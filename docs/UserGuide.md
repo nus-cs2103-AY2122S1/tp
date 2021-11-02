@@ -22,7 +22,7 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Listing all Participants: `list`](#listing-all-participants--list)
         * [Viewing a Participant's details: `view`](#viewing-a-participants-details-view)
         * [Adding Next-of-Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
-        * [Removing Next-of-Kin from a Participant: `deleteNok`](#removing-next-of-kin-from-a-participant-deletenok)
+        * [Deleting Next-of-Kin of a Participant: `deleteNok`](#deleting-next-of-kin-of-a-participant-deletenok)
     * [Event](#event)
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
@@ -40,6 +40,7 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Viewing help: `help`](#viewing-help--help)
         * [Clearing all Data: `clear`](#clearing-all-data--clear)
         * [Exiting the program: `exit`](#exiting-the-program--exit)
+- [**Valid emails**](#valid-emails)    
 - [**Saving the data**](#saving-the-data)
 - [**Editing the data file**](#editing-the-data-file)
 - [**Glossary**](#glossary)
@@ -97,7 +98,7 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
    how the app contains some sample data.<br>
    ![Ui](images/Ui_labelled.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
+6. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will 
    open the help window. <br>
    Some example commands you can try:
 
@@ -127,27 +128,27 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the [parameters](#glossary) to be supplied by the user.<br>
-  e.g. in `addEvent n/NAME d/DATE`, `n/NAME` and `d/DATE` are parameters which can be used as 
+  e.g., in `addEvent n/NAME d/DATE`, `n/NAME` and `d/DATE` are parameters which can be used as 
   `addEvent n/CS2103T Final d/2021-11-23`.
 
 * Items in square brackets are optional.<br>
-  e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as 
+  e.g., `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as 
   `addEvent n/CS2103T Final d/2021-11-23`.
 
 * Parameters with [prefixes](#glossary) can be in any order.<br>
-  e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 
 * Parameters without prefixes needs to be followed strictly.<br>
-  e.g. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]` INDEX must strictly be the first parameter 
+  e.g., `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]` INDEX must strictly be the first parameter 
   while the others with prefix can be in any order after that.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of 
   the parameter will be taken.<br>
-  e.g. if you specify `t/1700 t/1800`, only `t/1800` will be taken.
+  e.g., if you specify `t/1700 t/1800`, only `t/1800` will be taken.
 
 * If a command does not take in any parameters, (namely `help`, `list`, `clear`, `sortEvents` and 
   `exit`) then any extra words added after the command will be ignored.<br>
-  e.g. if the command specifies `sortEvents 123`, it will be interpreted as `sortEvents`.
+  e.g., if the command specifies `sortEvents 123`, it will be interpreted as `sortEvents`.
 
 </div>
 
@@ -161,7 +162,7 @@ The following commands deal with the handling of Participants in Managera. They 
 * [List all Participants](#listing-all-participants--list), 
 * [View a Participant's details](#viewing-a-participants-details-view), 
 * [Add Next-of-Kin to a Participant](#adding-next-of-kin-to-a-participant-addnok) and 
-* [Remove Next-of-Kin from a Participant](#removing-next-of-kin-from-a-participant-deletenok).
+* [Delete Next-of-Kin of a Participant](#deleting-next-of-kin-of-a-participant-deletenok).
 
 ### Adding a Participant: `add`
 
@@ -169,9 +170,22 @@ Adds a Participant to Managera.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`
+* The phone number should only have numbers, and must be at least 3-digits long.
+* Emails should be of the form `local-part@domain`. The full list of constraints can be found [here](#valid-emails).
+* The address does not have any constraints.
+* The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
+
+
+* Managera cannot accept duplicate participants. A participant is considered duplicate if all of their attributes 
+  (name, phone number, email, address, birthdate) are identical with those of an existing participant.
+* If a participant to be added shares identical attributes with an existing participant, but one of them lacks a 
+  birthdate, they are treated as two different participants. (The new participant will be added)
+* A participant is not considered duplicate if at least one of their attributes is different.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` - Adds a Participant whose name is 
-  John Doe with given phone number, email and address to the Participant list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/2000-01-02` - Adds a Participant
+  whose name is John Doe with given phone number, email, address and birthdate to the Participant list.
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567` - Adds a Participant whose name is Betsy 
   Crowe with given phone number, email and address to the Participant list.
 
@@ -205,9 +219,23 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
+
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`
+* The phone number should only have numbers, and must be at least 3-digits long.
+* Emails should be of the form `local-part@domain`. The full list of constraints can be found [here](#valid-emails).
+* The address does not have any constraints.
+* The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
+  
+
+* If a participant is edited in a way such that their attributes (name, phone number, email, address, birthdate) 
+  would exactly match those of another existing participant, Managera would refuse to execute the command as it forbids 
+  duplicate participants.
+* A participant is not considered duplicate if at least one of their attributes is different.
+
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant 
-   in the displayed Participant list to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com d/1999-10-09` - Edits the phone number, email address and birthdate of the 
+   1st Participant  in the displayed Participant list to be `91234567`, `johndoe@example.com` and `1999-10-09` 
+   respectively.
 *  `edit 2 n/Betsy Crower` - Edits the name of the 2nd Participant in the displayed Participant list to be 
    `Betsy Crower`.
 
@@ -217,12 +245,12 @@ Finds Participant(s) whose names contain any of the given keywords. It is possib
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g., `Han` will not match `Hans`
 * Participants whose names match at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` - Finds any Participants with the name "John"; possible matches: `John` and `John Doe`.
@@ -258,32 +286,37 @@ Example Usage:
 
 ### Adding Next-of-Kin to a Participant: `addNok`
 
-Adds a Next-of-Kin to a Participant.
+Adds a Next-of-Kin (NOK) to a Participant.
 
 Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 
-* Adds a Next-of-Kin to the Participant at the specified `INDEX`.
+* Adds an NOK to the Participant at the specified `INDEX`.
 * The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* A Next-of-Kin with the same name cannot be assigned to the same Participant.
+* An NOK with the same name cannot be assigned to the same Participant.
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Willy` will match `wiLLy`
+  
+
+* Managera does not allow duplicate NOKs for a single participant. An NOK is considered duplicate if they share the 
+  same name with another existing NOK. Please ensure that all NOKs for a single participant have different names.
 
 Example Usage:
-* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - Adds a Next-of-Kin whose name is Janette Yeo with contact number
+* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - Adds an NOK whose name is Janette Yeo with contact number
   88734323 and tag Spouse to the first Participant.
 
-### Removing Next-of-Kin from a Participant: `deleteNok`
+### Deleting Next-of-Kin of a Participant: `deleteNok`
 
-Removes a Next-of-Kin from a Participant.
+Deletes a Next-of-Kin (NOK) of a Participant.
 
-Format: `deleteNok INDEX_1 INDEX_2`
+Format: `deleteNok NOK_INDEX PARTICIPANT_ID`
 
-* Removes the Next-of-Kin at specified `INDEX_1` from the Participant at specified index `INDEX_2`.
-* `INDEX_1` refers to the index number of the Next-of_Kin as shown in the Participant's list of Next-of-Kins.
-* `INDEX_2` refers to the index number of the Participant as shown in the displayed Participant list.
+* Deletes the NOK at specified `NOK_INDEX` of the Participant at specified index `PARTICIPANT_ID`.
+* `NOK_INDEX` refers to the index number of the NOK as shown in the Participant's list of NOKs.
+* `PARTICIPANT_ID` refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `deleteNok 2 1` - Removes the 2nd Next-of-Kin from the 1st Participant.
+* `deleteNok 2 1` - Deletes the 2nd NOK of the 1st Participant.
 
 <br>![result for 'deleteNok 1 2'](images/deleteNokSecondFirstResult.png)
 
@@ -309,6 +342,15 @@ Adds an Event to Managera.
 
 Format: `addEvent n/NAME d/DATE [t/TIME]` 
 
+* The event name must contain only alphanumeric characters.
+* The event date must be given in YYYY-MM-DD format.
+* The event time must be given in 24-hr format e.g., 0000 to 2359.
+  
+
+* Managera cannot accept duplicate events. An event is considered duplicate it shares the same name **and** date
+  (time not considered) with those of an existing event. When adding a new event, please ensure that it has a 
+  different name or different date from those that already exist in Managera.
+
 Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 9:00am 
   to the Event list.
@@ -326,7 +368,7 @@ Format: `deleteEvent INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `delete 5` - Deletes the 5th Event in the displayed Event list.
+* `deleteEvent 5` - Deletes the 5th Event in the displayed Event list.
 * `listEvents` followed by `deleteEvent 2` - Deletes the 2nd Event in the full Event list.
   Find out more about `listEvents` [here](#listing-all-events-listevents).
 * `filterEvents d/2021-09-18` followed by `deleteEvent 1` - Deletes the 1st Event in the results of the `filterEvents` 
@@ -343,8 +385,17 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You can remove the time of Event by typing `t/` and leaving a blank after it. This is only possible
-due to the fact that time is optional for an Event.
+* You can remove the event time by typing `t/` and leaving a blank after it. This is possible 
+  due to the fact that time is optional for an Event.
+* The event name must contain only alphanumeric characters.
+* The event date must be given in YYYY-MM-DD format.
+* The event time must be given in 24-hr format e.g., 0000 to 2359.
+
+
+* If an event is edited in a way such that its name **and** date
+  would exactly match those of another existing event, Managera would refuse to execute the command as it forbids
+  duplicate events.
+* An event is considered duplicate if its name **and** date match those of another event.
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event in the displayed Event list to be 
@@ -377,12 +428,12 @@ Finds Events whose names contain any of the given keywords. It is possible for t
 
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `marathon` will match `Marathon`
-* The order of the keywords does not matter. e.g. `Marathon Commencement` will match `Commencement Marathon`
+* The search is case-insensitive. e.g., `marathon` will match `Marathon`
+* The order of the keywords does not matter. e.g., `Marathon Commencement` will match `Commencement Marathon`
 * Only the name is searched.
-* Only full words will be matched e.g. `Marath` will not match `Marathon`
+* Only full words will be matched e.g., `Marath` will not match `Marathon`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`
+  e.g., `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`
 
 Examples:
 * `findEvent party` - Finds any Events with the name "party"; possible matches: `beach party` and `Christmas party`
@@ -394,6 +445,9 @@ Examples:
 Filters the Event list for Events occurring on a specific date and optionally, time.
 
 Format: `filterEvents d/DATE [t/TIME]`
+
+* The event date must be given in YYYY-MM-DD format.
+* The event time must be given in 24-hr format e.g., 0000 to 2359.
 
 Example Usage:
 * `filterEvents d/2021-09-18` - Filters the displayed Event list to show only Events occurring on 18th September 2021.
@@ -437,12 +491,13 @@ Example Usage:
 Adds a Participant with the first specified index to the Event with the second specified index.
 
 Format:
-`enroll INDEX_1 INDEX_2`
+`enroll PARTICIPANT_INDEX EVENT_INDEX`
 
-* Adds the Participant at specified `INDEX_1` to the Event at specified index `INDEX_2`.
-* `INDEX_1` refers to the index number of the Participant as shown in the displayed Participant list.
-* `INDEX_2` refers to the index number of the Event as shown in the displayed Event list.
+* Adds the Participant at specified `PARTICIPANT_INDEX` to the Event at specified index `EVENT_INDEX`.
+* `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
+* `EVENT_INDEX` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
+* You cannot add participants who were already added to the event previously.
 
 Example Usage:
 * `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event
@@ -454,12 +509,13 @@ Example Usage:
 
 Removes the Participant with the first specified index from the Event with the second specified index.
 
-Format: `expel INDEX_1 INDEX_2`
+Format: `expel PARTICIPANT_INDEX EVENT_INDEX`
 
-* Removes the Participant at specified `INDEX_1` from the Event at specified index `INDEX_2`.
-* `INDEX_1` refers to the index number of the Participant as shown in the displayed Participant list.
-* `INDEX_2` refers to the index number of the Event as shown in the displayed Event list.
+* Removes the Participant at specified `PARTICIPANT_INDEX` from the Event at specified index `EVENT_INDEX`.
+* `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
+* `EVENT_INDEX` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
+* You cannot remove participants who were not added to the event previously.
 
 Example Usage:
 * `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event
@@ -512,6 +568,19 @@ Exits the program.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Valid emails
+
+* Emails should be of the form `local-part@domain`.
+* The local-part should only contain alphanumeric characters and these special characters: +_.-
+* The local-part should not start or end with any of the special characters.
+* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods
+* The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## Saving the data
@@ -572,15 +641,17 @@ changes you have made in the session. Your progress is most likely preserved aft
 
 Action | Format, Examples
 --------|------------------
-**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br>e.g., `add n/James Ho p/22224444e/jamesho@example.com a/123, Clementi Rd, 1234665`
+**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]` <br>e.g., `add n/James Ho p/22224444e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Delete Participant** | `delete INDEX`<br> e.g., `delete 3`
-**Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Participant** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Participants** | `list`
 **View Participant details** | `view INDEX` <br> e.g., `view 1`
+**Add NOK to Participant** | `addNok INDEX n/NAME p/PHONE_NUMBER tag/TAG` <br> e.g., `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse`
+**Delete NOK of Participant** | `deleteNOK NOK_INDEX PARTICIPANT_INDEX` <br> e.g., `deleteNok 2 1`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Delete Event** | `deleteEvent INDEX`  <br> e.g., `deleteEvent 1`
-**Edit Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent n/241Km Marathon`
+**Edit Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent 1 n/241Km Marathon`
 **Mark an Event as done** | `done INDEX` <br> e.g., `done 1`
 **Find Event** | `findEvent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findEvent Marathon Commencement`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
@@ -588,8 +659,8 @@ Action | Format, Examples
 **List Events** | `listEvents`
 **Show Event Details** | `showDetails INDEX` <br> e.g., `showDetails 1`
 **Show Event Participants** | `showParticipants INDEX` <br> e.g., `showParticipants 3`
-**Add Participant to Event** | `enroll INDEX_1 INDEX_2` <br> e.g. `enroll 1 2`
-**Remove Participant from Event** | `expel INDEX_1 INDEX_2` <br> e.g. `expel 3 1`
+**Add Participant to Event** | `enroll PARTICIPANT_INDEX EVENT_INDEX` <br> e.g., `enroll 1 2`
+**Remove Participant from Event** | `expel PARTICIPANT_INDEX EVENT_INDEX` <br> e.g., `expel 3 1`
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
