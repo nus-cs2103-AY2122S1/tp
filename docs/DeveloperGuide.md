@@ -254,7 +254,7 @@ After that, the filter is used to create a `FilterAppointmentCommand`. When exec
 
 Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
 
-A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
+A clearer view of this sequence diagram can be found [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/docs/images/AppointmentFilterSequenceDiagram.png).
 
 ![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
 
