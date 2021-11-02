@@ -251,7 +251,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `SEMESTER`
 * Represents Semester of the module that is being taken.
 * The `SEMESTER` must be a positive integer from 1-4.
-* Special semesters 1 and 2 are represented by integer values 3 and 4 respectively
+* Special semesters 1 and 2 are represented by integer values 3 and 4 respectively.
 
 --------------------------------------------------------------------------------------------------------------------
 
