@@ -12,8 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
 
 
@@ -25,24 +25,24 @@ public class PersonUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Contact contact) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(contact);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Contact contact) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_CATEGORY_CODE + person.getCategoryCode().toString() + " ");
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_REVIEW + person.getReview().value + " ");
-        sb.append(PREFIX_RATING + person.getRating().value + " ");
+        sb.append(PREFIX_CATEGORY_CODE + contact.getCategoryCode().toString() + " ");
+        sb.append(PREFIX_NAME + contact.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + contact.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + contact.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + contact.getAddress().value + " ");
+        sb.append(PREFIX_REVIEW + contact.getReview().value + " ");
+        sb.append(PREFIX_RATING + contact.getRating().value + " ");
 
-        person.getTags().stream().forEach(
+        contact.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
@@ -51,7 +51,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getCategoryCode().ifPresent(categoryCode -> sb.append(PREFIX_CATEGORY_CODE).append(categoryCode)
                 .append(" "));

@@ -25,7 +25,7 @@ public class SummaryTest {
     @Test
     public void execute_getNumberOfContacts_success() {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
-        int size = addressBook.getPersonList().size();
+        int size = addressBook.getContactList().size();
 
         Summary summary = new Summary(getTypicalAddressBook());
         int summarySize = summary.getNumberOfContacts();
@@ -36,7 +36,7 @@ public class SummaryTest {
     @Test
     public void execute_getNumberOfContactsGui_success() {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
-        int size = addressBook.getPersonList().size();
+        int size = addressBook.getContactList().size();
 
         Summary summary = new Summary(getTypicalAddressBook());
         String summarySize = summary.getNumberOfContactsGui();
@@ -52,7 +52,7 @@ public class SummaryTest {
         HashMap<String, Integer> summaryCategory = summary.getPercentageCategory();
 
         String category = PersonBuilder.DEFAULT_CATEGORY_CODE;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        model.addContact(new PersonBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -83,7 +83,7 @@ public class SummaryTest {
         ObservableList<PieChart.Data> summaryCategory = summary.getPercentageCategoryGui();
 
         String category = PersonBuilder.DEFAULT_CATEGORY_CODE;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        model.addContact(new PersonBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -114,7 +114,7 @@ public class SummaryTest {
         HashMap<String, Integer> summaryRating = summary.getPercentageRatings();
 
         String category = PersonBuilder.DEFAULT_RATING;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        model.addContact(new PersonBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -144,7 +144,7 @@ public class SummaryTest {
         ObservableList<PieChart.Data> summaryRating = summary.getPercentageRatingsGui();
 
         String category = PersonBuilder.DEFAULT_RATING;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        model.addContact(new PersonBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();

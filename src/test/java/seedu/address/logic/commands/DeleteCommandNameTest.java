@@ -18,8 +18,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Contact;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -33,22 +33,22 @@ public class DeleteCommandNameTest {
     public void execute_validNameUnfilteredList_success() {
         DeleteCommandName deleteCommandName = new DeleteCommandName(ALICE.getName());
 
-        List<Person> personList = model.getFilteredPersonList();
+        List<Contact> contactList = model.getFilteredContactList();
 
-        Person personToDelete = null;
+        Contact contactToDelete = null;
 
-        for (Person person: personList) {
-            String fullName = person.getName().fullName;
+        for (Contact contact : contactList) {
+            String fullName = contact.getName().fullName;
             if (fullName.equals(ALICE.getName().fullName.trim())) {
-                personToDelete = person;
+                contactToDelete = contact;
                 break;
             }
         }
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS, contactToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteContact(contactToDelete);
 
         assertCommandSuccess(deleteCommandName, model, expectedMessage, expectedModel);
     }
@@ -60,20 +60,20 @@ public class DeleteCommandNameTest {
         Name nameNotInList = new Name(nameNotInListString);
         DeleteCommandName deleteCommand = new DeleteCommandName(nameNotInList);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_NAME);
     }
 
     @Test
     public void execute_validNameFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Name nameInList = getTypicalPersons().get(0).getName();
-        Person personToDelete = getTypicalPersons().get(0);
+        Contact contactToDelete = getTypicalPersons().get(0);
         DeleteCommandName deleteCommand = new DeleteCommandName(nameInList);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS, contactToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteContact(contactToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -83,19 +83,19 @@ public class DeleteCommandNameTest {
     public void execute_invalidNameFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person nameNotInFilteredList = getTypicalPersons().get(5);
+        Contact nameNotInFilteredList = getTypicalPersons().get(5);
         // ensures that name is still in addressBook
-        assertTrue(getTypicalAddressBook().hasPerson(nameNotInFilteredList));
+        assertTrue(getTypicalAddressBook().hasContact(nameNotInFilteredList));
 
         DeleteCommandName deleteCommand = new DeleteCommandName(nameNotInFilteredList.getName());
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_NAME);
     }
 
     @Test
     public void equals() {
-        Person firstNameInList = getTypicalPersons().get(0);
-        Person secondNameInList = getTypicalPersons().get(1);
+        Contact firstNameInList = getTypicalPersons().get(0);
+        Contact secondNameInList = getTypicalPersons().get(1);
 
         DeleteCommandName deleteFirstCommand = new DeleteCommandName(firstNameInList.getName());
         DeleteCommandName deleteSecondCommand = new DeleteCommandName(secondNameInList.getName());
@@ -121,8 +121,8 @@ public class DeleteCommandNameTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        model.updateFilteredContactList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredContactList().isEmpty());
     }
 }

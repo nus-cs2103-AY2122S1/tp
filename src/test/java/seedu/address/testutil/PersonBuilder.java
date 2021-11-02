@@ -3,14 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rating;
-import seedu.address.model.person.Review;
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Phone;
+import seedu.address.model.contact.Rating;
+import seedu.address.model.contact.Review;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -52,15 +52,15 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        category = personToCopy.getCategoryCode();
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        review = personToCopy.getReview();
-        tags = new HashSet<>(personToCopy.getTags());
-        rating = personToCopy.getRating();
+    public PersonBuilder(Contact contactToCopy) {
+        category = contactToCopy.getCategoryCode();
+        name = contactToCopy.getName();
+        phone = contactToCopy.getPhone();
+        email = contactToCopy.getEmail();
+        address = contactToCopy.getAddress();
+        review = contactToCopy.getReview();
+        tags = new HashSet<>(contactToCopy.getTags());
+        rating = contactToCopy.getRating();
     }
 
     /**
@@ -135,8 +135,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(category, name, phone, email, address, review, tags, rating);
+    public Contact build() {
+        return new Contact(category, name, phone, email, address, review, tags, rating);
     }
 
 }

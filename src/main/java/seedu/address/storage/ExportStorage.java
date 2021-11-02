@@ -38,11 +38,11 @@ public class ExportStorage {
 
     /**
      * Appends a {@code contact} to export file.
-     * @param personString of {@code contact} to be added
+     * @param contactString of {@code contact} to be added
      */
-    public static void addToStorage(String personString) {
+    public static void addToStorage(String contactString) {
         try {
-            FileUtil.appendToFile(current.exportFilePath, personString);
+            FileUtil.appendToFile(current.exportFilePath, contactString);
         } catch (IOException ignored) {
             logger.warning(MESSAGE_NO_LOG_FILE);
         }

@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.IsFilterablePredicate;
-import seedu.address.model.person.Rating;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.IsFilterablePredicate;
+import seedu.address.model.contact.Rating;
 import seedu.address.model.tag.Tag;
 
 class FilterCommandTest {
@@ -101,9 +101,9 @@ class FilterCommandTest {
         Set<Tag> tags = Collections.emptySet();
         IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
 
     @Test
@@ -114,9 +114,9 @@ class FilterCommandTest {
         Set<Tag> tags = Collections.emptySet();
         IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE), model.getFilteredContactList());
     }
 
     @Test
@@ -127,10 +127,10 @@ class FilterCommandTest {
         Set<Tag> tags = Collections.emptySet();
         IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA, JANE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA, JANE), model.getFilteredContactList());
     }
 
     // TODO [LETHICIA]

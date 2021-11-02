@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a contact identified using it's displayed index from the address book.
  */
 public abstract class DeleteCommand extends Command {
 
@@ -12,7 +12,7 @@ public abstract class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) or n/NAME (must be full name)"
             + "\nExample: " + COMMAND_WORD + " 1" + ", " + COMMAND_WORD + " n/Marina Bay Sands";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Contact: %1$s";
+    public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
     @Override
     public boolean equals(Object other) {
