@@ -24,8 +24,7 @@ public class AddFavCommandParser implements Parser<AddFavCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         if (nameKeywords.length > 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFavCommand.MESSAGE_USAGE));
+            throw new ParseException(AddFavCommand.MULTIPLE_ID_ERROR);
         }
 
         return new AddFavCommand(nameKeywords[0]);
