@@ -13,7 +13,7 @@ public class TaskDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Deadlines should be in the format yyyy-MM-dd."
             + " " + "Do ensure you input a valid date.";
-    private static String dateFormat = "uuuu-MM-dd";
+    private static final String dateFormat = "uuuu-MM-dd";
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter
                     .ofPattern(dateFormat)

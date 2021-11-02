@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddEventTaskCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
@@ -34,7 +35,7 @@ public class AddEventTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        EventTask expectedTask = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE)
                 .withDate(VALID_TASK_DATE)
@@ -46,7 +47,7 @@ public class AddEventTaskCommandParserTest {
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_EVENTDATE_DESC
                 + TASK_DESCRIPTION_DESC_PLAY + TASK_TAG_DESC_EXERCISE, new AddEventTaskCommand(expectedTask));
 
-        Task expectedTaskWithMultipleTags = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        EventTask expectedTaskWithMultipleTags = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE, VALID_TASK_TAG_FUN)
                 .withDate(VALID_TASK_DATE)
@@ -61,7 +62,7 @@ public class AddEventTaskCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags and description
-        Task expectedTaskWithoutTagsAndDescription = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        EventTask expectedTaskWithoutTagsAndDescription = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();
 
@@ -69,7 +70,7 @@ public class AddEventTaskCommandParserTest {
                 new AddEventTaskCommand(expectedTaskWithoutTagsAndDescription));
 
         // zero tags
-        Task expectedTaskWithoutTags = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        EventTask expectedTaskWithoutTags = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();

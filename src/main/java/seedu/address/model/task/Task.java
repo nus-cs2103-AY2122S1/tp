@@ -12,13 +12,13 @@ import seedu.address.model.tag.Tag;
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task implements Comparable<Task>, Cloneable {
+public abstract class Task implements Comparable<Task>, Cloneable {
 
     private TaskName name;
     private Set<Tag> tags = new HashSet<>();
     private String description;
     private boolean isDone;
-    private final Priority priority;
+    private Priority priority;
 
     public enum Priority {
         HIGH, MEDIUM, LOW
@@ -41,21 +41,21 @@ public class Task implements Comparable<Task>, Cloneable {
         this.priority = priority;
     }
 
-    /**
-     * Constructs a {@code Task}.
-     *
-     * @param name A valid TaskName.
-     * @param tags A valid Set of Tags.
-     * @param description A valid Description of Tags.
-     * @param isDone A boolean indicating the status of the Task.
-     */
-    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
-        this.name = name;
-        this.tags.addAll(tags);
-        this.isDone = isDone;
-        this.description = description.description;
-        this.priority = Priority.LOW;
-    }
+//    /**
+//     * Constructs a {@code Task}.
+//     *
+//     * @param name A valid TaskName.
+//     * @param tags A valid Set of Tags.
+//     * @param description A valid Description of Tags.
+//     * @param isDone A boolean indicating the status of the Task.
+//     */
+//    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
+//        this.name = name;
+//        this.tags.addAll(tags);
+//        this.isDone = isDone;
+//        this.description = description.description;
+//        this.priority = Priority.LOW;
+//    }
 
     public TaskName getName() {
         return name;
@@ -166,15 +166,7 @@ public class Task implements Comparable<Task>, Cloneable {
      *
      * @return The date associated with a task.
      */
-    public LocalDate getDate() {
-        if (this instanceof DeadlineTask) {
-            return ((DeadlineTask) this).getDeadline().getDeadline();
-        } else if (this instanceof EventTask) {
-            return ((EventTask) this).getTaskDate().getDeadline();
-        } else {
-            return LocalDate.MAX;
-        }
-    }
+    public abstract LocalDate getDate();
 
     @Override
     public int compareTo(Task otherTask) {
@@ -199,6 +191,7 @@ public class Task implements Comparable<Task>, Cloneable {
             clone.tags.addAll(this.tags);
             clone.isDone = this.isDone;
             clone.description = this.description;
+            clone.priority = this.priority;
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();

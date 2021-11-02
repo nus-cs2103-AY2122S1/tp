@@ -25,6 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TodoTask;
 import seedu.address.testutil.TodoTaskBuilder;
 
 public class AddTodoTaskCommandTest {
@@ -39,7 +40,7 @@ public class AddTodoTaskCommandTest {
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
                 new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
-        Task validTask = new TodoTaskBuilder().build();
+        TodoTask validTask = new TodoTaskBuilder().build();
 
         CommandResult commandResult = new AddTodoTaskCommand(validTask).execute(modelStub);
 
@@ -50,7 +51,7 @@ public class AddTodoTaskCommandTest {
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        Task validTask = new TodoTaskBuilder().build();
+        TodoTask validTask = new TodoTaskBuilder().build();
         AddTodoTaskCommand addTodoTaskCommand = new AddTodoTaskCommand(validTask);
         AddTodoTaskCommandTest.ModelStub modelStub = new AddTodoTaskCommandTest.ModelStubWithTask(validTask);
 
@@ -60,9 +61,9 @@ public class AddTodoTaskCommandTest {
 
     @Test
     public void equals() {
-        Task todoIp = new TodoTaskBuilder().withName("Complete iP").build();
-        Task todoTp = new TodoTaskBuilder().withName("Complete tP").build();
-        Task todoTpFinalFeature = new TodoTaskBuilder().withName("Complete tP")
+        TodoTask todoIp = new TodoTaskBuilder().withName("Complete iP").build();
+        TodoTask todoTp = new TodoTaskBuilder().withName("Complete tP").build();
+        TodoTask todoTpFinalFeature = new TodoTaskBuilder().withName("Complete tP")
                 .withDescription("Implement the final feature").build();
         AddTodoTaskCommand todoIpCommand = new AddTodoTaskCommand(todoIp);
         AddTodoTaskCommand todoTpCommand = new AddTodoTaskCommand(todoTp);

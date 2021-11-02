@@ -22,22 +22,17 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
-//import seedu.address.model.task.TodoTask;
 import seedu.address.testutil.DeadlineTaskBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
-import seedu.address.testutil.EventTaskBuilder;
-import seedu.address.testutil.TodoTaskBuilder;
-//import seedu.address.testutil.TodoTaskBuilder;
-
+import seedu.address.testutil.TaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditTaskCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -68,8 +63,10 @@ public class EditTaskCommandTest {
 
     /*@Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastTask = Index.fromOneBased(model.getFilteredTaskList().size()-1);
-        Task lastTask = model.getFilteredTaskList().get(model.getFilteredTaskList().size()-1);
+        Index indexLastTask = Index.fromOneBased(model.getFilteredTaskList().size() - 1);
+        Task lastTask = model.getFilteredTaskList().get(model.getFilteredTaskList().size() - 1);
+
+        System.out.println(lastTask);
 
         DeadlineTaskBuilder taskInList = new DeadlineTaskBuilder((DeadlineTask) lastTask);
         Task editedTask = taskInList.withName(VALID_TASK_NAME_STUDY)
@@ -79,7 +76,7 @@ public class EditTaskCommandTest {
                 .build();
 
         EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_STUDY)
-                .withTags(VALID_TAG_HUSBAND).withPriority("H").build();
+                .withDeadlineDate("2021-01-01").withTags(VALID_TAG_HUSBAND).withPriority("H").build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(indexLastTask, descriptor);
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
@@ -90,23 +87,12 @@ public class EditTaskCommandTest {
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }*/
 
-
-
     @Test
     public void execute_filteredList_success() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        Task editedTask;
-        if (taskInFilteredList instanceof DeadlineTask) {
-            editedTask = new DeadlineTaskBuilder((DeadlineTask) taskInFilteredList)
-                    .withName(VALID_TASK_NAME_PLAY).build();
-        } else if (taskInFilteredList instanceof EventTask) {
-            editedTask = new EventTaskBuilder((EventTask) taskInFilteredList)
-                    .withName(VALID_TASK_NAME_PLAY).build();
-        } else {
-            editedTask = new TodoTaskBuilder(taskInFilteredList)
-                    .withName(VALID_TASK_NAME_PLAY).build();
-        }
+        Task editedTask = TaskBuilder.of(taskInFilteredList).withName(VALID_TASK_NAME_PLAY).build();
+
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK,
                 new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY).build());
 
