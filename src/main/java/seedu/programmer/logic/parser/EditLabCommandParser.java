@@ -1,8 +1,11 @@
 package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_TEMPLATE;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
+import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED;
+import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_MISSING_LAB_TO_BE_EDITED;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
@@ -38,34 +41,41 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
                     String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), EditLabCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_MISSING_ARGUMENT, EditLabCommand.MESSAGE_USAGE));
+        try {
+            if (!argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)) {
+                throw new ParseException(MESSAGE_MISSING_LAB_TO_BE_EDITED);
+            }
+
+            if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()
+                    && argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
+                // Provided new lab number and total score
+                int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+                int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
+                int total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
+                Lab labResult = new Lab(labNum);
+                return new EditLabCommand(labResult, newLabNum, total);
+            } else if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()) {
+                // Provided new lab number only
+                int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+                int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
+                Lab labResult = new Lab(labNum);
+                return new EditLabCommand(labResult, newLabNum);
+            } else if (argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
+                int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+                int total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
+                Lab labResult = new Lab(labNum);
+                return new EditLabCommand(labResult, total);
+            } else {
+                throw new ParseException(MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED);
+            }
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_TEMPLATE, pe.getMessage(), EditLabCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()
-                && argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
-            // Provided new lab number and total score
-            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-            int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
-            Integer total = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
-            Lab labResult = new Lab(labNum);
-            return new EditLabCommand(labResult, newLabNum, total);
-        } else if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()) {
-            // Provided new lab number only
-            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-            int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
-            // TODO: find out the labNum's total score
-            // Lab labResult = new Lab(labNum, totalScore)
-            Lab labResult = new Lab(labNum);
-            return new EditLabCommand(labResult, newLabNum);
-        } else {
-            assert(argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent());
-            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-            Integer total = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
-            Lab labResult = new Lab(labNum);
-            return new EditLabCommand(labResult, total);
-        }
     }
 
     /**
