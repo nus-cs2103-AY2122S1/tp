@@ -94,23 +94,6 @@
     -fx-border-width: 1;
 }
 
-.list-cell:filled #gameCardPane {
-    -fx-border-color: -dark-gray;
-    -fx-border-width: 0.5;
-}
-
-.list-cell:filled:even #gameCardPane {
-    -fx-background-color: -list-cell-even;
-}
-
-.list-cell:filled:odd #gameCardPane {
-    -fx-background-color: -list-cell-odd;
-}
-
-.list-cell:filled:selected #gameCardPane {
-    -fx-background-color: #4f609c;
-}
-
 .list-cell:filled:selected {
     -fx-border-color: -blurple;
     -fx-border-width: 0.75;
