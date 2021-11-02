@@ -246,7 +246,7 @@ TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`.
 
 ### Adding progress for a student : `add -p`
 
-Adds a given string representing progress to a student with a given student index.
+Adds a progress note to the student with a given student index.
 
 Format: `add -p STUDENT_INDEX PROGRESS`
 
@@ -390,12 +390,16 @@ Examples:
 * `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
 <hr>
 
-# 5. FAQ
+# 5. Glossary
+**Progress**: Refers to any remark you may want to add for a specific student, such as their performance in class and 
+their homework progression.
+
+# 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.<hr>
 
-# 6. Command summary
+# 7. Command summary
 
 Action | Format, Examples
 --------|------------------
