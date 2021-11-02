@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an attraction's Review in the address book.
+ * Represents a {@code Person} Review in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidReview(String)} (String)}
  */
 public class Review {
