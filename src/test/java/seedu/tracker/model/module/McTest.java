@@ -12,9 +12,9 @@ class McTest {
     void isValidMc() {
         // invalid Mc
         assertFalse(Mc.isValidMc(-3)); // negative value
+        assertFalse(Mc.isValidMc(0)); // zero
 
         // valid Mc
-        assertTrue(Mc.isValidMc(0)); // zero
         assertTrue(Mc.isValidMc(2));
         assertTrue(Mc.isValidMc(3));
         assertTrue(Mc.isValidMc(8));
