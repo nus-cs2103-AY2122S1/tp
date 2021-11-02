@@ -2,7 +2,7 @@ package seedu.address.logic.commands.event;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
@@ -20,7 +20,7 @@ import seedu.address.model.module.event.EventDate;
 import seedu.address.model.module.member.Member;
 
 /**
- * Adds a member to the address book.
+ * Adds an event to Ailurus.
  */
 public class EaddCommand extends Command {
 
@@ -30,12 +30,12 @@ public class EaddCommand extends Command {
             + "Parameters:"
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE (format: " + EventDate.DATE_TIME_FORMAT + ") "
-            + "[" + PREFIX_MEMBER_ID + "MEMBER_INDEX (must be a positive integer)]...\n"
+            + "[" + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Freshmen Orientation Week "
             + PREFIX_DATE + "11/07/2021 "
-            + PREFIX_MEMBER_ID + "1 "
-            + PREFIX_MEMBER_ID + "2";
+            + PREFIX_MEMBER_INDEX + "1 "
+            + PREFIX_MEMBER_INDEX + "2";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the Ailurus";

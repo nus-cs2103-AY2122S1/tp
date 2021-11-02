@@ -2,8 +2,8 @@ package seedu.address.logic.commands.event;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,20 +20,20 @@ import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
 
 /**
- * Add a member to an event identified using it's displayed index from the Ailurus.
+ * Removes a member to an event identified using it's displayed index from the Ailurus.
  */
 public class EmdelCommand extends Command {
 
     public static final String COMMAND_WORD = "emdel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Remove members from event identified by index number used in the displayed event list.\n"
+            + ": Remove members from event identified by the corresponding index number.\n"
             + "Parameters: "
-            + PREFIX_EVENT_ID + "EVENT_ID (must be a positive integer)"
-            + PREFIX_MEMBER_ID + "MEMBER_INDEX (must be a positive integer)...\n"
+            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
+            + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENT_ID + "1 "
-            + PREFIX_MEMBER_ID + "1 " + PREFIX_MEMBER_ID + "2";
+            + PREFIX_EVENT_INDEX + "1 "
+            + PREFIX_MEMBER_INDEX + "1 " + PREFIX_MEMBER_INDEX + "2";
 
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Removed members: %1$s. Event: %2$s. ";
     public static final String MESSAGE_MEMBER_NOT_IN_EVENT = "The following member is not in the event: %1$s";

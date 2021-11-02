@@ -3,7 +3,7 @@ package seedu.address.logic.parser.member;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTEND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.member.MlistCommand;
@@ -27,13 +27,14 @@ public class MlistCommandParser implements Parser<MlistCommand> {
         if (args.isEmpty()) {
             return new MlistCommand();
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_ID, PREFIX_ATTEND, PREFIX_ABSENT);
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_ID)
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_INDEX,
+                PREFIX_ATTEND, PREFIX_ABSENT);
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_INDEX)
             || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ATTEND, PREFIX_ABSENT)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MlistCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_INDEX).get());
 
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ATTEND)) {
             return new MlistCommand(index, true);

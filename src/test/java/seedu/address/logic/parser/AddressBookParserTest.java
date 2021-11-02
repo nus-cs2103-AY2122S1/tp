@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.MEMBER_ID_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 
@@ -70,7 +70,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         MdelCommand command = (MdelCommand) parser.parseCommand(
-                MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_ID + INDEX_FIRST_MEMBER.getOneBased());
+                MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_INDEX + INDEX_FIRST_MEMBER.getOneBased());
         assertEquals(new MdelCommand(INDEX_FIRST_MEMBER), command);
     }
 
@@ -79,7 +79,7 @@ public class AddressBookParserTest {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         MeditCommand command = (MeditCommand) parser.parseCommand(MeditCommand.COMMAND_WORD + " "
-                + CliSyntax.PREFIX_MEMBER_ID + INDEX_FIRST_MEMBER.getOneBased() + " "
+                + CliSyntax.PREFIX_MEMBER_INDEX + INDEX_FIRST_MEMBER.getOneBased() + " "
                 + MemberUtil.getEditMemberDescriptorDetails(descriptor));
         assertEquals(new MeditCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
@@ -113,7 +113,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tlist() throws Exception {
-        assertTrue(parser.parseCommand(TlistCommand.COMMAND_WORD + MEMBER_ID_DESC_ONE) instanceof TlistCommand);
+        assertTrue(parser.parseCommand(TlistCommand.COMMAND_WORD + MEMBER_INDEX_DESC_ONE) instanceof TlistCommand);
     }
 
     @Test

@@ -11,14 +11,14 @@ import seedu.address.model.module.member.Member;
 
 /**
  * Finds and lists all members in Ailurus whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class MfindCommand extends Command {
 
     public static final String COMMAND_WORD = "mfind";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and display them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alex bob john";
 

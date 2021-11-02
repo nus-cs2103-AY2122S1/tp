@@ -5,7 +5,7 @@ title: Developer Guide
 
 Ailurus is a **desktop app** that helps to organise committees account for details of their members. It provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
 
-The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecure and the different components, as well as their implementations in various commands. It also informs developers of the requirements and instructions for manual testing for the Ailurus product.
+The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands. It also informs developers of the requirements and instructions for manual testing for the Ailurus product.
 
 * Table of Contents
 {:toc}
@@ -152,7 +152,7 @@ Here is the Activity Diagram for a User when choosing the module and command to 
 
 New feature: Events
 * Events can be added and deleted from event list via `eadd` and `edel` commands
-* The participating members can be listed using the command `mlist /v EVENT_ID`
+* The participating members can be listed using the command `mlist /v EVENT_INDEX`
 * New events created can have many participants selected from member list.
 * <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
 for adding participants separately, eadd command allows creation of complete event to

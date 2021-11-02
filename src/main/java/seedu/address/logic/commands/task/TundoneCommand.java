@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,13 +21,12 @@ public class TundoneCommand extends Command {
 
     public static final String COMMAND_WORD = "tundone";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks one or multiple task(s) as undone "
-            + "the current selected member "
-            + "by the index numbers used in the displayed task list of the task identified\n"
-            + "Parameters: " + PREFIX_TASK_ID + "TASK_ID... (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks one or multiple task(s), identified by "
+            + "the corresponding index numbers, as undone for a currently selected member.\n"
+            + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX... (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "1"
-            + PREFIX_TASK_ID + "2";
+            + PREFIX_TASK_INDEX + "1"
+            + PREFIX_TASK_INDEX + "2";
 
     public static final String MESSAGE_UNDONE_TASK_SUCCESS = "Marked task: %1$s as undone\n";
     public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member\n";

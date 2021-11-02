@@ -23,12 +23,12 @@ public class MdelCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, " " + CliSyntax.PREFIX_MEMBER_ID + "1", new MdelCommand(INDEX_FIRST_MEMBER));
+        assertParseSuccess(parser, " " + CliSyntax.PREFIX_MEMBER_INDEX + "1", new MdelCommand(INDEX_FIRST_MEMBER));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, CliSyntax.PREFIX_MEMBER_ID + "a",
+        assertParseFailure(parser, CliSyntax.PREFIX_MEMBER_INDEX + "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MdelCommand.MESSAGE_USAGE));
     }
 }
