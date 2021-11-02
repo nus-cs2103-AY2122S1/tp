@@ -180,8 +180,8 @@ Format: `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edite
 Examples:
 * `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`: 
   * Edit the name and deadline of the task with task id 'T10' to 'Final exam' and 'Tue, Nov 23 2021' respectively
-* `edit task m/CS2103 ti/T10 d/2021-11-23`: 
-  * Edit only the deadline of the task with task id 'T10' to 'Tue, Nov 23 2021'
+* `edit task m/CS2103 ti/T10 d/2021-11-23 17:00`: 
+  * Edit only the deadline of the task with task id 'T10' to 'Tue, Nov 23 2021 5:00 pm'
   
 ### Delete a task from a module: `delete task`
 
