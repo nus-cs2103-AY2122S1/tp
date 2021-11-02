@@ -238,7 +238,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `MC`
 * Stands for Modular Credits.
 * Represents the `module`'s MC component.
-* `MC` must be a **positive integer** from 1-999.
+* `MC` must be a **positive integer** from 1-20.
 
 #### `TAG`
 * Represents the `module`'s tag component.

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Mc {
 
 
-    public static final String MESSAGE_CONSTRAINTS = "MC credit should only be an Integer from 1-999.";
+    public static final String MESSAGE_CONSTRAINTS = "MC credit should only be an Integer from 1-20.";
 
     public final int value;
 

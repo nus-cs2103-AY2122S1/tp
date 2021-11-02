@@ -91,7 +91,7 @@ public class ParserUtil {
         }
 
         int mcAsInt = Integer.parseInt(trimmedMc);
-        if (mcAsInt > 999 || mcAsInt < 1) {
+        if (mcAsInt > 20 || mcAsInt < 1) {
             throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
         }
 
