@@ -1,11 +1,8 @@
 package seedu.address.model.facility;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.DayOfWeek;
 
 import seedu.address.model.person.Person;
 
@@ -17,34 +14,25 @@ public class Facility {
     private final Location location;
     private final Time time;
     private final Capacity capacity;
-    private List<Person> personAllocatedList = new ArrayList<>();
+    private final AllocationMap allocationMap;
 
     /**
      * Creates a Facility object with the specified name,
-     * location, time and capacity.
+     * location, time, capacity and allocation map.
      *
      * @param name Name of facility.
      * @param location Location of facility.
      * @param time Time of slot booked for facility.
      * @param capacity Capacity of facility booked.
+     * @param allocationMap Allocation map of members to facility.
      */
-    public Facility(FacilityName name, Location location, Time time, Capacity capacity) {
-        requireAllNonNull(name, location, time, capacity);
+    public Facility(FacilityName name, Location location, Time time, Capacity capacity, AllocationMap allocationMap) {
+        requireAllNonNull(name, location, time, capacity, allocationMap);
         this.name = name;
         this.location = location;
         this.time = time;
         this.capacity = capacity;
-    }
-
-    /**
-     * Creates a Facility object with the specified name, location, time, capacity and
-     * person-allocated list.
-     */
-    public Facility(FacilityName name, Location location, Time time, Capacity capacity,
-                    List<Person> personAllocatedList) {
-        this(name, location, time, capacity);
-        requireNonNull(personAllocatedList);
-        this.personAllocatedList = personAllocatedList;
+        this.allocationMap = allocationMap;
     }
 
     public FacilityName getName() {
@@ -63,45 +51,36 @@ public class Facility {
         return capacity;
     }
 
-    public List<Person> getPersonAllocatedList() {
-        return personAllocatedList;
+    public int getCapacityAsOnDay(DayOfWeek day) {
+        return allocationMap.getCapacityOnDay(day);
     }
 
-    public boolean isMaxCapacity() {
-        return !capacity.isWithinCapacity(personAllocatedList.size());
+    public AllocationMap getAllocationMap() {
+        return allocationMap;
     }
 
-    public void clearAllocationList() {
-        personAllocatedList = new ArrayList<>();
+    public boolean isMaxCapacityOnDay(DayOfWeek day) {
+        return capacity.isMaxCapacity(allocationMap.getCapacityOnDay(day));
     }
 
-
-    /**
-     * Returns the allocated list as a String separated by commas.
-     *
-     * @return the allocated list as a String.
-     */
-    public boolean isPersonAllocated(Person person) {
-        return personAllocatedList.contains(person);
+    public void clearAllocationMapOnDay(DayOfWeek day) {
+        allocationMap.clearAllocationOnDay(day);
     }
 
-    public String getPersonsAsString() {
-        if (personAllocatedList == null) {
-            return "No person allocated";
-        }
-        return personAllocatedList.stream().map(p -> p.getName().fullName).collect(Collectors.joining(", "));
+    public boolean isPersonAllocatedOnDay(Person person, DayOfWeek day) {
+        return allocationMap.isPersonAllocatedOnDay(person, day);
     }
 
-    public boolean isWithinMaxCapacity(int numberOfPersons) {
-        return capacity.isWithinCapacity(numberOfPersons);
+    public void addPersonToFacilityOnDay(Person person, DayOfWeek day) {
+        allocationMap.addPersonOnDay(person, day);
     }
 
-    public void addPersonToFacility(Person person) {
-        personAllocatedList.add(person);
+    public void removePersonFromFacilityOnDay(Person person, DayOfWeek day) {
+        allocationMap.removePersonOnDay(person, day);
     }
 
-    public void removePersonFromFacility(Person person) {
-        personAllocatedList.remove(person);
+    public void removePersonFromFacilityOnAllDays(Person person) {
+        allocationMap.removePersonOnAllDays(person);
     }
 
     /**
@@ -140,7 +119,7 @@ public class Facility {
                 && location.equals(facility.location)
                 && time.equals(facility.time)
                 && capacity.equals(facility.capacity)
-                && personAllocatedList.equals(facility.personAllocatedList);
+                && allocationMap.equals(facility.allocationMap);
     }
 
     @Override

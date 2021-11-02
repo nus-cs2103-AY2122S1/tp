@@ -3,6 +3,7 @@ package seedu.address.model.facility;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Iterator;
 import java.util.List;
 
@@ -70,23 +71,6 @@ public class UniqueFacilityList implements Iterable<Facility> {
         }
     }
 
-    /**
-     * Removes specified person from the allocation list.
-     *
-     * @param toRemove Person to be removed
-     */
-    public void removePersonFromAllocations(Person toRemove) {
-        requireNonNull(toRemove);
-        for (Facility facility : facilityList) {
-            Facility toEdit = facility;
-            if (facility.isPersonAllocated(toRemove)) {
-                facility.removePersonFromFacility(toRemove);
-                setFacility(facility, toEdit);
-                return;
-            }
-        }
-    }
-
     @Override
     public Iterator<Facility> iterator() {
         return facilityList.iterator();
@@ -144,18 +128,15 @@ public class UniqueFacilityList implements Iterable<Facility> {
      *
      * @param members Members to be allocated.
      */
-    public void allocateMembersToFacilities(FilteredList<Person> members) {
+    public void allocateMembersToFacilitiesOnDay(FilteredList<Person> members, int dayNumber) {
+        DayOfWeek day = DayOfWeek.of(dayNumber);
         int index = 0;
         for (Facility facility : facilityList) {
             Facility toEdit = facility;
-            toEdit.clearAllocationList();
+            toEdit.clearAllocationMapOnDay(day);
 
-            int facilityCount = 0;
-
-            while (toEdit.isWithinMaxCapacity(facilityCount + 1)
-                    && !(index > members.size() - 1)) {
-                toEdit.addPersonToFacility(members.get(index));
-                facilityCount++;
+            while (!toEdit.isMaxCapacityOnDay(day) && !(index > members.size() - 1)) {
+                toEdit.addPersonToFacilityOnDay(members.get(index), day);
                 index++;
             }
             this.setFacility(facility, toEdit);
@@ -194,4 +175,14 @@ public class UniqueFacilityList implements Iterable<Facility> {
 
     }
 
+    /**
+     * Removes a person from all allocations from all facilities.
+     *
+     * @param key Person to be removed from allocations.
+     */
+    public void removePersonFromAllocations(Person key) {
+        for (Facility facility: facilityList) {
+            facility.removePersonFromFacilityOnAllDays(key);
+        }
+    }
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITIES;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +16,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Person;
 
 public class EditFacilityCommand extends Command {
 
@@ -74,8 +75,10 @@ public class EditFacilityCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FACILITY);
         }
 
-        if (editedFacility.isMaxCapacity()) {
-            editedFacility.clearAllocationList();
+        for (DayOfWeek day : DayOfWeek.values()) {
+            if (facilityToEdit.getCapacityAsOnDay(day) > editedFacility.getCapacityAsOnDay(day)) {
+                facilityToEdit.clearAllocationMapOnDay(day);
+            }
         }
 
         model.setFacility(facilityToEdit, editedFacility);
@@ -96,10 +99,11 @@ public class EditFacilityCommand extends Command {
         Location updatedLocation = editFacilityDescriptor.getLocation().orElse(facilityToEdit.getLocation());
         Time updatedTime = editFacilityDescriptor.getTime().orElse(facilityToEdit.getTime());
         Capacity updatedCapacity = editFacilityDescriptor.getCapacity().orElse(facilityToEdit.getCapacity());
-        // Not an editable field
-        List<Person> personAllocatedList = facilityToEdit.getPersonAllocatedList();
 
-        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity, personAllocatedList);
+        // edit command does not allow editing allocations
+        AllocationMap allocationMap = facilityToEdit.getAllocationMap();
+
+        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity, allocationMap);
     }
 
     @Override

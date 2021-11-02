@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookEmp
 import static seedu.address.testutil.TypicalFacilities.FIELD;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -89,7 +90,7 @@ public class AddressBookTest {
         ObservableList<Person> emptyPersonsList = FXCollections.emptyObservableList();
         FilteredList<Person> emptyList = new FilteredList<>(emptyPersonsList);
         ObservableList<Facility> facilities = addressBook.getFacilityList();
-        addressBook.split(emptyList);
+        addressBook.split(emptyList, 1);
         assertEquals(facilities, addressBook.getFacilityList());
     }
 
@@ -99,11 +100,11 @@ public class AddressBookTest {
         Facility firstFacility = new FacilityBuilder(FIELD).build();
         newData.addFacility(firstFacility);
         FilteredList<Person> filteredList = new FilteredList<>(newData.getPersonList());
-        newData.split(filteredList);
+        newData.split(filteredList, 1);
 
         Facility withAllocatedMembers = new FacilityBuilder(FIELD).build();
         for (Person person : filteredList) {
-            withAllocatedMembers.addPersonToFacility(person);
+            withAllocatedMembers.addPersonToFacilityOnDay(person, DayOfWeek.of(1));
         }
 
         AddressBook expected = new AddressBook(getTypicalAddressBookEmptyFacilityList());

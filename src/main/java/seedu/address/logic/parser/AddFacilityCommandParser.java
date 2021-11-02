@@ -7,16 +7,22 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new AddFacilityCommand object.
@@ -45,11 +51,14 @@ public class AddFacilityCommandParser implements Parser<AddFacilityCommand> {
         Location location = ParserUtil.parseLocation(argMultiMap.getValue(PREFIX_LOCATION).get());
         Time time = ParserUtil.parseTime(argMultiMap.getValue(PREFIX_TIME).get());
         Capacity capacity = ParserUtil.parseCapacity(argMultiMap.getValue(PREFIX_CAPACITY).get());
-
-        Facility facility = new Facility(name, location, time, capacity);
+        // add command does not allow adding allocations
+        Map<DayOfWeek, List<Person>> allocationMap = new EnumMap<>(DayOfWeek.class);
+        for (DayOfWeek day : DayOfWeek.values()) {
+            allocationMap.put(day, new ArrayList<>());
+        }
+        Facility facility = new Facility(name, location, time, capacity, new AllocationMap(allocationMap));
 
         return new AddFacilityCommand(facility);
-
     }
 
     /**
