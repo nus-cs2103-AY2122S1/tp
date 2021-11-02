@@ -147,6 +147,10 @@ Breadth and Depth | "breadth and depth"
 IT Professionalism | "it professionalism"
 Math and Science | "math and science"
 
+<div markdown="span" class="alert alert-info">:information_source:
+A module can have more than one tag, but the module will only be included in the calculation of MC requirements if it contains at least one of the tags mentioned above.
+</div>
+
 Notes:
 * If the MC requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.<br>
 ![Satisfied MC Requirement](images/SatisfiedMCRequirement.png)  
