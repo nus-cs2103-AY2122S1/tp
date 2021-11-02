@@ -20,11 +20,9 @@ public class ViewProductCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Views a current product identified by the index number used in the displayed "
                     + "product list.\n"
-                    + "If no such product exists, nothing will be shown\n"
-                    + "Parameters: INDEX (must be a positive integer)"
-                    + "Example usage : "
-                    + COMMAND_WORD
-                    + " 20 ";
+                    + "If no such product exists, nothing will be shown.\n"
+                    + "Parameters: INDEX (must be a positive integer)\n"
+                    + "Example usage : " + COMMAND_WORD + " 2";
 
     private Index index;
 
@@ -50,7 +48,7 @@ public class ViewProductCommand extends Command {
 
         Product product = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(Messages.MESSAGE_VIEW_PRODUCT, product.getId()),
+        return new CommandResult(String.format(Messages.MESSAGE_VIEW_PRODUCT, product.getId(), index.getOneBased()),
                 CommandType.VIEW, product, false);
     }
 

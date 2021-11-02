@@ -114,7 +114,7 @@ public class EditClientCommand extends Command {
         updatedOrders.addAll(oldOrders);
 
         return updatedOrders.stream()
-                .filter(Order::isValidOrder)
+                .filter(Order::isPositiveQuantity)
                 .collect(Collectors.toSet());
     }
 

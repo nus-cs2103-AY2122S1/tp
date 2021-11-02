@@ -13,6 +13,7 @@ public class HelpMessage extends UiPart<Region> implements SecondPanel {
     private static final String TITLE = "Need help?";
     private static final String HELP_MESSAGE =
             "help: see detailed user guide\n"
+                    + "stat: show statistics (Revenue and Products Sold)\n"
                     + "exit: exit the application\n"
                     + "clear: purge all data (use with caution!)\n"
                     + "\n"

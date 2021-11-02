@@ -61,7 +61,7 @@ public class Order {
         return product.hasEnoughStock(quantity);
     }
 
-    public boolean isValidOrder() {
+    public boolean isPositiveQuantity() {
         return quantity.moreThan(QUANTITY_ZERO);
     }
 

@@ -1,6 +1,5 @@
 ---
-layout: page
-title: Shi Chen's Project Portfolio Page
+layout: page title: Shi Chen's Project Portfolio Page
 ---
 
 ### Project: Sellah
@@ -61,6 +60,9 @@ Given below are my contributions to the project.
           [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181))
         * Added documentation for the feature `clear` (Pull request
           [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181))
+        * Implemented `Dropdown List` (Pull requests
+          [\#193](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/193),
+          [\#218](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/218))
     * Developer Guide:
         * Added use cases of the feature `edit`. (Pull requests
           [\#48](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/48),
@@ -72,6 +74,8 @@ Given below are my contributions to the project.
           [\#200](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/200))
         * Added `Table of Content` (Pull requests
           [\#188](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/188),
+          [\#191](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/191))
+        * Implemented `Dropdown List` (Pull request
           [\#191](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/191))
 
 * **Community**:

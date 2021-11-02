@@ -10,11 +10,12 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
+import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Product;
 
-public class PieChartView extends UiPart<Region> implements SecondPanel {
-    private static String fxml = "PieChart.fxml";
+public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
+    private static String fxml = "PieChartSales.fxml";
 
     @FXML
     private PieChart pieChart;
@@ -22,31 +23,32 @@ public class PieChartView extends UiPart<Region> implements SecondPanel {
     /**
      * Constructor for the piechart
      */
-    public PieChartView(ObservableList<Client> clients, ObservableList<Product> products) {
+    public PieChartSalesView(ObservableList<Client> clients, ObservableList<Product> products) {
         super(fxml);
         // data to be changed
-        HashMap<Integer, Integer> table = new HashMap<Integer, Integer>();
+        HashMap<Name, Integer> table = new HashMap<Name, Integer>();
         for (Client client : clients) {
             Set<Order> currOrders = client.getOrders();
             for (Order order : currOrders) {
-                int year = order.time.getYear();
+                int id = order.id.getId();
+                Name productName = products.get(id - 1).getName();
                 int quantity = Integer.parseInt(order.quantity.value);
-                int unitPrice = Integer.parseInt(products.get(order.id.getId()).getUnitPrice().value);
-                int sale = quantity * unitPrice;
-                if (table.containsKey(year)) {
-                    table.put(year, table.get(year) + sale);
+                if (table.containsKey(productName)) {
+                    table.put(productName, table.get(productName) + quantity);
                 } else {
-                    table.put(year, sale);
+                    table.put(productName, quantity);
                 }
             }
         }
+
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        for (Map.Entry<Integer, Integer> profits : table.entrySet()) {
-            pieChartData.add(new PieChart.Data("Profits for "
-                    + profits.getKey().toString()
-                    + ": $"
-                    + profits.getValue().toString(),
-                    profits.getValue()));
+
+        for (Map.Entry<Name, Integer> product : table.entrySet()) {
+            pieChartData.add(new PieChart.Data("Product: "
+                                                        + product.getKey().toString() + "\n"
+                                                        + " Sold: "
+                                                        + product.getValue().toString(),
+                    product.getValue()));
         }
         pieChart.getData().addAll(pieChartData);
     }
@@ -55,10 +57,10 @@ public class PieChartView extends UiPart<Region> implements SecondPanel {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof PieChartView)) {
+        if (!(other instanceof PieChartSalesView)) {
             return false;
         }
-        PieChartView view = (PieChartView) other;
+        PieChartSalesView view = (PieChartSalesView) other;
         return pieChart.equals(view.pieChart);
     }
 }
