@@ -66,7 +66,7 @@ public class Facility {
     public void clearAllocationMapOnDay(DayOfWeek day) {
         allocationMap.clearAllocationOnDay(day);
     }
-    
+
     public boolean isPersonAllocatedOnDay(Person person, DayOfWeek day) {
         return allocationMap.isPersonAllocatedOnDay(person, day);
     }

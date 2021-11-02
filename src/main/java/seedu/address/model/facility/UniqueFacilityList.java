@@ -142,8 +142,6 @@ public class UniqueFacilityList implements Iterable<Facility> {
             this.setFacility(facility, toEdit);
         }
     }
-    
-    
 
     /**
      * Replaces target Facility with edited Facility. Does not
