@@ -21,7 +21,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
-
 public class ViewCommandParserTest {
     private static final String COMMAND_WORD = ViewCommand.COMMAND_WORD;
     private static final String DEFAULT_TEST_NAME = "Alex Yeoh";
@@ -43,7 +42,6 @@ public class ViewCommandParserTest {
 
     @Test
     public void test_single_input() {
-
         String nameInput = inputFormat(PREFIX_DASH_NAME, DEFAULT_TEST_NAME);
         ViewCommand nameExpectedCommand = commandFromString(DEFAULT_TEST_NAME, Name::new);
         assertParseSuccess(parser, nameInput, nameExpectedCommand);
@@ -59,7 +57,6 @@ public class ViewCommandParserTest {
         String addressInput = inputFormat(PREFIX_DASH_ADDRESS, DEFAULT_TEST_ADDRESS);
         ViewCommand addressExpectedCommand = commandFromString(DEFAULT_TEST_ADDRESS, Address::new);
         assertParseSuccess(parser, addressInput, addressExpectedCommand);
-
     }
 
     private static ViewCommand commandFromString(String name, Function<String, Field> function) {
@@ -103,4 +100,3 @@ public class ViewCommandParserTest {
         return String.format(singleInput, prefixName.getPrefix() + defaultTestName);
     }
 }
-
