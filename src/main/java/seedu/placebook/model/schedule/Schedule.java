@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.placebook.model.ReadOnlySchedule;
 import seedu.placebook.model.person.Person;
-import seedu.placebook.model.person.exceptions.PersonNotFoundException;
 import seedu.placebook.model.schedule.exceptions.AppointmentNotFoundException;
 import seedu.placebook.model.schedule.exceptions.DuplicateAppointmentException;
 

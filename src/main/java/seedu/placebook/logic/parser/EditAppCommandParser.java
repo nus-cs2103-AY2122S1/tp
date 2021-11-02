@@ -9,7 +9,6 @@ import static seedu.placebook.logic.parser.CliSyntax.PREFIX_STARTDATETIME;
 import seedu.placebook.commons.core.index.Index;
 import seedu.placebook.logic.commands.EditAppCommand;
 import seedu.placebook.logic.parser.exceptions.ParseException;
-import seedu.placebook.model.schedule.TimePeriod;
 import seedu.placebook.model.schedule.exceptions.EndTimeBeforeStartTimeException;
 
 /**
