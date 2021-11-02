@@ -57,6 +57,8 @@ If you are familiar with Unix commands, this is definitely for you!
 
 ## <a name="features"></a>Features
 
+<div markdown="block" class="alert alert-info">
+
 **Notes about the command format (Unix Command Syntax):**
 - Similar to Unix CLI, the up and down arrow keys can be used to navigate the history of commands executed.
   - Up Arrow Key: Navigate to an older command.
@@ -71,6 +73,7 @@ If you are familiar with Unix commands, this is definitely for you!
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be
   ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+</div>
 
 ## <a name="general-features"></a>1. General Features
 
@@ -96,7 +99,9 @@ Exits ProgrammerError and closes the GUI.
 ### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
 Fills the program with sample data if no data is already present. Otherwise, throws an error message.
 
-*Note: As this is a mass operation, it might take a couple of seconds to complete.*
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+As this is a mass operation, it might take a couple of seconds to complete.*
+</div>
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
 Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
