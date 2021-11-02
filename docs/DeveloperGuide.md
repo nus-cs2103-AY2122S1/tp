@@ -1239,7 +1239,51 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a Client
+1. Adds a new Client to FAST.
+   1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Client added must not be a duplicated client.
+   
+   2. **Test case**: `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`<br>
+      **Expected**: Adds a client with name `Matthew`, phone `98523146`, email `Matt@example.com` and address `Seletar Lane 12`. Success message with details of the newly added client will be shown.
+
+   3. **Test case**: `add n/Matthew`<br>
+      **Expected**: No client added. Error message is shown.
+   
+   4. **Other incorrect delete commands to try**: `add n/Matthew p/98523146... e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew... p/98523146 e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt...@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12...` (where ... represents string that exceeds the character limit). <br> 
+      **Expected**: Similar to previous (in Point 3).
+
+<div markdown="span" class="alert alert-primary">
+:information: 
+Character limit:
+1) Name - 0 to 50 characters
+2) Phone - 3 to 20 digits
+3) Email - max 100 characters (at least 2 for domain portion, before @ symbol)
+4) Address - max 100 characters
+</div>
+
+### Editing a Client
+1. Edits an existing Client in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+
+    2. **Test case**: `edit 1 n/Mattias`<br>
+       **Expected**: Edits the name of the first client in the displayed list. Success message with details of the edited client is shown.
+   
+    3. **Test case**: `edit n/Mattias`<br>
+       **Expected**: No client added. Error message is shown.
+
+    4. **Other incorrect delete commands to try**: `edit 1 n/ `, `edit 1 p/11`, `edit 1 e/mattias@u` <br>
+       **Expected**: Similar to previous (in Point 3).
+
+<div markdown="span" class="alert alert-primary">
+:information: 
+Character limit:
+1) Name - 0 to 50 characters
+2) Phone - 3 to 20 digits
+3) Email - max 100 characters (at least 2 for domain portion, after @ symbol)
+4) Address - max 100 characters
+</div>
+
+### Deleting a Client
 
 #### Single delete
 
@@ -1254,7 +1298,7 @@ testers are expected to do more *exploratory* testing.
       **Expected**: No person is deleted. Error message displayed.
 
    1. **Other incorrect delete commands to try**: `del`, `del x`(where x is larger than the list size)<br>
-      **Expected**: Similar to previous.
+      **Expected**: Similar to previous (in Point 3).
 
 #### Multiple delete
 1. Deleting multiple clients using range input while all clients are being shown
@@ -1267,7 +1311,7 @@ testers are expected to do more *exploratory* testing.
       **Expected**: No client is deleted. Error message displayed.
    
    4. **Other incorrect delete commands to try**: `del`, `del 1-`, `del 1-x`(where x is larger than the list size)<br>
-      **Expected**: Similar to previous.
+      **Expected**: Similar to previous (in Point 3).
    
 2. Deleting multiple clients using several indexes input while all clients are being shown
     1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list. Argument is valid.
