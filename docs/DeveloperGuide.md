@@ -1240,6 +1240,7 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Adding a Client
+
 1. Adds a new Client to FAST.
    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Client added must not be a duplicated client.
    
@@ -1249,7 +1250,7 @@ testers are expected to do more *exploratory* testing.
    3. **Test case**: `add n/Matthew`<br>
       **Expected**: No client added. Error message is shown.
    
-   4. **Other incorrect delete commands to try**: `add n/Matthew p/98523146... e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew... p/98523146 e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt...@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12...` (where ... represents string that exceeds the character limit). <br> 
+   4. **Other incorrect add commands to try**: `add n/Matthew p/98523146... e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew... p/98523146 e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt...@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12...` (where ... represents string that exceeds the character limit). <br> 
       **Expected**: Similar to previous (in Point 3).
 
 <div markdown="span" class="alert alert-primary">
@@ -1262,6 +1263,7 @@ Character limit:
 </div>
 
 ### Editing a Client
+
 1. Edits an existing Client in FAST.
     1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
 
@@ -1271,17 +1273,8 @@ Character limit:
     3. **Test case**: `edit n/Mattias`<br>
        **Expected**: No client added. Error message is shown.
 
-    4. **Other incorrect delete commands to try**: `edit 1 n/ `, `edit 1 p/11`, `edit 1 e/mattias@u` <br>
+    4. **Other incorrect edit commands to try**: `edit 1 n/ `, `edit 1 p/11`, `edit 1 e/mattias@u` <br>
        **Expected**: Similar to previous (in Point 3).
-
-<div markdown="span" class="alert alert-primary">
-:information: 
-Character limit:
-1) Name - 0 to 50 characters
-2) Phone - 3 to 20 digits
-3) Email - max 100 characters (at least 2 for domain portion, after @ symbol)
-4) Address - max 100 characters
-</div>
 
 ### Deleting a Client
 
@@ -1301,6 +1294,7 @@ Character limit:
       **Expected**: Similar to previous (in Point 3).
 
 #### Multiple delete
+
 1. Deleting multiple clients using range input while all clients are being shown
    1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list. Argument is valid.
    
@@ -1324,6 +1318,22 @@ Character limit:
 
     4. **Other incorrect delete commands to try**: `del`, `del 1 x 2`(where x is larger than the list size)<br>
        **Expected**: Similar to previous.
+
+### Adding a remark
+
+1. Adds a remark to an existing Client in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+
+    2. **Test case**: `rmk 1 r/He loves to sleep.`<br>
+       **Expected**: Add a remark `He loves to sleep` to the first client in the displayed list. Success message with details of the client and the new remark is shown.
+
+    3. **Test case**: `rmk 1 r/`<br>
+       **Expected**: Removes the remark of the first client in the displayed list. Success message with details of the client and an empty remark is shown.
+    4. **Test case**: `rmk 1`<br>
+       **Expected**: No remark added. Error message is shown.
+   
+    5. **Other incorrect remark commands to try**: `rmk r/ `, `rmk 1 r/remark...`(where remark... represents a remark longer than 45 characters) <br>
+       **Expected**: Similar to previous (in Point 4).
 
 ### Appointment Feature
 
