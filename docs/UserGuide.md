@@ -41,7 +41,6 @@ Orange text     | Headings and subheadings of various size
 :information_source: : Additional information <br/>
 :bulb: : Tip <br/>
 :exclamation: : Important message <br/>
-:x: : Error or danger to avoid <br/>
 
 <div markdown="block" class="alert alert-info">
 :information_source: Call out bar 
@@ -79,6 +78,12 @@ Orange text     | Headings and subheadings of various size
 
 1. Refer to the [Features](#features) below for details of each command.
 
+<div markdown="block" class="alert alert-info">
+:exclamation: Try not to edit the **data file** directly!  
+* This may lead to invalid values for data fields. 
+* In the event of this, *ComputingConnection* will restart with an empty database! 
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Understanding the 'Features' section
@@ -106,7 +111,7 @@ Miscellaneous data fields| 8. `r/` : Remark <br><br> 9. `int/` : Interaction <br
 
 <div markdown="block" class="alert alert-info">
 :information_source: Elaboration on valid items
-* Valid items of the **faculty** field must be entered in lower case. A future patch will allow case-insensitive valid entires. 
+* Valid items of the **faculty** field must be entered in lower case. A future patch will allow case-insensitive valid entries. 
 * The **major** field currently takes any alphanumeric item. A future patch will ensure major is tied to a valid faculty.
 </div>
 
@@ -116,8 +121,6 @@ Understanding the structure of a **organisation** in *ComputingConnection* is al
 Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
 Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
-
-
 
 <div markdown="block" class="alert alert-info">
 :information_source: Compulsory vs Optional data fields
@@ -213,14 +216,14 @@ Commands that are related to a specific contact.
 ##### Adding a contact : `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR compat/COMPATABILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples: 
 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science` 
   > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
-* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science s/frontend l/javascript r/interest in web development` 
-  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
+* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science compat/80 s/frontend l/javascript r/interest in web development` 
+  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with a compatibility of 80/100, with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
 
 <div markdown="block" class="alert alert-info">
 :bulb: :information_source: Start with the essentials!
@@ -258,7 +261,8 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 :bulb: Appending is cumulative! 
-* Items in data fields are not numbered chronologically after an `append`, but alphanumerically - this should help you see contacts more consistently. 
+* Items in data fields are not numbered chronologically after an `append`, but alphanumerically - this should help you see contacts more consistently.
+* Sorting order follows **digit** first, then **upper case letter** and finally, **lower case letter**.
 </div>
 
 ##### Removing data fields : `rm`
