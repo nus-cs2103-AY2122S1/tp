@@ -79,9 +79,6 @@ public class CommandTestUtil {
     public static final int INVALID_TABLE_ID_ZERO = 0;
     public static final int INVALID_TABLE_ID_NEGATIVE = -1;
 
-    static {
-    }
-
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
