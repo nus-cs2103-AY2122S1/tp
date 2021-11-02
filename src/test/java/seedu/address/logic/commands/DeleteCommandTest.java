@@ -14,8 +14,10 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemDescriptorBuilder;
@@ -26,7 +28,8 @@ import seedu.address.testutil.ItemDescriptorBuilder;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void execute_deleteExistingItemByName_success() {
@@ -35,7 +38,8 @@ public class DeleteCommandTest {
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
         DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.deleteItem(BAGEL);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_SUCCESS, BAGEL);
@@ -50,7 +54,8 @@ public class DeleteCommandTest {
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
         DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.deleteItem(BAGEL);
 
         String expectedMessage = String.format(seedu.address.logic.commands.DeleteCommand.MESSAGE_SUCCESS, BAGEL);
@@ -66,7 +71,8 @@ public class DeleteCommandTest {
                 .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
         DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.deleteItem(BAGEL);
 
         String expectedMessage = String.format(seedu.address.logic.commands.DeleteCommand.MESSAGE_SUCCESS, BAGEL);
@@ -94,7 +100,8 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
         String expectedMessage = DeleteCommand.MESSAGE_NAME_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                new TransactionList(), new BookKeeping());
 
         assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
     }
@@ -108,7 +115,8 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
         String expectedMessage = DeleteCommand.MESSAGE_ID_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                new TransactionList(), new BookKeeping());
 
         assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
     }
@@ -124,7 +132,8 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(descriptor);
         String expectedMessage = DeleteCommand.MESSAGE_MULTIPLE_MATCHES;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, x-> x.equals(BAGEL) || x.equals(DONUT));
 
         assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);

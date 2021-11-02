@@ -6,7 +6,6 @@ import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,7 +17,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.display.DisplayList;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.display.Displayable;
@@ -26,8 +24,6 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
-import seedu.address.storage.BookKeepingStorage;
-import seedu.address.storage.TransactionStorage;
 
 /**
  * Represents the in-memory model of BogoBogo data.
@@ -49,7 +45,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
      */
-    public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyTransactionList transactionList, ReadOnlyBookKeeping bookKeeping) {
         super();
         requireAllNonNull(inventory, userPrefs);
 
@@ -57,25 +54,14 @@ public class ModelManager implements Model {
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.transactions = transactionList.getTransactionRecordList();
         displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
-        List<TransactionRecord> transactionRecordList = null;
-        bookKeeping = new BookKeeping(0.0, 0.0, 0.0);
-        try {
-            transactionRecordList = new TransactionStorage()
-                    .readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
-            bookKeeping = new BookKeepingStorage()
-                    .readBookKeeping(userPrefs.getBookKeepingFilePath())
-                    .orElse(new BookKeeping(0.0, 0.0, 0.0));
-        } catch (DataConversionException e) {
-            System.out.println(e);
-        }
-
-        transactions = transactionRecordList == null ? new ArrayList<>() : transactionRecordList;
+        this.bookKeeping = new BookKeeping(bookKeeping);
     }
 
     public ModelManager() {
-        this(new Inventory(), new UserPrefs());
+        this(new Inventory(), new UserPrefs(), new TransactionList(), new BookKeeping());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -366,36 +352,15 @@ public class ModelManager implements Model {
 
         addRevenueBookKeeping(totalRevenue);
 
-        try {
-            new TransactionStorage().saveTransaction(new ArrayList(transactions),
-                    path);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }
 
     @Override
-    public List<TransactionRecord> getTransactions() {
-        return new ArrayList<>(transactions);
+    public ReadOnlyTransactionList getTransactions() {
+        return new TransactionList(new ArrayList<>(transactions));
     }
 
     //=========== BookKeeping ================================================================================
-
-    /**
-     * Save the BookKeeping to json.
-     *
-     * @param bookKeeping current bookKeeping.
-     */
-    public void saveBookKeeping(BookKeeping bookKeeping) {
-        try {
-            new BookKeepingStorage().saveBookKeeping(bookKeeping, userPrefs.getBookKeepingFilePath());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
 
     /**
      * Add cost to bookKeeping.
@@ -404,7 +369,6 @@ public class ModelManager implements Model {
      */
     public void addCostBookKeeping(Double cost) {
         bookKeeping.addCost(cost);
-        saveBookKeeping(bookKeeping);
     }
 
     /**
@@ -414,6 +378,5 @@ public class ModelManager implements Model {
      */
     public void addRevenueBookKeeping(Double revenue) {
         bookKeeping.addRevenue(revenue);
-        saveBookKeeping(bookKeeping);
     }
 }

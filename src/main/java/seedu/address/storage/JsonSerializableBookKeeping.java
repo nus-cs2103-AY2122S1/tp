@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.BookKeeping;
+import seedu.address.model.ReadOnlyBookKeeping;
 
 @JsonRootName(value = "bookKeeping")
 public class JsonSerializableBookKeeping {
@@ -34,7 +35,7 @@ public class JsonSerializableBookKeeping {
      *
      * @param bookKeeping current bookKeeping.
      */
-    public JsonSerializableBookKeeping(BookKeeping bookKeeping) {
+    public JsonSerializableBookKeeping(ReadOnlyBookKeeping bookKeeping) {
         this.revenue = bookKeeping.getRevenue();
         this.cost = bookKeeping.getCost();
         this.profit = bookKeeping.getProfit();

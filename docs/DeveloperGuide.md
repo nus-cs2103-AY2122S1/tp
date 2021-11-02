@@ -193,6 +193,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Ordering
+
+### Implementation
+
+When ModelManager is initialised, optionalOrder is set to Optional.empty(). 
+At this point, the user has 1 order record with 2 items in his transaction list.
+
+![Initial_State](images/OrderInitialState.png)
+
+Step 1. The user enters ordering mode via the `sorder` command.
+
+Upon entering the ordering mode, optionalOrder now has a new Order() which is empty
+
+![Sorder_State](images/OrderSorderState.png)
+
+Step 2. The user adds an item to the order via the `iorder` command.
+
+Upon entering `iorder Banana c/1`, the order now contains 1 banana item.
+
+![Iorder_State](images/OrderItem1State.png)
+
+Next, upon entering `iorder Strawberry c/1`, the order now contains 1 strawberry item.
+
+![Iorder_State](images/OrderItem2State.png)
+
+Step 3. The user transacts the order via the `eorder` command.
+
+After the transaction is done, optionalOrder is reinitialised to Optional.empty()
+
+![Initial_State](images/OrderFinalState.png)
+
+Step 4. The new transactions are saved to json file.
+
+![Transact_Order_Sequence_Diagram](images/TransactOrderSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -352,21 +387,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User did not specify the name of item.
-    * 1a1. BogoBogo notifies user of missing details.
+* 1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
+    * 1a1. BogoBogo informs user of the missing details.
+    * 1a2. User reenters with the missing details.
+
+      Use case resumes at step 2.
+
+* 1b. User is adding item that has been added before, and only specifies either name or id without the other fields.
+    * 1b1. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
       Use case ends.
 
-* 1b. User is adding the item for the first time, and did not specify the id, price or cost of the item.
-    * 1b1. BogoBogo requests user for the missing details.
-    * 1b2. User enters the missing details.
+* 1c. User is adding an item that has been added before, but provides an id that corresponds to another item.
+    * 1c1. BogoBogo notifies user of the mismatch and shows the list of possible matches.
+    * 1c2. User reenters with the correct details.
+    * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
-      Use case resumes at step 2.
-
-* 1c. The given id does not match with the given name.
-    * 1c1. BogoBogo notifies user of the mismatch.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 **UC02 - Deleting an item**
 

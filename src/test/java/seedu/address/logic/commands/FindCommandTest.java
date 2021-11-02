@@ -20,8 +20,10 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
@@ -31,8 +33,10 @@ import seedu.address.model.order.Order;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
+    private Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void equals() {
