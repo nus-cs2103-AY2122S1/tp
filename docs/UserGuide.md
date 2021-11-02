@@ -571,7 +571,7 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 ### Managing Your Schedule
 
-This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tags`, will bring you right out.
+This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -677,11 +677,11 @@ Clears all entries from TAB.
 
 Format: `clear`
 
-#### Viewing all tags: `tags`
+#### Viewing all tags: `tag`
 
 Shows all the tags that you have created together with the number of students labelled with each tag.
 
-Format: `tags`
+Format: `tag`
 
 ![tag](images/tag.png)
 
@@ -777,7 +777,7 @@ Action | Format, Examples
 **Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
 **List Students** | `list`
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
-**View Tags** | `tags`
+**View Tags** | `tag`
 **Add Lesson** | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
 **Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
