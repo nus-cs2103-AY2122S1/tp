@@ -1,10 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-
 import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 
 /**
@@ -35,6 +31,12 @@ public class DeadlineTaskBuilder extends TaskBuilder {
         return new DeadlineTask(taskName, tags, false, taskDate, description, priority);
     }
 
+    /**
+     * Sets the date of the task builder.
+     *
+     * @param newDate The updated date.
+     * @return The taskBuilder.
+     */
     public DeadlineTaskBuilder withDate(String newDate) {
         this.taskDate = new TaskDate(newDate);
         return this;

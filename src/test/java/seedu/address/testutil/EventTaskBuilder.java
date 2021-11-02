@@ -28,6 +28,12 @@ public class EventTaskBuilder extends TaskBuilder {
         return new EventTask(taskName, tags, false, taskDate, description, priority);
     }
 
+    /**
+     * Sets the date of the task builder.
+     *
+     * @param newDate The updated date.
+     * @return The taskBuilder.
+     */
     public EventTaskBuilder withDate(String newDate) {
         this.taskDate = new TaskDate(newDate);
         return this;

@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddEventTaskCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.EventTask;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EventTaskBuilder;

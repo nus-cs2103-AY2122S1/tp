@@ -21,13 +21,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTodoTaskCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 import seedu.address.model.task.TodoTask;
 import seedu.address.testutil.TodoTaskBuilder;
 
 public class AddTodoTaskCommandParserTest {
-    private AddTodoTaskCommandParser parser = new AddTodoTaskCommandParser();
+    private final AddTodoTaskCommandParser parser = new AddTodoTaskCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
