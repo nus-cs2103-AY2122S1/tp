@@ -213,16 +213,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initListeners() {
-        ListView<Person> personListView = centerPanel.getPersonListView();
         // Add listeners
-        personListView.getSelectionModel().selectedItemProperty()
+        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
                         handlePersonGridPanel(newVal);
                     }
                 });
-        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
-                .getSelectionModel().getSelectedItem()));
     }
 
     /**
