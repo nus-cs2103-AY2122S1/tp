@@ -349,13 +349,13 @@ The essential fields for a lesson are indicated by the presence of the '*'. The 
 
 Field | Prefix | Constraints | Examples | Remark|
 ------------------|-------|-----------| --------| -----|
-DATE* |`date/`| Dates should be of the format dd MMM yyyy and adhere to the following constraints:<br/>1. dd and yyyy are numerical characters.<br/>2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec<br/>3. Must be a valid date for the year."|`20 jan 2022`<br/>`4 nov 2000`| Dates are case-insensitive and allows single digit day without the leading zero.|
-TIME_RANGE*        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br/>2. Lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` | |
-SUBJECT*           | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br/> `subject/Language Arts` | |
-LESSON_RATE*       | `rates/` | Money-related fields such as lesson rate should be formatted with a decimal point '.' as a separator between the dollars and cents, and adhere to the following constraints:<br/>1. Lesson rates should only contain numbers and at most one decimal point.<br/>2. The lesson rate should not start or end with a decimal point and should have at most two decimal places. | `rates/37.50`<br/>`rates/40` | The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br/> |
-RECURRENCE        | `recurring/` | This prefix takes in an optional parameter `END_DATE` that signifies the end of the recurrence. The `END_DATE` constraints follows the `DATE` constraints. An additional constraint is that the end date cannot be earlier than the start date | `recurring/`<br/>`recurring/30 Nov 2100` |  |
-HOMEWORK          | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br/> `hw/Assignment 5` | |
-OUTSTANDING FEES  | `f/` | Constraints for fees follow that of lesson rates. | `f/50` | Refer to more details in this [section](#managing-lesson-fees) |
+Start date* |`date/`| Dates should be of the format dd MMM yyyy and adhere to the following constraints:<br/>1. dd and yyyy are numerical characters.<br/>2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec<br/>3. Must be a valid date for the year."|`20 jan 2022`<br/>`4 nov 2000`| Dates are case-insensitive and allows single digit day without the leading zero.|
+Time range*        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br/>2. Lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` | |
+Subject*           | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br/> `subject/Language Arts` | |
+Lesson rate*       | `rates/` | Money-related fields such as lesson rate should be formatted with a decimal point '.' as a separator between the dollars and cents, and adhere to the following constraints:<br/>1. Lesson rates should only contain numbers and at most one decimal point.<br/>2. The lesson rate should not start or end with a decimal point and should have at most two decimal places. | `rates/37.50`<br/>`rates/40` | The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br/> |
+Recurrence        | `recurring/` | This prefix takes in an optional parameter, end date, that signifies the end of the recurrence. The end date constraints follows the start date constraints. An additional constraint is that the end date cannot be earlier than the start date | `recurring/`<br/>`recurring/30 Nov 2100` |  |
+Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br/> `hw/Assignment 5` | |
+Outstanding fees  | `f/` | Constraints for fees follow that of lesson rates. | `f/50` | Refer to more details in this [section](#managing-lesson-fees) |
 
 <div markdown="block" class="alert alert-info">
 
@@ -412,7 +412,8 @@ Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time
 
 * The lesson index must be a valid index number shown in the lesson list of the student.
 
-* You can edit all fields of a lesson.
+* You can delete all homework of a lesson by typing `hw/` without any arguments.<br>
+  e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
