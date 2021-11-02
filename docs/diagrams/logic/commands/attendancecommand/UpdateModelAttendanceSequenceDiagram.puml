@@ -5,10 +5,10 @@ Participant ":AttendanceCommand" as ac LOGIC_COLOR
 Participant ":StudioRecord" as sr LOGIC_COLOR
 Participant ":Student" as est LOGIC_COLOR
 Participant ":ModelManager" as mm LOGIC_COLOR
-Participant ":AcademyDirectory" as ad LOGIC_COLOR
-Participant ":UniqueStudentList" as usl LOGIC_COLOR
+
 
 activate ac
+-> ac
 create sr
 ac -> sr ++ : StudioRecord(attendanceToEdit, participation)
 sr --> ac -- : newStudioRecord
@@ -19,10 +19,6 @@ ac -> est ++ :  Student(name, phone, email, telegram, newStudioRecord, assessmen
 est --> ac -- : editedStudent
 
 ac -> mm ++ : setStudent(studentToEdit, editedStudent)
-mm -> ad ++ : setStudent(studentToEdit, editedStudent)
-ad -> usl ++ : setStudent(studentToEdit, editedStudent)
-usl --> ad --
-ad --> mm --
 mm --> ac --
-
+<-- ac
 @enduml
