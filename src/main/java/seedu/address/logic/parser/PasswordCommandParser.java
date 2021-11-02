@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
-import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID＿PASSWORD;
+import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID_PASSWORD;
 import static seedu.address.logic.commands.PasswordCommand.MESSAGE_WRONG_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
@@ -40,7 +40,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
         Optional<String> oldInput = argMultimap.getValue(PREFIX_OLD_PASSWORD);
         Optional<String> newInput = argMultimap.getValue(PREFIX_NEW_PASSWORD);
 
-        // old password is empty
+        // one of the passwords is empty
         if (oldInput.isEmpty() || newInput.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
@@ -55,7 +55,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // new password invalid format
         if (!passwordValidation(newPassword)) {
-            throw new ParseException(MESSAGE_INVALID＿PASSWORD
+            throw new ParseException(MESSAGE_INVALID_PASSWORD
                     + System.lineSeparator()
                     + PasswordCommand.CORRECT_PASSWORD_FORMAT);
         } else {

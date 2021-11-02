@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
-import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID＿PASSWORD;
+import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID_PASSWORD;
 import static seedu.address.logic.commands.PasswordCommand.MESSAGE_WRONG_PASSWORD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
@@ -66,11 +67,19 @@ public class PasswordCommandParserTest {
 
     @Test
     public void parse_invalidPassword_failure() {
-        String expectedMessage = MESSAGE_INVALID＿PASSWORD
+        String expectedMessage = MESSAGE_INVALID_PASSWORD
                 + System.lineSeparator()
                 + PasswordCommand.CORRECT_PASSWORD_FORMAT;
 
         assertParseFailure(parser, PasswordUtil.getPasswordCommand(validPassword, inValidPassword),
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_emptyPassword_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, PasswordUtil.getMissingFlag(validPassword),
                 expectedMessage);
     }
 }
