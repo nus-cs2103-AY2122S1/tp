@@ -50,12 +50,24 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        boolean isDuplicatedPerson = duplicatedPersonChecker(model, toAdd);
+        if (isDuplicatedPerson) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    /**
+     * Checks if the current model contains the {@code Person} to be checked.
+     *
+     * @param model The current model for FAST.
+     * @param person The person to be checked.
+     * @return A boolean indicating whether the person to be checked already exist in the model.
+     */
+    private boolean duplicatedPersonChecker(Model model, Person person) {
+        return model.hasPerson(person);
     }
 
     @Override
