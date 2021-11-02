@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TutorMaster is a desktop app for freelance tutors to manage their students’ grades, assignment submission and tuition fee payment. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
+TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
 * Table of Contents
   {:toc}
