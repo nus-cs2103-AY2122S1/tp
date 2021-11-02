@@ -29,7 +29,7 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 
    * **`ls -contacts`**: Lists all contacts.
 
-   * `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to the Address Book.
+   * `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to UNIon.
 
    * `rm 3`: Deletes the 3rd contact shown in the current list.
 
@@ -79,7 +79,7 @@ Format: `help`
 
 #### Adding a person: `touch`
 
-Adds a person to the address book.
+Adds a person to UNIon.
 
 Format: `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​`
 
@@ -97,13 +97,13 @@ Examples:
 
 #### Listing all persons: `ls -contacts`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in UNIon.
 
 Format: `ls -contacts`
 
 #### Editing a person: `vim`
 
-Edits an existing person in the address book.
+Edits an existing person in the UNIon.
 
 Format: `vim INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
@@ -140,7 +140,7 @@ Examples:
 
 #### Deleting a person: `rm`
 
-Deletes the specified person from the address book.
+Deletes the specified person from UNIon.
 
 Format: `rm INDEX`
 
@@ -149,12 +149,12 @@ Format: `rm INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `ls -contacts` followed by `rm 2` deletes the 2nd person in the address book.
+* `ls -contacts` followed by `rm 2` deletes the 2nd person in UNIon.
 * `find Betsy` followed by `rm 1` deletes the 1st person in the results of the `find` command.
 
 #### Clearing all people: `rm -contacts`
 
-Clears all contacts from the address book.
+Clears all contacts from UNIon.
 
 Format: `rm -contacts`
 
@@ -247,7 +247,7 @@ Examples:
 
 #### Clearing all folders: `rm -folders`
 
-Clears all folders from the address book.
+Clears all folders from UNIon.
 
 Format: `rm -folders`
 
