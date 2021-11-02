@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -14,8 +13,8 @@ import seedu.address.logic.ai.Ai;
 import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.Model;
 import seedu.address.model.person.FindABuddyPredicate;
+import seedu.address.model.person.IsEventTagPredicate;
 import seedu.address.model.person.IsFavouritePredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Ui component for navigating between different tabs.
@@ -78,8 +77,7 @@ public class TabPaneHeader extends UiPart<Region> {
                 logic.sort();
                 stopFabLoader();
             } else if (newValue.equals(events)) {
-                logic.updateFilteredPersonList(
-                        new TagContainsKeywordsPredicate(Collections.singletonList("colleagues")));
+                logic.updateFilteredPersonList(new IsEventTagPredicate());
                 logic.getPersonList().getRoot().setVisible(true);
                 indicator.getRoot().setVisible(false);
                 logic.sort();
