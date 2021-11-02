@@ -210,9 +210,6 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 * Existing values will be updated to the entered values.<br>
   e.g. `edit 2 f/0` will override the outstanding fees of the 2nd student in the displayed list to `0`.
 
-* When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
-  e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
-
 * You can delete the data in optional fields by supplying a parameter with no arguments.<br>
   e.g. `edit 2 r/` will remove the remarks for the 2nd student in the displayed list.
 
@@ -220,7 +217,10 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
   e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
   any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
 
-* You can delete all tags of a student by typing `t/` without any arguments.<br>
+* When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
+  e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
+
+* You can delete all tags of a student by typing `t/` without any arguments. If you add other tags along with `t/`, `t/` will be interpreted as an empty tag.<br>
   e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
 
 Examples:
@@ -412,7 +412,8 @@ Cancelled date |`cancel/`| Same constraints as other date fields.|`cancel/20 jan
 Uncancelled date |`uncancel/` | Same constraints as other date fields. | `uncancel/20 jan 2022`|The date to uncancel must be an already cancelled date. | 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+* Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.
 </div>
 
 Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time/TIMERANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
@@ -423,7 +424,10 @@ Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time
 
 * The lesson index must be a valid index number shown in the lesson list of the student.
 
-* You can delete all homework of a lesson by typing `hw/` without any arguments.<br>
+* When editing homework, all existing pieces of homework of the lesson will be removed and replaced with the pieces of homework specified.<br>
+  e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
+
+* You can delete all homework of a lesson by typing `hw/` without any arguments. If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br>
   e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
