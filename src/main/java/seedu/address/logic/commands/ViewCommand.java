@@ -13,7 +13,7 @@ public abstract class ViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n or NAME (must be full name)"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Person: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed contact: %1$s";
 
     public ViewCommand() {
     }

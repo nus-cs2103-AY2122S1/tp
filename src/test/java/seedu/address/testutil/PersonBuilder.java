@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REVIEW = "Great place";
     public static final String DEFAULT_CATEGORY_CODE = "att";
-    public static final String DEFAULT_RATING = "5";
+    public static final String DEFAULT_RATING = "2";
 
     private CategoryCode category;
     private Name name;

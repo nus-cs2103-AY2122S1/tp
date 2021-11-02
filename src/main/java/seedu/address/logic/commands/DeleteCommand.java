@@ -16,6 +16,7 @@ public abstract class DeleteCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this; // short circuit if same object
+        return other == this
+                || other instanceof DeleteCommand; // short circuit if same object
     }
 }

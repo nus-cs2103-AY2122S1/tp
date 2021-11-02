@@ -22,7 +22,7 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all contacts by category or rating "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all contacts by category, rating or tag"
             + "and displays them as a list with index numbers.\n"
             + "Parameters: [" + PREFIX_CATEGORY_CODE + "CATEGORY_CODE] "
             + "[" + PREFIX_RATING + "RATING] "
