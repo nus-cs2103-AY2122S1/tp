@@ -25,4 +25,21 @@ public class ValidateUtil {
         String trimmed = str.trim();
         return trimmed.equals("");
     }
+
+    /**
+     * Checks if given string has the expected number of segments. Segments are separated by whitespace.
+     * @param str to check
+     * @param expected number of segments
+     * @return true if given string has the expected number of segments.
+     */
+    public static boolean hasExpectedSeparatedSegments(String str, int expected) {
+        String[] split = str.split(" ");
+        int count = 0;
+        for (String segment : split) {
+            if (!isEmptyOrOnlyWhitespace(segment)) {
+                count++;
+            }
+        }
+        return count == expected;
+    }
 }

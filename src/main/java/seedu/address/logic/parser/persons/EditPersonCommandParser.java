@@ -41,7 +41,7 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.preambleHasExpectedSegments(1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditPersonCommand.MESSAGE_USAGE));
         }

@@ -32,7 +32,9 @@ public class PersonRemoveExamParserTest {
         assertParseFailure(parser, "", INVALID_FORMAT);
 
         // invalid indexes
-        assertParseFailure(parser, "...", INVALID_COMMAND_INVALID_INDEX);
+        assertParseFailure(parser, "...", INVALID_FORMAT);
+
+        assertParseFailure(parser, "... 2", INVALID_COMMAND_INVALID_INDEX);
 
         assertParseFailure(parser, "abc 1", INVALID_COMMAND_INVALID_INDEX);
     }

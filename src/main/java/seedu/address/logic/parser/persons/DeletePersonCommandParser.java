@@ -2,6 +2,7 @@ package seedu.address.logic.parser.persons;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
+import static seedu.address.logic.parser.ValidateUtil.hasExpectedSeparatedSegments;
 import static seedu.address.logic.parser.ValidateUtil.isEmptyOrOnlyWhitespace;
 
 import seedu.address.commons.core.index.Index;
@@ -22,11 +23,10 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeletePersonCommand parse(String args) throws ParseException {
-        if (isEmptyOrOnlyWhitespace(args)) {
+        if (isEmptyOrOnlyWhitespace(args) || !hasExpectedSeparatedSegments(args, 1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteGroupCommand.MESSAGE_USAGE));
         }
-
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeletePersonCommand(index);

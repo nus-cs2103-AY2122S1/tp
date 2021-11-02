@@ -29,7 +29,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DEADLINE);
 
-        if (argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.preambleHasExpectedSegments(1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditTaskCommand.COMMAND_WORD));
         }

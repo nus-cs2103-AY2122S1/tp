@@ -43,7 +43,7 @@ public class PersonAddLessonParser implements Parser<EditPersonCommand> {
                 ArgumentTokenizer.tokenize(userInput, PREFIX_SUBJECT, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DAY);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_SUBJECT, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DAY)
-                || argMultimap.getPreamble().isEmpty()) {
+                || argMultimap.getPreamble().isEmpty() || !argMultimap.preambleHasExpectedSegments(1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
         }

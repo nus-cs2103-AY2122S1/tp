@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
 import static seedu.address.commons.core.Messages.MESSAGE_WRONG_INDEX_NUM_FORMAT;
+import static seedu.address.logic.parser.ValidateUtil.hasExpectedSeparatedSegments;
 import static seedu.address.logic.parser.ValidateUtil.isEmptyOrOnlyWhitespace;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class PersonRemoveExamParser implements Parser<EditPersonCommand> {
     public EditPersonCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
 
-        if (isEmptyOrOnlyWhitespace(userInput)) {
+        if (isEmptyOrOnlyWhitespace(userInput) || !hasExpectedSeparatedSegments(userInput, INDEX_NUM)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
         }
