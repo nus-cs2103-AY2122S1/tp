@@ -11,13 +11,11 @@ public class ID {
     public static final String MESSAGE_CONSTRAINTS =
             "ID should only contain numbers and it should not be blank";
 
-    /**
-     * The quantity should contain digits from 0 to 9 only.
-     */
+    // The quantity should contain digits from 0 to 9 only.
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    private static int clientIDCounter = 0;
-    private static int productIDCounter = 0;
+    private static int clientIDCounter = 1;
+    private static int productIDCounter = 1;
 
     private final int id;
 
