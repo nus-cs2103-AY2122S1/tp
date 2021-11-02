@@ -86,36 +86,37 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyInventory> addressBookOptional;
+        Optional<ReadOnlyInventory> inventoryOptional;
         ReadOnlyInventory initialData;
         Optional<ReadOnlyTransactionList> transactionListOptional;
         ReadOnlyTransactionList transactionList;
         Optional<ReadOnlyBookKeeping> bookKeepingOptional;
         ReadOnlyBookKeeping bookKeeping;
         try {
-            addressBookOptional = storage.readInventory();
+            inventoryOptional = storage.readInventory();
             transactionListOptional = storage.readTransactionList();
             bookKeepingOptional = storage.readBookKeeping();
-            if (!addressBookOptional.isPresent()) {
+            if (inventoryOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            if (!transactionListOptional.isPresent()) {
+            if (transactionListOptional.isEmpty()) {
                 logger.info("Transaction not found");
             }
-            if (!bookKeepingOptional.isPresent()) {
+            if (bookKeepingOptional.isEmpty()) {
                 logger.info("BookKeeping not found");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleInventory);
+            initialData = inventoryOptional.orElseGet(SampleDataUtil::getSampleInventory);
             transactionList = transactionListOptional
                     .orElseGet(() -> new TransactionList(new ArrayList<TransactionRecord>()));
-            bookKeeping = bookKeepingOptional.orElseGet(() -> new BookKeeping());
+            bookKeeping = bookKeepingOptional.orElseGet(BookKeeping::new);
+
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty inventory");
             initialData = new Inventory();
             transactionList = new TransactionList();
             bookKeeping = new BookKeeping();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty inventory");
             initialData = new Inventory();
             transactionList = new TransactionList();
             bookKeeping = new BookKeeping();
@@ -182,7 +183,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty inventory");
             initializedPrefs = new UserPrefs();
         }
 
