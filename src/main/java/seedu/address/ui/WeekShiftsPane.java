@@ -32,7 +32,6 @@ public class WeekShiftsPane extends UiPart<Region> {
     }
 
     public void setChildren(ObservableList<Person> staffList, Period period) {
-        int currentDay = LocalDate.now().getDayOfWeek().getValue();
         weekShiftsPane.getChildren().clear();
         weekShiftsPane.getChildren().addAll(new DayCard(0, staffList, period).getRoot(),
                 new DayCard(1, staffList, period).getRoot(),
