@@ -19,7 +19,7 @@ end box
 
 box Model MODEL_COLOR_T1
 
-participant "person:Person" as Person MODEL_COLOR
+participant "contact:Contact" as Contact MODEL_COLOR
 end box
 
 
@@ -46,15 +46,15 @@ activate ParserUtil
 ParserUtil --> AddCommandParser
 deactivate ParserUtil
 
-create Person
-AddCommandParser -> Person : Person(... review ...)
-activate Person
+create Contact
+AddCommandParser -> Contact : Contact(... review ...)
+activate Contact
 
-Person --> AddCommandParser : person
-deactivate Person
+Contact --> AddCommandParser : contact
+deactivate Contact
 
 create AddCommand
-AddCommandParser -> AddCommand : AddCommand(person)
+AddCommandParser -> AddCommand : AddCommand(contact)
 activate AddCommand
 
 AddCommand --> AddCommandParser:a
@@ -69,11 +69,11 @@ deactivate AddressBookParser
 LogicManager -> AddCommand : execute(model)
 activate AddCommand
 
-AddCommand -> Person : addPerson(person)
-activate Person
+AddCommand -> Contact : addContact(contact)
+activate Contact
 
-Person --> AddCommand
-deactivate Person
+Contact --> AddCommand
+deactivate Contact
 
 create CommandResult
 AddCommand -> CommandResult

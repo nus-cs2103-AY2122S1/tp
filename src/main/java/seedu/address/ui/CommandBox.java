@@ -2,13 +2,16 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.contact.Contact;
 import seedu.address.ui.util.InputHistory;
 
 
@@ -67,7 +70,6 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
-
         try {
             commandExecutor.execute(commandText);
         } catch (CommandException | ParseException e) {
@@ -76,6 +78,21 @@ public class CommandBox extends UiPart<Region> {
             String text = commandTextField.getText();
             inputHistory.addToHistory(text);
             commandTextField.setText("");
+        }
+    }
+
+    /**
+     * Handles the View Selection.
+     */
+    public void handleViewSelected(MultipleSelectionModel<Contact> selectedContactModel) {
+        int index = selectedContactModel.getSelectedIndices().get(0);
+        int indexOneOff = index + 1;
+        String commandText = ViewCommand.COMMAND_WORD + " " + indexOneOff;
+
+        try {
+            commandExecutor.execute(commandText);
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
         }
     }
 

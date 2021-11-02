@@ -5,9 +5,12 @@ import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_ATT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_FNB;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATING_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -18,8 +21,8 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Rating;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Rating;
 
 class FilterCommandParserTest {
 
@@ -35,10 +38,15 @@ class FilterCommandParserTest {
         // missing prefix
         assertParseFailure(parser, "att", expectedMessage);
 
+        // missing prefix
+        assertParseFailure(parser, "3", expectedMessage);
+
+        // missing prefix
+        assertParseFailure(parser, "tag", expectedMessage);
+
         // invalid format
         assertParseFailure(parser, "abc", expectedMessage);
     }
-
 
     @Test
     public void parse_invalidCategoryCode_failure() {
@@ -88,5 +96,49 @@ class FilterCommandParserTest {
             expectedFilterCommand);
     }
 
-    // TODO: add test cases for tags filtering
+    @Test
+    public void parse_emptyRating_failure() {
+        String expectedMessage = Rating.MESSAGE_CONSTRAINTS;
+
+        // empty category code
+        assertParseFailure(parser, " " + PREFIX_RATING, expectedMessage);
+
+        // invalid category code
+        assertParseFailure(parser, INVALID_RATING_DESC, expectedMessage);
+    }
+
+    @Test
+    public void parse_validRating_returnsFilterCommand() {
+        // no leading and trailing whitespaces
+        FilterCommand expectedFilterCommand =
+            new FilterCommand(Collections.emptySet(), new Rating("5"),
+                Collections.emptySet());
+        assertParseSuccess(parser, RATING_DESC_AMY, expectedFilterCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RATING_DESC_AMY, expectedFilterCommand);
+    }
+
+    // TODO [LETHICIA]: add test cases for tags filtering
+
+    @Test
+    public void parse_invalidTag_failure() {
+
+    }
+
+    @Test
+    public void parse_oneTag_returnsFilterCommand() {
+
+    }
+
+    @Test
+    public void parse_multipleTag_returnsFilterCommand() {
+
+    }
+
+    @Test
+    public void parse_noTag_returnsFilterCommand() {
+
+    }
+
 }

@@ -7,12 +7,12 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
 import seedu.address.model.summary.Summary;
 
 /**
- * Deletes a person identified using its displayed index from the address book.
+ * Deletes a contact identified using its displayed index from the address book.
  */
 public class DeleteCommandName extends DeleteCommand {
 
@@ -25,28 +25,28 @@ public class DeleteCommandName extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToDelete = findPerson(model);
-        model.deletePerson(personToDelete);
+        Contact contactToDelete = findContact(model);
+        model.deleteContact(contactToDelete);
         Summary summary = new Summary(model.getAddressBook());
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete), summary);
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, contactToDelete), summary);
     }
 
     /**
-     * This method finds the person object for Delete Command to delete
+     * This method finds the contact object for Delete Command to delete
      * @param model the current address book model
-     * @return Returns the person to be deleted (if any)
-     * @throws CommandException if the person does not exist
+     * @return Returns the contact to be deleted (if any)
+     * @throws CommandException if the contact does not exist
      */
-    private Person findPerson(Model model) throws CommandException {
-        List<Person> personList = model.getFilteredPersonList();
+    private Contact findContact(Model model) throws CommandException {
+        List<Contact> contactList = model.getFilteredContactList();
 
-        for (Person person: personList) {
-            String fullName = person.getName().fullName;
+        for (Contact contact : contactList) {
+            String fullName = contact.getName().fullName;
             if (fullName.equals(targetName.fullName.trim())) {
-                return person;
+                return contact;
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME,
+        throw new CommandException(String.format(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_NAME,
                 DeleteCommand.MESSAGE_USAGE));
     }
 

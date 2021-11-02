@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CmdCommand.SHOWING_CMD_MESSAGE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
@@ -17,5 +19,24 @@ public class CmdCommandTest {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_CMD_MESSAGE, true,
                 false, false);
         assertCommandSuccess(new CmdCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+
+        CmdCommand cmdFirstCommand = new CmdCommand();
+        CmdCommand cmdSecondCommand = new CmdCommand();
+
+        // same object -> returns true
+        assertTrue(cmdFirstCommand.equals(cmdFirstCommand));
+
+        // different types -> returns false
+        assertFalse(cmdFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(cmdFirstCommand.equals(null));
+
+        // same -> returns true
+        assertTrue(cmdFirstCommand.equals(cmdSecondCommand));
     }
 }

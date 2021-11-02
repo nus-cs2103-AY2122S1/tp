@@ -1,0 +1,20 @@
+{
+  "contacts": [ {
+    "category": "ATT",
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "review": "- No Review -",
+    "tagged": [ "friends" ],
+    "rating": "2"
+  }, {
+    "category": "ATT",
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "address": "4th street",
+    "review": "- No Review -",
+    "rating": "4"
+  } ]
+}
