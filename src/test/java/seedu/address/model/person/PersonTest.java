@@ -40,20 +40,21 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertTrue(AMY.isSamePerson(editedBob));
 
+        // same email but different contact number, all other attributes same -> returns true
+        editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // different email but same contact number, all other attributes same -> returns true
+        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
         // different email and contact number, all other attributes same -> returns false
         editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
-        // same email but different contact number, all other attributes same -> returns false
-        editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).build();
-        assertFalse(BOB.isSamePerson(editedBob));
-
-        // different email but same contact number, all other attributes same -> returns false
-        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).build();
-        assertFalse(BOB.isSamePerson(editedBob));
-
-        // email differs in case, all other attributes same -> returns false
-        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
+        // checks case sensitiveness of email
+        // email same but differing in case, different phone number, all other attributes same -> returns false
+        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).withPhone(VALID_PHONE_AMY).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 

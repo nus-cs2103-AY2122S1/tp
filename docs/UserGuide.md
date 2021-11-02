@@ -107,12 +107,17 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
-* Sections with headings appended with ***{Advanced}*** are intended for the advanced user.
 
-* Duplicate applicants are not allowed. For two applicants to be duplicate, 
-they must have the same ***Contact Number*** and ***Email***. An error message will show if you attempt to
-`add` or `edit` applicants in a manner that will lead to duplicate stored applicants.
+</div>
+
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Notes about the applicants:**<br>
+
+* Duplicate applicants are not allowed. <br>
+  For two applicants to be duplicate, they must have either the same ***Phone Number*** or ***Email*** or both. 
+  An error message will show if you attempt to `add` or `edit` applicants in a manner that will lead to duplicate stored applicants.
 
 </div>
 
@@ -142,6 +147,29 @@ Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
+<div markdown="block" class="alert alert-success">
+**:information_source: Prefix inputs for `add` command must follow the following input specifications:**<br>
+
+* You may
+    * refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
+    * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+
+| Input | Prefix | Specifications |
+| :---: | :---: | :---: |
+| NAME | `n/` | [name](#name-n) |
+| PHONE_NUMBER | `p/` | [phone_number](#phone_number-p) |
+| EMAIL_ADDRESS | `e/` | [email_address](#email_address-e) |
+| ROLE | `r/` | [role](#role-r) |
+| EMPLOYMENT_TYPE | `et/` | [employment_type](#employment_type-et) |
+| EXPECTED_SALARY | `s/` | [expected_salary](#expected_salary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [level_of_education](#level_of_education-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [years_of_experience](#years_of_experience-y) |
+| TAG | `t/` | [tag](#tag-t) |
+| INTERVIEW | `i/` | [interview](#interview-i) |
+| NOTES | `nt/` | [notes](#notes-nt) |
+
+</div>
+
 ### Editing an applicant : `edit`
 
 Edits an applicant's with specified index in RecruitIn.
@@ -157,13 +185,34 @@ remove tags from the applicant.
 Giving more than 1 tag prefix input with 1 or more having no value will instead lead to an error. (i.e. `edit 1 t/ t/smart` leads to an error)
 </div>
  * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
- * Prefix inputs for `edit` command must follow the same input specifications as `add` command. 
-Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
 * `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
 * `edit 1 t/` will remove all ***tags***s from the applicant with index number 1
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
+
+<div markdown="block" class="alert alert-success">
+**:information_source: Prefix inputs for `edit` command must follow the same input specifications as `add` command:**<br>
+
+* You may 
+  * refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
+  * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+
+| Input | Prefix | Specifications |
+| :---: | :---: | :---: |
+| NAME | `n/` | [name](#name-n) |
+| PHONE_NUMBER | `p/` | [phone_number](#phone_number-p) |
+| EMAIL_ADDRESS | `e/` | [email_address](#email_address-e) |
+| ROLE | `r/` | [role](#role-r) |
+| EMPLOYMENT_TYPE | `et/` | [employment_type](#employment_type-et) |
+| EXPECTED_SALARY | `s/` | [expected_salary](#expected_salary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [level_of_education](#level_of_education-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [years_of_experience](#years_of_experience-y) |
+| TAG | `t/` | [tag](#tag-t) |
+| INTERVIEW | `i/` | [interview](#interview-i) |
+| NOTES | `nt/` | [notes](#notes-nt) |
+
+</div>
 
 ### Listing all applicants : `list`
 
@@ -181,7 +230,6 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 * If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
 * Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 * Inputs for all prefixes are **case-insensitive**.
-* Refer to [**Find Input Specifications**](#find-inputs) for detailed input specifications.
 
 Examples:
 * `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
@@ -189,7 +237,29 @@ Examples:
 * `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
-        
+
+<div markdown="block" class="alert alert-success">
+**:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
+
+* You may
+    * refer to [**Find Input Specifications**](#find-inputs) for detailed input specifications.
+    * refer to find input specifications for specific prefixes by clicking on relevant links in the table below.
+
+| Input | Prefix | Specifications |
+| :---: | :---: | :---: |
+| NAME | `n/` | [name](#name-n-1) |
+| PHONE_NUMBER | `p/` | [phone_number](#phone_number-p-1) |
+| EMAIL_ADDRESS | `e/` | [email_address](#email_address-e-1) |
+| ROLE | `r/` | [role](#role-r-1) |
+| EMPLOYMENT_TYPE | `et/` | [employment_type](#employment_type-et-1) |
+| EXPECTED_SALARY | `s/` | [expected_salary](#expected_salary-s-1) |
+| LEVEL_OF_EDUCATION | `l/` | [level_of_education](#level_of_education-l-1) |
+| YEARS_OF_EXPERIENCE | `y/` | [years_of_experience](#years_of_experience-y-1) |
+| TAG | `t/` | [tag](#tag-t-1) |
+| INTERVIEW | `i/` | [interview](#interview-i-1) |
+| NOTES | `nt/` | [notes](#notes-nt-1) |
+
+</div>
         
 ### Filtering interviews : `filter_interview`
 Filters applicants by interview dates based on whether they are upcoming or in the past (based on current date and time).
@@ -357,12 +427,14 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
     * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by an `@` character.
     * The **local part**:
         * must contain **at least 1** alphanumeric character.
-        * It can contain alphanumeric characters separated by any 1 of these characters `+_.-`. e.g. `John-a-bc`
+        * It can contain alphanumeric characters separated by any 1 of these characters `+_.-`. (i.e. `John-a-bc`)
         * It must **start with** and **end with** an alphanumeric character.
     * The **domain part**:
-        * must contain **at least 2** alphanumeric characters.
-        * It can contain sections, each containing alphanumeric characters separated by `_`. Each section must end with
-          `.`. The sections must be followed by **at least** 2 alphanumeric characters. e.g. `John-a.a-b-c.bc`
+        * must contain **at least 2** domain labels. Each domain label, **except the final domain label**, must start with an
+          alphanumeric character and end with a `.`.
+        * The final domain label must have **at least 2** alphanumeric characters, but does not need to end with
+          a `.` unlike its preceding domain labels. (i.e. `John@u.sg` is valid)
+        * The domain label can contain alphanumeric characters separated by `-`. (i.e. `John@u-u.sg`)
     * For example:
         * EMAIL_ADDRESS inputs such as `PeterJack_1190@example.com` and `e1234567@u.nus.edu` are acceptable.
         * EMAIL_ADDRESS inputs such as `peterjack@example.c` and `peter..jack@example.com` are unacceptable.

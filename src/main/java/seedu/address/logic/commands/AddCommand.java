@@ -13,6 +13,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -53,7 +55,6 @@ public class AddCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
 
@@ -70,11 +71,35 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            List<Person> duplicates = model.getDuplicate(toAdd);
+            assert !duplicates.isEmpty() : "There should be at least 1 duplicate.";
+
+            throw new CommandException(createDuplicateMessage(duplicates, toAdd));
         }
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    /**
+     * Creates a UI message informing user of existing duplicate applicants.
+     * {@code duplicates} provided must contain at least 1 applicant.
+     *
+     * @param duplicates List of applicants who share the same phone number and email with {@code editedPerson}
+     * @param toCheck applicant to be checked for duplicates with
+     * @return String accumulation of all duplicate applicants
+     */
+    private String createDuplicateMessage(List<Person> duplicates, Person toCheck) {
+        assert toCheck != null;
+        assert duplicates != null;
+        assert !duplicates.isEmpty() : "There should be at least 1 duplicate";
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Person duplicate : duplicates) {
+            stringBuilder.append(duplicate);
+        }
+        return "The applicant to be added " + toCheck
+                + " shares either the same phone number or email as the following applicant(s):\n"
+                + stringBuilder;
     }
 
     @Override

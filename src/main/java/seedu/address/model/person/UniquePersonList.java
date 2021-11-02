@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,14 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns first occurrence of a person (if any) with same identity as {@code person} in the address book.
+     */
+    public List<Person> getDuplicate(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(x -> x.isSamePerson(toCheck)).collect(Collectors.toList());
     }
 
     /**
