@@ -519,9 +519,8 @@ This folder contains a file called `addressbook.json` which contains all of your
 **Q**: What do I do if I forget the format of all the commands?<br>
 **A**: You can type either `cmd` to show the command summary or `help` to open our User Guide.
 
-**Q**: Why does cmd/help command not work as intended?<br>
-**A**:
-
+**Q**: Why does cmd/help command open a backup window with a link instead of my browser?<br>
+**A**: Check to ensure that you have a browser installed and updated to the latest version. Restart the app and try again. If the issue still isn't resolved, please contact us at "WhereTourGo@gmail.com".
 
 
 --------------------------------------------------------------------------------------------------------------------
