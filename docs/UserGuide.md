@@ -26,7 +26,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ gr
 
    * **`help`** : Displays a help message with a link to the User Guide.
 
-   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the students list.
+   * **`student -a n/Alice p/12345678 e/alice@gmail.com a/42 Wallaby Way`** : Adds a contact named `Alice` to the students list.
 
    * **`student -v 3`**: Views the 3rd student in the persons list.
 
