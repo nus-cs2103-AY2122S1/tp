@@ -43,6 +43,8 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 
 ```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER_VALUE…​```
 
+Detailed notes about the command format can be found [here](#features).
+
 |Component|Description|
 |---------|-----------|
 |Command word|The word that specifies the action to execute.|
