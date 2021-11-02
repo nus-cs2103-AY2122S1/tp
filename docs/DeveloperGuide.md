@@ -416,6 +416,8 @@ There are currently 4 custom predicates implemented in FAST:
 `TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
 `RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
 
+![Find_Command_Class_Diagram](images/findcommandpredicates.png)
+
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. <br>
@@ -427,6 +429,8 @@ Step 4. After execution of the user input, `LogicManager` calls `FindCommand::ex
 the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
 of the search.<br>
+
+![Find_Command_Sequence_Diagram](images/findcommandsequencediagram.png)
 
 #### Design Considerations
 
