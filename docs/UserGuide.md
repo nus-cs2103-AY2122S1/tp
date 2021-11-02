@@ -173,6 +173,7 @@ Snapshot:
 
 Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
 * gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
+* The hourly blocks of time allows users to get an estimate of when their friends are free, allowing them to easily find common timeslots to play.
 
 Format: `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`
 
@@ -184,16 +185,18 @@ New friends start off which a schedule with all periods marked as busy.
 
 </div>  
 
-* `FRIEND_ID` must belong to an existing friend in gitGud
+* `FRIEND_ID` must belong to an existing friend in gitGud.
 * `START_HOUR` and `END_HOUR` must be an integer between 0 and 24 inclusive, and represents the hour of the day.
   * `END_HOUR` must be strictly after `START_HOUR`.
   * For example, `START_HOUR` = 2 and `END_HOUR` = 20 represents the time period from the 2nd to the 20th hour of the day.
 * `DAY` must be an integer between 1 and 7 inclusive, with each day representing a day of the week from Monday to Sunday.
-* `IS_FREE` is used to mark the period as a free or busy period, with `1` meaning free and `0` meaning busy
+* `IS_FREE` is used to mark the period as a free or busy period, with `1` meaning free and `0` meaning busy.
+* gitGud's UI displays the periods of time friends are free using the 24-hour notation.
+  * The end of a day, midnight (12am) is displayed as 2400 to allow users to easily differentiate it from the start of the day, which is displayed as 0000.
 
 Examples:
 * `friend --schedule Draco -p 18 22 2 -f 1` Schedules "Draco" as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
-* `friend --schedule Draco -p 12 24 7 -f 0` Schedules "Draco" as busy from 12th to 24th hour, 1200 - 0000 (midnight) on Sunday.
+* `friend --schedule Draco -p 12 24 7 -f 0` Schedules "Draco" as busy from 12th to 24th hour, 1200 - 2400 (midnight) on Sunday.
 
 Snapshot:
 
@@ -229,14 +232,14 @@ Lists all friends stored in gitGud whose friend id contains any of the given key
 
 Format: `friend --list [KEYWORD]`
 
-* If `KEYWORD` is left empty, **all friends** stored in gitGud will be listed
-* The filter keyword is case insensitive e.g `Tau_bar` will match `tau_bar`
-* Only the `FRIEND_ID` of friends is filtered
-* Partial matches will be displayed e.g. `tau` will match `tau_bar`
+* If `KEYWORD` is left empty, **all friends** stored in gitGud will be listed.
+* The filter keyword is case insensitive e.g `Tau_bar` will match `tau_bar`.
+* Only the `FRIEND_ID` of friends is filtered.
+* Partial matches will be displayed e.g. `tau` will match `tau_bar`.
 
 Examples:
-* `friend --list` Lists all friends stored in gitGud
-* `friend --list ta` Lists all friends stored in gitGud that have `ta` in their name
+* `friend --list` Lists all friends stored in gitGud.
+* `friend --list ta` Lists all friends stored in gitGud that have `ta` in their `FRIEND_ID`.
 
 Snapshot:
 
@@ -307,14 +310,14 @@ Lists all games stored in gitGud whose game id contains any of the given keyword
 
 Format: `game --list [KEYWORD]`
 
-* If `KEYWORD` is left empty, **all games** stored in gitGud will be listed
-* The filter keyword is case insensitive e.g `valorant` will match `Valorant`
-* Only the `GAME_ID` of games is filtered
-* Partial matches will be displayed e.g. `Valo` will match `Valorant`
+* If `KEYWORD` is left empty, **all games** stored in gitGud will be listed.
+* The filter keyword is case insensitive e.g `valorant` will match `Valorant`.
+* Only the `GAME_ID` of games is filtered.
+* Partial matches will be displayed e.g. `Valo` will match `Valorant`.
 
 Examples:
-* `game --list` Lists all games stored in gitGud
-* `game --list Valo` Lists all friends stored in gitGud that have `Valo` in their name
+* `game --list` Lists all games stored in gitGud.
+* `game --list Valo` Lists all games stored in gitGud that have `Valo` in their `GAME_ID`.
 
 Snapshot:
 
