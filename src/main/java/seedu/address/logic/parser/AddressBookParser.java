@@ -44,7 +44,7 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        String trimmedUserInput = StringUtil.removeExtraWhitespace(userInput.trim());
+        String trimmedUserInput = StringUtil.removeExtraWhitespace(userInput);
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmedUserInput);
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

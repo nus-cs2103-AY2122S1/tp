@@ -96,8 +96,6 @@ public class StringUtil {
      */
     public static String removeExtraWhitespace(String s) {
         requireNonNull(s);
-        String[] result = Arrays.stream(s.split("\\s+"))
-                .toArray(String[]::new);
-        return String.join(" ", result);
+        return String.join(" ", s.split("\\s+")).trim();
     }
 }
