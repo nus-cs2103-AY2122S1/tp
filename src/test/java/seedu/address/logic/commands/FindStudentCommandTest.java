@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.StudentBuilder.DEFAULT_ID;
-import static seedu.address.testutil.TypicalModules.INVALID_MODULE_NAME;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
 import static seedu.address.testutil.TypicalModules.getTypicalModules;
@@ -33,6 +32,8 @@ import seedu.address.testutil.TypicalModules;
  * Contains integration tests (interaction with the Model) for {@code FindStudentCommand}.
  */
 public class FindStudentCommandTest {
+    private static final String DIFFERENT_MODULE_NAME = "CS2105";
+
     private Model model = new ModelManager(TypicalModules.getTypicalBuddy(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalModules.getTypicalBuddy(), new UserPrefs());
 
@@ -78,8 +79,8 @@ public class FindStudentCommandTest {
 
     @Test
     public void execute_moduleNotFound() {
-        String expectedMessage = String.format(MESSAGE_MODULE_NAME_NOT_FOUND, INVALID_MODULE_NAME);
-        FindStudentCommand command = new FindStudentCommand(new ModuleName(INVALID_MODULE_NAME),
+        String expectedMessage = String.format(MESSAGE_MODULE_NAME_NOT_FOUND, DIFFERENT_MODULE_NAME);
+        FindStudentCommand command = new FindStudentCommand(new ModuleName(DIFFERENT_MODULE_NAME),
                 new StudentId(VALID_STUDENT_ID_AMY));
         assertCommandFailure(command, model, expectedMessage);
         assertEquals(getTypicalModules(), model.getFilteredModuleList());

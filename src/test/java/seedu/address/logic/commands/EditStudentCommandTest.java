@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_AMY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.INVALID_MODULE_NAME;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
+import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
 import static seedu.address.testutil.TypicalStudents.AMY;
 
 import org.junit.jupiter.api.Test;
@@ -34,6 +34,8 @@ import seedu.address.testutil.TypicalModules;
  * Contains integration tests (interaction with the Model) and unit tests for EditStudentCommand.
  */
 public class EditStudentCommandTest {
+
+    private static final String DIFFERENT_MODULE_NAME = "CS2105";
 
     private Model model = new ModelManager(TypicalModules.getTypicalBuddy(), new UserPrefs());
 
@@ -98,13 +100,13 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_moduleNotFound_failure() {
-        ModuleName moduleName = new ModuleName(INVALID_MODULE_NAME);
+        ModuleName moduleName = new ModuleName(DIFFERENT_MODULE_NAME);
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentId(VALID_STUDENT_ID_AMY)
                 .build();
         EditStudentCommand editCommand = new EditStudentCommand(moduleName, descriptor);
 
         assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND,
-                INVALID_MODULE_NAME));
+                DIFFERENT_MODULE_NAME));
     }
 
     @Test
@@ -134,7 +136,7 @@ public class EditStudentCommandTest {
         assertFalse(standardCommand.equals(new EditStudentCommand(moduleName, descriptor2)));
 
         // different moduleName -> returns false
-        assertFalse(standardCommand.equals(new EditStudentCommand(new ModuleName(INVALID_MODULE_NAME), descriptor)));
+        assertFalse(standardCommand.equals(new EditStudentCommand(new ModuleName(MODULE_NAME_1), descriptor)));
     }
 
 }

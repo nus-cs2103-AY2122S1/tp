@@ -10,13 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ModuleName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Module Names should contain either 2 to 4 upper case characters, followed by 4 numbers, followed by "
+            + "0 to 4 upper case characters\n"
+            + "Examples: ST2334, CS1010S, ASP1201CH";
 
     /*
      * The first character of the module name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[A-Z]{2,4}[0-9]{4}[A-Z]{0,4}";
 
     private final String moduleName;
 

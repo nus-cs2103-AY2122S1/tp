@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.INVALID_MODULE_NAME;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalTasks.getTypicalTasksForModule;
 
@@ -52,14 +51,6 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void execute_moduleNameNotFound_throwsCommandException() {
-        DeleteTaskCommand deleteCommand = new DeleteTaskCommand(new TaskId(VALID_TASK_ID_0),
-                new ModuleName(INVALID_MODULE_NAME));
-        String expectedMessage = String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, INVALID_MODULE_NAME);
-        assertCommandFailure(deleteCommand, model, expectedMessage);
-    }
-
-    @Test //need to fix this
     public void execute_taskIdNotFound_throwsCommandException() {
         TaskId invalidTaskId = new TaskId("T100");
         DeleteTaskCommand deleteCommand = new DeleteTaskCommand(invalidTaskId,
