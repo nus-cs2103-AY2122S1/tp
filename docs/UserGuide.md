@@ -340,7 +340,7 @@ A doctor can have any number of tags (including 0).
 
 Examples:
 * `add n/John Doe hp/98765432 eml/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
-* `add n/Betsy Crowe t/friend eml/betsycrowe@example.com a/Bukit Merah hp/1234567 dob/20/07/1964 t/COVID`
+* `add n/Betsy Crowe t/friend eml/betsycrowe@example.com a/Bukit Merah hp/1234567 dob/20/07/1964 t/experienced`
 
 ### Listing all doctors : `list` <a name="list-doctor"/>
 
