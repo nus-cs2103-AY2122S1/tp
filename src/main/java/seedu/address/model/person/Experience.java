@@ -11,16 +11,15 @@ import seedu.address.commons.util.StringUtil;
  */
 public class Experience {
 
-    public static final String MESSAGE_CONSTRAINTS = "Experience should only contain numbers (no decimals), "
+    public static final String MESSAGE_CONSTRAINTS = "Experience should be a number with at most 1 decimal place, "
             + "should be non-negative, not larger than 67 (re-employment age in Singapore), and it should not be blank";
 
     /**
-     * The first character of the experience must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Year of Experience should be a positive number with at most 1 decimal place.
      */
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "(\\d{0,2}\\.\\d)|(\\d{0,2})";
 
-    public static final int MAX_EXPERIENCE = 67;
+    public static final double MAX_EXPERIENCE = 67.0;
     public final String value;
 
     /**
@@ -42,7 +41,7 @@ public class Experience {
     public static boolean isValidExperience(String test) {
         try {
             if (test.matches(VALIDATION_REGEX)) {
-                int value = Integer.parseInt(test);
+                double value = Double.parseDouble(test);
                 return (value <= MAX_EXPERIENCE);
             }
             return false;
