@@ -61,7 +61,7 @@ public class LoginScreen extends UiPart<Stage> {
     }
 
     private void handlePassword() {
-        // wrong format
+        // blocks the case when / is appended to the end of password
         if (!PasswordCommandParser.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText("Wrong password, try again!");
             userInputPassword.clear();
