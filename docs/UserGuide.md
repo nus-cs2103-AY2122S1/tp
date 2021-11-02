@@ -61,6 +61,8 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* `INDEX` parameters are very common in this application. Ensure that they are a positive integer and is less than 2,147,483,648.
 
 </div>
 
