@@ -36,4 +36,3 @@ Given below are my contributions to the project.
 
 * **Community**:
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/junwei26/ped/issues/6), [2](https://github.com/junwei26/ped/issues/1), [3](https://github.com/junwei26/ped/issues/9))
-  

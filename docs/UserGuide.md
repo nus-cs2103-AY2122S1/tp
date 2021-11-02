@@ -39,7 +39,7 @@ This user guide will bring you through **how to quickly start using our applicat
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
-    * **`list`** : Lists all students currently stored.     
+    * **`list`** : Lists all students currently stored.
 
     * **`addgroup`**`g/CS2100 d/Computer Organisation` : Adds a group named `CS2101` with a simple description to CSBook
 
