@@ -87,7 +87,7 @@ public class FileUtil {
      */
     public static void appendToFile(Path file, String content) throws IOException {
         Writer output = new BufferedWriter(new FileWriter(file.toString(), true));
-        output.append(content + "\n");
+        output.append(content);
         output.close();
     }
 

@@ -63,5 +63,14 @@
     "review": "Amazing",
     "tagged" : [ ],
     "rating": "3"
+  }, {
+    "category": "COM",
+    "name" : "Jane Parker",
+    "phone" : "90477602",
+    "email" : "jane@example.com",
+    "address" : "23rd street",
+    "review": "beautiful",
+    "tagged" : [ ],
+    "rating": "5"
   } ]
 }

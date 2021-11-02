@@ -28,4 +28,10 @@ public class ClearCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS, summary);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof ClearCommand; // instanceof handles nulls
+    }
 }

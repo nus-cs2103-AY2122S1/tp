@@ -20,7 +20,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.REVIEW_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REVIEW_DESC_BOB;
@@ -102,7 +101,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, CATEGORY_DESC_ATT + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + RATING_DESC_AMY, new AddCommand(expectedPerson));
+                        + ADDRESS_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test

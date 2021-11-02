@@ -47,7 +47,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code category} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withCategory(String category) {
+    public EditPersonDescriptorBuilder withCategoryCode(String category) {
         descriptor.setCategoryCode(new CategoryCode(category));
         return this;
     }
@@ -107,6 +107,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withRating(String rating) {
         descriptor.setRating(new Rating(rating));
+        return this;
+    }
+
+    /**
+     * Sets the {@code empty Rating} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRating() {
+        descriptor.setRating(new Rating());
         return this;
     }
 
