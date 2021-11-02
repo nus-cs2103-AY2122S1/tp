@@ -29,6 +29,10 @@ import seedu.anilist.model.stats.Stats;
  * The UI component responsible for displaying the statistics breakdown of animes in the anime list.
  */
 public class StatsDisplay extends UiPart<Stage> {
+    private static final String PIE_CHART_ID = "pieChart";
+    private static final String PIE_CHART_EMPTY_ID = "pieChartEmpty";
+    private static final String BAR_CHART_ID = "barChart";
+    private static final String BAR_CHART_EMPTY_ID = "barChartEmpty";
 
     private static final String TOTAL_ANIMES_MSG = "You have %d anime(s) in AniList!";
     private static final String NO_ANIMES_MSG = "You haven't added any animes...";
@@ -141,11 +145,11 @@ public class StatsDisplay extends UiPart<Stage> {
     private void setAnimeStats(Stats stats) {
         pieChart.getData().clear();
         if (stats.getTotalAnimesCount() == 0) {
-            pieChart.setId("pieChartEmpty");
+            pieChart.setId(PIE_CHART_EMPTY_ID);
             pieChart.setTitle(NO_ANIMES_MSG);
             return;
         }
-        pieChart.setId("pieChart");
+        pieChart.setId(PIE_CHART_ID);
         pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, stats.getTotalAnimesCount()));
 
         addToPieChart(NUM_ANIMES_WATCHING_MSG, stats.getWatchingCount());
@@ -173,11 +177,11 @@ public class StatsDisplay extends UiPart<Stage> {
         barChart.getYAxis().setTickMarkVisible(false);
         barChart.getXAxis().setTickMarkVisible(false);
         if (genreStats.isEmpty()) {
-            barChart.setId("barChartEmpty");
+            barChart.setId(BAR_CHART_EMPTY_ID);
             barChart.getXAxis().setOpacity(0);
             barChart.setTitle(NO_GENRES_TO_SHOW_MSG);
         } else {
-            barChart.setId("barChart");
+            barChart.setId(BAR_CHART_ID);
             barChart.getXAxis().setOpacity(1);
             barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
         }
