@@ -20,4 +20,5 @@ For example, this product could help them to remember the dimensions and orders 
 The project pages site can be accessed **[here](https://ay2122s1-cs2103t-w08-3.github.io/tp/)**.
 
 ### Acknowledgement
-This project is based on the AddressBook-Level3 project created by the **[SE-EDU initiative](https://se-education.org)**.
+* This project is based on the AddressBook-Level3 project created by the **[SE-EDU initiative](https://se-education.org)**.
+* Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
