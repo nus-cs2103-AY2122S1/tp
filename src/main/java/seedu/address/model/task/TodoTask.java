@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -15,7 +16,6 @@ public class TodoTask extends Task {
     public TodoTask(TaskName name, Set<Tag> tags, boolean isDone, Description description, Priority priority) {
         super(name, tags, isDone, description, priority);
     }
-
 
     @Override
     public String toString() {
@@ -34,6 +34,11 @@ public class TodoTask extends Task {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return LocalDate.MAX;
     }
 
     @Override
