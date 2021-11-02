@@ -119,6 +119,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
      * Resets the supplier list to its default sorting state.
      */
     public void resetCustomerListToDefaultSortState() {
+        customerComparator = CustomerComparator.getDefaultComparator();
         internalList.sort(CustomerComparator.getDefaultComparator());
     }
 
