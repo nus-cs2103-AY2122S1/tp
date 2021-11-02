@@ -22,7 +22,21 @@ This guide has been designed to make sure you can quickly access any information
 6. [Glossary](#glossary)
 
 We further recommend taking a glance at **[Section 1.1 Syntax and symbols](#section-11-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
+
 ### Section 1.1: Syntax and Symbols
+Here are the commonly used syntax and symbols throughout the UG:
+
+`inline code`<br/>denotes a command for the application
+
+<div class="alert alert-warning">:exclamation: Important</div>denotes an important information for the functioning of the app
+<br/>
+
+<div class="alert alert-warning">:warning: Caution</div>denotes a possible fault that could occur
+<br/>
+
+<div class="alert alert-info">ℹ️: Notes</div>denotes extra information to aid user in understanding the app
+<br/>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -37,10 +51,10 @@ Alternatively, if you prefer, you could also check the version via the GUI for b
    <br/>
    <br/>
    <div markdown="span" class="alert alert-warning">:exclamation: Important:
-   ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide]       (https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+   ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
    </div>
    <br/>
-2. Download the latest `modulink.jar` from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
+2. Download the latest **modulink.jar** from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
 3. Move the file to the folder you want to use as the home folder for ModuLink on your computer.
 
 ### Section 2.2 Working with ModuLink
@@ -62,7 +76,7 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 
 ## Section 3: Features - Understanding what ModuLink can do for you
 
-To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br><br>
+To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br/>
 
 <div markdown="span" class="alert alert-warning">:exclamation: Important:
 If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
@@ -116,10 +130,14 @@ If you are a first-time user, we recommend starting with [Create your own profil
 
 #### 1.1 Create your own profile : `create`
 
-Creates your user profile. You can also choose to add modules and indicate your group status for each module. :warning: in order to start using ModuLink, you are **required** to create a new profile should you not have one.
+Creates your user profile. You can also choose to add modules and indicate your group status for each module.
+<div markdown="span" class="alert alert-warning">:exclamation: Important:
+in order to start using ModuLink, you are **required** to create a new profile should you not have one.
+</div>
 
 Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP_STATUS]]...`
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes:**
 * STUDENT_ID must be unique
 * You can choose to input your telegram handle as either starting with '@' eg: (@teleHandle), or just the handle itself (eg: teleHandle)
@@ -127,7 +145,8 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERN
 * The default status when a module is added without a description is 'Don't need group/Not looking for group'. The respective module will be displayed as a blue tag.
 * To indicate you need members for your group, you can include the description 'need member'. The respective module will be displayed as a yellow tag.
 * To indicate you are looking for a group, you can include the description 'need group'. The respective module will be displayed as a red tag.
-
+</div>
+   
 Examples:
 * `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com github/johndoe mod/CS2103T`
 * `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com tele/@janedoe mod/CS2101 need group`
@@ -141,6 +160,14 @@ Examples:
 Edits your own profile. You can choose to edit any attributes in your own profile except module tags which use separate commands. You can edit multiple attributes at once.
 
 Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
+
+Prefixes:
+* NAME: `n/`
+* STUDENT ID: `id/`
+* PHONE: `p/`
+* EMAIL: `e/`
+* GITHUB: `github/`
+* TELE: `tele/`
 
 Examples:
 * `edit p/123321432 e/changedemail@example.com`
@@ -171,9 +198,11 @@ Edits the group status of user-specified module.
 
 Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION]`
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
-
+</div>
+   
 Examples:
 * `editGroupStatus mod/CS2220`
 * `editGroupStatus mod/CS2030S need member`
@@ -211,8 +240,10 @@ Adds a profile to your favourites list. Favourited profiles will have a star bes
 
 Format: `addFav STUDENT_ID`
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes:**
 * You cannot add your own profile as a favourite.
+</div>
 
 Examples:
 * `addFav A0222594A`
@@ -367,7 +398,6 @@ Prefix | Parameter
 **`github/`** | GITHUB USERNAME
 **`tele/`** | TELEGRAM HANDLE
 **`mod/`** | MODULE
-**`group/`** | GROUP STATUS
 
 ### Command summary
 
@@ -376,7 +406,7 @@ Action | Format, Examples
 **Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
 **Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]` <br> <br> e.g., `edit p/123321432 e/changedemail@example.com`
 **Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...` <br> <br> e.g., `addMod mod/CS2103T need member mod/CS1231S`
-**Edit module group status** | `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...` <br> <br> e.g., `editGroupStatus mod/CS2103T updateStatus/Need a member`
+**Edit module group status** | `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION] [mod/MODULE [NEW_STATUS_DESCRIPTION]]...` <br> <br> e.g., `editGroupStatus mod/CS2103T need group`
 **Remove module** | `remMod mod/MODULE [mod/MODULE]...` <br> <br> e.g., `remMod mod/CS2100 mod/CS2103T`
 **Add Favourite** | `addFav STUDENT_ID`  <br> <br> e.g., `addFav A0222594A`
 **Remove Favourite** | `remFav STUDENT_ID`  <br> <br> e.g., `remFav A0222594A`
