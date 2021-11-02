@@ -14,9 +14,9 @@ public class Messages {
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
     public static final String MESSAGE_MEMBER_NOT_AVAILABLE = "The member is not available on that day";
     public static final String MESSAGE_MEMBER_ALREADY_ALLOCATED =
-            "The member has already been allocated to that facility";
+            "The member has already been allocated to that facility on that day";
     public static final String MESSAGE_MEMBER_NOT_ALLOCATED =
-            "The member is not allocated to that facility";
+            "The member is not allocated to that facility on that day";
 
     // Facility-specific Messages
     public static final String MESSAGE_FACILITIES_LISTED_OVERVIEW = "%1$d facilities listed!";

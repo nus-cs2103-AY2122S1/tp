@@ -26,7 +26,7 @@ public class Facility {
      * @param capacity Capacity of facility booked.
      */
     public Facility(FacilityName name, Location location, Time time, Capacity capacity, AllocationMap allocationMap) {
-        requireAllNonNull(name, location, time, capacity);
+        requireAllNonNull(name, location, time, capacity, allocationMap);
         this.name = name;
         this.location = location;
         this.time = time;

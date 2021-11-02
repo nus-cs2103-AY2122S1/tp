@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,10 +50,10 @@ public class SampleDataUtil {
 
     public static Facility[] getSampleFacilities() {
         // to initialize separate maps for each sample facility
-        Map<DayOfWeek, List<Person>> emptyAllocationMap1 = new HashMap<>();
-        Map<DayOfWeek, List<Person>> emptyAllocationMap2 = new HashMap<>();
-        Map<DayOfWeek, List<Person>> emptyAllocationMap3 = new HashMap<>();
-        Map<DayOfWeek, List<Person>> emptyAllocationMap4 = new HashMap<>();
+        Map<DayOfWeek, List<Person>> emptyAllocationMap1 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Person>> emptyAllocationMap2 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Person>> emptyAllocationMap3 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Person>> emptyAllocationMap4 = new EnumMap<>(DayOfWeek.class);
 
         for (DayOfWeek day : DayOfWeek.values()) {
             emptyAllocationMap1.put(day, new ArrayList<>());

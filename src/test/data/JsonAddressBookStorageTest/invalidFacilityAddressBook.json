@@ -5,6 +5,14 @@
     "location": "Tampines Hub Field",
     "time": "200",
     "capacity": "4",
-    "allocationList": [ ]
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
   } ]
 }

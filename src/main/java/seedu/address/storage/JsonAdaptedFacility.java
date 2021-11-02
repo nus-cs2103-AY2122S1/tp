@@ -57,8 +57,6 @@ public class JsonAdaptedFacility {
         Map<DayOfWeek, List<JsonAdaptedPerson>> map = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             map.put(day, new ArrayList<>());
-        }
-        for (DayOfWeek day : source.getAllocationMap().getPersonsAllocatedMap().keySet()) {
             for (Person person : source.getAllocationMap().getPersonsAllocatedMap().get(day)) {
                 JsonAdaptedPerson adaptedPerson = new JsonAdaptedPerson(person);
                 map.get(day).add(adaptedPerson);
@@ -76,8 +74,6 @@ public class JsonAdaptedFacility {
         final Map<DayOfWeek, List<Person>> personsAllocatedMap = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             personsAllocatedMap.put(day, new ArrayList<>());
-        }
-        for (DayOfWeek day : allocationMap.keySet()) {
             for (JsonAdaptedPerson adaptedPerson : allocationMap.get(day)) {
                 Person allocatedPerson = adaptedPerson.toModelType();
                 personsAllocatedMap.get(day).add(allocatedPerson);

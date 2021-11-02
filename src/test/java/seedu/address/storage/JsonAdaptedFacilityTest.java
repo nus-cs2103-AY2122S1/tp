@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalFacilities.FIELD;
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +30,14 @@ public class JsonAdaptedFacilityTest {
     private static final String VALID_LOCATION = KENT_RIDGE_SPORT_HALL_5_COURT_1.getLocation().toString();
     private static final String VALID_TIME = KENT_RIDGE_SPORT_HALL_5_COURT_1.getTime().time;
     private static final String VALID_CAPACITY = KENT_RIDGE_SPORT_HALL_5_COURT_1.getCapacity().toString();
-
-    private static final Map<DayOfWeek, List<JsonAdaptedPerson>> EMPTY_ALLOCATION_MAP = new EnumMap<>(DayOfWeek.class);
+    private static final Map<DayOfWeek, List<JsonAdaptedPerson>> EMPTY_ALLOCATION_MAP = new EnumMap<>(
+            Map.ofEntries(Map.entry(DayOfWeek.MONDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.TUESDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.WEDNESDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.THURSDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.FRIDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.SATURDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.SUNDAY, new ArrayList<>())));
 
     @Test
     public void toModelType_validFacilityDetails_returnsFacility() throws Exception {

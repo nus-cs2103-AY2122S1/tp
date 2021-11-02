@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -52,7 +52,7 @@ public class AddFacilityCommandParser implements Parser<AddFacilityCommand> {
         Time time = ParserUtil.parseTime(argMultiMap.getValue(PREFIX_TIME).get());
         Capacity capacity = ParserUtil.parseCapacity(argMultiMap.getValue(PREFIX_CAPACITY).get());
         // add command does not allow adding allocations
-        Map<DayOfWeek, List<Person>> allocationMap = new HashMap<>();
+        Map<DayOfWeek, List<Person>> allocationMap = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             allocationMap.put(day, new ArrayList<>());
         }
