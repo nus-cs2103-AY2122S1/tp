@@ -92,11 +92,11 @@ Here is how our application's homepage works
 
 ![UiExplanation](images/UiExplanation.png)
 
-#### 3.2.1 Help Buttons
+#### 3.2.1 GUI Buttons
 * Buttons have been placed at the top of our application to help you to exit the application and access the help function using your mouse.
 
 #### 3.2.2 Command Box
-* Location for you to key in your inputs.
+* Here is the location for you to key in your inputs.
 
 #### 3.2.3 Output Display
 * Here is where our application will echo out your inputs entered.
