@@ -41,35 +41,31 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("English"));
+        assertTrue(predicate.test(new TaskBuilder().withName("English Quiz").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
-
-        // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Alice Carol").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("English", "Quiz"));
+        assertTrue(predicate.test(new TaskBuilder().withName("English Quiz").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("eNGliSh", "qUiZ"));
+        assertTrue(predicate.test(new TaskBuilder().withName("English Quiz").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new TaskBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new TaskBuilder().withName("Quiz").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new TaskBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Math"));
+        assertFalse(predicate.test(new TaskBuilder().withName("English Quiz").build()));
 
         // Keywords match time and date, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
-        assertFalse(predicate.test(new TaskBuilder().withName("Alice").withTime("12:34")
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Assignment", "12:34", "2022-02-27"));
+        assertFalse(predicate.test(new TaskBuilder().withName("English Quiz").withTime("12:34")
                 .withDate("2022-02-27").build()));
     }
 }

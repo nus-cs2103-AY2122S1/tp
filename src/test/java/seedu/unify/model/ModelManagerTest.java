@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.unify.testutil.Assert.assertThrows;
-import static seedu.unify.testutil.TypicalTasks.ALICE;
+import static seedu.unify.testutil.TypicalTasks.CS1234_QUIZ;
 import static seedu.unify.testutil.TypicalTasks.MATH_ASSIGNMENT;
 
 import java.nio.file.Path;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasTask_taskNotInUniFy_returnsFalse() {
-        assertFalse(modelManager.hasTask(ALICE));
+        assertFalse(modelManager.hasTask(CS1234_QUIZ));
     }
 
     @Test
     public void hasTask_taskInUniFy_returnsTrue() {
-        modelManager.addTask(ALICE);
-        assertTrue(modelManager.hasTask(ALICE));
+        modelManager.addTask(CS1234_QUIZ);
+        assertTrue(modelManager.hasTask(CS1234_QUIZ));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        UniFy uniFy = new UniFyBuilder().withTask(ALICE).withTask(MATH_ASSIGNMENT).build();
+        UniFy uniFy = new UniFyBuilder().withTask(CS1234_QUIZ).withTask(MATH_ASSIGNMENT).build();
         UniFy differentUniFy = new UniFy();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentUniFy, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().taskName.split("\\s+");
+        String[] keywords = CS1234_QUIZ.getName().taskName.split("\\s+");
         modelManager.updateFilteredTaskList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(uniFy, userPrefs)));
 

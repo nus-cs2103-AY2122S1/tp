@@ -3,10 +3,10 @@ package seedu.unify.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_QUIZ;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_MODULE;
 import static seedu.unify.testutil.Assert.assertThrows;
-import static seedu.unify.testutil.TypicalTasks.ALICE;
+import static seedu.unify.testutil.TypicalTasks.CS1234_QUIZ;
 import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import java.util.Arrays;
@@ -46,9 +46,9 @@ public class UniFyTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE)
                 .build();
-        List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
+        List<Task> newTasks = Arrays.asList(CS1234_QUIZ, editedAlice);
         UniFyStub newData = new UniFyStub(newTasks);
 
         assertThrows(DuplicateTaskException.class, () -> uniFy.resetData(newData));
@@ -61,19 +61,19 @@ public class UniFyTest {
 
     @Test
     public void hasTask_taskNotInUniFy_returnsFalse() {
-        assertFalse(uniFy.hasTask(ALICE));
+        assertFalse(uniFy.hasTask(CS1234_QUIZ));
     }
 
     @Test
     public void hasTask_taskInUniFy_returnsTrue() {
-        uniFy.addTask(ALICE);
-        assertTrue(uniFy.hasTask(ALICE));
+        uniFy.addTask(CS1234_QUIZ);
+        assertTrue(uniFy.hasTask(CS1234_QUIZ));
     }
 
     @Test
     public void hasTask_taskWithSameIdentityFieldsInUniFy_returnsTrue() {
-        uniFy.addTask(ALICE);
-        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
+        uniFy.addTask(CS1234_QUIZ);
+        Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE)
                 .build();
         assertTrue(uniFy.hasTask(editedAlice));
     }

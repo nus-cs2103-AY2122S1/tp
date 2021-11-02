@@ -10,6 +10,7 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Priority;
+import seedu.unify.model.task.State;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 
@@ -20,24 +21,24 @@ import seedu.unify.model.task.Time;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new Name("Alex Yeoh"), new Time("10:10"),
-                new Date("2020-10-10"),
-                getTagSet("friends"), new Priority()),
-            new Task(new Name("Bernice Yu"), new Time("10:10"),
-                new Date("2020-10-10"),
-                getTagSet("colleagues", "friends"), new Priority()),
-            new Task(new Name("Charlotte Oliveiro"), new Time("10:10"),
-                new Date("2020-10-10"),
-                getTagSet("neighbours"), new Priority()),
-            new Task(new Name("David Li"), new Time("10:10"),
-                new Date("2020-10-10"),
-                getTagSet("family"), new Priority()),
-            new Task(new Name("Irfan Ibrahim"), new Time("10:10"),
-                new Date("2020-10-10"),
-                getTagSet("classmates"), new Priority()),
-            new Task(new Name("Roy Balakrishnan"), new Time("10:10"),
-                new Date("2020-10-10"),
-                getTagSet("colleagues"), new Priority())
+            new Task(new Name("Quiz 1"), new Time("10:10"),
+                new Date("2021-08-18"),
+                getTagSet("CS1234"), new State(State.ObjectState.DONE), new Priority()),
+            new Task(new Name("Training"), new Time("11:30"),
+                new Date("2021-10-28"),
+                getTagSet("CCA", "sports"), new Priority()),
+            new Task(new Name("Lab 2"), new Time("10:00"),
+                new Date("2021-11-03"),
+                getTagSet("CS2101"), new Priority(Priority.ObjectPriority.HIGH)),
+            new Task(new Name("Presentation 2"), new Time("16:00"),
+                new Date("2020-11-10"),
+                getTagSet("ES5678"), new Priority()),
+            new Task(new Name("Quiz 2"), new Time("23:59"),
+                new Date("2020-11-21"),
+                getTagSet("MA4321"), new Priority()),
+            new Task(new Name("Meeting"), new Time("12:00"),
+                new Date("2020-11-22"),
+                getTagSet("CS2222"), new Priority())
         };
     }
 

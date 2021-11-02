@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unify.testutil.TypicalTasks.CARL;
-import static seedu.unify.testutil.TypicalTasks.ELLE;
-import static seedu.unify.testutil.TypicalTasks.FIONA;
+import static seedu.unify.testutil.TypicalTasks.GYM_TRAINING;
+import static seedu.unify.testutil.TypicalTasks.GYM_TRAINING_2;
 import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import java.util.Arrays;
@@ -66,12 +65,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleTasksFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("gym");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredTaskList());
+        assertEquals(Arrays.asList(GYM_TRAINING, GYM_TRAINING_2), model.getFilteredTaskList());
     }
 
     /**
