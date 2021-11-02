@@ -94,6 +94,10 @@ Some example commands you can try:
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Amount accepts a real number for its input, with an upper limit of 1 billion, and no negative amounts allowed. Note 
+  that it supports accuracy of up to 15-17 decimal places, and accuracy may be lost beyond that point.
+
 
 * Date inputs should follow one of the formats below.
 
@@ -151,7 +155,7 @@ A client can have any number of tags (including 0). The remark is also optional.
 
 Examples:
 * `addclient n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
-* `addclient n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
+* `addclient n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F m/160_85_35_81`
 
 ### Deleting a client : `deleteclient`
 
@@ -171,7 +175,7 @@ Examples:
 
 Edits an existing client in the application.
 
-Format: `editclient INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
+Format: `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Do not forget to edit the body measurements when you modify the client's gender.
@@ -480,7 +484,7 @@ Action | Format, Examples
 **ListTasks** | `listtasks`
 **AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g., `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
 **DeleteTask** | `deletetask INDEX` e.g., `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
+**EditTask** | `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
 **MarkTask** | `marktask INDEX` e.g., `marktask 2`
 **FindTasks** | `findtask KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtask buttons`
 **CompletedTasks** | `completedtasks`
