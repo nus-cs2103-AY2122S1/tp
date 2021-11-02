@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasProduct(Product product) {
         requireNonNull(product);
-        return products.contains(product);
+        return products.hasProductWithSameName(product);
     }
 
     /**

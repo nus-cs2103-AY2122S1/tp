@@ -133,4 +133,12 @@ public class UniqueProductList implements Iterable<Product> {
         }
         return true;
     }
+
+    /**
+     * Returns true if {@code products} contains a product with the same name as {@code product}.
+     */
+    public boolean hasProductWithSameName(Product product) {
+        long filteredLength = internalList.stream().filter(p -> p.getName().equals(product.getName())).count();
+        return filteredLength > 0;
+    }
 }
