@@ -39,11 +39,19 @@ public class EventAdditionalCard extends UiPart<Region> {
         super(FXML);
         this.event = event;
         name.setText(event.getEventName().eventName);
+        name.setWrapText(true);
+
         date.setText(EventDate.DESC + event.getEventDate().eventDate);
         time.setText(EventTime.DESC + event.getEventTime().eventTime);
+
         venue.setText(Venue.DESC + event.getVenue().venue);
+        venue.setWrapText(true);
+
         capacity.setText(Capacity.DESC + event.getCapacity().capacity);
+        capacity.setWrapText(true);
+
         residents.setText(ResidentList.DESC + event.getResidentList().getResidentsDisplay());
+        residents.setWrapText(true);
     }
 
     @Override
