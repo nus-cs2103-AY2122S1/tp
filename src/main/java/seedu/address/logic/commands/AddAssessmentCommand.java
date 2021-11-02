@@ -21,11 +21,11 @@ public class AddAssessmentCommand extends Command {
 
     public static final String COMMAND_WORD = "addassessment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's assessment to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's assessment to the address book.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_ASSESSMENT_NAME + "ASSESSMENT NAME "
-            + PREFIX_SCORE + "SCORE "
+            + PREFIX_SCORE + "SCORE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSESSMENT_NAME + "Midterms "
             + PREFIX_SCORE + "60" + SCORE_DELIMITER + "100 ";

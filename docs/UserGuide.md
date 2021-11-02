@@ -21,7 +21,7 @@ section of the user guide.
 
 This user guide will bring you through **how to quickly start using our application through the [Quick Start](#quick-start) section**, while also serving as a **reference to more experienced users in the [Feature List](#feature-list) section**, where notes and tips on how best to make use of our application will also be given.
 
-**If you face any difficult while following the user guide, do refer to the [FAQ section](#faq)** to see if your issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ section, feel free to reach out to our team lead, Erin Ong, at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
+**If you face any difficulty while following the user guide, do refer to the [FAQ section](#faq)** to see if your issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ section, feel free to reach out to our team lead, Erin Ong, at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,11 +41,14 @@ This user guide will bring you through **how to quickly start using our applicat
 
     * **`list`** : Lists all students currently stored.
    
-    * **`addgroup`**`g/CS2100 d/Computer Organisation` : Adds a group named `CS2101` with a simple description to CSBook
+    * **`addgroup`** `g/CS2100 d/Computer Organisation` : Adds a group named `CS2100` with the description `Computer Organisation` to CSBook
 
-    * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2101` : Adds a student named `Jia Xian` to CSBook
-
-    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
+    * **`add`** `n/Jia Xian t/@albino_monkii e/albinomonkey@gmail.com g/CS2101` : Adds a student named `Jia Xian` to CSBook. The student has the following details:
+        * Telegram Handle: `@albino_monkii`
+        * Email: `albinomonkey@gmail.com`
+        * Group: `CS2101`
+    
+    * **`delete`** `3` : Deletes the 3rd student shown in the current list.
 
     * **`clear`** : Deletes all students and groups.
 
@@ -95,10 +98,10 @@ These icons will appear within coloured boxes to indicate
   e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
 
 * Optional parameters/fields will be indicated within square brackets.
-  e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
+  e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
 
 * If a parameter is expected only once in the command but if you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `t/albino_monkii t/albino_api`, only `t/albino_api` will be taken.
+  e.g. if you specify `t/@albino_monkii t/@albino_api`, only `t/@albino_api` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -153,7 +156,7 @@ CSBook data are saved in the hard disk automatically after any command that chan
 
 CSBook data are saved as an JSON file at `[JAR file location]/data/csbook`. Advanced users are welcome to update data directly by editing that data file. 
 
-Note that if the encrypt function is turned on, the data will be saved in an encrypted JSON format. In which case, users are highly advised to **NOT** edit the data file directly and only manipulate data through the commands provided.
+Note that if the encrypt function is turned on, the data will be saved in an encrypted JSON format. In which case, users are highly advised to decrypt the data file first through the `decrypt` command before editing the data file directly.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/><br/>
@@ -171,7 +174,7 @@ If there are changes to the data file that makes its format invalid, CSBook will
 
 Adds a student to the CSBook.
 
-Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
+Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL g/GROUP_NAME`
 
 * Adds a new student into CSBook.
 * The group name must correspond to that of a group that has been added to CSBook before the student is created. Each student **MUST** belong to a group.
@@ -199,7 +202,7 @@ Format: `list`
 
 Edits an existing student in the CSBook.
 
-Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL]`
+Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL]`
 
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -240,6 +243,7 @@ Format: `viewstudent NAME`
 * The full name of the student must be matched. e.g. `Alex` will not match `Alex Yeoh`
 * The student's details shown includes their full name, group, telegram handle, email, notes and assessments.
 * Individual assessments are coloured red if they fall below the passing threshold of 50%.
+* To go back to the main page with the list of students, use the `list` command.
 
 Examples:
 * `viewstudent David Li` returns `David Li`
@@ -252,7 +256,7 @@ Result of `viewstudent Irfan Ibrahim`:
 
 Adds an assessment for a student.
 
-Format: `addassessment INDEX a/ASSESSMENT_NAME S/SCORE`
+Format: `addassessment INDEX a/ASSESSMENT_NAME s/SCORE`
 
 * Adds a new assessment to the student at the specified `INDEX`
 * The index refers to the index number shown in the displayed student list.
@@ -294,6 +298,7 @@ Sets the note of the student to the given input.
 Format: `note n/NAME no/NOTE`
 
 * If a note exists, it will be overwritten with the new note.
+* An existing note can be cleared by having an empty `NOTE` parameter. i.e., `note n/NAME no/`
 
 Examples:
 * `note n/Charlotte Oliveiro no/Great with presentations` will replace the existing note `Very convincing presentations` with `Great with presentations`
@@ -337,7 +342,7 @@ Format: `addgroup g/GROUPNAME d/DESCRIPTION`
 * Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
 Examples:
-* `addgroup g/CS2100 d/Computer Organisation` creates a group called `CS2103T` and the description `Computer Organisation`
+* `addgroup g/CS2100 d/Computer Organisation` creates a group called `CS2100` and the description `Computer Organisation`
 that students can be added into.<br>
 
 
@@ -352,10 +357,10 @@ Views the students in a group.
 Format: `viewgroup g/GROUPNAME`
 
 Examples:
-* `viewgroup CS2103T` displays the students in `CS2103T`.
+* `viewgroup g/CS2103T` displays the students in `CS2103T`.
 
-Result of `viewgroup CS2103T`:
-  ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
+Result of `viewgroup g/CS2103T`:
+  ![result for `viewgroup g/CS2103T`](images/viewGroupCS2103T.png)
 
 #### Changing the group of a student: `changegroup`
 
@@ -372,12 +377,12 @@ Examples:
 
 Deletes the group with the specified group name as well as all students associated with the group.
 
-Format: `deletegroup GROUPNAME`
+Format: `deletegroup g/GROUPNAME`
 
 * Deletes the group with the specified `GROUPNAME` as well as all students associated with the group.
 
 Examples:
-* `deletegroup CS2103T` deletes the group `CS2103T` along with all students that are in the group.
+* `deletegroup g/CS2103T` deletes the group `CS2103T` along with all students that are in the group.
 
 ## Command summary
 
@@ -388,9 +393,9 @@ Action | Format, Examples
 **Encrypt** | `encrypt`
 **Decrypt** | `decrypt`
 **Exit** | `exit`
-**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
+**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **List Students** | `list`
-**Edit Student** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
+**Edit Student** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **Find Students** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find oliveiro`
 **View Student** | `viewstudent NAME`<br> e.g., `viewstudent David Li`
 **Add Assessment** | `addassessment INDEX a/ASSESSMENT_NAME S/SCORE`<br> e.g., `addassessment 1 a/Midterms s/60/100`
@@ -398,9 +403,9 @@ Action | Format, Examples
 **Add Notes** | `note n/NAME no/NOTE`<br> e.g., `note n/Charlotte Oliveiro no/Great with presentations`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Add Group** | `addgroup g/GROUPNAME d/DESCRIPTION`<br> e.g., `addgroup g/CS2100 d/Computer Organisation`
-**View Group** | `viewgroup g/GROUPNAME`<br> e.g., `viewgroup CS2103T`
+**View Group** | `viewgroup g/GROUPNAME`<br> e.g., `viewgroup g/CS2103T`
 **Change Group** | `changegroup n/NAME g/GROUPNAME`<br> e.g., `changegroup n/David Li g/CS2103T Consult Group 1`
-**Delete Group** | `deletegroup GROUPNAME`<br> e.g., `deletegropu CS2103T`
+**Delete Group** | `deletegroup g/GROUPNAME`<br> e.g., `deletegroup g/CS2103T`
 
 
 ## FAQ
@@ -409,3 +414,5 @@ Action | Format, Examples
     * You may run the `java -version` command on your respective operating system's (OS) terminal window.
     * Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
     * Note: Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
+
+2. I have some font issues with my user interface.
