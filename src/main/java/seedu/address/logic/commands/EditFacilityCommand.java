@@ -20,6 +20,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
+import seedu.address.model.person.Person;
 
 public class EditFacilityCommand extends Command {
 
@@ -73,6 +74,10 @@ public class EditFacilityCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FACILITY);
         }
 
+        if (editedFacility.isMaxCapacity()) {
+            editedFacility.clearAllocationList();
+        }
+
         model.setFacility(facilityToEdit, editedFacility);
         model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility),
@@ -91,8 +96,10 @@ public class EditFacilityCommand extends Command {
         Location updatedLocation = editFacilityDescriptor.getLocation().orElse(facilityToEdit.getLocation());
         Time updatedTime = editFacilityDescriptor.getTime().orElse(facilityToEdit.getTime());
         Capacity updatedCapacity = editFacilityDescriptor.getCapacity().orElse(facilityToEdit.getCapacity());
+        // Not an editable field
+        List<Person> personAllocatedList = facilityToEdit.getPersonAllocatedList();
 
-        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity);
+        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity, personAllocatedList);
     }
 
     @Override
