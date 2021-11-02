@@ -95,7 +95,7 @@ public class MarkAppointmentCommandTest {
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE);
+        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE_EMPTY_APPT);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -147,7 +147,7 @@ public class MarkAppointmentCommandTest {
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE);
+        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE_EMPTY_APPT);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
@@ -24,7 +25,7 @@ public class MarkAppointmentCommand extends Command {
 
     public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Completed an appointment with "
             + "%1$s %2$s %3$s %4$s";
-    public static final String MESSAGE_MARK_APPOINTMENT_FAILURE = "No appointment exists!";
+    public static final String MESSAGE_MARK_APPOINTMENT_FAILURE_EMPTY_APPT = "No appointment exists!";
 
     private final Index index;
     private final Appointment appointment;
@@ -46,15 +47,15 @@ public class MarkAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         // No appointment -> no reason to be able to mark it as completed.
-        if (personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
-            throw new CommandException(MESSAGE_MARK_APPOINTMENT_FAILURE);
+        if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
+            throw new CommandException(MESSAGE_MARK_APPOINTMENT_FAILURE_EMPTY_APPT);
         }
 
         Person editedPerson = new Person(
