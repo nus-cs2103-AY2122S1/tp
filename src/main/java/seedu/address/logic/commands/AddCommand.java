@@ -32,15 +32,15 @@ public class AddCommand extends Command {
             + PREFIX_REVIEW + "REVIEW "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CATEGORY_CODE + "oth "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_CATEGORY_CODE + "att "
+            + PREFIX_NAME + "Singapore Flyers "
+            + PREFIX_PHONE + "92345678 "
+            + PREFIX_EMAIL + "123@example.com "
+            + PREFIX_ADDRESS + "30 Raffles Ave, Singapore 039803 "
             + PREFIX_REVIEW + "Great place! "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
-            + PREFIX_RATING + "3";
+            + PREFIX_TAG + "view "
+            + PREFIX_TAG + "tourist "
+            + PREFIX_RATING + "4";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the address book";
