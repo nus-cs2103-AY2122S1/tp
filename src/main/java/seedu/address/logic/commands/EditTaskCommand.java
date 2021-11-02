@@ -86,7 +86,7 @@ public class EditTaskCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Student} with the details of {@code taskToEdit}
+     * Creates and returns a {@code task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor)
@@ -106,8 +106,8 @@ public class EditTaskCommand extends Command {
             if (editTaskDescriptor.getTaskDate().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_DEADLINE_ON);
             }
-            TaskDate updatedTaskDate = ((DeadlineTask) taskToEdit).getDeadline();
-            return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate,
+            TaskDate updatedDeadline = editTaskDescriptor.deadline;
+            return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedDeadline,
                     description, updatedPriority);
         }
 
@@ -116,8 +116,7 @@ public class EditTaskCommand extends Command {
             if (editTaskDescriptor.getDeadline().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_EVENT_BY);
             }
-            TaskDate updatedTaskDate = ((EventTask) taskToEdit).getTaskDate();
-
+            TaskDate updatedTaskDate = editTaskDescriptor.taskDate;
             return new EventTask(updatedTaskName, updatedTags,
                     taskToEdit.checkIsDone(), updatedTaskDate, description, updatedPriority);
         } else { //if (taskToEdit instanceof TodoTask) {
@@ -128,8 +127,6 @@ public class EditTaskCommand extends Command {
             return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(),
                     description, updatedPriority);
         }
-
-        //return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description, updatedPriority);
     }
 
     @Override
@@ -259,6 +256,8 @@ public class EditTaskCommand extends Command {
 
             return getTaskName().equals(e.getTaskName())
                     && getTaskDate().equals(e.getTaskDate())
+                    && getPriority().equals(e.getPriority())
+                    && getDeadline().equals(e.getDeadline())
                     && getDescription().equals(e.getDescription())
                     && getTags().equals(e.getTags());
         }

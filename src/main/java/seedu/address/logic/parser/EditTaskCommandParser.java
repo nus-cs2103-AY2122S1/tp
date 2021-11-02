@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -32,7 +33,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE,
-                        PREFIX_TAG, PREFIX_EVENT, PREFIX_DESCRIPTION);
+                        PREFIX_TAG, PREFIX_EVENT, PREFIX_DESCRIPTION, PREFIX_PRIORITY);
 
         Index index;
 
@@ -48,6 +49,9 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             editTaskDescriptor.setTaskName(ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get()));
         }
 
+        if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
+            editTaskDescriptor.setTaskPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
+        }
 
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
             editTaskDescriptor.setDeadline(ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DEADLINE).get()));
