@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+'skinparam genericDisplay old
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyPlannerMd <<Interface>>
@@ -16,9 +17,8 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-Class UniquePersonList
-Class UniquePatientList
-Class UniqueDoctorList
+Class "UniquePersonList<Patient>" as patient
+Class "UniquePersonList<Doctor>" as doctor
 Class UniqueAppointmentList
 Class Person
 Class Patient
@@ -35,7 +35,7 @@ HiddenOutside ..> Model
 ModelManager .up.|> Model
 Model .down.> State
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyPlannerMd
+Model ..> ReadOnlyPlannerMd
 ModelManager -down-> "1" PlannerMd
 ModelManager -right-> "1" UserPrefs
 PlannerMd .up.|> ReadOnlyPlannerMd
@@ -44,18 +44,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 Patient .down.|> Person
 Doctor .down.|> Person
 PlannerMd *--> "1" UniqueAppointmentList
-PlannerMd *--> "1" UniquePatientLists
-PlannerMd *--> "1" UniqueDoctorList
-UniquePatientList ..|> UniquePersonList
-UniqueDoctorList ..|> UniquePersonList
+PlannerMd *--> "1" patient
+PlannerMd *--> "1" doctor
+
 
 UniqueAppointmentList -->  "~* all" Appointment
-UniquePatientList -->  "~* all" Patient
-UniqueDoctorList --> "~* all" Doctor
+patient -->  "~* all" Patient
+doctor --> "~* all" Doctor
 
 Patient *-down-> Risk
 
-ModelManager -->"~* filtered" Patient
-ModelManager -->"~* filtered" Doctor
+ModelManager -right->"~* filtered" Patient
+ModelManager -right->"~* filtered" Doctor
 ModelManager -->"~* filtered" Appointment
 @enduml

@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
 participant "t:ToggleCommand" as ToggleCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -21,7 +21,7 @@ activate Model
 Model --> LogicManager : state
 deactivate Model
 
-LogicManager -> PlannerMdParser : parseCommand("toggle", State.PATIENT)
+LogicManager -> PlannerMdParser : parseCommand("toggle", state)
 activate PlannerMdParser
 
 create ToggleCommand
@@ -47,12 +47,12 @@ create CommandResult
 ToggleCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> ToggleCommand
+CommandResult --> ToggleCommand :result
 deactivate CommandResult
 
-ToggleCommand --> LogicManager :
+ToggleCommand --> LogicManager : result
 deactivate ToggleCommand
 
-[<--LogicManager
+[<--LogicManager : result
 deactivate LogicManager
 @enduml

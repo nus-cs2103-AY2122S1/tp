@@ -153,9 +153,11 @@ How the parsing works:
 ### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-<img src="images/PersonClassDiagram.png" width="450" />
-<img src="images/AppointmentClassDiagram.png" width="450" />
+![ModelClassDiagram](images/ModelClassDiagram.png)
+Here's the class diagram of the `Person` component within `Model`:
+![PersonClassDiagram](images/PersonClassDiagram.png)
+Heres the class diagram of the `Appointment` component within `Model`:
+![AppointmentClassDiagram](images/AppointmentClassDiagram.png)
 
 The `Model` component,
 
@@ -208,7 +210,7 @@ Command used to toggle displayed tab and the current state of PlannerMD.
 
 The activity Diagram below illustrates the execution flow when the user executes a `remark` command.<br>
 
-<img src="images/ToggleCommandActivityDiagram.png" width="450" />
+![ToggleActivityDiagram](images/ToggleActivityDiagram.png)
 
 1. The user inputs a `toggle` command.
 2. A `ToggleCommand` is generated and executed.
@@ -217,11 +219,11 @@ The activity Diagram below illustrates the execution flow when the user executes
 3. The GUI displays a success message.
 
 #### Execution
-The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call.
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call in Patient state.
 
-<img src="images/ToggleCommandSequenceDiagram.png" width="450" />
+![ToggleCommandSequenceDiagram](images/ToggleCommandSequenceDiagram.png)
 
-1. `plannerMdParser::parseCommand` is called with the user input "toggle" along with the current `Model.state`. <br>
+1. `plannerMdParser::parseCommand` is called with the user input "toggle" along with the current `Model.state` (`State.Pateint`). <br>
    1.1 A `ToggleCommand` instance is instantiated.
 2. `ToggleCommand::execute` is called<br>
    3.1. `Model::toggleState` is called and toggles `Model.State` from `State.Patient` to `State.Doctor`<br>
@@ -246,7 +248,7 @@ Command used to edit the `Remark` field of a Person.
 
 The activity Diagram below illustrates the execution flow when the user executes a `remark` command. <br>
 
-<img src="images/RemarkActivityDiagram.png" width="450" />
+![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
 
 1. The user inputs a `remark` command.
 2. The input is parsed <br>
@@ -259,7 +261,7 @@ The activity Diagram below illustrates the execution flow when the user executes
 #### Execution
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("remark 1 r/bad cough") API call. <br>
 
-<img src="images/RemarkSequenceDiagram.png" width="450" />
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
 
 1. `plannerMdParser::parseCommand` is called with the user input "remark 1 r/bad cough" along with the current `Model.state`. <br>
    1.1 A `RemarkCommandParser` instance is instantiated.
@@ -271,7 +273,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 4. The `CommandResult` is then returned
 
 #### Result
-The GUI updates the list and displays a success message.
+The GUI updates the patient record in the displayed list and displays a success message.
 
 #### Design considerations
 
@@ -287,18 +289,18 @@ changes in patients and doctors through user command or otherwise needs to be pr
 #### Execution
 The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
 
-<img src="images/PropagateChangesDiagram.png" width="450" />
+![PropagateChangesDiagram](images/PropagateChangesDiagram.png)
 
 1. `PlannerMd::removePatient` is called with `target` and deletes `target` from the list of patients. <br>
 2. `UniqueAppointmentList::removeAppointmentWithPatient` is called <br>
    * Loops through `UniqueAppointmentList` and deletes `Appointment` objects containing `target`.
 
 #### Result
-GUI is updated to display the changes in the appointment list.
+GUI is updated to display the propagated changes in the appointment list.
 
 #### Design considerations
 Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
-to replace `Appointment` when `Patient` or `Doctor` are edited or delete them when they have references to the deleted `Patient` or `Doctor`.
+to update `Appointment` with `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
 
 ### Adding an appointment
 Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
