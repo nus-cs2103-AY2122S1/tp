@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import seedu.placebook.model.schedule.exceptions.EndTimeBeforeStartTimeException;
 
@@ -170,5 +171,10 @@ public class TimePeriod implements Comparable<TimePeriod> {
         TimePeriod otherTimePeriod = (TimePeriod) other;
         return otherTimePeriod.startDateTime.equals(startDateTime)
                 && otherTimePeriod.endDateTime.equals(endDateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.startDateTime, this.endDateTime);
     }
 }
