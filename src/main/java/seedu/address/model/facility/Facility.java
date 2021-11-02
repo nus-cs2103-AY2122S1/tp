@@ -51,8 +51,8 @@ public class Facility {
         return capacity;
     }
 
-    public int getCapacityAsInt() {
-        return Integer.parseInt(capacity.capacity);
+    public int getCapacityAsOnDay(DayOfWeek day) {
+        return allocationMap.getCapacityOnDay(day);
     }
 
     public AllocationMap getAllocationMap() {
