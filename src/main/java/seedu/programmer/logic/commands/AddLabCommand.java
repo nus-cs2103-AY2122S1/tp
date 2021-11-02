@@ -20,7 +20,7 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lab to all the students in the list.\n"
             + "Parameters: "
-            + PREFIX_LAB_NUM + "<LAB_NUMBER>"
+            + PREFIX_LAB_NUM + "<LAB_NUMBER> "
             + PREFIX_LAB_TOTAL + "<TOTAL_SCORE>\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LAB_NUM + "1 "

@@ -4,8 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 public class Lab implements DisplayableObject {
 
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
+    public static final String MESSAGE_LAB_SCORE_AND_LAB_NUMBER_REQUIREMENT =
+            "Both Lab Number and Score to be should be provided together.";
+    public static final String MESSAGE_LAB_NUMBER_CONSTRAINT = "Lab number should be a non-negative integer.";
+    public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
+
 
     private int labNum;
     private Integer actualScore;

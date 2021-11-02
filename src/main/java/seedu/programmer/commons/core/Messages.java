@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_ARGUMENT_FLAG = "Unknown flag(s) detected for this command: %1$s \n%2$s";
     public static final String MESSAGE_EMPTY_ARGUMENT = "Empty argument(s) provided for this command!\n%1$s";
     public static final String MESSAGE_MISSING_ARGUMENT = "Missing argument(s) provided for this command!\n%1$s";
+    public static final String MESSAGE_TEMPLATE = "%1$s\n%2$s";
 
 }

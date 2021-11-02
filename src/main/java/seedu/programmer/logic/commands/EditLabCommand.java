@@ -31,12 +31,14 @@ public class EditLabCommand extends Command {
             + PREFIX_LAB_TOTAL + "15";
 
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Updated %1$s!";
-
     public static final String MESSAGE_SCORE_SHOULD_BE_POSITIVE = "The lab total score %f should be a positive value.";
-
     public static final String MESSAGE_LAB_ALREADY_EXISTS = "Lab %d already exists.";
-
     public static final String MESSAGE_LAB_NOT_EXISTS = "Lab %d doesn't exist.";
+    public static final String MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED =
+            "Kindly specify if you want to edit the lab number and/or the total score.\n%1$s";
+    public static final String MESSAGE_MISSING_LAB_TO_BE_EDITED =
+            "Kindly specify the lab number that you would like to edit using the " + PREFIX_LAB_NUM + "flag.\n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! ";
 
     private final int newLabNum;
     private final Integer total;
