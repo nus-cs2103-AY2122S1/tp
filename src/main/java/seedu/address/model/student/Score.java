@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Score {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Score should be in percentage format, and it should have at most 2 decimal places";
+            "Score should be an unsigned number in percentage format, and it should have at most 2 decimal places";
     public static final String INTEGRAL_PART_REGEX = "\\d{1,2}";
     public static final String DECIMAL_PART_REGEX = "(\\.\\d{1,2})?";
     public static final double MIN_SCORE = 0.0;
