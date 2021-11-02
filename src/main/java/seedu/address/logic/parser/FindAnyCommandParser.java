@@ -1,15 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.AddCommand;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_SENSITIVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -76,11 +71,11 @@ public class FindAnyCommandParser implements Parser<FindAnyCommand> {
     }
 
     private static boolean areThereBlanks(List<String> stringList) throws ParseException {
-        String NAME_FORMAT_REQUIREMENT = "There should not be any blanks in name.\n" + "If you are searching for "
-                + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
+        String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "If you are "
+                + "searching for " + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
         for (String s : stringList) {
             if (s.contains(" ")) {
-                throw new ParseException(NAME_FORMAT_REQUIREMENT);
+                throw new ParseException(nameFormatRequirementMessage);
             }
         }
         return true;

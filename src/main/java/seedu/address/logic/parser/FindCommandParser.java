@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.FindAnyCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_SENSITIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -42,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
 
         if ((!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_TAG))) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAnyCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         List<String> nameStringList = argMultimap.getAllValues(PREFIX_NAME);
@@ -72,11 +71,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     private static boolean areThereBlanks(List<String> stringList) throws ParseException {
-        String NAME_FORMAT_REQUIREMENT = "There should not be any blanks in name.\n" + "If you are searching for "
-                + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
+        String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "If you are "
+                + "searching for " + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
         for (String s : stringList) {
             if (s.contains(" ")) {
-                throw new ParseException(NAME_FORMAT_REQUIREMENT);
+                throw new ParseException(nameFormatRequirementMessage);
             }
         }
         return true;
