@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import seedu.siasa.commons.core.LogsCenter;
+
+import javax.swing.*;
 
 public class WarningWindow extends UiPart<Stage> {
 
@@ -68,6 +71,7 @@ public class WarningWindow extends UiPart<Stage> {
     private void handleButtonAction(ActionEvent event) {
         Node source = (Node) event.getSource();
         String buttonClicked = source.getId();
+        System.out.println(buttonClicked);
         if (buttonClicked.equals("noButton")) {
             getRoot().hide();
             userResponse = false;
@@ -75,6 +79,11 @@ public class WarningWindow extends UiPart<Stage> {
             getRoot().hide();
             userResponse = true;
         }
+    }
+
+    @FXML
+    private void handleCloseButtonAction(WindowEvent event) {
+        userResponse = false;
     }
 
 }
