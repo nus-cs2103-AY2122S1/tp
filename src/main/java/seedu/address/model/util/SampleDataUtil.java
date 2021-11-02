@@ -62,10 +62,10 @@ public class SampleDataUtil {
             new Supplier(new Name("Supplier2"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     getTagSet("colleagues", "friends"), new SupplyType("Rice"),
-                    new DeliveryDetails("12:00 2021-05-19")),
+                    new DeliveryDetails("1200 2021-05-19")),
             new Supplier(new Name("Supplier3"), new Phone("92492021"), new Email("irfan@yahoo.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("classmates"),
-                    new SupplyType("Potatoes"), new DeliveryDetails("19-10-2021 10:00")),
+                    new SupplyType("Potatoes"), new DeliveryDetails("19-10-2021 1000")),
             new Supplier(new Name("Supplier4"), new Phone("92624417"), new Email("royb@outlook.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("colleagues"),
                     new SupplyType("Flour"), new DeliveryDetails("10:00 15-10-2021"))

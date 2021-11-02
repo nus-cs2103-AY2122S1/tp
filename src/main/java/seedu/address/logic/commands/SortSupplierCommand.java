@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
 import java.util.Comparator;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
@@ -27,6 +28,7 @@ public class SortSupplierCommand extends Command {
             + PREFIX_SORT_ORDER + "a ";
 
     public static final String MESSAGE_SUCCESS = "Supplier list sorted by %1$s in %2$s order";
+    public static final String MESSAGE_EMPTY_FILTERED_LIST = "Supplier list is currently empty!";
 
     private final Comparator<Supplier> comparator;
     private final String sortBy;
@@ -36,14 +38,20 @@ public class SortSupplierCommand extends Command {
      * Creates a SortSupplierCommand object.
      */
     public SortSupplierCommand(Comparator<Supplier> comparator, String sortBy, String sortingOrder) {
+        requireNonNull(comparator);
+        requireNonNull(sortBy);
+        requireNonNull(sortingOrder);
         this.comparator = comparator;
         this.sortBy = sortBy;
         this.sortingOrder = sortingOrder;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getFilteredSupplierList().size() == 0) {
+            throw new CommandException(MESSAGE_EMPTY_FILTERED_LIST);
+        }
         model.getSortableSupplierList().sort(comparator);
         model.setSupplierComparator(comparator);
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortBy, sortingOrder),
@@ -61,8 +69,7 @@ public class SortSupplierCommand extends Command {
 
         SortSupplierCommand otherCommand = (SortSupplierCommand) other;
         return otherCommand.sortingOrder.equals(sortingOrder)
-                && otherCommand.sortBy.equals(sortBy)
-                && otherCommand.comparator.equals(comparator);
+                && otherCommand.sortBy.equals(sortBy);
     }
 
 }

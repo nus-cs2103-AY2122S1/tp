@@ -228,7 +228,7 @@ public class ModelManager implements Model {
     @Override
     public void setTableList(List<Table> tableList) {
         requireNonNull(tableList);
-        addressBook.setTableList(tableList);
+        addressBook.setTables(tableList);
     }
 
     @Override
@@ -239,6 +239,12 @@ public class ModelManager implements Model {
     @Override
     public void resetTableCount() {
         addressBook.resetTableCount();
+    }
+
+    @Override
+    public boolean hasTable(Table table) {
+        requireNonNull(table);
+        return addressBook.hasTable(table);
     }
 
     //=========== Filtered Employee List Accessors =============================================================

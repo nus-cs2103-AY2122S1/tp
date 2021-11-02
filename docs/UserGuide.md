@@ -747,26 +747,31 @@ Format: `listR`
 <div markdown="block" class="alert alert-danger">
 
 :bangbang: **Warning!**<br>
-This command will remove **ALL** reservations and overwrite previously set tables <br>
+This command will remove **ALL** reservations and overwrite **ALL** previously set tables <br>
 
 </div>
 
-Sets the tables with the sizes specified so that reservations can be made
+Sets the number of tables and size of each table in the restaurant.
 
 Format: `settables LIST_OF_TABLE_SIZES`
   * `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
-    * **(size of one table)**
-    * **(size of one table)x(number of tables with this size)**,<br>
+    * **<TABLE_SIZE>**
+    * **<TABLE_SIZE>x<NUMBER_OF_TABLE_WITH_THIS_SIZE>**,<br>
       each comma-separated from the next.
 
 Example:
-* `settables 10,8,8,4,4,2x6,1x4`
+* `settables 10, 8, 8, 4, 4, 2x6, 1x4`
 
 <div markdown="block" class="alert alert-warning">
 
 :information_source: **Notes:**<br>
 
-* Size of tables and Number of tables with specified size has to be a positive integer
+* This command must be used at least once before you can [add a reservation](#adding-a-reservation-addr).
+  
+    (i.e. RHRH must contain tables before making a reservation)
+
+
+* TABLE_SIZE and NUMBER_OF_TABLE_WITH_THIS_SIZE has to be a positive integer
 
 </div>
 
@@ -802,11 +807,9 @@ If your changes to the data file makes its format invalid, RHRH will discard all
 
 ## FAQ
 
-<details>
 <summary>How do I transfer my data to another Computer?</summary>
 
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
 
-</details>
 
 --------------------------------------------------------------------------------------------------------------------
