@@ -17,8 +17,8 @@ Source Control is **optimized for use via a Command Line Interface** (CLI) while
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps!
 
 This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you
-all the basic knowledge to get started with Source Control. If you are an experienced user,
-feel free to skip to the [command summary](#command-summary) and experiment with our more advanced features!
+all the basic knowledge to [get started](#quick-start) with Source Control. If you are an experienced user,
+feel free to skip to the [command summary](#command-summary) and experiment with our more [advanced features](#setting-customised-aliases-for-commands--alias)!
 
 --------------------------------------------------------------------------------------------------------------------
 
