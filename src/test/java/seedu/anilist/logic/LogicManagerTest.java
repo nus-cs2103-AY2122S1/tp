@@ -2,7 +2,7 @@ package seedu.anilist.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.testutil.Assert.assertThrows;
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     @Test

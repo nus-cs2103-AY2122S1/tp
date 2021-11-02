@@ -2,10 +2,12 @@ package seedu.anilist.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.UpdateStatusCommand;
+import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
@@ -22,16 +24,22 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
+
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateStatusCommand.MESSAGE_USAGE), pe);
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         }
 
-        UpdateStatusCommand.StatusDescriptor statusDescriptor = new UpdateStatusCommand.StatusDescriptor();
+        UpdateStatusCommand.StatusDescriptor statusDescriptor =
+            new UpdateStatusCommand.StatusDescriptor();
+
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             statusDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }

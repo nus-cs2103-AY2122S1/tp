@@ -76,7 +76,7 @@ public class UpdateEpisodeCommandTest {
             .withEpisode(VALID_EPISODE_TWO).build();
         UpdateEpisodeCommand updateEpisodeCommand = new UpdateEpisodeCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(updateEpisodeCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandFailure(updateEpisodeCommand, model, Messages.MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     /**
@@ -93,7 +93,7 @@ public class UpdateEpisodeCommandTest {
             .withEpisode(VALID_EPISODE_TWO).build();
         UpdateEpisodeCommand updateEpisodeCommand = new UpdateEpisodeCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(updateEpisodeCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandFailure(updateEpisodeCommand, model, Messages.MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     @Test

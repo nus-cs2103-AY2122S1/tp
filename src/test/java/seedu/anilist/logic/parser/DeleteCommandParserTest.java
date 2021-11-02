@@ -1,6 +1,7 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
@@ -28,5 +29,13 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_indexNotInRangeOfPositiveInt_failure() {
+        assertParseFailure(parser, "-5", MESSAGE_OUT_OF_RANGE_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_OUT_OF_RANGE_INDEX);
+        assertParseFailure(parser, Long.toString((long) Integer.MAX_VALUE + 1),
+            MESSAGE_OUT_OF_RANGE_INDEX);
     }
 }

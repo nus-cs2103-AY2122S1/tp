@@ -2,7 +2,6 @@ package seedu.anilist.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.anilist.logic.parser.ParserUtil.parseAction;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
@@ -15,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.anilist.logic.commands.Action;
+import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.genre.Genre;
@@ -64,12 +64,22 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("+10"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(
+            IntegerOutOfRangeException.class,
+            String.format(IntegerOutOfRangeException.OUT_OF_RANGE_MESSAGE, 1, Integer.MAX_VALUE), ()
+                -> ParserUtil.parseIndex("-10")
+        );
+
+        assertThrows(
+            IntegerOutOfRangeException.class,
+            String.format(IntegerOutOfRangeException.OUT_OF_RANGE_MESSAGE, 1, Integer.MAX_VALUE), ()
+                -> ParserUtil.parseIndex(Long.toString((long) Integer.MAX_VALUE + 1))
+        );
     }
 
     @Test

@@ -82,7 +82,7 @@ public class UpdateStatusCommandTest {
                 .withStatus(VALID_STATUS_WATCHING).build();
         UpdateStatusCommand updateStatusCommand = new UpdateStatusCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(updateStatusCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandFailure(updateStatusCommand, model, Messages.MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     /**
@@ -99,7 +99,7 @@ public class UpdateStatusCommandTest {
                 .withStatus(VALID_STATUS_WATCHING).build();
         UpdateStatusCommand updateStatusCommand = new UpdateStatusCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(updateStatusCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandFailure(updateStatusCommand, model, Messages.MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     @Test
