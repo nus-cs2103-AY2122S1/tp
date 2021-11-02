@@ -19,7 +19,7 @@ import seedu.track2gather.model.person.Person;
 @JsonRootName(value = "track2gather")
 class JsonSerializableTrack2Gather {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate case number(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 

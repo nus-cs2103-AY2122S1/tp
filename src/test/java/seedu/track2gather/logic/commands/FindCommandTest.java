@@ -3,7 +3,7 @@ package seedu.track2gather.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.track2gather.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.track2gather.commons.core.Messages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 import static seedu.track2gather.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.track2gather.testutil.TypicalPersons.CARL;
 import static seedu.track2gather.testutil.TypicalPersons.ELLE;
@@ -56,7 +56,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -66,7 +66,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

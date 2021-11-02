@@ -24,7 +24,7 @@ public class FCallCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_INCREMENT_PERSON_SUCCESS =
-        "Failed to call Person: %s; non-compliance counter: %d";
+            "Failed to call Person: %s (Case No. %s) with %d past failed call attempt(s)";
 
     private final Index targetIndex;
 
@@ -51,8 +51,8 @@ public class FCallCommand extends Command {
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().incrementNumFailedCalls());
         model.setPerson(personToIncrement, newPerson);
 
-        return new CommandResult(String.format(MESSAGE_INCREMENT_PERSON_SUCCESS, newPerson.getCaseNumber(),
-            newPerson.getCallStatus().getNumFailedCalls()));
+        return new CommandResult(String.format(MESSAGE_INCREMENT_PERSON_SUCCESS, newPerson.getName(),
+                newPerson.getCaseNumber(), newPerson.getCallStatus().getNumFailedCalls()));
     }
 
     @Override

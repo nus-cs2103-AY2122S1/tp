@@ -10,6 +10,7 @@ import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_START;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,7 +29,8 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in the contact list. "
-            + "At least one field prefix must be provided. Specifying the sort direction is optional.\n"
+            + "At least one field prefix must be provided. Specifying the sort direction is optional. "
+            + "Default sort direction is ascending.\n"
             + "Direction \"" + Direction.ASCENDING + "\" indicates ascending order and \""
             + Direction.DESCENDING + "\" indicates descending order.\n"
             + "Parameters: "
@@ -42,6 +44,24 @@ public class SortCommand extends Command {
             + "\"";
 
     public static final String MESSAGE_SUCCESS = "All persons sorted by %s";
+
+    public static final HashMap<Prefix, String> SORTING_FIELD_STRINGS;
+
+    static {
+        SORTING_FIELD_STRINGS = new HashMap<Prefix, String>();
+        SORTING_FIELD_STRINGS.put(PREFIX_NAME, "name");
+        SORTING_FIELD_STRINGS.put(PREFIX_CASE_NUMBER, "case number");
+        SORTING_FIELD_STRINGS.put(PREFIX_SHN_PERIOD_START, "SHN start date");
+        SORTING_FIELD_STRINGS.put(PREFIX_SHN_PERIOD_END, "SHN end date");
+    }
+
+    public static final HashMap<Direction, String> SORTING_DIRECTION_STRINGS;
+
+    static {
+        SORTING_DIRECTION_STRINGS = new HashMap<Direction, String>();
+        SORTING_DIRECTION_STRINGS.put(Direction.ASCENDING, " in ascending order");
+        SORTING_DIRECTION_STRINGS.put(Direction.DESCENDING, " in descending order");
+    }
 
     public static final List<Prefix> SUPPORTED_PREFIXES = Arrays.asList(PREFIX_NAME, PREFIX_CASE_NUMBER,
             PREFIX_SHN_PERIOD_START, PREFIX_SHN_PERIOD_END);
@@ -97,8 +117,9 @@ public class SortCommand extends Command {
         model.updateSortedPersonList(comparator);
 
         String sortsString = IntStream.range(0, prefixes.size())
-                .mapToObj(i -> prefixes.get(i).toString() + directions.get(i))
-                .collect(Collectors.joining(" "));
+                .mapToObj(i -> SORTING_FIELD_STRINGS.get(prefixes.get(i))
+                        + SORTING_DIRECTION_STRINGS.get(directions.get(i)))
+                .collect(Collectors.joining(", then by "));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortsString));
     }

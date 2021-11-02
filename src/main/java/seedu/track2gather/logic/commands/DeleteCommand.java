@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX [MORE_INDICES] (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s):";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s):\n";
 
     private final ArrayList<Index> targetIndices;
 
@@ -53,7 +53,7 @@ public class DeleteCommand extends Command {
             model.deletePerson(personToDelete);
             commandResultList.add(0, personToDelete.toString());
         }
-        commandResult += commandResultList.stream().collect(Collectors.joining("; "));
+        commandResult += commandResultList.stream().collect(Collectors.joining("\n"));
 
         return new CommandResult(commandResult);
     }

@@ -1,6 +1,7 @@
 package seedu.track2gather.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.track2gather.commons.core.Messages.MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_HOME_ADDRESS;
@@ -24,30 +25,30 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the contacts list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the contacts list. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_CASE_NUMBER + "CASE NUMBER "
-            + PREFIX_HOME_ADDRESS + "HOME ADDRESS "
-            + "[" + PREFIX_WORK_ADDRESS + "WORK ADDRESS] "
-            + "[" + PREFIX_QUARANTINE_ADDRESS + "QUARANTINE ADDRESS] "
-            + "[" + PREFIX_SHN_PERIOD + "SHN PERIOD] "
-            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NEXT OF KIN NAME] "
-            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NEXT OF KIN PHONE] "
-            + "[" + PREFIX_NEXT_OF_KIN_ADDRESS + "NEXT OF KIN ADDRESS] "
+            + PREFIX_CASE_NUMBER + "CASE_NUMBER "
+            + PREFIX_HOME_ADDRESS + "HOME_ADDRESS "
+            + "[" + PREFIX_WORK_ADDRESS + "WORK_ADDRESS] "
+            + "[" + PREFIX_QUARANTINE_ADDRESS + "QUARANTINE_ADDRESS] "
+            + "[" + PREFIX_SHN_PERIOD + "SHN_PERIOD] "
+            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NEXT_OF_KIN_NAME] "
+            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NEXT_OF_KIN_PHONE] "
+            + "[" + PREFIX_NEXT_OF_KIN_ADDRESS + "NEXT_OF_KIN_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_CASE_NUMBER + "123 "
             + PREFIX_HOME_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_SHN_PERIOD + "2021-10-23 2021-10-30"
+            + PREFIX_SHN_PERIOD + "2021-10-23 2021-10-30 "
             + PREFIX_NEXT_OF_KIN_NAME + "Bob Doe";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the contacts list";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s\n" + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
+    public static final String MESSAGE_DUPLICATE_PERSON = "This case number already exists in the contacts list.";
 
     private final Person toAdd;
 

@@ -15,7 +15,7 @@ public class ShnPeriod {
     public static final String MESSAGE_CONSTRAINTS =
             "SHN period should be of two dates in the ISO-8601 format (i.e. yyyy-MM-dd), "
             + "separated by a space. Start date should be keyed before the end date, "
-            + "and must occur earlier than the end date by at least 1 second.";
+            + "and must occur earlier than the end date by at least 1 day.";
     public static final String MESSAGE_CONSTRAINTS_DATE =
             "Date should be in the ISO-8601 format (i.e. yyyy-MM-dd)";
 

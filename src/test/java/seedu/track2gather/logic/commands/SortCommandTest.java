@@ -7,6 +7,8 @@ import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_CA
 import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_NAME;
 import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_END;
 import static seedu.track2gather.logic.commands.SortCommand.COMPARATOR_PERSON_SHN_PERIOD_START;
+import static seedu.track2gather.logic.commands.SortCommand.SORTING_DIRECTION_STRINGS;
+import static seedu.track2gather.logic.commands.SortCommand.SORTING_FIELD_STRINGS;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_END;
@@ -39,7 +41,7 @@ public class SortCommandTest {
         SortCommand sortCommand = new SortCommand(prefixes, directions);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_NAME.toString() + Direction.ASCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_NAME) + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING));
 
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
@@ -56,7 +58,7 @@ public class SortCommandTest {
 
         SortCommand sortCommand = new SortCommand(prefixes, directions);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_NAME.toString() + Direction.ASCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_NAME) + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING));
         Model expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -69,7 +71,7 @@ public class SortCommandTest {
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_CASE_NUMBER.toString() + Direction.ASCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_CASE_NUMBER) + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -81,8 +83,8 @@ public class SortCommandTest {
         comparator = COMPARATOR_PERSON_SHN_PERIOD_START;
 
         sortCommand = new SortCommand(prefixes, directions);
-        expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_SHN_PERIOD_START.toString() + Direction.ASCENDING);
+        expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SORTING_FIELD_STRINGS.get(PREFIX_SHN_PERIOD_START)
+                + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -95,7 +97,7 @@ public class SortCommandTest {
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_SHN_PERIOD_END.toString() + Direction.ASCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_SHN_PERIOD_END) + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -107,7 +109,8 @@ public class SortCommandTest {
         comparator = COMPARATOR_PERSON_NAME.reversed();
 
         sortCommand = new SortCommand(prefixes, directions);
-        expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, PREFIX_NAME.toString() + Direction.DESCENDING);
+        expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SORTING_FIELD_STRINGS.get(PREFIX_NAME)
+                + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -120,7 +123,7 @@ public class SortCommandTest {
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_CASE_NUMBER.toString() + Direction.DESCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_CASE_NUMBER) + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -132,8 +135,8 @@ public class SortCommandTest {
         comparator = COMPARATOR_PERSON_SHN_PERIOD_START.reversed();
 
         sortCommand = new SortCommand(prefixes, directions);
-        expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_SHN_PERIOD_START.toString() + Direction.DESCENDING);
+        expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SORTING_FIELD_STRINGS.get(PREFIX_SHN_PERIOD_START)
+                        + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -146,7 +149,7 @@ public class SortCommandTest {
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_SHN_PERIOD_END.toString() + Direction.DESCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_SHN_PERIOD_END) + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -162,7 +165,10 @@ public class SortCommandTest {
 
         SortCommand sortCommand = new SortCommand(prefixes, directions);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_NAME.toString() + Direction.ASCENDING + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_NAME) + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING)
+                        + ", then by "
+                        + SORTING_FIELD_STRINGS.get(PREFIX_CASE_NUMBER)
+                        + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING));
         Model expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -175,7 +181,10 @@ public class SortCommandTest {
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_CASE_NUMBER.toString() + Direction.ASCENDING + " " + PREFIX_NAME + Direction.DESCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_CASE_NUMBER) + SORTING_DIRECTION_STRINGS.get(Direction.ASCENDING)
+                        + ", then by "
+                        + SORTING_FIELD_STRINGS.get(PREFIX_NAME)
+                        + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
@@ -188,7 +197,10 @@ public class SortCommandTest {
 
         sortCommand = new SortCommand(prefixes, directions);
         expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
-                PREFIX_CASE_NUMBER.toString() + Direction.DESCENDING + " " + PREFIX_NAME + Direction.DESCENDING);
+                SORTING_FIELD_STRINGS.get(PREFIX_CASE_NUMBER) + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING)
+                        + ", then by "
+                        + SORTING_FIELD_STRINGS.get(PREFIX_NAME)
+                        + SORTING_DIRECTION_STRINGS.get(Direction.DESCENDING));
         expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
         expectedModel.updateSortedPersonList(comparator);
 
