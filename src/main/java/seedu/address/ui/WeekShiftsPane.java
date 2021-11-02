@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
