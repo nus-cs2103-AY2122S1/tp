@@ -284,9 +284,6 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 #### Result
 The GUI updates the patient record in the displayed list and displays a success message.
 
-#### Design considerations
-
-
 ### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
 Since specific patients and doctors within the records are directly referenced in appointments,
 changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
@@ -781,7 +778,6 @@ These are some use cases to familiarise with the flow of our application:
 6. The data should be available for backup and portable to another computer.
 7. The user interface should be simple and intuitive enough for any users.
 8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-9. The project is expected to adhere to a schedule that delivers a feature set every two weeks.
 
 ### Glossary <a name="glossary"/>
 
