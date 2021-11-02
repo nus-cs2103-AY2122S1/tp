@@ -78,8 +78,8 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 1. Open Terminal.
 
 2. Navigate to the home folder you have chosen for your WhereTourGo.<br>
-For example, if you have moved the app to Desktop, simply run: 
-   
+For example, if you have moved the app to Desktop, simply run:
+
 ```
 cd Desktop
 ```
@@ -93,11 +93,11 @@ java -jar WhereTourGo.jar
 <br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data<br><br>
    ![Ui](images/sample.png)
    <br><br>
-   
+
 Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window
 <br><br>
 Some example commands you can try:
-   
+
   * **`list`** : Lists all contacts
 
   * **`add`**`c/att n/Mandarin Oriental p/98765432 e/Mandarin_Oriental@example.com a/Marina Bay Sands, Singapore 123432` : Adds a contact named `Mandarin Oriental`
@@ -202,11 +202,11 @@ More examples will be provided for each command in [Features](#features).
   * Transport: `tpt`
   * Others: `oth`
 
-<div markdown="block" class="alert alert-danger"> :warning: 
+<div markdown="block" class="alert alert-danger"> :warning:
  Only alphanumeric symbols are allowed in the contact fields. Characters like ‘&’, ‘!’, ‘?’ are not allowed.
 </div>
 
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -487,7 +487,7 @@ Please refer to the FAQ for more information.
 Open the command list in your default Browser.
 Format: `cmd`
 <div markdown="span" class="alert alert-danger">:warning: Caution:
-If the command list cannot be opened in the Browser, a link to the User Guide will be provided. 
+If the command list cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
 
 Please refer to the FAQ for more information.
@@ -499,7 +499,7 @@ Exits the program.
 
 Format: `exit`
 
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
@@ -523,7 +523,7 @@ This folder contains a file called `addressbook.json` which contains all of your
 **A**:
 
 
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Command summary
