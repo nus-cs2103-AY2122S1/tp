@@ -228,7 +228,7 @@ Filters the current list by the given keywords.
 | :-: | :-- |
 | **examples** | • `search John` returns `john` and `John Doe` <br> • `search alex david` returns `Alex Yeoh`, `David Li` |
 | <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
-| <img src=images/tip_icon.png width="50"> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> <img src=images/FilterTagCommand.jpg width="300">| 
+| <img src=images/tip_icon.png width="50"> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">| 
  
 ### 4.10 Clearing all entries : `clear`
 
@@ -253,7 +253,7 @@ LeadsForce's data are saved in the hard disk automatically after any command tha
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-| <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run. |
+| <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.  |
 | --- | :-- |
 
 ### 5. Multiple Address Books Feature 
@@ -339,10 +339,6 @@ List all the name of all the existing address books
 2. If you get the version information, and have made sure that the java version is `11` and above. You have downloaded the correct java version, and can skip the rest of this tutorial. 
 3. Go to `start menu` → `System` → `Advanced` → `Environment Variable`. Set the `JAVA_HOME` to the path of your JDK, and press `update`. For more details, the link to a more in-depth guide can be found [here](https://javatutorial.net/set-java-home-windows-10). 
 4. If none of the above worked, do search your system for the `javac.exe` file. If it cannot be found, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the PC version of the java JDK.
- 
-### Corrupted Data file
- 
-Clients are stored in the JSON file found in the 
  
 ## 8. Bugs Reporting
 
