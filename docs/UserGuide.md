@@ -328,7 +328,7 @@ Examples:
 `find -n John`  
 `find -n alex david`    
 `find -i 3`  
-
+ 
 List before using Find command:
 ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
 
@@ -338,7 +338,8 @@ List after using Find command:
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the Staff List.
+Clears all entries from the Staff List. The default [Shift Timings](#setting-default-shift-timings--setdefaultshifttimings-) 
+and [role requirements](#setting-role-requirements--setrolereq-) are also reset.
 
 Format: `clear`
 
