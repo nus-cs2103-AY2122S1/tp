@@ -20,7 +20,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (trimmedArgs.isEmpty() || trimmedArgs.matches("^.*[^a-zA-Z0-9].*$")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
