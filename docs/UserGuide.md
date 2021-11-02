@@ -63,7 +63,7 @@ tasks done faster than traditional GUI apps.
 </div>
 
 
-### Create a new module: `add module`
+### Add a new module: `add module`
 
 Add a new module to TAB.<br>
 Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 2-4 numbers, followed by 2-4 capital letters.
@@ -71,8 +71,8 @@ Module name must be an NUS module code, consisting of 2-4 capital letters, follo
 Format: `add module m/<module name>`
 
 Examples:
-* `add module m/CS2103`: Adds module CS2103 to TAB
-* `add module m/CS2100`: Adds module CS2100 to TAB
+* `add module m/CS2103`: Add module CS2103 to TAB
+* `add module m/CS2100`: Add module CS2100 to TAB
 
 ### Edit a module's name: `edit module`
 
@@ -83,7 +83,7 @@ Format: `edit module m/<old module name> mn/<new module name>`
 
 Examples:
 * `edit module m/CS2103 mn/CS2105`:
-  * Renames the module "CS2103" to "CS2105"
+  * Edit the module name of module "CS2103" to "CS2105"
 
 ### Delete a module from TAB: `delete module`
 
@@ -94,9 +94,9 @@ Format: `delete module m/<module name>`
 
 Examples:
 * `delete module m/CS2103`:
-  * Deletes module CS2103 from TAB
+  * Delete module CS2103 from TAB
 * `delete module m/CS2100`:
-  * Deletes module CS2100 from TAB
+  * Delete module CS2100 from TAB
 
 ### Add a student to a specific module: `add student`
 
@@ -113,9 +113,9 @@ Format: `add student m/<module name> i/<student id> n/<student name> t/<student 
 
 Examples:
 * `add student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`:
-  * Adds student with id A0123456A to module CS2103
+  * Add student with id A0123456A to module CS2103
 * `add student m/CS2100 i/A0123457A n/Amy t/@amylee e/amy@u.nus.edu`:
-  * Adds student with id A0123457A to module CS2100
+  * Add student with id A0123457A to module CS2100
 
 ### Edit a student's information: `edit student`
 
@@ -131,9 +131,9 @@ Format: `edit student m/<module name> i/<student id> [n/<edited student name>] [
 
 Examples:
 * `edit student m/CS2103 i/A0123456A n/John Doe`:
-  * Edits the name of the student with id A0123456A in module CS2103 to John Doe
+  * Edit the name of the student with id A0123456A in module CS2103 to John Doe
 * `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`:
-  * Edits the tele handle and email of the student with id A0123457A in module CS2100 to @amylee and amy@u.nus.edu respectively
+  * Edit the tele handle and email of the student with id A0123457A in module CS2100 to @amylee and amy@u.nus.edu respectively
 
 ### Delete a student from a specific module: `delete student`
 
@@ -143,13 +143,13 @@ Format: `delete student m/<module name> i/<student id>`
 
 Examples:
 * `delete student m/CS2103 i/A1234567A`:
-  * Removes student with id A1234567A from module CS2103’s list of students
+  * Delete student with id A1234567A from module CS2103’s list of students
 * `delete student m/CS2100 i/A7654321A`:
-  * Removes student with id A7654321A from module CS2100’s list of students
+  * Delete student with id A7654321A from module CS2100’s list of students
 
 ### Add a new task to a module: `add task`
 
-Create a new task for a specific module.<br>
+Add a new task to the specified module.<br>
 Task id must begin with a capital letter 'T', followed by numbers only.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
 Task deadline must contain either date only/time only/date and time.<br>
@@ -160,9 +160,9 @@ Format: `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>`
 
 Examples:
 * `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-12`:
-  * Adds the task assignment1 with deadline 'Tue, Oct 12 2021' to module CS2103
+  * Add the task assignment1 with deadline 'Tue, Oct 12 2021' to module CS2103
 * `add task m/CS2100 ti/T1 a/lab1 d/2021-10-13 16:00 `:
-  * Adds the task lab1 with deadline 'Wed, Oct 13 2021 04:00 pm' to module CS2100
+  * Add the task lab1 with deadline 'Wed, Oct 13 2021 04:00 pm' to module CS2100
 
 ### Edit a task's information: `edit task`
 
@@ -179,22 +179,22 @@ Format: `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edite
 
 Examples:
 * `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`: 
-  * Edits the name and deadline of the task with task id 'T10' to 'Final exam' and 'Tue, Nov 23 2021' respectively
+  * Edit the name and deadline of the task with task id 'T10' to 'Final exam' and 'Tue, Nov 23 2021' respectively
 * `edit task m/CS2103 ti/T10 d/2021-11-23`: 
-  * Edits only the deadline of the task with task id 'T10' to 'Tue, Nov 23 2021'
+  * Edit only the deadline of the task with task id 'T10' to 'Tue, Nov 23 2021'
   
 ### Delete a task from a module: `delete task`
 
-Delete the specified task from the specified module using the TaskID.<br>
-Also deletes the task from all the students in that module.
+Delete the specified task from the specified module.<br>
+Also delete the task from all the students in that module.
 
 Format: `delete task m/<module name> ti/<task id>`
 
 Examples:
 * `delete task m/CS2103 ti/T1`: 
-  * Deletes the task with task ID T1 from CS2103
+  * Delete the task with task ID T1 from CS2103
 * `delete task m/CS2105 ti/T2`: 
-  * Deletes the task with task ID T2 from CS2105
+  * Delete the task with task ID T2 from CS2105
 
 ### Mark a task as done: `mark done`
 
@@ -205,7 +205,7 @@ Format: `mark done m/<module name> i/<student id> ti/<task id>`
 
 Examples:
 * `mark done m/CS2103 i/A1234567A ti/T1`:
-  * Marks the task with ID T1 under student with ID A1234567A of module CS2103 as done.
+  * Mark the task with ID T1 under student with ID A1234567A of module CS2103 as done.
   * This means that student A1234567A has completed task T1 of module CS2103.
 
 ### Mark a task as undone: `mark undone`
