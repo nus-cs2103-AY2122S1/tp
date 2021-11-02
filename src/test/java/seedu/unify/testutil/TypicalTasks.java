@@ -47,11 +47,10 @@ public class TypicalTasks {
             .withDate("2022-01-15").withTags("CS1234").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
-    public static final Task ASSIGNMENT = new TaskBuilder().withName(VALID_NAME_ASSIGNMENT).withTime(VALID_TIME_ASSIGNMENT)
-            .withDate(VALID_DATE_ASSIGNMENT).withTags(VALID_TAG_MODULE).build();
+    public static final Task ASSIGNMENT = new TaskBuilder().withName(VALID_NAME_ASSIGNMENT)
+            .withTime(VALID_TIME_ASSIGNMENT).withDate(VALID_DATE_ASSIGNMENT).withTags(VALID_TAG_MODULE).build();
     public static final Task QUIZ = new TaskBuilder().withName(VALID_NAME_QUIZ).withTime(VALID_TIME_QUIZ)
-            .withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE)
-            .build();
+            .withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE).build();
 
     public static final String KEYWORD_MATCHING_QUIZ = "quiz"; // A keyword that matches MEIER
 
@@ -69,6 +68,13 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(CS1234_QUIZ, MATH_ASSIGNMENT, GYM_TRAINING, GE1234_LAB, CS4321_GROUP_MEETING, GYM_TRAINING_2, INTERNSHIP_SEMINAR));
+        return new ArrayList<>(
+                Arrays.asList(CS1234_QUIZ,
+                        MATH_ASSIGNMENT,
+                        GYM_TRAINING,
+                        GE1234_LAB,
+                        CS4321_GROUP_MEETING,
+                        GYM_TRAINING_2,
+                        INTERNSHIP_SEMINAR));
     }
 }

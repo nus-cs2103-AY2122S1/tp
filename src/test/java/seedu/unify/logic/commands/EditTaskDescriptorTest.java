@@ -35,7 +35,8 @@ public class EditTaskDescriptorTest {
         assertFalse(DESC_ASSIGNMENT.equals(DESC_QUIZ));
 
         // different name -> returns false
-        EditTaskDescriptor editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT).withName(VALID_NAME_QUIZ).build();
+        EditTaskDescriptor editedAssignment = new EditTaskDescriptorBuilder(DESC_ASSIGNMENT)
+                .withName(VALID_NAME_QUIZ).build();
         assertFalse(DESC_ASSIGNMENT.equals(editedAssignment));
 
         // different phone -> returns false
