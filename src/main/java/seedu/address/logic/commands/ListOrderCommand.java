@@ -17,7 +17,7 @@ public class ListOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+        model.resetOrderView();
         return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayState.ORDER);
     }
 }
