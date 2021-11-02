@@ -298,7 +298,7 @@ Valid _csv_ file example:
 | name | phone    | email                | address       | tag              |
 | -----| -------- | -------------------- | ------------- | ---------------- |
 | Adam | 81234567 | adam<span>@test.com  | ABC, Street   |                  |
-| Beth | 620400   | beth123<span>@eg.edu | 123 Drive     |friend            |
+| Beth | 620400   | beth123<span>@eg.edu | 123 Drive     | friends          |
 | Cody | 90005000 | Cody<span>@test.org  | Oak Lane      | mentor;colleague |
 
 
@@ -447,7 +447,7 @@ find -n Yeoh Alex
 ```
 The order of the keywords does not matter.
 ```text
-find -t friend -t colleagues
+find -t friends -t colleagues
 ```
 Optional fields can be repeated. The above returns only persons with tags containing both `friends` and `colleagues`.
 </div>
