@@ -157,12 +157,14 @@ public class AppointmentTest {
         assertTrue(Appointment.isValidVenueFormat("1234"));
         assertTrue(Appointment.isValidVenueFormat("Clementi 123"));
         assertTrue(Appointment.isValidVenueFormat("?!@!!?@"));
+        assertTrue(Appointment.isValidVenueFormat("testttestttestttestt")); // length = 20
+        assertTrue(Appointment.isValidVenueFormat("testttestttestttest")); // length = 19
 
         // empty time
         assertTrue(Appointment.isValidVenueFormat(""));
 
         // invalid time
-        assertFalse(Appointment.isValidVenueFormat("testttestttestttestttesttestttestt"));
+        assertFalse(Appointment.isValidVenueFormat("testttestttestttesttt")); // length = 21
     }
 
     @Test
