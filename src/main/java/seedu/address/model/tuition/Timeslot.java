@@ -184,17 +184,17 @@ public class Timeslot {
      * @return an integer indicating the relative size of two timeslots compared to each other.
      */
     public int compareTimeOrder(Timeslot timeslot) {
-        Date thisDay = this.getDay();
-        Date otherDay = timeslot.getDay();
-        int compareDay = thisDay.compareTo(otherDay);
+        int otherDay = timeslot.getDay().getDay();
+        int compareDay = day.getDay() - otherDay;
         if (compareDay != 0) {
-            return compareDay;
+            return compareDay > 0 ? 1 : -1;
         }
-        int compareStart = this.getStart().compareTo(timeslot.getStart());
-        if (compareStart != 0) {
-            return compareStart;
+
+        if (start.isBefore(timeslot.getStart())) {
+            return -1;
+        } else {
+            return 1;
         }
-        return this.getEnd().compareTo(timeslot.getEnd());
     }
 }
 
