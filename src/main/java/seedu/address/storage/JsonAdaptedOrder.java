@@ -108,7 +108,7 @@ class JsonAdaptedOrder {
         } else if (isComplete.equals("false")) {
             // intentionally allow fall through
         } else {
-            throw new IllegalValueException("isComplete filed is not in the correct format");
+            throw new IllegalValueException("isComplete field is not in the correct format");
         }
 
         return newOrder;

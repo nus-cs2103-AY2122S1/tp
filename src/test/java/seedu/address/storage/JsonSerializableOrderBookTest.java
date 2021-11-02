@@ -38,7 +38,7 @@ public class JsonSerializableOrderBookTest {
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicateOrders_throwsIllegalValueException() throws Exception {
         JsonSerializableOrderBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ORDER_FILE,
                 JsonSerializableOrderBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableOrderBook.MESSAGE_DUPLICATE_ORDER,

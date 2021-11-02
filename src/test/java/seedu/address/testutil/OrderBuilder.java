@@ -79,10 +79,18 @@ public class OrderBuilder {
     }
 
     /**
-     * Increments the {@code id} of the {@code Order} that we are building.
+     * Sets the {@code Label} of the {@code Order} that we are building.
      */
-    public OrderBuilder incrementId(long addId) {
-        this.id += addId;
+    public OrderBuilder withLabel(String label) {
+        this.label = new Label(label);
+        return this;
+    }
+
+    /**
+     * Sets the {@code id} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withId(long id) {
+        this.id = id;
         return this;
     }
 

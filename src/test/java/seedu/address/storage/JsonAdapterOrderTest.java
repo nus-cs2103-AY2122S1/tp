@@ -122,7 +122,7 @@ public class JsonAdapterOrderTest {
         JsonAdaptedOrder order =
                 new JsonAdaptedOrder(VALID_ID, VALID_DATE, VALID_AMOUNT,
                         VALID_CUSTOMER, INVALID_IS_COMPLETE, VALID_LABEL);
-        String expectedMessage = "isComplete filed is not in the correct format";
+        String expectedMessage = "isComplete field is not in the correct format";
         assertThrows(IllegalValueException.class, expectedMessage, order::toModelType);
     }
 
