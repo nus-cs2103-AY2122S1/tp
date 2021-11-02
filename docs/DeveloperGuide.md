@@ -490,6 +490,87 @@ window to the default page.
 
 <br>
 
+### Multiple Delete feature
+
+#### Current Implementation
+
+Managed by: [`DeleteCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/DeleteCommand.java)
+and [`DeleteCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/DeleteCommandParser.java)
+
+The `multiple delete` feature built on the existing `delete` feature. With the introduction of `multiple delete`, 
+the `DeleteCommand` class is designed to handle both types of delete. 
+`DeleteCommand::isSingleDelete()` and `DeleteCommand::executeSingleDelete()` handles the scenario of deleting just one client.
+`DeleteCommand::isMultipleDelete()` and `DeleteCommand::executeMultipleDelete()` handles the scenario of deleting multiple client.
+
+`Multiple delete` allows user to delete up to 10 clients in one go. 
+
+Duplicated and out of bound indexes are not allowed. If these indexes are detected,
+the command will not be executed. `HashSet` is used to check for duplicates in the extracted indexes.
+The indexes will also be sorted in descending order to check for any out of bound indexes.
+
+Currently, `multiple delete` allows 2 different format of user input:
+1) `del INDEX...`
+2) `del INDEX-INDEX`
+
+To handle this 2 types of scenario, the `DeleteCommandParser::isRangeInput()` is implemented to determine whether the user input follows format 2.
+`DeleteCommandParser::isRangeInput()` makes use of `DeleteCommandParser::CountDash()` to ensure that the input is a valid input that contains only one dash.
+On top of checking the number of dashes, it also ensures that the length of the input is at least 3 after all whitespaces have been removed.
+The end index must be greater than or equals to the start index. If the end index is equals to the start index, it will be treated as a `single delete`.
+After validation, `DeleteCommandParser::parseRangeInput()` will extract all the indexes that the user wish to delete and create a new `DeleteCommand`.
+The indexes are generated using a loop, starting from the first index, slowly incrementing by 1 until it reaches the end index.
+As for format 1, the indexes are extracted from the user input by breaking up the input between the whitespaces.
+
+The activity diagram below shows the flow of a multiple delete command.
+![Multiple_Delete_Activity_Diagram](images/MultipleDeleteActivityDiagram.png)
+
+#### Usage Scenario
+
+**1**) The user enters this command `del 1-5` into FAST.
+
+**2**) `LogicManage::execute()` will be called which will in turn call `FastParser::parseCommand()`
+
+**3**) `FastParser::ParseCommand()` will determine that it is a delete command and it will call the `DeleteCommandParser::parse()`
+
+**4**) Inside `DeleteCommandParser::parse()`:
+ * `DeleteCommandParser::isRangeInput()` will check if the user input contains exactly 1 dash and if the length is at least 3, after removing all the whitespaces. The result will be `true`
+ * `DeleteCommandParser::spiltRangeInput()` will parse the input and extract out the start index and the end index.
+ * `DeleteCommandParser::parseRangeInput()` will generate all the indexes in between the start and end index and return a new `DeleteCommand` object.
+
+**5**) `LogicManager` will call `DeleteCommand::execute()`.
+
+**6**) Inside `DeleteCommand::execute()`:
+ * It will check if the length of the Index array is more than 10 or more than the number of clients that FAST currently has.
+ * After validation, `DeleteCommand::isMultipleDelete()` will determine that it is a multiple delete.
+ * `DeleteCommand::sortOrder()` will sort the indexes in descending order.
+ * `DeleteCommand::getInvalidIndex()` will traverse through the Index array to collate a list of invalid index.
+ * `DeleteCommand::checkIndex()` will check and determine that there is no invalid index.
+ * `DeleteCommand::checkDuplicates()` will check and determine that there is no duplicated index.
+ * `DeleteCommand::executeMultipleDelete()` will start to delete the 5 clients in a for loop through `Model::deletePerson()`.
+ * Success message will be displayed afterwards.
+
+The sequence diagram below shows step 1 to step 6 mentioned above.
+![Multiple_Delete_Sequence_Diagram](images/MultipleDeleteSequenceDiagram.png)
+
+
+#### Design Consideration
+**Alternative 1 (current choice):** Execute multiple delete in descending order of indexes.
+* Pros:
+  1. Detects out of bound index first.
+
+* Cons:
+  1. Have to introduce another method to do the sorting.
+  2. Slower time as the index array needs to be sorted first.
+
+**Alternative 2:** Execute multiple delete in the order of indexes input by user.
+* Pros:
+    1. Faster process, do not need to sort.
+
+* Cons:
+    1. More bug-prone, have to account for the differences between the currently deleted index and the to-be deleted index as the model updates after each delete, hence the index may not be the same as what the user has input.
+    2. Will delete contacts until the first invalid index is detect, might be confusing for the user.
+
+<br>
+
 ### Sort feature
 
 #### Current Implementation
