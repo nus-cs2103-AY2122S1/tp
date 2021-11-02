@@ -34,7 +34,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-            <HBox prefHeight="479.0" prefWidth="594.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <HBox prefHeight="183.0" prefWidth="615.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                <children>
                   <VBox fx:id="friendBox" alignment="CENTER" minWidth="20.0" prefHeight="183.0" prefWidth="300.0" styleClass="pane-with-border" HBox.hgrow="NEVER">
                      <padding>
@@ -83,7 +83,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </Label>
-                        <StackPane fx:id="gamesPlaceholder" prefHeight="154.0" prefWidth="240.0" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="gamesPlaceholder" prefHeight="132.0" prefWidth="312.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>
