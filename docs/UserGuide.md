@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant’s Buddy (TAB) is a **desktop app for managing students, optimized for use via a Command Line Interface** (CLI) while still
+Teaching Assistant’s Buddy (TAB) is a **desktop app for NUS Teaching Assistants to help them manage students, optimized for use via a Command Line Interface** (CLI) while still
 having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB can get your student management
 tasks done faster than traditional GUI apps.
 
