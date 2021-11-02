@@ -319,7 +319,7 @@ Format: `task -a n/NAME d/DEADLINE`
 * `-a` refers to the add command
 
 Examples:
-* `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
+* `task -a n/CS2100 Lab 1 d/2021-10-10` adds the task "CS2100 Lab 1"
 </details>
 
 ### Editing a task 
