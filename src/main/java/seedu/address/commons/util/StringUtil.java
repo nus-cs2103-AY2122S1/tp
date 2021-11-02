@@ -121,14 +121,14 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if the integer represented by {@code s1} is larger than or equals to that by {@code s2}.
+     * Returns true if the double represented by {@code s1} is larger than or equals to that by {@code s2}.
      * @throws NullPointerException if {@code s1} or {@code s2} are null.
      */
-    public static boolean isIntegerLargerOrEqualToValue(String s1, String s2) {
+    public static boolean isDoubleLargerOrEqualToValue(String s1, String s2) {
         CollectionUtil.requireAllNonNull(s1, s2);
         try {
-            int value1 = Integer.parseInt(s1);
-            int value2 = Integer.parseInt(s2);
+            double value1 = Double.parseDouble(s1);
+            double value2 = Double.parseDouble(s2);
             return (value1 >= value2);
         } catch (NumberFormatException nfe) {
             return false;
