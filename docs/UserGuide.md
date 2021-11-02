@@ -45,9 +45,6 @@ tasks done faster than traditional GUI apps.
 * Words in `<angle brackets>` are the parameters to be supplied by the user.<br>
   e.g. in `add module m/<module name>`, `<module name>` is a parameter which can be used as `add module m/CS2105`.
 
-* Parameters must be in the specified order.<br>
-  e.g. if the command specifies `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>`, `add task ti/<task id> m/<module name> a/<task name> d/<task deadline>` will not work.
-
 * Parameters must be prefixed with their specific prefixes.<br>
   e.g. the command `add module m/CS2105` will add the module CS2105 to TAB, the command `add module CS2105` will not work.
 
