@@ -26,7 +26,7 @@ public class AddPersonCommand extends Command {
             + PREFIX_MODULE_CODE + "MODULE_CODE [LESSON_CODE(S)] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELEGRAM_HANDLE] "
-            + "[" + PREFIX_REMARK + "REMARK]\n "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: add "
             + PREFIX_NAME + "Ben "
             + PREFIX_EMAIL + "ben123@gmail.com "
