@@ -1,4 +1,4 @@
-package seedu.fast.logic.commands;
+package seedu.fast.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
