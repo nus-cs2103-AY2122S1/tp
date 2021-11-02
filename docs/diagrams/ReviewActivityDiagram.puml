@@ -15,8 +15,8 @@ if () then ([contains review field])
 else ([else])
 endif
 
-:Create Person Object;
-:Add Person to Contacts;
+:Create Contact Object;
+:Add Contact to Contacts;
 :Save AddressBook;
 
 stop
