@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Homework {
     public static final String MESSAGE_CONSTRAINTS = "Homework description can have a maximum of "
-            + "50 characters, and it should not be blank.";
+            + "50 characters.";
     public static final String VALIDATION_REGEX = ".{0,50}";
 
     public final String description;
@@ -32,7 +32,7 @@ public class Homework {
      * @return True if test is a valid homework description.
      */
     public static boolean isValidDescription(String test) {
-        return !test.isEmpty() && test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
 
