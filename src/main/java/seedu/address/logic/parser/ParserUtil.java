@@ -394,7 +394,7 @@ public class ParserUtil {
     public static SortBySupplier parseSortBySupplier(String sortBy) throws ParseException {
         requireNonNull(sortBy);
         String trimmedSortBy = sortBy.trim().toLowerCase();
-        if (!SortBySupplier.isValidSortingOrder(trimmedSortBy)) {
+        if (!SortBySupplier.isValidSortBy(trimmedSortBy)) {
             throw new ParseException(SortBySupplier.MESSAGE_CONSTRAINTS);
         }
         return new SortBySupplier(trimmedSortBy);

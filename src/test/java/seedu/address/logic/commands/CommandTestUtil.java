@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,22 +11,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
-import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.model.person.employee.Employee;
-import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
 import seedu.address.testutil.EditCustomerDescriptorBuilder;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
@@ -64,6 +61,12 @@ public class CommandTestUtil {
     public static final String VALID_SHIFTS_BOB = "2021-12-26 0800";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_SORT_ORDER_ASCENDING = "a";
+    public static final String VALID_SORT_ORDER_DESCENDING = "d";
+    public static final String VALID_SORT_BY_NAME = "n";
+    public static final String VALID_SORT_BY_ADDRESS = "a";
+    public static final String VALID_SORT_BY_EMAIL = "e";
+    public static final String VALID_SORT_BY_PHONE = "p";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -96,11 +99,19 @@ public class CommandTestUtil {
     public static final String SHIFTS_DESC_BOB = " " + PREFIX_SHIFT + VALID_SHIFTS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String SORT_DESC_ASCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_ASCENDING;
+    public static final String SORT_DESC_DESCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_DESCENDING;
+    public static final String SORT_BY_NAME_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_NAME;
+    public static final String SORT_BY_EMAIL_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_EMAIL;
+    public static final String SORT_BY_PHONE_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_PHONE;
+    public static final String SORT_BY_ADDRESS_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_ADDRESS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    // "only "a" and "d" are allowed for sorting order
+    public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "ad";
     public static final String INVALID_LP_DESC = " " + PREFIX_LP + "911a"; // 'a' not allowed in loyalty
     // points
     public static final String INVALID_ALLERGIES_DESC = " " + PREFIX_ALLERGIES + "!vvdv"; // '!' not allowed
@@ -197,33 +208,5 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredCustomerList, actualModel.getFilteredCustomerList());
         assertEquals(expectedFilteredEmployees, actualModel.getFilteredEmployeeList());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
-     */
-    public static void showCustomerAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
-
-        Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
-        final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredCustomerList(new CustomerClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredCustomerList().size());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the employee at the given {@code targetIndex} in the
-     * {@code model}'s address book.
-     */
-    public static void showEmployeeAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredEmployeeList().size());
-
-        Employee employee = model.getFilteredEmployeeList().get(targetIndex.getZeroBased());
-        final String[] splitName = employee.getName().fullName.split("\\s+");
-        model.updateFilteredEmployeeList(new EmployeeClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredEmployeeList().size());
     }
 }
