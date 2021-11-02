@@ -138,9 +138,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson, boolean removeFilter) {
         requireAllNonNull(target, editedPerson);
-        runOperation(() -> addressBook.setPerson(target, editedPerson));
+        runOperation(() -> {
+            addressBook.setPerson(target, editedPerson);
+            if (removeFilter) {
+                this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+            }
+        });
     }
 
     @Override

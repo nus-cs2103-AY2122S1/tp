@@ -57,7 +57,7 @@ public class BulkTagCommand extends Command {
             Person taggedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     person.getAddress(), newTagList, person.getGitHubId(),
                     person.getNusNetworkId(), person.getType(), person.getStudentId(), person.getTutorialId());
-            model.setPerson(person, taggedPerson);
+            model.setPerson(person, taggedPerson, false);
         }
 
         return getCommandResult(tagList, personsToTag);
