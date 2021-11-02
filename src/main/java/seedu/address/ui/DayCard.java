@@ -43,11 +43,11 @@ public class DayCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public DayCard(int dayCardNumber, ObservableList<Person> stafflist, Period currentPeriod) {
+    public DayCard(LocalDate firstDate, int dayCardNumber, ObservableList<Person> stafflist, Period currentPeriod) {
         super(FXML);
         this.dayCardNumber = dayCardNumber;
-        DayOfWeek day = LocalDate.now().getDayOfWeek().plus(dayCardNumber);
-        LocalDate date = LocalDate.now().plusDays(dayCardNumber);
+        DayOfWeek day = firstDate.getDayOfWeek().plus(dayCardNumber);
+        LocalDate date = firstDate.plusDays(dayCardNumber);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
         String text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()) + ", "
                 + date.format(formatter);

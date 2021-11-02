@@ -10,7 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.ParserUtil.initializePeriodToThisWeek;
+
+import java.time.LocalDate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemoveMarkCommand;
@@ -35,7 +36,7 @@ public class RemoveMarkCommandParser implements Parser<RemoveMarkCommand> {
                         PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
                         PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
         //created to test if there are
-        Period period = initializePeriodToThisWeek();
+        Period period = Period.oneWeekFrom(LocalDate.now());
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             period = ParserUtil.extractPeriodDates(argMultimap);
         }

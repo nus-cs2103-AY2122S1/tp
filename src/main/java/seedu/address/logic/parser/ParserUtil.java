@@ -483,7 +483,6 @@ public class ParserUtil {
         return timings;
     }
 
-
     /**
      * Creates an array of {@code LocalDate} of size 2 representing the range of the current week.
      * If the current date is monday, it gives the range from this monday to next sunday.
@@ -507,18 +506,5 @@ public class ParserUtil {
         int diffFromSunday = 7 - date;
         return new LocalDate[]{currentDate.minusDays(diffFromMonday),
                 currentDate.plusDays(diffFromSunday)};
-    }
-
-    public static Period getWeekPeriodFromDate(LocalDate date) {
-        LocalDate[] init = getDateArrayOfTheWeek(date);
-        assert init.length == 2;
-        return new Period(init[0], init[1]);
-    }
-
-    /**
-     * Creates a Period from monday to sunday, where today is within that range.
-     */
-    public static Period initializePeriodToThisWeek() {
-        return getWeekPeriodFromDate(LocalDate.now());
     }
 }

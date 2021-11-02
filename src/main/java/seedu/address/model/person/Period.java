@@ -57,8 +57,6 @@ public class Period {
         this.endDate = date;
     }
 
-
-
     /**
      * Returns true if any dates within {@code period} is within
      * {@code this}.
@@ -67,9 +65,6 @@ public class Period {
         return this.contains(period.startDate)
                 || this.contains(period.endDate);
     }
-
-
-
 
     /**
      * Obtains a {@code Period} representing the period across the month of the input date.
@@ -82,7 +77,6 @@ public class Period {
         int lastDate = month.length(year % 4 == 0);
         return new Period(LocalDate.of(year, month, 1),
                 LocalDate.of(year, month, lastDate));
-
     }
 
     /**
@@ -109,7 +103,6 @@ public class Period {
     public boolean contains(LocalDate date) {
         return withinExclusively(date)
                 || atDelimiters(date);
-
     }
 
     /**
@@ -160,7 +153,6 @@ public class Period {
 
         //when there is no need to
         return List.of(this);
-
     }
 
     /**
@@ -195,7 +187,6 @@ public class Period {
         return List.of();
 
     }
-
 
     /**
      * Unions the input {@code Collection<Period> periods} with {@code this}.
@@ -262,10 +253,6 @@ public class Period {
                 || this.endDate.isEqual(date);
     }
 
-
-
-
-
     /**
      * Tests if the input string is a valid string representing a period.
      */
@@ -284,6 +271,24 @@ public class Period {
     }
 
     /**
+     * Returns the first date of the period.
+     *
+     * @return LocalDate representing the first date of the period.
+     */
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Returns a Period that represents a week that starts from the LocalDate provided.
+     *
+     * @param firstDate first date of the week.
+     */
+    public static Period oneWeekFrom(LocalDate firstDate) {
+        return new Period(firstDate, firstDate.plusDays(6));
+    }
+
+    /**
      * Gets an List representing an iteration over this period.
      *
      * @return The List.
@@ -293,7 +298,6 @@ public class Period {
                 .datesUntil(endDate.plusDays(1)) //exclusive
                 .collect(Collectors.toList());
     }
-
 
     @Override
     public String toString() {
@@ -308,6 +312,4 @@ public class Period {
                 && ((Period) o).endDate.equals(endDate);
 
     }
-
-
 }

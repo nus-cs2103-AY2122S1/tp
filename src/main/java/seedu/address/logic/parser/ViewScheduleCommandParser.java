@@ -12,9 +12,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.ParserUtil.extractPeriodDates;
-import static seedu.address.logic.parser.ParserUtil.initializePeriodToThisWeek;
 import static seedu.address.logic.parser.ParserUtil.parseIndex;
 import static seedu.address.logic.parser.ParserUtil.testByAllFields;
+
+import java.time.LocalDate;
 
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -39,7 +40,7 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
                         PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
                         PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
 
-        Period period = initializePeriodToThisWeek();
+        Period period = Period.oneWeekFrom(LocalDate.now());
         if (argMultimap.isEmpty()) {
             throw new ParseException(ViewScheduleCommand.MESSAGE_USAGE);
         }

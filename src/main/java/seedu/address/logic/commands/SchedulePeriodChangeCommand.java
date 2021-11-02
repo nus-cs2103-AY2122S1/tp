@@ -28,7 +28,6 @@ public class SchedulePeriodChangeCommand extends Command {
         this.period = period;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         return new CommandResult(String.format(DEFAULT_MESSAGE, period), period);
