@@ -289,11 +289,11 @@ Shows the in-depth data analysis of individual, group, or the cohort's performan
 Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f <export_file_path>]`
 
 * Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments.
-  * Student's score in each assessment as well as the cohort mean and median score will be shown as a line graph. 
+  * Student's score in each assessment, as well as the cohort mean and median score, will be shown as a line graph. 
   * The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
   * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 * Using `-g <group_name>` displays the information of the group's performance in all their graded assessments.
-  * Group's mean score in each assessment as well as the cohort mean and median score will be shown as a line graph.
+  * Group's mean score in each assessment, as well as the cohort mean and median score, will be shown as a line graph.
 * Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
   * The cohort's score distribution will be shown as a histogram. 
 * Keywords are case-sensitive and only allows exact match. e.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
