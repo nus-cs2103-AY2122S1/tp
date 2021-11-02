@@ -3,7 +3,10 @@ package seedu.fast.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Model;
+
+import java.util.logging.Logger;
 
 /**
  * Lists all persons in FAST to the user.
@@ -19,11 +22,14 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all clients";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----List Command: Success-----");
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

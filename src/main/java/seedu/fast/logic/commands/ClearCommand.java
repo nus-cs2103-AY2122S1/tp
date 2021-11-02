@@ -2,8 +2,11 @@ package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
+
+import java.util.logging.Logger;
 
 /**
  * Clears FAST.
@@ -18,11 +21,14 @@ public class ClearCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "FAST has been cleared!";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setFast(new Fast());
+        logger.info("-----Clear Command: Success-----");
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

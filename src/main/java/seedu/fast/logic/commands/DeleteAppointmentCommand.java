@@ -3,7 +3,9 @@ package seedu.fast.logic.commands;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CommandUtil;
@@ -25,6 +27,8 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAILED_EMPTY_APPT = "No appointment with %1$s yet!";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index index;
     private final Appointment appointment;
 
@@ -44,6 +48,7 @@ public class DeleteAppointmentCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Delete Appointment Command: Invalid Index-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -56,11 +61,13 @@ public class DeleteAppointmentCommand extends Command {
         String name = personToEdit.getName().fullName;
 
         if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
+            logger.warning("-----Invalid Delete Appointment Command: Appointment does not exist-----");
             throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED_EMPTY_APPT, name));
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Delete Appointment Command: Appointment deleted successfully-----");
 
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, name));
     }

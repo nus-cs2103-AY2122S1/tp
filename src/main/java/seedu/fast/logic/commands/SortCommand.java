@@ -3,7 +3,9 @@ package seedu.fast.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
 
@@ -20,6 +22,8 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Sorted all clients by %1$s";
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private final Comparator<Person> comparator;
     private final String keyword;
@@ -39,6 +43,8 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortPerson(comparator);
+        logger.info("-----Sort Command: Success-----");
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, keyword));
     }
 

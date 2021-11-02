@@ -4,7 +4,9 @@ import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CommandUtil;
@@ -27,6 +29,8 @@ public class MarkAppointmentCommand extends Command {
             + "%1$s %2$s %3$s %4$s";
     public static final String MESSAGE_MARK_APPOINTMENT_FAILURE_EMPTY_APPT = "No appointment exists!";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index index;
     private final Appointment appointment;
 
@@ -48,6 +52,7 @@ public class MarkAppointmentCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Mark Appointment Command: Invalid Index-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -55,6 +60,7 @@ public class MarkAppointmentCommand extends Command {
 
         // No appointment -> no reason to be able to mark it as completed.
         if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
+            logger.warning("-----Invalid Mark Appointment Command: Appointment does not exist-----");
             throw new CommandException(MESSAGE_MARK_APPOINTMENT_FAILURE_EMPTY_APPT);
         }
 
@@ -65,6 +71,7 @@ public class MarkAppointmentCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Mark Appointment Command: Appointment marked successfully-----");
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }

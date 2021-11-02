@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CommandUtil;
@@ -43,6 +45,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "Unable to execute command!\n"
             + "One or more invalid index detected at: %1$s\n" + MESSAGE_MULTIPLE_DELETE_FAILED_LARGER_THAN_CONTACTS;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index[] indexArray;
 
     /**
@@ -76,6 +80,7 @@ public class DeleteCommand extends Command {
     }
 
     private void executeInvalidIndexScenario() throws CommandException {
+        logger.warning("-----Invalid Delete Command: Invalid Index-----");
         if (isSingleDelete()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else {
@@ -93,6 +98,7 @@ public class DeleteCommand extends Command {
 
     private void checkIndex(Index index, List<Person> lastShownList, String message) throws CommandException {
         if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Delete Command: Invalid Index-----");
             throw new CommandException(message);
         }
     }
@@ -104,6 +110,7 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        logger.info("-----Delete Command: Success-----");
 
         return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS, personToDelete));
     }
@@ -143,6 +150,7 @@ public class DeleteCommand extends Command {
 
     private void checkIndexes(ArrayList<Index> indexArrayList, String message) throws CommandException {
         if (indexArrayList.size() > 0) {
+            logger.warning("-----Invalid Delete Command: Invalid Indexes-----");
             throw new CommandException(message);
         }
     }
@@ -151,6 +159,7 @@ public class DeleteCommand extends Command {
         Set<Integer> set = new HashSet<>();
         for (Index index : array) {
             if (!set.add(index.getZeroBased())) {
+                logger.warning("-----Invalid Delete Command: Invalid Indexes-----");
                 throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES);
             }
         }
@@ -180,6 +189,7 @@ public class DeleteCommand extends Command {
         }
 
         deleteMultiplePerson(lastShownList, model);
+        logger.info("-----Delete Command: Success-----");
 
         return new CommandResult(String.format(MESSAGE_MULTIPLE_DELETE_SUCCESS, indexArray.length));
     }

@@ -4,7 +4,9 @@ import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CommandUtil;
@@ -31,6 +33,8 @@ public class UnmarkAppointmentCommand extends Command {
     public static final String MESSAGE_UNMARK_APPOINTMENT_FAILURE_APPT_EXIST = "You cannot undo marking of appointment "
             + "if you have a scheduled appointment with %1$s currently!";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index index;
     private final Appointment appointment;
 
@@ -52,6 +56,7 @@ public class UnmarkAppointmentCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Unmark Appointment Command: Invalid Index-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -59,11 +64,13 @@ public class UnmarkAppointmentCommand extends Command {
 
         // AppointmentCount cannot go below 0.
         if (!AppointmentCount.isValidDecrementCount(personToEdit.getCount())) {
+            logger.warning("-----Invalid Unmark Appointment Command: Appointment Count cannot go below 0-----");
             throw new CommandException(MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO_COUNT);
         }
 
         // Has an appointment -> means did not accidentally mark an appointment as completed.
         if (!(Appointment.isAppointmentEmpty(personToEdit.getAppointment()))) {
+            logger.warning("-----Invalid Unmark Appointment Command: Appointment Exist-----");
             throw new CommandException(String.format(MESSAGE_UNMARK_APPOINTMENT_FAILURE_APPT_EXIST,
                     personToEdit.getName()));
         }
@@ -75,6 +82,7 @@ public class UnmarkAppointmentCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Unmark Appointment Command: Appointment unmarked successfully-----");
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }

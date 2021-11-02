@@ -8,7 +8,9 @@ import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CollectionUtil;
@@ -45,6 +47,8 @@ public class EditAppointmentCommand extends Command {
             + "At least one field to edit must be provided.";
     public static final String MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT = "No Appointment to edit.";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index index;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
@@ -68,6 +72,7 @@ public class EditAppointmentCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Edit Appointment Command: Invalid Index-----");
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
         }
 
@@ -79,11 +84,14 @@ public class EditAppointmentCommand extends Command {
                 personToEdit.getCount());
 
         if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
+            logger.warning("-----Invalid Edit Appointment Command: Appointment does not exist-----");
             throw new CommandException(MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT);
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Edit Appointment Command: Appointment edited successfully-----");
+
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 

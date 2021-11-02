@@ -65,7 +65,7 @@ public class TagCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
-            logger.info("Input index is not within range.");
+            logger.warning("-----Invalid Tag Command: Input index is not within range-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -75,21 +75,21 @@ public class TagCommand extends Command {
 
         for (Tag tag: deleteTags) {
             if (!newTags.remove(tag)) {
-                logger.info("Tag to be deleted does not exist.");
+                logger.warning("-----Invalid Tag Command: Tag to be deleted does not exist-----");
                 throw new CommandException(String.format(MESSAGE_TAG_DOES_NOT_EXIST, tag.tagName));
             }
         }
 
         for (Tag tag: addTags) {
             if (!newTags.add(tag)) {
-                logger.info("Tag to be added already exists.");
+                logger.warning("-----Invalid Tag Command: Tag to be added already exists-----");
                 throw new CommandException(String.format(MESSAGE_TAGS_ARE_REPEATED, tag.tagName));
             }
         }
 
         //add any additional tag constraint checks here, for priority and investment plan tags
         if (TagCommandUtils.hasMultiplePriorityTags(newTags)) {
-            logger.info("Attempted to add more than one priority tag.");
+            logger.warning("-----Invalid Tag Command: Attempted to add more than one priority tag-----");
             throw new CommandException(MESSAGE_MULTIPLE_PRIORITY_TAGS);
         }
 
@@ -101,6 +101,7 @@ public class TagCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
+        logger.info("-----Tag Command: Success-----");
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
