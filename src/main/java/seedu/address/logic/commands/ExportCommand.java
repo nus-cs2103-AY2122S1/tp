@@ -24,9 +24,10 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the contacts in the current displayed list to the exports folder in project directory."
             + System.lineSeparator()
-            + "Parameters: FILENAME (Must be a valid filename and be in the csv format)"
+            + "Parameters: FILENAME (Valid filenames are those that contain only alphanumeric characters, whitespaces "
+            + "and/or the symbols '-'  '_'  '.')"
             + System.lineSeparator()
-            + "Example: " + COMMAND_WORD + " myContacts.csv";
+            + "Example: " + COMMAND_WORD + " myContacts";
     public static final String MESSAGE_SUCCESS = "contacts successfully exported to";
     public static final String MSG_FILE_WRITE_ERROR = "File cannot be written to";
 
