@@ -86,7 +86,7 @@ Here is a table of commonly used terms in this document along with their meaning
 
 |Term |Explanation |
 |-----|------------|
-|GUI | A GUI (graphical user interface) is a system of interactive visual components for the user interacts with. |
+|GUI | A GUI (graphical user interface) is a system of interactive visual components for the user to interact with. |
 |index | The position of a task in the list. Indexes start from 1. |
 |parameter| Specific information for a command. |
 
