@@ -174,8 +174,7 @@ public class Item implements Displayable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; id: ")
-                .append(getId())
+                .append(String.format("; count: %06d", getId()))
                 .append("; count: ")
                 .append(getCount())
                 .append(String.format("; costPrice: $%.2f", getCostPrice()))

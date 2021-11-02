@@ -95,19 +95,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String count} into a {@code id}.
+     * Parses {@code String id} into an {@code Integer}.
      */
     public static Integer parseId(String id) throws ParseException {
+        Integer idValue;
         try {
-            Integer.parseInt(id);
+            idValue = Integer.parseInt(id);
         } catch (NumberFormatException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_FORMAT);
         }
-        if (id.length() <= 6 && Integer.parseInt(id) > 0) {
-            return Integer.parseInt(id);
-        } else {
+
+        if (id.length() != 6 || idValue < 0) {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
         }
+
+        return idValue;
+    }
+
+    /**
+     * Parses {@code Collection<String> idStrings} into a {@code Set<Integers>}.
+     */
+    public static Set<Integer> parseIds(Collection<String> idStrings) throws ParseException {
+        requireNonNull(idStrings);
+        final Set<Integer> idSet = new HashSet<>();
+        for (String idString : idStrings) {
+            idSet.add(parseId(idString));
+        }
+        return idSet;
     }
 
     /**
