@@ -14,9 +14,9 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.ALLERGY_DESC_NONSENSE;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_AMY;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVE_BAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_NONSENSE;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.JOB_TITLE_DESC_AMY;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.LEAVES_DESC_AMY;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.SALARY_DESC_AMY;
@@ -98,9 +98,9 @@ public class LogicManagerTest {
         // Execute add command
         String addCustomerCommand = AddCustomerCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + LP_DESC_AMY + ALLERGY_DESC_NONSENSE
-                + SPECIAL_REQUEST_DESC_LIVEBAND + TAG_DESC_FRIEND;
+                + SPECIAL_REQUEST_DESC_LIVE_BAND + TAG_DESC_FRIEND;
         Customer expectedCustomer = new CustomerBuilder(CUSTOMER_AMY).withAllergies(VALID_ALLERGY_NONSENSE)
-                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND).build();
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCustomer(expectedCustomer);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

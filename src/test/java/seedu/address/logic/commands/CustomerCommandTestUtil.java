@@ -40,24 +40,17 @@ public class CustomerCommandTestUtil {
     public static final String VALID_LP_BOB = "9000";
     public static final String VALID_ALLERGY_NONSENSE = "Nonsense";
     public static final String VALID_ALLERGY_ALMONDS = "Almonds";
-    public static final String VALID_ALLERGY_GRAPES = "Grapes";
     public static final String VALID_ALLERGY_GRAPEFRUITS = "Grapefruit";
-    public static final String VALID_SPECIAL_REQUEST_OFFLIGHTS = "off lights";
+    public static final String VALID_SPECIAL_REQUEST_OFF_LIGHTS = "off lights";
     public static final String VALID_SPECIAL_REQUEST_SILENCE = "Silence";
     public static final String VALID_SPECIAL_REQUEST_ROCK = "Rock music";
-    public static final String VALID_SPECIAL_REQUEST_LIVEBAND = "Live band";
+    public static final String VALID_SPECIAL_REQUEST_LIVE_BAND = "Live band";
 
     public static final String ALLERGY_DESC_NONSENSE = " " + PREFIX_ALLERGIES + VALID_ALLERGY_NONSENSE;
     public static final String ALLERGY_DESC_ALMONDS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_ALMONDS;
-    public static final String ALLERGY_DESC_GRAPES = " " + PREFIX_ALLERGIES + VALID_ALLERGY_GRAPES;
     public static final String ALLERGY_DESC_GRAPEFRUITS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_GRAPEFRUITS;
-    public static final String SPECIAL_REQUEST_DESC_OFFLIGHTS = " " + PREFIX_SPECIAL_REQUESTS
-            + VALID_SPECIAL_REQUEST_OFFLIGHTS;
-    public static final String SPECIAL_REQUEST_DESC_SILENCE = " " + PREFIX_SPECIAL_REQUESTS
-            + VALID_SPECIAL_REQUEST_SILENCE;
-    public static final String SPECIAL_REQUEST_DESC_ROCK = " " + PREFIX_SPECIAL_REQUESTS + VALID_SPECIAL_REQUEST_ROCK;
-    public static final String SPECIAL_REQUEST_DESC_LIVEBAND = " " + PREFIX_SPECIAL_REQUESTS
-            + VALID_SPECIAL_REQUEST_LIVEBAND;
+    public static final String SPECIAL_REQUEST_DESC_LIVE_BAND = " " + PREFIX_SPECIAL_REQUESTS
+            + VALID_SPECIAL_REQUEST_LIVE_BAND;
 
     public static final String LP_DESC_AMY = " " + PREFIX_LP + VALID_LP_AMY;
     public static final String LP_DESC_BOB = " " + PREFIX_LP + VALID_LP_BOB;
@@ -66,9 +59,6 @@ public class CustomerCommandTestUtil {
     public static final String INVALID_ALLERGIES_DESC = " " + PREFIX_ALLERGIES + "!vvdv"; // '!' not allowed
     // symbol
     public static final String INVALID_SPECIAL_REQUESTS_DESC = " " + PREFIX_SPECIAL_REQUESTS + "!vdfv"; // '!'
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_AMY;
     public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_BOB;
 
@@ -77,12 +67,12 @@ public class CustomerCommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withLoyaltyPoints(VALID_LP_AMY)
                 .withAllergies(VALID_ALLERGY_GRAPEFRUITS, VALID_ALLERGY_NONSENSE)
-                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND, VALID_SPECIAL_REQUEST_ROCK)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND, VALID_SPECIAL_REQUEST_ROCK)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_CUSTOMER_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withLoyaltyPoints(VALID_LP_BOB)
-                .withAllergies(VALID_ALLERGY_ALMONDS).withSpecialRequests(VALID_SPECIAL_REQUEST_OFFLIGHTS)
+                .withAllergies(VALID_ALLERGY_ALMONDS).withSpecialRequests(VALID_SPECIAL_REQUEST_OFF_LIGHTS)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

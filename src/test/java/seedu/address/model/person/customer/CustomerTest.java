@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_ALMONDS;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BOB;
@@ -93,7 +93,7 @@ public class CustomerTest {
 
         // different special requests -> returns false
         editedAlice = new CustomerBuilder(CUSTOMER_ALICE)
-                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND).build();
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND).build();
         assertFalse(CUSTOMER_ALICE.equals(editedAlice));
         // different tags -> returns false
         editedAlice = new CustomerBuilder(CUSTOMER_ALICE).withTags(VALID_TAG_HUSBAND).build();
