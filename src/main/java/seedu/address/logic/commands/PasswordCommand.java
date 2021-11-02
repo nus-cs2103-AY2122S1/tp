@@ -12,11 +12,11 @@ public class PasswordCommand extends Command {
     public static final int MAX_PASSWORD_LENGTH = 32;
 
     public static final String CORRECT_PASSWORD_FORMAT =
-            "Password should contain LETTERS, SPECIAL CHARACTERS and NUMBERS."
-            + "Password length should be between "
-            + MIN_PASSWORD_LENGTH
-            + " and "
-            + MAX_PASSWORD_LENGTH;
+            "Password should have "
+                    + MIN_PASSWORD_LENGTH
+                    + " to "
+                    + MAX_PASSWORD_LENGTH
+                    + " characters and contain LETTERS, NUMBERS AND symbols from !@#$%&*()_+=|<>?{}~-[].";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " oldPassword "
             + PREFIX_NEW_PASSWORD + " newPassword";
