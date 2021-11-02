@@ -56,4 +56,4 @@ You can reach us at the email `shermannws@u.nus.edu`
 [[portfolio](team/zhaopeiduo.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI design
