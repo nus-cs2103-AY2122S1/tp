@@ -72,7 +72,7 @@ public class DashboardWindow extends PopupWindow {
 
         String dataToDisplay = formatDataToDisplay(numStudents, numClasses, numLabs);
         Label label = new Label(dataToDisplay);
-        label.getStylesheets().add("view/Dashboard.css");
+        label.getStylesheets().add("css/Dashboard.css");
         label.getStyleClass().add("overall-stats");
         overallStatsPlaceholder.getChildren().add(label);
     }
@@ -81,7 +81,7 @@ public class DashboardWindow extends PopupWindow {
         labVBox.getChildren().clear();
         String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
         Label labsLabel = new Label(labsMarked);
-        labsLabel.getStylesheets().add("view/Dashboard.css");
+        labsLabel.getStylesheets().add("css/Dashboard.css");
         labsLabel.getStyleClass().add("labs-marked");
         labVBox.getChildren().add(labsLabel);
     }

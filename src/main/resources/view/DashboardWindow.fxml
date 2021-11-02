@@ -17,10 +17,10 @@
   <scene>
     <Scene fx:id="primaryScene">
       <stylesheets>
-        <URL value="@Fonts.css" />
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-        <URL value="@Dashboard.css" />
+        <URL value="@../css/Fonts.css" />
+        <URL value="@../css/DarkTheme.css" />
+        <URL value="@../css/Extensions.css" />
+        <URL value="@../css/Dashboard.css" />
       </stylesheets>
 
       <VBox>
