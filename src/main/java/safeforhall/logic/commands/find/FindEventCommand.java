@@ -29,7 +29,7 @@ import safeforhall.model.event.Venue;
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String PARAMETERS = "[n/NAME] [d/DATE] [v/VENUE] [c/CAPACITY]";
+    public static final String PARAMETERS = "[n/NAME] [d/DATE] [t/TIME] [v/VENUE] [c/CAPACITY]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose parameters match any of "
             + "the provided keywords for different options (case-insensitive)\nand displays them as a "
             + "list with index numbers.\n"

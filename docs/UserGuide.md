@@ -169,7 +169,7 @@ Shows a list of residents that match the provided keywords for different availab
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `r/`, `e`, `p/`, `f/` and `v/`
+* Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
 * Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
@@ -318,6 +318,21 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CA
 
 Examples:
 *  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+
+#### Deleting an event : `delete`
+
+Deletes specified events from the address book.
+
+Format: `delete INDEX…`
+
+* Delete the events at the specified `INDEX…`.
+* Each index refers to the index number shown in the displayed event list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* Delete multiple events in a single command by inputting multiple indexes, each separated by a space.
+
+Examples:
+* `view` followed by `delete 1 2 3` deletes the first 3 events in the address book.
+* `find n/Football Training` followed by `delete 1` deletes the 1st event named Football Training in the results of the `find` command.
 
 #### Add residents to an event: `include`
 
