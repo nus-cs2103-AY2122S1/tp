@@ -231,7 +231,6 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(messageConstraints);
         }
-
         return trimmedStr;
     }
 
@@ -347,9 +346,6 @@ public class ParserUtil {
         return new LocalTime[]{startTime, endTime};
     }
 
-
-
-
     /**
      * Parses {@code args} into {@code PersonContainsFieldsPredicate} which tests a person for all
      * of the qualifiers of the predicate.
@@ -362,9 +358,9 @@ public class ParserUtil {
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
+        predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getAllValues(PREFIX_DASH_ROLE), Role::translateStringToRole);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_SALARY), Salary::new);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_STATUS), Status::translateStringToStatus);
         } catch (IllegalArgumentException iae) {
