@@ -27,8 +27,9 @@ public class EditModuleCommandParser implements Parser<EditModuleCommand> {
 
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         if (argMultimap.getValue(PREFIX_NEW_MODULE_NAME).isPresent()) {
-            editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(
-                    argMultimap.getValue(PREFIX_NEW_MODULE_NAME).get()));
+            ModuleName newModuleName = ParserUtil.parseModuleName(
+                    argMultimap.getValue(PREFIX_NEW_MODULE_NAME).get());
+            editModuleDescriptor.setModuleName(newModuleName);
         }
         if (!editModuleDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditModuleCommand.MESSAGE_NOT_EDITED);
