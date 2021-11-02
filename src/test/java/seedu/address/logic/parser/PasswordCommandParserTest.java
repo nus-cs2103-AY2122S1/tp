@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID＿PASSWORD;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
+import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID＿PASSWORD;
+import static seedu.address.logic.commands.PasswordCommand.MESSAGE_WRONG_PASSWORD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.jupiter.api.Test;
@@ -47,17 +48,29 @@ public class PasswordCommandParserTest {
 
     @Test
     public void parse_repeatedFlag_failure() {
-        String expectedMessage = String.format(MESSAGE_TOO_MANY_FLAGS, PasswordCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_TOO_MANY_FLAGS
+                + System.lineSeparator()
+                + PasswordCommand.MESSAGE_USAGE;
 
         assertParseFailure(parser, PasswordUtil.getRepeatedFlag(validPassword, validPassword),
                 expectedMessage);
     }
 
     @Test
-    public void parse_invalidPassword_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID＿PASSWORD, PasswordCommand.CORRECT_PASSWORD_FORMAT);
+    public void parse_wrongPassword_failure() {
+        String expectedMessage = MESSAGE_WRONG_PASSWORD;
 
         assertParseFailure(parser, PasswordUtil.getPasswordCommand(inValidPassword, validPassword),
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidPassword_failure() {
+        String expectedMessage = MESSAGE_INVALID＿PASSWORD
+                + System.lineSeparator()
+                + PasswordCommand.CORRECT_PASSWORD_FORMAT;
+
+        assertParseFailure(parser, PasswordUtil.getPasswordCommand(validPassword, inValidPassword),
                 expectedMessage);
     }
 }
