@@ -14,13 +14,13 @@ import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModuleLessons.getTypicalConthacks;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -34,8 +34,8 @@ import seedu.address.testutil.ModuleLessonBuilder;
  */
 public class EditModuleLessonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConthacks(), new UserPrefs());
+    private Model expectedModel = new ModelManager(new Conthacks(model.getConthacks()), new UserPrefs());
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -119,8 +119,8 @@ public class EditModuleLessonCommandTest {
         showLessonAtIndex(model, INDEX_FIRST);
         Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
 
-        // ensures that invalidIndex is still in bounds of address book list
-        assertTrue(invalidIndex.getZeroBased() < model.getAddressBook().getModuleLessonList().size());
+        // ensures that invalidIndex is still in bounds of Conthacks list
+        assertTrue(invalidIndex.getZeroBased() < model.getConthacks().getModuleLessonList().size());
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                         .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();

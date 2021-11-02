@@ -40,9 +40,9 @@ import seedu.address.testutil.ModuleLessonUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class ConthacksParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ConthacksParser parser = new ConthacksParser();
 
     @Test
     public void parseCommand_add() throws Exception {

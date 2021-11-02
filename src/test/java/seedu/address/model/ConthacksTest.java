@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalConthacks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,25 +23,25 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class ConthacksTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Conthacks conthacks = new Conthacks();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), conthacks.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> conthacks.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyConthacks_replacesData() {
+        Conthacks newData = getTypicalConthacks();
+        conthacks.resetData(newData);
+        assertEquals(newData, conthacks);
     }
 
     @Test
@@ -49,64 +49,64 @@ public class AddressBookTest {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(ALICE).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        ConthacksStub newData = new ConthacksStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> conthacks.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> conthacks.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInConthacks_returnsFalse() {
+        assertFalse(conthacks.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInConthacks_returnsTrue() {
+        conthacks.addPerson(ALICE);
+        assertTrue(conthacks.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInConthacks_returnsTrue() {
+        conthacks.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(conthacks.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> conthacks.getPersonList().remove(0));
     }
 
     @Test
-    public void sortAddressBookByName_success() {
+    public void sortConthacksByName_success() {
         List<Person> persons = new ArrayList<>();
         persons.add(BOB);
         persons.add(ALICE);
-        addressBook.setPersons(persons);
+        conthacks.setPersons(persons);
 
-        AddressBook expectedAddressBook = new AddressBook();
+        Conthacks expectedConthacks = new Conthacks();
         List<Person> expectedPersons = new ArrayList<>();
         expectedPersons.add(ALICE);
         expectedPersons.add(BOB);
-        expectedAddressBook.setPersons(expectedPersons);
+        expectedConthacks.setPersons(expectedPersons);
 
-        addressBook.sortAddressBook();
-        assertEquals(expectedAddressBook, addressBook);
+        conthacks.sortConthacks();
+        assertEquals(expectedConthacks, conthacks);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyConthacks whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ConthacksStub implements ReadOnlyConthacks {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<ModuleLesson> classes = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        ConthacksStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
