@@ -98,4 +98,9 @@ public class AppointmentCountTest {
         // invalid input
         assertFalse(AppointmentCount.isValidDecrementCount(new AppointmentCount("0")));
     }
+
+    @Test
+    public void getDefaultAppointmentCount() {
+        assertTrue(AppointmentCount.getDefaultAppointmentCount().equals(new AppointmentCount("0")));
+    }
 }

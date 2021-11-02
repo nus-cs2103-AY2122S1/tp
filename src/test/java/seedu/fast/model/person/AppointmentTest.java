@@ -175,4 +175,11 @@ public class AppointmentTest {
 
         assertFalse(Appointment.isAppointmentEmpty(nonEmptyAppointment));
     }
+
+    @Test
+    public void getDefaultAppointment() {
+        Appointment emptyAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        assertTrue(Appointment.getDefaultAppointment().equals(emptyAppointment));
+    }
 }

@@ -172,7 +172,16 @@ public class Appointment {
      * @return A boolean indicating whether the appointment has been scheduled.
      */
     public static boolean isAppointmentEmpty(Appointment appointment) {
-        return appointment.getDate().equalsIgnoreCase(NO_APPOINTMENT);
+        return appointment.equals(getDefaultAppointment());
+    }
+
+    /**
+     * Generates an empty {@code Appointment}.
+     *
+     * @return An empty Appointment.
+     */
+    public static Appointment getDefaultAppointment() {
+        return new Appointment(NO_APPOINTMENT, NO_TIME, NO_VENUE);
     }
 
 

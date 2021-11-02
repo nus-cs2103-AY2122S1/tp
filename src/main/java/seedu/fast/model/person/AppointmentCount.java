@@ -68,6 +68,15 @@ public class AppointmentCount {
         return (test.count >= 1);
     }
 
+    /**
+     * Generates the default {@code AppointmentCount}.
+     *
+     * @return An {@code AppointmentCount} with zero count.
+     */
+    public static AppointmentCount getDefaultAppointmentCount() {
+        return new AppointmentCount(INITIAL_COUNT);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(count);

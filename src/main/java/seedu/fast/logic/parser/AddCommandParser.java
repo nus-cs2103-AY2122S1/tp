@@ -37,8 +37,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+        boolean areCompulsoryFieldsMissing = !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
+                PREFIX_PHONE, PREFIX_EMAIL);
+        boolean isPreambleNotEmpty = !argMultimap.getPreamble().isEmpty();
+        if (areCompulsoryFieldsMissing || isPreambleNotEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -48,9 +50,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Remark remark = new Remark("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Appointment appointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
-                Appointment.NO_VENUE);
-        AppointmentCount count = new AppointmentCount(AppointmentCount.INITIAL_COUNT);
+        Appointment appointment = Appointment.getDefaultAppointment();
+        AppointmentCount count = AppointmentCount.getDefaultAppointmentCount();
 
         Person person = new Person(name, phone, email, address, remark, tagList, appointment, count);
 
