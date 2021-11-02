@@ -15,6 +15,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_EXAM_INDEX = "Exam index provided is invalid!";
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_WRONG_INDEX_NUM_FORMAT = "Expected %d indexes, got %d instead";
-    public static final String MESSAGE_INVALID_INDEX_GIVEN = "Index provided is invalid, did you ensure that it is "
-            + "a positive integer and less than 2,147,483,648";
+    public static final String MESSAGE_INVALID_INDEX_GIVEN = "Index provided is invalid, did you ensure that each "
+            + "index is a positive integer and less than 2,147,483,648";
 }
