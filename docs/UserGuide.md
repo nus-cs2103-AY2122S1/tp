@@ -50,7 +50,7 @@ The third will open the help window and the last will exit the application.
 ### Viewing data
 
 Resident and Event information is organized in this panel. <br>
-You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#Viewing residents information))
+You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#viewing-residents-information--view))
 > Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
 > 
 > Vaccinated residents include the syringe icon towards the right-side of the card
@@ -62,7 +62,7 @@ You can view details about a resident/event by clicking on it. (Also achievable 
 ### Interacting
 
 This is where you can enter commands to interact with the data. <br>
-The [Command Suggestion](#Command suggestion) box will suggest parameters on typing. <br>
+The [Command Suggestion](#command-suggestion) box will suggest parameters on typing. <br>
 The result of executing the input command will be displayed the lower-most box.
 
 ![Ui](images/commandBox.png)
@@ -169,20 +169,21 @@ Shows a list of residents that match the provided keywords for different availab
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `r/`, `e`, `p/`, `f/` and `v/`
-* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#Listing residents by fet/collection deadlines) on how to make use of these fields.
+* Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
+* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
-    - Only full words will be matched e.g `Han` will not match `Hans`
+    - Only full words will be matched. e.g `Han` will not match `Hans`
     - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
   e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Searching by room:
+    - It is case-sensitive. Block letters must be capitalised.
     - A block can be used as a search. e.g `r/A`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
     - A full valid room can be used as a search. e.g `r/A210`
-* All other fields are subject to the same validity conditions as in the [Add Command](#Adding a resident's information)
+* All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -307,7 +308,7 @@ Examples:
 
 Edits an existing event in the address book.
 
-Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
+Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CAPACITY]`
 
 * Edits the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
@@ -316,7 +317,22 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+*  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+
+#### Deleting an event : `delete`
+
+Deletes specified events from the address book.
+
+Format: `delete INDEX…`
+
+* Delete the events at the specified `INDEX…`.
+* Each index refers to the index number shown in the displayed event list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* Delete multiple events in a single command by inputting multiple indexes, each separated by a space.
+
+Examples:
+* `view` followed by `delete 1 2 3` deletes the first 3 events in the address book.
+* `find n/Football Training` followed by `delete 1` deletes the 1st event named Football Training in the results of the `find` command.
 
 #### Add residents to an event: `include`
 
