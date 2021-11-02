@@ -523,7 +523,74 @@ public class SampleDataUtil {
                     new Description("This module exposes the graduate students to the fundamental theory of "
                             + "speech processing, focusing primarily on automatic speech "
                             + "recognition."), new Mc(4),
-                    getTagSet("breadth and depth"))
+                    getTagSet("breadth and depth")),
+
+            new Module(new Code("CS3103"), new Title("Computer Networks Practice"),
+                    new Description("This module aims to provide an opportunity for the students to learn"
+                            + " commonly-used network protocols in greater technical depth with their "
+                            + "implementation details than a basic networking course. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4222"), new Title("Wireless Networking"),
+                    new Description("This module aims to provide solid foundation for students in the area of "
+                            + "wireless networks and introduces students to the emerging area of "
+                            + "cyber-physical-system/Internet-of-Things. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4226"), new Title("Internet Architecture"),
+                    new Description("This module aims to focus on advanced networking concepts pertaining to "
+                            + "the modern Internet architecture and applications. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS3237"), new Title("Introduction to Internet of Things"),
+                    new Description("The Internet of Things (IoT), where a large number of physical objects"
+                            + " embedded with computing power and sensors connect to the network for seamless "
+                            + "cooperation between the cyber domain and the physical world, is revolutionizing "
+                            + "our lives. "), new Mc(4),
+                        getTagSet("breadth and depth")),
+            new Module(new Code("CS4344"), new Title("Networked and Mobile Gaming"),
+                    new Description("This module aims at providing students a deep understanding of various"
+                            + " technical issues pertaining to the development of networked games and mobile"
+                            + " games. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5223"), new Title("Distributed Systems"),
+                    new Description("The topic of Distributed Systems is now garnering increasing importance, "
+                            + "especially with the advancement in technology of the Internet and WWW. The aim of"
+                            + " this module is to provide students with basic concepts and principles of"
+                            + " distributed operating systems, interprocess communications, distributed file"
+                            + " systems, shared data, and the middleware approach. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5224"), new Title("Cloud Computing"),
+                    new Description("This module aims to provide an overview of the design, management and "
+                            + "application of cloud computing. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5229"), new Title("Advanced Computer Networks"),
+                    new Description("This course covers advanced fundamental principles of computer networks"
+                            + " and techniques for networking. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5248"), new Title("Systems Support for Continuous Media"),
+                    new Description("This module is targeted at computer science graduate students and covers"
+                            + " the major aspects of building streaming media applications -- from coding to "
+                            + "transmission to playback. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS3210"), new Title("Parallel Computing"),
+                    new Description("The aim of this module is to provide an introduction to the field of "
+                            + "parallel computing with hands-on parallel programming experience on real "
+                            + "parallel machines. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4223"), new Title("Multi-core Architectures"),
+                    new Description("The world of parallel computer architecture has gone through a "
+                            + "significant transformation in the recent years from high-end supercomputers "
+                            + "used only for scientific applications to the multi-cores (multiple processing "
+                            + "cores on a single chip) that are ubiquitous in mainstream computing systems "
+                            + "including desktops, servers, and embedded systems. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5222"), new Title("Advanced Computer Architecture"),
+                    new Description("The aim of this module is to introduce the state-of-the-art architectural"
+                            + " advances underlying the current generation of computing systems. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5239"), new Title("Computer System Performance Analysis"),
+                    new Description("The objective of this module is to provide students a working knowledge"
+                        + " of computer performance evaluation and capacity planning. "), new Mc(4),
+                    getTagSet("breadth and depth")),
+
         };
     }
 
