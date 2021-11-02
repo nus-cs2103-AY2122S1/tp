@@ -61,27 +61,23 @@ public class ExportCommand extends Command {
      * @return the converted {@code List<String>} of the facility's data.
      */
     private List<String> convertToList(Facility facility) {
-//        if (facility.getPersonAllocatedList().isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        List<String> rowData = new ArrayList<>();
-//        String facilityName = facility.getName().facilityName;
-//        rowData.add(facilityName);
-//
-//        String location = facility.getLocation().location;
-//        rowData.add(location);
-//
-//        String time = facility.getTime().time;
-//        rowData.add(time);
-//
-//        String capacity = facility.getCapacity().capacity;
-//        rowData.add(capacity);
-//
-//        String allocatedMembers = facility.getPersonsAsString();
-//        allocatedMembers = allocatedMembers.replaceAll(",", " |");
-//        rowData.add(allocatedMembers);
-//
-//        return rowData;
-        return new ArrayList<>();
+        List<String> rowData = new ArrayList<>();
+        String facilityName = facility.getName().facilityName;
+        rowData.add(facilityName);
+
+        String location = facility.getLocation().location;
+        rowData.add(location);
+
+        String time = facility.getTime().time;
+        rowData.add(time);
+
+        String capacity = facility.getCapacity().capacity;
+        rowData.add(capacity);
+
+        String allocatedMembers = facility.getAllocationMap().toString();
+        allocatedMembers = allocatedMembers.replaceAll(",", " |").replaceAll("\n", " ");
+        rowData.add(allocatedMembers);
+
+        return rowData;
     }
 }
