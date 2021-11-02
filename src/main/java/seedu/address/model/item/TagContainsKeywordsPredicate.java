@@ -1,18 +1,18 @@
 package seedu.address.model.item;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Item}'s {@code tag} matches any of the keywords given.
  */
 public class TagContainsKeywordsPredicate implements Predicate<Item> {
-    private final List<String> keywords;
+    private final Collection<Tag> keytags;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public TagContainsKeywordsPredicate(Collection<Tag> keytags) {
+        this.keytags = keytags;
     }
 
     @Override
@@ -21,17 +21,15 @@ public class TagContainsKeywordsPredicate implements Predicate<Item> {
         if (item.getTags().isEmpty()) {
             return false;
         }
-        String itemTag = item.getTags().toString().substring(2, lengthOfItemTag - 2);
-        boolean multipleWord = keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsMultipleWord(itemTag, keyword));
-        return multipleWord;
+
+        return item.getTags().stream().anyMatch(keytags::contains);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
+                && keytags.equals(((TagContainsKeywordsPredicate) other).keytags)); // state check
     }
 
 }

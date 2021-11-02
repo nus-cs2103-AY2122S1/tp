@@ -17,9 +17,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Item> {
 
     @Override
     public boolean test(Item item) {
-        boolean multipleWord = keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsMultipleWord(item.getName().fullName, keyword));
-        return multipleWord;
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.phrasesStartsWithQuery(item.getName().fullName, keyword));
     }
 
     @Override

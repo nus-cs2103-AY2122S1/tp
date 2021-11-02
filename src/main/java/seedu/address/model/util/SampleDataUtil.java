@@ -24,7 +24,7 @@ public class SampleDataUtil {
                     getTagSet("baked"), 3.0, 5.0),
             new Item(new Name("Oreo Cheesecake"), 109128, 1,
                     getTagSet("desert"), 4.0, 5.0),
-            new Item(new Name("Strawberry Shortcake"), 1991287, 2,
+            new Item(new Name("Strawberry Shortcake"), 199127, 2,
                     getTagSet("desert"), 2.1, 3.2),
             new Item(new Name("Cold Brew Coffee"), 121858, 5,
                     getTagSet("beverage"), 3.2, 4.4),
