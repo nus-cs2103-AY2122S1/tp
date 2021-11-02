@@ -158,12 +158,12 @@ public class DeleteCommand extends Command {
     }
 
     private CommandResult executeMultipleDelete(List<Person> lastShownList, Model model) throws CommandException {
+        sortOrder();
         ArrayList<Index> invalidIndexList = getInvalidIndex(lastShownList);
         String invalidIndexString = getInvalidIndexMessage(invalidIndexList);
         String errorMsg = String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED, invalidIndexString);
         checkIndex(invalidIndexList, errorMsg);
         checkDuplicates(indexArray);
-        sortOrder();
 
         Index targetIndex;
         for (int i = 0; i < indexArray.length; i++) {

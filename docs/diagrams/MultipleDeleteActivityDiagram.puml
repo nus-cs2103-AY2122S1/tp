@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+title Mutiple Delete Flow
+
+start
+:FAST receives a multiple delete command;
+if () then ([valid command])
+:Parses the user input;
+if () then ([range input])
+:Check if input is in the valid format;
+:Extract the indexes to be deleted;
+:Check if number of indexes is less than 10
+and less than current number of clients in FAST;
+if () then ([valid number])
+:Check for duplicates;
+if () then ([no duplicates])
+:Check for invalid index;
+if () then ([no invalid indexes])
+:Delete the contacts;
+:Update Model and Storage;
+else ([invalid indexes])
+- Thrown Exception
+endif
+else ([duplicates])
+- Throw Exception
+endif
+else ([invalid number])
+- Throw Exception
+endif
+else ([multiple indexes input])
+endif
+else ([invalid command])
+- Throw Exception
+endif
+:Displays message;
+stop
+
+@enduml
