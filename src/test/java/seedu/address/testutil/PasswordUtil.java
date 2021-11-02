@@ -7,7 +7,7 @@ import seedu.address.logic.commands.PasswordCommand;
 
 public class PasswordUtil {
     /**
-     * Returns an password command string for adding the {@code person}.
+     * Returns a password command string for adding the {@code person}.
      */
     public static String getPasswordCommand(String oldPassword, String newPassword) {
         return PasswordCommand.COMMAND_WORD + " " + getPasswordDetails(oldPassword, newPassword);
@@ -17,23 +17,24 @@ public class PasswordUtil {
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPasswordDetails(String oldPassword, String newPassword) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_OLD_PASSWORD + oldPassword + " ");
-        sb.append(PREFIX_NEW_PASSWORD + newPassword + " ");
-        return sb.toString();
+        return PREFIX_OLD_PASSWORD + " " + oldPassword + " " +
+                PREFIX_NEW_PASSWORD + " " + newPassword + " ";
     }
 
+    /**
+     * Returns a password command argument string with some repeated flags.
+     */
     public static String getRepeatedFlag(String oldPassword, String newPassword) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_OLD_PASSWORD + oldPassword + " ");
-        sb.append(PREFIX_OLD_PASSWORD + oldPassword + " ");
-        sb.append(PREFIX_NEW_PASSWORD + newPassword + " ");
-        return PasswordCommand.COMMAND_WORD + " " + sb;
+        return PasswordCommand.COMMAND_WORD + " " +
+                PREFIX_OLD_PASSWORD + " " + oldPassword + " " +
+                PREFIX_OLD_PASSWORD + " " + oldPassword + " " +
+                PREFIX_NEW_PASSWORD  + " " + newPassword + " ";
     }
 
+    /**
+     * Returns a password command argument string with a missing flag.
+     */
     public static String getMissingFlag(String oldPassword) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_OLD_PASSWORD + oldPassword + " ");
-        return PasswordCommand.COMMAND_WORD + " " + sb;
+        return PasswordCommand.COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " " + oldPassword;
     }
 }
