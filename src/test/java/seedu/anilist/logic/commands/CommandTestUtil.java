@@ -33,6 +33,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
+    public static final String VALID_NAME_MAX_LENGTH = "A".repeat(140);
     public static final String VALID_GENRE_ACTION = "action";
     public static final String VALID_GENRE_SCIENCE_FICTION = "sci fi";
     public static final String VALID_EPISODE_ONE = "1";
