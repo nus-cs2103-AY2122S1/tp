@@ -147,7 +147,6 @@ Format: `delete {INDEX | -a | -f}`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Displays a confirmation to delete all contacts returned from any previous find queries.
 * You can use the optional -f argument to clear all contacts from a previous find queries.
 * The -a argument deletes all contacts unless specified by the [-f] argument to delete only the previous find query.
 
