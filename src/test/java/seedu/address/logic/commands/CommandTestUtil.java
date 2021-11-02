@@ -114,7 +114,7 @@ public class CommandTestUtil {
     public static final String INVALID_TASKTAG_DESC = " " + PREFIX_TASK_TAG + "SOSO"; // wrong prefix and missing id
 
     public static final String INVALID_CUSTOMER_DESC = " " + PREFIX_CUSTOMER; // empty string not allowed for customers
-    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "20."; // no digit after dot
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "10000000000"; // too large
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -20,9 +20,16 @@ public class StatusBarFooter extends UiPart<Region> {
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public StatusBarFooter(Path addressBookLocation, Path taskBookLocation, Path orderBookLocation) {
         super(FXML);
-        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        String paths = getPath(addressBookLocation) + "; "
+                + getPath(taskBookLocation) + "; "
+                + getPath(orderBookLocation);
+        saveLocationStatus.setText(paths);
+    }
+
+    private String getPath(Path location) {
+        return Paths.get(".").resolve(location).toString();
     }
 
 }

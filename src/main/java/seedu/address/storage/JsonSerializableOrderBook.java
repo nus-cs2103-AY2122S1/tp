@@ -47,10 +47,22 @@ class JsonSerializableOrderBook {
      */
     public OrderBook toModelType() throws IllegalValueException {
         OrderBook orderBook = new OrderBook();
+        long localCount = 0;
+        ArrayList<Long> idList = new ArrayList<>();
+
         for (JsonAdaptedOrder jsonAdaptedOrder : orders) {
             Order order = jsonAdaptedOrder.toModelType();
             orderBook.addOrder(order);
+            if (localCount < order.getId()) {
+                localCount = order.getId();
+            }
+            if (idList.contains(order.getId())) {
+                throw new IllegalValueException("Order Id can not be duplicated");
+            } else {
+                idList.add(order.getId());
+            }
         }
+        Order.setCount(localCount + 1);
         return orderBook;
     }
 

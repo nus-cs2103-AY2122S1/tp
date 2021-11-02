@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindOrderCommand;
+import seedu.address.logic.commands.Keyword;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.order.OrderContainsKeywordsPredicate;
 
@@ -26,6 +27,12 @@ public class FindOrderCommandParser {
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
+        for (String keyword : nameKeywords) {
+            if (!Keyword.isValidKeyword(keyword)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrderCommand.MESSAGE_USAGE));
+            }
+        }
 
         return new FindOrderCommand(new OrderContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
