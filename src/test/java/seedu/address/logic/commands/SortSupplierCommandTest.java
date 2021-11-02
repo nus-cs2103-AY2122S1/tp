@@ -248,6 +248,9 @@ public class SortSupplierCommandTest {
         SortSupplierCommand sortByNameDescending =
                 new SortSupplierCommand(SupplierComparator.getNameComparator(false),
                         NAME_DESC, DESCENDING_DESC);
+        SortSupplierCommand sortByNameAscending =
+                new SortSupplierCommand(SupplierComparator.getNameComparator(true),
+                        NAME_DESC, ASCENDING_DESC);
         SortSupplierCommand sortByDeliveryDetailsAscending =
                 new SortSupplierCommand(SupplierComparator.getDeliveryDetailsComparator(true),
                         DELIVERY_DETAILS_DESC, ASCENDING_DESC);
@@ -268,6 +271,9 @@ public class SortSupplierCommandTest {
 
         // different sorting type -> returns false
         assertFalse(sortByNameDescending.equals(sortByDeliveryDetailsAscending));
+
+        //different sorting order -> returns false
+        assertFalse(sortByNameDescending.equals(sortByNameAscending));
     }
 
 }
