@@ -29,7 +29,8 @@ import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 public class RemoveMarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to remove the marking of an absentee.\n\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to remove the marking of an absentee."
+            + Messages.SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] "
             + "[" + PREFIX_DASH_NAME + " NAME] "
@@ -39,8 +40,7 @@ public class RemoveMarkCommand extends Command {
             + "[" + PREFIX_DASH_SALARY + " SALARY] "
             + "[" + PREFIX_DASH_STATUS + " STATUS] "
             + "[" + PREFIX_DASH_ROLE + " ROLE]... "
-            + PREFIX_DAY_SHIFT + "DATE "
-            + PREFIX_DAY_SHIFT + "DATE "
+            + Messages.DATE_RANGE_INPUT
             + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + "1"

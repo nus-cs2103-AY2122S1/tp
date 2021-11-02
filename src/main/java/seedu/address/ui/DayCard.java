@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -40,9 +39,8 @@ public class DayCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public DayCard(DayOfWeek day, ObservableList<Person> stafflist) {
+    public DayCard(DayOfWeek day, ObservableList<Person> stafflist, Period currentPeriod) {
         super(FXML);
-        Period currentPeriod = new Period(LocalDate.now(), LocalDate.now().plusDays(30));
         this.day = day;
         dayLabel.setText(day.toString().substring(0, 3));
         slotPane.getChildren().addAll(new SlotCard(day, Slot.MORNING, stafflist, currentPeriod).getRoot(),

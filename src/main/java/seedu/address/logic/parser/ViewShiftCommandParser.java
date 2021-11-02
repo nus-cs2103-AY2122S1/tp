@@ -51,9 +51,7 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
         int slotNum = ViewShiftCommand.INVALID_SLOT_NUMBER;
         DayOfWeek dayOfWeek = null; // should not be null when ViewShiftCommand object is created
         LocalTime time = null;
-        LocalDate[] dates = new LocalDate[2];
-        dates[0] = LocalDate.now();
-        dates[1] = dates[0].plusDays(7);
+        LocalDate[] dates = ParserUtil.initializeLocalDateToThisWeek();
         try {
             // remove the prefix, then parse
             if (argMultimap.getValue(PREFIX_DASH_TIME).isPresent()) {

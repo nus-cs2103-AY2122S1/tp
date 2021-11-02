@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -62,8 +63,11 @@ public class RecurrencePeriod extends Period {
         return this.period;
     }
 
-    public long getWorkingHour() {
-        return Duration.between(this.startTime, this.endTime).toHours();
+    public long getWorkingHour(DayOfWeek day, Period period) {
+        long numOfTimes = this.toList().stream()
+                .filter(d -> period.contains(d))
+                .filter(d -> d.getDayOfWeek().equals(day)).count();
+        return Duration.between(this.startTime, this.endTime).toHours() * numOfTimes;
     }
 
     /**
@@ -82,9 +86,9 @@ public class RecurrencePeriod extends Period {
                 .map(p -> p.getPeriod())
                 .collect(Collectors.toList());
         underlyingPeriods = this.period.union(underlyingPeriods);
-        result = underlyingPeriods.stream()
+        result.addAll(underlyingPeriods.stream()
                 .map(p -> new RecurrencePeriod(p, startTime, endTime))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
         return result;
 
     }
@@ -119,8 +123,12 @@ public class RecurrencePeriod extends Period {
                 || time.isBefore(endTime) && time.isAfter(startTime);
     }
 
-    @Override
-    public String toString() {
+
+    /**
+     * Print result for viewSchedule command.
+     *
+     */
+    public String toPrintString() {
         return getStartTime() + "-" + getEndTime();
     }
 }

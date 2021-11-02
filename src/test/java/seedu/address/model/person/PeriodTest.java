@@ -53,8 +53,6 @@ public class PeriodTest {
         Period testPeriodBeforeMid = new Period(TEST_DATE, BEFORE_TEST_DATE);
         assertFalse(testPeriodBeforeMid.contains(PAST_TEST_DATE));
 
-
-
     }
 
 
@@ -126,6 +124,14 @@ public class PeriodTest {
     }
 
     @Test
+    public void test_intersect() {
+        Period testPeriod = createPeriod(1, 10);
+        Collection<Period> set = List.of(createPeriod(1, 3), createPeriod(1, 5));
+        assertEquals(set, testPeriod.intersect(set));
+    }
+
+
+    @Test
     public void test_toList() {
         Period testPeriod = createPeriod(1, 16);
         List<LocalDate> expected = createDates(1, 16);
@@ -140,11 +146,6 @@ public class PeriodTest {
 
     }
 
-
-
-
-
-
     private void assertNotEqual(Collection<Period> expected, Collection<Period> actual) {
         assertFalse(expected.containsAll(actual) && actual.containsAll(expected));
     }
@@ -154,9 +155,6 @@ public class PeriodTest {
         assertTrue(expected.containsAll(actual));
         assertTrue(actual.containsAll(expected));
     }
-
-
-
 
     @Test
     public void equals() {
