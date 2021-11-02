@@ -35,8 +35,8 @@ public class CommandHistory {
     public String getPrevCommand() {
         // We should not call getPrevCommand() if the counter is already at the oldest command.
         assert !isCounterAtFirst();
-        String result = commandHistory.get(currCommandIndex);
         currCommandIndex--;
+        String result = commandHistory.get(currCommandIndex);
         logger.info("Previous Command retrieved: " + result);
         return result;
     }
@@ -49,8 +49,8 @@ public class CommandHistory {
     public String getNextCommand() {
         // We should not call getNextCommand() if the counter is already at the latest command.
         assert !isCounterAtLast();
-        String result = commandHistory.get(currCommandIndex);
         currCommandIndex++;
+        String result = commandHistory.get(currCommandIndex);
         logger.info("Next Command retrieved: " + result);
         return result;
     }

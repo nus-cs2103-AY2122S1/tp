@@ -82,6 +82,7 @@ public class CommandBox extends UiPart<Region> {
         if (upPressed && lastWasSuccess) {
             commandTextField.setText(commandHistory.getCurrentCommand());
             lastWasSuccess = false;
+            commandTextField.end();
             return;
         }
 
