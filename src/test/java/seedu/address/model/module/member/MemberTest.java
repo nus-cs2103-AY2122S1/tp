@@ -40,9 +40,9 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
         Assertions.assertFalse(ALICE.isSameType(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Member editedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        Assertions.assertFalse(BOB.isSameType(editedBob));
+        Assertions.assertTrue(BOB.isSameType(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
