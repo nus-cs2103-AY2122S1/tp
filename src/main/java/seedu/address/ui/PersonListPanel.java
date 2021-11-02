@@ -47,6 +47,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
+                // Get Model of which person is selected in the left pane.
                 MultipleSelectionModel<Person> selectedPersonModel = personListView.getSelectionModel();
                 Person selectedPerson = selectedPersonModel.getSelectedItem();
                 if (selectedPerson != null) {
