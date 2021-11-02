@@ -113,6 +113,7 @@ Miscellaneous data fields| 8. `r/` : Remark <br><br> 9. `int/` : Interaction <br
 :information_source: Elaboration on valid items
 * Valid items of the **faculty** field must be entered in lower case. A future patch will allow case-insensitive valid entries. 
 * The **major** field currently takes any alphanumeric item. A future patch will ensure major is tied to a valid faculty.
+* Items in *ComputingConnection* are sorted alphanumerically, from **upper case** to **lower case**.
 </div>
 
 ### Structure of an Organisation
