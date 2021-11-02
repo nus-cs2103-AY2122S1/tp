@@ -17,11 +17,13 @@ import seedu.address.model.order.Order;
 public class TypicalOrders {
 
     public static final Order SALESORDER1 = new OrderBuilder().withCustomer("Josh")
-            .withDate("2021-09-18").withAmount("10").build();
+            .withDate("2021-09-18").withAmount("10").withIsComplete(true).build();
     public static final Order SALESORDER2 = new OrderBuilder().withCustomer("Mac")
-            .withDate("2021-09-19").withAmount("15").withIsComplete(true).build();
+            .withDate("2021-09-19").withAmount("20").withIsComplete(true).build();
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
-            .withDate("2021-09-20").withAmount("20").withIsComplete(true).build();
+            .withDate("2021-09-20").withAmount("15").withIsComplete(true).build();
+    public static final Order SALESORDER4 = new OrderBuilder().withCustomer("Justin")
+            .withDate("2021-09-20").withAmount("20").build();
 
     // Manually added - Order's details found in {@code CommandTestUtil}
     public static final Order ORDER = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
@@ -34,14 +36,14 @@ public class TypicalOrders {
      */
     public static OrderBook getTypicalOrderBook() {
         OrderBook sb = new OrderBook();
-        for (Order order : getTypicalOrder()) {
+        for (Order order : getTypicalOrders()) {
             sb.addOrder(order);
         }
         return sb;
     }
 
-    public static List<Order> getTypicalOrder() {
-        return new ArrayList<>(Arrays.asList(SALESORDER1, SALESORDER2, SALESORDER3));
+    public static List<Order> getTypicalOrders() {
+        return new ArrayList<>(Arrays.asList(SALESORDER1, SALESORDER2, SALESORDER3, SALESORDER4));
     }
 
 }
