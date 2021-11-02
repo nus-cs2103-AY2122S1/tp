@@ -471,7 +471,7 @@ This feature is additionally facilitated by the following operations:
 
 To represent a lesson and its details, a `Lesson` class is introduced. Its class diagram can be seen below.
 
-<img src="images/LessonClassDiagram.png" />
+<img src="images/LessonClassDiagram.png" width="500"/>
 
 Given below is an example usage scenario for adding a lesson to TutorAid, and how the command is executed.
 
@@ -490,7 +490,7 @@ its execution and `ParseException` will be thrown.
 
 Below is the sequence diagram that depicts the parsing of the command `add -l n/Maths 1 c/15`, and the instantiation of the `AddLessonCommand` object.
 
-<img src="images/ParseAddLessonCommandSequenceDiagram.png" />
+<img src="images/ParseAddLessonCommandSequenceDiagram.png" height="250"/>
 
 5. `AddLessonCommand#execute()` is then called to add the lesson to TutorAid. 
 
