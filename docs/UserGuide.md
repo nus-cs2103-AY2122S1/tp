@@ -99,8 +99,8 @@ Exits ProgrammerError and closes the GUI.
 ### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
 Fills the program with sample data if no data is already present. Otherwise, throws an error message.
 
-<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
-As this is a mass operation, it might take a couple of seconds to complete.*
+<div markdown="span" class="alert alert-warning">:exclamation: **Note:**
+As this is a mass operation, it might take a couple of seconds to complete.
 </div>
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
@@ -113,11 +113,15 @@ file to.
 ### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
 Uploads student data via a CSV file with **only** the following fields: student ID, class ID, name, email 
 
-Note that the CSV should **not** contain students' lab results since this functionality is only meant for the TA to
+<div markdown="span" class="alert alert-warning">:exclamation: **Note:**
+
+the CSV should **not** contain students' lab results since this functionality is only meant for the TA to
 automating the adding of **students** to PE.
 - As such, simply uploading the CSV obtained via the `download` command will not be accepted
 - Furthermore, if there are already existing students, the upload will **overwrite** the existing data rather than append to it.
-This is because in a typical use case, the TA would not want to have the existing data kept if they would like to use student data from their own CSV file.
+  This is because in a typical use case, the TA would not want to have the existing data kept if they would like to use student data from their own CSV file.
+
+</div>
 
 In summary:
 1. Select a valid CSV file from the file chooser to upload the student data from.
@@ -197,7 +201,9 @@ Displays a list of all students in the left panel. This list is ordered first by
 
 ## <a name="lab-features"></a>4. Lab Features
 
-*Note: As the following commands are mass operations, they might take slighty longer than usual.*
+<div markdown="span" class="alert alert-warning">:exclamation: **Note:**
+As the following commands are mass operations, they might take slighty longer than usual.
+</div>
 
 ### <a name="add-lab"></a>4.1 Add Lab: `addlab`
 Adds a lab to every student with the lab number and total score.
