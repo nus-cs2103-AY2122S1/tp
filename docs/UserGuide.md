@@ -299,7 +299,7 @@ Format: `filter mod/MODULE_CODE [GROUP_STATUS]`
 * You can filter by profiles who need to join or form a group ('need group') or profiles who need members for their group ('need member').
 * `MODULE_CODE` is required for filtering by group status. The filter will return the profiles with the specified group status of the specified module.
 
-Examples (will change screenshot after javafx stuff done):
+Examples
 * `filter mod/CS2100`
 * `filter mod/CS2100 need member`
 * `filter mod/CS2100 need group`
