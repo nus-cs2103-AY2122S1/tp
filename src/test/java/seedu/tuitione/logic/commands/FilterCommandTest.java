@@ -1,8 +1,10 @@
 package seedu.tuitione.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_LESSON_FOUND_OVERVIEW;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.testutil.TypicalTuition.BENSON;
 import static seedu.tuitione.testutil.TypicalTuition.MATH_S2;
@@ -12,23 +14,40 @@ import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.ModelManager;
 import seedu.tuitione.model.UserPrefs;
+import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGradeAndSubject;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedSubject;
 import seedu.tuitione.model.lesson.Subject;
 import seedu.tuitione.model.student.Grade;
+import seedu.tuitione.model.student.Student;
 import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
+import seedu.tuitione.testutil.LessonBuilder;
+import seedu.tuitione.testutil.StudentBuilder;
 
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalTuitione(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalTuitione(), new UserPrefs());
+
+    private Model model;
+    private Model expectedModel;
+    private Student localBenson;
+    private Lesson localMathS2;
+
+    @BeforeEach
+    public void setup() {
+        model = new ModelManager(getTypicalTuitione(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalTuitione(), new UserPrefs());
+        localBenson = new StudentBuilder(BENSON).build();
+        localMathS2 = new LessonBuilder(MATH_S2).build();
+        localBenson.enrollForLesson(localMathS2);
+    }
 
     @Test
     public void equals() {
@@ -43,41 +62,41 @@ public class FilterCommandTest {
         FilterCommand filterSecondCommand = new FilterCommand(secondGrade, mathSubject);
 
         // same object -> returns true
-        assertTrue(filterFirstCommand.equals(filterFirstCommand));
+        assertEquals(filterFirstCommand, filterFirstCommand);
 
         // same object, one field is null -> returns true
-        assertTrue(filterFirstCommandWithoutGrade.equals(filterFirstCommandWithoutGrade));
-        assertTrue(filterFirstCommandWithoutSubject.equals(filterFirstCommandWithoutSubject));
+        assertEquals(filterFirstCommandWithoutGrade, filterFirstCommandWithoutGrade);
+        assertEquals(filterFirstCommandWithoutSubject, filterFirstCommandWithoutSubject);
 
         // same values -> returns true
         FilterCommand filterFirstCommandCopy = new FilterCommand(firstGrade, engSubject);
-        assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
+        assertEquals(filterFirstCommand, filterFirstCommandCopy);
 
         // same values, one field is null -> returns true
         FilterCommand filterFirstCommandWithoutSubjectCopy = new FilterCommand(firstGrade, null);
         FilterCommand filterFirstCommandWithoutGradeCopy = new FilterCommand(null, engSubject);
-        assertTrue(filterFirstCommandWithoutSubject.equals(filterFirstCommandWithoutSubjectCopy));
-        assertTrue(filterFirstCommandWithoutGrade.equals(filterFirstCommandWithoutGradeCopy));
+        assertEquals(filterFirstCommandWithoutSubject, filterFirstCommandWithoutSubjectCopy);
+        assertEquals(filterFirstCommandWithoutGrade, filterFirstCommandWithoutGradeCopy);
 
         // different types -> returns false
-        assertFalse(filterFirstCommand.equals(1));
+        assertNotEquals(1, filterFirstCommand);
 
         // null -> returns false
-        assertFalse(filterFirstCommand.equals(null));
+        assertNotEquals(null, filterFirstCommand);
 
         // both fields different values -> returns false
-        assertFalse(filterFirstCommand.equals(filterSecondCommand));
+        assertNotEquals(filterFirstCommand, filterSecondCommand);
 
         // one field same value -> returns false
-        assertFalse(filterFirstCommand.equals(filterFirstCommandWithoutSubject));
-        assertFalse(filterFirstCommand.equals(filterFirstCommandWithoutGrade));
+        assertNotEquals(filterFirstCommand, filterFirstCommandWithoutSubject);
+        assertNotEquals(filterFirstCommand, filterFirstCommandWithoutGrade);
     }
 
     @Test
     public void execute_gradeNotFoundInTuitione_noStudentFoundnoLessonFound() {
-        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
+        String expectedMessage = String.format("ℹ\tUpdate:\n" + MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
                 + "\n"
-                + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
+                + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, 0);
         Grade grade = new Grade("S4");
         FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
@@ -89,7 +108,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_subjectNotFoundInTuitione_noLessonFound() {
-        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
+        String expectedMessage = String.format(HEADER_UPDATE + MESSAGE_LESSON_FOUND_OVERVIEW, 0);
         Subject subject = new Subject("Chemistry");
         FilterCommand command = new FilterCommand(null, subject);
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
@@ -99,46 +118,42 @@ public class FilterCommandTest {
 
     @Test
     public void execute_gradeFoundInTuitione_studentFoundLessonFound() {
-        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
+        String expectedMessage = String.format(HEADER_UPDATE + MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
-                + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 2);
+                + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, 2);
         Grade grade = new Grade("S2");
-        MATH_S2.enrollStudent(BENSON);
         FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON), model.getFilteredStudentList());
-        assertEquals(Arrays.asList(MATH_S2, PHYSICS_S2), model.getFilteredLessonList());
-        MATH_S2.unenrollStudent(BENSON);
+        assertEquals(List.of(localBenson), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(localMathS2, PHYSICS_S2), model.getFilteredLessonList());
     }
 
     @Test
     public void execute_subjectFoundInTuitione_lessonFound() {
-        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
+        String expectedMessage = String.format(HEADER_UPDATE + MESSAGE_LESSON_FOUND_OVERVIEW, 1);
         Subject subject = new Subject("Science");
         FilterCommand command = new FilterCommand(null, subject);
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(SCIENCE_P2), model.getFilteredLessonList());
+        assertEquals(List.of(SCIENCE_P2), model.getFilteredLessonList());
     }
 
     @Test
     public void execute_gradeFoundSubjectFoundInTuitione_studentFoundLessonFound() {
-        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
+        String expectedMessage = String.format(HEADER_UPDATE + MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
-                + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
+                + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, 1);
         Grade grade = new Grade("S2");
         Subject subject = new Subject("Mathematics");
-        MATH_S2.enrollStudent(BENSON);
         FilterCommand command = new FilterCommand(grade, subject);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGradeAndSubject(grade, subject));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON), model.getFilteredStudentList());
-        assertEquals(Arrays.asList(MATH_S2), model.getFilteredLessonList());
-        MATH_S2.unenrollStudent(BENSON);
+        assertEquals(List.of(localBenson), model.getFilteredStudentList());
+        assertEquals(List.of(localMathS2), model.getFilteredLessonList());
     }
 }

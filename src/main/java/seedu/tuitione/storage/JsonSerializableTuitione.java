@@ -136,7 +136,8 @@ class JsonSerializableTuitione {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
             }
             if (!lesson.isAbleToEnroll(student)) {
-                throw new IllegalValueException(String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName()));
+                throw new IllegalValueException(String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT,
+                        student.getName(), lesson.getLessonCode()));
             }
             lesson.enrollStudent(student);
         }

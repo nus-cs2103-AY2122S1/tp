@@ -1,6 +1,9 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT_FOUND;
+import static seedu.tuitione.commons.core.Messages.generateAlert;
+import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -8,6 +11,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.tuitione.model.student.Student.ENROLLMENT_REMARK_COUNT_CONSTRAINT;
 import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
 
 import java.util.Collections;
@@ -52,16 +56,13 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "✔\tSuccess:\n\nEdited Student: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "⚠\tAlert:\n\nAt least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT =
-            "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
-    public static final String MESSAGE_T00_MANY_REMARKS =
-            "⚠\tAlert:\n\nThe amount of remarks tagged to this student will exceed the limit of 5! "
-                    + "\nYou can only add %d more unique remark(s).";
-    public static final String MESSAGE_NO_SUCH_REMARK_FOUND =
-            "⚠\tAlert:\n\nThe remark(s) you wish to remove does not exist!"
-                    + "\nPlease check your spelling and formatting.";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = generateSuccess("Edited Student: %1$s");
+    public static final String MESSAGE_NOT_EDITED = generateAlert("At least one field to edit must be provided.");
+    public static final String MESSAGE_DUPLICATE_STUDENT = generateAlert(MESSAGE_DUPLICATE_STUDENT_FOUND);
+    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(ENROLLMENT_REMARK_COUNT_CONSTRAINT
+            + "\nYou can only add %d more unique remark(s).");
+    public static final String MESSAGE_NO_SUCH_REMARK_FOUND = generateAlert("The remark(s) you wish to "
+            + "remove does not exist.");
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -83,26 +84,28 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
 
+        // grab student from list
+        List<Student> lastShownList = model.getFilteredStudentList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-
         Student studentToEdit = lastShownList.get(index.getZeroBased());
+
+        // check if it conflicts with another unique student
         List<Lesson> studentLessons = studentToEdit.getLessons();
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
-
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        // update lessons associated with student to edit
         while (!studentLessons.isEmpty()) {
             Lesson lesson = studentLessons.get(0);
             if (editStudentDescriptor.gradeIsEdited) {
                 lesson.unenrollStudent(studentToEdit);
             } else {
-                // grade is not modified, hence must be updated in lessons
+                // grade is not modified, hence must be update lessons about student change
                 lesson.updateStudent(studentToEdit, editedStudent);
             }
             model.setLesson(lesson, lesson);
@@ -141,7 +144,7 @@ public class EditCommand extends Command {
 
         for (Remark remark : remarksToAdd) {
             if (updatedRemarks.size() >= MAX_REMARK_SIZE) {
-                throw new CommandException(String.format(MESSAGE_T00_MANY_REMARKS,
+                throw new CommandException(String.format(MESSAGE_TOO_MANY_REMARKS,
                         MAX_REMARK_SIZE - numOfExistingRemarks));
             }
             updatedRemarks.add(remark);

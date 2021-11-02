@@ -18,7 +18,7 @@ import seedu.tuitione.model.student.Student;
 public class Lesson {
 
     public static final int MAX_LESSON_SIZE = 15;
-    public static final String UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT = "%1$s is unable to enroll for this lesson";
+    public static final String UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT = "%1$s is unable to enroll for %2$s";
     public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has"
             + String.format("%1$d students enrolled, and cannot enroll anymore students.", MAX_LESSON_SIZE);
     public static final String STUDENT_NOT_ENROLLED = "%1$s is not enrolled for %2$s";
@@ -163,7 +163,8 @@ public class Lesson {
      */
     public void enrollStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToEnroll(student), String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName()));
+        checkArgument(isAbleToEnroll(student),
+                String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName(), this.getLessonCode()));
         addStudent(student);
     }
 
@@ -203,7 +204,7 @@ public class Lesson {
             if (student.isSameStudent(oldStudent)) {
                 removeStudent(oldStudent);
                 checkArgument(isAbleToEnroll(newStudent),
-                        String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, newStudent.getName()));
+                        String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, newStudent.getName(), this));
                 addStudent(newStudent);
                 return;
             }

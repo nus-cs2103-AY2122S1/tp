@@ -185,7 +185,8 @@ public class LessonTest {
 
         // we edit a student to have a different grade
         Student wrongGradeStudent = sb.withGrade("P5").build();
-        String expectedMessage = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, wrongGradeStudent.getName());
+        String expectedMessage = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT,
+                wrongGradeStudent.getName(), defaultLesson);
         assertThrows(IllegalArgumentException.class, expectedMessage, () ->
                 defaultLesson.updateStudent(student, wrongGradeStudent));
     }

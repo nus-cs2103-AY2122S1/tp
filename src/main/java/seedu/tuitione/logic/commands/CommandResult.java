@@ -1,10 +1,6 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
-import static seedu.tuitione.commons.core.Messages.HEADER_ERROR;
-import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
-import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
 
 import java.util.Objects;
 
@@ -36,34 +32,6 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
-    }
-
-    /**
-     * Provides a {@code CommandResult} with the alert header template in its message.
-     */
-    public static CommandResult createAlertResult(String feedbackToUser) {
-        return new CommandResult(HEADER_ALERT + feedbackToUser);
-    }
-
-    /**
-     * Provides a {@code CommandResult} with the error header template in its message.
-     */
-    public static CommandResult createErrorResult(String feedbackToUser) {
-        return new CommandResult(HEADER_ERROR + feedbackToUser);
-    }
-
-    /**
-     * Provides a {@code CommandResult} with the success header template in its message.
-     */
-    public static CommandResult createSuccessResult(String feedbackToUser) {
-        return new CommandResult(HEADER_SUCCESS + feedbackToUser);
-    }
-
-    /**
-     * Provides a {@code CommandResult} with the update header template in its message.
-     */
-    public static CommandResult createUpdateResult(String feedbackToUser) {
-        return new CommandResult(HEADER_UPDATE + feedbackToUser);
     }
 
     public String getFeedbackToUser() {

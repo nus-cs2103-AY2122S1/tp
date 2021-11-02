@@ -1,10 +1,13 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.generateAlert;
+import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.model.lesson.Lesson.MAX_LESSON_SIZE;
+import static seedu.tuitione.model.student.Student.ENROLLMENT_MESSAGE_CONSTRAINT;
 
 import java.util.List;
 
@@ -27,16 +30,13 @@ public class EnrollCommand extends Command {
             + "l/LESSON_INDEX\n"
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_STUDENT_IN_LESSON =
-            "⚠\tAlert:\n\n%1$s is already enrolled in the existing %2$s";
-    public static final String MESSAGE_UNABLE_TO_ENROLL = "⚠\tAlert:\n\n%1$s cannot be enrolled into %2$s";
-    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\n%1$s enrolled into lesson:\n%2$s";
-    public static final String MESSAGE_MORE_THAN_MAX_LESSONS = "⚠\tAlert:\n\n"
-            + "%1$s is currently enrolled in more than %2$s lessons, "
-            + "and cannot be enrolled in one more. "
-            + "Please unenroll the student from a lesson before enrolling them in another.";
-    public static final String MESSAGE_MORE_THAN_MAX_STUDENTS = "⚠\tAlert:\n\n"
-            + EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
+    public static final String MESSAGE_SUCCESS = generateSuccess("%1$s enrolled into lesson:\n%2$s");
+    public static final String MESSAGE_UNABLE_TO_ENROLL = generateAlert("%1$s cannot be enrolled into %2$s");
+    public static final String MESSAGE_MORE_THAN_MAX_STUDENTS = generateAlert(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT);
+    public static final String MESSAGE_STUDENT_IN_LESSON = generateAlert("%1$s is already enrolled "
+            + "in the existing %2$s");
+    public static final String MESSAGE_MORE_THAN_MAX_LESSONS = generateAlert(ENROLLMENT_MESSAGE_CONSTRAINT
+            + "Please unenroll the student from a lesson before enrolling them in another.");
 
     private final Index indexStudent;
     private final Index indexLesson;

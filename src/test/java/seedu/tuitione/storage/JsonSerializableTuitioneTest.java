@@ -35,6 +35,7 @@ public class JsonSerializableTuitioneTest {
 
     // extracted from json files
     private static final String PROBLEMATIC_STUDENT_NAME = "Leena";
+    private static final String PROBLEMATIC_ENROLLMENT_LESSON_CODE = "Science-P3-Wed-1230";
     private static final String PROBLEMATIC_LESSON_CODE = "Science-S3-Sun-1730";
     private static final Path INVALID_ENROLLMENT_FILE = TEST_DATA_FOLDER
             .resolve("invalidEnrollmentTuitione.json");
@@ -136,7 +137,8 @@ public class JsonSerializableTuitioneTest {
     public void toModelType_invalidEnrollment_throwsIllegalValueException() throws Exception {
         JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(INVALID_ENROLLMENT_FILE,
                 JsonSerializableTuitione.class).get();
-        String expected = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, PROBLEMATIC_STUDENT_NAME);
+        String expected = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT,
+                PROBLEMATIC_STUDENT_NAME, PROBLEMATIC_ENROLLMENT_LESSON_CODE);
         assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
     }
 
