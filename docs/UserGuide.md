@@ -150,12 +150,12 @@ must be provided in an `HH:mm` format.
 
 Format:
 
-`setShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
+`setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
 
 Examples:
 
-`setShiftTimings 10:00 16:00 17:00 22:00`\
-`setShiftTimings 09:00 15:00 18:00 23:00`
+`setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
+`setDefaultShiftTimings 09:00 15:00 18:00 23:00`
 
 #### Listing all persons : `list`
 
