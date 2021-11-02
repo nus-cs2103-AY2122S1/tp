@@ -54,7 +54,7 @@ public class PersonUtil {
         sb.append(PREFIX_SCHOOL + person.getSchool().value + " ");
         sb.append(PREFIX_ACAD_STREAM + person.getAcadStream().value + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
-        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.getTagName() + " "));
+        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.toString() + " "));
         return sb.toString();
     }
 
@@ -83,7 +83,7 @@ public class PersonUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.getTagName()).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.toString()).append(" "));
             }
         }
         return sb.toString();

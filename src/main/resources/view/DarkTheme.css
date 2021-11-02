@@ -443,3 +443,14 @@
     -fx-text-fill: white;
     -fx-background-radius: 15 15 0 0;
 }
+
+#titleScrollPane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-background-radius: 15 15 0 0;
+}
+
+#titleScrollPane .scroll-bar {
+    -fx-padding: 7 0 0 0;
+}
