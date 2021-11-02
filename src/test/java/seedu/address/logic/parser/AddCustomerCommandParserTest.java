@@ -19,7 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
+import static seedu.address.logic.commands.CommandTestUtil.SPECIAL_REQUEST_DESC_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -27,7 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_GRAPEFR
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -78,10 +78,10 @@ public class AddCustomerCommandParserTest {
         // multiple tags - all accepted
         Customer expectedCustomerMultipleTags = new CustomerBuilder(CUSTOMER_BOB).withTags(VALID_TAG_FRIEND,
                         VALID_TAG_HUSBAND).withAllergies(VALID_ALLERGY_GRAPEFRUITS)
-                .withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + LP_DESC_BOB + ALLERGY_DESC_GRAPEFRUITS + SPECIALREQUEST_DESC_LIVEBAND
+                        + LP_DESC_BOB + ALLERGY_DESC_GRAPEFRUITS + SPECIAL_REQUEST_DESC_LIVEBAND
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCustomerCommand(expectedCustomerMultipleTags));
     }

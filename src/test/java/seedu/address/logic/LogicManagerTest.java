@@ -12,11 +12,11 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
+import static seedu.address.logic.commands.CommandTestUtil.SPECIAL_REQUEST_DESC_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_NONSENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.JOB_TITLE_DESC_AMY;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.LEAVES_DESC_AMY;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.SALARY_DESC_AMY;
@@ -98,9 +98,9 @@ public class LogicManagerTest {
         // Execute add command
         String addCustomerCommand = AddCustomerCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + LP_DESC_AMY + ALLERGY_DESC_NONSENSE
-                + SPECIALREQUEST_DESC_LIVEBAND + TAG_DESC_FRIEND;
+                + SPECIAL_REQUEST_DESC_LIVEBAND + TAG_DESC_FRIEND;
         Customer expectedCustomer = new CustomerBuilder(CUSTOMER_AMY).withAllergies(VALID_ALLERGY_NONSENSE)
-                .withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND).build();
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCustomer(expectedCustomer);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

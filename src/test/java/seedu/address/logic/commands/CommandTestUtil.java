@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -42,10 +42,10 @@ public class CommandTestUtil {
     public static final String VALID_ALLERGY_ALMONDS = "Almonds";
     public static final String VALID_ALLERGY_GRAPES = "Grapes";
     public static final String VALID_ALLERGY_GRAPEFRUITS = "Grapefruit";
-    public static final String VALID_SPECIALREQUEST_OFFLIGHTS = "off lights";
-    public static final String VALID_SPECIALREQUEST_SILENCE = "Silence";
-    public static final String VALID_SPECIALREQUEST_ROCK = "Rock music";
-    public static final String VALID_SPECIALREQUEST_LIVEBAND = "Live band";
+    public static final String VALID_SPECIAL_REQUEST_OFFLIGHTS = "off lights";
+    public static final String VALID_SPECIAL_REQUEST_SILENCE = "Silence";
+    public static final String VALID_SPECIAL_REQUEST_ROCK = "Rock music";
+    public static final String VALID_SPECIAL_REQUEST_LIVEBAND = "Live band";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_SORT_ORDER_ASCENDING = "a";
@@ -69,13 +69,13 @@ public class CommandTestUtil {
     public static final String ALLERGY_DESC_ALMONDS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_ALMONDS;
     public static final String ALLERGY_DESC_GRAPES = " " + PREFIX_ALLERGIES + VALID_ALLERGY_GRAPES;
     public static final String ALLERGY_DESC_GRAPEFRUITS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_GRAPEFRUITS;
-    public static final String SPECIALREQUEST_DESC_OFFLIGHTS = " " + PREFIX_SPECIALREQUESTS
-            + VALID_SPECIALREQUEST_OFFLIGHTS;
-    public static final String SPECIALREQUEST_DESC_SILENCE = " " + PREFIX_SPECIALREQUESTS
-            + VALID_SPECIALREQUEST_SILENCE;
-    public static final String SPECIALREQUEST_DESC_ROCK = " " + PREFIX_SPECIALREQUESTS + VALID_SPECIALREQUEST_ROCK;
-    public static final String SPECIALREQUEST_DESC_LIVEBAND = " " + PREFIX_SPECIALREQUESTS
-            + VALID_SPECIALREQUEST_LIVEBAND;
+    public static final String SPECIAL_REQUEST_DESC_OFFLIGHTS = " " + PREFIX_SPECIAL_REQUESTS
+            + VALID_SPECIAL_REQUEST_OFFLIGHTS;
+    public static final String SPECIAL_REQUEST_DESC_SILENCE = " " + PREFIX_SPECIAL_REQUESTS
+            + VALID_SPECIAL_REQUEST_SILENCE;
+    public static final String SPECIAL_REQUEST_DESC_ROCK = " " + PREFIX_SPECIAL_REQUESTS + VALID_SPECIAL_REQUEST_ROCK;
+    public static final String SPECIAL_REQUEST_DESC_LIVEBAND = " " + PREFIX_SPECIAL_REQUESTS
+            + VALID_SPECIAL_REQUEST_LIVEBAND;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String SORT_DESC_ASCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_ASCENDING;
@@ -95,7 +95,7 @@ public class CommandTestUtil {
     // points
     public static final String INVALID_ALLERGIES_DESC = " " + PREFIX_ALLERGIES + "!vvdv"; // '!' not allowed
     // symbol
-    public static final String INVALID_SPECIALREQUESTS_DESC = " " + PREFIX_SPECIALREQUESTS + "!vdfv"; // '!'
+    public static final String INVALID_SPECIAL_REQUESTS_DESC = " " + PREFIX_SPECIAL_REQUESTS + "!vdfv"; // '!'
     // not
     // allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
@@ -121,12 +121,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withLoyaltyPoints(VALID_LP_AMY)
                 .withAllergies(VALID_ALLERGY_GRAPEFRUITS, VALID_ALLERGY_NONSENSE)
-                .withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND, VALID_SPECIALREQUEST_ROCK)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND, VALID_SPECIAL_REQUEST_ROCK)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_CUSTOMER_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withLoyaltyPoints(VALID_LP_BOB)
-                .withAllergies(VALID_ALLERGY_ALMONDS).withSpecialRequests(VALID_SPECIALREQUEST_OFFLIGHTS)
+                .withAllergies(VALID_ALLERGY_ALMONDS).withSpecialRequests(VALID_SPECIAL_REQUEST_OFFLIGHTS)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

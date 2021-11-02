@@ -44,7 +44,7 @@ Dangerous or potentially negative actions are displayed here
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
     - `addC`: Add a customer
-    - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
+    - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
@@ -99,7 +99,7 @@ This is the list of some repeatedly used preambles in RHRH, as well as there cor
 
 Action | Format, Examples
 --------|------------------
-**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000`
+**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]` <br> e.g. `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000`
 **Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG] [sh/SHIFTS]` <br> e.g. `addE n/John Doe p/87654321 e/john@example.com a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Soup Chef t/Managerial sh/2021-12-08 0800`
 **Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/10 Balestier Rd st/Chicken dd/19-12-2021 08:00`
 **Add reservation** | `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addR 2 p/98765432 at/2021-12-24 2000`
@@ -109,7 +109,7 @@ Action | Format, Examples
 **Delete Employee** | `deleteE INDEX`<br> e.g., `deleteE 1`
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `deleteS 2`
 **Delete Reservation** | `deleteR INDEx` <br> e.g., `deleteR 4`
-**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIALREQUESTS]…​ [t/TAG]…​`<br> e.g.,`editC 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIAL_REQUESTS]…​ [t/TAG]…​`<br> e.g.,`editC 2 n/James Lee e/jameslee@example.com alg/Kiwi`
 **Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [sh/SHIFTS]…​ [t/TAG]…​`<br> e.g.,`editE 2 n/James Lee e/jameslee@example.com sal/7000`
 **Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`editS 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
@@ -273,7 +273,7 @@ Examples:
 
 Edits an existing customer in RHRH.
 
-Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`
+Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]…​`
 
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list.
 
