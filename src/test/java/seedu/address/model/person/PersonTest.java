@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.time.DayOfWeek;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -117,4 +118,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_EXCO).build();
         assertFalse(ALICE.equals(editedAlice));
     }
+
+
 }
