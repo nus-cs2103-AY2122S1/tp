@@ -10,7 +10,7 @@ Please refer to the [About Us](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob
 
 ## User Guide
 
-Please refer to the [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/) document for specific details.
+Please refer to the [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html) document for specific details.
 
 ## Developer Guide
 
