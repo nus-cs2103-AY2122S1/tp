@@ -30,6 +30,10 @@ public class ShowCommand extends Command {
 
     public static final String MESSAGE_NO_NAME = "No User with Given Name could be found in the List";
 
+    public static final String MESSAGE_INVALID_INDEX = "The Index must be A Non-Zero Positive Integer.";
+
+    public static final String MESSAGE_INVALID_NAME = "The Name is Invalid.";
+
     public static final String MESSAGE_SUCCESS = "Showing details for %1$s.";
 
     public static final String MESSAGE_MULTIPLE_NAME = "%1$d Persons with the given keyword in their name exists.\n"

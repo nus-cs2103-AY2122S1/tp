@@ -35,9 +35,14 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             return new ShowCommand(index);
         }
 
+        Integer ind = StringUtil.getInt(trimmedArgs);
+        if (ind != null && ind <= 0) {
+            throw new ParseException(ShowCommand.MESSAGE_INVALID_INDEX);
+        }
+
+
         if (!Name.isValidName(trimmedArgs)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+            throw new ParseException(ShowCommand.MESSAGE_INVALID_NAME);
         }
 
         return new ShowCommand(new NameContainsKeywordsPredicate(
