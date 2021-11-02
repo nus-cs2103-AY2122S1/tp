@@ -28,24 +28,24 @@ public class SortByCustomerTest {
     }
 
     @Test
-    public void isValidSortingOrder() {
+    public void isValidSortBy() {
         // null
-        assertThrows(NullPointerException.class, () -> SortByCustomer.isValidSortingOrder(null));
+        assertThrows(NullPointerException.class, () -> SortByCustomer.isValidSortBy(null));
 
         // invalid sorting orders
-        assertFalse(SortByCustomer.isValidSortingOrder("")); // empty string
-        assertFalse(SortByCustomer.isValidSortingOrder(" ")); // spaces only
-        assertFalse(SortByCustomer.isValidSortingOrder("123")); // not valid prefix
-        assertFalse(SortByCustomer.isValidSortingOrder("hello")); // not valid prefix
-        assertFalse(SortByCustomer.isValidSortingOrder("t")); // cannot sort by tags
-        assertFalse(SortByCustomer.isValidSortingOrder("sh")); // cannot sort by shifts
+        assertFalse(SortByCustomer.isValidSortBy("")); // empty string
+        assertFalse(SortByCustomer.isValidSortBy(" ")); // spaces only
+        assertFalse(SortByCustomer.isValidSortBy("123")); // not valid prefix
+        assertFalse(SortByCustomer.isValidSortBy("hello")); // not valid prefix
+        assertFalse(SortByCustomer.isValidSortBy("t")); // cannot sort by tags
+        assertFalse(SortByCustomer.isValidSortBy("sh")); // cannot sort by shifts
 
         // valid sorting orders
-        assertTrue(SortByCustomer.isValidSortingOrder("n")); // Sort by name
-        assertTrue(SortByCustomer.isValidSortingOrder("a")); // Sort by address
-        assertTrue(SortByCustomer.isValidSortingOrder("e")); // Sort by email
-        assertTrue(SortByCustomer.isValidSortingOrder("p")); // Sort by phone number
-        assertTrue(SortByCustomer.isValidSortingOrder("lp")); // Sort by leaves
+        assertTrue(SortByCustomer.isValidSortBy("n")); // Sort by name
+        assertTrue(SortByCustomer.isValidSortBy("a")); // Sort by address
+        assertTrue(SortByCustomer.isValidSortBy("e")); // Sort by email
+        assertTrue(SortByCustomer.isValidSortBy("p")); // Sort by phone number
+        assertTrue(SortByCustomer.isValidSortBy("lp")); // Sort by leaves
     }
 
     @Test
