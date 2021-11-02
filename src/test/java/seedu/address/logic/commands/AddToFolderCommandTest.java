@@ -228,8 +228,8 @@ public class AddToFolderCommandTest {
      * A Model stub with one Person inside Folder.
      */
     private class ModelStubAcceptingPersonAdded extends AddToFolderCommandTest.ModelStub {
-        private final ObservableList<Folder> folderList = FXCollections.observableArrayList();
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList(new PersonBuilder().build());
+        private final ObservableList<Folder> folderList = FXCollections.observableArrayList();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -280,8 +280,8 @@ public class AddToFolderCommandTest {
      * A Model stub with one Person inside Folder, same as the peron being added.
      */
     private class ModelStubContainingDuplicate extends AddToFolderCommandTest.ModelStub {
-        private final ObservableList<Folder> folderList = FXCollections.observableArrayList();
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList(new PersonBuilder().build());
+        private final ObservableList<Folder> folderList = FXCollections.observableArrayList();
 
         @Override
         public boolean hasPerson(Person person) {
