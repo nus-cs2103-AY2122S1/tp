@@ -231,7 +231,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 3. The `CommandResult` is then returned
 
 #### Result
-The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display a success message.
+The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
 
 ### Remark
 
@@ -281,26 +281,34 @@ The GUI updates the patient record in the displayed list and displays a success 
 ### Propagating Person Changes to Appointment List
 Since specific patients and doctors within the records are directly referenced in appointments,
 changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
-* When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
-  * `RemarkCommand`, `EditCommand` and `TagCommand`
 * When patients or doctor deleted, appointments they are a part of will be deleted as well.
   * `DeleteCommand`
+* When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
+  * `RemarkCommand`, `EditCommand` and `TagCommand`
 
 #### Execution
 The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
 
 ![PropagateChangesDiagram](images/PropagateChangesDiagram.png)
 
-1. `PlannerMd::removePatient` is called with `target` and deletes `target` from the list of patients. <br>
-2. `UniqueAppointmentList::removeAppointmentWithPatient` is called <br>
-   * Loops through `UniqueAppointmentList` and deletes `Appointment` objects containing `target`.
+1. `PlannerMd::removePatient` is called and deletes `target` from the list of patients. <br>
+2. `UniqueAppointmentList::deleteAppointmentWithPerson` is called <br>
+   * Loops through `UniqueAppointmentList` and deletes `appointment` which references `target`.
 
+The Sequence Diagram below illustrates the interactions within the Model component for the setPatient(patientToEdit, editedPatient) API call.
+
+![PropagateChangesEditDiagram](images/PropagateChangesEditDiagram.png)
+
+1. `PlannerMd::setPatient` is called and replaces `patientToEdit` with `editedPatient` in the list of patients. <br>
+2. `UniqueAppointmentList::editAppointmentWithPerson` is called <br>
+    * Loops through `UniqueAppointmentList` and replaces `appointment` which references `patientToEdit` with a new `editedAppointment` which has the same fields as `appointment` but references `editedPatient`.
+    
 #### Result
 GUI is updated to display the propagated changes in the appointment list.
 
 #### Design considerations
 Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
-to update `Appointment` with `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
+to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
 
 ### Adding an appointment
 Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.

@@ -1,6 +1,8 @@
 @startuml
 !include style.puml
 
+'mainframe **sd** execute logic of "toggle" user input
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
