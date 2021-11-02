@@ -21,7 +21,7 @@ public class FindEmployeeCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindEmployeeCommand() {
         // no leading and trailing whitespaces
         FindEmployeeCommand expectedFindCommand =
                 new FindEmployeeCommand(new EmployeeClassContainsKeywordsPredicate(Arrays.asList("Alice")));
