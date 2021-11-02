@@ -37,12 +37,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_COSTPRICE, PREFIX_SALESPRICE);
 
         Index index;
-        boolean editId = true;
 
         ItemDescriptor itemDescriptor = new ItemDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             itemDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-            editId = false;
         }
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             itemDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
@@ -51,10 +49,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             itemDescriptor.setCount(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_COSTPRICE).isPresent()) {
-            itemDescriptor.setCostPrice(ParserUtil.parseCostPrice(argMultimap.getValue(PREFIX_COSTPRICE).get()));
+            itemDescriptor.setCostPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_COSTPRICE).get()));
         }
         if (argMultimap.getValue(PREFIX_SALESPRICE).isPresent()) {
-            itemDescriptor.setSalesPrice(ParserUtil.parseSalesPrice(argMultimap.getValue(PREFIX_SALESPRICE).get()));
+            itemDescriptor.setSalesPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_SALESPRICE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(itemDescriptor::setTags);
 

@@ -76,37 +76,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String costPrice} into a {@code Double}.
+     * Parses {@code String price} into a {@code Double}.
      */
-    public static Double parseCostPrice(String costPrice) throws ParseException {
+    public static Double parsePrice(String price) throws ParseException {
+        double priceValue;
         try {
-            Double.parseDouble(costPrice);
+            priceValue = Double.parseDouble(price);
         } catch (NumberFormatException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_COSTPRICE_FORMAT);
+            throw new ParseException(Messages.MESSAGE_INVALID_PRICE_FORMAT);
         }
 
-        if (Double.parseDouble(costPrice) > 0) {
-            return Double.parseDouble(costPrice);
-        } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_COSTPRICE_FORMAT);
-        }
-    }
-
-    /**
-     * Parses {@code String salesPrice} into a {@code Double}.
-     */
-    public static Double parseSalesPrice(String salesPrice) throws ParseException {
-        try {
-            Double.parseDouble(salesPrice);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_SALESPRICE_FORMAT);
+        if (priceValue < 0 || priceValue >= 10000000) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PRICE_RANGE);
         }
 
-        if (Double.parseDouble(salesPrice) > 0) {
-            return Double.parseDouble(salesPrice);
-        } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_SALESPRICE_FORMAT);
-        }
+        // Round off to 2 decimal places
+        return (double) Math.round(priceValue * 100) / 100;
     }
 
     /**

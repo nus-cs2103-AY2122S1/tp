@@ -54,11 +54,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         // Parse salesPrice
         if (argMultimap.getValue(PREFIX_SALESPRICE).isPresent()) {
-            toAddDescriptor.setSalesPrice(ParserUtil.parseSalesPrice(argMultimap.getValue(PREFIX_SALESPRICE).get()));
+            toAddDescriptor.setSalesPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_SALESPRICE).get()));
         }
         // Parse costPrice
         if (argMultimap.getValue(PREFIX_COSTPRICE).isPresent()) {
-            toAddDescriptor.setCostPrice(ParserUtil.parseCostPrice(argMultimap.getValue(PREFIX_COSTPRICE).get()));
+            toAddDescriptor.setCostPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_COSTPRICE).get()));
         }
         // Parse tags
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {

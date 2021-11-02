@@ -178,10 +178,8 @@ public class Item implements Displayable {
                 .append(getId())
                 .append("; count: ")
                 .append(getCount())
-                .append("; costPrice: ")
-                .append(getCostPrice())
-                .append("; salesPrice: ")
-                .append(getSalesPrice());
+                .append(String.format("; costPrice: $%.2f", getCostPrice()))
+                .append(String.format("; salesPrice: $%.2f", getSalesPrice()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

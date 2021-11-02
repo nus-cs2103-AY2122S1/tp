@@ -11,8 +11,11 @@ public class Messages {
     public static final String MESSAGE_ITEMS_LISTED_OVERVIEW = "%1$d items listed!";
     public static final String MESSAGE_INVALID_COUNT_INTEGER = "The count provided must be positive!";
     public static final String MESSAGE_INVALID_COUNT_FORMAT = "The count provided must be integer!";
-    public static final String MESSAGE_INVALID_SALESPRICE_FORMAT = "The sales price provided must be positive integer!";
-    public static final String MESSAGE_INVALID_COSTPRICE_FORMAT = "The cost price provided must be positive integer!";
+
+    public static final String MESSAGE_INVALID_PRICE_FORMAT = "Prices provided must be numerical values!";
+    public static final String MESSAGE_INVALID_PRICE_RANGE =
+            "Prices provided must be at least $0 and less than $10,000,000!";
+
     public static final String MESSAGE_INVALID_ID_FORMAT = "The id provided must be integer!";
     public static final String MESSAGE_INVALID_ID_LENGTH_AND_SIGN = "The id provided must be positive"
             + " and at most 6 digits!";
