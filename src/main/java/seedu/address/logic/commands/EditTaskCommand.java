@@ -117,7 +117,7 @@ public class EditTaskCommand extends Command {
             if (editTaskDescriptor.getDeadlineTaskDate().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_EVENT_BY);
             }
-            TaskDate updatedTaskDate = editTaskDescriptor.getDeadlineTaskDate()
+            TaskDate updatedTaskDate = editTaskDescriptor.getEventTaskDate()
                     .orElse(((EventTask) taskToEdit).getTaskDate());
             return new EventTask(updatedTaskName, updatedTags,
                     taskToEdit.checkIsDone(), updatedTaskDate, description, updatedPriority);
