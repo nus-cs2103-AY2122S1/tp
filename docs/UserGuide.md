@@ -134,7 +134,7 @@ Set the minimum number of staff required for each shift. The three roles are: ki
 Multiple roles can be set with this same command, but if the same role occurs multiple times, the last instance will be
 used.
 
-Note that the default role requirements are 0 for all three roles, and the [Clear Command](#clearing-all-entries--clear) will also reset the
+The default role requirements are 0 for all three roles. The Clear Command will also reset the
 role requirements to the default.
 
 Format:
@@ -146,13 +146,17 @@ Examples:
 `setRoleReq r/floor-3`\
 `setRoleReq r/kitchen-4 r/bartender-2`
 
+See Also:
+
+[Clear Command](#clearing-all-entries--clear)
+
 #### Setting Default Shift Timings : `setDefaultShiftTimings `
 
 Set the default timings for the morning and afternoon shift. Note that all 4 timings must be present, and the timings 
 must be provided in an `HH:mm` format.
 
-Note that the default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
-The [Clear Command](#clearing-all-entries--clear) will also reset the shift timings to the aforementioned defaults.
+The default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
+The Clear Command will also reset the shift timings to the aforementioned defaults.
 
 Format:
 
@@ -162,6 +166,10 @@ Examples:
 
 `setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
 `setDefaultShiftTimings 09:00 15:00 18:00 23:00`
+
+See Also:
+
+[Clear Command](#clearing-all-entries--clear)
 
 #### Listing all persons : `list`
 
@@ -338,10 +346,14 @@ List after using Find command:
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the Staff List. The default [Shift Timings](#setting-default-shift-timings--setdefaultshifttimings-) 
-and [role requirements](#setting-role-requirements--setrolereq-) are also reset.
+Clears all entries from the Staff List. The default Shift Timings and Role Requirements are also reset.
 
 Format: `clear`
+
+See Also:
+
+[setDefaultShiftTimings Command](#setting-default-shift-timings--setdefaultshifttimings-)
+[setRoleReq Command](#setting-role-requirements--setrolereq-)
 
 #### Exiting the program : `exit`
 
@@ -373,7 +385,7 @@ Examples:
 `change da/2021-12-28`  
 
 
-#### Viewing schedule of staff(s): `viewSchedule`
+#### Viewing schedule of staff: `viewSchedule`
 
 Views the schedule of staff's that satisfy the query conditions.
 
@@ -514,7 +526,10 @@ Action | Format, Examples
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Change schedule** | `change da/START_DATE`
+**Set role requirements** | `setRoleReq r/ROLE-NUMBER_REQUIRED...`
+**Set default shift timings** | `setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
 **List** | `list`
+**Tab** | `tab`
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
