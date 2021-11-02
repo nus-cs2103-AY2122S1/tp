@@ -282,7 +282,6 @@ public class ModelManager implements Model {
     public void sortOrderList(SortDescriptor sortDescriptor) {
         Comparator<Order> comparator = sortDescriptor.generateComparator();
         orderBook.sortOrders(comparator);
-        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     /**
