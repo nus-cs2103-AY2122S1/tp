@@ -9,6 +9,7 @@ import seedu.placebook.model.schedule.Appointment;
  * The endTime of the time period is before the startTime of the time period.
  */
 public class ClashingAppointmentsException extends RuntimeException {
+    public static String MESSAGE_CLASHING_APPOINTMENTS = "Clashing Appointments found.";
     private final List<Appointment> appointments;
 
     /**
@@ -17,7 +18,7 @@ public class ClashingAppointmentsException extends RuntimeException {
      *                      with the appointment to add.
      */
     public ClashingAppointmentsException(List<Appointment> appointments) {
-        super("Clashing Appointment with: ");
+        super(MESSAGE_CLASHING_APPOINTMENTS);
         this.appointments = appointments;
     }
 
