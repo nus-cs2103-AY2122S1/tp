@@ -69,13 +69,13 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
 2. Download the latest `wheretourgo.jar` from [here](update on final)
 
-3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo.
+3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
 **For Windows**
-1. Simply double-click the file to start the app!
+1. Simply double-click the file to start the app
 
 **For Mac**
-1. Open Terminal.
+1. Open Terminal
 
 2. Navigate to the home folder you have chosen for your WhereTourGo.<br>
 For example, if you have moved the app to Desktop, simply run:
@@ -90,11 +90,11 @@ cd Desktop
 java -jar WhereTourGo.jar
 ```
 
-<br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data<br><br>
+<br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/sample.png)
    <br><br>
 
-Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 <br><br>
 Some example commands you can try:
 
