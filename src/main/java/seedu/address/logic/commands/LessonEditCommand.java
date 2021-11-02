@@ -52,7 +52,7 @@ public class LessonEditCommand extends UndoableCommand {
             + "[" + PREFIX_TIME + "HHmm-HHmm] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_RATES + "RATE] "
-            + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING FEES]"
+            + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING FEES] "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]... "
             + "[" + PREFIX_CANCEL + "CANCEL_DATE]... "
             + "[" + PREFIX_UNCANCEL + "UNCANCEL_DATE]...";
@@ -143,7 +143,9 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         assert lessonToEdit != null;
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getStartDate());
-        Date updatedEndDate = editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate());
+        Date updatedEndDate = lessonToEdit.isRecurring()
+                ? editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate())
+                : updatedDate;
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
@@ -186,7 +188,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToCancel A set of lesson dates to add to cancelled dates.
      * @param datesToUncancel A set of lesson dates to remove from cancelled dates.
      * @return A set of updated cancelled dates.
-     * @throws CommandException
+     * @throws CommandException If any of the dates to cancel is invalid.
      */
     private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
                                                          Set<Date> datesToUncancel) throws CommandException {
@@ -255,7 +257,9 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         // Checks if the edited lesson clashes with any existing lessons apart from the one to be edited.
         if (model.hasClashingLesson(edited, toEdit)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
+            Set<String> clashes = model.getClashingLessonsString(edited, toEdit);
+            String clashingLessons = CommandUtil.lessonsToString(clashes);
+            throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }
         lessonList.remove(toEdit);
         lessonList.add(edited);
@@ -327,6 +331,7 @@ public class LessonEditCommand extends UndoableCommand {
          * A defensive copy of {@code homeworkSet} is used internally.
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
+            setRecurring(toCopy.isRecurring);
             setDate(toCopy.date);
             setEndDate(toCopy.endDate);
             setTimeRange(toCopy.timeRange);

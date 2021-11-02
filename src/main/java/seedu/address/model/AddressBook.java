@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
@@ -110,6 +111,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
+     */
+    public Set<String> getClashingLessonsString(Lesson lesson) {
+        requireNonNull(lesson);
+        return entries.getClashes(lesson);
+    }
+
+    /**
+     * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
+     */
+    public Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return entries.getClashes(lesson, lessonToIgnore);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      *
@@ -194,13 +211,30 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asUnmodifiableMap();
     }
 
+    /**
+     * Returns the Calendar consisting of all lessons entries.
+     *
+     * @return The Calendar consisting of all lessons entries.
+     */
     public Calendar getCalendar() {
         // TODO: Make defensive
         return entries.getCalendar();
     }
 
+    /**
+     * Returns a list of upcoming lessons within the next two days.
+     *
+     * @return List of upcoming lessons within the next two days.
+     */
     public ObservableList<Entry<Lesson>> getUpcomingLessons() {
         return entries.getUpcomingLessons();
+    }
+
+    /**
+     * Updates the list of upcoming lessons.
+     */
+    public void updateUpcomingLessons() {
+        entries.updateUpcomingLessons();
     }
 
     @Override

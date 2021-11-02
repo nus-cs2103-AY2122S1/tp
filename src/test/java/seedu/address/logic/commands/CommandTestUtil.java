@@ -24,6 +24,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.MAKEUP_LESSON;
+import static seedu.address.testutil.TypicalLessons.RECURRING_LESSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +37,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -160,6 +163,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final LessonEditCommand.EditLessonDescriptor DESC_RECURRING;
+    public static final LessonEditCommand.EditLessonDescriptor DESC_MAKEUP;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
@@ -180,6 +186,10 @@ public class CommandTestUtil {
                 .withAcadLevel(VALID_ACAD_LEVEL_BOB)
                 .withRemark(VALID_REMARK_BOB)
                 .withTags(VALID_TAG_ZOOM, VALID_TAG_FORGETFUL).build();
+
+        DESC_RECURRING = new EditLessonDescriptorBuilder(RECURRING_LESSON).build();
+
+        DESC_MAKEUP = new EditLessonDescriptorBuilder(MAKEUP_LESSON).build();
     }
 
     /**
