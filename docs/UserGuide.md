@@ -275,6 +275,10 @@ Format: `import CSV_NAME`
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
 
+Example csv:
+
+![CSV](images/csvFormat.png)
+
 #### Exporting residents' emails : `export`
 
 Exports the emails of all the residents in the last filtered list to a filename of choice within the `data/exports/` folder.
