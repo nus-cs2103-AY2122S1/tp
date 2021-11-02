@@ -8,11 +8,11 @@ public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number or name used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n or NAME (must be full name)"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the contact identified by the index number or name used in the displayed contact list.\n"
+            + "Parameters: INDEX (must be a positive integer) or n/NAME (must be full name)"
+            + "\nExample: " + COMMAND_WORD + " 1" + ", " + COMMAND_WORD + " n/Marina Bay Sands";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Contact: %1$s";
 
     @Override
     public boolean equals(Object other) {

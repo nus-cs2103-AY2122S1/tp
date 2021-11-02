@@ -74,28 +74,46 @@ public class AddressBookParser {
             return new SortCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            if (arguments.equals("")) {
+                return new ListCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            if (arguments.equals("")) {
+                return new HelpCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
 
         case SummaryCommand.COMMAND_WORD:
-            return new SummaryCommand();
+            if (arguments.equals("")) {
+                return new SummaryCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE));
 
         case CmdCommand.COMMAND_WORD:
-            return new CmdCommand();
+            if (arguments.equals("")) {
+                return new CmdCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CmdCommand.MESSAGE_USAGE));
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            if (arguments.equals("")) {
+                return new UndoCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
 
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            if (arguments.equals("")) {
+                return new RedoCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);

@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Rating.EMPTY_RATING;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -52,10 +55,12 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         String ratingValue = person.getRating().value;
-        if (ratingValue.equals("0")) {
-            rating.setText("unrated");
+        if (ratingValue.equals(EMPTY_RATING)) {
+            rating.setText(EMPTY_RATING);
         } else {
-            rating.setText(ratingValue + "\u2B50");
+            byte[] emojiBytes = new byte[]{(byte) 0xE2, (byte) 0xAD, (byte) 0x90};
+            String emojiAsString = new String(emojiBytes, StandardCharsets.UTF_8);
+            rating.setText(ratingValue + emojiAsString + "\u2B50");
         }
     }
 

@@ -9,9 +9,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Review {
 
-    public static final String MESSAGE_CONSTRAINTS = "Reviews can take any value, use '-' to indicate an empty review";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Reviews can take any value, use '-' to indicate an empty review\n"
+            + "Reviews cannot be longer than 500 characters";
 
     public static final String EMPTY_REVIEW = "- No Review -";
+
+    /*
+     * Limit of 500 Characters
+     */
+    public static final String VALIDATION_REGEX = "^.{0,500}";
 
     public final String value;
 
@@ -31,7 +38,7 @@ public class Review {
      * Returns true if a given string is a valid review (all valid for now)
      */
     public static boolean isValidReview(String test) {
-        return true;
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     public boolean isEmptyReview() {

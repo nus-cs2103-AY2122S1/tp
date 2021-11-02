@@ -100,7 +100,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void exportPerson(Person key) {
         // Write to file
-        ExportStorage.addToStorage(key.toString());
+        ExportStorage.addToStorage(key.toExportFormat());
     }
 
     //// util methods

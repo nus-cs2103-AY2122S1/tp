@@ -1,12 +1,19 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.ThrowingSupplier;
 
 public class RatingTest {
+
+    @Test
+    public void constructor_noArguments_emptyRating() {
+        assertDoesNotThrow((ThrowingSupplier<Rating>) Rating::new);
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -28,7 +35,7 @@ public class RatingTest {
         assertFalse(Rating.isValidRating(" ")); // spaces only
         assertFalse(Rating.isValidRating("91")); // more than 2 numbers
         assertFalse(Rating.isValidRating("r")); // non-numeric
-        assertFalse(Rating.isValidRating("-1")); // out of range
+        assertFalse(Rating.isValidRating("0")); // out of range
         assertFalse(Rating.isValidRating("6")); // out of range
         assertFalse(Rating.isValidRating("2.5")); // not integer
 

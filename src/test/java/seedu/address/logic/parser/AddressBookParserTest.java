@@ -81,25 +81,29 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("help 3"));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), (
+        ) -> parser.parseCommand("list 3"));
     }
 
     @Test
     public void parseCommand_cmd() throws Exception {
         assertTrue(parser.parseCommand(CmdCommand.COMMAND_WORD) instanceof CmdCommand);
-        assertTrue(parser.parseCommand(CmdCommand.COMMAND_WORD + " 3") instanceof CmdCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CmdCommand.MESSAGE_USAGE), () -> parser.parseCommand("cmd 3"));
     }
 
     @Test
     public void parseCommand_sum() throws Exception {
         assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
-        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD + " 3") instanceof SummaryCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SummaryCommand.MESSAGE_USAGE), () -> parser.parseCommand("sum 3"));
     }
 
     @Test
