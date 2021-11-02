@@ -13,7 +13,7 @@ import seedu.fast.commons.core.index.Index;
 public class CommandUtilTest {
 
     @Test
-    public void checkIndexWithinSize() {
+    public void checkIndexExceedLimit() {
         Index indexSafe = Index.fromZeroBased(4);
         Index indexEqual = Index.fromZeroBased(5);
         Index indexExceedByOne = Index.fromZeroBased(6);
