@@ -25,12 +25,12 @@ public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> 
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateEpisodeCommand.MESSAGE_USAGE), pe);
-        } catch (IntegerOutOfRangeException e) {
-            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         }
 
         UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor =

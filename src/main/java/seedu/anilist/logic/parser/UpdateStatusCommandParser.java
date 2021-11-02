@@ -29,12 +29,12 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateStatusCommand.MESSAGE_USAGE), pe);
-        } catch (IntegerOutOfRangeException e) {
-            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         }
 
         UpdateStatusCommand.StatusDescriptor statusDescriptor =

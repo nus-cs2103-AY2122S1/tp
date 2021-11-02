@@ -5,6 +5,7 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_TWO;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_NEG;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -70,6 +71,8 @@ public class UpdateEpisodeCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_NEG, Episode.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_DECIMAL, Episode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT,
+            Episode.MESSAGE_CONSTRAINTS);
     }
 
     @Test

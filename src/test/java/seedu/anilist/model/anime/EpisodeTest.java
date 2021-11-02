@@ -30,9 +30,11 @@ public class EpisodeTest {
         assertFalse(Episode.isValidEpisode("^123%")); // contains non-numeric characters
         assertFalse(Episode.isValidEpisode("-1")); // negative numbers
         assertFalse(Episode.isValidEpisode("3.0")); // float numbers
+        assertFalse(Episode.isValidEpisode(Long.toString((long) Integer.MAX_VALUE + 1))); // over maximum value
 
         // valid name
         assertTrue(Episode.isValidEpisode("12345")); // numbers only
         assertTrue(Episode.isValidEpisode("0000")); // leading zeroes
+        assertTrue(Episode.isValidEpisode(Integer.toString(Integer.MAX_VALUE))); // maximum value
     }
 }

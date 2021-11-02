@@ -39,12 +39,12 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GenreCommand.MESSAGE_USAGE), pe);
-        } catch (IntegerOutOfRangeException e) {
-            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         }
 
         if (argMultimap.getValue(PREFIX_ACTION).isEmpty()) {

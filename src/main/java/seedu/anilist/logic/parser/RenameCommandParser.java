@@ -24,12 +24,12 @@ public class RenameCommandParser implements Parser<RenameCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RenameCommand.MESSAGE_USAGE), pe);
-        } catch (IntegerOutOfRangeException e) {
-            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         }
 
         RenameCommand.NameDescriptor nameDescriptor = new RenameCommand.NameDescriptor();

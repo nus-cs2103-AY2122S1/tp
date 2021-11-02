@@ -69,16 +69,17 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
+        String indexOutOfRangeErrorMsg = String.format(
+                IntegerOutOfRangeException.OUT_OF_RANGE_MESSAGE, 1, Integer.MAX_VALUE
+        );
         assertThrows(
-            IntegerOutOfRangeException.class,
-            String.format(IntegerOutOfRangeException.OUT_OF_RANGE_MESSAGE, 1, Integer.MAX_VALUE), ()
-                -> ParserUtil.parseIndex("-10")
+            IntegerOutOfRangeException.class, indexOutOfRangeErrorMsg, () ->
+                ParserUtil.parseIndex("-10")
         );
 
         assertThrows(
-            IntegerOutOfRangeException.class,
-            String.format(IntegerOutOfRangeException.OUT_OF_RANGE_MESSAGE, 1, Integer.MAX_VALUE), ()
-                -> ParserUtil.parseIndex(Long.toString((long) Integer.MAX_VALUE + 1))
+            IntegerOutOfRangeException.class, indexOutOfRangeErrorMsg, () ->
+                ParserUtil.parseIndex(Long.toString((long) Integer.MAX_VALUE + 1))
         );
     }
 

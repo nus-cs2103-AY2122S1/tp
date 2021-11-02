@@ -94,6 +94,7 @@ public class ParserUtil {
         if (!Episode.isValidEpisode(trimmedEpisode)) {
             throw new ParseException(Episode.MESSAGE_CONSTRAINTS);
         }
+
         return new Episode(trimmedEpisode);
     }
 
