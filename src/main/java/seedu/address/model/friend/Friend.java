@@ -79,6 +79,24 @@ public class Friend {
         gameFriendLinks.get(gameId).setSkillValue(skillValue);
     }
 
+    /**
+     * Links friend with the game in gameFriendLink
+     * @param gameFriendLink gameFriendLink which contains the game to link to, the username and also the skill value.
+     */
+    public void link(GameFriendLink gameFriendLink) {
+        GameId gameId = gameFriendLink.getGameId();
+        this.gameFriendLinks.put(gameId, gameFriendLink);
+    }
+
+    /**
+     * Removes the link between the friend and the game provided.
+     * @param game game to unlink from.
+     */
+    public void unlink(Game game) {
+        GameId gameId = game.getGameId();
+        this.gameFriendLinks.remove(gameId);
+    }
+
     public FriendId getFriendId() {
         return friendId;
     }

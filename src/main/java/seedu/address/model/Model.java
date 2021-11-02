@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
@@ -136,7 +137,7 @@ public interface Model {
     /**
      * Unlinks the friend {@code toUnlink} with the Game {@code game}.
      */
-    void unlinkFriend(Friend toUnlink, Game game);
+    void unlinkFriend(Friend toUnlink, Game game) throws GameLinkNotFoundException;
 
     //=========== GamesBook ==================================================================================
 
