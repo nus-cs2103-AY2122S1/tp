@@ -52,7 +52,7 @@ public class SortField {
 
     @Override
     public String toString() {
-        return value.name().toLowerCase(Locale.ROOT);
+        return value.name().toLowerCase();
     }
 
     @Override
