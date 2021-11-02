@@ -66,22 +66,22 @@ Examples:
 * `add module m/CS2103`: Adds module CS2103 to TAB
 * `add module m/CS2100`: Adds module CS2100 to TAB
 
-
 ### Adding new task to a module: `add task`
 
 Creates a new task for a specific module.<br>
 Task id must begin with a capital letter 'T', followed by numbers only.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
-Task deadline must only contain alphanumeric characters and dashes.
+Task deadline must contain either date only/time only/date and time.<br>
+Date must be in the form "YYYY-MM-DD".<br>
+Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
 
 Format: `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>`
 
 Examples:
 * `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-12`:
-  * Adds the task assignment1 with deadline on 12 October 2021 to module CS2103
-* `add task m/CS2100 ti/T1 a/lab1 d/2021-10-13 `:
-  * Adds the task lab1 with deadline on 13 October 2021 to module CS2100
-
+  * Adds the task assignment1 with deadline 'Tue, Oct 12 2021' to module CS2103
+* `add task m/CS2100 ti/T1 a/lab1 d/2021-10-13 16:00 `:
+  * Adds the task lab1 with deadline 'Wed, Oct 13 2021 04:00 pm' to module CS2100
 
 ### Editing a module's name: `edit module`
 
@@ -92,7 +92,6 @@ Format: `edit module m/<old module name> mn/<new module name>`
 Examples:
 * `edit module m/CS2103 mn/CS2105`: 
   * Renames the module "CS2103" to "CS2105"
-
 
 ### Add student to a specific module: `add student`
 
@@ -138,17 +137,19 @@ Examples:
 Edits a task's information.<br>
 The identity fields (module name/task id) must be provided.<br>
 At least one editable field (name/deadline) must be provided, and only provided editable fields will be changed.<br>
-Task name must only contain alphanumeric characters.<br>
-Task deadline must only contain alphanumeric characters and dashes.
+Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
+Task deadline must contain either date only/time only/date and time.<br>
+Date must be in the form "YYYY-MM-DD".<br>
+Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
 
 Format: `edit task m/<module name> ti/<task id> a/<edited task name> d/<edited task deadline>`
 
 Examples:
-* `edit task m/CS2103 ti/T10 a/Final exam d/20-11-2021`: 
-  * Edits the name and deadline of the task with task id 'T10' to 'Final exam' and '20-11-2021' respectively
-* `edit task m/CS2103 ti/T10 d/23-11-2021`: 
-  * Edits only the deadline of the task with task id 'T10' to '20-11-2021'
-
+* `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`: 
+  * Edits the name and deadline of the task with task id 'T10' to 'Final exam' and 'Tue, Nov 23 2021' respectively
+* `edit task m/CS2103 ti/T10 d/2021-11-23`: 
+  * Edits only the deadline of the task with task id 'T10' to 'Tue, Nov 23 2021'
+  
 ### Delete a task from a module: `delete task`
 
 Deletes the specified task from the specified module using the TaskID.<br>
