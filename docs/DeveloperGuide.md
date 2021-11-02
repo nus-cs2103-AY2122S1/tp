@@ -235,7 +235,7 @@ Preconditions: The app is already launched and the applicant to be deleted exist
 
 Step 1: The user inputs the command `delete-applicant 1`. The app parser simply parses the index 1 and returns the `DeleteApplicantCommand` instance.
 
-Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
+Step 2: After verifying that index 1 is valid, LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
 
@@ -246,11 +246,50 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 **Aspect: How to access and delete an applicant**
 
-* **Alternative 1 (current choice):** [to be added]
+* **Alternative 1 (current choice):** Let ModelManager handle the deletion but keep the ApplicantBook's methods separate from the ModelManager [to be added]
+    * Pros: More accessible since ModelManager already contains the applicantBook, and reduces complication of code.
+    * Cons: Higher coupling for ModelManager since it handles more commands.
 
 * **Alternative 2:** [to be added]
 
 ### Edit applicant feature
+
+#### Implementation
+The implementation of the edit applicant feature uses the `EditApplicantCommand` class. A unique attribute for this 
+class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
+
+The `EditApplicantCommand` method takes in a non-null index and non-null description of the target applicant with the help of the `EditApplicantDescriptor` class.
+It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
+It also has guard clauses verifying that the description has a valid `Title` which is a valid position title in the current `positionBook`. A final check is done to check that the applicant
+with the new description is not already existing in MTR. Once these criteria are met, the model then updates the target applicant with the new description via the
+`Model#setApplicant` and `Model#updateFilteredApplicantList` methods.
+
+Given below is an example usage scenario and how the edit applicant feature behaves at each step. <br>
+Preconditions: The app is already launched, the target applicant exists.
+
+Step 1. User inputs command `edit-applicant 1 n/Jasmine Doe p/98761432 e/jdoe@example.com`.  The app parser will store 
+all the user-input parameters into an `EditApplicantDescriptor` object.
+
+Step 2. After verifying that index 1 and the new description are valid, LogicManager executes this `EditApplicantCommand` instance.
+This invokes the `EditApplicantDescriptor#createEditedApplicant` method to create a new `Applicant` to replace the original one.
+
+Step 3. A comparison is then done using the `Applicant#isSameApplicant` and `Model#hasApplicant` methods to ensure that the descriptions of the new applicant is different from the
+target `Applicant` and that the target `Applicant` exists.
+
+Step 4. Once step 3 is verified, we replace the existing applicant with the new one in the `applicantBook` via `Model#setApplicant` and reflect the updated list.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: How to access and delete an applicant**
+
+* **Alternative 1 (current choice):** Have a separate class handle changing details of an applicant. [to be added]
+    * Pros: Lowers coupling and makes logic of ModelManager simpler.
+    * Cons: If a change is needed for the EditApplicantCommand, more classes need to be changed, making it more troublesome.
+
+* **Alternative 2:** [to be added]
 
 ### Filter applicants feature
 
@@ -258,9 +297,23 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
 which filters its contents based on a specified `Predicate`.  
-This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called.
+This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called. 
 
-Given below is an example usage scenario of the applicant filter feature.
+The `FilterApplicantCommand#execute()` method has guard clauses to check that the contents of the input are valid through the
+`FilterApplicantDescriptor#hasAnyFilter()` method. If contents are valid, it uses mapping via the `FilterApplicantCommand#applicantMatchesFilter`
+method to filter out all applicants matching the given criteria. A new filtered list is now displayed on the MTR UI.
+
+Given below is an example usage scenario of the applicant filter feature. <br>
+Preconditions: Applicant exists in MTR and valid filters provided. 
+
+Step 1. User inputs command `filter-applicant status/rejected`. The app parser stores all information in a new `FilterApplicantDescriptor` instance.
+
+Step 2. Model executes `FilterApplicantCommand#applicantMatchesFilter` method my mapping all applicants to check if they meet the criteria/information given.
+
+Step 3. Results of this new filtered list is then passed to the model and is reflected onto the UI.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the FilterApplicantCommand:
+[to be added]
 
 *{More to be added}*
 
@@ -276,13 +329,38 @@ It is also used to in the validation of the filtering criteria.
 
 *{More to be added}*
 
-#### Alternatives considered
+#### Design considerations:
 
-- Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`
-    - Does not make good use of the in-built functionality of `FilteredList`
+**Aspect: Accessing a list**
+
+* **Alternative 1 (current choice):** Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`.
+    * Pros: [to be added]
+    * Cons: Does not make good use of the in-built functionality of `FilteredList`.
+
+* **Alternative 2:** [to be added]
+
+**Aspect: Filtering the inputs**
+
+* **Alternative 1(current choice)**: Separate class to handle parsing of filtering inputs.
+    * Pros: Allows class with methods catered better to our needs (e.g. use of Optional so that fields not filtered by are untouched)
+    * Cons: More time-consuming to create from scratch and creation of more test cases.
+
+* **Alternative 2**: Modifying/improving original AB3 `FindCommand` and `FindCommandParser`.
+    * Pros: Base code already exists and modifying it would take less time. Test cases also require little modification.
+    * Cons: Requires understanding base of the code and high coupling exists.
 
 *{More to be added}*
 
+
+### Mark/update applicant's status feature
+The mark feature is achieved using the `MarkApplicantStatusCommand` class. It is a simple command which only modifies the 
+application status of the applicant for a particular position.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There are currently only 3 states for applicants: `Accepted`, `Rejected` and `Pending`.
+
+
+
+</div>
 
 ### List applicants feature
 
@@ -306,23 +384,19 @@ Implements the following functions:
 
 These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
 
-Given below is an example usage scenario and how the rejection rate mechanism works at every step.
+Given below is an example usage scenario and how the rejection rate mechanism works at every step. <br>
+Preconditions: Position exists in MTR and there is at least 1 applicant for this position (regardless of status).
 
 Step 1. The user launches the application which is assumed to have some positions and corresponding applicants applying for them in the MTR.
-
-![InitialState](images/rejection-rates/Initial-state.png)
 
 Step 2. The user executes `rate pos/software engineer` command to calculate the rejection rate of Software Engineer in the PositionBook.
 The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
 
-![Step2](images/rejection-rates/Step2.png)
-
 Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the position as well as the number of rejected applicants of the same position.
-
-![Step3](images/rejection-rates/Step3.png)
 
 Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
 
+The following sequence diagram shows the method invocation in this step.
 ![SeqDiagram](images/rejection-rates/SeqDiagram.png)
 
 Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
@@ -340,7 +414,8 @@ Step 5. Any command the user executes next simply refreshes the current state to
     * Cons: Potentially a large amount of space required, slowing performance. Also, the dictionary needs to be updated everytime an applicant's status changes or when a position/applicant is added/deleted,
       which could result in many inter-linked implementations for the dictionary, rendering it slow. May be difficult to show change in UI as well with many layers affected.
 
-
+The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
+![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 

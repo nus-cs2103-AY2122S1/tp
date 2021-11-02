@@ -74,8 +74,6 @@ public class EditApplicantCommand extends Command {
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit, model);
 
-
-
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
