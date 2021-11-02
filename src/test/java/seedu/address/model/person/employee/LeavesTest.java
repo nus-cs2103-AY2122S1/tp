@@ -23,10 +23,8 @@ public class LeavesTest {
 
     @Test
     public void isValidLeaves() {
-        // null leaves
-        assertThrows(NullPointerException.class, () -> Leaves.isValidLeaves(null));
-
         // invalid leaves
+        assertFalse(Leaves.isValidLeaves(null)); // null
         assertFalse(Leaves.isValidLeaves("")); // empty string
         assertFalse(Leaves.isValidLeaves(" ")); // spaces only
         assertFalse(Leaves.isValidLeaves("Leaves")); // non-numeric

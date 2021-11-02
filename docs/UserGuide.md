@@ -74,7 +74,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
 |  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags.
-| `lp/`  | Loyalty Point       | A non-negative number with at least 4 digits
+| `lp/`  | Loyalty Point       | A non-negative number that should not exceed 2^31 - 1
 | `alg/` | Allergy (Optional)  | Similar to `t/`
 | `sr/`  | Special Request (Optional) | Similar to `t/`
 |  `l/`  | Leaves              | Leaves should only contain numbers
