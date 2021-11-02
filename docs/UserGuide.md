@@ -167,7 +167,7 @@ Name is case-sensitive and only allows exact match. E.g. `Jonas` will not match 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
 
-If duplicated students are found in the list of names and NUSNET IDs input, and error will be thrown to inform you of
+If duplicated students are found in the list of names and NUSNET IDs input, an error will be shown to inform you of
 the clash, and the group will not be created. 
 </div>
 
@@ -360,7 +360,7 @@ Loads data as specified in the provided CSV file.
 
 Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]`
 
-* The file path can be either the absolute path or the relative path. The relative path will be relative to the folder your jar file is located.
+* The file path can be either the absolute path or the relative path. The relative path will be relative to the folder your JAR file is located.
 * The first row of the CSV file needs to be headers for the respective columns.
 * The header for the assessment columns should the name of the assessment. For example, `Rune Trials`. The header for every other column does not matter.
 * Every row apart from the first represents a student.
@@ -387,11 +387,12 @@ An example of how the CSV should be formatted is shown below:
 
 ![CsvFormatExample](images/CsvFormatExample.png)
 
-The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`. (There are 2 group columns, 2 assessments, and 2 tag columns.)
+The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`. 
+(There are 2 group columns, 2 assessments columns, and 2 tag columns.)
 
 Examples:
 * `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` 
-  * imports from the absolute path, and database has 2 group columns, 10 assessments, and 1 tag column.
+  * imports from the absolute path, and database has 2 group columns, 10 assessments columns, and 1 tag column.
 * `import -f student_data.csv -g 5 -a 20` 
   * imports from the relative path, and database has 5 group columns and 20 assessments.
 
@@ -405,7 +406,7 @@ Exports data into a CSV file. Can be used to backup the data, or to send the dat
 Format: `export [-f <file_path>]`
 
 * The file path can be either the absolute path or the relative path.
-* The relative path will be relative to the folder your jar file is located.
+* The relative path will be relative to the folder your JAR file is located.
 * If the file path is not specified, it will be saved to `sourceControl.csv`.
 * The format of the CSV file saved matches exactly the CSV format used by the `import` command.
 
@@ -461,7 +462,12 @@ Format: `help`
 
 ### Accessing command history
 
-Using the up and down arrow keys on the keyboard retrieves past command lines entered. 
+Retrieves past command lines input. 
+
+* This can be done using the up and down arrow keys.
+* Only successful command input would be recorded. Unsuccessful inputs which shows an error will not be saved. 
+* Using the up arrow key retrieves the previous input. 
+* Using the down arrow key retrieves the next input.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -529,6 +535,14 @@ If you wish to back up the data, you can use the `export` command. The `import` 
 [Return to Table of Contents](#table-of-contents)
 
 
+### Why is my data is gone when I reopen the app?
+Please ensure that the JAR file is in the same directory as it was before. Our application stores the data in external files,
+and data would be lost if either these files are deleted, or if the JAR file is removed from the directory. 
+
+Some of these data stored externally include students and their particulars (e.g. NUSNET IDs, groups, assessments and scores),
+as well as you alias preferences. 
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -584,8 +598,9 @@ Word | Meaning
 Alphanumeric | A character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
 Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
-CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
 Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
+CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
+JAR | A package file format to combine many Java class files and resources (e.g. text and images) into one file for distribution. Source Control can be opened from the JAR file `sourceControl.jar` retrieved from our website. 
 Java | A computing platform for application development. Source Control runs on Java.
 JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 Directory | It is where files in the computer are stored, or commonly known as folder. 
