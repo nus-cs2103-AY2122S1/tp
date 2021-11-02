@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.JANE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -120,7 +121,7 @@ class FilterCommandTest {
 
     @Test
     public void execute_oneRating_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 4);
         Set<CategoryCode> categoryCodes = Collections.emptySet();
         Rating rating = new Rating("5");
         Set<Tag> tags = Collections.emptySet();
@@ -128,7 +129,8 @@ class FilterCommandTest {
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA), model.getFilteredPersonList());
+
+        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA, JANE), model.getFilteredPersonList());
     }
 
     // TODO [LETHICIA]

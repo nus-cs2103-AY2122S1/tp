@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.IsFindableContainsKeywordsPredicate;
-import seedu.address.model.person.FindableContainsKeywordsPredicate;
 import seedu.address.model.summary.Summary;
 import seedu.address.testutil.AddressBookBuilder;
 

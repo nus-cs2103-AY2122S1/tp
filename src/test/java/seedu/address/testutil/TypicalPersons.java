@@ -45,14 +45,16 @@ public class TypicalPersons {
             .withReview("great").withTags("friends").withRating("5").build();
     public static final Person ELLE = new PersonBuilder().withCategoryCode("att").withName("Elle Meyer")
             .withReview("great").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").withRating("4").build();
+            .withEmail("werner@example.com").withAddress("michegan ave").withRating("5").build();
     public static final Person FIONA = new PersonBuilder().withCategoryCode("com").withName("Fiona Kunz")
             .withReview("great").withPhone("9482427").withEmail("lydia@example.com")
-            .withAddress("little tokyo").withRating("3")
-            .build();
+            .withAddress("little tokyo").withRating("5").build();
     public static final Person GEORGE = new PersonBuilder().withCategoryCode("fnb").withName("George Best")
             .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street").withReview("great")
             .withRating("2").build();
+    public static final Person JANE = new PersonBuilder().withCategoryCode("com").withName("Jane Parker")
+            .withPhone("90477602").withEmail("jane@example.com").withAddress("23rd street").withReview("beautiful")
+            .withRating("5").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withCategoryCode("att").withName("Hoon Meier")
@@ -96,10 +98,10 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE));
     }
 
     public static List<Person> getRandomTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(CARL, DANIEL, GEORGE, BENSON, ELLE, ALICE, FIONA));
+        return new ArrayList<>(Arrays.asList(CARL, DANIEL, GEORGE, BENSON, JANE, ELLE, ALICE, FIONA));
     }
 }
