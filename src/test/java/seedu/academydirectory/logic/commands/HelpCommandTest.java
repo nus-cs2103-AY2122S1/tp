@@ -2,11 +2,13 @@ package seedu.academydirectory.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.model.VersionedModel;
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.VersionedModelManager;
 
 public class HelpCommandTest {
@@ -14,16 +16,27 @@ public class HelpCommandTest {
 
     @Test
     public void valid_help_commands() {
+        // two general help commands are equal to each other
         HelpCommand helpCommand1 = new HelpCommand();
         assertEquals(helpCommand1, new HelpCommand());
+
+        // a general help command is not equal to a specific help command
         assertNotEquals(helpCommand1, new HelpCommand("add", AddCommand.HELP_MESSAGE));
+
+        // a help command is not equal to another type
         assertNotEquals(helpCommand1, "Life");
+
         HelpCommand helpCommand2 = new HelpCommand("grade", GradeCommand.HELP_MESSAGE);
+
+        // a help command is equal if the specific type is equal
         assertEquals(helpCommand2, new HelpCommand("grade", GradeCommand.HELP_MESSAGE));
         assertNotEquals(helpCommand2, helpCommand1);
-        HelpCommand helpCommand3 = new HelpCommand("please send help right now", "random help message");
-        assertNotEquals(helpCommand3, helpCommand2);
-        assertNotEquals(helpCommand3, 3);
+
+        // a help command is not equal even if the type is equal, if the message are different
+        assertNotEquals(helpCommand2, new HelpCommand("grade", AddCommand.HELP_MESSAGE));
+
+        // a help command is not equal if type and help message are different
+        assertNotEquals(helpCommand2, new HelpCommand("clear", ClearCommand.HELP_MESSAGE));
     }
 
     @Test
@@ -31,16 +44,25 @@ public class HelpCommandTest {
         HelpCommand helpCommand1 = new HelpCommand();
         CommandResult commandResult1 = new CommandResult(HelpCommand.MESSAGE_HELP_SUCCESS_GENERAL,
                 HelpCommand.DEFAULT_MESSAGE);
+        // assert that executing a general help command is successful
         assertCommandSuccess(helpCommand1, model, commandResult1, model);
 
         HelpCommand helpCommand2 = new HelpCommand("grade", GradeCommand.HELP_MESSAGE);
         CommandResult commandResult2 = new CommandResult(String.format(HelpCommand.MESSAGE_HELP_SUCCESS_SPECIFIC,
                 "grade"), GradeCommand.HELP_MESSAGE);
+        // asserting that executing a specific help command is successful
         assertCommandSuccess(helpCommand2, model, commandResult2, model);
 
-        HelpCommand helpCommand3 = new HelpCommand("exit", ExitCommand.HELP_MESSAGE);
+        HelpCommand helpCommand3 = new HelpCommand("exit", GradeCommand.HELP_MESSAGE);
         CommandResult commandResult3 = new CommandResult(String.format(HelpCommand.MESSAGE_HELP_SUCCESS_SPECIFIC,
-                "exit"), ExitCommand.HELP_MESSAGE);
+                "exit"), GradeCommand.HELP_MESSAGE);
+        // asserting that executing a non-viable help command is successful
         assertCommandSuccess(helpCommand3, model, commandResult3, model);
+    }
+
+    @Test
+    public void execute_non_valid_help() {
+        // help command throws exception if inputs are null
+        assertThrows(CommandException.class, () -> new HelpCommand(null, null).execute(model));
     }
 }
