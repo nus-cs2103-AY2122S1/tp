@@ -26,25 +26,32 @@ public class AppointmentBuilder {
      * Creates a {@code} AppointmentBuilder with the default details.
      */
     public AppointmentBuilder() {
-        this(true);
+        this(Seed.ONE);
     }
 
     /**
      * Creates a {@code} AppointmentBuilder with the two default values.
      * This is a simple way to create appointments without time conflicts.
      */
-    public AppointmentBuilder(boolean isFirst) {
+    public AppointmentBuilder(Seed seed) {
         UniquePersonList clients = new UniquePersonList();
         clients.add(new PersonBuilder().withName(DEFAULT_CLIENT).build());
         this.clients = clients;
         this.location = new Address(DEFAULT_LOCATION);
         this.description = DEFAULT_DESCRIPTION;
-        if (isFirst) {
+
+        switch (seed) {
+        case ONE:
             this.timePeriod = new TimePeriod(LocalDateTime.of(2021, 12, 25, 21, 30),
                     LocalDateTime.of(2021, 12, 25, 22, 30));
-        } else {
+            break;
+        case TWO:
             this.timePeriod = new TimePeriod(LocalDateTime.of(2022, 12, 25, 21, 30),
                     LocalDateTime.of(2022, 12, 25, 22, 30));
+            break;
+        default:
+            this.timePeriod = new TimePeriod(LocalDateTime.of(2023, 12, 25, 21, 30),
+                    LocalDateTime.of(2023, 12, 25, 22, 30));
         }
     }
 

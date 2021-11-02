@@ -1,7 +1,5 @@
 package seedu.placebook.commons.util;
 
-import seedu.placebook.model.schedule.Appointment;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.placebook.commons.util.AppUtil.checkArgument;
 
@@ -70,6 +68,15 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Returns the String representation of fields of the list, joined by delimiter.
+     *
+     * @param list the list to be converted to String
+     * @param function function to get the field of each item
+     * @param delimiter delimiter to join the String
+     * @param <T> the type of the item in the List
+     * @return the result String
+     */
     public static <T> String listToString(List<T> list, Function<T, String> function, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
         for (T t : list) {

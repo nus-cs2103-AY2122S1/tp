@@ -28,6 +28,6 @@ public class ClashingAppointmentsException extends RuntimeException {
      * @return the String representation of the clashing Appointments.
      */
     public String getClashingAppointmentAsString() {
-        return StringUtil.listToString(appointments, app -> app.getTimePeriod().toString(), ", ");
+        return StringUtil.listToString(appointments, app -> app.getTimePeriod().toString(), "\n");
     }
 }
