@@ -280,5 +280,7 @@ Action | Format, Examples
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
 **Export Email** | `exportemail FILENAME` <br> e.g., `export email email.txt`
+**Undo** | `undo`
+**Redo** | `redo`
 **Statistics** | `stat`
 **Help** | `help`
