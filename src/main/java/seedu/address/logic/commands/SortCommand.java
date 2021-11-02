@@ -20,7 +20,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the currently displayed items by name or count\n"
+            + ": Sorts the items in the inventory by name or count\n"
             + "Parameters: "
             + "NAME " + PREFIX_NAME
             + " or COUNT" + PREFIX_COUNT
