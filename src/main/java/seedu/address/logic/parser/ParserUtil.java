@@ -357,7 +357,7 @@ public class ParserUtil {
     public static SortOrder parseSortingOrder(String sortingOrder) throws ParseException {
         requireNonNull(sortingOrder);
         String trimmedSortingOrder = sortingOrder.trim().toLowerCase();
-        if (!SortOrder.isValidSortingOrder(trimmedSortingOrder)) {
+        if (!SortOrder.isValidSortBy(trimmedSortingOrder)) {
             throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
         }
         return new SortOrder(trimmedSortingOrder);
@@ -387,7 +387,7 @@ public class ParserUtil {
     public static SortByCustomer parseSortByCustomer(String sortBy) throws ParseException {
         requireNonNull(sortBy);
         String trimmedSortBy = sortBy.trim().toLowerCase();
-        if (!SortByCustomer.isValidSortingOrder(trimmedSortBy)) {
+        if (!SortByCustomer.isValidSortBy(trimmedSortBy)) {
             throw new ParseException(SortByCustomer.MESSAGE_CONSTRAINTS);
         }
         return new SortByCustomer(trimmedSortBy);

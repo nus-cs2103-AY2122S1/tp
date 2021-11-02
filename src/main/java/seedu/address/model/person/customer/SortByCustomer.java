@@ -35,14 +35,14 @@ public class SortByCustomer {
      */
     public SortByCustomer(String sortBy) {
         requireNonNull(sortBy);
-        checkArgument(isValidSortingOrder(sortBy), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSortBy(sortBy), MESSAGE_CONSTRAINTS);
         this.sortBy = sortBy;
     }
 
     /**
      * Returns true if a given string is a valid sorting type.
      */
-    public static boolean isValidSortingOrder(String test) {
+    public static boolean isValidSortBy(String test) {
         switch (test) {
         case NAME:
         case ADDRESS:

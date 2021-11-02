@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_AMY;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_BOB;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_ROCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
@@ -86,7 +86,7 @@ public class ReservationCommandTestUtil {
         DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withAllergies(VALID_ALLERGY_ALMONDS)
-                .withLoyaltyPoints(VALID_LP_AMY).withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND)
+                .withLoyaltyPoints(VALID_LP_AMY).withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND)
                 .build();
         DESC_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)

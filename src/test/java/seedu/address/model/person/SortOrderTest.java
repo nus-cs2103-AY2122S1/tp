@@ -22,19 +22,19 @@ public class SortOrderTest {
     }
 
     @Test
-    public void isValidSortingOrder() {
+    public void isValidSortBy() {
         // null phone number
-        assertThrows(NullPointerException.class, () -> SortOrder.isValidSortingOrder(null));
+        assertThrows(NullPointerException.class, () -> SortOrder.isValidSortBy(null));
 
         // invalid sorting orders
-        assertFalse(SortOrder.isValidSortingOrder("")); // empty string
-        assertFalse(SortOrder.isValidSortingOrder(" ")); // spaces only
-        assertFalse(SortOrder.isValidSortingOrder("123")); // not "a" or "d"
-        assertFalse(SortOrder.isValidSortingOrder("hello")); // not "a" or "d"
+        assertFalse(SortOrder.isValidSortBy("")); // empty string
+        assertFalse(SortOrder.isValidSortBy(" ")); // spaces only
+        assertFalse(SortOrder.isValidSortBy("123")); // not "a" or "d"
+        assertFalse(SortOrder.isValidSortBy("hello")); // not "a" or "d"
 
         // valid sorting orders
-        assertTrue(SortOrder.isValidSortingOrder("a")); // sorting order ascending
-        assertTrue(SortOrder.isValidSortingOrder("d")); // sorting order descending
+        assertTrue(SortOrder.isValidSortBy("a")); // sorting order ascending
+        assertTrue(SortOrder.isValidSortBy("d")); // sorting order descending
     }
 
     @Test

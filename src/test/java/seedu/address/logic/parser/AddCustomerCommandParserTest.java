@@ -27,9 +27,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.ALLERGY_DESC_GRAPEFRUITS;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_AMY;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_BOB;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVE_BAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_AMY;
@@ -78,10 +78,10 @@ public class AddCustomerCommandParserTest {
         // multiple tags - all accepted
         Customer expectedCustomerMultipleTags = new CustomerBuilder(CUSTOMER_BOB).withTags(VALID_TAG_FRIEND,
                         VALID_TAG_HUSBAND).withAllergies(VALID_ALLERGY_GRAPEFRUITS)
-                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + LP_DESC_BOB + ALLERGY_DESC_GRAPEFRUITS + SPECIAL_REQUEST_DESC_LIVEBAND
+                        + LP_DESC_BOB + ALLERGY_DESC_GRAPEFRUITS + SPECIAL_REQUEST_DESC_LIVE_BAND
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCustomerCommand(expectedCustomerMultipleTags));
     }

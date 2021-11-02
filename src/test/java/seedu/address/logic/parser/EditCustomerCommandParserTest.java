@@ -30,12 +30,12 @@ import static seedu.address.logic.commands.CustomerCommandTestUtil.INVALID_ALLER
 import static seedu.address.logic.commands.CustomerCommandTestUtil.INVALID_SPECIAL_REQUESTS_DESC;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_AMY;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_BOB;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVE_BAND;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_ALMONDS;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_AMY;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_BOB;
-import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -132,12 +132,12 @@ public class EditCustomerCommandParserTest {
         Index targetIndex = INDEX_SECOND_CUSTOMER;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_GRAPEFRUITS
-                + LP_DESC_AMY + ALLERGY_DESC_ALMONDS + SPECIAL_REQUEST_DESC_LIVEBAND + TAG_DESC_FRIEND;
+                + LP_DESC_AMY + ALLERGY_DESC_ALMONDS + SPECIAL_REQUEST_DESC_LIVE_BAND + TAG_DESC_FRIEND;
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withLoyaltyPoints(VALID_LP_AMY).withAllergies(VALID_ALLERGY_GRAPEFRUITS, VALID_ALLERGY_ALMONDS)
-                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
 
@@ -195,8 +195,8 @@ public class EditCustomerCommandParserTest {
         expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
         // special requests
-        userInput = targetIndex.getOneBased() + SPECIAL_REQUEST_DESC_LIVEBAND;
-        descriptor = new EditCustomerDescriptorBuilder().withSpecialRequests(VALID_SPECIAL_REQUEST_LIVEBAND).build();
+        userInput = targetIndex.getOneBased() + SPECIAL_REQUEST_DESC_LIVE_BAND;
+        descriptor = new EditCustomerDescriptorBuilder().withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND).build();
         expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
