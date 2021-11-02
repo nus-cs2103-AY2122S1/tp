@@ -41,6 +41,10 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
 
         if (argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).isPresent()) {
             String venue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).get();
+            if (!Appointment.isValidVenueFormat(venue)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        Appointment.INVALID_VENUE_INPUT));
+            }
             editAppointmentDescriptor.setVenue(venue);
         }
 
