@@ -16,7 +16,9 @@ public class NameTest {
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
+        String tooLongName = "this is a 51 character name that is not allowed hah";
         assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+        assertThrows(IllegalArgumentException.class, () -> new Name(tooLongName));
     }
 
     @Test

@@ -5,24 +5,22 @@ skinparam classBackgroundColor MODEL_COLOR
 skinparam classAttributeIconSize 0
 show fields
 
-title Default Appointment
+title Adding new Appointment
 
 object "__:Person__" as normalHuman {
 }
 
-object "__:Appointment__" as emptyAppointment {
+object "__:Appointment__" as completeAppointment {
     - date = "No Appointment Scheduled Yet"
     - time = ""
     - venue = ""
 }
 
-
-
 object "__:AppointmentCount__" as emptyAppointmentCount {
-    - count = 0
+    - count = 1
 }
 
-normalHuman --> emptyAppointment
+normalHuman --> completeAppointment
 normalHuman --> emptyAppointmentCount
 
 
