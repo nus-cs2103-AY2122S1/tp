@@ -18,6 +18,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Label;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.OrderBook;
@@ -132,5 +133,28 @@ public class EditTaskCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditTaskCommand(INDEX_FIRST_TASK, DESC_SEW)));
+    }
+
+    @Test
+    public void editTaskDescriptorEquals() {
+        final EditTaskDescriptor descriptor = new EditTaskDescriptor();
+        final EditTaskDescriptor otherEqual = new EditTaskDescriptor();
+        final EditTaskDescriptor otherNotEqual = new EditTaskDescriptor();
+        otherNotEqual.setLabel(new Label(VALID_LABEL_ORDER));
+
+        // same object is equal
+        assertTrue(descriptor.equals(descriptor));
+
+        // same fields is equal
+        assertTrue(descriptor.equals(otherEqual));
+
+        // not same fields is not equal
+        assertFalse(descriptor.equals(otherNotEqual));
+
+        // null is not equal
+        assertFalse(descriptor.equals(null));
+
+        // other objects are not equal
+        assertFalse(descriptor.equals(new TaskBuilder().build()));
     }
 }
