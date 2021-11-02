@@ -147,7 +147,7 @@ Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix inputs for `add` command must follow the following input specifications:**<br>
 
 * You may
@@ -156,17 +156,17 @@ Examples:
 
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
-| NAME | `n/` | [name](#name-n) |
-| PHONE_NUMBER | `p/` | [phone_number](#phone_number-p) |
-| EMAIL_ADDRESS | `e/` | [email_address](#email_address-e) |
-| ROLE | `r/` | [role](#role-r) |
-| EMPLOYMENT_TYPE | `et/` | [employment_type](#employment_type-et) |
-| EXPECTED_SALARY | `s/` | [expected_salary](#expected_salary-s) |
-| LEVEL_OF_EDUCATION | `l/` | [level_of_education](#level_of_education-l) |
-| YEARS_OF_EXPERIENCE | `y/` | [years_of_experience](#years_of_experience-y) |
-| TAG | `t/` | [tag](#tag-t) |
-| INTERVIEW | `i/` | [interview](#interview-i) |
-| NOTES | `nt/` | [notes](#notes-nt) |
+| NAME | `n/` | [**name**](#name-n) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e) |
+| ROLE | `r/` | [**role**](#role-r) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y) |
+| TAG | `t/` | [**tag**](#tag-t) |
+| INTERVIEW | `i/` | [**interview**](#interview-i) |
+| NOTES | `nt/` | [**notes**](#notes-nt) |
 
 </div>
 
@@ -191,7 +191,7 @@ Examples:
 * `edit 1 t/` will remove all ***tags***s from the applicant with index number 1
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix inputs for `edit` command must follow the same input specifications as `add` command:**<br>
 
 * You may 
@@ -200,17 +200,17 @@ Examples:
 
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
-| NAME | `n/` | [name](#name-n) |
-| PHONE_NUMBER | `p/` | [phone_number](#phone_number-p) |
-| EMAIL_ADDRESS | `e/` | [email_address](#email_address-e) |
-| ROLE | `r/` | [role](#role-r) |
-| EMPLOYMENT_TYPE | `et/` | [employment_type](#employment_type-et) |
-| EXPECTED_SALARY | `s/` | [expected_salary](#expected_salary-s) |
-| LEVEL_OF_EDUCATION | `l/` | [level_of_education](#level_of_education-l) |
-| YEARS_OF_EXPERIENCE | `y/` | [years_of_experience](#years_of_experience-y) |
-| TAG | `t/` | [tag](#tag-t) |
-| INTERVIEW | `i/` | [interview](#interview-i) |
-| NOTES | `nt/` | [notes](#notes-nt) |
+| NAME | `n/` | [**name**](#name-n) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e) |
+| ROLE | `r/` | [**role**](#role-r) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y) |
+| TAG | `t/` | [**tag**](#tag-t) |
+| INTERVIEW | `i/` | [**interview**](#interview-i) |
+| NOTES | `nt/` | [**notes**](#notes-nt) |
 
 </div>
 
@@ -238,7 +238,7 @@ Examples:
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
 
 * You may
@@ -247,17 +247,17 @@ Examples:
 
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
-| NAME | `n/` | [name](#name-n-1) |
-| PHONE_NUMBER | `p/` | [phone_number](#phone_number-p-1) |
-| EMAIL_ADDRESS | `e/` | [email_address](#email_address-e-1) |
-| ROLE | `r/` | [role](#role-r-1) |
-| EMPLOYMENT_TYPE | `et/` | [employment_type](#employment_type-et-1) |
-| EXPECTED_SALARY | `s/` | [expected_salary](#expected_salary-s-1) |
-| LEVEL_OF_EDUCATION | `l/` | [level_of_education](#level_of_education-l-1) |
-| YEARS_OF_EXPERIENCE | `y/` | [years_of_experience](#years_of_experience-y-1) |
-| TAG | `t/` | [tag](#tag-t-1) |
-| INTERVIEW | `i/` | [interview](#interview-i-1) |
-| NOTES | `nt/` | [notes](#notes-nt-1) |
+| NAME | `n/` | [**name**](#name-n-1) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p-1) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e-1) |
+| ROLE | `r/` | [**role**](#role-r-1) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et-1) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s-1) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l-1) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y-1) |
+| TAG | `t/` | [**tag**](#tag-t-1) |
+| INTERVIEW | `i/` | [**interview**](#interview-i-1) |
+| NOTES | `nt/` | [**notes**](#notes-nt-1) |
 
 </div>
         
