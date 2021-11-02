@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.BOB;
+import static seedu.address.testutil.TypicalGameFriendLinks.APEX_AMY_DRACO_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_LINK;
 
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,14 @@ public class FriendTest {
         // id differs in case, all other attributes same -> returns false
         Friend editedBob = new FriendBuilder(BOB).withFriendName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameFriendId(editedBob));
+    }
+
+    @Test
+    public void getNumberOfGames() {
+        // add two games, should return 2
+        Friend copyAlice = new FriendBuilder(ALICE)
+                .withGameFriendLinks(CSGO_AMY_DRACO_LINK, APEX_AMY_DRACO_LINK).build();
+        assertEquals(2, copyAlice.getNumberOfGames());
     }
 
     @Test

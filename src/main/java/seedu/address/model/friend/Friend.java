@@ -79,16 +79,17 @@ public class Friend {
         gameFriendLinks.get(gameId).setSkillValue(skillValue);
     }
 
-    public Integer getSkillValue(GameId gameId) {
-        GameFriendLink gfl = gameFriendLinks.get(gameId);
-        int skillVal = gfl.getSkillValue().getSkillVal();
-        return skillVal;
-    }
-
     public FriendId getFriendId() {
         return friendId;
     }
 
+    /**
+     * Returns the number of games contained inside the friend's GameFriendLinks.
+     * @return Number of games.
+     */
+    public int getNumberOfGames() {
+        return getGameFriendLinks().size();
+    }
     public FriendName getFriendName() {
         return friendName;
     }
