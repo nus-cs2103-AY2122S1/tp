@@ -135,7 +135,7 @@ Examples:
 
 #### 1.2 Edit your profile : `edit`
 
-Edits your own profile. You can choose to edit any attributes in your own profile. You can edit multiple attributes at once.
+Edits your own profile. You can choose to edit any attributes in your own profile except module tags which use separate commands. You can edit multiple attributes at once.
 
 Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
 
