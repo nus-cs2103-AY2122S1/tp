@@ -573,7 +573,7 @@ exit
 
 Changes the current password.
 
-The flags used in `passord` are as follows:
+The flags used in `password` are as follows:
 
 | Flag | Description |
 | ---- | ----------- |
