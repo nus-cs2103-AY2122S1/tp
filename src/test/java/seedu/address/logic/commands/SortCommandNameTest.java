@@ -99,7 +99,7 @@ public class SortCommandNameTest {
         // filter model by c/att
         IsFilterablePredicate predicate = new IsFilterablePredicate(
                 Collections.singleton(new CategoryCode("att")),
-                new Rating("0"),
+                new Rating(),
                 Collections.emptySet());
         model.updateFilteredPersonList(predicate);
 

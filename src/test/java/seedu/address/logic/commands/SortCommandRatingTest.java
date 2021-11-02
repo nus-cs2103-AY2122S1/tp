@@ -89,7 +89,7 @@ public class SortCommandRatingTest {
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(DANIEL, ELLE, GEORGE, FIONA, ALICE, BENSON, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DANIEL, ELLE, GEORGE, FIONA, ALICE, CARL, BENSON), model.getFilteredPersonList());
     }
 
 
@@ -99,7 +99,7 @@ public class SortCommandRatingTest {
         // filter model by c/att
         IsFilterablePredicate predicate = new IsFilterablePredicate(
                 Collections.singleton(new CategoryCode("att")),
-                new Rating("0"),
+                new Rating(),
                 Collections.emptySet());
         model.updateFilteredPersonList(predicate);
 
@@ -156,7 +156,7 @@ public class SortCommandRatingTest {
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(DANIEL, ELLE, GEORGE, FIONA, ALICE, BENSON, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DANIEL, ELLE, GEORGE, FIONA, ALICE, CARL, BENSON), model.getFilteredPersonList());
 
     }
 
