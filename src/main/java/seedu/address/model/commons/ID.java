@@ -62,6 +62,14 @@ public class ID {
         return id.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Resets the counter. To be used with clear command.
+     */
+    public static void resetIdCounter() {
+        clientIDCounter = 1;
+        productIDCounter = 1;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(getId());
