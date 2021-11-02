@@ -245,6 +245,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+            helpWindow.getRoot().toFront();
         }
     }
 
@@ -271,6 +272,7 @@ public class MainWindow extends UiPart<Stage> {
             userProfileWindow.show();
         } else {
             userProfileWindow.focus();
+            userProfileWindow.getRoot().toFront();
         }
     }
 
