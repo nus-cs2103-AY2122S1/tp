@@ -25,7 +25,8 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
 
-    private boolean lastCommandIsValid = false;
+    // Keep track of whether last command entered is valid to decide command to return when up or down keys are pressed
+    private boolean isLastCommandValid = false;
 
     @FXML
     private TextField commandTextField;
@@ -54,10 +55,10 @@ public class CommandBox extends UiPart<Region> {
             commandHistory.add(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-            lastCommandIsValid = true;
+            isLastCommandValid = true;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
-            lastCommandIsValid = false;
+            isLastCommandValid = false;
         }
     }
 
@@ -80,14 +81,13 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        if (upAndAtLastCommand && lastCommandIsValid) {
+        if (upAndAtLastCommand && isLastCommandValid) {
             // Remember the text field resets to "" after each valid command
             commandTextField.setText(commandHistory.getCurrentCommand());
-            lastCommandIsValid = false;
-        } else if (downAndAtLastCommand && lastCommandIsValid) {
+            isLastCommandValid = false;
+        } else if (downAndAtLastCommand && isLastCommandValid) {
             logger.info("We are already at the newest command -> show current command");
             commandTextField.setText("");
-            lastCommandIsValid = false;
         } else if (downAndAtLastCommand || upAndAtFirstCommand) {
             logger.info("We are already at the newest or oldest command -> show current command");
             commandTextField.setText(commandHistory.getCurrentCommand());
