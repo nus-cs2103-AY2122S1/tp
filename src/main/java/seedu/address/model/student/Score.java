@@ -15,8 +15,10 @@ public class Score {
     public static final String DECIMAL_PART_REGEX = "(\\.\\d{1,2})?";
     public static final double MIN_SCORE = 0.0;
     public static final double MAX_SCORE = 100.0;
-    public static final String MAX_SCORE_REGEX = "|100.00|100.0|100";
-    public static final String VALIDATION_REGEX = INTEGRAL_PART_REGEX + DECIMAL_PART_REGEX + MAX_SCORE_REGEX;
+    public static final String MAX_SCORE_INT = "100";
+    public static final String MAX_SCORE_DEC_1 = "100.0";
+    public static final String MAX_SCORE_DEC_2 = "100.00";
+    public static final String VALIDATION_REGEX = INTEGRAL_PART_REGEX + DECIMAL_PART_REGEX;
     public final String value;
 
     /**
@@ -34,7 +36,10 @@ public class Score {
      * Returns true if a given string is a valid score.
      */
     public static boolean isValidScore(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX)
+                || test.equals(MAX_SCORE_INT)
+                || test.equals(MAX_SCORE_DEC_1)
+                || test.equals(MAX_SCORE_DEC_2);
     }
 
     /**
