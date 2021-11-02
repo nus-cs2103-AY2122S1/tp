@@ -21,7 +21,7 @@ This guide has been designed to make sure you can quickly access any information
 5. [Frequently Asked Questions](#faq)
 6. [Glossary](#glossary)
 
-We further recommend taking a glance at **[Section 2.1 Syntax and symbols](#section-21-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
+We further recommend taking a glance at **[Section 1.1 Syntax and symbols](#section-11-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
 ### Section 1.1: Syntax and Symbols
 
 --------------------------------------------------------------------------------------------------------------------
@@ -32,12 +32,14 @@ We further recommend taking a glance at **[Section 2.1 Syntax and symbols](#sect
 If you are using ModuLink for the first time, we will first walk you through a one-time set-up to get started.
 
 1. Ensure you have Java 11 or above installed on your computer. You can easily do this via the **Terminal** app for Mac users, or the **Command Prompt** app for Windows users, and simply type and enter `java -version`. 
-<br> <br>
+<br/>
 Alternatively, if you prefer, you could also check the version via the GUI for both Mac and Windows systems, as mentioned in this [guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows). 
-   <br><br>
-   ❗**ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/downloads/#java11JDK11.0.13=).**
-   <br>
-   <br>
+   <br/>
+   <br/>
+   <div markdown="span" class="alert alert-warning">:exclamation: Important:
+   ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide]       (https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+   </div>
+   <br/>
 2. Download the latest `modulink.jar` from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
 3. Move the file to the folder you want to use as the home folder for ModuLink on your computer.
 
@@ -62,8 +64,9 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 
 To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br><br>
 
-❗**If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
-
+<div markdown="span" class="alert alert-warning">:exclamation: Important:
+If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
+</div>
 
 1. [Profiles](#1-profiles) <br/>
    1.1. [Create your own profile](#11-create-your-own-profile--create) <br/>
@@ -338,7 +341,7 @@ ModuLink's data is saved in the hard disk automatically after any command that c
 
 ModuLink's data are saved as a JSON file `[JAR file location]/data/modulink.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: Caution:
+<div markdown="span" class="alert alert-warning">:warning: Caution:
 If your changes to the data file makes its format invalid, ModuLink will discard all data and start with an empty data file at the next run.
 </div>
 
