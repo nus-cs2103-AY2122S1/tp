@@ -365,7 +365,7 @@ Examples:
 </div>
 
 ### Organisation-specific commands
-Commands that are related to organisations
+Commands that are related to organisations.
 
 ##### Showing the list of all organisations: `listorg`
 Shows the list of organisations in the organisation list.
@@ -425,7 +425,7 @@ Examples:
 </div>
 
 ### Future commands
-Commands to be implemented in future versions
+Commands to be implemented in future versions.
 
 ##### Updates to data fields
 Data fields of a contact will be updated to meet the following specifications in future updates of *ComputingConnection*.
