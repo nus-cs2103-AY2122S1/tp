@@ -21,14 +21,14 @@ public class ShowCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        ShowCommand showFirstCommand = new ShowCommand(firstPredicate);
-        ShowCommand showSecondCommand = new ShowCommand(secondPredicate);
+        ShowCommand showFirstCommand = new ShowCommand(firstPredicate, "Name");
+        ShowCommand showSecondCommand = new ShowCommand(secondPredicate, "Name");
 
         // same object -> returns true
         assertTrue(showFirstCommand.equals(showFirstCommand));
 
         // same values -> returns true
-        ShowCommand showFirstCommandCopy = new ShowCommand(firstPredicate);
+        ShowCommand showFirstCommandCopy = new ShowCommand(firstPredicate, "Name");
         assertTrue(showFirstCommand.equals(showFirstCommandCopy));
 
         // different types -> returns false
