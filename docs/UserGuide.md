@@ -183,6 +183,7 @@ Format: `find [PREFIX/KEYWORD]...`
     - A block-level can be used as a search. e.g `r/A2`
     - A full valid room can be used as a search. e.g `r/A210`
 * All other fields are subject to the same validity conditions as in the [Add Command](#Adding a resident's information)
+* Any provided preamble to the prefixes will be ignored
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
