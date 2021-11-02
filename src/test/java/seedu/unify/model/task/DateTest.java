@@ -30,6 +30,11 @@ public class DateTest {
         assertFalse(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
         assertFalse(Date.isValidDate("-")); // one character
+        assertFalse(Date.isValidDate("2020-10-11")); // not within year range
+        assertFalse(Date.isValidDate("0011-12-11")); // not within year range
+        assertFalse(Date.isValidDate("9982-12-11")); // not within year range
+        assertFalse(Date.isValidDate("2021-03-1")); // invalid day format
+        assertFalse(Date.isValidDate("2019-2-11")); // invalid month format
 
         // valid dates
         assertTrue(Date.isValidDate("2021-12-11"));
@@ -38,10 +43,10 @@ public class DateTest {
 
     @Test
     public void getDate() {
-        Date validDate = new Date("2020-01-08");
+        Date validDate = new Date("2021-01-08");
 
         // valid date formats since invalid formats will be rejected at constructor
-        LocalDate test1 = LocalDate.parse("2020-01-08");
+        LocalDate test1 = LocalDate.parse("2021-01-08");
         System.out.println(validDate.getDate().equals(test1));
     }
 }
