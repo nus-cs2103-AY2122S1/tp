@@ -25,13 +25,13 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-        <VBox alignment="BOTTOM_CENTER" minHeight="500" minWidth="600">
+        <VBox alignment="BOTTOM_CENTER" minHeight="400" minWidth="600">
             <children>
                <Label fx:id="helpHeader" text="Command Summary">
                   <padding>
                      <Insets bottom="5.0" top="5.0" />
                   </padding></Label>
-                <ScrollPane fx:id="helpScrollPane" prefViewportHeight="400" prefViewportWidth="400">
+                <ScrollPane fx:id="helpScrollPane" prefViewportHeight="350" prefViewportWidth="350">
                     <ImageView fx:id="helpCommands" fitHeight="700.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" />
                 </ScrollPane>
 
