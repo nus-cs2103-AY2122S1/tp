@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.Student;
 
 /**
@@ -56,34 +58,31 @@ public class StudentCard extends UiPart<Region> {
     private ImageView image;
 
     private int displayedIndex;
-    private CommandBox commandBox;
+    private CommandExecutor commandExecutor;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      * @param student student to be displayed
      * @param displayedIndex index of the student
      */
-    public StudentCard(Student student, int displayedIndex, CommandBox commandBox) {
+    public StudentCard(Student student, int displayedIndex, CommandExecutor commandExecutor) {
         super(FXML);
         this.student = student;
         this.displayedIndex = displayedIndex;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().toString());
-        phone.setVisible(false);
         email.setText(student.getEmail().value);
-        email.setVisible(false);
         studioRecord.setText(student.getStudioRecord().toString());
         telegram.setText(student.getTelegram().value);
-        telegram.setVisible(false);
         assessment.setText(student.getAssessment().toString());
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         // Studio Record, Assessment, and Telegram will be removed for better aesthetics
-        container.getChildren().removeAll(studioRecord, assessment);
+        container.getChildren().removeAll(studioRecord, assessment, telegram);
         image.setImage(new Image("/images/student.png"));
-        this.commandBox = commandBox;
+        this.commandExecutor = commandExecutor;
     }
 
     @Override
@@ -111,9 +110,10 @@ public class StudentCard extends UiPart<Region> {
     public void viewFullInformation() {
         logger.info("Item selected");
         String commandEquivalent = "view " + this.displayedIndex;
-        commandBox.execute(commandEquivalent);
-        phone.setVisible(true);
-        email.setVisible(true);
-        telegram.setVisible(true);
+        try {
+            commandExecutor.execute(commandEquivalent);
+        } catch (ParseException | CommandException e) {
+            logger.info("This should not be reached");
+        }
     }
 }

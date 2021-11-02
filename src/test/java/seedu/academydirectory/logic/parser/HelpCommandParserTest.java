@@ -3,37 +3,77 @@ package seedu.academydirectory.logic.parser;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.commands.AddCommand;
+import seedu.academydirectory.logic.commands.AttendanceCommand;
+import seedu.academydirectory.logic.commands.ClearCommand;
+import seedu.academydirectory.logic.commands.DeleteCommand;
+import seedu.academydirectory.logic.commands.EditCommand;
+import seedu.academydirectory.logic.commands.ExitCommand;
+import seedu.academydirectory.logic.commands.FilterCommand;
+import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
+import seedu.academydirectory.logic.commands.ListCommand;
+import seedu.academydirectory.logic.commands.ParticipationCommand;
+import seedu.academydirectory.logic.commands.ShowCommand;
+import seedu.academydirectory.logic.commands.SortCommand;
+import seedu.academydirectory.logic.commands.TagCommand;
+import seedu.academydirectory.logic.commands.VisualizeCommand;
 
 public class HelpCommandParserTest {
+
     private HelpCommandParser parser = new HelpCommandParser();
 
-    private final String validInput1 = "";
-    private final HelpCommand expectedValidOutcome1 = new HelpCommand();
-    private final String validInput2 = "add";
-    private final HelpCommand expectedValidOutcome2 = new HelpCommand("add", AddCommand.HELP_MESSAGE);
-    private final String validInput3 = "grade";
-    private final HelpCommand expectedValidOutcome3 = new HelpCommand("grade", GradeCommand.HELP_MESSAGE);
-    private final String invalidInput1 = "CS2103T";
-    private final String expectedInvalidOutcome1 = String.format(Messages.MESSAGE_HELP_NOT_EXIST, invalidInput1);
-    private final String invalidInput2 = "please send help I'm suffering with CS right now";
-    private final String expectedInvalidOutcome2 = String.format(Messages.MESSAGE_HELP_NOT_EXIST, invalidInput2);
+    private final String[] validInputs = {
+            "add", "attendance", "clear", "delete",
+            "edit", "exit", "filter", "get",
+            "grade", "list", "participation",
+            "show", "sort", "tag", "visualize"
+    };
+
+    private final HashMap<String, String> mapInputsToCorrectHelpMessage = new HashMap<>();
+
+    private final String[] invalidInputs = {
+            "CS2103T", "my life sucks", "NUS",
+            "Computer Science", "02hf40hg240",
+            "[;.;..;[", "23rglbt;mbw", "-3429"
+    };
 
     @Test
     public void parse_validArgument_success() {
-        assertParseSuccess(parser, validInput1, expectedValidOutcome1);
-        assertParseSuccess(parser, validInput2, expectedValidOutcome2);
-        assertParseSuccess(parser, validInput3, expectedValidOutcome3);
+        assertParseSuccess(parser, "", new HelpCommand());
+
+        mapInputsToCorrectHelpMessage.put("add", AddCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("attendance", AttendanceCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("clear", ClearCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("delete", DeleteCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("edit", EditCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("exit", ExitCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("filter", FilterCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("get", GetCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("grade", GradeCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("list", ListCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("participation", ParticipationCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("show", ShowCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("sort", SortCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("tag", TagCommand.HELP_MESSAGE);
+        mapInputsToCorrectHelpMessage.put("visualize", VisualizeCommand.HELP_MESSAGE);
+
+        // help works for all valid input command
+        for (String keyword : validInputs) {
+            assertParseSuccess(parser, keyword, new HelpCommand(keyword, mapInputsToCorrectHelpMessage.get(keyword)));
+        }
     }
 
     @Test
     public void parse_invalidArgument_failure() {
-        assertParseFailure(parser, invalidInput1, expectedInvalidOutcome1);
-        assertParseFailure(parser, invalidInput2, expectedInvalidOutcome2);
+        for (String keyword : invalidInputs) {
+            assertParseFailure(parser, keyword, String.format(Messages.MESSAGE_HELP_NOT_EXIST, keyword));
+        }
     }
 }

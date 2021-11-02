@@ -15,6 +15,7 @@ import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.model.AdditionalViewModel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -95,7 +96,7 @@ public class MainWindow extends UiPart<Stage> {
 
         appMenu = new AppMenu(this::executeCommand);
 
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), this::executeCommand);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -129,7 +130,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
-    public void showHelpFrom(String helpMessage) {
+    public void showHelpFrom(AdditionalViewModel additionalViewModel) {
+        String helpMessage = (String) additionalViewModel.getAdditionalInfo().get();
         this.helpWindow.setHelpMessage(helpMessage);
         if (!helpWindow.isShowing()) {
             helpWindow.show();
@@ -174,7 +176,7 @@ public class MainWindow extends UiPart<Stage> {
             visualizerDisplay.handleAdditionalInfo(logic.getAdditionalViewModel());
 
             if (commandResult.isShowHelp()) {
-                showHelpFrom(commandResult.getHelpContent());
+                showHelpFrom(logic.getAdditionalViewModel());
             }
 
             if (commandResult.isExit()) {

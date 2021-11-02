@@ -30,7 +30,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status should only be 0 or 1, "
             + "with 0 indicating absence while 1 indicates the student was present.";
     public static final String MESSAGE_INVALID_PARTICIPATION_STATUS =
-            "Change in Participation must be between -500 and 500 inclusive.";
+            "Change in Participation must be between -100 and 100.";
+    public static final String MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW = "Invalid usage of command. No other keyword should" +
+            "follow the command";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -239,4 +241,10 @@ public class ParserUtil {
         }
     }
 
+    public static String parseSingularCommand(String arguments) throws ParseException {
+        if (!arguments.isEmpty()) {
+            throw new ParseException(MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW);
+        }
+        return arguments;
+    }
 }

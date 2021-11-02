@@ -125,7 +125,7 @@ public class AcademyDirectoryParser {
             return new ViewCommandParser().parse(arguments);
 
         case VisualizeCommand.COMMAND_WORD:
-            return new VisualiseCommandParser().parse(arguments);
+            return new VisualizeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
