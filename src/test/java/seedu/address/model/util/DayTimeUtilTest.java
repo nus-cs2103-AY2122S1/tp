@@ -18,7 +18,7 @@ class DayTimeUtilTest {
 
         // Invalid index
         assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getTimeFromIndex(-1));
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getTimeFromIndex(24));
+        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getTimeFromIndex(25));
     }
 
     @Test
