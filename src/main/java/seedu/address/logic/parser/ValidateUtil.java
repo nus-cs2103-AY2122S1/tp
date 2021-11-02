@@ -15,4 +15,14 @@ public class ValidateUtil {
     public static boolean validDayOfWeekInteger(int test) {
         return test >= 1 && test <= 7;
     }
+
+    /**
+     * Tests if a String is empty or only whitespace.
+     * @param str to check
+     * @return true if the String is empty or only contains whitespace.
+     */
+    public static boolean isEmptyOrOnlyWhitespace(String str) {
+        String trimmed = str.trim();
+        return trimmed.equals("");
+    }
 }
