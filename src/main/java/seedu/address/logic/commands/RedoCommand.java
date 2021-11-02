@@ -31,10 +31,7 @@ public class RedoCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
 
-        boolean isClearOrDelete = commandToRedo.commandType.equals(ClearCommand.COMMAND_ACTION)
-                || commandToRedo.commandType.equals(DeleteCommand.COMMAND_ACTION);
-
-        if (isClearOrDelete) {
+        if (commandToRedo.isClearOrDelete()) {
             String successMessage = commandToRedo.commandType + " command has been redone.";
             return new CommandResult(successMessage);
         }

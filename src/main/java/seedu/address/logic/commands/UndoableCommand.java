@@ -43,4 +43,14 @@ public abstract class UndoableCommand extends Command {
             throw new AssertionError(MESSAGE_FAILURE);
         }
     }
+
+    public boolean isClearOrDelete() {
+        return commandType.equals(ClearCommand.COMMAND_ACTION)
+                || commandType.equals(DeleteCommand.COMMAND_ACTION);
+    }
+
+    public boolean isClearOrAdd() {
+        return commandType.equals(ClearCommand.COMMAND_ACTION)
+                || commandType.equals(AddCommand.COMMAND_ACTION);
+    }
 }
