@@ -1051,8 +1051,56 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering all appointments <a name="filter-all-appointments"/>
 
+1. Searches through all appointment based on the filter parameters provided.
+   
+    1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
+
+    2. Test case: `appt -u`<br>
+       Expected: All appointments in the appointment records will be listed in the appointment list.
+
+    3. Test case: `appt -f p/Aaron`<br>
+       Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it and displays the results in the appointment list.
+       
+    4. Test case: `appt -f p/Aaron Yeoh`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+
+    5. Test case: `appt -f d/Irfan`<br>
+       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` in it and displays the results in the appointment list.
+       
+    6. Test case: `appt -f d/Irfan Ibrahim`<br>
+        Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+        
+    7. Test case: `appt -f s/01/11/2021`<br>
+        Expected: Searches for appointments that has a starting date after `01/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    8. Test case: `appt -f e/30/11/2021`<br>
+        Expected: Searches for appointments that has a starting date before `31/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    9. Test case: `appt -f p/Aaron e/Irfan s/01/11/2021 e/30/11/2021`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive].
+
+
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
 
+1. Searches for upcoming appointment based on the filter parameters provided. An appointment is considered upcoming if it has a date and time greater or equal than the current date and time.
+   
+    1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
+       
+    2. Test case: `appt -u`<br>
+       Expected: All upcoming appointments in the appointment records will be listed in the appointment list.
+       
+    3. Test case: `appt -u p/Aaron`<br>
+       Expected: Searches for upcoming appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    4. Test case: `appt -u p/Aaron Yeoh`<br>
+      Expected: Searches for upcoming appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+      
+    5. Test case: `appt -u d/Irfan`<br>
+       Expected: Searches for appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+   6. Test case: `appt -u d/Irfan Ibrahim`<br>
+      Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+      
 ### Listing all appointments for today <a name="list-appointments"/>
 
 ### Saving data  <a name="saving-data"/>
