@@ -21,7 +21,7 @@ public class AddDoctorCommand extends AddCommand {
             + "[" + PREFIX_TAG + "TAG]... " + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_BIRTH_DATE + "20/07/1964 " + PREFIX_TAG
-            + "friends " + PREFIX_TAG + "owesMoney";
+            + "xray " + PREFIX_TAG + "experienced";
 
     public static final String MESSAGE_SUCCESS = "New doctor added: %1$s";
     public static final String MESSAGE_DUPLICATE_DOCTOR = "This doctor already exists in PlannerMD";

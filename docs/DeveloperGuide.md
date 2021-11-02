@@ -905,23 +905,27 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Adding a patient <a name="add-patient"/>
+1. Adding a patient
+    1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command.
 
 ### Deleting a patient  <a name="delete-patient"/>
+1. Deleting a patient while all doctors are being shown
+    1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command. There must be multiple patients. 
 
-1. Deleting a person while all persons are being shown
+    2. Test case: `delete 1`<br>
+       Expected: First patient is deleted from the patients list. Details of the deleted patient are shown in the status message.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    3. Test case: `delete 0`<br>
+       Expected: No patient is edited. Error details are shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    4. Other incorrect edit commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
+       Expected: Similar to previous.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. Delete a patient while some patients are being shown
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Prerequisites: `toggle` to the `Patients` tab. List some patients using `find XYZ` (XYZ is the name of an existing patient).
 
-1. _{ more test cases …​ }_
+    2. Test cases are similar to those above.
 
 ### Editing a patient <a name="edit-patient"/>
 
@@ -932,7 +936,24 @@ testers are expected to do more *exploratory* testing.
 ### Adding a doctor <a name="add-doctor"/>
 
 ### Deleting a doctor  <a name="delete-doctor"/>
+1. Deleting a doctor while all doctors are being shown
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command. There must be multiple doctors. 
 
+    2. Test case: `delete 1`<br>
+       Expected: First doctor is deleted from the doctors list. Details of the deleted doctor are shown in the status message.
+
+    3. Test case: `delete 0`<br>
+       Expected: No doctor is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
+       Expected: Similar to previous.
+
+2. Delete a doctor while some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+    
 ### Editing a doctor <a name="edit-doctor"/>
 
 1. Editing a doctor while all doctors are being shown
@@ -943,7 +964,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited contact are shown in the status message.
 
     3. Test case: `edit 0 hp/91234567`<br>
-       Expected: No doctor is edited. Error details are shown in the status message.
+       Expected: No doctor is edited. Response box displays error message: "Invalid command format!..."
 
     4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
