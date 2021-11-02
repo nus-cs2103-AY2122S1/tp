@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TutorMaster is a desktop app for freelance tutors to manage their students’ grades, assignment submission and tuition fee payment. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
+TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
 * Table of Contents
   {:toc}
@@ -240,7 +240,7 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 Groups students by their names together.
 </summary>
 
-Format: `student -a INDEX…​ n/GROUPNAME`
+Format: `group -a INDEX…​ n/GROUPNAME`
 
 * Groups students into a group specified at `GROUPNAME`
 * `-a` refers to the add group command
@@ -249,7 +249,7 @@ Format: `student -a INDEX…​ n/GROUPNAME`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
+* `group -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
 </details>
 
 ### Deleting a group
@@ -322,7 +322,7 @@ Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
 </details>
 
-### Editing a task `[coming in v1.3]`
+### Editing a task 
 <details markdown="1">
 <summary>
 Edits a task in the task list.
@@ -332,7 +332,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
 * `-e` refers to the edit command
-* It is a requirement that **at least one of the optional fields should be provided**
+* It is a requirement that **at least one of the optional fields should be provided!**
 * The current value will be updated to the value input by the user
 
 Examples:
@@ -356,7 +356,7 @@ Examples:
 * `task -d 1` deletes the task at index 1
 </details>
 
-### Listing all tasks `[coming in v1.3]`
+### Listing all tasks 
 <details markdown="1">
 <summary>
 Shows a list of all the tasks in the task list. 
@@ -365,7 +365,7 @@ Shows a list of all the tasks in the task list.
 Format: `task -l`
 </details>
 
-### Finding a task by name`[coming in v1.3]`
+### Finding a task by name
 <details markdown="1">
 <summary>
 Find tasks whose names contain any of the given keywords.
