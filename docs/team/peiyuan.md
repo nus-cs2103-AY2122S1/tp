@@ -5,7 +5,7 @@ title: Lim Peiyuan's Project Portfolio Page
 ### Introduction
 
 I am a software developer for Financial Advisor Smart Tracker (FAST). I was in-charge of the Code Quality of FAST.
-At the time of developed FAST, I was a Year 2 Computer Science Undergraduate.
+At the time of developing FAST, I was a Year 2 Computer Science Undergraduate.
 
 ---
 
@@ -13,7 +13,7 @@ At the time of developed FAST, I was a Year 2 Computer Science Undergraduate.
 
 Financial Advisor Smart Tracker (FAST) is a desktop application targeted at financial advisors, for
 them to keep track of their clients as contacts. The user interacts with it using a CLI, and it has a GUI created with
-JavaFX. It is written in Java, and has about 12k LoC.
+JavaFX. It is written in Java, and has about 12 kLoC.
 
 ---
 
@@ -30,7 +30,7 @@ Given below are my contributions to the project.
   The `Appointment` feature allows users to manage their appointment with their clients. 
   It allows user to store critical information such as date, time and venue.
   It also allows user to track the number of completed appointments with a client.
-  In the situation where the user accidentally mark an appointment wrongly, he can unmark the appointment.
+  In the situation where the user accidentally marks an appointment wrongly, he can unmark the appointment.
   It is integrated into the `PersonCard`, placed on the right-hand side of each client's details. 
   
   <br>
@@ -131,5 +131,5 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Added some user stories as issues
-    * Opened and Closed some issues 
+    * Opened and closed some issues 
 
