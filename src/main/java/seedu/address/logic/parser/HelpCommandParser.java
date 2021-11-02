@@ -30,7 +30,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      */
     public HelpCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        final String userGuide = "https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/UserGuide.md";
+        final String userGuide = "https://ay2122s1-cs2103-f10-2.github.io/tp/UserGuide.html";
         final String helpMessage = "\nRefer to the user guide: " + userGuide;
 
         switch (trimmedArgs) {
