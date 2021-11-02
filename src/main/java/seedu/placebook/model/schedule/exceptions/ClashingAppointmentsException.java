@@ -2,6 +2,7 @@ package seedu.placebook.model.schedule.exceptions;
 
 import java.util.List;
 
+import seedu.placebook.commons.util.StringUtil;
 import seedu.placebook.model.schedule.Appointment;
 
 /**
@@ -27,10 +28,6 @@ public class ClashingAppointmentsException extends RuntimeException {
      * @return the String representation of the clashing Appointments.
      */
     public String getClashingAppointmentAsString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Appointment app : appointments) {
-            stringBuilder.append(app.getTimePeriod()).append(", ");
-        }
-        return stringBuilder.substring(0, stringBuilder.length() - 2);
+        return StringUtil.listToString(appointments, app -> app.getTimePeriod().toString(), ", ");
     }
 }

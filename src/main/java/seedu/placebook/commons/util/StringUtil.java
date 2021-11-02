@@ -1,11 +1,15 @@
 package seedu.placebook.commons.util;
 
+import seedu.placebook.model.schedule.Appointment;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.placebook.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +68,13 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    public static <T> String listToString(List<T> list, Function<T, String> function, String delimiter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T t : list) {
+            stringBuilder.append(function.apply(t)).append(delimiter);
+        }
+        return stringBuilder.substring(0, stringBuilder.length() - 2);
     }
 }
