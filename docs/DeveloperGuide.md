@@ -1241,20 +1241,112 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+#### Single delete
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Deleting a client while all clients are being shown
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. **Test case**: `del 1`<br>
+      **Expected**: First contact is deleted from the list. Success message with details of the deleted contact shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. **Test case**: `del 0`<br>
+      **Expected**: No person is deleted. Error message displayed.
 
-1. _{ more test cases …​ }_
+   1. **Other incorrect delete commands to try**: `del`, `del x`(where x is larger than the list size)<br>
+      **Expected**: Similar to previous.
+
+#### Multiple delete
+1. Deleting multiple clients using range input while all clients are being shown
+   1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list. Argument is valid.
+   
+   2. **Test case**: `del 1-3`<br>
+      **Expected**: First, second and third contacts are deleted from the list. Success message showing number of contacts deleted is shown .
+   
+   3. **Test case**: `del 3-1`<br>
+      **Expected**: No client is deleted. Error message displayed.
+   
+   4. **Other incorrect delete commands to try**: `del`, `del 1-`, `del 1-x`(where x is larger than the list size)<br>
+      **Expected**: Similar to previous.
+   
+2. Deleting multiple clients using several indexes input while all clients are being shown
+    1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list. Argument is valid.
+
+    2. **Test case**: `del 1 3 5`<br>
+       **Expected**: First, third and fifth contacts are deleted from the list. Success message showing number of contacts deleted is shown .
+
+    3. **Test case**: `del 1 0 `<br>
+       **Expected**: No client is deleted. Error message displayed.
+
+    4. **Other incorrect delete commands to try**: `del`, `del 1 x 2`(where x is larger than the list size)<br>
+       **Expected**: Similar to previous.
+
+### Appointment Feature
+
+#### Adding an appointment
+1. Adds a new appointment to FAST
+   1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment does not exist for the specified client yet.
+   
+   2. **Test Case**: `aa 1 d/2030-05-15 t/07:00 v/NUS` <br>
+   **Expected**: Adds an appointment to the first client in the displayed list with date `15 May 2030`, time `0700hrs` and venue `NUS`. Success message with details of the client name and appointment added is shown.
+   
+   3. **Test Case**: `aa 1 v/NUS` <br>
+      **Expected**: No appointment added. Error message displayed.
+   
+   4. **Other invalid commands to try**: `aa d/2023-05-15`, `aa 1 d/2019-05-15`,  `aa 1 d/2023-15-05`, `aa 1 d/2023-05-15 t/0700`, `aa y d/2023-05-15`(where y is an index with an appointment), `aa 1 v/venue...`(where venue... is longer than 20 characters) <br>
+      **Expected**: Similar to previous testcase (in Point 3).
+
+#### Editing an appointment
+1. Edits an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
+   
+    2. **Test Case**: `ea 1 d/2030-12-16 t/17:00 v/SOC` <br>
+       **Expected**: Edits the appointment of the first client in the displayed list. Changes the date to `16 Dec 2030`, time to `1700hrs` and venue to `SOC`. Success message with details of the client name and edited appointment is shown.
+   
+    3. **Test Case**: `ea 1` <br>
+       **Expected**: No appointment edited. Error message displayed.
+   
+    4. **Other invalid commands to try**: `ea d/2023-12-16`, `ea 1 d/2019-12-16`,  `ea 1 d/2023-16-12`, `ea 1 d/2023-12-16 t/1700` `ea y v/SOC`(where y is an index with no appointment), `ea 1 v/venue...`(where venue... is longer than 20 characters)<br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
+#### Deleting an appointment
+1. Deletes an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
+   
+    2. **Test Case**: `da 1` <br>
+       **Expected**: Deletes the appointment of the first client in the displayed list. Success message with client name is shown.
+   
+    3. **Test Case**: `da 0` <br>
+       **Expected**: No appointment deleted. Error message displayed.
+   
+    4. **Other invalid commands to try**: `da`, `da x`(where x is larger than the list size) <br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
+#### Marking an appointment
+1. Marks an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
+   
+    2. **Test Case**: `ma 1` <br>
+       **Expected**: Marks and deletes the appointment of the first client in the displayed list. Appointment count is incremented by 1. Success message with details of the client name and edited appointment is shown.
+   
+    3. **Test Case**: `ma 0` <br>
+       **Expected**: No appointment marked. Error message displayed.
+   
+    4. **Other invalid commands to try**: `ma`, `ma x`(where x is larger than the list size), `ma y`(where y is an index with no appointment). <br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
+#### Unmarking an appointment
+1. Umarks an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment does not exist for the specified client yet.
+   
+    2. **Test Case**: `ua 1` <br>
+       **Expected**: Unmarks the appointment of the first client in the displayed list. Appointment count is decremented by 1. Success message with client name is shown.
+   
+    3. **Test Case**: `ua 0` <br>
+       **Expected**: No appointment unmarked. Error message displayed.
+   
+    4. **Other invalid commands to try**: `ua`, `ua x`(where x is larger than the list size), `ua y`(where y is an index with an appointment). <br>
+       **Expected**: Similar to previous testcase (in Point 3).
 
 ### Saving data
 
