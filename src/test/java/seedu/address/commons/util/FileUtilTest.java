@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test;
 
 public class FileUtilTest {
 
-    public static final Path EXISTING_FILE_PATH = Paths.get("src", "test",
-        "data", "FileUtilTest", "samplefile.txt");
+    public static final Path EXISTING_FILE_PATH = Paths.get("src", "test", "data", "FileUtilTest",
+        "samplefile.txt");
 
-    public static final Path NEW_FILE_PATH = Paths.get("src", "test",
-        "data", "FileUtilTest", "no_such_samplefile.txt");
+    public static final Path NEW_FILE_PATH = Paths.get("src", "test", "data", "FileUtilTest",
+        "no_such_samplefile.txt");
 
     public static final String CONTACT_TO_STRING =
         "\n-------------------------------------------------------\n"
