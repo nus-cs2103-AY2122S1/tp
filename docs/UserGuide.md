@@ -123,6 +123,7 @@ Examples:
 Edits a student's information.<br>
 The identity fields(module name/student id) must be provided.<br>
 At least one editable field (name/tele handle/email) must be provided, and only provided editable fields will be changed.
+If duplicate fields are provided, only the latest fields will be processed.
 
 Format: `edit student m/<module name> i/<student id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
 
@@ -137,6 +138,7 @@ Examples:
 Edits a task's information.<br>
 The identity fields (module name/task id) must be provided.<br>
 At least one editable field (name/deadline) must be provided, and only provided editable fields will be changed.<br>
+If duplicate fields are provided, only the latest fields will be processed.
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
 Task deadline must contain either date only/time only/date and time.<br>
 Date must be in the form "YYYY-MM-DD".<br>
