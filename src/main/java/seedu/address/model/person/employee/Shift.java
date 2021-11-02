@@ -15,9 +15,6 @@ public class Shift {
     public static final String MESSAGE_CONSTRAINTS = "Working shifts should be in the format yyyy-mm-dd HHmm"
             + ".";
 
-    public static final String VALIDATION_REGEX =
-            "^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9]) (2[0-3]|[01]?[0-9])([0-5]?[0-9])$";
-
     private static DateTimeFormatter chosenFormat = null;
     public final LocalDateTime workingShift;
     public final String shiftString;
