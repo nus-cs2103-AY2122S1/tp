@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReviewTest {
 
-    private final String EXACTLY_499_CHARS_REVIEW =
+    private static final String EXACTLY_499_CHARS_REVIEW =
             "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
             + "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
             + "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"

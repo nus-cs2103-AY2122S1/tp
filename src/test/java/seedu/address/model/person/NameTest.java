@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class NameTest {
 
-    private final String EXACTLY_100_CHARS_NAME =
+    private static final String EXACTLY_100_CHARS_NAME =
         "012345678901234567890123456789012345678901234567890123456789"
             + "0123456789012345678901234567890123456789";
 

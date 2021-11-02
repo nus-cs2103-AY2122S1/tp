@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static seedu.address.model.person.Rating.EMPTY_RATING;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -58,7 +57,7 @@ public class PersonCard extends UiPart<Region> {
         if (ratingValue.equals(EMPTY_RATING)) {
             rating.setText(EMPTY_RATING);
         } else {
-//            rating.setText(ratingValue + "\u2B50");
+            // rating.setText(ratingValue + "\u2B50");
             rating.setText(ratingValue + " stars");
         }
     }

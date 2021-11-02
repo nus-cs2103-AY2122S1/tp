@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.model.person.Rating.isEmptyRating;
-
 import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;

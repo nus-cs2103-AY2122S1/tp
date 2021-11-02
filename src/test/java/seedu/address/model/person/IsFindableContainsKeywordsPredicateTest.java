@@ -69,7 +69,8 @@ public class IsFindableContainsKeywordsPredicateTest {
     public void test_findableDoesNotContainKeywords_returnsFalse() {
         // NAME
         // Zero keywords
-        IsFindableContainsKeywordsPredicate predicate = new IsFindableContainsKeywordsPredicate(Collections.emptyList());
+        IsFindableContainsKeywordsPredicate predicate =
+            new IsFindableContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withName("Marina Bay Sands").build()));
 
         // Non-matching keyword

@@ -21,18 +21,18 @@ public class FileUtilTest {
         "data", "FileUtilTest", "no_such_samplefile.txt");
 
     public static final String CONTACT_TO_STRING =
-        "\n-------------------------------------------------------\n" +
-        "Your WhereTourGo (WTG) Contacts have been exported below:\n" +
-        "-------------------------------------------------------\n\n" +
-        "Name: Marina Bay Sands\n" +
-        "Category: ATT\n" +
-        "Phone: 66888868\n" +
-        "Email: marinabaysands@example.com\n" +
-        "Address: 10 Bayfront Ave, Singapore 018956\n" +
-        "Review: amazing\n" +
-        "Tags: [casino][popular]\n" +
-        "Rating: 4\n" +
-        "-------------------------------------------------------\n\n";
+        "\n-------------------------------------------------------\n"
+        + "Your WhereTourGo (WTG) Contacts have been exported below:\n"
+        + "-------------------------------------------------------\n\n"
+        + "Name: Marina Bay Sands\n"
+        + "Category: ATT\n"
+        + "Phone: 66888868\n"
+        + "Email: marinabaysands@example.com\n"
+        + "Address: 10 Bayfront Ave, Singapore 018956\n"
+        + "Review: amazing\n"
+        + "Tags: [casino][popular]\n"
+        + "Rating: 4\n"
+        + "-------------------------------------------------------\n\n";
 
     @Test
     public void isValidPath_success() {
