@@ -123,8 +123,8 @@ Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSIT
 * The `position` must have been added to MrTechRecruiter
 
 Examples:
-* `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
-* `edit-applicant n/Betsy p/1234567 pos/database administrator`
+* `edit-applicant 1 n/Jasmine Doe p/98761432 e/jdoe@example.com`
+* `edit-applicant 2 n/Betsy p/1234567 pos/database administrator`
 
 ### Updating an applicant's status: `mark`
 
