@@ -48,8 +48,9 @@ This section gives you a quick summary on how to download and run our applicatio
    ![NewUserUi](images/NewUserUi.png)
 
 <div markdown="span" class="alert alert-primary">:bulb:
-If double-clicking does not work, trying launching our application through a terminal with the command `java -jar "modtracker.jar"` 
-</div><br>
+If double-clicking does not work, trying launching our application through a terminal with the command  
+</div>
+`java -jar "modtracker.jar"` <br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
