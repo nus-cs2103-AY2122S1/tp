@@ -13,13 +13,19 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_FAILURE = "No data to clear!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
-        Summary summary = new Summary(model.getAddressBook());
-        return new CommandResult(MESSAGE_SUCCESS, summary);
+        if (model.getAddressBook().equals(new AddressBook())) {
+            Summary summary = new Summary(model.getAddressBook());
+            return new CommandResult(MESSAGE_FAILURE);
+        } else {
+            model.setAddressBook(new AddressBook());
+            Summary summary = new Summary(model.getAddressBook());
+            return new CommandResult(MESSAGE_SUCCESS, summary);
+        }
     }
 }
