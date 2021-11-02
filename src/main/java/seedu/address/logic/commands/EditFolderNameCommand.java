@@ -6,6 +6,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
 
+import java.util.List;
+
 /**
  * Edits the name of an existing folder in the address book.
  */
@@ -21,7 +23,8 @@ public class EditFolderNameCommand extends Command {
             + "Example: " + COMMAND_WORD + " OLD_FOLDER_NAME | " + "NEW_FOLDER_NAME";
 
     public static final String MESSAGE_SUCCESS_EDIT_FOLDER_NAME = "Folder updated to: %1$s";
-    public static final String MESSAGE_NO_SUCH_FOLDER = "No such folder found in UNIon to be renamed";
+    public static final String MESSAGE_NO_SUCH_FOLDER = "Folder name supplied"
+            + " cannot be found in the folders' listing below";
     public static final String MESSAGE_FOLDER_ALREADY_EXISTS = "Cannot rename folder to"
             + " an already existing folder in UNIon";
 
@@ -44,9 +47,13 @@ public class EditFolderNameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.hasFolder(oldFolder)) {
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+        int indexOfFolder = lastShownFolderList.indexOf(oldFolder);
+
+        if (indexOfFolder == -1) {
             throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
         }
+
         if (model.hasFolder(newFolder)) {
             throw new CommandException(MESSAGE_FOLDER_ALREADY_EXISTS);
         }
