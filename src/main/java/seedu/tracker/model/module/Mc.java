@@ -11,10 +11,10 @@ import java.util.Objects;
  */
 public class Mc {
 
-    public static final String OVERALL_MESSAGE_CONSTRAINTS = "MC credit for a module should only be an "
-            + "Integer from 1-20.\nMC credit for a MC goal should only be an Integer from 1-999";
-    public static final String MESSAGE_CONSTRAINTS = "MC credit for a module should only be an Integer from 1-20.";
-    public static final String MESSAGE_CONSTRAINTS_GOAL = "MC credit for a MC goal should only be an "
+    public static final String OVERALL_MESSAGE_CONSTRAINTS = "MC for a module should only be an "
+            + "Integer from 1-20.\n MC for a MC goal should only be an Integer from 1-999";
+    public static final String MESSAGE_CONSTRAINTS = "MC for a module should only be an Integer from 1-20.";
+    public static final String MESSAGE_CONSTRAINTS_GOAL = "MC for a MC goal should only be an "
             + "Integer from 1-999";
 
     public final int value;
