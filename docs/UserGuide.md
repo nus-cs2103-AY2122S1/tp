@@ -159,8 +159,8 @@ Action | Format, Examples
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* If the user's interface is showing a different list, they can use specific commands to go to another window with a that specific list. 
- <br> e.g. If user's interface shows `Customers` list, they can use other Employee related commands such as `addE`, `editE` or `listE` etc. to change the interface to show `employees`.
+* Users can use all customer/employee/supplier commands apart from  listC listE and listS to switch to the customer/employee/supplier list respectively
+ <br> e.g. If a user is currently viewing the customer list, using `addE`, `editE`, `sortE` etc. while the customer list is active will execute the respective employee command and switch to the employee list automatically
 
 </div>
 
@@ -590,6 +590,7 @@ Examples:
 * `ALLERGIES`, `SPECIAL REQUESTS` & `TAG` are not fields that can be used to sort customers.
 * `sortC` only sorts the active current list for customers.
     * e.g. If you findC previously and only 3 customers are displayed on the list, `sortC` will only sort the 3 customers
+* If a filtered list with no customer listed is shown, `sortC` will be invalid.
 
 </div>
 
@@ -615,6 +616,7 @@ Examples:
 * `SHIFT` & `TAG` are not fields that can be used to sort employees.
 * `sortE` only sorts the active current list for employees.
     * e.g. If you findE previously and only 3 employees are displayed on the list, `sortE` will only sort the 3 employees
+* If a filtered list with no employee listed is shown, `sortE` will be invalid.
 
 </div>
 
@@ -641,6 +643,7 @@ Examples:
 * `TAG` is not a field that can be used to sort suppliers.
 * `sortS` only sorts the active current list for suppliers.
     * e.g. If you findS previously and only 3 suppliers are displayed on the list, `sortS` will only sort the 3 suppliers
+* If a filtered list with no supplier listed is shown, `sortS` will be invalid.
 
 
 </div>

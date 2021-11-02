@@ -116,7 +116,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
      */
     public void resetSupplierListToDefaultSortState() {
         supplierComparator = SupplierComparator.getDefaultComparator();
-        internalList.sort(SupplierComparator.getDefaultComparator());
+        internalList.sort(supplierComparator);
     }
 
     /**

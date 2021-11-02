@@ -120,7 +120,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
      */
     public void resetCustomerListToDefaultSortState() {
         customerComparator = CustomerComparator.getDefaultComparator();
-        internalList.sort(CustomerComparator.getDefaultComparator());
+        internalList.sort(customerComparator);
     }
 
     /**
