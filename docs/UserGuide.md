@@ -229,16 +229,20 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 * If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
 * Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
+
 * You can search for tags using multiple keywords by providing your keywords separated by whitespace in a `t/` prefix. (i.e. `find t/smart kind`)
     * This is different from `add` and `edit` commands which require tag inputs to be provided separately. (i.e. `edit 1 t/smart t/kind`)
+
 </div>
 
 * Inputs for all prefixes are **case-insensitive**.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
+
 * Applicants will not be filtered by prefixes that are not provided.
 * Applicants will also not be filtered by prefixes that are provided, yet have empty inputs. (i.e. `find d/` will return all applicants unfiltered by their ***done*** status)
+
 </div>
 
 Examples:
