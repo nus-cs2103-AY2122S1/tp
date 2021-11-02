@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import seedu.address.model.student.Student;
 
 public class DetailedStudentCard extends UiPart<Region> {
@@ -37,7 +40,7 @@ public class DetailedStudentCard extends UiPart<Region> {
     public DetailedStudentCard(Student student) {
         super(FXML);
         this.student = student;
-        name.setText(student.getName().fullName);
+        setName(student);
         groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
@@ -59,6 +62,21 @@ public class DetailedStudentCard extends UiPart<Region> {
         // state check
         DetailedStudentCard card = (DetailedStudentCard) other;
         return student.equals(card.student);
+    }
+
+    private void setName(Student student) {
+        String studentName = student.getName().fullName;
+        Text txt = new Text(studentName);
+        double txtWidth = txt.getLayoutBounds().getWidth();
+        double ratio = 200 / txtWidth;
+        if (txtWidth > 200) {
+            double newFontSize = 70 * ratio;
+            if (ratio < 0.1) {
+                newFontSize *= (1 - 1/ratio);
+            }
+            name.setStyle(String.format("-fx-font-size:%f;", newFontSize));
+        }
+        name.setText(student.getName().fullName);
     }
 }
 
