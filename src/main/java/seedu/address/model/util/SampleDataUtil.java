@@ -43,7 +43,7 @@ public class SampleDataUtil {
                     new Phone("93210283"),
                     new Email("yeeming@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    getTagSet("neighbours"),
+                    getTagSet("neighbours", "event-hackathon2021"),
                     false),
             new Person(new Name("Damith C. Rajapakse"),
                     new Telegram("damith_c"),
@@ -59,7 +59,7 @@ public class SampleDataUtil {
                     new Phone("92492021"),
                     new Email("jai@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
-                    getTagSet("classmates"),
+                    getTagSet("classmates", "event-hackathon2021"),
                     false)
         };
     }
