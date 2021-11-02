@@ -7,12 +7,14 @@ import static seedu.fast.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Logger;
+
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
 
-import java.util.logging.Logger;
+
 
 /**
  * Adds a person to FAST.

@@ -3,10 +3,10 @@ package seedu.fast.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.logging.Logger;
+
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Model;
-
-import java.util.logging.Logger;
 
 /**
  * Lists all persons in FAST to the user.

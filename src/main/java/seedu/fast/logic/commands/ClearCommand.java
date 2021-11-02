@@ -2,11 +2,13 @@ package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 
-import java.util.logging.Logger;
+
 
 /**
  * Clears FAST.
