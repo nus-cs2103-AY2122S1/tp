@@ -153,7 +153,7 @@ This section details the various features available in a single address book in 
 
 Adds a new client to the address book.
 | Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES} ...​`|
-| :-: | --- |
+| :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
 | <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
@@ -162,7 +162,7 @@ Adds a new client to the address book.
 View client's information in detail. 
 
 | Format | `view CLIENT'S ID` |
-| :-: | --- |
+| :-: | :-- |
 | **example** | • `view 2` would be used to view client 2's information|
  
 ### 4.3 Update Existing Contact : `edit`
@@ -173,7 +173,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a space.
  
 | Format | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
-| :-: | --- |
+| :-: | :-- |
 | **example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), Mcdonalds` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at Mcdonalds |
 | <img src=images/tip_icon.png width="50"> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several different clients, you could simply use this feature to do so. |
  
@@ -182,7 +182,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 Deletes an existing client from the address book using their client id.
 
 | Format | `delete CLIENT'S ID...`|
-| :-: | --- |
+| :-: | :-- |
 | **example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src=images/info_icon.png width="50"> | • Multiple clients can be deleted with one `delete` command |
 | <img src=images/warn_icon.png width="50"> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
@@ -191,7 +191,8 @@ Deletes an existing client from the address book using their client id.
 
 Shows the full list of all clients in the address book.
 | Format | `list` |
-| --- | ---|
+| --- | :--|
+| <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work | 
 
 ### 4.6 Sort Contacts : `sort`
 
@@ -243,7 +244,8 @@ Clears all entries from the address book.
 
 Exits LeadsForce. 
 | Format | `exit` |
-| --- | --- |
+| --- | :-- |
+| <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work | 
 
 ### 4.12 Saving the data
 
