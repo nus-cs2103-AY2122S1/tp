@@ -26,10 +26,11 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ExportCommand parse(String args) throws ParseException {
-        if (!args.matches(REGEX)) {
+        String trimmedArgs = args.trim();
+        if (!trimmedArgs.matches(REGEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
-        String filePath = EXPORTS_DIRECTORY_PATH + File.separator + args + CSV_EXTENSION;
+        String filePath = EXPORTS_DIRECTORY_PATH + File.separator + trimmedArgs + CSV_EXTENSION;
         return new ExportCommand(filePath, new CsvWriter());
     }
 }
