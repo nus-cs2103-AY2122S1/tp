@@ -14,7 +14,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+/**
+ * Contains integration tests for interaction with the model, and unit tests for ListOrderCommand.
+ * Modeled after ListCommandTest
+ */
 class ListOrderCommandTest {
+
     private Model model;
     private Model expectedModel;
 

@@ -11,7 +11,7 @@ public class OrderBuilder {
     public static final String DEFAULT_LABEL = "Blue Shirt";
     public static final String DEFAULT_CUSTOMER = "Johnson";
     public static final String DEFAULT_AMOUNT = "99.99";
-    public static final String DEFAULT_DATE = "2021-11-06";
+    public static final String DEFAULT_DATE = "2021-10-20";
     public static final boolean DEFAULT_IS_COMPLETE = false;
 
     private Label label;
@@ -19,6 +19,7 @@ public class OrderBuilder {
     private Amount amount;
     private Date date;
     private boolean isComplete;
+    private long id;
 
     /**
      * Creates a {@code OrderBuilder} with the default details.
@@ -75,10 +76,29 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code Label} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withLabel(String label) {
+        this.label = new Label(label);
+        return this;
+    }
+
+    /**
+     * Sets the {@code id} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Builds the {@code Order}.
      */
     public Order build() {
         Order order = new Order(label, customer, date, amount);
+        if (this.id != null) {
+            order.setId(this.id);
+        }
         if (this.isComplete) {
             order.markCompleted();
         }
