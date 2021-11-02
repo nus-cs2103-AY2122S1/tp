@@ -424,7 +424,8 @@ Step 1. The user launches the application for the first time. <br>
 Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
 calls `FastParser::parseCommand` to parse the given input. <br>
 Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
-`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
+`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate` 
+containing a `List` of all the search queries (only "john" in this case) <br>
 Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate
 the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
