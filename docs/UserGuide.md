@@ -50,7 +50,7 @@ The third will open the help window and the last will exit the application.
 ### Viewing data
 
 Resident and Event information is organized in this panel. <br>
-You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#Viewing residents information))
+You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#view))
 > Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
 > 
 > Vaccinated residents include the syringe icon towards the right-side of the card
@@ -128,6 +128,8 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
+<div id="view"></div>
+
 #### Viewing residents information : `view`
 
 Shows a numbered list of all the residents in the address book.
@@ -174,10 +176,11 @@ Format: `find [PREFIX/KEYWORD]...`
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
-    - Only full words will be matched e.g `Han` will not match `Hans`
+    - Only full words will be matched. e.g `Han` will not match `Hans`
     - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
   e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Searching by room:
+    - It is case-sensitive. Block letters must be capitalised.
     - A block can be used as a search. e.g `r/A`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
@@ -307,7 +310,7 @@ Examples:
 
 Edits an existing event in the address book.
 
-Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
+Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CAPACITY]`
 
 * Edits the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
@@ -316,7 +319,7 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+*  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
 #### Add residents to an event: `include`
 
