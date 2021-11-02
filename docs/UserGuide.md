@@ -579,13 +579,8 @@ Action | Format, Examples
 --------|------------------
 **Add appointment** | `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION] [r/REMARK]` <br> e.g., `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test`|
 **Add doctor** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`<br> e.g., `add n/John Doe hp/98765432 eml/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
-<<<<<<< HEAD
 **Add patient** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add tag** | `tag -a INDEX t/TAG`<br> e.g, `tag -a 1 t/Unvaccinated`
-=======
-**Add patient** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho hp/98989898 eml/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
-**Add tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
->>>>>>> 2b35a75654aa5c94e1b654e33128616a855d3356
 **Clear** | `clear`
 **Delete appointment** | `appt -d INDEX`<br> e.g., `appt -d 3`
 **Delete patient/doctor** | `delete INDEX`<br> e.g., `delete 3`
