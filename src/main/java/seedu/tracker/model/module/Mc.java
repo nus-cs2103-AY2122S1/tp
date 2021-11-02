@@ -11,8 +11,11 @@ import java.util.Objects;
  */
 public class Mc {
 
-
-    public static final String MESSAGE_CONSTRAINTS = "MC credit should only be an Integer from 1-999.";
+    public static final String OVERALL_MESSAGE_CONSTRAINTS = "MC credit for a module should only be an "
+            + "Integer from 1-20.\nMC credit for a MC goal should only be an Integer from 1-999";
+    public static final String MESSAGE_CONSTRAINTS = "MC credit for a module should only be an Integer from 1-20.";
+    public static final String MESSAGE_CONSTRAINTS_GOAL = "MC credit for a MC goal should only be an "
+            + "Integer from 1-999";
 
     public final int value;
 
@@ -25,13 +28,13 @@ public class Mc {
     }
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Mc}.
      *
      * @param value A valid mc credit.
      */
     public Mc(int value) {
         requireNonNull(value);
-        checkArgument(isValidMc(value), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidMc(value), OVERALL_MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
@@ -39,7 +42,7 @@ public class Mc {
      * Returns true if a given string is a valid mc credit.
      */
     public static boolean isValidMc(int test) {
-        return test >= 0;
+        return test > 0;
     }
 
     @Override

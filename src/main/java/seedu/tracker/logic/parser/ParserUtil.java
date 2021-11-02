@@ -82,7 +82,7 @@ public class ParserUtil {
     /**
      * Parses {@code mc} into an {@code Mc} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified mc is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified mc is invalid for a module MC (not non-zero unsigned integer from 1-20).
      */
     public static Mc parseMc(String mc) throws ParseException {
         String trimmedMc = mc.trim();
@@ -91,8 +91,27 @@ public class ParserUtil {
         }
 
         int mcAsInt = Integer.parseInt(trimmedMc);
-        if (mcAsInt > 999 || mcAsInt < 1) {
+        if (mcAsInt > 20 || mcAsInt < 1) {
             throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Mc(mcAsInt);
+    }
+
+    /**
+     * Parses {@code mc} into an {@code Mc} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified mc is invalid for a MC goal (not non-zero unsigned integer from 1-999).
+     */
+    public static Mc parseMcGoal(String mc) throws ParseException {
+        String trimmedMc = mc.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMc)) {
+            throw new ParseException(Mc.MESSAGE_CONSTRAINTS_GOAL);
+        }
+
+        int mcAsInt = Integer.parseInt(trimmedMc);
+        if (mcAsInt > 999 || mcAsInt < 1) {
+            throw new ParseException(Mc.MESSAGE_CONSTRAINTS_GOAL);
         }
 
         return new Mc(mcAsInt);

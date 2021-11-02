@@ -14,7 +14,7 @@ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_MC_GOAL;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_SEMESTER;
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.tracker.model.module.Mc.MESSAGE_CONSTRAINTS;
+import static seedu.tracker.model.module.Mc.MESSAGE_CONSTRAINTS_GOAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -76,7 +76,7 @@ public class SetCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid mc goal
-        assertParseFailure(parser, INVALID_MC_DESC, MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_MC_DESC, MESSAGE_CONSTRAINTS_GOAL);
 
         // invalid academic year, missing semester
         assertParseFailure(parser, INVALID_ACADEMIC_YEAR_DESC, MESSAGE_INVALID_FORMAT);
