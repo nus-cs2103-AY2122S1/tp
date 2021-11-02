@@ -483,8 +483,8 @@ Format: `exit`
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer. Overwrite the empty data file it creates with the data file from your previous WhereTourGo home folder.
 
-**Q**: Why does cmd/help command not work as intended?<br>
-**A**: 
+**Q**: Why does cmd/help command open a backup window with a link instead of my browser?<br>
+**A**: Check to ensure that you have a browser installed and updated to the latest version. Restart the app and try again. If the issue still isn't resolved, please contact us at "WhereTourGo@gmail.com".
  
 --------------------------------------------------------------------------------------------------------------------
 
