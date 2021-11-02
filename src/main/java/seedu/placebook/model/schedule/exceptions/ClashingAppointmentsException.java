@@ -23,10 +23,14 @@ public class ClashingAppointmentsException extends RuntimeException {
     }
 
     /**
-     * Returns the clashing Appointments.
-     * @return the clashing Appointments.
+     * Returns the clashing Appointments as String.
+     * @return the String representation of the clashing Appointments.
      */
-    public List<Appointment> getClashingAppointment() {
-        return this.appointments;
+    public String getClashingAppointmentAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Appointment app : appointments) {
+            stringBuilder.append(app.getTimePeriod()).append(", ");
+        }
+        return stringBuilder.substring(0, stringBuilder.length() - 2);
     }
 }

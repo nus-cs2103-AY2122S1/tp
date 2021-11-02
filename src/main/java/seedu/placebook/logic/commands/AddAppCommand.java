@@ -92,13 +92,8 @@ public class AddAppCommand extends Command {
         try {
             model.addAppointment(appointmentToAdd);
         } catch (ClashingAppointmentsException e) {
-            List<Appointment> appointmentList = e.getClashingAppointment();
-            String temp = " ";
-            for (Appointment app : appointmentList) {
-                temp += app.getTimePeriod().toString() + ", ";
-            }
-            temp = temp.substring(0, temp.length() - 2);
-            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED + temp);
+            String clashingAppointments = e.getClashingAppointmentAsString();
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED + clashingAppointments);
         } catch (DuplicateAppointmentException e) {
             throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
         }
