@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.ParserUtil.DATE_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BOB;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,8 +34,8 @@ class CheckCommandTest {
     private LocalDate date2 = LocalDate.parse("2021-02-02", DATE_FORMATTER);
     private LocalTime time = LocalTime.parse("1200", TIME_FORMATTER);
     private EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model resultModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model resultModel = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
     private Table table1 = new Table(5, 10);
     private Table table2 = new Table(10, 11);
     private Reservation reservation1 = new Reservation(

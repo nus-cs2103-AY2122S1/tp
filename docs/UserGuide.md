@@ -47,7 +47,6 @@ Dangerous or potentially negative actions are displayed here
     - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
-
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
 ### Command syntax
@@ -138,7 +137,7 @@ Action | Format, Examples
 
 **:information_source: Notes about the command format:**<br>
 
-* Commands are case-insensitive. <br>
+* Command words are case-insensitive. <br>
   e.g. `editE 1` is the same as `edite 1`
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -159,7 +158,7 @@ Action | Format, Examples
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* Users can use all customer/employee/supplier commands apart from  listC listE and listS to switch to the customer/employee/supplier list respectively
+* Users can use all customer/employee/supplier commands apart from  `listC`, `listE` and `listS` to switch to the customer/employee/supplier list respectively
  <br> e.g. If a user is currently viewing the customer list, using `addE`, `editE`, `sortE` etc. while the customer list is active will execute the respective employee command and switch to the employee list automatically
 
 </div>
