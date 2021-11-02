@@ -6,9 +6,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":LessonAddCommandParser" as LessonAddCommandParser LOGIC_COLOR
 participant "la:LessonAddCommand" as LessonAddCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant "editedPerson:Person" as Person LOGIC_COLOR
-participant "lesson:Lesson" as Lesson LOGIC_COLOR
 
 end box
 
@@ -51,38 +48,15 @@ deactivate AddressBookParser
 LogicManager -> LessonAddCommand : execute()
 activate LessonAddCommand
 
-create Lesson
-LessonAddCommand -> Lesson
-activate Lesson
-
-Lesson --> LessonAddCommand : lesson
-deactivate Lesson
-
-LessonAddCommand -> Model : hasClashingLesson(lesson)
+LessonAddCommand -> Model : handle Lesson Add logic
 activate Model
+
+note bottom
+Details of lesson add logic is given in another diagram
+end note
 
 Model --> LessonAddCommand
 deactivate Model
-
-create Person
-LessonAddCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
-activate Person
-
-Person --> LessonAddCommand : person
-deactivate Person
-
-LessonAddCommand -> Model : setPerson(person, editedPerson)
-activate Model
-
-Model --> LessonAddCommand
-deactivate Model
-
-create CommandResult
-LessonAddCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> LessonAddCommand
-deactivate CommandResult
 
 LessonAddCommand --> LogicManager : result
 deactivate LessonAddCommand
