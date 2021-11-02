@@ -37,8 +37,8 @@ public class ResultDisplay extends UiPart<Region> {
     }
 
     public void getWelcomeMessage() {
-        String welcomeMessage = "Welcome to Socius!\n" +
-                "\nSocius is a desktop application that can help you to\n"
+        String welcomeMessage = "Welcome to Socius!\n"
+                + "\nSocius is a desktop application that can help you to\n"
                 + "\n1. manage your classmates’ contacts\n"
                 + "2. make friends\n"
                 + "3. find teammates!\n"
