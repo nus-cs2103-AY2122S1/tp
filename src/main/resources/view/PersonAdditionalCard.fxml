@@ -35,6 +35,8 @@
                 <Label fx:id="faculty" styleClass="cell_normal" text="\$faculty" />
                 <Label fx:id="vaccStatus" styleClass="cell_normal" text="\$vaccStatus" />
                 <Label fx:id="events" styleClass="cell_normal" text="\$events" />
+                <Label fx:id="lastFetDate" styleClass="cell_normal" text="\$lastFetDate" />
+                <Label fx:id="lastCollectionDate" styleClass="cell_normal" text="\$lastCollectionDate" />
             </VBox>
         </VBox>
     </GridPane>

@@ -68,16 +68,9 @@ public class ResidentList {
                 Email email = new Email(information[3]);
                 VaccStatus vaccStatus = new VaccStatus(information[4]);
                 Faculty faculty = new Faculty(information[5]);
+                LastDate lastFetDate = new LastDate(information[6]);
+                LastDate lastCollectionDate = new LastDate(information[7]);
 
-                LastDate lastFetDate;
-                LastDate lastCollectionDate;
-                if (information.length == 8) {
-                    lastFetDate = new LastDate(information[6]);
-                    lastCollectionDate = new LastDate(information[7]);
-                } else {
-                    lastFetDate = new LastDate(LastDate.DEFAULT_DATE);
-                    lastCollectionDate = new LastDate(LastDate.DEFAULT_DATE);
-                }
                 Person p = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
                 this.residentList.add(p);
             }

@@ -31,7 +31,7 @@ public class LastDateTest {
 
     @Test
     public void returnsDateWhenEmpty_success() {
-        LastDate date = new LastDate("");
+        LastDate date = new LastDate(LastDate.DEFAULT_DATE);
         assertDoesNotThrow(() -> date.getDeadline());
     }
 }

@@ -12,7 +12,7 @@ public class LastDate implements Comparable<LastDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy, dd.mm.yyyy"
             + "or dd/mm/yyyy format";
-    public static final String DEFAULT_DATE = "";
+    public static final String DEFAULT_DATE = "None";
     public static final String FET_DESC = "Last FET: ";
     public static final String COLLECTION_DESC = "Last Collection: ";
     public static final String FET_FIELD = "fd";
@@ -63,7 +63,7 @@ public class LastDate implements Comparable<LastDate> {
      * Converts the given {@code LastDate} to a {@code LocalDate}.
      */
     public LocalDate toLocalDate() {
-        return date.equals("")
+        return date.equals(DEFAULT_DATE)
                 ? LocalDate.now()
                 : LocalDate.parse(date, dateFormatter);
     }
@@ -72,7 +72,7 @@ public class LastDate implements Comparable<LastDate> {
      * Adds the period of validity to the given {@code LastDate} to get the next deadline.
      */
     public LocalDate getDeadline() {
-        return date.equals("")
+        return date.equals(DEFAULT_DATE)
                 ? LocalDate.now()
                 : LocalDate.parse(date, dateFormatter).plusWeeks(LASTDATE_DEADLINE);
     }

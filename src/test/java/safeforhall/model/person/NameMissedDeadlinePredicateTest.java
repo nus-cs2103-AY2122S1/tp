@@ -58,7 +58,7 @@ public class NameMissedDeadlinePredicateTest {
         predicate = new NameMissedDeadlinePredicate("c", new LastDate("11-10-2021"));
         assertEquals(predicate.getDeadlinePeriod(ALICE), 1);
 
-        predicate = new NameMissedDeadlinePredicate("c", new LastDate(""));
+        predicate = new NameMissedDeadlinePredicate("c", new LastDate(LastDate.DEFAULT_DATE));
         NameMissedDeadlinePredicate finalPredicate = predicate;
         assertDoesNotThrow(() -> finalPredicate.getDeadlinePeriod(ALICE));
     }

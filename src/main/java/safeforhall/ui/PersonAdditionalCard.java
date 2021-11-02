@@ -1,7 +1,5 @@
 package safeforhall.ui;
 
-import static safeforhall.model.person.LastDate.DEFAULT_DATE;
-
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
@@ -43,6 +41,10 @@ public class PersonAdditionalCard extends UiPart<Region> {
     @FXML
     private Label events;
     @FXML
+    private Label lastFetDate;
+    @FXML
+    private Label lastCollectionDate;
+    @FXML
     private HBox informationContainer;
     @FXML
     private HBox deadlineContainer;
@@ -63,6 +65,8 @@ public class PersonAdditionalCard extends UiPart<Region> {
         email.setText(Email.DESC + person.getEmail().value);
         faculty.setText(Faculty.DESC + person.getFaculty().faculty);
         vaccStatus.setText(VaccStatus.DESC + person.getVaccStatus().vaccStatus);
+        lastFetDate.setText(LastDate.FET_DESC + person.getLastFetDate().date);
+        lastCollectionDate.setText(LastDate.COLLECTION_DESC + person.getLastCollectionDate().date);
 
         ArrayList<Event> eventList = logic.getModel().getPersonEvents(person, event -> true);
         events.setText(EVENTS_DESC + (eventList.isEmpty() ? "None" : eventList
@@ -85,18 +89,6 @@ public class PersonAdditionalCard extends UiPart<Region> {
             date.getStyleClass().add("cell_alert");
             deadlineContainer.getChildren().add(textBox);
             deadlineContainer.getChildren().add(date);
-        }
-
-        if (person.getLastFetDate().date != DEFAULT_DATE) {
-            Label textBox = new Label(LastDate.FET_DESC + person.getLastFetDate().date);
-            textBox.getStyleClass().add("cell_normal");
-            labelBoxInterior.getChildren().add(textBox);
-        }
-
-        if (person.getLastCollectionDate().date != DEFAULT_DATE) {
-            Label textBox = new Label(LastDate.COLLECTION_DESC + person.getLastCollectionDate().date);
-            textBox.getStyleClass().add("cell_normal");
-            labelBoxInterior.getChildren().add(textBox);
         }
     }
 
