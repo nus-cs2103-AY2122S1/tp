@@ -391,8 +391,9 @@ Format: `sortorders f/FIELD [o/ORDERING]`
 
 **:information_source: Note:** <br>
 
-* By default, your orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
-* Adding / Deleting an order reverts the list to the default ordering.
+* Your orders are normally arranged in the sequence they were added. 
+* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker.
+* Adding / Deleting an order reverts the list to the normal arrangement.
 
 </div>
 
