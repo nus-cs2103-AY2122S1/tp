@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommandIndex;
 import seedu.address.logic.commands.DeleteCommandName;
 
@@ -33,7 +34,19 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_invalidArgsName_throwsParseException() {
+        assertParseFailure(parser, " n/  Alice Pauline p/1234", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_inValidArgsIndex_throwsParseException() {
+        assertParseFailure(parser, "1 n/  Alice Pauline", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_inValidArgs_throwsParseException() {
         assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ParserUtil.MESSAGE_INVALID_INDEX));
     }
