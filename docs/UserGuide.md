@@ -165,8 +165,8 @@ Examples:
 - `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
 - `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
-### Deleting a student : `delete`
-Deletes the specified student with the given student index from TutorAid.
+### Deleting a student : `del -s`
+Deletes the student corresponding to the given student index from TutorAid.
 
 Format: `del -s STUDENT_INDEX`
 
@@ -175,7 +175,7 @@ Format: `del -s STUDENT_INDEX`
 * The index must be a positive integer 1,2,3, …​
 
 Example:
-* `del -s 2` deletes the 2nd student in TutorAid.
+* `del -s 2` deletes the 2nd student in the displayed student list from TutorAid.
 
 ### Editing a student : `edit -s`
 
@@ -401,7 +401,7 @@ Action | Format, Examples
 --------|------------------
 **Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
-**Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
+**Delete student** | `del -s STUDENT_INDEX`<br> e.g., `del -s 3`
 **Edit student** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **List** | `list [-a]`<br>e.g., `list`, `list -a`
 **Help** | `help`
