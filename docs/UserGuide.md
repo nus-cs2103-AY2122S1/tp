@@ -47,13 +47,14 @@ This section gives you a quick summary on how to download and run our applicatio
 1. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note that the Module Tracker comes with some sample modules.<br>
    ![NewUserUi](images/NewUserUi.png)
 
+1. If double-clicking does not work, trying launching our application through a terminal with the command `java -jar "modtracker.jar"`.<br>
+
 <div markdown="span" class="alert alert-primary">:bulb:
-If double-clicking does not work, trying launching our application through a terminal with the command  
-</div>
-`java -jar "modtracker.jar"` <br>
+If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
+</div><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   Some example commands you can try: 
 
    * **`list`** : Lists all modules.
 
@@ -62,7 +63,7 @@ If double-clicking does not work, trying launching our application through a ter
    * **`delete`**`3` : Deletes the 3rd module from the database.
 
 
-Kindly refer to the [Features](#4-features) below for more details of each command.
+Kindly refer to the [Features](#4-features) below for more details of each command. 
 Unsure of what some phrases or words mean? Head over to the [Command Terminology](#35-command-terminology) section to find out more.
 
 --------------------------------------------------------------------------------------------------------------------
