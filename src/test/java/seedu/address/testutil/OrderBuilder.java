@@ -79,6 +79,22 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code Label} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withLabel(String label) {
+        this.label = new Label(label);
+        return this;
+    }
+
+    /**
+     * Sets the {@code id} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * builds the Order.
      */
     public Order build() {
