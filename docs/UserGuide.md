@@ -226,7 +226,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 * Modules in the database can be view in the [Module List](#324-module-list)
 
 #### `academic plan`
-* Refers to modules that the user has assigned with a specific semester and year.
+* Refers to modules that you have assigned with a specific semester and year.
 * Contributes to the calculation of the MC requirements.<br>
   ![requirements MCs Display](images/CourseRequirementsDisplay.png)
 
