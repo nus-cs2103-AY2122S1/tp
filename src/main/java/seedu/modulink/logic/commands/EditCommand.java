@@ -32,8 +32,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of your profile.\n" +
-            "(Module tags cannot be edited using this function)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of your profile.\n"
+            + "(Module tags cannot be edited using this function)\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
