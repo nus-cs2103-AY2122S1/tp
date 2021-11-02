@@ -364,7 +364,7 @@ Example:
 * `take 1 y/1 s/4` is equivalent to scheduling the 1st module in the database for year 1 special semester 2.
 
 
-#### 4.2.2 Remove a module from the academic plan : `untake`
+#### 4.2.2 Removing a module from the academic plan : `untake`
 
 You can remove a module from your academic plan with our `untake` command.
 
@@ -396,7 +396,7 @@ Examples:
 * `set y/2 s/1` - is equivalent to setting the current semester to year 2 semester 1
 * `set y/3 s/3` - is equivalent to setting the current semester to year 3 special semester 1
 
-#### 4.2.5 See modules taken in a specific semester : `view`
+#### 4.2.5 Viewing modules taken in a specific semester : `view`
 
 You can view all the modules that you have taken in a specific semester with our `view` command.
 
@@ -408,7 +408,7 @@ Examples:
 * `view y/2 s/1` - is equivalent to seeing all the modules taken in year 2 semester 1.
 * `view y/2 s/3` - is equivalent to seeing all the modules taken in year 2 special semester 1.
 
-#### 4.2.6 Remove the schedules for a specific semester from modules : `clear`
+#### 4.2.6 Removing all modules in a specific semester from the academic plan : `clear`
 
 You can remove all modules from a specific semester in your academic plan with our `clear` command.
 
@@ -421,8 +421,7 @@ Example:
 
 ### 4.3 Miscellaneous
 
-Miscellaneous features consist of features that does not directly affect the database nor the academic plan. 
-Currently, we only have the help feature in this sub-category.
+Miscellaneous features consist of features that does not directly affect the database nor the academic plan.
 
 #### 4.3.1 Viewing help : `help`
 
@@ -431,6 +430,12 @@ You can view our command summary and get a link to our user guide(this documenta
 ![help message](images/HelpMessage.png)
 
 Format: `help`
+
+#### 4.3.2 Exiting the application : `exit`
+
+You can exit our application with our `exit` command.
+
+Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -473,5 +478,6 @@ Academic Plan Commands | Format, Examples
 Miscellaneous Command | Format, Examples
 --------|------------------
 **Help**| `help`
+**Exit**| `exit`
 
 
