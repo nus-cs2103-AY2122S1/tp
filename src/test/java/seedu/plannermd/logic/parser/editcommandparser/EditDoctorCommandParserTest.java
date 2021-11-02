@@ -1,6 +1,7 @@
 package seedu.plannermd.logic.parser.editcommandparser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_DOCTOR_RISK_FIELD;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_AMY;
@@ -16,6 +17,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.RISK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -223,5 +225,11 @@ public class EditDoctorCommandParserTest {
         EditDoctorCommand expectedCommand = new EditDoctorCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_riskField_failure() {
+        assertParseFailure(parser, RISK_DESC_AMY,
+                String.format(MESSAGE_INVALID_DOCTOR_RISK_FIELD, EditDoctorCommand.MESSAGE_USAGE));
     }
 }
