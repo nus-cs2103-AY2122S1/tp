@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import safeforhall.logic.commands.sort.SortEventCommand;
 import safeforhall.logic.parser.ArgumentMultimap;
 import safeforhall.logic.parser.ArgumentTokenizer;
-import safeforhall.logic.parser.CliSyntax;
 import safeforhall.logic.parser.Parser;
 import safeforhall.logic.parser.ParserUtil;
 import safeforhall.logic.parser.Prefix;
@@ -34,7 +33,7 @@ public class SortEventCommandParser implements Parser<SortEventCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT,
-                CliSyntax.PREFIX_ORDER);
+                PREFIX_ORDER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SORT, PREFIX_ORDER)
                 || !argMultimap.getPreamble().isEmpty()) {

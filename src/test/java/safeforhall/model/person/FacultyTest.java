@@ -1,5 +1,6 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -45,5 +46,16 @@ public class FacultyTest {
         } catch (NoSuchMethodError e) {
             fail();
         }
+    }
+
+    @Test
+    public void checkCompareTo() {
+        Faculty f1 = new Faculty("ABC");
+        Faculty f2 = new Faculty("BCD");
+        Faculty f3 = new Faculty("ABC");
+
+        assertEquals(f1.compareTo(f2), -1);
+        assertEquals(f2.compareTo(f1), 1);
+        assertEquals(f3.compareTo(f1), 0);
     }
 }
