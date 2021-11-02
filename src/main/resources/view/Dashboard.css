@@ -15,3 +15,12 @@
 .final-message {
     -fx-font-size: 18;
 }
+
+/*
+@@author AllardQuek-reused
+Reused with modifications from https://stackoverflow.com/questions/12535397/
+ */
+.split-pane *.split-pane-divider {
+    -fx-padding: 1 0 1 0;
+    visibility: hidden;
+}
