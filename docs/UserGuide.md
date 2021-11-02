@@ -79,7 +79,7 @@ This section includes all the necessary information that you will need to start 
 
 To set up a working version of SPAM on your device, follow the steps below.
 
-1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads) or above installed in your device.
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your device.
    
 2. Download the latest `SPAM.jar` release from [here](https://github.com/AY2122S1-CS2103T-W13-2/tp/releases).
    
@@ -298,7 +298,7 @@ Valid _csv_ file example:
 | name | phone    | email                | address       | tag              |
 | -----| -------- | -------------------- | ------------- | ---------------- |
 | Adam | 81234567 | adam<span>@test.com  | ABC, Street   |                  |
-| Beth | 620400   | beth123<span>@eg.edu | 123 Drive     |friend            |
+| Beth | 620400   | beth123<span>@eg.edu | 123 Drive     | friends          |
 | Cody | 90005000 | Cody<span>@test.org  | Oak Lane      | mentor;colleague |
 
 
@@ -447,7 +447,7 @@ find -n Yeoh Alex
 ```
 The order of the keywords does not matter.
 ```text
-find -t friend -t colleagues
+find -t friends -t colleagues
 ```
 Optional fields can be repeated. The above returns only persons with tags containing both `friends` and `colleagues`.
 </div>
@@ -458,7 +458,7 @@ Optional fields can be repeated. The above returns only persons with tags contai
 
 ### `select`
 
-Selects contacts from the current list. Below is the list of flags that can be used with the `select` command in the order of precedence. 
+Selects contacts from the current list. The selected contacts stay in the selected list until they are unselected (deleting/clearing the original contacts does not remove them from the selection). Below is the list of flags that can be used with the `select` command in the order of precedence. 
 
 | Flag | Description |
 | ---- | ----------- |
