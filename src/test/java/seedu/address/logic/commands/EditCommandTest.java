@@ -19,9 +19,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
@@ -35,7 +37,8 @@ import seedu.address.testutil.TypicalIndexes;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +48,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.setItem((Item) model.getFilteredDisplayList().get(0), editedItem);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +68,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.setItem(lastItem, editedItem);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +82,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +99,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.setItem((Item) model.getFilteredDisplayList().get(0), editedItem);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
