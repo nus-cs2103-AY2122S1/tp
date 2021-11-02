@@ -24,7 +24,7 @@ public class PasswordCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Password updated!";
     public static final String MESSAGE_WRONG_PASSWORD = "Wrong password. Please try again!";
     public static final String MESSAGE_FAIL = "Something went wrong. Please try again!";
-    public static final String MESSAGE_INVALID＿PASSWORD = "Invalid password!";
+    public static final String MESSAGE_INVALID_PASSWORD = "Invalid password!";
 
     private final String oldPassword;
     private final String newPassword;

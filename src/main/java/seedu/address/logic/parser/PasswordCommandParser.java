@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
-import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID＿PASSWORD;
+import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID_PASSWORD;
 import static seedu.address.logic.commands.PasswordCommand.MESSAGE_WRONG_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
@@ -23,8 +23,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
     public PasswordCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(ParserUtil.mapPrefixesToShortForm(args),
-                PREFIX_OLD_PASSWORD,
-                PREFIX_NEW_PASSWORD
+                PREFIX_OLD_PASSWORD, PREFIX_NEW_PASSWORD
         );
 
         List<String> allOld = argMultimap.getAllValues(PREFIX_OLD_PASSWORD);
@@ -32,9 +31,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // repeated flags
         if (allOld.size() > 1 || allNew.size() > 1) {
-            throw new ParseException(MESSAGE_TOO_MANY_FLAGS
-                    + System.lineSeparator()
-                    + PasswordCommand.MESSAGE_USAGE);
+            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_TOO_MANY_FLAGS));
         }
 
         Optional<String> oldInput = argMultimap.getValue(PREFIX_OLD_PASSWORD);
@@ -42,7 +39,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // old password is empty
         if (oldInput.isEmpty() || newInput.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
+            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_INVALID_COMMAND_FORMAT));
         }
 
         String oldPassword = oldInput.get();
@@ -50,19 +47,17 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // old password invalid format(wrong)
         if (!isValidPassword(oldPassword)) {
-            throw new ParseException(String.format(MESSAGE_WRONG_PASSWORD));
+            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_WRONG_PASSWORD));
         }
 
         // new password invalid format
         if (!isValidPassword(newPassword)) {
-            throw new ParseException(MESSAGE_INVALID＿PASSWORD
-                    + System.lineSeparator()
-                    + PasswordCommand.CORRECT_PASSWORD_FORMAT);
-        } else {
-            // valid old and new password format
-            return new PasswordCommand(oldPassword, newPassword);
+            throw new ParseException(passwordCommandErrorMessageGenerator(
+                    MESSAGE_INVALID_PASSWORD, PasswordCommand.CORRECT_PASSWORD_FORMAT));
         }
 
+        // valid old and new password format
+        return new PasswordCommand(oldPassword, newPassword);
     }
 
     /**
@@ -87,5 +82,16 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
                 && password.length() <= PasswordCommand.MAX_PASSWORD_LENGTH
                 && hasLetter.find() && hasDigit.find()
                 && hasSpecial.find() && !hasSlash.find();
+    }
+
+    /**
+     * Generates a multiline error message. Will always end with PasswordCommand's usage message.
+     */
+    public static String passwordCommandErrorMessageGenerator(String...errorMessages) {
+        StringBuilder sb = new StringBuilder();
+        for (String errorMessage : errorMessages) {
+            sb.append(errorMessage).append(System.lineSeparator());
+        }
+        return sb.append(PasswordCommand.MESSAGE_USAGE).toString();
     }
 }
