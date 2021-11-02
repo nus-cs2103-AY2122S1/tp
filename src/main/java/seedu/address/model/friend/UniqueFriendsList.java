@@ -114,10 +114,10 @@ public class UniqueFriendsList implements Iterable<Friend> {
         requireAllNonNull(toLink, gameFriendLink);
 
         Map<GameId, GameFriendLink> currentLinks = new HashMap<>(toLink.getGameFriendLinks());
-        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getFriendName(),
+        Friend friendToEdit = new Friend(toLink.getFriendId(), toLink.getFriendName(),
                 currentLinks, toLink.getSchedule());
-        editedFriend.link(gameFriendLink);
-        this.setFriend(toLink, editedFriend);
+        friendToEdit.link(gameFriendLink);
+        this.setFriend(toLink, friendToEdit);
     }
 
     /**
