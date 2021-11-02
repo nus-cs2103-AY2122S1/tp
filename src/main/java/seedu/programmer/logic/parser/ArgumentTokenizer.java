@@ -75,9 +75,13 @@ public class ArgumentTokenizer {
         return true;
     }
 
+    //@@author shermannws-reused
+    //Reused with modifications from https://stackoverflow.com/questions/2811031/
+    //for the regex matching positive fractional numbers
     private static boolean isValidNumericalInput(String restOfString) {
         return restOfString.matches("^(0|[1-9]\\d*)?(\\.\\d+)?(?<=\\d)$");
     }
+    //@@author
 
     /**
      * Finds all zero-based prefix positions in the given arguments string.
