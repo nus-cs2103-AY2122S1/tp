@@ -144,9 +144,9 @@ Task deadline must only contain alphanumeric characters and dashes.
 Format: `edit task m/<module name> ti/<task id> a/<edited task name> d/<edited task deadline>`
 
 Examples:
-* `edit task m/CS2103 i/T10 a/Final exam d/20-11-2021`: 
+* `edit task m/CS2103 ti/T10 a/Final exam d/20-11-2021`: 
   * Edits the name and deadline of the task with task id 'T10' to 'Final exam' and '20-11-2021' respectively
-* `edit task m/CS2103 i/T10 d/23-11-2021`: 
+* `edit task m/CS2103 ti/T10 d/23-11-2021`: 
   * Edits only the deadline of the task with task id 'T10' to '20-11-2021'
 
 ### Delete a task from a module: `delete task`
