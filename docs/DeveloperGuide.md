@@ -26,6 +26,15 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Storage Component](#storage) 
         - [Common classes](#common-classes)
     - [Implementation](#implementation)
+        - [Stateful PlannerMd](#stateful-plannermd)
+        - [Toggle Command](#toggle-command)
+        - [Remark](#remark)
+        - [Propagating Person Changes to Appointment List](#propagating-person-changes-to-appointment-list)
+        - [Adding an appointment](#adding-an-appointment)
+        - [Deleting an appointment](#deleting-an-appointment)
+        - [Editing an appointment](#editing-an-appointment)
+        - [Filtering appointments](#filtering-appointments)
+        - [Storing an appointment](#storing-an-appointment)
     - [Documentation, logging, testing, configuration, dev-ops](#documentation)
     - [Appendix: Requirements](#appendix-requirements)
         - [Product scope](#product-scope)
@@ -190,7 +199,7 @@ Classes used by multiple components are in the `seedu.plannermd.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Stateful PlannerMd
+### Stateful PlannerMd <a name="stateful-plannermd"/>
 With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
 a state is used to determine which list should be interacted with.
 
@@ -205,10 +214,10 @@ Since it is likely that clinic would be mainly interacting with patient records,
 would be less user-friendly. Also, since commands for records are applicable to both patients and doctors, we wanted to avoid flags for record commands and keep them as succinct as possible. <br>
 Therefore, we decided to introduce a state, allowing us to display the list the user desires and execute commands according to the state.
 
-### Toggle Command
+### Toggle Command <a name="toggle-command"/>
 Command used to toggle displayed tab and the current state of PlannerMD.
 
-The activity Diagram below illustrates the execution flow when the user executes a `remark` command.<br>
+The Activity Diagram below illustrates the execution flow when the user executes a `remark` command.<br>
 
 ![ToggleActivityDiagram](images/ToggleActivityDiagram.png)
 
@@ -233,7 +242,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 #### Result
 The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
 
-### Remark
+### Remark <a name="remark"/>
 
 #### Remark field
 A field added for `Person` and thus applies to both `Patient` and `Doctor`. Remark is miscellaneous information
@@ -275,10 +284,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 #### Result
 The GUI updates the patient record in the displayed list and displays a success message.
 
-#### Design considerations
-
-
-### Propagating Person Changes to Appointment List
+### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
 Since specific patients and doctors within the records are directly referenced in appointments,
 changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
 * When patients or doctor deleted, appointments they are a part of will be deleted as well.
@@ -310,7 +316,7 @@ GUI is updated to display the propagated changes in the appointment list.
 Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
 to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
 
-### Adding an appointment
+### Adding an appointment <a name="adding-an-appointment"/>
 Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
 The diagram below illustrates the flow of adding an appointment:
 ![AddAppointment](images/AddAppointmentActivityDiagram.png)
@@ -325,12 +331,13 @@ The diagram below illustrates the flow of adding an appointment:
    `Model#FilteredPatientList` or `Model#FilteredDoctorList`, it will throw an error, and the invalid index message will be shown.
    If not, the `Appointment` object with the is created and added to the model. The add appointment success message is then returned.
 4. The UI will then display the result
-### Deleting an appointment
+
+### Deleting an appointment <a name="deleting-an-appointment"/>
 Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
 The diagram below illustrates the flow of deleting an appointment:
 ![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
 
-![DeleteAppointment](images/DeleteSequenceActivityDiagram.png)
+![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
 1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
    to `DeleteAppointmentCommandParser` for parsing.
 2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
@@ -339,9 +346,7 @@ The diagram below illustrates the flow of deleting an appointment:
    success message as a `CommandResult` object.
 4. The UI will then display the result
 
-
-
-### Editing an appointment
+### Editing an appointment <a name="editing-an-appointment"/> 
 
 Edits the details of an existing appointment.
 
@@ -365,7 +370,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppointmentCommandParser` and `EditAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Filtering appointments
+### Filtering appointments <a name="filtering-appointments"/>
 
 #### What it is
 
@@ -394,7 +399,7 @@ A clearer view of this sequence diagram can be found [here](images/AppointmentFi
 ![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
 
 
-### Storing an appointment
+### Storing an appointment <a name="storing-an-appointment"/>
 
 #### What it is
 
@@ -419,7 +424,6 @@ which is synonymous to the `Session` object contained in an `Appointment`.
 The Sequence Diagram below illustrates the interactions within the Storage component for the creation of a `JsonAdaptedAppointment`.
 
 <img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -456,10 +460,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use an instruction              |
 | `* * *`  | clinic receptionist                        | add a new patient              |                                                                        |
 | `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
-| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand them and contact them |
+| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand him/her and contact him/her |
 | `* * *`  | clinic receptionist                        | view a patient's risk profile| view his/her risk |
 | `* * *`  | clinic receptionist                        | edit a patient's personal details| change his/her personal details should it change|
 | `* * *`  | clinic receptionist                        | edit a patient's risk profile| change his/her risk profile should it change |
@@ -473,12 +477,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
 | `* * *`  | clinic receptionist                        | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
-| `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many doctors to manage| sort doctors by name      | locate a doctor easily                                                |
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
 | `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
-| `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`      | clinic receptionist                        | write tags for a patient  | easily identify him/her or provide additional information                |
+| `*`      | clinic receptionist                        | write tags for a doctor  | easily identify him/her or provide additional information       |
  
 ### Use cases  <a name="use-cases"/>
 These are some use cases to familiarise with the flow of our application: 
@@ -512,7 +514,7 @@ These are some use cases to familiarise with the flow of our application:
 
 **MSS**
 
-1.  Receptionist requests to list patients/doctors
+1.  Receptionist requests for a list of patients/doctors
 2.  PlannerMD shows a list of patients/doctors
 3.  Receptionist requests to delete a specific patient/doctor in the list
 4.  PlannerMD deletes the patient/doctor which is reflected immediately in the list
@@ -612,7 +614,7 @@ These are some use cases to familiarise with the flow of our application:
 
 **MSS**
 
-1.  Receptionist requests to list patients
+1.  Receptionist requests a list of patients
 2.  PlannerMD shows a list of patients
 3.  Receptionist requests to delete a tag from a specific person in the list
 4.  PlannerMD deletes the tag which is reflected immediately in the list
@@ -776,9 +778,6 @@ These are some use cases to familiarise with the flow of our application:
 6. The data should be available for backup and portable to another computer.
 7. The user interface should be simple and intuitive enough for any users.
 8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-9. The project is expected to adhere to a schedule that delivers a feature set every two weeks.
-
-*{More to be added}*
 
 ### Glossary <a name="glossary"/>
 
@@ -788,7 +787,6 @@ These are some use cases to familiarise with the flow of our application:
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Patient**: The individual that visits the clinic
 * **Personal details** personal information including a name, contact number, email, address, date of birth, whatever tags the receptionist gives
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Risk profile**: The health status and severity of the condition of a patient
 * **Tag**: A label attached to a patient for easy identification or providing additional information
 * **MSS**: Main Success Scenario in the use cases.
@@ -811,7 +809,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample patients, doctors and appointments. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -820,7 +818,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the app
+    1. While the app is still open, enter `exit` in the command box or click on the close window button.
+        Expected: The application closes.
 
 ### Adding a patient <a name="add-patient"/>
 
