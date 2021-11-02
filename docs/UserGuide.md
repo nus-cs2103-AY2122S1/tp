@@ -345,6 +345,35 @@ A lesson can be categorised into 2 types:
 1. A **weekly** recurring lesson
 2. A one-off makeup lesson.
 
+<table>
+  <thead>
+    <th style="text-align: center">Field</th>
+    <th style="text-align: center">Prefix</th>
+    <th style="text-align: center">Constraints</th>
+    <th style="text-align: center">Examples</th>
+    <th style="text-align: center">Remark</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Start Date</td>
+      <td>date/</td>
+      <td>Dates should be of the format dd MMM yyyy and adhere to the following constraints:<br> 1. dd and yyyy are numerical characters.<br>2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec<br>3. Must be a valid date for the year.<br></td>
+      <td>`date/20 jan 2022<br>`date/4 dec 2000`</td>
+      <td>Dates are case-insensitive and allows single digit day without the leading zero.</td>
+    </tr>
+  </tbody>
+
+</table>
+Field | Prefix | Constraints | Examples | Remark
+------------------|-------|-----------| --------| -----
+TIME_RANGE        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br>2. Lesson should be conducted between 8am and 10pm, inclusive.<br> | `time/1100-1300`<br>`time/2000-2130` |
+SUBJECT           | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br> `subject/Language Arts` | 
+LESSON_RATE       | `rates/` | Money-related fields such as lesson rate should be formatted with a decimal point '.' as a separator between the dollars and cents, and adhere to the following constraints:<br>1. Lesson rates should only contain numbers and at most one decimal point.<br>2. The lesson rate should not start or end with a decimal point and should have at most two decimal places. | `rates/37.50`<br>`rates/40` | The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br>
+RECURRENCE        | `recurring/` | This prefix takes in an optional parameter `END_DATE` that signifies the end of the recurrence. The `END_DATE` constraints follows the `DATE` constraints. An additional constraint is that the end date cannot be earlier than the start date | `recurring/`<br>`recurring/30 Nov 2100` | 
+HOMEWORK          | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br> `hw/Assignment 5` | 
+OUTSTANDING FEES  | `f/` | Constraints for fees follow that of lesson rates. | `f/50` | 
+
+
 The essential fields for a lesson are:
 * Start date
 * Time range
