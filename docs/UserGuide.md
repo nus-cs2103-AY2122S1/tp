@@ -79,7 +79,7 @@ This section includes all the necessary information that you will need to start 
 
 To set up a working version of SPAM on your device, follow the steps below.
 
-1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) or above installed in your device.
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your device.
    
 2. Download the latest `SPAM.jar` release from [here](https://github.com/AY2122S1-CS2103T-W13-2/tp/releases).
    
