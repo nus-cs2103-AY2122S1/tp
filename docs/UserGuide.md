@@ -231,8 +231,8 @@ Clears all entries from the address book.
 
 | Format | `clear`|
 | :-: | :-- |
-| <img src=images/info_icon.png width="50"> | • This command clears all clients in **all** address books <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br> • `yes`: to confirm and proceed with the clear command. <br> •`no`: to cancel the clear command.|
-| <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from LeadsForce, this information will be removed from the storage file and will not be retrievable.|
+| <img src=images/info_icon.png width="50"> | • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br> • `yes`: to confirm and proceed with the clear command. <br> •`no`: to cancel the clear command.|
+| <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 ### 4.11 Exiting the program : `exit`
 
@@ -279,6 +279,8 @@ Switch to a different address book that currently exists.
 | Format | `ab switch ADDRESSBOOK_NAME` <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :-: | :-- |
 | Example | `ab switch other` will switch over to the address book named `other` |
+| <img src=images/tip_icon.png width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) |
+ 
 
 ### 5.4 List all address book : `ab list`
 
