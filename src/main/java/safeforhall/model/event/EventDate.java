@@ -6,15 +6,19 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 public class EventDate implements Comparable<EventDate> {
-    public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy, dd.mm.yyyy"
-            + "or dd/mm/yyyy format";
+    public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be a valid date in the format of:\n1. "
+            + "dd-mm-yyyy\n2. dd.mm.yyyy\n3. dd/mm/yyyy\n"
+            + "Some common errors include having an invalid day (35-01-2021),"
+            + " an invalid month (31-13-2021), an invalid date (29-02-2021) or an invalid formatting (01012021)";
     public static final String DESC = "Date: ";
     public static final String FIELD = "d";
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter
-            .ofPattern("[dd-MM-yyyy][dd.MM.yyyy][dd/MM/yyyy]");
+            .ofPattern("[dd-MM-uuuu][dd.MM.uuuu][dd/MM/uuuu]")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final String eventDate;
 

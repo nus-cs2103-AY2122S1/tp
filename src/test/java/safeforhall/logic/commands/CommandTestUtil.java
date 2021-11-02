@@ -53,9 +53,9 @@ public class CommandTestUtil {
     public static final String VALID_FACULTY_BOB = "FASS";
     public static final String VALID_VACCSTATUS_AMY = "T";
     public static final String VALID_VACCSTATUS_BOB = "F";
-    public static final String VALID_FETDATE_AMY = "20-11-2021";
+    public static final String VALID_FETDATE_AMY = "20-10-2021";
     public static final String VALID_FETDATE_BOB = "02-09-2021";
-    public static final String VALID_COLLECTIONDATE_AMY = "22-11-2021";
+    public static final String VALID_COLLECTIONDATE_AMY = "22-10-2021";
     public static final String VALID_COLLECTIONDATE_BOB = "12-09-2021";
     public static final String VALID_LAST_DATE1_OCT = "10-10-2021";
     public static final String VALID_LAST_DATE2_OCT = "15-10-2021";
