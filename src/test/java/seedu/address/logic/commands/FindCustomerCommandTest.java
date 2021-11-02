@@ -54,7 +54,7 @@ public class FindCustomerCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_allPersonsFound() {
+    public void execute_zeroKeywords_allCustomersFound() {
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW,
                 model.getFilteredCustomerList().size());
         ObservableList<Customer> customersList = model.getFilteredCustomerList();
@@ -66,7 +66,7 @@ public class FindCustomerCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsNamesNotFound() {
+    public void execute_multipleKeywords_multipleCustomerNamesNotFound() {
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 0);
         CustomerClassContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
