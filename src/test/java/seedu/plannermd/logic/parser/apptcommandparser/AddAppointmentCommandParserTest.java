@@ -23,6 +23,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_APPT_REMARK;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_APPT_TIME_THIRTY_MIN;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_DOCTOR_INDEX;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PATIENT_INDEX;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -32,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
+import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.testutil.appointment.AddAppointmentDescriptorBuilder;
 
 public class AddAppointmentCommandParserTest {
@@ -93,7 +95,6 @@ public class AddAppointmentCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         Index patientIndex = INDEX_FIRST_PERSON;
         Index doctorIndex = INDEX_SECOND_PERSON;
-
 
         // No Duration
         String userInput = APPT_PATIENT_INDEX_DESC + APPT_DOCTOR_INDEX_DESC + APPT_START_THIRTY_MIN_DESC
@@ -183,5 +184,16 @@ public class AddAppointmentCommandParserTest {
         assertParseFailure(parser,
                 userInput,
                 AddAppointmentCommand.MESSAGE_WRONG_DATE_TIME);
+    }
+
+    @Test
+    public void parse_sessionSpansTwoDays_failure() {
+        String userInput = APPT_PATIENT_INDEX_DESC + APPT_DOCTOR_INDEX_DESC + APPT_START_THIRTY_MIN_DESC
+                + APPT_DURATION_TWO_HOUR_DESC + APPT_REMARK_DESC; // session 22:35-00:35
+        assertParseFailure(parser, userInput, Session.MESSAGE_END_WITHIN_SAME_DAY);
+
+        String userInput2 = APPT_PATIENT_INDEX_DESC + APPT_DOCTOR_INDEX_DESC + APPT_START_THIRTY_MIN_DESC
+                + " " + PREFIX_DURATION + "85" + APPT_REMARK_DESC; // session 22:35-00:00
+        assertParseFailure(parser, userInput2, Session.MESSAGE_END_WITHIN_SAME_DAY);
     }
 }

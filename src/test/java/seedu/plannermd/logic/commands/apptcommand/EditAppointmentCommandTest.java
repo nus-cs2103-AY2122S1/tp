@@ -32,6 +32,7 @@ import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.testutil.appointment.AppointmentBuilder;
 import seedu.plannermd.testutil.appointment.EditAppointmentDescriptorBuilder;
 
@@ -130,6 +131,23 @@ public class EditAppointmentCommandTest {
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editAppointmentCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_sessionSpansTwoDaysUnfilteredList_failure() {
+        AppointmentBuilder editedAppointmentBuilder =
+                // patient and doctor are same as those for first appt in TypicalAppointments
+                new AppointmentBuilder().withPatient(ALICE).withDoctor(DR_GEORGE).withDate(EDITED_DATE)
+                        .withSession("23:30", VALID_APPT_DURATION_TWO_HOUR)
+                        .withRemark(VALID_APPT_REMARK);
+        Appointment editedAppointment = editedAppointmentBuilder.build();
+
+        EditAppointmentCommand.EditAppointmentDescriptor descriptor =
+                new EditAppointmentDescriptorBuilder(ALICE_PATIENT_INDEX, DR_GEORGE_DOCTOR_INDEX, editedAppointment)
+                        .build();
+        EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(INDEX_FIRST_APPT, descriptor);
+
+        assertCommandFailure(editAppointmentCommand, model, Session.MESSAGE_END_WITHIN_SAME_DAY);
     }
 
     @Test

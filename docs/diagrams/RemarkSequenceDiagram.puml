@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerMdParser" as PlannerMdParser LOGIC_COLOR
+participant ":RemarkPatientCommandParser" as RemarkPatientCommandParser LOGIC_COLOR
+participant "r:RemarkPatientCommand" as RemarkPatientCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("remark 1 r/bad cough")
+activate LogicManager
+
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
+LogicManager -> PlannerMdParser : parseCommand("remark 1 r/bad cough", state)
+activate PlannerMdParser
+
+create RemarkPatientCommandParser
+PlannerMdParser -> RemarkPatientCommandParser
+activate RemarkPatientCommandParser
+
+RemarkPatientCommandParser --> PlannerMdParser
+deactivate RemarkPatientCommandParser
+
+PlannerMdParser -> RemarkPatientCommandParser : parse("1 r/bad cough")
+activate RemarkPatientCommandParser
+
+create RemarkPatientCommand
+RemarkPatientCommandParser -> RemarkPatientCommand
+activate RemarkPatientCommand
+
+RemarkPatientCommand --> RemarkPatientCommandParser : r
+deactivate RemarkPatientCommand
+
+RemarkPatientCommandParser --> PlannerMdParser : r
+deactivate RemarkPatientCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RemarkPatientCommandParser -[hidden]-> PlannerMdParser
+destroy RemarkPatientCommandParser
+
+PlannerMdParser --> LogicManager : r
+deactivate PlannerMdParser
+
+LogicManager -> RemarkPatientCommand : execute()
+activate RemarkPatientCommand
+
+RemarkPatientCommand -> Model : setPatient(patientToEdit, editedPatient)
+activate Model
+
+Model --> RemarkPatientCommand
+deactivate Model
+
+create CommandResult
+RemarkPatientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RemarkPatientCommand :result
+deactivate CommandResult
+
+RemarkPatientCommand --> LogicManager : result
+deactivate RemarkPatientCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

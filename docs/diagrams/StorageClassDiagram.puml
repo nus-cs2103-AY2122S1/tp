@@ -22,6 +22,8 @@ class JsonAdaptedDoctor
 class JsonAdaptedPatient
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+class JsonAdaptedAppointment
+Class JsonAdaptedSession
 }
 
 }
@@ -41,6 +43,10 @@ JsonPlannerMdStorage .up.|> PlannerMdStorage
 JsonPlannerMdStorage ..> JsonSerializablePlannerMd
 JsonSerializablePlannerMd --> "*" JsonAdaptedDoctor
 JsonSerializablePlannerMd --> "*" JsonAdaptedPatient
+JsonSerializablePlannerMd --> "*" JsonAdaptedAppointment
+JsonAdaptedAppointment --> "1" JsonAdaptedPatient
+JsonAdaptedAppointment --> "1" JsonAdaptedDoctor
+JsonAdaptedAppointment --> "1" JsonAdaptedSession
 JsonAdaptedDoctor --|> JsonAdaptedPerson
 JsonAdaptedPatient --|> JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
