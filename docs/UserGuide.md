@@ -55,6 +55,9 @@ tasks done faster than traditional GUI apps.
 
 * Parameters must only contain permitted characters, as listed in the [Parameter summary](#parameter-summary-with-prefix-included) below.
 
+* Optional parameters need not be all present when executing a command, they are denoted in this user guide using square brackets '[]'.<br>
+  e.g. in `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]`, `a/<edited task name>` and `d/<edited task deadline>` are the optional parameters
+
 </div>
 
 
@@ -116,13 +119,13 @@ Examples:
 
 Edit a student's information.<br>
 The identity fields(module name/student id) must be provided.<br>
-At least one editable field (name/tele handle/email) must be provided, and only provided editable fields will be changed.
+At least one optional editable field (name/tele handle/email) must be provided, and only provided editable fields will be changed.
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
 Student tele handle must start with @ and followed by alphanumeric characters.<br>
 Student email must follow the format specified in the [Parameter summary](#parameter-summary) section below.<br>
 If duplicate fields are provided, only the latest fields will be processed.
 
-Format: `edit student m/<module name> i/<student id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
+Format: `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]`
 
 Examples:
 * `edit student m/CS2103 i/A0123456A n/John Doe`:
@@ -163,14 +166,14 @@ Examples:
 
 Edit a task's information.<br>
 The identity fields (module name/task id) must be provided.<br>
-At least one editable field (name/deadline) must be provided, and only provided editable fields will be changed.<br>
+At least one optional editable field (name/deadline) must be provided, and only provided editable fields will be changed.<br>
 If duplicate fields are provided, only the latest fields will be processed.
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
 Task deadline must contain either date only/time only/date and time.<br>
 Date must be in the form "YYYY-MM-DD".<br>
 Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
 
-Format: `edit task m/<module name> ti/<task id> a/<edited task name> d/<edited task deadline>`
+Format: `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]`
 
 Examples:
 * `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`: 
@@ -263,18 +266,20 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-Action | Format, Examples (optional parameters may be omitted from examples)
+**Optional parameters** are surrounded by square brackets '[]' in Format, and may be omitted from Examples to show they are optional.<br>
+
+Action | Format, Examples
 --------|------------------
 **Add Module** | `add module m/<module name>` <br> e.g., `add module m/CS2103`
 **Add Student** | `add student m/<module name> i/<student id> n/<student name> t/<student tele handle> e/<student email>` <br> e.g., `add student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`
-**Add Task** | `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>` <br> e.g., `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-12`
+**Add Task** | `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>` <br> e.g., `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-12 12:00`
 **Clear** | `clear` <br> e.g., `clear`
 **Delete Module** | `delete module m/<module name>` <br> e.g., `delete module m/CS2103`
 **Delete Student** | `delete student m/<module name> i/<student id>` <br> e.g., `delete student m/CS2103 i/A1234567A`
 **Delete Task** | `delete task m/<module name> ti/<task id>` <br> e.g., `delete task m/CS2103 ti/T1`
 **Edit Module** | `edit module m/<old module name> mn/<new module name>` <br> e.g., `edit module m/CS2103 mn/CS2105`
-**Edit Student** | `edit student m/<module name> i/<student id> n/<edited student name> t/<edited student tele handle> e/<edited student email>` <br> e.g., `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`
-**Edit Task** | `edit task m/<module name> ti/<task id> a/<edited task name> d/<edited task deadline>` <br> e.g., `edit task m/CS2103 ti/T10 a/Final exam d/20-11-2021`
+**Edit Student** | `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]` <br> e.g., `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`
+**Edit Task** | `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]` <br> e.g., `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`
 **Exit** | `exit` <br> e.g., `exit module m/CS2103`
 **Find** | `find m/<module name> i/<student id>` <br> e.g., `find m/CS2103 i/A0123456A`
 **Home** | `home` <br> e.g., `home`
