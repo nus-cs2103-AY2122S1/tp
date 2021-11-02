@@ -208,6 +208,9 @@ Adds a profile to your favourites list. Favourited profiles will have a star bes
 
 Format: `addFav STUDENT_ID`
 
+**:information_source: Notes:**
+* You cannot add your own profile as a favourite.
+
 Examples:
 * `addFav A0222594A`
 * `addFav A1234567R`
