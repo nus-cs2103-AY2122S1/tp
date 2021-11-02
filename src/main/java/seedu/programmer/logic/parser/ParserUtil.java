@@ -123,17 +123,21 @@ public class ParserUtil {
      * @param result the result of the lab assignment.
      * */
     public static Integer parseResult (String result) throws ParseException {
-        String trimmedResult = result.trim();
-        if (trimmedResult.isEmpty()) {
+        try {
+            String trimmedResult = result.trim();
+            if (trimmedResult.isEmpty()) {
+                throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+            }
+            Integer res = Integer.parseInt(trimmedResult);
+            if (result == null) {
+                return 0;
+            } else if (res < 0) {
+                throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+            }
+            return Integer.parseInt(result.trim());
+        } catch (NumberFormatException e) {
             throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
         }
-        Integer res = Integer.parseInt(trimmedResult);
-        if (result == null) {
-            return 0;
-        } else if (res < 0) {
-            throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
-        }
-        return Integer.parseInt(result.trim());
     }
 
     /**
@@ -142,16 +146,20 @@ public class ParserUtil {
      * @param total the total score of the lab assignment.
      * */
     public static Integer parseTotal(String total) throws ParseException {
-        String trimmedResult = total.trim();
-        if (trimmedResult.isEmpty()) {
+        try {
+            String trimmedResult = total.trim();
+            if (trimmedResult.isEmpty()) {
+                throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+            }
+            Integer res = Integer.parseInt(trimmedResult);
+            if (total == null) {
+                return 0;
+            } else if (res < 0) {
+                throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+            }
+            return Integer.parseInt(total.trim());
+        } catch (NumberFormatException e) {
             throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
         }
-        Integer res = Integer.parseInt(trimmedResult);
-        if (total == null) {
-            return 0;
-        } else if (res < 0) {
-            throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
-        }
-        return Integer.parseInt(total.trim());
     }
 }
