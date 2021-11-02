@@ -133,5 +133,15 @@ public class RoleReqStorage {
                 + "Floor: " + requirements[1] + "\n"
                 + "Kitchen: " + requirements[2] + "\n";
     }
+
+    /**
+     * Resets the timings to the default timings.
+     *
+     * @throws FileNotFoundException If the file cannot be found.
+     */
+    public static void reset() throws FileNotFoundException {
+        requirements = new int[]{0, 0, 0};
+        update();
+    }
 }
 

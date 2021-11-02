@@ -134,6 +134,9 @@ Set the minimum number of staff required for each shift. The three roles are: ki
 Multiple roles can be set with this same command, but if the same role occurs multiple times, the last instance will be
 used.
 
+Note that the default role requirements are 0 for all three roles, and the [Clear Command](#clearing-all-entries--clear) will also reset the
+role requirements to the default.
+
 Format:
 
 `setRoleReq r/ROLE-NUMBER_REQUIRED...`
@@ -148,14 +151,17 @@ Examples:
 Set the default timings for the morning and afternoon shift. Note that all 4 timings must be present, and the timings 
 must be provided in an `HH:mm` format.
 
+Note that the default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
+The [Clear Command](#clearing-all-entries--clear) will also reset the shift timings to the aforementioned defaults.
+
 Format:
 
-`setShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
+`setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
 
 Examples:
 
-`setShiftTimings 10:00 16:00 17:00 22:00`\
-`setShiftTimings 09:00 15:00 18:00 23:00`
+`setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
+`setDefaultShiftTimings 09:00 15:00 18:00 23:00`
 
 #### Listing all persons : `list`
 
