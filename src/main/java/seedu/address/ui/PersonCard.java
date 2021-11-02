@@ -140,8 +140,8 @@ public class PersonCard extends UiPart<Region> {
     private void setTagsField(Set<Tag> tagSet) {
         tags.setManaged(!person.getTags().isEmpty());
         tagSet.stream()
-                .sorted(Comparator.comparing(Tag::getTagName))
-                .forEach(tag -> tags.getChildren().add(createTagLabel(tag.getTagName())));
+                .sorted(Comparator.comparing(Tag::toString))
+                .forEach(tag -> tags.getChildren().add(createTagLabel(tag.toString())));
     }
 
     private Label createTagLabel(String tag) {

@@ -36,15 +36,6 @@ public class Tag {
     }
 
     /**
-     * Returns the tag name of this tag.
-     *
-     * @return Tag name of this tag.
-     */
-    public String getTagName() {
-        return tagName;
-    }
-
-    /**
      * Returns true if both tags are the same object or both tags have the same tag name.
      *
      * @param other Object to be checked.
@@ -54,7 +45,7 @@ public class Tag {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && getTagName().equals(((Tag) other).getTagName())); // state check
+                && tagName.equals(((Tag) other).tagName)); // state check
     }
 
     @Override
@@ -66,7 +57,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
     }
 
 }
