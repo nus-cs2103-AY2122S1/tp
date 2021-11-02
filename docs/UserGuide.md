@@ -458,7 +458,7 @@ Optional fields can be repeated. The above returns only persons with tags contai
 
 ### `select`
 
-Selects contacts from the current list. Below is the list of flags that can be used with the `select` command in the order of precedence. 
+Selects contacts from the current list. The selected contacts stay in the selected list until they are unselected (deleting/clearing the original contacts does not remove them from the selection). Below is the list of flags that can be used with the `select` command in the order of precedence. 
 
 | Flag | Description |
 | ---- | ----------- |
