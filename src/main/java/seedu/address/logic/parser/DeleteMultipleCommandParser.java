@@ -18,10 +18,17 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             int indexOfDash = ParserUtil.getIndexOfSubstring(args, INDEX_SPLITTER);
             Index indexStart = ParserUtil.parseIndex(args.substring(0, indexOfDash));
             Index indexEnd = ParserUtil.parseIndex(args.substring(indexOfDash + 1));
+            validateIndexes(indexStart, indexEnd);
             return new DeleteMultipleCommand(indexStart, indexEnd);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()), pe);
+        }
+    }
+
+    private void validateIndexes(Index indexStart, Index indexEnd) throws ParseException {
+        if (!DeleteMultipleCommand.areValidIndexes(indexStart, indexEnd)) {
+            throw new ParseException(DeleteMultipleCommand.MESSAGE_CONSTRAINTS);
         }
     }
 }
