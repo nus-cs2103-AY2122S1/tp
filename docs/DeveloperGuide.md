@@ -228,105 +228,120 @@ Step 4. The new transactions are saved to json file.
 
 ![Transact_Order_Sequence_Diagram](images/TransactOrderSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### Mutating Inventory
 
-#### Proposed Implementation
+This section explains how various commands update the list of items and display the result.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness between
+items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then update the
+`ObservableList<Item>`. The `ObservableList<Item>` is bounded to the UI so that the UI automatically updates when the
+data in the list change.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design needs to
+ensure that every command mutates the `UniqueItemList` through `Inventory`.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+The general flow of inventory manipulation through AddCommand is as below:
+1. The `AddCommand` object in `Logic` component interacts with `Model` component by calling the `Model#addItem()` if a
+   new item is added and `Model#restockItem()` if an existing item is restocked.
+2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
+3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
+4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be returned to the user.
+   The returned list has added a new item or incremented the count of the existing item.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Flow:`AddCommand` -> `Model` -> `Inventory` -> `UniqueItemList` -> `ObservableList<Item>`
 
-![UndoRedoState0](images/UndoRedoState0.png)
+The above flow applies for all the other similar commands that manipulates the inventory.
+The detailed flow for each command is found below:
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+**`AddCommand:`**      
+AddCommand#execute() -> Model#addItem() or Model#restockItem() -> Inventory#addItem() or Inventory#restockItem()
+-> UniqueItemList#addItem() or UniqueItemList#setItem() -> ObservableList<Item>#add() or ObservableList<Item>#set()
 
-![UndoRedoState1](images/UndoRedoState1.png)
+**`RemoveCommand:`**    
+RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`
-, causing another modified address book state to be saved into the `addressBookStateList`.
+**`EditCommand:`**       
+EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
 
-![UndoRedoState2](images/UndoRedoState2.png)
+**`ClearCommand:`**       
+ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**`DeleteCommand:`**      
+DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() -> ObservableList<Item>#remove()
 
-</div>
+**`SortCommand:`**      
+SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>#sort()
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+### Sort feature
 
-![UndoRedoState3](images/UndoRedoState3.png)
+The sort mechanism is facilitated by the built-in `Comparator` interface. The SortCommand constructor takes in a
+predicate enum instruction as a parameter depending on whether the user requested to sort by name or count. The
+items' respective fields are then compared with a `Comparator` so that the updated list displayed is sorted.
+`Comparator<Item>` interface is implemented by different classes below:
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+* `ItemNameComparator` — allows sorting of items by name
+* `ItemCountComparator` — allows sorting of items by count
 
-</div>
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-The following sequence diagram shows how the undo operation works:
+Step 1. The user opens up BogoBogo and executes `sort n/` to sort items by name. The `LogicManager` then calls the
+`AddressBookParser` which create a `SortCommandParser` object. Then, `SortCommandParser#parse()` creates a `SortCommand`
+object. Then the `LogicManager` calls the `SortCommand#execute()` which calls the `Model#SortItems()` and creates an
+`ItemNameComparator` object which is passed as a parameter inside `Model#SortItems()`. The `Model#SortItems()` then
+update the display list with items sorted by name according to the `ItemNameComparator#compare()` method.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input does not input any field to sort by, SortCommandParser will throw a ParseException and a SortCommand will not be created.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+Step 2. The updated list with items sorted by name will then be shown to the user. The same procedure above is executed
+for sorting by count as well.
 
-</div>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user tries to sort when not in inventory mode, a CommandException will be thrown by SortCommand to remind user to list first. 
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+<div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+The following sequence diagram shows how the sort operation works:
 
-</div>
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+### Find feature 
 
-![UndoRedoState4](images/UndoRedoState4.png)
+The find mechanism is facilitated by the built-in `Predicate` class. The FindCommand constructor takes in a predicate 
+type as a parameter and the list is then filtered with `ModelManager#updateFilteredItemList` method to only contain the 
+items that match the predicate specified. `Predicate<Item>` interface is implemented by 3 different classes:
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
+* `IdContainsNumberPredicate` — allows finding of items by Id
+* `NameContainsKeywordsPredicate` — allows finding of items by Name
+* `TagContainsKeywordsPredicate` — allows finding of items by Tag
 
-![UndoRedoState5](images/UndoRedoState5.png)
+Given below is an example usage scenario and how the find mechanism behaves at each step.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+Step 1. The user opens up BogoBogo and executes `find n/Chocolate` to find items with the name chocolate. The 
+`LogicManager` then calls the `AddressBookParser` which create a `FindCommandParser` object. Then, `FindCommandParser#parse()`
+then creates a `FindCommand` object and `NameContainsKeywordsPredicate` object. The `NameContainsKeywordsPredicate` is 
+passed as a field of the FindCommand constructor. Then, the `LogicManager` calls the `FindCommand#execute()` 
+which will update the filtered list with items that matches the predicate stated. 
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input a wrong format of the name, id or tag, a ParseException will be thrown by FindCommandParser and a FindCommand will not be created. 
+
+Step 2. The updated list with items that matches the predicate will then be shown to the user. If none matches, an empty
+list will be shown. The same procedure above is executed for finding by Id and Tags as well.
+
+<div>
+
+The following sequence diagram shows how the find operation works:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
+`IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of 
+strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to 
+update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
 
 --------------------------------------------------------------------------------------------------------------------
 

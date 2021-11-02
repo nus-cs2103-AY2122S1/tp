@@ -113,7 +113,6 @@ public class UniqueItemList implements Iterable<Item> {
 
     /**
      * Removes the specified count of the equivalent item from the list.
-     * If item is
      * The item must exist in the list.
      */
     public void remove(Item toRemove) {
