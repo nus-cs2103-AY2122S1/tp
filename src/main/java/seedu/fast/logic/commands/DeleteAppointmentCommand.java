@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
@@ -30,7 +31,7 @@ public class DeleteAppointmentCommand extends Command {
     /**
      * Construct for an {@code DeleteAppointmentCommand}
      *
-     * @param index       index of the person in the filtered person list to delete the appointment
+     * @param index index of the person in the filtered person list to delete the appointment
      * @param appointment appointment scheduled with the person
      */
     public DeleteAppointmentCommand(Index index, Appointment appointment) {
@@ -42,7 +43,7 @@ public class DeleteAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -54,7 +55,7 @@ public class DeleteAppointmentCommand extends Command {
 
         String name = personToEdit.getName().fullName;
 
-        if (personToEdit.getAppointment().equals(appointment)) {
+        if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
             throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED, name));
         }
 
