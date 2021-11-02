@@ -94,14 +94,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseStudentIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
-                () -> ParserUtil.parseStudentIndex("a"));
+        assertThrows(ParseException.class,
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> ParserUtil.parseStudentIndex("a"));
     }
 
     @Test
     public void parseLessonIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX,
-                () -> ParserUtil.parseLessonIndex("a"));
+        assertThrows(ParseException.class,
+                MESSAGE_INVALID_LESSON_DISPLAYED_INDEX, () -> ParserUtil.parseLessonIndex("a"));
     }
 
     @Test
