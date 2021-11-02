@@ -41,7 +41,7 @@ public class Name {
     /**
      * @return A capitalised version of the name.
      */
-    public String capitalisedName() {
+    public String capitaliseFullName() {
         return fullName.toUpperCase();
     }
 
@@ -54,7 +54,7 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && capitalisedName().equals(((Name) other).capitalisedName())); // state check
+                && capitaliseFullName().equals(((Name) other).capitaliseFullName())); // state check
     }
 
     @Override
