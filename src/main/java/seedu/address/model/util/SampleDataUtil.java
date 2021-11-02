@@ -22,11 +22,11 @@ public class SampleDataUtil {
 
     public static Folder[] getSampleFolders() {
         return new Folder[] {
-                new Folder(new FolderName("Family")),
-                new Folder(new FolderName("Friends")),
-                new Folder(new FolderName("Primary School")),
-                new Folder(new FolderName("NUS")),
-                new Folder(new FolderName("Neighbours"))
+            new Folder(new FolderName("Family")),
+            new Folder(new FolderName("Friends")),
+            new Folder(new FolderName("Primary School")),
+            new Folder(new FolderName("NUS")),
+            new Folder(new FolderName("Neighbours"))
         };
     }
     public static Person[] getSamplePersons() {
