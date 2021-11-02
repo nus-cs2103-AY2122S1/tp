@@ -7,36 +7,36 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
 
 import java.util.stream.Stream;
 
-import seedu.edrecord.logic.commands.AddAssignmentCommand;
+import seedu.edrecord.logic.commands.MakeAssignmentCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.name.Name;
 
-public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
+public class MakeAssignmentCommandParser implements Parser<MakeAssignmentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code AddAssignmentCommand}
-     * and returns a {@code AddAssignmentCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code MakeAssignmentCommand}
+     * and returns a {@code MakeAssignmentCommand} object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddAssignmentCommand parse(String args) throws ParseException {
+    public MakeAssignmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEIGHTAGE, PREFIX_SCORE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_WEIGHTAGE, PREFIX_SCORE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MakeAssignmentCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Weightage weightage = ParserUtil.parseWeightage(argMultimap.getValue(PREFIX_WEIGHTAGE).get());
         Score maxScore = ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get());
-
         Assignment asg = new Assignment(name, weightage, maxScore);
-        return new AddAssignmentCommand(asg);
+        return new MakeAssignmentCommand(asg);
     }
 
     /**
