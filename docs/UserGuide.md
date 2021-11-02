@@ -445,7 +445,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | <code>add <i>n/task_name (t/time) d/date (tg/tag) (p/level)</i></code> <br>e.g `add n/Assignment 1 t/13:00 d/2021-12-12 tg/CS2103 p/HIGH`
-**Tag** | <code>tag <i>task_id tg/tag (tg/tag)</code> <br>e.g `tag 2 tg/assignment tg/tough` <br>e.g `tag 3 tg/meeting`
+**Tag** | <code>tag <i>task_id tg/tag (tg/tag) </i></code> <br>e.g `tag 2 tg/assignment tg/tough` <br>e.g `tag 3 tg/meeting`
 **Done** | <code>done <i>task_id</i></code> <br>e.g `done 1`
 **Undone** | <code>undone <i>task_id</i></code> <br>e.g `undone 1`
 **Edit** | <code>edit <i>task_id n/task_name d/date</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
@@ -453,6 +453,6 @@ Action | Format, Examples
 **Show** | `show week_number ` <br>e.g `show 13`
 **Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
-**Clear** | <code>clear</i></code> <br>
+**Clear** | <code>clear</code> <br>
 **Command History** | <code>/prev</code> or <code>&#8593;</code><br>
 **Help** | `help`
