@@ -11,17 +11,16 @@ The following is a summary of my contributions to the project. ([View Reposense]
 1. Added the ability to upload student data (Credits: [opencsv](http://opencsv.sourceforge.net/), Stackoverflow)
     - What it does: Allows the TA to upload a CSV file containing students' student ID, class ID, name and email 
     - Justification: So that the TA can automate the process of adding students to their classes without having to manually type the add command
-    - Highlights: Trying out different third-party libraries and evaluating their usefulness (e.g. based on their size, ease-of-use, functionality offered). 
-      Validating the user input, since there are many invalid formats and inputs possible
+    - Highlights: This feature involved trying out different third-party libraries and evaluating their suitability (e.g. based on their size, ease-of-use, functionality offered). 
+      Challenges included handling the multiple possibilities for invalid user input with intuitive error messages and good design.
 2. Added the ability to download student data (Credits: [org.json](https://mvnrepository.com/artifact/org.json/json) (third-party library), Stackoverflow)
     - What it does: Allows the TA to download the current student data into a CSV format
-    - Justification: So that the TA can upload the students' lab results onto Luminus gradebook or share with other TAs.
-    - Highlights: Integrating a third-party library into the project for the first time. Encountered issues integrating different libraries into the project dependencies. 
-      Getting the display of the popup message to be precise and appealing (required working on the Ui and exploring CSS properties)
+    - Justification: So that the TA can upload the students' lab results onto Luminus gradebook or share them with other TAs.
+    - Highlights: This feature was challenging as it required integrating a third-party library into the project for the first time and ensuring the feature works across different devices. To improve the user experience, I also created a popup message to be which required significant exploration with CSS properties and display sizes.
 3. Added the ability to view a dashboard of student and lab data
     - What it does: Shows the total number of students, labs and classes, as well as the number of labs left to marked for each class
     - Justification: So that the TA can track their progress in marking their students' labs conveniently, especially when they have many students
-    - Highlights: Used a TreeMap to store the students' lab data since no database usage was allowed for this project. Learnt more about CSS to make the dashboard interface more user-friendly using colour schemes and visibility properties of javafx components
+    - Highlights: This feature required a unique solution to overcome the project constraint of not using a database, specifically using a TreeMap for to store and retrieve the students' lab data. Additionally, this feature required learning more about javafx components and CSS properties to make the dashboard interface more user-friendly.
 
 
 #### Other Contributions
