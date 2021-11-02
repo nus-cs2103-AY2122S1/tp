@@ -44,7 +44,22 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Glossary](#glossary)
     - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
         - [Launch and shutdown](#launch-and-shutdown)
-        - [Deleting a person](#delete-person)
+        - [Adding a person](#add-patient-manual-testing)
+        - [Deleting a patient](#delete-patient-manual-testing)
+        - [Editing a patient](#edit-patient-manual-testing)
+        - [Finding a patient](#find-patient-manual-testing)
+        - [Listing all patients](#list-patients-manual-testing)
+        - [Adding a doctor](#add-doctor-manual-testing)
+        - [Deleting a doctor](#delete-doctor-manual-testing)
+        - [Editing a doctor](#edit-doctor-manual-testing)
+        - [Finding a doctor](#find-doctor-manual-testing)
+        - [Listing all doctors](#list-doctors-manual-testing)
+        - [Adding an appointment](#add-appointment-manual-testing)
+        - [Deleting an appointment](#deleting-appointment-manual-testing)
+        - [Editing an appointment](#edit-appointment-manual-testing)
+        - [Filtering all appointments](#filter-all-manual-testing)
+        - [Filtering upcoming appointments](#filter-upcoming-manual-testing)
+        - [Listing all appointments](#list-all-manual-testing)
         - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -822,11 +837,33 @@ testers are expected to do more *exploratory* testing.
     1. While the app is still open, enter `exit` in the command box or click on the close window button.
         Expected: The application closes.
 
-### Adding a patient <a name="add-patient"/>
-1. Adding a patient
-    1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command.
+### Adding a patient <a name="add-patient-manual-testing"/>
+1. Adding a doctor
+    1. Prerequisites: `toggle` to the `Patients` tab. The following patient must already exists:
+       John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: vaccinated; Risk: LOW
+       
+    2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+       Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
-### Deleting a patient  <a name="delete-patient"/>
+    3. Test case: `add n/Bobby Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
+        Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
+
+    4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+       Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
+
+    5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+       Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
+
+    6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+       Expected: No Patient is edited. Error message is shown in the response box: "This patient already exists in PlannerMD"
+
+    7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
+       Expected: No Patient is edited. Error message is shown in the response box: "This patient already exists in PlannerMD"
+
+    8. Other incorrect edit commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
+       Expected: Similar to previous.
+
+### Deleting a patient  <a name="delete-patient-manual-testing"/>
 1. Deleting a patient while all doctors are being shown
     1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command. There must be multiple patients. 
 
@@ -834,7 +871,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient is deleted from the patients list. Details of the deleted patient are shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No patient is edited. Error details are shown in the status message.
+       Expected: No patient is edited. Error details are shown in the response box.
 
     4. Other incorrect edit commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
        Expected: Similar to previous.
@@ -845,15 +882,39 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
-### Editing a patient <a name="edit-patient"/>
+### Editing a patient <a name="edit-patient-manual-testing"/>
 
-### Finding a patient <a name="find-patient"/>
+### Finding a patient <a name="find-patient-manual-testing"/>
 
-### Listing all patients <a name="list-patients"/>
+### Listing all patients <a name="list-patients-manual-testing"/>
 
-### Adding a doctor <a name="add-doctor"/>
+### Adding a doctor <a name="add-doctor-manual-testing"/>
+1. Adding a doctor
+    1. Prerequisites: `toggle` to the `Doctors` tab. The following doctor must already exists:
+       John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: experienced
+    
+    2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+       Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
 
-### Deleting a doctor  <a name="delete-doctor"/>
+    3. Test case: `add n/OJ Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
+      Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
+       
+    4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+          Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
+
+    5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+        Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
+       
+    6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
+        Expected: No doctor is edited. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+       
+    7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
+        Expected: No doctor is edited. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+
+    8. Other incorrect edit commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
+        Expected: Similar to previous.
+       
+### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
     1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command. There must be multiple doctors. 
 
@@ -861,7 +922,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor is deleted from the doctors list. Details of the deleted doctor are shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No doctor is edited. Error details are shown in the status message.
+       Expected: No doctor is edited. Error details are shown in the response box.
 
     4. Other incorrect edit commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
        Expected: Similar to previous.
@@ -872,7 +933,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
     
-### Editing a doctor <a name="edit-doctor"/>
+### Editing a doctor <a name="edit-doctor-manual-testing"/>
 
 1. Editing a doctor while all doctors are being shown
 
@@ -893,11 +954,11 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
-### Finding a doctor <a name="find-doctor"/>
+### Finding a doctor <a name="find-doctor-manual-testing"/>
 
-### Listing all doctors <a name="list-doctors"/>
+### Listing all doctors <a name="list-doctors-manual-testing"/>
 
-### Adding an appointment <a name="appointment"/>
+### Adding an appointment <a name="add-appointment-manual-testing"/>
 1. Add an appointment 
     1. Prerequisites: There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
        
@@ -938,7 +999,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
 
 
-### Deleting an appointment  <a name="delete-appointment"/>
+### Deleting an appointment  <a name="deleting-appointment-manual-testing"/>
 1. Deleting an appointment while all appointments are being shown
 
     1. Prerequisites: list all appointments using the `appt -f` command. Multiple appointments in the list.
@@ -964,7 +1025,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Editing an appointment <a name="edit-appointment"/>
+### Editing an appointment <a name="edit-appointment-manual-testing"/>
 
 1. Editing an appointment while all appointments are being shown
 
@@ -988,11 +1049,11 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
-### Filtering all appointments <a name="filter-all-appointments"/>
+### Filtering all appointments <a name="filter-all-manual-testing/>
 
-### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
+### Filtering upcoming appointments <a name="filter-upcoming-manual-testing"/>
 
-### Listing all appointments for today <a name="list-appointments"/>
+### Listing all appointments for today <a name="list-all-manual-testing"/>
 
 ### Saving data  <a name="saving-data"/>
 
