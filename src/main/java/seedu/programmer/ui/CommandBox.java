@@ -25,7 +25,7 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
 
-    private boolean lastWasSuccess = false;
+    private boolean lastCommandIsValid = false;
 
     @FXML
     private TextField commandTextField;
@@ -54,10 +54,10 @@ public class CommandBox extends UiPart<Region> {
             commandHistory.add(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-            lastWasSuccess = true;
+            lastCommandIsValid = true;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
-            lastWasSuccess = false;
+            lastCommandIsValid = false;
         }
     }
 
@@ -71,17 +71,17 @@ public class CommandBox extends UiPart<Region> {
         boolean downPressed = event.getCode() == KeyCode.DOWN;
         boolean isNotUpOrDown = !upPressed && !downPressed;
         boolean noCommandHistoryPresent = commandHistory.isEmpty();
-        boolean downAndAtLastCommand = downPressed && commandHistory.isCounterAtLast();
-        boolean upAndAtFirstCommand = upPressed && commandHistory.isCounterAtFirst();
+        boolean downAndAtLastCommand = downPressed && commandHistory.isAtLastIndex();
+        boolean upAndAtFirstCommand = upPressed && commandHistory.isAtFirstIndex();
 
         // Do nothing if neither up nor down pressed, or no command history
         if (isNotUpOrDown || noCommandHistoryPresent) {
             return;
         }
 
-        if (upPressed && lastWasSuccess) {
+        if (upPressed && lastCommandIsValid) {
             commandTextField.setText(commandHistory.getCurrentCommand());
-            lastWasSuccess = false;
+            lastCommandIsValid = false;
             commandTextField.end();
             return;
         }
