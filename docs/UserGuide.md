@@ -93,7 +93,9 @@ Examples:
 ### Add student to a specific module: `add student`
 
 Add a new student to the specified module.<br>
-Also automatically copies over the task list from the module to the student.
+Also automatically copies over the task list from the module to the student.<br>
+Student id must be unique along with the student's tele handle and email.<br>
+Duplicate student names are allowed to cater for students who may have the same name.
 
 Format: `add student m/<module name> i/<student id> n/<student name> t/<student tele handle> e/<student email>`
 
