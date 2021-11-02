@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Rating;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Rating;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SummaryCommand.MESSAGE_SUCCESS;
 
@@ -18,5 +20,24 @@ public class SummaryCommandTest {
         Summary summary = new Summary(model.getAddressBook());
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, summary);
         assertCommandSuccess(new SummaryCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+
+        SummaryCommand summaryFirstCommand = new SummaryCommand();
+        SummaryCommand summarySecondCommand = new SummaryCommand();
+
+        // same object -> returns true
+        assertTrue(summaryFirstCommand.equals(summaryFirstCommand));
+
+        // different types -> returns false
+        assertFalse(summaryFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(summaryFirstCommand.equals(null));
+
+        // same -> returns true
+        assertTrue(summaryFirstCommand.equals(summarySecondCommand));
     }
 }

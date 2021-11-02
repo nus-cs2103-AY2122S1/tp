@@ -7,7 +7,7 @@ import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewCommandIndex;
 import seedu.address.logic.commands.ViewCommandName;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.contact.Name;
 
 /**
  * Parses input arguments and creates a new ViewCommand object.

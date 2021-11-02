@@ -17,7 +17,7 @@ end box
 
 box Model MODEL_COLOR_T1
 
-participant "person:Person" as Person MODEL_COLOR
+participant "contact:Contact" as Contact MODEL_COLOR
 end box
 
 
@@ -31,10 +31,10 @@ create Summary
 ModelManager -> Summary : Summary(addressBook)
 activate Summary
 
-Summary -> AddressBook : getPersonList()
+Summary -> AddressBook : getContactList()
 activate AddressBook
 
-AddressBook --> Summary : personList
+AddressBook --> Summary : contactList
 deactivate AddressBook
 
 Summary -> Summary : setNumberOfContacts()
@@ -47,11 +47,11 @@ Summary -> Summary : setPercentageReviews()
 activate Summary
 
 loop addressBookSize
-Summary -> Person : getReview()
-activate Person
+Summary -> Contact : getReview()
+activate Contact
 
-Person --> Summary
-deactivate Person
+Contact --> Summary
+deactivate Contact
 end
 Summary --> Summary
 deactivate Summary
@@ -60,11 +60,11 @@ Summary -> Summary : setNumberCategory()
 activate Summary
 
 loop addressBookSize
-Summary -> Person : getCategoryCode()
-activate Person
+Summary -> Contact : getCategoryCode()
+activate Contact
 
-Person --> Summary
-deactivate Person
+Contact --> Summary
+deactivate Contact
 end
 
 Summary --> Summary

@@ -17,4 +17,10 @@ public class CmdCommand extends Command {
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CMD_MESSAGE, true, false, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof CmdCommand; // instanceof handles nulls
+    }
 }

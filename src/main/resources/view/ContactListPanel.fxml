@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox alignment="CENTER" minWidth="740.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8"  xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox fx:id="contactList" minWidth="400" prefWidth="400" styleClass="pane-with-border" HBox.hgrow="SOMETIMES" VBox.vgrow="ALWAYS">
+      <ListView fx:id="contactListView" VBox.vgrow="ALWAYS" />
+    </VBox>
+    <ScrollPane fx:id="selectedContactPanelPlaceholder" fitToWidth="true" minWidth="400.0" HBox.hgrow="ALWAYS" />
+  </children>
+</HBox>
