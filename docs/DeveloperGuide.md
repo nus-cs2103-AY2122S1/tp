@@ -153,13 +153,19 @@ How the parsing works:
 ### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![ModelClassDiagram](images/ModelClassDiagram.png)
+Here's the class diagram of the `Person` component within `Model`:
+![PersonClassDiagram](images/PersonClassDiagram.png)
+Heres the class diagram of the `Appointment` component within `Model`:
+![AppointmentClassDiagram](images/AppointmentClassDiagram.png)
 
 The `Model` component,
 
-* stores the plannerMd data i.e., all `Patient` and `Doctor` objects (which are contained in `UniquePersonList<Patient>` and `UniquePersonList<Doctor>` respectively).
+* stores the plannerMd data  
+  * all `Patient` and `Doctor` objects (which are contained in `UniquePersonList<Patient>` and `UniquePersonList<Doctor>` respectively).
+  * all `Appointment` objects (which are contained in `UniqueAppointmentList<Patient>`).
 * stores the currently active `State` (which determines which list of Person, `Patient` or `Doctor`, to interact with)
-* stores the currently 'selected' `Patient` or `Doctor`  objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as unmodifiable `ObservableList<Patient>` and `ObservableList<Doctor>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Patient`, `Doctor` and `Appointment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as unmodifiable `ObservableList<Patient>`, `ObservableList<Doctor>`  and `ObservableList<Appointment>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -176,7 +182,7 @@ The `Storage` component,
 
 ### Common classes  <a name="common-classes"/>
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.plannermd.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -194,19 +200,146 @@ The state is maintained in `ModelManager`
 * The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
 * Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
 
-### \[Upcoming\] Propagating Person Changes to Appointment List
+#### Design considerations
+Since it is likely that clinic would be mainly interacting with patient records, we did not want to display both lists within the UI  at the same time as the additional clutter
+would be less user-friendly. Also, since commands for records are applicable to both patients and doctors, we wanted to avoid flags for record commands and keep them as succinct as possible. <br>
+Therefore, we decided to introduce a state, allowing us to display the list the user desires and execute commands according to the state.
+
+### Toggle Command
+Command used to toggle displayed tab and the current state of PlannerMD.
+
+The activity Diagram below illustrates the execution flow when the user executes a `remark` command.<br>
+
+![ToggleActivityDiagram](images/ToggleActivityDiagram.png)
+
+1. The user inputs a `toggle` command.
+2. A `ToggleCommand` is generated and executed.
+   * If the currently displayed tab is the patient tab, it is toggled to the doctor tab.
+   * If the currently displayed tab is the doctor tab, it is toggled to the patient tab.
+3. The GUI displays a success message.
+
+#### Execution
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call in Patient state.
+
+![ToggleCommandSequenceDiagram](images/ToggleCommandSequenceDiagram.png)
+
+1. `plannerMdParser::parseCommand` is called with the user input "toggle" along with the current `Model.state` (`State.Pateint`). <br>
+   1.1 A `ToggleCommand` instance is instantiated.
+2. `ToggleCommand::execute` is called<br>
+   3.1. `Model::toggleState` is called and toggles `Model.State` from `State.Patient` to `State.Doctor`<br>
+   3.2. A `CommandResult` instance is instantiated with a success message.
+3. The `CommandResult` is then returned
+
+#### Result
+The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
+
+### Remark
+
+#### Remark field
+A field added for `Person` and thus applies to both `Patient` and `Doctor`. Remark is miscellaneous information
+stored as a String.
+* No restrictions, `Remark` can be any `String`, including empty.
+* `Remark` is an empty String by default.
+
+#### Remark command
+Command used to edit the `Remark` field of a Person.
+* No input restrictions, input can be any `String`, including empty.
+    * empty input effectively deletes the current `Remark` and the Remark field will not be displayed in the UI at all.
+
+The activity Diagram below illustrates the execution flow when the user executes a `remark` command. <br>
+
+![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
+
+1. The user inputs a `remark` command.
+2. The input is parsed <br>
+    * If the `INDEX` is invalid, invalid prefixes are inputted or the remark prefix `/r` is missing, a `ParseException` is thrown and an error message is displayed.
+3. A `RemarkCommand` is generated and executed.
+    * If remark input is empty, effectively deletes the remark, generate successful delete remark message.
+    * If remark input is not empty, effectively deletes the remark, generate successful edit remark message.
+4. The GUI displays a success message.
+
+#### Execution
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("remark 1 r/bad cough") API call. <br>
+
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
+
+1. `plannerMdParser::parseCommand` is called with the user input "remark 1 r/bad cough" along with the current `Model.state`. <br>
+   1.1 A `RemarkCommandParser` instance is instantiated.
+2. `RemarkCommandParser::parse` is called with input "1 r/bad cough" <br>
+   2.1 A `RemarkCommand` instance is instantiated.
+3. `RemarkCommand::execute` is called<br>
+   3.1. `Model::setPatient` is called and replaces the patient with edited patient in the patient list.<br>
+   3.2. A `CommandResult` instance is instantiated with a success message.
+4. The `CommandResult` is then returned
+
+#### Result
+The GUI updates the patient record in the displayed list and displays a success message.
+
+#### Design considerations
+
+
+### Propagating Person Changes to Appointment List
 Since specific patients and doctors within the records are directly referenced in appointments,
 changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
-* When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
 * When patients or doctor deleted, appointments they are a part of will be deleted as well.
+  * `DeleteCommand`
+* When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
+  * `RemarkCommand`, `EditCommand` and `TagCommand`
 
+#### Execution
 The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
 
-<img src="images/PropagateChangesDiagram.png" width="450" />
+![PropagateChangesDiagram](images/PropagateChangesDiagram.png)
+
+1. `PlannerMd::removePatient` is called and deletes `target` from the list of patients. <br>
+2. `UniqueAppointmentList::deleteAppointmentWithPerson` is called <br>
+   * Loops through `UniqueAppointmentList` and deletes `appointment` which references `target`.
+
+The Sequence Diagram below illustrates the interactions within the Model component for the setPatient(patientToEdit, editedPatient) API call.
+
+![PropagateChangesEditDiagram](images/PropagateChangesEditDiagram.png)
+
+1. `PlannerMd::setPatient` is called and replaces `patientToEdit` with `editedPatient` in the list of patients. <br>
+2. `UniqueAppointmentList::editAppointmentWithPerson` is called <br>
+    * Loops through `UniqueAppointmentList` and replaces `appointment` which references `patientToEdit` with a new `editedAppointment` which has the same fields as `appointment` but references `editedPatient`.
+    
+#### Result
+GUI is updated to display the propagated changes in the appointment list.
+
+#### Design considerations
+Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
+to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
 
 ### Adding an appointment
+Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
+The diagram below illustrates the flow of adding an appointment:
+![AddAppointment](images/AddAppointmentActivityDiagram.png)
 
+![AddAppointment](images/AddAppointmentSequenceDiagram.png)
+1. After user enters the add appointment command `appt -a` with the relevant prefix, the input will be sent
+   to `AddAppointmentCommandParser` for parsing.
+2. `AddAppointmentCommandParser` will check if the prefixes are relevant. If the prefixes are relevant, a new `AddAppointmentCommand` which extends `AppointmentCommand`
+   is created. The `AddAppointmentCommand` implements the `execute()` method from the abstract class `Command`. If the prefixes are not relevant,
+   a `ParseException` will be thrown, and the missing prefixes' error message will be shown.
+3. The `AddAppointmentCommand` will run `execute()`. First, it retrieves the `Patient` object and the `Doctor` object at the given index from the model. If the index is out of range of the
+   `Model#FilteredPatientList` or `Model#FilteredDoctorList`, it will throw an error, and the invalid index message will be shown.
+   If not, the `Appointment` object with the is created and added to the model. The add appointment success message is then returned.
+4. The UI will then display the result
 ### Deleting an appointment
+Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
+The diagram below illustrates the flow of deleting an appointment:
+![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
+
+![DeleteAppointment](images/DeleteSequenceActivityDiagram.png)
+1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
+   to `DeleteAppointmentCommandParser` for parsing.
+2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
+   which extends `AppointmentCommand` is created. If not, a `ParseException` will be thrown, and the invalid index message will be shown.
+3. The `DeleteAppointmentCommand` will run `execute()`, removing the appointment at the inputted index. Then, it will return the
+   success message as a `CommandResult` object.
+4. The UI will then display the result
+
+
 
 ### Editing an appointment
 
@@ -261,7 +394,32 @@ A clearer view of this sequence diagram can be found [here](https://github.com/A
 ![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
 
 
-### Storage
+### Storing an appointment
+
+#### What it is
+
+Stores an Appointment object in the Json file by first creating the `JsonAdaptedAppointment` object, which is the Json representation of the `Appointment` object. 
+Then, the `JsonAdaptedAppointment` is then contained within the `JsonSerializablePlannerMd` object and `JsonSerializablePlannerMd` is passed as parameter to `JsonUtil.saveJsonFile` to write all records,
+including the `Appointment` object, into the file.
+
+The implementation focuses on the creation of a single `JsonAdapatedAppointment` object after the user keys in a command that changes the current records.
+
+#### Implementation
+
+The creation of a `JsonAdaptedAppointment` will create the respective `JsonAdaptedPatient` and `JsonAdaptedDoctor` involved in the appointment. 
+The creation of `JsonAdaptedPatient` and `JsonAdaptedDoctor` will create the number of tags that the respective `Patient` and `Doctor` objects have.
+
+We use `JsonAdaptedPatient` and `JsonAdaptedDoctor` that are used to store `Patient` and `Doctor` standalone objects 
+as Json to ensure that these objects are stored in a consistent format, whether as a standalone `Patient`/`Doctor` or
+a `Patient`/`Doctor` in an `Appointment`.
+
+The creation of a `JsonAdaptedAppointment` will also create the `JsonAdaptedSession`
+which is synonymous to the `Session` object contained in an `Appointment`.
+
+The Sequence Diagram below illustrates the interactions within the Storage component for the creation of a `JsonAdaptedAppointment`.
+
+<img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
+
 
 --- 
 
@@ -369,8 +527,6 @@ _{more aspects and alternatives to be added}_
 * prefers desktop applications over other types
 * can type fast and prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-
-
 
 **Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
@@ -803,8 +959,71 @@ testers are expected to do more *exploratory* testing.
 ### Listing all doctors <a name="list-doctors"/>
 
 ### Adding an appointment <a name="appointment"/>
+1. Add an appointment 
+    1. Prerequisites: There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
+       
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:00 dur/5 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:05 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:30 dur/50`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+       
+    1. Test case: `appt -a`<br>
+       Expected: No appointment is added. Response box displays error message: `Invalid command format! ...`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `Sessions should be of the format DD/MM/YYYY HH:MM and adhere to the following constraints:...`
+
+    1. Test case: `appt -a p/100 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The patient index provided is invalid`
+    
+    1. Test case: `appt -a p/1 d/100 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `The doctor index provided is invalid`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/xxx r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/121 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
 
 ### Deleting an appointment  <a name="delete-appointment"/>
+1. Deleting an appointment while all appointments are being shown
+
+    1. Prerequisites: list all appointments using the `appt -f` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting an appointment while upcoming appointments are being shown
+    1. Prerequisites: list all persons using the `appt -l` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+       
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Editing an appointment <a name="edit-appointment"/>
 
@@ -835,7 +1054,6 @@ testers are expected to do more *exploratory* testing.
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
 
 ### Listing all appointments for today <a name="list-appointments"/>
-
 
 ### Saving data  <a name="saving-data"/>
 

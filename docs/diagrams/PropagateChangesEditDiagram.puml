@@ -8,13 +8,13 @@ participant ":UniquePersonList<Patient>" as UniquePersonList MODEL_COLOR
 participant ":UniqueAppointmentList" as UniqueAppointmentList MODEL_COLOR
 end box
 
-[-> ModelManager : deletePatient(target)
+[-> ModelManager : setPatient(patientToEdit, editedPatient)
 activate ModelManager
 
-ModelManager -> PlannerMd : removePatient(target)
+ModelManager -> PlannerMd : setPatient(patientToEdit, editedPatient)
 activate PlannerMd
 
-PlannerMd -> UniquePersonList : remove(target)
+PlannerMd -> UniquePersonList : setPatient(patientToEdit, editedPatient)
 activate UniquePersonList
 
 UniquePersonList -> PlannerMd
@@ -23,15 +23,15 @@ deactivate UniquePersonList
 PlannerMd -> ModelManager
 deactivate PlannerMd
 
-ModelManager -> PlannerMd : deleteAppointmentsWithPerson(target)
+ModelManager -> PlannerMd : editAppointmentWithPerson(patientToEdit, editedPatient)
 activate PlannerMd
 
-PlannerMd -> UniqueAppointmentList : deleteAppointmentsWithPerson(target)
+PlannerMd -> UniqueAppointmentList : editAppointmentWithPerson(patientToEdit, editedPatient)
 activate UniqueAppointmentList
 
 loop through list of appointments
-    opt target matches Patient in appointment
-        UniqueAppointmentList -> UniqueAppointmentList: remove(appointment)
+    opt patientToEdit matches Patient in appointment
+        UniqueAppointmentList -> UniqueAppointmentList: setAppointment(appointment, editedAppointment)
         activate UniqueAppointmentList
 
         UniqueAppointmentList -> UniqueAppointmentList:

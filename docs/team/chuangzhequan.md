@@ -9,7 +9,7 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
@@ -38,4 +38,4 @@ Given below are my contributions to the project.
 * **Community**:
 
 * **Tools**:
-  * Used Figma to design a [mockup](https://www.figma.com/file/LA0OQ6FUXr87X3lZMcs15E/CS2103T-tP?node-id=0%3A1) for the application 
+  * Used Figma to design a [mockup](https://www.figma.com/file/LA0OQ6FUXr87X3lZMcs15E/CS2103T-tP?node-id=0%3A1) for the application
