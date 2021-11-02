@@ -1,4 +1,4 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.delete;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
 import safeforhall.model.UserPrefs;
