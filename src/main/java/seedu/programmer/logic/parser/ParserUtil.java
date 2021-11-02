@@ -18,6 +18,8 @@ import seedu.programmer.model.student.StudentId;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INTEGER_FORMAT = "The lab score should be an integer value!";
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
@@ -97,20 +99,6 @@ public class ParserUtil {
         return new Email(formattedEmail);
     }
 
-    //todo: for test of show feature only
-
-    /**
-     * Parses the index of the student that the lab result is added to.
-     *
-     * @param index the index of the student.
-     * */
-    public static int parseNumber(String index) {
-        if (index == null) {
-            return 1;
-        }
-        return Integer.parseInt(index.trim());
-    }
-
     /**
      * Parses the title of the lab assignment.
      *  @param labNum the lab number
@@ -148,12 +136,16 @@ public class ParserUtil {
      * @param total the total score of the lab assignment.
      * */
     public static Integer parseTotal(String total) throws ParseException {
-        Integer res = Integer.parseInt(total.trim());
-        if (total == null) {
-            return 0;
-        } else if (res < 0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
+        try {
+            Integer res = Integer.parseInt(total.trim());
+            if (total == null) {
+                return 0;
+            } else if (res < 0) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
+            }
+            return Integer.parseInt(total.trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INTEGER_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
-        return Integer.parseInt(total.trim());
     }
 }
