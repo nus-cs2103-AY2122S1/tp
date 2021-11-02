@@ -255,11 +255,15 @@ Tip: Do take a good look at this section to understand the common terminologies 
 * Tags names should not be more than 30 characters.
 
 #### `YEAR`
-* Represents Academic Year of the module that is being taken.
+* Represents one of the following:
+  1. Academic Year that the specified module is being taken in (for [take](#421-adding-a-module-to-the-academic-plan--take) command).
+  1. Academic Year of the academic plan (for [set](#423-setting-users-mc-goal-or-current-semester--set), [view](#424-viewing-modules-taken-in-a-specific-semester--view) and [clear](#425-removing-all-modules-in-a-specific-semester-from-the-academic-plan--clear) commands).  
 * The `YEAR` must be a positive integer from 1-6.
 
 #### `SEMESTER`
-* Represents Semester of the module that is being taken.
+* Represents one of the following:
+  1. Semester that the specified module is being taken in (for [take](#421-adding-a-module-to-the-academic-plan--take) command).
+  1. Semester of the academic plan (for [set](#423-setting-users-mc-goal-or-current-semester--set), [view](#424-viewing-modules-taken-in-a-specific-semester--view) and [clear](#425-removing-all-modules-in-a-specific-semester-from-the-academic-plan--clear) commands).
 * The `SEMESTER` must be a positive integer from 1-4.
 * Special semesters 1 and 2 are represented by integer values 3 and 4 respectively.
 
