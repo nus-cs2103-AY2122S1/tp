@@ -26,14 +26,13 @@ activate Student
 Student --> Model : updatedStudent
 deactivate Student
 
-Model --> Group : getMembers()
+Model --> Group : addMember(updatedStudent)
 activate Group
-Group --> Model : Members
-deactivate Group
-
-Model --> Members : addMember(updatedStudent)
+Group --> Members : addMember((updatedStudent)
 activate Members
 deactivate Members
+deactivate Group
+
 
 Model --> Ab : setStudent(student, updatedStudent)
 activate Ab
