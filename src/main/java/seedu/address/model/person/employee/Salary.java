@@ -33,7 +33,11 @@ public class Salary {
      * Returns true if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            return Integer.parseInt(test) >= 100;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
