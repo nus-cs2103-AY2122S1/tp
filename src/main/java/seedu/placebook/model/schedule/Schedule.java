@@ -141,7 +141,7 @@ public class Schedule implements Iterable<Appointment>, ReadOnlySchedule {
 
         int index = appointmentList.indexOf(appointmentToEdit);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new AppointmentNotFoundException();
         }
 
         appointmentList.set(index, editedAppointment);
