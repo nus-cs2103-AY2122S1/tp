@@ -363,6 +363,7 @@ public class MainWindow extends UiPart<Stage> {
             case FRIEND_UNLINK:
             case FRIEND_DELETE:
             case FRIEND_ADD_GAME_SKILL:
+            case FRIEND_LIST:
             case GAME_ADD:
             case GAME_DELETE:
             case GAME_LIST:
