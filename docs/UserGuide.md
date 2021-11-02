@@ -163,7 +163,7 @@ A module is made up of 6 components:
 * A [title](#title) 
 * A [description](#description) of the module
 * The number of [MC](#mc) that the module carries
-* The [tags](#tags) that the module can be classified under
+* The [tag(s)](#tag) that the module can be classified under
 
 A module can have 4 different colour codes:
 * A grey coloured module represents a module that is in the database but not in your [academic plan](#academic-plan)<br>
