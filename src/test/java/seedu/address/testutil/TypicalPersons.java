@@ -27,6 +27,7 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withPhone("94351253").build();
+    public static final Person ALICE_TAN = new PersonBuilder().withName("Alice Tan").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withPhone("98765432").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
@@ -67,6 +68,10 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersonsToFind() {
+        return new ArrayList<>(Arrays.asList(ALICE, ALICE_TAN, BENSON));
     }
 
     public static List<Person> getTypicalPersonsUnsortedName() {

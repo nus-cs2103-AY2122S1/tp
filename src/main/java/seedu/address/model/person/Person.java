@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +19,6 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private List<String> days;
 
 
     // Data fields

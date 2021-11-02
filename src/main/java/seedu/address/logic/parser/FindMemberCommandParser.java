@@ -91,7 +91,8 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
     }
 
     private Predicate<Person> generateNamePredicate(Name name, Builder builder, Predicate<Person> predicate) {
-        List<String> nameList = new ArrayList<>(Arrays.asList(name.toString()));
+        String nameWithNoSpaces = name.toString().toLowerCase().replace("\\s+", "");
+        List<String> nameList = new ArrayList<>(Arrays.asList(nameWithNoSpaces));
         predicate = predicate.and(new NameContainsKeywordsPredicate(nameList));
         builder.setName(name);
         return predicate;

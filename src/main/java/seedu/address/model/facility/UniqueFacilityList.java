@@ -142,6 +142,8 @@ public class UniqueFacilityList implements Iterable<Facility> {
             this.setFacility(facility, toEdit);
         }
     }
+    
+    
 
     /**
      * Replaces target Facility with edited Facility. Does not
@@ -175,4 +177,14 @@ public class UniqueFacilityList implements Iterable<Facility> {
 
     }
 
+    /**
+     * Removes a person from all allocations from all facilities.
+     *
+     * @param key Person to be removed from allocations.
+     */
+    public void removePersonFromAllocations(Person key) {
+        for (Facility facility: facilityList) {
+            facility.removePersonFromFacilityOnAllDays(key);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package seedu.address.model.facility;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CAPACITY_COURT;
@@ -15,7 +16,9 @@ import java.util.EnumMap;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
 import seedu.address.testutil.FacilityBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class FacilityTest {
 
@@ -39,25 +42,15 @@ public class FacilityTest {
     }
 
     @Test
-    public void getPersonAsString_success() {
-//        Person person = new PersonBuilder().build();
-//        Person secondPerson = new PersonBuilder().withName("Matt").build();
-//        Facility facility = new FacilityBuilder().build();
-//        facility.addPersonToFacility(person);
-//        facility.addPersonToFacility(secondPerson);
-//        assertEquals("Amy Bee, Matt", facility.getPersonsAsString());
-    }
-
-    @Test
-    public void clearAllocationList_emptiesList() {
-//        Person person = new PersonBuilder().build();
-//        Person secondPerson = new PersonBuilder().withName("Matt").build();
-//        Facility facility = new FacilityBuilder().build();
-//        facility.addPersonToFacility(person);
-//        facility.addPersonToFacility(secondPerson);
-//        facility.clearAllocationList();
-//        Facility expectedFacility = new FacilityBuilder().build();
-//        assertEquals(expectedFacility, facility);
+    public void clearAllocationMapOnDay_emptiesPersonListOnDay() {
+        Person person = new PersonBuilder().build();
+        Person secondPerson = new PersonBuilder().withName("Matt").build();
+        Facility facility = new FacilityBuilder().build();
+        facility.addPersonToFacilityOnDay(person, DayOfWeek.of(1));
+        facility.addPersonToFacilityOnDay(secondPerson, DayOfWeek.of(1));
+        facility.clearAllocationMapOnDay(DayOfWeek.of(1));
+        Facility expectedFacility = new FacilityBuilder().build();
+        assertEquals(expectedFacility, facility);
     }
 
     @Test
@@ -111,18 +104,22 @@ public class FacilityTest {
 
         Facility facilityCopy = new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
                 new Time("1130"), new Capacity("10"), new AllocationMap(new EnumMap<>(DayOfWeek.class)));
-
         Facility differentFacility = new Facility(new FacilityName("Field"), new Location("Opp University Hall"),
                 new Time("2045"), new Capacity("5"), new AllocationMap(new EnumMap<>(DayOfWeek.class)));
 
+        // same object
         assertTrue(facility.equals(facility));
 
+        // facilities with same name and location
         assertTrue(facility.equals(facilityCopy));
 
+        // null facility
         assertFalse(facility.equals(null));
 
+        // not a facility
         assertFalse(facility.equals("5"));
 
+        // different facility
         assertFalse(facility.equals(differentFacility));
 
         Facility differentName = new Facility(new FacilityName("Field"), new Location("University Sports Hall"),

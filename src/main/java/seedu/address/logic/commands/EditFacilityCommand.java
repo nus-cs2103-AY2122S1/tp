@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITIES;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,12 @@ public class EditFacilityCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FACILITY);
         }
 
+        for (DayOfWeek day : DayOfWeek.values()) {
+            if (facilityToEdit.isMaxCapacityOnDay(day)) {
+                facilityToEdit.clearAllocationMapOnDay(day);
+            }
+        }
+
         model.setFacility(facilityToEdit, editedFacility);
         model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility),
@@ -92,6 +99,7 @@ public class EditFacilityCommand extends Command {
         Location updatedLocation = editFacilityDescriptor.getLocation().orElse(facilityToEdit.getLocation());
         Time updatedTime = editFacilityDescriptor.getTime().orElse(facilityToEdit.getTime());
         Capacity updatedCapacity = editFacilityDescriptor.getCapacity().orElse(facilityToEdit.getCapacity());
+
         // edit command does not allow editing allocations
         AllocationMap allocationMap = facilityToEdit.getAllocationMap();
 

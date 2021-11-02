@@ -43,6 +43,17 @@ public class AllocationMap {
         personsAllocatedMap.get(day).remove(person);
     }
 
+    /**
+     * Removes a person from the allocation for all days.
+     *
+     * @param person Person to be removed from allocations on all days.
+     */
+    public void removePersonOnAllDays(Person person) {
+        for (DayOfWeek day : DayOfWeek.values()) {
+            personsAllocatedMap.get(day).remove(person);
+        }
+    }
+
     public String getPersonsAsString(List<Person> personList) {
         return personList.stream().map(person -> person.getName().toString()).collect(Collectors.joining(", "));
     }

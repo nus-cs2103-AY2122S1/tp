@@ -10,8 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facility.Facility;
+import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.FacilityBuilder;
 
@@ -96,6 +100,31 @@ public class EditFacilityCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFacility(model.getFilteredFacilityList().get(0), editedFacility);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_unfilteredListCapacityBelowNumberOfAllocations_clearsAllocation() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
+        Facility editedFacility = new FacilityBuilder(facility)
+                .withCapacity("1").build();
+
+        model.addPerson(AMY);
+        model.addPerson(BOB);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addFacility(editedFacility);
+
+        model.addFacility(facility);
+        model.split(new PersonAvailableOnDayPredicate(1), 1);
+
+        EditFacilityDescriptor descriptor =
+                new EditFacilityDescriptorBuilder(facility).withCapacity("1").build();
+        EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, descriptor);
+
+        String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

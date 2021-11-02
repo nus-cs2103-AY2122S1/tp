@@ -18,12 +18,13 @@ public class Facility {
 
     /**
      * Creates a Facility object with the specified name,
-     * location, time and capacity.
+     * location, time, capacity and allocation map.
      *
      * @param name Name of facility.
      * @param location Location of facility.
      * @param time Time of slot booked for facility.
      * @param capacity Capacity of facility booked.
+     * @param allocationMap Allocation map of members to facility.
      */
     public Facility(FacilityName name, Location location, Time time, Capacity capacity, AllocationMap allocationMap) {
         requireAllNonNull(name, location, time, capacity, allocationMap);
@@ -61,12 +62,7 @@ public class Facility {
     public void clearAllocationMapOnDay(DayOfWeek day) {
         allocationMap.clearAllocationOnDay(day);
     }
-
-    /**
-     * Returns the allocated list as a String separated by commas.
-     *
-     * @return the allocated list as a String.
-     */
+    
     public boolean isPersonAllocatedOnDay(Person person, DayOfWeek day) {
         return allocationMap.isPersonAllocatedOnDay(person, day);
     }
@@ -77,6 +73,10 @@ public class Facility {
 
     public void removePersonFromFacilityOnDay(Person person, DayOfWeek day) {
         allocationMap.removePersonOnDay(person, day);
+    }
+
+    public void removePersonFromFacilityOnAllDays(Person person) {
+        allocationMap.removePersonOnAllDays(person);
     }
 
     /**
