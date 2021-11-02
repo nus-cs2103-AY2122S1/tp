@@ -83,23 +83,9 @@ public class MainApp extends Application {
         Optional<ReadOnlySchedule> scheduleOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlySchedule initialSchedule;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        }
 
         try {
             scheduleOptional = storage.readSchedule();
-            // TODO: Create sample data
             if (!scheduleOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Schedule");
             }
@@ -109,6 +95,23 @@ public class MainApp extends Application {
             initialSchedule = new Schedule();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialSchedule = new Schedule();
+        }
+
+        try {
+            addressBookOptional = storage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                initialSchedule = SampleDataUtil.getSampleSchedule();
+            }
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            initialData = new AddressBook();
+            initialSchedule = new Schedule();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialData = new AddressBook();
             initialSchedule = new Schedule();
         }
 
