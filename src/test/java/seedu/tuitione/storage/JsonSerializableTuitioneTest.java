@@ -1,8 +1,9 @@
 package seedu.tuitione.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
-import static seedu.tuitione.model.lesson.Lesson.UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.DIFFERENT_GRADE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.LESSON_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_ALREADY_ENROLLED_CONSTRAINT;
 import static seedu.tuitione.model.student.Student.STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
@@ -105,8 +106,8 @@ public class JsonSerializableTuitioneTest {
     public void toModelType_doubleEnrollment_throwsIllegalValueException() throws Exception {
         JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ENROLLMENT_FILE,
                 JsonSerializableTuitione.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableTuitione.MESSAGE_DUPLICATE_ENROLLMENT,
-                dataFromFile::toModelType);
+        String expected = String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT, "Alice Pauline", "Science-S1-Wed-1230");
+        assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
     }
 
     @Test
@@ -129,7 +130,7 @@ public class JsonSerializableTuitioneTest {
     public void toModelType_exactlyAtLessonEnrollmentCapacity_throwsIllegalValueException() throws Exception {
         JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(EXCEEDING_LESSON_ENROLLMENT_FILE,
                 JsonSerializableTuitione.class).get();
-        String expected = String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_LESSON_CODE);
+        String expected = String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_LESSON_CODE);
         assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
     }
 
@@ -137,7 +138,7 @@ public class JsonSerializableTuitioneTest {
     public void toModelType_invalidEnrollment_throwsIllegalValueException() throws Exception {
         JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(INVALID_ENROLLMENT_FILE,
                 JsonSerializableTuitione.class).get();
-        String expected = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT,
+        String expected = String.format(DIFFERENT_GRADE_CONSTRAINT,
                 PROBLEMATIC_STUDENT_NAME, PROBLEMATIC_ENROLLMENT_LESSON_CODE);
         assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
     }
@@ -154,7 +155,7 @@ public class JsonSerializableTuitioneTest {
     public void toModelType_exceedingLessonEnrollmentCapacity_throwsIllegalValueException() throws Exception {
         JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(EXCEEDING_LESSON_ENROLLMENT_FILE,
                 JsonSerializableTuitione.class).get();
-        String expected = String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_LESSON_CODE);
+        String expected = String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_LESSON_CODE);
         assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
     }
 }

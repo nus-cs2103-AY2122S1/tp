@@ -4,11 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.tuitione.model.lesson.Lesson.CONFLICTING_TIMINGS_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.DIFFERENT_GRADE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.LESSON_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.MAX_LESSON_SIZE;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_ALREADY_ENROLLED_CONSTRAINT;
 import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED_CONSTRAINT;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,28 +58,62 @@ public class LessonTest {
     }
 
     @Test
-    public void isAbleToEnroll() {
-        // null -> false
-        assertFalse(defaultLesson.isAbleToEnroll(null));
+    public void runEnrollmentChecks_invalidCases_throwsIllegalArgumentException() {
+        String expectedMessage;
 
-        // eligible student -> true
-        Student eligibleStudent = new StudentBuilder().build();
-        assertTrue(defaultLesson.isAbleToEnroll(eligibleStudent));
-
-        // different grade student -> false
+        // different grade student
         Student differentGradeStudent = new StudentBuilder().withGrade("P5").build();
-        assertFalse(defaultLesson.isAbleToEnroll(differentGradeStudent));
+        expectedMessage = String.format(DIFFERENT_GRADE_CONSTRAINT, differentGradeStudent.getName(), defaultLesson);
+        assertThrows(IllegalArgumentException.class, expectedMessage, () ->
+                defaultLesson.runEnrollmentChecks(differentGradeStudent));
 
-        // student with clashing timing -> false
+        // student with clashing timing
+        Student busyStudent = new StudentBuilder().build();
+        Lesson clashingLesson = new LessonBuilder().withSubject("Random").build();
+        clashingLesson.enrollStudent(busyStudent);
+        expectedMessage = String.format(CONFLICTING_TIMINGS_CONSTRAINT, busyStudent.getName(), defaultLesson);
+        assertThrows(IllegalArgumentException.class, expectedMessage, () ->
+                defaultLesson.runEnrollmentChecks(busyStudent));
+
+        // student already enrolled
+        Student enrolledStudent = new StudentBuilder().build();
+        defaultLesson.enrollStudent(enrolledStudent);
+        expectedMessage = String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT, enrolledStudent.getName(), defaultLesson);
+        assertThrows(IllegalArgumentException.class, expectedMessage, () ->
+                defaultLesson.runEnrollmentChecks(enrolledStudent));
+
+        // hit max capacity
+        IntStream.rangeClosed(1, MAX_LESSON_SIZE - 1).boxed()
+                .map(num -> new StudentBuilder().withName("Temp" + num).build())
+                .forEach(s -> defaultLesson.enrollStudent(s));
+        Student studentEnteringFullLesson = new StudentBuilder().withName("Temp").build();
+        expectedMessage = String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, defaultLesson);
+        assertThrows(IllegalArgumentException.class, expectedMessage, () ->
+                defaultLesson.runEnrollmentChecks(studentEnteringFullLesson));
+    }
+
+    @Test
+    public void doesStudentHaveConflictingTimings() {
+        // eligible student
+        Student eligibleStudent = new StudentBuilder().build();
+        assertFalse(defaultLesson.doesStudentHaveConflictingTimings(eligibleStudent));
+
+        // student with clashing timing
         Student busyStudent = new StudentBuilder().build();
         Lesson clashingLesson = LessonBuilder.getDefault();
         clashingLesson.enrollStudent(busyStudent);
-        assertFalse(defaultLesson.isAbleToEnroll(busyStudent));
+        assertTrue(defaultLesson.doesStudentHaveConflictingTimings(busyStudent));
+    }
 
-        // student already enrolled -> false
-        Student enrolledStudent = new StudentBuilder().build();
-        defaultLesson.enrollStudent(enrolledStudent);
-        assertFalse(defaultLesson.isAbleToEnroll(enrolledStudent));
+    @Test
+    public void isStudentOfSameGrade() {
+        // eligible student
+        Student eligibleStudent = new StudentBuilder().build();
+        assertTrue(defaultLesson.isStudentOfSameGrade(eligibleStudent));
+
+        // different grade student
+        Student differentGradeStudent = new StudentBuilder().withGrade("P5").build();
+        assertFalse(defaultLesson.isStudentOfSameGrade(differentGradeStudent));
     }
 
     @Test
@@ -171,7 +211,8 @@ public class LessonTest {
 
         // we edit a student who has not been enrolled at all
         Student unrelatedStudent = sb.withName("Edited Name Here").build();
-        String expectedMessage = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, unrelatedStudent.getName(), defaultLesson);
+        String expectedMessage = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT,
+                unrelatedStudent.getName(), defaultLesson);
         assertThrows(IllegalArgumentException.class, expectedMessage, () ->
                 defaultLesson.updateStudent(unrelatedStudent, unrelatedStudent));
     }
@@ -184,7 +225,7 @@ public class LessonTest {
 
         // we edit a student to have a different grade
         Student wrongGradeStudent = sb.withGrade("P5").build();
-        String expectedMessage = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT,
+        String expectedMessage = String.format(DIFFERENT_GRADE_CONSTRAINT,
                 wrongGradeStudent.getName(), defaultLesson);
         assertThrows(IllegalArgumentException.class, expectedMessage, () ->
                 defaultLesson.updateStudent(student, wrongGradeStudent));

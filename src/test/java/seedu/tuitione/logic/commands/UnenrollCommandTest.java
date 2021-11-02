@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED_CONSTRAINT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
@@ -56,24 +57,18 @@ public class UnenrollCommandTest {
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
         Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); //CARL
 
-        String expectedMessageAlice = String.format(UnenrollCommand.MESSAGE_STUDENT_NOT_IN_LESSON,
-                alice.getName(),
+        String expectedMessageAlice = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, alice.getName(),
                 testLesson.getLessonCode());
-        String expectedMessageBenson = String.format(UnenrollCommand.MESSAGE_STUDENT_NOT_IN_LESSON,
-                benson.getName(),
+        String expectedMessageBenson = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, benson.getName(),
                 testLesson.getLessonCode());
-        String expectedMessageCarl = String.format(UnenrollCommand.MESSAGE_STUDENT_NOT_IN_LESSON,
-                carl.getName(),
+        String expectedMessageCarl = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, carl.getName(),
                 testLesson.getLessonCode());
 
-        assertCommandFailure(new UnenrollCommand(INDEX_FIRST_STUDENT, INDEX_THIRD_LESSON),
-                model,
+        assertCommandFailure(new UnenrollCommand(INDEX_FIRST_STUDENT, INDEX_THIRD_LESSON), model,
                 expectedMessageAlice);
-        assertCommandFailure(new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_LESSON),
-                model,
+        assertCommandFailure(new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_LESSON), model,
                 expectedMessageBenson);
-        assertCommandFailure(new UnenrollCommand(INDEX_THIRD_STUDENT, INDEX_THIRD_LESSON),
-                model,
+        assertCommandFailure(new UnenrollCommand(INDEX_THIRD_STUDENT, INDEX_THIRD_LESSON), model,
                 expectedMessageCarl);
     }
 

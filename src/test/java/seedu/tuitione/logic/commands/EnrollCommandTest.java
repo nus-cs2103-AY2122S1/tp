@@ -2,9 +2,13 @@ package seedu.tuitione.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tuitione.model.lesson.Lesson.MAX_LESSON_SIZE;
+import static seedu.tuitione.model.lesson.Lesson.DIFFERENT_GRADE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.LESSON_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_ALREADY_ENROLLED_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
@@ -63,10 +67,10 @@ public class EnrollCommandTest {
         Student alice = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()); //ALICE
         Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); //CARL
 
-        String expectedMessageAlice = String.format(EnrollCommand.MESSAGE_UNABLE_TO_ENROLL,
+        String expectedMessageAlice = HEADER_ALERT + String.format(DIFFERENT_GRADE_CONSTRAINT,
                 alice.getName(),
                 testLesson.getLessonCode());
-        String expectedMessageCarl = String.format(EnrollCommand.MESSAGE_UNABLE_TO_ENROLL,
+        String expectedMessageCarl = HEADER_ALERT + String.format(DIFFERENT_GRADE_CONSTRAINT,
                 carl.getName(),
                 testLesson.getLessonCode());
 
@@ -84,12 +88,10 @@ public class EnrollCommandTest {
         LessonCode code = testLesson.getLessonCode();
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
 
-        String expectedMessageBenson = String.format(EnrollCommand.MESSAGE_STUDENT_IN_LESSON,
-                benson.getName(),
-                code);
+        String expectedMessageBenson = HEADER_ALERT
+                + String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT, benson.getName(), code);
 
-        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, INDEX_FOURTH_LESSON),
-                model,
+        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, INDEX_FOURTH_LESSON), model,
                 expectedMessageBenson);
     }
 
@@ -160,8 +162,7 @@ public class EnrollCommandTest {
         benson.enrollForLesson(lessonEight);
         benson.enrollForLesson(lessonNine);
         benson.enrollForLesson(lessonTen);
-        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS,
-                benson.getName(), MAX_LESSON_SIZE);
+        String expectedMessage = HEADER_ALERT + String.format(STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT, benson.getName());
         assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(6)),
                 model,
                 expectedMessage);
@@ -188,8 +189,7 @@ public class EnrollCommandTest {
         }
         //adding lesson into model
         model.addLesson(scienceP2);
-        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_STUDENTS,
-                scienceP2.getLessonCode());
+        String expectedMessage = HEADER_ALERT + String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, scienceP2);
         assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(2)),
                 model,
                 expectedMessage);

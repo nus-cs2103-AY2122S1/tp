@@ -1,6 +1,7 @@
 package seedu.tuitione.logic.parser;
 
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.tuitione.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -33,7 +34,6 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_FRIEND;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.tuitione.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
@@ -75,7 +75,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // zero index
         assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);

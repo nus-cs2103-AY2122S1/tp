@@ -1,9 +1,9 @@
 package seedu.tuitione.logic.parser;
 
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.tuitione.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 
 import org.junit.jupiter.api.Test;
