@@ -99,10 +99,10 @@ class LessonEditCommandParserTest {
         assertParseFailure(parser, "-1 0" + SUBJECT_DESC, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
     }
 
     @Test

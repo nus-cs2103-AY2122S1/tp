@@ -277,4 +277,23 @@ public class LessonAddCommandParserTest {
                 + LESSON_RATES_DESC + INVALID_SUBJECT_DESC + OUTSTANDING_FEES_DESC
                 + HOMEWORK_DESC_POETRY, Date.MESSAGE_CONSTRAINTS);
     }
+
+    @Test
+    public void parse_multipleInvalidValues_failure() {
+        // missing arguments have priority over invalid argument format
+        // missing subject field
+        assertParseFailure(parser, " " + FIRST_PERSON + INVALID_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC
+                + OUTSTANDING_FEES_DESC, MESSAGE_INVALID_FORMAT);
+
+        // missing arguments have priority over invalid index
+        assertParseFailure(parser, " " + 0 + FUTURE_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC
+                + OUTSTANDING_FEES_DESC, MESSAGE_INVALID_FORMAT);
+
+        // invalid fields have priority over invalid index
+        assertParseFailure(parser, " " + 0 + INVALID_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + OUTSTANDING_FEES_DESC, Date.MESSAGE_CONSTRAINTS);
+    }
 }

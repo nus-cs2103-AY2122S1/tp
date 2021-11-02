@@ -93,7 +93,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
                     String.format(LessonEditCommand.MESSAGE_NOT_EDITED, LessonEditCommand.MESSAGE_USAGE));
         }
 
-        // index check should come after message not edited
+        // index errors should come after field errors and not edited error
         Index studentIndex = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
         Index lessonIndex = ParserUtil.parseLessonIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 

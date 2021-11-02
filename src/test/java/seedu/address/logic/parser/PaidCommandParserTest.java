@@ -23,6 +23,12 @@ import seedu.address.model.lesson.Money;
 class PaidCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE);
+
+    private static final String VALID_INDICES =
+            INDEX_FIRST_PERSON.getOneBased() + " " + INDEX_THIRD_LESSON.getOneBased();
+
+    private static final String INVALID_INDICES = INDEX_FIRST_PERSON.getOneBased() + " " + 0;
+
     private final PaidCommandParser parser = new PaidCommandParser();
 
     @Test
@@ -90,5 +96,14 @@ class PaidCommandParserTest {
 
         PaidCommand expectedCommand = new PaidCommand(targetIndex, lessonTargetIndex, new Money(VALID_PAYMENT));
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleInvalidValues_failure() {
+        // missing arguments have priority over invalid argument format
+        assertParseFailure(parser, VALID_INDICES, MESSAGE_INVALID_FORMAT);
+
+        // invalid fields have priority over invalid index
+        assertParseFailure(parser, INVALID_INDICES + INVALID_PAYMENT_DESC, Money.MESSAGE_CONSTRAINTS);
     }
 }

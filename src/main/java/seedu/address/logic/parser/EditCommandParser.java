@@ -89,7 +89,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(EditCommand.MESSAGE_NOT_EDITED, EditCommand.MESSAGE_USAGE));
         }
 
-        // index check should come after message not edited
+        // index error should come after field errors and not edited error
         Index index = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
 
         return new EditCommand(index, editPersonDescriptor);

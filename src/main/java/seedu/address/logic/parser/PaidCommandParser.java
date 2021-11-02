@@ -32,11 +32,11 @@ public class PaidCommandParser implements Parser<PaidCommand> {
         if (isInvalidPreamble || isMissingPrefix) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
         }
+        Money payment = ParserUtil.parseMoney(argMultimap.getValue(PREFIX_PAID_AMOUNT).get());
 
+        // index errors should come after field errors and not edited error
         Index studentIndex = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
         Index lessonIndex = ParserUtil.parseLessonIndex(preamble[LESSON_INDEX_ZERO_BASED]);
-
-        Money payment = ParserUtil.parseMoney(argMultimap.getValue(PREFIX_PAID_AMOUNT).get());
 
         return new PaidCommand(studentIndex, lessonIndex, payment);
     }
