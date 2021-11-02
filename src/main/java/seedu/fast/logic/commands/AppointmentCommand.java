@@ -10,6 +10,7 @@ import java.util.List;
 
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
@@ -29,17 +30,17 @@ public class AppointmentCommand extends Command {
             + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format)), "
             + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 20 characters long)." + "\n\n"
             + "Examples: \n" + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT + "2030-10-25 "
             + PREFIX_APPOINTMENT_TIME + "22:15 "
             + PREFIX_APPOINTMENT_VENUE + "Orchard Central" + "\n"
             + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT + "2030-10-25 "
             + PREFIX_APPOINTMENT_TIME + "19:00 \n"
             + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT + "2030-10-25 "
             + PREFIX_APPOINTMENT_VENUE + "Ion \n"
             + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-25 \n\n";
+            + PREFIX_APPOINTMENT + "2030-10-25 \n\n";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
     public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "The appointment already exists! "
@@ -65,7 +66,7 @@ public class AppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -75,7 +76,7 @@ public class AppointmentCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), appointment,
                 personToEdit.getCount());
 
-        if (!personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+        if (!Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
             throw new CommandException(MESSAGE_ADD_APPOINTMENT_FAILURE);
         }
 
