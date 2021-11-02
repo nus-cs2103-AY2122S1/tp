@@ -94,6 +94,10 @@ public class Student {
         return progressList.deleteLatestProgress();
     }
 
+    public boolean isProgressListEmpty() {
+        return progressList.isProgressListEmpty();
+    }
+
     public void addLesson(Lesson toAttend) {
         lessons.addLesson(toAttend);
     }

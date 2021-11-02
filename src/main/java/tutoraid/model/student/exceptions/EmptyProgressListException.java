@@ -5,6 +5,6 @@ package tutoraid.model.student.exceptions;
  */
 public class EmptyProgressListException extends RuntimeException {
     public EmptyProgressListException() {
-        super("The list of progress is empty");
+        super("The list of progress entries is empty for this student.");
     }
 }
