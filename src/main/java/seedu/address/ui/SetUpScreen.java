@@ -72,7 +72,7 @@ public class SetUpScreen extends UiPart<Stage> {
     }
 
     private void handleNewPassword() {
-        if (!PasswordCommandParser.passwordValidation(userInputPassword.getText())) {
+        if (!PasswordCommandParser.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
             userInputPassword.clear();
             userConfirmPassword.clear();
@@ -83,6 +83,8 @@ public class SetUpScreen extends UiPart<Stage> {
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException e) {
             responseDisplay.setText("Something went wrong, try again!");
+            userInputPassword.clear();
+            userConfirmPassword.clear();
         }
     }
 

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.encryption.exceptions.UnsupportedPasswordException;
+import seedu.address.logic.parser.PasswordCommandParser;
 
 public class LoginScreen extends UiPart<Stage> {
     private static final String FXML = "LoginWindow.fxml";
@@ -60,15 +61,24 @@ public class LoginScreen extends UiPart<Stage> {
     }
 
     private void handlePassword() {
+        // blocks the case when / is appended to the end of password
+        if (!PasswordCommandParser.isValidPassword(userInputPassword.getText())) {
+            responseDisplay.setText("Wrong password, try again!");
+            userInputPassword.clear();
+            return;
+        }
         try {
             boolean isCorrectPassword = app.logIn(userInputPassword.getText());
+            // wrong password
             if (!isCorrectPassword) {
                 responseDisplay.setText("Wrong password, try again!");
+                userInputPassword.clear();
             }
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException e) {
-            userInputPassword.clear();
+            // app problems
             responseDisplay.setText("Something went wrong, try again!");
+            userInputPassword.clear();
         }
     }
 

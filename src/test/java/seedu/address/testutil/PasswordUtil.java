@@ -7,7 +7,7 @@ import seedu.address.logic.commands.PasswordCommand;
 
 public class PasswordUtil {
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an password command string for adding the {@code person}.
      */
     public static String getPasswordCommand(String oldPassword, String newPassword) {
         return PasswordCommand.COMMAND_WORD + " " + getPasswordDetails(oldPassword, newPassword);
