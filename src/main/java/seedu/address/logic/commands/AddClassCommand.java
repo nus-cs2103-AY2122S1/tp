@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class AddClassCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds tuition class given name, limit, timeslot, and student \n"
             + "Parameters: "
-            + PREFIX_TUITION_CLASS + "NAME "
+            + PREFIX_NAME + "NAME "
             + PREFIX_LIMIT + "LIMIT "
             + PREFIX_TIMESLOT + "TIMESLOT "
             + "[" + PREFIX_STUDENT + "NAME,...] "
