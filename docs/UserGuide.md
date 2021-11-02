@@ -54,7 +54,7 @@ Detailed notes about the command format can be found [here](#features).
 
 * Each parameter prefix is separated from the others with a space.<br/>
   Using the parameter prefix for tag, `t/`, as an example,
-`t/t/` means the parameter value of the 1st `t/` is `t/` and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` means there is no parameter value of both `t/`s and TAB will interpret this as 2 empty tags. (See [Managing students](#managing-students) for more details)
+`t/t/` means the parameter value of the 1st `t/` is `t/` and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` means there is no parameter value for both `t/`s and TAB will interpret this as 2 empty tags. (See [Managing students](#managing-students) for more details)
   
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
