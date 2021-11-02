@@ -32,13 +32,17 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [4.11 Exiting the program: exit](#411-exiting-the-program--exit)
     * [4.12 Saving data](#412-saving-the-data)
     * [4.13 Edit data file](#413-edit-data-file)
-* [**5. Multiple Address Books**](#5-multiple-address-books-feature)
+* [**5. Multiple Address Books Features **](#5-multiple-address-books-feature)
     * [5.1 Create new address book: ab create](#51-create-new-address-book--ab-create)
     * [5.2 Delete existing address book: ab delete](#52-delete-existing-address-book-ab-delete--ab-delete)
     * [5.3 Switch to different address book: ab switch](#53-switch-to-different-address-book--ab-switch)
     * [5.4 List all address book: ab list](#54-list-all-address-book--ab-list)
 * [**6. FAQ**](#6-faq)
-* [**7. Command Summary**](#7-command-summary)
+* [**7. Troubleshooting**](#7-troubleshooting)
+* [**8. Bugs Reporting**](#8-bugs-reporting)
+* [**9. Command Summary**](#9-command-summary)
+    * [10.1 Address Book Specific Commands](#91-client-specific-commands)
+    * [10.2 Multiple Address Book Commands](#92-multiple-address-book-commands)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -198,6 +202,15 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted as
 | **examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src=images/info_icon.png width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
+### 4.7 Find meeting schedule : `schedule`
+
+Finds the meeting schedule on a specified date.
+
+ | Format | `schedule DATE`|
+| :-: | :-- |
+| **examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
+| <img src=images/info_icon.png width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
+ 
 ### 4.8 Locating clients by keywords : `search`
 
 Finds clients whose contacts match with the given keywords.
@@ -215,15 +228,7 @@ Filters the current list by the given keywords.
 | :-: | :-- |
 | **examples** | • `search John` returns `john` and `John Doe` <br> • `search alex david` returns `Alex Yeoh`, `David Li` |
 | <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
-
-### 4.7 Find meeting schedule : `schedule`
-
-Finds the meeting schedule on a specified date.
-
- | Format | `schedule DATE`|
-| :-: | :-- |
-| **examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
-| <img src=images/info_icon.png width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
+| <img src=images/tip_icon.png width="50"> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> <img src=images/FilterTagCommand.jpg width="300">| 
  
 ### 4.10 Clearing all entries : `clear`
 
@@ -311,16 +316,45 @@ List all the name of all the existing address books
 **Q**: I have downloaded the `LeadsForce.jar` and is unable to open the application. Is there anything I could do? <br> 
 **A**: Yes, there is another way to open up LeadsForce. Open the command prompt on your computer, navigate to the directory where you have stored the `LeadsForce.jar` file, and type `java -jar LeadsForce.jar`.
  
- **Q**: How do I transfer my data to another computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install LeadsForce on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LeadsForce home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+ 
+## 7. troubleshooting
 
-## 7. Command summary
+### Unable to launch LeadsForce
+* Do check that you indeed have Java 11 or above installed in your computer. 
+ 
+**For Mac users,**
+ 
+1. Open the terminal and type `java -version`, and press `enter`. 
+2. If you get the version information, and have made sure that the java version is `11` and above. You have downloaded the correct java version, and can skip the rest of this tutorial.
+3. Otherwise, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the mac version of the java JDK.
+ 
+ 
+**For windows users,**
+ 
+1. Open the command prompt, and type `-version`. 
+2. If you get the version information, and have made sure that the java version is `11` and above. You have downloaded the correct java version, and can skip the rest of this tutorial. 
+3. Go to `start menu` → `System` → `Advanced` → `Environment Variable`. Set the `JAVA_HOME` to the path of your JDK, and press `update`. For more details, the link to a more in-depth guide can be found [here](https://javatutorial.net/set-java-home-windows-10). 
+4. If none of the above worked, do search your system for the `javac.exe` file. If it cannot be found, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the PC version of the java JDK.
+ 
+### Corrupted Data file
+ 
+Clients are stored in the JSON file found in the 
+ 
+## 8. Bugs Reporting
+
+The latest version of LeadsForce (version 1.4) is currently undergoing rigorous testing. This version would serve as the public beta testing of LeadsForce. We have done comprehensive tests on the application, including integration and unit testing. In addition, several students from NUS School of Computing have also contributed towards the rigorous testing of LeadsForce. 
+ 
+However, if you do happen to encounter any bugs while using LeadsForce, please go to LeadsForce's [issue page](https://github.com/AY2122S1-CS2103T-T17-3/tp/issues) to issue the bug with the steps to recreate the bug.  
+ 
+## 9. Command summary
 
 This section details all commands in using the features in LeadsForce.
 
-### 7.1 Client Specific Commands
+### 9.1 Address Book Specific Commands
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
@@ -335,7 +369,7 @@ Action | Format | Examples
 **Clear** | `clear` | - |
 **Exit** | `exit` | - |
  
-### 7.2 Multiple Address Book Commands
+### 9.2 Multiple Address Book Commands
  
 Action | Format | Examples
 --------|---------|---------
