@@ -22,7 +22,7 @@ public class JsonAdaptedTaskTest {
 
     private static final String VALID_LABEL = SEW.getLabel().toString();
     private static final String VALID_DATE = SEW.getDate().toString();
-    private static final String VALID_TAGS = SEW.getTaskTag().toString();
+    private static final String VALID_TAG = SEW.getTaskTag().toString();
     private static final String VALID_IS_DONE = Boolean.toString(SEW.getIsDone());
 
     @Test
@@ -34,7 +34,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidLabel_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(INVALID_LABEL, VALID_DATE, VALID_TAGS, VALID_IS_DONE);
+                new JsonAdaptedTask(INVALID_LABEL, VALID_DATE, VALID_TAG, VALID_IS_DONE);
         String expectedMessage = Label.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -42,7 +42,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_nullLabel_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(null, VALID_DATE, VALID_TAGS, VALID_IS_DONE);
+                new JsonAdaptedTask(null, VALID_DATE, VALID_TAG, VALID_IS_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Label.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -50,7 +50,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidDate_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_LABEL, INVALID_DATE, VALID_TAGS, VALID_IS_DONE);
+                new JsonAdaptedTask(VALID_LABEL, INVALID_DATE, VALID_TAG, VALID_IS_DONE);
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -58,7 +58,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_LABEL, null, VALID_TAGS, INVALID_IS_DONE);
+                new JsonAdaptedTask(VALID_LABEL, null, VALID_TAG, INVALID_IS_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -82,7 +82,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_invalidIsDone_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_LABEL, VALID_DATE, VALID_TAGS, INVALID_IS_DONE);
+                new JsonAdaptedTask(VALID_LABEL, VALID_DATE, VALID_TAG, INVALID_IS_DONE);
         String expectedMessage = Label.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -90,7 +90,7 @@ public class JsonAdaptedTaskTest {
     @Test
     public void toModelType_nullIsDone_throwsIllegalValueException() {
         JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_LABEL, VALID_DATE, VALID_TAGS, null);
+                new JsonAdaptedTask(VALID_LABEL, VALID_DATE, VALID_TAG, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "IsDone");
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
