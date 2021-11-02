@@ -2,8 +2,8 @@ package seedu.address.model.person.customer;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIAL_REQUEST_ROCK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIAL_REQUEST_SILENCE;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_ROCK;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_SILENCE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;

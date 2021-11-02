@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_ALMONDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIAL_REQUEST_ROCK;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_ALMONDS;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_AMY;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_BOB;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_ROCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
