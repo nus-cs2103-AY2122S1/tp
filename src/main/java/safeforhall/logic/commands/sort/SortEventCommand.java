@@ -20,21 +20,22 @@ public class SortEventCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String PARAMETERS = "by/FIELD o/ORDER";
-    public static final String MESSAGE_SUCCESS = "Events have been successfully sorted";
+    public static final String MESSAGE_SUCCESS = "Events have been successfully sorted.";
     public static final String ALLOWED_FIELDS = "FIELD should be one of the following: "
             + EventName.FIELD + ", "
             + EventDate.FIELD + ", "
             + Capacity.FIELD + ", "
-            + Venue.FIELD + ", ";
+            + Venue.FIELD;
+
     public static final String ASCENDING = "a";
     public static final String DESCENDING = "d";
     public static final String ALLOWED_ORDER = "ORDER should be one of the following: " + ASCENDING + ", " + DESCENDING;
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort events by field in"
-            + "ascending or descending order \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort events by field in "
+            + "ascending or descending order. \n"
             + "Parameters: " + PREFIX_SORT + "FIELD " + PREFIX_ORDER + "ORDER \n"
             + ALLOWED_FIELDS + "\n"
             + ALLOWED_ORDER + "\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SORT + EventName.FIELD + " " + PREFIX_ORDER + DESCENDING;
 
     private final String field;
     private final String order;
@@ -43,10 +44,12 @@ public class SortEventCommand extends Command {
     /**
      * Creates a {@code SortCommand} to sort the list of residents
      *
-     * @param field The field to sort by
-     * @param order Ascending or descending order to sort
+     * @param field The field to sort by.
+     * @param order Ascending or descending order to sort.
      */
     public SortEventCommand(String field, String order) {
+        requireNonNull(field);
+        requireNonNull(order);
         this.field = field;
         this.order = order;
     }
@@ -61,12 +64,17 @@ public class SortEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Comparator<Event> comparator = getComparator(field, order);
+        Comparator<Event> comparator = getComparator();
         model.updateSortedEventList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    public Comparator<Event> getComparator(String field, String order) throws CommandException {
+    /**
+     * Creates a Comparator given the field and order for sort.
+     * @return Comparator that sorts by the field and order specified.
+     * @throws CommandException If field or order provided is invalid.
+     */
+    public Comparator<Event> getComparator() throws CommandException {
         Comparator<Event> comparator;
         switch (field) {
         case EventName.FIELD:
@@ -93,6 +101,14 @@ public class SortEventCommand extends Command {
         default:
             throw new CommandException(ALLOWED_ORDER);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortEventCommand // instanceof handles nulls
+                && field.equals(((SortEventCommand) other).field)
+                && order.equals(((SortEventCommand) other).order));
     }
 
 }

@@ -10,14 +10,13 @@ import java.util.stream.Stream;
 import safeforhall.logic.commands.sort.SortPersonCommand;
 import safeforhall.logic.parser.ArgumentMultimap;
 import safeforhall.logic.parser.ArgumentTokenizer;
-import safeforhall.logic.parser.CliSyntax;
 import safeforhall.logic.parser.Parser;
 import safeforhall.logic.parser.ParserUtil;
 import safeforhall.logic.parser.Prefix;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindEventCommand object
+ * Parses input arguments and creates a new SortPersonCommand object
  */
 public class SortPersonCommandParser implements Parser<SortPersonCommand> {
 
@@ -34,7 +33,7 @@ public class SortPersonCommandParser implements Parser<SortPersonCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT,
-                CliSyntax.PREFIX_ORDER);
+                PREFIX_ORDER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SORT, PREFIX_ORDER)
                 || !argMultimap.getPreamble().isEmpty()) {
