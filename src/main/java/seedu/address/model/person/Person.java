@@ -202,12 +202,7 @@ public class Person implements Comparable<Person> {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return this.equals(otherPerson);
     }
 
     /**
@@ -226,12 +221,8 @@ public class Person implements Comparable<Person> {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getTelegram().equals(getTelegram())
-                && otherPerson.getGithub().equals(getGithub())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                || otherPerson.getTelegram().equals(getTelegram())
+                || otherPerson.getGithub().equals(getGithub());
     }
 
     @Override
