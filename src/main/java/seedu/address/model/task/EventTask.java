@@ -1,10 +1,12 @@
 package seedu.address.model.task;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
 public class EventTask extends Task {
+
     private TaskDate dueDate;
 
     /**
@@ -19,22 +21,8 @@ public class EventTask extends Task {
         this.dueDate = date;
     }
 
-    //    @Override
     public TaskDate getTaskDate() {
         return dueDate;
-    }
-
-    /**
-     * Returns true if both Tasks have the same name.
-     * This defines a weaker notion of equality between two Task.
-     */
-    public boolean isSameTask(EventTask otherTask) {
-        if (otherTask == this) {
-            return true;
-        }
-
-        return otherTask != null
-                && otherTask.getName().equals(getName());
     }
 
     /**
@@ -79,6 +67,11 @@ public class EventTask extends Task {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.dueDate.getDeadline();
     }
 
     @Override

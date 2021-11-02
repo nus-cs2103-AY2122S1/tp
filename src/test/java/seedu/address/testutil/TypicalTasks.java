@@ -15,6 +15,9 @@ public class TypicalTasks {
     public static final Task TUTORIAL = new DeadlineTaskBuilder().withName("Do Tutorial")
             .withDate("2000-02-02")
             .withTags("work").build();
+    public static final Task EXERCISE = new DeadlineTaskBuilder().withName("Run")
+            .withDate("2000-02-02")
+            .build();
     public static final Task MEETING = new DeadlineTaskBuilder().withName("Prepare for meeting")
             .withDate("2010-02-02")
             .withTags("work").build();
@@ -24,9 +27,6 @@ public class TypicalTasks {
     public static final Task FRIEND_BIRTHDAY = new DeadlineTaskBuilder().withName("Plan Birthday")
             .withDate("2021-10-20")
             .withTags("friends").build();
-    public static final Task EXERCISE = new DeadlineTaskBuilder().withName("Run")
-            .withDate("2000-02-02")
-            .build();
 
     private TypicalTasks() {}
 
@@ -43,6 +43,6 @@ public class TypicalTasks {
 
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(
-                TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
+                TUTORIAL, EXERCISE, MEETING, DINNER, FRIEND_BIRTHDAY));
     }
 }
