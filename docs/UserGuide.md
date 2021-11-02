@@ -83,8 +83,8 @@ Adds a person to UNIon.
 
 Format: `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​`
 
-* PHONE_NUMBER accepts any length to allow for phone formats from different countries.
-* NAME has a character limit of 70 characters.
+* `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
+* `NAME` has a character limit of 70 characters.
 * Duplicate tags are ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -109,8 +109,8 @@ Format: `vim INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* PHONE_NUMBER accepts any length to allow for phone formats from different countries.
-* NAME has a character limit of 70 characters.
+* `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
+* `NAME` has a character limit of 70 characters.
 * Duplicate tags are ignored.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
