@@ -25,10 +25,12 @@ public class SortContactCommandParser implements Parser<SortContactCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortContactCommand.MESSAGE_USAGE));
         }
 
-        if ("dsc".equals(trimmedArgs)) {
+        if ("asc".equals(trimmedArgs)) {
+            return new SortContactCommand(CONTACT_SORT_BY_ALPHA_ASC);
+        } else if ("dsc".equals(trimmedArgs)) {
             return new SortContactCommand(CONTACT_SORT_BY_ALPHA_DESC);
         } else {
-            return new SortContactCommand(CONTACT_SORT_BY_ALPHA_ASC);
+            return new SortContactCommand();
         }
     }
 }
