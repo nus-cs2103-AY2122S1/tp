@@ -36,6 +36,8 @@ tasks done faster than traditional GUI apps.
 
 8. Refer to the [Parameter summary](#parameter-summary-with-prefix-included) below for a quick table of reference to all valid parameters with their respective permitted characters.
 
+9. Experienced users may choose to edit the saved `.json` data file directly. **However**, invalid/corrupted data files will result in the initialization of a new, blank TAB.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
