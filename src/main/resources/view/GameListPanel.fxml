@@ -3,6 +3,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox prefHeight="440.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox prefHeight="440.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <ListView fx:id="gameListView" prefHeight="440.0" prefWidth="300.0" styleClass="items-list" HBox.hgrow="NEVER" />
 </HBox>
