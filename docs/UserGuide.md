@@ -309,8 +309,10 @@ Example:
 </details>
 
 ### Adding a task
-
+<details markdown="1">
+<summary>
 Adds a task to the task list.
+</summary>
 
 Format: `task -a n/NAME d/DEADLINE`
 
@@ -320,6 +322,7 @@ Format: `task -a n/NAME d/DEADLINE`
 
 Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
+</details>
 
 ### Editing a task `[coming in v1.3]`
 <details markdown="1">
@@ -338,9 +341,11 @@ Examples:
 * `task -e 4 d/2021-12-31` edits the deadline to 31 December 2021
 </details>
 
-### Deleting a task `[coming in v1.3]`
-
-Deletes the specific task from the students' task list.
+### Deleting a task: `task -d`
+<details markdown="1">
+<summary>
+Deletes the specific task from the addressbook.
+</summary>
 
 Format: `task -d INDEX`
 
@@ -349,7 +354,9 @@ Format: `task -d INDEX`
 * The index refers to the index number shown in the displayed task list.
 
 Examples:
+
 * `task -d 1` deletes the task at index 1
+</details>
 
 ### Listing all tasks `[coming in v1.3]`
 <details markdown="1">
@@ -381,8 +388,10 @@ Examples:
 </details>
 
 ### Assigning tasks to students
-
+<details markdown="1">
+<summary>
 Assigns a specific task to students’ task list.
+</summary>
 
 Format: `task -as STUDENTINDEX TASKINDEX`
 
@@ -391,10 +400,13 @@ Format: `task -as STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
+</details>
 
 ### Assigning tasks to groups
-
+<details markdown="1">
+<summary>
 Assigns a specific task to groups’ task list.
+</summary>
 
 Format: `task -ag GROUPINDEX TASKINDEX`
 
@@ -403,10 +415,13 @@ Format: `task -ag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -ag 2 4` adds the task at the index 4 to the group at the index 2
+</details>
 
 ### Unassigning tasks to students
-
+<details markdown="1">
+<summary>
 Unassigns a specific task from students’ task list.
+</summary>
 
 Format: `task -unas STUDENTINDEX TASKINDEX`
 
@@ -415,10 +430,13 @@ Format: `task -unas STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -unas 2 4` removes the task at the index 4 from the student at the index 2
+</details>
 
 ### Unassigning tasks to groups
-
+<details markdown="1">
+<summary>
 Unassigns a specific task from groups’ task list.
+</summary>
 
 Format: `task -unag GROUPINDEX TASKINDEX`
 
@@ -427,6 +445,37 @@ Format: `task -unag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
+</details>
+
+### Mark task as done by student
+<details markdown="1">
+<summary>
+Marks that a student has done a task.
+</summary>
+
+Format: `task -do STUDENTINDEX TASKINDEX`
+
+* Marks the task specified at index `TASKINDEX` as done by the “Student” object specified at index `STUDENTINDEX`.
+* `-do` refers to the "mark as done" command.
+
+Examples:
+* `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
+</details>
+
+### Mark task as not done by student
+<details markdown="1">
+<summary>
+Marks that a student has not done a task.
+</summary>
+
+Format: `task -undo STUDENTINDEX TASKINDEX`
+
+* Marks the task specified at index `TASKINDEX` as not done by the “Student” object specified at index `STUDENTINDEX`.
+* `-undo` refers to the "mark as undone" command.
+
+Examples:
+* `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
+</details>
 
 ### Clearing all entries : `clear`
 
@@ -490,5 +539,7 @@ Action | Format, Examples
 **Assign a task to a group** | `task -ag GROUPINDEX TASKINDEX​` <br> e.g., `task -ag 2 4`
 **Unassign a task from a student** | `task -unas STUDENTINDEX TASKINDEX​` <br> e.g., `task -unas 2 4`
 **Unassign a task from a group** | `task -unag GROUPINDEX TASKINDEX​` <br> e.g., `task -unag 2 4`
+**Mark task as done by student** | `task -do STUDENTINDEX TASKINDEX​` <br> e.g., `task -do 2 4`
+**Mark task as not done by student** | `task -undo STUDENTINDEX TASKINDEX​` <br> e.g., `task -undo 2 4`
 **Clear all entries** | `clear`
 **Exit** | `exit`
