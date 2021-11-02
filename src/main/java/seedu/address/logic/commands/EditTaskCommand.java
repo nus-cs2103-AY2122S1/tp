@@ -45,7 +45,7 @@ public class EditTaskCommand extends EditCommand {
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_TASK_ID + "T1 "
             + PREFIX_TASK_NAME + "V13 "
-            + PREFIX_TASK_DEADLINE + "21 Oct 2021 "
+            + PREFIX_TASK_DEADLINE + "2021-10-29 15:00 "
             + "(edits all fields)"
             + "You may omit editable fields that are not being edited.";
 
