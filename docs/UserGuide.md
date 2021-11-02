@@ -30,11 +30,11 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 * Features
   * [Notes on command format](#features)
   * Adding data
-    * [Adding a student : `add student`](#adding-a-student--add-student)
-    * [Creating a new group : `add group`](#creating-a-new-group--add-group)
-    * [Adding a student into a group : `add alloc`](#adding-a-student-into-a-group--add-alloc)
-    * [Creating a new assessment : `add assessment`](#creating-a-new-assessment--add-assessment)
-    * [Adding a score : `add score`](#adding-a-score--add-score)
+    * [Adding a student : `add student`](#adding-a-student--addstudent)
+    * [Creating a new group : `add group`](#creating-a-new-group--addgroup)
+    * [Adding a student into a group : `add alloc`](#adding-a-student-into-a-group--addalloc)
+    * [Creating a new assessment : `add assessment`](#creating-a-new-assessment--addassessment)
+    * [Adding a score : `add score`](#adding-a-score--addscore)
   * Searching Data
     * [Listing all students : `list`](#listing-all-students--list)
     * [Searching for students : `search`](#searching-for-students--search)
