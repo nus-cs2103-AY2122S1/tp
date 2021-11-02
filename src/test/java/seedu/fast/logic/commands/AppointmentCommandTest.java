@@ -180,7 +180,7 @@ public class AppointmentCommandTest {
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_SECOND_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
 
-        String expectedMessage = AppointmentCommand.MESSAGE_ADD_APPOINTMENT_FAILURE;
+        String expectedMessage = AppointmentCommand.MESSAGE_ADD_APPOINTMENT_FAILURE_APPT_EXIST;
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -310,7 +310,7 @@ public class AppointmentCommandTest {
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
 
-        String expectedMessage = AppointmentCommand.MESSAGE_ADD_APPOINTMENT_FAILURE;
+        String expectedMessage = AppointmentCommand.MESSAGE_ADD_APPOINTMENT_FAILURE_APPT_EXIST;
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }

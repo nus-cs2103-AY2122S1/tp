@@ -43,7 +43,7 @@ public class AppointmentCommand extends Command {
             + PREFIX_APPOINTMENT + "2030-10-25 \n\n";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
-    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "The appointment already exists! "
+    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE_APPT_EXIST = "The appointment already exists! "
             + "Use the edit command to change details, or delete it and add it again!";
 
     private final Index index;
@@ -77,7 +77,7 @@ public class AppointmentCommand extends Command {
                 personToEdit.getCount());
 
         if (!Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
-            throw new CommandException(MESSAGE_ADD_APPOINTMENT_FAILURE);
+            throw new CommandException(MESSAGE_ADD_APPOINTMENT_FAILURE_APPT_EXIST);
         }
 
         model.setPerson(personToEdit, editedPerson);

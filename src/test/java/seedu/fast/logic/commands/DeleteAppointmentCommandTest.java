@@ -92,7 +92,7 @@ public class DeleteAppointmentCommandTest {
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED,
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED_EMPTY_APPT,
                 editedPerson.getName().fullName);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
@@ -145,7 +145,7 @@ public class DeleteAppointmentCommandTest {
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED,
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED_EMPTY_APPT,
                 editedPerson.getName().fullName);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);

@@ -39,14 +39,12 @@ public class DeleteCommand extends Command {
         + "your client list.";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES = "Cannot delete the same client twice! "
         + "(Cannot have duplicated index!)";
-    public static final String MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT = "The position/number of clients "
+    public static final String MESSAGE_MULTIPLE_DELETE_FAILED_LARGER_THAN_CONTACTS = "The position/number of clients "
         + "you want to delete cannot be more than the number of clients you currently have!";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT = "You cannot delete more than "
         + MULTIPLE_DELETE_LIMIT + " clients at one time!";
     public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "Unable to execute command!\n"
-            + "One or more invalid index detected at: %1$s\n" + MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT;
-
-    private static final Logger logger = LogsCenter.getLogger(JsonFastStorage.class);
+            + "One or more invalid index detected at: %1$s\n" + MESSAGE_MULTIPLE_DELETE_FAILED_LARGER_THAN_CONTACTS;
 
     private final Index[] indexArray;
 
@@ -84,7 +82,7 @@ public class DeleteCommand extends Command {
         if (isSingleDelete()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else {
-            throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT);
+            throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_LARGER_THAN_CONTACTS);
         }
     }
 

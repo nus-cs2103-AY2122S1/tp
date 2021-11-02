@@ -23,7 +23,7 @@ public class DeleteAppointmentCommand extends Command {
             + "Example: \n" + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
-    public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
+    public static final String MESSAGE_DELETE_APPOINTMENT_FAILED_EMPTY_APPT = "No appointment with %1$s yet!";
 
     private final Index index;
     private final Appointment appointment;
@@ -56,7 +56,7 @@ public class DeleteAppointmentCommand extends Command {
         String name = personToEdit.getName().fullName;
 
         if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
-            throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED, name));
+            throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED_EMPTY_APPT, name));
         }
 
         model.setPerson(personToEdit, editedPerson);

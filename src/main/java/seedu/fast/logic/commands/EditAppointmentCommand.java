@@ -12,6 +12,7 @@ import java.util.Optional;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CollectionUtil;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
@@ -40,9 +41,9 @@ public class EditAppointmentCommand extends Command {
 
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s %3$s"
             + " %4$s";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_FAILED = "Unable to edit appointment. "
+    public static final String MESSAGE_UPDATE_APPOINTMENT_FAILED_MISSING_FIELDS = "Unable to edit appointment. "
             + "At least one field to edit must be provided.";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_ERROR = "No Appointment to edit.";
+    public static final String MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT = "No Appointment to edit.";
 
     private final Index index;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
@@ -66,7 +67,7 @@ public class EditAppointmentCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
         }
 
@@ -77,8 +78,8 @@ public class EditAppointmentCommand extends Command {
                 createEditedAppointment(personToEdit.getAppointment(), editAppointmentDescriptor),
                 personToEdit.getCount());
 
-        if (personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
-            throw new CommandException(MESSAGE_UPDATE_APPOINTMENT_ERROR);
+        if (Appointment.isAppointmentEmpty(personToEdit.getAppointment())) {
+            throw new CommandException(MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -135,6 +136,8 @@ public class EditAppointmentCommand extends Command {
     /**
      * Stores the details to edit the appointment with. Each non-empty field value will replace the
      * corresponding field value of the appointment.
+     *
+     * Modified from AddressBook3 EditPersonDescriptor.
      */
     public static class EditAppointmentDescriptor {
         private String date;

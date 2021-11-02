@@ -49,7 +49,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
         }
 
         if (!editAppointmentDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED + "\n"
+            throw new ParseException(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_MISSING_FIELDS + "\n"
                     + EditAppointmentCommand.MESSAGE_USAGE);
         }
 

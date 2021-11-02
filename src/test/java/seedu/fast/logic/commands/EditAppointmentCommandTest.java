@@ -206,7 +206,7 @@ public class EditAppointmentCommandTest {
         EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor(desc));
 
-        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_ERROR;
+        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT;
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -342,7 +342,7 @@ public class EditAppointmentCommandTest {
         EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor(desc));
 
-        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_ERROR;
+        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT;
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
