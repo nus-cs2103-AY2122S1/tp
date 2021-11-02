@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.groups;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
@@ -39,7 +40,7 @@ public class AddGroupCommandParserTest {
     public void parse_invalidInput_failure() {
         // wrong indexes
         assertParseFailure(parser, "-1" + GROUP_DESC_TUTORIAL, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddGroupCommandParser.MESSAGE_USAGE));
+                MESSAGE_INVALID_INDEX_GIVEN));
         // invalid name
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_GROUP_NAME_DESC,
                 GroupName.MESSAGE_CONSTRAINTS);
