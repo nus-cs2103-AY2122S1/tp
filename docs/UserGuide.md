@@ -166,7 +166,7 @@ A module is made up of 6 components:
 * The [tags](#tags) that the module can be classified under
 
 A module can have 4 different colour codes:
-* A grey coloured module represents a module that is in the database but not in your [academic plan](#academic-plan)
+* A grey coloured module represents a module that is in the database but not in your [academic plan](#academic-plan)<br>
   ![Default Module](images/ModuleExplanation.png)
 
 * A green coloured module represents a module that is in your academic plan and you have taken the module previously<br>
