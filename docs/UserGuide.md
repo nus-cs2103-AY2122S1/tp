@@ -188,7 +188,7 @@ Remember to do a backup in case you may need the data again.
 </div>
 
 Examples:
-Typing `IWANTTOCLEAREVERYTHING` in the removes all patient, doctor and appointment entries.
+Typing `IWANTTOCLEAREVERYTHING` removes all patient, doctor and appointment entries.
 
 ### Exiting the program : `exit` <a name="exit"/>
 
