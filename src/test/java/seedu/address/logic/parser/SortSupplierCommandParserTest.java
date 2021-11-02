@@ -47,6 +47,21 @@ public class SortSupplierCommandParserTest {
         assertParseSuccess(parser, SORT_BY_SUPPLY_TYPE_DESC + SORT_DESC_DESCENDING + SORT_DESC_ASCENDING,
                 new SortSupplierCommand(SupplierComparator.getSupplyTypeComparator(true),
                         "supply type", "ascending"));
+
+        // parse sort by with address in ascending order
+        assertParseSuccess(parser, SORT_BY_ADDRESS_DESC + SORT_DESC_ASCENDING,
+                new SortSupplierCommand(SupplierComparator.getSupplyTypeComparator(true),
+                        "address", "ascending"));
+
+        // parse sort by with email in decreasing order
+        assertParseSuccess(parser, SORT_BY_EMAIL_DESC + SORT_DESC_DESCENDING,
+                new SortSupplierCommand(SupplierComparator.getSupplyTypeComparator(true),
+                        "email", "descending"));
+
+        // parse sort by with phone in descending order
+        assertParseSuccess(parser, SORT_BY_PHONE_DESC + SORT_DESC_DESCENDING,
+                new SortSupplierCommand(SupplierComparator.getSupplyTypeComparator(true),
+                        "phone", "descending"));
     }
 
     @Test
