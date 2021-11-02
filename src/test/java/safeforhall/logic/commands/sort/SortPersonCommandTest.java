@@ -36,15 +36,15 @@ public class SortPersonCommandTest {
     @Test
     public void getComparator_invalidField_throwsCommandException() {
         SortPersonCommand invalidFieldCommand = new SortPersonCommand("z", ASCENDING);
-        assertThrows(CommandException.class, SortPersonCommand.ALLOWED_FIELDS,
-                () -> invalidFieldCommand.getComparator());
+        assertThrows(CommandException.class, SortPersonCommand.ALLOWED_FIELDS, () ->
+                invalidFieldCommand.getComparator());
     }
 
     @Test
     public void getComparator_invalidOrder_throwsCommandException() {
         SortPersonCommand invalidFieldCommand = new SortPersonCommand(Name.FIELD, "c");
-        assertThrows(CommandException.class, SortPersonCommand.ALLOWED_ORDER,
-                () -> invalidFieldCommand.getComparator());
+        assertThrows(CommandException.class, SortPersonCommand.ALLOWED_ORDER, () ->
+                invalidFieldCommand.getComparator());
     }
 
     @Test

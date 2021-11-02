@@ -27,7 +27,7 @@ public class SortPersonCommandParserTest {
                 expectedMessage);
 
         //missing field
-        assertParseFailure(parser,  Name.FIELD + " " + PREFIX_ORDER + ASCENDING,
+        assertParseFailure(parser, Name.FIELD + " " + PREFIX_ORDER + ASCENDING,
                 expectedMessage);
     }
 

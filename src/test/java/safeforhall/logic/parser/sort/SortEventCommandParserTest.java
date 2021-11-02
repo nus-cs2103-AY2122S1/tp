@@ -27,7 +27,7 @@ public class SortEventCommandParserTest {
                 expectedMessage);
 
         //missing field
-        assertParseFailure(parser,  EventName.FIELD + " " + PREFIX_ORDER + ASCENDING,
+        assertParseFailure(parser, EventName.FIELD + " " + PREFIX_ORDER + ASCENDING,
                 expectedMessage);
     }
 

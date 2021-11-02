@@ -38,7 +38,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
-    
+
     @Test
     public void checkCompareTo() {
         Phone p1 = new Phone("123");

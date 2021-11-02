@@ -1,7 +1,6 @@
 package safeforhall.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static safeforhall.logic.commands.sort.SortPersonCommand.ALLOWED_FIELDS;
 import static safeforhall.logic.commands.sort.SortPersonCommand.ALLOWED_ORDER;
 import static safeforhall.logic.commands.sort.SortPersonCommand.ASCENDING;
 import static safeforhall.logic.commands.sort.SortPersonCommand.DESCENDING;

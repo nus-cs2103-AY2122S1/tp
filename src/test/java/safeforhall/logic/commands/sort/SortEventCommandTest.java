@@ -37,15 +37,15 @@ public class SortEventCommandTest {
     @Test
     public void getComparator_invalidField_throwsCommandException() {
         SortEventCommand invalidFieldCommand = new SortEventCommand("z", ASCENDING);
-        assertThrows(CommandException.class, SortEventCommand.ALLOWED_FIELDS,
-                () -> invalidFieldCommand.getComparator());
+        assertThrows(CommandException.class, SortEventCommand.ALLOWED_FIELDS, () ->
+                invalidFieldCommand.getComparator());
     }
 
     @Test
     public void getComparator_invalidOrder_throwsCommandException() {
         SortEventCommand invalidFieldCommand = new SortEventCommand(EventName.FIELD, "c");
-        assertThrows(CommandException.class, SortEventCommand.ALLOWED_ORDER,
-                () -> invalidFieldCommand.getComparator());
+        assertThrows(CommandException.class, SortEventCommand.ALLOWED_ORDER, () ->
+                invalidFieldCommand.getComparator());
     }
 
     @Test
