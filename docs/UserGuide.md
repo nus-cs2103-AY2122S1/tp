@@ -254,9 +254,9 @@ Format:
 Find items in the inventory.
 Note that display must be in inventory mode (see `list`).
 
-Format: `find [ n/{name}... | id/{id}... | t/{tag} ]`
+Format: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
 
-Searching by 1 or more names, or 1 or more ids, or 1 or more tags is supported. However, searching by multiple tags simultaneously is not supported.
+BogoBogo searches and lists items in the inventory that has matches any of the specified name, id, or tag.
 
 Examples: 
 
@@ -303,6 +303,10 @@ Format: `sorder`
 
 Add an item into the current order. BogoBogo will let you know if there isn't enough items in the inventory to fulfill the order request.
 
+<div class="code-example bg-grey-lt-000">
+:bulb: Once having added items, you can view your current order with <code>list order</code>.
+</div>
+
 Format:
 `iorder [ {name} | id/{id} ] (c/{count})`
 
@@ -324,7 +328,7 @@ Examples:
 Cancels the specified order from the current order.
 
 Format:
-`corder [ {name} | id/{serial number} ]`
+`corder [ {name} | id/{serial number} ] (c/COUNT)`
 
 Flag    |  Argument      | Description                                 | Remarks                                         |
 --------|----------------|---------------------------------------------|-------------------------------------------------|
