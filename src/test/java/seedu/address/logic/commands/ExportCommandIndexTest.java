@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
+import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 
 import java.io.IOException;
 
@@ -37,8 +37,8 @@ public class ExportCommandIndexTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_PERSON);
+        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
 
         String expectedMessage = ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
@@ -58,25 +58,25 @@ public class ExportCommandIndexTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
-        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_PERSON);
+        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
 
         String expectedMessage = ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.exportContact(contactToExport);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        showContactAtIndex(expectedModel, INDEX_FIRST_CONTACT);
 
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_CONTACT;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getContactList().size());
 
@@ -87,14 +87,14 @@ public class ExportCommandIndexTest {
 
     @Test
     public void equals() {
-        ExportCommandIndex exportFirstCommand = new ExportCommandIndex(INDEX_FIRST_PERSON);
-        ExportCommandIndex exportSecondCommand = new ExportCommandIndex(INDEX_SECOND_PERSON);
+        ExportCommandIndex exportFirstCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
+        ExportCommandIndex exportSecondCommand = new ExportCommandIndex(INDEX_SECOND_CONTACT);
 
         // same object -> returns true
         assertTrue(exportFirstCommand.equals(exportFirstCommand));
 
         // same values -> returns true
-        ExportCommand exportFirstCommandCopy = new ExportCommandIndex(INDEX_FIRST_PERSON);
+        ExportCommand exportFirstCommandCopy = new ExportCommandIndex(INDEX_FIRST_CONTACT);
         assertTrue(exportFirstCommand.equals(exportFirstCommandCopy));
 
         // different types -> returns false
@@ -103,7 +103,7 @@ public class ExportCommandIndexTest {
         // null -> returns false
         assertFalse(exportFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(exportFirstCommand.equals(exportSecondCommand));
     }
 

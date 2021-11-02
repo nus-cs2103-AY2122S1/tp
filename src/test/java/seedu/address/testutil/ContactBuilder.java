@@ -5,9 +5,9 @@ import java.util.Set;
 
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.contact.Rating;
 import seedu.address.model.contact.Review;
@@ -15,9 +15,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Contact objects.
  */
-public class PersonBuilder {
+public class ContactBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -36,9 +36,9 @@ public class PersonBuilder {
     private Rating rating;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code ContactBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public ContactBuilder() {
         category = new CategoryCode(DEFAULT_CATEGORY_CODE);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
@@ -50,9 +50,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the ContactBuilder with the data of {@code contactToCopy}.
      */
-    public PersonBuilder(Contact contactToCopy) {
+    public ContactBuilder(Contact contactToCopy) {
         category = contactToCopy.getCategoryCode();
         name = contactToCopy.getName();
         phone = contactToCopy.getPhone();
@@ -64,73 +64,73 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withCategoryCode(String code) {
+    public ContactBuilder withCategoryCode(String code) {
         this.category = new CategoryCode(code);
         return this;
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public ContactBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Contact} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public ContactBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public ContactBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public ContactBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public ContactBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
     /**
-     * Sets the {@code Rating} of the {@code Person} that we are building.
+     * Sets the {@code Rating} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withRating(String rating) {
+    public ContactBuilder withRating(String rating) {
         this.rating = new Rating(rating);
         return this;
     }
 
     /**
-     * Sets the empty {@code Rating} of the {@code Person} that we are building.
+     * Sets the empty {@code Rating} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withRating() {
+    public ContactBuilder withRating() {
         this.rating = new Rating();
         return this;
     }
 
     /**
-     * Sets the {@code Review} of the {@code Person} that we are building.
+     * Sets the {@code Review} of the {@code Contact} that we are building.
      */
-    public PersonBuilder withReview(String review) {
+    public ContactBuilder withReview(String review) {
         this.review = new Review(review);
         return this;
     }

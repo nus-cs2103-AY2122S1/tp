@@ -11,7 +11,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 class IsFilterablePredicateTest {
 
@@ -65,7 +65,7 @@ class IsFilterablePredicateTest {
             new Rating("2"), new HashSet<>(Arrays.asList(
             new Tag("fun"), new Tag("horrible"), new Tag("weekends"))));
 
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("2")
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("att").withRating("2")
             .withTags("fun", "horrible", "weekends").build()));
 
         // multiple category codes
@@ -74,11 +74,11 @@ class IsFilterablePredicateTest {
             new Rating("2"), new HashSet<>(Arrays.asList(
             new Tag("fun"), new Tag("horrible"), new Tag("weekends"))));
 
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("2")
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("att").withRating("2")
             .withTags("fun", "horrible", "weekends").build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("2")
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("tpt").withRating("2")
             .withTags("fun", "horrible", "weekends").build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("2")
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("oth").withRating("2")
             .withTags("fun", "horrible", "weekends").build()));
     }
 
@@ -89,14 +89,14 @@ class IsFilterablePredicateTest {
         // One category code
         IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
             new Rating("1"), Collections.emptySet());
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("1").build()));
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("att").withRating("1").build()));
 
         // Multiple category codes
         predicate = new IsFilterablePredicate(new HashSet<>(Arrays.asList(
             new CategoryCode("acc"), new CategoryCode("tpt"))),
             new Rating("1"), Collections.emptySet());
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("1").build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("1").build()));
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("fnb").withRating("1").build()));
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("att").withRating("1").build()));
     }
 
     @Test
@@ -108,18 +108,18 @@ class IsFilterablePredicateTest {
             new HashSet<>(Arrays.asList(
                 new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
             new Rating(), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating().withTags().build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating().withTags().build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating().withTags().build()));
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("att").withRating().withTags().build()));
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("tpt").withRating().withTags().build()));
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("acc").withRating().withTags().build()));
 
         // One rating
         predicate = new IsFilterablePredicate(
             new HashSet<>(Arrays.asList(
                 new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
             new Rating("3"), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("3").withTags().build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("3").withTags().build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating("3").withTags().build()));
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("att").withRating("3").withTags().build()));
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("tpt").withRating("3").withTags().build()));
+        assertTrue(predicate.test(new ContactBuilder().withCategoryCode("acc").withRating("3").withTags().build()));
     }
 
     @Test
@@ -130,19 +130,19 @@ class IsFilterablePredicateTest {
         IsFilterablePredicate predicate = new IsFilterablePredicate(
             Collections.singleton(new CategoryCode("oth")), new Rating(), new HashSet<>(Arrays.asList(
             new Tag("fun"), new Tag("horrible"), new Tag("affordable"))));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("4")
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("oth").withRating("4")
             .withTags("fun", "horrible", "affordable").build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("1")
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("oth").withRating("1")
             .withTags("fun", "horrible", "affordable").build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("5")
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("oth").withRating("5")
             .withTags("fun", "horrible", "affordable").build()));
 
         // One rating
         predicate = new IsFilterablePredicate(
             Collections.singleton(new CategoryCode("oth")), new Rating("4"), new HashSet<>(Arrays.asList(
             new Tag("fun"), new Tag("horrible"), new Tag("affordable"))));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating().withTags().build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("3").withTags().build()));
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("oth").withRating().withTags().build()));
+        assertFalse(predicate.test(new ContactBuilder().withCategoryCode("oth").withRating("3").withTags().build()));
     }
 
     // TODO [LETHICIA]

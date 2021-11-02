@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.BENSON;
+import static seedu.address.testutil.TypicalContacts.CARL;
+import static seedu.address.testutil.TypicalContacts.DANIEL;
+import static seedu.address.testutil.TypicalContacts.ELLE;
+import static seedu.address.testutil.TypicalContacts.FIONA;
+import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,12 +54,12 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different Contact -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -69,7 +69,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleFullNameKeyword_singlePersonFound() {
+    public void execute_singleFullNameKeyword_singleContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("Elle");
         FindCommand command = new FindCommand(predicate);
@@ -79,7 +79,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleFullAddressKeyword_singlePersonFound() {
+    public void execute_singleFullAddressKeyword_singleContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("michegan");
         FindCommand command = new FindCommand(predicate);
@@ -89,7 +89,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleFullPhoneKeyword_singlePersonFound() {
+    public void execute_singleFullPhoneKeyword_singleContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("9482224");
         FindCommand command = new FindCommand(predicate);
@@ -99,7 +99,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleFullReviewKeyword_singlePersonFound() {
+    public void execute_singleFullReviewKeyword_singleContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("bad");
         FindCommand command = new FindCommand(predicate);
@@ -109,7 +109,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleFullEmailKeyword_singlePersonFound() {
+    public void execute_singleFullEmailKeyword_singleContactFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("alice@example.com");
         FindCommand command = new FindCommand(predicate);
@@ -119,7 +119,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleFullKeyword_multiplePersonsFound() {
+    public void execute_singleFullKeyword_multipleContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("Meier");
         FindCommand command = new FindCommand(predicate);
@@ -129,7 +129,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleFullKeywords_multiplePersonsFound() {
+    public void execute_multipleFullKeywords_multipleContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("Kurz Meyer tokyo");
         FindCommand command = new FindCommand(predicate);
@@ -139,7 +139,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_singleNonFullKeyword_multiplePersonsFound() {
+    public void execute_singleNonFullKeyword_multipleContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("Me");
         FindCommand command = new FindCommand(predicate);
@@ -149,7 +149,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleNonFullKeywords_multiplePersonsFound() {
+    public void execute_multipleNonFullKeywords_multipleContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         IsFindableContainsKeywordsPredicate predicate = preparePredicate("Paul Ku");
         FindCommand command = new FindCommand(predicate);

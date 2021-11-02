@@ -7,8 +7,9 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+
 
 /**
  * Displays details of a contact identified using it's displayed name on the side panel.

@@ -7,33 +7,33 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.contact.Rating;
 import seedu.address.model.contact.Review;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditContactDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditContactDescriptorBuilder {
 
     private EditContactDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
+    public EditContactDescriptorBuilder() {
         descriptor = new EditContactDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditContactDescriptor descriptor) {
+    public EditContactDescriptorBuilder(EditContactDescriptor descriptor) {
         this.descriptor = new EditContactDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditContactDescriptor} with fields containing {@code contact}'s details
      */
-    public EditPersonDescriptorBuilder(Contact contact) {
+    public EditContactDescriptorBuilder(Contact contact) {
         descriptor = new EditContactDescriptor();
         descriptor.setCategoryCode(contact.getCategoryCode());
         descriptor.setName(contact.getName());
@@ -45,75 +45,75 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code category} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code category} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withCategoryCode(String category) {
+    public EditContactDescriptorBuilder withCategoryCode(String category) {
         descriptor.setCategoryCode(new CategoryCode(category));
         return this;
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditContactDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditContactDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditContactDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
+    public EditContactDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
         return this;
     }
 
     /**
-     * Sets the {@code Review} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Review} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withReview(String review) {
+    public EditContactDescriptorBuilder withReview(String review) {
         descriptor.setReview(new Review(review));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditContactDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditContactDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
 
     /**
-     * Sets the {@code Rating} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Rating} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withRating(String rating) {
+    public EditContactDescriptorBuilder withRating(String rating) {
         descriptor.setRating(new Rating(rating));
         return this;
     }
 
     /**
-     * Sets the {@code empty Rating} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code empty Rating} of the {@code EditContactDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withRating() {
+    public EditContactDescriptorBuilder withRating() {
         descriptor.setRating(new Rating());
         return this;
     }

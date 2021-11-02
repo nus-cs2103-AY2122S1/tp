@@ -22,39 +22,39 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.summary.Summary;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullContact_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Contact validContact = new PersonBuilder().build();
+    public void execute_contactAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
+        Contact validContact = new ContactBuilder().build();
 
         CommandResult commandResult = new AddCommand(validContact).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validContact), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validContact), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Contact validContact = new PersonBuilder().build();
+    public void execute_duplicateContact_throwsCommandException() {
+        Contact validContact = new ContactBuilder().build();
         AddCommand addCommand = new AddCommand(validContact);
-        ModelStub modelStub = new ModelStubWithPerson(validContact);
+        ModelStub modelStub = new ModelStubWithContact(validContact);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Contact alice = new PersonBuilder().withName("Alice").build();
-        Contact bob = new PersonBuilder().withName("Bob").build();
+        Contact alice = new ContactBuilder().withName("Alice").build();
+        Contact bob = new ContactBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -71,7 +71,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -191,12 +191,12 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single contact.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithContact extends ModelStub {
         private final Contact contact;
 
-        ModelStubWithPerson(Contact contact) {
+        ModelStubWithContact(Contact contact) {
             requireNonNull(contact);
             this.contact = contact;
         }
@@ -209,21 +209,21 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the contact being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Contact> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingContactAdded extends ModelStub {
+        final ArrayList<Contact> contactsAdded = new ArrayList<>();
 
         @Override
         public boolean hasContact(Contact contact) {
             requireNonNull(contact);
-            return personsAdded.stream().anyMatch(contact::isSameContact);
+            return contactsAdded.stream().anyMatch(contact::isSameContact);
         }
 
         @Override
         public void addContact(Contact contact) {
             requireNonNull(contact);
-            personsAdded.add(contact);
+            contactsAdded.add(contact);
         }
 
         @Override

@@ -25,65 +25,65 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.contact.Contact;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Contact} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalContacts {
 
-    public static final Contact ALICE = new PersonBuilder().withCategoryCode("att").withName("Alice Pauline")
+    public static final Contact ALICE = new ContactBuilder().withCategoryCode("att").withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withReview("great")
             .withTags("friends").withRating("3").build();
-    public static final Contact BENSON = new PersonBuilder().withCategoryCode("oth").withName("Benson Meier")
+    public static final Contact BENSON = new ContactBuilder().withCategoryCode("oth").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").withReview("amazing").withRating("4").build();
-    public static final Contact CARL = new PersonBuilder().withCategoryCode("acc").withName("Carl Kurz")
+    public static final Contact CARL = new ContactBuilder().withCategoryCode("acc").withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
             .withReview("bad").withRating("2").build();
-    public static final Contact DANIEL = new PersonBuilder().withCategoryCode("tpt").withName("Daniel Meier")
+    public static final Contact DANIEL = new ContactBuilder().withCategoryCode("tpt").withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
             .withReview("great").withTags("friends").withRating("5").build();
-    public static final Contact ELLE = new PersonBuilder().withCategoryCode("att").withName("Elle Meyer")
+    public static final Contact ELLE = new ContactBuilder().withCategoryCode("att").withName("Elle Meyer")
             .withReview("great").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withRating("5").build();
-    public static final Contact FIONA = new PersonBuilder().withCategoryCode("com").withName("Fiona Kunz")
+    public static final Contact FIONA = new ContactBuilder().withCategoryCode("com").withName("Fiona Kunz")
             .withReview("great").withPhone("9482427").withEmail("lydia@example.com")
             .withAddress("little tokyo").withRating("5").build();
-    public static final Contact GEORGE = new PersonBuilder().withCategoryCode("fnb").withName("George Best")
+    public static final Contact GEORGE = new ContactBuilder().withCategoryCode("fnb").withName("George Best")
             .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street").withReview("great")
             .withRating("2").build();
-    public static final Contact JANE = new PersonBuilder().withCategoryCode("com").withName("Jane Parker")
+    public static final Contact JANE = new ContactBuilder().withCategoryCode("com").withName("Jane Parker")
             .withPhone("90477602").withEmail("jane@example.com").withAddress("23rd street").withReview("beautiful")
             .withRating("5").build();
 
     // Manually added
-    public static final Contact HOON = new PersonBuilder().withCategoryCode("att").withName("Hoon Meier")
+    public static final Contact HOON = new ContactBuilder().withCategoryCode("att").withName("Hoon Meier")
             .withPhone("8482424").withEmail("stefan@example.com").withAddress("little india").withReview("great")
             .withRating("4").build();
-    public static final Contact IDA = new PersonBuilder().withCategoryCode("oth").withName("Ida Mueller")
+    public static final Contact IDA = new ContactBuilder().withCategoryCode("oth").withName("Ida Mueller")
             .withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave").withReview("bad")
             .withRating("2").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Contact AMY = new PersonBuilder().withCategoryCode(VALID_CATEGORY_CODE_ATT)
+    // Manually added - Contact's details found in {@code CommandTestUtil}
+    public static final Contact AMY = new ContactBuilder().withCategoryCode(VALID_CATEGORY_CODE_ATT)
             .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY).withReview(VALID_REVIEW_AMY).withTags(VALID_TAG_FRIEND)
             .withRating(VALID_RATING_AMY).build();
-    public static final Contact BOB = new PersonBuilder().withCategoryCode(VALID_CATEGORY_CODE_OTH)
+    public static final Contact BOB = new ContactBuilder().withCategoryCode(VALID_CATEGORY_CODE_OTH)
             .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB).withReview(VALID_REVIEW_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withRating(VALID_RATING_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalContacts() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical contacts.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Contact contact : getTypicalPersons()) {
+        for (Contact contact : getTypicalContacts()) {
             ab.addContact(contact);
         }
         return ab;
@@ -91,17 +91,17 @@ public class TypicalPersons {
 
     public static AddressBook getRandomTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Contact contact : getRandomTypicalPersons()) {
+        for (Contact contact : getRandomTypicalContacts()) {
             ab.addContact(contact);
         }
         return ab;
     }
 
-    public static List<Contact> getTypicalPersons() {
+    public static List<Contact> getTypicalContacts() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE));
     }
 
-    public static List<Contact> getRandomTypicalPersons() {
+    public static List<Contact> getRandomTypicalContacts() {
         return new ArrayList<>(Arrays.asList(CARL, DANIEL, GEORGE, BENSON, JANE, ELLE, ALICE, FIONA));
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 public class IsFindableContainsKeywordsPredicateTest {
 
@@ -37,7 +37,7 @@ public class IsFindableContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -46,23 +46,23 @@ public class IsFindableContainsKeywordsPredicateTest {
         // One keyword
         IsFindableContainsKeywordsPredicate predicate =
                 new IsFindableContainsKeywordsPredicate(Collections.singletonList("Marina"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Marina Bay Sands").build()));
+        assertTrue(predicate.test(new ContactBuilder().withName("Marina Bay Sands").build()));
 
         // Multiple keywords
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("Bayfront", "Ave"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("10 Bayfront Ave").build()));
+        assertTrue(predicate.test(new ContactBuilder().withAddress("10 Bayfront Ave").build()));
 
         // Only one matching keyword
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("amazing", "meh"));
-        assertTrue(predicate.test(new PersonBuilder().withReview("amazing").build()));
+        assertTrue(predicate.test(new ContactBuilder().withReview("amazing").build()));
 
         // Mixed-case keywords
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("harbourfront", "St"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("1 HarbourFront Walk").build()));
+        assertTrue(predicate.test(new ContactBuilder().withAddress("1 HarbourFront Walk").build()));
 
         // Number keywords
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("886", "908"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("6688868").build()));
+        assertTrue(predicate.test(new ContactBuilder().withPhone("6688868").build()));
     }
 
     @Test
@@ -71,46 +71,46 @@ public class IsFindableContainsKeywordsPredicateTest {
         // Zero keywords
         IsFindableContainsKeywordsPredicate predicate =
             new IsFindableContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Marina Bay Sands").build()));
+        assertFalse(predicate.test(new ContactBuilder().withName("Marina Bay Sands").build()));
 
         // Non-matching keyword
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("VivoCity"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Marina Bay Sands").build()));
+        assertFalse(predicate.test(new ContactBuilder().withName("Marina Bay Sands").build()));
 
         // ADDRESS
         // Zero keywords
         predicate = new IsFindableContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withAddress("10 Bayfront Ave").build()));
+        assertFalse(predicate.test(new ContactBuilder().withAddress("10 Bayfront Ave").build()));
 
         // Non-matching keyword
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("Walk"));
-        assertFalse(predicate.test(new PersonBuilder().withAddress("10 Bayfront Ave").build()));
+        assertFalse(predicate.test(new ContactBuilder().withAddress("10 Bayfront Ave").build()));
 
         // PHONE
         // Zero keywords
         predicate = new IsFindableContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withPhone("6376860").build()));
+        assertFalse(predicate.test(new ContactBuilder().withPhone("6376860").build()));
 
         // Non-matching keyword
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("908"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("6376860").build()));
+        assertFalse(predicate.test(new ContactBuilder().withPhone("6376860").build()));
 
         // EMAIL
         // Zero keywords
         predicate = new IsFindableContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withEmail("marinabaysands@example.com").build()));
+        assertFalse(predicate.test(new ContactBuilder().withEmail("marinabaysands@example.com").build()));
 
         // Non-matching keyword
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("gmail"));
-        assertFalse(predicate.test(new PersonBuilder().withEmail("marinabaysands@example.com").build()));
+        assertFalse(predicate.test(new ContactBuilder().withEmail("marinabaysands@example.com").build()));
 
         // REVIEW
         // Zero keywords
         predicate = new IsFindableContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withReview("amazing").build()));
+        assertFalse(predicate.test(new ContactBuilder().withReview("amazing").build()));
 
         // Non-matching keyword
         predicate = new IsFindableContainsKeywordsPredicate(Arrays.asList("awesome"));
-        assertFalse(predicate.test(new PersonBuilder().withReview("amazing").build()));
+        assertFalse(predicate.test(new ContactBuilder().withReview("amazing").build()));
     }
 }
