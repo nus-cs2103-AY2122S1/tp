@@ -412,6 +412,10 @@ Users can add, remove, or edit remarks through the editor window.
 ![Remark editor](images/remark_editor_student.png)
 <p align="center"><i>Figure 4: Editing remarks with editor window</i></p>
 
+<div markdown="span" class="alert alert-primary">
+:warning: For MacOS users, the remarks editor may open as a new tab instead of a window, which can cause a UI bug where the buttons are not displayed correctly. To open as a new window instead, go to System preferences > General > Prefer tabs and choose never. 
+</div>
+
 #### Adding remark to a student: `remark` | `re`
 
 Adds a remark for a student. 
