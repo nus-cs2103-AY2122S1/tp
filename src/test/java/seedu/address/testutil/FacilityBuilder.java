@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import seedu.address.model.facility.AllocationMap;
@@ -11,6 +12,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building Facility objects.
@@ -21,6 +23,7 @@ public class FacilityBuilder {
     public static final String DEFAULT_LOCATION = "Tampines Hub Badminton Hall";
     public static final String DEFAULT_TIME = "1700";
     public static final String DEFAULT_CAPACITY = "5";
+    private static final Map<DayOfWeek, List<Person>> DEFAULT_ALLOCATIONS = new EnumMap<>(DayOfWeek.class);
 
     private FacilityName facilityName;
     private Location location;
@@ -36,14 +39,10 @@ public class FacilityBuilder {
         this.location = new Location(DEFAULT_LOCATION);
         this.time = new Time(DEFAULT_TIME);
         this.capacity = new Capacity(DEFAULT_CAPACITY);
-        this.allocationMap = new AllocationMap(new EnumMap<>(
-                Map.ofEntries(Map.entry(DayOfWeek.MONDAY, new ArrayList<>()),
-                        Map.entry(DayOfWeek.TUESDAY, new ArrayList<>()),
-                        Map.entry(DayOfWeek.WEDNESDAY, new ArrayList<>()),
-                        Map.entry(DayOfWeek.THURSDAY, new ArrayList<>()),
-                        Map.entry(DayOfWeek.FRIDAY, new ArrayList<>()),
-                        Map.entry(DayOfWeek.SATURDAY, new ArrayList<>()),
-                        Map.entry(DayOfWeek.SUNDAY, new ArrayList<>()))));
+        for (DayOfWeek day : DayOfWeek.values()) {
+            DEFAULT_ALLOCATIONS.put(day, new ArrayList<>());
+        }
+        this.allocationMap = new AllocationMap(DEFAULT_ALLOCATIONS);
     }
 
     /**
