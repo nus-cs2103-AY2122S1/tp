@@ -10,18 +10,18 @@ participant "d:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
 
 end box
 
-[-> LogicManager : execute("add task \nm/CS2103 \nti/T1 \na/assignment1 \nd/20-10-2021")
+[-> LogicManager : execute("add task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
 activate LogicManager
 
-LogicManager -> TeachingAssistantBuddyParser : parseCommand("add task \nm/CS2103 \nti/T1 \na/assignment1 \nd/20-10-2021")
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("add task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
 activate TeachingAssistantBuddyParser
 
 create AddCommandParser
-TeachingAssistantBuddyParser -> AddCommandParser : parse("task \nm/CS2103 \nti/T1 \na/assignment1 \nd/20-10-2021")
+TeachingAssistantBuddyParser -> AddCommandParser : parse("task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
 activate AddCommandParser
 
 create AddTaskCommandParser
-AddCommandParser -> AddTaskCommandParser : parse("m/CS2103 \nti/T1 \na/assignment1 \nd/20-10-2021")
+AddCommandParser -> AddTaskCommandParser : parse("m/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
 activate AddTaskCommandParser
 
 create AddTaskCommand

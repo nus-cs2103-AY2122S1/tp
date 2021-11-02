@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete module m/CS2103`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -93,14 +93,18 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When the `Logic` is called upon to execute `delete module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
+3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Module` object as indicated by `module`.
+4. The `DeleteModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `DeleteModuleCommand`.
+5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+![How the command `delete module m/CS2103` is parsed in the Logic component](images/DeleteModuleSequenceDiagram1.png)
+6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![How the `DeleteModuleCommand` is executed](images/DeleteModuleSequenceDiagram2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -181,22 +185,6 @@ This section describes some noteworthy details on how certain features are imple
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
    ![How the command `edit module m/CS2103 mn/CS2105` is executed](images/EditModuleSequenceDiagram2.png)
 
-
-### Delete Module
-
-1. When the `Logic` is called upon to execute `delete module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
-2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
-3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Module` object as indicated by `module`.
-4. The `DeleteModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `DeleteModuleCommand`.
-5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
-
-![How the command `delete module m/CS2103` is parsed in the Logic component](images/DeleteModuleSequenceDiagram1.png)
-6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
-7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
-8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-
-![How the `DeleteModuleCommand` is executed](images/DeleteModuleSequenceDiagram2.png)
-
 ### Add Student
 
 1. When the `Logic` is called upon to execute `add student m/CS2103 i/A1234567A n/Amy bee t/@amybee e/amybee@gmail.com`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -258,7 +246,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Task
 
-1. When `Logic` is called upon to execute the user input `add task m/CS2103 ti/T1 a/assignment1 d/20-10-2021`, it uses the 
+1. When `Logic` is called upon to execute the user input `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20`, it uses the 
    `TeachingAssistantBuddyParser` class to parse the user command.
 2. `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to `AddCommandParser`.
 3. `AddCommandParser` then figures out the type of object to add, in this case a `task` object as indicated by the 
@@ -267,12 +255,12 @@ This section describes some noteworthy details on how certain features are imple
    the input arguments. They are then passed to `AddTaskCommand`.
 5. This results in a `AddTaskCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic 
    Manager`.
-   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/20-10-2021` is parsed in the Logic component](images/AddTaskSequenceDiagram1.png)
+   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is parsed in the Logic component](images/AddTaskSequenceDiagram1.png)
 6. The `AddTaskCommand` communicates with the `Model` when it is executed.
 7. The `Model` will add a new `Task` with the new `taskName` under the `Module` with that `moduleName`. The `Task` will also be 
    added to all the `Student`s under the specified `Module`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/20-10-2021` is executed](images/AddTaskSequenceDiagram2.png)
+   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is executed](images/AddTaskSequenceDiagram2.png)
 
 ### Edit Task
 
