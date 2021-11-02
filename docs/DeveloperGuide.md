@@ -1366,7 +1366,7 @@ Character limit:
 #### Deleting an appointment
 1. Deletes an existing appointment in FAST
     1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
-   
+
     2. **Test Case**: `da 1` <br>
        **Expected**: Deletes the appointment of the first client in the displayed list. Success message with client name is shown.
    
