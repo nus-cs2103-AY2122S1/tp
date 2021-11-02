@@ -99,10 +99,16 @@ Understanding the structure of a **contact** in *ComputingConnection* is importa
 
 Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
-Personal data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
-University data fields   | 3. `f/`: Faculty <br><br>  4. `m/:` Major | 3. NUS Faculties: <br> fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law <br><br> 4. Alphanumeric |Compulsory
-Skill data fields | 5. `s/`:Skill <br><br> 6. `l/`: Programming Language <br><br> 7. `fr/`: Framework | 5. Alphanumeric <br><br> 6. Alphanumeric <br><br> 7. Alphanumeric| Optional
-Miscellaneous data fields| 8. `r/`: Remark <br><br> 9. `int/`: Interaction <br><br> 10. `compat/`: Compatability | 8. Alphanumeric <br><br> 9. Alphanumeric, Date <br><br> 10. 0 - 100 | Optional
+Personal data fields  | 1. `n/` : Name <br><br> 2. `e/` : Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
+University data fields   | 3. `f/` : Faculty <br><br>  4. `m/` : Major | 3. NUS Faculties: <br> fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law <br><br> 4. Alphanumeric |Compulsory
+Skill data fields | 5. `s/` : Skill <br><br> 6. `l/` : Programming Language <br><br> 7. `fr/`: Framework | 5. Alphanumeric <br><br> 6. Alphanumeric <br><br> 7. Alphanumeric| Optional
+Miscellaneous data fields| 8. `r/` : Remark <br><br> 9. `int/` : Interaction <br><br> 10. `compat/` : Compatability | 8. Alphanumeric <br><br> 9. Alphanumeric, Date <br><br> 10. 0 - 100 | Optional
+
+<div markdown="block" class="alert alert-info">
+:information_source: Elaboration on valid items
+* Valid items of the **faculty** field must be entered in lower case. A future patch will allow case-insensitive valid entires. 
+* The **major** field currently takes any alphanumeric item. A future patch will ensure major is tied to a valid faculty.
+</div>
 
 ### Structure of an Organisation
 Understanding the structure of a **organisation** in *ComputingConnection* is also important in enabling you to be more productive and keep contacts together in the one organisation. E.g. a group, CCA or company
@@ -235,7 +241,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATABILI
 
 <div markdown="block" class="alert alert-info">
 :exclamation: Editing is not cumulative!
-* When editing data fields, the existing items of the data field of the contact will be removed i.e adding of items is not cumulative (see [append](#appending-items-to-data-fields)).
+* When editing data fields, the existing items of the data field of the contact will be removed i.e adding of items is not cumulative (see [append](#appending-items-to-data-fields--append)).
 * You can remove all the contact’s optional data fields by typing `s/`, `l/`, `fr/`, `t/`, `r`, or `int/` without
   specifying any tags after it.
 * However, you can't do this for compulsory data fields!
@@ -314,7 +320,7 @@ Examples:
 * Index is based on current list displayed on left side of screen. 
 </div>
 
-##### Locating contacts by name: `find`
+##### Locating contacts by name : `find`
 Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -420,6 +426,14 @@ Examples:
 
 ### Future commands
 Commands to be implemented in future versions
+
+##### Updates to data fields
+Data fields of a contact will be updated to meet the following specifications in future updates of *ComputingConnection*.
+
+Data field | Future updates
+-----------|---------------
+`f/` : Faculty | Case insensitive items, wider scope of NUS faculties
+`m/` : Major | Valid items to correspond with valid faculties
 
 ##### Archiving data files
 _Details coming soon ..._
