@@ -89,13 +89,11 @@ public class Schedule implements Iterable<Appointment>, ReadOnlySchedule {
      * @return A list of appointments that have time conflicts with the given appointment.
      */
     private List<Appointment> getClashingAppointments(Appointment appointmentToCheck) {
-        List<Appointment> clashingAppoinments = new ArrayList<>();
-        for (Appointment appointment : this.appointmentList) {
-            if (appointment.isConflictingWith(appointmentToCheck)) {
-                clashingAppoinments.add(appointment);
-            }
-        }
-        return clashingAppoinments;
+        return this.appointmentList
+                .stream()
+                .parallel()
+                .filter(appointment -> appointment.isConflictingWith(appointmentToCheck))
+                .collect(Collectors.toList());
     }
 
     public void sortAppointmentByDescription() {

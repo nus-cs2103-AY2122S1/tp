@@ -159,7 +159,6 @@ public class ModelManager implements Model {
         requireNonNull(a);
 
         schedule.addAppointment(a);
-
     }
 
     @Override
