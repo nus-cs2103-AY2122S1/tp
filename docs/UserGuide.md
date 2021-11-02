@@ -603,7 +603,7 @@ Note that if you successfully add a student, the name will appear exactly as wha
 For example, when adding a new student, given an existing student named `John Doe`, 
 
 - Valid: `John Doe the Great` 
-- Invalid: `john doe`, `John &ensp; Doe`
+- Invalid: `john doe`, <code>John &ensp; Doe</code>
 
 Names for tuition classes may be reused.
 
