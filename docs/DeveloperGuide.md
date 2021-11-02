@@ -187,109 +187,22 @@ Classes used by multiple components are in the `seedu.fast.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Sort feature
-
-#### Current Implementation
-
-The sort mechanism is facilitated by the inbuilt Collections::sort method.
-This is done by passing a custom comparator that implements the Comparator interface to the sort method.
-There are currently three custom comparators implemented in FAST:
-- `SortByName` -- Sorts the contacts alphabetically by name.
-- `SortByAppointment` -- Sorts the contacts chronologically by date.
-- `SortByPriority` -- Sorts the contacts by priority tags.
-
-`SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
-`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
-the inbuilt `Date::compareTo` method.  <br>
-`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
-Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
-
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. <br>
-Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
-calls `FastParser::parseCommand` to parse the given input. <br>
-Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
-`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
-Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate 
-the state of our contacts. <br>
-Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
-to sort the list of persons by their name.<br>
-
-#### Design Considerations
-
-**Aspect: How sort executes:**
-
-* **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
-  * Pros: Easy to implement.
-  * Cons: May need additional attributes to compare.
-
-* **Alternative 2:** Implement a custom Sort method.
-  * Pros: May not need additional attributes
-  * Cons: Very complicated, may have performance issues if the sort is not efficient.
-
-**Aspect: How SortByDate is implemented:**
-
-* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
-    * Pros: Easy to implement.
-    * Cons: Need to account for empty appointment dates.
-
-* **Alternative 2:** Compare dates in String.
-    * Pros: No need to convert the values to another type.
-    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
-    
-### Find feature
-
-#### Current implementation
-
-The find mechanism uses a few implementations of Predicate<Person> using the inbuilt `Predicate` class.
-It uses these predicates to determine which persons to display in the search results.
-There are currently 4 custom predicates implemented in FAST:
-- `NameContainsQueriesPredicate` -- checks if the person's name contains the query.
-- `PriorityPredicate` -- checks if the person has the given priority tag.
-- `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
-- `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
-
-`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
-`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
-`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
-`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
-
-Given below is an example usage scenario and how the find mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. <br>
-Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
-calls `FastParser::parseCommand` to parse the given input. <br>
-Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
-`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
-Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate 
-the state of our contacts. <br>
-Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
-of the search.<br>
-
-#### Design Considerations
-
-**Aspect: How find executes:**
-
-* **Alternative 1 (current choice):** Use many `Predicate<Person` implementations.
-  * Pros: Easy to implement.
-  * Cons: For every type of find added, a new class must be made.
-
-* **Alternative 2:** Implement a custom Find method.
-  * Pros: May be able to condense into 1 class
-  * Cons: Very complicated and difficult to implement.
+<br>
 
 ### Appointment feature
 
 #### Current Implementation
-The appointment feature supports 5 different type of command currently:
+Currently, the appointment feature supports 5 different type of command:
 1. `add appointment`
 2. `edit appointment` 
 3. `delete appointment` 
 4. `mark appointment` 
 5. `unmark appointment`
 
-This 5 features will allow users to be able to keep track of the appointments they have with their clients.
+This 5 features will allow users to be able to manage the appointments they have with their clients.
+All 5 features extends from the `abstract` `Command` class.  
+These 5 features help clients to manage their appointment by manipulating the `Appointment` and the `AppointmentCount` class.
+`add appointment`, `edit appointment` and `delete appointment` works similar to `add`, `edit` and `delete` feature.
 The table below summarises the purpose of the 5 different appointment commands.
 
 | Command      | Command Word | Purpose |
@@ -300,12 +213,16 @@ The table below summarises the purpose of the 5 different appointment commands.
 | `mark appointment` | `ma` | Mark an appointment as done.|
 | `unmark appointment` | `ua` | Undo the marking of an appointment as done.|
 
+<br>
+
 **Appointment**
 
 Managed by: [`Appointment.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/person/Appointment.java)
 
-Stores 3 data:
-1) The 'date' of an appointment in `dd-MMM-yyyy` format as a String.
+This class contains the details of the appointment with a specific client.
+
+Data stored in an `Appointment` object:
+1) The `date` of an appointment in `dd-MMM-yyyy` format as a String.
 2) The `time` of an appointment in `HHmm` format as a String.
 3) The `venue` of an appointment has to be within 20 characters as a String.
 
@@ -315,7 +232,10 @@ Stores 3 data:
 
 Managed by: [`AppointmentCount.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/person/AppointmentCount.java)
 
-Stores the completed appointment count with a specific client.
+This class contains the number of completed / marked appointment with a specific client.
+
+Data stored in an `AppointmentCount` object:
+1) `count` (number) of completed appointment as an int.
 
 <br>
 
@@ -328,6 +248,7 @@ and [`AppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/
 of which only 2 (`index` and `date`) are compulsory for FAST to be able to execute the command.
 
 `Add appointment` requires the `date` to be of the format `yyyy-mm-dd` and `time` to be of the format `HH:mm`.
+Additionally, the `date` entered by the user must be a date in the future (i.e. cannot be a date in the past).
 If the `date` and/or `time` input does not follow the required format, Fast will display an error message to the user.
 
 `AppointmentCommandParser::parse()` makes use of `ParserUtil::parseDateString()` and `ParserUtil::parseTimeString()` to check if the input `date` and `time` follows the format.
@@ -476,6 +397,51 @@ Given below is Activity Diagram for FAST Appointment procedure. It includes scen
       the four different feature. 
         3. Unnecessary code would be executed to check for the type of sub-features is called in the parser class.
 
+<br>
+
+### Find feature
+
+#### Current implementation
+
+The find mechanism uses a few implementations of Predicate<Person> using the inbuilt `Predicate` class.
+It uses these predicates to determine which persons to display in the search results.
+There are currently 4 custom predicates implemented in FAST:
+- `NameContainsQueriesPredicate` -- checks if the person's name contains the query.
+- `PriorityPredicate` -- checks if the person has the given priority tag.
+- `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
+- `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
+
+`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
+`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
+`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
+`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
+`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
+Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
+of the search.<br>
+
+#### Design Considerations
+
+**Aspect: How find executes:**
+
+* **Alternative 1 (current choice):** Use many `Predicate<Person` implementations.
+    * Pros: Easy to implement.
+    * Cons: For every type of find added, a new class must be made.
+
+* **Alternative 2:** Implement a custom Find method.
+    * Pros: May be able to condense into 1 class
+    * Cons: Very complicated and difficult to implement.
+
+<br>
+
 ### Help Window
 
 #### Current Implementation
@@ -522,6 +488,61 @@ To address to cons of our implementation, we decided to compromise by still open
 valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
 window to the default page.
 
+<br>
+
+### Sort feature
+
+#### Current Implementation
+
+The sort mechanism is facilitated by the inbuilt Collections::sort method.
+This is done by passing a custom comparator that implements the Comparator interface to the sort method.
+There are currently three custom comparators implemented in FAST:
+- `SortByName` -- Sorts the contacts alphabetically by name.
+- `SortByAppointment` -- Sorts the contacts chronologically by date.
+- `SortByPriority` -- Sorts the contacts by priority tags.
+
+`SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
+`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
+the inbuilt `Date::compareTo` method.  <br>
+`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
+Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
+`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
+Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
+to sort the list of persons by their name.<br>
+
+#### Design Considerations
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
+    * Pros: Easy to implement.
+    * Cons: May need additional attributes to compare.
+
+* **Alternative 2:** Implement a custom Sort method.
+    * Pros: May not need additional attributes
+    * Cons: Very complicated, may have performance issues if the sort is not efficient.
+
+**Aspect: How SortByDate is implemented:**
+
+* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
+    * Pros: Easy to implement.
+    * Cons: Need to account for empty appointment dates.
+
+* **Alternative 2:** Compare dates in String.
+    * Pros: No need to convert the values to another type.
+    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
+
+<br>
+
 ### Statistics window
 
 #### Current Implementation
@@ -554,6 +575,8 @@ thus might be confusing the the user. To address the cons of the piechart, we al
 piechart to help users better understand the data and provide a more complete statistic.
     
 _{more aspects and alternatives to be added}_
+
+<br>
 
 ### Tagging feature
 
