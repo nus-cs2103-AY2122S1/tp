@@ -104,7 +104,7 @@ Add a new student to the specified module.<br>
 Also automatically copies over the task list from the module to the student.<br>
 Student id must be a valid NUS student id (starts with A, followed by 7 numbers and ends with a capital letter.<br>
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
-Student tele handle must start with @ and followed by alphanumeric characters.<br>
+Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
 Student email must follow the format specified in the [Parameter summary](#parameter-summary) section below.<br>
 Student id, student tele handle, and student email must be unique for each student.<br>
 Duplicate student names are allowed to cater for students who may have the same name.
@@ -123,7 +123,7 @@ Edit a student's information.<br>
 The identity fields(module name/student id) must be provided.<br>
 At least one optional editable field (name/tele handle/email) must be provided, and only provided editable fields will be changed.
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
-Student tele handle must start with @ and followed by alphanumeric characters.<br>
+Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
 Student email must follow the format specified in the [Parameter summary](#parameter-summary) section below.<br>
 If duplicate fields are provided, only the latest fields will be processed.
 
@@ -252,18 +252,19 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I assign tasks to students?<br>
-**A**: Adding the student to the module will automatically add the tasks in the module to the student.
-
+**A**: Adding the student to the module will automatically add the tasks in the module to the student.<br>
+<br>
 **Q**: How do I see the full TAB after executing the `find` command?<br>
-**A**: Use the `home` command to return to the homepage showing the full TAB. 
+**A**: Use the `home` command to return to the homepage showing the full TAB. <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-**Alphanumeric**: Any characters from [0-9], [a-z], or [A-Z].
-**TAB**: Teaching Assistant's Buddy.
-**Tele handle**: A telegram user handle.
+**Alphanumeric**: Any characters from [0-9], [a-z], or [A-Z].<br>
+**TAB**: Teaching Assistant's Buddy.<br>
+**Tele handle**: A telegram user handle that must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
@@ -296,7 +297,7 @@ Parameter with prefix | Permitted characters
 `m/<module name>` <br> `m/<old module name>` <br> `mn/<new module name>` | Must be an NUS module code, consisting of 2-4 capital letters, followed by 2-4 numbers and ending with 2-4 capital letters.
 `i/<student id>` | Student id must be a valid NUS student id, starting with the capital letter 'A', followed by 7 numbers and ending with a capital letter.
 `n/<student name>` <br> `n/<edited student name>` | Student name should only contain alphanumeric characters and spaces, and it should not be blank. 
-`t/<student tele handle>` <br> `t/<edited student tele handle>` | Student tele handle must start with @ and followed by alphanumeric characters.
+`t/<student tele handle>` <br> `t/<edited student tele handle>` | Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.
 `e/<student email>` <br> `e/<student email>` | Student email must follow the format specified in the [Email format](#email-format)) section below.
 `ti/<task id>` | Task id must begin with a capital letter 'T', followed by numbers only.
 `a/<task name>` <br> `a/<edited task name>` | Task name must only contain alphanumeric characters and spaces, and it must not be blank.
