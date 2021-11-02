@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -29,20 +33,25 @@ public class DayCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    private final DayOfWeek day;
+    private final int dayCardNumber;
 
     @FXML
     private VBox slotPane;
     @FXML
-    private Label dayLabel;
+    private Label dayDateLabel;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public DayCard(DayOfWeek day, ObservableList<Person> stafflist, Period currentPeriod) {
+    public DayCard(int dayCardNumber, ObservableList<Person> stafflist, Period currentPeriod) {
         super(FXML);
-        this.day = day;
-        dayLabel.setText(day.toString().substring(0, 3));
+        this.dayCardNumber = dayCardNumber;
+        DayOfWeek day = LocalDate.now().getDayOfWeek().plus(dayCardNumber);
+        LocalDate date = LocalDate.now().plusDays(dayCardNumber);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        String text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()) + ", "
+                + date.format(formatter);
+        dayDateLabel.setText(text);
         slotPane.getChildren().addAll(new SlotCard(day, Slot.MORNING, stafflist, currentPeriod).getRoot(),
                 new SlotCard(day, Slot.AFTERNOON, stafflist, currentPeriod).getRoot());
     }
@@ -61,6 +70,6 @@ public class DayCard extends UiPart<Region> {
 
         // state check
         DayCard card = (DayCard) other;
-        return day.equals(card.day);
+        return dayCardNumber == card.dayCardNumber;
     }
 }

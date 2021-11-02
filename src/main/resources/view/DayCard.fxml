@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="slotPane" minHeight="300.0" prefHeight="800.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="slotPane" minHeight="300.0" prefHeight="800.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <Label fx:id="dayLabel" textAlignment="CENTER" styleClass="big_label_white" text="\$dayName" wrapText="true" />
+      <Label fx:id="dayDateLabel" styleClass="big_label_white" text="\$dayDate" textAlignment="CENTER" wrapText="true" />
    </children>
 </VBox>

@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -32,13 +33,15 @@ public class WeekShiftsPane extends UiPart<Region> {
     }
 
     public void setChildren(ObservableList<Person> staffList, Period period) {
+        int currentDay = LocalDate.now().getDayOfWeek().getValue();
         weekShiftsPane.getChildren().clear();
-        weekShiftsPane.getChildren().addAll(new DayCard(DayOfWeek.MONDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.TUESDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.WEDNESDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.THURSDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.FRIDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.SATURDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.SUNDAY, staffList, period).getRoot());
+        weekShiftsPane.getChildren().addAll(new DayCard(0, staffList, period).getRoot(),
+                new DayCard(1, staffList, period).getRoot(),
+                new DayCard(2, staffList, period).getRoot(),
+                new DayCard(3, staffList, period).getRoot(),
+                new DayCard(4, staffList, period).getRoot(),
+                new DayCard(5, staffList, period).getRoot(),
+                new DayCard(6, staffList, period).getRoot());
     }
+
 }

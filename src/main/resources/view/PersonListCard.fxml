@@ -35,10 +35,10 @@
                 <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="address" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$address" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$email" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" orientation="VERTICAL"/>
                 <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" prefHeight="90.0" prefWidth="63.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" prefHeight="90.0" prefWidth="63.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER" orientation="VERTICAL"/>
             </children>
         </GridPane>
     </VBox>
