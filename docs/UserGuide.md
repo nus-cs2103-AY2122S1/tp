@@ -76,11 +76,11 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`add student`**`-n John Doe -i E0123456` : Adds a student named `John Doe` with NUSNET ID `E0123456` into the database.
+    * **`addstudent`**`-n John Doe -i E0123456` : Adds a student named `John Doe` with NUSNET ID `E0123456` into the database.
 
-    * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` into the database and student `John Doe` into the group.
+    * **`addgroup`**`-g T01A -n John Doe` : Adds a group called `T01A` into the database and student `John Doe` into the group.
 
-    * **`add score`**`-a P01 -n John Doe -s 12`: Adds score for assessment `P01` as `12` for student `John Doe`.
+    * **`addscore`**`-a P01 -n John Doe -s 12`: Adds score for assessment `P01` as `12` for student `John Doe`.
 
     * **`search`**`-n John Doe` : Searches for student `John Doe`.
 
@@ -102,7 +102,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 * `<angled brackets>`: <br>
   Words in `<angled brackets>` are the parameters to be supplied by the user.<br>
-  e.g. in `add -n <student_name>`, `<student_name>` is a placeholder which can be used as `add -n John Doe`.
+  e.g. in `addsudent -n <student_name>`, `<student_name>` is a placeholder which can be used as `addstudent -n John Doe`.
 
 * `(round brackets)`: <br>
   Parameters in `(round brackets)` separated by `|` are mutually exclusive options for input. Only one input should to be supplied by the user.<br>
@@ -130,11 +130,11 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 [Return to table of contents](#table-of-contents)
 
 
-### Adding a student : `add student`
+### Adding a student : `addstudent`
 
 Adds a student into the database.
 
-Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag_name>]...`
+Format: `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag_name>]...`
 
 * Adds a new student into the database with the given name and NUSNET ID.
 * Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created.
@@ -142,18 +142,21 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 * There should not be an existing student with the same NUSNET ID. If there is, the student to be added is considered invalid.
 
 Examples:
-* `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID.
-* `add student -n Jonas Chow -i E0123456 -g T01A -g R01A` adds the student Jonas Chow and allocate him into groups `T01A` and `R01A`.
-* `add student -n Jonas Chow -i E0123456 -t beginner` adds the student Jonas Chow and tag him with `beginner`.
+* `addstudent -n Jonas Chow -i E0123456` 
+  * adds the student Jonas Chow with the given NUSNET ID.
+* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` 
+  * adds the student Jonas Chow and allocate him into groups `T01A` and `R01A`.
+* `addstudent -n Jonas Chow -i E0123456 -t beginner` 
+  * adds the student Jonas Chow and tag him with `beginner`.
 
 [Return to table of contents](#table-of-contents)
 
 
-### Creating a new group : `add group`
+### Creating a new group : `addgroup`
 
 Creates a new group and adds students into the group.
 
-Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
+Format: `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 
 * Creates a new group with the given group name. Group should not already exist.
 * Group name can be any number of alphanumeric words.
@@ -169,59 +172,59 @@ the clash, and the group would not be created.
 </div>
 
 Examples:
-* `add group -g T01A` 
+* `addgroup -g T01A` 
   * creates group `T01A`. 
-* `add group -g T01A -n Hong Yao -n Hong Fai` 
+* `addgroup -g T01A -n Hong Yao -n Hong Fai` 
   * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
-* `add group -g T01A -n Hong Yao -i E0123456` 
+* `addgroup -g T01A -n Hong Yao -i E0123456` 
   * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
-* `add group -g Require More Help -i E0123456` 
+* `addgroup -g Require More Help -i E0123456` 
   * creates group `Require More Help` and adds student with NUSNET ID `E0123456` into the group.
 
 [Return to table of contents](#table-of-contents)
 
 
-### Adding a student into a group : `add alloc`
+### Adding a student into a group : `addalloc`
 
 Allocates an existing student into an existing group.
 
-Format: `add alloc -g <group_name> (-n <student_name> | -i <student_id>)`
+Format: `addalloc -g <group_name> (-n <student_name> | -i <student_id>)`
 * Adds the student into an existing group specified by the group name. Group specified must already exist.
 * Students can be identified by their name or NUSNET ID.
   Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`.
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `add alloc -g T01A -n Zhiying` 
+* `addalloc -g T01A -n Zhiying` 
   * adds `Zhiying` into the tutorial group `T01A`.
-* `add alloc -g T02A -i E0123456` 
+* `addalloc -g T02A -i E0123456` 
   * adds student with NUSNET ID `E0123456` into tutorial group `T02A`.
 
 [Return to table of contents](#table-of-contents)
 
 
-### Creating a new assessment : `add assessment`
+### Creating a new assessment : `addassessment`
 
 Creates a new assessment in the database.
 
-Format: `add assessment -a <assessment_name>`
+Format: `addassessment -a <assessment_name>`
 * Assessment should not already exist in database.
 * Assessment name can be any number of alphanumeric words.
 
 Examples:
-* `add assessment -a P01` 
+* `addassessment -a P01` 
   * creates a new assessment `P01`.
-* `add assessment -a Midterm Assessment` 
+* `addassessment -a Midterm Assessment` 
   * creates a new assessment `Midterm Assessment`.
 
 [Return to table of contents](#table-of-contents)
 
 
-### Adding a score : `add score`
+### Adding a score : `addscore`
 
 Adds students' score for an existing assessment into the database.
 
-Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>`
+Format: `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>`
 * Assessment must already exist in database.
 * Updates the student's score if the student already has a score for the assessment.
 * Scores given should be in percentage out of a 100, and can be accurate to 2 decimal places.
@@ -230,9 +233,9 @@ Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `add score -a Midterm -n Van Nhi -s 95` 
+* `addscore -a Midterm -n Van Nhi -s 95` 
   * records score for `Van Nhi` in `Midterm` to be `95` percent.
-* `add score -a P01 -i E0123456 -s 75.25` 
+* `addscore -a P01 -i E0123456 -s 75.25` 
   * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
 
 [Return to table of contents](#table-of-contents)
@@ -469,7 +472,7 @@ Sets up an alias that can be used instead of a command.
 
 Format: `alias -c <existing_command> -as <alias>`
 
-* `<existing_command>` refers to any command keywords e.g. `search`, `add alloc`, `add student`.
+* `<existing_command>` refers to any command keywords e.g. `search`, `addalloc`, `addstudent`.
 * The `<alias>` can only be a single alphanumeric word.
 * Multiple aliases can be set for each command.
 * Default and existing aliases can still be used after new alias is added. e.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
@@ -600,11 +603,11 @@ Path | A string of characters to uniquely identify the location in the computer.
 
 Action | Format | Examples
 --------|--------|----------
-**Add Student** | `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag>]...` | e.g. `add student -n Jonas Chow -i E0123456 -g T01A -g R01A -t beginner`
-**Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` | e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
-**Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
-**Add Assessment** | `add assessment -a <assessment_name>` | e.g. `add assessment -a P01`
-**Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
+**Add Student** | `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag>]...` | e.g. `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A -t beginner`
+**Add Group** | `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...` | e.g. `addgroup -g FG1`, `addgroup -g FG1 -n John Doe -i E0123456`
+**Add Allocation** | `addalloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `addalloc -g T01A -n John Doe`, `addalloc -g T02A -i E0123456`
+**Add Assessment** | `addassessment -a <assessment_name>` | e.g. `addssessment -a P01`
+**Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `addscore -a P01 -n John Doe -s 12`, `addscore -a P02 -i E0123456 -s 12.5`
 **List** | `list` |
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe`, `search -g T02B R04D`
 **Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f <export_file_path>]` | e.g. `show -n Alex Yeoh`, `show -a P01`

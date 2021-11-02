@@ -26,7 +26,7 @@ import seedu.address.model.student.Student;
  */
 public class AddGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "add group";
+    public static final String COMMAND_WORD = "addgroup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates a new group with the specified students (if any). "
