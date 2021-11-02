@@ -200,7 +200,7 @@ Notes:
 Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find [n/NAME] [n/MORE_NAMES]…​ [t/TAG] [t/MORE_TAGS]…​`
+* `find [n/NAME] …​ [t/TAG] …​`
   * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
@@ -232,7 +232,7 @@ Notes:
 Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 #### Format:
-* `findAny [n/NAME] [n/MORE_NAMES]…​ [t/TAG] [t/MORE_TAGS]…​`
+* `findAny [n/NAME] …​ [t/TAG] …​`
   * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
