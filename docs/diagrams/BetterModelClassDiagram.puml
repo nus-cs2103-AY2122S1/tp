@@ -6,10 +6,12 @@ skinparam classBackgroundColor MODEL_COLOR
 
 ProgrammerError *-right-> "1" UniqueStudentList
 
-UniqueStudentList -right-> Student
+UniqueStudentList -right-> "*"Student
 
-Student *--> Name
-Student *--> StudentId
-Student *--> ClassId
-Student *--> Grade
+Student *--> "1"Name
+Student *--> "1"StudentId
+Student *--> "1"ClassId
+Student *--> "1"Email
+Student *--> "*"Lab
+
 @enduml

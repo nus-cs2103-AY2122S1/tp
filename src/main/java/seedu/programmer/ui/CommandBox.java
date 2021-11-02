@@ -121,6 +121,16 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    @FXML
+    private void handleFocusTextField() {
+        commandTextField.setStyle("-fx-border-color: #383838 #383838 #81A4CD #383838;\n");
+    }
+
+    @FXML
+    private void handleUnfocusTextField() {
+        commandTextField.setStyle("-fx-border-color: #383838 #383838 #ffffff #383838;\n");
+    }
+
     /**
      * Represents a function that can execute commands.
      */

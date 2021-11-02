@@ -1,7 +1,7 @@
 package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_TEMPLATE;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -31,6 +31,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap;
         Index index;
+        EditStudentDescriptor editstudentDescriptor;
 
         try {
             argMultimap =
@@ -42,34 +43,40 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         try {
+            // ParseException will be thrown from the parseIndex method if index from Preamble cannot be parsed
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            editstudentDescriptor = new EditStudentDescriptor();
+
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                editstudentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
+                editstudentDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap
+                        .getValue(PREFIX_STUDENT_ID).get()));
+            }
+            if (argMultimap.getValue(PREFIX_CLASS_ID).isPresent()) {
+                editstudentDescriptor.setClassId(ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASS_ID).get()));
+            }
+            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                editstudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            }
+            if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent()
+                    && argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
+                int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+                Integer result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null));
+                Lab labResult = new Lab(labNum);
+                editstudentDescriptor.setLab(labResult, result);
+            } else if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent()
+                    || argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
+                //if only one of the required two arguments provided, we will throw an exception
+                throw new ParseException(Lab.MESSAGE_LAB_SCORE_AND_LAB_NUMBER_REQUIREMENT);
+            }
+
+            if (!editstudentDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            }
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
-        EditStudentDescriptor editstudentDescriptor = new EditStudentDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editstudentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            editstudentDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap
-                    .getValue(PREFIX_STUDENT_ID).get()));
-        }
-        if (argMultimap.getValue(PREFIX_CLASS_ID).isPresent()) {
-            editstudentDescriptor.setClassId(ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASS_ID).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editstudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent() && argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
-            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-            Integer result = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null));
-            Lab labResult = new Lab(labNum);
-            editstudentDescriptor.setLab(labResult, result);
-        }
-
-        if (!editstudentDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(String.format(MESSAGE_TEMPLATE, pe.getMessage(), EditCommand.MESSAGE_USAGE));
         }
 
         return new EditCommand(index, editstudentDescriptor);

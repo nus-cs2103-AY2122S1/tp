@@ -46,7 +46,7 @@ public class LabResultListPanel extends UiPart<Region> {
                 setGraphic(new StudentCard(student).getRoot());
             } else {
                 Lab labResult = (Lab) item;
-                setGraphic(new LabResultCard(labResult, getIndex() + 1).getRoot());
+                setGraphic(new LabResultCard(labResult).getRoot());
             }
         }
     }

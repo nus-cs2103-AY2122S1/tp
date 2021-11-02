@@ -36,12 +36,12 @@ public class LabResultCard extends UiPart<Region> {
     /**
      * Creates a {@code labResultCode} with the given {@code labResult} and index to display.
      */
-    public LabResultCard(Lab result, int displayedIndex) {
+    public LabResultCard(Lab result) {
         super(FXML);
         this.result = result;
         labTitle.setText(result.toString());
         totalScore.setText("Total Score: " + result.getTotalScore().toString());
-        if (result.getActualScore().equals(0)) {
+        if (!result.isMarked()) {
             studentScore.setText("Actual Score: -");
         } else {
             studentScore.setText("Actual Score: " + result.getActualScore().toString());

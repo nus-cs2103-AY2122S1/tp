@@ -4,13 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 public class Lab implements DisplayableObject {
 
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
+    public static final String MESSAGE_LAB_SCORE_AND_LAB_NUMBER_REQUIREMENT =
+            "Both Lab Number and Score to be should be provided together.";
+    public static final String MESSAGE_LAB_NUMBER_CONSTRAINT = "Lab number should be a non-negative integer.";
+    public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
+    private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
+
 
     private int labNum;
     private Integer actualScore;
     private Integer totalScore;
 
     /**
+     * Constructs a marked Lab Object.
      * @param labNum the labNum of the lab
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
@@ -23,12 +29,13 @@ public class Lab implements DisplayableObject {
     }
 
     /**
+     * Constructs a unmarked Lab Object.
      * @param labNum the labNum of the lab
      * @param totalScore the total score */
     public Lab(int labNum, Integer totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
-        this.actualScore = 0;
+        this.actualScore = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
         this.totalScore = totalScore;
     }
 
@@ -78,7 +85,7 @@ public class Lab implements DisplayableObject {
     }
 
     public boolean isMarked() {
-        return !actualScore.equals(0);
+        return !actualScore.equals(UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
     }
 
     @Override

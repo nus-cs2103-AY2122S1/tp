@@ -34,15 +34,16 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" StudentListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow *-down-> "1" StudentCard
+MainWindow *-down-> "0..1" HelpWindow
+MainWindow *-down-> "0..1" DashboardWindow
 MainWindow *-down-> "1" LabResultListPanel
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" StudentListPanel
 
-PersonListPanel -down-> "*" PersonCard
 CommandBox -down-> "1" CommandHistory
-StudentListPanel -down-> "*" StudentCard
+StudentListPanel --> "*" StudentCard
+LabResultListPanel --> "*" LabResultCard
+LabResultListPanel --> "1" StudentCard
 
 MainWindow -left-|> UiPart
 
@@ -51,14 +52,15 @@ CommandBox --|> UiPart
 StudentListPanel --|> UiPart
 StudentCard --|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
 LabResultListPanel --|> UiPart
+HelpWindow --|> UiPart
+DashboardWindow --|> UiPart
 
-
-StudentCard ..> Model
+StudentCard .left.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
+LabResultCard -[hidden]right- LabResultListPanel
 StudentListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
