@@ -19,7 +19,7 @@ public class Position {
      * Every field must be present and not null.
      */
     public Position(Title title, Description description) {
-        requireAllNonNull(title);
+        requireAllNonNull(title, description);
         this.title = title;
         this.description = description;
     }

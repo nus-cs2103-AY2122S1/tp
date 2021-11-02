@@ -358,4 +358,25 @@ public class ModelManager implements Model {
 
         return memento.getMessage();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+        // state check
+        ModelManager other = (ModelManager) obj;
+        return positionBook.equals(other.positionBook)
+                && applicantBook.equals(other.applicantBook)
+                && filteredPositions.equals(other.filteredPositions)
+                && filteredApplicants.equals(other.filteredApplicants)
+                && userPrefs.equals(other.userPrefs);
+    }
 }

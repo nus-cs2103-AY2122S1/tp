@@ -299,7 +299,7 @@ public class AddPositionCommandTest {
         public void addToHistory(Command command) {
             return;
         }
-        
+
         @Override
         public boolean hasHistory() {
             throw new AssertionError("This method should not be called.");
