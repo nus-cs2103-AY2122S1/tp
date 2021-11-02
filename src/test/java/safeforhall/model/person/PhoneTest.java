@@ -1,5 +1,6 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
@@ -36,5 +37,16 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+    }
+
+    @Test
+    public void checkCompareTo() {
+        Phone p1 = new Phone("123");
+        Phone p2 = new Phone("234");
+        Phone p3 = new Phone("123");
+
+        assertEquals(p1.compareTo(p2), -1);
+        assertEquals(p2.compareTo(p1), 1);
+        assertEquals(p3.compareTo(p1), 0);
     }
 }
