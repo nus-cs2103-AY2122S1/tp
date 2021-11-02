@@ -13,10 +13,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CollectionUtil;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Address;
@@ -53,6 +56,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in FAST.";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -73,19 +78,25 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Edit Command: Invalid Index-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        boolean isDifferentPerson = !personToEdit.isSamePerson(editedPerson);
+        boolean isPersonInModel = model.hasPerson(editedPerson);
+        if (isDifferentPerson && isPersonInModel) {
+            logger.warning("-----Invalid Edit Command: Duplicated Client-----");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Edit Command: Edited Client Successfully-----");
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

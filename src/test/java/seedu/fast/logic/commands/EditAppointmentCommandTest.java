@@ -125,75 +125,6 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
-    public void execute_dateFieldSpecifiedFilteredList_success() {
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
-                .build();
-        Appointment editedAppt = editedPerson.getAppointment();
-        EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
-
-        EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
-                new EditAppointmentDescriptor(desc));
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
-                editedAppt.getVenue());
-
-        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
-
-        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_timeFieldSpecifiedFilteredList_success() {
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
-                .build();
-        Appointment editedAppt = editedPerson.getAppointment();
-        EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
-
-        EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
-                new EditAppointmentDescriptor(desc));
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
-                editedAppt.getVenue());
-
-        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
-
-        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_venueFieldSpecifiedFilteredList_success() {
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
-                .build();
-        Appointment editedAppt = editedPerson.getAppointment();
-        EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
-
-        EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
-                new EditAppointmentDescriptor(desc));
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
-                editedAppt.getVenue());
-
-        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
-
-        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_editNonExistingAppointmentFilteredList_failure() {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -206,7 +137,7 @@ public class EditAppointmentCommandTest {
         EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor(desc));
 
-        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_ERROR;
+        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT;
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -265,72 +196,6 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
-    public void execute_dateFieldSpecifiedUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
-                .build();
-        Appointment editedAppt = editedPerson.getAppointment();
-        EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
-
-        EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
-                new EditAppointmentDescriptor(desc));
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
-                editedAppt.getVenue());
-
-        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
-
-        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_timeFieldSpecifiedUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
-                .build();
-        Appointment editedAppt = editedPerson.getAppointment();
-        EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
-
-        EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
-                new EditAppointmentDescriptor(desc));
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
-                editedAppt.getVenue());
-
-        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
-
-        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_venueFieldSpecifiedUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
-                .build();
-        Appointment editedAppt = editedPerson.getAppointment();
-        EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
-
-        EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
-                new EditAppointmentDescriptor(desc));
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
-                editedAppt.getVenue());
-
-        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
-
-        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_editNonExistingAppointmentUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
@@ -342,7 +207,7 @@ public class EditAppointmentCommandTest {
         EditAppointmentCommand appointmentCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor(desc));
 
-        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_ERROR;
+        String expectedMessage = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_NO_APPT;
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }

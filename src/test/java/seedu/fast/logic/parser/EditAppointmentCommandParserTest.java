@@ -102,7 +102,7 @@ public class EditAppointmentCommandParserTest {
         String expectedMessageInvalidCommand = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditAppointmentCommand.MESSAGE_USAGE);
 
-        String expectedMessageMissingAllFields = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED
+        String expectedMessageMissingAllFields = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_MISSING_FIELDS
                 + "\n" + EditAppointmentCommand.MESSAGE_USAGE;
 
         String expectedMessageWrongDateFormat = String.format(MESSAGE_INVALID_COMMAND_FORMAT,

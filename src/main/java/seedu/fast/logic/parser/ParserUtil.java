@@ -40,8 +40,6 @@ public class ParserUtil {
         "Edit", "Find", "List", "Help", "Remark", "Sort", "Statistics", "Tag", "Investment Plan Tag",
         "Priority Tag", "Misc"};
 
-
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -264,7 +262,6 @@ public class ParserUtil {
     public static String parseDateString(String date) throws ParseException {
         try {
             checkDate(date);
-
             // converts the date to the specified format
             date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException dtpe) {

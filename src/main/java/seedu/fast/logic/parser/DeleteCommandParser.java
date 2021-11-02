@@ -78,6 +78,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
         }
 
+        return generateIndexesInRange(result, startIndex, endIndex);
+    }
+
+    private Index[] generateIndexesInRange(Index[] result, Index startIndex, Index endIndex) {
         int count = 0;
         for (int i = startIndex.getOneBased(); i <= endIndex.getOneBased(); i++) {
             result[count++] = Index.fromOneBased(i);

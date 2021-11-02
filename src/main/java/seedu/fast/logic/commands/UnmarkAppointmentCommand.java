@@ -4,9 +4,12 @@ import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
@@ -24,11 +27,13 @@ public class UnmarkAppointmentCommand extends Command {
 
     public static final String MESSAGE_UNMARK_APPOINTMENT_SUCCESS = "Successfully undo marking of appointment with "
             + "%1$s.";
-    public static final String MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO = "You cannot undo marking of appointment "
+    public static final String MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO_COUNT = "You cannot undo marking of appointment "
             + "if you have not done any appointment!";
 
-    public static final String MESSAGE_UNMARK_APPOINTMENT_FAILURE_EXIST = "You cannot undo marking of appointment "
+    public static final String MESSAGE_UNMARK_APPOINTMENT_FAILURE_APPT_EXIST = "You cannot undo marking of appointment "
             + "if you have a scheduled appointment with %1$s currently!";
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private final Index index;
     private final Appointment appointment;
@@ -50,7 +55,8 @@ public class UnmarkAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Unmark Appointment Command: Invalid Index-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -58,12 +64,14 @@ public class UnmarkAppointmentCommand extends Command {
 
         // AppointmentCount cannot go below 0.
         if (!AppointmentCount.isValidDecrementCount(personToEdit.getCount())) {
-            throw new CommandException(MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO);
+            logger.warning("-----Invalid Unmark Appointment Command: Appointment Count cannot go below 0-----");
+            throw new CommandException(MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO_COUNT);
         }
 
         // Has an appointment -> means did not accidentally mark an appointment as completed.
-        if (!(personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT))) {
-            throw new CommandException(String.format(MESSAGE_UNMARK_APPOINTMENT_FAILURE_EXIST,
+        if (!(Appointment.isAppointmentEmpty(personToEdit.getAppointment()))) {
+            logger.warning("-----Invalid Unmark Appointment Command: Appointment Exist-----");
+            throw new CommandException(String.format(MESSAGE_UNMARK_APPOINTMENT_FAILURE_APPT_EXIST,
                     personToEdit.getName()));
         }
 
@@ -74,6 +82,7 @@ public class UnmarkAppointmentCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Unmark Appointment Command: Appointment unmarked successfully-----");
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }

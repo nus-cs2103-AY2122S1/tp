@@ -3,9 +3,12 @@ package seedu.fast.logic.commands;
 import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
+import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
@@ -31,6 +34,8 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Client: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Client: %1$s";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Index index;
     private Remark remark;
 
@@ -51,7 +56,8 @@ public class RemarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (CommandUtil.checkIndexExceedLimit(index, lastShownList)) {
+            logger.warning("-----Invalid Remark Command: Invalid Index-----");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -63,6 +69,7 @@ public class RemarkCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("-----Remark Command: Remark added successfully-----");
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }

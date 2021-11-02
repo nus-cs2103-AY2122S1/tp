@@ -93,6 +93,20 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final Name modelName = getName();
+        final Phone modelPhone = getPhone();
+        final Email modelEmail = getEmail();
+        final Address modelAddress = getAddress();
+        final Remark modelRemark = getRemark();
+        final Appointment modelAppointment = getAppointment();
+        final AppointmentCount apptCount = getAppointmentCount();
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
+                modelAppointment, apptCount);
+    }
+
+    private Name getName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Name.class.getSimpleName()));
@@ -101,7 +115,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+        return modelName;
+    }
 
+    private Phone getPhone() throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Phone.class.getSimpleName()));
@@ -110,7 +127,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
+        return modelPhone;
+    }
 
+    private Email getEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Email.class.getSimpleName()));
@@ -119,7 +139,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
+        return modelEmail;
+    }
 
+    private Address getAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Address.class.getSimpleName()));
@@ -128,7 +151,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        return modelAddress;
+    }
 
+    private Remark getRemark() throws IllegalValueException {
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
@@ -137,7 +163,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
         }
         final Remark modelRemark = new Remark(remark);
+        return modelRemark;
+    }
 
+    private Appointment getAppointment() throws IllegalValueException {
         if (appointmentDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appointment.class.getSimpleName()));
@@ -167,7 +196,10 @@ class JsonAdaptedPerson {
 
         final Appointment modelAppointment = new Appointment(appointmentDate, appointmentTime,
                 appointmentVenue);
+        return modelAppointment;
+    }
 
+    private AppointmentCount getAppointmentCount() throws IllegalValueException {
         if (appointmentCount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppointmentCount.class.getSimpleName()));
@@ -178,11 +210,6 @@ class JsonAdaptedPerson {
         }
 
         final AppointmentCount apptCount = new AppointmentCount(appointmentCount);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
-                modelAppointment, apptCount);
+        return apptCount;
     }
-
 }
