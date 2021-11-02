@@ -86,7 +86,6 @@ public class MainApp extends Application {
 
         try {
             scheduleOptional = storage.readSchedule();
-            // TODO: Create sample data
             if (!scheduleOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Schedule");
             }
@@ -108,6 +107,7 @@ public class MainApp extends Application {
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
+            initialSchedule = new Schedule();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
