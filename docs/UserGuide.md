@@ -39,7 +39,7 @@ _text_ | Caption for images.
 :exclamation: | Indication that the following text is important.
 
 ### Command Format
-Commands in TAB have several components and follow a general format as follows:<br/>
+Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
 
 ```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER_VALUE…​```
 
