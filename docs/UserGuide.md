@@ -412,6 +412,10 @@ Users can add, remove, or edit remarks through the editor window.
 ![Remark editor](images/remark_editor_student.png)
 <p align="center"><i>Figure 4: Editing remarks with editor window</i></p>
 
+<div markdown="span" class="alert alert-primary">
+:warning: For MacOS users, the remarks editor may open as a new tab instead of a window, which can cause a UI bug where the buttons are not displayed correctly. To open as a new window instead, go to System preferences > General > Prefer tabs and choose never. 
+</div>
+
 #### Adding remark to a student: `remark` | `re`
 
 Adds a remark for a student. 
@@ -589,9 +593,19 @@ The requirements of the various parameters used are explained below. Head back t
 
 ### 4.1 Name
 
-Student name is unique. There cannot be 2 or more students registered with the exact same name.
+Student name is unique, i.e., there cannot be 2 or more students registered with the same name. TutAssistor ignores
+letter case and trivial whitespaces when it checks for duplicate names.
+
+Note that if you successfully add a student, the name will appear exactly as what you typed, including trivial whitespaces.
+
+For example, when adding a new student, given an existing student named `John Doe`, 
+
+- Valid: `John Doe the Great` 
+- Invalid: `john doe`, `John   Doe`
 
 Names for tuition classes may be reused.
+
+For example, given an existing class named `Biology`, you may add a new class also named `Biology`.
 
 ### 4.2 Phone Number
 Phone number should only contain digits, and should be at least 3 digits long.
