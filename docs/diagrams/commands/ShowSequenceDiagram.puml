@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 actor User
 
 box UI UI_COLOR_T1
