@@ -56,7 +56,7 @@ public class PasswordCommandParserTest {
 
     @Test
     public void parse_wrongPassword_failure() {
-        String expectedMessage = passwordCommandErrorMessageGenerator(MESSAGE_WRONG_PASSWORD);
+        String expectedMessage = MESSAGE_WRONG_PASSWORD;
         assertParseFailure(parser, PasswordUtil.getPasswordCommand(inValidPassword, validPassword), expectedMessage);
     }
 

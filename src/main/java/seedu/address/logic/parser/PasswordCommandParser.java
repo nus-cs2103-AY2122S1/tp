@@ -39,7 +39,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // one of the passwords is empty
         if (oldInput.isEmpty() || newInput.isEmpty()) {
-            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_INVALID_COMMAND_FORMAT));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
 
         String oldPassword = oldInput.get();
@@ -47,7 +47,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // old password invalid format(wrong)
         if (!isValidPassword(oldPassword)) {
-            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_WRONG_PASSWORD));
+            throw new ParseException(String.format(MESSAGE_WRONG_PASSWORD, PasswordCommand.MESSAGE_USAGE));
         }
 
         // new password invalid format
