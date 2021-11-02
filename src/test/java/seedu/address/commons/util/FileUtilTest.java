@@ -40,7 +40,7 @@ public class FileUtilTest {
         assertTrue(FileUtil.isValidPath("valid/file/path"));
 
         // invalid path (wrong use of backslash)
-        assertFalse(FileUtil.isValidPath("valid\file/path"));
+        assertFalse(FileUtil.isValidPath("a\0"));
 
         // null path -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> FileUtil.isValidPath(null));
