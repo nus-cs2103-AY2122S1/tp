@@ -18,7 +18,7 @@ if () then ([recognised command])
             :Save Fast to
             fastStateList;
             else ([1 invalid])
-            - Thrown Exception
+            - Throw Exception
             endif
         else ([other command])
         - Handled by the corresponding classes

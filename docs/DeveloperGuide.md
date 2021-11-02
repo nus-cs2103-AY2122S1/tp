@@ -52,15 +52,15 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 There are the 6 major components of **FAST**:
-1) **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/MainApp.java). It is responsible for,
+1. **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/MainApp.java). It is responsible for,
    * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
    * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-2) [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-3) [**`UI`**](#ui-component): The UI of the **FAST**.
-4) [**`Logic`**](#logic-component): The command executor.
-5) [**`Model`**](#model-component): Holds the data of the **FAST** in memory.
-6) [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+2. [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+3. [**`UI`**](#ui-component): The UI of the **FAST**.
+4. [**`Logic`**](#logic-component): The command executor.
+5. [**`Model`**](#model-component): Holds the data of the **FAST** in memory.
+6. [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 Each of the four main components(*labelled 3-6*) (also shown in the diagram above),
 
@@ -1366,7 +1366,7 @@ Character limit:
 #### Deleting an appointment
 1. Deletes an existing appointment in FAST
     1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
-   
+
     2. **Test Case**: `da 1` <br>
        **Expected**: Deletes the appointment of the first client in the displayed list. Success message with client name is shown.
    
