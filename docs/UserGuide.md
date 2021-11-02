@@ -352,7 +352,7 @@ Format: `clear`
 
 See Also:
 
-[setDefaultShiftTimings Command](#setting-default-shift-timings--setdefaultshifttimings-)
+[setDefaultShiftTimings Command](#setting-default-shift-timings--setdefaultshifttimings-)\
 [setRoleReq Command](#setting-role-requirements--setrolereq-)
 
 #### Exiting the program : `exit`
