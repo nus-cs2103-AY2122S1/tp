@@ -167,7 +167,7 @@ Format: `help`
 ### Toggling between tabs: `toggle` <a name="toggle"/>
 
 Toggles between `Patients` and `Doctors` tab.<br>
-Commands enters only applies on the currently displayed tab. (eg. If the currently displayed tab the `add` command will add a patient to the records.)
+Commands enters only applies on the currently displayed tab. (eg. If the currently displayed tab is the patient tab, the `add` command will add a patient to the records.)
 
 Format: `toggle`
 * toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
