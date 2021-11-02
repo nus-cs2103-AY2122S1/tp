@@ -215,11 +215,21 @@ Format: `export email FILENAME`
 
 Undoes a previously executed command. `undo` can reverse any commands executed after the program was last started (except `undo`, `export`, and `exit`).
 
+After executing the `undo` command, the remaining number of commands that can be undid is displayed. For example, the following output shows that there are 2 more commands that can be undid; the `undo` command can be executed 2 more times.
+
+> Undo successful  
+> Remaining undo count: 2
+
 Format: `undo`
 
 ### Redoing a command: `redo`
 
 Re-performs a command that was undone. `redo` can redo any undone command up to the last executed command; executing a command that is not `undo` or `redo` will clear the redo history.
+
+After executing the `redo` command, the remaining number of commands that can be redone is displayed. For example, the following output shows that there are 3 more commands that can be redone.
+
+> Undo successful  
+> Remaining undo count: 3
 
 Format: `redo`
 
