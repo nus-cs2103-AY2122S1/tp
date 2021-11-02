@@ -51,6 +51,10 @@ public class Facility {
         return capacity;
     }
 
+    public int getCapacityAsInt() {
+        return Integer.parseInt(capacity.capacity);
+    }
+
     public AllocationMap getAllocationMap() {
         return allocationMap;
     }
