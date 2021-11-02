@@ -74,7 +74,7 @@ class FindOrderCommandTest {
     @Test
     public void execute_multipleKeywords_multipleOrdersFound() {
         String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 3);
-        OrderContainsKeywordsPredicate predicate = preparePredicate("Josh Mac Clark");
+        OrderContainsKeywordsPredicate predicate = preparePredicate("Josh testorder2 2021-09-20");
         FindOrderCommand command = new FindOrderCommand(predicate);
         expectedModel.updateFilteredOrderList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

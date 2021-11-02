@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.TASK1;
 import static seedu.address.testutil.TypicalTasks.TASK2;
 import static seedu.address.testutil.TypicalTasks.TASK3;
-import static seedu.address.testutil.TypicalTasks.TASK4;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import java.util.Arrays;
@@ -75,12 +74,12 @@ class FindTaskCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleOrdersFound() {
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 4);
-        TaskContainsKeywordsPredicate predicate = preparePredicate("buttons");
+        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
+        TaskContainsKeywordsPredicate predicate = preparePredicate("red 19 SO3");
         FindTaskCommand command = new FindTaskCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TASK1, TASK2, TASK3, TASK4), model.getFilteredTaskList());
+        assertEquals(Arrays.asList(TASK1, TASK2, TASK3), model.getFilteredTaskList());
     }
 
     /**

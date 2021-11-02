@@ -237,19 +237,24 @@ public class EditCommandTest {
     @Test
     public void editPersonDescriptorEquals() {
         final EditPersonDescriptor standardDescriptor = new EditPersonDescriptor();
-        final EditPersonDescriptor otherDescriptor = new EditPersonDescriptor();
+        final EditPersonDescriptor otherDescriptorEqual = new EditPersonDescriptor();
+        final EditPersonDescriptor otherDescriptorNotEqual = new EditPersonDescriptor();
+        otherDescriptorNotEqual.setName(new Name(VALID_NAME_AMY));
 
         //equals to itself
         assertTrue(standardDescriptor.equals(standardDescriptor));
 
         //equals when the fields are the same
-        assertTrue(standardDescriptor.equals(otherDescriptor));
+        assertTrue(standardDescriptor.equals(otherDescriptorEqual));
 
         //equals null is false
         assertFalse(standardDescriptor.equals(null));
 
         //equals other objects is false
         assertFalse(standardDescriptor.equals(new OrderBuilder().build()));
+
+        //not same fields is not equal
+        assertFalse(standardDescriptor.equals(otherDescriptorNotEqual));
     }
 
 }

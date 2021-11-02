@@ -87,6 +87,14 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code id} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * builds the Order.
      */
     public Order build() {
