@@ -106,8 +106,8 @@ Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
 Personal data fields  | 1. `n/` : Name <br><br> 2. `e/` : Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
 University data fields   | 3. `f/` : Faculty <br><br>  4. `m/` : Major | 3. NUS Faculties: <br> fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law <br><br> 4. Alphanumeric |Compulsory
-Skill data fields | 5. `s/` : Skill <br><br> 6. `l/` : Programming Language <br><br> 7. `fr/`: Framework | 5. Alphanumeric <br><br> 6. Alphanumeric <br><br> 7. Alphanumeric| Optional
-Miscellaneous data fields| 8. `r/` : Remark <br><br> 9. `int/` : Interaction <br><br> 10. `compat/` : Compatability | 8. Alphanumeric <br><br> 9. Alphanumeric, Date <br><br> 10. 0 - 100 | Optional
+Skill data fields | 5. `s/` : Skill <br><br> 6. `l/` : Programming Language <br><br> 7. `fr/` : Framework | 5. Alphanumeric <br><br> 6. Alphanumeric and the '+' and '#' characters <br><br> 7. Alphanumeric and the '.' character| Optional
+Miscellaneous data fields| 8. `t/` : Tag <br><br> 9. `r/` : Remark <br><br> 10. `int/` : Interaction <br><br> 11. `compat/` : Compatability | 8. Alphanumeric, less than or equal to 30 characters <br><br> 9. Alphanumeric <br><br> 10. Alphanumeric, Date <br><br> 11. 0 - 100 | Optional
 
 <div markdown="block" class="alert alert-info">
 :information_source: Elaboration on valid items
@@ -464,7 +464,7 @@ System Command | Format, Examples
 
 Contact-specific Command | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR compat/COMPATABILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
+**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
 **Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Append** | `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `append 3 s/web devevelopment l/python t/classmate`
 **Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
