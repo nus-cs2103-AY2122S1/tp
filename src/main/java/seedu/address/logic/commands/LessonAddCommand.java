@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -35,6 +36,7 @@ public class LessonAddCommand extends UndoableCommand {
             + PREFIX_TIME + "HHmm-HHmm "
             + PREFIX_RATES + "RATES "
             + PREFIX_SUBJECT + "SUBJECT "
+            + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING_FEES] "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;

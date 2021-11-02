@@ -374,7 +374,7 @@ Outstanding fees  | `f/` | Constraints for fees follow that of lesson rates. | `
 
 Adds a lesson to the specified student in TAB.
 
-Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES f/OUTSTANDING_FEES [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
