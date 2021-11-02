@@ -6,6 +6,7 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.FilterCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.ModuleContainsKeywordsPredicate;
@@ -25,7 +26,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_MOD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MOD)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || StringUtil.countMatch(args, '/') != 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 

@@ -1,5 +1,6 @@
 package seedu.modulink.logic.parser;
 
+import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2103T;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
@@ -32,6 +33,7 @@ public class EditGroupStatusCommandParserTest {
         EditCommand.EditPersonDescriptor descriptor =
                 new EditPersonDescriptorBuilder().withTags(VALID_TAG_CS2100, VALID_TAG_CS2103T).build();
         EditGroupStatusCommand expectedCommand = new EditGroupStatusCommand(descriptor);
-        assertParseFailure(parser, userInput, EditGroupStatusCommand.MESSAGE_MULTIPLE_MODULES_SPECIFIED);
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupStatusCommand.MESSAGE_USAGE));
     }
 }

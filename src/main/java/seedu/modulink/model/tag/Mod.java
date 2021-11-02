@@ -3,6 +3,9 @@ package seedu.modulink.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.util.AppUtil.checkArgument;
 
+import seedu.modulink.logic.parser.exceptions.ParseException;
+
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -25,7 +28,7 @@ public class Mod {
      *
      * @param modString A valid tag name.
      */
-    public Mod(String modString) {
+    public Mod(String modString) throws ParseException {
         requireNonNull(modString);
 
         this.oriInput = modString;

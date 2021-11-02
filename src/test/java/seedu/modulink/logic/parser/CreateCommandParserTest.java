@@ -61,34 +61,9 @@ public class CreateCommandParserTest {
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
-
-        // multiple student IDs - last student ID accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY
-                + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
-
-        // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_AMY + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
-
-        // multiple GitHub usernames - last username accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_AMY + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
-
-        // multiple Telegram handles - last handle accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_AMY + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
+                + TAG_DESC_CS2100, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_CS2100, VALID_TAG_CS2103T)

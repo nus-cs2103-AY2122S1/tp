@@ -2,7 +2,6 @@ package seedu.modulink.logic.parser;
 
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -16,7 +15,6 @@ import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_GITHUB_USERNAME_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -73,10 +71,6 @@ public class EditCommandParserTest {
 
         // invalid phone followed by valid email
         assertParseFailure(parser, INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
-        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
@@ -141,36 +135,6 @@ public class EditCommandParserTest {
         // Telegram handle
         userInput = TELEGRAM_HANDLE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).build();
-        expectedCommand = new EditCommand(descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
-        String userInput = PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB)
-                .build();
-        EditCommand expectedCommand = new EditCommand(descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
-        // no other valid values specified
-        String userInput = INVALID_PHONE_DESC + PHONE_DESC_BOB;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
-        EditCommand expectedCommand = new EditCommand(descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // other valid values specified
-        userInput = EMAIL_DESC_BOB + INVALID_PHONE_DESC
-                + PHONE_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         expectedCommand = new EditCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

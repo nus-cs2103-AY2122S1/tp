@@ -1,5 +1,7 @@
 package seedu.modulink.model.tag;
 
+import seedu.modulink.logic.parser.exceptions.ParseException;
+
 public enum Status {
     NONE("G"),
     NEED_GROUP("SG"),
@@ -50,8 +52,13 @@ public enum Status {
      * @param s the given string.
      * @return the matching status
      */
-    public static Status parseStatusFromString(String s) {
+    public static Status parseStatusFromString(String s) throws ParseException {
         s = s.trim();
+        s = s.toLowerCase();
+        if (!isValidStatus(s)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
+
         if (s.equalsIgnoreCase("need group")) {
             return Status.NEED_GROUP;
         } else if (s.equalsIgnoreCase("need member")

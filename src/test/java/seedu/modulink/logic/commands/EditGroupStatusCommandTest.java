@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.modulink.logic.commands.exceptions.CommandException;
+import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.UserPrefs;
@@ -28,7 +29,7 @@ public class EditGroupStatusCommandTest {
     }
 
     @Test
-    void execute_editGroupStatus_success() throws CommandException {
+    void execute_editGroupStatus_success() throws CommandException, ParseException {
         Person editedPerson = new PersonBuilder().withTags("CS2103T").buildProfile();
         model.addPerson(editedPerson);
         EditCommand.EditPersonDescriptor descriptor =

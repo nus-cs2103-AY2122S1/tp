@@ -65,4 +65,17 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns the number of occurrences of {@param c} in {@param s}.
+     */
+    public static int countMatch(String s, char c) {
+        int n = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (c == s.charAt(i)) {
+                n++;
+            }
+        }
+        return n;
+    }
 }

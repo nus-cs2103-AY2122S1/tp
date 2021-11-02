@@ -5,16 +5,16 @@ import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.EditGroupStatusCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.tag.Mod;
 
-public class EditGroupStatusCommandParser implements Parser {
+public class EditGroupStatusCommandParser implements Parser<EditGroupStatusCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditGroupStatusCommand
      * and returns an EditGroupStatusCommand object for execution.
@@ -26,7 +26,8 @@ public class EditGroupStatusCommandParser implements Parser {
                 ArgumentTokenizer.tokenize(args, PREFIX_MOD);
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (trimmedArgs.isEmpty()
+            || StringUtil.countMatch(args, '/') != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupStatusCommand.MESSAGE_USAGE));
         }
@@ -58,7 +59,10 @@ public class EditGroupStatusCommandParser implements Parser {
             throw new ParseException(EditGroupStatusCommand.MESSAGE_MULTIPLE_MODULES_SPECIFIED);
         }
 
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        if (tags.contains("")) {
+            throw new ParseException(EditGroupStatusCommand.MESSAGE_NO_MODULE_SPECIFIED);
+        } else {
+            return Optional.of(ParserUtil.parseTags(tags));
+        }
     }
 }

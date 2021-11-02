@@ -12,6 +12,7 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.Email;
@@ -40,7 +41,8 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                         PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE, PREFIX_MOD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()
+                || numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
         }
 
@@ -58,6 +60,37 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 telegramHandle, false, modList, true);
 
         return new CreateCommand(person);
+    }
+
+    /**
+     * Checks how many valid prefixes are present in args.
+     *
+     * @param argMultimap tokenized list of arguments.
+     * @return number of provided prefixes.
+     */
+    private int numberOfValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        int i = 0;
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
+            i++;
+        }
+
+        i += ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD)).size();
+        return i;
     }
 
     /**

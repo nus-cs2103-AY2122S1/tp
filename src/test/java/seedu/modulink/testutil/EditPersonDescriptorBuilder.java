@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.Email;
 import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
@@ -96,7 +97,13 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... mods) {
-        Set<Mod> modSet = Stream.of(mods).map(Mod::new).collect(Collectors.toSet());
+        Set<Mod> modSet = Stream.of(mods).map(modString -> {
+            try {
+                return new Mod(modString);
+            } catch (ParseException e) {
+                return null;
+            }
+        }).collect(Collectors.toSet());
         descriptor.setTags(modSet);
         return this;
     }

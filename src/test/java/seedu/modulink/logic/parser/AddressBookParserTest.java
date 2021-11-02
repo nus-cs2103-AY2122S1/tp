@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.modulink.logic.commands.ClearCommand;
 import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.commands.DeleteCommand;
 import seedu.modulink.logic.commands.EditCommand;
@@ -40,12 +39,6 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         CreateCommand command = (CreateCommand) parser.parseCommand(PersonUtil.getCreateCommand(person));
         assertEquals(new CreateCommand(person), command);
-    }
-
-    @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
