@@ -59,6 +59,16 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     private DeletePersonCommand deleteByModuleCode(List<String> moduleCodes) throws ParseException {
         List<String> stringListOfModuleCodes = ParserUtil.parseModuleCodes(moduleCodes).stream()
                 .map(moduleCode -> moduleCode.toString())
+                .map(string -> {
+                    String temp = string;
+                    if (string.contains("[")) {
+                        temp = temp.substring(temp.indexOf("[") + 1);
+                    }
+                    if (string.contains("]")) {
+                        temp = temp.substring(0, temp.indexOf("]"));
+                    }
+                    return temp;
+                })
                 .collect(Collectors.toList());
         ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
         if (moduleCodes.size() > 1) {

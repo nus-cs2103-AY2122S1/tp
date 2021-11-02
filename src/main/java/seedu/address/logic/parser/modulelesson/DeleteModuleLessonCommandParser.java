@@ -57,6 +57,16 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
         }
         List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
                 .map(ModuleCode::toString)
+                .map(string -> {
+                    String temp = string;
+                    if (string.contains("[")) {
+                        temp = temp.substring(temp.indexOf("[") + 1);
+                    }
+                    if (string.contains("]")) {
+                        temp = temp.substring(0, temp.indexOf("]"));
+                    }
+                    return temp;
+                })
                 .collect(Collectors.toList());
         return new DeleteModuleLessonCommand(
                 new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(listOfModuleCode.get(0)))
