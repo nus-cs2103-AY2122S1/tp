@@ -40,12 +40,16 @@ This section gives you a quick summary on how to download and run our applicatio
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases/tag/v1.3.trial).
+1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases/tag/v1.3.1).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Module Tracker.
 
 1. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note that the Module Tracker comes with some sample modules.<br>
    ![NewUserUi](images/NewUserUi.png)
+
+<div markdown="span" class="alert alert-primary">:bulb:
+If double-clicking does not work, trying launching our application through a terminal with the command `java -jar "modtracker.jar"` 
+</div><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
