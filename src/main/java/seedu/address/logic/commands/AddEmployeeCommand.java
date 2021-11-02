@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -31,7 +31,7 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_LEAVES + " LEAVES "
             + PREFIX_SALARY + " SALARY "
-            + PREFIX_JOBTITLE + " JOB TITLE "
+            + PREFIX_JOB_TITLE + " JOB TITLE "
             + "[" + PREFIX_SHIFT + "SHIFT]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
@@ -41,7 +41,7 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_LEAVES + "14 "
             + PREFIX_SALARY + "5000 "
-            + PREFIX_JOBTITLE + "Head Chef "
+            + PREFIX_JOB_TITLE + "Head Chef "
             + PREFIX_SHIFT + "2021-12-24 0800 "
             + PREFIX_TAG + "Team C";
 

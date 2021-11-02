@@ -4,20 +4,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_JOB_TITLE_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_JOB_TITLE_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SALARY_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SALARY_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SHIFTS_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SHIFTS_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,13 +75,13 @@ public class TypicalEmployees {
     public static final Employee AMY_EMPLOYEE = new EmployeeBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withTags(VALID_TAG_FRIEND)
-            .withLeaves(VALID_LEAVES_AMY).withSalary(VALID_SALARY_AMY).withJobTitle(VALID_JOBTITLE_AMY)
+            .withLeaves(VALID_LEAVES_AMY).withSalary(VALID_SALARY_AMY).withJobTitle(VALID_JOB_TITLE_AMY)
             .withShifts(VALID_SHIFTS_AMY)
             .build();
     public static final Employee BOB_EMPLOYEE = new EmployeeBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withLeaves(VALID_LEAVES_BOB).withSalary(VALID_SALARY_BOB).withJobTitle(VALID_JOBTITLE_BOB)
+            .withLeaves(VALID_LEAVES_BOB).withSalary(VALID_SALARY_BOB).withJobTitle(VALID_JOB_TITLE_BOB)
             .withShifts(VALID_SHIFTS_BOB, VALID_SHIFTS_AMY)
             .build();
 

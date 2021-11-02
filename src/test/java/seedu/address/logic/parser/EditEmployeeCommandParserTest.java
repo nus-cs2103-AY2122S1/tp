@@ -7,41 +7,41 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOBTITLE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHIFT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.LEAVES_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.LEAVES_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.INVALID_JOB_TITLE_DESC;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.INVALID_LEAVES_DESC;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.INVALID_SALARY_DESC;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.INVALID_SHIFT_DESC;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.JOB_TITLE_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.JOB_TITLE_DESC_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.LEAVES_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.LEAVES_DESC_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.SALARY_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.SALARY_DESC_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.SHIFTS_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_JOB_TITLE_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_JOB_TITLE_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SALARY_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SALARY_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_SHIFTS_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -110,7 +110,7 @@ public class EditEmployeeCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_LEAVES_DESC, Leaves.MESSAGE_CONSTRAINTS); // invalid leaves
         assertParseFailure(parser, "1" + INVALID_SALARY_DESC, Salary.MESSAGE_CONSTRAINTS); //invalid salary
-        assertParseFailure(parser, "1" + INVALID_JOBTITLE_DESC, JobTitle.MESSAGE_CONSTRAINTS); // invalid job
+        assertParseFailure(parser, "1" + INVALID_JOB_TITLE_DESC, JobTitle.MESSAGE_CONSTRAINTS); // invalid job
         assertParseFailure(parser, "1" + INVALID_SHIFT_DESC, Shift.MESSAGE_CONSTRAINTS); // invalid shift
 
         // invalid phone followed by valid email
@@ -201,8 +201,8 @@ public class EditEmployeeCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // job title
-        userInput = targetIndex.getOneBased() + JOBTITLE_DESC_AMY;
-        descriptor = new EditEmployeeDescriptorBuilder().withJobTitle(VALID_JOBTITLE_AMY).build();
+        userInput = targetIndex.getOneBased() + JOB_TITLE_DESC_AMY;
+        descriptor = new EditEmployeeDescriptorBuilder().withJobTitle(VALID_JOB_TITLE_AMY).build();
         expectedCommand = new EditEmployeeCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -224,14 +224,14 @@ public class EditEmployeeCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + LEAVES_DESC_AMY
-                + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + TAG_DESC_FRIEND
+                + SALARY_DESC_AMY + JOB_TITLE_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + LEAVES_DESC_BOB + SALARY_DESC_BOB
-                + JOBTITLE_DESC_BOB + TAG_DESC_HUSBAND;
+                + JOB_TITLE_DESC_BOB + TAG_DESC_HUSBAND;
 
 
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .withLeaves(VALID_LEAVES_BOB).withSalary(VALID_SALARY_BOB).withJobTitle(VALID_JOBTITLE_BOB)
+                .withLeaves(VALID_LEAVES_BOB).withSalary(VALID_SALARY_BOB).withJobTitle(VALID_JOB_TITLE_BOB)
                 .build();
         EditEmployeeCommand expectedCommand = new EditEmployeeCommand(targetIndex, descriptor);
 

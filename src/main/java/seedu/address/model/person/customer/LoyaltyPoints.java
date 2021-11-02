@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LoyaltyPoints {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Loyalty points is a non-negative number with at least 4 digits";
+            "Loyalty points must be a number";
     public static final String VALIDATION_REGEX = "\\d{4,}";
     public final String value;
 
@@ -25,7 +25,11 @@ public class LoyaltyPoints {
      * Returns true if a given value is a valid point value.
      */
     public static boolean isValidLoyaltyPoints(String value) {
-        return value.matches(VALIDATION_REGEX);
+        try {
+            return Integer.parseInt(value) >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override

@@ -34,7 +34,11 @@ public class Leaves {
      * Returns true if a given string is a valid leaves input.
      */
     public static boolean isValidLeaves(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            return Integer.parseInt(test) >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 

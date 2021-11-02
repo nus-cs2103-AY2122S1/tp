@@ -2,8 +2,8 @@ package seedu.address.model.person.employee;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,8 @@ public class LeavesTest {
 
     @Test
     public void isValidLeaves() {
-        // null leaves
-        assertThrows(NullPointerException.class, () -> Leaves.isValidLeaves(null));
-
         // invalid leaves
+        assertFalse(Leaves.isValidLeaves(null)); // null
         assertFalse(Leaves.isValidLeaves("")); // empty string
         assertFalse(Leaves.isValidLeaves(" ")); // spaces only
         assertFalse(Leaves.isValidLeaves("Leaves")); // non-numeric

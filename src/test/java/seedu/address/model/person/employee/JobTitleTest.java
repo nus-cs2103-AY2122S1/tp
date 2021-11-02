@@ -2,8 +2,8 @@ package seedu.address.model.person.employee;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_JOB_TITLE_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_JOB_TITLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -41,10 +41,10 @@ public class JobTitleTest {
 
     @Test
     public void equals() {
-        JobTitle jobTitle = new JobTitle(VALID_JOBTITLE_AMY);
+        JobTitle jobTitle = new JobTitle(VALID_JOB_TITLE_AMY);
 
         // same values -> returns true
-        JobTitle toCopy = new JobTitle(VALID_JOBTITLE_AMY);
+        JobTitle toCopy = new JobTitle(VALID_JOB_TITLE_AMY);
         assertTrue(jobTitle.equals(toCopy));
 
         // same object -> returns true
@@ -57,7 +57,7 @@ public class JobTitleTest {
         assertFalse(jobTitle.equals(5));
 
         // different JobTitle -> returns false
-        JobTitle different = new JobTitle(VALID_JOBTITLE_BOB);
+        JobTitle different = new JobTitle(VALID_JOB_TITLE_BOB);
         assertFalse(jobTitle.equals(different));
 
     }
