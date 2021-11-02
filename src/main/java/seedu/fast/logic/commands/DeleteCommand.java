@@ -7,16 +7,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
-import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.CommandUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
-import seedu.fast.storage.JsonFastStorage;
 
 /**
  * Deletes a person identified using it's displayed index from FAST.

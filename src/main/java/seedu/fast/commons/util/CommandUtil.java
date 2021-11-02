@@ -1,8 +1,8 @@
 package seedu.fast.commons.util;
 
-import seedu.fast.commons.core.index.Index;
-
 import java.util.List;
+
+import seedu.fast.commons.core.index.Index;
 
 /**
  * Container class for commonly used Command specific function.

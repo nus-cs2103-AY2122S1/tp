@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Set;
 
-import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.tag.Tag;
 
 public class TagCommandUtils {
