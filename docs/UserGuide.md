@@ -192,29 +192,30 @@ Notes:
 Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
+* `find [n/NAME] [MORE_NAMES] [t/TAG] [MORE_TAGS]`
+  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
-* `find` is case-insensitive by default. e.g. `hans` will match `Hans`
+* `find` is case-insensitive by default. e.g. `hans` will match `Hans`.
   * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
-  * `c/` case-sensitive search applies **ONLY** to tags
+  * `c/` case-sensitive search applies **ONLY** to tags.
 * The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as
-  `t/friends n/Hans`
+  `t/friends n/Hans`.
 * Both name and tags are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-  * This applies to both names and tags
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+  * This applies to both names and tags.
 * Only Persons matching all keywords will be returned (i.e. `AND` search).
-  e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`
+  e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`.
 
 **Sample Usage:**
 * `find n/John`
-  * returns `john` and `John Doe`
+  * returns `john` and `John Doe`.
     ![result for `find n/john`](images/findjohnResult.png)
 * `find n/alex t/football t/classmate`
-  * returns `Alex Yeoh`, who has both `football` and `classmates` tag<br>
+  * returns `Alex Yeoh`, who has both `football` and `classmates` tag.
     ![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
 * `find c/ t/FRIENDS`
-  * returns `Shin`, who is tagged with `FRIENDS` 
+  * returns `Shin`, who is tagged with `FRIENDS` .
     ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
 ### Locating persons by name or tag(s): `findAny`
@@ -223,27 +224,28 @@ Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 #### Format:
 * `findAny n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
+  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
-* `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`
+* `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`.
   * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
-  * `c/` case-sensitive search applies **ONLY** to tags
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+  * `c/` case-sensitive search applies **ONLY** to tags.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Both name and tags are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-  * This applies to both names and tags
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+  * This applies to both names and tags.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 
 **Sample Usage:**
 * `findAny n/John`
-  * returns `john` and `John Doe`
+  * returns `john` and `John Doe`.
     ![result for `findAny n/john`](images/findAnyjohnResult.png)
 * `findAny n/alex n/irfan t/chef`
-  * returns `Alex Yeoh`, `Irfan Ibrahim`, `Carol` who is tagged with `chef`<br>
+  * returns `Alex Yeoh`, `Irfan Ibrahim`, `Carol` who is tagged with `chef`.
     ![result for `findAny alex david`](images/findAnyalexirfanchefResult.png)
 * `findAny c/ n/Shin t/FRIENDS t/chef`
-  * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`
+  * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
     ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
 
 ### Pinning a person : `pin`
