@@ -159,8 +159,9 @@ Example:
 ### <a name="filter-student"></a>3.4 Filter Students: `filter`
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 Of the three arguments, at least one has to be provided. Arguments can be provided in any order and are
-case-insensitive. ProgrammerError will display the filtered list of students whose details matches all the specified
-arguments.
+**case-insensitive**. ProgrammerError will display the filtered list of students whose details matches all the specified
+arguments. The arguments are matched to the corresponding details as long as the details of the students contains the
+sequence of characters provided in the argument string.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
