@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
             "Can't find outside inventory mode. Please use `list` first";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all items whose descrption matches any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all items whose description matches any of "
             + "the specified names, ids, or tags, and displays them as a list with index numbers.\n"
             + "\n Parameters: "
             + PREFIX_NAME + "NAME "
