@@ -93,7 +93,6 @@ public class UniqueModuleList implements Iterable<Module> {
         if (!modulesAreUnique(modules)) {
             throw new DuplicateModuleException();
         }
-
         internalList.setAll(modules);
     }
 

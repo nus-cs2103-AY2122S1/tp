@@ -9,7 +9,7 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should not be empty";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should not be empty or more than 40 characters";
 
     /*
      * The first character of the tag must not be a whitespace,
@@ -34,7 +34,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 60;
     }
 
     @Override

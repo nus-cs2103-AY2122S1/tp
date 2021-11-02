@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
-import static seedu.tracker.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
@@ -60,14 +59,13 @@ public class SetCommand extends Command {
         requireNonNull(model);
 
         if (isSemChanged) {
-            //model.setCurrentSemester(currentSemester);
             model.setCurrentSemester(toBeUpdated.getCurrentSemester());
+
             //update module list so that module color can change accordingly when the semester is changed
-            model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+            model.updateFilteredModuleList();
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_SEM, model.getCurrentSemester()));
         } else {
-            //model.setMcGoal(mcGoal);
             model.setMcGoal(toBeUpdated.getMcGoal());
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_MC, model.getMcGoal()));

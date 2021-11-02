@@ -229,6 +229,7 @@ A module can have 4 different colour codes:
 * Inputs for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+
 </div>
 
 ### 3.5 Command Terminology
