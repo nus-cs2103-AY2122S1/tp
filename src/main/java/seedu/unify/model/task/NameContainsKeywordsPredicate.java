@@ -15,9 +15,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
-        boolean check = false;
+        boolean check = true;
         for (String keyword:keywords) {
-            check = check || task.getName().taskName.toLowerCase().contains(keyword.toLowerCase());
+            check = check && task.getName().taskName.toLowerCase().contains(keyword.toLowerCase());
         }
         return check;
     }
