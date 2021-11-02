@@ -115,10 +115,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
+        // ID has changed, update IDs in assessments
         if (!target.getId().equals(editedStudent.getId())) {
             assessments.replaceStudent(target, editedStudent);
-            groups.replaceStudent(target, editedStudent);
         }
+
+        // Update group memberships
+        groups.replaceStudent(target, editedStudent);
 
         students.setStudent(target, editedStudent);
     }
