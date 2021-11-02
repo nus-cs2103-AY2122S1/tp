@@ -58,7 +58,7 @@ public class EditEmployeeCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_SALARY + "4000";
 
     public static final String MESSAGE_EDIT_EMPLOYEE_SUCCESS = "Edited Employee: %1$s";
