@@ -130,7 +130,7 @@ public class Student implements DisplayableObject {
     /**
      * Updates a lab's score  for a student
      * */
-    public void editLabScore(Lab lab , Double score) throws CommandException {
+    public void editLabScore(Lab lab , Integer score) throws CommandException {
         if (score < 0.0) {
             throw new CommandException(REQUIRE_POSITIVE_SCORE);
         }
@@ -146,7 +146,7 @@ public class Student implements DisplayableObject {
     /**
      * Updates a lab result for a student
      * */
-    public boolean editLabInfo(Lab lab, int newLabNum, Double total) {
+    public boolean editLabInfo(Lab lab, int newLabNum, Integer total) {
         Lab newLab = new Lab(newLabNum);
         int index2 = this.labList.indexOf(newLab);
         if (index2 == -1) {

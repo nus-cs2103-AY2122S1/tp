@@ -36,6 +36,7 @@ import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.FileManager;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -225,21 +226,29 @@ public class MainWindow extends UiPart<Stage> {
     private void handleUpload() {
         FileManager fm = new FileManager();
         File chosenFile = promptUserForCsvFile();
+        if (chosenFile == null) {
+            logger.info("User cancelled the file upload.");
+            return;
+        }
+
         List<Student> stuList;
         try {
             stuList = fm.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
-            // Error while adding data
-            displayPopup("Upload failed: " + e.getMessage());
+            displayPopup("Upload failed: " + e.getMessage()); // Error with file data
             return;
         } catch (IllegalValueException e) {
-            // Error with file headers
-            displayPopup(e.getMessage());
+            displayPopup(e.getMessage()); // Error with file headers
             return;
         }
 
         ProgrammerError newPE = new ProgrammerError();
-        newPE.setStudents(stuList);
+        try {
+            newPE.setStudents(stuList);
+        } catch (DuplicateStudentException e) {
+            displayPopup("Upload failed: " + e.getMessage());
+            return;
+        }
         logic.updateProgrammerError(newPE);
         logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
         logic.saveProgrammerError(newPE);
@@ -293,6 +302,8 @@ public class MainWindow extends UiPart<Stage> {
      * @return a Popup object
      */
     private Popup createPopup(String message) {
+        // @@author AllardQuek-reused
+        // Reused with modifications from https://stackoverflow.com/questions/18669209/
         final Popup popup = new Popup();
         popup.setAutoFix(true);
         popup.setHideOnEscape(true);

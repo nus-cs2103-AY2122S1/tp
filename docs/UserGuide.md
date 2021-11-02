@@ -18,7 +18,7 @@ If you are familiar with Unix commands, this is definitely for you!
         3. [Exit: `exit`](#exit)
     2. [Data Features](#data-features)
         1. [Fill Sample Data: `fill`](#fill-sample-data)
-        2. [Purge All Data: ``](#-all-data)
+        2. [Purge All Data: `purge`](#purge-all-data)
         3. [Download Data: `download`](#download-data)
         4. [Upload Data: `upload`](#upload-data)
     3. [Student Features](#student-features)
@@ -42,7 +42,7 @@ If you are familiar with Unix commands, this is definitely for you!
 3. Copy the file to the folder you want to use as the _home folder_ for your ProgrammerError.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
-   ![Ui](images/Ui1_v1.3b.png)
+   ![Ui](images/Ui_v1.4.png)
 5. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
    will open the help window.<br>
    Here are some example commands you can try:
@@ -94,7 +94,9 @@ Exits ProgrammerError and closes the GUI.
 ## <a name="data-features"></a>2. Data Features
 
 ### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
-If no data present, fills it with sample data. Otherwise, throws an error message.
+Fills the program with sample data if no data is already present. Otherwise, throws an error message.
+
+*Note: As this is a mass operation, it might take a couple of seconds to complete.*
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
 Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
@@ -104,8 +106,15 @@ All current students' data can be downloaded to a CSV file. The TA will need to 
 file to.
 
 ### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
-Uploads student data (student ID, class ID, name, email) via a CSV file.
+Uploads student data via a CSV file with **only** the following fields: student ID, class ID, name, email 
 
+Note that the CSV should **not** contain students' lab results since this functionality is only meant for the TA to
+automating the adding of **students** to PE.
+- As such, simply uploading the CSV obtained via the `download` command will not be accepted
+- Furthermore, if there are already existing students, the upload will **overwrite** the existing data rather than append to it.
+This is because in a typical use case, the TA would not want to have the existing data kept if they would like to use student data from their own CSV file.
+
+In summary:
 1. Select a valid CSV file from the file chooser to upload the student data from.
 2. A valid CSV file must contain the following column header: `studentId,classId,name,email`
 3. Note that this command is not meant for uploading lab results. Rather, it is only for automating the adding of
@@ -120,9 +129,6 @@ Adds a student to ProgrammerError with their student ID and class ID.
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Example:
-
-![UI](images/addStudent.png)
-
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
   A1234567X and class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
 
@@ -153,15 +159,13 @@ Example:
 ### <a name="filter-student"></a>3.4 Filter Students: `filter`
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 Of the three arguments, at least one has to be provided. Arguments can be provided in any order and are
-case-insensitive. ProgrammerError will display the filtered list of students whose details matches all the specified
-arguments.
+**case-insensitive**. ProgrammerError will display the filtered list of students whose details matches all the specified
+arguments. The arguments are matched to the corresponding details as long as the details of the students contains the
+sequence of characters provided in the argument string.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
-
-![UI](images/commands/FilterCommand/filter.png)
-
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
 - `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
@@ -187,6 +191,8 @@ Displays a list of all students in the left panel. This list is ordered first by
 
 
 ## <a name="lab-features"></a>4. Lab Features
+
+*Note: As the following commands are mass operations, they might take slighty longer than usual.*
 
 ### <a name="add-lab"></a>4.1 Add Lab: `addlab`
 Adds a lab to every student with the lab number and total score.

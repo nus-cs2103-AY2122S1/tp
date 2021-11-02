@@ -1,11 +1,14 @@
 package seedu.programmer.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
@@ -18,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
 
@@ -59,15 +63,29 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.UP) {
-            commandTextField.setText(commandHistory.getPrevCommand());
-        } else if (event.getCode() == KeyCode.DOWN) {
-            commandTextField.setText(commandHistory.getNextCommand());
-        } else {
+        boolean upPressed = event.getCode() == KeyCode.UP;
+        boolean downPressed = event.getCode() == KeyCode.DOWN;
+        boolean isNotUpOrDown = !upPressed && !downPressed;
+        boolean noCommandHistoryPresent = commandHistory.isEmpty();
+        boolean downAndAtLastCommand = downPressed && commandHistory.isCounterAtLast();
+        boolean upAndAtFirstCommand = upPressed && commandHistory.isCounterAtFirst();
+
+        // Do nothing if neither up nor down pressed, or no command history
+        if (isNotUpOrDown || noCommandHistoryPresent) {
             return;
         }
-        commandTextField.end();
-        event.consume(); // Consume Event`
+
+        if (downAndAtLastCommand || upAndAtFirstCommand) {
+            logger.info("We are already at the oldest or newest command -> show current command");
+            commandTextField.setText(commandHistory.getCurrentCommand());
+        } else if (upPressed) {
+            commandTextField.setText(commandHistory.getPrevCommand());
+        } else {
+            commandTextField.setText(commandHistory.getNextCommand());
+        }
+
+        commandTextField.end(); // Move cursor to end of text field
+        event.consume(); // Consume Event
     }
 
     /**

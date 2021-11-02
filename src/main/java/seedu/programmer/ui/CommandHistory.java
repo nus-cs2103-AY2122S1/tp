@@ -7,70 +7,50 @@ import java.util.logging.Logger;
 import seedu.programmer.commons.core.LogsCenter;
 
 public class CommandHistory {
-    static final String DEFAULT_COMMAND = "";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
     private List<String> commandHistory;
-    private int counter;
+    private int currCommandIndex;
 
     /**
      * Constructor to initialize a new {@code CommandHistory} object.
      */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
-        counter = commandHistory.size();
     }
 
     /**
      * Adds the {@code command} to the {@code commandHistory}.
-     * {@code counter} resets itself to point to the most recently added command to {@code commandHistory}.
      * @param command The string to be added to the history of commands.
      */
     public void add(String command) {
-        addCommandToHistory(command);
+        commandHistory.add(command);
+        currCommandIndex = commandHistory.size() - 1;
     }
 
     /**
      * Returns the next most recently entered command according to the {@code counter} pointer.
-     * Returns the {@code DEFAULT_COMMAND} if the {@code commandHistory} is empty.
      * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
      * @return The string of the next most recent entered command.
      */
     public String getPrevCommand() {
-        if (isCommandHistoryEmpty()) {
-            logger.info("There is no command history.");
-            return DEFAULT_COMMAND;
-        }
-
-        if (!isCounterAtFirst()) {
-            counter--;
-        }
-        String result = commandHistory.get(counter);
-
+        // We should not call getPrevCommand() if the counter is already at the oldest command.
+        assert !isCounterAtFirst();
+        currCommandIndex--;
+        String result = commandHistory.get(currCommandIndex);
         logger.info("Previous Command retrieved: " + result);
         return result;
     }
 
     /**
      * Returns the next least recent entered command according to the {@code counter} pointer.
-     * Returns the {@code DEFAULT_COMMAND} if the {@code commandHistory} is empty.
      * Returns the most recent command if the {@code counter} is already pointer at the latest command.
      * @return The string of the next least recent entered command.
      */
     public String getNextCommand() {
-        if (isCommandHistoryEmpty()) {
-            logger.info("There is no command history.");
-            return DEFAULT_COMMAND;
-        }
-        if (isCounterAtDefault()) {
-            logger.info("Previous command has not been executed before. Empty command returned.");
-            return DEFAULT_COMMAND;
-        }
-        if (!isCounterAtLast()) {
-            counter++;
-        }
-        String result = commandHistory.get(counter);
-
+        // We should not call getNextCommand() if the counter is already at the latest command.
+        assert !isCounterAtLast();
+        currCommandIndex++;
+        String result = commandHistory.get(currCommandIndex);
         logger.info("Next Command retrieved: " + result);
         return result;
     }
@@ -90,30 +70,22 @@ public class CommandHistory {
         // state check
         CommandHistory e = (CommandHistory) other;
         return commandHistory.equals(e.commandHistory)
-                && counter == e.counter;
+                && currCommandIndex == e.currCommandIndex;
     }
 
-    private boolean isCounterAtDefault() {
-        return counter == commandHistory.size();
-    }
-    private boolean isCommandHistoryEmpty() {
+    public boolean isEmpty() {
         return commandHistory.size() == 0;
     }
 
-    private void resetCounterToDefault() {
-        counter = commandHistory.size();
+    public boolean isCounterAtLast() {
+        return currCommandIndex == commandHistory.size() - 1;
     }
 
-    private void addCommandToHistory(String command) {
-        commandHistory.add(command);
-        resetCounterToDefault();
+    public boolean isCounterAtFirst() {
+        return currCommandIndex == 0;
     }
 
-    private boolean isCounterAtLast() {
-        return counter == commandHistory.size() - 1;
-    }
-
-    private boolean isCounterAtFirst() {
-        return counter == 0;
+    public String getCurrentCommand() {
+        return isEmpty() ? "" : commandHistory.get(currCommandIndex);
     }
 }
