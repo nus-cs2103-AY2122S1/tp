@@ -143,13 +143,11 @@ public class Person {
     }
 
     private String getModuleCodesInString(Set<ModuleCode> moduleCodes) {
-        StringBuilder sb = new StringBuilder();
         ModuleCode[] array = moduleCodes.toArray(ModuleCode[]::new);
-        for (int i = 0; i < array.length; i++) {
+        StringBuilder sb = new StringBuilder(array[0].toString());
+        for (int i = 1; i < array.length; i++) {
+            sb.append(", ");
             sb.append(array[i]);
-            if (i != array.length - 1) {
-                sb.append(", ");
-            }
         }
         return sb.toString();
     }
