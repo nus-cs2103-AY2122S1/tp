@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,7 +28,7 @@ public class AddCustomerCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_LP + "LOYALTY POINTS "
             + PREFIX_ALLERGIES + "ALLERGIES "
-            + PREFIX_SPECIALREQUESTS + "SPECIAL REQUESTS "
+            + PREFIX_SPECIAL_REQUESTS + "SPECIAL REQUESTS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
             + PREFIX_NAME + "John Doe "
@@ -37,7 +37,7 @@ public class AddCustomerCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_LP + "1000 "
             + PREFIX_ALLERGIES + "Seafood "
-            + PREFIX_SPECIALREQUESTS + "Likes window seating "
+            + PREFIX_SPECIAL_REQUESTS + "Likes window seating "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

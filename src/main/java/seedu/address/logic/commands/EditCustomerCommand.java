@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
@@ -51,12 +51,12 @@ public class EditCustomerCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_LP + "LOYALTY POINTS] "
             + "[" + PREFIX_ALLERGIES + "ALLERGIES] "
-            + "[" + PREFIX_SPECIALREQUESTS + "SPECIAL REQUESTS] "
+            + "[" + PREFIX_SPECIAL_REQUESTS + "SPECIAL REQUESTS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " 1 "
             + PREFIX_LP + "4000 "
             + PREFIX_ALLERGIES + "Peanuts"
-            + PREFIX_SPECIALREQUESTS + "Window seating"
+            + PREFIX_SPECIAL_REQUESTS + "Window seating"
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";

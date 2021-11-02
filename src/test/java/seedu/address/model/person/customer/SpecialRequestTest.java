@@ -2,8 +2,8 @@ package seedu.address.model.person.customer;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_ROCK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_SILENCE;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_ROCK;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_SILENCE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -29,10 +29,10 @@ public class SpecialRequestTest {
 
     @Test
     public void equals() {
-        SpecialRequest specialRequest = new SpecialRequest(VALID_SPECIALREQUEST_ROCK);
+        SpecialRequest specialRequest = new SpecialRequest(VALID_SPECIAL_REQUEST_ROCK);
 
         // same values -> returns true
-        SpecialRequest toCopy = new SpecialRequest(VALID_SPECIALREQUEST_ROCK);
+        SpecialRequest toCopy = new SpecialRequest(VALID_SPECIAL_REQUEST_ROCK);
         assertTrue(specialRequest.equals(toCopy));
 
         // same object -> returns true
@@ -45,7 +45,7 @@ public class SpecialRequestTest {
         assertFalse(specialRequest.equals(5));
 
         // different SpecialRequest -> returns false
-        SpecialRequest different = new SpecialRequest(VALID_SPECIALREQUEST_SILENCE);
+        SpecialRequest different = new SpecialRequest(VALID_SPECIAL_REQUEST_SILENCE);
         assertFalse(specialRequest.equals(different));
 
     }

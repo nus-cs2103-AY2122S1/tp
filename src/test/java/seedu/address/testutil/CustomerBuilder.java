@@ -27,7 +27,7 @@ public class CustomerBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_LP = "3000";
     public static final String DEFAULT_ALLERGIES = "Peanuts, Apples";
-    public static final String DEFAULT_SPECIALREQUESTS = "Window seating";
+    public static final String DEFAULT_SPECIAL_REQUESTS = "Window seating";
 
     private Name name;
     private Phone phone;

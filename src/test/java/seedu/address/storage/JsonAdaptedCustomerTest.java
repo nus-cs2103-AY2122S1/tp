@@ -24,7 +24,7 @@ public class JsonAdaptedCustomerTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ALLERGY = "#friend";
-    private static final String INVALID_SPECIALREQUEST = "#friend";
+    private static final String INVALID_SPECIAL_REQUEST = "#friend";
 
     private static final String VALID_NAME = CUSTOMER_BENSON.getName().toString();
     private static final String VALID_PHONE = CUSTOMER_BENSON.getPhone().toString();
@@ -38,7 +38,7 @@ public class JsonAdaptedCustomerTest {
             CUSTOMER_BENSON.getAllergies().stream()
             .map(JsonAdaptedAllergy::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedSpecialRequest> VALID_SPECIALREQUESTS =
+    private static final List<JsonAdaptedSpecialRequest> VALID_SPECIAL_REQUESTS =
             CUSTOMER_BENSON.getSpecialRequests().stream()
             .map(JsonAdaptedSpecialRequest::new)
             .collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class JsonAdaptedCustomerTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                        VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -61,7 +61,7 @@ public class JsonAdaptedCustomerTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedCustomer customer = new JsonAdaptedCustomer(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -70,7 +70,7 @@ public class JsonAdaptedCustomerTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_LP,
-                        VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                        VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -78,7 +78,7 @@ public class JsonAdaptedCustomerTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedCustomer customer = new JsonAdaptedCustomer(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
-                VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -87,7 +87,7 @@ public class JsonAdaptedCustomerTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
-                        VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                        VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -95,7 +95,7 @@ public class JsonAdaptedCustomerTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedCustomer customer = new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
-                VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -104,7 +104,7 @@ public class JsonAdaptedCustomerTest {
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
-                        VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                        VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -112,7 +112,7 @@ public class JsonAdaptedCustomerTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedCustomer customer = new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
-                VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, VALID_TAGS);
+                VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, customer::toModelType);
     }
@@ -123,7 +123,7 @@ public class JsonAdaptedCustomerTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_LP, VALID_ALLERGIES, VALID_SPECIALREQUESTS, invalidTags);
+                        VALID_LP, VALID_ALLERGIES, VALID_SPECIAL_REQUESTS, invalidTags);
         assertThrows(IllegalValueException.class, customer::toModelType);
     }
 
@@ -133,14 +133,14 @@ public class JsonAdaptedCustomerTest {
         invalidAllergies.add(new JsonAdaptedAllergy(INVALID_ALLERGY));
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_LP, invalidAllergies, VALID_SPECIALREQUESTS, VALID_TAGS);
+                        VALID_LP, invalidAllergies, VALID_SPECIAL_REQUESTS, VALID_TAGS);
         assertThrows(IllegalValueException.class, customer::toModelType);
     }
 
     @Test
     public void toModelType_invalidSpecialRequests_throwsIllegalValueException() {
-        List<JsonAdaptedSpecialRequest> invalidSpecialRequests = new ArrayList<>(VALID_SPECIALREQUESTS);
-        invalidSpecialRequests.add(new JsonAdaptedSpecialRequest(INVALID_SPECIALREQUEST));
+        List<JsonAdaptedSpecialRequest> invalidSpecialRequests = new ArrayList<>(VALID_SPECIAL_REQUESTS);
+        invalidSpecialRequests.add(new JsonAdaptedSpecialRequest(INVALID_SPECIAL_REQUEST));
         JsonAdaptedCustomer customer =
                 new JsonAdaptedCustomer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_LP, VALID_ALLERGIES, invalidSpecialRequests, VALID_TAGS);

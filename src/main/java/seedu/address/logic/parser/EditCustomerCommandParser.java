@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_LP, PREFIX_ALLERGIES, PREFIX_SPECIALREQUESTS, PREFIX_TAG);
+                        PREFIX_LP, PREFIX_ALLERGIES, PREFIX_SPECIAL_REQUESTS, PREFIX_TAG);
 
         Index index;
 
@@ -69,7 +69,7 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
         }
         parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES))
                 .ifPresent(editCustomerDescriptor::setAllergies);
-        parseSpecialRequestsForEdit(argMultimap.getAllValues(PREFIX_SPECIALREQUESTS))
+        parseSpecialRequestsForEdit(argMultimap.getAllValues(PREFIX_SPECIAL_REQUESTS))
                 .ifPresent(editCustomerDescriptor::setSpecialRequests);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editCustomerDescriptor::setTags);
 
