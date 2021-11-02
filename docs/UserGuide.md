@@ -344,13 +344,6 @@ Format: `exit`
 
 ### Basic Management of Staff Schedules
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The current week refers to a week from monday to sunday which includes today's date.  
-An example would be if 27/10/2021 were the date we were looking at (a wednesday),
-the range would be from 25/10/2021 to 31/10/2021.
-</div>
-
-
 #### Viewing schedule for the week: `change`
 
 The schedule for the current week is shown under the schedule tab by default. The week
@@ -390,9 +383,9 @@ The output will look like the following.
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
-* The DAY entry is not case sensitive.
-* If no date input is provided the shift is viewed for current week.
-* If only one date input is provided, the shift is viewed for seven days after the date.
+* The DAY entry is not case-sensitive.
+* If no date input is provided, the next occurrence of the provided shift is displayed.
+* Similarly, if only one date input is provided, the next occurrence of the provided shift *after the provided date* is displayed.
 
 Formats:  
 `viewShift -d DAY-shift_number [da/START_DATE] [da/END_DATE]`  
@@ -417,9 +410,9 @@ Adds a time period where the staff is working to the staff’s schedule.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 * The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
   10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
-* If no date input is provided, current week is taken as default.
-* If only one date input is provided, the shift added is to the next date that the shift is at. For instance, 
-  if the shift is on a 1/10/2021, a monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
+* If no date input is provided, the staff is added to the next occurrence of the provided shift.
+* If only one date input is provided, the staff next occurence of the provided shift *after the provided date*. For instance, 
+  if the shift is on a 1/10/2021, a Monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
 * If the shift is not in the period provided, the program will do nothing.
 
 Formats:  
@@ -434,8 +427,8 @@ Examples:
 #### Swapping shifts: `swapShift`
 Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
 
-* If no date input is provided, current week is taken as default.
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If no date input is provided, the next occurrence of the provided shift is assumed.
+* If only one date input is provided, the next occurrence of both the provided shifts *after the provided date* is assumed.
 
 Formats:  
 `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]`  
@@ -454,8 +447,8 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-* If no date input is provided, current week is taken as default.  
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If no date input is provided, the next occurrence of the provided shift is assumed.
+* If only one date input is provided, the next occurrence of the provided shift *after the provided date* is assumed.
 
 Formats:  
 `setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
@@ -475,8 +468,8 @@ Examples:
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
-* If no date input is provided, current week is taken as default.
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+If no date input is provided, the next occurrence of the provided shift is assumed.
+* If only one date input is provided, the next occurrence of the provided shift *after the provided date* is assumed.
 * If the shift to delete is not in the input date range, the program will do nothing.
 
 Formats:  
