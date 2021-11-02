@@ -279,7 +279,7 @@ Switch to a different address book that currently exists.
 | Format | `ab switch ADDRESSBOOK_NAME` <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :-: | :-- |
 | Example | `ab switch other` will switch over to the address book named `other` |
-| <img src=images/tip_icon.png width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) |
+| <img src=images/tip_icon.png width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="300"> |
  
 
 ### 5.4 List all address book : `ab list`
