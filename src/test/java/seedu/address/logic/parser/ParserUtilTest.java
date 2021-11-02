@@ -25,6 +25,7 @@ public class ParserUtilTest {
     private static final String INVALID_COUNT_NEGATIVE = "-1";
     private static final String INVALID_ID_FORMAT = "abc";
     private static final String INVALID_ID_NEGATIVE = "-1";
+    private static final String INVALID_ID_SHORTER = "123";
     private static final String INVALID_PRICE_FORMAT = "abc";
     private static final String INVALID_PRICE_NEGATIVE = "-1";
     private static final String INVALID_PRICE_OVERFLOW = "999999999.1";
@@ -34,10 +35,9 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "sweet";
     private static final String VALID_COUNT_1 = "2";
     private static final String VALID_COUNT_2 = "12";
-    private static final String VALID_ID_1 = "223";
-    private static final String VALID_ID_2 = "122489";
+    private static final String VALID_ID = "123456";
     private static final String VALID_PRICE_1 = "1.21";
-    private static final String VALID_PRICE_2 = "12.2121";  // Should be rounded to 2 decimal places
+    private static final String VALID_PRICE_2 = "12.2121"; // Should be rounded to 2 decimal places
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -180,16 +180,14 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseId_validId_returnsId() throws Exception {
-        Integer expectedId = Integer.parseInt(VALID_ID_1);
-        Integer actualId = ParserUtil.parseId(VALID_ID_1);
-        assertEquals(expectedId, actualId);
+    public void parseId_lessThan6Digits_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_SHORTER));
     }
 
     @Test
-    public void parseId_validId2_returnsId() throws Exception {
-        Integer expectedId = Integer.parseInt(VALID_ID_2);
-        Integer actualId = ParserUtil.parseId(VALID_ID_2);
+    public void parseId_validId_returnsId() throws Exception {
+        Integer expectedId = Integer.parseInt(VALID_ID);
+        Integer actualId = ParserUtil.parseId(VALID_ID);
         assertEquals(expectedId, actualId);
     }
 
@@ -197,12 +195,12 @@ public class ParserUtilTest {
     public void parsePrice_validPrices_returnsPrice() throws Exception {
         // 2 decimal places
         double expectedPrice = Double.parseDouble(VALID_PRICE_1);
-        double actualPrice = ParserUtil.parseId(VALID_PRICE_1);
+        double actualPrice = ParserUtil.parsePrice(VALID_PRICE_1);
         assertEquals(expectedPrice, actualPrice);
 
         // Extra decimal places
-        expectedPrice = Math.round(Double.parseDouble(VALID_PRICE_1) / 100) * 100;
-        actualPrice = ParserUtil.parseId(VALID_PRICE_1);
+        expectedPrice = Math.round(Double.parseDouble(VALID_PRICE_2) * 100) / 100.0;
+        actualPrice = ParserUtil.parsePrice(VALID_PRICE_2);
         assertEquals(expectedPrice, actualPrice);
     }
 
@@ -212,7 +210,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePrice_largePrice_throwsParseException()  {
+    public void parsePrice_largePrice_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_PRICE_OVERFLOW));
     }
 
