@@ -31,7 +31,7 @@ public class RosterCommand extends Command {
 
     public static final String MESSAGE_ROSTER_LESSON_SUCCESS = generateSuccess("Roster of %s is displayed.\n"
             + "A total of %s student(s) found.");
-    public static final String MESSAGE_ENROLLED_STUDENT_HEADER = "\nStudent(s): ";
+    public static final String MESSAGE_ENROLLED_STUDENT_HEADER = "\nStudent(s): "; // add when there are students
 
     private final Index targetIndex;
 

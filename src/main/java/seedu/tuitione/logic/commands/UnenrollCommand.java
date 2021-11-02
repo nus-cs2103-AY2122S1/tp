@@ -1,10 +1,10 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.core.Messages.generateAlert;
 import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED_CONSTRAINT;
 
 import java.util.List;
 
@@ -32,8 +32,6 @@ public class UnenrollCommand extends Command {
 
     public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = generateSuccess("Unenrolled student "
             + "%1$s from lesson %2$s");
-    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = generateAlert("%1$s is not currently enrolled "
-            + "in the lesson: %2$s");
 
     private final Index indexStudent;
 
@@ -66,9 +64,8 @@ public class UnenrollCommand extends Command {
         Lesson lesson = lastShownLessonList.get(indexLesson.getZeroBased());
 
         if (!lesson.containsStudent(studentToUnenroll)) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_LESSON,
-                    studentToUnenroll.getName(),
-                    lesson));
+            throw new CommandException(String.format(STUDENT_NOT_ENROLLED_CONSTRAINT,
+                    studentToUnenroll.getName(), lesson));
         }
         lesson.unenrollStudent(studentToUnenroll);
 
