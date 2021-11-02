@@ -94,6 +94,10 @@ Some example commands you can try:
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Amount accepts a real number for its input, with an upper limit of 1 billion, and no negative amounts allowed. Note 
+  that it supports accuracy of up to 15-17 decimal places, and accuracy may be lost beyond that point.
+
 
 * Date inputs should follow one of the formats below.
 
@@ -151,7 +155,7 @@ A client can have any number of tags (including 0). The remark is also optional.
 
 Examples:
 * `addclient n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
-* `addclient n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
+* `addclient n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F m/160_85_35_81`
 
 ### Deleting a client : `deleteclient`
 
@@ -171,7 +175,7 @@ Examples:
 
 Edits an existing client in the application.
 
-Format: `editclient INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
+Format: `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Do not forget to edit the body measurements when you modify the client's gender.
