@@ -477,7 +477,7 @@ public class ParserUtil {
         }
 
         for (int i = 0; i < 3; i++) {
-            // if i > (i + 1)
+            // if check if the timings are in increasing order
             if (timings[i].compareTo(timings[i + 1]) > 0) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
