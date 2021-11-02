@@ -20,6 +20,7 @@ import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.TaskStatusChecker;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -42,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private StatisticsDisplay statisticsDisplay;
     private AllTaskListPanel allTaskListPanel;
     private CommandBox commandBox;
-
+    private TaskStatusChecker taskStatusChecker;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -69,12 +70,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, TaskStatusChecker taskStatusChecker) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.taskStatusChecker = taskStatusChecker;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -220,6 +222,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+        taskStatusChecker.stop();
     }
 
     @FXML
