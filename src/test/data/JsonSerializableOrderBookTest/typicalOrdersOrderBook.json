@@ -1,25 +1,25 @@
 {
   "orders" : [ {
-    "id" : "2021",
+    "id" : "1",
     "date" : "2021-09-18",
     "amount" : "10",
     "customer" : "Josh",
     "isComplete" : "false",
-    "label" : "Blue Shirt"
+    "label" : "testorder1"
   }, {
-    "id" : "2022",
+    "id" : "2",
     "date" : "2021-09-19",
     "amount" : "15",
     "customer" : "Mac",
     "isComplete" : "true",
-    "label" : "Blue Shirt"
+    "label" : "testorder2"
   }, {
-    "id" : "2023",
+    "id" : "3",
     "date" : "2021-09-20",
     "amount" : "20",
     "customer" : "Clark",
     "isComplete" : "true",
-    "label" : "Blue Shirt"
+    "label" : "testorder3"
   } ]
 }
 

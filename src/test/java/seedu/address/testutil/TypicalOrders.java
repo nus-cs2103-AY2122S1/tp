@@ -17,11 +17,11 @@ import seedu.address.model.order.Order;
 public class TypicalOrders {
 
     public static final Order SALESORDER1 = new OrderBuilder().withCustomer("Josh")
-            .withDate("2021-09-18").withAmount("10").build();
+            .withDate("2021-09-18").withAmount("10").withLabel("testorder1").withId(1).build();
     public static final Order SALESORDER2 = new OrderBuilder().withCustomer("Mac")
-            .withDate("2021-09-19").withAmount("15").withIsComplete(true).withId(2022).build();
+            .withDate("2021-09-19").withAmount("15").withIsComplete(true).withId(2).withLabel("testorder2").build();
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
-            .withDate("2021-09-20").withAmount("20").withIsComplete(true).withId(2023).build();
+            .withDate("2021-09-20").withAmount("20").withIsComplete(true).withId(3).withLabel("testorder3").build();
 
     // Manually added - Order's details found in {@code CommandTestUtil}
     public static final Order ORDER = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
