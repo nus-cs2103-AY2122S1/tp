@@ -29,9 +29,8 @@ import seedu.plannermd.model.appointment.AppointmentIsBeforePredicate;
 public class FilterAppointmentCommandParser implements Parser<FilterAppointmentCommand> {
 
     public static final String END_DATE_BEFORE_START_DATE_MESSAGE = "End date cannot be before start date.";
-    public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
+    public static final String NO_ARGUMENTS_MESSAGE = "Specified parameters cannot be empty.\n"
             + FilterAppointmentCommand.MESSAGE_USAGE;
-    private static final String UNUSED_PREAMBLE = "0";
 
     private LocalDate startDate;
     private LocalDate endDate;

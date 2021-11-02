@@ -27,7 +27,7 @@ import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
 public class FilterUpcomingAppointmentCommandParser implements
         Parser<FilterUpcomingAppointmentCommand> {
 
-    public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
+    public static final String NO_ARGUMENTS_MESSAGE = "Specified parameters cannot be empty.\n"
             + FilterAppointmentCommand.MESSAGE_USAGE;
 
     /**
