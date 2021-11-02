@@ -20,30 +20,30 @@ public class PasswordCommandParserTest {
     @Test
     public void incorrect_formatPasswordReturns_false() {
         // empty password
-        assertFalse(PasswordCommandParser.passwordValidation(""));
+        assertFalse(PasswordCommandParser.isValidPassword(""));
 
         // password too short
-        assertFalse(PasswordCommandParser.passwordValidation("1232a!"));
+        assertFalse(PasswordCommandParser.isValidPassword("1232a!"));
 
         // contain illegal characters
-        assertFalse(PasswordCommandParser.passwordValidation("`````sdfdf1212121"));
+        assertFalse(PasswordCommandParser.isValidPassword("`````sdfdf1212121"));
 
         // does not contain all three types of characters
-        assertFalse(PasswordCommandParser.passwordValidation("gsdjfkhk123123"));
-        assertFalse(PasswordCommandParser.passwordValidation("@#%$^@&*dfghj"));
-        assertFalse(PasswordCommandParser.passwordValidation("121212121!!!!"));
-        assertFalse(PasswordCommandParser.passwordValidation("2132354241412"));
-        assertFalse(PasswordCommandParser.passwordValidation("sdfgjbsjkdfsdfkhsdf"));
-        assertFalse(PasswordCommandParser.passwordValidation("!@#$%^&*(*&^%$#$%^&"));
+        assertFalse(PasswordCommandParser.isValidPassword("gsdjfkhk123123"));
+        assertFalse(PasswordCommandParser.isValidPassword("@#%$^@&*dfghj"));
+        assertFalse(PasswordCommandParser.isValidPassword("121212121!!!!"));
+        assertFalse(PasswordCommandParser.isValidPassword("2132354241412"));
+        assertFalse(PasswordCommandParser.isValidPassword("sdfgjbsjkdfsdfkhsdf"));
+        assertFalse(PasswordCommandParser.isValidPassword("!@#$%^&*(*&^%$#$%^&"));
 
         // contains /
-        assertFalse(PasswordCommandParser.passwordValidation("password1234/"));
+        assertFalse(PasswordCommandParser.isValidPassword("password1234/"));
 
         // valid cases
-        assertTrue(PasswordCommandParser.passwordValidation("p1!@#$%&*()_+=|<>?{}~-[]"));
+        assertTrue(PasswordCommandParser.isValidPassword("p1!@#$%&*()_+=|<>?{}~-[]"));
 
         // valid plus additional characters
-        assertTrue(PasswordCommandParser.passwordValidation("password1!@''`"));
+        assertTrue(PasswordCommandParser.isValidPassword("password1!@''`"));
     }
 
     @Test
