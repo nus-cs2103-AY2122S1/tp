@@ -12,6 +12,11 @@ public class ExportStorage {
 
     private static ExportStorage current;
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+    private static final String EXPORT_FILE_HEADER =
+        "\n-------------------------------------------------------\n"
+        + "Your WhereTourGo (WTG) Contacts have been exported below:"
+        + "\n-------------------------------------------------------\n";
+    private static final String MESSAGE_NO_LOG_FILE = "Could not find export file.";
 
     private Path exportFilePath;
 
@@ -39,7 +44,7 @@ public class ExportStorage {
         try {
             FileUtil.appendToFile(current.exportFilePath, personString);
         } catch (IOException ignored) {
-            logger.warning("Could not find export file.");
+            logger.warning(MESSAGE_NO_LOG_FILE);
         }
     }
 
@@ -49,8 +54,9 @@ public class ExportStorage {
     public static void clearStorage() {
         try {
             FileUtil.clearFile(current.exportFilePath);
+            FileUtil.appendToFile(current.exportFilePath, EXPORT_FILE_HEADER);
         } catch (IOException ignored) {
-            logger.warning("Could not find export file.");
+            logger.warning(MESSAGE_NO_LOG_FILE);
         }
     }
 

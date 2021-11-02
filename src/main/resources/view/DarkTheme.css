@@ -144,8 +144,8 @@
 }
 
 .cell_small_rating_label {
-    -fx-font-family: "RNS Sanz Bold";
-    -fx-font-size: 13px;
+    -fx-font-family: "Open Sans Emoji";
+    -fx-font-size: 12px;
     -fx-text-fill: #010504;
 
     -fx-background-color: #4A2512;

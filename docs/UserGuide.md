@@ -171,6 +171,7 @@ More examples will be provided for each command in [Features](#features).
   * Address has a limit of 150 characters.
   * Emails must have a domain name i.e. @gmail.com, @yahoo.com etc.
   * Phone number has a limit of 15 digits.
+  * Review has a limit of 500 characters.
 
 
 * Category Codes only accept the following 5 inputs:
@@ -182,7 +183,8 @@ More examples will be provided for each command in [Features](#features).
   * Others: `oth`
 
 <div markdown="block" class="alert alert-danger"> :warning: 
- Only alphanumeric symbols are allowed in the contact fields. Characters like ‘&’, ‘!’, ‘?’ are not allowed.</div>
+ Only alphanumeric symbols are allowed in the contact fields. Characters like ‘&’, ‘!’, ‘?’ are not allowed.
+</div>
 
  
 --------------------------------------------------------------------------------------------------------------------

@@ -12,18 +12,27 @@ public class Rating implements Comparable<Rating> {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Ratings should be a single integer between 1 to 5 inclusive";
-    public static final String VALIDATION_REGEX = "$|[0-5]";
+    public static final String VALIDATION_REGEX = "$|[1-5]";
+    public static final String EMPTY_RATING = "unrated";
     public final String value;
 
     /**
-     * Constructs a {@code Rating}.
+     * Constructs a {@code Rating} that is not empty.
      *
      * @param rating A valid phone number.
      */
     public Rating(String rating) {
         requireNonNull(rating);
         checkArgument(isValidRating(rating), MESSAGE_CONSTRAINTS);
-        value = rating;
+        this.value = rating;
+    }
+
+    /**
+     * Constructs a {@code Rating} that is empty.
+     *
+     */
+    public Rating() {
+        this.value = EMPTY_RATING;
     }
 
     /**
@@ -31,6 +40,10 @@ public class Rating implements Comparable<Rating> {
      */
     public static boolean isValidRating(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isEmptyRating(String test) {
+        return test.equals(EMPTY_RATING);
     }
 
     @Override
