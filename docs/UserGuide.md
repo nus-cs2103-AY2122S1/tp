@@ -606,7 +606,7 @@ Action | Format | Examples
 **Add Student** | `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag>]...` | e.g. `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A -t beginner`
 **Add Group** | `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...` | e.g. `addgroup -g FG1`, `addgroup -g FG1 -n John Doe -i E0123456`
 **Add Allocation** | `addalloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `addalloc -g T01A -n John Doe`, `addalloc -g T02A -i E0123456`
-**Add Assessment** | `addassessment -a <assessment_name>` | e.g. `addssessment -a P01`
+**Add Assessment** | `addassessment -a <assessment_name>` | e.g. `addassessment -a P01`
 **Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `addscore -a P01 -n John Doe -s 12`, `addscore -a P02 -i E0123456 -s 12.5`
 **List** | `list` |
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe`, `search -g T02B R04D`
