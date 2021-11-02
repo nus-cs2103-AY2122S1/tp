@@ -8,9 +8,11 @@ import seedu.fast.model.Model;
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exits FAST and closes the window \n\n"
             + "Example: \n" + COMMAND_WORD;
+    
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting FAST as requested ...";
 
     @Override
