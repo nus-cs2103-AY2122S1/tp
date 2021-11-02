@@ -32,18 +32,18 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_LEAVES + " LEAVES "
             + PREFIX_SALARY + " SALARY "
             + PREFIX_JOBTITLE + " JOB TITLE "
-            + "[" + PREFIX_SHIFT + "SHIFT]"
+            + "[" + PREFIX_SHIFT + "SHIFT]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_LEAVES + "14"
-            + PREFIX_SALARY + "5000"
-            + PREFIX_JOBTITLE + "Account Manager"
-            + PREFIX_SHIFT + "2021-12-24 0800"
-            + PREFIX_TAG + "SEA";
+            + PREFIX_LEAVES + "14 "
+            + PREFIX_SALARY + "5000 "
+            + PREFIX_JOBTITLE + "Head Chef "
+            + PREFIX_SHIFT + "2021-12-24 0800 "
+            + PREFIX_TAG + "Team C";
 
     public static final String MESSAGE_SUCCESS = "New employee has been added: %1$s";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employee information already exists in the address book";

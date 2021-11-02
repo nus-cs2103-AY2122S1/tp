@@ -107,7 +107,8 @@ public class UniqueEmployeeList implements Iterable<Employee> {
      * Resets the employee list to its default sorting state.
      */
     public void resetEmployeeListToDefaultSortState() {
-        internalList.sort(EmployeeComparator.getDefaultComparator());
+        employeeComparator = EmployeeComparator.getDefaultComparator();
+        internalList.sort(employeeComparator);
     }
 
     /**

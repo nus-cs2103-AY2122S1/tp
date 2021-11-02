@@ -23,10 +23,8 @@ public class SalaryTest {
 
     @Test
     public void isValidSalary() {
-        // null Salary
-        assertThrows(NullPointerException.class, () -> Salary.isValidSalary(null));
-
         // invalid salary
+        assertFalse(Salary.isValidSalary(null)); // null salary
         assertFalse(Salary.isValidSalary("")); // empty string
         assertFalse(Salary.isValidSalary(" ")); // spaces only
         assertFalse(Salary.isValidSalary("91")); // less than 3 numbers
