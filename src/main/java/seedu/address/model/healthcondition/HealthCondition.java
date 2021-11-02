@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class HealthCondition {
 
     public static final String MESSAGE_CONSTRAINTS = "Health conditions should only contain alphanumeric "
-            + "characters and spaces, and it should not be blank";
+            + "characters and spaces, and it should be between 1 and 50 characters (inclusive)";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String healthCondition;
@@ -30,7 +30,7 @@ public class HealthCondition {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidHealthCondition(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
     @Override
