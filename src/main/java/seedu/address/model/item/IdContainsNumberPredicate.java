@@ -1,11 +1,7 @@
 package seedu.address.model.item;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
-
-import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Item}'s {@code Id} matches any of the keywords given.

@@ -5,16 +5,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
-    private static final long DEFAULT_RANDOM_SEED = 10L;
 
     /**
      * Returns true if any of the phrases in {@code sentence} starts with the {@code query}.
@@ -37,8 +34,8 @@ public class StringUtil {
         String preppedSentence = sentence.toLowerCase();
         // Indexes of start of each word in the sentence
         IntStream phrasesIndexes = IntStream.range(0, sentence.length() - 1).filter(
-                x -> sentence.charAt(x) != ' '
-                        && (x == 0 || sentence.charAt(x - 1) == ' ')
+            x -> sentence.charAt(x) != ' '
+                 && (x == 0 || sentence.charAt(x - 1) == ' ')
         );
 
         // True if any phrase starts with the query
@@ -46,68 +43,6 @@ public class StringUtil {
                 .anyMatch(i -> preppedSentence.startsWith(preppedQuery, i));
     }
 
-    /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
-     *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc def") == true
-     *       containsWordIgnoreCase("ABc def", "abc DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
-     *       </pre>
-     * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
-     */
-    public static boolean containsMultipleWord(String sentence, String word) {
-        requireNonNull(sentence);
-        requireNonNull(word);
-        if (sentence.length() == 0 || word.length() == 0) {
-            return false;
-        }
-
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        String[] wordsInPreppedWord = preppedWord.split("\\s+");
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
-
-        return StringUtil.equalArray(wordsInPreppedSentence, wordsInPreppedWord);
-    }
-    /**
-     * Checks whether first array string contains the second array string in exact order
-     * example: [aaa, bbb, ddd] contains [aaa, Bbb] but does not contain [aaa, ddd]
-     */
-    public static boolean equalArray (String [] first, String [] second) {
-        int firstLength = first.length;
-        int secondLength = second.length;
-        if (firstLength == 0 || secondLength == 0) {
-            return false;
-        }
-        boolean doesMatch = false;
-        for (int i = 0; i < firstLength - secondLength + 1; i = i + 1) {
-            doesMatch = doesMatch || StringUtil.equalArrayElements(first, second, i);
-        }
-        return doesMatch;
-    }
-    /**
-     * Helper Function for equalArray
-     * Checks whether first string array from firstStringIndex is the same as
-     * second array string with all elements in same order
-     */
-    public static boolean equalArrayElements (String [] first, String [] second, int firstStringIndex) {
-        if (firstStringIndex >= first.length) {
-            return false;
-        }
-        int indexOfFirst = firstStringIndex;
-        boolean doesMatch = true;
-        for (int j = 0; j < second.length; j = j + 1) {
-            if (!first[indexOfFirst].equalsIgnoreCase(second[j])) {
-                doesMatch = doesMatch && false;
-                break;
-            }
-            indexOfFirst = indexOfFirst + 1;
-        }
-        return doesMatch;
-    }
     /**
      * Returns a detailed message of the t, including the stack trace.
      */

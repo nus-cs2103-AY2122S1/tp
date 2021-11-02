@@ -6,16 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
-import seedu.address.model.item.TagContainsKeywordsPredicate;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Finds and lists all items in inventory whose name contains any of the argument keywords.
