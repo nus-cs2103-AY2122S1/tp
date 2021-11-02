@@ -3,9 +3,9 @@ layout: page
 title: Chi Sern's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: SalesNote
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+SalesNote is a desktop application that helps tailors to manage sales and keep track of a smaller, but more recurrent group of clients. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 Given below are my contributions to the project.
 
