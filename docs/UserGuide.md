@@ -293,13 +293,34 @@ List all the name of all the existing address books
 
 ## 6. FAQ
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LeadsForce home folder.
+**Q**: Is LeadsForce free to use? <br>
+**A**: Yes, LeadsForce is free for use as long as you have a computer with you. <br> 
+
+**Q**: Does LeadsForce require internet connection? <br>
+**A**: No, LeadsForce doesn't require any internet connection. This is great because you can use LeadsForce without having to worry about having adequate internet connection! 
+ 
+**Q**: Is LeadsForce safe to use? <br> 
+**A**: Yes, LeadsForce is 100% safe for use! Our team regularly reviews our code to ensure that there isn't any security vulnerabilities.
+ 
+**Q**: Will LeadsForce be consistently updated? <br>
+**A**: Yes, our team is consistently updating LeadsForce to better meet the needs of our user. 
+ 
+**Q**: Can i use LeadsForce on a mobile device? <br> 
+**A**: Unfortunately, LeadsForce is only available for use on computers. The team is thinking of implementing a mobile version of LeadsForce in the near future so do tuned in to our updates. 🙂
+
+**Q**: I have downloaded the `LeadsForce.jar` and is unable to open the application. Is there anything I could do? <br> 
+**A**: Yes, there is another way to open up LeadsForce. Open the command prompt on your computer, navigate to the directory where you have stored the `LeadsForce.jar` file, and type `java -jar LeadsForce.jar`.
+ 
+ **Q**: How do I transfer my data to another computer?<br>
+**A**: Install LeadsForce on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LeadsForce home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Command summary
 
+This section details all commands in using the features in LeadsForce.
+
+### 7.1 Client Specific Commands
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
@@ -313,6 +334,11 @@ Action | Format | Examples
 **Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
 **Clear** | `clear` | - |
 **Exit** | `exit` | - |
+ 
+### 7.2 Multiple Address Book Commands
+ 
+Action | Format | Examples
+--------|---------|---------
 **Create Address Book** | `ab create ADDRESSBOOK_NAME` | ab create vip
 **Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
 **Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
