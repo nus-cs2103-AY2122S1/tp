@@ -2,7 +2,7 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_TEMPLATE;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_LAB_NUM;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_LAB_TOTAL;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_NEW_LAB_NUM;
@@ -16,6 +16,8 @@ import static seedu.programmer.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE2;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.programmer.model.student.Lab.MESSAGE_LAB_NUMBER_CONSTRAINT;
+import static seedu.programmer.model.student.Lab.MESSAGE_LAB_SCORE_CONSTRAINT;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,7 @@ public class EditLabCommandParserTest {
         // missing labNum prefix
         assertParseFailure(parser,
                 VALID_LAB_NO + NEW_LAB_NUM + LAB_TOTAL2,
-                String.format(MESSAGE_MISSING_ARGUMENT, EditLabCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -43,17 +45,17 @@ public class EditLabCommandParserTest {
         // invalid labNum
         assertParseFailure(parser,
                 INVALID_LAB_NUM + NEW_LAB_NUM + LAB_TOTAL2,
-                MESSAGE_INVALID_FORMAT);
+                String.format(MESSAGE_TEMPLATE, MESSAGE_LAB_NUMBER_CONSTRAINT, EditLabCommand.MESSAGE_USAGE));
 
         // invalid newLabNum
         assertParseFailure(parser,
                 LAB_NUM + INVALID_NEW_LAB_NUM + LAB_TOTAL2,
-                MESSAGE_INVALID_FORMAT);
+                String.format(MESSAGE_TEMPLATE, MESSAGE_LAB_NUMBER_CONSTRAINT, EditLabCommand.MESSAGE_USAGE));
 
         // invalid labTotal
         assertParseFailure(parser,
                 LAB_NUM + NEW_LAB_NUM + INVALID_LAB_TOTAL,
-                MESSAGE_INVALID_FORMAT);
+                String.format(MESSAGE_TEMPLATE, MESSAGE_LAB_SCORE_CONSTRAINT, EditLabCommand.MESSAGE_USAGE));
     }
 
     @Test
