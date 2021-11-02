@@ -72,7 +72,7 @@ public class SetUpScreen extends UiPart<Stage> {
     }
 
     private void handleNewPassword() {
-        if (!PasswordCommandParser.passwordValidation(userInputPassword.getText())) {
+        if (!PasswordCommandParser.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
             userInputPassword.clear();
             userConfirmPassword.clear();

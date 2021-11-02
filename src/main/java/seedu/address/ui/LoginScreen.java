@@ -62,7 +62,7 @@ public class LoginScreen extends UiPart<Stage> {
 
     private void handlePassword() {
         // wrong format
-        if (!PasswordCommandParser.passwordValidation(userInputPassword.getText())) {
+        if (!PasswordCommandParser.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText("Wrong password, try again!");
             userInputPassword.clear();
             return;

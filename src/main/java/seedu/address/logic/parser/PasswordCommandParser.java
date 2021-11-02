@@ -23,8 +23,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
     public PasswordCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(ParserUtil.mapPrefixesToShortForm(args),
-                PREFIX_OLD_PASSWORD,
-                PREFIX_NEW_PASSWORD
+                PREFIX_OLD_PASSWORD, PREFIX_NEW_PASSWORD
         );
 
         List<String> allOld = argMultimap.getAllValues(PREFIX_OLD_PASSWORD);
@@ -32,9 +31,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // repeated flags
         if (allOld.size() > 1 || allNew.size() > 1) {
-            throw new ParseException(MESSAGE_TOO_MANY_FLAGS
-                    + System.lineSeparator()
-                    + PasswordCommand.MESSAGE_USAGE);
+            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_TOO_MANY_FLAGS));
         }
 
         Optional<String> oldInput = argMultimap.getValue(PREFIX_OLD_PASSWORD);
@@ -42,27 +39,25 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // one of the passwords is empty
         if (oldInput.isEmpty() || newInput.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
+            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_INVALID_COMMAND_FORMAT));
         }
 
         String oldPassword = oldInput.get();
         String newPassword = newInput.get();
 
         // old password invalid format(wrong)
-        if (!passwordValidation(oldPassword)) {
-            throw new ParseException(String.format(MESSAGE_WRONG_PASSWORD));
+        if (!isValidPassword(oldPassword)) {
+            throw new ParseException(passwordCommandErrorMessageGenerator(MESSAGE_WRONG_PASSWORD));
         }
 
         // new password invalid format
-        if (!passwordValidation(newPassword)) {
-            throw new ParseException(MESSAGE_INVALID_PASSWORD
-                    + System.lineSeparator()
-                    + PasswordCommand.CORRECT_PASSWORD_FORMAT);
-        } else {
-            // valid old and new password format
-            return new PasswordCommand(oldPassword, newPassword);
+        if (!isValidPassword(newPassword)) {
+            throw new ParseException(passwordCommandErrorMessageGenerator(
+                    MESSAGE_INVALID_PASSWORD, PasswordCommand.CORRECT_PASSWORD_FORMAT));
         }
 
+        // valid old and new password format
+        return new PasswordCommand(oldPassword, newPassword);
     }
 
     /**
@@ -72,23 +67,31 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
      * @param password the input password from user.
      * @return Boolean value of the check result.
      */
-    public static boolean passwordValidation(String password) {
-        if (password.length() >= PasswordCommand.MIN_PASSWORD_LENGTH
-                && password.length() <= PasswordCommand.MAX_PASSWORD_LENGTH) {
-            Pattern letter = Pattern.compile("[a-zA-z]");
-            Pattern digit = Pattern.compile("[0-9]");
-            Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-            Pattern slash = Pattern.compile("/");
+    public static boolean isValidPassword(String password) {
+        Pattern letter = Pattern.compile("[a-zA-z]");
+        Pattern digit = Pattern.compile("[0-9]");
+        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Pattern slash = Pattern.compile("/");
 
-            Matcher hasLetter = letter.matcher(password);
-            Matcher hasDigit = digit.matcher(password);
-            Matcher hasSpecial = special.matcher(password);
-            Matcher hasSlash = slash.matcher(password);
+        Matcher hasLetter = letter.matcher(password);
+        Matcher hasDigit = digit.matcher(password);
+        Matcher hasSpecial = special.matcher(password);
+        Matcher hasSlash = slash.matcher(password);
 
-            return hasLetter.find() && hasDigit.find()
-                    && hasSpecial.find() && !hasSlash.find();
-        } else {
-            return false;
+        return password.length() >= PasswordCommand.MIN_PASSWORD_LENGTH
+                && password.length() <= PasswordCommand.MAX_PASSWORD_LENGTH
+                && hasLetter.find() && hasDigit.find()
+                && hasSpecial.find() && !hasSlash.find();
+    }
+
+    /**
+     * Generates a multiline error message. Will always end with PasswordCommand's usage message.
+     */
+    public static String passwordCommandErrorMessageGenerator(String...errorMessages) {
+        StringBuilder sb = new StringBuilder();
+        for (String errorMessage : errorMessages) {
+            sb.append(errorMessage).append(System.lineSeparator());
         }
+        return sb.append(PasswordCommand.MESSAGE_USAGE).toString();
     }
 }
