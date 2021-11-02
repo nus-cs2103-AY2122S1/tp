@@ -257,7 +257,7 @@ public class ModelManager implements Model {
      */
     public void addOrder(Order toAdd) {
         orderBook.addOrder(toAdd);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+        resetOrderView();
     }
 
     /**
