@@ -12,11 +12,13 @@ package "Lesson" {
     Class TimeRange
     Class Subject
     Class Homework
+    Class LessonRates
 }
 
-Lesson *-up-> Date
+Lesson *-up-> "2" Date
 Lesson *-up-> TimeRange
 Lesson *-up-> Subject
+Lesson *-up-> LessonRates
 Lesson *-up-> "*" Homework
 
 Homework -[hidden]left-> Subject
