@@ -234,7 +234,9 @@ a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-1
 ```
 
 <div markdown="span" class="alert alert-primary">
-:information_source: Note: `James Yeoh` and  `james &nbsp;  yeoh` are considered the same person, namely `Name` is case-insensitive and the differences in whitespaces would not be considered.
+  
+:information_source: Note: `James Yeoh` and  <code>james &nbsp; yeoh</code> are considered the same person, namely `Name` is case-insensitive and the differences in whitespaces would not be considered.
+
 </div>
 
 #### Adding a tuition class: `addclass` | `ac`
@@ -601,7 +603,7 @@ Note that if you successfully add a student, the name will appear exactly as wha
 For example, when adding a new student, given an existing student named `John Doe`, 
 
 - Valid: `John Doe the Great` 
-- Invalid: `john doe`, `John   Doe`
+- Invalid: `john doe`, `John &ensp; Doe`
 
 Names for tuition classes may be reused.
 
