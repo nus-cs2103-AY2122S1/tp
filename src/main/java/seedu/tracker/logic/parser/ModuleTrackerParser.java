@@ -14,7 +14,6 @@ import seedu.tracker.logic.commands.EditCommand;
 import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.FindCommand;
 import seedu.tracker.logic.commands.HelpCommand;
-import seedu.tracker.logic.commands.InfoCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.SetCommand;
 import seedu.tracker.logic.commands.TakeCommand;
@@ -75,9 +74,6 @@ public class ModuleTrackerParser {
 
         case SetCommand.COMMAND_WORD:
             return new SetCommandParser().parse(arguments);
-
-        case InfoCommand.COMMAND_WORD:
-            return new InfoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
