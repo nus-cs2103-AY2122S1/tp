@@ -181,7 +181,7 @@ Deletes an existing client from the address book using their client id.
 | :-: | --- |
 | **example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src=images/info_icon.png width="50"> | • Multiple clients can be deleted with one `delete` command |
-| <img src=images/warn_icon.png width="50"> | •This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
+| <img src=images/warn_icon.png width="50"> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
  
 ### 4.5 List all contacts : `list`
 
@@ -191,78 +191,48 @@ Shows the full list of all clients in the address book.
 
 ### 4.6 Sort Contacts : `sort`
 
-Sorts clients in order based off the inputted attribute. the `SORT DIRECTION` can take on the values `asc` and `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. 
+Sorts clients in order based on the inputted attribute. Clients can be sorted ascendingly or descendingly, and is based on the given `SORT DIRECTION`. 
 
-| Format | `sort <attribute>/{SORT DIRECTION}...`
+| Format | `sort <attribute>/{SORT DIRECTION}...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :-: | :-- |
 | **examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
-| <img src=images/info_icon.png width="50"> | • The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order. <br> • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
+| <img src=images/info_icon.png width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
 ### 4.8 Locating clients by keywords : `search`
 
 Finds clients whose contacts match with the given keywords.
 
-Format: `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
-
-* `KEYWORD` will be used to match with all attribute of the client.
-* `<attribute>/` refers to the argument tag for the client's attribute.
-* `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
-* If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only.
-* The search is case-insensitive. e.g `keith` will match `Keith`.
-* The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
-* Clients matching at least one keyword will be returned).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned.
-  e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.
-
-Examples:
-* `search John` returns `john` and `John Doe`
-* `search alex david` returns `Alex Yeoh`, `David Li`<br>
+| Format | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `<attribute>/` refers to the argument tag for the client's attribute. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| :-: | :-- |
+| **examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
+| <img src=images/info_icon.png width="50"> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
 ### 4.9 Filter current list by keywords : `filter`
 
-Filter the current list by the given keywords.
-
-Format: `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
-
-* Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
-* `KEYWORD` will be used to match with all attribute of the client.
-* If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}`
-* `<attribute>/` refers to the argument tag for the client's attribute.
-* `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
-* The filter is case-insensitive. e.g `keith` will match `Keith`.
-* The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
-* Clients matching at least one keyword will be returned).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned.
-  e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.
-
-Examples:
-* `search John` returns `john` and `John Doe`
-* `search alex david` returns `Alex Yeoh`, `David Li`<br>
+Filters the current list by the given keywords.
+ 
+| Format | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `<attribute>/` refers to the argument tag for the client's attribute. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| :-: | :-- |
+| **examples** | • `search John` returns `john` and `John Doe` <br> • `search alex david` returns `Alex Yeoh`, `David Li` |
+| <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
 
 ### 4.7 Find meeting schedule : `schedule`
 
-Finds the meeting schedule that the user has on a specified date.
+Finds the meeting schedule on a specified date.
 
-Format: `schedule {DATE}`
-
-* `DATE` has to be in the format of dd-MM-yyyy, where Day(dd), Month(MM) and Years(yyyy) are numerical values.
-* if the `{date}` is not specified, all meetings will be displayed.
-
-Example:
-* `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
-* `schedule` displays all meetings
+ | Format | `schedule DATE`|
+| :-: | :-- |
+| **examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
+| <img src=images/info_icon.png width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
+ 
 ### 4.10 Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
-
-* After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book.
-* The input required for the confirmation will either be:
-  * `yes`: to confirm and proceed with the clear command.
-  * `no`: to cancel the clear command.
+| Format | `clear`|
+| :-: | :-- |
+| <img src=images/info_icon.png width="50"> | • This command clears all clients in **all** address books <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br> • `yes`: to confirm and proceed with the clear command. <br> •`no`: to cancel the clear command.|
+| <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from LeadsForce, this information will be removed from the storage file and will not be retrievable.|
 
 ### 4.11 Exiting the program : `exit`
 
@@ -278,55 +248,44 @@ LeadsForce's data are saved in the hard disk automatically after any command tha
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
+| <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run. |
+| --- | :-- |
 
 ### 5. Multiple Address Books Feature 
+This section details the multiple address book feature in LeadsForce. Seperate your clients into different address books to better manage your clients! 
 
 ### 5.1 Create new address book : `ab create`
 
-Create a new address book by the name provided and switch to it.
+Create a new address book by the name provided and switches to it.
 
-Format: `ab create {ADDRESSBOOK_NAME}`
-
-* `{ADDRESSBOOK_NAME}` refers to the name to be given to the new address book.
-* The name of the addressbook cannot be the same as an existing address book.
-
-Examples:
-* 'ab create vip clients' will create a new address book named `vip clients`
+| Format | `ab create ADDRESSBOOK_NAME`|
+| :-: | :-- |
+| Example | `ab create vip clients` will create a new address book named `vip clients` |
+| <img src=images/info_icon.png width="50"> | • `{ADDRESSBOOK_NAME}` refers to the name to be given to the new address book. <br> • The name of the addressbook cannot be the same as an existing address book.|
 
 ### 5.2 Delete existing address book: ab delete : `ab delete`
 
 Delete an address book that currently exists.
 
-Format: `ab delete {ADDRESSBOOK_NAME}`
-
-* `{ADDRESSBOOK_NAME}` refers to the name of the address book to be deleted .
-* The current address book cannot be deleted, switch to another address book first before deleting the address book.
-
-Examples:
-* 'ab delete test' will delete the address book named `test`
-
+| Format | `ab delete ADDRESSBOOK_NAME`<br> <br>• `ADDRESSBOOK_NAME` refers to the name of the address book to be deleted.|
+| :-: | :-- |
+| Example | `ab delete test` will delete the address book named `test` |
+| <img src=images/info_icon.png width="50"> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
 
 ### 5.3 Switch to different address book : `ab switch`
 
 Switch to a different address book that currently exists.
-
-Format: `ab switch {ADDRESSBOOK_NAME}`
-
-* `{ADDRESSBOOK_NAME}` refers to the name of the address book to switched to .
-
-Examples:
-* 'ab switch other' will switch over to the address book named `other`
-
+ 
+| Format | `ab switch ADDRESSBOOK_NAME` <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
+| :-: | :-- |
+| Example | `ab switch other` will switch over to the address book named `other` |
 
 ### 5.4 List all address book : `ab list`
 
 List all the name of all the existing address books
 
-Format: `ab list`
-
+| Format | `ab list` |
+| :-: | :-- |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -342,18 +301,18 @@ Format: `ab list`
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
-**View** | `view {CLIENT'S ID}` | view 123 |
-**Edit** | `edit {CLIENT'S ID}... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
-**Delete** | `delete {CLIENT'S ID}...` | delete 4  |
+**View** | `view CLIENT'S ID` | view 123 |
+**Edit** | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
+**Delete** | `delete CLIENT'S ID...` | delete 4  |
 **List** | `list` | - |
 **Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
-**Schedule** | `schedule {DATE}` | schedule 22-09-2021 |
-**Search** | `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
+**Schedule** | `schedule DATE` | schedule 22-09-2021 |
+**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
+**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
 **Clear** | `clear` | - |
 **Exit** | `exit` | - |
-**Create Address Book** | `ab create {ADDRESSBOOK_NAME}` | ab create vip
-**Delete Address Book** | `ab delete {ADDRESSBOOK_NAME}` | ab delete book
-**Switch Address Book** | `ab switch {ADDRESSBOOK_NAME}` | ab switch another
+**Create Address Book** | `ab create ADDRESSBOOK_NAME` | ab create vip
+**Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
+**Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
 **List Address Book** | `ab list` | -
 
