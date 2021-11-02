@@ -136,7 +136,7 @@ Adds a student to ProgrammerError with their student ID and class ID.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
-<div markdown="block" class="alert alert-success">💡: **Example:**
+<div markdown="block" class="alert alert-success">💡 **Example:**
 
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
   A1234567X and class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
@@ -154,7 +154,7 @@ Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input values.
 
-<div markdown="block" class="alert alert-success">💡: **Examples:**
+<div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `edit 1 -n Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
 - `edit 1 -ln 4 -s 29.5` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
@@ -167,7 +167,7 @@ Deletes the specified student from the PE.
 Format: `delete <STUDENT_INDEX>`
 - Deletes the student at `<STUDENT_INDEX>`. (1-indexed)
 
-<div markdown="block" class="alert alert-success">💡: **Example:**
+<div markdown="block" class="alert alert-success">💡 **Example:**
     
 - `delete 23` Deletes the data of the student at index 23
     
@@ -182,7 +182,7 @@ sequence of characters provided in the argument string.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
-<div markdown="block" class="alert alert-success">💡: **Examples:**
+<div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
@@ -202,7 +202,7 @@ Format: `show <INDEX_IN_LIST>`
 
 ![UI](images/commands/ShowCommand/show.png)
 
-<div markdown="block" class="alert alert-success">💡: **Example:**
+<div markdown="block" class="alert alert-success">💡 **Example:**
 
 - `show 1`: Shows the student particular and lab results of the student at index 1.
     
@@ -214,7 +214,7 @@ Displays a list of all students in the left panel. This list is ordered first by
 
 ## <a name="lab-features"></a>4. Lab Features
 
-<div markdown="span" class="alert alert-warning">💡: **Note:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Note:**
 As the following commands are mass operations, they might take slighty longer than usual.
 </div>
 
@@ -224,7 +224,7 @@ Adds a lab to every student with the lab number and total score.
 Format: `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 
 
-<div markdown="block" class="alert alert-success">💡: **Examples:**
+<div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `addlab -ln 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
 - `addlab -ln 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
@@ -237,7 +237,7 @@ Edits the details of an existing lab for every student.
 Format: `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 
 
-<div markdown="block" class="alert alert-success">💡: **Examples:**
+<div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `editlab -ln 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
 - `editlab -ln 1 -nln 2`: Changes the number of an existing lab from 1 to 2 for all students.
@@ -249,7 +249,7 @@ Deletes an existing lab from every student in ProgrammerError.
 
 Format: `dellab -ln <LAB_NUM>`
 
-<div markdown="block" class="alert alert-success">💡: **Example:**
+<div markdown="block" class="alert alert-success">💡 **Example:**
 
 - `dellab -ln 1`: Deletes lab 1 for all students if it exists.
     
