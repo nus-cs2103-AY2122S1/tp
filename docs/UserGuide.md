@@ -127,7 +127,7 @@ Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/} KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find n/ Hans Bo` will return `Hans Gruber`, `Will Han` and `Bo Yang`
+* `find n/ Hans Bo` will return `Hans Gruber`, and `Bo Yang`
 * `find t/ friend` will return all the contacts with the tag `friend`
 * `find T/ 01` returns `Alex Yeoh`
 * `find t/ frien` returns `Alex Yeoh`, `Bernice Yu`
@@ -149,8 +149,8 @@ Format: `delete {INDEX | -a | -f}`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `find Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
+* `find n/ Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/ Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
 * `delete -a` deletes all entries in the address book.
 
 ### Import existing contacts from JSON: `import`
