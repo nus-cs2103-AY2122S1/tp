@@ -8,10 +8,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class HelpCommandTest {
+    private static final String DUMMY_MESSAGE = "Dummy help message";
+
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
-
-    private static final String DUMMY_MESSAGE = "Dummy help message";
 
     @Test
     public void execute_help_success() {

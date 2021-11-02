@@ -18,11 +18,11 @@ public class RemoveFromOrderCommand extends Command {
     public static final String COMMAND_WORD = "corder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes an item from current order list . "
-            + "\nParameters: "
-            + "NAME "
-            + "Or " + PREFIX_ID + "ID"
-            + PREFIX_COUNT + "COUNT "
-            + "\nExample: " + COMMAND_WORD + " "
+            + "\n Parameters: "
+            + "[ NAME | "
+            + PREFIX_ID + "ID ]"
+            + " (" + PREFIX_COUNT + "COUNT)"
+            + "\n Example: " + COMMAND_WORD + " "
             + "Milk "
             + PREFIX_COUNT + "10 ";
 

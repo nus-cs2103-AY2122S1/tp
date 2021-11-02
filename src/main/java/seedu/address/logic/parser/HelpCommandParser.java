@@ -30,8 +30,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      */
     public HelpCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        final String userGuide = "https://ay2122s1-cs2103-f10-2.github.io/tp/UserGuide.html";
-        final String helpMessage = "\nRefer to the user guide: " + userGuide;
 
         switch (trimmedArgs) {
         case AddCommand.COMMAND_WORD:
@@ -76,7 +74,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             return new HelpCommand(EndAndTransactOrderCommand.MESSAGE_USAGE);
 
         default:
-            return new HelpCommand(helpMessage);
+            return new HelpCommand("");
         }
     }
 }

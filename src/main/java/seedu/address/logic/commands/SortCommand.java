@@ -21,12 +21,9 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the items in the inventory by name or count\n"
-            + "Parameters: "
-            + "NAME " + PREFIX_NAME
-            + " or COUNT" + PREFIX_COUNT
-            + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_COUNT + " or "
-            + COMMAND_WORD + " " + PREFIX_NAME;
+            + " Example: "
+            + COMMAND_WORD + " " + PREFIX_COUNT
+            + " or " + COMMAND_WORD + " " + PREFIX_NAME;
 
     public static final String MESSAGE_SUCCESS = "Listed items sorted by %s";
     public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =

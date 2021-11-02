@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import seedu.address.commons.core.Messages;
@@ -29,6 +30,7 @@ public class FindCommand extends Command {
             + "\n Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ID + "ID "
+            + PREFIX_TAG + "TAG "
             + "\n Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "019381 or "
             + COMMAND_WORD + " " + PREFIX_NAME + "Banana "
