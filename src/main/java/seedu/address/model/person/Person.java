@@ -220,8 +220,7 @@ public class Person implements Comparable<Person> {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                || otherPerson.getTelegram().equals(getTelegram())
+        return otherPerson.getTelegram().equals(getTelegram())
                 || otherPerson.getGithub().equals(getGithub());
     }
 
