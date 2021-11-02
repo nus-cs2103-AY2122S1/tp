@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -24,8 +25,6 @@ public class PersonListPanel extends UiPart<Region> {
 
     private SelectedPersonCard selected = new SelectedPersonCard();
 
-    private ObservableList<Person> personList;
-
     @FXML
     private ListView<Person> personListView;
 
@@ -35,9 +34,8 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, Summary summary) {
+    public PersonListPanel(ObservableList<Person> personList, Summary summary, CommandBox commandBox) {
         super(FXML);
-        this.personList = personList;
 
         setSelectedPersonPanel();
         selected.updateSummary(summary);
@@ -49,11 +47,17 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-                logger.info("selected " + selectedPerson);
-                selectedPersonPanelPlaceholder.setVvalue(0.0);
-                selected.updatePerson(selectedPerson);
-                selected.setPersonDetails();
+                // Get Model of which person is selected in the left pane.
+                MultipleSelectionModel<Person> selectedPersonModel = personListView.getSelectionModel();
+                Person selectedPerson = selectedPersonModel.getSelectedItem();
+                if (selectedPerson != null) {
+                    commandBox.handleViewSelected(selectedPersonModel);
+                    personListView.getSelectionModel().clearSelection();
+                    logger.info("selected " + selectedPerson);
+                    selectedPersonPanelPlaceholder.setVvalue(0.0);
+                    selected.updatePerson(selectedPerson);
+                    selected.setPersonDetails();
+                }
             }
         });
     }
