@@ -86,9 +86,7 @@ public class DeleteCommand extends Command {
     private CommandResult deleteAllShown(Model model) {
         List<Person> personsToDelete = new ArrayList<>(model.getFilteredPersonList());
 
-        for (Person person : personsToDelete) {
-            model.deletePerson(person);
-        }
+        model.deletePersons(personsToDelete);
 
         StringBuilder resultSb = new StringBuilder(MESSAGE_DELETE_ALL_SHOWN_PERSONS_SUCCESS);
         for (Person person : personsToDelete) {
