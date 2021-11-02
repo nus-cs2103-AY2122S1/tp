@@ -3,12 +3,11 @@ layout: page
 title: Allard Quek's Project Portfolio Page
 ---
 
-## Project: ProgrammerError
 ProgrammerError is a desktop application which helps CS2100 tutors manage their students’ lab results in a simple and efficient manner, allowing them to spend less time on administrative processes and more time teaching students.
 
 The following is a summary of my contributions to the project. Visit this [Reposense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=allardquek) for further details.
 
-### Features
+#### Features
 1. Added the ability to upload student data (Credits: [opencsv](http://opencsv.sourceforge.net/), Stackoverflow)
     - What it does: Allows the TA to upload a CSV file containing students' student ID, class ID, name and email 
     - Justification: So that the TA can automate the process of adding students to their classes without having to manually type the add command
@@ -25,7 +24,7 @@ The following is a summary of my contributions to the project. Visit this [Repos
     - Highlights: Used a TreeMap to store the students' lab data since no database usage was allowed for this project. Learnt more about CSS to make the dashboard interface more user-friendly using colour schemes and visibility properties of javafx components
 
 
-### Other Contributions
+#### Other Contributions
 1. **Project management:**
     1. Managed releases 1.3-1.3b (2 releases) and issue tracker on GitHub
     2. Set up the GitHub team org, repo, and tools e.g. GitHub issue labels, Gradle, Notion
