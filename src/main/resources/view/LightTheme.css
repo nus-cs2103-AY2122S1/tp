@@ -372,5 +372,7 @@
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 14pt;
     -fx-text-fill: black;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
 }
 
