@@ -30,8 +30,6 @@ class IsFilterablePredicateTest {
         IsFilterablePredicate secondPredicate = new IsFilterablePredicate(
                 secondCategoryCodeSet, secondRating, secondTag);
         IsFilterablePredicate thirdPredicate = new IsFilterablePredicate(firstCategoryCodeSet, secondRating, firstTag);
-        IsFilterablePredicate fourthPredicate = new IsFilterablePredicate(
-                secondCategoryCodeSet, firstRating, secondTag);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -48,78 +46,128 @@ class IsFilterablePredicateTest {
         assertFalse(firstPredicate.equals(null));
 
         // different category codes -> returns false
-        assertFalse(firstPredicate.equals(fourthPredicate));
+        assertFalse(firstPredicate.equals(secondPredicate));
 
         // different ratings -> returns false
         assertFalse(firstPredicate.equals(thirdPredicate));
     }
 
+    // Due to high number of all available combinations of inputs, only some test cases were selected to increase
+    // the efficiency of testing. A combination of the 'at least once' and 'random' strategies were employed.
+
     @Test
     public void test_isInCategory_returnsTrue() {
-        // One category code
-        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
-            new Rating(), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating().build()));
+        // Tests done with 1 rating and multiple tags
 
-        //Multiple category codes
+        // one category code
+        IsFilterablePredicate predicate = new IsFilterablePredicate(
+            Collections.singleton(new CategoryCode("att")),
+            new Rating("2"), new HashSet<>(Arrays.asList(
+            new Tag("fun"), new Tag("horrible"), new Tag("weekends"))));
+
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("2")
+            .withTags("fun", "horrible", "weekends").build()));
+
+        // multiple category codes
         predicate = new IsFilterablePredicate(
-                new HashSet<>(Arrays.asList(
-                    new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
-                    new Rating(), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating().build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating().build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating().build()));
+            new HashSet<>(Arrays.asList(new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("oth"))),
+            new Rating("2"), new HashSet<>(Arrays.asList(
+            new Tag("fun"), new Tag("horrible"), new Tag("weekends"))));
+
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("2")
+            .withTags("fun", "horrible", "weekends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("2")
+            .withTags("fun", "horrible", "weekends").build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("2")
+            .withTags("fun", "horrible", "weekends").build()));
     }
 
     @Test
     public void test_isInCategory_returnsFalse() {
-        //One category code
-        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
-            new Rating(), Collections.emptySet());
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").build()));
+        // Tests done with 1 rating and no tags
 
-        //Multiple category codes
+        // One category code
+        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
+            new Rating("1"), Collections.emptySet());
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("1").build()));
+
+        // Multiple category codes
         predicate = new IsFilterablePredicate(new HashSet<>(Arrays.asList(
-                new CategoryCode("acc"), new CategoryCode("tpt"))),
-                new Rating(), Collections.emptySet());
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating().build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").withRating().build()));
+            new CategoryCode("acc"), new CategoryCode("tpt"))),
+            new Rating("1"), Collections.emptySet());
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("1").build()));
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("1").build()));
     }
 
     @Test
     public void test_isRating_returnsTrue() {
-        // No Rating initialises as 0
-        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
+        // Tests done with multiple categories and no tags
+
+        // No rating
+        IsFilterablePredicate predicate = new IsFilterablePredicate(
+            new HashSet<>(Arrays.asList(
+                new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
             new Rating(), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("fnb").build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating().withTags().build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating().withTags().build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating().withTags().build()));
 
-        // One category code
-        predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
-            new Rating("5"), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("5").build()));
-
-        //Multiple category codes
+        // One rating
         predicate = new IsFilterablePredicate(
             new HashSet<>(Arrays.asList(
                 new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
-            new Rating("5"), Collections.emptySet());
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("5").build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("5").build()));
-        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating("5").build()));
+            new Rating("3"), Collections.emptySet());
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("att").withRating("3").withTags().build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("3").withTags().build()));
+        assertTrue(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating("3").withTags().build()));
     }
 
     @Test
     public void test_isRating_returnsFalse() {
-        //One category code
-        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
-            new Rating("3"), Collections.emptySet());
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("2").build()));
+        // Tests done with 1 category and multiple tags
 
-        //Multiple category codes
-        predicate = new IsFilterablePredicate(new HashSet<>(Arrays.asList(
-            new CategoryCode("acc"), new CategoryCode("tpt"))),
-            new Rating("3"), Collections.emptySet());
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("4").build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("acc").withRating("5").build()));
+        // No rating
+        IsFilterablePredicate predicate = new IsFilterablePredicate(
+            Collections.singleton(new CategoryCode("oth")), new Rating(), new HashSet<>(Arrays.asList(
+            new Tag("fun"), new Tag("horrible"), new Tag("affordable"))));
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("4")
+            .withTags("fun", "horrible", "affordable").build()));
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("1")
+            .withTags("fun", "horrible", "affordable").build()));
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("5")
+            .withTags("fun", "horrible", "affordable").build()));
+
+        // One rating
+        predicate = new IsFilterablePredicate(
+            Collections.singleton(new CategoryCode("oth")), new Rating("4"), new HashSet<>(Arrays.asList(
+            new Tag("fun"), new Tag("horrible"), new Tag("affordable"))));
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating().withTags().build()));
+        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("3").withTags().build()));
     }
+
+    // TODO [LETHICIA]
+    @Test
+    public void test_isInTags_returnsTrue() {
+        // Tests done with 1 rating and 1 category
+
+        // no tags
+
+        // one tag
+
+        // multiple tags
+
+    }
+
+    @Test
+    public void test_isInTags_returnsFalse() {
+        // Tests done with no rating and 1 category
+
+        // no tags
+
+        // one tag
+
+        // multiple tags
+
+    }
+
 }

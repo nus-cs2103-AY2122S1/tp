@@ -110,6 +110,14 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code empty Rating} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRating() {
+        descriptor.setRating(new Rating());
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }

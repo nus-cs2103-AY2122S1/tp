@@ -20,12 +20,15 @@ import seedu.address.logic.commands.DeleteCommandIndex;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ExportCommandAll;
+import seedu.address.logic.commands.ExportCommandIndex;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SummaryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FindableContainsKeywordsPredicate;
+import seedu.address.model.person.IsFindableContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -75,7 +78,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new FindableContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new IsFindableContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -104,6 +107,18 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SummaryCommand.MESSAGE_USAGE), () -> parser.parseCommand("sum 3"));
+    }
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        assertTrue(parser.parseCommand(ExportCommandAll.COMMAND_WORD) instanceof ExportCommandAll);
+
+        ExportCommandIndex command = (ExportCommandIndex) parser.parseCommand(
+            ExportCommandIndex.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ExportCommandIndex(INDEX_FIRST_PERSON), command);
+
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            ExportCommand.MESSAGE_USAGE), () -> parser.parseCommand("export mary"));
     }
 
     @Test

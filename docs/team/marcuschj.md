@@ -33,14 +33,15 @@ Given below are my contributions to the project.
 * **Project management**:
   * Tracked team progress to meet deadlines
   * Reviewed and merged Pull Requests of other teammates 
-  * Organised issues on GitHub
+  * Organised issues on GitHub, managing issue tracker
+  * Managed quality and progress of User Guide
   * Managed the different pages of the project. (index.md, README etc.)
 
 
 * **Enhancements to existing features**:
   * Revamped the predicate and parser for Filter command to take in multiple fields.
   * Adjusted regex expressions for various information fields to restrict the input lengths.
-  * Changed the GUI by redesigning colour scheme and replacing all the fonts.
+  * Changed the GUI by changing the product icon, redesigning colour scheme and replacing all the fonts.
 
 
 * **Documentation**:
@@ -52,7 +53,7 @@ Given below are my contributions to the project.
 
   * Developer Guide:
     * Added implementation details of the `ratings` field and `export` command [\#69](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/69).
-    * Added implementation details of the `delete` (by name) feature [\#19](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/19).
+    * Added use cases [\#19](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/19).
 
 
 * **Community**:

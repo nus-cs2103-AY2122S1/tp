@@ -26,4 +26,10 @@ public class ListCommand extends Command {
         Summary summary = new Summary(model.getAddressBook());
         return new CommandResult(MESSAGE_SUCCESS, summary);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof ListCommand; // instanceof handles nulls
+    }
 }

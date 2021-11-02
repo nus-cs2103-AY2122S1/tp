@@ -30,14 +30,14 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withCategoryCode("att").withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withReview("great")
-            .withTags("friends").withRating("5").build();
+            .withTags("friends").withRating("3").build();
     public static final Person BENSON = new PersonBuilder().withCategoryCode("oth").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withReview("amazing").withRating("5").build();
+            .withTags("owesMoney", "friends").withReview("amazing").withRating("4").build();
     public static final Person CARL = new PersonBuilder().withCategoryCode("acc").withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
-            .withReview("bad").withRating("5").build();
+            .withReview("bad").withRating("2").build();
     public static final Person DANIEL = new PersonBuilder().withCategoryCode("tpt").withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
             .withReview("great").withTags("friends").withRating("5").build();
@@ -50,15 +50,15 @@ public class TypicalPersons {
             .build();
     public static final Person GEORGE = new PersonBuilder().withCategoryCode("fnb").withName("George Best")
             .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street").withReview("great")
-            .withRating("5").build();
+            .withRating("2").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withCategoryCode("att").withName("Hoon Meier")
             .withPhone("8482424").withEmail("stefan@example.com").withAddress("little india").withReview("great")
-            .withRating("5").build();
+            .withRating("4").build();
     public static final Person IDA = new PersonBuilder().withCategoryCode("oth").withName("Ida Mueller")
             .withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave").withReview("bad")
-            .withRating("5").build();
+            .withRating("2").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withCategoryCode(VALID_CATEGORY_CODE_ATT)

@@ -44,10 +44,6 @@ public class ExportCommandAllTest {
         // same object -> returns true
         assertTrue(exportFirstCommand.equals(exportFirstCommand));
 
-        // same values -> returns true
-        ExportCommandAll exportFirstCommandCopy = new ExportCommandAll();
-        assertTrue(exportFirstCommand.equals(exportFirstCommandCopy));
-
         // different types -> returns false
         assertFalse(exportFirstCommand.equals(1));
 

@@ -38,16 +38,10 @@ public class IsFilterablePredicate implements Predicate<Person> {
 
         if (categoryCodes.isEmpty() && tags.isEmpty()) {
             return isSameRating;
-        } else if (isEmptyRating(rating.value) && tags.isEmpty()) {
-            return isSameCategoryCodes;
-        } else if (isEmptyRating(rating.value) && categoryCodes.isEmpty()) {
-            return isSameTags;
+        } else if (tags.isEmpty()) {
+            return isSameRating && isSameCategoryCodes;
         } else if (categoryCodes.isEmpty()) {
             return isSameRating && isSameTags;
-        } else if (isEmptyRating(rating.value)) {
-            return isSameCategoryCodes && isSameTags;
-        } else if (tags.isEmpty()) {
-            return isSameCategoryCodes && isSameRating;
         } else {
             return isSameRating && isSameCategoryCodes && isSameTags;
         }

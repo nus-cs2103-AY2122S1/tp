@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReviewTest {
 
-    private final String exactly499Chars =
+    private final String EXACTLY_499_CHARS_REVIEW =
             "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
             + "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
             + "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
@@ -31,9 +31,9 @@ public class ReviewTest {
         assertTrue(Review.isValidReview(" ")); // whitespace
         assertTrue(Review.isValidReview("a")); // one char
 
-        assertFalse(Review.isValidReview(exactly499Chars + "ab")); // 501 chars
-        assertTrue(Review.isValidReview(exactly499Chars + 'a')); // 500 chars
-        assertTrue(Review.isValidReview(exactly499Chars)); // 499 chars
+        assertFalse(Review.isValidReview(EXACTLY_499_CHARS_REVIEW + "ab")); // 501 chars
+        assertTrue(Review.isValidReview(EXACTLY_499_CHARS_REVIEW + 'a')); // 500 chars
+        assertTrue(Review.isValidReview(EXACTLY_499_CHARS_REVIEW)); // 499 chars
         assertTrue(Review.isValidReview("!@#@!$@!%$$%&^&(*)_+:<>?")); // special characters
 
     }
