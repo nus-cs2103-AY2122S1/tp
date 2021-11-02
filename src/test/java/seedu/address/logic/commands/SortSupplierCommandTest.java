@@ -25,8 +25,7 @@ public class SortSupplierCommandTest {
     private static final String DELIVERY_DETAILS_DESC = "delivery details";
     private static final String ASCENDING_DESC = "ascending";
     private static final String DESCENDING_DESC = "descending";
-    private Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
-    private AddressBook ab = new AddressBook();
+    private final Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
 
     @Test
     public void constructor_nullComparator_throwsNullPointerException() {

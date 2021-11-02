@@ -80,7 +80,7 @@ public class TypicalCustomers {
     /**
      * Returns an {@code AddressBook} with all the typical customers.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalAddressBookCustomers() {
         AddressBook ab = new AddressBook();
         for (Customer customer : getTypicalCustomers()) {
             ab.addCustomer(customer);
