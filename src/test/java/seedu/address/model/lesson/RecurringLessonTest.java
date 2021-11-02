@@ -12,6 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.model.lesson.Date.MAX_DATE;
+import static seedu.address.testutil.TypicalDates.DATE_CURRENT_WEEK;
+import static seedu.address.testutil.TypicalDates.DATE_ONE_WEEK_AGO;
+import static seedu.address.testutil.TypicalDates.DATE_ONE_WEEK_LATER;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -22,55 +25,101 @@ import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.DateUtil;
 import seedu.address.testutil.LessonBuilder;
 
 class RecurringLessonTest {
 
+
     @Test
     public void getDisplayDate_dateNotOver_sameDate() {
-        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
-        Lesson lesson = new LessonBuilder().withDate(dateCurrentWeek).buildRecurring();
-        assertEquals(dateCurrentWeek, lesson.getDisplayDate());
+        Lesson lesson = new LessonBuilder().withDate(DATE_CURRENT_WEEK).buildRecurring();
+        assertEquals(DATE_CURRENT_WEEK, lesson.getDisplayDate());
         assertEquals(LocalDate.now(), lesson.getDisplayLocalDate());
     }
 
     @Test
     public void getDisplayDate_dateOver_showNextDate() {
-        Date currentWeek = DateUtil.build(LocalDate.now());
-        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
-        Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo).buildRecurring();
-        assertEquals(currentWeek, lesson.getDisplayDate());
+        Lesson lesson = new LessonBuilder().withDate(DATE_ONE_WEEK_AGO).buildRecurring();
+        assertEquals(DATE_CURRENT_WEEK, lesson.getDisplayDate());
         assertEquals(LocalDate.now(), lesson.getDisplayLocalDate());
     }
 
     @Test
     public void getDisplayDate_dateOver_showNextUncancelledDate() {
-        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
-        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
-        Date dateOneWeekLater = DateUtil.build(LocalDate.now().plusWeeks(1));
-        Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo)
-                .withCancelledDatesSet(dateCurrentWeek).buildRecurring();
-
-        assertEquals(dateOneWeekLater, lesson.getDisplayDate());
+        Lesson lesson = new LessonBuilder().withDate(DATE_ONE_WEEK_AGO)
+                .withCancelledDatesSet(DATE_CURRENT_WEEK).buildRecurring();
+        assertEquals(DATE_ONE_WEEK_LATER, lesson.getDisplayDate());
         assertEquals(LocalDate.now().plusWeeks(1), lesson.getDisplayLocalDate());
     }
+
+    @Test
+    public void getDisplayStartLocalDateTime_dateNotOver_sameDateTime() {
+        Lesson lesson = new LessonBuilder().withDate(DATE_CURRENT_WEEK)
+                .withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getStart().atDate(DATE_CURRENT_WEEK.getLocalDate()),
+                lesson.getDisplayStartLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayStartLocalDateTime_dateOver_showNextDateTime() {
+        Lesson lesson = new LessonBuilder().withDate(DATE_ONE_WEEK_AGO)
+                .withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getStart().atDate(DATE_CURRENT_WEEK.getLocalDate()),
+                lesson.getDisplayStartLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayStartLocalDateTime_dateOver_showNextUncancelledDateTime() {
+        Lesson lesson = new LessonBuilder().withDate(DATE_ONE_WEEK_AGO).withTimeRange(VALID_TIME_RANGE)
+                .withCancelledDatesSet(DATE_CURRENT_WEEK).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getStart().atDate(DATE_ONE_WEEK_LATER.getLocalDate()),
+                lesson.getDisplayStartLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayEndLocalDateTime_dateNotOver_sameDateTime() {
+        Lesson lesson = new LessonBuilder().withDate(DATE_CURRENT_WEEK)
+                .withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getEnd().atDate(DATE_CURRENT_WEEK.getLocalDate()),
+                lesson.getDisplayEndLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayEndLocalDateTime_dateOver_showNextDateTime() {
+        Lesson lesson = new LessonBuilder().withDate(DATE_ONE_WEEK_AGO)
+                .withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getEnd().atDate(DATE_CURRENT_WEEK.getLocalDate()),
+                lesson.getDisplayEndLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayEndLocalDateTime_dateOver_showNextUncancelledDateTime() {
+        Lesson lesson = new LessonBuilder().withDate(DATE_ONE_WEEK_AGO).withTimeRange(VALID_TIME_RANGE)
+                .withCancelledDatesSet(DATE_CURRENT_WEEK).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getEnd().atDate(DATE_ONE_WEEK_LATER.getLocalDate()),
+                lesson.getDisplayEndLocalDateTime());
+    }
+
 
     @Test
     public void isClashing_withMakeupLesson_returnsTrue() {
         // clashes with makeup lesson with clashing day and time
         Lesson recurringLesson = new LessonBuilder().withDate(VALID_DATE_MON).buildRecurring();
         Lesson makeupLesson = new LessonBuilder().withDate(VALID_DATE_NEXT_MON).build();
-
         assertTrue(recurringLesson.isClashing(makeupLesson));
     }
 
     @Test
-    public void isClashing_withMakeupLessonD_returnsFalse() {
+    public void isClashing_withMakeupLesson_returnsFalse() {
         // does not clash with makeup lesson on same day and non-clashing time
         Lesson recurringLesson = new LessonBuilder().withTimeRange(VALID_TIME_RANGE).buildRecurring();
         Lesson makeupLesson = new LessonBuilder().withTimeRange(VALID_NON_CLASHING_TIME_RANGE).build();
-
         assertFalse(recurringLesson.isClashing(makeupLesson));
     }
 
@@ -171,7 +220,6 @@ class RecurringLessonTest {
         Lesson recurringLesson = new LessonBuilder().withDate(VALID_DATE_MON).withTimeRange(VALID_TIME_RANGE)
                 .buildRecurring();
         Date date = new Date(VALID_DATE_NEXT_MON);
-
         assertTrue(recurringLesson.hasLessonOnDate(date));
     }
 
@@ -181,13 +229,12 @@ class RecurringLessonTest {
         Lesson recurringLesson = new LessonBuilder().withDate(VALID_DATE_MON).withTimeRange(VALID_TIME_RANGE)
                 .buildRecurring();
         Date dateTue = new Date(VALID_DATE_TUE);
-
         assertFalse(recurringLesson.hasLessonOnDate(dateTue));
 
         // date lies on a recurring lesson date and is cancelled
         recurringLesson = new LessonBuilder().withDate(VALID_DATE_MON).withTimeRange(VALID_TIME_RANGE)
                 .withCancelledDatesSet(VALID_DATE_NEXT_MON).buildRecurring();
         Date dateMon = new Date(VALID_DATE_NEXT_MON);
-        assertFalse(recurringLesson.hasLessonOnDate(dateTue));
+        assertFalse(recurringLesson.hasLessonOnDate(dateMon));
     }
 }

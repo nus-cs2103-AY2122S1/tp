@@ -157,6 +157,15 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
     /**
+     * Gets the start {@code LocalDateTime} to be displayed.
+     *
+     * @return start {@code LocalDateTime} to be displayed.
+     */
+    public LocalDateTime getDisplayStartLocalDateTime() {
+        return timeRange.getStart().atDate(getDisplayLocalDate());
+    }
+
+    /**
      * Gets the end {@code LocalDateTime} to be displayed.
      *
      * @return End {@code LocalDateTime} to be displayed.
@@ -222,6 +231,28 @@ public abstract class Lesson implements Comparable<Lesson> {
     public int hashCode() {
         return Objects.hash(startDate, endDate, timeRange, subject, homework,
                 lessonRates, outstandingFees, cancelledDates);
+    }
+
+    /**
+     * Get the lesson timing details in String.
+     *
+     * @return String representation for time fields for the Lesson.
+     */
+    public String getLessonDetails() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("Start date: ")
+                .append(getStartDate());
+
+        if (!getEndDate().equals(Date.MAX_DATE)) {
+            builder.append("; End date: ")
+                .append(getEndDate());
+        }
+
+        builder.append("; Time: ")
+                .append(getTimeRange());
+
+        return builder.toString();
     }
 
     @Override
