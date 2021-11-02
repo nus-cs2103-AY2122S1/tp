@@ -115,8 +115,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 **:information_source: Notes about the applicants:**<br>
 
-* Duplicate applicants are not allowed. <br>
-  For two applicants to be duplicate, they must have either the same ***Phone Number*** or ***Email*** or both. 
+* Duplicate applicants are not allowed. For two applicants to be duplicate, they must have either the same ***Phone Number*** or ***Email*** or both. <br>
   An error message will show if you attempt to `add` or `edit` applicants in a manner that will lead to duplicate stored applicants.
 
 </div>
