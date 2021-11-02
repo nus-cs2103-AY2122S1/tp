@@ -75,7 +75,6 @@ public class ModuleTrackerParser {
         case SetCommand.COMMAND_WORD:
             return new SetCommandParser().parse(arguments);
 
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
