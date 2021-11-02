@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -174,6 +175,19 @@ public class Person {
     }
 
     /**
+     * Determines equality of {@code TreeSet<Lesson>} between two persons
+     * using Lesson#equals instead of the default Lesson#compareTo.
+     *
+     * @param other The other person.
+     * @return True if all lessons in the two sets are equals, false otherwise.
+     */
+    private boolean hasEqualLessons(Person other) {
+        List<Lesson> lessons = List.copyOf(getLessons());
+        List<Lesson> otherLessons = List.copyOf(other.getLessons());
+        return lessons.containsAll(otherLessons) && otherLessons.containsAll(lessons);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -199,7 +213,7 @@ public class Person {
                 && otherPerson.getAcadLevel().equals(getAcadLevel())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getLessons().equals(getLessons())
+                && hasEqualLessons(otherPerson)
                 && otherPerson.getOutstandingFees().equals(getOutstandingFees());
     }
 

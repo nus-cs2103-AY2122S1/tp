@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -307,23 +308,28 @@ public abstract class Lesson implements Comparable<Lesson> {
      * Compares this Lesson object with the other Lesson object.
      *
      * @param other The Lesson object to compare with.
-     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
+     * @return 1, if this is later than other, 0 if clashing, and -1 if this is earlier.
      */
     @Override
     public int compareTo(Lesson other) {
-        // enforces order as cancelled lessons could be equal
-        if (isCancelled() || other.isCancelled()) {
-            return -1;
+        if (isClashing(other)) {
+            return 0;
         }
+
         /*
-        Date represents the date of this lesson that is relevant to the comparison.
-        i.e. The upcoming date for recurring lessons; or the start date for makeup lessons
-        (since makeup lesson is a one-time event).
+        Orders by display date, followed by time range.
+        If both are the same, it means that at least one lesson isCancelled and orders with cancelled lesson below.
+        If both are cancelled, orders with Recurring lessons above.
+        If same type of lesson, orders by subject alphabetically.
+        Otherwise, this lesson is below.
          */
-        int compareDate = getDisplayDate().compareTo(other.getDisplayDate());
-        int compareTime = getTimeRange().compareTo(other.getTimeRange());
-        // Compare time if date is equal
-        return compareDate == 0 ? compareTime : compareDate;
+        int result = Comparator.comparing(Lesson::getDisplayDate)
+                .thenComparing(Lesson::getTimeRange)
+                .thenComparing(lesson -> lesson.isCancelled())
+                .thenComparing(lesson -> !lesson.isRecurring())
+                .thenComparing(Lesson::getSubject)
+                .compare(this, other);
+        return result == 0 ? 1 : result;
     }
 
 }
