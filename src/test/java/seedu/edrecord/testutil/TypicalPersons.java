@@ -34,17 +34,17 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withInfo("Has great hair").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withInfo("Very fashionable").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822245")
             .withEmail("werner@example.com").withInfo("Quick to pick up on concepts").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824217")
             .withEmail("lydia@example.com").withInfo("Helpful to other students").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824142")
             .withEmail("anna@example.com").withInfo("Has potential to do better").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84821424")
             .withEmail("stefan@example.com").withInfo("May be disruptive to other students").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821331")
             .withEmail("hans@example.com").withInfo("Needs examples to understand concepts well")
             .withModuleAndGroup("CS3230", "T02").build();
 
