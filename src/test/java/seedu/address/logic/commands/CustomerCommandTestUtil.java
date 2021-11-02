@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -45,12 +46,15 @@ public class CustomerCommandTestUtil {
     public static final String VALID_SPECIAL_REQUEST_SILENCE = "Silence";
     public static final String VALID_SPECIAL_REQUEST_ROCK = "Rock music";
     public static final String VALID_SPECIAL_REQUEST_LIVE_BAND = "Live band";
+    public static final String VALID_SORT_BY_LOYALTY_POINTS = "lp";
 
     public static final String ALLERGY_DESC_NONSENSE = " " + PREFIX_ALLERGIES + VALID_ALLERGY_NONSENSE;
     public static final String ALLERGY_DESC_ALMONDS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_ALMONDS;
     public static final String ALLERGY_DESC_GRAPEFRUITS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_GRAPEFRUITS;
     public static final String SPECIAL_REQUEST_DESC_LIVE_BAND = " " + PREFIX_SPECIAL_REQUESTS
             + VALID_SPECIAL_REQUEST_LIVE_BAND;
+    public static final String SORT_BY_LOYALTY_POINTS_DESC =
+            " " + PREFIX_SORT_BY + VALID_SORT_BY_LOYALTY_POINTS;
 
     public static final String LP_DESC_AMY = " " + PREFIX_LP + VALID_LP_AMY;
     public static final String LP_DESC_BOB = " " + PREFIX_LP + VALID_LP_BOB;
@@ -59,6 +63,8 @@ public class CustomerCommandTestUtil {
     public static final String INVALID_ALLERGIES_DESC = " " + PREFIX_ALLERGIES + "!vvdv"; // '!' not allowed
     // symbol
     public static final String INVALID_SPECIAL_REQUESTS_DESC = " " + PREFIX_SPECIAL_REQUESTS + "!vdfv"; // '!'
+    //only "n", "a", "p", "e", "st", and "dd" are allowed for sort by
+    public static final String INVALID_SORT_BY_DESC = " " + PREFIX_SORT_BY + "t";
     public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_AMY;
     public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_BOB;
 
