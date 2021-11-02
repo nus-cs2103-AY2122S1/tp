@@ -75,6 +75,14 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 </div>
 
+### Upcoming Birthdays
+The vertical tab provides upcoming birthdays at a glance.
+It sorts all birthdays amongst CONNECTIONS in chronological order, with the nearest upcoming birthday at the top.
+
+* Entries colour-coded in GREEN are celebrating their birthdays today.
+* Entries colour-coded in BLUE will be celebrating their birthdays in a week or less.
+* The rest of the entries will not be colour-coded.
+
 ### Viewing help : `help`
 
 Shows help message explaining each command.
@@ -192,7 +200,8 @@ Notes:
 Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find n/NAME [n/MORE_NAMES]…​ t/TAG [t/MORE_TAGS]…​`
+* `find [n/NAME] [n/MORE_NAMES]…​ [t/TAG] [t/MORE_TAGS]…​`
+  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
 * `find` is case-insensitive by default. e.g. `hans` will match `Hans`.
@@ -202,7 +211,8 @@ Notes:
   `t/friends n/Hans`.
 * Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * This applies to both names and tags.
+  * This applies to both names and tags. This means `find n/an` will not return entries such as `Hans`, but 
+    it will return entries such as `Jing An`.
 * Only Persons matching all keywords will be returned (i.e. `AND` search).
   e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`.
 
@@ -222,7 +232,8 @@ Notes:
 Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 #### Format:
-* `findAny n/NAME [n/MORE_NAMES]…​ t/TAG [t/MORE_TAGS]…​`
+* `findAny [n/NAME] [n/MORE_NAMES]…​ [t/TAG] [t/MORE_TAGS]…​`
+  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
 * `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`.
@@ -231,7 +242,8 @@ Notes:
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * This applies to both names and tags.
+  * This applies to both names and tags. This means `findAny n/an` will not return entries such as `Hans`, but
+    it will return entries such as `Jing An`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 
