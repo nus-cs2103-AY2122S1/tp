@@ -11,7 +11,7 @@ public class TeleHandle {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tele handle start with @";
+            "Tele handle start with @ and followed by alphanumeric characters";
     public static final String VALIDATION_REGEX = "@[a-zA-Z0-9]+$";
     public final String value;
 

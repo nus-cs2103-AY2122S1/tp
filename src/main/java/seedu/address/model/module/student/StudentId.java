@@ -9,13 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Must be a valid student Id";
+    public static final String MESSAGE_CONSTRAINTS = "Must be a valid NUS student Id (starts with A, followed by 7 "
+            + "numbers and ends \n"
+            + "with a capital letter)";
 
     /*
      *  Student Id must start and end with a capitalised letter, with 7 digits in between
      *
      */
-    public static final String VALIDATION_REGEX = "[A-Z]\\d{7}[A-Z]";
+    public static final String VALIDATION_REGEX = "A\\d{7}[A-Z]";
 
     public final String value;
 
