@@ -28,7 +28,7 @@ public class Shift {
     public Shift(String shift) {
         requireNonNull(shift);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        checkArgument(isValidShift(shift), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidShift(shift, formatter), MESSAGE_CONSTRAINTS);
         workingShift = LocalDateTime.parse(shift, formatter);
         shiftString = this.workingShift.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }

@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_EMPLOYEE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_EMPLOYEE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.showEmployeeAtIndex;
@@ -148,10 +148,10 @@ public class EditEmployeeCommandTest {
 
     @Test
     public void equals() {
-        final EditEmployeeCommand standardCommand = new EditEmployeeCommand(INDEX_FIRST_PERSON, DESC_EMPLOYEE_AMY);
+        final EditEmployeeCommand standardCommand = new EditEmployeeCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
         // same values -> returns true
-        EditEmployeeDescriptor copyDescriptor = new EditEmployeeDescriptor(DESC_EMPLOYEE_AMY);
+        EditEmployeeDescriptor copyDescriptor = new EditEmployeeDescriptor(DESC_AMY);
         EditEmployeeCommand commandWithSameValues = new EditEmployeeCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -165,9 +165,9 @@ public class EditEmployeeCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditEmployeeCommand(INDEX_SECOND_PERSON, DESC_EMPLOYEE_AMY)));
+        assertFalse(standardCommand.equals(new EditEmployeeCommand(INDEX_SECOND_PERSON, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditEmployeeCommand(INDEX_FIRST_PERSON, DESC_EMPLOYEE_BOB)));
+        assertFalse(standardCommand.equals(new EditEmployeeCommand(INDEX_FIRST_PERSON, DESC_BOB)));
     }
 }

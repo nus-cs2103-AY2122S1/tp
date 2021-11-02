@@ -39,7 +39,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_LEAVES = "a";
     private static final String INVALID_SALARY = "8we9";
-    private static final String INVALID_JOBTITLE = "% manager";
+    private static final String INVALID_JOB_TITLE = "% manager";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUPPLY_TYPE = "Chicken & Beef";
     private static final String INVALID_DELIVERY_DETAILS = "Monday 2-4 pm";
@@ -256,7 +256,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseJobTitle_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOBTITLE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOB_TITLE));
     }
 
     @Test

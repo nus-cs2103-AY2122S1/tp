@@ -2,8 +2,8 @@ package seedu.address.model.person.employee;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_BOB;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.VALID_LEAVES_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
