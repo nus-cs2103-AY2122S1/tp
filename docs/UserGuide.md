@@ -345,14 +345,14 @@ A lesson can be categorised into 2 types:
 1. A **weekly** recurring lesson
 2. A one-off makeup lesson.
 
-The essential fields for a lesson are indicated by the presence of the '*'. The rest of the fields are considered optional.
+The essential fields for a lesson are indicated by the presence of the '*'. The rest of the fields are optional.
 
 Field | Prefix | Constraints | Examples | Remark|
 ------------------|-------|-----------| --------| -----|
-Start date* |`date/`| Dates should be of the format dd MMM yyyy and adhere to the following constraints:<br/>1. dd and yyyy are numerical characters.<br/>2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec<br/>3. Must be a valid date for the year."|`20 jan 2022`<br/>`4 nov 2000`| Dates are case-insensitive and allows single digit day without the leading zero.|
-Time range*        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br/>2. Lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` | |
-Subject*           | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br/> `subject/Language Arts` | |
-Lesson rate*       | `rates/` | Money-related fields such as lesson rate should be formatted with a decimal point '.' as a separator between the dollars and cents, and adhere to the following constraints:<br/>1. Lesson rates should only contain numbers and at most one decimal point.<br/>2. The lesson rate should not start or end with a decimal point and should have at most two decimal places. | `rates/37.50`<br/>`rates/40` | The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br/> |
+*Start date |`date/`| Dates should be of the format dd MMM yyyy and adhere to the following constraints:<br/>1. dd and yyyy are numerical characters.<br/>2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec<br/>3. Must be a valid date for the year."|`date/20 jan 2022`<br/>`date/4 nov 2000`| Dates are case-insensitive and allows single digit day without the leading zero.|
+*Time range        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br/>2. Lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` | |
+*Subject          | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br/> `subject/Language Arts` | |
+*Lesson rate      | `rates/` | Money-related fields such as lesson rate should be formatted with a decimal point '.' as a separator between the dollars and cents, and adhere to the following constraints:<br/>1. Lesson rates should only contain numbers and at most one decimal point.<br/>2. The lesson rate should not start or end with a decimal point and should have at most two decimal places. | `rates/37.50`<br/>`rates/40` | The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br/> |
 Recurrence        | `recurring/` | This prefix takes in an optional parameter, end date, that signifies the end of the recurrence. The end date constraints follows the start date constraints. An additional constraint is that the end date cannot be earlier than the start date | `recurring/`<br/>`recurring/30 Nov 2100` |  |
 Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br/> `hw/Assignment 5` | |
 Outstanding fees  | `f/` | Constraints for fees follow that of lesson rates. | `f/50` | Refer to more details in this [section](#managing-lesson-fees) |
@@ -362,7 +362,7 @@ Outstanding fees  | `f/` | Constraints for fees follow that of lesson rates. | `
 **:information_source: Note:**<br>
 
 * A lesson can be identified by the index number shown in the lesson list of the student.
-* An additional field of a lesson aside from those stated in the table is for recording cancelled dates. More details can be found in [Editing a lesson](#edit-lesson).
+* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit).
 
 </div>
 
@@ -374,7 +374,7 @@ Outstanding fees  | `f/` | Constraints for fees follow that of lesson rates. | `
 
 Adds a lesson to the specified student in TAB.
 
-Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES f/OUTSTANDING_FEES [hw/HOMEWORK]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
@@ -400,9 +400,20 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
-#### Editing a lesson : `ledit` {#edit-lesson}
+#### Editing a lesson : `ledit`
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
+
+Additional fields to the ones in [Managing lessons](#managing-lessons) are listed below.
+
+Field | Prefix | Constraints | Examples | Remark|
+------------------|-------|-----------| --------| -----|
+Cancelled date |`cancel/`| Same constraints as other date fields.|`cancel/20 jan 2022`| The date to cancel must be a valid lesson date.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|
+Uncancelled date |`uncancel/` | Same constraints as other date fields. | `uncancel/20 jan 2022`|The date to uncancel must be an already cancelled date. | 
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+</div>
 
 Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time/TIMERANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
@@ -416,13 +427,6 @@ Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time
   e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
-
-* The date to cancel must be a valid lesson date.<br>
-  e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.
-  
-* The date to uncancel must be an already cancelled date.
-
-* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
@@ -543,16 +547,20 @@ Examples:
 TAB will automatically update your lesson's outstanding fees once the lesson has ended using Fees Calculator feature. 
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
-However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+The Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
 
 * **Lesson rates increment.** In the event that you want to increase your lesson rates, the current outstanding fees will not change according to the newly edited lesson rates.
-* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to 
-the newly edited lesson rates.
+* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to
+  the newly edited lesson rates.
 * **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the Fees Calculator will not deduct
-the fees of the cancelled lesson for you. Same for uncancelling a lesson that has passed, the fees will not be added back for you.
+  the fees of the cancelled lesson for you. Same for uncancelling a lesson that has passed, the fees will not be added back for you.
 * **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
 * **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
-the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
+  the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
+  
+</div>
 
 <div style="page-break-after: always;"></div>
 
