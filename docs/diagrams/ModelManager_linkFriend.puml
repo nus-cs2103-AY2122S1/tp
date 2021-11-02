@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":FriendsList" as FriendsList MODEL_COLOR
+participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
+participant "toLink:Friend" as Friend MODEL_COLOR
+participant "friendToEdit:Friend" as Friend MODEL_COLOR
+participant ":GameFriendLink" as GameFriendLink MODEL_COLOR
+end box
+
+-> ModelManager : linkFriend
+activate ModelManager
+ModelManager -> FriendsList : linkFriend
+activate FriendsList
+FriendsList -> UniqueFriendsList : link
+activate UniqueFriendsList
+UniqueFriendsList -> Friend : getGameFriendLinks
+activate Friend
+Friend --> UniqueFriendsList
+deactivate Friend
+UniqueFriendsList -> GameFriendLink : getGameId
+activate GameFriendLink
+GameFriendLink --> UniqueFriendsList
+deactivate GameFriendLink
+UniqueFriendsList -> Friend : getFriendId
+activate Friend
+Friend --> UniqueFriendsList
+deactivate Friend
+UniqueFriendsList -> Friend : getFriendName
+activate Friend
+Friend --> UniqueFriendsList
+deactivate Friend
+UniqueFriendsList -> Friend : getSchedule
+activate Friend
+Friend --> UniqueFriendsList
+deactivate Friend
+UniqueFriendsList -> Friend : new
+activate Friend
+Friend --> UniqueFriendsList
+deactivate Friend
+UniqueFriendsList -> UniqueFriendsList : setFriend
+activate UniqueFriendsList
+UniqueFriendsList --> UniqueFriendsList
+deactivate UniqueFriendsList
+UniqueFriendsList --> FriendsList
+deactivate UniqueFriendsList
+FriendsList --> ModelManager
+deactivate FriendsList
+return
+@enduml
