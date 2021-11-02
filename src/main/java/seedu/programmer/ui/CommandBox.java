@@ -73,24 +73,26 @@ public class CommandBox extends UiPart<Region> {
         boolean noCommandHistoryPresent = commandHistory.isEmpty();
         boolean downAndAtLastCommand = downPressed && commandHistory.isAtLastIndex();
         boolean upAndAtFirstCommand = upPressed && commandHistory.isAtFirstIndex();
+        boolean upAndAtLastCommand = upPressed && commandHistory.isAtLastIndex();
 
         // Do nothing if neither up nor down pressed, or no command history
         if (isNotUpOrDown || noCommandHistoryPresent) {
             return;
         }
 
-        if (upPressed && lastCommandIsValid) {
+        if (upAndAtLastCommand && lastCommandIsValid) {
             commandTextField.setText(commandHistory.getCurrentCommand());
             lastCommandIsValid = false;
             commandTextField.end();
             return;
         }
 
-        if (downAndAtLastCommand) {
+        if (downAndAtLastCommand && lastCommandIsValid) {
             logger.info("We are already at the newest command -> show current command");
+            lastCommandIsValid = false;
             commandTextField.setText("");
-        } else if (upAndAtFirstCommand) {
-            logger.info("We are already at the oldest command -> show current command");
+        } else if (downAndAtLastCommand || upAndAtFirstCommand) {
+            logger.info("We are already at the newest or oldest command -> show current command");
             commandTextField.setText(commandHistory.getCurrentCommand());
         } else if (upPressed) {
             commandTextField.setText(commandHistory.getPrevCommand());
