@@ -161,6 +161,13 @@ Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`.
 * If multiple students have the same name, NUSNET ID needs to be used to identify them. 
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+
+If duplicated students are found in the list of names and NUSNET IDs input, and error would be thrown to inform you of
+the clash, and the group would not be created. 
+</div>
+
 Examples:
 * `add group -g T01A` creates group `T01A`
 * `add group -g T01A -n Hong Yao -n Hong Fai` creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
@@ -193,7 +200,7 @@ Creates a new assessment in the database.
 
 Format: `add assessment -a <assessment_name>`
 * Assessment should not already exist in database.
-* Group name can be any number of alphanumeric words.
+* Assessment name can be any number of alphanumeric words.
 
 Examples:
 * `add assessment -a P01` creates a new assessment `P01`.
@@ -264,9 +271,13 @@ Shows the in-depth data analysis of individual, group, or the cohort's performan
 Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f <export_file_path>]`
 
 * Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments.
-* The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
+  * Student's score in each assessment as well as the cohort mean and median score will be shown as a line graph. 
+  * The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
+  * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 * Using `-g <group_name>` displays the information of the group's performance in all their graded assessments.
+  * Group's mean score in each assessment as well as the cohort mean and median score will be shown as a line graph.
 * Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
+  * The cohort's score distribution will be shown as a histogram. 
 * Keywords are case-sensitive and only allows exact match. e.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
 * Entering `-f <export_file_path>` exports the graph produced from the command to the specified location. `<export_file_path>` can be relative or absolute filepath.
 
@@ -274,7 +285,7 @@ Examples:
 * `show -n Hong Fai` displays line chart of `Hong Fai`'s performance in all his assessments.
 * `show 2 -f chartImage` shows and exports the line chart (produced of the 2nd student on the displayed list) into a file `chartImage.png`.
 * `show -g T02A` displays line chart of group `T02A`'s performance in their assessments.
-* `show -a Midterm` displays bar chart of the distribution of scores in the `Midterm` assessment.
+* `show -a Midterm` displays histogram of the distribution of scores in the `Midterm` assessment.
 
 [Return to table of contents](#table-of-contents)
 
@@ -427,18 +438,22 @@ Format: `alias -c <existing_command> -as <alias>`
 * `<existing_command>` refers to any command keywords e.g. `search`, `add alloc`, `add student`.
 * The `<alias>` can only be a single alphanumeric word.
 * Multiple aliases can be set for each command.
-* Default and existing aliases can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
+* Default and existing aliases can still be used after new alias is added. e.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command.
-* The aliases created will persist between Source Control sessions.
-* If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`
+* If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`.
+* The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously. 
 
 Examples:
-* `alias -c add student -as as` adds a new alias to `add student` command.
-  * `as -n Zhiying -i E1234567` adds student `Zhiying` to database.
-* `alias -c add score -as as` replace the mapping of the alias `as` to the `add score` command. i.e. `as` no longer function as `add student`.
-  * `as -a P01 -n Zhiying -s 80` will add a score for `P01` for the student `Zhiying`.
-* `alias -c as -as as2` will add the alias `as2` to the command that `as` currently maps to. i.e. `as2` functions as `add score`.
-* `alias -c as -as as` will remove the alias `as`. `as` will no longer be recognised as a command.
+* `alias -c addstudent -as example` 
+  * adds a new alias to `addstudent` command.
+  * `example -n Zhiying -i E1234567` adds student `Zhiying` to database.
+* `alias -c addgroup -as example` 
+  * replaces the mapping of the alias `example` to the `addgroup` command. i.e. `example` no longer function as `addstudent`.
+  * `example -g T02A` will create a new group `T02A`.
+* `alias -c example -as example2` 
+  * adds the alias `example2` to the command that `example` currently maps to. i.e. `example2` functions as `addgroup`.
+* `alias -c example -as example` 
+  * removes the alias `example`. `example` will no longer be recognised as a command.
 
 [Return to table of contents](#table-of-contents)
 
@@ -463,6 +478,8 @@ If your changes to the data file makes its format invalid, Source Control will d
 Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
 
 Run the JAR file by using the command `java -jar sourceControl.jar`.
+
+On an OS based off of Linux, it might be necessary to run `chmod +x sourceControl.jar` on Terminal to allow opening application via double-clicking.
 
 [Return to table of contents](#table-of-contents)
 
@@ -527,13 +544,17 @@ Below is a table explaining some terms used in this document.
 
 Word | Meaning
 -------|--------
-Alphanumeric | character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
-Command | instruction entered by the user e.g. `list`, `exit`.
+Alphanumeric | A character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
+Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
-Graphic User Interface (GUI) | a system of interactive visual components for computer software, which allows users to interact via many visual components.
-Java | a computing platform for application development. Source Control runs on Java.
+Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
+Java | A computing platform for application development. Source Control runs on Java.
 JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
+Directory | It is where files in the computer are stored, or commonly known as folder. 
+Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory. 
+
+
 
 [Return to table of contents](#table-of-contents)
 
