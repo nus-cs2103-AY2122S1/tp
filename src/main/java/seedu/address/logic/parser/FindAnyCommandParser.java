@@ -46,7 +46,12 @@ public class FindAnyCommandParser implements Parser<FindAnyCommand> {
         }
 
         List<String> nameStringList = argMultimap.getAllValues(PREFIX_NAME);
-        areThereBlanks(nameStringList);
+        if (areBlanksPresent(nameStringList)) {
+            String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "If you are "
+                    + "searching for " + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
+            throw new ParseException(nameFormatRequirementMessage);
+        }
+
         List<String> tagStringList = argMultimap.getAllValues(PREFIX_TAG);
 
         List<Name> nameKeywords;
@@ -70,15 +75,13 @@ public class FindAnyCommandParser implements Parser<FindAnyCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private static boolean areThereBlanks(List<String> stringList) throws ParseException {
-        String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "If you are "
-                + "searching for " + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
+    private static boolean areBlanksPresent(List<String> stringList) {
         for (String s : stringList) {
             if (s.contains(" ")) {
-                throw new ParseException(nameFormatRequirementMessage);
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
 
