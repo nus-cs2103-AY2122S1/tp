@@ -169,10 +169,14 @@ the clash, and the group would not be created.
 </div>
 
 Examples:
-* `add group -g T01A` creates group `T01A`
-* `add group -g T01A -n Hong Yao -n Hong Fai` creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
-* `add group -g T01A -n Hong Yao -i E0123456` creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
-* `add group -g Require More Help -i E0123456` creates group `Require More Help` and adds student with NUSNET ID `E0123456` into the group.
+* `add group -g T01A` 
+  * creates group `T01A`. 
+* `add group -g T01A -n Hong Yao -n Hong Fai` 
+  * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
+* `add group -g T01A -n Hong Yao -i E0123456` 
+  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
+* `add group -g Require More Help -i E0123456` 
+  * creates group `Require More Help` and adds student with NUSNET ID `E0123456` into the group.
 
 [Return to table of contents](#table-of-contents)
 
@@ -188,8 +192,10 @@ Format: `add alloc -g <group_name> (-n <student_name> | -i <student_id>)`
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `add alloc -g T01A -n Zhiying` adds `Zhiying` into the tutorial group `T01A`.
-* `add alloc -g T02A -i E0123456` adds student with NUSNET ID `E0123456` into tutorial group `T02A`.
+* `add alloc -g T01A -n Zhiying` 
+  * adds `Zhiying` into the tutorial group `T01A`.
+* `add alloc -g T02A -i E0123456` 
+  * adds student with NUSNET ID `E0123456` into tutorial group `T02A`.
 
 [Return to table of contents](#table-of-contents)
 
@@ -203,8 +209,10 @@ Format: `add assessment -a <assessment_name>`
 * Assessment name can be any number of alphanumeric words.
 
 Examples:
-* `add assessment -a P01` creates a new assessment `P01`.
-* `add assessment -a Midterm Assessment` creates a new assessment `Midterm Assessment`.
+* `add assessment -a P01` 
+  * creates a new assessment `P01`.
+* `add assessment -a Midterm Assessment` 
+  * creates a new assessment `Midterm Assessment`.
 
 [Return to table of contents](#table-of-contents)
 
@@ -222,8 +230,10 @@ Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `add score -a Midterm -n Van Nhi -s 95` records score for `Van Nhi` in `Midterm` to be `95` percent.
-* `add score -a P01 -i E0123456 -s 75.25` records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
+* `add score -a Midterm -n Van Nhi -s 95` 
+  * records score for `Van Nhi` in `Midterm` to be `95` percent.
+* `add score -a P01 -i E0123456 -s 75.25` 
+  * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
 
 [Return to table of contents](#table-of-contents)
 
@@ -255,11 +265,16 @@ e.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
 `beginner` will match `beginners`.
 
 Examples:
-* `search -n Jonas Chow` returns a list of students with part of names that matches `Jonas` and `Chow`.
-* `search -i E0123456` returns the student with NUSNET ID `E0123456`, if found in database.
-* `search -g T02B R03C` returns a list of students in the groups `T02B` and `R03C`.
-* `search -g T02` returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
-* `search -t beginners` returns a list of students tagged as `beginners`.
+* `search -n Jonas Chow` 
+  * returns a list of students with part of names that matches `Jonas` and `Chow`.
+* `search -i E0123456` 
+  * returns the student with NUSNET ID `E0123456`, if found in database.
+* `search -g T02B R03C` 
+  * returns a list of students in the groups `T02B` and `R03C`.
+* `search -g T02` 
+  * returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
+* `search -t beginners` 
+  * returns a list of students tagged as `beginners`.
 
 [Return to table of contents](#table-of-contents)
 
@@ -282,10 +297,14 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 * Entering `-f <export_file_path>` exports the graph produced from the command to the specified location. `<export_file_path>` can be relative or absolute filepath.
 
 Examples:
-* `show -n Hong Fai` displays line chart of `Hong Fai`'s performance in all his assessments.
-* `show 2 -f chartImage` shows and exports the line chart (produced of the 2nd student on the displayed list) into a file `chartImage.png`.
-* `show -g T02A` displays line chart of group `T02A`'s performance in their assessments.
-* `show -a Midterm` displays histogram of the distribution of scores in the `Midterm` assessment.
+* `show -n Hong Fai` 
+  * displays line chart of `Hong Fai`'s performance in all his assessments.
+* `show 2 -f chartImage` 
+  * displays and exports the line chart (produced of the 2nd student on the displayed list) into a file `chartImage.png`.
+* `show -g T02A` 
+  * displays line chart of group `T02A`'s performance in their assessments.
+* `show -a Midterm` 
+  * displays histogram of the distribution of scores in the `Midterm` assessment.
 
 [Return to table of contents](#table-of-contents)
 
@@ -304,9 +323,12 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 * You can remove all the student’s tags or groups by typing `-t` or `-g` without specifying any values after it.
 
 Examples:
-* `edit 1 -n Hong Yao -i E1234567` edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`.
-* `edit 3 -g T01C -g R01A` edits the group of the 3rd student on the displayed list to `T01C` and `R01A`.
-* `search -n Hong Yao` followed by `edit 1 -t` removes all tags of the 1st student on the displayed list after searching for `Hong Yao`.
+* `edit 1 -n Hong Yao -i E1234567` 
+  * edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`.
+* `edit 3 -g T01C -g R01A` 
+  * edits the group of the 3rd student on the displayed list to `T01C` and `R01A`.
+* `search -n Hong Yao` followed by `edit 1 -t` 
+  * removes all tags of the 1st student on the displayed list after searching for `Hong Yao`.
 
 [Return to table of contents](#table-of-contents)
 
@@ -321,8 +343,10 @@ Format: `delete <index>`
 * The `<index>` refers to the index number shown in the displayed student list. The `<index>` **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the student list.
-* `search -n Van Nhi` followed by `delete 1` deletes the 1st student in the results of the `search` command.
+* `list` followed by `delete 2` 
+  * deletes the 2nd student in the student list.
+* `search -n Van Nhi` followed by `delete 1` 
+  * deletes the 1st student in the results of the `search` command.
 
 [Return to table of contents](#table-of-contents)
 
@@ -347,6 +371,9 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 
 :bulb: **Tips:**<br>
 
+* `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups. 
+The similar applies for `<number_of_tag_columns>`. 
+
 * If the student does not have as many groups as the number of group columns, you should leave several group columns blank.
 
 * If the student does not have a grade for some assessment, you should leave the corresponding assessment column blank.
@@ -357,9 +384,13 @@ An example of how the CSV should be formatted is shown below:
 
 ![CsvFormatExample](images/CsvFormatExample.png)
 
+The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`. (There are 2 group columns, 2 assessments, and 2 tag columns.)
+
 Examples:
-* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` imports from the absolute path and database has 2 group columns, 10 assessments, and 1 tag column.
-* `import -f student_data.csv -g 5 -a 20` imports from the relative path and database has 5 group columns, 20 assessments.
+* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` 
+  * imports from the absolute path and database has 2 group columns, 10 assessments, and 1 tag column.
+* `import -f student_data.csv -g 5 -a 20` 
+  * imports from the relative path, and database has 5 group columns and 20 assessments.
 
 [Return to table of contents](#table-of-contents)
 
@@ -373,20 +404,23 @@ Format: `export [-f <file_path>]`
 * The file path can be either the absolute path or the relative path.
 * The relative path will be relative to the folder your jar file is located.
 * If the file path is not specified, it will be saved to `sourceControl.csv`.
-* The format of the csv file saved matches exactly the csv format used by the `import` command.
+* The format of the CSV file saved matches exactly the CSV format used by the `import` command.
 
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tips:**<br>
 
-* The exported csv file can be imported again to restore the state of the application when the data was exported
+* The exported CSV file can be imported again to restore the state of the application when the data was exported
 
 </div>
 
 Examples:
-* `export -f student_data.csv` exports database as file `student_data.csv`.
-* `export -f /home/prof/CS1101S/student_data.csv` exports database to the given absolute path.
-* `export` exports database as file `sourceControl.csv`.
+* `export -f student_data.csv` 
+  * exports database as file `student_data.csv`.
+* `export -f /home/prof/CS1101S/student_data.csv` 
+  * exports database to the given absolute path.
+* `export` 
+  * exports database as file `sourceControl.csv`.
 
 [Return to table of contents](#table-of-contents)
 
@@ -479,7 +513,7 @@ Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate 
 
 Run the JAR file by using the command `java -jar sourceControl.jar`.
 
-On an OS based off of Linux, it might be necessary to run `chmod +x sourceControl.jar` on Terminal to allow opening application via double-clicking.
+On an OS based off of Linux, it might be necessary to run `chmod +x sourceControl.jar` on Terminal to allow opening of the application via double-clicking.
 
 [Return to table of contents](#table-of-contents)
 
@@ -487,7 +521,7 @@ On an OS based off of Linux, it might be necessary to run `chmod +x sourceContro
 ### How can I back up my data? 
 Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
+If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the CSV file created.
 
 [Return to table of contents](#table-of-contents)
 
