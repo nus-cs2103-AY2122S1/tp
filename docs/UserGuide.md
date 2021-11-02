@@ -377,13 +377,7 @@ Parameters: [`INDEX`](#index)
 Example:
 * `untake 1` is equivalent to removing the schedule from the 1st module in the database.
 
-#### 4.2.3 Viewing user information : `info`
-
-You can view your current MC goal and semester with our `info` command.
-
-Format: `info`
-
-#### 4.2.4 Setting user's MC goal OR current semester : `set`
+#### 4.2.3 Setting user's MC goal OR current semester : `set`
 
 You can update your MC goal or current semester with our `set` command.
 
@@ -396,7 +390,7 @@ Examples:
 * `set y/2 s/1` - is equivalent to setting the current semester to year 2 semester 1
 * `set y/3 s/3` - is equivalent to setting the current semester to year 3 special semester 1
 
-#### 4.2.5 Viewing modules taken in a specific semester : `view`
+#### 4.2.4 Viewing modules taken in a specific semester : `view`
 
 You can view all the modules that you have taken in a specific semester with our `view` command.
 
@@ -408,7 +402,7 @@ Examples:
 * `view y/2 s/1` - is equivalent to seeing all the modules taken in year 2 semester 1.
 * `view y/2 s/3` - is equivalent to seeing all the modules taken in year 2 special semester 1.
 
-#### 4.2.6 Removing all modules in a specific semester from the academic plan : `clear`
+#### 4.2.5 Removing all modules in a specific semester from the academic plan : `clear`
 
 You can remove all modules from a specific semester in your academic plan with our `clear` command.
 
@@ -470,7 +464,6 @@ Academic Plan Commands | Format, Examples
 --------|------------------
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
-**Info**| `info`
 **Set**| `set m/MC` or `set y/YEAR s/SEMESTER` <br> e.g. `set m/120` `set y/2 s/1`
 **View**| `view y/YEAR s/SEMESTER` <br> e.g. `view y/2 s/1`
 **Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
