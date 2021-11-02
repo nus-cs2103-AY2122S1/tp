@@ -38,7 +38,26 @@ _text_ | Caption for images.
 :bulb: | Indication that the following text is a tip.
 :exclamation: | Indication that the following text is important.
 
+### Command Format
+Commands in TAB have several components and follow a general format as follows:<br/>
 
+```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER_VALUE…​```
+
+|Component|Description|
+|---------|-----------|
+|Command word|The word that specifies the action to execute.|
+|Preamble| The text before the first valid parameter prefix in the command. The preamble may or may not be empty depending on the command.|
+|Parameter| An input provided by the user for the execution of the command.<br/> A parameter in TAB is defined fully by its prefix and value. |
+|Parameter prefix| The keyword that differentiates parameters from one another. All prefixes end with a `/`.|
+|Parameter value| The value of the parameter|
+
+* Each parameter prefix is separated from the others with a space.<br/>
+  Using the parameter prefix for tag, `t/`, as an example,
+`t/t/` means the parameter value of the 1st `t/` is `t/` and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` means there is no parameter value of both `t/`s and TAB will interpret this as 2 empty tags. (See [Managing students](#managing-students) for more details)
+  
+An example of a command in TAB:
+![Command format](images/CommandFormat.png)
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
