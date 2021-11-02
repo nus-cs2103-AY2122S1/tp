@@ -182,7 +182,6 @@ sequence of characters provided in the argument string.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
-
 <div markdown="block" class="alert alert-success">💡: **Examples:**
 
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
@@ -252,7 +251,6 @@ Format: `dellab -ln <LAB_NUM>`
 
 <div markdown="block" class="alert alert-success">💡: **Example:**
 
-Example:
 - `dellab -ln 1`: Deletes lab 1 for all students if it exists.
     
 </div>
