@@ -32,7 +32,7 @@ public class MoveCommand extends Command {
             + PREFIX_MODULE + "CS2103 "
             + PREFIX_GROUP + "T01";
 
-    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Successfully moved to %1$s/%2$s";
+    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Successfully moved student(s) to %1$s, %2$s";
 
     private final List<Index> indexes;
     private final Module module;
@@ -76,7 +76,9 @@ public class MoveCommand extends Command {
                 throw new CommandException(
                         String.format(ModuleSet.MESSAGE_DUPLICATE_GROUP, personToMove.getName(), savedMod, group));
             }
-            personToMove.getModules().add(savedMod, group);
+
+            Module newModule = new Module(savedMod.getCode());
+            personToMove.getModules().add(newModule, group);
         }
 
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);

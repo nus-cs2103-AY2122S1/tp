@@ -149,7 +149,7 @@ class JsonAdaptedPerson {
                 if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
                     modelModule.getGroupSystem().addGroup(modelGroup);
                 }
-                moduleSet.addToSet(modelModule, modelGroup);
+                moduleSet.addToSet(modelModule);
             }
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);

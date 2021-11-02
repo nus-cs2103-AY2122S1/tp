@@ -15,25 +15,32 @@ public class ModuleSet {
     private final Set<Module> modules = new HashSet<>();
 
     /**
-     * Creates a new ModuleSet
+     * Creates a new ModuleSet, which holds a student's modules and classes.
      */
-    public ModuleSet() {
-    }
+    public ModuleSet() {}
 
     /**
      * Adds a module to the person's module set.
      * The module should not have any classes
      */
     public void add(Module mod, Group group) {
-        mod.addGroup(group);
-        modules.add(mod);
-    }
+        if (!containsModule(mod)) {
+            modules.add(mod);
+        }
 
+        if (!containsGroupInModule(mod, group)) {
+            for (Module module : modules) {
+                if (module.equals(mod)) {
+                    module.addGroup(group);
+                }
+            }
+        }
+    }
     /**
      * Adds a module without adding to the module's group system.
      * Used for testing purposes only.
      */
-    public void addToSet(Module mod, Group group) {
+    public void addToSet(Module mod) {
         modules.add(mod);
     }
 
@@ -61,8 +68,10 @@ public class ModuleSet {
     public void removeGroup(Module mod, Group grp) {
         for (Module module : this.getModules()) {
             if (module.getCode().equals(mod.getCode())) {
-                module.deleteGroup(grp);
-                return;
+                if (module.hasGroup(grp)) {
+                    module.deleteGroup(grp);
+                    return;
+                }
             }
         }
     }
@@ -95,7 +104,7 @@ public class ModuleSet {
     public boolean containsGroupInModule(Module mod, Group grp) {
         for (Module module : this.getModules()) {
             if (module.getCode().equals(mod.getCode())) {
-                if (module.getGroup(grp.getCode()).equals(grp)) {
+                if (module.hasGroup(grp)) {
                     return true;
                 }
             }
@@ -126,7 +135,10 @@ public class ModuleSet {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Module module : modules) {
-            sb.append(module.getCode()).append(":").append(module.getGroupSystem()).append(" ");
+            sb.append(module.getCode())
+                    .append(":")
+                    .append(module.getGroupSystem())
+                    .append(" ");
         }
         return sb.toString().trim();
     }
