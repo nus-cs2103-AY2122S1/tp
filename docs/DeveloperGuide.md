@@ -9,8 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* [Opencsv](http://opencsv.sourceforge.net/)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -391,6 +390,22 @@ Step 3. The rest of the list with birthday after this first person will be displ
 
 Step 4. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
 earliest birthday and display remaining people in sorted order.
+
+### Mailing List feature
+Allows user to download a CSV file mailing list of the current view
+Users can use arguments to specify which fields to include in their download
+
+#### Implementation
+
+Step 1. The user filters the contacts using other commands, eg. `find`
+
+Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
+
+Step 3. The user is prompted to pick the name and download location of their generated CSV file.
+
+#### Design considerations:
+* Arguments for the command should follow the standard used in other parts of the software.
+* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
 
 --------------------------------------------------------------------------------------------------------------------
 
