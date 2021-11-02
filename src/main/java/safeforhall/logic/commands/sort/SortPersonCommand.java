@@ -19,12 +19,16 @@ import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
+
+/**
+ * Sorts list of persons in the application.
+ */
 public class SortPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String PARAMETERS = "by/FIELD o/ORDER";
 
-    public static final String MESSAGE_SUCCESS = "Residents have been successfully sorted";
+    public static final String MESSAGE_SUCCESS = "Residents have been successfully sorted.";
     public static final String ALLOWED_FIELDS = "FIELD should be one of the following: "
             + Name.FIELD + ", "
             + Email.FIELD + ", "
@@ -39,24 +43,26 @@ public class SortPersonCommand extends Command {
     public static final String DESCENDING = "d";
     public static final String ALLOWED_ORDER = "ORDER should be one of the following: " + ASCENDING + ", " + DESCENDING;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort residents by field in"
-            + "ascending or descending order \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort residents by field in "
+            + "ascending or descending order. \n"
             + "Parameters: " + PREFIX_SORT + "FIELD " + PREFIX_ORDER + "ORDER \n"
             + ALLOWED_FIELDS + "\n"
             + ALLOWED_ORDER + "\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SORT + Name.FIELD + " " + PREFIX_ORDER + ASCENDING;
 
     private final String field;
     private final String order;
 
 
     /**
-     * Creates a {@code SortCommand} to sort the list of residents
+     * Creates a SortPersonCommand to sort the list of residents.
      *
-     * @param field The field to sort by
-     * @param order Ascending or descending order to sort
+     * @param field The field to sort by.
+     * @param order Ascending or descending order to sort.
      */
     public SortPersonCommand(String field, String order) {
+        requireNonNull(field);
+        requireNonNull(order);
         this.field = field;
         this.order = order;
     }
@@ -71,12 +77,18 @@ public class SortPersonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Comparator<Person> comparator = getComparator(field, order);
+        Comparator<Person> comparator = getComparator();
         model.updateSortedPersonList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    public Comparator<Person> getComparator(String field, String order) throws CommandException {
+
+    /**
+     * Creates a Comparator given the field and order for sort.
+     * @return Comparator that sorts by the field and order specified.
+     * @throws CommandException If field or order provided is invalid.
+     */
+    public Comparator<Person> getComparator() throws CommandException {
         Comparator<Person> comparator;
         switch (field) {
         case Name.FIELD:
@@ -115,6 +127,14 @@ public class SortPersonCommand extends Command {
         default:
             throw new CommandException(ALLOWED_ORDER);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortPersonCommand // instanceof handles nulls
+                && field.equals(((SortPersonCommand) other).field)
+                && order.equals(((SortPersonCommand) other).order));
     }
 
 }

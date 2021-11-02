@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static safeforhall.logic.commands.sort.SortPersonCommand.ASCENDING;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_ORDER;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_SORT;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -30,9 +33,12 @@ import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.logic.commands.find.FindPersonCommand;
 import safeforhall.logic.commands.find.FindPersonCommand.FindCompositePredicate;
+import safeforhall.logic.commands.sort.SortEventCommand;
+import safeforhall.logic.commands.sort.SortPersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
@@ -161,6 +167,19 @@ public class AddressBookParserTest {
                 ExcludeCommand.COMMAND_WORD + " "
                         + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
         assertEquals(command, new ExcludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
+    }
+
+    @Test
+    public void parseCommand_sortPerson() throws Exception {
+        SortPersonCommand command = (SortPersonCommand) parser.parseCommand(SortPersonCommand.COMMAND_WORD
+                + " " + PREFIX_SORT + Name.FIELD + " " + PREFIX_ORDER + ASCENDING, true);
+        assertEquals(new SortPersonCommand(Name.FIELD, ASCENDING), command);
+    }
+    @Test
+    public void parseCommand_sortEvent() throws Exception {
+        SortEventCommand command = (SortEventCommand) parser.parseCommand(SortEventCommand.COMMAND_WORD
+                + " " + PREFIX_SORT + EventName.FIELD + " " + PREFIX_ORDER + ASCENDING, false);
+        assertEquals(new SortEventCommand(EventName.FIELD, ASCENDING), command);
     }
 
     @Test

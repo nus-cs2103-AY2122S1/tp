@@ -1,5 +1,6 @@
 package safeforhall.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
@@ -33,5 +34,16 @@ public class EventDateTest {
 
         EventDate past2 = new EventDate("10-12-2000");
         assertTrue(past2.isPast());
+    }
+
+    @Test
+    public void checkCompareTo() {
+        EventDate e1 = new EventDate("01-10-2020");
+        EventDate e2 = new EventDate("03-10-2020");
+        EventDate e3 = new EventDate("01-10-2020");
+
+        assertEquals(e1.compareTo(e2), -2);
+        assertEquals(e2.compareTo(e1), 2);
+        assertEquals(e3.compareTo(e1), 0);
     }
 }
