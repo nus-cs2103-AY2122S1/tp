@@ -1,8 +1,11 @@
 package seedu.plannermd.logic.parser.apptcommandparser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_UPCOMING_APPOINTMENT_DATE_FIELD;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.plannermd.logic.parser.apptcommandparser.FilterUpcomingAppointmentCommandParser.NO_ARGUMENTS_MESSAGE;
@@ -78,6 +81,19 @@ public class FilterUpcomingAppointmentCommandParserTest {
         assertParseSuccess(parser, filters.getUpcomingFilterDetails(), expectedCommand);
         userInput = PREFIX_DOCTOR + "John   Doe"; // More than 1 white space
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_dateParametersSpecified_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_UPCOMING_APPOINTMENT_DATE_FIELD,
+                FilterUpcomingAppointmentCommand.MESSAGE_USAGE);
+        // Start date provided
+        assertParseFailure(parser, PREFIX_PATIENT + " John " + PREFIX_START + " 30/11/2021", expectedMessage);
+        // End date provided
+        assertParseFailure(parser, PREFIX_DOCTOR + " Alex " + PREFIX_END + " 20/12/2021", expectedMessage);
+        // Start and end date provided
+        assertParseFailure(parser, PREFIX_PATIENT + " John " + PREFIX_DOCTOR + " Alex " + PREFIX_START
+                + " 30/11/2021 " + PREFIX_END + "20/12/2021", expectedMessage);
     }
 
     @Test

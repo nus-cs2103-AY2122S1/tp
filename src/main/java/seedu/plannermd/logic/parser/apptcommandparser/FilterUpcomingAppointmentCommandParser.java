@@ -2,8 +2,11 @@ package seedu.plannermd.logic.parser.apptcommandparser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_UPCOMING_APPOINTMENT_DATE_FIELD;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,13 +39,17 @@ public class FilterUpcomingAppointmentCommandParser implements
     public FilterUpcomingAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(" " + args,
-                PREFIX_DOCTOR, PREFIX_PATIENT);
+                PREFIX_DOCTOR, PREFIX_PATIENT, PREFIX_START, PREFIX_END);
 
         AppointmentFilters filters = AppointmentFilters.upcomingAppointmentsFilter();
 
         if (!argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterUpcomingAppointmentCommand.MESSAGE_USAGE));
+        }
+        if (argumentMultimap.getValue(PREFIX_START).isPresent() || argumentMultimap.getValue(PREFIX_END).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_UPCOMING_APPOINTMENT_DATE_FIELD,
+                    FilterUpcomingAppointmentCommand.MESSAGE_USAGE));
         }
         if (argumentMultimap.getValue(PREFIX_DOCTOR).isPresent()) {
             String doctorKeywords = argumentMultimap.getValue(PREFIX_DOCTOR).get();
