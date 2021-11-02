@@ -113,9 +113,10 @@ Given below are my contributions to the project.
 #### Community
 
 * **Community**:
-    * Fix bug in SampleDataUtils [\#100](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/100)
-    * Fix bugs from PED [\#184](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/184)
-    * Minor Shift to UI layout (i.e. position of command box, result display box) [/#99](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/99)
+    * Fixed bug in SampleDataUtils [\#100](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/100)
+    * Fixed bugs from PED [\#184](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/184)
+    * Minor shift to UI layout (i.e. position of command box, result display box) [/#99](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/99)
+    * Released JAR v1.3.2
     * PRs reviewed: [\#52](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/52), [\#54](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/54),
       [\#63](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/63), [\#65](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/65),
       [\#80](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/80), [\#95](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/95),
