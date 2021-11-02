@@ -10,8 +10,8 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.tuitione.model.student.Student.ENROLLMENT_REMARK_COUNT_CONSTRAINT;
 import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
+import static seedu.tuitione.model.student.Student.REMARK_COUNT_CONSTRAINT;
 
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_REMARK + "overdue";
 
     public static final String MESSAGE_SUCCESS = generateSuccess("New student added:\n%1$s");
-    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(ENROLLMENT_REMARK_COUNT_CONSTRAINT);
+    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(REMARK_COUNT_CONSTRAINT);
     public static final String MESSAGE_DUPLICATE_STUDENT = generateAlert(MESSAGE_DUPLICATE_STUDENT_FOUND);
 
     private final Student toAdd;

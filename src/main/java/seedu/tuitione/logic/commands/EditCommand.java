@@ -11,8 +11,8 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.tuitione.model.student.Student.ENROLLMENT_REMARK_COUNT_CONSTRAINT;
 import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
+import static seedu.tuitione.model.student.Student.REMARK_COUNT_CONSTRAINT;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -59,7 +59,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = generateSuccess("Edited Student: %1$s");
     public static final String MESSAGE_NOT_EDITED = generateAlert("At least one field to edit must be provided.");
     public static final String MESSAGE_DUPLICATE_STUDENT = generateAlert(MESSAGE_DUPLICATE_STUDENT_FOUND);
-    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(ENROLLMENT_REMARK_COUNT_CONSTRAINT
+    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(REMARK_COUNT_CONSTRAINT
             + "\nYou can only add %d more unique remark(s).");
     public static final String MESSAGE_NO_SUCH_REMARK_FOUND = generateAlert("The remark(s) you wish to "
             + "remove does not exist.");

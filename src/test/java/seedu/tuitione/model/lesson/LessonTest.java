@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED;
-import static seedu.tuitione.model.lesson.Lesson.UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED_CONSTRAINT;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
 import java.time.DayOfWeek;
@@ -172,7 +171,7 @@ public class LessonTest {
 
         // we edit a student who has not been enrolled at all
         Student unrelatedStudent = sb.withName("Edited Name Here").build();
-        String expectedMessage = String.format(STUDENT_NOT_ENROLLED, unrelatedStudent.getName(), defaultLesson);
+        String expectedMessage = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, unrelatedStudent.getName(), defaultLesson);
         assertThrows(IllegalArgumentException.class, expectedMessage, () ->
                 defaultLesson.updateStudent(unrelatedStudent, unrelatedStudent));
     }
@@ -195,7 +194,7 @@ public class LessonTest {
     public void removeStudent() {
         Student toRemove = new StudentBuilder().build();
         // student not present
-        String notPresentMessage = String.format(STUDENT_NOT_ENROLLED, toRemove.getName(), defaultLesson);
+        String notPresentMessage = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, toRemove.getName(), defaultLesson);
         assertThrows(IllegalArgumentException.class, notPresentMessage, () -> defaultLesson.unenrollStudent(toRemove));
         assertEquals(0, defaultLesson.getLessonSize());
 

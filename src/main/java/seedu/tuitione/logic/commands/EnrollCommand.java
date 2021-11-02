@@ -5,9 +5,11 @@ import static seedu.tuitione.commons.core.Messages.generateAlert;
 import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
-import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
-import static seedu.tuitione.model.lesson.Lesson.MAX_LESSON_SIZE;
-import static seedu.tuitione.model.student.Student.ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.CONFLICTING_TIMINGS_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.DIFFERENT_GRADE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.LESSON_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_ALREADY_ENROLLED_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT;
 
 import java.util.List;
 
@@ -31,12 +33,6 @@ public class EnrollCommand extends Command {
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "1";
 
     public static final String MESSAGE_SUCCESS = generateSuccess("%1$s enrolled into lesson:\n%2$s");
-    public static final String MESSAGE_UNABLE_TO_ENROLL = generateAlert("%1$s cannot be enrolled into %2$s");
-    public static final String MESSAGE_MORE_THAN_MAX_STUDENTS = generateAlert(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT);
-    public static final String MESSAGE_STUDENT_IN_LESSON = generateAlert("%1$s is already enrolled "
-            + "in the existing %2$s");
-    public static final String MESSAGE_MORE_THAN_MAX_LESSONS = generateAlert(ENROLLMENT_MESSAGE_CONSTRAINT
-            + "Please unenroll the student from a lesson before enrolling them in another.");
 
     private final Index indexStudent;
     private final Index indexLesson;
@@ -68,21 +64,28 @@ public class EnrollCommand extends Command {
         }
         Lesson lesson = lessonList.get(indexLesson.getZeroBased());
 
-        // individual checks
-        if (lesson.containsStudent(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), lesson));
-        }
+        // run checks
+        String alertMessageContainer;
         if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
-            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS, studentToEnroll.getName(),
-                    MAX_LESSON_SIZE));
-        }
-        if (!lesson.isAbleToEnrollMoreStudents()) {
-            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_STUDENTS, lesson.getLessonCode()));
-        }
+            alertMessageContainer = String.format(STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT, studentToEnroll.getName());
+            throw new CommandException(generateAlert(alertMessageContainer));
 
-        // final overall check
-        if (!lesson.isAbleToEnroll(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
+        } else if (lesson.containsStudent(studentToEnroll)) {
+            alertMessageContainer = String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT,
+                    studentToEnroll.getName(), lesson);
+            throw new CommandException(generateAlert(alertMessageContainer));
+
+        } else if (lesson.doesStudentHaveConflictingTimings(studentToEnroll)) {
+            alertMessageContainer = String.format(CONFLICTING_TIMINGS_CONSTRAINT, studentToEnroll.getName(), lesson);
+            throw new CommandException(generateAlert(alertMessageContainer));
+
+        } else if (!lesson.isStudentOfSameGrade(studentToEnroll)) {
+            alertMessageContainer = String.format(DIFFERENT_GRADE_CONSTRAINT, studentToEnroll.getName(), lesson);
+            throw new CommandException(generateAlert(alertMessageContainer));
+
+        } else if (!lesson.isAbleToEnrollMoreStudents()) {
+            alertMessageContainer = String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, lesson);
+            throw new CommandException(generateAlert(alertMessageContainer));
         }
 
         lesson.enrollStudent(studentToEnroll);
