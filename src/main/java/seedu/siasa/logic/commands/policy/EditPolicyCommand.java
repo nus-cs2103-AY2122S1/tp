@@ -74,7 +74,7 @@ public class EditPolicyCommand extends Command {
         List<Policy> lastShownList = model.getFilteredPolicyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
         }
 
         Policy policyToEdit = lastShownList.get(index.getZeroBased());
