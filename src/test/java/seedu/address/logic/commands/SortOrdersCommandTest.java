@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalOrders.SALESORDER1;
 import static seedu.address.testutil.TypicalOrders.SALESORDER2;
 import static seedu.address.testutil.TypicalOrders.SALESORDER3;
 import static seedu.address.testutil.TypicalOrders.SALESORDER4;
+import static seedu.address.testutil.TypicalOrders.SALESORDER5;
 import static seedu.address.testutil.TypicalOrders.getTypicalOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
@@ -26,19 +27,19 @@ import seedu.address.model.order.Order;
 import seedu.address.model.sort.SortDescriptor;
 import seedu.address.testutil.SortDescriptorBuilder;
 
-class SortOrdersCommandTest {
+public class SortOrdersCommandTest {
+    public static final SortDescriptor DATE_ASC = new SortDescriptorBuilder().onDateField().inAscOrder().build();
+    public static final SortDescriptor DATE_DESC = new SortDescriptorBuilder().onDateField().inDescOrder().build();
+    public static final SortDescriptor AMOUNT_ASC = new SortDescriptorBuilder().onAmountField().inAscOrder().build();
+    public static final SortDescriptor AMOUNT_DESC = new SortDescriptorBuilder().onAmountField().inDescOrder().build();
+
+    public static final SortOrdersCommand SORT_BY_DATE_ASC = new SortOrdersCommand(DATE_ASC);
+    public static final SortOrdersCommand SORT_BY_DATE_DESC = new SortOrdersCommand(DATE_DESC);
+    public static final SortOrdersCommand SORT_BY_AMOUNT_ASC = new SortOrdersCommand(AMOUNT_ASC);
+    public static final SortOrdersCommand SORT_BY_AMOUNT_DESC = new SortOrdersCommand(AMOUNT_DESC);
+
     private Model model;
     private Model expectedModel;
-
-    private final SortDescriptor dateAsc = new SortDescriptorBuilder().onDateField().inAscendingOrder().build();
-    private final SortDescriptor dateDesc = new SortDescriptorBuilder().onDateField().inDescendingOrder().build();
-    private final SortDescriptor amountAsc = new SortDescriptorBuilder().onAmountField().inAscendingOrder().build();
-    private final SortDescriptor amountDesc = new SortDescriptorBuilder().onAmountField().inDescendingOrder().build();
-
-    private final SortOrdersCommand sortByDateAsc = new SortOrdersCommand(dateAsc);
-    private final SortOrdersCommand sortByDateDesc = new SortOrdersCommand(dateDesc);
-    private final SortOrdersCommand sortByAmountAsc = new SortOrdersCommand(amountAsc);
-    private final SortOrdersCommand sortByAmountDesc = new SortOrdersCommand(amountDesc);
 
     @BeforeEach
     public void setUp() {
@@ -50,58 +51,58 @@ class SortOrdersCommandTest {
 
     @Test
     public void execute_filteredList_sortsFilteredList() {
-        String expectedMessage = amountAsc.generateSuccessMessage();
+        String expectedMessage = AMOUNT_ASC.generateSuccessMessage();
 
         OrderBook sortedOrderBook = new OrderBook();
         List<Order> sortedOrdersAmtAsc =
-                new ArrayList<>(Arrays.asList(SALESORDER1, SALESORDER3, SALESORDER2, SALESORDER4));
+                new ArrayList<>(Arrays.asList(SALESORDER5, SALESORDER1, SALESORDER3, SALESORDER2, SALESORDER4));
         sortedOrderBook.setOrders(sortedOrdersAmtAsc);
         expectedModel.setOrderBook(sortedOrderBook);
 
         model.updateFilteredOrderList(Model.PREDICATE_SHOW_COMPLETED_ORDERS);
         expectedModel.updateFilteredOrderList(Model.PREDICATE_SHOW_COMPLETED_ORDERS);
 
-        assertCommandSuccess(sortByAmountAsc, model, expectedMessage, expectedModel);
+        assertCommandSuccess(SORT_BY_AMOUNT_ASC, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_unsortedList_sortsList() {
-        String expectedMessage = amountDesc.generateSuccessMessage();
+        String expectedMessage = AMOUNT_DESC.generateSuccessMessage();
 
         List<Order> sortedOrdersAmtDesc =
-                new ArrayList<>(Arrays.asList(SALESORDER2, SALESORDER4, SALESORDER3, SALESORDER1));
+                new ArrayList<>(Arrays.asList(SALESORDER2, SALESORDER4, SALESORDER3, SALESORDER1, SALESORDER5));
         OrderBook sortedOrderBook = new OrderBook();
         sortedOrderBook.setOrders(sortedOrdersAmtDesc);
         expectedModel.setOrderBook(sortedOrderBook);
 
-        assertCommandSuccess(sortByAmountDesc, model, expectedMessage, expectedModel);
+        assertCommandSuccess(SORT_BY_AMOUNT_DESC, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_emptyList_success() {
-        String expectedMessage = amountDesc.generateSuccessMessage();
+        String expectedMessage = AMOUNT_DESC.generateSuccessMessage();
         model.setOrderBook(new OrderBook());
         expectedModel.setOrderBook(new OrderBook());
-        assertCommandSuccess(sortByAmountDesc, model, expectedMessage, expectedModel);
+        assertCommandSuccess(SORT_BY_AMOUNT_DESC, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
         // same object -> returns true
-        assertTrue(sortByDateAsc.equals(sortByDateAsc));
+        assertTrue(SORT_BY_DATE_ASC.equals(SORT_BY_DATE_ASC));
 
         // same values -> returns true
-        SortOrdersCommand sortByDateAscCommandCopy = new SortOrdersCommand(dateAsc);
-        assertTrue(sortByDateAsc.equals(sortByDateAscCommandCopy));
+        SortOrdersCommand sortByDateAscCommandCopy = new SortOrdersCommand(DATE_ASC);
+        assertTrue(SORT_BY_DATE_ASC.equals(sortByDateAscCommandCopy));
 
         // different types -> returns false
-        assertFalse(sortByDateAsc.equals(1));
+        assertFalse(SORT_BY_DATE_ASC.equals(1));
 
         // null -> returns false
-        assertFalse(sortByDateAsc.equals(null));
+        assertFalse(SORT_BY_DATE_ASC.equals(null));
 
         // different ordering -> returns false
-        assertFalse(sortByDateAsc.equals(sortByAmountDesc));
+        assertFalse(SORT_BY_DATE_ASC.equals(SORT_BY_AMOUNT_DESC));
 
     }
 }

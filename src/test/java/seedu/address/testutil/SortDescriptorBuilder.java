@@ -52,7 +52,7 @@ public class SortDescriptorBuilder {
     /**
      * Initializes the {@code SortOrdering} of the {@code SortDescriptor} that we are building to {@code ASC_ORDER}.
      */
-    public SortDescriptorBuilder inAscendingOrder() {
+    public SortDescriptorBuilder inAscOrder() {
         this.sortOrdering = ASC_ORDER;
         return this;
     }
@@ -60,7 +60,7 @@ public class SortDescriptorBuilder {
     /**
      * Initializes the {@code SortOrdering} of the {@code SortDescriptor} that we are building to {@code DESC_ORDER}.
      */
-    public SortDescriptorBuilder inDescendingOrder() {
+    public SortDescriptorBuilder inDescOrder() {
         this.sortOrdering = DESC_ORDER;
         return this;
     }

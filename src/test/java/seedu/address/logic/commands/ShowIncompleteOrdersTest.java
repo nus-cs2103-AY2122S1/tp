@@ -80,7 +80,7 @@ class ShowIncompleteOrdersTest {
 
         ShowIncompleteOrders command = new ShowIncompleteOrders();
         expectedModel.updateFilteredOrderList(PREDICATE_SHOW_INCOMPLETE_ORDERS);
-        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 2);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
