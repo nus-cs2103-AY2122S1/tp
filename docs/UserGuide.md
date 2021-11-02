@@ -153,8 +153,11 @@ Notes:
 * If the MC requirement is not satisfied, the completed MCs and progress bar will be coloured pink.<br>
 ![Unsatisfied MC Requirement](images/UnsatisfiedMCRequirement.png)
 
-#### 3.2.6 Current Semester
+#### 3.2.6 Current Year and Semester
 * Displays the current year and semester that the application is in.
+* The current year and semester affects the colours of the [modules](#33-module-explanation) in your academic plan.
+* The current year and semester also affects your [MC goal progress](#325-mc-goal-progress).
+* You can use the [set](#423-setting-users-mc-goal-or-current-semester--set) command to update the current year and semester that the application is in.
 
 #### 3.2.7 Current MC goal
 * Displays your current [MC goal](#mcgoal).
