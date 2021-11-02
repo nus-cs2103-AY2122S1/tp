@@ -148,7 +148,7 @@ public class MainWindow extends UiPart<Stage> {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openUserGuide();
-            } catch (IOException | SecurityException | IllegalArgumentException ex) {
+            } catch (IOException | SecurityException | UnsupportedOperationException ex) {
                 handleBackUpHelp();
             }
         } else {
@@ -163,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openCommandSummary();
-            } catch (IOException | SecurityException | IllegalArgumentException ex) {
+            } catch (IOException | SecurityException | UnsupportedOperationException ex) {
                 handleBackUpHelp();
             }
         } else {
