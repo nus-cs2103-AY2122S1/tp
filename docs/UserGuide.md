@@ -470,7 +470,7 @@ Action | Format, Examples
 **ListClients** | `listclients`
 **AddClient** | `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
 **DeleteClient** | `deleteclient INDEX`<br> e.g., `delete 3`
-**EditClient** | `editclient INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**EditClient** | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **FindClients** | `findclient KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
 ### Task Commands
@@ -480,7 +480,7 @@ Action | Format, Examples
 **ListTasks** | `listtasks`
 **AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g., `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
 **DeleteTask** | `deletetask INDEX` e.g., `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
+**EditTask** | `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
 **MarkTask** | `marktask INDEX` e.g., `marktask 2`
 **FindTasks** | `findtask KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtask buttons`
 **CompletedTasks** | `completedtasks`
