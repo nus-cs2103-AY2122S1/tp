@@ -22,8 +22,8 @@ public class Help {
      */
     public void openCommandSummary() throws IOException {
         Desktop.getDesktop().browse(
-                URI.create("https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/docs/UserGuide.md#:~:text"
-                        + "=jameslee%40example.com-,Find,-find%20KEYWORD%20%5BMORE_KEYWORDS"));
+                URI.create("https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/docs/"
+                        + "UserGuide.md#:~:text=Action-,Format%2C%20Examples,-Add"));
     }
 
     /**
