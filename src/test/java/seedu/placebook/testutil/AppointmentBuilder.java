@@ -31,6 +31,7 @@ public class AppointmentBuilder {
 
     /**
      * Creates a {@code} AppointmentBuilder with the two default values.
+     * This is a simple way to create appointments without time conflicts.
      */
     public AppointmentBuilder(boolean isFirst) {
         UniquePersonList clients = new UniquePersonList();
