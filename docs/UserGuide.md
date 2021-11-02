@@ -142,8 +142,10 @@ IT Professionalism | "it professionalism"
 Math and Science | "math and science"
 
 Notes:
-* If the MC requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.
-* If the MC requirement is not satisfied, the completed MCs and progress bar will be coloured pink.
+* If the MC requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.<br>
+![Satisfied MC Requirement](images/SatisfiedMCRequirement.png)  
+* If the MC requirement is not satisfied, the completed MCs and progress bar will be coloured pink.<br>
+![Unsatisfied MC Requirement](images/UnsatisfiedMCRequirement.png)
 
 #### 3.2.6 Current Semester
 * Displays the current year and semester that the application is in.
