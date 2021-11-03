@@ -202,6 +202,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleShowResult() {
         labResultListPanel = new LabResultListPanel(logic.getSelectedInformation());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
+        logger.fine("Showing student's lab results.");
     }
 
     /**

@@ -19,4 +19,19 @@ public class UploadCommandResult extends CommandResult {
     public Model getModel() {
         return model;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UploadCommandResult)) {
+            return false;
+        }
+
+        UploadCommandResult otherCommandResult = (UploadCommandResult) other;
+        return super.getFeedbackToUser().equals(otherCommandResult.getFeedbackToUser())
+                && model.equals(otherCommandResult.model);
+    }
 }
