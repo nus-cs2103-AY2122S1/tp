@@ -34,8 +34,7 @@
 ### Add a new module: `add module`
 
 Add a new module to TAB.<br>
-Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 2-4 numbers, followed by 2-4 capital letters.
-
+Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 Format: `add module m/<module name>`
 
 Examples:
@@ -45,8 +44,7 @@ Examples:
 ### Edit a module's name: `edit module`
 
 Edit the name of the module.<br>
-Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 2-4 numbers, followed by 2-4 capital letters.
-
+Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 Format: `edit module m/<old module name> mn/<new module name>`
 
 Examples:
@@ -56,8 +54,7 @@ Examples:
 ### Delete a module from TAB: `delete module`
 
 Delete the specified module from TAB.
-Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 2-4 numbers, followed by 2-4 capital letters.
-
+Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 Format: `delete module m/<module name>`
 
 Examples:
