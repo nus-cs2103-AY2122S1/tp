@@ -560,7 +560,11 @@ Action | Format | Examples
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
 
 
-* **Q:** Am i able to add or edit remarks to have spacings within them?
+* **Q:** Am I able to add or edit remarks to have spacings within them?
 
   **A:** No. The number of characters each remark can have is capped at 25, and must be single words.
 
+
+* **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
+
+  **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes (e.g `1400` and `1415` are valid inputs, while `1415` is an invalid input).
