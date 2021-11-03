@@ -28,13 +28,13 @@ import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing module in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the module identified "
             + "by the index number used in the displayed module list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -49,7 +49,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the module tracker.";
     public static final String MESSAGE_SAME_VALUE = "The given value for the field(s) must be different from value"
             + " that it is replacing.";
 
@@ -57,8 +57,8 @@ public class EditCommand extends Command {
     private final EditModuleDescriptor editModuleDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editModuleDescriptor details to edit the person with
+     * @param index of the module in the filtered module list to edit
+     * @param editModuleDescriptor details to edit the module with
      */
     public EditCommand(Index index, EditModuleDescriptor editModuleDescriptor) {
         requireNonNull(index);
@@ -94,8 +94,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Module} with the details of {@code moduleToEdit}
+     * edited with {@code editModuleDescriptor}.
      */
     private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;
@@ -134,8 +134,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the module with. Each non-empty field value will replace the
+     * corresponding field value of the module.
      */
     public static class EditModuleDescriptor {
         private Code code;

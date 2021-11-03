@@ -37,8 +37,6 @@ public class TakeCommand extends Command {
             + PREFIX_SEMESTER + "1 ";
 
     public static final String MESSAGE_SUCCESS = "Module scheduled: %1$s";
-    public static final String MESSAGE_NOT_SCHEDULED = "The year and semester fields must be provided";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module has already been scheduled in the same semester";
 
     private final Index index;
     private final AcademicCalendar academicCalendar;
