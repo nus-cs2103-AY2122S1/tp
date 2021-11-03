@@ -59,7 +59,6 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
             }
             if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
                 dates = extractTupleDates(argMultimap);
-
             }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {

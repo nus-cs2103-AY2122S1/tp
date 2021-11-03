@@ -30,9 +30,9 @@ public class AddShiftCommand extends Command {
     public static final String COMMAND_WORD = "addShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift to the staff identified "
-            + "by the index number used in the displayed staff list or the name of staff the period over"
-            + "which the shift is active over is optional. Date input is used to indicate the duration of"
-            + "the shift to add."
+            + "by the index number used in the displayed staff list or the name of staff. the period over"
+            + "which the shift is active over is optional. Date inputs are used to indicate the period of"
+            + "the shift to add and they are optional."
             + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
