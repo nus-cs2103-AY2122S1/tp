@@ -327,7 +327,7 @@ Step 1. The user launches the application.
 
 Step 2. The user executes `deletem t/friends g/m` command to delete all contacts with the tag `friends` and gender `M`.
 
-Step 3. This will call `DeleteMultipleCommandParsr#parse` which will then parse the arguments provided.
+Step 3. This will call `DeleteMultipleCommandParser#parse` which will then parse the arguments provided.
 Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
 
 Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.

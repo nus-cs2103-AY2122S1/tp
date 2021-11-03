@@ -12,7 +12,7 @@ end box
 [-> LogicManager : execute("deletem t/friends g/m")
 activate LogicManager
 
-ref over LogicManager,DeleteMultipleCommand : Parse DeleteMultipleParserCommand
+ref over LogicManager,DeleteMultipleCommand : Parse Delete Multiple Command
 
 LogicManager -> DeleteMultipleCommand : execute()
 activate DeleteMultipleCommand
