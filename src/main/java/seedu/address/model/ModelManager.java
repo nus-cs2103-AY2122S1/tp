@@ -286,6 +286,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasApplicantsApplyingTo(Position position) {
+        requireNonNull(position);
+        return applicantBook.hasApplicantsApplyingTo(position);
+    }
+
+    @Override
     public Applicant getApplicantByNameIgnoreCase(Name applicantName) {
         requireNonNull(applicantName);
         return applicantBook.getApplicantByNameIgnoreCase(applicantName);

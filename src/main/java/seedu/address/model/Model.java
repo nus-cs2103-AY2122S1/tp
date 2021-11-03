@@ -22,6 +22,8 @@ public interface Model {
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
+    //=========== User prefs related methods =============================================================
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -41,28 +43,6 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
-
-    /**
-     * Adds a new applicant to MrTechRecruiter with the given particulars.
-     * The intended applicant must not already exist in the applicant book.
-     *
-     * @return the newly added applicant.
-     */
-    Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
-
-    /**
-     * Returns true if an applicant named {@code applicantName} exists in MrTechRecruiter.
-     */
-    boolean hasApplicantWithName(Name applicantName);
-
-    /**
-     * Returns the applicant with the specified name, if any.
-     */
-    Applicant getApplicantByNameIgnoreCase(Name applicantName);
-
-
-
 
     //=========== Position related methods =============================================================
 
@@ -151,10 +131,33 @@ public interface Model {
     void addApplicant(Applicant applicant);
 
     /**
+     * Adds a new applicant to MrTechRecruiter with the given particulars.
+     * The intended applicant must not already exist in the applicant book.
+     *
+     * @return the newly added applicant.
+     */
+    Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
+
+    /**
      * Returns true if {@code applicant} exists in MrTechRecruiter.
      */
     boolean hasApplicant(Applicant applicant);
 
+    /**
+     * Returns true if an applicant named {@code applicantName} exists in MrTechRecruiter.
+     */
+    boolean hasApplicantWithName(Name applicantName);
+
+    /**
+     * Returns true if MrTechRecruiter has applicants applying to
+     * the specified position.
+     */
+    boolean hasApplicantsApplyingTo(Position position);
+
+    /**
+     * Returns the applicant with the specified name, if any.
+     */
+    Applicant getApplicantByNameIgnoreCase(Name applicantName);
 
     /**
      * Deletes the given applicant.
@@ -207,5 +210,4 @@ public interface Model {
      * Undoes the previous modification.
      */
     String recoverHistory();
-
 }
