@@ -56,11 +56,11 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String sanitizedName = name.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "");
-        if (!Name.isValidName(sanitizedName)) {
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(sanitizedName);
+        return new Name(trimmedName);
     }
 
     /**
@@ -71,11 +71,11 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
-        String sanitizedPhone = phone.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "");
-        if (!Phone.isValidPhone(sanitizedPhone)) {
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(sanitizedPhone);
+        return new Phone(trimmedPhone);
     }
 
     /**
@@ -86,11 +86,11 @@ public class ParserUtil {
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
-        String sanitizedAddress = address.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "");
-        if (!Address.isValidAddress(sanitizedAddress)) {
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
-        return new Address(sanitizedAddress);
+        return new Address(trimmedAddress);
     }
 
     /**
@@ -101,11 +101,11 @@ public class ParserUtil {
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
-        String sanitizedEmail = email.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "");
-        if (!Email.isValidEmail(sanitizedEmail)) {
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(sanitizedEmail);
+        return new Email(trimmedEmail);
     }
 
     /**
@@ -129,8 +129,8 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagSequence : tags) { // {"tag1", "tag2,tag3"}
-            String[] tokenizedTags = tagSequence.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "").split(",");
+        for (String tagSequence : tags) {
+            String[] tokenizedTags = tagSequence.trim().split(",");
             for (String tag : tokenizedTags) {
                 tagSet.add(parseTag(tag));
             }

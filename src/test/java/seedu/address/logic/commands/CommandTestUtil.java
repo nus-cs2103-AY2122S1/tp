@@ -38,31 +38,27 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + String.format("\"%s\"", VALID_NAME_AMY);
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + String.format("\"%s\"", VALID_NAME_BOB);
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + " " + String.format("\"%s\"", VALID_PHONE_AMY);
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + " " + String.format("\"%s\"", VALID_PHONE_BOB);
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + " " + String.format("\"%s\"", VALID_EMAIL_AMY);
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + " " + String.format("\"%s\"", VALID_EMAIL_BOB);
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + " "
-            + String.format("\"%s\"", VALID_ADDRESS_AMY);
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + " "
-            + String.format("\"%s\"", VALID_ADDRESS_BOB);
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + " "
-            + String.format("\"%s\"", VALID_TAG_FRIEND);
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + " "
-            + String.format("\"%s\"", VALID_TAG_HUSBAND);
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + " " + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + " " + VALID_NAME_BOB;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + " " + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + " " + VALID_PHONE_BOB;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + " " + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + " " + VALID_EMAIL_BOB;
+    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + " " + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + " " + VALID_ADDRESS_BOB;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + " " + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + " " + VALID_TAG_HUSBAND;
 
     // '&' not allowed in names
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " " + String.format("\"%s\"", "James&");
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " " + "James&";
+    // Empty string not allowed in names
+    public static final String INVALID_EMPTY_NAME = " " + PREFIX_NAME + " ";
     // 'a' not allowed in phones
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " " + String.format("\"%s\"", "911a");
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + " " + "911a";
     // missing '@' symbol
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " " + String.format("\"%s\"", "bob!yahoo");
-    // whitespace not allowed for addresses
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + " \" \" ";
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + " " + "bob!yahoo";
     // '*' not allowed in tags
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " " + String.format("\"%s\"", "hubby*");
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " " + "hubby*";
 
     // For issue #150
     public static final String STRAY_NAME_PREFIX = "-name";
@@ -71,27 +67,17 @@ public class CommandTestUtil {
     public static final String STRAY_ADDRESS_PREFIX = "-address";
     public static final String STRAY_TAG_PREFIX = "-tag";
 
-    public static final String STRAY_NAME_PREFIX_DESC_AMY = " " + STRAY_NAME_PREFIX + " "
-            + String.format("\"%s\"", VALID_NAME_AMY);
-    public static final String STRAY_PHONE_PREFIX_DESC_AMY = " " + STRAY_PHONE_PREFIX + " "
-            + String.format("\"%s\"", VALID_PHONE_AMY);
-    public static final String STRAY_EMAIL_PREFIX_DESC_AMY = " " + STRAY_EMAIL_PREFIX + " "
-            + String.format("\"%s\"", VALID_EMAIL_AMY);
-    public static final String STRAY_ADDRESS_PREFIX_DESC_AMY = " " + STRAY_ADDRESS_PREFIX + " "
-            + String.format("\"%s\"", VALID_ADDRESS_AMY);
-    public static final String STRAY_TAG_PREFIX_DESC_FRIEND = " " + STRAY_TAG_PREFIX + " "
-            + String.format("\"%s\"", VALID_TAG_FRIEND);
+    public static final String STRAY_NAME_PREFIX_DESC_AMY = " " + STRAY_NAME_PREFIX + " " + VALID_NAME_AMY;
+    public static final String STRAY_PHONE_PREFIX_DESC_AMY = " " + STRAY_PHONE_PREFIX + " " + VALID_PHONE_AMY;
+    public static final String STRAY_EMAIL_PREFIX_DESC_AMY = " " + STRAY_EMAIL_PREFIX + " " + VALID_EMAIL_AMY;
+    public static final String STRAY_ADDRESS_PREFIX_DESC_AMY = " " + STRAY_ADDRESS_PREFIX + " " + VALID_ADDRESS_AMY;
+    public static final String STRAY_TAG_PREFIX_DESC_FRIEND = " " + STRAY_TAG_PREFIX + " " + VALID_TAG_FRIEND;
 
-    public static final String STRAY_NAME_PREFIX_DESC_BOB = " " + STRAY_NAME_PREFIX + " "
-            + String.format("\"%s\"", VALID_NAME_BOB);
-    public static final String STRAY_PHONE_PREFIX_DESC_BOB = " " + STRAY_PHONE_PREFIX + " "
-            + String.format("\"%s\"", VALID_PHONE_BOB);
-    public static final String STRAY_EMAIL_PREFIX_DESC_BOB = " " + STRAY_EMAIL_PREFIX + " "
-            + String.format("\"%s\"", VALID_EMAIL_BOB);
-    public static final String STRAY_ADDRESS_PREFIX_DESC_BOB = " " + STRAY_ADDRESS_PREFIX + " "
-            + String.format("\"%s\"", VALID_ADDRESS_BOB);
-    public static final String STRAY_TAG_PREFIX_DESC_HUSBAND = " " + STRAY_TAG_PREFIX + " "
-            + String.format("\"%s\"", VALID_TAG_HUSBAND);
+    public static final String STRAY_NAME_PREFIX_DESC_BOB = " " + STRAY_NAME_PREFIX + " " + VALID_NAME_BOB;
+    public static final String STRAY_PHONE_PREFIX_DESC_BOB = " " + STRAY_PHONE_PREFIX + " " + VALID_PHONE_BOB;
+    public static final String STRAY_EMAIL_PREFIX_DESC_BOB = " " + STRAY_EMAIL_PREFIX + " " + VALID_EMAIL_BOB;
+    public static final String STRAY_ADDRESS_PREFIX_DESC_BOB = " " + STRAY_ADDRESS_PREFIX + " " + VALID_ADDRESS_BOB;
+    public static final String STRAY_TAG_PREFIX_DESC_HUSBAND = " " + STRAY_TAG_PREFIX + " " + VALID_TAG_HUSBAND;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
