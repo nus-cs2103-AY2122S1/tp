@@ -319,7 +319,7 @@ Finds a client in Sellah.
 
 Format : `find -c NAME`
 
-Example : `find -c john` Shows a list of all clients with the `NAME` `john` in Sellah.
+Example : `find -c Benson` Shows a list of all clients with the `NAME` `Benson` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindClientCommand.png)
@@ -330,7 +330,7 @@ Finds a product in Sellah.
 
 Format : `find -p NAME`
 
-Example : `find -p phone` Shows a list of all products with the `NAME` `phone` in Sellah.
+Example : `find -p apple` Shows a list of all products with the `NAME` `apple` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindProductCommand.png)
