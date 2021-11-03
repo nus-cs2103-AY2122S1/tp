@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 public class LastDateTest {
@@ -28,6 +31,19 @@ public class LastDateTest {
         assertTrue(LastDate.isValidDate("21-10-2021"));
         assertTrue(LastDate.isValidDate("10.10.2021"));
         assertTrue(LastDate.isValidDate("10/10/2021"));
+    }
+
+    @Test
+    public void isFutureDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        assertFalse(LastDate.isFutureDate(LastDate.DEFAULT_DATE)); // default lastDate
+        assertFalse(LastDate.isFutureDate(LocalDate.now().format(formatter))); // current date
+        assertFalse(LastDate.isFutureDate(LocalDate.now().minusDays(1).format(formatter))); // a day before current date
+        assertFalse(LastDate.isFutureDate("10-10-2020")); // current date
+
+        assertTrue(LastDate.isFutureDate(LocalDate.now().plusDays(1).format(formatter))); // a day after current date
+        assertTrue(LastDate.isFutureDate("10-10-2022")); // a day after current date
     }
 
     @Test
