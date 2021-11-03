@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -122,14 +123,13 @@ public class TimeRange implements Comparable<TimeRange> {
      * Compares this TimeRange object with the other TimeRange object.
      *
      * @param other The TimeRange object to compare with.
-     * @return 1, if this is later than other;0 if clashing; -1 if this is earlier.
+     * @return 1, if this is later than other; 0 if same start and end; -1 if this is earlier.
      */
     @Override
     public int compareTo(TimeRange other) {
-        /*
-        start.compareTo(other.start) will not return 0 because it will
-        be labelled as clashing with this time range.
-         */
-        return isClashing(other) ? 0 : start.compareTo(other.start);
+        // compares by start time then end time
+        return Comparator.comparing(TimeRange::getStart)
+                .thenComparing(TimeRange::getEnd)
+                .compare(this, other);
     }
 }
