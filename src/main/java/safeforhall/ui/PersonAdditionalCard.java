@@ -58,10 +58,17 @@ public class PersonAdditionalCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
+        name.setWrapText(true);
+
         room.setText(Room.DESC + person.getRoom().room);
         phone.setText(Phone.DESC + person.getPhone().value);
+
         email.setText(Email.DESC + person.getEmail().value);
+        email.setWrapText(true);
+
         faculty.setText(Faculty.DESC + person.getFaculty().faculty);
+        faculty.setWrapText(true);
+
         vaccStatus.setText(VaccStatus.DESC + person.getVaccStatus().vaccStatus);
 
         ArrayList<Event> eventList = logic.getModel().getPersonEvents(person, event -> true);
@@ -71,6 +78,7 @@ public class PersonAdditionalCard extends UiPart<Region> {
                 .reduce("", (name, acc) -> name.equals("")
                         ? name + acc
                         : name + ", " + acc)));
+        events.setWrapText(true);
 
         if (person.hasMissedDeadline()) {
             Label textBox = new Label("Fet late by: ");
