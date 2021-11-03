@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 import static seedu.address.testutil.TypicalStudents.getTypicalCsBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,13 +30,16 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
-
         Model expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
         expectedModel.addStudent(validStudent);
 
         assertCommandSuccess(new AddCommand(validStudent), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validStudent), expectedModel);
+        //Adding a student will mutate this group, we need remove the student we added
+        //to ensure the other tests run smoothly
+        TYPICAL_GROUP_CS2103T.removeStudentName(validStudent.getName());
     }
+
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
