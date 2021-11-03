@@ -163,8 +163,10 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
+
 Here's the class diagram of the `Person` component within `Model`:
 ![PersonClassDiagram](images/PersonClassDiagram.png)
+
 Heres the class diagram of the `Appointment` component within `Model`:
 ![AppointmentClassDiagram](images/AppointmentClassDiagram.png)
 
@@ -199,7 +201,7 @@ Classes used by multiple components are in the `seedu.plannermd.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Stateful PlannerMd <a name="stateful-plannermd"/>
+### Stateful PlannerMD <a name="stateful-plannermd"/>
 With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
 a state is used to determine which list should be interacted with.
 
@@ -227,7 +229,7 @@ The Activity Diagram below illustrates the execution flow when the user executes
    * If the currently displayed tab is the doctor tab, it is toggled to the patient tab.
 3. The GUI displays a success message.
 
-#### Execution
+#### Implementation
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call in Patient state.
 
 ![ToggleCommandSequenceDiagram](images/ToggleCommandSequenceDiagram.png)
@@ -239,7 +241,6 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
    3.2. A `CommandResult` instance is instantiated with a success message.
 3. The `CommandResult` is then returned
 
-#### Result
 The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
 
 ### Remark <a name="remark"/>
@@ -267,7 +268,7 @@ The activity Diagram below illustrates the execution flow when the user executes
     * If remark input is not empty, effectively deletes the remark, generate successful edit remark message.
 4. The GUI displays a success message.
 
-#### Execution
+#### Implementation
 The Sequence Diagram below illustrates the interactions within the Logic component for the execute("remark 1 r/bad cough") API call. <br>
 
 ![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
@@ -281,7 +282,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
    3.2. A `CommandResult` instance is instantiated with a success message.
 4. The `CommandResult` is then returned
 
-#### Result
+
 The GUI updates the patient record in the displayed list and displays a success message.
 
 ### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
@@ -292,7 +293,7 @@ changes in patients and doctors through user command or otherwise needs to be pr
 * When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
   * `RemarkCommand`, `EditCommand` and `TagCommand`
 
-#### Execution
+#### Implementation
 The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
 
 ![PropagateChangesDiagram](images/PropagateChangesDiagram.png)
@@ -309,7 +310,7 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 2. `UniqueAppointmentList::editAppointmentWithPerson` is called <br>
     * Loops through `UniqueAppointmentList` and replaces `appointment` which references `patientToEdit` with a new `editedAppointment` which has the same fields as `appointment` but references `editedPatient`.
     
-#### Result
+
 GUI is updated to display the propagated changes in the appointment list.
 
 #### Design considerations
@@ -845,6 +846,77 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a patient <a name="find-patient"/>
 
+### Editing a patient's remark <a name="remark-patient"/>
+1. Editing a patient's remark while all patient are being shown
+
+    1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
+
+    2. Test case: `remark 1 r/Prefers Dr. Mok`<br>
+        1. If the first patient had no remarks initially,
+           Expected: A new remark field displaying `Prefers Dr. Mok` is added to the first patient's fields. Details of the edited contact are shown in the status message.
+        2. If the first patient had remarks initially,
+           Expected: First patient's remarks are edited to `Prefers Dr. Mok`. Details of the edited contact are shown in the status message.
+
+    3. Test case: `remark 1 r/`<br>
+       Expected: First patient's remarks are deleted and the remark field is no longer displayed for the patient. Details of the edited contact are shown in the status message.
+
+    4. Test case: `remark 0 r/Prefers Dr. Mok`<br>
+       Expected: No patient's remarks are edited. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `remark`, `remark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Editing a patient's remark while some patients are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
+### Adding a tag to a patient <a name="add-tag-patient"/>
+1. Adding a tag to a patient while all patient are being shown
+
+    1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
+
+    2. Test case: `tag -a 1 t/Immunocompromised`<br>
+       Expected: A new tag `Immunocompromised` is added to the first patient. Details of the edited contact are shown in the status message.
+
+    3. Test case: `tag -a 1 t/`<br>
+       Expected: No tag is added to the patient. Response box displays error message: "A tag must be provided."
+
+    4. Test case: `tag -a 0 t/Immunocompromised`<br>
+       Expected: No tag is added to any patient. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `tag`, `tag -a t/`, `tag -a x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Adding a tag to a patient while some patients are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
+### Deleting a tag of a patient <a name="delete-tag-patient"/>
+1. Deleting a tag of a patient while all patient are being shown
+
+    1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.<br>
+       First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
+
+    3. Test case: `tag -d 1 t/Immunocompromised`<br>
+       Expected: First patient's `Immunocompromised` tag is deleted. Details of the edited contact are shown in the status message.
+
+    4. Test case: `tag -d 1 t/`<br>
+       Expected: No tag is deleted from the patient. Response box displays error message: "A tag must be provided."
+
+    5. Test case: `tag -d 0 t/Immunocompromised`<br>
+       Expected: No tag is deleted from any patient. Response box displays error message: "Invalid command format! ..."
+
+    6. Other incorrect edit commands to try: `tag`, `tag -d t/`, `tag -d x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Deleting a tag of a patient while some patients are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient). <br>
+       First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
+   
+    2. Test cases are similar to those above.
+
 ### Listing all patients <a name="list-patients"/>
 
 ### Adding a doctor <a name="add-doctor"/>
@@ -875,6 +947,78 @@ testers are expected to do more *exploratory* testing.
 ### Finding a doctor <a name="find-doctor"/>
 
 ### Listing all doctors <a name="list-doctors"/>
+
+### Editing a doctor's remark <a name="remark-doctor"/>
+1. Editing a doctor's remark while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
+
+    2. Test case: `remark 1 r/Comes at 8am`<br>
+       Expected: First doctor's remarks are edited to `Orthopedic`. Details of the edited contact are shown in the status message.
+   
+    3. Test case: `remark 1 r/`<br>
+       Expected: First doctor's remarks are deleted. Details of the edited contact are shown in the status message.
+
+    4. Test case: `remark 0 r/Comes at 8am`<br>
+       Expected: No doctor's remarks are edited. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `remark`, `remark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Editing a doctor while some doctors are being shown
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+
+### Adding a tag to a doctor <a name="add-tag-doctor"/>
+1. Adding a tag to a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctor` tab. List all doctor using the `list` command.
+
+    2. Test case: `tag -a 1 t/Pediatrician`<br>
+       Expected: `Pediatrician` is deleted from the first doctor. Details of the edited contact are shown in the status message.
+
+    3. Test case: `tag -a 1 t/`<br>
+       Expected: No tag is added to the doctor. Response box displays error message: "A tag must be provided."
+
+    4. Test case: `tag -a 0 t/Pediatrician`<br>
+       Expected: No tag is added to any doctor. Response box displays error message: "Invalid command format! ..."
+
+    5. Other incorrect edit commands to try: `tag`, `tag -a t/`, `tag -a x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Adding a tag to a doctor while some doctors are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some doctor using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+
+### Deleting a tag of a doctor <a name="delete-tag-doctor"/>
+1. Deleting a tag of a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctor` tab. List all doctors using the `list` command.<br>
+       First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
+
+    2. Test case: `tag -d 1 t/Pediatrician`<br>
+       Expected: First doctor's `Pediatrician` tag is deleted. Details of the edited contact are shown in the status message.
+   
+    3. Test case: `tag -d 1 t/Osteopath`<br>
+       Expected: No tag is deleted from the doctor. Response box displays error message: "The tag does not exist."
+
+    4. Test case: `tag -d 1 t/`<br>
+       Expected: No tag is deleted from the doctor. Response box displays error message: "A tag must be provided."
+
+    5. Test case: `tag -d 0 t/Pediatrician`<br>
+       Expected: No tag is deleted from any doctor. Response box displays error message: "Invalid command format! ..."
+
+    6. Other incorrect edit commands to try: `tag`, `tag -d t/`, `tag -d x t/`, `tag -e`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous test case.
+
+2. Deleting a tag of a doctor while some doctors are being shown
+    1. Prerequisites: `toggle` to the `Patient` tab. List some doctor using `find XYZ` (XYZ is the name of an existing doctor). <br>
+       First doctor has `Pediatrician` tag. Tag can be added using the following command: `tag -a 1 t/Pediatrician`.
+
+    2. Test cases are similar to those above.
+
 
 ### Adding an appointment <a name="appointment"/>
 1. Add an appointment 
