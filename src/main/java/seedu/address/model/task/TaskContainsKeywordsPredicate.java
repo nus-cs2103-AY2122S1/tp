@@ -20,7 +20,7 @@ public class TaskContainsKeywordsPredicate implements Predicate<Task> {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getLabel().checkedLabel, keyword))
                 || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDate().dateString, keyword))
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getDate().toString(), keyword))
                 || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
     }
