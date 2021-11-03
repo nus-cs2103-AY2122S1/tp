@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Assessment;
