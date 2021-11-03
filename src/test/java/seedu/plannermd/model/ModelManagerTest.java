@@ -3,8 +3,12 @@ package seedu.plannermd.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.plannermd.testutil.Assert.assertThrows;
+import static seedu.plannermd.testutil.appointment.TypicalAppointments.ANOTHER_TWO_HOUR_APPOINTMENT;
+import static seedu.plannermd.testutil.appointment.TypicalAppointments.TWO_HOUR_APPOINTMENT;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_ALICE;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_BENSON;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
@@ -18,8 +22,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.model.Model.State;
+import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.doctor.Doctor;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.testutil.PlannerMdBuilder;
+import seedu.plannermd.testutil.appointment.AppointmentBuilder;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class ModelManagerTest {
 
@@ -124,6 +134,44 @@ public class ModelManagerTest {
     @Test
     public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAppointmentList().remove(0));
+    }
+
+    @Test
+    public void deleteAppointmentsWithPerson_deletePerson_appointmentsDeleted() {
+        modelManager.addAppointment(TWO_HOUR_APPOINTMENT);
+        modelManager.addAppointment(ANOTHER_TWO_HOUR_APPOINTMENT);
+
+        modelManager.deleteAppointmentsWithPerson(ALICE);
+        assertFalse(modelManager.hasAppointment(TWO_HOUR_APPOINTMENT));
+
+        modelManager.deleteAppointmentsWithPerson(DR_ALICE);
+        assertFalse(modelManager.hasAppointment(ANOTHER_TWO_HOUR_APPOINTMENT));
+    }
+
+    @Test
+    public void editAppointmentsWithPerson_editPerson_appointmentsEdited() {
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        Appointment editedPatientAppointment = new AppointmentBuilder(TWO_HOUR_APPOINTMENT).withPatient(editedAlice)
+                .build();
+
+        Doctor editedDoctor = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        Appointment editedDoctorAppointment = new AppointmentBuilder(ANOTHER_TWO_HOUR_APPOINTMENT)
+                .withDoctor(editedDoctor).build();
+
+        modelManager.addAppointment(TWO_HOUR_APPOINTMENT);
+        modelManager.addAppointment(ANOTHER_TWO_HOUR_APPOINTMENT);
+
+        modelManager.editAppointmentsWithPerson(ALICE, editedAlice);
+
+        assertTrue(modelManager.hasAppointment(editedPatientAppointment));
+        assertFalse(modelManager.hasAppointment(TWO_HOUR_APPOINTMENT));
+
+        modelManager.editAppointmentsWithPerson(DR_ALICE, editedDoctor);
+
+        assertTrue(modelManager.hasAppointment(editedDoctorAppointment));
+        assertFalse(modelManager.hasAppointment(ANOTHER_TWO_HOUR_APPOINTMENT));
     }
 
     @Test

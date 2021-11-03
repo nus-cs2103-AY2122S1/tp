@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
@@ -25,7 +26,8 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_TODAY_APPOINTMENT =
+            AppointmentFilters.todayAppointmentFilter().collectAllFilters();
 
     /**
      * Changes current state to  {@code state}.
@@ -141,6 +143,19 @@ public interface Model {
     boolean hasAppointment(Appointment appointment);
 
     /**
+     * Returns true if an existing appointment clashes with {@code appointment} in the PlannerMD.
+     */
+    boolean isClashAppointment(Appointment appointment);
+
+    /**
+     * Returns true if an edited appointment clashes with {@code appointment} in the PlannerMD.
+     *
+     * @param editedAppointment The appointment that is edited.
+     * @param oldAppointment    The appointment before applying the changes.
+     */
+    boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment);
+
+    /**
      * Deletes the given appointment.
      * The appointment must exist in the PlannerMD.
      */
@@ -192,4 +207,22 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<? super Appointment> predicate);
+
+    /**
+     * Deletes appointments with {@code person} from the appointment list
+     *
+     * @param person person whose appointments should be deleted
+     * @param <T> Subtype of Person
+     */
+    <T extends Person> void deleteAppointmentsWithPerson(T person);
+
+    /**
+     * Updates appointments with {@code person} to {@code editedPerson} from the appointment list
+     *
+     * @param person person whose appointments should be updated
+     * @param editedPerson the person to replace {@code person} in existing appointments
+     * @param <T> Subtype of Person
+     */
+    <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson);
+
 }

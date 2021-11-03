@@ -11,10 +11,15 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class PersonTab
+Class DoctorListPanel
+Class DoctorCard
+Class PatientListPanel
+Class PatientCard
 Class StatusBarFooter
 Class CommandBox
+Class AppointmentListPanel
+Class AppointmentCard
 }
 
 package Model <<Rectangle>> {
@@ -30,28 +35,40 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-->  "1" CommandBox
+MainWindow *-down--> "1" ResultDisplay
+MainWindow *-down--> "1" PersonTab
+MainWindow -down--> "0..1" HelpWindow
+MainWindow *-down--> "1" StatusBarFooter
+MainWindow *-down--> "1" AppointmentListPanel
 
-PersonListPanel -down-> "*" PersonCard
+AppointmentListPanel -down-> "*" AppointmentCard
+
+PersonTab -down-> "1" DoctorListPanel
+PersonTab -down-> "1" PatientListPanel
+
+PatientListPanel -down-> "*" PatientCard
+DoctorListPanel -down--> "*" DoctorCard
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay ----|> UiPart
+CommandBox ----|> UiPart
+PersonTab ----|> UiPart
+PatientListPanel ----|> UiPart
+DoctorListPanel ----|> UiPart
+PatientCard ----|> UiPart
+DoctorCard ----|> UiPart
+StatusBarFooter ----|> UiPart
+HelpWindow -down---|> UiPart
+AppointmentListPanel ----|> UiPart
+AppointmentCard ------|> UiPart
 
-PersonCard ..> Model
+PatientCard .> Model
+DoctorCard .> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

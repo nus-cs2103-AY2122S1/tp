@@ -13,5 +13,7 @@
     "address": "4th street",
     "remark": "valid remark",
     "risk": "LOW"
-  } ]
+  } ],
+  "doctors": [],
+  "appointments": []
 }

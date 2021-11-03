@@ -24,7 +24,18 @@ import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
 import seedu.plannermd.logic.commands.tagcommand.TagCommand;
 import seedu.plannermd.logic.parser.addcommandparser.AddDoctorCommandParser;
 import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
+import seedu.plannermd.logic.parser.apptcommandparser.AppointmentCommandParser;
+import seedu.plannermd.logic.parser.deletecommandparser.DeleteDoctorCommandParser;
+import seedu.plannermd.logic.parser.deletecommandparser.DeletePatientCommandParser;
+import seedu.plannermd.logic.parser.editcommandparser.EditDoctorCommandParser;
+import seedu.plannermd.logic.parser.editcommandparser.EditPatientCommandParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.logic.parser.findcommandparser.FindDoctorCommandParser;
+import seedu.plannermd.logic.parser.findcommandparser.FindPatientCommandParser;
+import seedu.plannermd.logic.parser.remarkcommandparser.RemarkDoctorCommandParser;
+import seedu.plannermd.logic.parser.remarkcommandparser.RemarkPatientCommandParser;
+import seedu.plannermd.logic.parser.tagcommandparser.TagDoctorCommandParser;
+import seedu.plannermd.logic.parser.tagcommandparser.TagPatientCommandParser;
 import seedu.plannermd.model.Model.State;
 
 /**
@@ -64,7 +75,7 @@ public class PlannerMdParser {
             return new ToggleCommand();
 
         case AppointmentCommand.COMMAND_WORD:
-            return new AppointmentCommandParser().parseAppointmentCommand(userInput);
+            return new AppointmentCommandParser().parseAppointmentCommand(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

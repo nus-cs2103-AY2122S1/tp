@@ -2,31 +2,73 @@
 layout: page
 title: Developer Guide
 ---
+PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
+
+The purpose of the Developer Guide is to guide you through the architecture of our program, so you can familiarise yourself with its underlying structure.
+
+## Navigating this Developer Guide
+Take note of some syntax we will frequently use throughout the Developer Guide:
+
+| Syntax | Description |
+|--------|------------|
+| **Bold** | keywords |
+| :bulb: **Tip:** | Useful tips |
+| `markdown` | Classes or methods |
+
 * Table of Contents
-{:toc}
+    - [Acknowledgements](#acknowledgements) 
+    - [Setting up, getting started](#setting-up)
+    - [Design](#design)
+        - [Architecture](#architecture)
+        - [UI Component](#ui)
+        - [Logic Component](#logic)
+        - [Model Component](#model)
+        - [Storage Component](#storage) 
+        - [Common classes](#common-classes)
+    - [Implementation](#implementation)
+        - [Stateful PlannerMd](#stateful-plannermd)
+        - [Toggle Command](#toggle-command)
+        - [Remark](#remark)
+        - [Propagating Person Changes to Appointment List](#propagating-person-changes-to-appointment-list)
+        - [Adding an appointment](#adding-an-appointment)
+        - [Deleting an appointment](#deleting-an-appointment)
+        - [Editing an appointment](#editing-an-appointment)
+        - [Filtering appointments](#filtering-appointments)
+        - [Storing an appointment](#storing-an-appointment)
+    - [Documentation, logging, testing, configuration, dev-ops](#documentation)
+    - [Appendix: Requirements](#appendix-requirements)
+        - [Product scope](#product-scope)
+        - [User stories](#user-stories)
+        - [Use cases](#use-cases)
+        - [Non-functional Requirements](#nfr)
+        - [Glossary](#glossary)
+    - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+        - [Launch and shutdown](#launch-and-shutdown)
+        - [Deleting a person](#delete-person)
+        - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **Acknowledgements** <a name="acknowledgements"/> 
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, getting started** <a name="setting-up"/>
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **Design** <a name="design"/>
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### Architecture <a name="architecture"/>
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -36,7 +78,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -44,10 +86,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui): The UI of the App.
+* [**`Logic`**](#logic): The command executor.
+* [**`Model`**](#model): Holds the data of the App in memory.
+* [**`Storage`**](#storage): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
@@ -67,13 +109,15 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component <a name="ui"/>
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonTab`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `PersonTab` is a tab layout that consists of a `PatientListPanel` and a `DoctorListPanel`. Only one of the tabs is displayed to the user at a particular time, and the user can toggle between the 2 tabs.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -84,7 +128,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic component <a name="logic"/>
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -93,10 +137,11 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it gets the current state (i.e. whether the user is on the `Patients` or `Doctors` tab) from the `Model`.
+2. It then uses the `PlannerMdParser` class to parse the user command.
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPatientCommand`) which is executed by the `LogicManager`.
+4. The command can communicate with the `Model` when it is executed (e.g. to add a patient).
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -110,138 +155,279 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `PlannerMdParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `PlannerMdParser` returns back as a `Command` object.
+* If the `PlannerMdParser` parses an appointment command (e.g., `appt -a`, `appt -e`, ...), it first creates an `AppointmentCommandParser` to parse the flags given (e.g., `-a`, `-e`, ...). The `AppointmentCommandParser` then creates an `XYZCommandParser` (e.g., `AddAppointmentCommandParser`) to parse the remaining user command.
+* All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+### Model component <a name="model"/>
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+![ModelClassDiagram](images/ModelClassDiagram.png)
+Here's the class diagram of the `Person` component within `Model`:
+![PersonClassDiagram](images/PersonClassDiagram.png)
+Heres the class diagram of the `Appointment` component within `Model`:
+![AppointmentClassDiagram](images/AppointmentClassDiagram.png)
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the plannerMd data  
+  * all `Patient` and `Doctor` objects (which are contained in `UniquePersonList<Patient>` and `UniquePersonList<Doctor>` respectively).
+  * all `Appointment` objects (which are contained in `UniqueAppointmentList<Patient>`).
+* stores the currently active `State` (which determines which list of Person, `Patient` or `Doctor`, to interact with)
+* stores the currently 'selected' `Patient`, `Doctor` and `Appointment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as unmodifiable `ObservableList<Patient>`, `ObservableList<Doctor>`  and `ObservableList<Appointment>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+### Storage component <a name="storage"/>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
-### Storage component
-
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both PlannerMD data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `PlannerMdStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common classes  <a name="common-classes"/>
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.plannermd.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation** <a name="implementation"/>
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Stateful PlannerMd <a name="stateful-plannermd"/>
+With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
+a state is used to determine which list should be interacted with.
 
-#### Proposed Implementation
+The state is maintained in `ModelManager`
+* Two possible states (`State.PATIENT` and `State.DOCTOR`)
+* `ModelManager::toggleState` is used to switch between states
+* The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
+* Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Design considerations
+Since it is likely that clinic would be mainly interacting with patient records, we did not want to display both lists within the UI  at the same time as the additional clutter
+would be less user-friendly. Also, since commands for records are applicable to both patients and doctors, we wanted to avoid flags for record commands and keep them as succinct as possible. <br>
+Therefore, we decided to introduce a state, allowing us to display the list the user desires and execute commands according to the state.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+### Toggle Command <a name="toggle-command"/>
+Command used to toggle displayed tab and the current state of PlannerMD.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The Activity Diagram below illustrates the execution flow when the user executes a `remark` command.<br>
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+![ToggleActivityDiagram](images/ToggleActivityDiagram.png)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+1. The user inputs a `toggle` command.
+2. A `ToggleCommand` is generated and executed.
+   * If the currently displayed tab is the patient tab, it is toggled to the doctor tab.
+   * If the currently displayed tab is the doctor tab, it is toggled to the patient tab.
+3. The GUI displays a success message.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+#### Execution
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("toggle") API call in Patient state.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+![ToggleCommandSequenceDiagram](images/ToggleCommandSequenceDiagram.png)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+1. `plannerMdParser::parseCommand` is called with the user input "toggle" along with the current `Model.state` (`State.Pateint`). <br>
+   1.1 A `ToggleCommand` instance is instantiated.
+2. `ToggleCommand::execute` is called<br>
+   3.1. `Model::toggleState` is called and toggles `Model.State` from `State.Patient` to `State.Doctor`<br>
+   3.2. A `CommandResult` instance is instantiated with a success message.
+3. The `CommandResult` is then returned
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+#### Result
+The GUI updates the list according to the current state(eg. displays patient list if `Model.state` is `State.Patient`) and display the success message given by `CommandResult`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+### Remark <a name="remark"/>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+#### Remark field
+A field added for `Person` and thus applies to both `Patient` and `Doctor`. Remark is miscellaneous information
+stored as a String.
+* No restrictions, `Remark` can be any `String`, including empty.
+* `Remark` is an empty String by default.
 
+#### Remark command
+Command used to edit the `Remark` field of a Person.
+* No input restrictions, input can be any `String`, including empty.
+    * empty input effectively deletes the current `Remark` and the Remark field will not be displayed in the UI at all.
+
+The activity Diagram below illustrates the execution flow when the user executes a `remark` command. <br>
+
+![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
+
+1. The user inputs a `remark` command.
+2. The input is parsed <br>
+    * If the `INDEX` is invalid, invalid prefixes are inputted or the remark prefix `/r` is missing, a `ParseException` is thrown and an error message is displayed.
+3. A `RemarkCommand` is generated and executed.
+    * If remark input is empty, effectively deletes the remark, generate successful delete remark message.
+    * If remark input is not empty, effectively deletes the remark, generate successful edit remark message.
+4. The GUI displays a success message.
+
+#### Execution
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("remark 1 r/bad cough") API call. <br>
+
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
+
+1. `plannerMdParser::parseCommand` is called with the user input "remark 1 r/bad cough" along with the current `Model.state`. <br>
+   1.1 A `RemarkCommandParser` instance is instantiated.
+2. `RemarkCommandParser::parse` is called with input "1 r/bad cough" <br>
+   2.1 A `RemarkCommand` instance is instantiated.
+3. `RemarkCommand::execute` is called<br>
+   3.1. `Model::setPatient` is called and replaces the patient with edited patient in the patient list.<br>
+   3.2. A `CommandResult` instance is instantiated with a success message.
+4. The `CommandResult` is then returned
+
+#### Result
+The GUI updates the patient record in the displayed list and displays a success message.
+
+### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
+Since specific patients and doctors within the records are directly referenced in appointments,
+changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
+* When patients or doctor deleted, appointments they are a part of will be deleted as well.
+  * `DeleteCommand`
+* When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
+  * `RemarkCommand`, `EditCommand` and `TagCommand`
+
+#### Execution
+The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
+
+![PropagateChangesDiagram](images/PropagateChangesDiagram.png)
+
+1. `PlannerMd::removePatient` is called and deletes `target` from the list of patients. <br>
+2. `UniqueAppointmentList::deleteAppointmentWithPerson` is called <br>
+   * Loops through `UniqueAppointmentList` and deletes `appointment` which references `target`.
+
+The Sequence Diagram below illustrates the interactions within the Model component for the setPatient(patientToEdit, editedPatient) API call.
+
+![PropagateChangesEditDiagram](images/PropagateChangesEditDiagram.png)
+
+1. `PlannerMd::setPatient` is called and replaces `patientToEdit` with `editedPatient` in the list of patients. <br>
+2. `UniqueAppointmentList::editAppointmentWithPerson` is called <br>
+    * Loops through `UniqueAppointmentList` and replaces `appointment` which references `patientToEdit` with a new `editedAppointment` which has the same fields as `appointment` but references `editedPatient`.
+    
+#### Result
+GUI is updated to display the propagated changes in the appointment list.
+
+#### Design considerations
+Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
+to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
+
+### Adding an appointment <a name="adding-an-appointment"/>
+Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
+The diagram below illustrates the flow of adding an appointment:
+![AddAppointment](images/AddAppointmentActivityDiagram.png)
+
+![AddAppointment](images/AddAppointmentSequenceDiagram.png)
+1. After user enters the add appointment command `appt -a` with the relevant prefix, the input will be sent
+   to `AddAppointmentCommandParser` for parsing.
+2. `AddAppointmentCommandParser` will check if the prefixes are relevant. If the prefixes are relevant, a new `AddAppointmentCommand` which extends `AppointmentCommand`
+   is created. The `AddAppointmentCommand` implements the `execute()` method from the abstract class `Command`. If the prefixes are not relevant,
+   a `ParseException` will be thrown, and the missing prefixes' error message will be shown.
+3. The `AddAppointmentCommand` will run `execute()`. First, it retrieves the `Patient` object and the `Doctor` object at the given index from the model. If the index is out of range of the
+   `Model#FilteredPatientList` or `Model#FilteredDoctorList`, it will throw an error, and the invalid index message will be shown.
+   If not, the `Appointment` object with the is created and added to the model. The add appointment success message is then returned.
+4. The UI will then display the result
+
+### Deleting an appointment <a name="deleting-an-appointment"/>
+Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
+The diagram below illustrates the flow of deleting an appointment:
+![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
+
+![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
+1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
+   to `DeleteAppointmentCommandParser` for parsing.
+2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
+   which extends `AppointmentCommand` is created. If not, a `ParseException` will be thrown, and the invalid index message will be shown.
+3. The `DeleteAppointmentCommand` will run `execute()`, removing the appointment at the inputted index. Then, it will return the
+   success message as a `CommandResult` object.
+4. The UI will then display the result
+
+### Editing an appointment <a name="editing-an-appointment"/> 
+
+Edits the details of an existing appointment.
+
+The edit appointment command accepts at least one of the following parameters:
+* Patient index
+* Doctor index
+* Start date and time
+* Duration (in minutes)
+* Remark
+
+#### Implementation
+
+1. An `EditAppointmentCommandParser` is used to parse the edit appointment command. It checks if the patient and doctor indices are not out of bounds (based on the current filtered patient and doctor lists). The validity and format of the date and time as well as duration are also checked.
+2. If the inputs are valid, an `EditAppointmentCommand` is created. The command is executed and attempts to edit the fields as specified in the user input. The edited appointment will be reflected in the filtered appointment list in `Model`.
+3. Whenever an edited appointment results in a clash with existing appointments, the command is aborted and an error message is shown to the user.
+
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("appt -e 2 p/1 dur/30")` API call.
+
+![EditAppointmentSequenceDiagram](images/EditAppointmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppointmentCommandParser` and `EditAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+### Filtering appointments <a name="filtering-appointments"/>
 
-![UndoRedoState3](images/UndoRedoState3.png)
+#### What it is
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+Filters through the appointment records in PlannerMd and shows the appointments that matches the filter parameters.
 
-</div>
+There are 4 possible parameters provided to a filter appointment command are:
+* Patient keywords (Filters appointments whose patient's name contains one of the keywords provided)
+* Doctor keywords (Filters appointments whose doctor's name contains one of the keywords provided)
+* Start date (Filters appointments which has a starting date greater or equal to the start date provided)
+* End date (Filters appointment which has a starting date lesser or equal to the end date provided)
 
-The following sequence diagram shows how the undo operation works:
+If no parameters are provided, the command simply lists all appointments in the appointment records.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+#### Implementation
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+Upon entry of a filter appointment command, it is parsed by a `FilterAppointmentCommandParser` to check if the input parameters are valid (Dates are formatted correctly, `startDate` <= `endDate` if both parameters are provided). If the inputs are valid, an 'AppointmentFilters' is created and the filter parameters are stored in it. An 'AppointmentFilters' is an object that stores the different filter conditions a user can provide.
 
-</div>
+After that, the filter is used to create a `FilterAppointmentCommand`. When executed, the `FilterAppointmentCommand` takes the `AppointmentFilters` and converts it into a single predicate based on the filter parameters provided. The predicate is then used to update the filtered appointment list in `Model`.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
 
-</div>
+![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
 
-![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+### Storing an appointment <a name="storing-an-appointment"/>
 
-![UndoRedoState5](images/UndoRedoState5.png)
+#### What it is
 
-The following activity diagram summarizes what happens when a user executes a new command:
+Stores an Appointment object in the Json file by first creating the `JsonAdaptedAppointment` object, which is the Json representation of the `Appointment` object. 
+Then, the `JsonAdaptedAppointment` is then contained within the `JsonSerializablePlannerMd` object and `JsonSerializablePlannerMd` is passed as parameter to `JsonUtil.saveJsonFile` to write all records,
+including the `Appointment` object, into the file.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+The implementation focuses on the creation of a single `JsonAdapatedAppointment` object after the user keys in a command that changes the current records.
 
-#### Design considerations:
+#### Implementation
 
-**Aspect: How undo & redo executes:**
+The creation of a `JsonAdaptedAppointment` will create the respective `JsonAdaptedPatient` and `JsonAdaptedDoctor` involved in the appointment. 
+The creation of `JsonAdaptedPatient` and `JsonAdaptedDoctor` will create the number of tags that the respective `Patient` and `Doctor` objects have.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+We use `JsonAdaptedPatient` and `JsonAdaptedDoctor` that are used to store `Patient` and `Doctor` standalone objects 
+as Json to ensure that these objects are stored in a consistent format, whether as a standalone `Patient`/`Doctor` or
+a `Patient`/`Doctor` in an `Appointment`.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The creation of a `JsonAdaptedAppointment` will also create the `JsonAdaptedSession`
+which is synonymous to the `Session` object contained in an `Appointment`.
 
-_{more aspects and alternatives to be added}_
+The Sequence Diagram below illustrates the interactions within the Storage component for the creation of a `JsonAdaptedAppointment`.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+<img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, logging, testing, configuration, dev-ops**  <a name="documentation"/>
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -251,9 +437,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix: Requirements**  <a name="appendix-requirements"/>
 
-### Product scope
+### Product scope  <a name="product-scope"/>
 
 **Target user profile**:
 
@@ -264,21 +450,20 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast and prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-
-
 **Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
 
-### User stories
+### User stories  <a name="user-stories"/>
+These are some user stories we took into account when designing PlannerMD:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use an instruction              |
 | `* * *`  | clinic receptionist                        | add a new patient              |                                                                        |
 | `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
-| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand them and contact them |
+| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand him/her and contact him/her |
 | `* * *`  | clinic receptionist                        | view a patient's risk profile| view his/her risk |
 | `* * *`  | clinic receptionist                        | edit a patient's personal details| change his/her personal details should it change|
 | `* * *`  | clinic receptionist                        | edit a patient's risk profile| change his/her risk profile should it change |
@@ -290,43 +475,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
 | `* * *`  | clinic receptionist                        | add an appointment |                                                 |
 | `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
-| `* * *`  | clinic receptionist                        | update an appointment | reschedule the appointment when the patient or doctor asks for it |
+| `* * *`  | clinic receptionist                        | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
-| `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort doctors by name      | locate a doctor easily                                                |
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
 | `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
-| `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
-
-*{More to be added}*
-
-### Use cases
+| `*`      | clinic receptionist                        | write tags for a patient  | easily identify him/her or provide additional information                |
+| `*`      | clinic receptionist                        | write tags for a doctor  | easily identify him/her or provide additional information       |
+ 
+### Use cases  <a name="use-cases"/>
+These are some use cases to familiarise with the flow of our application: 
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Adding a patient/doctor**
 
 **MSS**
 
-1.  Receptionist requests to list of patients and doctors
-2.  PlannerMD shows a list of patients and doctors
-3.  Receptionist requests to delete a specific person in the list
-4.  PlannerMD deletes the person which is reflected immediately in the list
+1. Receptionist requests to add a patient/doctor by typing in their details
+2. PlannerMD adds the patient/doctor which is reflected immediately in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. PlannerMD detects that compulsory details are missing.
+
+    * 1a1. PlannerMD shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. PlannerMD detects data entered with invalid format.
+
+    * 1b1. PlannerMD shows an error message stating the required format.
+
+    Use case resumes at step 1.
+
+**Use case: Deleting a patient/doctor**
+
+**MSS**
+
+1.  Receptionist requests for a list of patients/doctors
+2.  PlannerMD shows a list of patients/doctors
+3.  Receptionist requests to delete a specific patient/doctor in the list
+4.  PlannerMD deletes the patient/doctor which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+
+  Use case ends.
+
 * 3a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
+  
   Use case ends.
 
-**Use case: Adding a risk profile to a patient (Coming soon)**
+**Use case: Adding a risk profile to a patient**
 
 **MSS**
 
@@ -349,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Editing the risk profile of a patient (Coming soon)**
+**Use case: Editing the risk profile of a patient**
 
 **MSS**
 
@@ -405,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Receptionist requests to list patients
+1.  Receptionist requests a list of patients
 2.  PlannerMD shows a list of patients
 3.  Receptionist requests to delete a tag from a specific person in the list
 4.  PlannerMD deletes the tag which is reflected immediately in the list
@@ -430,13 +639,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Editing personal details of a patient (Coming soon)**
+**Use case: Editing personal details of a patient**
 
 **MSS**
 
 1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  Receptionist requests to edit the personal details of a specific person in the list
+3.  Receptionist requests to edit the personal details of a specific patient in the list
 4.  PlannerMD edits the patient's personal details which is reflected immediately
 
     Use case ends.
@@ -453,7 +662,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Scheduling an appointment (Coming soon)**
+**Use case: Editing personal details of a doctor**
+
+**MSS**
+
+1.  Receptionist requests to find a certain doctor by typing his/her name in the CLI
+2.  PlannerMD shows a list of doctors with that name
+3.  Receptionist requests to edit the personal details of a specific doctor in the list
+4.  PlannerMD edits the doctor's personal details which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Scheduling an appointment**
 
 **MSS**
 
@@ -483,8 +715,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a3. PlannerMD updates the doctor's schedule which is reflected immediately.
 
       Use case ends.
-    
-### Non-Functional Requirements
+
+**Use case: Deleting an appointment**
+
+**MSS**
+1. Receptionist requests to list appointments
+2. PlannerMD shows the list of appointments
+3. Receptionist requests to delete an appointment
+4. PlannerMD deletes the appointment from the appointment list which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Editing an appointment**
+
+**MSS**
+1. Receptionist requests to list appointments
+2. PlannerMD shows the list of appointments
+3. Receptionist requests to edit a specific appointment
+4. PlannerMD edits the appointment which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The appointment list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given parameters are invalid.
+
+    * 3b1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The edited appointment date or time clashes with an existing appointment.
+
+    * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
+
+      Use case resumes at step 2.
+
+### Non-Functional Requirements  <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should work independent of network connection.
@@ -494,11 +778,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The data should be available for backup and portable to another computer.
 7. The user interface should be simple and intuitive enough for any users.
 8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-9. The project is expected to adhere to a schedule that delivers a feature set every two weeks.
 
-*{More to be added}*
-
-### Glossary
+### Glossary <a name="glossary"/>
 
 * **Appointment**: Arrangement to meet between a doctor and a patient
 * **CLI**: Command Line Interface
@@ -506,13 +787,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Patient**: The individual that visits the clinic
 * **Personal details** personal information including a name, contact number, email, address, date of birth, whatever tags the receptionist gives
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Risk profile**: The health status and severity of the condition of a patient
 * **Tag**: A label attached to a patient for easy identification or providing additional information
+* **MSS**: Main Success Scenario in the use cases.
+* **Extensions**: "Add-ons" to the MSS that describes an exceptional/alternative flow of events. 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for manual testing** <a name="appendix-instructions-for-manual-testing"/>
 
 Given below are instructions to test the app manually.
 
@@ -521,13 +803,13 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and shutdown  <a name="launch-and-shutdown"/>
 
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample patients, doctors and appointments. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -536,9 +818,13 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the app
+    1. While the app is still open, enter `exit` in the command box or click on the close window button.
+        Expected: The application closes.
 
-### Deleting a person
+### Adding a patient <a name="add-patient"/>
+
+### Deleting a patient  <a name="delete-patient"/>
 
 1. Deleting a person while all persons are being shown
 
@@ -555,7 +841,139 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### Editing a patient <a name="edit-patient"/>
+
+### Finding a patient <a name="find-patient"/>
+
+### Listing all patients <a name="list-patients"/>
+
+### Adding a doctor <a name="add-doctor"/>
+
+### Deleting a doctor  <a name="delete-doctor"/>
+
+### Editing a doctor <a name="edit-doctor"/>
+
+1. Editing a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
+
+    2. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited contact are shown in the status message.
+
+    3. Test case: `edit 0 hp/91234567`<br>
+       Expected: No doctor is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Editing a doctor while some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+
+### Finding a doctor <a name="find-doctor"/>
+
+### Listing all doctors <a name="list-doctors"/>
+
+### Adding an appointment <a name="appointment"/>
+1. Add an appointment 
+    1. Prerequisites: There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
+       
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:00 dur/5 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:05 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:30 dur/50`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+       
+    1. Test case: `appt -a`<br>
+       Expected: No appointment is added. Response box displays error message: `Invalid command format! ...`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `Sessions should be of the format DD/MM/YYYY HH:MM and adhere to the following constraints:...`
+
+    1. Test case: `appt -a p/100 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The patient index provided is invalid`
+    
+    1. Test case: `appt -a p/1 d/100 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `The doctor index provided is invalid`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/xxx r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/121 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+
+### Deleting an appointment  <a name="delete-appointment"/>
+1. Deleting an appointment while all appointments are being shown
+
+    1. Prerequisites: list all appointments using the `appt -f` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting an appointment while upcoming appointments are being shown
+    1. Prerequisites: list all persons using the `appt -l` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+       
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Editing an appointment <a name="edit-appointment"/>
+
+1. Editing an appointment while all appointments are being shown
+
+    1. Prerequisites: Use `appt -f` to list all appointments.
+
+    2. Test case: `appt -e 1 p/1 s/31/12/2021 10:00 dur/30`<br>
+       Expected: First appointment's patient is edited to the first patient in the filtered patient list. The date and session are edited to `31 Dec 21, Fri` and `10:00 - 10:30` respectively. Details of the edited appointment are shown in the status message.
+
+    3. Test case: `appt -e 0 dur/30`<br>
+       Expected: No appointment is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+    5. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
+        Expected: Similar to previous.
+
+3. Editing an appointment while some appointments are being shown
+
+    1. Prerequisites: Use `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]` to list only some appointments. E.g., `appt -f s/01/11/2021` to list only appointments after `01/11/2021`.
+
+    2. Test cases are similar to those above.
+
+### Filtering all appointments <a name="filter-all-appointments"/>
+
+### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
+
+### Listing all appointments for today <a name="list-appointments"/>
+
+### Saving data  <a name="saving-data"/>
 
 1. Dealing with missing/corrupted data files
 

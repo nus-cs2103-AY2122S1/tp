@@ -12,6 +12,7 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,10 @@ import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
+import seedu.plannermd.logic.commands.apptcommand.FilterAppointmentCommand;
+import seedu.plannermd.logic.commands.apptcommand.FilterUpcomingAppointmentCommand;
+import seedu.plannermd.logic.commands.apptcommand.ListAppointmentCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeleteDoctorCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
@@ -46,9 +51,10 @@ import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
-import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
+import seedu.plannermd.testutil.appointment.AppointmentFiltersBuilder;
 import seedu.plannermd.testutil.doctor.DoctorBuilder;
 import seedu.plannermd.testutil.doctor.DoctorUtil;
+import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 import seedu.plannermd.testutil.patient.PatientUtil;
@@ -93,17 +99,45 @@ public class PlannerMdParserTest {
 
     @Test
     public void parseCommand_filterAppointmentCommand() throws Exception {
-        //TODO
+        AppointmentFilters filters = new AppointmentFiltersBuilder()
+                .withStartDate(LocalDate.of(2021, 10, 20))
+                .withPatientKeywords("Alice").build();
+
+        // Patient state
+        FilterAppointmentCommand command = (FilterAppointmentCommand) parser.parseCommand(
+                FilterAppointmentCommand.COMMAND_WORD + " " + filters.getFilterDetails(), patientState);
+        assertEquals(command, new FilterAppointmentCommand(filters));
+
+        // Doctor state
+        command = (FilterAppointmentCommand) parser.parseCommand(
+                FilterAppointmentCommand.COMMAND_WORD + " " + filters.getFilterDetails(), doctorState);
+        assertEquals(command, new FilterAppointmentCommand(filters));
     }
 
     @Test
     public void parseCommand_filterUpcomingAppointmentCommand() throws Exception {
-        //TODO
+        AppointmentFilters filters = new AppointmentFiltersBuilder().withUpcoming()
+                .withPatientKeywords("Alice").build();
+
+        // Patient state
+        FilterUpcomingAppointmentCommand command = (FilterUpcomingAppointmentCommand) parser.parseCommand(
+                FilterUpcomingAppointmentCommand.COMMAND_WORD + " " + filters.getUpcomingFilterDetails(),
+                patientState);
+        assertEquals(command, new FilterUpcomingAppointmentCommand(filters));
+
+        // Doctor state
+        command = (FilterUpcomingAppointmentCommand) parser.parseCommand(
+                FilterUpcomingAppointmentCommand.COMMAND_WORD + " " + filters.getUpcomingFilterDetails(),
+                doctorState);
+        assertEquals(command, new FilterUpcomingAppointmentCommand(filters));
     }
 
     @Test
     public void parseCommand_listAppointmentCommand() throws Exception {
-        //TODO
+        assertTrue(parser.parseCommand(
+                ListAppointmentCommand.COMMAND_WORD, doctorState) instanceof ListAppointmentCommand);
+        assertTrue(parser.parseCommand(
+                ListAppointmentCommand.COMMAND_WORD + " 3", patientState) instanceof ListAppointmentCommand);
     }
 
     @Test

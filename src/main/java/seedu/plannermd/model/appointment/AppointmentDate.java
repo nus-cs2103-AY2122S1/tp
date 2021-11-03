@@ -16,13 +16,12 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format DD/MM/YYYY "
             + "and adhere to the following constraints:\n"
-            + "1. Must be a valid date (after now)\n"
-            + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
-            + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
-            + "4. Year must be 4 characters.";
+            + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
+            + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
+            + "3. Year must be 4 characters.";
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy")
-            .withResolverStyle(ResolverStyle.SMART);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public static final DateTimeFormatter DISPLAYED_DATE_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy");
 
@@ -44,11 +43,18 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      */
     public static boolean isValidAppointmentDate(String test) {
         try {
-            LocalDate date = LocalDate.parse(test, DATE_FORMATTER);
-            return !date.isBefore(LocalDate.now());
+            LocalDate.parse(test, DATE_FORMATTER);
+            return true;
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns the date in input format.
+     */
+    public String toInputStringFormat() {
+        return date.format(DATE_FORMATTER);
     }
 
     /**

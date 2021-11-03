@@ -3,52 +3,58 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+'skinparam genericDisplay old
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyPlannerMd <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Enum State <<enumeration>>
+Class PlannerMd
+Class ReadOnlyPlannerMd
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
-Class UniquePersonList
+Class "UniquePersonList<Patient>" as patient
+Class "UniquePersonList<Doctor>" as doctor
+Class UniqueAppointmentList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class Patient
+Class Risk
+Class Doctor
 
+
+Class Appointment
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
-
 ModelManager .up.|> Model
+Model .down.> State
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model ..> ReadOnlyPlannerMd
+ModelManager -down-> "1" PlannerMd
 ModelManager -right-> "1" UserPrefs
+PlannerMd .up.|> ReadOnlyPlannerMd
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Patient .down.|> Person
+Doctor .down.|> Person
+PlannerMd *--> "1" UniqueAppointmentList
+PlannerMd *--> "1" patient
+PlannerMd *--> "1" doctor
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+UniqueAppointmentList -->  "~* all" Appointment
+patient -->  "~* all" Patient
+doctor --> "~* all" Doctor
+
+Patient *-down-> Risk
+
+ModelManager -right->"~* filtered" Patient
+ModelManager -right->"~* filtered" Doctor
+ModelManager -->"~* filtered" Appointment
 @enduml

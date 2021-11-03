@@ -5,6 +5,7 @@ import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,16 @@ public class UniquePersonList<T extends Person> implements Iterable<T> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
+
+    /**
+     * Returns the exact person that matches the input.
+     * @return an Optional object wrapping the exact person in the list.
+     */
+    public Optional<T> getExactPerson(T target) {
+        requireNonNull(target);
+        return internalList.stream().filter(target::equals).findFirst();
+    }
+
 
     /**
      * Adds a person to the list.

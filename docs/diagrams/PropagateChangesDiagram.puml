@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":PlannerMd" as PlannerMd MODEL_COLOR
+participant ":UniquePersonList<Patient>" as UniquePersonList MODEL_COLOR
+participant ":UniqueAppointmentList" as UniqueAppointmentList MODEL_COLOR
+end box
+
+[-> ModelManager : deletePatient(target)
+activate ModelManager
+
+ModelManager -> PlannerMd : removePatient(target)
+activate PlannerMd
+
+PlannerMd -> UniquePersonList : remove(target)
+activate UniquePersonList
+
+UniquePersonList -> PlannerMd
+deactivate UniquePersonList
+
+PlannerMd -> ModelManager
+deactivate PlannerMd
+
+ModelManager -> PlannerMd : deleteAppointmentsWithPerson(target)
+activate PlannerMd
+
+PlannerMd -> UniqueAppointmentList : deleteAppointmentsWithPerson(target)
+activate UniqueAppointmentList
+
+loop through list of appointments
+    opt target matches Patient in appointment
+        UniqueAppointmentList -> UniqueAppointmentList: remove(appointment)
+        activate UniqueAppointmentList
+
+        UniqueAppointmentList -> UniqueAppointmentList:
+        deactivate UniqueAppointmentList
+    end
+end
+
+UniqueAppointmentList -> PlannerMd
+deactivate UniqueAppointmentList
+
+PlannerMd -> ModelManager
+deactivate PlannerMd
+
+[<--ModelManager
+deactivate ModelManager
+@enduml

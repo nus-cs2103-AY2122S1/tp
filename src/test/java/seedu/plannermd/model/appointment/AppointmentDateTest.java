@@ -33,7 +33,6 @@ class AppointmentDateTest {
     @Test
     public void isValidAppointmentDate_invalidDate_failure() {
         assertFalse(AppointmentDate.isValidAppointmentDate(invalidDate));
-        assertFalse(AppointmentDate.isValidAppointmentDate("12/12/2012")); // before now
         assertFalse(AppointmentDate.isValidAppointmentDate("abc123"));
     }
 
@@ -49,7 +48,7 @@ class AppointmentDateTest {
 
     @Test
     public void isEqualDate_notEqualDates_returnsFalse() {
-        String otherDate = "31/11/2030";
+        String otherDate = "31/12/2030";
         assertFalse(new AppointmentDate(validDate).isEqualDate(new AppointmentDate(otherDate)));
     }
 

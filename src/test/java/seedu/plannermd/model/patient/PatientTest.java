@@ -58,6 +58,5 @@ class PatientTest {
         // different risk -> returns false
         editedAlice = new PatientBuilder(ALICE).withRisk(VALID_RISK_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
     }
 }

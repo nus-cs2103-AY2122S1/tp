@@ -48,11 +48,24 @@ class SessionTest {
     }
 
     @Test
+    public void isEndWithinSameDay() {
+        Session s1 = new Session("00:00", duration);
+        Session s2 = new Session("23:50", new Duration(9));
+        assertTrue(s1.isEndWithinSameDay());
+        assertTrue(s2.isEndWithinSameDay());
+
+        Session s3 = new Session("23:50", new Duration(10));
+        Session s4 = new Session("22:30", new Duration(120));
+        assertFalse(s3.isEndWithinSameDay());
+        assertFalse(s4.isEndWithinSameDay());
+    }
+
+    @Test
     public void isClash_clash_returnsTrue() {
         Session s1 = new Session("12:00", duration);
         Session s2 = new Session("12:05", duration);
         Session s3 = new Session("11:00", new Duration(120));
-        Session s4 = new Session("12:10", new Duration(1));
+        Session s4 = new Session("12:14", new Duration(1));
         assertTrue(s1.isClash(s2));
         assertTrue(s1.isClash(s3));
         assertTrue(s1.isClash(s4));
@@ -63,8 +76,10 @@ class SessionTest {
         Session s1 = new Session("12:00", duration);
         Session s2 = new Session("12:20", duration);
         Session s3 = new Session("11:00", duration);
+        Session s4 = new Session("12:15", duration);
         assertFalse(s1.isClash(s2));
         assertFalse(s1.isClash(s3));
+        assertFalse(s1.isClash(s4)); // 12:00-12:15 does not clash with 12:15-12:30
     }
 
     @Test

@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":PlannerMd" as PlannerMd MODEL_COLOR
+participant ":UniquePersonList<Patient>" as UniquePersonList MODEL_COLOR
+participant ":UniqueAppointmentList" as UniqueAppointmentList MODEL_COLOR
+end box
+
+[-> ModelManager : setPatient(patientToEdit, editedPatient)
+activate ModelManager
+
+ModelManager -> PlannerMd : setPatient(patientToEdit, editedPatient)
+activate PlannerMd
+
+PlannerMd -> UniquePersonList : setPatient(patientToEdit, editedPatient)
+activate UniquePersonList
+
+UniquePersonList -> PlannerMd
+deactivate UniquePersonList
+
+PlannerMd -> ModelManager
+deactivate PlannerMd
+
+ModelManager -> PlannerMd : editAppointmentWithPerson(patientToEdit, editedPatient)
+activate PlannerMd
+
+PlannerMd -> UniqueAppointmentList : editAppointmentWithPerson(patientToEdit, editedPatient)
+activate UniqueAppointmentList
+
+loop through list of appointments
+    opt patientToEdit matches Patient in appointment
+        UniqueAppointmentList -> UniqueAppointmentList: setAppointment(appointment, editedAppointment)
+        activate UniqueAppointmentList
+
+        UniqueAppointmentList -> UniqueAppointmentList:
+        deactivate UniqueAppointmentList
+    end
+end
+
+UniqueAppointmentList -> PlannerMd
+deactivate UniqueAppointmentList
+
+PlannerMd -> ModelManager
+deactivate PlannerMd
+
+[<--ModelManager
+deactivate ModelManager
+@enduml
