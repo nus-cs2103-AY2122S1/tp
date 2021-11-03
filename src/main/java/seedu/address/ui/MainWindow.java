@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
@@ -172,12 +173,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initKeyPressEventHandler(CommandBox commandBox) {
-        // Add event handlers
+        // Add handler to request focus on commandBox when user wants to type
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (commandBox.getCommandTextField().isFocused()) {
                 return; // Don't filter if already in focus
             }
-            if (isTextInputKeyCode(event.getCode())) {
+            if (!event.isShortcutDown() && isTextInputKeyCode(event.getCode())) {
                 commandBox.getCommandTextField().requestFocus();
                 commandBox.getCommandTextField().selectEnd();
             }
@@ -213,12 +214,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private void initListeners() {
         // Add listeners
-        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+        ListView<Person> personListView = centerPanel.getPersonListView();
+        personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
                         handlePersonGridPanel(newVal);
                     }
                 });
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
+                .getSelectionModel().getSelectedItem()));
     }
 
     /**
@@ -314,6 +318,14 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
+    private void handleStudents(CommandResult commandResult) {
+        if (commandResult.getStudent().isPresent()) {
+            Person student = commandResult.getStudent().get();
+            handlePersonGridPanel(student);
+        } else {
+            handlePersonGridPanel();
+        }
+    }
     /**
      * Displays tag list instead of the default person list.
      */
@@ -347,12 +359,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
 
             case STUDENTS:
-                if (commandResult.getStudent().isPresent()) {
-                    Person student = commandResult.getStudent().get();
-                    handlePersonGridPanel(student);
-                } else {
-                    handlePersonGridPanel();
-                }
+                handleStudents(commandResult);
                 break;
 
             case TAGS:

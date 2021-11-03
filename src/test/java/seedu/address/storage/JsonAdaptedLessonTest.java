@@ -120,7 +120,7 @@ class JsonAdaptedLessonTest {
                 new JsonAdaptedLesson(VALID_DATE, VALID_END_DATE, VALID_TIME_RANGE, VALID_SUBJECT,
                         VALID_HOMEWORK_PIECES, INVALID_LESSON_RATES, VALID_OUTSTANDING_FEES, null);
 
-        String expectedMessage = LessonRates.MESSAGE_CONSTRAINTS;
+        String expectedMessage = LessonRates.MESSAGE_FORMAT_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
