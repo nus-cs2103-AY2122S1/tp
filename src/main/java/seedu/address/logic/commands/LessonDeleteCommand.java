@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class LessonDeleteCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson for student %1$s:\n%2$s";
 
-    private final Index index;
+    private Index index;
     private final Index lessonIndex;
     private Person personBeforeLessonDelete;
     private Person personAfterLessonDelete;
@@ -48,6 +47,8 @@ public class LessonDeleteCommand extends UndoableCommand {
      * @param index of the person in the filtered person list to delete lesson from
      */
     public LessonDeleteCommand(Index index, Index lessonIndex) {
+        super(COMMAND_ACTION);
+
         requireNonNull(index);
         requireNonNull(lessonIndex);
         this.index = index;
@@ -61,6 +62,9 @@ public class LessonDeleteCommand extends UndoableCommand {
 
         personBeforeLessonDelete = CommandUtil.getPerson(lastShownList, index);
 
+        // set with index from mainList
+        index = setToDefinitiveIndex(personBeforeLessonDelete);
+
         List<Lesson> lessonList = new ArrayList<>(personBeforeLessonDelete.getLessons());
         Lesson toRemove = CommandUtil.getLesson(lessonList, lessonIndex);
 
@@ -68,7 +72,6 @@ public class LessonDeleteCommand extends UndoableCommand {
         personAfterLessonDelete = PersonUtil.createdEditedPerson(personBeforeLessonDelete, updatedLessons);
 
         model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS,
                 personAfterLessonDelete.getName(), toRemove), personAfterLessonDelete);
     }
@@ -89,21 +92,23 @@ public class LessonDeleteCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() throws AssertionError {
         requireNonNull(model);
 
+        checkValidity(personAfterLessonDelete);
+
         model.setPerson(personAfterLessonDelete, personBeforeLessonDelete);
+        return personBeforeLessonDelete;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() throws AssertionError {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personBeforeLessonDelete);
+
+        model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
+        return personAfterLessonDelete;
     }
 
     @Override

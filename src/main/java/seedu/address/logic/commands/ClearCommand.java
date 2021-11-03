@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * Clears the address book.
@@ -23,6 +24,10 @@ public class ClearCommand extends UndoableCommand {
 
     private ReadOnlyAddressBook previousAddressBook;
 
+    public ClearCommand() {
+        super(COMMAND_ACTION);
+    }
+
     @Override
     public CommandResult executeUndoableCommand() {
         requireNonNull(model);
@@ -32,10 +37,11 @@ public class ClearCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
         model.setAddressBook(previousAddressBook);
+        return null;
     }
 
     /**
@@ -43,9 +49,10 @@ public class ClearCommand extends UndoableCommand {
      * {@code previousAddressBook} becomes an empty address book.
      */
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        executeUndoableCommand();
+        model.setAddressBook(new AddressBook());
+        return null;
     }
 }

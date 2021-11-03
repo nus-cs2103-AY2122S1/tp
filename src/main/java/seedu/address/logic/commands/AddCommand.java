@@ -71,7 +71,9 @@ public class AddCommand extends UndoableCommand {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
+        super(COMMAND_ACTION);
         requireNonNull(person);
+
         toAdd = person;
     }
 
@@ -84,28 +86,28 @@ public class AddCommand extends UndoableCommand {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), toAdd);
     }
 
     /**
      * To undo add student, delete added student
      */
     @Override
-    protected void undo() {
+    protected Person undo() throws AssertionError {
         requireNonNull(model);
 
+        checkValidity(toAdd);
+
         model.deletePerson(toAdd);
+        return null;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        model.addPerson(toAdd);
+        return toAdd;
     }
 
     @Override
