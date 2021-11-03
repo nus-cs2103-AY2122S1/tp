@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_P_AMY;
@@ -19,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditParticipantDescriptor;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -34,6 +32,7 @@ import seedu.address.testutil.ParticipantBuilder;
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model anotherModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,17 +42,10 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
+        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), new UserPrefs());
+        expectedModel.setParticipant(anotherModel.getFilteredParticipantList().get(0), editedParticipant);
 
-        try {
-            CommandResult result = editCommand.execute(model);
-            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-            assertEquals(expectedCommandResult, result);
-            assertEquals(expectedModel, model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -70,7 +62,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), new UserPrefs());
         expectedModel.setParticipant(lastParticipant, editedParticipant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -83,7 +75,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -101,18 +93,11 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(anotherModel.getAddressBook()), new UserPrefs());
         showParticipantAtIndex(expectedModel, INDEX_FIRST_PARTICIPANT);
-        expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
+        expectedModel.setParticipant(anotherModel.getFilteredParticipantList().get(0), editedParticipant);
 
-        try {
-            CommandResult result = editCommand.execute(model);
-            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-            assertEquals(expectedCommandResult, result);
-            assertEquals(expectedModel, model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

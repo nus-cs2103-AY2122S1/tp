@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showParticipantAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARTICIPANT;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,6 +25,7 @@ import seedu.address.model.participant.Participant;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model anotherModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,17 +36,10 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS,
                 participantToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(anotherModel.getAddressBook(), new UserPrefs());
         expectedModel.deleteParticipant(participantToDelete);
 
-        try {
-            CommandResult result = deleteCommand.execute(model);
-            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-            assertEquals(expectedCommandResult, result);
-            assertEquals(expectedModel, model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -67,18 +60,11 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(anotherModel.getAddressBook(), new UserPrefs());
         expectedModel.deleteParticipant(participantToDelete);
         showNoParticipant(expectedModel);
 
-        try {
-            CommandResult result = deleteCommand.execute(model);
-            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-            assertEquals(expectedCommandResult, result);
-            assertEquals(expectedModel, model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
