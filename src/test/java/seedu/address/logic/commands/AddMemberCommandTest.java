@@ -28,7 +28,7 @@ import seedu.address.model.group.Group;
  */
 public class AddMemberCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     // Pass
     @Test

@@ -25,7 +25,7 @@ import seedu.address.model.UserPrefs;
  */
 public class DeleteMemberCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     // Pass
     @Test

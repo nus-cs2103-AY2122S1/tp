@@ -17,7 +17,7 @@ import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.model.group.GroupName;
 
 public class AddMemberCommandParserTest {
-    private AddMemberCommandParser parser = new AddMemberCommandParser();
+    private final AddMemberCommandParser parser = new AddMemberCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

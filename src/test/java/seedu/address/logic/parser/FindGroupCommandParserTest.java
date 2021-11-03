@@ -13,7 +13,7 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
 
 public class FindGroupCommandParserTest {
 
-    private FindGroupCommandParser parser = new FindGroupCommandParser();
+    private final FindGroupCommandParser parser = new FindGroupCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
