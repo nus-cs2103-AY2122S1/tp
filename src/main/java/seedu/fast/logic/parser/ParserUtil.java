@@ -66,7 +66,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        trimmedName = capitalise(trimmedName);
+        trimmedName = capitaliseNamesFirstLetters(trimmedName);
         return new Name(trimmedName);
     }
 
@@ -77,7 +77,7 @@ public class ParserUtil {
      * @param trimmedName
      * @return trimmedName with capitalised words.
      */
-    private static String capitalise(String trimmedName) {
+    private static String capitaliseNamesFirstLetters(String trimmedName) {
         char[] chars = trimmedName.toLowerCase().toCharArray();
         if (Character.isLetter(chars[0])) {
             chars[0] = Character.toUpperCase(chars[0]);
