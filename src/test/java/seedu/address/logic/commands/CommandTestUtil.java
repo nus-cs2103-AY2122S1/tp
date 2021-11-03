@@ -151,10 +151,10 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            //            System.out.println("expected result: " + expectedCommandResult.getFeedbackToUser() + "\n\n");
-            //            System.out.println("actual result: " + result.getFeedbackToUser() + "\n\n");
-            //            System.out.println("expected model: " + expectedModel.getFilteredTaskList() + "\n\n");
-            //            System.out.println("actual model: " + actualModel.getFilteredTaskList() + "\n\n");
+            System.out.println("expected result: " + expectedCommandResult.getFeedbackToUser() + "\n\n");
+            System.out.println("actual result: " + result.getFeedbackToUser() + "\n\n");
+            System.out.println("expected model: " + expectedModel.getFilteredTaskList() + "\n\n");
+            System.out.println("actual model: " + actualModel.getFilteredTaskList() + "\n\n");
 
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);

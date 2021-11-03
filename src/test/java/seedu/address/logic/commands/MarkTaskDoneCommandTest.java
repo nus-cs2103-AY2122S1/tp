@@ -75,11 +75,11 @@ public class MarkTaskDoneCommandTest {
                 MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showTaskAtIndex(expectedModel, INDEX_FIRST_TASK);
 
         Task expectedCopy = TaskBuilder.of(taskToMarkAsDone).build();
         expectedModel.setTask(taskToMarkAsDone, expectedCopy);
         expectedModel.toggleTaskIsDone(expectedCopy);
-        showNoTask(expectedModel);
 
         assertCommandSuccess(markTaskDoneCommand, model, expectedMessage, expectedModel);
     }
@@ -121,12 +121,4 @@ public class MarkTaskDoneCommandTest {
         assertNotEquals(markFirstTaskDoneCommand, markSecondTaskDoneCommand);
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoTask(Model model) {
-        model.updateFilteredTaskList(p -> false);
-
-        assertTrue(model.getFilteredTaskList().isEmpty());
-    }
 }

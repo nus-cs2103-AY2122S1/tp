@@ -8,13 +8,27 @@ import seedu.address.model.tag.Tag;
 public class TodoTask extends Task {
 
     /**
-     * Constructs a {@code Task}.
+     * Constructs a {@code TodoTask}.
      *
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
+     * @param description A valid Description.
+     * @param priority A valid Priority.
      */
     public TodoTask(TaskName name, Set<Tag> tags, boolean isDone, Description description, Priority priority) {
         super(name, tags, isDone, description, priority);
+    }
+
+    /**
+     * Constructs a {@code TodoTask}.
+     *
+     * @param name A valid TaskName.
+     * @param tags A valid Set of Tags.
+     * @param description A valid Description.
+     * @param priority A valid Priority.
+     */
+    public TodoTask(TaskName name, Set<Tag> tags, Description description, Priority priority) {
+        super(name, tags, description, priority);
     }
 
     @Override
@@ -41,8 +55,4 @@ public class TodoTask extends Task {
         return LocalDate.MAX;
     }
 
-    @Override
-    public TodoTask clone() {
-        return (TodoTask) super.clone();
-    }
 }

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 
 public class AddEventTaskCommand extends Command {
@@ -33,7 +34,7 @@ public class AddEventTaskCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddEventTaskCommand(Task task) {
+    public AddEventTaskCommand(EventTask task) {
         requireNonNull(task);
         toAdd = task;
     }

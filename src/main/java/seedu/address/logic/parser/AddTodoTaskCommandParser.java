@@ -43,7 +43,8 @@ public class AddTodoTaskCommandParser implements Parser<AddTodoTaskCommand> {
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Task.Priority priority = ParserUtil.parsePriority(argMultimap.getPriorityUsingPrefix(PREFIX_PRIORITY).get());
-        TodoTask task = new TodoTask(name, tagList, false, description, priority);
+
+        TodoTask task = new TodoTask(name, tagList, description, priority);
         return new AddTodoTaskCommand(task);
     }
 

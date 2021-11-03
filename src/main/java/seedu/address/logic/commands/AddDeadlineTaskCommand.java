@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
 
 public class AddDeadlineTaskCommand extends Command {
@@ -33,7 +34,7 @@ public class AddDeadlineTaskCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddDeadlineTaskCommand(Task task) {
+    public AddDeadlineTaskCommand(DeadlineTask task) {
         requireNonNull(task);
         toAdd = task;
     }
