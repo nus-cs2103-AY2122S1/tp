@@ -3,9 +3,9 @@ layout: page
 title: Zi Yang's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: SafeFor(H)All
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+SafeFor(H)All is a desktop app for hall admins to keep track of hall residents’ information to keep hall residents safe during the COVID-19 pandemic via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). It is written in Java, and has about 15 kLoC.
 
 Given below are my contributions to the project.
 
