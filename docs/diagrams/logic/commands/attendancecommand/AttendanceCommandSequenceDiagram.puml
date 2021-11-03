@@ -1,15 +1,17 @@
 @startuml
 !include ../../../style.puml
 
+box Logic LOGIC_COLOR_T1
 Participant ":AttendanceCommand" as ac LOGIC_COLOR
-Participant ":ModelManager" as mm LOGIC_COLOR
-Participant ":Index" as i LOGIC_COLOR
-Participant ":ObservableList" as ol LOGIC_COLOR
-Participant ":Student" as st LOGIC_COLOR
-Participant ":StudioRecord" as sr LOGIC_COLOR
 Participant ":Attendance" as at LOGIC_COLOR
 Participant ":CommandResult" as cr LOGIC_COLOR
-Participant ":FilteredList" as fl LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":ModelManager" as mm MODEL_COLOR
+Participant ":Student" as st MODEL_COLOR
+Participant ":StudioRecord" as sr MODEL_COLOR
+end box
 
 [-> ac : execute(model)
 activate ac
@@ -17,30 +19,26 @@ ac -> mm ++: getFilteredStudentList
 mm --> ac --: lastShownList
 
 loop for each Index in indexArrayList
-    ac -> i ++ : getZeroBased
-    i --> ac -- : zero based index
-    ac -> ol ++ : get(zero based index)
-    ol --> ac -- : studentToEdit
+
+
     ac -> st ++ : getAttendance
     st -> sr ++ : getAttendance
-    sr --> st --
+    sr --> st -- : attendanceToEdit
     st --> ac -- : attendanceToEdit
     ac -> at  : update(studioSession, attendanceStatus)
     ac -> st ++ : getParticipation
     st -> sr ++ : getParticipation
-    sr --> st --
-    st --> ac --
+    sr --> st -- : participation
+    st --> ac -- : participatiion
     ref over ac : UpdateModelAttendance
 end loop
 
-ac -> mm ++ : updateFilteredStudentsList(PREDICATE_SHOW_ALL_STUDENTS)
-mm -> fl ++ : setPredicate(PREDICATE_SHOW_ALL_STUDENTS)
-fl --> mm --
-mm --> ac --
+ac -> mm  : updateFilteredStudentsList(PREDICATE_SHOW_ALL_STUDENTS)
+
 
 create cr
 ac -> cr ++ : CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS)
-cr --> ac -- : command result
-<-- ac : command result
+cr --> ac -- : result
+<-- ac -- : result
 
 @enduml

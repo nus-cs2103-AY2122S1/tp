@@ -1,46 +1,20 @@
 @startuml
 !include ../../../style.puml
 
+box Logic LOGIC_COLOR_T1
 Participant ":ParticipationCommand" as pc LOGIC_COLOR
-Participant ":ModelManager" as mm LOGIC_COLOR
-Participant ":FilteredList" as fl LOGIC_COLOR
-Participant ":Student" as st LOGIC_COLOR
-Participant ":StudioRecord" as sr LOGIC_COLOR
-Participant ":Participation" as p LOGIC_COLOR
-Participant ":Index" as i LOGIC_COLOR
-Participant ":Student" as ste LOGIC_COLOR
-Participant ":Attendance" as att LOGIC_COLOR
-Participant ":boolean[]" as bla LOGIC_COLOR
-Participant ":Attendance" as natt LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Student" as ste MODEL_COLOR
+Participant ":Attendance" as natt MODEL_COLOR
+end box
 
 activate pc
+-> pc
 opt  participationUpdate > 0
-pc -> mm ++ : getFilteredStudentList
-mm --> pc -- : studentList
-pc -> fl ++ : get(0)
-fl --> pc -- : firstStudent
-pc -> st ++ : getParticipation
-st -> sr ++ : getParticipation
-sr --> st -- : participation
-st --> pc -- : participation
-pc -> p ++ : getSessionCount
-p --> pc -- : sessionCount
 
 loop for each Index in indexArrayList
-pc -> i ++ : getZeroBased()
-i --> pc -- : zeroBasedIndex
-
-pc -> fl ++ : get(zeroBasedIndex)
-fl --> pc -- : studentToEdit
-
-pc -> ste ++ : getAttendance
-ste --> pc -- : attendance
-
-pc -> att ++ : getAttendanceArray
-att --> pc -- : newAttArr
-
-pc -> bla ++ : newAttArr[sessionCount - 1] = true
-bla --> pc --
 
 create natt
 pc -> natt ++ : Attendance(sessionCount)
@@ -53,4 +27,7 @@ pc -> ste ++ : setAttendance(newAttendance)
 ste --> pc --
 end
 end
+
+<-- pc--
+
 @enduml

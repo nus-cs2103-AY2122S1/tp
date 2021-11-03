@@ -13,6 +13,7 @@ title: Developer Guide
   * [Storage Component](#storage-component)
   * [Common Classes](#common-classes)
 * [Implementation](#implementation)
+  * [AddCommand](#addcommand)
   * [GetCommand](#getcommand)
   * [SortCommand](#sortcommand)
   * [AttendanceCommand](#attendancecommand)
@@ -169,6 +170,36 @@ Classes used by multiple components are in the `seedu.academydirectory.commons` 
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### AddCommand
+
+This command adds a new `Student` to `AcademyDirectory`.
+
+#### Implementation
+`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+`AddCommand` adds students to the `AcademyDirectory`, with prevention of duplicates by ensuring that each `Student` has a unique `NAME`. 
+`NAME` is a sufficiently unique field to identify a unique instance of a student as for the purposes of `AcademyDirectory` is scoped to 
+service CS1101S Avengers, each `Studio` has approximately 10 `Students`, with the probability of a `NAME` collision being sufficiently minimised.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student`s 
+do not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
+</div>
+
+### EditCommand
+
+This command edits a `Student`'s personal details such as their `NAME`, `PHONE`, `TELEGRAM` and `EMAIL`.
+
+#### Implementaion
+`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
+unless the `NAME` is the same  as the `Student` being edited.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student`s 
+do not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
+</div>
+
+
 ### GetCommand
 This command serves to retrieve a specific `Information` of students.
 
@@ -234,7 +265,9 @@ This command serves to update the `Participation` score of students. Following t
 
 `ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring is done. `ParticipationCommand` has an additional section in the sequence diagram located above the loop in `AttendanceCommand`.
+The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done. 
+
+`ParticipationCommand` has an additional section in the sequence diagram located above the loop in `AttendanceCommand`. The purpose of the logic below is to update a student's `Attendance` to be marked as present if the `participationUpdate` is greater than 0. This is because a student that has a positive `Participation` score would also count as having attended the `Studio`.
 
 ![ParticipationCommandMarkAttendanceSequenceDiagram](images/logic/commands/participationcommand/ParticipationCommandMarkAttendanceSequenceDiagram.png)
 
@@ -659,9 +692,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Should work in computer with `32-bit` or `64-bit` processor.
 5. Should run on user computer with double-click - no installer or additional libraries required.
 6. Should not require internet connection for any of its feature.
-7. All user and app data are stored locally, not through an online database solution.
+7. All user and app data should be stored locally, not through an online database solution.
+8. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
+9. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
+10. Logs and previous commits should be transferable and functional after transfer onto other computers.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -669,6 +704,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Studios**: A tutorial held in CS1101S and is essential in aiding the students to improve their grasp on the concepts taught during the lecture.
 * **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
+* **Principle of Least-Privilege**: Minimum levels of access – or permissions – needed to perform function.
 
 --------------------------------------------------------------------------------------------------------------------
 
