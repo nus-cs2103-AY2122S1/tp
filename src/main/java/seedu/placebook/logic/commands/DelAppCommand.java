@@ -9,6 +9,7 @@ import seedu.placebook.commons.core.index.Index;
 import seedu.placebook.logic.commands.exceptions.CommandException;
 import seedu.placebook.model.Model;
 import seedu.placebook.model.schedule.Appointment;
+import seedu.placebook.ui.Ui;
 import seedu.placebook.ui.UiManager;
 
 /**
@@ -39,7 +40,7 @@ public class DelAppCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, Ui ui) throws CommandException {
         requireNonNull(model);
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
@@ -50,7 +51,7 @@ public class DelAppCommand extends Command {
         Appointment appointmentToDelete = lastShownList.get(index.getZeroBased());
         String deleteWarning = "You are about to delete:\n" + appointmentToDelete;
 
-        if (UiManager.showDeleteDialogAndWait(deleteWarning)) {
+        if (ui.showDeleteDialogAndWait(deleteWarning)) {
             model.deleteAppointment(appointmentToDelete);
             model.updateState();
             return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToDelete));

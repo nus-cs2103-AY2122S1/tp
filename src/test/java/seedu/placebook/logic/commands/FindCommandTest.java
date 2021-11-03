@@ -16,10 +16,12 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.placebook.logic.UiStubFactory;
 import seedu.placebook.model.Model;
 import seedu.placebook.model.ModelManager;
 import seedu.placebook.model.UserPrefs;
 import seedu.placebook.model.person.NameContainsKeywordsPredicate;
+import seedu.placebook.ui.Ui;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -27,6 +29,8 @@ import seedu.placebook.model.person.NameContainsKeywordsPredicate;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
+    // default positive confirmation ui. This will not affect FindCommand
+    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @Test
     public void equals() {
@@ -61,7 +65,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, uiStub, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -71,7 +75,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, uiStub, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 

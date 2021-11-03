@@ -9,9 +9,11 @@ import static seedu.placebook.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.placebook.logic.UiStubFactory;
 import seedu.placebook.model.Model;
 import seedu.placebook.model.ModelManager;
 import seedu.placebook.model.UserPrefs;
+import seedu.placebook.ui.Ui;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -20,6 +22,8 @@ public class ListCommandTest {
 
     private Model model;
     private Model expectedModel;
+    // default positive confirmation ui. This will not affect ListCommand
+    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @BeforeEach
     public void setUp() {
@@ -29,12 +33,12 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, uiStub, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, uiStub, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
