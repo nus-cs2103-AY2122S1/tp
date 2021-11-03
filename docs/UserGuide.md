@@ -212,7 +212,7 @@ Hovering over a pie chart slice will display its percentage value.
 
 Format: `visualize POSITION_TITLE​`
 
-* `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
+* `POSITION_TITLE` is case-sensitive. e.g. `visualize software engineer` will not display the pie chart for the position `SOFTWARE ENGINEER`.
 
 
 ### Searching for applicants using keywords: `find-applicant`
