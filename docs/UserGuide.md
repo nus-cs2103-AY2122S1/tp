@@ -58,7 +58,7 @@ Here are some main features Socius provides:
 * Access details of coursemates taking CS2103T.
 * Find any coursemate(s) with their name, tutorial group, nationalities, tags and more.
 * Tag coursemates with suitable tags to categorize them.
-* View statistics on nationality and gender.
+* View statistics on nationality.
 
 <div markdown="block" class="alert alert-info">
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
@@ -383,13 +383,13 @@ Examples:
 
 ### Viewing statistics: `stat`
 
-You can view the gender and nationality statistics of a specified tutorial group.
+You can view the nationality statistics of a specified tutorial group.
 
 Format: **`stat`** `TUTORIAL GROUP`
 
 Examples:
 
-* **`stat`** `T09` computes and shows the gender and nationality statistics of tutorial group `T09`.
+* **`stat`** `T09` computes and shows the nationality statistics of tutorial group `T09`.
 
 ### Importing contacts: `import`
 
@@ -401,7 +401,9 @@ Format: **`import`** `FILE_NAME.json`
 * File must be located in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
-* **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
+* **`import`** `import.json` imports a contact book via a file named `import.json` into your existing application.
+![Folder Directory for imported files](images/ImportExample.png)
+*Illustration of where the JSON file should be located*
 
 ### Exporting contacts: `export`
 
@@ -417,18 +419,17 @@ Examples:
 
 ### Aliasing commands: `alias`
 
-You can create command shortcut by aliasing it with custom `KEYWORD`.
+You can create command shortcut by aliasing it with custom `KEYWORD`. This will assign the `KEYWORD` to a particular `COMMAND`,
+so next time you can simply type in `KEYWORD` instead of the full `COMMAND`.
 
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
-* Exactly one `KEYWORD` must be provided.
 * The order of `KEYWORD` and `COMMAND` does not matter.
-* If `KEYWORD` coincides with command keyword such as `add`, it will not override the original command.
+* `KEYWORD` cannot be the same as a command keyword such as `add`.
 
 Examples:
 
 * **`alias`** `a/nonLocal c/find nat/Indonesian nat/Malaysian` map the keyword `nonLocal` to the stated command.
-* **`alias`** `a/add c/add n/James p/12345678 nat/Malaysian` map the keyword `add` to the stated command without replacing the original `add` command keyword.
 
 ### Exiting the program: `exit`
 
@@ -477,7 +478,7 @@ Example: `98739283`
 Example: `e/e3029834@u.nus.edu`
 
 ### `nat/NATIONALITY`
-`NATIONALITY` is only valid if it is one of the nationality listed in the [list of nationalities CSV file](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/664133/CH_Nationality_List_20171130_v1.csv/preview) by GOV.UK.
+`NATIONALITY` is only valid if it is one of the nationality listed in this [list of nationalities TXT file](https://gist.github.com/marijn/274449).
 
 Example: `nat/Singaporean`
 
