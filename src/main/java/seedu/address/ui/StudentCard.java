@@ -15,8 +15,6 @@ import seedu.address.model.student.Student;
  */
 public class StudentCard extends UiPart<Region> {
 
-    private static final String FXML = "StudentListCard.fxml";
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -25,8 +23,12 @@ public class StudentCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Student student;
+    private static final String FXML = "StudentListCard.fxml";
 
+    protected final Student student;
+
+    @FXML
+    protected FlowPane tags;
     @FXML
     private HBox cardPane;
     @FXML
@@ -40,9 +42,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label githubLink;
     @FXML
-    private FlowPane tags;
-    @FXML
     private VBox studentValuesContainer;
+
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -54,7 +55,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText("Email: " + student.getEmail().value);
         studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
-        if (!student.getGroupName().toString().contentEquals("-")) {
+        if (student.hasGroupName()) {
             Label studentGrp = new Label("Group: " + student.getGroupName().toString());
             tags.getChildren().add(studentGrp);
             studentGrp.getStyleClass().add("studentGroupLabel");

@@ -15,6 +15,7 @@ public class EventTaskCard extends UiPart<Region> {
 
     private static final String FXML = "EventTaskListCard.fxml";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final String EVENT_LABEL_STYLE = "taskType-event";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -64,7 +65,7 @@ public class EventTaskCard extends UiPart<Region> {
         } else {
             priorityLabel.getStyleClass().add("priorityLabel-low");
         }
-        taskType.getStyleClass().add("taskType");
+        taskType.getStyleClass().add(EVENT_LABEL_STYLE);
 
         taskDate.setText("Date: " + eventTask.getTaskDate().getDeadline().format(formatter));
 
@@ -81,7 +82,7 @@ public class EventTaskCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeadlineTaskCard)) {
+        if (!(other instanceof EventTaskCard)) {
             return false;
         }
 

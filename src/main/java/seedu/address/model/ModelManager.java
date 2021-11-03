@@ -15,9 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
@@ -244,12 +242,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void completeTask(Task target) {
+    public void toggleTaskIsDone(Task target) {
         requireAllNonNull(target, target);
-        target.markTaskComplete();
-        /*Task newTask = target.clone();
-        newTask.markTaskComplete();
-        addressBook.setTask(target, newTask);*/
+        target.toggleIsDone();
+        addressBook.sortTasks();
     }
 
     @Override
@@ -287,14 +283,6 @@ public class ModelManager implements Model {
 
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         addressBook.setGroup(target, editedGroup);
-    }
-
-    @Override
-    public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
-        requireAllNonNull(year, repoName, group);
-        Group newGroup = new Group(group.getName(), group.getMembers(), year, repoName, group.getTags());
-        addressBook.setGroup(group, newGroup);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     //=========== Filtered Student List Accessors =============================================================

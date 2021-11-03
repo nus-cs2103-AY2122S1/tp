@@ -28,7 +28,7 @@ public class DeadlineTaskBuilder extends TaskBuilder {
 
     @Override
     public DeadlineTask build() {
-        return new DeadlineTask(taskName, tags, false, taskDate, description, priority);
+        return new DeadlineTask(taskName, tags, isDone, taskDate, description, priority);
     }
 
     /**

@@ -121,10 +121,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.setTask(target, editedTask);
     }
 
-    public void markTaskComplete(Task target) {
-        target.markTaskComplete();
-    }
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -133,8 +129,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.remove(key);
     }
 
+    /**
+     * Clears all tasks in the task list.
+     */
     public void clearAllTask() {
         tasks.removeAllTasks();
+    }
+
+    /**
+     * Sorts all the tasks in the task list.
+     */
+    public void sortTasks() {
+        tasks.sortList();
     }
 
 
@@ -160,7 +166,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
-     * @param s
+     * @param s The student to be added.
      */
     public void addStudent(Student s) {
         students.add(s);
@@ -226,7 +232,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.
-     * @param g
+     * @param g The group to be added.
      */
     public void addGroup(Group g) {
         groups.add(g);

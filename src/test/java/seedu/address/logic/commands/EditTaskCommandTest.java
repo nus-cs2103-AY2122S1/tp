@@ -60,6 +60,31 @@ public class EditTaskCommandTest {
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
 
+    // Does not work because editTask is buggy for editing dates and priority
+    /*@Test
+    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastTask = Index.fromOneBased(model.getFilteredTaskList().size()-1);
+        Task lastTask = model.getFilteredTaskList().get(model.getFilteredTaskList().size()-1);
+
+        DeadlineTaskBuilder taskInList = new DeadlineTaskBuilder((DeadlineTask) lastTask);
+        Task editedTask = taskInList.withName(VALID_TASK_NAME_STUDY)
+                .withTags(VALID_TAG_HUSBAND)
+                .withDate("2021-01-01")
+                .withPriority("H")
+                .build();
+
+        EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_STUDY)
+                .withTags(VALID_TAG_HUSBAND).withPriority("H").build();
+        EditTaskCommand editTaskCommand = new EditTaskCommand(indexLastTask, descriptor);
+
+        String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setTask(lastTask, editedTask);
+
+        assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
+    }*/
+
     @Test
     public void execute_filteredList_success() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);

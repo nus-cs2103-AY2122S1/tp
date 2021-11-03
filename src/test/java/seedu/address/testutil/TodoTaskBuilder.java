@@ -23,7 +23,7 @@ public class TodoTaskBuilder extends TaskBuilder {
 
     @Override
     public TodoTask build() {
-        return new TodoTask(taskName, tags, false, description, priority);
+        return new TodoTask(taskName, tags, isDone, description, priority);
     }
 
     @Override

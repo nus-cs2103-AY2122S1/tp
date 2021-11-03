@@ -323,6 +323,8 @@ Format: `clearGroups`
 ### List all tasks: `tasks`
 
 Displays all the tasks currently in the task list.
+All tasks are sorted with completed tasks at the bottom of the list.
+Pending tasks are sorted by their associated dates, and their priority.
 
 Format: `tasks`
 
@@ -338,7 +340,7 @@ Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 * The priority parameter accepts partial words and is case-insensitive.
 * A combination of different priority levels are not accepted.
 * Tasks that are not specified a priority level will be by default Low Priority.
-* `DESCRIPTION` should only contain alphanumerical characters.
+* `DESCRIPTION` should only contain ASCII characters.
 
 Examples:
 * `todo n/play` creates the todo task "play" with the default LOW Priority.
@@ -417,16 +419,21 @@ Examples:
 
 ### Marking a task as done: : `doneTask`
 
-Mark the specified task from the list as done.
+Mark the specified task from the list as complete, or mark it as pending.
 
-Format: `doneTask INDEX`
+Format: `doneTask INDEX [MORE INDEXES]`
 
-* Mark the task as done at the specified `INDEX`.
+* If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
+* If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
 * The index refers to the index number shown in the task list.
-* The index must be a positive integer 1, 2, 3, …​
+* The user is able to mark multiple tasks by providing multiple indexes.
+* The indexes must be a positive integer 1, 2, 3, …​
+* Duplicate indexes are not accepted.
 
 Examples:
-* `doneTask 2` marks the 2nd task in the task list as completed.
+* `doneTask 2` marks the 2nd task in the task list as completed or pending.
+* `doneTask 1 3 4` marks the 1st, 3rd and 4th tasks in the task list as completed or pending.
+![markTaskDoneCommand visual](images/MarkTaskDoneCommand_UG_visual.PNG)
 
 ### Clearing all entries from task list: `clearTasks`
 
@@ -513,7 +520,7 @@ Commands | Format | Examples
 [**Add Deadline Task**](#add-a-deadline-task-deadline) | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` | e.g., `deadline n/Finish tP by/2021-10-31 t/W14-4`
 [**Edit Task**](#editing-a-task-edittask) | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`| e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
 [**Delete Task**](#deleting-a-task-deletetask) | `deleteTask INDEX`| e.g., `deleteTask 3`
-[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX` | e.g., `doneTask 1`
+[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX [MORE INDEXES]` | e.g., `doneTask 1 2 3`
 [**Clear Tasks**](#clearing-all-entries-from-task-list-cleartasks) | `clearTasks`
 
 ## General

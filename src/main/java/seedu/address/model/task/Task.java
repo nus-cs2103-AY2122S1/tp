@@ -69,7 +69,7 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         return isDone;
     }
 
-    public void markTaskComplete() {
+    public void toggleIsDone() {
         this.isDone = !this.isDone;
     }
 
@@ -91,7 +91,7 @@ public abstract class Task implements Comparable<Task>, Cloneable {
 
     public String getPriorityAsString() {
         if (this.priority == Priority.HIGH) {
-            return "HIGH️";
+            return "HIGH";
         } else if (this.priority == Priority.MEDIUM) {
             return "MEDIUM";
         } else {
@@ -132,13 +132,14 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         return otherTask.getName().equals(getName())
                 && otherTask.getTags().equals(getTags())
                 && otherTask.getDate().equals(getDate())
-                && otherTask.getDescription().equals(getDescription());
+                && otherTask.getDescription().equals(getDescription())
+                && otherTask.getPriority().equals(getPriority());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags, isDone);
+        return Objects.hash(name, tags, description, isDone, priority);
     }
 
     @Override
@@ -179,7 +180,13 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         LocalDate thisDate = this.getDate();
         LocalDate otherDate = otherTask.getDate();
 
-        return thisDate.compareTo(otherDate);
+        int result = thisDate.compareTo(otherDate);
+
+        if (result == 0) {
+            return this.priority.compareTo(otherTask.priority);
+        } else {
+            return result;
+        }
     }
 
     @Override

@@ -25,7 +25,7 @@ public class EventTaskBuilder extends TaskBuilder {
 
     @Override
     public EventTask build() {
-        return new EventTask(taskName, tags, false, taskDate, description, priority);
+        return new EventTask(taskName, tags, isDone, taskDate, description, priority);
     }
 
     /**

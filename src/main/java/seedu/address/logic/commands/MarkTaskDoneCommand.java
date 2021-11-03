@@ -20,7 +20,7 @@ public class MarkTaskDoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task Completed: %1$s\n";
+    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "The following task is marked as %1$s:\n%2$s\n";
 
     private final List<Index> targetIndexList;
 
@@ -45,8 +45,9 @@ public class MarkTaskDoneCommand extends Command {
             }
 
             Task taskToMarkCompleted = savedStateList.get(targetIndex.getZeroBased());
-            model.completeTask(taskToMarkCompleted);
-            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted));
+            model.toggleTaskIsDone(taskToMarkCompleted);
+            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS,
+                    taskToMarkCompleted.getStatusString(), taskToMarkCompleted));
         }
 
         return new CommandResult(result.toString());
