@@ -270,7 +270,7 @@ Step 3.2: Valid students who are not added due to tuition class size limit or wh
 Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled in the class which shows the `ClassName` and
 `Timeslot` of the class.
 
-### \[Developed\] Undo/redo feature
+### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
