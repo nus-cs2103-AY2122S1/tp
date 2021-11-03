@@ -169,6 +169,7 @@ Creates a folder for contacts to be added into.
 Format: `mkdir FOLDER_NAME`
 
 * Creates a folder with the name `FOLDER_NAME`.
+* `FOLDER_NAME` has a maximum character limit of 30.
 * Duplicate folder names are not allowed.
 
 Examples:
@@ -217,6 +218,7 @@ Format: `ls -folders`
 Replaces the old folder name with the new folder name.
 
 Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
+* `NEW_FOLDER_NAME` has a maximum character limit of 30.
 
 #### Locating folders by name: `find -folders`
 
