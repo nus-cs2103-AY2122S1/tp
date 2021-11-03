@@ -36,7 +36,7 @@ Syntax | Meaning
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
 _text_ | Caption for images.
 <div markdown="block" class="alert alert-info"> :information_source: **Note** </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip** </div> | Indication that the following text is a tip, which can allows you to interact with TAB more effectively and quickly. 
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip** </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly. 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution** </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to breakdown!
 
 
@@ -96,13 +96,13 @@ Section | Representation
 ---------|---------
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
 Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>). <br> - Note: Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students.
-Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you pressed <kbd>Enter</kbd>.
-Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display relevant success messages, otherwise, it will show error messages indicating the cause of the error.
-Student List | The area that shows the list of students you have in TAB.
+Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
+Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
+Student List | The panel that shows the list of students you have in TAB.
 Student Card | The area that shows the details of a student. See [Managing Students](#managing-students) for more details.
-Lesson List | The area that shows the name of the student you have selected together with a list of lessons that the student has.
+Lesson List | The panel that shows the name of the student you have selected together with a list of lessons that the student has.
 Lesson Card | The area that shows the details of a lesson. See [Managing Lessons](#managing-lessons) for more details.
-Center Panel | The area that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
+Center Panel | The region that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 Footer | The area which shows where TAB saves your student details to. For example, **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json**. <br> ![fileStorage](images/annotatedFileStorage.png) <br> <div class="caption">Location of the saved data.</div>
 
 
@@ -586,7 +586,7 @@ Examples:
 
 #### Viewing upcoming lessons : `remind`
 
-Displays a list of upcoming lessons with end date time within the next 48 hours
+Displays a list of upcoming lessons that ends within the next 48 hours
 
 Format: `remind`
 
