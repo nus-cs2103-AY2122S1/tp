@@ -234,19 +234,18 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 #### Implementation
 
 The delete-applicant feature is achieved by the `DeleteApplicantCommand` class. Just like all other
-commands in MTR, it extends the Command class. It is one of the simplest commands in the sense that the only parameter it
-takes in is the index position of the applicant in the `ApplicantBook`. However, its implementation is not.
+commands in MTR, it extends the Command class. The only parameter it takes in is the index position of the applicant in the `ApplicantBook`.
 
 The `DeleteApplicantCommand#execute(Model model)` method will use the `Model#getFilteredApplicantList()` to indirectly
 check whether the applicant exists by checking the size of the list against the index provided. The applicant to be deleted is then
 obtained from the list via the standard `List#get()` and is removed from the model via `Model#deleteApplicant()`.
 
 Given below is an example usage scenario and how the delete applicant feature behaves at each step.
-Preconditions: The app is already launched and the applicant to be deleted exists in MTR.
+Preconditions: The app is already launched and there is an applicant existing in MTR.
 
 Step 1: The user inputs the command `delete-applicant 1`. The app parser simply parses the index 1 and returns the `DeleteApplicantCommand` instance.
 
-Step 2: After verifying that index 1 is valid, LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
+Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
 
@@ -269,7 +268,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 The implementation of the edit applicant feature uses the `EditApplicantCommand` class. A unique attribute for this 
 class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
 
-The `EditApplicantCommand` method takes in a non-null index and non-null description of the target applicant with the help of the `EditApplicantDescriptor` class.
+The `EditApplicantCommand` method takes in an index and description of the target applicant with the help of the `EditApplicantDescriptor` class.
 It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
 It also has guard clauses verifying that the description has a valid `Title` which is a valid position title in the current `positionBook`. A final check is done to check that the applicant
 with the new description is not already existing in MTR. Once these criteria are met, the model then updates the target applicant with the new description via the
@@ -281,26 +280,25 @@ Preconditions: The app is already launched, the target applicant exists.
 Step 1. User inputs command `edit-applicant 1 n/Jasmine Doe p/98761432 e/jdoe@example.com`.  The app parser will store 
 all the user-input parameters into an `EditApplicantDescriptor` object.
 
-Step 2. After verifying that index 1 and the new description are valid, LogicManager executes this `EditApplicantCommand` instance.
-This invokes the `EditApplicantDescriptor#createEditedApplicant` method to create a new `Applicant` to replace the original one.
+Step 2. LogicManager executes this `EditApplicantCommand` instance, invoking the `EditApplicantDescriptor#createEditedApplicant` method to create a new `Applicant` to replace the original one.
 
-Step 3. A comparison is then done using the `Applicant#isSameApplicant` and `Model#hasApplicant` methods to ensure that the descriptions of the new applicant is different from the
-target `Applicant` and that the target `Applicant` exists.
-
-Step 4. Once step 3 is verified, we replace the existing applicant with the new one in the `applicantBook` via `Model#setApplicant` and reflect the updated list.
+Step 3. The model then replace the existing applicant with the new one in the `applicantBook` via `Model#setApplicant` and reflect the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
 [to be added]
 
 #### Design considerations:
 
-**Aspect: How to access and delete an applicant**
+**Aspect: How to access and change an applicant**
 
 * **Alternative 1 (current choice):** Have a separate class handle changing details of an applicant. [to be added]
     * Pros: Lowers coupling and makes logic of ModelManager simpler.
     * Cons: If a change is needed for the EditApplicantCommand, more classes need to be changed, making it more troublesome.
 
-* **Alternative 2:** [to be added]
+* **Alternative 2:** Create a separate ModelManager to handle applicant-related commands.
+    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
+    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
+    
 
 ### Filter applicants feature
 
@@ -313,6 +311,11 @@ This `Predicate` is constructed from the filters specified whenever the `filter-
 The `FilterApplicantCommand#execute()` method has guard clauses to check that the contents of the input are valid through the
 `FilterApplicantDescriptor#hasAnyFilter()` method. If contents are valid, it uses mapping via the `FilterApplicantCommand#applicantMatchesFilter`
 method to filter out all applicants matching the given criteria. A new filtered list is now displayed on the MTR UI. <br>
+
+<div markdown="block" class="alert alert-info"> 
+* This command is used for filtering applicants by `Position` and `applicationStatus` only, not to be confused with `FindApplicantCommand`.
+
+</div>
 
 Given below is an example usage scenario of the applicant filter feature. <br>
 Preconditions: Applicant exists in MTR and valid filters provided. 
@@ -363,7 +366,51 @@ It is also used to in the validation of the filtering criteria.
 *{More to be added}*
 
 
+### Find applicants feature
+
+#### Implementation
+
+The find feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
+which finds all applicants based on a specified name. This name is constructed via the `NameContainsKeywordsPredicate` class whenever the `find-applicant` command is called.
+
+The `FindApplicantCommand#execute()` method does not have guard clauses to check that the given name is valid. It simply maps via the `FindApplicantCommand#applicantMatchesFilter`
+method to find all applicants matching the given name. A new filtered list is now displayed on the MTR UI. Hence an empty list may be displayed on the UI. <br>
+
+<div markdown="block" class="alert alert-info"> 
+* This command is used for finding applicants by their `Name` only, not to be confused with `FilterApplicantCommand`.
+
+</div>
+
+Given below is an example usage scenario of the find applicant feature. <br>
+Preconditions: Applicant exists in MTR and valid filters provided.
+
+Step 1. User inputs command `find-applicant John`. The app parser stores all information in a new `NameContainsKeywordsPredicate` instance.
+
+Step 2. Model executes `FindApplicantCommand#execute` method, invoking the `Model#updateFilteredApplicantList` method, mapping all applicants to check if they have the same name.
+
+Step 3. Results of this new filtered list is then passed to the model and is reflected onto the UI.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the FindApplicantCommand:
+[to be added]
+
+*{More to be added}*
+
+#### Design considerations:
+
+**Aspect: Finding via name**
+
+* **Alternative 1 (current choice):** Separating searching of name from positions and statuses.
+    * Pros: Because of the way we implemented, it is much easier to search via name rather than positions or statuses. Also reduces coupling on the `FilterApplicantCommand` class and easier to test.
+    * Cons: Might result in slight confusion for users due to 2 similarly-named commands.
+
+* **Alternative 2:** Use the existing `FindCommand` or created `FilterApplicantCommand` and improve the command from there to achieve this functionality.
+    * Pros: A singular class to handle all finding/filtering-related commands, making it easier for users.
+    * Cons: Very difficult to code since it requires integrating of multiple existing classes, resulting in potentially many bugs and complicated logic.
+
+
 ### Mark/update applicant's status feature :heavy_check_mark:
+
+#### Implementation
 The mark feature is achieved using the `MarkApplicantStatusCommand` class. It is a simple command which only modifies the 
 application status of the applicant for a particular position. It does so by taking in the applicant to be modified and the updated `ApplicationStatus`.
 
@@ -378,9 +425,9 @@ Preconditions: Applicant exists in MTR and valid mark status given.
 
 Step 1. User inputs `mark john doe status/rejected`. The app parser stores the target applicant name and new `ApplicationStatus` internally in the `MarkApplicantStatusCommand` as private fields.
 
-Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoking the `Model#getApplicantByNameIgnoreCase` method.
+Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoking the `Applicant#markAs` method and `Model#setApplicant` method, which creates a new applicant and replaces the existing applicant with the created one.
 
-Step 3. After verifying that the applicant exists, a new applicant is created via `Applicant#markAs`, and the model calls the `Model#setApplicant` method replaces the existing applicant with the created one.
+Step 3. UI-wise, the applicant should now appear with the updated application status.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
 [to be added]
@@ -397,7 +444,10 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Pros: Separates code logic from Application, easier to digest and manipulate.
     * Cons: Increases complexity of code. Separate class has little usage.
 
+
 ### List applicants feature
+
+#### Implementation
 The list applicants feature is achieved by the `ListApplicantCommand` class. Unlike most other commands in the MTR, 
 it only has 1 action under the `ListApplicantCommand#execute` method besides creation of the command itself, which is 
 `Model#updateFilteredApplicantList` which updates the UI to show all current applicants in the `applicantBook`.
@@ -429,15 +479,123 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Pros: Many functions already in place and little modification is required.
     * Cons: Although less code to be added, due to coupling, more things are needed to be changed intricately and carefully (i.e. prone to errors/bugs).
 
+
 ### Add position feature :heavy_check_mark:
+
+#### Implementation
+The implementation of the add position feature is achieved by the `AddPositionCommand` class. There are 2 things parsed 
+straight from the user input: The position `title` and the `description`. A slight difference from the `AddApplicantCommand` 
+is that no separate class is used here - the `Position` class simply creates a new instance directly.
+
+The `AddPositionCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
+position in `positionBook`. If valid, the new position will then be passed to Model to add to
+`positionBook`, using the `Model#addPosition` method.
+
+Given below is an example usage scenario and how the add position feature behaves at each step.
+Preconditions: The app is already launched and the position to be added is new to MTR.
+
+Step 1. The user inputs the command `add-position tit/software engineer des/work in a team that builds a facial recognition application`. 
+The app parser will store all the user-input parameters into a new `Position` instance.
+
+Step 2. LogicManager executes this `AddPositionCommand` instance, invoking the `Model#addPosition` method.
+
+Step 3. The UI for `positionBook` will now contain the new position added.
+
+The following sequence diagram shows the method invocation in this step.
+[to be added]
+
+#### Design considerations:
+
+**Aspect: Adding positions**
+
+* **Alternative 1 (current choice):** Have a singular `Position` class to handle all position related methods.
+    * Pros: Simplifies coding and testing since everything is parked under 1 class.
+    * Cons: Higher coupling for the `Position` class.
+
+* **Alternative 2:** Have a separate class which contains details of various positions like applicants.
+    * Pros: Separates details from the actual class.
+    * Cons: Unnecessary since positions have few fields and functions, additional class simply increases complexity. Defeats the purpose of the `Position` class.
+
 
 ### Delete position feature :heavy_check_mark:
 
+#### Implementation
+
+The delete-position feature is achieved by the `DeletePositionCommand` class, in similar flavour to the `DeleteApplicantCommand`. 
+The only parameter it takes in is the index position of the position in the `positionBook`.
+
+The `DeletePositionCommand#execute(Model model)` method will use the `Model#getFilteredPositionList()` to indirectly
+check whether the position exists by checking the size of the list against the index provided. The position to be deleted is then
+obtained from the list via the standard `List#get()` and is removed from the model via `Model#deletePosition()`.
+
+Given below is an example usage scenario and how the delete position feature behaves at each step.
+Preconditions: The app is already launched and there is a position existing in MTR.
+
+Step 1: The user inputs the command `delete-position 1`. The app parser simply parses the index 1 and returns the `DeletePositionCommand` instance.
+
+Step 2: LogicManager executes this `DeletePositionCommand` instance, invoking the `Model#deletePosition()` method.
+
+Step 3: This then calls the internal method for `PositionBook`, `PositionBook#removeApplicant()`, which then removes the position thereafter.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the DeletePositionCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: How to access and delete a position**
+
+* **Alternative 1 (current choice):** Let ModelManager handle the deletion but keep the PositionBook's methods separate from the ModelManager
+    * Pros: More accessible since ModelManager already contains the positionBook, and reduces complication of code.
+    * Cons: Higher coupling for ModelManager since it handles more commands.
+
+* **Alternative 2:** Create a separate ModelManager to handle position-related commands.
+    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
+    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
+
+
 ### Edit position feature :heavy_check_mark:
 
+#### Implementation
+The implementation of the edit position feature uses the `EditPositionCommand` class, in similar flavour to the `EditApplicantCommand`. A unique attribute for this
+class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
+
+The `EditPositionCommand` method takes in an index and description (including `title`) of the target position with the help of the `EditPositionDescriptor` class.
+It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
+It also has guard clauses verifying that the description is valid and different from the one in the MTR. Once these criteria are met, 
+the model then updates the target position with the new description via the `Model#setPosition` and `Model#updateFilteredPositionList` methods.
+It also ensures all applicant's positions are updated using the `Model#updateApplicantsWithPosition`.
+
+Given below is an example usage scenario and how the edit position feature behaves at each step. <br>
+Preconditions: The app is already launched, the target position exists.
+
+Step 1. User inputs command `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `.  The app parser will store
+all the user-input parameters into an `EditPositionDescriptor` object.
+
+Step 2. LogicManager executes this `EditPositionCommand` instance, invoking the `EditPositionDescriptor#createEditedPosition` method to create a new `Position` to replace the original one.
+
+Step 3. The model then replaces the existing position with the new one in the `positionBook` via `Model#setPosition` and reflect the updated list in the UI.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the EditPositionCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: How to access and change a position**
+
+* **Alternative 1 (current choice):** Have a separate class handle changing details of a position. [to be added]
+    * Pros: Lowers coupling and makes logic of ModelManager simpler.
+    * Cons: If a change is needed for the EditPositionCommand, more classes need to be changed, making it more troublesome.
+
+* **Alternative 2:** Create a separate ModelManager to handle position-related commands.
+    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
+    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
+    
+
 ### List positions feature
+
+#### Implementation
 The list positions feature is achieved by the `ListPositionCommand` class. Unlike most other commands in the MTR,
-it only has 1 action under the `ListApplicantCommand#execute` method besides creation of the command itself, which is
+it only has 1 action under the `ListPositionCommand#execute` method besides creation of the command itself, which is
 `Model#updateFilteredPositionList` which updates the UI to show all current positions in the `positionBook`.
 
 If there are no current positions in the `positionBook`, the UI should appear empty.
@@ -466,6 +624,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
     * Pros: Many functions already in place and little modification is required.
     * Cons: Due to coupling, requires changing code intricately and carefully (i.e. prone to errors/bugs).
+
 
 ### Rejection Rate feature
 
@@ -511,6 +670,7 @@ Step 5. Any command the user executes next simply refreshes the current state to
 
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
+
 
 ### Undo/redo feature
 
