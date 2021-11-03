@@ -45,9 +45,10 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the application.";
     public static final String MESSAGE_DUPLICATE_STUDENT =
             "The student \"%1$s\" needs to be allocated manually using ID due to duplicate naming.";
-    public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "The student \"%1$s\" already exists in the group.";
+    public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP =
+            "The student \"%1$s\" (%2$s) was specified more than once.";
 
-    private final Group toAdd;
+    private final Group groupToAdd;
     private final List<AllocDescriptor> allocDescriptors;
 
     /**
@@ -56,7 +57,7 @@ public class AddGroupCommand extends Command {
     public AddGroupCommand(Group group, List<AllocDescriptor> allocDescriptors) {
         requireNonNull(group);
         requireNonNull(allocDescriptors);
-        toAdd = group;
+        groupToAdd = group;
         this.allocDescriptors = new ArrayList<>(allocDescriptors);
     }
 
@@ -64,10 +65,11 @@ public class AddGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasGroup(toAdd)) {
+        if (model.hasGroup(groupToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
+        List<Student> originalStudents = new ArrayList<>();
         List<Student> addedStudents = new ArrayList<>();
 
         for (AllocDescriptor allocDescriptor : allocDescriptors) {
@@ -91,17 +93,24 @@ public class AddGroupCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, studentToEdit.getName()));
             }
 
-            if (toAdd.hasStudent(studentToEdit.getId())) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT_IN_GROUP, studentToEdit.getName()));
+            if (groupToAdd.hasStudent(studentToEdit.getId())) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT_IN_GROUP,
+                        studentToEdit.getName(), studentToEdit.getId()));
             }
 
+            originalStudents.add(studentToEdit);
             Student editedStudent = createEditedStudent(studentToEdit, allocDescriptor);
-            toAdd.addStudent(editedStudent.getId());
+            groupToAdd.addStudent(editedStudent.getId());
             addedStudents.add(editedStudent);
-            model.setStudent(studentToEdit, editedStudent);
         }
 
-        model.addGroup(toAdd);
+        model.addGroup(groupToAdd);
+
+        assert originalStudents.size() == addedStudents.size();
+        for (int i = 0; i < originalStudents.size(); i++) {
+            model.setStudent(originalStudents.get(i), addedStudents.get(i));
+        }
+
         return new CommandResult(formatSuccessMessage(addedStudents));
     }
 
@@ -109,7 +118,7 @@ public class AddGroupCommand extends Command {
      * Returns the formatted success message, depending on whether there were students added to the new group.
      */
     public String formatSuccessMessage(List<Student> addedStudents) {
-        String groupAddedMessage = String.format(MESSAGE_SUCCESS, toAdd.name);
+        String groupAddedMessage = String.format(MESSAGE_SUCCESS, groupToAdd.name);
 
         if (addedStudents.isEmpty()) {
             return groupAddedMessage;
@@ -137,7 +146,7 @@ public class AddGroupCommand extends Command {
         // state check
         AddGroupCommand e = (AddGroupCommand) other;
 
-        return toAdd.equals(e.toAdd)
+        return groupToAdd.equals(e.groupToAdd)
                 && equalsIgnoreOrder(allocDescriptors, e.allocDescriptors);
     }
 }
