@@ -155,6 +155,20 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 </div>
 
+
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution on use of the symbol `/` in commands:**<br>
+
+* For all commands, the symbol `/` should only be used in the **representation of prefixes**, such as `n/`, `p/` and `r/`, etc. 
+* You **should not** use the symbol `/` when filling up any of the parameters.
+* For example,  in `add` command,
+  * **Acceptable** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`.
+  * **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>
+  _*notice the additional `/` used in the parameter of `a/ADDRESS`._
+
+</div>
+
 ### General Commands
 
 #### Viewing help: `help`
