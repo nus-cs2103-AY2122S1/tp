@@ -1,5 +1,6 @@
 package dash.logic.parser.taskcommand;
 
+import static dash.commons.core.Messages.MESSAGE_ARGUMENT_EMPTY;
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static dash.logic.parser.CliSyntax.PREFIX_COMPLETION_STATUS;
@@ -65,29 +66,28 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
         //if both preamble and desc prefix specified, desc prefix will override
         if (descPresent) {
             if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] nameKeywords = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get().split("\\s+");
             findTaskDescriptor.setDesc(Arrays.asList(nameKeywords));
         }
         if (datePresent) {
             if (argMultimap.getValue(PREFIX_TASK_DATE).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             TaskDate taskDateArg = ParserUtil.parseTaskDateToEdit(argMultimap.getValue(PREFIX_TASK_DATE).get());
             findTaskDescriptor.setDate(taskDateArg);
         }
         if (tagPresent) {
             if (argMultimap.getValue(PREFIX_TAG).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).get().split("\\s+");
             findTaskDescriptor.setTags(Arrays.asList(tagKeywords));
         }
         if (personPresent) {
             if (argMultimap.getValue(PREFIX_PERSON).get().isEmpty()) {
-                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + "\n"
-                        + FindTaskCommand.MESSAGE_USAGE);
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             try {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
@@ -116,7 +116,7 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
         }
         if (completionStatusPresent) {
             if (argMultimap.getValue(PREFIX_COMPLETION_STATUS).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] completionStatusKeywords = argMultimap.getValue(PREFIX_COMPLETION_STATUS).get().split("\\s+");
             String firstKeyword = completionStatusKeywords[0];

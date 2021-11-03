@@ -25,6 +25,7 @@
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="6" text=" "></Label>
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="7" text=" Tasks " styleClass="helpHeader"></Label>
 
+
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="9" fx:id="helpContent" styleClass="label-bright"></Label>
                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="10">
                         <Button fx:id="copyUserGuideButton" mnemonicParsing="false" onAction="#copyUserGuideUrl" text="Copy User Guide URL">

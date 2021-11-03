@@ -1,5 +1,6 @@
 package dash.logic.parser.taskcommand;
 
+import static dash.commons.core.Messages.MESSAGE_ARGUMENT_EMPTY;
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
@@ -44,6 +45,9 @@ public class AssignPeopleCommandParser implements ParserRequiringPersonList<Assi
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
         if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
+            if (argMultimap.getValue(PREFIX_PERSON).get().isEmpty()) {
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
+            }
             Set<Index> personIndices = ParserUtil.parsePersonIndex(argMultimap.getAllValues(PREFIX_PERSON));
             Set<Person> people = new HashSet<>();
             for (Index i : personIndices) {

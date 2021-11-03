@@ -49,6 +49,9 @@ public class TabMenu extends UiPart<Region> {
      */
     public TabMenu() {
         super(FXML);
+        //Solution below adapted from https://github.com/sshahine/JFoenix/issues/854
+        //This is to prevent using any arrow keys to navigate through tabs and bypassing
+        //the program flow
         tabMenu.addEventFilter(KeyEvent.ANY, event -> {
             if (event.getCode().isArrowKey()) {
                 event.consume();

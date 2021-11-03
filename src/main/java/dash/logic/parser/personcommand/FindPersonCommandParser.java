@@ -1,5 +1,6 @@
 package dash.logic.parser.personcommand;
 
+import static dash.commons.core.Messages.MESSAGE_ARGUMENT_EMPTY;
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static dash.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -51,35 +52,35 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         //if both preamble and name prefix specified, name prefix will override
         if (namePresent) {
             if (argMultimap.getValue(PREFIX_NAME).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
             findPersonDescriptor.setName(Arrays.asList(nameKeywords));
         }
         if (phonePresent) {
             if (argMultimap.getValue(PREFIX_PHONE).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] phoneKeywords = argMultimap.getValue(PREFIX_PHONE).get().split("\\s+");
             findPersonDescriptor.setPhone(Arrays.asList(phoneKeywords));
         }
         if (emailPresent) {
             if (argMultimap.getValue(PREFIX_EMAIL).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] emailKeywords = argMultimap.getValue(PREFIX_EMAIL).get().split("\\s+");
             findPersonDescriptor.setEmail(Arrays.asList(emailKeywords));
         }
         if (addressPresent) {
             if (argMultimap.getValue(PREFIX_ADDRESS).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] addressKeywords = argMultimap.getValue(PREFIX_ADDRESS).get().split("\\s+");
             findPersonDescriptor.setAddress(Arrays.asList(addressKeywords));
         }
         if (tagPresent) {
             if (argMultimap.getValue(PREFIX_TAG).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
             String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).get().split("\\s+");
             findPersonDescriptor.setTags(Arrays.asList(tagKeywords));
