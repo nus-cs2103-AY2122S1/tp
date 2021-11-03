@@ -18,13 +18,18 @@ import java.util.stream.Stream;
 
 import seedu.track2gather.logic.commands.AddCommand;
 import seedu.track2gather.logic.parser.exceptions.ParseException;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.Phone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -53,34 +58,34 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address homeAddress = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_HOME_ADDRESS).get());
 
         Optional<String> workAddressOptional = argMultimap.getValue(PREFIX_WORK_ADDRESS);
-        Optional<Address> workAddress = workAddressOptional.isEmpty()
+        WorkAddress workAddress = new WorkAddress(workAddressOptional.isEmpty()
                 ? Optional.empty()
-                : Optional.of(ParserUtil.parseAddress(workAddressOptional.get()));
+                : Optional.of(ParserUtil.parseAddress(workAddressOptional.get())));
 
         Optional<String> quarantineAddressOptional = argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS);
-        Optional<Address> quarantineAddress = quarantineAddressOptional.isEmpty()
+        QuarantineAddress quarantineAddress = new QuarantineAddress(quarantineAddressOptional.isEmpty()
                 ? Optional.empty()
-                : Optional.of(ParserUtil.parseAddress(quarantineAddressOptional.get()));
+                : Optional.of(ParserUtil.parseAddress(quarantineAddressOptional.get())));
 
         Optional<String> shnPeriodOptional = argMultimap.getValue(PREFIX_SHN_PERIOD);
-        Optional<ShnPeriod> shnPeriod = shnPeriodOptional.isEmpty()
+        ShnPeriod shnPeriod = new ShnPeriod(shnPeriodOptional.isEmpty()
                 ? Optional.empty()
-                : Optional.of(ParserUtil.parseShnPeriod(shnPeriodOptional.get()));
+                : Optional.of(ParserUtil.parsePeriod(shnPeriodOptional.get())));
 
         Optional<String> nextOfKinNameOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME);
-        Optional<Name> nextOfKinName = nextOfKinNameOptional.isEmpty()
+        NextOfKinName nextOfKinName = new NextOfKinName(nextOfKinNameOptional.isEmpty()
                 ? Optional.empty()
-                : Optional.of(ParserUtil.parseName(nextOfKinNameOptional.get()));
+                : Optional.of(ParserUtil.parseName(nextOfKinNameOptional.get())));
 
         Optional<String> nextOfKinPhoneOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE);
-        Optional<Phone> nextOfKinPhone = nextOfKinPhoneOptional.isEmpty()
+        NextOfKinPhone nextOfKinPhone = new NextOfKinPhone(nextOfKinPhoneOptional.isEmpty()
                 ? Optional.empty()
-                : Optional.of(ParserUtil.parsePhone(nextOfKinPhoneOptional.get()));
+                : Optional.of(ParserUtil.parsePhone(nextOfKinPhoneOptional.get())));
 
         Optional<String> nextOfKinAddressOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS);
-        Optional<Address> nextOfKinAddress = nextOfKinAddressOptional.isEmpty()
+        NextOfKinAddress nextOfKinAddress = new NextOfKinAddress(nextOfKinAddressOptional.isEmpty()
                 ? Optional.empty()
-                : Optional.of(ParserUtil.parseAddress(nextOfKinAddressOptional.get()));
+                : Optional.of(ParserUtil.parseAddress(nextOfKinAddressOptional.get())));
 
         Person person = new Person(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress,
                 shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress);

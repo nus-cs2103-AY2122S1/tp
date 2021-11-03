@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 
 import seedu.track2gather.logic.commands.FindCommand;
 import seedu.track2gather.logic.parser.exceptions.ParseException;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Period;
 import seedu.track2gather.model.person.predicates.CaseNumberEqualsKeywordsPredicate;
 import seedu.track2gather.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.track2gather.model.person.predicates.PhoneStartsWithKeywordsPredicate;
@@ -72,17 +72,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
-            boolean areValidDates = keywordList.stream().allMatch(ShnPeriod::isValidDate);
+            boolean areValidDates = keywordList.stream().allMatch(Period::isValidDate);
             if (!areValidDates) {
-                throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+                throw new ParseException(Period.MESSAGE_CONSTRAINTS_DATE);
             }
             return new FindCommand(new ShnPeriodStartEqualsKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
-            boolean areValidDates = keywordList.stream().allMatch(ShnPeriod::isValidDate);
+            boolean areValidDates = keywordList.stream().allMatch(Period::isValidDate);
             if (!areValidDates) {
-                throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+                throw new ParseException(Period.MESSAGE_CONSTRAINTS_DATE);
             }
             return new FindCommand(new ShnPeriodEndEqualsKeywordsPredicate(keywordList));
         }

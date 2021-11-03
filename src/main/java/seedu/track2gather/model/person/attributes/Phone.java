@@ -1,19 +1,16 @@
-package seedu.track2gather.model.person;
+package seedu.track2gather.model.person.attributes;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.track2gather.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's phone number in the contacts list.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
-
+public class Phone extends Attribute<String> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
 
     /**
      * Constructs a {@code Phone}.
@@ -21,9 +18,8 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
-        requireNonNull(phone);
+        super(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
     }
 
     /**
@@ -31,11 +27,6 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    @Override
-    public String toString() {
-        return value;
     }
 
     @Override
@@ -49,5 +40,4 @@ public class Phone {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

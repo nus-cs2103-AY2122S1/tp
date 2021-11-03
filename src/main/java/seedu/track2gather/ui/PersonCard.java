@@ -88,33 +88,33 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
+        name.setText(person.getName().value);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         caseNumber.setText(String.format("#%1$6s", person.getCaseNumber().value).replace(' ', '0'));
         homeAddress.setText(person.getHomeAddress().value);
 
-        person.getWorkAddress().map(Object::toString).ifPresentOrElse(
+        person.getWorkAddress().value.map(Object::toString).ifPresentOrElse(
             text -> workAddress.setText(text), () -> hideNode(workAddressHBox));
 
-        person.getQuarantineAddress().map(Object::toString).ifPresentOrElse(
+        person.getQuarantineAddress().value.map(Object::toString).ifPresentOrElse(
             text -> quarantineAddress.setText(text), () -> hideNode(quarantineAddressHBox));
 
-        person.getShnPeriod().map(Object::toString).ifPresentOrElse(
+        person.getShnPeriod().value.map(Object::toString).ifPresentOrElse(
             text -> shnPeriod.setText(text), () -> hideNode(shnPeriodHBox));
 
-        person.getNextOfKinName().map(Object::toString).ifPresentOrElse(
+        person.getNextOfKinName().value.map(Object::toString).ifPresentOrElse(
             text -> nextOfKinName.setText(text), () -> hideNode(nextOfKinNameHBox));
 
-        person.getNextOfKinPhone().map(Object::toString).ifPresentOrElse(
+        person.getNextOfKinPhone().value.map(Object::toString).ifPresentOrElse(
             text -> nextOfKinPhone.setText(text), () -> hideNode(nextOfKinPhoneHBox));
 
-        person.getNextOfKinAddress().map(Object::toString).ifPresentOrElse(
+        person.getNextOfKinAddress().value.map(Object::toString).ifPresentOrElse(
             text -> nextOfKinAddress.setText(text), () -> hideNode(nextOfKinAddressHBox));
 
-        if (person.getNextOfKinName().isEmpty()
-                && person.getNextOfKinPhone().isEmpty()
-                && person.getNextOfKinAddress().isEmpty()) {
+        if (person.getNextOfKinName().value.isEmpty()
+                && person.getNextOfKinPhone().value.isEmpty()
+                && person.getNextOfKinAddress().value.isEmpty()) {
             hideNode(nextOfKinBlock);
         }
 

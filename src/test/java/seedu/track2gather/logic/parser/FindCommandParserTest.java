@@ -14,8 +14,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.track2gather.logic.commands.FindCommand;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Period;
 import seedu.track2gather.model.person.predicates.CaseNumberEqualsKeywordsPredicate;
 import seedu.track2gather.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.track2gather.model.person.predicates.PhoneStartsWithKeywordsPredicate;
@@ -125,11 +125,11 @@ public class FindCommandParserTest {
     public void parse_invalidShnPeriodStartArgs_returnsFindCommand() {
         // One invalid keyword
         String invalidKeyword = " " + PREFIX_SHN_PERIOD_START + "2000/01/01";
-        assertParseFailure(parser, invalidKeyword, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidKeyword, Period.MESSAGE_CONSTRAINTS_DATE);
 
         // One valid and one invalid keyword
         String invalidTestInput = " " + PREFIX_SHN_PERIOD_START + "2000-01-01 2000/01/01";
-        assertParseFailure(parser, invalidTestInput, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidTestInput, Period.MESSAGE_CONSTRAINTS_DATE);
     }
 
     @Test
@@ -152,10 +152,10 @@ public class FindCommandParserTest {
     public void parse_invalidShnPeriodEndArgs_returnsFindCommand() {
         // One invalid keyword
         String invalidKeyword = " " + PREFIX_SHN_PERIOD_END + "2000/01/02";
-        assertParseFailure(parser, invalidKeyword, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidKeyword, Period.MESSAGE_CONSTRAINTS_DATE);
 
         // One valid and one invalid keyword
         String invalidTestInput = " " + PREFIX_SHN_PERIOD_END + "2000-01-02 2000/01/02";
-        assertParseFailure(parser, invalidTestInput, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidTestInput, Period.MESSAGE_CONSTRAINTS_DATE);
     }
 }

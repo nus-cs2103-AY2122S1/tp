@@ -8,7 +8,7 @@ import java.util.List;
 
 import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Period;
 
 /**
  * Clears the contacts list.
@@ -38,11 +38,11 @@ public class ClearCommand extends Command {
         LocalDate startDate = LocalDate.of(2000, 1, 1);
         LocalDate futureDate = LocalDate.now().plusDays(1);
         assert (futureDate.isAfter(startDate));
-        ShnPeriod dummyIncompleteShnPeriod = new ShnPeriod(startDate, futureDate);
+        Period dummyIncompleteShnPeriod = new Period(startDate, futureDate);
 
         for (int i = 0; i < lastShownListCopy.size(); i++) {
             Person person = lastShownListCopy.get(i);
-            if (person.getShnPeriod().orElse(dummyIncompleteShnPeriod).isCompletedBy(LocalDate.now(clock))) {
+            if (person.getShnPeriod().value.orElse(dummyIncompleteShnPeriod).isCompletedBy(LocalDate.now(clock))) {
                 model.deletePerson(person);
             }
         }

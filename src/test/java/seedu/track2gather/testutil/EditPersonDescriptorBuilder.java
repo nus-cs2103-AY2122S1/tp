@@ -1,13 +1,19 @@
 package seedu.track2gather.testutil;
 
 import seedu.track2gather.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,12 +40,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setCaseNumber(person.getCaseNumber());
         descriptor.setHomeAddress(person.getHomeAddress());
-        descriptor.setWorkAddress(person.getWorkAddress().orElse(null));
-        descriptor.setQuarantineAddress(person.getQuarantineAddress().orElse(null));
-        descriptor.setShnPeriod(person.getShnPeriod().orElse(null));
-        descriptor.setNextOfKinName(person.getNextOfKinName().orElse(null));
-        descriptor.setNextOfKinPhone(person.getNextOfKinPhone().orElse(null));
-        descriptor.setNextOfKinAddress(person.getNextOfKinAddress().orElse(null));
+        descriptor.setWorkAddress(person.getWorkAddress());
+        descriptor.setQuarantineAddress(person.getQuarantineAddress());
+        descriptor.setShnPeriod(person.getShnPeriod());
+        descriptor.setNextOfKinName(person.getNextOfKinName());
+        descriptor.setNextOfKinPhone(person.getNextOfKinPhone());
+        descriptor.setNextOfKinAddress(person.getNextOfKinAddress());
     }
 
     /**
@@ -86,7 +92,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code WorkAddress} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withWorkAddress(String workAddress) {
-        descriptor.setWorkAddress(new Address(workAddress));
+        descriptor.setWorkAddress(new WorkAddress(new Address(workAddress)));
         return this;
     }
 
@@ -94,7 +100,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code QuarantineAddress} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withQuarantineAddress(String quarantineAddress) {
-        descriptor.setQuarantineAddress(new Address(quarantineAddress));
+        descriptor.setQuarantineAddress(new QuarantineAddress(new Address(quarantineAddress)));
         return this;
     }
 
@@ -102,7 +108,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code ShnPeriod} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withShnPeriod(String shnPeriod) {
-        descriptor.setShnPeriod(new ShnPeriod(shnPeriod));
+        descriptor.setShnPeriod(new ShnPeriod(new Period(shnPeriod)));
         return this;
     }
 
@@ -110,7 +116,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code NextOfKinName} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withNextOfKinName(String nextOfKinName) {
-        descriptor.setNextOfKinName(new Name(nextOfKinName));
+        descriptor.setNextOfKinName(new NextOfKinName(new Name(nextOfKinName)));
         return this;
     }
 
@@ -118,7 +124,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code NextOfKinPhone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withNextOfKinPhone(String nextOfKinPhone) {
-        descriptor.setNextOfKinPhone(new Phone(nextOfKinPhone));
+        descriptor.setNextOfKinPhone(new NextOfKinPhone(new Phone(nextOfKinPhone)));
         return this;
     }
 
@@ -126,10 +132,8 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code NextOfKinAddress} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withNextOfKinAddress(String nextOfKinAddress) {
-        {
-            descriptor.setNextOfKinAddress(new Address(nextOfKinAddress));
-            return this;
-        }
+        descriptor.setNextOfKinAddress(new NextOfKinAddress(new Address(nextOfKinAddress)));
+        return this;
     }
 
     public EditPersonDescriptor build() {

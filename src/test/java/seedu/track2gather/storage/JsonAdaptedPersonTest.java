@@ -8,13 +8,13 @@ import static seedu.track2gather.testutil.TypicalPersons.BENSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.track2gather.commons.exceptions.IllegalValueException;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CallStatus;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CallStatus;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -35,14 +35,16 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_CASE_NUMBER = BENSON.getCaseNumber().toString();
     private static final String VALID_HOME_ADDRESS = BENSON.getHomeAddress().toString();
-    private static final String VALID_WORK_ADDRESS = BENSON.getWorkAddress().map(Object::toString).orElse(null);
+    private static final String VALID_WORK_ADDRESS = BENSON.getWorkAddress().value.map(Object::toString).orElse(null);
     private static final String VALID_QUARANTINE_ADDRESS =
-            BENSON.getQuarantineAddress().map(Object::toString).orElse(null);
-    private static final String VALID_SHN_PERIOD = BENSON.getShnPeriod().map(Object::toString).orElse(null);
-    private static final String VALID_NEXT_OF_KIN_NAME = BENSON.getNextOfKinName().map(Object::toString).orElse(null);
-    private static final String VALID_NEXT_OF_KIN_PHONE = BENSON.getNextOfKinPhone().map(Object::toString).orElse(null);
+            BENSON.getQuarantineAddress().value.map(Object::toString).orElse(null);
+    private static final String VALID_SHN_PERIOD = BENSON.getShnPeriod().value.map(Object::toString).orElse(null);
+    private static final String VALID_NEXT_OF_KIN_NAME =
+            BENSON.getNextOfKinName().value.map(Object::toString).orElse(null);
+    private static final String VALID_NEXT_OF_KIN_PHONE =
+            BENSON.getNextOfKinPhone().value.map(Object::toString).orElse(null);
     private static final String VALID_NEXT_OF_KIN_ADDRESS =
-            BENSON.getNextOfKinAddress().map(Object::toString).orElse(null);
+            BENSON.getNextOfKinAddress().value.map(Object::toString).orElse(null);
     private static final String VALID_CALL_STATUS = BENSON.getCallStatus().toString();
 
     @Test
@@ -164,7 +166,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
                 VALID_HOME_ADDRESS, VALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, INVALID_SHN_PERIOD,
                 VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS, VALID_CALL_STATUS);
-        String expectedMessage = ShnPeriod.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Period.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

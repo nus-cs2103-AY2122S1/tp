@@ -2,14 +2,20 @@ package seedu.track2gather.testutil;
 
 import java.util.Optional;
 
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CallStatus;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CallStatus;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * A utility class to help with building Person objects.
@@ -28,12 +34,12 @@ public class PersonBuilder {
     private Email email;
     private CaseNumber caseNumber;
     private Address homeAddress;
-    private Optional<Address> workAddress;
-    private Optional<Address> quarantineAddress;
-    private Optional<ShnPeriod> shnPeriod;
-    private Optional<Name> nextOfKinName;
-    private Optional<Phone> nextOfKinPhone;
-    private Optional<Address> nextOfKinAddress;
+    private WorkAddress workAddress;
+    private QuarantineAddress quarantineAddress;
+    private ShnPeriod shnPeriod;
+    private NextOfKinName nextOfKinName;
+    private NextOfKinPhone nextOfKinPhone;
+    private NextOfKinAddress nextOfKinAddress;
     private CallStatus callStatus;
 
     /**
@@ -45,12 +51,12 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         caseNumber = new CaseNumber(DEFAULT_CASE_NUMBER);
         homeAddress = new Address(DEFAULT_HOME_ADDRESS);
-        workAddress = Optional.empty();
-        quarantineAddress = Optional.empty();
-        shnPeriod = Optional.empty();
-        nextOfKinName = Optional.empty();
-        nextOfKinPhone = Optional.empty();
-        nextOfKinAddress = Optional.empty();
+        workAddress = new WorkAddress();
+        quarantineAddress = new QuarantineAddress();
+        shnPeriod = new ShnPeriod();
+        nextOfKinName = new NextOfKinName();
+        nextOfKinPhone = new NextOfKinPhone();
+        nextOfKinAddress = new NextOfKinAddress();
         callStatus = new CallStatus(DEFAULT_CALL_STATUS);
     }
 
@@ -116,7 +122,7 @@ public class PersonBuilder {
      * Sets the {@code workAddress} of the {@code Person} that we are building.
      */
     public PersonBuilder withWorkAddress(String workAddress) {
-        this.workAddress = Optional.ofNullable(workAddress).map(Address::new);
+        this.workAddress = new WorkAddress(Optional.ofNullable(workAddress).map(Address::new));
         return this;
     }
 
@@ -124,7 +130,7 @@ public class PersonBuilder {
      * Sets the {@code quarantineAddress} of the {@code Person} that we are building.
      */
     public PersonBuilder withQuarantineAddress(String quarantineAddress) {
-        this.quarantineAddress = Optional.ofNullable(quarantineAddress).map(Address::new);
+        this.quarantineAddress = new QuarantineAddress(Optional.ofNullable(quarantineAddress).map(Address::new));
         return this;
     }
 
@@ -132,7 +138,7 @@ public class PersonBuilder {
      * Sets the {@code shnPeriod} of the {@code Person} that we are building.
      */
     public PersonBuilder withShnPeriod(String shnPeriod) {
-        this.shnPeriod = Optional.ofNullable(shnPeriod).map(ShnPeriod::new);
+        this.shnPeriod = new ShnPeriod(Optional.ofNullable(shnPeriod).map(Period::new));
         return this;
     }
 
@@ -140,7 +146,7 @@ public class PersonBuilder {
      * Sets the {@code nextOfKinName} of the {@code Person} that we are building.
      */
     public PersonBuilder withNextOfKinName(String nextOfKinName) {
-        this.nextOfKinName = Optional.ofNullable(nextOfKinName).map(Name::new);
+        this.nextOfKinName = new NextOfKinName(Optional.ofNullable(nextOfKinName).map(Name::new));
         return this;
     }
 
@@ -148,7 +154,7 @@ public class PersonBuilder {
      * Sets the {@code nextOfKinPhone} of the {@code Person} that we are building.
      */
     public PersonBuilder withNextOfKinPhone(String nextOfKinPhone) {
-        this.nextOfKinPhone = Optional.ofNullable(nextOfKinPhone).map(Phone::new);
+        this.nextOfKinPhone = new NextOfKinPhone(Optional.ofNullable(nextOfKinPhone).map(Phone::new));
         return this;
     }
 
@@ -156,7 +162,7 @@ public class PersonBuilder {
      * Sets the {@code nextOfKinAddress} of the {@code Person} that we are building.
      */
     public PersonBuilder withNextOfKinAddress(String nextOfKinAddress) {
-        this.nextOfKinAddress = Optional.ofNullable(nextOfKinAddress).map(Address::new);
+        this.nextOfKinAddress = new NextOfKinAddress(Optional.ofNullable(nextOfKinAddress).map(Address::new));
         return this;
     }
 

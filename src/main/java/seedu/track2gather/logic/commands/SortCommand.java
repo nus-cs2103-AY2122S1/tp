@@ -18,7 +18,7 @@ import seedu.track2gather.logic.commands.exceptions.CommandException;
 import seedu.track2gather.logic.parser.Prefix;
 import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Period;
 
 /**
  * Sorts all persons in the contacts list based on specified fields.
@@ -48,9 +48,9 @@ public class SortCommand extends Command {
     public static final Comparator<Person> COMPARATOR_PERSON_NAME = Comparator.comparing(Person::getName);
     public static final Comparator<Person> COMPARATOR_PERSON_CASE_NUMBER = Comparator.comparing(Person::getCaseNumber);
     public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_START = Comparator.comparing(person ->
-        person.getShnPeriod().map(ShnPeriod::getStartDate).orElse(LocalDate.MAX));
+            person.getShnPeriod().value.map(Period::getStartDate).orElse(LocalDate.MAX));
     public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_END = Comparator.comparing(person ->
-            person.getShnPeriod().map(ShnPeriod::getEndDate).orElse(LocalDate.MAX));
+            person.getShnPeriod().value.map(Period::getEndDate).orElse(LocalDate.MAX));
 
     public enum Direction {
         ASCENDING("asc"),

@@ -14,10 +14,18 @@ import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_QUARANTINE_ADDRES
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_SHN_PERIOD;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_WORK_ADDRESS;
 
+import java.util.Optional;
+
 import seedu.track2gather.commons.core.index.Index;
 import seedu.track2gather.logic.commands.EditCommand;
 import seedu.track2gather.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.track2gather.logic.parser.exceptions.ParseException;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -62,28 +70,40 @@ public class EditCommandParser implements Parser<EditCommand> {
                     argMultimap.getValue(PREFIX_HOME_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_WORK_ADDRESS).isPresent()) {
-            editPersonDescriptor.setWorkAddress(ParserUtil.parseAddress(
-                    argMultimap.getValue(PREFIX_WORK_ADDRESS).get()));
+            Optional<String> workAddressOptional = argMultimap.getValue(PREFIX_WORK_ADDRESS);
+            editPersonDescriptor.setWorkAddress(workAddressOptional.isEmpty()
+                    ? null
+                    : new WorkAddress(ParserUtil.parseAddress(workAddressOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS).isPresent()) {
-            editPersonDescriptor.setQuarantineAddress(ParserUtil.parseAddress(
-                    argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS).get()));
+            Optional<String> quarantineAddressOptional = argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS);
+            editPersonDescriptor.setQuarantineAddress(quarantineAddressOptional.isEmpty()
+                    ? null
+                    : new QuarantineAddress(ParserUtil.parseAddress(quarantineAddressOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_SHN_PERIOD).isPresent()) {
-            editPersonDescriptor.setShnPeriod(ParserUtil.parseShnPeriod(
-                    argMultimap.getValue(PREFIX_SHN_PERIOD).get()));
+            Optional<String> shnPeriodOptional = argMultimap.getValue(PREFIX_SHN_PERIOD);
+            editPersonDescriptor.setShnPeriod(shnPeriodOptional.isEmpty()
+                    ? null
+                    : new ShnPeriod(ParserUtil.parsePeriod(shnPeriodOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
-            editPersonDescriptor.setNextOfKinName(ParserUtil.parseName(
-                    argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).get()));
+            Optional<String> nextOfKinNameOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME);
+            editPersonDescriptor.setNextOfKinName(nextOfKinNameOptional.isEmpty()
+                    ? null
+                    : new NextOfKinName(ParserUtil.parseName(nextOfKinNameOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
-            editPersonDescriptor.setNextOfKinPhone(ParserUtil.parsePhone(
-                    argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).get()));
+            Optional<String> nextOfKinPhoneOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE);
+            editPersonDescriptor.setNextOfKinPhone(nextOfKinPhoneOptional.isEmpty()
+                    ? null
+                    : new NextOfKinPhone(ParserUtil.parsePhone(nextOfKinPhoneOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS).isPresent()) {
-            editPersonDescriptor.setNextOfKinAddress(ParserUtil.parseAddress(
-                    argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS).get()));
+            Optional<String> nextOfKinAddressOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS);
+            editPersonDescriptor.setNextOfKinAddress(nextOfKinAddressOptional.isEmpty()
+                    ? null
+                    : new NextOfKinAddress(ParserUtil.parseAddress(nextOfKinAddressOptional.get())));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
