@@ -15,9 +15,9 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class AssessmentStatisticsTest {
-    private static final Assessment assessment = new Assessment("P01");
+    private final Assessment assessment = new Assessment("P01");
 
-    private static final Map<ID, Score> scores = Map.of(
+    private final Map<ID, Score> scores = Map.of(
             new ID("E0000001"), new Score("5"),
             new ID("E0000002"), new Score("13"),
             new ID("E0000003"), new Score("46"),
@@ -30,7 +30,7 @@ public class AssessmentStatisticsTest {
             new ID("E0000010"), new Score("100")
     );
 
-    private static final List<Bin> bins = Arrays.asList(
+    private final List<Bin> bins = Arrays.asList(
             new Bin(new Score("0"), new Score("10")),
             new Bin(new Score("10"), new Score("20")),
             new Bin(new Score("20"), new Score("30")),
