@@ -1,5 +1,6 @@
 ---
-layout: page title: Shi Chen's Project Portfolio Page
+layout: page
+title: Shi Chen's Project Portfolio Page
 ---
 
 ### Project: Sellah
@@ -109,3 +110,8 @@ Given below are my contributions to the project.
       [\#299](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/299))
     * ID & Clear Command (Pull request
       [\#293](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/293))
+
+* **Clean Up**:
+    * Pull requests
+      [\#300](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/300),
+      [\#307](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/307))
