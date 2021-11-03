@@ -32,7 +32,7 @@ public class UniqueStudentList implements Iterable<Student> {
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private ObservableList<DisplayableObject> selectedInformation = FXCollections.observableArrayList();
-    //Keep track of the existing labs
+    // Keep track of the existing labs
     private List<Lab> labsTracker = new ArrayList<>();
 
     /**
