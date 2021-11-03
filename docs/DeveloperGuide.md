@@ -25,6 +25,8 @@ LeadsForce's developer Guide is written for developers who wish to contribute to
 | 💡 | This icon denotes useful tips to note of during development. |
 | ❗️ | This icon denotes important details to take note of during development. |
 
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **2. Setting up and getting started**
@@ -36,8 +38,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **3. Design**
 
 ### 3.1 Architecture
-
+<p align="center">
 <img src="images/ArchitectureDiagram.png" width="280" />
+</p>
 
 LeadsForce is a brown field project adapted and developed upon from **AddressBook3**. Our team decided on reusing the overall architecture by maintaining the system with 6 components (as listed in the diagram above) while building upon each component to cater to the needs of LeadsForce. The ***Architecture Diagram*** given above explains the high-level design of the App, which was adapted from **AddressBook3**. In the subsequent chapters, we will be providing an overview of the each component, explain how each component works internally, and how you could scale the system, which can server as a guideline for the developers to expand LeadsForce.
 
@@ -62,8 +65,9 @@ Each of the four main components,
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface.
-
+<p align="center">
 <img src="images/LogicClassDiagram.png" width="574" />
+</p>
 
 **How the architecture components interact with each other**
 
@@ -73,11 +77,14 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.2 UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<p align="center">
+<img src="images/UiClassDiagram.png" alt="Structure of UI component" width="800" />
+</p> 
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -96,6 +103,7 @@ Our `SideBar` has a `ClientViewPanel`, which like the `ClientCard`, has a depend
 
 The `SideBar` also has a `MeetingListPanel`, which holds a list of `NextMeetingCard`. `NextMeetingCard` has a dependency on the `Model` class to fully display all scheduled meetings of the user.
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -125,6 +133,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.4 Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -143,6 +152,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -154,6 +164,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+--------------------------------------------------------------------------------------------------------------------
 ### 3.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
