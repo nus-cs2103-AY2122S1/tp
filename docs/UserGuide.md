@@ -93,9 +93,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 ### Date Time Formatting
 
 * All fields that require both `Date` and `Time` in RHRH are accepted if they follow the format below, where the order of date and time are interchangeable.
-However, time strictly follows the `24 hours` format. 
-
-The following table shows the acceptable formats and relevant examples for `DeliveryDetails`:
+However, time strictly follows the `24 hours` format.
 
 | Acceptable Formats | Examples |
 | ----------- | ----------- |
