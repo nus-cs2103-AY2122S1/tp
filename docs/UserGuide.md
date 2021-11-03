@@ -7,13 +7,14 @@ title: User Guide
   {:toc}
 
 # 1. Introduction
+
 Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to keep track of the details of 
 their students and lessons**.
 
 Some main ways in which TutorAid can help you with your tutoring responsibilities include:
-1. Storing contacts of your students and their parents
-2. Storing and managing your lesson details
-3. Tracking your students' progress
+1. Storing of your students' and their parents' contacts
+2. Storing and managing of your lesson details
+3. Tracking of your students' progress
 
 TutorAid is a unique app that is optimised for use via a **Command Line Interface** (CLI) while retaining the benefits 
 of a visually-appealing Graphical User Interface (GUI). If you can type fast, TutorAid can help you to manage your 
@@ -50,70 +51,83 @@ Commands in these highlighted boxes are typically used to show what you should e
 `command`<hr>
 
 ## 2.2 TutorAid visual components
+
 This section details the various components in TutorAid and how they will be referred to throughout the guide.
 ![Labelled Ui](images/labelled-ui.jpg)
 
 #### Menu Bar
+
 This is an area where some features can be found. As TutorAid primarily interacts with you through the command box, this area is infrequently used.
 
 #### Command Box
+
 The Command Box is a field in which you can type instructions (commands) to TutorAid. Text in this user guide that is `highlighted` should typically be copied into the command box exactly (including spaces). After you have typed a command into this box, you can press ENTER :leftwards_arrow_with_hook: on your keyboard to tell TutorAid to execute your command.
 
-If your command is of the wrong [format](#23-command-format), TutorAid will try to show you the correct format in the Console if it is able to infer what command you had intended to provide.
+If your command is of the wrong [format](#2.3-command-format), TutorAid will try to show you the correct format in the Console if it is able to infer what command you had intended to provide.
 
 #### Console
+
 The Console is used by TutorAid to communicate with you. Whenever a command is executed, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the execution.
 
 #### Student Panel
-The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their names and their index numbers. These modes can be set via [the list command](#listing-all-students--list). In the labelled screenshot, the Student Panel is in Minimal view.
+
+The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their names and their index numbers. These modes can be set via [the list commands](#listing-all-students--list). In the labelled screenshot, the Student Panel is in Minimal view.
 
 > :bulb: The **index number** is important for many commands in TutorAid.
 
 #### Lesson Panel
+
 The Lesson Panel is where your lessons are listed. Just like the Student Panel, there are the **Full** and **Minimal** modes which determine how much information is displayed. In the labelled screenshot, the Lesson Panel is in Full view.
 
 > :bulb: The **index number** of a lesson is important too, and is used in commands just like the index number for students.
 
 #### Status Bar
+
 The status bar shows the path where you can find the save file for TutorAid.<hr>
 
 ## 2.3 Command Format
+
 Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands have many components, each of which serve different purposes. The following diagram depicts the components of a command:
 
 ![](images/command-syntax.png)
 
 #### Command Word
-The command word is how you can tell TutorAid what kind of operation you want it to do. These command words are listed [here](#6-command-summary). All commands must contain a command word.
+
+The command word is how you can tell TutorAid what kind of operation you want it to do. These command words are listed [here](#8-command-summary). All commands must contain a command word.
 
 In the example above, `edit` tells TutorAid to perform an *edit* operation.
 
 #### Flag
+
 The flag is used to differentiate between variants of the same operation. For example, the `edit` command word can be used to edit the details of a student or a lesson. To differentiate between these usages, you should pass a flag to TutorAid - `edit -s` to edit a student, and `edit -l` to edit a lesson.
 
-In the example above, `-s` tells TutorAid to perform the edit operation on *students*.
+In the example above, the flag `-s` tells TutorAid to perform the edit operation on *students*.
 
 #### Index Number
+
 Some commands perform operations on a specific student or lesson. You should give TutorAid an index number to specify the student or the lesson. The index number can be found by looking at the respective panels - the [Student Panel](#student-panel) or the [Lesson Panel](#lesson-panel).
 
-In the example above, `3` tells TutorAid to perform the edit operation on the *third student* in the student panel.
+In the example above, `3` tells TutorAid to perform the edit operation on the *third student* in the Student Panel.
 
 #### Parameter
+
 A parameter contains the *specifics* of the command to be executed. There can be **multiple** parameters for a single command, depending on the type of command that you wish to perform. Arguments are prefixed with a few characters followed by a slash (`sn/` and `sp/` for this example). These prefixes help TutorAid to differentiate parameters.
 
 > :bulb: `sn/` is the prefix for Student Name and `sp/` is the prefix for Student Phone.
 
-In the example above, `sn/Matthew Judge` tells TutorAid that the third student should be edited *by changing their name to Matthew Judge*. Similarly, `sp/91263740` tells TutorAid that the third student should be edited *by changing their student mobile number to the specified number*.
+In the example above, `sn/Matthew Judge` tells TutorAid that the third student should be edited *by updating their name to Matthew Judge*. Similarly, `sp/91263740` tells TutorAid that the third student should be edited *by updating their student mobile number to the specified number*.
 
 ### 2.3.1 Command Syntax in this Guide
+
 In this guide, the syntax / format of a command is shown like this:
 
 `edit -s INDEX_NUMBER [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 `add -sl s/STUDENT_INDEX... n/LESSON_INDEX...`
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user and can contain spaces.
+* Words in `UPPER_CASE` are the parameters that are to be supplied by you. They can contain spaces.
 * Items in square brackets are optional.
 * Parameters can be in any order.
-* If a parameter is expected only once in the command but if you specify it multiple times, only the last occurrence of the parameter will be taken.
+* If a parameter is expected only once in the command, and you specify it multiple times, only the last occurrence of the parameter will be taken.
 * `...` signals that multiple parameters of this type can be accepted(separated by a space), but there must be at least one parameter present.
   e.g. if the format of a command has `s/STUDENT_INDEX...` then both `s/1 2 3` and `s/1` are acceptable inputs, but not `s/ `.
 * Extraneous parameters for commands that do not take in parameters will be ignored.
@@ -130,27 +144,62 @@ In this guide, the syntax / format of a command is shown like this:
 
 4. Double-click the file to start the app. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
+   
+5. If this is your first time using TutorAid, we highly encourage you to check out our [Beginner's Tutorial](#4-beginners-tutorial) so that you can practise using some of the commands and familiarise yourself with the app!
 
-5. Type the command in the Command Box and press ENTER to execute it. For example, typing `help` and pressing ENTER will open the help window.<br>
-
-6. Refer to the [Features](#6-command-summary) below to see which commands TutorAid understands.
+6. After completing the tutorial, refer to the [Features](#8-command-summary) below to see all the commands available in TutorAid.
 <hr>
 
-# 4. Features
+# 4. Beginner's tutorial
 
-This section lists the types of commands that TutorAid can execute. For more information about how to interpret these commands, check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
+Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use some of our commands to manage the details of your students and lessons on a day-to-day basis.
+
+If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the students 
+shown in the student panel and that you offer the lesson shown in the lesson panel. 
+
+### Step 4: Adding a progress note for a student
+
+Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
+note of it so that you can provide him extra practice. To do so, you can easily add a progress note for Alex on TutorAid by following the steps below: 
+1. Key in `find -s Alex Yeoh` into the command box. This would result in only Alex's details being displayed in the student panel.
+2. Key in `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added. 
+
+Alternatively, you can also do this:
+1. Key in `list` in the command box to see list of all your students in the student panel.
+2. Locate `Alex Yeoh` in the student panel and take note of his index. In this case, it would be `1`.
+3. Key in `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added.
+
+Now, the next time you open TutorAid, you will be able to see Alex's progress note at a glance! 
+
+You will be able to add up to 10 such progress notes for each student. When you attempt to add an 11th note, your very first note will be automatically deleted, and your new note will be added in.
+
+> :bulb: We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
+
+### End
+
+Congratulations on successfully completing TutorAid's beginner's tutorial :tada: 
+But why quit now? Since you have completed the tutorial, you can go ahead and key in `clear` in the command box to remove all the sample data and to add in some of your own students and lessons. 
+You can also experiment with some of the other TutorAid commands that are listed below in [Features](#5-features). Happy Learning! 
+
+# 5. Features
+
+If you are new to TutorAid, we hope that you have gone through the [Beginner's Tutorial](#4-beginners-tutorial) to gain a better understanding on how TutorAid can help to 
+ease your tutoring tasks! This section lists all the available commands in TutorAid. The commands can be split into 3 main categories: 'Student' commands, 'Lesson' comamnds and 'Other' commands. 
+This section will also be split into these 3 sub-sections for easier navigation.
+
+For more information about how to interpret any of the commands, check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Open a new pop-up window that displays an offline help guide. This guide contains all of the commands available in TutorAid. 
 
 ![help message](images/helpWindow.png)
 
 Format: `help`
 
 ### Adding a student: `add`
-Adds a new student to TutorAid.
 
+Adds a new student to TutorAid.
 Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 
 Examples:
@@ -162,58 +211,57 @@ Examples:
 > the exact same name (case-insensitive) as an existing student in the app. 
 > For example, TutorAid will consider 'John Doe' and 'john doe' as the same student, but not 'John Doe' and 'John'.
 
-
 ### Listing all students : `list`
 
-Shows a list of all students in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise fields are hidden by default.
+Shows a list of all students and lessons in TutorAid (in the order that they were added in). 
+Use the `-a` flag to display all fields, otherwise fields are hidden by default.
 
 Format: `list [-a]`
 
 Examples:
-
-- `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
-- `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
+* `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
+* `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
 ### Deleting a student : `del -s`
-Deletes the student corresponding to the given student index from TutorAid.
+
+Deletes the student at the specified student index.
 
 Format: `del -s STUDENT_INDEX`
 
 * Deletes the student at the specified STUDENT_INDEX.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the student panel.
 * The index must be a positive integer 1,2,3, …​
 
 Example:
-* `del -s 2` deletes the 2nd student in the displayed student list from TutorAid.
+* `del -s 2` deletes the 2nd student displayed in the student panel from TutorAid.
 
 ### Editing a student : `edit -s`
 
-Edits the specified student with the given student index from TutorAid.
+Updates the field(s) of the student at the specified student index.
 
 Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 
 * Edits the student at the specified STUDENT_INDEX.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the student panel.
 * The index must be a positive integer 1,2,3, …​
-* At least one of the optional fields should be present
+* At least 1 of the 4 optional fields must be present.
 
 Example:
-
 * `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
 
 ### Viewing a student : `view -s`
 
-Displays the specified student’s name, phone number, progress, lessons and payment status, along with their parent’s name and phone number.
+Displays the specified student’s name, phone number, parent's name, parent's phone number, progress and lessons.
 
 Format: `view -s STUDENT_INDEX`
 
 * Display details of the student at the specified STUDENT_INDEX.
 * Display details of the lessons the student at the specified STUDENT_INDEX has.
-* The index refers to the index number shown in the displayed student list.
+* The index refers to the index number shown in the student panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `view -s 2` shows the details associated with the 2nd student
+* `view -s 2` shows the details associated with the 2nd student displayed in the student panel.
 
 ### Viewing a lesson : `view -l`
 
@@ -223,11 +271,11 @@ Format: `view -l LESSON_INDEX`
 
 * Display details of the lesson at the specified LESSON_INDEX.
 * Display details of the students that have the lesson at the specified LESSON_INDEX.
-* The index refers to the index number shown in the displayed lesson list.
+* The index refers to the index number shown in the lesson panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `view -l 2` shows the details associated with the 2nd lesson
+* `view -l 2` shows the details associated with the 2nd lesson displayed in the lesson panel.
 
 ### Clearing all entries : `clear`
 
@@ -249,18 +297,16 @@ TutorAid data are saved in the hard disk automatically after any command that ch
 
 TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`. Advanced users are welcome to update data directly by editing that data file.
 
-
 > :exclamation: **If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.**
-
 
 ### Adding progress for a student : `add -p`
 
-Adds a progress note to the student with a given student index.
+Adds a progress note to the student at the specified student index.
 
 Format: `add -p STUDENT_INDEX PROGRESS`
 
 * Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the student panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -268,12 +314,12 @@ Examples:
 
 ### Deleting progress from a student : `del -p`
 
-Removes the string representing progress from the student with a given student index.
+Removes a progress note from the student at the specified student index.
 
 Format: `del -p STUDENT_INDEX`
 
 * Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the student panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -309,35 +355,34 @@ Examples:
 
 ### Adding a lesson: `add -l`
 
-Adds a new lesson to TutorAid.
+Adds a new lesson to TutorAid. The lesson's capacity, price and timing are optional details for tutors to include.
 
 Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`
 
 * The lesson name should only contain alphanumeric characters and spaces.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
-* If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
+* If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`. 
+* The lesson's capacity, price and timing are optional details for tutors to include.
 
 Examples:
 * `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 
-> :bulb: The lesson's capacity, price and timing are optional details for tutors to include.
-
 ### Deleting a lesson : `del -l`
 
-Deletes the specified lesson with the given lesson index from TutorAid.
+Deletes the lesson at the specified index.
 
 Format: `del -l LESSON_INDEX`
 
 * Deletes the lesson at the specified `LESSON_INDEX`.
-* `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+* `LESSON_INDEX` refers to the index number shown in the lesson panel.
 * `LESSON_INDEX` must be a **positive integer** 1,2,3, …​
 
 Examples:
-* `del -l 3`
+* `del -l 3` deletes the 3rd lesson displayed in the lesson panel from TutorAid
 
 ### Editing a lesson: `edit -l`
 
-Edits the specified lesson by updating its fields
+Updates the field(s) of the lesson at the specified index.
 
 Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`
 
@@ -379,9 +424,9 @@ Examples:
 
 > :exclamation: All of these students must be attending all the lessons provided for this command to work.
 
-### Locating students or lessons by name: `find -s` / `find -l`
+### Finding students or lessons by name: `find -s` / `find -l`
 
-Finds students or lessons whose names contain any of the given keywords. Use `-s` flag to search for students and
+Finds students or lessons whose names contain any of the given keywords. Use the `-s` flag to search for students and
 `-l` to search for lessons.
 
 Format: `find FLAG KEYWORD [MORE_KEYWORDS]`
@@ -399,16 +444,16 @@ Examples:
 * `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
 <hr>
 
-# 5. Glossary
+# 6. Glossary
 **Progress**: Refers to any remark you may want to add for a specific student, such as their performance in class and 
 their homework progression.
 
-# 6. FAQ
+# 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.<hr>
 
-# 7. Command summary
+# 8. Command summary
 
 Action | Format, Examples
 --------|------------------
