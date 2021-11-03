@@ -8,6 +8,7 @@ import static seedu.address.commons.util.StringUtil.isValidCurrency;
 public class DisposableIncome extends NumberComparable<DisposableIncome> implements OptionalStringBasedField {
     public static final String MESSAGE_CONSTRAINTS =
             "Disposable Income numbers should be a positive integer only";
+    public static final String DEFAULT_VALUE = "0.00";
 
     public final String value;
     public final String valueWithSymbol;

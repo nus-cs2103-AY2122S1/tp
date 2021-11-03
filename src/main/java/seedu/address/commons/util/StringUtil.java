@@ -268,6 +268,8 @@ public class StringUtil {
      * Returns {@code value} in currency format.
      */
     public static String getCurrencyFormat(String value, boolean withSymbol) {
+        assert isValidCurrency(value);
+
         double currency = Double.parseDouble(getUnformattedNumber(value));
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
         String result = formatter.format(currency);
