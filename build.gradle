@@ -68,15 +68,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'Connections.jar'
-}
-
-run {
-    enableAssertions = true
-}
-
-run {
-    enableAssertions = true
+    archiveName = 'CONNECTIONS.jar'
 }
 
 defaultTasks 'clean', 'test'
