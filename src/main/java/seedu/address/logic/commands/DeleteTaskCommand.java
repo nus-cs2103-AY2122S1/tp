@@ -24,10 +24,10 @@ public class DeleteTaskCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Removed %1$d %2$s from %3$s";
     public static final String COMMAND_WORD = "deletetask";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task, specified by the TASKINDEX, from person"
+            + ": Deletes the task, specified by the TASKINDEX, from person "
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK_INDEX + " TaskIndex\n"
+            + PREFIX_TASK_INDEX + " TaskIndex (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
     public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, "
