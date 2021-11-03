@@ -16,7 +16,6 @@ import seedu.address.model.product.ProductContainsIdPredicate;
  */
 public class ViewProductCommand extends Command {
     public static final String COMMAND_WORD = "view -p";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Views a current product identified by the index number used in the displayed "
                     + "product list.\n"
@@ -32,7 +31,7 @@ public class ViewProductCommand extends Command {
     public ViewProductCommand(ProductContainsIdPredicate predicate) {
         try {
             this.index = Index.fromOneBased(predicate.getId());
-        } catch (IndexOutOfBoundsException ioobe) {
+        } catch (IndexOutOfBoundsException ex) {
             this.index = Index.fromOneBased(Integer.MAX_VALUE);
         }
     }
@@ -47,7 +46,6 @@ public class ViewProductCommand extends Command {
         }
 
         Product product = lastShownList.get(index.getZeroBased());
-
         return new CommandResult(String.format(Messages.MESSAGE_VIEW_PRODUCT, product.getId(), index.getOneBased()),
                 CommandType.VIEW, product, false);
     }

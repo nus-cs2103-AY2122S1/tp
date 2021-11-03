@@ -10,11 +10,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.client.Client;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Product;
@@ -26,7 +28,6 @@ import seedu.address.model.product.UnitPrice;
  */
 public class EditProductCommand extends Command {
     public static final String COMMAND_WORD = "edit -p";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Edits the details of the product identified by the index number used in the displayed "
                     + "product list.\n"
@@ -78,8 +79,8 @@ public class EditProductCommand extends Command {
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
 
         Name productNameToEdit = productToEdit.getName();
-        model.getAddressBook().getClientList()
-                .filtered(client -> client.hasOrder(productNameToEdit))
+        ObservableList<Client> clientList = model.getAddressBook().getClientList();
+        clientList.filtered(client -> client.hasOrder(productNameToEdit))
                 .forEach(client -> {
                     Order orderToEdit = client.removeOrder(productNameToEdit);
                     Order editedOrder =
@@ -189,8 +190,8 @@ public class EditProductCommand extends Command {
             EditProductDescriptor e = (EditProductDescriptor) other;
 
             return getName().equals(e.getName())
-                           && getUnitPrice().equals(e.getUnitPrice())
-                           && getQuantity().equals(e.getQuantity());
+                    && getUnitPrice().equals(e.getUnitPrice())
+                    && getQuantity().equals(e.getQuantity());
         }
     }
 }
