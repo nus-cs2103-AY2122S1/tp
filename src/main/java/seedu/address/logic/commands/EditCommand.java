@@ -125,6 +125,8 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        String editedTaskMessage = "";
+
         if (targetTaskIndex != null) {
             List<Task> tasks = new ArrayList<>();
             tasks.addAll(personToEdit.getTasks());
@@ -146,14 +148,21 @@ public class EditCommand extends Command {
                     editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
                     editedPerson.isImportant()
             );
+
+            editedTaskMessage = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
         }
         // If the edited details result in a duplicate person, throw an exception.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        if (targetTaskIndex == null) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n" +
+                    editedTaskMessage);
+        }
     }
 
     /**
