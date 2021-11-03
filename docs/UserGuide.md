@@ -211,6 +211,9 @@ Exports all current filtered contacts into a JSON file.
 
 Format: `export FILENAME`
 
+Example:
+    `export t01students.json`
+
 * Takes the current filtered list of contacts and writes them into `FILENAME`
 
 ### Export emails of filtered contacts to txt: `export email`
@@ -219,7 +222,7 @@ Exports the list of contacts of all current filtered contacts into a txt file. T
 
 Format: `exportemail FILENAME`
 
-* Takes the current filtered list of contacts and writes them into `FILENAME`
+* Takes the current filtered list of contacts and writes the emails into `FILENAME`
 
 ### Undoing a command: `undo`
 
