@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DoneCommand.MESSAGE_EVENT_ALREADY_DONE;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBookCopy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,18 +26,18 @@ class DoneCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
 
-    //    @Test
-    //    public void execute_validIndex_success() {
-    //        DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_EVENT);
-    //        ModelManager expectedModel = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
-    //        Event eventMarkedAsDone = expectedModel.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-    //        eventMarkedAsDone.markAsDone();
-    //
-    //        String expectedMessage = String.format(DoneCommand.MESSAGE_DONE_EVENT_SUCCESS,
-    //                eventMarkedAsDone);
-    //
-    //        assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
-    //    }
+        @Test
+        public void execute_validIndex_success() {
+            DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_EVENT);
+            ModelManager expectedModel = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
+            Event eventMarkedAsDone = expectedModel.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+            eventMarkedAsDone.markAsDone();
+
+            String expectedMessage = String.format(DoneCommand.MESSAGE_DONE_EVENT_SUCCESS,
+                    eventMarkedAsDone);
+
+            assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
+        }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
