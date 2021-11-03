@@ -25,7 +25,7 @@ import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
-import safeforhall.model.person.exceptions.*;
+import safeforhall.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Imports the csv and replaces the existing address book with the available information
