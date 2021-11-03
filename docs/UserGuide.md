@@ -299,7 +299,7 @@ Example(s):
 
 #### Editing a student : `edit`
 
-Deletes a student from the TuitiONE.
+Edits a student which currently exists in **TuitiONE**
 
 Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD]... [dr/REMARK_TO_DELETE]...`
 
@@ -568,3 +568,13 @@ Action | Format | Examples
 * **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
 
   **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes (e.g `1400` and `1415` are valid inputs, while `1415` is an invalid input).
+
+
+* **Q:** How long can my name be for adding a new student?
+
+  **A:** We have imposed a `150` character limit for the respective names of `Students`. Students with names longer than 150 characters should use initials to represent their full name instead.
+
+
+* **Q:** Can lessons of the same subject and grade start at the same time?
+
+  **A:** No. **TuitiONE** would count a lesson of the same grade and subject that start at the same time on the same day as a conflict. 
