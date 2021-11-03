@@ -122,6 +122,7 @@ public class DashboardWindow extends PopupWindow {
             return "\nYou don't have any classes yet!";
         }
 
+        // Start building message
         StringBuilder dataToDisplay = new StringBuilder("\nNo. of labs left to mark:\n");
         for (ClassId cid: labMap.keySet()) {
             String key = cid.toString();
