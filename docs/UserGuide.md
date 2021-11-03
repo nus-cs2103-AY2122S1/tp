@@ -439,7 +439,7 @@ Format: `exit`
 ### Resident Prefix
 
 PREFIX | Description | Usage
--------- | ------ | ------
+|-------- | ------ | ------
 `n/` | Name | `add`, `edit`, `find`
 `p/` | Phone number | `add`, `edit`, `find`
 `e/` | Email address | `add`, `edit`, `find`
