@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 
 public class ThemeManager {
     private static final double size = 30;
-    private static final String darkThemeStylesheet = "view/DarkTheme.css";
-    private static final String lightThemeStylesheet = "view/LightTheme.css";
+    private static final String DARK_THEME_CSS = "view/DarkTheme.css";
+    private static final String LIGHT_THEME_CSS = "view/LightTheme.css";
     private enum Theme { LIGHT, DARK }
 
     private Theme currentTheme;
@@ -19,7 +19,7 @@ public class ThemeManager {
      */
     public ThemeManager() {
         currentTheme = Theme.LIGHT;
-        currentStylesheet = lightThemeStylesheet;
+        currentStylesheet = LIGHT_THEME_CSS;
     }
 
     /**
@@ -31,8 +31,8 @@ public class ThemeManager {
     public void changeTheme(Stage primaryStage, Button themeButton) {
         switch (currentTheme) {
         case DARK:
-            primaryStage.getScene().getStylesheets().remove(darkThemeStylesheet);
-            primaryStage.getScene().getStylesheets().add(lightThemeStylesheet);
+            primaryStage.getScene().getStylesheets().remove(DARK_THEME_CSS);
+            primaryStage.getScene().getStylesheets().add(LIGHT_THEME_CSS);
 
             ImageView sun = new ImageView("images/sun.png");
             sun.setFitHeight(size);
@@ -40,11 +40,11 @@ public class ThemeManager {
             themeButton.setGraphic(sun);
 
             currentTheme = Theme.LIGHT;
-            currentStylesheet = lightThemeStylesheet;
+            currentStylesheet = LIGHT_THEME_CSS;
             break;
         case LIGHT:
-            primaryStage.getScene().getStylesheets().remove(lightThemeStylesheet);
-            primaryStage.getScene().getStylesheets().add(darkThemeStylesheet);
+            primaryStage.getScene().getStylesheets().remove(LIGHT_THEME_CSS);
+            primaryStage.getScene().getStylesheets().add(DARK_THEME_CSS);
 
             ImageView moon = new ImageView("images/moon.png");
             moon.setFitHeight(size);
@@ -52,7 +52,7 @@ public class ThemeManager {
             themeButton.setGraphic(moon);
 
             currentTheme = Theme.DARK;
-            currentStylesheet = darkThemeStylesheet;
+            currentStylesheet = DARK_THEME_CSS;
             break;
         default:
         }

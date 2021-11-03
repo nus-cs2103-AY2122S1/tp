@@ -16,7 +16,7 @@ import seedu.placebook.ui.Ui;
 
 public class ClearCommandTest {
     // default positive confirmation ui. This will not affect clearCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
+    private final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @Test
     public void execute_emptyAddressBook_success() {

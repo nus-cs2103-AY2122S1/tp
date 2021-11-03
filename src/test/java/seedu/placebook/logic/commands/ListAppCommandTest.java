@@ -17,7 +17,7 @@ import seedu.placebook.ui.Ui;
 
 class ListAppCommandTest {
     // default positive confirmation ui. This will not affect ListAppCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
+    private final Ui uiStub = UiStubFactory.getUiStub(true);
 
     private Model model;
     private Model expectedModel;

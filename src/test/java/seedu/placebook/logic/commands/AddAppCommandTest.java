@@ -33,7 +33,7 @@ import seedu.placebook.ui.Ui;
 
 public class AddAppCommandTest {
     // default positive confirmation ui. This will not affect AddAppCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
+    private final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {

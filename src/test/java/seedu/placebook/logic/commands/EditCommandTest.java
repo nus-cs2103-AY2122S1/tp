@@ -40,7 +40,7 @@ import seedu.placebook.ui.Ui;
  */
 public class EditCommandTest {
     // default positive confirmation ui. This will not affect EditCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
+    private final Ui uiStub = UiStubFactory.getUiStub(true);
 
     private final UniquePersonList editTestPersonList = new UniquePersonList();
 

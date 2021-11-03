@@ -12,7 +12,7 @@ import seedu.placebook.ui.Ui;
 
 public class ExitCommandTest {
     // default positive confirmation ui. This will not affect ExitCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
+    private final Ui uiStub = UiStubFactory.getUiStub(true);
 
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
