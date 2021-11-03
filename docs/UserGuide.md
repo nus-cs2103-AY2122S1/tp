@@ -10,10 +10,11 @@ title: User Guide
 
 ## Introduction
 
-**Tuition Address Book (TAB)** is an all-in-one desktop application that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
+**Tuition Address Book (TAB)** is an all-in-one desktop application that helps private 1-to-1 home tutors like you keep track of the large number of students and your respective lesson information, and empower you to provide the best quality home tuition service.
 
-TAB is a Command Line Interface (CLI) application which allows users to interact with it with just text inputs. On top of that, TAB also 
-comes with a clean and aesthetic Graphical User Interface (GUI), allowing users to view their data easily.
+TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also 
+comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
+
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -34,9 +35,9 @@ Syntax | Meaning
 <kbd>text</kbd> | A keyboard input, or a button to be clicked on.
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
 _text_ | Caption for images.
-:information_source: | Indication that the following text is a note.
-:bulb: | Indication that the following text is a tip.
-:exclamation: | Indication that the following text is important.
+<div markdown="block" class="alert alert-info"> :information_source: **Note** </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip** </div> | Indication that the following text is a tip, which can allows you to interact with TAB more effectively and quickly. 
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution** </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to breakdown!
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -88,16 +89,22 @@ to help you with the installation. Follow the guide for your operating system fo
 
 This section briefly explains the various section of TAB's GUI.
 
-![layout](images/annotation.png)
+![layout](images/annotatedGui.png)
 <div class="caption">Basic layout of TAB's user interface.</div>
 
-No. | Section | Representation
-----|---------|---------
-1 | Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you pressed <kbd>Enter</kbd>.
-2 | Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display relevant success messages, otherwise, it will show error messages indicating the cause of the error.
-3 | Student List Panel | The area that shows the list of students you have in TAB.
-4 | Lesson List Panel | The area that shows the name of the student you have selected together with a list of lessons that the student has.
-5 | Center Panel | The area that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
+Section | Representation
+---------|---------
+Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
+Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
+Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you pressed <kbd>Enter</kbd>.
+Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display relevant success messages, otherwise, it will show error messages indicating the cause of the error.
+Student List | The area that shows the list of students you have in TAB.
+Student Card | The area that shows the details of a student. See [Managing Students](#managing-students) for more details.
+Lesson List | The area that shows the name of the student you have selected together with a list of lessons that the student has.
+Lesson Card | The area that shows the details of a lesson. See [Managing Lessons](#managing-lessons) for more details.
+Center Panel | The area that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
+Footer | The area which shows where TAB saves your student details to. For example, **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json**. <br> ![fileStorage](images/annotatedFileStorage.png) <br> <div class="caption">Location of the saved data.</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -162,6 +169,11 @@ Shortcut: <kbd>F1</kbd>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
+
+![studentCard](images/annotatedStudentCard.png)
+<div class="caption">Layout of a student card.</div>
+
+Type | Fields | 
 
 A student must have the following essential fields:
 * Name
