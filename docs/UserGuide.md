@@ -133,7 +133,7 @@ Action | Format, Examples
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:information_source: Notes about the command format:**<br>
 
