@@ -13,7 +13,7 @@ Given below are my contributions to the project.
   * What it does: Allows users to enroll a student of a specific `grade` into a lesson with that same respective `grade`.
   * Justification: A key feature in the application in order to establish the bi-directional linkages between a `Student` and a `Lesson`.
   * Highlights:
-    * A `Student` can be enrolled into a `Lesson` if and only if 
+    * A `Student` can be enrolled into a `Lesson` if and only if:
       1. The `Student` is not currently enrolled in the specific `Lesson`.
       1. The `Student` has the same grade as the `Lesson`.
       1. The `Student` must not currently be enrolled in **10** or more `Lessons`.
@@ -41,8 +41,8 @@ Given below are my contributions to the project.
     * Added documentation for About, Introduction, and Quick Start: (Pull requests [#180](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/180))
     * Did cosmetic and functional (and structural) tweaks overall: (Pull requests [#220](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/220), [#169](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/169/files))
   * Developer Guide:
-    * Added implementation details of the 'Enroll' feature: (Pull requests [#153](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153)) 
+    * Added implementation details of the 'Enroll' feature: (Pull requests [#153](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153))
     * Did cosmetic tweaks to existing documentation of user stories: (Pull requests [#164](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/164))
     * Added documentation for User Stories: (Pull requests [#116](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/116))
 * **Community**:
-* PRs reviewed (with non-trivial review comments): [#95](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/95#discussion_r725457630), [#142](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/142#discussion_r730911339)  
+* PRs reviewed (with non-trivial review comments): [#95](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/95#discussion_r725457630), [#142](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/142#discussion_r730911339)
