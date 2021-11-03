@@ -24,18 +24,15 @@ public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
      */
     public PieChartSalesView(ObservableList<Client> clients) {
         super(fxml);
+
         // data to be changed
         HashMap<Name, Integer> table = new HashMap<>();
         for (Client client : clients) {
             Set<Order> currOrders = client.getOrders();
             for (Order order : currOrders) {
-                Name productName = order.productName;
-                int quantity = Integer.parseInt(order.quantity.value);
-                if (table.containsKey(productName)) {
-                    table.put(productName, table.get(productName) + quantity);
-                } else {
-                    table.put(productName, quantity);
-                }
+                Name productName = order.getProductName();
+                int quantity = Integer.parseInt(order.getQuantity().value);
+                table.put(productName, table.getOrDefault(productName, 0) + quantity);
             }
         }
 

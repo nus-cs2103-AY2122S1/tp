@@ -26,9 +26,9 @@ public class Order {
 
     private static final Quantity QUANTITY_ZERO = new Quantity("0");
 
-    public final Name productName;
-    public final Quantity quantity;
-    public final LocalDate time;
+    private final Name productName;
+    private final Quantity quantity;
+    private final LocalDate time;
 
     /**
      * Constructor of {@code Order}
@@ -52,6 +52,18 @@ public class Order {
         this.productName = productName;
         this.quantity = quantity;
         this.time = time;
+    }
+
+    public Name getProductName() {
+        return productName;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
+    public LocalDate getTime() {
+        return time;
     }
 
     private static boolean isValidProductID(ID id, Model model) {

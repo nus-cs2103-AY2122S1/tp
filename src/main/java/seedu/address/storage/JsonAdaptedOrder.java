@@ -31,7 +31,7 @@ public class JsonAdaptedOrder {
      * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order source) {
-        this(source.productName.fullName, source.quantity.value, source.time);
+        this(source.getProductName().fullName, source.getQuantity().value, source.getTime());
     }
 
     /**
