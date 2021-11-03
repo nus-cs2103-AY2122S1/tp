@@ -219,9 +219,7 @@ Find tasks with matching keywords and show them in the task list.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `find keyword (more_keywords)`
-- <code> find <i>d/date</i> </code>
-- <code> find <i>t/tag</i> </code>
+- <code> find <i>keyword (more_keywords)... (d/date) (tg/tag)...</i> </code>
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -238,8 +236,6 @@ Find tasks with matching keywords and show them in the task list.
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
-* `find d/2021-10-10` returns all tasks that is due by 2021-10-10
-* `find t/GEQ1000` returns all tasks tagged with GEQ1000
 </div>
 
 ![find_command](images/findCommand.jpeg)
@@ -450,7 +446,7 @@ Action | Format, Examples
 **Done** | <code>done <i>task_id</i></code> <br>e.g `done 1`
 **Undone** | <code>undone <i>task_id</i></code> <br>e.g `undone 1`
 **Edit** | <code>edit <i>task_id (n/task_name) (d/date) (t/time) (tg/tag) (p/level)</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
-**Find** | <code>find <i>keyword (more_keywords)</i></code> <br><code> find <i> d/date</i></code> <br><code> find <i> t/tag</i></code> <br> e.g. `find Quiz` <br> e.g. `find d/2021-12-12` <br> e.g. `find t/GEQ1000`
+**Find** | <code>find <i>keyword (more_keywords)... (d/date) (tg/tag)...</i></code> <br> e.g. `find quiz` <br> e.g. `find quiz d/2021-12-12` <br> e.g. `find quiz tg/GEQ1000` <br> e.g. `find quiz d/2021-12-12 tg/GEQ1000`
 **Show** | <code>show <i>week_number</i></code> <br>e.g `show 13`
 **Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 3 4 </code>

@@ -91,7 +91,7 @@ public class Date {
      *
      * @return The LocalDate representing the date.
      */
-    public LocalDate getDate() {
+    public LocalDate getLocalDate() {
         return localDate;
     }
 

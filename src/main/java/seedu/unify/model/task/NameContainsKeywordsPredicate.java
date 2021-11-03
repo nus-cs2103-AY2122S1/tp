@@ -9,15 +9,18 @@ import java.util.function.Predicate;
 public class NameContainsKeywordsPredicate implements Predicate<Task> {
     private final List<String> keywords;
 
+    /**
+     * Create a NameContainsKeywordsPredicate.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Task task) {
-        boolean check = false;
+        boolean check = !keywords.isEmpty();
         for (String keyword:keywords) {
-            check = check || task.getName().taskName.toLowerCase().contains(keyword.toLowerCase());
+            check = check && task.getName().taskName.toLowerCase().contains(keyword.toLowerCase());
         }
         return check;
     }

@@ -3,9 +3,9 @@ package seedu.unify.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.unify.testutil.Assert.assertThrows;
-import static seedu.unify.testutil.TypicalTasks.ALICE;
-import static seedu.unify.testutil.TypicalTasks.HOON;
-import static seedu.unify.testutil.TypicalTasks.IDA;
+import static seedu.unify.testutil.TypicalTasks.BUY_GROCERIES;
+import static seedu.unify.testutil.TypicalTasks.CS1234_PRESENTATION;
+import static seedu.unify.testutil.TypicalTasks.CS1234_QUIZ;
 import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import java.io.IOException;
@@ -72,14 +72,14 @@ public class JsonUniFyStorageTest {
         assertEquals(original, new UniFy(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addTask(HOON);
-        original.removeTask(ALICE);
+        original.addTask(BUY_GROCERIES);
+        original.removeTask(CS1234_QUIZ);
         jsonUniFyStorage.saveUniFy(original, filePath);
         readBack = jsonUniFyStorage.readUniFy(filePath).get();
         assertEquals(original, new UniFy(readBack));
 
         // Save and read without specifying file path
-        original.addTask(IDA);
+        original.addTask(CS1234_PRESENTATION);
         jsonUniFyStorage.saveUniFy(original); // file path not specified
         readBack = jsonUniFyStorage.readUniFy().get(); // file path not specified
         assertEquals(original, new UniFy(readBack));

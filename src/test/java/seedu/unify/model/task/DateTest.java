@@ -46,7 +46,7 @@ public class DateTest {
         Date validDate = new Date("2021-01-08");
 
         // valid date formats since invalid formats will be rejected at constructor
-        LocalDate test1 = LocalDate.parse("2021-01-08");
-        System.out.println(validDate.getDate().equals(test1));
+        LocalDate test1 = LocalDate.parse("2020-01-08");
+        System.out.println(validDate.getLocalDate().equals(test1));
     }
 }

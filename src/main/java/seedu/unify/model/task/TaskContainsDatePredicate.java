@@ -15,7 +15,7 @@ public class TaskContainsDatePredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
-        return task.getDate().getDate().equals(date);
+        return task.getDate().getLocalDate().equals(date);
     }
 
     @Override
