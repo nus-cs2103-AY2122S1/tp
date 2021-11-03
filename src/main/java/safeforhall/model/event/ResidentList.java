@@ -61,6 +61,7 @@ public class ResidentList {
             String[] residentInformationList = residentList.split("\\s*,\\s*");
             for (String residentInformation : residentInformationList) {
                 String[] information = residentInformation.split(";\\s*\\w*(\\w*\\s*)*:\\s*");
+
                 Name name = new Name(information[0]);
                 Room room = new Room(information[1]);
                 Phone phone = new Phone(information[2]);
@@ -69,6 +70,7 @@ public class ResidentList {
                 Faculty faculty = new Faculty(information[5]);
                 LastDate lastFetDate = new LastDate(information[6]);
                 LastDate lastCollectionDate = new LastDate(information[7]);
+
                 Person p = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
                 this.residentList.add(p);
             }

@@ -5,6 +5,7 @@ import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_TIME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import safeforhall.commons.core.index.Index;
@@ -29,7 +30,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
     public EditEventCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_VENUE, PREFIX_CAPACITY);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_VENUE, PREFIX_CAPACITY);
 
         Index index;
 
@@ -46,6 +47,9 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editEventDescriptor.setDate(ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            editEventDescriptor.setTime(ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_TIME).get()));
         }
         if (argMultimap.getValue(PREFIX_VENUE).isPresent()) {
             editEventDescriptor.setVenue(ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get()));
