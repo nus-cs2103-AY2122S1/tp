@@ -178,6 +178,9 @@ Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL g/GROUP_NAME`
 
 * Adds a new student into CSBook.
 * The group name must correspond to that of a group that has been added to CSBook before the student is created. Each student **MUST** belong to a group.
+* Each student can only belong to one group.
+* `NAME` is case-sensitive and must be unique. Thus, it is possible to have two students named `John` and `john`, but it is not possible to have two students named `Alfred` and `Alfred`
+* The `EMAIL` used can be any email; it need not be an NUS email.
 
 <div markdown="block" class="alert alert-info">
 :information_source: **Note on groups**: Refer to the "Group management features" section for more details on how you may use groups to enhance the way you track students.
@@ -414,5 +417,4 @@ Action | Format, Examples
     * You may run the `java -version` command on your respective operating system's (OS) terminal window.
     * Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
     * Note: Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
-
-2. I have some font issues with my user interface.
+    
