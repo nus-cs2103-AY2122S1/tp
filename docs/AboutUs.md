@@ -15,8 +15,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/squeakysquak)]
 [[portfolio](team/ethan.md)]
 
-* Role: Developer
-* Responsibilities: Scheduling & Tracking
+* Role: Developer, in charge of Scheduling & Tracking
+* Responsibilities: Model 
 
 ### Lau Teng Hon
 
@@ -25,8 +25,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/Th-429B)]
 [[portfolio](team/tenghon.md)]
 
-* Role: Team Lead
-* Responsibilities: Integration (Tentative)
+* Role: Team Lead, in charge of Deliverables & Deadlines
+* Responsibilities: Storage
 
 ### Toh Wang Bin
 
@@ -35,8 +35,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/trash-bin99)]
 [[portfolio](team/wangbin.md)]
 
-* Role: Developer
-* Responsibilities: Testing
+* Role: Developer, in charge of Testing
+* Responsibilities: Parser
 
 ### Lim Peiyuan
 
@@ -45,8 +45,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/Py0000)]
 [[portfolio](team/peiyuan.md)]
 
-* Role: Developer
-* Responsibilities: Code Quality
+* Role: Developer, in charge of Code Quality
+* Responsibilities: Logic
 
 ### Calvin Tan
 
@@ -55,5 +55,5 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/Cyn7hius)]
 [[portfolio](team/calvin.md)]
 
-* Role: Developer
-* Responsibilities: Documentation
+* Role: Developer, in charge of Documentation
+* Responsibilities: UI
