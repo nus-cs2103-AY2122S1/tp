@@ -5,13 +5,10 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-Hi, this is AvengerDirectory.
+Hi, this is AcademyDirectory!
 
-**please note that roles are still a WIP**
 
 ### Manh Duc
 
@@ -51,12 +48,12 @@ Hi, this is AvengerDirectory.
 * Role: Minion
 * Responsibilities: Everything
 
-### Jian Wei
+### Tan Jian Wei
 
 <img src="images/jianoway.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jianoway/)]
+[[portfolio](team/jianoway.md)]
 
 * Role: Minion
 * Responsibilities: Everything

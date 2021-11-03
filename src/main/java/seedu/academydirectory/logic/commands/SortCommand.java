@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Assessment;
@@ -74,8 +73,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
-        ObservableList<Student> students = model.getFilteredStudentList();
 
+        List<Student> students = model.getAcademyDirectory().getStudentList();
         Comparator<Student> comparator = getComparator();
 
         List<Student> sortedList = new ArrayList<>();
