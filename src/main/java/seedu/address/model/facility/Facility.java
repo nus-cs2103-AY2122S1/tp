@@ -3,15 +3,22 @@ package seedu.address.model.facility;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 import seedu.address.model.person.Person;
 
 /**
- * Represents a Facility in the address book.
+ * Represents a Facility in SportsPA.
  */
 public class Facility {
+    // Identity fields
     private final FacilityName name;
     private final Location location;
+
+    // Data fields
     private final Time time;
     private final Capacity capacity;
     private final AllocationMap allocationMap;
@@ -55,8 +62,27 @@ public class Facility {
         return allocationMap.getCapacityOnDay(day);
     }
 
+    public int getMaxCapacityOnDay(DayOfWeek day) {
+        // all days have the same capacity for now
+        return capacity.getCapacityAsInt();
+    }
+
     public AllocationMap getAllocationMap() {
         return allocationMap;
+    }
+
+    /**
+     * Makes a deep copy of the allocation map.
+     */
+    public AllocationMap getAllocationMapClone() {
+        Map<DayOfWeek, List<Person>> map = new EnumMap<>(DayOfWeek.class);
+        for (DayOfWeek day : DayOfWeek.values()) {
+            map.put(day, new ArrayList<>());
+            for (Person person : allocationMap.getPersonsAllocatedOnDay(day)) {
+                map.get(day).add(person);
+            }
+        }
+        return new AllocationMap(map);
     }
 
     public boolean isMaxCapacityOnDay(DayOfWeek day) {

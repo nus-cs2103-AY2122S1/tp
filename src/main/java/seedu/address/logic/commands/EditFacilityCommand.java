@@ -28,7 +28,7 @@ public class EditFacilityCommand extends Command {
     public static final String COMMAND_WORD = "editf";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the facility identified "
-            + "by the index number used in the displayed facility list. "
+            + "by the index number used in the displayed facility list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -76,7 +76,7 @@ public class EditFacilityCommand extends Command {
         }
 
         for (DayOfWeek day : DayOfWeek.values()) {
-            if (facilityToEdit.getCapacityAsOnDay(day) > editedFacility.getCapacityAsOnDay(day)) {
+            if (facilityToEdit.getCapacityAsOnDay(day) > editedFacility.getMaxCapacityOnDay(day)) {
                 facilityToEdit.clearAllocationMapOnDay(day);
             }
         }

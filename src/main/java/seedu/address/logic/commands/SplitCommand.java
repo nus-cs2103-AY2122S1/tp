@@ -15,7 +15,7 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
  */
 public class SplitCommand extends Command {
     public static final String COMMAND_WORD = "split";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": splits members into locations based on availability.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Splits members into locations based on availability.\n"
             + "Parameters: " + "DAY\n"
             + "DAY must be an integer from 1 to 7\n"
             + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"

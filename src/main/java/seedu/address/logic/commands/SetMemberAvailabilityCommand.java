@@ -50,9 +50,11 @@ public class SetMemberAvailabilityCommand extends Command {
 
         for (Index i : indices) {
             if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
             }
+        }
 
+        for (Index i : indices) {
             Person personToEdit = lastShownList.get(i.getZeroBased());
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTodayAttendance(),

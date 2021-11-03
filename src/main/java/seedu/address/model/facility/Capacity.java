@@ -42,6 +42,10 @@ public class Capacity {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public int getCapacityAsInt() {
+        return Integer.parseInt(capacity);
+    }
+
     @Override
     public boolean equals(Object obj) {
         return (obj == this)

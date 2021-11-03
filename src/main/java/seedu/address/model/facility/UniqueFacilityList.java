@@ -43,6 +43,9 @@ public class UniqueFacilityList implements Iterable<Facility> {
      * Replaces the facility {@code target} in the list with {@code editedFacility}.
      * {@code target} must exist in the list.
      * The facility parameter of {@code editedFacility} must not be the same as another existing facility in the list.
+     *
+     * @param target The facility to be replaced.
+     * @param editedFacility The facility to replace the target facility.
      */
     public void setFacility(Facility target, Facility editedFacility) {
         requireAllNonNull(target, editedFacility);
@@ -88,6 +91,8 @@ public class UniqueFacilityList implements Iterable<Facility> {
     /**
      * Replaces the contents of this list with {@code facilities}.
      * {@code facilities} must not contain duplicate facilities.
+     *
+     * @param facilities The list of facilities to replace the contents of this list with.
      */
     public void setFacilities(List<Facility> facilities) {
         requireAllNonNull(facilities);
@@ -114,6 +119,8 @@ public class UniqueFacilityList implements Iterable<Facility> {
 
     /**
      * Returns the total capacity of the facilities in the list.
+     *
+     * @return The total capacity of all facilities in the list.
      */
     public int getTotalCapacity() {
         int count = 0;
@@ -127,6 +134,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
      * Allocates members into the different facilities.
      *
      * @param members Members to be allocated.
+     * @param dayNumber Day on which to allocate the members.
      */
     public void allocateMembersToFacilitiesOnDay(FilteredList<Person> members, int dayNumber) {
         DayOfWeek day = DayOfWeek.of(dayNumber);
@@ -161,7 +169,10 @@ public class UniqueFacilityList implements Iterable<Facility> {
 
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code facilities} contains only unique facilities.
+     *
+     * @param facilities List of facilities to check for uniqueness.
+     * @return true if and only if facilities are unique.
      */
     private boolean facilitiesAreUnique(List<Facility> facilities) {
         for (int i = 0; i < facilities.size() - 1; i++) {
@@ -182,7 +193,9 @@ public class UniqueFacilityList implements Iterable<Facility> {
      */
     public void removePersonFromAllocations(Person key) {
         for (Facility facility: facilityList) {
-            facility.removePersonFromFacilityOnAllDays(key);
+            Facility toEdit = facility;
+            toEdit.removePersonFromFacilityOnAllDays(key);
+            this.setFacility(facility, toEdit);
         }
     }
 }
