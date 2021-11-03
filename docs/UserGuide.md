@@ -179,6 +179,13 @@ Hougang Street 91, #01-41"_ and tagged with _"friend"_.
 
 :page_with_curl: Format: ```add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
+<div markdown="block" class="alert alert-info">
+
+**:warning: Name Limitations:**<br>
+Names are only limited to 20 characters!
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ![Editing a Contact](images/UG-04.png)
@@ -211,8 +218,10 @@ using an _Edit Command_ to edit the phone number and email parameters of a conta
 :page_with_curl: Format: ```tag INDEX [t/TAG]...```
 
 <div markdown="block" class="alert alert-info">
+
 **:warning: Tag Limitations:**<br>
 Tag names are only limited to 20 characters!
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -284,8 +293,10 @@ in this case, all contacts which are tagged as "friends".
 :page_with_curl: Format: ```clear```
 
 <div markdown="block" class="alert alert-info">
+
 **:warning: Clearing all contacts:**<br>
 This command is irreversible and all contacts from the list will be deleted with no way of recovering them.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -344,8 +355,10 @@ an _Edit Command_ to edit a task's date/time and assignee.
 :page_with_curl: Format: ```tag INDEX [t/TAG]...```
 
 <div markdown="block" class="alert alert-info">
+
 **:warning: Tag Limitations:**<br>
 Tag names are only limited to 20 characters!
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -360,6 +373,16 @@ Tag names are only limited to 20 characters!
 :grey_question:
 * Assigning people to a task uses the current `INDEX` of the person on the contacts list, which is shown
   on the side panel to the right.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about assigning people:**<br>
+
+Think of assigning like tags but meant for people's names instead. Since assignees behave like tags, any changes to the 
+person's name in contacts will not be reflected in the assignees of a task. If you would like to change the assignees 
+names to a task, you can delete the task and re-add it with the updated details.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -474,9 +497,12 @@ the current Date/Time on your computer. These tasks are sorted chronologically a
 :page_with_curl: Format: ```clear```
 
 <div markdown="block" class="alert alert-info">
+
 **:warning: Clearing all tasks:**<br>
 This command is irreversible and all tasks from the list will be deleted with no way of recovering them.
+
 </div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### <u>Handling Date and Time of tasks</u>
@@ -501,6 +527,7 @@ A task can optionally have a Date, or both a Date and a Time.
 **:warning: Multiple date and time parameters:**<br>
 If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
 e.g. if you specify `dt/12/02/2021 dt/1900`, only `dt/1900` will be taken.
+
 </div>
 
 #### Date Formats
