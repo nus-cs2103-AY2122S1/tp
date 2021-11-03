@@ -108,7 +108,7 @@ public class MainApp extends Application {
             initialData = inventoryOptional.orElseGet(SampleDataUtil::getSampleInventory);
             transactionList = transactionListOptional
                     .orElseGet(() -> new TransactionList(new ArrayList<TransactionRecord>()));
-            bookKeeping = bookKeepingOptional.orElseGet(BookKeeping::new);
+            bookKeeping = bookKeepingOptional.orElseGet(SampleDataUtil::getSampleBookKeeping);
 
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty inventory");

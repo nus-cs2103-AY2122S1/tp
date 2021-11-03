@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Inventory;
+import seedu.address.model.ReadOnlyBookKeeping;
 import seedu.address.model.ReadOnlyInventory;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
@@ -46,6 +48,12 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    public static ReadOnlyBookKeeping getSampleBookKeeping() {
+        double cost = Arrays.stream(getSampleItems())
+                .map(item -> item.getCostPrice() * item.getCount()).reduce((a, b) -> a + b).get();
+        return new BookKeeping(0.0, cost, -cost);
     }
 
 }

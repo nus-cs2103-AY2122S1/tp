@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,6 +34,10 @@ public class AddToOrderCommand extends Command {
     public static final String MESSAGE_NO_UNCLOSED_ORDER = "Please use `sorder` to enter ordering mode first.";
     public static final String MESSAGE_MULTIPLE_MATCHES =
             "Multiple candidates found, which one do you mean to add?";
+    public static final String MESSAGE_EXTRA_PRICE_FLAG =
+            "Extra price flags are ignored.";
+    public static final String MESSAGE_EXTRA_TAG_FLAG =
+            "Extra tag flags are ignored.";
 
     private final ItemDescriptor toAddDescriptor;
 
@@ -105,6 +110,17 @@ public class AddToOrderCommand extends Command {
 
         Item toAddItem = matchingItems.get(0).updateCount(toAddDescriptor.getCount().get());
         model.addToOrder(toAddItem);
+        if (!toAddDescriptor.getSalesPrice().equals(Optional.empty())
+                || !toAddDescriptor.getCostPrice().equals(Optional.empty())) {
+            String addMessage = String.format(MESSAGE_SUCCESS, toAddItem.getCount(), toAddItem.getName());
+            return new CommandResult(
+                    addMessage + "\n" + MESSAGE_EXTRA_PRICE_FLAG);
+        }
+        if (!toAddDescriptor.getTags().equals(Optional.empty())) {
+            String addMessage = String.format(MESSAGE_SUCCESS, toAddItem.getCount(), toAddItem.getName());
+            return new CommandResult(
+                    addMessage + "\n" + MESSAGE_EXTRA_TAG_FLAG);
+        }
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, toAddItem.getCount(), toAddItem.getName()));
     }

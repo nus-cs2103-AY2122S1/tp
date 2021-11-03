@@ -49,9 +49,10 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs,
                         ReadOnlyTransactionList transactionList, ReadOnlyBookKeeping bookKeeping) {
         super();
-        requireAllNonNull(inventory, userPrefs);
+        requireAllNonNull(inventory, userPrefs, transactionList, bookKeeping);
 
-        logger.fine("Initializing with inventory: " + inventory + " and user prefs " + userPrefs);
+        logger.fine("Initializing with inventory: " + inventory + ", user prefs " + userPrefs
+            + ", transaction list: " + transactionList + ", bookkeeping: " + bookKeeping);
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -364,6 +365,11 @@ public class ModelManager implements Model {
         return new TransactionList(new ArrayList<>(transactions));
     }
 
+    @Override
+    public void initialiseTransactions() {
+        transactions = new TransactionList().getTransactionRecordList();
+    }
+
     //=========== BookKeeping ================================================================================
 
     /**
@@ -382,5 +388,13 @@ public class ModelManager implements Model {
      */
     public void addRevenueBookKeeping(Double revenue) {
         bookKeeping.addRevenue(revenue);
+    }
+
+    /**
+     * Reinitialise bookKeeping.
+     */
+    @Override
+    public void initialiseBookKeeping() {
+        bookKeeping.initialise();
     }
 }

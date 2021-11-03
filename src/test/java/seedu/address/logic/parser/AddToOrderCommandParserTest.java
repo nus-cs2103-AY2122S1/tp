@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NAME_SPECIFIED_TWICE;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_ZERO;
@@ -16,6 +17,8 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_POPULAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -95,6 +98,14 @@ public class AddToOrderCommandParserTest {
 
         // both name and id prefix missing
         assertParseFailure(parser, COUNT_DESC_BAGEL, expectedMessage);
+    }
+
+    @Test
+    public void parse_twoNameFields_failure() {
+        String expectedMessage = String.format(MESSAGE_NAME_SPECIFIED_TWICE + "\n" + AddToOrderCommand.MESSAGE_USAGE);
+
+        // both name and id prefix missing
+        assertParseFailure(parser, VALID_NAME_BAGEL + " " + PREFIX_NAME + VALID_NAME_DONUT , expectedMessage);
     }
 
     @Test
