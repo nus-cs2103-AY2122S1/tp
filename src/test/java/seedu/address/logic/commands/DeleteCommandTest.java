@@ -32,7 +32,8 @@ public class DeleteCommandTest {
     //                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
     //        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
     //
-    //        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
+    //        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS,
+    //        participantToDelete);
     //
     //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     //        expectedModel.deleteParticipant(participantToDelete);

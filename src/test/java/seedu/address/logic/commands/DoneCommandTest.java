@@ -26,18 +26,18 @@ class DoneCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
 
-        @Test
-        public void execute_validIndex_success() {
-            DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_EVENT);
-            ModelManager expectedModel = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
-            Event eventMarkedAsDone = expectedModel.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-            eventMarkedAsDone.markAsDone();
+    @Test
+    public void execute_validIndex_success() {
+        DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_EVENT);
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
+        Event eventMarkedAsDone = expectedModel.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        eventMarkedAsDone.markAsDone();
 
-            String expectedMessage = String.format(DoneCommand.MESSAGE_DONE_EVENT_SUCCESS,
-                    eventMarkedAsDone);
+        String expectedMessage = String.format(DoneCommand.MESSAGE_DONE_EVENT_SUCCESS,
+                eventMarkedAsDone);
 
-            assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
-        }
+        assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
