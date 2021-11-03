@@ -209,7 +209,7 @@ The features mentioned are:
 3. View 
    1. Listing all persons
    2. Locating persons
-   3. Sorting persons
+   3. [Sorting persons](#sorting-persons)
    4. Viewing statistics
 4. Share 
    1. Importing contacts
@@ -354,6 +354,53 @@ The following sequence diagram shows how the deleting multiple person mechanism 
 * **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
     * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
     * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
+
+### Sorting persons
+
+#### Implementation
+
+The following activity diagram summarizes what happens when a user executes a sort persons command with a specified field:
+
+![SortActivityDiagram](images/SortActivityDiagram.png)
+
+The Sort mechanism sorts persons based on the specified field in ascending order. 
+The command will result in the creation of a Comparator<Person>.
+
+#### Usage
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `sort n/` command to sort all persons by name in ascending alphabetical order.
+
+Step 3. This will call SortCommandParser#parse which will then parse the arguments provided.
+
+Step 4. A new `NameComparator` and `SortCommand` object will then be created. It will be used to sort all the persons based on their names. This `NameComparator` is then passed to the `SortCommand`. 
+
+The following sequence diagram shows how the parser operation works (`NameComparator` not shown):
+
+![SortParserSequenceDiagram](images/SortParserSequenceDiagram.png)
+
+Step 5. `SortCommand#execute` will set the `AddressBook` model's sorted person list with the provided comparator.
+
+Step 6. The GUI will then proceed to get the full list of persons.
+
+Step 7. After execution, `CommandResult` will contain a message indicating that it has sorted all persons based on the specified field.
+
+The following sequence diagram shows how the Sort mechanism works:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Sort all persons based on single field.
+    * Pros: Easy to implement.
+    * Cons: May not be very convenient if the contact list is very huge and users would like to sort based on multiple fields.
+
+* **Alternative 2:** Sort all persons based on multiple fields.
+    * Pros: Convenient if the contact list is very huge and users would like to sort based on multiple fields.
+    * Cons: Difficult to implement.
     
 ### Import JSON file
 
