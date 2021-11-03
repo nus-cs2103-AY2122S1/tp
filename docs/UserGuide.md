@@ -246,6 +246,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 * `PARENT_CONTACT` can only be 8 digits long and start with `6`, `8` or `9` (as this application is currently based for Singapore use).
 
 * `EMAIL` can only have a maximum of 100 characters and have the conventional `@` as well as a domain name.
+  * As there can be a variety of possible email address namings and domains, the application will not run a through check on your input. If you happen to input the wrong email address, you can use the `edit` command [here](#editing-a-student--edit).
 
 * `ADDRESS` can only have a maximum of 150 characters.
 
@@ -597,6 +598,16 @@ Action | Format | Examples
 * **Q:** Where can I view the list of commands?
 
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
+
+
+* **Q:** Why are some usual email address inputed valid, such as 'jd@gmail.com.this.that.this.that.this.that'?
+
+  **A:** There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, see the `edit` command [here](#editing-a-student--edit).
+
+
+* **Q:** Why are there some unusual files present in my folder after I run **TuitiONE**?
+
+  **A:** **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [here](#managing-data) for more).
 
 
 * **Q:** Why am I unable to add a student with the same name as another student?
