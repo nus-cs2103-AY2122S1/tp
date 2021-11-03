@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GroupType implements Comparable<GroupType> {
 
     public static final String MESSAGE_CONSTRAINTS = "GroupType can only either be OP1 or OP2";
+    public static final String VALIDATION_REGEX = "[O|o][P|p][1/2]";
 
     public final String value;
     /**
@@ -24,7 +25,7 @@ public class GroupType implements Comparable<GroupType> {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidGroupType(String test) {
-        return test.equals("OP1") || test.equals("OP2");
+        return test.matches(VALIDATION_REGEX);
     }
 
     private Integer parseGroupType(String groupType) {

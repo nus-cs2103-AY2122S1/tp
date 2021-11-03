@@ -173,7 +173,7 @@ public class ParserUtil {
         if (!GroupType.isValidGroupType(groupType)) {
             throw new ParseException(GroupType.MESSAGE_CONSTRAINTS);
         }
-        return new GroupType(groupType);
+        return new GroupType(groupType.toUpperCase());
     }
 
     /**
