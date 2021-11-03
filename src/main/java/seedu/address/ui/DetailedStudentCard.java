@@ -70,8 +70,9 @@ public class DetailedStudentCard extends UiPart<Region> {
         double txtWidth = txt.getLayoutBounds().getWidth();
         double ratio = 200 / txtWidth;
         if (txtWidth > 200) {
+            System.out.println(ratio);
             double newFontSize = 70 * ratio;
-            if (ratio < 0.1) {
+            if (ratio < 0.2) {
                 newFontSize *= (1 - 1/ratio);
             }
             name.setStyle(String.format("-fx-font-size:%f;", newFontSize));
