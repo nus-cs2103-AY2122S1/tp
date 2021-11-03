@@ -227,7 +227,7 @@ A student can be identified by the student index number shown in the displayed l
             <td>
               <ul>
                 <li><strong>At least one</strong> of the contact fields must be present.</li>
-                <li>Must be of the format _local-part@domain_ and adhere to the following constraints:</li> 
+                <li>Must be of the format <em>local-part@domain</em> and adhere to the following constraints:</li> 
                   <ul>
                     <li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li>
                     <li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.</li>
