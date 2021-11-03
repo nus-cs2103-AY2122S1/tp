@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="SportsPA" type="javafx.stage.Stage"
-         xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="SportsPA" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -43,8 +42,7 @@
                     </padding>
                 </StackPane>
 
-                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
-                           styleClass="pane-with-border" VBox.vgrow="NEVER">
+                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150.0" minHeight="100" prefHeight="150.0" prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
                     <padding>
                         <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
@@ -54,16 +52,13 @@
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-               <TabPane fx:id="tabsPlaceholder" prefHeight="200.0" prefWidth="200.0"
-                        tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+               <TabPane fx:id="tabsPlaceholder" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                  <tabs>
                    <Tab text="Members">
                      <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
                               <children>
-                                      <StackPane fx:id="personListPanelPlaceholder" AnchorPane.bottomAnchor="0.0"
-                                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                 AnchorPane.topAnchor="0.0" />
+                                      <StackPane fx:id="personListPanelPlaceholder" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               </children>
                            </AnchorPane>
                      </content>
@@ -72,9 +67,7 @@
                      <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                      <StackPane fx:id="facilityListPanelPlaceholder" AnchorPane.bottomAnchor="0.0"
-                                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                                 AnchorPane.topAnchor="0.0" />
+                                      <StackPane fx:id="facilityListPanelPlaceholder" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               </children>
                            </AnchorPane>
                      </content>
