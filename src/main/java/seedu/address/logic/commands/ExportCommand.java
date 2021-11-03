@@ -64,7 +64,7 @@ public class ExportCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, FileUtil.getRelativePathString(file)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, file));
     }
 
     private void appendGroupHeaders(StringBuilder writeContent, List<Student> students) {
