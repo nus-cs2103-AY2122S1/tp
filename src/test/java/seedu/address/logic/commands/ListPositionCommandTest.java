@@ -34,7 +34,7 @@ public class ListPositionCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPositionAtIndex(model, INDEX_FIRST_POSITION);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListPositionCommand(), model, ListPositionCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 

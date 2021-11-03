@@ -7,23 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddApplicantCommand;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPositionCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteApplicantCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePositionCommand;
 import seedu.address.logic.commands.EditApplicantCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPositionCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterApplicantCommand;
 import seedu.address.logic.commands.FindApplicantCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListApplicantCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListPositionCommand;
 import seedu.address.logic.commands.MarkApplicantStatusCommand;
 import seedu.address.logic.commands.RejectionRateCommand;
@@ -57,24 +51,6 @@ public class MrTechRecruiterParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
