@@ -17,10 +17,20 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("delete task \nm/CS2
 activate TeachingAssistantBuddyParser
 
 create DeleteCommandParser
+TeachingAssistantBuddyParser -> DeleteCommandParser
+activate DeleteCommandParser
+DeleteCommandParser --> TeachingAssistantBuddyParser
+deactivate DeleteCommandParser
+
 TeachingAssistantBuddyParser -> DeleteCommandParser : parse("task \nm/CS2103 \nti/T1")
 activate DeleteCommandParser
 
 create DeleteTaskCommandParser
+DeleteCommandParser -> DeleteTaskCommandParser
+activate DeleteTaskCommandParser
+DeleteTaskCommandParser --> DeleteCommandParser
+deactivate DeleteTaskCommandParser
+
 DeleteCommandParser -> DeleteTaskCommandParser : parse("m/CS2103 \nti/T1")
 activate DeleteTaskCommandParser
 

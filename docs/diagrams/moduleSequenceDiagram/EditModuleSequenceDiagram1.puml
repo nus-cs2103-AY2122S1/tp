@@ -19,10 +19,20 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("edit module \nm/CS2
 activate TeachingAssistantBuddyParser
 
 create EditCommandParser
+TeachingAssistantBuddyParser -> EditCommandParser
+activate EditCommandParser
+EditCommandParser --> TeachingAssistantBuddyParser
+deactivate EditCommandParser
+
 TeachingAssistantBuddyParser -> EditCommandParser : parse("module m/CS2103 \nmn/CS2105")
 activate EditCommandParser
 
 create EditModuleCommandParser
+EditCommandParser -> EditModuleCommandParser
+activate EditModuleCommandParser
+EditModuleCommandParser --> EditCommandParser
+deactivate EditModuleCommandParser
+
 EditCommandParser -> EditModuleCommandParser : parse("m/CS2103 \nmn/CS2105")
 activate EditModuleCommandParser
 

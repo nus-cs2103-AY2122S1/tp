@@ -16,10 +16,22 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("add student \nm/CS2
 activate TeachingAssistantBuddyParser
 
 create AddCommandParser
+TeachingAssistantBuddyParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser
+deactivate AddCommandParser
+
 TeachingAssistantBuddyParser -> AddCommandParser : parse("student \nm/CS2103\ni/A1234567A \nn/Amy bee \nt/@amybee \ne/amybee@gmail.com")
 activate AddCommandParser
 
 create AddStudentCommandParser
+AddCommandParser -> AddStudentCommandParser
+activate AddStudentCommandParser
+AddStudentCommandParser --> AddCommandParser
+deactivate AddStudentCommandParser
+
+
 AddCommandParser -> AddStudentCommandParser : parse("m/CS2103 \ni/A1234567A \nn/Amy bee \nt/@amybee \ne/amybee@gmail.com")
 activate AddStudentCommandParser
 

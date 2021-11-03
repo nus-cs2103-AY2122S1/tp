@@ -21,10 +21,20 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("delete module \nm/C
 activate TeachingAssistantBuddyParser
 
 create DeleteCommandParser
+TeachingAssistantBuddyParser -> DeleteCommandParser
+activate DeleteCommandParser
+DeleteCommandParser --> TeachingAssistantBuddyParser
+deactivate DeleteCommandParser
+
 TeachingAssistantBuddyParser -> DeleteCommandParser : parse("module \nm/CS2103")
 activate DeleteCommandParser
 
 create DeleteModuleCommandParser
+DeleteCommandParser -> DeleteModuleCommandParser
+activate DeleteModuleCommandParser
+DeleteModuleCommandParser --> DeleteCommandParser
+deactivate DeleteModuleCommandParser
+
 DeleteCommandParser -> DeleteModuleCommandParser : parse("m/CS2103")
 activate DeleteModuleCommandParser
 

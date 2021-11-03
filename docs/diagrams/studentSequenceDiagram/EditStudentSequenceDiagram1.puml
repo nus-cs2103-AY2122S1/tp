@@ -16,10 +16,20 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("edit student \nm/CS
 activate TeachingAssistantBuddyParser
 
 create EditCommandParser
+TeachingAssistantBuddyParser -> EditCommandParser
+activate EditCommandParser
+EditCommandParser --> TeachingAssistantBuddyParser
+deactivate EditCommandParser
+
 TeachingAssistantBuddyParser -> EditCommandParser : parse("student \nm/CS2103 \ni/A1234567A \nn/Amy Lee")
 activate EditCommandParser
 
 create EditStudentCommandParser
+EditCommandParser -> EditStudentCommandParser
+activate EditStudentCommandParser
+EditStudentCommandParser --> EditCommandParser
+deactivate EditStudentCommandParser
+
 EditCommandParser -> EditStudentCommandParser : parse("m/CS2103 \ni/A1234567A \nn/Amy Lee")
 activate EditStudentCommandParser
 

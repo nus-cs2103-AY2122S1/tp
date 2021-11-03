@@ -15,6 +15,11 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("find m/CS2103 i/A12
 activate TeachingAssistantBuddyParser
 
 create FindStudentCommandParser
+TeachingAssistantBuddyParser -> FindStudentCommandParser
+activate FindStudentCommandParser
+FindStudentCommandParser --> TeachingAssistantBuddyParser
+deactivate FindStudentCommandParser
+
 TeachingAssistantBuddyParser -> FindStudentCommandParser : parse("m/CS2103 i/A1234567A")
 activate FindStudentCommandParser
 

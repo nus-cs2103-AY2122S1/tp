@@ -16,10 +16,20 @@
  activate TeachingAssistantBuddyParser
 
  create DeleteCommandParser
+ TeachingAssistantBuddyParser -> DeleteCommandParser
+ activate DeleteCommandParser
+ DeleteCommandParser --> TeachingAssistantBuddyParser
+ deactivate DeleteCommandParser
+
  TeachingAssistantBuddyParser -> DeleteCommandParser : parse("student \nm/CS2103 \ni/A1234567A")
  activate DeleteCommandParser
 
  create DeleteStudentCommandParser
+ DeleteCommandParser -> DeleteStudentCommandParser
+ activate DeleteStudentCommandParser
+ DeleteStudentCommandParser --> DeleteCommandParser
+ deactivate DeleteStudentCommandParser
+
  DeleteCommandParser -> DeleteStudentCommandParser : parse("m/CS2103 i/A1234567A")
  activate DeleteStudentCommandParser
 

@@ -17,10 +17,21 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("add task \nm/CS2103
 activate TeachingAssistantBuddyParser
 
 create AddCommandParser
+TeachingAssistantBuddyParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser
+deactivate AddCommandParser
+
 TeachingAssistantBuddyParser -> AddCommandParser : parse("task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
 activate AddCommandParser
 
 create AddTaskCommandParser
+AddCommandParser -> AddTaskCommandParser
+activate AddTaskCommandParser
+AddTaskCommandParser --> AddCommandParser
+deactivate AddTaskCommandParser
+
 AddCommandParser -> AddTaskCommandParser : parse("m/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
 activate AddTaskCommandParser
 

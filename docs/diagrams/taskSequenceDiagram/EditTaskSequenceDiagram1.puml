@@ -16,10 +16,19 @@ LogicManager -> TeachingAssistantBuddyParser : parseCommand("edit task \nm/CS210
 activate TeachingAssistantBuddyParser
 
 create EditCommandParser
+TeachingAssistantBuddyParser -> EditCommandParser
+activate EditCommandParser
+EditCommandParser --> TeachingAssistantBuddyParser
+deactivate EditCommandParser
+
 TeachingAssistantBuddyParser -> EditCommandParser : parse("task \nm/CS2103 \nti/T1 \na/final exam")
 activate EditCommandParser
 
 create EditTaskCommandParser
+EditCommandParser -> EditTaskCommandParser
+activate EditTaskCommandParser
+EditTaskCommandParser --> EditCommandParser
+deactivate EditTaskCommandParser
 EditCommandParser -> EditTaskCommandParser : parse("\nm/CS2103 \nti/T1 \na/final exam")
 activate EditTaskCommandParser
 
