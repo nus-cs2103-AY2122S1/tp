@@ -34,6 +34,10 @@ public class Stats {
         this.numUniqueGenres = genres.size();
     }
 
+    public static int getGenreCountLimit() {
+        return genreCountLimit;
+    }
+
     private HashMap<Genre, Integer> extractTopGenres(HashMap<Genre, Integer> genres) {
         Comparator<Entry<Genre, Integer>> genreCountComparator = new Comparator<>() {
             @Override

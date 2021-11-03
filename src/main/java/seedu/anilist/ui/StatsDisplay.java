@@ -59,15 +59,18 @@ public class StatsDisplay extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     class IntegerStringConverter extends StringConverter<Number> {
+        private long mult = 100000000;
 
         public IntegerStringConverter() {}
 
         @Override
         public String toString(Number object) {
-            if (object.intValue() != object.doubleValue()) {
-                return "";
+            String tickLabel = "";
+            //handle error where integer values do not show up due to rounding errors
+            if (Math.ceil(object.doubleValue()) == (Math.round(object.doubleValue() * mult) / mult)) {
+                tickLabel += (int) Math.ceil(object.doubleValue());
             }
-            return "" + (object.intValue());
+            return tickLabel;
         }
 
         @Override
@@ -195,13 +198,15 @@ public class StatsDisplay extends UiPart<Stage> {
         tempGenreStats.getData().add(getBarChartData(genreStats));
         barChart.setData(tempGenreStats.getData());
         barChart.getYAxis().setTickMarkVisible(false);
-        barChart.getXAxis().setTickMarkVisible(false);
 
         //set horizontal labels to be integer values
-        ((NumberAxis)barChart.getXAxis()).setTickLabelFormatter(new IntegerStringConverter());
+        NumberAxis numberAxis = (NumberAxis) barChart.getXAxis();
+        numberAxis.setTickLabelFormatter(new IntegerStringConverter());
+
+        numberAxis.setOpacity(1);
+        numberAxis.setTickMarkVisible(false);
 
         barChart.setId(BAR_CHART_ID);
-        barChart.getXAxis().setOpacity(1);
         barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
     }
 
