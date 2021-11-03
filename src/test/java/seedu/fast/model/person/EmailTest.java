@@ -21,6 +21,11 @@ public class EmailTest {
 
     @Test
     public void isValidEmail() {
+        String EMAIL_TOO_LONG = "this@thisemailislongerthan100characters"
+                + "hahahhahahahahahhahahahahahahahhahahahahhahahahahahahahahhahaha";
+        // too long
+        assertFalse(Email.isValidEmail(EMAIL_TOO_LONG));
+
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
 
