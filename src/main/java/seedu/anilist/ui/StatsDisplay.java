@@ -180,6 +180,14 @@ public class StatsDisplay extends UiPart<Stage> {
     private void setGenreStats(HashMap<Genre, Integer> genreStats, int uniqueGenresCount) {
         barChart.getData().clear();
         barChart.layout();
+
+        if (genreStats.isEmpty()) {
+            barChart.setId(BAR_CHART_EMPTY_ID);
+            barChart.getXAxis().setOpacity(0);
+            barChart.setTitle(NO_GENRES_TO_SHOW_MSG);
+            return;
+        }
+
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
 
@@ -192,15 +200,9 @@ public class StatsDisplay extends UiPart<Stage> {
         //set horizontal labels to be integer values
         ((NumberAxis)barChart.getXAxis()).setTickLabelFormatter(new IntegerStringConverter());
 
-        if (genreStats.isEmpty()) {
-            barChart.setId(BAR_CHART_EMPTY_ID);
-            barChart.getXAxis().setOpacity(0);
-            barChart.setTitle(NO_GENRES_TO_SHOW_MSG);
-        } else {
-            barChart.setId(BAR_CHART_ID);
-            barChart.getXAxis().setOpacity(1);
-            barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
-        }
+        barChart.setId(BAR_CHART_ID);
+        barChart.getXAxis().setOpacity(1);
+        barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
     }
 
     /**
