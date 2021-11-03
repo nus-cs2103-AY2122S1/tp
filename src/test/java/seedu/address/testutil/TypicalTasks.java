@@ -1,5 +1,17 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_0;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_0;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_0;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_2;
+import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
+import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +20,14 @@ import seedu.address.model.task.Task;
 
 
 public class TypicalTasks {
+
+    public static final Task TASK1 = new TaskBuilder().withModule(MODULE_NAME_0).withId(VALID_TASK_ID_0)
+            .withName(VALID_TASK_NAME_0).withDeadline(VALID_TASK_DEADLINE_0).build();
+    public static final Task TASK2 = new TaskBuilder().withModule(MODULE_NAME_1).withId(VALID_TASK_ID_1)
+            .withName(VALID_TASK_NAME_1).withDeadline(VALID_TASK_DEADLINE_1).build();
+    public static final Task TASK3 = new TaskBuilder().withModule(MODULE_NAME_0).withId(VALID_TASK_ID_2)
+            .withName(VALID_TASK_NAME_2).withDeadline(VALID_TASK_DEADLINE_2)
+            .withStatus(true).build();
 
     /**
      * Returns a list of tasks assigned to the {@code moduleName} specified
