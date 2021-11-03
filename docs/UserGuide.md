@@ -87,7 +87,7 @@ The result of executing the input command will be displayed the lower-most box.
   e.g. if the command specifies `n/NAME f/FACULTY`, `f/FACULTY n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `v/t v/f` only `v/t` will be taken.
+  e.g. if you specify `v/t v/f` only `v/f` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`, `view`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -188,8 +188,8 @@ Format: `find [PREFIX/KEYWORD]...`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
-* `find v/false f/soc` returns un-vaccinated residents from SoC <br>
+* `find n/alex david v/t` returns vaccinated residents, `Alex Yeoh` and `David Li`
+* `find v/f f/soc` returns un-vaccinated residents from SoC <br>
 
 #### Editing a resident : `edit`
 
@@ -206,7 +206,7 @@ Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STAT
 
 Examples:
 *  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
-*  `edit 1 2 3 v/true fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
+*  `edit 1 2 3 v/t fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
 #### Deleting a resident : `delete`
 
@@ -252,7 +252,7 @@ FIELD | Resident's field
 `p` | Phone
 `f` | Faculty
 `v` | Vaccination
-`ld` | FET date
+`fd` | FET date
 `cd` | Collection date
 
 * `ORDER` can be `a` for ascending or `d` for descending
@@ -288,7 +288,7 @@ As they are comma-separated, a quick copy-paste allows you to send mass emails u
 Format: `export FILE_NAME`
 
 Examples:
-* `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the last filtered residents.
+* `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the residents currently displayed on the application.
 
 
 ### For Events
@@ -382,7 +382,7 @@ Examples:
 
 #### Sorting events : `sort`
 
-Sorts the events according to specified fields in ascending or descending order
+Sorts the events according to specified fields in ascending or descending order.
 
 Format: `sort by/FIELD o/ORDER`
 
@@ -441,6 +441,39 @@ Format: `exit`
 
 ## Prefix summary
 
+### Resident Prefix
+
+PREFIX | Description | Usage
+|-------- | ------ | ------
+`n/` | Name | `add`, `edit`, `find`
+`p/` | Phone number | `add`, `edit`, `find`
+`e/` | Email address | `add`, `edit`, `find`
+`r/` | Room | `add`, `edit`, `find`
+`v/` | Vaccination status | `add`, `edit`, `find`
+`f/` | Faculty | `add`, `edit`, `find`
+`fd/` | Last FET date | `add`, `edit`
+`cd/` | Last collection date | `add`, `edit`
+`k/` | Keyword | `deadline`
+`d1/` | Date 1 | `deadline`
+`d2/` | Date 2 | `deadline`
+`r/` | Resident | `trace`
+`d/` | Depth | `trace`
+`t/` | Duration | `trace`
+`by/` | Field | `sort`
+`o/` | Order | `sort`
+
+### Event Prefix
+
+PREFIX | Description | Usage
+|-------- | ------ | ------
+`n/` | Name | `add`, `edit`
+`v/` | Venue | `add`, `edit`
+`c/` | Capacity | `add`, `edit`
+`d/` | Date | `add`, `edit`
+`t/` | Time | `add`, `edit`
+`r/` | Residents | `add`, `include`, `exclude`
+`by/` | Field | `sort`
+`o/` | Order | `sort`
 
 
 ## Command summary
@@ -456,7 +489,7 @@ Command | Format | Examples
 **Edit** | `edit INDEX… [FLAG/UPDATED_PARTICULARS]…` | `edit 1 2 3 v/true fd/20-10-2021` <br>
 **Delete** | `delete INDEX…` | `delete 1 2 3`
 **Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` | `trace r/D201 d/2 t/4`
-**Sort** | `TODO` | `TODO`
+**Sort** | `sort by/FIELD o/ORDER` | `sort by/n o/a`
 **Import** | `import CSV_NAME` | `import safeforhall`
 **Export** | `export FILE_NAME` | `export closeContactsOfA123`
 
@@ -471,7 +504,7 @@ Command | Format | Examples
 **Delete** | `delete INDEX…` | `delete 1 2 3`
 **Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` | `include 1 r/A102, E416`
 **Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` | `exclude 1 r/A102, E416`
-**Sort** | `TODO` | `TODO`
+**Sort** | `sort by/FIELD o/ORDER` | `sort by/c o/d`
 
 ### Commons
 
