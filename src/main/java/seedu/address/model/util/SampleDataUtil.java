@@ -88,6 +88,15 @@ public class SampleDataUtil {
                     getHomeworkSet("Ch7 pg10"),
                     new LessonRates("60.00"),
                     new OutstandingFees("100.00"),
+                    EMPTY_CANCELLED_DATES_SET),
+            new RecurringLesson(
+                    getDate(LocalDate.now().withDayOfMonth(21).minusWeeks(7)),
+                    getDate(LocalDate.now().withDayOfMonth(21).plusWeeks(1)),
+                    new TimeRange("0800-1000"),
+                    new Subject("Chem"),
+                    getHomeworkSet("tb p101"),
+                    new LessonRates("55.00"),
+                    new OutstandingFees("110.00"),
                     EMPTY_CANCELLED_DATES_SET)
         };
     }
@@ -127,7 +136,7 @@ public class SampleDataUtil {
                     EMPTY_PHONE, EMPTY_EMAIL,
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
                     new School("DHS"), new AcadStream("IP"), new AcadLevel("Y3"),
-                    EMPTY_REMARK, getTagSet("forgetful"), EMPTY_LESSON_SET)
+                    EMPTY_REMARK, getTagSet("forgetful"), getLessonSet(getSampleLessons()[5]))
         };
     }
 
