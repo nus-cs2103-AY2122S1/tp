@@ -52,6 +52,20 @@ public class EndAndTransactOrderCommandTest {
     }
 
     @Test
+    public void execute_emptyOrder_success() {
+        EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
+
+        Model modelWithEmptyOrder = new ModelManager(getTypicalInventory(),
+                new UserPrefs(), new TransactionList(), new BookKeeping());
+        modelWithEmptyOrder.setOrder(new Order());
+
+        Model modelWithoutOrder = new ModelManager(getTypicalInventory(),
+                new UserPrefs(), new TransactionList(), new BookKeeping());
+        CommandResult expectedResult = new CommandResult(EndAndTransactOrderCommand.MESSAGE_EMPTY_ORDER);
+        assertCommandSuccess(command, modelWithEmptyOrder, expectedResult, modelWithoutOrder);
+    }
+
+    @Test
     public void execute_normalTransaction_itemRemoved() {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
@@ -62,11 +76,6 @@ public class EndAndTransactOrderCommandTest {
         Model modelTemp = getModelWithOrderedDonut(temporaryFolder.resolve("transaction.json"));
 
         assertCommandSuccess(new EndAndTransactOrderCommand(), modelTemp, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_orderIsEmpty_failure() {
-        // TODO: Behaviour not supported yet. Change and update accordingly
     }
 
     @Test

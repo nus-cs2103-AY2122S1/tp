@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION;
 import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
 import java.nio.file.Path;
@@ -244,7 +245,7 @@ public class ModelManager implements Model {
                 .reduce((a, b) -> a + b).get();
 
         // Display transaction
-        currentDisplay = DISPLAY_TRANSACTION_LIST;
+        currentDisplay = DISPLAY_TRANSACTION;
         displayList.setItems(transactionOptional.get().getOrderItems());
         return totalCost;
     }
@@ -296,6 +297,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void closeOrder() {
+        assert hasUnclosedOrder();
+        optionalOrder = Optional.empty();
+    }
+
+    @Override
     public boolean hasUnclosedOrder() {
         return optionalOrder.isPresent();
     }
@@ -325,32 +332,29 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void transactAndClearOrder() {
+    public void transactAndCloseOrder() {
         transactAndClearOrder(userPrefs.getTransactionFilePath());
     }
 
     /**
      * Helper TransactAndClearOrder with given path (for testing purposes)
-     *
+     * Model must have an unclosed order. The order must have at least 1 item.
      * @param path the path of the file
      */
     public void transactAndClearOrder(Path path) {
         assert hasUnclosedOrder();
+        assert !optionalOrder.get().isEmpty();
 
         TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
-        // Reset to no order status
-        optionalOrder = Optional.empty();
+
         transactions.add(transaction);
-
-        if (transaction.getOrderItems().size() == 0) {
-            return;
-        }
-
         Double totalRevenue = transaction.getOrderItems().stream()
                 .map(i -> i.getCount() * i.getSalesPrice())
                 .reduce(0.0, (subTotal, next) -> subTotal + next);
 
         addRevenueBookKeeping(totalRevenue);
+
+        closeOrder();
 
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }

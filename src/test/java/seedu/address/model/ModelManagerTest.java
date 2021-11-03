@@ -186,7 +186,7 @@ public class ModelManagerTest {
     @Test
     public void transactAndClearOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
-        assertThrows(AssertionError.class, model::transactAndClearOrder);
+        assertThrows(AssertionError.class, model::transactAndCloseOrder);
     }
 
     @Test
