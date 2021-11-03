@@ -97,7 +97,8 @@ Given below are my contributions to the project.
     * Order (Pull requests
       [\#281](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/281),
       [\#284](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/284),
-      [\#296](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/296))
+      [\#296](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/296),
+      [\#304](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/304))
     * GUI Display (Pull requests
       [\#283](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/283),
       [\#284](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/284),
