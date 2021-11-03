@@ -73,7 +73,7 @@ Given below are my contributions to the project.
 * **Tools**:
   * Implemented Pie Chart from Java Fx (Pull request [\#143](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/143))
 
-* _**Bug Fixed**:
+* **Bug Fixed**:
   * Images and phrasing for UI (Pull requests
     [\#217](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/217),
     [\#269](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/269),
