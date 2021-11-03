@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARTICIPANT;
 import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
