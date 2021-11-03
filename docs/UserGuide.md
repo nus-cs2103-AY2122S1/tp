@@ -95,7 +95,7 @@ This section briefly explains the various section of TAB's GUI.
 Section | Representation
 ---------|---------
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
-Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
+Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>). <br> - Note: Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students.
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you pressed <kbd>Enter</kbd>.
 Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display relevant success messages, otherwise, it will show error messages indicating the cause of the error.
 Student List | The area that shows the list of students you have in TAB.
