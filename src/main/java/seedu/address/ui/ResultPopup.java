@@ -5,9 +5,13 @@ import static java.util.Objects.requireNonNull;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,6 +29,9 @@ public class ResultPopup extends UiPart<Region> {
     @FXML
     private Label result;
 
+    @FXML
+    private VBox popupContainer;
+
     /**
      * Creates a result popup.
      * @param primaryStage stage to show popup on
@@ -40,7 +47,10 @@ public class ResultPopup extends UiPart<Region> {
      * Displays popup on primary stage for POPUP_DISPLAY_DURATION_SECONDS.
      */
     public void show() {
-        popup.show(primaryStage);
+        double width = primaryStage.getScene().getWindow().getX() + primaryStage.getScene().getWindow().getWidth() * 0.25;
+        double height = primaryStage.getScene().getWindow().getY() + primaryStage.getScene().getWindow().getHeight() * 0.25;
+        result.setPrefSize(primaryStage.getScene().getWindow().getWidth() * 0.5, primaryStage.getScene().getWindow().getHeight() * 0.25);
+        popup.show(primaryStage, width, height);
         PauseTransition delay = new PauseTransition(Duration.seconds(POPUP_DISPLAY_DURATION_SECONDS));
         delay.setOnFinished(event -> popup.hide());
         delay.play();
