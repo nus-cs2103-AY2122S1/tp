@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javafx.scene.chart.BarChart;
@@ -78,19 +79,19 @@ public class ChartUtil {
         XYChart.Series seriesScore = new XYChart.Series();
         seriesScore.setName(dataLabel);
         for (Map.Entry<String, Number> entry : data.entrySet()) {
-            seriesScore.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+            seriesScore.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
         }
 
         XYChart.Series seriesMean = new XYChart.Series();
         seriesMean.setName("cohort mean");
         for (Map.Entry<String, Number> entry : mean.entrySet()) {
-            seriesMean.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+            seriesMean.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
         }
 
         XYChart.Series seriesMedian = new XYChart.Series();
         seriesMedian.setName("cohort median");
         for (Map.Entry<String, Number> entry : median.entrySet()) {
-            seriesMedian.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
+            seriesMedian.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
         }
 
         lineChart.getData().addAll(seriesScore, seriesMean, seriesMedian);
@@ -98,7 +99,84 @@ public class ChartUtil {
         return lineChart;
     }
 
-    private static double roundUpToNearestMultiple(double val, int multiple) {
+    public static double roundUpToNearestMultiple(double val, int multiple) {
         return Math.round(val / multiple) * multiple;
+    }
+
+    public static String wrap(String string) {
+        String[] words = string.split(" ");
+        int count = 0;
+        ArrayList<String> result = new ArrayList<>();
+        int line = 0;
+
+        while (count < words.length) {
+            // check if exceed line limit
+            if (line == 3) {
+                break;
+            }
+
+            int currLineLength = 0;
+            if (result.size() - 1 == line) {
+                currLineLength = result.get(line).length();
+            }
+            int wordLength = words[count].length();
+
+            // if nothing in current line, and next word can fit
+            if (currLineLength == 0 && wordLength <= 12) {
+                result.add(words[count]);
+                count++;
+                continue;
+            }
+
+            // word can fit into previous line
+            if (wordLength + currLineLength + 1 <= 12) {
+                result.set(line, result.get(line) + " " + words[count]);
+                count++;
+                continue;
+            }
+
+            // word cannot fit into previous line, but word is below size limit
+            if (wordLength <= 12) {
+                line++;
+                result.add(words[count]);
+                count++;
+                continue;
+            }
+
+            // if nothing in curr line, but next word cannot fit
+            if (currLineLength == 0) {
+                result.add(words[count].substring(0, 12));
+                words[count] = words[count].substring(12);
+                line++;
+                continue;
+            }
+
+            // if something in current line, fill up current line first
+            int temp = 12 - 1 - currLineLength;
+            if (temp < 0) {
+                line++;
+                continue;
+            }
+            result.set(line, result.get(line) + " " + words[count].substring(0, temp));
+            words[count] = words[count].substring(temp);
+            line++;
+        }
+
+        int numOfLines = result.size() - 1;
+
+        String wrappedString = result.get(0);
+
+        if (count < words.length) {
+            result.set(2, result.get(2).substring(0, 10) + "...");
+        }
+        if (numOfLines >= 1) {
+            wrappedString += "\n" + result.get(1);
+        }
+        if (numOfLines >= 2) {
+            wrappedString += "\n" + result.get(2);
+        }
+
+        return wrappedString;
+
     }
 }
