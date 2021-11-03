@@ -73,7 +73,7 @@ Here are several useful tips on how to read and intrepret this guide.
 
 ### Reading the User Guide
 
-This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide. 
+This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide.
 This would be useful for you should they be unclear to you.
 
 #### Technical terms
@@ -141,8 +141,8 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 * Items in square brackets are optional.<br>
   e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[r/REMARK]…` can be used as ` ` (i.e. 0 times), `r/sick`, `r/absent r/graduated` etc.
+* Items with `…` after them can be used as many times as the user would like.<br>
+  e.g. `[r/REMARK]…` can be used multiple times like `r/sick` or `r/absent r/graduated`, or can be omitted altogether.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PARENT_CONTACT`, `p/PARENT_CONTACT n/NAME` is also acceptable.
@@ -195,9 +195,9 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
 * You can filter by `GRADE`, `SUBJECT`, or both.
 
     * If you are only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
-  
+
     * If you are only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
-  
+
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
 * `GRADE` can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
@@ -237,7 +237,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
-* A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
+* `REMARK` can have a maximum of 25 characters, single worded without spacings in between them. A student can have any number of remarks, capped at 5. (including 0). (e.g `smart` is valid, while `needs help` is invalid)
 
 Example(s):
 
@@ -362,11 +362,11 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
 * Enrolling a student is only possible if the student:
   1. has the same `grade` as the lesson,
-  
+
   2. is not enrolled to the lesson and,
-  
+
   3. has no other lessons with conflicting timing.
-  
+
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
@@ -374,6 +374,8 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
 * Students can only be enrolled to a **maximum of 10 lessons**.
+
+* Lessons can only have enrolled a **maximum of 15 students**.
 
 Example(s):
 
@@ -503,7 +505,7 @@ Command Format: `clear`
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:** Using this command removes all data from <b>TuitiONE</b>. Only use this command if you want to reset all information on the application and start anew.
-  
+
 </div>
 
 #### Exiting the program : `exit`
@@ -534,7 +536,7 @@ If the changes you made to the data file render its format invalid, <b>TuitiONE<
 
 ## **Command summary**
 
-Action | Format | Examples 
+Action | Format | Examples
 --------|-------|----------
 **Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` | `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 **Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` | `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
@@ -568,3 +570,33 @@ Action | Format | Examples
 * **Q:** Where can I view the list of commands?
 
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
+
+
+* **Q:** Am I able to add or edit `Remarks` to have spacings within them?
+
+  **A:** No. The number of characters each `Remark` can have is capped at 25, and must be single words.
+
+
+* **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
+
+  **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes (e.g `1400` and `1415` are valid inputs, while `1415` is an invalid input).
+
+
+* **Q:** How long can my name be for adding a new `Student`?
+
+  **A:** We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead.
+
+
+* **Q:** Can `Lessons` of the same `Subject` and `Grade` start at the same time?
+
+  **A:** No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict.
+
+
+* **Q:** How many `Lessons` can a `Student` be enrolled in?
+
+  **A:** A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons`.
+
+
+* **Q:** How many `Students` can a `Lesson` contain?
+
+  **A:** A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time.

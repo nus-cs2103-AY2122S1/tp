@@ -13,6 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.ScrollPane?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon_01.png" />
@@ -24,13 +25,16 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-        <VBox alignment="BOTTOM_CENTER" minHeight="600" minWidth="600">
+        <VBox alignment="BOTTOM_CENTER" minHeight="400" minWidth="600">
             <children>
                <Label fx:id="helpHeader" text="Command Summary">
                   <padding>
                      <Insets bottom="5.0" top="5.0" />
                   </padding></Label>
-                <ImageView fx:id="helpCommands" fitHeight="700.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" />
+                <ScrollPane fx:id="helpScrollPane" prefViewportHeight="350" prefViewportWidth="350">
+                    <ImageView fx:id="helpCommands" fitHeight="700.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" />
+                </ScrollPane>
+
                 <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="100.0">
                     <children>
                         <Label fx:id="helpMessage" prefHeight="50.0" text="Label">
