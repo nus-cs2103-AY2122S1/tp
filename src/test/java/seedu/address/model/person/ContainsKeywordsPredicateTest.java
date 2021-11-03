@@ -55,7 +55,7 @@ public class ContainsKeywordsPredicateTest {
 
         // Only one matching keyword
         predicate = new ContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"), PersonField.NAME);
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new ContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"), PersonField.NAME);
@@ -74,14 +74,14 @@ public class ContainsKeywordsPredicateTest {
 
         // Only match one of the given tags
         predicate = new ContainsKeywordsPredicate(Arrays.asList("Friend", "Work"), PersonField.TAG);
-        assertTrue(predicate.test(new PersonBuilder().withTags("Friend").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTags("Friend").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(Collections.emptyList(), PersonField.NAME);
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         predicate = new ContainsKeywordsPredicate(Arrays.asList("Carol"), PersonField.NAME);
