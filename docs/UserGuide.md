@@ -497,7 +497,10 @@ A task can optionally have a Date, or both a Date and a Time.
 * When only Date is specified in the `edit` command, a task will only have its Date changed to the specified Date.
 * When only Time is specified in the `edit` command, a task will only have its Time changed to the specified Time.
 * When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
-   
+
+**:warning: Multiple date and time parameters:**<br>
+If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+e.g. if you specify `dt/12/02/2021 dt/1900`, only `dt/1900` will be taken.
 </div>
 
 #### Date Formats
@@ -508,14 +511,14 @@ Format | Example
 **dd-MM-yyyy** | `02-10-2021`
 **yyyy/MM/dd** | `2021/10/02`
 **yyyy-MM-dd** | `2021-10-02`
-**dd MMM yyyy** | `02 Oct 2021`
+**dd MMM yyyy** | `02 Oct 2021` (First letter of Month must be capitalised)
 
 #### Time Formats
 
 Format | Example
 --------|------------------
 **HHmm** | `1300` (01:00 PM in 24-hour notation)
-**hh:mm a** | `10:00 PM`, `02:00 AM`
+**hh:mm a** | `10:00 PM`, `02:00 AM` (AM and PM must be capitalised)
 
 
 ## <u>Command summary</u>
