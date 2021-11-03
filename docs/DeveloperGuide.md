@@ -316,16 +316,16 @@ as `filteredPersons`. Each `Person` in the list internally stores `totalAttendan
 which will be updated accordingly when the attendance of that `Person` is marked or unmarked.
 
 `ModelManager` implements the following operations:
-* ModelManager#markMembersAttendance(List<Index>) — Marks attendance of members at the specified list of index.
-* ModelManager#unmarkMembersAttendance(List<Index>) — Unmarks attendance of members at the specified list of index
+* `ModelManager#markMembersAttendance(List<Index>)` — Marks attendance of members at the specified list of index.
+* `ModelManager#unmarkMembersAttendance(List<Index>)` — Unmarks attendance of members at the specified list of index
 as absent.
-* ModelManager#markOneMemberAttendance(Person) — Marks attendance of specified member.
-* ModelManager#unmarkMembersAttendance(Person) — Unmarks attendance of specified member.
+* `ModelManager#markOneMemberAttendance(Person)` — Marks attendance of specified member.
+* `ModelManager#unmarkMembersAttendance(Person)` — Unmarks attendance of specified member.
   as absent.
   
 Additionally, `Person` implements the following operations:
-* Person#setPresent() — Sets `todayAttendance` as present and increments `totalAttendance`
-* Person#setNotPresent() — Sets `todayAttendance` as not present and decrements `totalAttendance`
+* `Person#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
+* `Person#setNotPresent()` — Sets `todayAttendance` as not present and decrements `totalAttendance`
 
 Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
 
@@ -351,8 +351,8 @@ The following sequence diagram shows how the mark attendance operation works.
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-The unmark command does the opposite — it calls the ModelManager#unmarkMembersAttendance(List<Index>), which then
-calls the ModelManager#unmarkMembersAttendance(Person) which decrements the `totalAttendance` and `todayAttendance` of the `Person` 
+The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
+calls the `ModelManager#unmarkMembersAttendance(Person)` which decrements the `totalAttendance` and `todayAttendance` of the `Person` 
 to be unmarked via the `Person#setNotPresent()` and `ModelManager` references the newly modified `Person`s.
 
 
