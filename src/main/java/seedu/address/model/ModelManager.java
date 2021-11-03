@@ -390,10 +390,10 @@ public class ModelManager implements Model {
         bookKeeping.addRevenue(revenue);
     }
 
-    @Override
     /**
      * reinitialise bookKeeping.
      */
+    @Override
     public void initialiseBookKeeping() {
         bookKeeping.initialise();
     }
