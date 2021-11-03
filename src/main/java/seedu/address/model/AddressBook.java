@@ -144,8 +144,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param membersFilteredList List of filtered members to be allocated.
      * @return number of members left unallocated, -1 if zero members provided.
      */
-    public int split(FilteredList<Person> membersFilteredList) {
+    public int split(FilteredList<Person> membersFilteredList, int dayNumber) {
         int memberCount = membersFilteredList.size();
+        // facilities have the same capacity everyday so this can be considered the total capacity on the day to split
         int facilityCap = facilities.getTotalCapacity();
         // No members available
         if (memberCount == 0) {
@@ -156,7 +157,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             return memberCount - facilityCap;
         }
 
-        facilities.allocateMembersToFacilities(membersFilteredList);
+        facilities.allocateMembersToFacilitiesOnDay(membersFilteredList, dayNumber);
         return 0;
     }
 

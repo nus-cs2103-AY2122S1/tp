@@ -193,39 +193,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Mark/unmark attendance feature
-
-### Implementation
-
-The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. ModelManager contains the
-`filteredPersons` and attendance will be updated based on members index in this list. Additionally, it implements the
-following operations:
-
-* details to be added later
-
-Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
-
-Step 1. The user launches the application and adds members to the list. The `totalAttendance` and `todayAttendance`
-of the members added will be initialised to `0` and `false` respectively.
-
-Step 2. The user executes `mark 1` command to mark the 1st person as present.
-
-(more details to be added later)
-
-#### Design considerations:
-
-**Aspect: How mark & unmark executes:**
-
-* **Alternative 1 (current choice):** Uses index to mark attendance.
-    * Pros: Easy to implement (e.g there will be no two members with the same index in list, so there will be no
-      ambiguity)
-    * Cons: May require additional step of finding members' index using findm command then marking attendance.
-
-* **Alternative 2:** Uses names of members to mark attendance.
-    * Pros: Requires one less step of finding members.
-    * Cons: There may be two members with same name, so when marking using names, it might result in ambiguity of whose
-      attendance to mark.
-
 ### Alias feature
 
 #### Implementation
@@ -320,24 +287,122 @@ The split mechanism is facilitated by `AddressBookParser`. More details to be ad
     * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are in
       the correct format. Less user-friendly due to need to type out the names of the days. More difficult to sort.
 
+### Mark/unmark attendance feature
+
+#### Implementation
+
+The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
+as `filteredPersons`. Each `Person` in the list internally stores `totalAttendance` and `todayAttendance`
+which will be updated accordingly when the attendance of that `Person` is marked or unmarked.
+
+`ModelManager` implements the following operations:
+* `ModelManager#markMembersAttendance(List<Index>)` — Marks attendance of members at the specified list of index.
+* `ModelManager#unmarkMembersAttendance(List<Index>)` — Unmarks attendance of members at the specified list of index
+as absent.
+* `ModelManager#markOneMemberAttendance(Person)` — Marks attendance of specified member.
+* `ModelManager#unmarkMembersAttendance(Person)` — Unmarks attendance of specified member.
+  as absent.
+  
+Additionally, `Person` implements the following operations:
+* `Person#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
+* `Person#setNotPresent()` — Sets `todayAttendance` as not present and decrements `totalAttendance`
+
+Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
+
+Step 1. The user launches the application for the first time. The user then adds 2 members into an empty SportsPA
+by executing the `addm` command. Each `Person` in the `filteredPersons` list will be initialized with their initial 
+`todayAttendance` and `totalAttendance`. 
+
+![MarkObjectDiagram](images/MarkObjectDiagram_InitialState.png)
+
+
+Step 2. The user executes `mark 1 2` command to mark the members at index 1 and 2 in the filtered list as present. The `mark` command
+calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Person)` to increment `todayAttendance`
+and `totalAttendance` of the `Person` at the 1st and 2nd index in the list by calling `Person#setPresent()` for each `Person`. The newly edited 
+newly edited`Person`s with the updated attendance are now referenced by `ModelManager`.
+
+![MarkObjectDiagramModified](images/MarkObjectDiagramModified_FinalState.png)
+
+The following sequence diagram shows how the mark attendance operation works.
+
+![MarkSequenceDiagram](images/MarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
+calls the `ModelManager#unmarkMembersAttendance(Person)` which decrements the `totalAttendance` and `todayAttendance` of the `Person` 
+to be unmarked via the `Person#setNotPresent()` and `ModelManager` references the newly modified `Person`s.
+
+
+
+#### Design considerations:
+
+**Aspect: How mark & unmark executes:**
+
+* **Alternative 1 (current choice):** Uses index to mark attendance.
+    * Pros: Easy to implement (e.g there will be no two members with the same index in list, so there will be no
+      ambiguity)
+    * Cons: May require additional step of finding members' index using findm command then marking attendance.
+
+* **Alternative 2:** Uses names of members to mark attendance.
+    * Pros: Requires one less step of finding members.
+    * Cons: There may be two members with same name, so when marking using names, it might result in ambiguity of whose
+      attendance to mark.
+
 ### Find member feature
 
 #### Implementation
-The `findm` command filters the member list by the keywords specified.
-We extended the functionality of the `FindCommand` from the standard AB3, the `FindMemberCommand` in SportsPA can now find members with multiple attributes.
-Each attribute has its own predicate class to generate a unique predicate, which is then chained together in the new `PersonMatchesKeywordsPredicate` using the `Predicate#and` method.
-The final predicate is stored in `PersonMatchesKeywordPredicate` and then passed to the `FindMemberCommand` class to filter the member list with.
+The find member mechanism is facilitated by `FindMemberCommandParser`.
+`FindMemberCommandParser` implements the following operations:<br>
 
-* More details and diagrams to be added later
+* `FindMemberCommandParser#generatePredicate` — Generates the final predicate to be used for FindMemberCommand.
+* `FindMemberCommandParser#generateNamePredicate` — Generates the unique name predicate.
+* `FindMemberCommandParser#generatePhonePredicate` — Generates the unique phone predicate.
+* `FindMemberCommandParser#generateTagPredicate` — Generates the unique tag predicate.
+* `FindMemberCommandParser#generateAvailabilityPredicate` — Generates the unique availability predicate.
+* `FindMemberCommandParser#generateTodayAttendancePredicate` — Generates the unique today attendance predicate.
+* `FindMemberCommandParser#generateTotalAttendancePredicate` — Generates the unique total attendance predicate.<br>
 
+The last six operations are facilitated by each attribute's unique `Predicate` class, the predicates generated are then chained together in `FindMemberCommandParser#generatePredicate` using the `Predicate#and` method.<br>
+
+The final `Predicate` to filter the member list with is stored in `PersonMatchesKeywordsPredicate`, which is subsequently passed to the `FindMemberCommand` class to be executed.<br>
+
+Lastly, the filtered member list is displayed through `Model#updateFilteredPersonList(Predicate)`
+
+Given below is an example usage scenario and how the find member mechanism behaves.
+
+Step 1. The user executes the `findm t/exco` command to find all members with the tag `exco`<br>
+Step 2. `LogicManager` calls `AddressBookParser#parseCommand` and creates a new `FindMemberCommandParser`. <br>
+Step 3. `FindMemberCommandParser#parse` is called to parse the argument `t/exco`.<br>
+Step 4. Since `t/exco` is a valid argument,`FindMemberCommandParser#generatePredicate` is called.<br>
+Step 5. The system recognises the `t/` prefix and calls on the `FindMemberCommandParser#generateTagPredicate` to generate a unique tag predicate from `exco`.<br>
+Step 6. The unique tag predicate is returned in the `FindMemberCommandParser#generatePredicate` method and then chained together via the `Predicate#and` method.<br>
+Step 7. A new `PersonMatchesKeywordPredicate` object is created to store the final predicate.<br>
+Step 8. The `PersonMatchesKeywordPredicate` object is passed to `FindMemberCommand`.<br>
+Step 9. `FindMemberCommand` is then executed through `FindCommand#execute`.<br>
+Step 10. `FindMemberCommand` will update the member list using the `Model#updateFilteredPersonList` method.<br>
+Step 11. Lastly, a new `CommandResult` is returned to the `LogicManager`.
+
+The following sequence diagram shows how the find member operation works:
+
+![FindMemberSequenceDiagram](images/FindMemberSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user enters and executes a find member command:
+
+![FindMemberActivityDiagram](images/FindMemberActivityDiagram.png)
 #### Design considerations
-**Aspect: Implementation of `findm`**
+**Aspect: Implementation of the find member command**
 
-* **Alternative 1 (current choice):** User is able to `findm` by multiple attribute keywords
+* **Alternative 1 (current choice):** The find member command can search for members with multiple attributes.
     * Pros: Allows users to find members in a more precise manner e.g. Users can find members who are available on Monday and are EXCO members.
-    * Cons: More complex implementation due to parsing of multiple prefixes and chaining predicates, this alternative is more prone to bugs.
-* ** Alternative 2: User can only `findm` by specifying one attribute
+    * Cons: More complex implementation due to parsing multiple prefixes and chaining predicates, thus this alternative is more prone to bugs.
+* ** Alternative 2: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
+      <<<<<<< HEAD
+    * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
+      =======
     * Cons: Not maximising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
 ### \[Proposed\] Undo/redo feature
 

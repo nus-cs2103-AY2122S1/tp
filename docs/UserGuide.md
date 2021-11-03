@@ -324,6 +324,13 @@ Format: `mark INDEX [MORE_INDICES]...`
 * `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
 * `MORE_INDICES` **must be separated only by whitespaces** 1 2 3 …​
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** 
+After you have marked attendance for today, use the cleara command to clear today's attendance and save
+the total attendance so that you can use the mark command again to take attendance for another day.
+</div>
+
 Examples:
 
 * `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list a present :camera:

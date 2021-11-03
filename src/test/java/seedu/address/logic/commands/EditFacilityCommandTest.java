@@ -118,7 +118,7 @@ public class EditFacilityCommandTest {
         expectedModel.addFacility(editedFacility);
 
         model.addFacility(facility);
-        model.split(new PersonAvailableOnDayPredicate(1));
+        model.split(new PersonAvailableOnDayPredicate(1), 1);
 
         EditFacilityDescriptor descriptor =
                 new EditFacilityDescriptorBuilder(facility).withCapacity("1").build();
