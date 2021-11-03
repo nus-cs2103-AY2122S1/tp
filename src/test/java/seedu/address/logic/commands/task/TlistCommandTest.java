@@ -28,7 +28,7 @@ class TlistCommandTest {
     }
 
     @Test
-    public void execute_tlistIsSuccessfulShown_showsSameList() {
+    public void execute_tlistIsSuccessfullyShown_showsSameList() {
         Index validMemberId = TypicalIndexes.INDEX_FIRST_MEMBER;
         Member targetMember = model.getFilteredMemberList().get(0);
         expectedModel.loadTaskList(targetMember);

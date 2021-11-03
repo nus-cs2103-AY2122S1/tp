@@ -29,8 +29,8 @@ public class TdelCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_INDEX + "3 ";
 
-    public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
+    public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s.";
+    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member.";
     public final Index targetTaskId;
 
     /**

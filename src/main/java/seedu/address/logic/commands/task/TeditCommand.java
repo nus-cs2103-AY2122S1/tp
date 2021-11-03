@@ -31,7 +31,7 @@ public class TeditCommand extends Command {
     public static final String COMMAND_WORD = "tedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the detail of the task identified"
-            + "by the corresponding index number.\n"
+            + " by the corresponding index number.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "TASK_NAME] "
