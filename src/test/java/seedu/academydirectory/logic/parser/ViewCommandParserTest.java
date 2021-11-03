@@ -9,10 +9,11 @@ import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_THIRD_STUDENT
 
 import org.junit.jupiter.api.Test;
 
+import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.ViewCommand;
 
 public class ViewCommandParserTest {
-    private ViewCommandParser viewCommandParser = new ViewCommandParser();
+    private final ViewCommandParser viewCommandParser = new ViewCommandParser();
 
     /**
      * ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
