@@ -274,7 +274,7 @@ It works by filtering for the contacts in the `model` and deleting them one by o
 
 The following activity diagram briefly summarizes what happens when a user executes the `DeleteMultipleCommand` to delete contacts by keywords:
 
-[insert diagram]
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
 
 Given below is an exmaple usage scenario and how the deleting multiple person mechanism behaves at each step.
 

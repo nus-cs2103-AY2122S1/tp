@@ -1,0 +1,20 @@
+@startuml
+scale max 300 height
+
+start
+
+:User executes delete multiple command;
+:AddressBook parses the user input;
+if () then ([input is valid])
+    :Create predicates based on specified keywords;
+    :Filter the model to get persons with the specified keywords;
+    :Delete the persons;
+    :Pass the result to the UI;
+else ([input is invalid])
+    :Throw ParseException;
+    :Pass the ParseException to the UI;
+endif
+:UI displays the results to the User;
+
+stop
+@enduml
