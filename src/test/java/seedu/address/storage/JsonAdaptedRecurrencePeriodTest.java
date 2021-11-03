@@ -29,7 +29,7 @@ public class JsonAdaptedRecurrencePeriodTest {
     }
 
     @Test
-    public void toModelType_validRPT() throws Exception {
+    public void toModelType_validRecPeriod() throws Exception {
         JsonAdaptedRecurrencePeriod toTest = new JsonAdaptedRecurrencePeriod(DEFAULT_TEST_MORNING);
         assertEquals(DEFAULT_TEST_MORNING, toTest.toModelType());
 

@@ -280,7 +280,8 @@ public class Shift {
      * @param order The slot the shift is at in int, only accepts 1 or 0 now.
      * @throws InvalidShiftTimeException
      */
-    public static void checkTimeOrder(LocalTime startTime, LocalTime endTime, int order) throws InvalidShiftTimeException {
+    public static void checkTimeOrder(LocalTime startTime, LocalTime endTime, int order)
+            throws InvalidShiftTimeException {
         if (startTime.isAfter(endTime)) {
             throw new InvalidShiftTimeException();
         }
