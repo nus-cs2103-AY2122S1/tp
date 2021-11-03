@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,10 +37,13 @@ public class AddCommandParser implements Parser<Command> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parse(String args) throws ParseException {
+        if (args.equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(args.substring(1, 2))) {
             ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_TASK_DESCRIPTION, PREFIX_DESCRIPTION);
+                        PREFIX_TAG, PREFIX_TASK_DESCRIPTION, PREFIX_DESCRIPTION, PREFIX_IMPORTANCE);
 
             if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -52,8 +56,11 @@ public class AddCommandParser implements Parser<Command> {
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             List<Task> taskList = ParserUtil.parseTasks(argMultimap.getAllValues(PREFIX_TASK_DESCRIPTION));
-            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).orElse(""));
-            Person person = new Person(name, phone, email, address, tagList, taskList, description);
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
+                    .orElse(""));
+            Boolean isImportant = ParserUtil.parseImportance(argMultimap.getValue(PREFIX_IMPORTANCE)
+                    .orElse("false"));
+            Person person = new Person(name, phone, email, address, tagList, taskList, description, isImportant);
 
             return new AddCommand(person);
         } else {

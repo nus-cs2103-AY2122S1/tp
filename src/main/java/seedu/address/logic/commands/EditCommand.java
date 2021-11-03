@@ -7,8 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -28,15 +34,20 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskTime;
+import seedu.address.model.task.Venue;
 
 /**
  * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String DESCRIPTION = "Edits the details of the person identified.";
+    public static final String DESCRIPTION = "Edits the details of the person/task identified.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION
             + " by the index number used in the displayed person list. "
@@ -47,19 +58,48 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]"
-            + "[" + PREFIX_DESCRIPTION + "Description...\n"
+            + "[" + PREFIX_DESCRIPTION + "Description]"
+            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX "
+            + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
+            + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
+            + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
+            + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_TASK_INDEX + " 2 "
+            + PREFIX_TASK_DESCRIPTION + " Assignment Discussion";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_CANNOT_EDIT_TASK = "Editing Task is not supported through edit person. "
-            + "Please use addtask and deletetask instead";
+
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s ";
+    public static final String MESSAGE_TASK_NOT_EDITED = "At least one field of task to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_TASK = "Task already exists.";
+    public static final String MESSAGE_INVALID_TASK = "The size of %1$s's task list is not that big";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+
+    private final Index targetTaskIndex;
+    private final EditTaskCommand.EditTaskDescriptor editTaskDescriptor;
+
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     * @param targetTaskIndex of the person in the filtered person list
+     * @param editTaskDescriptor details to edit the task with
+     */
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor,
+                       Index targetTaskIndex, EditTaskCommand.EditTaskDescriptor editTaskDescriptor) {
+        requireNonNull(index);
+
+        this.index = index;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.targetTaskIndex = targetTaskIndex;
+        this.editTaskDescriptor = editTaskDescriptor;
+    }
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -71,24 +111,46 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.targetTaskIndex = null;
+        this.editTaskDescriptor = null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        if (targetTaskIndex != null) {
+            List<Task> tasks = new ArrayList<>();
+            tasks.addAll(personToEdit.getTasks());
+
+            if (targetTaskIndex.getZeroBased() >= tasks.size()) {
+                throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
+            }
+
+            Task taskToEdit = tasks.get(targetTaskIndex.getZeroBased());
+            Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+
+            if (taskToEdit.equals(editedTask)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+
+            tasks.set(targetTaskIndex.getZeroBased(), editedTask);
+            editedPerson = new Person(
+                    editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
+                    editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
+                    editedPerson.isImportant()
+            );
+        }
+        // If the edited details result in a duplicate person, throw an exception.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
@@ -108,9 +170,23 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
         List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
+        Boolean updatedisImportant = editPersonDescriptor.getImportance().orElse(personToEdit.isImportant());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
-                updatedDescription);
+                updatedDescription, updatedisImportant);
+    }
+
+    private static Task createEditedTask(Task taskToEdit, EditTaskCommand.EditTaskDescriptor editTaskDescriptor) {
+        assert(taskToEdit != null);
+
+        TaskName updatedName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
+        TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElse(taskToEdit.getDate());
+        TaskTime updatedTime = editTaskDescriptor.getTaskTime().orElse(taskToEdit.getTime());
+        Venue updatedVenue = editTaskDescriptor.getTaskVenue().orElse(taskToEdit.getVenue());
+
+        Task updatedTask = new Task(updatedName, updatedDate, updatedTime, updatedVenue);
+
+        return updatedTask;
     }
 
     @Override
@@ -151,6 +227,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Description description;
         private List<Task> tasks;
+        private Boolean isImportant;
 
         public EditPersonDescriptor() {}
 
@@ -166,13 +243,14 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setDescription(toCopy.description);
             setTasks(toCopy.tasks);
+            setImportance(toCopy.isImportant);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description, isImportant);
         }
 
         public void setName(Name name) {
@@ -221,7 +299,14 @@ public class EditCommand extends Command {
 
         public Optional<List<Task>> getTasks() {
             return Optional.ofNullable(tasks);
+        }
 
+        public void setImportance(Boolean isImportant) {
+            this.isImportant = isImportant;
+        }
+
+        public Optional<Boolean> getImportance() {
+            return Optional.ofNullable(isImportant);
         }
 
         /**

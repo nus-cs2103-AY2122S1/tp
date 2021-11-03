@@ -33,6 +33,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private List<Task> tasks;
     private Description description;
+    private boolean isImportant;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +46,7 @@ public class PersonBuilder {
         description = new Description(DEFAULT_DESCRIPTION);
         tags = new HashSet<>();
         tasks = new ArrayList<>();
+        isImportant = false;
     }
 
     /**
@@ -58,6 +60,7 @@ public class PersonBuilder {
         description = personToCopy.getDescription();
         tags = new HashSet<>(personToCopy.getTags());
         tasks = personToCopy.getTasks();
+        isImportant = personToCopy.isImportant();
     }
 
     /**
@@ -116,8 +119,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withImportance(boolean importance) {
+        this.isImportant = importance;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, tasks, description);
+        return new Person(name, phone, email, address, tags, tasks, description, isImportant);
     }
 
 }

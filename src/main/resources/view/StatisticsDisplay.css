@@ -1,0 +1,35 @@
+.chart-pie-label-line {
+    -fx-stroke: lime;
+    -fx-fill: lime;
+}
+
+.chart-pie-label {
+    -fx-fill: Cornsilk;
+    -fx-font-size: 14;
+}
+
+.chart-legend {
+    -fx-max-width: 160;
+    -fx-wrap-text: true;
+}
+
+.chart-legend-item {
+    -fx-wrap-text: true;
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: #00FF00
+}
+.default-color1.chart-pie {
+    -fx-pie-color: lightblue;
+}
+.default-color2.chart-pie {
+    -fx-pie-color: red;
+}
+.default-color3.chart-pie {
+    -fx-pie-color: orange;
+}
+
+#pieChart {
+    -fx-legend-side: left;
+}

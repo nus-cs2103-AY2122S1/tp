@@ -54,8 +54,7 @@ public class Index implements Comparable<Index> {
 
     @Override
     public int hashCode() {
-        Integer i = zeroBasedIndex;
-        return i.hashCode();
+        return ((Integer) zeroBasedIndex).hashCode();
     }
 
     /**

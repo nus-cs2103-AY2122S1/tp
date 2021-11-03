@@ -26,9 +26,9 @@ public class DeleteTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task, specified by the TASKINDEX, from person"
             + "identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_TASK_INDEX + "TaskIndex\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + "2";
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_TASK_INDEX + " TaskIndex\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
     public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, "
             + "from person specified by the INDEX";
@@ -84,12 +84,15 @@ public class DeleteTaskCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
-
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
+        CommandResult commandResult = new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     public String getCommand() {

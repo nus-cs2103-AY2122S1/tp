@@ -35,7 +35,7 @@ public class AddTaskCommand extends Command {
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
             + "[" + PREFIX_TASK_VENUE + " TASK_VENUE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_DESCRIPTION + "Likes to swim.";
+            + PREFIX_TASK_DESCRIPTION + " Likes to swim.";
 
     public static final String DESCRIPTION = "Add to the task list of the person specified by INDEX";
 
@@ -68,12 +68,16 @@ public class AddTaskCommand extends Command {
         tasks.addAll(newTasks);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        CommandResult commandResult = new CommandResult(generateSuccessMessage(editedPerson));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     @Override
