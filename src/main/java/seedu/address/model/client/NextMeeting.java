@@ -92,6 +92,9 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty()) || isValidTime(test);
     }
 
+    /**
+     * Returns a boolean of the given {@code test} is a valid NextMeeting string
+     */
     public static boolean isValidNextMeeting(String test) {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
             || (test.matches(VALID_MEETING_STRING) && isWithinLongLimit(test));
