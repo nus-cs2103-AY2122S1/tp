@@ -457,10 +457,13 @@ public class ParserUtil {
             dateArray[1] = ParserUtil.parseLocalDate(dates.get(1));
         } else if (dates.size() == 1) {
             dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
-            dateArray[1] = dateArray[0].plusDays(7);
+            dateArray[1] = dateArray[0].plusDays(6);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     String.format(WRONG_NUMBER_OF_DATES, dates.size())));
+        }
+        if (dateArray[0].isAfter(dateArray[1])) {
+            throw new ParseException(Messages.DATES_IN_WRONG_ORDER);
         }
         return dateArray;
     }
