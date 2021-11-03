@@ -619,20 +619,20 @@ Path | A string of characters to uniquely identify the location in the computer.
 Action | Format | Examples
 --------|--------|----------
 **Add Student** | `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag>]...` | `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A -t beginner`
-**Add Group** | `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...` | `addgroup -g FG1`, `addgroup -g FG1 -n John Doe -i E0123456`
-**Add Allocation** | `addalloc -g <group_name> (-n <student_name> | -i <student_id>)` | `addalloc -g T01A -n John Doe`, `addalloc -g T02A -i E0123456`
-**Add Assessment** | `addassessment -a <assessment_name>` | `addassessment -a P01`
-**Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | `addscore -a P01 -n John Doe -s 12`, `addscore -a P02 -i E0123456 -s 12.5`
+**Add Group** | `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...` | `addgroup -g FG1`, `addgroup -g FG1 -n Hong Fai -i E0123456`
+**Add Allocation** | `addalloc -g <group_name> (-n <student_name> | -i <student_id>)` | `addalloc -g T01A -n Hong Yao`, `addalloc -g T02A -i E0123456`
+**Add Assessment** | `addassessment -a <assessment_name>` | `addassessment -a Midterm Examination`
+**Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | `addscore -a Midterm -n Van Nhi -s 75`, `addscore -a Finals -i E0123456 -s 87.65`
 **List** | `list` |
-**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | `search -n John Doe`, `search -g T02B R04D`
-**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f <export_file_path>]` | `show -n Alex Yeoh`, `show -a P01`
-**Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | `edit 1 -n John Doe -i E1234567 -g T01 -g R01`
+**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | `search -n Zhiying`, `search -g T02B R04D`
+**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f <export_file_path>]` | `show -n Jonas Chow`, `show -a Midterm Examination`
+**Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | `edit 1 -n Hong Fai -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | `import -f student_data.csv -g 2 -a 10 -t 1`
 **Export Data** | `export [-f <file_path>]` | `export -f save_data.csv`
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
 **Help** | `help` |
-**Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c add student -as as`
+**Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c add student -as addstu`
 
 [Return to Table of Contents](#table-of-contents)
