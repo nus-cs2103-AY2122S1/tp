@@ -292,7 +292,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 * Only the name is searched.
 * Only alphanumeric characters can be entered.
 * Only full words will be matched e.g. Han will not match Hans
-* Profiles matching at least one keyword will be returned (i.e. OR search).
+* Profiles matching at least one of the specified keywords will be returned.
 
 Examples:
 * `find John` returns `John` and `John Doe`
