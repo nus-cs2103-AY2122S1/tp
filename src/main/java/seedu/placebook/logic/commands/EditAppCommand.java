@@ -43,7 +43,7 @@ public class EditAppCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_CLASHING_TIMINGS = "This appointment clashes with another appointment!";
-    public static final String MESSAGE_END_BEFORE_START = "End time cannot be earlier than Start time!";
+    public static final String MESSAGE_END_BEFORE_START = "End time must be after Start time!";
 
     private final Index index;
     private final EditAppCommand.EditAppDescriptor editAppDescriptor;
@@ -72,22 +72,26 @@ public class EditAppCommand extends Command {
         Appointment appointmentToEdit = lastShownList.get(index.getZeroBased());
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppDescriptor);
 
-        // If End is later than the Start
-        if (editedAppointment.getEnd().compareTo(editedAppointment.getStart()) < 0) {
-            throw new EndTimeBeforeStartTimeException(MESSAGE_END_BEFORE_START
-                    + '\n' + editedAppointment.getEndDateTimeString()
-                    + "\nis before\n" + editedAppointment.getStartDateTimeString());
+        try {
+            TimePeriod testTimePeriod = new TimePeriod(editedAppointment.getStart(), editedAppointment.getEnd());
+        } catch (EndTimeBeforeStartTimeException e) {
+            throw new CommandException(MESSAGE_END_BEFORE_START);
         }
 
-        // If clashing appointment list is not empty
-        if (!model.getClashingAppointments(editedAppointment).isEmpty()) {
+        List<Appointment> clashingAppointmentsList = model.getClashingAppointments(editedAppointment);
+        clashingAppointmentsList.remove(appointmentToEdit);
 
-            // If the only clashing appointment is itself, skip. the timing may get edited anyway
-            if (model.getClashingAppointments(editedAppointment).size() != 1) {
-                String clashingAppointments = model.getClashingAppointmentsAsString(editedAppointment);
-                throw new CommandException(MESSAGE_CLASHING_TIMINGS
-                        + '\n' + clashingAppointments);
+        // If clashing appointment list is not empty
+        if (!clashingAppointmentsList.isEmpty()) {
+
+            StringBuilder clashingAppointmentsString = new StringBuilder();
+            for (Appointment app : clashingAppointmentsList) {
+                clashingAppointmentsString.append(app + "\n");
             }
+
+            throw new CommandException(MESSAGE_CLASHING_TIMINGS
+                    + '\n' + clashingAppointmentsString);
+
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);
