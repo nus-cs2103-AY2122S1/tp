@@ -6,12 +6,17 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoUnit;
 
 public class LastDate implements Comparable<LastDate> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy, dd.mm.yyyy"
-            + "or dd/mm/yyyy format";
+    public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be a valid date in the format of:\n1. "
+            + "dd-mm-yyyy\n2. dd.mm.yyyy\n3. dd/mm/yyyy\n"
+            + "Some common errors include having an invalid day (35-01-2021),"
+            + " an invalid month (31-13-2021), an invalid date (29-02-2021) or an invalid formatting (01012021)";
+    public static final String MESSAGE_IS_FUTURE_DATE = "Date inputted is a future date, it should be today or "
+            + "a date before the current date";
     public static final String DEFAULT_DATE = "None";
     public static final String FET_DESC = "Last FET: ";
     public static final String COLLECTION_DESC = "Last Collection: ";
@@ -20,7 +25,8 @@ public class LastDate implements Comparable<LastDate> {
 
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter
-            .ofPattern("[dd-MM-yyyy][dd.MM.yyyy][dd/MM/yyyy]");
+            .ofPattern("[dd-MM-uuuu][dd.MM.uuuu][dd/MM/uuuu]")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     private static final int LASTDATE_DEADLINE = 1;
 
@@ -57,6 +63,17 @@ public class LastDate implements Comparable<LastDate> {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns true if a given string is a future date.
+     */
+    public static boolean isFutureDate(String date) {
+        if (date.equals(DEFAULT_DATE)) {
+            return false;
+        }
+        long period = ChronoUnit.DAYS.between(LocalDate.parse(date, dateFormatter), LocalDate.now());
+        return period < 0;
     }
 
     /**
