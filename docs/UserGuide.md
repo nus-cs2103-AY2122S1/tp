@@ -26,13 +26,20 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 
 Whether you're using Windows or macOS, the steps for installation are the same.
 
-[//]: # (TODO: Consider adding video here)
-
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
-2. Download the latest `dash.jar` from here (not available yet).
+2. Download the latest `dash.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: We suggest creating a folder called "Dash" and putting the `dash.jar` file inside it. You can place this 
+folder wherever you want. Next, we recommend that you create a shortcut for Dash by right-clicking on the `dash.jar` 
+file. On Windows, click on the `Create Shortcut` option while on macOS, click on `Make Alias`. You can then put this 
+shortcut in a convenient place (such as your Desktop) for easy access.
+
+</div>
 
 4. Double-click the file to start the app. Here's what you should see in a few seconds:<br>
    ![Ui](images/UG-00.png)
@@ -47,23 +54,15 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 * If you want to dive straight into features, you can check out our [Features](#features) section.
 * For a quick recap of the commands, you can take a look at our [Command Summary](#command-summary) section.
 
-
-* :information_source: indicates extra information about the specific section.
-* :warning: indicates important information or errors to look out for.
-
-
 <div markdown="block" class="alert alert-info">
    
-**:information_source: Meaning of icons:**<br>
+**Here is the meaning of some icons used in the guide:**<br>
 
-:orange_book: _Description_: This is a brief description of what the command does.
+:information_source: Extra information about the specific section.
 
-:page_with_curl: _Format_: ```This is how you're supposed to type the command into the command line``` (Refer to the section below on notes
-about the command format.)
+:warning: Important information to help you avoid errors.
 
-:grey_question: _Explanation_: This is an explanation on how the command can be used, and any noteworthy examples or caveats.
-
-:bulb: Tip: This is additional info to help you get the most out of Dash.
+:bulb: Tips to help you get the most out of Dash.
    
 </div>
 
@@ -129,7 +128,7 @@ you a lot of time!
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used more than once.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -140,162 +139,190 @@ you a lot of time!
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `contacts`, `tasks` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Here is the meaning of some icons used in this section:
+
+:orange_book: _Description_: This is a brief description of what the command does.
+
+:page_with_curl: _Format_: `This is how you're supposed to type the command into the command line` (Refer to the section below on notes
+about the command format.)
+
+:scroll: Notes: These are some notes on how the command can be used, along with any noteworthy examples or caveats.
 
 </div>
 
 ### <u>General</u>
 
-#### Switch Tabs: [contacts] or [tasks] or [help]
+#### Switch Tabs: `contacts` or `tasks` or `help`
 
 :orange_book: If you want to switch to a certain tab, you can do that by typing out the tab name.
 
-:page_with_curl: Format: ```contacts or tasks or help```
+:page_with_curl: Format: `contacts` or `tasks` or `help`
 
 Alternatively, you can switch tabs using shortcuts to save time:
 
-:page_with_curl: Format: ```c or t or h```
+:page_with_curl: Format: `c` or `t` or `h`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Exiting the program: [exit]
+#### Exiting the program: `exit`
 
-:orange_book: The _Exit Command_ closes the window and exits the program.
+:orange_book: If you want to close the window and exit the program, you can use the _Exit_ command.
 
-:page_with_curl: Format: ```exit```
-
---------------------------------------------------------------------------------------------------------------------
-
-### <u>Contacts (When on contacts tab)</u>
-
-![Adding a Contact](images/UG-02.png)
-#### Adding contact details of a person: [add]
-
-:orange_book: If you want to add a contact to the contacts list, the _Add Contact_ command adds a contact to the address book. Only 
-name is compulsory during creation. 
-
-The above screenshot shows how you can use the _Add Command_ to add a contact of a
-person named _"Mitski Miyawaki"_, with a phone number of _"9128841"_, an email of _"mitski@example.com"_, an address of _"1 
-Hougang Street 91, #01-41"_ and tagged with _"friend"_.
-
-:page_with_curl: Format: ```add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
+:page_with_curl: Format: `exit`
 
 <div markdown="block" class="alert alert-info">
 
-**:warning: Name Limitations:**<br>
-Names are only limited to 20 characters!
+:bulb: You can exit the app at any time by using the exit command or by closing the window. Your progress will always
+be saved.
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
+### <u>Contacts</u>
+
+<div markdown="block" class="alert alert-info">
+
+**:warning: Command behaviour:**
+Make sure you switch to the Contacts tab before using these commands! They will not work otherwise.
+
+</div>
+
+#### Adding a person to the contact list: `add`
+
+![Adding a Contact](images/UG-02.png)
+
+:orange_book: If you want to add a person to the contact list, you can use the _Add_ command. Only the contact's name 
+is compulsory during creation. 
+
+The above screenshot shows how you can use the _Add_ command to add a person with the following details to your contact 
+list:
+
+* Name: _Mitski Miyawaki_
+* Phone number: _91288841_
+* Email address: _mitski@example.com_
+* Address: _1 Hougang Street 91, #01-41_
+* Tag(s): _friend_
+
+:page_with_curl: Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Name limitations:**<br>
+Names should be no longer than 20 characters.
+
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editing contact details: `edit`
+
 ![Editing a Contact](images/UG-04.png)
-#### Editing contact details: [edit]
 
-:orange_book: If you want to modify certain details about a specific contact, the _Edit Command_ replaces the contact details of the 
-contact at the chosen index with the new details. 
+:orange_book: If you want to modify the details of a specific contact, you can use the _Edit_ command.
 
-The above screenshot is an example of the before and after of
-using an _Edit Command_ to edit the phone number and email parameters of a contact.
+The above screenshot shows how the _Edit_ command can be used to edit the phone number and email of a contact.
 
-:page_with_curl: Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...```
+:page_with_curl: Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...`
 
-:grey_question:
+:scroll: Notes:
 * Edits the contact at the specified `INDEX`.
-  * The `INDEX` refers to the index number shown in the displayed contact list.
-  * The `INDEX` must be a positive integer 1, 2, 3, …​
+  * The `INDEX` refers to the position of the contact in the displayed contact list as indicated by the number next to 
+    their name.
+  * The `INDEX` must be a positive integer (1, 2, 3,...).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
-  * To add tags without removing existing tags, refer to the Tag command in the [next section.](#tagging-a-contact-tag)
-* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
-
---------------------------------------------------------------------------------------------------------------------
-![Tagging a Contact](images/UG-14.png)
-#### Tagging a contact: [tag]
-
-:orange_book: The _Tag Command_ lets you add extra tags to a contact without wiping/replacing the old tags.
-
-:page_with_curl: Format: ```tag INDEX [t/TAG]...```
+  * To add tags without removing existing tags, refer to the Tag command in the [next section](#tagging-a-contact-tag).
 
 <div markdown="block" class="alert alert-info">
 
-**:warning: Tag Limitations:**<br>
-Tag names are only limited to 20 characters!
+:bulb: You can remove all tags from a contact by typing `edit INDEX t/`.
+
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+#### Tagging a contact: `tag`
+
+![Tagging a Contact](images/UG-14.png)
+
+:orange_book: If you want to add new tags to a contact without replacing the old ones, you can use the _Tag_ command.
+
+:page_with_curl: Format: `tag INDEX t/TAG...`
+
+:scroll: Notes:
+* At least one tag must be provided.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Tag limitations:**<br>
+Tags should be no longer than 15 characters.
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Deleting a contact: [delete]
+#### Deleting a contact: `delete`
 
-:orange_book: The _Delete Command_ deletes the contact at the chosen index.
+:orange_book: If you want to delete a contact, you can use the _Delete_ command.
 
-:page_with_curl: Format: ```delete INDEX```
+:page_with_curl: Format: `delete INDEX`
 
-:grey_question:
+:scroll: Notes:
 * Deletes the person at the specified `INDEX`.
-  * The `INDEX` refers to the index number shown in the contact list.
-  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
+  * The `INDEX` refers to the position of the contact in the displayed contact list as indicated by the number next to
+    their name.
+  * The `INDEX` must be a positive integer (1, 2, 3,...).
 
 --------------------------------------------------------------------------------------------------------------------
 
-![Finding a Contact](images/UG-09.png)
-#### Finding contact through searching name: [find]
-
-:orange_book: The _Find Command_ finds all contacts whose name matches the search term. 
-
-The above screenshot is an example of how the 
-app would look like given a sample *Find Command*.
-
-:page_with_curl: Format: ```find NAME```
-
-:grey_question:
-* The search is case-insensitive. e.g. `find hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `find Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
-* Contacts matching all keywords will be returned (i.e. AND search). e.g.
-  `find Hans Bo` will return only `Hans Bo` and `Hans Bo the Second`. It will not return `Hans Gruber` or `Bo Yang`.
-
---------------------------------------------------------------------------------------------------------------------
+#### Finding all contacts matching given details: `find`
 
 ![Finding a Contact](images/UG-06.png)
-#### Finding contact through searching a specific field: [find]
 
-:orange_book: Expanding on the _Find Command_, you can also find all contacts whose parameter (number, email, etc) matches the search 
-term. 
+:orange_book: If you want to filter your contacts by tags, names, or any other details, you can use the _Find_ command.
 
-The above screenshot shows an example of how you can use the _Find Command_ to find for a specific parameter only,
-in this case, all contacts which are tagged as "friends".
+The above screenshot shows how the _Find_ command can be used to search for all contacts who are tagged as "friends".
 
-:page_with_curl: Format: ```find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
+:page_with_curl: Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-:grey_question:
+:scroll: Notes:
 * The search is case-insensitive. e.g. `find e/hans@gmail.com` will match `Hans@gmail.com`.
 * The order of the keywords does not matter. e.g. `find a/tampines 123` will match Blk 123 Tampines.
-* Contacts matching all keywords will be returned (i.e. AND search). e.g. ```find p/86235343 t/CS2101``` will return
-  only contacts who both have the given phone number AND the tag `CS2101`.
-  It will not return contacts with different phone numbers, even if they both contain the tag `CS2101`.
+* Contacts matching all keywords will be returned (i.e. AND search). 
+  * e.g. `find n/Hans Bo` will return only `Hans Bo` and `Hans Bo the Second`. It will not return `Hans Gruber` or
+    `Bo Yang`.
+  * e.g. `find p/86235343 t/CS2101` will return only contacts who both have the given phone number AND the tag `CS2101`.
+    It will not return contacts with different phone numbers, even if they both contain the tag `CS2101`.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: For added convenience, you can find contacts by their names by typing just `find NAME` without the prefix `n/`.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Listing all contacts: [list]
+#### Listing all contacts: `list`
 
-:orange_book: The _List Command_ clears the search results of a find command, and shows all contacts.
+:orange_book: After you've filtered your contacts using [the _Find_ command](#Finding all contacts matching given details), 
+if you want to view all of them again, you can use the _List_ command.
 
-:page_with_curl: Format: ```list```
+:page_with_curl: Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Clearing all contacts: [clear]
+#### Clearing all contacts: `clear`
 
-:orange_book: The _Clear Command_ deletes all contacts.
+:orange_book: If you want to delete all of your contacts, you can use the _Clear_ command.
 
-:page_with_curl: Format: ```clear```
+:page_with_curl: Format: `clear`
 
 <div markdown="block" class="alert alert-info">
 
 **:warning: Clearing all contacts:**<br>
-This command is irreversible and all contacts from the list will be deleted with no way of recovering them.
+This command is **irreversible** and your contact list will be **permanently** deleted.  
 
 </div>
 
@@ -312,9 +339,9 @@ compulsory during creation.
 The above screenshot shows an example of how you could use the _Add Command_ to add a task
 titled _"Submit PR"_ that is due on _"1 Nov 2021, 5:00 PM"_, tagged with _"Groupwork"_ and assigned to _"Alex Yeoh"_.
 
-:page_with_curl: Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
+:page_with_curl: Format: `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
 
-:grey_question:
+:scroll: Notes:
 * An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
   on the side panel to the right.
@@ -330,9 +357,9 @@ details of the task at the given `INDEX` with the new details.
 The above screenshot shows the before and after of using 
 an _Edit Command_ to edit a task's date/time and assignee.
 
-:page_with_curl: Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
+:page_with_curl: Format: `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
 
-:grey_question:
+:scroll: Notes:
 * Edits the specified task fields at the specified `INDEX`
   * The `INDEX` refers to the index number shown in the task list
   * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
@@ -352,7 +379,7 @@ an _Edit Command_ to edit a task's date/time and assignee.
 
 :orange_book: The _Tag Command_ lets you add extra tags to a task without wiping/replacing the old tags.
 
-:page_with_curl: Format: ```tag INDEX [t/TAG]...```
+:page_with_curl: Format: `tag INDEX [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
@@ -368,9 +395,9 @@ Tag names are only limited to 20 characters!
 
 :orange_book: The _Assign Command_ lets you add extra assignees to a task without wiping/replacing the old assignees.
 
-:page_with_curl: Format: ```assign INDEX [p/PERSON INDEX]...```
+:page_with_curl: Format: `assign INDEX p/PERSON INDEX...`
 
-:grey_question:
+:scroll: Notes:
 * Assigning people to a task uses the current `INDEX` of the person on the contacts list, which is shown
   on the side panel to the right.
 
@@ -395,9 +422,9 @@ marking the task at the chosen index as complete.
 As per the above screenshot, completed tasks are greyed out and have
 a green tick next to their description (as opposed to a red tick for incomplete tasks).
 
-:page_with_curl: Format: ```complete INDEX```
+:page_with_curl: Format: `complete INDEX`
 
-:grey_question:
+:scroll: Notes:
 * Completes the task at the specified `INDEX`.
   * The `INDEX` refers to the index number shown in the task list.
   * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
@@ -408,9 +435,9 @@ a green tick next to their description (as opposed to a red tick for incomplete 
 
 :orange_book: Deletes the task at the chosen index.
 
-:page_with_curl: Format: ```delete INDEX```
+:page_with_curl: Format: `delete INDEX`
 
-:grey_question:
+:scroll: Notes:
 * Deletes the task at the specified `INDEX`.
   * The `INDEX` refers to the index number shown in the task list.
   * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
@@ -426,15 +453,15 @@ search term.
 The above screenshot demonstrates how you can use the _Find Command_ to find all tasks in your task list with 
 the word "PR" in its task description.
 
-:page_with_curl: Format: ```find DESCRIPTION```
+:page_with_curl: Format: `find DESCRIPTION`
 
-:grey_question:
+:scroll: Notes:
 * The search is case-insensitive. e.g. `find job` will match `Job`.
 * The order of the keywords does not matter. e.g. `find home work` will match `work home`
 * Only the description field is searched.
 * Task descriptions matching all keywords will be returned (i.e. AND search).
-  e.g. ```Math Quiz``` will return only ```Math Quiz``` and ```Math Quiz 8```.
-  It will not return ```Math Assignment```, ```GEQ Quiz```, or ```This doesn't matter```.
+  e.g. `Math Quiz` will return only `Math Quiz` and `Math Quiz 8`.
+  It will not return `Math Assignment`, `GEQ Quiz`, or `This doesn't matter`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -447,12 +474,12 @@ parameter (date/time, people, etc) matches the search term.
 The above screenshot is an example of how you can use the
 _Find Command_ to find for all tasks that occur on 07:00 PM.
 
-:page_with_curl: Format: ```find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
+:page_with_curl: Format: `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
 
-:grey_question:
+:scroll: Notes:
 * At least one of the fields must be present.
 * The search is case-insensitive. e.g `find t/HOMEWORK` will match the `homework` tag.
-* Tasks matching all keywords will be returned (i.e. AND search). e.g. ```find dt/1900 t/homework``` will return
+* Tasks matching all keywords will be returned (i.e. AND search). e.g. `find dt/1900 t/homework` will return
   only tasks which both have time `1900` AND the tag `homework`.
   It will not return contacts with different times, even if they both contain the tag `homework`.
 
@@ -467,9 +494,9 @@ computer). These tasks will be sorted chronologically, with tasks that are close
 The above screenshot demonstrates how the _Upcoming Command_ will show incomplete tasks with a Date/Time that is after 
 the current Date/Time on your computer. These tasks are sorted chronologically as described above.
 
-:page_with_curl: Format: ```upcoming```
+:page_with_curl: Format: `upcoming`
 
-:grey_question:
+:scroll: Notes:
 * An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -478,7 +505,7 @@ the current Date/Time on your computer. These tasks are sorted chronologically a
 
 :orange_book: Clears the search results of a find/upcoming command, showing all tasks.
 
-:page_with_curl: Format: ```list```
+:page_with_curl: Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -486,7 +513,7 @@ the current Date/Time on your computer. These tasks are sorted chronologically a
 
 :orange_book: Deletes all completed tasks.
 
-:page_with_curl: Format: ```cleardone```
+:page_with_curl: Format: `cleardone`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -494,7 +521,7 @@ the current Date/Time on your computer. These tasks are sorted chronologically a
 
 :orange_book: Deletes all tasks.
 
-:page_with_curl: Format: ```clear```
+:page_with_curl: Format: `clear`
 
 <div markdown="block" class="alert alert-info">
 
