@@ -213,9 +213,13 @@ public interface Model {
      */
     DisplayMode getDisplayMode();
 
+    void initialiseTransactions();
+
     void addCostBookKeeping(Double cost);
 
     void addRevenueBookKeeping(Double revenue);
 
     BookKeeping getBookKeeping();
+
+    void initialiseBookKeeping();
 }

@@ -365,6 +365,11 @@ public class ModelManager implements Model {
         return new TransactionList(new ArrayList<>(transactions));
     }
 
+    @Override
+    public void initialiseTransactions() {
+        transactions = new TransactionList().getTransactionRecordList();
+    }
+
     //=========== BookKeeping ================================================================================
 
     /**
@@ -383,5 +388,13 @@ public class ModelManager implements Model {
      */
     public void addRevenueBookKeeping(Double revenue) {
         bookKeeping.addRevenue(revenue);
+    }
+
+    @Override
+    /**
+     * reinitialise bookKeeping.
+     */
+    public void initialiseBookKeeping() {
+        bookKeeping.initialise();
     }
 }

@@ -64,4 +64,13 @@ public class BookKeeping implements ReadOnlyBookKeeping {
         this.revenue += revenue;
         this.profit += revenue;
     }
+
+    /**
+     * Reinitialise bookKeeping.
+     */
+    public void initialise() {
+        this.revenue = 0.0;
+        this.cost = 0.0;
+        this.profit = 0.0;
+    }
 }
