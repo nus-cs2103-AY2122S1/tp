@@ -223,7 +223,6 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
-        // TODO: I am using leveraging this method for list. Should we consider new method?
         requireNonNull(predicate);
         isPersonList = true;
         isSuperGroupList = false;

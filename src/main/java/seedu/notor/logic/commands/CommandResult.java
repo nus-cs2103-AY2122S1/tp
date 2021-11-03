@@ -28,10 +28,6 @@ public class CommandResult {
 
     private final Notable notable;
 
-    // TODO: ADHFJIOJASFOIJOAFSJHAFJ. Some extremely bad coding practices here cuz Elton's Brain not functioning.
-
-
-
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
