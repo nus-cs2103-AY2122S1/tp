@@ -19,4 +19,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_ID_FORMAT = "The id provided must be integer!";
     public static final String MESSAGE_INVALID_ID_LENGTH_AND_SIGN = "The id provided must be positive"
             + " and at most 6 digits!";
+    public static final String MESSAGE_NAME_SPECIFIED_TWICE = "Name field is specified twice!";
 }

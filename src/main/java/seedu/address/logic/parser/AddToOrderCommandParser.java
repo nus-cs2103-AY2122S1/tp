@@ -1,7 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.commons.core.Messages.MESSAGE_NAME_SPECIFIED_TWICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddToOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,9 +32,9 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
         }
 
         ItemDescriptor toAddDescriptor = new ItemDescriptor();
-        // if both name tag and prefix are present
+        // if both name flag and prefix are present
         if (!argMultimap.getPreamble().isEmpty() && argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException("Name field is specified 2 times." + "\n" + AddToOrderCommand.MESSAGE_USAGE);
+            throw new ParseException(MESSAGE_NAME_SPECIFIED_TWICE + "\n" + AddToOrderCommand.MESSAGE_USAGE);
         }
 
         // Parse preamble
