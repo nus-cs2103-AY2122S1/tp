@@ -7,6 +7,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_NEG;
+import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -69,10 +70,14 @@ public class UpdateEpisodeCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // wrong episode desc
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_NEG, Episode.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_DECIMAL, Episode.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT,
             Episode.MESSAGE_CONSTRAINTS);
+
+        // wrong param specified
+        assertParseFailure(parser, "1" + EPISODE_DESC_EPISODE_ONE + STATUS_DESC_TOWATCH, MESSAGE_INVALID_FORMAT);
     }
 
     @Test

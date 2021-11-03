@@ -1,6 +1,7 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_TWO;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
@@ -133,6 +134,12 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BNHA
                 + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
                 + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // wrong field specified
+        assertParseFailure(parser, NAME_DESC_BNHA
+                        + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
+                        + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION + ACTION_DESC_ADD,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

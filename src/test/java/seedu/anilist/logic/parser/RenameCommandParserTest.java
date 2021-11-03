@@ -5,6 +5,7 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NONASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -38,8 +39,8 @@ public class RenameCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // not a valid number
-        assertParseFailure(parser, "3.141582653" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "3-141582653" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "3.141592654" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "3-141582654" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -64,8 +65,12 @@ public class RenameCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // wrong name parameter
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_NAME_DESC_NONASCII, Name.MESSAGE_CONSTRAINTS);
+
+        // extra wrong parameter specified
+        assertParseFailure(parser, "1" + NAME_DESC_AKIRA + STATUS_DESC_TOWATCH, MESSAGE_INVALID_FORMAT);
     }
 
     @Test

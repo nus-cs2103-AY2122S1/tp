@@ -18,8 +18,6 @@ public class Stats {
     private final int toWatchCount;
     private final int finishedCount;
 
-    private final long episodesCount;
-
     private final int numUniqueGenres;
 
     private final HashMap<Genre, Integer> topGenres;
@@ -27,12 +25,11 @@ public class Stats {
     /**
      * Creates a Stats object containing the user statistics.
      */
-    public Stats(int watchingCount, int toWatchCount, int finishedCount, long episodesCount,
+    public Stats(int watchingCount, int toWatchCount, int finishedCount,
                  HashMap<Genre, Integer> genres) {
         this.watchingCount = watchingCount;
         this.toWatchCount = toWatchCount;
         this.finishedCount = finishedCount;
-        this.episodesCount = episodesCount;
         this.topGenres = extractTopGenres(genres);
         this.numUniqueGenres = genres.size();
     }
@@ -78,10 +75,6 @@ public class Stats {
         return this.finishedCount;
     }
 
-    public long getEpisodesCount() {
-        return this.episodesCount;
-    }
-
     public int getNumUniqueGenres() {
         return this.numUniqueGenres;
     }
@@ -101,7 +94,6 @@ public class Stats {
         return this.watchingCount == otherStats.watchingCount
                 && this.toWatchCount == otherStats.toWatchCount
                 && this.finishedCount == otherStats.finishedCount
-                && this.episodesCount == otherStats.episodesCount
                 && this.numUniqueGenres == otherStats.numUniqueGenres
                 && this.topGenres.equals(otherStats.topGenres);
     }

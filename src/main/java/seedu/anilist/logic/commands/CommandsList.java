@@ -5,7 +5,8 @@ package seedu.anilist.logic.commands;
  */
 public class CommandsList {
     private static final String[] LIST_OF_COMMANDS =
-        {"add", "delete", "help", "list", "update", "status", "rename", "genre", "find", "clear", "genrelist", "exit"};
+        {"add", "delete", "help", "list", "update", "status", "rename",
+            "genre", "find", "clear", "stats", "genrelist", "exit"};
 
     /**
      * Creates a copy of the LIST_OF_COMMANDS array and return it.

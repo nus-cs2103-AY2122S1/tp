@@ -19,7 +19,13 @@ public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> 
      */
     public UpdateEpisodeCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EPISODE);
+        ArgumentMultimap argMultimap;
+
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, true, PREFIX_EPISODE);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateEpisodeCommand.MESSAGE_USAGE));
+        }
 
         Index index;
 

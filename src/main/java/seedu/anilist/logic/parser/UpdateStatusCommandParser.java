@@ -22,9 +22,14 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
      */
     public UpdateStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
+        ArgumentMultimap argMultimap;
 
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, true,
+                    PREFIX_STATUS);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateStatusCommand.MESSAGE_USAGE));
+        }
         Index index;
 
         try {

@@ -2,6 +2,10 @@ package seedu.anilist.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.anilist.logic.parser.ParserUtil.parseAction;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
@@ -167,5 +171,28 @@ public class ParserUtilTest {
         );
 
         assertEquals(expectedGenreSet, actualGenreSet);
+    }
+
+    @Test
+    public void tokenizeWithCheck_invalidArg_throwsParseException() throws Exception {
+        // args contains preamble, preamble not required, no valid prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck("asdf", false));
+
+        // args contains extra prefixes, preamble not required, no valid prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(STATUS_DESC_WATCHING, false));
+
+        // args contains no preamble, preamble required, no valid prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck("", true));
+
+        // args contains extra prefixes, preamble not required, one valid prefix
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA, true, PREFIX_STATUS));
+
+        // args contains extra prefixes, preamble not required, two valid prefix
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA, true,
+                PREFIX_STATUS, PREFIX_ACTION));
+
+        // args contains extra and valid prefixes, preamble not required, one valid prefix
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA + STATUS_DESC_WATCHING,
+                true, PREFIX_STATUS));
     }
 }

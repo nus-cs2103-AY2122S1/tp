@@ -28,13 +28,15 @@ public class ListCommandParserTest {
         assertParseFailure(parser, EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
         // extra random characters
         assertParseFailure(parser, "asdfg", MESSAGE_INVALID_FORMAT);
+        // wrong field and correct field specified
+        assertParseFailure(parser, EPISODE_DESC_EPISODE_ONE + STATUS_DESC_WATCHING, MESSAGE_INVALID_FORMAT);
     }
 
     @Test void parse_invalidValue_failure() {
         // invalid status
         assertParseFailure(parser, INVALID_STATUS_DESC_ALPHA, Status.MESSAGE_CONSTRAINTS);
         // extra fields specified after parameter
-        assertParseFailure(parser, STATUS_DESC_WATCHING + EPISODE_DESC_EPISODE_ONE, Status.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, STATUS_DESC_WATCHING + EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
         // empty status
         assertParseFailure(parser, PREFIX_STATUS + "", MESSAGE_INVALID_FORMAT);
     }
@@ -51,8 +53,6 @@ public class ListCommandParserTest {
         ListCommand expectedCommand = new ListCommand(expectedPredicate);
 
         assertParseSuccess(parser, STATUS_DESC_WATCHING, expectedCommand);
-        //extra fields specified before status
-        assertParseSuccess(parser, EPISODE_DESC_EPISODE_ONE + STATUS_DESC_WATCHING, expectedCommand);
         //multiple status specified, last status taken
         assertParseSuccess(parser, STATUS_DESC_TOWATCH + STATUS_DESC_WATCHING, expectedCommand);
     }

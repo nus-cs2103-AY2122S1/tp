@@ -18,8 +18,12 @@ public class RenameCommandParser implements Parser<RenameCommand> {
      */
     public RenameCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, true, PREFIX_NAME);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameCommand.MESSAGE_USAGE));
+        }
         Index index;
 
         try {

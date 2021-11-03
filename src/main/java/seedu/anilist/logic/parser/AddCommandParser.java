@@ -28,11 +28,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EPISODE, PREFIX_STATUS, PREFIX_GENRE);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, false,
+                    PREFIX_NAME, PREFIX_EPISODE, PREFIX_STATUS, PREFIX_GENRE);
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
