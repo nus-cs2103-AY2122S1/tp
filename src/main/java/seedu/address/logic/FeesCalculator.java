@@ -218,7 +218,7 @@ public class FeesCalculator implements Calculator {
 
     /**
      * Returns the outstanding fees after payment.
-     *F
+     *
      * @param payment Amount paid.
      * @return Updated OutstandingFees.
      */

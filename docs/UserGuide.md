@@ -552,7 +552,7 @@ Examples:
 
 #### Behaviours of the Fees Calculator
 
-TAB will automatically update your lesson's outstanding fees once the lesson has ended using Fees Calculator feature. 
+TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
 However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
@@ -699,9 +699,25 @@ Format: `undo`
 
 #### Redoing undone command: `redo`
 
-Redo the previous command that has been undone.
+Redo the previous command that has been undone. 
+The undone command can only be redone provided that you did not call any commands that will modify data prior to redo.
 
 Format: `redo`
+
+Example:
+1. Valid Redo command
+   1. `edit 1 n/Joe Doe` modifies name of the first student.
+   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   3. `day` displays the calendar for today. This command **does not modify any data**.
+   4. `redo` redoes the edit command.
+  
+
+2. Invalid Redo command
+   1. `edit 1 n/Joe Doe` modifies name of the first student.
+   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
+   4. `redo` shows that there are no commands to be redone.
+   
 
 #### Exiting the program: `exit`
 
