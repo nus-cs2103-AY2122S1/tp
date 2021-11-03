@@ -319,6 +319,28 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CA
 Examples:
 *  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
+#### Searching by event information: `find`
+
+Shows a list of events that match the provided keywords for different available parameters.
+
+Format: `find [PREFIX/KEYWORD]...`
+
+* Allowed flags include; `n/`, `d/`, `v/`, `c/`
+* Searching by name:
+    - It is case-insensitive. e.g `dance` will match `Dance`
+    - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training`
+    - Events matching at least one keyword for the event name will be returned (i.e. `OR` search).
+      e.g `Football Basketball` will return `Football Training`, `Basketball Training`
+* Searching by venue:
+    - It is case-insensitive. e.g `nus field` will match `NUS Field`
+    - Only full event names will be matched. e.g `Field` will not match `NUS Field`
+* The date and capacity fields are subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
+
+Examples:
+* `find n/Football` returns `Football Match` and `Football Training`
+* `find v/NUS field c/5` returns all the events at `NUS field` which have a capacity of `5`
+* `find d/03-01-2021` returns all the events which occur on the date `03-01-2021` <br>
+
 #### Deleting an event : `delete`
 
 Deletes specified events from the address book.
