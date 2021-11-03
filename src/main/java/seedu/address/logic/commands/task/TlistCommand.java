@@ -2,7 +2,7 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERDUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPLETED_TASKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DUE_TASKS;
@@ -30,12 +30,12 @@ public class TlistCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. \n"
             + "Only one of " + PREFIX_DONE + "or " + PREFIX_OVERDUE + "may be present\n"
             + "Parameters: "
-            + PREFIX_MEMBER_ID + "MEMBER_ID "
+            + PREFIX_MEMBER_INDEX + "MEMBER_INDEX "
             + "[" + PREFIX_DONE + " OPTION (must be \"y\" or \"n\")] "
             + "[" + PREFIX_OVERDUE + "] \n"
-            + "Examples: " + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2\n"
-            + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_DONE + "y\n"
-            + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_OVERDUE + "\n";
+            + "Examples: " + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2\n"
+            + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2" + PREFIX_DONE + "y\n"
+            + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2" + PREFIX_OVERDUE + "\n";
 
     public final Index targetMemberId;
 

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,17 +21,15 @@ public class TdoneCommand extends Command {
 
     public static final String COMMAND_WORD = "tdone";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks one or multiple task(s) as done "
-            + "the current selected member "
-            + "by the index numbers used in the displayed task list of the task identified\n"
-            + "Parameters: " + PREFIX_TASK_ID + "TASK_ID... (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks one or multiple task(s), identified by "
+            + "the corresponding index numbers, as done for a currently selected member.\n"
+            + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX... (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "1 "
-            + PREFIX_TASK_ID + "2";
+            + PREFIX_TASK_INDEX + "1 "
+            + PREFIX_TASK_INDEX + "2";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Marked task: %1$s as done\n";
-    public static final String MESSAGE_TASK_HAS_DONE = "The task: %1$s has been done before.";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member\n";
 
     private final Set<Index> indexList;
 
@@ -49,18 +47,17 @@ public class TdoneCommand extends Command {
         List<Task> lastShownTaskList = model.getFilteredTaskList();
         StringBuilder resultMessage = new StringBuilder();
 
-        for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
-                throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+        for (Index index : indexList) {
+            if (index.getZeroBased() >= lastShownTaskList.size()) {
+                throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, index.getOneBased()));
             }
+        }
 
+        for (Index targetIndex : indexList) {
             Task taskToEdit = lastShownTaskList.get(targetIndex.getZeroBased());
-            if (taskToEdit.isDone()) {
-                throw new CommandException(String.format(MESSAGE_TASK_HAS_DONE, taskToEdit));
-            }
 
             Task editedTask = new Task(taskToEdit.getName(), true, taskToEdit.getTaskDeadline());
-            model.setTask(targetIndex.getZeroBased(), editedTask);
+            model.setTask(taskToEdit, editedTask);
             resultMessage.append(String.format(MESSAGE_DONE_TASK_SUCCESS, editedTask));
         }
 

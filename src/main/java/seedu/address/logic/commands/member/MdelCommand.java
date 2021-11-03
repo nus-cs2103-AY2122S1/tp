@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.member;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class MdelCommand extends Command {
     public static final String COMMAND_WORD = "mdel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the member identified by the index number used in the displayed member list.\n"
-            + "Parameters: " + PREFIX_MEMBER_ID + "MEMBER_ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "1\n";
+            + ": Deletes the member identified by the corresponding index number.\n"
+            + "Parameters: " + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "1\n";
 
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Deleted Member: %1$s";
 

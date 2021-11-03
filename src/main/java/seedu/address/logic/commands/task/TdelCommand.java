@@ -2,8 +2,8 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -24,10 +24,10 @@ public class TdelCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from the task list of a person. "
             + "Parameters: "
-            + PREFIX_TASK_ID + "TASK_ID "
-            + PREFIX_MEMBER_ID_DEL + "MEMBER_ID\n"
+            + PREFIX_TASK_INDEX + "TASK_INDEX "
+            + PREFIX_MEMBER_INDEX_DEL + "MEMBER_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "3 ";
+            + PREFIX_TASK_INDEX + "3 ";
 
     public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";

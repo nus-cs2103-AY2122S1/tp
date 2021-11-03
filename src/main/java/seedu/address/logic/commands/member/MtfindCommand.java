@@ -12,12 +12,16 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.member.Member;
 
+/**
+ * Finds and lists all members in Ailurus with any of their tasks' names containing any of the argument keywords.
+ * Keyword matching is case-insensitive.
+ */
 public class MtfindCommand extends Command {
 
     public static final String COMMAND_WORD = "mtfind";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose tasks contains any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and display them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " form";
 

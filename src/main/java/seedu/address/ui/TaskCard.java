@@ -28,7 +28,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label index;
     @FXML
     private Label deadline;
     @FXML
@@ -40,7 +40,7 @@ public class TaskCard extends UiPart<Region> {
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". ");
+        index.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
         deadline.setText("Due: " + task.getTaskDeadline().toString());
         isDone.setText(task.isDone()
@@ -62,7 +62,7 @@ public class TaskCard extends UiPart<Region> {
 
         // state check
         TaskCard card = (TaskCard) other;
-        return id.getText().equals(card.id.getText())
+        return index.getText().equals(card.index.getText())
                 && task.equals(card.task);
     }
 }

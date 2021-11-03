@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -48,10 +48,10 @@ public class CommandTestUtil {
     public static final String VALID_EVENT_NAME_BADMINTON = "Recreational badminton";
     public static final String VALID_EVENT_DATE_CHESS = "10/10/2030";
     public static final String VALID_EVENT_DATE_BADMINTON = "20/09/2020";
-    public static final int VALID_EVENT_ID = 1;
-    public static final int VALID_TASK_ID = 1;
-    public static final int VALID_MEMBER_ID = 1;
-    public static final int VALID_MEMBER_ID_DEL = 1;
+    public static final int VALID_EVENT_INDEX = 1;
+    public static final int VALID_TASK_INDEX = 1;
+    public static final int VALID_MEMBER_INDEX = 1;
+    public static final int VALID_MEMBER_INDEX_DEL = 1;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -65,9 +65,9 @@ public class CommandTestUtil {
     public static final String POSITION_DESC_HUSBAND = " " + PREFIX_POSITION + VALID_POSITION_HUSBAND;
     public static final String TASK_NAME_DESC_POEM = " " + PREFIX_NAME + VALID_POEM_TASK_NAME;
     public static final String TASK_DEADLINE_DESC_POEM = " " + PREFIX_DATE + VALID_POEM_TASK_DEADLINE;
-    public static final String TASK_ID_DESC_ONE = " " + PREFIX_TASK_ID + VALID_TASK_ID;
-    public static final String MEMBER_ID_DESC_ONE = " " + PREFIX_MEMBER_ID + VALID_MEMBER_ID;
-    public static final String MEMBER_ID_DEL_DESC_ONE = " " + PREFIX_MEMBER_ID_DEL + VALID_MEMBER_ID;
+    public static final String TASK_INDEX_DESC_ONE = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
+    public static final String MEMBER_INDEX_DESC_ONE = " " + PREFIX_MEMBER_INDEX + VALID_MEMBER_INDEX;
+    public static final String MEMBER_INDEX_DEL_DESC_ONE = " " + PREFIX_MEMBER_INDEX_DEL + VALID_MEMBER_INDEX;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -76,12 +76,12 @@ public class CommandTestUtil {
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION + "hubby*"; // '*' not allowed in positions
     public static final String INVALID_TASK_NAME_DESC =
             " " + CliSyntax.PREFIX_NAME + ""; // an empty string is not allowed in names
-    public static final String INVALID_TASK_ID_DESC =
-            " " + PREFIX_TASK_ID + "abs"; // 'abs' not allowed in id
-    public static final String INVALID_MEMBER_ID_DESC =
-            " " + PREFIX_MEMBER_ID + "abs"; // 'abs' not allowed in id
-    public static final String INVALID_MEMBER_ID_DEL_DESC =
-            " " + PREFIX_MEMBER_ID_DEL + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_TASK_INDEX_DESC =
+            " " + PREFIX_TASK_INDEX + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_MEMBER_INDEX_DESC =
+            " " + PREFIX_MEMBER_INDEX + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_MEMBER_INDEX_DEL_DESC =
+            " " + PREFIX_MEMBER_INDEX_DEL + "abs"; // 'abs' not allowed in id
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

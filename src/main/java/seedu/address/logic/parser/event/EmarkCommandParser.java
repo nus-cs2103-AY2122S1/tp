@@ -1,8 +1,8 @@
 package seedu.address.logic.parser.event;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 
 import java.util.Set;
 
@@ -25,13 +25,13 @@ public class EmarkCommandParser implements Parser<EmarkCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EmarkCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_ID, PREFIX_MEMBER_ID);
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_ID, PREFIX_MEMBER_ID)
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_INDEX, PREFIX_MEMBER_INDEX);
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_INDEX, PREFIX_MEMBER_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmarkCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
-        Set<Index> memberIndices = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_INDEX).get());
+        Set<Index> memberIndices = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_INDEX));
         return new EmarkCommand(index, memberIndices);
     }
 }

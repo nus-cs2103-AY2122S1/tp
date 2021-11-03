@@ -3,8 +3,8 @@ package seedu.address.logic.parser.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.HashSet;
@@ -34,16 +34,16 @@ public class EeditCommandParser implements Parser<EeditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_EVENT_ID, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID);
+                        args, PREFIX_EVENT_INDEX, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_INDEX);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_ID)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_INDEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EeditCommand.MESSAGE_USAGE));
         }
 
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EeditCommand.MESSAGE_USAGE), pe);
         }
@@ -56,11 +56,11 @@ public class EeditCommandParser implements Parser<EeditCommand> {
             editEventDescriptor.setDate(ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
 
-        if (!argMultimap.getAllValues(PREFIX_MEMBER_ID).isEmpty()) {
+        if (!argMultimap.getAllValues(PREFIX_MEMBER_INDEX).isEmpty()) {
             editEventDescriptor.setMemberSet(new HashSet<Member>());
         }
 
-        Set<Index> indexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
+        Set<Index> indexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_INDEX));
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EeditCommand.MESSAGE_NOT_EDITED);

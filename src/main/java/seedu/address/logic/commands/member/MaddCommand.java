@@ -36,7 +36,7 @@ public class MaddCommand extends Command {
             + PREFIX_POSITION + "Logistics Assistant";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in Ailurus";
 
     private final Member toAdd;
 

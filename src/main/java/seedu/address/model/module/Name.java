@@ -38,6 +38,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * @return A capitalised version of the name.
+     */
+    public String capitaliseFullName() {
+        return fullName.toUpperCase();
+    }
 
     @Override
     public String toString() {
@@ -48,7 +54,7 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+                && capitaliseFullName().equals(((Name) other).capitaliseFullName())); // state check
     }
 
     @Override

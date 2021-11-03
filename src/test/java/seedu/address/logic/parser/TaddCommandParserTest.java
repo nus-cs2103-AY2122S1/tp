@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEMBER_ID_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.MEMBER_ID_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEMBER_INDEX_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_POEM;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_POEM;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMBER_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_DEADLINE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_NAME;
 import static seedu.address.logic.commands.task.TaddCommand.MESSAGE_USAGE;
@@ -31,11 +31,11 @@ class TaddCommandParserTest {
     void parse_allFieldsPresent_success() {
         Task expectedTask = new TaskBuilder().withName(VALID_POEM_TASK_NAME)
                 .withDeadline(VALID_POEM_TASK_DEADLINE).build();
-        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_INDEX);
         Set<Index> expectedMemberIdList = new HashSet<>();
         expectedMemberIdList.add(expectedMemberId);
 
-        assertParseSuccess(parser, TASK_NAME_DESC_POEM + TASK_DEADLINE_DESC_POEM + MEMBER_ID_DESC_ONE,
+        assertParseSuccess(parser, TASK_NAME_DESC_POEM + TASK_DEADLINE_DESC_POEM + MEMBER_INDEX_DESC_ONE,
                 new TaddCommand(expectedMemberIdList, expectedTask));
     }
 
@@ -47,7 +47,7 @@ class TaddCommandParserTest {
         assertParseFailure(parser, TASK_NAME_DESC_POEM, expectedMessage);
 
         //missing task name
-        assertParseFailure(parser, MEMBER_ID_DESC_ONE, expectedMessage);
+        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE, expectedMessage);
     }
 
     @Test
@@ -55,10 +55,10 @@ class TaddCommandParserTest {
         // TODO: fix this test case, I have no idea what is the expected output
         //invalid task name (blank)
 
-        //assertParseFailure(parser, INVALID_TASK_NAME_DESC + MEMBER_ID_DESC_ONE, MESSAGE_USAGE);
+        //assertParseFailure(parser, INVALID_TASK_NAME_DESC + MEMBER_INDEX_DESC_ONE, MESSAGE_USAGE);
 
         //invalid member id
-        assertParseFailure(parser, TASK_NAME_DESC_POEM + TASK_DEADLINE_DESC_POEM + INVALID_MEMBER_ID_DESC,
+        assertParseFailure(parser, TASK_NAME_DESC_POEM + TASK_DEADLINE_DESC_POEM + INVALID_MEMBER_INDEX_DESC,
                 MESSAGE_INVALID_INDEX);
     }
 }

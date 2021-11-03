@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.event;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ public class EmarkAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark all members as present for the event.\n"
             + "Parameters: "
-            + PREFIX_EVENT_ID + "EVENT_ID (must be a positive integer)"
+            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENT_ID + "1 ";
+            + PREFIX_EVENT_INDEX + "1 ";
 
     public static final String MESSAGE_MARK_MEMBER_SUCCESS = "Marked all members in event: %1$s";
 

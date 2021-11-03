@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.stream.Stream;
 
@@ -30,14 +30,14 @@ public class TeditCommandParser implements Parser<TeditCommand> {
     public TeditCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
-                userInput, PREFIX_TASK_ID, PREFIX_NAME, PREFIX_STATUS, PREFIX_DATE);
+                userInput, PREFIX_TASK_INDEX, PREFIX_NAME, PREFIX_STATUS, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_TASK_ID)
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_TASK_INDEX)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TeditCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_TASK_ID).get());
+        Index index = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_TASK_INDEX).get());
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {

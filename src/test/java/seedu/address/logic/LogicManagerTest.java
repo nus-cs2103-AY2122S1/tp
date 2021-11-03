@@ -60,7 +60,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_ID + "9";
+        String deleteCommand = MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_INDEX + "9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 

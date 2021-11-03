@@ -18,8 +18,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -75,6 +77,30 @@ class TaddCommandTest {
 
         assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
                 commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_taskForMultipleMembersWithOneDuplicate_throwsCommandException() {
+        Index validMemberId1 = Index.fromOneBased(1);
+        Index validMemberId2 = Index.fromOneBased(2);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId1);
+        validMemberIdList.add(validMemberId2);
+        Task validTask = new TaskBuilder().build();
+        Member validMember1 = new MemberBuilder().build();
+        Member validMember2 = new MemberBuilder()
+                .withName("Amy").withEmail("amy@fakemail")
+                .withPhone("12312312").withAddress("Block23 St Andrew Street").build();
+        TaskList taskList = new TaskList();
+        taskList.add(validTask);
+        validMember1.setTaskList(taskList);
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember1).build();
+        addressBook.addMember(validMember2);
+        ModelStubAcceptingTaskAdded modelStub =
+                new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberIdList);
+        assertThrows(CommandException.class,
+            String.format(Messages.MESSAGE_DUPLICATE_TASK, validMember1.getName().toString()), () ->
+            new TaddCommand(validMemberIdList, validTask).execute(modelStub));
     }
 
     @Test

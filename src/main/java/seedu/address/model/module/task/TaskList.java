@@ -9,8 +9,20 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.task.exceptions.DuplicateTaskException;
 import seedu.address.model.module.task.exceptions.TaskNotFoundException;
 
+/**
+ * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A task is considered unique by comparing using {@code Task#isSameType(Module)}. As such, adding and updating of
+ * tasks uses Task#isSameType(Task) for equality so as to ensure that the task being added or updated is
+ * unique in terms of identity in the TaskList.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Task#isSameType(Module)
+ */
 public class TaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
@@ -21,7 +33,7 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameType);
     }
 
     public boolean isEmpty() {
@@ -33,6 +45,9 @@ public class TaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
         internalList.add(toAdd);
     }
 
@@ -48,6 +63,10 @@ public class TaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
 
+        if (!target.isSameType(editedTask) && contains(editedTask)) {
+            throw new DuplicateTaskException();
+        }
+
         internalList.set(index, editedTask);
     }
 
@@ -59,6 +78,13 @@ public class TaskList implements Iterable<Task> {
         if (index < 0 || index >= internalList.size()) {
             throw new TaskNotFoundException();
         }
+
+        Task target = internalList.get(index);
+
+        if (!target.isSameType(editedTask) && contains(editedTask)) {
+            throw new DuplicateTaskException();
+        }
+
         internalList.set(index, editedTask);
     }
 
@@ -95,6 +121,9 @@ public class TaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
+        if (!tasksAreUnique(tasks)) {
+            throw new DuplicateTaskException();
+        }
 
         internalList.setAll(tasks);
     }
@@ -147,7 +176,7 @@ public class TaskList implements Iterable<Task> {
     private boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
             for (int j = i + 1; j < tasks.size(); j++) {
-                if (tasks.get(i).equals(tasks.get(j))) {
+                if (tasks.get(i).isSameType(tasks.get(j))) {
                     return false;
                 }
             }
