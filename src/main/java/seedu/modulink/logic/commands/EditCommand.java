@@ -35,7 +35,6 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of your profile.\n"
-            + "(Module tags cannot be edited using this function)\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -47,7 +46,8 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
-            + "Note: To edit your module list, "
+            + "Note: Module tags cannot be edited using this command.\n "
+            + "To edit your module list, "
             + "please use the \"addMod\", \"remMod\", or \"editGroupStatus\" commands.";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited: %1$s";

@@ -9,7 +9,7 @@ public enum Status {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Available grouping statuses are: \"need group\" and \"need member\".\n"
-            + "Please leave the description blank to indicate you do not need a group.";
+            + "Please leave the module description blank to indicate you do not need a group.";
 
     public static final String VALIDATION_REGEX =
             "((need group)|(need members?))?";

@@ -26,15 +26,15 @@ We further recommend taking a glance at **[Section 1.1 Syntax and symbols](#sect
 ### Section 1.1: Syntax and Symbols
 Here are the commonly used syntax and symbols throughout the UG:
 
-`inline code`<br/>denotes a command for the application
+`inline code`<br/>denotes a command for the application.
 
-<div class="alert alert-warning">:exclamation: Important</div>denotes an important information for the functioning of the app
+<div class="alert alert-warning">:exclamation: Important</div>denotes an important information for the functioning of the app.
 <br/>
 
-<div class="alert alert-warning">:warning: Caution</div>denotes a possible fault that could occur
+<div class="alert alert-warning">:warning: Caution</div>denotes a possible fault that could occur.
 <br/>
 
-<div class="alert alert-info">:information_source: Notes</div>denotes extra information to aid user in understanding the app
+<div class="alert alert-info">:information_source: Notes</div>denotes extra information to aid user in understanding the app.
 <br/>
 
 
@@ -65,7 +65,7 @@ To run the app, simply double click the file. You should see a GUI similar to th
 As mentioned earlier, ModuLink works as a CLI, which means you will need to type and enter commands in the command box. To get accustomed to the interface, try the following commands (in the given the order).
 
 * **`create n/John Doe id/A0123456A p/24680135 e/johndoe@example.com`** : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
-* **`addMod mod/CS2103T need group mod/CS2101 need member`**: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
+* **`addMod mod/CS2103T need group`**, followed by **`addMod mod/CS2101 need member`**: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
 * **`list`**: Lists all the profiles on ModuLink.
 * **`filter mod/CS2101`**: Filters all profiles who have CS2101 as one of their module tags.
 * **`filter mod/CS2101 need group`**: Filters all profiles who have CS2101 as one of their module tags AND need to form or join a group for it.
@@ -79,7 +79,7 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br/>
 
 <div markdown="span" class="alert alert-warning">:exclamation: Important:
-If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
+If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.
 </div>
 
 1. [Profiles](#1-profiles) <br/>
@@ -118,9 +118,6 @@ If you are a first-time user, we recommend starting with [Create your own profil
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -139,8 +136,8 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERN
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**
-* STUDENT_ID must be unique
-* You can choose to input your telegram handle as either starting with '@' eg: (@teleHandle), or just the handle itself (eg: teleHandle)
+* Every STUDENT_ID in the database must be unique.
+* You can choose to input your telegram handle as either starting with '@' (e.g.: @teleHandle), or just the handle itself (e.g.: teleHandle)
 * The group statuses available are: Need member, Need group, Don't need group/Not looking for group.
 * The default status when a module is added without a description is 'Don't need group/Not looking for group'. The respective module will be displayed as a blue tag.
 * To indicate you need members for your group, you can include the description 'need member'. The respective module will be displayed as a yellow tag.
@@ -157,11 +154,11 @@ Examples:
 
 #### 1.2 Edit your profile : `edit`
 
-Edits your own profile. You can choose to edit any attributes in your own profile except module tags which use separate commands. You can edit multiple attributes at once.
+Edits your own profile. You can choose to edit any attribute in your own profile, except for module tags which use separate commands. You can edit multiple attributes at once.
 
 Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
 
-Prefixes:
+Prefixes for editable attributes:
 * NAME: `n/`
 * STUDENT ID: `id/`
 * PHONE: `p/`
@@ -182,11 +179,11 @@ Examples:
 
 Adds the user-specified module(s) to your own profile.
 
-Format: `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`
+Format: `addMod mod/MODULE [GROUP_STATUS]`
 
 Examples:
-* `addMod mod/CS2103T Need member mod/CS1231S`
-* `addMod mod/CS2220 mod/CS1231S`
+* `addMod mod/CS2103T need member`
+* `addMod mod/CS2220`
   <br>
   <br>
   ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addMod.png)
@@ -218,14 +215,13 @@ Examples:
 
 #### 2.3 Remove modules from your profile : `remMod`
 
-Removes the user-specified module(s) from your own profile.
+Removes the user-specified module from your own profile.
 
-Format: `remMod mod/MODULE [mod/MODULE]...`
+Format: `remMod mod/MODULE`
 
 Examples:
 * `remMod mod/CS2103T`
 * `remMod mod/CS2220`
-* `remMod mod/CS1231S mod/CS2220`
   <br>
   <br>
   ![result for 'remMod mod/CS2220'](images/screenshots/remMod.png)
@@ -332,7 +328,10 @@ Format: `filter mod/MODULE_CODE [GROUP_STATUS]`
 
 * You can filter by profiles who need to join or form a group ('need group') or profiles who need members for their group ('need member').
 * `MODULE_CODE` is required for filtering by group status. The filter will return the profiles with the specified group status of the specified module.
-
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**
+* Your own profile does not appear when filtering.
+</div>
 Examples
 * `filter mod/CS2100`
 * `filter mod/CS2100 need member`
