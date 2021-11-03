@@ -166,9 +166,9 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 * For example,  in `add` command,
 
-* **Acceptable** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`.
+  * **Acceptable** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`.
 
-* **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>_*notice the additional `/` used in the parameter of `a/ADDRESS`._
+  * **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>_*notice the additional `/` used in the parameter of `a/ADDRESS`._
 
 </div>
 
