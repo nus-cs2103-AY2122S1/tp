@@ -235,7 +235,7 @@ Format: `trace r/RESIDENT [d/DEPTH] [t/DURATION]`
 
 Examples:
 * `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
-* `trace n/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
+* `trace r/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
 
 #### Sorting residents : `sort`
 
