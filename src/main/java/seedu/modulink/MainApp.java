@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import seedu.modulink.commons.core.Config;
 import seedu.modulink.commons.core.LogsCenter;
@@ -21,6 +22,9 @@ import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.ReadOnlyAddressBook;
 import seedu.modulink.model.ReadOnlyUserPrefs;
 import seedu.modulink.model.UserPrefs;
+import seedu.modulink.model.person.Person;
+import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.exceptions.DuplicatePersonException;
 import seedu.modulink.model.util.SampleDataUtil;
 import seedu.modulink.storage.AddressBookStorage;
 import seedu.modulink.storage.JsonAddressBookStorage;
@@ -83,6 +87,21 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            Model currentData = new ModelManager(initialData, userPrefs);
+            ObservableList<Person> allPersons = currentData.getFilteredPersonList();
+            int noOfPeople = allPersons.size();
+            for (int i = 0; i < noOfPeople; i++) {
+                StudentId currentId = allPersons.get(i).getStudentId();
+                for (int j = i + 1; j < noOfPeople; j++) {
+                    StudentId comparingId = allPersons.get(j).getStudentId();
+                    if (currentId.equals(comparingId)) {
+                        throw new DuplicatePersonException();
+                    }
+                }
+            }
+        } catch (DuplicatePersonException err) {
+            logger.warning("Data file consists of duplicate StudentIds. Will be starting with an empty AddressBook");
+            initialData = new AddressBook();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
