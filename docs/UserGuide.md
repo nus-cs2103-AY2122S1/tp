@@ -44,11 +44,13 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 1. Ensure you have Java `11` or above installed in your computer
 
-2. Download the latest `contHACKS.jar` from here
+2. Download the latest `contHACKS.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-2/tp/releases)
 
 3. Copy the file to the folder you want to use as the home folder
 
-4. Double-click the file to start the app. A GUI should appear in a few seconds
+4. Double-click the file to start the app
+
+5. An application like the one in the screenshot below should appear in a few seconds
 
 <img src="images/MainApp.png" width="800px">
 
@@ -67,6 +69,7 @@ Here are some of the things you will need to know before you get started!
 |---|---|
 |:information_source:| This icon indicates that some extra information is provided.|
 |:exclamation:| This icon indicates that the information provided is **important**. |
+|:warning:| This icon indicates proceed with caution. |
 
 ### Key terms <a name="key-terms"></a>
 
@@ -86,9 +89,15 @@ Refer to the image below for more information on the different components of Con
 
 ### GUI <a name="gui"></a>
 
+#### Top Navigation Bar
+
 <img src="images/Walkthrough_1.png" width="1000px">
 
+#### Contact List Panel
+
 <img src="images/Walkthrough_2.png" width="1000px">
+
+#### Lesson List Panel
 
 <img src="images/Walkthrough_3.png" width="1000px">
 
@@ -164,7 +173,7 @@ Format: `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM
 * You can add multiple module codes, and can have multiple lesson codes for a single module code
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Module code and lesson code are seperated by white spaces.
+Module code and lesson code are separated by white spaces.
 </div>
 
 Examples:
@@ -176,24 +185,33 @@ Command alias: `a`
 
 <img src="images/AddCommand.png" width="800px">
 
+***
+
 #### Editing a contact: `edit` <a name="edit"></a>
 
 Edits the contact at the specified index in the currently viewed list.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`
 
-* At least one of the fields must be provided
-* Existing values of the fields specified will be erased and updated to the input values
+* At least one of the parameters must be provided
+* Existing values of the parameters specified will be erased and updated to the input values
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+To remove an existing phone number/telegram handle/remark from a contact, simply input `p/`/`h/`/`r/` respectively, followed with a whitespace. <br>
+e.g. `edit 1 r/` will remove the existing remark from the first contact.
+</div>
 
 Examples:
 * `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email of the 1st contact to be `91234567` and `ben321@gmail.com` respectively
 * `edit 2 n/Ben m/CS2100 T09 B09`: Edits the name and module of the 2nd contact to be `Ben` and `CS2100 T09 B09` respectively
 * `edit 3 h/@BenWasHere r/Overseas`: Edits the telegram handle and remark of the 3rd contact to be `@BenWasHere` and `Overseas` respectively
-* `edit 4 n/Ben m/CS2100 T09 B09 p/91234567 e/ben321@gmail.com h/@BenWasHere r/Overseas`: All fields present in one command
+* `edit 4 n/Ben m/CS2100 T09 B09 p/91234567 e/ben321@gmail.com h/@BenWasHere r/Overseas`: All parameters present in one command
 
 Command aliases: `update` `e`
 
 <img src="images/EditCommand.png" width="800px">
+
+***
 
 #### Deleting a contact / contacts: `delete` <a name="delete"></a>
 
@@ -204,10 +222,10 @@ Format: `delete INDEX`/ `delete INDEX_START-INDEX_END`
 * Deletes the specified contact(s) at the specified index(es) including `INDEX_END` and `INDEX_START`.
 * `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`.
 
-Format: `delete m/MODULE_CODE`/`delete m/MODULE_CODE LESSONS_CODE`
+Format: `delete m/MODULE_CODE`/`delete m/MODULE_CODE LESSON_CODE`
 
 * Delete all contacts associated with a module code using `m/MODULE_CODE`.
-* Delete all contact associated with a lesson code under the module using `m/MODULE_CODE LESSONS_CODE`.
+* Delete all contact associated with a lesson code under the module using `m/MODULE_CODE LESSON_CODE`.
 
 Examples:
 * `delete 2`: Deletes the 2nd contact in the displayed list.
@@ -219,6 +237,8 @@ Command aliases: `del` `rm` `d`
 
 <img src="images/DeleteCommand.png" width="800px">
 
+***
+
 #### Finding contacts by name / module code: `find` <a name="find"></a>
 
 Finds a contact by specifying either the name/module code(s).
@@ -228,9 +248,13 @@ Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
 * Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
-* If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
-  e.g `find n/Bernice Yu` will only return contacts that have both words `Bernice` and `Yu`
-* Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br> e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Important:**
+If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
+e.g `find n/Bernice Yu` will only return contacts that have both words `Bernice` and `Yu`<br>
+Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br> 
+e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
+</div>
 
 Examples:
 * `find n/Ben`: Search contacts with name containing `Ben`
@@ -241,6 +265,8 @@ Command alias: `f`
 
 <img src="images/FindCommand.png" width="800px">
 
+***
+
 #### Listing all contacts : `list` <a name="list"></a>
 
 Shows a list of all contacts in contHACKS.
@@ -249,9 +275,15 @@ Format: `list`
 
 Command alias: `ls`
 
+***
+
 #### Clearing all contacts: `clear` <a name="clear"></a>
 
-Purges **all** existing contacts from contHACKS. **Use with caution.**
+Purges **all** existing contacts from contHACKS. 
+
+<div markdown="span" class="alert alert-warning">:warning: **Warning:** 
+This action cannot be undone. Use with caution!
+</div> 
 
 Format: `clear`
 
@@ -274,7 +306,7 @@ Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 * Start and end time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Module code and lesson code are seperated by white spaces. Lesson start time and end time are seperated by white spaces as well.
+Module code and lesson code are separated by white spaces. Lesson start time and end time are separated by white spaces as well.
 </div>
 
 Examples:
@@ -285,25 +317,33 @@ Command alias: `ac`
 
 <img src="images/AddLessonCommand.png" width="800px">
 
+***
+
 #### Editing a lesson: `editc` <a name="editc"></a>
 
 Edits the lesson at the specified index in the currently viewed list.
 
 Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`
 
-* At least one of the fields must be provided.
-* Existing values of the fields specified will be erased and updated to the input values
+* At least one of the parameters must be provided.
+* Existing values of the parameters specified will be erased and updated to the input values
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+To remove a remark from a lesson, simply input `r/` followed with a whitespace.
+</div>
 
 Examples:
 * `editc 1 m/CS2100 B05`: Edits the module of the 1st lesson to be `CS2100 B05`
 * `editc 2 d/3`: Edits the day of the 2nd lesson to be Wednesday
 * `editc 3 t/10:00 12:00`: Edits the start time and end time of the 3rd lesson to be 10AM and 12PM respectively
 * `editc 4 r/COM01-0120`: Edits the remark of the 4th lesson to `COM01-0120`
-* `editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120`: All fields present in one command
+* `editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120`: All parameters present in one command
 
 Command aliases: `updatec` `ec`
 
 <img src="images/EditLessonCommand.png" width="800px">
+
+***
 
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
 
@@ -327,6 +367,8 @@ Command aliases: `delc` `rmc` `dc`
 
 <img src="images/DeleteLessonCommand.png" width="800px">
 
+***
+
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
 
 Finds a contact by specifying the module code(s)/day(s)/start time(s).
@@ -336,10 +378,13 @@ Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
 * The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
 * Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
-* If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
-  e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
-  e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
-  e.g. `findc t/10:00 15:00` will return lessons that start at either timings `10:00` or `15:00`
+
+<div markdown="span" class="alert alert-primary">:warning: **Important:**
+If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
+e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
+e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
+e.g. `findc t/10:00 15:00` will return lessons that start at either timings `10:00` or `15:00`
+</div>
 
 Examples:
 * `findc m/CS2030 CS2040`: Search lessons of modules `CS2030` or `CS2040`
@@ -350,6 +395,8 @@ Command alias: `fc`
 
 <img src="images/FindLessonCommand.png" width="800px">
 
+***
+
 #### Listing all lessons: `listc` <a name="listc"></a>
 
 Shows a list of all lessons in contHACKS.
@@ -358,9 +405,15 @@ Format: `listc`
 
 Command alias: `lc`
 
+***
+
 #### Clearing all lessons: `clearc` <a name="clearc"></a>
 
-Purges **all** existing lessons from contHACKS. **Use with caution.**
+Purges **all** existing lessons from contHACKS. 
+
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
+This action cannot be undone. Use with caution!
+</div> 
 
 Format: `clearc`
 
@@ -378,10 +431,14 @@ Contact data are saved in the hard disk automatically after any command that cha
 
 #### Editing the data file <a name="editing-data"></a>
 
-contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json`. Advanced users are welcome to update data directly by editing that data file.
+contHACKS data are saved as a JSON file `[JAR file location]/data/conthacks.json`. 
 
-<div markdown="span" class="alert alert-warning">:exclamation: Caution:
-If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Advanced users are welcome to update data directly by editing that data file.
+</div>
+
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
+If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file on the next start up.
 </div>
 
 ***
@@ -452,10 +509,10 @@ If your changes to the data file makes its format invalid, contHACKS will discar
         <code>e</code>
     </td>
     <td>
-        <code>`edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`</code>
+        <code>edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]</code>
     </td>
     <td>
-        <code>`edit 1 p/91234567 e/ben321@gmail.com`</code>
+        <code>edit 1 p/91234567 e/ben321@gmail.com</code>
     </td>
 </tr>
 
@@ -470,12 +527,14 @@ If your changes to the data file makes its format invalid, contHACKS will discar
     <td>
         <code>delete INDEX</code><br>
         <code>delete INDEX_START-INDEX_END</code><br>
-        <code>delete m/MODULE_CODE</code>
+        <code>delete m/MODULE_CODE</code><br>
+        <code>delete m/MODULE_CODE LESSON_CODE</code>
     </td>
     <td>
         <code>delete 2</code><br>
         <code>delete 2-5</code><br>
-        <code>delete m/CS2103T</code>
+        <code>delete m/CS2103T</code><br>
+        <code>delete m/CS2103T T09</code>
     </td>
 </tr>
 
