@@ -69,7 +69,6 @@ skinparam Sequence {
     ActorBorderColor #000000
     ActorFontColor #FFFFFF
     LifeLineBorderColor #000000
-    LifeLineBackgroundColor #000000
     ArrowColor #000000
 }
 
@@ -87,3 +86,4 @@ skinparam packageStyle Rectangle
 hide footbox
 hide members
 hide circle
+
