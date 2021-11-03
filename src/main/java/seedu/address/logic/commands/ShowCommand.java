@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.nio.file.Path;
@@ -45,9 +41,13 @@ public class ShowCommand extends Command {
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name> | "
             + PREFIX_GROUP + "<group_name>) "
-            + "[" + PREFIX_FILE + "<export_location>]";
+            + "[" + PREFIX_FILE + "<export_location>]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Tang Zhiying, "
+            + COMMAND_WORD + " "
+            + PREFIX_ASSESSMENT + "Midterm";
 
-    public static final String MESSAGE_SUCCESS = "Info requested successfully";
+    public static final String MESSAGE_SUCCESS = "Info requested successfully. ";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";

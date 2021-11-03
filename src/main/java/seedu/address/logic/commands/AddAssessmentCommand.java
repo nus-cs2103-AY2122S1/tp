@@ -20,7 +20,7 @@ public class AddAssessmentCommand extends Command {
             + PREFIX_ASSESSMENT + "P01";
 
     public static final String MESSAGE_SUCCESS = "New assessment added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in the database";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in the database. ";
 
     private final Assessment assessment;
 

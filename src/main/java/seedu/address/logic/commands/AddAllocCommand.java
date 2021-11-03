@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,10 @@ public class AddAllocCommand extends Command {
             + "Parameters: "
             + PREFIX_GROUP + "<group_name> "
             + "(" + PREFIX_NAME + "<student_name> | "
-            + PREFIX_ID + "<student_id>)";
+            + PREFIX_ID + "<student_id>)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GROUP + "T01A "
+            + PREFIX_NAME + "Jonas Chow";
 
     public static final String MESSAGE_SUCCESS = "New allocation added: %1$s";
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
