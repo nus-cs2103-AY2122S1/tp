@@ -5,9 +5,15 @@ title: User Guide
 
 # Welcome to Socius User Guide!
 
+Welcome to Socius User Guide! Choose a section from the table of contents below to find answers, step-by-step guides and know about Socius better!
+
+Are you a developer? Make sure to check out our Developer Guide too! You can find the Developer Guide [here](https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/docs/DeveloperGuide.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 
-1. [Introduction](#introduction-to-socius)
+1. [Introduction to Socius](#introduction-to-socius)
 2. [Using this guide](#using-this-guide)
 3. [Quick start](#quick-start)
 4. [Features](#features)
@@ -74,7 +80,7 @@ Here are some main features Socius provides:
 * Access details of coursemates taking CS2103T.
 * Find any coursemate(s) with their name, tutorial group, nationalities, tags and more.
 * Tag coursemates with suitable tags to categorize them.
-* View statistics on nationality and gender.
+* View statistics on nationality.
 
 <div markdown="block" class="alert alert-info">
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
@@ -93,7 +99,6 @@ Before diving into Socius and getting to know its features, lets get familiar wi
 | :exclamation: | Warnings or cautions |
 | :bulb: | Additional information such as tips |
 | :wrench: | Help with common technical issues |
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -588,9 +593,13 @@ If the format of your data file is invalid, Socius will discard all data and sta
 |--------|-------|
 |        |         |
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Authors
 
 This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
