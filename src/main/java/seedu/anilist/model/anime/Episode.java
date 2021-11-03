@@ -3,13 +3,17 @@ package seedu.anilist.model.anime;
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
 
+import seedu.anilist.commons.util.StringUtil;
+
 /**
  * Represents an Anime's episode number in the anime list.
  * Guarantees: immutable; is valid as declared in {@link #isValidEpisode(String)}
  */
 public class Episode {
 
-    public static final String MESSAGE_CONSTRAINTS = "Episodes should only contain numbers";
+    public static final String MESSAGE_CONSTRAINTS =
+        String.format("Episodes should be a non-negative integer less than %d",
+            (long) Integer.MAX_VALUE + 1);
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String DEFAULT_EPISODE = "0";
     public final int episodeNumber;
@@ -29,7 +33,7 @@ public class Episode {
      * Returns true if a given string is a valid episode number.
      */
     public static boolean isValidEpisode(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && StringUtil.isUnsignedInteger(test);
     }
 
     @Override

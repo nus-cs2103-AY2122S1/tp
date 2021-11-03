@@ -1,6 +1,7 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NONASCII;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
@@ -37,17 +38,29 @@ public class RenameCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
-
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
+        // not a valid number
+        assertParseFailure(parser, "3.141592654" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "3-141582654" + NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_indexNotInRangeOfPositiveInt_failure() {
+        // negative index
+        assertParseFailure(parser, "-5" + NAME_DESC_AKIRA, MESSAGE_OUT_OF_RANGE_INDEX);
+
+        // zero index
+        assertParseFailure(parser, "0" + NAME_DESC_AKIRA, MESSAGE_OUT_OF_RANGE_INDEX);
+
+        // larger than MAX_INT index
+        assertParseFailure(parser, ((long) Integer.MAX_VALUE + 1) + NAME_DESC_AKIRA,
+            MESSAGE_OUT_OF_RANGE_INDEX);
+
     }
 
     @Test

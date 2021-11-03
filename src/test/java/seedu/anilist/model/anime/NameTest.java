@@ -2,6 +2,7 @@ package seedu.anilist.model.anime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_MAX_LENGTH;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName(" Danshi Koukousei no Nichijou")); // starting with space
+        assertFalse(Name.isValidName(VALID_NAME_MAX_LENGTH + "A")); // exceed max length
 
         // valid name
         assertTrue(Name.isValidName("Danshi Koukousei no Nichijou")); // alphabets only
@@ -39,6 +41,7 @@ public class NameTest {
         assertTrue(Name.isValidName("BLEACH")); // with all capital letters
         // long names
         assertTrue(Name.isValidName("Higehiro: After Being Rejected, I Shaved and Took in a High School Runaway"));
+        assertTrue(Name.isValidName(VALID_NAME_MAX_LENGTH)); // max length
         assertTrue(Name.isValidName("Gintama'")); // name containing apostrophe
     }
 }

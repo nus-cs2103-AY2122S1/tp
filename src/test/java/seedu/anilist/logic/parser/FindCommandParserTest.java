@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
+import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.genre.Genre;
 
 public class FindCommandParserTest {
 
@@ -30,6 +32,14 @@ public class FindCommandParserTest {
         // empty param
         assertParseFailure(parser, "n/",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "g/",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, " n/", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " g/", Genre.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, "asdf" + GENRE_DESC_SCIENCE_FICTION,
@@ -50,6 +60,9 @@ public class FindCommandParserTest {
         assertIsFindCommand(resultingCommand);
 
         resultingCommand = parser.parse(" n/A n/B g/sci fi g/fantasy");
+        assertIsFindCommand(resultingCommand);
+
+        resultingCommand = parser.parse(" n/this should work g/sci fi g/fantasy");
         assertIsFindCommand(resultingCommand);
     }
 

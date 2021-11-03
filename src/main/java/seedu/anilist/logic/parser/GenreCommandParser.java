@@ -2,6 +2,7 @@ package seedu.anilist.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.ParserUtil.parseAction;
@@ -15,6 +16,7 @@ import seedu.anilist.logic.commands.Action;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.GenreDeleteCommand;
+import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.genre.Genre;
 
@@ -43,10 +45,14 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GenreCommand.MESSAGE_USAGE), pe);
         }
+
         if (argMultimap.getValue(PREFIX_ACTION).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
         }

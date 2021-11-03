@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.commons.util.StringUtil;
 import seedu.anilist.logic.commands.Action;
+import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
@@ -31,8 +32,12 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (!StringUtil.isValidNumber(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new IntegerOutOfRangeException(1, Integer.MAX_VALUE);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -91,6 +96,7 @@ public class ParserUtil {
         if (!Episode.isValidEpisode(trimmedEpisode)) {
             throw new ParseException(Episode.MESSAGE_CONSTRAINTS);
         }
+
         return new Episode(trimmedEpisode);
     }
 
