@@ -3,8 +3,7 @@ package seedu.unify.model.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_QUIZ;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_MODULE;
+import static seedu.unify.logic.commands.CommandTestUtil.*;
 import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.CS1234_QUIZ;
 import static seedu.unify.testutil.TypicalTasks.QUIZ;
@@ -42,7 +41,7 @@ public class UniqueTaskListTest {
     @Test
     public void contains_taskWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTaskList.add(CS1234_QUIZ);
-        Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE)
+        Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(DUPLICATE_DATE_QUIZ).withTags(DUPLICATE_TAG_MODULE)
                 .build();
         assertTrue(uniqueTaskList.contains(editedAlice));
     }
