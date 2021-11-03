@@ -126,7 +126,6 @@ public interface Model {
     /**
      * Adds a student to a new group as well as removing the old reference of the student from the old group.
      */
-    //TODO: Junwei might need to change this to student name
     void updateGroupStudent(Group group, Student student);
 
     /**
