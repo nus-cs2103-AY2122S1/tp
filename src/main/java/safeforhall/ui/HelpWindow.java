@@ -53,7 +53,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         Image helpGuideImg = new Image("/images/help-guide.png");
-        Rectangle rec = new Rectangle(800, 600);
+        Rectangle rec = new Rectangle(850, 700);
         rec.setFill(new ImagePattern(helpGuideImg));
         helpGuideContainer.getChildren().add(rec);
         message.setText(HELP_MESSAGE);
