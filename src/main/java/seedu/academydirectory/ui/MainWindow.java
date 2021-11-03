@@ -11,10 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.AdditionalViewModel;
 
 /**
@@ -131,7 +133,8 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     public void showHelpFrom(AdditionalViewModel additionalViewModel) {
-        String helpMessage = (String) additionalViewModel.getAdditionalInfo().get();
+        AdditionalInfo<?> additionalInfo = additionalViewModel.getAdditionalInfo();
+        String helpMessage = (String) additionalInfo.get();
         this.helpWindow.setHelpMessage(helpMessage);
         if (!helpWindow.isShowing()) {
             helpWindow.show();
@@ -171,12 +174,14 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            AdditionalViewModel additionalViewModel = logic.getAdditionalViewModel();
             logger.info("Result: " + commandResult.getFeedbackToUser());
+
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            visualizerDisplay.handleAdditionalInfo(logic.getAdditionalViewModel());
+            visualizerDisplay.handleAdditionalInfo(additionalViewModel);
 
             if (commandResult.isShowHelp()) {
-                showHelpFrom(logic.getAdditionalViewModel());
+                showHelpFrom(additionalViewModel);
             }
 
             if (commandResult.isExit()) {

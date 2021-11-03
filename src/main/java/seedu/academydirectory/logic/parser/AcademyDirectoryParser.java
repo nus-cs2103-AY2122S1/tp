@@ -3,11 +3,9 @@ package seedu.academydirectory.logic.parser;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.logic.commands.AddCommand;
 import seedu.academydirectory.logic.commands.AttendanceCommand;
 import seedu.academydirectory.logic.commands.ClearCommand;
@@ -43,11 +41,6 @@ public class AcademyDirectoryParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
-     * Used for logging input parsed.
-     */
-    private final Logger logger = LogsCenter.getLogger(AcademyDirectoryParser.class);
-
-    /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
@@ -73,17 +66,11 @@ public class AcademyDirectoryParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
         case GetCommand.COMMAND_WORD:
             return new GetCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case AttendanceCommand.COMMAND_WORD:
             return new AttendanceCommandParser().parse(arguments);
@@ -103,29 +90,23 @@ public class AcademyDirectoryParser {
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
 
         case RevertCommand.COMMAND_WORD:
             return new RevertCommandParser().parse(arguments);
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
-
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
+        case ClearCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD:
+        case HistoryCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD:
+        case RedoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_WORD:
         case VisualizeCommand.COMMAND_WORD:
-            return new VisualizeCommandParser().parse(arguments);
+            return new SingularCommandParser(commandWord).parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

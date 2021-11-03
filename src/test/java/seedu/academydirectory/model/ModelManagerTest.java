@@ -102,6 +102,8 @@ public class ModelManagerTest {
         assertDoesNotThrow(() -> modelManager.setAdditionalInfo(AdditionalInfo.of("String")));
 
         modelManager.setAdditionalViewType(AdditionalViewType.VIEW);
+        additionalViewModel.setAdditionalViewType(AdditionalViewType.VIEW);
+        assertEquals(modelManager.getAdditionalViewModel(), additionalViewModel);
     }
 
     @Test

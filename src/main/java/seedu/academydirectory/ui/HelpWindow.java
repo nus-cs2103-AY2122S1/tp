@@ -51,12 +51,9 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         this.root = root;
-        root.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ESCAPE)) {
-                    hide();
-                }
+        root.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode().equals(KeyCode.ESCAPE)) {
+                hide();
             }
         });
         this.markdownView = new MarkdownView();

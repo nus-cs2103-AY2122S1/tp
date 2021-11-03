@@ -7,7 +7,6 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.assertComman
 
 import org.junit.jupiter.api.Test;
 
-import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.VersionedModel;
 
@@ -63,6 +62,7 @@ public class HelpCommandTest {
     @Test
     public void execute_non_valid_help() {
         // help command throws exception if inputs are null
-        assertThrows(CommandException.class, () -> new HelpCommand(null, null).execute(model));
+        assertThrows(NullPointerException.class, () -> new HelpCommand(null, null)
+                .execute(model));
     }
 }

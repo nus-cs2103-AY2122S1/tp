@@ -3,6 +3,9 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
@@ -14,6 +17,7 @@ import seedu.academydirectory.model.VersionedModel;
  */
 public class HelpCommand extends Command {
 
+    private final Logger logger = LogsCenter.getLogger(HelpCommand.class);
     public static final String COMMAND_WORD = "help";
     public static final String DEFAULT_MESSAGE = Messages.GENERAL_HELP_MESSAGE;
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -54,12 +58,14 @@ public class HelpCommand extends Command {
         }
         model.setAdditionalViewType(AdditionalViewType.HELP);
         model.setAdditionalInfo(AdditionalInfo.of(helpMessage));
+        CommandResult commandResult;
         if (isGeneralHelp) {
-            return new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, this.helpMessage);
+            commandResult = new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, true, false);
         } else {
-            return new CommandResult(String.format(MESSAGE_HELP_SUCCESS_SPECIFIC, this.commandWord),
-                    this.helpMessage);
+            commandResult = new CommandResult(String.format(MESSAGE_HELP_SUCCESS_SPECIFIC, this.commandWord),
+                    true, false);
         }
+        return commandResult;
     }
 
     @Override
@@ -71,6 +77,7 @@ public class HelpCommand extends Command {
             return false;
         }
         HelpCommand curr = (HelpCommand) obj;
-        return curr.helpMessage.equals(this.helpMessage) && curr.commandWord.equals(this.commandWord);
+        return curr.helpMessage.equals(this.helpMessage)
+                && curr.commandWord.equals(this.commandWord);
     }
 }

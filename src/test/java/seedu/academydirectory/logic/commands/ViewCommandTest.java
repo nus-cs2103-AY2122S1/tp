@@ -53,7 +53,7 @@ public class ViewCommandTest {
 
         // view command parses successfully for last student
         Index lastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-        Student studentToGet1 = model.getFilteredStudentList().get(lastStudent.getOneBased());
+        Student studentToGet1 = model.getFilteredStudentList().get(lastStudent.getZeroBased());
         ViewCommand viewCommand4 = new ViewCommand(lastStudent);
         String expectedMessage4 = String.format(ViewCommand.MESSAGE_SUCCESS, studentToGet1.getName());
         assertCommandSuccess(viewCommand4, model, expectedMessage4, model);
@@ -82,15 +82,9 @@ public class ViewCommandTest {
         assertThrows(CommandException.class, () -> viewCommand5.execute(model));
         assertCommandFailure(viewCommand5, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
-        Index validIndex1 = Index.fromOneBased(0);
+        Index validIndex1 = Index.fromOneBased(model.getFilteredStudentList().size() + 100);
         ViewCommand viewCommand1 = new ViewCommand(validIndex1);
-        // view command throws exception for index = 0
+        // view command for very high index
         assertThrows(CommandException.class, () -> viewCommand1.execute(model));
-
-        Index validIndex2 = Index.fromOneBased(-3);
-
-        // view command throws exception for index < 0
-        assertThrows(CommandException.class, () -> new ViewCommand(validIndex2)
-                .execute(model));
     }
 }
