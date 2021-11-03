@@ -59,6 +59,7 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 
 :bulb: TIP:
 <br/>
+
 1. Telegram Handle Conventions:  
 • Handles can use a-z, 0-9 and underscores.
 <br/>
