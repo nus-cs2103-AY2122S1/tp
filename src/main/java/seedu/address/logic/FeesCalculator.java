@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -120,15 +121,15 @@ public class FeesCalculator implements Calculator {
 
     public OutstandingFees getUpdatedOutstandingFeesMakeup(OutstandingFees original, Date date, TimeRange timeRange,
                                                            LessonRates lessonRates) {
-        float costPerLesson = getCostPerLesson(timeRange, lessonRates);
-        float updatedFees = original.getMonetaryValueInFloat();
+        BigDecimal costPerLesson = getCostPerLesson(timeRange, lessonRates);
+        BigDecimal updatedFees = original.getMonetaryValue();
 
         LocalDateTime makeUpLessonEnd = LocalDateTime.of(date.getLocalDate(), timeRange.getEnd());
 
         boolean isBetween = makeUpLessonEnd.isAfter(lastUpdated.dateTime) && makeUpLessonEnd.isBefore(currentDateTime);
 
         if (isBetween) {
-            updatedFees += costPerLesson;
+            updatedFees = updatedFees.add(costPerLesson);
         }
 
         return new OutstandingFees(DECIMAL_FORMAT.format(updatedFees));
@@ -150,16 +151,20 @@ public class FeesCalculator implements Calculator {
         int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, startDate.getLocalDate(),
                 endDate.getLocalDate(), timeRange.getEnd(), cancelledDates);
         assert numberOfLessons >= 0;
-        float costPerLesson = getCostPerLesson(timeRange, lessonRates);
-        float updatedFees = costPerLesson * (float) numberOfLessons + original.getMonetaryValueInFloat();
+        BigDecimal costPerLesson = getCostPerLesson(timeRange, lessonRates);
+
+        // updatedFees = costPerLesson * numOfLessons + originalAmount
+        BigDecimal updatedFees = costPerLesson
+                .multiply(BigDecimal.valueOf(numberOfLessons))
+                .add(original.getMonetaryValue());
 
         return new OutstandingFees(DECIMAL_FORMAT.format(updatedFees));
     }
 
-    private float getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
+    private BigDecimal getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
         Duration duration = timeRange.getDuration();
-        float durationInHour = duration.toMinutes() / numberOfMinutesInAnHour;
-        return durationInHour * lessonRates.getMonetaryValueInFloat();
+        BigDecimal durationInHour = BigDecimal.valueOf(duration.toMinutes() / numberOfMinutesInAnHour);
+        return durationInHour.multiply(lessonRates.getMonetaryValue());
     }
 
     public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate startDate,
@@ -223,12 +228,12 @@ public class FeesCalculator implements Calculator {
      * @return Updated OutstandingFees.
      */
     public static String pay(OutstandingFees toPay, Money payment) throws IllegalValueException {
-        float newOutstandingFees = toPay.getMonetaryValueInFloat() - payment.getMonetaryValueInFloat();
+        BigDecimal newOutstandingFees = toPay.getMonetaryValue().subtract(payment.getMonetaryValue());
 
-        if (newOutstandingFees < 0) {
+        if (newOutstandingFees.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalValueException(MESSAGE_PAY_TOO_MUCH);
         }
-        String parseValueToString = Float.toString(newOutstandingFees);
+        String parseValueToString = DECIMAL_FORMAT.format(newOutstandingFees);
         return parseValueToString;
     }
 }
