@@ -6,11 +6,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
-import java.math.BigDecimal;
 
 class OutstandingFeesTest {
 
