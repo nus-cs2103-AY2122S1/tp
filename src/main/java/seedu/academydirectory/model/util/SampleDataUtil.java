@@ -23,25 +23,25 @@ public class SampleDataUtil {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Telegram("@alexyeoh"),
                     getAssessment(35, 26, 60, 47, 33),
-                    getTagSet("friends")),
+                    getTagSet("streams")),
             new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Telegram("@berniceyu"),
                     getAssessment(34, 13, 4, 59, 50),
-                    getTagSet("colleagues", "friends")),
+                    getTagSet("recursion")),
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Telegram("@charlotte"),
                     getAssessment(30, 24, 5, 12, 48),
-                    getTagSet("neighbours")),
+                    getTagSet("wishfulThinking", "recursion")),
             new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Telegram("@lidavid"),
                     getAssessment(47, 5, 54, 57, 44),
-                    getTagSet("family")),
+                    getTagSet("higherOrderFunctions")),
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Telegram("@irfan"),
-                    getTagSet("classmates")),
+                    getTagSet("genius")),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Telegram("@royb"),
-                    getTagSet("colleagues"))
+                    getTagSet("abstractions"))
         };
     }
 
