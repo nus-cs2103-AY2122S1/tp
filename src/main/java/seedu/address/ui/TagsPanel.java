@@ -48,7 +48,7 @@ public class TagsPanel extends UiPart<Region> {
 
                 for (Tag tag: change.getAddedSubList()) {
                     TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
-                    logger.fine(tag.getName() + "was added to the list!");
+                    logger.fine(tag.getName() + "was added to the tag list!");
                     tags.getChildren().add(tagLabel.getRoot());
                     tagLabels.put(tag, tagLabel.getRoot());
                 }
