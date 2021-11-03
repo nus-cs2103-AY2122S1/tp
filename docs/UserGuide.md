@@ -316,9 +316,15 @@ Notes about search keywords:
 
 * You must provide at least one keyword to search for.<br>
   e.g. entering just `find n/` alone is not a valid command as the keyword is empty.
-  
+
+* Tags must only have one keyword.<br>
+  e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
+
 * The search is case-insensitive.<br>
   e.g. keyword `hans` will match `Hans`.
+
+* A keyword can match a word partially.<br>
+  e.g. keyword `math` will match `mathematics`.
 
 * The order of the keywords do not matter.<br>
   e.g. keyword `west jurong` will match `jurong west`.
@@ -787,7 +793,7 @@ Action | Format, Examples
 **View Weekly Calendar** | `week`
 **View Monthly Calendar** | `month`
 **View Yearly Calendar** | `year`
-**Navigate to Today** | `today`
+**Navigate to Today in Calendar** | `today`
 **Navigate forward in Calendar** | `next`
 **Navigate backward in Calendar** | `back`
 **View Reminders** | `remind`
