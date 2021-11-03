@@ -564,3 +564,7 @@ Action | Format | Examples
 * **Q:** Why am I unable to add a student with the same name as another student?
 
   **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
+
+* **Q:** How do I edit a lesson?
+
+  **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
