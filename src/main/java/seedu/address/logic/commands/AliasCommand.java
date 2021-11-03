@@ -24,6 +24,7 @@ public class AliasCommand extends Command {
             + PREFIX_COMMAND + "COMMAND ";
 
     public static final String MESSAGE_SUCCESS = "Alias successfully added. Mapped `%s` to the command `%s`.";
+    public static final String MESSAGE_INVALID_ALIAS = "Invalid alias. Command words cannot be used as an alias.";
 
     private final String alias;
     private final Command command;
