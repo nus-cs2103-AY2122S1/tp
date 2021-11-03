@@ -33,7 +33,7 @@ public class SplitCommandTest {
         model.addFacility(f);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(1);
-        expectedModel.split(predicate);
+        expectedModel.split(predicate, 1);
         assertCommandSuccess(command, model, String.format(SplitCommand.MESSAGE_SUCCESS,
                 DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault())), expectedModel);
     }

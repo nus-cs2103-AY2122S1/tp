@@ -13,9 +13,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,7 +42,6 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CHARLIE = "33333333";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_AVAILABILITY_AMY = "1 2 3";
     public static final String VALID_AVAILABILITY_BOB = "1 2 3";
     public static final String VALID_AVAILABILITY_CHARLIE = "1 2 3";
@@ -54,6 +56,14 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_FIELD = "Opp University Hall";
     public static final String VALID_TIME_FIELD = "1330";
     public static final String VALID_CAPACITY_FIELD = "8";
+    public static final Map<DayOfWeek, List<Person>> VALID_ALLOCATION_MAP = new EnumMap<>(
+            Map.ofEntries(Map.entry(DayOfWeek.MONDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.TUESDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.WEDNESDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.THURSDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.FRIDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.SATURDAY, new ArrayList<>()),
+                    Map.entry(DayOfWeek.SUNDAY, new ArrayList<>())));
 
     public static final String VALID_SORT_ORDER_NAME = "name";
     public static final String VALID_SORT_ORDER_TAG = "tag";

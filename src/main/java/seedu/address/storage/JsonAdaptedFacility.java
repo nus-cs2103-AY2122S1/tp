@@ -1,12 +1,16 @@
 package seedu.address.storage;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
@@ -25,7 +29,7 @@ public class JsonAdaptedFacility {
     private final String location;
     private final String time;
     private final String capacity;
-    private final List<JsonAdaptedPerson> allocationList;
+    private final Map<DayOfWeek, List<JsonAdaptedPerson>> allocationMap;
 
     /**
      * Constructs a {@code JsonAdaptedFacility} with the given facility details.
@@ -33,12 +37,12 @@ public class JsonAdaptedFacility {
     @JsonCreator
     public JsonAdaptedFacility(@JsonProperty("name") String name, @JsonProperty("location") String location,
                                @JsonProperty("time") String time, @JsonProperty("capacity") String capacity,
-                               @JsonProperty("allocationList") List<JsonAdaptedPerson> allocationList) {
+                               @JsonProperty("allocationMap") Map<DayOfWeek, List<JsonAdaptedPerson>> allocationMap) {
         this.name = name;
         this.location = location;
         this.time = time;
         this.capacity = capacity;
-        this.allocationList = allocationList;
+        this.allocationMap = allocationMap;
     }
 
     /**
@@ -50,12 +54,15 @@ public class JsonAdaptedFacility {
         time = source.getTime().time;
         capacity = source.getCapacity().capacity;
 
-        List<JsonAdaptedPerson> allocationList = new ArrayList<>();
-        for (Person person : source.getPersonAllocatedList()) {
-            JsonAdaptedPerson adaptedPerson = new JsonAdaptedPerson(person);
-            allocationList.add(adaptedPerson);
+        Map<DayOfWeek, List<JsonAdaptedPerson>> map = new EnumMap<>(DayOfWeek.class);
+        for (DayOfWeek day : DayOfWeek.values()) {
+            map.put(day, new ArrayList<>());
+            for (Person person : source.getAllocationMap().getPersonsAllocatedMap().get(day)) {
+                JsonAdaptedPerson adaptedPerson = new JsonAdaptedPerson(person);
+                map.get(day).add(adaptedPerson);
+            }
         }
-        this.allocationList = allocationList;
+        this.allocationMap = map;
     }
 
     /**
@@ -64,6 +71,14 @@ public class JsonAdaptedFacility {
      * @throws IllegalValueException if there were any data constraints violated in the adapted facility.
      */
     public Facility toModelType() throws IllegalValueException {
+        final Map<DayOfWeek, List<Person>> personsAllocatedMap = new EnumMap<>(DayOfWeek.class);
+        for (DayOfWeek day : DayOfWeek.values()) {
+            personsAllocatedMap.put(day, new ArrayList<>());
+            for (JsonAdaptedPerson adaptedPerson : allocationMap.get(day)) {
+                Person allocatedPerson = adaptedPerson.toModelType();
+                personsAllocatedMap.get(day).add(allocatedPerson);
+            }
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -105,15 +120,16 @@ public class JsonAdaptedFacility {
 
         final Capacity modelCapacity = new Capacity(capacity);
 
-        Facility convertedFacility = new Facility(modelFacilityName, modelLocation, modelTime, modelCapacity);
-        addAllocatedPersons(convertedFacility);
-        return convertedFacility;
-    }
-
-    private void addAllocatedPersons(Facility facility) throws IllegalValueException {
-        for (JsonAdaptedPerson adaptedPerson : allocationList) {
-            Person allocatedPerson = adaptedPerson.toModelType();
-            facility.addPersonToFacility(allocatedPerson);
+        if (allocationMap == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Capacity.class.getSimpleName()));
         }
+
+        final AllocationMap modelAllocationMap = new AllocationMap(personsAllocatedMap);
+
+        Facility convertedFacility = new Facility(modelFacilityName, modelLocation,
+                modelTime, modelCapacity, modelAllocationMap);
+
+        return convertedFacility;
     }
 }

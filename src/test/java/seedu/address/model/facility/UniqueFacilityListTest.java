@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTIO
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
+import java.util.EnumMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,8 @@ public class UniqueFacilityListTest {
             new FacilityName("Court 1"),
             new Location("Kent Ridge Sports Hall"),
             new Time("1300"),
-            new Capacity("5"));
+            new Capacity("5"),
+            new AllocationMap(new EnumMap<>(DayOfWeek.class)));
 
     @Test
     public void add_null_exceptionThrown() {
@@ -64,13 +66,13 @@ public class UniqueFacilityListTest {
         members.add(secondMember);
 
         Facility updatedFacility = new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build();
-        updatedFacility.addPersonToFacility(firstMember);
-        updatedFacility.addPersonToFacility(secondMember);
+        updatedFacility.addPersonToFacilityOnDay(firstMember, DayOfWeek.of(1));
+        updatedFacility.addPersonToFacilityOnDay(secondMember, DayOfWeek.of(1));
         UniqueFacilityList expected = new UniqueFacilityList();
         expected.setFacilities(Arrays.asList(updatedFacility, TAMPINES_HUB_FIELD_SECTION_B));
 
-        FilteredList<Person> toAllocate = new FilteredList<Person>(members);
-        uniqueFacilityList.allocateMembersToFacilities(toAllocate);
+        FilteredList<Person> toAllocate = new FilteredList<>(members);
+        uniqueFacilityList.allocateMembersToFacilitiesOnDay(toAllocate, 1);
         assertEquals(expected, uniqueFacilityList);
     }
 

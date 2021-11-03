@@ -41,16 +41,16 @@ public class CapacityTest {
     }
 
     @Test
-    public void isWithinCapacity() {
+    public void isMaxCapacity() {
         Capacity capacity = new Capacity("5");
-        // within max capacity
-        assertTrue(capacity.isWithinCapacity(5));
-        assertTrue(capacity.isWithinCapacity(4));
-        assertTrue(capacity.isWithinCapacity(0));
+        // below max capacity
+        assertFalse(capacity.isMaxCapacity(4));
+        assertFalse(capacity.isMaxCapacity(0));
 
-        // beyond max capacity
-        assertFalse(capacity.isWithinCapacity(6));
-        assertFalse(capacity.isWithinCapacity(50));
+        // at max capacity
+        assertTrue(capacity.isMaxCapacity(5));
+        assertTrue(capacity.isMaxCapacity(6));
+        assertTrue(capacity.isMaxCapacity(50));
     }
 
 

@@ -21,7 +21,7 @@ public class AddMemberCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_AVAILABILITY + "AVAILABILITY "
+            + "[" + PREFIX_AVAILABILITY + "AVAILABILITY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

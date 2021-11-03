@@ -1,4 +1,5 @@
 [![CI Status](https://github.com/AY2122S1-CS2103T-W12-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W12-1/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W12-1/tp/branch/master/graph/badge.svg?token=W77BXICS47)](https://codecov.io/gh/AY2122S1-CS2103T-W12-1/tp)
 
 # SportsPA
 
