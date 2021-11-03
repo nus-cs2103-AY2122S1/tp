@@ -1,13 +1,11 @@
 package seedu.address.ui;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import seedu.address.model.student.Student;
 
@@ -73,7 +71,7 @@ public class DetailedStudentCard extends UiPart<Region> {
             System.out.println(ratio);
             double newFontSize = 70 * ratio;
             if (ratio < 0.2) {
-                newFontSize *= (1 - 1/ratio);
+                newFontSize *= (1 - 1 / ratio);
             }
             name.setStyle(String.format("-fx-font-size:%f;", newFontSize));
         }
