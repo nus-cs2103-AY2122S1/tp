@@ -29,6 +29,7 @@ public class CommandHistory {
 
     /**
      * Returns the previous command entered according to the {@code counter} pointer.
+     *
      * @return The string of the previous command.
      */
     public String getPrevCommand() {
@@ -42,6 +43,7 @@ public class CommandHistory {
 
     /**
      * Returns the next command entered according to the {@code counter} pointer.
+     *
      * @return The string of the next most recent command.
      */
     public String getNextCommand() {
