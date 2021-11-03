@@ -25,13 +25,13 @@ public class StatCommandTest {
         + "student : 8\n"
         + "\n"
         + "Tutorial ID Count: \n"
-        + "03 : 1\n"
-        + "02 : 2\n"
-        + "01 : 1\n"
         + "00 : 1\n"
-        + "06 : 1\n"
+        + "01 : 1\n"
+        + "02 : 2\n"
+        + "03 : 1\n"
+        + "04 : 1\n"
         + "05 : 1\n"
-        + "04 : 1\n";
+        + "06 : 1\n";
 
     private Model model;
     private Model expectedModel;

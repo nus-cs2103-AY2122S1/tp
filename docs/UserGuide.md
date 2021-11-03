@@ -217,7 +217,7 @@ Format: `export FILENAME`
 
 Exports the list of contacts of all current filtered contacts into a txt file. This can then be used to create a group of contacts in outlook to mass send emails to.
 
-Format: `export email FILENAME`
+Format: `exportemail FILENAME`
 
 * Takes the current filtered list of contacts and writes them into `FILENAME`
 

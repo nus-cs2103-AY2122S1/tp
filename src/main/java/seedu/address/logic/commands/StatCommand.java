@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -80,7 +81,8 @@ public class StatCommand extends Command {
         }
 
         String tutString = "";
-        for (String s : tutDic.keySet()) {
+        List<String> temp_list = tutDic.keySet().stream().sorted().collect(Collectors.toList());
+        for (String s : temp_list) {
             tutString += String.format("%s : %d\n", s , tutDic.get(s));
         }
 
