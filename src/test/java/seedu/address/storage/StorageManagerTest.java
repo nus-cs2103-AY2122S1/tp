@@ -62,7 +62,12 @@ public class StorageManagerTest {
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertEquals(storageManager.getAddressBookFilePath(), getTempFilePath("ab"));
+    }
+
+    @Test
+    public void getUserPrefsFilePath() {
+        assertEquals(storageManager.getUserPrefsFilePath(), getTempFilePath("prefs"));
     }
 
 }

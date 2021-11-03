@@ -127,4 +127,11 @@ public class JsonUserPrefsStorageTest {
         assertEquals(original, readBack);
     }
 
+    @Test
+    public void getUserPrefsFilePath_success() {
+        Path path = Path.of("userprefs.json");
+        JsonUserPrefsStorage jups = new JsonUserPrefsStorage(path);
+        assertEquals(jups.getUserPrefsFilePath(), path);
+    }
+
 }
