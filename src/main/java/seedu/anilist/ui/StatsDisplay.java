@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.StringConverter;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.genre.Genre;
 import seedu.anilist.model.stats.Stats;
@@ -56,6 +57,24 @@ public class StatsDisplay extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    class IntegerStringConverter extends StringConverter<Number> {
+
+        public IntegerStringConverter() {}
+
+        @Override
+        public String toString(Number object) {
+            if(object.intValue()!=object.doubleValue())
+                return "";
+            return ""+(object.intValue());
+        }
+
+        @Override
+        public Number fromString(String string) {
+            Number val = Double.parseDouble(string);
+            return val.intValue();
+        }
+    }
 
     /**
      * Creates a StatsDisplay UI component.
@@ -163,19 +182,15 @@ public class StatsDisplay extends UiPart<Stage> {
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
 
-        //Set horizontal labelling to be integer values
-        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
-            @Override
-            public String toString(Number object) {
-                return Integer.toString(Math.round(object.intValue()));
-            }
-        });
-
         BarChart<Number, String> tempGenreStats = new BarChart<>(xAxis, yAxis);
         tempGenreStats.getData().add(getBarChartData(genreStats));
         barChart.setData(tempGenreStats.getData());
         barChart.getYAxis().setTickMarkVisible(false);
         barChart.getXAxis().setTickMarkVisible(false);
+
+        //set horizontal labels to be integer values
+        ((NumberAxis)barChart.getXAxis()).setTickLabelFormatter(new IntegerStringConverter());
+
         if (genreStats.isEmpty()) {
             barChart.setId(BAR_CHART_EMPTY_ID);
             barChart.getXAxis().setOpacity(0);
