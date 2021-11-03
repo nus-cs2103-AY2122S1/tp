@@ -25,7 +25,8 @@ LeadsForce's developer Guide is written for developers who wish to contribute to
 | 💡 | This icon denotes useful tips to note of during development. |
 | ❗️ | This icon denotes important details to take note of during development. |
 
-
+This user guide is also colour coded according to the component. <br> 
+<img src="images/Legends.png" width="300"/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,15 +444,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Has a need to manage a significant number of contacts
+* Currently studying in university
+* Prefers using desktop applications, over others 
+* Would much prefer to type, and can type fast
+* Manages a significant number of contacts
 * Short on time as they have to juggle both school and work at the same time
 * Trying to sell financial products effectively by finding the right clients
 * Job is competitive in nature
 
 **Value propositions**:
-* LeadsForce is a new way to streamline the process for student financial advisors to find the right clients to contact. We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. Finding your next lead has never been easier.
-
-
+* Keep tracks of client information and meetings all in one place
+* Much faster than a mouse driven GUI app
+* Financial advisors can have a more targetted approach by categorising different clients
 
 ### 6.2 User stories
 
@@ -459,19 +463,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I can …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add my clients information     | easily refer to it         |
-| `* * *`  | user                                       | delete contact information     | remove contacts who I no longer keep in touch with                                                                       |
-| `* * *`  | user                                       | lookup a client in the address book | retrieve relevant information |
-| `* * *`  | user                                       | search for a client by their name |                         |
-| `* * *`  | user                                       | save my address book locally   | access the information again when I reopen the application |
-| `* * *`  | user                                       | see hints in error messages when I input a wrong command | know how to rectify my command |
-| `* * *`  | user                                       | be warned that I am about to add the same user again |                         |
-| `* * *`  | user                                       | have the addressbook to be functional 99.999 percent of the time | not get frustrated and find another app to use |
-| `* * *`  | user                                       | exit the app safely            | my data will not be corrupted |
-| `* *`    | user                                       | edit my client's information   | keep track of relevant client information |
-| `* *`    | user                                       | sort my address book           | quickly identify the clients based on the last time I've seen them or the number of financial plans they have |
-
-*{More to be added}*
+| `* * *`  | Student financial advisor| add in my client's information| refer to my client's information later on|
+| `* * *`  | Student financial advisor| remove a client from my catalogue of clients | remove clients who I no longer keep in touch with |
+| `* * *`  | Student financial advisor | view my client's information | view in-depth information on the client which can allow me to better strategise the appropriate plan |
+| `* * *`  | Student financial advisor | categorise my clients | have a more targetted approach when approaching clients with new financial plans |
+| `* * *`  | Student financial advisor | list out all my clients | have an overview of the clients I have |
+| `* * *`  | student financial advisor who is meeting with a client soon| lookup a client in the address book | strategise several plans that would be appropriate for my clients based on the client's financial information |
+| `* * *`  | student financial advisor that forgot the client's name | search for a client by their information|be able to greet the client when we meet|
+| `* * *`  | student financial advisor| save my address book locally   | access the information again when I reopen the application |
+| `* * *`  | student financial advisor| see hints in error messages when I input a wrong command | know how to rectify my command |
+| `* * *`  | student financial advisor| be warned that I am about to add the same user again | avoid having duplicate clients in my catalogue of clients|
+| `* * *`  | student financial advisor| set meetings with my clients| keep track and not be late to my meetings with my clients |
+| `* * *`  | student financial advisor who's client has changed client information | edit my client's information   | keep track of my client's information |
+| `* * *`  | student financial advisor who is planning to attend an event | get an overview of my meeting schedule on the day | ensure that I can still attned my meetings with clients | Student financial advisor | 
+| `* *`   | Student financial advisor trying to sell a particular financial plan | search for clients with a certain amount of financial appetite | suggest the plans to the appropriate clients |
+| `* *`   | student financial advisor | sort clients in my catalogue of clients| quickly identify the clients based on the last time I've seen them or the number of financial plans they have |
+| `*`  | Student financial advisor who has gotten a new laptop | transfer my clients' information into another computer | transfer my clients' information onto my new laptop |
 
 ### 6.3 Use cases
 
