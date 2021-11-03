@@ -1,5 +1,6 @@
 package safeforhall.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
@@ -38,5 +39,16 @@ public class CapacityTest {
         assertTrue(Capacity.isValidCapacity("3"));
         assertTrue(Capacity.isValidCapacity("300"));
         assertTrue(Capacity.isValidCapacity("1000"));
+    }
+
+    @Test
+    public void checkCompareTo() {
+        Capacity c1 = new Capacity("5");
+        Capacity c2 = new Capacity("10");
+        Capacity c3 = new Capacity("5");
+
+        assertEquals(c1.compareTo(c2), -1);
+        assertEquals(c2.compareTo(c1), 1);
+        assertEquals(c3.compareTo(c1), 0);
     }
 }
