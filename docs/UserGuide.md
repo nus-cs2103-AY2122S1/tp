@@ -193,7 +193,7 @@ with each feature into the CLI.
 Displays a help message. Format: `help`
 
 Expected Output:
-![Ui](images/UIHelpCommand.png)
+![Ui](images/UiHelpCommand.png)
 
 ### 4.2 Add
 
@@ -219,8 +219,10 @@ Example (with orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi 
 whose `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road` with an `ORDER` of 
 `QUANTITY` `10` of product with `IDENTITY` `0` on `DATE` `26/10/<curr year>`.
 
-Expected Output:
+Expected Output (without orders):
 ![Ui](images/UIAddClientCommand.png)
+
+> Note: the expected output of an addClient command with orders is similar to the output above except that the orders added will be displayed.
 
 #### 4.2.2 Adding a Product
 

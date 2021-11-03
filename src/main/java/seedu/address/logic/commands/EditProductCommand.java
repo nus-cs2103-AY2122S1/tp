@@ -16,6 +16,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
@@ -75,6 +76,17 @@ public class EditProductCommand extends Command {
 
         model.setProduct(productToEdit, editedProduct);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+
+        Name productNameToEdit = productToEdit.getName();
+        model.getAddressBook().getClientList()
+                .filtered(client -> client.hasOrder(productNameToEdit))
+                .forEach(client -> {
+                    Order orderToEdit = client.removeOrder(productNameToEdit);
+                    Order editedOrder =
+                            new Order(editedProduct.getName(), orderToEdit.getQuantity(), orderToEdit.getTime());
+                    client.addOrder(editedOrder);
+                });
+
         return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct), CommandType.EDIT,
                 editedProduct, false);
     }
