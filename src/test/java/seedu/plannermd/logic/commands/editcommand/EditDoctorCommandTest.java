@@ -99,6 +99,7 @@ public class EditDoctorCommandTest {
         String expectedMessage = String.format(EditDoctorCommand.MESSAGE_EDIT_DOCTOR_SUCCESS, editedDoctor);
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
+        showDoctorAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setDoctor(model.getFilteredDoctorList().get(0), editedDoctor);
         expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(0), editedDoctor);
 

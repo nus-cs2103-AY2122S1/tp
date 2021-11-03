@@ -7,7 +7,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -79,7 +78,6 @@ public class EditDoctorCommand extends EditCommand {
         }
 
         model.setDoctor(doctorToEdit, editedDoctor);
-        model.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
         model.editAppointmentsWithPerson(doctorToEdit, editedDoctor);
         return new CommandResult(String.format(MESSAGE_EDIT_DOCTOR_SUCCESS, editedDoctor));
     }
