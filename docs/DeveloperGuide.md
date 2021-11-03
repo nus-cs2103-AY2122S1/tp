@@ -544,8 +544,8 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 | Priority          | As a …​           | I want to …​                                     | So that I can…​                                            |
 | :---------------- | :---------------- | :----------------------------------------------- | :--------------------------------------------------------- |
 |🔴 High|student|scroll through each user’s entry to access information about my classmates|have a basic understanding of my classmates background|
-|🔴 High|student|add new contacts|keep track of new people|
-|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from the address book|
+|🔴 High|student|add new contacts|keep track of new students|
+|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from my address book|
 |🔴 High|student|edit existing contacts|update any outdated contacts and customise my address book|
 |🔴 High|introvert student|obtain the information of all classmates|know more about them without having to chat with all of them personally|
 |🔴 High|first time user|see all the features / commands of the application|better understand how to use it|
@@ -555,22 +555,19 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 |🟡 Medium|impatient student|have a responsive interface|have a good user experience|
 |🟡 Medium|tutor|track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
 |🟡 Medium|tutor|track students with varying background|better spread out students with similar background into different groups|
-|🟡 Medium|student|find the address of my classmates to identify where they are staying|see who stays on campus and who does not|
 |🟡 Medium|student|find people with different skillsets|learn from others|
+|🟡 Medium|student|view all of my contact's social handles on a single platform|view their profile and easily contact them|
 |🟡 Medium|student|check teammates availability|make sure my teammates have same vacant timeslots as me|
-|🟡 Medium|student|differentiate classmates with different personalities|identify like minded people / people of certain qualities you hope to work with in the group project|
+|🟡 Medium|student|know my classmates' personalities|identify like minded people / people of certain qualities I hope to work with in the group project|
 |🟡 Medium|student|differentiate classmates from different countries|form groups with the correct international / local ratio|
-|🟡 Medium|student|find classmates who stay near me|form groups with people who stay near me|
-|🟡 Medium|student|find good off-campus study spots|find convenient meeting places|
-|🟡 Medium|student|find where classmates stay|find convenient meeting places|
 |🟡 Medium|student|identify classmates with experience|ensure the spread of people with background in different groups|
 |🟡 Medium|student|start finding teammates early|make a sound decision on who I wish to be in the same group with|
+|🟡 Medium|student|view my tutorial group's student statistics|have a better understanding of my tutorial group's demographics|
 |🟡 Medium|student|find classmates of the opposite gender|form groups with the correct gender ratio|
-|🟡 Medium|student|be reminded of tutorial/lecture/meeting time|be aware of the deadlines and not miss any of them|
+|🟡 Medium|student|mass tag a group of contacts|shortlist them as potential groupmates|
 |🟡 Medium|international student|find other international students, possibly from the same country as me|connect with them and talk with them|
 |🟡 Medium|high CAP student|find competent team|to mantain a good cap|
 |🟡 Medium|low cap student|find people to carry|learn from them|
-|🟢 Low|international student|have use the application in my own language|feel more comfortable using the application|
 |🟢 Low|fast-typer student|pipe my commands|achive greater efficiency|
 
 ### Use cases
