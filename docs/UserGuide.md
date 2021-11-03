@@ -624,7 +624,11 @@ Suppose the date today is 1 Nov 2021 and current time is 1500h,
   <ul>
     <li>Reminder does not refresh the list of upcoming lessons automatically.</li>
     <li>Type <code>remind</code>, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> (see <a href="#shortcuts">Shortcuts</a> for more available shortcuts) to refresh the list of upcoming lessons.</li>
-    <li>Reminder also updates when valid <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands are executed. See <a href="#managing-lessons">Managing Lessons</a> for more details regarding these commands.</li>
+    <li>Reminder also updates when valid <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands are executed. 
+      <ul>
+        <li>See <a href="#managing-lessons">Managing Lessons</a> for more details regarding these commands.</li>
+      </ul>
+    </li>
   </ul>
 </div>
 
