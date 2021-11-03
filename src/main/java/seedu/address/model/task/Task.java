@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task implements Comparable<Task>, Cloneable {
+public abstract class Task implements Comparable<Task>, Cloneable {
 
     private TaskName name;
     private Set<Tag> tags = new HashSet<>();
@@ -167,15 +167,7 @@ public class Task implements Comparable<Task>, Cloneable {
      *
      * @return The date associated with a task.
      */
-    public LocalDate getDate() {
-        if (this instanceof DeadlineTask) {
-            return ((DeadlineTask) this).getDeadline().getDeadline();
-        } else if (this instanceof EventTask) {
-            return ((EventTask) this).getTaskDate().getDeadline();
-        } else {
-            return LocalDate.MAX;
-        }
-    }
+    public abstract LocalDate getDate();
 
     @Override
     public int compareTo(Task otherTask) {

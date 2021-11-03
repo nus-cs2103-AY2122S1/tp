@@ -21,16 +21,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
-//import seedu.address.model.task.TodoTask;
-import seedu.address.testutil.DeadlineTaskBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
-import seedu.address.testutil.EventTaskBuilder;
-import seedu.address.testutil.TodoTaskBuilder;
-//import seedu.address.testutil.TodoTaskBuilder;
-
+import seedu.address.testutil.TaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -57,6 +50,7 @@ public class EditTaskCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditTaskCommand editTaskCommand =
                 new EditTaskCommand(INDEX_FIRST_TASK, new EditTaskCommand.EditTaskDescriptor());
+
         Task editedTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
@@ -95,17 +89,8 @@ public class EditTaskCommandTest {
     public void execute_filteredList_success() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        Task editedTask;
-        if (taskInFilteredList instanceof DeadlineTask) {
-            editedTask = new DeadlineTaskBuilder((DeadlineTask) taskInFilteredList)
-                    .withName(VALID_TASK_NAME_PLAY).build();
-        } else if (taskInFilteredList instanceof EventTask) {
-            editedTask = new EventTaskBuilder((EventTask) taskInFilteredList)
-                    .withName(VALID_TASK_NAME_PLAY).build();
-        } else {
-            editedTask = new TodoTaskBuilder(taskInFilteredList)
-                    .withName(VALID_TASK_NAME_PLAY).build();
-        }
+        Task editedTask = TaskBuilder.of(taskInFilteredList).withName(VALID_TASK_NAME_PLAY).build();
+
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK,
                 new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY).build());
 

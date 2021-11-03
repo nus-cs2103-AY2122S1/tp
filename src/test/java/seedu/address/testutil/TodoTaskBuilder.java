@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TodoTask;
 
 /**
@@ -18,7 +17,7 @@ public class TodoTaskBuilder extends TaskBuilder {
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TodoTaskBuilder(Task taskToCopy) {
+    public TodoTaskBuilder(TodoTask taskToCopy) {
         super(taskToCopy);
     }
 
@@ -27,4 +26,23 @@ public class TodoTaskBuilder extends TaskBuilder {
         return new TodoTask(taskName, tags, isDone, description, priority);
     }
 
+    @Override
+    public TodoTaskBuilder withName(String name) {
+        return (TodoTaskBuilder) super.withName(name);
+    }
+
+    @Override
+    public TodoTaskBuilder withTags(String... tags) {
+        return (TodoTaskBuilder) super.withTags(tags);
+    }
+
+    @Override
+    public TodoTaskBuilder withDescription(String description) {
+        return (TodoTaskBuilder) super.withDescription(description);
+    }
+
+    @Override
+    public TodoTaskBuilder withPriority(String description) {
+        return (TodoTaskBuilder) super.withPriority(description);
+    }
 }
