@@ -5,12 +5,6 @@ title: User Guide
 
 # Welcome to Socius User Guide!
 
-This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Table of Contents
-
 * Table of Contents
 {:toc}
 
@@ -53,16 +47,16 @@ Socius is a desktop application that can help you, as a CS2103T Software Enginee
 * find teammates!
 
 The Socius User Guide helps you get started with using Socius.
-This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, taking you from zero to hero.
-Don't like reading? A summary table is available at the end for quick reference!
+This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, helping you to achieve maximum efficiency so that you can get the most out of it.
+If you already have experience with using Socius, a summary table is available at the end for quick reference!
 
 We hope that you will have a great time using Socius! :)
 
-Here are some example usages you can derive from Socius:
-* Keep track of details of classmates who are also taking CS2103T
-* Delete details of less acquainted classmates
-* Tag classmates based on assigned project groups
-* Filter classmates based on different project groups
+Here are some main features Socius provides:
+* Access details of coursemates taking CS2103T.
+* Find any coursemate(s) with their name, tutorial group, nationalities, tags and more.
+* Tag coursemates with suitable tags to categorize them.
+* View statistics on nationality and gender.
 
 <div markdown="block" class="alert alert-info">
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
@@ -75,11 +69,16 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 Before diving into Socius and getting to know its features, lets get familiar with the symbols used in this user guide.
 
-:information_source: This symbol represents important information
+<div markdown="block" class="alert alert-info">
 
-:exclamation: This symbol represents warnings or cautions
-
-:bulb: This symbol represents additional information such as tips
+| Symbol | Meaning |
+| :----: | ------- |
+| :information_source: | Important information |
+| :exclamation: | Warnings or cautions |
+| :bulb: | Additional information such as tips |
+| :wrench: | Help with common technical issues |
+     
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -87,21 +86,23 @@ Before diving into Socius and getting to know its features, lets get familiar wi
 
 Here is a quick start on how you can start using our app in your own computer.
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [*Java 11*](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed in your Computer. 
 
 2. Download the latest `Socius.jar` on our [Releases](https://github.com/AY2122S1-CS2103T-W08-4/tp/releases) page.
 
-3. Move the file `Socius.jar` to a folder you want to use as the _home folder_ for your Socius application.
+3. Move the file `Socius.jar` to a folder you want to use as the home folder for your Socius application.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear within a few seconds.
 
-   ![Ui](images/Quickstart.png)
+<div markdown="block" class="alert alert-info">:wrench: **Help:**
+If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
+</div>
 
-* If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
+   ![Ui](images/Quickstart.png)
 
 * Note that the app comes with some sample data by default. Type **`clear`** in the command box to remove those sample data.
 
-5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
+* Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
 Some example commands you can try:
     * **`list`** : Lists all contacts.
 
@@ -113,7 +114,7 @@ Some example commands you can try:
 
     * **`exit`** : Exits the app.
 
-6. Refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
+* Refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,18 +147,15 @@ Some example commands you can try:
 
 ### Viewing help: `help`
 
-You can view the full list of commands.
-Additionally, if you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
-
-![help message](images/helpWindow.png)
+You can view the full list of commands available on Socius with the `help` command.
 
 Format: **`help`**
 
 ### Adding a person: `add`
 
-You can add a person to the contact book.
+If you want to add a new person into *Socius*, you can use the 'add' command.
 
-Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
+Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIAL HANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
@@ -165,14 +163,6 @@ The [Parameter Constraints](#parameter-constraints) section shows the constaints
 
 * Only the `NAME` field of a person is _compulsory_, other fields are _optional_.
 * The order of the fields does not matter.
-* The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name and `HANDLENAME` is the identifying username for that platform.
-* Supported `PLATFORM`
-  * `ig` for Instagram
-  * `tg` for Telegram
-  * `fb` for Facebook
-  * `tw` for Twitter
-  * `gh` for Github
-  * `ln` for Linkedin
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0) and social handles (including 0)
@@ -183,10 +173,10 @@ Examples:
 * **`add`** `n/Amy Tan` adds `Amy Tan` to the list.
 * **`add`** `n/Benedict p/98765432 e/ben@example.com g/M` adds `Benedict`  to the list together with his phone number, email and gender.
 * **`add`** `n/Cindy t/friend e/cindy@example.com p/1234567 tg/T07` adds `Cindy` to the list together with her tag, email, phone number and tutorial group.
-* **`add`** `n/David Lim nat/Singapore s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
+* **`add`** `n/David Lim nat/Singaporean s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
 ![Add Command Example](images/AddEnerst.png)
-*Add Command: n/Ernest s/tg:ernest2334 s/ig:ernessst*
+*After execution of Add Command: **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst`*
 
 ### Editing a person: `edit`
 
@@ -200,17 +190,23 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
   * `p/PHONE`
   * `e/EMAIL`
   * `nat/NATIONALITY`
-  * `tg/TUTORIAL_GROUP`
-  * `s/SOCIAL_HANDLE`
+  * `tg/TUTORIAL GROUP`
+  * `s/SOCIAL HANDLE`
   * `r/REMARK`
   * `t/TAG`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
+</div>
+
 * At least one field of the person must be changed.
 * Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* Index must be provided and **must be a positive integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
-* If duplicated fields are given, only the latest one will be taken, except for `s/SOCIAL_HANDLE` and `t/TAG`.
+* `INDEX` refers to the index number shown on the left of the name of a displayed person.
+* New input values will overwrite existing values.
+* To remove a field, simply leave the `VALUE` empty
+  * For `s/SOCIAL HANDLE`, you can specify which social handle to remove by only leaving the `USERID` part empty (i.e. `s/PLATFORM:`)
+* If duplicated fields are given, only the latest one will be taken
+  * This does not applies to `s/SOCIAL_HANDLE` and `t/TAG` as they can accept multiple values.
 * When editing tags, the existing tags of the person will be replaced (i.e adding of tags is not cumulative).
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
@@ -235,7 +231,7 @@ Format: **`remark`** `INDEX r/VALUE`
 * Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing remark will be updated to the input remark.
 * If duplicated remarks are given, only the latest one will be taken.
-* You can remove a person’s remark by typing ` ` (i.e. empty) or `r/` without specifying any remark after it.
+* You can remove a person’s remark by typing `remark` (i.e. empty parameter) or `remark r/` without specifying any remark after it.
 
 Examples:
 
@@ -255,7 +251,7 @@ Format: **`delete`** `INDEX`
 Examples:
 
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
-* **`find`** `Benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
+* **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
 
 ### Deleting multiple person: `deletem`
 
@@ -326,9 +322,9 @@ Examples:
 * **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`.<br>
 * **`find`** `nat/Singaporean` <br>
 ![result for 'find n/alex n/david'](images/FindAlexAndDavid.png)
-*Find Command: n/alex n/david*
+*After execution of Find Command: **`find`** `n/alex n/david`*
 ![result for 'find nat/Singapore'](images/FindSingaporean.png)
-*Find Command: nat/Singaporean*
+*After execution of Find Command: **`find`** `nat/Singaporean`*
 
 ### Sorting all persons: `sort`
 
@@ -336,18 +332,7 @@ You can sort all persons in the contact book by a specified field.
 
 Format: **`sort`** `FIELD_PREFIX/`
 
-* `FIELD_PREFIX/` can be any of the following:
-  * `n/`
-  * `g/`
-  * `p/`
-  * `e/`
-  * `nat/`
-  * `tg/`
-  * `s/`
-  * `r/`
-  * `t/`
-
-* Exactly one field must be provided.
+* `FIELD_PREFIX/` can be any of the following: `n/`, `g/`, `p/`, `e/`, `nat/`, `tg/`, `s/`, `r/`, `t/`
 * If field contains words, sort persons in ascending alphabetical order.
 * If field contains numbers, sort persons in ascending numeric order.
 
@@ -360,7 +345,7 @@ Examples:
 
 You can view the gender and nationality statistics of a specified tutorial group.
 
-Format: **`stat`** `TUTORIAL_GROUP`
+Format: **`stat`** `TUTORIAL GROUP`
 
 Examples:
 
@@ -373,7 +358,7 @@ You can import your friends' contact book into your application.
 Format: **`import`** `FILE_NAME.json`
 
 * File must be in JSON format!
-* File must be located in the `./data` directory in the same directory as `Socius.jar`.
+* File must be located in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
 * **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
@@ -384,8 +369,7 @@ You can export your contact book and share it with your friends.
 
 Format: **`export`** `FILE_NAME.json`
 
-* File must be in JSON format!
-* File must be located in the `./data` directory in the same directory as `Socius.jar`.
+* File will be stored in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
 
@@ -416,6 +400,10 @@ Format: **`exit`**
 
 Socius data are automatically saved to the computer after any command that changes the data.
 Therefore, there is no need to save manually. The data will be automatically loaded back into the application the next time you use it.
+
+### Command History
+
+Use up/down arrow to navigate through command history. This is useful if the command you are going to type only differs slightly from a command you have previously typed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -453,21 +441,24 @@ Example: `e/e3029834@u.nus.edu`
 
 Example: `nat/Singaporean`
 
-### `tg/TUTORIAL_GROUP`
-`TUTORIAL_GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
+### `tg/TUTORIAL GROUP`
+`TUTORIAL GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
 
 Example: `tg/T09`
 
-### `s/SOCIAL_HANDLE`
-`SOCIAL_HANDLE` should be of the format `platform:username` and adhere to the following constraints:
-* The platform should only contain the 2 letter shorthand for the social platform:
+### `s/SOCIAL HANDLE`
+`SOCIAL HANDLE` should be of the format `PLATFORM:USERID` and should adhere to the following constraints:
+* Only the following `PLATFORM` are supported: `Instagram`, `Telegram`, `Facebook`, `Twitter`, `Github`, `Linkedin`, `Snapchat`, `Discord`
+* The following 2 letter shorthand can be used to replace the full name of the social platform:
      * `ig` for Instagram
      * `tg` for Telegram
      * `fb` for Facebook
      * `tw` for Twitter
      * `gh` for Github
      * `ln` for Linkedin
-* The username should only contain alphanumeric characters
+     * `sc` for Snapchat
+     * `dc` for Discord
+* `USERID` should not contains whitespaces
 
 Example: `s/tg:alexx9384`
 
@@ -477,7 +468,7 @@ Example: `s/tg:alexx9384`
 Example: `r/Stays in PGP`
 
 ### `t/TAG`
-`TAG` names should be alphanumeric
+`TAG` names should be alphanumeric.
 
 Example:  `t/friends`
 
@@ -504,22 +495,49 @@ If the format of your data file is invalid, Socius will discard all data and sta
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+| Word | Meaning |
+|--------|---------|
+|        |           |
+
+## Authors
+
+This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
+
 ## Command Summary
 
-| Action | Command | Format | Examples|
-|--------|---------|-------------------|----------------------------------------------------|
-| Help | **Help** | **`help`** | **`help`** |
-| Modify | **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
-|  | **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
-|  | **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
-|  | **Delete** | **`delete`** `INDEX` | **`delete`** `3`|
-|  | **Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
-|  | **Clear** | **`clear`** | **`clear`** |
-| View | **List** | **`list`** | **`list`** |
-|  | **Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
-|  | **Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
-|  | **Stat** | **`stat`** `TUTORIAL_GROUP` | **`stat`** `T09`|
-| Share | **Import** | **`import`** | **`import`** `contactbook.json`|
-|  | **Export** | **`export`** | **`export`** `contactbook.json`|
-| Advance | **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
-| Exit | **Exit** | **`exit`** | **`exit`** |
+### General
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Help** | **`help`** | **`help`** |
+| **Exit** | **`exit`** | **`exit`** |
+
+### Modify
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
+| **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
+| **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
+| **Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+| **Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
+| **Clear** | **`clear`** | **`clear`** |
+
+### View
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **List** | **`list`** | **`list`** |
+| **Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
+| **Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
+| **Stat** | **`stat`** `TUTORIAL_GROUP` | **`stat`** `T09`|
+
+### Share
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Import** | **`import`** | **`import`** `contactbook.json`|
+| **Export** | **`export`** | **`export`** `contactbook.json`|
+
+### Advance
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
+

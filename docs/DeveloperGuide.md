@@ -216,6 +216,7 @@ The features mentioned are:
 - [Deleting multiple contacts by keywords](#delete-by-keywords)
 - [Importing a JSON file](#import-json-file)
 - [Undoing / redoing command](#proposed-undoredo-feature)
+- [Input Suggestion](#input-suggestion)
 - {and so on...}
 
 ### Add contacts with optional arguments
@@ -446,6 +447,58 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
+
+
+### Input Suggestion
+
+#### Implementation
+
+The Input Suggestion mechanism will suggest potential words when the user types in something wrong or invalid.
+
+Currently, this feature only supports suggestions for commands and nationalities.
+
+This feature is implemented using the `Wagner-Fischer` dynamic programming algorithm to compute the `Levenshtein distance`.
+The `Levenshtein distance` between two words is the minimum number of single-character edits
+(insertions, deletions or substitutions) required to change one word into the other. 
+
+#### Usage
+
+Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `fin n/Ben` command, with the intention of typing `find n/Ben`. 
+
+Step 3. This will call `AddressBookParser#parseCommand`. But since there are no command words that match it,
+it will end up at the `default` clause of the `switch` statement.
+
+Step 4. A new `WordSuggestion` object will be created with its `word` set to the `commandWord`,
+`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 3.
+
+Step 5. While being initialized, `WordSuggestion#computeAllLevenshteinDistance` will be called, and it will compute the
+`Levenshtein distance` of `word` with every single word in `validWords`.
+The result will be stored as a `Map` in `editDistances`,
+with the key and value being a word and its corresponding edit distance respectively.
+the minimum edit distance is also computed and stored in `minDistance`.
+
+Step 6. Next, `WordSuggestion#getSuggestedWords` is called. It will return as a string, all the words that has
+the same edit distance as `minDistance`, if `minDistance` is smaller than `distanceLimit`.
+
+Step 7. Finally, it will throw a `ParseException` which contains the suggested words computed previously and
+display the suggestions to the user.
+
+#### Design considerations:
+
+**Aspect: Algorithm and Time Complexity:**
+
+* **Alternative 1 (current choice):** Dynamic programming
+    * Pros: More efficient, only takes O(n*m) time, with n and m being the length of each of the two strings.
+    * Cons: Harder to implement by the developers.
+
+* **Alternative 2:** Recursive
+    * Pros: Very straightforward to implement as it follows directly from its mathematical formula.
+    * Cons: Very inefficient as there are three recursive calls at each step, resulting in exponential time complexity.
+
 
 _{more aspects and alternatives to be added}_
 
