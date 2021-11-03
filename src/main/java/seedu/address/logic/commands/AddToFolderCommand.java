@@ -18,7 +18,7 @@ public class AddToFolderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to folder in UNIon. "
             + "Parameters: "
-            + "INDEX >> FOLDERNAME \n"
+            + "CONTACT_INDEX >> FOLDERNAME \n"
             + "Example: "
             + COMMAND_WORD + " "
             + "3 >> CS2103";
@@ -47,7 +47,7 @@ public class AddToFolderCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Index index : this.indexList) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_EXCEEDS_LIST_SIZE);
             }
 
             Person personToAdd = lastShownList.get(index.getZeroBased());
