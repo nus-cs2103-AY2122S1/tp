@@ -346,11 +346,12 @@ Format: `exit`
 
 #### Viewing schedule for the week: `change`
 
-The schedule for the current week is shown under the schedule tab by default. The week
+The schedule for the next 7 days are shown under the schedule tab by default. The week
 can be changed using the `change` command.
 
- * Takes in a single date input to translate into a week.
- * The date is in `YYYY-MM-DD`
+ * Takes in a single date input to display as the first day in the schedule.
+ * Also changes the default Period for shift-related commands.
+ * The date format is `YYYY-MM-DD`
 
 Format:  
 `change da/DATE`    
