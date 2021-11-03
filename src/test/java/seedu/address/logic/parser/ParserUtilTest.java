@@ -13,6 +13,7 @@ import seedu.address.model.friend.FriendName;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_ID = "R@chel";
+    private static final String INVALID_USERNAME = "    ";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String WHITESPACE = " \t\r\n";
 
@@ -44,6 +45,11 @@ public class ParserUtilTest {
     @Test
     public void parseFriendName_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseFriendName(INVALID_NAME));
+    }
+
+    @Test
+    public void parseUserName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUserName(INVALID_USERNAME));
     }
 
     @Test
