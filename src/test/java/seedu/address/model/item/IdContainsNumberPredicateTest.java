@@ -15,8 +15,8 @@ public class IdContainsNumberPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("140121");
-        List<String> secondPredicateKeywordList = Arrays.asList("140252", "124535");
+        List<Integer> firstPredicateKeywordList = Collections.singletonList(140121);
+        List<Integer> secondPredicateKeywordList = Arrays.asList(140121, 124535);
 
         IdContainsNumberPredicate firstPredicate = new IdContainsNumberPredicate(firstPredicateKeywordList);
         IdContainsNumberPredicate secondPredicate = new IdContainsNumberPredicate(secondPredicateKeywordList);
@@ -41,7 +41,7 @@ public class IdContainsNumberPredicateTest {
     @Test
     public void test_idContainsNumber_returnsTrue() {
         // exact
-        IdContainsNumberPredicate predicate = new IdContainsNumberPredicate(Collections.singletonList("140121"));
+        IdContainsNumberPredicate predicate = new IdContainsNumberPredicate(Collections.singletonList(140121));
         assertTrue(predicate.test(new ItemBuilder().withId("140121").build()));
     }
 
@@ -52,16 +52,12 @@ public class IdContainsNumberPredicateTest {
         assertFalse(predicate.test(new ItemBuilder().withId("147564").build()));
 
         // partial match
-        predicate = new IdContainsNumberPredicate(Arrays.asList("140342", "140812"));
+        predicate = new IdContainsNumberPredicate(Arrays.asList(140342, 140812));
         assertFalse(predicate.test(new ItemBuilder().withId("140").build()));
 
         // completely doesn't match
-        predicate = new IdContainsNumberPredicate(Arrays.asList("140242", "243812"));
+        predicate = new IdContainsNumberPredicate(Arrays.asList(140242, 243812));
         assertFalse(predicate.test(new ItemBuilder().withId("203523").build()));
-
-        // Keywords match name and tag, but does not match id
-        predicate = new IdContainsNumberPredicate(Arrays.asList("12345", "baked"));
-        assertFalse(predicate.test(new ItemBuilder().withName("Apple Pie").withId("12346").withTags("baked").build()));
     }
 }
 
