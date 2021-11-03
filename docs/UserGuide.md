@@ -85,6 +85,7 @@ Format: `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​`
 
 * `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
 * `NAME` has a character limit of 70 characters.
+* `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
 * Duplicate tags are ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -111,6 +112,8 @@ Format: `vim INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 * At least one of the optional fields must be provided.
 * `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
 * `NAME` has a character limit of 70 characters.
+* `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
+
 * Duplicate tags are ignored.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
