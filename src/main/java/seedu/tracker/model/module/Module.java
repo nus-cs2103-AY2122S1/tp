@@ -142,18 +142,19 @@ public class Module {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getCode())
-                .append("; ")
+        builder.append("Code: ")
+                .append(getCode())
+                .append(", Title: ")
                 .append(getTitle())
-                .append("; Description: ")
+                .append(", Description: ")
                 .append(getDescription())
-                .append("; ")
+                .append(", ")
                 .append(getMc());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            tags.forEach((tag)->builder.append(tag.toString() + "; "));
         }
 
         if (hasAcademicCalendar) {

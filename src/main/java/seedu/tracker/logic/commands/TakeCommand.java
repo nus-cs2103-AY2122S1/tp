@@ -81,7 +81,6 @@ public class TakeCommand extends Command {
         Module scheduledModule = createScheduledModule(moduleToSchedule, academicCalendar);
 
         model.setModule(moduleToSchedule, scheduledModule);
-        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, scheduledModule));
     }
 

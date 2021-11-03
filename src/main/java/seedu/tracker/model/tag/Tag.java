@@ -9,7 +9,9 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should not be empty or more than 40 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should start with an alphanumeric character,"
+            + " followed by alphanumeric characters, space \" \", or underscore \"_\". "
+            + "and should not be empty or more than 40 characters";
 
     /*
      * The first character of the tag must not be a whitespace,

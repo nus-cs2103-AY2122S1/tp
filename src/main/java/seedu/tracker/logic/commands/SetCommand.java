@@ -27,7 +27,7 @@ public class SetCommand extends Command {
             + PREFIX_SEMESTER + "1\n"
             + "Example 2: " + COMMAND_WORD + " "
             + PREFIX_MC + "188";
-    public static final String MESSAGE_SUCCESS_SEM = "Current semester set:\n %1$s";
+    public static final String MESSAGE_SUCCESS_SEM = "Current semester set:\n%1$s";
     public static final String MESSAGE_SUCCESS_MC = "Mc goal set:\n %1$s";
     private boolean isSemChanged = false;
     private UserInfo toBeUpdated = new UserInfo();

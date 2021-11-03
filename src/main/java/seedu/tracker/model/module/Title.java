@@ -10,7 +10,7 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
 public class Title {
 
     public static final String MESSAGE_CONSTRAINTS = "Title can take any values, but the first character should "
-            + "be alphanumeric. And Title should not be blank or more than 60 characters";
+            + "be alphanumeric. It should not be blank or more than 60 characters";
 
     /*
      * The first character of the title must not be a whitespace,
