@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
-    public static final String defaultMessage = "\nRefer to the user guide: "
+    public static final String DEFAULT_MESSAGE = "\nRefer to the user guide: "
             + "https://ay2122s1-cs2103-f10-2.github.io/tp/UserGuide.html";
 
     private final String messageUsage;
@@ -18,7 +18,7 @@ public class HelpCommand extends Command {
      */
     public HelpCommand(String message) {
         if (message.isEmpty()) {
-            this.messageUsage = defaultMessage;
+            this.messageUsage = DEFAULT_MESSAGE;
         } else {
             this.messageUsage = message;
         }
