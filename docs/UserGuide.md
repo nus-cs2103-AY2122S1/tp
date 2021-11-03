@@ -17,9 +17,11 @@ title: User Guide
           1. Adding a person `add`
           2. Editing a person `edit`
           3. Adding a remark `remark`
-          4. Deleting a person `delete`
-          5. Deleting multiple person `deletem`
-          6. Clearing all entries `clear`
+          4. Adding tags 'addt'
+          5. Deleting a person `delete`
+          6. Deleting tags 'deletet'
+          6. Deleting multiple person `deletem`
+          7. Clearing all entries `clear`
      3. View
           1. Listing all persons `list`
           2. Finding persons `find`
@@ -235,6 +237,27 @@ Examples:
 * **`remark`** `1 r/She likes coding` adds the remark `She likes coding` to the person at index 1.
 * **`remark`** `2` clears the remark of the person at index 2.
 
+### Adding tags: `addt`
+
+You can add tags to a person in the contact book by `INDEX`. Alternatively, you can add tags to everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`addt`** `INDEX t/TAG [t/TAG]…​`
+* Add tags to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* Input tag will be appended to the existing tag.
+* If duplicated tags are given, these tags will not be added.
+* At least one `TAG` must be provided.
+* `TAG` is case-sensitive
+
+Alternatively, **`addt`** `all t/TAG [t/TAG]…​`
+* Add tags to everybody in the list.
+* Input tag will be appended to the existing tag.
+* If duplicated tags are given, these tags will not be added.
+* At least one `TAG` must be provided.
+* `TAG` is case-sensitive
+
 ### Deleting a person: `delete`
 
 You can delete the specified person from the contact book by `INDEX`.
@@ -249,6 +272,26 @@ Examples:
 
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
 * **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
+
+### Deleting tags: `deletet`
+You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`deletet`** `INDEX [t/TAG]…​`
+* Delete tags of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* The tag refers to the tags to delete from the person.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, all tags of the person will be deleted.
+* `TAG` is case-sensitive
+
+Alternatively, **`deletet`** `all [t/TAG]…​`
+* Delete tags of everybody in the list.
+* The tag refers to the tags to delete from everyone.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, every tag in the list will be deleted.
+* `TAG` is case-sensitive
 
 ### Deleting multiple person: `deletem`
 
