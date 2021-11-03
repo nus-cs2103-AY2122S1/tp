@@ -1145,7 +1145,7 @@ testers are expected to do more *exploratory* testing.
 
 ## Tasks
 
-### Adding a todo
+### Adding a todo task
 
 1. Adding a todo task while all tasks are being shown.
 
@@ -1208,6 +1208,65 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a task
 
+1. Editing a task while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `tasks` command. Multiple tasks in the list.
+
+    1. Test case: `editTask 1 n/Tutorial p/high d/Covers important topics for finals.`<br>
+       Expected: The first task in the list has details changed to the ones specified above. Details of the task is shown in the status message.
+    
+    1. Test case: `editTask 999 n/test` where the index is greater than the number of tasks in the list. <br>
+       Expected: No task is edited. Error message invalid index shown.
+
+    1. Test case: `editTask 1` with no prefixes <br>
+       Expected: No task is edited. Error message of missing edit fields shown.
+
+    1. Test case: `editTask 0 n/test`, where the index is 0 or smaller <br>
+       Expected: No task is edited. Error message of invalid command format shown.
+
+2. Editing a task while on another directory
+
+    1. Prerequisites: List all students or groups using the `students` or `groups` command.
+
+    2. Perform a successful `editTask` command
+       Expected: The task is edited, and the task list is displayed.
+
+3. Editing a deadline task
+
+   1. Prerequisites: There must be at least one Deadline Task present in the task list.
+
+   2. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the deadline task <br>
+      Expected: The Deadline Task is edited. Details of the task is shown in the status message.
+
+   3. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the deadline task <br>
+       Expected: No task is edited. Error message of invalid prefix is shown.
+
+   4. Test Case: `editTask 1 by/2021-20-12`, where the index is the index of the deadline task, and the date provided is invalid. <br>
+      Expected: No task is edited. Error message of invalid date shown.
+
+4. Editing an event task
+
+    1. Prerequisites: There must be at least one Event Task present in the task list.
+
+    2. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the event task <br>
+       Expected: The Event Task is edited. Details of the task is shown in the status message.
+
+    3. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the event task <br>
+       Expected: No task is edited. Error message of invalid prefix is shown.
+
+    4. Test Case: `editTask 1 on/2021-20-12`, where the index is the index of the event task, and the date provided is invalid. <br>
+        Expected: No task is edited. Error message of invalid date shown.
+
+5. Editing a todo task
+
+    1. Prerequisites: There must be at least one Todo Task present in the task list.
+
+    2. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the todo task <br>
+       Expected: No task is edited. Error message of invalid prefix is shown.
+
+    3. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the todo task <br>
+       Expected: No task is edited. Error message of invalid prefix is shown.
+
 ### Deleting a task
 
 1. Deleting a tasks while all tasks are being shown
@@ -1261,6 +1320,25 @@ testers are expected to do more *exploratory* testing.
        Expected: All tasks cleared from task list.
 
 ### Clearing all data from tApp
+
+1. Clearing all data from tApp
+
+    1. Test case: `clearAll`<br>
+       Expected: All students, tasks and groups cleared from the application.
+
+### Help Window
+
+1. Opening the help window through command line
+    1. Test case: `help`<br>
+       Expected: The help window pop up is displayed.
+
+2. Opening the help window through mouse input
+    1. Test case: click on the help tab
+       Expected: The help window pop up is displayed.
+
+3. Copying the User Guide url
+    1. Test case: click on the "COPY URL" button in the help page
+       Expected: The url for the User Guide is copied.
 
 ### Saving data
 
