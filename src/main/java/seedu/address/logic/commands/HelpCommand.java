@@ -37,14 +37,6 @@ public class HelpCommand extends Command {
             + "help                             " + "\t\t\tShow all available commands\n"
             + "exit                             " + "\t\t\tQuit bot";
 
-    private static String command(String s) {
-        return String.format("%10s", s);
-    }
-
-    private static String description(String s) {
-        return String.format("%-100s", s);
-    }
-
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
