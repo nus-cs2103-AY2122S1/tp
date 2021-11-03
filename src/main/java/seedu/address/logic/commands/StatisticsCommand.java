@@ -47,10 +47,11 @@ public class StatisticsCommand extends Command {
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));
         List<Person> filteredPersonList = new ArrayList<Person>(model.getFilteredPersonList());
+        model.updateFilteredPersonList(p -> true);
+
         if (filteredPersonList.size() == 0) {
             throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
         }
-        model.updateFilteredPersonList(p -> true);
 
         Statistic statistic = new Statistic(filteredPersonList);
 

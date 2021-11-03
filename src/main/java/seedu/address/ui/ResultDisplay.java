@@ -34,6 +34,7 @@ public class ResultDisplay extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
+        placeHolder.getChildren().add(resultDisplay);
     }
 
     public void setChartToUser(List<ObservableList<PieChart.Data>> datas, List<String> titles) {
@@ -72,8 +73,7 @@ public class ResultDisplay extends UiPart<Region> {
     /**
      * Clear chart from previous commands.
      */
-    public void clearCharts() {
+    public void clearDisplay() {
         placeHolder.getChildren().clear();
-        placeHolder.getChildren().add(resultDisplay);
     }
 }
