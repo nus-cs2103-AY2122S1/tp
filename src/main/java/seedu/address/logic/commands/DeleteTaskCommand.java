@@ -88,7 +88,7 @@ public class DeleteTaskCommand extends DeleteCommand {
      *
      * @param module The module with the task to be deleted.
      */
-    public void deleteTaskFromModule(Module module) throws CommandException {
+    public void deleteTaskFromModule(Module module) {
         for (Task task : module.getTaskList()) {
             if (task.getTaskId().equals(targetTaskId)) {
                 logger.log(Level.INFO, "deleting task from module taskList: " + task.getTaskId());
