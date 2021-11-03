@@ -26,8 +26,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Anime> combinedPred = unused -> true;
         boolean hasValidArguments = false;
 
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE);
+        ArgumentMultimap argMultimap;
+
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, false, PREFIX_NAME, PREFIX_GENRE);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             hasValidArguments = true;

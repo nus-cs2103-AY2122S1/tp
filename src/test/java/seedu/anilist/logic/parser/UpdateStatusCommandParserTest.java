@@ -1,6 +1,7 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STATUS_DESC_ALPHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STATUS_DESC_NUMERIC;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
@@ -53,8 +54,12 @@ public class UpdateStatusCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // wrong status desc
         assertParseFailure(parser, "1" + INVALID_STATUS_DESC_ALPHA, Status.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_STATUS_DESC_NUMERIC, Status.MESSAGE_CONSTRAINTS);
+
+        // wrong param specified
+        assertParseFailure(parser, "1" + STATUS_DESC_WATCHING + EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
     }
 
     @Test

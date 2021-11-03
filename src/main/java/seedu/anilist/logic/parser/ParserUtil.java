@@ -1,7 +1,9 @@
 package seedu.anilist.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -124,5 +126,39 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    /**
+     * Tokenizes a string into a map of parameters.
+     * Checks if unused params are present.
+     * Checks if preamble is present.
+     * @param args the string to tokenize
+     * @param requiresPreamble whether the command requires a preamble
+     * @param validPrefixes a Set of valid prefixes used in the command
+     * @return A argumentMultimap
+     * @throws ParseException if there are unused params present
+     */
+    public static ArgumentMultimap tokenizeWithCheck(String args, boolean requiresPreamble, Prefix... validPrefixes)
+            throws ParseException {
+        Prefix[] allPrefixes = CliSyntax.getAllPrefixes();
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, allPrefixes);
+        Set<Prefix> validPrefixesSet = new HashSet<>(Arrays.asList(validPrefixes));
+        boolean hasPreamble = !argMultimap.getPreamble().isEmpty();
+        if (!requiresPreamble && hasPreamble) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+
+        if (requiresPreamble && !hasPreamble) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+
+        for (Prefix p : allPrefixes) {
+            boolean isValidPrefix = validPrefixesSet.contains(p);
+            if (argMultimap.getValue(p).isPresent() && !isValidPrefix) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+        }
+        return argMultimap;
     }
 }

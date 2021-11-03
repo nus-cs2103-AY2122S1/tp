@@ -1,5 +1,6 @@
 package seedu.anilist.model.genre;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.testutil.Assert.assertThrows;
@@ -44,5 +45,25 @@ public class GenreTest {
         assertTrue(Genre.isValidGenreName(VALID_GENRE_LOWER_CASE));
         // genre with mixed case
         assertTrue(Genre.isValidGenreName(VALID_GENRE_MIXED_CASE));
+    }
+
+    @Test
+    public void compareTo() {
+        Genre genreOne = new Genre(VALID_GENRE_LOWER_CASE);
+        Genre genreOneCopy = new Genre(VALID_GENRE_LOWER_CASE);
+        Genre genreTwo = new Genre(VALID_GENRE_MIXED_CASE);
+
+        // null input
+        assertEquals(0, genreOne.compareTo(null));
+        // not a Genre
+        assertEquals(0, genreOne.compareTo(1));
+        // same object
+        assertEquals(0, genreOne.compareTo(genreOne));
+        // same genreName
+        assertEquals(0, genreOne.compareTo(genreOneCopy));
+        // other genre is 'larger'
+        assertTrue(genreOne.compareTo(genreTwo) < 0);
+        // other genre is 'smaller'
+        assertTrue(genreTwo.compareTo(genreOne) > 0);
     }
 }

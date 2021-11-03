@@ -3,10 +3,12 @@ package seedu.anilist.logic.parser;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_NO_SUCH_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.GenreCommand.MESSAGE_GENRE_NOT_PROVIDED;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -72,10 +74,13 @@ public class GenreCommandParserTest {
         assertParseFailure(parser,
                 "1" + INVALID_ACTION_DESC + GENRE_DESC_SCIENCE_FICTION,
                 String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, INVALID_ACTION_NO_SUCH_ACTION));
-        //unsupported action
 
         //invalid genre
         assertParseFailure(parser, "1" + ACTION_DESC_DELETE + INVALID_GENRE_DESC, Genre.MESSAGE_CONSTRAINTS);
+
+        // wrong params specified
+        assertParseFailure(parser, "1" + ACTION_DESC_DELETE + GENRE_DESC_ACTION + STATUS_DESC_TOWATCH,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
