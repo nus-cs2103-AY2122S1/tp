@@ -86,7 +86,7 @@ public class NotorParser {
                     + "(?<arguments>(\\s+.*)|(.*))"); // remaining arguments of the command or trailing spaces
     private static final Pattern TARGETED_NAME_COMMAND_FORMAT = Pattern.compile(
             "(?<commandWord>\\w+)\\s+" // command word and any trailing spaces
-                    + "(?<name>[a-zA-Z][a-zA-Z ]+\\s+)" // index or name and any trailing spaces
+                    + "(?<name>[a-zA-Z][\\p{Alnum}-. ]+\\s+)" // index or name and any trailing spaces
                     + "/(?<subCommandWord>\\w+)" // subcommand word and any trailing spaces
                     + "(?<arguments>(\\s+.*)|(.*))"); // remaining arguments of the command
 
