@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Framework {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Frameworks should only contain alphanumeric characters and spaces";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "Frameworks should only contain alphanumeric characters and spaces, "
+                    + "and the '.' character (but not start with '.').";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}[.]*]*";
 
     public final String frameworkName;
 
