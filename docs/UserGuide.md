@@ -402,8 +402,8 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td>Lesson rate</td>
             <td><code>rates/</code></td>
             <td><ul>
-              <li>The lesson's rate refers to the fee of the lesson per hour.<br/>This rate will be used in the calculation of fees due after each lesson.</li>
-              <li>See<a href="#monetary-fields"> this note for more details.</a></li>
+              <li>Fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.</li>
+              <li>Refer to<a href="#monetary-fields"> "Monetary fields" for more details.</a></li>
             </ul></td>
             <td><code>rates/50</code></td>
         </tr>
@@ -423,7 +423,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
         <tr>
             <td>Outstanding fees</td>
             <td><code>f/</code></td>
-            <td>See<a href="#monetary-fields"> this note for more details.</a></td>
+            <td>Refer to<a href="#monetary-fields"> "Monetary fields" for more details.</a></td>
             <td><code>lvl/J1</code></td>
         </tr>
         <tr>
