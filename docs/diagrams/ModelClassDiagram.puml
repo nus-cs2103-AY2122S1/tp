@@ -25,6 +25,10 @@ Class Language
 Class Name
 Class Phone
 Class HealthCondition
+Class LastVisit
+Class Visit
+Class Frequency
+Class Occurrence
 
 }
 
@@ -49,6 +53,10 @@ Person *--> Phone
 Person *--> Language
 Person *--> Address
 Person *--> "*" HealthCondition
+Person *--> LastVisit
+Person *--> Visit
+Visit *--> "0..1" Frequency
+Visit *--> "0..1" Occurrence
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
