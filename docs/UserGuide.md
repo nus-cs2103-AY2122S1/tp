@@ -231,6 +231,8 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
 
+* Each student must have a unique name.
+
 Example(s):
 
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
@@ -558,3 +560,7 @@ Action | Format | Examples
 * **Q:** Where can I view the list of commands?
 
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
+
+* **Q:** Why am I unable to add a student with the same name as another student?
+
+  **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
