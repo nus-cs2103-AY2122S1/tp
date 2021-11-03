@@ -105,7 +105,14 @@ public class EditCommandTest {
         showParticipantAtIndex(expectedModel, INDEX_FIRST_PARTICIPANT);
         expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        try {
+            CommandResult result = editCommand.execute(model);
+            CommandResult expectedCommandResult = editCommand.execute(expectedModel);
+            assertEquals(expectedCommandResult, result);
+            assertEquals(expectedModel, model);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
