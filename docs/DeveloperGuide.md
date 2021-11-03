@@ -329,7 +329,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-<ins>Aspect: How to design the syntax</ins> 
+<ins>Aspect: How to design the syntax</ins>
 * Option 1: `delete-l LESSON_INDEX`
   * Pros:
     * Non-space-separated word allows easier parsing of command word
