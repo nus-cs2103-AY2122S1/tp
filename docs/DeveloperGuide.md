@@ -263,7 +263,6 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`, whi
 to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
 </div>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
