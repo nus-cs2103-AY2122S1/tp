@@ -5,6 +5,7 @@ import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import tutoraid.model.lesson.exceptions.LessonExceedCapacityException;
 import tutoraid.model.student.Student;
 
 /**
@@ -98,13 +99,15 @@ public class Lesson {
     }
 
     /**
-     * Checks if the lesson will exceed capacity when accepting more students.
+     * Checks if the lesson is full.
      *
-     * @param numOfExtraStudents the number of students to be added
-     * @return true if the number of students after adding is larger than the capacity
+     *
      */
-    public boolean exceedsCapacity(int numOfExtraStudents) {
-        return students.numberOfStudents() + numOfExtraStudents > capacity.getCapacity();
+    public boolean isFull() throws LessonExceedCapacityException {
+        if (students.numberOfStudents() > capacity.getCapacity()) {
+            throw new LessonExceedCapacityException();
+        }
+        return students.numberOfStudents() == capacity.getCapacity();
     }
 
     /**

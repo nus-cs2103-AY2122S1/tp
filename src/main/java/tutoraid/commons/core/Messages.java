@@ -21,12 +21,11 @@ public class Messages {
             "The student indexes provided are invalid";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_MULTIPLE_INDEXES =
             "The lesson indexes provided are invalid";
-    public static final String MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON = "The students provided"
-            + " must not be attending any of the lessons provided";
-    public static final String MESSAGE_INVALID_STUDENT_NOT_IN_LESSON = "The students provided"
-            + " must be attending all of the lessons provided";
-    public static final String MESSAGE_INVALID_LESSON_FULL = "Adding all the students provided will exceed"
-            + " the capacity of one or more lessons";
+    public static final String MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON = "The student provided"
+            + " is already attending the lesson provided";
+    public static final String MESSAGE_INVALID_STUDENT_NOT_IN_LESSON = "The student provided"
+            + " is not attending the lesson provided";
+    public static final String MESSAGE_INVALID_LESSON_FULL = "The lesson provided is full";
     public static final String MESSAGE_INVALID_VIEW_COMMAND = "Invalid view command format! "
             + "Must start with 'view -s' or 'view -l'";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d student(s) listed!";
