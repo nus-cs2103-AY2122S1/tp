@@ -103,6 +103,13 @@ public class ParserUtilTest {
     public void parseDateTime_validDateTime_success() throws Exception {
         LocalDateTime expected = LocalDateTime.parse("2021-11-11T20:00");
         assertEquals(expected, ParserUtil.parseDateTime("  2021-11-11 2000   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  2021-11-11 20:00   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  2000 2021-11-11   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  20:00 2021-11-11   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  11-11-2021 2000   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  11-11-2021 20:00   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  2000 11-11-2021   "));
+        assertEquals(expected, ParserUtil.parseDateTime("  20:00 11-11-2021   "));
     }
 
     @Test
