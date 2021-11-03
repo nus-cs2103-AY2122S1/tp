@@ -183,6 +183,7 @@ Format: `find [PREFIX/KEYWORD]...`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
     - A full valid room can be used as a search. e.g `r/A210`
+* Any provided preamble to the prefixes will be ignored
 * All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
 
 Examples:
@@ -274,6 +275,10 @@ Format: `import CSV_NAME`
 
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
+
+Example csv:
+
+![CSV](images/csvFormat.png)
 
 #### Exporting residents' emails : `export`
 
@@ -476,7 +481,7 @@ PREFIX | Description | Usage
 ### Resident Commands
 
 Command | Format | Examples
---------|-------|----------
+|--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
 **Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
@@ -491,7 +496,7 @@ Command | Format | Examples
 ### Event Commands
 
 Command | Format | Examples
---------|-------|----------
+|--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
@@ -504,7 +509,7 @@ Command | Format | Examples
 ### Commons
 
 Command | Format | Examples
---------|-------|----------
+|--------|-------|----------
 **Help** | `help`
 **Switch** | `switch`
 **Clear** | `clear`
