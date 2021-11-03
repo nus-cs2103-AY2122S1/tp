@@ -4,8 +4,9 @@ import seedu.address.model.Date;
 import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
+
     private static final String idPrefix = "SO";
-    private static int count = 1;
+    private static long count = 1;
 
     private final Customer customer;
     private long id;
@@ -33,8 +34,17 @@ public class Order implements Comparable<Order> {
         return this.isComplete;
     }
 
-    public void setIsComplete(boolean isComplete) {
-        this.isComplete = isComplete;
+    /**
+     * Mark an order as completed by setting isComplete to true.
+     * @return boolean indicating whether isComplete has been changed or not.
+     */
+    public boolean markCompleted() {
+        if (this.isComplete == true) {
+            return false;
+        } else {
+            this.isComplete = true;
+            return true;
+        }
     }
 
     public Amount getAmount() {
@@ -71,6 +81,10 @@ public class Order implements Comparable<Order> {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public static void setCount(long newCount) {
+        count = newCount;
     }
 
     /**

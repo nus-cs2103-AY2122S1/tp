@@ -48,8 +48,11 @@ class JsonSerializableTaskBook {
     public TaskBook toModelType() throws IllegalValueException {
         TaskBook taskList = new TaskBook();
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
-            Task task = jsonAdaptedTask.toModelType();
-            taskList.addTask(task);
+            Task toAdd = jsonAdaptedTask.toModelType();
+            if (taskList.hasTask(toAdd)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            }
+            taskList.addTask(toAdd);
         }
         return taskList;
     }

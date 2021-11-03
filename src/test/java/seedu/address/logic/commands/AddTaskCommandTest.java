@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Date;
-import seedu.address.model.Label;
 import seedu.address.model.order.Order;
-import seedu.address.model.tag.TaskTag;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.OrderBuilder;
 import seedu.address.testutil.TaskBuilder;
@@ -35,25 +32,34 @@ class AddTaskCommandTest {
 
         assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
-
-        // test valid id
-        Order validOrder = new OrderBuilder().build();
-        modelStub = new ModelStubAcceptingTaskAdded();
-        modelStub.addOrder(validOrder);
-        validTask = new Task(new Label("test label"),
-                new Date("1918-10-12"), new TaskTag("SO" + validOrder.getId()));
-        commandResult = new AddTaskCommand(validTask).execute(modelStub);
-
-        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
-
     }
 
     @Test
-    public void execute_taskDeclinedByModel_throwsCommandException() {
-        Task validTask = new Task(new Label("test label"), new Date("1918-10-12"), new TaskTag("SO1"));
+    public void execute_duplicateTask_throwsCommandException() {
+        Task validTask = new TaskBuilder().build();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-        ModelStub modelStub = new ModelStubAcceptingTaskAdded();
+        ModelStub modelstub = new ModelStubWithOneTask(validTask);
+
+        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, (
+            ) -> addTaskCommand.execute(modelstub));
+    }
+
+    @Test
+    public void execute_taskWithValidTag_addSuccessful() throws Exception {
+        Task validTask = new TaskBuilder().withTaskTag("SO2021").build(); //based on default orderid from orderbuilder
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
+        ModelStub modelStub = new ModelStubAcceptingTaskWithOrder(new OrderBuilder().build());
+        CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
+
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+    }
+
+
+    @Test
+    public void execute_taskDeclinedByModel_throwsCommandException() {
+        Task validTask = new TaskBuilder().withTaskTag("SO1").build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
+        ModelStub modelStub = new ModelStubAcceptingTaskWithOrder(new OrderBuilder().build());
 
         assertThrows(CommandException.class,
                 AddTaskCommand.MESSAGE_UNFOUND_ORDERID, () -> addTaskCommand.execute(modelStub));
@@ -64,7 +70,6 @@ class AddTaskCommandTest {
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         private final ArrayList<Task> tasksAdded = new ArrayList<Task>();
-        private final ArrayList<Order> ordersAdded = new ArrayList<>();
 
         @Override
         public void addTask(Task task) {
@@ -73,15 +78,42 @@ class AddTaskCommandTest {
         }
 
         @Override
-        public void addOrder(Order order) {
-            requireNonNull(order);
-            ordersAdded.add(order);
+        public boolean hasTask(Task task) {
+            requireNonNull(task);
+            return tasksAdded.size() == 1 && tasksAdded.get(0).isSameTask(task);
         }
+    }
 
+    private class ModelStubAcceptingTaskWithOrder extends ModelStubAcceptingTaskAdded {
+        private final Order order;
+
+        public ModelStubAcceptingTaskWithOrder(Order order) {
+            this.order = order;
+        }
 
         @Override
         public boolean hasOrder(long id) {
-            return ordersAdded.stream().anyMatch(order -> order.getId() == id);
+            return order.getId() == id;
+        }
+
+        @Override
+        public void addTask(Task task) {
+            requireNonNull(task);
+            super.tasksAdded.add(task);
+        }
+    }
+
+    private class ModelStubWithOneTask extends ModelStub {
+        private final Task task;
+
+        public ModelStubWithOneTask(Task task) {
+            this.task = task;
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            requireNonNull(task);
+            return this.task.isSameTask(task);
         }
     }
 }

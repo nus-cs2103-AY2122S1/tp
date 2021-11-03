@@ -24,6 +24,8 @@ public class MarkOrderCommand extends Command {
 
     public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked Order: %1$s";
 
+    public static final String MESSAGE_ORDER_ALREADY_MARKED = "Order already marked: %1$s";
+
     private final Index targetIndex;
 
     public MarkOrderCommand(Index targetIndex) {
@@ -40,9 +42,16 @@ public class MarkOrderCommand extends Command {
         }
 
         Order orderToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markOrder(orderToMark);
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, orderToMark),
-                CommandResult.DisplayState.ORDER);
+
+        boolean hasChanged = model.markOrder(orderToMark);
+        if (hasChanged) {
+            return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, orderToMark),
+                    CommandResult.DisplayState.ORDER);
+        } else {
+            return new CommandResult(String.format(MESSAGE_ORDER_ALREADY_MARKED, orderToMark),
+                    CommandResult.DisplayState.ORDER);
+        }
+
     }
 
     @Override

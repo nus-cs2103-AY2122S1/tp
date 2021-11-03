@@ -18,6 +18,7 @@ import seedu.address.model.order.exceptions.OrderNotFoundException;
  * Basic version does not support editing SalesOrders.
  */
 public class OrderList implements Iterable<Order> {
+
     private final ObservableList<Order> internalList = FXCollections.observableArrayList();
     private final ObservableList<Order> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -65,7 +66,9 @@ public class OrderList implements Iterable<Order> {
 
     public void setOrders(List<Order> orders) {
         requireAllNonNull(orders);
-
+        if (!(ordersAreUnique(orders))) {
+            throw new DuplicateOrderException();
+        }
         internalList.setAll(orders);
     }
 
@@ -86,17 +89,19 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Marks an order as complete, if it exists in the OrderList
+     * Marks an order as complete, if it exists in the OrderList. Returns a boolean indicating
+     * whether or not an actual change has been made.
      * @param toMark
      */
-    public void markComplete(Order toMark) {
+    public boolean markComplete(Order toMark) {
         requireNonNull(toMark);
         if (!hasOrder(toMark)) {
             throw new OrderNotFoundException();
         }
         int index = internalList.indexOf(toMark);
-        toMark.setIsComplete(true);
+        boolean hasChanged = toMark.markCompleted();
         internalList.set(index, toMark);
+        return hasChanged;
     }
 
     public ObservableList<Order> asUnmodifiableObservableList() {
@@ -124,4 +129,17 @@ public class OrderList implements Iterable<Order> {
         internalList.sort(comparator);
     }
 
+    /**
+     * Returns true if {@code orders} contains only unique tasks.
+     */
+    private boolean ordersAreUnique(List<Order> orders) {
+        for (int i = 0; i < orders.size() - 1; i++) {
+            for (int j = i + 1; j < orders.size(); j++) {
+                if (orders.get(i).isSameOrder(orders.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

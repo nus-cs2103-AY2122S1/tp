@@ -95,12 +95,12 @@ public interface Model {
 
     //======================================== TASK FUNCTIONALITIES =================================================
     /**
-     * Returns the user prefs' TaskList file path.
+     * Returns the user prefs' UniqueTaskList file path.
      */
-    Path getTaskListFilePath();
+    Path getTaskBookFilePath();
 
     /**
-     * Sets the user prefs' TaskList file path.
+     * Sets the user prefs' UniqueTaskList file path.
      */
     void setTaskListFilePath(Path taskListFilePath);
 
@@ -109,7 +109,7 @@ public interface Model {
      */
     void setTaskBook(ReadOnlyTaskBook taskBook);
 
-    /** Returns the TaskList */
+    /** Returns the UniqueTaskList */
     ReadOnlyTaskBook getTaskBook();
 
 
@@ -145,7 +145,7 @@ public interface Model {
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
-    void markTask(Task toMark);
+    boolean markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
 
@@ -153,7 +153,7 @@ public interface Model {
     /**
      * Returns the user prefs' Order books  file path.
      */
-    Path getOrderPath();
+    Path getOrderBookFilePath();
 
     /**
      * Sets the user prefs' Order books  file path.
@@ -198,7 +198,7 @@ public interface Model {
 
     void updateFilteredOrderList(Predicate<Order> predicate);
 
-    void markOrder(Order order);
+    boolean markOrder(Order order);
 
     void sortOrderList(SortDescriptor sortDescriptor);
 

@@ -101,7 +101,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Path getTaskListFilePath() {
+    public Path getTaskBookFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -141,12 +141,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void markTask(Task task) {
+    public boolean markTask(Task task) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public Path getOrderPath() {
+    public Path getOrderBookFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -166,7 +166,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void markOrder(Order order) {
+    public boolean markOrder(Order order) {
         throw new AssertionError("This method should not be called.");
     }
 
