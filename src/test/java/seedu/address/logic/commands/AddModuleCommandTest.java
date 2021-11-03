@@ -74,7 +74,7 @@ public class AddModuleCommandTest {
         //null -> returns false
         assertFalse(addCS2100ModuleCommand.equals(null));
 
-        //different students -> returns false
+        //different modules -> returns false
         assertFalse(addCS2100ModuleCommand.equals(addCS2103ModuleCommand));
     }
 }

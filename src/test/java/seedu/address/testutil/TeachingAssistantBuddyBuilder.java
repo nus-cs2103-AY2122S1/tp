@@ -6,7 +6,7 @@ import seedu.address.model.module.Module;
 /**
  * A utility class to help with building TeachingAssistantBuddy objects.
  * Example usage: <br>
- *     {@code TeachingAssistantBuddy ab = new TeachingAssistantBuilder()
+ *     {@code TeachingAssistantBuddy tab = new TeachingAssistantBuilder()
  *     .withModule(new Module(new ModuleName("CS2103").build();}
  */
 public class TeachingAssistantBuddyBuilder {
