@@ -9,7 +9,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
@@ -20,7 +19,6 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
@@ -44,42 +42,6 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
-     * Sets the user prefs' address book file path.
-     */
-    void setAddressBookFilePath(Path addressBookFilePath);
-
-    /**
-     * Replaces address book data with the data in {@code addressBook}.
-     */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /**
-     * Returns the AddressBook
-     */
-    ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Person person);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deletePerson(Person target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addPerson(Person person);
 
     /**
      * Adds a new applicant to MrTechRecruiter with the given particulars.
@@ -100,21 +62,7 @@ public interface Model {
     Applicant getApplicantByNameIgnoreCase(Name applicantName);
 
 
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
 
     //=========== Position related methods =============================================================
 

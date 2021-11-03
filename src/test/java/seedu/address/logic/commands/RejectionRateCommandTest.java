@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_NO_CURRE
 import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_SUCCESS;
 import static seedu.address.model.applicant.Application.ApplicationStatus.REJECTED;
 import static seedu.address.testutil.TypicalApplicants.getTypicalApplicantBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPositions.DATASCIENTIST;
 import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 
@@ -28,7 +27,7 @@ import seedu.address.testutil.PositionBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for {@code RejectionRateCommand}.
  */
 public class RejectionRateCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalApplicantBook(),
+    private final ModelManager model = new ModelManager(getTypicalApplicantBook(),
             getTypicalPositionBook(), new UserPrefs());
     private final Position position = new PositionBuilder().build();
 

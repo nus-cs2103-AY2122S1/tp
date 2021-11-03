@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPositionAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_POSITION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_POSITION;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.descriptors.EditPositionDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PositionBook;
@@ -31,7 +29,7 @@ import seedu.address.testutil.PositionBuilder;
 
 public class EditPositionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalPositionBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPositionBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -41,8 +39,7 @@ public class EditPositionCommandTest {
 
         String expectedMessage = String.format(EditPositionCommand.MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new PositionBook(model.getPositionBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PositionBook(model.getPositionBook()), new UserPrefs());
         expectedModel.setPosition(model.getFilteredPositionList().get(0), editedPosition);
 
         assertCommandSuccess(editPositionCommand, model, expectedMessage, expectedModel);
@@ -63,8 +60,7 @@ public class EditPositionCommandTest {
 
         String expectedMessage = String.format(EditPositionCommand.MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new PositionBook(model.getPositionBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PositionBook(model.getPositionBook()), new UserPrefs());
         expectedModel.setPosition(lastPosition, editedPosition);
 
         assertCommandSuccess(editPositionCommand, model, expectedMessage, expectedModel);
@@ -78,8 +74,7 @@ public class EditPositionCommandTest {
 
         String expectedMessage = String.format(EditPositionCommand.MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new PositionBook(model.getPositionBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PositionBook(model.getPositionBook()), new UserPrefs());
 
         assertCommandSuccess(editPositionCommand, model, expectedMessage, expectedModel);
     }
@@ -96,8 +91,7 @@ public class EditPositionCommandTest {
 
         String expectedMessage = String.format(EditPositionCommand.MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new PositionBook(model.getPositionBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PositionBook(model.getPositionBook()), new UserPrefs());
         expectedModel.setPosition(model.getFilteredPositionList().get(0), editedPosition);
 
         assertCommandSuccess(editPositionCommand, model, expectedMessage, expectedModel);
@@ -167,8 +161,6 @@ public class EditPositionCommandTest {
         // null -> returns false
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditPositionCommand(INDEX_SECOND_POSITION, DESC_DATA_ENGINEER)));
