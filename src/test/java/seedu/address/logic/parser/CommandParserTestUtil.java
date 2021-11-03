@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -9,6 +10,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Contains helper methods for testing command parsers.
  */
 public class CommandParserTestUtil {
+
+    public static final String INVALID_COMMAND_INVALID_INDEX = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            Messages.MESSAGE_INVALID_INDEX_GIVEN);
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created

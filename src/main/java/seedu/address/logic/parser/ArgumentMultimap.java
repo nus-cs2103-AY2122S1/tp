@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.ValidateUtil.hasExpectedSeparatedSegments;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,16 @@ public class ArgumentMultimap {
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
+    }
+
+    /**
+     * Checks if the preamble has the number of segments expected , segments are separated by whitespace.
+     * @param expected segements to expect
+     * @return true if preamble has N segments.
+     */
+    public boolean preambleHasExpectedSegments(int expected) {
+        String preamble = getPreamble();
+        return hasExpectedSeparatedSegments(preamble, expected);
     }
 
     /**
