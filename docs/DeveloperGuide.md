@@ -153,19 +153,31 @@ API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/s
 
 The `Model` component
 
-- stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
-- stores the current order data i.e., an `Order` which contains all `Items` added to it.
-- stores the transaction history of orders i.e., a set of `TransactionRecord` objects.
-- stores the currently 'selected' `Item` objects (e.g., results of a search query) 
-  as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Item>`
-  that can be 'observed' e.g. the UI can be bound to this list 
-  so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. 
-  This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- stores the inventory data.
+- stores the current order data.
+- stores the transaction history of orders.
 - does not depend on any of the other three components (as the Model represents data entities of the domain,
   they should make sense on their own without depending on other components)
-- it is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects.
-  i.e., updates `Inventory` when `Order` is placed by user, and keep the order histories as `TransactionRecord`.
+
+## !!! Not Sure If the below 2 points are valid or not 
+- stores a `UserPref` object that represents the user’s preferences.
+  This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- stores the currently 'selected' `Item` objects (e.g., results of a search query)
+  as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Item>`
+  that can be 'observed' e.g. the UI can be bound to this list
+  so that the UI automatically updates when the data in the list change.
+
+![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
+
+- The `Model` component interacts with `Ui` component through a `Displayable` interface.
+
+![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
+
+Low leve architecture of `Model` component:
+- `Inventory` and `Order` are each consists of an `UniqueItemList` which contains `Items`.
+- The `TransactionList` stores `TransactionRecord` which are the records of history orders.
+- Each `TransactionRecord` has a unique id and timestamp, with a list of `Item` transacted in the history order.
+
 
 ### Storage component
 
