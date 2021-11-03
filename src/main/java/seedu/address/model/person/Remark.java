@@ -15,7 +15,7 @@ public class Remark {
      * The first character of the remark must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid remark.
      */
-    public static final String VALIDATION_REGEX = "[\p{ASCII}&&[^ ]][\p{ASCII}]{0,51}";
+    public static final String VALIDATION_REGEX = "[\\p{ASCII}&&[^ ]][\\p{ASCII}]{0,51}";
 
     public final String value;
 
