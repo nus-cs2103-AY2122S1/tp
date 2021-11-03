@@ -175,15 +175,15 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(HIGH);
 
-        String namesOfStudents = "";
-        String namesOfLessons = "";
+        StringBuilder namesOfStudents = new StringBuilder();
+        StringBuilder namesOfLessons = new StringBuilder();
 
         for (Student student : studentsToEdit) {
-            namesOfStudents += student.toNameString();
+            namesOfStudents.append(student.toNameString()).append("\n");
         }
 
         for (Lesson lesson : lessonsToEdit) {
-            namesOfLessons += lesson.nameAsString();
+            namesOfLessons.append(lesson.nameAsString()).append("\n");
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, namesOfStudents, namesOfLessons));
