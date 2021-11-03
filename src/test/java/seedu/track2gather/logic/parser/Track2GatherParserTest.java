@@ -25,9 +25,13 @@ import seedu.track2gather.logic.commands.DeleteCommand;
 import seedu.track2gather.logic.commands.EditCommand;
 import seedu.track2gather.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.track2gather.logic.commands.ExitCommand;
+import seedu.track2gather.logic.commands.FCallCommand;
 import seedu.track2gather.logic.commands.FindCommand;
 import seedu.track2gather.logic.commands.HelpCommand;
 import seedu.track2gather.logic.commands.ListCommand;
+import seedu.track2gather.logic.commands.SCallCommand;
+import seedu.track2gather.logic.commands.ScheduleCommand;
+import seedu.track2gather.logic.commands.SessionCommand;
 import seedu.track2gather.logic.commands.SortCommand;
 import seedu.track2gather.logic.commands.SortCommand.Direction;
 import seedu.track2gather.logic.commands.TShiftCommand;
@@ -127,5 +131,27 @@ public class Track2GatherParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD) instanceof ScheduleCommand);
+        assertTrue(parser.parseCommand(ScheduleCommand.COMMAND_WORD + " 3 ") instanceof ScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_session() throws Exception {
+        assertTrue(parser.parseCommand(SessionCommand.COMMAND_WORD) instanceof SessionCommand);
+        assertTrue(parser.parseCommand(SessionCommand.COMMAND_WORD + " 3 ") instanceof SessionCommand);
+    }
+
+    @Test
+    public void parseCommand_sCall() throws Exception {
+        assertTrue(parser.parseCommand(SCallCommand.COMMAND_WORD + " 3 ") instanceof SCallCommand);
+    }
+
+    @Test
+    public void parseCommand_fCall() throws Exception {
+        assertTrue(parser.parseCommand(FCallCommand.COMMAND_WORD + " 3 ") instanceof FCallCommand);
     }
 }
