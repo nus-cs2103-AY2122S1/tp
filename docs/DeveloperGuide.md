@@ -411,11 +411,13 @@ There are currently 4 custom predicates implemented in FAST:
 - `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
 - `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
 
-`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
-`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
-`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
-`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
+`NameContainsQueriesPredicate` implemented by running the person's name through a for-loop to see if any word starts with the query.
+`PriorityPredicate` implemented by running the person's tags through a for-loop and checking if any of them match the given priority.
+`TagMatchesKeywordPredicate` implemented by running the person's tags through a for-loop and checking if any of them match the given keyword.
+`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`. The person's remark is checked to see if it contains the given query.
 
+Each `Predicate` has a `test` method which will be called on every `Person` in the list to see if they fit the search.
+If the `test` method returns `true`, that `Person` will be displayed in the search results.
 ![Find_Command_Class_Diagram](images/findcommandpredicates.png)
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
