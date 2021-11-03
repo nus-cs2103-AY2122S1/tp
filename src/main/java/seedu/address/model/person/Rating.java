@@ -46,7 +46,9 @@ public class Rating implements Comparable<Rating> {
         return test.equals(EMPTY_RATING);
     }
 
-    public static boolean isEmptyRating(Rating rating) { return rating.equals(new Rating()); }
+    public static boolean isEmptyRating(Rating rating) {
+        return rating.equals(new Rating());
+    }
 
     @Override
     public String toString() {

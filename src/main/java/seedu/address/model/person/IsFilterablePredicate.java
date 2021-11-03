@@ -1,12 +1,12 @@
 package seedu.address.model.person;
 
+import static seedu.address.model.person.Rating.isEmptyRating;
+
 import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.model.person.Rating.isEmptyRating;
 
 /**
  * Tests that a {@code Person}'s {@code CategoryCode, Rating} matches the specified {@code CategoryCode, Rating}.
