@@ -105,7 +105,7 @@ public class ParserUtil {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_FORMAT);
         }
 
-        if (id.length() != 6 || idValue < 0) {
+        if (id.length() > 6 || idValue < 0) {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
         }
 
