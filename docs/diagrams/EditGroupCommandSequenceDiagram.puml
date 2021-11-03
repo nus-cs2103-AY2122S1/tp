@@ -4,8 +4,9 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "EditGroupCommandParser" as EditGroupParser LOGIC_COLOR
-participant "a:EditGroupCommand" as EditGroupCommand LOGIC_COLOR
+participant ":EditGroupCommandParser" as EditGroupParser LOGIC_COLOR
+participant "d:EditGroupDescriptor" as EditGroupDescriptor LOGIC_COLOR
+participant "c:EditGroupCommand" as EditGroupCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -25,31 +26,38 @@ activate EditGroupParser
 EditGroupParser --> AddressBookParser
 deactivate EditGroupParser
 
-AddressBookParser --> EditGroupParser : parse("1 g/w14-4"))
+AddressBookParser -> EditGroupParser : parse("1 g/w14-4"))
 activate EditGroupParser
+
+create EditGroupDescriptor
+EditGroupParser -> EditGroupDescriptor
+activate EditGroupDescriptor
+
+EditGroupDescriptor --> EditGroupParser : d
+deactivate EditGroupDescriptor
 
 create EditGroupCommand
 EditGroupParser -> EditGroupCommand
 activate EditGroupCommand
 
-EditGroupCommand -> EditGroupParser : a
+EditGroupCommand --> EditGroupParser : c
 deactivate EditGroupCommand
 
-EditGroupParser -> AddressBookParser : a
+EditGroupParser --> AddressBookParser : c
 destroy EditGroupParser
 
-AddressBookParser --> LogicManager : a
+AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
 LogicManager -> EditGroupCommand : execute()
 activate EditGroupCommand
 
 ref over EditGroupCommand, Model
-Edit group in the group list
+Edit group
 end ref
 
 create CommandResult
-EditGroupCommand --> CommandResult
+EditGroupCommand -> CommandResult
 activate CommandResult
 CommandResult --> EditGroupCommand : r
 deactivate CommandResult

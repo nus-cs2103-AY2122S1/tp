@@ -1,44 +1,57 @@
 @startuml
 !include style.puml
 
-mainframe **sd**  Add member to group
+mainframe **sd**  Edit group
 box Logic LOGIC_COLOR_T1
-participant "d:DeleteStudentCommand" as DeleteStudentCommand LOGIC_COLOR
+participant "c:EditGroupCommand" as EditGroupCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "u:Group" as Group MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
-participant ":Student" as Student MODEL_COLOR
-participant ":Group" as Group MODEL_COLOR
-participant ":Members" as Members MODEL_COLOR
+participant "s:Student" as Student MODEL_COLOR
 participant ":AddressBook" as Ab MODEL_COLOR
 end box
 
-activate DeleteStudentCommand
+activate EditGroupCommand
 
+EditGroupCommand -> EditGroupCommand : createEditedGroup(toEdit, d)
+activate EditGroupCommand
 
-DeleteStudentCommand --> Model : addMembers(student, group)
-activate Model
-
-create Student
-Model --> Student : new Student(student, groupName)
-activate Student
-Student --> Model : updatedStudent
-deactivate Student
-
-Model --> Group : addMember(updatedStudent)
+create Group
+EditGroupCommand -> Group
 activate Group
-Group --> Members : addMember((updatedStudent)
-activate Members
-deactivate Members
+
+Group --> EditGroupCommand : u
 deactivate Group
 
+EditGroupCommand --> EditGroupCommand : u
+deactivate EditGroupCommand
 
-Model --> Ab : setStudent(student, updatedStudent)
+EditGroupCommand -> Model : setGroup(toEdit, u)
+activate Model
+
+loop for every Student in toEdit:Group
+create Student
+Model -> Student
+activate Student
+Student --> Model : s
+deactivate Student
+
+Model -> Ab : setStudent(prevStudent, s)
 activate Ab
+Ab --> Model
+deactivate Ab
+end
+
+
+Model -> Ab : setGroup(toEdit, u)
+activate Ab
+
+Ab --> Model
 deactivate Ab
 
-Model --> Ab : setGroup(group, newGroup)
-activate Ab
-deactivate Ab
+Model --> EditGroupCommand
+deactivate Model
+
 @enduml
