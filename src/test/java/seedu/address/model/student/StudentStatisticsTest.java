@@ -1,7 +1,6 @@
 package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
