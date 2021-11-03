@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class DeallocateMemberCommand extends Command {
     public static final String COMMAND_WORD = "deallocate";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deallocates a member from a facility.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deallocates a member from a facility.\n"
             + "Parameters: " + "MEMBER_INDEX FACILITY_INDEX DAY\n"
             + "DAY must be an integer from 1 to 7\n"
             + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"

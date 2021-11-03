@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -58,7 +59,7 @@ public class SetMemberAvailabilityCommandTest {
         SetMemberAvailabilityCommand command = new SetMemberAvailabilityCommand(List.of(INDEX_FIRST, INDEX_SECOND),
                 expectedAvailability);
 
-        assertCommandFailure(command, model, SetMemberAvailabilityCommand.MESSAGE_INVALID_INDICES);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
     }
 
     @Test

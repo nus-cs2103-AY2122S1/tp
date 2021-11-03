@@ -15,7 +15,7 @@ import seedu.address.model.facility.Facility;
  */
 public class AddFacilityCommand extends Command {
     public static final String COMMAND_WORD = "addf";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a facility to SportsPA.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a facility to SportsPA.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_LOCATION + "LOCATION "
