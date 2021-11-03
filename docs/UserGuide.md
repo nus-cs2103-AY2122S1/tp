@@ -170,7 +170,7 @@ Shows a list of residents that match the provided keywords for different availab
 Format: `find [PREFIX/KEYWORD]...`
 
 * Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
-* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
+* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [Deadline Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
@@ -236,7 +236,7 @@ Format: `trace r/RESIDENT [d/DEPTH] [t/DURATION]`
 
 Examples:
 * `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
-* `trace n/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
+* `trace r/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
 
 #### Sorting residents : `sort`
 
@@ -316,6 +316,21 @@ Examples:
 * `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201, a121`
 * `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/John Doe, Jane Doe`
 
+#### Viewing events information : `view`
+
+Shows a numbered list of all the events in the address book.
+
+The index of the event is the corresponding number in the list
+shown when `view` (without the [INDEX] parameter) is called.
+
+Format: `view [INDEX]`
+* For an index i, 1 ≤ i ≤ n, where n is the number of events in the address book
+
+Examples:
+
+* `view` shows a list of all the events
+* `view 5` shows the details of the event at index 5
+
 #### Editing an event : `edit`
 
 Edits an existing event in the address book.
@@ -330,6 +345,28 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CA
 
 Examples:
 *  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+
+#### Searching by event information: `find`
+
+Shows a list of events that match the provided keywords for different available parameters.
+
+Format: `find [PREFIX/KEYWORD]...`
+
+* Allowed flags include; `n/`, `d/`, `v/`, `c/`
+* Searching by name:
+    - It is case-insensitive. e.g `dance` will match `Dance`
+    - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training`
+    - Events matching at least one keyword for the event name will be returned (i.e. `OR` search).
+      e.g `Football Basketball` will return `Football Training`, `Basketball Training`
+* Searching by venue:
+    - It is case-insensitive. e.g `nus field` will match `NUS Field`
+    - Only full event names will be matched. e.g `Field` will not match `NUS Field`
+* The date and capacity fields are subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
+
+Examples:
+* `find n/Football` returns `Football Match` and `Football Training`
+* `find v/NUS field c/5` returns all the events at `NUS field` which have a capacity of `5`
+* `find d/03-01-2021` returns all the events which occur on the date `03-01-2021` <br>
 
 #### Deleting an event : `delete`
 
@@ -370,6 +407,7 @@ Remove multiple residents from an event based on the information given(name or r
 Format: `exclude INDEX r/INFORMATION [, MORE INFORMATION]`
 
 * Resident information can be given in the form of name or room, but all has to be all rooms or all names
+* The full name of the resident must be specified
 * When adding multiple residents, each piece of information is separated by a comma
 * The information inputted is case-insensitive
 * If one or more of the given information is invalid, an error message is outputted and none of the residents are added to the event
