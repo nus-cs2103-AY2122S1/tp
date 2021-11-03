@@ -60,6 +60,7 @@ and TAs contacts within teams and tutorial groups. It is optimized for CLI users
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -191,7 +192,19 @@ Merges all contacts in a JSON file with the existing contacts in ProfBook.
 Format: `import FILENAME`
 
 * Reads the contacts in `FILENAME` and merges them into the existing ProfBook.
-* 
+* `FILENAME` should refer to the relative filepath from the jar file.
+
+Example:
+
+Step 1: Store the file you wish to import into the data folder of your ProfBook folder.
+![Import Step 1](images/ImportExample1.png)
+
+Step 2: type `import data/FILENAME` into the command line.
+![Import Step 2](images/ImportExample2.png)
+
+Step 3: Done! Now all your imported contacts will appear at the bottom of ProfBook.
+![Import Step 3](images/ImportExample3.png)
+
 ### Export filtered contacts to JSON: `export`
 
 Exports all current filtered contacts into a JSON file.
@@ -250,9 +263,6 @@ data directly by editing that data file.
 If your changes to the data file makes its format invalid, ProfBook will discard all data and start with an empty data
 file at the next run.
 </div>
-
-### Coming Soon
-Export feature...
 
 
 --------------------------------------------------------------------------------------------------------------------

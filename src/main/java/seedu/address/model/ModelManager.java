@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -124,6 +125,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersons(List<Person> targets) {
+        runOperation(() -> targets.forEach(addressBook::removePerson));
+    }
+
+    @Override
     public void addPerson(Person person) {
         runOperation(() -> {
             addressBook.addPerson(person);
@@ -132,9 +138,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson, boolean removeFilter) {
         requireAllNonNull(target, editedPerson);
-        runOperation(() -> addressBook.setPerson(target, editedPerson));
+        runOperation(() -> {
+            addressBook.setPerson(target, editedPerson);
+            if (removeFilter) {
+                this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+            }
+        });
     }
 
     @Override
