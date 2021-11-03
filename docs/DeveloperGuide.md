@@ -196,12 +196,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-- [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
-- [Deleting multiple contacts by keywords](#delete-by-keywords)
-- [Importing a JSON file](#import-json-file)
-- [Undoing / redoing command](#proposed-undoredo-feature)
-- [Input Suggestion](#input-suggestion)
-- {and so on...}
+1. Viewing help `help`
+2. Modify
+   1. Adding a person `add`
+   2. Adding tags to persons `addt`
+   3. Adding a remark `remark`
+   4. Editing a person `edit`
+   5. Deleting a person `delete`
+   6. Deleting multiple person `deletem`
+   7. Deleting tags from persons `deletet`
+   8. Clearing all persons `clear`
+3. View 
+   1. Listing all persons `list`
+   2. Locating persons `find`
+   3. Sorting persons `sort`
+   4. Viewing statistics `stat`
+4. Share 
+   1. Importing contacts `import`
+   2. Exporting contacts `export`
+5. Advance 
+   1. Aliasing commands `alias`
+6. Exiting the program `exit`
+7. Saving the data
 
 ### Add contacts with optional arguments
 
@@ -246,11 +262,11 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
 
-### Delete by keywords
+### Deleting multiple person
 
 #### Implementation
 
-The Delete By Keyword mechanism will delete contacts specified by a given set of keywords. Any contacts containing any of the specified keywords will be deleted.
+The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing all the specified keywords will be deleted.
 
 It works by filtering for the contacts in the `model` and deleting them one by one.
 
@@ -260,7 +276,7 @@ The following activity diagram briefly summarizes what happens when a user execu
 
 [insert diagram]
 
-Given below is an exmaple usage scenario and how the Delete By Keyword mechanism behaves at each step.
+Given below is an exmaple usage scenario and how the deleting multiple person mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
@@ -270,9 +286,9 @@ Step 3. This will call `DeleteMultipleCommandParsr#parse` which will then parse 
 Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
 
 Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.
-The following sequence diagram briefly shows how the parser operation works:
+The following sequence diagram briefly shows how the parser operation works (`MultiplePredicates` not shown):
 
-[insert diagram]
+![DeleteMultipleParserSequenceDiagram](images/DeleteMultipleParserSequenceDiagram.png)
 
 Step 5. `DeleteMultipleCommand#execute` will filter the model with the provided list of predicates and get back the filtered list.
 
@@ -280,13 +296,11 @@ Step 6. It will then iterate through the list and call `deletePerson` to remove 
 
 Step 7. After deleting contacts, it will call `updateFilteredPersonList` on model to list all the remaining contacts.
 
-The following sequence diagram shows how the Delete By Keywords mechanism works:
+The following sequence diagram shows how the deleting multiple person mechanism works:
 
-[insert diagram]
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
 #### Design considerations:
-
-**Aspect: How delete multiple executes:**
 
 * **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
     * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
