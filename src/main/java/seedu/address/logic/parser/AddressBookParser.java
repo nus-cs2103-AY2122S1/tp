@@ -30,13 +30,12 @@ import seedu.address.model.Model;
  * Parses user input.
  */
 public class AddressBookParser {
-
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Pattern ADVANCED_COMMAND_FORMAT =
-            Pattern.compile("(?<commandWord>\\S+)(?<flag>\\s+-[cp])(?<arguments>.*)");
+            Pattern.compile("(?<commandWord>\\S+)(?<flag>\\s+-[cp])(?<arguments>\\s.*)");
 
     /**
      * Parses user input into command for execution.

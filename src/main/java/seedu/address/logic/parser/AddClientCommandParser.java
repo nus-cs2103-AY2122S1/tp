@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddClientCommand.AddClientDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
@@ -37,7 +38,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
 
         PhoneNumber phoneNumber = ParserUtil.parsePhoneNumber(argMultimap.getValue(PREFIX_PHONE_NUMBER).get());
 
-        AddClientCommand.AddClientDescriptor descriptor = new AddClientCommand.AddClientDescriptor(name, phoneNumber);
+        AddClientDescriptor descriptor = new AddClientDescriptor(name, phoneNumber);
 
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             descriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
@@ -58,7 +59,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    private boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
