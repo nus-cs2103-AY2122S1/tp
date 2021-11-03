@@ -3,19 +3,33 @@ layout: page
 title: Sherman Ng's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: ProgrammerError
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+[ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) (P|E) is a desktop application which helps CS2100 lab
+tutors manage their students’ lab results in a simple and efficient manner, allowing them to spend less time on administrative
+processes and more time teaching students. It is optimized for use via a Command Line Interface (CLI) while still
+having the benefits of a Graphical User Interface (GUI) developed with Java and JavaFX.
 
-Given below are my contributions to the project.
+Please find below my contributions to the project. My contributions to the project code base can also be found at the
+following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=shermannws&tabRepo=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+<hr/>
 
+#### Features
+
+* **New Feature**: Added the ability to filter the list of students based on different query parameters.
+    * What it does:
+Filters the list of students stored in P|E by displaying all the students that matches the query parameters.
+Tutors can specify the filter criteria based on any combination of students' particulars.
+    * Justification:
+So that tutors are able to quickly filter out the students' of interest out of their large number of students using known parameters.
+    * Highlights:
+This feature was challenging as it involves filtering students based on any combination of query parameters provided.
+    
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+
+
+<hr/>
 
 * **Code contributed**: [RepoSense link]()
 
