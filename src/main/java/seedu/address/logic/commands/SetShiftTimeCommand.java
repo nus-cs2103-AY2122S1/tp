@@ -49,8 +49,8 @@ public class SetShiftTimeCommand extends Command {
             + PREFIX_DAY_SHIFT + "monday-1"
             + PREFIX_SHIFT_TIME + "10:00-12:00 da/2021-11-01\n";
 
-    public static final String MESSAGE_SET_SHIFT_TIME_SUCCESS = "%s's shift on %s %s from %s to %s is successfully updated to: "
-            + "From %s to %s.";
+    public static final String MESSAGE_SET_SHIFT_TIME_SUCCESS = "%s's shift on %s %s from %s to %s is successfully "
+            + "updated to: " + "From %s to %s.";
     public static final String MESSAGE_SHIFT_TIME_OUT_OF_BOUND = "The start time or end time of the shift is out"
             + " of bound.";
     public static final String MESSAGE_WRONG_TIME_ORDER = "The end time is earlier than the start time.";
