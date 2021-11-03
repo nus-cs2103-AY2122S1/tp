@@ -56,6 +56,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_ERROR_READING = "Error reading row %1d: ";
     public static final String MESSAGE_INCORRECT_CSV_FORMAT = "File is in an incorrect csv format";
     public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
+    public static final String MESSAGE_NO_RESIDENTS = "No resident information was found";
     public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
@@ -86,6 +87,9 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         AddressBook newAddressBook = readCsv();
+        if (newAddressBook.getPersonList().isEmpty()) {
+            throw new CommandException(MESSAGE_NO_RESIDENTS);
+        }
         List<Event> eventList = model.getAddressBook().getEventList();
         ArrayList<Event> eventListRemovedResidents = new ArrayList<>();
         for (Event event: eventList) {
@@ -115,7 +119,7 @@ public class ImportCommand extends Command {
                 Person personToAdd;
                 try {
                     // Skip empty rows
-                    if (row.length == 1) {
+                    if (row.length == 1 && row[0].equals("")) {
                         continue;
                     }
                     personToAdd = createPerson(row);
