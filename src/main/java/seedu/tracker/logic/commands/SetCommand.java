@@ -13,7 +13,7 @@ import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
 
 /**
- * Sets current semester in Module Tracker.
+ * Sets the current semester or mc goal in the Module Tracker.
  */
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
@@ -60,14 +60,12 @@ public class SetCommand extends Command {
         requireNonNull(model);
 
         if (isSemChanged) {
-            //model.setCurrentSemester(currentSemester);
             model.setCurrentSemester(toBeUpdated.getCurrentSemester());
             //update module list so that module color can change accordingly when the semester is changed
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_SEM, model.getCurrentSemester()));
         } else {
-            //model.setMcGoal(mcGoal);
             model.setMcGoal(toBeUpdated.getMcGoal());
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_MC, model.getMcGoal()));

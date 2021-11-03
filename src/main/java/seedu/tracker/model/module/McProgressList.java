@@ -9,6 +9,9 @@ import javafx.collections.ObservableList;
 import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.calendar.AcademicCalendar;
 
+/**
+ * Represents the list of the user's progress for each requirement.
+ */
 public class McProgressList {
 
     public static final int GE_REQUIREMENT = 16;
