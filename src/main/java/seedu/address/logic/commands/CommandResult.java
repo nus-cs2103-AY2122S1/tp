@@ -42,6 +42,7 @@ public class CommandResult {
         this.exit = exit;
         this.display = false;
         this.displaySummary = false;
+        this.summary = null;
         this.personToDisplay = null;
     }
 
@@ -72,6 +73,7 @@ public class CommandResult {
         this.display = true;
         this.displaySummary = false;
         this.personToDisplay = personToDisplay;
+        this.summary = null;
         this.showCommandSummary = false;
     }
 
@@ -133,8 +135,12 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
+
+        boolean isSummary = !displaySummary || !otherCommandResult.displaySummary;
+
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showCommandSummary == otherCommandResult.showCommandSummary
+                && (isSummary || summary.equals(otherCommandResult.summary))
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }

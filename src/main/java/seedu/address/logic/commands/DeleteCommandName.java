@@ -46,8 +46,7 @@ public class DeleteCommandName extends DeleteCommand {
                 return person;
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME,
-                DeleteCommand.MESSAGE_USAGE));
+        throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
     }
 
     @Override

@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.IsFindableContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -112,7 +113,8 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        Summary summary = new Summary(expectedModel.getAddressBook());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, summary);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
