@@ -1,0 +1,30 @@
+@startuml
+
+start
+:User edits an existing lesson of a student;
+
+:TAB searches for the student in the application;
+
+:TAB searches for the lesson among the student's list of lessons;
+
+if () then ([edit involves dates])
+
+  if () then ([TAB has clashing lessons with edited lesson])
+    :TAB disallows lesson to be edited;
+    :TAB displays clashing warning to user;
+  else ([else])
+    :TAB edits the lesson for the student;
+    :TAB displays details of the
+    edited lesson to the user;
+  endif
+
+else ([else])
+  :TAB edits the lesson for the student;
+  :TAB displays details of the
+  edited lesson to the user;
+
+endif
+
+stop
+
+@enduml

@@ -116,9 +116,12 @@ This section describes the available features in TAB.
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `calendar`, `exit`, `clear` etc.) are not valid.<br>
+  e.g. `help 123` is not a valid command.
+
+* Chaining commands is not supported.<br>
+  e.g. A chain of commands such as `next next back next` or `list calendar day` are not valid commands.
+
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
@@ -137,8 +140,6 @@ Shows a command summary table as well as a link to access this user guide page.
 
 Format: `help`
 
-Shortcut: <kbd>F1</kbd>
-
 - You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
@@ -150,6 +151,7 @@ Shortcut: <kbd>F1</kbd>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
+Executing any of the commands in this section will bring you to the students interface. Any command from other sections, such as `day` or `tag`, will bring you right out.
 
 A student must have the following essential fields:
 * Name
@@ -208,7 +210,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
   e.g. entering just `edit 2` alone is not a valid command. You need to include the field you wish to edit.
 
 * Existing values will be updated to the entered values.<br>
-  e.g. `edit 2 f/0` will override the outstanding fees of the 2nd student in the displayed list to `0`.
+  e.g. `edit 2 pp/81234567` will override the parent phone of the 2nd student in the displayed list to `81234567`.
 
 * You can delete the data in optional fields by supplying a parameter with no arguments.<br>
   e.g. `edit 2 r/` will remove the remarks for the 2nd student in the displayed list.
@@ -253,8 +255,6 @@ Examples:
 Shows a list of all students in TAB.
 
 Format: `list`
-
-Shortcut: <kbd>F2</kbd>
 
 <div style="page-break-after: always;"></div>
 
@@ -313,13 +313,13 @@ Notes about search keywords:
 
 * Tags must only have one keyword.<br>
   e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
-  
+
 * The search is case-insensitive.<br>
   e.g. keyword `hans` will match `Hans`.
 
 * A keyword can match a word partially.<br>
   e.g. keyword `math` will match `mathematics`.
-  
+
 * The order of the keywords do not matter.<br>
   e.g. keyword `west jurong` will match `jurong west`.
   
@@ -448,7 +448,7 @@ For all monetary fields (lesson rates and outstanding fees), we follow the [Sing
 
 #### Adding a lesson: `ladd`
 
-Adds a lesson to the specified student in TAB.
+Adds a lesson to the specified student in TAB, provided you do not have any other lessons scheduled at that time.
 
 Format: `ladd INDEX [recurring/END_DATE] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`
 
@@ -569,8 +569,6 @@ Displays a list of upcoming lessons with end date time within the next 48 hours
 
 Format: `remind`
 
-Shortcut: `F5`
-
 ![remind](images/remind.png)
 
 <div class="caption">Reminder window interface.</div>
@@ -652,9 +650,9 @@ Such cases to take note of include:
 
 <div style="page-break-after: always;"></div>
 
-### Viewing your Calendar
+### Managing Your Schedule
 
-This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
+This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -664,11 +662,9 @@ Brings you to TAB's calendar interface for you to see all your scheduled lessons
 
 Format: `calendar`
 
-Shortcut: <kbd>F3</kbd>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
-For example, the `day` command bellow opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
+For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
 #### Viewing your daily calendar: `day`
@@ -768,9 +764,8 @@ Shows all the tags that you have created together with the number of students la
 
 Format: `tag`
 
-Shortcut: <kbd>F4</kbd>
-
 ![tag](images/tag.png)
+
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
 <div style="page-break-after: always;"></div>
@@ -818,7 +813,7 @@ This means that after clicking any button in the GUI, you do not have to click i
 This section records frequently asked questions from users of TAB.
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuition Address Book.
 
 **Q**: I am using a Mac and when I tried to open **TAB.jar**, Mac shows “TAB.jar cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
 **A**: Go to <kbd>System Preferences</kbd> → <kbd>Security & Privacy</kbd> → <kbd>General</kbd> and click <kbd>Open Anyway</kbd> at the bottom as shown in the following screenshot.
@@ -869,13 +864,13 @@ Action | Format, Examples
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 **View Calendar** | `calendar`
-**View Schedule of Particular Day** | `day`
-**View Schedule of Today** | `today`
-**View Schedule of Week** | `week`
-**View Schedule of Month** | `month`
-**View Schedule of Year** | `year`
-**Navigate forward in Schedule** | `next`
-**Navigate backward in Schedule** | `back`
+**View Daily Calendar** | `day`
+**View Weekly Calendar** | `week`
+**View Monthly Calendar** | `month`
+**View Yearly Calendar** | `year`
+**Navigate to Today in Calendar** | `today`
+**Navigate forward in Calendar** | `next`
+**Navigate backward in Calendar** | `back`
 **View Reminders** | `remind`
 **Clear** |`clear`
 **Undo** | `undo`

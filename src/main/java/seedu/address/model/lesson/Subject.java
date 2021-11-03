@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Lesson's subject in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
-public class Subject {
+public class Subject implements Comparable<Subject> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Subject should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -56,6 +56,11 @@ public class Subject {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Subject other) {
+        return value.compareTo(other.value);
     }
 
 }
