@@ -542,7 +542,7 @@ Examples:
 
 Pays for a specific lesson.
 
-The amount paid would be deducted from the outstanding fees field. The amount paid should not be greater than the current outstanding fees.
+The amount paid would be deducted from the outstanding fees field. The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
 
 Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
