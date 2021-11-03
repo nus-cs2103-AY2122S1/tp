@@ -489,7 +489,7 @@ Format: `alias -c <existing_command> -as <alias>`
 Examples:
 * `alias -c addstudent -as example` 
   * adds a new alias to `addstudent` command.
-  * `example -n Zhiying -i E1234567` adds student `Zhiying` to database.
+  * `example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
 * `alias -c addgroup -as example` 
   * replaces the mapping of the alias `example` to the `addgroup` command, i.e. `example` no longer function as `addstudent`.
   * `example -g T02A` will create a new group `T02A`.
