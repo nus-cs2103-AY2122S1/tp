@@ -83,18 +83,20 @@ public class MainApp extends Application {
         Optional<ReadOnlySchedule> scheduleOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlySchedule initialSchedule;
+        boolean usingSampleSchedule = false;
 
         try {
             scheduleOptional = storage.readSchedule();
             if (!scheduleOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Schedule");
+                usingSampleSchedule = true;
             }
             initialSchedule = scheduleOptional.orElseGet(SampleDataUtil::getSampleSchedule);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Schedule");
             initialSchedule = new Schedule();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Schedule");
             initialSchedule = new Schedule();
         }
 
@@ -103,6 +105,11 @@ public class MainApp extends Application {
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
                 initialSchedule = SampleDataUtil.getSampleSchedule();
+            } else if (usingSampleSchedule) {
+                // Sample Schedule data would most likely not match non-sample addressBook
+                // In this case, we will wipe schedule data
+                logger.info("AddressBook data found, wiping sample Schedule");
+                initialSchedule = new Schedule();
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
