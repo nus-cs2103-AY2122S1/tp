@@ -22,7 +22,7 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
-        saveLocationStatus.setText(FileUtil.getRelativePath(saveLocation).toString());
+        saveLocationStatus.setText(FileUtil.getRelativePathString(saveLocation));
     }
 
 }

@@ -112,9 +112,9 @@ public class FileUtil {
     /**
      * Gets the path, relative to where the jar file is located.
      */
-    public static Path getRelativePath(Path path) {
+    public static String getRelativePathString(Path path) {
         return getAppEnclosingFolder() == null
-                ? path
-                : Path.of(".").resolve(getAppEnclosingFolder().relativize(path));
+                ? path.toString()
+                : Path.of(".").resolve(getAppEnclosingFolder().relativize(path)).toString();
     }
 }

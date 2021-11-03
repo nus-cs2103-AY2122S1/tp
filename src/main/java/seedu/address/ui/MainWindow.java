@@ -274,6 +274,6 @@ public class MainWindow extends UiPart<Stage> {
             throw new CommandException(GRAPH_SAVE_FAIL);
         }
 
-        resultDisplay.setFeedbackToUser("Graph saved successfully at " + FileUtil.getRelativePath(savePath));
+        resultDisplay.setFeedbackToUser("Graph saved successfully at " + FileUtil.getRelativePathString(savePath));
     }
 }

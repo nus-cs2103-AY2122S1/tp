@@ -35,7 +35,7 @@ public class ExportCommandTest {
         command.setFile(path);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(command, model,
-                String.format(ExportCommand.MESSAGE_SUCCESS, FileUtil.getRelativePath(path).toString()), expectedModel);
+                String.format(ExportCommand.MESSAGE_SUCCESS, FileUtil.getRelativePathString(path)), expectedModel);
     }
 
     @Test
