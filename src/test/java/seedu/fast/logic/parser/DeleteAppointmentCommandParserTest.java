@@ -2,7 +2,7 @@ package seedu.fast.logic.parser;
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_INPUT;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_INPUT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
@@ -43,6 +43,6 @@ public class DeleteAppointmentCommandParserTest {
                 DeleteAppointmentCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT
-                        + VALID_APPOINTMENT_INPUT, expectedMessage);
+                        + VALID_APPOINTMENT_INPUT_BOB, expectedMessage);
     }
 }

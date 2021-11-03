@@ -224,6 +224,21 @@ public class TypicalPersons {
         return fast;
     }
 
+    /**
+     * Returns an {@code Fast} with all the typical persons.
+     */
+    public static Fast getTypicalFastSetThree() {
+        Fast fast = new Fast();
+        for (Person person : getTypicalPersons()) {
+            fast.addPerson(person);
+        }
+
+        for (Person person : getTypicalPersonsSetTwo()) {
+            fast.addPerson(person);
+        }
+        return fast;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }

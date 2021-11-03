@@ -43,7 +43,6 @@ public class ParserUtilTest {
     private static final String INVALID_TIME_INPUT_2 = "8";
     private static final String INVALID_TIME_HOUR_INPUT = "26:00";
     private static final String INVALID_TIME_MINUTE_INPUT = "08:80";
-    private static final String INVALID_VENUE_INPUT = "Test1Test2Test3Test4Test5Test6Test7";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
