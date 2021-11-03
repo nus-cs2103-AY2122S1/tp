@@ -797,16 +797,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | general user                               | add new job positions | Add applicants to these positions.
-| `* * *`  | general user                               | delete existing job positions | Remove irrelevant, out-of-date jobs.
-| `* * *`  | general user                               | add a new applicant under a position      | Store his information within the system                                |
-| `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position          |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | easily search all relevant applicants through keywords         | compare applicants' relevant information |
-| `* *`    | user                                       | hide private applicant details   | ensure confidentiality of applicants' information. |
-| `*`      | user with many applicants in the address book | sort applicants by name           | locate an applicant easily                                                 |
-| `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a job might be          |
-
+| `* * *`  | general user                               | add new job positions | Add applicants to these positions. |
+| `* * *`  | general user                               | delete existing job positions | Remove irrelevant, out-of-date jobs. |
+| `* * *`  | general user                               | edit existing job positions | update the position name and description according to my company's changes.|
+| `* * *`  | general user                               | see the current list of positions | have a quick overview of current positions in the company. |
+| `* * *`  | general user                               | add a new applicant under a position      | Store his/her information within the system.    |
+| `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position.          |
+| `* * *`  | general user                               | edit existing applicants | update the applicant's name and relevant information accordingly.|
+| `* * *`  | general user                               | find applicants based on their name, position or application status | compare applicants' relevant information. |
+| `* * *`  | general user                               | update applicants' application statuses directly | quickly update and see positions' competitiveness. |
+| `* * *`  | general user                               | see the current list of applicants | have a quick overview of applicants that have applied to the various positions. |
+| `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a position might be.          |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App.              |
+| `* *  `  | user                                       | hide private applicant details   | ensure confidentiality of applicants' information. |
+| `* *  `  | user                                       | undo my last command/action | retract mistakes or changes made in the command. |
+| `*    `  | user with many applicants in the address book | sort applicants by name           | locate an applicant easily.  |
+| `*    `  | user                                       | see a graphical representation of statuses in a position | have a quick visualisation on how competitive a position might be. |
 
 *{More to be added}*
 
