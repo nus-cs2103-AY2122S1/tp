@@ -437,6 +437,7 @@ Format: `exit`
 ## Prefix summary
 
 ### Resident Prefix
+
 PREFIX | Description | Usage
 -------- | ------ | ------
 `n/` | Name | `add`, `edit`, `find`
@@ -457,6 +458,7 @@ PREFIX | Description | Usage
 `o/` | Order | `sort`
 
 ### Event Prefix
+
 PREFIX | Description | Usage
 -------- | ------ | ------
 `n/` | Name | `add`, `edit`
@@ -472,6 +474,7 @@ PREFIX | Description | Usage
 ## Command summary
 
 ### Resident Commands
+
 Command | Format | Examples
 --------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
@@ -486,6 +489,7 @@ Command | Format | Examples
 **Export** | `export FILE_NAME` | `export closeContactsOfA123`
 
 ### Event Commands
+
 Command | Format | Examples
 --------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
@@ -498,6 +502,7 @@ Command | Format | Examples
 **Sort** | `sort by/FIELD o/ORDER` | `sort by/c o/d`
 
 ### Commons
+
 Command | Format | Examples
 --------|-------|----------
 **Help** | `help`
