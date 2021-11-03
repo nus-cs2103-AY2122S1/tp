@@ -517,6 +517,16 @@ You can change the default colour of the tag with `t/TAG:#HEX_COLOUR`
 Example: `t/friends:#FF0000` for a red colour tag
 </div>
 
+### `a/ALIAS`
+`ALIAS` can take any values except keywords that are reserved for command names.
+
+Example: `a/findAlex`
+
+### `c/COMMAND`
+`COMMAND` must be a valid command.
+
+Example: `c/find n/Alex`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -527,7 +537,6 @@ the data of your previous Socius home folder.
 **Q**: Can I edit the data file directly?<br>
 **A**: Socius data are saved as a JSON file (i.e. `JAR_FILE_LOCATION/data/addressbook.json`).
 Advanced users are welcome to update data directly by editing that data file.
-However, be warned that changes that make the data format invalid will cause Socius to discard the data file and start with a new empty data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the format of your data file is invalid, Socius will discard all data and start with an empty data file at the next run.
