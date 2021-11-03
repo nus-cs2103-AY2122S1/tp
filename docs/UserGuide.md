@@ -231,7 +231,7 @@ Format: **`remark`** `INDEX r/VALUE`
 * Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing remark will be updated to the input remark.
 * If duplicated remarks are given, only the latest one will be taken.
-* You can remove a person’s remark by typing ` ` (i.e. empty) or `r/` without specifying any remark after it.
+* You can remove a person’s remark by typing `remark` (i.e. empty parameter) or `remark r/` without specifying any remark after it.
 
 Examples:
 
