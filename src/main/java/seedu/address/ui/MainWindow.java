@@ -197,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleStat() {
-        salesView = new PieChartSalesView(logic.getFilteredClientList(), logic.getFilteredProductList());
+        salesView = new PieChartSalesView(logic.getFilteredClientList());
         secondPanelPlaceholder.getChildren().clear();
         secondPanelPlaceholder.getChildren().add(salesView.getRoot());
     }
