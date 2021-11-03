@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.commands.AddToOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,15 +18,20 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
     @Override
     public AddToOrderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG,
+                        PREFIX_COSTPRICE, PREFIX_SALESPRICE);
 
         if (argMultimap.getValue(PREFIX_ID).isEmpty() && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToOrderCommand.MESSAGE_USAGE));
         }
 
         ItemDescriptor toAddDescriptor = new ItemDescriptor();
+        // if both name tag and prefix are present
+        if (!argMultimap.getPreamble().isEmpty() && argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            throw new ParseException("Name field is specified 2 times." + "\n" + AddToOrderCommand.MESSAGE_USAGE);
+        }
 
-        // Parse name
+        // Parse preamble
         if (!argMultimap.getPreamble().isEmpty()) {
             toAddDescriptor.setName(ParserUtil.parseName(argMultimap.getPreamble()));
         }
@@ -42,7 +45,18 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
         } else {
             toAddDescriptor.setCount(1);
         }
-
+        // Parse costprice
+        if (argMultimap.getValue(PREFIX_COSTPRICE).isPresent()) {
+            toAddDescriptor.setCostPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_COSTPRICE).get()));
+        }
+        // Parse salesprice
+        if (argMultimap.getValue(PREFIX_SALESPRICE).isPresent()) {
+            toAddDescriptor.setSalesPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_SALESPRICE).get()));
+        }
+        // Parse tag
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            toAddDescriptor.setTags(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SALESPRICE)));
+        }
         return new AddToOrderCommand(toAddDescriptor);
     }
 }
