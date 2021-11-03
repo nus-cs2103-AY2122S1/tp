@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+Package Model <<Rectangle>>{
+Interface Model <<Interface>>
+Interface Displayable <<Interface>>
+Class Model
+Class Displayable
+
+Class Item
+Class TransactionRecord
+Class ItemCard
+Class TransactionCard
+}
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+Model ..> Displayable
+Item .up.|> Displayable
+TransactionRecord .up.|> Displayable
+
+Item .down.> ItemCard
+TransactionRecord .down.> TransactionCard
+@enduml

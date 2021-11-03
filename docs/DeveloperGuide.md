@@ -172,7 +172,7 @@ The `Model` component
 **
 API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage class diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 

@@ -7,57 +7,36 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model <<Rectangle>>{
 Interface ReadOnlyInventory <<Interface>>
 Interface Model <<Interface>>
-Interface Displayable <<Interface>>
-Class Inventory
-Class ReadOnlyInventory
+Interface ReadOnlyTransactionList <<Interface>>
+Interface ReadOnlyBookKeeping <<Interface>>
 Class Model
 Class ModelManager
-Class Order
-Class UniqueItemList
-Class TransactionRecord
-Class Item
-Class ItemCard
-Class TransactionCard
+Class ReadOnlyInventory
+Class ReadOnlyTransactionList
+Class ReadOnlyBookKeeping
 
-Class Item {
-    -name: Name
-    -id: Integer
-    -salePrice: Double
-    -costPrice: Double
-}
+Class Inventory
+Class TransactionList
+Class BookKeeping
+Class Order
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-Model .right.> Displayable
-Model .left.> ReadOnlyInventory
+Model ..> ReadOnlyBookKeeping
+Model ..> ReadOnlyTransactionList
+Model ..> ReadOnlyInventory
+
+
+BookKeeping .up.|> ReadOnlyBookKeeping
+Inventory .up.|> ReadOnlyInventory
+TransactionList .up.|> ReadOnlyTransactionList
 
 ModelManager .up.|> Model
-ModelManager -left-> "1" Inventory
-ModelManager -right-> "0..1" Order
-ModelManager --> "*" TransactionRecord
-
-Inventory .right.> Order
-
-Inventory .up.|> ReadOnlyInventory
-
-Order *--> "1" UniqueItemList
-Inventory *--> "1" UniqueItemList
-
-UniqueItemList -right-> "~* all" Item
-ModelManager -right->"~* filtered" Item
-
-
-Item .up.|> Displayable
-TransactionRecord -[hidden]right- Item
-TransactionRecord .up.|> Displayable
-
-TransactionRecord .up.|> Order
-Item .up.|> Order
-
-Item .down.> ItemCard
-TransactionRecord .down.> TransactionCard
-
+ModelManager --> "1" BookKeeping
+ModelManager --> "1" Inventory
+ModelManager --> "1" TransactionList
+ModelManager --> "0..1" Order
 
 @enduml
