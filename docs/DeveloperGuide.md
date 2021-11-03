@@ -212,12 +212,12 @@ The features mentioned are:
    3. [Sorting persons](#sorting-persons)
    4. Viewing statistics
 4. Share
-   1. Importing contacts(#import-json-file)
-   2. Exporting contacts(#export-json-file)
+   1. [Importing contacts](#import-json-file)
+   2. [Exporting contacts](#export-json-file)
 5. Advance
    1. Aliasing commands
 6. Utility
-   1. Input Suggestion(#input-suggestion)
+   1. [Input Suggestion](#input-suggestion)
 7. Exiting the program
 8. Saving the data
 
@@ -487,6 +487,46 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
 
 * **Alternative 2:** Allow to-be-imported files to be located anywhere
     * Pros: Gives user the flexibility to put the file wherever they want.
+    * Cons: Different OSes have different file paths convention.
+
+
+### Export JSON file
+
+#### Implementation
+
+The export JSON file will export all the current data into a JSON file.
+
+It works by utilizing the same mechanism that is used by AB3 when saving the addressbook into a JSON file.
+
+#### Usage
+
+Given below is an example usage scenario and how the Export mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `export tmp.json` command to export a file located in `data/tmp.json`.
+
+Step 3. This will call `ExportCommandParser#parse` which will then parse the argument provided.
+
+Step 4. A new `ExportCommand` object will be created with its `outputFilePath` set to `data/FILE_NAME`,
+with the `FILE_NAME` being the string parsed in the previous step.
+
+Step 5. `ExportCommand#execute` will first call `FileUtil#createIfMissing` to create the file as specified in `outputFilePath`.
+
+Step 6. It will then call `JsonUtil#saveJsonFile` which will take in the `outputFilePath` and a `JsonSerializableAddressBook` of the current data, which is retrieved by calling `model#getAddressBook()`.
+
+Step 7. Finally, it will return a `CommandResult` if the operation is successful.
+
+#### Design considerations:
+
+**Aspect: File directory:**
+
+* **Alternative 1 (current choice):** Only allow files to be exported to the `data` directory
+    * Pros: Every file exported from the application will live under a single `data` directory.
+    * Cons: Less flexibility for the user.
+
+* **Alternative 2:** Allow users to export files to any directory
+    * Pros: Gives user the flexibility to place the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
 
