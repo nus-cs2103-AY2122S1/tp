@@ -4,6 +4,8 @@ import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
+import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.person.Person;
 
 public class PersonArchiveExecutor extends PersonExecutor {
