@@ -156,16 +156,19 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 </div>
 
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution on use of the symbol `/` in commands:**<br>
 
 * For all commands, the symbol `/` should only be used in the **representation of prefixes**, such as `n/`, `p/` and `r/`, etc. 
+
 * You **should not** use the symbol `/` when filling up any of the parameters.
+
 * For example,  in `add` command,
+
   * **Acceptable** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`.
-  * **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>
-  _*notice the additional `/` used in the parameter of `a/ADDRESS`._
+
+  * **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>_*notice the additional `/` used in the parameter of `a/ADDRESS`._
 
 </div>
 
@@ -599,59 +602,48 @@ Action | Format | Examples
 
 1. **Q:** Where can I view the list of commands?
 
-   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
-
+    > **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
 
 2. **Q:** Why are some usual email address inputed valid, such as 'jd@gmail.com.this.that.this.that.this.that'?
 
-   **A:** There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
-
+    > **A:** There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
 
 3. **Q:** Why are there some unusual files present in my folder after I run **TuitiONE**?
 
-   **A:** **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [Managing data](#managing-data) for more).
-
+    > **A:** **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [Managing data](#managing-data) for more).
 
 4. **Q:** Why am I unable to add a student with the same name as another student?
 
-   **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
-
+    > **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
 
 5.  **Q:** How do I edit a lesson?
 
-    **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
-
+    > **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
 
 6. **Q:** How do I edit a remark?
 
-   **A:** To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks. (see [Editing a student](#editing-a-student--edit) for more).
-
+    > **A:** To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks. (see [Editing a student](#editing-a-student--edit) for more).
 
 7. **Q:** Am I able to add or edit `Remarks` to have spacings within them?
 
-   **A:** No. The number of characters each `Remark` can have is capped at 25, and must be single words. (see [Adding a student](#adding-a-student-add) for more)
-
+    > **A:** No. The number of characters each `Remark` can have is capped at 25, and must be single words. (see [Adding a student](#adding-a-student-add) for more)
 
 8. **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
 
-    **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1415` are valid inputs, while `1415` is an invalid input. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
-
+    > **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1415` are valid inputs, while `1415` is an invalid input. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
 
 9. **Q:** How long can my name be for adding a new `Student`?
 
-    **A:** We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead. (see [Adding a student](#adding-a-student-add) for more)
-
+    > **A:** We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead. (see [Adding a student](#adding-a-student-add) for more)
 
 10. **Q:** Can `Lessons` of the same `Subject` and `Grade` start at the same time?
 
-    **A:** No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
-
+    > **A:** No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
 
 11. **Q:** How many `Lessons` can a `Student` be enrolled in?
 
-    **A:** A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons` (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
-
+    > **A:** A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons` (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
 
 12. **Q:** How many `Students` can a `Lesson` contain?
 
-    **A:** A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more)
+    > **A:** A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more)
