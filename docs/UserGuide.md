@@ -4,13 +4,16 @@ title: User Guide
 ---
 # Table of Contents
 {:.no_toc}
-<!-- TOC adapted from
+<!-- @@author wpinrui-reused
+Table of Contents from AY2021S1-CS2103T-W16-3/tp
 https://github.com/AY2021S1-CS2103T-W16-3/tp/pull/179/commits/aec461182c194c9ca2c67d7c407fcabb376191ff
 -->
 <div class="toc-no-bullet-points">
   * Table of Contents
   {:toc}
 </div>
+<!--@@author
+-->
 
 # 1. Introduction
 Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to track their students' contacts**.
@@ -219,7 +222,7 @@ Finds students whose names contain any of the given keywords.
 
 Format: `find -s KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Partial keywords will be matched e.g. `Han` will match `Hans`
@@ -296,6 +299,7 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 * The lesson name should only contain alphanumeric characters and spaces.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
+* The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 
 Examples:
 * `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
@@ -326,6 +330,7 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 * If provided, the lesson name should only contain alphanumeric characters and spaces.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
+* * The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 * At least 1 out of 4 optional fields must be provided.
 
 Examples:
@@ -353,7 +358,7 @@ Finds lessons whose names contain any of the given keywords.
 
 Format: `find -l KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `math` will match `Math`
+* The search is case-insensitive. e.g. `math` will match `Math`
 * The order of the keywords does not matter. e.g. `Math Upper` will match `Upper Math`
 * Only the name is searched.
 * Partial keywords will be matched e.g. `Sci` will match `Science`
@@ -467,7 +472,7 @@ Action | Format and Examples
 **[Delete student](#deleting-a-student--delete)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **[Edit student](#editing-a-student--edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **[View student](#viewing-a-student--view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
-**[Find student](#locating-students-or-lessons-by-name-find--s--find--l)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
+**[Find student](#locating-students-by-name-find--s)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
 **[Set payment made](#setting-payment-made-paid)** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
 **[Unset payment made](#unsetting-payment-made-unpaid)** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
@@ -482,7 +487,7 @@ Action | Format and Examples
 **[Delete lesson](#deleting-a-lesson--del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
 **[View lesson](#viewing-a-lesson--view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
-**[Find lesson](#locating-students-or-lessons-by-name-find--s--find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
+**[Find lesson](#locating-lessons-by-name-find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 
 ### 6.3 Student and Lesson commands
 
