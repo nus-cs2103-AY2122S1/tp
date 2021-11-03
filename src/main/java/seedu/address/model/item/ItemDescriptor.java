@@ -53,7 +53,7 @@ public class ItemDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, id, tags, costPrice, salesPrice);
+        return CollectionUtil.isAnyNonNull(name, id, count, tags, costPrice, salesPrice);
     }
 
     public void setName(Name name) {
