@@ -18,6 +18,7 @@ public class Nationality {
 
     public static final List<String> VALID_NATIONALITIES = readValidNationalities();
     public static final String MESSAGE_CONSTRAINTS = "Nationality can take any values, and it should not be blank";
+    public static final String MESSAGE_NOT_FOUND = "The nationality entered is not valid. Please try again";
 
     /*
      * The first character of the nationality must not be a whitespace,
