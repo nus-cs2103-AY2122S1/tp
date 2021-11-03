@@ -2,6 +2,7 @@ package seedu.notor.ui.note;
 
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -11,9 +12,11 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyCombination.Modifier;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.commons.util.DateUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
+import seedu.notor.model.Notable;
 import seedu.notor.model.person.Person;
 import seedu.notor.ui.ConfirmationWindow;
 import seedu.notor.ui.ResultDisplay;
@@ -41,12 +44,13 @@ public abstract class NoteWindow extends UiPart<Stage> {
     @FXML
     protected TextArea noteTextArea;
 
-
     protected ConfirmationWindow confirmationWindow;
 
     protected final Logic logic;
 
     protected final ResultDisplay resultDisplay;
+
+    protected final Logger logger = LogsCenter.getLogger(getClass());
 
     protected NoteWindow(Logic logic, ResultDisplay resultDisplay) {
         super(FXML);
@@ -134,6 +138,12 @@ public abstract class NoteWindow extends UiPart<Stage> {
      * Exits the note Window.
      */
     public abstract void exit();
+
+    public abstract boolean belongsTo(Notable notable);
+
+    public static boolean contains(Notable notable) {
+        return OPENED_NOTE_WINDOWS.parallelStream().anyMatch(noteWindow -> noteWindow.belongsTo(notable));
+    }
 
     /**
      * Exits and saves the note window.

@@ -15,6 +15,10 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class GeneralNoteWindow
+Class PersonNoteWindow
+Class GroupNoteWindow
+Class "{abstract}\nNoteWindow" as NoteWindow
 }
 
 package Model <<Rectangle>> {
@@ -35,7 +39,13 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" GeneralNoteWindow
+MainWindow --> "0..*" PersonNoteWindow
+MainWindow --> "0..*" GroupNoteWindow
 
+GroupNoteWindow --|> NoteWindow
+PersonNoteWindow --|> NoteWindow
+GeneralNoteWindow --|> NoteWindow
 PersonListPanel -down-> "*" PersonCard
 
 MainWindow -left-|> UiPart
@@ -46,10 +56,15 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+NoteWindow --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
+NoteWindow --> Logic
+GeneralNoteWindow --> Logic
+PersonNoteWindow --> Logic
+GroupNoteWindow --> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

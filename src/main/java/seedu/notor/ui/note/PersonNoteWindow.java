@@ -3,6 +3,7 @@ package seedu.notor.ui.note;
 import javafx.fxml.FXML;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
+import seedu.notor.model.Notable;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.ui.ConfirmationWindow;
@@ -10,8 +11,8 @@ import seedu.notor.ui.ResultDisplay;
 
 public class PersonNoteWindow extends NoteWindow {
 
-    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Person: %1$s";
-    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Person: %1$s";
+    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Person: %1$s.";
+    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Person: %1$s.";
 
     private Person person;
 
@@ -56,6 +57,7 @@ public class PersonNoteWindow extends NoteWindow {
         logic.executeSaveNote(person, editedPerson);
         person = editedPerson;
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
+        logger.info(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
     }
 
 
@@ -81,6 +83,14 @@ public class PersonNoteWindow extends NoteWindow {
         return otherPerson.person.equals(this.person);
 
     }
+    @Override
+    public boolean belongsTo(Notable notable) {
+        if (notable instanceof Person) {
+            Person otherPerson = (Person) notable;
+            return otherPerson.equals(person);
+        }
+        return false;
+    }
 
     /**
      * Exits the note Window.
@@ -90,5 +100,6 @@ public class PersonNoteWindow extends NoteWindow {
         getRoot().close();
         OPENED_NOTE_WINDOWS.remove(this);
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS));
+        logger.info(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS));
     }
 }

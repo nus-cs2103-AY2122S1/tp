@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
+import seedu.notor.model.Notable;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.person.Person;
 import seedu.notor.ui.ConfirmationWindow;
 import seedu.notor.ui.ResultDisplay;
 import seedu.notor.ui.listpanel.GroupListPanel;
@@ -13,8 +15,8 @@ import seedu.notor.ui.listpanel.SubgroupListPanel;
 
 public class GroupNoteWindow extends NoteWindow {
 
-    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Group: %1$s";
-    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Group: %1$s";
+    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Group: %1$s.";
+    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Group: %1$s.";
 
     private final Group group;
     private final StackPane listPanelPlaceholder;
@@ -47,7 +49,7 @@ public class GroupNoteWindow extends NoteWindow {
     }
 
     /**
-     * Saves the file
+     * Saves the file.
      */
     @FXML
     @Override
@@ -66,6 +68,7 @@ public class GroupNoteWindow extends NoteWindow {
         group.setNote(editedNote);
         logic.executeSaveNote();
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
+        logger.info(String.format(MESSAGE_SAVE_NOTE_SUCCESS, group));
     }
 
 
@@ -91,6 +94,15 @@ public class GroupNoteWindow extends NoteWindow {
         return otherGroup.group.equals(this.group);
     }
 
+    @Override
+    public boolean belongsTo(Notable notable) {
+        if (notable instanceof Group) {
+            Group otherGroup = (Group) notable;
+            return otherGroup.equals(group);
+        }
+        return false;
+    }
+
     /**
      * Exits the note Window.
      */
@@ -99,5 +111,6 @@ public class GroupNoteWindow extends NoteWindow {
         getRoot().close();
         OPENED_NOTE_WINDOWS.remove(this);
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS));
+        logger.info(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS));
     }
 }
