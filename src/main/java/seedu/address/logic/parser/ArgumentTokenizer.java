@@ -125,23 +125,25 @@ public class ArgumentTokenizer {
         Prefix prefix = currentPrefixPosition.getPrefix();
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
 
-        if (prefixHasBadForm(argsString, valueStartPos)) {
+        if (!prefixHasGoodForm(argsString, valueStartPos)) {
             throw new ParseException(MESSAGE_BAD_PREFIX_FORM);
         }
-
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
         return value.trim();
     }
 
     /**
-     * Checks if the prefix has bad form, for example, not followed by whitespace.
-     * Prefix at the end of args do not need to be followed by whitespace.
+     * Checks if the prefix has good form, i.e. followed by whitespace, or is end of arg String
      */
-    private static boolean prefixHasBadForm(String argsString, int valueStartPos) {
-        return valueStartPos != 0 &&
-                (argsString.length() - 1 < valueStartPos
-                        || argsString.charAt(valueStartPos) != ' '); // Prefix not at the end of args, check for whitespace
+    private static boolean prefixHasGoodForm(String argsString, int valueStartPos) {
+        // Case: beginning of argString always a good form
+        // Case: startPos exceeds or is at the end of the argString
+        if (valueStartPos == 0 || valueStartPos >= argsString.length() - 1) {
+            return true;
+        }
+        // startPos should be a whitespace to be of good form
+        return argsString.charAt(valueStartPos) == ' ';
     }
 
     /**
