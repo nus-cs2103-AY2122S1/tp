@@ -4,3 +4,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 13;
 }
+
+.tree-view .tree-cell {
+    -fx-control-inner-background: transparent;
+}
