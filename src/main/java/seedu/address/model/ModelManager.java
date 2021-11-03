@@ -49,9 +49,10 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs,
                         ReadOnlyTransactionList transactionList, ReadOnlyBookKeeping bookKeeping) {
         super();
-        requireAllNonNull(inventory, userPrefs);
+        requireAllNonNull(inventory, userPrefs, transactionList, bookKeeping);
 
-        logger.fine("Initializing with inventory: " + inventory + " and user prefs " + userPrefs);
+        logger.fine("Initializing with inventory: " + inventory + ", user prefs " + userPrefs
+            + ", transaction list: " + transactionList + ", bookkeeping: " + bookKeeping);
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
