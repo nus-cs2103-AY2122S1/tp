@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,15 +38,16 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final DateTimeFormatter[] DATE_TIME_FORMATTERS = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), DateTimeFormatter.ofPattern("HHmm yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"), DateTimeFormatter.ofPattern("HHmm dd-MM-yyyy"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"), DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")
+    public static final String[] DATE_TIME_PATTERNS = {
+        "yyyy-MM-dd HHmm", "HHmm yyyy-MM-dd",
+        "dd-MM-yyyy HHmm", "HHmm dd-MM-yyyy",
+        "yyyy-MM-dd HH:mm", "HH:mm yyyy-MM-dd",
+        "dd-MM-yyyy HH:mm", "HH:mm dd-MM-yyyy"
     };
 
-    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HHmm";
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+    public static final DateTimeFormatter[] DATE_TIME_FORMATTERS =
+            Arrays.stream(DATE_TIME_PATTERNS).map(DateTimeFormatter::ofPattern).toArray(DateTimeFormatter[]::new);
+
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
@@ -53,7 +55,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE =
             "Number of people is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE_TIME_FORMAT =
-            "Date time should be in the format of " + DATE_TIME_PATTERN;
+            "Date time should be in one of the following formats:  " + String.join(", ", DATE_TIME_PATTERNS);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -416,13 +418,17 @@ public class ParserUtil {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
 
-        LocalDateTime result;
-        try {
-            result = LocalDateTime.parse(trimmedDateTime, DATE_TIME_FORMATTER);
-        } catch (DateTimeParseException dtpe) {
-            throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
+        for (DateTimeFormatter formatter : DATE_TIME_FORMATTERS) {
+            try {
+                LocalDateTime result = LocalDateTime.parse(trimmedDateTime, formatter);
+                return result;
+            } catch (DateTimeParseException dtpe) {
+                // continue parsing with another format
+            }
         }
-        return result;
+
+        // cannot parse using the formatters
+        throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
     }
 
     /**
