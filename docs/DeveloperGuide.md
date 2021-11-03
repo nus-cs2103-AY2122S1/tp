@@ -484,7 +484,7 @@ At this point, if `AddLessonCommandParser#parse()` detects that no lesson name h
 its execution and `ParseException` will be thrown.
 </div>
 
-3. Since the optional parameters (`price` and `remark`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. Else, the original arguments (`Maths 1` and `15`) are used for the parameters `lessonName` and `capacity` respectively. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Remark` instances.
+3. Since the optional parameters (`price` and `timing`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. Else, the original arguments (`Maths 1` and `15`) are used for the parameters `lessonName` and `capacity` respectively. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Timing` instances.
 
 4. These individual instances, along with a `Students` object containing an empty `ArrayList<Student>`,  are then used to create a `Lesson` object. This `Lesson` instance is used to create a `AddLessonCommand` object.
 

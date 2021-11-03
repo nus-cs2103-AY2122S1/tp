@@ -28,7 +28,7 @@ AddCommandParser -> AddLessonCommandParser : parse("n/Maths 1 c/15")
 activate AddLessonCommandParser
 
 create Lesson
-AddLessonCommandParser -> Lesson : Lesson(lessonName, capacity, price, students, remark)
+AddLessonCommandParser -> Lesson : Lesson(lessonName, capacity, price, students, timing)
 activate Lesson
 
 Lesson --> AddLessonCommandParser
