@@ -205,7 +205,7 @@ Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STAT
 
 Examples:
 *  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
-*  `edit 1 2 3 v/true fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
+*  `edit 1 2 3 v/T fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
 #### Deleting a resident : `delete`
 
@@ -358,6 +358,7 @@ Remove multiple residents from an event based on the information given(name or r
 Format: `exclude INDEX r/INFORMATION [, MORE INFORMATION]`
 
 * Resident information can be given in the form of name or room, but all has to be all rooms or all names
+* The full name of the resident must be specified
 * When adding multiple residents, each piece of information is separated by a comma
 * The information inputted is case-insensitive
 * If one or more of the given information is invalid, an error message is outputted and none of the residents are added to the event
