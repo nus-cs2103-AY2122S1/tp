@@ -311,8 +311,8 @@ The final predicate is stored in `PersonMatchesKeywordPredicate` and then passed
 
 #### Implementation
 
-The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members 
-as `filteredPersons`. Each `Person` in the list internally stores `totalAttendance` and `todayAttendance` 
+The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
+as `filteredPersons`. Each `Person` in the list internally stores `totalAttendance` and `todayAttendance`
 which will be updated accordingly when the attendance of that `Person` is marked or unmarked.
 
 `ModelManager` implements the following operations:
