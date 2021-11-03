@@ -257,6 +257,8 @@ Format: `add -p STUDENT_INDEX PROGRESS`
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student in the list.
 
+> :bulb: Using this command will update the student panel to only display the edited student.
+
 ### Deleting progress from a student : `del -p`
 
 Removes the string representing progress from the student with a given student index.
@@ -269,6 +271,8 @@ Format: `del -p STUDENT_INDEX`
 
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
+
+> :bulb: Using this command will update the student panel to only display the edited student.
 
 ### Setting payment made: `paid`
 
