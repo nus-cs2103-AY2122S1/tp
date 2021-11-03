@@ -192,5 +192,20 @@ public class AssessmentStatisticsTest {
         assertEquals(Score.MIN_SCORE, statistics.getMean());
     }
 
+    @Test
+    public void getXPercentile_assessmentWithScores_returnsXPercentile() {
+        assessment.setScores(scores);
+        AssessmentStatistics statistics = new AssessmentStatistics(assessment);
 
+        assertEquals(46, statistics.getXPercentile(25));
+        assertEquals(78, statistics.getXPercentile(75));
+    }
+
+    @Test
+    public void getXPercentile_assessmentWithoutScores_returnsZeroScore() {
+        assessment.setScores(new HashMap<>());
+        AssessmentStatistics statistics = new AssessmentStatistics(assessment);
+
+        assertEquals(Score.MIN_SCORE, statistics.getXPercentile(25));
+    }
 }
