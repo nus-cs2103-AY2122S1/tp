@@ -15,7 +15,6 @@ import seedu.address.model.module.ModuleName;
 public class JsonAdaptedModuleTest {
     private static final String INVALID_MODULE_NAME = "1000";
 
-    private static final String VALID_MODULE_NAME = MODULE_1.getName().getModuleName();
     private static final List<JsonAdaptedStudent> VALID_STUDENT_LIST = MODULE_1
             .getStudentList()
             .stream()
