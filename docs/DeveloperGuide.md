@@ -568,8 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | download the app               | use it                                                                 |
-| `* * *`  | new user                                   | type ‘exit’                    | quit the app immediately                                               |
+| `* * *`  | new user                                   | see usage instructions         | can refer to them when I forget how to use the application                                                                 |
 | `* * *`  | 2nd-time user                              | add a client                   | keep track of the details of a specific client                         |
 | `* * *`  | 2nd-time user                              | add a product                  | keep track of the details of a specific product                        |
 | `* * * ` | 2nd-time user                              | edit a client                  | edit the details of a specific client                                  |
@@ -580,8 +579,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * * ` | 2nd-time user                              | delete a product               | remove product that I no longer need                                   |
 | `* * `   | 10th-time user                             | list all my clients            | locate a client easily                                                 |
 | `* * `   | 10th-time user                             | list all my products           | locate a product easily                                                |
+| `* * * ` | 10th-time user                             | see the statistics of the products sold | analyse the consumer pattern and make better decision in the future |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -755,8 +754,7 @@ User story ends.
     * 2a1. Sellah shows an error message.
 
       Use case ends.
-
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
@@ -767,8 +765,13 @@ User story ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, OS-X, and macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI** - Command Line Interface
+* **IntelliJ** - An Integrated Development Environment (IDE) designed for Java software development.
+* **UML** - Unified Modeling Language.
+* **Terminal/PowerShell** - Any operating system shell with a command-line interface.
+* **JDK** - Java Development Kit.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -830,8 +833,7 @@ expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+       
 
 ### Saving data
 
