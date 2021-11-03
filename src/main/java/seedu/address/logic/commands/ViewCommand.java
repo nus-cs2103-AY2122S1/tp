@@ -16,7 +16,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views a particular contact  "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views a particular contact "
             + "the specified index and displays the details of the contact at said index.\n"
             + "Parameters: INDEX...\n"
             + "Example: " + COMMAND_WORD + " 1";
