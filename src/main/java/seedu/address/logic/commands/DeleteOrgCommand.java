@@ -18,9 +18,9 @@ public class DeleteOrgCommand extends Command {
     public static final String COMMAND_WORD = "deleteorg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the organisation identified by its name used in the organisation list.\n"
-            + "Parameters: NAME (must be an organisation in the list)\n"
-            + "Example: " + COMMAND_WORD + " Facebook";
+            + ": Deletes the organisation identified by the index number used in the displayed organisation list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_ORGANISATION_SUCCESS = "Deleted Organisation: %1$s";
 
