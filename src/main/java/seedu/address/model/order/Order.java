@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.product.Quantity.QUANTITY_ZERO;
 
 import java.time.LocalDate;
 
@@ -23,8 +24,6 @@ public class Order {
 
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
-
-    private static final Quantity QUANTITY_ZERO = new Quantity("0");
 
     private final Name productName;
     private final Quantity quantity;

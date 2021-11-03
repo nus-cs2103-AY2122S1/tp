@@ -11,6 +11,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
 
 /**
@@ -48,6 +49,13 @@ public class DeleteProductCommand extends Command {
         model.deleteProduct(productToDelete);
 
         logger.log(Level.INFO, String.format("Deleting product %1$s", productToDelete.getId()));
+
+        Name productName = productToDelete.getName();
+        model.getAddressBook().getClientList().forEach(client -> {
+            if (client.hasOrder(productName)) {
+                client.removeOrder(productName);
+            }
+        });
 
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete),
                 CommandType.DELETE, null, false);
