@@ -266,6 +266,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
+The following activity diagram summarizes what happens when a user executes an add remark command on a specified person:
+
+![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
+
 The add remark mechanism will add remark to a contact specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
 
 During `RemarkCommand#execute`, a new `Person` object will be created. For all of its properties (e.g. `Name`) except for `Remark`, the values will remain the same as the original person's properties.
