@@ -23,18 +23,18 @@ public class AddPersonCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_MODULE_CODE + "MODULE_INFO... "
+            + PREFIX_MODULE_CODE + "MODULE_CODE [LESSON_CODE(S)] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
-            + "[" + PREFIX_REMARK + "REMARK]\n "
+            + "[" + PREFIX_TELE_HANDLE + "TELEGRAM_HANDLE] "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: add "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_MODULE_CODE + "CS2030S T12 "
-            + PREFIX_MODULE_CODE + "CS2040 "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_TELE_HANDLE + "@Johntho\n"
-            + "Note: MODULE_INFO must start with a module code";
+            + PREFIX_NAME + "Ben "
+            + PREFIX_EMAIL + "ben123@gmail.com "
+            + PREFIX_MODULE_CODE + "CS2103T T12 "
+            + PREFIX_MODULE_CODE + "CS2100 T11 B05 "
+            + PREFIX_PHONE + "91238456 "
+            + PREFIX_TELE_HANDLE + "@BenIsHere "
+            + PREFIX_REMARK + "Overseas\n";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

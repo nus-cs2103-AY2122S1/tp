@@ -41,14 +41,17 @@ public class EditPersonCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_MODULE_CODE + "MODULE_INFO]... "
+            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE LESSON_CODE(S)] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
             + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: edit 1 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_MODULE_CODE + "CS2103T T09"
-            + PREFIX_PHONE + "91234567 ";
+            + PREFIX_NAME + "Ben "
+            + PREFIX_EMAIL + "ben321@gmail.com "
+            + PREFIX_MODULE_CODE + "CS2100 T09 B09 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_TELE_HANDLE + "@BenWasHere "
+            + PREFIX_REMARK + "Overseas\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
