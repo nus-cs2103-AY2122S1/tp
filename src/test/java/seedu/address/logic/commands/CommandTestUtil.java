@@ -63,10 +63,14 @@ public class CommandTestUtil {
 
     public static final String VALID_TASK_NAME_0 = "Assignment 1";
     public static final String VALID_TASK_NAME_1 = "Lab 7";
+    public static final String VALID_TASK_NAME_2 = "Assignment3";
     public static final String VALID_TASK_ID_0 = "T1";
     public static final String VALID_TASK_ID_1 = "T77";
+    public static final String VALID_TASK_ID_2 = "T333";
     public static final String VALID_TASK_DEADLINE_0 = "2021-10-28";
-    public static final String VALID_TASK_DEADLINE_1 = "2022-11-11";
+    public static final String VALID_TASK_DEADLINE_1 = "2022-11-11 12:00";
+    public static final String VALID_TASK_DEADLINE_2 = "2021-10-01";
+    public static final String INVALID_TASK_DEADLINE_1 = "!@#$";
 
     public static final String TASK_NAME_DESC_0 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_0;
     public static final String TASK_NAME_DESC_1 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_1;
@@ -82,7 +86,6 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE
             + "18th November, 2021"; // only alphanumeric characters and dashes are allowed in taskDeadline
 
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -90,7 +93,6 @@ public class CommandTestUtil {
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
     public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_0;
     public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_1;
-
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)

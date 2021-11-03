@@ -45,7 +45,7 @@ public class TaskCard extends UiPart<Region> {
         taskId.setText(task.getTaskId().value);
         taskName.setText(task.getTaskName().taskName);
         taskName.setWrapText(true);
-        taskDeadline.setText(task.getTaskDeadline().value);
+        taskDeadline.setText(task.getTaskDeadline().toString());
         isComplete.setText(task.isComplete() ? "Completed" : "Incomplete");
     }
 

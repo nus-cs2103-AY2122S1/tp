@@ -37,6 +37,7 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         moduleName = taskToCopy.getTaskModuleName();
+        taskId = taskToCopy.getTaskId();
         taskName = taskToCopy.getTaskName();
         taskDeadline = taskToCopy.getTaskDeadline();
         isComplete = taskToCopy.isComplete();
@@ -82,8 +83,12 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Build a Task based on the fields specified.
+     * @return The Task object built.
+     */
     public Task build() {
-        return new Task(moduleName, taskId, taskName, taskDeadline);
+        return new Task(moduleName, taskId, taskName, taskDeadline, isComplete);
     }
 
 }
