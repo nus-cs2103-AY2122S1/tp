@@ -229,7 +229,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
-* A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
+* `REMARK` can have a maximum of 25 characters, single worded without spacings in between them. A student can have any number of remarks, capped at 5. (including 0). (e.g `smart` is valid, while `needs help` is invalid)
 
 Example(s):
 
@@ -558,3 +558,9 @@ Action | Format | Examples
 * **Q:** Where can I view the list of commands?
 
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
+
+
+* **Q:** Am i able to add or edit remarks to have spacings within them?
+
+  **A:** No. The number of characters each remark can have is capped at 25, and must be single words.
+
