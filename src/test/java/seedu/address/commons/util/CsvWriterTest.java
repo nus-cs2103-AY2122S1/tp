@@ -43,7 +43,7 @@ public class CsvWriterTest {
         data.put("name", TypicalPersons.getTypicalNamesStringForm());
         data.put("phone", TypicalPersons.getTypicalPhonesStringForm());
         data.put("email", TypicalPersons.getTypicalEmailsStringForm());
-        data.put("address", TypicalPersons.getTypicalAddressesStringForm());
+        data.put("address", TypicalPersons.getTypicalAddressesStringFormWithDoubleQuoutes());
         data.put("tags", TypicalPersons.getTypicalTagsStringForm());
 
         CsvWriter writer = new CsvWriter();
