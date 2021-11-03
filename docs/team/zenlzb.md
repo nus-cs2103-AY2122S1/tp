@@ -15,30 +15,21 @@ Given below are my contributions to the project.
 
 * **Project management**:
   - Team Lead
-  
     - Responsible for delegation of tasks and general direction of the project.
     - Managed the issue tracker on the team repo
-  
       - Created issues to keep track of todos
       - Categorised issues in terms of category and severity
-  
     - Managed Releases
-  
       - Created releases for every version
       - Manually tested jar files before releases
 
 * **New Features**:
-  - Adapted various Contacts features to work on Tasks  
-    
+  - Adapted various Contacts features to work on Tasks
     - Adapted AddressBookParser into TaskTabParser to parse commands on the task tab.
     - Adapted ClearPersonCommand and DeletePersonCommand into task versions.
-  
   - Implemented Assigning people to tasks
-  
     - A task can be assigned people from the contacts list similar to how it can be assigned tags.
-
   - Implemented Assign and Tag commands
-    
     - A person can have multiple tags, a task can have multiple tags and multiple
   people assigned to it.
     - Using edit to update tags or people overwrites all the existing tags and people.
@@ -50,8 +41,7 @@ Given below are my contributions to the project.
   easier process
 
 * **Documentation**:
-  * User Guide:   
-    
+  * User Guide:
     - Added command descriptions for many new commands  
     
     Example Extract:
@@ -84,9 +74,9 @@ Assigns extra people to a task without wiping people already assigned.
 >Assigning people to a task uses the current index of the person on the contacts list, which is shown on the side bar to the right.
   
   * Developer Guide:
-
     - Added implementations details of assigning people to tasks
-    - Updated implementation of logic section  
+    - Updated implementation of logic section 
+    
     Example Extract:
 > We integrated the existing address book system of storing contacts with our new task list system by adding the ability
 >      to assign people from your address book to tasks in your task list.   
