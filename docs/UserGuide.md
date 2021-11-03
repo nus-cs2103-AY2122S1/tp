@@ -5,39 +5,55 @@ title: User Guide
 
 # Welcome to Socius User Guide!
 
-* Table of Contents
-{:toc}
-
-<!---
 ## Table of Contents
-1. Quick Start
-2. Features
-     1. Viewing help `help`
-     2. Modify
-          1. Adding a person `add`
-          2. Editing a person `edit`
-          3. Adding a remark `remark`
-          4. Adding tags 'addt'
-          5. Deleting a person `delete`
-          6. Deleting tags 'deletet'
-          6. Deleting multiple person `deletem`
-          7. Clearing all entries `clear`
-     3. View
-          1. Listing all persons `list`
-          2. Finding persons `find`
-          3. Sorting persons `sort`
-          4. Viewing statistics `stat`
-     4. Share
-          1. Importing contacts `import`
-          2. Exporting contacts `export`
-     5. Advance
-          1. Aliasing commands `alias`
-     6. Exiting the program `exit`
-     7. Saving the data
-3. Arguments constraints
-3. FAQ
-4. Command Summary
---->
+
+1. [Introduction](#introduction-to-socius)
+2. [Using this guide](#using-this-guide)
+3. [Quick start](#quick-start)
+4. [Features](#features)
+   1. [Viewing help](#help)
+   2. [Modify](#adding-a-person-add)
+       1. [Adding a person `add`](#adding-a-person-add)
+       2. [Adding tags to persons `addt`](#adding-tags-addt)
+       3. [Adding a remark `remark`](#adding-remark-to-a-person-remark)
+       4. [Editing a person `edit`](#editing-a-person-edit)
+       5. [Deleting a person `delete`](#deleting-a-person-delete)
+       6. [Deleting multiple persons `deletem`](#deleting-multiple-person-deletem)
+       7. [Deleting tags from persons `deletet`](#deleting-tags-deletet)
+       8. [Clearing all persons `clear`](#clearing-all-persons-clear)
+   3. [View](#listing-all-persons-list)
+      1. [Listing all persons `list`](#listing-all-persons-list)
+      2. [Finding persons `find`](#finding-persons-find)
+      3. [Sorting persons `sort`](#sorting-all-persons-sort)
+      4. [Viewing statistics `stat`](#viewing-statistics-stat)
+   4. [Share](#importing-contacts-import)
+      1. [Importing contacts `import`](#importing-contacts-import)
+      2. [Exporting contacts `export`](#exporting-contacts-export)
+   5. [Advance](#aliasing-commands-alias)
+      1. [Aliasing commands `alias`](#aliasing-commands-alias)
+   6. [Exiting the program `exit`](#exiting-the-program-exit)
+   7. [Saving the data](#saving-the-data)
+5. [Parameter Constraints](#parameter-constraints)
+   1. [`n/NAME`](#nname)
+   2. [`g/GENDER`](#ggender)
+   3. [`p/PHONE`](#pphone)
+   4. [`e/EMAIL`](#eemail)
+   5. [`nat/NATIONALITY`](#natnationality)
+   6. [`tg/TUTORIAL GROUP`](#tgtutorial-group)
+   7. [`s/SOCIAL HANDLE`](#ssocial-handle)
+   8. [`r/REMARK`](#rremark)
+   9. [`t/TAG`](#ttag)
+   10. [`a/ALIAS`](#aalias)
+   11. [`c/COMMAND`](#ccommand)
+6. [FAQ](#faq)
+7. [Glossary](#glossary)
+8. [Authors](#authors)
+9. [Command summary](#command-summary)
+   1. [General](#general)
+   2. [Modify](#modify)
+   3. [View](#view)
+   4. [Share](#share)
+   5. [Advance](#advance)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,11 +119,13 @@ If double-click does not work, you can go to the terminal and type in `java -jar
 
 * Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
 Some example commands you can try:
-    * **`list`** : Lists all contacts.
-
     * **`add`** `n/Amy Tan tg/W08 nat/Singaporean` : Adds a contact named `Amy Tan` to Socius, together with her tutorial group and nationality.
 
     * **`delete`** `3` : Deletes the person at index 3 in the current list.
+
+    * **`find`** : `g/f nat/Singaporean` : Finds contacts of all female Singaporeans in Socius.
+
+    * **`list`** : Lists all contacts.
 
     * **`clear`** : Deletes all contacts.
 
@@ -177,6 +195,54 @@ Examples:
 ![Add Command Example](images/AddEnerst.png)
 *After execution of Add Command: **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst`*
 
+### Adding tags: `addt`
+
+You can add tags to a person in the contact book by `INDEX`. Alternatively, you can add tags to everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`addt`** `INDEX t/TAG [t/TAG]…​`
+* Add tags to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* Input tag will be appended to the existing tag.
+* If duplicated tags are given, these tags will not be added.
+* At least one `TAG` must be provided.
+* `TAG` is case-sensitive
+
+For example:
+
+* **`addt`** `1 t/friend` followed by **`find`** `g/f` adds the friend tag to the person at index 1 in the filtered list of female contacts.
+* **`addt`** `2 t/teammate t/neighbour` adds the teammate and neighbour tags to the person at index 2 in the displayed person list.
+
+Alternatively, **`addt`** `all t/TAG [t/TAG]…​`
+* Add tags to everybody in the list.
+* Input tag will be appended to the existing tag.
+* If duplicated tags are given, these tags will not be added.
+* At least one `TAG` must be provided.
+* `TAG` is case-sensitive
+
+For example:
+
+* **`addt`** `all t/friend` followed by **`find`** `g/f` adds the friend tag to all persons in the filtered list of female contacts.
+* **`addt`** `all t/teammate t/neighbour` adds the teammate and neighbour tags to all persons in the displayed person list.
+
+### Adding remark to a person: `remark`
+
+You can add a remark to a person in the contact book by `INDEX`.
+
+Format: **`remark`** `INDEX r/VALUE`
+* Add a remark to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* Existing remark will be updated to the input remark.
+* If duplicated remarks are given, only the latest one will be taken.
+* You can remove a person’s remark by typing `remark` (i.e. empty parameter) or `remark r/` without specifying any remark after it.
+
+Examples:
+
+* **`remark`** `1 r/She likes coding` adds the remark `She likes coding` to the person at index 1.
+* **`remark`** `2` clears the remark of the person at index 2.
+
 ### Editing a person: `edit`
 
 You can edit an existing person in the contact book by `INDEX`.
@@ -220,44 +286,6 @@ Examples:
   and `amytan@example.com` respectively.
 * **`edit`** `2 n/Benedict t/` edits the name of the person at index 2 to be `Benedict` and clears all his existing tags.
 
-### Adding remark to a person: `remark`
-
-You can add a remark to a person in the contact book by `INDEX`.
-
-Format: **`remark`** `INDEX r/VALUE`
-* Add a remark to the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* Index must be provided and **must be a positive integer** 1, 2, 3, …​
-* Existing remark will be updated to the input remark.
-* If duplicated remarks are given, only the latest one will be taken.
-* You can remove a person’s remark by typing `remark` (i.e. empty parameter) or `remark r/` without specifying any remark after it.
-
-Examples:
-
-* **`remark`** `1 r/She likes coding` adds the remark `She likes coding` to the person at index 1.
-* **`remark`** `2` clears the remark of the person at index 2.
-
-### Adding tags: `addt`
-
-You can add tags to a person in the contact book by `INDEX`. Alternatively, you can add tags to everyone in the
-contact book by replacing `INDEX` with the word `all`.
-
-Format: **`addt`** `INDEX t/TAG [t/TAG]…​`
-* Add tags to the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* Index must be provided and **must be a positive integer** 1, 2, 3, …​
-* Input tag will be appended to the existing tag.
-* If duplicated tags are given, these tags will not be added.
-* At least one `TAG` must be provided.
-* `TAG` is case-sensitive
-
-Alternatively, **`addt`** `all t/TAG [t/TAG]…​`
-* Add tags to everybody in the list.
-* Input tag will be appended to the existing tag.
-* If duplicated tags are given, these tags will not be added.
-* At least one `TAG` must be provided.
-* `TAG` is case-sensitive
-
 ### Deleting a person: `delete`
 
 You can delete the specified person from the contact book by `INDEX`.
@@ -272,26 +300,6 @@ Examples:
 
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
 * **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
-
-### Deleting tags: `deletet`
-You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
-contact book by replacing `INDEX` with the word `all`.
-
-Format: **`deletet`** `INDEX [t/TAG]…​`
-* Delete tags of the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* Index must be provided and **must be a positive integer** 1, 2, 3, …​
-* The tag refers to the tags to delete from the person.
-* Existing tag will be removed if one of the input tags is the existing tag.
-* If no `TAG` is provided, all tags of the person will be deleted.
-* `TAG` is case-sensitive
-
-Alternatively, **`deletet`** `all [t/TAG]…​`
-* Delete tags of everybody in the list.
-* The tag refers to the tags to delete from everyone.
-* Existing tag will be removed if one of the input tags is the existing tag.
-* If no `TAG` is provided, every tag in the list will be deleted.
-* `TAG` is case-sensitive
 
 ### Deleting multiple person: `deletem`
 
@@ -320,6 +328,36 @@ Examples:
 
 * **`deletem`** `n/Alex` deletes `alex` and `Alexandra`.
 * **`deletem`** `n/alex n/david` deletes `Alex Yeoh`, `David Li`.
+
+### Deleting tags: `deletet`
+You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`deletet`** `INDEX [t/TAG]…​`
+* Delete tags of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* The tag refers to the tags to delete from the person.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, all tags of the person will be deleted.
+* `TAG` is case-sensitive
+
+For example:
+
+* **`deletet`** `1 t/friend` followed by **`find`** `g/f` deletes the friend tag from the person at index 1 in the filtered list of female contacts.
+* **`deletet`** `2 t/teammate t/neighbour` deletes the teammate and neighbour tags from person at index 2 in the displayed person list.
+
+Alternatively, **`deletet`** `all [t/TAG]…​`
+* Delete tags of everybody in the list.
+* The tag refers to the tags to delete from everyone.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, every tag in the list will be deleted.
+* `TAG` is case-sensitive
+
+For example:
+
+* **`deletet`** `all t/friend` followed by **`find`** `g/f` deletes the friend tag from all persons in the filtered list of female contacts.
+* **`deletet`** `all t/teammate t/neighbour` deletes the teammate and neighbour tags from all persons in the displayed person list.
 
 ### Clearing all persons: `clear`
 
@@ -568,9 +606,11 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 | Command | Format | Examples |
 | --------- | ------------------- | ----------------------------------------------- |
 | **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
-| **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
+| **Addt** | **`addt`** `INDEX t/TAG [t/TAG]…​` or `all t/TAG [t/TAG]…​` | **`addt`** `1 t/friend t/teammate`|
 | **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
+| **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
 | **Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+| **Deletet** | **`deletet`** `INDEX t/TAG [t/TAG]…​` or `all t/TAG [t/TAG]…​` | **`deletet`** `all t/teammate`|
 | **Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
 | **Clear** | **`clear`** | **`clear`** |
 
@@ -595,4 +635,3 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 | Command | Format | Examples |
 |---------|-------------------|-------------------------------------------------|
 | **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
-
