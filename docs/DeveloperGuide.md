@@ -755,6 +755,22 @@ User story ends.
 
       Use case ends.
     
+**Use case: UC07 - Display statistics**
+
+**MSS**
+
+1. User requests to view the statistics of orders.
+2. Sellah shows statistics of orders in a pie chart.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There is no order found.
+  
+    * 2a1. Sellah shows an error message.
+      
+      Use case ends.
 
 ### Non-Functional Requirements
 
