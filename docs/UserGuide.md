@@ -53,7 +53,7 @@ Detailed notes about the command format can be found [here](#features).
 |Parameter| An input provided by the user for the execution of the command.|
 
 * Each parameter prefix is separated from the others with a space.<br/>
-  `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
   
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
