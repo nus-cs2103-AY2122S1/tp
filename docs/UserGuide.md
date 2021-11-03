@@ -156,7 +156,7 @@ Examples:
 
 Edits your own profile. You can choose to edit any attribute in your own profile, except for module tags which use separate commands. You can edit multiple attributes at once.
 
-Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
+Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]...`
 
 Prefixes for editable attributes:
 * NAME: `n/`
@@ -182,11 +182,11 @@ Adds the user-specified module(s) to your own profile.
 Format: `addMod mod/MODULE [GROUP_STATUS]`
 
 Examples:
-* `addMod mod/CS2103T need member`
-* `addMod mod/CS2220`
+* `addMod mod/CS2103T`
+* `addMod mod/CS2220 need group`
   <br>
   <br>
-  ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addMod.png)
+  ![result for 'addMod mod/CS2220 need group'](images/screenshots/addMod.png)
   
 
 #### 2.2 Edit the group status of existing modules on your profile : `editGroupStatus`
@@ -210,7 +210,7 @@ Examples:
   ![result for 'original'](images/screenshots/originalForegsc.png)
 
   Updated profile:
-  ![result for 'original'](images/screenshots/egsc.png)
+  ![result for 'updated'](images/screenshots/egsc.png)
 
 
 #### 2.3 Remove modules from your profile : `remMod`
@@ -285,7 +285,7 @@ Format: `listFav`
 
 Finds profiles whose names contain any of the entered keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 * The search is not case-sensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
@@ -306,16 +306,16 @@ Examples:
 
 Finds profiles whose student ID number matches any of the entered keywords.
 
-Format: `findId KEYWORD [MORE_KEYWORDS]`
+Format: `findId STUDENT_ID [MORE_STUDENT_IDS]...`
 
 * The search is not case-sensitive. e.g a0123456a will match A023456A
-* The order of the keywords does not matter. e.g. `findId A0123456A A0654321A` will show the profiles whose student Id number matches either A0123456A or A0654321A.
+* The order of the student IDs does not matter. e.g. `findId A0123456A A0654321A` will show the profiles whose student Id number matches either A0123456A or A0654321A.
 * Only the student ID numbers are searched.
 * Profiles matching any keywords will be returned.
 
 Examples:
-* `findId A1204567S` returns the person whose student ID number matches A1204567S
-* `findId A1234567R A1234567H` returns the profiles whose student ID number matches either A1234567R or A1234567H.
+* `findId A1204567S` returns the person whose student ID number matches A1204567S exactly.
+* `findId A1234567R A1234567H` returns the profiles whose student ID number matches either A1234567R or A1234567H exactly.
   <br>
   <br>
   ![result for 'findId A1234567R A1234567H'](images/screenshots/findId.png)
@@ -373,6 +373,7 @@ ModuLink's data are saved as a JSON file `[JAR file location]/data/modulink.json
 
 <div markdown="span" class="alert alert-warning">:warning: Caution:
 If your changes to the data file makes its format invalid, ModuLink will discard all data and start with an empty data file at the next run.
+In this event, please locate the data file, delete it, and relaunch the app.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -403,16 +404,16 @@ Prefix | Parameter
 Action | Format, Examples
 -------|-----------------
 **Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
-**Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]` <br> <br> e.g., `edit p/123321432 e/changedemail@example.com`
-**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...` <br> <br> e.g., `addMod mod/CS2103T need member mod/CS1231S`
-**Edit module group status** | `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION] [mod/MODULE [NEW_STATUS_DESCRIPTION]]...` <br> <br> e.g., `editGroupStatus mod/CS2103T need group`
-**Remove module** | `remMod mod/MODULE [mod/MODULE]...` <br> <br> e.g., `remMod mod/CS2100 mod/CS2103T`
+**Edit** | `edit EDITED_ATTRIBUTE [MORE_ATTRIBUTES]...` <br> <br> e.g., `edit p/123321432 e/changedemail@example.com`
+**Add module** | `addMod mod/MODULE [GROUP_STATUS]` <br> <br> e.g., `addMod mod/CS2103T need member`
+**Edit module group status** | `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION]` <br> <br> e.g., `editGroupStatus mod/CS2103T need group`
+**Remove module** | `remMod mod/MODULE` <br> <br> e.g., `remMod mod/CS2100`
 **Add Favourite** | `addFav STUDENT_ID`  <br> <br> e.g., `addFav A0222594A`
 **Remove Favourite** | `remFav STUDENT_ID`  <br> <br> e.g., `remFav A0222594A`
 **List** | `list`
 **List favorites** | `listFav`
-**Find by name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
-**Find by student ID** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `findId A0222594A` returns person with student Id matching A0222594A.
+**Find by name** | `find KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
+**Find by student ID** | `findId STUDENT_ID [MORE_STUDENT_IDS]...` <br> e.g., `findId A0222594A` returns person with student Id matching A0222594A.
 **Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` <br> with group filter: `filter mod/CS2030 need group`
 **Help** | `help`
 **Exit** | `exit`

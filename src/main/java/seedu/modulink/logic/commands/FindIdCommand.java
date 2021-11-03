@@ -14,9 +14,9 @@ public class FindIdCommand extends Command {
 
     public static final String COMMAND_WORD = "findId";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person whose Student ID matches "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds profiles whose Student ID matches "
             + "the specified ID (case-insensitive) exactly and displays them as a list with index numbers.\n"
-            + "Parameters: Student ID \n"
+            + "Parameters: STUDENT_ID [MORE_STUDENT_IDS]...\n"
             + "Example: " + COMMAND_WORD + " A1234567F";
 
     private final StudentIdContainsKeywordsPredicate predicate;
