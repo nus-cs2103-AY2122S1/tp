@@ -202,7 +202,6 @@ public class ModelManager implements Model {
                 student.getParticipation(), group.getName());
         group.addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -210,7 +209,6 @@ public class ModelManager implements Model {
         requireAllNonNull(student, group);
         addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     /**
@@ -260,7 +258,6 @@ public class ModelManager implements Model {
         List<Student> students = target.getMembersList();
         addressBook.clearGroupFromStudents(students);
         addressBook.deleteGroup(target);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -281,7 +278,6 @@ public class ModelManager implements Model {
             addressBook.setStudent(student, updatedStudent);
         }
 
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         addressBook.setGroup(target, editedGroup);
     }
 
@@ -357,6 +353,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents)
-                && filteredTasks.equals(other.filteredTasks);
+                && filteredTasks.equals(other.filteredTasks)
+                && filteredGroups.equals(other.filteredGroups);
     }
 }
