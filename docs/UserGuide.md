@@ -156,8 +156,6 @@ Shows a command summary table as well as a link to access this user guide page.
 
 Format: `help`
 
-Shortcut: <kbd>F1</kbd>
-
 - You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
@@ -171,32 +169,123 @@ Shortcut: <kbd>F1</kbd>
 This section guides you on how to use the commands for managing students in TAB.
 
 ![studentCard](images/annotatedStudentCard.png)
+
 <div class="caption">Layout of a student card.</div>
-
-Type | Fields | 
-
-A student must have the following essential fields:
-* Name
-* Address
-
-A student must have **at least 1** of these contact fields:
-* Phone number
-* Parent phone number
-* Email
-* Parent email
-
-Other available optional fields for a student are:
-* Academic level
-* Academic stream
-* School
-* Remarks
-* Tags
-* Lessons
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-A student can be identified by the index number shown in the displayed list of students.
+A student can be identified by the student index number shown in the displayed list of students.
 </div>
+
+<table id="student-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center; padding: 10px">Category</th>
+            <th style="text-align:center">Field</th>
+            <th style="text-align:center">Prefix</th>
+            <th style="text-align:center">Constraint(s)</th>
+            <th style="text-align:center">Example(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=2>Essential</td>
+            <td>Name</td>
+            <td><code>n/</code></td>
+            <td>
+              <ul> 
+                <li>Must be present.</li>
+                <li>Case-sensitive.</li>
+                <li>TAB does not allow adding students with the same name.</li>
+              </ul>
+            </td>
+            <td><code>n/Jane</code></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><code>a/</code></td>
+            <td>Must be present.</td>
+            <td><code>a/Blk 123A, Serangoon Ave 3, #04-56</code></td>
+        </tr>
+        <tr>
+            <td rowspan=4 id="student-contact">Contact</td>
+            <td>Phone</td>
+            <td><code>p/</code></td>
+            <td><ul>
+              <li><strong>At least one</strong> of the contact fields must be present.</li>
+              <li>Minimum 3 numeric characters.</li>
+            </ul></td>
+            <td><code>p/91234567</code></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><code>pe/</code></td>
+            <td>
+              <ul>
+                <li><strong>At least one</strong> of the contact fields must be present.</li>
+                <li>Must be of the format _local-part@domain_ and adhere to the following constraints:</li> 
+                  <ul>
+                    <li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li>
+                    <li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.</li>
+                    <li>The domain name must:
+                      <ul>
+                        <li>end with a domain label at least 2 characters long</li>
+                        <li>have each domain label start and end with alphanumeric characters</li>
+                        <li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li>
+                      </ul>
+                    </li>
+                  </ul>
+              </ul>
+            </td>
+            <td><code>e/jane@gmail.com</code></td>
+        </tr>
+        <tr>
+            <td>Parent Phone</td>
+            <td><code>pp/</code></td>
+            <td>Refer to the constraints for Email above.</td>
+            <td><code>pp/81234567</code></td>
+        </tr>
+        <tr>
+            <td>Parent Email</td>
+            <td><code>pe/</code></td>
+            <td>Refer to the constraints for Email above.</td>
+            <td><code>pe/john@gmail.com</code></td>
+        </tr>
+        <tr>
+        <td rowspan=5>Optional</td>
+            <td>School</td>
+            <td><code>sch/</code></td>
+            <td>Not Applicable.</td>
+            <td><code>sch/Serangoon JC</code></td>
+        </tr>
+        <tr>
+            <td>Academic Stream</td>
+            <td><code>stream/</code></td>
+            <td>Not Applicable.</td>
+            <td><code>stream/A-Level</code></td>
+        </tr>
+        <tr>
+            <td>Academic Level</td>
+            <td><code>lvl/</code></td>
+            <td>Maximum 15 characters, including space(s).</td>
+            <td><code>lvl/J1</code></td>
+        </tr>
+        <tr>
+            <td>Remark</td>
+            <td><code>r/</code></td>
+            <td>Not Applicable.</td>
+            <td><code>r/She is weak at maclaurin series.</code></td>
+        </tr>
+        <tr>
+            <td>Tags</td>
+            <td><code>t/</code></td>
+            <td>Must be alphanumeric characters.</td>
+            <td><code>t/unpaid</code></td>
+        </tr>
+    </tbody>
+</table>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -210,9 +299,7 @@ Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER
 A student can have any number of tags (including 0).
 </div>
 
-* At least one contact field is required.<br>
-  e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
-  included in the add command.
+* **At least one** [contact](#student-contact) field is required.<br>
 * `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
 Examples:
@@ -271,8 +358,6 @@ Examples:
 Shows a list of all students in TAB.
 
 Format: `list`
-
-Shortcut: <kbd>F2</kbd>
 
 <div style="page-break-after: always;"></div>
 
@@ -363,6 +448,10 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
+![lessonCard](images/annotatedRecurringLessonCard.png)
+
+<div class="caption">Layout of a lesson card.</div>
+
 A lesson **must** have the following fields: a start date, a time range, a lesson rate and a subject.
 
 A lesson can be categorised into 2 types: 
@@ -500,11 +589,15 @@ Displays a list of upcoming lessons with end date time within the next 48 hours
 
 Format: `remind`
 
-Shortcut: `F5`
-
 ![remind](images/remind.png)
 
 <div class="caption">Reminder window interface.</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+* Reminder does not refresh the list automatically. 
+* Type `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to refresh the list of upcoming lessons.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -591,8 +684,6 @@ This section guides you on how to use TAB's calendar interface. Typing any of th
 Brings you to TAB's calendar interface for you to see all your scheduled lessons.
 
 Format: `calendar`
-
-Shortcut: <kbd>F3</kbd>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
@@ -696,8 +787,6 @@ Shows all the tags that you have created together with the number of students la
 
 Format: `tag`
 
-Shortcut: <kbd>F4</kbd>
-
 ![tag](images/tag.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
@@ -725,13 +814,13 @@ Format: `exit`
 
 TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
 
-Shortcut | Action
---------|------------------
-<kbd>F1</kbd> | **Help** <br /> Opens the help window.
-<kbd>F2</kbd> | **View Students** <br /> Brings you to your list of students.
-<kbd>F3</kbd> | **View Calendar** <br /> Brings you to the calendar interface.
-<kbd>F4</kbd> | **View Tags** <br /> Brings you to your list of tags.
-<kbd>F5</kbd> | **View Reminders** <br /> Opens the reminder window.
+Shortcut | Action | Description
+--------|---------|---------
+<kbd>F1</kbd> | Help | Opens the help window.
+<kbd>F2</kbd> | View Students | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and switched to the calendar view, pressing <kbd>F2</kbd> brings you back to the filtered list.
+<kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
+<kbd>F4</kbd> | View Tags | Brings you to your list of tags.
+<kbd>F5</kbd> | View Reminder | Opens the reminder window with the list of upcoming lessons with end date time within the next 48 hours.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
@@ -804,7 +893,7 @@ Action | Format, Examples
 **View Schedule of Year** | `year`
 **Navigate forward in Schedule** | `next`
 **Navigate backward in Schedule** | `back`
-**View Reminders** | `remind`
+**View Reminder** | `remind`
 **Clear** |`clear`
 **Undo** | `undo`
 **Redo** | `redo`
