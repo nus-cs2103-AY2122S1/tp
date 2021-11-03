@@ -75,10 +75,6 @@ public class Facility {
         allocationMap.addPersonOnDay(person, day);
     }
 
-    public void removePersonFromFacilityOnDay(Person person, DayOfWeek day) {
-        allocationMap.removePersonOnDay(person, day);
-    }
-
     public void removePersonFromFacilityOnAllDays(Person person) {
         allocationMap.removePersonOnAllDays(person);
     }

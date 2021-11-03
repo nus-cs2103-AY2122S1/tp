@@ -8,6 +8,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facility.AllocationMap;
+import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,6 +43,7 @@ public class DeleteMemberCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
                 false, false, true);
     }

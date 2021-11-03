@@ -182,7 +182,9 @@ public class UniqueFacilityList implements Iterable<Facility> {
      */
     public void removePersonFromAllocations(Person key) {
         for (Facility facility: facilityList) {
-            facility.removePersonFromFacilityOnAllDays(key);
+            Facility toEdit = facility;
+            toEdit.removePersonFromFacilityOnAllDays(key);
+            this.setFacility(facility, toEdit);
         }
     }
 }
