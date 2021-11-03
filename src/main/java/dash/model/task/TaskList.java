@@ -2,6 +2,7 @@ package dash.model.task;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import dash.commons.util.CollectionUtil;
 import dash.model.task.exceptions.TaskNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * A list of tasks that does not allow nulls.
@@ -153,6 +155,30 @@ public class TaskList implements Iterable<Task> {
      */
     public ObservableList<Task> getObservableTaskList() {
         return internalUnmodifiableList;
+    }
+
+    public int getIndexToEdit(int userIndexZeroBase, Task taskToEdit, List<Task> filteredList) {
+        ObservableList<Task> copy = internalUnmodifiableList;
+        System.out.println("filteredsize: " + internalUnmodifiableList.size());
+        FilteredList<Task> filteredMainTaskList = copy.filtered(task -> {System.out.println(task); System.out.println(task.equals(taskToEdit)); return task.equals(taskToEdit);});
+        System.out.println("size " + filteredMainTaskList.size());
+
+        if (filteredMainTaskList.size() < 2) {
+            System.out.println("modlist: " + internalUnmodifiableList.indexOf(taskToEdit));
+            return  internalUnmodifiableList.indexOf(taskToEdit);
+        }
+
+        ArrayList<Task> filteredArray = new ArrayList<>(internalUnmodifiableList); //left list
+        ArrayList<Task> arrayOfTasks = new ArrayList<>(filteredList); //right list
+        arrayOfTasks.subList(0, userIndexZeroBase); //top half of right list
+        arrayOfTasks.removeIf(task -> !task.equals(taskToEdit)); //clear right list of non dup
+        int n = arrayOfTasks.size(); //no. of additional dup
+
+        for (int i = 0; i < n; i ++) {
+            int index = filteredArray.indexOf(taskToEdit);
+            filteredArray.add(index, new Task());
+        }
+        return filteredArray.indexOf(taskToEdit) - 1;
     }
 
     @Override

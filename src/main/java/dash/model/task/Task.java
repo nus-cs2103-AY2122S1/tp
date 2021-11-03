@@ -39,6 +39,12 @@ public class Task {
         this.tags.addAll(tags);
     }
 
+    public Task(){
+        this.taskDescription = new TaskDescription("xxxx");
+        this.completionStatus = new CompletionStatus(true);
+        this.taskDate = new TaskDate();
+    };
+
     public TaskDescription getTaskDescription() {
         return taskDescription;
     }

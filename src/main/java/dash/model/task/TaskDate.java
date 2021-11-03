@@ -178,7 +178,6 @@ public class TaskDate {
                         DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT));
                 isDate = true;
             } catch (Exception e) {
-                System.out.println(e);
                 isDate = isDate || false;
             }
         }
