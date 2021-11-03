@@ -344,6 +344,12 @@ Downloads elderly data onto user's computer.
 
 Format: `download`
 
+<div markdown="block" class="alert alert-info">
+:information_source: What happens if `addressbook.json` is corrupted?
+
+* If `addressbook.json` is corrupted (invalid format), attempting to download would result in a file that is wrong being downloaded.
+</div>
+
 
 ### Clear all entries : `clear`
 
