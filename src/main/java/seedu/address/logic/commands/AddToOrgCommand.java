@@ -28,6 +28,7 @@ public class AddToOrgCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 n/Facebook";
 
     public static final String MESSAGE_SUCCESS = "New person added to %1$s: %2$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the organisation";
 
     private final Name organisationName;
     private final Index targetIndex;
@@ -56,6 +57,9 @@ public class AddToOrgCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ORGANISATION_DISPLAYED_NAME);
         }
         UniquePersonList persons = organisation.getPersons();
+        if (persons.contains(personToAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
         persons.add(personToAdd);
         List<Person> organisationPersonList = persons.asUnmodifiableObservableList();
 
