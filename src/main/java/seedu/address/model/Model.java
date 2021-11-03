@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -78,6 +79,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes all persons in a list.
+     * The persons must exist in the address book.
+     */
+    void deletePersons(List<Person> targets);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -88,7 +95,7 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Person target, Person editedPerson, boolean removeFilter);
 
     void importFile(Path filePath) throws DataConversionException;
 
