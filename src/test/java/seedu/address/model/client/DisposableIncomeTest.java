@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.commons.util.StringUtil;
 
 public class DisposableIncomeTest {
 
@@ -32,7 +33,9 @@ public class DisposableIncomeTest {
         assertFalse(DisposableIncome.isValidDisposableIncome("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(DisposableIncome.isValidDisposableIncome("2432")); // Integer between 1 and 5
-        assertTrue(DisposableIncome.isValidDisposableIncome("5327891732")); // Integer between 1 and 5
+        assertTrue(DisposableIncome.isValidDisposableIncome("2432"));
+        assertTrue(DisposableIncome.isValidDisposableIncome("5327891732"));
+        assertTrue(DisposableIncome.isValidDisposableIncome("369.69")); // with decimal
+        assertTrue(DisposableIncome.isValidDisposableIncome("50,0000.963")); // with comma
     }
 }
