@@ -25,6 +25,9 @@ public class CurrentPlan extends StringComparable<CurrentPlan> implements Option
     public CurrentPlan(String currentPlan) {
         requireNonNull(currentPlan);
         checkArgument(isValidCurrentPlan(currentPlan), MESSAGE_CONSTRAINTS);
+        if (currentPlan.isEmpty()) {
+            currentPlan = DEFAULT_VALUE;
+        }
         value = currentPlan;
     }
 
@@ -45,8 +48,8 @@ public class CurrentPlan extends StringComparable<CurrentPlan> implements Option
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CurrentPlan // instanceof handles nulls
-                && value.equals(((CurrentPlan) other).value)); // state check
+            || (other instanceof CurrentPlan // instanceof handles nulls
+            && value.equals(((CurrentPlan) other).value)); // state check
     }
 
     @Override

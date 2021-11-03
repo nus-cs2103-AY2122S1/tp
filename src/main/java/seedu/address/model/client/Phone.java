@@ -26,6 +26,9 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        if (phone.isEmpty()) {
+            phone = DEFAULT_VALUE;
+        }
         value = phone;
     }
 
@@ -38,20 +41,20 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
     }
 
     @Override
-    public String toString() {
-        return value;
+    public int hashCode() {
+        return value.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+            || (other instanceof Phone // instanceof handles nulls
+            && value.equals(((Phone) other).value)); // state check
     }
 
     @Override
-    public int hashCode() {
-        return value.hashCode();
+    public String toString() {
+        return value;
     }
 
 }
