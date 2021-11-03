@@ -1,5 +1,6 @@
 package dash.logic.parser.taskcommand;
 
+import static dash.commons.core.Messages.MESSAGE_ARGUMENT_EMPTY;
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
@@ -43,6 +44,11 @@ public class TagTaskCommandParser implements Parser<TagTaskCommand> {
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent() && argMultimap.getValue(PREFIX_TAG).get().isEmpty()) {
+            throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
