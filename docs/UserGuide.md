@@ -367,7 +367,7 @@ Optional fields for a **recurring** lesson is:
 
 TAB has features to help to prevent scheduling mistakes.
 For example, we help you avoid mistakes scheduling two lessons at the same slots by ensuring that lessons never overlap.
-Additionally, we help to avoid accidentally scheduling lessons outside working hours.
+Additionally, we help to avoid accidentally scheduling lessons outside working hours (before 0800 and after 2200 hours).
 
 In the future, we intend to add some nice-to-have features that will allow you to customise your working hours,
 as well as specify minimum/maximum lesson durations so that accidents like mistyping a 10-minute lesson won't happen.
