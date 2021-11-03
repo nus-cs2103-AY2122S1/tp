@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -86,6 +85,7 @@ public class EditCommand extends UndoableCommand {
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        super(COMMAND_ACTION);
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -99,6 +99,7 @@ public class EditCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         personBeforeEdit = CommandUtil.getPerson(lastShownList, index);
+
         personAfterEdit = createEditedPerson(personBeforeEdit, editPersonDescriptor);
 
         if (!personBeforeEdit.isSamePerson(personAfterEdit) && model.hasPerson(personAfterEdit)) {
@@ -109,8 +110,7 @@ public class EditCommand extends UndoableCommand {
         }
 
         model.setPerson(personBeforeEdit, personAfterEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, personAfterEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, personAfterEdit), personAfterEdit);
     }
 
     /**
@@ -140,21 +140,22 @@ public class EditCommand extends UndoableCommand {
     }
 
     @Override
-    public void undo() {
+    public Person undo() {
         requireNonNull(model);
 
+        checkValidity(personAfterEdit);
+
         model.setPerson(personAfterEdit, personBeforeEdit);
+        return personBeforeEdit;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personBeforeEdit);
+        model.setPerson(personBeforeEdit, personAfterEdit);
+        return personAfterEdit;
     }
 
     @Override

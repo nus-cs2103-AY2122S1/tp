@@ -36,12 +36,16 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
-    private static final long TWO_DAY_DIFF = 48;
+    // two day time difference in minutes
+    private static final long TWO_DAY_DIFF = 2880;
 
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
     private final ObservableList<Entry<Lesson>> upcomingLessons = FXCollections.observableArrayList();
 
+    /**
+     * Constructs a {@code CalendarEntryList} and sets the {@code Calendar} style.
+     */
     public CalendarEntryList() {
         calendar.setStyle(Calendar.Style.STYLE3);
     }
@@ -53,8 +57,18 @@ public class CalendarEntryList {
     private void add(Entry<Lesson> calendarEntry) {
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
+        addUpcomingLesson(calendarEntry);
+    }
+
+    /**
+     * Adds calendar entry to the list of upcoming lessons if the lesson for the specified calendar entry
+     * is upcoming within the next two days.
+     *
+     * @param calendarEntry Calendar Entry of lesson to be checked and added if it is upcoming.
+     */
+    private void addUpcomingLesson(Entry<Lesson> calendarEntry) {
         Lesson lesson = calendarEntry.getUserObject();
-        if (isUpcoming(lesson.getDisplayEndLocalDateTime())
+        if (isUpcoming(lesson)
                 && upcomingLessons.stream().noneMatch(entry -> entry.getUserObject().equals(lesson))) {
             upcomingLessons.add(calendarEntry);
             sortUpcomingLessons();
@@ -272,14 +286,15 @@ public class CalendarEntryList {
     }
 
     /**
-     * Returns true if the given date and time is within two days of current date time.
+     * Returns true if the lesson start or end time is within two days of current date time.
      *
-     * @param endDateTime Date and time to be checked.
-     * @return True if the given date and time is within two days of current date time.
+     * @param lesson Lesson to be checked.
+     * @return True if the lesson start or end time is within two days of current date time.
      */
-    private boolean isUpcoming(LocalDateTime endDateTime) {
-        long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), endDateTime);
-        return timeDiff >= 0 && timeDiff < TWO_DAY_DIFF;
+    private boolean isUpcoming(Lesson lesson) {
+        long endTimeDiff = ChronoUnit.MINUTES.between(LocalDateTime.now(), lesson.getDisplayEndLocalDateTime());
+        long startTimeDiff = ChronoUnit.MINUTES.between(LocalDateTime.now(), lesson.getDisplayStartLocalDateTime());
+        return endTimeDiff >= 0 && (startTimeDiff < TWO_DAY_DIFF || endTimeDiff < TWO_DAY_DIFF);
     }
 
     /**
@@ -290,6 +305,20 @@ public class CalendarEntryList {
                 .sorted(Comparator.comparing(e -> e.getUserObject().getDisplayEndLocalDateTime()))
                 .collect(Collectors.toList());
         upcomingLessons.setAll(sortedList);
+    }
+
+    /**
+     * Removes lesson entries with end date time that has passed the current time and add new upcoming lessons if any.
+     */
+    public void updateUpcomingLessons() {
+        for (Entry<Lesson> entry : entryList) {
+            Lesson lesson = entry.getUserObject();
+            if (upcomingLessons.contains(entry)
+                    && !isUpcoming(lesson)) {
+                upcomingLessons.remove(entry);
+            }
+            addUpcomingLesson(entry);
+        }
     }
 
     /**

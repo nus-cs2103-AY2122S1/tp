@@ -135,6 +135,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
@@ -200,12 +205,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateUpcomingLessons() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public boolean hasPersonFilteredList(Person person) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 

@@ -5,7 +5,7 @@ import java.util.Stack;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.UndoableCommand;
 
-//@@author Zhiyuan-Amos-reused
+// @@author Zhiyuan-Amos-reused
 // Reused code from
 // https://github.com/nus-cs2103-AY1718S2/addressbook-level4/
 // blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java
@@ -29,6 +29,7 @@ public class UndoRedoStack {
 
     /**
      * Adds Command to Undo Stack if command is undoable.
+     * Clears the redo-stack
      *
      * @param command Command executed.
      */
@@ -36,6 +37,7 @@ public class UndoRedoStack {
         if (!(command instanceof UndoableCommand)) {
             return;
         }
+        redoStack.clear();
 
         undoStack.push((UndoableCommand) command);
     }
