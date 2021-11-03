@@ -25,7 +25,7 @@ public class AddModCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a module to your module list. "
-            + "You may optionally add your grouping status."
+            + "You may optionally add your grouping status. "
             + "Existing modules will not be overwritten.\n"
             + "Duplicate modules cannot be added.\n"
             + "Parameters: "

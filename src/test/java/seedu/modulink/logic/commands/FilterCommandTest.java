@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.modulink.commons.core.Messages;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.ModelManager;
@@ -49,7 +50,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_zeroKeywords_noProfilesFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(Messages.MESSAGE_NO_PERSON_LISTED, "with this module.");
         ModuleContainsKeywordsPredicate predicate = preparePredicate("CS1441");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
