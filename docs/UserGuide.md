@@ -615,7 +615,7 @@ Suppose the date today is 1 Nov 2021 and current time is 1500h,
   - 2 Nov 2021 with any valid time range, 
   - 3 Nov 2021 with start time before or at 1500h.
 - lessons with the following dates and time are not considered upcoming:
-  - Dates before 1 Nov 2021 (has passed),
+  - dates before 1 Nov 2021 (has passed),
   - 1 Nov 2021 with end time before 1500h (has passed),
   - 3 Nov 2021 with start time after 1500 (beyond 48 hours).
 
