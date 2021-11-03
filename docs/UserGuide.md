@@ -170,7 +170,7 @@ Shows a list of residents that match the provided keywords for different availab
 Format: `find [PREFIX/KEYWORD]...`
 
 * Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
-* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
+* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [Deadline Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
@@ -310,6 +310,21 @@ Examples:
 * `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201`  
 * `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201, a121`
 * `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/John Doe, Jane Doe`
+
+#### Viewing events information : `view`
+
+Shows a numbered list of all the events in the address book.
+
+The index of the event is the corresponding number in the list
+shown when `view` (without the [INDEX] parameter) is called.
+
+Format: `view [INDEX]`
+* For an index i, 1 ≤ i ≤ n, where n is the number of events in the address book
+
+Examples:
+
+* `view` shows a list of all the events
+* `view 5` shows the details of the event at index 5
 
 #### Editing an event : `edit`
 
