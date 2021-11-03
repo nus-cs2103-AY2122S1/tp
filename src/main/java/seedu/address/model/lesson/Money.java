@@ -11,16 +11,18 @@ import java.math.BigDecimal;
  */
 public class Money {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_FORMAT_CONSTRAINTS =
             "Money-related fields should be formatted with a decimal point '.' "
                     + "as a separator between the dollars and cents, "
                     + "and adhere to the following constraints:\n"
                     + "1. Money-related fields should only contain numbers and at most one decimal point.\n"
                     + "2. Money-related fields should not start or end with a decimal point"
                     + " and should have at most two decimal places.";
+
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     public final String value;
     private final BigDecimal valueInBigDec;
+    private static final BigDecimal MAX_VALUE = new BigDecimal(1000000);
 
     /**
      * Constructs a {@code Money}.

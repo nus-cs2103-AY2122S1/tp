@@ -247,12 +247,12 @@ public class LessonAddCommandParserTest {
         // invalid lesson rates
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
                 + INVALID_LESSON_RATES_DESC + SUBJECT_DESC + OUTSTANDING_FEES_DESC
-                + HOMEWORK_DESC_POETRY, LessonRates.MESSAGE_CONSTRAINTS);
+                + HOMEWORK_DESC_POETRY, LessonRates.MESSAGE_FORMAT_CONSTRAINTS);
 
         // invalid outstanding fees
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
                 + LESSON_RATES_DESC + SUBJECT_DESC + INVALID_OUTSTANDING_FEES_DESC
-                + HOMEWORK_DESC_POETRY, OutstandingFees.MESSAGE_CONSTRAINTS);
+                + HOMEWORK_DESC_POETRY, OutstandingFees.MESSAGE_FORMAT_CONSTRAINTS);
 
         // invalid homework
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC

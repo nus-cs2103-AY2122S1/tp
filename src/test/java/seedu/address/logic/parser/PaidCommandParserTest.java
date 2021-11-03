@@ -72,7 +72,7 @@ class PaidCommandParserTest {
 
     @Test
     public void parse_invalidAmount_failure() {
-        assertParseFailure(parser, "1 1" + INVALID_PAYMENT_DESC, Money.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 1" + INVALID_PAYMENT_DESC, Money.MESSAGE_FORMAT_CONSTRAINTS);
     }
 
     @Test
