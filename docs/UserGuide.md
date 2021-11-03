@@ -246,7 +246,7 @@ A student can be identified by the student index number shown in the displayed l
         <tr>
             <td>Parent Phone</td>
             <td><code>pp/</code></td>
-            <td>Refer to the constraints for Email above.</td>
+            <td>Refer to the constraints for Phone above.</td>
             <td><code>pp/81234567</code></td>
         </tr>
         <tr>
@@ -607,11 +607,24 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
+Example: <br>
+
+Suppose the date today is 1 Nov 2021 and current time is 1500h, 
+- lessons with the following dates and time are considered upcoming:
+  - 1 Nov 2021 with end time at or after 1500h, 
+  - 2 Nov 2021 with any valid time range, 
+  - 3 Nov 2021 with start time before or at 1500h.
+- lessons with the following dates and time are not considered upcoming:
+  - Dates before 1 Nov 2021 (has passed),
+  - 1 Nov 2021 with end time before 1500h (has passed),
+  - 3 Nov 2021 with start time after 1500 (beyond 48 hours).
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
   <ul>
-    <li>Reminder does not refresh the list automatically.</li>
-    <li>Type `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to refresh the list of upcoming lessons.</li>
+    <li>Reminder does not refresh the list of upcoming lessons automatically.</li>
+    <li>Type <code>remind</code>, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> (see <a href="#shortcuts">Shortcuts</a> for more available shortcuts) to refresh the list of upcoming lessons.</li>
+    <li>Reminder also updates when valid <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands are used. See <a href="#managing-lessons">Managing Lessons</a> for more details regarding these commands.</li>
   </ul>
 </div>
 
@@ -837,7 +850,7 @@ Shortcut | Action | Description
 <kbd>F2</kbd> | View Students | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and switched to the calendar view, pressing <kbd>F2</kbd> brings you back to the filtered list.
 <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
 <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
-<kbd>F5</kbd> | View Reminder | Opens the reminder window with the list of upcoming lessons with end date time within the next 48 hours.
+<kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
