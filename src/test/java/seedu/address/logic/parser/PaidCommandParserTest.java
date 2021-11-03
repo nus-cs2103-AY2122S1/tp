@@ -104,6 +104,6 @@ class PaidCommandParserTest {
         assertParseFailure(parser, VALID_INDICES, MESSAGE_INVALID_FORMAT);
 
         // invalid fields have priority over invalid index
-        assertParseFailure(parser, INVALID_INDICES + INVALID_PAYMENT_DESC, Money.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_INDICES + INVALID_PAYMENT_DESC, Money.MESSAGE_FORMAT_CONSTRAINTS);
     }
 }

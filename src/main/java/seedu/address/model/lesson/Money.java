@@ -22,7 +22,6 @@ public class Money {
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     public final String value;
     private final BigDecimal valueInBigDec;
-    private static final BigDecimal MAX_VALUE = new BigDecimal(1000000);
 
     /**
      * Constructs a {@code Money}.
