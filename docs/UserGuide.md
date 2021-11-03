@@ -99,6 +99,9 @@ Format: `student -v INDEX`
 
 Examples:
 * `student -v 3` view the student detail at index 3.
+
+![studentview](images/imagesInUG/student-view.png)
+
 </details>
 
 ### Editing a student: `student -e`
@@ -186,6 +189,8 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
+
+![studentaddlesson](images/imagesInUG/student-addlesson.png)
 </details>
 
 ### Deleting a lesson from a student: `student -dl`
@@ -252,6 +257,9 @@ Format: `group -a INDEX…​ n/GROUPNAME`
 
 Examples:
 * `group -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
+
+![groupadd](images/imagesInUG/group-add.png)
+
 </details>
 
 ### Deleting a group
@@ -339,6 +347,9 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
 Examples:
 * `task -e 4 d/2021-12-31` edits the deadline to 31 December 2021
+
+![taskedit](images/imagesInUG/task-edit.png)
+
 </details>
 
 ### Deleting a task: `task -d`
@@ -383,8 +394,11 @@ Format: `task -f KEYWORD…​`
   e.g. `Report Submission` will return `Report 1`, `Lab Submission`
 
 Examples:
-* `student -f Report` returns `Report 1` and `Report Submission`
-* `student -f lab submission` returns `Lab Submission`, `Report Submission`<br>
+* `task -f Report` returns `Report 1` and `Report Submission`
+* `task -f lab submission` returns `Lab Submission`, `Report Submission`<br>
+
+![taskfind](images/imagesInUG/task-find.png)
+
 </details>
 
 ### Assigning tasks to students
