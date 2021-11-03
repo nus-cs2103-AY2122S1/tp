@@ -9,6 +9,16 @@ title: Tze Jit's Project Portfolio Page
 Given below are my contributions to the project.
 
 * **Code contributed:** [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=tzejit)
+
+* **Enhancement:** Refactoring of Person class and its associated add/edit commands to Student class and changing the data fields of a Student class.
+- What it does:
+  - Removes irrelevant fields such as phone number and address, and adds in more data relevant to a Student, such as github repo name, username, student number and email.
+  - Updates criteria of being a same student to having either the same student number of email since these are unique.
+  - Updates the add/edit command to accept these new fields and check for duplicate students based on the new criteria.
+- Justification: This feature improves the product significantly because it allows TAs using it to get a good summary of the relevant Student details, and allows TAs to effectively update these details while automatically checking for any errors such as inputting duplicate students.
+- Highlights: This enhancement required extensive refactoring of the entire codebase as the classes of numerous fields deemed irrelevant had to be deleted, and all their dependencies had to be updated.
+- Credits: New fields added were based on the existing code for other fields, such as name, which was then edited to accommodate new regex limitations and behaviour.
+
 * **New Feature:** Added view switching functionality.
 - What it does:
     - Allows the user to switch displayed content between Students, Tasks or Groups.
