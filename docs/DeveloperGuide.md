@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanelPlaceholder`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `ListPanel` is in turn made up of other parts e.g. `StudentListPanel`, `TaskListPanel`, `GroupListPanel`.
+The `XYZListPanel` is in turn made up of other parts e.g. `StudentListPanel`, `TaskListPanel`, `GroupListPanel`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,13 +82,13 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands and to determine the type of object to display in the `ListPanelPlaceholder`.
 * depends on some classes in the `Model` component, as it displays either a `Student`, `Group`, or `Task` object residing in the `Model`.
 
-#### ListPanel Component
+#### XYZListPanel Component
 
-The `ListPanel` consists of either a `StudentListPanel`, `TaskListPanel` or `GroupListPanel`.
+The `XYZListPanel` consists of either a `StudentListPanel`, `TaskListPanel` or `GroupListPanel`.
 
-Each of these `ListPanels` consists of their own `Card` components which make up the final GUI.
+Each of these `XYZListPanel`s consists of their own `XYZCard` components which make up the final GUI.
 
-The layout of these `ListPanels` are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The layout of these `XYZListPanel`s are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 
 ### Logic component
@@ -121,10 +121,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`]
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+![Structure of the Model Component](images/ModelClassDiagram.png)
 
 The `Model` component,
 
@@ -133,11 +132,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+#####Task Component
 
-</div>
+![Structure of the Task Class](images/TaskClassDiagram.png)
 
 #### Student and Group component
 
@@ -155,6 +154,11 @@ The `Group` component,
 * stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
 * has a `Members` subcomponent that stores references to the `Student` component.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `XYZ` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `XYZ` object needing their own `Tag` objects.<br>
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+</div>
 
 ### Storage component
 
@@ -216,7 +220,6 @@ The above process is further summarised in the following sequence diagram:
 
 #### Implementation
 
-
 ![Sequence Diagram of Add Member](images/AddMemberSequenceDiagram.png)
 
 As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
@@ -253,6 +256,30 @@ these changes in the `AddressBook`.
     * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
     * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
       unnatural modelling of the real world since `Group` contains students and not the other way around.
+
+### Edit Group Command
+
+#### Implementation
+![Sequence Diagram of EditGroupCommand](images/EditGroupCommandSequenceDiagram.png)
+
+The Edit Group feature is activated when a user enters the `editGroup` command word followed by its relevant arguments.
+When the user executes the `editGroup` command, user input is parsed and the fields to be edited are extracted into an `EditGroupDescriptor` object.
+The `EditGroupDescriptor` object and the `Index` of the group to be edited are then extracted into parameters of the `EditGroupCommand` class.
+The `EditGroupCommand` then interacts with the `Model` class to edit the data.
+
+The implementations of the other Edit commands, namely the `EditTaskCommand` and the `EditStudentCommand`, are similar to the `EditGroupCommand` in the way the `Logic` component behaves.
+However, the behaviour of the `Model` component differs slightly for the `EditGroupCommand`, as it alters not only the `Group` data, but also the `Student` data in the `AddressBook`.
+
+This process is shown in the following sequence diagram:
+
+![Reference Sequence Diagram of EditGroupCommand](images/EditGroupCommandRefSequenceDiagram.png)
+
+The following steps describe the execution of the `EditGroupCommand`.
+
+1. `EditGroupCommand` uses the provided `Index` and `EditGroupDescriptor` to create the updated `Group` object.
+2. `EditGroupCommand` then calls the `setGroup` method of the `Model` class to replace the previous `Group` object with the newly updated one.
+3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have the updated `Group` object as a field, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
+4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data.
 
 ### Tasks
 

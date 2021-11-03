@@ -16,7 +16,7 @@ public abstract class Task implements Comparable<Task> {
 
     private final TaskName name;
     private final Set<Tag> tags = new HashSet<>();
-    private final String description;
+    private final Description description;
     private boolean isDone;
     private final Priority priority;
 
@@ -37,7 +37,7 @@ public abstract class Task implements Comparable<Task> {
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = isDone;
-        this.description = description.description;
+        this.description = description;
         this.priority = priority;
     }
 
@@ -53,7 +53,7 @@ public abstract class Task implements Comparable<Task> {
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = false;
-        this.description = description.description;
+        this.description = description;
         this.priority = priority;
     }
 
@@ -85,7 +85,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     public String getDescription() {
-        return description;
+        return description.description;
     }
 
     public Priority getPriority() {
