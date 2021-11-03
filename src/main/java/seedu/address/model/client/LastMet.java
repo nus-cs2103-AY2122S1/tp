@@ -12,6 +12,7 @@ import seedu.address.commons.util.StringUtil;
 public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparable<LastMet> {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
             + "where Day, month and year should be numerical values.";
+    public static final String MESSAGE_INVALID_LASTMET = "LastMet should not be a future date.";
 
     public final LocalDate value;
     public final String dateInString;
@@ -30,6 +31,7 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
         }
 
         checkArgument(isValidDate(lastMetDate), MESSAGE_CONSTRAINTS);
+        checkArgument(notFutureDate(lastMetDate), MESSAGE_INVALID_LASTMET);
         dateInString = lastMetDate;
 
         if (lastMetDate.isEmpty()) {
@@ -44,7 +46,18 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
      * Returns if a given string is a valid lastMet.
      */
     public static boolean isValidLastMet(String test) {
-        return StringUtil.isValidDate(test);
+        return StringUtil.isValidDate(test) && notFutureDate(test);
+    }
+
+    /**
+     * Returns if a given string contains a date that is not in the future.
+     */
+    public static boolean notFutureDate(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return !LocalDate.parse(test, formatter).isAfter(LocalDate.now());
     }
 
     /**

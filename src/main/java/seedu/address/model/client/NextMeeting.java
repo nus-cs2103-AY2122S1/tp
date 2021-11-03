@@ -63,19 +63,44 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
         checkArgument(isValidTime(endTime), TIME_MESSAGE_CONSTRAINTS);
         endTimeInString = endTime;
 
+        checkArgument(isDurationValid(startTime, endTime), MESSAGE_INVALID_TIME_DURATION);
+        checkArgument(notPastMeeting(date, endTime), MESSAGE_INVALID_MEETING_DATE_OVER);
+
         this.withWho = withWho.isEmpty() ? null : new Name(withWho);
 
         this.date = parseToLocalDate(date);
         this.startTime = parseToLocalTime(startTime);
         this.endTime = parseToLocalTime(endTime);
+    }
 
-        if (!startTime.isEmpty() && !endTime.isEmpty()) {
-            checkArgument(this.endTime.isAfter(this.startTime), MESSAGE_INVALID_TIME_DURATION);
+    /**
+     * Returns a boolean of whether the given {@code startTime} is before the {@code endTime}.
+     */
+    public static boolean isDurationValid(String startTime, String endTime) {
+        if (startTime.trim().isEmpty() || endTime.trim().isEmpty()) {
+            return true;
         }
+        if (!isValidTime(startTime) || !isValidTime(endTime)) {
+            return false;
+        }
+        return parseToLocalTime(endTime).isAfter(parseToLocalTime(startTime));
+    }
 
-        if (!date.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty()) {
-            checkArgument(!isMeetingOver(LocalDate.now(), LocalTime.now()), MESSAGE_INVALID_MEETING_DATE_OVER);
+    /**
+     * Returns a boolean of whether the meeting has passed based on the current date and time,
+     * as well as {@code dateString} and {@code endString}
+     */
+    public static boolean notPastMeeting(String dateString, String endString) {
+        if (dateString.trim().isEmpty() || endString.trim().isEmpty()) {
+            return true;
         }
+        if (!isValidDate(dateString) || !isValidTime(endString)) {
+            return false;
+        }
+        LocalDate dateNow = LocalDate.now();
+        LocalTime timeNow = LocalTime.now();
+        LocalDate date = parseToLocalDate(dateString);
+        return date.isAfter(dateNow) || date.isEqual(dateNow) && parseToLocalTime(endString).isAfter(timeNow);
     }
 
     public Name getWithWho() {
@@ -102,8 +127,18 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
         return date;
     }
 
+    /**
+     * Returns a boolean of the given {@code test} is a valid NextMeeting string
+     */
     public static boolean isValidNextMeeting(String test) {
-        return test.matches(VALID_MEETING_STRING);
+        if (!test.matches(VALID_MEETING_STRING)) {
+            return false;
+        }
+        String date = test.split(" ", 2)[0];
+        String startTime = test.substring(test.indexOf("(") + 1, test.indexOf("~"));
+        String endTime = test.substring(test.indexOf("~") + 1, test.indexOf(")"));
+
+        return isDurationValid(startTime, endTime) && notPastMeeting(date, endTime);
     }
 
     public boolean isSameDay(LocalDate comparison) {
