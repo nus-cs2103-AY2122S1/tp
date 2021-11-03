@@ -59,5 +59,15 @@ public class ScheduleTest {
         }
         long result = testSchedule.getTotalWorkingHour(testPeriod, List.of(createPeriod(1, 1)));
         assertEquals(6 * Schedule.HOURS_PER_SLOT, result);
+
+        testSchedule = new Schedule();
+        for (int i = 1; i <= 7; i++) {
+            testSchedule.addShift(toAdd, Slot.AFTERNOON, START_DATE, END_DATE);
+            result = testSchedule.getTotalWorkingHour(testPeriod, List.of());
+            assertEquals(i * Schedule.HOURS_PER_SLOT, result);
+            toAdd = toAdd.plus(1);
+        }
+        result = testSchedule.getTotalWorkingHour(testPeriod, List.of(createPeriod(1, 1)));
+        assertEquals(6 * Schedule.HOURS_PER_SLOT, result);
     }
 }
