@@ -817,165 +817,383 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Use cases
-(For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise. UC = Use Case)
 
+**<u>Use Case: UC1 - Add a new position</u>**
 
-**Use case: Add a new position**
+Preconditions: NA
 
-**MSS**
+Guarantees: New position is saved with information displayed.
 
-1. User requests to add a new position, with necessary details
-2. MrTechRecruiter adds the new position and shows a success message
+**MSS:**
 
+1. User requests to add a new position, with necessary details.
+2. MrTechRecruiter adds the new position and shows a success message. <br>
    Use case ends.
+
+**Extensions:**
 
 * 1a. The format is invalid.
+    * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
+      Use case ends.
+  
+* 1b. The position already exists in MTR.
+    * 1b1. MrTechRecruiter shows an error message for duplicate position. <br>
+      Use case ends.
 
-    * 1a1. MrTechRecruiter shows an error message.
 
-  Use case ends.
+**<u>Use Case: UC2 - Delete a position</u>** 
 
-**Use case: Edit a new position** [coming soon]
+Preconditions: NA
 
-**Use case: Delete a new position**
+Guarantees: Position is deleted from MTR and display is updated.
 
-**MSS**
+**MSS:**
 
-1. User requests to list positions
-2. MrTechRecruiter shows a list of positions
-3. User requests to delete a specific position in the list
-4. MrTechRecruiter deletes the position
+1. User requests to delete a position via index.
+2. MrTechRecruiter deletes the existing position from the position book and shows a success message.
+3. All applicants with this existing position will also be consequently deleted. <br>
    Use case ends.
 
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+* 1a. The index provided is invalid (negative or larger than positionBook size)
+    * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
+      Use case ends.
 
-    * 2a1. MrTechRecruiter displays a message that no position is in the list.
-
-  Use case ends.
-
-* 3a The given name of the position is invalid.
-
-    * 3a1. MrTechRecruiter shows an error message.
-
-  Use case resumes at step 2.
+* 1b. The position book is empty.
+    * 1b1. MrTechRecruiter displays a message that there are no current positions. <br>
+      Use case ends.
 
 
-**Use case: Add a new applicant**
+**<u>Use Case: UC3 - Edit a position</u>**
+
+Preconditions: NA
+
+Guarantees: Position in MTR is changed and display is updated.
+
+**MSS:**
+
+1. User requests to edit a position via index, providing a new title and new description.
+2. MrTechRecruiter updates the existing position in the position book and shows a success message. <br>
+   Use case ends.
+
+**Extensions:**
+
+* 1a. The index provided is invalid (negative or larger than positionBook size)
+    * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
+    Use case ends.
+
+* 1b. The position book is empty.
+    * 1b1. MrTechRecruiter displays a message that no position is in the list. <br>
+    Use case ends.
+
+* 1c. Title provided or description provided is invalid.
+    * 1c1. MrTechRecruiter shows an error message for invalid format. <br>
+    Use case ends.
+
+* 1d. The position to be changed has the same title and description.
+    * 1d1. MrTechRecruiter shows an error message saying that the edited position is the same. <br>
+    Use case ends.
+
+
+**<u>Use Case: UC4 - Add a new applicant </u>**
+
+Preconditions: NA
+
+Guarantees: Applicant is added to MTR and display is updated.
+
+**MSS:**
+
+1.  User requests to add a new applicant and provides all the necessary parameters/details.
+2.  MrTechRecruiter adds the new applicant and shows a success message. <br>
+    Use case ends.
+
+**Extensions:**
+
+* 1a. The format is invalid.
+    * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
+      Use case ends.
+
+* 1b. The applicant to be added already exists in MrTechRecruiter.
+    * 1b1. MrTechRecruiter shows an error message indicating duplicate applicant. <br>
+      Use case ends.
+
+
+**<u>Use Case: UC5 - Delete an applicant</u>**
+
+Preconditions: NA
+
+Guarantees: Applicant is deleted from MTR and display is updated.
 
 **MSS**
 
-1.  User requests to add a new applicant, with all the necessary parameters/details.
-2.  MrTechRecruiter adds the new applicant and shows a success message.
-
+1.  User requests to delete an applicant via index.
+2.  MrTechRecruiter deletes specified applicant in the list and UI updated to not show the deleted applicant. <br>
     Use case ends.
 
 **Extensions**
-
-* 1a. The format is invalid.
-    * 1a1. MrTechRecruiter shows an error message.
-
-      Use case resumes at step 1.
-
-**Use case: Edit a new applicant** [coming soon]
-
-**Use case: Delete an applicant**
-
-**MSS**
-
-1.  User requests to list applicants.
-2.  MrTechRecruiter shows a list of applicants.
-3.  User requests to delete a specific applicant in the list using the exact name.
-4.  MrTechRecruiter deletes the applicant.
-
+* 1a. The index provided is invalid (negative or larger than `applicantBook` size)
+  * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
     Use case ends.
 
-**Extensions**
+* 1b. The `applicantBook` is empty.
+  * 1b1. MrTechRecruiter displays a message that there is currently no applicants. <br>
+    Use case ends.
+    
 
-* 2a. The list is empty.
+**<u>Use Case: UC6 - Edit a new applicant</u>** 
 
-  Use case ends.
+Preconditions: NA
 
-* 3a. The given name is invalid.
+Guarantees: Applicant in MTR is edited and display is updated.
 
-    * 3a1. MrTechRecruiter shows an error message.
+**MSS:**
 
-      Use case resumes at step 2.
-
-**Use case: Viewing average rejection rates for all job positions.**
-
-**MSS**
-
-1. User requests to see a list of all job positions
-2. MrTechRecruiter displays the list of job positions, and their respective rejection rates.
-
+1. User requests to edit an applicant via index, giving the updated details.
+2. MrTechRecruiter updates the existing applicant and shows a success message.
+3. The UI will also be updated to show the applicant's new details. <br>
    Use case ends.
 
-**Extensions**
+**Extensions:**
+* 1a. The index provided is invalid (negative or larger than applicantBook size)
+  * 1a1. MrTechRecruiter shows an error message for invalid format. <br>
+    Use case ends.
 
-* 1a. No current job positions.
+* 1b. The Applicant book is empty.
+  * 1b1. MrTechRecruiter displays a message that there is currently no applicants. <br>
+    Use case ends.
 
-    * 1a1. MrTechRecruiter shows an 'No job positions' message.
+* 1c. Any new details provided is invalid.
+  * 1c1. MrTechRecruiter shows an error message for invalid format. <br>
+    Use case ends.
 
-      Use case ends.
+* 1d. The applicant to be changed has the same description overall.
+  * 1d1. MrTechRecruiter shows an error message saying that the edited applicant is the same. <br>
+    Use case ends.
 
-* 2b. Job positions with relatively high rejection rates.
 
-    * 2b1. MrTechRecruiter highlights the job positions with high rejection rates.
+**<u>Use Case: UC7 - Listing current positions</u>**
 
-      Use case ends.
+Preconditions: NA
 
-**Use case: Viewing average rejection rates for a particular job position.**
+Guarantees: NA
 
-**MSS**
+**MSS:**
 
-1. User searches for a particular job position using the 'find' function.
-2. MrTechRecruiter displays the job position and its corresponding rejection rate.
-
+1. User requests to view all current positions.
+2. MrTechRecruiter refreshes the UI and reflects all existing positions. <br>
    Use case ends.
 
-**Extensions**
-
-* 1a. Job position does not exist.
-
-    * 1a1. MrTechRecruiter shows an 'No such job position found' message.
-
-      Use case ends.
-
-* 2b. Job position has relatively high rejection rate.
-
-    * 2b1. MrTechRecruiter highlights its high rejection rate.
-
-      Use case ends.
+**Extensions:**
+* 1a. There are no positions yet in MrTechRecruiter.
+  * 1a1. MrTechRecruiter shows an message indicating no current positions. <br>
+    Use case ends.
 
 
-**Use case: Search for applicants through keywords**
+**<u>Use Case: UC8 - Listing current applicants</u>**
 
-**MSS**
+Preconditions: NA
 
-1. User enters the keywords for MrTechRecruiter to search for.
-2. MrTechRecruiter performs the search according to the keywords.
-3. MrTechRecruiter displays the search results.
+Guarantees: NA
 
+**MSS:**
+
+1. User requests to view all current applicants.
+2. MrTechRecruiter refreshes the UI and reflects all existing applicants. <br>
    Use case ends.
 
-**Extensions**
+**Extensions:**
+* 1a. There are no applicants yet in MrTechRecruiter.
+  * 1a1. MrTechRecruiter shows a message indicating no current applicants. <br>
+    Use case ends.
 
-* 1a. The list is empty.
 
+**<u>Use Case: UC9 - Finding applicants by name</u>**
+
+Preconditions: NA
+
+Guarantees: NA
+
+**MSS:**
+
+1. User requests to find all applicants containing a specified name.
+2. MrTechRecruiter searches through all applicants and returns a list of all applicants containing the name, displaying it in the UI. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid name given by user.
+  * 1a1. MrTechRecruiter shows an error message indicating invalid name. <br>
+    Use case ends.
+
+* 1b. No applicants contain the specified name.
+  * 1b1. MrTechRecruiter shows a message indicating no applicants matched the given search. <br>
+    Use case ends.
+
+
+**<u>Use Case: UC10 - Finding applicants by position</u>**
+
+Preconditions: NA
+
+Guarantees: NA
+
+**MSS:**
+
+1. User requests to find all applicants that applied to a specific position.
+2. MrTechRecruiter searches through all applicants and returns a list of all applicants who applied to the position, displaying it in the UI. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid position name given by user.
+  * 1a1. MrTechRecruiter shows an error message indicating invalid position name. <br>
+    Use case ends.
+
+* 1b. No applicants have applied for that particular position.
+  * 1b1. MrTechRecruiter shows a message indicating no applicants have applied for the selected position. <br>
+    Use case ends.
+
+
+**<u>Use Case: UC11 - Finding applicants by application status</u>**
+
+Preconditions: NA
+
+Guarantees: NA
+
+**MSS:**
+
+1. User requests to find all applicants with a specified application status.
+2. MrTechRecruiter searches through all applicants and retrieves all applicants with the specified application status, displaying it in the UI. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid application status given by user.
+  * 1a1. MrTechRecruiter shows an error message indicating invalid application status. <br>
+    Use case ends.
+
+* 1b. No applicants have that particular application status.
+  * 1b1. MrTechRecruiter shows a message indicating no applicants have that current application status. <br>
+    Use case ends.
+
+
+**<u>Use Case: UC12 - Update applicant's application status</u>**
+
+Preconditions: NA
+
+Guarantees: If updated, MTR will update and reflect the updated status.
+
+**MSS:**
+
+1. User requests to update an applicant's application status, giving the name and status.
+2. MrTechRecruiter replaces the existing applicant and updates the UI. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid application status given by user.
+  * 1a1. MrTechRecruiter shows an error message indicating invalid parameters. <br>
+    Use case ends.
+
+* 1b. Invalid name provided.
+  * 1b1. MrTechRecruiter shows an error message indicating invalid parameters. <br>
+    Use case ends.
+    
+* 1c. No current applicants in the `applicantBook`.
+  * 1c1. MrTechRecruiter displays a message indicating no such applicant. <br>
+    Use case ends.
+
+
+**<u>Use case: UC13 - Viewing average rejection rates for a job position.</u>**
+
+Preconditions: NA
+
+Guarantees: NA
+
+**MSS:**
+
+1. User requests to see the rejection rate of a particular position.
+2. MrTechRecruiter calculates and returns the rejection rate. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid position name given
+    * 1a1. MrTechRecruiter shows an error message indicating invalid position name. <br>
+      Use case ends.
+
+* 1b. No current applicants for that position.
+    * 1b1. MrTechRecruiter displays a message indicating no current applicants for that position. <br>
       Use case ends.
 
 
-* 2a. An invalid flag is specified.
+**<u>Use case: UC14 - Viewing breakdown of statuses of a position.</u>**
 
-    * 2a1. MrTechRecruiter shows an error message.
+Preconditions: NA
 
-      Use case ends.
+Guarantees: NA
 
-*{More to be added}*
+**MSS:**
 
-**Use case: Calculate the rejection rate for a position** [coming soon]
+1. User requests to see the breakdown of statuses of a particular position.
+2. MrTechRecruiter calculates and displays a pie chart showing distribution of current statuses of applicants for this position. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid position name given
+  * 1a1. MrTechRecruiter shows an error message indicating invalid position name. <br>
+    Use case ends.
+
+* 1b. No current applicants for that position.
+  * 1b1. MrTechRecruiter displays a message indicating no current applicants for that position. <br>
+    Use case ends.
+
+
+**<u>Use case: U15 - Undoing a previous command.</u>**
+
+Preconditions: NA
+
+Guarantees: Given an applicable command previously, MrTechRecruiter will update its state accordingly along with its UI.
+
+**MSS:**
+
+1. User requests to undo a previous command entered.
+2. MrTechRecruiter changes the state of `applicantBook` and `positionBook` to before the last applicable command occurred.
+3. The old `applicantBook` and `positionBook` is reflected in the UI. <br>
+   Use case ends.
+
+**Extensions:**
+* 1a. No applicable commands have been entered previously (i.e. no adding, editing or deletion of positions or applicants has occurred).
+  * 1a1. MrTechRecruiter displays an error message indicating it cannot `undo` due to no previous record. <br>
+    Use case ends.
+
+
+**<u>Use case: U16 - Requesting the help menu.</u>**
+
+Preconditions: NA
+
+Guarantees: Prompts opening of a window containing the link to our User Guide.
+
+**MSS:**
+
+1. User requests for the help page.
+2. MrTechRecruiter automatically opens up a window containing the link to our User Guide.
+
+**Extensions:**
+NA
+
+
+**<u>Use case: U17 - Exiting MrTechRecruiter.</u>**
+
+Preconditions: NA
+
+Guarantees: Saving of any current data in MrTechRecruiter before shutting down.
+
+**MSS:**
+
+1. User requests to exit MrTechRecruiter.
+2. MrTechRecruiter does a final save before shutting down.
+
+**Extensions:**
+NA
+
+
 
 ### Non-Functional Requirements
 
