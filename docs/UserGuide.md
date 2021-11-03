@@ -17,25 +17,24 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 
 1. Download the latest `union.jar` from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your UNIon.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   
 
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`ls -contacts`**: Lists all contacts.
+   * `ls -contacts`: Lists all contacts.
 
-   * **`touch`**`-n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to the Address Book.
+   * `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to UNIon.
 
-   * **`rm`**`3`: Deletes the 3rd contact shown in the current list.
+   * `rm 3`: Deletes the 3rd contact shown in the current list.
 
-   * **`rm -contacts`**: Deletes all contacts.
+   * `rm -contacts`: Deletes all contacts.
 
-   * **`exit`**: Exits the app.
+   * `exit`: Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -51,7 +50,7 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
   e.g. in `touch -n NAME`, `NAME` is a parameter which can be used as `touch -n John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `-n NAME [-t TAG]` can be used as `-n John Doe -t friend` or as `-n John Doe`.
+  e.g. `-n NAME [-t TAG]` can be used as `-n John Doe -t friend` or as `-n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[-t TAG]…​` can be used as ` ` (i.e. 0 times), `-t friend`, `-t friend -t family` etc.
@@ -81,9 +80,15 @@ Format: `help`
 
 #### Adding a person: `touch`
 
-Adds a person to the address book.
+Adds a person to UNIon.
 
 Format: `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​`
+
+* `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
+* `NAME` has a character limit of 70 characters.
+* `NAME` is case-sensitive as John Doe and john doe will be treated as different people.
+* `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
+* Duplicate tags are ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -95,20 +100,25 @@ Examples:
 
 #### Listing all persons: `ls -contacts`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in UNIon.
 
 Format: `ls -contacts`
 
 #### Editing a person: `vim`
 
-Edits an existing person in the address book.
+Edits an existing person in the UNIon.
 
 Format: `vim INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
+* `NAME` has a character limit of 70 characters.
+* `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
+
+* Duplicate tags are ignored.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e touching of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `-t` without specifying any tags after it.
 
 Examples:
@@ -136,7 +146,7 @@ Examples:
 
 #### Deleting a person: `rm`
 
-Deletes the specified person from the address book.
+Deletes the specified person from UNIon.
 
 Format: `rm INDEX`
 
@@ -145,12 +155,12 @@ Format: `rm INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `ls -contacts` followed by `rm 2` deletes the 2nd person in the address book.
+* `ls -contacts` followed by `rm 2` deletes the 2nd person in UNIon.
 * `find -contacts Betsy` followed by `rm 1` deletes the 1st person in the results of the `find -contacts` command.
 
 #### Clearing all people: `rm -contacts`
 
-Clears all contacts from the address book.
+Clears all contacts from UNIon.
 
 Format: `rm -contacts`
 
@@ -163,6 +173,7 @@ Creates a folder for contacts to be added into.
 Format: `mkdir FOLDER_NAME`
 
 * Creates a folder with the name `FOLDER_NAME`.
+* Duplicate folder names are not allowed.
 
 Examples:
 
@@ -170,9 +181,9 @@ Examples:
 
 #### Adding contacts to a folder: `echo`
 
-To organize and group contacts into an arbitrary folder.
+Adds contacts into an arbitrary folder.
 
-Format:`echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME`
+Format: `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME`
 
 * `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
 * Command fails if such a contact index does not exist.
@@ -181,20 +192,33 @@ Format:`echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME`
 * `FOLDER_NAME` must be an existing folder
 * Command fails if there is no existing folder with that name.
 * Every index that has been input must be valid for the contacts to be added to folder.
-      
+
 Examples:
 * `echo 3 >> CS2103` Adds contact 3 to CS2103 folder.
 * `echo 3 4 1 9 10 >> CS2103` Add contacts 3, 4, 1, 9, 10 to CS2103 folder.
 
+#### Deleting a contact from folder: `rm`
+
+Deletes the specified contact from the list of contacts from the folder.
+
+Format `rm 1 >> FOLDER_NAME`
+
+* Deletes contact number 1 seen on the contact list from the folder named `FOLDER_NAME`.
+
+Examples:
+
+* `rm 1 >> CS1010` deletes a contact that corresponds to index 1 in the contact list from the folder `CS1010`.
+
+
 #### Listing all folders: `ls -folders`
 
-Retrieve list of all folders created
+Retrieves list of all folders created.
 
 Format: `ls -folders`
 
 #### Editing a folder name: `mv`
 
-Replaces the old folder name with the new folder name
+Replaces the old folder name with the new folder name.
 
 Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
 
@@ -230,7 +254,7 @@ Examples:
 
 #### Clearing all folders: `rm -folders`
 
-Clears all folders from the address book.
+Clears all folders from UNIon.
 
 Format: `rm -folders`
 
@@ -244,20 +268,20 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UNIon data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UNIon data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, UNIon will discard all data and start with an empty data file at the next run.
 </div>
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UNIon home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,8 +297,9 @@ Action | Format, Examples
 **Delete contact** | `rm INDEX`<br> e.g., `rm 3`
 **Clear contacts** | `rm -contacts`
 **Add new folder** | `mkdir FOLDER_NAME` <br> e.g. `mkdir CS2103`
-**Add contact to folder** | `echo INDEX >> FOLDER_NAME` <br> e.g. `echo 3 >> CS2103`
+**Add contact to folder** | `echo INDEX >> FOLDER_NAME` <br> e.g., `echo 3 >> CS2103`
 **Add multiple contacts to folder** | `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME` <br> e.g. `echo 3 4 1 9 10 >> CS2103`
+**Delete contact from folder** | `rm INDEX >> FOLDER_NAME` <br> e.g., `rm 1 >> CS2102`
 **List folders** | `ls -folders`
 **Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` <br> e.g., `mv CS2103` &#124; `CS2102`
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
