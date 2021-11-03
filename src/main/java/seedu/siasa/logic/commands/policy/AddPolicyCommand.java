@@ -69,7 +69,7 @@ public class AddPolicyCommand extends Command {
      */
     public AddPolicyCommand(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
                             Commission commission, Index index, Set<Tag> tagList) {
-        requireAllNonNull(title, paymentStructure, coverageExpiryDate, index, tagList);
+        requireAllNonNull(title, paymentStructure, index, tagList);
         this.title = title;
         this.paymentStructure = paymentStructure;
         this.coverageExpiryDate = coverageExpiryDate;
@@ -88,7 +88,7 @@ public class AddPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
-        if (!CoverageExpiryDate.isFutureExpiryDate(coverageExpiryDate.value)) {
+        if (coverageExpiryDate != null && !CoverageExpiryDate.isFutureExpiryDate(coverageExpiryDate.value)) {
             boolean response = Warning.warnUser(MESSAGE_PAST_EXPIRY_DATE);
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);

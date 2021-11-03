@@ -54,7 +54,7 @@ public class PolicyBuilder {
         requireNonNull(policyToCopy);
         this.title = policyToCopy.getTitle();
         this.paymentStructure = policyToCopy.getPaymentStructure();
-        this.coverageExpiryDate = policyToCopy.getCoverageExpiryDate();
+        this.coverageExpiryDate = policyToCopy.getCoverageExpiryDate().orElse(null);
         this.commission = policyToCopy.getCommission();
         this.owner = policyToCopy.getOwner();
         this.tags = new HashSet<>(policyToCopy.getTags());

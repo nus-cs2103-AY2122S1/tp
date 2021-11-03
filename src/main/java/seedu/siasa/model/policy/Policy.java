@@ -2,9 +2,11 @@ package seedu.siasa.model.policy;
 
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.siasa.model.contact.Contact;
@@ -16,6 +18,8 @@ import seedu.siasa.model.tag.Tag;
  */
 public class Policy {
 
+    public static final String MESSAGE_NO_EXPIRY = "No coverage expiry defined.";
+
     private final Title title;
     private final PaymentStructure paymentStructure;
     private final CoverageExpiryDate coverageExpiryDate;
@@ -26,11 +30,11 @@ public class Policy {
     private final Contact owner;
 
     /**
-     * Every field must be present and not null.
+     * coverageExpiryDate can be optional and hence null.
      */
     public Policy(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
                   Commission commission, Contact owner, Set<Tag> tags) {
-        requireAllNonNull(title, paymentStructure, coverageExpiryDate, commission, owner, tags);
+        requireAllNonNull(title, paymentStructure, commission, owner, tags);
         this.title = title;
         this.paymentStructure = paymentStructure;
         this.coverageExpiryDate = coverageExpiryDate;
@@ -47,8 +51,8 @@ public class Policy {
         return paymentStructure;
     }
 
-    public CoverageExpiryDate getCoverageExpiryDate() {
-        return coverageExpiryDate;
+    public Optional<CoverageExpiryDate> getCoverageExpiryDate() {
+        return Optional.ofNullable(coverageExpiryDate);
     }
 
     public Commission getCommission() {
@@ -92,6 +96,10 @@ public class Policy {
                 && otherPolicy.getTitle().isSimilarTo(getTitle());
     }
 
+    public boolean isExpiringBefore(LocalDate cutOff) {
+        return getCoverageExpiryDate().map(date -> date.value.isBefore(cutOff)).orElse(false);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -125,10 +133,11 @@ public class Policy {
                 .append("; Payment Structure: ")
                 .append(getPaymentStructure())
                 .append("; Commission: ")
-                .append(getCommission())
-                .append("; Expiry Date: ")
-                .append(getCoverageExpiryDate());
-
+                .append(getCommission());
+        if (getCoverageExpiryDate().isPresent()) {
+            builder.append("; Expiry Date: ")
+                    .append(getCoverageExpiryDate().get());
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

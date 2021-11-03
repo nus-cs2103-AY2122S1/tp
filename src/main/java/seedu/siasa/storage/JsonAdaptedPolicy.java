@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
@@ -31,6 +32,7 @@ public class JsonAdaptedPolicy {
 
     private final String title;
     private final JsonAdaptedPaymentStructure paymentStructure;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private final String coverageExpiryDate;
     private final JsonAdaptedCommission commission;
     private final JsonAdaptedContact owner;
@@ -62,7 +64,7 @@ public class JsonAdaptedPolicy {
     public JsonAdaptedPolicy(Policy source) {
         title = source.getTitle().toString();
         paymentStructure = new JsonAdaptedPaymentStructure(source.getPaymentStructure());
-        coverageExpiryDate = source.getCoverageExpiryDate().toString();
+        coverageExpiryDate = source.getCoverageExpiryDate().map(date -> date.toString()).orElse(null);
         commission = new JsonAdaptedCommission(source.getCommission());
         owner = new JsonAdaptedContact(source.getOwner());
         tagged.addAll(source.getTags().stream()
@@ -102,19 +104,19 @@ public class JsonAdaptedPolicy {
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        try {
-            if (coverageExpiryDate == null) {
-                throw new IllegalValueException(
-                        String.format(MISSING_FIELD_MESSAGE_FORMAT, CoverageExpiryDate.class.getSimpleName()));
+        final CoverageExpiryDate modelCoverageExpiryDate;
+        if (coverageExpiryDate != null) {
+            try {
+                LocalDate.parse(coverageExpiryDate, formatter);
+            } catch (DateTimeParseException e) {
+                throw new IllegalValueException(e.getMessage());
             }
+
             LocalDate date = LocalDate.parse(coverageExpiryDate, formatter);
-
-        } catch (IllegalValueException | DateTimeParseException e) {
-            throw new IllegalValueException(e.getMessage());
+            modelCoverageExpiryDate = new CoverageExpiryDate(date);
+        } else {
+            modelCoverageExpiryDate = null;
         }
-
-        LocalDate date = LocalDate.parse(coverageExpiryDate, formatter);
-        final CoverageExpiryDate modelCoverageExpiryDate = new CoverageExpiryDate(date);
 
         if (commission == null) {
             throw new IllegalValueException(
