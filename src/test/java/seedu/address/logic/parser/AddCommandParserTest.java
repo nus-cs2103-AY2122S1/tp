@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BAD_PREFIX_FORM;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -155,10 +156,10 @@ public class AddCommandParserTest {
     public void parse_strayPrefixes_failure() {
         assertParseFailure(parser, STRAY_NAME_PREFIX_DESC_AMY + STRAY_PHONE_PREFIX_DESC_AMY
                 + STRAY_ADDRESS_PREFIX_DESC_AMY + STRAY_EMAIL_PREFIX_DESC_AMY + STRAY_TAG_PREFIX_DESC_FRIEND,
-                INVALID_COMMAND_EXPECTED_MESSAGE);
+                MESSAGE_BAD_PREFIX_FORM);
 
         assertParseFailure(parser, STRAY_NAME_PREFIX_DESC_BOB + STRAY_PHONE_PREFIX_DESC_BOB
                         + STRAY_ADDRESS_PREFIX_DESC_BOB + STRAY_EMAIL_PREFIX_DESC_BOB + STRAY_TAG_PREFIX_DESC_HUSBAND,
-                INVALID_COMMAND_EXPECTED_MESSAGE);
+                MESSAGE_BAD_PREFIX_FORM);
     }
 }

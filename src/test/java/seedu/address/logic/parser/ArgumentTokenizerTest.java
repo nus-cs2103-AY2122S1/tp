@@ -95,7 +95,7 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_multipleArgumentsWithRepeats() throws ParseException {
         // Two arguments repeated, some have empty values
-        String argsString = "SomePreambleString -t dashT-Value ^Q ^Q -t another dashT value p/ pSlash value -t ";
+        String argsString = "SomePreambleString -t dashT-Value ^Q ^Q -t another dashT value p/ pSlash value -t";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
         assertPreamblePresent(argMultimap, "SomePreambleString");
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
@@ -124,8 +124,8 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, pSlash, "normal");
         // End of argString
         argsString = "SomePreambleString ^Q";
-        String finalArgsString1 = argsString;
-        assertThrows(ParseException.class, () ->  ArgumentTokenizer.tokenize(finalArgsString1, hatQ));
+        argMultimap = ArgumentTokenizer.tokenize(argsString, hatQ);
+        assertArgumentPresent(argMultimap, hatQ, "");
     }
 
     @Test
