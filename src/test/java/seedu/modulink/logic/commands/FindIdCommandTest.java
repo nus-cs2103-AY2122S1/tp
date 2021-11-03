@@ -13,6 +13,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.modulink.commons.core.Messages;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.UserPrefs;
@@ -54,7 +55,7 @@ public class FindIdCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(Messages.MESSAGE_NO_PERSON_LISTED, "with this ID.");
         StudentIdContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindIdCommand command = new FindIdCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
