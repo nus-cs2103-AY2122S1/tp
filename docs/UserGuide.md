@@ -17,9 +17,11 @@ title: User Guide
           1. Adding a person `add`
           2. Editing a person `edit`
           3. Adding a remark `remark`
-          4. Deleting a person `delete`
-          5. Deleting multiple person `deletem`
-          6. Clearing all entries `clear`
+          4. Adding tags 'addt'
+          5. Deleting a person `delete`
+          6. Deleting tags 'deletet'
+          6. Deleting multiple person `deletem`
+          7. Clearing all entries `clear`
      3. View
           1. Listing all persons `list`
           2. Finding persons `find`
@@ -235,6 +237,27 @@ Examples:
 * **`remark`** `1 r/She likes coding` adds the remark `She likes coding` to the person at index 1.
 * **`remark`** `2` clears the remark of the person at index 2.
 
+### Adding tags: `addt`
+
+You can add tags to a person in the contact book by `INDEX`. Alternatively, you can add tags to everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`addt`** `INDEX t/TAG [t/TAG]…​`
+* Add tags to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* Input tag will be appended to the existing tag.
+* If duplicated tags are given, these tags will not be added.
+* At least one `TAG` must be provided.
+* `TAG` is case-sensitive
+
+Alternatively, **`addt`** `all t/TAG [t/TAG]…​`
+* Add tags to everybody in the list.
+* Input tag will be appended to the existing tag.
+* If duplicated tags are given, these tags will not be added.
+* At least one `TAG` must be provided.
+* `TAG` is case-sensitive
+
 ### Deleting a person: `delete`
 
 You can delete the specified person from the contact book by `INDEX`.
@@ -249,6 +272,26 @@ Examples:
 
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
 * **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
+
+### Deleting tags: `deletet`
+You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`deletet`** `INDEX [t/TAG]…​`
+* Delete tags of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* The tag refers to the tags to delete from the person.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, all tags of the person will be deleted.
+* `TAG` is case-sensitive
+
+Alternatively, **`deletet`** `all [t/TAG]…​`
+* Delete tags of everybody in the list.
+* The tag refers to the tags to delete from everyone.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, every tag in the list will be deleted.
+* `TAG` is case-sensitive
 
 ### Deleting multiple person: `deletem`
 
@@ -474,6 +517,16 @@ You can change the default colour of the tag with `t/TAG:#HEX_COLOUR`
 Example: `t/friends:#FF0000` for a red colour tag
 </div>
 
+### `a/ALIAS`
+`ALIAS` can take any values except keywords that are reserved for command names.
+
+Example: `a/findAlex`
+
+### `c/COMMAND`
+`COMMAND` must be a valid command.
+
+Example: `c/find n/Alex`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -484,7 +537,6 @@ the data of your previous Socius home folder.
 **Q**: Can I edit the data file directly?<br>
 **A**: Socius data are saved as a JSON file (i.e. `JAR_FILE_LOCATION/data/addressbook.json`).
 Advanced users are welcome to update data directly by editing that data file.
-However, be warned that changes that make the data format invalid will cause Socius to discard the data file and start with a new empty data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the format of your data file is invalid, Socius will discard all data and start with an empty data file at the next run.
