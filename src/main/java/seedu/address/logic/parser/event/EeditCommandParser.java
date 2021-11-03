@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -63,8 +62,8 @@ public class EeditCommandParser implements Parser<EeditCommand> {
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEMBER_INDEX)) {
             editEventDescriptor.setMemberSet(new HashSet<Member>());
             editEventDescriptor.setAttendance(new HashMap<Member, Boolean>());
-            if (!argMultimap.getValue(PREFIX_MEMBER_INDEX).get().equals("") ||
-                    argMultimap.getAllValues(PREFIX_MEMBER_INDEX).size() != 1) {
+            if (!argMultimap.getValue(PREFIX_MEMBER_INDEX).get().equals("")
+                    || argMultimap.getAllValues(PREFIX_MEMBER_INDEX).size() != 1) {
                 indexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_INDEX));
             }
         }
