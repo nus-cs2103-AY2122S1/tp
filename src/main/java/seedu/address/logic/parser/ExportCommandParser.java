@@ -17,7 +17,8 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         String fileName = args.trim();
 
         if (!fileName.endsWith(".json")) {
-            throw new ParseException(ExportCommand.MESSAGE_WRONG_FORMAT);
+            throw new ParseException(String.format("%s.\n%s", ExportCommand.MESSAGE_WRONG_FORMAT,
+                    ExportCommand.MESSAGE_USAGE));
         }
 
         return new ExportCommand(fileName);
