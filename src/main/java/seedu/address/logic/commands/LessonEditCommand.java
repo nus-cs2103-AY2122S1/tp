@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -129,6 +130,9 @@ public class LessonEditCommand extends UndoableCommand {
         personAfterLessonEdit = PersonUtil.createdEditedPerson(personBeforeLessonEdit, updatedLessons);
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
+        if (!model.hasPersonFilteredList(personAfterLessonEdit)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(), lessonToEdit, editedLesson),
                 personAfterLessonEdit);

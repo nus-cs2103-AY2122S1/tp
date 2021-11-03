@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -110,6 +111,10 @@ public class EditCommand extends UndoableCommand {
         }
 
         model.setPerson(personBeforeEdit, personAfterEdit);
+
+        if (!model.hasPersonFilteredList(personAfterEdit)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, personAfterEdit), personAfterEdit);
     }
 

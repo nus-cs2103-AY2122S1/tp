@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,9 @@ public class PaidCommand extends UndoableCommand {
         personAfterLessonPaid = createEditedPerson(personBeforeLessonPaid, toPay, paidLesson);
 
         model.setPerson(personBeforeLessonPaid, personAfterLessonPaid);
+        if (!model.hasPersonFilteredList(personAfterLessonPaid)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
         return new CommandResult(String.format(MESSAGE_PAID_LESSON_SUCCESS, personAfterLessonPaid.getName(),
                 toPay, paidLesson), personAfterLessonPaid);
     }
