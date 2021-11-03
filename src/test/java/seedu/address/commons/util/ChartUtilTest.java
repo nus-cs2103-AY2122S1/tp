@@ -1,11 +1,8 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.student.*;
 
 public class ChartUtilTest {
 
@@ -28,7 +25,7 @@ public class ChartUtilTest {
         assertEquals(ChartUtil.wrap("short longwordcannotfit"), "short longwo\nrdcannotfit");
         assertEquals(ChartUtil.wrap("aspecialcase longwordcannotfit"), "aspecialcase\nlongwordcann\notfit");
         assertEquals(ChartUtil.wrap("short short short short short short short short short"),
-        "short short\n" + "short short\n" + "short shor...");
+                "short short\n" + "short short\n" + "short shor...");
         assertEquals(ChartUtil.wrap("short longwordcannotfit short longwordcannotfit"),
                 "short longwo\n" + "rdcannotfit\n" + "short long...");
         assertEquals(ChartUtil.wrap("superlongonewordsuperlongonewordsuperlongoneword"),

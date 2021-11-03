@@ -99,10 +99,17 @@ public class ChartUtil {
         return lineChart;
     }
 
+    /**
+     * Rounds up {@code double val} to multiples of {@code int multiple}.
+     */
     public static double roundUpToNearestMultiple(double val, int multiple) {
         return Math.round(val / multiple) * multiple;
     }
 
+
+    /**
+     * Wraps the given string such that each line contains maximum of 12 characters, with a maximum of 3 lines.
+     */
     public static String wrap(String string) {
         String[] words = string.split(" ");
         int count = 0;
