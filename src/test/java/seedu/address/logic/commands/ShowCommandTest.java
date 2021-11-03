@@ -1,28 +1,39 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.student.*;
-import seedu.address.testutil.AssessmentBuilder;
-import seedu.address.testutil.GroupBuilder;
-
-import java.nio.file.Path;
-import java.util.List;
-import java.util.function.Predicate;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.util.List;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
+import seedu.address.model.student.ID;
+import seedu.address.model.student.IdContainsKeywordsPredicate;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.NameEqualsPredicate;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.AssessmentBuilder;
+import seedu.address.testutil.GroupBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -42,20 +53,20 @@ public class ShowCommandTest {
     @Test
     public void constructor_nullFirstArg_throwsNullPointerException() {
         Path path = getTempFilePath("error.csv");
-        assertThrows(NullPointerException.class,
-                () -> new ShowCommand((Name) null, path));
+        assertThrows(NullPointerException.class, () ->
+            new ShowCommand((Name) null, path));
 
-        assertThrows(NullPointerException.class,
-                () -> new ShowCommand((Index) null, path));
+        assertThrows(NullPointerException.class, () ->
+            new ShowCommand((Index) null, path));
 
-        assertThrows(NullPointerException.class,
-                () -> new ShowCommand((ID) null, path));
+        assertThrows(NullPointerException.class, () ->
+            new ShowCommand((ID) null, path));
 
-        assertThrows(NullPointerException.class,
-                () -> new ShowCommand((Assessment) null, path));
+        assertThrows(NullPointerException.class, () ->
+            new ShowCommand((Assessment) null, path));
 
-        assertThrows(NullPointerException.class,
-                () -> new ShowCommand((Group) null, path));
+        assertThrows(NullPointerException.class, () ->
+            new ShowCommand((Group) null, path));
     }
 
     @Test
