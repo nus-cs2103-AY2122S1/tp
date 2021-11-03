@@ -136,11 +136,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showCommandSummary == otherCommandResult.showCommandSummary
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && display == otherCommandResult.display
-                //&& displaySummary == otherCommandResult.displaySummary
-                //&& summary == otherCommandResult.summary
-                && contactToDisplay == otherCommandResult.contactToDisplay;
+                && exit == otherCommandResult.exit;
     }
 
     @Override
