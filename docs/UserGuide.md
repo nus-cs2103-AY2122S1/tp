@@ -83,7 +83,7 @@ The table below are the interpretations of a few technical terms that you may en
 | Technical term  | What it means |
 | ------------- | ------------- |
 | CLI | The Command Line Interface (CLI) is the interface that accepts text input to execute the functions of **TuitiONE**. |
-| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. |
+| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. Graphics, icons, windows, menus, cursor and buttons are all components of a GUI. |
 | Parameter  | Parameter refers to the user input required after the user is prompted by the TuitiONE GUI  |
 
 #### General Symbols and Syntax
@@ -252,6 +252,8 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 * `GRADE` refers to the educational level of the student. It can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
 * `REMARK` can have a maximum of 25 characters, single worded without spacings in between them. A student can have any number of remarks, capped at 5. (including 0). (e.g `smart` is valid, while `needs help` is invalid)
+
+* Each student must have a unique name.
 
 Example(s):
 
@@ -595,6 +597,21 @@ Action | Format | Examples
 * **Q:** Where can I view the list of commands?
 
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
+
+
+* **Q:** Why am I unable to add a student with the same name as another student?
+
+  **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
+
+
+* **Q:** How do I edit a lesson?
+
+  **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
+
+
+* **Q:** How do I edit a remark?
+
+  **A:** To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks.
 
 
 * **Q:** Am I able to add or edit `Remarks` to have spacings within them?
