@@ -18,10 +18,10 @@ Given below are my contributions to the project.
 * **New Feature**: Added `export` command to quickly share contact details.
   * What it does: Allows users to select individual contacts, or the entire contact list to be exported into a text file. The exported file will be available to users in the data directory.
   * Justification: This feature allows users to quickly retrieve the information which they may require on-the-go during a tour.
-  * Highlights: This feature required changes to many components in the `Storage` class and intricate changes to the initialisation process for the application. 
+  * Highlights: This feature required changes to many components in the `Storage` class and intricate changes to the initialisation process for the application.
 
 
-* **New Feature**: Reimplemented `filter` command to filter by multiple fields. 
+* **New Feature**: Reimplemented `filter` command to filter by multiple fields.
   * What it does: Filtering can be done by `rating` instead of previously where it was solely for categories.
   * Justification: This feature allows users to achieve more flexibility with the `filter` command.
   * Highlights: This feature required major changes to the filtering predicate and extensive testing to cover all possible edge cases.

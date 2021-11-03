@@ -64,20 +64,40 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start
+# Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. You may install it here
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
 2. Download the latest `wheretourgo.jar` from [here](update on final)
 
 3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data<br><br>
+**For Windows**
+1. Simply double-click the file to start the app
+
+**For Mac**
+1. Open Terminal
+
+2. Navigate to the home folder you have chosen for your WhereTourGo.<br>
+For example, if you have moved the app to Desktop, simply run:
+
+```
+cd Desktop
+```
+
+
+3. Run the following command:
+```
+java -jar WhereTourGo.jar
+```
+
+<br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/sample.png)
    <br><br>
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window
-   <br><br>
-   Some example commands you can try:
-   
+
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+<br><br>
+Some example commands you can try:
+
   * **`list`** : Lists all contacts
 
   * **`add`**`c/att n/Mandarin Oriental p/98765432 e/Mandarin_Oriental@example.com a/Marina Bay Sands, Singapore 123432` : Adds a contact named `Mandarin Oriental`
@@ -88,7 +108,9 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 
   * **`exit`** : Exits the app
 
-6. Refer to the [Features](#features) below for details of every command
+You can refer to the [Features](#features) below for details of every command.
+
+[Back to top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +178,7 @@ More examples will be provided for each command in [Features](#features).
 * Parameters can be in any order<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken<br>
+* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
@@ -174,7 +196,7 @@ More examples will be provided for each command in [Features](#features).
   * Review has a limit of 500 characters.
 
 
-* Category Codes only accept the following 5 inputs:
+* Category Codes only accept the following 6 inputs:
   * Attraction: `att`
   * F&B: `fnb`
   * Commerce: `com`
@@ -182,11 +204,19 @@ More examples will be provided for each command in [Features](#features).
   * Transport: `tpt`
   * Others: `oth`
 
-<div markdown="block" class="alert alert-danger"> :warning: 
+* Ratings only accept the following 5 inputs:
+  * 1-star : `ra/1`
+  * 2-star : `ra/2`
+  * 3-star : `ra/3`
+  * 4-star : `ra/4`
+  * 5-star : `ra/5`
+
+<div markdown="block" class="alert alert-danger"> :warning:
  Only alphanumeric symbols are allowed in the contact fields. Characters like ‘&’, ‘!’, ‘?’ are not allowed.
 </div>
 
- 
+[Back to top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -196,6 +226,8 @@ More examples will be provided for each command in [Features](#features).
 ### Adding a contact: `add`
 
 Adds a contact to the contact list.
+
+Category codes and ratings can be found [here](#restrictions-for-commands).
 
 Format: `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [rv/REVIEW] [ra/RATING] [t/TAG]…​​`
 
@@ -209,11 +241,15 @@ Examples:
 
 Expected Outcome for `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4` :
 
-![Add](images/add.png)
+<img src="images/add.png" width="800">
+
+[Back to top](#table-of-contents)
 
 ### Editing a contact: `edit`
 
 Edits an existing contact in the contact list.
+
+Category codes and ratings can be found [here](#restrictions-for-commands).
 
 Format: `edit INDEX [n/CONTACT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rv/REVIEW] [c/CATEGORY_CODE][ra/RATING]  [t/TAG]…​`
 
@@ -235,11 +271,13 @@ Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
 
 Before:
 
-![EditBefore](images/list.png)
+<img src="images/list.png" width="800">
 
 After:
 
-![EditAfter](images/edit.png)
+<img src="images/edit.png" width="800">
+
+[Back to top](#table-of-contents)
 
 ### Deleting a contact: `delete`
 
@@ -256,7 +294,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the contact list
 * `find Mandarin Oriental` followed by `delete 1` deletes the 1st contact in the results of the find command
 
-Format: `delete CONTACT_NAME`
+Format: `delete n/CONTACT_NAME`
 
 * Deletes the contact specified by CONTACT_NAME
 * The name must refer to a contact’s full name in the displayed contact list
@@ -266,6 +304,8 @@ Examples:
 * `list` followed by `delete Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours’
 * `find fullerton` followed by `delete The Fullerton Hotel` deletes the contact with name 'The Fullerton Hotel'
 
+[Back to top](#table-of-contents)
+
 ## Retrieving Contacts
 
 ### Listing all contacts: `list`
@@ -273,6 +313,8 @@ Examples:
 Shows a list of all contacts in the contact list.
 
 Format: `list`
+
+[Back to top](#table-of-contents)
 
 ### Locating contacts: `find`
 
@@ -291,41 +333,37 @@ Examples:
 
 Expected Outcome for `find bay`:
 
-![find](images/find.png)
+<img src="images/find.png" width="800">
 
+[Back to top](#table-of-contents)
 
 
 ### Filtering contacts: `filter`
-Shows a list of all contacts in the specified category or with the specified rating.
+Shows a list of all contacts in the specified category, with the specified rating and/or with the specified tag.
 
-Format: `filter [c/CATEGORY] [ra/NUMBER] ... `
+Format: `filter [c/CATEGORY] [ra/NUMBER] [t/TAGS] ... `
 
-* Category codes:
-  * Attraction :`c/att`
-  * F&B :`c/fnb`
-  * Commerce :`c/com`
-  * Accommodation :`c/acc`
-  * Transport :`c/tpt`
-* Ratings :
-  * 1-star : `ra/1`
-  * 2-star : `ra/2`
-  * 3-star : `ra/3`
-  * 4-star : `ra/4`
-  * 5-star : `ra/5`
+Category codes and ratings can be found [here](#restrictions-for-commands).
+* Tags:
+  * Any custom tags you've added into your contacts!
+
+
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
-You can add multiple category filters in a single command, but only a single rating filter!
+You can add multiple category and tag filters in a single command, but only a single rating filter!
 </div>
 
 Examples:
 * `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts)
 * `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts)
-* `filter ra/3` returns all contacts with 3-star rating from all categories
-* `filter c/fnb ra/3` returns all F&B contacts with 3-star rating
+* `filter ra/3 t/outdoor` returns all contacts with 3-star rating and outdoor tag from all categories
+* `filter c/fnb ra/3 t/fun t/outdoor` returns all F&B contacts with 3-star rating, and with fun and/or outdoor tags
 
 Expected Outcome for `filter c/fnb`:
 
-![filter](images/filter.png)
+<img src="images/filter.png" width="800">
+
+[Back to top](#table-of-contents)
 
 ### Sorting the contacts: `sort`
 Sorts the list of contacts in a specified order. The sort feature sorts by Contact name (in lexicographical order) or by Rating (in descending order).
@@ -335,6 +373,8 @@ Format : `sort FIELD`
 Examples :
 * `sort name` returns the same list of contacts displayed in lexicographical order
 * `sort rating` returns the same list of contacts displayed, sorted from highest to lowest rating
+
+[Back to top](#table-of-contents)
 
 ### Summarizing contacts: `sum`
 Shows a summary of the content of WhereTourGo. The data presented as a summary are as follows:
@@ -346,7 +386,9 @@ Format: `sum`
 
 Expected Outcome for `sum`:
 
-![sum](images/sum.png)
+<img src="images/sum.png" width="800">
+
+[Back to top](#table-of-contents)
 
 ### Viewing a contact: `view`
 
@@ -362,7 +404,7 @@ Examples:
 * `list` followed by `view 2` displays the 2nd contact in the contact list
 * `find Mandarin Oriental` followed by `view  1` displays the first contact in the results of the find command
 
-Format: `view CONTACT_NAME`
+Format: `view n/CONTACT_NAME`
 
 * Displays the contact specified by CONTACT_NAME
 * The name must refer to a contact’s full name in the displayed contact list
@@ -372,17 +414,24 @@ Examples:
 * `list` followed by `view Marina Bay Sands` displays the contact with name 'Marina Bay Sands'
 * `find Gardens By The Bay` followed by `view Gardens By The Bay` displays the contact with name 'Gardens By The Bay'
 
+[Back to top](#table-of-contents)
+
 ## Navigating WhereTourGo
 
 ### Navigating input history
 When typing commands, you can use the up and down arrow keys to access previously entered inputs.
 
 <div markdown="block" class="alert alert-danger"> :warning: Caution:
-Input history will be reset whenever you exit the app.</div>
+Input history will be reset whenever you exit the app.
+</div>
+
+[Back to top](#table-of-contents)
 
 ### Clicking on contacts
-Click on any contact in the [List Panel](Link to box diagram thing) to view more information about the contact.
+Click on any contact in the [List Panel](#orienting-to-the-application) to view more information about the contact.
 This is equivalent to using a [`view`](#viewing-a-contact-view) command.
+
+[Back to top](#table-of-contents)
 
 ## Undoing and Redoing
 ### Undoing operations: `undo`
@@ -392,6 +441,8 @@ Format: `undo`
 
 Examples :
 * If you execute the command `delete Marina Bay Sands`, then execute the command `undo`, the Marina Bay Sands contact will be restored
+
+[Back to top](#table-of-contents)
 
 ### Redoing operations: `redo`
 Redoes the last change undone on the list of contacts stored.
@@ -406,6 +457,8 @@ Examples :
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 Only commands that directly change the stored data can be redone and undone. These commands include add, delete, edit, sort and clear.
 </div>
+
+[Back to top](#table-of-contents)
 
 ## Managing Data
 ### Exporting data: `export`
@@ -428,7 +481,9 @@ Examples:
 
 A sample of the exported text file:
 
-![export](images/export.png)
+<img src="images/export.png" width="800">
+
+[Back to top](#table-of-contents)
 
 ### Clearing all entries: `clear`
 
@@ -436,9 +491,13 @@ Clears all entries from the contact list.
 
 Format: `clear`
 
+[Back to top](#table-of-contents)
+
 ### Saving the data
 
 WhereTourGo data is saved in the hard disk automatically after any command that changes the data. You do not need to save your changes manually!
+
+[Back to top](#table-of-contents)
 
 ### Editing the data file
 
@@ -446,6 +505,8 @@ WhereTourGo data is saved as a JSON file at `[JAR file location]/data/addressboo
 
 <div markdown="block" class="alert alert-danger"> :warning: Caution:
 If your changes to the data file make the format invalid, WhereTourGo will discard all data and start with an empty data file at the next run.</div>
+
+[Back to top](#table-of-contents)
 
 ## Help
 
@@ -458,16 +519,19 @@ Format: `help`
 
 Please refer to the FAQ for more information.
 
+[Back to top](#table-of-contents)
+
 ### Displaying commands: `cmd`
 
 Open the command list in your default Browser.
 Format: `cmd`
 <div markdown="span" class="alert alert-danger">:warning: Caution:
-If the command list cannot be opened in the Browser, a link to the User Guide will be provided. 
+If the command list cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
 
 Please refer to the FAQ for more information.
 
+[Back to top](#table-of-contents)
 
 ### Exiting the program: `exit`
 
@@ -475,17 +539,32 @@ Exits the program.
 
 Format: `exit`
 
- 
+[Back to top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
+**Q**: How do I save my data?<br>
+**A**: Your contact list is saved in your hard disk automatically for each command that modifies the list.
+
+**Q**: Where is my data saved?<br>
+**A**: When our app is first opened, it will create a folder named data in the same folder where the JAR file is located.
+This folder contains a file called `addressbook.json` which contains all of your contacts with the corresponding details.
+
+**Q**: Where can I find my text file after executing the `export` command?
+**A**: You can find the nicely-formatted text file called `export.txt` in the folder named data. (Path: `data/export.txt`)
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer. Overwrite the empty data file it creates with the data file from your previous WhereTourGo home folder.
 
-**Q**: Why does cmd/help command not work as intended?<br>
-**A**: 
- 
+**Q**: What do I do if I forget the format of all the commands?<br>
+**A**: You can type either `cmd` to show the command summary or `help` to open our User Guide.
+
+**Q**: Why does cmd/help command open a backup window with a link instead of my browser?<br>
+**A**: Check to ensure that you have a browser installed and updated to the latest version. Restart the app and try again. If the issue still isn't resolved, please contact us at "WhereTourGo@gmail.com".
+
+[Back to top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Command summary
@@ -508,3 +587,5 @@ Action | Format, Examples
 **Command Summary** | `cmd`
 **Help** | `help`
 **Exit** | `exit`
+
+[Back to top](#table-of-contents)

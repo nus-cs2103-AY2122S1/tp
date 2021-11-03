@@ -149,6 +149,7 @@ public class MainWindow extends UiPart<Stage> {
             try {
                 helpWindow.openUserGuide();
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
+                logger.info(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {
@@ -157,13 +158,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else opens the secondary internal help window.
+     * Opens the online Command Summary if possible, else opens the secondary internal help window.
      */
     public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openCommandSummary();
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
+                logger.info(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {

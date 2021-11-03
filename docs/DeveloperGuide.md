@@ -410,10 +410,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Review Feature
 
 #### Implementation
@@ -523,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
 |`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
 |`***`|Tour Guide|View all the contacts in my list |find contacts whose names I have forgotten|
-|`*`|Tour Guide|Sort my contacts by date visited/added||
+|`*`|Tour Guide|Sort my contacts by name or by rating||
 |`*`|Seasoned tour guide|Merge contacts |prevent duplicates or inaccurate information.|
 |`*`|Forgetful|Retrieve recently viewed/most frequently used contacts|easily access certain contacts|
 |`**`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
