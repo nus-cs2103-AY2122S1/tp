@@ -43,7 +43,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/py0000.png" width="200px">
 
 [[github](https://github.com/Py0000)]
-[[portfolio](team/peiyuan.md)]
+[[portfolio](team/py0000.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
