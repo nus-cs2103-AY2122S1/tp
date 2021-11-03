@@ -196,27 +196,27 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-1. Viewing help `help`
+1. Viewing help
 2. Modify
-   1. Adding a person `add`
-   2. Adding tags to persons `addt`
-   3. Adding a remark `remark`
-   4. Editing a person `edit`
-   5. Deleting a person `delete`
-   6. Deleting multiple person `deletem`
-   7. Deleting tags from persons `deletet`
-   8. Clearing all persons `clear`
+   1. Adding a person
+   2. Adding tags to persons
+   3. [Adding a remark](#adding-a-remark)
+   4. Editing a person
+   5. Deleting a person
+   6. [Deleting multiple person](#deleting-multiple-person)
+   7. Deleting tags from persons
+   8. Clearing all persons
 3. View 
-   1. Listing all persons `list`
-   2. Locating persons `find`
-   3. Sorting persons `sort`
-   4. Viewing statistics `stat`
+   1. Listing all persons
+   2. Locating persons
+   3. Sorting persons
+   4. Viewing statistics
 4. Share 
-   1. Importing contacts `import`
-   2. Exporting contacts `export`
+   1. Importing contacts
+   2. Exporting contacts
 5. Advance 
-   1. Aliasing commands `alias`
-6. Exiting the program `exit`
+   1. Aliasing commands
+6. Exiting the program
 7. Saving the data
 
 ### Add contacts with optional arguments
@@ -261,6 +261,47 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Save all optional attributes of a contact as Optional type.
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
+
+### Adding a remark
+
+#### Implementation
+
+The add remark mechanism will add remark to a contact specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
+
+During `RemarkCommand#execute`, a new `Person` object will be created. For all of its properties (e.g. `Name`) except for `Remark`, the values will remain the same as the original person's properties.
+
+#### Usage
+
+Given below is an example usage scenario and how the add remark mechanism behaves at each step.
+
+Step 1. The user executes `remark 1 r/She likes coding` command to add the remark field to the first person.
+
+Step 2. `RemarkCommandParser#parse` will then parse the arguments provided. In this example, a new `RemarkCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the parser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The `RemarkCommand` will then create a new `Person` using information from input remark. All other information will be taken from the original `Person`.
+
+Step 4. `RemarkCommand#execute` will then replace the old `Person` in the `model` with the new `Person`.
+
+The following sequence diagram shows how the add remark mechanism works:
+
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+</div>
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Create a new person with the remark field replaced and the other fields same as the old person.
+    * Pros: Maintains immutability.
+    * Cons: It may have performance issues in terms of memory usage as a new `Person` object is created.
+
+* **Alternative 2:** Edit the old person directly.
+    * Pros: It uses less memory and thus may run faster.
+    * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
 ### Deleting multiple person
 
@@ -309,7 +350,7 @@ The following sequence diagram shows how the deleting multiple person mechanism 
 * **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
     * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
     * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
-
+    
 ### Import JSON file
 
 #### Implementation
