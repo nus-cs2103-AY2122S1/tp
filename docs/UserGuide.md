@@ -16,19 +16,15 @@ title: User Guide
 
 CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 
-Manage large groups of contacts with advanced features such as **Import** for a quick 1-step setup, marking your **Favourite** contacts, as well as finding contacts going to the same **Event**. CohortConnect also makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging GitHub’s metadata using a proprietary algorithm.
+With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute `csv` or `json` files containing a list of students. Instantly load them into CohortConnect with a single **Import** command. With data collected from students before the semester, our **Find A Buddy** feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the **Events** tab, you can identify events and hackathons that your peers will be attending.
 
 ## Table of Contents
 * Table of Contents
 {:toc}
 
-<h2 id = "Purpose"> </h2>
-
 ## Purpose
 
 This User Guide is intended for basic to advanced users of CohortConnect. It provides sufficient information for users to set up the application and learn all its features.
-
-<h2 id = "Prerequisites"> </h2>
 
 ## Prerequisites
 
@@ -36,12 +32,10 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 2. Basic knowledge about Technical Terms like `CLI`, `UI` and `JAR`.
 3. `Java 11` Installed on the System.
 
-<h2 id = "QuickStart"> </h2>
-
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest `CohortConnect.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
+2. Download the latest `CohortConnect.jar` release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
 3. Place `CohortConnect.jar` in an empty folder.
 4. Double-click the jar file to start the program.
 5. The UI would look like this:
@@ -57,30 +51,46 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 </p>
 
 > * This Window is only displayed once, when the Student launches the App for the first time.
-1. Enter Your Name in the `Name Field`.
-2. Enter Your __VALID__ Telegram Handle in the `Telegram Field`.
-3. Enter Your __VALID__ GitHub Username in the `GitHub Field`.
+6. Enter Your Name in the `Name Field`.
+7. Enter Your __VALID__ Telegram Handle in the `Telegram Field`.
+8. Enter Your __VALID__ GitHub Username in the `GitHub Field`.
 
-> :bulb: TIP: 
-> 1. Telegram Handle Conventions: 
-> * Handles can use a-z, 0-9 and underscores. 
-> * Handles are case-insensitive,  
-> * Handles must be at least five characters long, and maximum is 39 characters.
-> 
-> 2. GitHub Username Conventions:
-> * Github username may only contain alphanumeric characters or hyphens.
-> * Github username cannot have multiple consecutive hyphens. 
-> * Github username cannot begin or end with a hyphen. 
-> * Maximum is 39 characters.
+<div markdown="span" class="alert alert-primary">
 
+:bulb: TIP: 
+1. Telegram Handle Conventions: 
+* Handles can use a-z, 0-9 and underscores. 
+* Handles are case-insensitive,  
+* Handles must be at least five characters long, and maximum is 39 characters.
+
+2. GitHub Username Conventions:
+* GitHub username may only contain alphanumeric characters or hyphens.
+* GitHub username cannot have multiple consecutive hyphens. 
+* GitHub username cannot begin or end with a hyphen. 
+* Maximum is 39 characters.
+
+</div>
 
 <p align="center">
 <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/MainWindow.png?raw=true">
 </p>
 
 > * Main Window.
-  
-<h2 id = "Features"> </h2>
+
+## Keyboard Mappings
+
+1. <kbd>⌘</kbd> + <kbd>1</kbd>: To Switch to Contacts Tab.
+2. <kbd>⌘</kbd> + <kbd>2</kbd>: To Switch to Favorites Tab.
+3. <kbd>⌘</kbd> + <kbd>3</kbd>: To Switch to Events Tab.
+4. <kbd>⌘</kbd> + <kbd>4</kbd>: To Switch to Find a Buddy Tab.
+5. <kbd>⌘</kbd> + <kbd>P</kbd>: To Launch the Profile Window.
+6. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
+7. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
+8. <kbd>F1</kbd>: To Launch the Help Window.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
+</div>
 
 ## Features
 
@@ -91,18 +101,6 @@ Notes about command format:
 <div markdown="span" class="alert alert-primary">
 :bulb: TIP: In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
 </div>
-
-<h3 id = "Nav"> </h3>
-
-### Navigating Between Tabs - <kbd>⌘</kbd> + NumKey
-
-* <kbd>⌘</kbd> + 1: Contacts Tab
-* <kbd>⌘</kbd> + 2: Favorites Tab
-* <kbd>⌘</kbd> + 3: Events Tab
-* <kbd>⌘</kbd> + 4: Find A Buddy Tab
-
-
-<h3 id = "Add"> </h3>
 
 ### Adding a new Student - `add`
 
@@ -120,8 +118,6 @@ Example:
 add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
 ```
 
-<h3 id = "Delete"> </h3>
-
 ### Delete a Student - `delete`
 
 Deletes the specified Student Contact from the Address Book.
@@ -137,8 +133,6 @@ Example:
 ```
 delete 7
 ```
-
-<h3 id = "Edit"> </h3>
 
 ### Edit a Student - `edit`
 
@@ -156,8 +150,6 @@ Example:
 edit 1 n/John te/john_123 t/TA
 ```
 
-<h3 id = "EditProfile"> </h3>
-
 ### Edit your Profile - `edit profile`
 
 Edits the Profile linked to the Address Book.
@@ -172,9 +164,6 @@ Example:
 ```
 edit profile te/bob_osum
 ```
-
-
-<h3 id = "Find"> </h3>
 
 ### Find a Student - `find`
 
@@ -281,8 +270,6 @@ Example 2:
 show 4
 ```
 
-<h3 id = "Import"> </h3>
-
 ### Importing Student Contacts - `import`
 
 Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
@@ -310,8 +297,6 @@ Example 2:
 ```
 import CS2103T.csv
 ```
-
-<h3 id = "Export"> </h3>
 
 ### Exporting Student Contacts - `export`
 
@@ -341,8 +326,6 @@ Example 2:
 export Friends.csv
 ```
 
-<h3 id = "SetFavourite"> </h3>
-
 ### Setting a Contact as Favourite - `fav`
 
 Helps to set a particular Student Contact as a Favourite.
@@ -359,8 +342,6 @@ Example:
 fav 1
 ```
 
-<h3 id = "SetUnFavourite"> </h3>
-
 ### Setting a Contact as Unfavourite - `unfav`
 
 Helps to set a particular Student Contact as an Unfavourite.
@@ -376,8 +357,6 @@ Example:
 ```
 unfav 1
 ```
-
-<h3 id = "Help"> </h3>
 
 ### Displaying the Help Window - `help`
 
@@ -400,8 +379,6 @@ help
 <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/HelpWindowUi.png?raw=true">
 </p>
 
-<h3 id = "List"> </h3>
-
 ### Listing All Student Contacts - `list`
 
 Lists all the Student Contacts present.
@@ -417,8 +394,6 @@ Example:
 ```
 list
 ```
-
-<h3 id = "Clear"> </h3>
 
 ### Deleting All Student Contacts - `clear`
 
@@ -438,8 +413,6 @@ clear
 
 > :exclamation: WARNING: Use With Caution!
 
-<h3 id = "OpenTelegram"> </h3>
-
 ### Open Telegram of Current User
 
 Format:
@@ -447,8 +420,6 @@ Format:
 ```
 te
 ```
-
-<h3 id = "OpenGithub"> </h3>
 
 ### Open GitHub of Current User
 
@@ -458,13 +429,9 @@ Format:
 g
 ```
 
-<h3 id = "CommandHistory"> </h3>
-
 ### Retrieve Command History - <kbd>↑</kbd> / <kbd>↓</kbd>
 
 Similar to a Command Line Interface, <kbd>↑</kbd> retrieves the previous command, while <kbd>↓</kbd> retrieves the next command.
-
-<h3 id = "Exit"> </h3>
 
 ### Exiting the App - `exit`
 
@@ -482,23 +449,6 @@ Example:
 exit
 ```
 
-<h2 id = "KeyboardMappings"> </h2>
-
-## Keyboard Mappings
-
-1. <kbd>⌘</kbd> + <kbd>1</kbd>: To Switch to Contacts Tab.
-2. <kbd>⌘</kbd> + <kbd>2</kbd>: To Switch to Favorites Tab.
-3. <kbd>⌘</kbd> + <kbd>3</kbd>: To Switch to Events Tab.
-4. <kbd>⌘</kbd> + <kbd>4</kbd>: To Switch to Find a Buddy Tab.
-5. <kbd>⌘</kbd> + <kbd>P</kbd>: To Launch the Profile Window.
-6. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
-7. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
-8. <kbd>F1</kbd>: To Launch the Help Window.
-
-> :bulb: TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
-
-<h2 id = "FAQ"> </h2>
-
 ## FAQ
 
 Q: On typing and running commands, the error message "XXXX" is shown, what shall I do?
@@ -506,8 +456,6 @@ Q: On typing and running commands, the error message "XXXX" is shown, what shall
 A: Please **strictly** follow the command format to avoid such issues.
 
 --------------------------------------------------------------------------------------------------------------------
-
-<h2 id = "CommandSummary"> </h2>
 
 ## Command summary
 
