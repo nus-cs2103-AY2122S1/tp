@@ -248,7 +248,7 @@ Action | Format, Examples
 **Edit Module** | `edit module m/<old module name> mn/<new module name>` <br> e.g., `edit module m/CS2103 mn/CS2105`
 **Edit Student** | `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]` <br> e.g., `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`
 **Edit Task** | `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]` <br> e.g., `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`
-**Exit** | `exit` <br> e.g., `exit module m/CS2103`
+**Exit** | `exit` <br> e.g., `exit`
 **Find** | `find m/<module name> i/<student id>` <br> e.g., `find m/CS2103 i/A0123456A`
 **Home** | `home` <br> e.g., `home`
 **Mark Done** | `mark done m/<module name> i/<student id> ti/<task id>` <br> e.g., `mark done m/CS2103 i/A1234567A ti/T1`
