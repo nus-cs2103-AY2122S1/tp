@@ -20,7 +20,6 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 1. Copy the file to the folder you want to use as the _home folder_ for your UNIon.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   
 
    ![Ui](images/Ui.png)
 
@@ -189,7 +188,7 @@ Format: `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME`
 * `FOLDER_NAME` must be an existing folder
 * Command fails if there is no existing folder with that name.
 * Every index that has been input must be valid for the contacts to be added to folder.
-      
+
 Examples:
 * `echo 3 >> CS2103` Adds contact 3 to CS2103 folder.
 * `echo 3 4 1 9 10 >> CS2103` Add contacts 3, 4, 1, 9, 10 to CS2103 folder.
