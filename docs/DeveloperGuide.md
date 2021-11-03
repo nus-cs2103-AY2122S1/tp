@@ -66,7 +66,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 1. Press run on the `Main()` method of Sellah or run `gradle run`.
 
 If the set up process had been completed successfully, you should see the GUI similar to the below：
-![img.png](images/UiHelpCommand.png)
+![img.png](images/UIStartup.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -806,7 +806,8 @@ expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the latest jar file from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases) and copy into an empty 
+       folder
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
@@ -818,7 +819,18 @@ expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the application
+
+    1. Enter `exit` and press enter or click the exit button<br>
+       Expected: The application exits successfully.
+
+### Viewing help
+
+1. Viewing help for Sellah
+
+    1. Enter `help` and press enter<br>
+       Expected: A help message will be shown on the second panel. In addition, a link to Sellah's user guide will also
+       pop up.
 
 ### Deleting a client/product
 
