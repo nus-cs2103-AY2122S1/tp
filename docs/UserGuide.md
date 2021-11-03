@@ -100,6 +100,8 @@ These icons will appear within coloured boxes to indicate
 * Optional parameters/fields will be indicated within square brackets.
   e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
 
+* For parameters that expect a number value, such as `INDEX` of a student or `SCORE` for assessments, CSBook will have unexpected behaviours if too large of a number is given. The reason being is that CSBook was designed to manage at most a few thousand students, and it is not realistic for an assessment to have the total number of marks above a couple of hundreds either.
+
 * If a parameter is expected only once in the command but if you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/@albino_monkii t/@albino_api`, only `t/@albino_api` will be taken.
 
