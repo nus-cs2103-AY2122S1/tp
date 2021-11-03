@@ -460,7 +460,7 @@ PREFIX | Description | Usage
 ### Event Prefix
 
 PREFIX | Description | Usage
--------- | ------ | ------
+|-------- | ------ | ------
 `n/` | Name | `add`, `edit`
 `v/` | Venue | `add`, `edit`
 `c/` | Capacity | `add`, `edit`
