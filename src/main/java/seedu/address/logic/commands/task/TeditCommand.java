@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Name;
+import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
 import seedu.address.model.module.task.TaskDeadline;
 
@@ -29,20 +31,20 @@ public class TeditCommand extends Command {
     public static final String COMMAND_WORD = "tedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the detail of the task identified"
-            + "by the index number used in the displayed task list of the task identified\n"
+            + "by the corresponding index number.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_TASK_ID + "TASK_ID (must be a positive integer) "
+            + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "TASK_NAME] "
             // + "[" + PREFIX_STATUS + "TASK_STATUS] "
             + "[" + PREFIX_DATE + "TASK_DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "1 "
+            + PREFIX_TASK_INDEX + "1 "
             + PREFIX_NAME + "group meeting "
             + PREFIX_DATE + "24/10/2021 23:59";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member\n";
 
     private final Index targetTaskIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -64,12 +66,18 @@ public class TeditCommand extends Command {
         List<Task> lastShownTasks = model.getFilteredTaskList();
 
         if (targetTaskIndex.getZeroBased() >= lastShownTasks.size()) {
-            throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, targetTaskIndex.getOneBased()));
         }
         Task taskToEdit = lastShownTasks.get(targetTaskIndex.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        model.setTask(targetTaskIndex.getZeroBased(), editedTask);
+        assert model.getCurrentMember().isPresent();
+        Member curMember = model.getCurrentMember().get();
+        if (!taskToEdit.isSameType(editedTask) && model.hasTask(curMember, editedTask)) {
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK, curMember.getName().toString()));
+        }
+
+        model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }

@@ -2,7 +2,7 @@ package seedu.address.logic.parser.event;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Set;
@@ -31,7 +31,7 @@ public class EaddCommandParser implements Parser<EaddCommand> {
     public EaddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID);
+                        args, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_INDEX);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -40,7 +40,7 @@ public class EaddCommandParser implements Parser<EaddCommand> {
 
         Name name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         EventDate date = ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get());
-        Set<Index> indexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
+        Set<Index> indexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_INDEX));
 
         Event event = new Event(name, date);
 

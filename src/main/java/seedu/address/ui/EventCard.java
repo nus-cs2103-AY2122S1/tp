@@ -31,7 +31,7 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label index;
     @FXML
     private Label date;
     @FXML
@@ -43,7 +43,7 @@ public class EventCard extends UiPart<Region> {
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
-        id.setText(displayedIndex + ". ");
+        index.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
         date.setText("Date: " + event.getDate().toString());
         event.getParticipants().stream()
@@ -75,7 +75,7 @@ public class EventCard extends UiPart<Region> {
 
         // state check
         EventCard card = (EventCard) other;
-        return id.getText().equals(card.id.getText())
+        return index.getText().equals(card.index.getText())
                 && event.equals(card.event);
     }
 }

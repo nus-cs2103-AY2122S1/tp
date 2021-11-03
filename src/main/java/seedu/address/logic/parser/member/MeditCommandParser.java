@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -37,14 +37,14 @@ public class MeditCommandParser implements Parser<MeditCommand> {
     public MeditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MEMBER_ID, PREFIX_NAME,
+                ArgumentTokenizer.tokenize(args, PREFIX_MEMBER_INDEX, PREFIX_NAME,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_POSITION);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEMBER_ID)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEMBER_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeditCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_INDEX).get());
 
         EditMemberDescriptor editMemberDescriptor = new EditMemberDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

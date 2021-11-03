@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.event;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 
 import java.util.List;
 
@@ -14,16 +14,16 @@ import seedu.address.model.Model;
 import seedu.address.model.module.event.Event;
 
 /**
- * Deletes an event identified using it's displayed index from the address book.
+ * Deletes an event identified using it's displayed index from Ailurus.
  */
 public class EdelCommand extends Command {
 
     public static final String COMMAND_WORD = "edel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the event identified by the index number used in the displayed event list.\n"
-            + "Parameters: " + PREFIX_EVENT_ID + " EVENT_ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_ID + " 1";
+            + ": Deletes the event identified by the corresponding index number.\n"
+            + "Parameters: " + PREFIX_EVENT_INDEX + " EVENT_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + " 1";
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
 

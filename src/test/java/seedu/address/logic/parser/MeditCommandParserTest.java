@@ -59,7 +59,7 @@ public class MeditCommandParserTest {
         assertParseFailure(parser, CliSyntax.PREFIX_NAME + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, " " + CliSyntax.PREFIX_MEMBER_ID + "1", MeditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, " " + CliSyntax.PREFIX_MEMBER_INDEX + "1", MeditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -82,7 +82,7 @@ public class MeditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + "1";
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + "1";
         assertParseFailure(parser, userInput + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, userInput + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, userInput + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
@@ -113,7 +113,7 @@ public class MeditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_MEMBER;
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + PHONE_DESC_BOB
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + PHONE_DESC_BOB
                 + POSITION_DESC_HUSBAND + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + POSITION_DESC_FRIEND;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -127,7 +127,7 @@ public class MeditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_MEMBER;
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + PHONE_DESC_BOB
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + PHONE_DESC_BOB
                 + EMAIL_DESC_AMY;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB)
@@ -141,31 +141,31 @@ public class MeditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_MEMBER;
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + NAME_DESC_AMY;
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + NAME_DESC_AMY;
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY).build();
         MeditCommand expectedCommand = new MeditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + PHONE_DESC_AMY;
+        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + PHONE_DESC_AMY;
         descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new MeditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + EMAIL_DESC_AMY;
         descriptor = new EditMemberDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new MeditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + ADDRESS_DESC_AMY;
+        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         descriptor = new EditMemberDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new MeditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // positions
-        userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + POSITION_DESC_FRIEND;
+        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + POSITION_DESC_FRIEND;
         descriptor = new EditMemberDescriptorBuilder().withPositions(VALID_POSITION_FRIEND).build();
 
         expectedCommand = new MeditCommand(targetIndex, descriptor);
@@ -175,7 +175,7 @@ public class MeditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_MEMBER;
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + PHONE_DESC_AMY
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + PHONE_DESC_AMY
                 + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + POSITION_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + POSITION_DESC_FRIEND
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_HUSBAND;
@@ -193,15 +193,15 @@ public class MeditCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_MEMBER;
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + INVALID_PHONE_DESC
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + INVALID_PHONE_DESC
                 + PHONE_DESC_BOB;
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         MeditCommand expectedCommand = new MeditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC
-                + ADDRESS_DESC_BOB + PHONE_DESC_BOB;
+        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + EMAIL_DESC_BOB
+                + INVALID_PHONE_DESC + ADDRESS_DESC_BOB + PHONE_DESC_BOB;
         descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new MeditCommand(targetIndex, descriptor);
@@ -211,7 +211,7 @@ public class MeditCommandParserTest {
     @Test
     public void parse_resetPositions_success() {
         Index targetIndex = INDEX_THIRD_MEMBER;
-        String userInput = " " + CliSyntax.PREFIX_MEMBER_ID + targetIndex.getOneBased() + POSITION_EMPTY;
+        String userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + POSITION_EMPTY;
 
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder().withPositions().build();
         MeditCommand expectedCommand = new MeditCommand(targetIndex, descriptor);

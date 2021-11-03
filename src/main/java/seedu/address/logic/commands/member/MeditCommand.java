@@ -3,7 +3,7 @@ package seedu.address.logic.commands.member;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -38,15 +38,15 @@ public class MeditCommand extends Command {
     public static final String COMMAND_WORD = "medit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
-            + "by the index number used in the displayed member list. "
+            + "by the corresponding index number. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_MEMBER_ID + "MEMBER_ID (must be a positive integer)\n"
+            + "Parameters: " + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)\n"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_POSITION + "POSITION]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "1 "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

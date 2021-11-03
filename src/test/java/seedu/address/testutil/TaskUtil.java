@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.task.TaddCommand;
@@ -29,7 +29,7 @@ public class TaskUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + task.getName().toString() + " ");
         sb.append(PREFIX_DATE + task.getTaskDeadline().toString() + " ");
-        sb.append(PREFIX_MEMBER_ID + Integer.toString(memberId.getOneBased()));
+        sb.append(PREFIX_MEMBER_INDEX + Integer.toString(memberId.getOneBased()));
         return sb.toString();
     }
 
@@ -38,7 +38,7 @@ public class TaskUtil {
      * from the member with {@code memberId}.
      */
     public static String getTdelCommand(Index taskId) {
-        return TdelCommand.COMMAND_WORD + " " + PREFIX_TASK_ID + Integer.toString(taskId.getOneBased());
+        return TdelCommand.COMMAND_WORD + " " + PREFIX_TASK_INDEX + Integer.toString(taskId.getOneBased());
     }
 
     /**
@@ -46,8 +46,8 @@ public class TaskUtil {
      */
     public static String getTaskIdDetails(Index taskId, Index memberId) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_TASK_ID + Integer.toString(taskId.getOneBased()) + " ");
-        sb.append(PREFIX_MEMBER_ID_DEL + Integer.toString(memberId.getOneBased()));
+        sb.append(PREFIX_TASK_INDEX + Integer.toString(taskId.getOneBased()) + " ");
+        sb.append(PREFIX_MEMBER_INDEX_DEL + Integer.toString(memberId.getOneBased()));
         return sb.toString();
     }
 }

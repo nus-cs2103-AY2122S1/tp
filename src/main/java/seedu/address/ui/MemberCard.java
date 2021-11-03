@@ -31,7 +31,7 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label index;
     @FXML
     private Label phone;
     @FXML
@@ -49,7 +49,7 @@ public class MemberCard extends UiPart<Region> {
     public MemberCard(Member member, int displayedIndex) {
         super(FXML);
         this.member = member;
-        id.setText(displayedIndex + ". ");
+        index.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
         phone.setText("Phone: " + member.getPhone().value);
         member.getAddress().ifPresentOrElse(a -> {
@@ -95,7 +95,7 @@ public class MemberCard extends UiPart<Region> {
 
         // state check
         MemberCard card = (MemberCard) other;
-        return id.getText().equals(card.id.getText())
+        return index.getText().equals(card.index.getText())
                 && member.equals(card.member);
     }
 }

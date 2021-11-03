@@ -1,7 +1,7 @@
 package seedu.address.logic.parser.member;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.member.MdelCommand;
@@ -22,12 +22,12 @@ public class MdelCommandParser implements Parser<MdelCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MdelCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER_ID);
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEMBER_ID)
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER_INDEX);
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEMBER_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MdelCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_INDEX).get());
         return new MdelCommand(index);
     }
 
