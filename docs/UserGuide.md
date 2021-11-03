@@ -177,8 +177,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
 
 
-* Managera cannot accept duplicate participants. A participant is considered duplicate if their attributes,
-  name and birthdate, are identical with those of an existing participant.
+* Managera cannot accept duplicate participants. A participant is considered duplicate if their attributes, name
+  and birthdate, are identical with those of an existing participant.
 * If a participant to be added shares identical name with an existing participant, but one of them lacks a 
   birthdate, they are treated as two different participants. (The new participant will be added)
 
