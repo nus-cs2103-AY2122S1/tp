@@ -64,9 +64,10 @@ public class StatsDisplay extends UiPart<Stage> {
 
         @Override
         public String toString(Number object) {
-            if(object.intValue()!=object.doubleValue())
+            if (object.intValue() != object.doubleValue()) {
                 return "";
-            return ""+(object.intValue());
+            }
+            return "" + (object.intValue());
         }
 
         @Override
