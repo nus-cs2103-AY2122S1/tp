@@ -6,6 +6,7 @@ import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT_FOUND;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_DELETE_REMARK;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
@@ -51,7 +52,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GRADE + "GRADE] "
-            + "[" + PREFIX_REMARK + "REMARK]...\n"
+            + "[" + PREFIX_REMARK + "REMARK]... "
+            + "[" + PREFIX_DELETE_REMARK + "REMARK_TO_DELETE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
