@@ -2,6 +2,7 @@ package seedu.programmer.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,15 @@ public class CommandHistoryTest {
     }
 
     @Test
+    public void add_sampleCommands_indexInvariantHold() {
+        commandHistory.add("first command");
+        commandHistory.add("second command");
+        commandHistory.add("123");
+        commandHistory.add("add");
+        assertTrue(commandHistory.isAtLastIndex());
+    }
+
+    @Test
     public void add_differentInputs_notEqual() {
         commandHistory.add("test input one");
         commandHistory.add("test input two");
@@ -53,6 +63,10 @@ public class CommandHistoryTest {
         assertEquals(commandHistory.getPrevCommand(), "one");
 
         // Retrieve the next previous command -> return the current command
+        assertEquals(commandHistory.getCurrentCommand(), "one");
+
+        // Simulate multiple up keys pressed
+        assertEquals(commandHistory.getCurrentCommand(), "one");
         assertEquals(commandHistory.getCurrentCommand(), "one");
     }
 
