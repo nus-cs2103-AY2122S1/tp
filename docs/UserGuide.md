@@ -283,6 +283,11 @@ in this case, all contacts which are tagged as "friends".
 
 :page_with_curl: Format: ```clear```
 
+<div markdown="block" class="alert alert-info">
+**:warning: Clearing all contacts:**<br>
+This command is irreversible and all contacts from the list will be deleted with no way of recovering them.
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### <u>Tasks (When on tasks tab)</u>
@@ -419,9 +424,10 @@ parameter (date/time, people, etc) matches the search term.
 The above screenshot is an example of how you can use the
 _Find Command_ to find for all tasks that occur on 07:00 PM.
 
-:page_with_curl: Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
+:page_with_curl: Format: ```find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
 :grey_question:
+* At least one of the fields must be present.
 * The search is case-insensitive. e.g `find t/HOMEWORK` will match the `homework` tag.
 * Tasks matching all keywords will be returned (i.e. AND search). e.g. ```find dt/1900 t/homework``` will return
   only tasks which both have time `1900` AND the tag `homework`.
@@ -467,6 +473,10 @@ the current Date/Time on your computer. These tasks are sorted chronologically a
 
 :page_with_curl: Format: ```clear```
 
+<div markdown="block" class="alert alert-info">
+**:warning: Clearing all tasks:**<br>
+This command is irreversible and all tasks from the list will be deleted with no way of recovering them.
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 #### <u>Handling Date and Time of tasks</u>
