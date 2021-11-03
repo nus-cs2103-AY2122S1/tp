@@ -128,7 +128,7 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
      */
     public static boolean isValidGroupName(String test) {
         // TODO: Check if this is the only condition.
-        return !test.matches(".*[:/_].*");
+        return !test.matches(".*[:/_].*") && !test.isEmpty();
     }
 
     @Override

@@ -2,6 +2,7 @@ package seedu.notor.logic.commands.person;
 
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPNAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.notor.logic.parser.CliSyntax.PREFIX_SUBGROUP;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +24,7 @@ public class PersonRemoveGroupCommand extends PersonCommand {
             + COMMAND_DESCRIPTION
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_GROUPNAME + "GROUP\n"
+            + PREFIX_GROUPNAME + "GROUP" + "[" + PREFIX_SUBGROUP + "SUBGROUP" + "]" + "\n"
             + "Example: " + PersonCommand.COMMAND_WORD
             + " 1 /" + COMMAND_WORD + " "
             + PREFIX_GROUPNAME + "Team";

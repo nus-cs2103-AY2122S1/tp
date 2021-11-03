@@ -13,6 +13,8 @@ import seedu.notor.logic.parser.ArgumentMultimap;
 import seedu.notor.logic.parser.ArgumentTokenizer;
 import seedu.notor.logic.parser.Prefix;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.group.SubGroup;
+import seedu.notor.model.group.SuperGroup;
 
 /**
  * Parses input arguments to create a person command.
@@ -44,6 +46,15 @@ public class PersonAddGroupCommandParser extends PersonCommandParser {
         String subGroupName = null;
         if (argMultimap.getValue(PREFIX_SUBGROUP).isPresent()) {
             subGroupName = argMultimap.getValue(PREFIX_SUBGROUP).get();
+        }
+
+        // TODO: Check here for validty after Yukun allow special characters.
+        if (!SuperGroup.isValidGroupName(groupName)) {
+            throw new ParseException("Please input a valid group.");
+        }
+
+        if (subGroupName != null && !SubGroup.isValidGroupName(subGroupName)) {
+            throw new ParseException("Please input a valid subgroup.");
         }
 
         if (subGroupName != null) {

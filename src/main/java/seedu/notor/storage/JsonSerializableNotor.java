@@ -102,7 +102,6 @@ class JsonSerializableNotor {
             }
             for (String subGroup : person.getDisplaySubGroups()) {
                 String[] split = subGroup.split("_");
-                // TODO: Create method to check for validity
                 notor.findSuperGroup(split[0]).addPersonToSubGroup(split[1], person);
             }
 
