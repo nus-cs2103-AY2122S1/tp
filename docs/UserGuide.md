@@ -13,7 +13,7 @@ Ailurus is catered for people that are familiar with [Command Line Interfaces](h
 --------------------------------------------------------------------------------------------------------------------
 
 ## Welcome to the Ailurus User Guide
-This User Guide aims to introduce new users to Ailurus, while also providing them with a comprehensive guide to all the commands in Ailurus. This User Guide aims to introduce new users to Ailurus, while also providing them with a comprehensive guide to all the commands in Ailurus.
+This User Guide aims to introduce new users to Ailurus, while also providing them with a comprehensive guide to all the commands in Ailurus.
 
 Texts highlighted in light-blue such as [this](https://en.wikipedia.org/wiki/This_(computer_programming)) will direct the user to areas where more information about the highlighted text can be found. This is useful especially when the user wants to navigate to a certain section via the Table of Contents.
 
@@ -38,7 +38,7 @@ open the help window.<br>
 
    * **`madd`**`/n John Doe /ph 98765432 /em johnd@example.com /a John street, block 123, #01-01` : Adds a contact named `John Doe` to Ailurus.
 
-   * **`mdel`**`3` : Deletes the 3rd contact shown in the current list of people.
+   * **`mdel`**`/m 3` : Deletes the 3rd contact shown in the current list of people.
 
    * **`exit`** : Exits the app.
 
