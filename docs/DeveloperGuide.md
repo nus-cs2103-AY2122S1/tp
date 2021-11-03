@@ -1204,6 +1204,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **FXML**: FX Markup Language, the format in which the GUI layout is stored in
 * **Java 11**: Version of the programming language, used in the coding of this software
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **MSS**: Main success scenario  
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Remark**: A comment/note about a specific contact
   **Tag** A short note about a specific contact, used for sorting and grouping contacts
