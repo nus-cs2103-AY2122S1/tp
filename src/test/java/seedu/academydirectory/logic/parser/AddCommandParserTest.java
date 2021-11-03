@@ -21,8 +21,8 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.TELEGRAM_DES
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_RECURSION;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_STREAMS;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -45,7 +45,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_RECURSION).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -73,7 +73,7 @@ public class AddCommandParserTest {
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple tags - all accepted
-        Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_TAG_RECURSION, VALID_TAG_STREAMS)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleTags));
@@ -133,7 +133,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_RECURSION, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB,

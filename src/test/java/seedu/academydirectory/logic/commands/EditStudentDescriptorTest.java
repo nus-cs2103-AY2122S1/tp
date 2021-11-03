@@ -7,7 +7,7 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_STREAMS;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_STREAMS).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

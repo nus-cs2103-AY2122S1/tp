@@ -3,7 +3,7 @@ package seedu.academydirectory.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_RECURSION;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 import static seedu.academydirectory.testutil.TypicalStudents.ALICE;
 import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
@@ -45,7 +45,7 @@ public class AcademyDirectoryTest {
     @Test
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
-        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_RECURSION)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
         AcademyDirectoryStub newData = new AcademyDirectoryStub(newStudents);
@@ -72,7 +72,7 @@ public class AcademyDirectoryTest {
     @Test
     public void hasStudent_studentWithSameIdentityFieldsInAcademyDirectory_returnsTrue() {
         academyDirectory.addStudent(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_RECURSION)
                 .build();
         assertTrue(academyDirectory.hasStudent(editedAlice));
     }

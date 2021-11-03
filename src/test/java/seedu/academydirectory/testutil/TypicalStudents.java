@@ -6,8 +6,8 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_NAME_A
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_RECURSION;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_STREAMS;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 
@@ -26,15 +26,15 @@ public class TypicalStudents {
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withTelegram("@alice").withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("recursion").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withTelegram("@johnd").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("wishfulThinking", "functions").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withTelegram("@heinz").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withTelegram("@cornelia")
-            .withTags("friends").build();
+            .withTags("higherOrderFunctions").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withTelegram("@werner").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
@@ -51,10 +51,10 @@ public class TypicalStudents {
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withTelegram(VALID_TELEGRAM_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_RECURSION).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTelegram(VALID_TELEGRAM_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_STREAMS, VALID_TAG_RECURSION)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

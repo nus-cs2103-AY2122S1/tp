@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_RECURSION;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_STREAMS;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 import static seedu.academydirectory.testutil.TypicalStudents.ALICE;
@@ -33,7 +34,7 @@ public class StudentTest {
 
         // same name, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_RECURSION).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -85,7 +86,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_STREAMS).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
