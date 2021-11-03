@@ -21,7 +21,6 @@ public class Student {
 
     // Data fields
     private final StudentId studentId;
-    //private final Set<Tag> tags = new HashSet<>();
     private UniqueTaskList taskList;
 
     /**

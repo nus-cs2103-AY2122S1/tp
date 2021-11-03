@@ -54,7 +54,7 @@ public class TypicalTasks {
                 .withModule(moduleName)
                 .withId("T3")
                 .withName("Assignment 3")
-                .withDeadline("2021-11-31")
+                .withDeadline("2021-11-30")
                 .build();
 
         Task task4 = new TaskBuilder()
