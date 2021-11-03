@@ -37,7 +37,7 @@ class TaskTest {
         assertFalse(TASK1.isSameTask(TASK2));
 
         // same module but different ID -> return false
-        Task taskDifferentId = new TaskBuilder().withModule(MODULE_NAME_0).withId("T0")
+        Task taskDifferentId = new TaskBuilder().withModule(MODULE_NAME_0).withId("T111")
                 .withName(VALID_TASK_NAME_0).withDeadline(VALID_TASK_DEADLINE_0).build();
         assertFalse(TASK1.isSameTask(taskDifferentId));
 
