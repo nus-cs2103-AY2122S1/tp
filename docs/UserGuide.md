@@ -596,8 +596,10 @@ Format: `remind`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-* Reminder does not refresh the list automatically. 
-* Type `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to refresh the list of upcoming lessons.
+  <ul>
+    <li>Reminder does not refresh the list automatically.</li>
+    <li>Type `remind`, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> to refresh the list of upcoming lessons.</li>
+  </ul>
 </div>
 
 <div style="page-break-after: always;"></div>
