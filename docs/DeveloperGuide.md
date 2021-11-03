@@ -571,6 +571,7 @@ _{more aspects and alternatives to be added}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
