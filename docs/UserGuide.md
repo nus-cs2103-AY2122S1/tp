@@ -17,7 +17,7 @@ Are you a developer? Make sure to check out our Developer Guide too! You can fin
 2. [Using this guide](#using-this-guide)
 3. [Quick start](#quick-start)
 4. [Features](#features)
-   1. [Viewing help](#help)
+   1. [Viewing help `help`](#help)
    2. [Modify](#adding-a-person-add)
        1. [Adding a person `add`](#adding-a-person-add)
        2. [Adding tags to persons `addt`](#adding-tags-addt)
@@ -37,8 +37,10 @@ Are you a developer? Make sure to check out our Developer Guide too! You can fin
       2. [Exporting contacts `export`](#exporting-contacts-export)
    5. [Advance](#aliasing-commands-alias)
       1. [Aliasing commands `alias`](#aliasing-commands-alias)
-   6. [Exiting the program `exit`](#exiting-the-program-exit)
-   7. [Saving the data](#saving-the-data)
+   6. [General](#exiting-the-program-exit)
+      1. [Exiting the program `exit`](#exiting-the-program-exit)
+      2. [Saving the data](#saving-the-data)
+      3. [Command History](#command-history)
 5. [Parameter Constraints](#parameter-constraints)
    1. [`n/NAME`](#nname)
    2. [`g/GENDER`](#ggender)
@@ -54,7 +56,7 @@ Are you a developer? Make sure to check out our Developer Guide too! You can fin
 6. [FAQ](#faq)
 7. [Glossary](#glossary)
 8. [Authors](#authors)
-9. [Command summary](#command-summary)
+9. [Command Summary](#command-summary)
    1. [General](#general)
    2. [Modify](#modify)
    3. [View](#view)
@@ -124,11 +126,11 @@ If double-click does not work, you can go to the terminal and type in `java -jar
 
 * Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
 Some example commands you can try:
-    * **`add`** `n/Amy Tan tg/W08 nat/Singaporean` : Adds a contact named `Amy Tan` to Socius, together with her tutorial group and nationality.
+    * **`add`** `n/Amy Tan tg/W08 nat/Singaporean` : Adds a contact named `Amy Tan` to list, together with her tutorial group and nationality.
 
     * **`delete`** `3` : Deletes the person at index 3 in the current list.
 
-    * **`find`** : `g/f nat/Singaporean` : Finds contacts of all female Singaporeans in Socius.
+    * **`find`** : `g/f nat/Singaporean` : Finds contacts of all female Singaporeans.
 
     * **`list`** : Lists all contacts.
 
@@ -173,14 +175,17 @@ You can view the full list of commands available on Socius with the `help` comma
 
 Format: **`help`**
 
+![Help Command](images/HelpCommand.png)
+*After execution of Help Command: **`help`***
+
 ### Adding a person: `add`
 
-If you want to add a new person into *Socius*, you can use the 'add' command.
+If you want to add a new person into Socius, you can use the `add` command.
 
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIAL HANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
+The [Parameter Constraints](#parameter-constraints) section shows the constraints for each parameter.
 </div>
 
 * Only the `NAME` field of a person is _compulsory_, other fields are _optional_.
@@ -194,8 +199,6 @@ Examples:
 
 * **`add`** `n/Amy Tan` adds `Amy Tan` to the list.
 * **`add`** `n/Benedict p/98765432 e/ben@example.com g/M` adds `Benedict`  to the list together with his phone number, email and gender.
-* **`add`** `n/Cindy t/friend e/cindy@example.com p/1234567 tg/T07` adds `Cindy` to the list together with her tag, email, phone number and tutorial group.
-* **`add`** `n/David Lim nat/Singaporean s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
 ![Add Command Example](images/AddEnerst.png)
 *After execution of Add Command: **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst`*
@@ -230,6 +233,8 @@ For example:
 
 * **`addt`** `all t/friend` followed by **`find`** `g/f` adds the friend tag to all persons in the filtered list of female contacts.
 * **`addt`** `all t/teammate t/neighbour` adds the teammate and neighbour tags to all persons in the displayed person list.
+![result for 'addt all t/teammate t/neighbour'](images/AddTagsToAll.png)
+*After execution of Add Tag Command: **`addt`** `all t/teammate t/neighbour`*
 
 ### Adding remark to a person: `remark`
 
@@ -247,6 +252,8 @@ Examples:
 
 * **`remark`** `1 r/She likes coding` adds the remark `She likes coding` to the person at index 1.
 * **`remark`** `2` clears the remark of the person at index 2.
+![result for 'remark 2'](images/RemoveRemark.png)
+*After execution of Remark Command: **`remark`** `2`*
 
 ### Editing a person: `edit`
 
@@ -325,14 +332,13 @@ Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
 * At least one `KEYWORD` must be provided.
 * `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
-* As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
-* Persons matching at least one keyword will be deleted (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
-  return `Hans Gruber`, `Bo Yang`)
+* Persons matching all keywords will be deleted (i.e. `AND` search).
 
 Examples:
 
-* **`deletem`** `n/Alex` deletes `alex` and `Alexandra`.
-* **`deletem`** `n/alex n/david` deletes `Alex Yeoh`, `David Li`.
+* **`deletem`** `n/jia ling` deletes `Zhong Jia Ling` and `Oon Jia Ling`.
+![result for 'deletem n/jia ling'](images/DeleteJiaLing.png)
+*After execution of Delete Multiple Command: **`deletem`** `n/jia ling`*
 
 ### Deleting tags: `deletet`
 You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
@@ -351,6 +357,8 @@ For example:
 
 * **`deletet`** `1 t/friend` followed by **`find`** `g/f` deletes the friend tag from the person at index 1 in the filtered list of female contacts.
 * **`deletet`** `2 t/teammate t/neighbour` deletes the teammate and neighbour tags from person at index 2 in the displayed person list.
+![result for 'deletet 2 t/teammate t/neighbour'](images/DeleteTags.png)
+*After execution of Delete Tag Command: **`deletet`** `2 t/teammate t/neighbour`*
 
 Alternatively, **`deletet`** `all [t/TAG]…​`
 * Delete tags of everybody in the list.
@@ -395,9 +403,7 @@ Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
 * At least one `KEYWORD` must be provided.
 * The `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
-* As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
-* Persons matching at least one keyword will be returned (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
-  return `Hans Gruber`, `Bo Yang`)
+* Persons matching all keywords will be returned (i.e. `AND` search).
 
 Examples:
 
@@ -422,17 +428,21 @@ Format: **`sort`** `FIELD_PREFIX/`
 Examples:
 
 * **`sort`** `n/` sorts persons by name in ascending alphabetical order.
-* **`sort`** `p/` sorts persons by phone number in ascending numeric order.
+* **`sort`** `tg/` sorts persons by tutorial group in ascending alphanumeric order.
+![result for 'sort tg/'](images/SortbyTutorialGroup.png)
+*After execution of Sort Command: **`sort`** `tg/`*
 
 ### Viewing statistics: `stat`
 
-You can view the gender and nationality statistics of a specified tutorial group.
+You can view the nationality statistics of a specified tutorial group.
 
 Format: **`stat`** `TUTORIAL GROUP`
 
 Examples:
 
-* **`stat`** `T09` computes and shows the gender and nationality statistics of tutorial group `T09`.
+* **`stat`** `T08` computes and shows the nationality statistics of tutorial group `T08`.
+![result for 'stat T08'](images/StatforT08.png)
+*After execution of Stat Command: **`stat`** `T08`*
 
 ### Importing contacts: `import`
 
@@ -464,14 +474,15 @@ You can create command shortcut by aliasing it with custom `KEYWORD`.
 
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
+* `KEYWORD` cannot be same as command keywords such as `add`.
 * Exactly one `KEYWORD` must be provided.
 * The order of `KEYWORD` and `COMMAND` does not matter.
-* If `KEYWORD` coincides with command keyword such as `add`, it will not override the original command.
 
 Examples:
 
-* **`alias`** `a/nonLocal c/find nat/Indonesian nat/Malaysian` map the keyword `nonLocal` to the stated command.
-* **`alias`** `a/add c/add n/James p/12345678 nat/Malaysian` map the keyword `add` to the stated command without replacing the original `add` command keyword.
+* **`alias`** `a/Singaporeans c/find nat/Singaporean tg/T08` map the keyword `Singaporeans` to the stated command.
+![result for 'alias a/Singaporeans c/find nat/Singaporean tg/T08'](images/AliasSingaporeans.png)
+*After execution of Alias Command: **`alias`** `a/Singaporeans c/find nat/Singaporean tg/T08`*
 
 ### Exiting the program: `exit`
 
@@ -486,7 +497,7 @@ Therefore, there is no need to save manually. The data will be automatically loa
 
 ### Command History
 
-Use up/down arrow to navigate through command history. This is useful if the command you are going to type only differs slightly from a command you have previously typed.
+Use up/down arrow keys to navigate through command history. This is useful if the command you are going to type only differs slightly from a command you have previously typed, or if you would like to revisit your previous commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -597,7 +608,7 @@ If the format of your data file is invalid, Socius will discard all data and sta
 
 ## Authors
 
-This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
+This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2022S1-CS2103T-W08-4.
 
 --------------------------------------------------------------------------------------------------------------------
 
