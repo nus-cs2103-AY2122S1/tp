@@ -112,8 +112,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return equals(otherPerson);
     }
 
     /**
