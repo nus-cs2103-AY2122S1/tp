@@ -411,10 +411,14 @@ There are currently 4 custom predicates implemented in FAST:
 - `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
 - `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
 
-`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
-`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
-`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
-`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
+`NameContainsQueriesPredicate` implemented by running the person's name through a for-loop to see if any word starts with the query.
+`PriorityPredicate` implemented by running the person's tags through a for-loop and checking if any of them match the given priority.
+`TagMatchesKeywordPredicate` implemented by running the person's tags through a for-loop and checking if any of them match the given keyword.
+`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`. The person's remark is checked to see if it contains the given query.
+
+Each `Predicate` has a `test` method which will be called on every `Person` in the list to see if they fit the search.
+If the `test` method returns `true`, that `Person` will be displayed in the search results.
+![Find_Command_Class_Diagram](images/findcommandpredicates.png)
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 
@@ -422,11 +426,14 @@ Step 1. The user launches the application for the first time. <br>
 Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
 calls `FastParser::parseCommand` to parse the given input. <br>
 Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
-`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
+`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate` 
+containing a `List` of all the search queries (only "john" in this case) <br>
 Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate
 the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
 of the search.<br>
+
+![Find_Command_Sequence_Diagram](images/findcommandsequencediagram.png)
 
 #### Design Considerations
 
