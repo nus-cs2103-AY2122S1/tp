@@ -52,4 +52,4 @@ Given below are my contributions to the project.
   * Raised concerns about implementation of certain features or provide alternatives: [#39](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/39), [#95](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/95), [#114](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/114)
   
 * **Contributions beyond the project team**:
-    * Reviewed and reported an above average number of bugs in other team's product [link](https://github.com/chuangzhequan/ped/issues)
+    * Reviewed and reported an above average number of bugs in other team's product: [link](https://github.com/chuangzhequan/ped/issues)
