@@ -41,6 +41,7 @@ public class DeleteMemberCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
                 false, false, true);
     }

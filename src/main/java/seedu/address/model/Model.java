@@ -151,6 +151,7 @@ public interface Model {
      * Allocates members into facilities.
      *
      * @param predicate the condition in which specifies the members to allocate.
+     * @param dayNumber the day on which to allocate the members.
      * @return number of members left unallocated, -1 if zero members to allocate.
      */
     int split(Predicate<Person> predicate, int dayNumber);

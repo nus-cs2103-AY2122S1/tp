@@ -35,9 +35,10 @@ public class AllocateMemberCommand extends Command {
     /**
      * @param memberIndex of the member to be allocated to a facility.
      * @param facilityIndex of the facility to allocate the member to.
+     * @param day to allocate the member to the facility.
      */
     public AllocateMemberCommand(Index memberIndex, Index facilityIndex, DayOfWeek day) {
-        requireAllNonNull(memberIndex, facilityIndex);
+        requireAllNonNull(memberIndex, facilityIndex, day);
         this.memberIndex = memberIndex;
         this.facilityIndex = facilityIndex;
         this.day = day;

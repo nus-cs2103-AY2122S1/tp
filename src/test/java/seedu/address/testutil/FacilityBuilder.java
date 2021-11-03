@@ -23,7 +23,7 @@ public class FacilityBuilder {
     public static final String DEFAULT_LOCATION = "Tampines Hub Badminton Hall";
     public static final String DEFAULT_TIME = "1700";
     public static final String DEFAULT_CAPACITY = "5";
-    private static final Map<DayOfWeek, List<Person>> DEFAULT_ALLOCATIONS = new EnumMap<>(DayOfWeek.class);
+    private Map<DayOfWeek, List<Person>> defaultAllocations = new EnumMap<>(DayOfWeek.class);
 
     private FacilityName facilityName;
     private Location location;
@@ -40,9 +40,9 @@ public class FacilityBuilder {
         this.time = new Time(DEFAULT_TIME);
         this.capacity = new Capacity(DEFAULT_CAPACITY);
         for (DayOfWeek day : DayOfWeek.values()) {
-            DEFAULT_ALLOCATIONS.put(day, new ArrayList<>());
+            defaultAllocations.put(day, new ArrayList<>());
         }
-        this.allocationMap = new AllocationMap(DEFAULT_ALLOCATIONS);
+        this.allocationMap = new AllocationMap(defaultAllocations);
     }
 
     /**
@@ -53,7 +53,7 @@ public class FacilityBuilder {
         this.location = facilityToCopy.getLocation();
         this.time = facilityToCopy.getTime();
         this.capacity = facilityToCopy.getCapacity();
-        this.allocationMap = facilityToCopy.getAllocationMap();
+        this.allocationMap = facilityToCopy.getAllocationMapClone();
     }
 
     /**
@@ -85,6 +85,14 @@ public class FacilityBuilder {
      */
     public FacilityBuilder withCapacity(String capacity) {
         this.capacity = new Capacity(capacity);
+        return this;
+    }
+
+    /**
+     * Sets the {@code AllocationMap} of the {@code Facility} that we are building.
+     */
+    public FacilityBuilder withAllocationMap(Map<DayOfWeek, List<Person>> allocationMap) {
+        this.allocationMap = new AllocationMap(allocationMap);
         return this;
     }
 

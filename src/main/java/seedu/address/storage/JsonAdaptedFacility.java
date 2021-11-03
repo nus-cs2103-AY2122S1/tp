@@ -71,7 +71,7 @@ public class JsonAdaptedFacility {
      * @throws IllegalValueException if there were any data constraints violated in the adapted facility.
      */
     public Facility toModelType() throws IllegalValueException {
-        final Map<DayOfWeek, List<Person>> personsAllocatedMap = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Person>> personsAllocatedMap = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             personsAllocatedMap.put(day, new ArrayList<>());
             for (JsonAdaptedPerson adaptedPerson : allocationMap.get(day)) {
