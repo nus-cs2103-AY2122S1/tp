@@ -266,6 +266,10 @@ public class TaskDate {
                 return false;
             }
             isSameDate = date.equals(otherTaskDate.getDate());
+        } else {
+            if (this.hasDate()) {
+                return false;
+            }
         }
 
         if (otherTaskDate.hasTime()) {
@@ -273,7 +277,12 @@ public class TaskDate {
                 return false;
             }
             isSameTime = time.equals(otherTaskDate.getTime());
+        } else {
+            if (this.hasTime()) {
+                return false;
+            }
         }
+
 
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls

@@ -157,28 +157,37 @@ public class TaskList implements Iterable<Task> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the index of task to be edited.
+     *
+     * @param userIndexZeroBase Index of user input.
+     * @param taskToEdit Task object to edit.
+     * @param filteredList The current filtered Task List.
+     * @return int of index to edit.
+     */
     public int getIndexToEdit(int userIndexZeroBase, Task taskToEdit, List<Task> filteredList) {
-        ObservableList<Task> copy = internalUnmodifiableList;
-        System.out.println("filteredsize: " + internalUnmodifiableList.size());
-        FilteredList<Task> filteredMainTaskList = copy.filtered(task -> {System.out.println(task); System.out.println(task.equals(taskToEdit)); return task.equals(taskToEdit);});
-        System.out.println("size " + filteredMainTaskList.size());
+        FilteredList<Task> filteredMainTaskList = internalUnmodifiableList.filtered(task -> task.equals(taskToEdit));
 
         if (filteredMainTaskList.size() < 2) {
-            System.out.println("modlist: " + internalUnmodifiableList.indexOf(taskToEdit));
-            return  internalUnmodifiableList.indexOf(taskToEdit);
+            return internalUnmodifiableList.indexOf(taskToEdit);
         }
+        ArrayList<Task> filteredArray = new ArrayList<>(internalUnmodifiableList);
+        ArrayList<Task> arrayOfTasks = new ArrayList<>(filteredList);
+        arrayOfTasks = new ArrayList<>(arrayOfTasks.subList(0, userIndexZeroBase));
+        arrayOfTasks.removeIf(task -> !task.equals(taskToEdit));
+        int duplicates = arrayOfTasks.size();
 
-        ArrayList<Task> filteredArray = new ArrayList<>(internalUnmodifiableList); //left list
-        ArrayList<Task> arrayOfTasks = new ArrayList<>(filteredList); //right list
-        arrayOfTasks.subList(0, userIndexZeroBase); //top half of right list
-        arrayOfTasks.removeIf(task -> !task.equals(taskToEdit)); //clear right list of non dup
-        int n = arrayOfTasks.size(); //no. of additional dup
-
-        for (int i = 0; i < n; i ++) {
-            int index = filteredArray.indexOf(taskToEdit);
-            filteredArray.add(index, new Task());
+        int countDuplicate = 0;
+        int indexToEdit = 0;
+        for (int i = 0; i < filteredArray.size(); i++) {
+            if (countDuplicate == duplicates) {
+                indexToEdit = i;
+            }
+            if (filteredArray.get(i).equals(taskToEdit)) {
+                countDuplicate++;
+            }
         }
-        return filteredArray.indexOf(taskToEdit) - 1;
+        return indexToEdit;
     }
 
     @Override
