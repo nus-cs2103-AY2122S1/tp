@@ -45,7 +45,7 @@ public class Capacity {
     public int getCapacityAsInt() {
         return Integer.parseInt(capacity);
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         return (obj == this)

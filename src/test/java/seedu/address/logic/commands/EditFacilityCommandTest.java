@@ -16,6 +16,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.DayOfWeek;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -26,11 +28,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facility.Facility;
-import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.FacilityBuilder;
-
-import java.time.DayOfWeek;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditFacilityCommand.
