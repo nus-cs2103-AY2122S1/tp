@@ -525,12 +525,11 @@ _{more aspects and alternatives to be added}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* is enrolled in CS2103T in NUS
-* is an international student who just came to Singapore
-* wish to meet new friends and form CS2103T project groups
+* is an NUS student enrolled in CS2103T
+* wishes to meet new friends and form CS2103T project groups
 
 **Value proposition**: Socius is a simple desktop app for managing CS2103T tutorial classmates’ contacts for
-international students, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
+CS2103T module-takers, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, Socius can get your contact management tasks done faster than
 traditional GUI apps.
 
@@ -580,7 +579,7 @@ otherwise)
 **MSS**
 
 1. User requests to add a person in the list
-2. AddressBook adds the person
+2. Socius adds the person
 
 Use case ends.
 
@@ -599,7 +598,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. Socius shows a list of persons
 3. User requests to edit the personal details of a specific person in the list
 4. Socius edits the personal details of the person
 
@@ -624,7 +623,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. Socius shows a list of persons
 3. User requests to delete a specific person in the list
 4. Socius deletes the person
 
@@ -793,7 +792,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Shutdown
 
-    1. Exit the application using the `exit` command, or close the window.
+    1. Exit the application using the `exit` command.
 
 ### Deleting a person
 
@@ -811,12 +810,42 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: -
+
+    1. Test case: `add n/Jon Snow p/98765432 g/M t/North`<br>
+       Expected: New person Jon Snow, along with parameters parsed, is added to the list.
+       Details of the added contact shown in the status message.
+
+    1. Test case: `add r/King of the North e/snowyjon@gmail.com`<br>
+       Expected: No person is added. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `add` <br>
+       Expected: Similar to previous.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Ensure that you have a `data` folder containing a file titled `addressbook.json` in the same directory as your jar file.
 
-1. _{ more test cases …​ }_
+    1. Simulate a missing file by deleting the `addressbook.json` file.
+
+    1. Re-Launch the application again.
+       Expected: Shows the GUI with a set of sample contacts and new file titled `addressbook.json` will be created in the `data` folder.  
+
+1. Dealing with corrupted data files
+
+    1. Prerequisites: Ensure that you have a `data` folder containing a file titled `addressbook.json` in the same directory as your jar file.
+
+    1. Simulate a corrupted file by editing the `addressbook.json` file.
+
+    1. Re-Launch the application again.
+       Expected: Shows the GUI with a set of sample contacts and upon shutdown, the `addressbook.json` file will be updated with the sample contacts.  
+
+
