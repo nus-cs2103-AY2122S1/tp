@@ -50,7 +50,7 @@ The third will open the help window and the last will exit the application.
 ### Viewing data
 
 Resident and Event information is organized in this panel. <br>
-You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#Viewing residents information))
+You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#viewing-residents-information--view))
 > Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
 > 
 > Vaccinated residents include the syringe icon towards the right-side of the card
@@ -62,7 +62,7 @@ You can view details about a resident/event by clicking on it. (Also achievable 
 ### Interacting
 
 This is where you can enter commands to interact with the data. <br>
-The [Command Suggestion](#Command suggestion) box will suggest parameters on typing. <br>
+The [Command Suggestion](#command-suggestion) box will suggest parameters on typing. <br>
 The result of executing the input command will be displayed the lower-most box.
 
 ![Ui](images/commandBox.png)
@@ -169,20 +169,21 @@ Shows a list of residents that match the provided keywords for different availab
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `r/`, `e`, `p/`, `f/` and `v/`
-* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#Listing residents by fet/collection deadlines) on how to make use of these fields.
+* Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
+* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
-    - Only full words will be matched e.g `Han` will not match `Hans`
+    - Only full words will be matched. e.g `Han` will not match `Hans`
     - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
   e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Searching by room:
+    - It is case-sensitive. Block letters must be capitalised.
     - A block can be used as a search. e.g `r/A`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
     - A full valid room can be used as a search. e.g `r/A210`
-* All other fields are subject to the same validity conditions as in the [Add Command](#Adding a resident's information)
+* All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -296,18 +297,25 @@ Adds a new event to the address book.
 Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]`
 
 * The combination of the 5 required parameters should be unique
+* `CAPACITY` is the maximum number of residents allowed in this event  
+* `DATE` is the date on which the event is held
+* `TIME` is the time at which the event is held
 * `RESIDENTS` can be included as all full names or all rooms
 * The number of residents cannot exceed to provided capacity
+* When adding multiple residents, each resident information is separated by a comma
+* The resident information is case-insensitive
 
 Examples:
 * `add n/Swim v/Swimming Pool c/10 d/28-10-2021 t/1500`
-* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201 a121`
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201`  
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201, a121`
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/John Doe, Jane Doe`
 
 #### Editing an event : `edit`
 
 Edits an existing event in the address book.
 
-Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
+Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CAPACITY]`
 
 * Edits the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
@@ -316,7 +324,22 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+*  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+
+#### Deleting an event : `delete`
+
+Deletes specified events from the address book.
+
+Format: `delete INDEX…`
+
+* Delete the events at the specified `INDEX…`.
+* Each index refers to the index number shown in the displayed event list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* Delete multiple events in a single command by inputting multiple indexes, each separated by a space.
+
+Examples:
+* `view` followed by `delete 1 2 3` deletes the first 3 events in the address book.
+* `find n/Football Training` followed by `delete 1` deletes the 1st event named Football Training in the results of the `find` command.
 
 #### Add residents to an event: `include`
 
@@ -399,7 +422,7 @@ A suggested string of parameters is displayed above the input box when a valid c
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book, including entries from the `Resident` Tab and the `Event` Tab. Data cleared cannot be retrieved and this command should be used with caution. A sample data can be retrieved by removing the `safeforhall.json` file from `/data`
 
 Format: `clear`
 
@@ -417,19 +440,37 @@ Format: `exit`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
-**View** | `view [INDEX]` <br> e.g. `view 30`
-**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `deadline k/f 15-8-2021 20-08-2021`
-**Find** | **Resident:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` <br><br> **Event:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/Swim d/28-10-2021`
-**Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
-**Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
-**Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` <br> e.g. `trace r/D201 d/2 t/4`
-**Import** | `import CSV_NAME` <br> e.g. `import safeforhall`
-**Export** | `export FILE_NAME` <br> e.g. `export closeContactsOfA123`
-**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
-**Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `exclude 1 r/A102, E416`
-**Switch** | `switch`
+### Resident Commands
+Command | Format | Examples
+--------|-------|----------
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**View** | `view [INDEX]`| `view 30`
+**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
+**Find** | `find [PREFIX/KEYWORD]...` | `find n/john alex v/false f/fass` <br>
+**Edit** | `edit INDEX… [FLAG/UPDATED_PARTICULARS]…` | `edit 1 2 3 v/true fd/20-10-2021` <br>
+**Delete** | `delete INDEX…` | `delete 1 2 3`
+**Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` | `trace r/D201 d/2 t/4`
+**Sort** | `TODO` | `TODO`
+**Import** | `import CSV_NAME` | `import safeforhall`
+**Export** | `export FILE_NAME` | `export closeContactsOfA123`
+
+### Event Commands
+Command | Format | Examples
+--------|-------|----------
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**View** | `view [INDEX]`| `view 30`
+**Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
+**Edit** | `edit INDEX [FLAG/UPDATED_PARTICULARS]…` | `edit 1 n/Football Training l/Field`
+**Delete** | `delete INDEX…` | `delete 1 2 3`
+**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` | `include 1 r/A102, E416`
+**Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` | `exclude 1 r/A102, E416`
+**Sort** | `TODO` | `TODO`
+
+### Commons
+Command | Format | Examples
+--------|-------|----------
 **Help** | `help`
+**Switch** | `switch`
+**Clear** | `clear`
 **Exit** | `exit`
+

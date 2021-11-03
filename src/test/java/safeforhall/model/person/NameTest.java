@@ -1,5 +1,6 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -46,5 +47,16 @@ public class NameTest {
         } catch (NoSuchMethodError e) {
             fail();
         }
+    }
+
+    @Test
+    public void checkCompareTo() {
+        Name n1 = new Name("ABC");
+        Name n2 = new Name("BCD");
+        Name n3 = new Name("ABC");
+
+        assertEquals(n1.compareTo(n2), -1);
+        assertEquals(n2.compareTo(n1), 1);
+        assertEquals(n3.compareTo(n1), 0);
     }
 }

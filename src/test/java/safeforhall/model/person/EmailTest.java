@@ -1,5 +1,6 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -74,5 +75,16 @@ public class EmailTest {
         } catch (NoSuchMethodError e) {
             fail();
         }
+    }
+
+    @Test
+    public void checkCompareTo() {
+        Email e1 = new Email("abc@gmail.com");
+        Email e2 = new Email("bcd@gmai.com");
+        Email e3 = new Email("abc@gmail.com");
+
+        assertEquals(e1.compareTo(e2), -1);
+        assertEquals(e2.compareTo(e1), 1);
+        assertEquals(e3.compareTo(e1), 0);
     }
 }

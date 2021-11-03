@@ -1,5 +1,6 @@
 package safeforhall.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
@@ -32,5 +33,16 @@ public class VenueTest {
         // valid venue
         assertTrue(Venue.isValidVenue("Football training"));
         assertTrue(Venue.isValidVenue("Frisbee training"));
+    }
+
+    @Test
+    public void checkCompareTo() {
+        Venue v1 = new Venue("A");
+        Venue v2 = new Venue("B");
+        Venue v3 = new Venue("a");
+
+        assertEquals(v1.compareTo(v2), -1);
+        assertEquals(v2.compareTo(v1), 1);
+        assertEquals(v3.compareTo(v1), 0);
     }
 }
