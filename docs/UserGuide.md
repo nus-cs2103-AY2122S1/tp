@@ -568,3 +568,7 @@ Action | Format | Examples
 * **Q:** How do I edit a lesson?
 
   **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
+
+* **Q:** How do I edit a remark?
+
+  **A:** To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks.
