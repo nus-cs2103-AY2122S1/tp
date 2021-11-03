@@ -89,7 +89,7 @@ class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasSameIdentity_success() {
         uniqueTaskList.add(TASK1);
-        Task editedTask = new TaskBuilder(TASK1).withName("t1").withDeadline("ddl").build();
+        Task editedTask = new TaskBuilder(TASK1).withName("t1").withDeadline("2021-11-03").build();
         uniqueTaskList.setTask(TASK1, editedTask);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
         expectedUniqueTaskList.add(editedTask);

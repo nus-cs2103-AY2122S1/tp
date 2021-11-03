@@ -23,7 +23,7 @@ class TaskDeadlineTest {
 
     @Test
     public void constructor_invalidDeadline_throwsIllegalArgumentException() {
-        String invalidDeadline = " ";
+        String invalidDeadline = "";
         assertThrows(IllegalArgumentException.class, () -> new TaskDeadline(invalidDeadline));
     }
 
