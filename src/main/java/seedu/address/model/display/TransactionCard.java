@@ -49,7 +49,7 @@ public class TransactionCard extends UiPart<Region> {
 
         Double sp = transaction.getOrderItems().stream()
                 .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
-        totalPrice.setText(String.format("Total price: $.2f", sp));
+        totalPrice.setText(String.format("Total price: $%.2f", sp));
         totalItems.setText(String.format("Total items: %d", transaction.getOrderItems().size()));
     }
 

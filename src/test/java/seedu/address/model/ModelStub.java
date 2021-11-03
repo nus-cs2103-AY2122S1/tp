@@ -134,6 +134,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void initialiseTransactions() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setOrder(Order order) {
         throw new AssertionError("This method should not be called.");
     }
@@ -190,6 +195,11 @@ public class ModelStub implements Model {
 
     @Override
     public BookKeeping getBookKeeping() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void initialiseBookKeeping() {
         throw new AssertionError("This method should not be called.");
     }
 }
