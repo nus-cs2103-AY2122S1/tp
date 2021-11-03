@@ -219,9 +219,15 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
+  
+* You can delete all tags of a student by typing `t/` without any arguments. 
 
-* You can delete all tags of a student by typing `t/` without any arguments. If you add other tags along with `t/`, `t/` will be interpreted as an empty tag.<br>
+<div markdown="span" class="alert alert-primary">**:information_source: Note about tags:**<br>
+
+If you add other tags along with `t/`, `t/` will be interpreted as an empty tag.<br>
   e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
+
+</div>
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -345,24 +351,27 @@ A lesson can be categorised into 2 types:
 1. A **weekly** recurring lesson
 2. A one-off makeup lesson.
 
+A lesson can be identified by the index number shown in the lesson list of the student.
+
 The essential fields for a lesson are indicated by the presence of the '*'. The rest of the fields are optional.
 
-Field | Prefix | Constraints | Examples | Remark|
-------------------|-------|-----------| --------| -----|
-*Start date |`date/`| Dates should be of the format dd MMM yyyy and adhere to the following constraints:<br/>1. dd and yyyy are numerical characters.<br/>2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec<br/>3. Must be a valid date for the year."|`date/20 jan 2022`<br/>`date/4 nov 2000`| Dates are case-insensitive and allows single digit day without the leading zero.|
-*Time range        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br/>2. Lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` | |
-*Subject          | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br/> `subject/Language Arts` | |
-*Lesson rate      | `rates/` | Money-related fields such as lesson rate should be formatted with a decimal point '.' as a separator between the dollars and cents, and adhere to the following constraints:<br/>1. Lesson rates should only contain numbers and at most one decimal point.<br/>2. The lesson rate should not start or end with a decimal point and should have at most two decimal places. | `rates/37.50`<br/>`rates/40` | The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br/> |
-Recurrence        | `recurring/` | This prefix takes in an optional parameter, end date, that signifies the end of the recurrence. The end date constraints follows the start date constraints. An additional constraint is that the end date cannot be earlier than the start date | `recurring/`<br/>`recurring/30 Nov 2100` |  |
-Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br/> `hw/Assignment 5` | |
-Outstanding fees  | `f/` | Constraints for fees follow that of lesson rates. | `f/50` | Refer to more details in this [section](#managing-lesson-fees) |
+Field | Prefix | Constraints | Examples | 
+------------------|-------|-----------| --------| 
+*Start date |`date/`| Dates follow the `dd MMM yyyy` format– a single or double digit day, a three-letter case-insensitive abbreviation of the month and a four-digit year, with spaces in-between. It must be a valid date for the year."|`date/20 jan 2022`<br/>`date/4 nov 2000`|
+*Time range        | `time/` | Lesson time range should be formatted as HHmm-HHmm and adhere to the following constraints:<br>1. Start time must be before end time.<br/>2. Lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` |
+*Subject          | `subject/` | Subject should only contain alphanumeric characters and spaces, and it should not be blank | `subject/Math`<br/> `subject/Language Arts` |
+*Lesson rate      | `rates/` | See [this note](#information_source-note-about-monetary-fieldsbr).<br/>The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.| `rates/37.50`<br/>`rates/40`|
+Recurrence        | `recurring/` | This prefix takes in an optional parameter, end date, that signifies the end of the recurrence. The end date constraints follows the start date constraints. An additional constraint is that the end date cannot be earlier than the start date | `recurring/`<br/>`recurring/30 Nov 2100` |
+Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br/> `hw/Assignment 5` |
+Outstanding fees  | `f/` | See [this note](#information_source-note-about-monetary-fieldsbr). | `f/50` | Refer to more details in this [section](#managing-lesson-fees) |
+
+* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit). 
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:**<br>
+### **:information_source: Note about monetary fields:**<br>
 
-* A lesson can be identified by the index number shown in the lesson list of the student.
-* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit).
+* For all monetary fields (lesson rates and outstanding fees), we follow the [Singapore convention](https://www.dfa.cornell.edu/treasurer/cash-management/processinginternational/intl-currency) of using a decimal point '.' to separate dollars and cents, The values of these fields should only contain numbers, with at most one decimal point, and two decimal places and should not start or end with a decimal point.
 
 </div>
 
@@ -406,14 +415,17 @@ Edits the specified lesson of the specified student in TAB with the indicated ch
 
 Additional fields to the ones in [Managing lessons](#managing-lessons) are listed below.
 
-Field | Prefix | Constraints | Examples | Remark|
-------------------|-------|-----------| --------| -----|
-Cancelled date |`cancel/`| Same constraints as other date fields.|`cancel/20 jan 2022`| The date to cancel must be a valid lesson date.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|
-Uncancelled date |`uncancel/` | Same constraints as other date fields. | `uncancel/20 jan 2022`|The date to uncancel must be an already cancelled date. | 
+Field | Prefix | Constraints | Examples |
+------------------|-------|-----------| --------|
+Cancelled date |`cancel/`| Same constraints as other date fields.<br/> The date to be cancelled must be a valid lesson date.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
+Uncancelled date |`uncancel/` | Same constraints as other date fields.<br/>The date to be uncancelled must be a date that has already been cancelled.| `uncancel/20 jan 2022`|
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
 * If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+
 * Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.
+
 </div>
 
 Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIMERANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
@@ -427,8 +439,14 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 * When editing homework, all existing pieces of homework of the lesson will be removed and replaced with the pieces of homework specified.<br>
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
-* You can delete all homework of a lesson by typing `hw/` without any arguments. If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br>
+* You can delete all homework of a lesson by typing `hw/` without any arguments. 
+
+<div markdown="span" class="alert alert-primary">**:information_source: Note about homework:**<br>
+
+If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br>
   e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
+
+</div>
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
