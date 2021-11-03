@@ -46,8 +46,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<String> nameStringList = argMultimap.getAllValues(PREFIX_NAME);
         if (areBlanksPresent(nameStringList)) {
-            String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "If you are "
-                    + "searching for " + "'n/John Doe', split them into 'n/John' and 'n/Doe' instead.";
+            String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "For example, "
+                    + "if you are " + "searching for " + "'n/John Doe', split them into 'n/John' "
+                    + "and 'n/Doe' instead.";
             throw new ParseException(nameFormatRequirementMessage);
         }
 
