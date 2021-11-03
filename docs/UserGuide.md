@@ -83,7 +83,7 @@ The table below are the interpretations of a few technical terms that you may en
 | Technical term  | What it means |
 | ------------- | ------------- |
 | CLI | The Command Line Interface (CLI) is the interface that accepts text input to execute the functions of **TuitiONE**. |
-| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. |
+| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. Graphics, icons, windows, menus, cursor and buttons are all components of a GUI. |
 | Parameter  | Parameter refers to the user input required after the user is prompted by the TuitiONE GUI  |
 
 #### General Symbols and Syntax
