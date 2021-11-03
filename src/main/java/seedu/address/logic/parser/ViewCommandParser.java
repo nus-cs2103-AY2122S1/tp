@@ -39,5 +39,4 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
         return new ViewCommand(predicate);
     }
-
 }
