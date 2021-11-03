@@ -525,12 +525,11 @@ _{more aspects and alternatives to be added}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* is enrolled in CS2103T in NUS
-* is an international student who just came to Singapore
-* wish to meet new friends and form CS2103T project groups
+* is an NUS student enrolled in CS2103T
+* wishes to meet new friends and form CS2103T project groups
 
 **Value proposition**: Socius is a simple desktop app for managing CS2103T tutorial classmates’ contacts for
-international students, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
+CS2103T module-takers, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, Socius can get your contact management tasks done faster than
 traditional GUI apps.
 
@@ -544,8 +543,8 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 | Priority          | As a …​           | I want to …​                                     | So that I can…​                                            |
 | :---------------- | :---------------- | :----------------------------------------------- | :--------------------------------------------------------- |
 |🔴 High|student|scroll through each user’s entry to access information about my classmates|have a basic understanding of my classmates background|
-|🔴 High|student|add new contacts|keep track of new people|
-|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from the address book|
+|🔴 High|student|add new contacts|keep track of new students|
+|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from my address book|
 |🔴 High|student|edit existing contacts|update any outdated contacts and customise my address book|
 |🔴 High|introvert student|obtain the information of all classmates|know more about them without having to chat with all of them personally|
 |🔴 High|first time user|see all the features / commands of the application|better understand how to use it|
@@ -555,22 +554,19 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 |🟡 Medium|impatient student|have a responsive interface|have a good user experience|
 |🟡 Medium|tutor|track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
 |🟡 Medium|tutor|track students with varying background|better spread out students with similar background into different groups|
-|🟡 Medium|student|find the address of my classmates to identify where they are staying|see who stays on campus and who does not|
 |🟡 Medium|student|find people with different skillsets|learn from others|
+|🟡 Medium|student|view all of my contact's social handles on a single platform|view their profile and easily contact them|
 |🟡 Medium|student|check teammates availability|make sure my teammates have same vacant timeslots as me|
-|🟡 Medium|student|differentiate classmates with different personalities|identify like minded people / people of certain qualities you hope to work with in the group project|
+|🟡 Medium|student|know my classmates' personalities|identify like minded people / people of certain qualities I hope to work with in the group project|
 |🟡 Medium|student|differentiate classmates from different countries|form groups with the correct international / local ratio|
-|🟡 Medium|student|find classmates who stay near me|form groups with people who stay near me|
-|🟡 Medium|student|find good off-campus study spots|find convenient meeting places|
-|🟡 Medium|student|find where classmates stay|find convenient meeting places|
 |🟡 Medium|student|identify classmates with experience|ensure the spread of people with background in different groups|
 |🟡 Medium|student|start finding teammates early|make a sound decision on who I wish to be in the same group with|
+|🟡 Medium|student|view my tutorial group's student statistics|have a better understanding of my tutorial group's demographics|
 |🟡 Medium|student|find classmates of the opposite gender|form groups with the correct gender ratio|
-|🟡 Medium|student|be reminded of tutorial/lecture/meeting time|be aware of the deadlines and not miss any of them|
+|🟡 Medium|student|mass tag a group of contacts|shortlist them as potential groupmates|
 |🟡 Medium|international student|find other international students, possibly from the same country as me|connect with them and talk with them|
 |🟡 Medium|high CAP student|find competent team|to mantain a good cap|
 |🟡 Medium|low cap student|find people to carry|learn from them|
-|🟢 Low|international student|have use the application in my own language|feel more comfortable using the application|
 |🟢 Low|fast-typer student|pipe my commands|achive greater efficiency|
 
 ### Use cases
@@ -583,7 +579,7 @@ otherwise)
 **MSS**
 
 1. User requests to add a person in the list
-2. AddressBook adds the person
+2. Socius adds the person
 
 Use case ends.
 
@@ -602,7 +598,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. Socius shows a list of persons
 3. User requests to edit the personal details of a specific person in the list
 4. Socius edits the personal details of the person
 
@@ -627,7 +623,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. Socius shows a list of persons
 3. User requests to delete a specific person in the list
 4. Socius deletes the person
 
@@ -677,18 +673,22 @@ Use case ends.
 
 * 2a. The list is empty.
 
-  Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+
+      Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
 
+      Use case resumes at step 4.
+      
 **Use case: Remove existing tag of a person**
 
 **MSS**
@@ -707,7 +707,9 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 **Use case: Filter persons by tag**
 
@@ -723,16 +725,20 @@ Use case ends.
 * 2a. The list is empty. Use case ends.
 
 * 3a. The given tag is invalid.
-    * 3a1. Socius shows an empty list. Use case ends.
+    * 3a1. Socius shows an empty list.
+
+      Use case ends.
 
 **Use case: Add remarks for a person**
 
 **MSS**
 
-1. User requests to list persons
-2. Socius shows a list of persons
-3. User requests to add remarks for a specific person in the list
-4. Socius adds remarks for the person Use case ends.
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to add remarks for a specific person in the list.
+4. Socius adds remarks for the person.
+
+      Use case ends.
 
 **Extensions**
 
@@ -741,14 +747,69 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+      
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+
+**Use case: Mass tag multiple persons**
+
+**MSS**
+
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to tag everyone in the list.
+4. Socius adds tag for the list of persons.
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. 
+      Use case ends.
+      
+* 3a. The format of the request is invalid.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+
+      Use case resumes at step 4.
+      
+**Use case: View tutorial group statistics**
+
+**MSS**
+
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to view statistics of a particular tutorial group.
+4. Socius displays statistics of the tutorial group.
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+      Use case ends.
+      
+* 3a. The tutorial group does not exist.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+
+      Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. 
 
-*{More to be added}*
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
@@ -794,7 +855,9 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutdown
+
+    1. Exit the application using the `exit` command.
 
 ### Deleting a person
 
@@ -812,12 +875,42 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: -
+
+    1. Test case: `add n/Jon Snow p/98765432 g/M t/North`<br>
+       Expected: New person Jon Snow, along with parameters parsed, is added to the list.
+       Details of the added contact shown in the status message.
+
+    1. Test case: `add r/King of the North e/snowyjon@gmail.com`<br>
+       Expected: No person is added. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `add` <br>
+       Expected: Similar to previous.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Ensure that you have a `data` folder containing a file titled `addressbook.json` in the same directory as your jar file.
 
-1. _{ more test cases …​ }_
+    1. Simulate a missing file by deleting the `addressbook.json` file.
+
+    1. Re-Launch the application again.
+       Expected: Shows the GUI with a set of sample contacts and new file titled `addressbook.json` will be created in the `data` folder.  
+
+1. Dealing with corrupted data files
+
+    1. Prerequisites: Ensure that you have a `data` folder containing a file titled `addressbook.json` in the same directory as your jar file.
+
+    1. Simulate a corrupted file by editing the `addressbook.json` file.
+
+    1. Re-Launch the application again.
+       Expected: Shows the GUI with a set of sample contacts and upon shutdown, the `addressbook.json` file will be updated with the sample contacts.  
+
+
