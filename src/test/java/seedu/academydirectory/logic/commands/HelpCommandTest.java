@@ -41,20 +41,19 @@ public class HelpCommandTest {
     @Test
     public void execute_valid_help() {
         HelpCommand helpCommand1 = new HelpCommand();
-        CommandResult commandResult1 = new CommandResult(HelpCommand.MESSAGE_HELP_SUCCESS_GENERAL,
-                HelpCommand.DEFAULT_MESSAGE);
+        CommandResult commandResult1 = new CommandResult(HelpCommand.MESSAGE_HELP_SUCCESS_GENERAL);
         // assert that executing a general help command is successful
         assertCommandSuccess(helpCommand1, model, commandResult1, model);
 
         HelpCommand helpCommand2 = new HelpCommand("grade", GradeCommand.HELP_MESSAGE);
         CommandResult commandResult2 = new CommandResult(String.format(HelpCommand.MESSAGE_HELP_SUCCESS_SPECIFIC,
-                "grade"), GradeCommand.HELP_MESSAGE);
+                "grade"));
         // asserting that executing a specific help command is successful
         assertCommandSuccess(helpCommand2, model, commandResult2, model);
 
         HelpCommand helpCommand3 = new HelpCommand("exit", GradeCommand.HELP_MESSAGE);
         CommandResult commandResult3 = new CommandResult(String.format(HelpCommand.MESSAGE_HELP_SUCCESS_SPECIFIC,
-                "exit"), GradeCommand.HELP_MESSAGE);
+                "exit"));
         // asserting that executing a non-viable help command is successful
         assertCommandSuccess(helpCommand3, model, commandResult3, model);
     }
