@@ -2,7 +2,6 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.StringUtil.isValidDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +28,7 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
             lastMetDate = "";
         }
 
-        checkArgument(isValidDate(lastMetDate), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLastMet(lastMetDate), MESSAGE_CONSTRAINTS);
         dateInString = lastMetDate;
 
         if (lastMetDate.isEmpty()) {
@@ -44,7 +43,7 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
      * Returns if a given string is a valid lastMet.
      */
     public static boolean isValidLastMet(String test) {
-        return StringUtil.isValidDate(test);
+        return (IS_NULL_VALUE_ALLOWED && test.isEmpty()) || StringUtil.isValidDate(test);
     }
 
     /**
@@ -58,12 +57,11 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
     }
 
     @Override
-    public String toString() {
+    public int hashCode() {
         if (value == null) {
-            return DEFAULT_VALUE;
-        } else {
-            return this.dateInString;
+            return 0;
         }
+        return value.hashCode();
     }
 
     @Override
@@ -74,11 +72,12 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
     }
 
     @Override
-    public int hashCode() {
+    public String toString() {
         if (value == null) {
-            return 0;
+            return DEFAULT_VALUE;
+        } else {
+            return this.dateInString;
         }
-        return value.hashCode();
     }
 
     @Override

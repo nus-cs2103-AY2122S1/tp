@@ -2,15 +2,18 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.client.OptionalNonStringBasedField.IS_NULL_VALUE_ALLOWED;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+
 
 /**
  * Helper functions for handling strings.
@@ -143,12 +146,25 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if {@code test} is a valid non-negative number.
+     */
+    public static boolean isNonNegativeNumber(String test) {
+        requireNonNull(test);
+
+        try {
+            double value = Double.parseDouble(test);
+            return value >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
      * Returns true if a {@code date} is a valid date.
      * A valid date is in the form of DD/MM/YYYY.
      */
     public static boolean isValidDate(String date) {
-        return (IS_NULL_VALUE_ALLOWED && date.isEmpty())
-                || date.matches(DATE_VALIDATION_REGEX);
+        return date.isEmpty() || date.matches(DATE_VALIDATION_REGEX);
     }
 
     /**
@@ -156,8 +172,15 @@ public class StringUtil {
      * A valid time is in the form of HH:MM.
      */
     public static boolean isValidTime(String time) {
-        return (IS_NULL_VALUE_ALLOWED && time.isEmpty())
-                || time.matches(TIME_VALIDATION_REGEX);
+        return time.isEmpty() || time.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if {@code currency} is a valid curreny.
+     * A valid currency is any non-negative number.
+     */
+    public static boolean isValidCurrency(String currency) {
+        return isNonNegativeNumber(getUnformattedNumber(currency));
     }
 
     /**
@@ -214,7 +237,7 @@ public class StringUtil {
      * Removes the {@code suffix} from {@code word} if it exists and returns it.
      * If {@code suffix} does not exists, then {@code word} will just be returned.
      *
-     * @param word the string to remove the suffix from
+     * @param word   the string to remove the suffix from
      * @param suffix the suffix that is to be removed
      */
     public static String getStringWithoutSuffix(String word, String suffix) {
@@ -225,6 +248,33 @@ public class StringUtil {
         }
 
         return word.substring(0, word.length() - suffix.length());
+    }
+
+    /**
+     * Returns the currency symbol for the currency of these DecimalFormatSymbols in their locale.
+     */
+    public static String getCurrencySymbol(Locale locale) {
+        return new DecimalFormatSymbols(locale).getCurrencySymbol();
+    }
+
+    /**
+     * Returns number without comma.
+     */
+    public static String getUnformattedNumber(String number) {
+        return number.replace(",", "");
+    }
+
+    /**
+     * Returns {@code value} in currency format.
+     */
+    public static String getCurrencyFormat(String value, boolean withSymbol) {
+        double currency = Double.parseDouble(getUnformattedNumber(value));
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
+        String result = formatter.format(currency);
+        if (withSymbol) {
+            return result;
+        }
+        return getUnformattedNumber(result.replace(getCurrencySymbol(Locale.US), ""));
     }
 
     /**

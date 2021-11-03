@@ -2,12 +2,15 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.getCurrencyFormat;
+import static seedu.address.commons.util.StringUtil.isValidCurrency;
 
 public class DisposableIncome extends NumberComparable<DisposableIncome> implements OptionalStringBasedField {
     public static final String MESSAGE_CONSTRAINTS =
             "Disposable Income numbers should be a positive integer only";
-    public static final String VALIDATION_REGEX = "\\d+";
+
     public final String value;
+    public final String valueWithSymbol;
 
     /**
      * Constructs a {@code Risk Appetite}.
@@ -17,21 +20,20 @@ public class DisposableIncome extends NumberComparable<DisposableIncome> impleme
     public DisposableIncome(String disposableIncome) {
         requireNonNull(disposableIncome);
         checkArgument(isValidDisposableIncome(disposableIncome), MESSAGE_CONSTRAINTS);
-        value = disposableIncome;
+        valueWithSymbol = getCurrencyFormat(disposableIncome, true);
+        value = getCurrencyFormat(disposableIncome, false);
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidDisposableIncome(String test) {
-
-        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty()) || test.matches(VALIDATION_REGEX);
-
+        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty()) || isValidCurrency(test);
     }
 
     @Override
-    public String toString() {
-        return value;
+    public int hashCode() {
+        return value.hashCode();
     }
 
     @Override
@@ -42,7 +44,7 @@ public class DisposableIncome extends NumberComparable<DisposableIncome> impleme
     }
 
     @Override
-    public int hashCode() {
-        return value.hashCode();
+    public String toString() {
+        return value;
     }
 }
