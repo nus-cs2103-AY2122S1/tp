@@ -155,6 +155,20 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 </div>
 
+
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution on use of the symbol `/` in commands:**<br>
+
+* For all commands, the symbol `/` should only be used in the **representation of prefixes**, such as `n/`, `p/` and `r/`, etc. 
+* You **should not** use the symbol `/` when filling up any of the parameters.
+* For example,  in `add` command,
+  * **Acceptable** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`.
+  * **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>
+  _*notice the additional `/` used in the parameter of `a/ADDRESS`._
+
+</div>
+
 ### General Commands
 
 #### Viewing help: `help`
@@ -200,7 +214,7 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
 
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
-* `GRADE` can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
+* `GRADE` refers to the educational level of the student. It can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
 
 * `SUBJECT` can be specified in lower- or upper- cases (i.e. `MATH` and `math` represents the same subject which is `Math`). See [`add-l` (add lesson)](#adding-a-lesson-add-l) command for more information.
 
@@ -235,7 +249,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * `ADDRESS` can only have a maximum of 150 characters.
 
-* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
+* `GRADE` refers to the educational level of the student. It can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
 * `REMARK` can have a maximum of 25 characters, single worded without spacings in between them. A student can have any number of remarks, capped at 5. (including 0). (e.g `smart` is valid, while `needs help` is invalid)
 
@@ -421,7 +435,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 :information_source: **Details:**
 
-* `GRADE` here follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
+* `GRADE` refers to the level of education a lesson is catering for. It follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
 
 * `SUBJECT` can only be a single word limited to `20` characters, and its first letter will be capitalized.
 
@@ -438,6 +452,9 @@ Example(s):
 * `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
+
+* `add-l s/Mathematics g/S4 d/fri t/1500 c/10.3`
+
 
 ![Outcome of `add-l`](images/UserGuideImage/add-l.PNG)
 
@@ -552,6 +569,14 @@ Action | Format | Examples
 **List** | `list` |
 **Help** | `help` |
 **Exit** | `exit` |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Upcoming Features**
+
+1. **Customizable lesson timing**:
+   1. In the upcoming update, the developers will lift the constraints placed on the lesson timing. Each lesson can be of any duration and can start from any period of time.
+   2. This will provide more flexibility for you in managing the lessons in your tuition center.
 
 --------------------------------------------------------------------------------------------------------------------
 
