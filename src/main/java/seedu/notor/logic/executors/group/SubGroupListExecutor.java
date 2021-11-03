@@ -26,7 +26,6 @@ public class SubGroupListExecutor extends GroupExecutor {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        // TODO: Should we create a new method lol in model.
         model.listSubGroup(super.index);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SUBGROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()));

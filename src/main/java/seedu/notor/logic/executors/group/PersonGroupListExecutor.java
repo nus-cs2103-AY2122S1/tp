@@ -25,7 +25,6 @@ public class PersonGroupListExecutor extends GroupExecutor {
             throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
         }
         peopleInGroupPredicate = new PeopleInGroupPredicate(super.getGroup());
-        // TODO: Should we create a new method lol in model.
         model.updateFilteredPersonList(peopleInGroupPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));

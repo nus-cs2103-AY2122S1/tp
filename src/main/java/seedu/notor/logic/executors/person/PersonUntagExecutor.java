@@ -1,7 +1,6 @@
 package seedu.notor.logic.executors.person;
 
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +43,6 @@ public class PersonUntagExecutor extends PersonExecutor {
         }
 
         model.setPerson(person, taggedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, taggedPerson));
     }
 

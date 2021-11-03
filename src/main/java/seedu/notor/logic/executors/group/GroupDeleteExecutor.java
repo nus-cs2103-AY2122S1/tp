@@ -25,17 +25,14 @@ public class GroupDeleteExecutor extends GroupExecutor {
         WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE, deletedGroup));
         warningWindow.show();
         if (warningWindow.canContinue()) {
-            if (!model.isPersonList()) {
-                if (deletedGroup instanceof SuperGroup) {
-                    model.deleteSuperGroup((SuperGroup) deletedGroup);
-                } else if (deletedGroup instanceof SubGroup) {
-                    model.deleteSubGroup((SubGroup) deletedGroup);
-                } else {
-                    throw new ExecuteException(Messages.MESSAGE_UNEXPECTED_ERROR);
-                }
-                return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, deletedGroup));
+            if (deletedGroup instanceof SuperGroup) {
+                model.deleteSuperGroup((SuperGroup) deletedGroup);
+            } else if (deletedGroup instanceof SubGroup) {
+                model.deleteSubGroup((SubGroup) deletedGroup);
+            } else {
+                throw new ExecuteException(Messages.MESSAGE_UNEXPECTED_ERROR);
             }
-            throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
+            return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, deletedGroup));
         }
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_CANCEL, deletedGroup));
     }

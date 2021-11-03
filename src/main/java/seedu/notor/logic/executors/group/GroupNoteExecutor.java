@@ -2,7 +2,6 @@ package seedu.notor.logic.executors.group;
 
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -29,12 +28,8 @@ public class GroupNoteExecutor extends GroupExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        // TODO: To update the if true after list is done. it is suppose to check person view.
-        if (!model.isPersonList()) {
-            Group group = super.getGroup();
-            return new CommandResult(generateSuccessMessage(group), false, true, false, group);
-        }
-        throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
+        Group group = super.getGroup();
+        return new CommandResult(generateSuccessMessage(group), false, true, false, group);
     }
 
     /**

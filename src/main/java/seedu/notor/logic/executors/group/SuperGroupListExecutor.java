@@ -18,7 +18,6 @@ public class SuperGroupListExecutor extends GroupExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         requireNonNull(model);
-        // TODO: Should we create a new method lol in model.
         model.listSuperGroup();
         return new CommandResult(
                 String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()));
