@@ -14,7 +14,10 @@ Class TransactionList
 Class BookKeeping
 Class Order
 Class UniqueItemList
-Class TransactionRecord
+Class TransactionRecord {
+    -id: String
+    -timestamp: Instant
+}
 Class Item {
     -name: Name
     -id: Integer
@@ -39,7 +42,7 @@ Inventory .right.> Order
 
 Order *--> "1" UniqueItemList
 Inventory *--> "1" UniqueItemList
-TransactionRecord o--> "*" Item
+TransactionRecord --> "*" Item
 TransactionRecord .left.|> Order
 
 UniqueItemList o-right- "*" Item
