@@ -681,7 +681,8 @@ Examples:
 
 #### Viewing upcoming lessons : `remind`
 
-Displays a list of upcoming lessons that ends within the next 48 hours
+Displays a list of upcoming lessons that ends within the next 48 hours.
+- Lesson cards in the reminder list do not display the date range and the cancelled dates, if any.
 
 Format: `remind`
 
