@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
  */
 public class AllocateMemberCommand extends Command {
     public static final String COMMAND_WORD = "allocate";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": allocates a member to facility.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Allocates a member to facility.\n"
             + "Parameters: " + "MEMBER_INDEX FACILITY_INDEX DAY\n"
             + "DAY must be an integer from 1 to 7\n"
             + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"
