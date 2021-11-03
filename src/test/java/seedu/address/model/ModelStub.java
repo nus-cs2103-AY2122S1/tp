@@ -144,6 +144,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void closeOrder() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void addToOrder(Item item) {
         throw new AssertionError("This method should not be called.");
     }
@@ -159,7 +164,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void transactAndClearOrder() {
+    public void transactAndCloseOrder() {
         throw new AssertionError("This method should not be called.");
     }
 
