@@ -40,7 +40,6 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedClient
 JsonAdaptedClient --> "*" JsonAdaptedOrder
-JsonAdaptedOrder --> "*" JsonAdaptedProduct
 JsonSerializableAddressBook --> "*" JsonAdaptedProduct
 
 @enduml
