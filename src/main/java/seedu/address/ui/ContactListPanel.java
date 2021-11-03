@@ -97,7 +97,6 @@ public class ContactListPanel extends UiPart<Region> {
                     } else if (change.wasRemoved()) {
                         if (contactList.size() > 0) {
                             contactListView.scrollTo(0);
-                            contactListView.getSelectionModel().select(0);
                             contactListView.getFocusModel().focus(0);
                         }
                         setSelectedContactPanel();
