@@ -145,11 +145,11 @@ public class CommandTestUtil {
                 .build();
         DESC_FOOTBALL_TRAINING = new EditEventDescriptorBuilder().withName(VALID_VENUE_FOOTBALL_TRAINING)
                 .withDate(VALID_DATE_FOOTBALL_TRAINING).withVenue(VALID_VENUE_FOOTBALL_TRAINING)
-                .withCapacity(VALID_CAPACITY_FOOTBALL_TRAINING)
+                .withCapacity(VALID_CAPACITY_FOOTBALL_TRAINING).withTime(VALID_TIME_FOOTBALL_TRAINING)
                 .build();
         DESC_SWIM_TRAINING = new EditEventDescriptorBuilder().withName(VALID_VENUE_SWIM_TRAINING)
                 .withDate(VALID_DATE_SWIM_TRAINING).withVenue(VALID_VENUE_SWIM_TRAINING)
-                .withCapacity(VALID_CAPACITY_SWIM_TRAINING)
+                .withCapacity(VALID_CAPACITY_SWIM_TRAINING).withTime(VALID_TIME_SWIM_TRAINING)
                 .build();
     }
 
