@@ -40,7 +40,7 @@ public class RemoveMarkCommandParserTest {
 
     @Test
     public void parse_fields_success() {
-        String userInput = " " + PREFIX_DASH_PHONE + " 999 " + PREFIX_DASH_ADDRESS  + " Kent Ridge";
+        String userInput = " " + PREFIX_DASH_PHONE + " 999 " + PREFIX_DASH_ADDRESS + " Kent Ridge";
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate(new Phone("999"),
                 new Address("Kent Ridge"));
         assertParseSuccess(PARSER, userInput, new RemoveMarkCommand(predicate,

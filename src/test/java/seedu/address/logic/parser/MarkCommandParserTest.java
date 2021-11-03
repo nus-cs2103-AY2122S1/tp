@@ -34,7 +34,7 @@ public class MarkCommandParserTest {
     public void parse_validLookup() {
         String userInput = " " + PREFIX_DASH_INDEX + " 1";
         assertParseSuccess(PARSER, userInput, new MarkCommand(Index.fromOneBased(1),
-               ParserUtil.initializePeriodToThisWeek(),  new PersonContainsFieldsPredicate()));
+               ParserUtil.initializePeriodToThisWeek(), new PersonContainsFieldsPredicate()));
 
     }
 
