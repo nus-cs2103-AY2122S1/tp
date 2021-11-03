@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARTICIPANT;
 import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -25,6 +26,11 @@ import seedu.address.model.participant.Participant;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    public void setModel() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -45,8 +51,7 @@ public class DeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteParticipant(participantToDelete);
 
-        // assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-        assertTrue(true);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

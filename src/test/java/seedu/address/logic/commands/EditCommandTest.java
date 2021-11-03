@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARTICIPANT;
 import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -33,6 +34,11 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    @BeforeEach
+    public void setModel() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
+
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Participant editedParticipant = new ParticipantBuilder().build();
@@ -44,8 +50,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
 
-        // assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        assertTrue(true);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -97,8 +102,7 @@ public class EditCommandTest {
         showParticipantAtIndex(expectedModel, INDEX_FIRST_PARTICIPANT);
         expectedModel.setParticipant(model.getFilteredParticipantList().get(0), editedParticipant);
 
-        // assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        assertTrue(true);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
