@@ -27,31 +27,12 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @BeforeEach
-    public void setModel() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    }
-
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredParticipantList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Participant participantToDelete = model.getFilteredParticipantList()
-                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteParticipant(participantToDelete);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
