@@ -24,7 +24,6 @@ import seedu.address.model.module.task.Task;
 public class TaddCommand extends Command {
     public static final String COMMAND_WORD = "tadd";
     public static final String MESSAGE_MEMBER_NOT_FOUND = "Member No. %1$s does not exist in the member list";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member. "
             + "Parameters: "
             + PREFIX_NAME + "TASKNAME "
@@ -58,18 +57,14 @@ public class TaddCommand extends Command {
         ObservableList<Member> members = model.getFilteredMemberList();
 
         for (Index targetMemberId: targetMemberIdList) {
+            if (targetMemberId.getZeroBased() >= members.size()) {
+                throw new CommandException(String.format(MESSAGE_MEMBER_NOT_FOUND, targetMemberId.getOneBased()));
+            }
             Member targetMember = members.get(targetMemberId.getZeroBased());
             if (model.hasTask(targetMember, toAdd)) {
                 throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK,
                         targetMember.getName().toString()));
             }
-        }
-
-        for (Index targetMemberId: targetMemberIdList) {
-            if (targetMemberId.getZeroBased() >= members.size()) {
-                throw new CommandException(String.format(MESSAGE_MEMBER_NOT_FOUND, targetMemberId.getOneBased()));
-            }
-            Member targetMember = members.get(targetMemberId.getZeroBased());
             model.addTask(targetMember, toAdd);
         }
 

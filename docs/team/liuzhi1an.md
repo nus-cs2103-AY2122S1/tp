@@ -11,16 +11,22 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**:
+### **New Feature**:
+* added the ability to add a task to an existing member
+* added the ability to list tasks of a member
+* added the ability to find a task of a member given keyword of the task name
+* added the ability to delete a task from a given member
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=liuzhi1an)
 
-* **Project management**:
+### **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=liuzhi1an)
 
-* **Enhancements to existing features**:
+### **Project management**:
 
-* **Documentation**:
+### **Enhancements to existing features**:
+* Refactored the Tag class in the original code for Address Book 3 to Position.
 
-* **Community**:
+### **Documentation**:
 
-* **Tools**:
+### **Community**:
+
+### **Tools**:
