@@ -59,7 +59,7 @@ public class DeleteTaskCommandTest {
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
-    @Test //need to fix this
+    @Test
     public void execute_taskIdNotFound_throwsCommandException() {
         TaskId invalidTaskId = new TaskId("T100");
         DeleteTaskCommand deleteCommand = new DeleteTaskCommand(invalidTaskId,
