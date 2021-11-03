@@ -24,7 +24,7 @@ import seedu.address.model.order.Order;
  * Parses input arguments and creates a new EditClientCommand object
  */
 public class EditClientCommandParser implements Parser<EditClientCommand> {
-    private Model model;
+    private final Model model;
 
     public EditClientCommandParser(Model model) {
         this.model = model;
@@ -38,16 +38,14 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
      */
     public EditClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE_NUMBER,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ORDER);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditClientCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getPreamble().equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClientCommand.MESSAGE_USAGE));
         }
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

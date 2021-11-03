@@ -25,7 +25,8 @@ public class DeleteProductCommandParser implements Parser<DeleteProductCommand> 
     public DeleteProductCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            logger.log(Level.INFO, String.format("Deleting product %1$s", index.toString()));
+            logger.log(Level.INFO, String.format("Deleting product %1$s", index));
+
             return new DeleteProductCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

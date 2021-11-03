@@ -80,7 +80,6 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, commandType, info);
+        return Objects.hash(feedbackToUser, commandType, info, isClientCommand);
     }
-
 }
