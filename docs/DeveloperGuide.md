@@ -193,39 +193,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Mark/unmark attendance feature
-
-### Implementation
-
-The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. ModelManager contains the
-`filteredPersons` and attendance will be updated based on members index in this list. Additionally, it implements the
-following operations:
-
-* details to be added later
-
-Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
-
-Step 1. The user launches the application and adds members to the list. The `totalAttendance` and `todayAttendance`
-of the members added will be initialised to `0` and `false` respectively.
-
-Step 2. The user executes `mark 1` command to mark the 1st person as present.
-
-(more details to be added later)
-
-#### Design considerations:
-
-**Aspect: How mark & unmark executes:**
-
-* **Alternative 1 (current choice):** Uses index to mark attendance.
-    * Pros: Easy to implement (e.g there will be no two members with the same index in list, so there will be no
-      ambiguity)
-    * Cons: May require additional step of finding members' index using findm command then marking attendance.
-
-* **Alternative 2:** Uses names of members to mark attendance.
-    * Pros: Requires one less step of finding members.
-    * Cons: There may be two members with same name, so when marking using names, it might result in ambiguity of whose
-      attendance to mark.
-
 ### Alias feature
 
 #### Implementation
@@ -339,6 +306,72 @@ The final predicate is stored in `PersonMatchesKeywordPredicate` and then passed
 * ** Alternative 2: User can only `findm` by specifying one attribute
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
     * Cons: Not maximising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
+
+### Mark/unmark attendance feature
+
+#### Implementation
+
+The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
+as `filteredPersons`. Each `Person` in the list internally stores `totalAttendance` and `todayAttendance`
+which will be updated accordingly when the attendance of that `Person` is marked or unmarked.
+
+`ModelManager` implements the following operations:
+* ModelManager#markMembersAttendance(List<Index>) — Marks attendance of members at the specified list of index.
+* ModelManager#unmarkMembersAttendance(List<Index>) — Unmarks attendance of members at the specified list of index
+as absent.
+* ModelManager#markOneMemberAttendance(Person) — Marks attendance of specified member.
+* ModelManager#unmarkMembersAttendance(Person) — Unmarks attendance of specified member.
+  as absent.
+  
+Additionally, `Person` implements the following operations:
+* Person#setPresent() — Sets `todayAttendance` as present and increments `totalAttendance`
+* Person#setNotPresent() — Sets `todayAttendance` as not present and decrements `totalAttendance`
+
+Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
+
+Step 1. The user launches the application for the first time. The user then adds 2 members into an empty SportsPA
+by executing the `addm` command. Each `Person` in the `filteredPersons` list will be initialized with their initial 
+`todayAttendance` and `totalAttendance`. 
+
+![MarkObjectDiagram](images/MarkObjectDiagram_InitialState.png)
+
+
+Step 2. The user executes `mark 1 2` command to mark the members at index 1 and 2 in the filtered list as present. The `mark` command
+calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Person)` to increment `todayAttendance`
+and `totalAttendance` of the `Person` at the 1st and 2nd index in the list by calling `Person#setPresent()` for each `Person`. The newly edited 
+newly edited`Person`s with the updated attendance are now referenced by `ModelManager`.
+
+![MarkObjectDiagramModified](images/MarkObjectDiagramModified_FinalState.png)
+
+The following sequence diagram shows how the mark attendance operation works.
+
+![MarkSequenceDiagram](images/MarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The unmark command does the opposite — it calls the ModelManager#unmarkMembersAttendance(List<Index>), which then
+calls the ModelManager#unmarkMembersAttendance(Person) which decrements the `totalAttendance` and `todayAttendance` of the `Person` 
+to be unmarked via the `Person#setNotPresent()` and `ModelManager` references the newly modified `Person`s.
+
+
+
+#### Design considerations:
+
+**Aspect: How mark & unmark executes:**
+
+* **Alternative 1 (current choice):** Uses index to mark attendance.
+    * Pros: Easy to implement (e.g there will be no two members with the same index in list, so there will be no
+      ambiguity)
+    * Cons: May require additional step of finding members' index using findm command then marking attendance.
+
+* **Alternative 2:** Uses names of members to mark attendance.
+    * Pros: Requires one less step of finding members.
+    * Cons: There may be two members with same name, so when marking using names, it might result in ambiguity of whose
+      attendance to mark.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
