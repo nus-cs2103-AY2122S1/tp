@@ -326,9 +326,13 @@ Adds a group to a particular tutorial class
 Format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
 Examples:
-* `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
+* `addcg gn/1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
-* Group Type refers to the assignment that the group will work together for
+* Group Type refers to the assignment that the group will work together for.
+
+<div markdown="span" class="alert alert-info">**:information_source: Note:**
+Group types for ClassMATE should only be OP1 or OP2.
+</div>
 
 ### Adding a group: `addcg`
 
@@ -367,7 +371,7 @@ Format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 Example:
 * `liststu c/G06`shows that Betsy is a student in class G06, with Index 1.
-  `addsg 1 g/A c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group A in class G06
+  `addsg 1 gn/1 c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group 1 in class G06
 
 ### Deleting Student from a group: `deletesg`
 
