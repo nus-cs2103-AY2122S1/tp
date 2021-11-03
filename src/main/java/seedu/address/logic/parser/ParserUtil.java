@@ -39,10 +39,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String[] DATE_TIME_PATTERNS = {
-            "yyyy-MM-dd HHmm", "HHmm yyyy-MM-dd",
-            "dd-MM-yyyy HHmm", "HHmm dd-MM-yyyy",
-            "yyyy-MM-dd HH:mm", "HH:mm yyyy-MM-dd",
-            "dd-MM-yyyy HH:mm", "HH:mm dd-MM-yyyy"
+        "yyyy-MM-dd HHmm", "HHmm yyyy-MM-dd",
+        "dd-MM-yyyy HHmm", "HHmm dd-MM-yyyy",
+        "yyyy-MM-dd HH:mm", "HH:mm yyyy-MM-dd",
+        "dd-MM-yyyy HH:mm", "HH:mm dd-MM-yyyy"
     };
 
     public static final DateTimeFormatter[] DATE_TIME_FORMATTERS =

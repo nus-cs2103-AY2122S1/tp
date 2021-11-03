@@ -101,14 +101,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_validDateTime_success() throws Exception {
-        LocalDateTime expected = LocalDateTime.parse("2021-11-11 2000", ParserUtil.DATE_TIME_FORMATTER);
+        LocalDateTime expected = LocalDateTime.parse("2021-11-11T20:00");
         assertEquals(expected, ParserUtil.parseDateTime("  2021-11-11 2000   "));
     }
 
     @Test
     public void parseDateTime_invalidDateTime_failure() {
         assertThrows(ParseException.class, MESSAGE_INVALID_DATE_TIME_FORMAT, ()
-            -> ParserUtil.parseDateTime("11-11-2021 2000"));
+            -> ParserUtil.parseDateTime("11/11/2021 2000"));
     }
 
     @Test
