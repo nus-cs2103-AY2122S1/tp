@@ -25,7 +25,7 @@ public class ParserUtilTest {
     private static final String INVALID_COUNT_NEGATIVE = "-1";
     private static final String INVALID_ID_FORMAT = "abc";
     private static final String INVALID_ID_NEGATIVE = "-1";
-    private static final String INVALID_ID_SHORTER = "123";
+    private static final String INVALID_ID_LONGER = "1232343";
     private static final String INVALID_PRICE_FORMAT = "abc";
     private static final String INVALID_PRICE_NEGATIVE = "-1";
     private static final String INVALID_PRICE_OVERFLOW = "999999999.1";
@@ -35,7 +35,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "sweet";
     private static final String VALID_COUNT_1 = "2";
     private static final String VALID_COUNT_2 = "12";
-    private static final String VALID_ID = "123456";
+    private static final String VALID_ID_1 = "123456";
+    private static final String VALID_ID_2 = "123";
     private static final String VALID_PRICE_1 = "1.21";
     private static final String VALID_PRICE_2 = "12.2121"; // Should be rounded to 2 decimal places
 
@@ -180,14 +181,21 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseId_lessThan6Digits_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_SHORTER));
+    public void parseId_moreThan6Digits_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID_LONGER));
     }
 
     @Test
     public void parseId_validId_returnsId() throws Exception {
-        Integer expectedId = Integer.parseInt(VALID_ID);
-        Integer actualId = ParserUtil.parseId(VALID_ID);
+        Integer expectedId = Integer.parseInt(VALID_ID_1);
+        Integer actualId = ParserUtil.parseId(VALID_ID_1);
+        assertEquals(expectedId, actualId);
+    }
+
+    @Test
+    public void parseId_validIdLessThan6digits_returnsId() throws Exception {
+        Integer expectedId = Integer.parseInt(VALID_ID_2);
+        Integer actualId = ParserUtil.parseId(VALID_ID_2);
         assertEquals(expectedId, actualId);
     }
 

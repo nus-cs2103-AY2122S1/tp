@@ -14,6 +14,7 @@ import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
+import static seedu.address.testutil.TypicalItems.getTypicalItems;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,11 +43,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Item editedItem = new ItemBuilder().build();
+        Item editedItem = new ItemBuilder().withCount(getTypicalItems().get(0).getCount().toString()).build();
         ItemDescriptor descriptor = new ItemDescriptorBuilder(editedItem).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
+        String expectedMessage = String.format(EditCommand.MESSAGE_COUNT_CNT_BE_EDITED, editedItem);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs(),
                 new TransactionList(), new BookKeeping());
@@ -121,6 +122,7 @@ public class EditCommandTest {
 
         // edit item in filtered list into a duplicate in inventory
         Item itemInList = model.getInventory().getItemList().get(INDEX_SECOND_ITEM.getZeroBased());
+
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
                 new ItemDescriptorBuilder(itemInList).build());
 

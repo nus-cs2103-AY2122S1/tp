@@ -45,8 +45,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory.";
-    public static final String MESSAGE_COUNT_CNT_BE_EDITED = "Count cannot be directly edited. Please remove/delete " +
-            "the item and add it back into the inventory.";
+    public static final String MESSAGE_COUNT_CNT_BE_EDITED = "Count cannot be directly edited. Please remove/delete "
+            + "the item and add it back into the inventory.";
     public static final String MESSAGE_DUPLICATE_ID = "This id clashes with another item in the inventory.";
     public static final String MESSAGE_DUPLICATE_NAME = "This name clashes with another item in the inventory.";
     public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
@@ -80,9 +80,6 @@ public class EditCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-        if (!toEditDescriptor.getCount().equals(Optional.empty())) {
-            throw new CommandException(MESSAGE_COUNT_CNT_BE_EDITED);
-        }
 
         Item itemToEdit = (Item) lastShownList.get(index.getZeroBased());
         Item editedItem = createEditedItem(itemToEdit, toEditDescriptor);
@@ -96,10 +93,15 @@ public class EditCommand extends Command {
         if (model.hasName(editedItem) && !toEditDescriptor.getName().equals(Optional.empty())) {
             throw new CommandException(MESSAGE_DUPLICATE_NAME);
         }
-
-
+        if ((!toEditDescriptor.getCount().equals(Optional.empty()))
+                && !(toEditDescriptor.getCount().get().equals(itemToEdit.getCount()))) {
+            throw new CommandException(MESSAGE_COUNT_CNT_BE_EDITED);
+        }
         model.setItem(itemToEdit, editedItem);
         model.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        if ((!toEditDescriptor.getCount().equals(Optional.empty()))) {
+            return new CommandResult(String.format(MESSAGE_COUNT_CNT_BE_EDITED, editedItem));
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_ITEM_SUCCESS, editedItem));
     }
 
