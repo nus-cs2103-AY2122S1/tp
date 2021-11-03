@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,6 +41,8 @@ public class Person implements Comparable<Person> {
     private Thread getProfilePicThread;
     private Thread getStatsThread;
     private HashMap<String, Double> gitStats;
+    private ArrayList<String> commonLanguages = new ArrayList<>();
+    private double simScore = 0.0;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -61,6 +64,7 @@ public class Person implements Comparable<Person> {
         this.getProfilePicThread = new Thread(() -> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
         });
+        getProfilePicThread.setPriority(Thread.MAX_PRIORITY);
         getProfilePicThread.start();
         this.gitStats = new HashMap<>();
         startGetStatThread();
@@ -117,9 +121,16 @@ public class Person implements Comparable<Person> {
         this.getStatsThread = new Thread(() -> {
             this.gitStats = GitHubUtil.getUserStats(github.value);
             logger.info("Stats for " + name.fullName + ": " + gitStats);
-            ThreadProcessor.removeThread(getStatsThread);
         });
         ThreadProcessor.addThread(getStatsThread);
+    }
+
+    public void setCommonLanguages(ArrayList<String> commonLanguages) {
+        this.commonLanguages = commonLanguages;
+    }
+
+    public void setSimScore(double simScore) {
+        this.simScore = simScore;
     }
 
     public Name getName() {
@@ -167,14 +178,15 @@ public class Person implements Comparable<Person> {
     }
 
     public Image getProfilePicture() {
-        if (getProfilePicThread != null && getProfilePicThread.isAlive()) {
-            try {
-                getProfilePicThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         return profilePicture;
+    }
+
+    public ArrayList<String> getCommonLanguages() {
+        return commonLanguages;
+    }
+
+    public double getSimScore() {
+        return simScore;
     }
 
     /**
@@ -190,12 +202,7 @@ public class Person implements Comparable<Person> {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return this.equals(otherPerson);
     }
 
     /**
@@ -213,13 +220,8 @@ public class Person implements Comparable<Person> {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getTelegram().equals(getTelegram())
-                && otherPerson.getGithub().equals(getGithub())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        return otherPerson.getTelegram().equals(getTelegram())
+                || otherPerson.getGithub().equals(getGithub());
     }
 
     @Override

@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import seedu.address.commons.util.GitHubUtil;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.person.Person;
 
 /**
@@ -73,6 +75,21 @@ public class PersonCard extends UiPart<Region> {
         Image userGitHubProfilePicture = person.getProfilePicture();
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(userGitHubProfilePicture);
+
+        if (userGitHubProfilePicture == GitHubUtil.DEFAULT_USER_PROFILE_PICTURE) {
+            Thread temp = new Thread(() -> {
+                while (person.getProfilePicture() == GitHubUtil.DEFAULT_USER_PROFILE_PICTURE && !MainWindow.isDone()) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        //e.printStackTrace();
+                    }
+                }
+                profileView.setImage(person.getProfilePicture());
+            });
+            temp.setPriority(Thread.MAX_PRIORITY);
+            ThreadProcessor.addThread(temp);
+        }
 
         // set favBtn here based on isFavorite
         if (person.isFavourite()) {

@@ -15,8 +15,10 @@ public class Tag {
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    private static final String[] stringTypes = new String[] {"", "event-", "mod-"};
     public static final String VALIDATION_REGEX =
-            "\\p{Alnum}+|event-\\s*\\p{Alnum}+|mod-\\s*\\p{Alnum}+";
+            "\\p{Alnum}+|" + stringTypes[1] + "\\s*\\p{Alnum}+|" + stringTypes[2] + "\\s*\\p{Alnum}+";
+
 
     public final String tagName;
     public final Type type;
@@ -40,11 +42,25 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if tag is of event type
+     *
+     * @return true, if tag is an event
+     */
+    public boolean isEvent() {
+        return type == Type.EVENT;
+    }
+
+    public String getStringType() {
+        return stringTypes[type.ordinal()];
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                && tagName.equals(((Tag) other).tagName) // name check
+                && type.equals(((Tag) other).type)); // type check
     }
 
     @Override
@@ -67,9 +83,9 @@ public class Tag {
      */
     public Type parseTagType(String tagDescription) {
         assert(!tagDescription.isEmpty());
-        if (tagDescription.indexOf("event-") == 0) {
+        if (tagDescription.indexOf(stringTypes[1]) == 0) {
             return Type.EVENT;
-        } else if (tagDescription.indexOf("mod-") == 0) {
+        } else if (tagDescription.indexOf(stringTypes[2]) == 0) {
             return Type.MODULE;
         } else {
             return Type.GENERAL;
@@ -84,13 +100,7 @@ public class Tag {
      * @return Name of tag represented by tag description.
      */
     public String parseTagName(Type tagType, String tagDescription) {
-        if (tagType == Type.GENERAL) {
-            return tagDescription;
-        } else if (tagType == Type.EVENT) {
-            return tagDescription.substring(6).trim();
-        } else {
-            return tagDescription.substring(4).trim();
-        }
+        return tagDescription.substring(stringTypes[tagType.ordinal()].length()).trim();
     }
 }
 

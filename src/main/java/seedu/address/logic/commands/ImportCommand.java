@@ -115,6 +115,9 @@ public class ImportCommand extends Command {
         } catch (DataConversionException dce) {
             logger.info("Import: Error while reading contacts from CSV file. File is likely to be wrongly formatted.");
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+        } catch (NoSuchElementException nsee) {
+            logger.info("Import: File does not exist");
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_NOT_FOUND, fileName));
         }
         return fileData.getPersonList();
     }

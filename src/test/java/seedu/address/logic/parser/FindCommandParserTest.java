@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_GITHUB_FIELD_CANNOT_BE_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_NAME;
+import static seedu.address.commons.core.Messages.MESSAGE_TAG_FIELD_CANNOT_BE_EMPTY;
+import static seedu.address.commons.core.Messages.MESSAGE_TELEGRAM_FIELD_CANNOT_BE_EMPTY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -27,25 +31,25 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArgGithub_throwsParseException() {
         assertParseFailure(parser, "g/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                MESSAGE_GITHUB_FIELD_CANNOT_BE_EMPTY);
     }
 
     @Test
     public void parse_emptyArgTag_throwsParseException() {
         assertParseFailure(parser, "t/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                MESSAGE_TAG_FIELD_CANNOT_BE_EMPTY);
     }
 
     @Test
     public void parse_emptyArgTelegram_throwsParseException() {
         assertParseFailure(parser, "te/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                MESSAGE_TELEGRAM_FIELD_CANNOT_BE_EMPTY);
     }
 
     @Test
     public void parse_invalidArg1_throwsParseException() {
         assertParseFailure(parser, "@alex",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+               MESSAGE_INVALID_NAME);
     }
 
     @Test
@@ -85,9 +89,6 @@ public class FindCommandParserTest {
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays
                         .asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
     @Test

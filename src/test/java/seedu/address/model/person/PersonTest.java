@@ -132,11 +132,9 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, github and telegram, all other attributes different -> returns true
         Person editedAlice =
                 new PersonBuilder(ALICE)
-                        .withTelegram(VALID_TELEGRAM_BOB)
-                        .withGithub(VALID_GITHUB_BOB)
                         .withPhone(VALID_PHONE_BOB)
                         .withEmail(VALID_EMAIL_BOB)
                         .withAddress(VALID_ADDRESS_BOB)
@@ -144,18 +142,26 @@ public class PersonTest {
                         .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
+        // different name, all other attributes same -> returns true
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // different github, all other attributes same -> returns true
+        editedAlice = new PersonBuilder(ALICE).withGithub(VALID_GITHUB_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different telegram, all other attributes same -> returns true
+        editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -176,32 +182,39 @@ public class PersonTest {
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
-        // different name -> returns false
+        // different name -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different telegram -> returns false
+        // different telegram -> returns true
         editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different github -> returns false
+        // different github -> returns true
         editedAlice = new PersonBuilder(ALICE).withGithub(VALID_GITHUB_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
+        // different phone -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different email -> returns false
+        // different email -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different address -> returns true
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different tags -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.equals(editedAlice));
+
+        // different name, telegram and github -> returns false
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withGithub(VALID_GITHUB_BOB)
+                .withTelegram(VALID_TELEGRAM_BOB)
+                .build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

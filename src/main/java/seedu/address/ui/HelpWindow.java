@@ -6,13 +6,16 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandDetails;
@@ -22,28 +25,50 @@ import seedu.address.logic.commands.CommandDetails;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t10-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "For more Information, please refer to the user guide:\n"
+    private static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t10-1.github.io/tp/UserGuide.html";
+    private static final String HELP_MESSAGE = "For more Information, please refer to the user guide:\n"
             + USERGUIDE_URL;
 
     private static final String ADD_NEW_CONTACT_FEATURE_NAME = "Add a New Contact";
-    private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ [p/] [e/] [a/<ADDRESS>] [t/]";
+    private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ g/ [p/] [e/] [a/] [t/]";
     private static final String DELETE_CONTACT_FEATURE_NAME = "Delete a Contact";
     private static final String DELETE_CONTACT_FEATURE_COMMAND = "delete <INDEX>";
+    private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete ALL Contacts";
+    private static final String DELETE_CONTACTS_FEATURE_COMMAND = "clear";
     private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
-    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit [n/] [p/] [e/] [a/<ADDRESS>] [t/]";
+    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [p/] [g/] [e/] [a/] [t/]";
+    private static final String EDIT_PROFILE_FEATURE_NAME = "Edit Your Profile";
+    private static final String EDIT_PROFILE_FEATURE_COMMAND = "edit profile [n/] [g/] [te/]";
     private static final String FIND_CONTACT_FEATURE_NAME_V1 = "Find a Contact (by Name)";
     private static final String FIND_CONTACT_FEATURE_COMMAND_V1 = "find <STRING>";
     private static final String FIND_CONTACT_FEATURE_NAME_V2 = "Find a Contact (by Tag)";
     private static final String FIND_CONTACT_FEATURE_COMMAND_V2 = "find t/<TAG>";
+    private static final String FIND_CONTACT_FEATURE_NAME_V3 = "Find a Contact (by GitHub Username)";
+    private static final String FIND_CONTACT_FEATURE_COMMAND_V3 = "find g/<STRING>";
+    private static final String FIND_CONTACT_FEATURE_NAME_V4 = "Find a Contact (by Telegram Handle)";
+    private static final String FIND_CONTACT_FEATURE_COMMAND_V4 = "find te/<STRING>";
     private static final String SHOW_CONTACT_FEATURE_NAME_V1 = "Show Contact Details (by Name)";
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V1 = "show <NAME>";
     private static final String SHOW_CONTACT_FEATURE_NAME_V2 = "Show Contact Details (by Index)";
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
-    private static final String IMPORT_CONTACT_FEATURE_NAME = "Import Contacts from JSON file";
-    private static final String IMPORT_CONTACT_FEATURE_COMMAND = "import filename.JSON";
-    private static final String EXPORT_CONTACT_FEATURE_NAME = "Export Contacts to JSON file";
-    private static final String EXPORT_CONTACT_FEATURE_COMMAND = "export filename.JSON";
+    private static final String LIST_CONTACTS_FEATURE_NAME = "List all Contacts present";
+    private static final String LIST_CONTACTS_FEATURE_COMMAND = "list";
+    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favourite";
+    private static final String FAVOURITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
+    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavourite";
+    private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
+    private static final String IMPORT_CONTACT_CSV_FEATURE_NAME = "Import Contacts from CSV file";
+    private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
+    private static final String IMPORT_CONTACT_JSON_FEATURE_NAME = "Import Contacts from JSON file";
+    private static final String IMPORT_CONTACT_JSON_FEATURE_COMMAND = "import <FILENAME>.json";
+    private static final String EXPORT_CONTACT_CSV_FEATURE_NAME = "Export Contacts to CSV file";
+    private static final String EXPORT_CONTACT_CSV_FEATURE_COMMAND = "export <FILENAME>.csv";
+    private static final String EXPORT_CONTACT_JSON_FEATURE_NAME = "Export Contacts to JSON file";
+    private static final String EXPORT_CONTACT_JSON_FEATURE_COMMAND = "export <FILENAME>.json";
+    private static final String HELP_FEATURE_NAME = "Launch this Help Window";
+    private static final String HELP_FEATURE_COMMAND = "help";
+    private static final String EXIT_APP_FEATURE_NAME = "Exit the App";
+    private static final String EXIT_APP_FEATURE_COMMAND = "exit";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -66,6 +91,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         setUpCommandDetails();
+        setUpHelpTableView();
     }
 
     /**
@@ -98,6 +124,19 @@ public class HelpWindow extends UiPart<Stage> {
         logger.fine("Showing help page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
+    }
+
+    /**
+     * Sets up the table view. Disables scrolling and
+     * adjusts the height according to the number of rows.
+     */
+    public void setUpHelpTableView() {
+        helpTable.addEventFilter(ScrollEvent.ANY, Event::consume);
+        helpTable.setFixedCellSize(25);
+        helpTable.prefHeightProperty().bind(helpTable.fixedCellSizeProperty()
+                .multiply(Bindings.size(helpTable.getItems()).add(1.01)));
+        helpTable.minHeightProperty().bind(helpTable.prefHeightProperty());
+        helpTable.maxHeightProperty().bind(helpTable.prefHeightProperty());
     }
 
     /**
@@ -146,30 +185,63 @@ public class HelpWindow extends UiPart<Stage> {
                 ADD_NEW_CONTACT_FEATURE_COMMAND);
         CommandDetails deleteContactCommandDetails = new CommandDetails(DELETE_CONTACT_FEATURE_NAME,
                 DELETE_CONTACT_FEATURE_COMMAND);
+        CommandDetails deleteAllContactsCommandDetails = new CommandDetails(DELETE_CONTACTS_FEATURE_NAME,
+                DELETE_CONTACTS_FEATURE_COMMAND);
         CommandDetails editContactCommandDetails = new CommandDetails(EDIT_CONTACT_FEATURE_NAME,
                 EDIT_CONTACT_FEATURE_COMMAND);
+        CommandDetails editProfileCommandDetails = new CommandDetails(EDIT_PROFILE_FEATURE_NAME,
+                EDIT_PROFILE_FEATURE_COMMAND);
         CommandDetails findContactByNameCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V1,
                 FIND_CONTACT_FEATURE_COMMAND_V1);
+        CommandDetails findContactByGitHubCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V3,
+                FIND_CONTACT_FEATURE_COMMAND_V3);
         CommandDetails findContactByTagCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V2,
                 FIND_CONTACT_FEATURE_COMMAND_V2);
+        CommandDetails findContactByTelegramCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V4,
+                FIND_CONTACT_FEATURE_COMMAND_V4);
         CommandDetails showContactByNameCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V1,
                 SHOW_CONTACT_FEATURE_COMMAND_V1);
         CommandDetails showContactByIndexCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V2,
                 SHOW_CONTACT_FEATURE_COMMAND_V2);
-        CommandDetails importContactCommandDetails = new CommandDetails(IMPORT_CONTACT_FEATURE_NAME,
-                IMPORT_CONTACT_FEATURE_COMMAND);
-        CommandDetails exportContactCommandDetails = new CommandDetails(EXPORT_CONTACT_FEATURE_NAME,
-                EXPORT_CONTACT_FEATURE_COMMAND);
+        CommandDetails listAllContactsCommandDetails = new CommandDetails(LIST_CONTACTS_FEATURE_NAME,
+                LIST_CONTACTS_FEATURE_COMMAND);
+        CommandDetails favouriteContactCommandDetails = new CommandDetails(FAVOURITE_CONTACT_FEATURE_NAME,
+                FAVOURITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails unFavouriteContactCommandDetails = new CommandDetails(UNFAVOURITE_CONTACT_FEATURE_NAME,
+                UNFAVOURITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails importContactCsvCommandDetails = new CommandDetails(IMPORT_CONTACT_CSV_FEATURE_NAME,
+                IMPORT_CONTACT_CSV_FEATURE_COMMAND);
+        CommandDetails importContactJsonCommandDetails = new CommandDetails(IMPORT_CONTACT_JSON_FEATURE_NAME,
+                IMPORT_CONTACT_JSON_FEATURE_COMMAND);
+        CommandDetails exportContactCsvCommandDetails = new CommandDetails(EXPORT_CONTACT_CSV_FEATURE_NAME,
+                EXPORT_CONTACT_CSV_FEATURE_COMMAND);
+        CommandDetails exportContactJsonCommandDetails = new CommandDetails(EXPORT_CONTACT_JSON_FEATURE_NAME,
+                EXPORT_CONTACT_JSON_FEATURE_COMMAND);
+        CommandDetails helpWindowCommandDetails = new CommandDetails(HELP_FEATURE_NAME,
+                HELP_FEATURE_COMMAND);
+        CommandDetails exitAppCommandDetails = new CommandDetails(EXIT_APP_FEATURE_NAME,
+                EXIT_APP_FEATURE_COMMAND);
 
         helpSectionCommandDetails.add(addNewContactCommandDetails);
         helpSectionCommandDetails.add(deleteContactCommandDetails);
+        helpSectionCommandDetails.add(deleteAllContactsCommandDetails);
         helpSectionCommandDetails.add(editContactCommandDetails);
+        helpSectionCommandDetails.add(editProfileCommandDetails);
         helpSectionCommandDetails.add(findContactByNameCommandDetails);
+        helpSectionCommandDetails.add(findContactByGitHubCommandDetails);
         helpSectionCommandDetails.add(findContactByTagCommandDetails);
+        helpSectionCommandDetails.add(findContactByTelegramCommandDetails);
         helpSectionCommandDetails.add(showContactByNameCommandDetails);
         helpSectionCommandDetails.add(showContactByIndexCommandDetails);
-        helpSectionCommandDetails.add(importContactCommandDetails);
-        helpSectionCommandDetails.add(exportContactCommandDetails);
+        helpSectionCommandDetails.add(listAllContactsCommandDetails);
+        helpSectionCommandDetails.add(favouriteContactCommandDetails);
+        helpSectionCommandDetails.add(unFavouriteContactCommandDetails);
+        helpSectionCommandDetails.add(importContactCsvCommandDetails);
+        helpSectionCommandDetails.add(importContactJsonCommandDetails);
+        helpSectionCommandDetails.add(exportContactCsvCommandDetails);
+        helpSectionCommandDetails.add(exportContactJsonCommandDetails);
+        helpSectionCommandDetails.add(helpWindowCommandDetails);
+        helpSectionCommandDetails.add(exitAppCommandDetails);
     }
 
     /**

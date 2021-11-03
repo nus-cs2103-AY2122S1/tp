@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root resizable="false" title="User Profile" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root resizable="false" onCloseRequest="#handleExit" title="Profile Set Up" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <icons>
         <Image url="@/images/User_Avatar.png" />
     </icons>

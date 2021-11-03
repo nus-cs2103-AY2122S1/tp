@@ -1,5 +1,6 @@
 package seedu.address.logic.ai;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,6 +20,7 @@ import seedu.address.model.person.Person;
 public class Ai {
 
     private static final Logger logger = LogsCenter.getLogger(Ai.class);
+    private static final String repoCount = "repo-count";
 
     /**
      * Returns the Cosine Similarity between two vectors
@@ -86,10 +88,10 @@ public class Ai {
 
     private static void normalizeRepoCount(HashMap<String, HashMap<String, Double>> features,
                                            HashMap<String, Double> mainUser) {
-        double sum = features.values().parallelStream().mapToDouble(u -> u.get("repo-count")).sum()
-                + mainUser.get("repo-count");
-        features.values().parallelStream().forEach(k -> k.replace("repo-count", k.get("repo-count") / sum));
-        mainUser.replace("repo-count", mainUser.get("repo-count") / sum);
+        double sum = features.values().parallelStream().mapToDouble(u -> u.get(repoCount)).sum()
+                + mainUser.get(repoCount);
+        features.values().parallelStream().forEach(k -> k.replace(repoCount, k.get(repoCount) / sum));
+        mainUser.replace(repoCount, mainUser.get(repoCount) / sum);
     }
 
     private static HashMap<String, Double> sort(HashMap<String, Double> distances) {
@@ -130,7 +132,7 @@ public class Ai {
     /**
      * Returns the sorted {@code HashMap} object based on decreasing similarity
      *
-     * @param mainUserStat username of the user to compare with
+     * @param mainUserStat the user to compare with
      * @param stats stats of all the users
      * @return a sorted dictionary based on similarity
      */
@@ -141,6 +143,24 @@ public class Ai {
         stats.keySet().parallelStream().forEach(u -> distance.put(u, getDistanceMetric(mainUserStat, stats.get(u))));
         normalize(distance);
         return sort(distance);
+    }
+
+    /**
+     * Returns the common languages for each user
+     *
+     * @param mainUserStat the user to compare with
+     * @param stats stats of all the users
+     * @return a dictionary of users and common languages
+     */
+    public static HashMap<String, ArrayList<String>> getCommonLanguages(
+            HashMap<String, Double> mainUserStat, HashMap<String, HashMap<String, Double>> stats) {
+        HashMap<String, ArrayList<String>> commonLanguages = new HashMap<>();
+        stats.keySet().forEach(u -> commonLanguages.put(u, new ArrayList<>(sort(stats.get(u))
+                .keySet().stream()
+                .filter(s -> !s.equals(repoCount) && !s.equals("Other") && mainUserStat.containsKey(s))
+                .limit(5)
+                .collect(Collectors.toList()))));
+        return commonLanguages;
     }
 
     /**
@@ -168,6 +188,13 @@ public class Ai {
         }
 
         HashMap<String, Double> scores = getSimilarityScore(mainUserStats, stats);
+        HashMap<String, ArrayList<String>> commons = getCommonLanguages(mainUserStats, stats);
+
+        list.parallelStream().forEach(p -> {
+            p.setCommonLanguages(commons.get(p.getGithub().value));
+            p.setSimScore(Math.round(scores.get(p.getGithub().value) * 10000) / 100.0);
+        });
+
         logger.info("Similarity Scores: " + scores);
         FXCollections.sort(list, (p1, p2) -> {
             double s1 = scores.get(p1.getGithub().value);

@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -65,6 +66,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         this.mainWindow = mainWindow;
         this.logic = logic;
         welcomeMessage.setText(WELCOME_MESSAGE);
+        submit.requestFocus();
     }
 
     /**
@@ -90,6 +92,14 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
     public void close() {
         logger.info("Closing Profile Window");
         getRoot().close();
+    }
+
+    /**
+     * Closes the application.
+     */
+    public void handleExit() {
+        MainWindow.setDone(true);
+        ThreadProcessor.stopAllThreads();
     }
 
     /**

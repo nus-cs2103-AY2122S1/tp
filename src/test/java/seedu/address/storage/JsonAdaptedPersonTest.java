@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -42,6 +44,18 @@ public class JsonAdaptedPersonTest {
     private static final Image VALID_IMAGE = new Image(JsonAdaptedPersonTest.class
             .getResourceAsStream("/images/profile.png"));
     private static final boolean NOT_IS_FAVOURITE = false;
+
+    @Test
+    public void isDefaultImage_defaultImage_returnsTrue() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
+        assertTrue(person.isDefaultImage(new Image(getClass().getResourceAsStream("/images/profile.png"))));
+    }
+
+    @Test
+    public void isDefaultImage_randomImage_returnsFalse() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
+        assertFalse(person.isDefaultImage(new Image(getClass().getResourceAsStream("/images/logo.png"))));
+    }
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
