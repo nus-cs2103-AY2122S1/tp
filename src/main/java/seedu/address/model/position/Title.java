@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Title {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Titles should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Position titles should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the Title must not be a whitespace,

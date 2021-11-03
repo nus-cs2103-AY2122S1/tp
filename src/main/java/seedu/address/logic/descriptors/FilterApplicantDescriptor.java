@@ -76,9 +76,8 @@ public class FilterApplicantDescriptor {
 
     @Override
     public String toString() {
-        Stream<String> filterDescriptions = Stream.of(getPositionTitle(), getApplicationStatus())
-                .flatMap(Optional::stream)
-                .map(filter -> filter.getClass().getSimpleName() + ": " + filter);
-        return filterDescriptions.collect(Collectors.joining("; ", "", "."));
+        return String.join(", ",
+                getPositionTitle().map(title -> "Position: " + title).orElse("")
+                + getApplicationStatus().map(status -> "Status: " + status).orElse(""));
     }
 }

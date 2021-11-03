@@ -196,7 +196,7 @@ Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
 
 * The position filter is case-sensitive. e.g `software engineer` will not match `Software Engineer`
 * The status filter is case-insensitive. e.g. `accepted` or `ACCEPTED` will both match the `"Accepted"` application status.
-* A variable number of filters can be specified.
+* A variable number of filters can be specified, but at least one must be present.
 * The filtering uses a logical `AND`. e.g. `filter-applicant pos/software engineer status/accepted` will match all applicants applying to the `software engineer` position AND with application status `"Accepted"`.
 * Consecutive calls are independent of one another (i.e. the filters do not stack).
 
