@@ -46,6 +46,14 @@ public class Appointment {
         return clients.asUnmodifiableObservableList();
     }
 
+    public LocalDateTime getStart() {
+        return this.getTimePeriod().getStartDateTime();
+    }
+
+    public LocalDateTime getEnd() {
+        return this.getTimePeriod().getEndDateTime();
+    }
+
     /**
      * Creates a string representation of the start timing.
      */
