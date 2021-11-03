@@ -273,67 +273,6 @@ DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> Uniq
 **`SortCommand:`**      
 SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>#sort()
 
-### Sort feature
-
-The sort mechanism is facilitated by the built-in `Comparator` interface. The SortCommand constructor takes in a
-predicate enum instruction as a parameter depending on whether the user requested to sort by name or count. The
-items' respective fields are then compared with a `Comparator` so that the updated list displayed is sorted.
-`Comparator<Item>` interface is implemented by different classes below:
-
-* `ItemNameComparator` — allows sorting of items by name
-* `ItemCountComparator` — allows sorting of items by count
-
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
-
-Step 1. The user opens up BogoBogo and executes `sort n/` to sort items by name. The `LogicManager` then calls the
-`AddressBookParser` which create a `SortCommandParser` object. Then, `SortCommandParser#parse()` creates a `SortCommand`
-object. Then the `LogicManager` calls the `SortCommand#execute()` which calls the `Model#SortItems()` and creates an
-`ItemNameComparator` object which is passed as a parameter inside `Model#SortItems()`. The `Model#SortItems()` then
-update the display list with items sorted by name according to the `ItemNameComparator#compare()` method.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input does not input any field to sort by, SortCommandParser will throw a ParseException and a SortCommand will not be created.
-
-Step 2. The updated list with items sorted by name will then be shown to the user. The same procedure above is executed
-for sorting by count as well.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user tries to sort when not in inventory mode, a CommandException will be thrown by SortCommand to remind user to list first. 
-
-<div>
-
-The following sequence diagram shows how the sort operation works:
-
-![SortSequenceDiagram](images/SortSequenceDiagram.png)
-
-### Find feature 
-
-The find mechanism is facilitated by the built-in `Predicate` class. The FindCommand constructor takes in a predicate 
-type as a parameter and the list is then filtered with `ModelManager#updateFilteredItemList` method to only contain the 
-items that match the predicate specified. `Predicate<Item>` interface is implemented by 3 different classes:
-
-* `IdContainsNumberPredicate` — allows finding of items by Id
-* `NameContainsKeywordsPredicate` — allows finding of items by Name
-* `TagContainsKeywordsPredicate` — allows finding of items by Tag
-
-Given below is an example usage scenario and how the find mechanism behaves at each step.
-
-Step 1. The user opens up BogoBogo and executes `find n/Chocolate` to find items with the name chocolate. The 
-`LogicManager` then calls the `AddressBookParser` which create a `FindCommandParser` object. Then, `FindCommandParser#parse()`
-then creates a `FindCommand` object and `NameContainsKeywordsPredicate` object. The `NameContainsKeywordsPredicate` is 
-passed as a field of the FindCommand constructor. Then, the `LogicManager` calls the `FindCommand#execute()` 
-which will update the filtered list with items that matches the predicate stated. 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input a wrong format of the name, id or tag, a ParseException will be thrown by FindCommandParser and a FindCommand will not be created. 
-
-Step 2. The updated list with items that matches the predicate will then be shown to the user. If none matches, an empty
-list will be shown. The same procedure above is executed for finding by Id and Tags as well.
-
-<div>
-
-The following sequence diagram shows how the find operation works:
-
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
-
-
 #### Design considerations:
 
 **Aspect:**
