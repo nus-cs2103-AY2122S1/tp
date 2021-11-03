@@ -73,7 +73,7 @@ Here are several useful tips on how to read and intrepret this guide.
 
 ### Reading the User Guide
 
-This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide. 
+This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide.
 This would be useful for you should they be unclear to you.
 
 #### Technical terms
@@ -142,7 +142,7 @@ This section outlines all the features that **TuitiONE** has. You will be able t
   e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used as many times as the user would like.<br>
-  e.g. `[r/REMARK]…` can be used multiple times like `r/sick` or `r/absent r/graduated`, or can be omitted altogether. 
+  e.g. `[r/REMARK]…` can be used multiple times like `r/sick` or `r/absent r/graduated`, or can be omitted altogether.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PARENT_CONTACT`, `p/PARENT_CONTACT n/NAME` is also acceptable.
@@ -187,9 +187,9 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
 * You can filter by `GRADE`, `SUBJECT`, or both.
 
     * If you are only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
-  
+
     * If you are only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
-  
+
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
 * `GRADE` can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
@@ -352,11 +352,11 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
 * Enrolling a student is only possible if the student:
   1. has the same `grade` as the lesson,
-  
+
   2. is not enrolled to the lesson and,
-  
+
   3. has no other lessons with conflicting timing.
-  
+
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
@@ -493,7 +493,7 @@ Command Format: `clear`
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:** Using this command removes all data from <b>TuitiONE</b>. Only use this command if you want to reset all information on the application and start anew.
-  
+
 </div>
 
 #### Exiting the program : `exit`
@@ -524,7 +524,7 @@ If the changes you made to the data file render its format invalid, <b>TuitiONE<
 
 ## **Command summary**
 
-Action | Format | Examples 
+Action | Format | Examples
 --------|-------|----------
 **Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` | `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 **Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` | `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
@@ -577,4 +577,4 @@ Action | Format | Examples
 
 * **Q:** Can lessons of the same subject and grade start at the same time?
 
-  **A:** No. **TuitiONE** would count a lesson of the same grade and subject that start at the same time on the same day as a conflict. 
+  **A:** No. **TuitiONE** would count a lesson of the same grade and subject that start at the same time on the same day as a conflict.
