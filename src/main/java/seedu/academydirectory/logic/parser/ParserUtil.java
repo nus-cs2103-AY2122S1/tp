@@ -31,8 +31,6 @@ public class ParserUtil {
             + "with 0 indicating absence while 1 indicates the student was present.";
     public static final String MESSAGE_INVALID_PARTICIPATION_STATUS =
             "Change in Participation must be between -100 and 100.";
-    public static final String MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW = "Invalid usage of command. No other keyword should" +
-            "follow the command";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -238,12 +236,6 @@ public class ParserUtil {
             return true;
         } else {
             return false;
-        }
-    }
-
-    public static void assertSingularCommand(String arguments) throws ParseException {
-        if (!arguments.isEmpty()) {
-            throw new ParseException(MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW);
         }
     }
 }

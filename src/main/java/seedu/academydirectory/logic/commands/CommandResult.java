@@ -86,7 +86,6 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && commitMessage.equals(otherCommandResult.commitMessage)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }

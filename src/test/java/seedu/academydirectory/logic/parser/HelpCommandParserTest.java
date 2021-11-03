@@ -30,18 +30,18 @@ public class HelpCommandParserTest {
     private HelpCommandParser parser = new HelpCommandParser();
 
     private final String[] validInputs = {
-            "add", "attendance", "clear", "delete",
-            "edit", "exit", "filter", "get",
-            "grade", "list", "participation",
-            "show", "sort", "tag", "visualize"
+        "add", "attendance", "clear", "delete",
+        "edit", "exit", "filter", "get",
+        "grade", "list", "participation",
+        "show", "sort", "tag", "visualize"
     };
 
     private final HashMap<String, String> mapInputsToCorrectHelpMessage = new HashMap<>();
 
     private final String[] invalidInputs = {
-            "CS2103T", "my life sucks", "NUS",
-            "Computer Science", "02hf40hg240",
-            "[;.;..;[", "23rglbt;mbw", "-3429"
+        "CS2103T", "my life sucks", "NUS",
+        "Computer Science", "02hf40hg240",
+        "[;.;..;[", "23rglbt;mbw", "-3429"
     };
 
     @Test
