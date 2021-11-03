@@ -817,7 +817,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Use cases
-(For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise. UC = Use Case)
+(For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise.)
 
 **<u>Use Case: UC1 - Add a new position</u>**
 
@@ -1208,21 +1208,27 @@ NA
 9. Developer & User guides should be PDF friendly.
 
 
-
 *{More to be added}*
+
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Job position**: A job opening within the user's company that is looking for potential hires
-* **Applicant**: A potential hire that is applying for a particular job position
+* **Applicant**: A potential hire that is applying for a particular job position.
+* **Application Status / Status**: Current application status of an applicant for a particular position. Can be `Accepted`, `Rejected` or `Pending`.
 * **CLI**: Command-line interface. CLI programs take in input in the form of text-based commands, usually input by the user, to execute the program's various functions.
-* **CAP**: Cumulative average point. Similar to grade point average (GPA), it is a numerical measure of a student's average academic performance across their duration of study.
+* **Guarantees**: Conditions that will be fulfilled after the use case ends.  
+* **Job position**: A job opening within the user's company that is looking for potential hires.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **MSS**: Main Success Scenario, the usual steps and outcome of an actor and a use case.
+* **NA**: Not Applicable.
+* **Preconditions**: Conditions that have to be fulfilled before the use case begins.  
+* **Private contact detail**: A contact detail not meant to be circulated.
 * **Rejection rate**: The percentage of jobs for a particular job position that was not accepted by the employee or employer.
-* **Calculation** = `No. of rejected jobs` / `Total no. of jobs applied`.
+* **Rejection rate calculation** = `No. of rejected applicants for a position` / `Total no. of applicants applying to the position`.
+* **UC** = Use Case.
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix: Instructions for manual testing**
 
