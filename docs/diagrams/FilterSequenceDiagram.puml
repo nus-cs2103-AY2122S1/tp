@@ -11,7 +11,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "list:FilteredList<Person>" as filteredPerson MODEL_COLOR
+participant "list:FilteredList<Contact>" as filteredContact MODEL_COLOR
 participant "p:IsInCategoryPredicate" as IsInCategoryPredicate MODEL_COLOR
 end box
 
@@ -57,14 +57,14 @@ deactivate AddressBookParser
 LogicManager -> FilterCommand : execute()
 activate FilterCommand
 
-FilterCommand -> Model : updateFilteredPersonList(p)
+FilterCommand -> Model : updateFilteredContactList(p)
 activate Model
 
-Model -> filteredPerson : setPredicate(p)
-activate filteredPerson
+Model -> filteredContact : setPredicate(p)
+activate filteredContact
 
-filteredPerson --> Model : list
-deactivate filteredPerson
+filteredContact --> Model : list
+deactivate filteredContact
 
 Model --> FilterCommand
 deactivate Model

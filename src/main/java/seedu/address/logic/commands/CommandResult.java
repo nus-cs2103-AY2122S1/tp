@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.summary.Summary;
 
 /**
@@ -28,7 +28,7 @@ public class CommandResult {
 
     private final boolean displaySummary;
 
-    private Person personToDisplay;
+    private Contact contactToDisplay;
 
     private Summary summary;
 
@@ -42,7 +42,7 @@ public class CommandResult {
         this.exit = exit;
         this.display = false;
         this.displaySummary = false;
-        this.personToDisplay = null;
+        this.contactToDisplay = null;
     }
 
     /**
@@ -63,15 +63,15 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     *  the specified {@code personToDisplay} and other fields set to their default value.
+     *  the specified {@code contactToDisplay} and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, Person personToDisplay) {
+    public CommandResult(String feedbackToUser, Contact contactToDisplay) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
         this.display = true;
         this.displaySummary = false;
-        this.personToDisplay = personToDisplay;
+        this.contactToDisplay = contactToDisplay;
         this.showCommandSummary = false;
     }
 
@@ -105,7 +105,7 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isDisplayPerson() {
+    public boolean isDisplayContact() {
         return display;
     }
 
@@ -113,8 +113,8 @@ public class CommandResult {
         return displaySummary;
     }
 
-    public Person getPersonToDisplay() {
-        return personToDisplay;
+    public Contact getContactToDisplay() {
+        return contactToDisplay;
     }
 
     public Summary getSummaryToDisplay() {

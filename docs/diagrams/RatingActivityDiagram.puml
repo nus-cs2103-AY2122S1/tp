@@ -12,8 +12,8 @@ if () then ([contains rating field])
     endif
 else ([else])
 endif
-:Create Person object;
-:Add Person to contacts;
+:Create Contact object;
+:Add Contact to contacts;
 :Save AddressBook;
 stop
 

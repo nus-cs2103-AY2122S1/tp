@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
-'participant "editPersonDescriptor:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+'participant "editContactDescriptor:EditContactDescriptor" as EditContactDescriptor LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -17,7 +17,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "editedPerson:Person" as Person MODEL_COLOR
+participant "editedContact:Contact" as Contact MODEL_COLOR
 end box
 
 [-> LogicManager : execute("edit 1 c/att")
@@ -44,7 +44,7 @@ ParserUtil -> EditCommandParser
 deactivate ParserUtil
 
 create EditCommand
-EditCommandParser -> EditCommand: EditCommand(1, personDescriptor)
+EditCommandParser -> EditCommand: EditCommand(1, contactDescriptor)
 activate EditCommand
 
 EditCommand -> EditCommandParser
@@ -60,25 +60,25 @@ LogicManager -> EditCommand: execute(model)
 deactivate LogicManager
 
 activate EditCommand
-EditCommand -> EditCommand: createEditedPerson(personToEdit, editPersonDescriptor)
-note bottom: editPersonDescriptor object holds the updated fields
+EditCommand -> EditCommand: createEditedContact(contactToEdit, editContactDescriptor)
+note bottom: editContactDescriptor object holds the updated fields
 activate EditCommand
 
-create Person
-EditCommand -> Person
-activate Person
+create Contact
+EditCommand -> Contact
+activate Contact
 
-Person -> EditCommand
-deactivate Person
+Contact -> EditCommand
+deactivate Contact
 deactivate EditCommand
 
-EditCommand -> Model: setPerson(personToEdit, editedPerson)
+EditCommand -> Model: setContact(contactToEdit, editedContact)
 activate Model
 
 Model -> EditCommand
 deactivate Model
 
-EditCommand -> Model: updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+EditCommand -> Model: updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS)
 activate Model
 
 Model -> EditCommand

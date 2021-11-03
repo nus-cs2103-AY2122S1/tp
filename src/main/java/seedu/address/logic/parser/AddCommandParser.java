@@ -15,14 +15,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rating;
-import seedu.address.model.person.Review;
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Phone;
+import seedu.address.model.contact.Rating;
+import seedu.address.model.contact.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,9 +56,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Rating rating = argMultimap.getValue(PREFIX_RATING).isPresent()
             ? ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get()) : ParserUtil.parseRating();
 
-        Person person = new Person(categoryCode, name, phone, email, address, review, tagList, rating);
+        Contact contact = new Contact(categoryCode, name, phone, email, address, review, tagList, rating);
 
-        return new AddCommand(person);
+        return new AddCommand(contact);
     }
 
     /**

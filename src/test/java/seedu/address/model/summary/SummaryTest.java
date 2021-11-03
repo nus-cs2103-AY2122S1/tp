@@ -1,7 +1,7 @@
 package seedu.address.model.summary;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 
 
@@ -25,7 +25,7 @@ public class SummaryTest {
     @Test
     public void execute_getNumberOfContacts_success() {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
-        int size = addressBook.getPersonList().size();
+        int size = addressBook.getContactList().size();
 
         Summary summary = new Summary(getTypicalAddressBook());
         int summarySize = summary.getNumberOfContacts();
@@ -36,7 +36,7 @@ public class SummaryTest {
     @Test
     public void execute_getNumberOfContactsGui_success() {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
-        int size = addressBook.getPersonList().size();
+        int size = addressBook.getContactList().size();
 
         Summary summary = new Summary(getTypicalAddressBook());
         String summarySize = summary.getNumberOfContactsGui();
@@ -51,8 +51,8 @@ public class SummaryTest {
         Summary summary = new Summary(addressBook);
         HashMap<String, Integer> summaryCategory = summary.getPercentageCategory();
 
-        String category = PersonBuilder.DEFAULT_CATEGORY_CODE;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
+        model.addContact(new ContactBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -82,8 +82,8 @@ public class SummaryTest {
         Summary summary = new Summary(addressBook);
         ObservableList<PieChart.Data> summaryCategory = summary.getPercentageCategoryGui();
 
-        String category = PersonBuilder.DEFAULT_CATEGORY_CODE;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        String category = ContactBuilder.DEFAULT_CATEGORY_CODE;
+        model.addContact(new ContactBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -113,8 +113,8 @@ public class SummaryTest {
         Summary summary = new Summary(addressBook);
         HashMap<String, Integer> summaryRating = summary.getPercentageRatings();
 
-        String category = PersonBuilder.DEFAULT_RATING;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        String category = ContactBuilder.DEFAULT_RATING;
+        model.addContact(new ContactBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
@@ -143,8 +143,8 @@ public class SummaryTest {
         Summary summary = new Summary(addressBook);
         ObservableList<PieChart.Data> summaryRating = summary.getPercentageRatingsGui();
 
-        String category = PersonBuilder.DEFAULT_RATING;
-        model.addPerson(new PersonBuilder().withName("Alice").build());
+        String category = ContactBuilder.DEFAULT_RATING;
+        model.addContact(new ContactBuilder().withName("Alice").build());
 
 
         ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();

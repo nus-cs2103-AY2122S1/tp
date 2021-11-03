@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 /**
- * Displays details of a person identified using it's displayed index or name on the side panel.
+ * Displays details of a contact identified using it's displayed index or name on the side panel.
  */
 public abstract class ViewCommand extends Command {
 
@@ -9,11 +9,11 @@ public abstract class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views details of the contact identified by the index number or name "
-            + "used in the displayed person list.\n"
+            + "used in the displayed contact list.\n"
             + "Parameters: INDEX (must be a positive integer) or NAME (must be full name) \n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed contact: %1$s";
+    public static final String MESSAGE_VIEW_CONTACT_SUCCESS = "Displayed contact: %1$s";
 
     public ViewCommand() {
     }

@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
+import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.storage.ExportStorage;
 
 public class ExportCommandIndexTest {
@@ -37,64 +37,64 @@ public class ExportCommandIndexTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToExport = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_PERSON);
+        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
 
         String expectedMessage = ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.exportPerson(personToExport);
+        expectedModel.exportContact(contactToExport);
 
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         ExportCommandIndex exportCommand = new ExportCommandIndex(outOfBoundIndex);
 
-        assertCommandFailure(exportCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(exportCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
-        Person personToExport = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_PERSON);
+        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
 
         String expectedMessage = ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.exportPerson(personToExport);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        expectedModel.exportContact(contactToExport);
+        showContactAtIndex(expectedModel, INDEX_FIRST_CONTACT);
 
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_CONTACT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getContactList().size());
 
         ExportCommandIndex exportCommand = new ExportCommandIndex(outOfBoundIndex);
 
-        assertCommandFailure(exportCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(exportCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        ExportCommandIndex exportFirstCommand = new ExportCommandIndex(INDEX_FIRST_PERSON);
-        ExportCommandIndex exportSecondCommand = new ExportCommandIndex(INDEX_SECOND_PERSON);
+        ExportCommandIndex exportFirstCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
+        ExportCommandIndex exportSecondCommand = new ExportCommandIndex(INDEX_SECOND_CONTACT);
 
         // same object -> returns true
         assertTrue(exportFirstCommand.equals(exportFirstCommand));
 
         // same values -> returns true
-        ExportCommand exportFirstCommandCopy = new ExportCommandIndex(INDEX_FIRST_PERSON);
+        ExportCommand exportFirstCommandCopy = new ExportCommandIndex(INDEX_FIRST_CONTACT);
         assertTrue(exportFirstCommand.equals(exportFirstCommandCopy));
 
         // different types -> returns false
@@ -103,7 +103,7 @@ public class ExportCommandIndexTest {
         // null -> returns false
         assertFalse(exportFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(exportFirstCommand.equals(exportSecondCommand));
     }
 

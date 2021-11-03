@@ -9,9 +9,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.IsFilterablePredicate;
-import seedu.address.model.person.Rating;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.IsFilterablePredicate;
+import seedu.address.model.contact.Rating;
 import seedu.address.model.summary.Summary;
 import seedu.address.model.tag.Tag;
 
@@ -49,11 +49,11 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
         Summary summary = new Summary(model.getAddressBook());
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size()), summary);
+                        model.getFilteredContactList().size()), summary);
     }
 
     @Override

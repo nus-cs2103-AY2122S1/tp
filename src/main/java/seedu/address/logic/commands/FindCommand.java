@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.IsFindableContainsKeywordsPredicate;
+import seedu.address.model.contact.IsFindableContainsKeywordsPredicate;
 import seedu.address.model.summary.Summary;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all contacts in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -30,11 +30,11 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
         Summary summary = new Summary(model.getAddressBook());
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size()), summary);
+                        model.getFilteredContactList().size()), summary);
     }
 
     @Override

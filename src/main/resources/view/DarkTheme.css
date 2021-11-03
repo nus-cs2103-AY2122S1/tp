@@ -392,7 +392,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #contactListPanel, #contactWebpage {
     -fx-effect: innershadow(gaussian, black, 100, 100, 100, 100);
 }
 

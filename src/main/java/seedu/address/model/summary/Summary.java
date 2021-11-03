@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 
 
 /**
@@ -20,7 +20,7 @@ public class Summary {
     private final HashMap<String, Integer> percentageRatings;
     private HashMap<String, Integer> percentageCategory;
 
-    private List<Person> personList;
+    private List<Contact> contactList;
 
 
     /**
@@ -28,7 +28,7 @@ public class Summary {
      * @param addressBook addressBook to summarise.
      */
     public Summary(ReadOnlyAddressBook addressBook) {
-        this.personList = addressBook.getPersonList();
+        this.contactList = addressBook.getContactList();
         numberOfContacts = setNumberOfContacts();
         percentageCategory = setNumberCategory();
         percentageRatings = setPercentageRatings();
@@ -39,7 +39,7 @@ public class Summary {
      * @return size of AddressBook.
      */
     private int setNumberOfContacts() {
-        return personList.size();
+        return contactList.size();
     }
 
     /**
@@ -48,8 +48,8 @@ public class Summary {
      */
     private HashMap<String, Integer> setPercentageRatings() {
         HashMap<String, Integer> count = new HashMap<>();
-        for (Person person : personList) {
-            String rating = person.getRating().toString();
+        for (Contact contact : contactList) {
+            String rating = contact.getRating().toString();
             if (count.containsKey(rating)) {
                 int value = count.get(rating);
                 int newValue = value + 1;
@@ -70,8 +70,8 @@ public class Summary {
     private HashMap<String, Integer> setNumberCategory() {
         HashMap<String, Integer> count = new HashMap<>();
 
-        for (Person person : personList) {
-            String categoryString = person.getCategoryCode().toString().toLowerCase();
+        for (Contact contact : contactList) {
+            String categoryString = contact.getCategoryCode().toString().toLowerCase();
             if (count.containsKey(categoryString)) {
                 int value = count.get(categoryString);
                 int newValue = value + 1;

@@ -55,7 +55,7 @@ deactivate AddressBookParser
 LogicManager -> FindCommand : execute()
 activate FindCommand
 
-FindCommand -> Model : updateFilteredPersonList(predicate)
+FindCommand -> Model : updateFilteredContactList(predicate)
 activate Model
 
 Model --> FindCommand

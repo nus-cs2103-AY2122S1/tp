@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
 ### Logic component
 
@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -121,12 +121,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
+* stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Contact` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -156,7 +156,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Category feature
 
 #### Implementation
-The category feature adds to the attributes of the `Person` object. Similar to the other fields of the `Person` object,
+The category feature adds to the attributes of the `Contact` object. Similar to the other fields of the `Contact` object,
 it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix.
 
 Additionally, it implements the following operations:
@@ -252,16 +252,16 @@ The following activity diagram summarises what happens when a Tour Guide execute
 
 The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
 
-* `Model#updateFilteredPersonList(Predicate p)` - iterates through the addressBook `PersonList`. If a `Person` returns true, the `Person` is added to the `filteredPersons` list.
-* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a person’s `categoryCode` is in the Set
+* `Model#updateFilteredContactList(Predicate p)` - iterates through the addressBook `ContactList`. If a `Contact` returns true, the `Contact` is added to the `filteredContacts` list.
+* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a contact’s `categoryCode` is in the Set
 
 Given below is an example usage scenario of the filter mechanism.
 
-Step 1. The user launched the application for the first time. The `filteredPerson` List will be initialized with all persons in the addressBook `UniquePersonList`.
+Step 1. The user launched the application for the first time. The `filteredContact` List will be initialized with all contacts in the addressBook `UniqueContactList`.
 
 Step 2. The user executes `filter c/att` command to filter all the attraction contacts in the address book. The `Parser` parses the user input and creates a `FilterCommand`.
 
-Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredPersonList()` with the predicate as an argument, causing the `filteredPerson` List to be modified to contain only attraction contacts in the address book.
+Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredContactList()` with the predicate as an argument, causing the `filteredContact` List to be modified to contain only attraction contacts in the address book.
 
 The following sequence diagram shows how the filter operation works:
 
@@ -287,7 +287,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The Ratings feature is implemented as an additional field in the `Person` object. Similar to the other fields in the `Person` object, the `rating` field is implemented with the following two operations:
+The Ratings feature is implemented as an additional field in the `Contact` object. Similar to the other fields in the `Contact` object, the `rating` field is implemented with the following two operations:
 
 * `AddCommand#execute()` —  Optionally initialises rating of contact added.
 * `EditCommand#execute()` —  Optionally modifies rating of contact added.
@@ -298,7 +298,7 @@ The Ratings feature is implemented as an additional field in the `Person` object
 
 Given below is an example usage scenario and how the rating mechanism behaves at each step.
 
-Step 1. The user launches the application. For each contact, the `PersonCard` object is constructed with rating as one of the fields.
+Step 1. The user launches the application. For each contact, the `ContactCard` object is constructed with rating as one of the fields.
 
 Step 2. The user executes `add ... ra/3` to add a new contact. The `add` command calls `ParserUtil#ParseRating()`, creating a `Rating` object if a valid input rating is received.
 
@@ -348,11 +348,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -360,7 +360,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -405,20 +405,16 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Review Feature
 
 #### Implementation
 
-The review feature builds upon the `Person` class by adding more functionality to the class. It utilises the `rv/` tag in the `add` command to add a review stored internally as a `Review` object.
+The review feature builds upon the `Contact` class by adding more functionality to the class. It utilises the `rv/` tag in the `add` command to add a review stored internally as a `Review` object.
 It implements the following operations:
 * `isValidReview()`  — Determines if the input value is valid.
 * `isEmptyReview()`  — Determines if the stored Review is empty (stored as `-No Review-` String).
@@ -478,7 +474,7 @@ The following sequence diagram gives an overview of how `Summary` works:
     * Pros: Easier to implement, guaranteed to not edit the internals.
     * Cons: Exposing internal workings of `AddressBook`.
 
-* **Alternative 2:** Gets data directly from `Person`, `Review` etc.
+* **Alternative 2:** Gets data directly from `Contact`, `Review` etc.
     * Pros: Data is kept directly with the low-level classes and pulled from there.
     * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
 --------------------------------------------------------------------------------------------------------------------
@@ -523,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
 |`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
 |`***`|Tour Guide|View all the contacts in my list |find contacts whose names I have forgotten|
-|`*`|Tour Guide|Sort my contacts by date visited/added||
+|`*`|Tour Guide|Sort my contacts by name or by rating||
 |`*`|Seasoned tour guide|Merge contacts |prevent duplicates or inaccurate information.|
 |`*`|Forgetful|Retrieve recently viewed/most frequently used contacts|easily access certain contacts|
 |`**`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
@@ -637,7 +633,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should respond within a second.
 5.  The system should not be able to connect to online services.
@@ -679,17 +675,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

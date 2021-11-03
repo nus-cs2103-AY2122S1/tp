@@ -7,11 +7,11 @@ start
 if () then ([valid command])
     :Parse index;
     if() then ([valid index])
-        :Create editPersonDescriptor Object;
+        :Create editContactDescriptor Object;
         if() then ([valid category])
-            :Update editPersonDescriptor with new category code;
-            :Create new Person Object with updated fields;
-            :Replace old Person Object with new Person Object;
+            :Update editContactDescriptor with new category code;
+            :Create new Contact Object with updated fields;
+            :Replace old Contact Object with new Contact Object;
             :Save AddressBook;
         else([else])
             :Invalid Category Message shown on GUI;
