@@ -7,11 +7,12 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Name;
+
 
 /**
- * Displays details of a person identified using it's displayed name on the side panel.
+ * Displays details of a contact identified using it's displayed name on the side panel.
  */
 public class ViewCommandName extends ViewCommand {
 
@@ -24,16 +25,16 @@ public class ViewCommandName extends ViewCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Contact> lastShownList = model.getFilteredContactList();
 
-        for (Person person : lastShownList) {
-            String fullName = person.getName().fullName;
+        for (Contact contact : lastShownList) {
+            String fullName = contact.getName().fullName;
             if (fullName.equals(targetName.fullName.trim())) {
-                Person selectedPerson = person;
-                return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson), selectedPerson);
+                Contact selectedContact = contact;
+                return new CommandResult(String.format(MESSAGE_VIEW_CONTACT_SUCCESS, selectedContact), selectedContact);
             }
         }
-        throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_NAME);
 
     }
 

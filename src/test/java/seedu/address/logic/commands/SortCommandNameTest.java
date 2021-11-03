@@ -3,16 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_CONTACT_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.JANE;
-import static seedu.address.testutil.TypicalPersons.getRandomTypicalAddressBook;
+import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.BENSON;
+import static seedu.address.testutil.TypicalContacts.CARL;
+import static seedu.address.testutil.TypicalContacts.DANIEL;
+import static seedu.address.testutil.TypicalContacts.ELLE;
+import static seedu.address.testutil.TypicalContacts.FIONA;
+import static seedu.address.testutil.TypicalContacts.GEORGE;
+import static seedu.address.testutil.TypicalContacts.HOON;
+import static seedu.address.testutil.TypicalContacts.JANE;
+import static seedu.address.testutil.TypicalContacts.getRandomTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,10 +23,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.IsFilterablePredicate;
-import seedu.address.model.person.IsFindableContainsKeywordsPredicate;
-import seedu.address.model.person.Rating;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.IsFilterablePredicate;
+import seedu.address.model.contact.IsFindableContainsKeywordsPredicate;
+import seedu.address.model.contact.Rating;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -40,7 +40,7 @@ public class SortCommandNameTest {
     // sort empty list
     @Test
     public void execute_emptyList_sorted() {
-        // create emptyModel and emptyExpectedModel of empty filteredPersons;
+        // create emptyModel and emptyExpectedModel of empty filteredContacts;
         AddressBook ab = new AddressBook();
 
         Model emptyModel = new ModelManager(ab, new UserPrefs());
@@ -54,7 +54,7 @@ public class SortCommandNameTest {
 
         assertCommandSuccess(command, emptyModel, expectedMessage, emptyExpectedModel);
 
-        assertEquals(Collections.emptyList(), emptyModel.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), emptyModel.getFilteredContactList());
     }
 
     // sort list with one contact
@@ -62,7 +62,7 @@ public class SortCommandNameTest {
     public void execute_listWithOneElement_sorted() {
         // create ab with one element
         AddressBook ab = new AddressBook();
-        ab.addPerson(HOON);
+        ab.addContact(HOON);
 
         Model oneElementModel = new ModelManager(ab, new UserPrefs());
         Model oneElementExpectedModel = new ModelManager(ab, new UserPrefs());
@@ -75,7 +75,7 @@ public class SortCommandNameTest {
 
         assertCommandSuccess(command, oneElementModel, expectedMessage, oneElementExpectedModel);
 
-        assertEquals(Arrays.asList(HOON), oneElementModel.getFilteredPersonList());
+        assertEquals(Arrays.asList(HOON), oneElementModel.getFilteredContactList());
     }
 
     // sort original list
@@ -90,7 +90,7 @@ public class SortCommandNameTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE),
-            model.getFilteredPersonList());
+            model.getFilteredContactList());
     }
 
 
@@ -102,20 +102,20 @@ public class SortCommandNameTest {
                 Collections.singleton(new CategoryCode("com")),
                 new Rating("5"),
                 Collections.emptySet());
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
 
         String expectedMessage = String.format(MESSAGE_SORT_CONTACT_SUCCESS, "by name");
 
         SortCommandName command = new SortCommandName();
 
         // filter expectedModel by c/att
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
 
         expectedModel.sortList("name");
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(FIONA, JANE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(FIONA, JANE), model.getFilteredContactList());
     }
 
     // sort list after find command
@@ -125,20 +125,20 @@ public class SortCommandNameTest {
         IsFindableContainsKeywordsPredicate predicate =
                 new IsFindableContainsKeywordsPredicate(Arrays.asList("Meier".split("\\s+")));
 
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
 
         String expectedMessage = String.format(MESSAGE_SORT_CONTACT_SUCCESS, "by name");
 
         SortCommandName command = new SortCommandName();
 
         // find "Meier" in expectedModel
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
 
         expectedModel.sortList("name");
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredContactList());
     }
 
 
@@ -158,7 +158,7 @@ public class SortCommandNameTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE),
-            model.getFilteredPersonList());
+            model.getFilteredContactList());
 
     }
 
@@ -178,6 +178,6 @@ public class SortCommandNameTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE),
-            model.getFilteredPersonList());
+            model.getFilteredContactList());
     }
 }

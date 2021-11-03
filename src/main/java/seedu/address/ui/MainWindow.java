@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private ResultDisplay resultDisplay;
     private Help helpWindow;
     private HelpWindow backUpHelpWindow;
@@ -46,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contactListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -123,8 +123,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSummary(), commandBox);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList(), logic.getSummary(), commandBox);
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
     }
 
     /**
@@ -149,6 +149,7 @@ public class MainWindow extends UiPart<Stage> {
             try {
                 helpWindow.openUserGuide();
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
+                logger.info(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {
@@ -157,13 +158,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else opens the secondary internal help window.
+     * Opens the online Command Summary if possible, else opens the secondary internal help window.
      */
     public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openCommandSummary();
             } catch (IOException | SecurityException | UnsupportedOperationException ex) {
+                logger.info(ex.getMessage());
                 handleBackUpHelp();
             }
         } else {
@@ -198,8 +200,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ContactListPanel getContactListPanel() {
+        return contactListPanel;
     }
 
     /**
@@ -225,12 +227,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isDisplayPerson()) {
-                personListPanel.handleDisplay(commandResult.getPersonToDisplay());
+            if (commandResult.isDisplayContact()) {
+                contactListPanel.handleDisplay(commandResult.getContactToDisplay());
             }
 
             if (commandResult.isDisplaySummary()) {
-                personListPanel.handleDisplay(commandResult.getSummaryToDisplay());
+                contactListPanel.handleDisplay(commandResult.getSummaryToDisplay());
             }
 
             return commandResult;

@@ -64,20 +64,40 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start
+# Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. You may install it here
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
 2. Download the latest `wheretourgo.jar` from [here](update on final)
 
 3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data<br><br>
+**For Windows**
+1. Simply double-click the file to start the app
+
+**For Mac**
+1. Open Terminal
+
+2. Navigate to the home folder you have chosen for your WhereTourGo.<br>
+For example, if you have moved the app to Desktop, simply run:
+
+```
+cd Desktop
+```
+
+
+3. Run the following command:
+```
+java -jar WhereTourGo.jar
+```
+
+<br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/sample.png)
    <br><br>
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window
-   <br><br>
-   Some example commands you can try:
-   
+
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+<br><br>
+Some example commands you can try:
+
   * **`list`** : Lists all contacts
 
   * **`add`**`c/att n/Mandarin Oriental p/98765432 e/Mandarin_Oriental@example.com a/Marina Bay Sands, Singapore 123432` : Adds a contact named `Mandarin Oriental`
@@ -88,7 +108,7 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 
   * **`exit`** : Exits the app
 
-6. Refer to the [Features](#features) below for details of every command
+You can refer to the [Features](#features) below for details of every command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +176,7 @@ More examples will be provided for each command in [Features](#features).
 * Parameters can be in any order<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken<br>
+* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
@@ -182,11 +202,11 @@ More examples will be provided for each command in [Features](#features).
   * Transport: `tpt`
   * Others: `oth`
 
-<div markdown="block" class="alert alert-danger"> :warning: 
+<div markdown="block" class="alert alert-danger"> :warning:
  Only alphanumeric symbols are allowed in the contact fields. Characters like ‘&’, ‘!’, ‘?’ are not allowed.
 </div>
 
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -296,9 +316,9 @@ Expected Outcome for `find bay`:
 
 
 ### Filtering contacts: `filter`
-Shows a list of all contacts in the specified category or with the specified rating.
+Shows a list of all contacts in the specified category, with the specified rating and/or with the specified tag.
 
-Format: `filter [c/CATEGORY] [ra/NUMBER] ... `
+Format: `filter [c/CATEGORY] [ra/NUMBER] [t/TAGS] ... `
 
 * Category codes:
   * Attraction :`c/att`
@@ -306,22 +326,26 @@ Format: `filter [c/CATEGORY] [ra/NUMBER] ... `
   * Commerce :`c/com`
   * Accommodation :`c/acc`
   * Transport :`c/tpt`
-* Ratings :
+* Ratings:
   * 1-star : `ra/1`
   * 2-star : `ra/2`
   * 3-star : `ra/3`
   * 4-star : `ra/4`
   * 5-star : `ra/5`
+* Tags:
+  * Any custom tags you've added into your contacts!
+
+
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
-You can add multiple category filters in a single command, but only a single rating filter!
+You can add multiple category and tag filters in a single command, but only a single rating filter!
 </div>
 
 Examples:
 * `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts)
 * `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts)
-* `filter ra/3` returns all contacts with 3-star rating from all categories
-* `filter c/fnb ra/3` returns all F&B contacts with 3-star rating
+* `filter ra/3 t/outdoor` returns all contacts with 3-star rating and outdoor tag from all categories
+* `filter c/fnb ra/3 t/fun t/outdoor` returns all F&B contacts with 3-star rating, and with fun and/or outdoor tags
 
 Expected Outcome for `filter c/fnb`:
 
@@ -463,7 +487,7 @@ Please refer to the FAQ for more information.
 Open the command list in your default Browser.
 Format: `cmd`
 <div markdown="span" class="alert alert-danger">:warning: Caution:
-If the command list cannot be opened in the Browser, a link to the User Guide will be provided. 
+If the command list cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
 
 Please refer to the FAQ for more information.
@@ -475,17 +499,30 @@ Exits the program.
 
 Format: `exit`
 
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
+**Q**: How do I save my data?<br>
+**A**: Your contact list is saved in your hard disk automatically for each command that modifies the list.
+
+**Q**: Where is my data saved?<br>
+**A**: When our app is first opened, it will create a folder named data in the same folder where the JAR file is located.
+This folder contains a file called `addressbook.json` which contains all of your contacts with the corresponding details.
+
+**Q**: Where can I find my text file after executing the `export` command?
+**A**: You can find the nicely-formatted text file called `export.txt` in the folder named data. (Path: `data/export.txt`)
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer. Overwrite the empty data file it creates with the data file from your previous WhereTourGo home folder.
 
-**Q**: Why does cmd/help command not work as intended?<br>
-**A**: 
- 
+**Q**: What do I do if I forget the format of all the commands?<br>
+**A**: You can type either `cmd` to show the command summary or `help` to open our User Guide.
+
+**Q**: Why does cmd/help command open a backup window with a link instead of my browser?<br>
+**A**: Check to ensure that you have a browser installed and updated to the latest version. Restart the app and try again. If the issue still isn't resolved, please contact us at "WhereTourGo@gmail.com".
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Command summary
