@@ -80,7 +80,7 @@ public class DeletePersonCommandTest {
         Person newPerson2 = new PersonBuilder(person2).withModuleCodes(VALID_MODULE_CODE_CS2106).build();
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2100))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1)
@@ -102,7 +102,7 @@ public class DeletePersonCommandTest {
         Set<LessonCode> lessonCodeToDelete = new HashSet<>();
         lessonCodeToDelete.add(new LessonCode("T12"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100 + " T12"))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2100 + " T12"))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, lessonCodeToDelete));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1)
@@ -123,7 +123,7 @@ public class DeletePersonCommandTest {
         Set<LessonCode> lessonCodeToDelete = new HashSet<>();
         lessonCodeToDelete.add(new LessonCode("T12"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106 + " T12"))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2106 + " T12"))),
                 new ModuleCode(VALID_MODULE_CODE_CS2106, lessonCodeToDelete));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
@@ -145,7 +145,7 @@ public class DeletePersonCommandTest {
         Set<LessonCode> lessonCodeToDelete = new HashSet<>();
         lessonCodeToDelete.add(new LessonCode("L08"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100 + " L08"))),
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2100 + " L08"))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, lessonCodeToDelete));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
@@ -188,7 +188,7 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_invalidMultipleModuleCodeUnfilteredList_throwsCommandException() {
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[CS2040S CS2030S]")));
+                Arrays.asList(String.format("CS2040S CS2030S")));
         Set<LessonCode> lessonCodeSet = new HashSet<>();
         lessonCodeSet.add(new LessonCode("CS2030S"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
@@ -200,7 +200,7 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_invalidLessonCodeUnfilteredList_throwsCommandException() {
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[CS2030S T1]")));
+                Arrays.asList(String.format("CS2030S T1")));
         Set<LessonCode> lessonCodeSet = new HashSet<>();
         lessonCodeSet.add(new LessonCode("T1"));
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
@@ -254,7 +254,7 @@ public class DeletePersonCommandTest {
         Person newPerson = new PersonBuilder(person).withModuleCodes(VALID_MODULE_CODE_CS2100).build();
 
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
-                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106)));
+                Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2106)));
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));

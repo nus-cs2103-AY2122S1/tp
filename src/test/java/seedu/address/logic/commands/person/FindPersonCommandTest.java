@@ -137,7 +137,6 @@ public class FindPersonCommandTest {
      */
     private ModuleCodesContainsKeywordsPredicate prepareModulePredicate(String userInput) {
         List<String> moduleKeywordsList = Arrays.stream(userInput.split("\\s+"))
-                .map(moduleName -> '[' + moduleName + ']')
                 .collect(Collectors.toList());
         return new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList);
     }
