@@ -72,9 +72,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case EndAndTransactOrderCommand.COMMAND_WORD:
             return new HelpCommand(EndAndTransactOrderCommand.MESSAGE_USAGE);
-
-        default:
+        }
+        if (trimmedArgs == "") {
             return new HelpCommand("");
         }
+        return new HelpCommand("invalid");
     }
 }
