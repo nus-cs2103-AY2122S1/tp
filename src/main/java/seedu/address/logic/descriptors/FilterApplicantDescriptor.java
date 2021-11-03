@@ -2,8 +2,6 @@ package seedu.address.logic.descriptors;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.applicant.Application.ApplicationStatus;
