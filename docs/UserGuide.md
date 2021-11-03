@@ -193,7 +193,7 @@ with each feature into the CLI.
 Displays a help message. Format: `help`
 
 Expected Output:
-![Ui](images/UiHelpCommand.png)
+![Ui](images/UIHelpCommand.png)
 
 ### 4.2 Add
 
