@@ -55,5 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/lethiciars)]
 
+[[portfolio](team/lethiciars.md)]
+
 * Role: Developer
 * Responsibilities: Documentation, Storage, README
