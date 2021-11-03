@@ -163,6 +163,9 @@ public class ModelManager implements Model {
     public void refreshFilteredPersonList() {
         @SuppressWarnings("unchecked")
         Predicate<Person> predicate = (Predicate<Person>) filteredPersons.getPredicate();
+        if (predicate == null) {
+            predicate = PREDICATE_SHOW_ALL_PERSONS;
+        }
         Predicate<Person> updatePredicate = unused -> false;
         updateFilteredPersonList(updatePredicate);
         updateFilteredPersonList(predicate);
