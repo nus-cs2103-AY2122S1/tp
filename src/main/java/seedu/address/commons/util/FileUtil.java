@@ -46,25 +46,26 @@ public class FileUtil {
     /**
      * Creates a file if it does not exist along with its missing parent directories.
      */
-    public static void createFile(Path file) throws IOException {
+    public static boolean createFile(Path file) throws IOException {
         if (Files.exists(file)) {
-            return;
+            return false;
         }
 
         createParentDirsOfFile(file);
-
         Files.createFile(file);
+        return true;
     }
 
     /**
      * Creates a directory if it does not exist.
      */
-    public static void createDirectoryIfEmpty(Path directory) throws IOException {
+    public static boolean createDirectoryIfEmpty(Path directory) throws IOException {
         if (Files.exists(directory)) {
-            return;
+            return false;
         }
 
         Files.createDirectory(directory);
+        return true;
     }
 
     /**
@@ -123,10 +124,11 @@ public class FileUtil {
     /**
      * Copies the source to the target if the target is missing.
      */
-    public static void copyFileIfMissing(InputStream src, Path target) throws IOException {
+    public static boolean copyFileIfMissing(InputStream src, Path target) throws IOException {
         if (isFileExists(target)) {
-            return;
+            return false;
         }
         Files.copy(src, target);
+        return true;
     }
 }
