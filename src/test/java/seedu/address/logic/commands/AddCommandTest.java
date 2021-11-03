@@ -281,7 +281,7 @@ public class AddCommandTest {
         }
         @Override
         public boolean hasGroup(GroupName groupName) {
-           return groupNames.contains(groupName);
+            return groupNames.contains(groupName);
         }
 
         @Override

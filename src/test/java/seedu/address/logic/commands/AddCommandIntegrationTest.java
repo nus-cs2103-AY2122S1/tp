@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 import static seedu.address.testutil.TypicalStudents.getTypicalCsBook;
-import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
