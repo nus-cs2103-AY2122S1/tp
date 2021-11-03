@@ -52,6 +52,9 @@ public class AddToOrgCommand extends Command {
         Person personToAdd = personList.get(targetIndex.getZeroBased());
 
         Organisation organisation = model.getOrganisationByName(organisationName);
+        if (organisation == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ORGANISATION_DISPLAYED_NAME);
+        }
         UniquePersonList persons = organisation.getPersons();
         persons.add(personToAdd);
         List<Person> organisationPersonList = persons.asUnmodifiableObservableList();

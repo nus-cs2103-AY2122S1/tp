@@ -13,7 +13,7 @@ public class AddOrgCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an organisation to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_EMAIL + "Email "
+            + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Shopee "
             + PREFIX_EMAIL + "shopee@gmail.com ";
