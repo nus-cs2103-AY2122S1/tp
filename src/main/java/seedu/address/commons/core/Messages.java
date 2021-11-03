@@ -19,7 +19,7 @@ public class Messages {
     public static final String DATES_IN_WRONG_ORDER = "End date keyed in is after startDate.";
     public static final String FILE_NOT_FOUND = "The following file could not be accessed: ";
     public static final String SHIFT_PERIOD_PARSING_DEFAULT = "When date input is provided, it should be in "
-            + "chronological order. If"
+            + "chronological order. If "
             + "only one date is provided, the end date is assumed to be seven days later. If no date is provided, "
             + "the period is assumed to be from this monday to this sunday. Expects 0, 1 or 2 date input";
     public static final String DATE_RANGE_INPUT = "[" + PREFIX_DATE + "START_DATE]"

@@ -47,9 +47,9 @@ public class SetShiftTimeCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " JOE "
             + PREFIX_DAY_SHIFT + "monday-1"
-            + PREFIX_SHIFT_TIME + "10:00-12:00\n";
+            + PREFIX_SHIFT_TIME + "10:00-12:00 da/2021-11-01\n";
 
-    public static final String MESSAGE_SET_SHIFT_TIME_SUCCESS = "%s's shift on %s %s is successfully updated to: "
+    public static final String MESSAGE_SET_SHIFT_TIME_SUCCESS = "%s's shift on %s %s from %s to %s is successfully updated to: "
             + "From %s to %s.";
     public static final String MESSAGE_SHIFT_TIME_OUT_OF_BOUND = "The start time or end time of the shift is out"
             + " of bound.";
@@ -105,7 +105,7 @@ public class SetShiftTimeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_SEARCHED);
         }
 
-        if (startTime.isAfter(endTime)) {
+        if (!endTime.isAfter(startTime)) {
             throw new CommandException(MESSAGE_WRONG_TIME_ORDER);
         }
 
@@ -117,7 +117,7 @@ public class SetShiftTimeCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SET_SHIFT_TIME_SUCCESS, staffToEdit.getName(), dayOfWeek, slot,
-                startTime, endTime));
+                startDate, endDate, startTime, endTime));
 
     }
 
@@ -140,6 +140,8 @@ public class SetShiftTimeCommand extends Command {
                 && dayOfWeek.equals(command.dayOfWeek)
                 && slot.equals(command.slot)
                 && startTime.equals(command.startTime)
-                && endTime.equals(command.endTime);
+                && endTime.equals(command.endTime)
+                && startDate.equals(command.startDate)
+                && endDate.equals(command.endDate);
     }
 }
