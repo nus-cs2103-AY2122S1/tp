@@ -48,7 +48,7 @@ public class EditCommandTest {
 
         try {
             CommandResult result = editCommand.execute(model);
-            CommandResult expectedCommandResult = editCommand.execute(expectedModel);
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, model);
         } catch (CommandException e) {
@@ -107,7 +107,7 @@ public class EditCommandTest {
 
         try {
             CommandResult result = editCommand.execute(model);
-            CommandResult expectedCommandResult = editCommand.execute(expectedModel);
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, model);
         } catch (CommandException e) {

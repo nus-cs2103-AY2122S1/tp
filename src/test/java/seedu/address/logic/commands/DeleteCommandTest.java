@@ -41,7 +41,7 @@ public class DeleteCommandTest {
 
         try {
             CommandResult result = deleteCommand.execute(model);
-            CommandResult expectedCommandResult = deleteCommand.execute(expectedModel);
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, model);
         } catch (CommandException e) {
@@ -73,7 +73,7 @@ public class DeleteCommandTest {
 
         try {
             CommandResult result = deleteCommand.execute(model);
-            CommandResult expectedCommandResult = deleteCommand.execute(expectedModel);
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, model);
         } catch (CommandException e) {
