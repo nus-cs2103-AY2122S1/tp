@@ -355,21 +355,92 @@ In the future, you can also customise your own recurrence rule for your recurrin
 
 A lesson can be identified by the index number shown in the lesson list of the student.
 
-The essential fields for a lesson are indicated by the presence of the '*'. The rest of the fields are optional.
-
-Field | Prefix | Constraints | Examples | 
------------|-------|-----------| --------| 
-*Start date |`date/`| Dates follow the `dd MMM yyyy` format– a single or double digit day, a three-letter case-insensitive abbreviation of the month and a four-digit year, with spaces in-between. It must be a valid date for the year."|`date/20 jan 2022`<br/>`date/4 nov 2000`|
-*Time range        | `time/` | Lesson time range should be formatted as HHmm-HHmm and the lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` |
-*Subject          | `subject/` | Subject should only contain alphanumeric characters and spaces cannot be left blank. | `subject/Math`<br/> `subject/Language Arts` |
-*Lesson rate      | `rates/` | See [this note](#information_source-note-about-monetary-fieldsbr).<br/>The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.| `rates/37.50`<br/>`rates/40`|
-Recurrence        | `recurring/` | This prefix takes in an optional parameter, end date, that signifies the end of the recurrence. The end date cannot be earlier than the start date. | `recurring/`<br/>`recurring/30 Nov 2100` |
-Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/TB Pg 4`<br/> `hw/Assignment 5` |
-Outstanding fees  | `f/` | See [this note](#information_source-note-about-monetary-fieldsbr). | `f/50` |
+<table id="student-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center; padding: 10px">Category</th>
+            <th style="text-align:center">Field</th>
+            <th style="text-align:center">Prefix</th>
+            <th style="text-align:center">Constraint(s)</th>
+            <th style="text-align:center">Example(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=4>Essential</td>
+            <td>Start Date</td>
+            <td><code>date/</code></td>
+            <td>
+              <ul> 
+                <li>Must be present.</li>
+                <li>Case-insensitive.</li>
+                <li>Formatted as <code>dd MMM yyyy</code></li>
+              </ul>
+            </td>
+            <td><code>date/12 jul 2020</code></td>
+        </tr>
+        <tr>
+            <td>Subject</td>
+            <td><code>subject/</code></td>
+            <td><ul>
+            <li>Must be present.</li>
+            <li>Should only contain alphanumeric characters and spaces.</li>
+            </ul></td>
+            <td><code>subject/Social studies</code></td>
+        </tr>
+        <tr>
+            <td>Time Range</td>
+            <td><code>time/</code></td>
+            <td><ul>
+            <li>Must be present.</li>
+            <li>Formatted as <code>HHmm-HHmm</code></li>
+            <li>Must be between 8am and 10pm, inclusive.</li>
+            </ul></td>
+            <td><code>time/1730-1830</code></td>
+        </tr>
+        <tr>
+            <td>Lesson rate</td>
+            <td><code>rates/</code></td>
+            <td><ul>
+              <li>The lesson's rate refers to the fee of the lesson per hour.<br/>This rate will be used in the calculation of fees due after each lesson.</li>
+              <li>See<a href="#monetary-fields"> this note for more details.</a></li>
+            </ul></td>
+            <td><code>rates/50</code></td>
+        </tr>
+        <tr>
+        <td rowspan=5>Optional</td>
+            <td>Recurrence flag</td>
+            <td><code>recurring/</code></td>
+            <td><ul>
+              <li>Optional parameter: end date that signifies the end of the recurrence.</li>
+              <li>The end date cannot be earlier than the start date.</li>
+            </ul></td>
+            <td><ul>
+              <li><code>recurring/</code></li>
+              <li><code>recurring/30 Nov 2100</code></li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>Outstanding fees</td>
+            <td><code>f/</code></td>
+            <td>See<a href="#monetary-fields"> this note for more details.</a></td>
+            <td><code>lvl/J1</code></td>
+        </tr>
+        <tr>
+            <td>Homework</td>
+            <td><code>hw/</code></td>
+            <td><ul>
+              <li>Maximum of 50 characters</li>
+              <li>Cannot be blank</li>
+            </ul></td>
+            <td><code>hw/Test 1</code></td>
+        </tr>
+    </tbody>
+</table>
 
 * Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit). 
 
-##### Monetary fields<br>
+##### Monetary fields
 For all monetary fields (lesson rates and outstanding fees), we follow the [Singapore convention](https://www.dfa.cornell.edu/treasurer/cash-management/processinginternational/intl-currency) of using a decimal point '.' to separate dollars and cents, The values of these fields should only contain numbers, with at most one decimal point, and two decimal places and should not start or end with a decimal point.
 <br/>
 
