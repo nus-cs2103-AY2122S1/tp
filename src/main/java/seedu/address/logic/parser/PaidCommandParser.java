@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
+import static seedu.address.logic.parser.ParserUtil.INDEX_ARGS_COUNT_STUDENT_LESSON;
+import static seedu.address.logic.parser.ParserUtil.LESSON_INDEX_ZERO_BASED;
+import static seedu.address.logic.parser.ParserUtil.STUDENT_INDEX_ZERO_BASED;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PaidCommand;
@@ -21,26 +24,19 @@ public class PaidCommandParser implements Parser<PaidCommand> {
      */
     public PaidCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAID_AMOUNT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAID_AMOUNT);
 
-        if (!argumentMultimap.getValue(PREFIX_PAID_AMOUNT).isPresent()) {
+        String[] preamble = ParserUtil.parsePreamble(argMultimap.getPreamble());
+        boolean isInvalidPreamble = preamble.length != INDEX_ARGS_COUNT_STUDENT_LESSON;
+        boolean isMissingPrefix = !argMultimap.getValue(PREFIX_PAID_AMOUNT).isPresent();
+        if (isInvalidPreamble || isMissingPrefix) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
         }
+        Money payment = ParserUtil.parseMoney(argMultimap.getValue(PREFIX_PAID_AMOUNT).get());
 
-        Index[] indices;
-
-        try {
-            indices = ParserUtil.parseIndices(argumentMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE), pe);
-        }
-
-        assert indices.length == 2;
-
-        Money payment = ParserUtil.parseMoney(argumentMultimap.getValue(PREFIX_PAID_AMOUNT).get());
-
-        Index studentIndex = indices[0];
-        Index lessonIndex = indices[1];
+        // index errors should come after field errors and not edited error
+        Index studentIndex = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
+        Index lessonIndex = ParserUtil.parseLessonIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 
         return new PaidCommand(studentIndex, lessonIndex, payment);
     }

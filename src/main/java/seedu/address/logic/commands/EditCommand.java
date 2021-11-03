@@ -71,7 +71,7 @@ public class EditCommand extends UndoableCommand {
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited student: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "You must provide at least one field to edit!";
+    public static final String MESSAGE_NOT_EDITED = "You must provide at least one field to edit! \n%1$s";
     public static final String MESSAGE_CONTACT_REQUIRED = "This student must have at least one contact field!";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAB!";
 

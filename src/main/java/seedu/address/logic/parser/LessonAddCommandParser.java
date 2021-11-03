@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.ParserUtil.INDEX_ARGS_COUNT_STUDENT;
+import static seedu.address.logic.parser.ParserUtil.STUDENT_INDEX_ZERO_BASED;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -47,12 +49,9 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE), pe);
+        String[] preamble = ParserUtil.parsePreamble(argMultimap.getPreamble());
+        if (preamble.length != INDEX_ARGS_COUNT_STUDENT) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
         Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
@@ -66,26 +65,25 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         LessonRates lessonRates = ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get());
         OutstandingFees outstandingFees = ParserUtil.parseOutstandingFees(argMultimap.getValue(PREFIX_OUTSTANDING_FEES)
                 .orElse("0.00"));
+        // initialise empty set of cancelledDates
+        Set<Date> cancelledDates = new HashSet<>();
 
+        // index should come after missing arguments error and field errors
+        Index index = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
 
+        Lesson lesson;
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
             // If no date is specified, use max date
             Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
                     .orElse(Date.MAX_DATE);
 
-            // initialise empty set of cancelledDates
-            Set<Date> cancelledDates = new HashSet<>();
-
-            RecurringLesson lesson = new RecurringLesson(date.get(), endDate,
+            lesson = new RecurringLesson(date.get(), endDate,
                     timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
             return new LessonAddCommand(index, lesson);
         }
 
-        // initialise empty set of cancelledDates
-        Set<Date> cancelledDates = new HashSet<>();
-
-        Lesson lesson = new MakeUpLesson(date.get(), timeRange, subject, homework, lessonRates,
+        lesson = new MakeUpLesson(date.get(), timeRange, subject, homework, lessonRates,
             outstandingFees, cancelledDates);
 
         return new LessonAddCommand(index, lesson);
