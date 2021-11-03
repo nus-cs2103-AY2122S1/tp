@@ -1,4 +1,3 @@
-
 ---
 layout: page
 title: Zen's Project Portfolio Page
@@ -15,7 +14,6 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=zenlzb)
 
 * **Project management**:
-
   - Team Lead
   
     - Responsible for delegation of tasks and general direction of the project.
@@ -30,7 +28,6 @@ Given below are my contributions to the project.
       - Manually tested jar files before releases
 
 * **New Features**:
-
   - Adapted various Contacts features to work on Tasks  
     
     - Adapted AddressBookParser into TaskTabParser to parse commands on the task tab.
@@ -48,8 +45,7 @@ Given below are my contributions to the project.
     - Assign and tag commands allow you to add additional tags and/or people without removing
   the old ones
 
-* **Enhancements to existing features**:*
-
+* **Enhancements to existing features**:
   - Updated contacts such that only name is a required field, making adding contacts an
   easier process
 
@@ -90,9 +86,9 @@ Assigns extra people to a task without wiping people already assigned.
   * Developer Guide:
 
     - Added implementations details of assigning people to tasks
-    - Updated implementation of logic section
+    - Updated implementation of logic section  
     Example Extract:
->      We integrated the existing address book system of storing contacts with our new task list system by adding the ability
+> We integrated the existing address book system of storing contacts with our new task list system by adding the ability
 >      to assign people from your address book to tasks in your task list.   
 >      Possible use cases:
 >- Assigning group members to group tasks to keep track of who to contact.
