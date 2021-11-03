@@ -3,7 +3,14 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg). <br>
+
+You may reach us through the following email addresses:
+* Khor Ethan: e0526005@u.nus.edu
+* Lau Teng Hon: e0543465@u.nus.edu
+* Toh Wang Bin: e0544223@u.nus.edu
+* Lim Peiyuan: e0543756@u.nus.edu
+* Calvin Tan: calvin.twx@u.nus.edu
 
 
 ## Project team
