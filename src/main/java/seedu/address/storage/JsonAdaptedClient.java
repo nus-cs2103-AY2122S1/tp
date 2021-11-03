@@ -33,15 +33,17 @@ class JsonAdaptedClient {
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phoneNumber") String phoneNumber,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("ordered") List<JsonAdaptedOrder> ordered) {
+    public JsonAdaptedClient(@JsonProperty("name") String name,
+                             @JsonProperty("phoneNumber") String phoneNumber,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("orders") List<JsonAdaptedOrder> orders) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        if (ordered != null) {
-            this.ordered.addAll(ordered);
+        if (orders != null) {
+            this.ordered.addAll(orders);
         }
     }
 

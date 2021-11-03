@@ -34,8 +34,8 @@ public class AddClientCommand extends Command {
                     + "John Doe "
                     + PREFIX_PHONE_NUMBER + "98765432 "
                     + PREFIX_EMAIL + "john.doe@eg.email "
-                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore"
-                    + PREFIX_ORDER + "0 100 2021/10/20"
+                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore "
+                    + PREFIX_ORDER + "0 100 2021/10/20 "
                     + PREFIX_ORDER + "15 10 10/20";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
@@ -62,7 +62,7 @@ public class AddClientCommand extends Command {
         }
 
         model.addClient(clientToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd), CommandType.ADD, clientToAdd, true);
     }
 
     /**
@@ -78,7 +78,7 @@ public class AddClientCommand extends Command {
         Address address = addClientDescriptor.getAddress();
         Set<Order> orders = addClientDescriptor.getOrders()
                 .stream()
-                .filter(Order::isValidOrder)
+                .filter(Order::isPositiveQuantity)
                 .collect(Collectors.toSet());
         return new Client(name, phoneNumber, email, address, orders);
     }

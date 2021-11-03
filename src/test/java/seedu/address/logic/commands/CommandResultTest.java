@@ -7,35 +7,39 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.TypicalClients;
+
 public class CommandResultTest {
     @Test
     public void equals() {
-        CommandResult commandResult = new CommandResult("feedback");
+        CommandResult commandResult1 = new CommandResult("feedback");
+        CommandResult commandResult2 = new CommandResult("feedback", CommandType.ADD, TypicalClients.BOB, true);
+        CommandResult commandResult3 = new CommandResult(commandResult2);
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false,
-                false, null, false, false)));
+        assertTrue(commandResult1.equals(new CommandResult("feedback")));
+        assertTrue(commandResult1.equals(new CommandResult("feedback", null, null, false)));
+
+        assertTrue(commandResult2.equals(commandResult3));
 
         // same object -> returns true
-        assertTrue(commandResult.equals(commandResult));
+        assertTrue(commandResult1.equals(commandResult1));
 
         // null -> returns false
-        assertFalse(commandResult.equals(null));
+        assertFalse(commandResult1.equals(null));
 
         // different types -> returns false
-        assertFalse(commandResult.equals(0.5f));
+        assertFalse(commandResult1.equals(0.5f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
+        assertFalse(commandResult1.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true,
-                false, false, null, false, false)));
+        assertFalse(commandResult1.equals(new CommandResult("feedback", CommandType.HELP, null, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false,
-                true, false, null, false, false)));
+        assertFalse(commandResult1.equals(new CommandResult("feedback", CommandType.EXIT, null, false)));
+
     }
 
     @Test
@@ -49,11 +53,11 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true,
-                false, false, null, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                CommandType.HELP, null, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
-                true, false, null, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                CommandType.EXIT, null, false).hashCode());
     }
 }

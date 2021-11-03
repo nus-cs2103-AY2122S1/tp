@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Category;
@@ -41,10 +42,11 @@ public class MainWindow extends UiPart<Stage> {
     private ProductListPanel productListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private PieChartView pieChartView;
+    private PieChartSalesView salesView;
     private HelpMessage helpMessage;
     private ViewMoreClient viewMoreClient;
     private ViewMoreProduct viewMoreProduct;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -98,6 +100,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -169,6 +172,8 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
+            secondPanelPlaceholder.getChildren().clear();
+            secondPanelPlaceholder.getChildren().add(helpMessage.getRoot());
         } else {
             helpWindow.focus();
         }
@@ -192,23 +197,19 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleStat() {
-        pieChartView = new PieChartView();
+        salesView = new PieChartSalesView(logic.getFilteredClientList());
         secondPanelPlaceholder.getChildren().clear();
-        secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
-
+        secondPanelPlaceholder.getChildren().add(salesView.getRoot());
     }
 
-    private void handleList(TabPaneBehavior tpb, int selectedTab, Category category) {
-        if (category instanceof Client) {
-            logger.info("List all clients");
+    private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, boolean isClient) {
+        if (isClient) {
             if (selectedTab == 1) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
-        if (category instanceof Product) {
-            logger.info("List all products");
+        } else {
             if (selectedTab == 0) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
@@ -219,7 +220,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleView(TabPaneBehavior tpb, int selectedTab, Category category) {
         if (category instanceof Client) {
-            logger.info("View client's details: " + category.toString());
+            logger.info("View client's details: " + category);
             viewMoreClient = new ViewMoreClient();
             viewMoreClient.setClientDetails((Client) category);
             secondPanelPlaceholder.getChildren().clear();
@@ -230,10 +231,8 @@ public class MainWindow extends UiPart<Stage> {
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
-
-        if (category instanceof Product) {
-            logger.info("View product's details: " + category.toString());
+        } else if (category instanceof Product) {
+            logger.info("View product's details: " + category);
             viewMoreProduct = new ViewMoreProduct();
             viewMoreProduct.setProductDetails((Product) category);
             secondPanelPlaceholder.getChildren().clear();
@@ -265,28 +264,39 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
             int selectedTab = tabPane.getSelectionModel().getSelectedIndex();
             TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
+
             Category category = commandResult.getInfo();
+            CommandType commandType = commandResult.getCommandType();
+            boolean isClient = commandResult.getIsClientCommand();
 
-            if (commandResult.isList()) {
-                handleList(tpb, selectedTab, category);
-            }
-
-            if (commandResult.isViewMore()) {
-                handleView(tpb, selectedTab, category);
-            }
-
-            if (commandResult.isShowHelp()) {
+            switch (commandType) {
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
-            }
+                break;
 
-            if (commandResult.isStat()) {
+            case STAT:
                 handleStat();
+                break;
+
+            case CLEAR:
+                break;
+
+            case ADD:
+            case EDIT:
+            case VIEW:
+                handleView(tpb, selectedTab, category);
+                break;
+
+            default:
+                handleChangeTab(tpb, selectedTab, isClient);
+                break;
             }
 
             return commandResult;

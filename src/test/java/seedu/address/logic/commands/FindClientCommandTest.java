@@ -57,20 +57,22 @@ public class FindClientCommandTest {
     @Test
     public void execute_zeroKeywords_noClientFound() {
         String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FIND, null, true);
         ClientContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindClientCommand command = new FindClientCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredClientList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleClientsFound() {
         String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 3);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FIND, null, true);
         ClientContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindClientCommand command = new FindClientCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredClientList());
     }
 

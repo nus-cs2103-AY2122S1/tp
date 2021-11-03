@@ -12,7 +12,7 @@ end box
 [-> LogicManager : execute("find -c john")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find -c john")
+LogicManager -> AddressBookParser : parseCommand("find -c john", model)
 activate AddressBookParser
 
 create FindClientCommandParser

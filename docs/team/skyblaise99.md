@@ -1,22 +1,21 @@
 ---
-layout: page
-title: Shi Chen's Project Portfolio Page
+layout: page title: Shi Chen's Project Portfolio Page
 ---
 
 ### Project: Sellah
 
-Sellah is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
+**Sellah** is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
 contains the contact information and order details related to clients and partners. The user interacts with it using a
 CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added a history command. (Pull request
+* **New Feature**: Added Command History feature. (Pull request
   [\#139](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/139),
   [\#141](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/141),
   [\#145](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/145),
   [\#152](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/152))
-    * What it does: allows the user to navigate to previous commands using up/down keys.
+    * What it does: allows the user to navigate to previous commands using `↑` or `↓` keys.
     * Justification: This feature allows user to reuse previous input commands quickly without the need to retype again.
       This is especially helpful if the previous command is very long (e.g.
       `edit -c 1 -n Sora -pn 12345678 -e sora1999@gmail.com -a Block 126 #07-13, 126 Lor 1 Toa Payoh, Singapore 310126`)
@@ -28,35 +27,56 @@ Given below are my contributions to the project.
     * Managed releases `v1.0` - `v1.3` (5 releases) on GitHub
 
 * **Enhancements to existing features**:
-    * Updated edit command (Pull requests [\#71](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/71),
+    * Updated edit command (Pull requests
+      [\#71](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/71),
       [\#96](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/96),
       [\#102](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/102),
-      [\#117](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/117))
-    * Wrote additional tests for existing features to increase coverage from 72% to 82% (Pull requests
+      [\#117](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/117),
+      [\#173](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/173),
+      [\#177](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/177))
+    * Wrote additional tests for existing and new features to increase coverage (Pull requests
       [\#106](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/106),
       [\#109](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/109),
       [\#113](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/113),
-      [\#117](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/117))
+      [\#117](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/117),
+      [\#177](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/177))
 
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `edit` and `Table of Content` (Pull requests
           [\#35](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/35),
           [\#40](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/40),
-          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162))
+          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162),
+          [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181),
+          [\#193](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/193))
         * Added `Command Summary Table` (Pull requests
           [\#44](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/44),
           [\#46](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/46),
           [\#47](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/47),
-          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162))
-        * Added documentation for the features `Command History` (Pull request
-          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162))
+          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162),
+          [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181))
+        * Added documentation for the feature `Command History` (Pull request
+          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162),
+          [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181))
+        * Added documentation for the feature `clear` (Pull request
+          [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181))
+        * Implemented `Dropdown List` (Pull requests
+          [\#193](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/193),
+          [\#218](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/218))
     * Developer Guide:
-        * Added use cases of the `edit` feature. (Pull requests
+        * Added use cases of the feature `edit`. (Pull requests
           [\#48](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/48),
           [\#50](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/50))
-        * Added implementation details of the `edit` feature. (Pull request
+        * Added implementation details of the feature `edit`. (Pull request
           [\#132](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/132))
+        * Added implementation details of the feature `Command History`. (Pull requests
+          [\#165](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/165),
+          [\#200](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/200))
+        * Added `Table of Content` (Pull requests
+          [\#188](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/188),
+          [\#191](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/191))
+        * Implemented `Dropdown List` (Pull request
+          [\#191](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/191))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments):

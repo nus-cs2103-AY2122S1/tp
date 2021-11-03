@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import seedu.address.model.Model;
 import seedu.address.model.commons.ID;
+import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 
@@ -25,9 +26,9 @@ public class Order {
 
     private static final Quantity QUANTITY_ZERO = new Quantity("0");
 
-    public final ID id;
-    public final Quantity quantity;
-    public final LocalDate time;
+    private final Name productName;
+    private final Quantity quantity;
+    private final LocalDate time;
 
     /**
      * Constructor of {@code Order}
@@ -39,7 +40,7 @@ public class Order {
 
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
-        this.id = id;
+        productName = product.getName();
         this.quantity = quantity;
         this.time = time;
     }
@@ -47,10 +48,22 @@ public class Order {
     /**
      * Constructor of {@code Order}, assume attributes to be valid.
      */
-    public Order(ID id, Quantity quantity, LocalDate time) {
-        this.id = id;
+    public Order(Name productName, Quantity quantity, LocalDate time) {
+        this.productName = productName;
         this.quantity = quantity;
         this.time = time;
+    }
+
+    public Name getProductName() {
+        return productName;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
+    public LocalDate getTime() {
+        return time;
     }
 
     private static boolean isValidProductID(ID id, Model model) {
@@ -61,7 +74,7 @@ public class Order {
         return product.hasEnoughStock(quantity);
     }
 
-    public boolean isValidOrder() {
+    public boolean isPositiveQuantity() {
         return quantity.moreThan(QUANTITY_ZERO);
     }
 
@@ -76,12 +89,12 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return id.equals(otherOrder.id);
+        return productName.equals(otherOrder.productName);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return productName.hashCode();
     }
 
     /**
@@ -89,6 +102,6 @@ public class Order {
      */
     @Override
     public String toString() {
-        return "[ Product ID: " + id + ", Quantity: " + quantity + ", Time " + time + "]";
+        return "[ Product Name: " + productName + ", Quantity: " + quantity + ", Time " + time + "]";
     }
 }

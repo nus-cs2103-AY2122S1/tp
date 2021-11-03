@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.address.model.Category;
 import seedu.address.model.commons.ID;
@@ -42,6 +43,8 @@ public class Client implements Category {
         if (orders != null) {
             this.orders.addAll(orders);
         }
+        Logger logger = Logger.getLogger("create client object");
+        logger.info("new client created");
     }
 
     public ID getId() {

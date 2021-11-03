@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-    </padding>
-    <Label fx:id="id" styleClass="cell_small_label" text="No ID provided!" />
-    <Label fx:id="name" styleClass="cell_small_label" text="No name provided!" />
-    <Label fx:id="phoneNumber" styleClass="cell_small_label" text="No phone number provided!" />
-    <Label fx:id="email" styleClass="cell_small_label" text="No email provided!" />
-    <Label fx:id="address" styleClass="cell_small_label" text="No address provided!" />
+	<padding>
+		<Insets bottom="5" left="15" right="5" top="5" />
+	</padding>
+	<Label fx:id="id" styleClass="cell_small_label" text="No ID provided!" wrapText="true">
+		<padding>
+			<Insets bottom="5.0" />
+		</padding>
+	</Label>
+	<Label fx:id="name" styleClass="cell_small_label" text="No name provided!" wrapText="true">
+		<padding>
+			<Insets bottom="5.0" />
+		</padding>
+	</Label>
+	<Label fx:id="phoneNumber" styleClass="cell_small_label" text="No phone number provided!" wrapText="true">
+		<padding>
+			<Insets bottom="5.0" />
+		</padding>
+	</Label>
+	<Label fx:id="email" styleClass="cell_small_label" text="No email provided!" wrapText="true">
+		<padding>
+			<Insets bottom="5.0" />
+		</padding>
+	</Label>
+	<Label fx:id="address" styleClass="cell_small_label" text="No address provided!" wrapText="true">
+		<padding>
+			<Insets bottom="5.0" />
+		</padding>
+	</Label>
+	<Label fx:id="orders" styleClass="cell_small_label" text="No orders available!" wrapText="true" />
 </VBox>

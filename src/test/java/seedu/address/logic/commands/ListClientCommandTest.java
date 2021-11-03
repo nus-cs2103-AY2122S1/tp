@@ -28,14 +28,18 @@ public class ListClientCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
+        String expectedMessage = ListClientCommand.MESSAGE_SUCCESS;
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.LIST, null, true);
         assertCommandSuccess(new ListClientCommand(), model,
-                ListClientCommand.MESSAGE_SUCCESS, expectedModel);
+                expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
+        String expectedMessage = ListClientCommand.MESSAGE_SUCCESS;
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.LIST, null, true);
         assertCommandSuccess(new ListClientCommand(), model,
-                ListClientCommand.MESSAGE_SUCCESS, expectedModel);
+                expectedCommandResult, expectedModel);
     }
 }

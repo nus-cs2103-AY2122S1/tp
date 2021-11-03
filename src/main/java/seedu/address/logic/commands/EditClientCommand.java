@@ -87,7 +87,8 @@ public class EditClientCommand extends Command {
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient));
+        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient), CommandType.EDIT,
+                editedClient, true);
     }
 
     /**
@@ -113,7 +114,7 @@ public class EditClientCommand extends Command {
         updatedOrders.addAll(oldOrders);
 
         return updatedOrders.stream()
-                .filter(Order::isValidOrder)
+                .filter(Order::isPositiveQuantity)
                 .collect(Collectors.toSet());
     }
 
