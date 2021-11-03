@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title iorder state 2
+
+Class modelManager as "__modelManager:ModelManager__"
+
+Class optionalOrder as "__optionalOrder:OptionalOrder__"
+
+Class ord as "__order:Order__"
+Class item1 as "__banana:Item__"
+Class item2 as "__strawberry:Item__"
+item2 -up-> ord
+item1 -up-> ord
+
+Class transactions as "__transactions:List<TransactionRecord>__"
+
+Class trans1 as "__transactionRecord1:TransactionRecord__"
+Class item1Trans1 as "__pencil:Item__"
+Class item2Trans2 as "__pen:Item__"
+item2Trans2 -up-> trans1
+item1Trans1 -up-> trans1
+
+
+transactions -up-> modelManager
+trans1 -up-> transactions
+ord -up-> optionalOrder
+optionalOrder -up-> modelManager
+
+@end

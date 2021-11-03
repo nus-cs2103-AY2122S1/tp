@@ -36,7 +36,7 @@ public class ItemUtil {
     public static String getDeleteCommand(Item item) {
         return DeleteCommand.COMMAND_WORD
                 + " " + item.getName()
-                + " " + PREFIX_ID + item.getId();
+                + " " + PREFIX_ID + String.format("%06d", item.getId());
     }
 
     /**
@@ -45,7 +45,7 @@ public class ItemUtil {
     public static String getRemoveCommand(Item item) {
         return RemoveCommand.COMMAND_WORD
                 + " " + item.getName()
-                + " " + PREFIX_ID + item.getId()
+                + " " + PREFIX_ID + String.format("%06d", item.getId())
                 + " " + PREFIX_COUNT + item.getCount();
     }
 

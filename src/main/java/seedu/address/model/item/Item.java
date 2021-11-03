@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javafx.scene.layout.Region;
 import seedu.address.model.display.Displayable;
+import seedu.address.model.display.ItemCard;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.ItemCard;
 import seedu.address.ui.UiPart;
 
 /**
@@ -174,14 +174,11 @@ public class Item implements Displayable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; id: ")
-                .append(getId())
+                .append(String.format("; count: %06d", getId()))
                 .append("; count: ")
                 .append(getCount())
-                .append("; costPrice: ")
-                .append(getCostPrice())
-                .append("; salesPrice: ")
-                .append(getSalesPrice());
+                .append(String.format("; costPrice: $%.2f", getCostPrice()))
+                .append(String.format("; salesPrice: $%.2f", getSalesPrice()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

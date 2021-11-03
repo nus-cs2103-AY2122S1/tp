@@ -26,11 +26,13 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.item.Item;
@@ -41,7 +43,8 @@ import seedu.address.testutil.ItemDescriptorBuilder;
 public class AddCommandTest {
 
     private ModelStubAcceptingItemAdded modelStub = new ModelStubAcceptingItemAdded();
-    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -125,40 +128,36 @@ public class AddCommandTest {
 
     @Test
     public void execute_existingItemNameDescription_restockSuccessful() {
-        modelStub.addItem(BAGEL.updateCount(5));
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
+                .withCount(VALID_COUNT_BAGEL).build();
 
-        ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL)
-                .withCount(5)
-                .build();
-
-        AddCommand addCommand = new AddCommand(validDescriptor);
-
+        AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
-        ModelStubAcceptingItemAdded expectedModel = new ModelStubAcceptingItemAdded();
+
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
-        assertCommandSuccess(addCommand, modelStub, expectedMessage, expectedModel);
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_existingItemIdDescription_restockSuccessful() {
-        modelStub.addItem(BAGEL);
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL)
+                .withCount(VALID_COUNT_BAGEL).build();
 
-        ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
-                .withId(VALID_ID_BAGEL)
-                .withCount(5)
-                .build();
-
-        AddCommand addCommand = new AddCommand(validDescriptor);
-
+        AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
-        ModelStubAcceptingItemAdded expectedModel = new ModelStubAcceptingItemAdded();
+
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.addItem(BAGEL);
         expectedModel.restockItem(BAGEL, 5);
 
-        assertCommandSuccess(addCommand, modelStub, expectedMessage, expectedModel);
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -170,7 +169,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_NAME_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                model.getTransactions(), model.getBookKeeping());
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
@@ -184,41 +184,45 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_ID_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                model.getTransactions(), model.getBookKeeping());
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
-
     @Test
-    public void execute_nameAlreadyExists_throwsCommandException() {
+    public void execute_extraPriceFlags_restockSuccessful() {
         model.addItem(BAGEL);
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL).withId("173927")
-                .withCount(VALID_COUNT_BAGEL).withCostPrice(VALID_COSTPRICE_BAGEL)
-                .withSalesPrice(VALID_SALESPRICE_BAGEL).build();
+                .withName(VALID_NAME_BAGEL).withCount(VALID_COUNT_BAGEL).withSalesPrice(VALID_SALESPRICE_BAGEL).build();
 
         AddCommand addCommand = new AddCommand(bagelDescriptor);
-        String expectedMessage = AddCommand.MESSAGE_NAME_EXISTS;
+        String replenishMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
+        String expectedMessage = replenishMessage + "\n" + AddCommand.MESSAGE_EXTRA_PRICE_FLAGS;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
+        expectedModel.addItem(BAGEL);
+        expectedModel.restockItem(BAGEL, 5);
 
-        assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_idAlreadyExists_throwsCommandException() {
+    public void execute_extraTagFlags_restockSuccessful() {
         model.addItem(BAGEL);
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
-                .withName("boo").withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL)
-                .withCostPrice(VALID_COSTPRICE_BAGEL)
-                .withSalesPrice(VALID_SALESPRICE_BAGEL).build();
+                .withName(VALID_NAME_BAGEL).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED).build();
 
         AddCommand addCommand = new AddCommand(bagelDescriptor);
-        String expectedMessage = AddCommand.MESSAGE_ID_EXISTS;
+        String replenishMessage = String.format(AddCommand.MESSAGE_SUCCESS_REPLENISH, 5, VALID_NAME_BAGEL);
+        String expectedMessage = replenishMessage + "\n" + AddCommand.MESSAGE_EXTRA_TAG_FLAGS;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
+        expectedModel.addItem(BAGEL);
+        expectedModel.restockItem(BAGEL, 5);
 
-        assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

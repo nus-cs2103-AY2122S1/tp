@@ -103,7 +103,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo");
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(List.of(new NameContainsKeywordsPredicate(keywords))), command);
     }
 
     @Test

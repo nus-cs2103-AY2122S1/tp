@@ -23,12 +23,16 @@ import seedu.address.logic.commands.ListInventoryCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Item;
+import seedu.address.storage.JsonBookKeepingStorage;
 import seedu.address.storage.JsonInventoryStorage;
+import seedu.address.storage.JsonTransactionStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ItemBuilder;
@@ -47,7 +51,12 @@ public class LogicManagerTest {
         JsonInventoryStorage inventoryStorage =
                 new JsonInventoryStorage(temporaryFolder.resolve("inventory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(inventoryStorage, userPrefsStorage);
+        JsonBookKeepingStorage bookKeepingStorage = new JsonBookKeepingStorage(temporaryFolder
+                .resolve("bookKeeping.json"));
+        JsonTransactionStorage transactionStorage = new JsonTransactionStorage(temporaryFolder
+                .resolve("transactions.json"));
+        StorageManager storage = new StorageManager(inventoryStorage, userPrefsStorage,
+                transactionStorage, bookKeepingStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -76,7 +85,12 @@ public class LogicManagerTest {
                 new JsonInventoryIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(inventoryStorage, userPrefsStorage);
+        JsonBookKeepingStorage bookKeepingStorage = new JsonBookKeepingStorage(temporaryFolder
+                .resolve("bookKeeping.json"));
+        JsonTransactionStorage transactionStorage = new JsonTransactionStorage(temporaryFolder
+                .resolve("transactions.json"));
+        StorageManager storage = new StorageManager(inventoryStorage, userPrefsStorage,
+                transactionStorage, bookKeepingStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -130,7 +144,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

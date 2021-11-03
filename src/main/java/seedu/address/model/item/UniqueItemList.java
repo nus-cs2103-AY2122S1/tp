@@ -56,6 +56,12 @@ public class UniqueItemList implements Iterable<Item> {
         return internalList.stream().anyMatch(x -> toCheck.isSameName(x) && x.getCount() > 0);
     }
 
+    /**
+     * Returns true if item list is empty.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
 
     /**
      * Returns true if the list contains an item that matches the given {@code ItemDescriptor}
@@ -113,7 +119,6 @@ public class UniqueItemList implements Iterable<Item> {
 
     /**
      * Removes the specified count of the equivalent item from the list.
-     * If item is
      * The item must exist in the list.
      */
     public void remove(Item toRemove) {

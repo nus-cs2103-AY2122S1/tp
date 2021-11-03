@@ -20,7 +20,7 @@ public class ListTransactionCommand extends ListCommand {
     public static final String MESSAGE_USAGE =
         ListInventoryCommand.COMMAND_WORD + " " + TRANSACTIONS_KEYWORD + ": lists all past transactions.\n"
         + ListInventoryCommand.COMMAND_WORD + " " + TRANSACTIONS_KEYWORD
-        + " ID: list items in the specified transaction.\n";
+        + " ID: list items in the specified transaction.";
 
     private final Optional<String> transactionId;
 

@@ -1,22 +1,33 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ID_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_100PLUS;
+import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_H20;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalItems.BAGEL;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.item.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 public class FindCommandParserTest {
 
@@ -24,54 +35,78 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validIdArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
+    public void parse_singleArgs_returnsFindCommand() {
+        // name prefix
+        List<String> nameList = List.of(VALID_NAME_BAGEL);
         FindCommand expectedFindCommand =
-                new FindCommand(new IdContainsNumberPredicate(Arrays.asList("140262")));
-        assertParseSuccess(parser, " id/140262", expectedFindCommand);
+                new FindCommand(List.of(new NameContainsKeywordsPredicate(nameList)));
+        assertParseSuccess(parser, NAME_DESC_BAGEL, expectedFindCommand);
+
+        // name prefix with spacing
+        nameList = List.of(VALID_NAME_BAGEL + " " + VALID_NAME_DONUT);
+        expectedFindCommand =
+                new FindCommand(List.of(new NameContainsKeywordsPredicate(nameList)));
+        assertParseSuccess(parser,
+                NAME_DESC_BAGEL + " " + VALID_NAME_DONUT, expectedFindCommand);
+
+        // id prefix
+        HashSet<Integer> idSet = new HashSet<>();
+        idSet.add(BAGEL.getId());
+        expectedFindCommand =
+                new FindCommand(List.of(new IdContainsNumberPredicate(idSet)));
+        assertParseSuccess(parser, ID_DESC_BAGEL, expectedFindCommand);
+
+        // tag prefix
+        HashSet<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag(VALID_TAG_BAKED));
+        expectedFindCommand =
+                new FindCommand(List.of(new TagContainsKeywordsPredicate(tagSet)));
+        assertParseSuccess(parser, TAG_DESC_BAKED, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_multipleValidArgs_returnsFindCommand() {
+        // Repeated prefixes
+        List<String> nameList = List.of(VALID_NAME_BAGEL, VALID_NAME_DONUT);
+        FindCommand expectedFindCommand =
+                new FindCommand(List.of(new NameContainsKeywordsPredicate(nameList)));
+        assertParseSuccess(parser,
+                NAME_DESC_BAGEL + " " + NAME_DESC_DONUT, expectedFindCommand);
+
+        // different prefixes
+        nameList = List.of(VALID_NAME_BAGEL);
+        HashSet<Integer> idSet = new HashSet<>();
+        idSet.add(BAGEL.getId());
+
+        expectedFindCommand =
+                new FindCommand(List.of(
+                    new NameContainsKeywordsPredicate(nameList),
+                    new IdContainsNumberPredicate(idSet)
+                ));
+
+        assertParseSuccess(parser, NAME_DESC_BAGEL + "   " + ID_DESC_BAGEL, expectedFindCommand);
     }
 
     @Test
     public void parse_negativeIdArgs_throwsParseException() {
-        assertParseFailure(parser, " id/-123123", String.format(
+        assertParseFailure(parser, PREFIX_ID + INVALID_ID_BAGEL_2, String.format(
                 MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_notSixDigitsIdArgs_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new IdContainsNumberPredicate(Arrays.asList(VALID_ID_BAGEL)));
-        assertParseSuccess(parser, " id/123", expectedFindCommand);
+    public void parse_notDigitsInArg_throwsParseException() {
+        assertParseFailure(parser, PREFIX_ID + INVALID_ID_BAGEL, String.format(
+                MESSAGE_INVALID_ID_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validNameArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME_BAGEL, VALID_NAME_DONUT)));
-        FindCommand expectedFindCommand2 =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Bagel donut")));
-        assertParseSuccess(parser, " n/Bagel n/Donut", expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/Bagel   n/Donut", expectedFindCommand);
-        // names with spaces
-        assertParseSuccess(parser, " n/Bagel donut", expectedFindCommand2);
-    }
-
-    @Test
-    public void parse_validNameWithNumbersArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME_100PLUS, VALID_NAME_H20)));
-        assertParseSuccess(parser, " n/100Plus n/H20", expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/100Plus     n/H20", expectedFindCommand);
+    public void parse_invalidTag_throwsParseException() {
+        assertParseFailure(parser, INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
     }
 
 }

@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION;
 import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.display.DisplayList;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.display.Displayable;
@@ -26,8 +25,6 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
-import seedu.address.storage.BookKeepingStorage;
-import seedu.address.storage.TransactionStorage;
 
 /**
  * Represents the in-memory model of BogoBogo data.
@@ -49,33 +46,24 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
      */
-    public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyTransactionList transactionList, ReadOnlyBookKeeping bookKeeping) {
         super();
-        requireAllNonNull(inventory, userPrefs);
+        requireAllNonNull(inventory, userPrefs, transactionList, bookKeeping);
 
-        logger.fine("Initializing with inventory: " + inventory + " and user prefs " + userPrefs);
+        logger.fine("Initializing with inventory: " + inventory + ", user prefs " + userPrefs
+            + ", transaction list: " + transactionList + ", bookkeeping: " + bookKeeping);
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.transactions = transactionList.getTransactionRecordList();
         displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
-        List<TransactionRecord> transactionRecordList = null;
-        bookKeeping = new BookKeeping(0.0, 0.0, 0.0);
-        try {
-            transactionRecordList = new TransactionStorage()
-                    .readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
-            bookKeeping = new BookKeepingStorage()
-                    .readBookKeeping(userPrefs.getBookKeepingFilePath())
-                    .orElse(new BookKeeping(0.0, 0.0, 0.0));
-        } catch (DataConversionException e) {
-            System.out.println(e);
-        }
-
-        transactions = transactionRecordList == null ? new ArrayList<>() : transactionRecordList;
+        this.bookKeeping = new BookKeeping(bookKeeping);
     }
 
     public ModelManager() {
-        this(new Inventory(), new UserPrefs());
+        this(new Inventory(), new UserPrefs(), new TransactionList(), new BookKeeping());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -258,7 +246,7 @@ public class ModelManager implements Model {
                 .reduce((a, b) -> a + b).get();
 
         // Display transaction
-        currentDisplay = DISPLAY_TRANSACTION_LIST;
+        currentDisplay = DISPLAY_TRANSACTION;
         displayList.setItems(transactionOptional.get().getOrderItems());
         return totalCost;
     }
@@ -310,6 +298,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void closeOrder() {
+        assert hasUnclosedOrder();
+        optionalOrder = Optional.empty();
+    }
+
+    @Override
     public boolean hasUnclosedOrder() {
         return optionalOrder.isPresent();
     }
@@ -339,63 +333,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void transactAndClearOrder() {
+    public void transactAndCloseOrder() {
         transactAndClearOrder(userPrefs.getTransactionFilePath());
     }
 
     /**
      * Helper TransactAndClearOrder with given path (for testing purposes)
-     *
+     * Model must have an unclosed order. The order must have at least 1 item.
      * @param path the path of the file
      */
     public void transactAndClearOrder(Path path) {
         assert hasUnclosedOrder();
+        assert !optionalOrder.get().isEmpty();
 
         TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
-        // Reset to no order status
-        optionalOrder = Optional.empty();
+
         transactions.add(transaction);
-
-        if (transaction.getOrderItems().size() == 0) {
-            return;
-        }
-
         Double totalRevenue = transaction.getOrderItems().stream()
                 .map(i -> i.getCount() * i.getSalesPrice())
                 .reduce(0.0, (subTotal, next) -> subTotal + next);
 
         addRevenueBookKeeping(totalRevenue);
 
-        try {
-            new TransactionStorage().saveTransaction(new ArrayList(transactions),
-                    path);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
+        closeOrder();
 
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }
 
     @Override
-    public List<TransactionRecord> getTransactions() {
-        return new ArrayList<>(transactions);
+    public ReadOnlyTransactionList getTransactions() {
+        return new TransactionList(new ArrayList<>(transactions));
+    }
+
+    @Override
+    public void initialiseTransactions() {
+        transactions = new TransactionList().getTransactionRecordList();
     }
 
     //=========== BookKeeping ================================================================================
-
-    /**
-     * Save the BookKeeping to json.
-     *
-     * @param bookKeeping current bookKeeping.
-     */
-    public void saveBookKeeping(BookKeeping bookKeeping) {
-        try {
-            new BookKeepingStorage().saveBookKeeping(bookKeeping, userPrefs.getBookKeepingFilePath());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
 
     /**
      * Add cost to bookKeeping.
@@ -404,7 +379,6 @@ public class ModelManager implements Model {
      */
     public void addCostBookKeeping(Double cost) {
         bookKeeping.addCost(cost);
-        saveBookKeeping(bookKeeping);
     }
 
     /**
@@ -414,6 +388,13 @@ public class ModelManager implements Model {
      */
     public void addRevenueBookKeeping(Double revenue) {
         bookKeeping.addRevenue(revenue);
-        saveBookKeeping(bookKeeping);
+    }
+
+    /**
+     * Reinitialise bookKeeping.
+     */
+    @Override
+    public void initialiseBookKeeping() {
+        bookKeeping.initialise();
     }
 }

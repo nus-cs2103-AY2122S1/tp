@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+Participant ":InventoryStorage" as inventoryStorage STORAGE_COLOR_T2
+Participant ":TransactionStorage" as transactionStorage STORAGE_COLOR_T2
+Participant ":BookKeepingStorage" as bookKeepingStorage STORAGE_COLOR_T2
+
+activate logic LOGIC_COLOR
+
+
+logic -[LOGIC_COLOR]> storage : saveInventory()
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> inventoryStorage : Save to inventory.json
+activate inventoryStorage STORAGE_COLOR_T2
+inventoryStorage --[STORAGE_COLOR]> storage
+deactivate inventoryStorage
+
+storage -[STORAGE_COLOR]> transactionStorage : Save to transactions.json
+activate transactionStorage STORAGE_COLOR_T2
+transactionStorage --[STORAGE_COLOR]> storage
+deactivate transactionStorage
+
+storage -[STORAGE_COLOR]> bookKeepingStorage : Save to bookKeeping.json
+activate bookKeepingStorage STORAGE_COLOR_T2
+bookKeepingStorage --[STORAGE_COLOR]> storage
+deactivate bookKeepingStorage
+
+storage --[STORAGE_COLOR]> logic
+deactivate storage
+
+
+deactivate logic
+
+@enduml

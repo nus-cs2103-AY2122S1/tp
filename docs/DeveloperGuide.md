@@ -202,104 +202,94 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Ordering
 
-#### Proposed Implementation
+### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+When ModelManager is initialised, optionalOrder is set to Optional.empty(). 
+At this point, the user has 1 order record with 2 items in his transaction list.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![Initial_State](images/OrderInitialState.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+Step 1. The user enters ordering mode via the `sorder` command.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Upon entering the ordering mode, optionalOrder now has a new Order() which is empty
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+![Sorder_State](images/OrderSorderState.png)
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 2. The user adds an item to the order via the `iorder` command.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+Upon entering `iorder Banana c/1`, the order now contains 1 banana item.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![Iorder_State](images/OrderItem1State.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`
-, causing another modified address book state to be saved into the `addressBookStateList`.
+Next, upon entering `iorder Strawberry c/1`, the order now contains 1 strawberry item.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![Iorder_State](images/OrderItem2State.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Step 3. The user transacts the order via the `eorder` command.
 
-</div>
+After the transaction is done, optionalOrder is reinitialised to Optional.empty()
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+![Initial_State](images/OrderFinalState.png)
 
-![UndoRedoState3](images/UndoRedoState3.png)
+Step 4. The new transactions are saved to json file.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+![Transact_Order_Sequence_Diagram](images/TransactOrderSequenceDiagram.png)
 
-</div>
+### Mutating Inventory
 
-The following sequence diagram shows how the undo operation works:
+This section explains how various commands update the list of items and display the result.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness between
+items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then update the
+`ObservableList<Item>`. The `ObservableList<Item>` is bounded to the UI so that the UI automatically updates when the
+data in the list change.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design needs to
+ensure that every command mutates the `UniqueItemList` through `Inventory`.
 
-</div>
+The general flow of inventory manipulation through AddCommand is as below:
+1. The `AddCommand` object in `Logic` component interacts with `Model` component by calling the `Model#addItem()` if a
+   new item is added and `Model#restockItem()` if an existing item is restocked.
+2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
+3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
+4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be returned to the user.
+   The returned list has added a new item or incremented the count of the existing item.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</div>
+Flow:`AddCommand` -> `Model` -> `Inventory` -> `UniqueItemList` -> `ObservableList<Item>`
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+The above flow applies for all the other similar commands that manipulates the inventory.
+The detailed flow for each command is found below:
 
-![UndoRedoState4](images/UndoRedoState4.png)
+**`AddCommand:`**      
+AddCommand#execute() -> Model#addItem() or Model#restockItem() -> Inventory#addItem() or Inventory#restockItem()
+-> UniqueItemList#addItem() or UniqueItemList#setItem() -> ObservableList<Item>#add() or ObservableList<Item>#set()
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
+**`RemoveCommand:`**    
+RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
 
-![UndoRedoState5](images/UndoRedoState5.png)
+**`EditCommand:`**       
+EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
 
-The following activity diagram summarizes what happens when a user executes a new command:
+**`ClearCommand:`**       
+ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+**`DeleteCommand:`**      
+DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() -> ObservableList<Item>#remove()
+
+**`SortCommand:`**      
+SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>#sort()
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
+`IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of 
+strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to 
+update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -360,21 +350,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User did not specify the name of item.
-    * 1a1. BogoBogo notifies user of missing details.
+* 1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
+    * 1a1. BogoBogo informs user of the missing details.
+    * 1a2. User reenters with the missing details.
+
+      Use case resumes at step 2.
+
+* 1b. User is adding item that has been added before, and only specifies either name or id without the other fields.
+    * 1b1. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
       Use case ends.
 
-* 1b. User is adding the item for the first time, and did not specify the id, price or cost of the item.
-    * 1b1. BogoBogo requests user for the missing details.
-    * 1b2. User enters the missing details.
+* 1c. User is adding an item that has been added before, but provides an id that corresponds to another item.
+    * 1c1. BogoBogo notifies user of the mismatch and shows the list of possible matches.
+    * 1c2. User reenters with the correct details.
+    * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
-      Use case resumes at step 2.
-
-* 1c. The given id does not match with the given name.
-    * 1c1. BogoBogo notifies user of the mismatch.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 **UC02 - Deleting an item**
 

@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -15,18 +16,27 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyBookKeeping;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.ReadOnlyTransactionList;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.order.TransactionRecord;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.BookKeepingStorage;
 import seedu.address.storage.InventoryStorage;
+import seedu.address.storage.JsonBookKeepingStorage;
 import seedu.address.storage.JsonInventoryStorage;
+import seedu.address.storage.JsonTransactionStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TransactionStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -57,7 +67,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         InventoryStorage inventoryStorage = new JsonInventoryStorage(userPrefs.getInventoryFilePath());
-        storage = new StorageManager(inventoryStorage, userPrefsStorage);
+        TransactionStorage transactionStorage = new JsonTransactionStorage(userPrefs.getTransactionFilePath());
+        BookKeepingStorage bookKeepingStorage = new JsonBookKeepingStorage(userPrefs.getBookKeepingFilePath());
+        storage = new StorageManager(inventoryStorage, userPrefsStorage, transactionStorage, bookKeepingStorage);
 
         initLogging(config);
 
@@ -74,23 +86,43 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyInventory> addressBookOptional;
+        Optional<ReadOnlyInventory> inventoryOptional;
         ReadOnlyInventory initialData;
+        Optional<ReadOnlyTransactionList> transactionListOptional;
+        ReadOnlyTransactionList transactionList;
+        Optional<ReadOnlyBookKeeping> bookKeepingOptional;
+        ReadOnlyBookKeeping bookKeeping;
         try {
-            addressBookOptional = storage.readInventory();
-            if (!addressBookOptional.isPresent()) {
+            inventoryOptional = storage.readInventory();
+            transactionListOptional = storage.readTransactionList();
+            bookKeepingOptional = storage.readBookKeeping();
+            if (inventoryOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleInventory);
+            if (transactionListOptional.isEmpty()) {
+                logger.info("Transaction not found");
+            }
+            if (bookKeepingOptional.isEmpty()) {
+                logger.info("BookKeeping not found");
+            }
+            initialData = inventoryOptional.orElseGet(SampleDataUtil::getSampleInventory);
+            transactionList = transactionListOptional
+                    .orElseGet(() -> new TransactionList(new ArrayList<TransactionRecord>()));
+            bookKeeping = bookKeepingOptional.orElseGet(SampleDataUtil::getSampleBookKeeping);
+
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty inventory");
             initialData = new Inventory();
+            transactionList = new TransactionList();
+            bookKeeping = new BookKeeping();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty inventory");
             initialData = new Inventory();
+            transactionList = new TransactionList();
+            bookKeeping = new BookKeeping();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, transactionList, bookKeeping);
     }
 
     private void initLogging(Config config) {
@@ -151,7 +183,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty inventory");
             initializedPrefs = new UserPrefs();
         }
 

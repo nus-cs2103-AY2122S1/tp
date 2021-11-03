@@ -1,52 +1,42 @@
 package seedu.address.storage;
 
-import static java.util.Objects.requireNonNull;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.BookKeeping;
+import seedu.address.model.ReadOnlyBookKeeping;
+import seedu.address.model.ReadOnlyTransactionList;
 
-public class BookKeepingStorage {
-    /**
-     * Save current BookKeeping to json.
-     *
-     * @param bookKeeping current bookKeeping.
-     * @param filePath the path of bookKeeping.json.
-     * @throws IOException if bookKeeping is not serializable.
-     */
-    public void saveBookKeeping(BookKeeping bookKeeping, Path filePath) throws IOException {
-        requireNonNull(bookKeeping);
-        FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableBookKeeping(bookKeeping), filePath);
-    }
+public interface BookKeepingStorage {
 
     /**
-     * Read BookKeeping from json file.
-     *
-     * @param filePath the path of the bookKeeping.json.
-     * @return the BookKeeping enclosed in an optional.
-     * @throws DataConversionException if bookKeeping.json cannot be converted to bookKeeping.
+     * Returns the file path of the BookKeeping file.
      */
-    public Optional<BookKeeping> readBookKeeping(Path filePath) throws DataConversionException {
-        requireNonNull(filePath);
+    Path getBookKeepingPath();
 
-        Optional<JsonSerializableBookKeeping> jsonBookKeeping = JsonUtil.readJsonFile(
-                filePath, JsonSerializableBookKeeping.class);
+    /**
+     * Returns TransactionRecord List data as a {@link ReadOnlyTransactionList}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
+     */
+    Optional<ReadOnlyBookKeeping> readBookKeeping() throws DataConversionException, IOException;
 
-        if (!jsonBookKeeping.isPresent()) {
-            return Optional.empty();
-        }
+    /**
+     * @see #getBookKeepingPath()
+     */
+    Optional<ReadOnlyBookKeeping> readBookKeeping(Path filePath) throws DataConversionException, IOException;
 
-        try {
-            return Optional.of(jsonBookKeeping.get().toModelType());
-        } catch (IllegalValueException e) {
-            throw new DataConversionException(e);
-        }
-    }
+    /**
+     * Saves the given {@link ReadOnlyBookKeeping} to the storage.
+     * @param bookKeeping cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveBookKeeping(ReadOnlyBookKeeping bookKeeping) throws IOException;
+
+    /**
+     * @see #saveBookKeeping(ReadOnlyBookKeeping)
+     */
+    void saveBookKeeping(ReadOnlyBookKeeping bookKeeping, Path filePath) throws IOException;
 }

@@ -2,153 +2,129 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
-import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
-import static seedu.address.testutil.TypicalItems.CHOCOCHIP;
-import static seedu.address.testutil.TypicalItems.DALGONA_COFFEE;
-import static seedu.address.testutil.TypicalItems.EGGNOG;
-import static seedu.address.testutil.TypicalItems.FOREST_CAKE;
+import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.IdContainsNumberPredicate;
+import seedu.address.model.item.Item;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
-import seedu.address.model.order.Order;
+import seedu.address.model.item.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
+    private Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
+
+    private NameContainsKeywordsPredicate pieNamePredicate =
+            new NameContainsKeywordsPredicate(List.of(APPLE_PIE.getName().fullName));
+    private IdContainsNumberPredicate pieIdPredicate =
+            new IdContainsNumberPredicate(List.of(APPLE_PIE.getId()));
+    private TagContainsKeywordsPredicate pieTagPredicate =
+            new TagContainsKeywordsPredicate(APPLE_PIE.getTags());
+    private NameContainsKeywordsPredicate muffinNamePredicate =
+            new NameContainsKeywordsPredicate(List.of(BANANA_MUFFIN.getName().fullName));
+
+    // Returns a predicate that returns true if any of the given predicates will return true
+    private static Predicate<Item> combinePredicate(Predicate<Item>... predicates) {
+        return item -> {
+            for (int i = 0; i < predicates.length; i++) {
+                if (predicates[i].test(item)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+
+    @Test
+    public void constructor_emptyList_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new FindCommand(new ArrayList<>()));
+    }
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstNamePredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondNamePredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-        IdContainsNumberPredicate firstIdPredicate =
-                new IdContainsNumberPredicate(Collections.singletonList("#140272"));
-        IdContainsNumberPredicate secondIdPredicate =
-                new IdContainsNumberPredicate(Collections.singletonList("#475272"));
 
+        FindCommand findNameCommand = new FindCommand(List.of(pieNamePredicate));
+        FindCommand findIdCommand = new FindCommand(List.of(pieTagPredicate));
 
-        FindCommand findNameFirstCommand = new FindCommand(firstNamePredicate);
-        FindCommand findNameSecondCommand = new FindCommand(secondNamePredicate);
-        FindCommand findIdFirstCommand = new FindCommand(firstIdPredicate);
-        FindCommand findIdSecondCommand = new FindCommand(secondIdPredicate);
+        // same object
+        assertEquals(findNameCommand, findNameCommand);
 
+        // same predicate
+        assertEquals(findNameCommand, new FindCommand(List.of(pieNamePredicate)));
 
-        // same Name type-> returns true
-        assertTrue(findNameFirstCommand.equals(findNameFirstCommand));
-
-        // same Id type-> returns true
-        assertTrue(findIdFirstCommand.equals(findIdFirstCommand));
-
-        // same Name values -> returns true
-        FindCommand findNameFirstCommandCopy = new FindCommand(firstNamePredicate);
-        assertTrue(findNameFirstCommand.equals(findNameFirstCommandCopy));
-
-        // same Id values -> returns true
-        FindCommand findIdFirstCommandCopy = new FindCommand(firstIdPredicate);
-        assertTrue(findIdFirstCommand.equals(findIdFirstCommandCopy));
-
-        // different Name types -> returns false
-        assertFalse(findNameFirstCommand.equals(1));
-
-        // different Id types -> returns false
-        assertFalse(findIdFirstCommand.equals(1));
+        // different types -> returns false
+        assertFalse(findNameCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findNameFirstCommand.equals(null));
+        assertFalse(findNameCommand.equals(null));
 
-        // null -> returns false
-        assertFalse(findIdFirstCommand.equals(null));
-
-        // different Name -> returns false
-        assertFalse(findNameFirstCommand.equals(findNameSecondCommand));
-
-        // different Id -> returns false
-        assertFalse(findIdFirstCommand.equals(findIdSecondCommand));
+        // different predicates -> returns false
+        assertNotEquals(findNameCommand, findIdCommand);
     }
 
     @Test
-    public void execute_zeroNameKeywords_noItemFound() {
-        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicateName(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+    public void execute_existentName_itemFound() {
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 1);
+        FindCommand command = new FindCommand(List.of(pieNamePredicate));
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, pieNamePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredDisplayList());
     }
 
     @Test
-    public void execute_zeroIdKeywords_noItemFound() {
-        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
-        IdContainsNumberPredicate predicate = preparePredicateId(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+    public void execute_existentId_itemFound() {
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 1);
+        FindCommand command = new FindCommand(List.of(pieIdPredicate));
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, pieIdPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredDisplayList());
     }
 
     @Test
-    public void execute_multipleNameKeywords_multipleItemsFound() {
+    public void execute_existentTag_itemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicateName("Chocolate Egg Forest");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+        FindCommand command = new FindCommand(List.of(pieTagPredicate));
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, pieTagPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CHOCOCHIP, EGGNOG, FOREST_CAKE), model.getFilteredDisplayList());
     }
 
     @Test
-    public void execute_multipleIdKeywords_multipleItemsFound() {
+    public void execute_multiplePredicates_itemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
-        IdContainsNumberPredicate predicate = preparePredicateId("444444 555555");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+        FindCommand command = new FindCommand(List.of(pieIdPredicate, muffinNamePredicate));
+
+        Predicate<Item> combinedPredicate = combinePredicate(pieIdPredicate, muffinNamePredicate);;
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, combinedPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CHOCOCHIP, DALGONA_COFFEE), model.getFilteredDisplayList());
     }
 
     @Test
-    public void execute_displayNotInInventoryMode_failure() {
-        IdContainsNumberPredicate predicate = preparePredicateId("444444 555555");
-        FindCommand command = new FindCommand(predicate);
+    public void execute_multiplePredicatesSameItem_itemFound() {
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 1);
+        FindCommand command = new FindCommand(List.of(pieIdPredicate, pieNamePredicate));
 
-        model.setOrder(new Order());
-        model.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
-        String expectedMessage = FindCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
-
-        assertCommandFailure(command, model, expectedMessage);
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
-    private NameContainsKeywordsPredicate preparePredicateName(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code IdContainsKeywordsPredicate}.
-     */
-    private IdContainsNumberPredicate preparePredicateId(String userInput) {
-        return new IdContainsNumberPredicate(Arrays.asList(userInput.split("\\s+")));
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, pieIdPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
 

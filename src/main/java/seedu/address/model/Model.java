@@ -12,7 +12,6 @@ import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.TransactionRecord;
 
 /**
  * The API of the Model component.
@@ -150,6 +149,12 @@ public interface Model {
     Order getOrder();
 
     /**
+     * Close the current order. Does not save the order beforehand.
+     * Model must have an unclosed order.
+     */
+    void closeOrder();
+
+    /**
      * Decrements the count of the given {@code target} in the order by {@code amount}.
      * {@code target} must exist in the order.
      * {@code amount} must be less than {@code target}'s count.
@@ -165,12 +170,12 @@ public interface Model {
     /**
      * Destroys the current order when ordering finish.
      */
-    void transactAndClearOrder();
+    void transactAndCloseOrder();
 
     /**
      * Return a list of {@code TransactionRecord} sorted according to timestamp.
      */
-    List<TransactionRecord> getTransactions();
+    ReadOnlyTransactionList getTransactions();
 
     /**
      * Returns an unmodifiable view of the filtered list to be displayed.
@@ -208,9 +213,31 @@ public interface Model {
      */
     DisplayMode getDisplayMode();
 
+    /**
+     * Initialise Transactions.
+     */
+    void initialiseTransactions();
+
+    /**
+     * Add a specified cost to bookKeeping.
+     * @param cost the specified cost
+     */
     void addCostBookKeeping(Double cost);
 
+    /**
+     * Add a specified revenue to bookKeeping.
+     * @param revenue the specified revenue
+     */
     void addRevenueBookKeeping(Double revenue);
 
+    /**
+     * Return the current BookKeeping.
+     * @return the current BookKeeping.
+     */
     BookKeeping getBookKeeping();
+
+    /**
+     * Initialise BookKeeping.
+     */
+    void initialiseBookKeeping();
 }

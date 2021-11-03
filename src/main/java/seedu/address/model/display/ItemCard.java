@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.model.display;
 
 import java.util.Comparator;
 
@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.item.Item;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of an {@code Item}.
@@ -53,8 +54,8 @@ public class ItemCard extends UiPart<Region> {
         name.setText(item.getName().fullName);
         id.setText(String.format("#%06d", item.getId()));
         count.setText(String.format("Quantity: %d", item.getCount()));
-        costPrice.setText(String.format("Cost Price: $ %s", item.getCostPrice()));
-        salesPrice.setText(String.format("Sales Price: $ %s", item.getSalesPrice()));
+        costPrice.setText(String.format("Cost Price: $ %.2f", item.getCostPrice()));
+        salesPrice.setText(String.format("Sales Price: $ %.2f", item.getSalesPrice()));
         item.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

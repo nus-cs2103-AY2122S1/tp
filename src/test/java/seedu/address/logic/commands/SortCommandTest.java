@@ -12,8 +12,10 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand.SortOrder;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.ItemCountComparator;
 import seedu.address.model.item.ItemNameComparator;
@@ -24,7 +26,8 @@ import seedu.address.model.order.Order;
  */
 public class SortCommandTest {
 
-    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void constructor_nullSortOrder_throwsNullPointerException() {
@@ -36,7 +39,8 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(SortCommand.SortOrder.BY_NAME);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name");
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.sortItems(new ItemNameComparator());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -47,7 +51,8 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(SortCommand.SortOrder.BY_COUNT);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "count");
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.sortItems(new ItemCountComparator());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

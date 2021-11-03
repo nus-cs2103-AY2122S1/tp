@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-public class BookKeeping {
+public class BookKeeping implements ReadOnlyBookKeeping {
     private Double revenue;
     private Double cost;
     private Double profit;
@@ -16,6 +16,21 @@ public class BookKeeping {
         this.revenue = revenue;
         this.cost = cost;
         this.profit = profit;
+    }
+
+    /**
+     * Constructor for BookKeeping.
+     *
+     * @param bookKeeping a ReadOnlyBookKeeping version of BookKeeping
+     */
+    public BookKeeping(ReadOnlyBookKeeping bookKeeping) {
+        this.revenue = bookKeeping.getRevenue();
+        this.cost = bookKeeping.getCost();
+        this.profit = bookKeeping.getProfit();
+    }
+
+    public BookKeeping() {
+        this(0.0, 0.0, 0.0);
     }
 
     public Double getRevenue() {
@@ -48,5 +63,14 @@ public class BookKeeping {
     public void addRevenue(Double revenue) {
         this.revenue += revenue;
         this.profit += revenue;
+    }
+
+    /**
+     * Reinitialise bookKeeping.
+     */
+    public void initialise() {
+        this.revenue = 0.0;
+        this.cost = 0.0;
+        this.profit = 0.0;
     }
 }
