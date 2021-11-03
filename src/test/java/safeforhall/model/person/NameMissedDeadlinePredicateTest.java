@@ -23,7 +23,7 @@ public class NameMissedDeadlinePredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withFet("01-10-2021").build()));
 
         predicate = new NameMissedDeadlinePredicate("c", new LastDate("10-10-2021"));
-        assertTrue(predicate.test(new PersonBuilder().withCollection("31-09-2021").build()));
+        assertTrue(predicate.test(new PersonBuilder().withCollection("30-09-2021").build()));
 
         predicate = new NameMissedDeadlinePredicate("f", new LastDate("10-10-2021"));
         assertTrue(predicate.test(new PersonBuilder().withFet("30-09-2021").build()));
@@ -58,7 +58,7 @@ public class NameMissedDeadlinePredicateTest {
         predicate = new NameMissedDeadlinePredicate("c", new LastDate("11-10-2021"));
         assertEquals(predicate.getDeadlinePeriod(ALICE), 1);
 
-        predicate = new NameMissedDeadlinePredicate("c", new LastDate(""));
+        predicate = new NameMissedDeadlinePredicate("c", new LastDate(LastDate.DEFAULT_DATE));
         NameMissedDeadlinePredicate finalPredicate = predicate;
         assertDoesNotThrow(() -> finalPredicate.getDeadlinePeriod(ALICE));
     }
