@@ -19,6 +19,8 @@ import seedu.placebook.model.historystates.exceptions.NoHistoryStatesException;
 import seedu.placebook.model.person.Person;
 import seedu.placebook.model.schedule.Appointment;
 import seedu.placebook.model.schedule.Schedule;
+import seedu.placebook.model.schedule.exceptions.ClashingAppointmentsException;
+import seedu.placebook.model.schedule.exceptions.DuplicateAppointmentException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -122,6 +124,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setSchedule(ReadOnlySchedule schedule) {
+        this.schedule.resetData(schedule);
+    }
+
+    @Override
     public ReadOnlySchedule getSchedule() {
         return schedule;
     }
@@ -136,6 +143,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        this.removePersonFromAppointments(target);
     }
 
     @Override
@@ -153,7 +161,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addAppointment(Appointment a) {
+    public void addAppointment(Appointment a) throws ClashingAppointmentsException, DuplicateAppointmentException {
         requireNonNull(a);
 
         schedule.addAppointment(a);

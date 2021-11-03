@@ -6,8 +6,11 @@ import static seedu.placebook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.placebook.commons.util.StringUtil;
 import seedu.placebook.model.person.exceptions.DuplicatePersonException;
 import seedu.placebook.model.person.exceptions.PersonNotFoundException;
 
@@ -27,6 +30,15 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final StringProperty personNames = new SimpleStringProperty("");
+
+    /**
+     * Returns the observable personNames.
+     * @return the person names of the list.
+     */
+    public StringProperty getPersonNames() {
+        return this.personNames;
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -46,6 +58,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        personNames.set(this.toString());
     }
 
     /**
@@ -66,6 +79,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        personNames.set(this.toString());
     }
 
     /**
@@ -77,11 +91,13 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        personNames.set(this.toString());
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        personNames.set(this.toString());
     }
 
     /**
@@ -95,6 +111,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        personNames.set(this.toString());
     }
 
     /**
@@ -113,8 +130,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     @Override
     public String toString() {
-        return internalList.stream().reduce(
-            "", (names, person) -> names + person.getName().fullName + ", ", String::concat);
+        return StringUtil.listToString(internalList, person -> person.getName().fullName, ", ");
     }
 
     @Override
