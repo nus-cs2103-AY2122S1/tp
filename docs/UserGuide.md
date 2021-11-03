@@ -174,6 +174,11 @@ Examples:
 ![result for 'edit p/99881234'](images/screenshots/editProfile.png)
 
 ### 2. Manage module tags
+Module tags are colour coded.
+* Blue tags indicate that the user is not looking for a group for that specific module.
+* Yellow tags indicate that the user is looking for other students to join their group for that specific module.
+* Red tags indicate that the user has no group and is looking to join one for that specific module. <br>
+![tag explanation](images/screenshots/tagexplanation.PNG)
 
 #### 2.1 Add modules to your profile : `addMod`
 
