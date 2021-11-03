@@ -128,6 +128,8 @@ public class AddShiftCommand extends Command {
         return ((index == null && command.index == null) || (index != null && index.equals(command.index)))
                 && ((name == null && command.name == null) || (name != null && name.equals(command.name)))
                 && dayOfWeek.equals(command.dayOfWeek)
-                && slot.equals(command.slot);
+                && slot.equals(command.slot)
+                && startDate.equals(command.startDate)
+                && endDate.equals(command.endDate);
     }
 }
