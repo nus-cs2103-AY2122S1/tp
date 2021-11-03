@@ -638,7 +638,7 @@ The `Levenshtein distance` between two words is the minimum number of single-cha
 
 #### Usage
 
-Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step.
+Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step when a user types in a wrong command word.
 
 Step 1. The user launches the application.
 
@@ -648,7 +648,7 @@ Step 3. This will call `AddressBookParser#parseCommand`. But since there are no 
 it will end up at the `default` clause of the `switch` statement.
 
 Step 4. A new `WordSuggestion` object will be created with its `word` set to the `commandWord`,
-`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 3.
+`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 2.
 
 Step 5. While being initialized, `WordSuggestion#computeAllLevenshteinDistance` will be called, and it will compute the
 `Levenshtein distance` of `word` with every single word in `validWords`.
@@ -666,8 +666,8 @@ display the suggestions to the user.
 
 **Aspect: Algorithm and Time Complexity:**
 
-* **Alternative 1 (current choice):** Dynamic programming
-    * Pros: More efficient, only takes O(n*m) time, with n and m being the length of each of the two strings.
+* **Alternative 1 (current choice):** Dynamic programming (Wagner-Fischer algorithm)
+    * Pros: More efficient, only takes `O(n * m)` time, with `n` and `m` being the length of each of the two strings.
     * Cons: Harder to implement by the developers.
 
 * **Alternative 2:** Recursive
