@@ -36,7 +36,10 @@ public class AddAllocCommand extends Command {
             + "Parameters: "
             + PREFIX_GROUP + "<group_name> "
             + "(" + PREFIX_NAME + "<student_name> | "
-            + PREFIX_ID + "<student_id>)";
+            + PREFIX_ID + "<student_id>)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GROUP + "T01A "
+            + PREFIX_NAME + "Jonas Chow";
 
     public static final String MESSAGE_SUCCESS = "New allocation added: %1$s";
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";

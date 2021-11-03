@@ -43,12 +43,12 @@ public class ImportCommand extends Command {
             + PREFIX_ASSESSMENT + "10 "
             + PREFIX_TAG + "3";
 
-    public static final String MESSAGE_SUCCESS = "Imported all students";
-    public static final String MESSAGE_INVALID_FILE = "Failed to read from the file";
-    public static final String MESSAGE_INVALID_NUMBER = "Failed to read the number of columns";
-    public static final String MESSAGE_OUT_OF_BOUNDS = "Reached unexpected end of line while reading from file";
-    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Duplicate assessment found in file";
-    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student ID found in file";
+    public static final String MESSAGE_SUCCESS = "Imported all students. ";
+    public static final String MESSAGE_INVALID_FILE = "Failed to read from the file. ";
+    public static final String MESSAGE_INVALID_NUMBER = "Failed to read the number of columns. ";
+    public static final String MESSAGE_OUT_OF_BOUNDS = "Reached unexpected end of line while reading from file. ";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Duplicate assessment found in file. ";
+    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student ID found in file. ";
 
     private final int groupCount;
     private final int assessmentCount;

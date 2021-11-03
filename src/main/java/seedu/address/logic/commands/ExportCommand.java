@@ -23,7 +23,7 @@ public class ExportCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Exported to file: %1$s";
-    public static final String MESSAGE_FAILURE = "Failed to export to file";
+    public static final String MESSAGE_FAILURE = "Failed to export to file. ";
 
     public static final String BASE_PATH = "sourceControl%1$s.csv";
 

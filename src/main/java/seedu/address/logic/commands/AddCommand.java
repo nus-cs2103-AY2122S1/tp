@@ -24,14 +24,14 @@ public class AddCommand extends Command {
             + "[" + PREFIX_GROUP + "<group_name>]... "
             + "[" + PREFIX_TAG + "<tag>]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "Leong Hong Fai "
             + PREFIX_ID + "E0543948 "
-            + PREFIX_GROUP + "T01A"
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_GROUP + "T01A "
+            + PREFIX_GROUP + "R02B "
+            + PREFIX_TAG + "beginner";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in Source Control.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student ID already exists in Source Control. ";
 
     private final Student toAdd;
 

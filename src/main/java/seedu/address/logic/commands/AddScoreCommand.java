@@ -38,7 +38,11 @@ public class AddScoreCommand extends Command {
             + PREFIX_ASSESSMENT + "<assessment_name> "
             + "(" + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id>) "
-            + PREFIX_SCORE + "<score_in_percentage>";
+            + PREFIX_SCORE + "<score_in_percentage>\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ASSESSMENT + "Midterm "
+            + PREFIX_NAME + "Tang Zhiying "
+            + PREFIX_SCORE + "68.5";
 
     public static final String MESSAGE_ADD_SUCCESS = "New score added: %1$s";
     public static final String MESSAGE_UPDATE_SUCCESS = "Score updated from %1$s to %2$s: %3$s";

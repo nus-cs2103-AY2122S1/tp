@@ -35,14 +35,14 @@ public class AddGroupCommand extends Command {
             + "[(" + PREFIX_NAME + "<student_name>" + " | "
             + PREFIX_ID + "<student_id>" + ")]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP + "T01A"
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_ID + "E0543948";
+            + PREFIX_GROUP + "T01A "
+            + PREFIX_NAME + "Gan Hong Yao "
+            + PREFIX_ID + "E0123456";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s\n";
     public static final String MESSAGE_STUDENTS_ADDED = "Students added to group: %1$s\n";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "Student with name or ID \"%1$s\" does not exist.";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the application.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the database.";
     public static final String MESSAGE_DUPLICATE_STUDENT =
             "The student \"%1$s\" needs to be allocated manually using ID due to duplicate naming.";
     public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP =
