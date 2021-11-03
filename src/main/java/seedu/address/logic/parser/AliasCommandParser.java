@@ -36,6 +36,10 @@ public class AliasCommandParser implements Parser<AliasCommand> {
         String rawCommand = argMultimap.getValue(PREFIX_COMMAND).get();
         Command command = parser.parseCommand(rawCommand);
 
+        if (AddressBookParser.COMMAND_WORDS.contains(alias)) {
+            throw new ParseException(AliasCommand.MESSAGE_INVALID_ALIAS);
+        }
+
         return new AliasCommand(alias, command, rawCommand);
     }
 
