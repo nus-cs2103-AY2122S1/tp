@@ -203,18 +203,18 @@ The features mentioned are:
    3. [Adding a remark](#adding-a-remark)
    4. Editing a person
    5. Deleting a person
-   6. [Deleting multiple person](#deleting-multiple-person)
+   6. [Deleting multiple person](#delete-multiple-persons)
    7. Deleting tags from persons
    8. Clearing all persons
-3. View 
+3. View
    1. Listing all persons
-   2. Locating persons
+   2. [Finding persons](#finding-persons)
    3. [Sorting persons](#sorting-persons)
    4. Viewing statistics
-4. Share 
+4. Share
    1. Importing contacts
    2. Exporting contacts
-5. Advance 
+5. Advance
    1. Aliasing commands
 6. Exiting the program
 7. Saving the data
@@ -261,7 +261,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Save all optional attributes of a contact as Optional type.
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
-    
+
 ### Adding a remark
 
 #### Implementation
@@ -307,12 +307,11 @@ The following sequence diagram shows how the add remark mechanism works:
     * Pros: It uses less memory and thus may run faster.
     * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
-### Find Contacts by Keywords
+### Finding Persons
 
 #### Implementation
 
-The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of 
-their contact details.
+The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
 
 #### Usage
 
@@ -343,15 +342,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How contacts are saved with multiple arguments:**
 
-* **Alternative 1 (current choice):** Only include people who contain all the specified contact details 
+* **Alternative 1 (current choice):** Only include people who contain all the specified contact details
     * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
     * Cons: Requires you to be familiar of the people in your contact list.
 
 * **Alternative 2:** Include people who contain at least one of the specified contact details.
-    * Pros: Good for users who want to broadly search for eligible friends 
+    * Pros: Good for users who want to broadly search for eligible friends
     * Cons: Not very intuitive
 
-### Delete multiple person
+### Delete multiple persons
 
 #### Implementation
 
@@ -407,7 +406,7 @@ The following activity diagram summarizes what happens when a user executes a so
 
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
-The Sort mechanism sorts persons based on the specified field in ascending order. 
+The Sort mechanism sorts persons based on the specified field in ascending order.
 The command will result in the creation of a Comparator<Person>.
 
 #### Usage
@@ -420,7 +419,7 @@ Step 2. The user executes `sort n/` command to sort all persons by name in ascen
 
 Step 3. This will call SortCommandParser#parse which will then parse the arguments provided.
 
-Step 4. A new `NameComparator` and `SortCommand` object will then be created. It will be used to sort all the persons based on their names. This `NameComparator` is then passed to the `SortCommand`. 
+Step 4. A new `NameComparator` and `SortCommand` object will then be created. It will be used to sort all the persons based on their names. This `NameComparator` is then passed to the `SortCommand`.
 
 The following sequence diagram shows how the parser operation works (`NameComparator` not shown):
 
@@ -445,7 +444,7 @@ The following sequence diagram shows how the Sort mechanism works:
 * **Alternative 2:** Sort all persons based on multiple fields.
     * Pros: Convenient if the contact list is very huge and users would like to sort based on multiple fields.
     * Cons: Difficult to implement.
-    
+
 ### Import JSON file
 
 #### Implementation
@@ -593,7 +592,7 @@ Currently, this feature only supports suggestions for commands and nationalities
 
 This feature is implemented using the `Wagner-Fischer` dynamic programming algorithm to compute the `Levenshtein distance`.
 The `Levenshtein distance` between two words is the minimum number of single-character edits
-(insertions, deletions or substitutions) required to change one word into the other. 
+(insertions, deletions or substitutions) required to change one word into the other.
 
 #### Usage
 
@@ -601,7 +600,7 @@ Given below is an example usage scenario and how the Input Suggestion mechanism 
 
 Step 1. The user launches the application.
 
-Step 2. The user executes `fin n/Ben` command, with the intention of typing `find n/Ben`. 
+Step 2. The user executes `fin n/Ben` command, with the intention of typing `find n/Ben`.
 
 Step 3. This will call `AddressBookParser#parseCommand`. But since there are no command words that match it,
 it will end up at the `default` clause of the `switch` statement.
