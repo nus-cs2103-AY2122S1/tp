@@ -73,7 +73,7 @@ public class AssessmentStatistics {
     /**
      * Returns the {@code Bin} that the {@code Score} belongs in.
      */
-    private Bin getBinForScore(Collection<Bin> bins, Score score) {
+    public static Bin getBinForScore(Collection<Bin> bins, Score score) {
         for (Bin b : bins) {
             if (b.includesScore(score)) {
                 return b;
@@ -89,7 +89,7 @@ public class AssessmentStatistics {
     /**
      * Adds the specified {@code Score} to its corresponding {@code Bin}.
      */
-    private void addScoreToBin(Map<Bin, Integer> binCounts,  Score score) {
+    public static void addScoreToBin(Map<Bin, Integer> binCounts, Score score) {
         Bin binForScore = getBinForScore(binCounts.keySet(), score);
         binCounts.put(binForScore, binCounts.get(binForScore) + 1);
     }
@@ -97,7 +97,7 @@ public class AssessmentStatistics {
     /**
      * Returns a distribution of scores for the assessment, with the bins in their string representations.
      */
-    private Map<String, Number> getScoreDistribution() {
+    public Map<String, Number> getScoreDistribution() {
         Map<Bin, Integer> binCounts = new HashMap<>();
 
         List<Bin> bins = createBins(binSize);
