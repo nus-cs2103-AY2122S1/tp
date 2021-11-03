@@ -128,9 +128,12 @@ The **API** of this component is specified in
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
-the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts `CommandBox`, `ResultDisplay`, `ClientListPanel`,
+`ProductListPanel`, `ClientCard`, `ProductCard`, `HelpMessage`, `ViewMoreClient`, `ViewMoreProduct`, `PieChartSalesView`
+`StatusBarFooter` and `HelpWindow`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class 
+which captures the commonalities between classes that represent parts of the visible GUI. In addition, `HelpMessage`, 
+`ViewMoreClient`, `ViewMoreProduct` and `PieChartSalesView` extends from `SecondPanel` which displays the results of
+view, stat and help command.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of the
@@ -143,7 +146,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Client` or `Product` object residing in the `Model`.
 
 ### Logic component
 
@@ -162,8 +165,8 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
-call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -c 1")` 
+API call.
 
 ![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteClientSequenceDiagram.png)
 
@@ -197,24 +200,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-  this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Client` and `Product` objects (which are contained in a `UniquePersonList` 
+  object and a `UniqueProductList` object respectively).
+* stores the currently 'selected' `Client` and `Product` objects (e.g., results of a search query) as two separate 
+  _filtered_ lists which are exposed to outsiders as the unmodifiable `ObservableList<Client>` and 
+  `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to the lists so that the UI automatically 
+  updates when the data in these lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the
-`AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag,
-instead of each `Person` needing their own `Tag` objects.
-<br>
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 ### Storage component
 
