@@ -97,15 +97,15 @@ public class ParserUtilTest {
     @Test
     public void parseMultipleIndex_validInput_success() throws Exception {
         // Only 1 space in between
-        assertArrayEquals(new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON},
+        assertArrayEquals(new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON},
                 ParserUtil.parseMultipleIndex("1 2 3"));
 
         // Leading and trailing whitespaces
-        assertArrayEquals(new Index[]{INDEX_FIRST_PERSON, INDEX_THIRD_PERSON, INDEX_SECOND_PERSON},
+        assertArrayEquals(new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON},
                 ParserUtil.parseMultipleIndex("  1 3 2  "));
 
         // Varying whitespaces
-        assertArrayEquals(new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON},
+        assertArrayEquals(new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON},
                 ParserUtil.parseMultipleIndex("  3     1               2  "));
     }
 

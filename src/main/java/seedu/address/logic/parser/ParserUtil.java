@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -59,6 +60,8 @@ public class ParserUtil {
             }
             indexesList[i] = Index.fromOneBased(Integer.parseInt(trimmedIndex));
         }
+        // Sort the array from large to small so that invalid (out of range) index will be encountered first
+        Arrays.sort(indexesList, (i1, i2) -> i2.getZeroBased() - i1.getZeroBased());
 
         return indexesList;
     }
