@@ -25,10 +25,12 @@ public class EditGroupStatusCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the group status of the specified module. "
-            + "No description is needed to change the group status to 'don't need group/not looking for a group'.\n"
+            + "To change the grouping status to 'don't need group/not looking for group', "
+            + "please leave the description blank\n"
             + "Parameters: "
             + PREFIX_MOD + "MOD \n"
-            + "Example: \n- " + COMMAND_WORD + " " + PREFIX_MOD + "CS2100 need group\n";
+            + "Example: \n- " + COMMAND_WORD + " " + PREFIX_MOD + "CS2100 need group\n"
+            + "- " + COMMAND_WORD + " " + PREFIX_MOD + "CS2101 need member\n";
 
     public static final String MESSAGE_EDIT_GROUP_STATUS_SUCCESS = "Group status changed to: %1$s";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The specified module does not exist on your profile. "
@@ -36,7 +38,7 @@ public class EditGroupStatusCommand extends Command {
     public static final String MESSAGE_NO_MODULE_SPECIFIED = "One module must be provided.";
     public static final String MESSAGE_MULTIPLE_MODULES_SPECIFIED = "Only one module must be provided.";
     public static final String MESSAGE_NO_STATUS_CHANGED = "The status specified is the same "
-            + "as what exists for the specified module.";
+            + "as what currently exists for the specified module.";
 
 
     private final EditCommand.EditPersonDescriptor editPersonDescriptor;

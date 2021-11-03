@@ -1,14 +1,18 @@
 package seedu.modulink.model.tag;
 
-import java.util.stream.Stream;
+import seedu.modulink.logic.parser.exceptions.ParseException;
 
 public enum Status {
     NONE("G"),
     NEED_GROUP("SG"),
     NEED_MEMBER("SM");
 
-    public static final String MESSAGE_CONSTRAINTS = "The group status you are trying to find does not exist! "
-            + "Please enter 'SG' for 'Seeking group', 'SM' for 'Seeking member' or 'G' for 'Not looking for group'";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Available grouping statuses are: \"need group\" and \"need member\".\n"
+            + "Please leave the description blank to indicate you do not need a group.";
+
+    public static final String VALIDATION_REGEX =
+            "((need group)|(need members?))?";
 
     private String status;
 
@@ -37,7 +41,8 @@ public enum Status {
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        return Stream.of(Status.values()).anyMatch(status -> status.toString().equalsIgnoreCase(test));
+        test = test.toLowerCase();
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -47,11 +52,17 @@ public enum Status {
      * @param s the given string.
      * @return the matching status
      */
-    public static Status parseStatusFromString(String s) {
+    public static Status parseStatusFromString(String s) throws ParseException {
         s = s.trim();
-        if (s.equals("need group")) {
+        s = s.toLowerCase();
+        if (!isValidStatus(s)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
+
+        if (s.equalsIgnoreCase("need group")) {
             return Status.NEED_GROUP;
-        } else if (s.equals("need member") || s.equals("need members")) {
+        } else if (s.equalsIgnoreCase("need member")
+                || s.equalsIgnoreCase("need members")) {
             return Status.NEED_MEMBER;
         } else {
             return Status.NONE;

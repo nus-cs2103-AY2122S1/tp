@@ -24,8 +24,7 @@ public class RemFavCommandParser implements Parser<RemFavCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         if (nameKeywords.length > 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemFavCommand.MESSAGE_USAGE));
+            throw new ParseException(RemFavCommand.MULTIPLE_ID_ERROR);
         }
 
         return new RemFavCommand(nameKeywords[0]);

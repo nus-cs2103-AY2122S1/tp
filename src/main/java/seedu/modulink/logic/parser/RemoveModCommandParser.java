@@ -2,17 +2,13 @@ package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.logic.commands.RemoveModCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
@@ -28,28 +24,18 @@ public class RemoveModCommandParser implements Parser<RemoveModCommand> {
     public RemoveModCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_MOD);
+                ArgumentTokenizer.tokenize(args, PREFIX_MOD);
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (trimmedArgs.isEmpty()
+                || StringUtil.countMatch(args, '/') != 1
+                || parseModsToRemove(argMultimap.getAllValues(PREFIX_MOD)).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveModCommand.MESSAGE_USAGE));
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            editPersonDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
+
         parseModsToRemove(argMultimap.getAllValues(PREFIX_MOD)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -68,9 +54,14 @@ public class RemoveModCommandParser implements Parser<RemoveModCommand> {
         assert tags != null;
 
         if (tags.isEmpty()) {
-            return Optional.empty();
+            throw new ParseException(RemoveModCommand.MESSAGE_NO_CHANGE);
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+
+        Collection<String> tagSet;
+        if (tags.size() == 1 && tags.contains("")) {
+            throw new ParseException(RemoveModCommand.MESSAGE_NO_CHANGE);
+        } else {
+            return Optional.of(ParserUtil.parseTags(tags));
+        }
     }
 }

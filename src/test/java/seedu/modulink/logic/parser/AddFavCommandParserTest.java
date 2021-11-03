@@ -27,7 +27,7 @@ public class AddFavCommandParserTest {
 
     @Test
     public void parse_twoArgs_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFavCommand.MESSAGE_USAGE);
+        String expectedMessage = AddFavCommand.MULTIPLE_ID_ERROR;
 
         // missing name prefix
         assertParseFailure(parser, "A123333X A232113Y", expectedMessage);

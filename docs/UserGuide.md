@@ -21,8 +21,22 @@ This guide has been designed to make sure you can quickly access any information
 5. [Frequently Asked Questions](#faq)
 6. [Glossary](#glossary)
 
-We further recommend taking a glance at **[Section 2.1 Syntax and symbols](#section-21-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
+We further recommend taking a glance at **[Section 1.1 Syntax and symbols](#section-11-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
+
 ### Section 1.1: Syntax and Symbols
+Here are the commonly used syntax and symbols throughout the UG:
+
+`inline code`<br/>denotes a command for the application
+
+<div class="alert alert-warning">:exclamation: Important</div>denotes an important information for the functioning of the app
+<br/>
+
+<div class="alert alert-warning">:warning: Caution</div>denotes a possible fault that could occur
+<br/>
+
+<div class="alert alert-info">:information_source: Notes</div>denotes extra information to aid user in understanding the app
+<br/>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,24 +46,26 @@ We further recommend taking a glance at **[Section 2.1 Syntax and symbols](#sect
 If you are using ModuLink for the first time, we will first walk you through a one-time set-up to get started.
 
 1. Ensure you have Java 11 or above installed on your computer. You can easily do this via the **Terminal** app for Mac users, or the **Command Prompt** app for Windows users, and simply type and enter `java -version`. 
-<br> <br>
+<br/>
 Alternatively, if you prefer, you could also check the version via the GUI for both Mac and Windows systems, as mentioned in this [guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows). 
-   <br><br>
-   ❗**ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/downloads/#java11JDK11.0.13=).**
-   <br>
-   <br>
-2. Download the latest `modulink.jar` from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
+   <br/>
+   <br/>
+   <div markdown="span" class="alert alert-warning">:exclamation: Important:
+   ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+   </div>
+   <br/>
+2. Download the latest **modulink.jar** from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
 3. Move the file to the folder you want to use as the home folder for ModuLink on your computer.
 
 ### Section 2.2 Working with ModuLink
 To run the app, simply double click the file. You should see a GUI similar to the one shown below in a few seconds. The app will already contain data. Here’s a quick look at the different elements in the app.
 
-![Ui](images/screenshots/Ui2.png) [To be updated]
+![Ui](images/screenshots/Ui2.png)
 
 As mentioned earlier, ModuLink works as a CLI, which means you will need to type and enter commands in the command box. To get accustomed to the interface, try the following commands (in the given the order).
 
-* **`create`**`n/John Doe id/A0123456A p/24680135 e/johndoe@example.com` : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
-* **`addMod`** `mod/CS2103T need group mod/CS2101 need member`: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
+* **`create n/John Doe id/A0123456A p/24680135 e/johndoe@example.com`** : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
+* **`addMod mod/CS2103T need group mod/CS2101 need member`**: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
 * **`list`**: Lists all the profiles on ModuLink.
 * **`filter mod/CS2101`**: Filters all profiles who have CS2101 as one of their module tags.
 * **`filter mod/CS2101 need group`**: Filters all profiles who have CS2101 as one of their module tags AND need to form or join a group for it.
@@ -60,10 +76,11 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 
 ## Section 3: Features - Understanding what ModuLink can do for you
 
-To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br><br>
-(Need to put different icon here)<br><br>
-❗**If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
+To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br/>
 
+<div markdown="span" class="alert alert-warning">:exclamation: Important:
+If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
+</div>
 
 1. [Profiles](#1-profiles) <br/>
    1.1. [Create your own profile](#11-create-your-own-profile--create) <br/>
@@ -104,7 +121,7 @@ To know what you can do with ModuLink, and what ModuLink can do for you, refer t
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -113,10 +130,14 @@ To know what you can do with ModuLink, and what ModuLink can do for you, refer t
 
 #### 1.1 Create your own profile : `create`
 
-Creates your user profile. You can also choose to add modules and indicate your group status for each module. :warning: in order to start using ModuLink, you are **required** to create a new profile should you not have one.
+Creates your user profile. You can also choose to add modules and indicate your group status for each module.
+<div markdown="span" class="alert alert-warning">:exclamation: Important:
+in order to start using ModuLink, you are **required** to create a new profile should you not have one.
+</div>
 
 Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP_STATUS]]...`
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes:**
 * STUDENT_ID must be unique
 * You can choose to input your telegram handle as either starting with '@' eg: (@teleHandle), or just the handle itself (eg: teleHandle)
@@ -124,7 +145,8 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERN
 * The default status when a module is added without a description is 'Don't need group/Not looking for group'. The respective module will be displayed as a blue tag.
 * To indicate you need members for your group, you can include the description 'need member'. The respective module will be displayed as a yellow tag.
 * To indicate you are looking for a group, you can include the description 'need group'. The respective module will be displayed as a red tag.
-
+</div>
+   
 Examples:
 * `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com github/johndoe mod/CS2103T`
 * `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com tele/@janedoe mod/CS2101 need group`
@@ -135,13 +157,21 @@ Examples:
 
 #### 1.2 Edit your profile : `edit`
 
-Edits your own profile. You can choose to edit any attributes in your own profile. You can edit multiple attributes at once.
+Edits your own profile. You can choose to edit any attributes in your own profile except module tags which use separate commands. You can edit multiple attributes at once.
 
 Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
 
+Prefixes:
+* NAME: `n/`
+* STUDENT ID: `id/`
+* PHONE: `p/`
+* EMAIL: `e/`
+* GITHUB: `github/`
+* TELE: `tele/`
+
 Examples:
 * `edit p/123321432 e/changedemail@example.com`
-* `edit github/alex_yeoh`  
+* `edit github/alex_tan`  
     <br>
   <br>
 ![result for 'edit p/99881234'](images/screenshots/editProfile.png)
@@ -161,22 +191,22 @@ Examples:
   <br>
   ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addMod.png)
   
-  ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addModProfile.png)
-  
 
 #### 2.2 Edit the group status of existing modules on your profile : `editGroupStatus`
 
-Edits the group status of user-specified module(s).
+Edits the group status of user-specified module.
 
 Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION]`
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
-
-Examples (Will update screenshot after javafx stuff done):
-* `editGroupStatus mod/CS2103T`
-* `editGroupStatus mod/CS2103T need group`
-* `editGroupStatus mod/CS2100 need member`
+</div>
+   
+Examples:
+* `editGroupStatus mod/CS2220`
+* `editGroupStatus mod/CS2030S need member`
+* `editGroupStatus mod/CS2100 need group`
   <br>
   <br>
   Original profile:
@@ -184,8 +214,6 @@ Examples (Will update screenshot after javafx stuff done):
 
   Updated profile:
   ![result for 'original'](images/screenshots/egsc.png)
-
-  ![result for 'original'](images/screenshots/editedGroupStatus.png)
 
 
 #### 2.3 Remove modules from your profile : `remMod`
@@ -197,11 +225,11 @@ Format: `remMod mod/MODULE [mod/MODULE]...`
 Examples:
 * `remMod mod/CS2103T`
 * `remMod mod/CS2220`
+* `remMod mod/CS1231S mod/CS2220`
   <br>
   <br>
   ![result for 'remMod mod/CS2220'](images/screenshots/remMod.png)
-  
-  ![result for 'remMod mod/CS2220'](images/screenshots/remModProfile.png)
+ 
   
 
 ### 3. Manage favorites
@@ -212,9 +240,14 @@ Adds a profile to your favourites list. Favourited profiles will have a star bes
 
 Format: `addFav STUDENT_ID`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**
+* You cannot add your own profile as a favourite.
+</div>
+
 Examples:
 * `addFav A0222594A`
-* `addFav A1234568X`
+* `addFav A1234567R`
   <br>
   <br>
   ![result for 'addfav A1234967R'](images/screenshots/addFav.png)
@@ -227,7 +260,7 @@ Format: `remFav STUDENT_ID`
 
 Examples:
 * `remFav A0212345X`
-* `remFav A1234568X`
+* `remFav A1234567R`
   <br>
   <br>
   ![result for 'remfav A1234567R'](images/screenshots/remFav.png)
@@ -261,6 +294,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is not case-sensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * Only the name is searched.
+* Only alphanumeric characters can be entered.
 * Only full words will be matched e.g. Han will not match Hans
 * Profiles matching at least one keyword will be returned (i.e. OR search).
 
@@ -285,10 +319,10 @@ Format: `findId KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findId A1204567S` returns the person whose student ID number matches A1204567S
-* `findId A0123456A A0654321A` returns the profiles whose student ID number matches either A0123456A or A0654321A.
+* `findId A1234567R A1234567H` returns the profiles whose student ID number matches either A1234567R or A1234567H.
   <br>
   <br>
-  ![result for 'findId A1204567S'](images/screenshots/findId.png)
+  ![result for 'findId A1234567R A1234567H'](images/screenshots/findId.png)
 
 #### 4.5 Filter profiles by module and group status : `filter`
 
@@ -299,16 +333,16 @@ Format: `filter mod/MODULE_CODE [GROUP_STATUS]`
 * You can filter by profiles who need to join or form a group ('need group') or profiles who need members for their group ('need member').
 * `MODULE_CODE` is required for filtering by group status. The filter will return the profiles with the specified group status of the specified module.
 
-Examples (will change screenshot after javafx stuff done):
-* `filter mod/CS2030`
-* `filter mod/CS2030 need member`
-* `filter mod/CS2030 need group`
+Examples
+* `filter mod/CS2100`
+* `filter mod/CS2100 need member`
+* `filter mod/CS2100 need group`
   <br>
   <br>
-  ![result for 'filter mod/CS2103T'](images/screenshots/filtermod.png)
+  ![result for 'filter mod/CS2100'](images/screenshots/filtermod.png)
   <br>
   <br>
-  ![result for 'filter mod/CS2101' group/SM](images/screenshots/filtermodgroup.png)
+  ![result for 'filter mod/CS210' need memmber](images/screenshots/filtermodgroup.png)
 
 
 ### 5. Utility commands
@@ -338,7 +372,7 @@ ModuLink's data is saved in the hard disk automatically after any command that c
 
 ModuLink's data are saved as a JSON file `[JAR file location]/data/modulink.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: Caution:
+<div markdown="span" class="alert alert-warning">:warning: Caution:
 If your changes to the data file makes its format invalid, ModuLink will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -364,23 +398,22 @@ Prefix | Parameter
 **`github/`** | GITHUB USERNAME
 **`tele/`** | TELEGRAM HANDLE
 **`mod/`** | MODULE
-**`group/`** | GROUP STATUS
 
 ### Command summary
 
 Action | Format, Examples
 -------|-----------------
-**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
-**Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`, `edit p/123321432 e/changedemail@example.com`
-**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T Need a member mod/CS1231S`
-**Edit module group status** | `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...`, `editGroupStatus mod/CS2103T updateStatus/Need a member`
-**Remove module** | `remMod mod/MODULE [mod/MODULE]...`, `remMod mod/CS2100 mod/CS2103T`
-**Add Favourite** | `addFav STUDENT_ID` <br> e.g., `addFav A0222594A`
-**Remove Favourite** | `remFav STUDENT_ID` <br> e.g., `remFav A0222594A`
+**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
+**Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]` <br> <br> e.g., `edit p/123321432 e/changedemail@example.com`
+**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...` <br> <br> e.g., `addMod mod/CS2103T need member mod/CS1231S`
+**Edit module group status** | `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION] [mod/MODULE [NEW_STATUS_DESCRIPTION]]...` <br> <br> e.g., `editGroupStatus mod/CS2103T need group`
+**Remove module** | `remMod mod/MODULE [mod/MODULE]...` <br> <br> e.g., `remMod mod/CS2100 mod/CS2103T`
+**Add Favourite** | `addFav STUDENT_ID`  <br> <br> e.g., `addFav A0222594A`
+**Remove Favourite** | `remFav STUDENT_ID`  <br> <br> e.g., `remFav A0222594A`
 **List** | `list`
 **List favorites** | `listFav`
 **Find by name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
 **Find by student ID** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `findId A0222594A` returns person with student Id matching A0222594A.
-**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM`
+**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` <br> with group filter: `filter mod/CS2030 need group`
 **Help** | `help`
 **Exit** | `exit`

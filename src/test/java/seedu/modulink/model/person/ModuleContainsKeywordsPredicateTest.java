@@ -7,11 +7,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.tag.Mod;
 
 public class ModuleContainsKeywordsPredicateTest {
     @Test
-    public void equals() {
+    public void equals() throws ParseException {
         Set<Mod> firstPredicateKeywordList = Set.of(new Mod("CS2100"));
         Set<Mod> secondPredicateKeywordList = Set.of(new Mod("CS2103T"));
 

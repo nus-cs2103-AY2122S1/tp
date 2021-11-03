@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.modulink.logic.commands.exceptions.CommandException;
+import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.UserPrefs;
@@ -26,7 +27,7 @@ class AddModCommandTest {
     }
 
     @Test
-    void execute_addMod_success() throws CommandException {
+    void execute_addMod_success() throws CommandException, ParseException {
         Person editedPerson = new PersonBuilder().buildProfile();
         model.addPerson(editedPerson);
         EditCommand.EditPersonDescriptor descriptor =
@@ -37,7 +38,7 @@ class AddModCommandTest {
     }
 
     @Test
-    public void execute_addDuplicateMod_failure() throws CommandException {
+    public void execute_addDuplicateMod_failure() throws CommandException, ParseException {
         Person editedPerson = new PersonBuilder().buildProfile();
         model.addPerson(editedPerson);
         EditCommand.EditPersonDescriptor descriptor =

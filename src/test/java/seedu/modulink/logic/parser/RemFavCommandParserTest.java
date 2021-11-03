@@ -27,7 +27,7 @@ public class RemFavCommandParserTest {
 
     @Test
     public void parse_twoArgs_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemFavCommand.MESSAGE_USAGE);
+        String expectedMessage = RemFavCommand.MULTIPLE_ID_ERROR;
 
         // missing name prefix
         assertParseFailure(parser, "A123333X A232113Y", expectedMessage);

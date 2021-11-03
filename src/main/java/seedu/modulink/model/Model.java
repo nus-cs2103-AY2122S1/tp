@@ -57,7 +57,16 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    /**
+     * Returns true if a person with the same Student ID as {@code person} exists in the address book.
+     */
     boolean hasStudentId(Person person);
+
+    /**
+     * Returns true if a person other than the profile
+     * with the same Student ID as {@code person} exists in the address book.
+     */
+    boolean hasStudentIdNotProfile(Person person);
 
     /**
      * Deletes the given person.

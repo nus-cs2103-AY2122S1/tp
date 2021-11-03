@@ -5,6 +5,7 @@ import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.logic.parser.exceptions.ParseException;
@@ -33,11 +35,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE);
+                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE,
+                        PREFIX_MOD);
 
         String trimmedArgs = args.trim();
         String preamble = argMultimap.getPreamble();
-        if (trimmedArgs.isEmpty() || !preamble.isEmpty()) {
+        if (trimmedArgs.isEmpty()
+            || !preamble.isEmpty()
+            || numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
@@ -55,15 +60,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-
         if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
             editPersonDescriptor.setGitHubUsername(ParserUtil.parseGithubUsername
                     (argMultimap.getValue(PREFIX_GITHUB_USERNAME).get()));
         }
-
         if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
             editPersonDescriptor.setTelegramHandle(ParserUtil.parseTelegramHandle(
                     argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
+        }
+        if (parseModsToEdit(argMultimap.getAllValues(PREFIX_MOD)).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -74,11 +81,42 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
+     * Checks how many valid prefixes are present in args.
+     *
+     * @param argMultimap tokenized list of arguments.
+     * @return number of provided prefixes.
+     */
+    private int numberOfValidPrefixes(ArgumentMultimap argMultimap) {
+        int i = 0;
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
+            i++;
+        }
+        return i;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
+     *
+     * Only used for error checking.
      */
-    private Optional<Set<Mod>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Mod>> parseModsToEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

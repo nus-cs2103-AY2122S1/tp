@@ -24,21 +24,22 @@ public class AddModCommand extends Command {
     public static final String COMMAND_WORD = "addMod";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds one or more modules to your module list. "
+            + ": Adds a module to your module list. "
             + "You may optionally add your grouping status."
             + "Existing modules will not be overwritten.\n"
             + "Duplicate modules cannot be added.\n"
             + "Parameters: "
-            + "[" + PREFIX_MOD + "MOD]...\n"
+            + "[" + PREFIX_MOD + "MOD]\n"
             + "Example: \n- " + COMMAND_WORD
-            + " " + PREFIX_MOD + "CS2103T\n"
-            + COMMAND_WORD + " " + PREFIX_MOD + "CS2100 need group"
-            + " " + PREFIX_MOD + "CS1101S need member\n";
+            + " " + PREFIX_MOD + "CS2103T\n- "
+            + COMMAND_WORD + " " + PREFIX_MOD + "CS2100 need group";
 
     public static final String MESSAGE_ADD_MODULE_SUCCESS = "Added module: %1$s";
-    public static final String MESSAGE_NO_CHANGE = "At least one module must be provided.";
+    public static final String MESSAGE_NO_CHANGE =
+            "Please provide a module to add with the \"mod/\" prefix.";
     public static final String MESSAGE_DUPLICATE_MODULE = "You have already added this module to your list.\n"
-            + "Please use the \"editGroupStatus\" keyword to change your grouping status.";
+            + "Please use the \"editGroupStatus\" command to change your grouping status.";
+
 
     private final EditPersonDescriptor editPersonDescriptor;
 
