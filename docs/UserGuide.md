@@ -469,6 +469,9 @@ This section gives you the solutions to commonly asked questions.
 **Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
 **A**: First, add the module into the database using the [add](#411-adding-a-module-into-the-database--add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
 
+**Q**: Why is the module not included in the [MC Goal Progress](#325-mc-goal-progress) even though I have added it to my academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command<br>
+**A**: Make sure that the module has the appropriate tag. Also make sure that the module is colour coded in green as specified [here](#33-module-explanation). Do remember that our MC Goal Progress only takes into account the modules that you have taken.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Command summary
