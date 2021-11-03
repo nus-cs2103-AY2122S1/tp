@@ -141,8 +141,8 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 * Items in square brackets are optional.<br>
   e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[r/REMARK]…` can be used as ` ` (i.e. 0 times), `r/sick`, `r/absent r/graduated` etc.
+* Items with `…` after them can be used as many times as the user would like.<br>
+  e.g. `[r/REMARK]…` can be used multiple times like `r/sick` or `r/absent r/graduated`, or can be omitted altogether. 
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PARENT_CONTACT`, `p/PARENT_CONTACT n/NAME` is also acceptable.
