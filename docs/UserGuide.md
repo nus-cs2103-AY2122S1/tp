@@ -27,7 +27,7 @@ This user guide will bring you through **how to quickly start using our applicat
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer (See also: [FAQ](#faq)). 
+1. Ensure you have Java `11` or above installed in your Computer (See also: [FAQ](#faq)).
 
 2. Download the latest `csbook.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-3/tp/releases).
 
@@ -40,7 +40,7 @@ This user guide will bring you through **how to quickly start using our applicat
    Some example commands you can try:
 
     * **`list`** : Lists all students currently stored.
-   
+
     * **`addgroup`**`g/CS2100 d/Computer Organisation` : Adds a group named `CS2101` with a simple description to CSBook
 
     * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2101` : Adds a student named `Jia Xian` to CSBook
@@ -77,7 +77,7 @@ These icons will appear within coloured boxes to indicate
 ------------|------------------|----
  :information_source:**Note** |This icon serves to give an additional note or remark about the current feature|Blue
  :bulb:**Tip** |This icon serves to give a quick recommendation about how to use the feature in the most beneficial way|Blue
- :exclamation:**Caution** |This icon serves to give a note on behaviour of the application that could be unexpected to you|Yellow 
+ :exclamation:**Caution** |This icon serves to give a note on behaviour of the application that could be unexpected to you|Yellow
  :warning:**Warning** |This icon serves to warn against using a feature in some unintended manner| Yellow
 
 
@@ -151,7 +151,7 @@ CSBook data are saved in the hard disk automatically after any command that chan
 
 #### Editing the data file
 
-CSBook data are saved as an JSON file at `[JAR file location]/data/csbook`. Advanced users are welcome to update data directly by editing that data file. 
+CSBook data are saved as an JSON file at `[JAR file location]/data/csbook`. Advanced users are welcome to update data directly by editing that data file.
 
 Note that if the encrypt function is turned on, the data will be saved in an encrypted JSON format. In which case, users are highly advised to **NOT** edit the data file directly and only manipulate data through the commands provided.
 
@@ -191,7 +191,7 @@ Result of `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`:
 
 Shows a list of all students in the CSBook.
 
-* A student will be coloured red if their latest assessment fall below the passing threshold of 50%. 
+* A student will be coloured red if their latest assessment fall below the passing threshold of 50%.
 
 Format: `list`
 
