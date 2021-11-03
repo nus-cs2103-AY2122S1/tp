@@ -116,7 +116,7 @@ A client is considered to be the same as another client if they share the same *
 LeadsForce has checks that prevent users from creating duplicated contacts.
 
 <div markdown="block" class="alert alert-info">
- <p><img src=images/info_icon.png width="20"/><b>Notes about having the same client information for various attributes:</b></p>
+ <p><img src=images/info_icon.png width="30"/><b>Notes about having the same client information for various attributes:</b></p>
 
 * Users have the flexibility to give the same name, email, phone number or any other attributes to multiple users, as long as
    2 separate clients do not end up with the same name and email.
@@ -146,7 +146,7 @@ where
 This section details the various features available in a single address book in LeadsForce. These features are generally used in the management of client information and client meetings. 
 
 <div markdown="block" class="alert alert-info">
- <p><img src=images/info_icon.png width="20"/><b>Notes about the command format:</b></p>
+ <p><img src=images/info_icon.png width="30"/><b>Notes about the command format:</b></p>
  
 * When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
