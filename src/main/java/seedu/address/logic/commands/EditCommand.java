@@ -31,15 +31,14 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the item identified "
-            + "by the index number used in the displayed item list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ID + "ID] "
-            + "[" + PREFIX_COSTPRICE + "COSTPRICE] "
-            + "[" + PREFIX_SALESPRICE + "SALESPRICE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "by the index number used in the displayed item list.\n"
+            + " Parameters: INDEX"
+            + " (" + PREFIX_NAME + "NAME)"
+            + " (" + PREFIX_ID + "ID) "
+            + " (" + PREFIX_COSTPRICE + "COSTPRICE)"
+            + " (" + PREFIX_SALESPRICE + "SALESPRICE)"
+            + " (" + PREFIX_TAG + "TAG)...\n"
+            + " Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ID + "192028 ";
 
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";

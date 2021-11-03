@@ -22,12 +22,11 @@ public class RemoveCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the given item(s) from the inventory.\n"
-            + "Bogo Bogo still remembers memory about an item including cp and sp \n"
-            + "Parameters: NAME "
-            + "Or " + PREFIX_ID + "ID"
-            + " [" + PREFIX_COUNT + "COUNT" + "]\n"
-            + "Example: " + COMMAND_WORD + " Apple Pie "
-            + PREFIX_COUNT + " 1";
+            + " Parameters: [ NAME | "
+            + PREFIX_ID + "ID ]"
+            + " (" + PREFIX_COUNT + "COUNT" + ")\n"
+            + " Example: " + COMMAND_WORD + " Apple Pie "
+            + PREFIX_COUNT + "1";
 
     public static final String MESSAGE_SUCCESS = "Item removed: %d x %s";
     public static final String MESSAGE_ITEM_NOT_FOUND = "No such item in the inventory";
