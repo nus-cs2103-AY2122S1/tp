@@ -6,42 +6,37 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyInventory <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class Inventory
-Class ReadOnlyInventory
+Interface ReadOnlyTransactionList <<Interface>>
+Interface ReadOnlyBookKeeping <<Interface>>
 Class Model
 Class ModelManager
-Class UserPrefs
-Class ReadOnlyUserPrefs
-Class Order
-Class UniqueItemList
+Class ReadOnlyInventory
+Class ReadOnlyTransactionList
+Class ReadOnlyBookKeeping
 
-Class Item {
-    -name: Name
-    -id: Integer
-    -salePrice: Double
-    -costPrice: Double
-}
+Class Inventory
+Class TransactionList
+Class BookKeeping
+Class Order
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
+Model ..> ReadOnlyBookKeeping
+Model ..> ReadOnlyTransactionList
+Model ..> ReadOnlyInventory
+
+
+BookKeeping .up.|> ReadOnlyBookKeeping
 Inventory .up.|> ReadOnlyInventory
+TransactionList .up.|> ReadOnlyTransactionList
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyInventory
-ModelManager -left-> "1" Inventory
-ModelManager -right-> "1" UserPrefs
-ModelManager -left-> "0..1" Order
-Inventory .right.> Order
-UserPrefs .up.|> ReadOnlyUserPrefs
+ModelManager --> "1" BookKeeping
+ModelManager --> "1" Inventory
+ModelManager --> "1" TransactionList
+ModelManager --> "0..1" Order
 
-Order *--> "1" UniqueItemList
-Inventory *--> "1" UniqueItemList
-UniqueItemList -right-> "~* all" Item
-
-ModelManager -->"~* filtered" Item
 @enduml
