@@ -402,11 +402,11 @@ Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 Examples:
 
 * **`find`** `n/Alex` returns `alex` and `Alexandra`.
-* **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`.<br>
-* **`find`** `nat/Singaporean` <br>
-![result for 'find n/alex n/david'](images/FindAlexAndDavid.png)
-*After execution of Find Command: **`find`** `n/alex n/david`*
-![result for 'find nat/Singapore'](images/FindSingaporean.png)
+* **`find`** `n/jack tg/M12` returns `Jack` who are from tutorial group `M12`.<br>
+![result for 'find n/jack tg/M12'](images/FindJack.png)
+*After execution of Find Command: **`find`** `n/jack tg/M12`*
+* **`find`** `nat/Singaporean` returns all persons who are Singaporeans. <br>
+![result for 'find nat/Singaporean'](images/FindSingaporean.png)
 *After execution of Find Command: **`find`** `nat/Singaporean`*
 
 ### Sorting all persons: `sort`
