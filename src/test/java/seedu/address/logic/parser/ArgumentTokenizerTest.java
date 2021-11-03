@@ -117,7 +117,7 @@ public class ArgumentTokenizerTest {
     public void tokenize_strayArguments() throws ParseException {
         String argsString = "SomePreambleString p/stray";
         String finalArgsString = argsString;
-        assertThrows(ParseException.class, () ->  ArgumentTokenizer.tokenize(finalArgsString, pSlash));
+        assertThrows(ParseException.class, () -> ArgumentTokenizer.tokenize(finalArgsString, pSlash));
         argsString = "SomePreambleString ^Qstray p/ normal";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
         assertPreamblePresent(argMultimap, "SomePreambleString ^Qstray");

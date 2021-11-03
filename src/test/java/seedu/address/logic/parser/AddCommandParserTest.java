@@ -49,9 +49,10 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
-    private static final String INVALID_COMMAND_EXPECTED_MESSAGE =
+    private static final String invalidCommandExpectedMessage =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+    private AddCommandParser parser = new AddCommandParser();
+
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -116,7 +117,7 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                INVALID_COMMAND_EXPECTED_MESSAGE);
+                invalidCommandExpectedMessage);
     }
 
     @Test
@@ -148,7 +149,7 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-               INVALID_COMMAND_EXPECTED_MESSAGE);
+                invalidCommandExpectedMessage);
     }
 
     // Test for issue #150, where parser should reject stray prefixes such as -name, -phone, etc.

@@ -17,18 +17,17 @@ public class PasswordUtil {
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPasswordDetails(String oldPassword, String newPassword) {
-        return PREFIX_OLD_PASSWORD + " " + oldPassword + " " +
-                PREFIX_NEW_PASSWORD + " " + newPassword + " ";
+        return PREFIX_OLD_PASSWORD + " " + oldPassword + " " + PREFIX_NEW_PASSWORD + " " + newPassword + " ";
     }
 
     /**
      * Returns a password command argument string with some repeated flags.
      */
     public static String getRepeatedFlag(String oldPassword, String newPassword) {
-        return PasswordCommand.COMMAND_WORD + " " +
-                PREFIX_OLD_PASSWORD + " " + oldPassword + " " +
-                PREFIX_OLD_PASSWORD + " " + oldPassword + " " +
-                PREFIX_NEW_PASSWORD  + " " + newPassword + " ";
+        return PasswordCommand.COMMAND_WORD + " "
+                + PREFIX_OLD_PASSWORD + " " + oldPassword + " "
+                + PREFIX_OLD_PASSWORD + " " + oldPassword + " "
+                + PREFIX_NEW_PASSWORD + " " + newPassword + " ";
     }
 
     /**
