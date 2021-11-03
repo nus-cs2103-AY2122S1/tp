@@ -253,8 +253,8 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [te/TELE_HANDLE] [p/PHONE_NUMBER]`
 * Existing values will be updated to the input values.
 
 Examples:
-* `edit 1 p/91234567 e/e0425205@u.nus.com`  Edits the phone number and email address of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.
-* `edit 2 n/Aaron Tan`  Edits the name of the 2nd student to be Aaron Tan.
+* `edit 1 p/91234567 e/e0425205@u.nus.edu`  Edits the phone number and email address of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.
+* `edit 2 n/Aaron Tan`  Edits the name of the 2nd student to be `Aaron Tan`.
 
 ### Tracking students' grades, Studio attendance, and participation
 #### Adding grades for an assessment:  `grade`
