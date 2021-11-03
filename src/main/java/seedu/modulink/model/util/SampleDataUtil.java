@@ -80,7 +80,7 @@ public class SampleDataUtil {
                 new Email("aniqNathan@example.com"), new GitHubUsername("NathAniq"),
                 new TelegramHandle("Aniqle4urThoughts"), false,
                 getTagSet("CS2101 need group", "CS4234", "CS2103T need group"), false),
-            new Person(new Name("Timmy Turner"), new StudentId("A1234567E"), new Phone("95483265"),
+            new Person(new Name("Timmy Turner"), new StudentId("A1234569E"), new Phone("95483265"),
                 new Email("timmyturns@example.com"), new GitHubUsername("TimTam"),
                 new TelegramHandle(null), false,
                 getTagSet("ST2334 need group", "GEA1000 need member"), false),

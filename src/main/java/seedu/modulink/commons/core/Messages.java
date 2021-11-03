@@ -16,5 +16,7 @@ public class Messages {
     public static final String MESSAGE_FAVOURITE_REMOVED = "%s is removed from favourites.";
     public static final String MESSAGE_PERSON_IS_NOT_FAVOURITE = "The Student is not a favourite.";
     public static final String MESSAGE_NO_FAVOURITES = "There is currently no one in your favourites list.";
+    public static final String MESSAGE_DUPLICATE_ON_START = "Duplicate Student IDs were detected in the data file."
+            + " A new addressbook was created";
 
 }
