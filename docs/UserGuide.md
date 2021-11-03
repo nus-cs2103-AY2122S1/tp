@@ -690,9 +690,7 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
-Example: <br>
-
-Suppose the date today is 1 Nov 2021 and current time is 1500h, 
+Example: Suppose the date today is 1 Nov 2021 and current time is 1500h, 
 - lessons with the following dates and time are considered upcoming:
   - 1 Nov 2021 with end time at or after 1500h, 
   - 2 Nov 2021 with any valid time range, 
