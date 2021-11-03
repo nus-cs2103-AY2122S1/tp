@@ -490,7 +490,7 @@ The following table describes the different sections shown on a lesson card:
             <td>Start date to end date of the lesson.
               <ul> 
                 <li> If the end date of the recurring lesson is not specified, the default end date will be shown as ∞.</li> 
-                <li>As makeup lessons have only one date (same start and end date), date range will **not** be shown for makeup lessons.</li>
+                <li>As makeup lessons have only one date (same start and end date), date range will <strong>not</strong> be shown for makeup lessons.</li>
               </ul>
             </td>
         </tr>
@@ -504,7 +504,7 @@ The following table describes the different sections shown on a lesson card:
               For makeup lessons: 
                 <ul>
                   <li>Actual date of the lesson.</li>
-                  <li>This date will not change if the date has passed (provided no data modifications have been made to the lesson).</li>
+                  <li>This date will <strong>not</strong> change if the date has passed (provided no data modifications have been made to the lesson).</li>
                 </ul>
             </td>
         </tr>
