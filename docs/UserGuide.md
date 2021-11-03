@@ -183,6 +183,7 @@ Format: `find [PREFIX/KEYWORD]...`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
     - A full valid room can be used as a search. e.g `r/A210`
+* Any provided preamble to the prefixes will be ignored
 * All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
 
 Examples:
@@ -274,6 +275,10 @@ Format: `import CSV_NAME`
 
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
+
+Example csv:
+
+![CSV](images/csvFormat.png)
 
 #### Exporting residents' emails : `export`
 
