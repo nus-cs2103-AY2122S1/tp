@@ -107,18 +107,18 @@ ___
 <div markdown="block" class="alert alert-info">
 
 **Notes about command format:**
-* Words in UPPER_CASE are the specifications given by the user.
-  e.g. in `add n/NAME`, NAME is the specification which can be used in in the form `add n/Doraemon`
+* Words in UPPER_CASE are the specifications given by the user:
+  <br/>e.g. in `add n/NAME`, NAME is the specification which can be used in the form `add n/Doraemon`
 
-* Items in square brackets are optional
-  e.g. `add n/NAME [e/EPISODE]`. Both `add n/Naruto` and `add n/Naruto e/27` are considered valid commands.
+* Items in square brackets are optional:
+  <br/>e.g. `add n/NAME [e/EPISODE]`. Both `add n/Naruto` and `add n/Naruto e/27` are considered valid commands.
 
-* Commands are case-sensitive (TODO refine later)
-  e.g. `list` and `LIST` are registered differently. Entering `list` successfully lists all animes but
+* Commands are case-sensitive:
+  <br/>e.g. `list` and `LIST` are registered differently. Entering `list` successfully lists all animes but
   entering `LIST` registers as an unknown command.
 
-* Leading and trailing whitespace is ignored
-  TODO add example
+* Leading and trailing whitespace is ignored:
+  <br/>e.g. <code>&nbsp; list</code> and <code>list &nbsp;</code> will both be registered as `list`
 
 </div>
 
@@ -402,6 +402,24 @@ Format: `exit`
 ___
 
 ## Commands Table
+
+<div markdown="block" class="alert alert-info">
+
+**Reminders on command format:**
+* Words in UPPER_CASE are the specifications given by the user:
+  <br/>e.g. in `add n/NAME`, NAME is the specification which can be used in the form `add n/Doraemon`
+
+* Items in square brackets are **optional**:
+  <br/>e.g. `add n/NAME [e/EPISODE]`. Both `add n/Naruto` and `add n/Naruto e/27` are considered valid commands.
+
+* Commands are case-sensitive:
+  <br/>e.g. `list` and `LIST` are registered differently. Entering `list` successfully lists all animes but
+  entering `LIST` registers as an unknown command.
+
+* Leading and trailing whitespace is ignored:
+  <br/>e.g. <code>&nbsp; list</code> and <code>list &nbsp;</code> will both be registered as `list`
+
+</div>
 
 | Command | Usage |
 | :--------: | -------- |

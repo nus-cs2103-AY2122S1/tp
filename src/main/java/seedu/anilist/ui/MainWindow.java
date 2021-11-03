@@ -196,9 +196,13 @@ public class MainWindow extends UiPart<Stage> {
             break;
         }
         Scene scene = primaryStage.getScene();
+        Scene statsScene = statsDisplay.getRoot().getScene();
         ObservableList<String> styleSheets = scene.getStylesheets();
+        ObservableList<String> statsStyleSheets = statsScene.getStylesheets();
         styleSheets.remove(0);
+        statsStyleSheets.remove(0);
         styleSheets.add(cssFilePath + themeCss);
+        statsStyleSheets.add(cssFilePath + themeCss);
     }
 
     private void setNextTheme() {

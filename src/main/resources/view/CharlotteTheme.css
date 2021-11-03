@@ -473,7 +473,16 @@
 #pieChart.chart {
     -fx-background-image: url("/images/KannaKobayashi.gif");
     -fx-background-size: 85px;
-    -fx-background-position: 92% 19.5%;
+    -fx-background-position: 92% 16%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: derive(-fx-primary-color, 20%);
+    -fx-padding: 20 20 20 20;
+}
+
+#pieChartEmpty.chart {
+    -fx-background-image: url("/images/Chiaki.png");
+    -fx-background-size: 170px;
+    -fx-background-position: 50% 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-color: derive(-fx-primary-color, 20%);
     -fx-padding: 20 20 20 20;
@@ -484,34 +493,42 @@
     -fx-padding: 20 20 20 20;
 }
 
+#barChartEmpty.chart {
+    -fx-background-image: url("/images/Monokuma.png");
+    -fx-background-size: 170px;
+    -fx-background-position: 50% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: derive(-fx-primary-color, 20%);;
+    -fx-padding: 20 20 20 20;
+}
+
 chart-pie-label-line {
-    -fx-stroke: #ffffff;
-    -fx-fill: #ffffff;
+    -fx-stroke: -fx-font-color;
+    -fx-fill: -fx-font-color;
 }
 
 .chart-pie-label {
-    -fx-stroke: #ffffff;
-    -fx-text-fill: #ffffff;
+    -fx-stroke: -fx-font-color;
+    -fx-text-fill: -fx-font-color;
     -fx-font-size: 1em;
 }
 
 .chart-legend {
     -fx-background: transparent;
-    -fx-stroke: WHITE;
-    -fx-text-fill: WHITE;
-
-    -fx-tick-label-fill: white;
+    -fx-stroke: -fx-font-color;
+    -fx-text-fill: -fx-font-color;
+    -fx-tick-label-fill: -fx-font-color;
     -fx-background-radius: 5px;
 }
 
 .chart-title {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
     -fx-alignment: CENTER;
 }
 
 .axis {
     -fx-font-size: 1.4em;
-    -fx-tick-label-fill: white;
+    -fx-tick-label-fill: -fx-font-color;
     -fx-tick-label-font-size: 10pt;
     -fx-font-family: "Open Sans Regular";
     -fx-tick-visible: false;
@@ -535,8 +552,7 @@ chart-pie-label-line {
 
 .axis-label {
    -fx-label-padding: -10 0 0 0;
-   -fx-text-fill: white;
+   -fx-text-fill: -fx-font-color;
    -fx-font-size: 11pt;
    -fx-font-family: "Open Sans Regular";
 }
-

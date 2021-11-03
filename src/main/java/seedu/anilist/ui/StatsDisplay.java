@@ -29,13 +29,19 @@ import seedu.anilist.model.stats.Stats;
  * The UI component responsible for displaying the statistics breakdown of animes in the anime list.
  */
 public class StatsDisplay extends UiPart<Stage> {
+    private static final String PIE_CHART_ID = "pieChart";
+    private static final String PIE_CHART_EMPTY_ID = "pieChartEmpty";
+    private static final String BAR_CHART_ID = "barChart";
+    private static final String BAR_CHART_EMPTY_ID = "barChartEmpty";
+
     private static final String TOTAL_ANIMES_MSG = "You have %d anime(s) in AniList!";
-    private static final String EPISODES_WATCHED_MSG = "Episode(s) watched: %d";
+    private static final String NO_ANIMES_MSG = "You haven't added any animes...";
     private static final String NUM_ANIMES_WATCHING_MSG = "Watching (%d)";
     private static final String NUM_ANIMES_TOWATCH_MSG = "To Watch (%d)";
     private static final String NUM_ANIMES_FINISHED_MSG = "Finished (%d)";
     private static final String GENRES_MSG = "You have tagged animes with %d unique genre(s) in total.\n"
                                             + "Here are your top anime genres.";
+    private static final String NO_GENRES_TO_SHOW_MSG = "You haven't tagged any animes with genres yet.";
 
     private static final Logger logger = LogsCenter.getLogger(StatsDisplay.class);
     private static final String FXML = "StatsDisplay.fxml";
@@ -58,8 +64,6 @@ public class StatsDisplay extends UiPart<Stage> {
         super(FXML, root);
         pieChart.setLabelsVisible(false);
         pieChart.setLegendSide(Side.RIGHT);
-        pieChart.setId("pieChart");
-        barChart.setId("barChart");
         getRoot().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
@@ -140,8 +144,13 @@ public class StatsDisplay extends UiPart<Stage> {
 
     private void setAnimeStats(Stats stats) {
         pieChart.getData().clear();
-        pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, stats.getTotalAnimesCount())
-                + "\n" + String.format(EPISODES_WATCHED_MSG, stats.getEpisodesCount()));
+        if (stats.getTotalAnimesCount() == 0) {
+            pieChart.setId(PIE_CHART_EMPTY_ID);
+            pieChart.setTitle(NO_ANIMES_MSG);
+            return;
+        }
+        pieChart.setId(PIE_CHART_ID);
+        pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, stats.getTotalAnimesCount()));
 
         addToPieChart(NUM_ANIMES_WATCHING_MSG, stats.getWatchingCount());
         addToPieChart(NUM_ANIMES_TOWATCH_MSG, stats.getToWatchCount());
@@ -151,7 +160,6 @@ public class StatsDisplay extends UiPart<Stage> {
     private void setGenreStats(HashMap<Genre, Integer> genreStats, int uniqueGenresCount) {
         barChart.getData().clear();
         barChart.layout();
-        barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
 
@@ -168,6 +176,15 @@ public class StatsDisplay extends UiPart<Stage> {
         barChart.setData(tempGenreStats.getData());
         barChart.getYAxis().setTickMarkVisible(false);
         barChart.getXAxis().setTickMarkVisible(false);
+        if (genreStats.isEmpty()) {
+            barChart.setId(BAR_CHART_EMPTY_ID);
+            barChart.getXAxis().setOpacity(0);
+            barChart.setTitle(NO_GENRES_TO_SHOW_MSG);
+        } else {
+            barChart.setId(BAR_CHART_ID);
+            barChart.getXAxis().setOpacity(1);
+            barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
+        }
     }
 
     /**
