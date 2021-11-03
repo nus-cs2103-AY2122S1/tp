@@ -7,7 +7,6 @@ import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.common.Note;
-import seedu.notor.model.group.Group;
 import seedu.notor.ui.ConfirmationWindow;
 import seedu.notor.ui.ResultDisplay;
 import seedu.notor.ui.view.ViewPanel;
