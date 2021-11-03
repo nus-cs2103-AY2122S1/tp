@@ -211,15 +211,18 @@ Exports all current filtered contacts into a JSON file.
 
 Format: `export FILENAME`
 
+Example:
+    `export t01students.json`
+
 * Takes the current filtered list of contacts and writes them into `FILENAME`
 
 ### Export emails of filtered contacts to txt: `export email`
 
 Exports the list of contacts of all current filtered contacts into a txt file. This can then be used to create a group of contacts in outlook to mass send emails to.
 
-Format: `export email FILENAME`
+Format: `exportemail FILENAME`
 
-* Takes the current filtered list of contacts and writes them into `FILENAME`
+* Takes the current filtered list of contacts and writes the emails into `FILENAME`
 
 ### Undoing a command: `undo`
 
@@ -286,7 +289,7 @@ Action | Format, Examples
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
-**Export Email** | `exportemail FILENAME` <br> e.g., `export email email.txt`
+**Export Email** | `exportemail FILENAME` <br> e.g., `exportemail email.txt`
 **Undo** | `undo`
 **Redo** | `redo`
 **Statistics** | `stat`
