@@ -562,9 +562,9 @@ Action | Format | Examples
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
 
 
-* **Q:** Am I able to add or edit remarks to have spacings within them?
+* **Q:** Am I able to add or edit `Remarks` to have spacings within them?
 
-  **A:** No. The number of characters each remark can have is capped at 25, and must be single words.
+  **A:** No. The number of characters each `Remark` can have is capped at 25, and must be single words.
 
 
 * **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
@@ -572,11 +572,21 @@ Action | Format | Examples
   **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes (e.g `1400` and `1415` are valid inputs, while `1415` is an invalid input).
 
 
-* **Q:** How long can my name be for adding a new student?
+* **Q:** How long can my name be for adding a new `Student`?
 
-  **A:** We have imposed a `150` character limit for the respective names of `Students`. Students with names longer than 150 characters should use initials to represent their full name instead.
+  **A:** We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead.
 
 
-* **Q:** Can lessons of the same subject and grade start at the same time?
+* **Q:** Can `Lessons` of the same `Subject` and `Grade` start at the same time?
 
-  **A:** No. **TuitiONE** would count a lesson of the same grade and subject that start at the same time on the same day as a conflict.
+  **A:** No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict.
+
+
+* **Q:** How many `Lessons` can a `Student` be enrolled in?
+
+  **A:** A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons`.
+
+
+* **Q:** How many `Students` can a `Lesson` contain?
+
+  **A:** A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time.
