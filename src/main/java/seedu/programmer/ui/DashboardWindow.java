@@ -110,7 +110,7 @@ public class DashboardWindow extends PopupWindow {
     private String formatDataToDisplay(ObservableList<Student> stuList, HashSet<ClassId> classList) {
         int numStudents = stuList.size();
         int numClasses = classList.size();
-        int numLabs = stuList.size() > 0 ? stuList.get(0).getLabList().size() : 0;
+        int numLabs = stuList.size() > 0 ? stuList.get(0).getNumLabs() : 0;
 
         return "No. of students: " + numStudents + "\n"
                 + "No. of classes: " + numClasses + "\n"
