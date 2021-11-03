@@ -73,18 +73,38 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
-|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags.
-| `lp/`  | Loyalty Point       | A non-negative number that should not exceed 2^31 - 1
+|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags
+| `lp/`  | Loyalty Point       | A non-negative number that should not exceed 100000
 | `alg/` | Allergy (Optional)  | Similar to `t/`
 | `sr/`  | Special Request (Optional) | Similar to `t/`
-|  `l/`  | Leaves              | Leaves should only contain numbers
+|  `l/`  | Leaves              | Leaves should only contain non-negative numbers that are less than or equals to 365
 | `jt/`  | Job Title           | Job Title should only contain alphanumeric characters and spaces, and should not be left blank
-| `sal/` | Salary              | Salary should contain numbers and should be at least 3 numbers long
-| `sh/`  | Shift (Optional)    | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-08 0800`. One entity can have multiple shifts <br> When editing shifts, the existing values of shifts will be replaced, i.e editing of these fields are not cumulative <br> If you want to remove all shifts from an entity, you can use `editE INDEX sh/` without specifying any shifts after it <br> **NOTE**: Shifts CAN be in the past, present or future. Flexibility is given to the restaurant on how they want to use it 
+| `sal/` | Salary              | Salary should be numerical and is more than or equals to 100 and less than or equals to 10 million
+| `sh/`  | Shift (Optional)    | One entity can have multiple shifts <br> **NOTE**: Shifts CAN be in the past, present or future. Flexibility is given to the restaurant on how they want to use it <br> Refer [here](#date-time-formatting) for more information on how to format shifts
 | `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
-| `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-adds) for more details
-| `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
+| `dd/`  | Delivery Details    | Refer [here](#date-time-formatting) for more details
+| `at/`  | Reserving Date Time | Refer [here](#date-time-formatting) for more details
 |  `r/`  | Remark (Optional)   | Contains alphanumeric characters<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it
+
+<div markdown="block" class="alert alert-warning">
+
+:information_source: **Notes:**<br>
+
+### Date Time Formatting
+
+* All fields that require both `Date` and `Time` in RHRH are accepted if they follow the format below, where the order of date and time are interchangeable.
+However, time strictly follows the `24 hours` format. 
+
+The following table shows the acceptable formats and relevant examples for `DeliveryDetails`:
+
+| Acceptable Formats | Examples |
+| ----------- | ----------- |
+| yyyy-MM-dd HH:mm | 2021-09-19 13:00 |
+| dd-MM-yyyy HH:mm | 19-09-2021 13:00 |
+| HH:mm yyyy-MM-dd | 14:00 2021-11-10 |
+| HH:mm dd-MM-yyyy | 14:00 10-11-2021 |
+
+</div>
 
 This is the list of some repeatedly used preambles in RHRH, as well as there corresponding constraints:
 
@@ -226,31 +246,14 @@ Examples:
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
   supplier without any optional fields.
 
-<div markdown="block" class="alert alert-warning">
-   
-:information_source: **Notes:**<br>
-
-* Order of the `date` and `time` in `DeliveryDetails` does not matter but `time` has to be in `24 hour` 
-  format.
-
-The following table shows the acceptable formats and relevant examples for `DeliveryDetails`:
-
-| Acceptable Formats | Examples |
-| ----------- | ----------- |
-| yyyy-MM-dd HH:mm | 2021-09-19 13:00 |
-| dd-MM-yyyy HH:mm | 19-09-2021 13:00 |
-| HH:mm yyyy-MM-dd | 14:00 2021-11-10 |
-| HH:mm dd-MM-yyyy | 14:00 10-11-2021 |
-
-</div>
-
 ### Adding a reservation: `addR`
 
 Adds a new reservation to RHRH
 
 Format: `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
 
-* Date-time format is `yyyy-MM-dd HH00`, e.g. `2021-11-11 2000`
+* Adds a reservation with all specified fields.
+* `REMARK` and `TAG` are optional fields that can be omitted.
 
 Examples:
 * `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
@@ -306,7 +309,7 @@ Format: `editE INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SA
 Examples:
 * `editE 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
 
-* `editE 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
+* `editE 2 n/Betsy Crower sh/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing shifts.
 
 <div markdown="block" class="alert alert-warning">
    

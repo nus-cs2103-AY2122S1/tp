@@ -12,8 +12,10 @@ import java.time.format.DateTimeFormatter;
  * Represents an Employee's shift in the address book.
  */
 public class Shift {
-    public static final String MESSAGE_CONSTRAINTS = "Working shifts should be in the format yyyy-mm-dd HHmm"
-            + ".";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Shifts is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy "
+            + "format and a time in HH:mm or HHmm (24hr clock) format (eg: 1800 or 18:00 for 6 pm). "
+            + "You can choose to entire enter a date first or time first in any of the formats mentioned";
 
     private static DateTimeFormatter chosenFormat = null;
     public final LocalDateTime workingShift;
