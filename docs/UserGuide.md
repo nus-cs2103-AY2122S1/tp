@@ -365,6 +365,8 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
 * Students can only be enrolled to a **maximum of 10 lessons**.
 
+* Lessons can only have enrolled a **maximum of 15 students**.
+
 Example(s):
 
 * `enroll 1 l/2` will enroll the student indexed at `2` in the displayed student list to the lesson indexed at `2` in the displayed lesson list.
