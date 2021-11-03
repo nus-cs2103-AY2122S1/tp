@@ -12,7 +12,7 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long "
-                + "(Character limit: 20";
+                + "(Character limit: 30)";
 
     public static final String VALIDATION_REGEX = "\\d{3,}";
 

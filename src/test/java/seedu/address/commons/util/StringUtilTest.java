@@ -323,6 +323,58 @@ public class StringUtilTest {
         assertTrue(StringUtil.isValidDate(""));
     }
 
+    //---------------- Tests for isWithinStandardLimit --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid Strings with <=30 char, invalid Strings with >30 char
+     */
+
+    @Test
+    public void isWithinStandardLimit_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isWithinStandardLimit(null));
+    }
+
+    @Test
+    public void isWithinStandardLimit_withinLimit_returnsTrue() {
+        assertTrue(StringUtil.isWithinStandardLimit(
+            "0123456789" + "0123456789" + "0123456789"
+        ));
+    }
+
+    @Test
+    public void isWithinStandardLimit_exceedLimit_returnsFalse() {
+        assertFalse(StringUtil.isWithinStandardLimit(
+            "0123456789" + "0123456789" + "0123456789" + "1"
+        ));
+    }
+
+    //---------------- Tests for isWithinLongLimit --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid Strings with <=100 char, invalid Strings with >100 char
+     */
+
+    @Test
+    public void isWithinLongLimit_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isWithinLongLimit(null));
+    }
+
+    @Test
+    public void isWithinLongLimit_withinLimit_returnsTrue() {
+        assertTrue(StringUtil.isWithinLongLimit(
+            "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789"
+                + "0123456789" + "0123456789" + "0123456789" + "0123456789"
+        ));
+    }
+
+    @Test
+    public void isWithinLongLimit_exceedLimit_returnsFalse() {
+        assertFalse(StringUtil.isWithinLongLimit(
+            "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789"
+                + "0123456789" + "0123456789" + "0123456789" + "0123456789" + "1"
+        ));
+    }
+
     //---------------- Tests for parseToLocalDate --------------------------------------
 
     /*

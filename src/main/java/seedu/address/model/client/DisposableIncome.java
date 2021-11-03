@@ -6,7 +6,7 @@ import static seedu.address.commons.util.StringUtil.isWithinStandardLimit;
 
 public class DisposableIncome extends NumberComparable<DisposableIncome> implements OptionalStringBasedField {
     public static final String MESSAGE_CONSTRAINTS =
-            "Disposable Income numbers should be a positive integer only. (Character limit: 20)";
+            "Disposable Income numbers should be a positive integer only. (Character limit: 30)";
     public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
