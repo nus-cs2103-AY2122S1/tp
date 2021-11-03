@@ -60,7 +60,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -94,6 +94,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
+
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
@@ -188,6 +189,7 @@ The following sequence diagram show how the view task list operation works:
 The following activity diagram summarises what happens when a user executes a `cat` command:
 
 ![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
+</div>
 
 #### Design consideration:
 
@@ -195,22 +197,21 @@ The following activity diagram summarises what happens when a user executes a `c
 
 - **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
 
-  - Pros: User is able to concurrently view more information.
-  - Cons:
-    - More work to create and optimize the split panel.
-    - Content wrapping can was tricky since there is a slider in the middle to resize either panels.
+  * Pros:
+    * User is able to concurrently view more information.
 
-- **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
+  * Cons:
+    * More work to create and optimize the split panel.
+    * Content wrapping can was tricky since there is a slider in the middle to resize either panels.
 
-  - Pros: More convenient to implement.
+* **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
 
-  - Cons:
+  * Pros: More convenient to implement.
 
-    - `list` has to be executed again if user wants to redirect back to the person list (extra overhead
-
+  * Cons:
+    * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
       which reduces efficiency).
-
-    - Lesser view of information.
+    * Lesser view of information.
 
 ### Command Cache
 
@@ -226,8 +227,9 @@ This function is facilitated by 3 aspects of the program:
 The following sequence diagram demonstrates how the caching mechanism in the Model and Logic unit:
 ![CachingModelAndLogic](images/CachingModelAndLogic.png)
 
-:information_source: **Note:** The execution of the command happens after the caching
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The execution of the command happens after the caching
 (and is omitted in the above diagram). This means invalid commands are also stored.
+</div>
 
 The following activity diagram illustrates how the storage in the cache is handled:
 ![CacheAddCommandActivityDiagram](images/CacheAddCommandActivityDiagram.png)
@@ -250,40 +252,31 @@ be only one cache existing.
 #### Design Consideration
 ##### Aspect: Accessing cache
 * **Alternative 1** : Have cache stored in model and piggyback on existing command code.
-
     * Pros:
-
         * A relatively simple design with less possibility of bug
         * Less effort needed
         * Still maintain cohesion and separation of responsibility
 
     * Cons:
-
         * Could not differentiate between internal and external input command. This leads to either the possibility
           for user to input the internal commands accidentally, causing bug, or some commands being blocked from running
 
 * **Alternative 2 (current choice):** Have cache stored in model and create new internal command.
-
     * Pros:
-
         * No need for command blocking and no possibility for user to accidentally type in the command
         * Still maintain cohesion and separation of responsibility
 
     * Cons:
-
         * Increased avenue for bugs
         * More coding to be done
         * Relatively worse in terms of "repeating yourself"
 
 * **Alternative 3:** Have cache stored in UI.
-
     * Pros:
-
         * No need for extraction using commands
         * Simple implementation
 
     * Cons:
-
         * Breaks the MVC pattern as UI now saves things
         * Decreased cohesion
 
@@ -304,7 +297,7 @@ The following sequence diagram show how the find operation works:
 ![ViewTaskListSequenceDiagram](images/FindSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the user does not provide any keywords or uses an invalid flag, ParseException will be thrown and an error message providing the correct format will be shown.
-
+</div>
 The following activity diagram summarises what happens when a user executes a `find -n Alex` command:
 
 ![ViewTaskListActivityDiagram](images/FindActivityDiagram.png)
@@ -674,13 +667,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `rm 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `rm 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

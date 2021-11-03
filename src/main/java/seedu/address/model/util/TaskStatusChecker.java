@@ -38,4 +38,8 @@ public class TaskStatusChecker {
             });
         }
     }
+
+    public void stop() {
+        timer.cancel();
+    }
 }
