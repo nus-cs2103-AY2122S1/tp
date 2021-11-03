@@ -41,7 +41,7 @@ public class ImportCommand extends Command {
     private final Path importedFilePath; // fileName.json
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an ImportCommand to import the specified {@code importedFileName}
      */
     public ImportCommand(String importedFileName) {
         requireNonNull(importedFileName);
