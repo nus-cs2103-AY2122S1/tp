@@ -553,12 +553,12 @@ The following activity diagram summarizes what happens when a user executes a ne
   - Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
-    
+
 ---
 
 ## **Maintaining the application**
 
-This section contains links to additional guides that will help you maintain the code base of this application. 
+This section contains links to additional guides that will help you maintain the code base of this application.
 
 - [Documentation guide](Documentation.md)
 - [Testing guide](Testing.md)
@@ -744,7 +744,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
-      
+ 
 
 ### Deleting a student
 
@@ -760,6 +760,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-      
-
-

@@ -70,7 +70,7 @@ public class SampleDataUtil {
         return new Group[]{
             new Group(new GroupName("CS2103T"), new Description("SWE Module")),
             new Group(new GroupName("CS2101"), new Description("Communications Module")),
-            new Group(new GroupName("CS2103T Consult Group 1"), new Description("Consultion group 1 for CS2103T"))
+            new Group(new GroupName("CS2103T Consult Group 1"), new Description("Consultation group 1 for CS2103T"))
         };
     }
 
