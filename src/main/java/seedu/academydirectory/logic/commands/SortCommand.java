@@ -74,8 +74,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
-        ObservableList<Student> students = model.getFilteredStudentList();
 
+        List<Student> students = model.getAcademyDirectory().getStudentList();
         Comparator<Student> comparator = getComparator();
 
         List<Student> sortedList = new ArrayList<>();
