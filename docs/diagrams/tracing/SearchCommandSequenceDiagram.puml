@@ -1,7 +1,7 @@
 @startuml
 !include ../style.puml
 
-box "Logic" #LightBlue
+box "Logic" LOGIC_COLOR_T1
 Participant ":LogicManager" as logic LOGIC_COLOR
 Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant ":SearchCommandParser" as fcp LOGIC_COLOR
@@ -9,10 +9,11 @@ Participant "command:SearchCommand" as fc LOGIC_COLOR
 Participant "result:CommandResult" as cr LOGIC_COLOR
 Participant "predicate:ClientContainsKeywordPredicate" as pckp LOGIC_COLOR
 end box
-box "Model" #Pink
+box "Model" MODEL_COLOR_T1
 Participant "model:Model" as model MODEL_COLOR
 end box
 
+skinparam sequenceBoxBorderColor #black
 [-> logic : execute
 activate logic
 logic -> abp ++: parseCommand(commandText)

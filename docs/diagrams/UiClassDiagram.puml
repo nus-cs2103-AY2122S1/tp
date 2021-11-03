@@ -47,11 +47,8 @@ SideBar -down-> "1" MeetingsListPanel
 MeetingsListPanel -down-> "*" NextMeetingCard
 
 ClientCard ..> Model
-ClientViewPanel ..> Model
-NextMeetingCard ..> Model
-ClientCard ..> Model
-ClientViewPanel ..> Model
-NextMeetingCard ..> Model
+NextMeetingCard .down.> Model
+ClientViewPanel .down.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

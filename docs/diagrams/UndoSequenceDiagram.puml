@@ -7,10 +7,12 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
+skinparam sequenceBoxBorderColor #black
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
 end box
+
 [-> LogicManager : execute(undo)
 activate LogicManager
 
