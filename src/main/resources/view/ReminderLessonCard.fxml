@@ -36,7 +36,7 @@
                 <Label fx:id="time" styleClass="cell_small_label" text="\$date" wrapText="true" />
             </HBox>
             <HBox>
-                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" minWidth="47" maxWidth="48" />
+                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" minWidth="50" maxWidth="51" />
                 <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true" />
             </HBox>
             <HBox>
