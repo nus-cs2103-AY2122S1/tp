@@ -154,15 +154,6 @@ public class AppointmentTest {
     }
 
     @Test
-    public void getUrgency_appointmentOccursInTwoDaysCase2_returnsHighUrgency() {
-        TimePeriod timePeriod = new TimePeriod(
-                LocalDateTime.now().plusDays(2),
-                LocalDateTime.now().plusDays(2).plusHours(1));
-        Appointment appointment = new Appointment(testClientList1, TEST_ADDRESS2, timePeriod, TEST_DESCRIPTION1);
-        assertEquals(appointment.getUrgency(), Urgency.HIGH);
-    }
-
-    @Test
     public void getUrgency_appointmentOccursWithinTwoToEightDaysCase1_returnsMediumUrgency() {
         TimePeriod timePeriod = new TimePeriod(
                 LocalDateTime.now().plusDays(2).plusMinutes(1),
@@ -175,15 +166,6 @@ public class AppointmentTest {
     public void getUrgency_appointmentOccursWithinTwoToEightDaysCase2_returnsMediumUrgency() {
         TimePeriod timePeriod = new TimePeriod(
                 LocalDateTime.now().plusDays(8).minusMinutes(1),
-                LocalDateTime.now().plusDays(8).plusHours(1));
-        Appointment appointment = new Appointment(testClientList1, TEST_ADDRESS1, timePeriod, TEST_DESCRIPTION1);
-        assertEquals(appointment.getUrgency(), Urgency.MEDIUM);
-    }
-
-    @Test
-    public void getUrgency_appointmentOccursWithinTwoToEightDaysCase3_returnsMediumUrgency() {
-        TimePeriod timePeriod = new TimePeriod(
-                LocalDateTime.now().plusDays(8),
                 LocalDateTime.now().plusDays(8).plusHours(1));
         Appointment appointment = new Appointment(testClientList1, TEST_ADDRESS1, timePeriod, TEST_DESCRIPTION1);
         assertEquals(appointment.getUrgency(), Urgency.MEDIUM);
