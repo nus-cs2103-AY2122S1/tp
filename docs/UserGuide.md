@@ -372,7 +372,7 @@ Optional fields for a **recurring** lesson is:
 * Cancelled dates
 
 TAB has features to help to prevent scheduling mistakes.
-For example, we help you avoid mistakes scheduling two lessons at the same slots by ensuring that lessons never overlap.
+For example, we help you avoid mistakes such as scheduling two lessons at the same slots by ensuring that lessons never overlap.
 Additionally, we help to avoid accidentally scheduling lessons outside working hours (before 0800 and after 2200 hours).
 
 In the future, we intend to add some nice-to-have features that will allow you to customise your working hours,
