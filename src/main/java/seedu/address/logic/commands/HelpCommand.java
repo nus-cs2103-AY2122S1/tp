@@ -10,8 +10,9 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String DEFAULT_MESSAGE = "\nRefer to the user guide: "
             + "https://ay2122s1-cs2103-f10-2.github.io/tp/UserGuide.html";
+    public static final String INVALID_WORD = "Command given does not exist.";
 
-    private final String messageUsage;
+    private String messageUsage;
 
     /**
      * Creates a HelpCommand with specific help messages
@@ -19,6 +20,8 @@ public class HelpCommand extends Command {
     public HelpCommand(String message) {
         if (message.isEmpty()) {
             this.messageUsage = DEFAULT_MESSAGE;
+        } else if (message.equals("invalid")) {
+            this.messageUsage = INVALID_WORD + DEFAULT_MESSAGE;
         } else {
             this.messageUsage = message;
         }

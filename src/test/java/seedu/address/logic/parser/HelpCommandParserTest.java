@@ -48,6 +48,22 @@ public class HelpCommandParserTest {
     }
 
     @Test
+    public void parse_validNonExistentCommand_returnsHelpCommand() {
+        // asking help for delete command
+        final String message = "invalid";
+        HelpCommand expectedHelpCommand = new HelpCommand(message);
+        assertParseSuccess(parser, "fneoubv", expectedHelpCommand);
+    }
+
+    @Test
+    public void parse_generalHelpMessage_returnsHelpCommand() {
+        // asking help for delete command
+        final String message = "";
+        HelpCommand expectedHelpCommand = new HelpCommand(message);
+        assertParseSuccess(parser, "", expectedHelpCommand);
+    }
+
+    @Test
     public void parse_validClearArgs_returnsHelpCommand() {
         // asking help for clear command
         final String message = ClearCommand.MESSAGE_USAGE;
