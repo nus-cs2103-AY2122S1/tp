@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.FileNotFoundException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -78,6 +79,10 @@ public class LoginScreen extends UiPart<Stage> {
                 | InvalidAlgorithmParameterException e) {
             // app problems
             responseDisplay.setText("Something went wrong, try again!");
+            userInputPassword.clear();
+        } catch (FileNotFoundException e) {
+            // data deleted after opening the app
+            responseDisplay.setText("Data not found. Please exit and start again!");
             userInputPassword.clear();
         }
     }
