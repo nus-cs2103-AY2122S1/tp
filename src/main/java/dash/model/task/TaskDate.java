@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -15,7 +16,8 @@ import java.util.Optional;
  */
 public class TaskDate {
     public static final String MESSAGE_CONSTRAINTS = "Date/Time should not be blank. "
-            + "They should also be valid and follow a format. (eg. Date: dd MMM yyyy -> 02 Dec 2021,"
+            + "They should also be valid (consider leap years) and follow a format."
+            + " (eg. Date: dd MMM yyyy -> 02 Dec 2021,"
             + " Time: hh:mm a -> 12:00 PM) \n"
             + "If both Date and Time are included, Date should come first before Time and they should be separated "
             + "by a comma. A full list of available formats can be seen under the Help tab.";
@@ -29,11 +31,11 @@ public class TaskDate {
             + "HHmm\n"
             + "hh:mm a\n";
     private static final String[] DATE_FORMATS = {
-        "dd/MM/yyyy",
-        "dd-MM-yyyy",
-        "yyyy/MM/dd",
-        "yyyy-MM-dd",
-        "dd MMM yyyy"
+        "dd/MM/uuuu",
+        "dd-MM-uuuu",
+        "uuuu/MM/dd",
+        "uuuu-MM-dd",
+        "dd MMM uuuu"
     };
     private static final String[] TIME_FORMATS = {
         "HHmm",
@@ -57,7 +59,8 @@ public class TaskDate {
 
         if (detectedDateFormat != null) {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
-            this.date = Optional.of(LocalDate.parse(taskDateString, dateFormat));
+            this.date = Optional.of(LocalDate.parse(taskDateString,
+                    dateFormat.withResolverStyle(ResolverStyle.STRICT)));
         } else {
             this.date = Optional.of(LocalDate.now());
         }
@@ -79,7 +82,8 @@ public class TaskDate {
 
         if (detectedDateFormat != null) {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
-            this.date = Optional.of(LocalDate.parse(taskDateString, dateFormat));
+            this.date = Optional.of(LocalDate.parse(taskDateString,
+                    dateFormat.withResolverStyle(ResolverStyle.STRICT)));
         }
 
         if (detectedTimeFormat != null) {
@@ -170,9 +174,11 @@ public class TaskDate {
 
         for (String dateFormat : DATE_FORMATS) {
             try {
-                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
+                LocalDate.parse(dateString,
+                        DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT));
                 isDate = true;
             } catch (Exception e) {
+                System.out.println(e);
                 isDate = isDate || false;
             }
         }
@@ -184,7 +190,8 @@ public class TaskDate {
 
         for (String dateFormat : DATE_FORMATS) {
             try {
-                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
+                LocalDate.parse(dateString,
+                        DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT));
                 detectedDateFormat = dateFormat;
                 isDate = true;
                 taskDateString = dateString;
