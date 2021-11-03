@@ -181,9 +181,7 @@ Examples:
 ### Undoing the last modification : `undo`
 
 Recovers the state before last modification is made.
-The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`
-
-[command that modifies the state should also be added later]
+The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`, `mark`
 
 Format: `undo`
 
