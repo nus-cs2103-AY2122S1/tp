@@ -439,7 +439,7 @@ public class ParserUtil {
     public static Money parseMoney(String amount) throws ParseException {
         String strippedAmount = amount.strip();
         if (!Money.isValidMonetaryField(strippedAmount)) {
-            throw new ParseException(Money.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Money.MESSAGE_FORMAT_CONSTRAINTS);
         }
         return new Money(strippedAmount);
     }

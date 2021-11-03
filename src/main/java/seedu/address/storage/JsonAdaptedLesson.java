@@ -116,13 +116,13 @@ class JsonAdaptedLesson {
 
         String strippedLessonRates = lessonRates.strip();
         if (!LessonRates.isValidMonetaryField(strippedLessonRates)) {
-            throw new IllegalValueException(LessonRates.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(LessonRates.MESSAGE_FORMAT_CONSTRAINTS);
         }
         final LessonRates modelLessonRates = new LessonRates(strippedLessonRates);
 
         String strippedOutstandingFees = outstandingFees.strip();
         if (!OutstandingFees.isValidMonetaryField(strippedOutstandingFees)) {
-            throw new IllegalValueException(OutstandingFees.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(OutstandingFees.MESSAGE_FORMAT_CONSTRAINTS);
         }
         final OutstandingFees modelOutstandingFees = new OutstandingFees(outstandingFees);
 

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -51,7 +52,8 @@ public class PaidCommand extends UndoableCommand {
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_PAID_LESSON_SUCCESS = "Paid for %1$s's lesson:\n%2$s";
+    public static final String MESSAGE_PAID_LESSON_SUCCESS = "Paid for %1$s's lesson:\n%2$s \nto %3$s";
+    public static final String MESSAGE_PAID_AMT_LESS_THAN_ZERO_ERROR = "Please pay an amount greater than 0.";
 
     private final Index index;
     private final Index indexToEdit;
@@ -87,6 +89,10 @@ public class PaidCommand extends UndoableCommand {
         Set<Lesson> lessons = new TreeSet<>(personBeforeLessonPaid.getLessons());
         if (indexToEdit.getZeroBased() >= lessons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+
+        if (payment.getMonetaryValue().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new CommandException(MESSAGE_PAID_AMT_LESS_THAN_ZERO_ERROR);
         }
 
         List<Lesson> lessonList = new ArrayList<>(lessons);
