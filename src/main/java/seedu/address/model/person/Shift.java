@@ -272,7 +272,15 @@ public class Shift {
 
     }
 
-    private void checkTimeOrder(LocalTime startTime, LocalTime endTime, int order) throws InvalidShiftTimeException {
+    /**
+     * Checks that the input start and end time fit the order of the shift.
+     *
+     * @param startTime The start time of the shift.
+     * @param endTime The end time of the shift.
+     * @param order The slot the shift is at in int, only accepts 1 or 0 now.
+     * @throws InvalidShiftTimeException
+     */
+    public static void checkTimeOrder(LocalTime startTime, LocalTime endTime, int order) throws InvalidShiftTimeException {
         if (startTime.isAfter(endTime)) {
             throw new InvalidShiftTimeException();
         }
