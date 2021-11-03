@@ -111,4 +111,12 @@ public final class AdditionalInfo<T> {
         AdditionalInfo<?> other = (AdditionalInfo<?>) obj;
         return Objects.equals(value, other.value);
     }
+
+    @Override
+    public String toString() {
+        if (value == null) {
+            return "No value";
+        }
+        return value.toString();
+    }
 }

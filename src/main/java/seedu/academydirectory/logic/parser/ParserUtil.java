@@ -241,10 +241,9 @@ public class ParserUtil {
         }
     }
 
-    public static String parseSingularCommand(String arguments) throws ParseException {
+    public static void assertSingularCommand(String arguments) throws ParseException {
         if (!arguments.isEmpty()) {
             throw new ParseException(MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW);
         }
-        return arguments;
     }
 }

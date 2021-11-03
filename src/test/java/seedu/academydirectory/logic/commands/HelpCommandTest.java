@@ -63,6 +63,7 @@ public class HelpCommandTest {
     @Test
     public void execute_non_valid_help() {
         // help command throws exception if inputs are null
-        assertThrows(CommandException.class, () -> new HelpCommand(null, null).execute(model));
+        assertThrows(NullPointerException.class, () -> new HelpCommand(null, null)
+                .execute(model));
     }
 }
