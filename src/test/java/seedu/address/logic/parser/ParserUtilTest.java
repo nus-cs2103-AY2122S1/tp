@@ -12,6 +12,8 @@ import seedu.address.model.friend.FriendName;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_ID = "R@chel";
+    private static final String INVALID_USERNAME = "    ";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String WHITESPACE = " \t\r\n";
 
@@ -46,6 +48,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseUserName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUserName(INVALID_USERNAME));
+    }
+
+    @Test
     public void parseFriendName_validValueWithoutWhitespace_returnsName() throws Exception {
         FriendName expectedFriendName = new FriendName(VALID_NAME);
         assertEquals(expectedFriendName, ParserUtil.parseFriendName(VALID_NAME));
@@ -58,5 +65,10 @@ public class ParserUtilTest {
         assertEquals(expectedFriendName, ParserUtil.parseFriendName(nameWithWhitespace));
     }
 
-    // TODO: Add tests for new parse methods
+    @Test
+    public void parseFriendId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFriendName(INVALID_ID));
+    }
+
+
 }

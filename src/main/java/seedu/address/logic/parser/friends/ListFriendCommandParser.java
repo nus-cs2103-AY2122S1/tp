@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.friends;
 
 import static seedu.address.logic.parser.CliSyntax.FLAG_LIST;
-import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
 
 import seedu.address.logic.commands.friends.ListFriendCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -23,7 +22,7 @@ public class ListFriendCommandParser implements Parser<ListFriendCommand> {
      */
     public ListFriendCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args + FLAG_POSTFIX, FLAG_LIST);
+                ArgumentTokenizer.tokenize(args, FLAG_LIST);
 
         if (argMultimap.getValue(FLAG_LIST).isPresent()) {
             return new ListFriendCommand(
