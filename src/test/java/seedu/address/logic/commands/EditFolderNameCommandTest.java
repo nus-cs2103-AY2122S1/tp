@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -52,6 +53,15 @@ public class EditFolderNameCommandTest {
 
         assertCommandSuccess(editFolderNameCommand, model,
                 expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_folderWithLongName_failure() {
+        String longFolderName = "Some Super Strange Long Folder Name";
+        Folder longFolder = new Folder(new FolderName(longFolderName));
+        model.addFolder(testFolder1);
+        EditFolderNameCommand editFolderCommand = new EditFolderNameCommand(testFolder1, longFolder);
+        assertCommandFailure(editFolderCommand, model, EditFolderNameCommand.MESSAGE_FOLDER_NAME_TOO_LONG);
     }
 
 }

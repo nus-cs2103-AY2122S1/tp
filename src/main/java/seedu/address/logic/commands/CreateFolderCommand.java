@@ -21,6 +21,8 @@ public class CreateFolderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New folder added: %1$s";
     public static final String MESSAGE_DUPLICATE_FOLDER = "This folder already exists in UNIon";
+    public static final String MESSAGE_FOLDER_NAME_TOO_LONG = "This folder name is too long!"
+            + "Please keep it to a maximum of 30 chars";
 
     private final Folder folderToAdd;
 
@@ -38,6 +40,10 @@ public class CreateFolderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         if (model.hasFolder(folderToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_FOLDER);
+        }
+
+        if (folderToAdd.getFolderName().toString().length() > 30) {
+            throw new CommandException(MESSAGE_FOLDER_NAME_TOO_LONG);
         }
 
         model.addFolder(folderToAdd);
