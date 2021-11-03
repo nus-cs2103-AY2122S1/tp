@@ -39,21 +39,30 @@ public class ListAppointmentCommandTest {
         model = new ModelManager(new PlannerMd(), new UserPrefs());
         expectedModel = new ModelManager(new PlannerMd(), new UserPrefs());
 
-        model.addAppointment(todayAppointment);
         model.addAppointment(nextDayAppointment);
         model.addAppointment(yesterdayAppointment);
 
-        expectedModel.addAppointment(todayAppointment);
         expectedModel.addAppointment(nextDayAppointment);
         expectedModel.addAppointment(yesterdayAppointment);
     }
 
     @Test
-    public void execute_showTodayAppointment_successful() {
+    public void execute_hasTodayAppointment_successful() {
+        model.addAppointment(todayAppointment);
+        expectedModel.addAppointment(todayAppointment);
+
         expectedModel.updateFilteredAppointmentList(AppointmentFilters.todayAppointmentFilter().collectAllFilters());
         assertCommandSuccess(new ListAppointmentCommand(), model,
                 ListAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
         assertEquals(Collections.singletonList(todayAppointment), model.getFilteredAppointmentList());
+    }
+
+    @Test
+    public void execute_doesNotHasTodayAppointment_successful() {
+        expectedModel.updateFilteredAppointmentList(AppointmentFilters.todayAppointmentFilter().collectAllFilters());
+        assertCommandSuccess(new ListAppointmentCommand(), model,
+                ListAppointmentCommand.MESSAGE_NO_APPOINTMENTS_TODAY, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredAppointmentList());
     }
 
 }

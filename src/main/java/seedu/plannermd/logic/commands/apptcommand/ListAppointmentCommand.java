@@ -12,10 +12,14 @@ public class ListAppointmentCommand extends AppointmentCommand {
 
     public static final String COMMAND_WORD = "appt -l";
     public static final String MESSAGE_SUCCESS = "Listed all appointments for today.";
+    public static final String MESSAGE_NO_APPOINTMENTS_TODAY = "There are no appointments for the current day.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         model.updateFilteredAppointmentList(AppointmentFilters.todayAppointmentFilter().collectAllFilters());
+        if (model.getFilteredAppointmentList().size() == 0) {
+            return new CommandResult(MESSAGE_NO_APPOINTMENTS_TODAY);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
