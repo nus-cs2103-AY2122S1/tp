@@ -165,7 +165,15 @@ Command Format: `help`
 
 #### Listing all students: `list`
 
-Shows you a list of all students and lessons in the **TuitiONE**. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from `P1` to `S4`.
+Shows you a list of all students and lessons in the **TuitiONE**. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from `P1` to `S5`.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+Sorting of the lists by other fields (eg. day, time, subject) is not available in the current version of **TuitiONE**, and will be an upcoming feature.
+
+</div>
 
 Command Format: `list`
 
@@ -299,7 +307,7 @@ Example(s):
 
 #### Editing a student : `edit`
 
-Edits a student which currently exists in **TuitiONE**
+Edits a student's particulars.
 
 Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD]... [dr/REMARK_TO_DELETE]...`
 
@@ -314,6 +322,8 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
 * You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.
+
+* Remarks are unique, and you cannot tag more than one of the same remark to the same student. For example, `edit 2 r/overdueFees r/overdueFees` will only tag a single `overdueFees` remark to the student at index `2`.
 
 * See [`add` command](#adding-a-student-add) for other constraints on defining a student.
 
@@ -421,7 +431,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * Lessons are fixed at **two** hour periods. In upcoming features, we will give you the power to define your lesson timing ranges.
 
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive.
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive. The cost will be displayed in the lesson list rounded off to two decimal places.
 
 Example(s):
 
