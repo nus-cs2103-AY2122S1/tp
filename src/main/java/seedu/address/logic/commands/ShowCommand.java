@@ -77,13 +77,13 @@ public class ShowCommand extends Command {
             filteredList.setPredicate(predicate);
             if (filteredList.isEmpty()) {
                 throw new CommandException(String.format(MESSAGE_NO_TARGET, searchBy));
-            } else {
-                if (model.getPersonListControl() != null) {
-                    model.setTabIndex(0);
-                }
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                this.executeWithOthers(model);
             }
+
+            if (model.getPersonListControl() != null) {
+                model.setTabIndex(0);
+            }
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            this.executeWithOthers(model);
         }
 
         if (filteredList.size() == 1) {
@@ -91,11 +91,11 @@ public class ShowCommand extends Command {
             model.setSelectedIndex(index);
             return new CommandResult(String.format(MESSAGE_SUCCESS,
                     model.getFilteredPersonList().get(index).getName()));
-        } else {
-            model.updateFilteredPersonList(predicate);
-            return new CommandResult(String.format(MESSAGE_MULTIPLE_NAME,
-                    model.getFilteredPersonList().size(), searchBy));
         }
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(String.format(MESSAGE_MULTIPLE_NAME,
+                model.getFilteredPersonList().size(), searchBy));
+
     }
 
     /**
