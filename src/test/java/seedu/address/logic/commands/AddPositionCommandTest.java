@@ -118,6 +118,11 @@ public class AddPositionCommandTest {
         }
 
         @Override
+        public boolean hasApplicantsApplyingTo(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Applicant getApplicantByNameIgnoreCase(Name applicantName) {
             throw new AssertionError("This method should not be called.");
         }
