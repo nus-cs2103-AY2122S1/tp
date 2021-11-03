@@ -9,9 +9,9 @@ SeniorLove is a contact management desktop app which aims to facilitate communit
 
 Given below are my contributions to the project.
 
-- **New Feature**: Added the ability to delate visits for elderly.
+- **New Feature**: Added the ability to delete visits for elderly.
 
-  - What it does: allows the user to delete visits for elderly with a shceduled next visit using elderly's index.
+  - What it does: allows the user to delete visits for elderly with a scheduled next visit using elderly's index.
   - Justification: This feature improves the product significantly because a user can cancel a scheduled visit of an elderly. Visits are at the core of SeniorLove, hence it is important to ensure the user has the ability to perform deletion on a visit.
   - Highlights: This enhancement affects existing commands such as `DeleteCommand` in SeniorLove. It required an in-depth OOP analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
   - What it does: allows the user to sort elderly based on visit or last visit.
   - Justification: This feature enhances the functionality of SeniorLove by improving the effectiveness of display of information. As visits are at the heart of SeniorLove, sorting boosts the productivity by reducing the time to manually search for the timeline of visit.
-  - Highlights: The implementation was challengins as there are many design alternatives and in-depth understanding of JavaFX features. I managed to find a way to maintain immutability of the lists while making the list of elderly sortable.
+  - Highlights: The implementation was challenging as there are many design alternatives and in-depth understanding of JavaFX features. I managed to find a way to maintain immutability of the lists while making the list of elderly sortable.
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=ziqing26&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 

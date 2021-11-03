@@ -239,7 +239,7 @@ Given below is an example usage scenario:
 
 #### Implementation details
 
-Delete command is used to delete an existing elderly or the next visit of a elderly in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
+Delete command is used to delete an existing elderly or the next visit of an elderly in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
 
 - `DeleteCommand` extends `Command`
 - `DeleteCommandParser` implements `Parser<DeleteCommand>`
@@ -319,7 +319,7 @@ Given below is an example usage scenario:
 
 - Searching by specified attributes:
 
-  This is a possible solution, but we chose to do a search across all attributes because we have many different flags and formatting, and it makes `find` harder to use if each attribute has to be specified.
+  This is a possible solution, but we chose to do a search across all attributes because we have many flags and formatting, and it makes `find` harder to use if each attribute has to be specified.
 
 - AND search:
 
@@ -486,7 +486,7 @@ _{Explain here how the data archiving feature will be implemented}_
 - is reasonably comfortable using CLI apps
 
 **Value proposition**:
-Since social workers need to contact many different elderly every day, we created this app to help them easily avoid missing out on any elderly while reducing the hassle of manually checking the frequency of contacts for each elderly.
+Since social workers need to contact many elderly every day, we created this app to help them easily avoid missing out on any elderly while reducing the hassle of manually checking the frequency of contacts for each elderly.
 
 ### Glossary
 
@@ -669,7 +669,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a visit an elderly while all elderly are being shown
 
-   1. Prerequisites: List all elderly using the `list` command. The first eldery listed has a next visit.
+   1. Prerequisites: List all elderly using the `list` command. The first elderly listed has a next visit.
 
    2. Test case: `delete v/1`<br>
       Expected: Next visit of the first elderly is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
