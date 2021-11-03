@@ -28,7 +28,7 @@ public class AssessmentStatistics {
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
 
     private final Assessment assessment;
-    private final Map<Bin, Integer> binCounts;
+    private final double binSize = DEFAULT_BIN_SIZE;
     private int numScores = 0;
     private double sumOfScores = 0.0;
 
@@ -42,14 +42,7 @@ public class AssessmentStatistics {
 
         this.assessment = assessment;
 
-        List<Bin> bins = createBins(DEFAULT_BIN_SIZE);
-        binCounts = new HashMap<>();
-        for (Bin b : bins) {
-            binCounts.put(b, 0);
-        }
-
         for (Score score : assessment.scores.values()) {
-            addScoreToBin(score);
             numScores++;
             sumOfScores += score.getNumericValue();
         }
@@ -80,8 +73,8 @@ public class AssessmentStatistics {
     /**
      * Returns the {@code Bin} that the {@code Score} belongs in.
      */
-    public Bin getBin(Score score) {
-        for (Bin b : binCounts.keySet()) {
+    private Bin getBinForScore(Collection<Bin> bins, Score score) {
+        for (Bin b : bins) {
             if (b.includesScore(score)) {
                 return b;
             }
@@ -96,15 +89,27 @@ public class AssessmentStatistics {
     /**
      * Adds the specified {@code Score} to its corresponding {@code Bin}.
      */
-    public void addScoreToBin(Score score) {
-        Bin binForScore = getBin(score);
+    private void addScoreToBin(Map<Bin, Integer> binCounts,  Score score) {
+        Bin binForScore = getBinForScore(binCounts.keySet(), score);
         binCounts.put(binForScore, binCounts.get(binForScore) + 1);
     }
 
     /**
      * Returns a distribution of scores for the assessment, with the bins in their string representations.
      */
-    public Map<String, Number> getScoreDistribution() {
+    private Map<String, Number> getScoreDistribution() {
+        Map<Bin, Integer> binCounts = new HashMap<>();
+
+        List<Bin> bins = createBins(binSize);
+
+        for (Bin b : bins) {
+            binCounts.put(b, 0);
+        }
+
+        for (Score score : assessment.scores.values()) {
+            addScoreToBin(binCounts, score);
+        }
+
         Map<String, Number> distribution = new TreeMap<>();
         binCounts.forEach((bin, count) -> distribution.put(bin.toString(), count));
         return distribution;
