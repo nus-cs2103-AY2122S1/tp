@@ -7,7 +7,7 @@ import static seedu.address.commons.util.StringUtil.isValidCurrencyValue;
 
 public class DisposableIncome extends NumberComparable<DisposableIncome> implements OptionalStringBasedField {
     public static final String MESSAGE_CONSTRAINTS =
-            "Disposable Income numbers should be a positive integer only";
+        "Disposable Income numbers should be a positive integer only";
     public static final String DEFAULT_VALUE = "0.00";
 
     public final String value;
@@ -21,8 +21,12 @@ public class DisposableIncome extends NumberComparable<DisposableIncome> impleme
     public DisposableIncome(String disposableIncome) {
         requireNonNull(disposableIncome);
         checkArgument(isValidDisposableIncome(disposableIncome), MESSAGE_CONSTRAINTS);
+        if (disposableIncome.isEmpty()) {
+            disposableIncome = DEFAULT_VALUE;
+        }
         valueWithSymbol = getCurrencyFormat(disposableIncome, true);
         value = getCurrencyFormat(disposableIncome, false);
+
     }
 
     /**
@@ -40,8 +44,8 @@ public class DisposableIncome extends NumberComparable<DisposableIncome> impleme
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DisposableIncome // instanceof handles nulls
-                && value.equals(((DisposableIncome) other).value)); // state check
+            || (other instanceof DisposableIncome // instanceof handles nulls
+            && value.equals(((DisposableIncome) other).value)); // state check
     }
 
     @Override

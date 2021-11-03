@@ -10,7 +10,7 @@ import seedu.address.commons.util.StringUtil;
 
 public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparable<LastMet> {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
-            + "where Day, month and year should be numerical values.";
+        + "where Day, month and year should be numerical values.";
 
     public final LocalDate value;
     public final String dateInString;
@@ -26,6 +26,9 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
         }
         if (lastMetDate == null) {
             lastMetDate = "";
+        }
+        if (lastMetDate.isEmpty()) {
+            lastMetDate = DEFAULT_VALUE;
         }
 
         checkArgument(isValidLastMet(lastMetDate), MESSAGE_CONSTRAINTS);
@@ -67,8 +70,8 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LastMet // instanceof handles nulls
-                && value.equals(((LastMet) other).value)); // state check
+            || (other instanceof LastMet // instanceof handles nulls
+            && dateInString.equals(((LastMet) other).dateInString)); // state check
     }
 
     @Override
