@@ -42,7 +42,7 @@ public class EditLessonCommandTest {
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
         EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM, descriptor);
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString());
 
         Model expectedModel = new ModelManager(
                 modelNoStudents.getStudentBook(), new LessonBook(modelNoStudents.getLessonBook()), new UserPrefs());
@@ -69,7 +69,7 @@ public class EditLessonCommandTest {
                 .withPrice(VALID_PRICE_MATHS_TWO)
                 .build();
         EditLessonCommand editCommand = new EditLessonCommand(indexLastLesson, descriptor);
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString());
         Model expectedModel = new ModelManager(
                 model.getStudentBook(), new LessonBook(model.getLessonBook()), new UserPrefs());
         expectedModel.setLesson(lastLesson, editedLesson);
@@ -84,7 +84,7 @@ public class EditLessonCommandTest {
         EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM, new EditLessonDescriptor());
         Lesson editedLesson = model.getFilteredLessonList().get(INDEX_FIRST_ITEM.getZeroBased());
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString());
 
         Model expectedModel = new ModelManager(
                 model.getStudentBook(), new LessonBook(model.getLessonBook()), new UserPrefs());
@@ -105,7 +105,7 @@ public class EditLessonCommandTest {
         EditLessonCommand editCommand = new EditLessonCommand(INDEX_FIRST_ITEM,
                 new EditLessonDescriptorBuilder().withLessonName(VALID_LESSON_NAME_MATHS_TWO).build());
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString());
 
         Model expectedModel = new ModelManager(
                 model.getStudentBook(), model.getLessonBook(), new UserPrefs());
