@@ -26,13 +26,20 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 
 Whether you're using Windows or macOS, the steps for installation are the same.
 
-[//]: # (TODO: Consider adding video here)
-
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
-2. Download the latest `dash.jar` from here (not available yet).
+2. Download the latest `dash.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: Tip: We suggest creating a folder called "Dash" and putting the `dash.jar` file inside it. You can place this 
+folder wherever you want. Next, we recommend that you create a shortcut for Dash by right-clicking on the `dash.jar` 
+file. On Windows, click on the `Create Shortcut` option while on macOS, click on `Make Alias`. You can then put this 
+shortcut in a convenient place (such as your Desktop) for easy access.
+
+</div>
 
 4. Double-click the file to start the app. Here's what you should see in a few seconds:<br>
    ![Ui](images/UG-00.png)
@@ -47,21 +54,13 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 * If you want to dive straight into features, you can check out our [Features](#features) section.
 * For a quick recap of the commands, you can take a look at our [Command Summary](#command-summary) section.
 
-
-* :information_source: indicates extra information about the specific section.
-* :warning: indicates important information or errors to look out for.
-
-
 <div markdown="block" class="alert alert-info">
    
-**:information_source: Meaning of icons:**<br>
+**Here is the meaning of some icons we use in the guide:**<br>
 
-:orange_book: _Description_: This is a brief description of what the command does.
+:information_source: indicates extra information about the specific section.
 
-:page_with_curl: _Format_: ```This is how you're supposed to type the command into the command line``` (Refer to the section below on notes
-about the command format.)
-
-:grey_question: _Explanation_: This is an explanation on how the command can be used, and any noteworthy examples or caveats.
+:warning: indicates important information or errors to look out for.
 
 :bulb: Tip: This is additional info to help you get the most out of Dash.
    
@@ -129,7 +128,7 @@ you a lot of time!
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used more than once.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -140,6 +139,15 @@ you a lot of time!
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `contacts`, `tasks` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Here is the meaning of some icons used in this section:
+
+:orange_book: _Description_: This is a brief description of what the command does.
+
+:page_with_curl: _Format_: ```This is how you're supposed to type the command into the command line``` (Refer to the section below on notes
+about the command format.)
+
+:grey_question: _Explanation_: This is an explanation on how the command can be used, and any noteworthy examples or caveats.
 
 </div>
 
@@ -355,7 +363,7 @@ Tag names are only limited to 20 characters!
 
 :orange_book: The _Assign Command_ lets you add extra assignees to a task without wiping/replacing the old assignees.
 
-:page_with_curl: Format: ```assign INDEX [p/PERSON INDEX]...```
+:page_with_curl: Format: ```assign INDEX p/PERSON INDEX...```
 
 :grey_question:
 * Assigning people to a task uses the current `INDEX` of the person on the contacts list, which is shown
