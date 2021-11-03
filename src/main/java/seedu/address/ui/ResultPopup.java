@@ -5,13 +5,9 @@ import static java.util.Objects.requireNonNull;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
@@ -29,9 +25,6 @@ public class ResultPopup extends UiPart<Region> {
 
     @FXML
     private Label result;
-
-    @FXML
-    private VBox popupContainer;
 
     /**
      * Creates a result popup.
