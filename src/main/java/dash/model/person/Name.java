@@ -11,7 +11,8 @@ import dash.commons.util.AppUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, be limited to 20 characters, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, be limited to 20 characters, and it should "
+                    + "not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
