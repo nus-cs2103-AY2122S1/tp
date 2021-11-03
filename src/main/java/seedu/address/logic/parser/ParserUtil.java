@@ -55,7 +55,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE =
             "Number of people is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE_TIME_FORMAT =
-            "Date time should be in one of the following formats:  " + String.join(", ", DATE_TIME_PATTERNS);
+            "Date time is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy "
+            + "format and a time in HH:mm or HHmm (24hr clock) format (eg: 1800 or 18:00 for 6 pm). "
+            + "You can choose to entire enter a date first or time first in any of the formats mentioned";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

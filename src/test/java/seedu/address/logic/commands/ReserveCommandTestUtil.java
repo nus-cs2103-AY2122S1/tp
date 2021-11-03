@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -18,6 +19,13 @@ public class ReserveCommandTestUtil {
     public static final int VALID_NUMBER_OF_PEOPLE_BOB = 2;
     public static final String VALID_DATE_TIME_AMY = "2021-11-11 2000";
     public static final String VALID_DATE_TIME_BOB = "2021-12-01 1900";
+    public static final String VALID_REMARK = "birthday party";
+
+    public static final String REMARK_DESC = " " + PREFIX_REMARK + VALID_REMARK;
+
+    public static final String INVALID_REMARK = "10% off";
+
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + INVALID_REMARK;
 
     /**
      * Executes the given {@code command}, confirms that <br>
