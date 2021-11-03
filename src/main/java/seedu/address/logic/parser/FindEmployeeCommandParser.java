@@ -25,8 +25,6 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEmployeeCommand.MESSAGE_USAGE));
         }
 
-        //String[] nameKeywords = trimmedArgs.split("\\s+");
-
         return new FindEmployeeCommand(new EmployeeClassContainsKeywordsPredicate(Arrays.asList(trimmedArgs)));
     }
 

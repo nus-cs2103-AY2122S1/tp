@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -41,7 +41,7 @@ public class EmployeeUtil {
         sb.append(PREFIX_ADDRESS + employee.getAddress().value + " ");
         sb.append(PREFIX_LEAVES + employee.getLeaves().currentLeaves + " ");
         sb.append(PREFIX_SALARY + employee.getSalary().currentSalary + " ");
-        sb.append(PREFIX_JOBTITLE + employee.getJobTitle().jobTitle + " ");
+        sb.append(PREFIX_JOB_TITLE + employee.getJobTitle().jobTitle + " ");
         employee.getTags().stream().forEach(s ->
                 sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -59,7 +59,7 @@ public class EmployeeUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getLeaves().ifPresent(leaves -> sb.append(PREFIX_LEAVES).append(leaves.currentLeaves).append(" "));
         descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.currentSalary).append(" "));
-        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOBTITLE).append(jobTitle.jobTitle)
+        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOB_TITLE).append(jobTitle.jobTitle)
                                                                                     .append(" "));
         if (descriptor.getShifts().isPresent()) {
             Set<Shift> shifts = descriptor.getShifts().get();

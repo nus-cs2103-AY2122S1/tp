@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_CUSTOMER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_CUSTOMER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.DESC_CUSTOMER_AMY;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.DESC_CUSTOMER_BOB;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.showCustomerAtIndex;
@@ -34,7 +34,7 @@ import seedu.address.testutil.TypicalCustomers;
  */
 public class EditCustomerCommandTest {
 
-    private Model model = new ModelManager(TypicalCustomers.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalCustomers.getTypicalAddressBookCustomers(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

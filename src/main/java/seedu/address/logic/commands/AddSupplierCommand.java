@@ -27,7 +27,7 @@ public class AddSupplierCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]"
+            + "[" + PREFIX_TAG + "TAG] "
             + PREFIX_SUPPLY_TYPE + "TYPE OF SUPPLY "
             + PREFIX_DELIVERY_DETAILS + "DELIVERY DETAILS...\n"
             + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindCustomerCommand;
 import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 
-public class FindCommandParserTest {
+public class FindCustomerCommandParserTest {
 
     private FindCustomerCommandParser parser = new FindCustomerCommandParser();
 
@@ -22,7 +22,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindCustomerCommand() {
         // no leading and trailing whitespaces
         FindCustomerCommand expectedFindCommand =
                 new FindCustomerCommand(new CustomerClassContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));

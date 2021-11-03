@@ -3,41 +3,41 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_ALMONDS;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_GRAPEFRUITS;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ALLERGIES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SPECIALREQUESTS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LP_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.LP_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_ALMONDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.ALLERGY_DESC_ALMONDS;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.ALLERGY_DESC_GRAPEFRUITS;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.INVALID_ALLERGIES_DESC;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.INVALID_SPECIAL_REQUESTS_DESC;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_AMY;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_BOB;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVE_BAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_ALMONDS;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_AMY;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_LP_BOB;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGIES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -64,7 +64,7 @@ public class EditCustomerCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
     private static final String ALLERGY_EMPTY = " " + PREFIX_ALLERGIES;
-    private static final String SPECIALREQUEST_EMPTY = " " + PREFIX_SPECIALREQUESTS;
+    private static final String SPECIAL_REQUEST_EMPTY = " " + PREFIX_SPECIAL_REQUESTS;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCustomerCommand.MESSAGE_USAGE);
@@ -105,7 +105,7 @@ public class EditCustomerCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_ALLERGIES_DESC, Allergy.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_SPECIALREQUESTS_DESC,
+        assertParseFailure(parser, "1" + INVALID_SPECIAL_REQUESTS_DESC,
                 SpecialRequest.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
@@ -132,12 +132,12 @@ public class EditCustomerCommandParserTest {
         Index targetIndex = INDEX_SECOND_CUSTOMER;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_GRAPEFRUITS
-                + LP_DESC_AMY + ALLERGY_DESC_ALMONDS + SPECIALREQUEST_DESC_LIVEBAND + TAG_DESC_FRIEND;
+                + LP_DESC_AMY + ALLERGY_DESC_ALMONDS + SPECIAL_REQUEST_DESC_LIVE_BAND + TAG_DESC_FRIEND;
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withLoyaltyPoints(VALID_LP_AMY).withAllergies(VALID_ALLERGY_GRAPEFRUITS, VALID_ALLERGY_ALMONDS)
-                .withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
 
@@ -195,8 +195,8 @@ public class EditCustomerCommandParserTest {
         expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
         // special requests
-        userInput = targetIndex.getOneBased() + SPECIALREQUEST_DESC_LIVEBAND;
-        descriptor = new EditCustomerDescriptorBuilder().withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND).build();
+        userInput = targetIndex.getOneBased() + SPECIAL_REQUEST_DESC_LIVE_BAND;
+        descriptor = new EditCustomerDescriptorBuilder().withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND).build();
         expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -258,7 +258,7 @@ public class EditCustomerCommandParserTest {
     @Test
     public void parse_resetSpecialRequests_success() {
         Index targetIndex = INDEX_THIRD_CUSTOMER;
-        String userInput = targetIndex.getOneBased() + SPECIALREQUEST_EMPTY;
+        String userInput = targetIndex.getOneBased() + SPECIAL_REQUEST_EMPTY;
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withSpecialRequests().build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);

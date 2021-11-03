@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -44,7 +44,7 @@ public class CustomerUtil {
         sb.append(PREFIX_LP + customer.getLoyaltyPoints().value + " ");
         customer.getAllergies().stream().forEach(s -> sb.append(PREFIX_ALLERGIES + s.allergyName + " ")
         );
-        customer.getSpecialRequests().stream().forEach(s -> sb.append(PREFIX_SPECIALREQUESTS
+        customer.getSpecialRequests().stream().forEach(s -> sb.append(PREFIX_SPECIAL_REQUESTS
                 + s.specialRequestName + " "));
         customer.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
@@ -72,9 +72,9 @@ public class CustomerUtil {
         if (descriptor.getSpecialRequests().isPresent()) {
             Set<SpecialRequest> specialRequests = descriptor.getSpecialRequests().get();
             if (specialRequests.isEmpty()) {
-                sb.append(PREFIX_SPECIALREQUESTS).append(" ");
+                sb.append(PREFIX_SPECIAL_REQUESTS).append(" ");
             } else {
-                specialRequests.forEach(s -> sb.append(PREFIX_SPECIALREQUESTS)
+                specialRequests.forEach(s -> sb.append(PREFIX_SPECIAL_REQUESTS)
                         .append(s.specialRequestName).append(" "));
             }
         }

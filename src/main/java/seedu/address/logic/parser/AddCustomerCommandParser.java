@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -38,7 +38,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
     public AddCustomerCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_LP, PREFIX_ALLERGIES, PREFIX_SPECIALREQUESTS, PREFIX_TAG);
+                        PREFIX_LP, PREFIX_ALLERGIES, PREFIX_SPECIAL_REQUESTS, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_LP) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -52,7 +52,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         LoyaltyPoints loyaltyPoints = ParserUtil.parseLoyaltyPoints(argMultimap.getValue(PREFIX_LP).get());
         Set<Allergy> allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGIES));
         Set<SpecialRequest> specialRequests =
-                ParserUtil.parseSpecialRequests(argMultimap.getAllValues(PREFIX_SPECIALREQUESTS));
+                ParserUtil.parseSpecialRequests(argMultimap.getAllValues(PREFIX_SPECIAL_REQUESTS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Customer customer = new Customer(name, phone, email, address, loyaltyPoints, allergies,

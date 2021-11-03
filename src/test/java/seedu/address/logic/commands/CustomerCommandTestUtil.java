@@ -2,19 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_ALMONDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_ROCK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLY_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIAL_REQUESTS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -45,54 +37,49 @@ public class CustomerCommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_SUPPLY_TYPE_BEEF = "Beef";
-    public static final String VALID_SUPPLY_TYPE_CHICKEN = "Chicken";
-    public static final String VALID_DELIVERY_DETAIL_DAILY = "Everyday at 6pm";
-    public static final String VALID_DELIVERY_DETAIL_MONTHLY = "Every 3rd Friday of the month";
+    public static final String VALID_LP_AMY = "5000";
+    public static final String VALID_LP_BOB = "9000";
+    public static final String VALID_ALLERGY_NONSENSE = "Nonsense";
+    public static final String VALID_ALLERGY_ALMONDS = "Almonds";
+    public static final String VALID_ALLERGY_GRAPEFRUITS = "Grapefruit";
+    public static final String VALID_SPECIAL_REQUEST_OFF_LIGHTS = "off lights";
+    public static final String VALID_SPECIAL_REQUEST_SILENCE = "Silence";
+    public static final String VALID_SPECIAL_REQUEST_ROCK = "Rock music";
+    public static final String VALID_SPECIAL_REQUEST_LIVE_BAND = "Live band";
+    public static final String VALID_SORT_BY_LOYALTY_POINTS = "lp";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String ALLERGY_DESC_NONSENSE = " " + PREFIX_ALLERGIES + VALID_ALLERGY_NONSENSE;
+    public static final String ALLERGY_DESC_ALMONDS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_ALMONDS;
+    public static final String ALLERGY_DESC_GRAPEFRUITS = " " + PREFIX_ALLERGIES + VALID_ALLERGY_GRAPEFRUITS;
+    public static final String SPECIAL_REQUEST_DESC_LIVE_BAND = " " + PREFIX_SPECIAL_REQUESTS
+            + VALID_SPECIAL_REQUEST_LIVE_BAND;
+    public static final String SORT_BY_LOYALTY_POINTS_DESC =
+            " " + PREFIX_SORT_BY + VALID_SORT_BY_LOYALTY_POINTS;
+
+    public static final String LP_DESC_AMY = " " + PREFIX_LP + VALID_LP_AMY;
+    public static final String LP_DESC_BOB = " " + PREFIX_LP + VALID_LP_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String SUPPLY_TYPE_DESC_AMY = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_CHICKEN;
-    public static final String SUPPLY_TYPE_DESC_BOB = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
-    public static final String DELIVERY_DETAILS_DESC_AMY = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_DAILY;
-    public static final String DELIVERY_DETAILS_DESC_BOB =
-            " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_MONTHLY;
-
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    // & not allowed in supply types
-    public static final String INVALID_SUPPLY_TYPE_DESC = " " + PREFIX_SUPPLY_TYPE + "Chicken & Beef";
-    // @ not allowed in delivery details
-    public static final String INVALID_DELIVERY_DETAILS_DESC = " " + PREFIX_DELIVERY_DETAILS + "Everyday @ 6pm";
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditCustomerCommand.EditCustomerDescriptor DESC_AMY;
-    public static final EditCustomerCommand.EditCustomerDescriptor DESC_BOB;
+    // points
+    public static final String INVALID_ALLERGIES_DESC = " " + PREFIX_ALLERGIES + "!vvdv"; // '!' not allowed
+    // symbol
+    public static final String INVALID_SPECIAL_REQUESTS_DESC = " " + PREFIX_SPECIAL_REQUESTS + "!vdfv"; // '!'
+    //only "n", "a", "p", "e", "st", and "dd" are allowed for sort by
+    public static final String INVALID_SORT_BY_DESC = " " + PREFIX_SORT_BY + "t";
+    public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_AMY;
+    public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_BOB;
 
     static {
-        DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_CUSTOMER_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withAllergies(VALID_ALLERGY_ALMONDS)
-                .withLoyaltyPoints(VALID_LP_AMY).withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND)
-                .build();
-        DESC_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withLoyaltyPoints(VALID_LP_AMY)
+                .withAllergies(VALID_ALLERGY_GRAPEFRUITS, VALID_ALLERGY_NONSENSE)
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND, VALID_SPECIAL_REQUEST_ROCK)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_CUSTOMER_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAllergies(VALID_ALLERGY_GRAPEFRUITS)
-                .withSpecialRequests(VALID_SPECIALREQUEST_ROCK).withLoyaltyPoints(VALID_LP_BOB)
-                .build();
+                .withLoyaltyPoints(VALID_LP_BOB)
+                .withAllergies(VALID_ALLERGY_ALMONDS).withSpecialRequests(VALID_SPECIAL_REQUEST_OFF_LIGHTS)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
 

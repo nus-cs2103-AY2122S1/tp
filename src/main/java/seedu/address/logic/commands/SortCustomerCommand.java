@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
 import java.util.Comparator;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
@@ -27,6 +28,7 @@ public class SortCustomerCommand extends Command {
             + PREFIX_SORT_ORDER + "a ";
 
     public static final String MESSAGE_SUCCESS = "Customer list sorted by %1$s in %2$s order";
+    public static final String MESSAGE_EMPTY_FILTERED_LIST = "Customer list is currently empty!";
 
     private final Comparator<Customer> comparator;
     private final String sortBy;
@@ -36,14 +38,20 @@ public class SortCustomerCommand extends Command {
      * Creates a SortCustomerCommand object.
      */
     public SortCustomerCommand(Comparator<Customer> comparator, String sortBy, String sortingOrder) {
+        requireNonNull(comparator);
+        requireNonNull(sortBy);
+        requireNonNull(sortingOrder);
         this.comparator = comparator;
         this.sortBy = sortBy;
         this.sortingOrder = sortingOrder;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.getFilteredCustomerList().size() == 0) {
+            throw new CommandException(MESSAGE_EMPTY_FILTERED_LIST);
+        }
         model.getSortableCustomerList().sort(comparator);
         model.setCustomerComparator(comparator);
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortBy, sortingOrder),
@@ -55,13 +63,12 @@ public class SortCustomerCommand extends Command {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof SortSupplierCommand)) {
+        if (!(other instanceof SortCustomerCommand)) {
             return false;
         }
 
         SortCustomerCommand otherCommand = (SortCustomerCommand) other;
         return otherCommand.sortingOrder.equals(sortingOrder)
-                && otherCommand.sortBy.equals(sortBy)
-                && otherCommand.comparator.equals(comparator);
+                && otherCommand.sortBy.equals(sortBy);
     }
 }

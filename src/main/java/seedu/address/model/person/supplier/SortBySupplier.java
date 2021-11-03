@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Comparator;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Represents the types of sorting methods we can apply to suppliers in the address book.
  */
@@ -24,9 +26,9 @@ public class SortBySupplier {
     private static final String SUPPLY_TYPE_DESC = "supply type";
     private static final String DELIVERY_DETAILS_DESC = "delivery details";
 
-    public static final String MESSAGE_CONSTRAINTS = "Sort by can only be 1 of the supplier fields: "
-            + NAME_DESC + "/" + PHONE_DESC + "/" + ADDRESS_DESC + "/" + EMAIL_DESC + "/" + SUPPLY_TYPE_DESC + "/"
-            + DELIVERY_DETAILS_DESC + " and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Sort by can only be 1 of the supplier field prefixes: "
+            + NAME + "/" + PHONE + "/" + ADDRESS + "/" + EMAIL + "/" + SUPPLY_TYPE + "/"
+            + DELIVERY_DETAILS + " and it should not be blank";
 
     private final String sortBy;
 
@@ -37,14 +39,14 @@ public class SortBySupplier {
      */
     public SortBySupplier(String sortBy) {
         requireNonNull(sortBy);
-        checkArgument(isValidSortingOrder(sortBy), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSortBy(sortBy), MESSAGE_CONSTRAINTS);
         this.sortBy = sortBy;
     }
 
     /**
      * Returns true if a given string is a valid sorting type.
      */
-    public static boolean isValidSortingOrder(String test) {
+    public static boolean isValidSortBy(String test) {
         switch (test) {
         case NAME:
         case ADDRESS:
@@ -63,8 +65,10 @@ public class SortBySupplier {
      * @param isAscending A boolean representing if sorting order is ascending.
      * @return A comparator to sort the supplier list.
      */
-    public Comparator<Supplier> selectComparator(boolean isAscending) {
+    public Comparator<Supplier> selectComparator(boolean isAscending) throws ParseException {
         switch (sortBy) {
+        case NAME:
+            return SupplierComparator.getNameComparator(isAscending);
         case ADDRESS:
             return SupplierComparator.getAddressComparator(isAscending);
         case EMAIL:
@@ -76,7 +80,7 @@ public class SortBySupplier {
         case DELIVERY_DETAILS:
             return SupplierComparator.getDeliveryDetailsComparator(isAscending);
         default:
-            return SupplierComparator.getNameComparator(isAscending);
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
     }
 

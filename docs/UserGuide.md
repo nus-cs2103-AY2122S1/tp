@@ -44,9 +44,8 @@ Dangerous or potentially negative actions are displayed here
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
     - `addC`: Add a customer
-    - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
+    - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
-
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
@@ -75,13 +74,13 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
 |  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags.
-| `lp/`  | Loyalty Point       | A non-negative number with at least 4 digits
+| `lp/`  | Loyalty Point       | A non-negative number that should not exceed 2^31 - 1
 | `alg/` | Allergy (Optional)  | Similar to `t/`
 | `sr/`  | Special Request (Optional) | Similar to `t/`
 |  `l/`  | Leaves              | Leaves should only contain numbers
 | `jt/`  | Job Title           | Job Title should only contain alphanumeric characters and spaces, and should not be left blank
 | `sal/` | Salary              | Salary should contain numbers and should be at least 3 numbers long
-| `sh/`  | Shift (Optional)    | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-08 0800`. One entity can have multiple shifts <br> When editing shifts, the existing values of shifts will be replaced, i.e editing of these fields are not cumulative <br> If you want to remove all shifts from an entity, you can use `editE INDEX sh/` without specifying any shifts after it 
+| `sh/`  | Shift (Optional)    | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-08 0800`. One entity can have multiple shifts <br> When editing shifts, the existing values of shifts will be replaced, i.e editing of these fields are not cumulative <br> If you want to remove all shifts from an entity, you can use `editE INDEX sh/` without specifying any shifts after it <br> **NOTE**: Shifts CAN be in the past, present or future. Flexibility is given to the restaurant on how they want to use it 
 | `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
 | `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-adds) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
@@ -100,7 +99,7 @@ This is the list of some repeatedly used preambles in RHRH, as well as there cor
 
 Action | Format, Examples
 --------|------------------
-**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000`
+**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]` <br> e.g. `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000`
 **Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG] [sh/SHIFTS]` <br> e.g. `addE n/John Doe p/87654321 e/john@example.com a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Soup Chef t/Managerial sh/2021-12-08 0800`
 **Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/10 Balestier Rd st/Chicken dd/19-12-2021 08:00`
 **Add reservation** | `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addR 2 p/98765432 at/2021-12-24 2000`
@@ -110,7 +109,7 @@ Action | Format, Examples
 **Delete Employee** | `deleteE INDEX`<br> e.g., `deleteE 1`
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `deleteS 2`
 **Delete Reservation** | `deleteR INDEx` <br> e.g., `deleteR 4`
-**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIALREQUESTS]…​ [t/TAG]…​`<br> e.g.,`editC 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIAL_REQUESTS]…​ [t/TAG]…​`<br> e.g.,`editC 2 n/James Lee e/jameslee@example.com alg/Kiwi`
 **Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [sh/SHIFTS]…​ [t/TAG]…​`<br> e.g.,`editE 2 n/James Lee e/jameslee@example.com sal/7000`
 **Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`editS 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
@@ -134,11 +133,11 @@ Action | Format, Examples
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:information_source: Notes about the command format:**<br>
 
-* Commands are case-insensitive. <br>
+* Command words are case-insensitive. <br>
   e.g. `editE 1` is the same as `edite 1`
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -158,6 +157,9 @@ Action | Format, Examples
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Users can use all customer/employee/supplier commands apart from  `listC`, `listE` and `listS` to switch to the customer/employee/supplier list respectively
+ <br> e.g. If a user is currently viewing the customer list, using `addE`, `editE`, `sortE` etc. while the customer list is active will execute the respective employee command and switch to the employee list automatically
 
 </div>
 
@@ -271,7 +273,7 @@ Examples:
 
 Edits an existing customer in RHRH.
 
-Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`
+Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]…​`
 
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list.
 
@@ -480,7 +482,7 @@ Format: `findE KEYWORDS`
 * Displays all employees that contain the specified keywords **together**.
 
 Examples:
-* `findE 2021-12-08 0800`: Finds employees that have `2021-12-08 0800` in any of their fields.
+* `findE 2021-12-08 0800`: Finds employees that are working on `shift` `2021-12-08 0800`.
 
 * `findE Team A`: Finds all employees that have `Team A` in any of their fields.
 
@@ -566,7 +568,7 @@ Example:
 
 ### Displaying a sorted list of customers: `sortC`
 
-Sorts and displays the list of customers based on a given field in either ascending or descending order.
+Sorts and displays the active list of customers based on a given field in either ascending or descending order.
 
 Format: `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`
 
@@ -585,11 +587,14 @@ Examples:
     * For example `n` for name and `lp` for loyalty points
 * The only acceptable inputs for the `ORDER_OF_SORT` parameter are `a` for `ascending` and `d` for `descending`.
 * `ALLERGIES`, `SPECIAL REQUESTS` & `TAG` are not fields that can be used to sort customers.
+* `sortC` only sorts the active current list for customers.
+    * e.g. If you findC previously and only 3 customers are displayed on the list, `sortC` will only sort the 3 customers
+* If a filtered list with no customer listed is shown, `sortC` will be invalid.
 
 </div>
 
 ### Displaying a sorted list of employees: `sortE`
-Sorts and displays the list of employees based on a given field in either ascending or descending order.
+Sorts and displays the active list of employees based on a given field in either ascending or descending order.
 
 Format: `sortE by/PREFIX_OF_EMMPLOYEE_FIELD o/ORDER_OF_SORT`
 * Sorts and displays the list of employees based on the sort type
@@ -608,11 +613,14 @@ Examples:
     * For example `n` for name and `sal` for salary
 * The only acceptable inputs for the `ORDER_OF_SORT` parameter are `a` for `ascending` and `d` for `descending`.
 * `SHIFT` & `TAG` are not fields that can be used to sort employees.
+* `sortE` only sorts the active current list for employees.
+    * e.g. If you findE previously and only 3 employees are displayed on the list, `sortE` will only sort the 3 employees
+* If a filtered list with no employee listed is shown, `sortE` will be invalid.
 
 </div>
 
 ### Displaying a sorted list of suppliers: `sortS`
-Sorts and displays the list of suppliers based on a given field in either ascending or descending order.
+Sorts and displays the active list of suppliers based on a given field in either ascending or descending order.
 
 Format: `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`
 
@@ -632,6 +640,9 @@ Examples:
   * For example `n` for name and `dd` for delivery details
 * The only acceptable inputs for the `ORDER_OF_SORT` parameter are `a` for `ascending` and `d` for `descending`.
 * `TAG` is not a field that can be used to sort suppliers.
+* `sortS` only sorts the active current list for suppliers.
+    * e.g. If you findS previously and only 3 suppliers are displayed on the list, `sortS` will only sort the 3 suppliers
+* If a filtered list with no supplier listed is shown, `sortS` will be invalid.
 
 
 </div>
@@ -735,26 +746,31 @@ Format: `listR`
 <div markdown="block" class="alert alert-danger">
 
 :bangbang: **Warning!**<br>
-This command will remove **ALL** reservations and overwrite previously set tables <br>
+This command will remove **ALL** reservations and overwrite **ALL** previously set tables <br>
 
 </div>
 
-Sets the tables with the sizes specified so that reservations can be made
+Sets the number of tables and size of each table in the restaurant.
 
 Format: `settables LIST_OF_TABLE_SIZES`
   * `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
-    * **(size of one table)**
-    * **(size of one table)x(number of tables with this size)**,<br>
+    * **<TABLE_SIZE>**
+    * **<TABLE_SIZE>x<NUMBER_OF_TABLE_WITH_THIS_SIZE>**,<br>
       each comma-separated from the next.
 
 Example:
-* `settables 10,8,8,4,4,2x6,1x4`
+* `settables 10, 8, 8, 4, 4, 2x6, 1x4`
 
 <div markdown="block" class="alert alert-warning">
 
 :information_source: **Notes:**<br>
 
-* Size of tables and Number of tables with specified size has to be a positive integer
+* This command must be used at least once before you can [add a reservation](#adding-a-reservation-addr).
+  
+    (i.e. RHRH must contain tables before making a reservation)
+
+
+* TABLE_SIZE and NUMBER_OF_TABLE_WITH_THIS_SIZE has to be a positive integer
 
 </div>
 
@@ -790,11 +806,9 @@ If your changes to the data file makes its format invalid, RHRH will discard all
 
 ## FAQ
 
-<details>
 <summary>How do I transfer my data to another Computer?</summary>
 
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
 
-</details>
 
 --------------------------------------------------------------------------------------------------------------------

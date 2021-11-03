@@ -11,12 +11,6 @@ public class Leaves {
     public static final String MESSAGE_CONSTRAINTS =
             "Leaves should only be in numbers";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[0-9]+";
-
     public final String currentLeaves;
 
     /**
@@ -34,7 +28,11 @@ public class Leaves {
      * Returns true if a given string is a valid leaves input.
      */
     public static boolean isValidLeaves(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            return Integer.parseInt(test) >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 

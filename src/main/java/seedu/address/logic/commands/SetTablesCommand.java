@@ -16,9 +16,9 @@ public class SetTablesCommand extends Command {
     public static final String COMMAND_WORD = "settables";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Set the number of tables and size of each table in the restaurant.\n"
-            + "Parameters: number of seats in a table [separated by comma] "
-            + "(format: <table size>, ... OR <table size>x<number of tables with this size>, ...\n"
-            + "Example: " + COMMAND_WORD + " 5, 4, 3x10, 2x5, 1x2";
+            + "Parameters: LIST_OF_TABLE_SIZES "
+            + "(format: <TABLE_SIZE>, ... OR <TABLE_SIZE>x<NUMBER_OF_TABLE_WITH_THIS_SIZE>, ...\n"
+            + "Example: " + COMMAND_WORD + " 10, 8, 8, 4, 4, 2x6, 1x4";
 
     public static final String MESSAGE_SUCCESS =
             "Tables set successfully, restaurant has %1$d table(s) now.\nAll reservations have been deleted.";

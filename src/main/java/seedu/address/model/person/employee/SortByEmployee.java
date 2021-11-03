@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Comparator;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Represents the types of sorting methods we can apply to employees in the address book.
  */
@@ -16,7 +18,7 @@ public class SortByEmployee {
     private static final String EMAIL = "e";
     private static final String SALARY = "sal";
     private static final String LEAVES = "l";
-    private static final String JOBTITLE = "jt";
+    private static final String JOB_TITLE = "jt";
 
     private static final String NAME_DESC = "name";
     private static final String PHONE_DESC = "phone";
@@ -24,11 +26,11 @@ public class SortByEmployee {
     private static final String EMAIL_DESC = "email";
     private static final String SALARY_DESC = "salary";
     private static final String LEAVES_DESC = "leaves";
-    private static final String JOBTITLE_DESC = "job title";
+    private static final String JOB_TITLE_DESC = "job title";
 
     public static final String MESSAGE_CONSTRAINTS = "Sort by can only be 1 of the employee fields: "
             + NAME_DESC + "/" + PHONE_DESC + "/" + ADDRESS_DESC + "/" + EMAIL_DESC + "/" + SALARY_DESC + "/"
-            + LEAVES + "/" + JOBTITLE_DESC + " and it should not be blank";
+            + LEAVES + "/" + JOB_TITLE_DESC + " and it should not be blank";
 
     private final String sortBy;
 
@@ -39,14 +41,14 @@ public class SortByEmployee {
      */
     public SortByEmployee(String sortBy) {
         requireNonNull(sortBy);
-        checkArgument(isValidSortingOrder(sortBy), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSortBy(sortBy), MESSAGE_CONSTRAINTS);
         this.sortBy = sortBy;
     }
 
     /**
      * Returns true if a given string is a valid sorting type.
      */
-    public static boolean isValidSortingOrder(String test) {
+    public static boolean isValidSortBy(String test) {
         switch (test) {
         case NAME:
         case ADDRESS:
@@ -54,7 +56,7 @@ public class SortByEmployee {
         case PHONE:
         case SALARY:
         case LEAVES:
-        case JOBTITLE:
+        case JOB_TITLE:
             return true;
         default:
             return false;
@@ -66,8 +68,10 @@ public class SortByEmployee {
      * @param isAscending A boolean representing if sorting order is ascending.
      * @return A comparator to sort the employee list.
      */
-    public Comparator<Employee> selectComparator(boolean isAscending) {
+    public Comparator<Employee> selectComparator(boolean isAscending) throws ParseException {
         switch (sortBy) {
+        case NAME:
+            return EmployeeComparator.getNameComparator(isAscending);
         case ADDRESS:
             return EmployeeComparator.getAddressComparator(isAscending);
         case EMAIL:
@@ -78,10 +82,10 @@ public class SortByEmployee {
             return EmployeeComparator.getSalaryComparator(isAscending);
         case LEAVES:
             return EmployeeComparator.getLeavesComparator(isAscending);
-        case JOBTITLE:
+        case JOB_TITLE:
             return EmployeeComparator.getJobTitleComparator(isAscending);
         default:
-            return EmployeeComparator.getNameComparator(isAscending);
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -98,8 +102,8 @@ public class SortByEmployee {
             return SALARY_DESC;
         case LEAVES:
             return LEAVES_DESC;
-        case JOBTITLE:
-            return JOBTITLE_DESC;
+        case JOB_TITLE:
+            return JOB_TITLE_DESC;
         default:
             return NAME_DESC;
         }

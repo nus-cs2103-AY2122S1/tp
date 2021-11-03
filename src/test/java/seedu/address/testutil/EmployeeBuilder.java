@@ -26,7 +26,7 @@ public class EmployeeBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_LEAVES = "14";
     public static final String DEFAULT_SALARY = "3000";
-    public static final String DEFAULT_JOBTITLE = "Junior Developer";
+    public static final String DEFAULT_JOB_TITLE = "Junior Developer";
 
     private Name name;
     private Phone phone;
@@ -48,7 +48,7 @@ public class EmployeeBuilder {
         address = new Address(DEFAULT_ADDRESS);
         leaves = new Leaves(DEFAULT_LEAVES);
         salary = new Salary(DEFAULT_SALARY);
-        jobTitle = new JobTitle(DEFAULT_JOBTITLE);
+        jobTitle = new JobTitle(DEFAULT_JOB_TITLE);
         tags = new HashSet<>();
         shifts = new HashSet<>();
     }

@@ -23,14 +23,14 @@ public class SortOrder {
      */
     public SortOrder(String sortingOrder) {
         requireNonNull(sortingOrder);
-        checkArgument(isValidSortingOrder(sortingOrder), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSortBy(sortingOrder), MESSAGE_CONSTRAINTS);
         this.sortingOrder = sortingOrder;
     }
 
     /**
      * Returns true if a given string is a valid sorting order.
      */
-    public static boolean isValidSortingOrder(String test) {
+    public static boolean isValidSortBy(String test) {
         switch (test) {
         case ASCENDING:
         case DESCENDING:

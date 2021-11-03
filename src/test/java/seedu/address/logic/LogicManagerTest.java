@@ -1,29 +1,28 @@
 package seedu.address.logic;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NONSENSE;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.LEAVES_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.LP_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_NONSENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.ALLERGY_DESC_NONSENSE;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.LP_DESC_AMY;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.SPECIAL_REQUEST_DESC_LIVE_BAND;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_ALLERGY_NONSENSE;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.VALID_SPECIAL_REQUEST_LIVE_BAND;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.JOB_TITLE_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.LEAVES_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.SALARY_DESC_AMY;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.SHIFTS_DESC_AMY;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.DELIVERY_DETAILS_DESC_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.SUPPLY_TYPE_DESC_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_AMY;
 import static seedu.address.testutil.TypicalEmployees.AMY_EMPLOYEE;
@@ -99,9 +98,9 @@ public class LogicManagerTest {
         // Execute add command
         String addCustomerCommand = AddCustomerCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + LP_DESC_AMY + ALLERGY_DESC_NONSENSE
-                + SPECIALREQUEST_DESC_LIVEBAND + TAG_DESC_FRIEND;
+                + SPECIAL_REQUEST_DESC_LIVE_BAND + TAG_DESC_FRIEND;
         Customer expectedCustomer = new CustomerBuilder(CUSTOMER_AMY).withAllergies(VALID_ALLERGY_NONSENSE)
-                .withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND).build();
+                .withSpecialRequests(VALID_SPECIAL_REQUEST_LIVE_BAND).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCustomer(expectedCustomer);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -120,7 +119,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addEmployeeCommand = AddEmployeeCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + SHIFTS_DESC_AMY
+                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOB_TITLE_DESC_AMY + SHIFTS_DESC_AMY
                 + TAG_DESC_FRIEND;
         Employee expectedEmployee = new EmployeeBuilder(AMY_EMPLOYEE).build();
         ModelManager expectedModel = new ModelManager();

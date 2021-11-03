@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.showCustomerAtIndex;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 
@@ -25,7 +25,7 @@ import seedu.address.model.person.customer.Customer;
  */
 public class DeleteCustomerCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

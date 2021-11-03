@@ -21,10 +21,14 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SortOrder;
+import seedu.address.model.person.customer.SortByCustomer;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.SortByEmployee;
 import seedu.address.model.person.supplier.DeliveryDetails;
+import seedu.address.model.person.supplier.SortBySupplier;
 import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
@@ -35,10 +39,12 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_LEAVES = "a";
     private static final String INVALID_SALARY = "8we9";
-    private static final String INVALID_JOBTITLE = "% manager";
+    private static final String INVALID_JOB_TITLE = "% manager";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SUPPLY_TYPE = "Chicken & Beef";
     private static final String INVALID_DELIVERY_DETAILS = "Monday 2-4 pm";
+    private static final String INVALID_SORT_BY = "t";
+    private static final String INVALID_SORTING_ORDER = "123";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -51,6 +57,10 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SUPPLY_TYPE = "Chicken and Beef";
     private static final String VALID_DELIVERY_DETAILS = "1400 2021-10-19";
+    private static final String VALID_SORT_BY = "n";
+    private static final String VALID_SORT_BY_WITH_CAPS = "N";
+    private static final String VALID_SORTING_ORDER = "a";
+    private static final String VALID_SORTING_ORDER_WITH_CAPS = "A";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -91,14 +101,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_validDateTime_success() throws Exception {
-        LocalDateTime expected = LocalDateTime.parse("2021-11-11 2000", ParserUtil.DATE_TIME_FORMATTER);
+        LocalDateTime expected = LocalDateTime.parse("2021-11-11T20:00");
         assertEquals(expected, ParserUtil.parseDateTime("  2021-11-11 2000   "));
     }
 
     @Test
     public void parseDateTime_invalidDateTime_failure() {
         assertThrows(ParseException.class, MESSAGE_INVALID_DATE_TIME_FORMAT, ()
-            -> ParserUtil.parseDateTime("11-11-2021 2000"));
+            -> ParserUtil.parseDateTime("11/11/2021 2000"));
     }
 
     @Test
@@ -246,7 +256,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseJobTitle_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOBTITLE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOB_TITLE));
     }
 
     @Test
@@ -319,13 +329,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSupplyType_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseSupplyType_validValueWithoutWhitespace_returnsSupplyType() throws Exception {
         SupplyType expectedSupplyType = new SupplyType(VALID_SUPPLY_TYPE);
         assertEquals(expectedSupplyType, ParserUtil.parseSupplyType(VALID_SUPPLY_TYPE));
     }
 
     @Test
-    public void parseSupplyType_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseSupplyType_validValueWithWhitespace_returnsTrimmedSupplyType() throws Exception {
         String supplyTypeWithWhitespace = WHITESPACE + VALID_SUPPLY_TYPE + WHITESPACE;
         SupplyType expectedSupplyType = new SupplyType(VALID_SUPPLY_TYPE);
         assertEquals(expectedSupplyType, ParserUtil.parseSupplyType(supplyTypeWithWhitespace));
@@ -342,15 +352,159 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDeliveryDetails_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseDeliveryDetails_validValueWithoutWhitespace_returnsDeliveryDetails() throws Exception {
         DeliveryDetails expectedDeliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAILS);
         assertEquals(expectedDeliveryDetails, ParserUtil.parseDeliveryDetails(VALID_DELIVERY_DETAILS));
     }
 
     @Test
-    public void parseDeliveryDetails_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseDeliveryDetails_validValueWithWhitespace_returnsTrimmedDeliveryDetails() throws Exception {
         String deliveryDetailsWithWhitespace = WHITESPACE + VALID_DELIVERY_DETAILS + WHITESPACE;
         DeliveryDetails expectedDeliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAILS);
         assertEquals(expectedDeliveryDetails, ParserUtil.parseDeliveryDetails(deliveryDetailsWithWhitespace));
+    }
+
+    @Test
+    public void parseSortByCustomer_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortByCustomer((String) null));
+    }
+
+    @Test
+    public void parseSortByCustomer_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortByCustomer(INVALID_SORT_BY));
+    }
+
+    @Test
+    public void parseSortByCustomer_validValueWithoutWhitespace_returnsSortBy() throws Exception {
+        SortByCustomer expectedSortByCustomer = new SortByCustomer(VALID_SORT_BY);
+        assertEquals(expectedSortByCustomer, ParserUtil.parseSortByCustomer(VALID_SORT_BY));
+    }
+
+    @Test
+    public void parseSortByCustomer_validCapsValueWithoutWhitespace_returnsSortBy() throws Exception {
+        SortByCustomer expectedSortByCustomer = new SortByCustomer(VALID_SORT_BY);
+        assertEquals(expectedSortByCustomer, ParserUtil.parseSortByCustomer(VALID_SORT_BY_WITH_CAPS));
+    }
+
+    @Test
+    public void parseSortByCustomer_validValueWithWhitespace_returnsTrimmedSortBy() throws Exception {
+        String sortByWithWhitespace = WHITESPACE + VALID_SORT_BY + WHITESPACE;
+        SortByCustomer expectedSortByCustomer = new SortByCustomer(VALID_SORT_BY);
+        assertEquals(expectedSortByCustomer, ParserUtil.parseSortByCustomer(sortByWithWhitespace));
+    }
+
+    @Test
+    public void parseSortByCustomer_validCapsValueWithWhitespace_returnsTrimmedAndLowerCasedSortBy() throws Exception {
+        String sortByWithWhitespaceAndCaps = WHITESPACE + VALID_SORT_BY_WITH_CAPS + WHITESPACE;
+        SortByCustomer expectedSortByCustomer = new SortByCustomer(VALID_SORT_BY);
+        assertEquals(expectedSortByCustomer, ParserUtil.parseSortByCustomer(sortByWithWhitespaceAndCaps));
+    }
+
+    @Test
+    public void parseSortByEmployee_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortByEmployee((String) null));
+    }
+
+    @Test
+    public void parseSortByEmployee_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortByEmployee(INVALID_SORT_BY));
+    }
+
+    @Test
+    public void parseSortByEmployee_validValueWithoutWhitespace_returnsSortBy() throws Exception {
+        SortByEmployee expectedSortByEmployee = new SortByEmployee(VALID_SORT_BY);
+        assertEquals(expectedSortByEmployee, ParserUtil.parseSortByEmployee(VALID_SORT_BY));
+    }
+
+    @Test
+    public void parseSortByEmployee_validCapsValueWithoutWhitespace_returnsSortBy() throws Exception {
+        SortByEmployee expectedSortByEmployee = new SortByEmployee(VALID_SORT_BY);
+        assertEquals(expectedSortByEmployee, ParserUtil.parseSortByEmployee(VALID_SORT_BY_WITH_CAPS));
+    }
+
+    @Test
+    public void parseSortByEmployee_validValueWithWhitespace_returnsTrimmedSortBy() throws Exception {
+        String sortByWithWhitespace = WHITESPACE + VALID_SORT_BY + WHITESPACE;
+        SortByEmployee expectedSortByEmployee = new SortByEmployee(VALID_SORT_BY);
+        assertEquals(expectedSortByEmployee, ParserUtil.parseSortByEmployee(sortByWithWhitespace));
+    }
+
+    @Test
+    public void parseSortByEmployee_validCapsValueWithWhitespace_returnsTrimmedAndLowerCasedSortBy() throws Exception {
+        String sortByWithWhitespaceAndCaps = WHITESPACE + VALID_SORT_BY_WITH_CAPS + WHITESPACE;
+        SortByEmployee expectedSortByEmployee = new SortByEmployee(VALID_SORT_BY);
+        assertEquals(expectedSortByEmployee, ParserUtil.parseSortByEmployee(sortByWithWhitespaceAndCaps));
+    }
+
+    @Test
+    public void parseSortBySupplier_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortBySupplier((String) null));
+    }
+
+    @Test
+    public void parseSortBySupplier_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortBySupplier(INVALID_SORT_BY));
+    }
+
+    @Test
+    public void parseSortBySupplier_validValueWithoutWhitespace_returnsSortBy() throws Exception {
+        SortBySupplier expectedSortBySupplier = new SortBySupplier(VALID_SORT_BY);
+        assertEquals(expectedSortBySupplier, ParserUtil.parseSortBySupplier(VALID_SORT_BY));
+    }
+
+    @Test
+    public void parseSortBySupplier_validCapsValueWithoutWhitespace_returnsSortBy() throws Exception {
+        SortBySupplier expectedSortBySupplier = new SortBySupplier(VALID_SORT_BY);
+        assertEquals(expectedSortBySupplier, ParserUtil.parseSortBySupplier(VALID_SORT_BY_WITH_CAPS));
+    }
+
+    @Test
+    public void parseSortBySupplier_validValueWithWhitespace_returnsTrimmedSortBy() throws Exception {
+        String sortByWithWhitespace = WHITESPACE + VALID_SORT_BY + WHITESPACE;
+        SortBySupplier expectedSortBySupplier = new SortBySupplier(VALID_SORT_BY);
+        assertEquals(expectedSortBySupplier, ParserUtil.parseSortBySupplier(sortByWithWhitespace));
+    }
+
+    @Test
+    public void parseSortBySupplier_validCapsValueWithWhitespace_returnsTrimmedAndLowerCasedSortBy() throws Exception {
+        String sortByWithWhitespaceAndCaps = WHITESPACE + VALID_SORT_BY_WITH_CAPS + WHITESPACE;
+        SortBySupplier expectedSortBySupplier = new SortBySupplier(VALID_SORT_BY);
+        assertEquals(expectedSortBySupplier, ParserUtil.parseSortBySupplier(sortByWithWhitespaceAndCaps));
+    }
+
+    @Test
+    public void parseSortingOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortingOrder((String) null));
+    }
+
+    @Test
+    public void parseSortingOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(INVALID_SORTING_ORDER));
+    }
+
+    @Test
+    public void parseSortingOrder_validValueWithoutWhitespace_returnsSortingOrder() throws Exception {
+        SortOrder expectedSortOrder = new SortOrder(VALID_SORTING_ORDER);
+        assertEquals(expectedSortOrder, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER));
+    }
+
+    @Test
+    public void parseSortingOrder_validCapsValueWithoutWhitespace_returnsSortingOrder() throws Exception {
+        SortOrder expectedSortOrder = new SortOrder(VALID_SORTING_ORDER);
+        assertEquals(expectedSortOrder, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER_WITH_CAPS));
+    }
+
+    @Test
+    public void parseSortBySupplier_validValueWithWhitespace_returnsTrimmedSortingOrder() throws Exception {
+        String sortingOrderWithWhitespace = WHITESPACE + VALID_SORTING_ORDER + WHITESPACE;
+        SortOrder expectedSortingOrder = new SortOrder(VALID_SORTING_ORDER);
+        assertEquals(expectedSortingOrder, ParserUtil.parseSortingOrder(sortingOrderWithWhitespace));
+    }
+
+    @Test
+    public void parseSortBySupplier_validCapsValueWithWhitespace_returnsTrimmedSortingOrder() throws Exception {
+        String sortingOrderWithWhitespace = WHITESPACE + VALID_SORTING_ORDER_WITH_CAPS + WHITESPACE;
+        SortOrder expectedSortingOrder = new SortOrder(VALID_SORTING_ORDER);
+        assertEquals(expectedSortingOrder, ParserUtil.parseSortingOrder(sortingOrderWithWhitespace));
     }
 }
