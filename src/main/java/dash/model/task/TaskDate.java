@@ -178,7 +178,6 @@ public class TaskDate {
                         DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT));
                 isDate = true;
             } catch (Exception e) {
-                System.out.println(e);
                 isDate = isDate || false;
             }
         }
@@ -267,6 +266,10 @@ public class TaskDate {
                 return false;
             }
             isSameDate = date.equals(otherTaskDate.getDate());
+        } else {
+            if (this.hasDate()) {
+                return false;
+            }
         }
 
         if (otherTaskDate.hasTime()) {
@@ -274,7 +277,12 @@ public class TaskDate {
                 return false;
             }
             isSameTime = time.equals(otherTaskDate.getTime());
+        } else {
+            if (this.hasTime()) {
+                return false;
+            }
         }
+
 
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
