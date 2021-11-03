@@ -28,7 +28,8 @@ public class AddDeadlineTaskCommandTest {
 
         CommandResult commandResult = new AddDeadlineTaskCommand(validTask).execute(modelStub);
 
-        assertEquals(String.format(AddDeadlineTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddDeadlineTaskCommand.MESSAGE_SUCCESS, validTask),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
