@@ -51,4 +51,3 @@ Given below are my contributions to the project.
         * Fix raised points about improvements in User guide during PE-D (Issues [\#159](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/159), [\#161](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/161), [\#165](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/165), [\#166](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/166), [\#168](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/168) and [\#172](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/172), Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
     * Developer Guide:
         * Added NFRs(Pull requests [\#30](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/30), [\#39](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/39))_
-  
