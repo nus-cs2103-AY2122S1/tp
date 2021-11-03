@@ -63,7 +63,7 @@ public class CommandTestUtil {
     public static final String VALID_TASK_ID_1 = "T77";
     public static final String VALID_TASK_ID_2 = "T333";
     public static final String VALID_TASK_DEADLINE_0 = "2021-10-28";
-    public static final String VALID_TASK_DEADLINE_1 = "2022-11-11";
+    public static final String VALID_TASK_DEADLINE_1 = "2022-11-11 12:00";
     public static final String VALID_TASK_DEADLINE_2 = "2021-10-1";
     public static final String INVALID_TASK_DEADLINE_1 = "!@#$";
 

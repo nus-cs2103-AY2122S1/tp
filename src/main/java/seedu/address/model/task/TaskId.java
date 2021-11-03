@@ -9,14 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TaskId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Task Id must start with a capital T, "
-            + "followed by a number representing its index number";
+    public static final String MESSAGE_CONSTRAINTS = "Task Id must not be blank and start with a capital T, "
+            + "followed by a number representing its index number \n"
+            + "(number must be a positive integer)";
 
-    /*
-     *  Task Id must start with a capital T, followed by a number representing its index number
-     *
-     */
-    public static final String VALIDATION_REGEX = "T[0-9]*";
+    public static final String VALIDATION_REGEX = "T[1-9][0-9]*";
 
     public final String value;
 

@@ -32,12 +32,13 @@ public class StudentIdTest {
         assertFalse(StudentId.isValidStudentId(" ")); // spaces only
         assertFalse(StudentId.isValidStudentId("123456789")); // numbers only
         assertFalse(StudentId.isValidStudentId("A12345678")); // missing last letter
-        assertFalse(StudentId.isValidStudentId("Invalid")); // Letters only
+        assertFalse(StudentId.isValidStudentId("Invalid")); // letters only
         assertFalse(StudentId.isValidStudentId("A123 4567A")); // spaces within digits
+        assertFalse(StudentId.isValidStudentId("Z1234567A")); // starts with Z
 
         // valid student ids
         assertTrue(StudentId.isValidStudentId("A1234567A"));
         assertTrue(StudentId.isValidStudentId("A1111111Z"));
-        assertTrue(StudentId.isValidStudentId("Z0000000Z"));
+
     }
 }
