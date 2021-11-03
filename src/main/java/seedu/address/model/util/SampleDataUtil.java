@@ -20,15 +20,6 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static Folder[] getSampleFolders() {
-        return new Folder[] {
-            new Folder(new FolderName("Family")),
-            new Folder(new FolderName("Friends")),
-            new Folder(new FolderName("Primary School")),
-            new Folder(new FolderName("NUS")),
-            new Folder(new FolderName("Neighbours"))
-        };
-    }
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -56,9 +47,6 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
-        }
-        for (Folder sampleFolder : getSampleFolders()) {
-            sampleAb.addFolder(sampleFolder);
         }
         return sampleAb;
     }
