@@ -1008,7 +1008,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Searches for upcoming appointment based on the filter parameters provided. An appointment is considered upcoming if it has a date and time greater or equal than the current date and time.
    
-    1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
+    1. Prerequisites: None, but if there are no upcoming appointments in the appointment records, upcoming filter searches will not return any results.
        
     2. Test case: `appt -u`<br>
        Expected: All upcoming appointments in the appointment records will be listed in the appointment list.
@@ -1032,6 +1032,14 @@ testers are expected to do more *exploratory* testing.
        Expected: Displays an error message telling the user that a specified parameter cannot be empty.
       
 ### Listing all appointments for today <a name="list-appointments"/>
+
+1. Displays all appointments for the current day in the appointment list.
+   
+    1. Test case: `appt -l` when there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
+        Expected: No appointments are displayed in the appointment list.
+       
+    2. Test case: `appt -l` when there are appointments for the current day<br>
+        Expected: All of today's appointments are displayed in the appointment list
 
 ### Saving data  <a name="saving-data"/>
 
