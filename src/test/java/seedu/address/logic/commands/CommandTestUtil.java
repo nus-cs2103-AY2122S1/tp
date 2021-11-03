@@ -100,6 +100,10 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            System.out.println(result.isDisplaySummary());
+            System.out.println(expectedCommandResult.isDisplaySummary());
+            System.out.println(result.getSummaryToDisplay());
+            System.out.println(expectedCommandResult.getSummaryToDisplay());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -114,7 +118,14 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         Summary summary = new Summary(expectedModel.getAddressBook());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, summary);
+        CommandResult expectedCommandResult;
+        if (command instanceof CmdCommand || command instanceof EditCommand || command instanceof ExitCommand
+                || command instanceof ExportCommand || command instanceof HelpCommand
+                || command instanceof SortCommand) {
+            expectedCommandResult = new CommandResult(expectedMessage);
+        } else {
+            expectedCommandResult = new CommandResult(expectedMessage, summary);
+        }
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

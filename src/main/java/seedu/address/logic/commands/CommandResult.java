@@ -136,11 +136,22 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
 
-        boolean isSummary = !displaySummary || !otherCommandResult.displaySummary;
+        // handle instances of null summary
+        if (summary == null && otherCommandResult.summary != null) {
+            return false;
+        }
+
+        if (summary != null && otherCommandResult.summary == null) {
+            return false;
+        }
+
+        boolean isSummary = displaySummary == otherCommandResult.displaySummary;
 
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showCommandSummary == otherCommandResult.showCommandSummary
-                && (isSummary || summary.equals(otherCommandResult.summary))
+                && (isSummary
+                && ((summary == null && otherCommandResult.summary == null)
+                || summary.equals(otherCommandResult.summary)))
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
