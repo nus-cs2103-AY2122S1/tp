@@ -1,5 +1,7 @@
 @startuml
 !include style.puml
+skinparam defaultFontSize 15
+skinparam maxMessageSize 210
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -14,10 +16,10 @@ participant ":Model" as Model MODEL_COLOR
 participant ":Person" as Person MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add n/John Doe p/98765432 l/English a/311, Clementi Ave 2, #02-25")
+[-> LogicManager : execute("add n/John Doe p/98765432 l/English a/Clementi Ave 2")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add n/John Doe p/98765432 l/English a/311, Clementi Ave 2, #02-25")
+LogicManager -> AddressBookParser : parseCommand("add n/John Doe p/98765432 l/English a/Clementi Ave 2")
 activate AddressBookParser
 
 create AddCommandParser
@@ -27,7 +29,7 @@ activate AddCommandParser
 AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse("n/John Doe p/98765432 l/English a/311, Clementi Ave 2, #02-25")
+AddressBookParser -> AddCommandParser : parse("n/John Doe p/98765432 l/English a/Clementi Ave 2")
 activate AddCommandParser
 
 create Person
