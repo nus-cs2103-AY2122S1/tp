@@ -115,4 +115,13 @@ public class CommandResult {
                 showEmployee, showReservation);
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "Feedback: %s; showHelp: %b; exit: %b; showCustomer: %b; showEmployee: "
+                        + "%b; showReservation: %b; showSupplier: %b",
+                feedbackToUser, showHelp, exit, showCustomer, showEmployee, showReservation, showSupplier
+        );
+    }
+
 }

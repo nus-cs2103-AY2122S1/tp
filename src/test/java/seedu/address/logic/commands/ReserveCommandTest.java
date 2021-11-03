@@ -3,6 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_DATE_TIME_AMY;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_DATE_TIME_BOB;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_NUMBER_OF_PEOPLE_AMY;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_NUMBER_OF_PEOPLE_BOB;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_REMARK;
 import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
 
 import java.time.LocalDateTime;
@@ -20,18 +28,19 @@ import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.table.Table;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.CustomerBuilder;
 
 
 class ReserveCommandTest {
-    private static final int DUMMY_NUMBER_OF_PEOPLE = 2;
-    private static final Phone DUMMY_PHONE = new Phone("98765432");
-    private static final LocalDateTime DUMMY_DATE_TIME = LocalDateTime.parse("2021-11-11T20:00");
+    private static final int DUMMY_NUMBER_OF_PEOPLE = VALID_NUMBER_OF_PEOPLE_AMY;
+    private static final Phone DUMMY_PHONE = new Phone(VALID_PHONE_AMY);
+    private static final LocalDateTime DUMMY_DATE_TIME = LocalDateTime.parse(VALID_DATE_TIME_AMY);
     private static final Table DUMMY_TABLE = new Table(5, 10);
-    private static final Remark DUMMY_REMARK = new Remark("");
-    private static final Set<Tag> DUMMY_TAG_LIST = Set.of();
-    private static final int DIFFERENT_NUMBER_OF_PEOPLE = 3;
-    private static final Phone DIFFERENT_PHONE = new Phone("12345678");
-    private static final LocalDateTime DIFFERENT_DATE_TIME = LocalDateTime.parse("2021-11-12T21:00");
+    private static final Remark DUMMY_REMARK = new Remark(VALID_REMARK);
+    private static final Set<Tag> DUMMY_TAG_LIST = Set.of(new Tag(VALID_TAG_FRIEND));
+    private static final int DIFFERENT_NUMBER_OF_PEOPLE = VALID_NUMBER_OF_PEOPLE_BOB;
+    private static final Phone DIFFERENT_PHONE = new Phone(VALID_PHONE_BOB);
+    private static final LocalDateTime DIFFERENT_DATE_TIME = LocalDateTime.parse(VALID_DATE_TIME_BOB);
 
     private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
 
@@ -56,6 +65,10 @@ class ReserveCommandTest {
 
     @Test
     public void execute_validReservationWithTablesSetAlready_addSuccessful() throws Exception {
+        // add customer first
+        model.addCustomer(
+                new CustomerBuilder().withPhone(DUMMY_PHONE.value).build()
+        );
         ReserveCommand command = new ReserveCommand(
                 DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME, DUMMY_REMARK, DUMMY_TAG_LIST
         );

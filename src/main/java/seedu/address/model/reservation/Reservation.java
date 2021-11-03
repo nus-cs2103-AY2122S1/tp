@@ -88,6 +88,7 @@ public class Reservation {
                 && phone.equals(that.phone)
                 && dateTime.equals(that.dateTime)
                 && table.equals(that.table)
+                && remark.equals(that.remark)
                 && tags.equals(that.tags);
     }
 
@@ -113,7 +114,7 @@ public class Reservation {
                 .append("; Table: ")
                 .append(table);
 
-        if (remark != null) {
+        if (!remark.value.isEmpty()) {
             builder.append("; Remark: ")
                     .append(remark);
         }
