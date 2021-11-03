@@ -206,7 +206,7 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
   
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
-* `GRADE` can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
+* `GRADE` refers to the educational level of the student. It can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
 
 * `SUBJECT` can be specified in lower- or upper- cases (i.e. `MATH` and `math` represents the same subject which is `Math`). See [`add-l` (add lesson)](#adding-a-lesson-add-l) command for more information.
 
@@ -241,7 +241,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * `ADDRESS` can only have a maximum of 150 characters.
 
-* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
+* `GRADE` refers to the educational level of the student. It can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
 * A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
 
@@ -423,7 +423,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 :information_source: **Details:**
 
-* `GRADE` here follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
+* `GRADE` refers to the level of education a lesson is catering for. It follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
 
 * `SUBJECT` can only be a single word limited to `20` characters, and its first letter will be capitalized.
 
