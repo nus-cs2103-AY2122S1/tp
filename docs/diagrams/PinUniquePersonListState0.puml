@@ -13,15 +13,15 @@ package People {
     object "__person3:Person__" as person3
 }
 
-object "__pin1:Pin" as pin1 {
+object "__pin1:Pin__" as pin1 {
     boolean isPinned = true
 }
 
-object "__pin2:Pin" as pin2 {
+object "__pin2:Pin__" as pin2 {
     boolean isPinned = false
 }
 
-object "__pin3:Pin" as pin3 {
+object "__pin3:Pin__" as pin3 {
     boolean isPinned = false
 }
 
