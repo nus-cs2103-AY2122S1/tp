@@ -132,7 +132,7 @@ Updates an applicant's status as specified.
 
 Format: `mark NAME status/STATUS`
 
-* `NAME` is case-insensitive. e.g. `john doe` and `John Doe` will update the same applicant's status.
+* `NAME` is case-sensitive. e.g. `john doe` and `John Doe` will update separate applicants' statuses.
 * `STATUS` is case-insensitive. e.g. `accepted` and `ACCEPTED` will both update the applicant's status to `"Accepted"`.
 * Note: Possible statuses are `ACCEPTED`, `REJECTED` or `PENDING`.
 
