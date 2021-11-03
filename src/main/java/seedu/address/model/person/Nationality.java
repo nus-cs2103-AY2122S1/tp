@@ -39,7 +39,9 @@ public class Nationality {
         requireNonNull(nationality);
         checkArgument(isValidNationality(nationality), MESSAGE_CONSTRAINTS);
 
-        value = nationality;
+        value = nationality.equals("")
+                ? nationality
+                : nationality.substring(0, 1).toUpperCase() + nationality.substring(1).toLowerCase();
     }
 
     /**
