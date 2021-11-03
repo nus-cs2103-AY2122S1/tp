@@ -129,6 +129,9 @@ public class ParserUtil {
         if (!ClassCode.isValidClassCode(trimmedClassCode)) {
             throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS);
         }
+        if (ClassCode.isDefaultClassCode(trimmedClassCode)) {
+            throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS_DEFAULT_CLASSCODE);
+        }
         return new ClassCode(trimmedClassCode);
     }
 

@@ -14,8 +14,11 @@ public class ClassCode implements Comparable<ClassCode> {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G/g, "
             + "followed by a 2-digit number and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS_DEFAULT_CLASSCODE = "G00 is not a valid class code";
 
     public static final String VALIDATION_REGEX = "[G|g]\\d{2}";
+    public static final String DEFAULT_CLASSCODE_REGEX = "[G|g]00";
+
     public final String value;
 
     /**
@@ -36,6 +39,15 @@ public class ClassCode implements Comparable<ClassCode> {
         boolean value = test.matches(VALIDATION_REGEX);
         return value;
     }
+
+    /**
+     * Returns true if a given string is a default classCode.
+     */
+    public static boolean isDefaultClassCode(String test) {
+        boolean value = test.matches(DEFAULT_CLASSCODE_REGEX);
+        return value;
+    }
+
     @Override
     public String toString() {
         return value;
