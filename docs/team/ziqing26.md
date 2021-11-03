@@ -50,9 +50,10 @@ Given below are my contributions to the project.
     - Did cosmetic tweaks to existing documentation of features `help`: [\#26](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/26)
     - Added alert boxes to highlight key informations and updated links in the guide: [\#184](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/184)
   - Developer Guide:
-    - Added implementation details of the `delete` and `sort` feature (Pull requests [\#102](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/102), [\#139](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/139))
-    - Added relevant glossary of terms for SeniorLove (Pull requests [\#42](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/42))
+    - Added implementation details of the `delete` and `sort` feature: [\#102](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/102), [\#139](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/139)
+    - Added relevant glossary of terms for SeniorLove: [\#42](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/42)
     - Updated links in the guide: [\#184](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/184)
+    - Format diagrams: [\#195](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/195)
 
 - **Community**:
   - PRs reviewed (with non-trivial review comments): [\#49](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/49), [\#54](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/54), [\#101](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/101), [\#117](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/117), [\#180](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/180)
