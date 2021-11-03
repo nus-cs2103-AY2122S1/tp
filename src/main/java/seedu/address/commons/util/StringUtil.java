@@ -161,6 +161,20 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if {@code str} is under the limit of 20 characters.
+     */
+    public static boolean isWithinStandardLimit(String str) {
+        return str.length() <= 20;
+    }
+
+    /**
+     * Returns true if {@code str} is under the limit of 100 characters.
+     */
+    public static boolean isWithinLongLimit(String str) {
+        return str.length() <= 100;
+    }
+
+    /**
      * Returns {@code LocalDate} from a valid date.
      * To use after isValidDate.
      */

@@ -2,10 +2,11 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isWithinStandardLimit;
 
 public class DisposableIncome extends NumberComparable<DisposableIncome> implements OptionalStringBasedField {
     public static final String MESSAGE_CONSTRAINTS =
-            "Disposable Income numbers should be a positive integer only";
+            "Disposable Income numbers should be a positive integer only. (Character limit: 20)";
     public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
@@ -25,7 +26,8 @@ public class DisposableIncome extends NumberComparable<DisposableIncome> impleme
      */
     public static boolean isValidDisposableIncome(String test) {
 
-        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty()) || test.matches(VALIDATION_REGEX);
+        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
+            || (test.matches(VALIDATION_REGEX) && isWithinStandardLimit(test));
 
     }
 

@@ -2,6 +2,7 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isWithinStandardLimit;
 
 /**
  * Represents a Client's name in the address book.
@@ -10,7 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name extends StringComparable<Name> implements RequiredField {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank "
+                + "(Character limit: 20";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -36,7 +38,7 @@ public class Name extends StringComparable<Name> implements RequiredField {
      */
     public static boolean isValidName(String test) {
         return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
-                || test.matches(VALIDATION_REGEX);
+                || (test.matches(VALIDATION_REGEX) && isWithinStandardLimit(test));
     }
 
 

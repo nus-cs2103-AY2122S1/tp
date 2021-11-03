@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.convertEmptyStringIfNull;
 import static seedu.address.commons.util.StringUtil.isValidDate;
 import static seedu.address.commons.util.StringUtil.isValidTime;
+import static seedu.address.commons.util.StringUtil.isWithinLongLimit;
 import static seedu.address.commons.util.StringUtil.parseToLocalDate;
 import static seedu.address.commons.util.StringUtil.parseToLocalTime;
 
@@ -18,7 +19,8 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
             + "where Day, month and year should be numerical values.";
     public static final String TIME_MESSAGE_CONSTRAINTS = "Next meeting time should be in the 24-hour format, "
             + "where Hour and Minutes should be numerical values.";
-    public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
+    public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct. "
+            + "It should be in the form {dd-MM-yyyy (hh:mm~hh:mm), location}. (Character limit: 100)";
     public static final String MESSAGE_INVALID_TIME_DURATION = "End Time should be after Start Time";
     public static final String MESSAGE_INVALID_MEETING_DATE_OVER = "NextMeeting should not be in the past";
     public static final String NO_NEXT_MEETING = "No meeting planned";
@@ -103,7 +105,7 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
     }
 
     public static boolean isValidNextMeeting(String test) {
-        return test.matches(VALID_MEETING_STRING);
+        return test.matches(VALID_MEETING_STRING) && isWithinLongLimit(test);
     }
 
     public boolean isSameDay(LocalDate comparison) {

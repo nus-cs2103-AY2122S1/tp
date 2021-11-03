@@ -2,6 +2,7 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isWithinStandardLimit;
 
 /**
  * Represents a Client's phone number in the address book.
@@ -10,7 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Phone extends NumberComparable<Phone> implements OptionalStringBasedField {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+            "Phone numbers should only contain numbers, and it should be at least 3 digits long "
+                + "(Character limit: 20";
 
     public static final String VALIDATION_REGEX = "\\d{3,}";
 
@@ -31,7 +33,8 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty()) || test.matches(VALIDATION_REGEX);
+        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
+            || (test.matches(VALIDATION_REGEX) && isWithinStandardLimit(test));
     }
 
     @Override
