@@ -25,6 +25,7 @@ import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
+import safeforhall.model.person.exceptions.*;
 
 /**
  * Imports the csv and replaces the existing address book with the available information
@@ -57,6 +58,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INCORRECT_CSV_FORMAT = "File is in an incorrect csv format";
     public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
     public static final String MESSAGE_NO_RESIDENTS = "No resident information was found";
+    public static final String MESSAGE_DUPLICATE_RESIDENT = "Duplicate resident information found: ";
     public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
@@ -133,7 +135,11 @@ public class ImportCommand extends Command {
 
             AddressBook importedData = new AddressBook();
             for (Person singlePerson : persons) {
-                importedData.addPerson(singlePerson);
+                try {
+                    importedData.addPerson(singlePerson);
+                } catch (DuplicatePersonException e) {
+                    throw new CommandException(MESSAGE_DUPLICATE_RESIDENT + singlePerson.toString());
+                }
             }
             return importedData;
         } catch (IOException e) {
