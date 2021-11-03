@@ -33,11 +33,12 @@ public class DeallocateMemberCommand extends Command {
     private final DayOfWeek day;
 
     /**
-     * @param memberIndex of the member to be allocated to a facility.
-     * @param facilityIndex of the facility to allocate the member to.
+     * @param memberIndex of the member to be deallocated from a facility.
+     * @param facilityIndex of the facility to deallocate the member from.
+     * @param day to deallocate the member from the facility.
      */
     public DeallocateMemberCommand(Index memberIndex, Index facilityIndex, DayOfWeek day) {
-        requireAllNonNull(memberIndex, facilityIndex);
+        requireAllNonNull(memberIndex, facilityIndex, day);
         this.memberIndex = memberIndex;
         this.facilityIndex = facilityIndex;
         this.day = day;

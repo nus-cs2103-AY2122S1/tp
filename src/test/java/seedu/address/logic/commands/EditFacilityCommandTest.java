@@ -30,6 +30,8 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.FacilityBuilder;
 
+import java.time.DayOfWeek;
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditFacilityCommand.
  */
@@ -108,8 +110,13 @@ public class EditFacilityCommandTest {
     public void execute_unfilteredListCapacityBelowNumberOfAllocations_clearsAllocation() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
         Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
+        facility.addPersonToFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        facility.addPersonToFacilityOnDay(BOB, DayOfWeek.MONDAY);
+
         Facility editedFacility = new FacilityBuilder(facility)
                 .withCapacity("1").build();
+        editedFacility.removePersonFromFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        editedFacility.removePersonFromFacilityOnDay(BOB, DayOfWeek.MONDAY);
 
         model.addPerson(AMY);
         model.addPerson(BOB);
@@ -118,10 +125,36 @@ public class EditFacilityCommandTest {
         expectedModel.addFacility(editedFacility);
 
         model.addFacility(facility);
-        model.split(new PersonAvailableOnDayPredicate(1), 1);
 
         EditFacilityDescriptor descriptor =
                 new EditFacilityDescriptorBuilder(facility).withCapacity("1").build();
+        EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, descriptor);
+
+        String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_unfilteredListCapacityEqualNumberOfAllocations_doesNotClearAllocation() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
+        facility.addPersonToFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        facility.addPersonToFacilityOnDay(BOB, DayOfWeek.MONDAY);
+
+        Facility editedFacility = new FacilityBuilder(facility)
+                .withCapacity("2").build();
+
+        model.addPerson(AMY);
+        model.addPerson(BOB);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addFacility(editedFacility);
+
+        model.addFacility(facility);
+
+        EditFacilityDescriptor descriptor =
+                new EditFacilityDescriptorBuilder(facility).withCapacity("2").build();
         EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);

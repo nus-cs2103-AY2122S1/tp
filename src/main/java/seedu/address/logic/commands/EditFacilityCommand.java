@@ -76,7 +76,7 @@ public class EditFacilityCommand extends Command {
         }
 
         for (DayOfWeek day : DayOfWeek.values()) {
-            if (facilityToEdit.getCapacityAsOnDay(day) > editedFacility.getCapacityAsOnDay(day)) {
+            if (facilityToEdit.getCapacityAsOnDay(day) > editedFacility.getMaxCapacityOnDay(day)) {
                 facilityToEdit.clearAllocationMapOnDay(day);
             }
         }
