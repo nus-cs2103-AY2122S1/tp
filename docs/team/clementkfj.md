@@ -41,12 +41,14 @@ Given below are my contributions to the project.
     * Wrote additional tests for existing features to increase coverage (Pull requests [\#61](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/61), [\#56](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/56), [\#94](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/94), [\#181](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/181), [\#186](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/186))
     * Improve `Find` Employees command to search more accurately for `Shift` (Pull request [\#131](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/131))
     * Improve `Find` Suppliers and Customers command to search more accurately (Pull request [\#131](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/131))
-    * Fix PE-D related bugs [\#154](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/154), [\#155](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/155), [\#159](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/159), [\#161](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/161), [\#162](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/162) [\#165](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/165), [\#166](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/166), [\#168](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/168) and [\#172](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/172)
-      (Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
+    * Fix PE-D related bugs, changing validity checkers to enforce stricter rules for entering fields so people will not find bugs in it (Issues [\#154](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/154), [\#155](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/155) and [\#162](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/162), Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
 
 * **Documentation**:
     * User Guide:
         * Created first draft User Guide for `Customer`, `Supplier` and `Employee` (Pull request [\#67](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/67))
         * Fixed errors for formatting issues and updated `Employee` related commands' details (Pull request [\#142](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/142))
+        * Updated new information for `Shift`, `Leaves`, `Salary` and `Loyalty Points` with new REGEX checker (Pull request [\#197](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/197))
+        * Fix raised points about improvements in User guide during PE-D (Issues [\#159](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/159), [\#161](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/161), [\#165](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/165), [\#166](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/166), [\#168](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/168) and [\#172](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/172), Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
     * Developer Guide:
         * Added NFRs(Pull requests [\#30](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/30), [\#39](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/39))_
+  
