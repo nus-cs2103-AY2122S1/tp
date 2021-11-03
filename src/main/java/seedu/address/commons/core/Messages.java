@@ -13,5 +13,6 @@ public class Messages {
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
     public static final String MESSAGE_INVALID_UNDO_STATE = "You have no changes to undo.";
     public static final String MESSAGE_INVALID_REDO_STATE = "You have no changes to redo.";
+    public static final String MESSAGE_INVALID_CLEAR = "No data to clear!";
 
 }

@@ -10,7 +10,7 @@ public abstract class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views details of the contact identified by the index number or name "
             + "used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n or NAME (must be full name)"
+            + "Parameters: INDEX (must be a positive integer) or NAME (must be full name) \n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed contact: %1$s";
