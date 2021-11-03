@@ -297,12 +297,19 @@ Adds a new event to the address book.
 Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]`
 
 * The combination of the 5 required parameters should be unique
+* `CAPACITY` is the maximum number of residents allowed in this event  
+* `DATE` is the date on which the event is held
+* `TIME` is the time at which the event is held
 * `RESIDENTS` can be included as all full names or all rooms
 * The number of residents cannot exceed to provided capacity
+* When adding multiple residents, each resident information is separated by a comma
+* The resident information is case-insensitive
 
 Examples:
 * `add n/Swim v/Swimming Pool c/10 d/28-10-2021 t/1500`
-* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201 a121`
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201`  
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201, a121`
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/John Doe, Jane Doe`
 
 #### Editing an event : `edit`
 
@@ -415,7 +422,7 @@ A suggested string of parameters is displayed above the input box when a valid c
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book, including entries from the `Resident` Tab and the `Event` Tab. Data cleared cannot be retrieved and this command should be used with caution. A sample data can be retrieved by removing the `safeforhall.json` file from `/data`
 
 Format: `clear`
 
@@ -433,19 +440,37 @@ Format: `exit`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
-**View** | `view [INDEX]` <br> e.g. `view 30`
-**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `deadline k/f 15-8-2021 20-08-2021`
-**Find** | **Resident:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` <br><br> **Event:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/Swim d/28-10-2021`
-**Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
-**Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
-**Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` <br> e.g. `trace r/D201 d/2 t/4`
-**Import** | `import CSV_NAME` <br> e.g. `import safeforhall`
-**Export** | `export FILE_NAME` <br> e.g. `export closeContactsOfA123`
-**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
-**Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `exclude 1 r/A102, E416`
-**Switch** | `switch`
+### Resident Commands
+Command | Format | Examples
+--------|-------|----------
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**View** | `view [INDEX]`| `view 30`
+**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
+**Find** | `find [PREFIX/KEYWORD]...` | `find n/john alex v/false f/fass` <br>
+**Edit** | `edit INDEX… [FLAG/UPDATED_PARTICULARS]…` | `edit 1 2 3 v/true fd/20-10-2021` <br>
+**Delete** | `delete INDEX…` | `delete 1 2 3`
+**Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` | `trace r/D201 d/2 t/4`
+**Sort** | `TODO` | `TODO`
+**Import** | `import CSV_NAME` | `import safeforhall`
+**Export** | `export FILE_NAME` | `export closeContactsOfA123`
+
+### Event Commands
+Command | Format | Examples
+--------|-------|----------
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**View** | `view [INDEX]`| `view 30`
+**Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
+**Edit** | `edit INDEX [FLAG/UPDATED_PARTICULARS]…` | `edit 1 n/Football Training l/Field`
+**Delete** | `delete INDEX…` | `delete 1 2 3`
+**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` | `include 1 r/A102, E416`
+**Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` | `exclude 1 r/A102, E416`
+**Sort** | `TODO` | `TODO`
+
+### Commons
+Command | Format | Examples
+--------|-------|----------
 **Help** | `help`
+**Switch** | `switch`
+**Clear** | `clear`
 **Exit** | `exit`
+
