@@ -31,7 +31,7 @@ public class ParserUtil {
     public static final String MESSAGE_EMPTY_PATH = "Path should not be empty";
     public static final String MESSAGE_INVALID_PATH = "Path provided is invalid";
     public static final String MESSAGE_DIRECTORY = "Path provided should not be for a directory";
-    public static final String MESSAGE_WRONG_EXTENSION = "Path provided should end with %s$1";
+    public static final String MESSAGE_WRONG_EXTENSION = "Path provided should end with %1$s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
