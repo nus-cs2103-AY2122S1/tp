@@ -9,7 +9,7 @@ package seedu.address.commons.core.index;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index must be a positive integer.";
     private int zeroBasedIndex;
 
     /**

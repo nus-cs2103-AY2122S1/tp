@@ -89,7 +89,7 @@ public class BirthdayReminderCard extends UiPart<Region> {
         boolean isLeapDay = birthMonthDay.equals(MonthDay.of(2, 29));
         boolean hasPassedThisYear = birthMonthDay.isAfter(MonthDay.now());
         int thisYear = Year.now().getValue();
-        if (!hasPassedThisYear && isLeapDay && !Year.of(thisYear).isLeap()) {
+        if (!hasPassedThisYear && isLeapDay && !Year.now().isLeap()) {
             // Leap day birthday yet to pass and currently leap year
             return birthMonthDay.withDayOfMonth(28);
         } else if (hasPassedThisYear && isLeapDay && !Year.of(thisYear + 1).isLeap()) {
