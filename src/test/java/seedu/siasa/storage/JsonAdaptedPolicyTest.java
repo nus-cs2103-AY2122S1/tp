@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Title;
@@ -43,7 +42,7 @@ public class JsonAdaptedPolicyTest {
 
     @Test
     public void toModelType_nullExpiryDate_returnsPolicy() throws Exception {
-        Policy noExpiryDatePolicy = new PolicyBuilder(FULL_LIFE).withExpiryDate(null).build();
+        Policy noExpiryDatePolicy = new PolicyBuilder(FULL_LIFE).withNoExpiryDate().build();
         JsonAdaptedPolicy policy =
                 new JsonAdaptedPolicy(noExpiryDatePolicy);
         assertEquals(noExpiryDatePolicy, policy.toModelType(FULL_LIFE.getOwner()));

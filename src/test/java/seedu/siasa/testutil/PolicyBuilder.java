@@ -109,6 +109,15 @@ public class PolicyBuilder {
     }
 
     /**
+     * Removes the {@code ExpiryDate} of the {@code Policy} that we are building.
+     * @return
+     */
+    public PolicyBuilder withNoExpiryDate() {
+        this.coverageExpiryDate = null;
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Policy} that we are building.
      */
     public PolicyBuilder withTags(String ... tags) {
