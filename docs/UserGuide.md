@@ -308,7 +308,7 @@ Expected Output:
 
 ### 4.5 Find
 
-Finds a client or product in Sellah, based on the name specified in `-n`.
+Finds a client or product in Sellah, based on the name previously specified in `-n` when a client or product was added.
 
 An error message will be displayed if the format of a parameter is incorrect. The name you provided must fully match
 (case-insensitive) the name of the client or product in Sellah, otherwise you will receive an error message.
