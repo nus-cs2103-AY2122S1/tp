@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import seedu.siasa.commons.core.LogsCenter;
 
-import javax.swing.*;
-
 public class WarningWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(WarningWindow.class);
@@ -71,7 +69,6 @@ public class WarningWindow extends UiPart<Stage> {
     private void handleButtonAction(ActionEvent event) {
         Node source = (Node) event.getSource();
         String buttonClicked = source.getId();
-        System.out.println(buttonClicked);
         if (buttonClicked.equals("noButton")) {
             getRoot().hide();
             userResponse = false;
