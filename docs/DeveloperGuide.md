@@ -810,6 +810,12 @@ These are some use cases to familiarise with the flow of our application:
     * 2a1. An error message is shown to the user.
   
         Use case resumes at step 2.
+    
+* 2b. There are no appointments for the current day.
+
+    * 2b1. A message is shown informing the user that there are no appointments for the current day.
+    
+        Use case ends.
 
 
 ### Non-Functional Requirements  <a name="nfr"/>
