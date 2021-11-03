@@ -68,6 +68,16 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL + GROUP_DESC_RECITATION
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleGroups));
 
+        //multiple similar groups - only one unique instance accepted
+        Student expectedStudentWithMultipleSimilarGroups = new PersonBuilder(BOB)
+                .withScores(new LinkedHashMap<>())
+                .withGroups(VALID_GROUP_RECITATION)
+                .withTags(VALID_TAG_FRIEND)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_RECITATION
+                + GROUP_DESC_RECITATION + TAG_DESC_FRIEND,
+                new AddCommand(expectedStudentWithMultipleSimilarGroups));
+
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new PersonBuilder(BOB)
                 .withScores(new LinkedHashMap<>())

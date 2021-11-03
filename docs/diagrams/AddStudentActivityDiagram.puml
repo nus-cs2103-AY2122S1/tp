@@ -2,10 +2,10 @@
 
 start
 
-:User executes an AddTaskCommand;
+:User executes an AddStudentCommand;
 
 if () then ([command is valid])
-	:Execute AddTaskCommand;
+	:Execute AddStudentCommand;
 	if() then ([Student does not exist in database])
         :Create a new Student with given inputs;
         :Add Student to database;

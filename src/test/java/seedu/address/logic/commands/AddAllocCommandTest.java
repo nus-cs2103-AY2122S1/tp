@@ -48,12 +48,16 @@ public class AddAllocCommandTest {
         AddAllocCommand addAllocCommand = new AddAllocCommand(allocDescriptor);
 
         model.addStudent(simpleAmy);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        Group simpleGroupCopy = new Group(simpleGroup.name);
         model.addGroup(simpleGroup);
+        expectedModel.addGroup(simpleGroupCopy);
 
         Student expectedAmy = new PersonBuilder(simpleAmy)
                 .withGroups(VALID_GROUP_TUTORIAL).build();
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(simpleAmy, expectedAmy);
 
         String expectedMessage = String.format(AddAllocCommand.MESSAGE_SUCCESS, expectedAmy);
@@ -69,12 +73,16 @@ public class AddAllocCommandTest {
         AddAllocCommand addAllocCommand = new AddAllocCommand(allocDescriptor);
 
         model.addStudent(simpleAmy);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        Group simpleGroupCopy = new Group(simpleGroup.name);
         model.addGroup(simpleGroup);
+        expectedModel.addGroup(simpleGroupCopy);
 
         Student expectedAmy = new PersonBuilder(simpleAmy)
                 .withGroups(VALID_GROUP_TUTORIAL).build();
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(simpleAmy, expectedAmy);
 
         String expectedMessage = String.format(AddAllocCommand.MESSAGE_SUCCESS, expectedAmy);

@@ -31,14 +31,18 @@ import seedu.address.model.tag.Tag;
  */
 public class AddScoreCommand extends Command {
 
-    public static final String COMMAND_WORD = "add score";
+    public static final String COMMAND_WORD = "addscore";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds score of an assessment for a student. "
             + "Parameters: "
             + PREFIX_ASSESSMENT + "<assessment_name> "
             + "(" + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id>) "
-            + PREFIX_SCORE + "<score_in_percentage>";
+            + PREFIX_SCORE + "<score_in_percentage>\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ASSESSMENT + "Midterm "
+            + PREFIX_NAME + "Tang Zhiying "
+            + PREFIX_SCORE + "68.5";
 
     public static final String MESSAGE_ADD_SUCCESS = "New score added: %1$s";
     public static final String MESSAGE_UPDATE_SUCCESS = "Score updated from %1$s to %2$s: %3$s";

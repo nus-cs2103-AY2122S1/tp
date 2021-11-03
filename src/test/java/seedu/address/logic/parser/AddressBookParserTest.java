@@ -7,13 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ASSESSMENT_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.ASSESSMENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_VALID_FILE;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_COUNT_DESC_TYPICAL;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
@@ -31,9 +35,12 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAllocCommand;
 import seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
+import seedu.address.logic.commands.AddAssessmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.AddScoreCommand;
 import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -45,15 +52,19 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.AllocDescriptorBuilder;
+import seedu.address.testutil.AssessmentBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ScoreDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -154,6 +165,67 @@ public class AddressBookParserTest {
                 + PREFIX_COMMAND + ExitCommand.COMMAND_WORD + " "
                 + PREFIX_ALIAS + "aliasWord")
                 instanceof AliasCommand);
+    }
+
+    @Test
+    public void parseCommand_show() throws Exception {
+        ShowCommand command = (ShowCommand) parser.parseCommand(
+                ShowCommand.COMMAND_WORD
+                        + ASSESSMENT_DESC_AMY
+                        + FILE_DESC_VALID_FILE);
+
+        Assessment simpleAssessment = new AssessmentBuilder()
+                .withValue(VALID_ASSESSMENT_AMY).build();
+
+        assertEquals(new ShowCommand(simpleAssessment,
+                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv")),
+                command);
+    }
+
+    @Test
+    public void parseCommand_addAlloc() throws Exception {
+        AllocDescriptor descriptor = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withName(VALID_NAME_AMY)
+                .build();
+
+        AddAllocCommand command = (AddAllocCommand) parser.parseCommand(
+                AddAllocCommand.COMMAND_WORD
+                        + GROUP_DESC_TUTORIAL
+                        + NAME_DESC_AMY);
+
+        assertEquals(new AddAllocCommand(descriptor),
+                command);
+    }
+
+    @Test
+    public void parseCommand_addAssessment() throws Exception {
+        Assessment simpleAssessment = new AssessmentBuilder()
+                .withValue(VALID_ASSESSMENT_AMY).build();
+
+        AddAssessmentCommand command = (AddAssessmentCommand) parser.parseCommand(
+                AddAssessmentCommand.COMMAND_WORD
+                        + ASSESSMENT_DESC_AMY);
+
+        assertEquals(new AddAssessmentCommand(simpleAssessment),
+                command);
+    }
+
+    @Test
+    public void parseCommand_addScore() throws Exception {
+        AddScoreCommand command = (AddScoreCommand) parser.parseCommand(
+                AddScoreCommand.COMMAND_WORD
+                        + ASSESSMENT_DESC_AMY
+                        + NAME_DESC_AMY
+                        + SCORE_DESC_AMY);
+
+        AddScoreCommand.ScoreDescriptor scoreDescriptor = new ScoreDescriptorBuilder()
+                .withAssessment(VALID_ASSESSMENT_AMY)
+                .withName(VALID_NAME_AMY)
+                .withScore(VALID_SCORE_AMY).build();
+
+        assertEquals(new AddScoreCommand(scoreDescriptor),
+                command);
     }
 
     @Test
