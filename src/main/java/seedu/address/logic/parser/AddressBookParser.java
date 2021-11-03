@@ -56,6 +56,32 @@ public class AddressBookParser {
         logger.info("----------------[COMMAND WORD][" + commandWord + "]");
         final String arguments = matcher.group("arguments");
         logger.info("----------------[ARGUMENTS][" + arguments + "]");
+
+        if (arguments.isBlank()) {
+            switch (commandWord) {
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            case TelegramCommand.COMMAND_WORD:
+                return new TelegramCommand();
+
+            case GithubCommand.COMMAND_WORD:
+                return new GithubCommand();
+
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -67,9 +93,6 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FavouriteCommand.COMMAND_WORD:
             return new FavouriteCommandParser().parse(arguments);
 
@@ -79,15 +102,6 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
 
@@ -96,12 +110,6 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
-
-        case TelegramCommand.COMMAND_WORD:
-            return new TelegramCommand();
-
-        case GithubCommand.COMMAND_WORD:
-            return new GithubCommand();
 
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);

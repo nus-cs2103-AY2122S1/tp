@@ -28,14 +28,19 @@ public class ShowCommand extends Command {
             + "Parameters : INDEX\n"
             + "Example: " + COMMAND_WORD + " 2";
 
-    public static final String MESSAGE_NO_NAME = "No User with Given Name could be found in the List";
+    public static final String MESSAGE_NO_TARGET = "No User with Given %1$s could be found in the List";
+
+    public static final String MESSAGE_INVALID_INDEX = "The Index must be A Non-Zero Positive Integer.";
+
+    public static final String MESSAGE_INVALID_NAME = "The Name is Invalid.";
 
     public static final String MESSAGE_SUCCESS = "Showing details for %1$s.";
 
-    public static final String MESSAGE_MULTIPLE_NAME = "%1$d Persons with the given keyword in their name exists.\n"
-            + "You can try show with index or full name";
+    public static final String MESSAGE_MULTIPLE_NAME = "%1$d Persons with the given keyword in their %2$s exists.\n"
+            + "You can try show with index or full %2$s";
 
     private final Predicate<Person> predicate;
+    private final String searchBy;
     private final Index index;
 
     /**
@@ -43,8 +48,9 @@ public class ShowCommand extends Command {
      *
      * @param predicate contains Persons with name matching keyword
      */
-    public ShowCommand(Predicate<Person> predicate) {
+    public ShowCommand(Predicate<Person> predicate, String searchBy) {
         this.predicate = predicate;
+        this.searchBy = searchBy;
         this.index = null;
     }
 
@@ -55,13 +61,14 @@ public class ShowCommand extends Command {
      */
     public ShowCommand(Index index) {
         this.predicate = null;
+        this.searchBy = null;
         this.index = index;
     }
 
     /**
      * Executes the show command if argument is a string name
      */
-    private CommandResult executeWithName(Model model) throws CommandException {
+    private CommandResult executeWithOthers(Model model) throws CommandException {
         FilteredList<Person> filteredList = new FilteredList<>(model.getFilteredPersonList());
         filteredList.setPredicate(predicate);
 
@@ -69,14 +76,14 @@ public class ShowCommand extends Command {
             filteredList = new FilteredList<>(model.getAddressBook().getPersonList());
             filteredList.setPredicate(predicate);
             if (filteredList.isEmpty()) {
-                throw new CommandException(MESSAGE_NO_NAME);
-            } else {
-                if (model.getPersonListControl() != null) {
-                    model.setTabIndex(0);
-                }
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                this.executeWithName(model);
+                throw new CommandException(String.format(MESSAGE_NO_TARGET, searchBy));
             }
+
+            if (model.getPersonListControl() != null) {
+                model.setTabIndex(0);
+            }
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            this.executeWithOthers(model);
         }
 
         if (filteredList.size() == 1) {
@@ -84,10 +91,11 @@ public class ShowCommand extends Command {
             model.setSelectedIndex(index);
             return new CommandResult(String.format(MESSAGE_SUCCESS,
                     model.getFilteredPersonList().get(index).getName()));
-        } else {
-            model.updateFilteredPersonList(predicate);
-            return new CommandResult(String.format(MESSAGE_MULTIPLE_NAME, model.getFilteredPersonList().size()));
         }
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(String.format(MESSAGE_MULTIPLE_NAME,
+                model.getFilteredPersonList().size(), searchBy));
+
     }
 
     /**
@@ -108,7 +116,7 @@ public class ShowCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (predicate != null) {
-            return executeWithName(model);
+            return executeWithOthers(model);
         } else if (index != null) {
             return executeWithIndex(model);
         }

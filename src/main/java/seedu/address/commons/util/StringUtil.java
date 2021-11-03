@@ -13,6 +13,8 @@ import java.util.Locale;
  */
 public class StringUtil {
 
+    private static final String multiSpace = "\\s+";
+
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -33,8 +35,8 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         String preppedSentence = sentence.trim().toLowerCase(Locale.ROOT);
 
-        if (preppedWord.split("\\s+").length == 1) {
-            String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        if (preppedWord.split(multiSpace).length == 1) {
+            String[] wordsInPreppedSentence = preppedSentence.split(multiSpace);
             return Arrays.stream(wordsInPreppedSentence)
                     .anyMatch(t -> t.contains(preppedWord));
         } else {
@@ -57,6 +59,7 @@ public class StringUtil {
      * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
      * Will return false for any other non-null string input
      * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     *
      * @throws NullPointerException if {@code s} is null.
      */
     public static boolean isNonZeroUnsignedInteger(String s) {
@@ -70,8 +73,26 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Returns Integer if {@code s} represents an unsigned integer
+     * e.g. 0, 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
+     * Will return null for any other non-null string input
+     * e.g. empty string, "-1", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     *
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static Integer getInt(String s) {
+        requireNonNull(s);
+
+        try {
+            return Integer.parseInt(s); // "+1" is successfully parsed by Integer#parseInt(String)
+        } catch (NumberFormatException nfe) {
+            return null;
+        }
+    }
+
     public static String clean(String s) {
-        return s.strip().replaceAll("[\n|\r|\"|\f|\b|']", "").replaceAll("\\s+", " ").strip();
+        return s.strip().replaceAll("[\n|\r|\"|\f|\b|']", "").replaceAll(multiSpace, " ").strip();
     }
 
     public static String clean(String s, String toRemove) {

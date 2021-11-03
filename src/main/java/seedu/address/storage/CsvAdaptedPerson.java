@@ -62,7 +62,7 @@ public class CsvAdaptedPerson {
         address = source.getAddress().value;
         List<String> tagsString = source.getTags()
                 .stream()
-                .map(tag -> tag.tagName)
+                .map(tag -> tag.getStringType() + tag.tagName)
                 .collect(Collectors.toList());
         tagged = String.join(" ", tagsString);
     }
