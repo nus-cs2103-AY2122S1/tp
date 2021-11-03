@@ -5,38 +5,39 @@ title: Developer Guide
 
 ## Table of Contents
 
-1. [Introduction](#Introduction)<br>
-1. [Setting up & getting started](#setting-up--getting-started)<br>
-1. <details><summary><a href="#design">Design</a></summary>
-        3.1 <a href="#architecture">Architecture</a><br>
-        3.2 <a href="#ui-component">UI component</a><br>
-        3.3 <a href="#logic-component">Logic component</a><br>
-        3.4 <a href="#model-component">Model component</a><br>
-        3.5 <a href="#storage-component">Storage component</a><br>
-        3.6 <a href="#common-classes">Common classes</a><br>
+1. [Introduction](#1-Introduction)<br>
+1. [Setting up & getting started](#2-setting-up--getting-started)<br>
+1. <details><summary><a href="#3-design">Design</a></summary>
+        3.1 <a href="#31-architecture">Architecture</a><br>
+        3.2 <a href="#32-ui-component">UI component</a><br>
+        3.3 <a href="#33-logic-component">Logic component</a><br>
+        3.4 <a href="#34-model-component">Model component</a><br>
+        3.5 <a href="#35-storage-component">Storage component</a><br>
+        3.6 <a href="#36-common-classes">Common classes</a><br>
    </details>
-1. <details><summary><a href="#implementation">Implementation</a></summary>
-        4.1 <a href="#add-clientproduct-feature">Add Client/Product Feature</a><br>
-        4.2 <a href="#delete-clientproduct-feature">Delete Client/Product Feature</a><br>
-        4.3 <a href="#edit-clientproduct-feature">Edit Client/Product Feature</a><br>
-        4.4 <a href="#find-clientproduct-feature">Find Client/Product Feature</a><br>
-        4.5 <a href="#view-clientproduct-feature">View Client/Product Feature</a><br>
-        4.6 <a href="#command-history-feature">Command History Feature</a><br>
-        4.7 <a href="#proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
-        4.8 <a href="#proposed-data-archiving">[Proposed] Data archiving</a><br>
+1. <details><summary><a href="#4-implementation">Implementation</a></summary>
+        4.1 <a href="#41-add-clientproduct-feature">Add Client/Product Feature</a><br>
+        4.2 <a href="#42-delete-clientproduct-feature">Delete Client/Product Feature</a><br>
+        4.3 <a href="#43-edit-clientproduct-feature">Edit Client/Product Feature</a><br>
+        4.4 <a href="#44-find-clientproduct-feature">Find Client/Product Feature</a><br>
+        4.5 <a href="#45-view-clientproduct-feature">View Client/Product Feature</a><br>
+        4.6 <a href="#46-command-history-feature">Command History Feature</a><br>
+        4.7 <a href="#47-proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
+        4.8 <a href="#48-proposed-data-archiving">[Proposed] Data archiving</a><br>
    </details>
-1. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-1. <details><summary><a href="#appendix-requirements">Appendix: Requirements</a></summary>
-        6.1 <a href="#product-scope">Product scope</a><br>
-        6.2 <a href="#user-stories">User stories</a><br>
-        6.3 <a href="#use-cases">Use cases</a><br>
-        6.4 <a href="#non-functional-requirements">Non-Functional Requirements</a><br>
-        6.5 <a href="#glossary">Glossary</a><br>
+1. [Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops)
+1. <details><summary><a href="#6-appendix-requirements">Appendix: Requirements</a></summary>
+        6.1 <a href="#61-product-scope">Product scope</a><br>
+        6.2 <a href="#62-user-stories">User stories</a><br>
+        6.3 <a href="#63-use-cases">Use cases</a><br>
+        6.4 <a href="#64-non-functional-requirements">Non-Functional Requirements</a><br>
+        6.5 <a href="#65-glossary">Glossary</a><br>
    </details>
-1. <details><summary><a href="#appendix-instructions-for-manual-testing">Appendix: Instructions for manual testing</a></summary>
-        7.1 <a href="#launch-and-shutdown">Launch and shutdown</a><br>
-        7.2 <a href="#deleting-a-clientproduct">Deleting a client/product</a><br>
-        7.3 <a href="#saving-data">Saving data</a><br>
+1. <details><summary><a href="#7-appendix-instructions-for-manual-testing">Appendix: Instructions for manual testing</a></summary>
+        7.1 <a href="#71-launch-and-shutdown">Launch and shutdown</a><br>
+        7.2 <a href="#72-viewing-help">Viewing help</a><br>
+        7.3 <a href="#73-deleting-a-clientproduct">Deleting a client/product</a><br>
+        7.4 <a href="#74-saving-data">Saving data</a><br>
    </details>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -121,7 +122,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2 UI component
 
 The **API** of this component is specified in
 [`Ui.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -148,7 +149,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Client` or `Product` object residing in the `Model`.
 
-### Logic component
+### 3.3 Logic component
 
 **API** :
 [`Logic.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -191,7 +192,7 @@ How the parsing works:
   the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 3.4 Model component
 
 **API** :
 [`Model.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -211,7 +212,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-### Storage component
+### 3.5 Storage component
 
 **API** :
 [`Storage.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -227,17 +228,17 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-### Common classes
+### 3.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 4. Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Client/Product Feature
+### 4.1 Add Client/Product Feature
 
 The add feature adds a new `Client` or `Product` with details into the application. The commands are composed of a
 keyword `add` followed by `-c` for adding clients and `-p` for adding products.
@@ -267,7 +268,7 @@ The flow of the sequence diagram would be the same for adding `Products`, but th
     * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
       be done through the`edit` command (requires the user to memorise the IDs)
 
-### Delete Client/Product Feature
+### 4.2 Delete Client/Product Feature
 
 This feature deletes a `Client` or `Product`. When deleting a `Client` or
 `Product`, listing all clients/products using the `list -p` or `list -c` command is required.
@@ -294,7 +295,7 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
     * Pros : Deletion of multiple clients or products at the same time
     * Cons : More complex code which would lead to higher amount of error
 
-### Edit Client/Product Feature
+### 4.3 Edit Client/Product Feature
 
 This feature allows edits the details of a `Client` or `Product` of their choice. When editing a `Client` or
 `Product`, at least 1 field is required to be edited.
@@ -321,7 +322,7 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
     * Pros : Saves time if editing a field in all clients or products to the same value
     * Cons : More complex code which would lead to higher amount of error
 
-### Find Client/Product Feature
+### 4.4 Find Client/Product Feature
 
 This feature finds a `Client` or `Product` based on their `name`.
 
@@ -347,7 +348,7 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
     * Pros : Able to quickly find clients or products if the respective name cannot be remembered at the moment
     * Cons : More complex code which would lead to higher amount of error
 
-### View Client/Product Feature
+### 4.5 View Client/Product Feature
 
 This feature views the details of the `Client` or `Product` of their choice. When viewing a `Client`, more details such
 as `Products` bought before, will be visible to the user. Input is first handled and retrieved by `MainWindow` in the UI
@@ -371,7 +372,7 @@ the inputs and returning a `ViewClientCommand`. The command will then be execute
     * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
 
-### Command History Feature
+### 4.6 Command History Feature
 
 This feature allows navigation to previous commands using `↑` and `↓` keys.
 
@@ -419,7 +420,7 @@ stored into `ArrayList` and `Index` will be shifted to the newly input command.
 
 ![CommandHistoryState1](images/CommandHistoryState6.png)
 
-### \[Proposed\] Undo/Redo Feature
+### 4.7 \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation
 
@@ -527,14 +528,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### 4.8 \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 5. Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -544,9 +545,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## 6 Appendix: Requirements
 
-### Product scope
+### 6.1 Product scope
 
 **Target user profile**:
 
@@ -562,7 +563,7 @@ _{Explain here how the data archiving feature will be implemented}_
 and partners. The information and status of each order can also be easily monitored by the user. This product makes it
 easy and convenient to track orders and look for future cooperation.
 
-### User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -582,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * * ` | 10th-time user                             | see the statistics of the products sold | analyse the consumer pattern and make better decision in the future |
 
 
-### Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -756,14 +757,14 @@ User story ends.
       Use case ends.
     
 
-### Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 
-### Glossary
+### 6.5 Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X, and macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
@@ -775,7 +776,7 @@ User story ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -786,7 +787,7 @@ expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### 7.1 Launch and shutdown
 
 1. Initial launch
 
@@ -808,7 +809,7 @@ expected to do more *exploratory* testing.
     1. Enter `exit` and press enter or click the exit button<br>
        Expected: The application exits successfully.
 
-### Viewing help
+### 7.2 Viewing help
 
 1. Viewing help for Sellah
 
@@ -816,7 +817,7 @@ expected to do more *exploratory* testing.
        Expected: A help message will be shown on the second panel. In addition, a link to Sellah's user guide will also
        pop up.
 
-### Deleting a client/product
+### 7.3 Deleting a client/product
 
 1. Deleting a client while all clients are being shown
 
@@ -847,10 +848,9 @@ expected to do more *exploratory* testing.
        Expected: Similar to previous.
        
 
-### Saving data
+### 7.4 Saving data
 
 1. Dealing with missing/corrupted data files
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    
