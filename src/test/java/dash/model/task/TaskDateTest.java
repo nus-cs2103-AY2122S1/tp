@@ -68,7 +68,7 @@ public class TaskDateTest {
     public void getTime() {
         TaskDate taskDateTime1 = new TaskDate("1600");
         Optional<LocalTime> time1 = Optional.of(LocalTime.parse(("1600"),
-                DateTimeFormatter.ofPattern("HHmm")));
+                DateTimeFormatter.ofPattern("HHmm", Locale.US)));
 
         TaskDate taskDateTime2 = new TaskDate("07:00 AM");
         Optional<LocalTime> time2 = Optional.of(LocalTime.parse(("07:00 AM"),
