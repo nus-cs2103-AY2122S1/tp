@@ -391,7 +391,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * reinitialise bookKeeping.
+     * Reinitialise bookKeeping.
      */
     @Override
     public void initialiseBookKeeping() {

@@ -213,13 +213,31 @@ public interface Model {
      */
     DisplayMode getDisplayMode();
 
+    /**
+     * Initialise Transactions.
+     */
     void initialiseTransactions();
 
+    /**
+     * Add a specified cost to bookKeeping.
+     * @param cost the specified cost
+     */
     void addCostBookKeeping(Double cost);
 
+    /**
+     * Add a specified revenue to bookKeeping.
+     * @param revenue the specified revenue
+     */
     void addRevenueBookKeeping(Double revenue);
 
+    /**
+     * Return the current BookKeeping.
+     * @return the current BookKeeping.
+     */
     BookKeeping getBookKeeping();
 
+    /**
+     * Initialise BookKeeping.
+     */
     void initialiseBookKeeping();
 }
