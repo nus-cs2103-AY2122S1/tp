@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
-import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;

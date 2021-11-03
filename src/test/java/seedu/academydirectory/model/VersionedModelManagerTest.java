@@ -97,7 +97,7 @@ public class VersionedModelManagerTest {
     }
 
     @Test
-    public void setAndGetAdditionalVMTest() {
+    public void setAndGetAdditionalViewModelTest() {
         AdditionalViewModel additionalViewModel = modelManager.getAdditionalViewModel();
         assertDoesNotThrow(() -> modelManager.setAdditionalViewType(AdditionalViewType.VIEW));
         assertDoesNotThrow(() -> modelManager.setAdditionalInfo(AdditionalInfo.of("String")));

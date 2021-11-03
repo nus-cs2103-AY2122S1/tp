@@ -3,13 +3,11 @@ package seedu.academydirectory.logic.parser;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.academydirectory.testutil.Assert.assertThrows;
 import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.ViewCommand;
 
 public class ViewCommandParserTest {

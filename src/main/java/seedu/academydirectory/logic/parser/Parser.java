@@ -1,16 +1,6 @@
 package seedu.academydirectory.logic.parser;
 
-import static seedu.academydirectory.logic.parser.ParserUtil.assertSingularCommand;
-
-import seedu.academydirectory.commons.core.Messages;
-import seedu.academydirectory.logic.commands.ClearCommand;
 import seedu.academydirectory.logic.commands.Command;
-import seedu.academydirectory.logic.commands.ExitCommand;
-import seedu.academydirectory.logic.commands.HistoryCommand;
-import seedu.academydirectory.logic.commands.ListCommand;
-import seedu.academydirectory.logic.commands.RedoCommand;
-import seedu.academydirectory.logic.commands.UndoCommand;
-import seedu.academydirectory.logic.commands.VisualizeCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 /**

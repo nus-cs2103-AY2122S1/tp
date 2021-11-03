@@ -3,9 +3,6 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.logging.Logger;
-
-import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
@@ -17,7 +14,6 @@ import seedu.academydirectory.model.VersionedModel;
  */
 public class HelpCommand extends Command {
 
-    private final Logger logger = LogsCenter.getLogger(HelpCommand.class);
     public static final String COMMAND_WORD = "help";
     public static final String DEFAULT_MESSAGE = Messages.GENERAL_HELP_MESSAGE;
     public static final String MESSAGE_USAGE = COMMAND_WORD
