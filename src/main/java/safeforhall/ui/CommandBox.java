@@ -85,7 +85,7 @@ public class CommandBox extends UiPart<Region> {
             if (event.getCode() == KeyCode.ENTER) {
                 String commandText = main.getText();
                 historicals.add(commandText);
-                current = historicals.size() - 1;
+                current = historicals.size();
                 if (commandText.equals("")) {
                     return;
                 }
@@ -95,6 +95,7 @@ public class CommandBox extends UiPart<Region> {
                     main.setText("");
                 } catch (CommandException | ParseException e) {
                     setStyleToIndicateCommandFailure();
+                    current--;
                 }
                 event.consume();
             }
@@ -131,7 +132,7 @@ public class CommandBox extends UiPart<Region> {
                 return;
             }
 
-            // Simplified if statement not used to allow other key pressed to propagate
+            // Simplified if statement not used to allow other key presses to propagate
             if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
                 String newText;
                 if (event.getCode() == KeyCode.UP) {
