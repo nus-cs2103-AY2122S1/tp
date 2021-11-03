@@ -126,19 +126,8 @@ class IsFilterablePredicateTest {
     public void test_isRating_returnsFalse() {
         // Tests done with 1 category and multiple tags
 
-        // No rating
-        IsFilterablePredicate predicate = new IsFilterablePredicate(
-            Collections.singleton(new CategoryCode("oth")), new Rating(), new HashSet<>(Arrays.asList(
-            new Tag("fun"), new Tag("horrible"), new Tag("affordable"))));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("4")
-            .withTags("fun", "horrible", "affordable").build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("1")
-            .withTags("fun", "horrible", "affordable").build()));
-        assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating("5")
-            .withTags("fun", "horrible", "affordable").build()));
-
         // One rating
-        predicate = new IsFilterablePredicate(
+        IsFilterablePredicate predicate = new IsFilterablePredicate(
             Collections.singleton(new CategoryCode("oth")), new Rating("4"), new HashSet<>(Arrays.asList(
             new Tag("fun"), new Tag("horrible"), new Tag("affordable"))));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("oth").withRating().withTags().build()));

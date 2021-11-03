@@ -48,7 +48,8 @@ public class RatingTest {
     @Test
     public void isEmptyRating() {
         // null rating
-        assertThrows(NullPointerException.class, () -> Rating.isEmptyRating(null));
+        assertThrows(NullPointerException.class, () -> Rating.isEmptyRating((String) null));
+        assertThrows(NullPointerException.class, () -> Rating.isEmptyRating((Rating) null));
 
         // invalid ratings
         assertFalse(Rating.isEmptyRating(" ")); // whitespace only
@@ -58,5 +59,6 @@ public class RatingTest {
 
         // valid ratings
         assertTrue(Rating.isEmptyRating(Rating.EMPTY_RATING));
+        assertTrue(Rating.isEmptyRating(new Rating()));
     }
 }

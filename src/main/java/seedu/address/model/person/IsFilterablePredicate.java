@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
 
+import static seedu.address.model.person.Rating.isEmptyRating;
+
 /**
  * Tests that a {@code Person}'s {@code CategoryCode, Rating} matches the specified {@code CategoryCode, Rating}.
  */
@@ -33,13 +35,20 @@ public class IsFilterablePredicate implements Predicate<Person> {
         boolean isSameRating = personRating.equals(rating);
         boolean isSameCategoryCodes = categoryCodes.contains(category);
         boolean isSameTags = !(Collections.disjoint(tags, personTags));
+        boolean noRating = isEmptyRating(rating);
 
         if (categoryCodes.isEmpty() && tags.isEmpty()) {
             return isSameRating;
-        } else if (tags.isEmpty()) {
-            return isSameRating && isSameCategoryCodes;
+        } else if (tags.isEmpty() && noRating) {
+            return isSameCategoryCodes;
+        } else if (categoryCodes.isEmpty() && noRating) {
+            return isSameTags;
         } else if (categoryCodes.isEmpty()) {
             return isSameRating && isSameTags;
+        } else if (tags.isEmpty()) {
+            return isSameRating && isSameCategoryCodes;
+        } else if (noRating) {
+            return isSameTags && isSameCategoryCodes;
         } else {
             return isSameRating && isSameCategoryCodes && isSameTags;
         }
