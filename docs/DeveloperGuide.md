@@ -673,18 +673,22 @@ Use case ends.
 
 * 2a. The list is empty.
 
-  Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+
+      Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
 
+      Use case resumes at step 4.
+      
 **Use case: Remove existing tag of a person**
 
 **MSS**
@@ -703,7 +707,9 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
 
 **Use case: Filter persons by tag**
 
@@ -719,16 +725,20 @@ Use case ends.
 * 2a. The list is empty. Use case ends.
 
 * 3a. The given tag is invalid.
-    * 3a1. Socius shows an empty list. Use case ends.
+    * 3a1. Socius shows an empty list.
+
+      Use case ends.
 
 **Use case: Add remarks for a person**
 
 **MSS**
 
-1. User requests to list persons
-2. Socius shows a list of persons
-3. User requests to add remarks for a specific person in the list
-4. Socius adds remarks for the person Use case ends.
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to add remarks for a specific person in the list.
+4. Socius adds remarks for the person.
+
+      Use case ends.
 
 **Extensions**
 
@@ -737,14 +747,69 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+      
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+
+**Use case: Mass tag multiple persons**
+
+**MSS**
+
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to tag everyone in the list.
+4. Socius adds tag for the list of persons.
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. 
+      Use case ends.
+      
+* 3a. The format of the request is invalid.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+
+      Use case resumes at step 4.
+      
+**Use case: View tutorial group statistics**
+
+**MSS**
+
+1. User requests to list persons.
+2. Socius shows a list of persons.
+3. User requests to view statistics of a particular tutorial group.
+4. Socius displays statistics of the tutorial group.
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+      Use case ends.
+      
+* 3a. The tutorial group does not exist.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+
+      Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. 
 
-*{More to be added}*
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
