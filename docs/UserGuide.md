@@ -84,7 +84,7 @@ Format: `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​`
 
 * `PHONE_NUMBER` accepts any length to allow for phone formats from different countries.
 * `NAME` has a character limit of 70 characters.
-* `Name` is case-sensitive as John Doe and john doe will be treated as different people
+* `NAME` is case-sensitive as John Doe and john doe will be treated as different people
 * `ADDRESS` is truncated by an ellipsis if the contents cannot fit in one line.
 * Duplicate tags are ignored.
 
