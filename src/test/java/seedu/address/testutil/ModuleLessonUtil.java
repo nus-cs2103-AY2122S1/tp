@@ -20,7 +20,9 @@ public class ModuleLessonUtil {
         StringBuilder sb = new StringBuilder();
         String dayAsInt = moduleLesson.getDay().getDayAsIntString();
 
-        sb.append(PREFIX_MODULE_CODE).append(moduleLesson.getModuleCode().toString()).append(" ");
+        String moduleCode = moduleLesson.getModuleCode().toString();
+        moduleCode = moduleCode.substring(1, moduleCode.length() - 1);
+        sb.append(PREFIX_MODULE_CODE).append(moduleCode).append(" ");
         sb.append(PREFIX_LESSON_DAY).append(dayAsInt).append(" ");
         sb.append(PREFIX_LESSON_TIME).append(moduleLesson.getLessonStartTime().toString()).append(" ")
                 .append(moduleLesson.getLessonEndTime().toString()).append(" ");
@@ -33,7 +35,8 @@ public class ModuleLessonUtil {
     public static String getEditLessonDescriptorDetails(EditModuleLessonCommand.EditLessonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getModuleCode()
-                .ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE).append(moduleCode).append(" "));
+                .ifPresent(moduleCode -> sb.append(PREFIX_MODULE_CODE)
+                        .append(moduleCode.toString().substring(1, moduleCode.toString().length() - 1)).append(" "));
         descriptor.getLessonDay()
                 .ifPresent(lessonDay -> sb.append(PREFIX_LESSON_DAY).append(lessonDay.getDayAsIntString()).append(" "));
         descriptor.getLessonStartTime()
