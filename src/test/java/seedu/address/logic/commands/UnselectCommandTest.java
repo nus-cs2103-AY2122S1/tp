@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class UnselectCommandTest {
     }
 
     @Test
-    public void execute_validIndexNonEmptySelectedList_success() {
+    public void execute_inclusionValidIndexNonEmptySelectedList_success() {
         Person firstToUnselect = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondToUnselect = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         List<Index> indexes = new ArrayList<>();
@@ -56,6 +57,33 @@ public class UnselectCommandTest {
         String expectedMessage = "2 persons unselected!";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model.addSelected(persons);
+
+        assertCommandSuccess(unselectCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_exclusionValidIndexNonEmptySelectedList_success() {
+        Person firstToUnselect = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondToUnselect = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person toNotUnselect = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        List<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_THIRD_PERSON);
+        List<Person> persons = new ArrayList<>();
+        persons.add(firstToUnselect);
+        persons.add(secondToUnselect);
+        persons.add(toNotUnselect);
+
+        List<Person> remainSelectedPersons = new ArrayList<>();
+        remainSelectedPersons.add(toNotUnselect);
+
+
+        UnselectCommand unselectCommand = new UnselectCommand(indexes, false);
+
+        String expectedMessage = "2 persons unselected!";
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addSelected(remainSelectedPersons);
         model.addSelected(persons);
 
         assertCommandSuccess(unselectCommand, model, expectedMessage, expectedModel);
