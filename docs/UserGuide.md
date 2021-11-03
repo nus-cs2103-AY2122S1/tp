@@ -350,19 +350,21 @@ A lesson **must** have the following fields: a start date, a time range, a lesso
 A lesson can be categorised into 2 types: 
 1. A **weekly** recurring lesson
 2. A one-off makeup lesson.
+   
+In the future, you can also customise your own recurrence rule for your recurring lessons.
 
 A lesson can be identified by the index number shown in the lesson list of the student.
 
 The essential fields for a lesson are indicated by the presence of the '*'. The rest of the fields are optional.
 
 Field | Prefix | Constraints | Examples | 
-------------------|-------|-----------| --------| 
+-----------|-------|-----------| --------| 
 *Start date |`date/`| Dates follow the `dd MMM yyyy` format– a single or double digit day, a three-letter case-insensitive abbreviation of the month and a four-digit year, with spaces in-between. It must be a valid date for the year."|`date/20 jan 2022`<br/>`date/4 nov 2000`|
 *Time range        | `time/` | Lesson time range should be formatted as HHmm-HHmm and the lesson should be conducted between 8am and 10pm, inclusive.<br/> | `time/1100-1300`<br/>`time/2000-2130` |
 *Subject          | `subject/` | Subject should only contain alphanumeric characters and spaces cannot be left blank. | `subject/Math`<br/> `subject/Language Arts` |
 *Lesson rate      | `rates/` | See [this note](#information_source-note-about-monetary-fieldsbr).<br/>The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.| `rates/37.50`<br/>`rates/40`|
 Recurrence        | `recurring/` | This prefix takes in an optional parameter, end date, that signifies the end of the recurrence. The end date cannot be earlier than the start date. | `recurring/`<br/>`recurring/30 Nov 2100` |
-Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/Textbook Page 4`<br/> `hw/Assignment 5` |
+Homework         | `hw/` | Homework description can have a maximum of 50 characters and cannot be left blank. | `hw/TB Pg 4`<br/> `hw/Assignment 5` |
 Outstanding fees  | `f/` | See [this note](#information_source-note-about-monetary-fieldsbr). | `f/50` |
 
 * Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit). 
