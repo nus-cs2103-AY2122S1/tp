@@ -30,7 +30,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Anime> {
     @Override
     public boolean test(Anime anime) {
         return names.stream()
-                .anyMatch(name -> StringUtil.containsWordIgnoreCase(anime.getName().fullName, name.fullName));
+                .anyMatch(name -> StringUtil.containsPhraseIgnoreCase(anime.getName().fullName, name.fullName));
     }
 
     @Override
