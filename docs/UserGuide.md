@@ -87,7 +87,7 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 1. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. You can use
    the [`clear`](#48-clearing-all-data) command to purge all data. <br>
-   ![Ui](images/UiHelpCommand.png)
+   ![Ui](images/UIStartup.png)
 
 1. Refer to the [Features](#4-features) below for details of each command.
 
