@@ -42,7 +42,7 @@ public class StaffIndividualStatisticsCommandTest {
     }
 
     @Test
-    public void execute_Empty() {
+    public void execute_noStaffSatisfies() {
         StaffIndividualStatisticsCommand testCommand = createCommand(1, 10, new FieldStub(2));
         assertCommandFailure(testCommand, model, StaffIndividualStatisticsCommand.NO_STAFF_SATISFIES_QUERY);
 
