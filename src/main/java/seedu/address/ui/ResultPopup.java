@@ -15,7 +15,7 @@ public class ResultPopup extends UiPart<Region> {
 
     private static final String FXML = "ResultPopup.fxml";
 
-    private static final int POPUP_DISPLAY_DURATION_SECONDS = 3;
+    private static final int POPUP_DISPLAY_DURATION_SECONDS = 6;
 
     private Stage primaryStage;
 
