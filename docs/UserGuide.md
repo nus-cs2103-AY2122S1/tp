@@ -178,7 +178,10 @@ Executing any of the commands in this section will bring you to the students int
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-A student can be identified by the student index number shown in the displayed list of students.
+  <ul>
+    <li>A student can be identified by the student index number shown in the displayed list of students.</li>
+    <li>Fields that are empty will not be displayed.</li>
+  </ul>
 </div>
 
 <table id="student-param-table">
@@ -188,7 +191,7 @@ A student can be identified by the student index number shown in the displayed l
             <th style="text-align:center">Field</th>
             <th style="text-align:center">Prefix</th>
             <th style="text-align:center">Constraint(s)</th>
-            <th style="text-align:center">Example(s)</th>
+            <th style="text-align:center">Example</th>
         </tr>
     </thead>
     <tbody>
@@ -229,7 +232,7 @@ A student can be identified by the student index number shown in the displayed l
                 <li><strong>At least one</strong> of the contact fields must be present.</li>
                 <li>Must be of the format <em>local-part@domain</em> and adhere to the following constraints:</li> 
                   <ul>
-                    <li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li>
+                    <li>The <em>local-part</em> should only contain alphanumeric characters and these special characters <em>+_.-</em>. The <em>local-part</em> may not start or end with any special characters.</li>
                     <li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.</li>
                     <li>The domain name must:
                       <ul>
@@ -285,6 +288,13 @@ A student can be identified by the student index number shown in the displayed l
             <td><code>t/</code></td>
             <td>Must be alphanumeric characters.</td>
             <td><code>t/unpaid</code></td>
+        </tr>
+        <tr>
+            <td>View Only</td>
+            <td>Outstanding Fees</td>
+            <td>Not Applicable.</td>
+            <td>Can only be changed with valid executions of <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands. See <a href="#managing-fees">Managing Fees</a> for more details.</td>
+            <td>Not Applicable</td>
         </tr>
     </tbody>
 </table>
