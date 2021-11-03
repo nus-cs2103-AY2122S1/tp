@@ -47,14 +47,13 @@ Detailed notes about the command format can be found [here](#features).
 
 |Component|Description|
 |---------|-----------|
-|Command word|The word that specifies the action to execute.|
-|Preamble| The text before the first valid parameter prefix in the command. The preamble may or may not be empty depending on the command.|
-|Parameter prefix| The keyword that differentiates parameters from one another. All prefixes end with a `/`.|
+|Command word|The word that specifies which action you want TAB to execute.|
+|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student or lesson indices for commands that require them. The preamble may or may not be empty depending on the command.|
+|Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
 |Parameter| An input provided by the user for the execution of the command.|
 
 * Each parameter prefix is separated from the others with a space.<br/>
-  Using the parameter prefix for tag, `t/`, as an example,
-`t/t/` means the parameter value of the 1st `t/` is `t/` and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` means there is no parameter value for both `t/`s and TAB will interpret this as 2 empty tags. (See [Managing students](#managing-students) for more details)
+  `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
   
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
