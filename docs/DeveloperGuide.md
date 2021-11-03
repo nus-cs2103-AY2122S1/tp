@@ -12,7 +12,7 @@ The [Requirements](https://ay2122s1-cs2103t-f13-4.github.io/tp/DeveloperGuide.ht
 
 Relevant non-trivial terminologies used are explained in the [Glossary](#glossary) Section.
 
-Here are the interpretations of symbols and formatting used in this document: 
+Here are the interpretations of symbols and formatting used in this document:
 
 * `highlights` represents code.
 * :information_source: indicates additional information.
@@ -186,8 +186,8 @@ The add lesson operation is facilitated by `AddLessonCommand` and `AddLessonComm
 
 The add lesson feature is relative similar to that of the original add student feature. The differences lay in the properties which a lesson could hold as compared to a student. See below for the properties of a lesson:
 
-- `GRADE`: 
-  1. This is a common property between the student class and the lesson class. 
+- `GRADE`:
+  1. This is a common property between the student class and the lesson class.
   2. When enrolling a student for a particular lesson, compatible and matching `GRADE` between student and lesson will be required to successful enrolment.
   3. In the current version of implementation, `GRADE`'s input constraints are:
      1. Primary School: "P`X`" <where `X` can be 1, 2, 3, 4, 5, 6>.
@@ -259,7 +259,7 @@ The following sequence diagram shows how add lesson operation works:
     * Cons:
       * Harder to parse, as the `-l` flag is space separated from the command keyword.
       * User might forget to include the `-l` flag, accidentally adding a student instead.
-    
+
 * Command Informational Field Style
   * Option 1: `LESSON_CODE`
     * Pros:
@@ -278,15 +278,15 @@ The following sequence diagram shows how add lesson operation works:
 
 Command Word Style: Option 1 (`add-l`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, there is not much significance in having an especially pretty command syntax as efficiency(i.e. entering commands fast and correctly) is desired. At the same time, the accidental addition of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`add -l`) should only be implemented once an undo/redo feature is implemented.
 
-Command Informational Field Style: Option 2 (`s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, similar behaviour with the add student command would help the user to pick up the command syntax easier since there are lesser things to remember. 
+Command Informational Field Style: Option 2 (`s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, similar behaviour with the add student command would help the user to pick up the command syntax easier since there are lesser things to remember.
 
 ### Delete Lesson feature
 
 #### Implementation
 
-The delete lesson operation is facilitated by `DeleteLessonCommand` and `DeleteLessonCommandParser`. `DeleteLessonCommandParser` first parses the user input to extract out the command and the arguments, after which the `DeleteLessonCommand#execute(model)` method is invoked in the `LogicManager` class to delete the lesson.  
+The delete lesson operation is facilitated by `DeleteLessonCommand` and `DeleteLessonCommandParser`. `DeleteLessonCommandParser` first parses the user input to extract out the command and the arguments, after which the `DeleteLessonCommand#execute(model)` method is invoked in the `LogicManager` class to delete the lesson.
 
-The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before deletion. Given below is an example usage scenario and how the delete lesson operation behaves.  
+The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before deletion. Given below is an example usage scenario and how the delete lesson operation behaves.
 _Note: For this usage, we only consider the main success scenario (i.e. the lesson specified exists as well as the students enrolled to the lesson)._
 
 <u>Step 1:</u>
@@ -329,24 +329,24 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-<ins>Aspect: How to design the syntax</ins>  
+<ins>Aspect: How to design the syntax</ins>
 * Option 1: `delete-l LESSON_INDEX`
   * Pros:
     * Non-space-separated word allows easier parsing of command word
     * Unique command word allows command keys to be easily distinguished
-  * Cons: 
+  * Cons:
     * Redundant creation of a new command word, when there is an existing `delete STUDENT_INDEX` command.
     * Might not be as intuitive as there are now 2 delete commands with different keywords.
 * Option 2: `delete -l LESSON_INDEX`
-  * Pros: 
+  * Pros:
     * More intuitive, `-l` flag can be used to determine that a lesson is to be deleted, while omitting it means a student is to be deleted.
-  * Cons: 
+  * Cons:
     * Harder to parse, as the `-l` flag is space separated from the command keyword.
     * User might forget to include the `-l` flag, accidentally deleting a student instead.
 
 <ins>Decision</ins>
 
-Ultimately, Option 1 (`delete-l LESSON_INDEX`) is chosen as it requires lesser modification to the existing code base parsing utilities.  
+Ultimately, Option 1 (`delete-l LESSON_INDEX`) is chosen as it requires lesser modification to the existing code base parsing utilities.
 Additionally, there is not much significance in having an especially pretty command syntax as efficiency (i.e. entering commands fast and correctly) is desired. At the same time, the accidental deletion of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`delete -l LESSON_INDEX`) should only be implemented once an undo/redo feature is implemented.
 
 ### Enroll feature
@@ -430,29 +430,29 @@ Our team's main goal is to ensure that whatever the user does and types is done 
 
 #### Implementation
 
-The unenroll operation is facilitated by the `UnenrollCommand` and `UnenrollcommandParser`. `UnenrollCommandParser` 
-first parses the user input to extract out the command and the arguments, after which the 
-`UnenrollCommand#execute(model)` method is invoked in the `LogicManager` class to unenroll the specified student from 
+The unenroll operation is facilitated by the `UnenrollCommand` and `UnenrollcommandParser`. `UnenrollCommandParser`
+first parses the user input to extract out the command and the arguments, after which the
+`UnenrollCommand#execute(model)` method is invoked in the `LogicManager` class to unenroll the specified student from
 the specified lesson.
 
 The unenroll feature removes the student from the list of students in the specified lesson object. Subsequently, the
-lesson is removed from the set of lessons in the specified student object. The student must be enrolled in the lesson 
+lesson is removed from the set of lessons in the specified student object. The student must be enrolled in the lesson
 in order for the unenroll operation to be successful.
 
 Given below is an example usage scenario and how the unenroll operation works.
 
 <ins>Step 1:</ins>
 
-User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
+User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a
 lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
 
 ![UnenrollState0](images/DeveloperGuideImage/UnenrollState0.png)
 
-Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1. 
+Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1.
 
 <ins>Step 2:</ins>
 
-The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
+The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few
 internal steps.
 
 * The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
@@ -492,10 +492,10 @@ The following activity diagram summarizes what happens when a user executes the 
 
 <ins>Decision</ins>
 
-Ultimately, Option 2 (`unenroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as it is faster and easier to type. 
-This makes our app faster and easier to use. Additionally, there is not much significance in specifying the lesson 
-through a lesson code as although it cleary specifies the lesson, the chances of the user keying in the wrong index and 
-subsequently unenrolling the student from the wrong lesson is not high. Even if it does happen, the short command 
+Ultimately, Option 2 (`unenroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as it is faster and easier to type.
+This makes our app faster and easier to use. Additionally, there is not much significance in specifying the lesson
+through a lesson code as although it cleary specifies the lesson, the chances of the user keying in the wrong index and
+subsequently unenrolling the student from the wrong lesson is not high. Even if it does happen, the short command
 syntax should make it easy to fix the mistake.
 
 ### Filter feature
@@ -529,7 +529,7 @@ the `FilterCommand#execute(model)` method to be called which then filters the re
 
 <u>Step 3:</u>
 
-The user executes `list` to get back the initial lists before the filter. 
+The user executes `list` to get back the initial lists before the filter.
 
 The following sequence diagram shows how the filter operation works:
 
@@ -552,7 +552,7 @@ The following activity diagram summarizes what happens when a user executes the 
 * Option 2: 3 separate filter commands, one for each scenario stated above
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
-    
+
 <u>Design</u>
 Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
 handle multiple scenarios would be less daunting to use.
@@ -941,7 +941,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 * 2a. TuitiONE detects an error in entered command.
     * 2a1. TuitiONE requests CSO to input a valid command.
-    * 2a2. CSO enters new command. 
+    * 2a2. CSO enters new command.
       Steps 2a1-2a2 are repeated until the data entered are correct.
 
     Use case resumes at step 3.
@@ -1037,7 +1037,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 2. TuitiONE provides the basic commands, as well as the user guide link.
 
     Use case ends.
-    
+
 #### UC13: View Lesson Roster
 
 **MSS**
@@ -1059,7 +1059,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 * 2b. There are no students enrolled in the lesson.
     * 2b1. TuitiONE informs that there are no students in the lesson roster.
-    
+
     Use case ends.
 
 ### Non-Functional Requirements
