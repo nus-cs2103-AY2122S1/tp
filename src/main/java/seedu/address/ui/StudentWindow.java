@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -113,8 +114,14 @@ public class StudentWindow extends UiPart<Stage> {
             Label markToAdd = new Label(SESSION_LABEL + i + SPACE + mark.name() + SPACE);
             marks.getChildren().add(markToAdd);
         }
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+        stage.show();
+        stage.centerOnScreen();
+        stage.focusedProperty().addListener((ov, onHidden, onShown) -> {
+            if (!stage.isFocused()) {
+                Platform.runLater(stage::close);
+            }
+        });
     }
 
     /**
