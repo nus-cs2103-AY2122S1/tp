@@ -14,6 +14,7 @@ title: Developer Guide
   * [Common Classes](#common-classes)
 * [Implementation](#implementation)
   * [AddCommand](#addcommand)
+  * [EditCommand](#editcommand)
   * [GetCommand](#getcommand)
   * [SortCommand](#sortcommand)
   * [AttendanceCommand](#attendancecommand)
@@ -181,8 +182,8 @@ This command adds a new `Student` to `AcademyDirectory`.
 `NAME` is a sufficiently unique field to identify a unique instance of a student as for the purposes of `AcademyDirectory` is scoped to 
 service CS1101S Avengers, each `Studio` has approximately 10 `Students`, with the probability of a `NAME` collision being sufficiently minimised.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student`s 
-do not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student` 
+does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
 </div>
 
 ### EditCommand
@@ -195,8 +196,8 @@ This command edits a `Student`'s personal details such as their `NAME`, `PHONE`,
 Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
 unless the `NAME` is the same  as the `Student` being edited.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student`s 
-do not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student` 
+does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
 </div>
 
 
