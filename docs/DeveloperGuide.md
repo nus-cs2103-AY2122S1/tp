@@ -597,6 +597,7 @@ Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikel
 |🟡&nbsp;Medium|visual student|see more graphics|understand the program faster|
 |🟡 Medium|unorganized student|able to organise my modules/schedule easily|keeps things on schedule so i wont lack behind|
 |🟡 Medium|impatient student|have a responsive interface|have a good user experience|
+|🟡 Medium|impatient student|customise my commands to keep them short and simple|have a better user experience|
 |🟡 Medium|tutor|track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
 |🟡 Medium|tutor|track students with varying background|better spread out students with similar background into different groups|
 |🟡 Medium|student|find people with different skillsets|learn from others|
