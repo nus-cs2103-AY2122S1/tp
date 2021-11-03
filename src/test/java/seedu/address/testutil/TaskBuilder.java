@@ -39,6 +39,9 @@ public class TaskBuilder {
         isDueSoon = new SimpleBooleanProperty();
     }
 
+    /**
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
+     */
     public TaskBuilder(Task taskToCopy) {
         taskName = taskToCopy.getTaskName();
         date = taskToCopy.getDate();
@@ -87,6 +90,11 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Returns a {@code Task} with details of TaskBuilder.
+     *
+     * @return a Task object.
+     */
     public Task build() {
         Task task = new Task(taskName, date, time, venue);
         if (isDone.getValue()) {
