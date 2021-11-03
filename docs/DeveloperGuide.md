@@ -164,7 +164,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add applicant feature
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** <br>
+
+* All commands that modify the `ApplicantBook` or `PositionBook` using the `undo` command. This is due to the introduction of the `Memento` class which captures the 
+  existing model and success message from a command and stands by in the event of an `undo` scenario.
+  
+* All such commands will have a :heavy_check_mark: symbol beside it. Others will have no symbol displayed beside it.
+
+* Such commands include add-applicant, add-position, delete-applicant & delete-position.
+
+</div>
+
+### Add applicant feature :heavy_check_mark:
 
 The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
 commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
@@ -174,8 +187,7 @@ Title of Position Applying to), parsed straight from the user input.
 The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
 applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
 `positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
-`applicantBook`, using the `Model#addApplicantWithParticulars` method. Meanwhile, the `Memento` class captures the 
-existing model and success message from this command and stands by in the event of an `undo` scenario.
+`applicantBook`, using the `Model#addApplicantWithParticulars` method.
 
 Given below is an example usage scenario and how the add applicant feature behaves at each step.
 Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
@@ -217,7 +229,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Pros: Will reduce the usage of a new class, thereby reducing coupling.
     * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
     
-### Delete applicant feature
+### Delete applicant feature :heavy_check_mark:
 
 #### Implementation
 
@@ -228,7 +240,6 @@ takes in is the index position of the applicant in the `ApplicantBook`. However,
 The `DeleteApplicantCommand#execute(Model model)` method will use the `Model#getFilteredApplicantList()` to indirectly
 check whether the applicant exists by checking the size of the list against the index provided. The applicant to be deleted is then
 obtained from the list via the standard `List#get()` and is removed from the model via `Model#deleteApplicant()`.
-Meanwhile, the `Memento` class captures the existing model and success message from this command and stands by in the event of an `undo` scenario.
 
 Given below is an example usage scenario and how the delete applicant feature behaves at each step.
 Preconditions: The app is already launched and the applicant to be deleted exists in MTR.
@@ -252,7 +263,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 * **Alternative 2:** [to be added]
 
-### Edit applicant feature
+### Edit applicant feature :heavy_check_mark:
 
 #### Implementation
 The implementation of the edit applicant feature uses the `EditApplicantCommand` class. A unique attribute for this 
@@ -262,7 +273,7 @@ The `EditApplicantCommand` method takes in a non-null index and non-null descrip
 It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
 It also has guard clauses verifying that the description has a valid `Title` which is a valid position title in the current `positionBook`. A final check is done to check that the applicant
 with the new description is not already existing in MTR. Once these criteria are met, the model then updates the target applicant with the new description via the
-`Model#setApplicant` and `Model#updateFilteredApplicantList` methods.
+`Model#setApplicant` and `Model#updateFilteredApplicantList` methods. <br>
 
 Given below is an example usage scenario and how the edit applicant feature behaves at each step. <br>
 Preconditions: The app is already launched, the target applicant exists.
@@ -301,7 +312,7 @@ This `Predicate` is constructed from the filters specified whenever the `filter-
 
 The `FilterApplicantCommand#execute()` method has guard clauses to check that the contents of the input are valid through the
 `FilterApplicantDescriptor#hasAnyFilter()` method. If contents are valid, it uses mapping via the `FilterApplicantCommand#applicantMatchesFilter`
-method to filter out all applicants matching the given criteria. A new filtered list is now displayed on the MTR UI.
+method to filter out all applicants matching the given criteria. A new filtered list is now displayed on the MTR UI. <br>
 
 Given below is an example usage scenario of the applicant filter feature. <br>
 Preconditions: Applicant exists in MTR and valid filters provided. 
@@ -341,34 +352,60 @@ It is also used to in the validation of the filtering criteria.
 
 **Aspect: Filtering the inputs**
 
-* **Alternative 1(current choice)**: Separate class to handle parsing of filtering inputs.
+* **Alternative 1(current choice):** Separate class to handle parsing of filtering inputs.
     * Pros: Allows class with methods catered better to our needs (e.g. use of Optional so that fields not filtered by are untouched)
     * Cons: More time-consuming to create from scratch and creation of more test cases.
 
-* **Alternative 2**: Modifying/improving original AB3 `FindCommand` and `FindCommandParser`.
+* **Alternative 2:** Modifying/improving original AB3 `FindCommand` and `FindCommandParser`.
     * Pros: Base code already exists and modifying it would take less time. Test cases also require little modification.
     * Cons: Requires understanding base of the code and high coupling exists.
 
 *{More to be added}*
 
 
-### Mark/update applicant's status feature
+### Mark/update applicant's status feature :heavy_check_mark:
 The mark feature is achieved using the `MarkApplicantStatusCommand` class. It is a simple command which only modifies the 
-application status of the applicant for a particular position.
+application status of the applicant for a particular position. It does so by taking in the applicant to be modified and the updated `ApplicationStatus`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There are currently only 3 states for applicants: `Accepted`, `Rejected` and `Pending`.
-
-
-
 </div>
 
+The `MarkApplicantStatusCommand#execute` first confirms the existence of the target applicant to be marked using guard clauses.
+If the applicant exists, the applicant is updated with the new application status and the model replaces this applicant.
+
+Given below is an example usage scenario of the mark applicant feature. <br>
+Preconditions: Applicant exists in MTR and valid mark status given.
+
+Step 1. User inputs `mark john doe status/rejected`. The app parser stores the target applicant name and new `ApplicationStatus` internally in the `MarkApplicantStatusCommand` as private fields.
+
+Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoking the `Model#getApplicantByNameIgnoreCase` method.
+
+Step 3. After verifying that the applicant exists, a new applicant is created via `Applicant#markAs`, and the model calls the `Model#setApplicant` method replaces the existing applicant with the created one.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: Accessing the applicant's application status**
+
+* **Alternative 1 (current choice):** Have application status as an enumeration under the `Application` class which serves as an association class between `Applicant` and `Position`.
+    * Pros: Simplifies code base since it is accessible via the `Application` class directly.
+    * Cons: Higher coupling for `Application` class.
+
+* **Alternative 2:** Have application status in a separate class with enumerations inside it.
+    * Pros: Separates code logic from Application, easier to digest and manipulate.
+    * Cons: Increases complexity of code. Separate class has little usage.
+
 ### List applicants feature
+The list applicants feature is 
 
-### Add position feature
 
-### Delete position feature
+### Add position feature :heavy_check_mark:
 
-### Edit position feature
+### Delete position feature :heavy_check_mark:
+
+### Edit position feature :heavy_check_mark:
 
 ### List positions feature
 
@@ -417,7 +454,7 @@ Step 5. Any command the user executes next simply refreshes the current state to
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Proposed Implementation
 
