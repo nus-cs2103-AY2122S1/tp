@@ -33,7 +33,7 @@ public class StudentStatistics {
     /**
      * Returns a distribution of student's scores for the assessment.
      */
-    private Map<String, Number> getScoreDistribution() {
+    public Map<String, Number> getScoreDistribution() {
         Map<String, Number> distribution = new TreeMap<>();
         scoreMap.forEach((assessment, score) -> distribution.put(assessment.getName(), score.getNumericValue()));
         return distribution;
