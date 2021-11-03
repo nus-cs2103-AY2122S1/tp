@@ -1,7 +1,7 @@
 * {
     -fx-main-bg-color: #22272d;
     -fx-secondary-bg-color: #2d333b;
-    -fx-lab-result-bg-color: #444c56;
+    -fx-light-bg-color: #444c56;
 }
 
 .background {
@@ -233,7 +233,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: -fx-light-bg-color;
 }
 
 .button:pressed, .button:default:hover:pressed {
@@ -323,7 +323,7 @@
 }
 
 #labCardPane {
-    -fx-background-color: -fx-lab-result-bg-color;
+    -fx-background-color: -fx-light-bg-color;
     -fx-border-width: 0;
 }
 
