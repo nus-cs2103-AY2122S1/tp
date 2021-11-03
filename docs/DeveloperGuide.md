@@ -14,6 +14,7 @@ title: Developer Guide
   * [Common Classes](#common-classes)
 * [Implementation](#implementation)
   * [AddCommand](#addcommand)
+  * [EditCommand(#editcommand)
   * [GetCommand](#getcommand)
   * [SortCommand](#sortcommand)
   * [AttendanceCommand](#attendancecommand)
