@@ -19,6 +19,7 @@ import seedu.placebook.model.person.Address;
 import seedu.placebook.model.person.UniquePersonList;
 import seedu.placebook.model.schedule.Appointment;
 import seedu.placebook.model.schedule.TimePeriod;
+import seedu.placebook.ui.Ui;
 
 public class EditAppCommand extends Command {
 
@@ -58,7 +59,7 @@ public class EditAppCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, Ui ui) throws CommandException {
         requireNonNull(model);
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
