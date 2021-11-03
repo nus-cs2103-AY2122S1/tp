@@ -1,5 +1,6 @@
 package seedu.academydirectory.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.commons.core.GuiSettings;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.model.student.NameContainsKeywordsPredicate;
 import seedu.academydirectory.testutil.AcademyDirectoryBuilder;
 
@@ -91,6 +93,15 @@ public class ModelManagerTest {
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void setAndGetAdditionalVMTest() {
+        AdditionalViewModel additionalViewModel = modelManager.getAdditionalViewModel();
+        assertDoesNotThrow(() -> modelManager.setAdditionalViewType(AdditionalViewType.VIEW));
+        assertDoesNotThrow(() -> modelManager.setAdditionalInfo(AdditionalInfo.of("String")));
+
+        modelManager.setAdditionalViewType(AdditionalViewType.VIEW);
     }
 
     @Test

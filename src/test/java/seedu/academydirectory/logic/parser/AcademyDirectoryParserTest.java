@@ -24,6 +24,7 @@ import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
+import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.InformationContainsKeywordsPredicate;
 import seedu.academydirectory.model.student.Student;
@@ -95,6 +96,11 @@ public class AcademyDirectoryParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " grade") instanceof HelpCommand);
         assertThrows(ParseException.class, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " me"));
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " 2") instanceof ViewCommand);
     }
 
     @Test
