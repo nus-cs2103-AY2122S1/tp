@@ -97,10 +97,10 @@ However, time strictly follows the `24 hours` format.
 
 | Acceptable Formats | Examples |
 | ----------- | ----------- |
-| yyyy-MM-dd HH:mm | 2021-09-19 13:00 |
-| dd-MM-yyyy HH:mm | 19-09-2021 13:00 |
-| HH:mm yyyy-MM-dd | 14:00 2021-11-10 |
-| HH:mm dd-MM-yyyy | 14:00 10-11-2021 |
+| yyyy-mm-dd hh:mm | 2021-09-19 13:00 |
+| dd-mm-yyyy hh:mm | 19-09-2021 13:00 |
+| hh:mm yyyy-mm-dd | 14:00 2021-11-10 |
+| hh:mm dd-mm-yyyy | 14:00 10-11-2021 |
 
 </div>
 
