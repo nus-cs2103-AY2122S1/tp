@@ -19,11 +19,11 @@ import seedu.placebook.ui.Ui;
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class ListCommandTest {
+    // default positive confirmation ui. This will not affect ListCommand
+    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     private Model model;
     private Model expectedModel;
-    // default positive confirmation ui. This will not affect ListCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @BeforeEach
     public void setUp() {

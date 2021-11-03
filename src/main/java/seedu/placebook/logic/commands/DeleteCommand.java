@@ -10,7 +10,6 @@ import seedu.placebook.logic.commands.exceptions.CommandException;
 import seedu.placebook.model.Model;
 import seedu.placebook.model.person.Person;
 import seedu.placebook.ui.Ui;
-import seedu.placebook.ui.UiManager;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -50,7 +49,6 @@ public class DeleteCommand extends Command {
 
         if (ui.showDeleteDialogAndWait(relatedAppointment)) {
             model.deletePerson(personToDelete);
-            model.removePersonFromAppointments(personToDelete);
             model.updateState();
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         } else {

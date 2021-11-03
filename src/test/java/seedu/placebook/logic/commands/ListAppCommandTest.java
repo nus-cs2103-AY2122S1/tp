@@ -16,11 +16,11 @@ import seedu.placebook.testutil.TypicalPersons;
 import seedu.placebook.ui.Ui;
 
 class ListAppCommandTest {
+    // default positive confirmation ui. This will not affect ListAppCommand
+    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     private Model model;
     private Model expectedModel;
-    // default positive confirmation ui. This will not affect ListAppCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @BeforeEach
     public void setUp() {

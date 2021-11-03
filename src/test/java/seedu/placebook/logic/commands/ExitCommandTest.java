@@ -11,10 +11,11 @@ import seedu.placebook.model.ModelManager;
 import seedu.placebook.ui.Ui;
 
 public class ExitCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
     // default positive confirmation ui. This will not affect ExitCommand
     private static final Ui uiStub = UiStubFactory.getUiStub(true);
+
+    private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_exit_success() {

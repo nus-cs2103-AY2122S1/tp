@@ -39,14 +39,14 @@ import seedu.placebook.ui.Ui;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
+    // default positive confirmation ui. This will not affect EditCommand
+    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     private final UniquePersonList editTestPersonList = new UniquePersonList();
 
     private Model model;
     private AddressBook testAddressbook;
     private Schedule testSchedule;
-    // default positive confirmation ui. This will not affect EditCommand
-    private static final Ui uiStub = UiStubFactory.getUiStub(true);
 
     @BeforeEach
     public void setUp() {

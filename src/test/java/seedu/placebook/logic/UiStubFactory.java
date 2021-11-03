@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import seedu.placebook.ui.Ui;
 
 public class UiStubFactory {
-    private static class positiveConfirmationUi implements Ui {
+    private static class PositiveConfirmationUi implements Ui {
 
         @Override
         public void start(Stage primaryStage) {
@@ -17,7 +17,7 @@ public class UiStubFactory {
         }
     }
 
-    private static class negativeConfirmationUi implements Ui {
+    private static class NegativeConfirmationUi implements Ui {
 
         @Override
         public void start(Stage primaryStage) {
@@ -30,8 +30,8 @@ public class UiStubFactory {
         }
     }
 
-    private static final Ui POSITIVE_CONFIRMATION_UI = new positiveConfirmationUi();
-    private static final Ui NEGATIVE_CONFIRMATION_UI = new negativeConfirmationUi();
+    private static final Ui POSITIVE_CONFIRMATION_UI = new PositiveConfirmationUi();
+    private static final Ui NEGATIVE_CONFIRMATION_UI = new NegativeConfirmationUi();
 
     public static Ui getUiStub(boolean expectedConfirmation) {
         if (expectedConfirmation) {

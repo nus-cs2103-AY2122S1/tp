@@ -24,10 +24,11 @@ import seedu.placebook.model.person.PersonHasTagsPredicate;
 import seedu.placebook.ui.Ui;
 
 public class FindTagsCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
     // default positive confirmation ui. This will not affect FindTagsCommand
     private static final Ui uiStub = UiStubFactory.getUiStub(true);
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
 
     @Test
     public void equals() {

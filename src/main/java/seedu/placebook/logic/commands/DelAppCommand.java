@@ -10,7 +10,6 @@ import seedu.placebook.logic.commands.exceptions.CommandException;
 import seedu.placebook.model.Model;
 import seedu.placebook.model.schedule.Appointment;
 import seedu.placebook.ui.Ui;
-import seedu.placebook.ui.UiManager;
 
 /**
  * Deletes an existing appointment in the schedule

@@ -11,10 +11,11 @@ import seedu.placebook.model.ModelManager;
 import seedu.placebook.ui.Ui;
 
 public class HelpCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
     // default positive confirmation ui. This will not affect HelpCommand
     private static final Ui uiStub = UiStubFactory.getUiStub(true);
+
+    private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_help_success() {
