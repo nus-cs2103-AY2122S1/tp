@@ -316,10 +316,17 @@ Expected Output:
 
 ### 4.5 Find
 
-Finds a client or product in Sellah, based on the name previously specified in `-n` when a client or product was added.
+Finds a client or product in Sellah based on the name. If there are no matching name, Sellah will show an empty list.
 
-An error message will be displayed if the format of a parameter is incorrect. The name you provided must fully match
-(case-insensitive) the name of the client or product in Sellah, otherwise you will receive an error message.
+An error message will be displayed if the format of a parameter is incorrect. 
+
+The name you provide must fully match (case-insensitive) the name of the client or product in Sellah.
+
+Example : `find -c ben` will match with `Ben`, but will not match with `Benson`.
+
+If multiple keywords are specified, any name matching the keywords will be displayed.
+
+Example: `find -c alice ben charlie` will match with `alice`, `ben`, and `charlie`.
 
 #### 4.5.1 Finding a Client
 
@@ -345,8 +352,8 @@ Expected Output:
 
 ### 4.6 List
 
-Displays a list of all the clients or products in Sellah. If there are no clients or products, a message will inform you
-that Sellah has no clients or product, depending on whether you are listing client or product.
+Displays a list of all the clients or products in Sellah. If there are no clients or products, Sellah will show
+an empty list.
 
 An error message will be displayed if the format of a parameter is incorrect.
 
