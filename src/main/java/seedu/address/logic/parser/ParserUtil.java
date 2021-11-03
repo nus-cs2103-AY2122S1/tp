@@ -371,6 +371,29 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code args} into {@code PersonContainsFieldsPredicate} which tests a person for all
+     * of the qualifiers of the predicate except for name.
+     * @throws ParseException Throws parse exception when the input is not something needed.
+     */
+    public static PersonContainsFieldsPredicate testByAllFieldsExceptName(ArgumentMultimap argMultimap)
+            throws ParseException {
+        requireNonNull(argMultimap);
+        PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
+        try {
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_SALARY), Salary::new);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_STATUS), Status::translateStringToStatus);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage());
+        }
+        return predicate;
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
