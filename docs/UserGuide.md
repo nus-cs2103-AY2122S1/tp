@@ -465,7 +465,79 @@ This section guides you on how to use the commands for managing the lessons of y
 
 ![lessonCard](images/annotatedRecurringLessonCard.png)
 
-<div class="caption">Layout of a lesson card.</div>
+<div class="caption">Layout of a recurring lesson card.</div>
+
+The following table describes the different sections shown on a lesson card:
+
+<table id="student-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center; padding: 10px">Section</th>
+            <th style="text-align:center">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Lesson Index</td>
+            <td>Identifier of the lesson.</td>
+        </tr>
+        <tr>
+            <td>Lesson Title</td>
+            <td>Lesson subject together with the type of lesson (recurring / makeup).</td>
+        </tr>
+        <tr>
+            <td>Date Range</td>
+            <td>Start date to end date of the lesson.
+              <ul> 
+                <li> If the end date of the recurring lesson is not specified, the default end date will be shown as ∞.</li> 
+                <li>As makeup lessons have only one date (same start and end date), date range will **not** be shown for makeup lessons.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td>For recurring lessons: 
+              <ul>
+                <li> Date of the nearest upcoming lesson.</li> 
+                <li>This displayed date will be updated to the following week once it has passed.</li>
+                </ul> 
+              For makeup lessons: 
+                <ul>
+                  <li>Actual date of the lesson.</li>
+                  <li>This date will not change if the date has passed (provided no data modifications have been made to the lesson).</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td>Time range of the lesson.</td>
+        </tr>
+        <tr>
+            <td>Rates</td>
+            <td>Hourly amount charged for the lesson.</td>
+        </tr>
+        <tr>
+            <td>Outstanding Fees</td>
+            <td>Total amount due for this lesson.</td>
+        </tr>
+        <tr>
+            <td>Cancelled Date(s)</td>
+            <td>
+              <ul>
+                <li>The dates on which the lesson has been cancelled.</li> 
+                <li>This field will only be shown for recurring lessons.</li> 
+                <li>Makeup lessons that have been cancelled will be displayed as such: 
+                  <img src="images/annotatedMakeupLessonCard.png" />
+                  <div class="caption">Layout of a cancelled makeup lesson.</div> </li> 
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Homework</td>
+            <td>Homework given to the student.</td>
+        </tr>
+    </tbody>
+</table>
 
 A lesson **must** have the following fields: a start date, a time range, a lesson rate and a subject.
 
