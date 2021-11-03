@@ -560,6 +560,14 @@ Action | Format | Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Upcoming Features**
+
+1. **Customizable lesson timing**:
+   1. In the upcoming update, the developers will lift the constraints placed on the lesson timing. Each lesson can be of any duration and can start from any period of time.
+   2. This will provide more flexibility for you in managing the lessons in your tuition center.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Glossary**
 
 * **Java**: A widely used programming language
