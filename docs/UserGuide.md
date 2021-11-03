@@ -73,7 +73,7 @@ Here are several useful tips on how to read and intrepret this guide.
 
 ### Reading the User Guide
 
-This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide. 
+This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide.
 This would be useful for you should they be unclear to you.
 
 #### Technical terms
@@ -83,7 +83,7 @@ The table below are the interpretations of a few technical terms that you may en
 | Technical term  | What it means |
 | ------------- | ------------- |
 | CLI | The Command Line Interface (CLI) is the interface that accepts text input to execute the functions of **TuitiONE**. |
-| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. |
+| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. Graphics, icons, windows, menus, cursor and buttons are all components of a GUI. |
 | Parameter  | Parameter refers to the user input required after the user is prompted by the TuitiONE GUI  |
 
 #### General Symbols and Syntax
@@ -141,8 +141,8 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 * Items in square brackets are optional.<br>
   e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[r/REMARK]…` can be used as ` ` (i.e. 0 times), `r/sick`, `r/absent r/graduated` etc.
+* Items with `…` after them can be used as many times as the user would like.<br>
+  e.g. `[r/REMARK]…` can be used multiple times like `r/sick` or `r/absent r/graduated`, or can be omitted altogether.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PARENT_CONTACT`, `p/PARENT_CONTACT n/NAME` is also acceptable.
@@ -152,6 +152,23 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 * Commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will ignore follow-up inputs.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
+
+
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution on use of the symbol `/` in commands:**<br>
+
+* For all commands, the symbol `/` should only be used in the **representation of prefixes**, such as `n/`, `p/` and `r/`, etc. 
+
+* You **should not** use the symbol `/` when filling up any of the parameters.
+
+* For example,  in `add` command,
+
+  * **Acceptable** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`.
+
+  * **Invalid** command: `add n/John Doe p/98765432 e/jd@gmail.com a/John stre/et, block 123, #01-01 g/P2`.<br>_*notice the additional `/` used in the parameter of `a/ADDRESS`._
 
 </div>
 
@@ -165,7 +182,15 @@ Command Format: `help`
 
 #### Listing all students: `list`
 
-Shows you a list of all students and lessons in the **TuitiONE**. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from `P1` to `S4`.
+Shows you a list of all students and lessons in the **TuitiONE**. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from `P1` to `S5`.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+Sorting of the lists by other fields (eg. day, time, subject) is not available in the current version of **TuitiONE**, and will be an upcoming feature.
+
+</div>
 
 Command Format: `list`
 
@@ -187,12 +212,12 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
 * You can filter by `GRADE`, `SUBJECT`, or both.
 
     * If you are only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
-  
+
     * If you are only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
-  
+
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
-* `GRADE` can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
+* `GRADE` refers to the educational level of the student. It can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
 
 * `SUBJECT` can be specified in lower- or upper- cases (i.e. `MATH` and `math` represents the same subject which is `Math`). See [`add-l` (add lesson)](#adding-a-lesson-add-l) command for more information.
 
@@ -224,12 +249,15 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 * `PARENT_CONTACT` can only be 8 digits long and start with `6`, `8` or `9` (as this application is currently based for Singapore use).
 
 * `EMAIL` can only have a maximum of 100 characters and have the conventional `@` as well as a domain name.
+  * As there can be a variety of possible email address namings and domains, the application will not run a through check on your input. If you happen to input the wrong email address, you can use the `edit` command [here](#editing-a-student--edit).
 
 * `ADDRESS` can only have a maximum of 150 characters.
 
-* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
+* `GRADE` refers to the educational level of the student. It can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
-* A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
+* `REMARK` can have a maximum of 25 characters, single worded without spacings in between them. A student can have any number of remarks, capped at 5. (including 0). (e.g `smart` is valid, while `needs help` is invalid)
+
+* Each student must have a unique name.
 
 Example(s):
 
@@ -299,7 +327,7 @@ Example(s):
 
 #### Editing a student : `edit`
 
-Deletes a student from the TuitiONE.
+Edits a student's particulars.
 
 Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD]... [dr/REMARK_TO_DELETE]...`
 
@@ -314,6 +342,8 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
 * You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.
+
+* Remarks are unique, and you cannot tag more than one of the same remark to the same student. For example, `edit 2 r/overdueFees r/overdueFees` will only tag a single `overdueFees` remark to the student at index `2`.
 
 * See [`add` command](#adding-a-student-add) for other constraints on defining a student.
 
@@ -352,11 +382,11 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
 * Enrolling a student is only possible if the student:
   1. has the same `grade` as the lesson,
-  
+
   2. is not enrolled to the lesson and,
-  
+
   3. has no other lessons with conflicting timing.
-  
+
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
@@ -364,6 +394,8 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
 * Students can only be enrolled to a **maximum of 10 lessons**.
+
+* Lessons can only have enrolled a **maximum of 15 students**.
 
 Example(s):
 
@@ -409,7 +441,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 :information_source: **Details:**
 
-* `GRADE` here follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
+* `GRADE` refers to the level of education a lesson is catering for. It follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
 
 * `SUBJECT` can only be a single word limited to `20` characters, and its first letter will be capitalized.
 
@@ -419,13 +451,18 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * Lessons are fixed at **two** hour periods. In upcoming features, we will give you the power to define your lesson timing ranges.
 
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive.
+* Lessons with the same `SUBJECT` and `GRADE` cannot have the same `DAY_OF_WEEK` and `START_TIME`. 
+
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive. The cost will be displayed in the lesson list rounded off to two decimal places.
 
 Example(s):
 
 * `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
+
+* `add-l s/Mathematics g/S4 d/fri t/1500 c/10.3`
+
 
 ![Outcome of `add-l`](images/UserGuideImage/add-l.PNG)
 
@@ -493,7 +530,7 @@ Command Format: `clear`
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:** Using this command removes all data from <b>TuitiONE</b>. Only use this command if you want to reset all information on the application and start anew.
-  
+
 </div>
 
 #### Exiting the program : `exit`
@@ -524,7 +561,7 @@ If the changes you made to the data file render its format invalid, <b>TuitiONE<
 
 ## **Command summary**
 
-Action | Format | Examples 
+Action | Format | Examples
 --------|-------|----------
 **Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` | `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 **Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` | `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
@@ -543,6 +580,14 @@ Action | Format | Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Upcoming Features**
+
+1. **Customizable lesson timing**:
+   1. In the upcoming update, the developers will lift the constraints placed on the lesson timing. Each lesson can be of any duration and can start from any period of time.
+   2. This will provide more flexibility for you in managing the lessons in your tuition center.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Glossary**
 
 * **Java**: A widely used programming language
@@ -555,6 +600,50 @@ Action | Format | Examples
 
 ## **FAQ**
 
-* **Q:** Where can I view the list of commands?
+1. **Q:** Where can I view the list of commands?
 
-  **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
+    > **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
+
+2. **Q:** Why are some usual email address inputed valid, such as 'jd@gmail.com.this.that.this.that.this.that'?
+
+    > **A:** There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
+
+3. **Q:** Why are there some unusual files present in my folder after I run **TuitiONE**?
+
+    > **A:** **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [Managing data](#managing-data) for more).
+
+4. **Q:** Why am I unable to add a student with the same name as another student?
+
+    > **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
+
+5.  **Q:** How do I edit a lesson?
+
+    > **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
+
+6. **Q:** How do I edit a remark?
+
+    > **A:** To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks. (see [Editing a student](#editing-a-student--edit) for more).
+
+7. **Q:** Am I able to add or edit `Remarks` to have spacings within them?
+
+    > **A:** No. The number of characters each `Remark` can have is capped at 25, and must be single words. (see [Adding a student](#adding-a-student-add) for more)
+
+8. **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
+
+    > **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1415` are valid inputs, while `1415` is an invalid input. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
+
+9. **Q:** How long can my name be for adding a new `Student`?
+
+    > **A:** We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead. (see [Adding a student](#adding-a-student-add) for more)
+
+10. **Q:** Can `Lessons` of the same `Subject` and `Grade` start at the same time?
+
+    > **A:** No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
+
+11. **Q:** How many `Lessons` can a `Student` be enrolled in?
+
+    > **A:** A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons` (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
+
+12. **Q:** How many `Students` can a `Lesson` contain?
+
+    > **A:** A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more)
