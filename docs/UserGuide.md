@@ -315,7 +315,7 @@ Examples:
 *  `view 1` 
 > Displays the details of contact indexed at 1 in the currently displayed list.
 *  `view 2`
-> Displays the details of contact indexed at 2 in the currently dispalyed list.
+> Displays the details of contact indexed at 2 in the currently displayed list.
 
 ![result for 'view 2'](images/viewscreenshot.PNG)
 
@@ -340,7 +340,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find roy'](images/findscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: How to 'find'
