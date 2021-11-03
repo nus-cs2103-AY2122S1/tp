@@ -59,7 +59,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]"
             + "[" + PREFIX_DESCRIPTION + "Description]"
-            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX "
+            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer)"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
             + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
