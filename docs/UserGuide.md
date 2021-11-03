@@ -87,10 +87,10 @@ Parameter | Data format
 
 ## Features
 
-## **Contact Features**
+### **Contact Features**
 This section contains information on features related to adding contacts to the contact list.
 
-### Adding a person: `add`
+#### Adding a person: `add`
 
 Adds a person to the PlaceBook.
 
@@ -113,13 +113,13 @@ Error Messages:
     * There may be some special characters in the tag input, e.g.!@#*
     * There should be no spaces in tags, e.g. close friend, is invalid.
 
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Shows a list of all persons in the PlaceBook.
 
 Format: `list`
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in the PlaceBook.
 
@@ -148,7 +148,7 @@ Error Messages:
 * The person index provided is invalid.
     * The index inputted may be out of the range of the displayed list indexes.
 
-### Locating persons by name: `find`
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -166,7 +166,7 @@ Examples:
   
 ![result for 'find alex'](images/findAlexResult.png)
 
-### Locating persons by tags: `findTags`
+#### Locating persons by tags: `findTags`
 
 Finds persons whose tags contain any of the given keywords.
 
@@ -187,7 +187,7 @@ one or both of the `friends` and `colleagues` tags
 
 ![result for 'findTags friends colleagues'](images/findTagsFriendsColleaguesResult.png)
 
-### Deleting a person : `delete`
+#### Deleting a person : `delete`
 
 Deletes the specified person from the PlaceBook.
 
@@ -206,10 +206,10 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the PlaceBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-## **Appointment Features**
+### **Appointment Features**
 This section contains information on features related to adding appointments to the appointment list.
 
-### Adding an appointment: `addApp`
+#### Adding an appointment: `addApp`
 
 Adds an appointment for the specified person or persons identified using a list of index(es) with 
 the datetime field(dd-MM-yyyy HHmm), with time being in the 24-hour format e.g. 1530, 
@@ -231,7 +231,7 @@ Error messages:
 * Clashing appointment Timings
     * The appointment you are trying to add clashes with an existing appointment.
 
-### Editing an appointment: `editApp`
+#### Editing an appointment: `editApp`
 
 Edits an appointment in PlaceBook.
 
@@ -263,7 +263,7 @@ Error messages:
 * End time before Start time
     * The appointment timing you are trying to edit has an End time which is earlier than the Start time.
 
-### Deleting an appointment: `delApp`
+#### Deleting an appointment: `delApp`
 
 * Deletes an appointment at the specified `INDEX`
 * A popup will appear asking for confirmation before actually deleting the appointment.
@@ -289,7 +289,7 @@ Confirmation:
 After:
 ![result for 'delApp' after change](images/delAppResultAfter.png)
 
-### Locating appointments by description: `findApp`
+#### Locating appointments by description: `findApp`
 
 Finds appointments whose descriptions contain any of the given keywords.
 
@@ -306,7 +306,7 @@ Examples:
 * `findApp zoom` returns `Zoom` and `Zoom meeting`
 * `findApp meeting talk` returns `sales talk`, `urgent meeting`<br>
 
-### Listing all appointments : `listapp` 
+#### Listing all appointments : `listapp` 
 
 Show all the appointments in the appointment list currently.
 List is sorted by Date, Time and Description baseline. Can optionally add a condition
@@ -314,15 +314,15 @@ to sort List by, if an invalid condition is input, it will sort by baseline cond
 
 Format: `listapp` Optional: `listapp Time` or `listapp Description`
 
-## **Other Features**
+### **Other Features**
 
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
 
 Clears all contacts and appointments from PlaceBook.
 
 Format: `clear`
 
-### Command history navigation
+#### Command history navigation
 
 Using the keyboard `UP` and `DOWN` arrow buttons, you can easily navigate through the command that you previously entered.
 This can be very helpful when you are doing repetitive task such as adding multiple person or appointment.
@@ -332,7 +332,7 @@ Please note that the command history will not be saved in the data file.
 So you will not be able to get your command history if you exit PlaceBook and open it again.
 </div>
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -340,7 +340,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Changing Dark and Light Theme
+#### Changing Dark and Light Theme
 
 You may notice the 'sun' or 'moon' button located at the top right of PlaceBook.
 Simply click that to toggle PlaceBook between Dark and Light Theme.
@@ -350,17 +350,18 @@ PlaceBook aims to support your work in different lighting environments and boost
  ![light theme](images/lightTheme.png)
  Dark Theme
  ![dark theme](images/darkTheme.png)
-### Exiting the program : `exit`
+
+#### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+#### Saving the data
 
 PlaceBook data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### Editing the data file
 
 Advanced users are welcome to update data directly by editing that data file.
 PlaceBook Person and Appointment data will be saved in two separate JSON files, locations in the table below.
@@ -375,7 +376,7 @@ If your changes to the data file makes its format invalid, PlaceBook will discar
 Invalid changes include creating duplicate entries in any of the JSON files, or creating Appointments with time conflicts in the `schedule.json` file
 </div>
 
-### Archiving data files `[coming in v2.0]`
+#### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
