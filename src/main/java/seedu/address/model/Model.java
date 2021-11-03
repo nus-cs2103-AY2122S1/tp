@@ -149,6 +149,12 @@ public interface Model {
     Order getOrder();
 
     /**
+     * Close the current order. Does not save the order beforehand.
+     * Model must have an unclosed order.
+     */
+    void closeOrder();
+
+    /**
      * Decrements the count of the given {@code target} in the order by {@code amount}.
      * {@code target} must exist in the order.
      * {@code amount} must be less than {@code target}'s count.
@@ -164,7 +170,7 @@ public interface Model {
     /**
      * Destroys the current order when ordering finish.
      */
-    void transactAndClearOrder();
+    void transactAndCloseOrder();
 
     /**
      * Return a list of {@code TransactionRecord} sorted according to timestamp.

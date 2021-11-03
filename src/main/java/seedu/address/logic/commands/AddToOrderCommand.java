@@ -19,13 +19,13 @@ public class AddToOrderCommand extends Command {
     public static final String COMMAND_WORD = "iorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to current order list. \n"
-            + "Parameters: "
-            + "NAME "
-            + "Or " + PREFIX_ID + "ID "
-            + PREFIX_COUNT + "COUNT \n"
-            + "Example: " + COMMAND_WORD + " "
+            + " Parameters: "
+            + "[ NAME | "
+            + PREFIX_ID + "ID ]"
+            + " (" + PREFIX_COUNT + "COUNT)\n"
+            + " Example: " + COMMAND_WORD + " "
             + "Milk "
-            + PREFIX_COUNT + "10 ";
+            + PREFIX_COUNT + "10";
 
 
     public static final String MESSAGE_SUCCESS = "Items added to order: %d x %s";

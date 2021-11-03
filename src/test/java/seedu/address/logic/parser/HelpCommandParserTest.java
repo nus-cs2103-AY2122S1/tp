@@ -123,9 +123,7 @@ public class HelpCommandParserTest {
     @Test
     public void parse_validEmptyArgs_success() {
         // asking help for empty command
-        final String userGuide = "https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/UserGuide.md";
-        final String message = "\nRefer to the user guide: " + userGuide;
-        HelpCommand expectedHelpCommand = new HelpCommand(message);
+        HelpCommand expectedHelpCommand = new HelpCommand(HelpCommand.DEFAULT_MESSAGE);
         assertParseSuccess(parser, "", expectedHelpCommand);
     }
 

@@ -88,6 +88,13 @@ public class Order {
         return items.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns true if order is empty.
+     */
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

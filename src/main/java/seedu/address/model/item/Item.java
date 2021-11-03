@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javafx.scene.layout.Region;
 import seedu.address.model.display.Displayable;
+import seedu.address.model.display.ItemCard;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.ItemCard;
 import seedu.address.ui.UiPart;
 
 /**

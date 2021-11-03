@@ -1,7 +1,9 @@
 package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
@@ -148,6 +150,17 @@ class OrderTest {
         ItemDescriptor descriptor = new ItemDescriptorBuilder()
                 .withName(VALID_NAME_BAGEL).withId(VALID_ID_DONUT).build();
         assertEquals(order.getItems(descriptor), List.of(DONUT, BAGEL));
+    }
+
+    @Test
+    public void isEmpty() {
+        // Return true if order empty
+        assertTrue(order.isEmpty());
+
+        // Return false if order has items
+        order.addItem(DONUT);
+        order.addItem(BAGEL);
+        assertFalse(order.isEmpty());
     }
 
 }
