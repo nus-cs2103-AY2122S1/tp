@@ -184,6 +184,10 @@ public class ParserUtil {
         if (!LastDate.isValidDate(trimmedDate)) {
             throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
         }
+        if (LastDate.isFutureDate(trimmedDate)) {
+            throw new ParseException(LastDate.MESSAGE_IS_FUTURE_DATE);
+        }
+
         return new LastDate(trimmedDate);
     }
 

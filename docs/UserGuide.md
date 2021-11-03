@@ -441,8 +441,9 @@ Format: `exit`
 ## Command summary
 
 ### Resident Commands
+
 Command | Format | Examples
---------|-------|----------
+|--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
 **Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
@@ -455,8 +456,9 @@ Command | Format | Examples
 **Export** | `export FILE_NAME` | `export closeContactsOfA123`
 
 ### Event Commands
+
 Command | Format | Examples
---------|-------|----------
+|--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
@@ -467,8 +469,9 @@ Command | Format | Examples
 **Sort** | `TODO` | `TODO`
 
 ### Commons
+
 Command | Format | Examples
---------|-------|----------
+|--------|-------|----------
 **Help** | `help`
 **Switch** | `switch`
 **Clear** | `clear`
