@@ -88,13 +88,6 @@ public class ParserUtil {
         requireNonNull(moduleCode);
         String trimmedModuleCode = moduleCode.trim();
 
-        if (trimmedModuleCode.contains("[")) {
-            trimmedModuleCode = trimmedModuleCode.substring(trimmedModuleCode.indexOf("[") + 1);
-        }
-        if (trimmedModuleCode.contains("]")) {
-            trimmedModuleCode = trimmedModuleCode.substring(0, trimmedModuleCode.indexOf("]"));
-        }
-
         String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
         assert moduleCodeArr.length >= 1 : "Array should not be empty\n";
         if (!ModuleCode.isValidModuleCode(moduleCodeArr[0])) {
