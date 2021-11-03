@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":WelcomeWindow" as WelcomeWindow UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":ProfileSetUpWindow" as ProfileSetUpWindow UI_COLOR
+participant ":UiPart" as UiPart UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+[-> WelcomeWindow : close()
+activate WelcomeWindow
+
+WelcomeWindow -> MainWindow : show()
+activate MainWindow
+
+deactivate WelcomeWindow
+
+create ProfileSetUpWindow
+MainWindow -> ProfileSetUpWindow : new ProfileSetUpWindow(stage, mainWindow, logic)
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow --> MainWindow
+deactivate ProfileSetUpWindow
+
+MainWindow -> ProfileSetUpWindow : start()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow -> LogicManager : isProfilePresent()
+activate LogicManager
+
+LogicManager --> ProfileSetUpWindow
+deactivate LogicManager
+
+alt profile present
+
+ProfileSetUpWindow --> MainWindow : start()
+
+else profile not present
+
+ProfileSetUpWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> ProfileSetUpWindow
+deactivate UiPart
+
+opt submit
+
+ProfileSetUpWindow -> ProfileSetUpWindow : submit()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow -> ProfileSetUpWindow : close()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow --> ProfileSetUpWindow
+deactivate ProfileSetUpWindow
+
+ProfileSetUpWindow --> ProfileSetUpWindow
+deactivate ProfileSetUpWindow
+
+ProfileSetUpWindow --> MainWindow : start()
+deactivate ProfileSetUpWindow
+
+end
+
+end
+
+@enduml
