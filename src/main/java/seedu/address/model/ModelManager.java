@@ -225,13 +225,7 @@ public class ModelManager implements Model {
         for (Name studentName : namesOfStudentsToDelete) {
             updateFilteredStudentList((student -> student.getName().equals(studentName)));
             // Should have only 1 student found since we cant have students with same name
-            if (filteredStudents.size() < 1) {
-                System.out.println(filteredStudents.size());
-                System.out.println(studentName + "AAAAAAAAA");
-            }
             assert(filteredStudents.size() == 1);
-            System.out.println(filteredStudents.size());
-            System.out.println(studentName + "AAAAAAAAA");
             csBook.removeStudent(filteredStudents.get(0));
         }
         //Resets filtered student list to show all students
