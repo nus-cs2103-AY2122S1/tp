@@ -121,7 +121,7 @@ on any operating system including Windows, macOS or Linux
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
-Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
+<br> Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
 in your command, FAST will inform you here! <br><br>
@@ -136,10 +136,10 @@ are all sample data! Here are some commands you can try to see what they do:
 
     
 1. Add a contact named "John Doe" to FAST
-   * `add n/John Doe`
+   * `add n/Matthew Shen p/91087657 e/matthew@example.com a/511 Seletar Road 12`
     
 2. Delete the 3rd contact in FAST
-    * `delete 3`
+    * `del 3`
     
 3. View all your saved contacts
     *  `list`
@@ -220,10 +220,33 @@ To achieve the best possible experience, avoid adding excessively long input to 
 #### `ADDRESS` 
 * The address of your client
 * Can take any value (should not be *blank*)
+* Should not be more than **100** characters
 
 
-#### `COMMAND`
-* The type of command available in FAST:
+#### `DATE`
+* The date of an appointment with your client
+* Should be in this format: `yyyy-mm-dd` 
+  * e.g. `2023-05-15` 
+* Should be a valid date (cannot be a date in the past) where:
+  * `yyyy` (year): should be a positive 4-digit number 
+  * `mm` (month): should be a valid calendar month between 01 and 12
+  * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
+
+
+#### `EMAIL`
+* The email address of your client
+* Should be in this format: `local-part@domain`
+* `local-part`: 
+  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?\{\}\|~^.-`).
+  * should not start and end with special characters,
+* `domain`: 
+  * must be at least **2** characters long. 
+  * each domain label must start and end with alphanumeric characters
+  * each domain label is separated using hyphens (if any)
+
+  
+#### `HELP_TOPIC`
+* The Help topics available in FAST:
   * `Quick Start`
   * `Add`
   * `Appointment`
@@ -245,28 +268,6 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * `Misc`
 
 
-#### `DATE`
-* The date of an appointment with your client
-* Should be in this format: `yyyy-mm-dd` 
-  * e.g. `2023-05-15` 
-* Should be a valid date where:
-  * `yyyy` (year): should be a non-negative 4-digit number
-  * `mm` (month): should be a valid calendar month between 01 and 12
-  * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
-
-
-#### `EMAIL`
-* The email address of your client
-* Should be in this format: `local-part@domain`
-* `local-part`: 
-  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?{|}~^.-`).
-  * should not start and end with special characters,
-* `domain`: 
-  * must be at least **2** characters long. 
-  * each domain label must start and end with alphanumeric characters
-  * each domain label is separated using hyphens (if any)
-
-
 #### `INDEX`
 * Refers to the number shown in the displayed client list
 * **Must be a positive integer** 1, 2, 3, …​
@@ -274,22 +275,33 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `KEYWORD`
 *   The condition to sort your client list
-*   There are currently only 3 conditions available: name, appointment, priority.
-    * name will sort all clients in alphabetical order from A to Z.
-    * appointment will sort all client by appointment date from the earliest date to latest.
-    * priority will sort all client by priority tag from the highest to the lowest priority.
-    
+*   There are currently only 3 `KEYWORD` available: `name`, `appointment`, `priority`.
+    * `name` will sort all clients in alphabetical order from A to Z.
+    * `appointment` will sort all client by appointment date from the earliest date to latest.
+    * `priority` will sort all client by `priority tag` from the highest to the lowest priority.
+
+<div markdown="block" class="alert alert-info"> :information_source: 
+** Notes about sorting by appointment:** <br>
+
+* For clients with the **same appointment date**, FAST will first show those *without appointment times*, followed by
+the earliest time to the latest time.
+
+</div>
+<br>
 
 #### `NAME`
 * The name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
-
+   <div markdown="block" class="alert alert-info">
+   :information_source: FAST does not allow duplicate names, but you may use numbers to differentiate between 2 clients with
+   the exact same name.<br>
+   </div>
 
 #### `PHONE`
 * The contact number of your client
 * Should only contain numbers
   * for numbers with an area/country code e.g. +65 80081355, you can just enter 6580081355
-* Should be at least **3** digit long
+* Should be at least **3** digits long and at most **20** digits long.
 
 
 #### `QUERY`
@@ -300,15 +312,20 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `REMARK`
 * Extra notes given for your client
-* Should not be more than **75** characters
+* Should not be more than **45** characters
 
 
 #### `TAG`
 * A label given to your client
 * There are 3 types of `TAG` in FAST:
   1. Normal Tags: should not be longer than 20 characters
+     * no prefix
   2. Priority Tag: either one of the 3 priorities (low, med, high)
+     * prefix: pr/
   3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
+     * prefix: ip/
+  
+* To use Priority or Inventment Plan Tags, you need to specify the prefix, or it will be treated as a Normal Tag.
 * Refer to [Tags](#tags) to find out more about each tag
 
 
@@ -324,7 +341,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `VENUE`
 * The location of an appointment with your client
-* Should not be longer than **30** characters long
+* Should not be longer than **20** characters long
 <br> <br>
 
 ### **Managing a client**
@@ -378,13 +395,15 @@ This can be used if the client's information has changed, or if you entered an i
 
 * Edits the client at the specified `INDEX`
 
-<div markdown="block" class="alert alert-info"> :information_source: 
+<div markdown="block" class="alert alert-info"> :information_source:
+
 * Only the edited fields will be updated to the input values, while the unedited values are unchanged.
 * You can remove all the client’s tags by typing `t/` without specifying any tags after it.
 * For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
 </div>
 
-<div markdown="span" class="alert alert-warning"> :exclamation: 
+<div markdown="span" class="alert alert-warning"> :exclamation:
+
 * At least one of the optional fields must be provided.
 * When editing tags, all existing tags of the client will be replaced with the new tags.
 </div>
@@ -420,7 +439,7 @@ You can delete the specified client from FAST. This is useful when a client has 
 **Examples**:
 * `list` followed by `del 2` deletes the second client in FAST. If `Bernice Yu` is the second client on the list, his entry
 will be deleted.
-![EditExample](images/deleteexample.png)
+![DeleteExample](images/deleteexample.png)
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
@@ -429,7 +448,7 @@ Can be used to delete up to **10** contacts in a single `del` command by supplyi
 
 <div markdown="span" class="alert alert-primary">:exclamation: Warning:
 If *Format 1* is used, there should be a space in between each `INDEX` if multiple `INDEX` are input. <br>
-If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'.
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`.
 </div>
 
 **Examples**:
@@ -445,11 +464,11 @@ This CANNOT be undone!
 
 #### Adding a remark to your client: `rmk`
 
-You can add a remark to an existing client in FAST. <br>
+You can add a remark to an existing client in FAST, or update the current remark if they already have one. <br>
 This is useful for adding additional client notes such as their preferred meeting timing, allowing you to better serve your clients!
 
-<div markdown="block" class="alert alert-info">
-:information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
+<div markdown="block" class="alert alert-info"> :information_source: 
+Remarks should be used to annotate contacts with longer and more specific things compared to tags,
 which should mostly be one or two words.<br>
 </div>
 
@@ -469,8 +488,13 @@ To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
 * `rmk 1 r/loves to eat pizza` adds a remark `loves to eat pizza` to the first client.
 ![result for `rmk 1 r/loves to eat pizza`](images/remarkResult.png)
 * `rmk 1` removes the remark from the first client.<br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Adding a remark will overwrite any previous remarks that were made for the client!
 </div>
 
 #### Appointments
@@ -503,10 +527,10 @@ The `DATE` of the appointment must at least be specified.
 
 
 **Examples**:
-* `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
-![result for `aa 1 d/2021-03-27`](images/appointment.png)
-* `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
-* `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
+* `aa 1 d/2022-03-27` adds an appointment with date `27 Mar 2022` to the first client in FAST.
+![result for `aa 1 d/2022-03-27`](images/appointment.png)
+* `aa 3 d/2022-03-27 t/18:00` adds an appointment with date `27 Mar 2022` and time `1800hrs` to the third client in FAST.
+* `find Matthew John` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
    <div markdown="block" class="alert alert-info">
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
@@ -539,8 +563,8 @@ At least **one** of the optional fields must be present.
 * [`VENUE`](#venue)
 
 **Examples**:
-* `ea 1 d/2021-03-28` edits the appointment date to be `28 Mar 2021` of the first client.
-![result for `ea 1 d/2021-03-28`](images/editappointmentexample.png)
+* `ea 1 d/2022-03-28` edits the appointment date to be `28 Mar 2022` of the first client.
+![result for `ea 1 d/2022-03-28`](images/editappointmentexample.png)
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
 <br> 
@@ -589,23 +613,16 @@ This also allows you to keep track of the number of completed appointments with 
 ![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
-
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
-If you have accidentally marked an appointment as completed, fret not! You can always undo it! 
-<br>Refer to [Undo marking of completed appointment](#undo-marking-of-completed-appointment-ua) for more information.
-</div>
-
-
-<br>
+  
 
 ##### Undo marking of completed appointment: `ua`
 
-You can unmark the appointment with your client as completed. <br>
-This also allows you to undo your mistake if you have accidentally marked an appointment as completed.
+You can reduce the appointment count of your client as needed. <br>
 
 **Format**: `ua INDEX`
-* Decreases the completed appointment count with the client at the specified `INDEX` if the appointment does not exist.
-* The current appointment count will have to be greater than 0!
+* Decreases the completed appointment count of the client at the specified `INDEX` by 1, if no appointment is 
+  currently scheduled with the client.
+* The current appointment count has to be greater than 0.
 
 **Parameter**:
 * [`INDEX`](#index)
@@ -638,21 +655,22 @@ In FAST, we have three main types of tags:
 
 1. Normal tags, which you can customise according to your needs.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
+    </div>
 
 2. Priority tags, which have fixed names and help you to remember which contacts you need to focus on first.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
-</div>
+   
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
+    </div>
 
 3. Investment plan tags, which help you recall the plans that each contact has bought.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
-
-For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
+    
+    For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
+    </div>
 
 <br>
 
@@ -673,12 +691,13 @@ More examples of how to use these will be given in the following section.
 
 <br>
 
-##### Editing a tag: `tag`
+##### Using tags: `tag`
 
 You can add or delete the tags of a specified client. 
 
 **Format**: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
+* To add Priority or Investment Plan Tags, remember to add their prefixes!
 * Does not affect any unmentioned tags, unlike `edit`.
 * Delete operations are performed first before add operations, regardless of their order in the input.
 
@@ -795,10 +814,10 @@ In the help window, you can view all the command usages built-in right into FAST
 
 ![help window](images/helpWindow.png)
 
-**Format**: `help [COMMAND]`
+**Format**: `help [HELP_TOPIC]`
 
 **Parameters**:
-* [`COMMAND`](#command)
+* [`HELP_TOPIC`](#help-topics)
 
 **Examples**:
 * `help` will just open the default help window
@@ -917,7 +936,7 @@ Action | Format, Examples
 
 Action|Format, Examples
 --------|------------------
-**Help** | `help [COMMAND]` <br> e.g. `help add`
+**Help** | `help [HELP_TOPIC]` <br> e.g. `help add`
 **Clear** | `clear`
 **Exit** | `exit`
 

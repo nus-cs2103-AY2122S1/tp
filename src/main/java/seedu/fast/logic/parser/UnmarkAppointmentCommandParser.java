@@ -22,7 +22,6 @@ public class UnmarkAppointmentCommandParser implements Parser<UnmarkAppointmentC
                     UnmarkAppointmentCommand.MESSAGE_USAGE), ive);
         }
 
-        return new UnmarkAppointmentCommand(index,
-                new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME, Appointment.NO_VENUE));
+        return new UnmarkAppointmentCommand(index, Appointment.getDefaultAppointment());
     }
 }

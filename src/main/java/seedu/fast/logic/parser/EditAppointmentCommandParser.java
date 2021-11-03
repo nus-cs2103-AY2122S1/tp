@@ -29,30 +29,51 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
         }
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
-        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            String date = ParserUtil.parseDateString(argMultimap.getValue(PREFIX_APPOINTMENT).get());
-            editAppointmentDescriptor.setDate(date);
-        }
+        setEditAppointmentDescriptor(argMultimap, editAppointmentDescriptor);
 
-        if (argMultimap.getValue(PREFIX_APPOINTMENT_TIME).isPresent()) {
-            String time = ParserUtil.parseTimeString(argMultimap.getValue(PREFIX_APPOINTMENT_TIME).get());
-            editAppointmentDescriptor.setTime(time);
-        }
-
-        if (argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).isPresent()) {
-            String venue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).get();
-            if (!Appointment.isValidVenueFormat(venue)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        Appointment.INVALID_VENUE_INPUT));
-            }
-            editAppointmentDescriptor.setVenue(venue);
-        }
-
-        if (!editAppointmentDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED + "\n"
+        boolean isAllFieldAbsent = !editAppointmentDescriptor.isAnyFieldEdited();
+        if (isAllFieldAbsent) {
+            throw new ParseException(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED_MISSING_FIELDS + "\n"
                     + EditAppointmentCommand.MESSAGE_USAGE);
         }
 
         return new EditAppointmentCommand(index, editAppointmentDescriptor);
+    }
+
+    private void setEditAppointmentDescriptor(ArgumentMultimap argMultimap,
+            EditAppointmentDescriptor editAppointmentDescriptor) throws ParseException {
+        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
+            getAndSetDate(argMultimap, editAppointmentDescriptor);
+        }
+
+        if (argMultimap.getValue(PREFIX_APPOINTMENT_TIME).isPresent()) {
+            getAndSetTime(argMultimap, editAppointmentDescriptor);
+        }
+
+        if (argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).isPresent()) {
+            getAndSetVenue(argMultimap, editAppointmentDescriptor);
+        }
+    }
+
+    private void getAndSetDate(ArgumentMultimap argMultimap, EditAppointmentDescriptor editAppointmentDescriptor)
+            throws ParseException {
+        String date = ParserUtil.parseDateString(argMultimap.getValue(PREFIX_APPOINTMENT).get());
+        editAppointmentDescriptor.setDate(date);
+    }
+
+    private void getAndSetTime(ArgumentMultimap argMultimap, EditAppointmentDescriptor editAppointmentDescriptor)
+            throws ParseException {
+        String time = ParserUtil.parseTimeString(argMultimap.getValue(PREFIX_APPOINTMENT_TIME).get());
+        editAppointmentDescriptor.setTime(time);
+    }
+
+    private void getAndSetVenue(ArgumentMultimap argMultimap, EditAppointmentDescriptor editAppointmentDescriptor)
+            throws ParseException {
+        String venue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).get();
+        if (!Appointment.isValidVenueFormat(venue)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Appointment.INVALID_VENUE_INPUT));
+        }
+        editAppointmentDescriptor.setVenue(venue);
     }
 }

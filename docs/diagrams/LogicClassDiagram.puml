@@ -5,11 +5,16 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
+    package Parser {
+    Class FastParser
+    Class XYZCommandParser
+    }
 
-Class AddressBookParser
-Class XYZCommand
-Class CommandResult
-Class "{abstract}\nCommand" as Command
+    package Command {
+    Class CommandResult
+    Class "{abstract}\nCommand" as Command
+    Class XYZCommand
+    }
 
 
 Interface Logic <<Interface>>
@@ -26,9 +31,7 @@ package Storage{
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
-LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager .left.|> Logic
 
 XYZCommand -up-|> Command
 LogicManager .left.> Command : executes >
@@ -43,4 +46,8 @@ note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
 Command .up.> CommandResult : produces >
+
+LogicManager -down-|> FastParser
+FastParser .down.> XYZCommandParser : creates >
+XYZCommandParser .left.> XYZCommand : creates >
 @enduml

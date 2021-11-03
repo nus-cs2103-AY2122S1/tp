@@ -96,7 +96,7 @@ public class UnmarkAppointmentCommandTest {
         UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO);
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO_COUNT);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -113,7 +113,7 @@ public class UnmarkAppointmentCommandTest {
         UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_SIXTH_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_EXIST,
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_APPT_EXIST,
                 sixthPerson.getName().fullName);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
@@ -166,7 +166,7 @@ public class UnmarkAppointmentCommandTest {
         UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO);
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO_COUNT);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -184,7 +184,7 @@ public class UnmarkAppointmentCommandTest {
         UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_EXIST,
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_APPT_EXIST,
                 sixthPerson.getName().fullName);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);

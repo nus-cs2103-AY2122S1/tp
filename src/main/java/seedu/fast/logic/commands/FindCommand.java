@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsQueriesPredicate;
@@ -47,6 +49,8 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     public FindCommand(NameContainsQueriesPredicate predicate) {
         this.predicate = predicate;
     }
@@ -67,6 +71,8 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        logger.info("-----Find Command: Success-----");
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

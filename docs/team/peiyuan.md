@@ -2,33 +2,135 @@
 layout: page
 title: Lim Peiyuan's Project Portfolio Page
 ---
+### Introduction
 
-### Project: Financial Advisor Smart Tracker (FAST)
+I am a software developer for Financial Advisor Smart Tracker (FAST). I was in-charge of the Code Quality of FAST.
+At the time of developing FAST, I was a Year 2 Computer Science Undergraduate.
 
-Financial Advisor Smart Tracker (FAST) is a desktop address book application targeted at financial advisors, for
+---
+
+### Project Overview: Financial Advisor Smart Tracker (FAST)
+
+Financial Advisor Smart Tracker (FAST) is a desktop application targeted at financial advisors, for
 them to keep track of their clients as contacts. The user interacts with it using a CLI, and it has a GUI created with
-JavaFX. It is written in Java, and has about 10 kLoC.
+JavaFX. It is written in Java, and has about 12 kLoC.
+
+---
+
+### Contributions to FAST
 
 Given below are my contributions to the project.
 
-* **New Feature**: TBA
+<br>
 
-* **Code contributed**: [RepoSense link]()
+#### New Features
 
-* **Project management**:
-    * Added some of the user stories as issues
+* **New Feature 1**: `Appointment` feature.
+  * **What it does**:<br>
+  The `Appointment` feature allows users to manage their appointment with their clients. 
+  It allows user to store critical information such as date, time and venue.
+  It also allows user to track the number of completed appointments with a client.
+  In the situation where the user accidentally marks an appointment wrongly, he can unmark the appointment.
+  It is integrated into the `PersonCard`, placed on the right-hand side of each client's details. 
+  
+  <br>
+  
+  * **Justification**: <br>
+  Financial Advisors (FA) do not just manage their clients' contacts, they spend a lot of their time meeting clients to clinch deals.
+  Thus, it is necessary for them to be able to see the appointment information alongside the client's details (with the need to switch between apps).
 
-* **Enhancements to existing features**:
-    * TBA
+  <br>
 
-* **Documentation**:
-    * User Guide:
-        * Added documentation for the feature `delete`
-    * Developer Guide:
-        * Added Use Cases in Developer's Guide
+  * **Highlights**: <br>
+  Designed 5 different sub-features(`add appointment`, `edit appointment`, `delete appointment`, `mark appointment` and `unmark appointment`) 
+  for user to manipulate the `Appointment`. 
+  `add appointment`, `edit appointment` and `delete appointment` was referenced and modified from the existing **AB3** `add`, `edit` and `delete` features.
+  <br> <br> `Appointment` and `AppointmentCount` class was designed to allow the `Appointment` feature to function.
+  <br> <br> Makes use of parser to check for valid date and time format before formatting them into the desired, more reader-friendly format.
+  
+  <br> 
+  
+  * **Related PR**: [\#77](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/77), [\#79](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/79),
+    [\#84](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/84), [\#94](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/94),
+    [\#99](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/99), [\#152](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/152)
+
+<br>
+
+#### Enhancement to Existing Features
+
+* **Enhancements to existing features**:`Multiple Delete` feature.
+  * **What it does**:<br>
+  The `Multiple Delete` feature allows users to delete up to 10 contacts at one go. 
+  It supports 2 input format to cater for different situations the user may be in.
+  
+  <br>
+
+  * **Justification**: <br>
+  This feature allows FAST to be faster for users to manage their contact, as they can delete more contacts with one command.
+  
+  <br>
+
+  * **Highlights**: <br>
+  This is built upon the `delete` feature. The `delete` feature is spilt into 2 portion for handling single and multiple delete as well as to handle the 2 types of input format. 
+  Checks for multiple indexes are included and checks for dash(-) symbol is added to capture the information required for multiple delete.
+  Implemented duplication detection to prevent user from entering the same indexes.
+
+  <br> 
+
+  * **Related PR**: [\#127](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/127)
+
+<br>
+  
+#### Code Contribution
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t09&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Py0000&tabRepo=AY2122S1-CS2103T-T09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+    
+<br>
+
+#### Documentation
+
+* **User Guide**:
+  * Added documentation for the feature `add appointment` [\#102](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/102)
+  * Added documentation for the feature `edit appointment` [\#102](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/102)
+  * Added documentation for the feature `delete appointment` [\#102](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/102)
+  * Added documentation for the feature `mark appointment` [\#102](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/102)
+  * Added Command Parameter Section [\#143](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/143)
+  * Added Purpose of Guide Section [\#143](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/143)
+  * Added documentation for the feature `unmark appointment` [\#152](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/152)
+
+* **Developer Guide**:
+  * Added Use Cases in Developer's Guide [\#55](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/55)
+  * Added UC07 to UC10  [\#102](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/102)
+  * Added implementation of Appointment features [\#117](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/117), [\#211](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/211)
+  * Updated existing UML diagrams and description of `Design` Section [\#137](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/137)
+  * Added Introduction Section [\#211](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/211)
+  * Added UC11 [\#211](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/211)
+  * Added Manual Testing Section for `Appointment` features, `add`, `edit`, `delete` and `remark` [\#211](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/211)
+  * Added implementation fo Multiple Delete [\#211](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/211)
+
+<br>
+
+#### Community
 
 * **Community**:
-    * TBA
+    * Fixed bug in SampleDataUtils [\#100](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/100)
+    * Fixed bugs from PED [\#184](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/184)
+    * Minor shift to UI layout (i.e. position of command box, result display box) [/#99](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/99)
+    * Released JAR v1.3.2
+    * PRs reviewed: [\#52](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/52), [\#54](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/54),
+      [\#63](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/63), [\#65](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/65),
+      [\#80](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/80), [\#95](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/95),
+      [\#111](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/111), [\#118](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/118),
+      [\#125](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/125), [\#126](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/126),
+      [\#134](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/134), [\#139](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/139),
+      [\#142](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/142), [\#146](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/146),
+      [\#208](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/208)
 
-* **Tools**:
-    * TBA
+<br>
+
+#### Project Management
+
+* **Project management**:
+    * Added some user stories as issues
+    * Opened and closed some issues 
+

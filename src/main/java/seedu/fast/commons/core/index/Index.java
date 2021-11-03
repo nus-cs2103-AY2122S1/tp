@@ -8,7 +8,7 @@ package seedu.fast.commons.core.index;
  * base the other component is using for its index. However, after receiving the {@code Index}, that component can
  * convert it back to an int if the index will not be passed to a different component again.
  */
-public class Index {
+public class Index implements Comparable<Index> {
     private int zeroBasedIndex;
 
     /**
@@ -45,14 +45,16 @@ public class Index {
         return new Index(oneBasedIndex - 1);
     }
 
-    public static Index indexModifier(Index index, int shiftAmount) {
-        return new Index(index.zeroBasedIndex - shiftAmount);
-    }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Index // instanceof handles nulls
                 && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
+    }
+
+    @Override
+    public int compareTo(Index o) {
+        return o.zeroBasedIndex - this.zeroBasedIndex;
     }
 }

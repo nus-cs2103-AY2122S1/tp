@@ -47,7 +47,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     }
 
     private boolean isRangeInput(String args) {
-        return args.contains("-") && args.trim().length() == 3;
+        String testArgs = args.trim().replace(" ", "");
+        return testArgs.length() >= 3 && countDash(testArgs) == 1;
     }
 
     // should return a string array of length 2
@@ -65,17 +66,36 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             startIndex = ParserUtil.parseIndex(args[0]);
             endIndex = ParserUtil.parseIndex(args[1]);
+
+            if (!isValidRange(startIndex, endIndex)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
             result = new Index[endIndex.getOneBased() - startIndex.getOneBased() + 1];
-        } catch (ParseException pe) {
+        } catch (ParseException | NegativeArraySizeException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
         }
 
+        return generateIndexesInRange(result, startIndex, endIndex);
+    }
+
+    private Index[] generateIndexesInRange(Index[] result, Index startIndex, Index endIndex) {
         int count = 0;
         for (int i = startIndex.getOneBased(); i <= endIndex.getOneBased(); i++) {
             result[count++] = Index.fromOneBased(i);
         }
 
         return result;
+    }
+
+    private long countDash(String str) {
+        long count = str.chars().filter(c -> c == '-').count();
+        return count;
+    }
+
+    private boolean isValidRange(Index start, Index end) {
+        return end.getOneBased() - start.getOneBased() >= 0;
     }
 }
