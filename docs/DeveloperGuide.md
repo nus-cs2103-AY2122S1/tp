@@ -398,8 +398,36 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Cons: Increases complexity of code. Separate class has little usage.
 
 ### List applicants feature
-The list applicants feature is 
+The list applicants feature is achieved by the `ListApplicantCommand` class. Unlike most other commands in the MTR, 
+it only has 1 action under the `ListApplicantCommand#execute` method besides creation of the command itself, which is 
+`Model#updateFilteredApplicantList` which updates the UI to show all current applicants in the `applicantBook`.
 
+If there are no current applicants in the `applicantBook`, the UI should appear empty.
+
+Given below is an example usage scenario of the mark applicant feature. <br>
+Preconditions: MTR has started up and is working.
+
+Step 1. User inputs `list-applicant`.
+
+Step 2. LogicManager executes this `ListApplicantCommand` instance, invoking the `Model#updateFilteredApplicantList`.
+
+Step 3. The UI is updated to show the current list of applicants.
+[display picture of current applicants here]
+
+The following activity diagram summarizes the actions taken when LogicManager executes the ListApplicantCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: Listing applicants**
+
+* **Alternative 1 (current choice):** Create a separate command from the original AB3, but follow a similar style.
+    * Pros: Better understanding of underlying code and how everything comes together.
+    * Cons: More time-consuming.
+
+* **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
+    * Pros: Many functions already in place and little modification is required.
+    * Cons: Although less code to be added, due to coupling, more things are needed to be changed intricately and carefully (i.e. prone to errors/bugs).
 
 ### Add position feature :heavy_check_mark:
 
@@ -408,6 +436,36 @@ The list applicants feature is
 ### Edit position feature :heavy_check_mark:
 
 ### List positions feature
+The list positions feature is achieved by the `ListPositionCommand` class. Unlike most other commands in the MTR,
+it only has 1 action under the `ListApplicantCommand#execute` method besides creation of the command itself, which is
+`Model#updateFilteredPositionList` which updates the UI to show all current positions in the `positionBook`.
+
+If there are no current positions in the `positionBook`, the UI should appear empty.
+
+Given below is an example usage scenario of the mark applicant feature. <br>
+Preconditions: MTR has started up and is working.
+
+Step 1. User inputs `list-position`.
+
+Step 2. LogicManager executes this `ListPositionCommand` instance, invoking the `Model#updateFilteredPositionList`.
+
+Step 3. The UI is updated to show the current list of positions.
+[display picture of current positions here]
+
+The following activity diagram summarizes the actions taken when LogicManager executes the ListPositionCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: Listing positions**
+
+* **Alternative 1 (current choice):** Create a separate command from the original AB3, but follow a similar style.
+    * Pros: Better understanding of underlying code and how everything comes together.
+    * Cons: More time-consuming.
+
+* **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
+    * Pros: Many functions already in place and little modification is required.
+    * Cons: Due to coupling, requires changing code intricately and carefully (i.e. prone to errors/bugs).
 
 ### Rejection Rate feature
 
