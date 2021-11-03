@@ -252,7 +252,7 @@ Examples:
 
 #### Deleting a Staff : `delete`
 
-Deletes the specified staff `Staff'd`.
+Deletes the specified staff.
 
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, within the range of the staff view.
@@ -266,7 +266,7 @@ Formats:
 Examples:  
 `delete -n Candice`  
 `delete -i 2`  
-`delete -r cashiers`  
+`delete -r floor`  
 `delete -s fulltime`
 
 
@@ -495,7 +495,7 @@ Formats:
 `deleteShift -i INDEX d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
 
 Examples:  
-`deleteShift -n Joe d/tuesday-2 da/2021-10-01`  
+`deleteShift -n Joe d/tuesday-1 da/2021-10-01`  
 `deleteShift -i 1278 d/friday-1`
 
 --------------------------------------------------------------------------------------------------------------------

@@ -25,14 +25,14 @@ public class SwapShiftCommand extends Command {
     public static final String COMMAND_WORD = "swapShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": swaps shifts between 2 staffs identified "
-            + "using their names. You have to input exactly 2 names and 2 shifts. The period within which the"
-            + "shifts are active over is optional. Date input is used to indicate the period when the shift is active."
+            + "using their names. You have to input exactly 2 names and 2 shifts. The period within which the "
+            + "shifts are active over is optional. Date input is used to indicate the period when the shift is active. "
             + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "NOTE: The staff identified using the first name is associated with the first shift and the staff "
             + "identified using the second name is associated with the second shift. Do take note of the order!\n\n"
             + "Parameters: (2 of each)\n"
             + PREFIX_DASH_NAME + " NAME\n"
-            + PREFIX_DAY_SHIFT + "monday-1"
+            + PREFIX_DAY_SHIFT + "dayOfWeek-slotNumber "
             + DATE_RANGE_INPUT + "\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " -n Alex Yeoh d/monday-1 -n David Li d/friday-0\n\n"

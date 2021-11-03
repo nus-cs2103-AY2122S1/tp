@@ -177,9 +177,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dayOfWeek} is invalid.
      */
     public static String parseDayOfWeekAndSlot(String shiftDay) throws ParseException {
-        String messageConstraints = "Valid input format: dayOfWeek-slotNumber:" + "List of valid dayOfWeek: "
-                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n"
-                + "List of valid slotNumber: 1, 2.";
+        String messageConstraints = "Valid input format:\n\n dayOfWeek-slotNumber:" + " List of valid dayOfWeek: "
+                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n\n"
+                + "List of valid slotNumber: 0, 1.";
         requireNonNull(shiftDay);
         String trimmedStr = shiftDay.trim().toLowerCase();
         String[] strings = trimmedStr.split("-");
