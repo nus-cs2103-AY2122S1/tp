@@ -88,9 +88,7 @@ public class TaskBuilder {
      * @return The Task object built.
      */
     public Task build() {
-        return this.isComplete
-                ? new Task(moduleName, taskId, taskName, taskDeadline, isComplete)
-                : new Task(moduleName, taskId, taskName, taskDeadline);
+        return new Task(moduleName, taskId, taskName, taskDeadline, isComplete);
     }
 
 }
