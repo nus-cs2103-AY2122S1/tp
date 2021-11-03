@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+import java.math.BigDecimal;
+
 class OutstandingFeesTest {
 
     @Test
@@ -30,8 +32,8 @@ class OutstandingFeesTest {
     @Test
     public void pay_validAmount_success() {
         Money payment = new Money(VALID_PAYMENT);
-        float afterPayment = Float.parseFloat(VALID_OUTSTANDING_FEES) - Float.parseFloat(VALID_PAYMENT);
-        String afterPaymentInString = Float.toString(afterPayment);
+        BigDecimal afterPayment = (new BigDecimal(VALID_OUTSTANDING_FEES)).subtract(new BigDecimal(VALID_PAYMENT));
+        String afterPaymentInString = afterPayment.toPlainString();
 
         OutstandingFees actual = new OutstandingFees(VALID_OUTSTANDING_FEES);
 
