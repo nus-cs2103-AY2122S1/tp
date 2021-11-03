@@ -54,6 +54,8 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
             "This student needs to be specified using INDEX or ID due to duplicate naming.";
 
+    public static final String BASE_PATH = "graph%1$s.png";
+
     private Index index;
     private Name name;
     private ID id;

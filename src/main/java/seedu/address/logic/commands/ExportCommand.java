@@ -29,23 +29,17 @@ public class ExportCommand extends Command {
 
     private int groupColumns;
     private int tagColumns;
-    private final Path file;
+    private Path file;
 
     /**
      * Creates an ExportCommand to export data to a file.
      */
-    public ExportCommand(Path file) {
-        this.file = file;
+    public ExportCommand() {
+        this.file = generateNewPath(0);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        try {
-            FileUtil.createIfMissing(file);
-        } catch (IOException e) {
-            throw new CommandException(MESSAGE_FAILURE);
-        }
-
         StringBuilder writeContent = new StringBuilder();
         writeContent.append("Name,Id,");
 
@@ -64,12 +58,13 @@ public class ExportCommand extends Command {
         }
 
         try {
+            FileUtil.createIfMissing(file);
             FileUtil.writeToFile(file, writeContent.toString());
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, file.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, FileUtil.getRelativePath(file).toString()));
     }
 
     private void appendGroupHeaders(StringBuilder writeContent, List<Student> students) {
@@ -134,6 +129,28 @@ public class ExportCommand extends Command {
     private void replaceLastCharacterWithNewLine(StringBuilder writeContent) {
         int length = writeContent.length();
         writeContent.replace(length - 1, length, "\n");
+    }
+
+    /**
+     * Generates a path to save the csv. Ensures that the csv saved does not overwrite any existing file.
+     * Default path is ./sourceControl.csv.
+     */
+    public static Path generateNewPath(int tries) {
+        String pathString = String.format(BASE_PATH, tries == 0 ? "" : "(" + tries + ")");
+        Path path = FileUtil.pathOf(pathString);
+        if (FileUtil.isFileExists(path)) {
+            return generateNewPath(tries + 1);
+        } else {
+            return path;
+        }
+    }
+
+    public Path getFile() {
+        return this.file;
+    }
+
+    public void setFile(Path file) {
+        this.file = file;
     }
 
     @Override

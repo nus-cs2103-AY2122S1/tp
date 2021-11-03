@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.util.FileUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,16 +31,18 @@ public class ExportCommandTest {
     @Test
     public void execute_success() {
         Path path = getTempFilePath("execute.csv");
-        ExportCommand command = new ExportCommand(path);
+        ExportCommand command = new ExportCommand();
+        command.setFile(path);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(command, model,
-                String.format(ExportCommand.MESSAGE_SUCCESS, path.toString()), expectedModel);
+                String.format(ExportCommand.MESSAGE_SUCCESS, FileUtil.getRelativePath(path).toString()), expectedModel);
     }
 
     @Test
     public void exportImport_sameAb_success() throws Exception {
         Path path = getTempFilePath("exportImport.csv");
-        ExportCommand command = new ExportCommand(path);
+        ExportCommand command = new ExportCommand();
+        command.setFile(path);
         command.execute(model);
 
         ImportCommand importCommand = new ImportCommand(
@@ -55,8 +58,8 @@ public class ExportCommandTest {
 
     @Test
     public void equals() {
-        ExportCommand command = new ExportCommand(Path.of("abc.csv"));
-        ExportCommand otherCommand = new ExportCommand(Path.of("abc.csv"));
+        ExportCommand command = new ExportCommand();
+        ExportCommand otherCommand = new ExportCommand();
 
         // same object
         assertEquals(command, command);
@@ -64,7 +67,7 @@ public class ExportCommandTest {
         // same path
         assertEquals(otherCommand, command);
 
-        otherCommand = new ExportCommand(Path.of("def.csv"));
+        otherCommand.setFile(Path.of("abc.csv"));
         // different path
         assertNotEquals(otherCommand, command);
 
@@ -76,5 +79,13 @@ public class ExportCommandTest {
 
         // different type
         assertNotEquals(command, 1);
+    }
+
+    @Test
+    public void generatePath_success() {
+        assertEquals(new ExportCommand().getFile(), FileUtil.pathOf("sourceControl.csv"));
+
+        assertEquals(ExportCommand.generateNewPath(0), FileUtil.pathOf("sourceControl.csv"));
+        assertEquals(ExportCommand.generateNewPath(1), FileUtil.pathOf("sourceControl(1).csv"));
     }
 }

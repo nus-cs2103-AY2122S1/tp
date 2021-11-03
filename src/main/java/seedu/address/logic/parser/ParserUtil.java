@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +29,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_EMPTY_PATH = "Path should not be empty";
+    public static final String MESSAGE_INVALID_PATH = "Path provided is invalid";
+    public static final String MESSAGE_DIRECTORY = "Path provided should not be for a directory";
+    public static final String MESSAGE_WRONG_EXTENSION = "Path provided should end with %s$1";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
@@ -181,16 +185,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a given path into a path relative to the app's folder, ending in the right extension.
+     * Parses a given path into a path relative to the app's folder, and ensures that the path has the right extension.
      */
     public static Path parsePath(String path, String extension) throws ParseException {
         requireAllNonNull(path, extension);
         if (path.equals("")) {
             throw new ParseException(MESSAGE_EMPTY_PATH);
         }
-        if (!path.endsWith(extension)) {
-            path = path + extension;
+
+        if (!FileUtil.isValidPath(path)) {
+            throw new ParseException(MESSAGE_INVALID_PATH);
         }
+
+        if (new File(path).isDirectory()) {
+            throw new ParseException(MESSAGE_DIRECTORY);
+        }
+
+        if (!path.endsWith(extension)) {
+            throw new ParseException(String.format(MESSAGE_WRONG_EXTENSION, extension));
+        }
+
         return FileUtil.pathOf(path);
     }
 }
