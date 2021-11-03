@@ -3,7 +3,7 @@ package seedu.siasa.logic.commands.policy;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
-import java.util.Iterator;
+import java.util.function.Predicate;
 
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
@@ -11,24 +11,22 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.policy.Policy;
 
 /**
- * Lists all expired policies to the user.
+ * Filters the list of policies to only those expiring in a month to the user.
  */
 public class ShowExpiringPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicy";
 
+    public static final String MESSAGE_SUCCESS = "Showing policies that will be expiring in 1 month";
+
+    public static final Predicate<Policy> EXPIRING_POLICIES_MONTH = (
+            p) -> p.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1));
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        Iterator<Policy> policyListIterator = model.getFilteredPolicyList().iterator();
-        StringBuilder listOfPolicies = new StringBuilder("Policies expiring soon in 1 month:\n");
+        model.updateFilteredPolicyList(EXPIRING_POLICIES_MONTH);
 
-        while (policyListIterator.hasNext()) {
-            Policy policy = policyListIterator.next();
-            if (policy.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1))) {
-                listOfPolicies.append(policy);
-            }
-        }
-        return new CommandResult(listOfPolicies.toString());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
