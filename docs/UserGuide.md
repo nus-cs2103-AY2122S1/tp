@@ -610,7 +610,7 @@ Examples:
 Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
-Refer to [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator) for cases the Fees Calculator will not account for.
+Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
 Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
 
@@ -631,15 +631,16 @@ Examples:
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
 
-#### Behaviours of the Fees Calculator
+#### Behaviour of the Fees Calculator
 
 TAB will automatically update your lesson's outstanding fees once the lesson has ended using Fees Calculator feature. 
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The Fees Calculator will not account for any changes to lessons that have passed.
+</div>
 
-The Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
-
+Such cases to take note of include:
 * **Lesson rates increment.** In the event that you want to increase your lesson rates, the current outstanding fees will not change according to the newly edited lesson rates.
 * **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to
   the newly edited lesson rates.
@@ -648,8 +649,6 @@ The Fees Calculator will not account for any changes to lessons that have passed
 * **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
 * **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
   the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
-  
-</div>
 
 <div style="page-break-after: always;"></div>
 
