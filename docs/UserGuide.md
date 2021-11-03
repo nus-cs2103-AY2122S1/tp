@@ -102,15 +102,28 @@ Client ID (**Unique**) | Integer (assigned on creation of new contact) | i/
 Name (**Compulsory**) | String | n/
 Email (**Compulsory**)| String (email address)| e/
 Address | String | a/
-Current financial plans | List of Strings | c/
+Current financial plans | String | c/
 Disposable Income | Integer | d/
-Last met | Date | l/
+Last met | Date in `dd-MM-yyyy` format | l/
 Next Meeting | Composite (More information below table) | m/
-Contact number | Integer (8 digits long)| p/
+Contact number | Integer (at least 3 digits long)| p/
 Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| r/
 Tag | String | t/
 
-### 3.1 Next Meeting attribute 
+### 3.1 Duplicate Clients
+A client is considered to be the same as another client if they share the same **name** and **email**.
+
+LeadsForce has checks that prevent users from creating duplicated contacts.
+
+<div markdown="block" class="alert alert-info">
+ <p><img src=images/info_icon.png width="20"/><b>Notes about having the same client information for various attributes:</b></p>
+
+* Users have the flexibility to give the same name, email, phone number or any other attributes to multiple users, as long as
+   2 separate clients do not end up with the same name and email.
+
+</div>
+
+### 3.2 Next Meeting attribute 
 The `Next Meeting` attribute refers to the next meeting that the financial advisor using has with the client. Each `Next Meeting` consists of a *date*, *start time*, *end time* and a *location*. 
 
 A NextMeeting needs to be inputted in the following format:
@@ -126,7 +139,6 @@ where
 | :-: | :-- |
 | <img src=images/info_icon.png width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Features
@@ -134,7 +146,7 @@ where
 This section details the various features available in a single address book in LeadsForce. These features are generally used in the management of client information and client meetings. 
 
 <div markdown="block" class="alert alert-info">
- <p><img src=images/info_icon.png width="40"/><b>Notes about the command format:</b></p>
+ <p><img src=images/info_icon.png width="20"/><b>Notes about the command format:</b></p>
  
 * When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
