@@ -3,8 +3,6 @@ layout: page
 title: Developer Guide
 ---
 
-## Table of Contents
-
 * Table of Contents
 {:toc}
 
@@ -215,9 +213,9 @@ The features mentioned are:
 - [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
 - [Deleting multiple contacts by keywords](#delete-by-keywords)
 - [Importing a JSON file](#import-json-file)
+- [Support for multiple social handles](#support-for-multiple-social-handles)
 - [Undoing / redoing command](#proposed-undoredo-feature)
 - [Input Suggestion](#input-suggestion)
-- {and so on...}
 
 ### Add contacts with optional arguments
 
@@ -354,6 +352,24 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
     * Pros: Gives user the flexibility to put the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
+### Support for multiple social handles
+
+#### Implementation
+A social handle can store a social platfrom and a user ID tied to that platform.
+
+As a person may have multiple social handles for different social platforms, there is a need to support multiple social handles tied to a person.
+
+The approach to implementing mutiple social handles is similar to the orginal AB3's approach to implementing mutiple tags. A Java HashSet is used to store all the social handle objects of a person. 
+
+The current implementation allows for each person to have only 1 social handle for each platform. Therefore, when parsing social handles, new user ID will overwrite old user ID of the same social platfrom. This is done by using a Java Hashtable to store all the original social platforms in a platform name to social handle object pair, then check if the social platform of new social handle is present in the hashtable, and then update accordingly. After all the updates, the values of the hashtable are converted into a set to be store under an attribute of a person.
+
+#### Usage
+Social handles can be introduced to a person via the 'add' or 'edit' command.
+
+#### Design considerations:
+**Aspect: How to store social handle**
+* **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
+	* Cons: Will have many duplicated code as each social handles are similar.
 
 ### \[Proposed\] Undo/redo feature
 
