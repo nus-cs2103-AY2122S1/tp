@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.groups;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         try {
             indexes = ParserUtil.parseAllIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
         assert indexes.size() > 0; // indexes should not be empty, since preamble is non-empty and no parse exception

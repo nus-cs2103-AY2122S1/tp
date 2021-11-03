@@ -2,6 +2,9 @@ package seedu.address.logic.parser.tasks;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
+import static seedu.address.logic.parser.ValidateUtil.hasExpectedSeparatedSegments;
+import static seedu.address.logic.parser.ValidateUtil.isEmptyOrOnlyWhitespace;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
@@ -18,6 +21,12 @@ public class AssignTaskToPersonCommandParser implements Parser<AssignTaskToPerso
      */
     public AssignTaskToPersonCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        if (isEmptyOrOnlyWhitespace(args) || !hasExpectedSeparatedSegments(args, 2)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignTaskToPersonCommand.MESSAGE_USAGE));
+        }
+
         Index personIndex;
         Index taskIndex;
 
@@ -27,7 +36,7 @@ public class AssignTaskToPersonCommandParser implements Parser<AssignTaskToPerso
             taskIndex = indices[1];
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AssignTaskToPersonCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
         return new AssignTaskToPersonCommand(personIndex, taskIndex);

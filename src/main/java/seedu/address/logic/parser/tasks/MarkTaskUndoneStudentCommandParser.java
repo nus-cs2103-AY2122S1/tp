@@ -2,9 +2,11 @@ package seedu.address.logic.parser.tasks;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
+import static seedu.address.logic.parser.ValidateUtil.hasExpectedSeparatedSegments;
+import static seedu.address.logic.parser.ValidateUtil.isEmptyOrOnlyWhitespace;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.tasks.MarkTaskDoneStudentCommand;
 import seedu.address.logic.commands.tasks.MarkTaskUndoneStudentCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -18,6 +20,10 @@ public class MarkTaskUndoneStudentCommandParser implements Parser<MarkTaskUndone
      */
     public MarkTaskUndoneStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        if (isEmptyOrOnlyWhitespace(args) || !hasExpectedSeparatedSegments(args, 2)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkTaskUndoneStudentCommand.MESSAGE_USAGE));
+        }
         Index personIndex;
         Index taskIndex;
 
@@ -27,7 +33,7 @@ public class MarkTaskUndoneStudentCommandParser implements Parser<MarkTaskUndone
             taskIndex = indices[1];
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MarkTaskDoneStudentCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
         return new MarkTaskUndoneStudentCommand(personIndex, taskIndex);
