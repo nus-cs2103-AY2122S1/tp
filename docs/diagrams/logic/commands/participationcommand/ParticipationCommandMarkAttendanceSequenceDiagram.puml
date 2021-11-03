@@ -1,24 +1,20 @@
 @startuml
 !include ../../../style.puml
 
+box Logic LOGIC_COLOR_T1
 Participant ":ParticipationCommand" as pc LOGIC_COLOR
-Participant ":Student" as ste LOGIC_COLOR
-Participant ":Attendance" as att LOGIC_COLOR
-Participant ":boolean[]" as bla LOGIC_COLOR
-Participant ":Attendance" as natt LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Student" as ste MODEL_COLOR
+Participant ":Attendance" as natt MODEL_COLOR
+end box
 
 activate pc
+-> pc
 opt  participationUpdate > 0
 
 loop for each Index in indexArrayList
-pc -> ste ++ : getAttendance
-ste --> pc -- : attendance
-
-pc -> att ++ : getAttendanceArray
-att --> pc -- : newAttArr
-
-pc -> bla ++ : newAttArr[sessionCount - 1] = true
-bla --> pc --
 
 create natt
 pc -> natt ++ : Attendance(sessionCount)
@@ -31,4 +27,7 @@ pc -> ste ++ : setAttendance(newAttendance)
 ste --> pc --
 end
 end
+
+<-- pc--
+
 @enduml

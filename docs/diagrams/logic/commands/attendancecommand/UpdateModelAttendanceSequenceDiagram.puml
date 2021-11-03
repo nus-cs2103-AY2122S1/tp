@@ -1,11 +1,15 @@
 @startuml
 !include ../../../style.puml
 
+box Logic LOGIC_COLOR_T1
 Participant ":AttendanceCommand" as ac LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
 Participant ":StudioRecord" as sr LOGIC_COLOR
 Participant ":Student" as est LOGIC_COLOR
 Participant ":ModelManager" as mm LOGIC_COLOR
-
+end box
 
 activate ac
 -> ac
@@ -20,5 +24,5 @@ est --> ac -- : editedStudent
 
 ac -> mm ++ : setStudent(studentToEdit, editedStudent)
 mm --> ac --
-<-- ac
+<-- ac --
 @enduml
