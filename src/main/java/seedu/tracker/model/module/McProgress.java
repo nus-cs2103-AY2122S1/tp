@@ -57,7 +57,7 @@ public class McProgress {
 
         if (ratio > 0 && ratio <= minDisplayRatio) {
             return minDisplayRatio;
-        } else if (ratio >= 1){
+        } else if (ratio >= 1) {
             return 1;
         } else {
             return ratio;
