@@ -213,6 +213,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The features mentioned are:
 - [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
+- [Finding contacts by keywords](#find-contacts-by-keywords)
 - [Deleting multiple contacts by keywords](#delete-by-keywords)
 - [Importing a JSON file](#import-json-file)
 - [Undoing / redoing command](#proposed-undoredo-feature)
@@ -261,6 +262,50 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Save all optional attributes of a contact as Optional type.
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
+
+### Find Contacts by Keywords
+
+#### Implementation
+
+The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of 
+their contact details.
+
+#### Usage
+
+Given below is an example usage scenario of how the findCommand mechanism behaves at each step.
+
+1. The user first launches Socius. The user can see the details of his/her contacts once Socius starts.
+
+2. The user finds a new contact by one or more contact details, for example, Name and Tag.
+
+3. The user executes the command "find n/[NAME] t/[TAG]" to find people with that Name and has that Tag.
+
+4. The `parse` function of FindCommandParse will parse the input and instantiate a new `Predicate` object for each
+   argument present. At the end, all `Predicate` objects are combined using the `MultiplePredicate` object.
+
+5. The command communicates with the `Model` to filter out the found person from the existing AddressBook.
+
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following sequence diagram shows how the FindCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/FindCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![UpdatedAddCommand](images/UpdatedFindCommand.png)#
+
+#### Design Considerations
+
+**Aspect: How contacts are saved with multiple arguments:**
+
+* **Alternative 1 (current choice):** Only include people who contain all the specified contact details 
+    * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
+    * Cons: Requires you to be familiar of the people in your contact list.
+
+* **Alternative 2:** Include people who contain at least one of the specified contact details.
+    * Pros: Good for users who want to broadly search for eligible friends 
+    * Cons: Not very intuitive
 
 ### Delete by keywords
 
