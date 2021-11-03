@@ -28,7 +28,7 @@ import safeforhall.model.event.Venue;
 public class EditEventCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String PARAMETERS = "INDEXES [n/NAME] [d/DATE] [v/VENUE] [c/CAPACITY]";
+    public static final String PARAMETERS = "INDEXES [n/NAME] [d/DATE] [t/TIME] [v/VENUE] [c/CAPACITY]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed events list. "
             + "Existing values will be overwritten by the input values.\n"
