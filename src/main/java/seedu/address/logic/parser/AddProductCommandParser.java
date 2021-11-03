@@ -20,6 +20,9 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_UNIT_PRICE, PREFIX_QUANTITY);
 
+        if (argMultimap.getPreamble().equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddProductCommand.MESSAGE_USAGE));
+        }
         Name name = ParserUtil.parseName(argMultimap.getPreamble());
 
         if (!arePrefixesPresent(argMultimap, PREFIX_UNIT_PRICE)) {

@@ -30,6 +30,9 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE_NUMBER, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_ORDER);
 
+        if (argMultimap.getPreamble().equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
+        }
         Name name = ParserUtil.parseName(argMultimap.getPreamble());
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PHONE_NUMBER)) {
