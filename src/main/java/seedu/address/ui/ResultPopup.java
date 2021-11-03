@@ -13,6 +13,7 @@ import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 public class ResultPopup extends UiPart<Region> {
@@ -47,10 +48,14 @@ public class ResultPopup extends UiPart<Region> {
      * Displays popup on primary stage for POPUP_DISPLAY_DURATION_SECONDS.
      */
     public void show() {
-        double width = primaryStage.getScene().getWindow().getX() + primaryStage.getScene().getWindow().getWidth() * 0.25;
-        double height = primaryStage.getScene().getWindow().getY() + primaryStage.getScene().getWindow().getHeight() * 0.25;
-        result.setPrefSize(primaryStage.getScene().getWindow().getWidth() * 0.5, primaryStage.getScene().getWindow().getHeight() * 0.25);
-        popup.show(primaryStage, width, height);
+        Window window = primaryStage.getScene().getWindow();
+
+        result.setPrefSize(window.getWidth() * 0.75, window.getHeight() * 0.25);
+
+        double x = window.getX() + window.getWidth() * 0.125;
+        double y = window.getY() + window.getHeight() * 0.25;
+        popup.show(primaryStage, x, y);
+
         PauseTransition delay = new PauseTransition(Duration.seconds(POPUP_DISPLAY_DURATION_SECONDS));
         delay.setOnFinished(event -> popup.hide());
         delay.play();
