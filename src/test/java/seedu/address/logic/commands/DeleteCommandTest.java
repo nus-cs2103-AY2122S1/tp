@@ -35,23 +35,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
-
-        Participant participantToDelete = model.getFilteredParticipantList()
-                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteParticipant(participantToDelete);
-        showNoParticipant(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
 
