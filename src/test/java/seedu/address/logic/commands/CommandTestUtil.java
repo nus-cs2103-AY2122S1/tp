@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -47,10 +48,10 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_DESCRIPTION_CS2030S = "Programming Methodology II";
     public static final String VALID_GROUP_DESCRIPTION_CS2040S = "Data Structures and Algorithms";
 
-    public static final String VALID_GROUP_NAME_AMY = "CS2103T"; // TODO change back later @albino monke
-    public static final String VALID_DESC_AMY = "hi";
-    public static final String VALID_GROUP_NAME_BOB = "CS2103T"; // TODO change back later @albino monke
-    public static final String VALID_DESC_BOB = "hi";
+    public static final String VALID_GROUP_NAME_AMY = "CS2103T";
+    public static final String VALID_DESC_AMY = "Software eng mod";
+    public static final String VALID_GROUP_NAME_BOB = "CS2103T";
+    public static final String VALID_DESC_BOB = "Software eng mod";
 
     public static final String VALID_ASSESSMENT_NAME_QUIZ1 = "Quiz 1";
     public static final String VALID_ASSESSMENT_NAME_LAB5 = "Lab 5";
@@ -73,6 +74,23 @@ public class CommandTestUtil {
     public static final String ASSESSMENT_NAME_DESC_LAB5 = " " + PREFIX_ASSESSMENT_NAME + VALID_ASSESSMENT_NAME_LAB5;
     public static final String SCORE_DESC_QUIZ1 = " " + PREFIX_SCORE + VALID_SCORE_QUIZ1;
     public static final String SCORE_DESC_LAB5 = " " + PREFIX_SCORE + VALID_SCORE_LAB5;
+
+    public static final String VALID_GROUP_NAME_CS2103T_DESC = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_CS2103T;
+    public static final String VALID_GROUP_NAME_CS1231S_DESC = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_CS1231S;
+    public static final String VALID_GROUP_NAME_CS1101S_DESC = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_CS1101S;
+    public static final String VALID_GROUP_NAME_CS2030S_DESC = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_CS2030S;
+    public static final String VALID_GROUP_NAME_CS2040S_DESC = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_CS2040S;
+    public static final String VALID_GROUP_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + VALID_GROUP_DESCRIPTION;
+
+    public static final String VALID_GROUP_DESCRIPTION_CS1231S_DESC = " " + PREFIX_DESCRIPTION
+            + VALID_GROUP_DESCRIPTION_CS1231S;
+    public static final String VALID_GROUP_DESCRIPTION_CS1101S_DESC = " " + PREFIX_DESCRIPTION
+            + VALID_GROUP_DESCRIPTION_CS1101S;
+    public static final String VALID_GROUP_DESCRIPTION_CS2030S_DESC = " " + PREFIX_DESCRIPTION
+            + VALID_GROUP_DESCRIPTION_CS2030S;
+    public static final String VALID_GROUP_DESCRIPTION_CS2040S_DESC = " " + PREFIX_DESCRIPTION
+            + VALID_GROUP_DESCRIPTION_CS2040S;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_TELEGRAM_HANDLE_DESC = " " + PREFIX_TELEGRAM_HANDLE
