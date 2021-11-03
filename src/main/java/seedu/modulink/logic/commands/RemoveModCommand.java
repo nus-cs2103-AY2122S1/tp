@@ -24,15 +24,16 @@ public class RemoveModCommand extends Command {
     public static final String COMMAND_WORD = "remMod";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes one or more modules from your module list. "
-            + "Remaining modules will not be overwritten.\n"
+            + ": Removes a module from your module list. "
+            + "Remaining modules will not be affected.\n"
             + "Parameters: "
             + "[" + PREFIX_MOD + "MOD]\n"
             + "Example: " + COMMAND_WORD
             + " " + PREFIX_MOD + "CS2103T";
 
     public static final String MESSAGE_ADD_MODULE_SUCCESS = "Removed module: %1$s";
-    public static final String MESSAGE_NO_CHANGE = "At least one module must be provided.";
+    public static final String MESSAGE_NO_CHANGE =
+            "Please provide a module to remove with the \"mod/\" prefix.";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST =
             "You can only remove existing modules in your module list.";
 

@@ -2,9 +2,11 @@ package seedu.modulink.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.modulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -39,10 +41,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ID + "STUDENT ID] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL]\n"
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GITHUB_USERNAME + "GITHUB] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "Note: To edit your module list, "
+            + "please use the \"addMod\", \"remMod\", or \"editGroupStatus\" commands.";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

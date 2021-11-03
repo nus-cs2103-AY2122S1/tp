@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.AddressBook;
 import seedu.modulink.model.ReadOnlyAddressBook;
 import seedu.modulink.model.person.Email;
@@ -255,7 +256,13 @@ public class SampleDataUtil {
      */
     public static Set<Mod> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Mod::new)
+                .map(modString -> {
+                    try {
+                        return new Mod(modString);
+                    } catch (ParseException e) {
+                        return null;
+                    }
+                })
                 .collect(Collectors.toSet());
     }
 
