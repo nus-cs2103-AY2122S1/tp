@@ -82,6 +82,7 @@ public class Appointment {
             String source = date + " " + time;
             temp = new SimpleDateFormat("dd MMM yyyy HHmm").parse(source);
         } catch (ParseException e) {
+            logger.info("-----Error parsing Date-----");
             e.printStackTrace();
         }
         return temp;
@@ -95,6 +96,7 @@ public class Appointment {
         try {
             temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
         } catch (ParseException e) {
+            logger.info("-----Error parsing Date-----");
             e.printStackTrace();
         }
         return temp;
