@@ -225,7 +225,7 @@ Expected Output:
 #### 4.2.2 Adding a Product
 
 Adds a product with name, unit price and optional quantity. If quantity is not specified, the number of product is not
-0, but undefined instead.
+0, but undefined instead. Unit price have to only contain 2 decimal places. `-$ 0.2` and `-$ 0.002` would be invalid.
 
 Format: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
