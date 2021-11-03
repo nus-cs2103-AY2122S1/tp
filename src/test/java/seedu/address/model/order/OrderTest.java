@@ -13,10 +13,10 @@ import seedu.address.model.product.Quantity;
 
 public class OrderTest {
     private final LocalDate now = LocalDate.now();
-    private final Order oneIphone = new Order(IPHONE.getId(), new Quantity("1"), now);
-    private final Order oneIphoneCopy = new Order(IPHONE.getId(), new Quantity("1"), now);
-    private final Order oneIphoneDuplicate = new Order(IPHONE.getId(), new Quantity("3"), now);
-    private final Order twoAirpods = new Order(AIRPODS.getId(), new Quantity("2"), LocalDate.MAX);
+    private final Order oneIphone = new Order(IPHONE.getName(), new Quantity("1"), now);
+    private final Order oneIphoneCopy = new Order(IPHONE.getName(), new Quantity("1"), now);
+    private final Order oneIphoneDuplicate = new Order(IPHONE.getName(), new Quantity("3"), now);
+    private final Order twoAirpods = new Order(AIRPODS.getName(), new Quantity("2"), LocalDate.MAX);
 
     @Test
     public void equals() {
