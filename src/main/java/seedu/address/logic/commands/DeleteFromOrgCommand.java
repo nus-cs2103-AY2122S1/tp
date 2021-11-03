@@ -25,7 +25,7 @@ public class DeleteFromOrgCommand extends Command {
             + "Parameters: "
             + "INDEX (must be a positive integer, refers to person in list) "
             + PREFIX_NAME + "NAME \n"
-            + "Example: " + COMMAND_WORD + " 1 /n Facebook";
+            + "Example: " + COMMAND_WORD + " 1 n/Facebook";
 
     public static final String MESSAGE_SUCCESS = "%1$s deleted from %2$s";
 
@@ -45,6 +45,9 @@ public class DeleteFromOrgCommand extends Command {
         requireNonNull(model);
 
         Organisation organisation = model.getOrganisationByName(organisationName);
+        if (organisation == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ORGANISATION_DISPLAYED_NAME);
+        }
         UniquePersonList persons = organisation.getPersons();
         List<Person> personList = persons.asUnmodifiableObservableList();
 
