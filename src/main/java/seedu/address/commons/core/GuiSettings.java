@@ -52,15 +52,14 @@ public class GuiSettings implements Serializable {
             return true;
         }
 
-        if (!(other instanceof GuiSettings)) { //this handles null as well.
+        if (!(other instanceof GuiSettings)) { // this handles null as well.
             return false;
         }
 
         GuiSettings o = (GuiSettings) other;
-
         return windowWidth == o.windowWidth
-                       && windowHeight == o.windowHeight
-                       && Objects.equals(windowCoordinates, o.windowCoordinates);
+                && windowHeight == o.windowHeight
+                && Objects.equals(windowCoordinates, o.windowCoordinates);
     }
 
     @Override

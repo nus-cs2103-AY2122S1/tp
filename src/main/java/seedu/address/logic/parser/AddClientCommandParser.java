@@ -16,7 +16,7 @@ import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommandParser implements Parser<AddClientCommand> {
-    private Model model;
+    private final Model model;
 
     public AddClientCommandParser(Model model) {
         this.model = model;
@@ -25,27 +25,19 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
     @Override
     public AddClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_PHONE_NUMBER, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ORDER);
 
-        Name name;
-        try {
-            name = ParserUtil.parseName(argMultimap.getPreamble());
-        } catch (ParseException parseException) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddClientCommand.MESSAGE_USAGE), parseException);
-        }
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE_NUMBER, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_ORDER);
+
+        Name name = ParserUtil.parseName(argMultimap.getPreamble());
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PHONE_NUMBER)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddClientCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
         }
 
-        PhoneNumber phoneNumber = ParserUtil.parsePhoneNumber(
-                argMultimap.getValue(PREFIX_PHONE_NUMBER).get());
+        PhoneNumber phoneNumber = ParserUtil.parsePhoneNumber(argMultimap.getValue(PREFIX_PHONE_NUMBER).get());
 
-        AddClientCommand.AddClientDescriptor descriptor =
-                new AddClientCommand.AddClientDescriptor(name, phoneNumber);
+        AddClientCommand.AddClientDescriptor descriptor = new AddClientCommand.AddClientDescriptor(name, phoneNumber);
 
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             descriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));

@@ -3,78 +3,82 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-    * [Acknowledgements](#acknowledgements)
-    * [Setting up & getting started](#setting-up--getting-started)
-    * <details><summary><a href="#design">Design</a></summary>
-        <ul>
-            <li><a href="#architecture">Architecture</a></li>
-            <li><a href="#ui-component">UI component</a></li>
-            <li><a href="#logic-component">Logic component</a></li>
-            <li><a href="#model-component">Model component</a></li>
-            <li><a href="#storage-component">Storage component</a></li>
-            <li><a href="#common-classes">Common classes</a></li>
-        </ul></details>
-    * <details><summary><a href="#implementation">Implementation</a></summary>
-        <ul>
-            <li><a href="#add-clientproduct-feature">Add Client/Product Feature</a></li>
-            <li><a href="#delete-clientproduct-feature">Delete Client/Product Feature</a></li>
-            <li><a href="#edit-clientproduct-feature">Edit Client/Product Feature</a></li>
-            <li><a href="#find-clientproduct-feature">Find Client/Product Feature</a></li>
-            <li><a href="#view-clientproduct-feature">View Client/Product Feature</a></li>
-            <li><a href="#command-history-feature">Command History Feature</a></li>
-            <li><a href="#proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a></li>
-            <li><a href="#proposed-data-archiving">[Proposed] Data archiving</a></li>
-        </ul></details>
-    * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-    * <details><summary><a href="#appendix-requirements">Appendix: Requirements</a></summary>
-        <ul>
-            <li><a href="#product-scope">Product scope</a></li>
-            <li><a href="#user-stories">User stories</a></li>
-            <li><a href="#use-cases">Use cases</a></li>
-            <li><a href="#non-functional-requirements">Non-Functional Requirements</a></li>
-            <li><a href="#glossary">Glossary</a></li>
-        </ul></details>
-    * <details><summary><a href="#appendix-instructions-for-manual-testing">Appendix: Instructions for manual testing</a></summary>
-        <ul>
-            <li><a href="#launch-and-shutdown">Launch and shutdown</a></li>
-            <li><a href="#deleting-a-clientproduct">Deleting a client/product</a></li>
-            <li><a href="#saving-data">Saving data</a></li>
-        </ul></details>
+## Table of Contents
+
+1. [Introduction](#Introduction)<br>
+1. [Setting up & getting started](#setting-up--getting-started)<br>
+1. <details><summary><a href="#design">Design</a></summary>
+        3.1 <a href="#architecture">Architecture</a><br>
+        3.2 <a href="#ui-component">UI component</a><br>
+        3.3 <a href="#logic-component">Logic component</a><br>
+        3.4 <a href="#model-component">Model component</a><br>
+        3.5 <a href="#storage-component">Storage component</a><br>
+        3.6 <a href="#common-classes">Common classes</a><br>
+   </details>
+1. <details><summary><a href="#implementation">Implementation</a></summary>
+        4.1 <a href="#add-clientproduct-feature">Add Client/Product Feature</a><br>
+        4.2 <a href="#delete-clientproduct-feature">Delete Client/Product Feature</a><br>
+        4.3 <a href="#edit-clientproduct-feature">Edit Client/Product Feature</a><br>
+        4.4 <a href="#find-clientproduct-feature">Find Client/Product Feature</a><br>
+        4.5 <a href="#view-clientproduct-feature">View Client/Product Feature</a><br>
+        4.6 <a href="#command-history-feature">Command History Feature</a><br>
+        4.7 <a href="#proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
+        4.8 <a href="#proposed-data-archiving">[Proposed] Data archiving</a><br>
+   </details>
+1. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+1. <details><summary><a href="#appendix-requirements">Appendix: Requirements</a></summary>
+        6.1 <a href="#product-scope">Product scope</a><br>
+        6.2 <a href="#user-stories">User stories</a><br>
+        6.3 <a href="#use-cases">Use cases</a><br>
+        6.4 <a href="#non-functional-requirements">Non-Functional Requirements</a><br>
+        6.5 <a href="#glossary">Glossary</a><br>
+   </details>
+1. <details><summary><a href="#appendix-instructions-for-manual-testing">Appendix: Instructions for manual testing</a></summary>
+        7.1 <a href="#launch-and-shutdown">Launch and shutdown</a><br>
+        7.2 <a href="#deleting-a-clientproduct">Deleting a client/product</a><br>
+        7.3 <a href="#saving-data">Saving data</a><br>
+   </details>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## 1. Introduction
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+**Sellah** is a desktop application optimized for online sellers who prefer using a `Command Line Interface (CLI)` over
+the `Graphical User Interface (GUI)`. It is used to keep track of the contact information of your clients and details of
+the products in your inventory, as well as details of the orders placed by your clients.
+
+The purpose of this developer guide is to aid any curious or interested contributor in developing Sellah further by 
+providing more insight on how the features were implemented.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up & getting started**
+## 2. Setting up & getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+1. Ensure that Java 11 and IntelliJ Idea (or your preferred Java IDE) are installed in your computer.
+1. Fork the Sellah repo from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp), and clone the fork into your computer.
+1. Configure the JDK in IntelliJ Idea to use JDK 11 by following instructions from [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
+1. Import the project as a Gradle project.
+1. If you had previously disabled the Gradle plugin, go to `File → Settings → Plugins` to re-enable them.
+1. Click on Import Project and select the build.gradle file.
+1. Navigate to the Sellah class via the path `src → main → java → Main` and click on it.
+1. Press run on the `Main()` method of Sellah or run `gradle run`.
+
+If the set up process had been completed successfully, you should see the GUI similar to the below：
+![img.png](images/UiHelpCommand.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## 3. Design
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the
-[diagrams](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/docs/diagrams/) folder. Refer to the
-[_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
-and edit diagrams.
-
-</div>
-
-### Architecture
+### 3.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of main components of Sellah and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -98,7 +102,7 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete 1`.
+the command `delete -c 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -124,9 +128,12 @@ The **API** of this component is specified in
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
-the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts `CommandBox`, `ResultDisplay`, `ClientListPanel`,
+`ProductListPanel`, `ClientCard`, `ProductCard`, `HelpMessage`, `ViewMoreClient`, `ViewMoreProduct`, `PieChartSalesView`
+`StatusBarFooter` and `HelpWindow`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class 
+which captures the commonalities between classes that represent parts of the visible GUI. In addition, `HelpMessage`, 
+`ViewMoreClient`, `ViewMoreProduct` and `PieChartSalesView` extends from `SecondPanel` which displays the results of
+view, stat and help command.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of the
@@ -139,7 +146,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Client` or `Product` object residing in the `Model`.
 
 ### Logic component
 
@@ -158,8 +165,8 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
-call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -c 1")` 
+API call.
 
 ![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteClientSequenceDiagram.png)
 
@@ -193,24 +200,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-  this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Client` and `Product` objects (which are contained in a `UniquePersonList` 
+  object and a `UniqueProductList` object respectively).
+* stores the currently 'selected' `Client` and `Product` objects (e.g., results of a search query) as two separate 
+  _filtered_ lists which are exposed to outsiders as the unmodifiable `ObservableList<Client>` and 
+  `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to the lists so that the UI automatically 
+  updates when the data in these lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the
-`AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag,
-instead of each `Person` needing their own `Tag` objects.
-<br>
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 ### Storage component
 
@@ -569,8 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | download the app               | use it                                                                 |
-| `* * *`  | new user                                   | type ‘exit’                    | quit the app immediately                                               |
+| `* * *`  | new user                                   | see usage instructions         | can refer to them when I forget how to use the application                                                                 |
 | `* * *`  | 2nd-time user                              | add a client                   | keep track of the details of a specific client                         |
 | `* * *`  | 2nd-time user                              | add a product                  | keep track of the details of a specific product                        |
 | `* * * ` | 2nd-time user                              | edit a client                  | edit the details of a specific client                                  |
@@ -581,8 +579,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * * ` | 2nd-time user                              | delete a product               | remove product that I no longer need                                   |
 | `* * `   | 10th-time user                             | list all my clients            | locate a client easily                                                 |
 | `* * `   | 10th-time user                             | list all my products           | locate a product easily                                                |
+| `* * * ` | 10th-time user                             | see the statistics of the products sold | analyse the consumer pattern and make better decision in the future |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -756,8 +754,7 @@ User story ends.
     * 2a1. Sellah shows an error message.
 
       Use case ends.
-
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
@@ -768,8 +765,13 @@ User story ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, OS-X, and macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI** - Command Line Interface
+* **IntelliJ** - An Integrated Development Environment (IDE) designed for Java software development.
+* **UML** - Unified Modeling Language.
+* **Terminal/PowerShell** - Any operating system shell with a command-line interface.
+* **JDK** - Java Development Kit.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -831,8 +833,7 @@ expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+       
 
 ### Saving data
 
