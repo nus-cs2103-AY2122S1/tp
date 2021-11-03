@@ -4,9 +4,10 @@ import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.module.Module;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building TeachingAssistantBuddy objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code TeachingAssistantBuddy tab = new TeachingAssistantBuilder()
+ *     .withModule(new Module(new ModuleName("CS2103").build();}
  */
 public class TeachingAssistantBuddyBuilder {
 

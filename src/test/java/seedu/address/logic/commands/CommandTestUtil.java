@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
@@ -39,6 +40,8 @@ public class CommandTestUtil {
 
     public static final String MODULE_NAME_DESC_0 = " " + PREFIX_MODULE_NAME + MODULE_NAME_0;
     public static final String MODULE_NAME_DESC_1 = " " + PREFIX_MODULE_NAME + MODULE_NAME_1;
+    public static final String NEW_MODULE_NAME_DESC_0 = " " + PREFIX_NEW_MODULE_NAME + MODULE_NAME_0;
+    public static final String NEW_MODULE_NAME_DESC_1 = " " + PREFIX_NEW_MODULE_NAME + MODULE_NAME_1;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_AMY;
@@ -54,6 +57,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "teleHandle"; // missing @
     public static final String INVALID_MODULE_NAME_DESC = " " + PREFIX_MODULE_NAME
+            + "modulE@"; // '@' not allowed in module names
+    public static final String INVALID_NEW_MODULE_NAME_DESC = " " + PREFIX_NEW_MODULE_NAME
             + "modulE@"; // '@' not allowed in module names
 
     public static final String VALID_TASK_NAME_0 = "Assignment 1";

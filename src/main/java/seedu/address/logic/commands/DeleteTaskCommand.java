@@ -71,7 +71,7 @@ public class DeleteTaskCommand extends DeleteCommand {
      *
      * @param student The student with the task to be deleted.
      */
-    public void deleteTaskFromStudent(Student student) {
+    public void deleteTaskFromStudent(Student student) throws CommandException {
         for (Task task : student.getTaskList()) {
             if (task.getTaskId().equals(targetTaskId)) {
                 logger.log(Level.INFO, "deleting task from student's taskList: " + task.getTaskId());
@@ -79,6 +79,7 @@ public class DeleteTaskCommand extends DeleteCommand {
                 return;
             }
         }
+        throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, targetTaskId));
     }
 
     /**
