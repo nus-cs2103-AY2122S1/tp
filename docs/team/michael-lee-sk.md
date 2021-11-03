@@ -3,17 +3,24 @@ layout: page
 title: Michael Lee's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: TuitiONE
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+TuitiONE is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added a feature called `Enroll` that established bi-directional linkages between `Student` (previously `Person`) and `Lesson` entities.
+  * What it does: Allows users to enroll a student of a specific `grade` into a lesson with that same respective `grade`.
+  * Justification: A key feature in the application in order to establish the bi-directional linkages between a `Student` and a `Lesson`.
+  * Highlights:
+    * A `Student` can be enrolled into a `Lesson` if and only if 
+      1. The `Student` is not currently enrolled in the specific `Lesson`.
+      1. The `Student` has the same grade as the `Lesson`.
+      1. The `Student` must not currently be enrolled in **10** or more `Lessons`.
+      1. The `Lesson` must not currently have **15** or more `Students` enrolled.
+    * Ensuring defensive programming is embedded in the bidirectional relationship with multiple constraints so that it can be tapped on by other packages such as `model`, `storage` as well as `logic`.
+    * Abstracting logic for ease of usage within other packages (similar to previous pointer).
+    * Ensuring and maintaining the new entity into `storage` integration with Jackson JSON processing library.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
