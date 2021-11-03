@@ -21,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
@@ -83,6 +84,8 @@ public class AddGroupCommandTest {
     private class ModelStubAddGroupSuccess extends ModelStub {
         private List<Person> personList = new ArrayList<>();
         private Group added = null;
+        private ViewingType type = null;
+        private Group toView = null;
 
         public ModelStubAddGroupSuccess(List<Person> personList, Group added) {
             this.personList = personList;
@@ -112,6 +115,16 @@ public class AddGroupCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setGroupToView(Group group) {
+            toView = group;
+        }
+
+        @Override
+        public void setViewingType(ViewingType type) {
+            this.type = type;
         }
 
         @Override
