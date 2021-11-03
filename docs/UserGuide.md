@@ -291,7 +291,7 @@ The following sub-categories will explain the intended purpose for the set of fe
 
 ### 4.1 Database
 
-Database features consist of features that allows you to be able to make changes to modules that are in our database. 
+[Database](#database) features consist of features that allows you to be able to make changes to modules that are in our database. 
 Do note that these features do not directly affect the modules that are currently stored in your academic plan.
 (we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan in the [FAQ](#5-faq) section) <br>
 
@@ -364,7 +364,7 @@ Examples:
 
 ### 4.2 Academic Plan
 
-Academic Plan features consist of features that allows you to be able to create and customize your own academic plan.
+[Academic Plan](#academic-plan) features consist of features that allows you to be able to create and customize your own academic plan.
 Do note that these features are the ones that allows you to update and edit your academic plans
 (such as the visual display of which modules you have taken, as well as the progress bar for each of the University's requirements).
 
