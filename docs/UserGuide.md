@@ -427,6 +427,9 @@ Example(s):
 
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
+* `add-l s/Mathematics g/S4 d/fri t/1500 c/10.3`
+
+
 ![Outcome of `add-l`](images/UserGuideImage/add-l.PNG)
 
 <center><i>Image: Expected output of <code>add-l</code> command.</i></center><br>
