@@ -179,7 +179,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons\n"
                 + persons;
-        // TODO: refine later
     }
 
     @Override
@@ -217,7 +216,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return The Calendar consisting of all lessons entries.
      */
     public Calendar getCalendar() {
-        // TODO: Make defensive
         return entries.getCalendar();
     }
 

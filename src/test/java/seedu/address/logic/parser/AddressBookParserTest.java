@@ -54,7 +54,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
@@ -97,7 +96,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -114,61 +112,51 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_calendar() throws Exception {
         assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD) instanceof CalendarCommand);
-        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " 3") instanceof CalendarCommand);
     }
 
     @Test
     public void parseCommand_day() throws Exception {
         assertTrue(parser.parseCommand(DayCommand.COMMAND_WORD) instanceof DayCommand);
-        assertTrue(parser.parseCommand(DayCommand.COMMAND_WORD + " 3") instanceof DayCommand);
     }
 
     @Test
     public void parseCommand_week() throws Exception {
         assertTrue(parser.parseCommand(WeekCommand.COMMAND_WORD) instanceof WeekCommand);
-        assertTrue(parser.parseCommand(WeekCommand.COMMAND_WORD + " 3") instanceof WeekCommand);
     }
 
     @Test
     public void parseCommand_month() throws Exception {
         assertTrue(parser.parseCommand(MonthCommand.COMMAND_WORD) instanceof MonthCommand);
-        assertTrue(parser.parseCommand(MonthCommand.COMMAND_WORD + " 3") instanceof MonthCommand);
     }
 
     @Test
     public void parseCommand_year() throws Exception {
         assertTrue(parser.parseCommand(YearCommand.COMMAND_WORD) instanceof YearCommand);
-        assertTrue(parser.parseCommand(YearCommand.COMMAND_WORD + " 3") instanceof YearCommand);
     }
 
     @Test
     public void parseCommand_next() throws Exception {
         assertTrue(parser.parseCommand(NextCommand.COMMAND_WORD) instanceof NextCommand);
-        assertTrue(parser.parseCommand(NextCommand.COMMAND_WORD + " 3") instanceof NextCommand);
     }
 
     @Test
     public void parseCommand_back() throws Exception {
         assertTrue(parser.parseCommand(BackCommand.COMMAND_WORD) instanceof BackCommand);
-        assertTrue(parser.parseCommand(BackCommand.COMMAND_WORD + " 3") instanceof BackCommand);
     }
 
     @Test
     public void parseCommand_today() throws Exception {
         assertTrue(parser.parseCommand(TodayCommand.COMMAND_WORD) instanceof TodayCommand);
-        assertTrue(parser.parseCommand(TodayCommand.COMMAND_WORD + " 3") instanceof TodayCommand);
     }
 
     @Test
@@ -176,6 +164,10 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () -> parser
                         .parseCommand(""));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        TodayCommand.MESSAGE_USAGE), () -> parser
+                        .parseCommand(TodayCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
