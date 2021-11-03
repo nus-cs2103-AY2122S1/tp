@@ -767,6 +767,50 @@ These are some use cases to familiarise with the flow of our application:
     * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 2.
+    
+**Use case: Filtering appointments**
+
+**MSS**
+1. Clinic receptionist wishes to filter through all appointments.
+2. Clinic receptionist enters the parameters to filter through the appointment records.
+3. The filtered results are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not specify any parameters when filtering through the appointment records.
+  
+    * 2a1. All appointments in the appointment records are displayed in the appointment list.
+    
+        Use case ends.
+    
+* 2b. The users enters a parameter that is invalid.
+  
+    * 2b1. An error message is shown, informing the user of an invalid parameter.
+    * 2b2. User enters the new parameters.
+    
+        Steps 2b1-2b2 are repeated until the new parameters entered are valid.
+      
+        Use case resumes from step 3.  
+    
+**Use case: Listing today's appointments**
+
+**MSS**
+1. Clinic receptionists wishes to view all of today's appointments.
+2. Clinic receptionists enters the `appt -l` command.
+3. All of today's appointments are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid.
+
+    * 2a1. An error message is shown to the user.
+  
+        Use case resumes at step 2.
+
 
 ### Non-Functional Requirements  <a name="nfr"/>
 
