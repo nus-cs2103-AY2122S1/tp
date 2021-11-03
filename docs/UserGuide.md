@@ -363,10 +363,15 @@ Moves a student to/from a class.
 
 Adds one or more existing students to an existing class.
 
-When adding multiple students at once, use:
-* commas(`,`) to separate names, with no spaces after each comma.
-
-* spaces to separate indices.
+<div markdown="block" class="alert alert-primary"> 
+  
+:information_source: Note: When adding multiple students at once:<br>
+  
+  * use commas(`,`) to separate names, with no spaces after each comma.
+  
+  * use spaces to separate indices.
+  
+</div>
 
 Format:
 
@@ -543,6 +548,14 @@ Format:
 ```
 timetable
 ```
+<div markdown="block" class="alert alert-primary"> 
+  
+:information_source: Note: <br>
+  
+  * If a lesson is shorter than one hour, its details would have a smaller font size or be completely omitted.
+  
+  * Lessons with partically displayed details can be found in the ResultDisplay panel above the timetable. For example, in Figure 6 below, Econs lesson is only 15     minutes and thus not displayed with details.
+</div>
 
 ![Timetable](images/time_table.png)
 <p align="center"><i>Figure 6: A timetable view of all tuition classes in a week</i></p>
