@@ -448,6 +448,7 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
+
 ![lessonCard](images/annotatedRecurringLessonCard.png)
 
 <div class="caption">Layout of a lesson card.</div>
