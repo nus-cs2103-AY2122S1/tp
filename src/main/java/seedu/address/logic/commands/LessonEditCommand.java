@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -88,7 +87,7 @@ public class LessonEditCommand extends UndoableCommand {
             "Failed to uncancel lesson! This lesson does not have a cancelled lesson on %1$s.";
 
 
-    private final Index index;
+    private Index index;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
     private Person personBeforeLessonEdit;
@@ -101,6 +100,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param lessonIndex to edit.
      */
     public LessonEditCommand(Index index, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
+        super(COMMAND_ACTION);
         requireNonNull(index);
         requireNonNull(lessonIndex);
 
@@ -129,7 +129,6 @@ public class LessonEditCommand extends UndoableCommand {
         personAfterLessonEdit = PersonUtil.createdEditedPerson(personBeforeLessonEdit, updatedLessons);
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(), lessonToEdit, editedLesson),
                 personAfterLessonEdit);
@@ -269,22 +268,19 @@ public class LessonEditCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
         model.setPerson(personAfterLessonEdit, personBeforeLessonEdit);
+        return personBeforeLessonEdit;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
-
+        model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
+        return personAfterLessonEdit;
     }
 
     @Override
