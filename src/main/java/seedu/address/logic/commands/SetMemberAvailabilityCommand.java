@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,6 +27,8 @@ public class SetMemberAvailabilityCommand extends Command {
             + "d/1 2 3 7";
 
     public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Successfully set availability of %s to %s";
+    public static final String MESSAGE_INVALID_INDICES =
+            "One or more of the provided member index is not in the displayed member list";
 
     private final List<Index> indices;
     private final Availability availability;
@@ -50,9 +51,11 @@ public class SetMemberAvailabilityCommand extends Command {
 
         for (Index i : indices) {
             if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+                throw new CommandException(MESSAGE_INVALID_INDICES);
             }
+        }
 
+        for (Index i : indices) {
             Person personToEdit = lastShownList.get(i.getZeroBased());
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTodayAttendance(),

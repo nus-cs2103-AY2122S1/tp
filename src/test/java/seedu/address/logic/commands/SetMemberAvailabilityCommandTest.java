@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -14,12 +20,45 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Availability;
+import seedu.address.testutil.PersonBuilder;
 
 public class SetMemberAvailabilityCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_null_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new SetMemberAvailabilityCommand(null, null));
+    }
+
+    @Test
+    public void execute_validIndicesProvided_success() {
+        Model model = new ModelManager();
+        model.addPerson(AMY);
+        model.addPerson(BOB);
+
+        Model expectedModel = new ModelManager();
+        expectedModel.addPerson(new PersonBuilder(AMY).withAvailability("6 7").build());
+        expectedModel.addPerson(new PersonBuilder(BOB).withAvailability("6 7").build());
+        Availability expectedAvailability = new Availability(List.of(DayOfWeek.of(6), DayOfWeek.of(7)));
+        SetMemberAvailabilityCommand command = new SetMemberAvailabilityCommand(List.of(INDEX_FIRST, INDEX_SECOND),
+                expectedAvailability);
+        String expectedNames = AMY.getName() + ", " + BOB.getName() + ", ";
+        String expectedMessage = String.format(SetMemberAvailabilityCommand.MESSAGE_SET_AVAILABILITY_SUCCESS,
+                expectedNames, expectedAvailability);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndicesAndInvalidIndicesProvided_failure() {
+        Model model = new ModelManager();
+        model.addPerson(AMY);
+
+        Availability expectedAvailability = new Availability(List.of(DayOfWeek.of(6), DayOfWeek.of(7)));
+        SetMemberAvailabilityCommand command = new SetMemberAvailabilityCommand(List.of(INDEX_FIRST, INDEX_SECOND),
+                expectedAvailability);
+
+        assertCommandFailure(command, model, SetMemberAvailabilityCommand.MESSAGE_INVALID_INDICES);
     }
 
     @Test
