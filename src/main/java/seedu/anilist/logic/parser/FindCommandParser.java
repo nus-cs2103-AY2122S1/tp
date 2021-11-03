@@ -29,7 +29,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap;
 
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, false, PREFIX_NAME, PREFIX_GENRE);
+            argMultimap = ParserUtil.tokenizeWithCheck(args, false, new Prefix[] {}, PREFIX_NAME, PREFIX_GENRE);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

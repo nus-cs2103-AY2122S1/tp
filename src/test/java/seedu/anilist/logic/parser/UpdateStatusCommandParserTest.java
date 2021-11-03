@@ -31,7 +31,7 @@ public class UpdateStatusCommandParserTest {
         assertParseFailure(parser, STATUS_DESC_WATCHING, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", UpdateStatusCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

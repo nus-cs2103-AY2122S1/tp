@@ -20,7 +20,7 @@ public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EPISODE);
 
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, true, PREFIX_EPISODE);
+            argMultimap = ParserUtil.tokenizeWithCheck(args, true, new Prefix[] {PREFIX_EPISODE});
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateEpisodeCommand.MESSAGE_USAGE));
         }
@@ -35,9 +35,7 @@ public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> 
         }
 
         UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor = new UpdateEpisodeCommand.EpisodeDescriptor();
-        if (argMultimap.getValue(PREFIX_EPISODE).isPresent()) {
-            episodeDescriptor.setEpisode(ParserUtil.parseEpisode(argMultimap.getValue(PREFIX_EPISODE).get()));
-        }
+        episodeDescriptor.setEpisode(ParserUtil.parseEpisode(argMultimap.getValue(PREFIX_EPISODE).get()));
 
         if (!episodeDescriptor.isEpisodeUpdated()) {
             throw new ParseException(UpdateEpisodeCommand.MESSAGE_NOT_UPDATED);

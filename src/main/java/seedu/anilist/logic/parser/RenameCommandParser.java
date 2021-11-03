@@ -18,7 +18,7 @@ public class RenameCommandParser implements Parser<RenameCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap;
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, true, PREFIX_NAME);
+            argMultimap = ParserUtil.tokenizeWithCheck(args, true, new Prefix[] {PREFIX_NAME});
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameCommand.MESSAGE_USAGE));
         }
@@ -32,9 +32,7 @@ public class RenameCommandParser implements Parser<RenameCommand> {
         }
 
         RenameCommand.NameDescriptor nameDescriptor = new RenameCommand.NameDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            nameDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
+        nameDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
 
         if (!nameDescriptor.isNameUpdated()) {
             throw new ParseException(RenameCommand.MESSAGE_NOT_RENAMED);

@@ -24,16 +24,11 @@ public class ListCommandParser implements Parser<ListCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap;
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, false, PREFIX_STATUS);
+            argMultimap = ParserUtil.tokenizeWithCheck(args, false, new Prefix[] {PREFIX_STATUS});
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         Status statusToMatch;
-
-        if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE));
-        }
 
         statusToMatch = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
 

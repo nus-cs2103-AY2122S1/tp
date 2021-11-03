@@ -9,7 +9,6 @@ import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_NO_SUCH_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
-import static seedu.anilist.logic.commands.GenreCommand.MESSAGE_GENRE_NOT_PROVIDED;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.anilist.testutil.AnimeUtil.getGenreDescriptorDetails;
@@ -46,7 +45,7 @@ public class GenreCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
         // no genre specified
-        assertParseFailure(parser, "1" + ACTION_DESC_ADD, MESSAGE_GENRE_NOT_PROVIDED);
+        assertParseFailure(parser, "1" + ACTION_DESC_ADD, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
