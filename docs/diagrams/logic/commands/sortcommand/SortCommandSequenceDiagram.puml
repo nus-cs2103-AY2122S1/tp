@@ -1,17 +1,18 @@
 @startuml
 !include ../../../style.puml
 
+box Logic LOGIC_COLOR_T1
 Participant ":SortCommand" as sc LOGIC_COLOR
-Participant ":ModelManager" as mm LOGIC_COLOR
-Participant ":ObservableList" as ol LOGIC_COLOR
-Participant ":ArrayList" as al LOGIC_COLOR
 Participant ":AcademyDirectory" as ad LOGIC_COLOR
-Participant ":UniqueStudentList" as usl LOGIC_COLOR
 Participant ":AcademyDirectory" as mad LOGIC_COLOR
 Participant ":UniqueStudentList" as musl LOGIC_COLOR
 Participant ":CommandResult" as cr LOGIC_COLOR
 Participant ":FilteredList" as fl LOGIC_COLOR
+end box
 
+box Model MODEL_COLOR_T1
+Participant ":ModelManager" as mm MODEL_COLOR
+end box
 
 [-> sc : execute(model)
 activate sc
@@ -19,41 +20,20 @@ sc -> mm ++: getFilteredStudentList
 mm --> sc --: students
 ref over sc : GetComparator
 
-create al
-sc -> al ++ : ArrayList
-al --> sc --: sortedList
-sc -> al ++ : addAll(students)
-al --> sc --
-sc -> al ++ : sort(comparator)
-al --> sc --
-sc -> sc ++ : getResultString
-sc --> sc -- : result
+
 
 create ad
 sc -> ad ++ : AcademyDirectory
 ad --> sc -- : sortedAcademyDirectory
 
-sc -> ad ++ : setStudents(sortedList)
-ad -> usl ++ : setStudents(sortedList)
-usl --> ad --
-ad --> sc --
+sc -> ad : setStudents(sortedList)
 
-sc -> mm ++ : setAcademyDirectory(sortedAcademyDirectory)
-mm -> mad ++ : resetData(sortedAcademyDirectory)
-mad -> mad ++ : getStudentList
-mad --> mad -- : newStudentList
-mad -> musl ++ : setStudents(newStudentList)
-musl --> mad --
-mad --> mm --
-mm --> sc --
-sc -> mm ++ : updateFilteredStudentsList(PREDICATE_SHOW_ALL_STUDENTS)
-mm -> fl ++ : setPredicate(PREDICATE_SHOW_ALL_STUDENTS)
-fl --> mm --
-mm --> sc --
+
+sc -> mm : setAcademyDirectory(sortedAcademyDirectory)
 
 create cr
 sc -> cr ++ : CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS)
-cr --> sc -- : command result
-<-- sc : command result
+cr --> sc -- : commandResult
+<-- sc : commandResult
 
 @enduml

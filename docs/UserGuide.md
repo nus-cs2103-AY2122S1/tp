@@ -166,8 +166,8 @@ A student can have no phone number due to privacy concern.
 * If Avengers do not wish to enter a student's phone number, 
   * `p/` prefix can be omitted from the command.
   * Otherwise, Avengers can supply the value `NA` to `p/` prefix. Note that it must be `NA` not `N.A` or `NAb`
-* If newly inputted students have `NAME` matching exactly with an already existing entry, the program will output a warning message and show the existing entry.\
-`This student already exists in the academy directory`
+* If newly inputted students have `NAME` matching exactly (case-sensitive) with an already existing entry, the program will output a warning message and show the existing entry.\
+`This student already exists in the academy directory.`
 
 Examples:
 * `add n/Aaron Tan te/@sausage e/e0123456@u.nus.edu p/90312311`
@@ -244,13 +244,15 @@ whose name contains `alex`
 
 #### Editing a student's detail : `edit`
 
-Edits a student's personal detail and `NAME`.
+Edits a student's personal details such as their `NAME`, `PHONE`, `TELEGRAM` and `EMAIL`.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [te/TELE_HANDLE] [p/PHONE_NUMBER]`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* If edited `NAME` exactly matches (case-sensitive) with an already existing entry that is not the entry being edited, the program will output a warning message and show the existing entry.\
+`This student already exists in the academy directory.`
 
 Examples:
 * `edit 1 p/91234567 e/e0425205@u.nus.edu`  Edits the phone number and email address of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.
