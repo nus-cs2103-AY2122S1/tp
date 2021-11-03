@@ -60,7 +60,8 @@ and TAs contacts within teams and tutorial groups. It is optimized for CLI users
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -147,7 +148,6 @@ Format: `delete {INDEX | -a | -f}`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Displays a confirmation to delete all contacts returned from any previous find queries.
 * You can use the optional -f argument to clear all contacts from a previous find queries.
 * The -a argument deletes all contacts unless specified by the [-f] argument to delete only the previous find query.
 
@@ -225,11 +225,21 @@ Format: `export email FILENAME`
 
 Undoes a previously executed command. `undo` can reverse any commands executed after the program was last started (except `undo`, `export`, and `exit`).
 
+After executing the `undo` command, the remaining number of commands that can be undid is displayed. For example, the following output shows that there are 2 more commands that can be undid; the `undo` command can be executed 2 more times.
+
+> Undo successful  
+> Remaining undo count: 2
+
 Format: `undo`
 
 ### Redoing a command: `redo`
 
 Re-performs a command that was undone. `redo` can redo any undone command up to the last executed command; executing a command that is not `undo` or `redo` will clear the redo history.
+
+After executing the `redo` command, the remaining number of commands that can be redone is displayed. For example, the following output shows that there are 3 more commands that can be redone.
+
+> Undo successful  
+> Remaining undo count: 3
 
 Format: `redo`
 
@@ -277,5 +287,7 @@ Action | Format, Examples
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
 **Export** | `export FILENAME` <br> e.g., `export t01students.json`
 **Export Email** | `exportemail FILENAME` <br> e.g., `export email email.txt`
+**Undo** | `undo`
+**Redo** | `redo`
 **Statistics** | `stat`
 **Help** | `help`
