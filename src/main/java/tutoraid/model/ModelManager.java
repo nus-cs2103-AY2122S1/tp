@@ -2,7 +2,6 @@ package tutoraid.model;
 
 import static java.util.Objects.requireNonNull;
 import static tutoraid.ui.DetailLevel.HIGH;
-import static tutoraid.ui.DetailLevel.MED;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;

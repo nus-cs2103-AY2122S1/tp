@@ -1,9 +1,6 @@
 package tutoraid.ui;
 
 import static java.util.Objects.requireNonNull;
-import static tutoraid.ui.DetailLevel.HIGH;
-import static tutoraid.ui.DetailLevel.LOW;
-import static tutoraid.ui.DetailLevel.MED;
 
 import java.util.logging.Logger;
 
@@ -97,8 +94,9 @@ public class UiManager implements Ui {
      * @param detailLevel The level of detail to display
      */
     public static void showDetails(DetailLevel detailLevel) {
-        requireNonNull(mainWindow);
-        mainWindow.fillLessonCard(detailLevel);
-        mainWindow.fillStudentCard(detailLevel);
+        if (mainWindow != null) {
+            mainWindow.fillLessonCard(detailLevel);
+            mainWindow.fillStudentCard(detailLevel);
+        }
     }
 }
