@@ -117,7 +117,8 @@ public class UniqueModuleLessonListTest {
 
     @Test
     public void setModuleLesson_nullUniqueModuleLessonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueLessonList.setModuleLessons((UniqueModuleLessonList) null));
+        assertThrows(NullPointerException.class,
+                () -> uniqueLessonList.setModuleLessons((UniqueModuleLessonList) null));
     }
 
     @Test
