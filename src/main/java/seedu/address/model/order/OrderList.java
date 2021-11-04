@@ -130,7 +130,7 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Returns true if {@code orders} contains only unique tasks.
+     * Returns true if {@code orders} contains only unique orders.
      */
     private boolean ordersAreUnique(List<Order> orders) {
         for (int i = 0; i < orders.size() - 1; i++) {
