@@ -253,6 +253,10 @@ public class MainWindow extends UiPart<Stage> {
             displayPopup("Upload failed: " + e.getMessage());
             return;
         }
+        saveDataState(newPE);
+    }
+
+    private void saveDataState(ProgrammerError newPE) {
         logic.updateProgrammerError(newPE);
         logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
         logic.saveProgrammerError(newPE);
