@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in contHACKS.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -85,7 +85,7 @@ public class Person {
         }
 
         return otherPerson.getName().equals(getName())
-                || otherPerson.getEmail().equals(getEmail());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -97,7 +97,9 @@ public class Person {
         }
 
         return getName().isSimilarTo(otherPerson.getName())
-                || getEmail().isSimilarTo(otherPerson.getEmail());
+                || getEmail().isSimilarTo(otherPerson.getEmail())
+                || getPhone().equals(otherPerson.getPhone())
+                || getTeleHandle().isSimilarTo(otherPerson.getTeleHandle());
     }
 
 

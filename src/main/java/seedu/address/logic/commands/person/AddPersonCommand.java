@@ -15,11 +15,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to contHACKS.
  */
 public class AddPersonCommand extends Command {
 
-    public static final String MESSAGE_USAGE = "add: Adds a person to the address book.\n"
+    public static final String MESSAGE_USAGE = "add: Adds a person to contHACKS.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
@@ -38,10 +38,10 @@ public class AddPersonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON_MAYBE =
-            "Warning: Someone with similar name/email already exist.\n"
+            "Warning: Someone with similar identity already exist.\n"
             + "Nonetheless, new person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =
-            "A person with exactly the same name or email already exists in the address book";
+            "A person with exactly the same name and email already exists in contHACKS";
 
     private final Person toAdd;
 

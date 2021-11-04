@@ -48,7 +48,7 @@ public class Name {
             return false;
         }
 
-        return this.contains(other) || other.contains(this);
+        return this.contains(other) && other.contains(this);
     }
 
     private boolean contains(Name other) {
