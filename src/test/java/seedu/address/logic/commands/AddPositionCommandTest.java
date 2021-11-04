@@ -6,27 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyApplicantBook;
-import seedu.address.model.ReadOnlyPositionBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.ApplicantParticulars;
-import seedu.address.model.applicant.Name;
 import seedu.address.model.position.Position;
-import seedu.address.model.position.Title;
 import seedu.address.testutil.PositionBuilder;
-
 
 
 public class AddPositionCommandTest {

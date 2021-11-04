@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -12,8 +15,7 @@ import seedu.address.model.applicant.Name;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
+
 
 /**
  * A default model stub that have all of the methods failing.

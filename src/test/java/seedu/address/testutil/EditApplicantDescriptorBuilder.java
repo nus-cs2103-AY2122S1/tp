@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.descriptors.EditApplicantDescriptor;
-import seedu.address.logic.descriptors.EditPositionDescriptor;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Application;
@@ -9,7 +8,6 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.applicant.ProfileUrl;
-import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 public class EditApplicantDescriptorBuilder {

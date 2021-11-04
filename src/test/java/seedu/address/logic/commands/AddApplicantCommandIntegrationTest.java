@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -48,8 +49,8 @@ public class AddApplicantCommandIntegrationTest {
     public void execute_newApplicantWithNonExistingPosition_throwsCommandException() {
         Position nonExistingPosition = new PositionBuilder().withTitle("NonExistingPosition").build();
 
-        ApplicantParticulars invalidParticulars = new ApplicantBuilder().
-                withPosition(nonExistingPosition).getParticulars();
+        ApplicantParticulars invalidParticulars = new ApplicantBuilder()
+                .withPosition(nonExistingPosition).getParticulars();
         Applicant invalidApplicant = new ApplicantBuilder().withPosition(nonExistingPosition).build();
 
         Model expectedModel = new ModelManager(model.getPositionBook(), new UserPrefs());
