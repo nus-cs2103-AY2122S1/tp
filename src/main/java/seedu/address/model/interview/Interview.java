@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class Interview {
     public static final String EMPTY_TIME = "-";
     public static final String MESSAGE_CONSTRAINTS =
             "Interview time should be on a valid day and follow the format: "
-                    + "[year(in 4 digit)-month-date, hour-minute]. "
+                    + "yyyy-M-d, H:m (Year should be strictly 4-digit while others can be either 1 or 2 digit) "
                     + "E.g. i/2021-09-01, 8:00 or i/2021-9-1,08:00";
 
     public final String parseTime;
