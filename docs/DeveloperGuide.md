@@ -176,7 +176,7 @@ The `Model` component
   that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the
   list change.
 
-![Model Displayable object diagram](images/ModelDisplayableClassDiagram.png)
+![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
 
 - The `Model` component interacts with `Ui` component through a `Displayable` interface.
 
