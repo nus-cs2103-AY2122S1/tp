@@ -233,33 +233,6 @@ Examples:
 * `find -s John` returns `john`, `John Doe` and `Johnny Liu`
 * `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
 
-### Setting payment made: `paid`
-{:.no_toc}
-Sets the payment status of the specified student to `Paid for the current month`.
-
-Format: `paid STUDENT_INDEX`
-
-- Sets the payment status for the student at the specified `STUDENT_INDEX` as `Paid for the current month`.
-- The index refers to the index number shown in the displayed student list.
-- The index must be a **positive integer** 1, 2, 3, ...
-
-Example:
-
-- `paid 3` updates the 3rd student's payment status to `Paid for the current month`.
-
-### Unsetting payment made: `unpaid`
-{:.no_toc}
-Sets the payment status of the specified student to `Has not paid for the current month`.
-
-Format: `unpaid STUDENT_INDEX`
-
-- Sets the payment status for the student at the specified `STUDENT_INDEX` as `Has not paid for the current month`.
-- The index refers to the index number shown in the displayed student list.
-- The index must be a **positive integer** 1, 2, 3, …
-
-Examples:
-
-- `unpaid 3` updates the 3rd student's payment status to `Has not paid for the current month`.
 
 ### Adding progress for a student : `add -p`
 {:.no_toc}
@@ -475,8 +448,6 @@ Action | Format and Examples
 **[Edit student](#editing-a-student--edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **[View student](#viewing-a-student--view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
 **[Find student](#locating-students-by-name-find--s)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
-**[Set payment made](#setting-payment-made-paid)** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
-**[Unset payment made](#unsetting-payment-made-unpaid)** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student--del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
