@@ -1,6 +1,6 @@
 @startuml
 start
-:User executes Edit Command;
+:User executes Add Command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
@@ -8,11 +8,9 @@ start
 if () then ([command is
 valid])
 
-    :Identify the Person to be edited from the specified
-    index and what categories to be edited;
-    :Create the edited Person with the changed categories;
+    :Create the new Person with the specified arguments;
 
-    if () then ([new edited Person already
+    if () then ([new Person already
     exists in the AddressBook])
 
         stop
@@ -20,8 +18,7 @@ valid])
     else ([else])
     endif
 
-    :Replace the specified Person in the
-    AddressBook with the new edited Person;
+    :Add the new Person into the AddressBook;
 
     :GUI Result Display updated with
     new correct list of applicants;
