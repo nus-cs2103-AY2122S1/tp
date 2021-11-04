@@ -1,7 +1,6 @@
 package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.joining;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static tutoraid.ui.DetailLevel.HIGH;
@@ -15,7 +14,6 @@ import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
-import tutoraid.model.student.Name;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
