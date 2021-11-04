@@ -454,7 +454,7 @@ Format: **`import`** `FILE_NAME.json`
 * File must be located in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
-* **`import`** `import.json` imports a contact book via a file named `import.json` into your existing application.
+* **`import`** `groupmates.json` imports a contact book via a file named `groupmates.json` into your existing application.
 ![Folder Directory for imported files](images/ImportExample.png)
 *Illustration of where the JSON file should be located*
 
