@@ -63,7 +63,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = FriendCommandParser.COMMAND_WORD + " " + DeleteFriendCommand.COMMAND_WORD
-                + " daksjhdkjashdjkashkdjashjkaskjdjkasdhkas";
+                + " daksjhdkjashdjkas";
         assertCommandException(deleteCommand, MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 

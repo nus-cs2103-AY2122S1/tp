@@ -84,7 +84,7 @@ public class JsonAdaptedGameFriendLinkTest {
     public void toModelType_invalidGameId_throwsIllegalValueException() {
         JsonAdaptedGameFriendLink gameFriendLink = new JsonAdaptedGameFriendLink(INVALID_GAME_ID,
                 VALID_FRIEND_ID_BENSON, INVALID_FRIEND_USERNAME, VALID_SKILL_VALUE_STRING_ONE);
-        String expectedMessage = GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID;
+        String expectedMessage = GameId.MESSAGE_INVALID_CHARACTERS;
         assertThrows(IllegalValueException.class, expectedMessage, gameFriendLink::toModelType);
     }
 

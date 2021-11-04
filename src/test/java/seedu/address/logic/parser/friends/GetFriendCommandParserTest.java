@@ -30,7 +30,7 @@ public class GetFriendCommandParserTest {
     public void parse_emptyArgsWithFlag_throwsParseException() {
         String emptyArgs1 = " " + FLAG_GET.getFlag();
         String emptyArgs2 = " " + FLAG_GET.getFlag() + "          ";
-        String expectedMessage = FriendId.MESSAGE_INVALID_CHARACTERS;
+        String expectedMessage = FriendId.MESSAGE_EMPTY_FRIEND_ID;
 
         assertParseFailure(parser, emptyArgs1, expectedMessage);
         assertParseFailure(parser, emptyArgs2, expectedMessage);
