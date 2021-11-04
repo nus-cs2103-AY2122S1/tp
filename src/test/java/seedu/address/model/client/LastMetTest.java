@@ -64,7 +64,7 @@ public class LastMetTest {
     }
 
     @Test
-    public void notFutureDate() {
+    public void isNotFutureDate() {
         // used in conjunction with isValidDate, so assume dates to be valid
 
         // empty string

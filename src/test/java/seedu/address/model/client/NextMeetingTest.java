@@ -59,7 +59,7 @@ public class NextMeetingTest {
     }
 
     @Test
-    public void notPastMeeting() {
+    public void isNotPastMeeting() {
         String validDate = "24-12-2050";
         String validEndTime = "13:00";
 
