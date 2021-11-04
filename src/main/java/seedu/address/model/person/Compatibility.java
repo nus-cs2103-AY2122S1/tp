@@ -48,9 +48,9 @@ public class Compatibility {
      */
     public String toString() {
         if (compatibilityRating.isEmpty()) {
-            return "[ - % ]";
+            return " - ";
         } else {
-            return '[' + compatibilityRating.get() + "% ]";
+            return compatibilityRating.get() + "%";
         }
     }
 }
