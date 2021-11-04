@@ -15,6 +15,7 @@ public class ProfileUrl {
     public static final String PLACEHOLDER_URL = "https://www.google.com";
     public static final String MESSAGE_CONSTRAINTS =
             "Profile urls must be valid github and linkedin urls.";
+    //better give an example of a valid url?
 
     private static final ProfileUrl EMPTY_PROFILE_URL = new ProfileUrl(PLACEHOLDER_URL);
     public final String url;
