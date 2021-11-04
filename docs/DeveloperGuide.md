@@ -813,6 +813,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
 * **Principle of Least-Privilege**: Minimum levels of access – or permissions – needed to perform function.
 * **Version Controllable**: Refers to a `Command` that logs a `Commit` object upon execution with the logging relying on the `Optional` field in the `CommandResult` returned from `Command#execute()`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
