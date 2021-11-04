@@ -378,7 +378,8 @@ invoked. This method calls `areUserCredentialsValid()` method to verify if the
 entered credentials are valid or not. If they are valid, the User Profile is deemed
 complete and is set up with the help of the `Logic` object, that was obtained during
 the initialization of the object. If the credentials are not valid, an error message
-is shown in the Window, highlighting which credential is invalid.
+is shown in the Window, highlighting which credential is invalid. The User cannot proceed
+forward without entering all valid Credentials.
 
 The `areUserCredentialsValid()` class checks if the entered Name, Telegram Handle
 and the GitHub Username are valid. 
@@ -394,6 +395,45 @@ This method is also responsible for displaying the appropriate error message
 in the Window.
 
 ![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
+
+### User Profile Window
+
+#### Implementation
+
+The class `UserProfileWindow` is responsible for displaying the User Profile
+Window. It is showed only when the user either uses the keyboard shortcut, 
+`Command/Control + P`, or clicks on the User Profile located in the top right in
+the Menu Bar. It is facilitated by `UserProfileWindow.fxml`
+and `UserProfileWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file add a style, and enhances the
+overall Ui.
+
+The `UserProfileWindow` class extends `UiPart<Stage>`.
+
+This window can only be viewed when the app has successfully started up,
+and has the valid User Credentials.
+
+This window is initialized when the `MainWindow` is initialized. Basically, it
+is initialized in the `MainWindow` constructor. This window, to be seen, has to be 
+triggered as an event by the user. The `MainWindow` class has a method 
+`handleUserProfileWindow()`, which is responsible for displaying this window.
+
+The `handleUserProfileWindow()` when called, calls the method `isShowing()` via 
+the object initialized earlier. If it is not showing, the `show()` method of the
+`UserProfileWindow` class is called upon. Else, if it is already showing, the
+`focus()` method is called upon. Along with that, in case the window had been
+minimized by the User, `UserProfileWindow#getRoot()#toFront()` is called to
+bring the window to the maximized state.
+
+The `UserProfileWindow#show()`, first calls the `UserProfileWindow#initializeFields()`,
+to initialize all the fields with the latest User Profile Credentials. This would in turn
+also call `UserProfileWindow#setFields()`, to set them up in the Ui. After all the setting
+up is done, the User Profile Window is shown.
+
+The `UserProfileWindow#focus()`, calls the `getRoot()` method to obtain the root object.
+On that root object, `requestFocus()` is called upon to request focus.
+
+![UserProfileWindowSequenceDiagram](images/UserProfileWindowSequenceDiagram.png)
 
 ### Show command
 
