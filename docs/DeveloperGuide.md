@@ -798,6 +798,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAST shows an error message.
     * 1a2. FAST shows an example of add contact command to user.
 
+* 1b. The given input parameters is invalid.
+    * 1b1. FAST shows an error message.
+    * 1b2. FAST shows an example of add contact command to user.
+
       Use case ends.
 
 #### Use case: UC02 - Delete Contact
@@ -843,7 +847,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
+* 2c. The given input parameters is invalid.
+    * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
+    
 #### Use case: UC04 - Add a remark
 
 **MSS**
@@ -869,8 +876,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends
 
+* 2c. The given input parameters is invalid.
+    * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
 
-* 2c. User removes an existing remark
+      Use case ends
+    
+* 2d. User removes an existing remark
     * 2c1. FAST displays a message that the remark has been removed.
 
       Use case ends.
@@ -937,8 +949,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2c. An appointment has already been scheduled.
+* 2c. The given input parameters is invalid.
     * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
+
+      Use case ends.
+
+* 2d. An appointment has already been scheduled.
+    * 2d1. FAST shows an error message.
 
       Use case ends.
 
@@ -987,8 +1005,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2c. No appointment scheduled yet.
-    * 2c1.FAST shows an error message.
+* 2c. The given input parameters is invalid.
+    * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
+
+      Use case ends.
+    
+* 2d. No appointment scheduled yet.
+    * 2d1.FAST shows an error message.
 
       Use case ends.
 
