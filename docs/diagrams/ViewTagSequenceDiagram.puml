@@ -7,7 +7,7 @@ participant ":CenterPanel" as CenterPanel UI_COLOR
 end box
 
 box Logic LOGIC_COLOR_T1
-participant "logic:LogicManager" as LogicManager LOGIC_COLOR
+participant "logic:Logic" as Logic LOGIC_COLOR
 participant "addressBookParser:AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "command:TagCommand" as TagCommand LOGIC_COLOR
 participant "command:TagCommand" as TagCommand LOGIC_COLOR
@@ -17,10 +17,10 @@ end box
 [-> MainWindow : executeCommand("tag")
 activate MainWindow
 
-MainWindow -> LogicManager : execute("tag")
-activate LogicManager
+MainWindow -> Logic : execute("tag")
+activate Logic
 
-LogicManager -> AddressBookParser : parseCommand("tag")
+Logic -> AddressBookParser : parseCommand("tag")
 activate AddressBookParser
 
 create TagCommand
@@ -30,10 +30,10 @@ activate TagCommand
 TagCommand --> AddressBookParser : command
 deactivate TagCommand
 
-AddressBookParser --> LogicManager : command
+AddressBookParser --> Logic : command
 deactivate AddressBookParser
 
-LogicManager -> TagCommand : execute()
+Logic -> TagCommand : execute()
 activate TagCommand
 
 create CommandResult
@@ -47,13 +47,34 @@ deactivate CommandResult
 CommandResult -[hidden]-> AddressBookParser
 destroy CommandResult
 
-TagCommand --> LogicManager : commandResult
+TagCommand --> Logic : commandResult
 deactivate TagCommand
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-TagCommand -[hidden]-> AddressBookParser
+TagCommand -[hidden]-> Logic
 destroy TagCommand
 
-[<--LogicManager
-deactivate LogicManager
+Logic --> MainWindow : commandResult
+deactivate Logic
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Logic -[hidden]-> MainWindow
+destroy Logic
+
+MainWindow -> MainWindow : handleShowTagList()
+activate MainWindow
+
+MainWindow -> CenterPanel : displayTagListPanel()
+activate CenterPanel
+
+CenterPanel --> MainWindow
+deactivate CenterPanel
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+[<-- MainWindow
+deactivate MainWindow
+
+
 @enduml

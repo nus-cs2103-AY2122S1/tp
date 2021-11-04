@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 
 public class TagCommand extends Command {
@@ -15,6 +17,6 @@ public class TagCommand extends Command {
             + "Example: " + COMMAND_WORD;
     @Override
     public CommandResult execute() throws CommandException {
-        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayType.TAGS);
+        return new CommandResult(MESSAGE_SUCCESS, TAGS);
     }
 }
