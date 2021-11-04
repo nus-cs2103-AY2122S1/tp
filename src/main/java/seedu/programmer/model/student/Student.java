@@ -101,7 +101,7 @@ public class Student implements DisplayableObject {
     }
 
     public Lab getLab(LabNum labNum) {
-        return labList.stream().filter(x -> x.getLabNum() == labNum).findFirst().orElse(null);
+        return labList.stream().filter(x -> x.getLabNum().equals(labNum)).findFirst().orElse(null);
     }
 
     /**
