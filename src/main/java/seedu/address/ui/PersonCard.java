@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.commons.util.GitHubUtil;
 import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.person.Person;
@@ -42,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private TextFlow name;
     @FXML
     private Label id;
     @FXML
@@ -60,10 +63,17 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
+
+        setName(person);
+
+        String[] tagClasses = new String[] {"tag-general", "tag-event", "tag-mod"};
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label temp = new Label(tag.tagName);
+                    temp.setId(tagClasses[tag.getIntType()]);
+                    tags.getChildren().add(temp);
+                });
         Rectangle clip = new Rectangle(
                 profileView.getFitWidth(), profileView.getFitHeight()
         );
@@ -96,6 +106,29 @@ public class PersonCard extends UiPart<Region> {
             favBtn.setImage(FAVORITE);
         } else {
             favBtn.setImage(NOT_FAVORITE);
+        }
+    }
+
+    public void setName(Person person) {
+        if (person.getFindHighlight() != null) {
+            String nameString = person.getName().fullName.toLowerCase(Locale.ROOT);
+            int start = nameString.indexOf(person.getFindHighlight());
+            int end = start + person.getFindHighlight().length();
+            Text startText = new Text(person.getName().fullName.substring(0, start));
+            Text midText = new Text(person.getName().fullName.substring(start, end));
+            Text endText = new Text(person.getName().fullName.substring(end));
+            startText.getStyleClass().add("big_label");
+            midText.getStyleClass().add("big_label");
+            endText.getStyleClass().add("big_label");
+            startText.setFill(Color.WHITE);
+            midText.setFill(Color.LIME);
+            endText.setFill(Color.WHITE);
+            name.getChildren().addAll(startText, midText, endText);
+        } else {
+            Text nameText = new Text(person.getName().fullName);
+            nameText.getStyleClass().add("big_label");
+            nameText.setFill(Color.WHITE);
+            name.getChildren().add(nameText);
         }
     }
 
