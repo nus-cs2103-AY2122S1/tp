@@ -392,7 +392,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
         public CommandResult execute() {
             return executeUndoableCommand();
         }
-        protected abstract void undo;
+        protected abstract Person undo;
     }
     
     public class DeleteCommand extends UndoableCommand {
@@ -401,7 +401,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
             //...delete logic
         }
         @Override
-        protected void undo {
+        protected Person undo {
             //...undo logic
         }
     }
@@ -462,6 +462,43 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoStack` is empty, then there are no other commands left to be redone, and an `Exception` will be thrown when popping the `redoStack`.<br></div>
 
+There are 2 cases for redoing commands - `UndoableCommand` v.s. non-`UndoableCommand`. The `UndoRedoStack` reacts differently depending on the type of the command.
+
+**Case 1: `UndoableCommand` called before `redo`**
+
+Continuing from the previous example, suppose that after the user undoes the `AddCommand`, the user now decides to add another student with the same name `John Doe`.
+The user executes a new command, `add`. Figure I.2.6 below shows the change in `UndoRedoStack` after executing the `add` command. Note that the `AddCommand` before and after are 2 different commands.
+The one before is named `a1` and the one after is named `a2` for better readability.
+
+![UndoRedoStackClearRedoStack](images/UndoRedoStackClearRedoStack.png)
+
+*Figure I.2.6: UndoRedoStack before and after executing Add Command.*
+
+In Figure I.2.6, `add` will be pushed into the `undoStack` since `add` is an `UndoableCommand`. At the same time, the `redoStack` is cleared.
+Its contents are cleared as we no longer makes sense be able to redo `add n/John Doe ...` as it would result in duplicate students 
+(this is the behaviour that most modern desktop applications follow).
+
+**Case 2: Commands that does not modify any data called before `redo`**
+
+Continuing from the previous example, suppose that after the user undoes the `AddCommand`, the user now decides to view the calendar.
+The user executes a new command, `day`. Figure I.2.7 below shows the change in `UndoRedoStack` after executing the `day` command.
+
+![UndoRedoStackAfterNonUndoableCommand](images/UndoRedoStackNonUndoableCommand.png)
+
+*Figure I.2.7: UndoRedoStack before and after executing Day Command.*
+
+In Figure I.2.7, `day` will not be pushed into the `undoStack` since `day` is not an `UndoableCommand`. Unlike for the `add` command in Case 1,
+the `redoStack` is not cleared as there were no changes to the data after undoing `AddCommand`, executing `redo` would not result in any errors.
+Hence, the `UndoRedoStack` remains identical.
+
+The following activity diagram in Figure I.2.8 summarizes what happens inside the `UndoRedoStack` when a user executes a new command:
+
+![UndoRedoStackActivityDiagram](images/UndoRedoStackActivityDiagram.png)
+
+*Figure I.2.8: Activity Diagram after a `Command` is executed.*
+
+In Figure I.2.8, after execution, any `Command` that is **not** `UndoableCommand` will not change the `UndoRedoStack`.
+If the `Command` is an `UndoableCommand`, it will be pushed to the `undoStack` before the control is returned to the user eventually.
 
 #### Design considerations:
 
