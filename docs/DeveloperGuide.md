@@ -86,7 +86,7 @@ in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W12-1/tp/blob/master/src/main
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`
 , `FacilityListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
@@ -101,7 +101,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` and `Facility` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member` and `Facility` object residing in the `Model`.
 
 ### Logic component
 
@@ -113,13 +113,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `SportsPaParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddMemberCommand`)
    which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletem 1")` API
 call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
@@ -133,11 +133,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+* When called upon to parse a user command, the `SportsPaParser` class creates an `XYZCommandParser` (`XYZ` is a
   placeholder for the specific command name e.g., `AddMemberCommandParser`) which uses the other classes shown above to
-  parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `AddressBookParser`
+  parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `SportsPaParser`
   returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteMemberCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -149,17 +149,17 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the SportsPA data i.e., all `Person` and `Facility` objects (which are contained in a `UniquePersonList`
+* stores the SportsPA data i.e., all `Member` and `Facility` objects (which are contained in a `UniqueMemberList`
 and a `UniqueFacilityList` object respectively).
-* stores the currently 'selected' `Person` and `Facility` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as unmodifiable `ObservableList<Person>` and `ObservableList<Facility>` respectively which can be 'observed' e.g. the UI can be bound to
+* stores the currently 'selected' `Member` and `Facility` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as unmodifiable `ObservableList<Member>` and `ObservableList<Facility>` respectively which can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SportsPA`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SportsPA`, which `Member` references. This allows `SportsPa` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 
@@ -176,7 +176,7 @@ The `Storage` component,
 
 * can save both address book data (data on members and facilities) and user preference data in json format, and read them back into corresponding
   objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+* inherits from both `SportsPaStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
@@ -195,7 +195,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The aliases mechanism is facilitated by `AddressBookParser`. Aliases are stored in `AliasMap`, which keeps the mappings
+The aliases mechanism is facilitated by `SportsPaParser`. Aliases are stored in `AliasMap`, which keeps the mappings
 between `Shortcut` and `CommandWord`, and is stored in `UserPrefs`. The association between `Shortcut` and `CommandWord`
 is represented as `Alias`. `AliasMap` implements the following operations:
 
@@ -268,31 +268,31 @@ likely to be repeated, we decided that it was sufficient to allow users to creat
 
 #### Implementation
 
-The split mechanism is facilitated by `ModelManager` and `AddressBook`. <br>`ModelManager` stores a list of
-filtered members as `filteredPersons`. Each `Person` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
+The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
+filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
-`Address Book`stores a list of all facilities as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Person>>`. This `EnumMap` is initialized
+`Address Book`stores a list of all facilities as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
 with 7 key-value pairs, of which the keys are all the enums of the
 `java.time.DayOfWeek` (`{MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}`) and the values are all initialized
 as an empty `ArrayList`. This is based on the assumption that facilities are available on every day of the week.
 <br>
-When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `List<Person>` of all facilities for that `DAY` is cleared.
-The available members are then added to the `List<Person>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a Greedy algorithm. <br>
-i.e. The filtered members list and facility list are iterated and each person is allocated to the first facility which is not at max capacity. After
+When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `List<Member>` of all facilities for that `DAY` is cleared.
+The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a Greedy algorithm. <br>
+i.e. The filtered members list and facility list are iterated and each Member is allocated to the first facility which is not at max capacity. After
 a facility is at max capacity, any remaining members are allocated to the next available facility and so on.
 
 `ModelManager` implements the following operations:
-* `split(Predicate<Person> predicate, int dayNumber)` —  Filters the list of all members according to the given `predicate`.
-When the `split` command is executed, `PersonAvailableOnDayPredicate` is passed to `predicate`, allowing a filtered list of members available
-on the given `dayNumber` to be created and passed to the `split` method of `Addressbook`.
+* `split(Predicate<Member> predicate, int dayNumber)` —  Filters the list of all members according to the given `predicate`.
+When the `split` command is executed, `MemberAvailableOnDayPredicate` is passed to `predicate`, allowing a filtered list of members available
+on the given `dayNumber` to be created and passed to the `split` method of `SportsPa`.
 
-`AddressBook` implements the following operations:
-* `split(FilteredList<Person> membersFilteredList, int dayNumber)` — Splits the members in the given filtered member list into facilities on the given day.
+`SportsPa` implements the following operations:
+* `split(FilteredList<Member> membersFilteredList, int dayNumber)` — Splits the members in the given filtered member list into facilities on the given day.
 Returns -1 if no members are available, the number of members that exceed the total capacity if the number of members is
 more than the total capacity on the given day and 0 if members can be split successfully.
 
 Additionally, `UniqueFacilityList` implements the following operations:
-* `allocateMembersToFacilitiesOnDay(FilteredList<Person> members, int dayNumber)` — Clears the `AllocationMap` of each `Facility`
+* `allocateMembersToFacilitiesOnDay(FilteredList<Member> members, int dayNumber)` — Clears the `AllocationMap` of each `Facility`
 and allocates the members in the given filtered member list to facilities greedily.
 
 Given below is an example usage scenario and how the split feature behaves at each step.
@@ -324,7 +324,7 @@ The lifeline for `SplitCommand` should end at the destroy marker (X) but due to 
 **Aspect: Algorithm used to determine allocation**
 * **Alternative 1 (current choice):** Greedy algorithm.
   * Pros: Easy to implement and test. Intuitive and produces results similar to manual allocation.
-  * Cons: Can only produce 1 allocation mapping for a set of person and facilities with the same availabilities and capacities, which may
+  * Cons: Can only produce 1 allocation mapping for a set of Member and facilities with the same availabilities and capacities, which may
     not be ideal.
 
 * **Alternative 2:** Other algorithms.
@@ -336,34 +336,34 @@ The lifeline for `SplitCommand` should end at the destroy marker (X) but due to 
 #### Implementation
 
 The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
-as `filteredPersons`. Each `Person` in the list internally stores `totalAttendance` and `todayAttendance`
-which will be updated accordingly when the attendance of that `Person` is marked or unmarked.
+as `filteredMembers`. Each `Member` in the list internally stores `totalAttendance` and `todayAttendance`
+which will be updated accordingly when the attendance of that `Member` is marked or unmarked.
 
 `ModelManager` implements the following operations:
 * `ModelManager#markMembersAttendance(List<Index>)` — Marks attendance of members at the specified list of index.
 * `ModelManager#unmarkMembersAttendance(List<Index>)` — Unmarks attendance of members at the specified list of index
 as absent.
-* `ModelManager#markOneMemberAttendance(Person)` — Marks attendance of specified member.
-* `ModelManager#unmarkMembersAttendance(Person)` — Unmarks attendance of specified member.
+* `ModelManager#markOneMemberAttendance(Member)` — Marks attendance of specified member.
+* `ModelManager#unmarkMembersAttendance(Member)` — Unmarks attendance of specified member.
 as absent.
   
-Additionally, `Person` implements the following operations:
-* `Person#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
-* `Person#setNotPresent()` — Sets `todayAttendance` as not present and decrements `totalAttendance`
+Additionally, `Member` implements the following operations:
+* `Member#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
+* `Member#setNotPresent()` — Sets `todayAttendance` as not present and decrements `totalAttendance`
 
 Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
 
 Step 1. The user launches the application for the first time. The user then adds 2 members into an empty SportsPA
-by executing the `addm` command. Each `Person` in the `filteredPersons` list will be initialized with their initial 
+by executing the `addm` command. Each `Member` in the `filteredMembers` list will be initialized with their initial 
 `todayAttendance` and `totalAttendance`. 
 
 ![MarkObjectDiagram](images/MarkObjectDiagram_InitialState.png)
 
 
 Step 2. The user executes `mark 1 2` command to mark the members at index 1 and 2 in the filtered list as present. The `mark` command
-calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Person)` to increment `todayAttendance`
-and `totalAttendance` of the `Person` at the 1st and 2nd index in the list by calling `Person#setPresent()` for each `Person`. The newly edited 
-newly edited`Person`s with the updated attendance are now referenced by `ModelManager`.
+calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
+and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The newly edited 
+newly edited`Member`s with the updated attendance are now referenced by `ModelManager`.
 
 ![MarkObjectDiagramModified](images/MarkObjectDiagramModified_FinalState.png)
 
@@ -376,8 +376,8 @@ The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a
 </div>
 
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
-calls the `ModelManager#unmarkMembersAttendance(Person)` which decrements the `totalAttendance` and `todayAttendance` of the `Person` 
-to be unmarked via the `Person#setNotPresent()` and `ModelManager` references the newly modified `Person`s.
+calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
+to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
 
 
 
@@ -411,22 +411,22 @@ The find member mechanism is facilitated by `FindMemberCommandParser`.
 
 The last six operations are facilitated by each attribute's unique `Predicate` class, the predicates generated are then chained together in `FindMemberCommandParser#generatePredicate` using the `Predicate#and` method.<br>
 
-The final `Predicate` to filter the member list with is stored in `PersonMatchesKeywordsPredicate`, which is subsequently passed to the `FindMemberCommand` class to be executed.<br>
+The final `Predicate` to filter the member list with is stored in `MemberMatchesKeywordsPredicate`, which is subsequently passed to the `FindMemberCommand` class to be executed.<br>
 
-Lastly, the filtered member list is displayed through `Model#updateFilteredPersonList(Predicate)`
+Lastly, the filtered member list is displayed through `Model#updateFilteredMemberList(Predicate)`
 
 Given below is an example usage scenario and how the find member mechanism behaves.
 
 Step 1. The user executes the `findm t/exco` command to find all members with the tag `exco`<br>
-Step 2. `LogicManager` calls `AddressBookParser#parseCommand` and creates a new `FindMemberCommandParser`. <br>
+Step 2. `LogicManager` calls `SportsPaParser#parseCommand` and creates a new `FindMemberCommandParser`. <br>
 Step 3. `FindMemberCommandParser#parse` is called to parse the argument `t/exco`.<br>
 Step 4. Since `t/exco` is a valid argument,`FindMemberCommandParser#generatePredicate` is called.<br>
 Step 5. The system recognises the `t/` prefix and calls on the `FindMemberCommandParser#generateTagPredicate` to generate a unique tag predicate from `exco`.<br>
 Step 6. The unique tag predicate is returned in the `FindMemberCommandParser#generatePredicate` method and then chained together via the `Predicate#and` method.<br>
-Step 7. A new `PersonMatchesKeywordPredicate` object is created to store the final predicate.<br>
-Step 8. The `PersonMatchesKeywordPredicate` object is passed to `FindMemberCommand`.<br>
+Step 7. A new `MemberMatchesKeywordPredicate` object is created to store the final predicate.<br>
+Step 8. The `MemberMatchesKeywordPredicate` object is passed to `FindMemberCommand`.<br>
 Step 9. `FindMemberCommand` is then executed through `FindCommand#execute`.<br>
-Step 10. `FindMemberCommand` will update the member list using the `Model#updateFilteredPersonList` method.<br>
+Step 10. `FindMemberCommand` will update the member list using the `Model#updateFilteredMemberList` method.<br>
 Step 11. Lastly, a new `CommandResult` is returned to the `LogicManager`.
 
 The following sequence diagram shows how the find member operation works:
@@ -444,10 +444,7 @@ The following activity diagram summarizes what happens when a user enters and ex
     * Cons: More complex implementation due to parsing multiple prefixes and chaining predicates, thus this alternative is more prone to bugs.
 * ** Alternative 2: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
-      <<<<<<< HEAD
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
-      =======
-    * Cons: Not maximising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
