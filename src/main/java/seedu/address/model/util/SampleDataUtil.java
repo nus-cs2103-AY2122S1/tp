@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Money;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.InsurancePal;
+import seedu.address.model.ReadOnlyInsurancePal;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.Description;
@@ -25,7 +25,7 @@ import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code InsurancePal} with sample data.
  */
 public class SampleDataUtil {
 
@@ -67,8 +67,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyInsurancePal getSampleAddressBook() {
+        InsurancePal sampleAb = new InsurancePal();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

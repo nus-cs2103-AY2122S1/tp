@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
+import seedu.address.model.InsurancePal;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -43,7 +43,7 @@ class NoteCommandTest {
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new InsurancePal(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ class NoteCommandTest {
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new InsurancePal(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ class NoteCommandTest {
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new InsurancePal(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
