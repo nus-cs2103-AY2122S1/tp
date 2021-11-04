@@ -209,7 +209,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CsvUtil.modelToCsv(personList, path, prefixSet);
         } catch (IOException e) {
-            throw new CommandException("writing csv failed: " + e.getMessage());
+            throw new CommandException("Writing csv failed: " + e.getMessage());
         }
     }
 
