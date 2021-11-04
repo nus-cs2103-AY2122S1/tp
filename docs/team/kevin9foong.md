@@ -72,10 +72,10 @@ Given below are my contributions to the project.
        `link game and friend`.
     2. Maintenance of `add friend` and `add game` features in the UG.  
     3. Added the documentation for the features `assign skill`, `edit friend` and `recommend friend to play with`.
-    4. Minor changes to formatting and optimizing words used. 
-    5. Adding of symbols, constraints to each user command for user's reference. 
-    6. Adding of application UI overview and FAQ sections. 
-    7. Add explanations for terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
+    4. Made changes to formatting and optimizing words used. 
+    5. Added symbols, constraints and warnings to each user command for user's reference. 
+    6. Added the application UI overview and FAQ sections. 
+    7. Added glossary section including terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.

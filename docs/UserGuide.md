@@ -6,7 +6,7 @@ title: User Guide
 ![gitGud](images/gitgud.png)
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
@@ -15,10 +15,10 @@ title: User Guide
 
 gitGud is a **desktop application for storing and managing your friends' gaming information and schedules**. 
 It is dedicated to gamers like you and provides a gamer-themed experience with a focus on increasing your efficiency through
-its typing-focused interface.  
+its typing-based interface.  
 
 Previously, keeping track of all of yours friends' gaming information and schedules can be difficult and time-consuming.
-However, with gitGud, there is no need to get tilted(frustrated) by this anymore as gitGud provides you with a convenient 
+However, with gitGud, there is no need to get tilted (frustrated) by this anymore as gitGud provides you with a convenient 
 platform to manage essential gaming information of your fellow gamer friends.
 
 For example, to get you excited, gitGud supports many time-saving features such as finding friends available to play with
@@ -31,7 +31,7 @@ just a single command.
 ### How to use this guide?
 
 If you're new to gitGud, don't worry!
-This guide will walk you through the [basic setup](#Quick start) necessary to get you ready to use gitGud
+This guide will walk you through the [basic setup](#quick-start) necessary to get you ready to use gitGud
 for the first time quickly.
 
 Additionally, this guide provides you with in-depth information on the functionality gitGud provides, which will turn
@@ -43,12 +43,12 @@ you can quickly look up all of gitGud's core commands at a glance.
 ### Reading this document
 
 This guide utilizes symbols and syntax to highlight specific points made throughout the guide and to enhance your 
-overall reading experience. The section below on the meanings of [symbols and syntax used](#meaning-of-symbols-and-syntax-used) 
+overall reading experience. The section below on the meanings of [symbols and syntax used](#general-symbols-used) 
 provides more details for your reference. 
 
 #### General symbols used
 
-This table describes the main symbols use in the user guide and their respective meanings. 
+This table describes the main symbols used in the user guide and their respective meanings. 
 
 | Symbol/Syntax | What it means | 
 --------------- | ---------------
@@ -105,9 +105,9 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 | 1 | Toolbar | Currently provides functionality related to exiting and on accessing the help screen. | 
 | 2 | Command input box | This is where you can input commands to perform actions in gitGud. |
 | 3 | Command feedback box | This box displays information related to the status of the commands you have executed. |
-| 4 | Friends list | This section displays the friends list - and may be filtered to display specific friends based on the previous executed commands. |
+| 4 | Friends list | This section displays the friends list and may be filtered to display specific friends based on the previous executed commands. |
 | 5 | Main card | This box displays in-depth information for friends or games during `get` commands. | 
-| 6 | Games list | This section displays the games list - and may be filtered to display specific games based on the previous executed commands. | 
+| 6 | Games list | This section displays the games list and may be filtered to display specific games based on the previous executed commands. | 
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -134,22 +134,30 @@ adding, editing, deleting or viewing of friends in your gitGud friend list.
 Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: What exactly is the friend identifier?**
 
-The friend identifier(FRIEND_ID) is a name you assign to a friend to refer to each unique friend for use in the gitGud application, 
+**:information_source: What is the friend identifier?**
+
+The friend identifier (`FRIEND_ID`) is a name you assign to a friend to refer to each unique friend for use within the gitGud application, 
 it must also be unique and not previously exist in the friends list.
-gitGud has imposed the command constraints listed below on the friend identifier to ensure it is easy for you to remember, 
-type and to use to refer to friends with. 
+gitGud has imposed the command constraints listed below on the friend identifier to ensure it is easy for you to remember and type.
 </div>
 
 Format: `friend --add FRIEND_ID [-n NAME]`
 
 Command constraints:
-* The `FRIEND_ID` used must be a single word without spaces. e.g. `Kevin` and not `Kevin Lee`
-and should only contain alphanumeric characters.
+* The `FRIEND_ID` used: 
+  * must be non-empty and cannot contain only whitespaces.
+  * must be a single word (no spaces) e.g. `Kevin` and not `Kevin Lee`.
+  * must only contain alphanumeric characters e.g. `Kevin` and not `K@v!n`.
+  * can have at most 20 characters.
+* The `NAME` used:
+  * must be non-empty and cannot contain only whitespaces.
+  * can have at most 20 characters.
+  * supports all characters except for `-`.
 * The `FRIEND_ID` must be unique and must not already exist in the friends list.
 
 <div markdown="block" class="alert alert-warning">
+
 **:heavy_exclamation_mark: Warning: `FRIEND_ID` cannot be changed after being set, hence, make sure to use a `FRIEND_ID`
 you are sure about.**
 </div>
@@ -198,7 +206,7 @@ Screenshot:
 ![Friend delete Screenshot](images/ui-screenshots/friend-delete.png)
 <br><center><ins>Image: gitGud after deleting a friend `Draco`</ins></center>
 
-#### Link games to a friend: `friend --link`
+#### Link a game to a friend: `friend --link`
 
 Links a game and the associated in-game username for the game to a friend with the provided `FRIEND_ID`.
 A link between a particular friend and game shows that the friend plays the game. 
@@ -206,14 +214,23 @@ This association is required for subsequent commands, e.g. for the application t
 or to recommend a friend to play with based on a particular game.
 
 <div markdown="block" class="alert alert-info">
-:information_source: If you link an already linked game to particular friend again, the previous link will be 
-overridden with the new link with the new `IN_GAME_USERNAME` and the friend's skill level set to `0`. 
+
+**:information_source: Notes about the link command:** 
+
+* When a game is newly linked to a friend, the skill value is initially set to `0`. 
+
+* If you link an already linked game to particular friend again, the previous link will be 
+overridden with the new link with the new `IN_GAME_USERNAME` and the friend's skill value set to `0`.
 </div>
 
 Format: `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`
 
 Command constraints: 
 * Both `FRIEND_ID` and `GAME_ID` have to already exist within the friends and games list respectively.
+* The `IN_GAME_USERNAME` used:
+    * must be non-empty and cannot contain only whitespaces.
+    * can have at most 20 characters.
+    * supports all characters except for `-`.
 
 Examples:
 * `friend --link Draco -g DOTA -u Draco995`
@@ -242,19 +259,19 @@ Examples:
 Screenshot:
 
 ![Friend unlink screenshot](images/ui-screenshots/friend-unlink.png)
-<br><center><ins>Image: gitGud after unlinking a game `DOTA' from friend `Draco`</ins></center>
+<br><center><ins>Image: gitGud after unlinking a game `DOTA` from friend `Draco`</ins></center>
 
 #### Assigning a skill value for a linked game : `friend --skill`
 
 Assigns the provided skill value to the friend with the given `FRIEND_ID` for the linked game with the given `GAME_ID`.
-This command allows you to record your personal gauge of a friend's skill level at a particular game.
+This command allows you to record your personal gauge of a friend's skill at a particular game.
 
 Format: `friend --skill FRIEND_ID -g GAME_ID -v SKILL_VALUE`
 
 Command constraints: 
 * A friend with the given `FRIEND_ID` provided must exist in the friends list.
 * The friend has to be previously linked to the game with the given `GAME_ID`.
-* The skill value assigned must be integers within the range 0 to 10 (inclusive). e.g. 0, 8 and 10 are valid skill levels,
+* The skill value assigned must be integers within the range 0 to 10 (inclusive). e.g. 0, 8 and 10 are valid skill values,
   whereas -1, 11, 1.2, and "one" are invalid skill values.
  
 Examples: 
@@ -311,8 +328,8 @@ with at the specified time each week based on their stored schedules.
 Format: `recommend -g GAME_ID -t HOUR DAY`
 
 Command constraints:
-* The `HOUR` provided must be an integer within 0 to 23 inclusive, with 0 representing midnight `0000` of the current
-  day and 23 representing `2300`.
+* The `HOUR` provided must be an integer within 0 to 23 inclusive, with 0 representing the 24-hour time (start of the day)
+  `0000` and 23 representing the 24-hour time `2300`.
 * The `DAY` provided must be an integer within 1 - 7 inclusive, with `1` representing Monday
   and `7` representing Sunday.
 * The `GAME_ID` must be valid(contain only alphanumeric characters and be a single word)
@@ -333,7 +350,7 @@ Displays a particular friend's complete data with gitGud’s **unique** friend i
 A friend's complete data includes:
 * The weekly schedule of the friend
 * List of games the friend plays
-* In-game username for each game and the skill level in that game
+* In-game username for each game and the skill value in that game
 
 Format: `friend --get FRIEND_ID`
 
@@ -346,8 +363,7 @@ Examples:
 Screenshot:
 
 ![Friend get screenshot](images/ui-screenshots/friend-get.png)
-<br><ins>gitGud displaying friend `Draco` after the `get` command</ins>
-
+<br><center><ins>Image: gitGud displaying friend `Draco` after the `get` command</ins></center>
 
 #### Listing/Filtering multiple friends data: `friend --list`
 
@@ -381,12 +397,16 @@ Adds a game with the given **unique** `GAME_ID` into the gitGud game list.
 Format: `game --add GAME_ID`
 
 Command constraints:
-* The `GAME_ID` provided must be a single word e.g. `ApexLegends` and not `Apex Legends`.
-* The `GAME_ID` provided must contain only alphanumeric characters.
+* The `GAME_ID` provided:
+  * must be non-empty and cannot contain only whitespaces.
+  * must be a single word (no spaces) e.g. `ApexLegends` and not `Apex Legends`.
+  * must only contain alphanumeric characters e.g. `CSGO` and not `CS:GO`.
+  * can have at most 20 characters.
 * The `GAME_ID` provided should not already exist in the games list. 
 
 <div class="alert alert-info">
-** :information_source: Notes on GAME_ID **
+
+**:information_source: Notes on GAME_ID:**
 
 * To ensure the `GAME_ID` is easy to remember and use, `GAME_ID` is limited to a single word and 
 to alphanumeric characters as it is used to refer to games stored in gitGud.
@@ -409,7 +429,8 @@ Screenshot:
 Deletes a game from the gitGud game list.
 
 <div markdown="block" class="alert alert-info">
-**information_source**: When a game is deleted, all links between the game and friends will be removed.
+
+**:information_source: When a game is deleted, all links between the game and friends will be removed.**
 </div>
 
 Format: `game --delete GAME_ID`
@@ -431,7 +452,7 @@ Displays a particular game's complete data with gitGud’s **unique** game ident
 
 A game's complete data includes:
 * List of friends that play the game
-* In-game username for each friend and their skill level
+* In-game username for each friend and their skill value
 
 Format: `game --get GAME_ID`
 
@@ -488,7 +509,8 @@ Clears all friends and games from gitGud.
 Format: `clear`
 
 <div markdown="block" class="alert alert-warning">
-:heavy_exclamation_mark: Warning: This command deletes all friends and games from gitGud! 
+
+**:heavy_exclamation_mark: Warning: This command deletes all friends and games from gitGud!** 
 Only use this command if you are absolutely sure you would like to restart gitGud from a clean slate.
 </div>
 
@@ -514,9 +536,10 @@ However, this is **not recommended** and may cause your files to be corrupted - 
 details in our guide. 
 
 <div markdown="block" class="alert alert-warning">
-:heavy_exclamation_mark: Warning: If the changes you have made cause the format of the data files to be invalid, 
+
+**:heavy_exclamation_mark: Warning: If the changes you have made cause the format of the data files to be invalid, 
 gitGud will start with empty data for the list(s) affected by the invalid file(s) at the next run and 
-may override the invalid files with subsequent saves.  
+may override the invalid files with subsequent saves.**  
 This may cause loss of data and hence should be avoided unless you are absolutely sure of what you are doing!
 </div>
 
@@ -541,6 +564,8 @@ Terminology used | What it means
 --------|------------------
 Tilted | A term widely used in the gaming community to express frustration. 
 Pro | A term widely used in the gaming community to refer to a someone who is considered highly skilled. 
+Friend Identifier | identifier you assign to a friend to refer to that specific friend within the gitGud application
+Game Identifier | identifier you assign to a game to refer to that specific game within the gitGud application.
 
 --------------------------------------------------------------------------------------------------------------------
 
