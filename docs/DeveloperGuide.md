@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
 ```AddressBook```. A ```List``` of unique ```String``` objects is created, with ```String``` content depending on
-the prefix provided by the user. 
+the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
@@ -190,7 +190,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 ### Filter interview feature
 
 The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
-input. This command then updates the ```model``` accordingly. 
+input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
@@ -203,10 +203,10 @@ to identify the user input ` past`. `FilterInterviewCommandParser#parse` then in
 `FilterInterviewPastCommand`.
 
 Step 3. `FilterInterviewPastCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
-and filters for applicants that have interviews that have already passed. 
- 
+and filters for applicants that have interviews that have already passed.
+
 Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
-have interviews that have passed. This `CommandResult` is then returned. 
+have interviews that have passed. This `CommandResult` is then returned.
 
 Given below is an example usage scenario and how the show operation behaves at each step.
 
@@ -261,6 +261,30 @@ and returned.
  **Note:** The lifeline for `FindCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Unmark feature
+
+The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
+```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
+
+The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
+![images](images/UnmarkCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
+
+Step 1. A valid command `unmark 3` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ` 3`.
+
+Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
+to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
+`UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
+
+Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
+
+Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+![images](images/UnmarkCommandSequenceDiagram.png)
 
 
 ### Datetime for interview 
