@@ -2,13 +2,13 @@ package seedu.address.logic.commands.friends;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalFriends.ALICE;
-import static seedu.address.testutil.TypicalFriends.AMY;
+import static seedu.address.testutil.TypicalFriends.BOB;
+import static seedu.address.testutil.TypicalFriends.CARL;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.CSGO;
 import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ public class UnlinkFriendCommandTest {
     @Test
     public void execute_validFriendIdUnfilteredList_success() {
         Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
-        Friend friendToUnlink = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToUnlink = model.getFilteredAndSortedFriendsList().get(INDEX_THIRD_ITEM.getZeroBased());
         GameFriendLink gameFriendLink = new GameFriendLink(GENSHIN_IMPACT.getGameId(), friendToUnlink.getFriendId(),
                 new UserName("GoldNova"));
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(),
@@ -42,20 +42,20 @@ public class UnlinkFriendCommandTest {
 
     @Test
     public void execute_nonExistentFriendIdUnfilteredList_throwsCommandException() {
-        UnlinkFriendCommand unlinkFriendCommand = new UnlinkFriendCommand(AMY.getFriendId(),
+        UnlinkFriendCommand unlinkFriendCommand = new UnlinkFriendCommand(BOB.getFriendId(),
                 GENSHIN_IMPACT.getGameId());
         assertCommandFailure(unlinkFriendCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
     public void execute_nonExistentGameIdUnfilteredList_throwsCommandException() {
-        UnlinkFriendCommand unlinkFriendCommand = new UnlinkFriendCommand(ALICE.getFriendId(), CSGO.getGameId());
+        UnlinkFriendCommand unlinkFriendCommand = new UnlinkFriendCommand(CARL.getFriendId(), CSGO.getGameId());
         assertCommandFailure(unlinkFriendCommand, model, Messages.MESSAGE_NONEXISTENT_GAME_ID);
     }
 
     @Test
     public void execute_gameNotAssociatedWithFriend_throwsCommandException() {
-        UnlinkFriendCommand unlinkFriendCommand = new UnlinkFriendCommand(ALICE.getFriendId(),
+        UnlinkFriendCommand unlinkFriendCommand = new UnlinkFriendCommand(CARL.getFriendId(),
                 GENSHIN_IMPACT.getGameId());
 
         assertCommandFailure(unlinkFriendCommand, model, Messages.MESSAGE_GAME_NOT_ASSOCIATED);
