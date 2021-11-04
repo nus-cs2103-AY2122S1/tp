@@ -51,9 +51,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s updated!\n";
 
+    private static LabNum labNum2;
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
+
 
     /**
      * @param index of the student in the filtered student list to edit
@@ -86,6 +89,10 @@ public class EditCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
+        if (labNum2 != null) {
+            return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
+                                    + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
@@ -96,6 +103,7 @@ public class EditCommand extends Command {
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
             throws CommandException {
         assert studentToEdit != null;
+        labNum2 = null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updateStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
@@ -112,6 +120,7 @@ public class EditCommand extends Command {
             } catch (NullPointerException e) { //when getLab does not find anything
                 throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
             }
+            labNum2 = labNum;
             updatedLab.updateTotal(currTotalScore);
         }
 

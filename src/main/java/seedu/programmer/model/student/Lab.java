@@ -10,7 +10,7 @@ public class Lab implements DisplayableObject {
             "Lab number should be between 0 and 14 (non-inclusive).";
     public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
     public static final String MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT =
-            "Lab total score should be between 0 and 100 (inclusive)";
+            "Lab total score should be between 1 and 100 (inclusive)";
 
     private LabNum labNum;
     private LabResult actualScore;
