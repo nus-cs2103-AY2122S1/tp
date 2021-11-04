@@ -52,7 +52,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/pbthang.png" width="200px">
 
 [[github](http://github.com/pbthang)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/pbthang)]
 
 * Role: Testing and Debug
 * Responsibilities: Ensures testing of code is done properly and on time
