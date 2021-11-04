@@ -37,6 +37,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `search` and `clear`. [\#35](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/35)
     * Major revamp to update User Guide for practical dry run. [\#181](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/181)
     * Fix PED bugs raised. [\#203](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/203)
+    * Added visual aids for command examples. [\#260](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/260)
   * Developer Guide:
     * Updated target user profile, value proposition and user stories [\#34](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/34)
     * Added implementation details of the `search` feature. [\#152](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/152)
