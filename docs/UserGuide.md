@@ -17,7 +17,9 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
   * [1.1 Reading this User Guide](#11-reading-this-user-guide)
 * [**2. Quick Start**](#2-quick-start)
 * [**3. Client Information**](#3-client-information)
-    * [3.1 Next Meeting format](#31-nextmeeting) 
+    * [3.1 Duplicate Clients](#31-nextmeeting) 
+    * [3.2 Next Meeting Attribute](#32-next-meeting-attribute) 
+    * [3.3 Last Meeting Attribute](#33-last-meeting-attribute) 
 * [**4. Features**](#4-features)
     * [4.1 Create new contact: add](#41-create-new-contact--add)
     * [4.2 Retrieve particular contact: view](#42-retrieve-particular-contact--view)
@@ -123,7 +125,7 @@ LeadsForce has checks that prevent users from creating duplicated contacts.
 
 </div>
 
-### 3.2 Next Meeting attribute 
+### 3.2 Next Meeting Attribute 
 The `Next Meeting` attribute refers to the next meeting that the financial advisor using has with the client. Each `Next Meeting` consists of a *date*, *start time*, *end time* and a *location*. 
 
 A NextMeeting needs to be inputted in the following format:
@@ -139,7 +141,7 @@ where
 | :-: | :-- |
 | <img src=images/info_icon.png width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
-### 3.3 Last Meeting attribute 
+### 3.3 Last Meeting Attribute 
 
 The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client. 
 
