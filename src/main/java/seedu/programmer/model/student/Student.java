@@ -181,7 +181,7 @@ public class Student implements DisplayableObject {
 
         return otherStudent != null
                 && (otherStudent.getStudentId().equals(getStudentId())
-                || otherStudent.getEmailValue().equals(getEmailValue()));
+                || otherStudent.getEmailValue().equals(getEmail()));
     }
 
     /**
