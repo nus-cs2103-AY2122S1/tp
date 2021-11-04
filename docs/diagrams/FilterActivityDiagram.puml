@@ -4,27 +4,39 @@
 start
 if () then ([filter grade & subject])
     if () then ([valid grade])
-        : lesson & student list
-         filtered by grade & subject;
+        :lesson &
+        student list
+        filtered by
+        grade &
+        subject;
     else ([invalid grade])
-        : TuitiONE informs user
-         of incorrect input;
+        :TuitiONE
+        informs
+        user of
+        incorrect
+        input;
     endif
 else ([filter by single variable])
     if () then ([filter by grade])
         if () then ([valid grade])
-            : lesson & student list
-             filtered by grade;
+            :lesson &
+            student list
+            filtered by
+            grade;
         else ([invalid grade])
-            : TuitiONE informs user
-             of incorrect input;
+            :TuitiONE
+            informs user
+            of incorrect
+            input;
         endif
     else ([filter by subject])
-        : lesson list filtered by subject;
+        :lesson list
+        filtered by
+        subject;
 
     endif
 endif
-: UI updated with filters applied;
+:UI updated with filters applied;
 stop
 
 @enduml

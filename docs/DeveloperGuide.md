@@ -151,7 +151,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
 <center>
-<img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="550"/>
+<img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="600"/>
 </center>
 
 The `Model` component,
