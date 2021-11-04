@@ -8,7 +8,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
 /**
- * Represents a ModuleLesson in the address book.
+ * Represents a ModuleLesson in contHACKS.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class ModuleLesson {
