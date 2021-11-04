@@ -559,6 +559,35 @@ If the changes you made to the data file render its format invalid, <b>TuitiONE<
 
 </div>
 
+### Upcoming Features
+
+You can expect these features in upcoming versions of **TuitiONE**.
+
+#### Editing lessons
+
+With this feature, you will have the flexibility in managing the lessons in your tuition center. You will be able to change the day and time of the lesson, its subject, its grade, and its price.
+
+#### Customised sorting 
+
+With this feature, you will have the flexibility to order the student and lesson lists to your preference. For students, you can expect to be able to sort the student list by address, number of lessons and even by their fees. For lessons, you can expect to sort the lesson list by day and time, and number of students enrolled.
+
+#### Verification of student particulars
+
+With this feature, **TuitiONE** will help you check whether given student particulars are legitimate. This includes verifying the email and address of newly added students.
+
+#### Tutor management
+
+With this feature, you will be able to store information about tutors into **TuitiONE**. The information can include the lessons they are teaching, their qualifications and their schedule.
+
+#### Importing/exporting files
+
+With this feature, you will be able to import existing files, such as csv and excel files, into **TuitiONE**, and **TuitiONE** will automatically format them for you in its GUI.
+You can also export current data in **TuitiONE** as other file types for compatibility with other applications.
+
+#### Data Analytics
+
+With this feature, you will be able to view statistics on the performance of students, popular lessons, times, and tutors. This allows you to gain better business insights about your centre.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Command summary**
@@ -568,7 +597,6 @@ Action | Format | Examples
 **Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` | `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 **Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` | `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD] [dr/REMARK_TO_DELETE]` | `edit 2 n/Ben Lim e/benlim@gmail.com`
-**Clear** | `clear`
 **Delete** | `delete INDEX` | `delete 3`
 **Delete lesson** | `delete-l INDEX` | `delete-l 1`
 **Enroll** | `enroll STUDENT_INDEX l/LESSON_INDEX` | `enroll 1 l/1`
@@ -578,15 +606,8 @@ Action | Format | Examples
 **Roster** | `roster LESSON_INDEX` | `roster 1`
 **List** | `list` |
 **Help** | `help` |
+**Clear** | `clear`
 **Exit** | `exit` |
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Upcoming Features**
-
-1. **Customizable lesson timing**:
-   1. In the upcoming update, the developers will lift the constraints placed on the lesson timing. Each lesson can be of any duration and can start from any period of time.
-   2. This will provide more flexibility for you in managing the lessons in your tuition center.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -602,50 +623,50 @@ Action | Format | Examples
 
 ## **FAQ**
 
-1. **Q:** Where can I view the list of commands?
+1. Where can I view the list of commands?
 
-    > **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
+    > You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
 
-2. **Q:** Why are some usual email address inputed valid, such as 'jd@gmail.com.this.that.this.that.this.that'?
+1. Why are some usual email address inputed valid, such as 'jd@gmail.com.this.that.this'?
 
-    > **A:** There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
+    > There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
 
-3. **Q:** Why are there some unusual files present in my folder after I run **TuitiONE**?
+1. Why am I unable to add a student with the same name as another student?
 
-    > **A:** **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [Managing data](#managing-data) for more).
+    > Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
 
-4. **Q:** Why am I unable to add a student with the same name as another student?
+1. How do I edit a lesson?
 
-    > **A:** Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
+    > Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
 
-5.  **Q:** How do I edit a lesson?
+1. How do I edit a remark?
 
-    > **A:** Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
+    > To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks. (see [Editing a student](#editing-a-student--edit) for more).
 
-6. **Q:** How do I edit a remark?
+1. Am I able to add or edit `Remarks` to have spacings within them?
 
-    > **A:** To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks. (see [Editing a student](#editing-a-student--edit) for more).
+    > No. The number of characters each `Remark` can have is capped at 25, and must be single words. (see [Adding a student](#adding-a-student-add) for more)
 
-7. **Q:** Am I able to add or edit `Remarks` to have spacings within them?
+1. Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
 
-    > **A:** No. The number of characters each `Remark` can have is capped at 25, and must be single words. (see [Adding a student](#adding-a-student-add) for more)
+    > No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1415` are valid inputs, while `1415` is an invalid input. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
 
-8. **Q:** Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
+1. How long can my name be for adding a new `Student`?
 
-    > **A:** No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1415` are valid inputs, while `1415` is an invalid input. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
+    > We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead. (see [Adding a student](#adding-a-student-add) for more)
 
-9. **Q:** How long can my name be for adding a new `Student`?
+1. Can `Lessons` of the same `Subject` and `Grade` start at the same time?
 
-    > **A:** We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead. (see [Adding a student](#adding-a-student-add) for more)
+    > No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
 
-10. **Q:** Can `Lessons` of the same `Subject` and `Grade` start at the same time?
+1. How many `Lessons` can a `Student` be enrolled in?
 
-    > **A:** No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
+    > A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons` (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
 
-11. **Q:** How many `Lessons` can a `Student` be enrolled in?
+1. How many `Students` can a `Lesson` contain?
 
-    > **A:** A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons` (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
+    > A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more)
 
-12. **Q:** How many `Students` can a `Lesson` contain?
+1. Why are there some unusual files present in my folder after I run **TuitiONE**?
 
-    > **A:** A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more)
+    > **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [Managing data](#managing-data) for more).
