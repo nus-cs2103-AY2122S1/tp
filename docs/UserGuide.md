@@ -31,7 +31,7 @@ InsurancePal is a client management software specially designed to help manage t
 Action | Parameters| Description
 --------|------------------|-------
 `add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE]…` |`NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br> `ADDRESS`: Address of the client <br> `NOTE`: Note about the client<br>`TAG`: Tags of the client <br>`INSURANCES`: life/health/general <img>| Adds a client to InsurancePal
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [n/NOTE] [t/TAG]… [i/INSURANCE]…` | `INDEX`: Index of the client <br> `NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br>  `REVENUE`: Revenue of the client <br>`ADDRESS`: Address of the client <br> `NOTE`:Note about the client  <br>`TAG`: Tags of the client <br>`INSURANCES`: life/health/general | Edits a client information
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [no/NOTE] [t/TAG]… [i/INSURANCE]…` | `INDEX`: Index of the client <br> `NAME`: Name of the client <br> `PHONE`: Phone number of the client <br> `EMAIL`: Email of the client <br>  `REVENUE`: Revenue of the client <br>`ADDRESS`: Address of the client <br> `NOTE`:Note about the client  <br>`TAG`: Tags of the client <br>`INSURANCES`: life/health/general | Edits a client information
 `revenue INDEX r/AMOUNT` |  `INDEX`: Index of the client <br> `AMOUNT`: Change in revenue | Changes the revenue of client by the specified amount
 `note INDEX no/NOTE` | `INDEX`: Index of the client <br> `NOTE`: Note about the client | Add/edit/delete a note of a client
 `schedule INDEX m/MEETING_TIME` |`INDEX` Index of the client <br> `MEETING_TIME`: Time of the meeting | Add/edit/delete a meeting with a client
@@ -144,7 +144,7 @@ Format: `list`
 
 You can edit an existing client using the `edit` command
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [n/NOTE] [t/TAG]… [i/INSURANCE]…`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/REVENUE] [a/ADDRESS] [no/NOTE] [t/TAG]… [i/INSURANCE]…`
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
