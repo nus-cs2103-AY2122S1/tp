@@ -121,6 +121,10 @@ ___
 * Leading and trailing whitespace is ignored:
   <br/>e.g. <code>&nbsp; list</code> and <code>list &nbsp;</code> will both be registered as `list`
 
+* Order of prefixed parameters do not matter:
+  <br/> e.g. `add n/NAME e/EPISODE` will obtain the same result as `add e/EPISODE n/NAME`
+  <br/> e.g. `genre c/add 1 g/comedy` will not work as `1` is not a prefixed parameter
+
 </div>
 
 ### Adding an anime: `add`
@@ -130,6 +134,8 @@ Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE] [g/GENRE] ...`
 
 Notes:
 * If multiple `n/NAME` is given in the command, the title of the added anime will be the last provided `NAME`
+* If multiple `e/EPISODE` is given in the command, the episode of the added anime will be the last provided `EPISODE`
+* If multiple `s/STATUS` is given in the command, the status of the added anime will be the last provided `STATUS`
 * If `EPISODE` is not provided, it will be set to `0`
 * If `STATUS` is not provided, it will be set to `watching`
 * All genres provided must be valid for the command to be successful
@@ -185,6 +191,9 @@ ___
 Updates the episode that you are currently on for the specified anime.
 Format: `update INDEX e/EPISODE`
 
+Notes:
+* If multiple `e/EPISODE` is given in the command, the episode of the added anime will be the last provided `EPISODE`
+
 Parameters:
 * [`INDEX`](#index)
 * [`EPISODE`](#episode)
@@ -208,6 +217,8 @@ ___
 Updates the watch status of a specified anime.
 Format: `status INDEX s/STATUS`
 
+Notes:
+* If multiple `s/STATUS` is given in the command, the status of the added anime will be the last provided `STATUS`
 
 Parameters:
 * [`INDEX`](#index)
@@ -231,6 +242,9 @@ ___
 ### Updating anime title: `rename`
 Updates the anime title for the user specified anime.
 Format: `rename INDEX n/NAME`
+
+Notes:
+* If multiple `n/NAME` is given in the command, the title of the added anime will be the last provided `NAME`
 
 Parameters:
 * [`INDEX`](#index)
@@ -257,6 +271,7 @@ Adds or deletes genre(s) from a specified anime<br>
 Format: `genre INDEX c/ACTION g/GENRE [g/GENRE] ...`
 
 Notes:
+* If multiple `c/ACTION` is given in the command, the action done to the anime will be the last provided `ACTION`
 * Duplicate genres are not allowed
 * You need to provide at least 1 `GENRE`
 * All valid genres provided will be successfully added/deleted from the anime
@@ -303,7 +318,9 @@ ___
 Displays a list of animes that has been previously entered by the user based on their watch status.<br>
 Format: `list [s/STATUS]`
 
-* If no `STATUS` is given, all animes will be listed.
+Notes:
+* If multiple `s/STATUS` is given in the command, the animes listed will be of the last provided `STATUS`
+* If no `s/STATUS` is given, all animes will be listed.
 
 Parameters:
 * [`STATUS`](#status)
@@ -350,7 +367,7 @@ ___
 
 ### Finding an anime: `find`
 
-Finds all anime(s) in the current tab that match specified keyword(s) in their names or genres
+Finds all anime(s) with status belonging to the current tab that contains specified keyword(s) in their names or genres
 (case-insensitive) and displays them as a list with index numbers<br>
 Format: `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...`
 
