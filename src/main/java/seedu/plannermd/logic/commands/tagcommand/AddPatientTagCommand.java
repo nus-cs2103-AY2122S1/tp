@@ -60,7 +60,13 @@ public class AddPatientTagCommand extends AddTagCommand {
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(patientToEdit.getTags());
+        Set<Tag> existingTags = patientToEdit.getTags();
+
+        if (existingTags.contains(tag)) {
+            throw new CommandException(MESSAGE_TAG_EXISTS);
+        }
+
+        Set<Tag> newTags = new HashSet<>(existingTags);
         newTags.add(tag);
 
         Patient editedPatient = setPatientTags(model, patientToEdit, newTags);

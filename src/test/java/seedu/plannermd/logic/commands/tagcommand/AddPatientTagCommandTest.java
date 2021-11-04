@@ -3,15 +3,17 @@ package seedu.plannermd.logic.commands.tagcommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_PATIENT;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.logic.commands.CommandTestUtil.showPatientAtIndex;
+import static seedu.plannermd.logic.commands.tagcommand.AddTagCommand.MESSAGE_TAG_EXISTS;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +38,7 @@ class AddPatientTagCommandTest {
 
     private final Model model = new ModelManager(getTypicalPlannerMd(), new UserPrefs());
 
-    private final Tag tag = new Tag(VALID_TAG_FRIEND);
+    private final Tag tag = new Tag(VALID_TAG_PATIENT);
 
     @Test
     void execute_validTagUnfilteredList_success() {
@@ -83,6 +85,30 @@ class AddPatientTagCommandTest {
     }
 
     @Test
+    void execute_repeatTagUnfilteredList_failure() {
+        Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ArrayList<Tag> tags = new ArrayList<>(firstPatient.getTags());
+        Tag firstTag = tags.get(0);
+
+        AddPatientTagCommand addPatientTagCommand = new AddPatientTagCommand(INDEX_FIRST_PERSON, firstTag);
+
+        assertCommandFailure(addPatientTagCommand, model, MESSAGE_TAG_EXISTS);
+    }
+
+    @Test
+    void execute_repeatTagFilteredList_failure() {
+        showPatientAtIndex(model, INDEX_FIRST_PERSON);
+
+        Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ArrayList<Tag> tags = new ArrayList<>(firstPatient.getTags());
+        Tag firstTag = tags.get(0);
+
+        AddPatientTagCommand addPatientTagCommand = new AddPatientTagCommand(INDEX_FIRST_PERSON, firstTag);
+
+        assertCommandFailure(addPatientTagCommand, model, MESSAGE_TAG_EXISTS);
+    }
+
+    @Test
     void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
         AddPatientTagCommand addPatientTagCommand = new AddPatientTagCommand(outOfBoundIndex, tag);
@@ -108,7 +134,7 @@ class AddPatientTagCommandTest {
         final AddPatientTagCommand standardCommand = new AddPatientTagCommand(INDEX_FIRST_PERSON, tag);
 
         // same values -> returns true
-        Tag copyTag = new Tag(VALID_TAG_FRIEND);
+        Tag copyTag = new Tag(VALID_TAG_PATIENT);
         AddPatientTagCommand commandWithSameValues = new AddPatientTagCommand(INDEX_FIRST_PERSON, copyTag);
         assertEquals(standardCommand, commandWithSameValues);
 

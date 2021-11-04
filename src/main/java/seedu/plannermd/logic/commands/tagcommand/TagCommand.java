@@ -22,7 +22,7 @@ public abstract class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + "{FLAG} {ARGUMENTS}: Executes tag command given by flag tag\n"
+            COMMAND_WORD + " {FLAG} {ARGUMENTS}: Executes tag command given by flag tag\n"
             + "Commands: \n"
             + "tag -a: "
                     + "Adds a tag to the person identified by the index number used in the displayed person list.\n"

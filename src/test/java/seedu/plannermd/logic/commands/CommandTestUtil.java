@@ -59,6 +59,8 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_BOB = "Company X coverage";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_PATIENT = "Immunocompromised";
+    public static final String VALID_TAG_DOCTOR = "Pediatrician";
     public static final String VALID_RISK_AMY = "LOW";
     public static final String VALID_RISK_BOB = "MEDIUM";
 
