@@ -7,7 +7,6 @@
 * It is named `Teaching Assistant’s Buddy (TAB)` (`TAB` for short).
 * For the detailed documentation of this project, see the **[Teaching Assistant’s Buddy Product Website](https://ay2122s1-cs2103-f09-1.github.io/tp/)**.
 
-
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -25,7 +24,7 @@
 
 * Parameters must only contain permitted characters, as listed in the [Parameter summary](#parameter-summary-with-prefix-included) below.
 
-* Optional parameters need not be all present when executing a command, they are denoted in this user guide using square brackets '[]'.<br>
+* Optional parameters are denoted in this user guide using square brackets '[]', at least one optional parameter must be present when executing a command.<br>
   e.g. in `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]`, `a/<edited task name>` and `d/<edited task deadline>` are the optional parameters
 
 * If duplicate parameters are provided, only the latest parameters will be processed.
@@ -50,6 +49,7 @@ Examples:
 
 Edit the name of the module.<br>
 Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
+The new module name must not be identical to the old module name.
 
 Format: `edit module m/<old module name> mn/<new module name>`
 
@@ -72,7 +72,7 @@ Examples:
 
 ### Add a student to a specific module: `add student`
 
-Add a new student to the specified module.<br>
+Add a new student to the specified module by providing the module name, student id, student name, student tele handle, and the student email.<br>
 If the student is already present in other modules in TAB, the specified parameters must contain the same information as in those modules.<br>
 Also automatically copies over the task list from the module to the student.<br>
 Student id must be a valid NUS student id (starts with A, followed by 7 numbers and ends with a capital letter.<br>
@@ -93,25 +93,25 @@ Examples:
 ### Edit a student's information: `edit student`
 
 Edit a student's information.<br>
-If the student is also present in other modules in TAB, also edit their information in those modules.<br>
-The identity parameters (module name/student id) must be provided.<br>
-At least one optional editable parameter (name/tele handle/email) must be provided, and only provided editable parameters will be changed.<br>
+If the student is present in more than one module, edit their information in all modules.<br>
+The identity parameter (student id) must be provided.<br>
+At least one optional parameter (name/tele handle/email) must be provided, and only provided parameters will be changed.<br>
 If the editable parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
 Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
 Student email must follow the format specified in the [Parameter summary](#parameter-summary-with-prefix-included) section below.<br>
 
-Format: `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]`
+Format: `edit student i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]`
 
 Examples:
-* `edit student m/CS2103 i/A0123456A n/John Doe`:
-  * Edit the name of the student with id A0123456A in module CS2103 to John Doe
-* `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`:
-  * Edit the tele handle and email of the student with id A0123457A in module CS2100 to @amylee and amy@u.nus.edu respectively
+* `edit student i/A0123456A n/John Doe`:
+  * Edit the name of the student with id A0123456A to John Doe
+* `edit student i/A0123457A t/@amylee e/amy@u.nus.edu`:
+  * Edit the tele handle and email of the student with id A0123457A to @amylee and amy@u.nus.edu respectively
 
 ### Delete a student from a specific module: `delete student`
 
-Delete the specified student from the specified module.
+Delete the specified student from the specified module by providing the module name and the student id.
 
 Format: `delete student m/<module name> i/<student id>`
 
@@ -123,10 +123,10 @@ Examples:
 
 ### Add a new task to a module: `add task`
 
-Add a new task to the specified module.<br>
-Task id must begin with a capital letter 'T', followed by numbers only. The numbers must not start with 0.<br>
+Add a new task to the specified module by providing the module name, task id, task name, and the task deadline.<br>
+Task id must begin with a capital letter 'T', followed by a positive integer.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
-Task deadline must contain either date only/time only/date and time.<br>
+Task deadline can contain either the date and time, or only the date, or only the time.<br>
 Date must be in the form "YYYY-MM-DD".<br>
 Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
 
@@ -142,10 +142,10 @@ Examples:
 
 Edit a task's information.<br>
 The identity parameters (module name/task id) must be provided.<br>
-At least one optional editable parameter (name/deadline) must be provided, and only provided editable parameters will be changed.<br>
+At least one optional parameter (name/deadline) must be provided, and only provided parameters will be changed.<br>
 If the editable parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
-Task deadline must contain either date only/time only/date and time.<br>
+Task deadline can contain either the date and time, or only the date, or only the time.<br>
 Date must be in the form "YYYY-MM-DD".<br>
 Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
 
@@ -159,7 +159,7 @@ Examples:
 
 ### Delete a task from a module: `delete task`
 
-Delete the specified task from the specified module.<br>
+Delete the specified task from the specified module by providing the module name and the task id.<br>
 Also delete the task from all the students in that module.
 
 Format: `delete task m/<module name> ti/<task id>`
@@ -217,11 +217,26 @@ Clear all information stored in the TAB application.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:warning: **Caution:** Clearing is irreversible, please use with caution.
+</div>
+
 ### Exit the application: `exit`
 
 Exit the TAB application.
 
 Format: `exit`
+
+### Saving the data
+
+TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file (JSON)
+
+TAB data are saved as a JSON file `[JAR file location]/data/assistantbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:warning: **Caution:**
+If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
+</div>
 
 ## FAQ
 
@@ -255,7 +270,7 @@ Action | Format, Examples
 **Delete Student** | `delete student m/<module name> i/<student id>` <br> e.g., `delete student m/CS2103 i/A1234567A`
 **Delete Task** | `delete task m/<module name> ti/<task id>` <br> e.g., `delete task m/CS2103 ti/T1`
 **Edit Module** | `edit module m/<old module name> mn/<new module name>` <br> e.g., `edit module m/CS2103 mn/CS2105`
-**Edit Student** | `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]` <br> e.g., `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`
+**Edit Student** | `edit student i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]` <br> e.g., `edit student i/A0123457A t/@amylee e/amy@u.nus.edu`
 **Edit Task** | `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]` <br> e.g., `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`
 **Exit** | `exit` <br> e.g., `exit`
 **Find** | `find m/<module name> i/<student id>` <br> e.g., `find m/CS2103 i/A0123456A`
@@ -273,9 +288,9 @@ Parameter with prefix | Permitted characters
 `n/<student name>` <br> `n/<edited student name>` | Student name should only contain alphanumeric characters and spaces, and it should not be blank.
 `t/<student tele handle>` <br> `t/<edited student tele handle>` | Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.
 `e/<student email>` <br> `e/<student email>` | Student email must follow the format specified in the [Email format](#email-format)) section below.
-`ti/<task id>` | Task id must begin with a capital letter 'T', followed by numbers only. The numbers must not start with 0.
+`ti/<task id>` | Task id must begin with a capital letter 'T', followed by a positive integer.
 `a/<task name>` <br> `a/<edited task name>` | Task name must only contain alphanumeric characters and spaces, and it must not be blank.
-`d/<task deadline>` <br> `d/<edited task deadline>` | Task deadline must contain either date only/time only/date and time.<br> Date must be in the form "YYYY-MM-DD".<br> Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
+`d/<task deadline>` <br> `d/<edited task deadline>` | Task deadline can contain either the date and time, or only the date, or only the time.<br> Date must be in the form "YYYY-MM-DD".<br> Time must be in the form "hh:mm" in 24-hrs format, and will appear in TAB in 12-hrs format.
 
 
 ### Email format
