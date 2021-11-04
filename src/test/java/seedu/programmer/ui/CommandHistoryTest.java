@@ -64,6 +64,10 @@ public class CommandHistoryTest {
 
         // Retrieve the next previous command -> return the current command
         assertEquals(commandHistory.getCurrentCommand(), "one");
+
+        // Simulate multiple up keys pressed
+        assertEquals(commandHistory.getCurrentCommand(), "one");
+        assertEquals(commandHistory.getCurrentCommand(), "one");
     }
 
     @Test

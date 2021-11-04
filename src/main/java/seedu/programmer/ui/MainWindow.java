@@ -355,6 +355,16 @@ public class MainWindow extends UiPart<Stage> {
         fileChooser.getExtensionFilters().add(csvFilter);
     }
 
+    @FXML
+    private void handleHover() {
+        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
+    }
+
+    @FXML
+    private void handleUnhover() {
+        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
+    }
+
     /**
      * Executes the command and returns the result.
      *
