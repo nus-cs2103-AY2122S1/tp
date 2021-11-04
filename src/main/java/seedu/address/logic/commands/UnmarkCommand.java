@@ -46,7 +46,7 @@ public class UnmarkCommand extends MarkingCommand {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
-            unmarkingUnmarkedPerson = model.checkForMarkedPerson(personToCheck);
+            unmarkingUnmarkedPerson = model.checkForUnmarkedPerson(personToCheck);
             if (unmarkingUnmarkedPerson) {
                 throw new CommandException(MESSAGE_UNMARKING_UNMARKED_PERSON);
             }
