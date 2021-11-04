@@ -1415,7 +1415,7 @@ Character limit:
        **Expected**: Similar to previous testcase (in Point 3).
 
 #### Unmarking an appointment
-1. Umarks an existing appointment in FAST
+1. Unmarks an existing appointment in FAST
     1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment does not exist for the specified client yet.
    
     2. **Test Case**: `ua 1` <br>
