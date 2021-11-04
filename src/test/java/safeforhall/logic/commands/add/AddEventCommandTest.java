@@ -73,7 +73,7 @@ public class AddEventCommandTest {
     public void execute_exceedCapacityEvent_throwsCommandException() throws Exception {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person alice = new PersonBuilder().withName(TypicalPersons.ALICE.getName().toString()).build();
-        Person bob = new PersonBuilder().withName(TypicalPersons.BOB.getName().toString()).build();
+        Person bob = new PersonBuilder().withName(TypicalPersons.BOB.getName().toString()).withRoom("E401").build();
         AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
         addAliceCommand.execute(model);
         AddPersonCommand addBobCommand = new AddPersonCommand(bob);
