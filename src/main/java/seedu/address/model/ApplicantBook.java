@@ -86,9 +86,9 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     /**
      * Returns the applicant with the specified name, if any.
      */
-    public Applicant getApplicantByName(Name applicantName) {
+    public Applicant getApplicantWithName(Name applicantName) {
         requireNonNull(applicantName);
-        return applicants.getApplicantByName(applicantName);
+        return applicants.getApplicantWithName(applicantName);
     }
 
     /**

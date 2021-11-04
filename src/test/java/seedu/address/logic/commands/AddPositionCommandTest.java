@@ -123,7 +123,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public Applicant getApplicantByName(Name applicantName) {
+        public Applicant getApplicantWithName(Name applicantName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -244,9 +244,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public void addToHistory(Command command) {
-            return;
-        }
+        public void addToHistory(Command command) {}
 
         @Override
         public boolean hasHistory() {
@@ -301,9 +299,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public void addToHistory(Command command) {
-            return;
-        }
+        public void addToHistory(Command command) {}
 
         @Override
         public boolean hasHistory() {

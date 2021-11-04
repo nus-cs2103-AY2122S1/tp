@@ -292,9 +292,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Applicant getApplicantByName(Name applicantName) {
+    public Applicant getApplicantWithName(Name applicantName) {
         requireNonNull(applicantName);
-        return applicantBook.getApplicantByName(applicantName);
+        return applicantBook.getApplicantWithName(applicantName);
     }
 
     @Override
