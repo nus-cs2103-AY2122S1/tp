@@ -254,7 +254,7 @@ Command constraints:
 * The friend has to be previously linked to the game with the provided `GAME_ID`.
 
 Examples:
-* `friend --unlink Draco -g DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
+* `friend --unlink Draco -g DOTA` Removes the link between the friend with FRIEND_ID 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
 Screenshot:
 
