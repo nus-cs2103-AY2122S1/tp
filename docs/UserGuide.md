@@ -64,7 +64,7 @@ Below is a list that highlights some of our special features.
 | Feature | Description  |
 | ------- | ------------ |
 | Data Security <span class="badge badge-pill bg-success text-white">NEW</span> | The application data is protected by industry standard [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption. |
-| Spreadsheets Support <span class="badge badge-pill bg-success text-white">NEW</span> | SPAM supports imports from and exports to _.csv_ files, which are compatible with Microsoft Excel and most modern day marketing software. |
+| Spreadsheets Support <span class="badge badge-pill bg-success text-white">NEW</span> | SPAM supports imports from and exports to _.csv_ files, which are compatible with Microsoft Excel and most modern-day marketing software. |
 | Contacts Management | SPAM allows you to create, add, edit and delete contacts that are locally stored on your computer. | 
 
 ---
@@ -128,8 +128,8 @@ Note that the password needs to follow the requirements stated in the [`password
 3. Once you have set up the password, you will be prompted to enter the same password for subsequent logins.
 
    <figure class="figure">
-       <img src="images/loginPassword.png" class="figure-img img-fluid rounded" alt="Enter Password Prompt Display">
-       <figcaption class="figure-caption">Figure 2: Enter Password Prompt Display</figcaption>
+      <img src="images/loginPassword.png" class="figure-img img-fluid rounded" alt="Enter Password Prompt Display">
+      <figcaption class="figure-caption">Figure 2: Enter Password Prompt Display</figcaption>
    </figure>
    
 5. After a brief period of loading, the GUI similar to the picture below should appear.
@@ -233,7 +233,7 @@ short form `-n` can also be used instead.
 
 ### `add`
 
-Adds a contact to the address manager.
+Adds a contact to the address book.
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
@@ -250,9 +250,9 @@ add
 </div>
 <div markdown="1" class="w-100">
 ```text
-add -n Jane Deer -t woman
+add -n Jane Deer -t woman -t friend
 ```
-Add a contact with the name of `Jane Deer` that consist of the tag `woman`.
+Add a contact with the name of `Jane Deer` that consist of the tags `woman` and `friend`.
 </div>
 </div>
 
@@ -323,11 +323,9 @@ list
 
 ### `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book at the specified index. The `edit` command uses the same flags as [`add`](#add).
 
-Format: `edit [INDEX] (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
-
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- The specified index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
@@ -407,9 +405,7 @@ clear
 
 ### `find`
 
-Finds persons whose respective fields contain the respective keywords.
-
-Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
+Finds persons whose respective fields (specified by the flags) contain the respective keywords. The `find` command uses the same flags as [`add`](#add).
 
 - At least one of the optional fields must be provided.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -466,7 +462,8 @@ Selects contacts from the current list. The selected contacts stay in the select
 | `-i` | Include indexes when selecting. |
 
 <figure class="figure">
-   <img src="images/select.gif" class="figure-img img-fluid rounded" alt="Help Window">
+   <img src="images/select.png" class="figure-img img-fluid rounded" alt="Help Window">
+   <figcaption class="figure-caption">Figure 3: Selection Display with Indexes 1, 2 and 3 Selected</figcaption>
 </figure>
 
 <div class="d-flex alert alert-secondary pb-0">
@@ -496,10 +493,6 @@ Select contacts at indexes `1`, `2` and `3` of the list.
 ### `unselect`
 
 Unselects contacts from the selected list. The `unselect` command uses the same flags as [`select`](#select).
-
-<figure class="figure">
-   <img src="images/unselect.gif" class="figure-img img-fluid rounded" alt="Help Window">
-</figure>
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
@@ -613,7 +606,8 @@ password -o password123! -n password!321
 Opens up a window that contains this user guide.
 
 <figure class="figure">
-   <img src="images/helpWindow.gif" class="figure-img img-fluid rounded" alt="Help Window">
+   <img src="images/helpWindow.png" class="figure-img img-fluid rounded" alt="Help Window">
+   <figcaption class="figure-caption">Figure 4: Help Window Display</figcaption>
 </figure>
 
 <div class="d-flex alert alert-secondary pb-0">
@@ -640,7 +634,7 @@ This section contains some frequently asked questions about SPAM.
 <h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
 
 **Option 1:**
-Export all the contacts in your current device into a _.csv_ file. Then, after installing the app in your new device,
+Export all the contacts on your current device into a _.csv_ file. Then, after installing the app in your new device,
 import the _.csv_ file into the new list of contacts.
 
 **Option 2 (with encryption):**
