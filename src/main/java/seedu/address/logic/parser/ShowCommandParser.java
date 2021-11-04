@@ -45,7 +45,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         Index index;
 
         // check if there are any prefixes, e.g. `show 1 -a Midterm` is valid
-        if (!isNoPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP)) {
+        if (!isNoPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
@@ -86,7 +86,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     /**
      * Returns true if none of the prefixes present in the given {@code ArgumentMultimap}.
      */
-    private static boolean isNoPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    private static boolean isNoPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
