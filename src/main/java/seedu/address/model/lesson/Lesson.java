@@ -259,19 +259,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
-
-        builder.append(typeOfLesson)
-                .append(" ")
-                .append("Start Date: ")
-                .append(getStartDate());
-
-        if (!getEndDate().equals(Date.MAX_DATE)) {
-            builder.append("; End Date: ")
-                   .append(getEndDate());
-        }
-
-
+        // common fields of Lesson
         builder.append("; Date: ")
                 .append(getDisplayDate())
                 .append("; Time: ")
@@ -283,23 +271,10 @@ public abstract class Lesson implements Comparable<Lesson> {
                 .append("; Lesson Rates: ")
                 .append(getLessonRates());
 
-        Set<Homework> homework = getHomework();
+        String homework = getHomework().stream().map(Homework::toString).collect(Collectors.joining(", "));
         if (!homework.isEmpty()) {
-            builder.append("; Homework: ");
-            homework.forEach(x -> builder.append(x + "; "));
-        } else {
-            builder.append("; ");
-        }
-        if (isCancelled()) {
-            builder.append("(Cancelled)");
-            return builder.toString();
-        }
-        String dates = getCancelledDates().stream().sorted()
-                .map(Date::toString).collect(Collectors.joining(","));
-
-        if (!dates.isEmpty()) {
-            builder.append("Cancelled Date(s): ")
-                    .append(dates);
+            builder.append("; Homework: ")
+                    .append(homework);
         }
         return builder.toString();
     }

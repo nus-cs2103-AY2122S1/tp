@@ -89,5 +89,24 @@ public class MakeUpLesson extends Lesson {
     public boolean hasLessonOnDate(Date date) {
         return getStartDate().equals(date) && !isCancelled();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("(Makeup)")
+                .append(" ")
+                .append("Start Date: ")
+                .append(getStartDate());
+
+        builder.append(super.toString());
+
+        if (isCancelled()) {
+            builder.append("; (Cancelled)");
+            return builder.toString();
+        }
+
+        return builder.toString();
+    }
 }
 

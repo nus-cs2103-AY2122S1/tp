@@ -175,4 +175,29 @@ public class RecurringLesson extends Lesson {
                 && !getCancelledDates().contains(date); // other date is not a cancelled date
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("(Recurring)")
+                .append(" ")
+                .append("Start Date: ")
+                .append(getStartDate());
+
+        if (!getEndDate().equals(Date.MAX_DATE)) {
+            builder.append("; End Date: ")
+                    .append(getEndDate());
+        }
+
+        builder.append(super.toString());
+
+        String dates = getCancelledDates().stream().sorted()
+                .map(Date::toString).collect(Collectors.joining(", "));
+
+        if (!dates.isEmpty()) {
+            builder.append("; Cancelled Date(s): ")
+                    .append(dates);
+        }
+        return builder.toString();
+    }
 }
