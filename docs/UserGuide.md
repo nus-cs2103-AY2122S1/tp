@@ -228,6 +228,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 If you add other tags along with `t/`, `t/` will be interpreted as an empty tag.<br>
   e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
+On the other hand, `edit 2 t/ t/neighbour` will remove all existing tags and add only `neighbour` as a tag to the student.
 
 </div>
 
@@ -498,7 +499,7 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 
 If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br>
   e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
-
+On the other hand, `ledit 2 1 hw/ hw/Assignment 1` will remove all existing homework and add only `Assignment 1` as homework for the lesson.
 </div>
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
