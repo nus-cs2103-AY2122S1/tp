@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -19,7 +20,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -74,12 +74,13 @@ public class ShowCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex, null);
 
-        assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(showCommand, model,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, model.getFilteredStudentList().size()));
     }
 
     @Test
     public void execute_invalidName_throwsCommandException() {
-        //AMY does not exist in typicalAddressBook
+        // AMY does not exist in typicalAddressBook
         Name name = AMY.getName();
         String studentName = name.toString();
 
