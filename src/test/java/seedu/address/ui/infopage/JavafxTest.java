@@ -1,10 +1,12 @@
 package seedu.address.ui.infopage;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.BeforeAll;
+
+import javafx.application.Platform;
+
 
 public abstract class JavafxTest {
     private static boolean isInitialized = false;
