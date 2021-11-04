@@ -52,12 +52,10 @@ deactivate AddressBookParser
 LogicManager -> MarkCommand : execute()
 activate MarkCommand
 
-
 MarkCommand -> Model : getFilteredPersonList()
 activate Model
 Model --> MarkCommand
 deactivate Model
-
 
 loop until list of indices ends
     MarkCommand -> Model: checkForMarkedPerson(personToCheck)
@@ -81,6 +79,7 @@ deactivate CommandResult
 
 MarkCommand --> LogicManager: result
 deactivate MarkCommand
+
 
 
 [<--LogicManager
