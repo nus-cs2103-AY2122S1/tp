@@ -8,7 +8,16 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 
+/**
+ * Test class for {@link JsonSerializableUserProfile}.
+ */
 public class JsonSerializableUserProfileTest {
+
+    /**
+     * Checks if conversion from {@code JsonAdaptedPerson} to {@code Person} is successful.
+     *
+     * @throws IllegalValueException If there is an error converting to Person.
+     */
     @Test
     public void toModelType_jsonAdaptedPerson_success() throws IllegalValueException {
         Person ALICE = TypicalPersons.ALICE;

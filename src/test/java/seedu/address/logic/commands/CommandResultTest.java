@@ -9,6 +9,9 @@ import javax.naming.CompositeName;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for {@link CommandResult}.
+ */
 public class CommandResultTest {
 
     @Test

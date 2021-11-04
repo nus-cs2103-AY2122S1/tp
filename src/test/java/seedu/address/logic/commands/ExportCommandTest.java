@@ -27,6 +27,11 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.ui.PersonListPanel;
 
+/**
+ * Test class for {@link ExportCommand}.
+ * Test exports are done in {@code src/test/data/ExportImportCommandTest/EmptyFolder/} and
+ * {@code src/test/data/ExportImportCommandTest/TestFiles/}.
+ */
 public class ExportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
     private static final String PATH_TEST_FILES = "src/test/data/ExportImportCommandTest/TestFiles/";
@@ -92,7 +97,7 @@ public class ExportCommandTest {
     }
 
     /**
-     * Export command fails when there is an existing file with the given name.
+     * Tests if Export command fails when there is an existing file with the given name.
      * Test occurs in src/test/data/ExportImportCommandTest/TestFiles.
      */
     @Test
@@ -103,7 +108,7 @@ public class ExportCommandTest {
     }
 
     /**
-     * Export command fails when there is the filename provided is of the wrong type.
+     * Tests if Export command fails when there is the filename provided is of the wrong type.
      * This should not happen as file type should be verified in ExportCommandParser.
      * However, it is still checked here for completeness.
      */

@@ -31,6 +31,11 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.PersonListPanel;
 
+/**
+ * Test class for {@link ImportCommand}.
+ * Test exports are done in {@code src/test/data/ExportImportCommandTest/EmptyFolder/} and
+ * {@code src/test/data/ExportImportCommandTest/TestFiles/}.
+ */
 public class ImportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
     private static final String PATH_TEST_FILES = "src/test/data/ExportImportCommandTest/TestFiles/";
@@ -87,7 +92,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * Import command fails when there is no file with the provided JSON file name.
+     * Tests if Import command fails when there is no file with the provided JSON file name.
      * Test occurs in src/test/data/ExportImportCommandTest/EmptyFolder.
      */
     @Test
@@ -98,7 +103,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * Import command fails when there is no file with the provided CSV file name.
+     * Tests if Import command fails when there is no file with the provided CSV file name.
      * Test occurs in src/test/data/ExportImportCommandTest/EmptyFolder.
      */
     @Test
@@ -109,7 +114,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * Import command fails when there is the file provided is of the wrong type.
+     * Tests if Import command fails when there is the file provided is of the wrong type.
      * This should not happen as file type should be verified in ImportCommandParser.
      * However, it is still checked here for completeness.
      */
@@ -121,7 +126,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * Import command fails when the json file is wrongly formatted.
+     * Tests if Import command fails when the json file is wrongly formatted.
      */
     @Test
     public void execute_wronglyFormattedJson_importFail() {
@@ -132,7 +137,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * Import command fails when the csv file is wrongly formatted.
+     * Tests if Import command fails when the csv file is wrongly formatted.
      */
     @Test
     public void execute_wronglyFormattedCsv_importFail() {
@@ -143,7 +148,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * No change expected when importing a contact which already exists.
+     * Checks for no change expected when importing a contact which already exists.
      */
     @Test
     public void execute_duplicatePersonImported_noChangeSuccess() {

@@ -89,12 +89,18 @@ public class AddressBookTest {
         assertEquals(FXCollections.observableArrayList(), addressBook.getModifiableList());
     }
 
+    /**
+     * Tests if hashcode is correct.
+     */
     @Test
     public void hashTest() {
         int expected = -996168738;
         assertEquals(expected, getTypicalAddressBook().hashCode());
     }
 
+    /**
+     * Sorts an already sorted {@code AddressBook}. No change is expected.
+     */
     @Test
     public void sort_sortedAddressBook_noChange() {
         AddressBook sortedAddressBook = getTypicalAddressBook();
@@ -102,6 +108,9 @@ public class AddressBookTest {
         assertEquals(getTypicalAddressBook(), sortedAddressBook);
     }
 
+    /**
+     * Sorts an unsorted {@code AddressBook}.
+     */
     @Test
     public void sort_unsortedAddressBook_sorted() {
         AddressBook addressBook = getTypicalAddressBookUnsorted();
