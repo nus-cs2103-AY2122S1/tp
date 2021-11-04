@@ -6,9 +6,8 @@ import static java.util.Objects.requireNonNull;
  * Represents a student's name in the ProgrammerError.
  */
 public class LabResult {
-
+    private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
     private final Integer labResult;
-    //public static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
 
     /**
      * Constructs a {@code Name}.
@@ -18,15 +17,18 @@ public class LabResult {
     public LabResult(Integer labResult) {
         requireNonNull(labResult);
         if (labResult == -1) {
-            this.labResult = Lab.UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
+            this.labResult = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
         } else {
-            //checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
             this.labResult = labResult;
         }
     }
 
-    public int getLabResult() {
+    public Integer getLabResult() {
         return this.labResult;
+    }
+
+    public static Integer getPlaceholder() {
+        return UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
     }
 
     @Override
