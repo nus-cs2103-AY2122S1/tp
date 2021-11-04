@@ -469,7 +469,9 @@ Examples:
   5
 * `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
 
-![addfExample](images/addfExample.png)
+<p align="center">
+   <img src="images/addfExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
