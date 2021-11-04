@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-# AniList V1.3
+# AniList V1.4
 
 AniList is a desktop application made to be a single centralized location for anime lovers to keep track of all the animes they are interested in. In AniList, users will be able to keep track of animes that they are watching, wanting to watch or even animes that they have finished. Users will also be able to get statistics on their watching habits such as number of episodes watched and the genre distribution of their current list of animes.
 
@@ -23,12 +23,13 @@ This User Guide is to be used by any AniList user. No technical background is re
   * [Updating anime watch status: `status`](#updating-anime-watch-status-status)
   * [Updating anime title: `rename`](#updating-anime-title-rename)
   * [Adding/ Deleting genre from anime: `genre`](#adding-deleting-genre-from-anime-genre)
-  * [List all supported genres: `genrelist`](#list-all-supported-genres-genrelist)
+  * [Listing all supported genres: `genrelist`](#list-all-supported-genres-genrelist)
   * [Listing anime based on watch status: `list`](#listing-anime-based-on-watch-status-list)
   * [Clearing all animes currently displayed: `clear`](#clearing-all-animes-currently-displayed-clear)
   * [Finding an anime: `find`](#finding-an-anime-find)
-  * [View user statistics: `stats`](#view-user-statistics-stats)
+  * [Viewing user statistics: `stats`](#view-user-statistics-stats)
   * [Viewing all supported commands: `help`](#viewing-all-supported-commands-help)
+  * [Exiting application: `exit`](#exiting-application-exit)
 - [Commands Table](#commands-table)
 - [Glossary](#glossary)
 
@@ -120,6 +121,10 @@ ___
 * Leading and trailing whitespace is ignored:
   <br/>e.g. <code>&nbsp; list</code> and <code>list &nbsp;</code> will both be registered as `list`
 
+* Order of prefixed parameters do not matter:
+  <br/> e.g. `add n/NAME e/EPISODE` will obtain the same result as `add e/EPISODE n/NAME`
+  <br/> e.g. `genre c/add 1 g/comedy` will not work as `1` is not a prefixed parameter
+
 </div>
 
 ### Adding an anime: `add`
@@ -127,7 +132,13 @@ ___
 Adds a user defined anime into the anime list.
 Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE] [g/GENRE] ...`
 
-Note: If multiple `n/NAME` is given in the command, the title of the added anime will be the last provided `NAME`
+Notes:
+* If multiple `n/NAME` is given in the command, the title of the added anime will be the last provided `NAME`
+* If multiple `e/EPISODE` is given in the command, the episode of the added anime will be the last provided `EPISODE`
+* If multiple `s/STATUS` is given in the command, the status of the added anime will be the last provided `STATUS`
+* If `EPISODE` is not provided, it will be set to `0`
+* If `STATUS` is not provided, it will be set to `watching`
+* All genres provided must be valid for the command to be successful
 
 Parameters:
 * [`NAME`](#name)
@@ -180,6 +191,9 @@ ___
 Updates the episode that you are currently on for the specified anime.
 Format: `update INDEX e/EPISODE`
 
+Notes:
+* If multiple `e/EPISODE` is given in the command, the episode of the added anime will be the last provided `EPISODE`
+
 Parameters:
 * [`INDEX`](#index)
 * [`EPISODE`](#episode)
@@ -203,6 +217,8 @@ ___
 Updates the watch status of a specified anime.
 Format: `status INDEX s/STATUS`
 
+Notes:
+* If multiple `s/STATUS` is given in the command, the status of the added anime will be the last provided `STATUS`
 
 Parameters:
 * [`INDEX`](#index)
@@ -226,6 +242,9 @@ ___
 ### Updating anime title: `rename`
 Updates the anime title for the user specified anime.
 Format: `rename INDEX n/NAME`
+
+Notes:
+* If multiple `n/NAME` is given in the command, the title of the added anime will be the last provided `NAME`
 
 Parameters:
 * [`INDEX`](#index)
@@ -251,8 +270,11 @@ ___
 Adds or deletes genre(s) from a specified anime<br>
 Format: `genre INDEX c/ACTION g/GENRE [g/GENRE] ...`
 
+Notes:
+* If multiple `c/ACTION` is given in the command, the action done to the anime will be the last provided `ACTION`
 * Duplicate genres are not allowed
 * You need to provide at least 1 `GENRE`
+* All valid genres provided will be successfully added/deleted from the anime
 
 Parameters:
 * [`INDEX`](#index)
@@ -274,7 +296,7 @@ Example usages:
 ___
 
 
-### List all supported genres: `genrelist`
+### Listing all supported genres: `genrelist`
 
 Lists all currently supported genres on the Command Results panel.
 Format: `genrelist`
@@ -296,7 +318,9 @@ ___
 Displays a list of animes that has been previously entered by the user based on their watch status.<br>
 Format: `list [s/STATUS]`
 
-* If no `STATUS` is given, all animes will be listed.
+Notes:
+* If multiple `s/STATUS` is given in the command, the animes listed will be of the last provided `STATUS`
+* If no `s/STATUS` is given, all animes will be listed.
 
 Parameters:
 * [`STATUS`](#status)
@@ -343,7 +367,7 @@ ___
 
 ### Finding an anime: `find`
 
-Finds all anime(s) that match specified keyword(s) in their names or genres
+Finds all anime(s) with status belonging to the current tab that contains specified keyword(s) in their names or genres
 (case-insensitive) and displays them as a list with index numbers<br>
 Format: `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...`
 
@@ -366,7 +390,7 @@ all anime with comedy genre.
 
 ___
 
-### View user statistics: `stats`
+### Viewing user statistics: `stats`
 
 Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList
 
@@ -393,7 +417,7 @@ Example usages:
 2. A link to the User Guide is provided.
 ___
 
-### Exit application: `exit`
+### Exiting application: `exit`
 
 Exits the application.
 
@@ -443,11 +467,11 @@ ___
 
 ### EPISODE
 *  Refers to the latest episode watched for the anime
-*  Must be a non-negative integer `0, 1, 2 ...`
+*  Must be a non-negative integer ranging from 0 to 99999 `0, 1, 2 ... 99998, 99999`
 
 ### STATUS
-*  Refers to the watch status for the anime.
-*  In the form of `towatch`, `watching`, `finished`, with `t`, `w`, `f`, as their short forms.
+* Refers to the watch status for the anime.
+* Current list of available status: `towatch`, `watching`, `finished`, with `t`, `w`, `f`, as their short forms respectively
 
 ### GENRE
 *  Refers to the genre to which the anime belong to
@@ -459,8 +483,8 @@ ___
 *  The `INDEX` provided must be a positive integer `1, 2, 3...`
 
 ### ACTION
-*  Specifies additional information for the command
-*  Current list of available actions: `add`, `delete`
+*  Specifies additional information for the `genre` command
+*  Current list of available actions: `add`, `delete`, with `a`, `d`, as their short forms respectively
 
 ## List of Avaible Genres
 These are the current list of available Genres in the genrelist:
