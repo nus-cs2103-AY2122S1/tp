@@ -226,7 +226,11 @@ This command deletes a `Student` from `AcademyDirectory`.
 
 ### TagCommand
 
+{Add description}
+
 #### Implementation
+
+{Add implementation}
 
 ### GetCommand
 This command serves to retrieve a specific `Information` of students.
@@ -290,7 +294,6 @@ The attendance mechanism is facilitated by adding a `StudioRecord` parameter to 
 The following sequence diagram describes what happens when `AttendanceCommand` is executed:
 
 ![AttendanceCommandSequenceDiagram](images/dg/logic/commands/attendancecommand/AttendanceCommandSequenceDiagram.png)
-
 
 For `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams can be found below:
 
@@ -389,6 +392,8 @@ This command restores the original, unfiltered view of `AcademyDirectory`.
 
 `ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
+{Add more details on implementation}
+
 ### ClearCommand
 
 This command clears all `Student` entries from `AcademyDirectory`.
@@ -396,6 +401,8 @@ This command clears all `Student` entries from `AcademyDirectory`.
 #### Implementation
 
 `ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+
+{Add more details on implementation}
 
 ### UndoCommand
 #### Implementation
@@ -805,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Studios**: A tutorial held in CS1101S and is essential in aiding the students to improve their grasp on the concepts taught during the lecture.
 * **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
 * **Principle of Least-Privilege**: Minimum levels of access – or permissions – needed to perform function.
-* **Version Controllable**: Refers to a `Command` that logs a `Commit` object upon execution.
+* **Version Controllable**: Refers to a `Command` that logs a `Commit` object upon execution with the logging relying on the `Optional` field in the `CommandResult` returned from `Command#execute()`.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
