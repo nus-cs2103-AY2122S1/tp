@@ -98,13 +98,13 @@ public class VersionedModelManagerTest {
 
     @Test
     public void setAndGetAdditionalViewModelTest() {
-        AdditionalViewModel additionalViewModel = modelManager.getAdditionalViewModel();
-        assertDoesNotThrow(() -> modelManager.setAdditionalViewType(AdditionalViewType.VIEW));
-        assertDoesNotThrow(() -> modelManager.setAdditionalInfo(AdditionalInfo.of("String")));
+        AdditionalViewModel additionalViewModel = versionedModelManager.getAdditionalViewModel();
+        assertDoesNotThrow(() -> versionedModelManager.setAdditionalViewType(AdditionalViewType.VIEW));
+        assertDoesNotThrow(() -> versionedModelManager.setAdditionalInfo(AdditionalInfo.of("String")));
 
-        modelManager.setAdditionalViewType(AdditionalViewType.VIEW);
+        versionedModelManager.setAdditionalViewType(AdditionalViewType.VIEW);
         additionalViewModel.setAdditionalViewType(AdditionalViewType.VIEW);
-        assertEquals(modelManager.getAdditionalViewModel(), additionalViewModel);
+        assertEquals(versionedModelManager.getAdditionalViewModel(), additionalViewModel);
     }
 
     @Test
