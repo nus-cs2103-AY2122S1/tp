@@ -11,15 +11,20 @@
 
 * This project is developed with the following discretions:
   * It comes with a detailed User Guide and Developer Guide, as well as sufficient and comprehensive software testing for Quality Assurance purposes.
-  * It is optimized for CLI usage and suitable to fast typists, while at the same time having a highly interactive and stylized GUI for slow typers.
+  * It is optimized for CLI usage and suitable to fast typists, while at the same time having a highly interactive and stylized GUI for those who do not prefer to type.
   * It has a wide range of features, of different categories, for usage in recording and analyzing student data.
 
 ![Ui](docs/images/Ui.png)
+
+Point of View: You are an Avenger sitting behind the control table, supervising your tutee through the transparent glass while physically interacting with the system to manage your tutee's grades and participation. 
+
+Don't get us wrong though. We are not mad space scientists doing controlled experiment on students. *Or are we?...*
 
 ### Site Map
 
 * To find out about how to use Academy Directory, [view User Guide here](https://ay2122s1-cs2103t-t15-3.github.io/tp/UserGuide.html)
 * To find out about how Academy Directory was created and the various software engineering principles behind it, [view Developer Guide here](https://ay2122s1-cs2103t-t15-3.github.io/tp/DeveloperGuide.html)
+* To find out about who the developers of Academy Directory are, [view About Us page here](https://ay2122s1-cs2103t-t15-3.github.io/tp/AboutUs.html)
 
 ### Feature List (As of Version 1.3)
 1. Student
