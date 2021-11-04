@@ -22,9 +22,13 @@ public class AccessCacheCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (key.equals("UP")) {
-            return new CommandResult("", false, false, true, model.getBefore());
+            return new CommandResult("", false, false, true,
+                    model.getBefore()
+            );
         } else if (key.equals("DOWN")) {
-            return new CommandResult("", false, false, true, model.getAfter());
+            return new CommandResult("", false, false, true,
+                    model.getAfter()
+            );
         } else {
             throw new CommandException("Unknown Error in AccessCacheCommand#Execute!");
         }

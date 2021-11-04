@@ -44,29 +44,17 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-
+    public CommandResult execute(String commandText, boolean isInternal) throws CommandException, ParseException {
         CommandResult commandResult;
-        model.addCommand(commandText);
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
-
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        Command command;
+        if (isInternal) {
+            logger.info("----------------[INTERNAL COMMAND][" + commandText + "]");
+            command = addressBookInternalParser.parseCommand(commandText);
+        } else {
+            logger.info("----------------[USER COMMAND][" + commandText + "]");
+            model.addCommand(commandText);
+            command = addressBookParser.parseCommand(commandText);
         }
-
-        return commandResult;
-    }
-
-    @Override
-    public CommandResult executeInternal(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[INTERNAL COMMAND][" + commandText + "]");
-
-        CommandResult commandResult;
-        Command command = addressBookInternalParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
