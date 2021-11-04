@@ -35,7 +35,7 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[github](http://github.com/Neha-5678)] [[portfolio](team/Neha-5678.md)]
 
 * Role: Developer
-* Responsibilities: Scheduling and tracking
+* Responsibilities: Storage for tasks and groups and creating logic for features related to Tasks.
 
 ### Le Quoc Huy
 
