@@ -67,6 +67,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns first occurrence of a person (if any) with same identity as {@code person} in the address book.
+     */
+    public List<Person> getDuplicate(Person person) {
+        requireNonNull(person);
+        return persons.getDuplicate(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

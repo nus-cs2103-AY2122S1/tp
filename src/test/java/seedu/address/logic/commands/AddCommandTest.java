@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.generateDuplicateErrorMessage;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -47,7 +49,9 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                generateDuplicateErrorMessage("The applicant to be added ", validPerson, validPerson), () ->
+                        addCommand.execute(modelStub));
     }
 
     @Test
@@ -126,6 +130,13 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Person> getDuplicate(Person person) {
+            ArrayList<Person> result = new ArrayList<>();
+            result.add(person);
+            return result;
         }
 
         @Override

@@ -51,6 +51,36 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void getDuplicate_noPersonsInList_returnsEmptyList() {
+        assertTrue(uniquePersonList.getDuplicate(AMY).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_noPersonWithSameIdentityFieldsInList_returnsEmptyList() {
+        uniquePersonList.add(AMY);
+        assertTrue(uniquePersonList.getDuplicate(BOB).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_personWithSameIdentityFieldsInList_returnsDuplicatePerson() {
+        uniquePersonList.add(AMY);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertEquals(uniquePersonList.getDuplicate(editedBob).get(0), AMY);
+    }
+
+    @Test
+    public void getDuplicate_personsWithSameIdentityFieldsInLIst_returnsDuplicatePersons() {
+        uniquePersonList.add(AMY);
+        uniquePersonList.add(BOB);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY)
+                .withTags(VALID_TAG_HUSBAND).build();
+        List<Person> duplicates = uniquePersonList.getDuplicate(editedBob);
+        assertEquals(duplicates.get(0), AMY);
+        assertEquals(duplicates.get(1), BOB);
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }
@@ -170,4 +200,5 @@ public class UniquePersonListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
+
 }
