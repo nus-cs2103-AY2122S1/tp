@@ -14,7 +14,9 @@ Given below are my contributions to the project.
     * What it does: Allow users to edit event details (name, date and time).
     * Justification: Sometimes when users type too fast, they might have typos. Having to delete the event and re-add might reduce their productivity.
       Moreover, in the real world, sometimes events get postponed too. Hence, this feature caters to these scenarios.
-    * Highlights: This feature affects the choice of data structure our team uses
+    * Highlights: This feature affects the choice of data structure our team uses. We had plans to use priority queue to store events so the event list are automatically
+      sorted in chronological order. However, with edit events made possible, we find that it complicates the implementation to re-order it after each edit. Our team then decided to
+      provide another feature to provide the option for users to choose whether they want to sort the events or leave it as it is.
 
 * **New Feature**: Added ability to filter events by date and optionally time.
     * What it does: Allow users to filter for events occurring on a specific date and optionally time.
@@ -23,7 +25,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added ability to sort events in chronological order.
     * What it does: Allow users to rearrange all existing events in chronological order.
     * Justification: After adding multiple events or ad hoc events, the timeline of events may become too messy for users to keep track of.
-      Moreover, when events are edited, the timeline of events may get messed up too. Hence, this feature caters to these scenarios.
+      Moreover, when events are edited, the timeline of events may get messed up too. Hence, this feature caters to users who want to sort the events.
 
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2103T-T10-2&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=XXJJXJ&tabRepo=AY2122S1-CS2103T-T10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
@@ -41,6 +43,7 @@ Given below are my contributions to the project.
     * Developer Guide:
       * Added implementation details of the `filterEvents` feature.
       * Updated existing class diagrams to fit our project's structure.
+      * Improve the phrasing of use cases.
 
 
 * **Team based Task**:
