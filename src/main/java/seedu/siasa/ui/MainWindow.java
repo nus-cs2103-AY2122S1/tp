@@ -122,7 +122,7 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-        executeCommand("expiringpolicy");
+        executeCommand("expiringpolicysummary");
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -163,8 +163,7 @@ public class MainWindow extends UiPart<Stage> {
     public static boolean showWarning(String description) {
         WarningWindow warningWindow = new WarningWindow(new Stage(), description);
         warningWindow.display();
-        boolean userResponse = warningWindow.getUserResponse();
-        return userResponse;
+        return warningWindow.getUserResponse();
     }
 
     void show() {

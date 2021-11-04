@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.siasa.logic.commands.ClearCommand;
 import seedu.siasa.logic.commands.ExitCommand;
-import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
+import seedu.siasa.logic.commands.contact.FindContactCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
@@ -67,9 +67,9 @@ public class SiasaParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindContactCommand command = (FindContactCommand) parser.parseCommand(
+                FindContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     /*

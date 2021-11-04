@@ -10,12 +10,12 @@ import seedu.siasa.logic.commands.ClearCommand;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.DownloadCommand;
 import seedu.siasa.logic.commands.ExitCommand;
-import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.commands.contact.AddContactCommand;
 import seedu.siasa.logic.commands.contact.ClearContactPolicyCommand;
 import seedu.siasa.logic.commands.contact.DeleteContactCommand;
 import seedu.siasa.logic.commands.contact.EditContactCommand;
+import seedu.siasa.logic.commands.contact.FindContactCommand;
 import seedu.siasa.logic.commands.contact.ListContactCommand;
 import seedu.siasa.logic.commands.contact.ListContactPolicyCommand;
 import seedu.siasa.logic.commands.contact.SortContactCommand;
@@ -24,11 +24,13 @@ import seedu.siasa.logic.commands.policy.DeletePolicyCommand;
 import seedu.siasa.logic.commands.policy.EditPolicyCommand;
 import seedu.siasa.logic.commands.policy.ListPolicyCommand;
 import seedu.siasa.logic.commands.policy.ShowExpiringPolicyCommand;
+import seedu.siasa.logic.commands.policy.ShowExpiringPolicySummaryCommand;
 import seedu.siasa.logic.commands.policy.SortPolicyCommand;
 import seedu.siasa.logic.parser.contact.AddContactCommandParser;
 import seedu.siasa.logic.parser.contact.ClearContactPolicyCommandParser;
 import seedu.siasa.logic.parser.contact.DeleteContactCommandParser;
 import seedu.siasa.logic.parser.contact.EditContactCommandParser;
+import seedu.siasa.logic.parser.contact.FindCommandParser;
 import seedu.siasa.logic.parser.contact.ListContactPolicyCommandParser;
 import seedu.siasa.logic.parser.contact.SortContactCommandParser;
 import seedu.siasa.logic.parser.exceptions.ParseException;
@@ -94,7 +96,7 @@ public class SiasaParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindContactCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListContactPolicyCommand.COMMAND_WORD:
@@ -114,6 +116,9 @@ public class SiasaParser {
 
         case DownloadCommand.COMMAND_WORD:
             return new DownloadCommand();
+
+        case ShowExpiringPolicySummaryCommand.COMMAND_WORD:
+            return new ShowExpiringPolicySummaryCommand();
 
         case ShowExpiringPolicyCommand.COMMAND_WORD:
             return new ShowExpiringPolicyCommand();
