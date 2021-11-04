@@ -143,11 +143,11 @@ Format: `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <
 * There should not be an existing student with the same NUSNET ID. If there is, the student to be added is considered invalid.
 
 Examples:
-* `addstudent -n Jonas Chow -i E0123456` 
+* `addstudent -n Jonas Chow -i E0123456`
   * adds the student Jonas Chow with the given NUSNET ID.
-* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` 
+* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A`
   * adds the student Jonas Chow and allocates him into groups `T01A` and `R01A`. [\[view example\]](#addstudent-example-2)
-* `addstudent -n Jonas Chow -i E0123456 -t beginner` 
+* `addstudent -n Jonas Chow -i E0123456 -t beginner`
   * adds the student Jonas Chow and tags him with `beginner`. [\[view example\]](#addstudent-example-3)
 
 [Return to Table of Contents](#table-of-contents)
@@ -169,15 +169,15 @@ Name is case-sensitive and only allows exact match. E.g. `Jonas` will not match 
 **:information_source: Notes:**<br>
 
 If duplicated students are found in the list of names and NUSNET IDs input, an error will be shown to inform you of
-the clash, and the group will not be created. 
+the clash, and the group will not be created.
 </div>
 
 Examples:
-* `addgroup -g T01A` 
-  * creates group `T01A`. 
-* `addgroup -g T01A -n Hong Yao -n Hong Fai` 
+* `addgroup -g T01A`
+  * creates group `T01A`.
+* `addgroup -g T01A -n Hong Yao -n Hong Fai`
   * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group. [\[view example\]](#addgroup-example-2)
-* `addgroup -g T01A -n Hong Yao -i E0123456` 
+* `addgroup -g T01A -n Hong Yao -i E0123456`
   * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group. [\[view example\]](#addgroup-example-3)
 
 [Return to Table of Contents](#table-of-contents)
@@ -194,9 +194,9 @@ Format: `addalloc -g <group_name> (-n <student_name> | -i <student_id>)`
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `addalloc -g T01A -n Zhiying` 
+* `addalloc -g T01A -n Zhiying`
   * adds `Zhiying` into the tutorial group `T01A`. [\[view example\]](#addalloc-example-1)
-* `addalloc -g T02A -i E0123456` 
+* `addalloc -g T02A -i E0123456`
   * adds student with NUSNET ID `E0123456` into the tutorial group `T02A`.
 
 [Return to Table of Contents](#table-of-contents)
@@ -211,9 +211,9 @@ Format: `addassessment -a <assessment_name>`
 * Assessment name can be any number of alphanumeric words.
 
 Examples:
-* `addassessment -a P01` 
+* `addassessment -a P01`
   * creates a new assessment `P01`.
-* `addassessment -a Midterm Assessment` 
+* `addassessment -a Midterm Assessment`
   * creates a new assessment `Midterm Assessment`. [\[view example\]](#addassessment-example-2)
 
 [Return to Table of Contents](#table-of-contents)
@@ -232,9 +232,9 @@ Format: `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s 
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `addscore -a Midterm -n Van Nhi -s 95` 
+* `addscore -a Midterm -n Van Nhi -s 95`
   * records score for `Van Nhi` in `Midterm` to be `95.00` percent. [\[view example\]](#addscore-example-1)
-* `addscore -a P01 -i E0123456 -s 75.25` 
+* `addscore -a P01 -i E0123456 -s 75.25`
   * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent. [\[view example\]](#addscore-example-2)
 
 [Return to Table of Contents](#table-of-contents)
@@ -244,7 +244,7 @@ Examples:
 
 Displays a list of all students in the student list.
 
-Format: `list` 
+Format: `list`
 <br>
 [\[view example\]](#list-example)
 
@@ -271,7 +271,7 @@ E.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
 Examples:
 * `search -n Jonas Chow`
   * returns a list of students with part of names that matches `Jonas` and `Chow`. [\[view example\]](#search-example-1)
-* `search -i E0123456` 
+* `search -i E0123456`
   * returns the student with NUSNET ID `E0123456`, if found in database.
 * `search -g T02B R03C`
   * returns a list of students in the groups `T02B` and `R03C`. [\[view example\]](#search-example-3)
@@ -329,9 +329,9 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 Examples:
 * `edit 1 -n Hong Yao -i E1234567`
   * edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`. [\[view example\]](#edit-example-1)
-* `edit 3 -g T01C -g R01A` 
+* `edit 3 -g T01C -g R01A`
   * edits the group of the 3rd student on the displayed list to `T01C` and `R01A`.
-* `search -n Hong Yao` followed by `edit 1 -t` 
+* `search -n Hong Yao` followed by `edit 1 -t`
   * removes all tags of the 1st student on the displayed list after searching for `Hong Yao`.
 
 [Return to Table of Contents](#table-of-contents)
@@ -349,7 +349,7 @@ Format: `delete <index>`
 Examples:
 * `list` followed by `delete 2`
   * deletes the 2nd student in the student list. [\[view example\]](#delete-example-1)
-* `search -n Van Nhi` followed by `delete 1` 
+* `search -n Van Nhi` followed by `delete 1`
   * deletes the 1st student in the results of the `search` command.
 
 [Return to Table of Contents](#table-of-contents)
@@ -375,8 +375,8 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 
 :bulb: **Tips:**<br>
 
-* `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups. 
-The similar applies for `<number_of_tag_columns>`. 
+* `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups.
+The similar applies for `<number_of_tag_columns>`.
 
 * If the student does not have as many groups as the number of group columns, you should leave several group columns blank.
 
@@ -392,9 +392,9 @@ The command to import this file would be `import -f student_data.csv -g 2 -a 2 -
 (There are 2 group columns, 2 assessments columns, and 2 tag columns.) [\[view example\]](#import-example)
 
 Examples:
-* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` 
+* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
   * imports from the absolute path, and database has 2 group columns, 10 assessments columns, and 1 tag column.
-* `import -f student_data.csv -g 5 -a 20` 
+* `import -f student_data.csv -g 5 -a 20`
   * imports from the relative path, and database has 5 group columns and 20 assessments.
 
 [Return to Table of Contents](#table-of-contents)
@@ -456,7 +456,7 @@ Format: `help`
 Retrieves past command lines input. 
 
 * This can be done using the up and down arrow keys.
-* Only successful command input would be recorded. Unsuccessful inputs which shows an error will not be saved. 
+* Only successful command input would be recorded. Unsuccessful inputs which shows an error will not be saved.
 * Using the up arrow key retrieves the previous input. 
 * Using the down arrow key retrieves the next input.
 
@@ -481,12 +481,12 @@ Examples:
 * `alias -c addstudent -as example`
   * adds a new alias to `addstudent` command. [\[view example\]](#alias-example-1)
   * `example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
-* `alias -c addgroup -as example` 
+* `alias -c addgroup -as example`
   * replaces the mapping of the alias `example` to the `addgroup` command, i.e. `example` no longer function as `addstudent`.
   * `example -g T02A` will create a new group `T02A`.
-* `alias -c example -as example2` 
+* `alias -c example -as example2`
   * adds the alias `example2` to the command that `example` currently maps to, i.e. `example2` functions as `addgroup`.
-* `alias -c example -as example` 
+* `alias -c example -as example`
   * removes the alias `example`. `example` will no longer be recognised as a command. [\[view example\]](#alias-example-4)
 
 [Return to Table of Contents](#table-of-contents)
@@ -528,10 +528,10 @@ If you wish to back up the data, you can use the `export` command. The `import` 
 
 ### Why is my data is gone when I reopen the app?
 Please ensure that the JAR file is in the same directory as it was before. Our application stores the data in external files,
-and data would be lost if either these files are deleted, or if the JAR file is removed from the directory. 
+and data would be lost if either these files are deleted, or if the JAR file is removed from the directory.
 
 Some of these data stored externally include students and their particulars (e.g. NUSNET IDs, groups, assessments and scores),
-as well as you alias preferences. 
+as well as you alias preferences.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -591,11 +591,11 @@ Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
 CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
-JAR | A package file format to combine many Java class files and resources (e.g. text and images) into one file for distribution. Source Control can be opened from the JAR file `sourceControl.jar` retrieved from our website. 
+JAR | A package file format to combine many Java class files and resources (e.g. text and images) into one file for distribution. Source Control can be opened from the JAR file `sourceControl.jar` retrieved from our website.
 Java | A computing platform for application development. Source Control runs on Java.
 JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
-Directory | It is where files in the computer are stored, or commonly known as folder. 
-Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory. 
+Directory | It is where files in the computer are stored, or commonly known as folder.
+Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory.
 
 
 
