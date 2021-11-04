@@ -132,7 +132,7 @@ Note that the password needs to follow the requirements stated in the [`password
       <figcaption class="figure-caption">Figure 2: Enter Password Prompt Display</figcaption>
    </figure>
    
-5. After a brief period of loading, the GUI similar to the picture below should appear.
+5. After a brief period of loading, the GUI similar to the picture below should appear. A sample data will be loaded.
    
    ![Ui](images/Ui.png)
 
@@ -546,21 +546,6 @@ Export all currently selected contacts to the file _myContacts.csv_.
 </div>
 </div>
 
-### `exit`
-
-Shuts down and exits the program.
-
-<div class="d-flex alert alert-secondary pb-0">
-<div class="mr-2">
-   <span class="badge badge-dark">KEYWORD</span>
-</div>
-<div markdown="1" class="w-100">
-```text
-exit
-```
-</div>
-</div>
-
 ### `password`
 
 Changes the current password.
@@ -581,7 +566,7 @@ The flags used in `password` are as follows:
 password
 ```
 
-Do note that the password needs to be between **8** and **32** characters long, consisting of **LETTERS**, **NUMBERS** **AND** **SYMBOLS**.
+Note that the password needs to be between **8** and **32** characters (inclusive) long, consisting of **LETTERS**, **NUMBERS** **AND** **SYMBOLS**.
 
 The accepted symbols are : `!@#$%&*()_+=|<>?{}~-[]`
 
@@ -598,6 +583,21 @@ password -o password123! -n password!321
 </div>
 </div>
 
+</div>
+</div>
+
+### `exit`
+
+Shuts down and exits the program.
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+exit
+```
 </div>
 </div>
 
