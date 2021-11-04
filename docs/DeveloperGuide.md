@@ -288,6 +288,10 @@ When the `ClearCommand#execute()` method is called,
 - For each `Module` in the list, the `Module` is replaced by a copy of it without `AcademicCalander` field.
 - A `CommandResult` is returned with the updated `Model`.
 
+Below is an example sequence diagram for a valid clear command from the user.
+![clearCommand](images/clearCommand.png)
+
+
 #### Design Considerations:
 
 **Aspect: How should clear command work**
