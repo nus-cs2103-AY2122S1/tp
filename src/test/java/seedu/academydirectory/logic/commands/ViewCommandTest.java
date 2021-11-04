@@ -15,9 +15,9 @@ import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyD
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.commons.core.Messages;
-import seedu.academydirectory.model.UserPrefs;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.model.UserPrefs;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.VersionedModelManager;
 import seedu.academydirectory.model.student.Student;

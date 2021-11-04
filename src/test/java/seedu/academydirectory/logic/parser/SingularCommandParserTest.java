@@ -50,12 +50,12 @@ public class SingularCommandParserTest {
         Random rng = new Random();
         for (String input : validInputs) {
             SingularCommandParser parser = new SingularCommandParser(input);
-            String argument = rng.ints(48, 123)
+            String argument = " " + rng.ints(48, 123)
                     .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                     .limit(rng.nextInt())
                     .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                     .toString();
-            String userInput = input + " " +  argument;
+            String userInput = input + argument;
             assertParseFailure(parser, userInput,
                     String.format(SingularCommandParser.MESSAGE_NO_ARGUMENT_SHOULD_FOLLOW, input));
         }

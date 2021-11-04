@@ -8,7 +8,6 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.assertComman
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.model.VersionedModel;
-import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.VersionedModelManager;
 
 public class HelpCommandTest {
