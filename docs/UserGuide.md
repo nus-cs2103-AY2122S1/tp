@@ -482,6 +482,7 @@ You can export your contact book and share it with your friends.
 
 Format: **`export`** `FILE_NAME.json`
 
+* File can only be exported to JSON format.
 * File will be stored in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
