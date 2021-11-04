@@ -562,16 +562,14 @@ Examples:
 TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
-However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
+However, the Fees Calculator will not account for any changes to lessons that have passed. 
 
-* **Lesson rates increment.** In the event that you want to increase your lesson rates, the current outstanding fees will not change according to the newly edited lesson rates.
-* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to 
-the newly edited lesson rates.
-* **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the Fees Calculator will not deduct
-the fees of the cancelled lesson for you. Same for uncancelling a lesson that has passed, the fees will not be added back for you.
-* **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
-* **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
-the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
+Note that outstanding fees will not change with the following cases:
+
+* **Changing lesson rates.** The change in lesson rates will only take effect from the date and time of change.
+* **Cancelling or uncancelling a lesson date that has passed.**
+* **Changing lesson start or end date.**
+* **Changing of lesson timings.**
 
 #### Upcoming Features for Fees Calculator
 
