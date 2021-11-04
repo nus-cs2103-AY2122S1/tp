@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Venue {
     public static final String MESSAGE_CONSTRAINTS =
-            "Task venue should contain at least 1 non-whitespace character";
+            "Task address should contain at least 1 non-whitespace character";
 
     /*
      * The first character of the venue must not be a whitespace,
