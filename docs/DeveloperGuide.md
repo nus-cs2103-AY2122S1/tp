@@ -348,6 +348,8 @@ The diagram below illustrates the flow of deleting an appointment:
 
 ### Editing an appointment <a name="editing-an-appointment"/> 
 
+#### What it is
+
 Edits the details of an existing appointment.
 
 The edit appointment command accepts at least one of the following parameters:
