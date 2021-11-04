@@ -215,8 +215,8 @@ The `add group` feature allows users to create new groups, as well as specify st
 1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
 2. For each of the names and IDs, an `AllocDescriptor` is created.
 3. For each of the `AllocDescriptors`, a search is done against the current `StudentList` to find students that match the descriptors.
-   1. If there is a unique match, the student is added to the group.
-       4. The group is added to the application.
+   * If there is one and only one match, the student is added to the group.
+4. The group is added to the application if Step 3 completes without any exceptions.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
 
@@ -227,6 +227,9 @@ The following activity diagrams summarizes what happens when a user executes a c
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
+The following sequence diagram summarizes what happens when the user inputs an add group command together with a student to be added:
+
+![AddStudentSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
 ### Add Allocation feature
 

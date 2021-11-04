@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddGroupCommandParser" as AddGroupCommandParser LOGIC_COLOR
+participant "T01A:Group" as Group LOGIC_COLOR
+participant "allocDescriptor:AllocDescriptor" as JohnDoeDescriptor LOGIC_COLOR
+participant "addGroupCommand\n:AddGroupCommand" as AddGroupCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addgroup \n-g T01A \n-n John Doe")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(\n"addgroup -g T01A \n-n John Doe")
+activate AddressBookParser
+
+create AddGroupCommandParser
+AddressBookParser -> AddGroupCommandParser
+activate AddGroupCommandParser
+
+AddGroupCommandParser --> AddressBookParser
+deactivate AddGroupCommandParser
+
+AddressBookParser -> AddGroupCommandParser : parse(" -g T01A \n-n John Doe")
+activate AddGroupCommandParser
+
+create Group
+AddGroupCommandParser -> Group
+activate Group
+
+Group --> AddGroupCommandParser : T01A
+deactivate Group
+
+create JohnDoeDescriptor
+AddGroupCommandParser --> JohnDoeDescriptor
+activate JohnDoeDescriptor
+
+JohnDoeDescriptor --> AddGroupCommandParser : allocDescriptor
+deactivate JohnDoeDescriptor
+
+create AddGroupCommand
+AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(T01A, allocDescriptor)
+activate AddGroupCommand
+
+AddGroupCommand --> AddGroupCommandParser : addGroupCommand
+deactivate AddGroupCommand
+
+AddGroupCommandParser --> AddressBookParser : addGroupCommand
+deactivate AddGroupCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddGroupCommandParser -[hidden]-> AddressBookParser
+destroy AddGroupCommandParser
+
+AddressBookParser --> LogicManager : addGroupCommand
+deactivate AddressBookParser
+
+LogicManager -> AddGroupCommand : execute()
+activate AddGroupCommand
+
+AddGroupCommand -> Model : getAllocStudent(allocDescriptor)
+activate Model
+
+Model --> AddGroupCommand : John Doe
+deactivate Model
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+JohnDoeDescriptor -[hidden]-> JohnDoeDescriptor
+destroy JohnDoeDescriptor
+
+AddGroupCommand -> Group : addStudent(John Doe)
+
+AddGroupCommand -> Model : addGroup(T01A)
+
+create CommandResult
+AddGroupCommand -> CommandResult
+
+activate CommandResult
+
+CommandResult --> AddGroupCommand
+deactivate CommandResult
+
+AddGroupCommand --> LogicManager : result
+deactivate AddGroupCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddGroupCommand -[hidden]-> CommandResult
+destroy AddGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
