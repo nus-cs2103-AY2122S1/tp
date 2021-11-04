@@ -30,7 +30,12 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "e0518441@u.nus.edu";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same StudentId "
+            + "already exists in the ProgrammerError";
+    public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
+            + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError";
+
 
     private final Student toAdd;
 
