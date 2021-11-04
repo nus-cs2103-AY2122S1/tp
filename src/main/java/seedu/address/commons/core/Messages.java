@@ -21,7 +21,7 @@ public class Messages {
     public static final String SHIFT_PERIOD_PARSING_DEFAULT = "When date input is provided, it should be in "
             + "chronological order. If "
             + "only one date is provided, the end date is assumed to be seven days later. If no date is provided, "
-            + "the period is assumed to be from this monday to this sunday. Expects 0, 1 or 2 date input";
+            + "the period is assumed to be from this monday to this sunday. Expects 0, 1 or 2 date inputs.";
     public static final String DATE_RANGE_INPUT = "[" + PREFIX_DATE + "START_DATE]"
             + " [" + PREFIX_DATE + "END_DATE]";
 }
