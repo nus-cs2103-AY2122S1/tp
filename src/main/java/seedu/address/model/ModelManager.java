@@ -114,6 +114,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasModuleLessonClashingWith(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return conthacks.hasLessonClashingWith(moduleLesson);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         conthacks.removePerson(target);
     }

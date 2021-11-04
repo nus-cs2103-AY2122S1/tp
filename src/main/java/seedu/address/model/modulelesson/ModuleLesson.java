@@ -29,7 +29,7 @@ public class ModuleLesson {
         requireAllNonNull(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
         assert lessonStartTime.value.isBefore(lessonEndTime.value) : "Start time should be before end time";
         assert moduleCode.getLessonCodes().size() == 1
-                : "Each ModuleCode should contain exactly 1 LessonCode";;
+                : "Each ModuleCode should contain exactly 1 LessonCode";
         this.moduleCode = moduleCode;
         this.lessonDay = lessonDay;
         this.lessonStartTime = lessonStartTime;
@@ -69,6 +69,19 @@ public class ModuleLesson {
         return otherModuleLesson != null
                 && otherModuleLesson.getModuleCode().equals(getModuleCode())
                 && otherModuleLesson.getModuleCode().getLessonCodes().equals(getModuleCode().getLessonCodes());
+    }
+
+    /**
+     * Returns true if the {@code otherModuleLesson} clashes with this moduleLesson.
+     */
+    public boolean clashesWith(ModuleLesson otherModuleLesson) {
+        boolean isOtherModuleLessonStartTimeBetweenThis = otherModuleLesson.getLessonStartTime()
+                .isAfter(getLessonStartTime())
+                && otherModuleLesson.getLessonStartTime().isBefore(getLessonEndTime());
+        boolean isOtherModuleLessonEndTimeBetweenThis = otherModuleLesson.getLessonEndTime()
+                .isAfter(getLessonStartTime())
+                && otherModuleLesson.getLessonEndTime().isBefore(getLessonEndTime());
+        return isOtherModuleLessonStartTimeBetweenThis || isOtherModuleLessonEndTimeBetweenThis;
     }
 
     /**
