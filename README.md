@@ -29,13 +29,15 @@
 
 * If duplicate parameters are provided, only the latest parameters will be processed.
 
+* Students in different modules with the same student id are treated as different students.
+
 </div>
 
 
 ### Add a new module: `add module`
 
 Add a new module to TAB.<br>
-Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
+Module name must be an NUS module code, which consists of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 
 Format: `add module m/<module name>`
 
@@ -48,7 +50,7 @@ Examples:
 ### Edit a module's name: `edit module`
 
 Edit the name of the module.<br>
-Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
+Module name must be an NUS module code, which consists of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 The new module name must not be identical to the old module name.
 
 Format: `edit module m/<old module name> mn/<new module name>`
@@ -60,7 +62,7 @@ Examples:
 ### Delete a module from TAB: `delete module`
 
 Delete the specified module from TAB.
-Module name must be an NUS module code, consisting of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
+Module name must be an NUS module code, which consists of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
 
 Format: `delete module m/<module name>`
 
@@ -73,13 +75,13 @@ Examples:
 ### Add a student to a specific module: `add student`
 
 Add a new student to the specified module by providing the module name, student id, student name, student tele handle, and the student email.<br>
-If the student is already present in other modules in TAB, the specified parameters must contain the same information as in those modules.<br>
+Students in different modules with the same student id are treated as different students.<br>
 Also automatically copies over the task list from the module to the student.<br>
-Student id must be a valid NUS student id (starts with A, followed by 7 numbers and ends with a capital letter.<br>
+Student id must be a valid NUS student id, which starts with the capital letter 'A', followed by 7 numbers and ends with a capital letter.<br>
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
 Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
 Student email must follow the format specified in the [Parameter summary](#parameter-summary-with-prefix-included) section below.<br>
-Student id, student tele handle, and student email must be unique for each student.<br>
+Student id, student tele handle, and student email must be unique for each student in the same module.<br>
 Duplicate student names are allowed to cater for students who may have the same name.
 
 Format: `add student m/<module name> i/<student id> n/<student name> t/<student tele handle> e/<student email>`
@@ -93,21 +95,21 @@ Examples:
 ### Edit a student's information: `edit student`
 
 Edit a student's information.<br>
-If the student is present in more than one module, edit their information in all modules.<br>
+Students in different modules with the same student id are treated as different students.<br>
 The identity parameter (student id) must be provided.<br>
 At least one optional parameter (name/tele handle/email) must be provided, and only provided parameters will be changed.<br>
-If the editable parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
+If the optional parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
 Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
 Student email must follow the format specified in the [Parameter summary](#parameter-summary-with-prefix-included) section below.<br>
 
-Format: `edit student i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]`
+Format: `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]`
 
 Examples:
-* `edit student i/A0123456A n/John Doe`:
-  * Edit the name of the student with id A0123456A to John Doe
-* `edit student i/A0123457A t/@amylee e/amy@u.nus.edu`:
-  * Edit the tele handle and email of the student with id A0123457A to @amylee and amy@u.nus.edu respectively
+* `edit student m/CS2103 i/A0123456A n/John Doe`:
+  * Edit the name of the student with id A0123456A in the module CS2103 to John Doe
+* `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`:
+  * Edit the tele handle and email of the student with id A0123457A in the module CS2100 to @amylee and amy@u.nus.edu respectively
 
 ### Delete a student from a specific module: `delete student`
 
@@ -143,7 +145,7 @@ Examples:
 Edit a task's information.<br>
 The identity parameters (module name/task id) must be provided.<br>
 At least one optional parameter (name/deadline) must be provided, and only provided parameters will be changed.<br>
-If the editable parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
+If the optional parameters contain the same information as is already present, the edit command will still be executed successfully.<br>
 Task name must only contain alphanumeric characters and spaces, and it must not be blank.<br>
 Task deadline can contain either the date and time, or only the date, or only the time.<br>
 Date must be in the form "YYYY-MM-DD".<br>
@@ -270,7 +272,7 @@ Action | Format, Examples
 **Delete Student** | `delete student m/<module name> i/<student id>` <br> e.g., `delete student m/CS2103 i/A1234567A`
 **Delete Task** | `delete task m/<module name> ti/<task id>` <br> e.g., `delete task m/CS2103 ti/T1`
 **Edit Module** | `edit module m/<old module name> mn/<new module name>` <br> e.g., `edit module m/CS2103 mn/CS2105`
-**Edit Student** | `edit student i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]` <br> e.g., `edit student i/A0123457A t/@amylee e/amy@u.nus.edu`
+**Edit Student** | `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]` <br> e.g., `edit student m/CS2103 i/A0123457A t/@amylee e/amy@u.nus.edu`
 **Edit Task** | `edit task m/<module name> ti/<task id> [a/<edited task name>] [d/<edited task deadline>]` <br> e.g., `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`
 **Exit** | `exit` <br> e.g., `exit`
 **Find** | `find m/<module name> i/<student id>` <br> e.g., `find m/CS2103 i/A0123456A`
@@ -283,8 +285,8 @@ Action | Format, Examples
 ## Parameter summary with prefix included
 
 Parameter with prefix | Permitted characters
-`m/<module name>` <br> `m/<old module name>` <br> `mn/<new module name>` | Must be an NUS module code, consisting of 2-4 capital letters, followed by 2-4 numbers and ending with 2-4 capital letters.
-`i/<student id>` | Student id must be a valid NUS student id, starting with the capital letter 'A', followed by 7 numbers and ending with a capital letter.
+`m/<module name>` <br> `m/<old module name>` <br> `mn/<new module name>` | Module name must be an NUS module code, which consists of 2-4 capital letters, followed by 4 numbers, followed by 0-4 capital letters.
+`i/<student id>` | Student id must be a valid NUS student id, which starts with the capital letter 'A', followed by 7 numbers and ends with a capital letter.
 `n/<student name>` <br> `n/<edited student name>` | Student name should only contain alphanumeric characters and spaces, and it should not be blank.
 `t/<student tele handle>` <br> `t/<edited student tele handle>` | Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.
 `e/<student email>` <br> `e/<student email>` | Student email must follow the format specified in the [Email format](#email-format)) section below.

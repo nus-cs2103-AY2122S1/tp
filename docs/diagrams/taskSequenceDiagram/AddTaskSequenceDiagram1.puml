@@ -1,0 +1,57 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
+participant "d:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
+
+end box
+
+[-> LogicManager : execute("add task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
+activate LogicManager
+
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("add task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
+activate TeachingAssistantBuddyParser
+
+create AddCommandParser
+TeachingAssistantBuddyParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser
+deactivate AddCommandParser
+
+TeachingAssistantBuddyParser -> AddCommandParser : parse("task \nm/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
+activate AddCommandParser
+
+create AddTaskCommandParser
+AddCommandParser -> AddTaskCommandParser
+activate AddTaskCommandParser
+AddTaskCommandParser --> AddCommandParser
+deactivate AddTaskCommandParser
+
+AddCommandParser -> AddTaskCommandParser : parse("m/CS2103 \nti/T1 \na/assignment1 \nd/2021-10-20")
+activate AddTaskCommandParser
+
+create AddTaskCommand
+AddTaskCommandParser -> AddTaskCommand
+activate AddTaskCommand
+
+AddTaskCommand --> AddTaskCommandParser : d
+deactivate AddTaskCommand
+
+AddTaskCommandParser --> AddCommandParser : d
+deactivate AddTaskCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser : d
+deactivate AddCommandParser
+
+TeachingAssistantBuddyParser --> LogicManager : d
+deactivate TeachingAssistantBuddyParser
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
