@@ -656,14 +656,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### 6.4 Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The system should respond within two seconds.
+4. The system should respond within two seconds when entering in a command.
 5. Should work without requiring an installer.
-6. The system should work on a 64-bit environment.
-7. The product should be usable by a student who has little to much experience in using computers.
-8. 
-*{More to be added}*
+6. Should work on a 64-bit environment.
+7. Should be usable by a student who has little to much experience in using computers.
+8. The client information should be stored locally. 
+9. Students who are inexperienced in using computers should be able to easily use LeadsForce.
 
 ### 6.5 Glossary
 
@@ -699,18 +699,138 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. shut down the application by using the `exit` command. 
 
-### 7.2 Deleting a client
+### 7.2 Commands for manual testing (Client Management Features)
+In this section, you can test general commands in LeadsForce. Below is a summary of every client management feature in LeadsForce. 
+
+Action | Format | Examples
+--------|---------|---------
+**Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
+**View** | `view CLIENT'S ID` | view 123 |
+**Edit** | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
+**Delete** | `delete CLIENT'S ID...` | delete 4  |
+**List** | `list` | - |
+**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
+**Schedule** | `schedule DATE` | schedule 22-09-2021 |
+**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
+**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
+**Clear** | `clear` | - |
+**Exit** | `exit` | - |
+
+#### 7.2.1 Adding a client
+
+1. Adding a client to the client list 
+
+    1. Prerequisites: in using the `add` command, the user must input the client's email and name. 
+
+    1. Test case: `add n/Dominic e/dominicLovesCS@gmail.com`<br>
+       Expected: A new client named `Dominic` with the email address `dominicLovesCS@gmail.com` is added to the client list
+
+    1. Test case: `add n/Dominic p/97263912`<br>
+       Expected: No client is added to the client list since email is not included. Invalid command error is shown to the user in the status message. 
+
+    1. Other incorrect delete commands to try: `add n/Dominic i/6` (user is not allowed to give clients a client Id) 
+       Expected: Similar to previous.
+
+#### 7.2.2 View a client
+
+1. View the client's information in the side panel's client view panel. 
+
+    1. Prerequisites: a client with the corresponding client Id must be exist in the client list
+
+    1. Test case: `view 1` (supposing there is a client with client id 1) <br>
+       Expected: Client with client Id `1` is shown in the client view panel. Details of the command is shown in the status message. 
+
+    1. Test case: `view `<br>
+       Expected: No client is being selected to be viewed. Invalid command error is shown to the user in the status message. 
+
+    1. Other incorrect delete commands to try: `view 999`(when the client id 999 does not exist)  <br>
+       Expected: Similar to previous.
+
+
+#### 7.2.3 Deleting a client
 
 1. Deleting a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 0`<br>
+       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+
+    1. Test case: `delete 999` <br>
+       Expected: No client is deleted since there is no client with client id `999`. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`<br>
+       Expected: Similar to previous.
+
+#### 7.2.4 Edit clients information
+1. Editing a client's information
+
+    1. Prerequisites: Users are not allowed to change the client id of the client. 
+
+    1. Test case: `edit 1 n/Benedict` <br>
+       Expected: Client with client Id `1` has the name changed to `Benedict`. Details of this change is shown in the status message. 
+
+    1. Test case: `edit 1 2 3 4 5 n/Benedict` <br>
+       Expected: Client with client Id `1`, `2`,`3`,`4` have their name changed to `Benedict`. Details of this change is shown in the status message. 
+
+    1. Test case: `edit 1 n/Benedict e/rebeccalovescs@gmail.com` <br>
+       Expected: Client with client Id `1` has the name changed to `Benedict`, and the email changed to `rebeccalovescs@gmail.com`. Details of this change is shown in the status message. 
+
+    1. Test case: `edit 1 2 3 4 m/23-11-2021 (09:00~10:00), NUS SOC COM1` <br>
+       Expected: Client with client Id  `1`, `2`,`3`,`4` have their next meeting changed to the `23rd November 2021` from `9am to 10am` at `NUS SOC COM1`. Details of this change is shown in the status message. 
+       
+    1. Test case: `edit 1 i/9`<br>
+       Expected: The client's id will not be changed and error details are shown in the status message. Client list remains the same. 
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
+#### 7.2.5 Sort clients 
+
+1. Sorts the current lists of clients
+
+    1. Prerequisites: the client list is not empty when the command is used
+
+    1. Test case: `sort r/asc`<br>
+       Expected: Sort the current based on their risk appetite in an ascending order. Details of the sort is shown in the status message. 
+
+    1. Test case: `sort r/dsc d/asc`<br>
+       Expected: sorts clients by their risk appetite in a descending order, then sorts the clients by their dispoable incount in an ascending order for those who have the same risk appetite. Details of the sort is shown in the status message.
+
+    1. Test case: `sort r/descending`<br>
+       Expected: The client list will not be sorted and error details are shown in the status message. Details of the command will be shown in the status message.
+       
+    1. Other incorrect delete commands to try: `sort`, `sort r8` <br> 
+       Expected: Similar to previous.
+
+#### 7.2.6 Finding meeting schedule on day 
+
+1. Find meetings that are scheduled on a specified day
+
+    1. Prerequisites: User must have meetings on the day which is specified in the command.
 
     1. Test case: `delete 0`<br>
+       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+
+    1. Test case: `delete 999`<br>
+       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
+#### 7.2.7 Filter Client List
+
+1. Deleting a client while all clients are being shown
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    1. Test case: `delete 0`<br>
+       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+
+    1. Test case: `delete 999`<br>
        Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
@@ -718,7 +838,24 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### 7.3 Saving data
+#### 7.2.8 Searching for clients 
+
+1. Deleting a client while all clients are being shown
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    1. Test case: `delete 0`<br>
+       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+
+    1. Test case: `delete 999`<br>
+       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### 7.3 Commands for manual testing (Multiple address book feature)
 
 1. Dealing with missing/corrupted data files
 
