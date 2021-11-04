@@ -14,7 +14,7 @@ Given below are my contributions to the project.
   * Justification: this feature improves the product's security tremendously because a malware can no longer read the plaintext JSON file and retrieve student's particulars.
   * Highlights: this enhancement was rather challenging as I had no previous experience in implementing an encryption framework.
   
-* **New Feature**: Added the ability to add and delete asessments for each student.
+* **New Feature**: Added the ability to add and delete assessments for each student.
   * What it does: keep track of each student's assessments and flag out failing assessments.
   * Justification: this feature addresses the needs of CS TAs as they can now easily keep track of their student's academic performance. The auto-flagging system saves the time of CS TAs to analyse their students' results individually.
 
