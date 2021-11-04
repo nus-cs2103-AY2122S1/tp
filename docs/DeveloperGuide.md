@@ -197,11 +197,26 @@ Below is a sequence diagram for the deleting all shown Persons executed after th
 
 The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`.
 
+#### Sort Feature
+
+The sort feature is facilitated by `SortCommand`. It extends `Command` with a `Prefix` which specifies the prefix the `AddressBook` is to be sorted by, as well as a boolean `reverse` which specifies the order of the sorted list. This is further facilitated by a `PersonComparator` and a `Person#compare(Person p, Prefix prefix)` method to allow for sorting is the list.
+
+##### Design Considerations
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Sorts the list saved inside the `Model`'s `AddressBook`.
+    * Pros: Easy to implement. 
+    * Cons: Users might just want a temporary sorting of the list and not a permanent sorting.
+
+* **Alternative 2:** Sorts the `filteredPersons` list shown by the `Model`.
+    * Pros: Allow users to have a temporary sorting of the list, which they can later export if they want to be permanent.
+    * Cons: Difficult to implement, as the `FilteredList` data structure used by `filteredPersons` cannot be mutated.
 
 #### Statistic Feature
-The export feature is facilitated by `StatCommand`. It overwrites the `execute` function to get a count of the various tags, types and tutorial ID of the last searched contact list.
+The statistic feature is facilitated by `StatCommand`. It overwrites the `execute` function to get a count of the various tags, types and tutorial ID of the last searched contact list.
 
-The following sequence diagram shows how the export operation works:
+The following sequence diagram shows how the statistic operation works:
 ![Sequence of the ExportEmail command](images/StatSequenceDiagram.png)
 
 
