@@ -5,7 +5,7 @@ import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
 
-    private static final String idPrefix = "SO";
+    public static final String idPrefix = "SO";
     private static long count = 1;
 
     private final Customer customer;

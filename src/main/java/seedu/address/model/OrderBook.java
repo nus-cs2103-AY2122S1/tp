@@ -87,6 +87,10 @@ public class OrderBook implements ReadOnlyOrderBook {
         orders.remove(toDelete);
     }
 
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orders.removeIf(pred);
+    }
+
     public boolean markOrder(Order order) {
         return orders.markComplete(order);
     }

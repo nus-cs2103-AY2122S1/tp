@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.sort.SortDescriptor;
@@ -288,8 +289,26 @@ public class ModelManager implements Model {
     /**
      * Marks an order as completed
      */
+    @Override
     public boolean markOrder(Order order) {
         return orderBook.markOrder(order);
+    }
+
+    /**
+     * Delete tasks related to a given Order
+     */
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        String keyword = Order.idPrefix + String.valueOf(order.getId());
+        this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orderBook.deleteOrderIf(pred);
     }
 
     /**

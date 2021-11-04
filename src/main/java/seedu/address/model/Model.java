@@ -207,4 +207,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the list of ClientTotalOrders */
     ObservableList<ClientTotalOrder> getClientTotalOrders();
+
+    void deleteRelatedTasks(Order orderToDelete);
+
+    void deleteOrderIf(Predicate<Order> toDelete);
 }
