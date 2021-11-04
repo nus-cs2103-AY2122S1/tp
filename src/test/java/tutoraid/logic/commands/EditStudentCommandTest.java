@@ -38,7 +38,8 @@ public class EditStudentCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, descriptor);
 
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                editedStudent.toNameString());
 
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
@@ -65,7 +66,8 @@ public class EditStudentCommandTest {
                 .withStudentPhone(VALID_STUDENT_PHONE_BOB)
                 .build();
         EditStudentCommand editCommand = new EditStudentCommand(indexLastStudent, descriptor);
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                editedStudent.toNameString());
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
@@ -80,7 +82,8 @@ public class EditStudentCommandTest {
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, new EditStudentDescriptor());
         Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
 
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                editedStudent.toNameString());
 
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
@@ -101,7 +104,8 @@ public class EditStudentCommandTest {
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
                 new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                editedStudent.toNameString());
 
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());

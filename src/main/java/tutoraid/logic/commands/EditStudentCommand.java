@@ -45,7 +45,7 @@ public class EditStudentCommand extends EditCommand {
             + PREFIX_PARENT_NAME + "Mrs Doe "
             + PREFIX_PARENT_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edit successful. Displaying %s and his/her lessons.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
 
@@ -87,7 +87,7 @@ public class EditStudentCommand extends EditCommand {
         model.viewStudent(editedStudent);
         model.updateFilteredLessonList(editedStudent::hasLesson);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent.toNameString()));
     }
 
     /**
