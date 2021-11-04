@@ -479,11 +479,11 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
         * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ##### YEARS_OF_EXPERIENCE `y/`
-    * A YEARS_OF_EXPERIENCE should be a **non-negative number** with **at most 1 decimal place** and smaller than or equals to **67** (re-employment age in Singapore).
+    * A YEARS_OF_EXPERIENCE should be a **non-negative number** with intervals of **0.5** and smaller than or equals to **67** (re-employment age in Singapore).
     * For example:
         * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
         * YEARS_OF_EXPERIENCE inputs such as `0.5` and `3.0` are acceptable.
-        * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.14`, and `100` are not acceptable.
+        * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.1`, and `100` are not acceptable.
 * ##### TAG `t/`
     * A TAG should only contain alphanumeric characters. Spaces between words are **not** allowed.
     * For example:
