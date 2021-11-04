@@ -7,7 +7,7 @@ title: Dickson's Project Portfolio Page
 <!-- PPP format and structure adapted from
 https://github.com/samuelfangjw/tp/blob/master/docs/team/samuelfangjw.md
 -->
-TutorAid is a desktop application used for helping tech-savvy private tutors, who have busy schedules / many students, to keep track of each students' details.
+TutorAid is a desktop application used for helping tech-savvy private tutors, who have busy schedules / many students, to keep track of the details of all their students and lessons.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project:
