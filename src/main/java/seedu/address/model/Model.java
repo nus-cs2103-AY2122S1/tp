@@ -210,4 +210,5 @@ public interface Model {
      * Undoes the previous modification.
      */
     String recoverHistory();
+
 }
