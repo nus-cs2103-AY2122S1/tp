@@ -38,6 +38,8 @@ public class AddToOrderCommand extends Command {
             "Extra price flags are ignored.";
     public static final String MESSAGE_EXTRA_TAG_FLAG =
             "Extra tag flags are ignored.";
+    public static final String MESSAGE_ID_NOT_FOUND = "Name provided exists but id provided is nonexistent";
+    public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
 
     private final ItemDescriptor toAddDescriptor;
 
@@ -73,6 +75,9 @@ public class AddToOrderCommand extends Command {
         requireNonNull(model);
         assert(toAddDescriptor.getCount().isPresent());
 
+        boolean hasSp = !toAddDescriptor.getSalesPrice().isEmpty();
+        boolean hasCp = !toAddDescriptor.getCostPrice().isEmpty();
+
         if (!model.hasUnclosedOrder()) {
             // Not in ordering mode, tell user to enter ordering mode first.
             throw new CommandException(MESSAGE_NO_UNCLOSED_ORDER);
@@ -107,6 +112,24 @@ public class AddToOrderCommand extends Command {
             throw new CommandException(itemExceedsCount(itemInINventory,
                     itemCountInOrder, itemCountInInventory));
         }
+
+        // Dummy cp and sp
+        toAddDescriptor.setSalesPrice(0.0);
+        toAddDescriptor.setCostPrice(0.0);
+
+        if (!toAddDescriptor.getId().equals(Optional.empty())
+                && !toAddDescriptor.getName().equals(Optional.empty())) {
+            if (!model.hasId(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_NOT_FOUND);
+            }
+            if (!model.hasName(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            }
+        }
+
+        // reset cp and sp
+        toAddDescriptor.setCostPrice(hasCp ? 0.0 : null);
+        toAddDescriptor.setSalesPrice(hasSp ? 0.0 : null);
 
         Item toAddItem = matchingItems.get(0).updateCount(toAddDescriptor.getCount().get());
         model.addToOrder(toAddItem);
