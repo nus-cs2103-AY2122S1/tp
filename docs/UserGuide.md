@@ -551,12 +551,13 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `2500 5000` input can match with ***Expected Salary*** s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
 
 * ##### LEVEL_OF_EDUCATION `l/`
-    * LEVEL_OF_EDUCATION can be a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
-    * A LEVEL_OF_EDUCATION is considered matching with a ***level of Education*** only if **at least 1** letter of a keyword is equal to **at least 1** letter in the ***Level of Education***
+    * A LEVEL_OF_EDUCATION is considered matching with a ***Level of Education*** only if it **starts with any** of the keywords in the ***Level of Education***.    
     * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
     * For example:
-        * A `H` input can match with ***Level of Education*** s such `High School`, but not with *Level of Education*s such as `PhD`
-        * A `High School` input can match with ***Level of Education*** s such as `High School`, but not with *Level of Education*s such as `Middle School`
+        * A `H` input can match with ***Level of Education***s such `High School`, but not with *Level of Education*s such as `PhD`.
+        * A `High School` input will match with all *Level of Education*s that are `High School`, but not with *Level of Education*s such as `Middle School`.
+        * A `High Middle` input will match with all *Level of Education*s that are `High School` and `Middle School`.
+        * A `High School bob` input is invalid as `bob` is not a term any of the *Level of Education*s start with.
 
 * ##### YEARS_OF_EXPERIENCE `y/`
     * A YEARS_OF_EXPERIENCE is considered matching with a ***Years Of Experience*** only if the value represented by **at least 1** keyword is larger than or equal to the value represented by the ***Years Of Experience***.
@@ -590,10 +591,11 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `passionate` input can match with applicants that have Notes such as `passionate but inexperienced` and `passionate and experienced`.
 
 * ##### DONE `d/`
-    * An DONE is considered matching with a ***Done*** only if the ***Done***'s status string is either `Done` or `Not Done`.
+    * An DONE is considered matching only if the ***Done*** input is either `Done` or `Not Done`.    
     * For example:
         * A `Done` input can match with applicants that have their ***Done*** status marked as Done.
         * A `Not Done` input can match with applicants that have their ***Done*** status unmarked as Not Done.
+        * Any other non-empty input is considered invalid.
 
 --------------------------------------------------------------------------------------------------------------------
 
