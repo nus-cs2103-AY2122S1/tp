@@ -76,9 +76,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<p align="center">
+<center>
 <img src="images/DeveloperGuideImage/ArchitectureSequenceDiagram.png" width="574" />
-</p>
+</center>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -87,9 +87,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<p align="center">
-<img src="images/DeveloperGuideImage/ComponentManagers.png" width="350" />
-</p>
+<center>
+<img src="images/DeveloperGuideImage/ComponentManagers.png" width="300" />
+</center>
 
 The sections below give more details of each component.
 
@@ -97,7 +97,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/ui/Ui.java)
 
+<center>
 <img alt="Structure of the UI Component" src="images/DeveloperGuideImage/UiClassDiagram.png" width="740"/>
+</center>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -116,9 +118,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<p align="center">
+<center>
 <img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="650"/>
-</p>
+</center>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `TuitioneParser` class to parse the user command.
@@ -135,7 +137,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/DeveloperGuideImage/ParserClasses.png" width="550"/>
+<center>
+<img src="images/DeveloperGuideImage/ParserClasses.png" width="650"/>
+</center>
 
 How the parsing works:
 * When called upon to parse a user command, the `TuitioneParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TuitioneParser` returns back as a `Command` object.
@@ -144,9 +148,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-<p align="center">
+<center>
 <img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="650"/>
-</p>
+</center>
 
 The `Model` component,
 
@@ -161,9 +165,9 @@ The `Model` component,
 
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
 
-<p align="center">
+<center>
 <img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="550" />
-</p>
+</center>
 
 </div>
 
@@ -172,9 +176,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/storage/Storage.java)
 
-<p align="center">
+<center>
 <img src="images/DeveloperGuideImage/StorageClassDiagram.png" width="650" />
-</p>
+</center>
 
 The `Storage` component,
 * can save both tuitione data and user preference data in json format, and read them back into corresponding objects.
@@ -673,9 +677,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendices**
 
-### Product scope
+### **Appendix A: Requirements**
+
+#### Product scope
 
 **Target user profile (Customer Service Officer at tuition center)**:
 
@@ -688,7 +694,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Value proposition**: Provide a more streamlined platform, as compared to conventional excel which might have numerous irrelevant functions. This platform also offers a more intuitive UI - with a clean and minimalist layout. Helps manage student admin information faster than a typical mouse-driven app. The app is only used for one tuition centre.
 
 
-### User stories
+#### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -735,11 +741,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Customer Service Officer                   | write to excel sheet                 | export my existing administrative details                        |
 
 
-### Use cases
+#### Use cases
 
 For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise.
 
-#### UC01: View all Students and Lessons
+##### UC01: View all Students and Lessons
 
 **MSS**
 
@@ -748,7 +754,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC02: Add a Student
+##### UC02: Add a Student
 
 **MSS**
 
@@ -778,7 +784,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC03: Look up Student(s)
+##### UC03: Look up Student(s)
 
 **MSS**
 
@@ -807,7 +813,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC04: Filter Students by grade and Lessons by grade and/or subject
+##### UC04: Filter Students by grade and Lessons by grade and/or subject
 
 **MSS**
 1. CSO wants to filter the student and/or lesson list by their grade and/or subject.
@@ -847,7 +853,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 2.
 
-#### UC05: Delete a Student
+##### UC05: Delete a Student
 
 **MSS**
 
@@ -875,7 +881,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC06: Add a Lesson
+##### UC06: Add a Lesson
 
 **MSS**
 
@@ -898,7 +904,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC07: View details of a Lesson
+##### UC07: View details of a Lesson
 
 **MSS**
 
@@ -912,7 +918,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC08: Delete a Lesson
+##### UC08: Delete a Lesson
 
 **MSS**
 
@@ -940,7 +946,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC09: Update a specific Student’s Details
+##### UC09: Update a specific Student’s Details
 
 **MSS**
 
@@ -964,7 +970,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC10: Enroll a Student to a Lesson
+##### UC10: Enroll a Student to a Lesson
 
 **MSS**
 
@@ -1003,7 +1009,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC11: Unenroll a Student from a Lesson
+##### UC11: Unenroll a Student from a Lesson
 
 **MSS**
 
@@ -1042,7 +1048,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC12: Review Commands
+##### UC12: Review Commands
 
 **MSS**
 
@@ -1051,7 +1057,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC13: View Lesson Roster
+##### UC13: View Lesson Roster
 
 **MSS**
 
@@ -1075,7 +1081,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-### Non-Functional Requirements
+#### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -1088,7 +1094,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
     * The user interface should use readable text styling, i.e. appropriate size and font.
     * All string output must be in UTF-8 encoding.
 
-### Glossary
+#### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
@@ -1097,7 +1103,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+### **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1106,7 +1112,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+#### Launch and shutdown
 
 1. Initial launch
 
@@ -1123,7 +1129,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a student
+#### Deleting a student
 
 1. Deleting a student while all students are being shown
 
@@ -1140,7 +1146,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+#### Saving data
 
 1. Dealing with missing/corrupted data files
 
