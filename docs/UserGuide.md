@@ -89,18 +89,18 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 <div markdown="block" class="alert alert-warning">
 
 :information_source: **Notes:**<br>
-
 ### Date Time Formatting
 
-* All fields that require both `Date` and `Time` in RHRH are accepted if they follow the format below, where the order of date and time are interchangeable.
+* All fields that require **both** `Date` and `Time` in RHRH are accepted if they follow the format below, where the 
+  order of date and time are interchangeable.
 However, time strictly follows the `24 hours` format.
 
 | Acceptable Formats | Examples |
 | ----------- | ----------- |
-| yyyy-mm-dd hh:mm | 2021-09-19 13:00 |
-| dd-mm-yyyy hh:mm | 19-09-2021 13:00 |
-| hh:mm yyyy-mm-dd | 14:00 2021-11-10 |
-| hh:mm dd-mm-yyyy | 14:00 10-11-2021 |
+| `yyyy-mm-dd hh:mm` | `2021-09-19 13:00` |
+| `dd-mm-yyyy hh:mm` | `19-09-2021 13:00` |
+| `hh:mm yyyy-mm-dd` | `14:00 2021-11-10` |
+| `hh:mm dd-mm-yyyy` | `14:00 10-11-2021` |
 
 </div>
 
@@ -118,8 +118,8 @@ This is the list of some repeatedly used preambles in RHRH, as well as there cor
 Action | Format, Examples
 --------|------------------
 **Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]` <br> e.g. `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000`
-**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG] [sh/SHIFTS]` <br> e.g. `addE n/John Doe p/87654321 e/john@example.com a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Soup Chef t/Managerial sh/2021-12-08 0800`
-**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/10 Balestier Rd st/Chicken dd/19-12-2021 08:00`
+**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOB_TITLE [t/TAG] [sh/SHIFTS]` <br> e.g. `addE n/John Doe p/87654321 e/john@example.com a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Soup Chef t/Managerial sh/2021-12-08 0800`
+**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLY_TYPE dd/DELIVERY_DETAILS [t/TAG]` <br> e.g. `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/10 Balestier Rd st/Chicken dd/19-12-2021 08:00`
 **Add reservation** | `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addR 2 p/98765432 at/2021-12-24 2000`
 **Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
 **Get Customer Reserving** | `getC INDEX`<br> e.g. `getc 1`
@@ -128,8 +128,8 @@ Action | Format, Examples
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `deleteS 2`
 **Delete Reservation** | `deleteR INDEx` <br> e.g., `deleteR 4`
 **Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIAL_REQUESTS]…​ [t/TAG]…​`<br> e.g.,`editC 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [sh/SHIFTS]…​ [t/TAG]…​`<br> e.g.,`editE 2 n/James Lee e/jameslee@example.com sal/7000`
-**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`editS 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOB_TITLE] [sh/SHIFTS]…​ [t/TAG]…​`<br> e.g.,`editE 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLY_TYPE] [dd/DELIVERY_DETAILS] [t/TAG]…​`<br> e.g.,`editS 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
 **Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
 **Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
@@ -209,9 +209,10 @@ Examples:
 
 Adds an employee to RHRH.
 
-Format: `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG] [sh/SHIFT]`
+Format: `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOB_TITLE [t/TAG] [sh/SHIFT]`
 
-* Adds an employee with all specified fields, where `LEAVES`, `SALARY`, `JOBTITLE` & `SHIFT` are fields specific to employees.
+* Adds an employee with all specified fields, where `LEAVES`, `SALARY`, `JOB_TITLE` & `SHIFT` are fields specific to 
+  employees.
 * `TAG` & `SHIFT` are optional fields that can be omitted.
 
 Examples: 
@@ -220,11 +221,10 @@ Examples:
 * `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Chef` adds an employee without any optional fields.
 
 <div markdown="block" class="alert alert-warning">
-   
-:information_source: **Notes:**<br>
 
-* When adding a `SHIFT`, `yyyy-MM-dd HHmm` format must be followed strictly<br>
-  e.g. `2021-12-08 1700`
+:information_source: **Notes:**
+
+Refer [here](#date-time-formatting) for a list of acceptable formats when entering date time for `SHIFTS`
 
 </div>
 
@@ -232,9 +232,9 @@ Examples:
 
 Adds a supplier to RHRH.
 
-Format: `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]`
+Format: `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLY_TYPE dd/DELIVERY_DETAILS [t/TAG]`
 
-* Adds a supplier with all specified fields, where `SUPPLYTYPE` and `DELIVERYDETAILS` are fields specific to suppliers
+* Adds a supplier with all specified fields, where `SUPPLY_TYPE` and `DELIVERY_DETAILS` are fields specific to suppliers
 * `TAG` is an optional field that can be omitted.
 
 Examples:
@@ -243,6 +243,14 @@ Examples:
 
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
   supplier without any optional fields.
+
+<div markdown="block" class="alert alert-warning">
+
+:information_source: **Notes:**
+
+Refer [here](#date-time-formatting) for a list of acceptable formats when entering date time for `DELIVERY_DETAILS`
+
+</div>
 
 ### Adding a reservation: `addR`
 
@@ -299,7 +307,8 @@ Examples:
 
 Edits an existing employee in RHRH.
 
-Format: `editE INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​ [sh/SHIFT]…​`
+Format: `editE INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOB_TITLE] [t/TAG]…​ 
+[sh/SHIFT]…​`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list.
 
@@ -325,7 +334,7 @@ Examples:
 
 Edits an existing supplier in RHRH.
 
-Format: `editS INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`
+Format: `editS INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLY_TYPE] [dd/DELIVERY_DETAILS] [t/TAG]…​`
 
 * Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list.
 
@@ -629,7 +638,7 @@ Format: `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`
   and order.
 
 Examples:
-* `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order
+* `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERY_DETAILS` in `ascending` order
 
 * `sorts by/N o/d`: Sorts the list of suppliers by `NAME` in `descending` order
 
