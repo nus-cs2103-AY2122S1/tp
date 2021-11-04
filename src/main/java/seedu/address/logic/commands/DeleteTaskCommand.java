@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,47 +52,100 @@ public class DeleteTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = getLastShownList(model);
 
         if (targetPersonIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
+        Person personToEdit = model.getFilteredPersonList().get(targetPersonIndex.getZeroBased());
+        checkPersonToEditTasksDisplayed(model, personToEdit);
 
         //Make new copy for defensive programming.
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(personToEdit.getTasks());
-        List<Index> copyOfIndexList = new ArrayList<>();
-        copyOfIndexList.addAll(targetTaskIndexes);
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        List<Index> copyOfIndexList = new ArrayList<>(targetTaskIndexes);
 
-        Collections.sort(copyOfIndexList, Collections.reverseOrder());
+        copyOfIndexList.sort(Collections.reverseOrder());
 
+        List<Task> taskListToModify = getTaskListToModify(model);
+        checkTargetIndexesValidity(personToEdit, taskListToModify);
+        List<Task> tasksToRemove = extractTaskToRemove(copyOfIndexList, taskListToModify);
+        removeSelectedTasks(tasks, tasksToRemove);
+
+        Person editedPerson = createEditedPerson(personToEdit, tasks);
+        model.setPerson(personToEdit, editedPerson);
+
+        return generateWriteCommandResult(tasksToRemove, editedPerson);
+    }
+
+    private void checkTargetIndexesValidity(Person personToEdit, List<Task> taskListToModify)
+            throws CommandException {
         for (Index targetTaskIndex : targetTaskIndexes) {
-            if (targetTaskIndex.getZeroBased() >= tasks.size()) {
+            if (targetTaskIndex.getZeroBased() >= taskListToModify.size()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
             }
         }
+    }
 
-        List<Task> tasksToRemove = new ArrayList<>();
-        for (Index targetTaskIndex : copyOfIndexList) {
-            Task taskToRemove = tasks.get(targetTaskIndex.getZeroBased());
-            tasksToRemove.add(taskToRemove);
-            tasks.remove(targetTaskIndex.getZeroBased());
+    /**
+     * Checks if the person whose task(s) is selected for modification has their task list displayed
+     * on the task list panel.
+     */
+    private void checkPersonToEditTasksDisplayed(Model model, Person personToEdit) throws CommandException {
+        boolean isPersonToEditTaskDisplayed = personToEdit.getName()
+                .equals(model.getTaskListManager().getNameOfChosenPerson());
+        if (!isPersonToEditTaskDisplayed && !model.getIsViewAllTasks()) {
+            throw new CommandException(Messages.MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED);
         }
+    }
 
-        Person editedPerson = new Person(
+
+    private CommandResult generateWriteCommandResult(List<Task> tasksToRemove, Person editedPerson) {
+        CommandResult commandResult = new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
+        commandResult.setWriteCommand();
+        return commandResult;
+    }
+
+    private Person createEditedPerson(Person personToEdit, List<Task> tasks) {
+        return new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
                 personToEdit.isImportant()
         );
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
-        CommandResult commandResult = new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
-        commandResult.setWriteCommand();
-        return commandResult;
+    /**
+     * If every person's task list is being displayed, the person list used to facilitate
+     * that is returned. Otherwise the person list used for display on the person list panel
+     * is returned.
+     */
+    private List<Task> getTaskListToModify(Model model) {
+        List<Task> taskListToModify;
+        if (model.getIsViewAllTasks()) {
+            taskListToModify = model.getObservablePersonList().get(targetPersonIndex.getZeroBased()).getTasks();
+        } else {
+            taskListToModify = model.getDisplayTaskList();
+        }
+        return taskListToModify;
+    }
+
+    private List<Task> extractTaskToRemove(List<Index> copyOfIndexList, List<Task> taskListToModify) {
+        List<Task> tasksToRemove = new ArrayList<>();
+        for (Index targetTaskIndex : copyOfIndexList) {
+            Task taskToRemove = taskListToModify.get(targetTaskIndex.getZeroBased());
+            tasksToRemove.add(taskToRemove);
+        }
+        return tasksToRemove;
+    }
+
+    private List<Person> getLastShownList(Model model) {
+        List<Person> lastShownList;
+        if (model.getIsViewAllTasks()) {
+            lastShownList = model.getObservablePersonList();
+        } else {
+            lastShownList = model.getFilteredPersonList();
+        }
+        return lastShownList;
     }
 
     public String getCommand() {
@@ -112,6 +164,17 @@ public class DeleteTaskCommand extends Command {
     private String generateSuccessMessage(Person personToEdit, int amount) {
         String taskOrTasks = StringUtil.singularOrPlural("task", amount);
         return String.format(MESSAGE_SUCCESS, amount, taskOrTasks, personToEdit.getName());
+    }
+
+    private void removeSelectedTasks(List<Task> taskListToRemoveFrom, List<Task> tasksToRemove) {
+        for (Task taskToRemove : tasksToRemove) {
+            for (int i = 0; i < taskListToRemoveFrom.size(); i++) {
+                if (taskToRemove == taskListToRemoveFrom.get(i)) {
+                    taskListToRemoveFrom.remove(i);
+                    break;
+                }
+            }
+        }
     }
 
     @Override

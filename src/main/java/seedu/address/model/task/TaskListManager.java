@@ -32,7 +32,7 @@ public class TaskListManager {
     private final HashMap<String, List<Task>> taskListArchive;
 
     /** Name of person whose taskList is chosen to be displayed. */
-    private Name nameOfChosenPerson;
+    private Name nameOfChosenPerson = null;
 
     /** Flag to indicate if nameOfChosenPerson is initialised */
     private boolean isPersonSelected;
@@ -101,7 +101,7 @@ public class TaskListManager {
         taskListArchive.put(name.toString(), taskList);
 
         if (name.equals(nameOfChosenPerson)) {
-            setToDisplayTaskList(name, false);
+            setToDisplayTaskList(name, true);
         }
     }
 
@@ -125,7 +125,7 @@ public class TaskListManager {
     public void setToDisplayTaskList(Name name, boolean isSet) {
         requireNonNull(name);
 
-        String logMessage = name.toString() + ": task list set to be displayed.";
+        String logMessage = name + ": task list set to be displayed.";
         logger.info(logMessage);
 
         nameOfChosenPerson = name;
@@ -181,6 +181,10 @@ public class TaskListManager {
         filteredTasks.setPredicate(predicate);
     }
 
+    public Name getNameOfChosenPerson() {
+        return nameOfChosenPerson;
+    }
+
     /**
      * Updates {@code statList}'s values.
      */
@@ -195,7 +199,7 @@ public class TaskListManager {
     }
 
     /**
-     * Iterates through all {@Task}s and updates their status.
+     * Iterates through all {@code Task}s and updates their status.
      */
     public void updateAllTaskStatus() {
         taskListArchive.values().stream()

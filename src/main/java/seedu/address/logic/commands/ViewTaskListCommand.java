@@ -76,12 +76,12 @@ public class ViewTaskListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (isDisplayAll) {
-            CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
             if (hasFilter) {
                 model.setViewAllTasksFindPred(new TaskMatchesKeywordPredicate(keywords));
             } else {
                 model.setViewAllTasksFindPred(task -> true);
             }
+            CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
             cr.setDisplayAllTaskList();
             cr.setWriteCommand();
             return cr;

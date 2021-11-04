@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,38 +75,91 @@ public class EditTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = getLastShownList(model);
 
         if (targetPersonIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
-        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        Person personToEdit = model.getFilteredPersonList().get(targetPersonIndex.getZeroBased());
+        checkPersonToEditTasksDisplayed(model, personToEdit);
 
-        if (targetTaskIndex.getZeroBased() >= tasks.size()) {
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        List<Task> taskListToModify = getTaskListToModify(model);
+
+        if (targetTaskIndex.getZeroBased() >= taskListToModify.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
         }
 
-        Task taskToEdit = tasks.get(targetTaskIndex.getZeroBased());
+        Task taskToEdit = taskListToModify.get(targetTaskIndex.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        replaceTaskWithEditedVersion(tasks, taskToEdit, editedTask);
+
+        Person editedPerson = createEditedPerson(personToEdit, tasks);
+        model.setPerson(personToEdit, editedPerson);
+
+        return generateWriteCommandResult(editedTask);
+    }
+
+    /**
+     * Checks if the person whose task(s) is selected for modification has their task list displayed
+     * on the task list panel.
+     */
+    private void checkPersonToEditTasksDisplayed(Model model, Person personToEdit) throws CommandException {
+        boolean isPersonToEditTaskDisplayed = personToEdit.getName().equals(model.getTaskListManager()
+                .getNameOfChosenPerson());
+        if (!isPersonToEditTaskDisplayed && !model.getIsViewAllTasks()) {
+            throw new CommandException(Messages.MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED);
+        }
+    }
+
+    private void replaceTaskWithEditedVersion(List<Task> tasks, Task taskToEdit, Task editedTask)
+            throws CommandException {
+        int taskToEditIndex = getTaskToEditIndex(tasks, taskToEdit);
 
         if (taskToEdit.equals(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        tasks.set(targetTaskIndex.getZeroBased(), editedTask);
+        tasks.set(taskToEditIndex, editedTask);
+    }
 
-        Person editedPerson = new Person(
+    private Person createEditedPerson(Person personToEdit, List<Task> tasks) {
+        return new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
                 personToEdit.isImportant()
         );
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
+    private CommandResult generateWriteCommandResult(Task editedTask) {
         CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
         commandResult.setWriteCommand();
         return commandResult;
+    }
+
+    /**
+     * If every person's task list is being displayed, the person list used to facilitate
+     * that is returned. Otherwise the person list used for display on the person list panel
+     * is returned.
+     */
+    private List<Task> getTaskListToModify(Model model) {
+        List<Task> taskListToModify;
+        if (model.getIsViewAllTasks()) {
+            taskListToModify = model.getObservablePersonList().get(targetPersonIndex.getZeroBased()).getTasks();
+        } else {
+            taskListToModify = model.getDisplayTaskList();
+        }
+        return taskListToModify;
+    }
+
+    private List<Person> getLastShownList(Model model) {
+        List<Person> lastShownList;
+        if (model.getIsViewAllTasks()) {
+            lastShownList = model.getObservablePersonList();
+        } else {
+            lastShownList = model.getFilteredPersonList();
+        }
+        return lastShownList;
     }
 
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
@@ -121,6 +173,17 @@ public class EditTaskCommand extends Command {
         Task updatedTask = new Task(updatedName, updatedDate, updatedTime, updatedVenue);
 
         return updatedTask;
+    }
+
+    private int getTaskToEditIndex(List<Task> tasks, Task taskToEdit) {
+        int idx = 0;
+        for (Task task : tasks) {
+            if (task == taskToEdit) {
+                break;
+            }
+            idx++;
+        }
+        return idx;
     }
 
     @Override
