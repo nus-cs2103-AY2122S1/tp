@@ -34,7 +34,7 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
-    /* TODO: Test failiing on CI
+    //TODO: Test failiing on CI
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder().build();
@@ -48,7 +48,7 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-    */
+
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
