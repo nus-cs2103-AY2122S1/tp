@@ -153,8 +153,10 @@ There is a one week deadline for the test kit collection and fet test, therefore
 
 Format: `deadline k/KEYWORD d1/DATE1 d2/DATE2` or `deadline k/LATE_KEYWORD d1/DATE1`
 
-* A resident's fet or collection is due one week after their last fet date or last collection date. For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021`
-* The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive
+* A resident's fet or collection is due one week after their last fet date or last collection date. 
+  * For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021`
+* The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive. 
+  * For example, if a resident's last fet date is `15-10-2021`, then the fet deadline will be `22-10-2021`, if the current date is `25-10-2021`, then the number of days the resident is late for fet is `3 days`.
 * Normal keywords are `f` for fet and `c` for collection
 * Late keywords are `lf` for late fet and `lc` for late collection
 * When a normal keyword is given, both `DATE1` and `DATE2` have to be inputted
@@ -396,9 +398,10 @@ Add multiple residents to an event based on the information given(name or room n
 Format: `include INDEX [r/RESIDENTS]`
 
 * Residents can be given in the form of name or room, but all has to be all rooms or all names
-* When adding multiple residents, each resident is separated by a comma
-* The resident inputted is case-insensitive
-* If one or more of the given resident is invalid, an error message is outputted and none of the residents are added to the event
+* The name/room inputted has to exist in the address book under the `Resident` Tab to be added to an `Event`  
+* When adding multiple names/rooms, each name/room is separated by a comma
+* The name/room inputted is case-insensitive
+* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room are added to the event
 
 Examples:
 * `include 1 r/A101` adds the resident who stays in room A101 to the first event in the address book
