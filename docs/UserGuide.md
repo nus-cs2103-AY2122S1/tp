@@ -75,7 +75,7 @@ Typically, to execute a command, this is how you interact with the interface:
 
 1. Type the relevant command into the **Command Window** and press **Enter** on your keyboard.
 2. The results of the command (or any warning messages generated) are displayed in the **Result Window**.
-3. Any changes made to the data will be reflected accordingly in the **List Window**. 
+3. Any changes made to the data will be reflected accordingly in the **List Window**.
 
 SportsPA stores two lists - **Members** and **Facilities**, which you can freely switch between by clicking on the respective **Tabs**. Alternatively, whenever you execute a member-specific or facility-specific command, SportsPA automatically switches to the relevant tab for you.
 
@@ -125,7 +125,7 @@ documentation.
 * Items with `...` after them can be used multiple times including zero times, by repeating the character with slash symbol,
   if present, and the parameter.<br>
   e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/exco`, `t/exco t/y2`etc.
-  
+
 * Parameters with `(S)` at the end, can be supplied one or more times without repeating the characters with slash
   symbols.<br>
   e.g. `d/DAY(S)` can be used as `d/1`, `d/1 2`, etc.

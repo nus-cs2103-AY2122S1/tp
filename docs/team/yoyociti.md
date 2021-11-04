@@ -32,7 +32,7 @@ Updating tests was also more complicated as many of the commands already relied 
 
 * **Enhancements to existing features**:
     * Add test utilities to support Facilities and Facility List for easy and convenient testing (Pull request [\#98](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/98))
-    * Improve feature `split` by accounting for instances when zero members are available or if there is insufficient capacity to accommodate all available members (Pull Request [\#150](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/150)) 
+    * Improve feature `split` by accounting for instances when zero members are available or if there is insufficient capacity to accommodate all available members (Pull Request [\#150](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/150))
 
 * **Documentation**:
     * User Guide:
