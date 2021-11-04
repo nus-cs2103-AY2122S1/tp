@@ -10,6 +10,7 @@ import java.util.List;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.Student;
 
 
@@ -35,19 +36,19 @@ public class EditLabCommand extends Command {
     public static final String MESSAGE_LAB_ALREADY_EXISTS = "Lab %d already exists.";
     public static final String MESSAGE_LAB_NOT_EXISTS = "Lab %d doesn't exist.";
     public static final String MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED =
-            "Kindly specify if you want to edit the lab number and/or the total score.\n%1$s";
+            "Kindly specify if you want to edit the lab number and/or the total score and what lab do you want to edit";
     public static final String MESSAGE_MISSING_LAB_TO_BE_EDITED =
             "Kindly specify the lab number that you would like to edit using the " + PREFIX_LAB_NUM + "flag.\n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! ";
 
-    private final int newLabNum;
+    private final LabNum newLabNum;
     private final Integer total;
     private final Lab original;
 
     /**
      * @param original the lab to be edited.
      * */
-    public EditLabCommand(Lab original, int newLabNum, Integer total) {
+    public EditLabCommand(Lab original, LabNum newLabNum, Integer total) {
         this.original = original;
         this.newLabNum = newLabNum;
         this.total = total;
@@ -58,14 +59,14 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Lab original, Integer total) {
         this.original = original;
         this.total = total;
-        this.newLabNum = 0;
+        this.newLabNum = new LabNum(0);
     }
 
     /**
      * @param original the lab to be edited.
      * @param newLabNum the new lab number
      * */
-    public EditLabCommand(Lab original, int newLabNum) {
+    public EditLabCommand(Lab original, LabNum newLabNum) {
         this.original = original;
         this.newLabNum = newLabNum;
         this.total = original.getTotalScore();

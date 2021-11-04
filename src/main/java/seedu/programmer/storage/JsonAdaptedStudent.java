@@ -10,6 +10,7 @@ import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -25,7 +26,7 @@ class JsonAdaptedStudent {
     private final String studentId;
     private final String classId;
     private final String email;
-    private List<Lab> labResultList;
+    private List<JsonAdaptedLab> labResultList;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -49,7 +50,11 @@ class JsonAdaptedStudent {
         email = source.getEmailValue();
         if (source.getLabList() != null) {
             labResultList = new ArrayList<>();
-            labResultList.addAll(source.getLabList());
+            List<Lab> labs = source.getLabList();
+            for (Lab lab : labs) {
+                JsonAdaptedLab adaptedLab = new JsonAdaptedLab(lab);
+                labResultList.add(adaptedLab);
+            }
         }
     }
 
@@ -93,7 +98,20 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
         Student student = new Student(modelName, modelStudentId, modelClassId, modelEmail);
-        student.setLabResultRecord(labResultList);
+
+
+
+        if (labResultList != null) {
+            List<Lab> studentLabResults = new ArrayList<>();
+            for (JsonAdaptedLab adaptedLab : labResultList) {
+                Lab lab = new Lab(new LabNum(adaptedLab.getLabNum()),
+                        adaptedLab.getActualScore(),
+                        adaptedLab.getTotalScore());
+                studentLabResults.add(lab);
+            }
+            student.setLabResultRecord(studentLabResults);
+        }
+
         return student;
     }
 
