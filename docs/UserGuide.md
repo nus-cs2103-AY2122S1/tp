@@ -39,7 +39,7 @@ Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (C
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listcontact`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -132,7 +132,7 @@ Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMI
 A policy can have any number of tags (including 0)
 </div>
 
-* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires, optional.
+* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires, in YYYY-MM-DD format.
 * Payment structure of the policy is defined by:
   * `PMT_AMOUNT`: fixed amount per payment
   * `PMT_FREQ` (optional): number of payments per year
@@ -143,10 +143,11 @@ A policy can have any number of tags (including 0)
 * Commission structure of the policy is defined by:
   * `COMMISSION_%`: percentage of each payment that goes to commission
   * `NUM_OF_PMT`: number of payments that the agent will receive commission for
+* `CONTACT_INDEX` refers to the current index of the contact in the contact list you wish to attach this policy to.
 
 Examples:
-* `addpolicy n/full life e/2021-12-12 p/10000 c/10 12 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10% on 12 payments, tagged Aviva, belonging to client with index 1.
-* `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
+* `addpolicy n/full life e/2021-12-12 p/10000 c/10 1 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10% on 1 payment, tagged Aviva, belonging to client with index 1.
+* `addpolicy n/critical illness e/2025-10-10 p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, coverage till 2025-10-10, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
 
 ### Listing All Policies : `listpolicy`
 
@@ -250,9 +251,9 @@ SIASA data are saved in the hard disk automatically after any command that chang
 
 Action | Format, Examples
 --------|------------------
-**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
-**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete Contact** | `deletecontact INDEX`<br> e.g., `deletecontact 3`
+**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
 **List Contacts** | `listcontact`
 **Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 **Delete Policy** | `deletepolicy INDEX`
