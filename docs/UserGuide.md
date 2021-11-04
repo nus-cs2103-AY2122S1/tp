@@ -470,7 +470,7 @@ Examples:
 * `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
 
 <p align="center">
-   <img src="images/addfExample.png" height="400" align="center"/>
+   <img src="images/addfExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -550,7 +550,9 @@ Examples:
 * `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
 * `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
 
-![findfExample](images/findfExample.png)
+<p align="center">
+   <img src="images/findfExample.png" height="500" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -579,7 +581,9 @@ Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user :camera:
 
-![splitExample](images/splitExample.png)
+<p align="center">
+   <img src="images/splitExample.png" height="500" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
