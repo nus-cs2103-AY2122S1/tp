@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
 ```AddressBook```. A ```List``` of unique ```String``` objects is created, with ```String``` content depending on
-the prefix provided by the user. 
+the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
@@ -190,7 +190,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 ### Filter interview feature
 
 The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
-input. This command then updates the ```model``` accordingly. 
+input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
@@ -203,10 +203,10 @@ to identify the user input ` past`. `FilterInterviewCommandParser#parse` then in
 `FilterInterviewPastCommand`.
 
 Step 3. `FilterInterviewPastCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
-and filters for applicants that have interviews that have already passed. 
- 
+and filters for applicants that have interviews that have already passed.
+
 Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
-have interviews that have passed. This `CommandResult` is then returned. 
+have interviews that have passed. This `CommandResult` is then returned.
 
 Given below is an example usage scenario and how the show operation behaves at each step.
 
@@ -248,8 +248,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 
 ### Mark feature
 
-The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of 
-```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
+The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
 
 The following activity diagram summarizes what happens when a user executes a ```mark``` command:
 ![images](images/MarkCommandActivityDiagram.png)
