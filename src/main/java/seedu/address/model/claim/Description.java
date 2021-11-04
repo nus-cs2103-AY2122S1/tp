@@ -14,7 +14,9 @@ import java.util.Objects;
 
 public class Description {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Punct}\\p{Blank}]*";
-    public static final String MESSAGE_CONSTRAINTS = "Description should only contain alphanumeric letters";
+    public static final String MESSAGE_CONSTRAINTS = "A description can only contain alphanumeric characters, "
+            + "blank spaces and punctuations.\n"
+            + "A description cannot be blank.";
 
     private final String description;
 

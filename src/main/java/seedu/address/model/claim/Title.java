@@ -14,7 +14,9 @@ import java.util.Objects;
 
 public class Title implements Comparable<Title> {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Space}]*";
-    public static final String MESSAGE_CONSTRAINTS = "Title should only contain alphanumeric letters";
+    public static final String MESSAGE_CONSTRAINTS = "A title should only contain alphanumeric characters.\n"
+            + "A title is case-sensitive\n"
+            + "A title should not be blank";
 
     private final String title;
 

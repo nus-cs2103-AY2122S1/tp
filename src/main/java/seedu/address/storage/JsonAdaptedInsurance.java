@@ -15,7 +15,8 @@ class JsonAdaptedInsurance {
     private final String insuranceBrand;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs an {@code Insurance} with the given {@code insuranceType}
+     * and {@code insuranceBrand}.
      */
     @JsonCreator
     public JsonAdaptedInsurance(@JsonProperty("insuranceType") String insuranceType,
@@ -25,7 +26,7 @@ class JsonAdaptedInsurance {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Insurance} into this class for Jackson use.
      */
     public JsonAdaptedInsurance(Insurance source) {
         insuranceType = source.getTypeName();
@@ -33,9 +34,9 @@ class JsonAdaptedInsurance {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code Insurance} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted insurance.
      */
     public Insurance toModelType() throws IllegalValueException {
         return Insurance.of(insuranceType, insuranceBrand);

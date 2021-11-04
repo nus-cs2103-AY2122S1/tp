@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,10 +26,15 @@ public class ClaimCommand extends Command {
     public static final String COMMAND_WORD = "claim";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a claim to the person identified by the index number used in the displayed person list. "
-            + "Claims with the same name will be overwritten. Statuses can only be 'pending' or 'completed' \n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "TITLE] "
+            + ": Adds/edits/deletes claims. \n"
+            + "1. The claim is added if all parameters are provided and "
+            + "the client does not have an existing claim with the same title.\n"
+            + "2. The claim is edited if the client has an existing claim with the same title, "
+            + "and either a status or a description, or both is provided. \n"
+            + "3. The claim is deleted if the client has an existing claim with the same title, "
+            + "and a status and a description are both not provided.\n"
+            + "Format: INDEX "
+            + PREFIX_NAME + "TITLE "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_STATUS + "STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -59,7 +63,13 @@ public class ClaimCommand extends Command {
     }
 
     public static final String MESSAGE_CLAIM_EDIT_FAILURE =
-            "You are trying to edit a claim that does not exist. " + "Claim title: %1$s";
+            "You are trying to edit a claim that does not exist. Claim title: %1$s";
+
+    public static final String MESSAGE_CLAIM_REMOVE_FAILURE =
+            "You are trying to delete a claim that does not exist. Claim title: %1$s";
+
+    public static final String MESSAGE_INDEX_OUTSIDE_RANGE_FAILURE =
+            "The index provided is outside the range of the client list.";
 
     private final Index index;
     private final EditClaimDescriptor editClaimDescriptor;
@@ -85,7 +95,7 @@ public class ClaimCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INDEX_OUTSIDE_RANGE_FAILURE);
         }
 
         Person personToAddClaim = lastShownList.get(index.getZeroBased());
@@ -199,6 +209,9 @@ public class ClaimCommand extends Command {
          * Returns the claim with the corresponding attributes
          */
         public Claim build() throws CommandException {
+            if (isEmpty()) {
+                throw new CommandException(String.format(MESSAGE_CLAIM_REMOVE_FAILURE, getTitle()));
+            }
             if (!isComplete()) {
                 throw new CommandException(String.format(MESSAGE_CLAIM_EDIT_FAILURE, getTitle()));
             }

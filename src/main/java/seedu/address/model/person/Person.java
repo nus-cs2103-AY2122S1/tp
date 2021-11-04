@@ -155,6 +155,10 @@ public class Person {
         return this.appointment.isUpcoming();
     }
 
+    public boolean hasClaims() {
+        return !this.getClaims().isEmpty();
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

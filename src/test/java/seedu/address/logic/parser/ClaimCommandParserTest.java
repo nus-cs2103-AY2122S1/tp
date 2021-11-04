@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.CLAIM_STATUS_DESC_AMY
 import static seedu.address.logic.commands.CommandTestUtil.CLAIM_TITLE_DESC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,6 @@ public class ClaimCommandParserTest {
     @Test
     public void parse_invalidIndex_throwsParseException() {
         assertParseFailure(parser, "a" + CLAIM_TITLE_DESC_AMY + CLAIM_DESCRIPTION_DESC_AMY + CLAIM_STATUS_DESC_AMY,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClaimCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_INDEX);
     }
 }

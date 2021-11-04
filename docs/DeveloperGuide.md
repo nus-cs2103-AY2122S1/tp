@@ -8,8 +8,8 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+* Libraries used: JavaFX, Jackson, JUnit5
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="800" />
 
 </div>
 
@@ -154,85 +154,128 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+###  Revenue feature
 
-#### Proposed Implementation
+#### Current Implementation
+{:.no_toc}
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+A client's revenue is currently represented by the `revenue` field under `Person`,
+which is represented by a `Revenue` object.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The `Revenue` object contains a `Money` field called `value` which represents the amount 
+of money in Singapore Dollars(SGD) that the user earned from the client. This `value` can 
+never be null.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+<img src="images/RevenueClassDiagram.png" width="300" />
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The processing of a revenue command from the user can be split into 2 general steps:
+1. Parsing the user input into a `RevenueCommand`
+2. Executing the `RevenueCommand`
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Each step will be described in the sections below.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+**Step 1**: Parsing of user input
 
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Parsing of the user input is primarily handled by the `RevenueCommandParser` which calls other
+helper classes to parse the text into the data classes `Index` and `Revenue`.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<img src="images/RevenueCommandParserSequenceDiagram.png" width="800" />
 
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+`RevenueCommandParser` then creates a `RevenueCommand` using the `Index` and `Revenue` objects created.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+**Step 2**: Executing the RevenueCommand
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<img src="images/RevenueCommandExecuteActivityDiagram.png" width="300" />
 
-</div>
+There are 2 possible outcomes from the execution of a RevenueCommand.
 
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+1. Add a new revenue to the client
+2. No changes to the client's revenue after a RevenueCommand as the total value of
+the new revenue and client's original revenue is negative
 
-![UndoRedoState3](images/UndoRedoState3.png)
+#### Design considerations
+{:.no_toc}
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+*Aspect*: User interface of adding and editing revenue.
 
-</div>
+* **Alternative 1 (Current Choice):** `revenue` command adds to existing `revenue`
+of client. `edit` command sets the `revenue` of client.
+  * Pros: Easier to implement
+  * Cons: User has to remember a lot of commands and to also understand the differences
+  between each command
+* **Alternative 2:** One `revenue` command adds and edits
+  * Pros: Fewer commands for the user to remember
+  * Cons: It will be difficult to give proper error messages since we are not sure
+  of the user's intentions
+### Add command
 
-The following sequence diagram shows how the undo operation works:
+A user can use the add command to add a clients. A sequence diagram of this action is as shown:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-</div>
+###  Note feature
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### Current Implementation
+{:.no_toc}
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+A client's note is currently represented by the `note` field under `Person`,
+which is represented by an `Note` object.
 
-</div>
+The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+<img src="images/NoteClassDiagram.png" width="300" />
 
-![UndoRedoState4](images/UndoRedoState4.png)
+A `Note` can be given to a `Person` through any of these 3 methods:
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+1. Using the `NoteCommand` to add a note to an existing `Person`.
+2. Through the `AddCommand`, a new `Person` with a `Note` can be created.
+3. Editing a `Person` using the `EditCommand` to give the `Person` a `Note`.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+The processing of a note command from the user can be split into 2 general steps:
 
-The following activity diagram summarizes what happens when a user executes a new command:
+1. Parsing the user input into a `NoteCommand`
+2. Executing the `NoteCommand`
+   Each step will be described in the sections below.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+**Step 1:** Parsing of user input
 
-#### Design considerations:
+The user input is parsed by the `NoteCommandParser` which calls other helper methods 
+to parse the text into a `Note` object
 
-**Aspect: How undo & redo executes:**
+<img src="images/NoteCommandParserSequenceDiagram.png" width="800" />
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. Unlike the `Claim` feature, as the `Note` command has no constraints on the text that can be inputted, the `NoteCommandParser` is able to create a `NoteCommand` without using a `EditNoteDescriptor.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+**Step 2:** Executing the NoteCommand
 
-_{more aspects and alternatives to be added}_
+<img src="images/NoteCommandExecuteActivityDiagram.png" width="300" />
+
+There are 3 possible outcomes from the execution of a `NoteCommand`.
+
+1. Add a new Note to the client
+2. Edit an existing Note of the client
+3. Delete an existing Note of the client
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting Note
+
+* **Alternative 1 (Current choice):** The 'Note' command and 'Edit' command adds, edits and deletes. The 'Add' command is also able to create a person with a note.
+    * Pros:
+        * It is more intuitive as the note is a field that belongs to a `Person`.
+        * The user has more flexibility when choosing how to add, edit or delete a note.
+    * Cons:
+        * It is difficult to give proper error messages since we are not sure of the user intentions
+        * The user has to keep track of more prefixes
+        * The "help message" for the 'Add' and 'Edit' commands become longer and harder to read due to the additional field.
+* **Alternative 2:** One ‘Note’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 3:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
 
 ###  Claims feature
 
@@ -260,7 +303,7 @@ missing fields imply that the user wants to edit or delete an existing claim. Th
 
 **Step 2:** Executing the ClaimCommand
 
-<img src="images/ClaimCommandExecuteActivityDiagram.png" width="400" />
+<img src="images/ClaimCommandExecuteActivityDiagram.png" width="500" />
 
 There are 3 possible outcomes from the execution of a ClaimCommand.
 1. Add a new claim to the client
@@ -278,6 +321,7 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
     * Cons: User has to remember a lot of commands
+    
 #### Future Improvements
 {:.no_toc}
 
@@ -298,7 +342,7 @@ which is represented by an `Appointment` object.
 The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
 the appointment with is scheduled for. An empty appointment is represented when `appointmentTime` is set to `null`.
 
-<img src="images/ScheduleAppointmentClassDiagram.png" width="400" />
+<img src="images/ScheduleAppointmentClassDiagram.png" width="300" />
 
 The processing of a schedule command from the user can be split into 2 general steps:
 1. Parsing the user input into a `ScheduleCommand`
@@ -335,6 +379,24 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
     * Cons: User has to remember a lot of commands
+    
+### Insurance feature
+
+#### Implementation
+{:.no_toc}
+
+`Insurance` is currently composed of two objects:
+
+* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
+* `brand`, a `String` representing the brand of insurance.
+
+A `Person` can have any number of different `Insurances`, stored as a `HashSet`.
+
+`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command.
+
+A class diagram of `Insurance` is as shown:
+
+![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
