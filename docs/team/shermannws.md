@@ -15,46 +15,44 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 
 <hr/>
 
-#### Features
+#### Contributions
 
-* **New Feature**: Added the ability to filter the list of students based on different query parameters.
-    * What it does:
-Filters the list of students stored in P|E by displaying all the students that matches the query parameters.
-Tutors can specify the filter criteria based on any combination of students' particulars.
-    * Justification:
-So that tutors are able to quickly filter out the students' of interest out of their large number of students using known parameters.
-    * Highlights:
-This feature was challenging as it involves filtering students based on any combination of query parameters provided.
-    
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+1. **New Feature**: Added the ability to filter the list of students based on different query parameters.
+   * What it does:
+   Filters the list of students stored in P|E by displaying all the students that matches the query parameters.
+   Tutors can specify the filter criteria based on any combination of students' particulars.
+   * Justification:
+   So that tutors are able to quickly filter out the students' of interest out of their large number of students using known parameters (e.g. Class ID).
+   * Highlights:
+   This feature was challenging as it involves filtering students based on any combination of query parameters provided.
+   This also involves recreating a whole new command from scratch which requires comprehensive understand of all the classes in P|E.
 
+2. **New Feature**: Added a command history feature that allows the tutor to navigate to previous commands using up/down keys.
+   * What it does: Allows tutor to navigate previously executed commands, similar to the Unix CLI.
+   * Justification: So that tutors are able to be more efficient when using P|E.
+   * Highlights: Involves a sef-directed learning experience using online materials to properly implement an "onKeyPressed" event listener.
+   Requires deep thoughts into the edge cases to ensure that this feature is free of bug.
 
-<hr/>
+3. **Project management**:
+   * Created and set up the GitHub team organisation, repo, pages and actions
+   * Managed and ensured the prompt delivery of releases [v1.3.trial](https://github.com/AY2122S1-CS2103-F09-3/tp/releases/tag/v1.3.trial) & [v1.3.1](https://github.com/AY2122S1-CS2103-F09-3/tp/releases/tag/v1.3.1) (2 releases) on GitHub
 
-* **Code contributed**: [RepoSense link]()
+4. **Enhancements to existing features**:
+   * Enhanced the `edit` feature to accommodate the changing requirements of P|E (PRs [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121), [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387), [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403))
+   * Modified generic utility classes for the integration of the new P|E requirements (PRs [\#274](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/274))
+   * Increased user feedback by putting in place better exceptions throwing mechanism and more detailed description (PRs [\#272](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/272), [\#287](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/287), [\#373](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/373), [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387), [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403))
+   * Increased code quality (PR [\#206](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/206))
+   * Various bugfixes (PRs [\#150](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/150), [\#362](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/362), [\#375](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/375))
 
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+5. **Documentation**:
+   * User Guide:
+     * Added documentation for the command history navigation feature and for features `filter` and `edit` [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35), [\#148](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/148), [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160), [\#210](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/210), [\#385](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/385)
+     * Created the command summary at the bottom of the User Guide [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35)
+     * Solved bug that prevented User Guide and Developer Guide from being linked as one of the header page in our `index.md` page [\#276](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/276)
+   * Developer Guide:
+     * Added implementation details of the `filter` feature. [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162)
 
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
-
-* **Documentation**:
-    * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Developer Guide:
-        * Added implementation details of the `delete` feature.
-
-* **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+6. **Community**:
+   * PRs with non-trivial comments: [\#113](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/113), [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121), [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160), [\#211](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/211), [\#389](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/389)
+   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/348), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/324))
+   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/shermannws/ped/issues/7), [2](https://github.com/shermannws/ped/issues/17), [3](https://github.com/shermannws/ped/issues/5))
