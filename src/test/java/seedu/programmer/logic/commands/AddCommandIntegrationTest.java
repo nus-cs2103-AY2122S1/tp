@@ -43,7 +43,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         Student studentInList = model.getProgrammerError().getStudentList().get(0);
-        assertCommandFailure(new AddCommand(studentInList), model, AddCommand.MESSAGE_DUPLICATE_STUDENT_EMAIL);
+        assertCommandFailure(new AddCommand(studentInList), model, AddCommand.MESSAGE_DUPLICATE_STUDENT_ID);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class AddCommandIntegrationTest {
                                                    validStudent.getClassId(), validStudent.getEmail());
 
         assertCommandFailure(new AddCommand(studentDifferentName), expectedModel,
-                AddCommand.MESSAGE_DUPLICATE_STUDENT_EMAIL);
+                AddCommand.MESSAGE_DUPLICATE_STUDENT_ID);
     }
 
     @Test

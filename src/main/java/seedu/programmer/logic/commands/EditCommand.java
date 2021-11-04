@@ -95,9 +95,6 @@ public class EditCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
             } else if (model.hasOtherSameStudentEmail(studentToEdit, editedStudent)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
-            } else {
-                System.out.println("This line should not be reached in any case");
-                assert false;
             }
         }
 
