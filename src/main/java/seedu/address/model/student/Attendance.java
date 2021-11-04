@@ -50,8 +50,8 @@ public class Attendance {
      * @param week week to be checked.
      * @return int specifying if student was present.
      */
-    public int checkPresent(int week) {
-        return attendanceList.get(week);
+    public boolean checkPresent(int week) {
+        return attendanceList.get(week) == 1;
     }
 
     /**

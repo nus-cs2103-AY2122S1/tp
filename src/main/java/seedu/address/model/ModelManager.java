@@ -177,7 +177,7 @@ public class ModelManager implements Model {
     @Override
     public String getStudentAttendance(Student target, int week) {
         requireAllNonNull(target, week);
-        return target.checkPresent(week) == 1 ? "present" : "absent";
+        return target.checkPresent(week) ? "present" : "absent";
     }
 
     @Override
@@ -191,7 +191,7 @@ public class ModelManager implements Model {
     @Override
     public String getStudentParticipation(Student target, int week) {
         requireAllNonNull(target, week);
-        return target.checkParticipated(week) == 1 ? "participated" : "not participated";
+        return target.checkParticipated(week) ? "participated" : "not participated";
     }
 
     @Override
