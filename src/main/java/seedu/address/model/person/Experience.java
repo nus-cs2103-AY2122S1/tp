@@ -15,7 +15,7 @@ public class Experience {
             + "no larger than 67 (e-employment age in Singapore), "
             + "which can be either an integer or a double with only 0 or 5 behind decimal point"
             + ", and it should not be blank. "
-            + "E.g. y/1, y/0.5, y/3.0.";
+            + "E.g. y/1, y/0.5, y/3.0";
 
     /**
      * Check that experience is an integer or a double with only 0 or 5 behind decimal point.
