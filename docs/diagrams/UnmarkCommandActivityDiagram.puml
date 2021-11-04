@@ -5,9 +5,8 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command is
-valid with valid index/indices,
-with no duplicates])
+if () then ([command is valid with valid
+index/indices, with no duplicates])
 
     if () then ([applicant(s) at all indices
   have been marked])
