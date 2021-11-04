@@ -42,6 +42,7 @@ public class CommandResult {
         this.exit = exit;
         this.display = false;
         this.displaySummary = false;
+        this.summary = null;
         this.contactToDisplay = null;
     }
 
@@ -71,6 +72,7 @@ public class CommandResult {
         this.exit = false;
         this.display = true;
         this.displaySummary = false;
+        this.summary = null;
         this.contactToDisplay = contactToDisplay;
         this.showCommandSummary = false;
     }
@@ -133,8 +135,23 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
+
+        // handle instances of null summary
+        if (summary == null && otherCommandResult.summary != null) {
+            return false;
+        }
+
+        if (summary != null && otherCommandResult.summary == null) {
+            return false;
+        }
+
+        boolean isSummary = displaySummary == otherCommandResult.displaySummary;
+
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showCommandSummary == otherCommandResult.showCommandSummary
+                && (isSummary
+                && ((summary == null && otherCommandResult.summary == null)
+                || summary.equals(otherCommandResult.summary)))
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }

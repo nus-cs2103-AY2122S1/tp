@@ -91,7 +91,7 @@ java -jar WhereTourGo.jar
 ```
 
 <br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/sample.png)
+   ![Ui](images/ui.png)
    <br><br>
 
 Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
@@ -504,7 +504,8 @@ WhereTourGo data is saved in the hard disk automatically after any command that 
 WhereTourGo data is saved as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-danger"> :warning: Caution:
-If your changes to the data file make the format invalid, WhereTourGo will discard all data and start with an empty data file at the next run.</div>
+If your changes to the data file make the format invalid, WhereTourGo will discard all data and start with an empty data file at the next run.
+</div>
 
 [Back to top](#table-of-contents)
 

@@ -22,7 +22,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.IsFindableContainsKeywordsPredicate;
+import seedu.address.model.summary.Summary;
 import seedu.address.testutil.EditContactDescriptorBuilder;
+
 
 /**
  * Contains helper methods for testing commands.
@@ -98,6 +100,10 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            System.out.println(result.isDisplaySummary());
+            System.out.println(expectedCommandResult.isDisplaySummary());
+            System.out.println(result.getSummaryToDisplay());
+            System.out.println(expectedCommandResult.getSummaryToDisplay());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -111,7 +117,16 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        Summary summary = new Summary(expectedModel.getAddressBook());
+        CommandResult expectedCommandResult;
+        // Commands that have do not update Summary
+        if (command instanceof CmdCommand || command instanceof EditCommand || command instanceof ExitCommand
+                || command instanceof ExportCommand || command instanceof HelpCommand
+                || command instanceof SortCommand) {
+            expectedCommandResult = new CommandResult(expectedMessage);
+        } else {
+            expectedCommandResult = new CommandResult(expectedMessage, summary);
+        }
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

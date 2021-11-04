@@ -91,13 +91,11 @@ public class ContactListPanel extends UiPart<Region> {
                         int indexToChange = change.getFrom();
                         Contact updatedContact = change.getList().get(indexToChange);
                         contactListView.scrollTo(indexToChange);
-                        contactListView.getSelectionModel().select(indexToChange);
                         contactListView.getFocusModel().focus(indexToChange);
                         selected.updateContact(updatedContact);
                     } else if (change.wasRemoved()) {
                         if (contactList.size() > 0) {
                             contactListView.scrollTo(0);
-                            contactListView.getSelectionModel().select(0);
                             contactListView.getFocusModel().focus(0);
                         }
                         setSelectedContactPanel();

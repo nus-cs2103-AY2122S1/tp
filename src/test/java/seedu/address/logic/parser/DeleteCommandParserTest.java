@@ -48,6 +48,6 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_inValidArgs_throwsParseException() {
         assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ParserUtil.MESSAGE_INVALID_INDEX));
+                DeleteCommand.INVALID_INDEX));
     }
 }
