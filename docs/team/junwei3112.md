@@ -15,15 +15,15 @@ Given below are my contributions to the project:
 
 * **Enhancements implemented**:
   * Implemented the functionality of the `paid` and `unpaid` commands for v1.2.
-    * Relevant PRs: [#63](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/63)
+    * Relevant PR(s): [#63](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/63)
     * Allows private tutors to set and unset payment status of their students.
     * Removed from TutorAid for v1.4 due to its limited functionality.
   * Set up the storage system for TutorAid to store and fetch `Lesson` objects from memory.
-    * Relevant PRs: [#90](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/90).
+    * Relevant PR(s): [#90](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/90)
     * Worked closely with the `Storage` and `Model` components to implement storing, retrieving and handling of `Lesson` objects within TutorAid.
     * It was quite hard to implement since there were no concrete methods implemented to modify and view lessons in TutorAid at the time. As such, I wrote extensive test cases, alongside my functional code, to make sure that the storage system worked properly.
   * Implemented the functionality of the `add -l` and `del -l` commands.
-    * Relevant PRs: [#119](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/119).
+    * Relevant PR(s): [#119](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/119)
     * Allows private tutors to add and delete lessons with the specified lesson details.
 
 * **Contributions to the UG**:
