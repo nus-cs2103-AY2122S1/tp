@@ -24,7 +24,6 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Email;
-import seedu.address.model.student.EmptyClassCode;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -92,7 +91,7 @@ public class EditCommand extends Command {
         TutorialClass toCheckTutorialClass = new TutorialClass(editedStudent.getClassCode(),
                 new Schedule("Tues 12:00pm to 2:00pm, Fri 12:00pm to 2:00pm"), new HashSet<Tag>());
 
-        if (toCheckTutorialClass.equals(new EmptyClassCode()) || !model.hasTutorialClass(toCheckTutorialClass)) {
+        if (!model.hasTutorialClass(toCheckTutorialClass)) {
             throw new CommandException(Messages.MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
