@@ -218,7 +218,7 @@ Step 5. After checking that the new `Person` is not a duplicate of any existing 
 `Model#setPerson()` will be called to change the specified applicant in the `AddressBook`. Finally, `Model#updateFilteredPersonList()`
 is called to reflect the changes in the list of applicants shown to the user.
 
-Step 6. `CommandResult` is initialized with `String` containing the details of the deleted applicants.
+Step 6. Once the list is updated, `CommandResult` is initialized with `String` containing the details of the edited applicants.
 This CommandResult is then returned.
 
 The following sequence diagram shows how the edit operation works.
