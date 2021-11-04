@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
@@ -39,6 +40,8 @@ public class CommandTestUtil {
 
     public static final String MODULE_NAME_DESC_0 = " " + PREFIX_MODULE_NAME + MODULE_NAME_0;
     public static final String MODULE_NAME_DESC_1 = " " + PREFIX_MODULE_NAME + MODULE_NAME_1;
+    public static final String NEW_MODULE_NAME_DESC_0 = " " + PREFIX_NEW_MODULE_NAME + MODULE_NAME_0;
+    public static final String NEW_MODULE_NAME_DESC_1 = " " + PREFIX_NEW_MODULE_NAME + MODULE_NAME_1;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_AMY;
@@ -55,13 +58,19 @@ public class CommandTestUtil {
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "teleHandle"; // missing @
     public static final String INVALID_MODULE_NAME_DESC = " " + PREFIX_MODULE_NAME
             + "modulE@"; // '@' not allowed in module names
+    public static final String INVALID_NEW_MODULE_NAME_DESC = " " + PREFIX_NEW_MODULE_NAME
+            + "modulE@"; // '@' not allowed in module names
 
     public static final String VALID_TASK_NAME_0 = "Assignment 1";
     public static final String VALID_TASK_NAME_1 = "Lab 7";
+    public static final String VALID_TASK_NAME_2 = "Assignment3";
     public static final String VALID_TASK_ID_0 = "T1";
     public static final String VALID_TASK_ID_1 = "T77";
+    public static final String VALID_TASK_ID_2 = "T333";
     public static final String VALID_TASK_DEADLINE_0 = "2021-10-28";
     public static final String VALID_TASK_DEADLINE_1 = "2022-11-11 12:00";
+    public static final String VALID_TASK_DEADLINE_2 = "2021-10-01";
+    public static final String INVALID_TASK_DEADLINE_1 = "!@#$";
 
     public static final String TASK_NAME_DESC_0 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_0;
     public static final String TASK_NAME_DESC_1 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_1;
@@ -77,7 +86,6 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE
             + "18th November, 2021"; // only alphanumeric characters and dashes are allowed in taskDeadline
 
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -85,7 +93,6 @@ public class CommandTestUtil {
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
     public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_0;
     public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_1;
-
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)

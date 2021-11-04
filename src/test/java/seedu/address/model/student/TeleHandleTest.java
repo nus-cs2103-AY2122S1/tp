@@ -34,10 +34,16 @@ public class TeleHandleTest {
         assertFalse(TeleHandle.isValidTeleHandle("a")); // no@
         assertFalse(TeleHandle.isValidTeleHandle("@amy lee ")); // there is a space separating the name
         assertFalse(TeleHandle.isValidTeleHandle("@amy'lee ")); // special character is used
+        assertFalse(TeleHandle.isValidTeleHandle("@amy")); // less than 5 characters
+        assertFalse(TeleHandle.isValidTeleHandle("@amyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")); // more than 32 characters
 
         // valid tele handles
+        assertTrue(TeleHandle.isValidTeleHandle("@_____")); // underscores only
         assertTrue(TeleHandle.isValidTeleHandle("@AmyLee")); // letters only
-        assertTrue(TeleHandle.isValidTeleHandle("@999")); // numbers only
+        assertTrue(TeleHandle.isValidTeleHandle("@999970")); // numbers only
         assertTrue(TeleHandle.isValidTeleHandle("@amylee99")); // combination of numbers and letters
+        assertTrue(TeleHandle.isValidTeleHandle("@___99")); // combination of numbers and underscores
+        assertTrue(TeleHandle.isValidTeleHandle("@amy_lee_")); // combination of underscores and letters
+        assertTrue(TeleHandle.isValidTeleHandle("@amylee99__")); // combination of numbers, letters and underscores
     }
 }

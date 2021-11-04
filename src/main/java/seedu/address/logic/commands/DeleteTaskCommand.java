@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_TASK_NOT_FOUND;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
@@ -71,7 +72,7 @@ public class DeleteTaskCommand extends DeleteCommand {
      *
      * @param student The student with the task to be deleted.
      */
-    public void deleteTaskFromStudent(Student student) {
+    public void deleteTaskFromStudent(Student student) throws CommandException {
         for (Task task : student.getTaskList()) {
             if (task.getTaskId().equals(targetTaskId)) {
                 logger.log(Level.INFO, "deleting task from student's taskList: " + task.getTaskId());
@@ -79,6 +80,7 @@ public class DeleteTaskCommand extends DeleteCommand {
                 return;
             }
         }
+        throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, targetTaskId));
     }
 
     /**

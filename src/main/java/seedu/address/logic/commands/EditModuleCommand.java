@@ -23,7 +23,8 @@ public class EditModuleCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "edit module";
 
-    public static final String MESSAGE_NOT_EDITED = "Both old module name and new module name must be provided";
+    public static final String MESSAGE_NOT_EDITED = "Both old module name and new module name must be provided "
+            + "and must be different from one another";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a module's name. Must provide "
             + "old module name and the new module name "
@@ -55,6 +56,9 @@ public class EditModuleCommand extends EditCommand {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
         ModuleName updatedName = editModuleDescriptor.getModuleName();
+        if (moduleName.equals(updatedName)) {
+            throw new CommandException(String.format(MESSAGE_NOT_EDITED));
+        }
         if (model.hasModuleName(updatedName)) {
             throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_MODULE, updatedName.getModuleName()));
         }
