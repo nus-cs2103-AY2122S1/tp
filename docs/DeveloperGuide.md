@@ -209,8 +209,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Implementation
 
-When ModelManager is initialised, optionalOrder is set to Optional.empty(). 
-At this point, the user has 1 order record with 2 items in his transaction list.
+When ModelManager is initialised, optionalOrder is set to Optional.empty(). At this point, the user has 1 order record
+with 2 items in his transaction list.
 
 ![Initial_State](images/OrderInitialState.png)
 
