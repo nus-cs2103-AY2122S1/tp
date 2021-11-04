@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class RecurringLesson extends Lesson {
+    private static final String RECURRING = "Recurring";
+
     /**
      * Every field must be present and not null.
      *
@@ -53,6 +55,16 @@ public class RecurringLesson extends Lesson {
     @Override
     public boolean isRecurring() {
         return true;
+    }
+
+    /**
+     * Returns a string representing the type of this lesson.
+     *
+     * @return Recurring.
+     */
+    @Override
+    public String getTypeOfLesson() {
+        return RECURRING;
     }
 
     /**

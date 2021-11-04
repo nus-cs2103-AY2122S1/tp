@@ -17,11 +17,6 @@ import java.util.stream.Collectors;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson implements Comparable<Lesson> {
-
-    // Types of lesson
-    private static final String RECURRING = "Recurring";
-    private static final String MAKEUP = "Makeup";
-
     // Time fields
     private final Date startDate;
     private final Date endDate;
@@ -100,10 +95,6 @@ public abstract class Lesson implements Comparable<Lesson> {
         return timeRange.getEnd().atDate(startDate.getLocalDate());
     }
 
-    public String getTypeOfLesson() {
-        return isRecurring() ? RECURRING : MAKEUP;
-    }
-
     public LessonRates getLessonRates() {
         return lessonRates;
     }
@@ -142,6 +133,13 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @return True if it is a recurring lesson, false otherwise.
      */
     public abstract boolean isRecurring();
+
+    /**
+     * Returns a string representing the type of this lesson.
+     *
+     * @return The type of this lesson.
+     */
+    public abstract String getTypeOfLesson();
 
     /**
      * Gets the date of the lesson to display to the user.
