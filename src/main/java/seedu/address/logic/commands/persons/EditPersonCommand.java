@@ -349,7 +349,7 @@ public class EditPersonCommand extends Command {
             try {
                 personToEdit = removeLessons(personToEdit, lessonsToRemove);
             } catch (IndexOutOfBoundsException index) {
-                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
             // adding lessons
             try {
