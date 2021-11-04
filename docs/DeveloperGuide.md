@@ -471,9 +471,9 @@ Use case ends.
 
   Use case ends.
 * 3a. The format of the given details is invalid.
-    * 3a1. Track2Gather shows the correct format for input.
+  * 3a1. Track2Gather shows the correct format for input.
 
-      Use case resumes from step 2.
+    Use case resumes from step 2.
 
 #### Use case: UC09 - Access help page
 
@@ -741,23 +741,23 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 4. Updating a person's call status to successful in the current SHN enforcement session
-    1. Prerequisites: SHN enforcement mode is not activated.<br>
-       Expected: Similar to previous, except the updated person does not disappear from the display.
+   1. Prerequisites: SHN enforcement mode is not activated.<br>
+      Expected: Similar to previous, except the updated person does not disappear from the display.
 
 5. Updating that a failed call was made to a person in the current SHN enforcement session
-    1. Prerequisites: SHN enforcement mode is activated.
+   1. Prerequisites: SHN enforcement mode is activated.
 
-    2. Test case: `fcall 1`<br>
-       Expected: First person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+   2. Test case: `fcall 1`<br>
+      Expected: First person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-    3. Test case: `fcall 3`<br>
-       Expected: Third person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+   3. Test case: `fcall 3`<br>
+      Expected: Third person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-    4. Test case: `fcall 0`<br>
-       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+   4. Test case: `fcall 0`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
     
-    5. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
-       Expected: Similar to previous.
+   5. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
+      Expected: Similar to previous.
 
 6. Updating that a failed call was made to a person in the current SHN enforcement session
     1. Prerequisites: SHN enforcement mode is not activated.<br>
