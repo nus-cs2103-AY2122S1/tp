@@ -17,6 +17,7 @@ public class DefaultShiftTimingsStorage {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     // Morning shift start time, Morning shift end time, Afternoon shift start time, Afternoon shift end time
+    private static final String[] DEFAULT_TIMINGS = new String[]{"10:00", "16:00", "16:00", "22:00"};
     private static String[] stringTimings = new String[]{"10:00", "16:00", "16:00", "22:00"};
     private static LocalTime[] timings = new LocalTime[4];
 
@@ -128,5 +129,17 @@ public class DefaultShiftTimingsStorage {
     public static String getTimings() {
         return String.format("Morning Shift: %s-%s\nAfternoon Shift: %s-%s",
                 stringTimings[0], stringTimings[1], stringTimings[2], stringTimings[3]);
+    }
+
+    /**
+     * Resets the timings to the default timings.
+     *
+     * @throws FileNotFoundException If the file cannot be found.
+     */
+    public static void reset() throws FileNotFoundException {
+        for (int i = 0; i < 4; i++) {
+            stringTimings[i] = DEFAULT_TIMINGS[i];
+        }
+        update();
     }
 }
