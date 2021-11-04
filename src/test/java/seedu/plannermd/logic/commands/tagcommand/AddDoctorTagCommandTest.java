@@ -44,9 +44,7 @@ class AddDoctorTagCommandTest {
     void execute_validTagUnfilteredList_success() {
         Doctor firstDoctor = model.getFilteredDoctorList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Tag> newTags = new HashSet<>(firstDoctor.getTags());
-        System.out.printf(String.valueOf(newTags));
         newTags.add(tag);
-        System.out.printf(String.valueOf(newTags));
         Doctor editedDoctor = new DoctorBuilder(firstDoctor).withTags(
                 newTags.stream().map(t -> t.tagName).toArray(String[]::new))
                 .build();
