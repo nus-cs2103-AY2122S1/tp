@@ -222,8 +222,7 @@ Examples:
 
 * The student's phone number, parent's name and parent's phone number are optional details for you to include.
 
-> :bulb: TutorAid does not allow you to add duplicate students. A student is considered as a duplicate if he/she has
-> the exact same name (case-insensitive) as an existing student in the app.
+> :bulb: TutorAid does not allow you to add duplicate students. A student is considered as a duplicate if he/she has the exact same name (case-insensitive) as an existing student in the app.
 > For example, TutorAid will consider 'John Doe' and 'john doe' as the same student, but not 'John Doe' and 'John'.
 
 ### Deleting a student : `delete`
@@ -318,7 +317,7 @@ Adds a new lesson.
 
 Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`
 
-* The lesson's capacity, price and timing are optional details for tutors to include.
+* The lesson's capacity, price and timing are optional details for you to include.
 * The lesson name should only contain alphanumeric characters and spaces.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
@@ -326,6 +325,9 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 
 Examples:
 * `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+
+> :bulb: TutorAid does not allow you to add duplicate lessons. A lesson is considered as a duplicate if it has the exact same name (case-insensitive) as an existing lesson in the app.
+> For example, TutorAid will consider 'Maths 1' and 'maths 1' as the same lesson, but not 'Maths 1' and 'Maths'.
 
 ### Deleting a lesson : `del -l`
 {:.no_toc}
