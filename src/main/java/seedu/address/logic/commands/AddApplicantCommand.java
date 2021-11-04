@@ -34,7 +34,7 @@ public class AddApplicantCommand extends Command {
             + PREFIX_POSITION + "software engineer";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in MrTechRecruiter";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in MrTechRecruiter.";
     public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter.";
 
     private final ApplicantParticulars applicantParticulars;
