@@ -308,9 +308,9 @@ Examples:
 * `g Orbital /c`
 
 <div markdown="block" class="alert alert-info">
-:warning: 
+:warning:
 **Only the group create command can be used at other views.
-The rest of group commands below will work only when groups or subgroups are listed.** 
+The rest of group commands below will work only when groups or subgroups are listed.**
 :warning:
 </div>
 
