@@ -133,7 +133,8 @@ public class ShowCommand extends Command {
         List<Student> students = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= students.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, students.size()));
         }
 
         Student matchedStudent = students.get(index.getZeroBased());
