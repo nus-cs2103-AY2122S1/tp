@@ -5,9 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javax.naming.CompositeName;
+
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
+    @Test
+    public void getFeedbackToUser_feedbackPresent_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false, false);
+        assertEquals(commandResult.getFeedbackToUser(), "feedback");
+    }
 
     @Test
     public void isShowHelp_success() {
