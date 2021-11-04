@@ -28,6 +28,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SetDefaultShiftTimingsCommand;
 import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -481,7 +482,8 @@ public class ParserUtil {
      */
     public static LocalTime[] parseTimingsArr(String[] stringTimings) throws ParseException {
         if (stringTimings.length != 4) {
-            throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
         }
 
         LocalTime[] timings = new LocalTime[4];
@@ -494,9 +496,10 @@ public class ParserUtil {
         }
 
         for (int i = 0; i < 3; i++) {
-            // if i > (i + 1)
+            // if check if the timings are in increasing order
             if (timings[i].compareTo(timings[i + 1]) > 0) {
-                throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
             }
         }
 

@@ -39,7 +39,7 @@ public class ViewShiftCommand extends Command {
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " monday-0\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " TUESDAY-1\n"
-            + COMMAND_WORD + " " + PREFIX_DASH_TIME + " wednesday-11:00"
+            + COMMAND_WORD + " " + PREFIX_DASH_TIME + " wednesday-11:00 "
             + PREFIX_DATE + "2020-01-01" + " "
             + PREFIX_DATE + "2022-12-30" + "\n\n";
 
