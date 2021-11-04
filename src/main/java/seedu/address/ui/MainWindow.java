@@ -315,6 +315,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handlePersonGridPanel(Person student) {
         requireNonNull(student);
+        centerPanel.getPersonListView().getSelectionModel().select(student);
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
