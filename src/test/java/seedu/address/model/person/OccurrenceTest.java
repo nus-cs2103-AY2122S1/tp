@@ -25,9 +25,24 @@ public class OccurrenceTest {
     public void isValidOccurrence() {
         // invalid occurrence
         assertFalse(Occurrence.isValidOccurrence(-1));
+        assertFalse(Occurrence.isValidOccurrence("-1"));
+        assertFalse(Occurrence.isValidOccurrence(-100));
+        assertFalse(Occurrence.isValidOccurrence("-100"));
         assertFalse(Occurrence.isValidOccurrence(0));
+        assertFalse(Occurrence.isValidOccurrence("0"));
+        assertFalse(Occurrence.isValidOccurrence(1000)); // occurrence should be less than or equals 999
+        assertFalse(Occurrence.isValidOccurrence("1000"));
+        // large integers
+        assertFalse(Occurrence.isValidOccurrence("1000000000000000000000000000000000000000000000000000000000"));
+        assertFalse(Occurrence.isValidOccurrence("-1000000000000000000000000000000000000000000000000000000000"));
 
         // valid occurrence
         assertTrue(Occurrence.isValidOccurrence(1));
+        assertTrue(Occurrence.isValidOccurrence("1"));
+        assertTrue(Occurrence.isValidOccurrence(100));
+        assertTrue(Occurrence.isValidOccurrence("100"));
+        assertTrue(Occurrence.isValidOccurrence(999));
+        assertTrue(Occurrence.isValidOccurrence("999"));
+
     }
 }
