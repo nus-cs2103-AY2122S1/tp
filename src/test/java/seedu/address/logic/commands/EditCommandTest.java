@@ -203,7 +203,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand =
                 new EditCommand(INDEX_FIRST_PERSON, descriptor, Index.fromZeroBased(0),
-                        new EditTaskCommand.EditTaskDescriptor()
+                        new EditCommand.EditTaskDescriptor()
                 );
 
         assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_TASK);
@@ -225,17 +225,32 @@ public class EditCommandTest {
                 new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, Index.fromZeroBased(0), DESC_TASK_ONE);
         EditCommand editTaskCommandTwo =
                 new EditCommand(INDEX_FIRST_PERSON, DESC_AMY, Index.fromZeroBased(1), DESC_TASK_TWO);
+        EditCommand.EditTaskDescriptor editTaskDescriptorOne = new EditCommand.EditTaskDescriptor();
+        editTaskDescriptorOne.setTaskName(new TaskName("work"));
+        editTaskDescriptorOne.setTaskDate(new TaskDate("2017-12-12"));
+        editTaskDescriptorOne.setTaskTime(new TaskTime("15:30"));
+        editTaskDescriptorOne.setTaskVenue(new Venue("dummy"));
+        EditCommand.EditTaskDescriptor editTaskDescriptorTwo = new EditCommand.EditTaskDescriptor();
+        editTaskDescriptorTwo.setTaskName(new TaskName("sleep"));
+        editTaskDescriptorTwo.setTaskDate(new TaskDate("2017-12-12"));
+        editTaskDescriptorTwo.setTaskTime(new TaskTime("15:30"));
+        editTaskDescriptorTwo.setTaskVenue(new Venue("dummy"));
 
         // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        EditCommand.EditTaskDescriptor editTaskDescriptorOneCopy =
+                new EditCommand.EditTaskDescriptor(editTaskDescriptorOne);
+
         assertEquals(standardCommand, commandWithSameValues);
+        assertEquals(editTaskDescriptorOne, editTaskDescriptorOneCopy);
 
         // same object -> returns true
         assertEquals(standardCommand, standardCommand);
+        assertEquals(editTaskDescriptorOne, editTaskDescriptorOne);
 
         // null -> returns false
         assertNotEquals(null, standardCommand);
+        assertNotEquals(null, editTaskDescriptorOne);
 
         // different types -> returns false
         Command otherCommand = new ClearCommand();
@@ -249,6 +264,7 @@ public class EditCommandTest {
 
         // different task descriptor -> returns false
         assertNotEquals(editTaskCommandOne, standardCommand);
+        assertNotEquals(editTaskDescriptorOne, editTaskDescriptorTwo);
 
         // different target task index -> returns false
         assertNotEquals(editTaskCommandTwo, editTaskCommandOne);

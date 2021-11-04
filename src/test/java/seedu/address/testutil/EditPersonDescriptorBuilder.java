@@ -112,6 +112,10 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    public EditPersonDescriptorBuilder withImportance(String importance) {
+        descriptor.setImportance(Boolean.parseBoolean(importance));
+        return this;
+    }
 
     public EditPersonDescriptor build() {
         return descriptor;

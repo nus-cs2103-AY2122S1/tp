@@ -197,32 +197,18 @@ Format: `sort [-r]`
 
 Finds persons whose attribute (specified by the flag given) matches any of the given keywords.
 
-<<<<<<< HEAD
-Format: `find [FLAG] KEYWORD [MORE_KEYWORDS]…​`
-
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords matters. e.g. `Hans Bo` will not match `Bo Hans`
-* Only the specified attribute is searched.
-* Abbreviations will be matched e.g. `Han` will match `Hans`
-* Persons matching all the keywords will be returned.
-  e.g. `A Y` will return `Alex Yeoh`, `Alexandra Yee`
-
-Example:
-* `find [-n] Alex` Finds all people whose name matches the keyword "Alex".
-![result for 'find [-n] Alex'](images/findAlexResult.png)
-=======
 Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l LABEL] [-tn TASK_NAME]`
 
-* The search is case-insensitive. e.g. hans will match Hans
-* The order of the keywords matters. e.g. Hans Bo will not match Bo Hans
+* The search is case-insensitive. e.g. hans will match Hans.
+* The order of the keywords matters. e.g. Hans Bo will not match Bo Hans.
 * Only the specified attribute is searched.
-* Abbreviations will be matched e.g. Han will match Hans
-* Persons matching all the keywords will be returned. e.g. A Y will return Alex Yeoh, Alexandra Yee
+* At least one of the optional fields is required.
+* Abbreviations will be matched e.g. Han will match Hans.
+* Persons matching all the keywords will be returned. e.g. A Y will return Alex Yeoh, Alexandra Yee.
 
 Examples:
->>>>>>> origin/master
 
-find [-n] Alex Finds all people whose name matches the keyword "Alex".
+`find [-n] Alex` Finds all people whose name matches the keyword "Alex".
 ![result for find -n Alex](images/findResult.png)
 
 ### Adding a task: `add`
@@ -304,34 +290,24 @@ Examples:
 
 1. Displays a list of tasks that has been attached to a specific person.
 
-   Format: `cat INDEX`
+Format: `cat INDEX`
 
-<<<<<<< HEAD
 ### Viewing list of tasks of a person: `cat`
 
 Shows you a list of tasks that has been attached to a specific person.
 
 Format: `cat INDEX [-f KEYWORDS]`
 
-* Displays the list of tasks attached to the person at the specified`INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
-* If you give the optional arguments, you can see tasks in the task list that match the given keyword(s).
-
-Examples:
-* `cat 1` Displays the list of tasks attached to the 1st person.
-![result for 'cat 1'](images/cat1Result.png)
-* `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
-![result for 'cat 1 -f work'](images/cat1-fworkResult.png)
-=======
    * Displays the list of tasks attached to the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the displayed person list.
    * `INDEX` **must be a positive integer** 1, 2, 3, ...
 
    Examples:
 
-   * `ls` followed by delete 2 deletes the 2nd person in the address book.
-   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.
+   * `cat 1` Displays the list of tasks attached to the 1st person.
+   ![result for 'cat 1'](images/cat1Result.png)
+   * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
+   ![result for 'cat 1 -f work'](images/cat1-fworkResult.png)
 
 
 2. Displays a filtered list of tasks that has been attached to a specific person.
@@ -353,7 +329,6 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!
     </div>
->>>>>>> origin/master
 
 ### Setting the number of days before tasks are considered due soon: `reminder`
 
