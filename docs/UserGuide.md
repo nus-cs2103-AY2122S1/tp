@@ -166,7 +166,7 @@ An **Order** refers to a product that the client has ordered. For each order, th
 Parameter | Format |
 |:---:| --- |
 `-n` | Any valid name, only alphabets, numbers and spaces are allowed (applicable for Edit command only). <br> E.g.: `-n Alice Bob`.
-`-pn` | A series of 8 positive numbers from 0 to 9. <br> E.g.: `-pn 12345678`.
+`-pn` | A series of 1 or more positive integers from 0 to 9. <br> E.g.: `-pn 12345678` and `-pn 123` is valid.
 `-e` | Any valid email. <br> E.g.: `-e abc@asdf.com`.
 `-a` | Any valid address, spaces are allowed. <br> E.g.: `-a 12 clementi road`.
 `-o` | Each order requires a product id, quantity and a date field that is either in `YYYY/MM/DD` or `MM/DD` and is identified by its own ID. <br> E.g.: `-o 1 1 1/2` and `-o 3 12 2020/07/09`.
