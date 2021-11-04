@@ -249,8 +249,8 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 
 
 ### Datetime for interview 
-The `Interview` class accepts `y-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
-- `y` : year-of-era, e.g. `2021`, `21`
+The `Interview` class accepts `yyyy-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
+- `yyyy` : year-of-era in 4 digits, e.g. `2021`
 - `M` : month-of-year, e.g. `7`, `07`
 - `d` : day-of-month, e.g. `10`
 - `H` : hour-of-day (0-23), e.g. `0`
