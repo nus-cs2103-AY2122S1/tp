@@ -15,7 +15,7 @@ public class FriendName {
     /**
      * Non-empty, alpha-numeric, multi-word string with a max limit of 20 characters.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]{1,20}$";
+    public static final String VALIDATION_REGEX = "^[^ -][^-]{0,19}$";
 
     public final String fullName;
 

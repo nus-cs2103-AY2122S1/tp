@@ -27,15 +27,18 @@ public class FriendNameTest {
 
         // invalid name
         assertFalse(FriendName.isValidName("")); // empty string
-        assertFalse(FriendName.isValidName(" ")); // spaces only
-        assertFalse(FriendName.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(FriendName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(FriendName.isValidName("    ")); // spaces only
+        assertFalse(FriendName.isValidName("----")); // hyphen only characters
+        assertFalse(FriendName.isValidName("peter-jack")); // contains hyphen characters
+        assertFalse(FriendName.isValidName("peter jack peter jack peter jack")); // longer than 20 chars
 
         // valid name
-        assertTrue(FriendName.isValidName("peter jack")); // alphabets only
-        assertTrue(FriendName.isValidName("12345")); // numbers only
-        assertTrue(FriendName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(FriendName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(FriendName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(FriendName.isValidName("Peter123")); // single word
+        assertTrue(FriendName.isValidName("Peter jack123")); // multi-word
+        assertTrue(FriendName.isValidName("`~!@#$%^&*()-_=+[{]}")); // all special characters available
+        assertTrue(FriendName.isValidName("\\|;:'\",<.>/?")); // on an average keyboard
+        assertTrue(FriendName.isValidName("Peter jack#123 @<>")); // with special characters
+        assertTrue(FriendName.isValidName("p")); // short name - 1 char
+        assertTrue(FriendName.isValidName("David Roger Evans Jr")); // long names - 20 chars
     }
 }

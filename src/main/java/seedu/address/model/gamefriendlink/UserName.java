@@ -16,7 +16,7 @@ public class UserName {
      * The username must not be blank, empty, whitespace or contain a '-'. Max limit of 20 characters.
      * This is to avoid any flags being inserted in the username.
      */
-    public static final String VALIDATION_REGEX = "^[^-]{1,20}$";
+    public static final String VALIDATION_REGEX = "^[^ -][^-]{0,19}$";
 
     public final String value;
 
