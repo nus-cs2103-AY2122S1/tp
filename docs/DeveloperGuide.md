@@ -873,16 +873,19 @@ testers are expected to do more *exploratory* testing.
     9. Test case: `edit 1 t/covid`<br>
        Expected: First patient's tag is edited to `covid`. Details of the edited patient are shown in the status message.
 
-    10. Test case: `edit 1 risk/HIGH`<br>
+    10. Test case: `edit 1 t/`<br>
+        Expected: First patient's tags are deleted. Details of the edited patient are shown in the status message.
+
+    11. Test case: `edit 1 risk/HIGH`<br>
         Expected: First patient's risk is edited to `HIGH`. Details of the edited patient are shown in the status message.
 
-    11. Test case: `edit 1 risk/ABC`<br>
+    12. Test case: `edit 1 risk/ABC`<br>
         Expected: No patient is edited. Error details are shown in the status message: "Risks should only be either HIGH, MEDIUM OR LOW".
 
-    12. Test case: `edit 0 hp/91234567`<br>
+    13. Test case: `edit 0 hp/91234567`<br>
         Expected: No patient is edited. Error details are shown in the status message: "Invalid command format...".
 
-    13. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+    14. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
         Expected: No patient is edited. Error details are shown in the status message.
 
 2. Editing a patient while some patients are being shown
@@ -902,7 +905,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `list`<br>
        Expected: All existing patients are listed.
 
-    3. Test case: `list`<br>
+    3. Test case: `list extra-parameters`<br>
        Expected: All existing patients are listed.
 
 ### Adding a doctor <a name="add-doctor-manual-testing"/>
@@ -939,10 +942,13 @@ testers are expected to do more *exploratory* testing.
     9. Test case: `edit 1 t/experienced`<br>
        Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
 
-    10. Test case: `edit 0 hp/91234567`<br>
+    10. Test case: `edit 1 t/`<br>
+        Expected: First doctor's tags are deleted. Details of the edited doctor are shown in the status message.
+
+    11. Test case: `edit 0 hp/91234567`<br>
         Expected: No doctor is edited. Error details are shown in the status message: "Invalid command format...".
 
-    11. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+    12. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
         Expected: No doctor is edited. Error details are shown in the status message.
 
 2. Editing a doctor while some doctors are being shown
@@ -962,7 +968,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `list`<br>
        Expected: All existing doctors are listed.
 
-    3. Test case: `list`<br>
+    3. Test case: `list extra-parameters`<br>
        Expected: All existing doctors are listed.
 
 ### Adding an appointment <a name="appointment"/>
