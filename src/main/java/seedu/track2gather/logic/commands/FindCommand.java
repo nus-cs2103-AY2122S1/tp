@@ -23,14 +23,14 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who fulfills the "
-            + "criteria specified by the user. " + "User should specify only one parameter from the "
-            + "following: "
-            + "1. Name: \"" + PREFIX_NAME + "\" KEYWORD [MORE_KEYWORDS] "
-            + "2. Phone: \"" + PREFIX_PHONE + "\" KEY_NUMBERS [MORE_KEY_NUMBERS] "
-            + "3. Case Number: \"" + PREFIX_CASE_NUMBER + "\" KEY_NUMBERS [MORE_KEY_NUMBERS] "
-            + "4. Shn Period (start): \"" + PREFIX_SHN_PERIOD_START + "\" KEY_DATE [MORE_KEY_DATES] "
-            + "5. Shn Period (end): \"" + PREFIX_SHN_PERIOD_END + "\" KEY_DATE [MORE_KEY_DATES] \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice bob charlie";
+            + "criteria specified by the user.\n"
+            + "Parameters (indicate only 1): "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_CASE_NUMBER + "CASE NUMBER] "
+            + "[" + PREFIX_SHN_PERIOD_START + "SHN_START_DATE] "
+            + "[" + PREFIX_SHN_PERIOD_END + "SHN_END_DATE]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "91";
 
     private final Predicate<Person> predicate;
 
@@ -47,7 +47,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override

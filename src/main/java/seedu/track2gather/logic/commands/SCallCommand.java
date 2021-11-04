@@ -23,7 +23,7 @@ public class SCallCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_CALL_PERSON_SUCCESS =
-        "Successfully called Person: %s; non-compliance counter: %d";
+        "Successfully called Person: %s (Case No. %s) with %d past failed call attempt(s)";
 
     private final Index targetIndex;
 
@@ -50,8 +50,8 @@ public class SCallCommand extends Command {
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         model.setPerson(personToIncrement, newPerson);
 
-        return new CommandResult(String.format(MESSAGE_CALL_PERSON_SUCCESS, newPerson.getCaseNumber(),
-            newPerson.getCallStatus().getNumFailedCalls()));
+        return new CommandResult(String.format(MESSAGE_CALL_PERSON_SUCCESS, newPerson.getName(),
+                newPerson.getCaseNumber(), newPerson.getCallStatus().getNumFailedCalls()));
     }
 
     @Override

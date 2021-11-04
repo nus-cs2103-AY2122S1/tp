@@ -32,7 +32,7 @@ public class TShiftCommandTest {
 
         TShiftCommand tShiftCommand = new TShiftCommand(days);
         CommandResult commandResult = tShiftCommand.execute(model);
-        String expectedMessage = TShiftCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(TShiftCommand.MESSAGE_SUCCESS, days);
         assertEquals(commandResult.getFeedbackToUser(), expectedMessage);
     }
 
@@ -42,7 +42,7 @@ public class TShiftCommandTest {
 
         TShiftCommand tShiftCommand = new TShiftCommand(days);
         CommandResult commandResult = tShiftCommand.execute(model);
-        String expectedMessage = TShiftCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(TShiftCommand.MESSAGE_SUCCESS, days);
         assertEquals(commandResult.getFeedbackToUser(), expectedMessage);
     }
 

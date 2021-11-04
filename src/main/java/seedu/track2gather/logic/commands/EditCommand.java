@@ -1,6 +1,7 @@
 package seedu.track2gather.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.track2gather.commons.core.Messages.MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_HOME_ADDRESS;
@@ -50,21 +51,22 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_CASE_NUMBER + "CASE NUMBER] "
-            + "[" + PREFIX_HOME_ADDRESS + "HOME ADDRESS] "
-            + "[" + PREFIX_WORK_ADDRESS + "WORK ADDRESS] "
-            + "[" + PREFIX_QUARANTINE_ADDRESS + "QUARANTINE ADDRESS] "
-            + "[" + PREFIX_SHN_PERIOD + "SHN PERIOD] "
-            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NEXT OF KIN NAME] "
-            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NEXT OF KIN PHONE] "
-            + "[" + PREFIX_NEXT_OF_KIN_ADDRESS + "NEXT OF KIN ADDRESS] "
+            + "[" + PREFIX_CASE_NUMBER + "CASE_NUMBER] "
+            + "[" + PREFIX_HOME_ADDRESS + "HOME_ADDRESS] "
+            + "[" + PREFIX_WORK_ADDRESS + "WORK_ADDRESS] "
+            + "[" + PREFIX_QUARANTINE_ADDRESS + "QUARANTINE_ADDRESS] "
+            + "[" + PREFIX_SHN_PERIOD + "SHN_PERIOD] "
+            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NEXT_OF_KIN_NAME] "
+            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NEXT_OF_KIN_PHONE] "
+            + "[" + PREFIX_NEXT_OF_KIN_ADDRESS + "NEXT_OF_KIN_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s\n"
+            + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the contacts list.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This case number already exists in the contacts list.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

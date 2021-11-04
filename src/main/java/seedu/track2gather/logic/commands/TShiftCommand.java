@@ -20,7 +20,8 @@ public class TShiftCommand extends Command {
             + "Parameters: [PLUS_MINUS_SIGN]DAYS\n"
             + "Example: " + COMMAND_WORD + " 3";
 
-    public static final String MESSAGE_SUCCESS = "All SHN end dates have been shifted accordingly.";
+    public static final String MESSAGE_SUCCESS = "The SHN end dates of all currently displayed person(s) have been "
+            + "shifted by %d day(s).\n";
     public static final String MESSAGE_TSHIFT_BY_ZERO = "Number of days to shift the SHN end dates by should not be 0.";
     public static final String MESSAGE_BEYOND_LIMIT = "Magnitude of shift should not be larger than %d days.";
     public static final int MAX_ABS_DAYS_VALUE = 90;
@@ -52,7 +53,7 @@ public class TShiftCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, days));
     }
 
     /**

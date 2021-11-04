@@ -53,7 +53,7 @@ public class DeleteCommandTest {
         indicesMultiplePersons.add(INDEX_SECOND_PERSON);
         DeleteCommand deleteCommand = new DeleteCommand(indicesMultiplePersons);
 
-        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "; "
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "\n"
                 + secondPersonToDelete;
 
         ModelManager expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
@@ -72,7 +72,7 @@ public class DeleteCommandTest {
         indicesMultiplePersons.add(INDEX_FIRST_PERSON);
         DeleteCommand deleteCommand = new DeleteCommand(indicesMultiplePersons);
 
-        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "; "
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "\n"
                 + secondPersonToDelete;
 
         ModelManager expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
@@ -93,8 +93,8 @@ public class DeleteCommandTest {
         indicesMultiplePersons.add(INDEX_SECOND_PERSON);
         DeleteCommand deleteCommand = new DeleteCommand(indicesMultiplePersons);
 
-        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "; "
-                + secondPersonToDelete + "; " + thirdPersonToDelete;
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "\n"
+                + secondPersonToDelete + "\n" + thirdPersonToDelete;
 
         ModelManager expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
         expectedModel.deletePerson(firstPersonToDelete);
