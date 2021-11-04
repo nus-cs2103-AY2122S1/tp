@@ -170,4 +170,19 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
     }
 
+    @Test
+    public void notifyUserProfileWatchers_noInputs_success() {
+        boolean passed = false;
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+
+        try {
+            EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+            passed = true;
+        } catch (RuntimeException e){
+            assertTrue(passed);
+        }
+
+        assertTrue(passed);
+    }
 }
