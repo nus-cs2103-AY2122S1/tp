@@ -15,6 +15,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
@@ -83,6 +84,7 @@ public class DeleteTaskCommand extends Command {
 
         model.deleteTask(taskToDelete);
         model.updateLessonWithAttendeesList();
+        model.setViewingType(ViewingType.SCHEDULE);
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 

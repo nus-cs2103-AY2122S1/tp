@@ -23,6 +23,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.id.UniqueIdMapper;
@@ -96,6 +97,8 @@ public class EditPersonCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateLessonWithAttendeesList();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPersonToView(editedPerson);
+        model.setViewingType(ViewingType.PERSON);
         return new CommandResult(String.format(successMsg, editedPerson));
     }
 
