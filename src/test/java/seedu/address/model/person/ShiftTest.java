@@ -15,10 +15,12 @@ import org.junit.jupiter.api.Test;
 
 public class ShiftTest {
 
+    private static final LocalTime DIFFERENT_SHIFT_TIME = LocalTime.of(10, 10);
+    private static final LocalTime DIFFERENT_SHIFT_TIME_END = LocalTime.of(11, 11);
+
     private Shift firstShift = new Shift(DayOfWeek.MONDAY, Slot.MORNING);
     private Shift secondShift = new Shift(DayOfWeek.TUESDAY, Slot.AFTERNOON);
-    private LocalTime DIFFERENT_SHIFT_TIME = LocalTime.of(10, 10);
-    private LocalTime DIFFERENT_SHIFT_TIME_END = LocalTime.of(11, 11);
+
 
     @Test
     public void isMorningTest() {
