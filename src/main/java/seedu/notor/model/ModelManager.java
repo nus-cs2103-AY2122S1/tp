@@ -135,6 +135,7 @@ public class ModelManager implements Model {
             notor.findGroup(subGroup).removePerson(target);
         }
         notor.removePerson(target);
+        updateGroups(target);
     }
 
     @Override
@@ -146,6 +147,7 @@ public class ModelManager implements Model {
     @Override
     public void archivePerson(Person person) {
         notor.archivePerson(person);
+        updateGroups(person);
     }
 
     @Override
@@ -157,6 +159,25 @@ public class ModelManager implements Model {
             if (notor.hasPerson(person)) {
                 notor.removePerson(person);
             }
+        }
+    }
+
+    private void updateGroups(Person person) {
+        for (String subGroup : person.getDisplaySubGroups()) {
+            SubGroup group = (SubGroup) findGroup(subGroup);
+            if (group == null) {
+                continue;
+            }
+            person.removeSubGroup(group);
+            group.removePerson(person);
+        }
+        for (String superGroup : person.getDisplaySuperGroups()) {
+            Group group = findGroup(superGroup);
+            if (group == null) {
+                continue;
+            }
+            person.removeSuperGroup(superGroup);
+            group.removePerson(person);
         }
     }
 
@@ -261,6 +282,7 @@ public class ModelManager implements Model {
 
     /**
      * Replace the List with SubGroups.
+     *
      * @param i the Index i of the SuperGroup.
      */
     public void listSubGroup(Index i) {
@@ -269,7 +291,7 @@ public class ModelManager implements Model {
         isArchiveList = false;
         // TODO: Abstract this. This method is too long.
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups().get(i.getZeroBased()).getSubGroups()
-            .asUnmodifiableObservableList());
+                .asUnmodifiableObservableList());
     }
 
     @Override
