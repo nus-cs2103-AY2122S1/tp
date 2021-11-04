@@ -15,7 +15,19 @@
   }, {
     "name": "Janice Paula",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "email": "Janice@example.com",
+    "role": "Preschool Teacher",
+    "employmentType": "Part time",
+    "expectedSalary": "7500",
+    "levelOfEducation": "PhD",
+    "experience": "1",
+    "interview": "-",
+    "notes": "-",
+    "done": "Not Done"
+  }, {
+    "name": "Annie Paul",
+    "phone": "99009900",
+    "email": "Janice@example.com",
     "role": "Preschool Teacher",
     "employmentType": "Part time",
     "expectedSalary": "7500",

@@ -186,4 +186,18 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Generates a duplicate applicant error message using {@code duplicates} as existing duplicate applicants
+     * and {@code toCheck} as the applicant to be checked for duplicates.
+     */
+    public static String generateDuplicateErrorMessage(String message, Person toCheck, Person ... duplicates) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Person duplicate : duplicates) {
+            stringBuilder.append(duplicate);
+        }
+        return message + toCheck
+                + " shares either the same phone number or email as the following applicant(s):\n"
+                + stringBuilder;
+    }
+
 }

@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "find_command:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find n/Alex y/0")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find n/Alex y/0")
+activate AddressBookParser
+
+create FindCommandParser
+
+
+AddressBookParser -> FindCommandParser: FindCommandParser()
+activate FindCommandParser
+
+FindCommandParser --> AddressBookParser
+
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse(" n/Alex y/0")
+activate FindCommandParser
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand
+
+FindCommand --> FindCommandParser : find_command
+deactivate FindCommand
+
+FindCommandParser --> AddressBookParser :find_command
+deactivate FindCommandParser
+
+AddressBookParser --> LogicManager : find_command
+
+deactivate AddressBookParser
+
+destroy FindCommandParser
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> FindCommand :
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

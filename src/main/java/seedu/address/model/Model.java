@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -58,6 +59,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns first occurrence of a person (if any) with same identity as {@code person} in the address book.
+     */
+    List<Person> getDuplicate(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -92,8 +98,20 @@ public interface Model {
     void markPerson(Person target);
 
     /**
+     * Checks if the given person has already been marked "Done".
+     * The person must exist in the address book.
+     */
+    boolean checkForMarkedPerson(Person target);
+
+    /**
      * Unmarks the given person.
      * The person must exist in the address book.
      */
     void unmarkPerson(Person target);
+
+    /**
+     * Checks if the given person has already been unmarked "Not Done".
+     * The person must exist in the address book.
+     */
+    boolean checkForUnmarkedPerson(Person target);
 }

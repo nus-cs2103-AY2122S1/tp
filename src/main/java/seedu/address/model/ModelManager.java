@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -95,6 +96,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Person> getDuplicate(Person person) {
+        requireNonNull(person);
+        return addressBook.getDuplicate(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -156,9 +163,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean checkForMarkedPerson(Person target) {
+        requireAllNonNull(target);
+        return addressBook.checkForMarkedPerson(target);
+    }
+
+    @Override
     public void unmarkPerson(Person target) {
         requireAllNonNull(target);
         addressBook.unmarkPerson(target);
+    }
+
+    @Override
+    public boolean checkForUnmarkedPerson(Person target) {
+        requireAllNonNull(target);
+        return addressBook.checkForUnmarkedPerson(target);
     }
 
 }

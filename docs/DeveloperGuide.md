@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
 ```AddressBook```. A ```List``` of unique ```String``` objects is created, with ```String``` content depending on
-the prefix provided by the user. 
+the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
@@ -185,7 +185,36 @@ The following sequence diagram shows how the show operation works.
 ![images](images/ShowCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+   
+### Find feature
 
+The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
+input. This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```find``` command:
+
+![images](images/FindCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
+
+Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ` n/Alex y/0`.
+
+Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
+to identify the predicates present in ` n/Alex y/0`. `FindCommandParser#parse()` then initializes a
+`FindCommand` with the predicates as argument.
+
+Step 3. `FindCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
+and filters for applicants that have `Alex` in their names and `0` year of experience.
+
+Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+![images](images/FindCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `FindCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Filter interview feature
 
@@ -215,7 +244,7 @@ This instance is returned and propagated back to `LogicManager`.
 Step 5. `FilterInterviewPastCommand#execute()` is then called by `LogicManager`, which will in turn call `Model#updateFilteredPersonList()`
 and filters for applicants that have interviews that have already passed. 
  
-Step 6. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
+Step 6. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants
 have interviews that have passed. This `CommandResult` is then returned.
 
 The following sequence diagram shows how the filter interview operation works.
@@ -223,6 +252,63 @@ The following sequence diagram shows how the filter interview operation works.
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+#### Design considerations:
+
+**Aspect: User command to use in filtering interviews:**
+
+* **Alternative 1 (current choice):** Separate command for filtering interviews
+    * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
+    * Pros: Easy to use for user, only has two inputs it can take.
+    * Cons: Harder to implement than adding to `find` command.
+    * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
+
+* **Alternative 2:** Part of `find` command functionality
+    * Pros: Easy to implement
+    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
+    * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
+    types of inputs.
+
+### Unmark feature
+
+The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
+```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
+
+The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
+![images](images/UnmarkCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
+
+Step 1. A valid command `unmark 3` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ` 3`.
+
+Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
+to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
+`UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
+
+Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
+
+Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+![images](images/UnmarkCommandSequenceDiagram.png)
+
+
+### Datetime for interview 
+The `Interview` class accepts `yyyy-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
+- `yyyy` : year-of-era in 4 digits, e.g. `2021`
+- `M` : month-of-year, e.g. `7`, `07`
+- `d` : day-of-month, e.g. `10`
+- `H` : hour-of-day (0-23), e.g. `0`
+- `m` : minute-of-hour, e.g. `30`
+
+`Interview#isValidInterviewTime` uses `java.time.format.DateTimeFormatter` to generate a formatter using `Interview#PARSE_FORMAT`,
+and checks for `DateTimeParseException` when parsing the input with the formatter via `LocalDate#parse()`. 
+
+The `display()` method uses `java.text.DateFormat` and returns the formatted time which is displayed GUI.
+
+For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a person John with interview time shown as `Jan 01 2021, 10:30`.
 
 --------------------------------------------------------------------------------------------------------------------
 

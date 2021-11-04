@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.done.Done;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -34,6 +36,14 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns first occurrence of a person (if any) with same identity as {@code person} in the address book.
+     */
+    public List<Person> getDuplicate(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(x -> x.isSamePerson(toCheck)).collect(Collectors.toList());
     }
 
     /**
@@ -115,6 +125,23 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Done" returns true; false otherwise.
+     */
+    public boolean checkForMarkedPerson(Person toCheck) {
+        requireNonNull(toCheck);
+
+        int index = internalList.indexOf(toCheck);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person markedPerson = internalList.get(index);
+        return markedPerson.getDone().equals(Done.DONE);
+
+    }
+
+    /**
      * Unmarks the status of the person in the list to "Not Done".
      */
     public void unmarkPerson(Person toUnmark) {
@@ -128,6 +155,23 @@ public class UniquePersonList implements Iterable<Person> {
         Person unmarkedPerson = internalList.get(index);
         unmarkedPerson.getDone().setAsUndone();
         internalList.set(index, unmarkedPerson);
+
+    }
+
+    /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Not Done" returns true; false otherwise.
+     */
+    public boolean checkForUnmarkedPerson(Person toCheck) {
+        requireNonNull(toCheck);
+
+        int index = internalList.indexOf(toCheck);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person markedPerson = internalList.get(index);
+        return markedPerson.getDone().equals(Done.UNDONE);
 
     }
 
