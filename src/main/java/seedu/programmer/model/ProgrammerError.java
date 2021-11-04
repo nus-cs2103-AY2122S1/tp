@@ -9,9 +9,7 @@ import seedu.programmer.model.student.DisplayableObject;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.UniqueStudentList;
-import seedu.programmer.model.student.exceptions.DuplicateStudentEmailException;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
-import seedu.programmer.model.student.exceptions.DuplicateStudentIdException;
 
 /**
  * Wraps all data at the programmer-book level
@@ -49,7 +47,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      * {@code students} must not contain duplicate students.
      * @throws DuplicateStudentException if {@code students} contains duplicate students.
      */
-    public void setStudents(List<Student> students) throws DuplicateStudentEmailException, DuplicateStudentIdException {
+    public void setStudents(List<Student> students) throws DuplicateStudentException {
         this.students.setStudents(students);
     }
 

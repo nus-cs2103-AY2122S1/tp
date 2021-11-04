@@ -9,8 +9,6 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Student;
-import seedu.programmer.model.student.exceptions.DuplicateStudentEmailException;
-import seedu.programmer.model.student.exceptions.DuplicateStudentIdException;
 
 /**
  * Adds a student to ProgrammerError.
@@ -53,15 +51,15 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-//        if (model.hasSameStudentId(toAdd) && model.hasSameStudentEmail(toAdd)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-
-        if (model.hasSameStudentEmail(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
+        if (model.hasStudent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
-        if (model.hasSameStudentId(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
-        }
+////        if (model.hasSameStudentId(toAdd) && model.hasSameStudentEmail(toAdd)) {
+////            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+//
+//        if (model.hasSameStudentId(toAdd)) {
+//            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
+//        }
 
         model.addStudent(toAdd);
         model.setSelectedStudent(toAdd);
