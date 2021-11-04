@@ -9,13 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 public class ResultPopup extends UiPart<Region> {
 
     private static final String FXML = "ResultPopup.fxml";
 
-    private static final int POPUP_DISPLAY_DURATION_SECONDS = 3;
+    private static final int POPUP_DISPLAY_DURATION_SECONDS = 6;
 
     private Stage primaryStage;
 
@@ -40,7 +41,14 @@ public class ResultPopup extends UiPart<Region> {
      * Displays popup on primary stage for POPUP_DISPLAY_DURATION_SECONDS.
      */
     public void show() {
-        popup.show(primaryStage);
+        Window window = primaryStage.getScene().getWindow();
+
+        result.setPrefSize(window.getWidth() * 0.75, window.getHeight() * 0.25);
+
+        double x = window.getX() + window.getWidth() * 0.125;
+        double y = window.getY() + window.getHeight() * 0.25;
+        popup.show(primaryStage, x, y);
+
         PauseTransition delay = new PauseTransition(Duration.seconds(POPUP_DISPLAY_DURATION_SECONDS));
         delay.setOnFinished(event -> popup.hide());
         delay.play();

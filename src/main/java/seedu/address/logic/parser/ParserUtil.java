@@ -119,7 +119,7 @@ public class ParserUtil {
     public static Note parseNote(String note) {
         requireNonNull(note);
         String trimmedNote = note.trim();
-        return new Note(note);
+        return new Note(trimmedNote);
     }
 
     /**

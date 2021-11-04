@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
+
 import seedu.address.model.CsBook;
 import seedu.address.model.ReadOnlyCsBook;
 import seedu.address.model.assessment.Assessment;
@@ -67,11 +69,19 @@ public class SampleDataUtil {
     }
 
     private static Group[] getSampleGroups() {
-        return new Group[]{
-            new Group(new GroupName("CS2103T"), new Description("SWE Module")),
-            new Group(new GroupName("CS2101"), new Description("Communications Module")),
-            new Group(new GroupName("CS2103T Consult Group 1"), new Description("Consultion group 1 for CS2103T"))
-        };
+        Group cs2103T = new Group(new GroupName("CS2103T"), new Description("SWE Module"));
+        cs2103T.addAllStudentNames(Arrays.asList(new Name("Alex Yeoh"),
+                new Name("David Li"), new Name("Edgar Oliveiro")));
+
+        Group cs2101 = new Group(new GroupName("CS2101"), new Description("Communications Module"));
+        cs2101.addAllStudentNames(Arrays.asList(new Name("Bernice Yu"),
+                new Name("Charlotte Oliveiro"), new Name("Irfan Ibrahim")));
+
+        Group cs2103TConsultGroup = new Group(new GroupName("CS2103T Consult Group 1"),
+                new Description("Consultion group 1 for CS2103T"));
+        cs2103TConsultGroup.addStudentName(new Name("Roy Balakrishnan"));
+
+        return new Group[]{cs2103T, cs2101, cs2103TConsultGroup};
     }
 
     public static ReadOnlyCsBook getSampleCsBook() {

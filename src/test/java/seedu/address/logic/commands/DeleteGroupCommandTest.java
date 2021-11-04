@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalStudents.getTypicalCsBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -21,7 +22,12 @@ import seedu.address.model.group.GroupName;
  */
 public class DeleteGroupCommandTest {
 
-    private Model model = new ModelManager(getTypicalCsBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalCsBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_validGroup_success() {
@@ -33,7 +39,6 @@ public class DeleteGroupCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
         expectedModel.deleteGroup(groupToDelete);
-
         assertCommandSuccess(deleteGroupCommand, model, expectedMessage, expectedModel);
     }
 
