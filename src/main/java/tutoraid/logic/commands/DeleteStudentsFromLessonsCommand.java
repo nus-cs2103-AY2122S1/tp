@@ -13,7 +13,9 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
+import tutoraid.model.lesson.LessonName;
 import tutoraid.model.student.Student;
+import tutoraid.model.student.StudentName;
 
 
 /**
@@ -175,16 +177,18 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(HIGH);
 
-        StringBuilder namesOfStudents = new StringBuilder();
-        StringBuilder namesOfLessons = new StringBuilder();
-
-        for (Student student : studentsToEdit) {
-            namesOfStudents.append(student.toNameString()).append("\n");
-        }
-
-        for (Lesson lesson : lessonsToEdit) {
-            namesOfLessons.append(lesson.nameAsString()).append("\n");
-        }
+        String namesOfStudents = studentsToEdit.stream()
+                .map(Student::getStudentName)
+                .map(StudentName::toString)
+                .reduce("", (student1, student2) -> !student1.equals("")
+                        ? student1 + "\n" + student2
+                        : student2);
+        String namesOfLessons = lessonsToEdit.stream()
+                .map(Lesson::getLessonName)
+                .map(LessonName::toString)
+                .reduce("", (lesson1, lesson2) -> !lesson1.equals("")
+                        ? lesson1 + "\n" + lesson2
+                        : lesson2);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, namesOfStudents, namesOfLessons));
     }
