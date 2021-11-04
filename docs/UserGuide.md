@@ -18,7 +18,7 @@ title: User Guide
     * [Add Grade](#adding-grades-for-an-assessment--grade)
     * [Edit Attendance](#editing-a-students-studio-attendance-attendance)
     * [Edit Participation](#editing-a-students-studio-participation-participation)
-  * [Visualizing Data](#visualizing-data-in-academy-directory)
+  * [Visualizing Tools](#visualization-tools)
     * [View student information](#viewing-all-related-information-of-a-student-view)
     * [Show Grade](#displaying-the-grades-for-an-assessment--show)
     * [Visualize all Grades](#visualizing-assessments-grades-of-the-entire-class-visualize)
@@ -64,20 +64,20 @@ Academy Directory is developed as an evolution of the Address Book 3 application
 ## Information about this User Guide
 ### Purpose
 This user guide aims to: 
-- Provide first-time users on how to use Academy Directory
+- Provide first-time users with information on how to use Academy Directory
 - Show [details of all commands](#features) should users face any issues using any
 of the command in Academy Directory
 - Answer some of the [frequently asked questions](#faq)
 - Provide a [summary of all commands](#command-summary) supported by Academy Directory
 
 ### Target Audience
-The current iteration of Academy Directory is specifically designed for 
-**CS1101S Avengers**. Therefore, the main target audience of this user guide are CS1101S avengers.
-As such, the following assumptions are made regarding the target audience:
-- Can type fast and are comfortable using a CLI
-- Is comfortable downloading and installing software such as Java 11
-onto their system
-- Is familiar with the common terms relating to Computer Science
+The current version of Academy Directory is specifically designed for 
+**CS1101S Avengers**. Therefore, the main Target Audience of this user guide are CS1101S Avengers.
+As such, the following assumptions are made regarding the Target Audience:
+- Can type fast and are comfortable using a CLI.
+- Is comfortable downloading and installing software such as Java 11.
+onto their system.
+- Is familiar with the common terms relating to Computer Science.
 - Is familiar with CS1101S module structure and teaching pedagogy.
 
 While some technical background is assumed, we also provide the definitions for
@@ -88,11 +88,11 @@ certain technical terms commonly used in this user guide [here](#glossary).
 ## Quick Start
 This section provides instructions to begin using Academy Directory.
 
-1. Ensure you have Java `11` or above installed in your Computer. Academy Directory has been tested on Java `11`.
+1. Ensure you have Java `11` or above installed in your Computer. Academy Directory has been tested on Java `11` and running on other versions might result in **bugs**.
 
-2. Download the file _(link to the latest JAR will be available upon completion of v1.3)_ to the folder you want to use as the _home folder_ for your Academy Directory.
+2. Download the latest release [here](https://github.com/AY2122S1-CS2103T-T15-3/tp/releases) to the folder you want to use as the _home folder_ for your Academy Directory.
 
-3. From the command line, navigate to the folder used as *home folder* for academy directory and run `java -jar academydirectory.jar`. 
+3. From the CLI, navigate to the folder used as *home folder* for Academy Directory and run `java -jar academydirectory.jar`. Ensure that the `.jar` file is named `academydirectory.jar`, otherwise the command will not work. 
 A GUI similar to the below image should appear in a few seconds. Note how the app already contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -151,6 +151,8 @@ For better reading experience, please be familiar with the command format (shown
 
 </div>
 
+***
+
 ### Managing students' personal details
 #### Adding a student: `add`
 
@@ -165,7 +167,7 @@ A student can have no phone number due to privacy concern.
 * `PHONE_NUMBER` is an optional field. The default value is `NA` which stands for "Not Applicable".
 * If Avengers do not wish to enter a student's phone number, 
   * `p/` prefix can be omitted from the command.
-  * Otherwise, Avengers can supply the value `NA` to `p/` prefix. Note that it must be `NA` not `N.A` or `NAb`
+  * Otherwise, Avengers can supply the value `NA` to `p/` prefix. Note that it must be `NA` not `N.A` or `na`
 * If newly inputted students have `NAME` matching exactly (case-sensitive) with an already existing entry, the program will output a warning message and show the existing entry.\
 `This student already exists in the academy directory.`
 
@@ -261,6 +263,8 @@ Examples:
 * `edit 1 p/91234567 e/e0425205@u.nus.edu`  Edits the phone number and email address of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.
 * `edit 2 n/Aaron Tan`  Edits the name of the 2nd student to be `Aaron Tan`.
 
+***
+
 ### Tracking students' grades, Studio attendance, and participation
 #### Adding grades for an assessment:  `grade`
 Adds a student’s grade for a particular assessment.
@@ -311,7 +315,9 @@ Examples:
 * `participation 1, 2, 3 ses/12 add/500`
 * `participation 4, 6 ses/2 add/-300`
 
-### Visualizing data in Academy Directory
+***
+
+### Visualization Tools
 #### Viewing all related information of a student: `view`
 Displays all information relating to a student, both personal and academic information. Information shown include the student's name, tag, participation data, examination score, and contact information.
 
@@ -365,6 +371,8 @@ Format: `sort attr/ATTRIBUTE ord/ORDER`
 Examples:
 * `sort attr/RA1 ord/desc` sorts the list in descending order based on their `RA1` grades.
 * `sort attr/participation ord/asc` sorts the list in ascending order based on their participation score.
+
+***
 
 ### Others
 #### Listing all students : `list`
@@ -438,6 +446,8 @@ Exits the program.
 Format: `exit`
 
 Alternatively, users can exit by clicking the `X` button on the top right corner of the application window.
+
+***
 
 #### [For Advanced Users] Viewing Commit History: `history`
 Shows local commit history.
