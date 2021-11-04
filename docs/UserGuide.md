@@ -280,8 +280,8 @@ To achieve the best possible experience, avoid adding excessively long input to 
     * `appointment` will sort all client by appointment date from the earliest date to latest.
     * `priority` will sort all client by `priority tag` from the highest to the lowest priority.
 
-<div markdown="block" class="alert alert-info"> :information_source: 
-** Notes about sorting by appointment:** <br>
+<div markdown="block" class="alert alert-info"> 
+**:information_source: Notes about sorting by appointment**<br>
 
 * For clients with the **same appointment date**, FAST will first show those *without appointment times*, followed by
 the earliest time to the latest time.
