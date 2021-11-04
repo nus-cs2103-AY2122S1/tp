@@ -160,21 +160,21 @@ In this guide, the syntax / format of a command is shown like this:
 
 # 4. Beginner's tutorial
 
-Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use some of our commands to manage the details of your students and lessons on a day-to-day basis.
+Welcome to TutorAid's tutorial for beginners! Here, you will learn how you can use some of our commands to manage the details of your students and lessons on a day-to-day basis.
 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the students
-shown in the student panel and that you offer the lesson shown in the lesson panel.
+shown in the Student Panel and that you offer the lesson shown in the Lesson Panel.
 
 ### Step 4: Adding a progress note for a student
 
 Now, imagine you have ended your `Maths 1` lesson. You realised that one of your students, `Alex Yeoh`, seems to struggle with the topic `Vectors`, and you wish to take
 note of it so that you can provide him extra practice. To do so, you can easily add a progress note for `Alex Yeoh` in TutorAid by following the steps below:
-1. Type `find -s Alex Yeoh` into the command box. This would result in only Alex's details being displayed in the student panel.
+1. Type `find -s Alex Yeoh` into the command box. This would result in only Alex's details being displayed in the Student Panel.
 2. Type `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added.
 
 Alternatively, you can also do this:
-1. Type `list` in the command box to see the list of all your students in the student panel.
-2. Locate `Alex Yeoh` in the student panel and take note of his index. In this case, it would be `1`.
+1. Type `list` in the command box to see the list of all your students in the Student Panel.
+2. Locate `Alex Yeoh` in the Student Panel and take note of his index. In this case, it would be `1`.
 3. Type `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added.
 
 Now, the next time you open TutorAid, you will be able to see Alex's progress note at a glance!
@@ -187,11 +187,11 @@ You will be able to add up to 10 such progress notes for each student. When you 
 
 Lastly, imagine one of your students `Roy Balakrishnan` has graduated from secondary school and he no longer requires your tutoring services. You wish to remove his student details
 since he is no longer your student. To do so, you can easily delete his data in TutorAid by following the steps below:
-1. Type `list` in the command box to see the list of all your students in the student panel.
-2. Locate `Roy Balakrishnan` in the student panel and take note of his index. In this case, it would be `6`.
+1. Type `list` in the command box to see the list of all your students in the Student Panel.
+2. Locate `Roy Balakrishnan` in the Student Panel and take note of his index. In this case, it would be `6`.
 3. Type `del -s 6` into the command box. Upon pressing enter, all details belonging to `Roy Balakrishnan` will be removed.
 
-Now, the student and lesson panels will be updated accordingly without any data of `Roy Balakrishnan`.
+Now, the student and Lesson Panels will be updated accordingly without any data of `Roy Balakrishnan`.
 
 ### End
 
