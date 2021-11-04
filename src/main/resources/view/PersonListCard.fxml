@@ -21,12 +21,12 @@
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
          <FlowPane fx:id="importance" alignment="CENTER_LEFT" columnHalignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: #000000;" />
-         <FlowPane>
+         <HBox>
             <children>
            <Label fx:id="id" styleClass="cell_big_label" text="\$id " wrapText="true" />
            <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
             </children>
-         </FlowPane>
+         </HBox>
       <FlowPane fx:id="tags" hgap="1.0" minWidth="100.0" style="-fx-border-color: #000000;" vgap="1.0" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
             <VBox.margin>
