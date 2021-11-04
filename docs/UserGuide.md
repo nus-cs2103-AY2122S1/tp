@@ -332,11 +332,17 @@ Executing any of the commands in this section will bring you to the students int
             </ul></td>
         </tr>
         <tr>
-            <td>View Only</td>
+            <td rowspan="2">View Only</td>
+            <td>Student Index</td>
+            <td>Not Applicable.</td>
+            <td>Changes according to the position of the student in the displayed list.</td>
+            <td>Not Applicable.</td>
+        </tr>
+        <tr>
             <td>Outstanding Fees</td>
             <td>Not Applicable.</td>
             <td>Can only be changed with valid executions of <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands. See <a href="#managing-lesson-fees">Managing Fees</a> for more details.</td>
-            <td>Not Applicable</td>
+            <td>Not Applicable.</td>
         </tr>
     </tbody>
 </table>
