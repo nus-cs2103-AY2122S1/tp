@@ -88,7 +88,7 @@ public class SubGroup extends Group implements Unique<SubGroup> {
             return false;
         }
         SubGroup sg = (SubGroup) o;
-        return name.equals(sg.name) && parent.equals(sg.parent);
+        return name.equals(sg.name) && (parent == sg.parent || parent.equals(sg.parent));
     }
 
     @Override

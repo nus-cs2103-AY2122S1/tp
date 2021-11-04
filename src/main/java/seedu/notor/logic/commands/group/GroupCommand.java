@@ -30,6 +30,6 @@ public abstract class GroupCommand extends TargetedCommand {
 
         // state check
         GroupCommand e = (GroupCommand) other;
-        return index.equals(e.index);
+        return e.index == index || index.equals(e.index);
     }
 }

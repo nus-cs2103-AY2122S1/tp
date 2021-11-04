@@ -194,6 +194,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSubGroup(Index index, SubGroup subGroup) {
+        Group group = getFilteredGroupList().get(index.getZeroBased());
+        SuperGroup superGroup = (SuperGroup) group;
+        subGroup.setParent(superGroup);
+        superGroup.addSubGroup(subGroup);
+        assert superGroup.getSubGroups().contains(subGroup);
+    }
+
+    @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
         listSuperGroup();

@@ -257,6 +257,11 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void addSubGroup(Index index, SubGroup subGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean isPersonList() {
             return true;
         }
