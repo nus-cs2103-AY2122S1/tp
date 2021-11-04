@@ -55,6 +55,24 @@ public class AssessmentListTest {
     }
 
     @Test
+    public void remove_nullAssessment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> assessments.remove(null));
+    }
+
+    @Test
+    public void remove_personDoesNotExist_throwsAssessmentNotFoundException() {
+        assertThrows(AssessmentNotFoundException.class, () -> assessments.remove(PATH_01));
+    }
+
+    @Test
+    public void remove_existingAssessment_removesAssessment() {
+        assessments.add(PATH_01);
+        assessments.remove(PATH_01);
+        AssessmentList expectedUniqueAssessmentList = new AssessmentList();
+        assertEquals(expectedUniqueAssessmentList, assessments);
+    }
+
+    @Test
     public void setAssessment_nullTargetAssessment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> assessments.setAssessment(null, PATH_01));
     }
@@ -102,24 +120,6 @@ public class AssessmentListTest {
         assessments.add(PATH_01);
         assessments.add(MISSION_01);
         assertThrows(DuplicateAssessmentException.class, () -> assessments.setAssessment(PATH_01, MISSION_01));
-    }
-
-    @Test
-    public void remove_nullAssessment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> assessments.remove(null));
-    }
-
-    @Test
-    public void remove_personDoesNotExist_throwsAssessmentNotFoundException() {
-        assertThrows(AssessmentNotFoundException.class, () -> assessments.remove(PATH_01));
-    }
-
-    @Test
-    public void remove_existingAssessment_removesAssessment() {
-        assessments.add(PATH_01);
-        assessments.remove(PATH_01);
-        AssessmentList expectedUniqueAssessmentList = new AssessmentList();
-        assertEquals(expectedUniqueAssessmentList, assessments);
     }
 
     @Test

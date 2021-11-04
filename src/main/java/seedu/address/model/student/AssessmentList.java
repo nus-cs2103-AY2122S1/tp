@@ -72,27 +72,6 @@ public class AssessmentList {
     }
 
     /**
-     * Replaces the assessment {@code target} in the list with {@code editedAssessment}.
-     * {@code target} must exist in the list.
-     * The assessment identity of {@code editedAssessment} must not be the same as another existing assessment
-     * in the list.
-     */
-    public void setAssessment(Assessment target, Assessment editedAssessment) {
-        requireAllNonNull(target, editedAssessment);
-
-        int index = assessments.indexOf(target);
-        if (index == -1) {
-            throw new AssessmentNotFoundException();
-        }
-
-        if (!target.isSameAssessment(editedAssessment) && contains(editedAssessment)) {
-            throw new DuplicateAssessmentException();
-        }
-
-        assessments.set(index, editedAssessment);
-    }
-
-    /**
      * Removes the equivalent assessment from the list.
      * The assessment must exist in the list.
      */
@@ -122,6 +101,27 @@ public class AssessmentList {
 
         removeStudent(previous);
         update(edited);
+    }
+
+    /**
+     * Replaces the assessment {@code target} in the list with {@code editedAssessment}.
+     * {@code target} must exist in the list.
+     * The assessment identity of {@code editedAssessment} must not be the same as another existing assessment
+     * in the list.
+     */
+    public void setAssessment(Assessment target, Assessment editedAssessment) {
+        requireAllNonNull(target, editedAssessment);
+
+        int index = assessments.indexOf(target);
+        if (index == -1) {
+            throw new AssessmentNotFoundException();
+        }
+
+        if (!target.isSameAssessment(editedAssessment) && contains(editedAssessment)) {
+            throw new DuplicateAssessmentException();
+        }
+
+        assessments.set(index, editedAssessment);
     }
 
     public void setAssessments(AssessmentList replacement) {
