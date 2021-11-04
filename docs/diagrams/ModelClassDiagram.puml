@@ -23,8 +23,8 @@ Class Email
 Class Name
 Class ParentContact
 Class Remark
-Class Grade
-
+Class "Grade" as g1
+Class "Grade" as g2
 
 Class UniqueLessonList
 Class Lesson
@@ -53,23 +53,33 @@ Student *--> Name
 Student *--> ParentContact
 Student *--> Email
 Student *--> Address
-Student *--> "*" Remark
-Student *--> Grade
+Student *--> "0..5" Remark
+Student *--> g1
+
+Name -[hidden]down-> ParentContact
+ParentContact -[hidden]down-> g1
+g1 -[hidden]down-> Remark
+
+ParentContact -[hidden]down-> Address
+Address -[hidden]down-> Email
+
+UniqueStudentList --[hidden]right--> UniqueLessonList
 
 Tuitione *--> "1" UniqueLessonList
-UniqueLessonList ----> "~* all" Lesson
+UniqueLessonList --right--> "~* all" Lesson
 Lesson *--> LessonCode
 Lesson *--> LessonTime
 Lesson *--> Price
 Lesson *--> Subject
-Lesson *--> Grade
+Lesson *--> g2
 
-Student - Lesson
+Subject -[hidden]down-> LessonTime
+LessonTime -[hidden]down-> Price
 
+Subject -[hidden]down-> LessonCode
+LessonCode -[hidden]down-> g2
 
-Name -[hidden]right-> ParentContact
-ParentContact -[hidden]right-> Address
-Address -[hidden]right-> Email
+Student "0..15" <-left-> "0..10" Lesson
 
 ModelManager ----->"~* filtered" Student
 ModelManager ----->"~* filtered" Lesson

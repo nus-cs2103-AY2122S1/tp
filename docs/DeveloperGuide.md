@@ -91,7 +91,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/ui/Ui.java)
 
-![Structure of the UI Component](images/DeveloperGuideImage/UiClassDiagram.png)
+<img alt="Structure of the UI Component" src="images/DeveloperGuideImage/UiClassDiagram.png" width="740"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -136,7 +136,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-![Structure of the Model Component](images/DeveloperGuideImage/ModelClassDiagram.png)
+<img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="740"/>
 
 
 The `Model` component,
