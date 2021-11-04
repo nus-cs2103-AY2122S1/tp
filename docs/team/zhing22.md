@@ -15,22 +15,27 @@ Given below are my contributions to the project.
   * Added the ability to **search** based on name, NUSNET ID, groups, or tags of the student. [\#128](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/128)
   * Added data analysis for performance of a particular student, and display using a line chart. [\#170](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/170)
   * Added data analysis for performance of a particular group, and display using a line chart. [\#178](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/178)
+  
 
 * **Adapting project**: 
   * Removed irrelevant classes and methods from original AB3 code. [\#79](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/79)
   * Added new data field: ID. [\#82](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/82)
   * Added new data field: group. [\#88](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/88)
   * Added new data field: groupList. [\#91](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/91)
+  
 
 * **Enhancements to existing features**:
   * Enable wrapping of long chart axis names. [\#248](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/248)
   * Improve console return messages. [\#252](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/252)
   * Wrote additional tests for existing features: [\#254](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/254)
+  
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=zhing22&tabRepo=AY2122S1-CS2103T-W08-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
+
 * **Project management**:
   * Managed releases `v1.3` on GitHub. [release](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases/tag/v1.3)
+  
 
 * **Documentation**:
   * User Guide:
@@ -43,6 +48,7 @@ Given below are my contributions to the project.
     * Added implementation details of the `search` feature. [\#152](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/152)
   * Others: 
     * Update README and index.md. [\#196](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/196)
+    
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#144](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/144) [\#158](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/158) [\#179](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/179)
