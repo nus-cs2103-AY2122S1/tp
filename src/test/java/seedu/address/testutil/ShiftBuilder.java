@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import seedu.address.model.EmptyShift;
 import seedu.address.model.RecurrencePeriod;
+import seedu.address.model.person.EmptyShift;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.Slot;
 import seedu.address.model.util.SampleDataUtil;

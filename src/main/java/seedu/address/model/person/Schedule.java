@@ -19,14 +19,12 @@ import seedu.address.model.person.exceptions.NoShiftException;
  */
 public class Schedule {
 
-    public static final String MESSAGE_CONSTRAINTS = "Schedule json string error! Invalid format."; //todo idek if need
+    public static final String MESSAGE_CONSTRAINTS = "Schedule JSON string error! Invalid format."; //todo idek if need
     public static final int HOURS_PER_SLOT = 6;
 
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
     // Set the number of hours for a slot as 4 hours
-
-
 
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
             + "Monday: %1$s\n"
@@ -87,7 +85,7 @@ public class Schedule {
 
             return;
         }
-        if (!shift1.isEmpty() && shift1.isWorking(new Period(startDate, endDate))) {
+        if (!shift1.isEmpty() && shift1.isWorkingExactWithin(new Period(startDate, endDate))) {
             throw new DuplicateShiftException();
         }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift1.add(startDate, endDate);
@@ -157,14 +155,14 @@ public class Schedule {
      *
      * @return The string format to display.
      */
-    private static String formatShiftsToString(Shift[] shifts) {
+    private static String formatShiftsToString(Shift[] shifts, Period period) {
         String result = "";
         for (Shift shift: shifts) {
-            if (shift == null) {
+            if (shift == null || shift.isEmpty()) {
                 continue;
             }
             result += "\n\t";
-            result += shift;
+            result += shift.toRecurrenceString(period);
 
         }
         return result;
@@ -182,8 +180,11 @@ public class Schedule {
     public void setTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
                         LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
-        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
-            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new Shift(dayOfWeek, slot);
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null
+                || shifts[dayOfWeek.getValue() - 1][slot.getOrder()].isEmpty()) {
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new EmptyShift(dayOfWeek, slot);
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] =
+                    shifts[dayOfWeek.getValue() - 1][slot.getOrder()].add(startDate, endDate);
         }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shifts[dayOfWeek.getValue() - 1][slot.getOrder()]
                 .setTime(startTime, endTime, slot.getOrder(),
@@ -195,15 +196,15 @@ public class Schedule {
      *
      * @return The displayed schedule.
      */
-    public String toViewScheduleString() {
+    public String toViewScheduleString(Period period) {
         return String.format(SCHEDULE_DEFAULT,
-                formatShiftsToString(shifts[0]),
-                formatShiftsToString(shifts[1]),
-                formatShiftsToString(shifts[2]),
-                formatShiftsToString(shifts[3]),
-                formatShiftsToString(shifts[4]),
-                formatShiftsToString(shifts[5]),
-                formatShiftsToString(shifts[6]));
+                formatShiftsToString(shifts[0], period),
+                formatShiftsToString(shifts[1], period),
+                formatShiftsToString(shifts[2], period),
+                formatShiftsToString(shifts[3], period),
+                formatShiftsToString(shifts[4], period),
+                formatShiftsToString(shifts[5], period),
+                formatShiftsToString(shifts[6], period));
 
     }
 

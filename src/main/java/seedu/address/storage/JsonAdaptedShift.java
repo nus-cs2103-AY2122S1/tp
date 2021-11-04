@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.EmptyShift;
 import seedu.address.model.RecurrencePeriod;
+import seedu.address.model.person.EmptyShift;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.Slot;
 

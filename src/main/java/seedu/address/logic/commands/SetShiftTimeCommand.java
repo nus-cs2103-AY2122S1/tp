@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
+import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
@@ -29,12 +31,15 @@ public class SetShiftTimeCommand extends Command {
             + "If the shift does not exist, a new one will be created.\n"
             + "Notice that the startTime must be earlier than the endTime, "
             + "and if the range of time is [10:00-16:00] and [16:00-22:00] for morning "
-            + "slot and afternoon slot respectively" + "\n\n"
+            + "slot and afternoon slot respectively. Date input is used to indicate the period of the shift to modify."
+            + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
             + PREFIX_DASH_NAME + " NAME "
             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
-            + PREFIX_SHIFT_TIME + "START_TIME:END_TIME\n\n"
+            + PREFIX_SHIFT_TIME + "START_TIME:END_TIME"
+            + DATE_RANGE_INPUT
+            + "\n\n"
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1 "
             + PREFIX_DAY_SHIFT + "monday-1"

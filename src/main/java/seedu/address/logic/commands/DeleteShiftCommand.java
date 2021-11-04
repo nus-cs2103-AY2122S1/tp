@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
+import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -27,21 +29,23 @@ public class DeleteShiftCommand extends Command {
     public static final String COMMAND_WORD = "deleteShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a shift from the staff identified "
-            + "by the index number used in the displayed staff list or the name of staff. By default, the shift"
-            + "deleted is from today to seven days later. When date input is provided, it should be in order. If "
-            + "only one date is provided, the end date is assumed to be seven days later.\n\n"
+            + "by the index number used in the displayed staff list or the name of staff. Date input is used "
+            + "to indicate the duration of the shift to delete. "
+            + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] or "
             + "[" + PREFIX_DASH_NAME + " NAME] "
             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
-            + "[" + PREFIX_DATE + "START_DATE]"
-            + "[" + PREFIX_DATE + "END_DATE\n\n"
+            + DATE_RANGE_INPUT
+            + "\n\n"
             + "Examples:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1 "
             + PREFIX_DAY_SHIFT + "monday-1" + "\n"
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " Alex Yeoh "
-            + PREFIX_DAY_SHIFT + "TUESDAY-0";
+            + PREFIX_DAY_SHIFT + "TUESDAY-0"
+            + PREFIX_DATE + "2021-01-01" + " "
+            + PREFIX_DATE + "2021-01-05";
 
     public static final String MESSAGE_DELETE_SHIFT_SUCCESS = "Shift deleted from the schedule of %s: %s, %s.";
     public static final String MESSAGE_SHIFT_DOESNT_EXIST = "The shift that you are trying to delete does not exist!";
@@ -71,6 +75,7 @@ public class DeleteShiftCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        CommandUtil.checkDateForDayOfWeek(startDate, endDate, dayOfWeek);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person staffToEdit;

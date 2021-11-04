@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
+import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
@@ -19,6 +21,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
@@ -32,7 +35,8 @@ public class ViewScheduleCommand extends Command {
     public static final String COMMAND_WORD = "viewSchedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the schedules of the staff that have the"
-            + "input parameters.\n\n"
+            + "input parameters."
+            + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_NAME + "NAME] "
             + "[" + PREFIX_DASH_INDEX + "INDEX] "
@@ -41,6 +45,7 @@ public class ViewScheduleCommand extends Command {
             + "[" + PREFIX_DASH_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + "SALARY] "
             + "[" + PREFIX_DASH_STATUS + "STATUS] "
+            + DATE_RANGE_INPUT
             + "[" + PREFIX_DASH_ROLE + "ROLE]... "
             + "[" + PREFIX_DASH_TAG + "TAG]...\n\n"
             + "Example:\n" + COMMAND_WORD + " "
@@ -48,6 +53,7 @@ public class ViewScheduleCommand extends Command {
             + PREFIX_DASH_EMAIL + "johndoe@example.com";
     private static final String PERSON_NOT_IN_LIST = "No staff satisfies conditions applied.";
 
+    private final Period period;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
 
@@ -55,10 +61,11 @@ public class ViewScheduleCommand extends Command {
      * Constructs a view schedule command that views the schedule of the staff
      * filtered by {@code PersonContainsFieldsPredicate predicate}.
      */
-    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate) {
+    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Period period) {
         requireNonNull(predicate);
         this.predicate = predicate;
         this.index = -1;
+        this.period = period;
     }
 
     /**
@@ -66,10 +73,11 @@ public class ViewScheduleCommand extends Command {
      * staff at {@code Index index} and fulfils the {@code PersonContainsFieldsPredicate predicate}.
      *
      */
-    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Index index) {
+    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Index index, Period period) {
         requireAllNonNull(predicate, index);
         this.index = index.getZeroBased();
         this.predicate = predicate;
+        this.period = period;
 
     }
 
@@ -96,7 +104,7 @@ public class ViewScheduleCommand extends Command {
         String result = "";
         for (Person staff : staffs) {
             result += String.format(DEFAULT_MESSAGE, staff.getName());
-            result += staff.getSchedule().toViewScheduleString();
+            result += staff.getSchedule().toViewScheduleString(period);
         }
         return result;
     }

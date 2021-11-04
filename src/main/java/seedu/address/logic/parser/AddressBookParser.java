@@ -20,13 +20,14 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
+import seedu.address.logic.commands.SchedulePeriodChangeCommand;
+import seedu.address.logic.commands.SetDefaultShiftTimingsCommand;
 import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
 import seedu.address.logic.commands.StaffStatisticsCommand;
 import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.commands.SwitchTabCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -97,9 +98,6 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
-
         case AddShiftCommand.COMMAND_WORD:
             return new AddShiftCommandParser().parse(arguments);
 
@@ -111,6 +109,12 @@ public class AddressBookParser {
 
         case SetRoleReqCommand.COMMAND_WORD:
             return new SetRoleReqCommandParser().parse(arguments);
+
+        case SetDefaultShiftTimingsCommand.COMMAND_WORD:
+            return new SetDefaultShiftTimingsCommandParser().parse(arguments);
+
+        case SchedulePeriodChangeCommand.COMMAND_WORD:
+            return new SchedulePeriodChangeCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

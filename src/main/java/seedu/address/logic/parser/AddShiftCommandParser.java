@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.ParserUtil.extractTupleDates;
+import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -37,9 +38,7 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
-        LocalDate[] dates = new LocalDate[2];
-        dates[0] = LocalDate.now();
-        dates[1] = dates[0].plusDays(7);
+        LocalDate[] dates = initializeLocalDateToThisWeek();
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
