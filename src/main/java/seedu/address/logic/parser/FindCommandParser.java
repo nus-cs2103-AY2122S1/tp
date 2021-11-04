@@ -28,14 +28,12 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         // if the length of trimmedArgs is 2, only the command e.g. 'n/' has been provided, with no keys to search
-        if (trimmedArgs.length() == 2) {
+        if (trimmedArgs.length() == 2 || !trimmedArgs.contains("/")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         String[] typeKeywords = trimmedArgs.split("\\s+");
-        //check that there is a key inputted for the command after the attribute type
-        assert(typeKeywords[0].length() > 2);
         //check that the attribute type is inputted as a 2-character string, e.g. "n/" and not "n/alex"
         //assert(typeKeywords[0].length() == 2);
         String type = typeKeywords[0].substring(0, 2);
