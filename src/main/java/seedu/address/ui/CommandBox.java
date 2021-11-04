@@ -70,6 +70,7 @@ public class CommandBox extends UiPart<Region> {
         } else {
             String commandText = commandTextField.getText();
             if (commandText.equals("")) {
+                event.consume();
                 return;
             }
             try {

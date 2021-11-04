@@ -23,6 +23,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Birthday
+Class Pin
 
 }
 
@@ -45,6 +47,8 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> Birthday
+Person *--> Pin
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

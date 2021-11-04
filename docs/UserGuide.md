@@ -6,7 +6,8 @@ title: User Guide
 CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CONNECTIONS can get your contact management tasks done faster than traditional GUI apps.
 
 * [Quick Start](#quick-start)
-* [Features](#features)
+* [Features](#features
+  * [Upcoming birthdays](#upcoming-birthdays)
   * [Viewing help : `help`](#viewing-help--help)
   * [Adding a person: `add`](#adding-a-person-add)
   * [Listing all persons : `list`](#listing-all-persons--list)
@@ -33,7 +34,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `connections.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
+1. Download the latest `CONNECTIONS.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home directory_ for your CONNECTIONS.
 
@@ -74,6 +75,15 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 * Phone number can be of any length, and can contain any number of digits.
 
 </div>
+
+### Upcoming Birthdays
+The vertical tab provides upcoming birthdays at a glance.
+It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
+with the **nearest** upcoming birthday at the **top**.
+
+* Contacts colour-coded in **GREEN** are celebrating their birthdays **today**.
+* Contacts colour-coded in **BLUE** will be celebrating their birthdays in **a week or less**.
+* The rest of the entries will not be colour-coded.
 
 ### Viewing help : `help`
 
@@ -122,6 +132,7 @@ Notes:
 * Phone number must be unique.
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.
+* Each tag has a character limit of 60.
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -166,6 +177,7 @@ Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * New tags will be added on top of existing tags i.e. tags added is cumulative.
 * Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags.
+* Tags have a character limit of 60.
 
 **Sample Usage:**
 * `tag 2 t/friend t/NUS`
@@ -192,7 +204,8 @@ Notes:
 Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find n/NAME [n/MORE_NAMES]…​ t/TAG [t/MORE_TAGS]…​`
+* `find [n/NAME] …​ [t/TAG] …​`
+  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
 * `find` is case-insensitive by default. e.g. `hans` will match `Hans`.
@@ -202,7 +215,8 @@ Notes:
   `t/friends n/Hans`.
 * Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * This applies to both names and tags.
+  * This applies to both names and tags. This means `find n/an` will not return entries such as `Hans`, but 
+    it will return entries such as `Jing An`.
 * Only Persons matching all keywords will be returned (i.e. `AND` search).
   e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`.
 
@@ -222,7 +236,8 @@ Notes:
 Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 #### Format:
-* `findAny n/NAME [n/MORE_NAMES]…​ t/TAG [t/MORE_TAGS]…​`
+* `findAny [n/NAME] …​ [t/TAG] …​`
+  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
 * `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`.
@@ -231,7 +246,8 @@ Notes:
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * This applies to both names and tags.
+  * This applies to both names and tags. This means `findAny n/an` will not return entries such as `Hans`, but
+    it will return entries such as `Jing An`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 
@@ -386,17 +402,14 @@ CONNECTIONS data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-CONNECTIONS data are saved as a JSON file `[JAR file location]/data/connections.json`. Advanced users are welcome to update data directly by editing that data file.
+CONNECTIONS data are saved as a JSON file `[JAR file location]/data/CONNECTIONS.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (no birthday and not pinned). Other data will be recovered. 
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 

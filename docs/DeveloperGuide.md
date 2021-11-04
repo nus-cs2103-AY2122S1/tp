@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BirthdayReminderListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -121,7 +121,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed. 
+* stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -152,86 +153,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Tags
 
@@ -267,93 +188,138 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
   * Pros: Fast retrieval of tagged contacts.
   * Cons: Difficult to maintain a separate data structure.
 
-### \[Work in progress\] Pin feature
+### Pin feature
 
 #### Proposed Implementation
+
+The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of people in CONNECTIONS and maintains the order of these people according to if they are pinned or not. Pinned people have a higher priority and hence are displayed first. It currently implements the following operations: 
+* `UniquePersonList#add` - adds a person into the list of stored people and stores the people according to their priority. 
+* `UniquePersonList#setPerson` - updates an edited person in the list of stored people and stores the people according to their priority. 
 
 The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `PinCommand#Execute`
 
 Given below is an example usage scenario and how the pin mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time.
+Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
+    
+![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
-Step 2. The user executes `add n/David …​` to add a new person.
+Step 2. The user executes `add n/person3 …​` to add a new person. This person is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
 
-Step 3. CONNECTIONS displays the new person. 
+![PinUniquePersonListState1](images/PinUniquePersonListState1.png)
 
-Step 4. The user decides that the contact, currently at index 1, is important and should be pinned. User executes pin 1
+Step 3. CONNECTIONS UI displays the new person at the end of `PersonListPanel` using a `PersonCard`.
 
-Step 5. CONNECTIONS will pin the contact and moves the contact to the top of the list of contacts.
+Step 4. The user decides that the contact will be frequently contacted and should be pinned. User executes `pin 3`.
+
+Step 5. Person's `Pin` attribute will change to indicate that the person is pinned. Person will be brought forward to `UniquePersonList`, behind `person1` that was already pinned.
+
+![PinUniquePersonListState2](images/PinUniquePersonListState2.png)
+
+Step 6. CONNECTIONS UI will update to show the new person at the top of the list using a `PinnedPersonCard` which shows a pin next the person's name. 
+
+Step 7. The user decides that the contact will no longer be frequently contacted and should be unpinned. User executres `unpin 2`.
+
+Step 6. Person's `Pin` attribute will change to indicate that the person is not pinned. Person will be moved behind other pinned contacts in `UniquePersonList`.
+
+![PinUniquePersonListState3](images/PinUniquePersonListState3.png)
+
+Step 7. CONNECTIONS UI will update to show the person behind other pinned contacts using a `PersonCard`. 
 
 The following sequence diagram shows how the pin operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
 **Aspect: How pin executes:**
 
-* **Alternative 1:** Person has a boolean field isPinned to indicate if the person is pinned or not
+* **Alternative 1:** Person has a boolean field isPinned to indicate if the person is pinned or not.
     * Pros: Easy to implement, less memory usage
     * Cons: Less flexibility in expanding the usage of pin.
 
-* **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not
+* **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not.
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
-    
+
+**Aspect: How each pinned contact is displayed:**
+
+* **Alternative 1 (current choice):** Have two seperate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
+    * Pros: Easier to implement.
+    * Cons: More code duplication. 
+
+* **Alternative 2:** Have one card that will add a pin if the contact is pinned.
+    * Pros: Harder to implement.
+    * Cons: Less code duplication. 
 
 ### Find feature
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`.
+
+The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindPredicate` is generated according to the user's command and passed as a argument into `ModelManager#updateFilteredPersonList`.
+It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the Find mechanism behaves at each step.
 
-Step 1. The user launches the application.
+Step 1. The user launches the application for the first time. All people are displayed at default.
 
 Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
 
-Step 3. CONNECTIONS displays any person whose name contains `David` **while also having** `friend` **and** 
-`football` tagged to them.
+Step 3. A `FindPredicate`  which will only return `true` if person's name contains `David` **while also having** `friend` **and**
+`football` tagged to them is made.
+
+Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
+
+Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
 #### Design considerations:
 
 **Aspect: How Find executes:**
 
-* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+* **Alternative 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Alternative 2 (current choice):** Create a FindPredicate to store Name(s) and Tag(s)
-    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of Find.
+* **Alternative 2 (current choice):** Create a `FindPredicate` to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
 
 ### FindAny feature
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`.
+
+The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindAnyPredicate` is generated according to the user's command and passed as a argument into `ModelManager#updateFilteredPersonList`.
+It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time.
+Step 1. The user launches the application for the first time. All people are displayed at default. 
 
 Step 2. The user executes `findAny n/David n/Henry t/friend t/footnall` to search for a matching entry.
 
-Step 3. CONNECTIONS displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
-tagged to **either** `friend` **or** `football`.
+Step 3. A `FindAnyPredicate`  which will only return `true` if person's name contains **either** `David` **or** `Henry` **OR** are
+tagged to **either** `friend` **or** `football` is made.
+
+Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list. 
+
+Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
 #### Design considerations:
 
-**Aspect: How FindOr executes:**
+**Aspect: How FindAny executes:**
 
-* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+* **Alternative 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Alternative 2 (current choice):** Create a FindAnyPredicate to store Name(s) and Tag(s)
-    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of FindAny.
+* **Alternative 2 (current choice):** Create a `FindAnyPredicate` to store Name(s) and Tag(s).
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindAnyCommand`.
     * Cons: More code.
 
 
@@ -361,7 +327,9 @@ tagged to **either** `friend` **or** `football`.
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`.
+
+Help messages will be displayed in the CONNECTIONS' `UI` through the `ResultDisplay`.
 
 Given below is an example usage scenario and how the Help mechanism behaves at each step.
 
@@ -369,35 +337,59 @@ Step 1. The user launches the application for the first time.
 
 Step 2. The user executes `help` to seek help on CONNECTION's usage.
 
-Step 3. CONNECTIONS displays a list of available commands.
+Step 3. CONNECTIONS displays a list of available commands in `ResultDisplay`.
 
 Step 4. The user decides to view the usage of `add` to learn to add a contact, and executes `help add`.
 
-Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command.
+Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command in `ResultDisplay`.
 
 
-### \[Work in progress\] Birthday Reminder feature
-Shows a list of people with upcoming birthday.
+### Birthday Reminder feature
 
 #### Proposed Implementation
 
-Step 1. On app startup sort people with birthday by birth month and day only into a list of person.
+Shows a list of people with upcoming birthdays. This list of birthday reminders is displayed to the user though the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
+The list of birthdays is generated in the `ModelManager`, which implements the following functions:
+* `getBirthdayReminderList` which returns an `ObservableList<Person>` that is ordered according to upcoming birthdays.
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
+Step 1. On app startup sort people with birthday by birth month and day only into a list of people. Birthdays that are one day away are coloured green while birthdays that within one week are coloured blue.
 
 Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
 to current day.
 
-Step 3. The rest of the list with birthday after this first person will be displayed in sorted order.
+Step 3. The rest of the list with birthday after this first person will be displayed in sorted order. This list is displayed in CONNECTIONS' `UI` in `BirthdayReminderListPanel`.
 
-Step 4. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
-earliest birthday and display remaining people in sorted order.
+Step 4. The user decides to scroll through the `BirthdayReminderListPanel`. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
+earliest birthday and display remaining people in sorted order. 
 
+Step 5. The user executes `add n/person3 b/01012000 …​` to add a new person. 
+
+Step 6. CONNECTIONS will store the new person. The `ObservableList<Person>` for `BirthdayReminderPanelList` will include the new person and sort it according to upcoming birthdays. 
+
+Step 7. CONNECTIONS `UI` will observe a change in the `ObservableList<Person>` and update `BirthdayReminderPanelList`, displaying the new person. 
+
+#### Design considerations:
+
+**Aspect: How will the `ObservableList<Person>` update with a new person:**
+
+* **Alternative 1 (current choice):** Clear the birthday reminders and regenerate it.
+    * Pros: Straightforward.
+    * Cons: Will be slower as whole list is regenerated.
+
+* **Alternative 2:** Insert the person into the list. 
+    * Pros: Faster than alternative.
+    * Cons: Harder to implement and maintain.
+    
 ### Mailing List feature
 Allows user to download a CSV file mailing list of the current view
 Users can use arguments to specify which fields to include in their download
 
 #### Implementation
+Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
-Step 1. The user filters the contacts using other commands, eg. `find`
+Step 1. The user filters the contacts using other commands, eg. `find`.
 
 Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 
@@ -406,6 +398,32 @@ Step 3. The user is prompted to pick the name and download location of their gen
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+
+### [Proposed] Partial data recovery feature
+Allows user to recover partial data in event of corruption in data file. 
+
+#### Proposed Implementation
+If data file is corrupt for fields other than `Birthday` and `Pin`, CONNECTIONS will use an empty data file upon the next start up. 
+The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonAddressBookStorage`. Upon getting an invalid data format for compulsory fields, `JsonAdaptedPerson` can return `null` and 
+not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
+Step 1. The user edits the data file and changes `Tag` field of the first contact to an invalid value.
+
+Step 2. The user edits the data file and changes the `Email` field of the second contact to an invalid value.
+
+Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first person is invalid, `JsonAdaptedPerson` will not add the invalid `Tag`.
+
+Step 4. Since the value of `Email` (compulsory field) for the second person is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
+
+Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will not display the second person. The other fields and contacts will be displayed as per normal.  
+
+
+#### Design considerations:
+* Arguments for the command should follow the standard used in other parts of the software.
+* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -429,6 +447,7 @@ Step 3. The user is prompted to pick the name and download location of their gen
 * sociable and has multiple different friend groups that can partially overlap
 * regularly organises birthday parties for these contacts
 * regularly invites other contacts to these parties
+* is forgetful 
 * needs to keep track of different groups who are invited to different parties
 * prefer desktop apps over other types
 * can type fast
@@ -436,10 +455,10 @@ Step 3. The user is prompted to pick the name and download location of their gen
 * is reasonably comfortable using CLI apps
 
 **Value proposition**:
-* receive reminders about birthdays or lookup upcoming birthdays
+* view reminders about birthdays
 * retrieve contact details of all members of a group quickly and easily
-* partition contacts by group
-* keep track of upcoming birthdays and invite lists of these parties
+* view contact details of frequently contacted people easily
+* keep track of upcoming birthdays
 
 
 ### User stories

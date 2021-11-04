@@ -1,5 +1,7 @@
 package seedu.address;
 
+import java.util.Locale;
+
 import javafx.application.Application;
 
 /**
@@ -19,7 +21,11 @@ import javafx.application.Application;
  * to be the entry point of the application, we avoid this issue.
  */
 public class Main {
+    /**
+     * Runs application in english
+     */
     public static void main(String[] args) {
+        Locale.setDefault(Locale.ENGLISH);
         Application.launch(MainApp.class, args);
     }
 }

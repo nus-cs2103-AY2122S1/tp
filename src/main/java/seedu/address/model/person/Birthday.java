@@ -55,7 +55,7 @@ public class Birthday {
     public static boolean isValidDate(String birthday) {
         try {
             LocalDate.parse(birthday, BIRTHDATE_FORMATTER.withResolverStyle(ResolverStyle.STRICT));
-            return true;
+            return !isFutureDate(birthday);
         } catch (DateTimeParseException e) {
             return false;
         }

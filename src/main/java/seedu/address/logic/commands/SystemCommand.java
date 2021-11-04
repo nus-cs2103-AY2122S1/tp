@@ -32,6 +32,16 @@ public class SystemCommand {
             return new CommandResult(UnpinCommand.COMMAND_EXAMPLE, false, false);
         case (UntagCommand.COMMAND_WORD):
             return new CommandResult(UntagCommand.COMMAND_EXAMPLE, false, false);
+        case (ListCommand.COMMAND_WORD):
+            return new CommandResult(ListCommand.COMMAND_EXAMPLE, false, false);
+        case (MailingListCommand.COMMAND_WORD):
+            return new CommandResult(MailingListCommand.COMMAND_EXAMPLE, false, false);
+        case (ClearCommand.COMMAND_WORD):
+            return new CommandResult(ClearCommand.COMMAND_EXAMPLE, false, false);
+        case (HelpCommand.COMMAND_WORD):
+            return new CommandResult(HelpCommand.HELP_MESSAGE, false, false);
+        case (ExitCommand.COMMAND_WORD):
+            return new CommandResult(ExitCommand.COMMAND_EXAMPLE, false, false);
         default:
             return new CommandResult("", false, false);
         }

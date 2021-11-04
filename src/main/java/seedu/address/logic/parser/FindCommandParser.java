@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,7 +39,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
+
+        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_TAG))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         List<String> nameStringList = argMultimap.getAllValues(PREFIX_NAME);
+        if (areBlanksPresent(nameStringList)) {
+            String nameFormatRequirementMessage = "There should not be any blanks in name.\n" + "For example, "
+                    + "if you are " + "searching for " + "'n/John Doe', split them into 'n/John' "
+                    + "and 'n/Doe' instead.";
+            throw new ParseException(nameFormatRequirementMessage);
+        }
+
         List<String> tagStringList = argMultimap.getAllValues(PREFIX_TAG);
 
         List<Name> nameKeywords;
@@ -53,5 +66,22 @@ public class FindCommandParser implements Parser<FindCommand> {
         FindPredicate findpredicate = new FindPredicate(nameKeywords, tagList, isCaseSensitive);
 
         return new FindCommand(findpredicate);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static boolean areBlanksPresent(List<String> stringList) {
+        for (String s : stringList) {
+            if (s.contains(" ")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

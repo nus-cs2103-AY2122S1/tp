@@ -25,6 +25,7 @@ public class HelpCommand extends Command {
             + FindAnyCommand.COMMAND_WORD + SPACE + FindAnyCommand.COMMAND_DESCRIPTION
             + PinCommand.COMMAND_WORD + SPACE + PinCommand.COMMAND_DESCRIPTION
             + UnpinCommand.COMMAND_WORD + SPACE + UnpinCommand.COMMAND_DESCRIPTION
+            + MailingListCommand.COMMAND_WORD + SPACE + MailingListCommand.COMMAND_DESCRIPTION
             + DeleteCommand.COMMAND_WORD + SPACE + DeleteCommand.COMMAND_DESCRIPTION
             + DeleteMultipleCommand.COMMAND_WORD + SPACE + DeleteMultipleCommand.COMMAND_DESCRIPTION
             + ClearCommand.COMMAND_WORD + SPACE + ClearCommand.COMMAND_DESCRIPTION
@@ -98,6 +99,9 @@ public class HelpCommand extends Command {
 
         case UnpinCommand.COMMAND_WORD:
             return new CommandResult(UnpinCommand.MESSAGE_USAGE, false, false);
+
+        case MailingListCommand.COMMAND_WORD:
+            return new CommandResult(MailingListCommand.MESSAGE_USAGE, false, false);
 
         default:
             String message = MESSAGE_UNKNOWN_COMMAND + ": " + commandWord + "\n" + HELP_MESSAGE;
