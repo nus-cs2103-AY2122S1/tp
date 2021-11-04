@@ -575,7 +575,9 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 #### Upcoming Features for Fees Calculator
 
-1. **Flag out overdue lesson fees.** We 
+1. **Flag out overdue lesson fees.** In the future, we would like to allow users to specify how many lessons per payment, and if not specified the default would be 4 lessons per payment. 
+This value would be used to calculate and flag out which lesson's fees are due by automatically tagging a red `DUE` tag to that lesson.
+2. **Account for cancelled and uncancelled lessons.** In the future, we would also like to make the Fees Calculator smarter such that when lessons in the past has been cancelled, fees will be deducted accordingly. Vice versa for uncancelled dates in the past.
 
 <div style="page-break-after: always;"></div>
 
