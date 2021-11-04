@@ -184,9 +184,9 @@ Step 5. `AddCommand#execute()` then calls `Model#addPerson()` to add the new app
 Step 6. `CommandResult` is initialized with `String` containing the details of the new applicant.
 This CommandResult is then returned.
 
-The following sequence diagram shows how the edit operation works.
-![images](images/EditCommandSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
+The following sequence diagram shows how the add operation works.
+![images](images/AddCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Edit feature
