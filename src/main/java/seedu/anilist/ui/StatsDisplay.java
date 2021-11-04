@@ -59,7 +59,7 @@ public class StatsDisplay extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     class IntegerStringConverter extends StringConverter<Number> {
-        private long mult = 100000000;
+        private final double epsilon = 1E-3;
 
         public IntegerStringConverter() {}
 
@@ -67,8 +67,12 @@ public class StatsDisplay extends UiPart<Stage> {
         public String toString(Number object) {
             String tickLabel = "";
             //handle error where integer values do not show up due to rounding errors
-            if (Math.ceil(object.doubleValue()) == (Math.round(object.doubleValue() * mult) / mult)) {
-                tickLabel += (int) Math.ceil(object.doubleValue());
+            if (object.intValue() - epsilon <= object.doubleValue()
+                    && object.intValue() + epsilon >= object.doubleValue()) {
+                tickLabel += object.intValue();
+            } else if (object.intValue() - epsilon + 1 <= object.doubleValue()
+                    && object.intValue() + epsilon + 1 >= object.doubleValue()) {
+                tickLabel += (object.intValue() + 1);
             }
             return tickLabel;
         }
