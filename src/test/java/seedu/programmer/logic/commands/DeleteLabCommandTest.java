@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_SECOND_LAB;
-import static seedu.programmer.testutil.TypicalLabs.LAB6;
+import static seedu.programmer.testutil.TypicalLabs.LAB_6;
 import static seedu.programmer.testutil.TypicalLabs.getTypicalLabList;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
@@ -36,7 +36,7 @@ public class DeleteLabCommandTest {
 
     @Test
     public void execute_invalidTitle_failure() {
-        Lab labToDelete = LAB6;
+        Lab labToDelete = LAB_6;
         DeleteLabCommand deleteLabCommand = new DeleteLabCommand(labToDelete);
 
         String expectedMessage = String.format(DeleteLabCommand.MESSAGE_LAB_DOES_NOT_EXIST, labToDelete);
