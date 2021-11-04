@@ -470,36 +470,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `NUS Mod Tracker` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Database Features
+
+**UC1: Delete a Module from the Database**
 
 **MSS**
 
-1.  User requests to list modules
-2.  Mod tracker shows a list of modules
-3.  User requests to delete a specific module in the list
-4.  Mod tracker deletes the person
-5.  User requests to add a module to the list
-6.  Mod tracker adds the module
-
+1. User requests to delete a specific module in the list of modules in the database.
+2. NUS Mod Tracker deletes the module from the database.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given module index is invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
 
-  Use case resumes at step 5.
+      Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+#### Academic Plan Features
 
-    * 3a1. Mod tracker shows an error message.
+**UC2: Add a Module to the Academic Plan**
 
-      Use case resumes at step 2.
-* 5a. The module code given is invalid
-    * 5a1. Mod tracker shows an error message.
-      Use case ends.
+**MSS**
+
+1. User requests to add a specific module to the academic plan.
+2. NUS Mod Tracker adds the module to the academic plan under the specified year and semester.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The given module index or arguments are invalid.
+  * 1a1. NUS Mod Tracker shows an error message.
+  
+    Use case resumes at step 1.
+
+**UC3: Remove a Module from the Academic Plan**
+
+**MSS**
+
+1. User requests to remove a specific module from the academic plan.
+2. NUS Mod Tracker removes the module from the academic plan.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given module index is invalid.
+  * 1a1. NUS Mod Tracker shows an error message.
+
+    Use case resumes at step 1.
+* 1b. The specified module is not in the academic plan.
+  * 1b1. NUS Mod Tracker shows an error message.
+    
+    Use case resumes at step 1.
+
 
 *{More to be added}*
 
