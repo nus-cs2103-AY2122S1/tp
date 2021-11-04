@@ -56,8 +56,14 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    Applicant data are displayed as a list in the **Applicant Panel**.
    ![Applicant Diagram](images/ApplicantDiagram.png)
 
-5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br>
-**Note**: Type in your commands into the **Command Box** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br><br>
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Type in your commands into the **Command Box** and press Enter to execute it.**<br>
+    * e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+    </div>
+
    1. Use **`clear`** command to clear the existing sample data.
    2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
       your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
@@ -68,34 +74,41 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    3. Let's also add in another applicant named `Mary Sue`. Her phone number is `91131513` and her email is `MarySue@gmail.com`. She is applying
       for the role of a `Software Engineer` and is looking for an `Internship` with an expected salary of `3000`. Her highest level of education is `High School`
       and has `0` years of experience as a `Software Engineer`. <br><br>
-      Type in **`add`**`n/Mary Sue p/91131513 e/MarySue@gmail.com r/Software Engineer et/Internship s/3000 l/High School y/0`.
+      Type in **`add`**`n/Mary Sue p/91131513 e/MarySue@gmail.com r/Software Engineer et/Internship s/3000 l/High School y/0`.<br><br>
+      Your application should look like this:
+      ![After Adding](./images/SampleWorkflow1.png)
    4. As an experienced recruiter, you notice that `Mary Sue` may not have the qualifications for the job as a `Software Engineer` and want to add
       a note to remind yourself.<br><br>
-      Type in **`edit`**`2 nt/She might not have the qualifications for the job` to add the note to `Mary Sue`.
+      Type in **`edit`**`2 nt/She might not have the qualifications for the job` to add the note to `Mary Sue`.<br><br>
+      Your application should look like this:
+      ![After Note](./images/SampleWorkflow2.png)
    5. Your company then informs you that they would like to interview `John Doe` on December 11th 2021 at 10 am `2021-12-11, 10:00` and you want to remind
       yourself that an interview has been arranged for `John Doe`.<br><br>
-      Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.
+      Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.<br><br>
+      Your application should look like this:
+      ![After Interview](./images/SampleWorkflow3.png)
    6. Suppose time passes and you now have more applicants in your list of applicants. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
-      Type in **`mark`**`1` to mark `John Doe` as done.
+      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      ![After mark](./images/SampleWorkflow4.png)
    7. Type in **`list`** to go back to your list of applicants.<br><br>
-      To remove all applicants marked as done, such as `John Doe`, type in **`delete_marked`**.<br>
+      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br>
       Now `John Doe` is removed from your list of applicants, along with other applicants you may have marked.
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
    
-   * **`delete`**`2` : Deletes the second applicant in your currently displayed list.
+      * **`delete`**`2` : Deletes the second applicant in your currently displayed list.
 
-   * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn.
+      * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn.
 
-   * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would be `John`.
+      * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would be `John`.
 
-   * **`filter_interview`**`past` : Displays all applicants whose interviews are in the past, relative to current date and time.
+      * **`filter_interview`**`past` : Displays all applicants whose interviews are in the past, relative to current date and time.
 
-   * **`filter_interview`**`future` : Displays all applicants whose interview are in the future, relative to current date and time.
+      * **`filter_interview`**`future` : Displays all applicants whose interview are in the future, relative to current date and time.
 
-   * **`exit`** : Exits the app.
+      * **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of available commands.
 
