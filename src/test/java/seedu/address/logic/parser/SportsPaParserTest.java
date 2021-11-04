@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.person.MemberMatchesKeywordsPredicate.Builder;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -140,14 +140,13 @@ public class SportsPaParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findMember() throws Exception {
         Name name = new Name("baz");
         FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
                 FindMemberCommand.COMMAND_WORD + " n/baz", aliases);
-        Predicate<Member> predicate = x -> true;
-        predicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList("baz")));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("baz"));
         MemberMatchesKeywordsPredicate testPredicate =
-                new MemberMatchesKeywordsPredicate.Builder().setName(name).setPredicate(predicate).build();
+                new Builder().withName(name).withPredicate(predicate).build();
         assertEquals(new FindMemberCommand(testPredicate), command);
     }
 
