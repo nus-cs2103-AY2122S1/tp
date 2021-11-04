@@ -51,9 +51,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s updated! \n";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
+    private static LabNum labNum2;
 
     /**
      * @param index of the student in the filtered student list to edit
@@ -86,7 +88,8 @@ public class EditCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
-        return new EditCommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
+        return new EditCommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
+                + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
     }
 
     /**
@@ -112,6 +115,7 @@ public class EditCommand extends Command {
             } catch (NullPointerException e) { //when getLab does not find anything
                 throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
             }
+            labNum2 = labNum;
             updatedLab.updateTotal(currTotalScore);
         }
 
