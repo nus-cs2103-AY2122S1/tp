@@ -71,7 +71,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    
    * **`find`**`n/John Mary` : Finds all current applicants in RecruitIn whose names are `John` or `Mary`.
    
-   * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would now be `Mary`.
+   * **`delete`**`2` : Deletes `Mary`, who is the 2nd applicant in the list. After deletion, the list of all applicants will contain only 'John'.
 
    * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn, which would be 1 result that is `3000`.
 
