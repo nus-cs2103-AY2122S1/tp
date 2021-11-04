@@ -27,7 +27,7 @@ public class ClearContactPolicyCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_CLEAR_CLIENT_POLICY_SUCCESS = "Deleted %1$s policies belonging to contact %2$s";
+    public static final String MESSAGE_CLEAR_CONTACT_POLICY_SUCCESS = "Deleted %1$s policies belonging to contact %2$s";
 
     private final Index targetIndex;
 
@@ -56,7 +56,7 @@ public class ClearContactPolicyCommand extends Command {
         model.updateFilteredPolicyList(x -> true);
 
         return new CommandResult(
-                String.format(MESSAGE_CLEAR_CLIENT_POLICY_SUCCESS,
+                String.format(MESSAGE_CLEAR_CONTACT_POLICY_SUCCESS,
                         deletedPolicies,
                         targetIndex.getOneBased()));
     }
