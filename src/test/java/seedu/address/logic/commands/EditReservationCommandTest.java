@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.ReservationCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ReservationCommandTestUtil.showReservationAtIndex;
-import static seedu.address.testutil.TypicalReservation.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalReservation.getTypicalRhrh;
 
 import java.util.Set;
 
@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditReservationCommand.EditReservationDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
@@ -25,7 +25,7 @@ public class EditReservationCommandTest {
     private static final Remark NEW_REMARK = new Remark("new remark test");
     private static final Set<Tag> NEW_TAGS = Set.of(new Tag("new tag test"));
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrh(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -49,7 +49,7 @@ public class EditReservationCommandTest {
                 EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation
         );
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setReservation(targetReservation, editedReservation);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -78,7 +78,7 @@ public class EditReservationCommandTest {
                 EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedRemarkReservation
         );
 
-        Model remarkEditedExpectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model remarkEditedExpectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         remarkEditedExpectedModel.setReservation(targetReservation, editedRemarkReservation);
 
         assertCommandSuccess(remarkEditedCommand, model, remarkEditedExpectedMessage, remarkEditedExpectedModel);
@@ -107,7 +107,7 @@ public class EditReservationCommandTest {
                 EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedTagsReservation
         );
 
-        Model tagsEditedExpectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model tagsEditedExpectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         tagsEditedExpectedModel.setReservation(targetReservation, editedTagsReservation);
 
         assertCommandSuccess(tagsEditedCommand, model, tagEditedExpectedMessage, tagsEditedExpectedModel);
@@ -124,7 +124,7 @@ public class EditReservationCommandTest {
                 editedReservation
         );
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -152,7 +152,7 @@ public class EditReservationCommandTest {
                 editedReservation
         );
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.setReservation(targetReservation, editedReservation);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

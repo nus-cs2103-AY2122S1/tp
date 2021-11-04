@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.EmployeeCommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.showEmployeeAtIndex;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
+import static seedu.address.testutil.TypicalEmployees.getTypicalRhrhEmployees;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
@@ -32,7 +32,7 @@ import seedu.address.testutil.EmployeeBuilder;
  */
 public class EditEmployeeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhEmployees(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(EditEmployeeCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS, editedEmployee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(EditEmployeeCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS, editedEmployee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setEmployee(lastEmployee, editedEmployee);
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(EditEmployeeCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS, editedEmployee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(EditEmployeeCommand.MESSAGE_EDIT_EMPLOYEE_SUCCESS, editedEmployee);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), editedEmployee);
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
@@ -113,7 +113,7 @@ public class EditEmployeeCommandTest {
         showEmployeeAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
-        Employee employeeInList = model.getAddressBook().getEmployeeList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Employee employeeInList = model.getRhrh().getEmployeeList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST_PERSON,
                 new EditEmployeeDescriptorBuilder(employeeInList).build());
 
@@ -138,7 +138,7 @@ public class EditEmployeeCommandTest {
         showEmployeeAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEmployeeList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getEmployeeList().size());
 
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(outOfBoundIndex,
                 new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build());

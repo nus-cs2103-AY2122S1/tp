@@ -7,12 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
+import static seedu.address.testutil.TypicalEmployees.getTypicalRhrhEmployees;
 import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
 import static seedu.address.testutil.TypicalSuppliers.AMY;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalRhrhSuppliers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,41 +36,41 @@ import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
-public class AddressBookTest {
+public class RhrhTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Rhrh rhrh = new Rhrh();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getEmployeeList());
-        assertEquals(Collections.emptyList(), addressBook.getCustomerList());
-        assertEquals(Collections.emptyList(), addressBook.getSupplierList());
+        assertEquals(Collections.emptyList(), rhrh.getEmployeeList());
+        assertEquals(Collections.emptyList(), rhrh.getCustomerList());
+        assertEquals(Collections.emptyList(), rhrh.getSupplierList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> rhrh.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBookCustomers();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyRhrh_replacesData() {
+        Rhrh newData = getTypicalRhrhCustomers();
+        rhrh.resetData(newData);
+        assertEquals(newData, rhrh);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesDataEmployees() {
-        AddressBook newData = getTypicalAddressBookEmployees();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyRhrh_replacesDataEmployees() {
+        Rhrh newData = getTypicalRhrhEmployees();
+        rhrh.resetData(newData);
+        assertEquals(newData, rhrh);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesDataSuppliers() {
-        AddressBook newData = getTypicalAddressBookSuppliers();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyRhrh_replacesDataSuppliers() {
+        Rhrh newData = getTypicalRhrhSuppliers();
+        rhrh.resetData(newData);
+        assertEquals(newData, rhrh);
     }
 
     @Test
@@ -82,9 +82,9 @@ public class AddressBookTest {
         List<Customer> newCustomers = Arrays.asList(CUSTOMER_ALICE, editedAlice);
         List<Employee> emptyList = new ArrayList<>();
         List<Supplier> emptySuppliersList = new ArrayList<>();
-        AddressBookStub newData = new AddressBookStub(newCustomers, emptyList, emptySuppliersList);
+        RhrhStub newData = new RhrhStub(newCustomers, emptyList, emptySuppliersList);
 
-        assertThrows(DuplicateCustomerException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateCustomerException.class, () -> rhrh.resetData(newData));
     }
 
     @Test
@@ -96,9 +96,9 @@ public class AddressBookTest {
         List<Employee> newEmployees = Arrays.asList(ALICE_EMPLOYEE, editedAlice);
         List<Customer> emptyCustList = new ArrayList<>();
         List<Supplier> emptySuppliersList = new ArrayList<>();
-        AddressBookStub newData = new AddressBookStub(emptyCustList, newEmployees, emptySuppliersList);
+        RhrhStub newData = new RhrhStub(emptyCustList, newEmployees, emptySuppliersList);
 
-        assertThrows(DuplicateEmployeeException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateEmployeeException.class, () -> rhrh.resetData(newData));
     }
 
     @Test
@@ -110,133 +110,133 @@ public class AddressBookTest {
         List<Supplier> newSuppliers = Arrays.asList(AMY, editedAmy);
         List<Customer> emptyCustList = new ArrayList<>();
         List<Employee> emptyEmployeeList = new ArrayList<>();
-        AddressBookStub newData = new AddressBookStub(emptyCustList, emptyEmployeeList, newSuppliers);
+        RhrhStub newData = new RhrhStub(emptyCustList, emptyEmployeeList, newSuppliers);
 
-        assertThrows(DuplicateSupplierException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateSupplierException.class, () -> rhrh.resetData(newData));
     }
 
     @Test
     public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasCustomer(null));
+        assertThrows(NullPointerException.class, () -> rhrh.hasCustomer(null));
     }
 
     @Test
     public void hasEmployee_nullEmployee_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasEmployee(null));
+        assertThrows(NullPointerException.class, () -> rhrh.hasEmployee(null));
     }
 
     @Test
     public void hasReservation_nullReservation_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasReservation(null));
+        assertThrows(NullPointerException.class, () -> rhrh.hasReservation(null));
     }
 
     @Test
     public void hasSupplier_nullSupplier_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasSupplier(null));
+        assertThrows(NullPointerException.class, () -> rhrh.hasSupplier(null));
     }
 
     @Test
-    public void hasCustomer_customerNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasCustomer(CUSTOMER_ALICE));
+    public void hasCustomer_customerNotInRhrh_returnsFalse() {
+        assertFalse(rhrh.hasCustomer(CUSTOMER_ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasEmployee(ALICE_EMPLOYEE));
+    public void hasEmployee_employeeNotInRhrh_returnsFalse() {
+        assertFalse(rhrh.hasEmployee(ALICE_EMPLOYEE));
     }
 
     @Test
-    public void hasSupplier_supplierNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasSupplier(AMY));
+    public void hasSupplier_supplierNotInRhrh_returnsFalse() {
+        assertFalse(rhrh.hasSupplier(AMY));
     }
 
     @Test
-    public void hasReservation_reservationNOtInAddressBook_returnFalse() {
-        assertFalse(addressBook.hasReservation(ALICE_RESERVATION));
+    public void hasReservation_reservationNOtInRhrh_returnFalse() {
+        assertFalse(rhrh.hasReservation(ALICE_RESERVATION));
     }
 
     @Test
-    public void hasCustomer_customerInAddressBook_returnsTrue() {
-        addressBook.addCustomer(CUSTOMER_ALICE);
-        assertTrue(addressBook.hasCustomer(CUSTOMER_ALICE));
+    public void hasCustomer_customerInRhrh_returnsTrue() {
+        rhrh.addCustomer(CUSTOMER_ALICE);
+        assertTrue(rhrh.hasCustomer(CUSTOMER_ALICE));
     }
 
     @Test
-    public void hasEmployee_inAddressBook_returnsTrue() {
-        addressBook.addEmployee(ALICE_EMPLOYEE);
-        assertTrue(addressBook.hasEmployee(ALICE_EMPLOYEE));
+    public void hasEmployee_inRhrh_returnsTrue() {
+        rhrh.addEmployee(ALICE_EMPLOYEE);
+        assertTrue(rhrh.hasEmployee(ALICE_EMPLOYEE));
     }
 
     @Test
-    public void hasSupplier_inAddressBook_returnsTrue() {
-        addressBook.addSupplier(AMY);
-        assertTrue(addressBook.hasSupplier(AMY));
+    public void hasSupplier_inRhrh_returnsTrue() {
+        rhrh.addSupplier(AMY);
+        assertTrue(rhrh.hasSupplier(AMY));
     }
 
     @Test
-    public void hasReservation_reservationInAddressBook_returnsTrue() {
-        addressBook.addReservation(ALICE_RESERVATION);
-        assertTrue(addressBook.hasReservation(ALICE_RESERVATION));
+    public void hasReservation_reservationInRhrh_returnsTrue() {
+        rhrh.addReservation(ALICE_RESERVATION);
+        assertTrue(rhrh.hasReservation(ALICE_RESERVATION));
     }
 
     @Test
-    public void hasCustomer_customerWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addCustomer(CUSTOMER_ALICE);
+    public void hasCustomer_customerWithSameIdentityFieldsInRhrh_returnsTrue() {
+        rhrh.addCustomer(CUSTOMER_ALICE);
         Customer editedAlice =
                 new CustomerBuilder(CUSTOMER_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasCustomer(editedAlice));
+        assertTrue(rhrh.hasCustomer(editedAlice));
     }
 
     @Test
-    public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addEmployee(ALICE_EMPLOYEE);
+    public void hasEmployee_employeeWithSameIdentityFieldsInRhrh_returnsTrue() {
+        rhrh.addEmployee(ALICE_EMPLOYEE);
         Employee editedAlice = new EmployeeBuilder(ALICE_EMPLOYEE)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasEmployee(editedAlice));
+        assertTrue(rhrh.hasEmployee(editedAlice));
     }
 
     @Test
-    public void hasSupplier_supplierWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addSupplier(AMY);
+    public void hasSupplier_supplierWithSameIdentityFieldsInRhrh_returnsTrue() {
+        rhrh.addSupplier(AMY);
         Supplier editedAmy = new SupplierBuilder(AMY)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasSupplier(editedAmy));
+        assertTrue(rhrh.hasSupplier(editedAmy));
     }
 
     @Test
     public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getCustomerList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> rhrh.getCustomerList().remove(0));
     }
 
     @Test
     public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEmployeeList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> rhrh.getEmployeeList().remove(0));
     }
 
     @Test
     public void getSupplierList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getSupplierList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> rhrh.getSupplierList().remove(0));
     }
 
     @Test
     public void getReservationList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getReservationList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> rhrh.getReservationList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyRhrh whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class RhrhStub implements ReadOnlyRhrh {
 
         private final ObservableList<Customer> customers = FXCollections.observableArrayList();
         private final ObservableList<Employee> employees = FXCollections.observableArrayList();
         private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Customer> customers, Collection<Employee> employees,
-                        Collection<Supplier> suppliers) {
+        RhrhStub(Collection<Customer> customers, Collection<Employee> employees,
+                 Collection<Supplier> suppliers) {
             this.employees.setAll(employees);
             this.customers.setAll(customers);
             this.suppliers.setAll(suppliers);

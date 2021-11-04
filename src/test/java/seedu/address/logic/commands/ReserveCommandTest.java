@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_NUMB
 import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.ReservationCommandTestUtil.VALID_REMARK;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -42,7 +42,7 @@ class ReserveCommandTest {
     private static final Phone DIFFERENT_PHONE = new Phone(VALID_PHONE_BOB);
     private static final LocalDateTime DIFFERENT_DATE_TIME = LocalDateTime.parse(VALID_DATE_TIME_BOB);
 
-    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
 
     @Test
     public void constructor_nullArgument_throwsNullPointerException() {

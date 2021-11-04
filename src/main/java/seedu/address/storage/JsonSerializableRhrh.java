@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRhrh;
+import seedu.address.model.Rhrh;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
@@ -18,10 +18,10 @@ import seedu.address.model.reservation.Reservation;
 import seedu.address.model.table.Table;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Rhrh that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableRhrh {
 
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
@@ -36,10 +36,10 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedTable> tables = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and employees.
+     * Constructs a {@code JsonSerializableRhrh} with the given persons and employees.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,
+    public JsonSerializableRhrh(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,
         @JsonProperty("employees") List<JsonAdaptedEmployee> employees,
         @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
         @JsonProperty("reservations") List<JsonAdaptedReservation> reservations,
@@ -52,11 +52,11 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyRhrh} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableRhrh}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableRhrh(ReadOnlyRhrh source) {
         customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
         employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
         suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
@@ -66,45 +66,45 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code Rhrh} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Rhrh toModelType() throws IllegalValueException {
+        Rhrh rhrh = new Rhrh();
 
         for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();
-            if (addressBook.hasCustomer(customer)) {
+            if (rhrh.hasCustomer(customer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
-            addressBook.addCustomer(customer);
+            rhrh.addCustomer(customer);
         }
         for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
             Employee employee = jsonAdaptedEmployee.toModelType();
-            if (addressBook.hasEmployee(employee)) {
+            if (rhrh.hasEmployee(employee)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
-            addressBook.addEmployee(employee);
+            rhrh.addEmployee(employee);
         }
         for (JsonAdaptedSupplier jsonAdaptedSupplier : suppliers) {
             Supplier supplier = jsonAdaptedSupplier.toModelType();
-            if (addressBook.hasSupplier(supplier)) {
+            if (rhrh.hasSupplier(supplier)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SUPPLIER);
             }
-            addressBook.addSupplier(supplier);
+            rhrh.addSupplier(supplier);
         }
         for (JsonAdaptedReservation jsonAdaptedReservation : reservations) {
             Reservation reservation = jsonAdaptedReservation.toModelType();
-            if (!addressBook.hasCustomerWithPhone(reservation.getPhone())) {
+            if (!rhrh.hasCustomerWithPhone(reservation.getPhone())) {
                 throw new IllegalValueException(MESSAGE_RESERVATION_PHONE_DOES_NOT_EXIST);
             }
-            addressBook.addReservation(reservation);
+            rhrh.addReservation(reservation);
         }
         for (JsonAdaptedTable jsonAdaptedTable : tables) {
             Table table = jsonAdaptedTable.toModelType();
-            addressBook.addTable(table);
+            rhrh.addTable(table);
         }
-        return addressBook;
+        return rhrh;
     }
 }
