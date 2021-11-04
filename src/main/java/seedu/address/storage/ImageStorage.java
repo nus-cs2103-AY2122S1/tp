@@ -71,6 +71,9 @@ public class ImageStorage {
         case "F":
             imageFile = "female.png";
             break;
+        case "O":
+            imageFile = "other.png";
+            break;
         default:
             return null;
         }
