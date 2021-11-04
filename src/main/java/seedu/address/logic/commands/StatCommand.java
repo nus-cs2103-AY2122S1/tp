@@ -81,8 +81,8 @@ public class StatCommand extends Command {
         }
 
         String tutString = "";
-        List<String> temp_list = tutDic.keySet().stream().sorted().collect(Collectors.toList());
-        for (String s : temp_list) {
+        List<String> tempList = tutDic.keySet().stream().sorted().collect(Collectors.toList());
+        for (String s : tempList) {
             tutString += String.format("%s : %d\n", s , tutDic.get(s));
         }
 

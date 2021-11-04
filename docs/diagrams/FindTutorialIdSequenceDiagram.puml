@@ -11,10 +11,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("find T/ 01")
+[-> LogicManager : execute("find T/01")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find T/ 01")
+LogicManager -> AddressBookParser : parseCommand("find T/01")
 activate AddressBookParser
 
 create FindCommandParser
@@ -24,7 +24,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse("find T/ 01")
+AddressBookParser -> FindCommandParser : parse("find T/01")
 activate FindCommandParser
 
 create FindCommand

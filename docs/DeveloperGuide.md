@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
 | `* *`    | user in a supervising position             | export name and email to a file               | send specific emails to a select few contacts
-| `* *`    | curious user                               | view statustics about the contacts that I have added | derive more information about my contacts
+| `* *`    | curious user                               | view statistics about the contacts that I have added | derive more information about my contacts
 
 
 
