@@ -1,10 +1,11 @@
 package seedu.programmer.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.programmer.model.student.Lab;
 
-import static java.util.Objects.requireNonNull;
+import seedu.programmer.model.student.Lab;
 
 public class JsonAdaptedLab {
     private String labNumValue;
@@ -12,17 +13,22 @@ public class JsonAdaptedLab {
     private String totalScoreValue;
 
     /**
-     * Constructs a {@code JsonAdaptedStudent} with the given student details.
+     * Constructs a {@code JsonAdaptedLab} with the given lab details.
      */
     @JsonCreator
-    public JsonAdaptedLab(@JsonProperty("labNumValue") String labNumValue, @JsonProperty("actualScoreValue") String actualScoreValue,
-                              @JsonProperty("totalScoreValue") String totalScoreValue) {
+    public JsonAdaptedLab(@JsonProperty("labNumValue") String labNumValue,
+                          @JsonProperty("actualScoreValue") String actualScoreValue,
+                          @JsonProperty("totalScoreValue") String totalScoreValue) {
         this.labNumValue = labNumValue;
         //todo: change to actualScoreValue and totalScoreValue when the relevant classes are ready.
         this.actualScoreValue = actualScoreValue;
         this.totalScoreValue = totalScoreValue;
     }
 
+
+    /**
+     * Converts a given {@code lab} into this class for Jackson use.
+     */
     public JsonAdaptedLab(Lab lab) {
         requireNonNull(lab);
         this.labNumValue = lab.getLabNumValue();
