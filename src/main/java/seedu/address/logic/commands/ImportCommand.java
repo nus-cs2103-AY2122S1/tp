@@ -44,9 +44,9 @@ public class ImportCommand extends Command {
         }
 
         if (count < personsToAdd.size()) {
-            return new CommandResult(count + " " + MESSAGE_SUCCESS + ". " + MESSAGE_DUPLICATE);
+            return new CommandResult(count + " " + MESSAGE_SUCCESS + ". " + MESSAGE_DUPLICATE + ".");
         }
-        return new CommandResult(count + " " + MESSAGE_SUCCESS);
+        return new CommandResult(count + " " + MESSAGE_SUCCESS + ".");
     }
 
     @Override

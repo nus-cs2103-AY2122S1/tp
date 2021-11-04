@@ -28,7 +28,8 @@ public class ImportCommandTest {
 
         assertEquals(typicalPersons.size()
                 + " "
-                + ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+                + ImportCommand.MESSAGE_SUCCESS
+                + ".", commandResult.getFeedbackToUser());
         assertEquals(typicalPersons, modelStub.getPersonsAdded());
     }
 
@@ -47,7 +48,8 @@ public class ImportCommandTest {
                 + " "
                 + ImportCommand.MESSAGE_SUCCESS
                 + ". "
-                + ImportCommand.MESSAGE_DUPLICATE, commandResult.getFeedbackToUser());
+                + ImportCommand.MESSAGE_DUPLICATE
+                + ".", commandResult.getFeedbackToUser());
         assertEquals(typicalPersons, modelStub.getPersonsAdded());
     }
 }
