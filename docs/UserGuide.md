@@ -447,12 +447,6 @@ Format: `ladd INDEX [recurring/END_DATE] date/dd MMM yyyy time/HHmm-HHmm subject
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
 
-* The type of lesson will be inferred from the presence of the `recurring/` prefix.
-
-* The end date for the recurrence is optional.
-  
-* The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
-
 Examples:
 
 * `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
