@@ -2,6 +2,7 @@ package seedu.address.logic.parser.persons;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
@@ -37,7 +38,7 @@ public class PersonAddExamParser implements Parser<EditPersonCommand> {
                 ArgumentTokenizer.tokenize(userInput, PREFIX_SUBJECT, PREFIX_DAY);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_SUBJECT, PREFIX_DAY)
-                || argMultimap.getPreamble().isEmpty()) {
+                || argMultimap.getPreamble().isEmpty() || !argMultimap.preambleHasExpectedSegments(1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
         }
@@ -48,7 +49,7 @@ public class PersonAddExamParser implements Parser<EditPersonCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
