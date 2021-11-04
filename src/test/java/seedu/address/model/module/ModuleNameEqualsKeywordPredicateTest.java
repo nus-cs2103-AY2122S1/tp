@@ -21,7 +21,8 @@ class ModuleNameEqualsKeywordPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ModuleNameEqualsKeywordPredicate firstPredicateCopy = new ModuleNameEqualsKeywordPredicate(firstPredicateKeyword);
+        ModuleNameEqualsKeywordPredicate firstPredicateCopy =
+                new ModuleNameEqualsKeywordPredicate(firstPredicateKeyword);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

@@ -146,8 +146,8 @@ class UniqueModuleListTest {
     @Test
     public void setModules_list_replacesOwnListWithProvidedList() {
         uniqueModuleList.add(MODULE_1);
-        List<Module> ModuleList = Collections.singletonList(MODULE_2);
-        uniqueModuleList.setModules(ModuleList);
+        List<Module> moduleList = Collections.singletonList(MODULE_2);
+        uniqueModuleList.setModules(moduleList);
         UniqueModuleList expectedUniqueModuleList = new UniqueModuleList();
         expectedUniqueModuleList.add(MODULE_2);
         assertEquals(expectedUniqueModuleList, uniqueModuleList);
