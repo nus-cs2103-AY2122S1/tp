@@ -7,7 +7,7 @@ Busy private 1-to-1 home tutors can find it difficult to remember all their stud
 **Tuition Address Book (TAB)** is an all-in-one desktop application that helps keep track of large amounts of student and lesson information, to empower tutors to provide the best quality home tuition service.<br>
 TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface). Use TAB to effortlessly manage customer contacts faster than a typical mouse/GUI driven app!
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/start.png)
 
 ## Links
 
