@@ -85,8 +85,8 @@ public class HelpGuide {
             + "TutorAid to 17.";
 
     public static final String VIEW_S_TITLE = "Viewing a student";
-    public static final String VIEW_S_DESC = "Displays the specified student’s name, phone number, progress and "
-            + "payment status, along with their parent’s name and phone number.";
+    public static final String VIEW_S_DESC = "Displays the specified student’s name, phone number and progress, "
+            + "along with their parent’s name and phone number.";
     public static final String VIEW_S_COMMAND = "view -s STUDENT_INDEX";
     public static final String VIEW_S_EXAMPLE = "view -s 2";
     public static final String VIEW_S_EXAMPLE_DESC = " shows the details associated with the 2nd student.";
@@ -111,20 +111,6 @@ public class HelpGuide {
     public static final String DEL_P_COMMAND = "del -p STUDENT_INDEX";
     public static final String DEL_P_EXAMPLE = "del -p 2";
     public static final String DEL_P_EXAMPLE_DESC = " deletes the progress of the 2nd student in TutorAid.";
-
-    public static final String PAID_TITLE = "Set payment made";
-    public static final String PAID_DESC = "Sets the payment status of the student corresponding to the given index "
-            + "to 'paid' for the current month.";
-    public static final String PAID_COMMAND = "paid STUDENT_INDEX";
-    public static final String PAID_EXAMPLE = "paid 3";
-    public static final String PAID_EXAMPLE_DESC = " updates the 3rd student’s payment status to 'paid'.";
-
-    public static final String UNPAID_TITLE = "Unset payment made";
-    public static final String UNPAID_DESC = "Sets the payment status of the student corresponding to the given index"
-            + " to ‘unpaid’ for the current month.";
-    public static final String UNPAID_COMMAND = "unpaid STUDENT_INDEX";
-    public static final String UNPAID_EXAMPLE = "unpaid 3";
-    public static final String UNPAID_EXAMPLE_DESC = " updates the 3rd student’s payment status to 'unpaid'.";
 
     public static final String FIND_TITLE = "Locate students or lessons by name";
     public static final String FIND_DESC1 = "A case-insensitive search is done to find student or lesson names "

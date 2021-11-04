@@ -9,7 +9,6 @@ import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.Progress;
 import tutoraid.model.student.ProgressList;
@@ -28,7 +27,6 @@ class JsonAdaptedStudent {
     private final String parentName;
     private final String parentPhone;
     private final ArrayList<String> progressList;
-    private final boolean hasPaid;
     private final ArrayList<String> lessons;
 
     /**
@@ -39,7 +37,6 @@ class JsonAdaptedStudent {
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("progressList") ArrayList<String> progressList,
-            @JsonProperty("paymentStatus") boolean hasPaid,
             @JsonProperty("lessons") ArrayList<String> lessons) {
 
         this.studentName = studentName;
@@ -47,7 +44,6 @@ class JsonAdaptedStudent {
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.progressList = progressList;
-        this.hasPaid = hasPaid;
         this.lessons = lessons;
     }
 
@@ -60,7 +56,6 @@ class JsonAdaptedStudent {
         parentName = source.getParentName().fullName;
         parentPhone = source.getParentPhone().value;
         progressList = source.getProgressList().getAllProgressAsStringArrayList();
-        hasPaid = source.getPaymentStatus().hasPaid;
         lessons = source.getLessons().getAllLessonNamesAsStringArrayList();
     }
 
@@ -102,8 +97,6 @@ class JsonAdaptedStudent {
         }
         final ProgressList modelProgress = new ProgressList(progressList);
 
-        final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
-
         if (lessons == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Lessons.class.getSimpleName()));
@@ -114,7 +107,7 @@ class JsonAdaptedStudent {
         final Lessons modelLessons = new Lessons(lessons);
 
         return new Student(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
-                modelProgress, modelPaymentStatus, modelLessons);
+                modelProgress, modelLessons);
     }
 
 }

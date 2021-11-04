@@ -189,4 +189,12 @@ public class Lesson {
 
         return builder.toString();
     }
+
+    /**
+     * Returns the name of the lesson as a string.
+     * @return Name of lesson
+     */
+    public String toNameString() {
+        return lessonName.toString();
+    }
 }
