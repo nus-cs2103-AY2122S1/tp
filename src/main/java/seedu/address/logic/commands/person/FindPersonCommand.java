@@ -22,7 +22,7 @@ public class FindPersonCommand extends Command {
 
     public static final String MESSAGE_USAGE = "find: Finds all persons whose names contain "
             + "any of the specified keywords (case-insensitive).\n"
-            + "You can choose one of three ways to search:\n"
+            + "You can choose one of two ways to search:\n"
             + "1) search by name(s) using the prefix 'n/': " + "find " + PREFIX_NAME + "alice bob charlie\n"
             + "2) search by module code(s) using the prefix 'm/': " + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100\n";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";

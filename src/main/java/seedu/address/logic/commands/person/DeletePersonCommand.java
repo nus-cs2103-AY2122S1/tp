@@ -127,8 +127,9 @@ public class DeletePersonCommand extends Command {
     }
 
     private List<Person> listOfPersonToDeleteByLessonCode(Model model, List<Person> list) throws CommandException {
-        LessonCode lessonCodeToRemove = new LessonCode(
-                moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1));
+        LessonCode lessonCodeToRemove =
+                new LessonCode(moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1,
+                        moduleCode.toString().length() - 1));
         List<Person> personsToDelete = new ArrayList<>();
 
         for (Person current : list) {
@@ -182,7 +183,8 @@ public class DeletePersonCommand extends Command {
 
     private void deleteLessonCodeTag(Person person, Model model, ModuleCode personModuleCode) {
         Set<LessonCode> tags = new HashSet<>(personModuleCode.getLessonCodes());
-        String onlyTags = moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1);
+        String onlyTags = moduleCode.toString()
+                .substring(moduleCode.toString().indexOf(" ") + 1, moduleCode.toString().length() - 1);
         tags.remove(new LessonCode(onlyTags));
 
         ModuleCode newModuleCode = new ModuleCode(moduleCode.getModuleCodeName(), tags);

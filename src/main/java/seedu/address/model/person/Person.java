@@ -122,7 +122,7 @@ public class Person {
                 .append("; Module : ");
 
         Set<ModuleCode> moduleCodes = getModuleCodes();
-        moduleCodes.forEach(builder::append);
+        builder.append(getModuleCodesInString(moduleCodes));
 
         if (!getPhone().value.isEmpty()) {
             builder.append("; Phone: ");
@@ -142,4 +142,13 @@ public class Person {
         return builder.toString();
     }
 
+    private String getModuleCodesInString(Set<ModuleCode> moduleCodes) {
+        ModuleCode[] array = moduleCodes.toArray(ModuleCode[]::new);
+        StringBuilder sb = new StringBuilder(array[0].toString());
+        for (int i = 1; i < array.length; i++) {
+            sb.append(", ");
+            sb.append(array[i]);
+        }
+        return sb.toString();
+    }
 }
