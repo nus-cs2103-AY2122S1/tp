@@ -566,6 +566,10 @@ the fees of the cancelled lesson for you. Same for uncancelling a lesson that ha
 * **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
 the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
 
+#### Upcoming Features for Fees Calculator
+
+1. **Flag out overdue lesson fees.** We 
+
 <div style="page-break-after: always;"></div>
 
 ### Viewing your Calendar
@@ -709,14 +713,14 @@ Example:
    1. `edit 1 n/Joe Doe` modifies name of the first student.
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
-   4. `redo` redoes the edit command.
+   4. `redo` redoes the edit command. The name of the first student will be `John Doe` now.
   
 
 2. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
-   4. `redo` shows that there are no commands to be redone.
+   4. `redo` is invalid. TAB shows that there are no commands to be redone.
    
 
 #### Exiting the program: `exit`
