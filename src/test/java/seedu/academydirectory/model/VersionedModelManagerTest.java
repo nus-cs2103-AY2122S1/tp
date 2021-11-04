@@ -20,7 +20,7 @@ import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.model.student.NameContainsKeywordsPredicate;
 import seedu.academydirectory.testutil.AcademyDirectoryBuilder;
 
-public class ModelManagerTest {
+public class VersionedModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
