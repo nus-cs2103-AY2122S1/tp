@@ -70,7 +70,9 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
                 i--;
                 allValues.remove(currString);
             } catch (NumberFormatException e) {
-                continue;
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddToFolderCommand.MESSAGE_USAGE));
+
             }
         }
         return contactsToAdd;
