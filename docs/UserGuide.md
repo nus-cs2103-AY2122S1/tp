@@ -5,7 +5,7 @@ title: User Guide
 
 ### About RecruitIn
 
-RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
+RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 ![Ui](images/Ui.png)
 ### About this guide
 
@@ -71,7 +71,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    
    * **`find`**`n/John Mary` : Finds all current applicants in RecruitIn whose names are `John` or `Mary`.
    
-   * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would now be `Mary`.
+   * **`delete`**`2` : Deletes `Mary`, who is the 2nd applicant in the list. After deletion, the list of all applicants will contain only 'John'.
 
    * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn, which would be 1 result that is `3000`.
 
