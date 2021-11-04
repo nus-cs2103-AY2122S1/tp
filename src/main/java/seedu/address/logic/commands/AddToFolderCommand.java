@@ -27,7 +27,6 @@ public class AddToFolderCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Person added to folder: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This person already exists in this folder";
     public static final String MESSAGE_DUPLICATE_INDEX_PASSED = "Duplicate person indices passed";
-    public static final String MESSAGE_NONEXISTENT_FOLDER = "This folder does not exist in UNIon";
 
     private final List<Index> indexList;
     private final FolderName folderName;
@@ -57,7 +56,7 @@ public class AddToFolderCommand extends Command {
         }
 
         if (indexOfFolder == -1) {
-            throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
+            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }
 
         for (Index index : this.indexList) {
