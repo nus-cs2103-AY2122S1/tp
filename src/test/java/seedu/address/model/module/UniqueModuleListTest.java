@@ -83,10 +83,10 @@ class UniqueModuleListTest {
     @Test
     public void setModule_editedModuleHasSameIdentity_success() {
         uniqueModuleList.add(MODULE_1);
-        Module editedAlice = new ModuleBuilder().withName(MODULE_NAME_0).build();
-        uniqueModuleList.setModule(MODULE_1, editedAlice);
+        Module editedModule = new ModuleBuilder().withName(MODULE_NAME_0).build();
+        uniqueModuleList.setModule(MODULE_1, editedModule);
         UniqueModuleList expectedUniqueModuleList = new UniqueModuleList();
-        expectedUniqueModuleList.add(editedAlice);
+        expectedUniqueModuleList.add(editedModule);
         assertEquals(expectedUniqueModuleList, uniqueModuleList);
     }
 
