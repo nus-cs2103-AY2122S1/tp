@@ -57,7 +57,6 @@ public class Students {
      */
     public void removeStudent(Student student) {
         requireNonNull(student);
-        System.out.println(students.contains(student));
         if (!students.remove(student)) {
             throw new StudentNotFoundInLessonException();
         }
