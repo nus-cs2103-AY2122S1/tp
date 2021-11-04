@@ -25,6 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FREQUENCY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTH_CONDITION_DEMENTIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTH_CONDITION_DIABETES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LANGUAGE_BOB;
@@ -132,6 +133,32 @@ public class AddCommandParserTest {
                 .withHealthConditions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
                 + VISIT_DESC_AMY + LAST_VISIT_DESC_AMY, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_visitAndFrequencyAndOccurrence_success() {
+        Person expectedPerson = new PersonBuilder(AMY).withVisit(VALID_VISIT_AMY).withLastVisit("")
+                .withFrequency(VALID_FREQUENCY_AMY).withOccurrence(2).withHealthConditions().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
+                + VISIT_DESC_AMY + FREQUENCY_DESC_AMY + OCCURRENCE_DESC_AMY, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_occurrenceFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
+                        + FREQUENCY_DESC_AMY,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_frequencyFieldMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
+                        + OCCURRENCE_DESC_AMY,
+                expectedMessage);
     }
 
     @Test

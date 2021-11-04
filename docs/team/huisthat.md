@@ -5,7 +5,7 @@ title: Hu Linglong's Project Portfolio Page
 
 ### Project: SeniorLove
 
-SeniorLove is a desktop contact management application used for facilitating social worker's visits to the elderly. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+SeniorLove is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Senior Love can get your contact management tasks done faster than traditional GUI apps.
 
 Given below are my contributions to the project.
 
@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=huisthat&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Team-based Tasks**:
-    * Improve on the view of the GUI to include the last visit and next visit(Pull request [\#61](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/61))
+    * Improve on the view of the GUI to include the last visit and next visit (Pull request [\#61](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/61))
     * Change the GUI of the project from dark to light theme, and change the GUI color scheme (Pull request [\#130](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/130))
 
 * **Enhancements to existing features**:

@@ -24,10 +24,26 @@ public class OccurrenceTest {
     @Test
     public void isValidOccurrence() {
         // invalid occurrence
-        assertFalse(Occurrence.isValidOccurrence(-1));
-        assertFalse(Occurrence.isValidOccurrence(0));
+        assertFalse(Occurrence.isValidOccurrence(-1)); // occurrence should be positive
+        assertFalse(Occurrence.isValidOccurrence("-1"));
+        assertFalse(Occurrence.isValidOccurrence(-100)); // occurrence should be positive
+        assertFalse(Occurrence.isValidOccurrence("-100"));
+        assertFalse(Occurrence.isValidOccurrence(0)); // occurrence should be positive
+        assertFalse(Occurrence.isValidOccurrence("0"));
+        assertFalse(Occurrence.isValidOccurrence(1000)); // occurrence should be less than or equals 999
+        assertFalse(Occurrence.isValidOccurrence("1000"));
+        // occurrence should be less than or equals 999, test for large inputs
+        assertFalse(Occurrence.isValidOccurrence("1000000000000000000000000000000000000000000000000000000000"));
+        // occurrence should be positive, test for large inputs
+        assertFalse(Occurrence.isValidOccurrence("-1000000000000000000000000000000000000000000000000000000000"));
 
         // valid occurrence
         assertTrue(Occurrence.isValidOccurrence(1));
+        assertTrue(Occurrence.isValidOccurrence("1"));
+        assertTrue(Occurrence.isValidOccurrence(100));
+        assertTrue(Occurrence.isValidOccurrence("100"));
+        assertTrue(Occurrence.isValidOccurrence(999));
+        assertTrue(Occurrence.isValidOccurrence("999"));
+
     }
 }
