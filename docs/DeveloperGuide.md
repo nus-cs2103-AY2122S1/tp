@@ -3,7 +3,28 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+* [Quick Start](#quick-start)
+* [Features](#features
+    * [Upcoming birthdays](#upcoming-birthdays)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a person: `add`](#adding-a-person-add)
+    * [Listing all persons : `list`](#listing-all-persons--list)
+    * [Editing a person : `edit`](#editing-a-person--edit)
+    * [Adding Tags : `tag`](#adding-tags--tag)
+    * [Removing Tags : `untag`](#removing-tags--untag)
+    * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
+    * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findany)
+    * [Pinning a person: `pin`](#pinning-a-person--pin)
+    * [Unpinning a person: `unpin`](#unpinning-a-person--unpin)
+    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
+    * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailinglist)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Command Assistant](#command-assistant)
+    * [Command History](#command-history)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -463,63 +484,27 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 ### User stories
 
-Chosen user stories v1.2
 
 | As a... | I want to... | So that I can... |
 |---|---|---|
-| Person who loves Birthdays    | Track birthdays                       | Easy way of checking the birthday of friends
-| Sociable person               | Partition frequent contacts           | Easy to access people within each group
+| Person who loves Birthdays    | Track birthdays                       | Easily checking the birthday of friends
+| Person who Loves Birthdays and is forgetful    | have birthday reminders            | Avoid miss any of his/her friends’ birthdays
+| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
+| Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
 | Party Organiser               | Add people to a party list            | Easily extend a party invite list
 | Party Organiser               | Remove people to a party list         | Easily Remove people from only one party
 | Party Organiser               | Search contacts by invited party      | Generate invite list
-|  |  |  |
-| User                          | App need to be bug free               | So that I can rely on the app to give me accurate contact details
-| Fast typer                    | Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
-| Sociable person               | To be able to save up to 100 contacts | I can keep all my friends contacts
-| User with many contacts       | Search timings to be reasonable       | Do not have to wait too long for search results
-| Forgetful user                | Track contacts                        | Retrieve Contact details whenever I need to contact somebody
-
-Nice to have user stories v1.2
-
-| As a... | I want to... | So that I can... |
-|---|---|---|
-| Beginner user                 | View feedback on wrong commands       | Format commands better
-| User                          | Can modify contact details            | So that I can update my contact details
-| Beginner user                 | View feedback on wrong commands       | To format commands better
-| Advanced user                 | Add nicknames to my contacts          | Find my close friends using their nicknames
-
-Future versions user stories
-
-| As a... | I want to... | So that I can... |
-| --- | --- | --- |
-| Beginner              | See sample commands                               | To see what I should be typing.
-| Beginner              | View tutorials                                    | To see how the app should be used
-| Beginner              | View helpful prompts                              | To see what can be done with the app
-| New user              | Immediately add my first contact                  | Use the product without reading a manual
-|  |  |  |
-| Advanced user         | Disable suggestions                               | Avoid accidentally pressing on them
-| Experienced user      | Quickly add contact without my mouse              | Just type
-| Experienced user      | Get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
-|  |  |  |
-| Forgetful person      | Use the help button                               | Remind myself how to use the app
-| Forgetful person      | Select from existing tags                         | Have consistent labelling
-|  |  |  |
-| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
-| Party Organiser       | Generate mailing list from my contacts            | Contact all invitees as a group
-| Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
-| Party Organiser       | Generate a mail to link for my selection          | Send emails to a group
-|  |  |  |
-| Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
-| Sociable person       | Pin frequent contacts                             | Access these contacts easily
-|  |  |  |
-| Fast typer            | Use the app with little lag                       | Can utilise functions of the app quickly
-|  |  |  |
-| Person                | Add new optional fields                           | Add my own types of data
-| Youth                 | Use Emojis                                        | Add <3 to people i like and poop to people I don’t
-| University student    | User experience to be smooth                      | Find who they want to contact easily
-|  |  |  |
-| User with many contacts   | Show search suggestions                       | Easily find contacts
-| User with many contacts   | Search timings to be reasonable               | Do not have to wait too long for search results
+| Party Organiser               | Delete multiple contacts at once      | Delete contacts that I no longer need faster
+| Sociable person               | Partition frequent contacts           | Easily access people that I contact often
+| Sociable person               | To be able to save up to 100 contacts | Keep all my friends contacts
+| Sociable person               | Search for contacts within a reasonable timing | Avoid waiting too long for search results
+| Beginner              | See sample commands                               | See what I should be typing.
+| Beginner              | View helpful prompts                              | See what can be done with the app
+| Beginner                 | View feedback on wrong commands       | Format commands better
+| Beginner     | Get help on specific commands                                 | Learn how to use the app
+| Fast typer                    | Use sentences to interact with the app | Utilise the functions of the app quicker without using a mouse
+| User                          | Can modify contact details            | Update my contact details
+| Experienced user      | Get suggestions on previously run commands          | Avoid typing the commands I use frequently again and again.
 
 ### Use cases
 
@@ -831,7 +816,89 @@ Future versions user stories
   * 2c1. CONNNECTIONS display an error message followed by a list of valid commands
 
   Use case ends.
+
+
+**Use case: Generate CSV file**
+
+**MSS**
+
+1.  User requests to generate a CSV file with contacts displayed with request fields.
+2. CONNECTIONS requests for user to input export location and file name.
+3. User selected export location and file name.
+4. CONNECTIONS generates CSV file in export location with file name.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs invalid fields
+    * 1a1. CONNECTIONS display an error message
     
+      Use case ends.
+    
+* 2a. User fails to choose export location
+    * 2a1. CONNECTIONS does not export the CSV file.
+      
+      Use case ends.
+
+**Use case: Deleting multiple contacts**
+
+**MSS**
+
+1. User requests to delete multiple contacts.
+2. CONNECTIONS deletes the contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User inputs indexes that are out of range
+    * 1a1. CONNECTIONS display an error message
+
+      Use case ends.
+
+* 1b. User inputs negative numbers
+    * 1b1. CONNECTIONS display an error message
+
+      Use case ends.
+    
+* 1c. User inputs start index that is bigger then end index
+    * 1c1. CONNECTIONS display an error message
+
+      Use case ends.
+
+**Use case: View prompts for commands**
+
+**MSS**
+
+1. User starts typing command.
+2. CONNECTIONS displays a prompt to help user write command.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is not writing a valid command.
+    * 1a1. CONNETIONS will not display prompt.
+
+      Use case ends.
+
+**Use case: View previous command history**
+
+**MSS**
+
+1. User requests to view previous commands.
+2. CONNECTIONS displays previous commands.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There is no previous command history.
+    * 1a1. CONNETIONS will not display command.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -839,9 +906,6 @@ Future versions user stories
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-
-*{More to be added}*
 
 ### Glossary
 * **CONNECTIONS**: The name of our product
