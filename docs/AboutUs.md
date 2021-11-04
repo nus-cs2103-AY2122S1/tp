@@ -16,7 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/huizhuansam.md)]
 
 - Role: Scheduling and Tracking, Deliverables and Deadlines
-- Responsibilities: User assistance, command syntax
+- Responsibilities: Command syntax, encryption module
 
 ### Kishendran Vendar Kon
 

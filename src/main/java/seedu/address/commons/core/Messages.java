@@ -10,5 +10,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_TOO_MANY_FLAGS = "Repeated flags!";
+    public static final String MESSAGE_EMPTY_PASSWORD = "Empty password given!";
+    public static final String MESSAGE_BAD_PREFIX_FORM =
+            "Prefixes must be followed by whitespace before supplying argument";
 
 }
