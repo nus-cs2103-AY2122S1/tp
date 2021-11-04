@@ -125,11 +125,11 @@ A policy should have more payments than the number of commissions, since every c
 | X payments per year, definite number of payments   | /p 10000 12 120        | Monthly payments of $100, 120 total payments |
 
 * Commission structure of the policy - `c/COMMISSION_% NUM_OF_COMM`:
-  * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
+  * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT_CENTS`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
   * `COMMISSION_%`: percentage of each payment that goes to commission
   * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
   *  E.g. `/c 6 5` Receives 6% commission for the first 5 payments.
-* `CONTACT_INDEX` refers to the current index of the contact in the contact list you wish to attach this policy to.
+* `CONTACT_INDEX` refers to the current index of the contact in the contact list that this policy belongs to.
 * `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires in YYYY-MM-DD format, optional.
 
 
@@ -151,7 +151,7 @@ Format: `listpolicy`
 
 Edits an existing policy in the application.
 
-Format: `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] 
+Format: `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] 
 [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
@@ -190,7 +190,7 @@ Format: `contactpolicy CONTACT_INDEX`
 
 Clear all policies from a contact.
 
-Format: `clearpolicy PERSON_INDEX`
+Format: `clearpolicy CONTACT_INDEX`
 
 ### Querying and Sorting Functionalities
 
@@ -258,13 +258,13 @@ Clears all contacts and policies from the application.
 
 Format: `clear`
 
-####Getting Help : `help`
+#### Getting Help : `help`
 
 Provides a helpful guide of the commands.
 
 Format: `help`
 
-####Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits the program.
 
@@ -294,10 +294,10 @@ Action | Format, Examples
 **Find Contacts** | `findcontact KEYWORD`
 **Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **Delete Policy** | `deletepolicy INDEX`
-**Edit Policy** | `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
+**Edit Policy** | `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **List Policies** | `listpolicy`
-**List Contact's Policies** | `contactpolicy PERSON_INDEX`
-**Clear Contact's Policies** | `clearpolicy PERSON_INDEX`
+**List Contact's Policies** | `contactpolicy CONTACT_INDEX`
+**Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
 **Show Expiring Policies** | `expiringpolicy`
 **Clear All** | `clear`
 **Download** | `download`
