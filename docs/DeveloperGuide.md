@@ -597,9 +597,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students
-2.  AcademyDirectory shows a list of students
+2.  Academy Directory shows a list of students
 3.  User requests to delete a specific student in the list
-4.  AcademyDirectory deletes the student
+4.  Academy Directory deletes the student
 
     Use case ends.
 
@@ -611,7 +611,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -620,9 +620,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students
-2.  AcademyDirectory shows a list of students
+2.  Academy Directory shows a list of students
 3.  User requests to edit a specific student in the list
-4.  AcademyDirectory edit the student
+4.  Academy Directory edit the student
 
     Use case ends.
 
@@ -634,7 +634,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -643,9 +643,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students attending the relevant Studio session
-2.  AcademyDirectory shows a list of students attending the relevant Studio session
+2.  Academy Directory shows a list of students attending the relevant Studio session
 3.  User requests to update the attendance of the student in the relevant Studio session
-4.  AcademyDirectory updates the student's attendance for the relevant Studio session
+4.  Academy Directory updates the student's attendance for the relevant Studio session
 
     Use case ends.
 
@@ -653,12 +653,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index for the Studio group is invalid.
 
-  * 1a1. AcademyDirectory shows an error message.
+  * 1a1. Academy Directory shows an error message.
       Use case resumes at step 1.
 
 * 1b. The given index for the Studio group's Studio session is invalid.
 
-  * 1b1. AcademyDirectory shows an error message.
+  * 1b1. Academy Directory shows an error message.
       Use case resumes at step 1.
 
 * 2a. The list is empty.
@@ -667,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given keyword to search for the student is gives no result.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -676,9 +676,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list students attending the relevant Studio session
-2. AcademyDirectory shows a list of students attending the relevant Studio session
+2. Academy Directory shows a list of students attending the relevant Studio session
 3. User requests to update the Studio participation of the student in the relevant Studio session with the appropriate Studio participation score
-4. AcademyDirectory updates the student's Studio participation for the relevant Studio session
+4. Academy Directory updates the student's Studio participation for the relevant Studio session
 
     Use case ends.
 
@@ -686,13 +686,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index for the Studio group is invalid.
 
-    * 1a1. AcademyDirectory shows an error message.
+    * 1a1. Academy Directory shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The given index for the Studio group's Studio session is invalid.
 
-    * 1b1. AcademyDirectory shows an error message.
+    * 1b1. Academy Directory shows an error message.
 
       Use case resumes at step 1.
 
@@ -702,13 +702,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given keyword to search for the student is gives no result.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The given Studio participation score is invalid (non-integer).
 
-    * 3b1. AcademyDirectory shows an error message.
+    * 3b1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -717,8 +717,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to add the grade for an assessment to a student.
-2. AcademyDirectory checks for existing instance of the assessment.
-3. AcademyDirectory records the input grade for the assessment.
+2. Academy Directory checks for existing instance of the assessment.
+3. Academy Directory records the input grade for the assessment.
    
     Use case ends.
 
@@ -726,25 +726,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The student's name does not match any of the names in the directory.
 
-    * 1a1. AcademyDirectory shows an error message.
+    * 1a1. Academy Directory shows an error message.
 
       Use case resumes at step 1.
     
 * 1b. The input grade is not a positive integer.
 
-    * 1b1. AcademyDirectory requests for user to enter a positive integer.
+    * 1b1. Academy Directory requests for user to enter a positive integer.
 
       Use case resumes at step 1.
 
 * 2a. The assessment already exists.
 
-    * 2a1. AcademyDirectory edits the grade for the existing assessment.
+    * 2a1. Academy Directory edits the grade for the existing assessment.
 
       Use case ends.
 
 * 2b. The assessment is new.
 
-    * 2b1. AcademyDirectory adds a new assessment with the input grade.
+    * 2b1. Academy Directory adds a new assessment with the input grade.
 
       Use case ends.
 
@@ -753,8 +753,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to display the grades for an assessment.
-2. AcademyDirectory parses through the students to obtain the grades.
-3. AcademyDirectory displays a list of students with the grades.
+2. Academy Directory parses through the students to obtain the grades.
+3. Academy Directory displays a list of students with the grades.
 
    Use case ends.
 
@@ -762,8 +762,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The assessment does not exist.
 
-    * 1a1. AcademyDirectory shows an error message.
-    * 1a2. AcademyDirectory requests for the user to try another assessment.
+    * 1a1. Academy Directory shows an error message.
+    * 1a2. Academy Directory requests for the user to try another assessment.
 
       Use case resumes at step 1.
 
@@ -772,8 +772,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to retrieve information
-2. AcademyDirectory obtain the queried information from the students.
-3. AcademyDirectory displays the list of information queried.
+2. Academy Directory obtain the queried information from the students.
+3. Academy Directory displays the list of information queried.
 
    Use case ends.
 
@@ -781,13 +781,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User specifies exact student name.
 
-    * 1a1. AcademyDirectory displays the queried information associated with the queried student.
+    * 1a1. Academy Directory displays the queried information associated with the queried student.
   
          Use case ends.
   
 * 1a. User's queried information is not supported 
-    * 1a1. AcademyDirectory shows an error message.
-    * 1a2. AcademyDirectory requests for the user to try another information.
+    * 1a1. Academy Directory shows an error message.
+    * 1a2. Academy Directory requests for the user to try another information.
   
         Use case ends.
 
