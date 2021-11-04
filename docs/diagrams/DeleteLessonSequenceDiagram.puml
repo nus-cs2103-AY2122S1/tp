@@ -49,16 +49,16 @@ deactivate TuitioneParser
 LogicManager -> DeleteLessonCommand : execute()
 activate DeleteLessonCommand
 
-DeleteLessonCommand -> Lesson : removeEnrolledStudents()
+DeleteLessonCommand -> Lesson : unenrollStudents()
 activate Lesson
 
 Lesson --> DeleteLessonCommand
 deactivate Lesson
 
-DeleteLessonCommand -> Model : deleteLesson(l)
+DeleteLessonCommand -> Model : deleteLesson(1)
 activate Model
 
-Model -> Lesson : deleteLesson(l)
+Model -> Lesson : delete\nLesson(l)
 destroy Lesson
 
 Model --> DeleteLessonCommand

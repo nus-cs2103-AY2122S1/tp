@@ -130,7 +130,9 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeveloperGuideImage/DeleteSequenceDiagram.png)
+<center>
+<img alt="Interactions Inside the Logic Component for the `delete 1` Command" src="images/DeveloperGuideImage/DeleteSequenceDiagram.png"/>
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -166,7 +168,7 @@ The `Model` component,
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
 
 <center>
-<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="450" />
+<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="500" />
 </center>
 
 </div>
