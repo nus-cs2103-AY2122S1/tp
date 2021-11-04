@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class TotalAttendanceContainsKeywordsPredicateTest {
     private final List<TotalAttendance> firstPredicateKeywordList = Collections.singletonList(new TotalAttendance(0));
@@ -44,10 +44,10 @@ public class TotalAttendanceContainsKeywordsPredicateTest {
         // matching keyword
         TotalAttendanceContainsKeywordsPredicate predicate =
                 new TotalAttendanceContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTotalAttendance(0).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTotalAttendance(0).build()));
 
         predicate = new TotalAttendanceContainsKeywordsPredicate(secondPredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTotalAttendance(10).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTotalAttendance(10).build()));
     }
 
     @Test
@@ -55,10 +55,10 @@ public class TotalAttendanceContainsKeywordsPredicateTest {
         // zero keywords
         TotalAttendanceContainsKeywordsPredicate predicate =
                 new TotalAttendanceContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().build()));
+        assertFalse(predicate.test(new MemberBuilder().build()));
 
         // non-matching keyword
         predicate = new TotalAttendanceContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertFalse(predicate.test(new PersonBuilder().withTotalAttendance(10).build()));
+        assertFalse(predicate.test(new MemberBuilder().withTotalAttendance(10).build()));
     }
 }

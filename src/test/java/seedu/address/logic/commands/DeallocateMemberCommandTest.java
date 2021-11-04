@@ -5,16 +5,16 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalMembers.AMY;
 
 import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.SportsPa;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facility.Facility;
 import seedu.address.testutil.FacilityBuilder;
@@ -36,14 +36,14 @@ public class DeallocateMemberCommandTest {
     }
 
     @Test
-    public void execute_deallocatePerson_successful() {
-        Model model = new ModelManager(new AddressBook(), new UserPrefs());
-        model.addPerson(AMY);
+    public void execute_deallocateMember_successful() {
+        Model model = new ModelManager(new SportsPa(), new UserPrefs());
+        model.addMember(AMY);
         Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
-        facility.addPersonToFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        facility.addMemberToFacilityOnDay(AMY, DayOfWeek.MONDAY);
         model.addFacility(facility);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         Facility facilityAfterDeallocation = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
         expectedModel.setFacility(facility, facilityAfterDeallocation);
 
@@ -54,9 +54,9 @@ public class DeallocateMemberCommandTest {
     }
 
     @Test
-    public void execute_deallocatePersonNotAllocated_failure() {
-        Model model = new ModelManager(new AddressBook(), new UserPrefs());
-        model.addPerson(AMY);
+    public void execute_deallocateMemberNotAllocated_failure() {
+        Model model = new ModelManager(new SportsPa(), new UserPrefs());
+        model.addMember(AMY);
         Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
         model.addFacility(facility);
 

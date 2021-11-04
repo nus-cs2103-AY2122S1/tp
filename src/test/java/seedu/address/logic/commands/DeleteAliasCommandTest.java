@@ -23,7 +23,7 @@ public class DeleteAliasCommandTest {
     @Test
     public void execute_deleteAlias_success() {
         ModelManager model = new ModelManager();
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         model.addAlias(new Alias(new Shortcut("lf"), new CommandWord("listf")));
         String expectedMessage = String.format(DeleteAliasCommand.MESSAGE_SUCCESS, "listf", "lf");
         assertCommandSuccess(new DeleteAliasCommand(new Shortcut("lf")), model, expectedMessage, expectedModel);

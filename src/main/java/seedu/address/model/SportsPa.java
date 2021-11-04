@@ -8,16 +8,16 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.UniqueFacilityList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.Member;
+import seedu.address.model.person.UniqueMemberList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the SportsPA level
+ * Duplicates are not allowed (by .isSameMember comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class SportsPa implements ReadOnlySportsPa {
 
-    private final UniquePersonList persons;
+    private final UniqueMemberList members;
     private final UniqueFacilityList facilities;
 
     /*
@@ -28,16 +28,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        members = new UniqueMemberList();
         facilities = new UniqueFacilityList();
     }
 
-    public AddressBook() {}
+    public SportsPa() {}
 
     /**
-     * Creates an AddressBook using the Persons and Facilities in the {@code toBeCopied}.
+     * Creates a SportsPa using the Members and Facilities in the {@code toBeCopied}.
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public SportsPa(ReadOnlySportsPa toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -45,11 +45,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the member list with {@code members}.
+     * {@code members} must not contain duplicate members.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setMembers(List<Member> members) {
+        this.members.setMembers(members);
     }
 
     /**
@@ -64,20 +64,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sorts the member list by name.
      */
     public void sortMemberListByName() {
-        this.persons.sortMembersByName();
+        this.members.sortMembersByName();
     }
 
     /**
      * Sorts the member list by tag.
      */
     public void sortMemberListByTags() {
-        this.persons.sortMembersByTags();
+        this.members.sortMembersByTags();
     }
     /**
      * Clears the contents of the member list.
      */
     public void resetMemberList() {
-        this.persons.resetMembers();
+        this.members.resetMembers();
     }
 
     /**
@@ -91,30 +91,30 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Resets today's attendance for all members in list.
      */
     public void resetTodayAttendance() {
-        this.persons.resetAttendance();
+        this.members.resetAttendance();
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code SportsPa} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlySportsPa newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setMembers(newData.getMemberList());
         setFacilities(newData.getFacilityList());
     }
 
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a member with the same identity as {@code member} exists in SportsPA.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasMember(Member member) {
+        requireNonNull(member);
+        return members.contains(member);
     }
 
     /**
-     * Returns true if a facility with the same details as {@code facility} exists in the address book.
+     * Returns true if a facility with the same details as {@code facility} exists in SportsPA.
      */
     public boolean hasFacility(Facility facility) {
         requireNonNull(facility);
@@ -122,11 +122,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
+     * Adds a member to SportsPA.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addMember(Member m) {
+        members.add(m);
     }
 
     /**
@@ -144,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param membersFilteredList List of filtered members to be allocated.
      * @return number of members left unallocated, -1 if zero members provided.
      */
-    public int split(FilteredList<Person> membersFilteredList, int dayNumber) {
+    public int split(FilteredList<Member> membersFilteredList, int dayNumber) {
         int memberCount = membersFilteredList.size();
         // facilities have the same capacity everyday so this can be considered the total capacity on the day to split
         int facilityCap = facilities.getTotalCapacity();
@@ -162,14 +162,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given member {@code target} in the list with {@code editedMember}.
+     * {@code target} must exist in SportsPA.
+     * The member identity of {@code editedMember} must not be the same as another existing member in SportsPA.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setMember(Member target, Member editedMember) {
+        requireNonNull(editedMember);
 
-        persons.setPerson(target, editedPerson);
+        members.setMember(target, editedMember);
     }
 
     /**
@@ -184,19 +184,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code SportsPa}.
+     * {@code key} must exist in SportsPA.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removePerson(Member key) {
+        members.remove(key);
         facilities.removePersonFromAllocations(key);
     }
 
     /**
      * Removes {@code key} from all allocations.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in SportsPA.
      */
-    public void removePersonFromAllocations(Person key) {
+    public void removeMemberFromAllocations(Member key) {
         facilities.removePersonFromAllocations(key);
     }
 
@@ -212,13 +212,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return members.asUnmodifiableObservableList().size() + " members";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Member> getMemberList() {
+        return members.asUnmodifiableObservableList();
     }
 
     @Override
@@ -229,13 +229,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons)
-                && facilities.equals(((AddressBook) other).facilities));
+                || (other instanceof SportsPa // instanceof handles nulls
+                && members.equals(((SportsPa) other).members)
+                && facilities.equals(((SportsPa) other).facilities));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return members.hashCode();
     }
 }

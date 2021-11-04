@@ -8,7 +8,7 @@ import java.util.Locale;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonAvailableOnDayPredicate;
+import seedu.address.model.person.MemberAvailableOnDayPredicate;
 
 /**
  * Splits members available on particular day to different Facilities.
@@ -42,7 +42,7 @@ public class SplitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(dayNumber);
+        MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(dayNumber);
 
         int result = model.split(predicate, dayNumber);
         if (result == -1) {

@@ -5,15 +5,15 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person} is available on the given day.
  */
-public class PersonAvailableOnDayPredicate implements Predicate<Person> {
+public class MemberAvailableOnDayPredicate implements Predicate<Member> {
     private final int dayNumber;
 
-    public PersonAvailableOnDayPredicate(int dayNumber) {
+    public MemberAvailableOnDayPredicate(int dayNumber) {
         this.dayNumber = dayNumber;
     }
 
     @Override
-    public boolean test(Person person) {
-        return person.isAvailableOnDay(dayNumber);
+    public boolean test(Member member) {
+        return member.isAvailableOnDay(dayNumber);
     }
 }

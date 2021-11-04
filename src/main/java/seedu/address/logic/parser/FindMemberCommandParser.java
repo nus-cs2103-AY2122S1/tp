@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TODAY_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_ATTENDANCE;
-import static seedu.address.model.person.PersonMatchesKeywordsPredicate.Builder;
+import static seedu.address.model.person.MemberMatchesKeywordsPredicate.Builder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,9 +21,9 @@ import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.AvailabilityContainsKeywordsPredicate;
+import seedu.address.model.person.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TodayAttendance;
@@ -56,9 +56,9 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
      * Generates the final predicate to be used for FindMemberCommand
      * @throws ParseException if the user input does not conform the expected format.
      */
-    private Predicate<Person> generatePredicate(String args) throws ParseException {
+    private Predicate<Member> generatePredicate(String args) throws ParseException {
         Builder builder = new Builder();
-        Predicate<Person> predicate = x -> true;
+        Predicate<Member> predicate = x -> true;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_AVAILABILITY, PREFIX_TAG, PREFIX_TODAY_ATTENDANCE, PREFIX_TOTAL_ATTENDANCE);
         if (!argMultimap.getPreamble().trim().isEmpty()) {
@@ -90,7 +90,7 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
         return builder.setPredicate(predicate).build();
     }
 
-    private Predicate<Person> generateNamePredicate(Name name, Builder builder, Predicate<Person> predicate) {
+    private Predicate<Member> generateNamePredicate(Name name, Builder builder, Predicate<Member> predicate) {
         String nameWithNoSpaces = name.toString().toLowerCase().replace("\\s+", "");
         List<String> nameList = new ArrayList<>(Arrays.asList(nameWithNoSpaces));
         predicate = predicate.and(new NameContainsKeywordsPredicate(nameList));
@@ -98,37 +98,37 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
         return predicate;
     }
 
-    private Predicate<Person> generatePhonePredicate(Phone phone, Builder builder, Predicate<Person> predicate) {
+    private Predicate<Member> generatePhonePredicate(Phone phone, Builder builder, Predicate<Member> predicate) {
         List<Phone> phoneList = new ArrayList<>(Arrays.asList(phone));
         predicate = predicate.and(new PhoneContainsKeywordsPredicate(phoneList));
         builder.setPhone(phone);
         return predicate;
     }
 
-    private Predicate<Person> generateTagPredicate(List<Tag> tags, Builder builder, Predicate<Person> predicate) {
+    private Predicate<Member> generateTagPredicate(List<Tag> tags, Builder builder, Predicate<Member> predicate) {
         predicate = predicate.and(new TagsContainKeywordsPredicate(tags));
         builder.setTags(tags);
         return predicate;
     }
 
-    private Predicate<Person> generateAvailabilityPredicate(Availability availability,
-                                                            Builder builder, Predicate<Person> predicate) {
+    private Predicate<Member> generateAvailabilityPredicate(Availability availability,
+                                                            Builder builder, Predicate<Member> predicate) {
         List<Availability> availabilityList = new ArrayList<>(Arrays.asList(availability));
         predicate = predicate.and(new AvailabilityContainsKeywordsPredicate(availabilityList));
         builder.setAvailability(availability);
         return predicate;
     }
 
-    private Predicate<Person> generateTodayAttendancePredicate(TodayAttendance todayAttendance,
-                                                               Builder builder, Predicate<Person> predicate) {
+    private Predicate<Member> generateTodayAttendancePredicate(TodayAttendance todayAttendance,
+                                                               Builder builder, Predicate<Member> predicate) {
         List<TodayAttendance> todayAttendanceList = new ArrayList<>(Arrays.asList(todayAttendance));
         predicate = predicate.and(new TodayAttendanceContainsKeywordsPredicate(todayAttendanceList));
         builder.setTodayAttendance(todayAttendance);
         return predicate;
     }
 
-    private Predicate<Person> generateTotalAttendancePredicate(TotalAttendance totalAttendance,
-                                                               Builder builder, Predicate<Person> predicate) {
+    private Predicate<Member> generateTotalAttendancePredicate(TotalAttendance totalAttendance,
+                                                               Builder builder, Predicate<Member> predicate) {
         List<TotalAttendance> totalAttendanceList = new ArrayList<>(Arrays.asList(totalAttendance));
         predicate = predicate.and(new TotalAttendanceContainsKeywordsPredicate(totalAttendanceList));
         builder.setTotalAttendance(totalAttendance);

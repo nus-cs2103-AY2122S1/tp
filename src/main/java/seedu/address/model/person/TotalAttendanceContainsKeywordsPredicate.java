@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code TotalAttendance} matches any of the keywords given.
  */
-public class TotalAttendanceContainsKeywordsPredicate implements Predicate<Person> {
+public class TotalAttendanceContainsKeywordsPredicate implements Predicate<Member> {
     private final List<TotalAttendance> totalAttendance;
 
     public TotalAttendanceContainsKeywordsPredicate(List<TotalAttendance> totalAttendance) {
@@ -14,9 +14,9 @@ public class TotalAttendanceContainsKeywordsPredicate implements Predicate<Perso
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Member member) {
         return totalAttendance.stream()
-                .anyMatch(totalAttendance -> person.getTotalAttendance().equals(totalAttendance));
+                .anyMatch(totalAttendance -> member.getTotalAttendance().equals(totalAttendance));
     }
 
     @Override

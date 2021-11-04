@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookEmptyMemberList;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPaEmptyMemberList;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import seedu.address.model.UserPrefs;
 public class ClearMembersCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptySportsPa_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,9 +21,9 @@ public class ClearMembersCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBookEmptyMemberList(), new UserPrefs());
+    public void execute_nonEmptySportsPa_success() {
+        Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalSportsPaEmptyMemberList(), new UserPrefs());
 
         assertCommandSuccess(new ClearMembersCommand(), model, ClearMembersCommand.MESSAGE_SUCCESS, expectedModel);
     }

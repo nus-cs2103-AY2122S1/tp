@@ -9,12 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalMembers.AMY;
+import static seedu.address.testutil.TypicalMembers.BOB;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import java.time.DayOfWeek;
 
@@ -23,9 +23,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditFacilityCommand.EditFacilityDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.SportsPa;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facility.Facility;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
@@ -36,7 +36,7 @@ import seedu.address.testutil.FacilityBuilder;
  */
 public class EditFacilityCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -47,7 +47,7 @@ public class EditFacilityCommandTest {
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SportsPa(model.getSportsPa()), new UserPrefs());
         expectedModel.setFacility(model.getFilteredFacilityList().get(0), editedFacility);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -69,7 +69,7 @@ public class EditFacilityCommandTest {
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SportsPa(model.getSportsPa()), new UserPrefs());
         expectedModel.setFacility(lastFacility, editedFacility);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -82,7 +82,7 @@ public class EditFacilityCommandTest {
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SportsPa(model.getSportsPa()), new UserPrefs());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -99,7 +99,7 @@ public class EditFacilityCommandTest {
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SportsPa(model.getSportsPa()), new UserPrefs());
         expectedModel.setFacility(model.getFilteredFacilityList().get(0), editedFacility);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -107,20 +107,20 @@ public class EditFacilityCommandTest {
 
     @Test
     public void execute_unfilteredListCapacityBelowNumberOfAllocations_clearsAllocation() {
-        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Model model = new ModelManager(new SportsPa(), new UserPrefs());
         Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
-        facility.addPersonToFacilityOnDay(AMY, DayOfWeek.MONDAY);
-        facility.addPersonToFacilityOnDay(BOB, DayOfWeek.MONDAY);
+        facility.addMemberToFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        facility.addMemberToFacilityOnDay(BOB, DayOfWeek.MONDAY);
 
         Facility editedFacility = new FacilityBuilder(facility)
                 .withCapacity("1").build();
-        editedFacility.removePersonFromFacilityOnDay(AMY, DayOfWeek.MONDAY);
-        editedFacility.removePersonFromFacilityOnDay(BOB, DayOfWeek.MONDAY);
+        editedFacility.removeMemberFromFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        editedFacility.removeMemberFromFacilityOnDay(BOB, DayOfWeek.MONDAY);
 
-        model.addPerson(AMY);
-        model.addPerson(BOB);
+        model.addMember(AMY);
+        model.addMember(BOB);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addFacility(editedFacility);
 
         model.addFacility(facility);
@@ -136,18 +136,18 @@ public class EditFacilityCommandTest {
 
     @Test
     public void execute_unfilteredListCapacityEqualNumberOfAllocations_doesNotClearAllocation() {
-        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Model model = new ModelManager(new SportsPa(), new UserPrefs());
         Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
-        facility.addPersonToFacilityOnDay(AMY, DayOfWeek.MONDAY);
-        facility.addPersonToFacilityOnDay(BOB, DayOfWeek.MONDAY);
+        facility.addMemberToFacilityOnDay(AMY, DayOfWeek.MONDAY);
+        facility.addMemberToFacilityOnDay(BOB, DayOfWeek.MONDAY);
 
         Facility editedFacility = new FacilityBuilder(facility)
                 .withCapacity("2").build();
 
-        model.addPerson(AMY);
-        model.addPerson(BOB);
+        model.addMember(AMY);
+        model.addMember(BOB);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addFacility(editedFacility);
 
         model.addFacility(facility);
@@ -174,7 +174,7 @@ public class EditFacilityCommandTest {
     public void execute_duplicateFacilityFilteredList() {
         showFacilityAtIndex(model, INDEX_FIRST);
 
-        Facility facilityInList = model.getAddressBook().getFacilityList().get(INDEX_SECOND.getZeroBased());
+        Facility facilityInList = model.getSportsPa().getFacilityList().get(INDEX_SECOND.getZeroBased());
         EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST,
                 new EditFacilityDescriptorBuilder(facilityInList).build());
 
@@ -196,7 +196,7 @@ public class EditFacilityCommandTest {
         showFacilityAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundsIndex = INDEX_SECOND;
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getFacilityList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getSportsPa().getFacilityList().size());
 
         EditFacilityDescriptor descriptor = new EditFacilityDescriptorBuilder()
                 .withFacilityName(VALID_FACILITY_NAME_COURT).build();

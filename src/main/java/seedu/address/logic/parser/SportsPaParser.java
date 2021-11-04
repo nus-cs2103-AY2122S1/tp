@@ -40,7 +40,7 @@ import seedu.address.model.alias.AliasMap;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SportsPaParser {
 
     /**
      * Used for initial separation of command word and args.

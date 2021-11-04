@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class PhoneContainsKeywordsPredicateTest {
     private final List<Phone> firstPredicateKeywordList = Collections.singletonList(new Phone(VALID_PHONE_AMY));
@@ -43,17 +43,17 @@ public class PhoneContainsKeywordsPredicateTest {
     public void test_phoneContainsKeywords_returnsTrue() {
         // matching keyword
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withPhone(VALID_PHONE_AMY).build()));
+        assertTrue(predicate.test(new MemberBuilder().withPhone(VALID_PHONE_AMY).build()));
     }
 
     @Test
     public void test_phoneDoesNotContainKeywords_returnsFalse() {
         // zero keywords
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withPhone(VALID_PHONE_BOB).build()));
+        assertFalse(predicate.test(new MemberBuilder().withPhone(VALID_PHONE_BOB).build()));
 
         // non-matching keyword
         predicate = new PhoneContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertFalse(predicate.test(new PersonBuilder().withPhone(VALID_PHONE_BOB).build()));
+        assertFalse(predicate.test(new MemberBuilder().withPhone(VALID_PHONE_BOB).build()));
     }
 }

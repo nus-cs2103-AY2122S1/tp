@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
 /**
- * Represents total attendance of a member.
+ * Represents a Member's total attendance in SportsPA.
  */
 public class TotalAttendance {
     private int totalAttendance;

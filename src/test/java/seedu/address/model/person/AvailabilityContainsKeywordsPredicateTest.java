@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class AvailabilityContainsKeywordsPredicateTest {
     private final List<DayOfWeek> monList = Collections.singletonList(DayOfWeek.MONDAY);
@@ -53,15 +53,15 @@ public class AvailabilityContainsKeywordsPredicateTest {
         // person's availability exactly matches the given availability of 1 day
         AvailabilityContainsKeywordsPredicate predicate =
                 new AvailabilityContainsKeywordsPredicate(Collections.singletonList(mon));
-        assertTrue(predicate.test(new PersonBuilder().withAvailability(monList).build()));
+        assertTrue(predicate.test(new MemberBuilder().withAvailability(monList).build()));
 
         // person's availability exactly matches the given availability of 2 days
         predicate = new AvailabilityContainsKeywordsPredicate(Collections.singletonList(monTue));
-        assertTrue(predicate.test(new PersonBuilder().withAvailability(monTueList).build()));
+        assertTrue(predicate.test(new MemberBuilder().withAvailability(monTueList).build()));
 
         // person's availability includes the given availability
         predicate = new AvailabilityContainsKeywordsPredicate(Collections.singletonList(mon));
-        assertTrue(predicate.test(new PersonBuilder().withAvailability(monTueList).build()));
+        assertTrue(predicate.test(new MemberBuilder().withAvailability(monTueList).build()));
     }
 
     @Test
@@ -69,18 +69,18 @@ public class AvailabilityContainsKeywordsPredicateTest {
         // zero keywords
         AvailabilityContainsKeywordsPredicate predicate =
                 new AvailabilityContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withAvailability(monList).build()));
+        assertFalse(predicate.test(new MemberBuilder().withAvailability(monList).build()));
 
         // person's availability has zero matching days
         predicate = new AvailabilityContainsKeywordsPredicate(Collections.singletonList(monTue));
-        assertFalse(predicate.test(new PersonBuilder().withAvailability(wedThuFriList).build()));
+        assertFalse(predicate.test(new MemberBuilder().withAvailability(wedThuFriList).build()));
 
         // person's availability matches only 1 day out of 2 given days
         predicate = new AvailabilityContainsKeywordsPredicate(Collections.singletonList(monTue));
-        assertFalse(predicate.test(new PersonBuilder().withAvailability(monList).build()));
+        assertFalse(predicate.test(new MemberBuilder().withAvailability(monList).build()));
 
         // person has default availability
         predicate = new AvailabilityContainsKeywordsPredicate(Collections.singletonList(monTue));
-        assertFalse(predicate.test(new PersonBuilder().build()));
+        assertFalse(predicate.test(new MemberBuilder().build()));
     }
 }

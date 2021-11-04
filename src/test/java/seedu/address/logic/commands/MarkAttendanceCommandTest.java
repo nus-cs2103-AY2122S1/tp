@@ -17,23 +17,23 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.person.Member;
+import seedu.address.testutil.MemberBuilder;
 
 public class MarkAttendanceCommandTest {
     private Model model = new ModelManager();
 
     @Test
     public void execute_validIndices_success() {
-        Person firstPerson = new PersonBuilder().withName("John").build();
-        Person secondPerson = new PersonBuilder().withName("Mat").build();
-        model.addPerson(firstPerson);
-        model.addPerson(secondPerson);
+        Member firstMember = new MemberBuilder().withName("John").build();
+        Member secondMember = new MemberBuilder().withName("Mat").build();
+        model.addMember(firstMember);
+        model.addMember(secondMember);
         MarkAttendanceCommand command = new MarkAttendanceCommand(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
 
         String expectedMessage = MarkAttendanceCommand.MESSAGE_SUCCESS;
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.markMembersAttendance(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -41,7 +41,7 @@ public class MarkAttendanceCommandTest {
 
     @Test
     public void execute_invalidIndices_throwsCommandException() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         MarkAttendanceCommand command = new MarkAttendanceCommand(Arrays.asList(outOfBoundsIndex));
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);

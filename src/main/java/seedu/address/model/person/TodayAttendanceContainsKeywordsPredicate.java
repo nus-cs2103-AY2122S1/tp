@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code TodayAttendance} matches any of the keywords given.
  */
-public class TodayAttendanceContainsKeywordsPredicate implements Predicate<Person> {
+public class TodayAttendanceContainsKeywordsPredicate implements Predicate<Member> {
 
     private final List<TodayAttendance> todayAttendance;
 
@@ -15,9 +15,9 @@ public class TodayAttendanceContainsKeywordsPredicate implements Predicate<Perso
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Member member) {
         return todayAttendance.stream()
-                .anyMatch(todayAttendance -> person.getTodayAttendance().equals(todayAttendance));
+                .anyMatch(todayAttendance -> member.getTodayAttendance().equals(todayAttendance));
     }
 
     @Override

@@ -10,18 +10,18 @@ import seedu.address.model.tag.Tag;
 /**
  * Tests that a {@code Person} matches any of the keywords given.
  */
-public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
+public class MemberMatchesKeywordsPredicate implements Predicate<Member> {
     private final Name name;
     private final Phone phone;
     private final List<Tag> tags;
     private final Availability availability;
     private final TodayAttendance todayAttendance;
     private final TotalAttendance totalAttendance;
-    private final Predicate<Person> predicate;
+    private final Predicate<Member> predicate;
 
-    private PersonMatchesKeywordsPredicate(Name name, Phone phone, List<Tag> tags,
+    private MemberMatchesKeywordsPredicate(Name name, Phone phone, List<Tag> tags,
                                            Availability availability, TodayAttendance todayAttendance,
-                                           TotalAttendance totalAttendance, Predicate<Person> predicate) {
+                                           TotalAttendance totalAttendance, Predicate<Member> predicate) {
         this.name = name;
         this.phone = phone;
         this.tags = tags;
@@ -32,19 +32,19 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
-        return predicate.test(person);
+    public boolean test(Member member) {
+        return predicate.test(member);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PersonMatchesKeywordsPredicate // instanceof handles nulls
-                && name.equals(((PersonMatchesKeywordsPredicate) other).name) // state check
-                && phone.equals(((PersonMatchesKeywordsPredicate) other).phone)
-                && tags.equals(((PersonMatchesKeywordsPredicate) other).tags)
-                && todayAttendance.equals(((PersonMatchesKeywordsPredicate) other).todayAttendance)
-                && totalAttendance.equals(((PersonMatchesKeywordsPredicate) other).totalAttendance));
+                || (other instanceof MemberMatchesKeywordsPredicate // instanceof handles nulls
+                && name.equals(((MemberMatchesKeywordsPredicate) other).name) // state check
+                && phone.equals(((MemberMatchesKeywordsPredicate) other).phone)
+                && tags.equals(((MemberMatchesKeywordsPredicate) other).tags)
+                && todayAttendance.equals(((MemberMatchesKeywordsPredicate) other).todayAttendance)
+                && totalAttendance.equals(((MemberMatchesKeywordsPredicate) other).totalAttendance));
     }
 
     public static class Builder {
@@ -55,7 +55,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         private Availability availability = new Availability(new ArrayList<>());
         private TodayAttendance todayAttendance = new TodayAttendance(false);
         private TotalAttendance totalAttendance = new TotalAttendance(0);
-        private Predicate<Person> predicate;
+        private Predicate<Member> predicate;
 
         public Builder setName(Name name) {
             this.name = name;
@@ -88,7 +88,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
 
 
-        public Builder setPredicate(Predicate<Person> predicate) {
+        public Builder setPredicate(Predicate<Member> predicate) {
             this.predicate = predicate;
             return this;
         }
@@ -96,8 +96,8 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         /**
          * Builds a {@code PersonMatchesKeywordsPredicate} to be used in {@code FindMemberCommand}
          */
-        public PersonMatchesKeywordsPredicate build() {
-            return new PersonMatchesKeywordsPredicate(name, phone, tags, availability,
+        public MemberMatchesKeywordsPredicate build() {
+            return new MemberMatchesKeywordsPredicate(name, phone, tags, availability,
                     todayAttendance, totalAttendance, predicate);
         }
     }

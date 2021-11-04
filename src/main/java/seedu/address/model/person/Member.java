@@ -11,10 +11,10 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Represents a Person in the address book.
+ * Represents a Member in SportsPA.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Member {
 
     // Identity fields
     private final Name name;
@@ -30,7 +30,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Availability availability, Set<Tag> tags) {
+    public Member(Name name, Phone phone, Availability availability, Set<Tag> tags) {
         requireAllNonNull(name, phone, availability, tags);
         this.name = name;
         this.phone = phone;
@@ -49,7 +49,7 @@ public class Person {
      * @param totalAttendance Total attendance of member.
      * @param tags Tags associated with member.
      */
-    public Person(Name name, Phone phone, Availability availability,
+    public Member(Name name, Phone phone, Availability availability,
                   TodayAttendance todayAttendance, TotalAttendance totalAttendance,
                   Set<Tag> tags) {
         requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance, tags);
@@ -62,7 +62,7 @@ public class Person {
     }
 
     /**
-     * Constructor that creates person object with attendance.
+     * Constructor that creates member object with attendance.
      *
      * @param name Name of member
      * @param phone Phone number of member
@@ -70,7 +70,7 @@ public class Person {
      * @param todayAttendance Today's attendance of member.
      * @param totalAttendance Total attendance of member.
      */
-    public Person(Name name, Phone phone, Availability availability,
+    public Member(Name name, Phone phone, Availability availability,
                   TodayAttendance todayAttendance, TotalAttendance totalAttendance) {
         requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance);
         this.name = name;
@@ -112,21 +112,21 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameMember(Member otherMember) {
+        if (otherMember == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherMember != null
+                && otherMember.getName().equals(getName());
     }
 
     /**
-     * Returns true if person is available on specified day. Otherwise,
+     * Returns true if member is available on specified day. Otherwise,
      * false is returned.
      *
-     * @param dayNumber Day to be checked if person is available.
-     * @return Boolean value if person is available on day.
+     * @param dayNumber Day to be checked if member is available.
+     * @return Boolean value if member is available on day.
      */
     public boolean isAvailableOnDay(int dayNumber) {
         return availability.contains(DayOfWeek.of(dayNumber));
@@ -144,7 +144,7 @@ public class Person {
     }
 
     /**
-     * Sets member as not present today.
+     * Sets the member as not present today.
      */
     public void setNotPresent() {
         if (isMarkedPresent()) {
@@ -163,18 +163,18 @@ public class Person {
     }
 
     /**
-     * Returns true if person has been marked present. Otherwise,
+     * Returns true if the member has been marked present. Otherwise,
      * false is returned.
      *
-     * @return Boolean value if person is marked present.
+     * @return Boolean value if the member is marked present.
      */
     public boolean isMarkedPresent() {
         return todayAttendance.isPresentToday();
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both members have the same identity and data fields.
+     * This defines a stronger notion of equality between two members.
      */
     @Override
     public boolean equals(Object other) {
@@ -182,17 +182,17 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Member)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getAvailability().equals(getAvailability())
-                && otherPerson.getTodayAttendance().equals(getTodayAttendance())
-                && otherPerson.getTotalAttendance().equals(getTotalAttendance())
-                && otherPerson.getTags().equals(getTags());
+        Member otherMember = (Member) other;
+        return otherMember.getName().equals(getName())
+                && otherMember.getPhone().equals(getPhone())
+                && otherMember.getAvailability().equals(getAvailability())
+                && otherMember.getTodayAttendance().equals(getTodayAttendance())
+                && otherMember.getTotalAttendance().equals(getTotalAttendance())
+                && otherMember.getTags().equals(getTags());
     }
 
     @Override

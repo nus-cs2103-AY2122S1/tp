@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.AvailabilityContainsKeywordsPredicate;
+import seedu.address.model.person.Member;
+import seedu.address.model.person.MemberMatchesKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TodayAttendance;
@@ -67,17 +67,17 @@ public class FindMemberCommandParserTest {
     private final TotalAttendance totalAttendance = new TotalAttendance(3);
 
     // predicates
-    private final Predicate<Person> namePredicate =
+    private final Predicate<Member> namePredicate =
             new NameContainsKeywordsPredicate(Collections.singletonList(VALID_NAME_AMY));
-    private final Predicate<Person> phonePredicate =
+    private final Predicate<Member> phonePredicate =
             new PhoneContainsKeywordsPredicate(Collections.singletonList(phone));
-    private final Predicate<Person> singleTagPredicate =
+    private final Predicate<Member> singleTagPredicate =
             new TagsContainKeywordsPredicate(Collections.singletonList(excoTag));
-    private final Predicate<Person> availabilityPredicate =
+    private final Predicate<Member> availabilityPredicate =
             new AvailabilityContainsKeywordsPredicate(Collections.singletonList(availability));
-    private final Predicate<Person> todayAttendancePredicate =
+    private final Predicate<Member> todayAttendancePredicate =
             new TodayAttendanceContainsKeywordsPredicate(Collections.singletonList(todayAttendance));
-    private final Predicate<Person> totalAttendancePredicate =
+    private final Predicate<Member> totalAttendancePredicate =
             new TotalAttendanceContainsKeywordsPredicate(Collections.singletonList(totalAttendance));
 
     @Test
@@ -89,44 +89,44 @@ public class FindMemberCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // valid name
-        Predicate<Person> predicate = x -> true;
-        Predicate<Person> personPredicate = predicate.and(namePredicate);
-        PersonMatchesKeywordsPredicate testPredicate =
-                new PersonMatchesKeywordsPredicate.Builder().setName(amyName).setPredicate(personPredicate).build();
+        Predicate<Member> predicate = x -> true;
+        Predicate<Member> personPredicate = predicate.and(namePredicate);
+        MemberMatchesKeywordsPredicate testPredicate =
+                new MemberMatchesKeywordsPredicate.Builder().setName(amyName).setPredicate(personPredicate).build();
         FindMemberCommand expectedCommand = new FindMemberCommand(testPredicate);
         assertParseSuccess(parser, NAME_DESC_AMY, expectedCommand);
 
         // valid phone
         personPredicate = predicate.and(phonePredicate);
-        testPredicate = new PersonMatchesKeywordsPredicate.Builder()
+        testPredicate = new MemberMatchesKeywordsPredicate.Builder()
                 .setPhone(phone).setPredicate(personPredicate).build();
         expectedCommand = new FindMemberCommand(testPredicate);
         assertParseSuccess(parser, PHONE_DESC_AMY, expectedCommand);
 
         // valid tag
         personPredicate = predicate.and(singleTagPredicate);
-        testPredicate = new PersonMatchesKeywordsPredicate.Builder()
+        testPredicate = new MemberMatchesKeywordsPredicate.Builder()
                 .setTags(Collections.singletonList(excoTag)).setPredicate(personPredicate).build();
         expectedCommand = new FindMemberCommand(testPredicate);
         assertParseSuccess(parser, TAG_DESC_EXCO, expectedCommand);
 
         // valid availability
         personPredicate = predicate.and(availabilityPredicate);
-        testPredicate = new PersonMatchesKeywordsPredicate.Builder()
+        testPredicate = new MemberMatchesKeywordsPredicate.Builder()
                 .setAvailability(availability).setPredicate(personPredicate).build();
         expectedCommand = new FindMemberCommand(testPredicate);
         assertParseSuccess(parser, AVAILABILITY_DESC_AMY, expectedCommand);
 
         // valid today attendance
         personPredicate = predicate.and(todayAttendancePredicate);
-        testPredicate = new PersonMatchesKeywordsPredicate.Builder()
+        testPredicate = new MemberMatchesKeywordsPredicate.Builder()
                 .setTodayAttendance(todayAttendance).setPredicate(personPredicate).build();
         expectedCommand = new FindMemberCommand(testPredicate);
         assertParseSuccess(parser, " tda/true", expectedCommand);
 
         // valid total attendance
         personPredicate = predicate.and(totalAttendancePredicate);
-        testPredicate = new PersonMatchesKeywordsPredicate.Builder()
+        testPredicate = new MemberMatchesKeywordsPredicate.Builder()
                 .setTotalAttendance(totalAttendance).setPredicate(personPredicate).build();
         expectedCommand = new FindMemberCommand(testPredicate);
         assertParseSuccess(parser, " tta/3", expectedCommand);
@@ -134,10 +134,10 @@ public class FindMemberCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Predicate<Person> predicate = x -> true;
+        Predicate<Member> predicate = x -> true;
         predicate = predicate.and(namePredicate);
         predicate = predicate.and(availabilityPredicate);
-        PersonMatchesKeywordsPredicate testPredicate = new PersonMatchesKeywordsPredicate.Builder().setName(amyName)
+        MemberMatchesKeywordsPredicate testPredicate = new MemberMatchesKeywordsPredicate.Builder().setName(amyName)
                         .setAvailability(availability).setPredicate(predicate).build();
         FindMemberCommand expectedCommand = new FindMemberCommand(testPredicate);
 
@@ -148,10 +148,10 @@ public class FindMemberCommandParserTest {
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
-        Predicate<Person> predicate = x -> true;
+        Predicate<Member> predicate = x -> true;
         predicate = predicate.and(namePredicate);
-        PersonMatchesKeywordsPredicate testPredicate =
-                new PersonMatchesKeywordsPredicate.Builder().setName(amyName).setPredicate(predicate).build();
+        MemberMatchesKeywordsPredicate testPredicate =
+                new MemberMatchesKeywordsPredicate.Builder().setName(amyName).setPredicate(predicate).build();
         FindMemberCommand expectedCommand = new FindMemberCommand(testPredicate);
 
         assertParseSuccess(parser, INVALID_NAME_DESC + NAME_DESC_AMY, expectedCommand);
@@ -159,10 +159,10 @@ public class FindMemberCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Predicate<Person> predicate = x -> true;
+        Predicate<Member> predicate = x -> true;
         predicate = predicate.and(namePredicate);
-        PersonMatchesKeywordsPredicate testPredicate =
-                new PersonMatchesKeywordsPredicate.Builder().setName(amyName).setPredicate(predicate).build();
+        MemberMatchesKeywordsPredicate testPredicate =
+                new MemberMatchesKeywordsPredicate.Builder().setName(amyName).setPredicate(predicate).build();
         FindMemberCommand expectedCommand = new FindMemberCommand(testPredicate);
 
         assertParseSuccess(parser, NAME_DESC_BOB + NAME_DESC_AMY, expectedCommand);

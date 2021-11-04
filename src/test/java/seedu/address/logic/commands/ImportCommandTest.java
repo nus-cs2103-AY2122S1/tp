@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.ALICE_DIFFERENT_PHONE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalMembers.ALICE;
+import static seedu.address.testutil.TypicalMembers.ALICE_DIFFERENT_PHONE;
+import static seedu.address.testutil.TypicalMembers.HOON;
+import static seedu.address.testutil.TypicalMembers.IDA;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,23 +21,23 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ImportCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
 
     @Test
     public void execute_personNotInAddressBook_listOfPersonAddedWithNoReplacement() {
-        String testFilePath = "src/test/data/ImportCommandTest/SamePersonNotInAddressBook.csv";
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(HOON);
-        expectedModel.addPerson(IDA);
+        String testFilePath = "src/test/data/ImportCommandTest/SameMemberNotInSportsPa.csv";
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
+        expectedModel.addMember(HOON);
+        expectedModel.addMember(IDA);
         assertCommandSuccess(new ImportCommand(testFilePath), model, ImportCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_personInAddressBook_listOfPersonAddedWithReplacement() {
-        String testFilePath = "src/test/data/ImportCommandTest/SamePersonInAddressBook.csv";
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(HOON);
-        expectedModel.setPerson(ALICE, ALICE_DIFFERENT_PHONE);
+        String testFilePath = "src/test/data/ImportCommandTest/SameMemberInSportsPa.csv";
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
+        expectedModel.addMember(HOON);
+        expectedModel.setMember(ALICE, ALICE_DIFFERENT_PHONE);
         assertCommandSuccess(new ImportCommand(testFilePath), model, ImportCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

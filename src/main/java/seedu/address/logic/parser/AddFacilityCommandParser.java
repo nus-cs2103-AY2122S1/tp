@@ -22,7 +22,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Member;
 
 /**
  * Parses input arguments and creates a new AddFacilityCommand object.
@@ -52,7 +52,7 @@ public class AddFacilityCommandParser implements Parser<AddFacilityCommand> {
         Time time = ParserUtil.parseTime(argMultiMap.getValue(PREFIX_TIME).get());
         Capacity capacity = ParserUtil.parseCapacity(argMultiMap.getValue(PREFIX_CAPACITY).get());
         // add command does not allow adding allocations
-        Map<DayOfWeek, List<Person>> allocationMap = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> allocationMap = new EnumMap<>(DayOfWeek.class);
         for (DayOfWeek day : DayOfWeek.values()) {
             allocationMap.put(day, new ArrayList<>());
         }
