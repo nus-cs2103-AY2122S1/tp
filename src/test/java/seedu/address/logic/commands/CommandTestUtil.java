@@ -119,6 +119,7 @@ public class CommandTestUtil {
             Model expectedModel) {
         Summary summary = new Summary(expectedModel.getAddressBook());
         CommandResult expectedCommandResult;
+        // Commands that have do not update Summary
         if (command instanceof CmdCommand || command instanceof EditCommand || command instanceof ExitCommand
                 || command instanceof ExportCommand || command instanceof HelpCommand
                 || command instanceof SortCommand) {
