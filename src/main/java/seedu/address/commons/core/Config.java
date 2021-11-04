@@ -9,7 +9,6 @@ import java.util.logging.Level;
  * Config values used by the app
  */
 public class Config {
-
     public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
 
     // Config values customizable through config file
@@ -37,12 +36,12 @@ public class Config {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Config)) { //this handles null as well.
+
+        if (!(other instanceof Config)) { // this handles null as well.
             return false;
         }
 
         Config o = (Config) other;
-
         return Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
     }
@@ -54,10 +53,6 @@ public class Config {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Current log level : " + logLevel);
-        sb.append("\nPreference file Location : " + userPrefsFilePath);
-        return sb.toString();
+        return "Current log level : " + logLevel + "\nPreference file Location : " + userPrefsFilePath;
     }
-
 }

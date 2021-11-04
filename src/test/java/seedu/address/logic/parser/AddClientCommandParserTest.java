@@ -122,7 +122,7 @@ public class AddClientCommandParserTest {
                 .substring(4);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
         Order order = new Order(new ID(Integer.parseInt(idString)), new Quantity("1"),
-                LocalDate.parse("2021/10/27", formatter));
+                LocalDate.parse("2021/10/27", formatter), model);
         orders.add(order);
         descriptor.setOrders(orders);
         testValidAttributes("John Doe -pn 12345678 -o " + idString + " 1 2021/10/27", descriptor, parser, model);

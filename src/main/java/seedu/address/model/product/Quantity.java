@@ -7,6 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Product's quantity in Sellah.
  */
 public class Quantity implements Comparable<Quantity> {
+    public static final Quantity QUANTITY_ZERO = new Quantity("0");
+
     public static final String MESSAGE_CONSTRAINTS =
             "Quantity should only contain numbers and it should not be blank";
 

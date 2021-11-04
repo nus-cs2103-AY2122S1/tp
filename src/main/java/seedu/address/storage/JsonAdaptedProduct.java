@@ -23,7 +23,8 @@ public class JsonAdaptedProduct {
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
      */
     @JsonCreator
-    public JsonAdaptedProduct(@JsonProperty("name") String name, @JsonProperty("unitPrice") String unitPrice,
+    public JsonAdaptedProduct(@JsonProperty("name") String name,
+                              @JsonProperty("unitPrice") String unitPrice,
                               @JsonProperty("quantity") String quantity) {
         this.name = name;
         this.unitPrice = unitPrice;

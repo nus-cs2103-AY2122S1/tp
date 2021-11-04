@@ -41,7 +41,7 @@ public class EditProductCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_CANNON, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_CANNON, Index.MESSAGE_CONSTRAINTS);
 
         // no field specified
         assertParseFailure(parser, "1", EditProductCommand.MESSAGE_NOT_EDITED);
@@ -53,16 +53,16 @@ public class EditProductCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_CANNON, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_CANNON, Index.MESSAGE_CONSTRAINTS);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_CANNON, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_CANNON, Index.MESSAGE_CONSTRAINTS);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", Index.MESSAGE_CONSTRAINTS);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 -i 2", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 -i 2", Index.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -87,7 +87,7 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 1. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. You can use
    the [`clear`](#48-clearing-all-data) command to purge all data. <br>
-   ![Ui](images/UiHelpCommand.png)
+   ![Ui](images/UIStartup.png)
 
 1. Refer to the [Features](#4-features) below for details of each command.
 
@@ -210,16 +210,24 @@ Format: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 
 > Note: the format of `ORDER` is `PRODUCT_ID QUANTITY DATE`, e.g. `-o 0 10 10/26` represents an order made on 26 Oct of the current year, the product requested has `PRODUCT_ID` = `0` and `QUANTITY` = `10`.
 
-Example: `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, whose
+Example (without orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, 
+whose
 `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road`.
 
-Expected Output:
+Example (with orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road -o 0 10 10/26` adds a new 
+`Client` `Ben`,
+whose `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road` with an `ORDER` of 
+`QUANTITY` `10` of product with `IDENTITY` `0` on `DATE` `26/10/<curr year>`.
+
+Expected Output (without orders):
 ![Ui](images/UIAddClientCommand.png)
+
+> Note: the expected output of an addClient command with orders is similar to the output above except that the orders added will be displayed.
 
 #### 4.2.2 Adding a Product
 
 Adds a product with name, unit price and optional quantity. If quantity is not specified, the number of product is not
-0, but undefined instead.
+0, but undefined instead. Unit price have to only contain 2 decimal places. `-$ 0.2` and `-$ 0.002` would be invalid.
 
 Format: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
@@ -308,10 +316,17 @@ Expected Output:
 
 ### 4.5 Find
 
-Finds a client or product in Sellah, based on the name specified in `-n`.
+Finds a client or product in Sellah based on the name. If there are no matching name, Sellah will show an empty list.
 
-An error message will be displayed if the format of a parameter is incorrect. The name you provided must fully match
-(case-insensitive) the name of the client or product in Sellah, otherwise you will receive an error message.
+An error message will be displayed if the format of a parameter is incorrect. 
+
+The name you provide must fully match (case-insensitive) the name of the client or product in Sellah.
+
+Example : `find -c ben` will match with `Ben`, but will not match with `Benson`.
+
+If multiple keywords are specified, any name matching the keywords will be displayed.
+
+Example: `find -c alice ben charlie` will match with `alice`, `ben`, and `charlie`.
 
 #### 4.5.1 Finding a Client
 
@@ -319,7 +334,7 @@ Finds a client in Sellah.
 
 Format : `find -c NAME`
 
-Example : `find -c john` Shows a list of all clients with the `NAME` `john` in Sellah.
+Example : `find -c Benson` Shows a list of all clients with the `NAME` `Benson` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindClientCommand.png)
@@ -330,15 +345,15 @@ Finds a product in Sellah.
 
 Format : `find -p NAME`
 
-Example : `find -p phone` Shows a list of all products with the `NAME` `phone` in Sellah.
+Example : `find -p apple` Shows a list of all products with the `NAME` `apple` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindProductCommand.png)
 
 ### 4.6 List
 
-Displays a list of all the clients or products in Sellah. If there are no clients or products, a message will inform you
-that Sellah has no clients or product, depending on whether you are listing client or product.
+Displays a list of all the clients or products in Sellah. If there are no clients or products, Sellah will show
+an empty list.
 
 An error message will be displayed if the format of a parameter is incorrect.
 

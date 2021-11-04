@@ -12,7 +12,6 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
-import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Quantity;
@@ -87,11 +86,11 @@ public class EditClientDescriptorBuilder {
                         args[2] = String.format("%d/%s", year, args[2]);
                     }
 
-                    ID id = new ID(args[0]);
+                    Name productName = new Name(args[0]);
                     Quantity quantity = new Quantity(args[1]);
                     LocalDate time = LocalDate.parse(args[2], DateTimeFormatter.ofPattern("yyyy/M/d"));
 
-                    return new Order(id, quantity, time);
+                    return new Order(productName, quantity, time);
                 }).collect(Collectors.toSet());
         descriptor.setOrders(orderSet);
         return this;

@@ -9,11 +9,8 @@ import seedu.address.model.Model;
  * Lists all Clients in the application to the user.
  */
 public class ListClientCommand extends Command {
-
     public static final String COMMAND_WORD = "list -c";
-
     public static final String MESSAGE_SUCCESS = "Listed all clients";
-
 
     @Override
     public CommandResult execute(Model model) {

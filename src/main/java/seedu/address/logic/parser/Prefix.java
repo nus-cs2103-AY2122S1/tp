@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 /**
  * A prefix that marks the beginning of an argument in an arguments string.
- * E.g. 't/' in 'add James t/ friend'.
+ * E.g. '-pn' in 'add -c James -pn 12345678'.
  */
 public class Prefix {
     private final String prefix;
@@ -29,6 +29,7 @@ public class Prefix {
         if (!(obj instanceof Prefix)) {
             return false;
         }
+
         if (obj == this) {
             return true;
         }

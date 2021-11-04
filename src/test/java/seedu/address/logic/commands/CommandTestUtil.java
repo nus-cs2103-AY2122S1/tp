@@ -10,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_PRICE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalProducts.CANNON;
+import static seedu.address.testutil.TypicalProducts.DAISY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +29,6 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductContainsKeywordsPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.EditProductDescriptorBuilder;
-import seedu.address.testutil.TypicalProducts;
 
 /**
  * Contains helper methods for testing commands.
@@ -41,8 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ORDER_ONE = TypicalProducts.CANNON.getId() + " 1 1/1";
-    public static final String VALID_ORDER_TWO = TypicalProducts.DAISY.getId() + " 455 2020/12/31";
+    public static final String VALID_ORDER_ONE = CANNON.getName() + " 1 1/1";
+    public static final String VALID_ORDER_TWO = DAISY.getName() + " 455 2020/12/31";
 
     public static final String VALID_NAME_CANNON = "Cannon";
     public static final String VALID_NAME_DAISY = "Daisy";
@@ -59,8 +60,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String ORDER_DESC_ONE = " " + PREFIX_ORDER + VALID_ORDER_ONE;
-    public static final String ORDER_DESC_TWO = " " + PREFIX_ORDER + VALID_ORDER_TWO;
+    public static final String ORDER_DESC_ONE = " " + PREFIX_ORDER + CANNON.getId() + " 1 1/1";
+    public static final String ORDER_DESC_TWO = " " + PREFIX_ORDER + DAISY.getId() + " 455 2020/12/31";
 
     public static final String NAME_DESC_CANNON = " " + PREFIX_NAME + VALID_NAME_CANNON;
     public static final String NAME_DESC_DAISY = " " + PREFIX_NAME + VALID_NAME_DAISY;
