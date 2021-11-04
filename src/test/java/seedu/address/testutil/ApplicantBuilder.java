@@ -5,6 +5,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Position;
 
 
@@ -14,12 +15,14 @@ public class ApplicantBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Position DEFAULT_POSITION = new PositionBuilder().build();
+    private static final ProfileUrl DEFAULT_GITHUB_PROFILE = ProfileUrl.ofNullable("https://github.com/empty");
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Position position;
+    private ProfileUrl gitHubProfile;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -30,6 +33,7 @@ public class ApplicantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         position = DEFAULT_POSITION;
+        gitHubProfile = DEFAULT_GITHUB_PROFILE;
     }
 
     /**
@@ -41,6 +45,7 @@ public class ApplicantBuilder {
         email = applicantToCopy.getEmail();
         address = applicantToCopy.getAddress();
         position = applicantToCopy.getApplication().getPosition();
+        gitHubProfile = applicantToCopy.getGitHubUrl();
     }
 
     /**
@@ -83,7 +88,15 @@ public class ApplicantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code gitHubProfile} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withGitHubProfile(String githubUrl) {
+        this.gitHubProfile = ProfileUrl.ofNullable(githubUrl);
+        return this;
+    }
+
     public Applicant build() {
-        return new Applicant(name, phone, email, address, position);
+        return new Applicant(name, phone, email, address, position, gitHubProfile);
     }
 }

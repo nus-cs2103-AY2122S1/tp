@@ -23,34 +23,43 @@ public class TypicalApplicants {
 
     public static final Applicant ALICE = new ApplicantBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withPosition(DATASCIENTIST).build();
+            .withPhone("94351253").withPosition(DATASCIENTIST).withGitHubProfile("https://github.com/empty").build();
     public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withPosition(SOFTWAREARCHITECT)
+            .withGitHubProfile("https://github.com/empty")
             .build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withPosition(DATASCIENTIST).build();
+            .withEmail("heinz@example.com").withAddress("wall street").withPosition(DATASCIENTIST)
+            .withGitHubProfile("https://github.com/empty").build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withPosition(DATAENGINEER).build();
+            .withEmail("cornelia@example.com").withAddress("10th street").withPosition(DATAENGINEER)
+            .withGitHubProfile("https://github.com/empty").build();
     public static final Applicant ELLE = new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").withPosition(SOFTWAREARCHITECT).build();
+            .withEmail("werner@example.com").withAddress("michegan ave").withPosition(SOFTWAREARCHITECT)
+            .withGitHubProfile("https://github.com/empty").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withPosition(DATASCIENTIST).build();
+            .withEmail("lydia@example.com").withAddress("little tokyo").withPosition(DATASCIENTIST)
+            .withGitHubProfile("https://github.com/empty").build();
     public static final Applicant GEORGE = new ApplicantBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").withPosition(DATAENGINEER).build();
+            .withEmail("anna@example.com").withAddress("4th street").withPosition(DATAENGINEER)
+            .withGitHubProfile("https://github.com/empty").build();
 
     // Manually added
     public static final Applicant HOON = new ApplicantBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").withPosition(DATAENGINEER).build();
+            .withEmail("stefan@example.com").withAddress("little india").withPosition(DATAENGINEER)
+            .withGitHubProfile("https://github.com/empty").build();
     public static final Applicant IDA = new ApplicantBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").withPosition(DATAENGINEER).build();
+            .withEmail("hans@example.com").withAddress("chicago ave").withPosition(DATAENGINEER)
+            .withGitHubProfile("https://github.com/empty").build();
 
     // Manually added - Applicant's details found in {@code CommandTestUtil}
     public static final Applicant AMY = new ApplicantBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPosition(DATASCIENTIST).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPosition(DATASCIENTIST)
+            .withGitHubProfile("https://github.com/empty").build();
     public static final Applicant BOB = new ApplicantBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withPosition(SOFTWAREARCHITECT)
-            .build();
+            .withGitHubProfile("https://github.com/empty").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
