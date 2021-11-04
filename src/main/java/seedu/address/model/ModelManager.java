@@ -42,6 +42,9 @@ public class ModelManager implements Model {
 
     private Predicate<Task> viewAllTasksFindPred = s -> true;
 
+    /** Whether the task list panel is displaying every task list. */
+    private boolean isViewAllTasks;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -56,6 +59,7 @@ public class ModelManager implements Model {
         this.taskListManager = new TaskListManager();
         taskListManager.initialiseArchive(this.getAddressBook().getPersonList());
         this.userCommandCache = UserCommandCache.getInstance();
+        this.isViewAllTasks = false;
 
         onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyFilteredPersons);
@@ -130,7 +134,6 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         taskListManager.createNewEntry(person);
         taskListManager.updateStatistics();
         updateObservablePersonList();
@@ -177,13 +180,15 @@ public class ModelManager implements Model {
 
     @Override
     public void updateObservablePersonList() {
+        setIsViewAllTasks(true);
         List<Person> personList = new ArrayList<>();
         for (Person person : addressBook.getPersonList()) {
-            personList.add(person.makeClone());
+            Person personClone = person.makeClone();
+            personClone.getModifiableTasks().clear();
+            personClone.getModifiableTasks().addAll(person.filterTasks(viewAllTasksFindPred));
+            personList.add(personClone);
         }
-        for (Person person : personList) {
-            person.filterTasks(viewAllTasksFindPred);
-        }
+
         observablePersons = FXCollections.observableArrayList(personList);
         observablePersons = observablePersons.filtered(person -> !person.getTasks().isEmpty());
     }
@@ -231,11 +236,13 @@ public class ModelManager implements Model {
 
     @Override
     public void displayPersonTaskList(Person person) {
+        setIsViewAllTasks(false);
         taskListManager.setToDisplayTaskList(person.getName(), false);
     }
 
     @Override
     public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+        setIsViewAllTasks(false);
         taskListManager.setFilteredTasksPredicate(predicate);
         taskListManager.setToDisplayTaskList(person.getName(), true);
     }
@@ -243,6 +250,16 @@ public class ModelManager implements Model {
     @Override
     public void displayFilteredTaskList(Predicate<Task> predicate) {
         taskListManager.setFilteredTasksPredicate(predicate);
+    }
+
+    @Override
+    public boolean getIsViewAllTasks() {
+        return isViewAllTasks;
+    }
+
+    @Override
+    public void setIsViewAllTasks(boolean isViewAllTasks) {
+        this.isViewAllTasks = isViewAllTasks;
     }
 
     //=========== cache operation =============================================================

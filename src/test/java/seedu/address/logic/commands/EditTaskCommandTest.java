@@ -41,6 +41,8 @@ public class EditTaskCommandTest {
     @Test
     public void execute_filteredList_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(personToEdit);
+
         List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
         Task newTask = new Task(new TaskName("walk"), null, null, null);
         editTaskDescriptor.setTaskName(new TaskName("walk"));
@@ -54,8 +56,11 @@ public class EditTaskCommandTest {
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask.toString());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
+        expectedModel.displayPersonTaskList(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
@@ -63,6 +68,8 @@ public class EditTaskCommandTest {
     @Test
     public void execute_outOfBoundsPersonIndexFilteredList_failure() {
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(person);
+
         Index outOfBoundIndex = Index.fromZeroBased(person.getTasks().size());
         editTaskDescriptor.setTaskName(new TaskName("walk"));
         EditTaskCommand editTaskCommand = new EditTaskCommand(
@@ -76,6 +83,8 @@ public class EditTaskCommandTest {
     @Test
     public void execute_duplicateTask_failure() {
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(person);
+
         Task task = person.getTasks().get(0);
         editTaskDescriptor.setTaskName(task.getTaskName());
         editTaskDescriptor.setTaskDate(task.getDate());
