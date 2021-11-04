@@ -57,6 +57,7 @@ Given below are my contributions to the project.
 * **Testing**
   1. Wrote unit/integration tests for storage, add friend and add game commands.
   2. Wrote unit/integration tests(with Model) for Edit Friend functionality
+  3. Wrote unit/integration tests for recommend functionality - ensuring it works with e.g. list command in succession.
 
 * **Code contributed**: 
   [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevin9foong&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
@@ -72,6 +73,9 @@ Given below are my contributions to the project.
     2. Maintenance of `add friend` and `add game` features in the UG.  
     3. Added the documentation for the features `assign skill`, `edit friend` and `recommend friend to play with`.
     4. Minor changes to formatting and optimizing words used. 
+    5. Adding of symbols, constraints to each user command for user's reference. 
+    6. Adding of application UI overview and FAQ sections. 
+    7. Add explanations for terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
