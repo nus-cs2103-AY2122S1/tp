@@ -83,7 +83,7 @@ public class CommandTestUtil {
     public static final String VALID_EXISTING_FILE = "existingFile.json";
     public static final String INVALID_FILENAME_TXT = "importNewPerson.txt";
     public static final String INVALID_DOUBLE_FILENAME_TXT = "importNewPerson.json importNewPerson.json";
-    public static final String DUPLICATE_PERSON_FILENAME_JSON= "duplicatePerson.json";
+    public static final String DUPLICATE_PERSON_FILENAME_JSON = "duplicatePerson.json";
     public static final String WRONGLY_FORMATTED_JSON = "wronglyFormatted.json";
     public static final String WRONGLY_FORMATTED_CSV = "wronglyFormatted.csv";
 

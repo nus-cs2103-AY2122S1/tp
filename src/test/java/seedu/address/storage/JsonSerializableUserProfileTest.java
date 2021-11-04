@@ -20,9 +20,9 @@ public class JsonSerializableUserProfileTest {
      */
     @Test
     public void toModelType_jsonAdaptedPerson_success() throws IllegalValueException {
-        Person ALICE = TypicalPersons.ALICE;
-        JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson(ALICE);
+        Person alice = TypicalPersons.ALICE;
+        JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson(alice);
         JsonSerializableUserProfile userProfile = new JsonSerializableUserProfile(jsonAdaptedPerson);
-        assertEquals(ALICE, userProfile.toModelType());
+        assertEquals(alice, userProfile.toModelType());
     }
 }
