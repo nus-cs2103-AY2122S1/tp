@@ -90,6 +90,19 @@ public class StringUtil {
     }
 
     /**
+     * Removes flags (words starting with "-" character) from a string
+     * @param s input string
+     * @return string with flags removed
+     */
+    public static String stripFlags(String s) {
+        requireNonNull(s);
+        String[] result = Arrays.stream(s.split("\\s+"))
+                .filter(word -> !word.startsWith("-"))
+                .toArray(String[]::new);
+        return String.join(" ", result);
+    }
+
+    /**
      * Removes extra whitespace characters found within the command
      * @param s input string
      * @return string with extra whitespace characters replaced with a single space

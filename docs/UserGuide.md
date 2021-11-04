@@ -64,6 +64,8 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 * Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Flags such as `-contacts` and `-folders` are part of the command word and should be placed adjacent to the main command word
+
 </div>
 
 ### Viewing help: `help`
@@ -123,11 +125,11 @@ Examples:
 *  `vim 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `vim 2 -n Betsy Crower -t ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-#### Locating persons by name: `find`
+#### Locating persons by name: `find -contacts`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find -contacts KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -135,10 +137,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* All flags after `-contacts` will be ignored e.g. `find -contacts -invalid_flag Hans` is equivalent to `find -contacts Hans`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find -contacts John` returns `john` and `John Doe`
+* `find -contacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### Deleting a person: `rm`
@@ -153,7 +156,7 @@ Format: `rm INDEX`
 
 Examples:
 * `ls -contacts` followed by `rm 2` deletes the 2nd person in UNIon.
-* `find Betsy` followed by `rm 1` deletes the 1st person in the results of the `find` command.
+* `find -contacts Betsy` followed by `rm 1` deletes the 1st person in the results of the `find -contacts` command.
 
 #### Clearing all people: `rm -contacts`
 
@@ -231,6 +234,7 @@ Format: `find -folders KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `CS` will match `CS2103` and `CS2101`.
 * Folders matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `CS2103 Team Project` will return `CS2103`, `Team Project`
+* All flags after `-folders` will be ignored e.g. `find -folders -invalid_flag CS2103` is equivalent to `find -contacts CS2103`
 
 Examples:
 * `find -folders CS` returns `CS2103` and `CS2101`
@@ -289,7 +293,7 @@ Action | Format, Examples
 **Add new contact** | `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]` <br> e.g., `touch -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague`
 **List contacts** | `ls -contacts`
 **Edit contact** | `vim INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]` <br> e.g., `vim 2 -n James Lee -e jameslee@example.com`
-**Find contact** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find contact** | `find -contacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -contacts James Jake`
 **Delete contact** | `rm INDEX`<br> e.g., `rm 3`
 **Clear contacts** | `rm -contacts`
 **Add new folder** | `mkdir FOLDER_NAME` <br> e.g. `mkdir CS2103`

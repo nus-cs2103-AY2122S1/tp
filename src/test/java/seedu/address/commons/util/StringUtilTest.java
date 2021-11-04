@@ -220,6 +220,29 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for stripFlags --------------------------------------
+    /*
+     * Equivalence Partitions:
+     * - null
+     * - empty string
+     * - string which is entirely normal words
+     * - string with some flags and some normal words
+     * - string which is entirely flags
+     */
+
+    @Test
+    public void stripFlags_nullGiven_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.stripFlags(null));
+    }
+
+    @Test
+    public void stripFlags_validInputs_correctResult() {
+        assertEquals(StringUtil.stripFlags(""), "");
+        assertEquals(StringUtil.stripFlags("words    words   more words"), "words words more words");
+        assertEquals(StringUtil.stripFlags("words   -flag more    words -anotherflag"), "words more words");
+        assertEquals(StringUtil.stripFlags("-flag -moreflags  -anotherflag"), "");
+    }
+
     //---------------- Tests for removeExtraWhitespace --------------------------------------
     /*
      * Equivalence Partitions:
