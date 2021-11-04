@@ -83,7 +83,7 @@ Attribute | Prefix | Format
 ------|---|---------------------------------------------------------
 **Name** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Phone** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long
-**Email** | `e/` | Emails should be of the format `NUS Network ID@u.nus.edu`
+**Email** | `e/` | Emails should be of the format `"NUS Network ID"@u.nus.edu`
 **Address** | `a/` | Addresses can take any values, and it should not be blank
 **Tag** | `t/` | Tags names should be alphanumeric
 **GITHUB_ID** | `g/` | GitHub ID must be valid ie alphanumeric separated by single dash and it should not start or end with a dash, and it should not be blank
@@ -96,15 +96,15 @@ Attribute | Prefix | Format
 
 Adds a person to the address book.
 
-Format: `add n/NAME e/EMAIL s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/Siddharth Srivastava e/e0638874@u.nus.edu s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incompleteIp`
-* `add n/Rachel Cheah e/e0987654@u.nus.edu s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
+* `add n/Siddharth Srivastava s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incompleteIp`
+* `add n/Rachel Cheah s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
 
 ### Listing all persons : `list`
 
@@ -122,7 +122,7 @@ Format: `stat`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [e/Email] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -131,7 +131,7 @@ Format: `edit INDEX [n/NAME] [e/Email] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID
     specifying any tags after it.
 
 Examples:
-* `edit 1 p/91234567 e/e0123456@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `e0123456@u.nus.edu` respectively.
+* `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 1 n/Siddharth Srivastava t/IncompleteIP` Edits the name of the 1st person to be `Siddharth Srivastava` and replaces all existing tags with the tag `IncompleteIP`.
 
