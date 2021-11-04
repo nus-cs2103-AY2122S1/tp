@@ -63,9 +63,9 @@ to help you with the installation. Follow the guide for your operating system fo
 3. Copy the file to the folder you want to use as the _home folder_ for your TAB.
 
 4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![start](images/start.png)
+   ![start](images/start.png) <br> _Example screenshot of the full screen interface on a Mac. Note the icon beside "Quick Tips" may vary slightly for Windows users._
 
-5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
+5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>ENTER</kbd> will open the help window.<br>
    
    Some example commands you can try:
 
