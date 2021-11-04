@@ -23,10 +23,11 @@ public class AddToFolderCommand extends Command {
             + COMMAND_WORD + " "
             + "3 >> CS2103";
 
-    public static final String MESSAGE_DUPLICATE_CONTACT = "Contact has already been added to this folder";
-    public static final String MESSAGE_DUPLICATE_INDEX_PASSED = "Repeated Indexes passed";
+    public static final String MESSAGE_SUCCESS = "Person added to folder: %1$s";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This person already exists in this folder";
+    public static final String MESSAGE_DUPLICATE_INDEX_PASSED = "Duplicate person indices passed";
     public static final String MESSAGE_NONEXISTENT_FOLDER = "This folder does not exist in UNIon";
-    public static final String MESSAGE_SUCCESS = "Contact added to Folder: %1$s";
+
 
     private final List<Index> indexList;
     private final FolderName folderName;
@@ -47,7 +48,7 @@ public class AddToFolderCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Index index : this.indexList) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_EXCEEDS_LIST_SIZE);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_UNION);
             }
 
             Person personToAdd = lastShownList.get(index.getZeroBased());

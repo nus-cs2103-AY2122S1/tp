@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
@@ -23,8 +24,7 @@ public class DeleteFolderCommand extends Command {
             + COMMAND_WORD + " "
             + "CS2103";
 
-    public static final String MESSAGE_SUCCESS = "Folder deleted: %1$s";
-    public static final String MESSAGE_NO_SUCH_FOLDER = "No such folder found in UNIon";
+    public static final String MESSAGE_SUCCESS = "Deleted Folder: %1$s";
 
     private final Folder folderToRemove;
 
@@ -41,7 +41,7 @@ public class DeleteFolderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (!model.hasFolder(folderToRemove)) {
-            throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
+            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }
 
         model.deleteFolder(folderToRemove);
