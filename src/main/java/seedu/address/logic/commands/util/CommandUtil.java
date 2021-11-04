@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
  * Helper functions for commands.
  */
 public class CommandUtil {
+
     /**
      * Returns the {@code Person} at the specified index in a {@code List<Person>}.
      * Throws a CommandException if the index is invalid.

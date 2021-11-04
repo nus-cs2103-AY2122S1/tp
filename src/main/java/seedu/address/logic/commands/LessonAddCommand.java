@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -75,7 +74,7 @@ public class LessonAddCommand extends UndoableCommand {
             + "You can specify the start date with " + PREFIX_DATE + "DATE and the end date with "
             + PREFIX_RECURRING + "END_DATE";
 
-    private final Index index;
+    private Index index;
     private final Lesson toAdd;
     private Person personBeforeLessonAdd;
     private Person personAfterLessonAdd;
@@ -84,6 +83,7 @@ public class LessonAddCommand extends UndoableCommand {
      * Creates a LessonAddCommand to add the specified {@code Lesson}
      */
     public LessonAddCommand(Index index, Lesson lesson) {
+        super(COMMAND_ACTION);
         requireNonNull(lesson);
         this.index = index;
         toAdd = lesson;
@@ -95,12 +95,12 @@ public class LessonAddCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         personBeforeLessonAdd = CommandUtil.getPerson(lastShownList, index);
+
         Set<Lesson> lessons = personBeforeLessonAdd.getLessons();
         Set<Lesson> updatedLessons = createUpdatedLessons(lessons, toAdd);
         personAfterLessonAdd = PersonUtil.createdEditedPerson(personBeforeLessonAdd, updatedLessons);
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd),
                 personAfterLessonAdd);
     }
@@ -132,21 +132,23 @@ public class LessonAddCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() throws AssertionError {
         requireNonNull(model);
 
+        checkValidity(personAfterLessonAdd);
+
         model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+        return personBeforeLessonAdd;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personBeforeLessonAdd);
+
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
+        return personAfterLessonAdd;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -53,7 +54,6 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_TAG + "retained "
             + PREFIX_TAG + "new";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TAB.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Note: at least one contact field must be present and not empty. \n"
@@ -64,7 +64,6 @@ public class AddCommand extends UndoableCommand {
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAB!";
 
     private final Person toAdd; //the person to be added, should not be modified in execution of command
 
@@ -72,7 +71,9 @@ public class AddCommand extends UndoableCommand {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
+        super(COMMAND_ACTION);
         requireNonNull(person);
+
         toAdd = person;
     }
 
@@ -85,28 +86,28 @@ public class AddCommand extends UndoableCommand {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), toAdd);
     }
 
     /**
      * To undo add student, delete added student
      */
     @Override
-    protected void undo() {
+    protected Person undo() throws AssertionError {
         requireNonNull(model);
 
+        checkValidity(toAdd);
+
         model.deletePerson(toAdd);
+        return null;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        model.addPerson(toAdd);
+        return toAdd;
     }
 
     @Override

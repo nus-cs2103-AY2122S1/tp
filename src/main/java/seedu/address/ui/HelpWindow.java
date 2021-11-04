@@ -71,17 +71,9 @@ public class HelpWindow extends ExternalWindow {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        action.setCellFactory(getTableColumnTableCellCallback(format));
-        action.setCellValueFactory(new PropertyValueFactory<>("action"));
-        action.prefWidthProperty().bind(table.widthProperty().multiply(ACTION_WIDTH));
-
-        format.setCellFactory(getTableColumnTableCellCallback(format));
-        format.setCellValueFactory(new PropertyValueFactory<>("format"));
-        format.prefWidthProperty().bind(table.widthProperty().multiply(FORMAT_WIDTH));
-
-        example.setCellFactory(getTableColumnTableCellCallback(example));
-        example.setCellValueFactory(new PropertyValueFactory<>("example"));
-        example.prefWidthProperty().bind(table.widthProperty().multiply(EXAMPLE_WIDTH));
+        setColumnProperties(action, "action", ACTION_WIDTH);
+        setColumnProperties(format, "format", FORMAT_WIDTH);
+        setColumnProperties(example, "example", EXAMPLE_WIDTH);
         table.setItems(list);
         table.setColumnResizePolicy(p -> true);
 
@@ -92,6 +84,13 @@ public class HelpWindow extends ExternalWindow {
         // enable copy/paste
         TableUtil.installCopyPasteHandler(table);
         helpMessage.setText(HELP_MESSAGE);
+    }
+
+    private void setColumnProperties(TableColumn<CommandSummary, String> tableCol,
+            String colName, double colWidth) {
+        tableCol.setCellFactory(getTableColumnTableCellCallback(tableCol));
+        tableCol.setCellValueFactory(new PropertyValueFactory<>(colName));
+        tableCol.prefWidthProperty().bind(table.widthProperty().multiply(colWidth));
     }
 
     /**

@@ -78,7 +78,7 @@ public class FindCommand extends Command {
             + "To search for multiple tags, use multiple %1$s \n"
             + "Example: find %1$sunpaid %1$szoom", PREFIX_TAG);
 
-    public static final String MESSAGE_FIND_RESULTS = "%1$d students found who %2$s";
+    public static final String MESSAGE_FIND_RESULTS = "%1$d student(s) found who %2$s";
 
     private final Predicate<Person> predicate;
 

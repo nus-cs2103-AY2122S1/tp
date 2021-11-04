@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,14 +38,44 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    /** Number of index arguments expected in preamble when parsing student index */
+    public static final int INDEX_ARGS_COUNT_STUDENT = 1;
+
+    /** Number of index arguments expected in preamble when parsing student and lesson index */
+    public static final int INDEX_ARGS_COUNT_STUDENT_LESSON = 2;
+
+    /** Zero based position of student index in preamble */
+    public static final int STUDENT_INDEX_ZERO_BASED = 0;
+
+    /** Zero based position of lesson index in preamble */
+    public static final int LESSON_INDEX_ZERO_BASED = 1;
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INSUFFICIENT_INDICES = "Specify a valid index for both the student and lesson.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * stripped.
+     * Parses {@code preamble} into {@code String[]} and returns it.
+     * Leading and trailing whitespaces will be stripped and
+     * preamble string is split by whitespace into an array of strings.
      *
+     * @param preamble The preamble string to parse.
+     * @return Array of argument strings in preamble.
+     */
+    public static String[] parsePreamble(String preamble) {
+        String strippedPreamble = preamble.strip();
+        // required check as empty string split by whitespaces
+        // returns array with empty string instead of empty array.
+        if (strippedPreamble.isEmpty()) {
+            return new String[0];
+        }
+        return strippedPreamble.split("\\s+");
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @param oneBasedIndex The index string to parse.
+     * @return Index with the value of oneBasedIndex.
      * @throws ParseException If the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -55,27 +87,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index[]} and returns it. Leading and trailing whitespaces will be
-     * stripped.
+     * Parses {@code studentIndex} into {@code Index} and returns it.
      *
-     * @throws ParseException If the specified indices are invalid (not non-zero unsigned integer).
+     * @param studentIndex The student index string to parse.
+     * @return Index with the value of studentIndex.
+     * @throws ParseException If the student index is invalid.
      */
-    public static Index[] parseIndices(String args) throws ParseException {
-        // There will be 2 index arguments
-        // 1st is person, 2nd is lesson
-        String[] indices = args.trim().split(" ", 2);
-        if (indices.length < 2) {
-            throw new ParseException(MESSAGE_INSUFFICIENT_INDICES);
+    public static Index parseStudentIndex(String studentIndex) throws ParseException {
+        try {
+            return parseIndex(studentIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, pe);
         }
-        Index studentIndex = parseIndex(indices[0]);
-        /*
-        indices[1] would not be a valid index if more than 1 index is given
-        or if anything other than a single valid integer is given.
-        e.g. case "ldelete 1 2 3": indices[1] returns "2 3".
-        */
-        Index lessonIndex = parseIndex(indices[1]);
-        Index[] studentLessonIndices = {studentIndex, lessonIndex};
-        return studentLessonIndices;
+    }
+
+    /**
+     * Parses {@code lessonIndex} into {@code Index} and returns it.
+     *
+     * @param lessonIndex The lesson index string to parse.
+     * @return Index with the value of studentIndex.
+     * @throws ParseException If the lesson index is invalid.
+     */
+    public static Index parseLessonIndex(String lessonIndex) throws ParseException {
+        try {
+            return parseIndex(lessonIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX, pe);
+        }
     }
 
     /**
@@ -215,6 +253,10 @@ public class ParserUtil {
         requireNonNull(dates);
         final Set<Date> dateSet = new HashSet<>();
         for (String date : dates) {
+            Optional<Date> parsedDate = parseDate(date);
+            if (parsedDate.isEmpty()) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
             dateSet.add(parseDate(date).get());
         }
         return dateSet;
@@ -401,7 +443,7 @@ public class ParserUtil {
     public static Money parseMoney(String amount) throws ParseException {
         String strippedAmount = amount.strip();
         if (!Money.isValidMonetaryField(strippedAmount)) {
-            throw new ParseException(Money.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Money.MESSAGE_FORMAT_CONSTRAINTS);
         }
         return new Money(strippedAmount);
     }
