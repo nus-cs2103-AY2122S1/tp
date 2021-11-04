@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class TodayAttendanceContainsKeywordsPredicateTest {
     private final List<TodayAttendance> truePredicateKeywordList = Collections.singletonList(new TodayAttendance(true));
@@ -44,10 +44,10 @@ public class TodayAttendanceContainsKeywordsPredicateTest {
         // matching keyword
         TodayAttendanceContainsKeywordsPredicate predicate =
                 new TodayAttendanceContainsKeywordsPredicate(truePredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTodayAttendance(true).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTodayAttendance(true).build()));
 
         predicate = new TodayAttendanceContainsKeywordsPredicate(falsePredicateKeywordList);
-        assertTrue(predicate.test(new PersonBuilder().withTodayAttendance(false).build()));
+        assertTrue(predicate.test(new MemberBuilder().withTodayAttendance(false).build()));
 
     }
 
@@ -56,13 +56,13 @@ public class TodayAttendanceContainsKeywordsPredicateTest {
         // zero keywords
         TodayAttendanceContainsKeywordsPredicate predicate =
                 new TodayAttendanceContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().build()));
+        assertFalse(predicate.test(new MemberBuilder().build()));
 
         // non-matching keyword
         predicate = new TodayAttendanceContainsKeywordsPredicate(truePredicateKeywordList);
-        assertFalse(predicate.test(new PersonBuilder().withTodayAttendance(false).build()));
+        assertFalse(predicate.test(new MemberBuilder().withTodayAttendance(false).build()));
 
         predicate = new TodayAttendanceContainsKeywordsPredicate(falsePredicateKeywordList);
-        assertFalse(predicate.test(new PersonBuilder().withTodayAttendance(true).build()));
+        assertFalse(predicate.test(new MemberBuilder().withTodayAttendance(true).build()));
     }
 }

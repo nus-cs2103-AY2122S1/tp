@@ -9,23 +9,23 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
-public class PersonAvailableOnDayPredicateTest {
+public class MemberAvailableOnDayPredicateTest {
 
     @Test
     public void test_personAvailableOnDay_returnsTrue() {
         List<DayOfWeek> availability = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.FRIDAY);
-        Person person = new PersonBuilder().withAvailability(availability).build();
-        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(1);
-        assertTrue(predicate.test(person));
+        Member member = new MemberBuilder().withAvailability(availability).build();
+        MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(1);
+        assertTrue(predicate.test(member));
     }
 
     @Test
     public void test_personNotAvailableOnDay_returnsFalse() {
         List<DayOfWeek> availability = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.FRIDAY);
-        Person person = new PersonBuilder().withAvailability(availability).build();
-        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(3);
-        assertFalse(predicate.test(person));
+        Member member = new MemberBuilder().withAvailability(availability).build();
+        MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(3);
+        assertFalse(predicate.test(member));
     }
 }

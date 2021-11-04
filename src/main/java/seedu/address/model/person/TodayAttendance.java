@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 
 /**
- * Represents attendance for today of a member.
+ * Represents a Member's today attendance in SportsPA.
  */
 public class TodayAttendance {
     private boolean isPresent;

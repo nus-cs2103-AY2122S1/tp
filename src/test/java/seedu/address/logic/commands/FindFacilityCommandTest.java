@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1;
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_10;
 import static seedu.address.testutil.TypicalFacilities.UTOWN_FIELD_SECTION_A;
+import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import seedu.address.model.facility.LocationContainsKeywordsPredicate;
  * Contains integration tests for {@code FindFacilityCommand}.
  */
 public class FindFacilityCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalSportsPa(), new UserPrefs());
 
     @Test
     public void equals() {

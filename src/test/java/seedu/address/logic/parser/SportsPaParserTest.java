@@ -25,7 +25,6 @@ import seedu.address.logic.commands.DeleteFacilityCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.EditFacilityCommand;
 import seedu.address.logic.commands.EditMemberCommand;
-import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
@@ -44,28 +43,28 @@ import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
+import seedu.address.model.person.Member;
+import seedu.address.model.person.MemberMatchesKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.FacilityBuilder;
 import seedu.address.testutil.FacilityUtil;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.MemberUtil;
 
-public class AddressBookParserTest {
+public class SportsPaParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final SportsPaParser parser = new SportsPaParser();
     private final AliasMap aliases = new AliasMap();
 
     @Test
     public void parseCommand_addMember() throws Exception {
-        Person person = new PersonBuilder().build();
+        Member member = new MemberBuilder().build();
         AddMemberCommand command =
-                (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person), aliases);
-        assertEquals(new AddMemberCommand(person), command);
+                (AddMemberCommand) parser.parseCommand(MemberUtil.getAddMemberCommand(member), aliases);
+        assertEquals(new AddMemberCommand(member), command);
     }
 
     @Test
@@ -117,10 +116,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder(person).build();
+        Member member = new MemberBuilder().build();
+        EditMemberCommand.EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor), aliases);
+                + INDEX_FIRST.getOneBased() + " " + MemberUtil.getEditPersonDescriptorDetails(descriptor), aliases);
         assertEquals(new EditMemberCommand(INDEX_FIRST, descriptor), command);
     }
 
@@ -145,10 +144,10 @@ public class AddressBookParserTest {
         Name name = new Name("baz");
         FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
                 FindMemberCommand.COMMAND_WORD + " n/baz", aliases);
-        Predicate<Person> predicate = x -> true;
+        Predicate<Member> predicate = x -> true;
         predicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList("baz")));
-        PersonMatchesKeywordsPredicate testPredicate =
-                new PersonMatchesKeywordsPredicate.Builder().setName(name).setPredicate(predicate).build();
+        MemberMatchesKeywordsPredicate testPredicate =
+                new MemberMatchesKeywordsPredicate.Builder().setName(name).setPredicate(predicate).build();
         assertEquals(new FindMemberCommand(testPredicate), command);
     }
 

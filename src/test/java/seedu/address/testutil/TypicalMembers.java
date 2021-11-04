@@ -17,68 +17,68 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Member;
 
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Member} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalMembers {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    public static final Member ALICE = new MemberBuilder().withName("Alice Pauline")
             .withPhone("94351253").build();
-    public static final Person ALICE_TAN = new PersonBuilder().withName("Alice Tan").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+    public static final Member ALICE_TAN = new MemberBuilder().withName("Alice Tan").build();
+    public static final Member BENSON = new MemberBuilder().withName("Benson Meier")
             .withPhone("98765432").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
+    public static final Member CARL = new MemberBuilder().withName("Carl Kurz")
             .withPhone("95352563").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
+    public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier")
             .withPhone("87652533").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
+    public static final Member ELLE = new MemberBuilder().withName("Elle Meyer")
             .withPhone("9482224").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
+    public static final Member FIONA = new MemberBuilder().withName("Fiona Kunz")
             .withPhone("9482427").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best")
+    public static final Member GEORGE = new MemberBuilder().withName("George Best")
             .withPhone("9482442").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
+    public static final Member HOON = new MemberBuilder().withName("Hoon Meier")
             .withPhone("8482424").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
+    public static final Member IDA = new MemberBuilder().withName("Ida Mueller")
             .withPhone("8482131").withTodayAttendance(false).withTotalAttendance(0).build();
-    public static final Person ALICE_DIFFERENT_PHONE = new PersonBuilder().withName("Alice Pauline")
+    public static final Member ALICE_DIFFERENT_PHONE = new MemberBuilder().withName("Alice Pauline")
             .withPhone("94839542").build();
-    public static final Person CHOO = new PersonBuilder().withName("Choo")
+    public static final Member CHOO = new MemberBuilder().withName("Choo")
             .withPhone("90909090").build();
-    public static final Person DOO = new PersonBuilder().withName("Doo")
+    public static final Member DOO = new MemberBuilder().withName("Doo")
             .withPhone("99889898").withTags("y3").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
+    // Manually added - Member's details found in {@code CommandTestUtil}
+    public static final Member AMY = new MemberBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withAvailability(VALID_AVAILABILITY_AMY).withTags(VALID_TAG_Y2).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
+    public static final Member BOB = new MemberBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withAvailability(VALID_AVAILABILITY_BOB)
             .withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build();
-    public static final Person CHARLIE = new PersonBuilder().withName(VALID_NAME_CHARLIE)
+    public static final Member CHARLIE = new MemberBuilder().withName(VALID_NAME_CHARLIE)
             .withPhone(VALID_PHONE_CHARLIE).withAvailability(VALID_AVAILABILITY_CHARLIE).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalMembers() {} // prevents instantiation
 
-    public static List<Person> getTypicalPersons() {
+    public static List<Member> getTypicalMembers() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-    public static List<Person> getTypicalPersonsToFind() {
+    public static List<Member> getTypicalMembersToFind() {
         return new ArrayList<>(Arrays.asList(ALICE, ALICE_TAN, BENSON));
     }
 
-    public static List<Person> getTypicalPersonsUnsortedName() {
+    public static List<Member> getTypicalMembersUnsortedName() {
         return new ArrayList<>(Arrays.asList(GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE));
     }
 
-    public static List<Person> getTypicalPersonsUnsortedTag() {
+    public static List<Member> getTypicalMembersUnsortedTag() {
         return new ArrayList<>(Arrays.asList(AMY, BOB, CHOO, DOO));
     }
 }

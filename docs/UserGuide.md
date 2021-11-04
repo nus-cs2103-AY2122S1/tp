@@ -314,9 +314,9 @@ the command will be considered invalid and none of the member's availability wil
 
 Examples:
 
-* `findm n/John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm`
+* `findm n/John` followed by `setm 2 d/1` sets the availability of the member at index 2 in the results of the `findm`
   command to be Monday
-* `listm` followed by `setm 5 d/1 2` sets the availability of the person at index 5 in the member list to be Monday and
+* `listm` followed by `setm 5 d/1 2` sets the availability of the member at index 5 in the member list to be Monday and
   Tuesday
 * `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Wednesday and Thursday :camera:
 

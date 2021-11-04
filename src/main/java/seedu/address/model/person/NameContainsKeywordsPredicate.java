@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the name keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class NameContainsKeywordsPredicate implements Predicate<Member> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -14,9 +14,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Member member) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getName().toString().toLowerCase().contains(keyword));
+                .anyMatch(keyword -> member.getName().toString().toLowerCase().contains(keyword));
     }
 
     @Override

@@ -21,10 +21,10 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Member;
 
 public class AddFacilityCommandTest {
-    public static final Map<DayOfWeek, List<Person>> DEFAULT_ALLOCATION_MAP = new EnumMap<>(DayOfWeek.class);
+    public static final Map<DayOfWeek, List<Member>> DEFAULT_ALLOCATION_MAP = new EnumMap<>(DayOfWeek.class);
     @Test
     public void constructor_null_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new AddFacilityCommand(null));
@@ -35,7 +35,7 @@ public class AddFacilityCommandTest {
         ModelManager model = new ModelManager();
         Facility facility = new Facility(new FacilityName("Court"), new Location("Loc"), new Time("1500"),
                 new Capacity("5"), new AllocationMap(DEFAULT_ALLOCATION_MAP));
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addFacility(facility);
         AddFacilityCommand command = new AddFacilityCommand(facility);
         String expectedMessage = String.format(AddFacilityCommand.MESSAGE_SUCCESS, facility);

@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
@@ -42,24 +42,24 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
         // two words
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("john doe"));
-        assertTrue(predicate.test(new PersonBuilder().withName("John Doe").build()));
+        assertTrue(predicate.test(new MemberBuilder().withName("John Doe").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new MemberBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("john lim"));
-        assertFalse(predicate.test(new PersonBuilder().withName("John Tan").build()));
+        assertFalse(predicate.test(new MemberBuilder().withName("John Tan").build()));
     }
 }

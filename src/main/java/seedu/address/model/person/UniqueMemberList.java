@@ -18,34 +18,34 @@ import seedu.address.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A member is considered unique by comparing using {@code Member#isSameMember(Member)}. As such, adding and updating of
+ * persons uses Member#isSameMember(Member) for equality so as to ensure that the member being added or updated is
+ * unique in terms of identity in the UniqueMemberList. However, the removal of a member uses Member#equals(Object) so
+ * as to ensure that the member with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Member#isSameMember(Member)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniqueMemberList implements Iterable<Member> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
+    private final ObservableList<Member> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Member> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person toCheck) {
+    public boolean contains(Member toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameMember);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a member to the list.
+     * The member must not already exist in the list.
      */
-    public void add(Person toAdd) {
+    public void add(Member toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
@@ -54,72 +54,72 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the member {@code target} in the list with {@code editedMember}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The member identity of {@code editedMember} must not be the same as another existing member in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setMember(Member target, Member editedMember) {
+        requireAllNonNull(target, editedMember);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSameMember(editedMember) && contains(editedMember)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedMember);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent member from the list.
+     * The member must exist in the list.
      */
-    public void remove(Person toRemove) {
+    public void remove(Member toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setMembers(UniqueMemberList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code members}.
+     * {@code members} must not contain duplicate members.
      */
-    public void setPersons(List<Person> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    public void setMembers(List<Member> members) {
+        requireAllNonNull(members);
+        if (!membersAreUnique(members)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(members);
     }
 
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Person> asUnmodifiableObservableList() {
+    public ObservableList<Member> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Member> iterator() {
         return internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueMemberList // instanceof handles nulls
+                        && internalList.equals(((UniqueMemberList) other).internalList));
     }
 
     @Override
@@ -128,12 +128,12 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code members} contains only unique members.
      */
-    private boolean personsAreUnique(List<Person> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    private boolean membersAreUnique(List<Member> members) {
+        for (int i = 0; i < members.size() - 1; i++) {
+            for (int j = i + 1; j < members.size(); j++) {
+                if (members.get(i).isSameMember(members.get(j))) {
                     return false;
                 }
             }
@@ -145,10 +145,10 @@ public class UniquePersonList implements Iterable<Person> {
      * Resets today's attendance of all members in list.
      */
     public void resetAttendance() {
-        for (Person person : internalList) {
-            Person toEdit = person;
+        for (Member member : internalList) {
+            Member toEdit = member;
             toEdit.clearTodayAttendance();
-            setPerson(person, toEdit);
+            setMember(member, toEdit);
         }
     }
 
@@ -163,9 +163,9 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the member list in alphabetical order.
      */
     public void sortMembersByName() {
-        Collections.sort(internalList, new Comparator<Person>() {
+        Collections.sort(internalList, new Comparator<Member>() {
             @Override
-            public int compare(Person o1, Person o2) {
+            public int compare(Member o1, Member o2) {
                 String name1 = o1.getName().toString();
                 String name2 = o2.getName().toString();
                 return name1.compareToIgnoreCase(name2);
@@ -179,9 +179,9 @@ public class UniquePersonList implements Iterable<Person> {
      * Members with no tags are last.
      */
     public void sortMembersByTags() {
-        Collections.sort(internalList, new Comparator<Person>() {
+        Collections.sort(internalList, new Comparator<Member>() {
             @Override
-            public int compare(Person o1, Person o2) {
+            public int compare(Member o1, Member o2) {
                 Set<Tag> tagsO1 = o1.getTags();
                 Set<Tag> tagsO2 = o2.getTags();
                 return Integer.compare(tagsO2.size(), tagsO1.size());
