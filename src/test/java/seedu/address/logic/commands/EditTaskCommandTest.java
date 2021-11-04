@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.INVALID_MODULE_NAME;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 
 import org.junit.jupiter.api.Test;
@@ -34,6 +33,8 @@ import seedu.address.testutil.TypicalTasks;
  * Contains integration tests (interaction with the Model) and unit tests for EditTaskCommand.
  */
 public class EditTaskCommandTest {
+
+    private static final String DIFFERENT_MODULE_NAME = "CS2105";
 
     private Model model = new ModelManager(TypicalModules.getTypicalBuddy(), new UserPrefs());
 
@@ -116,12 +117,12 @@ public class EditTaskCommandTest {
 
     @Test
     public void execute_moduleNotFound_failure() {
-        ModuleName moduleName = new ModuleName(INVALID_MODULE_NAME);
+        ModuleName moduleName = new ModuleName(DIFFERENT_MODULE_NAME);
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTaskId(VALID_TASK_ID_0)
                 .build();
         EditTaskCommand editCommand = new EditTaskCommand(moduleName, descriptor);
         assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND,
-                INVALID_MODULE_NAME));
+                DIFFERENT_MODULE_NAME));
     }
 
     @Test
@@ -151,7 +152,7 @@ public class EditTaskCommandTest {
         assertFalse(standardCommand.equals(new EditTaskCommand(moduleName, descriptor2)));
 
         // different moduleName -> returns false
-        assertFalse(standardCommand.equals(new EditTaskCommand(new ModuleName(INVALID_MODULE_NAME), descriptor)));
+        assertFalse(standardCommand.equals(new EditTaskCommand(new ModuleName(DIFFERENT_MODULE_NAME), descriptor)));
     }
 
 }
