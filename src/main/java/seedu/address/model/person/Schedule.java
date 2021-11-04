@@ -267,7 +267,7 @@ public class Schedule {
         if (test.equals("")) {
             return true;
         }
-        String[] shiftSplit = test.split(" ");
+        String[] shiftSplit = test.split("\\s+"); // splits by white space, not just single white space
         for (String s : shiftSplit) {
             if (!isValidShift(s)) {
                 return false;

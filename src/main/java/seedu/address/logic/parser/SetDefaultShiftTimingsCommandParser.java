@@ -11,10 +11,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 public class SetDefaultShiftTimingsCommandParser implements Parser<SetDefaultShiftTimingsCommand> {
-    public static final ParseException DEFAULT_ERROR = new ParseException(
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
-
-
     /**
      * Parses the given {@code String} of arguments in the context of the SetDefaultShiftTimingsCommand
      * and returns a SetDefaultShiftTimingsCommand object for execution.
@@ -24,7 +20,7 @@ public class SetDefaultShiftTimingsCommandParser implements Parser<SetDefaultShi
     @Override
     public SetDefaultShiftTimingsCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String[] strTimings = args.trim().split(" ");
+        String[] strTimings = args.trim().split("\\s+");
         if (strTimings.length != 4) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
@@ -40,4 +36,5 @@ public class SetDefaultShiftTimingsCommandParser implements Parser<SetDefaultShi
 
         return new SetDefaultShiftTimingsCommand(newTimings);
     }
+
 }
