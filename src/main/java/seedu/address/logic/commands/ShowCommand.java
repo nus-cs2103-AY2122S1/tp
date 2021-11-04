@@ -45,9 +45,13 @@ public class ShowCommand extends Command {
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name> | "
             + PREFIX_GROUP + "<group_name>) "
-            + "[" + PREFIX_FILE + "<export_location>]";
+            + "[" + PREFIX_FILE + "<export_location>]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Tang Zhiying, "
+            + COMMAND_WORD + " "
+            + PREFIX_ASSESSMENT + "Midterm";
 
-    public static final String MESSAGE_SUCCESS = "Info requested successfully";
+    public static final String MESSAGE_SUCCESS = "Info requested successfully. ";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
@@ -65,6 +69,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Index}.
      */
     public ShowCommand(Index index, Path savePath) {
+        requireNonNull(index);
         setIndex(index);
         setSavePath(savePath);
     }
@@ -73,6 +78,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Name}.
      */
     public ShowCommand(Name name, Path savePath) {
+        requireNonNull(name);
         setName(name);
         setSavePath(savePath);
     }
@@ -81,6 +87,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code ID}.
      */
     public ShowCommand(ID id, Path savePath) {
+        requireNonNull(id);
         setId(id);
         setSavePath(savePath);
     }
@@ -89,6 +96,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Assessment}.
      */
     public ShowCommand(Assessment assessment, Path savePath) {
+        requireNonNull(assessment);
         setAssessment(assessment);
         setSavePath(savePath);
     }
@@ -97,6 +105,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Group}.
      */
     public ShowCommand(Group group, Path savePath) {
+        requireNonNull(group);
         setGroup(group);
         setSavePath(savePath);
     }

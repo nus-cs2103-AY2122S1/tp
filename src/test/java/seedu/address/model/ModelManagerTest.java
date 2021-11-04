@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -18,6 +19,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.Alias;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -123,6 +126,22 @@ public class ModelManagerTest {
         modelManager.addAlias(alias);
         modelManager.removeAlias(alias.getAliasWord());
         assertEquals(modelManager.getAliases(), new HashMap<>());
+    }
+
+    @Test
+    public void getGroup() {
+        ModelManager modelManager = new ModelManager();
+        Group added = new Group("T01A");
+        modelManager.addGroup(added);
+        assertSame(modelManager.getGroup(new Group("T01A")), added);
+    }
+
+    @Test
+    public void getAssessment() {
+        ModelManager modelManager = new ModelManager();
+        Assessment added = new Assessment("P01");
+        modelManager.addAssessment(added);
+        assertSame(modelManager.getAssessment(new Assessment("P01")), added);
     }
 
     @Test

@@ -19,6 +19,9 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path DUPLICATE_GROUP_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupAddressBook.json");
+    private static final Path DUPLICATE_ASSESSMENT_FILE =
+            TEST_DATA_FOLDER.resolve("duplicateAssessmentAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -41,6 +44,22 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateGroups_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_GROUP_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_GROUP,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateAssessments_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ASSESSMENT_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_ASSESSMENT,
                 dataFromFile::toModelType);
     }
 

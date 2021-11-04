@@ -144,7 +144,7 @@ public class AddGroupCommandTest {
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(amyNameDescriptor, amyIdDescriptor));
 
         assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_DUPLICATE_STUDENT_IN_GROUP,
-                AMY.getName()), () -> command.execute(model));
+                AMY.getName(), AMY.getId()), () -> command.execute(model));
     }
 
     @Test

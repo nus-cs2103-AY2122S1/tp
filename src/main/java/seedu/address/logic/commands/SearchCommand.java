@@ -26,7 +26,7 @@ public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names contain any of "
+            + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "(" + PREFIX_NAME + "<student_name>" + " | "
@@ -34,11 +34,9 @@ public class SearchCommand extends Command {
             + PREFIX_GROUP + "<group_name>" + " | "
             + PREFIX_TAG + "<tag>" + ")\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe, "
+            + PREFIX_NAME + "Tang Zhiying, "
             + COMMAND_WORD + " "
-            + PREFIX_ID + "E0123456, "
-            + COMMAND_WORD + " "
-            + PREFIX_GROUP + "T01A";
+            + PREFIX_GROUP + "T01A R04B";
 
     private final Predicate<Student> predicate;
 

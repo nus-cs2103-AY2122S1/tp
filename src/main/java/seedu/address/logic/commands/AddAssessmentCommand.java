@@ -12,7 +12,7 @@ import seedu.address.model.student.Assessment;
  */
 public class AddAssessmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "add assessment";
+    public static final String COMMAND_WORD = "addassessment";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assessment to the database. \n"
             + "Parameters: "
             + PREFIX_ASSESSMENT + "<assessment_name>\n"
@@ -20,7 +20,7 @@ public class AddAssessmentCommand extends Command {
             + PREFIX_ASSESSMENT + "P01";
 
     public static final String MESSAGE_SUCCESS = "New assessment added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in the database";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in the database. ";
 
     private final Assessment assessment;
 

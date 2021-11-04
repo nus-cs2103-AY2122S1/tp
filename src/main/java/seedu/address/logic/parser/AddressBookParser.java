@@ -49,6 +49,7 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+        requireNonNull(userInput);
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -97,24 +98,6 @@ public class AddressBookParser {
         case AliasCommand.COMMAND_WORD:
             return new AliasCommandParser(this).parse(arguments);
 
-        default:
-            boolean isTwoWordCommand = arguments.length() > 0
-                    && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
-
-            if (isTwoWordCommand) {
-                return parseTwoWordCommand(commandWord, arguments);
-            }
-
-            return parseAliases(userInput);
-        }
-    }
-
-    private Command parseTwoWordCommand(String commandWord, String arguments) throws ParseException {
-        commandWord = extractFullCommandWord(commandWord, arguments);
-        arguments = extractArguments(arguments);
-
-        switch (commandWord) {
-
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
@@ -131,41 +114,8 @@ public class AddressBookParser {
             return new AddScoreCommandParser().parse(arguments);
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            return parseAliases(userInput);
         }
-    }
-
-    /**
-     * Removes second word of command from arguments.
-     *
-     * @param arguments raw arguments to extract from.
-     * @return extracted arguments.
-     */
-    protected String extractArguments(String arguments) {
-        int argumentsIndex = arguments.indexOf("-");
-        if (argumentsIndex == -1) {
-            return "";
-        }
-        String extractedArguments = arguments.substring(argumentsIndex - 1);
-        return extractedArguments;
-    }
-
-    /**
-     * Converts commandWord to the two word format and retrieves second word from arguments.
-     *
-     * @param firstCommandWord the original commandWord parsed.
-     * @param arguments arguments to retrieve second half of commandWord from.
-     * @return full commandWord.
-     */
-    protected String extractFullCommandWord(String firstCommandWord, String arguments) {
-        int argumentsIndex = arguments.indexOf("-");
-        if (argumentsIndex == -1) {
-            String[] arr = arguments.split(" ", 3);
-            String firstWord = arr[1];
-            return firstCommandWord + " " + firstWord;
-        }
-        String fullCommandWord = firstCommandWord + arguments.substring(0, argumentsIndex - 1).stripTrailing();
-        return fullCommandWord;
     }
 
     /**

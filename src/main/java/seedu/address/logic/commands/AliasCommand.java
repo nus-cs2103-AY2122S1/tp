@@ -21,12 +21,12 @@ public class AliasCommand extends Command {
             + PREFIX_COMMAND + "<existing_command> " + PREFIX_ALIAS + "<alias>\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COMMAND + AddCommand.COMMAND_WORD + " "
-            + PREFIX_ALIAS + "as";
+            + PREFIX_ALIAS + "addstu";
 
     public static final String MESSAGE_ADD_SUCCESS = "New alias added: %1$s";
     public static final String MESSAGE_REMOVE_SUCCESS = "Alias removed: %1$s";
-    public static final String MESSAGE_UNKNOWN_OLD_COMMAND = "Specified command to be aliased does not exist";
-    public static final String MESSAGE_OVERWRITE_DEFAULT = "You can't overwrite a default command";
+    public static final String MESSAGE_UNKNOWN_OLD_COMMAND = "Specified command to be aliased does not exist. ";
+    public static final String MESSAGE_OVERWRITE_DEFAULT = "You can't overwrite a default command. ";
 
     private final Alias alias;
     private final AddressBookParser parser;
