@@ -108,7 +108,7 @@ public class EditCommand extends Command {
             LabNum labNum = updatedLab.getLabNum();
             LabTotal currTotalScore;
             try {
-                currTotalScore = studentToEdit.getLab(labNum).getTotalScore();
+                currTotalScore = studentToEdit.getLab(labNum).getLabTotal();
             } catch (NullPointerException e) { //when getLab does not find anything
                 throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
             }

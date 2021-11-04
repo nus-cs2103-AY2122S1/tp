@@ -8,6 +8,7 @@ import static java.util.Objects.requireNonNull;
 public class LabResult {
 
     private final Integer labResult;
+    //public static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
 
     /**
      * Constructs a {@code Name}.
@@ -16,8 +17,12 @@ public class LabResult {
      */
     public LabResult(Integer labResult) {
         requireNonNull(labResult);
-        //checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.labResult = labResult;
+        if (labResult == -1) {
+            this.labResult = Lab.UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
+        } else {
+            //checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+            this.labResult = labResult;
+        }
     }
 
     public int getLabResult() {

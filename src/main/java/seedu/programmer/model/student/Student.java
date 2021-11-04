@@ -95,7 +95,7 @@ public class Student implements DisplayableObject {
     public ObservableList<Lab> getFreshLabList() {
         ObservableList<Lab> freshCopy = FXCollections.observableArrayList();
         for (Lab lab : labList) {
-            freshCopy.add(new Lab(lab.getLabNum(), lab.getTotalScore()));
+            freshCopy.add(new Lab(lab.getLabNum(), lab.getLabTotal()));
         }
         return freshCopy;
     }
@@ -130,7 +130,7 @@ public class Student implements DisplayableObject {
      * Updates a lab's score  for a student
      * */
     public void editLabScore(Lab lab , LabResult score) throws CommandException {
-        if (score.getLabResult() > lab.getTotalScore().getLabTotal()) {
+        if (score.getLabResult() > lab.getLabTotal().getLabTotal()) {
             throw new CommandException(EXCEEDED_TOTAL_SCORE);
         }
         int index = this.labList.indexOf(lab);

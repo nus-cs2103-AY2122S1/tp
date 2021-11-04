@@ -11,6 +11,8 @@ import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -105,8 +107,8 @@ class JsonAdaptedStudent {
             List<Lab> studentLabResults = new ArrayList<>();
             for (JsonAdaptedLab adaptedLab : labResultList) {
                 Lab lab = new Lab(new LabNum(adaptedLab.getLabNum()),
-                        adaptedLab.getActualScore(),
-                        adaptedLab.getTotalScore());
+                        new LabResult(adaptedLab.getLabResult()),
+                        new LabTotal(adaptedLab.getLabTotal()));
                 studentLabResults.add(lab);
             }
             student.setLabResultRecord(studentLabResults);

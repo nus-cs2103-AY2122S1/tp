@@ -31,19 +31,19 @@ public class JsonAdaptedLab {
     public JsonAdaptedLab(Lab lab) {
         requireNonNull(lab);
         this.labNumValue = lab.getLabNumValue();
-        this.actualScoreValue = lab.getActualScoreValue();
-        this.totalScoreValue = lab.getTotalScoreValue();
+        this.actualScoreValue = lab.getLabResultValue();
+        this.totalScoreValue = lab.getLabTotalValue();
     }
 
     public String getLabNumValue() {
         return labNumValue;
     }
 
-    public String getActualScoreValue() {
+    public String getLabResultValue() {
         return actualScoreValue;
     }
 
-    public String getTotalScoreValue() {
+    public String getLabTotalValue() {
         return totalScoreValue;
     }
 
@@ -51,11 +51,11 @@ public class JsonAdaptedLab {
         return Integer.parseInt(labNumValue);
     }
 
-    public Integer getActualScore() {
+    public Integer getLabResult() {
         return Integer.parseInt(actualScoreValue);
     }
 
-    public Integer getTotalScore() {
+    public Integer getLabTotal() {
         return Integer.parseInt(totalScoreValue);
     }
 }

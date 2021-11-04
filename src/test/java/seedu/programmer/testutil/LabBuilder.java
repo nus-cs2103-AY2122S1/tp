@@ -28,8 +28,8 @@ public class LabBuilder {
      */
     public LabBuilder(Lab labToCopy) {
         labNum = labToCopy.getLabNum();
-        value = labToCopy.getActualScore();
-        total = labToCopy.getTotalScore();
+        value = labToCopy.getLabResult();
+        total = labToCopy.getLabTotal();
     }
 
     /**
