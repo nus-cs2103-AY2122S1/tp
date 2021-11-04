@@ -31,7 +31,7 @@ Given below are my contributions to the project.
         * Tweaked documentation to fix documentation bugs from PE-D [\#188](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/188).
     * Developer Guide:
         * Added implementation details of the `create folder` feature [\#83](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/83).
-        * Added Effort to appendix []()
+        * Added Effort to appendix [\#202](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/202)
 
 * **Community**:
     * Contributed to module forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/118#issuecomment-907715971))
