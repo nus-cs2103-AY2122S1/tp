@@ -130,6 +130,7 @@ Format birthday as `ddMMyyyy`.
 
 Notes:
 * Phone number must be unique.
+* Emails must contain @. (Other stricter checks are not included as there are some emails that violate the convention).
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.
 * Each tag has a character limit of 60.
@@ -329,7 +330,7 @@ Notes:
 * `list` followed by `deletem 2 - 3`
   * deletes the 2nd and 3rd person in the address book.
 * `find n/Betsy` followed by `deletem 1 - 5`
-  * deletes the 1st and 2nd person in the results of the `find` command.
+  * deletes the 1st to 5th person in the results of the `find` command.
 
 ### Exporting a mailing list of contacts : `mailingList`
 
@@ -341,7 +342,6 @@ Exports a CSV file of the current view containing specified fields.
 Notes:
 * Name is always the first column in the CSV file.
 * The default exported fields are name, phone, email.
-* Invalid prefixes are ignored.
 * Opens a file selector for you to pick the export location and file name.
 
 **Sample Usage:**
@@ -350,10 +350,6 @@ Notes:
 
 * `mailingList p/`
   * Prepares a CSV of the current view containing Name and Phone as the fields.
-
-* `mailingList j/`
-  * Invalid Prefix j/ is ignored.
-  * Prepares a CSV of the current view containing Name, Phone and Email as the fields.
 
 ### Clearing all entries : `clear`
 
