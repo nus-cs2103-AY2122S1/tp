@@ -58,45 +58,6 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-Format: `help`
-
-### Adding a position: `add-position`
-
-Adds a position to MrTechRecruiter.
-
-Format: `add-position tit/TITLE des/DESCRIPTION`
-
-Examples:
-* `add-position tit/software engineer des/work in a team that builds a facial recognition application`
-
-
-### Editing a position: `edit-position`
-
-Edits the specified position in MrTechRecruiter.
-
-Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
-
-* Edit the position with the specified `INDEX`
-
-Examples: 
-* `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
-
-
-### Deleting a position: `delete-position`
-
-Deletes the specified position from MrTechRecruiter.
-
-Format: `delete-position INDEX`
-
-* Deletes the position with the specified `INDEX`.
-
-Examples:
-* `delete-position 1` deletes the position with index 1.
-
 
 ### Adding an applicant: `add-applicant`
 
@@ -113,32 +74,6 @@ Examples:
 * `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 
 
-### Editing an applicant: `edit-applicant`
-Edits the specified applicant in MrTechRecruiter
-
-Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]` 
-
-* Edit the applicant with the specified `INDEX`
-* At least one argument should be present
-* The `position` must have been added to MrTechRecruiter
-
-Examples:
-* `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
-* `edit-applicant n/Betsy p/1234567 pos/database administrator`
-
-### Updating an applicant's status: `mark`
-
-Updates an applicant's status as specified.  
-
-Format: `mark NAME status/STATUS`
-
-* `NAME` is case-insensitive. e.g. `john doe` and `John Doe` will update the same applicant's status.
-* `STATUS` is case-insensitive. e.g. `accepted` and `ACCEPTED` will both update the applicant's status to `"Accepted"`.
-* Note: Possible statuses are `ACCEPTED`, `REJECTED` or `PENDING`.
-
-Examples:
-* `mark john doe status/rejected` marks the applicant `John Doe` with status `"Accepted"`.
-
 ### Deleting an applicant: `delete-applicant`
 
 Deletes the specified applicant from MrTechRecruiter.
@@ -151,6 +86,108 @@ Examples:
 * `delete-applicant 1` deletes the applicant with index 1.
 
 
+### Editing an applicant: `edit-applicant`
+Edits the specified applicant in MrTechRecruiter
+
+Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]`
+
+* Edit the applicant with the specified `INDEX`
+* At least one argument should be present
+* The `position` must have been added to MrTechRecruiter
+
+Examples:
+* `edit-applicant 1 n/Jasmine Doe p/98761432 e/jdoe@example.com`
+* `edit-applicant 2 n/Betsy p/1234567 pos/database administrator`
+
+
+### Filtering applicants: `filter-applicant`
+
+Filter the list of applicants by specific criteria.
+
+Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
+
+* The position filter is case-sensitive. e.g `software engineer` will not match `Software Engineer`
+* The status filter is case-insensitive. e.g. `accepted` or `ACCEPTED` will both match the `"Accepted"` application status.
+* A variable number of filters can be specified, but at least one must be present.
+* The filtering uses a logical `AND`. e.g. `filter-applicant pos/software engineer status/accepted` will match all applicants applying to the `software engineer` position AND with application status `"Accepted"`.
+* Consecutive calls are independent of one another (i.e. the filters do not stack).
+
+Examples:
+* `filter-applicant status/rejected` displays a list of all rejected applicants.
+* `filter-applicant pos/database administrator status/accepted` displays a list of all applicants to the `database administrator` position, that have been accepted.
+
+
+### Searching for applicants using keywords: `find-applicant`
+
+Finds all applicants whose name match the specified search terms.
+
+Format: `find-applicant KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find-applicant John` returns `john` and `John Doe`
+
+
+### Listing all applicants : `list-applicant`
+
+Shows a list of all applicants in MrTechRecruiter.
+
+Format: `list-applicant`
+
+
+### Updating an applicant's status: `mark`
+
+Updates an applicant's status as specified.
+
+Format: `mark NAME status/STATUS`
+
+* `NAME` is case-sensitive. e.g. `john doe` and `John Doe` will update separate applicants' statuses.
+* `STATUS` is case-insensitive. e.g. `accepted` and `ACCEPTED` will both update the applicant's status to `"Accepted"`.
+* Note: Possible statuses are `ACCEPTED`, `REJECTED` or `PENDING`.
+
+Examples:
+* `mark john doe status/rejected` marks the applicant `John Doe` with status `"Accepted"`.
+
+
+### Adding a position: `add-position`
+
+Adds a position to MrTechRecruiter.
+
+Format: `add-position tit/TITLE des/DESCRIPTION`
+
+Examples:
+* `add-position tit/software engineer des/work in a team that builds a facial recognition application`
+
+
+### Deleting a position: `delete-position`
+
+Deletes the specified position from MrTechRecruiter.
+
+Format: `delete-position INDEX`
+
+* Deletes the position with the specified `INDEX`.
+
+Examples:
+* `delete-position 1` deletes the position with index 1.
+
+
+### Editing a position: `edit-position`
+
+Edits the specified position in MrTechRecruiter.
+
+Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
+
+* Edit the position with the specified `INDEX`
+
+Examples:
+* `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
+
+
 ### Listing all positions : `list-position` 
 
 Shows a list of all positions in MrTechRecruiter.
@@ -158,11 +195,14 @@ Shows a list of all positions in MrTechRecruiter.
 Format: `list-position`
 
 
-### Listing all applicants : `list-applicant` 
+### Visualizing a position with a pie chart: `visualize`
 
-Shows a list of all applicants in MrTechRecruiter.
+Displays a pie chart breakdown of a position and the statuses of its applicants.
+Hovering over a pie chart slice will display its percentage value. 
 
-Format: `list-applicant`
+Format: `visualize POSITION_TITLE​`
+
+* `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
 
 
 ### Get rejection rate of a specified position : `rate`
@@ -181,54 +221,16 @@ Examples:
 ### Undoing the last modification : `undo`
 
 Recovers the state before last modification is made.
-The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`
-
-[command that modifies the state should also be added later]
+The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`, `mark`
 
 Format: `undo`
 
 
-### Filtering applicants: `filter-applicant`
+### Viewing help : `help`
 
-Filter the list of applicants by specific criteria.
+Shows a message explaining how to access the help page.
 
-Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
-
-* The position filter is case-sensitive. e.g `software engineer` will not match `Software Engineer`
-* The status filter is case-insensitive. e.g. `accepted` or `ACCEPTED` will both match the `"Accepted"` application status.
-* A variable number of filters can be specified.
-* The filtering uses a logical `AND`. e.g. `filter-applicant pos/software engineer status/accepted` will match all applicants applying to the `software engineer` position AND with application status `"Accepted"`.
-* Consecutive calls are independent of one another (i.e. the filters do not stack).
-
-Examples:
-* `filter-applicant status/rejected` displays a list of all rejected applicants.
-* `filter-applicant pos/database administrator status/accepted` displays a list of all applicants to the `database administrator` position, that have been accepted.
-
-
-### Visualizing a position with a pie chart: `visualize`
-
-Displays a pie chart breakdown of a position and the statuses of its applicants.
-Hovering over a pie chart slice will display its percentage value. 
-
-Format: `visualize POSITION_TITLE​`
-
-* `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
-
-
-### Searching for applicants using keywords: `find-applicant`
-
-Finds all applicants whose name match the specified search terms.
-
-Format: `find-applicant KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find-applicant John` returns `john` and `John Doe`
+Format: `help`
 
 
 ### Exiting the program : `exit`
@@ -267,10 +269,10 @@ Action | Format, Examples
 **Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
 **Edit Applicant** | `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]` <br> e.g. `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
-**Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
+**Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Applicants** | `list-applicant`
-**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
+**Update Applicant status** | `mark NAME status/STATUS` <br> e.g.,  `mark john doe status/accepted`
 **Add Position** | `add-position tit/TITLE des/DESCRIPTION` <br> e.g., `add-position tit/software engineer des/work in a team that builds a facial recognition application`
 **Delete Position** | `delete-position INDEX`<br> e.g., `delete-position 1`
 **Edit Position** | `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`<br> e.g., `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `

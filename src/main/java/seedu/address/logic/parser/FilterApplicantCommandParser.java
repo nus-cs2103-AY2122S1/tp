@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -33,7 +34,8 @@ public class FilterApplicantCommandParser implements Parser<FilterApplicantComma
         }
 
         if (!filterApplicantDescriptor.hasAnyFilter()) {
-            throw new ParseException(FilterApplicantCommand.MESSAGE_NOT_FILTERED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FilterApplicantCommand.MESSAGE_USAGE));
         }
 
         return new FilterApplicantCommand(filterApplicantDescriptor);

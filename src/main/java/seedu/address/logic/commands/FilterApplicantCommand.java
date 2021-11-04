@@ -18,18 +18,16 @@ public class FilterApplicantCommand extends Command {
     public static final String COMMAND_WORD = "filter-applicant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters the current list of applicants by the specified criteria. "
+            + ": Filters the current list of applicants by the specified criteria. " + "\n"
             + "Parameters: "
             + "[" + PREFIX_POSITION + "POSITION] "
-            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_STATUS + "STATUS] " + "\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_POSITION + "software engineer "
             + PREFIX_STATUS + "pending";
 
     public static final String MESSAGE_SUCCESS = "Applicants filtered by: %1$s";
     public static final String MESSAGE_INVALID_FILTER = "The following filters are invalid: %1$s";
-    public static final String MESSAGE_NOT_FILTERED =
-            "At least one valid filter criteria must be provided. Usage:\n" + MESSAGE_USAGE;
 
     private final FilterApplicantDescriptor filterApplicantDescriptor;
 
