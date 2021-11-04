@@ -20,7 +20,7 @@ You may reach us through the following email addresses:
 <img src="images/squeakysquak.png" width="200px">
 
 [[github](https://github.com/squeakysquak)]
-[[portfolio](team/ethan.md)]
+[[portfolio](team/squeakysquak.md)]
 
 * Role: Developer, in charge of Scheduling & Tracking
 * Responsibilities: Model 
