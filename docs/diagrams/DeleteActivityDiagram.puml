@@ -1,0 +1,22 @@
+@startuml
+
+start
+:User executes Delete Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid with valid and
+ non-duplicated index/indices])
+
+    :Delete the specified Person(s) from the AddressBook;
+
+
+    :GUI Result Display updated with
+    deleted applicant(s) no longer present;
+
+else([else])
+endif
+stop
+
+@enduml

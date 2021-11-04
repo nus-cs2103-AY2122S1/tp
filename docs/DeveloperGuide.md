@@ -218,12 +218,43 @@ Step 5. After checking that the new `Person` is not a duplicate of any existing 
 `Model#setPerson()` will be called to change the specified applicant in the `AddressBook`. Finally, `Model#updateFilteredPersonList()`
 is called to reflect the changes in the list of applicants shown to the user.
 
-Step 6. Once the list is updated, `CommandResult` is initialized with `String` containing the details of the edited applicants.
+Step 6. `CommandResult` is initialized with `String` containing the details of the deleted applicants.
 This CommandResult is then returned.
 
 The following sequence diagram shows how the edit operation works.
 ![images](images/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+### Delete feature
+
+The ```delete``` command is facilitated by creating a ```DeleteCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```delete``` command:
+![images](images/DeleteActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
+
+Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ` 1`.
+
+Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
+to identify the indices present in ` 1`. `DeleteCommandParser#parse()` then initializes a
+`DeleteCommand` with the indices present as arguments.
+
+Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
+If there is no exception thrown, `Model#deletePerson()` is called to delete the applicants corresponding to the 
+given indices.
+
+Step 4. `CommandResult` is initialized with `String` containing the details of the deleted applicant.
+This CommandResult is then returned.
+
+The following sequence diagram shows how the delete operation works.
+![images](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `DeleteCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Show feature
@@ -360,8 +391,8 @@ Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#c
 corresponding to the given indices. If there is no exception thrown, `Model#markPerson()` is called to mark the
 applicants corresponding to the given indices.
 
-Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this
-string as argument and returned.
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly marked applicants.
+This CommandResult is then returned.
 
 The following sequence diagram shows how the mark operation works.
 ![images](images/MarkCommandSequenceDiagram.png)
@@ -390,8 +421,8 @@ to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then ini
 Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
 corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
 
-Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
-and returned.
+Step 4. `CommandResult` is initialized with `String` containing the details of the newly unmarked applicants.
+This CommandResult is then returned.
 
 The following sequence diagram shows how the unmark operation works.
 ![images](images/UnmarkCommandSequenceDiagram.png)
