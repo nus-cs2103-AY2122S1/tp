@@ -53,8 +53,8 @@ class TimetableTest extends JavafxTest {
         assertEquals(1, timetable.getFontSize(-5));
         assertEquals(1, timetable.getFontSize(2));
         //span <= 4 -> font size = 2
-        assertEquals( 2, timetable.getFontSize(3));
-        assertEquals( 2, timetable.getFontSize(4));
+        assertEquals(2, timetable.getFontSize(3));
+        assertEquals(2, timetable.getFontSize(4));
         //span < 6 -> font size = 6
         assertEquals(6, timetable.getFontSize(5));
         //span < 9 -> font size = 7
