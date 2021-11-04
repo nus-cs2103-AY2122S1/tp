@@ -101,7 +101,7 @@ public class StringUtil {
                 .toArray(String[]::new);
         return String.join(" ", result);
     }
-    
+
     /**
      * Removes extra whitespace characters found within the command
      * @param s input string
