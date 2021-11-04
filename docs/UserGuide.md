@@ -39,7 +39,7 @@ Icon / Text Style | Description
 UPPER_CASE     | Represents parameters to be supplied by you for commands
 [link](#table-of-contents) | Represents links that can be clicked on to be navigate to a different section of the User Guide or a different site
 **:information_source: Notes:** | Represents important information regarding commands such as their format and constraints
-**:exclamation: Caution:**| Represents warnings for actions that can result in the unintentional and irreversible removal of data
+**:exclamation: Caution:**| Represents warnings for actions that can result in the unintentional and irreversible removal of data or affect the result of a previously executed command
 **:bulb: Tip:**| Represents useful tips that we would like to share
 :camera:| Signifies that a screenshot of the outcome of the command is provided below
 
@@ -184,7 +184,7 @@ Format: `listm`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Deleting a member : `deletem`
+#### Deleting a member: `deletem`
 
 Deletes a member from your member list
 
@@ -193,6 +193,11 @@ Format: `deletem INDEX`
 * Deletes the member at the specified `INDEX`.
 * The index refers to the index number shown in the displayed member list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** Deleting a member will automatically remove them from any facilities they were allocated to.
+</div>
 
 Examples:
 
@@ -219,6 +224,11 @@ Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...`
 member as they are considered duplicates.
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing any fields of a member will automatically remove them from any facilities they were allocated to. 
+This action is **irreversible**.
+</div>
+
 <div markdown="span" class="alert alert-primary">
 
 **:bulb: Tip 1:** Didn't tag a member when you added them? It's not too late, just tag them using this command!
@@ -228,6 +238,12 @@ Similarly, use `t/` (nothing supplied) to remove a tag from a member.
 <div markdown="span" class="alert alert-primary">
 
 **:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting member availability](#setting-member-availability-setm).
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Tip 3:** Remember to allocate an edited member back to a facility if necessary by manually [allocating the member to a facility](#allocating-a-member-to-a-facility-allocate)
+or [splitting members into facilities](#splitting-members-into-facilities-split)
 </div>
 
 Examples:
@@ -299,6 +315,17 @@ Format: `setm INDEX [MORE_INDICES]... d/DAY(S)`
 * `INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3, …​
 * `MORE_INDICES` **must be separated by a single space** 1 2 3 …​
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** All member indices provided must be in the range of the displayed member list. Otherwise,
+the command will be considered invalid and no member availability will be set.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Setting the availability of a member will automatically remove them from any facilities they were allocated to. 
+This action is **irreversible**.
+</div>
+
 Examples:
 
 * `findm n/John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm`
@@ -313,7 +340,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Marking attendance of members : `mark`
+#### Marking attendance of members: `mark`
 
 Marks attendance of members listed as present, represented by a tick.
 
@@ -414,13 +441,14 @@ All member data will be removed immediately after this command is executed. This
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** 
-* Facilities are assumed to be available on every day of the week.
+* All facilities are assumed to be available on every day of the week.
+* Each facility is assumed to have the same capacity on every day of the week.
 * `NAME` specifies the name of the facility.
 * `LOCATION` specifies the general location of the facility.
 * `NAME` and `LOCATION` each accept **up to 50 alphanumeric characters (including spaces)**.
 * Facilities with the same `NAME` and `LOCATION` are considered duplicates.
 * `TIME` specifies the start time of the training session at the facility and **must be in the 24-hour format** `HHmm`.
-* `CAPACITY` refers to the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**.
+* `CAPACITY` specifies the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**.
 </div>
 
 #### Adding a facility: `addf`
@@ -441,13 +469,11 @@ Examples:
   5
 * `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
 
-<p align="center">
-   <img src="images/addfExample.png" height="400" align="center"/>
-</p>
+![addfExample](images/addfExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Listing all facilities : `listf`
+#### Listing all facilities: `listf`
 
 Shows a list of all your facilities.
 
@@ -455,7 +481,7 @@ Format: `listf`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Deleting a facility : `deletef`
+#### Deleting a facility: `deletef`
 
 Removes a facility from your facility list.
 
@@ -485,7 +511,7 @@ Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 * Existing values will be updated to the input values
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All members allocated to the facility (if any) will be unallocated if you edit its `CAPACITY` to be below the number of allocated
+Any members allocated to the facility will be unallocated if you edit its `CAPACITY` to be below the number of allocated
 members. This action is **irreversible**.
 </div>
 
@@ -503,7 +529,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Finding a facility : `findf`
+#### Finding a facility: `findf`
 
 If you want to see specific facilities you are looking for, `findf` lets you find and filter facilities whose location contains
 any of the given keywords.
@@ -522,13 +548,11 @@ Examples:
 * `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
 * `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
 
-<p align="center">
-   <img src="images/findfExample.png" height="400" align="center"/>
-</p>
+![findfExample](images/findfExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Splitting members into facilities : `split`
+#### Splitting members into facilities: `split`
 
 Organise your next training session seamlessly by splitting members into the facilities based on its capacity and
 members' availability using `split`.
@@ -545,23 +569,21 @@ to accommodate all available members and the allocation will not be executed.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If you execute the split command after executing the allocate or deallocate command, it will **overwrite** the previous allocations and
-deallocations you have made.
+If you execute the split command, it will **overwrite** all existing allocations you have made for the given day. 
+This action is **irreversible**.
 </div>
 
 Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user :camera:
 
-<p align="center">
-   <img src="images/splitExample.png" height="400" align="center"/>
-</p>
+![splitExample](images/splitExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Deallocating a member from a facility : `deallocate`
+#### Deallocating a member from a facility: `deallocate`
 
-You can easily accommodate changes in member's availability by deallocating a member from a facility they were <br>
+You can easily accommodate changes in member's availability by deallocating a member from a facility they were
 previously allocated to on a specified day, using `deallocate`.
 
 Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
@@ -572,12 +594,12 @@ Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 
 Examples:
-* `deallocate 2 4 5` removes the member at index 2 in the displayed member list from the allocation list <br> of the facility
+* `deallocate 2 4 5` removes the member at index 2 in the displayed member list from the allocation list of the facility
   at index 4 in the displayed facility list on Friday.
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Allocating a member to a facility : `allocate`
+#### Allocating a member to a facility: `allocate`
 
 If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility
 using `allocate`.
@@ -591,17 +613,16 @@ Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** Members you choose to allocate must be available on the specified day and their addition must not result in
-the selected facility's capacity to exceed.
+**:information_source: Note:** 
+* Members you choose to allocate must be available on the specified day 
+* You cannot allocate members to facilities which are at maximum capacity.
 </div>
 
 Examples:
 * `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
   at index 2 in the displayed facility list on Monday :camera:
 
-<p align="center">
-   <img src="images/allocateExample.png" height="400" align="center"/>
-</p>
+![allocateExample](images/allocateExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -703,7 +724,7 @@ If changes made to the data file makes its format invalid, SportsPA will discard
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Exiting the program : `exit`
+#### Exiting the program: `exit`
 
 Exits the program.
 
