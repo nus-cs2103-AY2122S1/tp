@@ -236,8 +236,12 @@ public class ParserUtil {
         if (username.isEmpty()) {
             return new SocialHandle(platform, ""); // To delete the platform in socialHandles
         }
+        // Defensive coding to prevent user dumping long text as username
+        if (username.length() > SocialHandle.MAXIMUM_USERID_LENGTH) {
+            throw new ParseException(SocialHandle.USERID_LENGTH_CONSTRAINTS);
+        }
         if (!SocialHandle.isValidValue(username)) {
-            throw new ParseException(SocialHandle.USERNAME_CONSTRAINTS);
+            throw new ParseException(SocialHandle.USERID_CONSTRAINTS);
         }
         return new SocialHandle(platform, username);
     }
@@ -265,7 +269,6 @@ public class ParserUtil {
                 throw new ParseException(SocialHandle.CLEAR_CONSTRAINTS);
             }
         }
-        final Set<SocialHandle> socialHandleSet = new HashSet<>(socialHandleTable.values());
-        return socialHandleSet;
+        return new HashSet<>(socialHandleTable.values());
     }
 }
