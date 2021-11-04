@@ -35,6 +35,8 @@ public class RemoveCommand extends Command {
     public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
     public static final String MESSAGE_MULTIPLE_MATCHES =
             "Multiple candidates found, which one did you mean to remove?";
+    public static final String MESSAGE_EXTRA_PRICE_FLAGS = "Extra price fields are ignored.";
+    public static final String MESSAGE_EXTRA_TAG_FLAGS = "Extra tag fields are ignored.";
 
     private final ItemDescriptor toRemoveDescriptor;
 
@@ -50,9 +52,19 @@ public class RemoveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         assert(toRemoveDescriptor.getCount().isPresent());
+        boolean extraPriceFlags = false;
+        boolean extraTagFlags = false;
 
         List<Item> matchingItems = model.getItems(toRemoveDescriptor);
-
+        // check for extra price flags
+        if (!toRemoveDescriptor.getCostPrice().equals(Optional.empty())
+                || !toRemoveDescriptor.getSalesPrice().equals(Optional.empty())) {
+            extraPriceFlags = true;
+        }
+        // check for extra tag flags
+        if (!toRemoveDescriptor.getTags().equals(Optional.empty())) {
+            extraTagFlags = true;
+        }
         // Check if item exists in inventory
         if (matchingItems.size() == 0) {
             throw new CommandException(MESSAGE_ITEM_NOT_FOUND);
@@ -70,6 +82,8 @@ public class RemoveCommand extends Command {
             if (!model.hasName(toRemoveDescriptor.buildItem())) {
                 throw new CommandException(MESSAGE_NAME_NOT_FOUND);
             }
+            toRemoveDescriptor.setCostPrice(null);
+            toRemoveDescriptor.setSalesPrice(null);
         }
 
         // Check that only 1 item fit the description
@@ -88,13 +102,20 @@ public class RemoveCommand extends Command {
         }
 
         model.removeItem(target, amount);
+        String success = String.format(MESSAGE_SUCCESS, amount, target.getName());
+        if (extraPriceFlags) {
+            return new CommandResult(success + "\n" + MESSAGE_EXTRA_PRICE_FLAGS);
+        }
+        if (extraTagFlags) {
+            return new CommandResult(success + "\n" + MESSAGE_EXTRA_TAG_FLAGS);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, amount, target.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RemoveCommand // instanceof handles nulls
-                && toRemoveDescriptor.equals(((RemoveCommand) other).toRemoveDescriptor));
+                || (other instanceof RemoveCommand) // instanceof handles nulls
+                && toRemoveDescriptor.equals(((RemoveCommand) other).toRemoveDescriptor);
     }
 }

@@ -11,7 +11,6 @@ Class ModelManager
 
 Class Inventory
 Class TransactionList
-Class BookKeeping
 Class Order
 Class UniqueItemList
 Class TransactionRecord {
@@ -32,9 +31,8 @@ HiddenOutside ..> Model
 
 
 ModelManager .up.|> Model
-ModelManager -left-> "1" BookKeeping
 ModelManager --> "1" Inventory
-ModelManager -right-> "1" TransactionList
+ModelManager --> "1" TransactionList
 ModelManager --> "0..1" Order
 TransactionList o-down-> "*" TransactionRecord
 
@@ -42,10 +40,10 @@ Inventory .right.> Order
 
 Order *--> "1" UniqueItemList
 Inventory *--> "1" UniqueItemList
-TransactionRecord --> "*" Item
 TransactionRecord .left.|> Order
+TransactionRecord *-left-> "1" UniqueItemList
 
-UniqueItemList o-right- "*" Item
-Item .up.|> Order
+UniqueItemList o-down- "*" Item
+
 
 @enduml

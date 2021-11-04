@@ -9,16 +9,19 @@ Interface ReadOnlyInventory <<Interface>>
 Interface Model <<Interface>>
 Interface ReadOnlyTransactionList <<Interface>>
 Interface ReadOnlyBookKeeping <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
 Class Model
 Class ModelManager
 Class ReadOnlyInventory
 Class ReadOnlyTransactionList
 Class ReadOnlyBookKeeping
+Class ReadOnlyUserPrefs
 
 Class Inventory
 Class TransactionList
 Class BookKeeping
 Class Order
+Class UserPrefs
 }
 
 Class HiddenOutside #FFFFFF
@@ -27,16 +30,19 @@ HiddenOutside ..> Model
 Model ..> ReadOnlyBookKeeping
 Model ..> ReadOnlyTransactionList
 Model ..> ReadOnlyInventory
+Model ..> ReadOnlyUserPrefs
 
 
 BookKeeping .up.|> ReadOnlyBookKeeping
 Inventory .up.|> ReadOnlyInventory
 TransactionList .up.|> ReadOnlyTransactionList
+UserPrefs .up.|> ReadOnlyUserPrefs
 
 ModelManager .up.|> Model
 ModelManager --> "1" BookKeeping
 ModelManager --> "1" Inventory
 ModelManager --> "1" TransactionList
 ModelManager --> "0..1" Order
+ModelManager --> "1" UserPrefs
 
 @enduml

@@ -45,15 +45,15 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public boolean containsID(Item toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(x -> toCheck.isSameId(x) && x.getCount() > 0);
+        return internalList.stream().anyMatch(x -> toCheck.isSameId(x));
     }
     /**
-     * Returns true if the list contains an equivalent item as the given argument.
+     * Returns true if the list contains an equivalent name as the given argument.
      * @see Item#isSameItem(Item)
      */
     public boolean containsName(Item toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(x -> toCheck.isSameName(x) && x.getCount() > 0);
+        return internalList.stream().anyMatch(x -> toCheck.isSameName(x));
     }
 
     /**

@@ -161,20 +161,12 @@ API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/s
 
 The `Model` component
 
-- stores the inventory data.
-- stores the current order data.
-- stores the transaction history of orders.
+- stores an `Inventory` object that represents the inventory data.
+- stores an optional `Order` object that represents the current order data.
+- stores a `TransactionList` object that represents the transaction history of orders.
+- stores a `UserPref` object that represents the user’s preferences.
 - does not depend on any of the other three components (as the Model represents data entities of the domain, they should
   make sense on their own without depending on other components)
-
-## !!! Not Sure If the below 2 points are valid or not
-
-- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
-  a `ReadOnlyUserPref` objects.
-- stores the currently 'selected' `Item` objects (e.g., results of a search query)
-  as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Item>`
-  that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the
-  list change.
 
 ![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
 
@@ -182,7 +174,7 @@ The `Model` component
 
 ![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
 
-Low leve architecture of `Model` component:
+Low level architecture of `Model` component:
 
 - `Inventory` and `Order` are each consists of an `UniqueItemList` which contains `Items`.
 - The `TransactionList` stores `TransactionRecord` which are the records of history orders.
@@ -412,6 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise.
 
+
 <div class="code-example bg-grey-lt-000">
 :information_source: Click on any of the use cases to view them.
 </div>
@@ -451,6 +444,7 @@ Extensions:
     Use case resumes at step 2.
 ```
 </details>
+
 
 <details markdown="block">
   <summary>
@@ -642,6 +636,7 @@ MSS:
 6. BogoBogo transacts the order and updates inventory and transaction history.
    Use case ends.
 
+
 Extensions:
 1a. User is already in ordering mode
     1a1. BogoBogo informs the user that the current mode is already ordering mode.
@@ -733,7 +728,6 @@ Extensions:
     1a1. BogoBogo notifies user there is currently no open order.
     Use case ends.
 ```
-
 </details>
 
 <details markdown="block">
@@ -791,6 +785,7 @@ Extensions:
 ```
 MSS:
 1. User requests to exit the application
+
 2. BogoBogo exits.
    Use case ends.
 ```
