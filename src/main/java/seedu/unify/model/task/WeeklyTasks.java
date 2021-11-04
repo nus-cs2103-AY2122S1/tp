@@ -130,7 +130,7 @@ public class WeeklyTasks implements Iterable<Task> {
         totalWeeklyTasks.set(totalTasksTemp);
         totalDoneTasks.set(doneTasksTemp);
         if (totalTasksTemp == 0) {
-            weeklyProgress.set(1);
+            weeklyProgress.set(0);
         } else {
             weeklyProgress.set(getTotalDoneTasks().doubleValue() / getTotalWeeklyTasks().doubleValue());
         }
