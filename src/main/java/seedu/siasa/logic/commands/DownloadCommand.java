@@ -54,6 +54,10 @@ public class DownloadCommand extends Command {
         int countContacts = numberPoliciesPerContact.size();
         int countPolicies = numberPoliciesPerContact.values()
                 .stream().mapToInt(Integer::intValue).sum();
+        if (countContacts == 0) {
+            return 0;
+        }
+        assert countContacts > 0 : "number of contacts should be greater than 0";
         return (float) countPolicies / countContacts;
     }
 
@@ -64,17 +68,15 @@ public class DownloadCommand extends Command {
 
         stringList.add("Statistics for " + CURRENT_DATE + "\n");
         stringList.add("Most premium contacts:\n" + TITLE_UNDERLINE);
-        commissionPerContact.entrySet().stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .forEach((entry -> stringList.add(entry.getKey().toString()
-                        + "; Commission: " + centsToDollars(entry.getValue()))));
+        commissionPerContact.forEach((contact, commission) -> {
+            stringList.add(contact + "; Commission: " + centsToDollars(commission));
+        });
         stringList.add("\n");
 
         stringList.add("Number of policies per contact:\n" + TITLE_UNDERLINE);
-        numberPoliciesPerContact.entrySet().stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .forEach((entry -> stringList.add(entry.getKey().toString()
-                        + "; Number of policies: " + entry.getValue())));
+        numberPoliciesPerContact.forEach((contact, noPolicies) -> {
+            stringList.add(contact + "; Number of Policies: " + noPolicies);
+        });
         stringList.add("\n");
 
         stringList.add("Average number of policies per contact: "

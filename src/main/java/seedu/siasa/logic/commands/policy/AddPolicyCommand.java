@@ -18,7 +18,7 @@ import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
-import seedu.siasa.logic.commands.warnings.Warning;
+import seedu.siasa.logic.commands.Warning;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
@@ -89,7 +89,7 @@ public class AddPolicyCommand extends Command {
         }
 
         if (coverageExpiryDate != null && !CoverageExpiryDate.isFutureExpiryDate(coverageExpiryDate.value)) {
-            boolean response = Warning.warnUser(MESSAGE_PAST_EXPIRY_DATE);
+            boolean response = Warning.isUserConfirmingCommand(MESSAGE_PAST_EXPIRY_DATE);
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }
@@ -105,7 +105,7 @@ public class AddPolicyCommand extends Command {
 
         if (model.getSimilarPolicy(toAdd).isPresent()) {
             Policy similarPolicy = model.getSimilarPolicy(toAdd).get();
-            boolean response = Warning.warnUser(String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
+            boolean response = Warning.isUserConfirmingCommand(String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }

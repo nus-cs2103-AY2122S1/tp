@@ -163,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
     public static boolean showWarning(String description) {
         WarningWindow warningWindow = new WarningWindow(new Stage(), description);
         warningWindow.display();
-        return warningWindow.getUserResponse();
+        return warningWindow.isUserConfirmingCommand();
     }
 
     void show() {

@@ -22,7 +22,7 @@ class CoverageExpiryDateTest {
         // null address
         assertThrows(NullPointerException.class, () -> CoverageExpiryDate.isFutureExpiryDate(null));
 
-        // past addresses
+        // past and present addresses
         assertFalse(CoverageExpiryDate.isFutureExpiryDate(POLICY_EXPIRY_DATE_PAST));
         assertFalse(CoverageExpiryDate.isFutureExpiryDate(POLICY_EXPIRY_DATE_TODAY));
 

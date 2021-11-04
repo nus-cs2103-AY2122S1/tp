@@ -11,7 +11,7 @@ import seedu.siasa.commons.core.Messages;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
-import seedu.siasa.logic.commands.warnings.Warning;
+import seedu.siasa.logic.commands.Warning;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
 
@@ -61,7 +61,7 @@ public class AddContactCommand extends Command {
 
         if (model.getSimilarContact(toAdd).isPresent()) {
             Contact similarContact = model.getSimilarContact(toAdd).get();
-            boolean response = Warning.warnUser(String.format(MESSAGE_SIMILAR_CONTACT, similarContact.getName()));
+            boolean response = Warning.isUserConfirmingCommand(String.format(MESSAGE_SIMILAR_CONTACT, similarContact.getName()));
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }
