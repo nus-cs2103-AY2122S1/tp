@@ -408,12 +408,12 @@ The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonA
 not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
 
 Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
 Step 1. The user edits the data file and changes `Tag` field of the first contact to an invalid value.
 
 Step 2. The user edits the data file and changes the `Email` field of the second contact to an invalid value.
 
-Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first person is invalid, `JsonAdaptedPerson`
-will not add the invalid `Tag`.
+Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first person is invalid, `JsonAdaptedPerson` will not add the invalid `Tag`.
 
 Step 4. Since the value of `Email` (compulsory field) for the second person is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
 

@@ -27,8 +27,8 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
-    private static final String INVALID_BIRTHDAY_MESSAGE = "Birthday %s is invalid. Will start with empty birthday.";
-    private static final String INVALID_PIN_MESSAGE = "Pin status %s is invalid. "
+    private static final String INVALID_BIRTHDAY_MESSAGE = "%s's birthday %s is invalid. Will start with empty birthday.";
+    private static final String INVALID_PIN_MESSAGE = "%s's pin status %s is invalid. "
             + "Will start with not pinned by default.";
 
     private final String name;
@@ -120,11 +120,11 @@ class JsonAdaptedPerson {
         final Pin modelPin;
 
         if (pin == null) {
-            logger.info(String.format(INVALID_PIN_MESSAGE, "null"));
+            logger.info(String.format(INVALID_PIN_MESSAGE, name, "null"));
             modelPin = new Pin(false);
             //throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
         } else if (!Pin.isValidPinStatus(pin)) {
-            logger.info(String.format(INVALID_PIN_MESSAGE, pin));
+            logger.info(String.format(INVALID_PIN_MESSAGE, name, pin));
             modelPin = new Pin(false);
             //throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
         } else {
@@ -138,15 +138,12 @@ class JsonAdaptedPerson {
         }
 
         final Birthday modelBirthday;
-        // Set birthday if non-null
         if (!Birthday.isValidFormat(birthday)) {
-            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, birthday));
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
             modelBirthday = null;
-            //throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         } else if (!Birthday.isValidDate(birthday)) {
-            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, birthday));
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
             modelBirthday = null;
-            //throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
         } else {
             modelBirthday = new Birthday(birthday);
         }

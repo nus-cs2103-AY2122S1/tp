@@ -120,7 +120,6 @@ Adds a person to the address book.
 
 :bulb: **Tip:**
 A person can have any number of tags (including 0).
-Each tag has a limit of 60 characters.
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -133,6 +132,7 @@ Notes:
 * Phone number must be unique.
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.
+* Each tag has a character limit of 60.
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -407,8 +407,8 @@ CONNECTIONS data are saved as a JSON file `[JAR file location]/data/CONNECTIONS.
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
-If your changes to the data file makes other its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
-If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (empty for Birthday and false for Pin). Other data will be recovered. 
+If your changes to the data file makes its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (no birthday and not pinned). Other data will be recovered. 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
