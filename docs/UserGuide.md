@@ -32,7 +32,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [4.11 Exiting the program: exit](#411-exiting-the-program--exit)
     * [4.12 Saving data](#412-saving-the-data)
     * [4.13 Edit data file](#413-edit-data-file)
-* [**5. Multiple Address Books Features **](#5-multiple-address-books-feature)
+* [**5. Multiple Address Books Features**](#5-multiple-address-books-feature)
     * [5.1 Create new address book: ab create](#51-create-new-address-book--ab-create)
     * [5.2 Delete existing address book: ab delete](#52-delete-existing-address-book-ab-delete--ab-delete)
     * [5.3 Switch to different address book: ab switch](#53-switch-to-different-address-book--ab-switch)
@@ -94,9 +94,9 @@ When reading our User Guide, here are some important information to take note of
 
 ## 3. Client Information
 
-This section details the client information that financial advisors can keep track of with LeadsForce. Every client that is registered in LeadsForce have the following attributes that has the corresponding type and argument tag. The argument tags specified here will be used in the commands of several [features](#4-features). 
+This section details the client information that financial advisors can keep track of with LeadsForce. Every client that is registered in LeadsForce have the following attributes that has the corresponding type and attribute tag. The attribute tags specified here will be used in the commands of several [features](#4-features). 
 
-Client Attribute | Type of Attribute | Argument Tag
+Client Attribute | Type of Attribute | Attribute tag
 -----------------|-----------------|-----------------
 Client ID (**Unique**) | Integer (assigned on creation of new contact) | i/
 Name (**Compulsory**) | String | n/
@@ -150,7 +150,7 @@ This section details the various features available in a single address book in 
  
 * When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
-* If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding argument tag
+* If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding attribute tag
 
 * Inputs in square brackets are optional input:<br>
   e.g. `KEYWORD [OTHER_KEYWORD]` can be in the form of `firstName` or `firstName lastName`
@@ -164,7 +164,7 @@ This section details the various features available in a single address book in 
 ### 4.1 Create New Contact : `add`
 
 Adds a new client to the address book.
-| Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES} ...​`|
+| Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...​`|
 | :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
 | <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional <br> • Tags that can be added are as seen in the client information in the Client Info Section |
@@ -213,7 +213,7 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted as
 | Format | `sort <attribute>/{SORT DIRECTION}...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :-: | :-- |
 | **examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
-| <img src=images/info_icon.png width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
+| <img src=images/info_icon.png width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
 ### 4.7 Find meeting schedule : `schedule`
 
@@ -228,7 +228,7 @@ Finds the meeting schedule on a specified date.
 
 Finds clients whose contacts match with the given keywords.
 
-| Format | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `<attribute>/` refers to the argument tag for the client's attribute. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :-: | :-- |
 | **examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
 | <img src=images/info_icon.png width="50"> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
@@ -237,7 +237,7 @@ Finds clients whose contacts match with the given keywords.
 
 Filters the current list by the given keywords.
  
-| Format | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `<attribute>/` refers to the argument tag for the client's attribute. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :-: | :-- |
 | **examples** | • `search John` returns `john` and `John Doe` <br> • `search alex david` returns `Alex Yeoh`, `David Li` |
 | <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
@@ -277,16 +277,16 @@ This section details the multiple address book feature in LeadsForce. Seperate y
 
 Create a new address book by the name provided and switches to it.
 
-| Format | `ab create ADDRESSBOOK_NAME`|
+| Format | `ab create ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name to be given to the new address book.|
 | :-: | :-- |
 | Example | `ab create vip clients` will create a new address book named `vip clients` |
-| <img src=images/info_icon.png width="50"> | • `{ADDRESSBOOK_NAME}` refers to the name to be given to the new address book. <br> • The name of the addressbook cannot be the same as an existing address book.|
+| <img src=images/info_icon.png width="50"> | • The name of the addressbook cannot be the same as an existing address book.|
 
 ### 5.2 Delete existing address book: ab delete : `ab delete`
 
 Delete an address book that currently exists.
 
-| Format | `ab delete ADDRESSBOOK_NAME`<br> <br>• `ADDRESSBOOK_NAME` refers to the name of the address book to be deleted.|
+| Format | `ab delete ADDRESSBOOK_NAME`<br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to be deleted.|
 | :-: | :-- |
 | Example | `ab delete test` will delete the address book named `test` |
 | <img src=images/info_icon.png width="50"> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
@@ -295,7 +295,7 @@ Delete an address book that currently exists.
 
 Switch to a different address book that currently exists.
  
-| Format | `ab switch ADDRESSBOOK_NAME` <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
+| Format | `ab switch ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :-: | :-- |
 | Example | `ab switch other` will switch over to the address book named `other` |
 | <img src=images/tip_icon.png width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="300"> |
@@ -347,9 +347,9 @@ List all the name of all the existing address books
 3. Otherwise, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the mac version of the java JDK.
  
  
-**For windows users,**
+**For Windows users,**
  
-1. Open the command prompt, and type `-version`. 
+1. Open the command prompt, and type `java -version`, and press `enter`. 
 2. If you get the version information, and have made sure that the java version is `11` and above. You have downloaded the correct java version, and can skip the rest of this tutorial. 
 3. Go to `start menu` → `System` → `Advanced` → `Environment Variable`. Set the `JAVA_HOME` to the path of your JDK, and press `update`. For more details, the link to a more in-depth guide can be found [here](https://javatutorial.net/set-java-home-windows-10). 
 4. If none of the above worked, do search your system for the `javac.exe` file. If it cannot be found, head to the Oracle website [here](https://www.oracle.com/java/technologies/downloads/#java11-mac) to download the PC version of the java JDK.
@@ -374,8 +374,8 @@ Action | Format | Examples
 **List** | `list` | - |
 **Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
 **Schedule** | `schedule DATE` | schedule 22-09-2021 |
-**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
+**Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5 |
+**Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9 |
 **Clear** | `clear` | - |
 **Exit** | `exit` | - |
  
@@ -387,4 +387,3 @@ Action | Format | Examples
 **Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
 **Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
 **List Address Book** | `ab list` | -
-
