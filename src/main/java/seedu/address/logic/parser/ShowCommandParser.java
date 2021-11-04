@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -30,7 +31,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
 
         Path savePath = null;
         if (argMultimap.getValue(PREFIX_FILE).isPresent()) {
-            savePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), ".png");
+            savePath = generateNewPath(0);
         }
 
         return argMultimap.getPreamble().isEmpty()
@@ -83,6 +84,20 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     }
 
     /**
+     * Generates a path to save the graph. Ensures that the graph saved does not overwrite any existing file.
+     * Default path is ./graph.png.
+     */
+    public Path generateNewPath(int tries) {
+        String pathString = String.format(ShowCommand.BASE_PATH, tries == 0 ? "" : "(" + tries + ")");
+        Path path = FileUtil.pathOf(pathString);
+        if (FileUtil.isFileExists(path)) {
+            return generateNewPath(tries + 1);
+        } else {
+            return path;
+        }
+    }
+  
+      /**
      * Returns true if none of the prefixes present in the given {@code ArgumentMultimap}.
      */
     private static boolean isNoPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

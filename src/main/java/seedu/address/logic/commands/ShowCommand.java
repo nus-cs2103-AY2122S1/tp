@@ -45,7 +45,7 @@ public class ShowCommand extends Command {
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name> | "
             + PREFIX_GROUP + "<group_name>) "
-            + "[" + PREFIX_FILE + "<export_location>]\n"
+            + "[ " + PREFIX_FILE + "]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tang Zhiying, "
             + COMMAND_WORD + " "
@@ -57,6 +57,8 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
             "This student needs to be specified using INDEX or ID due to duplicate naming.";
+
+    public static final String BASE_PATH = "graph%1$s.png";
 
     private Index index;
     private Name name;

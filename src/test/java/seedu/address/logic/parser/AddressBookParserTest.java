@@ -156,12 +156,6 @@ public class AddressBookParserTest {
     public void parseCommand_export() throws Exception {
         assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD) instanceof ExportCommand);
         assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " 3") instanceof ExportCommand);
-
-        ExportCommand command = (ExportCommand) parser.parseCommand(
-                ExportCommand.COMMAND_WORD
-                + FILE_DESC_VALID_FILE);
-
-        assertEquals(new ExportCommand(ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv")), command);
     }
 
     @Test
