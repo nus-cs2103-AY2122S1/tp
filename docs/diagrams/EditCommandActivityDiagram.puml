@@ -1,0 +1,31 @@
+@startuml
+start
+:User executes Edit Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is
+valid])
+
+    :Identify the Person to be edited from the specified
+    index and what categories to be edited;
+    :Create the edited Person with the changed categories;
+
+    if () then ([new edited Person already
+    exists in the AddressBook])
+
+        stop
+
+    else ([else])
+    endif
+
+    :Replace the specified Person in the
+    AddressBook with the new edited Person;
+
+    :GUI Result Display updated with
+    correct list of applicants;
+else ([else])
+endif
+stop
+@enduml

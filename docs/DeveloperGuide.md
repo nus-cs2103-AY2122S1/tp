@@ -160,7 +160,7 @@ The ```edit``` command is facilitated by creating an ```EditCommand``` depending
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
-![images](images/ShowCommandActivityDiagram.png)
+![images](images/EditCommandActivityDiagram.png)
 
 Given below is an example usage scenario and how the edit operation behaves at each step.
 
@@ -187,7 +187,7 @@ Step 6. Once the list is updated, `CommandResult` is initialized with `String` c
 This CommandResult is then returned.
 
 The following sequence diagram shows how the edit operation works.
-![images](images/ShowCommandSequenceDiagram.png)
+![images](images/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
