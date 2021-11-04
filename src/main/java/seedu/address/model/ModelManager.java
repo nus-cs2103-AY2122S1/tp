@@ -286,9 +286,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Applicant getApplicantByNameIgnoreCase(Name applicantName) {
+    public Applicant getApplicantByName(Name applicantName) {
         requireNonNull(applicantName);
-        return applicantBook.getApplicantByNameIgnoreCase(applicantName);
+        return applicantBook.getApplicantByName(applicantName);
     }
 
     @Override

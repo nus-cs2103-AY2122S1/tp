@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_PROFILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -19,19 +20,21 @@ public class AddApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "add-applicant";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to MrTechRecruiter. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to MrTechRecruiter. " + "\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_POSITION + "POSITION "
+            + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE " + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_POSITION + "software engineer";
+            + PREFIX_POSITION + "software engineer"
+            + PREFIX_GITHUB_PROFILE + "https://github.com/empty";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in MrTechRecruiter";

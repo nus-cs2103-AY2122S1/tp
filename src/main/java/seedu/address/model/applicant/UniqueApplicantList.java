@@ -54,10 +54,10 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      * Returns the applicant in the list with the specified name, if any.
      * @throws ApplicantNotFoundException if not found.
      */
-    public Applicant getApplicantByNameIgnoreCase(Name name) {
+    public Applicant getApplicantByName(Name name) {
         requireNonNull(name);
         return internalList.stream()
-                .filter(applicant -> applicant.hasNameIgnoreCase(name))
+                .filter(applicant -> applicant.hasName(name))
                 .findFirst()
                 .orElseThrow(ApplicantNotFoundException::new);
     }
