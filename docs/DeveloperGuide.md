@@ -873,7 +873,7 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
     2. Prerequisites:
         2. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
         2. List all patients using the `list` command. Multiple patients in the list.
-        2. List some patients using `find xyz` (XYZ is the name of an existing patient).
+        2. List some patients using `find xyz` (xyz is the name of an existing patient).
 
     2. Test cases are similar to those above.
     
@@ -916,13 +916,13 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
         1. List all doctors using the `list` command. Multiple doctors in the list.
 
     1. Test case: `find Alex`<br>
-       Expected: Patient list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+       Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
 
     1. Test case: `find alex`<br>
        Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
 
     1. Test case: `find alex bernice`<br>
-       Expected: `find` command is able to search multiple doctors using multiple keywords. Patient list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
+       Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
 
     1. Test case: `find ale`<br>
        Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
@@ -935,7 +935,7 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
     2. Prerequisites:
         2. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
         2. List all doctors using the `list` command. Multiple doctors in the list.
-        2. List some doctors using `find xyz` (XYZ is the name of an existing doctor).
+        2. List some doctors using `find xyz` (xyz is the name of an existing doctor).
 
     2. Test cases are similar to those above.
 
