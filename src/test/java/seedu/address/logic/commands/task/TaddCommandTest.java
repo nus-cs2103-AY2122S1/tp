@@ -42,7 +42,7 @@ class TaddCommandTest {
     }
 
     @Test
-    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_taskForOneMemberAcceptedByModel_addSuccessful() throws Exception {
         Index validMemberId = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberId);

@@ -23,7 +23,6 @@ import seedu.address.model.module.task.Task;
  */
 public class TaddCommand extends Command {
     public static final String COMMAND_WORD = "tadd";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member. "
             + "Parameters: "
             + PREFIX_NAME + "TASKNAME "
@@ -57,15 +56,14 @@ public class TaddCommand extends Command {
         ObservableList<Member> members = model.getFilteredMemberList();
 
         for (Index targetMemberId: targetMemberIdList) {
+            if (targetMemberId.getZeroBased() >= members.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            }
             Member targetMember = members.get(targetMemberId.getZeroBased());
             if (model.hasTask(targetMember, toAdd)) {
                 throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK,
                         targetMember.getName().toString()));
             }
-        }
-
-        for (Index targetMemberId: targetMemberIdList) {
-            Member targetMember = members.get(targetMemberId.getZeroBased());
             model.addTask(targetMember, toAdd);
         }
 
