@@ -1283,6 +1283,58 @@ Character limit:
     4. **Other incorrect edit commands to try**: `edit 1 n/ `, `edit 1 p/11`, `edit 1 e/mattias@u` <br>
        **Expected**: Similar to previous (in Point 3).
 
+### Finding a Client
+
+#### Finding by name
+1. Finding a client by their name in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find john`<br>
+       **Expected**: All clients with the name "John" or whose names start with "John" are displayed. Success message with details of
+       search is shown.
+       
+    3. **Test case**: `find `
+       **Expected**: No search results are displayed. Error message is shown.
+
+#### Finding by priority
+1. Finding a client by their priority tag in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find pr/high`<br>
+       **Expected**: All clients with a "HighPriority" tag are displayed. Success message with details of search is shown.
+       
+    3. **Test case**: `find pr/friend`
+       **Expected**: No search results are displayed. Error message is shown.
+       
+    4. **Other incorrect find commands to try**: `find pr/`, `find pr/    `
+       **Expected**: Similar to previous (in Point 3).
+       
+#### Finding by tag
+1. Finding a client by their tag in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find t/friend`<br>
+       **Expected**: All clients with a "friend" tag are displayed. Success message with details of search is shown.
+       
+    3. **Test case**: `find t/`
+       **Expected**: No search results are displayed. Error message is shown.
+       
+    4. **Other incorrect find commands to try**: `find t/    `
+       **Expected**: Similar to previous (in Point 3).
+       
+#### Finding by remark
+1. Finding a client by their tag in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find r/likes to eat`<br>
+       **Expected**: All clients with remarks containing "likes to eat" are displayed. Success message with details of search is shown.
+       
+    3. **Test case**: `find r/`
+       **Expected**: No search results are displayed. Error message is shown.
+       
+    4. **Other incorrect find commands to try**: `find r/    `
+       **Expected**: Similar to previous (in Point 3).
+
 ### Deleting a Client
 
 #### Single delete
