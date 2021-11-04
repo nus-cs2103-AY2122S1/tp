@@ -57,7 +57,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
-* **Pin**: Fixing a `Person` to the top of the current list of `Person` objects or a `Group`
 * **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **
   Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is
   automatically in the parent `Group` as well
@@ -101,11 +100,21 @@ New Workflow for Adding Commands:
 4. Create a `XYZCommandExecutor` class that extends the same type of `Executor` as the `Command` from step 1.
 5. Implement all required methods and ensure all fields used by the methods are present.
 
+
 #### In-depth example of Command workflow, using the Find Command
 
 Notor allows you to search for groups and people, and both searches have slightly different requirements.
 
 Lets break down what happens to call a person comamnd.
+
+
+#### In-depth example of Command Workflow, using the Person Note Command.
+
+Notor allows you to add note to a itself, a person or group in a list.
+
+The following sequence diagram shows the detail when `PersonNoteCommand` is executed to add note for a person.
+
+![PersonNoteSequenceDiagram](images/PersonNoteSequenceDiagram.png)
 
 ### Model Changes
 
@@ -260,6 +269,27 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Clear Note Feature
+
+When a ClearNoteCommand i.e `ClearNoteCommand, PersonClearNoteCommand, GroupClearNoteCommand` is executed, Notor checks
+via`NoteWindow#contains(Notable notable)` where `notable` can be an instance of `Person`, `Notor` or 
+`Group/SubGroup`, whether the instance of notable belongs to any of `OPEN_NOTE_WINDOWS`. If it belongs to any instance
+of 
+
+### Note Feature
+
+`Notor, Person, Group` implements `Notable` interface, where they need to implement `Notable#getNote()` to retrieve note.
+
+When a NoteCommand i.e `NoteCommand, PersonNoteCommand, GroupNoteCommand` is executed, an instance of Notable is passed
+into `CommandResult`, and `showNote` boolean of `CommandResult` is set to `true`. `MainWindow` will execute 
+`MainWindow#handleNote(Notable notable, Logic logic)` which will create an instance of `GeneralNoteWindow`, `PersonNoteWindow`, 
+`GroupNoteWindow` depending on the instance of `Notable` and add it to `OPEN_NOTE_WINDOWS` which is a static `ArrayList<NoteWindow>` 
+which keeps track of what `NoteWindow` is opened. If a `NoteWindow` of an instance of `Notable` is already opened, that instance of 
+``
+
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -341,22 +371,41 @@ otherwise)
 
 **MSS**
 
-1. User requests to add a note to the person
-2. Notor shows a list of persons
-3. User requests to add a note to a specific person in the list
-4. Notor opens up a pop up dialogue for the user to type the note for the person
-5. User requests to save the note to the person
-6. Notor stores the book to the person
-7. Notor saves the note to storage
+1. User requests to add a note to the person.
+2. Notor shows a list of persons.
+3. User requests to add a note to a specific person in the list.
+4. Notor opens up a pop up dialogue for the user to type the note for the person.
+5. User types in note for the person in the pop up dialogue.
+6. User requests to save the note to the person.
+7. Notor stores the book to the person.
+8. Notor saves the note to storage.
+9. User requests to close pop up dialogue for note.
+10.Notor closes pop up dialogue for note.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. Use case ends.
+* 2a. The list is empty.
+  
+    Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. Notor shows an error message. Use case resumes at step 2.
+    * 3a1. Notor shows an error message.
+      
+       Use case resumes at step 2.
+
+* 5a. User requests to close pop up dialogue for note without saving note.
+    * 5a1. Notor opens up another confirmation pop up dialogue for the user to confirm.
+    * 5a2. User confirms exiting without saving note via confirmation pop up dialogue.
+    * 5a3. Notor closes pop up dialogue for note and confirmation pop up dialogue.
+    
+    Use case ends.
+
+* 5a1 a. User confirms closing and saving the pop up dialogue for note via confirmation pop up dialogue.
+
+    Use case resumes at step 5a3.
+
 
 **Use case: User types a command**
 
@@ -426,19 +475,71 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `person /list` command or already in person list. 
+       Must have at least one person in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+    1. Test case: `person 1 /delete`<br>
+       Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `person 0 /delete `<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `p /delete`, `p x /delete`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+
+### Adding general note.
+1. Adding general note.
+
+    1. Test case: `note` <br>
+       Expected: Note window opened with title of note window named as `General Note` to add note for.
+       Within the note window, user can refer to note shortcut key in User Guide.
+       Upon saving of note, general note is added and displayed in Notor.
+
+### Clearing general note.
+
+1. Clearing of general note.
+    1. Test case: `clearnote` <br>
+       Expected: Warning Window opened to prompt whether to proceed with clearing of general note.
+       General note is cleared in Notor upon confirmation to continue with clearing of note.
+       General note is not cleared upon confirmation to cancel clear note.
+
+### Adding note to a person
+
+1. Adding note to a person in person list.
+   
+    1.  Prerequisites: List all persons using the `person /list` command. Must have at least one person in the list.
+    
+    1. Test case: `person 1 /note` <br>
+        Expected: Note window opened with title of note window named as the person to add note for.
+        Within the note window, user can refer to note shortcut key in User Guide.
+        Upon saving of note, first three lines of note excluding empty line is shown for the first person in the list.
+
+   1. Test case: `person 0 /note `<br>
+      Expected: No note window is opened. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `p /note`, `p x /note`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Clearing note of a person
+1. Clearing note of a person in person list.
+
+    1.  Prerequisites: List all persons using the `person /list` command or already in person list. 
+        Must have at least one person in the list.
+
+    1. Test case: `person 1 /clearnote` <br>
+       Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person. 
+       Note of first person is cleared in the list upon confirmation to clear note. 
+       Note of first person in the list remains upon confirmation to cancel clear note.
+       
+   1. Test case: `person 0 /clearnote `<br>
+      Expected: No warning window is opened. Error details shown in the status message.
+      
+    1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 
 ### Saving data
 
@@ -447,3 +548,15 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## **Appendix: Effort**
+
+### GUI Test (Implemented but scrapped due to CI failure)
+
+We have initially decided to implement **Gui Testing** because many of our functionalities 
+such as clearing notes, tags and Notor, and adding notes uses a pop up window.
+
+The difficulty level of GUI Testing is moderate because there is very limited
+guides available on **TestFx** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally, 
+all efforts are of no avail.
