@@ -247,7 +247,7 @@ Names should be no longer than 20 characters.
 --------------------------------------------------------------------------------------------------------------------
 #### Tagging a contact: `tag`
 
-![Tagging a Contact](images/UG-14.png)
+![Tagging a Contact](images/UG-12.png)
 
 :orange_book: If you want to add new tags to a contact without replacing the old ones, you can use the _Tag_ command.
 
@@ -414,7 +414,7 @@ compulsory during creation.
 
 #### Tagging a task: `tag`
 
-![Tagging a Task](images/UG-10.png)
+![Tagging a Task](images/UG-8.png)
 
 :orange_book: If you want to add more tags to a task without replacing the old tags, you can use the _Tag_ command.
 
@@ -437,7 +437,7 @@ Tag names are only limited to 20 characters!
 
 #### Assigning people to a task: `assign`
 
-![Assigning people to a Task](images/UG-11.png)
+![Assigning people to a Task](images/UG-9.png)
 
 :orange_book: If you want to assign more people to a task without replacing the old assignees, you can use the _Assign_ 
 command.
@@ -460,7 +460,7 @@ by 23:59".
 
 #### Completing a task: `complete`
 
-![Completing a Task](images/UG-12.png)
+![Completing a Task](images/UG-10.png)
 
 :orange_book: If you have completed a task, you can mark it as completed by using the _Complete_ command.
 
@@ -526,7 +526,7 @@ without the prefix `d/`.
 
 #### Finding all upcoming tasks: `upcoming`
 
-![Finding upcoming Tasks](images/UG-13.png)
+![Finding upcoming Tasks](images/UG-11.png)
 
 :orange_book: If you want to view all of your upcoming tasks, you can use the _Upcoming_ command. Upcoming tasks are
 incomplete tasks whose Date/Time are after the current Date/Time.
