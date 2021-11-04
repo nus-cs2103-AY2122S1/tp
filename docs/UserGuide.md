@@ -233,7 +233,7 @@ short form `-n` can also be used instead.
 
 ### `add`
 
-Adds a contact to the address manager.
+Adds a contact to the address book.
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
