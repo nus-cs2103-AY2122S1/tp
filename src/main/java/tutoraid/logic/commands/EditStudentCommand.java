@@ -18,7 +18,6 @@ import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
@@ -103,11 +102,10 @@ public class EditStudentCommand extends EditCommand {
         Phone updatedParentPhone = editStudentDescriptor.getParentPhone().orElse(studentToEdit.getParentPhone());
 
         ProgressList studentProgress = studentToEdit.getProgressList();
-        PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
         Lessons lessons = studentToEdit.getLessons();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
-                studentProgress, paymentStatus, lessons);
+                studentProgress, lessons);
     }
 
     @Override
@@ -204,7 +202,6 @@ public class EditStudentCommand extends EditCommand {
                 return false;
             }
 
-            EditStudentDescriptor e = (EditStudentDescriptor) other;
             EditStudentDescriptor otherDescriptor = (EditStudentDescriptor) other;
             return otherDescriptor.getStudentName().equals(getStudentName())
                     && otherDescriptor.getStudentPhone().equals(getStudentPhone())

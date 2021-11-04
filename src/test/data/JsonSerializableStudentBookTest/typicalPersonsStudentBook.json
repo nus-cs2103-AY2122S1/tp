@@ -6,7 +6,6 @@
     "parentName" : "Mrs Tan",
     "parentPhone" : "94351253",
     "progressList" : [],
-    "paymentStatus": false,
     "lessons" : []
   }, {
     "studentName" : "Benson Meier",
@@ -14,7 +13,6 @@
     "parentName" : "Mrs Meier",
     "parentPhone" : "98765432",
     "progressList" : [],
-    "paymentStatus": true,
     "lessons" : []
   }, {
     "studentName" : "Carl Kurz",
@@ -22,7 +20,6 @@
     "parentName" : "Mr Kurz",
     "parentPhone" : "95352567",
     "progressList" : [],
-    "paymentStatus": false,
     "lessons" : []
   }, {
     "studentName" : "Daniel Meier",
@@ -30,7 +27,6 @@
     "parentName" : "Mrs Meier",
     "parentPhone" : "98765432",
     "progressList" : [],
-    "paymentStatus": false,
     "lessons" : []
   }, {
     "studentName" : "Elle Meyer",
@@ -38,7 +34,6 @@
     "parentName" : "Mrs Meyer",
     "parentPhone" : "9482290",
     "progressList" : [],
-    "paymentStatus": false,
     "lessons" : []
   }, {
     "studentName" : "Fiona Kunz",
@@ -46,7 +41,6 @@
     "parentName" : "Mr Daniel",
     "parentPhone" : "9482423",
     "progressList" : [],
-    "paymentStatus": false,
     "lessons" : []
   }, {
     "studentName" : "George Best",
@@ -54,7 +48,6 @@
     "parentName" : "Mrs Kayla",
     "parentPhone" : "94824432",
     "progressList" : [],
-    "paymentStatus": false,
     "lessons" : []
   } ]
 }
