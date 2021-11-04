@@ -96,7 +96,6 @@ class ModuleTest {
         Module differentTask = new ModuleBuilder()
                 .withName(MODULE_NAME_0)
                 .withStudents(TypicalStudents.getTypicalStudents())
-                //.withTasks(taskList) // this line will cause Duplicate Task Exception for some reason
                 .build();
         Task task5 = new TaskBuilder()
                 .withModule("CS2103")
@@ -110,7 +109,6 @@ class ModuleTest {
         Module differentStudent = new ModuleBuilder()
                 .withName(MODULE_NAME_0)
                 .withStudents(TypicalStudents.getTypicalStudents())
-                //.withTasks(TypicalTasks.getTypicalTasksForModule(MODULE_NAME_0))
                 .build();
         differentStudent.addStudent(CHARLIE);
         assertTrue(MODULE_1.equals(differentStudent));
