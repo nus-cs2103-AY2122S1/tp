@@ -774,10 +774,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First task has the new tag 'Important' added as a tag in addition to its existing list of tags. If it already has the same existing tag, no additional tag is added.
        Details of the task with added tag shown in the status message for both cases.
 
-    5. Test case: `tag 0 t/Important` <br>
-       Expected: No task has been added a tag. Error details stating 'invalid command format!' is shown with a description of how to use tag command with proper format.
+    3. Test case: `tag 0 t/Important` <br>
+        Expected: No task has been added a tag. Error details stating 'invalid command format!' is shown with a description of how to use tag command with proper format.
 
-    6. Test case: `tag 1 t/` <br>
+    4. Test case: `tag 1 t/` <br>
        Expected: No task has been added a tag. Error details stating 'Arguments cannot be empty' is shown.
 
 2. Tagging a task with multiple tags
