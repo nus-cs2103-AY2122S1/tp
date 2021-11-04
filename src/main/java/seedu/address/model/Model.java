@@ -66,6 +66,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with name ignoring case exists in the address book.
+     */
+    boolean hasPersonWithName(String name);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -211,4 +216,6 @@ public interface Model {
     void deleteRelatedTasks(Order orderToDelete);
 
     void deleteOrderIf(Predicate<Order> toDelete);
+
+
 }

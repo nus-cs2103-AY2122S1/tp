@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
 
         // in addition, we delete all related orders, and all tasks related to these orders.
         Predicate<Order> toDelete =
-                order -> order.getCustomer().getName().equalsIgnoreCase(personToDelete.getName().fullName);
+            order -> order.getCustomer().getName().equalsIgnoreCase(personToDelete.getName().fullName);
         ObservableList<Order> relatedOrders = model.getOrderBook().getOrderList().filtered(toDelete);
 
         for (Order order : relatedOrders) {

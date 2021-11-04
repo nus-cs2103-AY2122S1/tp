@@ -6,12 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class AddOrderCommand extends Command {
 
@@ -53,10 +50,7 @@ public class AddOrderCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ORDER);
         }
 
-        // check if the model contains a customer with the exact name of the order
-        ObservableList<Person> listWithOnePerson = model.getAddressBook().getPersonList().filtered(
-                person -> person.getName().fullName.equalsIgnoreCase(toAdd.getCustomer().getName()));
-        if (listWithOnePerson.size() != 1) {
+        if (!model.hasPersonWithName(toAdd.getCustomer().getName())) {
             throw new CommandException(MESSAGE_CLIENT_NOT_FOUND);
         }
 

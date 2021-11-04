@@ -5,7 +5,7 @@ import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
 
-    public static final String idPrefix = "SO";
+    public static final String ID_PREFIX = "SO";
     private static long count = 1;
 
     private final Customer customer;
@@ -93,7 +93,7 @@ public class Order implements Comparable<Order> {
      * @return Prefixed order id
      */
     public String getDisplayId() {
-        return idPrefix + this.id;
+        return ID_PREFIX + this.id;
     }
 
     /**
@@ -129,7 +129,7 @@ public class Order implements Comparable<Order> {
         } else {
             builder.append("[ ] ");
         }
-        builder.append("ID: " + idPrefix)
+        builder.append("ID: " + ID_PREFIX)
                 .append(getId())
                 .append("; Label: ")
                 .append(getLabel())

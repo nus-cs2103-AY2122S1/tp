@@ -219,8 +219,24 @@ public class ModelStub implements Model {
     public void resetOrderView() {
         throw new AssertionError("This method should not be called.");
     }
+
     @Override
     public void deleteTaskIf(Predicate<Task> pred) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasPersonWithName(String name) {
         throw new AssertionError("This method should not be called.");
     }
 }

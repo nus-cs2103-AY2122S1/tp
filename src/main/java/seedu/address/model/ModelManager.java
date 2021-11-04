@@ -111,6 +111,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return addressBook.hasPersonWithName(name);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -299,7 +305,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void deleteRelatedTasks(Order order) {
-        String keyword = Order.idPrefix + String.valueOf(order.getId());
+        String keyword = Order.ID_PREFIX + String.valueOf(order.getId());
         this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
     }
 
