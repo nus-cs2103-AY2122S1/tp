@@ -30,7 +30,7 @@ You may reach us through the following email addresses:
 <img src="images/th-429b.png" width="200px">
 
 [[github](https://github.com/Th-429B)]
-[[portfolio](team/tenghon.md)]
+[[portfolio](team/th-429b.md)]
 
 * Role: Team Lead, in charge of Deliverables & Deadlines
 * Responsibilities: Storage
