@@ -12,10 +12,10 @@ box Logic LOGIC_COLOR_T1
 participant ":Logic" as Logic LOGIC_COLOR
 end box
 
-user -> MainWindow : "schedule"
+user -> MainWindow : "calendar"
 activate MainWindow
 
-MainWindow -> Logic : execute("schedule")
+MainWindow -> Logic : execute("calendar")
 activate Logic
 
 Logic --> MainWindow : result
@@ -33,6 +33,6 @@ deactivate CenterPanel
 MainWindow --> MainWindow
 deactivate MainWindow
 
-MainWindow --> user : schedule view
+MainWindow --> user : calendar view
 deactivate MainWindow
 @enduml

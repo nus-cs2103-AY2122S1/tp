@@ -108,9 +108,9 @@ Here's a (partial) *class diagram* of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses, e.g., `AddCommand`) which is then executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses, e.g., `AddCommand`) which is then executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The _Sequence Diagram_ below illustrates the interactions within the `Logic` component for the `execute("delete 1")` _API_ call.
 
@@ -139,20 +139,32 @@ How the parsing works:
 
 *Figure A.3.1: Class Diagram of Model Component*
 
-
 The `Model` component
 
-* stores the tuition address book data, i.e., all `Person` and calendar `Entry` objects (which are contained in a `UniquePersonList` object and `CalendarEntryList` object respectively).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
+* stores the tuition address book data, i.e., all `Person`, calendar `Entry`, and `Tag` objects (which are contained in the `UniquePersonList`, `CalendarEntryList`, and `UniqueTagList` objects respectively).
+* stores the currently 'filtered' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+
+The _Sequence Diagram_ below illustrates the interactions when a person *p* is removed from the model.
+
+![Interactions Inside the Model Component for the `delete 1` Command](images/ModelDeleteSequenceDiagram.png)
+
+*Figure A.3.2: Sequence Diagram of Deleting a Person from the Model*
+
+Note that deleting a person in the tuition address book requires
+1. removing that person from the `UniquePersonList`
+2. removing all calendar `Entry`s related to that person from the `CalendarEntryList`
+3. removing all `Tag`s related to that person from the `UniqueTagList`
+
+Working together the `UniquePersonList`, `CalendarEntrylist`, and `UniqueTagList` manage all of TAB's data.
+**All three of these lists must be updated together, whenever a change is made to TAB's data.**
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -178,7 +190,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Lesson Management
+### Lesson management features
 
 Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects. These lessons can be added to any particular
 student in TAB. Added lessons can also be edited and deleted.<br>
@@ -204,7 +216,7 @@ The class diagram given below shows how these commands are part of the `Logic` C
 
 These commands are described in greater detail in the sections below.
 
-#### Adding Lessons
+#### Adding lessons
 The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.<br>
 
 A simple illustration of how TAB might interact with the user for `LessonAddCommand` is shown below.
@@ -228,9 +240,9 @@ The figure below shows the sequence diagram for adding a lesson to a student.
 
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
-existing lesson with a clashing date and timeslot.<br>
+existing lesson with a clashing date and timeslot.
 
-#### Editing Lessons
+#### Editing lessons
 The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
 with this lesson. The lesson will be edited per the given information input by the user.<br>
 
@@ -256,7 +268,7 @@ The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `edit
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
 the changes made to the specified lesson.<br>
 
-#### Deleting Lessons
+#### Deleting lessons
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
 student with this lesson.
 
@@ -266,19 +278,20 @@ list without the deleted lesson will be created and will replace the original `P
 
 The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.<br>
 
-#### Storing Lessons
+#### Storing lessons
 The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
 to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the
 `Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
 into `model`-friendly `Lesson` objects.<br>
 
-#### Displaying Lessons in GUI
+#### Displaying lessons in the GUI
+
 A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
 the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
 The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
 list of lessons to view. The `PersonListPanel` also has a listener that displays the selected student's list of lesson.<br>
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Data Structures to support lesson operations**
 
@@ -308,57 +321,128 @@ where the lessons are isolated to the student for more personalised teaching.<br
 
 Alternative 1 is our choice as weekly recurring lessons are common for private 1-to-1 tuition in Singapore and also allows us
 to implement the clashing warning feature more easily. As alternative 2 required more thinking on how to calculate overlapping dates,
-we decided to put off alternative 2 for future considerations.<br>
+we decided to put off alternative 2 for future considerations.
 
+<br/>
 
-### Schedule feature
+### Upcoming lesson reminders
 
-This feature allows users to view a calendar that contains all existing lessons to visualise their schedule and plan ahead.
+[TODO]
 
-TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface.
-Each lesson stored in the `Model` component is also converted to a CalendarFX `Entry`and maintained in the `CalendarEntryList` of `AddressBook` (see also: [`Model` component](#model-component)). 
-The `Ui` component shows this list of entries in the `SchedulePanel` using CalendarFX's `CalendarView` with our custom display settings.
+<br/>
 
-Any changes made to the `Calendar` in `Model` will automatically update the `CalendarView` through CalendarFX's internal implementation (see how in their [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)). 
+### Calendar interface
 
-#### CenterPanel
+TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface, allowing users to view a calendar that contains all their existing lessons, so that they can visualise their schedule and plan ahead.
 
-We allow the user to toggle between viewing the schedule and viewing the list of students with the `CenterPanel` class in the `Ui` component.
+![Calendar Interface](images/week.png)
 
-The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `schedule` command.
+A CalendarFX `CalendarView` with custom display settings is integrated into our GUI with the `SchedulePanel` class in the `Ui` component.
+This `CalendarView` displays every CalendarFX `Entry` that we store in model component's `CalendarEntryList`.
+Any changes made to the `CalendarEntryList` in `Model` will automatically update the `CalendarView` through CalendarFX's internal implementation (see how in their [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)).
 
-![Interactions Inside the Ui Component for the `schedule` Command](images/ScheduleSequenceDiagram.png)
+The `CalendarEntryList` converts every `Lesson` in TAB and maintains them as CalendarFX `Entry`(s) (see also: [Model Component](#model-component)).
+Some knowledge of the CalendarFX `Entry` _API_ (provided [here](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html)) 
+is necessary to understand the conversion that happens in [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
+and [`CalendarEntryList#convertToMakeupEntry(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L384).
 
-*Figure I.1.1: Sequence Diagram of Schedule Command*
+In particular, CalendarFX `Entry` does not support recurrence exceptions. 
+This means that we cannot modify properties of specific occurrences of a recurring `Entry`. 
+For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, 
+such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common
+behaviour of a 1-to-1 private home tutor. 
 
-When the user requests to view the schedule,the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
-Switching back is similarly achieved by calling the `displayPersonListPanel()` method of `CenterPanel`.
+To circumvent this problem, [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
+maps `RecurringLesson`s to a `List` of `Entry`s. The aforementioned example lesson would thus be converted to:
+1. A first calendar `Entry` that recurs weekly, from 1st Jan to 8th Jan (inclusive);
+2. A second calendar `Entry` that recurs weekly, from 22nd Jan to 31st Dec (inclusive).
+
+This effectively "cancels" the lesson that occurs on 15th Jan in the calendar interface.
 
 #### Design considerations
 
 **Aspect: How the calendar interface is implemented:**
 
 * **Alternative 1:**  Create a calendar view using JavaFX.
-    * Pros: More customisable as we are not limited by CalendarFX's _API_.
-    * Cons: Much more difficult to implement.
+  * Pros: More customisable as we are not limited by CalendarFX's _API_.
+  * Cons: Much more difficult to implement.
 
 * **Alternative 2 (current implementation):** Use CalendarFX to display entries while storing entry data locally.
-    * Pros: Less code is written to implement it and the difficulty of implementing a calendar is completely abstracted away.
-    * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
+  * Pros: Less code is written to implement it and the difficulty of implementing a calendar is completely abstracted away.
+  * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
 
 We chose alternative 2 and integrated CalendarFX into our app as the possibility of introducing bugs seems small due to it being a well-used and well-tested library. Furthermore, the schedule feature will be much more robust and can be implemented much faster as compared with alternative 1.
 
 **Aspect: How to implement different calendar views such as week view and month view:**
 
 * **Alternative 1 (current implementation):**  Use CalendarFX's `CalendarView` which is a complete calendar interface.
-    * Pros: Very easy to implement, as most things are done internally by CalendarFX. We also benefit from additional features such as their search bar, buttons for navigation, and fancy animations and transitions. 
-    * Cons: Each page becomes very small in our GUI, limiting its usefulness for users with smaller screens. Furthermore, we have no choice but to display all four of the default calendarFX pages (i.e., day, week, month and year pages), even if we do not want to.
+  * Pros: Very easy to implement, as most things are done internally by CalendarFX. We also benefit from additional features such as their search bar, buttons for navigation, and fancy animations and transitions.
+  * Cons: Each page becomes very small in our GUI, limiting its usefulness for users with smaller screens. Furthermore, we have no choice but to display all four of the default calendarFX pages (i.e., day, week, month and year pages), even if we do not want to.
 
 * **Alternative 2:**  Create our own JavaFX panels for each page for displaying week and month.
-    * Pros: Month view will be slightly bigger, increasing the number of entries that can be seen by a small amount. Bugs and inconsistencies in other pages can be avoided as we will have better control what we want to display.
-    * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
+  * Pros: Month view will be slightly bigger, increasing the number of entries that can be seen by a small amount. Bugs and inconsistencies in other pages can be avoided as we will have better control what we want to display.
+  * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
 
 Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
+
+### Viewing Tags
+
+Viewing tag is facilitated by `UniqueTagList`.
+- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
+- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag.
+- `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
+
+Operations include:
+- `UniqueTagList#asUnmodifiableTagList()` - Returns an unmodifiable view of the tag list.
+- `UniqueTagList#addTagFromPersonList(List<Person>)` - Adds tags from the specified list of persons to the tag list.
+- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person to the tag list and adds the new tags labelled for the specified person.
+- `UniqueTagList#getNumStudentsForTag(Tag)` - Returns the number of students labelled under the specified tag as stored in `tagCounter`.
+  These operations are called when a person is added, deleted, or edited with `AddCommand`, `EditCommand` and `DeleteCommand`.
+
+Given below is an example usage scenario and how viewing tag is executed:
+- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there is no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` with corresponding number of students labelled with the tags.
+- **Step 2:** The user enter the command `tag` to view all tags. `AddressBookParser` parses this command, creating a `TagCommand`.
+- **Step 3:** `LogicManager` executes the `TagCommand`.
+  - During execution, `TagCommand#execute()` calls `Model#getObservableList()` to get the tag list with the tags created in TAB with their corresponding number of students labelled under them to be displayed to the user.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
+
+Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
+<img src="images/ViewTagSequenceDiagram.png" width="800" />
+
+*Figure I.4.1: View tag sequence diagram*
+
+#### Design considerations
+
+**Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
+- Pros:
+  - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
+- Cons:
+  - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
+  - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
+
+**Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
+- Pros:
+  - Faster retrieval of the number of persons under each tag.
+- Cons:
+  - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
+  - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
+
+<br />
+
+### Switching between students, calendar, and tags
+
+The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` and handles the switching between each of them for users to view their list of students and lessons, schedule, and list of tags respectively.
+
+The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `calendar` command.
+
+![Interactions Inside the Ui Component for the `calendar` Command](images/ScheduleSequenceDiagram.png)
+
+*Figure I.1.1: Sequence Diagram of Schedule Command*
+
+When the user requests to view their schedule in the calendar interface,the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
+Switching back is similarly achieved by calling the `displayPersonListPanel()` method of `CenterPanel`.
 
 ### Undo/redo feature
 
@@ -463,7 +547,7 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoStack` is empty, then there are no other commands left to be redone, and an `Exception` will be thrown when popping the `redoStack`.<br></div>
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -476,48 +560,6 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
   
-### Viewing Tags
-Viewing tag is facilitated by `UniqueTagList`. 
-- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
-- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
-- `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
-
-Operations include:
-- `UniqueTagList#asUnmodifiableTagList()` - Returns an unmodifiable view of the tag list.
-- `UniqueTagList#addTagFromPersonList(List<Person>)` - Adds tags from the specified list of persons to the tag list.
-- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person to the tag list and adds the new tags labelled for the specified person.
-- `UniqueTagList#getNumStudentsForTag(Tag)` - Returns the number of students labelled under the specified tag as stored in `tagCounter`.
-These operations are called when a person is added, deleted, or edited with `AddCommand`, `EditCommand` and `DeleteCommand`.
-
-Given below is an example usage scenario and how viewing tag is executed:
-- **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there is no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` with corresponding number of students labelled with the tags.
-- **Step 2:** The user enter the command `tag` to view all tags. `AddressBookParser` parses this command, creating a `TagCommand`.
-- **Step 3:** `LogicManager` executes the `TagCommand`. 
-  - During execution, `TagCommand#execute()` calls `Model#getObservableList()` to get the tag list with the tags created in TAB with their corresponding number of students labelled under them to be displayed to the user.
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
-
-Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
-<img src="images/ViewTagSequenceDiagram.png" width="800" />
-
-*Figure I.4.1: View tag sequence diagram*
-
-#### Design considerations:
-**Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
-- Pros:
-  - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
-- Cons:
-  - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
-  - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
-
-**Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
-- Pros:
-  - Faster retrieval of the number of persons under each tag.
-- Cons:
-  - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
-  - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
-
 ### Finding students
 
 The `FindCommand` allows users to find students based on person fields.
