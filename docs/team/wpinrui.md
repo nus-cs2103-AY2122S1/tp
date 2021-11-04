@@ -7,7 +7,7 @@ title: Ivan's Project Portfolio Page
 <!-- PPP format and structure adapted from
 https://github.com/samuelfangjw/tp/blob/master/docs/team/samuelfangjw.md
 -->
-TutorAid is a desktop application used for helping tech-savvy private tutors, who have busy schedules / many students, to keep track of each students' details. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
+TutorAid is a desktop application used for helping tech-savvy private tutors, who have busy schedules / many students, to keep track of the details of all their students and lessons. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 * **Card-like UI elements**:
@@ -17,10 +17,10 @@ Given below are my contributions to the project.
   * `list` command alone hides fields [(PR #70)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/70)
   * Justification: Having a list command that can hide details while listing students and lessons allows users to see more entries on a single screen, while having a list command that can show all details can allow users to look at fields of each of their students / lessons. 
 * **Edit [student](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/86) / [lesson](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/118) commands**
-  * Justification: Being able to edit is a feature that makes it a lot more convenient for users to change fields for students / lessons. Without this feature, they would have to delete the original entry and create a new one which is a lot of trouble, especially if only a single field has changed.
+  * Justification: Being able to edit is a feature that makes it a lot more convenient for users to change fields for students / lessons. Without this feature, they would have to delete the original entry and create a new one. This is inconvenient especially if only a single field has changed.
 * **Other features and enhancements to existing features**:
-  * Add lesson to student / Add student to lesson: fixed a bug where editing the student or lesson would cause the two entities to go out of sync [(PR #143)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/143)
-  * Progress: Improve formatting as it appears on the Student Panel [(PR #142)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/142)
+  * Add lesson to student / Add student to lesson: Fixed a bug where editing the student or lesson would cause the two entities to go out of sync [(PR #143)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/143)
+  * Progress: Improved formatting as it appears on the Student Panel [(PR #142)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/142)
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=wpinrui&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17).
 * **Project management**:
   * Facilitated weekly team meetings
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
     * Re-organised feature reference
     * Re-organised command summary
   * Developer Guide:
-    * Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
+    * Worked on target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
     * Architecture notes for Model components
     * Implementation of card-like UI elements and related UML diagrams
 * Community:
