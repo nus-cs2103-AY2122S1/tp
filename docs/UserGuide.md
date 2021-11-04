@@ -505,7 +505,7 @@ to Academy Directory, including commit message. Only commands that change the Ac
 **A**: Version control related files are saved as text files at `[JAR file location]/data/vc/`. Advanced users are welcome to
 look at the files in this folder.
 
-**Q**: When I run Academy Directory via Command Prompt, a warning message appears that there are unsupported JavaFX configurations. Do I need to be concerned about this?
+**Q**: When I run Academy Directory via Command Prompt, a warning message appears that there are unsupported JavaFX configurations. Do I need to be concerned about this?<br>
 **A**: **No, both usability and functionality wise.** Academy Directory was not developed as a modular-based application, however, some features of our app do implement external modules not declared, and thus is the warning message. The problem has been addressed while our application was developed, but we have decided to left the warning as it is as addressing the warning is outside the scope of CS2103T and our project requirement itself.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
