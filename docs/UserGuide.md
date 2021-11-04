@@ -784,8 +784,8 @@ Sets the number of tables and size of each table in the restaurant.
 
 Format: `settables LIST_OF_TABLE_SIZES`
   * `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
-    * **<TABLE_SIZE>**
-    * **<TABLE_SIZE>x<NUMBER_OF_TABLE_WITH_THIS_SIZE>**,<br>
+    * **\<TABLE_SIZE\>**
+    * **\<TABLE_SIZE\>x\<NUMBER_OF_TABLE_WITH_THIS_SIZE\>**,<br>
       each comma-separated from the next.
 
 Example:
