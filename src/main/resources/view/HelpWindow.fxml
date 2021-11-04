@@ -177,30 +177,6 @@
                         <Label fx:id="viewLExample" text="Label" wrapText="true"/>
                         <Label fx:id="viewLExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
-
-                    <Label fx:id="paidTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="paidDesc" text="Label" wrapText="true"/>
-                    <TextFlow>
-                        <Label fx:id="format8" text="Format: " wrapText="true"/>
-                        <Label fx:id="paidCommand" text="Label" wrapText="true"/>
-                    </TextFlow>
-                    <TextFlow>
-                        <Label fx:id="example7" text="Label" wrapText="true"/>
-                        <Label fx:id="paidExample" text="Label" wrapText="true"/>
-                        <Label fx:id="paidExampleDesc" text="Label" wrapText="true"/>
-                    </TextFlow>
-
-                    <Label fx:id="unpaidTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="unpaidDesc" text="Label" wrapText="true"/>
-                    <TextFlow>
-                        <Label fx:id="format9" text="Format: " wrapText="true"/>
-                        <Label fx:id="unpaidCommand" text="Label" wrapText="true"/>
-                    </TextFlow>
-                    <TextFlow>
-                        <Label fx:id="example8" text="Label" wrapText="true"/>
-                        <Label fx:id="unpaidExample" text="Label" wrapText="true"/>
-                        <Label fx:id="unpaidExampleDesc" text="Label" wrapText="true"/>
-                    </TextFlow>
                     <TextFlow>
                         <Label fx:id="findTitle" text="Label" wrapText="true"/>
                         <Label fx:id="findDesc1" text="Label" wrapText="true"/>

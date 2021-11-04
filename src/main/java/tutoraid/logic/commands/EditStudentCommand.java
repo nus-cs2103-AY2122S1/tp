@@ -18,7 +18,6 @@ import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
@@ -45,7 +44,7 @@ public class EditStudentCommand extends EditCommand {
             + PREFIX_PARENT_NAME + "Mrs Doe "
             + PREFIX_PARENT_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edit successful. Displaying %s and his/her lessons.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
 
@@ -87,7 +86,7 @@ public class EditStudentCommand extends EditCommand {
         model.viewStudent(editedStudent);
         model.updateFilteredLessonList(editedStudent::hasLesson);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent.toNameString()));
     }
 
     /**
@@ -103,11 +102,10 @@ public class EditStudentCommand extends EditCommand {
         Phone updatedParentPhone = editStudentDescriptor.getParentPhone().orElse(studentToEdit.getParentPhone());
 
         ProgressList studentProgress = studentToEdit.getProgressList();
-        PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
         Lessons lessons = studentToEdit.getLessons();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
-                studentProgress, paymentStatus, lessons);
+                studentProgress, lessons);
     }
 
     @Override
@@ -204,7 +202,6 @@ public class EditStudentCommand extends EditCommand {
                 return false;
             }
 
-            EditStudentDescriptor e = (EditStudentDescriptor) other;
             EditStudentDescriptor otherDescriptor = (EditStudentDescriptor) other;
             return otherDescriptor.getStudentName().equals(getStudentName())
                     && otherDescriptor.getStudentPhone().equals(getStudentPhone())

@@ -4,8 +4,6 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_NAME_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_NAME_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_AMY;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_LIST_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_LIST_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_AMY;
@@ -30,7 +28,6 @@ public class TypicalStudents {
             .withParentName("Mrs Tan")
             .withParentPhone("94351253")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student BENSON = new StudentBuilder()
@@ -39,7 +36,6 @@ public class TypicalStudents {
             .withParentName("Mrs Meier")
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(true)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student CARL = new StudentBuilder()
@@ -48,7 +44,6 @@ public class TypicalStudents {
             .withParentName("Mr Kurz")
             .withParentPhone("95352567")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student DANIEL = new StudentBuilder()
@@ -57,7 +52,6 @@ public class TypicalStudents {
             .withParentName("Mrs Meier")
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student ELLE = new StudentBuilder()
@@ -65,7 +59,6 @@ public class TypicalStudents {
             .withStudentPhone("9482224")
             .withParentName("Mrs Meyer")
             .withParentPhone("9482290")
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student FIONA = new StudentBuilder()
@@ -74,7 +67,6 @@ public class TypicalStudents {
             .withParentName("Mr Daniel")
             .withParentPhone("9482423")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student GEORGE = new StudentBuilder()
@@ -83,7 +75,6 @@ public class TypicalStudents {
             .withParentName("Mrs Kayla")
             .withParentPhone("94824432")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
 
@@ -94,7 +85,6 @@ public class TypicalStudents {
             .withParentName("Mrs Meier")
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
     public static final Student IDA = new StudentBuilder()
@@ -103,7 +93,6 @@ public class TypicalStudents {
             .withParentName("Mr Mueller")
             .withParentPhone("8482155")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>())
             .build();
 
@@ -114,7 +103,6 @@ public class TypicalStudents {
             .withParentName(VALID_PARENT_NAME_AMY)
             .withParentPhone(VALID_PARENT_PHONE_AMY)
             .withProgressList(VALID_PROGRESS_LIST_AMY)
-            .withPaymentStatus(VALID_PAYMENT_STATUS_AMY)
             .build();
     public static final Student BOB = new StudentBuilder()
             .withStudentName(VALID_STUDENT_NAME_BOB)
@@ -122,7 +110,6 @@ public class TypicalStudents {
             .withParentName(VALID_PARENT_NAME_BOB)
             .withParentPhone(VALID_PARENT_PHONE_BOB)
             .withProgressList(VALID_PROGRESS_LIST_BOB)
-            .withPaymentStatus(VALID_PAYMENT_STATUS_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

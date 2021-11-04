@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import tutoraid.commons.util.AppUtil;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
-import tutoraid.model.student.exceptions.DuplicateStudentLessonException;
-import tutoraid.model.student.exceptions.StudentLessonNotFoundException;
+import tutoraid.model.student.exceptions.DuplicateStudentLessonsException;
+import tutoraid.model.student.exceptions.LessonNotFoundInStudentException;
 
 /**
  * Represents a student's list of progress in TutorAid.
@@ -65,13 +65,13 @@ public class Lessons {
      * Adds a new lesson name.
      *
      * @param toAdd the lesson to be added
-     * @throws DuplicateStudentLessonException if the lesson is already in the list
+     * @throws DuplicateStudentLessonsException if the lesson is already in the list
      */
     public void addLesson(Lesson toAdd) {
         requireNonNull(toAdd);
         LessonName lessonNameToAdd = toAdd.getLessonName();
         if (lessons.contains(lessonNameToAdd)) {
-            throw new DuplicateStudentLessonException();
+            throw new DuplicateStudentLessonsException();
         }
         lessons.add(lessonNameToAdd);
     }
@@ -80,13 +80,13 @@ public class Lessons {
      * Deletes a lesson.
      *
      * @param toDelete the lesson to be deleted
-     * @throws StudentLessonNotFoundException if the lesson is not in the list
+     * @throws LessonNotFoundInStudentException if the lesson is not in the list
      */
     public void deleteLesson(Lesson toDelete) {
         requireNonNull(toDelete);
         LessonName lessonNameToDelete = toDelete.getLessonName();
         if (!lessons.contains(lessonNameToDelete)) {
-            throw new StudentLessonNotFoundException();
+            throw new LessonNotFoundInStudentException();
         }
         lessons.remove(lessonNameToDelete);
     }
