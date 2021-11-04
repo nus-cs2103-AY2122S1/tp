@@ -173,7 +173,7 @@ Adds a new client to the address book.
 | Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...​`|
 | :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
-| <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client Id  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
+| <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client ID as client ID cannot be given to the client.  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
 ### 4.2 Retrieve Particular Contact : `view`
 
@@ -256,7 +256,7 @@ Clears all entries from the address book.
 
 | Format | `clear`|
 | :-: | :-- |
-| <img src=images/info_icon.png width="50"> | • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br> • `yes`: to confirm and proceed with the clear command. <br> •`no`: to cancel the clear command. <br> • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work.|
+| <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 ### 4.11 Exiting the program : `exit`
