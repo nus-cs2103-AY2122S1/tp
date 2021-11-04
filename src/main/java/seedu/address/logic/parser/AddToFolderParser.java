@@ -63,25 +63,10 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
             if (currString.equals(">>")) {
                 break;
             }
-//            try {
-//                int intValue = Integer.parseInt(currString);
-//                Index contactIndex = ParserUtil.parseIndex(Integer.toString(intValue));
             Index contactIndex = ParserUtil.parseIndex(currString);
-                contactsToAdd.add(contactIndex);
-                i--;
-                allValues.remove(currString);
-//            }
-//            catch (Exce e) {
-//                throw new ParseException(String.format("MESSAGE_INVALID_COMMAND_FORMAT",
-//                       " AddToFolderCommand.MESSAGE_USAGE"));
-//
-//            }
-
-//            catch (NumberFormatException e) {
-//                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-//                        AddToFolderCommand.MESSAGE_USAGE));
-//
-//            }
+            contactsToAdd.add(contactIndex);
+            i--;
+            allValues.remove(currString);
         }
         return contactsToAdd;
     }

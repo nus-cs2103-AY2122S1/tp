@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
@@ -24,9 +25,7 @@ public class DeleteFolderCommand extends Command {
             + COMMAND_WORD + " "
             + "CS2103";
 
-    public static final String MESSAGE_SUCCESS = "Folder deleted: %1$s";
-    public static final String MESSAGE_NO_SUCH_FOLDER = "Folder name supplied"
-            + " cannot be found in the folders' listing below";
+    public static final String MESSAGE_SUCCESS = "Deleted Folder: %1$s";
 
     private final Folder folderToRemove;
 
@@ -46,7 +45,7 @@ public class DeleteFolderCommand extends Command {
         int indexOfFolder = lastShownFolderList.indexOf(folderToRemove);
 
         if (indexOfFolder == -1) {
-            throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
+            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }
 
         model.deleteFolder(folderToRemove);

@@ -35,16 +35,32 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         Index index;
+        String preamble = argMultimap.getPreamble();
 
-        try {
-            String preamble = argMultimap.getPreamble();
-            Integer value = Integer.valueOf(preamble);
-            index = ParserUtil.parseIndex(String.valueOf(value));
-        } catch (NumberFormatException ne) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), ne);
-        } catch (ParseException pe) {
+
+        //Checks boundary cases
+        if (preamble.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        char firstElement = preamble.charAt(0);
+        if (preamble.length() == 1 && firstElement == 45) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        //Check for - symbol as first element
+        if (firstElement == 45) {
             throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
         }
+
+        for (int i = 0; i < preamble.length(); i++) {
+            char element = preamble.charAt(i);
+            if (!Character.isDigit(element)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+        }
+
+        index = ParserUtil.parseIndex(preamble);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

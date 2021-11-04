@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
@@ -23,10 +24,8 @@ public class EditFolderNameCommand extends Command {
             + "Example: " + COMMAND_WORD + " OLD_FOLDER_NAME | " + "NEW_FOLDER_NAME";
 
     public static final String MESSAGE_SUCCESS_EDIT_FOLDER_NAME = "Folder updated to: %1$s";
-    public static final String MESSAGE_NO_SUCH_FOLDER = "Folder name supplied"
-            + " cannot be found in the folders' listing below";
-    public static final String MESSAGE_FOLDER_ALREADY_EXISTS = "Cannot rename folder to"
-            + " an already existing folder in UNIon";
+    public static final String MESSAGE_DUPLICATE_FOLDER = "This folder already exists in UNIon";
+    public static final String MESSAGE_SAME_FOLDER_NAME_ENTERED = "This folder name is the same as the current one";
     public static final String MESSAGE_FOLDER_NAME_TOO_LONG = "This folder name is too long! "
             + "Please keep it to a maximum of 30 chars.";
 
@@ -49,15 +48,18 @@ public class EditFolderNameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (newFolder.getFolderName().equals(oldFolder.getFolderName())) {
+            throw new CommandException(MESSAGE_SAME_FOLDER_NAME_ENTERED);
+        }
         List<Folder> lastShownFolderList = model.getFilteredFolderList();
         int indexOfFolder = lastShownFolderList.indexOf(oldFolder);
 
         if (indexOfFolder == -1) {
-            throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
+            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }
 
         if (model.hasFolder(newFolder)) {
-            throw new CommandException(MESSAGE_FOLDER_ALREADY_EXISTS);
+            throw new CommandException(MESSAGE_DUPLICATE_FOLDER);
         }
         if (newFolder.getFolderName().toString().length() > 30) {
             throw new CommandException(MESSAGE_FOLDER_NAME_TOO_LONG);

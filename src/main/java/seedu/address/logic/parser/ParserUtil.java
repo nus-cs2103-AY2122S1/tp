@@ -33,16 +33,16 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
 
-        //Check for - symbol as first element
+        //Check for - symbol or 0 as first element
         char firstElement = trimmedIndex.charAt(0);
-        if(firstElement == 45){
+        if (firstElement == 45 || firstElement == 48) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
 
         //Check if all values are integers only
-        for (int i = 0;i < trimmedIndex.length();i++) {
+        for (int i = 0; i < trimmedIndex.length(); i++) {
             char element = trimmedIndex.charAt(i);
-            if(!Character.isDigit(element)){
+            if (!Character.isDigit(element)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddToFolderCommand.MESSAGE_USAGE));
             }
