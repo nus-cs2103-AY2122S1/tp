@@ -16,6 +16,7 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+note left of XYZCommandParser: XYZCommandParser = \nAddMemberCommandParser, \nFindCommandParser, etc
 }
 
 Class HiddenOutside #FFFFFF

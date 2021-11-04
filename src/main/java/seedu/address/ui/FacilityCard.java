@@ -9,9 +9,9 @@ import seedu.address.model.facility.Facility;
 /**
  * An Ui component that displays information of a Facility
  */
-public class FacilityListCard extends UiPart<Region> {
+public class FacilityCard extends UiPart<Region> {
 
-    private static final String FXML = "FacilityListCard.fxml";
+    private static final String FXML = "FacilityCard.fxml";
 
     public final Facility facility;
 
@@ -37,12 +37,12 @@ public class FacilityListCard extends UiPart<Region> {
     private Label personAllocated;
 
     /**
-     * Creates a FacilityListCard with the specified facility and index.
+     * Creates a FacilityCard with the specified facility and index.
      *
      * @param facility Facility to be listed.
      * @param index Index of facility in list.
      */
-    public FacilityListCard(Facility facility, int index) {
+    public FacilityCard(Facility facility, int index) {
         super(FXML);
         this.facility = facility;
         listIndex.setText(index + ".");

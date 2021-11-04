@@ -101,7 +101,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` and `Facility` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Facility` objects residing in the `Model`.
 
 ### Logic component
 
@@ -167,8 +167,7 @@ and a `UniqueFacilityList` object respectively).
 
 ### Storage component
 
-**
-API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -444,9 +443,7 @@ The following activity diagram summarizes what happens when a user enters and ex
     * Cons: More complex implementation due to parsing multiple prefixes and chaining predicates, thus this alternative is more prone to bugs.
 * ** Alternative 2: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
-      <<<<<<< HEAD
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
-      =======
     * Cons: Not maximising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
 ### \[Proposed\] Undo/redo feature
 
