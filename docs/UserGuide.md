@@ -100,6 +100,7 @@ Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/studen
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
+Also two persons are same if their names are equal with case sensitivity taken into consideration
 </div>
 
 Examples:
