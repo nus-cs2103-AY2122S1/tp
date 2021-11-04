@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your
-contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students
+ProfBook is a desktop app for managing contacts, optimized for use via a Command Line Interface
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ProfBook can get your
+contact management tasks done faster than traditional GUI apps. ProfBook helps CS2103 Instructors manage both students
 and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
@@ -81,6 +81,9 @@ Adds a person to the address book.
 
 Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
+* A person cannot be added if he or she already exists in ProfBook, i.e. they are the same person.
+* 2 persons are considered similar if they share the exact same name, e.g. if John Doe already exists in ProfBook, `add n/John Doe s/A0222530X N/E0560062 g/meixuanjin T/01 p/98159386 a/John Street, block 456, #01-01` would not add a new John Doe to ProfBook.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
@@ -155,7 +158,7 @@ Examples:
 
 ### Import existing contacts from JSON: `import`
 
-Merges all contacts in a JSON file with the existing contacts in PB3.
+Merges all contacts in a JSON file with the existing contacts in ProfBook.
 
 Format: `import FILENAME`
 
@@ -177,12 +180,12 @@ Format: `exit`
 
 ### Saving the data
 
-PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save
+ProfBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
 
 ### Editing the data file
 
-PB3 data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update
+ProfBook data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update
 data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -200,7 +203,7 @@ Export feature...
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that
-contains the data of your previous PB3 home folder.
+contains the data of your previous ProfBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
