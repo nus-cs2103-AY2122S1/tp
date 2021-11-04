@@ -185,54 +185,9 @@ The following sequence diagram shows how the show operation works.
 ![images](images/ShowCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-
-
-### Filter interview feature
-
-The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
-input. This command then updates the ```model``` accordingly.
-
-The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
-![images](images/FilterInterviewCommandActivityDiagram.png)
-
-Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ` past`.
-
-Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
-to identify the user input ` past`. `FilterInterviewCommandParser#parse` then initializes a
-`FilterInterviewPastCommand`.
-
-Step 3. `FilterInterviewPastCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
-and filters for applicants that have interviews that have already passed.
-
-Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
-have interviews that have passed. This `CommandResult` is then returned.
-
-Given below is an example usage scenario and how the show operation behaves at each step.
-
-The following sequence diagram shows how the show operation works.
-![images](images/FilterInterviewCommandSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source:
- **Note:** The lifeline for `FilterInterviewCommandParser`
-should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
-
-#### Design considerations:
-
-**Aspect: User command to use in filtering interviews:**
-
-* **Alternative 1 (current choice):** Separate command for filtering interviews
-    * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
-    * Pros: Easy to use for user, only has two inputs it can take.
-    * Cons: Harder to implement than adding to `find` command.
-    * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
-
-* **Alternative 2:** Part of `find` command functionality
-    * Pros: Easy to implement
-    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
-    * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
-    types of inputs.
    
 ### Find feature
+
 The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
 input. This command then updates the ```model``` accordingly.
 
@@ -260,6 +215,59 @@ and returned.
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FindCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+### Filter interview feature
+
+The ```filter_interview``` command is facilitated by extending an abstract ```FilterInterviewCommand``` class, and executing the appropriate 
+subclass depending on the given input. This command then updates the ```model``` accordingly. 
+
+The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
+![images](images/FilterInterviewCommandActivityDiagram.png)
+
+
+Given below is an example usage scenario and how the filter interview operation behaves at each step.
+
+Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ` past`.
+
+Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
+to identify the user input ` past`.
+
+Step 3. Upon identifying the user input ` past`, `FilterInterviewCommandParser#parse` will then call methods of the
+`ValidFilterInterviewArgs` class from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
+The details of this step are omitted from the sequence diagram below for brevity.
+
+Step 4. `FilterInterviewCommandParser#parse` calls the method `ValidFilterInterviewArgs#getFilterInterviewCommand()` to obtain
+an object of the appropriate subclass of `FilterInterviewCommand`, which in this case is an instance of `FilterInterviewPastCommand`. 
+This instance is returned and propagated back to `LogicManager`. 
+
+Step 5. `FilterInterviewPastCommand#execute()` is then called by `LogicManager`, which will in turn call `Model#updateFilteredPersonList()`
+and filters for applicants that have interviews that have already passed. 
+ 
+Step 6. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants
+have interviews that have passed. This `CommandResult` is then returned.
+
+The following sequence diagram shows how the filter interview operation works.
+![images](images/FilterInterviewCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `FilterInterviewCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+#### Design considerations:
+
+**Aspect: User command to use in filtering interviews:**
+
+* **Alternative 1 (current choice):** Separate command for filtering interviews
+    * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
+    * Pros: Easy to use for user, only has two inputs it can take.
+    * Cons: Harder to implement than adding to `find` command.
+    * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
+
+* **Alternative 2:** Part of `find` command functionality
+    * Pros: Easy to implement
+    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
+    * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
+    types of inputs.
 
 ### Unmark feature
 
@@ -301,10 +309,6 @@ and checks for `DateTimeParseException` when parsing the input with the formatte
 The `display()` method uses `java.text.DateFormat` and returns the formatted time which is displayed GUI.
 
 For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a person John with interview time shown as `Jan 01 2021, 10:30`.
-
-
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
