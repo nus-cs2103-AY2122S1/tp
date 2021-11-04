@@ -160,7 +160,7 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 **:exclamation: Caution on use of the symbol `/` in commands:**<br>
 
-* For all commands, the symbol `/` should only be used in the **representation of prefixes**, such as `n/`, `p/` and `r/`, etc. 
+* For all commands, the symbol `/` should only be used in the **representation of prefixes**, such as `n/`, `p/` and `r/`, etc.
 
 * You **should not** use the symbol `/` when filling up any of the parameters.
 
@@ -453,7 +453,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * Lessons are fixed at **two** hour periods. In upcoming features, we will give you the power to define your lesson timing ranges.
 
-* Lessons with the same `SUBJECT` and `GRADE` cannot have the same `DAY_OF_WEEK` and `START_TIME`. 
+* Lessons with the same `SUBJECT` and `GRADE` cannot have the same `DAY_OF_WEEK` and `START_TIME`.
 
 * The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive. The cost will be displayed in the lesson list rounded off to two decimal places.
 
@@ -567,7 +567,7 @@ You can expect these features in upcoming versions of **TuitiONE**.
 
 With this feature, you will have the flexibility in managing the lessons in your tuition center. You will be able to change the day and time of the lesson, its subject, its grade, and its price.
 
-#### Customised sorting 
+#### Customised sorting
 
 With this feature, you will have the flexibility to order the student and lesson lists to your preference. For students, you can expect to be able to sort the student list by address, number of lessons and even by their fees. For lessons, you can expect to sort the lesson list by day and time, and number of students enrolled.
 
