@@ -5,42 +5,42 @@ title: Chen Yiyang's Project Portfolio Page
 
 ### Project: SeniorLove
 
-SeniorLove is a desktop contact management application used for facilitating social worker's visits to the elderly. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+SeniorLove is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Senior Love can get your contact management tasks done faster than traditional GUI apps.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+- **New Feature**: Added the ability to mark visits as done.
+  - What it does: allows the user to make the next visit to an elderly as done using elderly's index. When a visit is marked as done, the `LastVisit` field will be updated. If the visit marked is recurring, it will be replaced with the next one following the recursion frequency.
+  - Justification: This feature improves the product significantly because a user can proceed with a sequence of visits of an elderly and visits are at the core of SeniorLove.
+  - Highlights: This command is dependent on the `Visit`, `Frequency`, `Occurrence` and `LastVisit` fields of an elderly in the system. Implementation for the command was challenging as many scenarios need to be taken into account. Defensive programming was also used to ensure smooth running of the programme should certain fields involved be missing or invalid.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* **Code contributed**: [RepoSense link]()
+- **New Feature**: Added the ability to view incoming visits.
+  - What it does: allows the user to see all the visits that are scheduled in the next 7 or 30 days depending on the command parameter.
+  - Justification: This feature improves the user experience as the user can view incoming visits easily and plan their schedule accordingly.
+  
+- **New Features**: Implemented Datetime for all time-related fields
+  - What it does: Replaces the original Date implementation with Datetime for all time-related fields such as `Visit` and `LastVisit`.
+  - Justification: This feature enhances the project by making information more accurate and relevant given that visits for the elderly are of high importance in the real world.
+  
 
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t14&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Chen-Yiyang&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Updated the GUI to highlight elderly with overdued visits (Pull requests [\#134](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/134))
+    * Implemented warnings for inappropriate command usage. (Pull requests [\#192](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/192), [\#96](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/96))
+  
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the features `done`, `list` and `datetime`. [\#33](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/33), [\#123](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/123)
+        * Checked for consistency of terms used. [\#188](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/188)
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `done` and `datetime` feature. [\#103](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/103)
+
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#130](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/130), [\#187](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/187)
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Chen-Yiyang/ped/issues/2), [2](https://github.com/Chen-Yiyang/ped/issues/4), [3](https://github.com/Chen-Yiyang/ped/issues/5))
+  * Reported bugs for tools used for the module: [\#1602](https://github.com/reposense/RepoSense/issues/1602)
