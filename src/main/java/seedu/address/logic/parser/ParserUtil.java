@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Compatability;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -35,7 +35,6 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        System.out.println(trimmedIndex);
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -104,26 +103,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String compatability} into an {@code Compatability}.
+     * Parses a {@code String compatibility} into an {@code Compatibility}.
      * string will be converted to a integer type
      *
      * @throws ParseException if the given {@code major} is invalid.
      */
-    public static Compatability parseCompatability(Optional<String> compatability) throws ParseException {
-        if (compatability.isEmpty()) {
-            return new Compatability(null);
+    public static Compatibility parseCompatibility(Optional<String> compatibility) throws ParseException {
+        if (compatibility.isEmpty()) {
+            return new Compatibility(null);
         }
-        String stringValue = compatability.get();
-        Integer compatabilityRating;
+        String stringValue = compatibility.get();
+        Integer compatibilityRating;
         try {
-            compatabilityRating = Integer.parseInt(stringValue);
+            compatibilityRating = Integer.parseInt(stringValue);
         } catch (NumberFormatException e) {
             if (stringValue.length() == 0) {
-                return new Compatability(null); 
+                return new Compatibility(null); 
             }
-            throw new ParseException((Compatability.MESSAGE_CONSTRAINTS));
+            throw new ParseException((Compatibility.MESSAGE_CONSTRAINTS));
         }
-        return new Compatability(compatabilityRating);
+        return new Compatibility(compatibilityRating);
     }
 
     /**
@@ -254,7 +253,6 @@ public class ParserUtil {
         requireNonNull(indexes);
         final Set<Index> indexSet = new HashSet<>();
         for (String index : indexes) {
-            System.out.println(index);
             indexSet.add(parseIndex(index));
         }
         return indexSet;

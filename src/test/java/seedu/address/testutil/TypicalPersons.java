@@ -37,7 +37,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withFaculty("computing")
             .withMajor("business analytics")
-            .withCompatability(97)
+            .withCompatibility(97)
             .withSkills("backend")
             .withLanguages("sql")
             .withFrameworks("psql")

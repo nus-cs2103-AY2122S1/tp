@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATABILITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATIBILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
@@ -43,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY,
-                                        PREFIX_MAJOR, PREFIX_COMPATABILITY, PREFIX_SKILL,
+                                        PREFIX_MAJOR, PREFIX_COMPATIBILITY, PREFIX_SKILL,
                                         PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
 
         Index index;
@@ -66,9 +66,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_MAJOR).isPresent()) {
             editPersonDescriptor.setMajor(ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get()));
         }
-        if (argMultimap.getValue(PREFIX_COMPATABILITY).isPresent()) {
-            editPersonDescriptor.setCompatability(ParserUtil.parseCompatability(argMultimap
-                                                                .getValue(PREFIX_COMPATABILITY)));
+        if (argMultimap.getValue(PREFIX_COMPATIBILITY).isPresent()) {
+            editPersonDescriptor.setCompatibility(ParserUtil.parseCompatibility(argMultimap
+                                                                .getValue(PREFIX_COMPATIBILITY)));
         }
         parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editPersonDescriptor::setSkills);
         parseLanguagesForEdit(argMultimap.getAllValues(PREFIX_LANGUAGE)).ifPresent(editPersonDescriptor::setLanguages);

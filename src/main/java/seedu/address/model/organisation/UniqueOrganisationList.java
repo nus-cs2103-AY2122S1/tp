@@ -129,9 +129,7 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
 
     public Organisation getByName(Name name) {
         Organisation o = null;
-        System.out.println(internalList);
         for (Organisation organisation: internalList) {
-            System.out.println(organisation.getName());
             if (organisation.getName().equals(name)) {
                 o = organisation;
             }

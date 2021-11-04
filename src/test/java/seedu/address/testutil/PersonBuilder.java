@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Compatability;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -25,13 +25,13 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_FACULTY = "computing";
     public static final String DEFAULT_MAJOR = "computer science";
-    public static final Integer DEFAULT_COMPATABILITY = 98;
+    public static final Integer DEFAULT_COMPATIBILITY = 98;
 
     private Name name;
     private Email email;
     private Faculty faculty;
     private Major major;
-    private Compatability compatability;
+    private Compatibility compatibility;
     private Set<Skill> skills;
     private Set<Language> languages;
     private Set<Framework> frameworks;
@@ -46,7 +46,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         faculty = new Faculty(DEFAULT_FACULTY);
         major = new Major(DEFAULT_MAJOR);
-        compatability = new Compatability(DEFAULT_COMPATABILITY);
+        compatibility = new Compatibility(DEFAULT_COMPATIBILITY);
         skills = new HashSet<>();
         languages = new HashSet<>();
         frameworks = new HashSet<>();
@@ -62,7 +62,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         faculty = personToCopy.getFaculty();
         major = personToCopy.getMajor();
-        compatability = personToCopy.getCompatability();
+        compatibility = personToCopy.getCompatibility();
         skills = new HashSet<>(personToCopy.getSkills());
         languages = new HashSet<>(personToCopy.getLanguages());
         frameworks = new HashSet<>(personToCopy.getFrameworks());
@@ -122,8 +122,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Major} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCompatability(Integer compatability) {
-        this.compatability = new Compatability(compatability);
+    public PersonBuilder withCompatibility(Integer compatibility) {
+        this.compatibility = new Compatibility(compatibility);
         return this;
     }
 
@@ -153,7 +153,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, faculty, major, compatability, skills, languages, frameworks, tags, remarks);
+        return new Person(name, email, faculty, major, compatibility, skills, languages, frameworks, tags, remarks);
     }
 
 }

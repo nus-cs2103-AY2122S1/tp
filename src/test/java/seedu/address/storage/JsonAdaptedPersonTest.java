@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Compatability;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -30,7 +30,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_FACULTY = BENSON.getFaculty().toString();
     private static final String VALID_MAJOR = BENSON.getMajor().toString();
-    private static final Compatability VALID_COMPATABILITY = BENSON.getCompatability();
+    private static final Compatibility VALID_COMPATIBILITY = BENSON.getCompatibility();
     private static final List<JsonAdaptedSkill> VALID_SKILLS = BENSON.getSkills().stream()
             .map(JsonAdaptedSkill::new)
             .collect(Collectors.toList());

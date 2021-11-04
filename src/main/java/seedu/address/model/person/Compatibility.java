@@ -4,20 +4,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Optional;
 
-public class Compatability {
+public class Compatibility {
 
     public static final String MESSAGE_CONSTRAINTS = "Rating must be a value between 0 and 100";
 
-    public final Optional<Integer> compatabilityRating;
+    public final Optional<Integer> compatibilityRating;
 
     /**
-     * Constructs a {@code Compatability}.
+     * Constructs a {@code Compatibility}.
      *
-     * @param compatabilityRating A valid Compatability percentage.
+     * @param compatibilityRating A valid Compatibility percentage.
      */
-    public Compatability(Integer compatabilityRating) {
-        checkArgument(isValidRating(compatabilityRating), MESSAGE_CONSTRAINTS);
-        this.compatabilityRating = Optional.ofNullable(compatabilityRating);
+    public Compatibility(Integer compatibilityRating) {
+        checkArgument(isValidRating(compatibilityRating), MESSAGE_CONSTRAINTS);
+        this.compatibilityRating = Optional.ofNullable(compatibilityRating);
     }
 
     /**
@@ -34,23 +34,23 @@ public class Compatability {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Compatability // instanceof handles nulls
-                && compatabilityRating.equals(((Compatability) other).compatabilityRating)); // state check
+                || (other instanceof Compatibility // instanceof handles nulls
+                && compatibilityRating.equals(((Compatibility) other).compatibilityRating)); // state check
     }
 
     @Override
     public int hashCode() {
-        return compatabilityRating.hashCode();
+        return compatibilityRating.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        if (compatabilityRating.isEmpty()) {
+        if (compatibilityRating.isEmpty()) {
             return "[ - % ]";
         } else {
-            return '[' + compatabilityRating.get() + "% ]";
+            return '[' + compatibilityRating.get() + "% ]";
         }
     }
 }
