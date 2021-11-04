@@ -163,7 +163,7 @@ Format: `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 * Group name can be any number of alphanumeric words.
 * Students can be identified by their name or NUSNET ID.
 Name is case-sensitive and only allows exact match. E.g. `Jonas` will not match `Jonas Chow`.
-* If multiple students have the same name, NUSNET ID needs to be used to identify them. 
+* If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
@@ -290,13 +290,13 @@ Shows the in-depth data analysis of individual, group, or the cohort's performan
 Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f]`
 
 * Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments.
-  * The student's score in each assessment, as well as the cohort mean and median score, will be shown as a line graph. 
+  * The student's score in each assessment, as well as the cohort mean and median score, will be shown as a line graph.
   * The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
   * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 * Using `-g <group_name>` displays the information of the group's performance in all their graded assessments.
   * The group's mean score in each assessment, as well as the cohort mean and median score, will be shown as a line graph.
 * Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
-  * The cohort's score distribution will be shown as a histogram. 
+  * The cohort's score distribution will be shown as a histogram.
 * Keywords are case-sensitive and only allows exact match. E.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
 * Entering `-f` exports the graph produced from the command to a `.png` file in the same directory as your JAR file.
 
@@ -453,7 +453,7 @@ Format: `help`
 
 ### Accessing command history
 
-Retrieves past command lines input. 
+Retrieves past command lines input.
 
 * This can be done using the up and down arrow keys.
 * Only successful command input would be recorded. Unsuccessful inputs which shows an error will not be saved.
@@ -475,7 +475,7 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing aliases can still be used after new alias is added. E.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`.
-* The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously. 
+* The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously.
 
 Examples:
 * `alias -c addstudent -as example`
@@ -518,7 +518,7 @@ On an OS based off of Linux, it might be necessary to run `chmod +x sourceContro
 [Return to Table of Contents](#table-of-contents)
 
 
-### How can I back up my data? 
+### How can I back up my data?
 Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the CSV file created.
