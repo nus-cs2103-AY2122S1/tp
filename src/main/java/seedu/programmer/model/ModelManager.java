@@ -97,6 +97,17 @@ public class ModelManager implements Model {
         requireNonNull(student);
         return programmerError.hasStudent(student);
     }
+    @Override
+    public boolean hasSameStudentId(Student student) {
+        requireNonNull(student);
+        return programmerError.hasSameStudentId(student);
+    }
+
+    @Override
+    public boolean hasSameStudentEmail(Student student) {
+        requireNonNull(student);
+        return programmerError.hasSameStudentEmail(student);
+    }
 
     @Override
     public void deleteStudent(Student target) {

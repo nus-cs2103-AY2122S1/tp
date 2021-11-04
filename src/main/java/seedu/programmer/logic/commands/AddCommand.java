@@ -9,6 +9,8 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.exceptions.DuplicateStudentEmailException;
+import seedu.programmer.model.student.exceptions.DuplicateStudentIdException;
 
 /**
  * Adds a student to ProgrammerError.
@@ -30,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "e0518441@u.nus.edu";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same StudentId "
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
@@ -51,8 +53,14 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+//        if (model.hasSameStudentId(toAdd) && model.hasSameStudentEmail(toAdd)) {
+//            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+
+        if (model.hasSameStudentEmail(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
+        }
+        if (model.hasSameStudentId(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
         }
 
         model.addStudent(toAdd);

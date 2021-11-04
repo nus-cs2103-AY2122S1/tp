@@ -12,7 +12,9 @@ import javafx.collections.ObservableList;
 import seedu.programmer.model.student.comparator.SortByClass;
 import seedu.programmer.model.student.comparator.SortByLabNumber;
 import seedu.programmer.model.student.comparator.SortByStudentName;
+import seedu.programmer.model.student.exceptions.DuplicateStudentEmailException;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
+import seedu.programmer.model.student.exceptions.DuplicateStudentIdException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 
 /**
@@ -65,11 +67,15 @@ public class UniqueStudentList implements Iterable<Student> {
      * Adds a student to the list and the list is sorted each time.
      * The student must not already exist in the list.
      */
-    public void add(Student toAdd) throws DuplicateStudentException {
+    public void add(Student toAdd) throws DuplicateStudentIdException,
+            DuplicateStudentEmailException {
         requireNonNull(toAdd);
         toAdd.setLabResultRecord(labsTracker);
-        if (contains(toAdd)) {
-            throw new DuplicateStudentException();
+        if (containsSameEmail(toAdd)) {
+            throw new DuplicateStudentEmailException();
+        }
+        if (containsSameStudentId(toAdd)) {
+            throw new DuplicateStudentIdException();
         }
         internalList.add(toAdd);
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
@@ -179,7 +185,8 @@ public class UniqueStudentList implements Iterable<Student> {
     private boolean studentsAreUnique(List<Student> students) {
         for (int i = 0; i < students.size() - 1; i++) {
             for (int j = i + 1; j < students.size(); j++) {
-                if (students.get(i).isSameStudent(students.get(j))) {
+                if (students.get(i).isSameStudentEmail(students.get(j))
+                        || students.get(i).isSameStudentId(students.get(j))) {
                     return false;
                 }
             }
