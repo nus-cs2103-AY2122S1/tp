@@ -28,7 +28,7 @@ public class MailingListCommand extends Command {
             + "[" + PREFIX_TAG + "]"
             + "[" + PREFIX_BIRTHDAY + "] \n"
             + "Default export is Phone numbers and Email addresses.\n"
-            + "Example: " + COMMAND_WORD + PREFIX_PHONE + " " + PREFIX_EMAIL;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + " " + PREFIX_EMAIL;
 
     public static final String MESSAGE_EMPTY_PERSON_LIST = "Trying to export an empty mailing list does not make sense";
 

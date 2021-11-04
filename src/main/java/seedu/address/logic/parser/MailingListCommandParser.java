@@ -22,6 +22,9 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
 
     public static final Set<Prefix> DEFAULT_PREFIXES = Set.of(PREFIX_PHONE, PREFIX_EMAIL);
 
+    public static final Set<Prefix> ALL_PREFIXES = Set.of(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY);
+
     /**
      * Parses the given {@code String} of arguments in the context of the MailingListCommand
      * and returns a MailingListCommand object for execution.
@@ -29,19 +32,39 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
      */
     public MailingListCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY);
-
-        Set<Prefix> prefixes = Set.of(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,ALL_PREFIXES.toArray(Prefix[]::new));
 
         Predicate<Prefix> prefixIsPresent = prefix -> argMultimap.getValue(prefix).isPresent();
-        Set<Prefix> providedPrefixes = prefixes.stream().filter(prefixIsPresent).collect(Collectors.toSet());
+        Set<Prefix> providedPrefixes = ALL_PREFIXES.stream().filter(prefixIsPresent).collect(Collectors.toSet());
 
+        // check that only valid Prefix are provided
+        if (hasExtraArguments(argMultimap,providedPrefixes)) {
+            throw new ParseException(MailingListCommand.MESSAGE_USAGE);
+        }
+
+        // set defaults
         if (providedPrefixes.isEmpty()) {
             providedPrefixes.addAll(DEFAULT_PREFIXES);
         }
         return new MailingListCommand(providedPrefixes);
     }
+
+    private boolean hasExtraArguments(ArgumentMultimap argMultimap,Set<Prefix> providedPrefixes) {
+        // check for preamble
+        if(!argMultimap.getPreamble().equals("")) {
+            return true;
+        }
+
+        // check for data after a prefix
+        boolean hasExtraArguments =  providedPrefixes.stream()
+                .map(p -> argMultimap.getValue(p).get())
+                .anyMatch(p -> !p.equals(""));
+        if (hasExtraArguments) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
