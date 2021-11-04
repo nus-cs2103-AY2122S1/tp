@@ -34,7 +34,7 @@ public enum CommandWord {
     LIST_PERSON("list", "ls"),
     EDIT_MODULE_LESSON("editc", "ec", "updatec"),
     FIND_MODULE_LESSON("findc", "fc"),
-    LIST_MODULE_LESSON("listc", "lc"),
+    LIST_MODULE_LESSON("listc", "lsc"),
     CLEAR_MODULE_LESSON("clearc", "clrc", "cc"),
     DELETE_MODULE_LESSON("deletec", "delc", "rmc", "dc"),
     ADD_MODULE_LESSON("addc", "ac");
