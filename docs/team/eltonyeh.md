@@ -33,7 +33,7 @@ The app is mainly written in Java and has about 12k LoC.
 - Developer guide
   - Add implementation detail of the `UniqueId` interface
 - General
-  - Fix some typos 
+  - Fix some typos
 
 #### Internal Design: Create the `UniqueId` class
 
@@ -53,7 +53,7 @@ Task added is reusable, i.e., tasks can be assigned to multiple student/group.
 
 #### New Feature: Ability to assign tasks to `TaskAssignable` (Students and Groups)
 
-This allows users to assign tasks to their students or student groups through a command. 
+This allows users to assign tasks to their students or student groups through a command.
 
 This feature is based on the command of assigning tasks to students created by my teammate. My main contribution is:
 - Combine the command of assigning tasks to students and assigning tasks to groups into a more generic command.
