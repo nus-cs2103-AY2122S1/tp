@@ -106,6 +106,7 @@ public class ParserUtil {
      *  @param labNum the lab number
      * */
     public static int parseLabNum(String labNum) throws ParseException {
+        requireNonNull(labNum);
         try {
             int value = Integer.parseInt(labNum);
             if (value <= 0) {
@@ -146,6 +147,7 @@ public class ParserUtil {
      * @param total the total score of the lab assignment.
      * */
     public static Integer parseTotal(String total) throws ParseException {
+        requireNonNull(total);
         try {
             String trimmedResult = total.trim();
             if (trimmedResult.isEmpty()) {
