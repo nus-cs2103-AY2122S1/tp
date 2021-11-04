@@ -484,31 +484,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LeadsForce` and the **Actor** is the `user`, unless specified otherwise)
 
-**6.3.1 Use case: Add a client**
+**Use case: UC01 Add a client to the client list**
 
 **MSS**
 
-1. User requests to add a client
+1. User adds a client into the contact book
 2. LeadsForce adds the client to the contact book
-
    Use case ends.
 
 **Extensions**
 
-* 1a.  The user forgets to input the required info (name and email)
+* 1a.  Missing paramters - name and email
 
-    * 1a1. LeadsForce shows an error message.
+    * 1a1. LeadsForce shows an invalid command error message. 
 
-      Use case resumes at step 2.
+          Use case ends. 
 
+**Use case: UC02 View a client's information**
 
-**6.3.2 Use case: Delete a client**
+**MSS**
 
-**MSS2**
+1. User requests to view the client's information 
+2. LeadsForce shows the detailed view of the client's information 
+
+**Extensions**
+
+* 2a.  User inputs an invalid client Id
+    * 2a1. LeadsForce shows an invalid command error to user.
+      Use case ends.
+      
+**Use case: UC03 Edit client information **
+
+**MSS**
+
+1. User request to edit multiple attributes of a client 
+2. LeadsForce updates the client's information.
+3. User __UC05 Views a client's information__ to see that the information of the client have been changed. 
+
+**Extensions**
+
+* 1a.  User inputs invalid attributes
+    * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format. 
+      Use case ends.
+      
+**Use case: UC04 Delete a client**
+
+**MSS**
 
 1.  User requests to list clients
 2.  LeadsForce shows a list of clients
-3.  User requests to delete a specific client in the list
+3.  User requests to delete a specific client by their client Id. 
 4.  LeadsForce deletes the client
 
     Use case ends.
@@ -516,38 +541,118 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
 
-* 3a. The given index is invalid.
-
-    * 3a1. LeadsForce shows an error message.
-
+* 3a. The given client id is invalid.
+    * 3a1. LeadsForce shows an error message, informing the user that there is no client with the given client Id .
       Use case resumes at step 2.
+      
+**Use case: UC05 Showcases list of clients **
 
-**6.3.3 Use case: Search for a client**
+**MSS**
 
-**MSS3**
+1. User request to view the full list of clients 
+2. LeadsForce showcases the client's information.
+
+**Use case: UC06 Search for a client**
+
+**MSS**
 
 1. User requests to list clients
 2. LeadsForce shows a list of clients
 3. User requests to search using specific keywords
 4. LeadsForce shows the list of all people which match the keyword
-
    Use case ends.
 
 **Extensions**
 
-* 2a.  The list is empty.
-
+* 2a.  LeadsForce returns an empty list since there is no clients in the list. 
   Use case ends.
 
-* 3a. No client fits the inputted keyword
+* 3a. LeadsForce returns an empty list since there is no client who fits the inputted keyword
+  Use case ends.
+  
 
+**Use case: UC07 Setting a meeting with clients **
+
+**MSS**
+
+1. User requests to set a meeting with the client
+2. LeadsForce updates the client's next meeting portion to show the meeting that was inputted
+
+**Extensions**
+
+* 1a.  User inputs invalid commands
+    * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format. 
+      Use case ends.
+
+**Use case: UC08 showing schedule for the day**
+
+**MSS**
+
+1. User requests to see the schedule of meetings on a particular day
+2. LeadsForce shows a schedule of meetings on the day
+
+**Extensions**
+
+* 1a.  User inputs an invalid date
+    * 1a1. LeadsForce shows an invalid command error to user.
+      Use case ends.
+
+* 2a. The meeting schedule is empty as the user has no meetings on the day
   Use case ends.
 
-*{More to be added}*
+**Use case: UC09 Clearing a client list **
 
+**MSS**
+
+1. User requests to clear the client list.
+2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information) 
+3. User validates the request
+4. LeadsForce shows address book with no clients
+
+**Extensions**
+
+* 3a.  User does not validate the request
+    * 3a1. LeadsForce does not clear the client list. 
+      Use case ends.
+      
+* 3b.  User inputs invalid commands
+    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands. 
+      Use case resumes at step 3.
+      
+**Use case: UC10 Create a new address book**
+
+**MSS**
+
+1. User requests to create another address book with a specified name
+2. LeadsForce shows view of the new address book
+
+**Extensions**
+
+* 1a.  User inputs name that is the same as an existing address book
+    * 1a1. LeadsForce shows an error to user, and informs the user that an address book with the same name already exists.
+      Use case ends.
+      
+**Use case: UC11 clear an address book of clients**
+
+**MSS**
+
+1. User requests to clear the address book.
+2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information) 
+3. User validates the request
+4. LeadsForce shows address book with no clients
+
+**Extensions**
+
+* 3a.  User does not validate the request
+    * 3a1. LeadsForce does not clear the address book. 
+      Use case ends.
+      
+* 3a.  User inputs invalid commands
+    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands. 
+      Use case resumes at step 3. 
+     
 ### 6.4 Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -557,8 +662,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Should work without requiring an installer.
 6. The system should work on a 64-bit environment.
 7. The product should be usable by a student who has little to much experience in using computers.
-
-
+8. 
 *{More to be added}*
 
 ### 6.5 Glossary
