@@ -298,7 +298,7 @@ public abstract class Lesson implements Comparable<Lesson> {
                 .map(Date::toString).collect(Collectors.joining(","));
 
         if (!dates.isEmpty()) {
-            builder.append("Cancelled Dates: ")
+            builder.append("Cancelled Date(s): ")
                     .append(dates);
         }
         return builder.toString();
