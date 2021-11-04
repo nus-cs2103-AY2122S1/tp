@@ -33,20 +33,20 @@ class TaskTest {
         // null -> returns false
         assertFalse(TASK1.isSameTask(null));
 
-        // different task -> return false
+        // different task -> returns false
         assertFalse(TASK1.isSameTask(TASK2));
 
-        // same module but different ID -> return false
+        // same module but different ID -> returns false
         Task taskDifferentId = new TaskBuilder().withModule(MODULE_NAME_0).withId("T111")
                 .withName(VALID_TASK_NAME_0).withDeadline(VALID_TASK_DEADLINE_0).build();
         assertFalse(TASK1.isSameTask(taskDifferentId));
 
-        // same ID but different module -> return false
+        // same ID but different module -> returns false
         Task taskDifferentModule = new TaskBuilder().withModule("module").withId(VALID_TASK_ID_0)
                 .withName(VALID_TASK_NAME_0).withDeadline(VALID_TASK_DEADLINE_0).build();
         assertFalse(TASK1.isSameTask(taskDifferentModule));
 
-        // both module and ID are the same -> return true
+        // both module and ID are the same -> returns true
         Task taskSame = new TaskBuilder().withModule(MODULE_NAME_0).withId(VALID_TASK_ID_0)
                 .withName(VALID_TASK_NAME_0).withDeadline(VALID_TASK_DEADLINE_0).build();
         assertTrue(TASK1.isSameTask(taskSame));
@@ -69,7 +69,7 @@ class TaskTest {
         // null -> returns false
         assertFalse(TASK1.equals(null));
 
-        // different task -> return false
+        // different task -> returns false
         assertFalse(TASK1.equals(TASK2));
 
         // different module name -> returns false

@@ -31,12 +31,16 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_CHARLIE = "Charlie Deen";
     public static final String VALID_STUDENT_ID_AMY = "A1111111A";
     public static final String VALID_STUDENT_ID_BOB = "A2222222A";
+    public static final String VALID_STUDENT_ID_CHARLIE = "A3333333A";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_CHARLIE = "charlie@example.com";
     public static final String VALID_TELE_HANDLE_AMY = "@AmyBee";
     public static final String VALID_TELE_HANDLE_BOB = "@bobchoo";
+    public static final String VALID_TELE_HANDLE_CHARLIE = "@charlie_D";
 
     public static final String MODULE_NAME_DESC_0 = " " + PREFIX_MODULE_NAME + MODULE_NAME_0;
     public static final String MODULE_NAME_DESC_1 = " " + PREFIX_MODULE_NAME + MODULE_NAME_1;
