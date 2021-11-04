@@ -6,9 +6,12 @@ title Activity: Adding students to a new group
 start
 while () is ([has remaining students to add])
   :Find matching students from student list;
-  if () then ([only 1 matching student found])
+  if () then ([only 1 matching student found
+and student not already in group])
     :Add student to group;
   else ([else])
+    : Throw a CommandException ;
+    stop
   endif
 endwhile ([else])
 stop
