@@ -88,7 +88,7 @@ Attribute | Prefix | Format
 **Tag** | `t/` | Tags names should be alphanumeric
 **GITHUB_ID** | `g/` | GitHub ID must be valid ie alphanumeric separated by single dash and it should not start or end with a dash, and it should not be blank
 **NUSNet_ID** | `N/` | NUS Network ID must be valid ie starting with e or E followed by 7 digits, and it should not be blank
-**Type** | `r/` | Type must be valid ie Student or Tutor, and it should not be blank
+**Type** | `r/` | Type must be valid ie `student` or `tutor`, and it should not be blank
 **STUDENT_ID** | `S/` | Student ID must be valid ie starting with a or A followed by 7 digits and a single alphabet, and it should not be blank
 **TUTORIAL_ID** | `T/ `| Tutorial ID must be valid ie a 2 digits, and it should not be blank
 
@@ -96,15 +96,15 @@ Attribute | Prefix | Format
 
 Adds a person to the address book.
 
-Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME e/EMAIL s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/Siddharth Srivastava s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incomplete ip`
-* `add n/Rachel Cheah s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
+* `add n/Siddharth Srivastava e/e0638874@u.nus.edu s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incompleteIp`
+* `add n/Rachel Cheah e/e0987654@u.nus.edu s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
 
 ### Listing all persons : `list`
 
@@ -122,7 +122,7 @@ Format: `stat`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [e/Email] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
