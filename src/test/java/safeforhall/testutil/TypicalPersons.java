@@ -97,7 +97,7 @@ public class TypicalPersons {
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withPhone("8482424")
             .withEmail("stefan@example.com")
-            .withRoom("A103")
+            .withRoom("A107")
             .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("15-10-2021")
