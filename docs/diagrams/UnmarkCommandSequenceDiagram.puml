@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkingCommandParser" as MarkingCommandParser LOGIC_COLOR
+participant ":UnmarkCommand" as UnmarkCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("unmark 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("unmark 3")
+activate AddressBookParser
+
+create MarkingCommandParser
+
+
+
+AddressBookParser -> MarkingCommandParser: MarkingCommandParser()
+activate MarkingCommandParser
+
+MarkingCommandParser --> AddressBookParser
+
+deactivate MarkingCommandParser
+
+AddressBookParser -> MarkingCommandParser : parse(" 3")
+activate MarkingCommandParser
+
+create UnmarkCommand
+MarkingCommandParser -> UnmarkCommand
+activate UnmarkCommand
+
+UnmarkCommand --> MarkingCommandParser :
+deactivate UnmarkCommand
+
+MarkingCommandParser --> AddressBookParser :
+deactivate MarkingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkingCommandParser -[hidden]-> AddressBookParser:
+destroy MarkingCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> UnmarkCommand : execute()
+activate UnmarkCommand
+
+UnmarkCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> UnmarkCommand
+deactivate Model
+
+loop until list of indices ends
+    UnmarkCommand -> Model: checkForUnmarkedPerson(personToCheck)
+    activate Model
+    Model --> UnmarkCommand:
+    deactivate Model
+end
+
+loop until list of indices ends
+    UnmarkCommand -> Model: unmarkPerson(personToMark)
+    activate Model
+    Model --> UnmarkCommand:
+    deactivate Model
+end
+
+create CommandResult
+UnmarkCommand -> CommandResult
+activate CommandResult
+CommandResult --> UnmarkCommand
+deactivate CommandResult
+
+UnmarkCommand --> LogicManager: result
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
