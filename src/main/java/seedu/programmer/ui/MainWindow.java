@@ -204,6 +204,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleShowResult() {
         labResultListPanel = new LabResultListPanel(logic.getSelectedInformation());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
+        logger.fine("Showing student's lab results.");
     }
 
     /**
@@ -355,6 +356,16 @@ public class MainWindow extends UiPart<Stage> {
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
         return chosenDir == null ? null : new File(chosenDir, destFileName);
+    }
+
+    @FXML
+    private void handleHover() {
+        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
+    }
+
+    @FXML
+    private void handleUnhover() {
+        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
     }
 
     /**
