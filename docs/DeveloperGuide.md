@@ -671,13 +671,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add n/John p/12345678 l/English a/New College`<br>
       Expected: An elderly is added to the list without visit or last visit. Details of the added elderly shown in the status message. Timestamp in the status bar is updated.
+
    2. Test case: `add n/John A p/12345678 l/English a/New College v/2021-12-20 12:00 lv/2021-10-10 13:00`<br>
       Expected: An elderly is added to the list with visit and last visit. Details of the added elderly shown in the status message. Timestamp in the status bar is updated.
+
    3. Test case: `add n/John B p/12345678 l/English a/New College v/2021-12-20 12:15 f/Weekly o/2`<br>
       Expected: An elderly is added to the list with a recurring weekly visit that occurs twice. Details of the added elderly shown in the status message. Timestamp in the status bar is updated.
 
    4. Test case: `add n/John C p/12345678 l/English a/New College f/Weekly o/2`<br>
       Expected: No elderly is added. Error details shown in the status message. Status bar remains the same.
+
    5. Other incorrect add commands to try: `add`, `add n/Timmy`, `add n/John D p/12345678 l/English a/New College o/2`, `add n/John D p/12345678 l/English a/New College f/Monthly`<br>
       Expected: Similar to previous.
 
@@ -694,6 +697,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No elderly is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+
       Expected: Similar to previous.
 
 ### Deleting a visit of an elderly
@@ -734,8 +738,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `list`<br>
       Expected: All elderly are displayed.
+
    2. Test case: `list m/`<br>
       Expected: All elderly with visits in the next month (30 days) are displayed.
+
    3. Test case: `list w/`<br>
       Expected: All elderly with visits in the next week (7 days) are displayed.
 
@@ -762,6 +768,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `find Alex`<br>
       Expected: Elderly whose attributes contain Alex as either a string or a substring of their attributes are displayed.
+
    3. Test case: `find`<br>
       Expected: No find operation is executed. Error details shown in the status message. Status bar remains the same.
 
@@ -773,10 +780,13 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `visit 1 at/2021-12-20 12:00`<br>
       Expected: Visit is added to the first elderly. Details of the elderly shown in the status message. Timestamp in the status bar is updated.
+
    3. Test case: `visit 1 at/2021-12-20 12:00 f/Weekly o/2`<br>
       Expected: Recurring weekly visit is added to the first elderly. Details of the elderly shown in the status message. Timestamp in the status bar is updated.
+
    4. Test case: `visit 1 at/2021-12-20 12:00 f/Weekly`<br>
       Expected: Visit is not added to elderly. Error details shown in the status message. Status bar remains the same.
+
    5. Other incorrect visit commands to try: `visit`, `visit 1`, `visit x at/2021-12-20 12:00` (where x is larger than the list size), `visit 1 at/2021-12-20 12:00 o/3`<br>
       Expected: Same as previous.
 
@@ -788,7 +798,41 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `done 1`<br>
       Expected: Visit for first elderly is marked as done, and is moved to the first elderly's last visit. Details of the elderly shown in the status message. Timestamp in the status bar is updated.
+
    3. Test case: `done 0`<br>
       Expected: No visit is marked as done. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size)<br>
       Expected: Same as previous.
+
+## **Appendix: Effort**
+
+Given below is a summary of the effort our team put into this project.
+
+### Visit, last visit and associated features
+
+These features were challenging to develop as they affect existing commands and classes. While maintaining the functionality of existing features, we also had to ensure their extensibility and consistency.
+
+E.g. We took into consideration the existing delete command while implementing the delete visit feature. Although a new `delete visit` command could be easier to implement, we chose to overload the existing delete elderly command with a `v/` flag to maintain OOP and also make our commands formats consistent.
+
+### Download
+
+The main difficulty in developing this feature was the conversion from JSON to CSV, which required effort to understand
+documentations.
+
+### Sort
+
+This feature required an in-depth understanding of JavaFX features. It was also challenging to maintain OOP, in particular,
+the immutability of the data had to be maintained while sorting the list.
+
+### Summary
+
+The challenging part in implementing this feature was its integration with the UI, as it required the changing of display
+from the elderly list to a summary list.
+
+### UI
+
+A considerable amount of effort was spent on revamping the user interface to cater for our purpose.
+We incorporated functional colors into the UI, which required careful integration of the UI and logic.
+E.g. Highlighting person card with red colour if the next visit is overdue.
+We also reorganised and adjusted the components, spacing and design for user-friendliness.
+While these UI changes are less challenging, it takes up considerable time and effort to produce a satisfactory render.
