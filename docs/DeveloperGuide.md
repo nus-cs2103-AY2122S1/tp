@@ -291,6 +291,65 @@ SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItem
 strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to 
 update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
 
+### Controlling the Display Panel in UI
+
+The main panel of displayed items in the UI is managed by `DisplayListPanel` in the UI component. 
+This panel is dependent on changes made by command logic and should be able to be toggled to display different items 
+(e.g. inventory items, items in current order, list of transactions, etc.).
+
+To minimise coupling between the logic and UI component, `DisplayListPanel` adopts an **observer pattern**.
+
+![DisplayList1](images/ObserverPattern.png)
+
+`DisplayListPanel` observes an `ObservableList<Displayable>` which is controlled by a `DisplayList` in the model component.
+This way, any changes to model can be propagated to the ui without having to explicitly have knowledge about the ui component.
+
+`DisplayList` is composed of 3 lists.
+1. `DisplayList#filtered` A filtered list that is observed by `DisplayListPanel`.
+2. `DisplayList#displayed` An observable list that acts as the base for `DisplayList#filtered`.
+3. `DisplayList#source` A list of displayables that acts as the base for `DisplayList#displayed`.
+
+To propagate any changes to the filtered list, to be reflected to the ui, `DisplayList` can:
+
+1. **Set a predicate**. 
+
+Set a predicate on the filtered list. This is done when items to be displayed already exists in `DisplayList#source`.
+
+2. **Update the source**.
+
+Call `DisplayList#setItems` which takes in an observable list of items. 
+The list of items is copied into `DisplayList#source`, which is eventually propagated to `DisplayList#filtered`.
+This is done when items to be displayed are not already in `DisplayList#source`.
+
+![DisplayList2](images/sequenceDiagram.png)
+
+<div class="code-example bg-grey-lt-000">:information_source:
+<code>DisplayList</code> uses a 3 list approach because of the way JavaFX has implemented `FilteredList`.
+`FilteredList` is bound to a `ObservableList` which is bound to a regular `List`.  
+</div>
+
+### Displaying an object
+
+Any object can be displayed in the display panel by implementing the `Displayable` interface. 
+The object must implement `Displayable#asDisplayCard()` which should return a `UIPart<Region>` that will act as the object's list cell.
+
+![DisplayList3](images/DisplayableUML.png)
+
+### Design Considerations
+
+**Time complexity**
+
+Each update to source requires DisplayList to copy over an entire list (complexity: _O(n)_).
+This is definitely inefficient since updates usually involve appending or removing an item from source.
+(e.g. when the user adds an item to the inventory).
+
+This inefficiency does not create observable latency given the envisioned scale of BogoBogo (1000 items).
+However, if BogoBogo is to be scaled up in the future, there might be a need for a more advanced implementation.
+
+Proposed upgrade: 
+Instead of relying on JavaFX's `ObservableList`, we can create a customised observable list that can reference multiple sources.
+From there, we should be able to toggle which source we want to be displaying on the `filteredlist`. This way, copying is no longer required.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
