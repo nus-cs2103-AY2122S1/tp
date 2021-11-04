@@ -76,9 +76,6 @@ activate CommandResult
 
 CommandResult --> DeleteCommand
 deactivate CommandResult
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-CommandResult -[hidden]-> AnimeListParser
-destroy CommandResult
 
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
@@ -86,6 +83,6 @@ deactivate DeleteCommand
 DeleteCommand  -[hidden]-> AnimeListParser
 destroy DeleteCommand
 
-[<--LogicManager
+[<--LogicManager : result
 deactivate LogicManager
 @enduml
