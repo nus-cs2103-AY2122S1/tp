@@ -93,7 +93,7 @@ Quarterly | Every 90 days
 * Add elderly with contact details 
 * Delete an elderly or corresponding visit 
 * Edit an elderly 
-* List all elderly
+* List all or selected elderly
 * Sort elderly by visit or last visit 
 * Find elderly by attribute 
 * Schedule a visit to an elderly 
@@ -145,6 +145,8 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `PHONE_NUMBER` must be a 8 digits numeric value for local phone number, with no country codes.
 * `FREQUENCY` and `OCCURRENCE` must both be included or excluded. 
 * `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
+* A warning message will be shown if the new `VISIT` datetime entered is in the past.
+* A warning message will be shown if the new `LAST_VISIT` datetime entered is in the future.
 * A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 </div>
 
@@ -193,6 +195,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] 
 * Edits the elderly at the specified `INDEX`. The index refers to the index number shown in the displayed elderly list. The index **must be a positive integer**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* A warning message will be shown if the new `VISIT` datetime entered is in the past.
+* A warning message will be shown if the new `LAST_VISIT` datetime entered is in the future.
 
 
 <div markdown="block" class="alert alert-info">
@@ -216,7 +220,7 @@ Examples:
 
 ### List elderly : `list`
 
-Shows a list of all the elderly and their associated details in SeniorLove address book in alphabetical order of their name.
+Shows a list of all or selecteded elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
 Format: `list [w/] [m/]`
 
@@ -290,6 +294,7 @@ Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 * `INDEX` corresponds to the elderly’s index in the address book. It is a **strictly positive integer, and must be included.**
 * The `VISIT` is in the format of `yyyy-mm-dd HH:mm`, and it must be included.
 * The `FREQUENCY` and `OCCURRENCE` are optional parameters, and must both be included or excluded.
+* A warning message will be shown if the new `VISIT` datetime entered is in the past.
 
 <div markdown="block" class="alert alert-info">
 :information_source: How do I know if I am deleting the visit or not?
