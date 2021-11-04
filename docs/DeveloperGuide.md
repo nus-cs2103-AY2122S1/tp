@@ -358,7 +358,7 @@ A similar execution scenario can be expected for view lesson mechanism.
     
 ### Card-like UI Elements
 
-Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
+Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. The Student Cards come in three flavours: `FullStudentCard` displays all fields to the user, `StudentCard` is the same but only displays the most recent `Progress` entry, and `MinimalStudentCard` only displays the index. Lesson Cards come in 2 flavours: `LessonCard` (fully-detailed) and `MinimalLessonCard` (only index and timing). Having minimally-detailed variants keeps the list compact and allows the user to view more entries. 
 
 These UI elements inherit the `Card` class, which in turn inherits `UiPart<Region>`. 
 
@@ -366,19 +366,21 @@ These UI elements inherit the `Card` class, which in turn inherits `UiPart<Regio
 
 At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed.
 
-There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. Every time the `Model` is updated, `MainWindow#fillStudentCard` and `MainWindow#fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
+There are thus three static instances of `StudentListPanel` and two of `LessonListPanel` - one for each variant. Every time the `Model` is updated, `MainWindow#fillStudentCard` and `MainWindow#fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
 
 ![CardUiSequence](images/CardUiSequence.png)
 
-When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes to prepare them to accept new nodes (panels). Then, the correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels to the user.
+When `fillStudentCard(DetailLevel.MED)` or `fillLessonCard(DetailLevel.MED)` are called during the execution of a `list -a` command, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes to prepare them to accept new nodes (panels). Then, the correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels (minus the full `Progress` of the `Student` objects) to the user.
 
-Conversely, if a user chooses to hide the details, `UiManager#hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
+Conversely, if a user chooses to hide the details by executing `list`, `UiManager#showDetails(DetailLevel.LOW)` will be called instead, which will call `fillStudentCard(DetailLevel.LOW)` and `fillLessonCard(DetailLevel.LOW)` and hide the details.
+
+The `FullStudentCard` is only used for the `view` command, in which the user wishes to view only a specific `Student` and their corresponding `Lessons` / `Lesson` and its corresponding `Students`. Then, all fields are displayed, including the 10 most recent `Progress` entries for each `Student`.
 
 The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. In contrast, during the application launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow#fillInnerParts`. The details are shown below:
 
 ![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
 
-The panels default to the minimal panels for the application launch.
+The panels default to `StudentCard` and `LessonCard` for the application launch, thus showing most details to the user but not the complete list of `Progress` entries.
 
 
 ### Set/Unset payment made feature
