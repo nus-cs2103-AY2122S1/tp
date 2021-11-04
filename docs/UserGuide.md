@@ -431,7 +431,7 @@ Format: `doneTask INDEX [MORE_INDEXES]`
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed or pending.
 * `doneTask 1 3 4` marks the 1st, 3rd and 4th tasks in the task list as completed or pending.
-![markTaskDoneCommand visual](images/MarkTaskDoneCommand_UG_visual.PNG)
+![markTaskDoneCommand](images/markTaskDone.png)
 
 ### Clearing all entries from task list: `clearTasks`
 
