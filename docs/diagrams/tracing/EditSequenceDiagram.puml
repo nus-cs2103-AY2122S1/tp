@@ -55,6 +55,11 @@ activate Model MODEL_COLOR
 Model --> EditCommand
 deactivate Model LOGIC_COLOR
 
+EditCommand -> Model : updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS)
+activate Model MODEL_COLOR
+
+Model --> EditCommand
+deactivate Model LOGIC_COLOR
 
 create CommandResult LOGIC_COLOR
 EditCommand -> CommandResult
