@@ -54,7 +54,7 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        if (toAdd.getName().toString().length() > 30) {
+        if (toAdd.getName().toString().length() > 70) {
             throw new CommandException(MESSAGE_NAME_TOO_LONG);
         }
 

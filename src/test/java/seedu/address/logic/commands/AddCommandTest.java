@@ -54,7 +54,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_personWithLongName_throwsCommandException() {
-        String longName = "NameOverThirtyCharactersIsTooLong";
+        String longName = "ThisNameThatIsOverSeventyCharactersSoItShouldNotBeAcceptedAtAllAndFails";
         Person validPerson = new PersonBuilder().withName(longName).build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);

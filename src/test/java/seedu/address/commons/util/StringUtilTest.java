@@ -243,4 +243,26 @@ public class StringUtilTest {
         assertEquals(StringUtil.stripFlags("-flag -moreflags  -anotherflag"), "");
     }
 
+    //---------------- Tests for removeExtraWhitespace --------------------------------------
+    /*
+     * Equivalence Partitions:
+     * - null
+     * - empty string
+     * - strings with no extra spaces in between words
+     * - strings with extra spaces in between words
+     * - strings with other whitespace characters in between words
+     */
+
+    @Test
+    public void removeExtraWhitespace_nullGiven_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.removeExtraWhitespace(null));
+    }
+
+    @Test
+    public void removeExtraWhitespace_validInputs_correctResult() {
+        assertEquals(StringUtil.removeExtraWhitespace(""), "");
+        assertEquals(StringUtil.removeExtraWhitespace("words words more words"), "words words more words");
+        assertEquals(StringUtil.removeExtraWhitespace("words    more    words       -flag"), "words more words -flag");
+        assertEquals(StringUtil.removeExtraWhitespace("words \t \n words"), "words words");
+    }
 }

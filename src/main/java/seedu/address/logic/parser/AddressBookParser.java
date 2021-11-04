@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -43,7 +44,8 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        String trimmedUserInput = StringUtil.removeExtraWhitespace(userInput);
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmedUserInput);
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -51,39 +53,39 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         // using if-else and String.startsWith() instead of switch-case
         // allows for the flexibility of having commands with multiple words, e.g. rm -contacts
-        if (userInput.startsWith(AddCommand.COMMAND_WORD)) {
+        if (trimmedUserInput.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommandParser().parse(arguments);
-        } else if (userInput.startsWith(EditFolderNameCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(EditFolderNameCommand.COMMAND_WORD)) {
             return new EditFolderNameCommandParser().parse(arguments);
-        } else if (userInput.startsWith(DeleteFolderCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(DeleteFolderCommand.COMMAND_WORD)) {
             return new DeleteFolderCommandParser().parse(arguments);
-        } else if (userInput.startsWith(EditCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(EditCommand.COMMAND_WORD)) {
             return new EditCommandParser().parse(arguments);
-        } else if (userInput.startsWith(ClearCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(ClearCommand.COMMAND_WORD)) {
             return new ClearCommand();
-        } else if (userInput.startsWith(ClearFoldersCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(ClearFoldersCommand.COMMAND_WORD)) {
             return new ClearFoldersCommand();
-        } else if (userInput.startsWith(DeleteCommand.COMMAND_WORD)
-                || userInput.startsWith(DeletePersonFromFolderCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(DeleteCommand.COMMAND_WORD)
+                || trimmedUserInput.startsWith(DeletePersonFromFolderCommand.COMMAND_WORD)) {
             if (arguments.contains(DeletePersonFromFolderCommand.COMMAND_IDENTIFIER)) {
                 return new DeletePersonFromFolderCommandParser().parse(arguments);
             }
             return new DeleteCommandParser().parse(arguments);
-        } else if (userInput.startsWith(FindFoldersCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(FindFoldersCommand.COMMAND_WORD)) {
             return new FindFoldersCommandParser().parse(arguments);
-        } else if (userInput.startsWith(FindCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(FindCommand.COMMAND_WORD)) {
             return new FindCommandParser().parse(arguments);
-        } else if (userInput.startsWith(ListFoldersCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(ListFoldersCommand.COMMAND_WORD)) {
             return new ListFoldersCommand();
-        } else if (userInput.startsWith(ListCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(ListCommand.COMMAND_WORD)) {
             return new ListCommand();
-        } else if (userInput.startsWith(ExitCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(ExitCommand.COMMAND_WORD)) {
             return new ExitCommand();
-        } else if (userInput.startsWith(HelpCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(HelpCommand.COMMAND_WORD)) {
             return new HelpCommand();
-        } else if (userInput.startsWith(CreateFolderCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(CreateFolderCommand.COMMAND_WORD)) {
             return new CreateFolderCommandParser().parse(arguments);
-        } else if (userInput.startsWith(AddToFolderCommand.COMMAND_WORD)) {
+        } else if (trimmedUserInput.startsWith(AddToFolderCommand.COMMAND_WORD)) {
             return new AddToFolderParser().parse(arguments);
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

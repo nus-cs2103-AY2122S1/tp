@@ -78,7 +78,7 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (editedPerson.getName().toString().length() > 30) {
+        if (editedPerson.getName().toString().length() > 70) {
             throw new CommandException(MESSAGE_NAME_TOO_LONG);
         }
 
