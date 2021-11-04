@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Updated the GUI logos such that they are the same for both Mac OS and Windows OS: (Pull requests [#280](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/280)).
-  * Updated the GUI to wrap texts for `Name`, `Email`, and `Address`: (Pull request(s) [#280](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/280)).
+  * Updated the GUI to wrap texts for `Name`, `Email`, and `Address`: (Pull requests [#280](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/280)).
   * Changed EnrollCommand to accept `lessonIndex` instead of `lessonCode`: (Pull requests [#147](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/147)).
   * Wrote additional tests for existing features to increase coverage for new entities and constraints: (Pull requests [#207](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/207), [#190](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/190), [#197](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/197), [#147](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/147), [#112](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/112), [#98](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/98)).
   * Updated `Find` feature to allow partial word searches: (Pull requests [#116](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/116)).
