@@ -58,12 +58,16 @@ public class DeleteCommandParserTest {
         // Multiple inputs, all invalid
         assertParseFailure(parser, "0 -1", String.format(errorDueToInvalidIndex, DeleteCommand.MESSAGE_USAGE));
 
-        // Multiple inputs, all valid, duplicates
+        // 2 duplicate inputs
         assertParseFailure(parser, "1 1",
-                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); // Only 2 inputs, duplicates
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); 
+        
+         // Many duplicates interspersed (Note that DeleteCommandParser does not detect out of range indexes)
         assertParseFailure(parser, "70 2 3 2 2 1 70",
-                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); // Many duplicates interspersed
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
+        
+        // Duplicates as last few inputs
         assertParseFailure(parser, "2 3 4 4 4",
-                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); // Duplicates as last few inputs
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); 
     }
 }
