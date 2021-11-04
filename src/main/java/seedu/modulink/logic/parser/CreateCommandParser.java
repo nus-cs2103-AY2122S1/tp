@@ -14,7 +14,6 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.Email;
@@ -54,16 +53,16 @@ public class CreateCommandParser implements Parser<CreateCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
         }
 
-        // either duplicate parameters, or unsupported parameters (dealt with in try-catch block)
-        if (ParserUtil.numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
-            if (isDuplicatePrefix(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE)) {
-                StringBuilder duplicatePrefixes = findDuplicatePrefixes(args,
-                        PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE);
-                throw new ParseException(String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
-                        duplicatePrefixes, CreateCommand.MESSAGE_USAGE));
-            }
+        // either duplicate parameters, or unsupported parameters (dealt with in next try-catch block)
+        try {
+            ParserUtil.checkDuplicate(args, argMultimap, ParserUtil.isDuplicatePrefix(args, PREFIX_NAME, PREFIX_ID,
+                    PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE));
+        } catch (ParseException e) {
+            StringBuilder duplicatePrefixes = ParserUtil.findDuplicatePrefixes(args,
+                    PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
+                    PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE);
+            throw new ParseException(String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                    duplicatePrefixes, CreateCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -81,7 +80,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
             return new CreateCommand(person);
 
         } catch (ParseException e) {
-            throw new ParseException(String.format(e.getMessage() + " %s",
+            throw new ParseException(String.format(e.getMessage() + "%s",
                     e.getMessage().startsWith("Unknown prefix(es)") ? CreateCommand.MESSAGE_USAGE : ""));
         }
     }
@@ -107,35 +106,5 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         }
         return missingPrefixList;
     }
-
-    /**
-     * Returns if any prefixes that are duplicates.
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isDuplicatePrefix(String args, Prefix... prefixes) {
-        for (Prefix prefix : prefixes) {
-            String prefixAsString = " " + prefix.getPrefix();
-            if (StringUtil.countMatch(args, prefixAsString) > 1) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns any prefixes that are duplicates.
-     * {@code ArgumentMultimap}.
-     */
-    private static StringBuilder findDuplicatePrefixes(String args, Prefix... prefixes) {
-        StringBuilder duplicatePrefixesList = new StringBuilder();
-        for (Prefix prefix : prefixes) {
-            String prefixAsString = " " + prefix.getPrefix();
-            if (StringUtil.countMatch(args, prefixAsString) > 1) {
-                    duplicatePrefixesList.append(prefix).append(" ");
-            }
-        }
-        return duplicatePrefixesList;
-    }
-
 
 }

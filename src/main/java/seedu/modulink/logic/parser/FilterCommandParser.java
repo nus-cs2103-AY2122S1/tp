@@ -6,8 +6,6 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.modulink.commons.util.StringUtil;
-import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.commands.FilterCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.ModuleContainsKeywordsPredicate;
@@ -15,7 +13,7 @@ import seedu.modulink.model.tag.Mod;
 
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    private static final String MESSAGE_MORE_THAN_ONE_PARAMETER_FORMAT = "Only one module can be specified.";
+    public static final String MESSAGE_MORE_THAN_ONE_PARAMETER_FORMAT = "Only one module can be specified.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
@@ -41,7 +39,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             return new FilterCommand(new ModuleContainsKeywordsPredicate(modList));
 
         } catch (ParseException e) {
-            throw new ParseException(String.format(e.getMessage() + " %s",
+            throw new ParseException(String.format(e.getMessage() + "%s",
                     e.getMessage().startsWith("Unknown prefix(es)") ? FilterCommand.MESSAGE_USAGE : ""));
         }
 

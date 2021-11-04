@@ -144,9 +144,6 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Mod> modSet = new HashSet<>();
         for (String tagName : tags) {
-            if (tagName.contains("/")) {
-                throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
-            }
             modSet.add(parseTag(tagName));
         }
         return modSet;
@@ -222,5 +219,43 @@ public class ParserUtil {
             i++;
         }
         return i;
+    }
+
+    /**
+     * Returns if any prefixes that are duplicates.
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean isDuplicatePrefix(String args, Prefix... prefixes) {
+        for (Prefix prefix : prefixes) {
+            String prefixAsString = " " + prefix.getPrefix();
+            if (StringUtil.countMatch(args, prefixAsString) > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns any prefixes that are duplicates.
+     * {@code ArgumentMultimap}.
+     */
+    public static StringBuilder findDuplicatePrefixes(String args, Prefix... prefixes) {
+        StringBuilder duplicatePrefixesList = new StringBuilder();
+        for (Prefix prefix : prefixes) {
+            String prefixAsString = " " + prefix.getPrefix();
+            if (StringUtil.countMatch(args, prefixAsString) > 1) {
+                duplicatePrefixesList.append(prefix).append(" ");
+            }
+        }
+        return duplicatePrefixesList;
+    }
+
+    static void checkDuplicate(String args, ArgumentMultimap argMultimap, boolean duplicatePrefix)
+            throws ParseException {
+        if (ParserUtil.numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
+            if (duplicatePrefix) {
+                throw new ParseException("error");
+            }
+        }
     }
 }

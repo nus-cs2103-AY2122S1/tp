@@ -1,6 +1,7 @@
 package seedu.modulink.logic.parser;
 
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.modulink.commons.core.Messages.MESSAGE_UNEXPECTED_INPUT_FORMAT;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -42,5 +43,12 @@ public class RemFavCommandParserTest {
         assertParseSuccess(parser, id, new RemFavCommand(id));
     }
 
+    @Test
+    public void parse_nonStudentId_failure() {
+        String expectedMessage = String.format(MESSAGE_UNEXPECTED_INPUT_FORMAT, "random", RemFavCommand.MESSAGE_USAGE);
+
+        // missing name prefix
+        assertParseFailure(parser, "random", expectedMessage);
+    }
 
 }

@@ -1,6 +1,7 @@
 package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.modulink.commons.core.Messages.MESSAGE_DUPLICATE_PREFIX_FORMAT;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
@@ -47,6 +48,18 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
+        // either duplicate parameters, or unsupported parameters (dealt with in next try-catch block)
+        try {
+            ParserUtil.checkDuplicate(args, argMultimap, ParserUtil.isDuplicatePrefix(args, PREFIX_NAME, PREFIX_ID,
+                    PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE));
+        } catch (ParseException e) {
+            StringBuilder duplicatePrefixes = ParserUtil.findDuplicatePrefixes(args,
+                    PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
+                    PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE);
+            throw new ParseException(String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                    duplicatePrefixes, EditCommand.MESSAGE_USAGE));
+        }
+
         try {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -79,10 +92,11 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditCommand(editPersonDescriptor);
         } catch (ParseException e) {
-            throw new ParseException(String.format(e.getMessage() + " %s",
+            throw new ParseException(String.format(e.getMessage() + "%s",
                     e.getMessage().startsWith("Unknown prefix(es)") ? EditCommand.MESSAGE_USAGE : ""));
         }
     }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.

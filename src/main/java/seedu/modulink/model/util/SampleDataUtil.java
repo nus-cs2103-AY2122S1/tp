@@ -30,7 +30,7 @@ public class SampleDataUtil {
                 new HashSet<>(), true),
             new Person(new Name("Alex Yeoh"), new StudentId("A1234567R"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new GitHubUsername("alex-yeoh-y"),
-                new TelegramHandle("alexyeoh"), false,
+                new TelegramHandle("@alexyeoh"), false,
                 getTagSet("CS2103T", "CS2106", "CS2101 need member"), false),
             new Person(new Name("Zachary Lau"), new StudentId("A1234567H"), new Phone("96523487"),
                 new Email("zachlau@example.com"), new GitHubUsername("zachattach"),

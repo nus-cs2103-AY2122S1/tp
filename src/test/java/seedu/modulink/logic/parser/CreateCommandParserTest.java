@@ -1,6 +1,8 @@
 package seedu.modulink.logic.parser;
 
+import static seedu.modulink.commons.core.Messages.MESSAGE_DUPLICATE_PREFIX_FORMAT;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.modulink.commons.core.Messages.MESSAGE_MISSING_PREFIXES_FORMAT;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_AMY;
@@ -60,10 +62,37 @@ public class CreateCommandParserTest {
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
-        // multiple names - last name accepted
+        // multiple names - not accepted
         assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
-                + TAG_DESC_CS2100, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "n/ ", CreateCommand.MESSAGE_USAGE));
+
+        // multiple student IDs - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_AMY + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "id/ ", CreateCommand.MESSAGE_USAGE));
+
+        // multiple phone numbers - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "p/ ", CreateCommand.MESSAGE_USAGE));
+
+        // multiple emails - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_AMY + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "e/ ", CreateCommand.MESSAGE_USAGE));
+
+        // multiple github usernames - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_AMY + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                "github/ ", CreateCommand.MESSAGE_USAGE));
+
+        // multiple telegram handles - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_AMY + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                "tele/ ", CreateCommand.MESSAGE_USAGE));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_CS2100, VALID_TAG_CS2103T)
@@ -85,30 +114,28 @@ public class CreateCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE);
-
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB, String.format(MESSAGE_MISSING_PREFIXES_FORMAT, "n/ ", CreateCommand.MESSAGE_USAGE));
 
         // missing student ID prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_ID_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB, String.format(MESSAGE_MISSING_PREFIXES_FORMAT, "id/ ", CreateCommand.MESSAGE_USAGE));
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
                 + VALID_PHONE_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+                String.format(MESSAGE_MISSING_PREFIXES_FORMAT, "p/ ", CreateCommand.MESSAGE_USAGE));
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
                 + PHONE_DESC_BOB + VALID_EMAIL_BOB,
-                expectedMessage);
+                String.format(MESSAGE_MISSING_PREFIXES_FORMAT, "e/ ", CreateCommand.MESSAGE_USAGE));
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_ID_BOB
                 + VALID_PHONE_BOB + VALID_EMAIL_BOB,
-                expectedMessage);
+                String.format(MESSAGE_MISSING_PREFIXES_FORMAT, "n/ id/ p/ e/ ", CreateCommand.MESSAGE_USAGE));
     }
 
     @Test

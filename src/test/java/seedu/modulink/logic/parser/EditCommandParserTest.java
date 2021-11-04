@@ -1,9 +1,13 @@
 package seedu.modulink.logic.parser;
 
+import static seedu.modulink.commons.core.Messages.MESSAGE_DUPLICATE_PREFIX_FORMAT;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_GITHUB_USERNAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_ID_DESC;
@@ -11,9 +15,12 @@ import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_TELEGRAM_HANDLE_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_GITHUB_USERNAME_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -137,6 +144,43 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).build();
         expectedCommand = new EditCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleFieldsSpecified_success() {
+
+        // multiple names - not accepted
+        assertParseFailure(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "n/ ", EditCommand.MESSAGE_USAGE));
+
+        // multiple student IDs - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_AMY + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "id/ ", EditCommand.MESSAGE_USAGE));
+
+        // multiple phone numbers - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "p/ ", EditCommand.MESSAGE_USAGE));
+
+        // multiple emails - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_AMY + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT, "e/ ", EditCommand.MESSAGE_USAGE));
+
+        // multiple github usernames - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_AMY + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                "github/ ", EditCommand.MESSAGE_USAGE));
+
+        // multiple telegram handles - not accepted
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_AMY + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                "tele/ ", EditCommand.MESSAGE_USAGE));
+
     }
 
 }

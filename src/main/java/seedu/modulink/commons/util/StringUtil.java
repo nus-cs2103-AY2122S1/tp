@@ -2,19 +2,11 @@ package seedu.modulink.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.util.AppUtil.checkArgument;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
-import seedu.modulink.logic.parser.ArgumentTokenizer;
 
 /**
  * Helper functions for handling strings.
