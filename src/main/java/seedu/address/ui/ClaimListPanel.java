@@ -35,7 +35,7 @@ public class ClaimListPanel extends UiPart<Region> {
         this.personList = personList;
         ObservableList<Pair<Claim, Person>> claimList = FXCollections.observableArrayList();
         this.claimList = claimList;
-        personList.addListener(new ListChangeListener() {
+        personList.addListener(new ListChangeListener<Person>() {
             @Override
             public void onChanged(ListChangeListener.Change change) {
                 update();
