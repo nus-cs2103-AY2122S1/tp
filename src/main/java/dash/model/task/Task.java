@@ -43,11 +43,6 @@ public class Task {
         return taskDescription;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-
     public CompletionStatus getCompletionStatus() {
         return completionStatus;
     }
@@ -60,8 +55,27 @@ public class Task {
         return Collections.unmodifiableSet(people);
     }
 
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns a boolean of whether or not this task contains the given person.
+     *
+     * @param person The given person.
+     * @return If the task contains the given person.
+     */
+    public boolean containsPerson(Person person) {
+        for (Person p : getPeople()) {
+            if (p.equals(person)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

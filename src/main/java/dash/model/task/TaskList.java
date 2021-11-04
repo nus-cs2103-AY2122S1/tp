@@ -4,11 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import dash.commons.util.CollectionUtil;
+import dash.model.person.Person;
 import dash.model.task.exceptions.TaskNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -188,6 +191,27 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return indexToEdit;
+    }
+
+    /**
+     * Finds all tasks that contain personToBeReplaced, and replaces that person with newPerson.
+     *
+     * @param personToBeReplaced Person to be replaced.
+     * @param newPerson New Person.
+     */
+    public void replacePeople(Person personToBeReplaced, Person newPerson) {
+        for (Task t : internalList) {
+            if (t.containsPerson(personToBeReplaced)) {
+                Set<Person> newPersonList = new HashSet<>(t.getPeople());
+                newPersonList.remove(personToBeReplaced);
+                newPersonList.add(newPerson);
+
+                Task newTask = new Task(t.getTaskDescription(), t.getCompletionStatus(), t.getTaskDate(),
+                        newPersonList, t.getTags());
+
+                setTask(internalList.indexOf(t), newTask);
+            }
+        }
     }
 
     @Override
