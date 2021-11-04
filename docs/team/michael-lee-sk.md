@@ -37,12 +37,16 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `Enroll`. (Pull requests [#290](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/290)).
-    * Added documentation for About, Introduction, and Quick Start: (Pull requests [#180](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/180)).
+    * [Added documentation for the features `Enroll`](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/290).
+    * [Added documentation for About, Introduction, and Quick Start](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/180).
     * Did cosmetic and functional (and structural) tweaks overall: (Pull requests [#298](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/298), [#220](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/220), [#169](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/169/files)).
   * Developer Guide:
-    * Added implementation details of the 'Enroll' feature: (Pull requests [#153](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153)).
-    * Did cosmetic tweaks to existing documentation of user stories: (Pull requests [#164](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/164)).
-    * Added documentation for User Stories: (Pull requests [#116](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/116)).
+    * [Added implementation details of the 'Enroll' feature](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153).
+    * [Did cosmetic tweaks to existing documentation of user stories](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/164).
+    * [Updated Enroll sequence, activity, and object diagrams](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/164)
+    * [Added documentation for User Stories](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/116).
 * **Community**:
-* PRs reviewed (with non-trivial review comments): [#95](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/95#discussion_r725457630), [#142](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/142#discussion_r730911339).
+  * PRs reviewed (with non-trivial review comments): [#95](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/95#discussion_r725457630), [#142](https://github.com/AY2122S1-    CS2103T-F13-4/tp/pull/142#discussion_r730911339).
+
+* **Tools**:
+  * Utilize SceneBuilder to build GUI Layout
