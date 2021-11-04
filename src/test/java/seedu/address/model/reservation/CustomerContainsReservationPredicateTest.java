@@ -2,41 +2,26 @@ package seedu.address.model.reservation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDateTime;
-import java.util.Set;
+import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
+import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
-import seedu.address.model.table.Table;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CustomerBuilder;
 
 class CustomerContainsReservationPredicateTest {
 
     @Test
     void testEquals() {
-        int numberOfCustomer = 5;
-        LocalDateTime dateTime = LocalDateTime.parse("2020-10-10T19:00");
-
-        Phone phone1 = new Phone("99999999");
-        Table table1 = new Table(5, 10);
-        Remark remark = new Remark("");
-        Set<Tag> tags = Set.of();
-        Reservation reservation1 = new Reservation(phone1, numberOfCustomer, dateTime, table1, remark, tags);
         ReservationList reservationList1 = new ReservationList();
-        reservationList1.add(reservation1);
+        reservationList1.add(ALICE_RESERVATION);
         FilteredList<Reservation> filteredList1 = new FilteredList<>(reservationList1.asUnmodifiableObservableList());
         CustomerContainsReservationPredicate predicate1 = new CustomerContainsReservationPredicate(filteredList1);
 
-        Phone phone2 = new Phone("88888888");
-        Table table2 = new Table(5, 11);
-        Reservation reservation2 = new Reservation(phone2, numberOfCustomer, dateTime, table2, remark, tags);
         ReservationList reservationList2 = new ReservationList();
-        reservationList2.add(reservation2);
+        reservationList2.add(BENSON_RESERVATION);
         FilteredList<Reservation> filteredList2 = new FilteredList<>(reservationList2.asUnmodifiableObservableList());
         CustomerContainsReservationPredicate predicate2 =
                 new CustomerContainsReservationPredicate(filteredList2);
@@ -61,20 +46,12 @@ class CustomerContainsReservationPredicateTest {
 
     @Test
     void test_customerPhoneNumberMatchReservation_returnTrue() {
-        int numberOfCustomer = 5;
-        LocalDateTime dateTime = LocalDateTime.parse("2020-10-10T19:00");
-
-        Phone phone = new Phone("99999999");
-        Table table = new Table(5, 10);
-        Remark remark = new Remark("");
-        Set<Tag> tags = Set.of();
-        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table, remark, tags);
         ReservationList reservationList = new ReservationList();
-        reservationList.add(reservation);
+        reservationList.add(ALICE_RESERVATION);
         FilteredList<Reservation> filteredList = new FilteredList<>(reservationList.asUnmodifiableObservableList());
         CustomerContainsReservationPredicate predicate =
                 new CustomerContainsReservationPredicate(filteredList);
-        Customer customer = new CustomerBuilder().withPhone("99999999").build();
+        Customer customer = new CustomerBuilder().withPhone(ALICE_RESERVATION.getPhone().toString()).build();
 
         // Person's phone number matches the phone number in the reservation
         assertTrue(predicate.test(customer));
@@ -82,16 +59,8 @@ class CustomerContainsReservationPredicateTest {
 
     @Test
     void test_customerPhoneNumberDoesNotMatchReservation_returnFalse() {
-        int numberOfCustomer = 5;
-        LocalDateTime dateTime = LocalDateTime.parse("2020-10-10T19:00");
-
-        Phone phone = new Phone("99999999");
-        Table table = new Table(5, 10);
-        Remark remark = new Remark("");
-        Set<Tag> tags = Set.of();
-        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table, remark, tags);
         ReservationList reservationList = new ReservationList();
-        reservationList.add(reservation);
+        reservationList.add(ALICE_RESERVATION);
         FilteredList<Reservation> filteredList = new FilteredList<>(reservationList.asUnmodifiableObservableList());
         CustomerContainsReservationPredicate predicate =
                 new CustomerContainsReservationPredicate(filteredList);

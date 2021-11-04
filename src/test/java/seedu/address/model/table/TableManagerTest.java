@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalTables.DUMMY_LIST_OF_TABLES;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_1;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_3;
 
 import java.util.List;
 
@@ -12,13 +15,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.reservation.exception.ReservationException;
 
 class TableManagerTest {
-    private Table table1 = new Table(1, 1);
-    private Table table2 = new Table(2, 2);
-    private Table table3 = new Table(3, 3);
-    private Table table4 = new Table(4, 4);
-    private Table table5 = new Table(5, 5);
-    private List<Table> listOfTables = List.of(table1, table2, table3, table4, table5);
-
     @Test
     public void constructor_nullArgument_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new TableManager(null));
@@ -27,20 +23,20 @@ class TableManagerTest {
     @Test
     public void getNumberOfTablesTest() {
         TableList tableList = new TableList();
-        tableList.setTables(listOfTables);
+        tableList.setTables(DUMMY_LIST_OF_TABLES);
         TableManager tableManager = new TableManager(tableList);
 
-        assertEquals(tableManager.getNumberOfTables(), listOfTables.size());
+        assertEquals(tableManager.getNumberOfTables(), DUMMY_LIST_OF_TABLES.size());
     }
 
     @Test
     public void getAvailableTable_validInputs_returnsCorrectTable() throws ReservationException {
         TableList tableList = new TableList();
-        tableList.setTables(listOfTables);
+        tableList.setTables(DUMMY_LIST_OF_TABLES);
         TableManager tableManager = new TableManager(tableList);
 
-        assertEquals(table1, tableManager.getAvailableTable(1, List.of()));
-        assertEquals(table3, tableManager.getAvailableTable(3, List.of()));
+        assertEquals(DUMMY_TABLE_1, tableManager.getAvailableTable(1, List.of()));
+        assertEquals(DUMMY_TABLE_3, tableManager.getAvailableTable(3, List.of()));
         assertThrows(ReservationException.class, () -> tableManager.getAvailableTable(6, List.of()));
     }
 
@@ -72,11 +68,11 @@ class TableManagerTest {
     @Test
     public void equals() {
         TableList tableList = new TableList();
-        tableList.setTables(listOfTables);
+        tableList.setTables(DUMMY_LIST_OF_TABLES);
         TableManager tableManager = new TableManager(tableList);
 
         TableList tableList2 = new TableList();
-        tableList2.setTables(listOfTables);
+        tableList2.setTables(DUMMY_LIST_OF_TABLES);
         TableManager tableManagerCopied = new TableManager(tableList2);
 
         // same object -> returns true
