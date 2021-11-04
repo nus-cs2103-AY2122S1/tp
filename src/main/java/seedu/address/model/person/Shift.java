@@ -196,15 +196,7 @@ public class Shift {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Checks if the input date is already logged.
-     */
-    public boolean isRegistered(LocalDate date) {
-        long val = this.recurrences.stream()
-                .filter(p -> p.getPeriod().contains(date))
-                .count();
-        return val != 0;
-    }
+
 
     /**
      * Makes this shift a working shift.
@@ -389,7 +381,8 @@ public class Shift {
         }
         Shift otherShift = (Shift) other;
         return slot.equals(otherShift.slot) && dayOfWeek.equals(otherShift.dayOfWeek)
-                && this.recurrences.equals(otherShift.recurrences);
+                && this.recurrences.containsAll(otherShift.recurrences)
+                && otherShift.recurrences.containsAll(this.recurrences);
     }
 
     @Override

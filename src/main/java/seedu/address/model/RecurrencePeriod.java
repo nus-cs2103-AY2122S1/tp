@@ -131,4 +131,12 @@ public class RecurrencePeriod extends Period {
     public String toPrintString() {
         return getStartTime() + "-" + getEndTime();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o)
+                && o instanceof RecurrencePeriod
+                && isSameDuration((RecurrencePeriod) o);
+
+    }
 }
