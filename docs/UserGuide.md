@@ -52,7 +52,7 @@ Some example commands you can try:
 * **`person /list`** : Lists all contacts.
 * **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
 * **`person User /create`** : Creates a person named `User`.
-* **`group ShopeeProject /create`** : Creates a group named `ShopeeProject`.
+* **`group Orbital /create`** : Creates a group named `Orbital`.
 * **`person 3 /add g:Orbital`** : Adds the person with index `3` to the group `Orbital`.
 * **`group /list`** : Lists all groups.
 * **`group 1 /note`** : Edits the group note for the group with index number `1`.
