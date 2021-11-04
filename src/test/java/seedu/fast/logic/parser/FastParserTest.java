@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.core.index.Index;
-import seedu.fast.commons.util.sort.SortByName;
+import seedu.fast.logic.parser.sort.SortByName;
 import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;

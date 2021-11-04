@@ -6,9 +6,9 @@ import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.fast.commons.util.sort.SortByAppointment;
-import seedu.fast.commons.util.sort.SortByName;
-import seedu.fast.commons.util.sort.SortByPriority;
+import seedu.fast.logic.parser.sort.SortByAppointment;
+import seedu.fast.logic.parser.sort.SortByName;
+import seedu.fast.logic.parser.sort.SortByPriority;
 import seedu.fast.logic.commands.SortCommand;
 
 public class SortCommandParserTest {
