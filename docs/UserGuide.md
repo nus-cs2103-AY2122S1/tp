@@ -86,9 +86,8 @@ Finally, the help tab provides you with a quick summary of Dash's features and h
 ![Switching Tabs](images/UG-01.png)
 
 Dash uses a Command Line Interface (CLI) to optimize speed. This means that you use mostly your keyboard to interact 
-with Dash, instead of relying on your mouse to click on options.    
-
-[//]: # (TODO: icons for notes abt cli here, talk about how you cant click on tabs here)
+with Dash, instead of relying on your mouse to click on options. For example, you can switch tabs by typing in a 
+command; you cannot do so by clicking the tab.
 
 ![Using the CLI](images/CLITutorialGif.gif)
 
@@ -189,7 +188,7 @@ Make sure you switch to the Contacts tab before using these commands! They will 
 
 </div>
 
-#### Adding a person to the contact list: `add`
+#### Adding a contact: `add`
 
 ![Adding a Contact](images/UG-02.png)
 
@@ -224,7 +223,7 @@ Names should be no longer than 20 characters.
 
 The above screenshot shows how the _Edit_ command can be used to edit the phone number and email of a contact.
 
-:page_with_curl: Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...`
+:page_with_curl: Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 :scroll: Notes:
 * Edits the contact at the specified `INDEX`.
@@ -248,6 +247,8 @@ The above screenshot shows how the _Edit_ command can be used to edit the phone 
 ![Tagging a Contact](images/UG-14.png)
 
 :orange_book: If you want to add new tags to a contact without replacing the old ones, you can use the _Tag_ command.
+
+The above screenshot shows how the _Tag_ command can be used to tag a contact with the tag "groupmate".
 
 :page_with_curl: Format: `tag INDEX t/TAG...`
 
@@ -289,12 +290,13 @@ The above screenshot shows how the _Find_ command can be used to search for all 
 
 :scroll: Notes:
 * The search is case-insensitive. e.g. `find e/hans@gmail.com` will match `Hans@gmail.com`.
-* The order of the keywords does not matter. e.g. `find a/tampines 123` will match Blk 123 Tampines.
+* The order of the keywords does not matter. e.g. `find a/tampines 111` will match `Blk 111 Tampines Street 11, #02-345`.
+* At least one of the fields must be present.
 * Contacts matching all keywords will be returned (i.e. AND search). 
   * e.g. `find n/Hans Bo` will return only `Hans Bo` and `Hans Bo the Second`. It will not return `Hans Gruber` or
     `Bo Yang`.
-  * e.g. `find p/86235343 t/CS2101` will return only contacts who both have the given phone number AND the tag `CS2101`.
-    It will not return contacts with different phone numbers, even if they both contain the tag `CS2101`.
+  * e.g. `find p/86235343 t/CS2101` will return only contacts who have both the phone number `86235343` AND the tag 
+    `CS2101`. It will not return contacts with different phone numbers, even if they both have the tag `CS2101`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -306,8 +308,9 @@ The above screenshot shows how the _Find_ command can be used to search for all 
 
 #### Listing all contacts: `list`
 
-:orange_book: After you've filtered your contacts using [the _Find_ command](#Finding all contacts matching given details), 
-if you want to view all of them again, you can use the _List_ command.
+:orange_book: After you’ve filtered your contacts using 
+[the _Find_ command](#finding-all-contacts-matching-given-details-find), if you want to view all of them again, you can 
+use the List command.
 
 :page_with_curl: Format: `list`
 
@@ -328,58 +331,96 @@ This command is **irreversible** and your contact list will be **permanently** d
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <u>Tasks (When on tasks tab)</u>
+### <u>Tasks</u>
+
+<div markdown="block" class="alert alert-info">
+
+**:warning: Command behaviour:**
+Make sure you switch to the Tasks tab before using these commands! They will not work otherwise.
+
+##### **:information_source: Notes on the Contacts panel:**
+On the Tasks tab, there is a Contacts panel on the right that shows a simplified view of your Contacts tab. If you 
+filtered your contacts by using the _Find_ command before switching to the Tasks tab, the Contacts panel shows the same 
+filtered contact list. In this way, if you have a lot of contacts, you can maintain a focused view of the current people
+of interest and more easily assign them to tasks.
+
+</div>
+
+#### Adding a task: `add`
 
 ![Adding a Task](images/UG-03.png)
-#### Adding a task: [add]
 
-:orange_book: If you want to add a task to the task list, the _Add Command_ adds a task to the task list. Only task `DESCRIPTION` is 
+:orange_book: If you want to add a task to the task list, you can use the _Add_ command. Only task's description is 
 compulsory during creation. 
 
-The above screenshot shows an example of how you could use the _Add Command_ to add a task
-titled _"Submit PR"_ that is due on _"1 Nov 2021, 5:00 PM"_, tagged with _"Groupwork"_ and assigned to _"Alex Yeoh"_.
+The above screenshot shows how you can use the _Add_ command to add a task with the following details to your task list:
+* Description: _Submit PR_
+* Date and Time: _1 Nov 2021, 5:00 PM_
+* Tag(s): _Groupwork_
+* Assigned Person(s): _Alex Yeoh_
 
-:page_with_curl: Format: `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
+:page_with_curl: Format: `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
-* An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
-* Assigning people to a task uses the current index of the person on the contacts list, which is shown
-  on the side panel to the right.
+* An explanation of how Date and Time formats work can be found 
+  [here](#information_source-notes-about-specifying-date-and-time).
+* If you want to assign people to the task, the people to be assigned to the task (assignees) are specified with
+  `PERSON_INDEX`.  
+  * You can assign multiple people to the same task at once.
+  * The `PERSON_INDEX` refers to the position of the person in the
+    [Contacts panel](#information_source-notes-on-the-contacts-panel) as indicated by the number next to their name.
+  * Any specified `PERSON_INDEX` must be a positive integer (1, 2, 3,...).
 
 --------------------------------------------------------------------------------------------------------------------
+
+#### Editing task details: `edit`
 
 ![Editing a Task](images/UG-05.png)
-#### Editing task details: [edit]
 
-:orange_book: If you want to modify certain details about a task in your task list, you can use the _Edit Command_ to replace the 
-details of the task at the given `INDEX` with the new details. 
+:orange_book: If you want to modify the details of a specific task, you can use the _Edit_ command.
 
-The above screenshot shows the before and after of using 
-an _Edit Command_ to edit a task's date/time and assignee.
+The above screenshot shows how the _Edit_ command can be used to edit the date/time and assignee of a task.
 
-:page_with_curl: Format: `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
+:page_with_curl: Format: `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
-* Edits the specified task fields at the specified `INDEX`
-  * The `INDEX` refers to the index number shown in the task list
-  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
+* Edits the task at the specified `INDEX`.
+  * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to 
+    its description.
+  * The `INDEX` must be a positive integer (1, 2, 3,...).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the task will be removed i.e. adding of tags is not cumulative.
-  * To add tags without removing existing tags, refer to the Tag command in the [next section.](#tagging-a-task-tag)
-* You can remove all the task’s tags by typing `t/` without specifying any tags after it.
-* An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
-* Assigning people to a task uses the current index of the person on the contacts list, which is shown
-  on the side panel to the right.
+* When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
+  * To add tags without removing existing tags, refer to the Tag command in the [next section](#tagging-a-task-tag).
+* An explanation of how Date and Time formats work can be found 
+  [here](#information_source-notes-about-specifying-date-and-time).
+* If you want to modify the assignees of the task, new assignees are specified with `PERSON_INDEX`.
+  * You can assign multiple people to the same task at once.
+  * The `PERSON_INDEX` refers to the position of the person in the 
+    [Contacts panel](#information_source-notes-on-the-contacts-panel) as indicated by the number next to their name.
+  * Any specified `PERSON_INDEX` must be a positive integer (1, 2, 3,...).
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: You can remove all tags from a task by typing `edit INDEX t/`.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
+#### Tagging a task: `tag`
+
 ![Tagging a Task](images/UG-10.png)
-#### Tagging a task: [tag]
 
-:orange_book: The _Tag Command_ lets you add extra tags to a task without wiping/replacing the old tags.
+:orange_book: If you want to add more tags to a task without replacing the old tags, you can use the _Tag_ command.
 
-:page_with_curl: Format: `tag INDEX [t/TAG]...`
+The above screenshot shows how the _Tag_ command is used to add the tag "urgent" to the task "Submit CS2100 Assignment
+by 23:59".
+
+:page_with_curl: Format: `tag INDEX t/TAG...`
+
+:scroll: Notes:
+* At least one tag must be provided.
 
 <div markdown="block" class="alert alert-info">
 
@@ -390,153 +431,152 @@ Tag names are only limited to 20 characters!
 
 --------------------------------------------------------------------------------------------------------------------
 
+#### Assigning people to a task: `assign`
+
 ![Assigning people to a Task](images/UG-11.png)
-#### Assigning people to a task: [assign]
 
-:orange_book: The _Assign Command_ lets you add extra assignees to a task without wiping/replacing the old assignees.
+:orange_book: If you want to assign more people to a task without replacing the old assignees, you can use the _Assign_ 
+command.
 
-:page_with_curl: Format: `assign INDEX p/PERSON INDEX...`
+The above screenshot shows how the _Assign_ command is used to assign "Alex Yeoh" to the task "Submit CS2100 Assignment
+by 23:59". 
+
+:page_with_curl: Format: `assign INDEX p/PERSON_INDEX...`
 
 :scroll: Notes:
-* Assigning people to a task uses the current `INDEX` of the person on the contacts list, which is shown
-  on the side panel to the right.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about assigning people:**<br>
-
-Think of assigning like tags but meant for people's names instead. Since assignees behave like tags, any changes to the 
-person's name in contacts will not be reflected in the assignees of a task. If you would like to change the assignees 
-names to a task, you can delete the task and re-add it with the updated details.
-
-</div>
-
+* Assigns people, specified with `PERSON_INDEX`, to the task at the specified `INDEX`.
+  * You can assign multiple people to the same task at once.
+  * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to its 
+    description.
+  * The `PERSON_INDEX` refers to the position of the person in the
+    [Contacts panel](#information_source-notes-on-the-contacts-panel) as indicated by the number next to their name.  
+  * The `INDEX` and `PERSON_INDEX` must be positive integers (1, 2, 3,...).
+  
 --------------------------------------------------------------------------------------------------------------------
 
+#### Completing a task: `complete`
+
 ![Completing a Task](images/UG-12.png)
-#### Completing a task: [complete]
 
-:orange_book: If you have completed a task on the task list, you can indicate that it is completed by using the _Complete Command_ and 
-marking the task at the chosen index as complete. 
+:orange_book: If you have completed a task, you can mark it as completed by using the _Complete_ command.
 
-As per the above screenshot, completed tasks are greyed out and have
-a green tick next to their description (as opposed to a red tick for incomplete tasks).
+The above screenshot shows how a completed task has its text greyed out and has a green tick next to its description. 
+An incomplete task has a red tick instead.
 
 :page_with_curl: Format: `complete INDEX`
 
 :scroll: Notes:
 * Completes the task at the specified `INDEX`.
-  * The `INDEX` refers to the index number shown in the task list.
-  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
+  * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to its 
+    description.
+  * The `INDEX` must be a positive integer (1, 2, 3,...).
+
+:scroll: Notes:
+* You cannot 'un-complete' a task. 
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Deleting a task: [delete]
+#### Deleting a task: `delete`
 
-:orange_book: Deletes the task at the chosen index.
+:orange_book: If you want to delete a task, you can use the _Delete_ command.
 
 :page_with_curl: Format: `delete INDEX`
 
 :scroll: Notes:
 * Deletes the task at the specified `INDEX`.
-  * The `INDEX` refers to the index number shown in the task list.
-  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
-
+  * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to 
+    its description.
+  * The `INDEX` must be a positive integer (1, 2, 3,...).
+  
 --------------------------------------------------------------------------------------------------------------------
 
-![Finding a Task](images/UG-08.png)
-#### Finding task through task description: [find]
-
-:orange_book: If you want to find a task through its description, the _Find Command_ can find all tasks with descriptions that match the 
-search term. 
-
-The above screenshot demonstrates how you can use the _Find Command_ to find all tasks in your task list with 
-the word "PR" in its task description.
-
-:page_with_curl: Format: `find DESCRIPTION`
-
-:scroll: Notes:
-* The search is case-insensitive. e.g. `find job` will match `Job`.
-* The order of the keywords does not matter. e.g. `find home work` will match `work home`
-* Only the description field is searched.
-* Task descriptions matching all keywords will be returned (i.e. AND search).
-  e.g. `Math Quiz` will return only `Math Quiz` and `Math Quiz 8`.
-  It will not return `Math Assignment`, `GEQ Quiz`, or `This doesn't matter`.
-
---------------------------------------------------------------------------------------------------------------------
+#### Finding all tasks matching given details: `find`
 
 ![Finding a Task](images/UG-07.png)
-#### Finding task through searching a specific field: [find]
 
-:orange_book: Additionally, you can find tasks through other parameters with the _Find Command_ as it can also find all tasks whose 
-parameter (date/time, people, etc) matches the search term. 
+:orange_book: If you want to filter your tasks by tags, assigned people, or any other details, 
+you can use the _Find_ command.
 
-The above screenshot is an example of how you can use the
-_Find Command_ to find for all tasks that occur on 07:00 PM.
+The above screenshot shows how the _Find_ command can be used to search for all tasks marked "07:00 PM".
 
-:page_with_curl: Format: `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
+:page_with_curl: Format: `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
-* At least one of the fields must be present.
 * The search is case-insensitive. e.g `find t/HOMEWORK` will match the `homework` tag.
-* Tasks matching all keywords will be returned (i.e. AND search). e.g. `find dt/1900 t/homework` will return
-  only tasks which both have time `1900` AND the tag `homework`.
-  It will not return contacts with different times, even if they both contain the tag `homework`.
+* The order of the keywords does not matter. e.g. `find d/lectures ST` will match `ST Lectures`.
+* At least one of the fields must be present.
+* Tasks matching all keywords will be returned (i.e. AND search). 
+  * e.g. `find d/Math Quiz` will return only `Math Quiz` and `Math Quiz 8`. 
+    It will not return `Math Assignment` or `GEQ Quiz`.
+  * e.g. `find dt/1900 t/homework` will return only tasks which have both the time `1900` AND the tag `homework`.
+  It will not return tasks with different times, even if they both have the tag `homework`.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: For added convenience, you can find tasks by their descriptions by typing just `find DESCRIPTION` 
+without the prefix `d/`.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
+#### Finding all upcoming tasks: `upcoming`
+
 ![Finding upcoming Tasks](images/UG-13.png)
-#### Find all upcoming tasks: [upcoming]
 
-:orange_book: Finds all incomplete tasks whose Date/Time are after the current Date/Time (as determined locally on your 
-computer). These tasks will be sorted chronologically, with tasks that are closer to the current Date/Time first.
+:orange_book: If you want to view all of your upcoming tasks, you can use the _Upcoming_ command. Upcoming tasks are
+incomplete tasks whose Date/Time are after the current Date/Time.
 
-The above screenshot demonstrates how the _Upcoming Command_ will show incomplete tasks with a Date/Time that is after 
-the current Date/Time on your computer. These tasks are sorted chronologically as described above.
+The above screenshot shows how the _Upcoming_ command is used to view all incomplete tasks after the current Date/Time.
+In this example, it was 25 October 2021, 09:16 PM.
 
 :page_with_curl: Format: `upcoming`
 
 :scroll: Notes:
-* An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
+* Upcoming tasks will be listed in chronological order.
+* The current Date/Time is determined locally by your system clock.
+* An explanation of how Date and Time formats work can be found 
+  [here](#information_source-notes-about-specifying-date-and-time).
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Listing all tasks: [list]
+#### Listing all tasks: `list`
 
-:orange_book: Clears the search results of a find/upcoming command, showing all tasks.
+:orange_book: After you’ve filtered your tasks using 
+[the _Find_ command](#finding-all-tasks-matching-given-details-find) or 
+[the _Upcoming_ command](#finding-all-upcoming-tasks-upcoming), if you want to view all of them again, you can
+use the List command.
 
 :page_with_curl: Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Clearing completed tasks: [cleardone]
+#### Clearing completed tasks: `cleardone`
 
-:orange_book: Deletes all completed tasks.
+:orange_book: If you want to delete all of your completed tasks, you can use the _Cleardone_ command.
 
 :page_with_curl: Format: `cleardone`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Clearing all tasks: [clear]
+#### Clearing all tasks: `clear`
 
-:orange_book: Deletes all tasks.
+:orange_book: If you want to delete all of your tasks, you can use the _Clear_ command.
 
 :page_with_curl: Format: `clear`
 
 <div markdown="block" class="alert alert-info">
 
 **:warning: Clearing all tasks:**<br>
-This command is irreversible and all tasks from the list will be deleted with no way of recovering them.
+This command is **irreversible** and your task list will be **permanently** deleted.
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### <u>Handling Date and Time of tasks</u>
-
 <div markdown="block" class="alert alert-info">
-   
-**:information_source: Notes about specifying date and time:**<br>
+
+##### **:information_source: Notes about specifying date and time:**
 A task can optionally have a Date, or both a Date and a Time.
 
 `add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
@@ -555,9 +595,7 @@ A task can optionally have a Date, or both a Date and a Time.
 If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
 e.g. if you specify `dt/12/02/2021 dt/1900`, only `dt/1900` will be taken.
 
-</div>
-
-#### Date Formats
+**Date Formats**
 
 Format | Example
 --------|------------------
@@ -567,13 +605,14 @@ Format | Example
 **yyyy-MM-dd** | `2021-10-02`
 **dd MMM yyyy** | `02 Oct 2021` (First letter of Month must be capitalised)
 
-#### Time Formats
+**Time Formats**
 
 Format | Example
 --------|------------------
 **HHmm** | `1300` (01:00 PM in 24-hour notation)
 **hh:mm a** | `10:00 PM`, `02:00 AM` (AM and PM must be capitalised)
 
+</div>
 
 ## <u>Command summary</u>
 
@@ -591,11 +630,10 @@ Action | Format
 Action | Format
 --------|------------------
 **Add** | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...`
-**Tag** | `tag INDEX [t/TAG]...`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+**Tag** | `tag INDEX t/TAG...`
 **Delete** | `delete INDEX`
-**Find** | `find NAME`
-**Find** | `find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 **List** | `list`
 **Clear** | `clear`
 
@@ -603,15 +641,15 @@ Action | Format
 
 Action | Format
 --------|------------------
-**Add** | `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
-**Edit** | `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
-**Tag** | `tag INDEX [t/TAG]...`
-**Assign** | `assign INDEX [p/PERSON INDEX]...`
+**Add** | `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
+**Edit** | `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
+**Tag** | `tag INDEX t/TAG...`
+**Assign** | `assign INDEX p/PERSON_INDEX...`
 **Complete** | `complete INDEX`
 **Delete** | `delete INDEX`
-**Find** | `find DESCRIPTION`
-**Find** | `find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
+**Find** | `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 **Upcoming** | `upcoming`
 **List** | `list`
+**Clear Done** | `cleardone`
 **Clear** | `clear`
 
