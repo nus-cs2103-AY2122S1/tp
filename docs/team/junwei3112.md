@@ -11,23 +11,28 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 Given below are my contributions to the project:
 
 * **Code contributed**:
-  * My contributions to the team's code base can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=W16-3&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabAuthor=JunWei3112&tabRepo=AY2122S1-CS2103T-W16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&tabType=authorship).
+  * My contributions to the code base can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=W16-3&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabAuthor=JunWei3112&tabRepo=AY2122S1-CS2103T-W16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&tabType=authorship).
 
 * **Enhancements implemented**:
   * Implemented the functionality of the `paid` and `unpaid` commands for v1.2.
-  * Set up the storage system for TutorAid to store and fetch `Lesson` objects from memory
-    * Worked closely with the `Storage` and `Model` components to store, retrieve and handle `Lesson` objects.
-    * It was quite hard to implement since there were no concrete methods implemented at the time to add lessons to TutorAid. As such, I also wrote extensive test cases to make sure the storage system works properly.
-  * Implemented the commands to add and delete lessons from TutorAid.
+    * Relevant PRs: [#63](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/63)
+    * Allows private tutors to set and unset payment status of their students.
+    * Removed from TutorAid for v1.4 due to its limited functionality.
+  * Set up the storage system for TutorAid to store and fetch `Lesson` objects from memory.
+    * Relevant PRs: [#90](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/90).
+    * Worked closely with the `Storage` and `Model` components to implement storing, retrieving and handling of `Lesson` objects within TutorAid.
+    * It was quite hard to implement since there were no concrete methods implemented to modify and view lessons in TutorAid at the time. As such, I wrote extensive test cases, alongside my functional code, to make sure that the storage system worked properly.
+  * Implemented the functionality of the `add -l` and `del -l` commands.
+    * Relevant PRs: [#119](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/119).
+    * Allows private tutors to add and delete lessons with the specified lesson details.
 
 * **Contributions to the UG**:
   * Added documentation for the following features in the `Features` and `Command summary` sections
     * `list`
-    * `paid`, `unpaid` (which were removed for v1.4)
     * `add -l`, `del -l`
 
 * **Contributions to the DG**:
-  * Updated the documentation and the class diagram for the `Storage` component under `Architecture`.
+  * Updated the documentation and class diagram for the `Storage` component under `Architecture`.
   * Added documentation and UML diagrams for the implementation details of `add -l`.
   * Contributed to the following sections:
     * Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
@@ -35,7 +40,7 @@ Given below are my contributions to the project:
 * **Contributions to team-based tasks**:
   * Set up the GitHub team organisation and repository.
   * Set up Codecov.
-  * In charge of maintaining the issue tracker.
+  * In charge of maintaining the issue tracker and milestones.
   * Update `index.md` to fit TutorAid.
 
 * **Review/mentoring contributions**:
@@ -47,4 +52,4 @@ Given below are my contributions to the project:
       [#122](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/122), [#123](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/123), [#125](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/125), [#129](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/129), [#136](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/136), [#142](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/142), [#143](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/143)
 
 * **Contributions beyond the project team**:
-  * Reported 11 bugs for another team during the PE dry run.
+  * Reported 11 bugs for AY2122S1-CS2103-T11-1's application during the Practical Exam Dry Run.
