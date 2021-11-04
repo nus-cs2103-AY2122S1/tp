@@ -34,7 +34,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `connections.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
+1. Download the latest `CONNECTIONS.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home directory_ for your CONNECTIONS.
 
@@ -410,10 +410,6 @@ CONNECTIONS data are saved as a JSON file `[JAR file location]/data/CONNECTIONS.
 If your changes to the data file makes other its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
 If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (empty for Birthday and false for Pin). Other data will be recovered. 
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
