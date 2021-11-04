@@ -2,11 +2,15 @@ package seedu.programmer.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.testutil.SerializableTestClass;
@@ -56,5 +60,16 @@ public class JsonUtilTest {
     public void getJsonData_invalidJson_returnsNull() {
         JSONArray result = JsonUtil.getJsonData(INVALID_JSON);
         assertNull(result);
+    }
+
+    @Test
+    public void writeJsonToCsv_invalidJsonData_throwsException() throws JSONException {
+        // Construct sample json array with sample data
+        String testFileName = "writeJsonTest.csv";
+        JSONArray jsonArray = new JSONArray(new int[]{1, 2, 3});
+        File testCsvFile = new File(testFileName);
+        JsonUtil.writeJsonToCsv(jsonArray, testCsvFile);
+        assertTrue(new File(testFileName).isFile()); // Check if file was created
+        testCsvFile.delete();
     }
 }
