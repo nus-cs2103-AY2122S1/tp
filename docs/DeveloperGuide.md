@@ -2,38 +2,13 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Contents
-1. [Acknowledgements](#acknowledgements)
-2. [Setting up, getting started](#setting-up-getting-started)
-3. [Design](#design)
-4. [Architecture](#architecture)
-   - [UI component](#ui-component)
-   - [Logic component](#logic-component)
-   - [Model component](#model-component)
-   - [Storage component](#storage-component)
-   - [Common classes](#common-classes)
-5. [Implementation](#implementation)
-   - [Add progress feature](#add-progress-feature)
-   - [Add student feature](#add-student-feature)
-   - [Delete student feature](#delete-student-feature)
-   - [View student/lesson feature](#view-studentlesson-feature)
-   - [Card-like UI Elements](#card-like-ui-elements)
-   - [Set/Unset payment made feature](#setunset-payment-made-feature)
-   - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
-   - [[Proposed] Data archiving](#proposed-data-archiving)
-7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-8. [Appendix: Requirements](#appendix-requirements)
-   - [Product Scope](#product-scope)
-   - [User stories](#user-stories)
-   - [Use cases](#use-cases)
-   - [Non-Functional Requirements](#non-functional-requirements)
-   - [Glossary](#glossary)
-9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-   - [Launch and shutdown](#launch-and-shutdown)
-   - [Deleting a person](#deleting-a-person)
-   - [Saving data](#saving-data)
 
---------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+{:.no_toc}
+* Table of Contents
+{:toc}
+
+***
 
 ## **Acknowledgements**
 
@@ -45,7 +20,7 @@ title: Developer Guide
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+***
 
 ## **Design**
 
@@ -142,24 +117,23 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+![](images/ModelClassDiagram.png)
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the student and lesson data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object) and `Lesson` objects (which are contained in a `UniqueLessonList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This is true for `Lesson` objects too.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+Each `Lesson` and `Student` object consists of fields as shown in the class diagrams below.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![](images/StudentClassDiagram.png)
+![](images/LessonClassDiagram.png)
 
-</div>
-
+Note that the `Student` and `Lesson` classes have dependencies through `LessonName` and `StudentName`, rather than storing `Lesson` and `Student` directly. This should be addressed in subsequent iterations to improve the use of OOP. It suffices for now as this information in the model is only used by the `Ui` to display the names of students or lessons.
 
 ### Storage component
 

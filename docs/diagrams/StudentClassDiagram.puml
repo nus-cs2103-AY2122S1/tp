@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+
+Class Student
+Class StudentName
+Class StudentPhone
+Class ParentName
+Class ParentPhone
+Class Progress
+Class LessonName
+
+Student *--> "1"StudentName
+Student *--> "0..1"StudentPhone
+Student *--> "0..1"ParentName
+Student *--> "0..1"ParentPhone
+Student *--> "0..10"Progress
+Student -right-> "*"LessonName
+
+
+@enduml
