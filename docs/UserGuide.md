@@ -115,7 +115,7 @@ Exits the program and saves your data.
 
 Format: `exit`
 
-#### _Exporting data_ :
+####<a name = "exporting-data"></a> _Exporting data_ :
 
 Exports all the data of Notor into a CSV file. The exported CSV will be located in the same directory as Notor.
 
@@ -298,7 +298,7 @@ Advanced user Format: `p (INDEX) /ct`
 * Please specify at least one tag to be added.
 
 
-### Archiving People
+###<a name = "archiving-people"></a> Archiving People
 Archiving people allows you to keep your Notor clean, without losing your information. You can use this in conjunction with the [Export](#exporting-data) command to make sure your data is safe. You can restore archived mentees at any time.
 
 #### _Archiving a person_ :
@@ -419,7 +419,7 @@ Sometimes, you will want to view all people, groups, subgroups to understand wha
 
 ### List
 
-List can show all persons, groups, subgroups which you have added to Notor. It can also list archived persons: see [Archiving People](#Archiving People).
+List can show all persons, groups, subgroups which you have added to Notor. It can also list archived persons: see [Archiving People](#archiving-people).
 
 #### _Listing all persons_ :
 
