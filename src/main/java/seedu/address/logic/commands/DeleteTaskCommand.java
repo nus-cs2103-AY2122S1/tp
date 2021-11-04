@@ -22,7 +22,7 @@ import seedu.address.model.task.Task;
 public class DeleteTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Removed %1$d %2$s from %3$s";
-    public static final String COMMAND_WORD = "deletetask";
+    public static final String COMMAND_WORD = "rm";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task, specified by the TASKINDEX, from person "
             + "identified by the index number used in the displayed person list.\n"

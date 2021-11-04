@@ -38,7 +38,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addTask() throws Exception {
-        String command = AddTaskCommand.COMMAND_WORD + " 1 " + PREFIX_TASK_DESCRIPTION + "blob ";
+        String command = AddCommand.COMMAND_WORD + " 1 " + PREFIX_TASK_DESCRIPTION + "blob ";
         String moreTask = PREFIX_TASK_DESCRIPTION + "blob2";
         assertTrue(parser.parseCommand(command) instanceof AddTaskCommand);
         assertTrue(parser.parseCommand(command + moreTask) instanceof AddTaskCommand);
