@@ -1529,6 +1529,45 @@ Character limit:
    
     4. **Other invalid commands to try**: `ua`, `ua x`(where x is larger than the list size), `ua y`(where y is an index with an appointment). <br>
        **Expected**: Similar to previous testcase (in Point 3).
+       
+### Viewing help
+1. Opening a new help window via command
+    1. **Prerequisites**: No help window is open currently.
+
+    2. **Test Case**: `help add` <br>
+       **Expected**: A help window will open on top of the main window. It should display the `Add` command usage page.
+
+    3. **Test Case**: `help priority tag` <br>
+       **Expected**: The existing help window will focus on top of the main window. It should display the `Priority Tag` 
+       command usage page.
+
+    4. **Test Case**: `help test` <br>
+       **Expected**: The existing help window will focus on top of the main window. It should display the default command usage page
+       as an invalid HELP_TOPIC was used.
+
+    5. **Other invalid commands to try**: `help` <br>
+       **Expected**: Similar to previous testcase (in Point 4)
+
+
+### Viewing stats
+1. Opening a new stats window
+    1. **Prerequisites**: No stats window is open currently. No new persons are added to FAST.
+
+    2. **Test Case**: Open the stats window (with `F2` or with the menu item) <br>
+       **Expected**: A stats window will open on top of the main window. There should be 2 pie charts displayed, one for
+       Priority Tags and one for Investment Plan Tags and the counts should tally with the data in FAST.
+
+    3. **Test Case**: Add a new person with a Priority Tag, then open the stats window again.
+       **Expected**: The stat window will focus on top of the main window. The pie charts should be updated to include
+       the new person's data.
+
+    4. **Test Case**: `clear` the persons in FAST then open the stats window.
+       **Expected**: The existing stats window will focus on top of the main window. There should be no pie charts displayed
+       and there should be a message at the side informing the user that there are no Tags detected.
+
+    5. **Other invalid commands to try**: Editing the Tags instead of adding a new persons <br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
 
 ### Saving data
 
