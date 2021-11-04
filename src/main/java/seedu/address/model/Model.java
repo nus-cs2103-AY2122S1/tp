@@ -129,6 +129,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Removes the given person from all allocations without deleting them.
+     * The person must exist in the address book.
+     */
+    void removePersonFromAllocations(Person target);
+
+    /**
      * Deletes the given facility.
      * The facility must exist in SportsPA.
      */

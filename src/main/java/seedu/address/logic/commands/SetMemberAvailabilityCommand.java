@@ -63,6 +63,7 @@ public class SetMemberAvailabilityCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
             names.append(lastShownList.get(i.getZeroBased()).getName());
             names.append(", ");
+            model.removePersonFromAllocations(personToEdit);
         }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
