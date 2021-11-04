@@ -42,6 +42,9 @@ public class UnmarkCommand extends MarkingCommand {
 
         boolean unmarkingUnmarkedPerson;
         for (Index checkIndex : targetIndexes) {
+            if (checkIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
             Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
             unmarkingUnmarkedPerson = model.checkForMarkedPerson(personToCheck);
             if (unmarkingUnmarkedPerson) {
@@ -50,9 +53,6 @@ public class UnmarkCommand extends MarkingCommand {
         }
 
         for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
             Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
             model.unmarkPerson(personToUnmark);
             result.append(personToUnmark);

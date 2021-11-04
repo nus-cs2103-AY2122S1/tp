@@ -42,6 +42,9 @@ public class MarkCommand extends MarkingCommand {
 
         boolean markingMarkedPerson;
         for (Index checkIndex : targetIndexes) {
+            if (checkIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
             Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
             markingMarkedPerson = model.checkForMarkedPerson(personToCheck);
             if (markingMarkedPerson) {
@@ -50,9 +53,6 @@ public class MarkCommand extends MarkingCommand {
         }
 
         for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
             Person personToMark = lastShownList.get(targetIndex.getZeroBased());
             model.markPerson(personToMark);
             result.append(personToMark);
