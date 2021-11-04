@@ -4,13 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class RoleReqStorage {
 
     public static final String FILEPATH = "data/RoleReq.txt";
     private static File file = new File(FILEPATH);
-    private static int[] requirements = new int[]{0, 0, 0}; // bartender, floor, kitchen
+
+    // The role name and the requirements have corresponding indexes.
+    // For example, "bartender" is in roleNames[0], and its role requirements corresponds to requirements[0]
+    private static final String[] roleNames = new String[]{"bartender", "floor", "kitchen"};
+    private static final int[] DEFAULT_REQUIREMENTS = new int[]{0, 0, 0};
+    private static int[] requirements = new int[]{0, 0, 0};
 
     /**
      * Loads the existing file for the list of requirements if it exists.
@@ -87,13 +93,7 @@ public class RoleReqStorage {
     }
 
     private static int getNumFromRole(String role) {
-        if (role.equals("bartender")) {
-            return 0;
-        } else if (role.equals("floor")) {
-            return 1;
-        } else { // checks are done in setRoleReqCommand
-            return 2;
-        }
+        return Arrays.asList(roleNames).indexOf(role);
     }
 
     /**
@@ -129,9 +129,21 @@ public class RoleReqStorage {
      * @return String representation of the current Role Requirements.
      */
     public static String getRoleReqs() {
-        return "Bartenders: " + requirements[0] + "\n"
-                + "Floor: " + requirements[1] + "\n"
-                + "Kitchen: " + requirements[2] + "\n";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < roleNames.length; i++) {
+            result.append(roleNames[i] + ": " + requirements[i] + "\n");
+        }
+        return result.toString();
+    }
+
+    /**
+     * Resets the timings to the default timings.
+     *
+     * @throws FileNotFoundException If the file cannot be found.
+     */
+    public static void reset() throws FileNotFoundException {
+        requirements = DEFAULT_REQUIREMENTS;
+        update();
     }
 }
 
