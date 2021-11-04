@@ -21,6 +21,8 @@ import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -100,13 +102,13 @@ public class EditCommand extends Command {
         ClassId updatedClassId = editStudentDescriptor.getClassId().orElse(studentToEdit.getClassId());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Lab updatedLab = editStudentDescriptor.getLab().orElse(null);
-        Integer updatedResult = null;
+        LabResult updatedResult = null;
         if (updatedLab != null) {
             updatedResult = editStudentDescriptor.getResult().orElse(null);
             LabNum labNum = updatedLab.getLabNum();
-            Integer currTotalScore;
+            LabTotal currTotalScore;
             try {
-                currTotalScore = studentToEdit.getLab(labNum).getTotalScore();
+                currTotalScore = studentToEdit.getLab(labNum).getLabTotal();
             } catch (NullPointerException e) { //when getLab does not find anything
                 throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
             }
@@ -150,7 +152,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private ClassId classId;
         private Email email;
-        private Integer result;
+        private LabResult result;
         private Lab lab;
         private ObservableList<Lab> labList;
 
@@ -207,7 +209,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setLab(Lab lab, Integer result) {
+        public void setLab(Lab lab, LabResult result) {
             this.lab = lab;
             this.result = result;
         }
@@ -220,7 +222,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(lab);
         }
 
-        public Optional<Integer> getResult() {
+        public Optional<LabResult> getResult() {
             return Optional.ofNullable(result);
         }
 

@@ -8,12 +8,14 @@ public class Lab implements DisplayableObject {
             "Both Lab Number and Score to be should be provided together.";
     public static final String MESSAGE_LAB_NUMBER_CONSTRAINT = "Lab number should be a positive integer.";
     public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
-    private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
+    public static final String MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT =
+            "Lab total score should be a positive integer.";
+    public static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
 
 
     private LabNum labNum;
-    private Integer actualScore;
-    private Integer totalScore;
+    private LabResult actualScore;
+    private LabTotal totalScore;
 
     /**
      * Constructs a marked Lab Object.
@@ -21,7 +23,7 @@ public class Lab implements DisplayableObject {
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
      * */
-    public Lab(LabNum labNum, Integer actualScore, Integer totalScore) {
+    public Lab(LabNum labNum, LabResult actualScore, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
         this.actualScore = actualScore;
@@ -32,10 +34,10 @@ public class Lab implements DisplayableObject {
      * Constructs a unmarked Lab Object.
      * @param labNum the labNum of the lab
      * @param totalScore the total score */
-    public Lab(LabNum labNum, Integer totalScore) {
+    public Lab(LabNum labNum, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
-        this.actualScore = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
+        this.actualScore = new LabResult(UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
         this.totalScore = totalScore;
     }
 
@@ -52,11 +54,11 @@ public class Lab implements DisplayableObject {
         return labNum;
     }
 
-    public Integer getActualScore() {
+    public LabResult getLabResult() {
         return actualScore;
     }
 
-    public Integer getTotalScore() {
+    public LabTotal getLabTotal() {
         return totalScore;
     }
 
@@ -65,15 +67,15 @@ public class Lab implements DisplayableObject {
     }
 
     //todo
-    public String getActualScoreValue() {
+    public String getLabResultValue() {
         return actualScore.toString();
     }
 
-    public String getTotalScoreValue() {
+    public String getLabTotalValue() {
         return totalScore.toString();
     }
 
-    public void updateActualScore(Integer value) {
+    public void updateActualScore(LabResult value) {
         this.actualScore = value;
     }
 
@@ -91,14 +93,14 @@ public class Lab implements DisplayableObject {
      * Updates the totalScore of the lab
      * @param total new total score
      */
-    public void updateTotal(Integer total) {
+    public void updateTotal(LabTotal total) {
         if (total != null) {
             this.totalScore = total;
         }
     }
 
     public boolean isMarked() {
-        return !actualScore.equals(UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
+        return !(actualScore.getLabResult() == UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
     }
 
     @Override

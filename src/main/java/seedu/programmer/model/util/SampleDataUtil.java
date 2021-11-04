@@ -8,6 +8,8 @@ import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -97,22 +99,22 @@ public class SampleDataUtil {
     public static Lab[] getSampleLab() {
 
         return new Lab[]{
-            new Lab(new LabNum(1), 10),
-            new Lab(new LabNum(2), 20),
-            new Lab(new LabNum(3), 10),
-            new Lab(new LabNum(4), 20),
-            new Lab(new LabNum(5), 10),
-            new Lab(new LabNum(6), 20),
-            new Lab(new LabNum(7), 10),
-            new Lab(new LabNum(8), 20),
-            new Lab(new LabNum(9), 10),
-            new Lab(new LabNum(10), 20),
+            new Lab(new LabNum(1), new LabTotal(10)),
+            new Lab(new LabNum(2), new LabTotal(20)),
+            new Lab(new LabNum(3), new LabTotal(10)),
+            new Lab(new LabNum(4), new LabTotal(20)),
+            new Lab(new LabNum(5), new LabTotal(10)),
+            new Lab(new LabNum(6), new LabTotal(20)),
+            new Lab(new LabNum(7), new LabTotal(10)),
+            new Lab(new LabNum(8), new LabTotal(20)),
+            new Lab(new LabNum(9), new LabTotal(10)),
+            new Lab(new LabNum(10), new LabTotal(20)),
         };
     }
 
     public static Integer getRandomLabScore (Lab lab) {
         Random r = new Random();
-        Integer maxScore = lab.getTotalScore();
+        Integer maxScore = lab.getLabTotal().getLabTotal();
         return r.nextInt(maxScore);
     }
 
@@ -123,7 +125,7 @@ public class SampleDataUtil {
             for (int i = 0; i < sampleLabs.length; i++) {
                 Lab sampleLab = sampleLabs[i];
                 if (i == 0) { // only add random score to 1 lab
-                    Integer randomLabScore = getRandomLabScore(sampleLab);
+                    LabResult randomLabScore = new LabResult(getRandomLabScore(sampleLab));
                     sampleLab.updateActualScore(randomLabScore);
                 }
                 sampleStudent.addLab(sampleLab);

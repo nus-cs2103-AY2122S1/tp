@@ -95,13 +95,13 @@ public class Student implements DisplayableObject {
     public ObservableList<Lab> getFreshLabList() {
         ObservableList<Lab> freshCopy = FXCollections.observableArrayList();
         for (Lab lab : labList) {
-            freshCopy.add(new Lab(lab.getLabNum(), lab.getTotalScore()));
+            freshCopy.add(new Lab(lab.getLabNum(), lab.getLabTotal()));
         }
         return freshCopy;
     }
 
     public Lab getLab(LabNum labNum) {
-        return labList.stream().filter(x -> x.getLabNum() == labNum).findFirst().orElse(null);
+        return labList.stream().filter(x -> x.getLabNum().equals(labNum)).findFirst().orElse(null);
     }
 
     /**
@@ -129,11 +129,8 @@ public class Student implements DisplayableObject {
     /**
      * Updates a lab's score  for a student
      * */
-    public void editLabScore(Lab lab , Integer score) throws CommandException {
-        if (score < 0.0) {
-            throw new CommandException(REQUIRE_POSITIVE_SCORE);
-        }
-        if (score > lab.getTotalScore()) {
+    public void editLabScore(Lab lab , LabResult score) throws CommandException {
+        if (score.getLabResult() > lab.getLabTotal().getLabTotal()) {
             throw new CommandException(EXCEEDED_TOTAL_SCORE);
         }
         int index = this.labList.indexOf(lab);
@@ -145,7 +142,7 @@ public class Student implements DisplayableObject {
     /**
      * Updates a lab result for a student
      * */
-    public boolean editLabInfo(Lab lab, LabNum newLabNum, Integer total) {
+    public boolean editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
         Lab newLab = new Lab(newLabNum);
         int index2 = this.labList.indexOf(newLab);
         if (index2 == -1) {
