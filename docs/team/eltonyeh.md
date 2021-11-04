@@ -1,46 +1,64 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Yeh Yu Cheng's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+## Project: Tutor Master
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+**Tutor Master** is a desktop application for experienced freelance tutors to keep track of their students. More specifically, it helps tutors to record student details and the tasks, lessons and exams assigned to them. Besides, tutors can view their teaching schedule in Tutor Master.
 
-Given below are my contributions to the project.
+Users can interact with Tutor Master using a CLI (command-line interface), while also benefit from the GUI we provided.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+The app is mainly written in Java and has about 12k LoC.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+### Contributions
 
-* **Code contributed**: [RepoSense link]()
+#### Contributed code
 
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=eltonyeh&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+#### Documentation
 
-* **Documentation**:
-    * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Developer Guide:
-        * Added implementation details of the `delete` feature.
+- README
+  - Update site-wide settings
+  - Wrote the acknowledgement note
+- User Guide
+  - Wrote the guide of the commands about:
+    - clearing all entries
+    - viewing student detail
+    - editing student detail
+    - adding a task
+    - assigning and unassigning a task
+  - Draft the command summary
+- Developer guide
+  - Add implementation detail of the `UniqueId` interface
+- General
+  - Fix some typos
 
-* **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+#### Internal Design: Create the `UniqueId` class
 
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
+This allows we to uniquely identify entities including students, groups, tasks, lessons and exams.
 
-* _{you can add/remove categories in the list above}_
+#### Internal Design: Create the interfaces `HasUniqueId` and `TaskAssignable`
+
+`HasUniqueId` is used when a class has a unique id. `TaskAssignable` is used when a class can be assigned a task.
+
+These two interfaces makes the code structure more inheritable and decrease duplicate code.
+
+#### New Feature: Ability to add tasks to the app
+
+This allows users to create new tasks and store them in Tutor Master through a command. They can assign tasks to students/groups later.
+
+Task added is reusable, i.e., tasks can be assigned to multiple student/group.
+
+#### New Feature: Ability to assign tasks to `TaskAssignable` (Students and Groups)
+
+This allows users to assign tasks to their students or student groups through a command.
+
+This feature is based on the command of assigning tasks to students created by my teammate. My main contribution is:
+- Combine the command of assigning tasks to students and assigning tasks to groups into a more generic command.
+- Reduce duplicate code and increase the code reusability.
+
+#### New Feature: Ability to unassign tasks from `TaskAssignable` (Students and Groups)
+
+This allows users to unassign tasks from students/groups. It is the reverse action compared to the feature above.
