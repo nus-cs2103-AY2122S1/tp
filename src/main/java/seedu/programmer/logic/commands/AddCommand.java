@@ -52,12 +52,10 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasStudent(toAdd)) {
-            if (model.hasSameStudentEmail(toAdd) && !model.hasSameStudentId(toAdd)) {
+            if (model.hasSameStudentEmail(toAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
-            } else if (model.hasSameStudentId(toAdd) && !model.hasSameStudentEmail(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
             } else {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
             }
         }
 
