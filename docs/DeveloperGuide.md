@@ -36,9 +36,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for:
+* At app launch: Initializing the components in the correct sequence, and connecting them up with each other.
+* At shut down: Shutting down the components and invoking cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -77,7 +77,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
@@ -121,7 +121,7 @@ How the parsing works:
 <img src="images/ModelClassDiagram.png" width="1000" />
 
 
-The `Model` component,
+The `Model` component:
 
 * stores the contacts list data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _sorted_ and _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
@@ -134,7 +134,7 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
+The `Storage` component:
 * can save both contacts list data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `Track2GatherStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -250,15 +250,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: contact tracing personnel at MOH
+**Target user profile**: contact tracing personnel at MOH who:
 
-* has a need to maintain a lot of contact information
-* has a need to regularly contact a large set of persons and track their responsiveness over a period of time
-* prefers desktop apps over other types
-* prefers CLI over GUI
+* have a need to maintain a lot of contact information
+* have a need to regularly contact a large set of persons and track their responsiveness over a period of time
+* prefer desktop apps over other types
+* prefer CLI over GUI
 
 
-**Value proposition**: The app will manage up to a few thousand contacts, providing basic features for contact tracing personnel to organise and search through them according to personal information (limited to English names and Singaporean contact numbers and addresses) and Stay-Home-Notice information.
+**Value proposition**: The app will manage up to a few thousand contacts, providing basic features for contact tracing personnel to organise and search through them according to personal information (limited to English names and Singaporean contact numbers and addresses), case numbers and Stay-Home-Notice (SHN) periods.
 
 
 ### User stories
@@ -267,23 +267,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​          | I want to …​                   | So that I can…​                                                         |
 | -------- | --------------------| --------------------------------- | ----------------------------------------------------------------------- |
+| `* * *`  | new user            | see usage instructions         | refer to instructions when I forget how to use the app                  |
+| `* * *`  | user                | save my contacts               | keep track of their details between sessions                            |
 | `* * *`  | user                | add a person’s personal information | contact the person regularly to enforce SHN |
 | `* * *`  | user                | add a person’s next-of-kin’s information | contact the person’s next-of-kin should an emergency arise |
-| `* * *`  | user                | add a person’s SHN-related information | track a person only within their SHN period |
+| `* * *`  | user                | add a person’s SHN period | track the person only within their SHN period |
 | `* * *`  | user                | delete multiple persons at once | more easily clean my contacts                                         |
-| `* * *`  | user                | update a person's contact details and SHN-related information without re-adding that contact  | avoid re-entering existing data |
-| `* *`    | user                | batch-update SHN periods       | postpone or bring forward the SHN end dates according to government regulations    |
-| `* *`    | user                | batch-remove persons whose SHN has been completed | quickly and easily clear outdated contacts           |
-| `* * *`  | user                | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate specific person(s) without having to go through the entire list  |
+| `* * *`  | user                | update a person's personal information and SHN period without re-adding that person  | avoid re-entering existing data |
+| `* *`    | user                | update the SHN periods of all persons      | postpone or bring forward the SHN end dates according to government regulations    |
+| `* *`    | user                | remove persons whose SHN period has been completed | quickly and easily clear outdated contacts           |
+| `* * `  | user                 | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate specific person(s) without having to go through the entire list  |
 | `* *`    | user                | sort contacts by name, case number, SHN start date or SHN end date | more easily browse through the contacts |
 | `* *`    | user                | see the number of search results | estimate how much additional filtering I would need to do          |
-| `* *`    | user                | start a new SHN enforcement session that resets all persons to 'not called' status | pull up a new schedule every day for calling |
-| `* *`    | user                | view a dynamic filtered list of people who have not been called in the current SHN enforcement session | know which persons need to be called next |
-| `* *`    | user                | mark a person as contacted in the current SHN enforcement session | track who I have been tried to contact for the day        |
+| `* *`    | user                | view a dynamically filtered list of persons who have not been called in the current SHN enforcement session | know which persons need to be called next |
+| `* *`    | user                | mark a person as contacted in the current SHN enforcement session | track who I have tried to contact for the day        |
 | `* *`    | user                | mark a person as un-contactable in the current SHN enforcement session | track the person's non-compliance instances for further action       |
-| `* * *`  | user                | save my contacts               | keep track of their details between sessions                            |
 | `* *`    | experienced user    | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
-| `* * *`  | new user            | see usage instructions         | refer to instructions when I forget how to use the app                  |
 | `*`      | user                | have Track2Gather dial my contacts for me       | increase efficiency when calling persons              |
 | `*`      | user                | be able to search persons with similar postal codes         | find groups of persons who stay within a close vicinity, and take fewer trips while enforcing SHN                |
 | `*`      | user                | be given a warning before making any delete operations      |  avoid accidentally losing data             |
@@ -306,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. The format of the given details is invalid.
-    * 3b1. Track2Gather shows the correct format for input.
+    * 3a1. Track2Gather shows the correct format for input.
       
       Use case resumes from step 2.
     
@@ -326,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-* 3a. The given index is invalid.
+* 3a. One or more of the given index(s) is invalid.
     * 3a1. Track2Gather shows an error message.
 
       Use case resumes from step 2.
@@ -358,21 +357,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3a1. Track2Gather shows an error message.
 
     Use case resumes from step 2.
-* 3b. The format of the given details is invalid.
-  * 3b1. Track2Gather shows the correct format for input.
+* 5a. The format of the given details is invalid.
+  * 5a1. Track2Gather shows the correct format for input.
 
     Use case resumes from step 2.
 
-#### Use case: UC04 - Update SHN periods of all persons
+#### Use case: UC04 - Update SHN end dates of all persons
 
 **MSS:**
 
 1. User chooses to list persons.
 2. Track2Gather shows a list of persons.
-3. User chooses to update the SHN periods of all persons.
-4. Track2Gather requests for the update parameter.
-5. User enters the update parameter.
-6. Track2Gather updates all person's SHN periods.
+3. User chooses to update the SHN end dates of all persons.
+4. Track2Gather requests for the number of days to shift the SHN end dates.
+5. User enters the number of days.
+6. Track2Gather updates all persons' SHN end dates.
 
    Use case ends.
 
@@ -381,10 +380,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-* 5a. The format of the update parameter is invalid.
+* 5a. The format of the given details is invalid.
     * 5a1. Track2Gather shows the correct format for input.
 
-      Use case resumes from step 4.
+      Use case resumes from step 2.
 
 #### Use case: UC05 - Clear persons with completed SHN periods
 
@@ -431,9 +430,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 6a. No person found.
   * 6a1. Track2Gather prompts the user that no person is found.
 
-    Use case resumes from step 2.
+    Use case ends.
 
-#### Use case: UC07 - Sort person(s) by name and case number
+#### Use case: UC07 - Sort person(s) by name, case number, SHN start date and/or SHN end date
 
 **MSS:**
 
@@ -461,18 +460,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1.  User chooses to start a new SHN enforcement session.
-2.	Track2Gather resets all persons to 'not called' in the new session.
+2.	Track2Gather resets all persons to 'not called' in the new session, and updates the display to show all persons.
 3.  User requests to update call statuses for specified person(s).
-4.	Track2Gather updates the list to remove all successfully called persons.
+4.	Track2Gather updates the call statuses for these person(s), and updates the display to remove all called person(s).
 
 Use case ends.
 
 **Extensions**
-* 2a. There are no person(s).
+* 2a. The list is empty.
 
   Use case ends.
-* 3a. The given index is invalid.
-    * 3a1. Track2Gather shows an error message.
+* 3a. The format of the given details is invalid.
+    * 3a1. Track2Gather shows the correct format for input.
 
       Use case resumes from step 2.
 
@@ -505,7 +504,7 @@ Use case ends.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Graphical User Interface (GUI)**: Type of user interface through which users interact with electronic devices via visual indicator representations
 * **Command Line Interface (CLI)**: Type of user interface through which users interact with a system or application by typing in text (commands)
-* **Stay Home Notice (SHN)**: The notice involves a stipulated period consisting of a start and end date a person would have to remain in their place of residence or dedicated facility.
+* **Stay-Home-Notice (SHN)**: The notice involves a stipulated period consisting of a start and end date a person would have to remain in their place of residence or dedicated facility
 * **SHN enforcement mode**: Refer to [User Guide](UserGuide.md#SHN-enforcement-mode)
 * **Case number**: The unique identifier assigned to each person in Track2Gather
 
@@ -540,11 +539,11 @@ testers are expected to do more *exploratory* testing.
 1. Adding a person
 
    1. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/1 ha/123 Waterloo`<br>
-       Expected: New person is added with the given details. Details of the edited person shown in the
+       Expected: New person is added with the given details. Details of the added person shown in the
        status message.
 
-   2. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/1 ha/123 Waterloo wa/456 Waterloo`<br>
-       Expected: New person is added with the given details. Details of the edited person shown in the 
+   2. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/3 ha/123 Waterloo wa/456 Waterloo`<br>
+       Expected: New person is added with the given details. Details of the added person shown in the 
        status message.
 
    3. Test case: `add n/John Doe cn/12`<br>
@@ -590,7 +589,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Editing a person while search results are being shown
 
-    Expected: similar to previous but person(s) are deleted based on the index(s) in the search results instead of the list.
+    Expected: Similar to previous, but person(s) are deleted based on their index(s) in the search results instead of the list.
 
 ### Deleting a person
 
@@ -618,21 +617,24 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a person while search results are being shown
 
-   Expected: similar to previous but person(s) are deleted based on the index(s) in the search results instead of the list.
+   Expected: Similar to previous, but person(s) are deleted based on their index(s) in the search results instead of the list.
 
-### Batch-updating SHN periods
+### Updating SHN end dates of all persons
 
 1. Batch-updating SHN periods while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons with an SHN period.
 
     2. Test case: `tshift 3` or `tshift +3`<br>
-       Expected: All person's SHN end dates will be postponed by `3` days. Details of the batch-update will be displayed as the status message.
+       Expected: All persons' SHN end dates will be postponed by `3` days. Details of the batch-update will be displayed as the status message.
 
     3. Test case: `tshift -3`<br>
-       Expected: All person's SHN end dates will be brought forwards by `3` days. Details of the batch-update will be displayed as the status message.
+       Expected: All persons' SHN end dates will be brought forward by `3` days. Details of the batch-update will be displayed as the status message.
 
     4. Test case: `tshift 91`<br>
-       Expected: Unable to shift beyond the limit of `90` days. No person's SHN end dates will be shifted. Error details shown in the status message.
+       Expected: Unable to shift beyond the limit of `90` days. No persons' SHN end dates will be shifted. Error details shown in the status message.
+
+    5. Test case: `tshift 0`<br>
+       Expected: Unable to shift by `0` days. No persons' SHN end dates will be shifted. Error details shown in the status message.
 
 ### Clearing person(s) with completed SHN periods
 
@@ -650,33 +652,36 @@ testers are expected to do more *exploratory* testing.
 1. Find person(s) while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `find n/Alex Alice`
-       Expected: Only persons whose name contains `Alex` or `Alice` will be shown.
+    2. Test case: `find n/Alex`<br>
+       Expected: Only persons whose name contains `Alex` will be shown.
+    
+    3. Test case: `find n/Alex Alice`<br>
+        Expected: Only persons whose name contains `Alex` or `Alice` will be shown.
 
-    3. Test case: `find p/123 234`
+    4. Test case: `find p/123`<br>
+       Expected: Only persons whose phone number starts with `123` will be shown.
+
+    5. Test case: `find p/123 234`<br>
        Expected: Only persons whose phone number starts with `123` or `234` will be shown.
 
-    4. Test case: `find cn/1 2 3`
+    6. Test case: `find cn/1 2 3`<br>
        Expected: Only persons with case number `1` `2` or `3` will be shown.
 
-    5. Test case: `find cn/-1`
-       Expected: Case number is not entered in the required format. Error details will be shown in the status message.
-
-    6. Test case: `find sh/start: 2021-01-01 2021-01-02`
+    8. Test case: `find sh/start:2021-01-01 2021-01-02`<br>
        Expected: Only persons with SHN start date of `2021-01-01` or `2021-01-02` will be shown.
-
-    7. Test case: `find sh/start: 2021/01/01`
-       Expected: Date is not entered in the required format. Error details will be shown in the status message.
-
-    8. Test case: `find sh/end: 2021-01-01 2021-01-02`
-       Expected: Only persons with SHN end date of `2021-01-01` or `2021-01-02` will be shown.
-
-    9. Test case: `find sh/end: 2021-01-01 2021/01/02`
-       Expected: One of the date keywords is not entered in the required format. Error details will be shown in the status message.
     
-### Sorting contacts
+    10. Test case: `find sh/end:2021-01-01 2021-01-02`<br>
+        Expected: Only persons with SHN end date of `2021-01-01` or `2021-01-02` will be shown.
 
-1. Sorting a person while all persons are being shown
+    12. Test case: `find INVALID_PREFIX/EXAMPLE`<br>
+        Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+
+    13. Test case: `find VALID_PREFIX/INVALID_INPUT`<br>
+        Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+    
+### Sorting persons
+
+1. Sorting persons while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -684,28 +689,35 @@ testers are expected to do more *exploratory* testing.
       Expected: The list of persons is sorted by name (in ascending order by default).
 
    3. Test case: `sort sh/start:dsc`<br>
-      Expected: The list of persons is sorted by start date of SHN Period in descending order.
+      Expected: The list of persons is sorted by SHN start date in descending order.
 
    4. Test case: `sort sh/end: cn/asc`<br>
-      Expected: The list of persons is sorted by end date of SHN period (in ascending order by default), then by case number in ascending order.
+      Expected: The list of persons is sorted by SHN end date (in ascending order by default), then by case number in ascending order.
 
    5. Test case: `sort`<br>
       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
 
-   6. Other incorrect sort commands to try: `sort shn/start`, `sort p/` (since `p/` is an unsupported field prefix), `...` <br>
-      Expected: Similar to previous.
+   6. Test case: `sort INVALID_PREFIX/VALID_DIRECTION`<br>
+      Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same. 
+
+   7. Test case: `sort VALID_PREFIX/INVALID_DIRECTION`<br>
+      Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+
+2. Sorting persons while search results are being shown
+
+   Expected: Similar to previous, but only search results are displayed and sorted.
 
 ### Enforcing SHN
 
 1. Starting a new SHN enforcement session
 
    1. Test case: `session`<br>
-      Expected: All persons in the list are updated to be non-called.
+      Expected: All persons in the list are updated to be 'not called' status.
        
    2. Test case: `session x` (where x is any character)<br>
       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
-2. Showing a filtered list of all persons who have not been called in the current SHN enforcement session
+2. Showing a dynamically filtered list of all persons who have not been called in the current SHN enforcement session
 
    1. Test case: `schedule`<br>
       Expected: The list is updated to display only persons who have not been called in the current SHN enforcement session.
@@ -713,61 +725,43 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `schedule x` (where x is any character)<br>
       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
-3. Updating a person's call status to successful in the current SHN enforcement session while in SHN enforcement mode
+3. Updating a person's call status to successful in the current SHN enforcement session
+   1. Prerequisites: SHN enforcement mode is activated.<br>
 
-   1. Test case: `scall 1`<br>
-      Expected: First person displayed in the list is updated as successfully called. The name and case number of the updated person is shown in the status message. The person disappears from the display.
+   2. Test case: `scall 1`<br>
+      Expected: First person displayed in the list is updated as successfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-   2. Test case: `scall 3`<br>
-      Expected: Third person displayed in the list is updated as successfully called. The name and case number of the updated person is shown in the status message. The person disappears from the display.
-      
-   3. Test case: `scall 0`<br>
+   3. Test case: `scall 3`<br>
+      Expected: Third person displayed in the list is updated as successfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+
+   4. Test case: `scall 0`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
+   5. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
       Expected: Similar to previous.
 
-4. Updating a person's call status to successful in the current SHN enforcement session while not in SHN enforcement mode
+4. Updating a person's call status to successful in the current SHN enforcement session
+    1. Prerequisites: SHN enforcement mode is not activated.<br>
+       Expected: Similar to previous, except the updated person does not disappear from the display.
 
-    1. Test case: `scall 1`<br>
-       Expected: First person displayed in the list is updated as successfully called. The name and case number of the updated person is shown in the status message.
+5. Updating that a failed call was made to a person in the current SHN enforcement session
+    1. Prerequisites: SHN enforcement mode is activated.
 
-    2. Test case: `scall 3`<br>
-       Expected: Third person displayed in the list is updated as successfully called. The name and case number of the updated person is shown in the status message.
+    2. Test case: `fcall 1`<br>
+       Expected: First person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
 
-    3. Test case: `scall 0`<br>
+    3. Test case: `fcall 3`<br>
+       Expected: Third person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+
+    4. Test case: `fcall 0`<br>
        Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
-
-    4. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
-       Expected: Similar to previous.
-
-5. Updating that a failed call was made to a person in the current SHN enforcement session while in SHN enforcement mode
-
-   1. Test case: `fcall 1`<br>
-      Expected: First person displayed in the list is updated as unsuccessfully called. The name and case number of the updated person is shown in the status message. The person disappears from the display.
-
-   2. Test case: `fcall 3`<br>
-      Expected: Third person displayed in the list is updated as unsuccessfully called. The name and case number of the updated person is shown in the status message. The person disappears from the display.
-
-   3. Test case: `fcall 0`<br>
-      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
     
-   4. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
-      Expected: Similar to previous.
-
-6. Updating that a failed call was made to a person in the current SHN enforcement session while not in SHN enforcement mode
-
-    1. Test case: `fcall 1`<br>
-       Expected: First person displayed in the list is updated as unsuccessfully called. The name and case number of the updated person is shown in the status message.
-
-    2. Test case: `fcall 3`<br>
-       Expected: Third person displayed in the list is updated as unsuccessfully called. The name and case number of the updated person is shown in the status message.
-
-    3. Test case: `fcall 0`<br>
-       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
-
-    4. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
+    5. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
        Expected: Similar to previous.
+
+6. Updating that a failed call was made to a person in the current SHN enforcement session
+    1. Prerequisites: SHN enforcement mode is not activated.<br>
+       Expected: Similar to previous, except the updated person does not disappear from the display.
 
 ### Saving data
 
