@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.logic.commands.EditLabCommand;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.testutil.LabBuilder;
 
 public class EditLabCommandParserTest {
@@ -63,23 +64,25 @@ public class EditLabCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Lab originalLab = new LabBuilder().withLabNum(VALID_LAB_NO).withTotal(VALID_TOTAL_SCORE).build();
         LabNum labNum = new LabNum(VALID_LAB_NO2);
+        LabTotal labTotal = new LabTotal(VALID_TOTAL_SCORE2);
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + LAB_NUM + NEW_LAB_NUM + LAB_TOTAL2,
-                new EditLabCommand(originalLab, labNum, VALID_TOTAL_SCORE2));
+                new EditLabCommand(originalLab, labNum, labTotal));
     }
 
     @Test
     public void parse_oneFieldSpecified_success() {
         Lab originalLab = new LabBuilder().withLabNum(VALID_LAB_NO).withTotal(VALID_TOTAL_SCORE).build();
-
+        LabNum labNum = new LabNum(VALID_LAB_NO2);
+        LabTotal labTotal = new LabTotal(VALID_TOTAL_SCORE2);
         // newLabTitle only
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + LAB_NUM + NEW_LAB_NUM,
-                new EditLabCommand(originalLab, VALID_LAB_NO2));
+                new EditLabCommand(originalLab, labNum));
 
         // newTotalScore only
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + LAB_NUM + LAB_TOTAL2,
-                new EditLabCommand(originalLab, VALID_TOTAL_SCORE2));
+                new EditLabCommand(originalLab, labTotal));
     }
 
 }

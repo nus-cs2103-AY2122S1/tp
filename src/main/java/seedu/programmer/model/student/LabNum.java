@@ -20,7 +20,9 @@ public class LabNum {
         this.labnum = labnum;
     }
 
-    public int getLabNum() { return this.labnum; }
+    public int getLabNum() {
+        return this.labnum;
+    }
 
     @Override
     public String toString() {

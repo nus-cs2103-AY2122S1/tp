@@ -20,7 +20,9 @@ public class LabResult {
         this.labResult = labResult;
     }
 
-    public int getLabResult() { return this.labResult; }
+    public int getLabResult() {
+        return this.labResult;
+    }
 
     @Override
     public String toString() {
