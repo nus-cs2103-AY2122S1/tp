@@ -4,7 +4,7 @@
 start
 if () then ([filter grade & subject])
     if () then ([valid grade])
-        :lesson &
+        :Lesson &
         student list
         filtered by
         grade &
@@ -19,7 +19,7 @@ if () then ([filter grade & subject])
 else ([filter by single variable])
     if () then ([filter by grade])
         if () then ([valid grade])
-            :lesson &
+            :Lesson &
             student list
             filtered by
             grade;
@@ -30,7 +30,7 @@ else ([filter by single variable])
             input;
         endif
     else ([filter by subject])
-        :lesson list
+        :Lesson list
         filtered by
         subject;
 

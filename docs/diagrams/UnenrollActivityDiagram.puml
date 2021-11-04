@@ -21,7 +21,7 @@ if () then ([student exists in TuitiONE])
 
         if () then ([student is enrolled in the lesson]))
 
-            :unenroll student
+            :Unenroll student
             from lesson;
 
             :Save new TuitiONE
