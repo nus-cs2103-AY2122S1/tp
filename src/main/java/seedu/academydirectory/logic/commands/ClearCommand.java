@@ -27,4 +27,5 @@ public class ClearCommand extends Command {
         model.setAcademyDirectory(new AcademyDirectory());
         return new CommandResult(MESSAGE_SUCCESS, Optional.of(MESSAGE_SUCCESS));
     }
+
 }
