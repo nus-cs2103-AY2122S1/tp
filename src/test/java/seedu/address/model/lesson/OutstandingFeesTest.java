@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -30,8 +32,8 @@ class OutstandingFeesTest {
     @Test
     public void pay_validAmount_success() {
         Money payment = new Money(VALID_PAYMENT);
-        float afterPayment = Float.parseFloat(VALID_OUTSTANDING_FEES) - Float.parseFloat(VALID_PAYMENT);
-        String afterPaymentInString = Float.toString(afterPayment);
+        BigDecimal afterPayment = (new BigDecimal(VALID_OUTSTANDING_FEES)).subtract(new BigDecimal(VALID_PAYMENT));
+        String afterPaymentInString = afterPayment.toPlainString();
 
         OutstandingFees actual = new OutstandingFees(VALID_OUTSTANDING_FEES);
 

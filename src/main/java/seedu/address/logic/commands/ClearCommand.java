@@ -19,6 +19,9 @@ public class ClearCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "TAB's data has been cleared!";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all data.\n"
+            + "Example: " + COMMAND_WORD;
+
     private ReadOnlyAddressBook previousAddressBook;
 
     public ClearCommand() {

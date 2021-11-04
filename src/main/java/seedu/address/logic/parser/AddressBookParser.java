@@ -80,6 +80,28 @@ public class AddressBookParser {
         case LessonDeleteCommand.COMMAND_WORD:
             return new LessonDeleteCommandParser().parse(arguments);
 
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case PaidCommand.COMMAND_WORD:
+            return new PaidCommandParser().parse(arguments);
+
+        default:
+            return parseSingleCommand(commandWord, arguments);
+        }
+
+    }
+
+    /**
+     * Parse commands that only have 1 command word and no arguments
+     */
+    private Command parseSingleCommand(String commandWord, String arguments) throws ParseException {
+        checkEmptyArgs(commandWord, arguments);
+        switch (commandWord.toLowerCase()) {
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -88,12 +110,6 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -125,9 +141,6 @@ public class AddressBookParser {
         case TagCommand.COMMAND_WORD:
             return new TagCommand();
 
-        case PaidCommand.COMMAND_WORD:
-            return new PaidCommandParser().parse(arguments);
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -142,4 +155,47 @@ public class AddressBookParser {
         }
     }
 
+    private void checkEmptyArgs(String commandWord, String args) throws ParseException {
+        if (args.isEmpty()) {
+            return;
+        }
+        switch (commandWord.toLowerCase()) {
+
+        case ClearCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        case UndoCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+        case RedoCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        case ListCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        case CalendarCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarCommand.MESSAGE_USAGE));
+        case DayCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DayCommand.MESSAGE_USAGE));
+        case WeekCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WeekCommand.MESSAGE_USAGE));
+        case MonthCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MonthCommand.MESSAGE_USAGE));
+        case YearCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, YearCommand.MESSAGE_USAGE));
+        case TodayCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TodayCommand.MESSAGE_USAGE));
+        case NextCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NextCommand.MESSAGE_USAGE));
+        case BackCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BackCommand.MESSAGE_USAGE));
+        case TagCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        case ExitCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
+        case HelpCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        case RemindCommand.COMMAND_WORD:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
 }

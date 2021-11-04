@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_TEXTBOOK;
@@ -13,12 +14,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_RANGE_DE
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_RATES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.OUTSTANDING_FEES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_INVALID_ARGS;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
@@ -219,12 +219,25 @@ public class LessonAddCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
-        // invalid index or preamble
-        assertParseFailure(parser, " " + 0 + VALID_DATE_PAST
-            + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
-            + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_FORMAT);
+    public void parse_invalidPreamble_failure() {
+        // invalid index
+        assertParseFailure(parser, 0 + PAST_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
+        // no index specified
+        assertParseFailure(parser, " " + PAST_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_FORMAT);
+
+        // invalid arguments being parsed as preamble
+        assertParseFailure(parser, PREAMBLE_INVALID_ARGS + PAST_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
         // invalid date
         assertParseFailure(parser, " " + FIRST_PERSON + INVALID_DATE_DESC
                 + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
@@ -247,12 +260,12 @@ public class LessonAddCommandParserTest {
         // invalid lesson rates
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
                 + INVALID_LESSON_RATES_DESC + SUBJECT_DESC + OUTSTANDING_FEES_DESC
-                + HOMEWORK_DESC_POETRY, LessonRates.MESSAGE_CONSTRAINTS);
+                + HOMEWORK_DESC_POETRY, LessonRates.MESSAGE_FORMAT_CONSTRAINTS);
 
         // invalid outstanding fees
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
                 + LESSON_RATES_DESC + SUBJECT_DESC + INVALID_OUTSTANDING_FEES_DESC
-                + HOMEWORK_DESC_POETRY, OutstandingFees.MESSAGE_CONSTRAINTS);
+                + HOMEWORK_DESC_POETRY, OutstandingFees.MESSAGE_FORMAT_CONSTRAINTS);
 
         // invalid homework
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
@@ -263,11 +276,24 @@ public class LessonAddCommandParserTest {
         assertParseFailure(parser, " " + FIRST_PERSON + INVALID_DATE_DESC + TIME_RANGE_DESC
                 + LESSON_RATES_DESC + INVALID_SUBJECT_DESC + OUTSTANDING_FEES_DESC
                 + HOMEWORK_DESC_POETRY, Date.MESSAGE_CONSTRAINTS);
+    }
 
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + " " + FIRST_PERSON
-                + FUTURE_DATE_DESC + TIME_RANGE_DESC + SUBJECT_DESC + OUTSTANDING_FEES_DESC
-                + HOMEWORK_DESC_POETRY + HOMEWORK_DESC_TEXTBOOK,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
+    @Test
+    public void parse_multipleInvalidValues_failure() {
+        // missing arguments have priority over invalid argument format
+        // missing subject field
+        assertParseFailure(parser, " " + FIRST_PERSON + INVALID_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC
+                + OUTSTANDING_FEES_DESC, MESSAGE_INVALID_FORMAT);
+
+        // missing arguments have priority over invalid index
+        assertParseFailure(parser, " " + 0 + FUTURE_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC
+                + OUTSTANDING_FEES_DESC, MESSAGE_INVALID_FORMAT);
+
+        // invalid fields have priority over invalid index
+        assertParseFailure(parser, " " + 0 + INVALID_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + OUTSTANDING_FEES_DESC, Date.MESSAGE_CONSTRAINTS);
     }
 }

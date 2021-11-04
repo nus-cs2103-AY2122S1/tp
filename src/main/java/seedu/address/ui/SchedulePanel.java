@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static com.calendarfx.view.DayViewBase.EarlyLateHoursStrategy.SHOW_COMPRESSED;
 import static com.calendarfx.view.DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT;
+import static com.calendarfx.view.page.DayPage.DayPageLayout.STANDARD;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,7 +10,6 @@ import java.time.LocalTime;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
-import com.calendarfx.view.page.DayPage;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -32,17 +32,28 @@ public class SchedulePanel extends UiPart<Region> {
     public SchedulePanel(Calendar calendar) {
         super(FXML);
         calendarView = new CalendarView();
-        initialiseCalendar(calendar);
+
+        initialiseCalendarView(calendar);
+        initialiseDayPage();
+        initialiseWeekPage();
+        initialiseYearPage();
+        initialiseScheduleView();
+
         createTimeThread();
     }
 
+    private void initialiseScheduleView() {
+        scheduleView.getChildren().setAll(calendarView);
+    }
+
     /**
-     * Sets up CalendarFX.
+     * Sets up CalendarFX.CalendarView.
      * Adapted from CalendarFX developer manual.
      * http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start
      */
-    private void initialiseCalendar(Calendar calendar) {
+    private void initialiseCalendarView(Calendar calendar) {
         calendar.setReadOnly(true); // !!! Disables editing entries in calendar interface
+
         CalendarSource calendarSource = new CalendarSource();
         calendarSource.getCalendars().addAll(calendar);
         calendarView.getCalendarSources().addAll(calendarSource);
@@ -60,17 +71,14 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.setShowAddCalendarButton(false);
         calendarView.setShowSourceTrayButton(false);
         calendarView.setShowPageToolBarControls(false);
-        calendarView.setShowSearchField(false); // TODO: implement CLI entry search
-
-        initialiseDayPage();
-        initialiseWeekPage();
-        initialiseYearPage();
-
-        scheduleView.getChildren().setAll(calendarView);
+        calendarView.setShowSearchField(false);
     }
 
+    /**
+     * Sets up the calendarView's DayPage.
+     */
     private void initialiseDayPage() {
-        calendarView.getDayPage().setDayPageLayout(DayPage.DayPageLayout.STANDARD);
+        calendarView.getDayPage().setDayPageLayout(STANDARD);
 
         calendarView.getDayPage().getYearMonthView().setShowWeekNumbers(false);
 
@@ -79,14 +87,20 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.getDayPage().getDetailedDayView().setHoursLayoutStrategy(FIXED_HOUR_COUNT);
     }
 
+    /**
+     * Sets up the calendarView's WeekPage.
+     */
     private void initialiseWeekPage() {
         calendarView.getWeekPage().getDetailedWeekView().setVisibleHours(15);
         calendarView.getWeekPage().getDetailedWeekView().setHoursLayoutStrategy(FIXED_HOUR_COUNT);
         calendarView.getWeekPage().getDetailedWeekView().setEarlyLateHoursStrategy(SHOW_COMPRESSED);
     }
 
+    /**
+     * Sets up the calendarView's YearPage.
+     */
     private void initialiseYearPage() {
-        calendarView.getYearPage().getMonthSheetView().setShowWeekNumber(false);
+        calendarView.getYearPage().getMonthSheetView().setShowWeekNumber(false); // This doesn't seem to work
     }
 
 

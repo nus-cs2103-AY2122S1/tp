@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
@@ -172,12 +173,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initKeyPressEventHandler(CommandBox commandBox) {
-        // Add event handlers
+        // Add handler to request focus on commandBox when user wants to type
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (commandBox.getCommandTextField().isFocused()) {
                 return; // Don't filter if already in focus
             }
-            if (isTextInputKeyCode(event.getCode())) {
+            if (!event.isShortcutDown() && isTextInputKeyCode(event.getCode())) {
                 commandBox.getCommandTextField().requestFocus();
                 commandBox.getCommandTextField().selectEnd();
             }
@@ -213,12 +214,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private void initListeners() {
         // Add listeners
-        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+        ListView<Person> personListView = centerPanel.getPersonListView();
+        personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
                         handlePersonGridPanel(newVal);
                     }
                 });
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
+                .getSelectionModel().getSelectedItem()));
     }
 
     /**
@@ -271,47 +275,93 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Switches to the calendar.
+     */
     @FXML
     private void handleCalendar() {
         centerPanel.displaySchedulePanel();
     }
 
+    /**
+     * Shows the day view of the calendar.
+     */
     private void handleDay() {
         centerPanel.showDay();
     }
 
+    /**
+     * Shows the week view of the calendar.
+     */
     private void handleWeek() {
         centerPanel.showWeek();
     }
 
+    /**
+     * Shows the month view of the calendar.
+     */
     private void handleMonth() {
         centerPanel.showMonth();
     }
 
+    /**
+     * Shows the year view of the calendar.
+     */
     private void handleYear() {
         centerPanel.showYear();
     }
 
+    /**
+     * Go next in the calendar.
+     */
     private void handleNext() {
         centerPanel.goNext();
     }
 
+    /**
+     * Go to today in the calendar.
+     */
     private void handleToday() {
         centerPanel.goToday();
     }
 
+    /**
+     * Go back in the calendar.
+     */
     private void handleBack() {
         centerPanel.goBack();
     }
 
+    /**
+     * Switches to the personGridPanel.
+     */
     @FXML
     private void handlePersonGridPanel() {
         centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
     }
 
+    /**
+     * Displays the person on the personGridPanel
+     *
+     * @param student The person whose lessons we wish to display.
+     */
     private void handlePersonGridPanel(Person student) {
         requireNonNull(student);
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
+    }
+
+    /**
+     * Switches to the student view.
+     *
+     * @param commandResult The commandResult that causes this change.
+     */
+    private void handleStudents(CommandResult commandResult) {
+        if (commandResult.getStudent().isPresent()) {
+            Person student = commandResult.getStudent().get();
+            handlePersonGridPanel(student);
+        } else {
+            handlePersonGridPanel();
+        }
     }
 
     /**
@@ -347,12 +397,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
 
             case STUDENTS:
-                if (commandResult.getStudent().isPresent()) {
-                    Person student = commandResult.getStudent().get();
-                    handlePersonGridPanel(student);
-                } else {
-                    handlePersonGridPanel();
-                }
+                handleStudents(commandResult);
                 break;
 
             case TAGS:
