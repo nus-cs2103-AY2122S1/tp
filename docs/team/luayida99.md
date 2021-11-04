@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t14&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=luayida99&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
-    * Managed releases `v1.2` - `v1.4.0` (4 releases) on GitHub
+    * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
 
 * **Enhancements to existing features**:
     * Update `help` command to reflect SeniorLove documentation (Pull request [\#56](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/56))
@@ -36,6 +36,7 @@ Given below are my contributions to the project.
         * Added glossary and resolved bugs in User Guide: (Pull requests [\#172](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/172), [\#180](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/180))
     * Developer Guide:
         * Added implementation details of the `visit` and `find` feature (Pull requests [\#98](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/98), [\#106](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/106))
+        * Added instructions for manual testing
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#54](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/54), [\#72](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/72), [\#88](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/88), [\#96](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/96), [\#120](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/120), [\#186](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/186)
