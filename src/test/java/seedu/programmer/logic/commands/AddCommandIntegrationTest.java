@@ -47,12 +47,25 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameNameDifferentStudentId_success() {
+    public void execute_sameNameDifferentStudentIdSameEmail_failure() {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentStudentId = "A6543210B";
         Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId),
-                                                   validStudent.getClassId(), validStudent.getEmail());
+                validStudent.getClassId(), validStudent.getEmail());
+
+        assertCommandFailure(new AddCommand(studentDifferentName), expectedModel,
+                String.format(AddCommand.MESSAGE_DUPLICATE_STUDENT, studentDifferentName));
+    }
+
+    @Test
+    public void execute_sameNameDifferentStudentIdDifferentEmail_success() {
+        Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
+        expectedModel.addStudent(validStudent);
+        String differentStudentId = "A6543210B";
+        String differentEmail = "e0511111@u.nus.edu";
+        Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId),
+                                                   validStudent.getClassId(), new Email(differentEmail));
 
         assertCommandSuccess(new AddCommand(studentDifferentName), expectedModel,
                 String.format(AddCommand.MESSAGE_SUCCESS, studentDifferentName), expectedModel);
