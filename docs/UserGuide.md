@@ -129,22 +129,27 @@ Examples:
 Finds person(s) based on the field specified by the user.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [cn/CASE_NUMBER] [sh/start:SHN_START_DATE] [sh/end:SHN_END_DATE]`
-* At least one field to search by must be provided
-* Only one field can be searched at a time
+* Exactly one field can be searched at a time
+* For each field, multiple keywords can be provided.
+  * Keywords are separated by spaces.
+  * The order of the keywords does not matter.
+  * Persons matching at least one keyword will be returned (i.e. `OR` search). <br> 
+    Example: `Hans Bo` will be interpreted as two separate keywords, `Hans` and `Bo`, and thus return `Hans Gruber`, `Bo Yang`
 * Field must be one of the following:
 
 Field (`FIELD_PREFIX`) | Description
 ------|------------------
-Name (`n/`) | <ul><li>Search is case-insensitive. e.g `hans` will match `Hans`</li><li>Full words will be matched e.g. `Han` will not match `Hans`</li><li>Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`</li><li>The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`</ul>
-Phone number (`p/`) | <ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number must be a number, minimally 1 digit long</ul>
-Case number (`cn/`) | <ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`</li><li> Case number must be entered in the [valid format](#format-for-person-details)</ul>
-SHN start date (`sh/start:`) | <ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`</li><li>SHN start date must be entered in the [valid format](#format-for-person-details)</ul>
-SHN end date (`sh/end:`) | <ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`</li><li>SHN end date must be entered in the [valid format](#format-for-person-details)</ul>
+Name (`n/`) | <ul><li>Search is case-insensitive. e.g `hans` will match `Hans`</li><li>Full words will be matched e.g. `Han` will not match `Hans`</li><li>Name must be entered in the [valid format](#format-for-person-details)</li></ul>
+Phone number (`p/`) | <ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number must be a positive integer, minimally 1 digit long</li></ul>
+Case number (`cn/`) | <ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`</li><li>Case number must be entered in the [valid format](#format-for-person-details)</li></ul>
+SHN start date (`sh/start:`) | <ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`</li><li>SHN start date must be entered in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd)</li></ul>
+SHN end date (`sh/end:`) | <ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`</li><li>SHN end date must be entered in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd)</li></ul>
 
 Examples:
 * `find n/John` will match the following names: `john` and `John Doe` 
 * `find n/alex david` will match the following names: `Alex Yeoh` and `David Li` 
 * `find p/123` will match the following phone numbers: `12345678` and `12387654` 
+* `find p/123 234` will match the following phone numbers: `12345678`, `23456778` and `12387654`
 * `find cn/1` will only match the following case number: `1`
 * `find sh/start:2021-01-01` will only match the following SHN start date: `2021-01-01` 
 * `find sh/end:2021-01-02` will only match the following SHN end date: `2021-01-02` 
@@ -239,7 +244,7 @@ Under `Call Status` for each person, there are two components:
   * The number of failed call attempts recorded is cumulative over the entire period of Track2Gather usage. It does not reset to zero when a new SHN enforcement session is created.
 
 #### Important notes
-* `add`, `edit`, `find`, `tshift` and `list` commands deactivate enforcement mode.
+* `add`, `edit`, `find` and `list` commands deactivate enforcement mode.
 * At any point in time, there is only 1 ongoing SHN enforcement session.
 * Previous sessions cannot be accessed.
 
