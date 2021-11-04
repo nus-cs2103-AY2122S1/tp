@@ -25,6 +25,7 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
     + [Editing an applicant: `edit`](#editing-an-applicant--edit)
     + [Listing all applicants : `list`](#listing-all-applicants--list)
     + [Finding an applicant : `find`](#finding-an-applicant--find)
+    + [Filtering interviews : `filter_interview`](#filtering-interviews--filter_interview)
     + [Deleting an applicant : `delete`](#deleting-an-applicant--delete)
     + [Showing search terms : `show`](#showing-search-terms--show)
     + [Marking an applicant : `mark`](#marking-an-applicant--mark)
@@ -51,37 +52,69 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 4. Double-click the file to start the app. The GUI should be similar to the below image. Note how the app contains some sample data.<br>
    ![Ui](images/description.png)
-
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
    
-   * **`clear`** : Clears all sample data.
+   Applicant data are displayed as a list in the **Applicant Panel**.
+   ![Applicant Diagram](images/ApplicantDiagram.png)
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com r/Teacher et/Full time s/3000 l/Bachelors y/4` : 
-     Adds an applicant named `John Doe` to RecruitIn, where `98765432`is his phone number, `johnd@example.com` is his email, 
-     `Teacher` is the role he applied for, `Full time` is his desired employment type, `3000` is his expected salary,
-     `Bachelors` is his highest level of education, and he has `4` years of experience.
-    
-   * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com r/Receptionist et/Temporary s/3000 l/High School y/2` : 
-     Adds an applicant named `Mary Poppins` to RecruitIn, where `91131513`is her phone number, `maryp@example.com` is her email, 
-     `Receptionist` is the role she applied for, `Temporary` is her desired employment type, `3000` is her expected salary, 
-     `High School` is her highest level of education, and she has `2` years of experience.
-    
-   * **`list`** : Lists all applicants.
+5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br><br>
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Type in your commands into the Command Box and press Enter to execute it.**<br>
+    * e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+    </div>
+
+   1. Use **`clear`** command to clear the existing sample data.
+   2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
+      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
+      stated that he is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
+      education is `Bachelors` and has `4` years of experience as a teacher. <br><br>
+      Type in **`add`**`n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4` to add `John Doe` to your
+      list of applicants.
+   3. Let's also add in another applicant named `Mary Sue`. Her phone number is `91131513` and her email is `MarySue@gmail.com`. She is applying
+      for the role of a `Software Engineer` and is looking for an `Internship` with an expected salary of `3000`. Her highest level of education is `High School`
+      and has `0` years of experience as a `Software Engineer`. <br><br>
+      Type in **`add`**`n/Mary Sue p/91131513 e/MarySue@gmail.com r/Software Engineer et/Internship s/3000 l/High School y/0`.<br><br>
+      Your application should look like this:
+      ![After Adding](./images/SampleWorkflow1.png)
+   4. As an experienced recruiter, you notice that `Mary Sue` may not have the qualifications for the job as a `Software Engineer` and want to add
+      a note to remind yourself.<br><br>
+      Type in **`edit`**`2 nt/She might not have the qualifications for the job` to add the note to `Mary Sue`.<br><br>
+      Your application should look like this:
+      ![After Note](./images/SampleWorkflow2.png)
+   5. Your company then informs you that they would like to interview `John Doe` on December 11th 2021 at 10 am `2021-12-11, 10:00` and you want to remind
+      yourself that an interview has been arranged for `John Doe`.<br><br>
+      Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.<br><br>
+      Your application should look like this:
+      ![After Interview](./images/SampleWorkflow3.png)
+   6. Fast forward the time. Your company informs you that `John Doe` has
+      passed his interview and is hired.<br><br>
+      Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
+      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      ![After mark](./images/SampleWorkflow4.png)
+   7. Type in **`list`** to go back to your list of applicants.<br><br>
+      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Now `John Doe` is removed from your list of applicants.
+
+6. Aside from the commands shown in the sample workflow above, you may also find these useful:
+
+    <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+    The commands given below are not related to the above sample workflow and are given strictly as example usages.
+    </div>
    
-   * **`find`**`n/John Mary` : Finds all current applicants in RecruitIn whose names are `John` or `Mary`.
-   
-   * **`delete`**`2` : Deletes `Mary`, who is the 2nd applicant in the list. After deletion, the list of all applicants will contain only 'John'.
+      * **`delete`**`2` : Deletes the second applicant in your currently displayed list.
 
-   * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn, which would be 1 result that is `3000`.
+      * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn.
 
-   * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done, which would be `John`.
+      * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
 
-   * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would be `John`.
+      * **`filter_interview`**`past` : Displays all applicants whose interviews are in the past, relative to current date and time.
 
-   * **`exit`** : Exits the app.
+      * **`filter_interview`**`future` : Displays all applicants whose interview are in the future, relative to current date and time.
 
-6. Refer to the [Features](#features) below for details of each command.
+      * **`exit`** : Exits the app.
+
+7. Refer to the [Features](#features) below for details of available commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -144,7 +177,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/E
 Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
 * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
-* Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
@@ -256,7 +288,7 @@ Examples:
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
-<div markdown="block" class="alert alert-secondary">
+<div markdown="block" class="alert alert-success">
 **:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
 
 * You may
@@ -431,6 +463,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ### Add Inputs
 
+<div markdown="block" class="alert alert-secondary">
+
 * Return to [**Add**](#adding-an-applicant-add).
 * Return to [**Edit**](#editing-an-applicant--edit).
 
@@ -505,7 +539,11 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
     * For example:
         * NOTES inputs such as `This candidate is good!` and `@Applicant123 is suitab13 for th3 job!` are acceptable.
 
+</div>
+
 ### Find Inputs
+
+<div markdown="block" class="alert alert-success">
 
 * Return to [**Find**](#finding-an-applicant--find)
 
@@ -602,6 +640,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `Done` input can match with applicants that have their ***Done*** status marked as Done.
         * A `Not Done` input can match with applicants that have their ***Done*** status unmarked as Not Done.
         * Any other non-empty input is considered invalid.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
