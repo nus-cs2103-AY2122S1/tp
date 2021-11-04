@@ -20,6 +20,7 @@ import seedu.programmer.model.Model;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -102,7 +103,7 @@ public class EditCommand extends Command {
         Integer updatedResult = null;
         if (updatedLab != null) {
             updatedResult = editStudentDescriptor.getResult().orElse(null);
-            int labNum = updatedLab.getLabNum();
+            LabNum labNum = updatedLab.getLabNum();
             Integer currTotalScore;
             try {
                 currTotalScore = studentToEdit.getLab(labNum).getTotalScore();

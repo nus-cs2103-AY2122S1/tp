@@ -25,6 +25,9 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
 
+    // Keep track of whether last command entered is valid to decide command to return when up or down keys are pressed
+    private boolean isLastCommandValid = false;
+
     @FXML
     private TextField commandTextField;
 
@@ -52,8 +55,10 @@ public class CommandBox extends UiPart<Region> {
             commandHistory.add(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+            isLastCommandValid = true;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+            isLastCommandValid = false;
         }
     }
 
@@ -63,22 +68,30 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPressed(KeyEvent event) {
-        boolean upPressed = event.getCode() == KeyCode.UP;
-        boolean downPressed = event.getCode() == KeyCode.DOWN;
-        boolean isNotUpOrDown = !upPressed && !downPressed;
-        boolean noCommandHistoryPresent = commandHistory.isEmpty();
-        boolean downAndAtLastCommand = downPressed && commandHistory.isCounterAtLast();
-        boolean upAndAtFirstCommand = upPressed && commandHistory.isCounterAtFirst();
+        boolean isUpPressed = event.getCode() == KeyCode.UP;
+        boolean isDownPressed = event.getCode() == KeyCode.DOWN;
+        boolean isNotUpOrDown = !isUpPressed && !isDownPressed;
+        boolean isCommandHistoryAbsent = commandHistory.isEmpty();
+        boolean isDownAtLastCommand = isDownPressed && commandHistory.isAtLastIndex();
+        boolean isUpAtFirstCommand = isUpPressed && commandHistory.isAtFirstIndex();
+        boolean isUpAtLastCommand = isUpPressed && commandHistory.isAtLastIndex();
 
         // Do nothing if neither up nor down pressed, or no command history
-        if (isNotUpOrDown || noCommandHistoryPresent) {
+        if (isNotUpOrDown || isCommandHistoryAbsent) {
             return;
         }
 
-        if (downAndAtLastCommand || upAndAtFirstCommand) {
-            logger.info("We are already at the oldest or newest command -> show current command");
+        if (isUpAtLastCommand && isLastCommandValid) {
+            // Remember the text field resets to "" after each valid command
             commandTextField.setText(commandHistory.getCurrentCommand());
-        } else if (upPressed) {
+            isLastCommandValid = false;
+        } else if (isDownAtLastCommand && isLastCommandValid) {
+            logger.info("We are already at the newest command -> show current command");
+            commandTextField.setText("");
+        } else if (isDownAtLastCommand || isUpAtFirstCommand) {
+            logger.info("We are already at the newest or oldest command -> show current command");
+            commandTextField.setText(commandHistory.getCurrentCommand());
+        } else if (isUpPressed) {
             commandTextField.setText(commandHistory.getPrevCommand());
         } else {
             commandTextField.setText(commandHistory.getNextCommand());

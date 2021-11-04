@@ -25,7 +25,7 @@ public class StudentCard extends UiPart<Region> {
      *
      */
 
-    public final Student student;
+    private final Student student;
 
     @FXML
     private HBox cardPane;
@@ -98,5 +98,9 @@ public class StudentCard extends UiPart<Region> {
             }
             tags.getChildren().add(labLabel);
         }
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }

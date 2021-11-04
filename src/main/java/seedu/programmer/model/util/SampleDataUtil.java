@@ -7,6 +7,7 @@ import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -94,17 +95,18 @@ public class SampleDataUtil {
     }
 
     public static Lab[] getSampleLab() {
+
         return new Lab[]{
-            new Lab(1, 10),
-            new Lab(2, 20),
-            new Lab(3, 10),
-            new Lab(4, 20),
-            new Lab(5, 10),
-            new Lab(6, 20),
-            new Lab(7, 10),
-            new Lab(8, 20),
-            new Lab(9, 10),
-            new Lab(10, 20),
+            new Lab(new LabNum(1), 10),
+            new Lab(new LabNum(2), 20),
+            new Lab(new LabNum(3), 10),
+            new Lab(new LabNum(4), 20),
+            new Lab(new LabNum(5), 10),
+            new Lab(new LabNum(6), 20),
+            new Lab(new LabNum(7), 10),
+            new Lab(new LabNum(8), 20),
+            new Lab(new LabNum(9), 10),
+            new Lab(new LabNum(10), 20),
         };
     }
 

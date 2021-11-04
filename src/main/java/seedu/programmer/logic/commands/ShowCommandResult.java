@@ -18,17 +18,12 @@ public class ShowCommandResult extends CommandResult {
         this.target = target;
     }
 
-    public Student getTarget() {
-        return target;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ShowCommandResult)) {
             return false;
         }
