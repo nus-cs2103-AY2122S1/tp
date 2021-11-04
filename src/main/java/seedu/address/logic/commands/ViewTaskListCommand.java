@@ -26,7 +26,7 @@ public class ViewTaskListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": " + DISPLAY_SINGLE_DESCRIPTION + "\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
+            + "INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 2\n"
             + COMMAND_WORD + " " + ALL_FLAG + ": " + DISPLAY_ALL_DESCRIPTION;
 

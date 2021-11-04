@@ -22,20 +22,23 @@ import seedu.address.model.task.Task;
 
 public class AddTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "addtask";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_SUCCESS = "Added %1$d %2$s to Person: %3$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add to the task list of the person identified "
+            + ": Add a task to the task list of the person identified "
             + "by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
             + PREFIX_TASK_DESCRIPTION + " TASK_NAME "
             + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
             + "[" + PREFIX_TASK_VENUE + " TASK_VENUE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_DESCRIPTION + " Likes to swim.";
+            + PREFIX_TASK_DESCRIPTION + " Meeting "
+            + PREFIX_TASK_DATE + " 2022-01-01 "
+            + PREFIX_TASK_TIME + " 13:29 "
+            + PREFIX_TASK_VENUE + " Board Room";
 
     public static final String DESCRIPTION = "Add to the task list of the person specified by INDEX";
 

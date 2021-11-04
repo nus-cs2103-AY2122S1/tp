@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -23,6 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -41,6 +43,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TASK_NAME_TASK1 = "task 1";
     public static final String VALID_TASK_NAME_TASK2 = "task 2";
+    public static final String VALID_TASK_DATE_1 = "2021-12-20";
+    public static final String VALID_TASK_DATE_2 = "2022-08-08";
+    public static final String VALID_TASK_TIME_1 = "23:59";
+    public static final String VALID_TASK_TIME_2 = "10:30";
+    public static final String VALID_TASK_VENUE_1 = "Zoom";
+    public static final String VALID_TASK_VENUE_2 = "Bugis";
     public static final List<Task> VALID_TASK_LIST_1 = new ArrayList<Task>(
             Arrays.asList(new Task(new TaskName(VALID_TASK_NAME_TASK1), null, null, null))
     );
@@ -91,6 +99,17 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withDescription(VALID_DESCRIPTION_BOB).build();
     }
+
+    public static final EditTaskDescriptor DESC_MEETING;
+    public static final EditTaskDescriptor DESC_RUN;
+
+    static {
+        DESC_MEETING = new EditTaskDescriptorBuilder().withTaskName("Meeting").withTaskDate("2021-11-30")
+                .withTaskTime("13:00").withVenue("SR15").build();
+        DESC_RUN = new EditTaskDescriptorBuilder().withTaskName("Run").withTaskDate("2021-12-30")
+                .withTaskTime("18:00").withVenue("Clementi Stadium").build();
+    }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

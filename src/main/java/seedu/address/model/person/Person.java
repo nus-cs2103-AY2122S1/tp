@@ -98,6 +98,7 @@ public class Person implements Comparable<Person> {
     public int getOverdueTasks() {
         int count = 0;
         for (Task task : tasks) {
+            task.updateDueDate();
             if (task.getIsOverdue()) {
                 count++;
             }
@@ -111,6 +112,7 @@ public class Person implements Comparable<Person> {
     public int getSoonDueTasks() {
         int count = 0;
         for (Task task : tasks) {
+            task.updateDueDate();
             if (task.getIsDueSoon()) {
                 count++;
             }

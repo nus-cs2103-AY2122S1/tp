@@ -51,14 +51,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION
             + " by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]"
             + "[" + PREFIX_DESCRIPTION + "Description]"
-            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer)"
+            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer less than or equal to "
+            + Integer.MAX_VALUE + ")\n"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
             + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
@@ -82,7 +83,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     private final Index targetTaskIndex;
-    private final EditTaskCommand.EditTaskDescriptor editTaskDescriptor;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -91,7 +92,7 @@ public class EditCommand extends Command {
      * @param editTaskDescriptor details to edit the task with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor,
-                       Index targetTaskIndex, EditTaskCommand.EditTaskDescriptor editTaskDescriptor) {
+                       Index targetTaskIndex, EditTaskDescriptor editTaskDescriptor) {
         requireNonNull(index);
 
         this.index = index;
@@ -124,6 +125,8 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        String editedTaskMessage = "";
+
         if (targetTaskIndex != null) {
             List<Task> tasks = new ArrayList<>();
             tasks.addAll(personToEdit.getTasks());
@@ -145,13 +148,21 @@ public class EditCommand extends Command {
                     editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
                     editedPerson.isImportant()
             );
+
+            editedTaskMessage = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
         }
         // If the edited details result in a duplicate person, throw an exception.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.setPerson(personToEdit, editedPerson);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        if (targetTaskIndex == null) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
+                    + editedTaskMessage);
+        }
     }
 
     /**
@@ -174,7 +185,7 @@ public class EditCommand extends Command {
                 updatedDescription, updatedisImportant);
     }
 
-    private static Task createEditedTask(Task taskToEdit, EditTaskCommand.EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert(taskToEdit != null);
 
         TaskName updatedName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
@@ -182,9 +193,7 @@ public class EditCommand extends Command {
         TaskTime updatedTime = editTaskDescriptor.getTaskTime().orElse(taskToEdit.getTime());
         Venue updatedVenue = editTaskDescriptor.getTaskVenue().orElse(taskToEdit.getVenue());
 
-        Task updatedTask = new Task(updatedName, updatedDate, updatedTime, updatedVenue);
-
-        return updatedTask;
+        return new Task(updatedName, updatedDate, updatedTime, updatedVenue);
     }
 
     @Override
@@ -346,6 +355,89 @@ public class EditCommand extends Command {
                     && getTags().equals(e.getTags())
                     && getTasks().equals(e.getTasks())
                     && getDescription().equals(e.getDescription());
+        }
+    }
+
+    /**
+     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * corresponding field value of the task.
+     */
+    public static class EditTaskDescriptor {
+        private TaskName taskName;
+        private TaskDate taskDate;
+        private TaskTime taskTime;
+        private Venue taskVenue;
+
+        public EditTaskDescriptor() {}
+
+        /**
+         * Copy constructor.
+         */
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            setTaskName(toCopy.taskName);
+            setTaskDate(toCopy.taskDate);
+            setTaskTime(toCopy.taskTime);
+            setTaskVenue(toCopy.taskVenue);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(taskName, taskDate, taskTime, taskVenue);
+        }
+
+        public void setTaskName(TaskName taskName) {
+            this.taskName = taskName;
+        }
+
+        public Optional<TaskName> getTaskName() {
+            return Optional.ofNullable(taskName);
+        }
+
+        public void setTaskDate(TaskDate taskDate) {
+            this.taskDate = taskDate;
+        }
+
+        public Optional<TaskDate> getTaskDate() {
+            return Optional.ofNullable(taskDate);
+        }
+
+        public void setTaskTime(TaskTime taskTime) {
+            this.taskTime = taskTime;
+        }
+
+        public Optional<TaskTime> getTaskTime() {
+            return Optional.ofNullable(taskTime);
+        }
+
+        public void setTaskVenue(Venue venue) {
+            this.taskVenue = venue;
+        }
+
+        public Optional<Venue> getTaskVenue() {
+            return Optional.ofNullable(taskVenue);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditTaskDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditTaskDescriptor e = (EditTaskDescriptor) other;
+
+            return getTaskName().equals(e.getTaskName())
+                    && getTaskDate().equals(e.getTaskDate())
+                    && getTaskTime().equals(e.getTaskTime())
+                    && getTaskVenue().equals(e.getTaskVenue());
         }
     }
 }

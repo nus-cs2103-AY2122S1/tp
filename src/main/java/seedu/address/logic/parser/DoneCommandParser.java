@@ -9,12 +9,13 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DoneCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DoneCommand object
  */
-public class DoneCommandParser {
+public class DoneCommandParser implements Parser<DoneCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DoneCommand
      * and returns a DoneCommand object for execution.
@@ -26,6 +27,9 @@ public class DoneCommandParser {
                     ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX);
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
+            if (argMultimap.getValue(PREFIX_TASK_INDEX).isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+            }
             Set<Index> taskIndexSet = ParserUtil.parseTaskIndexes(argMultimap.getAllValues(PREFIX_TASK_INDEX));
             List<Index> taskIndex = new ArrayList<>(taskIndexSet);
 
