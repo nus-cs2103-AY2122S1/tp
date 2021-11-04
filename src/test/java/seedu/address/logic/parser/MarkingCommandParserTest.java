@@ -77,18 +77,22 @@ public class MarkingCommandParserTest {
         assertParseFailure(parserForUnmark, "0 -1",
                 String.format(errorDueToInvalidIndex, UnmarkCommand.MESSAGE_USAGE));
 
-        // Multiple inputs, all valid, duplicates
-        assertParseFailure(parserForMark, "1 1",
-                String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE)); // Only 2 inputs, duplicates
+        // 2 duplicate inputs
+        assertParseFailure(parserForMark, "1 1", 
+                String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parserForUnmark, "1 1",
-                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE)); // Only 2 inputs, duplicates
-        assertParseFailure(parserForMark, "70 2 3 2 2 1 70",
-                String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE)); // Many duplicates interspersed
+                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE));
+        
+        // Many duplicates interspersed (Note that MarkingCommandParser does not detect out of range indexes)
+        assertParseFailure(parserForMark, "70 2 3 2 2 1 70", 
+                String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parserForUnmark, "70 2 3 2 2 1 70",
-                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE)); // Many duplicates interspersed
+                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE)); 
+        
+         // Duplicates as last few inputs
         assertParseFailure(parserForMark, "2 3 4 4 4",
-                String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE)); // Duplicates as last few inputs
+                String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parserForUnmark, "2 3 4 4 4",
-                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE)); // Duplicates as last few inputs
+                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE));
     }
 }
