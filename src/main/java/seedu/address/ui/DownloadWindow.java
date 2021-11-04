@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -19,9 +18,6 @@ public class DownloadWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(DownloadWindow.class);
     private static final String FXML = "DownloadWindow.fxml";
-
-    @FXML
-    private Button copyButton;
 
     @FXML
     private Label downloadMessage;

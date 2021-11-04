@@ -24,7 +24,8 @@ public class ListCommand extends Command {
             + "Parameters: [" + PREFIX_INCOMING_MONTH + "] or [" + PREFIX_INCOMING_WEEK + "]\n"
             + "Example: " + COMMAND_WORD
             + " or " + COMMAND_WORD + " " + PREFIX_INCOMING_MONTH
-            + " or " + COMMAND_WORD + " " + PREFIX_INCOMING_WEEK;
+            + " or " + COMMAND_WORD + " " + PREFIX_INCOMING_WEEK + "\n"
+            + "Note: No additional input after the flag is allowed.";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all elderly";
     public static final String MESSAGE_SUCCESS_INCOMING = "Listed all elderly with existing visits in next %1$s.";

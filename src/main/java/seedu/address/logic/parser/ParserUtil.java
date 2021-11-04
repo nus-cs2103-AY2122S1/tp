@@ -282,4 +282,15 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns true if the prefix present and contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean isPrefixPresentAndEmpty(ArgumentMultimap argumentMultimap, Prefix prefix) {
+        Optional<String> val = argumentMultimap.getValue(prefix);
+        if (val.isPresent() && val.get().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }
