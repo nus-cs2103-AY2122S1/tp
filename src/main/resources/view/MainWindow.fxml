@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root height="700.0" minHeight="700" minWidth="1400.0" onCloseRequest="#handleExit" title="gitGud" type="javafx.stage.Stage" width="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root height="700.0" minHeight="700" minWidth="1400.0" onCloseRequest="#handleExit" title="gitGud"
+         type="javafx.stage.Stage" width="1200.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/gitGud.png" />
   </icons>
