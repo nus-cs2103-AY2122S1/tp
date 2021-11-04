@@ -15,5 +15,10 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_INTERNAL_COMMAND = "Unknown internal command! Make a "
             + "bug report?";
     public static final String MESSAGE_INVALID_REMINDER_DAY_VALUE = "The value of the day must be a positive Integer!";
-
+    public static final String MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED =
+            "The task list of the selected person is not shown on the task list panel!\n"
+            + "Please view the selected person's task list first using cat INDEX, where\n"
+            + "INDEX refers to the index of the person in the displayed person list.\n"
+            + "Alternatively, you can use cat -A if you prefer to display every person's "
+            + "task list.\n";
 }
