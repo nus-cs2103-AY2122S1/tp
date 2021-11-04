@@ -57,17 +57,21 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    
    * **`clear`** : Clears all sample data.
     
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn,
-    where `98765432`is his phone number, `johnd@example.com` is his email and `3000` is his expected salary.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com r/Teacher et/Full time s/3000 l/Bachelors y/4` : 
+      Adds an applicant named `John Doe` to RecruitIn, where `98765432`is his phone number, `johnd@example.com` is his email, 
+      `Teacher` is the role he applied for, `Full time` is his desired employment type, `3000` is his expected salary,
+      `Bachelors` is his highest level of education, and he has `4` years of experience.
     
-    * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com s/3000` : Adds an applicant named `Mary Poppins` to RecruitIn,
-    where `91131513`is her phone number, `maryp@example.com` is her email and `3000` is her expected salary.
+    * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com r/Receptionist et/Temporary s/3000 l/High School y/2` : 
+      Adds an applicant named `Mary Poppins` to RecruitIn, where `91131513`is her phone number, `maryp@example.com` is her email, 
+      `Receptionist` is the role she applied for, `Temporary` is her desired employment type, `3000` is her expected salary, 
+      `High School` is her highest level of education, and she has `2` years of experience.
     
     * **`list`** : Lists all applicants.
    
     * **`find`**`n/John Mary` : Finds all applicants whose names are `John` or `Mary`.
 
-    * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would `Mary`.
+    * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would now be `Mary`.
 
     * **`show`**`s/` : Displays all unique expected salaries in RecruitIn, which would be 1 result that is `3000`.
 

@@ -20,7 +20,7 @@ public class UnmarkCommand extends MarkingCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the applicants identified by the index numbers used in the displayed "
-            + "person list to Not Done.\n" + "Parameters: INDEX... (must be positive integers)\n"
+            + "person list to Not Done.\n" + "Parameters: INDEX...\n"
             + "Example: " + COMMAND_WORD + " 1 4 7";
 
     public static final String MESSAGE_UNMARKED_PERSON_SUCCESS = "Unmarked Person(s) to Not Done: \n%1$s";
