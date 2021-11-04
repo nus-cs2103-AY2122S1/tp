@@ -25,7 +25,7 @@ Given below are my contributions to the project.
     * Set up project issue tracker with relevant issue tags
 
 * **Enhancements to existing features**:
-  * Adapted code from Address Book 3 to suit the context of Source Control (Pull requests [\#92](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/92), [\#94](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/94)) 
+  * Adapted code from Address Book 3 to suit the context of Source Control (Pull requests [\#92](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/92), [\#94](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/94))
   * Updated the application title and icon (Pull request [\#180](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/180))
   * Wrote additional tests for existing features to increase coverage from 66% to 71% (Pull request [\#256](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/256))
 

@@ -78,4 +78,3 @@ Given below are my contributions to the project.
       [10](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/140),
       [11](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/142),
       [12](https://github.com/AY2122S1-CS2103-F10-2/tp/issues/144))
-      
