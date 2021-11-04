@@ -30,16 +30,6 @@ public class Person {
 
     /**
      * Constructs a {@code Person}
-     *
-     * @param name
-     * @param phone
-     * @param email
-     * @param nationality
-     * @param tutorialGroup
-     * @param gender
-     * @param remark
-     * @param tags
-     * @param socialHandles
      */
     public Person(Name name, Phone phone, Email email, Nationality nationality,
                   TutorialGroup tutorialGroup, Gender gender,
@@ -168,14 +158,14 @@ public class Person {
         if (!getTutorialGroup().toString().isEmpty()) {
             builder.append("; Tutorial Group: ").append(getTutorialGroup());
         }
+        if (!getRemark().toString().isEmpty()) {
+            builder.append("; Remark: ").append(getRemark());
+        }
 
         Set<SocialHandle> socialHandles = getSocialHandles();
         if (!socialHandles.isEmpty()) {
             builder.append("; Social Handles: ");
             socialHandles.forEach(builder::append);
-        }
-        if (!getRemark().toString().isEmpty()) {
-            builder.append("; Remark: ").append(getRemark());
         }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

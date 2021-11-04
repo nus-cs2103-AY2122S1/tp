@@ -124,12 +124,9 @@ The `UI` component,
 
 ### Logic component
 
-**
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+![Structure of the Logic Component](images/LogicClassDiagram.png)
 
-Here's a (partial) class diagram of the `Logic` component:
-
-<img src="images/LogicClassDiagram.png" width="550"/>
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 How the `Logic` component works:
 
@@ -139,26 +136,13 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("edit 1 n/Amy")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `edit n/Amy` Command](images/EditSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<img src="images/ParserClasses.png" width="600"/>
-
-How the parsing works:
-
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -212,13 +196,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-- [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
-- [Finding contacts by keywords](#find-contacts-by-keywords)
-- [Deleting multiple contacts by keywords](#delete-by-keywords)
-- [Importing a JSON file](#import-json-file)
-- [Undoing / redoing command](#proposed-undoredo-feature)
-- [Input Suggestion](#input-suggestion)
-- {and so on...}
+1. Viewing help
+2. Modify
+   1. Adding a person
+   2. Adding tags to persons
+   3. [Adding a remark](#adding-a-remark)
+   4. Editing a person
+   5. Deleting a person
+   6. [Deleting multiple person](#delete-multiple-persons)
+   7. Deleting tags from persons
+   8. Clearing all persons
+3. View
+   1. Listing all persons
+   2. [Finding persons](#finding-persons)
+   3. [Sorting persons](#sorting-persons)
+   4. Viewing statistics
+4. Share
+   1. Importing contacts
+   2. Exporting contacts
+5. Advance
+   1. Aliasing commands
+6. Exiting the program
+7. Saving the data
 
 ### Add contacts with optional arguments
 
@@ -263,12 +262,56 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
 
-### Find Contacts by Keywords
+### Adding a remark
 
 #### Implementation
 
-The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of 
-their contact details.
+The following activity diagram summarizes what happens when a user executes an add remark command on a specified person:
+
+![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
+
+The add remark mechanism will add remark to a contact specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
+
+During `RemarkCommand#execute`, a new `Person` object will be created. For all of its properties (e.g. `Name`) except for `Remark`, the values will remain the same as the original person's properties.
+
+#### Usage
+
+Given below is an example usage scenario and how the add remark mechanism behaves at each step.
+
+Step 1. The user executes `remark 1 r/She likes coding` command to add the remark field to the first person.
+
+Step 2. `RemarkCommandParser#parse` will then parse the arguments provided. In this example, a new `RemarkCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the parser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The `RemarkCommand` will then create a new `Person` using information from input remark. All other information will be taken from the original `Person`.
+
+Step 4. `RemarkCommand#execute` will then replace the old `Person` in the `model` with the new `Person`.
+
+The following sequence diagram shows how the add remark mechanism works:
+
+![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+</div>
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Create a new person with the remark field replaced and the other fields same as the old person.
+    * Pros: Maintains immutability.
+    * Cons: It may have performance issues in terms of memory usage as a new `Person` object is created.
+
+* **Alternative 2:** Edit the old person directly.
+    * Pros: It uses less memory and thus may run faster.
+    * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
+
+### Finding Persons
+
+#### Implementation
+
+The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
 
 #### Usage
 
@@ -299,19 +342,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How contacts are saved with multiple arguments:**
 
-* **Alternative 1 (current choice):** Only include people who contain all the specified contact details 
+* **Alternative 1 (current choice):** Only include people who contain all the specified contact details
     * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
     * Cons: Requires you to be familiar of the people in your contact list.
 
 * **Alternative 2:** Include people who contain at least one of the specified contact details.
-    * Pros: Good for users who want to broadly search for eligible friends 
+    * Pros: Good for users who want to broadly search for eligible friends
     * Cons: Not very intuitive
 
-### Delete by keywords
+### Delete multiple persons
 
 #### Implementation
 
-The Delete By Keyword mechanism will delete contacts specified by a given set of keywords. Any contacts containing any of the specified keywords will be deleted.
+The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing all the specified keywords will be deleted.
 
 It works by filtering for the contacts in the `model` and deleting them one by one.
 
@@ -319,21 +362,21 @@ It works by filtering for the contacts in the `model` and deleting them one by o
 
 The following activity diagram briefly summarizes what happens when a user executes the `DeleteMultipleCommand` to delete contacts by keywords:
 
-[insert diagram]
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
 
-Given below is an exmaple usage scenario and how the Delete By Keyword mechanism behaves at each step.
+Given below is an exmaple usage scenario and how the deleting multiple person mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
 Step 2. The user executes `deletem t/friends g/m` command to delete all contacts with the tag `friends` and gender `M`.
 
-Step 3. This will call `DeleteMultipleCommandParsr#parse` which will then parse the arguments provided.
+Step 3. This will call `DeleteMultipleCommandParser#parse` which will then parse the arguments provided.
 Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
 
 Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.
-The following sequence diagram briefly shows how the parser operation works:
+The following sequence diagram briefly shows how the parser operation works (`MultiplePredicates` not shown):
 
-[insert diagram]
+![DeleteMultipleParserSequenceDiagram](images/DeleteMultipleParserSequenceDiagram.png)
 
 Step 5. `DeleteMultipleCommand#execute` will filter the model with the provided list of predicates and get back the filtered list.
 
@@ -341,13 +384,11 @@ Step 6. It will then iterate through the list and call `deletePerson` to remove 
 
 Step 7. After deleting contacts, it will call `updateFilteredPersonList` on model to list all the remaining contacts.
 
-The following sequence diagram shows how the Delete By Keywords mechanism works:
+The following sequence diagram shows how the deleting multiple person mechanism works:
 
-[insert diagram]
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
 #### Design considerations:
-
-**Aspect: How delete multiple executes:**
 
 * **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
     * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
@@ -356,6 +397,53 @@ The following sequence diagram shows how the Delete By Keywords mechanism works:
 * **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
     * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
     * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
+
+### Sorting persons
+
+#### Implementation
+
+The following activity diagram summarizes what happens when a user executes a sort persons command with a specified field:
+
+![SortActivityDiagram](images/SortActivityDiagram.png)
+
+The Sort mechanism sorts persons based on the specified field in ascending order.
+The command will result in the creation of a Comparator<Person>.
+
+#### Usage
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `sort n/` command to sort all persons by name in ascending alphabetical order.
+
+Step 3. This will call SortCommandParser#parse which will then parse the arguments provided.
+
+Step 4. A new `NameComparator` and `SortCommand` object will then be created. It will be used to sort all the persons based on their names. This `NameComparator` is then passed to the `SortCommand`.
+
+The following sequence diagram shows how the parser operation works (`NameComparator` not shown):
+
+![SortParserSequenceDiagram](images/SortParserSequenceDiagram.png)
+
+Step 5. `SortCommand#execute` will set the `AddressBook` model's sorted person list with the provided comparator.
+
+Step 6. The GUI will then proceed to get the full list of persons.
+
+Step 7. After execution, `CommandResult` will contain a message indicating that it has sorted all persons based on the specified field.
+
+The following sequence diagram shows how the Sort mechanism works:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Sort all persons based on single field.
+    * Pros: Easy to implement.
+    * Cons: May not be very convenient if the contact list is very huge and users would like to sort based on multiple fields.
+
+* **Alternative 2:** Sort all persons based on multiple fields.
+    * Pros: Convenient if the contact list is very huge and users would like to sort based on multiple fields.
+    * Cons: Difficult to implement.
 
 ### Import JSON file
 
@@ -504,7 +592,7 @@ Currently, this feature only supports suggestions for commands and nationalities
 
 This feature is implemented using the `Wagner-Fischer` dynamic programming algorithm to compute the `Levenshtein distance`.
 The `Levenshtein distance` between two words is the minimum number of single-character edits
-(insertions, deletions or substitutions) required to change one word into the other. 
+(insertions, deletions or substitutions) required to change one word into the other.
 
 #### Usage
 
@@ -512,7 +600,7 @@ Given below is an example usage scenario and how the Input Suggestion mechanism 
 
 Step 1. The user launches the application.
 
-Step 2. The user executes `fin n/Ben` command, with the intention of typing `find n/Ben`. 
+Step 2. The user executes `fin n/Ben` command, with the intention of typing `find n/Ben`.
 
 Step 3. This will call `AddressBookParser#parseCommand`. But since there are no command words that match it,
 it will end up at the `default` clause of the `switch` statement.

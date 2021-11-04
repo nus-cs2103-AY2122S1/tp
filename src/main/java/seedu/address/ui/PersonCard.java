@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.awt.Color;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -92,7 +93,12 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label l = new Label(tag.tagName);
-                    l.setStyle("-fx-background-color: " + tag.tagColour + ";");
+                    if (isTagTooBright(tag.tagColour)) {
+                        l.setStyle("-fx-text-fill: " + "black;"
+                                + "-fx-background-color: " + tag.tagColour + ";");
+                    } else {
+                        l.setStyle("-fx-background-color: " + tag.tagColour + ";");
+                    }
                     tags.getChildren().add(l);
                 });
         person.getSocialHandles().stream()
@@ -129,5 +135,23 @@ public class PersonCard extends UiPart<Region> {
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
+    }
+
+    /**
+     * Returns true if tag colour is too bright.
+     *
+     * @param tagColour
+     * @return
+     */
+    public boolean isTagTooBright(String tagColour) {
+        tagColour = tagColour.substring(1);
+        int hexadecimalCode = Integer.parseInt(tagColour, 16);
+        Color colour = new Color(hexadecimalCode);
+        float[] hsbArray = Color.RGBtoHSB(colour.getRed(), colour.getGreen(), colour.getBlue(), null);
+        float brightness = hsbArray[2];
+        if (brightness < 0.5) {
+            return false;
+        }
+        return true;
     }
 }
