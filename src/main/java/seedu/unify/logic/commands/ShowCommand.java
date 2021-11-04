@@ -1,6 +1,7 @@
 package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
@@ -15,9 +16,13 @@ public class ShowCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows task for the week \n"
             + "Parameters: "
-            + "week number"
+            + "week number "
+            + "OR"
+            + "date \n"
             + "Example: " + COMMAND_WORD + " "
-            + "1";
+            + "1"
+            + "OR"
+            + PREFIX_DATE + "2021-04-01";
 
     public static final String MESSAGE_SUCCESS = "Week %d is shown";
     public static final String MESSAGE_DUPLICATE_TASK = "This Week is already being shown";
@@ -41,7 +46,7 @@ public class ShowCommand extends Command {
     }
 
     private static int dateToWeekNum(Date date) {
-        return 1;
+        return date.getWeek();
     }
 
     @Override
