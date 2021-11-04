@@ -105,7 +105,12 @@ New Workflow for Adding Commands:
 
 Notor allows you to search for groups and people, and both searches have slightly different requirements.
 
-Lets break down what happens to call a person comamnd.
+Lets break down what happens to call a person command. The following is a low-level sequence diagram to show in detail how the method is called.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+* The common logic for all commands is shared in LogicManager and NotorParser, which uses the Command design pattern. Making use of polymorphism, we know we will have a Command returned which can be executed by the Logic Manager, while different classes hold the functionality.
+* Each command parser is responsible for checking that the correct parameters have been passed, and forming them into 
 
 ### Model Changes
 

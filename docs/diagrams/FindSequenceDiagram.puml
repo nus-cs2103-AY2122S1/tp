@@ -7,7 +7,7 @@ participant ":NotorParser" as NotorParser LOGIC_COLOR
 participant ":PersonFindCommandParser" as PersonFindCommandParser LOGIC_COLOR
 participant "pFind:PersonFindCommand" as PersonFindCommand LOGIC_COLOR
 participant ":PersonFindExecutor" as PersonFindExecutor LOGIC_COLOR
-participant "tagSearchPredicate:NameContainsPredicate" as NameContainsPredicate MODEL_COLOR
+participant "ourSearch:NameContainsPredicate" as NameContainsPredicate MODEL_COLOR
 participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -35,14 +35,15 @@ create NameContainsPredicate
 PersonFindCommandParser -> NameContainsPredicate : NameContainsPredicate(nameQuery, tagQuery)
 activate NameContainsPredicate
 
-NameContainsPredicate -> PersonFindCommandParser :tagSearchPredicate
+NameContainsPredicate -> PersonFindCommandParser :ourSearch
 deactivate NameContainsPredicate
 
 create PersonFindCommand
-PersonFindCommandParser -> PersonFindCommand : PersonFindCommand(tagSearchPredicate)
+PersonFindCommandParser -> PersonFindCommand : PersonFindCommand(ourSearch)
 activate PersonFindCommand
 
-PersonFindCommand -> PersonFindExecutor : PersonFindExecutor(tagSearchPredicate)
+create PersonFindExecutor
+PersonFindCommand -> PersonFindExecutor : PersonFindExecutor(ourSearch)
 activate PersonFindExecutor
 PersonFindExecutor -> PersonFindCommand
 deactivate PersonFindExecutor
@@ -64,7 +65,7 @@ activate PersonFindCommand
 
 PersonFindCommand -> PersonFindExecutor : execute()
 activate PersonFindExecutor
-PersonFindExecutor -> Model : updateFilteredPersonList(predicate)
+PersonFindExecutor -> Model : updateFilteredPersonList(ourSearch)
 activate Model
 Model --> PersonFindExecutor
 deactivate Model
@@ -73,7 +74,7 @@ create CommandResult
 PersonFindExecutor -> CommandResult
 activate CommandResult
 
-CommandResult --> PersonFindExecutor
+CommandResult --> PersonFindExecutor : result
 deactivate CommandResult
 
 PersonFindExecutor -> PersonFindCommand : result
