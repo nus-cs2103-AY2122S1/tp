@@ -11,9 +11,14 @@ public class FriendId {
 
     public static final String MESSAGE_EMPTY_FRIEND_ID =
             "FRIEND_ID cannot be empty.";
-    public static final String MESSAGE_INVALID_CHARACTERS = "FRIEND_ID provided must be a single word and only contain "
-            + "alphanumeric characters.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
+    public static final String MESSAGE_INVALID_CHARACTERS = "FRIEND_ID provided must be a single alphanumeric word, "
+            + "of maximum 20 characters.";
+
+    /**
+     * Non-empty, alpha-numeric, one-word string with a max limit of 20 characters.
+     */
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]{1,20}$";
+
     public final String value;
 
     /**

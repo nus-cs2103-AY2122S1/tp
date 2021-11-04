@@ -11,9 +11,14 @@ public class GameId {
 
     public static final String MESSAGE_DUPLICATE_GAME_ID =
             "Game IDs should be unique for each game in the game's list.";
-    public static final String MESSAGE_INVALID_CHARACTERS_IN_GAME_ID = "GAME_ID provided must be a single word"
-            + " and only contain alphanumeric characters.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
+    public static final String MESSAGE_INVALID_CHARACTERS = "GAME_ID provided must be a single alphanumeric "
+            + "word, of maximum 20 characters.";
+
+    /**
+     * Non-empty, alpha-numeric, one-word string with a max limit of 20 characters.
+     */
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]{1,20}$";
+
     public final String value;
 
     /**
@@ -23,7 +28,7 @@ public class GameId {
      */
     public GameId(String gameId) {
         requireNonNull(gameId);
-        checkArgument(isValidGameId(gameId), MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
+        checkArgument(isValidGameId(gameId), MESSAGE_INVALID_CHARACTERS);
         value = gameId;
     }
 

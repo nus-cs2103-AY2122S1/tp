@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UserName {
 
-    public static final String MESSAGE_CONSTRAINTS = "In-game usernames cannot be empty.";
+    public static final String MESSAGE_CONSTRAINTS = "USERNAME provided must be a non-empty string "
+            + "of maximum 20 characters, and not contain '-' (hyphen).";
 
-    /*
-     * The first character of the username must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+    /**
+     * The username must not be blank, empty, whitespace or contain a '-'. Max limit of 20 characters.
+     * This is to avoid any flags being inserted in the username.
      */
-    public static final String VALIDATION_REGEX = "^\\S.*$";
+    public static final String VALIDATION_REGEX = "^[^-]{1,20}$";
 
     public final String value;
 

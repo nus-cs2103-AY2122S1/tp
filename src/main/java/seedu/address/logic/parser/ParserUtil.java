@@ -76,7 +76,7 @@ public class ParserUtil {
         requireNonNull(gameId);
         String trimmedName = gameId.trim();
         if (!GameId.isValidGameId(trimmedName)) {
-            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
+            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS);
         }
         return new GameId(trimmedName);
     }

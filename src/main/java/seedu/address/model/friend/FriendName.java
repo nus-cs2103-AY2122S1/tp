@@ -10,13 +10,12 @@ public class FriendName {
     // constants
     public static final FriendName DEFAULT_FRIEND_NAME = new FriendName("No name assigned");
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "FRIEND_NAME provided must consist of only alphanumeric words, of maximum 20 characters in total.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+    /**
+     * Non-empty, alpha-numeric, multi-word string with a max limit of 20 characters.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]{1,20}$";
 
     public final String fullName;
 
