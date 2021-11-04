@@ -16,6 +16,6 @@ public class UploadCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new UploadCommandResult(SHOWING_UPLOAD_MESSAGE, model);
+        return new UploadCommandResult(SHOWING_UPLOAD_MESSAGE);
     }
 }
