@@ -116,4 +116,5 @@ Given below are my contributions to the project.
     * Pull requests
       [\#300](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/300),
       [\#307](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/307),
-      [\#318](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/318))
+      [\#318](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/318),
+      [\#320](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/320))
