@@ -106,13 +106,13 @@ public class AddToClassCommand extends Command {
 
     /**
      * Categorizes students into not found, already enrolled, added, and not added due to class size limit.
-     * @param studentList students to be added
-     * @param model model containing all students and tuition classes
-     * @param tuitionClass the tuition class students are added to
+     * @param studentList students to be added.
+     * @param model model containing all students and tuition classes.
+     * @param tuitionClass the tuition class students are added to.
      * @return an array of arraylists containing students being divided to not found, already enrolled, added,
      * and not added due to class size limit.
      */
-    private ArrayList[] getStudent(StudentList studentList, Model model, TuitionClass tuitionClass) {
+    private ArrayList[] categorizeStudents(StudentList studentList, Model model, TuitionClass tuitionClass) {
         ArrayList<String> invalidStudentNames = new ArrayList<>();
         ArrayList<Student> newStudents = new ArrayList<>();
         ArrayList<String> notAdded = new ArrayList<>();
@@ -153,14 +153,14 @@ public class AddToClassCommand extends Command {
 
     /**
      * Executes the command if students are added using their names.
-     * @param model model containing all students and tuition classes
-     * @param tuitionClass the tuition class students are added to
-     * @return a CommandResult of the AddToClass command
+     * @param model model containing all students and tuition classes.
+     * @param tuitionClass the tuition class students are added to.
+     * @return a CommandResult of the AddToClass command.
      */
     private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) {
-        ArrayList[] students = this.getStudent(studentList, model, tuitionClass);
+        ArrayList[] students = this.categorizeStudents(studentList, model, tuitionClass);
         ArrayList<Student> newStudents = students[0];
-        String logStudentName = "";
+
         if (newStudents.size() == 0) {
             return new CommandResult(getMessage(students));
         }
@@ -171,6 +171,23 @@ public class AddToClassCommand extends Command {
         if (modifiedClass == null) {
             return new CommandResult(getMessage(students));
         }
+
+        String logStudentName = updateStudent(newStudents, tuitionClass, modifiedClass, model);
+        logger.info("Add students [" + logStudentName + "] to class [" + tuitionClass.getName() + "]");
+        return new CommandResult(getMessage(students));
+    }
+
+    /**
+     * Updates information of new students enrolled in the tuition class.
+     * @param newStudents students to be updated.
+     * @param tuitionClass the original tuition class.
+     * @param modifiedClass the updated tuition class.
+     * @param model the model containing all students and tuition classes.
+     * @return log information.
+     */
+    private String updateStudent(ArrayList<Student> newStudents, TuitionClass tuitionClass,
+                                TuitionClass modifiedClass, Model model) {
+        String logStudentName = "";
         for (Student student : newStudents) {
             Student studentToAdd = student;
             Student studentToChange = student;
@@ -183,8 +200,7 @@ public class AddToClassCommand extends Command {
                     modifiedClass.getTimeslot())));
             updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         }
-        logger.info("Add students [" + logStudentName + "] to class [" + tuitionClass.getName() + "]");
-        return new CommandResult(getMessage(students));
+        return logStudentName;
     }
 
     /**

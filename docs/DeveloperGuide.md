@@ -170,29 +170,56 @@ Step3: If time slot follows the format and no conflict exist, a new `TuitionClas
 
 ### [Developed] Display of Timetable
 
-The construction of the read-only timetable is mainly facilitated by the `Timetable` class which is encapsulated in the `Tuition` package.
-The `Timetable` receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable.
+The construction of the read-only timetable is facilitated by the `Timetable` class in the `Tuition` package.
+The `Timetable` receives an updated `tuitionClassList` from `UniqueTuitionList`, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable.
 It generates a timetable with the help of the `TimetableInfoPage` class using the following operations:
 
-* `Timetable#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`. Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list
-* `TimetableInfoPage#setTableTime(start, end)` - Constructs a timetable given the starting and ending time
-* `Timetable#insertSlot()` - Inserts all tuition classes into the timetable
+* `Timetable#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`. Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list.
+* `TimetableInfoPage#setTableTime(start, end)` - Constructs a timetable given the starting and ending time.
+* `Timetable#insertSlot()` - Inserts all tuition classes into the timetable.
+* `TimetableInfoPage#addLesson(lesson, columnStartInsert, rowStartInsert, columnSpan, rowSpan)` - Inserts a lesson to the corresponding rows and columns of the timetable.
 
-Given below is an example usage scenario and how the timetable is generated.
+<div markdown="span" class="alert alert-info">:information_source:**Note:** 
+The above operations in the `Timetable` class is responsible for processing data of `tuitionClassList` and determining the details of timetable.
+And operations in the `TimetableInfoPage` class interact with `UI` to construct the timetable according to details provided by the `Timetable` class.
+</div>
 
-Step1: The user enters `timetable` command. The `TimetableCommand` class will first check whether the tuition class list received is empty.
-If there is not any tuition class, a `CommandException` will be thrown to alert the user that no class has been found.
+Given below is an example usage scenario of how the timetable is generated.
 
-Step2: Upon ensuring there are tuition classes, the list of tuition classes are passed to the `Timetable` class.
+Step1: The user executes `timetable` command to view a read-only timetable. 
 
-It will proceed to parse the `TimeSlot` in each tuition class.
+Step2: The `TimetableCommand` class checks whether the `mostRecentTuitionClasses` maintained in `UniqueTuitionList` is empty.
+
+Step2.1: If there is not any tuition class, a `CommandResult` will be returned to alert the user that no class has been found.
+
+Step2.2: Otherwise, the `mostRecentTuitionClasses` in `UniqueTuitionList` is passed to the `Timetable` class.
+
+Step3: `Timetable` will proceed to parse the `TimeSlot` in each tuition class.
 After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided.
+The intended size of timetable is then passed to the `TimetableInfoPage` class.
 
-Step3: The intended size of timetable is then passed to the `TimetableInfoPage` class.
+Step4: Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by calling `TimetableInfoPage#addLesson`.
 
-Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by the `TimetableInfoPage` class.
+The following *Sequence Diagram* illustrates how `Timetable` interacts with `TimetableInfoPage` as explained by `step 3` and `step 4`:
 
-Step4: The complete timetable is displayed to user through the `UI` component.
+![Interactions between Timetable and TimetableInfoPage](images/TimetableCommandSequenceDiagram.png)
+
+Step5: The complete timetable is displayed to user through the `UI` component.
+
+The following activity diagram summarizes what happens when a user executes a "timetable" command:
+![TimetableCommand Activity Diagram](images/TimetableCommandActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Size of timetable:**
+
+* **Alternative 1 (current choice):** Change the size of timetable according to lessons added.
+    * Pros: Easier for users to view lessons scheduled.
+    * Cons: May produce a timetable at a slightly slower speed and is more prone to bugs.
+
+* **Alternative 2:** Fix the size of timetable.
+    * Pros: Easy to implement.
+    * Cons: User experience would be compromised as the timetable will include many empty slots.
 
 
 ### [Developed] Adding Remarks With Editor
@@ -249,26 +276,43 @@ Step 4: Finally, it replaces the existing class with the updated class in the da
 Users can add students to existing tuition classes using student index or name.
 This is facilitated by the `AddToClassCommand` and `AddToClassCommandParser` classes.
 
-The `AddToClassCommandParser` class parses the input from user and decides whether student indexes or student names are indicated by the user.
-Students are added to the respective tuition class with the help of the following operations:
+The `AddToClassCommandParser` parses the input from user and decides whether student indices or student names are used.
+Students are added to the respective tuition class with the help of the following operations in `AddToClassCommand`:
 
-* `AddToClassCommand#getStudent()` - Categorizes students into four types, namely students that are added successfully, students with invalid names, students with valid names but not added due to class size limit, and students already enrolled in the class. 
-* `AddToClassCommand#updateModel()` - Updates the capacity of the corresponding tuition class and updates the class tag of students who have been enrolled.
+* `AddToClassCommand#categorizeStudents()` - Categorizes students into four types, namely students that are added successfully, students with invalid names, students with valid names but not added due to class size limit, and students already enrolled in the class. 
+* `AddToClassCommand#updateModel()` - Updates the capacity of the corresponding tuition class and updates the class tag of students enrolled.
 
 Given below is an example usage scenario and how an `addtoclass` command is executed.
 
-Step 1: The user enters `addtoclass si/2 4 tc/1` command.
+The interactions between the components during the usage scenario is show in the *Sequence Diagram* below.<br>
+![Ui](images/AddToClassSequenceDiagram.png)
 
-Step 2: The `AddToClassCommandParser` will check and confirm that student indexes are used. An `AddToClassCommand` object with student indexes as parameter is constructed.
+Step 1: The user enters `atc si/2 4 tc/1` command.
 
-Step 3: The `AddToClassCommand` is executed. Student indexes, namely 2 and 4, are converted to student names using the `UniqueStudentList`.
+Step 2: The `AddToClassCommandParser` will check and confirm that student indices are used. An `AddToClassCommand` object with student indices as parameter is constructed.
 
-Step 3.1: Student indexes that are not found in the `UniqueStudentList` would be regarded as invalid indexes. 
+Step 3: The `AddToClassCommand` is executed. Student indices, namely 2 and 4, are converted to student names using the `UniqueStudentList`.
 
-Step 3.2: Valid students who are not added due to tuition class size limit or who have been enrolled in the same class previously are identified using the `AddToClassCommand#getStudent()` method.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+Student indices that are not found in the `UniqueStudentList` would be regarded as invalid indices.
+Valid students who are not added due to tuition class size limit or who have been enrolled in the same class previously are identified using the `AddToClassCommand#categorizeStudents()` method.
+</div>
 
-Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled in the class which shows the `ClassName` and
+Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled ito show the `ClassName` and
 `Timeslot` of the class.
+
+#### Design considerations:
+
+**Aspect: Whether to allow users to add students using names:**
+
+* **Alternative 1 (current choice):** Allows both student indices and student names.
+    * Pros: More flexible for users to add students to tuition classes. 
+    * Cons: More bug-prone and more difficult for users to learn the commands. This is later resolved by providing more specific instructions in user guide and detailed command feedback in TutAssistor.
+
+* **Alternative 2:** Allows only student indices.
+    * Pros: Easy to implement and avoid confusions to users as command is easy to learn.
+    * Cons: Users with a lot of students will need to scroll down to find student indices.
+    
 
 ### \[Developed\] Undo/redo feature
 
