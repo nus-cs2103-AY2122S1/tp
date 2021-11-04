@@ -32,13 +32,13 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
      */
     public MailingListCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,ALL_PREFIXES.toArray(Prefix[]::new));
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, ALL_PREFIXES.toArray(Prefix[]::new));
 
         Predicate<Prefix> prefixIsPresent = prefix -> argMultimap.getValue(prefix).isPresent();
         Set<Prefix> providedPrefixes = ALL_PREFIXES.stream().filter(prefixIsPresent).collect(Collectors.toSet());
 
         // check that only valid Prefix are provided
-        if (hasExtraArguments(argMultimap,providedPrefixes)) {
+        if (hasExtraArguments(argMultimap, providedPrefixes)) {
             throw new ParseException(MailingListCommand.MESSAGE_USAGE);
         }
 
@@ -49,14 +49,14 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
         return new MailingListCommand(providedPrefixes);
     }
 
-    private boolean hasExtraArguments(ArgumentMultimap argMultimap,Set<Prefix> providedPrefixes) {
+    private boolean hasExtraArguments(ArgumentMultimap argMultimap, Set<Prefix> providedPrefixes) {
         // check for preamble
-        if(!argMultimap.getPreamble().equals("")) {
+        if (!argMultimap.getPreamble().equals("")) {
             return true;
         }
 
         // check for data after a prefix
-        boolean hasExtraArguments =  providedPrefixes.stream()
+        boolean hasExtraArguments = providedPrefixes.stream()
                 .map(p -> argMultimap.getValue(p).get())
                 .anyMatch(p -> !p.equals(""));
         if (hasExtraArguments) {
