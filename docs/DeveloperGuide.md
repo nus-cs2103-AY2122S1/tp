@@ -873,8 +873,8 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete 0`<br>
        Expected: No patient is edited. Error details are shown in the response box.
 
-    4. Other incorrect edit commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
-       Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
+       Expected: No patient deleted. Error message is shown in the response box: "Invalid command format!..."
 
 2. Delete a patient while some patients are being shown
 
@@ -896,8 +896,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
        Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
 
-    3. Test case: `add n/OJ Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
-      Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
+    3. Test case: `add n/Joe Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
+      Expected: Doctor named Joe Doe is added successfully. Details of the added doctor are shown in the status message.
        
     4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
           Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
@@ -906,13 +906,13 @@ testers are expected to do more *exploratory* testing.
         Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
        
     6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-        Expected: No doctor is edited. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+        Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
        
     7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
-        Expected: No doctor is edited. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+        Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
 
     8. Other incorrect edit commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
-        Expected: Similar to previous.
+        Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
        
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
