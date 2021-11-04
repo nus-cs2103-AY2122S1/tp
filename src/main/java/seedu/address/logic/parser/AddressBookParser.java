@@ -44,8 +44,7 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        String trimmedUserInput = StringUtil.removeExtraWhitespace(userInput);
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(trimmedUserInput);
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -53,39 +52,39 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         // using if-else and String.startsWith() instead of switch-case
         // allows for the flexibility of having commands with multiple words, e.g. rm -contacts
-        if (trimmedUserInput.startsWith(AddCommand.COMMAND_WORD)) {
+        if (StringUtil.startsWithCommand(userInput, AddCommand.COMMAND_WORD)) {
             return new AddCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(EditFolderNameCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, EditFolderNameCommand.COMMAND_WORD)) {
             return new EditFolderNameCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(DeleteFolderCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, DeleteFolderCommand.COMMAND_WORD)) {
             return new DeleteFolderCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(EditCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, EditCommand.COMMAND_WORD)) {
             return new EditCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(ClearCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, ClearCommand.COMMAND_WORD)) {
             return new ClearCommand();
-        } else if (trimmedUserInput.startsWith(ClearFoldersCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, ClearFoldersCommand.COMMAND_WORD)) {
             return new ClearFoldersCommand();
-        } else if (trimmedUserInput.startsWith(DeleteCommand.COMMAND_WORD)
-                || trimmedUserInput.startsWith(DeletePersonFromFolderCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, DeleteCommand.COMMAND_WORD)
+                || StringUtil.startsWithCommand(userInput, DeletePersonFromFolderCommand.COMMAND_WORD)) {
             if (arguments.contains(DeletePersonFromFolderCommand.COMMAND_IDENTIFIER)) {
                 return new DeletePersonFromFolderCommandParser().parse(arguments);
             }
             return new DeleteCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(FindFoldersCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, FindFoldersCommand.COMMAND_WORD)) {
             return new FindFoldersCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(FindCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, FindCommand.COMMAND_WORD)) {
             return new FindCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(ListFoldersCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, ListFoldersCommand.COMMAND_WORD)) {
             return new ListFoldersCommand();
-        } else if (trimmedUserInput.startsWith(ListCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, ListCommand.COMMAND_WORD)) {
             return new ListCommand();
-        } else if (trimmedUserInput.startsWith(ExitCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, ExitCommand.COMMAND_WORD)) {
             return new ExitCommand();
-        } else if (trimmedUserInput.startsWith(HelpCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, HelpCommand.COMMAND_WORD)) {
             return new HelpCommand();
-        } else if (trimmedUserInput.startsWith(CreateFolderCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, CreateFolderCommand.COMMAND_WORD)) {
             return new CreateFolderCommandParser().parse(arguments);
-        } else if (trimmedUserInput.startsWith(AddToFolderCommand.COMMAND_WORD)) {
+        } else if (StringUtil.startsWithCommand(userInput, AddToFolderCommand.COMMAND_WORD)) {
             return new AddToFolderParser().parse(arguments);
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

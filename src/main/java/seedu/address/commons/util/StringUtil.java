@@ -111,4 +111,20 @@ public class StringUtil {
         requireNonNull(s);
         return String.join(" ", s.split("\\s+")).trim();
     }
+
+    /**
+     * Checks if a sentence starts with a given command
+     *
+     * The command must be followed by a whitespace character or the end of the string
+     *
+     * @param sentence Sentence to check if it starts with a given command, which may have leading/trailing spaces
+     * @param command Given command, which may have spaces in the middle but not leading/trailing
+     * @return Whether the given sentence starts with the given command
+     */
+    public static boolean startsWithCommand(String sentence, String command) {
+        assert command.trim().equals(command); // command should not have leading or trailing spaces
+        requireNonNull(command);
+        String cleanSentence = removeExtraWhitespace(sentence);
+        return cleanSentence.startsWith(command + " ") || cleanSentence.equals(command);
+    }
 }
