@@ -1427,10 +1427,25 @@ Character limit:
     4. **Other invalid commands to try**: `ua`, `ua x`(where x is larger than the list size), `ua y`(where y is an index with an appointment). <br>
        **Expected**: Similar to previous testcase (in Point 3).
 
+#### Sorting Clients
+1. Sorts the list of clients by a given keyword
+    1. **Prerequisites**: Arguments are valid, FAST contains clients.
+
+    2. **Test Case**: `sort name` <br>
+       **Expected**: The list of clients are sorted alphabetically by name.
+
+    3. **Test Case**: `sort nam` <br>
+       **Expected**: No sorting happens. Error message displayed.
+       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Make sure there is a ./data/fast.json file.
+      If not, open the app, make some changes (e.g. `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`), and close the app.
+   
+   2. Open fast.json which is located in the data folder and delete any fields of the contact (eg. `name, phone etc...`) and save the file.
+      After which start the application.<br>
+      Expected: FAST should display an empty GUI.
 
 1. _{ more test cases …​ }_
