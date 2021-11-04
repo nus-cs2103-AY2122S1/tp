@@ -13,7 +13,6 @@ import seedu.address.model.client.Client;
  * An UI component that displays information of a {@code Client}.
  */
 public class ClientCard extends UiPart<Region> {
-
     private static final String FXML = "ClientListCard.fxml";
 
     /**
@@ -47,6 +46,7 @@ public class ClientCard extends UiPart<Region> {
     public ClientCard(Client client, int displayedIndex) {
         super(FXML);
         this.client = client;
+
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
         if (client.getPhoneNumber() != null) {
@@ -68,7 +68,6 @@ public class ClientCard extends UiPart<Region> {
 
         // state check
         ClientCard card = (ClientCard) other;
-        return id.getText().equals(card.id.getText())
-                       && client.equals(card.client);
+        return id.getText().equals(card.id.getText()) && client.equals(card.client);
     }
 }

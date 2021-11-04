@@ -9,7 +9,7 @@ import seedu.address.model.product.Product;
  * Second panel containing the details of client/product.
  */
 public class ViewMoreProduct extends UiPart<Region> implements SecondPanel {
-    private static String fxml = "ViewMoreProduct.fxml";
+    private static final String fxml = "ViewMoreProduct.fxml";
 
     @FXML
     private Label id;
@@ -34,22 +34,26 @@ public class ViewMoreProduct extends UiPart<Region> implements SecondPanel {
         id.setText("ID: " + product.getId().toString());
         name.setText("Name: " + product.getName().toString());
         unitPrice.setText("Unit Price: " + product.getUnitPrice().toString());
+
         if (product.getQuantity() != null) {
             quantity.setText("Quantity: " + product.getQuantity().toString());
         }
     }
-
 
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
+
         if (!(other instanceof ViewMoreProduct)) {
             return false;
         }
 
         ViewMoreProduct view = (ViewMoreProduct) other;
-        return id.equals(view.id);
+        return id.equals(view.id)
+                && name.equals(view.name)
+                && unitPrice.equals(view.unitPrice)
+                && quantity.equals(view.quantity);
     }
 }
