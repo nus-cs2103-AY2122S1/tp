@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
@@ -91,7 +93,7 @@ public class TraceCommand extends Command {
             throw new CommandException("No resident with this information '" + this.personInput + "' could be found");
         }
 
-        ArrayList<Person> contacts = findCloseContacts(model, this.person.get());
+        List<Person> contacts = findCloseContacts(model, this.person.get());
         contacts.remove(this.person.get());
 
         model.updateFilteredPersonList(contacts::contains);
@@ -119,15 +121,14 @@ public class TraceCommand extends Command {
         return contacts;
     }
 
-    private void addToContacts(ArrayList<Person> contacts, ArrayList<Event> relevantEvents) {
-        for (Event e: relevantEvents) {
-            ArrayList<Person> attendees = e.getResidentList().getResidents();
-            for (Person attendee: attendees) {
-                if (!contacts.contains(attendee)) {
-                    contacts.add(attendee);
-                }
-            }
-        }
+    private void addToContacts(List<Person> contacts, ArrayList<Event> relevantEvents) {
+        ArrayList<Person> finalContacts = new ArrayList<>(contacts);
+        relevantEvents.forEach(event ->
+                finalContacts.addAll(event.getResidentList().getResidents()));
+        contacts.removeAll(contacts);
+        contacts.addAll(finalContacts.stream()
+                .distinct()
+                .collect(Collectors.toList()));
     }
 
     @Override

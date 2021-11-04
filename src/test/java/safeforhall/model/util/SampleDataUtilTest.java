@@ -14,7 +14,7 @@ import safeforhall.model.ReadOnlyAddressBook;
 public class SampleDataUtilTest {
 
     @Test
-    public void testSampleData(){
+    public void testSampleData() {
         try {
             ReadOnlyAddressBook addressBook = SampleDataUtil.getSampleAddressBook();
         } catch (Exception e) {
