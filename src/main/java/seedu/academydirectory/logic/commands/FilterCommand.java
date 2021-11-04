@@ -7,7 +7,7 @@ import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.InformationContainsKeywordsPredicate;
 
 /**
- * Filters and lists all students in academy directory whose name or tag(s) contains any of the argument keywords.
+ * Filters and lists all students in Academy Directory whose name or tag(s) contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {

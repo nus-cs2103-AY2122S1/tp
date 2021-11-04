@@ -9,7 +9,7 @@ public class UndoCommand extends Command {
 
     public static final String HELP_MESSAGE = "### Undo changes : `undo`\n"
             + "\n"
-            + "Undo changes done to academy directory. Use the history command to preview what undo will do\n"
+            + "Undo changes done to Academy Directory. Use the history command to preview what undo will do\n"
             + "\n"
             + "Format: `undo`";
 
@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
 
     public static final String UNDO_REQUEST_REJECTED = "Unable to undo Academy Directory as requested ...";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo changes to academy directory "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo changes to Academy Directory "
             + "Example: " + COMMAND_WORD;
 
     /**

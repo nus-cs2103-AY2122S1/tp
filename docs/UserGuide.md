@@ -386,7 +386,7 @@ Format: `list`
 
 #### Clearing all students : `clear`
 
-Clears all students from Academy Directory. This will result in an empty academy directory
+Clears all students from Academy Directory. This will result in an empty Academy Directory
 
 Format: `clear`
 

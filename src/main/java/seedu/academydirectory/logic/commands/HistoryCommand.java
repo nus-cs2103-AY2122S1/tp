@@ -18,14 +18,14 @@ import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 
 /**
- * Lists all commands used in the academy directory to the user.
+ * Lists all commands used in the Academy Directory to the user.
  */
 public class HistoryCommand extends Command {
     public static final String COMMAND_WORD = "history";
     public static final String MESSAGE_SUCCESS = "Commit history shown";
     public static final String HELP_MESSAGE = "### Listing all history : `history`\n"
             + "\n"
-            + "Shows a list of all command history in the academy directory.\n"
+            + "Shows a list of all command history in the Academy Directory.\n"
             + "\n"
             + "Format: `history`";
 

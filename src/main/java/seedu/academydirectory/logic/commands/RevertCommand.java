@@ -21,7 +21,7 @@ public class RevertCommand extends Command {
 
     public static final String HELP_MESSAGE = "### Revert to a history : `revert`\n"
             + "\n"
-            + "Reverts storage to an old history in the academy directory.\n"
+            + "Reverts storage to an old history in the Academy Directory.\n"
             + "\n"
             + "Format: `revert KEYWORD`";
 
@@ -30,7 +30,7 @@ public class RevertCommand extends Command {
 
     public static final String REVERT_REQUEST_REJECTED = "Unable to revert Academy Directory as requested ...";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts academy directory to the stage given by "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts Academy Directory to the stage given by "
             + "the five character hash\n"
             + "Parameters: KEYWORD ...\n"
             + "Example: " + COMMAND_WORD + " 6dfdx";

@@ -11,7 +11,7 @@ public class RedoCommand extends Command {
 
     public static final String HELP_MESSAGE = "### Redo changes : `redo`\n"
             + "\n"
-            + "Redo changes done to academy directory. Use the history command to preview what redo will do\n"
+            + "Redo changes done to Academy Directory. Use the history command to preview what redo will do\n"
             + "\n"
             + "Format: `redo`";
 
@@ -20,7 +20,7 @@ public class RedoCommand extends Command {
 
     public static final String REDO_REQUEST_REJECTED = "Unable to redo Academy Directory as requested ...";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo changes to academy directory "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo changes to Academy Directory "
             + "Example: " + COMMAND_WORD;
 
     /**
