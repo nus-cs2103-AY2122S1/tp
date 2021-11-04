@@ -772,22 +772,38 @@ UX | User Experience - The experience a user has when using the app.
 <div style="page-break-after: always;"></div>
 
 ## Command summary
-This section lists all available commands in TAB, along with examples on how you can use them.
+This section lists all the available commands in TAB, along with examples on how you can use them.
+The commands are categorised into 4 different categories:
+* [Managing Students](#students)
+* [Managing Lessons](#lessons)
+* [Switching between views](#switching-between-views)
+* [General](#general)
+<br/>
 
+### Students
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help`
 **Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
 **Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
 **Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
-**List Students** | `list`
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
-**View Tags** | `tag`
+
+### Lessons
+
+Action | Format, Examples
+--------|------------------
 **Add Lesson** | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
 **Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+
+### Switching Between Views
+
+Action | Format
+--------|------------------
+**List Students** | `list`
+**View Tags** | `tag`
 **View Calendar** | `calendar`
 **View Daily Calendar** | `day`
 **View Weekly Calendar** | `week`
@@ -797,6 +813,12 @@ Action | Format, Examples
 **Navigate forward in Calendar** | `next`
 **Navigate backward in Calendar** | `back`
 **View Reminders** | `remind`
+
+### General
+
+Action | Format
+--------|------------------
+**Help** | `help`
 **Clear** |`clear`
 **Undo** | `undo`
 **Redo** | `redo`
