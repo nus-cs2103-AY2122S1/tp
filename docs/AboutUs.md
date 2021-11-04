@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ganhongyao.png" width="200px">
 
-[[github](https://github.com/ganhongyao)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/ganhongyao)] [[portfolio](team/ganhongyao.md)]
 
 * Role: Developer
 * Responsibilities: Testing + Integration
