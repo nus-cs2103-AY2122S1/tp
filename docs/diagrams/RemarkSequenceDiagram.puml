@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "t:RemarkCommand" as RemarkCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant "persons:UniquePersonList" as Persons MODEL_COLOR
+participant "internalList:ObservableList<Person>" as ObservableList MODEL_COLOR
+end box
+
+[-> LogicManager : execute("remark 1 r/She likes coding")
+activate LogicManager
+
+ref over LogicManager, RemarkCommand : Parse Remark Command
+
+LogicManager -> RemarkCommand : execute()
+activate RemarkCommand
+
+RemarkCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> RemarkCommand : lastShownList
+deactivate Model
+
+RemarkCommand ->RemarkCommand : lastShownList.get(index.getZeroBased())
+activate RemarkCommand
+
+RemarkCommand ->RemarkCommand : personToEdit
+deactivate RemarkCommand
+
+RemarkCommand ->RemarkCommand : new Person(..., remark)
+activate RemarkCommand
+
+RemarkCommand ->RemarkCommand : editedPerson
+deactivate RemarkCommand
+
+RemarkCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model -> AddressBook : setPerson(personToEdit, editedPerson)
+activate AddressBook
+
+AddressBook -> Persons : setPerson(personToEdit, editedPerson)
+activate Persons
+
+Persons -> ObservableList : setPerson(personToEdit, editedPerson)
+activate ObservableList
+return
+
+return
+
+return
+
+return
+
+return result
+
+RemarkCommand -[hidden]-> LogicManager
+destroy RemarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

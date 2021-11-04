@@ -85,7 +85,7 @@ Before diving into Socius and getting to know its features, lets get familiar wi
 
 Here is a quick start on how you can start using our app in your own computer.
 
-1. Ensure you have [*Java 11*](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed in your Computer. 
+1. Ensure you have [*Java 11*](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed in your Computer.
 
 2. Download the latest `Socius.jar` on our [Releases](https://github.com/AY2122S1-CS2103T-W08-4/tp/releases) page.
 
