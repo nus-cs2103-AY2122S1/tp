@@ -45,7 +45,7 @@ public class ShowCommand extends Command {
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name> | "
             + PREFIX_GROUP + "<group_name>) "
-            + "[" + PREFIX_FILE + "<export_location>]\n"
+            + "[ " + PREFIX_FILE + "]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tang Zhiying, "
             + COMMAND_WORD + " "
