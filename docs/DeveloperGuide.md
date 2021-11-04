@@ -176,7 +176,7 @@ API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/maste
 
 The `Storage` component,
 
-* can save both address book data and user preference data in json format, and read them back into corresponding
+* can save both address book data (data on members and facilities) and user preference data in json format, and read them back into corresponding
   objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
@@ -266,26 +266,72 @@ In modern CLI applications, an alias is mainly used for abbreviating system comm
 regularly used commands. Considering the target use of SportsPA and time constraints, since command arguments are not
 likely to be repeated, we decided that it was sufficient to allow users to create shortcuts for commands only.
 
-### Split feature
+### Split members to facilities feature
 
 #### Implementation
 
-The split mechanism is facilitated by `AddressBookParser`. More details to be added.
+The split mechanism is facilitated by `ModelManager` and `AddressBook`. <br>`ModelManager` stores a list of 
+filtered members as `filteredPersons`. Each `Person` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`. 
+<br>
+`Address Book`stores a list of all facilities as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Person>>`. This `EnumMap` is initialized
+with 7 key-value pairs, of which the keys are all the enums of the 
+`java.time.DayOfWeek` (`{MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}`) and the values are all initialized 
+as an empty `ArrayList`. This is based on the assumption that facilities are available on every day of the week.
+<br>
+When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `List<Person>` of all facilities for that `DAY` is cleared.
+The available members are then added to the `List<Person>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a Greedy algorithm. <br>
+i.e. The filtered members list and facility list are iterated and each person is allocated to the first facility which is not at max capacity. After 
+a facility is at max capacity, any remaining members are allocated to the next available facility and so on.
+
+`ModelManager` implements the following operations:
+* `split(Predicate<Person> predicate, int dayNumber)` —  Filters the list of all members according to the given `predicate`.
+When the `split` command is executed, `PersonAvailableOnDayPredicate` is passed to `predicate`, allowing a filtered list of members available 
+on the given `dayNumber` to be created and passed to the `split` method of `Addressbook`.
+
+`AddressBook` implements the following operations:
+* `split(FilteredList<Person> membersFilteredList, int dayNumber)` — Splits the members in the given filtered member list into facilities on the given day.
+Returns -1 if no members are available, the number of members that exceed the total capacity if the number of members is 
+more than the total capacity on the given day and 0 if members can be split successfully.
+
+Additionally, `UniqueFacilityList` implements the following operations:
+* `allocateMembersToFacilitiesOnDay(FilteredList<Person> members, int dayNumber)` — Clears the `AllocationMap` of each `Facility`
+and allocates the members in the given filtered member list to facilities greedily.
+
+Given below is an example usage scenario and how the split feature behaves at each step.
+
+Step 1.
+
+The following sequence diagram shows how the split mechanism works.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+The lifeline for `SplitCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
 **Aspect: Format of values in `Availability`**
 
-* **Alternative 1 (current choice):** Stores values as a `List<DayOfWeek>`.
+* **Alternative 1 (current choice):** Store values as `java.time.DayOfWeek`.
     * Pros: Easy to implement in parser, increases user-friendliness by allowing users to just type in numbers to
-      represent days of a week instead of the names. Numbers can then be easily converted into DayOfWeek, and sorted,
-      ensuring uniformity.
+      represent days of a week instead of the names. Numbers can then be easily converted into `DayOfWeek` and formatted
+      to get consistent display name formats. Easily sorted in the natural order of the days of a week, ensuring 
+      uniformity when displayed and making it easier to read. 
     * Cons: May not be intuitive to some users that 1 represents Monday and 7 represents Sunday.
 
-* **Alternative 2:** Stores values as a `String`
-    * Pros: Intuitive for users to type in the names of the days
-    * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are in
-      the correct format. Less user-friendly due to need to type out the names of the days. More difficult to sort.
+* **Alternative 2:** Store values as `String`
+    * Pros: Intuitive for users to type in the names of the days which can be stored directly after parsing.
+    * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are given 
+      in the correct format. Less user-friendly due to need to type out the names of the days and more difficult to sort.
+
+**Aspect: Algorithm used to determine allocation**
+* **Alternative 1 (current choice):** Greedy algorithm.
+  * Pros: Easy to implement and test. Intuitive and produces results similar to manual allocation.
+  * Cons: Can only produce 1 allocation mapping for a set of person and facilities with the same availabilities and capacities, which may
+    not be ideal.
+
+* **Alternative 2:** Other algorithms.
+    * Pros: Possible increase in performance and able to produce multiple different mappings.
+    * Cons: Harder to implement and test. May require the use of supporting data structures which adds on to the complexity.
 
 ### Mark/unmark attendance feature
 
