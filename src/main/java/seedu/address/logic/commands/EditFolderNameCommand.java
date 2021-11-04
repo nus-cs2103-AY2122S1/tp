@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
 
 /**
- * Edits the name of an existing folder in the address book.
+ * Edits the name of an existing folder in UNIon.
  */
 public class EditFolderNameCommand extends Command {
 

@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Deletes the contact that belongs to an existing
- * folder in the address book.
+ * folder in UNIon.
  */
 public class DeletePersonFromFolderCommand extends Command {
 
