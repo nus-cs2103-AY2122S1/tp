@@ -702,7 +702,9 @@ The user executes `clear`, which calls `Model#commitTuitione()`. Since the `curr
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+<center>
 <img src="images/DeveloperGuideImage/CommitActivityDiagram.png" width="250" />
+</center>
 
 #### Design considerations:
 

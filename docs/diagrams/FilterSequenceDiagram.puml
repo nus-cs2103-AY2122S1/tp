@@ -2,21 +2,21 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
-participant "fp:FilterCommandParser" as FilterCommandParser LOGIC_COLOR
-participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Logic\nManager" as LogicManager LOGIC_COLOR
+participant ":Tuitione\nParser" as TuitioneParser LOGIC_COLOR
+participant "fp:FilterCommand\nParser" as FilterCommandParser LOGIC_COLOR
+participant "f:Filter\nCommand" as FilterCommand LOGIC_COLOR
+participant ":Command\nResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("filter g/S2 s/English")
+[-> LogicManager : execute\n("filter g/S2 s/English")
 activate LogicManager
 
-LogicManager -> TuitioneParser : parseCommand("filter g/S2 s/English")
+LogicManager -> TuitioneParser : parseCommand\n("filter g/S2 s/English")
 activate TuitioneParser
 
 create FilterCommandParser
@@ -26,7 +26,7 @@ activate FilterCommandParser
 FilterCommandParser --> TuitioneParser
 deactivate FilterCommandParser
 
-TuitioneParser -> FilterCommandParser : parse("g/S2 s/English")
+TuitioneParser -> FilterCommandParser : parse\n("g/S2 s/English")
 activate FilterCommandParser
 
 create FilterCommand
@@ -56,10 +56,10 @@ else "subject != null"
     Model -> Model : filter lesson list by subject
 
 else "grade != null && subject != null"
-    Model -> Model : filter student list by subject, filter lesson list by subject and grade
+    Model -> Model : filter student list by subject,\nfilter lesson list by subject and grade
 end
 
-Model --> FilterCommand : student and lesson lists filtered
+Model --> FilterCommand : student and\nlesson lists filtered
 deactivate Model
 
 create CommandResult

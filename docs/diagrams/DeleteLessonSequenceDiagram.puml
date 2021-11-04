@@ -2,11 +2,11 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
-participant ":DeleteLessonCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
-participant "dl:DeleteLessonCommand" as DeleteLessonCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Logic\nManager" as LogicManager LOGIC_COLOR
+participant ":Tuitione\nParser" as TuitioneParser LOGIC_COLOR
+participant ":DeleteLesson\nCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
+participant "dl:DeleteLesson\nCommand" as DeleteLessonCommand LOGIC_COLOR
+participant ":Command\nResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -14,10 +14,10 @@ participant ":Model" as Model MODEL_COLOR
 participant "l:Lesson" as Lesson MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete-l 1")
+[-> LogicManager : execute\n("delete-l 1")
 activate LogicManager
 
-LogicManager -> TuitioneParser : parseCommand("delete-l 1")
+LogicManager -> TuitioneParser : parseCommand\n("delete-l 1")
 activate TuitioneParser
 
 create DeleteLessonCommandParser
@@ -49,7 +49,7 @@ deactivate TuitioneParser
 LogicManager -> DeleteLessonCommand : execute()
 activate DeleteLessonCommand
 
-DeleteLessonCommand -> Lesson : removeAllStudents()
+DeleteLessonCommand -> Lesson : removeEnrolledStudents()
 activate Lesson
 
 Lesson --> DeleteLessonCommand

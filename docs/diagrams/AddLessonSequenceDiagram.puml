@@ -2,11 +2,11 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
-participant ":AddLessonCommandParser" as AddLessonCommandParser LOGIC_COLOR
-participant "al:AddLessonCommand" as AddLessonCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Logic\nManager" as LogicManager LOGIC_COLOR
+participant ":Tuitione\nParser" as TuitioneParser LOGIC_COLOR
+participant ":AddLesson\nCommandParser" as AddLessonCommandParser LOGIC_COLOR
+participant "al:AddLesson\nCommand" as AddLessonCommand LOGIC_COLOR
+participant ":Command\nResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -14,10 +14,10 @@ participant ":Model" as Model MODEL_COLOR
 participant "l:Lesson" as Lesson MODEL_COLOR
 end box
 
-[-> LogicManager : execute(Input)
+[-> LogicManager : execute\n(Input)
 activate LogicManager
 
-LogicManager -> TuitioneParser : parseCommand(Input)
+LogicManager -> TuitioneParser : parseCommand\n(Input)
 activate TuitioneParser
 
 create AddLessonCommandParser
@@ -56,7 +56,7 @@ deactivate TuitioneParser
 LogicManager -> AddLessonCommand : execute()
 activate AddLessonCommand
 
-AddLessonCommand -> Model : AddLesson()
+AddLessonCommand -> Model : addLesson()
 activate Model
 
 Model --> AddLessonCommand

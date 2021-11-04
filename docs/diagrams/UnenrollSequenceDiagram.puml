@@ -2,33 +2,33 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":UnenrollCommandParser" as UnenrollCommandParser LOGIC_COLOR
-participant "u:UnenrollCommand" as UnenrollCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Logic\nManager" as LogicManager LOGIC_COLOR
+participant ":Tuitione\nParser" as TuitioneParser LOGIC_COLOR
+participant ":UnenrollCommand\nParser" as UnenrollCommandParser LOGIC_COLOR
+participant "u:Unenroll\nCommand" as UnenrollCommand LOGIC_COLOR
+participant ":Command\nResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant "l:Lesson" as Lesson MODEL_COLOR
-participant "Alice:Student" as Student MODEL_COLOR
+participant "Alice\n:Student" as Student MODEL_COLOR
 end box
 
-[-> LogicManager : execute("unenroll 2 l/1")
+[-> LogicManager : execute\n("unenroll 2 l/1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("unenroll 2 l/1")
-activate AddressBookParser
+LogicManager -> TuitioneParser : parseCommand\n("unenroll 2 l/1")
+activate TuitioneParser
 
 create UnenrollCommandParser
-AddressBookParser -> UnenrollCommandParser
+TuitioneParser -> UnenrollCommandParser
 activate UnenrollCommandParser
 
-UnenrollCommandParser --> AddressBookParser
+UnenrollCommandParser --> TuitioneParser
 deactivate UnenrollCommandParser
 
-AddressBookParser -> UnenrollCommandParser : parse("2 l/1")
+TuitioneParser -> UnenrollCommandParser : parse("2 l/1")
 activate UnenrollCommandParser
 
 create UnenrollCommand
@@ -38,14 +38,14 @@ activate UnenrollCommand
 UnenrollCommand --> UnenrollCommandParser : u
 deactivate UnenrollCommand
 
-UnenrollCommandParser --> AddressBookParser : u
+UnenrollCommandParser --> TuitioneParser : u
 deactivate UnenrollCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-UnenrollCommandParser -[hidden]-> AddressBookParser
+UnenrollCommandParser -[hidden]-> TuitioneParser
 destroy UnenrollCommandParser
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+TuitioneParser --> LogicManager : u
+deactivate TuitioneParser
 
 LogicManager -> UnenrollCommand : execute()
 activate UnenrollCommand
@@ -53,7 +53,7 @@ activate UnenrollCommand
 UnenrollCommand -> Lesson : removeStudent(2)
 activate Lesson
 
-Lesson -> Student : unenrollFromLesson(Alice)
+Lesson -> Student : unenrollFrom\nLesson(Alice)
 activate Student
 
 Student -> Lesson

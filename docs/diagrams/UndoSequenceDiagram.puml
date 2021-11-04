@@ -2,14 +2,14 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":Logic\nManager" as LogicManager LOGIC_COLOR
+participant ":Tuitione\nParser" as TuitioneParser LOGIC_COLOR
+participant "u:Undo\nCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedTuitione" as VersionedTuitione MODEL_COLOR
+participant ":Versioned\nTuitione" as VersionedTuitione MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
 activate LogicManager
@@ -36,7 +36,7 @@ activate Model
 Model -> VersionedTuitione : undo()
 activate VersionedTuitione
 
-VersionedTuitione -> VersionedTuitione :resetData(ReadOnlyTuitione)
+VersionedTuitione -> VersionedTuitione :resetData\n(ReadOnlyTuitione)
 VersionedTuitione --> Model :
 deactivate VersionedTuitione
 
