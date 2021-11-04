@@ -29,7 +29,7 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add to the task list of the person identified "
             + "by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
             + PREFIX_TASK_DESCRIPTION + " TASK_NAME "
             + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "

@@ -32,6 +32,11 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
                     AddTaskCommand.MESSAGE_USAGE), ive);
         }
 
+        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTaskCommand.MESSAGE_USAGE));
+        }
+
         List<Task> tasks = ParserUtil.parseTasks(argMultimap.getAllValues(PREFIX_TASK_DESCRIPTION));
 
         return new AddTaskCommand(index, tasks);
