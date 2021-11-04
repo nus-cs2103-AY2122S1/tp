@@ -32,10 +32,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div class="code-example bg-grey-lt-000">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
+the [diagrams](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
 </div>
@@ -51,8 +51,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes
-called [`Main`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is
+called [`Main`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is
 responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -70,9 +70,8 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete Milk -c 5`.
+the command `delete Milk c/5`.
 
-//TODO: modify `saveInventory()` later
 ![Delete Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
@@ -112,12 +111,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Displayable` objects residing in the `Model`.
 
 ### Logic component
-
-**
-API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+The **API** of this component is specified
+in [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -126,17 +124,18 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `AddCommand`) which is
    executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add an item).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add an item).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned by `Logic` back to the caller.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete Milk -c 5` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete Milk c/5` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div class="code-example bg-grey-lt-000">
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -146,35 +145,33 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
+  placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g. `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g. `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**
-API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+The **API** of this component is specified
+in [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![Model class diagram](images/ModelClassDiagram.png)
 
-The `Model` component
+The `Model` component:
 
-- stores an `Inventory` object that represents the inventory data.
-- stores an optional `Order` object that represents the current order data.
-- stores a `TransactionList` object that represents the transaction history of orders.
-- stores a `UserPref` object that represents the user’s preferences.
+- stores an `Inventory` object that encapsulates the inventory data.
+- stores an optional `Order` object that encapsulates the current order data.
+- stores a `TransactionList` object that encapsulates the history of past transactions.
+- stores a `UserPref` object that encapsulates the user’s preferences.
 - does not depend on any of the other three components (as the Model represents data entities of the domain, they should
   make sense on their own without depending on other components)
-
-![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
 
 - The `Model` component interacts with `Ui` component through a `Displayable` interface.
 
 ![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
 
-Low level architecture of `Model` component:
+Lower level details of `Model` component:
 
 - `Inventory` and `Order` are each consists of an `UniqueItemList` which contains `Items`.
 - The `TransactionList` stores `TransactionRecord` which are the records of history orders.
@@ -182,18 +179,24 @@ Low level architecture of `Model` component:
 
 ### Storage component
 
-**
-API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+The **API** of this component is specified
+in [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 ![Storage class diagram](images/StorageClassDiagram.png)
 
-The `Storage` component,
+The `Storage` component's responsibility is to read and write persistent data. 
+It can save inventory data, user preference data, bookkeeping data, and transaction history in json format, 
+and read them back into corresponding objects.
 
-* can save both inventory data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `InventoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the
-  functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
+The storage of different aspects of BogoBogo's data are each managed by their own class:
+
+* Inventory Data: `JsonInventoryStorage` 
+* User Preferences: `JsonUserPrefStorage`
+* BookKeeping Data: `JsonBookKeepingStorage`
+* Transaction History: `JsonTransactionStorage`
+
+Each of these classes employ a facade interface that `Storage` inherits from. 
+This ensures that `Storage` will have the necessary API for `Logic` to call when it wishes to save BogoBogo's state.
 
 ### Common classes
 
