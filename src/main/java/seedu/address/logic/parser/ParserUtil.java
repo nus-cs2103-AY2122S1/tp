@@ -113,8 +113,14 @@ public class ParserUtil {
         if (compatability.isEmpty()) {
             return new Compatability(null);
         }
-        Integer compatabilityRating = Integer.parseInt(compatability.get());
-        if (!Compatability.isValidRating(compatabilityRating)) {
+        String stringValue = compatability.get();
+        Integer compatabilityRating;
+        try {
+            compatabilityRating = Integer.parseInt(stringValue);
+        } catch (NumberFormatException e) {
+            if (stringValue.length() == 0) {
+                return new Compatability(null); 
+            }
             throw new ParseException((Compatability.MESSAGE_CONSTRAINTS));
         }
         return new Compatability(compatabilityRating);
