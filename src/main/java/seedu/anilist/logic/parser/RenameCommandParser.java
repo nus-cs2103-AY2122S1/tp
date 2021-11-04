@@ -2,10 +2,12 @@ package seedu.anilist.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.RenameCommand;
+import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 public class RenameCommandParser implements Parser<RenameCommand> {
@@ -26,9 +28,12 @@ public class RenameCommandParser implements Parser<RenameCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RenameCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RenameCommand.MESSAGE_USAGE), pe);
         }
 
         RenameCommand.NameDescriptor nameDescriptor = new RenameCommand.NameDescriptor();

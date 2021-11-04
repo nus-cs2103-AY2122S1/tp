@@ -6,6 +6,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STATUS_DESC_ALPHA;
@@ -118,6 +119,8 @@ public class AddCommandParserTest {
         // invalid episode
         assertParseFailure(parser, NAME_DESC_BNHA + INVALID_EPISODE_DESC_DECIMAL + STATUS_DESC_TOWATCH
                 + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, Episode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BNHA + INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT
+            + STATUS_DESC_TOWATCH + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, Episode.MESSAGE_CONSTRAINTS);
 
         // invalid status
         assertParseFailure(parser, NAME_DESC_BNHA + EPISODE_DESC_EPISODE_TWO + INVALID_STATUS_DESC_ALPHA

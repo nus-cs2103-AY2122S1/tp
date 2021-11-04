@@ -1,9 +1,11 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.DeleteCommand;
+import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
@@ -20,9 +22,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
+        } catch (IntegerOutOfRangeException e) {
+            throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 

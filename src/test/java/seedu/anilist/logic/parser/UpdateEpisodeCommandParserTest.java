@@ -1,9 +1,11 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_TWO;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_NEG;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
@@ -38,11 +40,11 @@ public class UpdateEpisodeCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
-
-        // zero index
-        assertParseFailure(parser, "0" + EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
+        // not a valid number
+        assertParseFailure(parser, "3.141582653" + EPISODE_DESC_EPISODE_ONE,
+            MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "3-141582653" + EPISODE_DESC_EPISODE_ONE,
+            MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -52,10 +54,27 @@ public class UpdateEpisodeCommandParserTest {
     }
 
     @Test
+    public void parse_indexNotInRangeOfPositiveInt_failure() {
+        // negative index
+        assertParseFailure(parser, "-5" + EPISODE_DESC_EPISODE_ONE,
+            MESSAGE_OUT_OF_RANGE_INDEX);
+
+        // zero index
+        assertParseFailure(parser, "0" + EPISODE_DESC_EPISODE_ONE, MESSAGE_OUT_OF_RANGE_INDEX);
+
+        // larger than MAX_INT index
+        assertParseFailure(parser, ((long) Integer.MAX_VALUE + 1) + EPISODE_DESC_EPISODE_ONE,
+            MESSAGE_OUT_OF_RANGE_INDEX);
+
+    }
+
+    @Test
     public void parse_invalidValue_failure() {
         // wrong episode desc
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_NEG, Episode.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_DECIMAL, Episode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT,
+            Episode.MESSAGE_CONSTRAINTS);
 
         // wrong param specified
         assertParseFailure(parser, "1" + EPISODE_DESC_EPISODE_ONE + STATUS_DESC_TOWATCH, MESSAGE_INVALID_FORMAT);

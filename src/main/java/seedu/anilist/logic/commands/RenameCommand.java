@@ -53,7 +53,7 @@ public class RenameCommand extends Command {
         List<Anime> lastShownList = model.getFilteredAnimeList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_OUT_OF_RANGE_INDEX);
         }
 
         Anime animeToRename = lastShownList.get(index.getZeroBased());

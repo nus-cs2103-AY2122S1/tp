@@ -1,6 +1,7 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
@@ -50,12 +51,6 @@ public class GenreCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION, MESSAGE_INVALID_FORMAT);
-
-        // zero index
-        assertParseFailure(parser, "0" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION, MESSAGE_INVALID_FORMAT);
-
         // invalid arguments being parsed as preamble
         assertParseFailure(parser,
                 "1 some random string" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
@@ -65,6 +60,22 @@ public class GenreCommandParserTest {
         assertParseFailure(parser,
                 "1 i/ string" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
                 MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_indexNotInRangeOfPositiveInt_failure() {
+        // negative index
+        assertParseFailure(parser, "-5" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
+            MESSAGE_OUT_OF_RANGE_INDEX);
+
+        // zero index
+        assertParseFailure(parser, "0" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
+            MESSAGE_OUT_OF_RANGE_INDEX);
+
+        // larger than MAX_INT index
+        assertParseFailure(parser, ((long) Integer.MAX_VALUE + 1) + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
+            MESSAGE_OUT_OF_RANGE_INDEX);
+
     }
 
     @Test

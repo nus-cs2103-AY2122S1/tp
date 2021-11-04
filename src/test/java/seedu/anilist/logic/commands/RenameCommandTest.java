@@ -75,7 +75,7 @@ public class RenameCommandTest {
             .withName(VALID_NAME_BNHA).build();
         RenameCommand renameCommand = new RenameCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(renameCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandFailure(renameCommand, model, Messages.MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     /**
@@ -92,7 +92,7 @@ public class RenameCommandTest {
             .withName(VALID_NAME_BNHA).build();
         RenameCommand renameCommand = new RenameCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(renameCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
+        assertCommandFailure(renameCommand, model, Messages.MESSAGE_OUT_OF_RANGE_INDEX);
     }
 
     @Test

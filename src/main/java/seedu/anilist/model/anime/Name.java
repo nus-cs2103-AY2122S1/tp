@@ -10,8 +10,9 @@ import static seedu.anilist.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain ASCII characters and spaces, and it should not be blank";
-
+        "Names should only contain ASCII characters and spaces, and it should have a length "
+        + "between 1 to 140 characters (not including trailing whitespaces)";
+    public static final int MAX_LEN = 140;
     /*
      * The first character of the anime name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -31,11 +32,15 @@ public class Name {
         fullName = name;
     }
 
+    private static boolean hasValidLength(String test) {
+        return test.length() <= MAX_LEN;
+    }
+
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string has a valid format to be a Name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return hasValidLength(test) && test.matches(VALIDATION_REGEX);
     }
 
 

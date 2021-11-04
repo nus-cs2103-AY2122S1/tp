@@ -33,6 +33,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
+    public static final String VALID_NAME_MAX_LENGTH = "A".repeat(140);
     public static final String VALID_GENRE_ACTION = "action";
     public static final String VALID_GENRE_SCIENCE_FICTION = "sci fi";
     public static final String VALID_EPISODE_ONE = "1";
@@ -43,6 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_WATCHING = "watching";
 
     public static final String INVALID_ACTION_EMPTY_STRING = "";
+    public static final String INVALID_EPISODE_LARGER_THAN_MAX_INT =
+        Long.toString((long) Integer.MAX_VALUE + 1);
     public static final String INVALID_ACTION_NO_SUCH_ACTION = "dancing";
     public static final String INVALID_GENRE_NOT_IN_LIST = "tentacles";
 
@@ -63,6 +66,8 @@ public class CommandTestUtil {
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + "-1"; // '-' not allowed in episode
     public static final String INVALID_EPISODE_DESC_DECIMAL = " "
         + PREFIX_EPISODE + "0.1"; // '.' not allowed in episode
+    public static final String INVALID_EPISODE_DESC_LARGER_THAN_MAX_INT = " "
+        + PREFIX_EPISODE + INVALID_EPISODE_LARGER_THAN_MAX_INT;
     public static final String INVALID_ACTION_DESC = " " + PREFIX_ACTION + INVALID_ACTION_NO_SUCH_ACTION;
     public static final String INVALID_STATUS_DESC_ALPHA = " " + PREFIX_STATUS + "TOWATCHINGG";
     public static final String INVALID_STATUS_DESC_NUMERIC = " " + PREFIX_STATUS + "261";
