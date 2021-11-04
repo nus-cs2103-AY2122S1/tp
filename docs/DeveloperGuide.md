@@ -141,7 +141,7 @@ call.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![Parser_Classes](images/ParserClasses.png)
 
 How the parsing works:
 
@@ -244,63 +244,23 @@ Step 4. The new transactions are saved to json file.
 
 This section explains how various commands update the list of items and display the result.
 
-As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness
-between items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then
-update the
-`ObservableList<Item>`. The `ObservableList<Item>` is bounded to the UI so that the UI automatically updates when the
-data in the list change.
+As described in the UML diagram of the Model component above, `Inventory` contains a `UniqueItemList` object which in turn
+has `Item` objects. Every time add, remove, edit, delete, or clear is called, the `UniqueItemList` inside Inventory is
+mutated, after which the UI will be changed upon the call of a method that mutates the `DisplayList` field inside
+`ModelManager` such as `UpdateFilteredItemList()`. More specifically, the `ObservableList<Displayable>` inside the
+`DisplayList` class is mutated.
 
-`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design
-needs to ensure that every command mutates the `UniqueItemList` through `Inventory`.
+The following sequence diagram shows what happens upon an addition of item to inventory until the 
+`ObservableList<Displayable>` inside DisplayList changes.
 
-The general flow of inventory manipulation through AddCommand is as below:
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
 
-1. The `AddCommand` object in `Logic` component interacts with `Model` component by calling the `Model#addItem()` if a
-   new item is added and `Model#restockItem()` if an existing item is restocked.
-2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature
-   in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
-3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method
-   signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
-4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be
-   returned to the user. The returned list has added a new item or incremented the count of the existing item.
+Another design decision that we have done is that `Item` objects are strictly immutable, as seen by all the
+final fields. Thus, when any field is mutated, the previous `Item` is destroyed and a new `Item` is created. The
+following activity diagram shows some possible actions that a user might take. Take note also on the difference
+between Remove and Delete command.
 
-Flow:`AddCommand` -> `Model` -> `Inventory` -> `UniqueItemList` -> `ObservableList<Item>`
-
-The above flow applies for all the other similar commands that manipulates the inventory. The detailed flow for each
-command is found below:
-
-**`AddCommand:`**      
-AddCommand#execute() -> Model#addItem() or Model#restockItem() -> Inventory#addItem() or Inventory#restockItem()
--> UniqueItemList#addItem() or UniqueItemList#setItem() -> ObservableList<Item>#add() or ObservableList<Item>#set()
-
-**`RemoveCommand:`**    
-RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() ->
-ObservableList<Item>#set()
-
-**`EditCommand:`**       
-EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>
-#set()
-
-**`ClearCommand:`**       
-ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem()
--> ObservableList<Item>#set()
-
-**`DeleteCommand:`**      
-DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() ->
-ObservableList<Item>#remove()
-
-**`SortCommand:`**      
-SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>
-#sort()
-
-#### Design considerations:
-
-**Aspect:**
-
-* **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
-  `IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of
-  strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to
-  update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
+![MutatingInventoryActivityDiagram](images/MutatingInventoryActivityDiagram.png)
 
 ### Controlling the Display Panel in UI
 
