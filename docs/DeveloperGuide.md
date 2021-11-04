@@ -268,7 +268,8 @@ ObservableList<Item>#set()
 
 **`EditCommand:`**       
 EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>
-#set()
+
+# set()
 
 **`ClearCommand:`**       
 ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem()
@@ -280,7 +281,8 @@ ObservableList<Item>#remove()
 
 **`SortCommand:`**      
 SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>
-#sort()
+
+# sort()
 
 #### Design considerations:
 
