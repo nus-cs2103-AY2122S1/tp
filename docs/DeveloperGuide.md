@@ -871,10 +871,11 @@ testers are expected to do more *exploratory* testing.
        Expected: First patient is deleted from the patients list. Details of the deleted patient are shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No patient is edited. Error details are shown in the response box.
+       Expected: No patient is deleted. Error details are shown in the response box.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>~~~~
        Expected: No patient deleted. Error message is shown in the response box: "Invalid command format!..."
+
 
 2. Delete a patient while some patients are being shown
 
@@ -922,9 +923,9 @@ testers are expected to do more *exploratory* testing.
        Expected: First doctor is deleted from the doctors list. Details of the deleted doctor are shown in the status message.
 
     3. Test case: `delete 0`<br>
-       Expected: No doctor is edited. Error details are shown in the response box.
+       Expected: No doctor is deleted. Error details are shown in the response box.
 
-    4. Other incorrect edit commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
        Expected: Similar to previous.
 
 2. Delete a doctor while some doctors are being shown
