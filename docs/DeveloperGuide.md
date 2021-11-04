@@ -205,7 +205,7 @@ This section describes some noteworthy details on how certain features are imple
 This command adds a new `Student` to `AcademyDirectory`.
 
 #### Implementation
-`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 `AddCommand` adds students to the `AcademyDirectory`, with prevention of duplicates by ensuring that each `Student` has a unique `NAME`. 
 `NAME` is a sufficiently unique field to identify a unique instance of a student as for the purposes of `AcademyDirectory` is scoped to 
@@ -217,7 +217,12 @@ does not have unnecessary duplicate information (e.g same `PHONE`) is left to an
 
 ### DeleteCommand
 
+This command deletes a `Student` from `AcademyDirectory`.
+
 #### Implementation
+`DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+
+`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `Model#deleteStudent()`.
 
 ### TagCommand
 
@@ -246,7 +251,7 @@ Exactly which field of `Student` should be retrieved is determined by the `Prefi
 This command edits a `Student`'s personal details such as their `NAME`, `PHONE`, `TELEGRAM` and `EMAIL`.
 
 #### Implementation
-`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
 unless the `NAME` is the same  as the `Student` being edited.
@@ -278,7 +283,7 @@ This command serves to update the attendance status of students. A student's `At
 
 #### Implementation
 
-`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
 
@@ -286,7 +291,6 @@ The following sequence diagram describes what happens when `AttendanceCommand` i
 
 ![AttendanceCommandSequenceDiagram](images/dg/logic/commands/attendancecommand/AttendanceCommandSequenceDiagram.png)
 
-As seen from the diagram, the `AttendanceCommand` involves two for loops. In each of the loops there is a reference frame.
 
 For `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams can be found below:
 
@@ -298,7 +302,7 @@ This command serves to update the `Participation` score of students. Following t
 
 #### Implementation
 
-`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done.
 
@@ -314,7 +318,15 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 
 ### ViewCommand
 
+This command serves to display the summarised details of a single `Student` in the `AcademyDirectory`.
+
+`ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
+
+{Improve on explanation and add a possible UML Diagram}
+
 #### Implementation
+
+`ViewCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
 ### ShowCommand
 
@@ -333,11 +345,23 @@ The following sequence diagram describes what happens when `ShowCommand` is exec
 
 ### VisualizeCommand
 
+This command provides a Box Plot of the performance of all `Student` in `AcademyDirectory` in all `Assessment`.
+
 #### Implementation
+
+`VisualizeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+{Improve on explanation and add a possible UML Diagram}
 
 ### FilterCommand
 
+This command filters the `ObservableList` by `NAME` or `TAG`.  
+
 #### Implementation
+
+`FilterCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+{Improve on explanation and add a possible UML Diagram}
 
 ### SortCommand
 
@@ -358,10 +382,20 @@ The reference frame for GetComparator can be found below. It details the selecti
 ### Others
 
 ### ListCommand
+
+This command restores the original, unfiltered view of `AcademyDirectory`.
+
 #### Implementation
 
+`ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
 ### ClearCommand
+
+This command clears all `Student` entries from `AcademyDirectory`.
+
 #### Implementation
+
+`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 ### UndoCommand
 #### Implementation
@@ -771,7 +805,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Studios**: A tutorial held in CS1101S and is essential in aiding the students to improve their grasp on the concepts taught during the lecture.
 * **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
 * **Principle of Least-Privilege**: Minimum levels of access – or permissions – needed to perform function.
-
+* **Version Controllable**: Refers to a `Command` that logs a `Commit` object upon execution.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
