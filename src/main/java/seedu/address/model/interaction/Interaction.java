@@ -3,9 +3,8 @@ package seedu.address.model.interaction;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an interaction in the address book. Guarantees: immutable; date is
@@ -44,12 +43,11 @@ public class Interaction {
     /**
      * Returns true if a given string is a valid tag name.
      */
-    boolean isValidDate(String input) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public static boolean isValidDate(String input) {
         try {
-            format.parse(input);
+            LocalDate.parse(input);
             return true;
-        } catch (ParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
