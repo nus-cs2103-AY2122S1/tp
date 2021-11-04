@@ -50,30 +50,32 @@ public class JsonAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product.
      */
     public Product toModelType() throws IllegalValueException {
+        final Name modelName;
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
+        } else if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        } else {
+            modelName = new Name(name);
         }
-        final Name modelName = new Name(name);
 
+        final UnitPrice modelUnitPrice;
         if (unitPrice == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     UnitPrice.class.getSimpleName()));
-        }
-        if (!UnitPrice.isValidUnitPrice(unitPrice)) {
+        } else if (!UnitPrice.isValidUnitPrice(unitPrice)) {
             throw new IllegalValueException(UnitPrice.MESSAGE_CONSTRAINTS);
+        } else {
+            modelUnitPrice = new UnitPrice(unitPrice);
         }
-        final UnitPrice modelUnitPrice = new UnitPrice(unitPrice);
 
         final Quantity modelQuantity;
         if (quantity == null) {
             modelQuantity = null;
-        } else if (Quantity.isValidQuantity(quantity)) {
-            modelQuantity = new Quantity(quantity);
-        } else {
+        } else if (!Quantity.isValidQuantity(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
+        } else {
+            modelQuantity = new Quantity(quantity);
         }
 
         return new Product(modelName, modelUnitPrice, modelQuantity);
