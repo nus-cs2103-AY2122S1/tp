@@ -1,23 +1,26 @@
 package seedu.programmer.testutil;
 
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.LabTotal;
 
 public class LabBuilder {
     public static final int DEFAULT_TITLE = 1;
-    public static final Integer DEFAULT_VALUE = null;
+    public static final Integer DEFAULT_VALUE = -1;
     public static final Integer DEFAULT_TOTAL = 20;
 
-    private int labNum;
-    private Integer value;
-    private Integer total;
+    private LabNum labNum;
+    private LabResult value;
+    private LabTotal total;
 
     /**
      * Creates a {@code labBuilder} with the default details.
      */
     public LabBuilder() {
-        labNum = DEFAULT_TITLE;
-        value = DEFAULT_VALUE;
-        total = DEFAULT_TOTAL;
+        labNum = new LabNum(DEFAULT_TITLE);
+        value = new LabResult(DEFAULT_VALUE);
+        total = new LabTotal(DEFAULT_TOTAL);
     }
 
     /**
@@ -25,15 +28,15 @@ public class LabBuilder {
      */
     public LabBuilder(Lab labToCopy) {
         labNum = labToCopy.getLabNum();
-        value = labToCopy.getActualScore();
-        total = labToCopy.getTotalScore();
+        value = labToCopy.getLabResult();
+        total = labToCopy.getLabTotal();
     }
 
     /**
      * Sets the {@code labNum} of the {@code lab} that we are building.
      */
     public LabBuilder withLabNum(int labNum) {
-        this.labNum = labNum;
+        this.labNum = new LabNum(labNum);
         return this;
     }
 
@@ -41,7 +44,7 @@ public class LabBuilder {
      * Sets the {@code value} of the {@code lab} that we are building.
      */
     public LabBuilder withResult(Integer value) {
-        this.value = value;
+        this.value = new LabResult(value);
         return this;
     }
 
@@ -49,7 +52,7 @@ public class LabBuilder {
      * Sets the {@code total} of the {@code lab} that we are building.
      */
     public LabBuilder withTotal(Integer total) {
-        this.total = total;
+        this.total = new LabTotal(total);
         return this;
     }
 

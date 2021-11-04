@@ -40,11 +40,11 @@ public class LabResultCard extends UiPart<Region> {
         super(FXML);
         this.result = result;
         labTitle.setText(result.toString());
-        totalScore.setText("Total Score: " + result.getTotalScore().toString());
+        totalScore.setText("Total Score: " + result.getLabTotal().toString());
         if (!result.isMarked()) {
             studentScore.setText("Actual Score: -");
         } else {
-            studentScore.setText("Actual Score: " + result.getActualScore().toString());
+            studentScore.setText("Actual Score: " + result.getLabResult().toString());
         }
 
     }

@@ -106,9 +106,10 @@ public class ParserUtil {
      *  @param labNum the lab number
      * */
     public static int parseLabNum(String labNum) throws ParseException {
+        requireNonNull(labNum);
         try {
             int value = Integer.parseInt(labNum);
-            if (value < 0) {
+            if (value <= 0 || value > 14) {
                 throw new ParseException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
             }
             return value;
@@ -146,20 +147,21 @@ public class ParserUtil {
      * @param total the total score of the lab assignment.
      * */
     public static Integer parseTotal(String total) throws ParseException {
+        requireNonNull(total);
         try {
             String trimmedResult = total.trim();
             if (trimmedResult.isEmpty()) {
-                throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+                throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
             }
             Integer res = Integer.parseInt(trimmedResult);
             if (total == null) {
                 return 0;
-            } else if (res < 0) {
-                throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+            } else if (res <= 0 || res > 100) {
+                throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
             }
             return Integer.parseInt(total.trim());
         } catch (NumberFormatException e) {
-            throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+            throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
         }
     }
 }

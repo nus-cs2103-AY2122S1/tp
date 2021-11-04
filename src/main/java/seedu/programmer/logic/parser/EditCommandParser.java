@@ -16,6 +16,8 @@ import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -62,8 +64,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent()
                     && argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
-                int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-                Integer result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null));
+                LabNum labNum = new LabNum(ParserUtil.parseLabNum(
+                        argMultimap.getValue(PREFIX_LAB_NUM).orElse(null)));
+                LabResult result = new LabResult(ParserUtil.parseResult(
+                        argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null)));
                 Lab labResult = new Lab(labNum);
                 editstudentDescriptor.setLab(labResult, result);
             } else if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent()

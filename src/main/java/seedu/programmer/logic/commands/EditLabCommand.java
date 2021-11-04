@@ -10,6 +10,8 @@ import java.util.List;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Student;
 
 
@@ -32,22 +34,21 @@ public class EditLabCommand extends Command {
 
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Updated %1$s!";
     public static final String MESSAGE_SCORE_SHOULD_BE_POSITIVE = "The lab total score %f should be a positive value.";
-    public static final String MESSAGE_LAB_ALREADY_EXISTS = "Lab %d already exists.";
-    public static final String MESSAGE_LAB_NOT_EXISTS = "Lab %d doesn't exist.";
+    public static final String MESSAGE_LAB_ALREADY_EXISTS = "%1$s already exists.";
+    public static final String MESSAGE_LAB_NOT_EXISTS = "%1$s doesn't exist.";
     public static final String MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED =
-            "Kindly specify if you want to edit the lab number and/or the total score.\n%1$s";
+            "Kindly specify if you want to edit the lab number and/or the total score.";
     public static final String MESSAGE_MISSING_LAB_TO_BE_EDITED =
             "Kindly specify the lab number that you would like to edit using the " + PREFIX_LAB_NUM + "flag.\n%1$s";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! ";
 
-    private final int newLabNum;
-    private final Integer total;
+    private final LabNum newLabNum;
+    private final LabTotal total;
     private final Lab original;
 
     /**
      * @param original the lab to be edited.
      * */
-    public EditLabCommand(Lab original, int newLabNum, Integer total) {
+    public EditLabCommand(Lab original, LabNum newLabNum, LabTotal total) {
         this.original = original;
         this.newLabNum = newLabNum;
         this.total = total;
@@ -55,20 +56,20 @@ public class EditLabCommand extends Command {
     /**
      * @param original the lab to be edited.
      * */
-    public EditLabCommand(Lab original, Integer total) {
+    public EditLabCommand(Lab original, LabTotal total) {
         this.original = original;
         this.total = total;
-        this.newLabNum = 0;
+        this.newLabNum = new LabNum(0);
     }
 
     /**
      * @param original the lab to be edited.
      * @param newLabNum the new lab number
      * */
-    public EditLabCommand(Lab original, int newLabNum) {
+    public EditLabCommand(Lab original, LabNum newLabNum) {
         this.original = original;
         this.newLabNum = newLabNum;
-        this.total = original.getTotalScore();
+        this.total = original.getLabTotal();
     }
 
     @Override
@@ -77,14 +78,14 @@ public class EditLabCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
         Lab newLab = new Lab(newLabNum);
         if (lastShownList.get(0).getLabList().contains(newLab)) {
-            throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, newLab.getLabNum()));
+            throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, newLab));
         }
         for (Student std : lastShownList) {
             Student editedStd = std;
-            if (total != null && total < 0.0) {
+            if (total != null && total.getLabTotalScore() < 0.0) {
                 throw new CommandException(String.format(MESSAGE_SCORE_SHOULD_BE_POSITIVE, total));
             } else if (!std.getLabList().contains(original)) {
-                throw new CommandException(String.format(MESSAGE_LAB_NOT_EXISTS, original.getLabNum()));
+                throw new CommandException(String.format(MESSAGE_LAB_NOT_EXISTS, original));
             } else {
                 editedStd.editLabInfo(original, newLabNum, total);
                 model.setStudent(std, editedStd);

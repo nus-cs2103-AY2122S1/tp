@@ -16,17 +16,18 @@ import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.testutil.LabBuilder;
 
 public class EditLabCommandTest {
     private static Lab validLab;
     private static Lab sampleLabA;
     private static Lab sampleLabB;
-    private static int newLabNum = 15;
-    private static int newLabNum1 = 14;
-    private static int newLabNum2 = 13;
-    private static int newLabNum3 = 12;
-    private static Integer newLabTotal = 40;
+    private static LabNum newLabNum = new LabNum(15);
+    private static LabNum newLabNum1 = new LabNum(14);
+    private static LabNum newLabNum2 = new LabNum(13);
+    private static LabTotal newLabTotal = new LabTotal(40);
     private static EditLabCommand sampleCommandA;
     private static EditLabCommand sampleCommandB;
     private static EditLabCommand sampleCommandC;
@@ -49,22 +50,25 @@ public class EditLabCommandTest {
         assertThrows(NullPointerException.class, () -> new AddLabCommand(null));
     }
 
+    //TODO
     @Test
     public void execute_labTitleDoesNotExist_throwsCommandException() {
-        Lab labToEdit = new Lab(10);
+        Lab labToEdit = new Lab(new LabNum(120));
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
 
-        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit.getLabNum());
+        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit);
 
         assertCommandFailure(editLabCommand, model, expectedMessage);
     }
 
+
+    //TODO
     @Test
     public void execute_newlabTitleAlreadyExists_throwsCommandException() {
         Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
-        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, 1);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, new LabNum(1));
 
-        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_ALREADY_EXISTS, labToEdit.getLabNum());
+        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_ALREADY_EXISTS, labToEdit);
 
         assertCommandFailure(editLabCommand, model, expectedMessage);
     }

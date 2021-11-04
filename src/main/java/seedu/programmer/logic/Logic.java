@@ -1,6 +1,7 @@
 package seedu.programmer.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -80,4 +81,6 @@ public interface Logic {
      * Save ProgrammerError to the storage.
      */
     void saveProgrammerError(ProgrammerError pe);
+
+    void replaceExistingStudents(List<Student> stuList);
 }
