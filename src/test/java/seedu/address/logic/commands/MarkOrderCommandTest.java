@@ -3,8 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.DeleteOrderCommandIntegrationTest.showNoOrder;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -13,12 +18,21 @@ import seedu.address.ModelStub;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.OrderBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.OrderBuilder;
 
 class MarkOrderCommandTest {
 
-    private static final Order testOrder = new OrderBuilder().build();
+    private Order testOrder;
+
+    @BeforeEach
+    public void setUp() {
+        testOrder = new OrderBuilder().withLabel("test label").build();
+    }
 
     @Test
     public void execute_validIndexMarkOrder_success() throws Exception {
@@ -54,6 +68,25 @@ class MarkOrderCommandTest {
         CommandResult commandResult = new MarkOrderCommand(targetIndex).execute(modelStub);
 
         assertEquals(String.format(MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED, testOrder),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_filterIncompleteOrders_removesOrder() throws Exception {
+        OrderBook orderBookWithIncompleteOrder = new OrderBook();
+        orderBookWithIncompleteOrder.addOrder(testOrder);
+
+        Model model = new ModelManager(getTypicalAddressBook(),
+                getTypicalTaskBook(), orderBookWithIncompleteOrder, new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(),
+                getTypicalTaskBook(), orderBookWithIncompleteOrder, new UserPrefs());
+
+        model.updateFilteredOrderList(order -> !order.getIsComplete());
+        showNoOrder(expectedModel);
+
+        CommandResult commandResult = new MarkOrderCommand(INDEX_FIRST_ORDER).execute(model);
+        assertTrue(testOrder.getIsComplete());
+        assertEquals(String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS, testOrder),
                 commandResult.getFeedbackToUser());
     }
 

@@ -31,7 +31,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.TaskTag;
 import seedu.address.model.task.Task;
 
-class DeleteTaskCommandTest {
+public class DeleteTaskCommandTest {
     private static final Task testTask = new Task(new Label("test label"),
             new Date("2001-10-12"), new TaskTag("SO100"));
 
@@ -113,7 +113,7 @@ class DeleteTaskCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no task.
      */
-    private void showNoTask(Model model) {
+    public static void showNoTask(Model model) {
         model.updateFilteredTaskList(p -> false);
 
         assertTrue(model.getFilteredTaskList().isEmpty());

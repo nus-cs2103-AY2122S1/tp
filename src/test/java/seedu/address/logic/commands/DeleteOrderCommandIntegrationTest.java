@@ -105,7 +105,7 @@ public class DeleteOrderCommandIntegrationTest {
     /**
      * Updates {@code model}'s filtered list to show no order.
      */
-    private void showNoOrder(Model model) {
+    public static void showNoOrder(Model model) {
         model.updateFilteredOrderList(p -> false);
 
         assertTrue(model.getFilteredOrderList().isEmpty());
