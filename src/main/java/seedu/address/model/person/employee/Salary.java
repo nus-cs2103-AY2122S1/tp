@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidSalary(String)}
  */
 public class Salary {
-    public static final String MESSAGE_CONSTRAINTS = "Salary should be numerical and should be 3 or more digits long"
-            + ".";
+    public static final String MESSAGE_CONSTRAINTS = "Salary should be numerical and more than or equal to 100 and"
+            + " less than or equals to 10 million";
 
     public final String currentSalary;
 
@@ -29,7 +29,7 @@ public class Salary {
      */
     public static boolean isValidSalary(String test) {
         try {
-            return Integer.parseInt(test) >= 100;
+            return Integer.parseInt(test) >= 100 && Integer.parseInt(test) <= 10000000;
         } catch (NumberFormatException e) {
             return false;
         }
