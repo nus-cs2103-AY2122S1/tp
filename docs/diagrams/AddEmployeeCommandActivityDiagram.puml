@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Execute AddEmployeeCommand with created employee;
+:Adds Employee in model;
+:Adds Employee to UniqueEmployeeList;
+stop
+
+@enduml

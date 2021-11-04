@@ -1,0 +1,107 @@
+@startuml
+!include style.puml
+
+Participant ":RhrhParser" as rhrhParser LOGIC_COLOR_T2
+Participant ":AddEmployeeCommandParser" as addEmployeeCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as util LOGIC_COLOR_T3
+Participant ":Name" as name MODEL_COLOR
+Participant ":Salary" as salary MODEL_COLOR
+Participant ":Shift" as shift MODEL_COLOR
+Participant ":Tag" as tag MODEL_COLOR
+Participant ":Employee" as employee MODEL_COLOR
+Participant ":AddEmployeeCommand" as command LOGIC_COLOR_T4
+
+rhrhParser -[LOGIC_COLOR_T2]> addEmployeeCommandParser :"n/John Doe p/98765432 a/10 Balestier rd e/john@ex.com jt/Chef sal/4000 l/14"
+activate addEmployeeCommandParser LOGIC_COLOR_T2
+activate rhrhParser LOGIC_COLOR
+
+addEmployeeCommandParser -[LOGIC_COLOR]> util: parseName;
+activate util LOGIC_COLOR_T3
+
+create name
+util -[LOGIC_COLOR_T3]-> name: Name(trimmedName)
+activate name MODEL_COLOR
+
+name -[LOGIC_COLOR_T3]-> util: name;
+deactivate name
+
+util -[LOGIC_COLOR_T3]-> addEmployeeCommandParser :name;
+deactivate util
+
+addEmployeeCommandParser -[LOGIC_COLOR]> util :parseSalary;
+activate util LOGIC_COLOR_T3
+
+create salary
+util -[LOGIC_COLOR_T3]-> salary: Salary(trimmedSalary)
+activate salary MODEL_COLOR
+
+salary -[LOGIC_COLOR_T3]-> util: salary;
+deactivate salary
+
+util -[LOGIC_COLOR_T3]-> addEmployeeCommandParser :salary;
+deactivate util
+
+addEmployeeCommandParser -[LOGIC_COLOR]> util :parseShifts;
+activate util LOGIC_COLOR_T3
+
+loop all shifts
+    util -[LOGIC_COLOR_T3]-> util: parseShift;
+    activate util
+
+    create shift
+    util -[LOGIC_COLOR_T3]-> shift: Shift(trimmedShift)
+    activate shift
+
+    shift -[LOGIC_COLOR_T3]-> util: shift;
+    deactivate shift
+
+    util -[LOGIC_COLOR_T3]-> util: shift;
+    deactivate util
+end
+
+util -[LOGIC_COLOR_T3]-> addEmployeeCommandParser :shiftSet;
+deactivate util
+
+addEmployeeCommandParser -[LOGIC_COLOR]> util :parseTags;
+activate util LOGIC_COLOR_T3
+
+loop all tags
+    util -[LOGIC_COLOR_T3]-> util: parseTag;
+    activate util
+
+    create tag
+    util -[LOGIC_COLOR_T3]-> tag: Tag(trimmedTag)
+    activate tag
+
+    tag -[LOGIC_COLOR_T3]-> util: tag;
+    deactivate tag
+
+    util -[LOGIC_COLOR_T3]-> util: tag;
+    deactivate util
+end
+
+util -[LOGIC_COLOR_T3]-> addEmployeeCommandParser :tagSet;
+deactivate util
+
+create employee
+addEmployeeCommandParser -[LOGIC_COLOR]-> employee: Employee(name , phone, email, address, tagList, leaves, salary, jobTitle, shiftList)
+activate employee
+
+employee -[LOGIC_COLOR]-> addEmployeeCommandParser: employee;
+deactivate employee
+
+
+
+create command
+addEmployeeCommandParser -[LOGIC_COLOR]> command :AddEmployeeCommand(employee)
+activate command LOGIC_COLOR_T4
+
+command -[LOGIC_COLOR_T4]-> addEmployeeCommandParser :AddEmployeeCommand
+deactivate command
+
+addEmployeeCommandParser -[LOGIC_COLOR]-> rhrhParser :AddEmployeeCommand
+deactivate scheduleCommandParser
+
+deactivate rhrhParser
+
+@enduml
