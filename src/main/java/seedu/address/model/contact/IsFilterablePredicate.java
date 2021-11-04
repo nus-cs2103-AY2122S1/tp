@@ -1,5 +1,7 @@
 package seedu.address.model.contact;
 
+import static seedu.address.model.contact.Rating.isEmptyRating;
+
 import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -33,13 +35,20 @@ public class IsFilterablePredicate implements Predicate<Contact> {
         boolean isSameRating = contactRating.equals(rating);
         boolean isSameCategoryCodes = categoryCodes.contains(category);
         boolean isSameTags = !(Collections.disjoint(tags, contactTags));
+        boolean noRating = isEmptyRating(rating);
 
         if (categoryCodes.isEmpty() && tags.isEmpty()) {
             return isSameRating;
-        } else if (tags.isEmpty()) {
-            return isSameRating && isSameCategoryCodes;
+        } else if (tags.isEmpty() && noRating) {
+            return isSameCategoryCodes;
+        } else if (categoryCodes.isEmpty() && noRating) {
+            return isSameTags;
         } else if (categoryCodes.isEmpty()) {
             return isSameRating && isSameTags;
+        } else if (tags.isEmpty()) {
+            return isSameRating && isSameCategoryCodes;
+        } else if (noRating) {
+            return isSameTags && isSameCategoryCodes;
         } else {
             return isSameRating && isSameCategoryCodes && isSameTags;
         }
