@@ -479,23 +479,25 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
 ### Viewing Tags
 Viewing tag is facilitated by `UniqueTagList`. 
 - `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
-- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
+- `UniqueTagList` holds a private field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
 - `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
 
 Operations include:
-- `UniqueTagList#asUnmodifiableTagList()` - Returns an unmodifiable view of the tag list.
 - `UniqueTagList#addTagFromPersonList(List<Person>)` - Adds tags from the specified list of persons to the tag list.
 - `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
 - `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
 - `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person to the tag list and adds the new tags labelled for the specified person.
 - `UniqueTagList#getNumStudentsForTag(Tag)` - Returns the number of students labelled under the specified tag as stored in `tagCounter`.
-These operations are called when a person is added, deleted, or edited with `AddCommand`, `EditCommand` and `DeleteCommand`.
+- `UniqueTagList#asUnmodifiableTagList()` - Returns an unmodifiable view of the tag list.
+- `UniqueTagList#asUnmodifiableMap()` - Returns an unmodifiable view of the tag counter.
+These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
 
 Given below is an example usage scenario and how viewing tag is executed:
 - **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there is no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` with corresponding number of students labelled with the tags.
 - **Step 2:** The user enter the command `tag` to view all tags. `AddressBookParser` parses this command, creating a `TagCommand`.
 - **Step 3:** `LogicManager` executes the `TagCommand`. 
-  - During execution, `TagCommand#execute()` calls `Model#getObservableList()` to get the tag list with the tags created in TAB with their corresponding number of students labelled under them to be displayed to the user.
+  - During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal to `MainWindow` to switch the center panel to show the tag list.
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
 
 Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
