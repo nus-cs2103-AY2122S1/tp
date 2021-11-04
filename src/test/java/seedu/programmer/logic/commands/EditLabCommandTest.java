@@ -1,7 +1,6 @@
 package seedu.programmer.logic.commands;
 
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
-
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
@@ -57,8 +56,7 @@ public class EditLabCommandTest {
         Lab labToEdit = new Lab(new LabNum(120));
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
 
-        String expectedMessage = String.format(
-        EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit);
+        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit);
 
         assertCommandFailure(editLabCommand, model, expectedMessage);
     }
