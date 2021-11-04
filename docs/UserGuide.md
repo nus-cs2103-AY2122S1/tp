@@ -323,9 +323,11 @@ list
 
 ### `edit`
 
-Edits an existing person in the address book at the specified index. The `edit` command uses the same flags as [`add`](#add).
+Edits an existing person in the address book at the specified index on the displayed list. The `edit` command uses the 
+same flags as [`add`](#add).
 
-- The specified index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- The specified index refers to the index number shown in the displayed person list. The index **must be a valid 
+  positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
@@ -356,6 +358,16 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 </div>
 </div>
 
+</div>
+</div>
+
+<div class="d-flex alert alert-info">
+<div class="mr-2">
+    <span class="badge badge-info">INFO</span>
+</div>
+<div markdown="1">
+    If a person is selected, editing the person's contact details will not update the person's information in the
+    selected contacts list.
 </div>
 </div>
 
