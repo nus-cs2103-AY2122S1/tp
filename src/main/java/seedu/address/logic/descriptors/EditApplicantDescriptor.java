@@ -115,9 +115,6 @@ public class EditApplicantDescriptor {
         return Optional.ofNullable(gitHubUrl);
     }
 
-    public void setLinkedInProfile(ProfileUrl linkedInUrl) {
-    }
-
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.

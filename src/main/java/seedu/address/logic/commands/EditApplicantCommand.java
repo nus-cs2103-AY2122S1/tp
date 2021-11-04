@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_PROFILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -32,6 +33,7 @@ public class EditApplicantCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_POSITION + "POSITION] "
+            + "[" + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE]"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com ";
@@ -75,8 +77,11 @@ public class EditApplicantCommand extends Command {
         Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit, model);
 
 
-
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
+        }
+
+        if (applicantToEdit.equals(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
@@ -110,6 +115,5 @@ public class EditApplicantCommand extends Command {
         return index.equals(e.index)
                 && editApplicantDescriptor.equals(e.editApplicantDescriptor);
     }
-
 
 }

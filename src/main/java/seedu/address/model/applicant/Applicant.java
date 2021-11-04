@@ -193,7 +193,8 @@ public class Applicant {
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
                 && address.equals(otherApplicant.address)
-                && application.equals(otherApplicant.application);
+                && application.equals(otherApplicant.application)
+                && gitHubUrl.equals(otherApplicant.gitHubUrl);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ProfileUrl {
 
     public static final String PLACEHOLDER_URL = "https://www.google.com";
     public static final String MESSAGE_CONSTRAINTS =
-            "Profile urls must be valid github and linkedin urls.";
+            "Profile urls must be valid github urls.";
 
     private static final ProfileUrl EMPTY_PROFILE_URL = new ProfileUrl(PLACEHOLDER_URL);
     public final String url;
@@ -87,5 +87,21 @@ public class ProfileUrl {
      */
     public ProfileUrl getCopiedProfileUrl() {
         return new ProfileUrl(url);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ProfileUrl)) {
+            return false;
+        }
+
+        ProfileUrl otherProfileUrl = (ProfileUrl) other;
+        return this.url.equals(otherProfileUrl.url);
     }
 }
