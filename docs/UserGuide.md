@@ -194,7 +194,7 @@ Edits the contact at the specified index in the currently viewed list.
 Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`
 
 * At least one of the parameters must be provided
-* Existing values of the parameters specified will be overwritten
+* Existing values of the parameters specified will be erased and updated to the input values
 * You can input multiple module codes, and can have multiple lesson codes for a single module code
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
@@ -325,7 +325,7 @@ Edits the lesson at the specified index in the currently viewed list.
 Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`
 
 * At least one of the parameters must be provided.
-* Existing values of the parameters specified will be overwritten
+* Existing values of the parameters specified will be erased and updated to the input values
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 To remove a remark from a lesson, simply input `r/`.
