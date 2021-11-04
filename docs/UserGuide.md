@@ -173,7 +173,7 @@ Other available optional fields for a student are:
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-A student can be identified by the index number shown in the displayed list of students.
+A student can be identified by the index number shown in the displayed list of students. The index number specified for commands must be a valid index number of a student shown in the displayed list.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -243,8 +243,6 @@ Deletes the specified student from TAB.
 Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
-
-* The index must be a valid index number of a student shown in the displayed list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
@@ -353,7 +351,7 @@ A lesson can be categorised into 2 types:
    
 In the future, you can also customise your own recurrence rule for your recurring lessons.
 
-A lesson can be identified by the index number shown in the lesson list of the student.
+A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 
 <table id="student-param-table">
     <thead>
@@ -361,18 +359,17 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <th style="text-align:center; padding: 10px">Category</th>
             <th style="text-align:center">Field</th>
             <th style="text-align:center">Prefix</th>
-            <th style="text-align:center">Constraint(s)</th>
-            <th style="text-align:center">Example(s)</th>
+            <th style="text-align:center">Constraints</th>
+            <th style="text-align:center">Examples</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td rowspan=4>Essential</td>
-            <td>Start Date</td>
+            <td>Start date</td>
             <td><code>date/</code></td>
             <td>
-              <ul> 
-                <li>Must be present.</li>
+              <ul>
                 <li>Case-insensitive.</li>
                 <li>Formatted as <code>dd MMM yyyy</code></li>
               </ul>
@@ -382,19 +379,15 @@ A lesson can be identified by the index number shown in the lesson list of the s
         <tr>
             <td>Subject</td>
             <td><code>subject/</code></td>
-            <td><ul>
-            <li>Must be present.</li>
-            <li>Should only contain alphanumeric characters and spaces.</li>
-            </ul></td>
+            <td>Should only contain alphanumeric characters and spaces</td>
             <td><code>subject/Social studies</code></td>
         </tr>
         <tr>
-            <td>Time Range</td>
+            <td>Time range</td>
             <td><code>time/</code></td>
             <td><ul>
-            <li>Must be present.</li>
             <li>Formatted as <code>HHmm-HHmm</code></li>
-            <li>Must be between 8am and 10pm, inclusive.</li>
+            <li>Must be between 8am and 10pm, inclusive</li>
             </ul></td>
             <td><code>time/1730-1830</code></td>
         </tr>
@@ -412,8 +405,8 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td>Recurrence flag</td>
             <td><code>recurring/</code></td>
             <td><ul>
-              <li>Optional parameter: end date that signifies the end of the recurrence.</li>
-              <li>The end date cannot be earlier than the start date.</li>
+              <li>Indicates whether the lesson is recurring</li>
+              <li>Optional parameter: end date of the recurrence</li>
             </ul></td>
             <td><ul>
               <li><code>recurring/</code></li>
@@ -496,10 +489,6 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
-* The index must be a valid index number shown in the displayed student list.
-
-* The lesson index must be a valid index number shown in the lesson list of the student.
-
 * When editing homework, all existing pieces of homework of the lesson will be removed and replaced with the pieces of homework specified.<br>
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
@@ -530,10 +519,6 @@ Deletes the specified lesson of the specified student in TAB.
 Format: `ldelete INDEX LESSON_INDEX`
 
 * Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-  
-* The index must be a valid index number shown in the displayed student list.
-  
-* The lesson index must be a valid index number shown in the lesson list of the student.
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
@@ -548,9 +533,6 @@ Views all the lessons for the specified student in TAB.
 Format: `view INDEX`
 
 * Views the list of lessons belonging to the student of the specified `INDEX`.
-
-* The index must be a valid index number shown in the displayed student list.
-
 
 Examples:
 
