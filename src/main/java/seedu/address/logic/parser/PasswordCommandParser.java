@@ -45,14 +45,10 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
         String oldPassword = oldInput.get();
         String newPassword = newInput.get();
 
-        // old password invalid format(wrong)
-        if (!isValidPassword(oldPassword)) {
-            throw new ParseException(String.format(MESSAGE_WRONG_PASSWORD, PasswordCommand.MESSAGE_USAGE));
-        }
-
         // new password invalid format
         if (!isValidPassword(newPassword)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_PASSWORD, PasswordCommand.CORRECT_PASSWORD_FORMAT));
+            throw new ParseException(MESSAGE_INVALID_PASSWORD + System.lineSeparator()
+                    + "NEW " + PasswordCommand.CORRECT_PASSWORD_FORMAT);
         }
 
         // valid old and new password format
