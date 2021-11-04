@@ -53,6 +53,7 @@ repeating similar commands multiple times.
 Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary.(Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
 
 #### Contributions to the Developer Guide
+Added the implementation details of edit commands (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
 
 <div style="page-break-after: always;"></div>
 
