@@ -73,6 +73,11 @@ open the help window.<br>
   <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Date and time will be rounded, such as: <br> <span id = 'id_date'>
+  1. if you specify date as `31/11/2021`, Ailurus will treat it as a valid date and round it to `30/11/2021`, while `32/11/2021` will be considered as an invalid date.
+  2. if you specify date as `29/02/2021`, Ailurus will round it to `28/02/2021` because 2021 is not a leap year.
+  3. Time `24:00` will be considered as `00:00` of the next valid day. If you specify a date time as `10/11/2021 24:00`, Ailurus will round it to `11/11/2021 00:00`.
+
 * Some commands require the user to enter the `EVENT_INDEX`, `MEMBER_INDEX` or `TASK_INDEX`. The `ID` refers to the order on 
   the display list.<br>
   e.g. `Financial Planning` has a `EVENT_INDEX` of `1` and `Charlotte Oliveiro` has a `MEMBER_INDEX` 
@@ -218,7 +223,7 @@ Format: `tadd /n TASKNAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…
 
 * `MEMBER_INDEX` **must be a positive integer** 1, 2, 3, …​
 * Tasks can be added to multiple members if there is more than one `MEMBER_INDEX` provided.
-* `DATE_TIME` must be of format: `dd/MM/yyyy HH:mm`
+* `DATE_TIME` must be of format: dd/MM/yyyy, and will be rounded. [More information](#id_date)
 * `MEMBER_INDEX` refers to the index number shown in the displayed member list.
 
 Examples:
@@ -252,6 +257,7 @@ Format: `tdone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 * `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
 * Marks the task specified by `TASK_INDEX`.
 * `TASK_INDEX` refers to the index number shown in the displayed task list.
+* If the task has been completed before, tdone command will still mark the task as done.
 
 Example:
 * `tdone /t 1 /t 2` marks the 1st and 2nd task on the displayed task list as done in Ailurus.
@@ -266,6 +272,7 @@ Format: `tundone /t TASK_INDEX [/t MORE_TASK_INDEX]…​`
 * `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
 * Marks the task specified by `TASK_INDEX`.
 * `TASK_INDEX` refers to the index number shown in the displayed task list.
+* If the task is incomplete, tundone command will still mark the task as undone.
 
 Example:
 * `tundone /t 1 /t 2` marks the 1st and 2nd completed task on the displayed task list as undone in Ailurus.
@@ -276,6 +283,7 @@ Edits an existing task within Ailurus.
 Format: `tedit /t TASK_INDEX [/n TASK_NAME] [/d TASK_DEADLINE]`
 
 * `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `DATE_TIME` must be of format: dd/MM/yyyy, and will be rounded. [More information](#id_date)
 * Edits the task at the specified `TASK_INDEX`. The index refers to the index number shown in the displayed task 
   list.
 * At least one of the optional fields must be provided.
@@ -328,7 +336,7 @@ You can add multiple members to an event e.g. /m 2 /m 3 /m 4...
 </div>
 
 * `EVENT_INDEX` and `MEMBER_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `DATE` must be of format: dd/MM/yyyy
+* `DATE` must be of format: dd/MM/yyyy, and will be rounded. [More information](#id_date)
 * `EVENT_INDEX` and `MEMBER_INDEX` are the INDEX of the event and member list respectively.
 * Multiple members can be added to an event when more than one `MEMBER_INDEX` is provided.
 
@@ -405,7 +413,7 @@ Edits an existing event in Ailurus.
 Format: `eedit /e EVENT_INDEX [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_INDEX]…​`
 
 * `EVENT_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `DATE` must be of format: dd/MM/yyyy
+* `DATE` must be of format: dd/MM/yyyy, and will be rounded. [More information](#id_date)
 * `EVENT_INDEX` and `MEMBER_INDEX` are the INDEX of the event and member list respectively.
 * Edits the member at the specified `EVENT_INDEX`. `EVENT_INDEX` refers to the index number shown in the displayed event list.
 * At least one of the optional fields must be provided.
