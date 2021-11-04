@@ -235,25 +235,45 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
+        List<Student> stuList = getStudentList(chosenFile);
+        if (stuList == null) {
+            return;
+        }
+
+        updateCurrentStudents(stuList);
+    }
+
+    private void updateCurrentStudents(List<Student> stuList) {
+        ProgrammerError newPE = new ProgrammerError();
+        try {
+            newPE.setStudents(stuList);
+        } catch (DuplicateStudentException e) {
+            logger.info("Aborting: file contains duplicate student");
+            displayPopup("Upload failed: " + e.getMessage());
+            return;
+        }
+        saveDataState(newPE);
+        displayPopup("Upload success! All past students have been deleted. You now have " + stuList.size() + " students.");
+    }
+
+    private List<Student> getStudentList(File chosenFile) {
         List<Student> stuList;
         try {
             stuList = FileUtil.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
             displayPopup("Upload failed: " + e.getMessage()); // Error with file data
-            return;
+            return null;
         } catch (IllegalValueException e) {
             displayPopup(e.getMessage()); // Error with file headers
-            return;
+            return null;
         }
 
-        ProgrammerError newPE = new ProgrammerError();
-        try {
-            newPE.setStudents(stuList);
-        } catch (DuplicateStudentException e) {
-            displayPopup("Upload failed: " + e.getMessage());
-            return;
+        if (stuList.size() == 0) {
+            displayPopup("Upload failed: No students were found in your file. Use the purge command if you want to remove all students.");
+            return null;
         }
-        saveDataState(newPE);
+
+        return stuList;
     }
 
     private void saveDataState(ProgrammerError newPE) {
@@ -277,11 +297,13 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         File destinationFile = promptUserForDestination();
-        if (destinationFile != null) {
-            JsonUtil.writeJsonToCsv(jsonData, destinationFile);
-            displayPopup("Your data has been downloaded to " + destinationFile + "!");
-            logger.info("Data successfully downloaded as CSV.");
+        if (destinationFile == null) {
+            return;
         }
+
+        JsonUtil.writeJsonToCsv(jsonData, destinationFile);
+        displayPopup("Your data has been downloaded to " + destinationFile + "!");
+        logger.info("Data successfully downloaded as CSV.");
     }
 
     /**
