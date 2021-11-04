@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_DUPLICATE_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -38,19 +40,34 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        String errorDueToInvalidIndex = MESSAGE_INVALID_COMMAND_FORMAT + "\n" + MESSAGE_INVALID_INDEX;
+        String errorDueToDuplicateIndex = MESSAGE_INVALID_COMMAND_FORMAT + "\n" + MESSAGE_DUPLICATE_INDEX;
+
         // Not a number
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(errorDueToInvalidIndex, DeleteCommand.MESSAGE_USAGE));
 
         // Zero index
-        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0", String.format(errorDueToInvalidIndex, DeleteCommand.MESSAGE_USAGE));
 
         // Negative index
-        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1", String.format(errorDueToInvalidIndex, DeleteCommand.MESSAGE_USAGE));
 
         // Multiple inputs, one invalid
-        assertParseFailure(parser, "0 1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0 1", String.format(errorDueToInvalidIndex, DeleteCommand.MESSAGE_USAGE));
 
         // Multiple inputs, all invalid
-        assertParseFailure(parser, "0 -1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0 -1", String.format(errorDueToInvalidIndex, DeleteCommand.MESSAGE_USAGE));
+
+        // 2 duplicate inputs
+        assertParseFailure(parser, "1 1",
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
+
+        // Many duplicates interspersed (Note that DeleteCommandParser does not detect out of range indexes)
+        assertParseFailure(parser, "70 2 3 2 2 1 70",
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
+
+        // Duplicates as last few inputs
+        assertParseFailure(parser, "2 3 4 4 4",
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
     }
 }
