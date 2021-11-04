@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -23,9 +22,6 @@ public class FriendSchedulePanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(FriendSchedulePanel.class);
 
     @FXML
-    private Label friendName;
-
-    @FXML
     private ListView<Day> dayListView;
 
     /**
@@ -34,7 +30,6 @@ public class FriendSchedulePanel extends UiPart<Region> {
     public FriendSchedulePanel(Friend friend) {
         super(FXML);
         this.friend = friend;
-        friendName.setText(formatFriendNameId(friend));
         dayListView.setItems((ObservableList<Day>) friend.getSchedule().getSchedule());
         dayListView.setCellFactory(listView -> new DayListViewCell());
     }
