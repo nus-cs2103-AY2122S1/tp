@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* We would like to thank Jun Xiong for the invaluable guidance.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,6 +154,56 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add command
+
+In the following section, we would be using the example of adding an `Employee` to RHRH. We can add a `Customer`
+and `Supplier` the using a similar format with their own fields and command, and the logic behind how another Person Type is added will be the same. More information on the differences in adding `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://github.com/AY2122S1-CS2103T-T17-4/tp/blob/master/docs/UserGuide.md)
+
+#### Current Implementation
+
+{:no_toc}
+
+The AddEmployeeCommand creates an Employee and adds it into the current Employee's list. In the Class Diagram below, we can see what is created when we call upon the 
+AddEmployeeCommand
+
+<img src="images/AddEmployeeCommandClassDiagram.png" width="550" />
+
+An AddEmployeeCommand is created through the usage of our `addE` command.
+
+The process in which an `Employee` is added can be broken down into 2.
+
+1. User input is sent into the `RhrhParser` and an `AddEmployeeCommand` is created.
+2. The `AddEmployeeCommand` then proceeds to add the created `Employee` to RHRH.
+
+In the first step, the user input is parsed in `AddEmployeeCommandParser` and broken down for other methods from other classes to create an `AddEmployeeCommand`.
+This is depicted in the Sequence Diagram below.
+
+<img src="images/AddEmployeeCommandSequenceDiagram.png" width="550" />
+
+After obtaining the `AddEmployeeCommand`, it then calls methods in `Model` to help add the newly created `Employee` to the existing `UniqueEmployeeList`.
+
+<img src="images/AddEmployeeCommandActivityDiagram.png" width="550" />
+
+### Design Considerations
+
+* Current Design: We separated `AddEmployeeCommmand`, `AddCustomerCommmand` and `AddSupplierCommmand` as different command types.
+This is evident in our differing Edit and Delete commands as well.
+  * Pros
+    * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
+    * Errors in user input is easier to identify due to the separation of Person type.
+    
+  * Cons
+    * Additional classes had to be implemented.
+    * More commands for a similar feature.
+
+* Alternative Design: We could have a singular `AddCommand` and parse the user's input to see what Person Type the user wanted to add.
+  * Pros
+    * Fewer commands for the user to remember.
+      
+  * Cons
+    * Error messages would have been confusing to select.
+    
 
 ### Customer
 

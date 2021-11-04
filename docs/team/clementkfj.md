@@ -25,6 +25,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added a list command for `Employee`.
     * What it does: Clears all filters and shows the entire list of `Employees`.
     * Justification: Easy way to clear all filters and display the entire list of employees again.
+      Also a quick way to switch to the window that displays a list of all employees.3 
     * Clarification: list command was previously `employee`, later on we modified it to become `listE` to clear all filters and display entire list of employees.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=T17-1&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=clementkfj&tabRepo=AY2122S1-CS2103T-T17-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
@@ -35,6 +36,7 @@ Given below are my contributions to the project.
         * Ensuring that internal deadlines and milestones(e.g. `v1.3` etc.) are met.
     * Managed and vet through PE-D bugs found by peers
         * Ensured bugs were fixed or issues raised are closed if not important.
+    * Reviewed 34 PRs throughout RHRH implementation.
 
 * **Enhancements to existing features**:
     * Removed `Person` related features in the Ui (Pull request [\#85](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/85))
@@ -51,3 +53,6 @@ Given below are my contributions to the project.
         * Fix raised points about improvements in User guide during PE-D (Issues [\#159](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/159), [\#161](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/161), [\#165](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/165), [\#166](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/166), [\#168](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/168) and [\#172](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/172), Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
     * Developer Guide:
         * Added NFRs(Pull requests [\#30](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/30), [\#39](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/39))
+
+**Contributions beyond the team project**:
+    * Found 6 bugs for PE-D for team [W14-2](https://github.com/clementkfj/ped/issues) 
