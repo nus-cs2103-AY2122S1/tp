@@ -333,62 +333,11 @@ The following sequence diagram shows how the sort operation works:
 
 <img src="images/SortCommandSequenceDiagram.png" />
 
-### 4.5 Multiple Address Book
+### 4.5 \[Proposed\] Multiple Address Book
 
-### Description
+#### 4.5.1 Proposed Implementation
 
-LeadsForce allow the user to create and switch between multiple addressbook.
-
-### Implementation
-
-Each individual addressbook is stored as its own JSON file in the data folder that the LeadsForce jar file is stored in.
-The following implementation will omit the details prior to the respective commands' parser.
-Also, details with regard to AddressBookList has been omitted for simplicity if it is not critical to the function of the command.
-
-### 4.5.1 Create new Address Book
-
-1. The `AbCreateCommandParser` parse the name of the address book that is to be created into a `Path` to that new address book.
-2. The `AbCreateCommandParser` will then create a new `AbCreateCommand` with the parsed `Path`.
-3. The `LogicManger` then call the execute method of `AbCreateCommand` which set the address book `Path` and create a new `CommandResult` with the `SpecialCommandResult` type of `CREATE_ADDRESSBOOK`.
-4. The `MainWindow` will then call its handleCreateAddressBook method after checking that the `CommandResult` is of type `CREATE_ADDRESSBOOK` which will call the createAddressBook method of `LogicManager`.
-5. The `LogicManger` will retrieve the `Path` of the new address book and create a new `AddressBookStorage` with it and along with a new `AddressBook`.
-6. The `LogicManger` then call setAddressBook method of `ModelManager` with the new `AddressBook` which will reset the `AddressBook` to a new `AddressBook`.
-7. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
-
-The following sequence diagram shows how the sort operation works:
-
-<img src="images\AbCreateCommandSequenceDiagram.png" />
-
-### 4.5.2 Switch Address Book
-
-1. The `AbSwitchCommandParser` parse the name of the address book that is to be switched to into a `Path` to that address book.
-2. The `AbSwitchCommandParser` will then create a new `AbSwitchCommand` with the parsed `Path`.
-3. The `LogicManger` then call the execute method of `AbSwitchCommand` which set the address book `Path` and create a new `CommandResult` with the `SpecialCommandResult` type of `SWITCH_ADDRESSBOOK`.
-4. The `MainWindow` will then call its handleSwitchAddressBook method after checking that the `CommandResult` is of type `SWITCH_ADDRESSBOOK` which will call the switchAddressBook method of `LogicManager`.
-5. The `LogicManger` will retrieve the `Path` of the address book to switched to and create a new `AddressBookStorage` with it
-6. The `LogicManger` will also call readAddressBook method of `JsonAddressBookStorage` with the `Path` to get the `AddressBook` that is to be switched to.
-7. The `LogicManger` then call setAddressBook method of `ModelManager` with the `AddressBook` which will reset the current `AddressBook` to that.
-8. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
-
-The following sequence diagram shows how the sort operation works:
-
-
-### 4.5.3 Delete Address Book
-
-1. The `AbDeleteCommandParser` parse the name of the address book that is to be deleted to into a `Path` to that address book.
-2. The `AbDeleteCommandParser` will then create a new `AbDeleteCommand` with the parsed `Path`.
-3. The `LogicManger` then call the execute method of `AbDeleteCommand`.
-4. The `AbDeleteCommand` will then attempt to delete the address book specified by the `Path`
-5. The `AbDeleteCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
-
-The following sequence diagram shows how the sort operation works:
-
-### 4.5.4 List Address Book
-
-1. The `AbListCommand` will call getAddressBookListString method of `ModelManager`.
-2. The `ModelManager` will then subsequently call toString method of `AddressBookList`
-3. The `AddressBookList` will append the name of all the addressbook in its list together and return it back to `AblistCommand`
-4. The `AblistCommand` will finally then create a `CommandResult` with that String and return it to `LogicManager`.
+To be included
 
 ### 4.6 \[Proposed\] Undo/redo feature
 
@@ -724,6 +673,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Leads**: refers to contact with a potential customer, also known as a “prospect”
 * **Risk Appetite**: level of risk that a lead is prepared to accept in pursuit of his/her objectives, before action is deemed necessary to reduce the risk
 * **Disposable Income**: total cliental income minus cliental current taxes
+* **Client list**: the list of clients that is displayed in the GUI
+* **Address Book**: the list of clients where all clients inserted are kept
 --------------------------------------------------------------------------------------------------------------------
 
 ## **7. Appendix: Instructions for manual testing**
@@ -767,7 +718,6 @@ Action | Format | Examples
 **Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
 **Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
 **Clear** | `clear` | - |
-**Exit** | `exit` | - |
 
 #### 7.2.1 Adding a client
 
@@ -840,7 +790,7 @@ Action | Format | Examples
        
 #### 7.2.5 Sort clients 
 
-1. Sorts the current lists of clients
+1. Sorts the lists of clients
 
     1. Prerequisites: the client list is not empty when the command is used
 
@@ -862,49 +812,87 @@ Action | Format | Examples
 
     1. Prerequisites: User must have meetings on the day which is specified in the command.
 
-    1. Test case: `delete 0`<br>
-       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+    1. Test case: `schedule 25-11-2021`<br>
+       Expected: Meetings that are schedule on the `25th November 2021` are shown in the meeting schedule panel.  Details of the command is shown in the status message. 
+       
+    1. Test case: `schedule`<br>
+       Expected: Returns the full list of meetings that are scheduled. Details of the command is shown in the status message. 
+       
+    1. Test case: `schedule 2021-30-21`<br>
+       Expected: Meeting schedule remains unchanged. Error details shown in the status message and informs user that the format is incorrect. 
 
-    1. Test case: `delete 999`<br>
-       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `schedule 31-13-2021`, `schedule 32-12-2021`<br>
        Expected: Similar to previous.
 
 
 #### 7.2.7 Filter Client List
 
-1. Deleting a client while all clients are being shown
+1. Filter client list based on a given attribute 
 
-    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: there must be clients in the current client list.
 
-    1. Test case: `delete 0`<br>
-       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+    1. Test case: `filter Dominic`<br>
+       Expected: Clients with the word `Dominic` in any of the client's attributes will be shown in the client list. Details of the command is shown in the status message. 
 
-    1. Test case: `delete 999`<br>
-       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `filter r/1`<br>
+       Expected: Clients with the risk appetite `1` will be shown in the client list. Details of the command is shown in the status message. 
+       
+    1. Test case: `filter Dominic r/1` <br> 
+       Expected: Clients with `Dominic` in any of its attributes and risk appetite of `1` will be shown on the client list. Details of the command is shown in the status message. 
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `filter`<br>
+       Expected: The client list remains unchanged. Error details shown in the status message and informs user of the correct format. 
 
-1. _{ more test cases …​ }_
 
 #### 7.2.8 Searching for clients 
 
-1. Deleting a client while all clients are being shown
+1. Search for a client based on a given attribute
 
-    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: there must be clients in your address book. 
 
-    1. Test case: `delete 0`<br>
-       Expected: Client with client Id `0` is deleted from the client list. Details of the deleted contact shown in the status message. 
+    1. Test case: `search Dominic`<br>
+       Expected: Clients with the word `Dominic` in any of the client's attributes will be shown in the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message. 
 
-    1. Test case: `delete 999`<br>
-       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `search r/1`<br>
+       Expected: Clients with the risk appetite `1` will be shown in the client list, regardless if the user was on the client list initially. Details of the command is shown in the status message. 
+         
+    1. Test case: `search Dominic r/1` <br> 
+       Expected: Clients with `Dominic` in any of its attributes and risk appetite of `1` will be shown on the client list, regardless if the user was on the client list intially. Details of the command is shown in the status message. 
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `search`<br>
+       Expected: The client list remains unchanged. Error details shown in the status message and informs user of the correct format. 
+       
+#### 7.2.9 Show all clients 
 
-1. _{ more test cases …​ }_
+ 1. List all clients 
+    1. Test case: `list`<br>
+       Expected: Client list will contain all clients in the address book. Details of the command is shown in the status message. 
+
+#### 7.2.10 Clear address book 
+
+ 1. Clear all clients in address book
+    1. Test case: `clear`, and then `yes` when prompted by *Are you sure that you wish to clear the Address Book*
+       Expected: Clients in the client list will be cleared and the client list and address book will be empty. Details of the command is shown in the status message. 
+       
+    1. Test case: `clear`, and then `no` when prompted by *Are you sure that you wish to clear the Address Book*
+       Expected: Clients in the client list will not be cleared and the client list and address book will remain the same. Details of the command is shown in the status message. 
+       
+
+#### 7.2.11 General commands 
+Action | Format | 
+| --- | --- | 
+**help** | `help` |
+**Exit** | `exit` | 
+
+**Help command** 
+ 1. Getting help information 
+    1. Test case: `help` <br>
+       Expected: A window with a link to LeadsForce's user guide
+       
+**Exit command** 
+ 1. Exit the application
+    1. Test case: `exit` <br> 
+       Expected: the application closes
 
 ### 7.3 Commands for manual testing (Multiple address book feature)
 
@@ -913,3 +901,10 @@ Action | Format | Examples
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### 7.4 Saving data
+
+1. Dealing with missing/corrupted data files
+
+    1. The data files can be found in the `data` folder of the repository, and are named accordingly to the name of the address books in your application (For instance, if you have an address book that's called `Young Adults`, there will be a JSON file called `Young Adults.json` in the data folder). Remove the `client id` for one of the clients in the corrupted data file, and restart the application <br> Expected: LeadsForce should display an empty client list for the address book with the same name as the corrupted data file.
