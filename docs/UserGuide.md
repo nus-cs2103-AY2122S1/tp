@@ -364,11 +364,13 @@ the range would be from 25/10/2021 to 31/10/2021.
 
 #### Viewing schedule for the week: `change`
 
+the change command enables the user to view a different week than the default one, which is the current week.
 The schedule for the current week is shown under the schedule tab by default. The week
-can be changed using the `change` command.
+can be changed using the `change` command. 
 
- * Takes in a single date input to translate into a week.
+ * Takes in a single date input to translate into a week, which consists of the seven days after the input date.
  * The date is in `YYYY-MM-DD`
+ * The change command also causes all the default shift related commands to take place over the resulting week.
 
 Format:  
 `change da/DATE`    
