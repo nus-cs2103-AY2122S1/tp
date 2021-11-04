@@ -86,7 +86,7 @@ public class EditCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
-        return new EditCommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
     /**

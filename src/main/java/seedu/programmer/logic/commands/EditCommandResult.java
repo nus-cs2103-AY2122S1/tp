@@ -8,18 +8,14 @@ import seedu.programmer.model.student.Student;
 public class EditCommandResult extends CommandResult {
 
     /** The application should show student's result. */
-    private final Student edtitedStudent;
+    private final Student editedStudent;
 
     /**
      * Constructs a {@code CommandResult} when there is a result to show.
      */
-    public EditCommandResult(String feedbackToUser, Student edtitedStudent) {
+    public EditCommandResult(String feedbackToUser, Student editedStudent) {
         super(feedbackToUser);
-        this.edtitedStudent = edtitedStudent;
-    }
-
-    public Student getEditedStudent() {
-        return edtitedStudent;
+        this.editedStudent = editedStudent;
     }
 
     @Override
@@ -35,12 +31,12 @@ public class EditCommandResult extends CommandResult {
 
         EditCommandResult otherCommandResult = (EditCommandResult) other;
         return getFeedbackToUser().equals(otherCommandResult.getFeedbackToUser())
-                && edtitedStudent == otherCommandResult.edtitedStudent;
+                && editedStudent == otherCommandResult.editedStudent;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFeedbackToUser(), edtitedStudent);
+        return Objects.hash(getFeedbackToUser(), editedStudent);
     }
 
 }
