@@ -12,20 +12,13 @@ Given below are my contributions to the project.
 
 * **New Feature**: Display folder list [#48](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/48)
   * What it does: Allows users to view list of folders create. Data shown: Folder name and list of contact names
-  * Justification: By having a component to view the folders that contain the name and the list of contacts, 
-    it allows the user to visualize, organize and manage efficiently and effectively with the massive number of contacts 
-    they collected while in college.
-  * Highlights: This has data dependency with the person's data. If any of the person data is modified,
-    we need to be able to update in the folder list as well. In particular, we need to update the person
-    in the folder that contains the updated person data.
+  * Justification: By having a component to view the folders that contain the name and the list of contacts, it allows the user to visualize, organize and manage efficiently and effectively with the massive number of contacts they collected while in college.
+  * Highlights: This has data dependency with the person's data. If any of the person data is modified, we need to be able to update in the folder list as well. In particular, we need to update the person in the folder that contains the updated person data.
 
 * **New Feature**: Implement command to clear all folders [#108](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/108)
   * What it does: Allows users to clear all folders
-  * Justification: With the marching of time, some folders, if not all, become obsolete. This feature
-    comes in handy when they want to remove all folders at one go. This helps to improve user experience
-    as they do not have to delete one by one, especially if he/she has created a significant number of it.
-  * Highlights: This command is similar to that of clearing all persons. However, there is one key difference. 
-    When clearing the folders, we need to ensure that the list of person/contacts still remain. 
+  * Justification: With the marching of time, some folders, if not all, become obsolete. This feature comes in handy when they want to remove all folders at one go. This helps to improve user experience as they do not have to delete one by one, especially if he/she has created a significant number of it.
+  * Highlights: This command is similar to that of clearing all persons. However, there is one key difference. When clearing the folders, we need to ensure that the list of person/contacts still remain. 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=sebbycake)
 
