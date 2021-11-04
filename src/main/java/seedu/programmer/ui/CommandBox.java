@@ -68,30 +68,30 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPressed(KeyEvent event) {
-        boolean upPressed = event.getCode() == KeyCode.UP;
-        boolean downPressed = event.getCode() == KeyCode.DOWN;
-        boolean isNotUpOrDown = !upPressed && !downPressed;
-        boolean noCommandHistoryPresent = commandHistory.isEmpty();
-        boolean downAndAtLastCommand = downPressed && commandHistory.isAtLastIndex();
-        boolean upAndAtFirstCommand = upPressed && commandHistory.isAtFirstIndex();
-        boolean upAndAtLastCommand = upPressed && commandHistory.isAtLastIndex();
+        boolean isUpPressed = event.getCode() == KeyCode.UP;
+        boolean isDownPressed = event.getCode() == KeyCode.DOWN;
+        boolean isNotUpOrDown = !isUpPressed && !isDownPressed;
+        boolean isCommandHistoryAbsent = commandHistory.isEmpty();
+        boolean isDownAtLastCommand = isDownPressed && commandHistory.isAtLastIndex();
+        boolean isUpAtFirstCommand = isUpPressed && commandHistory.isAtFirstIndex();
+        boolean isUpAtLastCommand = isUpPressed && commandHistory.isAtLastIndex();
 
         // Do nothing if neither up nor down pressed, or no command history
-        if (isNotUpOrDown || noCommandHistoryPresent) {
+        if (isNotUpOrDown || isCommandHistoryAbsent) {
             return;
         }
 
-        if (upAndAtLastCommand && isLastCommandValid) {
+        if (isUpAtLastCommand && isLastCommandValid) {
             // Remember the text field resets to "" after each valid command
             commandTextField.setText(commandHistory.getCurrentCommand());
             isLastCommandValid = false;
-        } else if (downAndAtLastCommand && isLastCommandValid) {
+        } else if (isDownAtLastCommand && isLastCommandValid) {
             logger.info("We are already at the newest command -> show current command");
             commandTextField.setText("");
-        } else if (downAndAtLastCommand || upAndAtFirstCommand) {
+        } else if (isDownAtLastCommand || isUpAtFirstCommand) {
             logger.info("We are already at the newest or oldest command -> show current command");
             commandTextField.setText(commandHistory.getCurrentCommand());
-        } else if (upPressed) {
+        } else if (isUpPressed) {
             commandTextField.setText(commandHistory.getPrevCommand());
         } else {
             commandTextField.setText(commandHistory.getNextCommand());
@@ -119,16 +119,6 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
-    }
-
-    @FXML
-    private void handleFocusTextField() {
-        commandTextField.setStyle("-fx-border-color: #383838 #383838 #81A4CD #383838;\n");
-    }
-
-    @FXML
-    private void handleUnfocusTextField() {
-        commandTextField.setStyle("-fx-border-color: #383838 #383838 #ffffff #383838;\n");
     }
 
     /**

@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.commons.exceptions.IllegalValueException;
+import seedu.programmer.commons.util.FileUtil;
+import seedu.programmer.commons.util.JsonUtil;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DashboardCommandResult;
@@ -33,7 +35,6 @@ import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.UploadCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.FileManager;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
@@ -45,6 +46,8 @@ import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final Double NINETY_PERCENT = 0.9;
+
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -202,6 +205,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleShowResult() {
         labResultListPanel = new LabResultListPanel(logic.getSelectedInformation());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
+        logger.fine("Showing student's lab results.");
     }
 
     /**
@@ -224,7 +228,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleUpload() {
-        FileManager fm = new FileManager();
         File chosenFile = promptUserForCsvFile();
         if (chosenFile == null) {
             logger.info("User cancelled the file upload.");
@@ -233,7 +236,7 @@ public class MainWindow extends UiPart<Stage> {
 
         List<Student> stuList;
         try {
-            stuList = fm.getStudentsFromCsv(chosenFile);
+            stuList = FileUtil.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
             displayPopup("Upload failed: " + e.getMessage()); // Error with file data
             return;
@@ -260,8 +263,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDownload() {
-        FileManager fm = new FileManager();
-        JSONArray jsonData = fm.getJsonData("data/programmerError.json");
+        JSONArray jsonData = JsonUtil.getJsonData("data/programmerError.json");
         assert (jsonData != null);
 
         if (jsonData.length() == 0) {
@@ -271,7 +273,7 @@ public class MainWindow extends UiPart<Stage> {
 
         File destinationFile = promptUserForDestination();
         if (destinationFile != null) {
-            fm.writeJsonToCsv(jsonData, destinationFile);
+            JsonUtil.writeJsonToCsv(jsonData, destinationFile);
             displayPopup("Your data has been downloaded to " + destinationFile + "!");
             logger.info("Data successfully downloaded as CSV.");
         }
@@ -286,12 +288,13 @@ public class MainWindow extends UiPart<Stage> {
         // We should not need to display an empty popup
         assert (message != null);
         Popup popup = createPopup(message);
+        double tenPercent = 1 - NINETY_PERCENT;
 
         // Add some left padding according to primaryStage's width
-        popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.05);
+        popup.setX(primaryStage.getX() + primaryStage.getWidth() * tenPercent / 2);
 
         // Set Y coordinate scaled according to primaryStage's height
-        popup.setY(primaryStage.getY() + primaryStage.getHeight() * 0.1);
+        popup.setY(primaryStage.getY() + primaryStage.getHeight() * tenPercent);
         popup.show(primaryStage);
     }
 
@@ -310,7 +313,7 @@ public class MainWindow extends UiPart<Stage> {
 
         Label label = new Label(message);
         label.setWrapText(true);
-        label.setMaxWidth(primaryStage.getWidth() * 0.9);
+        label.setMaxWidth(primaryStage.getWidth() * NINETY_PERCENT);
         label.getStylesheets().add("view/Styles.css");
         label.getStyleClass().add("popup");
 
@@ -319,6 +322,17 @@ public class MainWindow extends UiPart<Stage> {
 
         popup.getContent().add(label);
         return popup;
+    }
+
+    /**
+     * Configures file chooser to accept only CSV files.
+     *
+     * @param fileChooser FileChooser object
+     */
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("Select CSV file");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("All CSVs", "*.csv");
+        fileChooser.getExtensionFilters().add(csvFilter);
     }
 
     /**
@@ -342,17 +356,6 @@ public class MainWindow extends UiPart<Stage> {
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
         return chosenDir == null ? null : new File(chosenDir, destFileName);
-    }
-
-    /**
-     * Configures file chooser to accept only CSV files.
-     *
-     * @param fileChooser FileChooser object
-     */
-    private static void configureFileChooser(final FileChooser fileChooser) {
-        fileChooser.setTitle("Select CSV file");
-        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("All CSVs", "*.csv");
-        fileChooser.getExtensionFilters().add(csvFilter);
     }
 
     /**
@@ -386,5 +389,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    @FXML
+    private void handleHover() {
+        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
+    }
+
+    @FXML
+    private void handleUnhover() {
+        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
     }
 }

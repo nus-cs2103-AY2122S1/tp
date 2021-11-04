@@ -2,14 +2,14 @@
     -fx-font-family: null;
     -fx-font-size: 15;
     -fx-text-alignment: center;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-main-bg-color;
 }
 
 .overall-stats {
     -fx-text-fill: #FFD369;
 }
 
-.labs-marked {
+.labs-unmarked {
     -fx-text-fill: #1DB9C3;
 }
 

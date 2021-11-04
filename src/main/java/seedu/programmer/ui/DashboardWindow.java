@@ -7,13 +7,9 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
-import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
@@ -27,17 +23,12 @@ public class DashboardWindow extends PopupWindow {
     private static final String FXML = "DashboardWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private Logic logic;
-    private TreeMap<ClassId, Integer> labsUnmarkedMap;
 
     @FXML
-    private StackPane overallStatsPlaceholder;
+    private Label overallStatsLabel;
 
     @FXML
-    private ScrollPane labsMarkedList;
-
-    @FXML
-    private VBox labVBox;
-
+    private Label labsUnmarkedLabel;
 
     /**
      * Creates a new DashboardWindow.
@@ -52,57 +43,57 @@ public class DashboardWindow extends PopupWindow {
 
     /**
      * Creates a new Dashboard Window.
+     *
+     * @param logic Logic object for accessing student data.
      */
     public DashboardWindow(Logic logic) {
         this(new Stage(), logic);
     }
 
     /**
-     * Fills number of students, classes and labs.
-     */
-    private void fillOverallStats() {
-        overallStatsPlaceholder.getChildren().clear();
-        ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
-        ObservableList<Student> stuList = readOnlyPE.getStudentList();
-        HashSet<ClassId> classList = fillClassList(stuList);
-        labsUnmarkedMap = fillLabsUnmarkedMap(classList, stuList);
-        int numStudents = stuList.size();
-        int numClasses = classList.size();
-        int numLabs = stuList.size() > 0 ? stuList.get(0).getLabList().size() : 0;
-
-        String dataToDisplay = formatDataToDisplay(numStudents, numClasses, numLabs);
-        Label label = new Label(dataToDisplay);
-        label.getStylesheets().add("css/Dashboard.css");
-        label.getStyleClass().add("overall-stats");
-        overallStatsPlaceholder.getChildren().add(label);
-    }
-
-    private void fillLabsMarked() {
-        labVBox.getChildren().clear();
-        String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
-        Label labsLabel = new Label(labsMarked);
-        labsLabel.getStylesheets().add("css/Dashboard.css");
-        labsLabel.getStyleClass().add("labs-marked");
-        labVBox.getChildren().add(labsLabel);
-    }
-
-    /**
      * Refreshes the dashboard window.
      */
     public void update() {
-        fillOverallStats();
-        fillLabsMarked();
+        logger.info("Updating dashboard window...");
+        ObservableList<Student> stuList = logic.getFilteredStudentList();
+        HashSet<ClassId> classes = getClasses(stuList);
+        fillOverallStats(classes, stuList);
+        fillLabsMarked(classes, stuList);
     }
 
-    private HashSet<ClassId> fillClassList(ObservableList<Student> stuList) {
-        HashSet<ClassId> classList = new HashSet<>();
-        stuList.forEach(s -> classList.add(s.getClassId()));
-        return classList;
+    /**
+     * Fills number of students, classes and labs.
+     *
+     * @param classes the set of classes
+     * @param stuList the list of students
+     */
+    private void fillOverallStats(HashSet<ClassId> classes, ObservableList<Student> stuList) {
+        String dataToDisplay = formatDataToDisplay(stuList, classes);
+        overallStatsLabel.setText(dataToDisplay);
     }
 
-    private TreeMap<ClassId, Integer> fillLabsUnmarkedMap(HashSet<ClassId> classList, ObservableList<Student> stuList) {
+    /**
+     * Fills the number of unmarked labs per class.
+     *
+     * @param classes the classes to be displayed
+     * @param stuList the list of students
+     */
+    private void fillLabsMarked(HashSet<ClassId> classes, ObservableList<Student> stuList) {
+        TreeMap<ClassId, Integer> labsUnmarkedMap = populateLabsUnmarkedMap(classes, stuList);
+        String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
+        labsUnmarkedLabel.setText(labsMarked);
+    }
+
+    private HashSet<ClassId> getClasses(ObservableList<Student> stuList) {
+        HashSet<ClassId> classes = new HashSet<>();
+        stuList.forEach(s -> classes.add(s.getClassId()));
+        return classes;
+    }
+
+    private TreeMap<ClassId, Integer> populateLabsUnmarkedMap(HashSet<ClassId> classes,
+                                                              ObservableList<Student> stuList) {
         TreeMap<ClassId, Integer> labsUnmarkedMap = new TreeMap<>(new SortClassId());
-        classList.forEach(cid -> labsUnmarkedMap.put(cid, 0));
+        classes.forEach(cid -> labsUnmarkedMap.put(cid, 0));
 
         for (Student s : stuList) {
             ObservableList<Lab> stuLabs = s.getLabList();
@@ -116,7 +107,11 @@ public class DashboardWindow extends PopupWindow {
         return labsUnmarkedMap;
     }
 
-    private String formatDataToDisplay(int numStudents, int numClasses, int numLabs) {
+    private String formatDataToDisplay(ObservableList<Student> stuList, HashSet<ClassId> classList) {
+        int numStudents = stuList.size();
+        int numClasses = classList.size();
+        int numLabs = stuList.size() > 0 ? stuList.get(0).getNumLabs() : 0;
+
         return "No. of students: " + numStudents + "\n"
                 + "No. of classes: " + numClasses + "\n"
                 + "No. of labs: " + numLabs + "\n\n";
@@ -127,6 +122,7 @@ public class DashboardWindow extends PopupWindow {
             return "\nYou don't have any classes yet!";
         }
 
+        // Start building message
         StringBuilder dataToDisplay = new StringBuilder("\nNo. of labs left to mark:\n");
         for (ClassId cid: labMap.keySet()) {
             String key = cid.toString();

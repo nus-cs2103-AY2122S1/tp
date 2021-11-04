@@ -100,11 +100,10 @@ public class Student implements DisplayableObject {
         return freshCopy;
     }
 
-    public Lab getLab(int labNum) {
+    public Lab getLab(LabNum labNum) {
         return labList.stream().filter(x -> x.getLabNum() == labNum).findFirst().orElse(null);
     }
 
-    //todo check comment out
     /**
      * Adds a lab to all the student records
      * */
@@ -146,7 +145,7 @@ public class Student implements DisplayableObject {
     /**
      * Updates a lab result for a student
      * */
-    public boolean editLabInfo(Lab lab, int newLabNum, Integer total) {
+    public boolean editLabInfo(Lab lab, LabNum newLabNum, Integer total) {
         Lab newLab = new Lab(newLabNum);
         int index2 = this.labList.indexOf(newLab);
         if (index2 == -1) {
@@ -170,6 +169,10 @@ public class Student implements DisplayableObject {
 
     public void setLabList(ObservableList<Lab> labList) {
         this.labList = labList;
+    }
+
+    public int getNumLabs() {
+        return labList.size();
     }
 
     /**
