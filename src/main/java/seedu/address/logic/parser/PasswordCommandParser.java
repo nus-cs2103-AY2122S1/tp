@@ -21,7 +21,8 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
     public PasswordCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(ParserUtil.mapPrefixesToShortForm(args),
-                PREFIX_OLD_PASSWORD, PREFIX_NEW_PASSWORD
+                PREFIX_OLD_PASSWORD,
+                PREFIX_NEW_PASSWORD
         );
 
         List<String> allOld = argMultimap.getAllValues(PREFIX_OLD_PASSWORD);

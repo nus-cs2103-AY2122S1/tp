@@ -19,6 +19,8 @@ public class CliSyntax {
     public static final Prefix LONG_PREFIX_EMAIL = new Prefix("--email");
     public static final Prefix LONG_PREFIX_ADDRESS = new Prefix("--address");
     public static final Prefix LONG_PREFIX_TAG = new Prefix("--tag");
+    public static final Prefix LONG_PREFIX_OLD_PASSWORD = new Prefix("--old");
+    public static final Prefix LONG_PREFIX_NEW_PASSWORD = new Prefix("--new");
 
     public static final Prefix PREFIX_ALL = new Prefix("-a");
     public static final Prefix PREFIX_EXCLUDE = new Prefix("-e");

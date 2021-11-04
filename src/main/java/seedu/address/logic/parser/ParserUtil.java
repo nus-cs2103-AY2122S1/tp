@@ -4,11 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_OLD_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -146,7 +150,9 @@ public class ParserUtil {
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_ADDRESS), PREFIX_ADDRESS.getPrefix())
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_EMAIL), PREFIX_EMAIL.getPrefix())
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_PHONE), PREFIX_PHONE.getPrefix())
-                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_TAG), PREFIX_TAG.getPrefix());
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_TAG), PREFIX_TAG.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_OLD_PASSWORD), PREFIX_OLD_PASSWORD.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_NEW_PASSWORD), PREFIX_NEW_PASSWORD.getPrefix());
     }
 
     /**
