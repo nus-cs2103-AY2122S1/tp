@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 * **New Feature**: Display folder list [#48](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/48)
   * What it does: Allows users to view list of folders create. Data shown: Folder name and list of contact names
   * Justification: By having a component to view the folders that contain the name and the list of contacts, it allows the user to visualize, organize and manage efficiently and effectively with the massive number of contacts they collected while in college.
-  * Highlights: This has data dependency with the person's data. If any of the person data is modified, we need to be able to update in the folder list as well. In particular, we need to update the person in the folder that contains the updated person data.
+  * Highlights: This has data dependency with the persons' data. If any of the person data is modified, we need to be able to update in the folder list as well. In particular, we need to update the person in the folder that contains the updated person data.
 
 * **New Feature**: Implement command to clear all folders [#108](https://github.com/AY2122S1-CS2103-T16-1/tp/pull/108)
   * What it does: Allows users to clear all folders
