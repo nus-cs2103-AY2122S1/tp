@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
@@ -67,6 +68,9 @@ public class AddGroupCommand extends Command {
         // add group!
         Group withIds = toAdd.updateAssignedPersonIds(personsId);
         model.addGroup(withIds);
+
+        model.setGroupToView(withIds);
+        model.setViewingType(ViewingType.GROUP);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, withIds));
     }

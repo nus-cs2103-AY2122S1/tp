@@ -17,6 +17,7 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[portfolio](team/eltonyeh.md)]
 
 * Role: Developer
+* Responsibilities: Unique Id for entities and task assignments.
 
 ### Tan Hua Kun
 
