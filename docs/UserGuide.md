@@ -596,8 +596,8 @@ Members you choose to allocate must be available on the specified day and cannot
 </div>
 
 Examples:
-* `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
-  at index 2 in the displayed facility list on Monday :camera:
+* `allocate 1 2 5` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
+  at index 2 in the displayed facility list on Friday :camera:
 
 <p align="center">
    <img src="images/allocateExample.png" height="500" align="center"/>
