@@ -61,9 +61,9 @@ import seedu.address.testutil.EmployeeUtil;
 import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.SupplierUtil;
 
-public class AddressBookParserTest {
+public class RhrhParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final RhrhParser parser = new RhrhParser();
 
 
     @Test

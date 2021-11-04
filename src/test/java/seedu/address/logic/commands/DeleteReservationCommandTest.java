@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalReservation.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalReservation.getTypicalRhrh;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.reservation.Reservation;
 
 public class DeleteReservationCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrh(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -27,7 +27,7 @@ public class DeleteReservationCommandTest {
                 toDelete
         );
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.deleteReservation(toDelete);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

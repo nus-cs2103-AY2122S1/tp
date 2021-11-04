@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCustomerCommand.EditCustomerDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.testutil.CustomerBuilder;
@@ -34,7 +34,7 @@ import seedu.address.testutil.TypicalCustomers;
  */
 public class EditCustomerCommandTest {
 
-    private Model model = new ModelManager(TypicalCustomers.getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model model = new ModelManager(TypicalCustomers.getTypicalRhrhCustomers(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class EditCustomerCommandTest {
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
@@ -65,7 +65,7 @@ public class EditCustomerCommandTest {
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setCustomer(lastCustomer, editedCustomer);
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class EditCustomerCommandTest {
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
     }
@@ -95,7 +95,7 @@ public class EditCustomerCommandTest {
 
         String expectedMessage = String.format(EditCustomerCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
@@ -115,7 +115,7 @@ public class EditCustomerCommandTest {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
 
         // edit customer in filtered list into a duplicate in address book
-        Customer customerInList = model.getAddressBook().getCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
+        Customer customerInList = model.getRhrh().getCustomerList().get(INDEX_SECOND_CUSTOMER.getZeroBased());
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(INDEX_FIRST_CUSTOMER,
                 new EditCustomerDescriptorBuilder(customerInList).build());
 
@@ -140,7 +140,7 @@ public class EditCustomerCommandTest {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
         Index outOfBoundIndex = INDEX_SECOND_CUSTOMER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCustomerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getCustomerList().size());
 
         EditCustomerCommand editCustomerCommand = new EditCustomerCommand(outOfBoundIndex,
                 new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB).build());

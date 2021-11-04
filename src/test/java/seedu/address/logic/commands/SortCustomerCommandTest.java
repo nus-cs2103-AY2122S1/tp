@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.customer.CustomerComparator;
 
@@ -27,8 +27,8 @@ public class SortCustomerCommandTest {
     private static final String LOYALTY_POINTS_DESC = "loyalty points";
     private static final String ASCENDING_DESC = "ascending";
     private static final String DESCENDING_DESC = "descending";
-    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
-    private AddressBook ab = new AddressBook();
+    private Model model = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
+    private Rhrh ab = new Rhrh();
 
     // comparator field is null
     @Test
@@ -70,7 +70,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, NAME_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getNameComparator(true));
         System.out.println(expectedModel.getSortableCustomerList());
 
@@ -88,7 +88,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, NAME_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getNameComparator(false));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -105,7 +105,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, ADDRESS_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getAddressComparator(true));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -122,7 +122,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, ADDRESS_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getAddressComparator(false));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -139,7 +139,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, PHONE_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getPhoneComparator(true));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -156,7 +156,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, PHONE_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getPhoneComparator(false));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -173,7 +173,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, EMAIL_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getEmailComparator(true));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -190,7 +190,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, EMAIL_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getEmailComparator(false));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -207,7 +207,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, LOYALTY_POINTS_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getLoyaltyPointsComparator(true));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -224,7 +224,7 @@ public class SortCustomerCommandTest {
                 String.format(SortCustomerCommand.MESSAGE_SUCCESS, LOYALTY_POINTS_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableCustomerList().sort(CustomerComparator.getLoyaltyPointsComparator(false));
 
         assertCommandSuccess(sortCustomerCommand, model, expectedMessage, expectedModel);
@@ -235,7 +235,7 @@ public class SortCustomerCommandTest {
         SortCustomerCommand sortCustomerCommand =
                 new SortCustomerCommand(CustomerComparator.getLoyaltyPointsComparator(true),
                         LOYALTY_POINTS_DESC, ASCENDING_DESC);
-        Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+        Model emptyModel = new ModelManager(new Rhrh(), new UserPrefs());
         assertCommandFailure(sortCustomerCommand, emptyModel,
                 SortCustomerCommand.MESSAGE_EMPTY_FILTERED_LIST);
     }

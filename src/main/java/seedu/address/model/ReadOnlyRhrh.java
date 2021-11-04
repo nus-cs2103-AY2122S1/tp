@@ -10,7 +10,7 @@ import seedu.address.model.table.Table;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyRhrh {
 
     ObservableList<Table> getTableList();
 

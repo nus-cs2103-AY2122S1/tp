@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommand
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BENSON;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_CARL;
 import static seedu.address.testutil.TypicalReservation.CARL_RESERVATION;
-import static seedu.address.testutil.TypicalReservation.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalReservation.getTypicalRhrh;
 
 import java.util.Arrays;
 
@@ -22,8 +22,8 @@ import seedu.address.model.person.Phone;
 public class GetCustomerReservingCommandTest {
     private static final Index FIRST_INDEX = Index.fromOneBased(1);
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrh(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRhrh(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

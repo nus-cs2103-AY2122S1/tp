@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -33,7 +33,7 @@ class ReserveCommandTest {
     private static final Phone DIFFERENT_PHONE = new Phone("12345678");
     private static final LocalDateTime DIFFERENT_DATE_TIME = LocalDateTime.parse("2021-11-12T21:00");
 
-    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
 
     @Test
     public void constructor_nullArgument_throwsNullPointerException() {
