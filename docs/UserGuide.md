@@ -2,13 +2,19 @@
 layout: page
 title: User Guide
 ---
-
 ## User Guide
 
-Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (CLI) application that enables student financial advisors to quickly and easily keep track of their contacts** (potential clients and existing clients), financial plans sold and provide them with insightful, actionable statistics and querying functionalities to aid their operations.
-
 * Table of Contents
-{:toc}
+  {:toc}
+
+##Overview
+
+Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (CLI) application for Student Insurance
+Agents that aids their operations by:
+* Managing their contacts (such as potential clients and existing clients)
+* Managing financial policies that they have sold
+* Providing insightful statistics
+* Offering helpful querying functionalities
 
 --------------------------------------------------------------------------------------------------------------------
 
