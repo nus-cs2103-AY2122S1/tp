@@ -30,10 +30,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
     private final FilteredList<Policy> filteredPolicies;
-    private SortedList<Contact> sortedContacts;
-    private SortedList<Policy> sortedPolicies;
-    private Comparator<Contact> comparatorContact;
-    private Comparator<Policy> comparatorPolicy;
+    private final SortedList<Contact> sortedContacts;
+    private final SortedList<Policy> sortedPolicies;
 
     /**
      * Initializes a ModelManager with the given SIASA and userPrefs.
@@ -46,13 +44,10 @@ public class ModelManager implements Model {
 
         this.siasa = new Siasa(siasa);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.comparatorContact = CONTACT_SORT_BY_ALPHA_ASC;
-        filteredContacts = new FilteredList<>(this.siasa.getContactList());
-        filteredPolicies = new FilteredList<>(this.siasa.getPolicyList());
-        sortedContacts = new SortedList<>(filteredContacts);
-        sortedContacts.setComparator(CONTACT_SORT_BY_ALPHA_ASC);
-        sortedPolicies = new SortedList<>(filteredPolicies);
-        sortedPolicies.setComparator(POLICY_SORT_BY_ALPHA_ASC);
+        sortedContacts = new SortedList<>(this.siasa.getContactList(), CONTACT_SORT_BY_ALPHA_ASC);
+        sortedPolicies = new SortedList<>(this.siasa.getPolicyList(), POLICY_SORT_BY_ALPHA_ASC);
+        filteredContacts = new FilteredList<>(sortedContacts);
+        filteredPolicies = new FilteredList<>(sortedPolicies);
     }
 
     public ModelManager() {
@@ -198,22 +193,21 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Contact> getFilteredContactList() {
-        return sortedContacts;
+        return filteredContacts;
     }
 
     @Override
     public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
-        sortedContacts = new SortedList<>(filteredContacts);
-        sortedContacts.setComparator(comparatorContact);
     }
 
     @Override
     public void updateFilteredContactList(Comparator<Contact> comparator) {
         requireNonNull(comparator);
-        comparatorContact = comparator;
-        sortedContacts.setComparator(comparatorContact);
+        sortedContacts.setComparator(comparator);
+        filteredContacts.removeAll();
+        filteredContacts.addAll(sortedContacts);
     }
 
     //=========== Filtered Policy List Accessors =============================================================
@@ -224,22 +218,21 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Policy> getFilteredPolicyList() {
-        return sortedPolicies;
+        return filteredPolicies;
     }
 
     @Override
     public void updateFilteredPolicyList(Predicate<Policy> predicate) {
         requireNonNull(predicate);
         filteredPolicies.setPredicate(predicate);
-        sortedPolicies = new SortedList<>(filteredPolicies);
-        sortedPolicies.setComparator(comparatorPolicy);
     }
 
     @Override
     public void updateFilteredPolicyList(Comparator<Policy> comparator) {
         requireNonNull(comparator);
-        comparatorPolicy = comparator;
-        sortedPolicies.setComparator(comparatorPolicy);
+        sortedPolicies.setComparator(comparator);
+        filteredPolicies.removeAll();
+        filteredPolicies.addAll(sortedPolicies);
     }
 
     /**

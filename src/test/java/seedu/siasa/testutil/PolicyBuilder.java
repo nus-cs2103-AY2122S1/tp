@@ -54,7 +54,7 @@ public class PolicyBuilder {
         requireNonNull(policyToCopy);
         this.title = policyToCopy.getTitle();
         this.paymentStructure = policyToCopy.getPaymentStructure();
-        this.coverageExpiryDate = policyToCopy.getCoverageExpiryDate();
+        this.coverageExpiryDate = policyToCopy.getCoverageExpiryDate().orElse(null);
         this.commission = policyToCopy.getCommission();
         this.owner = policyToCopy.getOwner();
         this.tags = new HashSet<>(policyToCopy.getTags());
@@ -105,6 +105,15 @@ public class PolicyBuilder {
      */
     public PolicyBuilder withExpiryDate(LocalDate date) {
         this.coverageExpiryDate = new CoverageExpiryDate(date);
+        return this;
+    }
+
+    /**
+     * Removes the {@code ExpiryDate} of the {@code Policy} that we are building.
+     * @return
+     */
+    public PolicyBuilder withNoExpiryDate() {
+        this.coverageExpiryDate = null;
         return this;
     }
 

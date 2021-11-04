@@ -17,6 +17,8 @@ public class ShowExpiringPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicy";
 
+    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1);
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -25,7 +27,8 @@ public class ShowExpiringPolicyCommand extends Command {
 
         while (policyListIterator.hasNext()) {
             Policy policy = policyListIterator.next();
-            if (policy.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1))) {
+
+            if (policy.isExpiringBefore(CUT_OFF_DATE)) {
                 listOfPolicies.append(policy);
             }
         }

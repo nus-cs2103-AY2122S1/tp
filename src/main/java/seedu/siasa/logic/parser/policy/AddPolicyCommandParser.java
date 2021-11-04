@@ -47,7 +47,6 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
 
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_TITLE,
-                PREFIX_EXPIRY,
                 PREFIX_PAYMENT,
                 PREFIX_COMMISSION,
             PREFIX_CONTACT_INDEX)
@@ -60,8 +59,10 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                 ParserUtil.parsePaymentStructure(argMultimap.getValue(PREFIX_PAYMENT).get());
         Commission commission =
                 ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get(), paymentStructure);
-        CoverageExpiryDate coverageExpiryDate =
-                ParserUtil.parseCoverageExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
+        CoverageExpiryDate coverageExpiryDate = null;
+        if (argMultimap.getValue(PREFIX_EXPIRY).isPresent()) {
+            coverageExpiryDate = ParserUtil.parseCoverageExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
+        }
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT_INDEX).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

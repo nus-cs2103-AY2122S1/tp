@@ -74,7 +74,7 @@ public class EditPolicyCommand extends Command {
         List<Policy> lastShownList = model.getFilteredPolicyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
         }
 
         Policy policyToEdit = lastShownList.get(index.getZeroBased());
@@ -104,7 +104,7 @@ public class EditPolicyCommand extends Command {
         PaymentStructure updatedPaymentStructure = editPolicyDescriptor.getPaymentStructure()
                 .orElse(policyToEdit.getPaymentStructure());
         CoverageExpiryDate updatedCoverageExpiryDate = editPolicyDescriptor.getCoverageExpiryDate()
-                .orElse(policyToEdit.getCoverageExpiryDate());
+                .orElse(policyToEdit.getCoverageExpiryDate().orElse(null));
         Commission updatedCommission = editPolicyDescriptor.getCommission().orElse(policyToEdit.getCommission());
         Set<Tag> updatedTags = editPolicyDescriptor.getTags().orElse(policyToEdit.getTags());
 

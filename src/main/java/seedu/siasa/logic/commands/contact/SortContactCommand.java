@@ -23,7 +23,13 @@ public class SortContactCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Sorted contacts";
 
+    public static final String MESSAGE_NO_SUCH_COMPARATOR = "No such sorting order";
+
     private final Comparator<Contact> comparator;
+
+    public SortContactCommand() {
+        this.comparator = null;
+    }
 
     public SortContactCommand(Comparator<Contact> comparator) {
         this.comparator = comparator;
@@ -32,7 +38,11 @@ public class SortContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(comparator);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (comparator != null) {
+            model.updateFilteredContactList(comparator);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            return new CommandResult(MESSAGE_NO_SUCH_COMPARATOR);
+        }
     }
 }

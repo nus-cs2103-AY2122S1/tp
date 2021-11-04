@@ -14,9 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
+import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.testutil.PolicyBuilder;
 
 public class JsonAdaptedPolicyTest {
     private static final String INVALID_TITLE = "Policy#";
@@ -25,7 +26,7 @@ public class JsonAdaptedPolicyTest {
     private static final String INVALID_COMMISSION = "1000";
 
     private static final String VALID_TITLE = FULL_LIFE.getTitle().toString();
-    private static final String VALID_EXPIRY_DATE = FULL_LIFE.getCoverageExpiryDate().toString();
+    private static final String VALID_EXPIRY_DATE = FULL_LIFE.getCoverageExpiryDate().get().toString();
     private static final JsonAdaptedContact VALID_OWNER = new JsonAdaptedContact(FULL_LIFE.getOwner());
     private static final JsonAdaptedCommission VALID_COMMISSION = new JsonAdaptedCommission(FULL_LIFE.getCommission());
     private static final JsonAdaptedPaymentStructure VALID_PAYMENT_STRUCTURE =
@@ -36,7 +37,15 @@ public class JsonAdaptedPolicyTest {
     @Test
     public void toModelType_validPolicyDetails_returnsPolicy() throws Exception {
         JsonAdaptedPolicy policy = new JsonAdaptedPolicy(FULL_LIFE);
-        assertEquals(FULL_LIFE, policy.toModelType(VALID_OWNER.toModelType()));
+        assertEquals(FULL_LIFE, policy.toModelType(FULL_LIFE.getOwner()));
+    }
+
+    @Test
+    public void toModelType_nullExpiryDate_returnsPolicy() throws Exception {
+        Policy noExpiryDatePolicy = new PolicyBuilder(FULL_LIFE).withNoExpiryDate().build();
+        JsonAdaptedPolicy policy =
+                new JsonAdaptedPolicy(noExpiryDatePolicy);
+        assertEquals(noExpiryDatePolicy, policy.toModelType(FULL_LIFE.getOwner()));
     }
 
     @Test
@@ -71,15 +80,6 @@ public class JsonAdaptedPolicyTest {
         JsonAdaptedPolicy policy =
                 new JsonAdaptedPolicy(VALID_TITLE, null, VALID_EXPIRY_DATE, VALID_COMMISSION, VALID_OWNER, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PaymentStructure.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> policy.toModelType(ALICE));
-    }
-
-    @Test
-    public void toModelType_nullExpiryDate_throwsIllegalValueException() {
-        JsonAdaptedPolicy policy =
-                new JsonAdaptedPolicy(VALID_TITLE, VALID_PAYMENT_STRUCTURE, null, VALID_COMMISSION, VALID_OWNER,
-                        VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CoverageExpiryDate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> policy.toModelType(ALICE));
     }
 
