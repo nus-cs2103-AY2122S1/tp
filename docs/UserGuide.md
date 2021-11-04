@@ -365,7 +365,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 <div class="mr-2">
     <span class="badge badge-info">INFO</span>
 </div>
-<div markdown="1">
+<div>
     If a person is selected, editing the person's contact details will not update the person's information in the
     selected contacts list.
 </div>
@@ -397,6 +397,16 @@ Delete the person that is associated with the ID `1`.
 </div>
 </div>
 
+</div>
+</div>
+
+<div class="d-flex alert alert-info">
+<div class="mr-2">
+    <span class="badge badge-info">INFO</span>
+</div>
+<div>
+    If a person is selected, deleting the person's contact details will not delete the person's information from the
+    selected contacts list.
 </div>
 </div>
 
@@ -465,13 +475,14 @@ Optional fields can be repeated. The above returns the same result as the previo
 
 ### `select`
 
-Selects contacts from the current list. The selected contacts stay in the selected list until they are unselected (deleting/clearing the original contacts does not remove them from the selection). Below is the list of flags that can be used with the `select` command in the order of precedence. 
+Selects contacts from the current list. The selected contacts stay in the selected list until they are unselected. Below
+is the list of flags that can be used with the `select` command in the order of precedence. 
 
 | Flag | Description |
 | ---- | ----------- |
-| `-e` | Exclude indexes when selecting. |
+| `-e` | Select all indexes excluding the specified indexes. |
 | `-a` | Select all indexes. |
-| `-i` | Include indexes when selecting. |
+| `-i` | Include the specified indexes when selecting. |
 
 <figure class="figure">
    <img src="images/select.png" class="figure-img img-fluid rounded" alt="Help Window">
@@ -499,6 +510,30 @@ Select contacts at indexes `1`, `2` and `3` of the list.
 </div>
 </div>
 
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+select -i 1 2 3 -e 2
+```
+Select all contacts except the second contact. Here, although both the `-i` flag and `-e` flag has been used, the `-e`
+flag takes precedence. As a result, only the effects of the `-e` flag is applied.
+</div>
+</div>
+
+
+</div>
+</div>
+
+<div class="d-flex alert alert-info">
+<div class="mr-2">
+    <span class="badge badge-info">INFO</span>
+</div>
+<div>
+    If a person is selected, deleting, editing or clearing the original contact will not affect the contact details of
+    the selected person.
 </div>
 </div>
 
