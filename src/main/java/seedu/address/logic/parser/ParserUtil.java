@@ -283,7 +283,7 @@ public class ParserUtil {
     }
 
     /**
-     * Returns true if the prefix present and contains empty {@code Optional} values in the given
+     * Returns true if the prefix is present and contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
     public static boolean isPrefixPresentAndEmpty(ArgumentMultimap argumentMultimap, Prefix prefix) {
