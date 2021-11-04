@@ -58,7 +58,7 @@ ________________________________________________________________________________
    provides some sample data for you to play around with and familiarize yourself with the commands.
 
 <p align="center">
-   <img src="images/FirstLook.png" height="400" align="center"/>
+   <img src="images/FirstLook.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -170,7 +170,7 @@ Examples:
 * `addm n/Harry Li p/91234567 d/1 t/exco t/y2` adds Harry Li to the member list, indicates his availability on Monday and tags him as 'exco' and 'y2' :camera:
 
 <p align="center">
-   <img src="images/addmExample.png" height="400" align="center"/>
+   <img src="images/addmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -241,7 +241,7 @@ Examples:
 * `editm 2 t/exco t/y1` edits the 2nd member to have tags `exco` and `y1` :camera:
 
 <p align="center">
-   <img src="images/editmExample.png" height="400" align="center"/>
+   <img src="images/editmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -268,7 +268,7 @@ Examples:
 * `findm t/exco t/y2` returns members with either tags `exco` `y2`, or both :camera:
 
 <p align="center">
-   <img src="images/findmExample.png" height="400" align="center"/>
+   <img src="images/findmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -321,7 +321,7 @@ Examples:
 * `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Wednesday and Thursday :camera:
 
 <p align="center">
-   <img src="images/setmExample.png" height="400" align="center"/>
+   <img src="images/setmExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -348,7 +348,7 @@ Examples:
 * `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list as present :camera:
 
 <p align="center">
-   <img src="images/markExample.png" height="400" align="center"/>
+   <img src="images/markExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -444,7 +444,7 @@ Examples:
 * `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
 
 <p align="center">
-   <img src="images/addfExample.png" height="400" align="center"/>
+   <img src="images/addfExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -524,7 +524,7 @@ Examples:
 * `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
 
 <p align="center">
-   <img src="images/findfExample.png" height="400" align="center"/>
+   <img src="images/findfExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -554,7 +554,7 @@ Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the user :camera:
 
 <p align="center">
-   <img src="images/splitExample.png" height="400" align="center"/>
+   <img src="images/splitExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
@@ -600,7 +600,7 @@ Examples:
   at index 2 in the displayed facility list on Monday :camera:
 
 <p align="center">
-   <img src="images/allocateExample.png" height="400" align="center"/>
+   <img src="images/allocateExample.png" height="500" align="center"/>
 </p>
 
 [Back to Table of Contents](#table-of-contents)
