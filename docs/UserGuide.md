@@ -157,23 +157,58 @@ In this guide, the syntax / format of a command is shown like this:
 
 ***
 
-# 4. Features
+# 4. Beginner's tutorial
 
-This section lists the types of commands that TutorAid can execute. For more information about how to interpret these commands, check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
+### Step 5: Deleting a student
 
-## 4.1 Student Commands
-### Adding a student: `add`
+Lastly, imagine one of your students `Roy Balakrishnan` has graduated from secondary school and he no longer requires your tutoring services. You wish to remove his student details
+since he is no longer your student. To do so, you can easily delete his data in TutorAid by following the steps below:
+1. Type `list` in the command box to see the list of all your students in the Student Panel.
+2. Locate `Roy Balakrishnan` in the Student Panel and take note of his index. In this case, it would be `6`.
+3. Type `del -s 6` into the command box. Upon pressing enter, all details belonging to `Roy Balakrishnan` will be removed.
+
+Now, the Student and Lesson Panels will be updated accordingly without any data of `Roy Balakrishnan`.
+
+# 5. Features
+
+If you are new to TutorAid, we hope that you have gone through the [Beginner's Tutorial](#4-beginners-tutorial) to gain a better understanding on how TutorAid can help to
+ease your tutoring tasks! This section lists all the available commands in TutorAid. The commands can be split into 3 main categories: 'Student' commands, 'Lesson' commands and 'Other' commands.
+This section will also be split into these 3 sub-sections for easier navigation.
+
+For more information about how to interpret any of the commands, check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpWindow.png)
+
+Format: `help`
+
+## 5.1 Student Commands
+### Adding a student: `add -s`
 {:.no_toc}
 Adds a new student to TutorAid.
 
 Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 
 Examples:
-* `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+* `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` adds a student with name `John Does`, student phone number `81234567`, parent's name `Mrs Doe` and parent's phone number `91234567`.
 
 > :bulb: The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 
-### Deleting a student : `delete`
+### Listing all students : `list`
+
+Shows a list of all students in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise fields are hidden by default.
+
+Format: `list [-a]`
+
+Examples:
+
+- `list` displays all students and lessons by only showing their names and list indexes.
+- `list -a` displays all students and lessons while showing all of their fields' data.
+
+### Deleting a student : `del -s`
 {:.no_toc}
 Deletes the specified student with the given student index from TutorAid.
 
@@ -184,7 +219,7 @@ Format: `del -s STUDENT_INDEX`
 * The index must be a positive integer 1,2,3, …​
 
 Example:
-* `del -s 2` deletes the 2nd student in TutorAid.
+* `del -s 2` deletes the 2nd student.
 
 ### Editing a student : `edit -s`
 {:.no_toc}
@@ -199,7 +234,7 @@ Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_N
 
 Example:
 
-* `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
+* `edit -s 2 pp/91112222` updates the 2nd student's parent contact number to `91112222`.
 
 ### Viewing a student : `view -s`
 {:.no_toc}
@@ -260,8 +295,7 @@ Format: `del -p STUDENT_INDEX`
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
 
-
-## 4.2 Lesson Commands
+## 5.2 Lesson Commands
 
 ### Adding a lesson: `add -l`
 {:.no_toc}
@@ -275,7 +309,7 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 * The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 
 Examples:
-* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400` adds a lesson with name `P6 Maths`, capacity of `20 students`, price of `$80` and timing `Monday 1200-1400`.
 
 > :bulb: The lesson's capacity, price and timing are optional details for tutors to include.
 
@@ -291,7 +325,7 @@ Format: `del -l LESSON_INDEX`
 * `LESSON_INDEX` must be a **positive integer** 1,2,3, …​
 
 Examples:
-* `del -l 3`
+* `del -l 3` deletes the 3rd student.
 
 ### Editing a lesson: `edit -l`
 {:.no_toc}
@@ -309,7 +343,7 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 > :bulb: After you run this command, the Student Panel will only show students who are taking this lesson. Don't worry: you can easily find your students again using the [`list -a`](#listing-all-students-and-lessons-list) command.
 
 Examples:
-* `edit -l c/20 p/80`
+* `edit -l 1 c/20 p/80` updates the 1st lesson's capacity to `20 students` and price to `$80`
 
 ### Viewing a lesson : `view -l`
 {:.no_toc}
@@ -343,7 +377,7 @@ Format: `find -l KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
 
-## 4.3 Student and Lesson Commands
+## 5.3 Student and Lesson Commands
 ### Listing all students and lessons: `list`
 {:.no_toc}
 
@@ -368,7 +402,7 @@ Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `add -sl s/1 2 3 l/1 2`
+* `add -sl s/1 2 3 l/1 2` add students with index 1, 2, 3 into lessons with index 1, 2.
 
 > :exclamation: All of these students must not be attending any of the lessons provided for this command to work.
 
@@ -384,11 +418,11 @@ Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `del -sl s/2 3 l/1 2 3`
+* `del -sl s/2 3 l/1 2 3` deletes students with index 2, 3 from lessons with index 1, 2, 3.
 
 > :exclamation: All of these students must be attending all the lessons provided for this command to work.
 
-## 4.4 Other Commands
+## 5.4 Other Commands
 ### Viewing help : `help`
 {:.no_toc}
 
@@ -412,7 +446,7 @@ Exits the program.
 
 Format: `exit`
 
-## 4.5 Saving and Editing Data
+## 5.5 Saving and Editing Data
 
 ### Saving the data
 {:.no_toc}
@@ -429,16 +463,16 @@ TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`.
 
 ***
 
-# 5. FAQ
+# 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.
 
 ***
 
-# 6. Command summary
+# 7. Command summary
 
-### 6.1 Student commands
+### 7.1 Student commands
 
 |---
 Action | Format and Examples
@@ -451,7 +485,7 @@ Action | Format and Examples
 **[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student--del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
-### 6.2 Lesson commands
+### 7.2 Lesson commands
 
 |---
 Action | Format and Examples
@@ -462,7 +496,7 @@ Action | Format and Examples
 **[View lesson](#viewing-a-lesson--view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **[Find lesson](#locating-lessons-by-name-find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 
-### 6.3 Student and Lesson commands
+### 7.3 Student and Lesson commands
 
 |---
 Action | Format and Examples
@@ -472,7 +506,7 @@ Action | Format and Examples
 **[Delete students from lessons](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 **[Clear](#clearing-all-entries--clear)** | `clear`
 
-### 6.4 Other commands
+### 7.4 Other commands
 
 |---
 Action | Format and Examples
