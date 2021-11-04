@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -11,17 +11,27 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-
 [-> LogicManager :
 activate LogicManager
+
+
 LogicManager -> DeleteModuleCommand : execute()
 activate DeleteModuleCommand
 
-DeleteModuleCommand -> Model : deleteModule(moduleName)
+DeleteModuleCommand -> Model : getFilteredModuleList()
 activate Model
 
 Model --> DeleteModuleCommand
 deactivate Model
+
+loop for each student in student list
+    DeleteModuleCommand -> DeleteModuleCommand : deleteTaskFromStudent(student)
+end
+
+
+DeleteModuleCommand -> DeleteModuleCommand : deleteTaskFromModule(module)
+
+
 
 create CommandResult
 DeleteModuleCommand -> CommandResult

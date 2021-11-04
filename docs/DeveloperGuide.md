@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete module m/CS2103`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -93,14 +93,18 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When the `Logic` is called upon to execute `delete module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
+3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Module` object as indicated by `module`.
+4. The `DeleteModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `DeleteModuleCommand`.
+5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+![How the command `delete module m/CS2103` is parsed in the Logic component](images/DeleteModuleSequenceDiagram1.png)
+6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![How the `DeleteModuleCommand` is executed](images/DeleteModuleSequenceDiagram2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -154,34 +158,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Delete Module
-
-1. When the `Logic` is called upon to execute `delete module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
-2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
-3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Module` object as indicated by `module`.
-4. The `DeleteModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `DeleteModuleCommand`.
-5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
-
-![How the command `delete module m/CS2103` is parsed in the Logic component](images/DeleteModuleSequenceDiagram1.png)
-6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
-7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
-8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-
-![How the `DeleteModuleCommand` is executed](images/DeleteModuleSequenceDiagram2.png)
-
-
-### Edit Module
-
-1. When the `Logic` is called upon to execute `edit module m/CS2103 n/CS2105`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
-2. The `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to a `EditCommandParser`.
-3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Module` object as indicated by `module`.
-4. The `EditModuleCommandParser` will parse the tokens `m/<old module name>` and `n/<new module name>` and create a `EditModuleDescriptor`
-   (defined in EditModuleCommand) with the new module name.
-5. `EditModuleCommandParser` will also create a `EditModuleCommand` with the `EditModuleDescriptor` and the module to edit, which is executed by the `LogicManager`
-6. The `EditModuleCommand` communicates with the `Model` when it is executed.
-7. The `Model` will look for a `Module` with the specified name and edit the name.
-8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-
 ### Add Module
 
 1. When the `Logic` is called upon to execute `add module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -189,9 +165,25 @@ This section describes some noteworthy details on how certain features are imple
 3. The `AddCommandParser` then figures out the type of object to add, in this case a `Module` object as indicated by `module`.
 4. The `AddModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `AddModuleCommand`.
 5. This results in a `AddModuleCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic Manager`.
+   ![How the command `add module m/CS2103` is parsed in the Logic component](images/AddModuleSequenceDiagram1.png)
 6. The `AddModuleCommand` communicates with the `Model` when it is executed.
-7. The `Model` will add a new `Module` with the new `ModuleName`. 
+7. The `Model` will add a new `Module` with the new `ModuleName`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+   ![How the command `add module m/CS2103` is executed](images/AddModuleSequenceDiagram2.png)
+
+### Edit Module
+
+1. When the `Logic` is called upon to execute `edit module m/CS2103 mn/CS2105`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to a `EditCommandParser`.
+3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Module` object as indicated by `module`.
+4. The `EditModuleCommandParser` will parse the tokens `m/<old module name>` and `mn/<new module name>`.
+5. `EditModuleCommandParser` will also create a `EditModuleCommand` and the module to edit, which is executed by the `LogicManager`
+   ![How the command `edit module m/CS2103 mn/CS2105` is parsed in the Logic component](images/EditModuleSequenceDiagram1.png)
+6. The `EditModuleCommand` communicates with the `Model` when it is executed.
+7. The `EditModuleCommand` will look for a `Module` with the specified name and edit the name after getting a list of modules from `Model`.
+8. The `Model` will then cahnge the old module to the newly edited module.
+9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+   ![How the command `edit module m/CS2103 mn/CS2105` is executed](images/EditModuleSequenceDiagram2.png)
 
 ### Add Student
 
@@ -254,7 +246,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Task
 
-1. When `Logic` is called upon to execute the user input `add task m/CS2103 ti/T1 a/assignment1 d/20/10/2021`, it uses the 
+1. When `Logic` is called upon to execute the user input `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20`, it uses the 
    `TeachingAssistantBuddyParser` class to parse the user command.
 2. `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to `AddCommandParser`.
 3. `AddCommandParser` then figures out the type of object to add, in this case a `task` object as indicated by the 
@@ -263,9 +255,12 @@ This section describes some noteworthy details on how certain features are imple
    the input arguments. They are then passed to `AddTaskCommand`.
 5. This results in a `AddTaskCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic 
    Manager`.
+   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is parsed in the Logic component](images/AddTaskSequenceDiagram1.png)
 6. The `AddTaskCommand` communicates with the `Model` when it is executed.
-7. The `Model` will add a new `Task` with the new `taskName` under the `Module` with that `moduleName`.
+7. The `Model` will add a new `Task` with the new `taskName` under the `Module` with that `moduleName`. The `Task` will also be 
+   added to all the `Student`s under the specified `Module`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is executed](images/AddTaskSequenceDiagram2.png)
 
 ### Edit Task
 
@@ -279,14 +274,16 @@ This section describes some noteworthy details on how certain features are imple
    `taskId` object, and any other tokens passed from `EditTaskCommandParser` representing the newly updated fields of the task object.
 6. This results in a `EditTaskCommand` object (which is a subclass of `EditCommand`), which is executed by the `Logic
    Manager`.
+   ![How the command `edit task m/CS2103 ti/T1 a/final exam` is parsed in the Logic component](images/EditTaskSequenceDiagram1.png)
 7. The `EditTaskCommand` communicates with the `Model` when it is executed.
-8. The `Model` will look for the `Task` with the specified task id, `T1` in this case,  inside the `Module` specified by
-   the module name, `CS2103` in this case, and then replacing the old editable fields (such as task name, task deadline) 
-   of that `Task` using any optionally provided new fields.
-9. The `Model` will look for the `Task` with the specified task id, `T1` in this case, for every `Student` in the `Module` specified by
-   the module name, `CS2103` in this case, and replacing the old editable fields of (such as task name, task deadline) 
-   of that `Task` using any optionally provided new fields.
+8. The `EditTaskCommand` will get a list of modules from `Model` and look for the specified `Module`.
+9. The `EditTaskCommand` will look for the `Task` with the specified task id, `T1` in this case, for every `Student` in 
+   the student list under `Module` specified by the module name, `CS2103` in this case, and replacing the old editable
+   fields of (such as task name, task deadline) of that `Task` using any optionally provided new fields.
 10. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+    
+![How the command `edit task m/CS2103 ti/T1 a/final exam` is executed](images/EditTaskSequenceDiagram2.png)
+
 
 ### Delete Task
 
@@ -295,95 +292,106 @@ This section describes some noteworthy details on how certain features are imple
 3. The `DeleteTaskCommandParser` then figures out the type of object to delete, in this case a `Task` object as indicated by `task`.
 4. The `DeleteStudentCommandParser` will wrap the module name in a `ModuleName` object and the task ID in a `TaskId` object and pass them into a `DeleteTaskCommand`.
 5. This results in a `DeleteTaskCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
+   ![How the command `delete task m/CS2103 ti/T1` is parsed in the Logic component](images/DeleteTaskSequenceDiagram1.png)
 6. The `DeleteTaskCommand` communicates with the `Model` when it is executed.
-7. The `Model` will look for a `Module` with the specified `ModuleName`.
+7. The `DeleteTaskCommand` will get the current list of modules from `Model`, and look for the specified `Module`.
 8. The `Module` with the specified `ModuleName` will then look for the task with the specified `TaskId` and delete the task.
 9. The `Module` will also iterate through its `Student` list and delete the specified `Task` from all the students.
 10. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-### \[Proposed\] Undo/redo feature
+![How the command `delete task m/CS2103 ti/T1` is executed](images/DeleteTaskSequenceDiagram2.png)
 
-#### Proposed Implementation
+[comment]: <> (### \[Proposed\] Undo/redo feature)
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+[comment]: <> (#### Proposed Implementation)
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+[comment]: <> (The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+[comment]: <> (* `VersionedAddressBook#commit&#40;&#41;` — Saves the current address book state in its history.)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+[comment]: <> (* `VersionedAddressBook#undo&#40;&#41;` — Restores the previous address book state from its history.)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+[comment]: <> (* `VersionedAddressBook#redo&#40;&#41;` — Restores a previously undone address book state from its history.)
 
-![UndoRedoState0](images/UndoRedoState0.png)
+[comment]: <> (These operations are exposed in the `Model` interface as `Model#commitAddressBook&#40;&#41;`, `Model#undoAddressBook&#40;&#41;` and `Model#redoAddressBook&#40;&#41;` respectively.)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+[comment]: <> (Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+[comment]: <> (Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+[comment]: <> (![UndoRedoState0]&#40;images/UndoRedoState0.png&#41;)
 
-![UndoRedoState2](images/UndoRedoState2.png)
+[comment]: <> (Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook&#40;&#41;`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+[comment]: <> (![UndoRedoState1]&#40;images/UndoRedoState1.png&#41;)
 
-</div>
+[comment]: <> (Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook&#40;&#41;`, causing another modified address book state to be saved into the `addressBookStateList`.)
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+[comment]: <> (![UndoRedoState2]&#40;images/UndoRedoState2.png&#41;)
 
-![UndoRedoState3](images/UndoRedoState3.png)
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook&#40;&#41;`, so the address book state will not be saved into the `addressBookStateList`.)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+[comment]: <> (</div>)
 
-</div>
+[comment]: <> (Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook&#40;&#41;`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.)
 
-The following sequence diagram shows how the undo operation works:
+[comment]: <> (![UndoRedoState3]&#40;images/UndoRedoState3.png&#41;)
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook&#40;&#41;` to check if this is the case. If so, it will return an error to the user rather)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+[comment]: <> (than attempting to perform the undo.)
 
-</div>
+[comment]: <> (</div>)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+[comment]: <> (The following sequence diagram shows how the undo operation works:)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+[comment]: <> (![UndoSequenceDiagram]&#40;images/UndoSequenceDiagram.png&#41;)
 
-</div>
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker &#40;X&#41; but due to a limitation of PlantUML, the lifeline reaches the end of diagram.)
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+[comment]: <> (</div>)
 
-![UndoRedoState4](images/UndoRedoState4.png)
+[comment]: <> (The `redo` command does the opposite — it calls `Model#redoAddressBook&#40;&#41;`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size&#40;&#41; - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook&#40;&#41;` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.)
 
-![UndoRedoState5](images/UndoRedoState5.png)
+[comment]: <> (</div>)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+[comment]: <> (Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook&#40;&#41;`, `Model#undoAddressBook&#40;&#41;` or `Model#redoAddressBook&#40;&#41;`. Thus, the `addressBookStateList` remains unchanged.)
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+[comment]: <> (![UndoRedoState4]&#40;images/UndoRedoState4.png&#41;)
 
-#### Design considerations:
+[comment]: <> (Step 6. The user executes `clear`, which calls `Model#commitAddressBook&#40;&#41;`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.)
 
-**Aspect: How undo & redo executes:**
+[comment]: <> (![UndoRedoState5]&#40;images/UndoRedoState5.png&#41;)
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+[comment]: <> (The following activity diagram summarizes what happens when a user executes a new command:)
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+[comment]: <> (<img src="images/CommitActivityDiagram.png" width="250" />)
 
-_{more aspects and alternatives to be added}_
+[comment]: <> (#### Design considerations:)
 
-### \[Proposed\] Data archiving
+[comment]: <> (**Aspect: How undo & redo executes:**)
 
-_{Explain here how the data archiving feature will be implemented}_
+[comment]: <> (* **Alternative 1 &#40;current choice&#41;:** Saves the entire address book.)
+
+[comment]: <> (  * Pros: Easy to implement.)
+
+[comment]: <> (  * Cons: May have performance issues in terms of memory usage.)
+
+[comment]: <> (* **Alternative 2:** Individual command knows how to undo/redo by)
+
+[comment]: <> (  itself.)
+
+[comment]: <> (  * Pros: Will use less memory &#40;e.g. for `delete`, just save the person being deleted&#41;.)
+
+[comment]: <> (  * Cons: We must ensure that the implementation of each individual command are correct.)
+
+[comment]: <> (_{more aspects and alternatives to be added}_)
+
+[comment]: <> (### \[Proposed\] Data archiving)
+
+[comment]: <> (_{Explain here how the data archiving feature will be implemented}_)
 
 
 --------------------------------------------------------------------------------------------------------------------

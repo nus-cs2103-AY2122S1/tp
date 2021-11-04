@@ -1,9 +1,9 @@
 @startuml
-!include style.puml
+!include ../style.puml
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant "d:FindStudentCommand" as FindStudentCommand LOGIC_COLOR
+participant "d:AddStudentCommand" as AddStudentCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -17,30 +17,30 @@ end box
 
 [-> LogicManager :
 activate LogicManager
-LogicManager -> FindStudentCommand : execute()
-activate FindStudentCommand
+LogicManager -> AddStudentCommand : execute()
+activate AddStudentCommand
 
-FindStudentCommand -> Model : getFilteredModuleList()
+AddStudentCommand -> Model : getFilteredModuleList()
 activate Model
 
-Model -> Module : updateFilteredStudentList(predicate)
+Model -> Module : addStudent(student)
 activate Module
 
 Module --> Model
 deactivate Module
 
-Model --> FindStudentCommand
+Model --> AddStudentCommand
 deactivate Model
 
 create CommandResult
-FindStudentCommand -> CommandResult
+AddStudentCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> FindStudentCommand
+CommandResult --> AddStudentCommand
 deactivate CommandResult
 
-FindStudentCommand --> LogicManager : result
-deactivate FindStudentCommand
+AddStudentCommand --> LogicManager : result
+deactivate AddStudentCommand
 
 [<--LogicManager
 deactivate LogicManager

@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -9,18 +9,28 @@ participant ":EditStudentCommandParser" as EditStudentCommandParser LOGIC_COLOR
 participant "d:EditStudentCommand" as EditStudentCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("edit student m/CS2103 i/A1234567A n/Amy Lee")
+[-> LogicManager : execute("edit student \nm/CS2103 \ni/A1234567A \nn/Amy Lee")
 activate LogicManager
 
-LogicManager -> TeachingAssistantBuddyParser : parseCommand("edit student m/CS2103 i/A1234567A n/Amy Lee")
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("edit student \nm/CS2103 \ni/A1234567A \nn/Amy Lee")
 activate TeachingAssistantBuddyParser
 
 create EditCommandParser
-TeachingAssistantBuddyParser -> EditCommandParser : parse("student m/CS2103 i/A1234567A n/Amy Lee")
+TeachingAssistantBuddyParser -> EditCommandParser
+activate EditCommandParser
+EditCommandParser --> TeachingAssistantBuddyParser
+deactivate EditCommandParser
+
+TeachingAssistantBuddyParser -> EditCommandParser : parse("student \nm/CS2103 \ni/A1234567A \nn/Amy Lee")
 activate EditCommandParser
 
 create EditStudentCommandParser
-EditCommandParser -> EditStudentCommandParser : parse("m/CS2103 i/A1234567A n/Amy Lee")
+EditCommandParser -> EditStudentCommandParser
+activate EditStudentCommandParser
+EditStudentCommandParser --> EditCommandParser
+deactivate EditStudentCommandParser
+
+EditCommandParser -> EditStudentCommandParser : parse("m/CS2103 \ni/A1234567A \nn/Amy Lee")
 activate EditStudentCommandParser
 
 create EditStudentCommand
