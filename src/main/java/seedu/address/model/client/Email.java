@@ -2,13 +2,13 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.StringUtil.isWithinLongLimit;
+import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 
 /**
  * Represents a Client's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class Email extends StringComparable<Email> implements RequiredField {
+public class Email extends StringComparable<Email> implements RequiredField, LongerFieldLength {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
@@ -55,7 +55,7 @@ public class Email extends StringComparable<Email> implements RequiredField {
      */
     public static boolean isValidEmail(String test) {
         return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
-                || (test.matches(VALIDATION_REGEX) && isWithinLongLimit(test));
+                || (test.matches(VALIDATION_REGEX) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
     @Override

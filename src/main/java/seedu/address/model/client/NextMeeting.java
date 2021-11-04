@@ -6,14 +6,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.convertEmptyStringIfNull;
 import static seedu.address.commons.util.StringUtil.isValidDate;
 import static seedu.address.commons.util.StringUtil.isValidTime;
-import static seedu.address.commons.util.StringUtil.isWithinLongLimit;
+import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 import static seedu.address.commons.util.StringUtil.parseToLocalDate;
 import static seedu.address.commons.util.StringUtil.parseToLocalTime;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullComparable<NextMeeting> {
+public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullComparable<NextMeeting>, LongerFieldLength {
 
     public static final String DATE_MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of Day-Month-Year, "
             + "where Day, month and year should be numerical values.";
@@ -97,7 +97,7 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
      */
     public static boolean isValidNextMeeting(String test) {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
-            || (test.matches(VALID_MEETING_STRING) && isWithinLongLimit(test));
+            || (test.matches(VALID_MEETING_STRING) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
     public Name getWithWho() {

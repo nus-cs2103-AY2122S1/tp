@@ -387,57 +387,62 @@ public class StringUtilTest {
         assertTrue(StringUtil.isValidDate(""));
     }
 
-    //---------------- Tests for isWithinStandardLimit --------------------------------------
+    //---------------- Tests for isWithinLengthLimit --------------------------------------
 
     /*
-     * Equivalence Partitions: null, valid Strings with <=30 char, invalid Strings with >30 char
+     * EP for str: null, empty string,  valid Strings within limit, invalid Strings over limit
+     *
+     * EP for limit: negative, 0, positive
      */
 
     @Test
-    public void isWithinStandardLimit_nullValue_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.isWithinStandardLimit(null));
+    public void isWithinLengthLimit_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isWithinLengthLimit(null, 10));
     }
 
     @Test
-    public void isWithinStandardLimit_withinLimit_returnsTrue() {
-        assertTrue(StringUtil.isWithinStandardLimit(
-            "0123456789" + "0123456789" + "0123456789"
+    public void isWithinLengthLimit_emptyString_returnsTrue() {
+        assertTrue(StringUtil.isWithinLengthLimit("", 10));
+    }
+
+    @Test
+    public void isWithinStandardLimit_exactlyWithinLimit_returnsTrue() {
+        assertTrue(StringUtil.isWithinLengthLimit(
+            "0123456789" + "0123456789" + "0123456789", 30
         ));
     }
 
     @Test
-    public void isWithinStandardLimit_exceedLimit_returnsFalse() {
-        assertFalse(StringUtil.isWithinStandardLimit(
-            "0123456789" + "0123456789" + "0123456789" + "1"
-        ));
-    }
-
-    //---------------- Tests for isWithinLongLimit --------------------------------------
-
-    /*
-     * Equivalence Partitions: null, valid Strings with <=100 char, invalid Strings with >100 char
-     */
-
-    @Test
-    public void isWithinLongLimit_nullValue_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.isWithinLongLimit(null));
-    }
-
-    @Test
-    public void isWithinLongLimit_withinLimit_returnsTrue() {
-        assertTrue(StringUtil.isWithinLongLimit(
+    public void isWithinStandardLimit_exactlyWithinLongerLimit_returnsTrue() {
+        assertTrue(StringUtil.isWithinLengthLimit(
             "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789"
-                + "0123456789" + "0123456789" + "0123456789" + "0123456789"
+                + "0123456789" + "0123456789" + "0123456789" + "0123456789", 100
         ));
     }
 
     @Test
-    public void isWithinLongLimit_exceedLimit_returnsFalse() {
-        assertFalse(StringUtil.isWithinLongLimit(
-            "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789" + "0123456789"
-                + "0123456789" + "0123456789" + "0123456789" + "0123456789" + "1"
+    public void isWithinLengthLimit_exceedLimit_returnsFalse() {
+        assertFalse(StringUtil.isWithinLengthLimit(
+            "0123456789" + "0123456789" + "0123456789" + "1", 30
         ));
     }
+
+    @Test
+    public void isWithinLengthLimit_limitIsZero_returnsTrue() {
+        assertTrue(StringUtil.isWithinLengthLimit("", 0));
+    }
+
+    @Test
+    public void isWithinLengthLimit_positiveLimit_returnsTrue() {
+        assertTrue(StringUtil.isWithinLengthLimit("hi", 10));
+    }
+
+    @Test
+    public void isWithinLengthLimit_negativeLimit_returnsFalse() {
+        assertFalse(StringUtil.isWithinLengthLimit("", -10));
+    }
+
+
 
     //---------------- Tests for isValidCurrencyValue --------------------------------------
     /*

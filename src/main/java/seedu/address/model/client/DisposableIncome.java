@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.StringUtil.getCurrencyFormat;
 import static seedu.address.commons.util.StringUtil.isValidCurrencyValue;
-import static seedu.address.commons.util.StringUtil.isWithinStandardLimit;
+import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 
-public class DisposableIncome extends NumberComparable<DisposableIncome> implements OptionalStringBasedField {
+public class DisposableIncome extends NumberComparable<DisposableIncome>
+    implements OptionalStringBasedField, StandardFieldLength {
+
     public static final String MESSAGE_CONSTRAINTS =
             "Disposable Income numbers should be a positive number only. (Character limit: 30)";
     public static final String DEFAULT_VALUE = "0.00";
@@ -35,7 +37,7 @@ public class DisposableIncome extends NumberComparable<DisposableIncome> impleme
      */
     public static boolean isValidDisposableIncome(String test) {
         return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
-            || (isValidCurrencyValue(test) && isWithinStandardLimit(test));
+            || (isValidCurrencyValue(test) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
     @Override

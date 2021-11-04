@@ -209,17 +209,10 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code str} is under the limit of 30 characters.
+     * Returns true if {@code str} is within the {@code limit}.
      */
-    public static boolean isWithinStandardLimit(String str) {
-        return str.length() <= 30;
-    }
-
-    /**
-     * Returns true if {@code str} is under the limit of 100 characters.
-     */
-    public static boolean isWithinLongLimit(String str) {
-        return str.length() <= 100;
+    public static boolean isWithinLengthLimit(String str, int limit) {
+        return str.length() <= limit;
     }
 
     /**

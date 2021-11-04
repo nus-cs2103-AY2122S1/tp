@@ -2,9 +2,9 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.StringUtil.isWithinLongLimit;
+import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 
-public class CurrentPlan extends StringComparable<CurrentPlan> implements OptionalStringBasedField {
+public class CurrentPlan extends StringComparable<CurrentPlan> implements OptionalStringBasedField, LongerFieldLength {
 
     public static final String MESSAGE_CONSTRAINTS = "Current plan can take any values, and it can be blank"
             + " (Character limit: 100)";
@@ -36,7 +36,7 @@ public class CurrentPlan extends StringComparable<CurrentPlan> implements Option
      */
     public static boolean isValidCurrentPlan(String test) {
         return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
-                || (test.matches(VALIDATION_REGEX) && isWithinLongLimit(test));
+                || (test.matches(VALIDATION_REGEX) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
 
