@@ -39,7 +39,7 @@ public class AddPersonCommand extends Command {
             + CliSyntax.PREFIX_COLLECTIONDATE + "23-10-2021 ";
 
     public static final String MESSAGE_SUCCESS = "New resident added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This resident or room already exist in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This resident or room already exists in the address book";
 
     private final Person toAdd;
 
