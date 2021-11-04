@@ -95,7 +95,7 @@ This section briefly explains the various section of TAB's GUI.
 Section | Representation
 ---------|---------
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
-Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>). :information_source: **Note:** <br> Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students.
+Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).<br> - Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students. See [View Students](#view-students) for more details.
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
 Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
@@ -234,7 +234,7 @@ Executing any of the commands in this section will bring you to the students int
             </ul></td>
             <td><ul>
               <li><code>p/91234567</code></li>
-              <li><code>p/</code> clears the phone field, if there were any.</li>
+              <li><code>p/</code> clears the phone field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
         <tr>
@@ -259,7 +259,7 @@ Executing any of the commands in this section will bring you to the students int
             </td>
             <td><ul>
               <li><code>e/jane@gmail.com</code></li>
-              <li><code>e/</code> clears the email field, if there were any.</li>
+              <li><code>e/</code> clears the email field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
         <tr>
@@ -268,7 +268,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
             <td><ul>
               <li><code>pp/81234567</code></li>
-              <li><code>pp/</code> clears the parent phone field, if there were any.</li>
+              <li><code>pp/</code> clears the parent phone field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
         <tr>
@@ -277,7 +277,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
             <td><ul>
               <li><code>pe/john@gmail.com</code></li>
-              <li><code>pe/</code> clears the parent email field, if there were any.</li>
+              <li><code>pe/</code> clears the parent email field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
         <tr>
@@ -752,7 +752,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 **:information_source: Note:**<br>
   <ul>
     <li>Reminder does not refresh the list of upcoming lessons automatically.</li>
-    <li>Type <code>remind</code>, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> (see <a href="#shortcuts">Shortcuts</a> for more available shortcuts) to refresh the list of upcoming lessons.</li>
+    <li>Type <code>remind</code>, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> (see <a href="#menu-bar-shortcuts">Menu Bar Shortcuts</a> for more available shortcuts) to refresh the list of upcoming lessons.</li>
     <li>Reminder also updates when valid <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands are executed. 
       <ul>
         <li>See <a href="#managing-lessons">Managing Lessons</a> for more details regarding these commands.</li>
@@ -973,17 +973,17 @@ Exits the program.
 
 Format: `exit`
 
-### Shortcuts
+### Menu Bar Shortcuts
 
 TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
 
-Shortcut | Action | Description
---------|---------|---------
-<kbd>F1</kbd> | Help | Opens the help window.
-<kbd>F2</kbd> | View Students | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and switched to the calendar view, pressing <kbd>F2</kbd> brings you back to the filtered list.
-<kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
-<kbd>F4</kbd> | View Tags | Brings you to your list of tags.
-<kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
+Menu Item | Shortcut | Action | Description
+----------|--------|---------|---------
+<kbd>Help</kbd> | <kbd>F1</kbd> | View Help | Opens the help window.
+<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list.
+<kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
+<kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
+<kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
