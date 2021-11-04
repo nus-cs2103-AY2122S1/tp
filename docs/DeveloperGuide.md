@@ -420,6 +420,8 @@ Each `Predicate` has a `test` method which will be called on every `Person` in t
 If the `test` method returns `true`, that `Person` will be displayed in the search results.
 ![Find_Command_Class_Diagram](images/findcommandpredicates.png)
 
+#### Usage Scenario
+
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. <br>
@@ -535,18 +537,20 @@ The sequence diagram below shows step 1 to step 6 mentioned above.
 
 #### Current Implementation
 
-The sort mechanism is facilitated by the inbuilt Collections::sort method.
+The sort mechanism is facilitated by the inbuilt `Collections::sort` method.
 This is done by passing a custom comparator that implements the Comparator interface to the sort method.
 There are currently three custom comparators implemented in FAST:
 - `SortByName` -- Sorts the contacts alphabetically by name.
-- `SortByAppointment` -- Sorts the contacts chronologically by date.
-- `SortByPriority` -- Sorts the contacts by priority tags.
+- `SortByAppointment` -- Sorts the contact's appointment chronologically by date and time.
+- `SortByPriority` -- Sorts the contacts by `priority tags`.
 
 `SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
-`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
+`SortByAppointment`: Implemented by first converting the appointment date and time from `String` to a `Date` object before using
 the inbuilt `Date::compareTo` method.  <br>
-`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
+`SortByPriority`: Implemented by first assigning int values to `tags`, `tags` with highest priority will have the smallest int value.
 Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+
+#### Usage Scenario
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
@@ -560,13 +564,18 @@ the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
 to sort the list of persons by their name.<br>
 
+The sequence diagram below illustrates the execution of `sort name`.
+
+![Sort_Sequence_Diagram](images/SortSequenceDiagram.png)
+
+
 #### Design Considerations
 
 **Aspect: How sort executes:**
 
 * **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
     * Pros: Easy to implement.
-    * Cons: May need additional attributes to compare.
+    * Cons: May need additional attributes to implement the `compareTo` method.
 
 * **Alternative 2:** Implement a custom Sort method.
     * Pros: May not need additional attributes
@@ -574,13 +583,13 @@ to sort the list of persons by their name.<br>
 
 **Aspect: How SortByDate is implemented:**
 
-* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
+* **Alternative 1 (current choice):** Convert the String date and time value to a Date object before using inbuilt `compareTo`.
     * Pros: Easy to implement.
-    * Cons: Need to account for empty appointment dates.
+    * Cons: Need to account for empty appointment dates and empty appointment times.
 
 * **Alternative 2:** Compare dates in String.
     * Pros: No need to convert the values to another type.
-    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
+    * Cons: Complicated since there is a need for 4 different comparisons namely; year, month, date and time.
 
 <br>
 
@@ -678,6 +687,7 @@ window to the default page.
 ### Statistics window
 
 #### Current Implementation
+
 
 The statistics window displays statistics and insights into the user's client base. To access the stats window, users have 
 2 ways of getting to the stats page:
@@ -874,6 +884,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAST shows an error message.
     * 1a2. FAST shows an example of add contact command to user.
 
+* 1b. The given input parameters is invalid.
+    * 1b1. FAST shows an error message.
+    * 1b2. FAST shows an example of add contact command to user.
+
       Use case ends.
 
 #### Use case: UC02 - Delete Contact
@@ -919,7 +933,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
+* 2c. The given input parameters is invalid.
+    * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
+    
 #### Use case: UC04 - Add a remark
 
 **MSS**
@@ -945,8 +962,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends
 
+* 2c. The given input parameters is invalid.
+    * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
 
-* 2c. User removes an existing remark
+      Use case ends
+    
+* 2d. User removes an existing remark
     * 2c1. FAST displays a message that the remark has been removed.
 
       Use case ends.
@@ -1013,8 +1035,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2c. An appointment has already been scheduled.
+* 2c. The given input parameters is invalid.
     * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
+
+      Use case ends.
+
+* 2d. An appointment has already been scheduled.
+    * 2d1. FAST shows an error message.
 
       Use case ends.
 
@@ -1063,8 +1091,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2c. No appointment scheduled yet.
-    * 2c1.FAST shows an error message.
+* 2c. The given input parameters is invalid.
+    * 2c1. FAST shows an error message.
+    * 2c2. FAST shows an example of add contact command to user.
+
+      Use case ends.
+    
+* 2d. No appointment scheduled yet.
+    * 2d1.FAST shows an error message.
 
       Use case ends.
 
@@ -1280,6 +1314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **FXML**: FX Markup Language, the format in which the GUI layout is stored in
 * **Java 11**: Version of the programming language, used in the coding of this software
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **MSS**: Main success scenario  
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Remark**: A comment/note about a specific contact
   **Tag** A short note about a specific contact, used for sorting and grouping contacts
@@ -1575,10 +1610,21 @@ Character limit:
        **Expected**: Similar to previous testcase (in Point 3).
 
 
+#### Sorting Clients
+1. Sorts the list of clients by a given keyword
+    1. **Prerequisites**: Arguments are valid, FAST contains clients.
+
+    2. **Test Case**: `sort name` <br>
+       **Expected**: The list of clients are sorted alphabetically by name.
+
+    3. **Test Case**: `sort nam` <br>
+       **Expected**: No sorting happens. Error message displayed.
+       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
+<<<<<<< HEAD
     1. **Prerequisites**: At least one modification has been made to the persons list. FAST is not currently open.
     
     2. **Test Case**: 
@@ -1597,6 +1643,14 @@ Character limit:
         **Expected**: FAST should contain a default set of persons.
 
     
+=======
+   1. Make sure there is a ./data/fast.json file.
+      If not, open the app, make some changes (e.g. `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`), and close the app.
+   
+   2. Open fast.json which is located in the data folder and delete any fields of the contact (eg. `name, phone etc...`) and save the file.
+      After which start the application.<br>
+      Expected: FAST should display an empty GUI.
+>>>>>>> master
 
 2. Ensuring FAST saves your data
 
