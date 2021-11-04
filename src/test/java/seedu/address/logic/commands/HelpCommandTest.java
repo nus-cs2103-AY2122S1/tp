@@ -135,6 +135,14 @@ public class HelpCommandTest {
     }
 
     @Test
+    public void execute_mailingListCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(MailingListCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(MailingListCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_invalidCommand_failure() {
         HelpCommand helpCommand = new HelpCommand(invalidCommand);
         String message = MESSAGE_UNKNOWN_COMMAND + ": " + invalidCommand + "\n" + HelpCommand.HELP_MESSAGE;
