@@ -35,4 +35,9 @@ public class ClearCommand extends Command {
     public String getDescription() {
         return DESCRIPTION;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof ClearCommand); // instanceof handles nulls
+    }
 }

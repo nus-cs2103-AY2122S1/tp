@@ -29,4 +29,11 @@ public class AccessCacheCommand extends Command {
             throw new CommandException("Unknown Error in AccessCacheCommand#Execute!");
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AccessCacheCommand // instanceof handles nulls
+                && key.equals(((AccessCacheCommand) other).key));
+    }
 }
