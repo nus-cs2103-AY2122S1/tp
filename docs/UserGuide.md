@@ -730,19 +730,17 @@ Command: `delete 2` <br>
 
 ### Import Example
 Command: `import -f student_data.csv -g 2 -a 2 -t 2` <br>
-![Import Example](images/UGExamples/import0.png)
+![Import Example](images/UGExamples/import0.png)<br>
 [Return to Import](#importing-data--import)
 
 ### Alias Example 1
 Command: `alias -c addstudent -as example` <br>
-![Alias Example 1](images/UGExamples/alias1.png)
+![Alias Example 1](images/UGExamples/alias1.png)<br>
 [Return to Alias](#setting-customised-aliases-for-commands--alias)
 
 ### Alias Example 4
 Command: `alias -c example -as example` <br>
-![Alias Example 4](images/UGExamples/alias4.png)
+![Alias Example 4](images/UGExamples/alias4.png)<br>
 [Return to Alias](#setting-customised-aliases-for-commands--alias)
-
-<br>
 
 [Return to Table of Contents](#table-of-contents)
