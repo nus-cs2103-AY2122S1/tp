@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/squeakysquak.png" width="200px">
 
 [[github](https://github.com/squeakysquak)]
-[[portfolio](team/ethan.md)]
+[[portfolio](team/squeakysquak.md)]
 
 * Role: Developer
 * Responsibilities: Scheduling & Tracking
