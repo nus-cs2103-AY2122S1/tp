@@ -36,6 +36,16 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setText(feedbackToUser);
     }
 
+    public void getWelcomeMessage() {
+        String welcomeMessage = "Welcome to Socius!\n"
+                + "\nSocius is a desktop application that can help you to\n"
+                + "\n1. manage your classmates’ contacts\n"
+                + "2. make friends\n"
+                + "3. find teammates!\n"
+                + "\nLearn how to get started by entering 'help'!";
+        resultDisplay.setText(welcomeMessage);
+    }
+
     public void setChartToUser(List<ObservableList<PieChart.Data>> datas, List<String> titles) {
         ScrollPane scroll = new ScrollPane();
 

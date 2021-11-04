@@ -38,11 +38,12 @@ public class ImportCommand extends Command {
             "Problem while reading from the file";
     public static final String MESSAGE_FILE_NOT_FOUND = "File not found. Please try again";
     public static final String MESSAGE_DUPLICATE_PERSON = "Invalid file. %s";
+    public static final String MESSAGE_WRONG_FORMAT = "Imported file must be in JSON format";
 
     private final Path importedFilePath; // fileName.json
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an ImportCommand to import the specified {@code importedFileName}
      */
     public ImportCommand(String importedFileName) {
         requireNonNull(importedFileName);
