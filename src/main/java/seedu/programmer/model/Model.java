@@ -66,6 +66,24 @@ public interface Model {
     boolean hasSameStudentEmail(Student student);
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    boolean hasOtherStudent(Student studentToEdit, Student editedStudent);
+
+    /**
+     * Returns true if a student with the same student id as {@code student} exists in ProgrammerError
+     * excluding himself/herself.
+     */
+    boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent);
+
+    /**
+     * Returns true if a student with the same email as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent);
+
+    /**
      * Returns true if a student with the same student id as {@code student} exists in ProgrammerError.
      */
     boolean hasSameStudentId(Student student);

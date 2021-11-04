@@ -51,11 +51,15 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        //A duplicate student is a student with an existing student ID and/or email.
         if (model.hasStudent(toAdd)) {
-            if (model.hasSameStudentEmail(toAdd)) {
+            if (model.hasSameStudentId(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
+            } else if (model.hasSameStudentEmail(toAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
             } else {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
+                System.out.println("This line should not be reached in any case");
+                assert false;
             }
         }
 

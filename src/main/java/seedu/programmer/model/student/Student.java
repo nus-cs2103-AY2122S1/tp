@@ -178,10 +178,7 @@ public class Student implements DisplayableObject {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
-
-        return otherStudent != null
-                && (otherStudent.getStudentId().equals(getStudentId())
-                || otherStudent.getEmailValue().equals(getEmail()));
+        return isSameStudentId(otherStudent) || isSameStudentEmail(otherStudent);
     }
 
     /**
@@ -189,12 +186,8 @@ public class Student implements DisplayableObject {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudentEmail(Student otherStudent) {
-        if (otherStudent == this) {
-            return true;
-        }
-
         return otherStudent != null
-                && otherStudent.getEmailValue().equals(getEmailValue());
+                && otherStudent.getEmail().equals(getEmail());
     }
 
 
@@ -203,10 +196,6 @@ public class Student implements DisplayableObject {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudentId(Student otherStudent) {
-        if (otherStudent == this) {
-            return true;
-        }
-
         return otherStudent != null
                 && otherStudent.getStudentId().equals(getStudentId());
     }
