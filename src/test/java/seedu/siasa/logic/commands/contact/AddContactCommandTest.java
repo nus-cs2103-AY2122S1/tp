@@ -218,6 +218,11 @@ public class AddContactCommandTest {
         public Map<Contact, Integer> getNumberPoliciesPerContact() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Map<Contact, Integer> getCommissionPerContact() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

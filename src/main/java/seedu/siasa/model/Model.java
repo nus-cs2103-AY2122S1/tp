@@ -109,6 +109,11 @@ public interface Model {
     Map<Contact, Integer> getNumberPoliciesPerContact();
 
     /**
+     * Returrns a map of contacts and the commission from each contact.
+     */
+    Map<Contact, Integer> getCommissionPerContact();
+
+    /**
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.
      */
     boolean hasPolicy(Policy policy);

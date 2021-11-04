@@ -138,6 +138,11 @@ public class ModelManager implements Model {
         return siasa.getNumberPoliciesPerContact();
     }
 
+    @Override
+    public Map<Contact, Integer> getCommissionPerContact() {
+        return siasa.getCommissionPerContact();
+    }
+
     //=========== Policy CRUD ================================================================================
 
     @Override

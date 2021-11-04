@@ -2,21 +2,20 @@ package seedu.siasa.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javafx.collections.ObservableList;
+import seedu.siasa.commons.util.FileUtil;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
-import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 
 public class DownloadCommand extends Command {
 
@@ -37,29 +36,10 @@ public class DownloadCommand extends Command {
         int totalCommission = model.getTotalCommission();
 
         Map<Contact, Integer> numberPoliciesPerContact = model.getNumberPoliciesPerContact();
-
-        List<Contact> modifiableContactList = new ArrayList<>(model.getFilteredContactList());
-
-        // TODO: Abstract out when comparators for sorting policies are finished.
-        modifiableContactList.sort(new Comparator<Contact>() {
-            @Override
-            public int compare(Contact contactA, Contact contactB) {
-                model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactA));
-                ObservableList<Policy> personAPolicies = model.getFilteredPolicyList();
-                int commissionFromPersonA = getCommissionFromPolicyList(personAPolicies);
-
-                model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactB));
-                ObservableList<Policy> personBPolicies = model.getFilteredPolicyList();
-                int commissionFromPersonB = getCommissionFromPolicyList(personBPolicies);
-
-                model.updateFilteredPolicyList(x -> true);
-
-                return (commissionFromPersonB - commissionFromPersonA);
-            }
-        });
+        Map<Contact, Integer> commissionPerContact = model.getCommissionPerContact();
 
         List<String> listStringForTxt = stringListBuilderForTxt(
-                totalCommission, modifiableContactList, numberPoliciesPerContact);
+                totalCommission, commissionPerContact, numberPoliciesPerContact);
 
         try {
             writeToTxt(listStringForTxt);
@@ -70,18 +50,6 @@ public class DownloadCommand extends Command {
         return new CommandResult(MESSAGE_DOWNLOAD_SUCCESS);
     }
 
-    private int getCommissionFromPolicyList(List<Policy> policyList) {
-        float total = 0;
-        for (Policy policy : policyList) {
-            int commissionPercentage = policy.getCommission().commissionPercentage;
-            int numberPayments = policy.getCommission().numberOfPayments;
-            int paymentAmt = policy.getPaymentStructure().paymentAmount;
-            total = total + ((float) commissionPercentage / 100)
-                    * numberPayments * paymentAmt;
-        }
-        return (int) total;
-    }
-
     private float getAvgPoliciesPerContact(Map<Contact, Integer> numberPoliciesPerContact) {
         int countContacts = numberPoliciesPerContact.size();
         int countPolicies = numberPoliciesPerContact.values()
@@ -90,20 +58,23 @@ public class DownloadCommand extends Command {
     }
 
     private List<String> stringListBuilderForTxt(
-        int totalCommission, List<Contact> sortedContacts, Map<Contact, Integer> numberPoliciesPerContact) {
+        int totalCommission, Map<Contact,
+            Integer> commissionPerContact, Map<Contact, Integer> numberPoliciesPerContact) {
         List<String> stringList = new ArrayList<>();
 
         stringList.add("Statistics for " + CURRENT_DATE + "\n");
         stringList.add("Most premium contacts:\n" + TITLE_UNDERLINE);
-        for (Contact contact : sortedContacts) {
-            stringList.add(contact.toString());
-        }
+        commissionPerContact.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .forEach((entry -> stringList.add(entry.getKey().toString()
+                        + "; Commission: " + centsToDollars(entry.getValue()))));
         stringList.add("\n");
 
         stringList.add("Number of policies per contact:\n" + TITLE_UNDERLINE);
-        numberPoliciesPerContact.forEach((contact, count) -> {
-            stringList.add(String.format("%s: %d policies", contact.getName().fullName, count));
-        });
+        numberPoliciesPerContact.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .forEach((entry -> stringList.add(entry.getKey().toString()
+                        + "; Number of policies: " + entry.getValue())));
         stringList.add("\n");
 
         stringList.add("Average number of policies per contact: "
@@ -114,13 +85,13 @@ public class DownloadCommand extends Command {
     }
 
     private void writeToTxt(List<String> stringList) throws IOException {
-        FileWriter fileWriter = new FileWriter(TXT_FILEPATH);
+        Path pathToFile = Paths.get(".", TXT_FILEPATH);
+        FileUtil.createIfMissing(pathToFile);
+        StringBuilder stats = new StringBuilder();
         for (String string : stringList) {
-            fileWriter.append(string);
-            fileWriter.append("\n");
+            stats.append(string + "\n");
         }
-        fileWriter.flush();
-        fileWriter.close();
+        FileUtil.writeToFile(pathToFile, stats.toString());
     }
 
     private String centsToDollars(int priceInCents) {

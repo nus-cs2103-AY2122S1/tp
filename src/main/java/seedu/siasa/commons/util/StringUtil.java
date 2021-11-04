@@ -72,6 +72,7 @@ public class StringUtil {
      * to transform {@code a} to {@code b}. Otherwise, return false.
      * @throws NullPointerException if {@code a} or {@code b} is null.
      */
+    // Method adapted from: https://www.geeksforgeeks.org/check-if-two-given-strings-are-at-edit-distance-one/
     public static boolean isEditDistanceOne(String a, String b) {
         requireAllNonNull(a, b);
 
