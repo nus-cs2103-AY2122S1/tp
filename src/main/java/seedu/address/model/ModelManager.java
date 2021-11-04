@@ -197,9 +197,7 @@ public class ModelManager implements Model {
     @Override
     public void addMember(Student student, Group group) {
         requireAllNonNull(student, group);
-        Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
-                student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
-                student.getParticipation(), group.getName());
+        Student updatedStudent = new Student(student, group.getName());
         group.addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
     }
@@ -271,10 +269,8 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedGroup);
 
         for (Student student : target.getMembers().studentList) {
-            Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
-                    student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
-                    student.getParticipation(), editedGroup.getName());
-            editedGroup.getMembers().updateMember(student, updatedStudent);
+            Student updatedStudent = new Student(student, editedGroup.getName());
+            editedGroup.updateMember(student, updatedStudent);
             addressBook.setStudent(student, updatedStudent);
         }
 
