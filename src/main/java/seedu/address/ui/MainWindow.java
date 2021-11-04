@@ -288,9 +288,6 @@ public class MainWindow extends UiPart<Stage> {
             rightMainCard.getChildren().add(friendMainCardTable.getRoot());
             friendSchedulePanel = new FriendSchedulePanel(friendToGet);
             leftMainCard.getChildren().add(friendSchedulePanel.getRoot());
-        } else {
-            friendMainCardTable = new FriendMainCardTable();
-            rightMainCard.getChildren().add(friendMainCardTable.getRoot());
         }
     }
 
