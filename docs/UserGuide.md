@@ -327,7 +327,8 @@ Executing any of the commands in this section will bring you to the students int
             </ul></td>
             <td><ul>
               <li><code>t/unpaid</code> adds only one tag with tag name "UNPAID"</li>
-              <li><code>t/unpaid t/exams are coming</code> adds two tags with tag names "UNPAID" and "EXAMS ARE COMING"</li>
+              <li><code>t/unpaid retained</code> is invalid.</li>
+              <li><code>t/unpaid t/retained</code> adds two tags with tag names "UNPAID" and "RETAINED"</li>
               <li><code>t/</code> clears <strong>all</strong> tags, if there were any.</li>
             </ul></td>
         </tr>
