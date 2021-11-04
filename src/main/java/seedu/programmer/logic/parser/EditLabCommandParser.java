@@ -55,7 +55,6 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
         boolean isNewLabNum = argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent();
         boolean isNewTotal = argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent();
         if (!isNewLabNum && !isNewTotal) {
-            System.out.println("No changes to be made");
             throw new ParseException(MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED);
         }
 
