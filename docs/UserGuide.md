@@ -264,8 +264,10 @@ Adds a tutorial class to ClassMATE.
 
 Format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** 
-Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
+<div markdown="span" class="alert alert-primary"> :bulb: **Note:** 
+
+* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
+* Schedule consists of 2 weekly timeslots
 </div>
 
 Examples:
@@ -288,6 +290,10 @@ Format: `viewc INDEX`
 * Details of a class includes students in the class and the class schedule.
 * The index refers to the index number shown in the displayed list of classes.
 * The index must be a positive integer 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+In order to find a specific class, use the `findc` command to find a particular class before viewing it.
+</div>
 
 Examples:
 

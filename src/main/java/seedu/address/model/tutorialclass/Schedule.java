@@ -10,10 +10,14 @@ public class Schedule {
     public static final String MESSAGE_CONSTRAINTS =
             "Schedules should follow the format 'day-of-the-week starttime to endtime', "
                     + "and different days must be separated by commas. \n"
-                    + "Schedule must contain at least two days\n"
+                    + "Schedule must contain exactly two days\n"
                     + "e.g. Tues 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm";
 
-    private static final String VALIDATION_REGEX = "[,\n]";
+    private static final String SPLIT_REGEX = "[,\n]";
+    private static final String TIME_REGEX = "((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))";
+    private static final String DAY_OF_THE_WEEK_REGEX = "((Mon|Tues|Wed(nes)?|Thur(s)?|Fri|Sat(ur)?|Sun)(day)?)";
+
+    private static final String VALIDATION_REGEX = DAY_OF_THE_WEEK_REGEX + " " + TIME_REGEX + " to " + TIME_REGEX;
 
     public final String value;
 
@@ -34,7 +38,16 @@ public class Schedule {
      * @return validity of input schedule string.
      */
     public static boolean isValidSchedule(String test) {
-        return (test.split(VALIDATION_REGEX).length == 2);
+        String[] timeslots = test.split(SPLIT_REGEX);
+        if (timeslots.length != 2) {
+            return false;
+        }
+        for (String timeslot : timeslots) {
+            if (!timeslot.trim().matches(VALIDATION_REGEX)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

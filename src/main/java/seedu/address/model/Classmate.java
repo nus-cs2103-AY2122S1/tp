@@ -19,7 +19,7 @@ import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
  */
 public class Classmate implements ReadOnlyClassmate {
 
-    public static final ClassCode DEFAULT_CLASSCODE = new ClassCode("G06");
+    public static final ClassCode DEFAULT_CLASSCODE = new ClassCode("G00");
 
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
