@@ -451,53 +451,6 @@ of the search.<br>
 
 <br>
 
-### Help Window
-
-#### Current Implementation
-The help windows is a separate window and displays the command usage for each of the command. To access the help
-window, users have 3 ways to get to the help page:
-* Using the menu bar. Click on `Help` > `Help`.
-* Pressing `F1` while using FAST.
-* Typing the command `help [COMMAND]`.
-
-To access the different commands' help page, there is a dropdown selector which will navigate to 
-the different help pages. By default, the help window opens to our "Quick Start" page which contains basic 
-information for first time users.
-
-#### Design Considerations
-
-**Aspect: How to access various commands' help page**
-* **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
-    * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate 
-            between the pages.
-    * Cons: To new users, might not be immediately obvious that the `ComboBox` can be interacted with. Users
-            might also miss the scroll bar and miss out some commands available.
-      
-* **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
-    * Pros: Easier to be understood by new users.
-    * Cons: Cumbersome to users as they would have to scroll down a lot to find their desired command. 
-    
-* **Alternative 3:** Using a Table of Contents (ToC) landing page.
-    * Pros: Users can see all the available commands at a glance and can select their desired commands easily.
-    * Cons: Users have to navigate back to the ToC to navigate between each command.
-    
-We decided on the first choice as it provided users with the greatest ease of use. It is also the fastest way of 
-navigating between help pages. While we understand that most experienced users might not need to access the help menu, 
-by providing them a quick and easy way to access the commands' help page when they do need it is very important.
-    
-**Aspect: How to access the help window**
-
-Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an 
-additional `[COMMAND]` paremater for the help command, which nagivates to the selected command's help page.
-  * Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
-    first and selecting the command help page from there.
-  * Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
-
-To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
-valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
-window to the default page.
-
-<br>
 
 ### Multiple Delete feature
 
@@ -640,18 +593,121 @@ The sequence diagram below illustrates the execution of `sort name`.
 
 <br>
 
+### Help Window
+
+#### Current Implementation
+The Help Windows is a separate window and displays the command usage for each of the command. To access the help
+window, users have 3 ways to get to the help page:
+1. Using the menu bar. Click on `Help` > `Help`.
+2. Pressing `F1` while using FAST.
+3. Typing the command `help [HELP_TOPIC]`.
+
+Using the methods 1 and 2 will open the Help Window to the default help window view (currently the Quick start page).
+
+However, using method 3 gives the user the option to directly access the help page of the respective HELP_TOPIC. For
+example, using the command `help add` or `help Add` will open the Add command help page directly. Whereas if no HELP_TOPIC
+was given as parameter, or an invalid parameter is given, the default help window will open. Either ways, the help
+window will open to allow users to view help regardless. For reference, the current valid HELP_TOPICS are:
+* `Quick Start`
+* `Add`
+* `Appointment`
+* `Edit Appointment`
+* `Delete Appointment`
+* `Mark Appointment`
+* `Clear`
+* `Delete`
+* `Edit`
+* `Find`
+* `List`
+* `Help`
+* `Remark`
+* `Sort`
+* `Statistic`
+* `Tag`
+* `Investment Plan Tag`
+* `Priority Tag`
+* `Misc`
+
+The activity diagram below shows the many ways user can utilise the help command
+
+![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
+
+The way the help command is parsed is slightly different from the other commands. This is due to the help command not
+interacting with the `model` and `storage` components like other commands. Instead, the parsing of the help command
+parameter is done by `ParserUtil` and verification of the parameter is done in `HelpWindow` itself. After verification,
+`HelpWindow` will set the text of the `JavaFX::Label` to be the corresponding help topic. This is as shown in the sequence
+diagram as shown below.
+
+![Help Command Sequnce Diagram](images/HelpCommandParsingSequenceDiagram.png)
+
+
+To access the different commands' help page from within the help window, there is a dropdown selector which will
+navigate to the different help pages. To achieve this, a `JavaFX::ComboBox` commandList was used which toggles between all
+the available HELP_TOPICS. A method then reads from commandList's current value and displays the corresponding help message in a
+`JavaFX::Label`. A code snippet is shown below:
+
+`EventHandler<ActionEvent> event =
+e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));`
+
+#### Design Considerations
+
+**Aspect: How to access various commands' help page**
+* **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
+    * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate
+      between the pages.
+    * Cons: To new users, might not be immediately obvious that the `JavaFX::ComboBox` can be interacted with. Users
+      might also miss the scroll bar and miss out some commands available.
+
+* **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
+    * Pros: Easier to be understood by new users.
+    * Cons: Cumbersome to users as they would have to scroll down a lot to find their desired command.
+
+* **Alternative 3:** Using a Table of Contents (ToC) landing page.
+    * Pros: Users can see all the available commands at a glance and can select their desired commands easily.
+    * Cons: Users have to navigate back to the ToC to navigate between each command.
+
+We decided on the first choice as it provided users with the greatest ease of use. It is also the fastest way of
+navigating between help pages. While we understand that most experienced users might not need to access the help menu,
+by providing them a quick and easy way to access the commands' help page when they do need it is very important.
+
+**Aspect: How to access the help window**
+
+Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an
+additional `[COMMAND]` paramater for the help command, which navigates to the selected command's help page.
+* Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
+  first and selecting the command help page from there.
+* Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
+
+To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
+valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
+window to the default page.
+
+<br>
+
 ### Statistics window
 
 #### Current Implementation
 
-The stats window displays statistics and insights into the user's client base. To access the stats window, users have 
+
+The statistics window displays statistics and insights into the user's client base. To access the stats window, users have 
 2 ways of getting to the stats page:
 * Using the menu bar. Click on `Stats` > `Stats`.
 * Pressing `F2` while using FAST.
 
-Currently, the stats window provides infomation for the client's Priority Tags and their Insurance Plans. We used 
+Currently, the stats window provides information for the client's Priority Tags, and their Insurance Plans Tags. We used 
 `JavaFX::PieChart` to visualise the client's data and display them to the user. We also provided a few template insights
 for the user to make sense of the data provided.
+
+To calculate the statistics to be shown in the Priority pie chart, we took the data from `Fast` by applying different predicates
+and creating a new `FilteredList` each time. We then encapsulated all these data into a `PriorityData`, which is then 
+passed to `StatsWindow` to populate the pie chart with the data and generate the labels. This is illustrated in the sequence diagram
+as shown below.
+
+![Stats Window Sequence Diagram](images/StatsWindowSequenceDiagram.png).
+
+The implementation for Investment Plan Tag statistics is identical, except instead of a `PriorityData`, the data is encapsulated
+into a `InvestmentPlanData`, and uses the methods `populateInvestmentPieChart()`, `getInvestmentPlanData()` and 
+`addInvestmentPlanPieChartData()` instead. 
 
 #### Design Considerations
 
@@ -670,8 +726,22 @@ Ultimately, as our main focus was speed and ease of use, we decided on the piech
 easily understood, yet is able to convey the essence of the data to the user. Other chart types are less common and 
 thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
 piechart to help users better understand the data and provide a more complete statistic.
+
+**Asepct: How to open the stats window**
+* **Alternative 1 (Current choice):** Using `F2` or the menu item.
+    * Pros: More intuitive, and provides a one-key shortcut to open the stats window.
+    * Cons: Certain devices do not have the function keys, hence they would require to use their mouse and click 
+    on the menu item, which goes against the CLI-focused approach of FAST.
+
+* **Alternative 2:** Using a dedicated stats command.
+    * Pros: Consistent with the other features, as they all are accessible with commands.
+    * Cons: Typing in "stats" into the command box would take longer time than simply pressing the `F2` key. 
     
-_{more aspects and alternatives to be added}_
+For our current version of FAST, we felt that using the first alternative is more optimal as it is the fastest alternative.
+It also provides a distinction between Commands like `add` or `find` and utility features like `help` and `stats`. 
+However, in future iterations of FAST, alternative 2 might be more useful if there are different stats to view. For 
+instance there could be a pie chart window, or another one with a bar chart, and using the stats command with different
+parameters can be used to view these different windows.
 
 <br>
 
@@ -1233,7 +1303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should work fully offline, and not rely on external URLs for important guides and documentation
+4.  Should work fully offline, and users should not have to overly rely on external links for important guides and documentation
 5.  Application should be usable by a single user
 
 ### Glossary
@@ -1494,6 +1564,51 @@ Character limit:
    
     4. **Other invalid commands to try**: `ua`, `ua x`(where x is larger than the list size), `ua y`(where y is an index with an appointment). <br>
        **Expected**: Similar to previous testcase (in Point 3).
+       
+### Viewing help
+1. Opening a new help window via command
+    1. **Prerequisites**: No help window is open currently.
+
+    2. **Test Case**: `help add` <br>
+       **Expected**: A help window will open on top of the main window. It should display the `Add` command usage page.
+
+    3. **Test Case**: `help priority tag` <br>
+       **Expected**: The existing help window will focus on top of the main window. It should display the `Priority Tag` 
+       command usage page.
+
+    4. **Test Case**: `help test` <br>
+       **Expected**: The existing help window will focus on top of the main window. It should display the default command usage page
+       as an invalid HELP_TOPIC was used.
+
+    5. **Other invalid commands to try**: `help` <br>
+       **Expected**: Similar to previous testcase (in Point 4)
+
+
+### Viewing stats
+1. Opening a new stats window
+    1. **Prerequisites**: No stats window is open currently. No new persons are added to FAST.
+
+    2. **Test Case**: Open the stats window (with `F2` or with the menu item) <br>
+       **Expected**: A stats window will open on top of the main window. There should be 2 pie charts displayed, one for
+       Priority Tags and one for Investment Plan Tags and the counts should tally with the data in FAST.
+
+    3. **Test Case**:
+        1. Add a new person with a Priority Tag.
+        2. Open the stats window again.<br>
+        
+       **Expected**: The stat window will focus on top of the main window. The pie charts should be updated to include
+       the new person's data.
+
+   4. **Test Case**:
+       1. `clear` the persons in FAST.
+       2. Open the stats window.<br>
+       
+       **Expected**: The existing stats window will focus on top of the main window. There should be no pie charts displayed
+       and there should be a message at the side informing the user that there are no Tags detected.
+
+    5. **Other invalid commands to try**: Editing the Tags instead of adding a new persons <br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
 
 ### Sorting Clients
 1. Sorts the list of clients by a given keyword
@@ -1547,11 +1662,44 @@ Character limit:
 
 1. Dealing with missing/corrupted data files
 
-   1. Make sure there is a ./data/fast.json file.
-      If not, open the app, make some changes (e.g. `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`), and close the app.
-   
-   2. Open fast.json which is located in the data folder and delete any fields of the contact (eg. `name, phone etc...`) and save the file.
-      After which start the application.<br>
-      Expected: FAST should display an empty GUI.
+    1. **Prerequisites**: At least one modification has been made to the persons list (e.g. `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`). FAST is not currently open.
+    
+    2. **Test Case**: 
+        1. Go to the directory that contains FAST.jar.
+        2. navigate to `data` and open `fast.json`.
+        3. In line 3, change "name" to "test".
+        4. Launch FAST. <br>
+       
+        **Expected**: FAST should be completely blank, with no data displayed.
+        
+    3. **Test Case**:
+        1. Go to the directory that contains FAST.jar.
+        2. navigate to `data` and delete `fast.json`.
+        3. Launch FAST. <br>
+    
+        **Expected**: FAST should contain a default set of persons.
 
-1. _{ more test cases …​ }_
+
+2. Ensuring FAST saves your data
+
+    1. **Prerequisites**: FAST is not empty.
+
+    2. **Test Case**:
+        1. `add` a new person to FAST.
+        2. Close FAST by closing the window and relaunch it
+
+        **Expected**: The newest person should have been saved and displayed at the bottom of the person list.
+
+    2. **Test Case**:
+       1. Modify the appointment details of a person in FAST.
+       2. Close FAST by closing the window and relaunch it
+    
+        **Expected**: The affected person's appointment should have been saved and displayed correctly.
+    
+    2. **Test Case**:
+       1. `clear` the data in FAST.
+       2. Close FAST by closing the window and relaunch it
+          
+        **Expected**: FAST should be completely blank, with no data displayed.
+
+    
