@@ -51,6 +51,9 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 4. Double-click the file to start the app. The GUI should be similar to the below image. Note how the app contains some sample data.<br>
    ![Ui](images/description.png)
+   
+   Applicant data are displayed as a list in the **Applicant Panel**.
+   ![Applicant Diagram](images/ApplicantDiagram.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -144,7 +147,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/E
 Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
 * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
-* Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
@@ -256,7 +258,7 @@ Examples:
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
-<div markdown="block" class="alert alert-secondary">
+<div markdown="block" class="alert alert-dark">
 **:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
 
 * You may
@@ -431,6 +433,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ### Add Inputs
 
+<div markdown="block" class="alert alert-secondary">
+
 * Return to [**Add**](#adding-an-applicant-add).
 * Return to [**Edit**](#editing-an-applicant--edit).
 
@@ -505,7 +509,11 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
     * For example:
         * NOTES inputs such as `This candidate is good!` and `@Applicant123 is suitab13 for th3 job!` are acceptable.
 
+</div>
+
 ### Find Inputs
+
+<div markdown="block" class="alert alert-dark">
 
 * Return to [**Find**](#finding-an-applicant--find)
 
@@ -602,6 +610,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `Done` input can match with applicants that have their ***Done*** status marked as Done.
         * A `Not Done` input can match with applicants that have their ***Done*** status unmarked as Not Done.
         * Any other non-empty input is considered invalid.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
