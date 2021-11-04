@@ -74,7 +74,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component [need changes]
+### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -329,7 +329,6 @@ Step 3. Results of this new filtered list is then passed to the model and is ref
 The following activity diagram summarizes the actions taken when LogicManager executes the FilterApplicantCommand:
 [to be added]
 
-*{More to be added}*
 
 #### Rationale for implementation
 
@@ -341,7 +340,6 @@ and unspecified criteria should be left out of the filter.
 Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`.
 It is also used to in the validation of the filtering criteria.
 
-*{More to be added}*
 
 #### Design considerations:
 
@@ -363,7 +361,6 @@ It is also used to in the validation of the filtering criteria.
     * Pros: Base code already exists and modifying it would take less time. Test cases also require little modification.
     * Cons: Requires understanding base of the code and high coupling exists.
 
-*{More to be added}*
 
 
 ### Find applicants feature
@@ -393,7 +390,6 @@ Step 3. Results of this new filtered list is then passed to the model and is ref
 The following activity diagram summarizes the actions taken when LogicManager executes the FindApplicantCommand:
 [to be added]
 
-*{More to be added}*
 
 #### Design considerations:
 
@@ -750,12 +746,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -780,7 +770,11 @@ This product is for HR departments of tech companies that have a large number of
 
 Additionally, the user:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of applicants
+* Needs to quickly search for an applicant using its name
+* Needs to quickly search for the list of applicants from the position that they are applying to
+* Needs to quickly search for the list of applicants with a particular application status
+* Want to view the rejection rates of the various positions so that they can gain insights on which positions are most competitive
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -814,7 +808,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*    `  | user with many applicants in the address book | sort applicants by name           | locate an applicant easily.  |
 | `*    `  | user                                       | see a graphical representation of statuses in a position | have a quick visualisation on how competitive a position might be. |
 
-*{More to be added}*
 
 ### Use cases
 (For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise.)
@@ -1206,9 +1199,8 @@ NA
 7. Should work for standard (i.e. industry-standard Full HD 1080p resolution) screen resolutions and higher.
 8. Should be packaged into a single, compact (~100MB) file.
 9. Developer & User guides should be PDF friendly.
+10. The app should only read from the specified JSON file for persisted data.
 
-
-*{More to be added}*
 
 
 ### Glossary
@@ -1254,21 +1246,19 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1.  _{ more test cases …​ }_
 
 ### Deleting an applicant
 
 1. Deleting an applicant from MrTechRecruiter
 
-    1. Prerequisites: Multiple applicants in MrTechRecruiter. John Doe exists within MrTechRecruiter but Mary Jane does not.
+    1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
 
-    1. Test case: `delete applicant n/John Doe`<br>
-       Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete-applicant 1`<br>
+       Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Test case: `delete applicant n/Mary Jane`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete-applicant 3`<br>
+       Expected: No person is deleted. Error details depicting index out of bounds is shown.
 
-1. _{ more test cases …​ }_
 
 ### Adding a new applicant
 
@@ -1276,10 +1266,11 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: -
 
-    1. Test case: `add applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`<br>
+    1. Test case: `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer github/https://github.com/empty`<br>
        Expected: John Doe, with all the relevant details that were passed as parameters is added to MrTechRecruiter.
 
-1. _{ more test cases …​ }_
+    1. Test case: `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer github/https://github.com/`<br>
+       Expected: An error message will show, indicating that the github url passed is not a valid gitHub profile url (because it is the gitHub homepage).
 
 
 ### View average rate of a job
@@ -1290,16 +1281,18 @@ testers are expected to do more *exploratory* testing.
        a. Job must exist in address book. <br>
        b. Average rate already tabulated for the job.
 
-    1. Test case: `find software engineer`<br>
-       Expected: Software Engineer: [redacted], rejection rate: 10%
-
-1. _{ more test cases …​ }_
+    1. Test case: `rate pos/software engineer`<br>
+       Expected: Text indicating the rejection rate will be displayed in the status bar. E.g. `Rejection rate for software engineer = 10.00%`
 
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. If there is a data/applicantbook.json in the same directory as the jar file, open the file using a text editor and remove a random bracket. Launch the program.
+       Expected: A warning of the invalid json file will be shown in the terminal. An empty applicantbook will be launched.
 
-1. _{ more test cases …​ }
+    1. If there is no data/applicantbook.json in the same directory as the jar file, first launch MTR, then type `exit` into the command
+       box. A sample json file will be created. Then repeat the steps as above.
+
+    1. The steps for data/positionbook.json is similar.
