@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.friends;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.friends.AddFriendGameSkillCommand.MESSAGE_NO_GAME_LINK_FOUND;
 import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_UNLINK;
@@ -13,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 
@@ -54,7 +56,11 @@ public class UnlinkFriendCommand extends Command {
             throw new CommandException(Messages.MESSAGE_GAME_NOT_ASSOCIATED);
         }
 
-        model.unlinkFriend(friendToUnlink, gameToUnlink);
+        try {
+            model.unlinkFriend(friendToUnlink, gameToUnlink);
+        } catch (GameLinkNotFoundException e) {
+            throw new CommandException(MESSAGE_NO_GAME_LINK_FOUND);
+        }
         model.updateFilteredAndSortedFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
 
         return new CommandResult(generateSuccessMessage(friendToUnlink), CommandType.FRIEND_UNLINK);

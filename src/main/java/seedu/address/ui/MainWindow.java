@@ -4,16 +4,11 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -132,12 +127,6 @@ public class MainWindow extends UiPart<Stage> {
          * help window purposely so to support accelerators even when focus is
          * in CommandBox or ResultDisplay.
          */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
     }
 
     /**
@@ -147,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
         friendListPanel = new FriendListPanel(logic.getFilteredFriendsList());
         showFriendList();
 
-        gameListPanel = new GameListPanel(logic.getFilteredGamesList());
+        gameListPanel = new GameListPanel(logic.getFilteredGamesList(), logic.getFriendsBook().getFriendsList());
         showGameList();
 
         resultDisplay = new ResultDisplay();
@@ -158,26 +147,6 @@ public class MainWindow extends UiPart<Stage> {
 
         showFriendBox();
         showGameBox();
-
-        setListeners();
-    }
-
-    private void setListeners() {
-        friendListPanel.setListener(new ChangeListener<Friend>() {
-            @Override
-            public void changed(ObservableValue<? extends Friend> observable, Friend oldFriend,
-                                Friend newFriend) {
-                handleFriendGet(newFriend);
-            }
-        });
-
-        gameListPanel.setListener(new ChangeListener<Game>() {
-            @Override
-            public void changed(ObservableValue<? extends Game> observable, Game oldGame, Game newGame) {
-
-                handleGameGet(newGame);
-            }
-        });
     }
 
     /**
@@ -267,11 +236,23 @@ public class MainWindow extends UiPart<Stage> {
         return friendList.stream().anyMatch(x -> x.isSameFriendId(friendToTest));
     }
 
+    private void clearRightCard() {
+        rightMainCard.getChildren().clear();
+    }
+
+    private void clearLeftCard() {
+        leftMainCard.getChildren().clear();
+    }
+
+    private void clearMainCard() {
+        clearRightCard();
+        clearLeftCard();
+    }
+
     private void handleFriendGet(Friend friendToGet) {
         ObservableList<Friend> friendList = this.getFriendList();
         currentFriendToGet = friendToGet;
-        leftMainCard.getChildren().clear();
-        rightMainCard.getChildren().clear();
+        clearMainCard();
 
         // If currentFriendToGet is null, we do nothing.
         if (currentFriendToGet == null) {
@@ -306,8 +287,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleGameGet(Game gameToGet) {
         ObservableList<Friend> friendList = this.getFriendList();
         currentGameToGet = gameToGet;
-        leftMainCard.getChildren().clear();
-        rightMainCard.getChildren().clear();
+        clearMainCard();
         ObservableList<Game> gameList = this.getGameList();
 
         // If currentGameToGet is null, we do nothing.
@@ -316,7 +296,7 @@ public class MainWindow extends UiPart<Stage> {
         }
         // If current gameList does not contain gameToGet, clear rightMainCard
         if (this.gameListHasGame(gameList, currentGameToGet)) {
-            rightMainCard.getChildren().clear();
+            clearRightCard();
             return;
         }
 
@@ -328,7 +308,7 @@ public class MainWindow extends UiPart<Stage> {
 
             gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), currentGameToGet);
         } else {
-            rightMainCard.getChildren().clear();
+            clearRightCard();
             gameMainCardTable = new GameMainCardTable();
         }
         rightMainCard.getChildren().add(gameMainCardTable.getRoot());
@@ -363,9 +343,11 @@ public class MainWindow extends UiPart<Stage> {
             case FRIEND_UNLINK:
             case FRIEND_DELETE:
             case FRIEND_ADD_GAME_SKILL:
+            case FRIEND_LIST:
             case GAME_ADD:
             case GAME_DELETE:
             case GAME_LIST:
+                gameListPanel.updateNumberOfFriends();
                 if (isFriendTable) {
                     handleFriendGet(this.currentFriendToGet);
                 } else {
@@ -373,6 +355,7 @@ public class MainWindow extends UiPart<Stage> {
                 }
                 break;
             case CLEAR:
+                clearMainCard();
                 break;
             case HELP:
                 handleHelp();

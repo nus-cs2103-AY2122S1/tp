@@ -119,8 +119,8 @@ public class Day {
             }
         }
 
-        if (isContinuous) { // For last continuous time slot it wraps around to 0000
-            groupedSlots.add(new String[]{previousTimeSlot, getTimeFromIndex(0)});
+        if (isContinuous) { // For last continuous time slot it displays 2400 (midnight)
+            groupedSlots.add(new String[]{previousTimeSlot, getTimeFromIndex(24)});
         }
 
         return groupedSlots;

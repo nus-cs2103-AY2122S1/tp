@@ -3,7 +3,9 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.friend.Day;
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
@@ -39,6 +41,7 @@ public class FriendScheduleDayCard extends UiPart<Region> {
         dayName.setText(StringUtil.toTitleCase(day.getDayName()));
         timeslots.setHgap(20.0);
         timeslots.setVgap(15.0);
+        VBox.setVgrow(timeslots, Priority.ALWAYS);
         try {
             this.day.getGroupedTimeSlots()
                     .forEach(timeslot -> {

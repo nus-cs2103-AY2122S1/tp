@@ -57,15 +57,15 @@ class DayTest {
         day.setTime("3", "18", true);
         day.setTime("9", "24", true);
         ArrayList<String[]> expected = new ArrayList<>();
-        // Timeslots combined to 0300 - 0000
-        expected.add(new String[]{"0300", "0000"});
+        // Timeslots combined to 0300 - 2400
+        expected.add(new String[]{"0300", "2400"});
         assertArrayEquals(expected.toArray(), day.getGroupedTimeSlots().toArray());
 
         day.setTime("10", "12", false);
         expected = new ArrayList<>();
         // Timeslots split into two slots 0300 - 1000 and 1200 - 0000
         expected.add(new String[]{"0300", "1000"});
-        expected.add(new String[]{"1200", "0000"});
+        expected.add(new String[]{"1200", "2400"});
         assertArrayEquals(expected.toArray(), day.getGroupedTimeSlots().toArray());
     }
 

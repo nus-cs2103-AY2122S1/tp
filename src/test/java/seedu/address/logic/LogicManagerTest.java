@@ -15,10 +15,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.logic.commands.friends.DeleteFriendCommand;
+import seedu.address.logic.commands.friends.ListFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.friends.FriendCommandParser;
 import seedu.address.model.Model;
@@ -68,10 +70,8 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         // no flag will default to listing all friends
-        // TODO Update after list command is updated
-        // String listCommand = FriendCommandParser.COMMAND_WORD + " " + ListFriendCommand.COMMAND_WORD;
-        // assertCommandSuccess(listCommand,
-        //         String.format(ListFriendCommand.MESSAGE_SUCCESS_PREPEND, ListFriendCommand.FRIEND_LIST), model);
+        String listCommand = FriendCommandParser.COMMAND_WORD + " " + ListFriendCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ListFriendCommand.MESSAGE_SUCCESS_PREPEND, model);
     }
 
     @Test
@@ -106,6 +106,14 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredGamesList().remove(0));
     }
 
+    @Test
+    public void setGuiSettings_setGui_success() {
+        GuiSettings guiSettings = new GuiSettings(1, 1, 1, 1);
+        logic.setGuiSettings(guiSettings);
+        // guiSettings has been updated
+        assertEquals(guiSettings, logic.getGuiSettings());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -117,6 +125,16 @@ public class LogicManagerTest {
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
+
+
+        // check all properties are the same
+        assertEquals(expectedModel.getFriendsList(), logic.getFriendsBook());
+        assertEquals(expectedModel.getGamesList(), logic.getGamesBook());
+        assertEquals(expectedModel.getFilteredAndSortedFriendsList(), logic.getFilteredFriendsList());
+        assertEquals(expectedModel.getFilteredGamesList(), logic.getFilteredGamesList());
+        assertEquals(expectedModel.getAddressBookFilePath(), logic.getAddressBookFilePath());
+        assertEquals(expectedModel.getGuiSettings(), logic.getGuiSettings());
+
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
