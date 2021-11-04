@@ -822,7 +822,7 @@ testers are expected to do more *exploratory* testing.
     1. While the app is still open, enter `exit` in the command box or click on the close window button.
         Expected: The application closes.
 
-### Adding a patient <a name="add-patient"/>
+### Adding a patient <a name="add-patient-manual-testing"/>
 
 ### Deleting a patient  <a name="delete-patient"/>
 
@@ -843,11 +843,67 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a patient <a name="edit-patient"/>
 
+1. Editing a patient while all patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command.
+
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: First patient's name is edited to `John Doe`. Details of the edited patient are shown in the status message.
+
+    3. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First patient's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited patient are shown in the status message.
+
+    4. Test case: `edit 1 hp/abc`<br>
+       Expected: No patient is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+
+    5. Test case: `edit 1 eml/xyz`<br>
+       Expected: No patient is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+
+    6. Test case: `edit 1 a/Blk 50, Clementi Ave 2`<br>
+       Expected: First patient's address is edited to `Blk 50, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
+
+    7. Test case: `edit 1 dob/20/12/1960`<br>
+       Expected: First patient's date of birth is edited to `1960-12-20`. Details of the edited patient are shown in the status message.
+
+    8. Test case: `edit 1 dob/20/14/1960`<br>
+       Expected: No patient is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+
+    9. Test case: `edit 1 t/covid`<br>
+       Expected: First patient's tag is edited to `covid`. Details of the edited patient are shown in the status message.
+
+    10. Test case: `edit 1 risk/HIGH`<br>
+        Expected: First patient's risk is edited to `HIGH`. Details of the edited patient are shown in the status message.
+
+    11. Test case: `edit 1 risk/ABC`<br>
+        Expected: No patient is edited. Error details are shown in the status message: "Risks should only be either HIGH, MEDIUM OR LOW".
+
+    12. Test case: `edit 0 hp/91234567`<br>
+        Expected: No patient is edited. Error details are shown in the status message: "Invalid command format...".
+
+    13. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+        Expected: No patient is edited. Error details are shown in the status message.
+
+2. Editing a patient while some patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. List some patients using `find XYZ` (XYZ is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
 ### Finding a patient <a name="find-patient"/>
 
 ### Listing all patients <a name="list-patients"/>
 
-### Adding a doctor <a name="add-doctor"/>
+1. List all patients while none/some patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. Ensure that there are existing patients. If there is none, use the [add](#add-patient-manual-testing) command to add some patients. List some patients using `find XYZ` (XYZ is the name of an existing/non-existent patient).
+
+    2. Test case: `list`<br>
+       Expected: All existing patients are listed.
+
+    3. Test case: `list`<br>
+       Expected: All existing patients are listed.
+
+### Adding a doctor <a name="add-doctor-manual-testing"/>
 
 ### Deleting a doctor  <a name="delete-doctor"/>
 
@@ -857,14 +913,35 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
 
-    2. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
-       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited contact are shown in the status message.
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: First doctor's name is edited to `John Doe`. Details of the edited doctor are shown in the status message.
 
-    3. Test case: `edit 0 hp/91234567`<br>
-       Expected: No doctor is edited. Error details are shown in the status message.
+    3. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited doctor are shown in the status message.
 
-    4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. Test case: `edit 1 hp/abc`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+
+    5. Test case: `edit 1 eml/xyz`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+
+    6. Test case: `edit 1 a/Blk 30, Clementi Ave 2`<br>
+       Expected: First doctor's address is edited to `Blk 30, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
+
+    7. Test case: `edit 1 dob/20/12/1960`<br>
+       Expected: First doctor's date of birth is edited to `1960-12-20`. Details of the edited doctor are shown in the status message.
+
+    8. Test case: `edit 1 dob/20/14/1960`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+
+    9. Test case: `edit 1 t/experienced`<br>
+       Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
+
+    10. Test case: `edit 0 hp/91234567`<br>
+        Expected: No doctor is edited. Error details are shown in the status message: "Invalid command format...".
+
+    11. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+        Expected: No doctor is edited. Error details are shown in the status message.
 
 2. Editing a doctor while some doctors are being shown
 
@@ -875,6 +952,16 @@ testers are expected to do more *exploratory* testing.
 ### Finding a doctor <a name="find-doctor"/>
 
 ### Listing all doctors <a name="list-doctors"/>
+
+1. List all doctors while none/some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. Ensure that there are existing doctors. If there is none, use the [add](#add-doctor-manual-testing) command to add some doctors. List some doctors using `find XYZ` (XYZ is the name of an existing/non-existent doctor).
+
+    2. Test case: `list`<br>
+       Expected: All existing doctors are listed.
+
+    3. Test case: `list`<br>
+       Expected: All existing doctors are listed.
 
 ### Adding an appointment <a name="appointment"/>
 1. Add an appointment 
@@ -952,14 +1039,26 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `appt -e 1 p/1 s/31/12/2021 10:00 dur/30`<br>
        Expected: First appointment's patient is edited to the first patient in the filtered patient list. The date and session are edited to `31 Dec 21, Fri` and `10:00 - 10:30` respectively. Details of the edited appointment are shown in the status message.
 
-    3. Test case: `appt -e 0 dur/30`<br>
+    3. Test case: `appt -e 1 d/1 r/blood test`<br>
+       Expected: First appointment's doctor is edited to the first doctor in the filtered doctor list. The remark is edited to `blood test`. Details of the edited appointment are shown in the status message.
+
+    4. Test case: `appt -e 1 s/31/12/2021`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "Start date/time should be of the format DD/MM/YYYY HH:MM...".
+
+    5. Test case: `appt -e 1 s/10:00`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "Start date/time should be of the format DD/MM/YYYY HH:MM...".
+
+    6. Test case: `appt -e 1 dur/1000`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "The duration should be an integer between 1-120 minutes".
+
+    7. Test case: `appt -e 0 dur/30`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "Invalid command format...".
+
+    8. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
        Expected: No appointment is edited. Error details are shown in the status message.
 
-    4. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-    5. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
-        Expected: Similar to previous.
+    9. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
+        Expected: No appointment is edited. Error details are shown in the status message: "This appointment clashes with an existing appointment".
 
 3. Editing an appointment while some appointments are being shown
 
