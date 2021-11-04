@@ -46,7 +46,7 @@ Given below are my contributions to the project.
 * **Review Contributions**:
   * PRs reviewed (with non-trivial reviews) [\#155]([Update User Guide by GabrielWLM · Pull Request #155 · AY2122S1-CS2103T-W15-1/tp (github.com)](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/155)), 
 
-
+<div style="page-break-after: always;"></div>
 
 #### Appendix A (Contributions to the Developer Guide)
 
