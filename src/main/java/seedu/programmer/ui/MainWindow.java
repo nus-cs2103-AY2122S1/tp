@@ -305,23 +305,23 @@ public class MainWindow extends UiPart<Stage> {
      * @return a Popup object
      */
     private Popup createPopup(String message) {
-        // @@author AllardQuek-reused
-        // Reused with modifications from https://stackoverflow.com/questions/18669209/
-        final Popup popup = new Popup();
+        Popup popup = new Popup();
         popup.setAutoFix(true);
         popup.setHideOnEscape(true);
+        Label label = createLabelForPopup(message, popup);
+        popup.getContent().add(label);
+        return popup;
+    }
 
+    private Label createLabelForPopup(String message, Popup popup) {
         Label label = new Label(message);
         label.setWrapText(true);
         label.setMaxWidth(primaryStage.getWidth() * NINETY_PERCENT);
-        label.getStylesheets().add("view/Styles.css");
-        label.getStyleClass().add("popup");
+        label.getStyleClass().add("popup-label");
 
         // Hide popup when the user clicks on it
         label.setOnMouseReleased(e -> popup.hide());
-
-        popup.getContent().add(label);
-        return popup;
+        return label;
     }
 
     /**
