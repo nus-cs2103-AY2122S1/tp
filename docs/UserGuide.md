@@ -250,9 +250,9 @@ add
 </div>
 <div markdown="1" class="w-100">
 ```text
-add -n Jane Deer -t woman
+add -n Jane Deer -t woman -t friend
 ```
-Add a contact with the name of `Jane Deer` that consist of the tag `woman`.
+Add a contact with the name of `Jane Deer` that consist of the tags `woman` and `friend`.
 </div>
 </div>
 
