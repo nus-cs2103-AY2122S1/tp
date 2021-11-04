@@ -68,6 +68,7 @@ public class EditCommandTest {
         expectedModel.setStudent(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
     }
 
     @Test
