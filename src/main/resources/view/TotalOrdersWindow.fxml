@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root alwaysOnTop="true" title="Total Orders" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alwaysOnTop="true" resizable="false" title="Total Orders" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/totalorders_icon.png" />
   </icons>
@@ -17,7 +17,7 @@
     <Scene>
       <stylesheets>
         <URL value="@Fonts.css" />
-        <URL value="@Extensions.css"/>
+        <URL value="@Extensions.css" />
       </stylesheets>
 
       <HBox alignment="CENTER">
