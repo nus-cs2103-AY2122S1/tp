@@ -1,7 +1,6 @@
 package seedu.address.model.applicant;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,7 +11,16 @@ import java.net.URL;
  */
 public class ProfileUrl {
 
-    public static final String PLACEHOLDER_URL = "https://www.google.com";
+    /*
+     * There must not be any white spaces at all. This validation regex already assumes that it is a valid url.
+     * So there is no need to check for https:// or http://
+     * This checks whether the url link given is a gitHub profile url, e.g. github.com/empty or
+     * https://github.com/empty
+     */
+    public static final String VALIDATION_REGEX = "((http|https)://)?(www.)?"
+                    + "github\\.com/[a-zA-Z0-9@:%_\\+~#\\?&=]+";
+
+    public static final String PLACEHOLDER_URL = "https://www.google.com/";
     public static final String MESSAGE_CONSTRAINTS =
             "Profile urls must be valid github and linkedin urls.";
     //better give an example of a valid url?
@@ -22,12 +30,11 @@ public class ProfileUrl {
 
     /**
      * Constructs a {@code ProfileUrl}.
-     *
-     * @param url A valid github or linkedin url.
+     * Assumes non-null and assumes non-empty string, i.e. assumes valid gitHub url.
+     * @param url A valid github url.
      */
     public ProfileUrl(String url) {
         requireNonNull(url);
-        checkArgument(isValidUrl(url), MESSAGE_CONSTRAINTS);
         this.url = url;
     }
 
@@ -62,7 +69,9 @@ public class ProfileUrl {
     public static boolean isValidUrl(String gitHubUrl) {
         try {
             new URL(gitHubUrl);
-            return true;
+            // Comes to this line means that it is a valid url
+            // now to check whether it is valid gitHub link
+            return gitHubUrl.matches(VALIDATION_REGEX);
         } catch (MalformedURLException malformedUrlException) {
             return false;
         }

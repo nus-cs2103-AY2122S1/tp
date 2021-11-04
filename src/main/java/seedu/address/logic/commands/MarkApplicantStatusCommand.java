@@ -19,9 +19,9 @@ public class MarkApplicantStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Updates an applicant's application status as specified. "
-            + "Parameters: NAME " + PREFIX_STATUS + "STATUS\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Updates an applicant's application status as specified. " + "\n"
+            + "Parameters: NAME " + PREFIX_STATUS + "STATUS" + "\n"
             + "Example: " + COMMAND_WORD + " John Doe " + PREFIX_STATUS + "accepted";
 
     public static final String MESSAGE_MARK_APPLICANT_STATUS_SUCCESS =
@@ -47,7 +47,7 @@ public class MarkApplicantStatusCommand extends Command {
 
         Applicant applicantToUpdate;
         try {
-            applicantToUpdate = model.getApplicantByNameIgnoreCase(name);
+            applicantToUpdate = model.getApplicantByName(name);
         } catch (ApplicantNotFoundException e) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_APPLICANT_WITH_NAME, name));
         }

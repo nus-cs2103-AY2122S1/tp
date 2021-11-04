@@ -22,10 +22,10 @@ public class EditPositionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the position identified "
             + "by the index number used in the displayed position list. "
-            + "Existing values will be overwritten by the input values."
+            + "Existing values will be overwritten by the input values." + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TITLE + "TITLE] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] " + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "Create data pipeline";
 
