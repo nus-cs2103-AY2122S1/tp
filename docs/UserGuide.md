@@ -425,7 +425,7 @@ Advanced user Format:`p /f [n:NAME_QUERY] [t:TAG1, TAG2...]`
 * Finds all persons that match with given `NAME_QUERY`, or are tagged with the tags specified.
 * The query for name will match if the string exists within the name, regardless of case: `jo` will match `John` and `joanne`.
 * Tags must be spelled exactly. You may specify more than one tag
-* While the parameters have been marked optional, you should specify at least one parameter if you want to filter the results.
+* While the parameters have been marked optional, you must specify at least one of the parameters if you want to filter the results.
 
 Examples:
 

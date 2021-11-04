@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="300" minWidth="450" onCloseRequest="#handleExit" title="Notor" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="300" minWidth="450" onCloseRequest="#handleExit" title="Notor" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -67,9 +67,9 @@
               <items>
                   <VBox alignment="BOTTOM_CENTER" styleClass="splitpane-background">
                      <children>
-                        <StackPane fx:id="notePanePlaceholder" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                        <StackPane fx:id="notePanePlaceholder" maxHeight="1.7976931348623157E308" />
                         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" />
-                        <StackPane fx:id="resultDisplayPlaceholder" prefHeight="100.0"/>
+                        <StackPane fx:id="resultDisplayPlaceholder" minHeight="-Infinity" prefHeight="100.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox styleClass="splitpane-background">
