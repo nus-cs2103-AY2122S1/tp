@@ -22,7 +22,13 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.*;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TodoTask;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -64,14 +70,14 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-                new TodoTask(new TaskName("Discuss assignment 7 with team"), getTagSet("lab"),
-                        new Description("Need to set up a zoom meeting first!!!"), Task.Priority.HIGH),
-                new DeadlineTask(new TaskName("Submit CS2100 Assignment"), getTagSet("sohard"),
-                        new Description("Read through lecture on pipelining again"), Task.Priority.MEDIUM,
-                        new TaskDate("2020-11-08")),
-                new EventTask(new TaskName("Visit grandmother"), getTagSet("yay"),
-                        new Description("Recently moved house, need to visit house"), Task.Priority.LOW,
-                        new TaskDate("2020-11-07")),
+            new TodoTask(new TaskName("Discuss assignment 7 with team"), getTagSet("lab"),
+                    new Description("Need to set up a zoom meeting first!!!"), Task.Priority.HIGH),
+            new DeadlineTask(new TaskName("Submit CS2100 Assignment"), getTagSet("sohard"),
+                    new Description("Read through lecture on pipelining again"), Task.Priority.MEDIUM,
+                    new TaskDate("2020-11-08")),
+            new EventTask(new TaskName("Visit grandmother"), getTagSet("yay"),
+                    new Description("Recently moved house, need to visit house"), Task.Priority.LOW,
+                    new TaskDate("2020-11-07")),
         };
     }
 
