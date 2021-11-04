@@ -47,8 +47,7 @@ public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
             description = Description.NO_DESCRIPTION;
         }
 
-        Task task = new EventTask(name, tagList, false, taskDate, description, priority);
-
+        EventTask task = new EventTask(name, tagList, description, priority, taskDate);
         return new AddEventTaskCommand(task);
     }
 

@@ -24,7 +24,7 @@ import seedu.address.model.group.Group;
  */
 public class DeleteGroupCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     // Pass
     @Test

@@ -25,7 +25,7 @@ import seedu.address.model.student.Participation;
  */
 public class MarkStudentPartCommandParserTest {
 
-    private MarkStudentPartCommandParser parser = new MarkStudentPartCommandParser();
+    private final MarkStudentPartCommandParser parser = new MarkStudentPartCommandParser();
 
     @Test
     public void parse_validArgs_returnsMarkStudentPartCommand() {

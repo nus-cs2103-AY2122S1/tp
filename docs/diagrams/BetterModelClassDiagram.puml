@@ -4,18 +4,17 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueXYZList
 AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniqueXYZList
+UniqueTagList -[hidden]down- UniqueXYZList
 
 UniqueTagList *-right-> "*" Tag
-UniquePersonList -right-> Person
+UniqueXYZList -right-> XYZ
+note right
+XYZ refers to the Student,
+Task or Group classes
+end note
 
-Person -up-> "*" Tag
-
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+XYZ -up-> "*" Tag
 @enduml

@@ -24,8 +24,8 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindGroupCommand}.
  */
 public class FindGroupCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
     public void equals() {

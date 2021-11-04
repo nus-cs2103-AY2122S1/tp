@@ -25,7 +25,7 @@ import seedu.address.model.student.Attendance;
  */
 public class MarkStudentAttCommandParserTest {
 
-    private MarkStudentAttCommandParser parser = new MarkStudentAttCommandParser();
+    private final MarkStudentAttCommandParser parser = new MarkStudentAttCommandParser();
 
     @Test
     public void parse_validArgs_returnsMarkStudentAttCommand() {

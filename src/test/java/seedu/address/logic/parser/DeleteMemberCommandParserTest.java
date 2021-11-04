@@ -20,7 +20,7 @@ import seedu.address.logic.commands.DeleteMemberCommand;
  */
 public class DeleteMemberCommandParserTest {
 
-    private DeleteMemberCommandParser parser = new DeleteMemberCommandParser();
+    private final DeleteMemberCommandParser parser = new DeleteMemberCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

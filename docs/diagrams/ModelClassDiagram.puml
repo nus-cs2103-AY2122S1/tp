@@ -10,7 +10,6 @@ Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
 Class AddressBook
 Class ReadOnlyAddressBook
-Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
@@ -27,23 +26,29 @@ Class Group
 Class HiddenOutside #FFFFFF
 HiddenOutside .down.> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
-
-ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+
+AddressBook .up.|> ReadOnlyAddressBook
+ModelManager .up.|> Model
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *---> "1" UniqueStudentList
-AddressBook *---> "1" UniqueGroupList
-AddressBook *---> "1" UniqueTaskList
-UniqueStudentList ---> "~* all" Student
-UniqueGroupList ---> "~* all" Group
-UniqueTaskList ---> "~* all" Task
+AddressBook *-down-> "1" UniqueStudentList
+AddressBook *-down-> "1" UniqueGroupList
+AddressBook *-down-> "1" UniqueTaskList
+UniqueStudentList -right-> "~* all" Student
+UniqueGroupList -right-> "~* all" Group
+UniqueTaskList -right-> "~* all" Task
 
-ModelManager --->"~* filtered" Student
-ModelManager --->"~* filtered" Group
-ModelManager --->"~* filtered" Task
+ModelManager -down->"~* filtered" Student
+ModelManager -down->"~* filtered" Group
+ModelManager -down->"~* filtered" Task
+
+UniqueStudentList -[hidden]down- UniqueTaskList
+UniqueTaskList -[hidden]down- UniqueGroupList
+Student -[hidden]down- Task
+ModelManager -[hidden]down- Student
+Task -[hidden]down- Group
 @enduml

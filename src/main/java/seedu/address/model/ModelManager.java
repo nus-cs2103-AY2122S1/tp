@@ -147,12 +147,14 @@ public class ModelManager implements Model {
      * @param editedStudent updated Student object
      */
     public void updateGroup(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group updatedGroup = groupList.stream()
                     .filter(g -> g.getName().equals(target.getGroupName()))
                     .findAny()
                     .orElse(null);
+            assert updatedGroup != null;
             updatedGroup.updateMember(target, editedStudent);
         }
     }
@@ -195,14 +197,11 @@ public class ModelManager implements Model {
     @Override
     public void addMember(Student student, Group group) {
         requireAllNonNull(student, group);
-        Group newGroup = group;
         Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
                 student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
                 student.getParticipation(), group.getName());
-        newGroup.addMember(updatedStudent);
+        group.addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
-        addressBook.setGroup(group, newGroup);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -210,7 +209,6 @@ public class ModelManager implements Model {
         requireAllNonNull(student, group);
         addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     /**
@@ -260,7 +258,6 @@ public class ModelManager implements Model {
         List<Student> students = target.getMembersList();
         addressBook.clearGroupFromStudents(students);
         addressBook.deleteGroup(target);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -281,7 +278,6 @@ public class ModelManager implements Model {
             addressBook.setStudent(student, updatedStudent);
         }
 
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         addressBook.setGroup(target, editedGroup);
     }
 
@@ -356,6 +352,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredStudents.equals(other.filteredStudents)
+                && filteredTasks.equals(other.filteredTasks)
+                && filteredGroups.equals(other.filteredGroups);
     }
 }

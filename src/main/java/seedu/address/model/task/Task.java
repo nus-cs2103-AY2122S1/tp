@@ -12,13 +12,13 @@ import seedu.address.model.tag.Tag;
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public abstract class Task implements Comparable<Task>, Cloneable {
+public abstract class Task implements Comparable<Task> {
 
-    private TaskName name;
-    private Set<Tag> tags = new HashSet<>();
-    private String description;
+    private final TaskName name;
+    private final Set<Tag> tags = new HashSet<>();
+    private final Description description;
     private boolean isDone;
-    private Priority priority;
+    private final Priority priority;
 
     public enum Priority {
         HIGH, MEDIUM, LOW
@@ -37,7 +37,7 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = isDone;
-        this.description = description.description;
+        this.description = description;
         this.priority = priority;
     }
 
@@ -46,15 +46,15 @@ public abstract class Task implements Comparable<Task>, Cloneable {
      *
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
-     * @param description A valid Description of Tags.
-     * @param isDone A boolean indicating the status of the Task.
+     * @param description A valid Description.
+     * @param priority A valid Priority.
      */
-    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
+    public Task(TaskName name, Set<Tag> tags, Description description, Priority priority) {
         this.name = name;
         this.tags.addAll(tags);
-        this.isDone = isDone;
-        this.description = description.description;
-        this.priority = Priority.LOW;
+        this.isDone = false;
+        this.description = description;
+        this.priority = priority;
     }
 
     public TaskName getName() {
@@ -69,6 +69,9 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         return isDone;
     }
 
+    /**
+     * Toggles the isDone field of the task.
+     */
     public void toggleIsDone() {
         this.isDone = !this.isDone;
     }
@@ -82,21 +85,19 @@ public abstract class Task implements Comparable<Task>, Cloneable {
     }
 
     public String getDescription() {
-        return description;
+        return description.description;
     }
 
     public Priority getPriority() {
         return priority;
     }
 
+    /**
+     * Returns the priority of the task as a string.
+     * @return The string of the priority of the task.
+     */
     public String getPriorityAsString() {
-        if (this.priority == Priority.HIGH) {
-            return "HIGH";
-        } else if (this.priority == Priority.MEDIUM) {
-            return "MEDIUM";
-        } else {
-            return "LOW";
-        }
+        return this.priority.toString();
     }
 
     /**
@@ -189,19 +190,4 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         }
     }
 
-    @Override
-    public Task clone() {
-        try {
-            Task clone = (Task) super.clone();
-            clone.name = this.name;
-            clone.tags = new HashSet<>();
-            clone.tags.addAll(this.tags);
-            clone.isDone = this.isDone;
-            clone.description = this.description;
-            clone.priority = this.priority;
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
 }

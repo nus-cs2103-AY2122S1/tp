@@ -123,7 +123,8 @@ public class EditTaskCommand extends Command {
                     taskToEdit.checkIsDone(), updatedTaskDate, description, updatedPriority);
 
         } else {
-            //if the task is a Todo task, it should not contain any time info.
+
+            //if the task is a @codeTodo task, it should not contain any time info.
             if (editTaskDescriptor.getEventTaskDate().isPresent()
                     || editTaskDescriptor.getDeadlineTaskDate().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_TODO_TIME);

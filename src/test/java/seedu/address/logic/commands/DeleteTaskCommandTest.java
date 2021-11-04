@@ -24,7 +24,7 @@ import seedu.address.model.task.Task;
  */
 public class DeleteTaskCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
 
     // Pass
     @Test

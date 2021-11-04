@@ -7,7 +7,7 @@ import seedu.address.model.tag.Tag;
 
 public class EventTask extends Task {
 
-    private TaskDate dueDate;
+    private final TaskDate dueDate;
 
     /**
      * Constructs a {@code Task}.
@@ -19,6 +19,20 @@ public class EventTask extends Task {
                      TaskDate date, Description description, Priority priority) {
         super(name, tags, isDone, description, priority);
         this.dueDate = date;
+    }
+
+    /**
+     * Constructs a {@code EventTask}.
+     *
+     * @param name A valid TaskName.
+     * @param tags A valid Set of Tags.
+     * @param description A valid Description.
+     * @param priority A valid Priority.
+     * @param dueDate A valid TaskDate.
+     */
+    public EventTask(TaskName name, Set<Tag> tags, Description description, Priority priority, TaskDate dueDate) {
+        super(name, tags, description, priority);
+        this.dueDate = dueDate;
     }
 
     public TaskDate getTaskDate() {
@@ -74,10 +88,4 @@ public class EventTask extends Task {
         return this.dueDate.getDeadline();
     }
 
-    @Override
-    public EventTask clone() {
-        EventTask clone = (EventTask) super.clone();
-        clone.dueDate = this.dueDate;
-        return clone;
-    }
 }

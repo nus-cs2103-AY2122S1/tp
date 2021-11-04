@@ -32,7 +32,7 @@ public class MarkStudentPartCommandTest {
     private static final Integer[] MARK_PARTICIPATION_ABSENT_EXPECTED = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private static final int FIRST_WEEK = Participation.FIRST_WEEK_OF_SEM;
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_markStudentParticipatedUnfilteredList_success() {
