@@ -25,9 +25,9 @@ public class FileUtilTest {
     }
 
     @Test
-    public void getRelativePath() {
+    public void getRelativePathString() {
         Path path = FileUtil.pathOf("hello.world");
-        assertEquals(FileUtil.getRelativePath(path), Path.of(".").resolve(Path.of("hello.world")));
+        assertEquals(FileUtil.getRelativePathString(path), Path.of(".").resolve(Path.of("hello.world")).toString());
     }
 
 }
