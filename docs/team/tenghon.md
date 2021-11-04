@@ -38,6 +38,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added Glossary for developer guide & Non-functional requirements.
     * Added implementation for Sort feature.
+    * Added Use Case for Sort.
   
 
 * **Community**:
