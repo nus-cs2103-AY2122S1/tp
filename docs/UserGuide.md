@@ -139,6 +139,10 @@ where
 | :-: | :-- |
 | <img src=images/info_icon.png width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
+### 3.3 Last Meeting attribute 
+
+The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Features
@@ -167,7 +171,7 @@ Adds a new client to the address book.
 | Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...​`|
 | :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
-| <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional <br> • Tags that can be added are as seen in the client information in the Client Info Section |
+| <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client Id  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
 ### 4.2 Retrieve Particular Contact : `view`
 
@@ -187,6 +191,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 | Format | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
 | :-: | :-- |
 | **example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), Mcdonalds` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at Mcdonalds |
+| <img src=images/info_icon.png width="50"> | • Client Id cannot be changed. |
 | <img src=images/tip_icon.png width="50"> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several different clients, you could simply use this feature to do so. |
  
 ### 4.4 Delete particular contact : `delete`
@@ -249,7 +254,7 @@ Clears all entries from the address book.
 
 | Format | `clear`|
 | :-: | :-- |
-| <img src=images/info_icon.png width="50"> | • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br> • `yes`: to confirm and proceed with the clear command. <br> •`no`: to cancel the clear command.|
+| <img src=images/info_icon.png width="50"> | • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br> • `yes`: to confirm and proceed with the clear command. <br> •`no`: to cancel the clear command. <br> • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work.|
 | <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 ### 4.11 Exiting the program : `exit`
