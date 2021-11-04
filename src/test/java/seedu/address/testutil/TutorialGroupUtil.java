@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentToGroupCommand;
 import seedu.address.model.tutorialgroup.TutorialGroup;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 public class TutorialGroupUtil {
     /**
@@ -16,7 +18,8 @@ public class TutorialGroupUtil {
     }
 
     public static String getAddStudentToGroupCommand(TutorialGroup tutorialGroup, Index index) {
-        return AddStudentToGroupCommand.COMMAND_WORD + " " + index.getOneBased() + " " + getTutorialGroupDetails(tutorialGroup);
+        return AddStudentToGroupCommand.COMMAND_WORD + " " + index.getOneBased() + " "
+                + getTutorialGroupDetails(tutorialGroup);
     }
 
     public static String getTutorialGroupDetails(TutorialGroup tutorialGroup) {

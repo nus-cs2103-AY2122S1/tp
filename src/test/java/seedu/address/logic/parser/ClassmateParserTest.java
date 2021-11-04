@@ -14,13 +14,32 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddClassCommand;
+import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddStudentToGroupCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteClassCommand;
+import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindStudentCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ViewClassCommand;
+import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentUtil;
+import seedu.address.testutil.TutorialClassBuilder;
+import seedu.address.testutil.TutorialClassUtil;
+import seedu.address.testutil.TutorialGroupBuilder;
+import seedu.address.testutil.TutorialGroupUtil;
 
 public class ClassmateParserTest {
 
