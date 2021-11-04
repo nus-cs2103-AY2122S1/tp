@@ -1,12 +1,48 @@
 @startuml
 !include ../../../style.puml
 
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AcademyDirectoryParser" as AcademyDirectoryParser LOGIC_COLOR
+participant ":HelpCommandParser" as HelpCommandParser LOGIC_COLOR
 participant "h:HelpCommand" as HelpCommand LOGIC_COLOR
 participant ":CommandException" as CommandException LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("help add")
+activate LogicManager
+
+LogicManager -> AcademyDirectoryParser : parseCommand("help add")
+activate AcademyDirectoryParser
+
+create HelpCommandParser
+AcademyDirectoryParser -> HelpCommandParser
+activate HelpCommandParser
+
+HelpCommandParser --> AcademyDirectoryParser
+deactivate HelpCommandParser
+
+AcademyDirectoryParser -> HelpCommandParser : parse("add")
+activate HelpCommandParser
 
 create HelpCommand
-[-> HelpCommand : execute(model)
+HelpCommandParser -> HelpCommand
+activate HelpCommand
+
+HelpCommand --> AcademyDirectoryParser : h
+deactivate HelpCommand
+HelpCommandParser -[hidden]-> AcademyDirectoryParser
+destroy HelpCommandParser
+
+AcademyDirectoryParser --> LogicManager : h
+deactivate AcademyDirectoryParser
+
+LogicManager -> HelpCommand : execute(model)
 activate HelpCommand
 
 opt if commandWord is null or helpMessage is null
@@ -14,10 +50,12 @@ opt if commandWord is null or helpMessage is null
     HelpCommand -> CommandException ++ : CommandException(MESSAGE_HELP_NOT_EXIST)
     CommandException --> HelpCommand : exception created
     deactivate CommandException
-    [<-- HelpCommand : exception thrown
+    LogicManager <-- HelpCommand : exception thrown
+    deactivate HelpCommand
 end opt
 
 alt if isGeneralHelp
+
     create CommandResult
     HelpCommand -> CommandResult ++ : CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, helpMessage)
     CommandResult --> HelpCommand : general help command result
