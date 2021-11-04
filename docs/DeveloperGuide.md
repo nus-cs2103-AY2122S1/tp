@@ -154,6 +154,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature 
+
+The ```add``` command is facilitated by creating an ```AddCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```add``` command:
+![images](images/AddCommandActivityDiagram.png)
+
+Given below is an example usage scenario and how the add operation behaves at each step.
+
+Step 1. A valid command `add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`
+is given as user input. This invokes `LogicManager#execute()`, which calls`AddressBookParser#parseCommand()` to parse
+the input into command word `add` and command argument ` n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`.
+
+Step 2. `AddCommandParser` is initialized based on the parse results and `AddCommandParser#parse()` is called.
+`AddCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to obtain an `ArgumentMultimap`, which is
+a mapping of all prefixes to their respective arguments (i.e. `n/` to `Dylan`, `p/` to `97998581`, etc). 
+
+Step 3. `AddCommandParser#arePrefixesPresent` is then called to ensure all the mandatory prefixes have been inputted by the user.
+After which, `AddCommandParser#parse()` then initializes a new `Person` with all the specified details from the input.
+
+Step 4. `AddCommandParser#parse()` then initializes an `AddCommand` with the new `Person` as an argument. `AddCommand#execute()` 
+is then called, which calls `Model#hasPerson()` to ensure that the new `Person` is not a duplicate of any existing applicant in the 
+`AddressBook`.
+
+Step 5. `AddCommand#execute()` then calls `Model#addPerson()` to add the new applicant in the `AddressBook`.
+
+Step 6. `CommandResult` is initialized with `String` containing the details of the new applicant.
+This CommandResult is then returned.
+
+The following sequence diagram shows how the edit operation works.
+![images](images/EditCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
@@ -188,7 +223,7 @@ This CommandResult is then returned.
 
 The following sequence diagram shows how the edit operation works.
 ![images](images/EditCommandSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### Show feature
