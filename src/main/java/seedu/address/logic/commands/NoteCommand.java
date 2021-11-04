@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class NoteCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing note will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "no/[NOTE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[no/NOTE]\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NOTE
             + "Enjoys western cuisine";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Note: %2$s";
