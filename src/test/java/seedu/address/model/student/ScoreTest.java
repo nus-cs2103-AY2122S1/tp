@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.testutil.ScoreBuilder;
 
 public class ScoreTest {
 
@@ -61,5 +62,10 @@ public class ScoreTest {
         assertEquals("11.00", Score.reformatScore("11.0")); // adding 2 additional 0s
         assertEquals("100.00", Score.reformatScore("100"));
         assertEquals("0.00", Score.reformatScore("0"));
+    }
+
+    @Test
+    public void getNumericValue() {
+        assertEquals(11.01, new ScoreBuilder().withValue("11.01").build().getNumericValue());
     }
 }
