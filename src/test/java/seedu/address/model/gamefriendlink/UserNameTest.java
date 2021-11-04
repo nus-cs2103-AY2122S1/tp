@@ -34,7 +34,7 @@ public class UserNameTest {
         // valid name
         assertTrue(FriendName.isValidName("Peter123")); // single word
         assertTrue(FriendName.isValidName("Peter jack123")); // multi-word
-        assertTrue(FriendName.isValidName("`~!@#$%^&*()-_=+[{]}")); // all special characters available
+        assertTrue(FriendName.isValidName("`~!@#$%^&*()_=+[{]}")); // all special characters available
         assertTrue(FriendName.isValidName("\\|;:'\",<.>/?")); // on an average keyboard
         assertTrue(FriendName.isValidName("Peter jack#123 @<>")); // with special characters
         assertTrue(FriendName.isValidName("p")); // short name - 1 char

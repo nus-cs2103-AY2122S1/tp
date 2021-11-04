@@ -57,28 +57,14 @@ public class ParserUtil {
     public static FriendId parseFriendId(String friendId) throws ParseException {
         requireNonNull(friendId);
 
-        String trimmedName = friendId.trim();
+        String trimmedId = friendId.trim();
         if (friendId.isBlank()) {
             throw new ParseException(FriendId.MESSAGE_EMPTY_FRIEND_ID);
-        } else if (!FriendId.isValidFriendId(trimmedName)) {
+        } else if (!FriendId.isValidFriendId(trimmedId)) {
             throw new ParseException(FriendId.MESSAGE_INVALID_CHARACTERS);
         }
-        return new FriendId(trimmedName);
-    }
 
-    /**
-     * Parses a {@code String gameId} into a {@code GameId}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code gameId} is invalid.
-     */
-    public static GameId parseGameId(String gameId) throws ParseException {
-        requireNonNull(gameId);
-        String trimmedName = gameId.trim();
-        if (!GameId.isValidGameId(trimmedName)) {
-            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS);
-        }
-        return new GameId(trimmedName);
+        return new FriendId(trimmedId);
     }
 
     /**
@@ -89,21 +75,44 @@ public class ParserUtil {
      */
     public static FriendName parseFriendName(String friendName) throws ParseException {
         requireNonNull(friendName);
+
         String trimmedName = friendName.trim();
         if (!FriendName.isValidName(trimmedName)) {
             throw new ParseException(FriendName.MESSAGE_CONSTRAINTS);
         }
+
         return new FriendName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String gameId} into a {@code GameId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gameId} is invalid.
+     */
+    public static GameId parseGameId(String gameId) throws ParseException {
+        requireNonNull(gameId);
+
+        String trimmedId = gameId.trim();
+        if (!GameId.isValidGameId(trimmedId)) {
+            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS);
+        }
+
+        return new GameId(trimmedId);
     }
 
     /**
      * Takes in {@code userName} and returns the corresponding {@code UserName} if its format is valid.
      */
     public static UserName parseUserName(String userName) throws ParseException {
-        if (!UserName.isValidUserName(userName)) {
+        requireNonNull(userName);
+
+        String trimmedName = userName.trim();
+        if (!UserName.isValidUserName(trimmedName)) {
             throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
         }
-        return new UserName(userName);
+
+        return new UserName(trimmedName);
     }
 
     /**
