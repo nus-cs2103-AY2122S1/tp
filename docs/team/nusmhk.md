@@ -124,10 +124,10 @@ Given below are my contributions to the project.
 >
 >A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
 >is entered:
->![AddDateSequenceDiagram](images/AddDateSequenceDiagram.png)
+>![AddDateSequenceDiagram](../images/AddDateSequenceDiagram.png)
 >
 >The following activity diagram summarises what happens when a user executes an add command with date and/or time:
->![AddDateActivityDiagram](images/AddDateActivityDiagram.png)
+>![AddDateActivityDiagram](../images/AddDateActivityDiagram.png)
 >
 >#### Design considerations:
 >
