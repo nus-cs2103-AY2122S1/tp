@@ -98,6 +98,12 @@ public interface Model {
     void markPerson(Person target);
 
     /**
+     * Checks if the given person has already been marked "Done".
+     * The person must exist in the address book.
+     */
+    boolean checkForMarkedPerson(Person target);
+
+    /**
      * Unmarks the given person.
      * The person must exist in the address book.
      */

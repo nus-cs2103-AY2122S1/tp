@@ -105,6 +105,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.markPerson(toMark);
     }
 
+    public boolean checkForMarkedPerson(Person toCheck) {
+        return persons.checkForMarkedPerson(toCheck);
+    }
+
     public void unmarkPerson(Person toUnmark) {
         persons.unmarkPerson(toUnmark);
     }

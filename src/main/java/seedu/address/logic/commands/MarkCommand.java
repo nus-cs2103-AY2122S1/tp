@@ -24,6 +24,8 @@ public class MarkCommand extends MarkingCommand {
             + "Example: " + COMMAND_WORD + " 1 4 7";
 
     public static final String MESSAGE_MARKED_PERSON_SUCCESS = "Marked Person(s) as Done: \n%1$s";
+    public static final String MESSAGE_MARKING_MARKED_PERSON =
+            "A person that is already marked as Done cannot be marked again";
 
     private final Index[] targetIndexes;
 
@@ -37,6 +39,15 @@ public class MarkCommand extends MarkingCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         StringBuilder result = new StringBuilder();
+
+        boolean markingMarkedPerson;
+        for (Index checkIndex : targetIndexes) {
+            Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
+            markingMarkedPerson = model.checkForMarkedPerson(personToCheck);
+            if (markingMarkedPerson) {
+                throw new CommandException(MESSAGE_MARKING_MARKED_PERSON);
+            }
+        }
 
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {

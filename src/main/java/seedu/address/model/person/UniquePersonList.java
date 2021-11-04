@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.done.Done;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -120,6 +121,23 @@ public class UniquePersonList implements Iterable<Person> {
         Person markedPerson = internalList.get(index);
         markedPerson.getDone().setAsDone();
         internalList.set(index, markedPerson);
+
+    }
+
+    /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Done" returns true; false otherwise.
+     */
+    public boolean checkForMarkedPerson(Person toCheck) {
+        requireNonNull(toCheck);
+
+        int index = internalList.indexOf(toCheck);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person markedPerson = internalList.get(index);
+        return markedPerson.getDone().equals(Done.DONE);
 
     }
 
