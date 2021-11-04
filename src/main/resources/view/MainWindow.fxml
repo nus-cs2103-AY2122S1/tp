@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="690" minWidth="900" onCloseRequest="#handleExit" title="MrTechRecruiter" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="690" maxWidth="900" minHeight="690" minWidth="900" onCloseRequest="#handleExit" title="MrTechRecruiter" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -28,9 +28,7 @@
       </stylesheets>
 
       <VBox maxWidth="-Infinity" minHeight="-Infinity" prefHeight="630.0" prefWidth="650.0">
-
-        <StackPane fx:id="statusbarPlaceholder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="650.0" styleClass="pane-with-border" />
-            <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="650.0">
+            <AnchorPane minWidth="-Infinity" prefHeight="43.0" prefWidth="676.0">
                <children>
               <MenuBar fx:id="menuBar" layoutX="53.0" prefHeight="43.0" prefWidth="126.0">
                 <Menu mnemonicParsing="false" text="File">
@@ -95,6 +93,8 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
+
+        <StackPane fx:id="statusbarPlaceholder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="870.0" styleClass="background" />
       </VBox>
     </Scene>
   </scene>

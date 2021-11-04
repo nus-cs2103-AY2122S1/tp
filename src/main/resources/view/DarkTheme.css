@@ -155,7 +155,7 @@
 }
 
 /*
- * Change bottommost row bkg color
+ * Change file location row bkg color
  */
 .status-bar {
     -fx-background-color: derive(#FFFFFF, 30%);
@@ -176,7 +176,7 @@
 }
 
 /**
- * Settings of bottommost row - .\data\positionbook.json
+ * Settings of file location row - .\data\positionbook.json
  */
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
@@ -186,13 +186,13 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #FFFFFF;
     -fx-border-width: 1px;
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .grid-pane {
@@ -309,12 +309,15 @@
 }
 
 /*
- * Change scroll bar color
+ * Entire scroll bar color
  */
 .scroll-bar {
     -fx-background-color: derive(#FFFFFF, 20%);
 }
 
+/*
+ * The small scroll box color
+ */
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
     -fx-background-insets: 3;
