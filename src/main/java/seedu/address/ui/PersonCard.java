@@ -145,7 +145,8 @@ public class PersonCard extends UiPart<Region> {
      */
     public boolean isTagTooBright(String tagColour) {
         //@@author e0543978-reused
-        //Reused from https://stackoverflow.com/questions/4679715/is-there-a-way-to-tell-if-a-html-hex-colour-is-light-or-dark
+        //Reused from
+        // https://stackoverflow.com/questions/4679715/is-there-a-way-to-tell-if-a-html-hex-colour-is-light-or-dark
         // with minor modifications
         tagColour = tagColour.substring(1);
         int hexadecimalCode = Integer.parseInt(tagColour, 16);
