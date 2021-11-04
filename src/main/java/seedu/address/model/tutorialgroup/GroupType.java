@@ -28,7 +28,8 @@ public class GroupType implements Comparable<GroupType> {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private Integer parseGroupType(String groupType) {
+    public static Integer parseGroupType(String groupType) {
+        assert groupType.length() == 3;
         return parseInt(groupType.substring(2));
     }
 

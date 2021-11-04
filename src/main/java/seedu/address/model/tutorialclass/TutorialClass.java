@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -84,9 +86,8 @@ public class TutorialClass {
      *
      * @return List of tutorial groups
      */
-    public List<TutorialGroup> getTutorialGroupsAsList() {
-        ArrayList<TutorialGroup> result = new ArrayList<>(tutorialGroups.getInternalList());
-        return result;
+    public ObservableList<TutorialGroup> getTutorialGroupsAsList() {
+        return tutorialGroups.asUnmodifiableObservableList();
     }
 
     public Set<Tag> getTags() {

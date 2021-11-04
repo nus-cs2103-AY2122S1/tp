@@ -29,7 +29,7 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE));
         }
 
-        GroupNumber groupNumber = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPNUMBER).get());
+        GroupNumber groupNumber = ParserUtil.parseGroupNumber(argMultimap.getValue(PREFIX_GROUPNUMBER).get());
         ClassCode classCode = ParserUtil.parseClassCode(argMultimap.getValue(PREFIX_CLASSCODE).get());
         GroupType groupType = ParserUtil.parseGroupType(argMultimap.getValue(PREFIX_TYPE).get());
 

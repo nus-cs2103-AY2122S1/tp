@@ -154,13 +154,13 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the given {@code schedule} is invalid.
      */
-    public static GroupNumber parseGroupName(String groupName) throws ParseException {
-        requireNonNull(groupName);
-        String trimmedGroupName = groupName.trim();
-        if (!GroupNumber.isValidGroupNumber(groupName)) {
+    public static GroupNumber parseGroupNumber(String groupNumber) throws ParseException {
+        requireNonNull(groupNumber);
+        String trimmedGroupNumber = groupNumber.trim();
+        if (!GroupNumber.isValidGroupNumber(trimmedGroupNumber)) {
             throw new ParseException(GroupNumber.MESSAGE_CONSTRAINTS);
         }
-        return new GroupNumber(trimmedGroupName);
+        return new GroupNumber(trimmedGroupNumber);
     }
 
     /**
@@ -170,10 +170,11 @@ public class ParserUtil {
      */
     public static GroupType parseGroupType(String groupType) throws ParseException {
         requireNonNull(groupType);
-        if (!GroupType.isValidGroupType(groupType)) {
+        String trimmedGroupType = groupType.trim();
+        if (!GroupType.isValidGroupType(trimmedGroupType)) {
             throw new ParseException(GroupType.MESSAGE_CONSTRAINTS);
         }
-        return new GroupType(groupType.toUpperCase());
+        return new GroupType(trimmedGroupType.toUpperCase());
     }
 
     /**

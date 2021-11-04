@@ -19,6 +19,8 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.GroupNumber;
+import seedu.address.model.tutorialgroup.GroupType;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -26,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_GROUP_NUMBER = "a";
+    private static final String INVALID_GROUP_TYPE = "OP3";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_GROUP_NUMBER = "1";
+    private static final String VALID_GROUP_TYPE = "OP1";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +198,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseGroupNumber_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupNumber((String) null));
+    }
+
+    @Test
+    public void parseGroupNumber_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupNumber(INVALID_GROUP_NUMBER));
+    }
+
+    @Test
+    public void parseGroupNumber_validValueWithoutWhitespace_returnsGroupNumber() throws Exception {
+        GroupNumber expectedGroupNumber = new GroupNumber(VALID_GROUP_NUMBER);
+        assertEquals(expectedGroupNumber, ParserUtil.parseGroupNumber(VALID_GROUP_NUMBER));
+    }
+
+    @Test
+    public void parseGroupNumber_validValueWithWhitespace_returnsTrimmedGroupNumber() throws Exception {
+        String groupNumberWithWhitespace = WHITESPACE + VALID_GROUP_NUMBER + WHITESPACE;
+        GroupNumber expectedGroupNumber = new GroupNumber(VALID_GROUP_NUMBER);
+        assertEquals(expectedGroupNumber, ParserUtil.parseGroupNumber(groupNumberWithWhitespace));
+    }
+
+    @Test
+    public void parseGroupType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupType((String) null));
+    }
+
+    @Test
+    public void parseGroupType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupType(INVALID_GROUP_TYPE));
+    }
+
+    @Test
+    public void parseGroupType_validValueWithoutWhitespace_returnsGroupType() throws Exception {
+        GroupType expectedGroupType = new GroupType(VALID_GROUP_TYPE);
+        assertEquals(expectedGroupType, ParserUtil.parseGroupType(VALID_GROUP_TYPE));
+    }
+
+    @Test
+    public void parseGroupType_validValueWithWhitespace_returnsTrimmedGroupType() throws Exception {
+        String groupTypeWithWhitespace = WHITESPACE + VALID_GROUP_TYPE + WHITESPACE;
+        GroupType expectedGroupType = new GroupType(VALID_GROUP_TYPE);
+        assertEquals(expectedGroupType, ParserUtil.parseGroupType(groupTypeWithWhitespace));
     }
 }

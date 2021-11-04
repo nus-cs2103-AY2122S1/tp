@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G02;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.getTypicalClassmate;
+import static seedu.address.testutil.TypicalTutorialClasses.G01;
+import static seedu.address.testutil.TypicalTutorialClasses.G02;
+import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +28,7 @@ import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorialGroupBuilder;
 
 public class ClassmateTest {
 
@@ -52,7 +57,7 @@ public class ClassmateTest {
         //TODO: Add sample tutorialClasses to tests. Replace new ArrayList in newData constructor line.
         Student alice = new StudentBuilder(ALICE).build();
         List<Student> newStudents = Arrays.asList(ALICE, alice);
-        ClassmateStub newData = new ClassmateStub(newStudents, new ArrayList<>(), new ArrayList<>());
+        ClassmateStub newData = new ClassmateStub(newStudents, new ArrayList<>());
 
         assertThrows(DuplicateStudentException.class, () -> classmate.resetData(newData));
     }
@@ -86,19 +91,42 @@ public class ClassmateTest {
         assertThrows(UnsupportedOperationException.class, () -> classmate.getStudentList().remove(0));
     }
 
+    @Test
+    public void hasTutorialGroup_nullTutorialGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> classmate.hasTutorialGroup(null));
+    }
+
+    @Test
+    public void hasTutorialGroup_tutorialGroupNotInClassmate_returnsFalse() {
+        classmate.addTutorialClass(G01);
+        assertFalse(classmate.hasTutorialGroup(TUT_01));
+    }
+
+    @Test
+    public void hasTutorialGroup_tutorialGroupInClassmate_returnsTrue() {
+        classmate.addTutorialClass(G01);
+        classmate.addTutorialGroup(TUT_01);
+        assertTrue(classmate.hasTutorialGroup(TUT_01));
+    }
+
+    @Test
+    public void hasTutorialGroup_studentWithDifferentClassCodeInClassmate_returnsFalse() {
+        classmate.addTutorialClass(G01);
+        classmate.addTutorialClass(G02);
+        TutorialGroup editedTUT_01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G02).build();
+        assertFalse(classmate.hasTutorialGroup(editedTUT_01));
+    }
+
     /**
      * A stub ReadOnlyClassmate whose students list can violate interface constraints.
      */
     private static class ClassmateStub implements ReadOnlyClassmate {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<TutorialClass> tutorialClasses = FXCollections.observableArrayList();
-        private final ObservableList<TutorialGroup> tutorialGroups = FXCollections.observableArrayList();
 
-        ClassmateStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses,
-                      Collection<TutorialGroup> tutorialGroups) {
+        ClassmateStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses) {
             this.students.setAll(students);
             this.tutorialClasses.setAll(tutorialClasses);
-            this.tutorialGroups.setAll(tutorialGroups);
         }
 
         @Override
