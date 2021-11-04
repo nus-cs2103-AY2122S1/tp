@@ -12,6 +12,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -108,22 +109,15 @@ public class DeleteShiftCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeleteShiftCommand)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        // state check
-        DeleteShiftCommand command = (DeleteShiftCommand) other;
-        return ((index == null && command.index == null) || (index != null && index.equals(command.index)))
-                && ((name == null && command.name == null) || (name != null && name.equals(command.name)))
-                && dayOfWeek.equals(command.dayOfWeek)
-                && slot.equals(command.slot);
+        DeleteShiftCommand that = (DeleteShiftCommand) o;
+        return Objects.equals(index, that.index) && Objects.equals(name, that.name) && dayOfWeek == that.dayOfWeek
+                && slot == that.slot && startDate.equals(that.startDate) && endDate.equals(that.endDate);
     }
 }
