@@ -174,10 +174,35 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Returns true if both students have the same studentId or email.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
+
+        return otherStudent != null
+                && (otherStudent.getStudentId().equals(getStudentId())
+                || otherStudent.getEmailValue().equals(getEmailValue()));
+    }
+
+    /**
+     * Returns true if both students have the same studentId.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudentEmail(Student otherStudent) {
+        if (otherStudent == this) {
+            return true;
+        }
+
+        return otherStudent != null
+                && otherStudent.getEmailValue().equals(getEmailValue());
+    }
+
+
+    /**
+     * Returns true if both students have the same email.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudentId(Student otherStudent) {
         if (otherStudent == this) {
             return true;
         }

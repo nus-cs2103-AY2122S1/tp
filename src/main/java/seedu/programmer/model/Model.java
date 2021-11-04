@@ -61,6 +61,16 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if a student with the same email as {@code student} exists in ProgrammerError.
+     */
+    boolean hasSameStudentEmail(Student student);
+
+    /**
+     * Returns true if a student with the same student id as {@code student} exists in ProgrammerError.
+     */
+    boolean hasSameStudentId(Student student);
+
+    /**
      * Deletes the given student.
      * The student must exist in ProgrammerError.
      */

@@ -70,6 +70,23 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     }
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     */
+    public boolean hasSameStudentId(Student student) {
+        requireNonNull(student);
+        return students.containsSameStudentId(student);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     */
+    public boolean hasSameStudentEmail(Student student) {
+        requireNonNull(student);
+        return students.containsSameEmail(student);
+    }
+
+
+    /**
      * Adds a student to ProgrammerError.
      * The student must not already exist in ProgrammerError.
      */

@@ -24,7 +24,7 @@ You can reach us at the email `shermannws@u.nus.edu`
 <img src="images/erwinqxy.png" width="200px">
 
 [[github](http://github.com/erwinqxy)]
-[[portfolio](team/erwinquek.md)]
+[[portfolio](team/erwinqxy.md)]
 
 - Role: Team Lead
 - Responsibilities: Data

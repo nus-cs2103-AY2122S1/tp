@@ -44,12 +44,31 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns true if the list contains an equivalent student as the given argument.
+     */
+    public boolean containsSameEmail(Student toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameStudentEmail);
+    }
+
+
+    /**
+     * Returns true if the list contains an equivalent student as the given argument.
+     */
+    public boolean containsSameStudentId(Student toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameStudentEmail);
+    }
+
+
+    /**
      * Adds a student to the list and the list is sorted each time.
      * The student must not already exist in the list.
      */
     public void add(Student toAdd) throws DuplicateStudentException {
         requireNonNull(toAdd);
         toAdd.setLabResultRecord(labsTracker);
+
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
         }
@@ -86,10 +105,6 @@ public class UniqueStudentList implements Iterable<Student> {
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new StudentNotFoundException();
-        }
-
-        if (!target.isSameStudent(editedStudent) && contains(editedStudent)) {
-            throw new DuplicateStudentException();
         }
 
         internalList.set(index, editedStudent);
@@ -161,7 +176,7 @@ public class UniqueStudentList implements Iterable<Student> {
     private boolean studentsAreUnique(List<Student> students) {
         for (int i = 0; i < students.size() - 1; i++) {
             for (int j = i + 1; j < students.size(); j++) {
-                if (students.get(i).isSameStudent(students.get(j))) {
+                if (students.get(i).isSameStudent(students.get(j)))  {
                     return false;
                 }
             }
