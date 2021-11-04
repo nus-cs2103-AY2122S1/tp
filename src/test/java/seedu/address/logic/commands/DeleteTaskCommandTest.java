@@ -28,8 +28,8 @@ import seedu.address.model.Label;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.Task;
 import seedu.address.model.tag.TaskTag;
+import seedu.address.model.task.Task;
 
 class DeleteTaskCommandTest {
     private static final Task testTask = new Task(new Label("test label"),
