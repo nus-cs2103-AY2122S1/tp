@@ -7,14 +7,18 @@ ClassMATE is a **desktop app designed for CS2101 tutors to manage student contac
 other administrative matters including recording of students' class participation. It is optimized for use via a Command Line Interface** (CLI) while 
 still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClassMATE can help you organise your students faster than pen and paper, excel and traditional GUI apps.
 
-This guide will get you started on how to create students, classes and groups, 
+This user guide for ClassMATE, which you are reading now, will teach you how to use ClassMATE's features. 
+It will get you started on how to create students, classes and groups, 
 assigning students to their respective classes and groups and covers other functionalities for users 
 such as filtering and searching students. Finally, it will also guide
 you through on how you can add class participation marks for your students.
 
-To get started, learn how to use the user guide [here](#How-to-use-this-User-Guide). Use the Table of Contents below to 
-navigate to relevant sections to learn the commands for ClassMATE. Examples, Tips and Warnings are also provided to guide you through
-understanding the commands.
+The first part is a guide on how to set up ClassMATE and an overview of the symbols and syntax we use in the user guide.
+The remaining sections explain the important features of ClassMATE, such as the Student, 
+Marks, Tutorial Class and Tutorial Group Commands. 
+
+Use the Table of Contents below to 
+navigate to relevant sections to learn the commands for ClassMATE. 
 
 * Table of Contents
 {:toc}
@@ -437,7 +441,6 @@ Action | Format, Examples
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
 **Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
-
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
