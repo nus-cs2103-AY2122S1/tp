@@ -60,6 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private DashboardWindow dashboardWindow;
+    private Popup popup = new Popup();
 
     @FXML
     private Scene primaryScene;
@@ -287,8 +288,8 @@ public class MainWindow extends UiPart<Stage> {
     private void displayPopup(String message) {
         // We should not need to display an empty popup
         assert (message != null);
-        Popup popup = createPopup(message);
         double tenPercent = 1 - NINETY_PERCENT;
+        configurePopup(message);
 
         // Add some left padding according to primaryStage's width
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * tenPercent / 2);
@@ -302,18 +303,16 @@ public class MainWindow extends UiPart<Stage> {
      * Creates a Popup object with a message.
      *
      * @param message The text to display to the user
-     * @return a Popup object
      */
-    private Popup createPopup(String message) {
-        Popup popup = new Popup();
+    private void configurePopup(String message) {
         popup.setAutoFix(true);
         popup.setHideOnEscape(true);
-        Label label = createLabelForPopup(message, popup);
+        Label label = createLabelForPopup(message);
+        popup.getContent().clear();
         popup.getContent().add(label);
-        return popup;
     }
 
-    private Label createLabelForPopup(String message, Popup popup) {
+    private Label createLabelForPopup(String message) {
         Label label = new Label(message);
         label.setWrapText(true);
         label.setMaxWidth(primaryStage.getWidth() * NINETY_PERCENT);
