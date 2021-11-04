@@ -53,9 +53,9 @@ public class CommandTestUtil {
     public static final String VALID_FACULTY_BOB = "FASS";
     public static final String VALID_VACCSTATUS_AMY = "T";
     public static final String VALID_VACCSTATUS_BOB = "F";
-    public static final String VALID_FETDATE_AMY = "20-11-2021";
+    public static final String VALID_FETDATE_AMY = "20-10-2021";
     public static final String VALID_FETDATE_BOB = "02-09-2021";
-    public static final String VALID_COLLECTIONDATE_AMY = "22-11-2021";
+    public static final String VALID_COLLECTIONDATE_AMY = "22-10-2021";
     public static final String VALID_COLLECTIONDATE_BOB = "12-09-2021";
     public static final String VALID_LAST_DATE1_OCT = "10-10-2021";
     public static final String VALID_LAST_DATE2_OCT = "15-10-2021";
@@ -145,11 +145,11 @@ public class CommandTestUtil {
                 .build();
         DESC_FOOTBALL_TRAINING = new EditEventDescriptorBuilder().withName(VALID_VENUE_FOOTBALL_TRAINING)
                 .withDate(VALID_DATE_FOOTBALL_TRAINING).withVenue(VALID_VENUE_FOOTBALL_TRAINING)
-                .withCapacity(VALID_CAPACITY_FOOTBALL_TRAINING)
+                .withCapacity(VALID_CAPACITY_FOOTBALL_TRAINING).withTime(VALID_TIME_FOOTBALL_TRAINING)
                 .build();
         DESC_SWIM_TRAINING = new EditEventDescriptorBuilder().withName(VALID_VENUE_SWIM_TRAINING)
                 .withDate(VALID_DATE_SWIM_TRAINING).withVenue(VALID_VENUE_SWIM_TRAINING)
-                .withCapacity(VALID_CAPACITY_SWIM_TRAINING)
+                .withCapacity(VALID_CAPACITY_SWIM_TRAINING).withTime(VALID_TIME_SWIM_TRAINING)
                 .build();
     }
 

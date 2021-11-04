@@ -1,7 +1,6 @@
 package safeforhall.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static safeforhall.logic.commands.sort.SortPersonCommand.ALLOWED_FIELDS;
 import static safeforhall.logic.commands.sort.SortPersonCommand.ALLOWED_ORDER;
 import static safeforhall.logic.commands.sort.SortPersonCommand.ASCENDING;
 import static safeforhall.logic.commands.sort.SortPersonCommand.DESCENDING;
@@ -14,6 +13,8 @@ import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.ImportCommand;
+import safeforhall.logic.commands.sort.SortEventCommand;
+import safeforhall.logic.commands.sort.SortPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.EventDate;
@@ -183,6 +184,10 @@ public class ParserUtil {
         if (!LastDate.isValidDate(trimmedDate)) {
             throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
         }
+        if (LastDate.isFutureDate(trimmedDate)) {
+            throw new ParseException(LastDate.MESSAGE_IS_FUTURE_DATE);
+        }
+
         return new LastDate(trimmedDate);
     }
 
@@ -327,7 +332,7 @@ public class ParserUtil {
                 LastDate.FET_FIELD, LastDate.COLLECTION_FIELD));
 
         if (!allowedFields.contains(trimmedField)) {
-            throw new ParseException(ALLOWED_FIELDS);
+            throw new ParseException(SortPersonCommand.ALLOWED_FIELDS);
         }
         return trimmedField;
     }
@@ -346,7 +351,7 @@ public class ParserUtil {
                 EventDate.FIELD, Capacity.FIELD, Venue.FIELD));
 
         if (!allowedFields.contains(trimmedField)) {
-            throw new ParseException(ALLOWED_FIELDS);
+            throw new ParseException(SortEventCommand.ALLOWED_FIELDS);
         }
         return trimmedField;
     }
