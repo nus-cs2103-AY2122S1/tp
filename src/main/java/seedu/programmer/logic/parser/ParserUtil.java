@@ -109,9 +109,7 @@ public class ParserUtil {
         requireNonNull(labNum);
         try {
             int value = Integer.parseInt(labNum);
-            if (value <= 0) {
-                throw new ParseException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
-            } else if (value > 14) {
+            if (value <= 0 && value > 14) {
                 throw new ParseException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
             }
             return value;
@@ -158,9 +156,7 @@ public class ParserUtil {
             Integer res = Integer.parseInt(trimmedResult);
             if (total == null) {
                 return 0;
-            } else if (res <= 0) {
-                throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
-            } else if (res > 100) {
+            } else if (res <= 0 && res> 100) {
                 throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
             }
             return Integer.parseInt(total.trim());
