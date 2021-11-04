@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
@@ -23,8 +25,12 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
+    private static final String INVALID_BIRTHDAY_MESSAGE = "%s's birthday %s is invalid. "
+            + "Will start with empty birthday.";
+    private static final String INVALID_PIN_MESSAGE = "%s's pin status %s is invalid. "
+            + "Will start with not pinned by default.";
 
     private final String name;
     private final String phone;
@@ -76,7 +82,8 @@ class JsonAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            Tag currentTag = tag.toModelType();
+            personTags.add(currentTag);
         }
 
         if (name == null) {
@@ -111,15 +118,19 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Pin modelPin;
+
         if (pin == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
+            logger.info(String.format(INVALID_PIN_MESSAGE, name, "null"));
+            modelPin = new Pin(false);
+            //throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
+        } else if (!Pin.isValidPinStatus(pin)) {
+            logger.info(String.format(INVALID_PIN_MESSAGE, name, pin));
+            modelPin = new Pin(false);
+            //throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
+        } else {
+            modelPin = new Pin(pin);
         }
-
-        if (!Pin.isValidPinStatus(pin)) {
-            throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
-        }
-
-        final Pin modelPin = new Pin(pin);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -127,14 +138,16 @@ class JsonAdaptedPerson {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null, modelPin);
         }
 
-        // Set birthday if non-null
+        final Birthday modelBirthday;
         if (!Birthday.isValidFormat(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
+            modelBirthday = null;
+        } else if (!Birthday.isValidDate(birthday)) {
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
+            modelBirthday = null;
+        } else {
+            modelBirthday = new Birthday(birthday);
         }
-        if (!Birthday.isValidDate(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
-        }
-        final Birthday modelBirthday = new Birthday(birthday);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelPin);
     }

@@ -34,7 +34,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `connections.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
+1. Download the latest `CONNECTIONS.jar` from [here](https://github.com/AY2122S1-CS2103-F09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home directory_ for your CONNECTIONS.
 
@@ -132,6 +132,7 @@ Notes:
 * Phone number must be unique.
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.
+* Each tag has a character limit of 60.
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -176,6 +177,7 @@ Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * New tags will be added on top of existing tags i.e. tags added is cumulative.
 * Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags.
+* Tags have a character limit of 60.
 
 **Sample Usage:**
 * `tag 2 t/friend t/NUS`
@@ -400,17 +402,14 @@ CONNECTIONS data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-CONNECTIONS data are saved as a JSON file `[JAR file location]/data/connections.json`. Advanced users are welcome to update data directly by editing that data file.
+CONNECTIONS data are saved as a JSON file `[JAR file location]/data/CONNECTIONS.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (no birthday and not pinned). Other data will be recovered. 
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
