@@ -74,8 +74,4 @@ public class ModuleCode {
     public int hashCode() {
         return value.hashCode();
     }
-
-    public int compareTo(ModuleCode c) {
-        return this.value.toLowerCase().compareTo(c.value.toLowerCase());
-    }
 }
