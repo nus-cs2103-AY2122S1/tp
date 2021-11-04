@@ -18,10 +18,6 @@ import seedu.programmer.model.student.comparator.SortByLabNumber;
  */
 public class Student implements DisplayableObject {
 
-    public static final String REQUIRE_POSITIVE_SCORE = "The student score should be a positive value.";
-
-    public static final String EXCEEDED_TOTAL_SCORE = "The student score should be less than or equal to total score";
-
     // Identity fields
     private final Name name;
     private final StudentId studentId;
@@ -92,11 +88,12 @@ public class Student implements DisplayableObject {
     /**
      * Returns a labList with all labs unmarked.
      * */
-    public ObservableList<Lab> getFreshLabList() {
-        ObservableList<Lab> freshCopy = FXCollections.observableArrayList();
+    public List<Lab> getFreshLabList() {
+        List<Lab> freshCopy = new ArrayList<>();
         for (Lab lab : labList) {
             freshCopy.add(new Lab(lab.getLabNum(), lab.getLabTotal()));
         }
+        freshCopy.sort(new SortByLabNumber());
         return freshCopy;
     }
 
@@ -130,8 +127,9 @@ public class Student implements DisplayableObject {
      * Updates a lab's score  for a student
      * */
     public void editLabScore(Lab lab , LabResult score) throws CommandException {
-        if (score.getLabResult() > lab.getLabTotal().getLabTotal()) {
-            throw new CommandException(EXCEEDED_TOTAL_SCORE);
+        Integer labTotalScore = lab.getLabTotal().getLabTotalScore();
+        if (score.getLabResult() > labTotalScore) {
+            throw new CommandException(warnExceedTotalScore(score.getLabResult(), labTotalScore));
         }
         int index = this.labList.indexOf(lab);
         Lab current = this.labList.get(index);
@@ -144,8 +142,8 @@ public class Student implements DisplayableObject {
      * */
     public boolean editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
         Lab newLab = new Lab(newLabNum);
-        int index2 = this.labList.indexOf(newLab);
-        if (index2 == -1) {
+        int indexNewLab = this.labList.indexOf(newLab);
+        if (indexNewLab == -1) {
             int index = this.labList.indexOf(lab);
             Lab current = this.labList.get(index);
             current.updateLabNum(newLabNum);
@@ -159,9 +157,12 @@ public class Student implements DisplayableObject {
 
     public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
-            labResultRecord = new ArrayList<>();
+            return;
         }
-        this.labList.addAll(labResultRecord);
+
+        for (Lab lab : labResultRecord) {
+            labList.add(lab.copy());
+        }
     }
 
     public void setLabList(ObservableList<Lab> labList) {
@@ -177,10 +178,7 @@ public class Student implements DisplayableObject {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
-
-        return otherStudent != null
-                && (otherStudent.getStudentId().equals(getStudentId())
-                || otherStudent.getEmailValue().equals(getEmail()));
+        return isSameStudentId(otherStudent) || isSameStudentEmail(otherStudent);
     }
 
     /**
@@ -188,12 +186,8 @@ public class Student implements DisplayableObject {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudentEmail(Student otherStudent) {
-        if (otherStudent == this) {
-            return true;
-        }
-
         return otherStudent != null
-                && otherStudent.getEmailValue().equals(getEmailValue());
+                && otherStudent.getEmail().equals(getEmail());
     }
 
 
@@ -202,12 +196,12 @@ public class Student implements DisplayableObject {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudentId(Student otherStudent) {
-        if (otherStudent == this) {
-            return true;
-        }
-
         return otherStudent != null
                 && otherStudent.getStudentId().equals(getStudentId());
+    }
+
+    private String warnExceedTotalScore(int score, int totalScore) {
+        return String.format( "Error: New score %d exceeds total score of %d", score, totalScore);
     }
 
     /**

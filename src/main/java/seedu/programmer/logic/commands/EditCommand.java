@@ -83,8 +83,19 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        //Check if the user edits any field.
+        //Different from the one in EditCommandParser: at this stage user can enter an input
+        //that is identical to the existing field.
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
+        if (model.hasOtherStudent(studentToEdit, editedStudent)) {
+            if (model.hasOtherSameStudentId(studentToEdit, editedStudent)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
+            } else if (model.hasOtherSameStudentEmail(studentToEdit, editedStudent)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
+            }
         }
 
         model.setStudent(studentToEdit, editedStudent);

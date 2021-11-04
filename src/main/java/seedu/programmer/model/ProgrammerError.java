@@ -1,6 +1,7 @@
 package seedu.programmer.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -83,6 +84,34 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     public boolean hasSameStudentEmail(Student student) {
         requireNonNull(student);
         return students.containsSameEmail(student);
+    }
+
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        return students.containsOther(studentToEdit, editedStudent);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        return students.containsOtherSameStudentId(studentToEdit, editedStudent);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        return students.containsOtherSameEmail(studentToEdit, editedStudent);
     }
 
 
