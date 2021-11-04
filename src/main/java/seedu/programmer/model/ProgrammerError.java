@@ -92,7 +92,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      * excluding himself/herself.
      */
     public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         return students.containsOther(studentToEdit, editedStudent);
     }
 
@@ -101,7 +101,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      * excluding himself/herself.
      */
     public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         return students.containsOtherSameStudentId(studentToEdit, editedStudent);
     }
 
@@ -110,7 +110,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      * excluding himself/herself.
      */
     public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         return students.containsOtherSameEmail(studentToEdit, editedStudent);
     }
 

@@ -112,19 +112,19 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         return programmerError.hasOtherStudent(studentToEdit, editedStudent);
     }
 
     @Override
     public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         return programmerError.hasOtherSameStudentId(studentToEdit, editedStudent);
     }
 
     @Override
     public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         return programmerError.hasOtherSameStudentEmail(studentToEdit, editedStudent);
     }
 

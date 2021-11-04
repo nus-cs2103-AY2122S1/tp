@@ -161,11 +161,28 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasSameStudentId(Student student) { throw new AssertionError("This method should not be called.");
+        public boolean hasSameStudentId(Student student) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasSameStudentEmail(Student student) { throw new AssertionError("This method should not be called.");
+        public boolean hasSameStudentEmail(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
+            return false;
+        }
+
+        @Override
+        public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
+            return false;
+        }
+
+        @Override
+        public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
+            return false;
         }
 
         @Override

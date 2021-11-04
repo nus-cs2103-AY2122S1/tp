@@ -67,7 +67,7 @@ public class UniqueStudentList implements Iterable<Student> {
      * excluding himself/herself.
      */
     public boolean containsOther(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         List<Student> studentListCopy = new ArrayList<>();
         for (Student student : internalList) {
             studentListCopy.add(student.copy());
@@ -81,7 +81,7 @@ public class UniqueStudentList implements Iterable<Student> {
      * excluding himself/herself.
      */
     public boolean containsOtherSameEmail(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         List<Student> studentListCopy = new ArrayList<>();
         for (Student student : internalList) {
             studentListCopy.add(student.copy());
@@ -96,7 +96,7 @@ public class UniqueStudentList implements Iterable<Student> {
      * excluding himself/herself.
      */
     public boolean containsOtherSameStudentId(Student studentToEdit, Student editedStudent) {
-        requireAllNonNull(studentToEdit,editedStudent);
+        requireAllNonNull(studentToEdit, editedStudent);
         List<Student> studentListCopy = new ArrayList<>();
         for (Student student : internalList) {
             studentListCopy.add(student.copy());
@@ -223,7 +223,7 @@ public class UniqueStudentList implements Iterable<Student> {
     private boolean studentsAreUnique(List<Student> students) {
         for (int i = 0; i < students.size() - 1; i++) {
             for (int j = i + 1; j < students.size(); j++) {
-                if (students.get(i).equals(students.get(j)))  {
+                if (students.get(i).equals(students.get(j))) {
                     return false;
                 }
             }
