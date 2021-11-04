@@ -26,7 +26,7 @@ public class Notor implements ReadOnlyNotor {
             + "Some things this application can do are: \n"
             + "person /list : Lists all contacts.\n"
             + "person 3 /delete : Deletes the 3rd contact (contact with index number 3) shown in the current list.\n"
-            + "person User /create p:83248324 e:sampleuser@gmail.com : Creates a person named User with the phone and" 
+            + "person User /create p:83248324 e:sampleuser@gmail.com : Creates a person named User with the phone and"
             + " email listed \n\n\n ...and much more!";
 
     private final UniqueList<Person> persons;
