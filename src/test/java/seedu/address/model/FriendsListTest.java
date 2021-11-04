@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
+import static seedu.address.testutil.TypicalFriends.ALICE_FRIEND_ID;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,7 +20,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
+import seedu.address.testutil.GameFriendLinkBuilder;
 
 public class FriendsListTest {
 
@@ -39,6 +43,37 @@ public class FriendsListTest {
         FriendsList newData = getTypicalFriendsList();
         friendsList.resetData(newData);
         assertEquals(newData, friendsList);
+    }
+
+    @Test
+    public void linkFriend_withValidGameFriendLink_success() {
+        FriendsList newFriendsList = getTypicalFriendsList();
+        Friend friend = getTypicalFriendsList().getFriend(ALICE.getFriendId());
+        GameFriendLink gameFriendLink = new GameFriendLinkBuilder()
+                .withFriendId(ALICE_FRIEND_ID)
+                .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                .withUserName("GoldNova").build();
+        newFriendsList.linkFriend(friend, gameFriendLink);
+        Friend linkedFriend = newFriendsList.getFriend(ALICE.getFriendId());
+        assertTrue(linkedFriend.hasGameAssociation(GENSHIN_IMPACT));
+    }
+
+    @Test
+    public void unlinkFriend_withValidGameFriendLink_success() {
+        FriendsList friendsList = new FriendsList();
+        GameFriendLink gameFriendLink = new GameFriendLinkBuilder()
+                .withFriendId(ALICE_FRIEND_ID)
+                .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                .withUserName("GoldNova").build();
+        Friend friendBeforeUnlink =
+                new FriendBuilder().withFriendId(ALICE_FRIEND_ID).withGameFriendLinks(gameFriendLink).build();
+        friendsList.addFriend(friendBeforeUnlink);
+        friendsList.unlinkFriend(friendBeforeUnlink, GENSHIN_IMPACT);
+        Friend friendAfterUnlink =
+                new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        FriendsList expectedFriendsList = new FriendsList();
+        expectedFriendsList.addFriend(friendAfterUnlink);
+        assertEquals(friendsList, expectedFriendsList);
     }
 
     @Test

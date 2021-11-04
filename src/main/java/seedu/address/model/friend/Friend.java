@@ -1,5 +1,6 @@
 package seedu.address.model.friend;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
@@ -84,6 +85,7 @@ public class Friend {
      * @param gameFriendLink gameFriendLink which contains the game to link to, the username and also the skill value.
      */
     public void link(GameFriendLink gameFriendLink) {
+        requireNonNull(gameFriendLink);
         GameId gameId = gameFriendLink.getGameId();
         this.gameFriendLinks.put(gameId, gameFriendLink);
     }

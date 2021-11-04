@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
+import static seedu.address.testutil.TypicalFriends.ALICE_FRIEND_ID;
+import static seedu.address.testutil.TypicalFriends.BENSON_FRIEND_ID;
 import static seedu.address.testutil.TypicalFriends.BOB;
+import static seedu.address.testutil.TypicalGames.CSGO;
+import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,6 +22,7 @@ import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
+import seedu.address.testutil.GameFriendLinkBuilder;
 
 public class UniqueFriendsListTest {
 
@@ -189,5 +194,108 @@ public class UniqueFriendsListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueFriendsList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void link_nullFriend_throwsNullPointerException() {
+        // null friend input
+        GameFriendLink gameFriendLink =
+                new GameFriendLinkBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                        .withUserName("GoldNova").build();
+        assertThrows(NullPointerException.class, () -> uniqueFriendsList.link(null, gameFriendLink));
+    }
+
+    @Test
+    public void link_nullGameFriendLink_throwsNullPointerException() {
+        // null gfl input
+        assertThrows(NullPointerException.class, () -> uniqueFriendsList.link(ALICE, null));
+    }
+
+    @Test
+    public void link_validFriendAndGfl_success() {
+        // valid input friend and gfl
+        UniqueFriendsList expectedUniqueFriendsList = new UniqueFriendsList();
+        Friend friendToLink = ALICE;
+        uniqueFriendsList.add(friendToLink);
+        GameFriendLink gameFriendLink =
+                new GameFriendLinkBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                        .withUserName("GoldNova").build();
+        friendToLink.link(gameFriendLink);
+        expectedUniqueFriendsList.add(friendToLink);
+        uniqueFriendsList.link(friendToLink, gameFriendLink);
+        assertEquals(expectedUniqueFriendsList, uniqueFriendsList);
+    }
+
+    @Test
+    public void unlink_nullGame_throwsNullPointerException() {
+        // null gfl input
+        assertThrows(NullPointerException.class, () -> uniqueFriendsList.unlink(ALICE, null));
+    }
+
+    @Test
+    public void unlink_nullFriend_throwsNullPointerException() {
+        // null gfl input
+        assertThrows(NullPointerException.class, () -> uniqueFriendsList.unlink(null, CSGO));
+    }
+
+    @Test
+    public void unlink_validFriendAndGame_success() {
+        UniqueFriendsList expectedUniqueFriendsList = new UniqueFriendsList();
+        GameFriendLink gameFriendLink =
+                new GameFriendLinkBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                        .withUserName("GoldNova").build();
+        Friend friendToUnlink = new FriendBuilder().withFriendId(ALICE_FRIEND_ID)
+                .withGameFriendLinks(gameFriendLink).build();
+        uniqueFriendsList.add(friendToUnlink);
+        uniqueFriendsList.unlink(friendToUnlink, GENSHIN_IMPACT);
+        Friend friendAfterUnlink =
+                new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        expectedUniqueFriendsList.add(friendAfterUnlink);
+        assertEquals(expectedUniqueFriendsList, uniqueFriendsList);
+    }
+
+    @Test
+    public void removeLinksAllFriends_validFriendAndGame_success() {
+        // remove link from multiple friends with game
+        UniqueFriendsList expectedUniqueFriendsList = new UniqueFriendsList();
+        GameFriendLink gameFriendLinkAlice =
+                new GameFriendLinkBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                        .withUserName("GoldNova").build();
+
+        GameFriendLink gameFriendLinkBenson =
+                new GameFriendLinkBuilder()
+                        .withFriendId(BENSON_FRIEND_ID)
+                        .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                        .withUserName("BensonBeast").build();
+
+        Friend friendToUnlink = new FriendBuilder().withFriendId(ALICE_FRIEND_ID)
+                .withGameFriendLinks(gameFriendLinkAlice).build();
+        Friend friendToUnlink2 =
+                new FriendBuilder().withFriendId(BENSON_FRIEND_ID)
+                        .withGameFriendLinks(gameFriendLinkBenson).build();
+        uniqueFriendsList.add(friendToUnlink);
+        uniqueFriendsList.add(friendToUnlink2);
+        uniqueFriendsList.removeLinkAllFriends(GENSHIN_IMPACT);
+        Friend friendAfterUnlink =
+                new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        Friend friendAfterUnlink2 =
+                new FriendBuilder().withFriendId(BENSON_FRIEND_ID).build();
+        expectedUniqueFriendsList.add(friendAfterUnlink);
+        expectedUniqueFriendsList.add(friendAfterUnlink2);
+        assertEquals(expectedUniqueFriendsList, uniqueFriendsList);
+    }
+
+    @Test
+    public void removeAll_nullGame_throwsNullPointerException() {
+        // null game input
+        assertThrows(NullPointerException.class, () -> uniqueFriendsList.removeLinkAllFriends(null));
     }
 }
