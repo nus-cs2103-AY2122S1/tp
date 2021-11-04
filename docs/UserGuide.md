@@ -255,8 +255,10 @@ Action | Format, Examples
 **Delete Contact** | `deletecontact INDEX`<br> e.g., `deletecontact 3`
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
 **List Contacts** | `listcontact`
+**Find Contacts** | `findcontact KEYWORD`
 **Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 **Delete Policy** | `deletepolicy INDEX`
+**Edit Policy** | `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] [c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAG] [e/COVERAGE_EXPIRY_DATE] …`
 **List Policies** | `listpolicy`
 **List Contact's Policies** | `clientpolicy PERSON_INDEX`
 **Clear Contact's Policies** | `clearpolicy PERSON_INDEX`
