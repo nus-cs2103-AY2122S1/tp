@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -178,6 +179,21 @@ public class AddTaskCommandTest {
 
         @Override
         public void deleteDoneTasks() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getIndexToEdit(int userIndexZeroBase, Task taskToEdit, List<Task> filteredList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void replacePeopleInTasks(Person personToReplace, Person newPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePeopleFromTasks(Person personToDelete) {
             throw new AssertionError("This method should not be called.");
         }
 
