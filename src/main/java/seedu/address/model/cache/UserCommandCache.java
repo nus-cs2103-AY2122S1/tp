@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.cache;
 
 import static java.util.Objects.requireNonNull;
 
@@ -15,9 +15,9 @@ public class UserCommandCache {
     private List<String> commandCache;
     private int index;
 
-    /** Private constructor of the cache */
+    /** Package private constructor of the cache */
     private UserCommandCache() {
-        this.commandCache = new ArrayList<>();
+        commandCache = new ArrayList<>();
         index = 0;
     }
 
@@ -59,6 +59,7 @@ public class UserCommandCache {
      * @return Last entered command String
      */
     public String getBefore() {
+        requireNonNull(commandCache);
         if (commandCache.size() == 0) {
             return "";
         }
@@ -73,6 +74,7 @@ public class UserCommandCache {
      * @return Last entered command String
      */
     public String getAfter() {
+        requireNonNull(commandCache);
         if (commandCache.size() == 0) {
             return "";
         }
@@ -85,5 +87,14 @@ public class UserCommandCache {
         }
         index = Math.min(commandCache.size() - 1, index);
         return lastCommand;
+    }
+
+    /**
+     * Reset the current cache.
+     * Used for testing.
+     */
+    void reset() {
+        commandCache = new ArrayList<>();
+        index = 0;
     }
 }

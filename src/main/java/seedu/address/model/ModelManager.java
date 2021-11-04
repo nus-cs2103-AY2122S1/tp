@@ -17,6 +17,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.cache.UserCommandCache;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskListManager;
