@@ -55,9 +55,12 @@ public class EditCommand extends Command {
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s updated!\n";
 
+    private static LabNum labNum2;
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
+
 
     /**
      * @param index of the student in the filtered student list to edit
@@ -101,7 +104,11 @@ public class EditCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
-        return new EditCommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
+        if (labNum2 != null) {
+            return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
+                                    + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        }
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
     /**
@@ -111,6 +118,7 @@ public class EditCommand extends Command {
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
             throws CommandException {
         assert studentToEdit != null;
+        labNum2 = null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updateStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
@@ -127,6 +135,7 @@ public class EditCommand extends Command {
             } catch (NullPointerException e) { //when getLab does not find anything
                 throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
             }
+            labNum2 = labNum;
             updatedLab.updateTotal(currTotalScore);
         }
 

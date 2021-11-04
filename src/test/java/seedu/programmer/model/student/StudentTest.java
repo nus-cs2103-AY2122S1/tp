@@ -17,32 +17,43 @@ import seedu.programmer.testutil.StudentBuilder;
 
 public class StudentTest {
 
-    @Test
-    public void isSameStudent() {
-        // same object -> returns true
-        assertTrue(ALICE.isSameStudent(ALICE));
+    // same name, all other attributes different -> returns false
+    private Student editedAlice = new StudentBuilder(ALICE)
+                                .withStudentId(VALID_STUDENT_ID_BOB)
+                                .withClassId(VALID_CLASS_ID_BOB)
+                                .withEmail(VALID_EMAIL_BOB).build();
 
+    @Test
+    public void isSameStudent_differentStudents_returnsFalse() {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
-
-        // same name, all other attributes different -> returns false
-        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB)
-                                                       .withClassId(VALID_CLASS_ID_BOB)
-                                                       .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
+    }
 
-        // different name, all other attributes same -> returns true
+    @Test
+    public void isSameStudent_sameStudents_returnsTrue() {
+        // same object
+        assertTrue(ALICE.isSameStudent(ALICE));
+
+        // different name, all other attributes same
         editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // name differs in case, all other attributes same -> returns true
+        // name differs in case, all other attributes same
         Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameStudent(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns true
+        // name has trailing spaces, all other attributes same
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new StudentBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSameStudent(editedBob));
+    }
+
+    @Test
+    public void copy_ofSampleStudent_createsSameStudent() {
+        Student aliceCopy = ALICE.copy();
+        assertTrue(aliceCopy.isSameStudent(ALICE));
+        assertEquals(aliceCopy.getLabList(), ALICE.getLabList());
     }
 
     @Test

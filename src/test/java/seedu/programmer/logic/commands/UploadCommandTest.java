@@ -10,11 +10,10 @@ import seedu.programmer.model.ModelManager;
 
 public class UploadCommandTest {
     private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_upload_success() {
-        UploadCommandResult expectedCommandResult = new UploadCommandResult(SHOWING_UPLOAD_MESSAGE, model);
-        assertCommandSuccess(new UploadCommand(), model, expectedCommandResult, expectedModel);
+        UploadCommandResult expectedCommandResult = new UploadCommandResult(SHOWING_UPLOAD_MESSAGE);
+        assertCommandSuccess(new UploadCommand(), model, expectedCommandResult, model);
     }
 }
