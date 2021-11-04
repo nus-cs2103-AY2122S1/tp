@@ -12,10 +12,9 @@ import javafx.scene.control.Label;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.ui.infopage.JavafxTest;
 import seedu.address.ui.infopage.TimetableInfoPage;
 
-class TimetableTest extends JavafxTest {
+class TimetableTest {
     private static Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
             new UserPrefs());
     private static ObservableList<TuitionClass> tuitionClasses = UniqueTuitionList.getMostRecentTuitionClasses();
