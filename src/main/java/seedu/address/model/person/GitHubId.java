@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class GitHubId {
 
-    public static final String MESSAGE_CONSTRAINTS = "GitHub ID must be valid, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "GitHub ID must be valid ie alphanumeric separated by single "
+            + "dash and it should not start or end with a dash, and it should not be blank\n Example: Siddharth-Sid";
 
     /*
      * Regex for the GitHub ID.

@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class NusNetworkId {
 
-    public static final String MESSAGE_CONSTRAINTS = "NUS Network ID must be valid, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "NUS Network ID must be valid ie starting with e or E followed "
+            + "by 7 digits, and it should not be blank\nExample: e0123456, E1234567";
 
     /*
      * Regex for the NUS Network ID.
