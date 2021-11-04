@@ -157,13 +157,9 @@ Examples:
 
 Shows a list of all students in ClassMATE.
 
-Entering format: `liststu [c/CLASS_CODE]`
+Entering format: `liststu`
 
-* If the optional field is not provided, all students stored are listed. Otherwise, only students that belong to the field specified are listed.
-
-Examples:
-
-* `liststu c/G06` Lists all students stored in the class `G06`
+* All students stored are listed.
 
 ### Finding students by name: `findstu`
 
