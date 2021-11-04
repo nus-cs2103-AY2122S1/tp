@@ -1,6 +1,5 @@
 ---
-layout: page
-title: Developer Guide
+layout: page title: Developer Guide
 ---
 
 ## **Introduction**
@@ -32,9 +31,7 @@ This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
 
-
-* Table of Contents
-{:toc}
+* Table of Contents {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -78,7 +75,9 @@ section for the general Architectural design of the app. Only changes will be li
 #### Command Changes
 
 ![CommandClassDiagram](images/ParserClasses.png)
-Due to the addition of many new commands and refactoring of the command structure, we have amended the classes related to managing commands.
+
+Due to the addition of many new commands and refactoring of the command structure, we have amended the classes related
+to managing commands.
 
 * `Parser` now takes in generic `T extends Command` since we have multiple types of commands, each with their own unique
   parser
@@ -117,19 +116,23 @@ API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/ma
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
 * `Person` does not contain the `Address` field anymore.
-* `Person` contains a new `Note` field, `SuperGroup` field and `SubGroup` field.
-* `Person` does not contain direct reference to `SuperGroup` and `SubGroup` but
-strings of SuperGroup and for display purposes.
-
-* This UML diagram is the current class structure implemented.
+* `Person` contains a new `Note` field.
+* `Person` contains `HashSet<String>` containing `SuperGroup` and `SubGroup` names for display purposes.
+    * These are just `String` objects, and are not actual references to `Group` objects.
+* `Name` must start with an alphabet character.
+    * This is due to the fact that our parser will be unable to differentiate between indexes and names when parsing
+      commands.
+* `Name` may contain `-` and `.` characters.
+    * This is to account for people with these special characters in their names.
 
 Here is the better class structure to be implemented:
 ![ModelClassDiagram2](images/BetterModelClassDiagram.png)
 
 * `Trie` allows tags to be autocompleted as commands are entered.
-* Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per
-  object.
+* Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per object.
 * Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
+* This feature is planned for a future update, as the `Trie` data structure has already been implemented.
+* This feature could also not be implemented due to short form commands already being very user friendly.
 
 ### Storage component
 
@@ -153,7 +156,7 @@ API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/s
 * Allows grouping and autocompletion of `Tag` and `Command` objects.
 * Supports addition and deletion of items.
 * Supports finding of first item.
-* Supports finding of first item that contains specified keyword.
+* Supports finding of first item that starts with specified keyword.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,9 +168,9 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedNotor`. It extends `Notor` with an undo/redo
-history, stored internally as an `NotorStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedNotor`. It extends `Notor` with an undo/redo history,
+stored internally as an `NotorStateList` and `currentStatePointer`. Additionally, it implements the following
+operations:
 
 * `VersionedNotor#commit()` — Saves the current address book state in its history.
 * `VersionedNotor#undo()` — Restores the previous address book state from its history.
@@ -178,15 +181,14 @@ and `Model#redoNotor()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedNotor` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedNotor` will be initialized with the initial
+address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitNotor()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `NotorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+calls `Model#commitNotor()`, causing the modified state of the address book after the `delete 5` command executes to be
+saved in the `NotorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -218,29 +220,29 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoNotor()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoNotor()`, which shifts the `currentStatePointer` once to the
+right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `NotorStateList.size() - 1`, pointing to the latest address book state, then there are no undone Notor states to restore. The `redo` command uses `Model#canRedoNotor()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitNotor()`, `Model#undoNotor()` or `Model#redoNotor()`.
-Thus, the `NotorStateList` remains unchanged.
+as `list`, will usually not call `Model#commitNotor()`, `Model#undoNotor()` or `Model#redoNotor()`. Thus,
+the `NotorStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitNotor()`. Since the `currentStatePointer` is not
-pointing at the end of the `NotorStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitNotor()`. Since the `currentStatePointer` is not pointing at
+the end of the `NotorStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no
+longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications
+follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
 
 #### Design considerations:
 
@@ -334,8 +336,7 @@ Priorities:<p>
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Notor` and the **Actor** is the `user`, unless specified
-otherwise)
+(For all use cases below, the **System** is the `Notor` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a note to a person**
 
@@ -438,7 +439,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases ... }_
 
 ### Saving data
 
@@ -446,4 +447,4 @@ testers are expected to do more *exploratory* testing.
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. _{ more test cases ... }_
