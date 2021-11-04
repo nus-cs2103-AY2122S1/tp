@@ -1,10 +1,10 @@
 package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_TEMPLATE;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED;
-import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_MISSING_LAB_TO_BE_EDITED;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
@@ -43,7 +43,7 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             }
 
             if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)) {
-                throw new ParseException(String.format(MESSAGE_MISSING_LAB_TO_BE_EDITED,EditLabCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_MISSING_LAB_TO_BE_EDITED, EditLabCommand.MESSAGE_USAGE));
             }
         } catch (InvalidArgFlagsException e) {
             throw new ParseException(
