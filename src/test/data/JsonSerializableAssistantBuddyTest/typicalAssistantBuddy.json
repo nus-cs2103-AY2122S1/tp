@@ -1,0 +1,179 @@
+{
+  "modules" : [ {
+    "moduleName" : "CS2103",
+    "studentList" : [ {
+      "name" : "Amy Bee",
+      "teleHandle" : "@AmyBee",
+      "email" : "amy@example.com",
+      "studentId" : "A1111111A",
+      "studentTaskList" : [ {
+        "moduleName" : "CS2103",
+        "taskId" : "T1",
+        "taskName" : "Assignment 1",
+        "taskDeadline" : "2021-12-31",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2103",
+        "taskId" : "T2",
+        "taskName" : "Assignment 2",
+        "taskDeadline" : "2021-12-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2103",
+        "taskId" : "T3",
+        "taskName" : "Assignment 3",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2103",
+        "taskId" : "T4",
+        "taskName" : "Assignment 4",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      } ]
+    }, {
+      "name" : "Bob Choo",
+      "teleHandle" : "@bobchoo",
+      "email" : "bob@example.com",
+      "studentId" : "A2222222A",
+      "studentTaskList" : [ {
+        "moduleName" : "CS2103",
+        "taskId" : "T1",
+        "taskName" : "Assignment 1",
+        "taskDeadline" : "2021-12-31",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2103",
+        "taskId" : "T2",
+        "taskName" : "Assignment 2",
+        "taskDeadline" : "2021-12-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2103",
+        "taskId" : "T3",
+        "taskName" : "Assignment 3",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2103",
+        "taskId" : "T4",
+        "taskName" : "Assignment 4",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      } ]
+    } ],
+    "taskList" : [ {
+      "moduleName" : "CS2103",
+      "taskId" : "T1",
+      "taskName" : "Assignment 1",
+      "taskDeadline" : "2021-12-31",
+      "isComplete" : false
+    }, {
+      "moduleName" : "CS2103",
+      "taskId" : "T2",
+      "taskName" : "Assignment 2",
+      "taskDeadline" : "2021-12-30",
+      "isComplete" : false
+    }, {
+      "moduleName" : "CS2103",
+      "taskId" : "T3",
+      "taskName" : "Assignment 3",
+      "taskDeadline" : "2021-11-30",
+      "isComplete" : false
+    }, {
+      "moduleName" : "CS2103",
+      "taskId" : "T4",
+      "taskName" : "Assignment 4",
+      "taskDeadline" : "2021-11-30",
+      "isComplete" : false
+    } ]
+  }, {
+    "moduleName" : "CS2100",
+    "studentList" : [ {
+      "name" : "Amy Bee",
+      "teleHandle" : "@AmyBee",
+      "email" : "amy@example.com",
+      "studentId" : "A1111111A",
+      "studentTaskList" : [ {
+        "moduleName" : "CS2100",
+        "taskId" : "T1",
+        "taskName" : "Assignment 1",
+        "taskDeadline" : "2021-12-31",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2100",
+        "taskId" : "T2",
+        "taskName" : "Assignment 2",
+        "taskDeadline" : "2021-12-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2100",
+        "taskId" : "T3",
+        "taskName" : "Assignment 3",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2100",
+        "taskId" : "T4",
+        "taskName" : "Assignment 4",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      } ]
+    }, {
+      "name" : "Bob Choo",
+      "teleHandle" : "@bobchoo",
+      "email" : "bob@example.com",
+      "studentId" : "A2222222A",
+      "studentTaskList" : [ {
+        "moduleName" : "CS2100",
+        "taskId" : "T1",
+        "taskName" : "Assignment 1",
+        "taskDeadline" : "2021-12-31",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2100",
+        "taskId" : "T2",
+        "taskName" : "Assignment 2",
+        "taskDeadline" : "2021-12-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2100",
+        "taskId" : "T3",
+        "taskName" : "Assignment 3",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      }, {
+        "moduleName" : "CS2100",
+        "taskId" : "T4",
+        "taskName" : "Assignment 4",
+        "taskDeadline" : "2021-11-30",
+        "isComplete" : false
+      } ]
+    } ],
+    "taskList" : [ {
+      "moduleName" : "CS2100",
+      "taskId" : "T1",
+      "taskName" : "Assignment 1",
+      "taskDeadline" : "2021-12-31",
+      "isComplete" : false
+    }, {
+      "moduleName" : "CS2100",
+      "taskId" : "T2",
+      "taskName" : "Assignment 2",
+      "taskDeadline" : "2021-12-30",
+      "isComplete" : false
+    }, {
+      "moduleName" : "CS2100",
+      "taskId" : "T3",
+      "taskName" : "Assignment 3",
+      "taskDeadline" : "2021-11-30",
+      "isComplete" : false
+    }, {
+      "moduleName" : "CS2100",
+      "taskId" : "T4",
+      "taskName" : "Assignment 4",
+      "taskDeadline" : "2021-11-30",
+      "isComplete" : false
+    } ]
+  } ]
+}
