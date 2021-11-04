@@ -7,7 +7,7 @@ title: User Guide
 
 ## Table of Contents
 - [Quick start](#quick-start)
-- [Glossary](#glossary) 
+- [Glossary](#glossary)
   - [Terminology used](#terminology-used)
   - [Structure of an elderly contact](#structure-of-an-elderly-contact)
 - [Features](#features)
@@ -21,7 +21,7 @@ title: User Guide
   - [Mark one visit as done](#mark-one-visit-as-done--done)
   - [View summary statistics](#view-summary-statistics--summary)
   - [View help](#view-help--help)
-  - [Download data](#download-data--download)  
+  - [Download data](#download-data--download)
   - [Clear all entries](#clear-all-entries--clear)
   - [Exit the app](#exit-the-program--exit)
 - [FAQ](#faq)
@@ -90,15 +90,15 @@ Quarterly | Every 90 days
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
-* Add elderly with contact details 
-* Delete an elderly or corresponding visit 
-* Edit an elderly 
+* Add elderly with contact details
+* Delete an elderly or corresponding visit
+* Edit an elderly
 * List all or selected elderly
-* Sort elderly by visit or last visit 
-* Find elderly by attribute 
-* Schedule a visit to an elderly 
-* Mark visits as done 
-* View summary statistics 
+* Sort elderly by visit or last visit
+* Find elderly by attribute
+* Schedule a visit to an elderly
+* Mark visits as done
+* View summary statistics
 * View help
 * Download data
 * Clear all entries
@@ -143,7 +143,7 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`.
 * `LAST_VISIT`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
 * `PHONE_NUMBER` must be a 8 digits numeric value for local phone number, with no country codes.
-* `FREQUENCY` and `OCCURRENCE` must both be included or excluded. 
+* `FREQUENCY` and `OCCURRENCE` must both be included or excluded.
 * `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
 * A warning message will be shown if the new `VISIT` datetime entered is in the past.
 * A warning message will be shown if the new `LAST_VISIT` datetime entered is in the future.
@@ -237,7 +237,7 @@ Examples:
 * `list`
   > Displays all the elderly.
 * `list m/`
-  > Displays all the elderly with an incoming visit in the next month. 
+  > Displays all the elderly with an incoming visit in the next month.
 * `list w/`
   > Displays all elderly with an in
 
@@ -258,7 +258,7 @@ Format: `sort [FIELD_TO_BE_SORTED]`
 * Currently, `sort` only supports flags of `last visit` or `visit`.
 </div>
 
-Example: 
+Example:
 * `sort lv/`
   > Sorts the elderly list in descending order of `last visit` date.
 * `sort v/`
@@ -316,7 +316,7 @@ Marks a next visit to an elderly as done.
 
 Format: `done INDEX`
 
-* `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** 
+* `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.**
   There must be a next visit for the elderly before the visit can be marked as done.
 
 <div markdown="block" class="alert alert-info">

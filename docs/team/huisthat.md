@@ -13,7 +13,7 @@ Given below are my contributions to the project.
     * What it does: Allows the user to add visits that happen regularly at a certain frequency and for a certain number of times.
     * Justification: This feature is significant as the user might want to visit the elderly regularly, which is common in this area related to the elderly, and the user would not have to key in the visit everytime.
     * Highlights: This feature affects existing commands and commands to be added in the future relating to visit for the eldery. The implementation was challenging as it required changes to many of the existing commands.
-    
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=huisthat&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Team-based Tasks**:
@@ -35,4 +35,3 @@ Given below are my contributions to the project.
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#102](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/102)
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/huisthat/ped/issues/4), [2](https://github.com/huisthat/ped/issues/5), [3](https://github.com/huisthat/ped/issues/7))
-    
