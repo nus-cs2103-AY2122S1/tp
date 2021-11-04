@@ -168,6 +168,10 @@ time slot exists. If there is a conflict, a `CommandException` will be thrown.
 
 Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
 
+The interactions between the components during the usage scenario is show in the *Sequence Diagram* below.<br>
+![Ui](images/TimeConflictManagementSequence.png)
+
+
 ### [Developed] Display of Timetable
 
 The construction of the read-only timetable is facilitated by the `Timetable` class in the `Tuition` package.
@@ -314,7 +318,7 @@ Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to
     * Cons: Users with a lot of students will need to scroll down to find student indices.
     
 
-### \[Developed\] Undo/redo feature
+### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
