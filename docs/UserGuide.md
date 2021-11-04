@@ -3,14 +3,19 @@ layout: page
 title: User Guide
 ---
 
-ClassMATE is a **desktop app designed for CS2101 tutors to manage student contacts and organize them into their tutorial classes and groups, as well as
-other administrative matters including recording of students' class participation. It is optimized for use via a Command Line Interface** (CLI) while 
-still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClassMATE can get your contact management tasks done faster than traditional GUI apps.
+Are you having trouble with administrative work as a CS2101 tutor? Does current tools like Excel sheets or the pen and paper cause a lot of pain
+when trying to organize and search for students or recording class participation? Could there be a way to streamline this process
+while providing you a better way to visualise the information? Well, ClassMATE has it all covered! ClassMATE is a **desktop app 
+designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' 
+class participation without much hassle. Having both a Command Line Interface** (CLI) 
+and a Graphical User Interface (GUI), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
 
-This guide will get you started on how to create students, classes and groups, 
-assigning students to their respective classes and groups and covers other functionalities for users 
-such as filtering and searching students. Finally, it will also guide
-you through on how you can add class participation marks for your students.
+These are what we have to offer:
+* Create students, classes and groups
+* Organize groups in their respective classes
+* Add students to a class and their respective oral presentation groups within the class
+* Record class participation marks for students
+
 
 * Table of Contents
 {:toc}
@@ -319,28 +324,30 @@ Examples:
 ## Tutorial Group Commands
 
 These are the commands that involve tutorial groups!
+
+The first part covers interactions between groups and classes, while the second part
+covers interactions between students and groups.
+
 ### Adding a group: `addcg`
 
 Adds a group to a particular tutorial class
 
 Format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
+* GROUP_NUMBER should be a single digit
+
+* GROUP_TYPE refers to the assignment that the group will work for. It should only be OP1 or OP2.
+
+* The class must have already been added to ClassMATE first. If you are unsure, you can refer to
+  [Adding a Tutorial Class](#adding-a-tutorial-class)
+
+* Tutorial groups are identified by GROUP_NUMBER, GROUP_TYPE and CLASS_CODE. This means that
+  any two tutorial groups are identical if all three fields are identical, which is not allowed.
+
 Examples:
 * `addcg gn/1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
-* Group Type refers to the assignment that the group will work together for.
 
-<div markdown="span" class="alert alert-info">**:information_source: Note:**
-Group types for ClassMATE should only be OP1 or OP2.
-</div>
-
-### Adding a group: `addcg`
-
-Adds a group to a particular tutorial class
-
-Format: `addcg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
-
-Examples: `addcg gn/1 c/G01 type/OP1` adds `OP1` Group `1` to class `G01`
 
 ### Viewing a Group: `viewg`
 
@@ -356,7 +363,11 @@ Examples:
 
 Deletes a group from ClassMATE
 
-Format: `deletecg c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
+Format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
+
+* GROUP_NUMBER should be a single digit
+
+* GROUP_TYPE refers to the assignment that the group will work for. It should only be OP1 or OP2.
 
 Examples:
 * `deletecg c/G06 type/OP2 gn/1` deletes the `OP2` Group `1` of class `G06`
