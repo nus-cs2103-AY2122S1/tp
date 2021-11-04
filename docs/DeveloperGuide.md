@@ -48,7 +48,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img align="center" src="images/DeveloperGuideImage/ArchitectureDiagram.png" width="280" />
+<center>
+<img src="images/DeveloperGuideImage/ArchitectureDiagram.png" width="280" />
+</center>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
