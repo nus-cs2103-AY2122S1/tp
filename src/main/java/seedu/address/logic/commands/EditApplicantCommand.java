@@ -25,13 +25,13 @@ public class EditApplicantCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
             + "by the index number used in the displayed applicant list. "
-            + "Existing values will be overwritten by the input values."
+            + "Existing values will be overwritten by the input values." + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_POSITION + "POSITION] "
+            + "[" + PREFIX_POSITION + "POSITION] " + "\n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com ";
@@ -73,8 +73,6 @@ public class EditApplicantCommand extends Command {
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit, model);
-
-
 
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
