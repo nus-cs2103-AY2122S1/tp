@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.core.Messages;
+import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
@@ -46,12 +47,17 @@ public class EditFolderNameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.hasFolder(oldFolder)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
-        }
+
         if (newFolder.getFolderName().equals(oldFolder.getFolderName())) {
             throw new CommandException(MESSAGE_SAME_FOLDER_NAME_ENTERED);
         }
+
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+        int indexOfFolder = lastShownFolderList.indexOf(oldFolder);
+        if (indexOfFolder == -1) {
+            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
+        }
+
         if (model.hasFolder(newFolder)) {
             throw new CommandException(MESSAGE_DUPLICATE_FOLDER);
         }

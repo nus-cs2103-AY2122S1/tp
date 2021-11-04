@@ -56,12 +56,15 @@ public class DeletePersonFromFolderCommand extends Command {
         requireNonNull(model);
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+
+        int indexOfFolder = lastShownFolderList.indexOf(targetFolder);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_UNION);
         }
 
-        if (!model.hasFolder(targetFolder)) {
+        if (indexOfFolder == -1) {
             throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }
 

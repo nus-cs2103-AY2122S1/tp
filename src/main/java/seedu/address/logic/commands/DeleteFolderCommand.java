@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
@@ -40,7 +41,10 @@ public class DeleteFolderCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.hasFolder(folderToRemove)) {
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+        int indexOfFolder = lastShownFolderList.indexOf(folderToRemove);
+
+        if (indexOfFolder == -1) {
             throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }
 
