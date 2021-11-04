@@ -140,6 +140,7 @@ public class EditCommandTest {
                         emptyPersonDescriptor.getDescription().orElse(personToEdit.getDescription()),
                         emptyPersonDescriptor.getImportance().orElse(personToEdit.isImportant())
                 );
+
         String editedTaskMessage = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
                 + editedTaskMessage;

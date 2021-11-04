@@ -93,21 +93,13 @@ to quickly navigate to the command of your choice.
   e.g. if the command format is `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
 * If a parameter is expected only once in the command format but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
-  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.
+  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this such as the find command. In such cases, if a parameter is expected only once, an error message will appear.
 
 * Extraneous parameters for commands that do not take in parameters (such as `ls`, `exit` and `clear`) will be ignored.<br>
   e.g. if you specifiy `ls 123`, the command will be interpreted as `ls`.
 
 </div>
 
-<<<<<<< HEAD
-### Viewing instructions : `man`
-
-Shows you a table of instructions that can be used to navigate the app.
-
-Format: `man`
-
-=======
 ### Viewing details of instructions: `man`
 
 Shows you details of instructions that can be used to navigate the app.
@@ -128,7 +120,6 @@ Parameters: [-r]
 Example: sort -r
 ```
 
->>>>>>> origin/master
 ### Adding a person: `add`
 
 Adds a person to ContactSH.

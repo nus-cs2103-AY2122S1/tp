@@ -110,6 +110,10 @@ public class HelpCommand extends Command {
                 commandResult = new CommandResult(UndoCommand.MESSAGE_USAGE);
                 break;
 
+            case ReminderCommand.COMMAND_WORD:
+                commandResult = new CommandResult(ReminderCommand.MESSAGE_USAGE);
+                break;
+
             default:
                 break;
             }

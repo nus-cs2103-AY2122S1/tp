@@ -13,8 +13,8 @@ public class AccessCacheCommandParser implements Parser<Command> {
     public Command parse(String internalCommandString) throws ParseException {
         requireNonNull(internalCommandString);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(internalCommandString, PREFIX_KEY_DIRECTION);
-
         if (argMultimap.getValue(PREFIX_KEY_DIRECTION).isEmpty()) {
+
             throw new ParseException(MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT);
         }
         return new AccessCacheCommand(argMultimap.getValue(PREFIX_KEY_DIRECTION).get());
