@@ -27,8 +27,9 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task, specified by the TASKINDEX, from person "
             + "identified by the index number used in the displayed person list as done.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK_INDEX + " TaskIndex (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
+            + PREFIX_TASK_INDEX + " TaskIndex (must be a positive integer less than or equal to " + Integer.MAX_VALUE
+            + ")\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
     public static final String DESCRIPTION = "Marks the task(s), specified by the TASK_INDEX, "

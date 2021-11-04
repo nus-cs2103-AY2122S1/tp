@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,14 +51,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION
             + " by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]"
             + "[" + PREFIX_DESCRIPTION + "Description]"
-            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer)"
+            + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer less than or equal to "
+            + Integer.MAX_VALUE + ")\n"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
             + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
@@ -125,6 +125,8 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        String editedTaskMessage = "";
+
         if (targetTaskIndex != null) {
             List<Task> tasks = new ArrayList<>();
             tasks.addAll(personToEdit.getTasks());
@@ -146,14 +148,21 @@ public class EditCommand extends Command {
                     editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
                     editedPerson.isImportant()
             );
+
+            editedTaskMessage = String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask);
         }
         // If the edited details result in a duplicate person, throw an exception.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        if (targetTaskIndex == null) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
+                    + editedTaskMessage);
+        }
     }
 
     /**
