@@ -14,10 +14,13 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ImportCommand parse(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(ImportCommand.MESSAGE_USAGE);
+        String fileName = args.trim();
+
+        if (!fileName.endsWith(".json") || fileName.equals(".json")) {
+            throw new ParseException(ImportCommand.MESSAGE_WRONG_FORMAT);
         }
-        return new ImportCommand(args.trim());
+
+        return new ImportCommand(fileName);
     }
 
 }

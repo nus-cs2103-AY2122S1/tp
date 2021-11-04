@@ -36,11 +36,12 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IO_ERROR =
             "Problem while reading from the file. Will be starting with an empty AddressBook";
     public static final String MESSAGE_FILE_NOT_FOUND = "File not found. Please try again";
+    public static final String MESSAGE_WRONG_FORMAT = "Imported file must be in JSON format";
 
     private final Path importedFilePath; // fileName.json
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an ImportCommand to import the specified {@code importedFileName}
      */
     public ImportCommand(String importedFileName) {
         requireNonNull(importedFileName);

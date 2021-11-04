@@ -28,6 +28,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "File successfully exported as JSON format to %s";
     public static final String MESSAGE_IO_ERROR =
             "Problem while writing to the file. Please try again";
+    public static final String MESSAGE_WRONG_FORMAT = "File can only be exported to JSON format";
 
     private final Path outputFilePath; // fileName.json
 

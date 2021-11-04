@@ -14,10 +14,14 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ExportCommand parse(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(ExportCommand.MESSAGE_USAGE);
+        String fileName = args.trim();
+
+        if (!fileName.endsWith(".json") || fileName.equals(".json")) {
+            throw new ParseException(String.format("%s.\n%s", ExportCommand.MESSAGE_WRONG_FORMAT,
+                    ExportCommand.MESSAGE_USAGE));
         }
-        return new ExportCommand(args.trim());
+
+        return new ExportCommand(fileName);
     }
 
 }

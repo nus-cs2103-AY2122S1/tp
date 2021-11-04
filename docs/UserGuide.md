@@ -313,6 +313,26 @@ Examples:
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
 * **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
 
+### Deleting tags: `deletet`
+You can delete tags to a person in the contact book by `INDEX`. Alternatively, you can delete tags for everyone in the
+contact book by replacing `INDEX` with the word `all`.
+
+Format: **`deletet`** `INDEX [t/TAG]…​`
+* Delete tags of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
+* The tag refers to the tags to delete from the person.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, all tags of the person will be deleted.
+* `TAG` is case-sensitive
+
+Alternatively, **`deletet`** `all [t/TAG]…​`
+* Delete tags of everybody in the list.
+* The tag refers to the tags to delete from everyone.
+* Existing tag will be removed if one of the input tags is the existing tag.
+* If no `TAG` is provided, every tag in the list will be deleted.
+* `TAG` is case-sensitive
+
 ### Deleting multiple person: `deletem`
 
 You can delete multiple person from the contact book using `KEYWORD`.
@@ -462,6 +482,7 @@ You can export your contact book and share it with your friends.
 
 Format: **`export`** `FILE_NAME.json`
 
+* File can only be exported to JSON format.
 * File will be stored in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
