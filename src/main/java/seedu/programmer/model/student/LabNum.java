@@ -7,35 +7,35 @@ import static java.util.Objects.requireNonNull;
  */
 public class LabNum {
 
-    private final Integer labnum;
+    private final Integer labNum;
 
     /**
      * Constructs a {@code Name}.
      *
-     * @param labnum A valid name.
+     * @param labNum A valid name.
      */
-    public LabNum(Integer labnum) {
-        requireNonNull(labnum);
+    public LabNum(Integer labNum) {
+        requireNonNull(labNum);
         //checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.labnum = labnum;
+        this.labNum = labNum;
     }
 
-    public int getLabNum() { return this.labnum; }
+    public Integer getLabNum() { return this.labNum; }
 
     @Override
     public String toString() {
-        return labnum.toString();
+        return labNum.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LabNum // instanceof handles nulls
-                && labnum.equals(((LabNum) other).labnum)); // state check
+                && labNum.equals(((LabNum) other).labNum)); // state check
     }
 
     @Override
     public int hashCode() {
-        return labnum.hashCode();
+        return labNum.hashCode();
     }
 }

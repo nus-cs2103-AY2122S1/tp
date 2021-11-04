@@ -60,6 +60,19 @@ public class Lab implements DisplayableObject {
         return totalScore;
     }
 
+    public String getLabNumValue() {
+        return labNum.getLabNum().toString();
+    }
+
+    //todo
+    public String getActualScoreValue() {
+        return actualScore.toString();
+    }
+
+    public String getTotalScoreValue() {
+        return totalScore.toString();
+    }
+
     public void updateActualScore(Integer value) {
         this.actualScore = value;
     }
