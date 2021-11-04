@@ -114,7 +114,7 @@ public class SampleDataUtil {
 
     public static Integer getRandomLabScore (Lab lab) {
         Random r = new Random();
-        Integer maxScore = lab.getLabTotal().getLabTotal();
+        Integer maxScore = lab.getLabTotal().getLabTotalScore();
         return r.nextInt(maxScore);
     }
 

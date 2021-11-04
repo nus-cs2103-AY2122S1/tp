@@ -18,10 +18,6 @@ import seedu.programmer.model.student.comparator.SortByLabNumber;
  */
 public class Student implements DisplayableObject {
 
-    public static final String REQUIRE_POSITIVE_SCORE = "The student score should be a positive value.";
-
-    public static final String EXCEEDED_TOTAL_SCORE = "The student score should be less than or equal to total score";
-
     // Identity fields
     private final Name name;
     private final StudentId studentId;
@@ -130,8 +126,9 @@ public class Student implements DisplayableObject {
      * Updates a lab's score  for a student
      * */
     public void editLabScore(Lab lab , LabResult score) throws CommandException {
-        if (score.getLabResult() > lab.getLabTotal().getLabTotal()) {
-            throw new CommandException(EXCEEDED_TOTAL_SCORE);
+        Integer labTotalScore = lab.getLabTotal().getLabTotalScore();
+        if (score.getLabResult() > labTotalScore) {
+            throw new CommandException(warnExceedTotalScore(score.getLabResult(), labTotalScore));
         }
         int index = this.labList.indexOf(lab);
         Lab current = this.labList.get(index);
@@ -183,6 +180,10 @@ public class Student implements DisplayableObject {
 
         return otherStudent != null
                 && otherStudent.getStudentId().equals(getStudentId());
+    }
+
+    private String warnExceedTotalScore(int score, int totalScore) {
+        return String.format( "Error: New score %d exceeds total score of %d", score, totalScore);
     }
 
     /**
