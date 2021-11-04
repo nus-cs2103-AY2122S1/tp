@@ -6,20 +6,29 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage{
 
-package "UserPrefs Storage" #F4F6F6{
-Interface UserPrefsStorage <<Interface>>
-Class JsonUserPrefsStorage
+package "BookKeeping Storage" #F4F6F6{
+Interface BookKeepingStorage <<Interface>>
+Class JsonBookKeepingStorage
+Class JsonSerializableBookKeeping
 }
 
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "Inventory Storage" #F4F6F6{
+Interface InventoryStorage <<Interface>>
+Class JsonInventoryStorage
+Class JsonSerializableInventory
+Class JsonAdaptedItem
 Class JsonAdaptedTag
+}
+
+package "Transaction Storage" #F4F6F6{
+Interface TransactionStorage <<Interface>>
+Class JsonTransactionStorage
+Class JsonSerializableTransaction
+Class JsonAdaptedOrder
+Class JsonAdaptedItemOrder
 }
 
 }
@@ -28,16 +37,25 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" BookKeepingStorage
+StorageManager -up-> "1" InventoryStorage
+StorageManager -up-> "1" TransactionStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage --|> BookKeepingStorage
+Storage --|> InventoryStorage
+Storage --|> TransactionStorage
 
-JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonBookKeepingStorage .up.|> BookKeepingStorage
+JsonBookKeepingStorage .down.> JsonSerializableBookKeeping
+
+JsonInventoryStorage .up.|> InventoryStorage
+JsonInventoryStorage ..> JsonSerializableInventory
+JsonSerializableInventory --> "*" JsonAdaptedItem
+JsonAdaptedItem --> "*" JsonAdaptedTag
+
+JsonTransactionStorage .up.|> TransactionStorage
+JsonTransactionStorage ..> JsonSerializableTransaction
+JsonSerializableTransaction --> "*" JsonAdaptedOrder
+JsonAdaptedOrder --> "*" JsonAdaptedItemOrder
 
 @enduml

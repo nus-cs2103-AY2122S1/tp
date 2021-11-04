@@ -1,8 +1,5 @@
 ---
-layout: page
-title: Developer Guide
-parent: For Developers
-nav_order: 1
+layout: page title: Developer Guide parent: For Developers nav_order: 1
 ---
 
 * Table of Contents {:toc}
@@ -44,8 +41,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 **`Main`** has two classes
 called [`Main`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It
-is responsible for,
+and [`MainApp`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is
+responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
@@ -153,33 +150,37 @@ API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/s
 
 The `Model` component
 
-- stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
-- stores the current order data i.e., an `Order` which contains all `Items` added to it.
-- stores the transaction history of orders i.e., a set of `TransactionRecord` objects.
-- stores the currently 'selected' `Item` objects (e.g., results of a search query) 
-  as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Item>`
-  that can be 'observed' e.g. the UI can be bound to this list 
-  so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. 
-  This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the Model represents data entities of the domain,
-  they should make sense on their own without depending on other components)
-- it is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects.
-  i.e., updates `Inventory` when `Order` is placed by user, and keep the order histories as `TransactionRecord`.
+- stores an `Inventory` object that represents the inventory data.
+- stores an optional `Order` object that represents the current order data.
+- stores a `TransactionList` object that represents the transaction history of orders.
+- stores a `UserPref` object that represents the user’s preferences.
+- does not depend on any of the other three components (as the Model represents data entities of the domain, they should
+  make sense on their own without depending on other components)
+
+![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
+
+- The `Model` component interacts with `Ui` component through a `Displayable` interface.
+
+![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
+
+Low level architecture of `Model` component:
+
+- `Inventory` and `Order` are each consists of an `UniqueItemList` which contains `Items`.
+- The `TransactionList` stores `TransactionRecord` which are the records of history orders.
+- Each `TransactionRecord` has a unique id and timestamp, with a list of `Item` transacted in the history order.
 
 ### Storage component
 
 **
 API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage class diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 
-* can save both inventory data and user preference data in json format, and read them back into corresponding
-  objects.
-* inherits from both `InventoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
+* can save both inventory data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `InventoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the
+  functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
@@ -412,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. BogoBogo outputs an empty list.
 
       Use case ends.
-  
+
 * 1c. User tries to find by 2 different fields at the same time.
     * 1b1. BogoBogo notifies user that only one field can be inputted.
 
@@ -476,17 +477,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. There is no order created.
     * 1a1. BogoBogo notifies user there is no order.
-  
+
       Use case ends.
-    
+
 * 2a. The item is specified in wrong format.
     * 2a1. BogoBogo notifies user the item specification format is wrong.
-  
+
       Use case ends.
 
 * 3a. The specified item is not in the order
     * 3a1. BogoBogo notifies user the specified item is not in the order.
-  
+
       Use case ends.
 ```
 ```
@@ -500,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. BogoBogo sorts the inventory accordingly.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. User specifies to sort by both name and count.
@@ -519,14 +520,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. BogoBogo shows the commands available to the user.
 
    Use case ends.
-   
- **Extensions**
+
+**Extensions**
 
 * 1a. User specifies which command exactly he wants to know how to use.
     * 1a1. BogoBogo notifies the user what that exact command does.
 
       Use case ends.
-  
+
 * 1b. User specifies an inexistent command.
     * 1a1. BogoBogo notifies the user that the command does not exist, then proceed to display URL to userguide.
 
@@ -543,26 +544,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User enters the item name and amount.
 3. BogoBogo removes the specified amount of that item.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The name and amount is specified in wrong format.
     * 2a1. BogoBogo notifies user the format is wrong.
-    
-        Use case ends.
+
+      Use case ends.
 
 * 2b. There are multiple matching items in inventory.
     * 2b1. BogoBogo lists out all the matching items and let user choose one.
     * 2b2. User chooses the desired item.
-    * BogoBogo removes the specified amount of that item. 
+    * BogoBogo removes the specified amount of that item.
 
       Use case ends.
 
 * 3a. The item is not in the inventory.
     * 3a1. BogoBogo notifies user there is on such item.
 
-        Use case ends.
+      Use case ends.
 
 * 3b. The specified amount is greater than what inventory has.
     * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
@@ -580,20 +581,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User enters the item index, fields and new values to change.
 3. BogoBogo updates the fields of the item at the specified index with the new values given.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 3a. The edited item is a duplicate of another item in the inventory.
     * 3a1. BogoBogo notifies user of the duplication.
-  
+
       Use case ends
 
 * 3b. The specified index is invalid.
     * 3b1. BogoBogo notifies user the index is invalid.
 
       Use case ends
-  
+
 * 3c. The specified change of the field is invalid.
     * 3b1. BogoBogo notifies user that the new value specified is invalid.
 
@@ -686,17 +687,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    a. Download the jar file and copy into an empty folder
+   a. Download the jar file and copy into an empty folder
 
-    b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+   b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+   optimum.
 
 2. Saving window preferences
 
-    a. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    b. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   b. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
 
@@ -704,14 +705,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a new item into the inventory
 
-    a. Test case: `add Milk id/111111 c/1 sp/2.4 cp/1.2`<br>
-       Expected: Item Milk is added to the list. Milk should have the id #111111, count 1, sales price $2.40, and cost price $1.20.
+   a. Test case: `add Milk id/111111 c/1 sp/2.4 cp/1.2`<br>
+   Expected: Item Milk is added to the list. Milk should have the id #111111, count 1, sales price $2.40, and cost price
+   $1.20.
 
-    b. Test case: `add Milk c/1 sp/2.4 sp/1.2`<br>
-       Expected: No Milk added to the inventory. BogoBogo notifies user to specify id as well.
+   b. Test case: `add Milk c/1 sp/2.4 sp/1.2`<br>
+   Expected: No Milk added to the inventory. BogoBogo notifies user to specify id as well.
 
-    c. Test case: `add n/Milk c/1 sp/2.4 sp/1.2`<br>
-       Expected: No Milk added to the inventory. BogoBogo notifies of incorrect command format.
+   c. Test case: `add n/Milk c/1 sp/2.4 sp/1.2`<br>
+   Expected: No Milk added to the inventory. BogoBogo notifies of incorrect command format.
 
 2. _{ more test cases …​ }_
 
