@@ -33,6 +33,9 @@ deactivate TagCommand
 AddressBookParser --> Logic : command
 deactivate AddressBookParser
 
+AddressBookParser -[hidden]-> Logic
+destroy AddressBookParser
+
 Logic -> TagCommand : execute()
 activate TagCommand
 
@@ -70,8 +73,14 @@ activate CenterPanel
 CenterPanel --> MainWindow
 deactivate CenterPanel
 
+CenterPanel -[hidden]-> MainWindow
+destroy CenterPanel
+
 MainWindow --> MainWindow
 deactivate MainWindow
+
+MainWindow -[hidden]-> MainWindow
+destroy MainWindow
 
 [<-- MainWindow
 deactivate MainWindow

@@ -494,9 +494,9 @@ These operations are called when a person is added, edited, or deleted with `Add
 
 Given below is an example usage scenario and how viewing tag is executed:
 - **Step 1:** The user launches the application. The `Model` is initialized with the saved data (or sample data if there is no saved data). Tags from each person is loaded into `UniqueTagList` and `tagCounter` with corresponding number of students labelled with the tags.
-- **Step 2:** The user enter the command `tag` to view all tags. `AddressBookParser` parses this command, creating a `TagCommand`.
-- **Step 3:** `LogicManager` executes the `TagCommand`. 
-  - During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal to `MainWindow` to switch the center panel to show the tag list.
+- **Step 2:** The user enter the command `tag` to view all tags. `Logic` calls `AddressBookParser` to parse this command string, creating a `TagCommand`.
+- **Step 3:** `Logic` executes the `TagCommand`. During execution, `TagCommand#execute()` instantiates a `CommandResult` with the `DisplayType` of `TAGS` as a signal to `MainWindow` to switch the center panel to show the tag list.
+- **Step 4:** `MainWindow` then handles this command by calling `CenterPanel#displayTagListPanel()` to display the tag list to the user.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
 
@@ -505,7 +505,7 @@ Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
 
 *Figure I.4.1: View tag sequence diagram*
 
-#### Design considerations:
+#### Design considerations
 **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
 - Pros:
   - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
@@ -542,7 +542,7 @@ The `PersonMatchesKeywordsPredicate#test()` method will compose all searched fie
 The predicate is then used to filter the list of person.
 
 
-**Design considerations:**
+**Design considerations**
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
