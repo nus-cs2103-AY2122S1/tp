@@ -119,7 +119,7 @@ public class Appointment {
     }
 
     /**
-     * Check if the input date follows the format (dd MMM yyyy).
+     * Checks if the input date follows the format (dd MMM yyyy).
      *
      * @param test The input date string.
      * @return A boolean indicating if the date follows the format.
@@ -141,7 +141,7 @@ public class Appointment {
     }
 
     /**
-     * Check if the input time follows the format (HHmm).
+     * Checks if the input time follows the format (HHmm).
      *
      * @param test The input time string.
      * @return A boolean indicating if the time follows the format.
@@ -156,7 +156,7 @@ public class Appointment {
     }
 
     /**
-     * Check if the input venue is at most 20 characters.
+     * Checks if the input venue is at most 20 characters.
      *
      * @param test The input venue string.
      * @return A boolean indicating if the venue follows the format.
@@ -165,6 +165,24 @@ public class Appointment {
         return test.length() <= 20;
     }
 
+    /**
+     * Checks whether an appointment has been scheduled.
+     *
+     * @param appointment The appointment to be checked
+     * @return A boolean indicating whether the appointment has been scheduled.
+     */
+    public static boolean isAppointmentEmpty(Appointment appointment) {
+        return appointment.equals(getDefaultAppointment());
+    }
+
+    /**
+     * Generates an empty {@code Appointment}.
+     *
+     * @return An empty Appointment.
+     */
+    public static Appointment getDefaultAppointment() {
+        return new Appointment(NO_APPOINTMENT, NO_TIME, NO_VENUE);
+    }
 
 
     @Override

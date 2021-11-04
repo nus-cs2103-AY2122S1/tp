@@ -280,19 +280,22 @@ To achieve the best possible experience, avoid adding excessively long input to 
     * `appointment` will sort all client by appointment date from the earliest date to latest.
     * `priority` will sort all client by `priority tag` from the highest to the lowest priority.
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Notes about sorting by appointment:**<br>
+<div markdown="block" class="alert alert-info"> :information_source: 
+** Notes about sorting by appointment:** <br>
 
 * For clients with the **same appointment date**, FAST will first show those *without appointment times*, followed by
 the earliest time to the latest time.
 
-<div/><br>
-    
+</div>
+<br>
 
 #### `NAME`
 * The name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
-
+   <div markdown="block" class="alert alert-info">
+   :information_source: FAST does not allow duplicate names, but you may use numbers to differentiate between 2 clients with
+   the exact same name.<br>
+   </div>
 
 #### `PHONE`
 * The contact number of your client
@@ -316,8 +319,13 @@ the earliest time to the latest time.
 * A label given to your client
 * There are 3 types of `TAG` in FAST:
   1. Normal Tags: should not be longer than 20 characters
+     * no prefix
   2. Priority Tag: either one of the 3 priorities (low, med, high)
+     * prefix: pr/
   3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
+     * prefix: ip/
+  
+* To use Priority or Inventment Plan Tags, you need to specify the prefix, or it will be treated as a Normal Tag.
 * Refer to [Tags](#tags) to find out more about each tag
 
 
@@ -431,7 +439,7 @@ You can delete the specified client from FAST. This is useful when a client has 
 **Examples**:
 * `list` followed by `del 2` deletes the second client in FAST. If `Bernice Yu` is the second client on the list, his entry
 will be deleted.
-![EditExample](images/deleteexample.png)
+![DeleteExample](images/deleteexample.png)
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
@@ -519,10 +527,10 @@ The `DATE` of the appointment must at least be specified.
 
 
 **Examples**:
-* `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
-![result for `aa 1 d/2021-03-27`](images/appointment.png)
-* `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
-* `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
+* `aa 1 d/2022-03-27` adds an appointment with date `27 Mar 2022` to the first client in FAST.
+![result for `aa 1 d/2022-03-27`](images/appointment.png)
+* `aa 3 d/2022-03-27 t/18:00` adds an appointment with date `27 Mar 2022` and time `1800hrs` to the third client in FAST.
+* `find Matthew John` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
    <div markdown="block" class="alert alert-info">
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
@@ -555,8 +563,8 @@ At least **one** of the optional fields must be present.
 * [`VENUE`](#venue)
 
 **Examples**:
-* `ea 1 d/2021-03-28` edits the appointment date to be `28 Mar 2021` of the first client.
-![result for `ea 1 d/2021-03-28`](images/editappointmentexample.png)
+* `ea 1 d/2022-03-28` edits the appointment date to be `28 Mar 2022` of the first client.
+![result for `ea 1 d/2022-03-28`](images/editappointmentexample.png)
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
 <br> 
@@ -647,21 +655,22 @@ In FAST, we have three main types of tags:
 
 1. Normal tags, which you can customise according to your needs.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
+    </div>
 
 2. Priority tags, which have fixed names and help you to remember which contacts you need to focus on first.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
-</div>
+   
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
+    </div>
 
 3. Investment plan tags, which help you recall the plans that each contact has bought.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
-
-For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
+    
+    For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
+    </div>
 
 <br>
 
@@ -682,12 +691,13 @@ More examples of how to use these will be given in the following section.
 
 <br>
 
-##### Editing a tag: `tag`
+##### Using tags: `tag`
 
 You can add or delete the tags of a specified client. 
 
 **Format**: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
+* To add Priority or Investment Plan Tags, remember to add their prefixes!
 * Does not affect any unmentioned tags, unlike `edit`.
 * Delete operations are performed first before add operations, regardless of their order in the input.
 

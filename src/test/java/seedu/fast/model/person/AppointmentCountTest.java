@@ -78,7 +78,7 @@ public class AppointmentCountTest {
         assertTrue(AppointmentCount.isValidCount("0"));
 
         // negative input
-        assertFalse(AppointmentCount.isValidCount("-10"));
+        assertFalse(AppointmentCount.isValidCount("-1"));
 
         // empty input
         assertFalse(AppointmentCount.isValidCount(""));
@@ -97,5 +97,10 @@ public class AppointmentCountTest {
 
         // invalid input
         assertFalse(AppointmentCount.isValidDecrementCount(new AppointmentCount("0")));
+    }
+
+    @Test
+    public void getDefaultAppointmentCount() {
+        assertTrue(AppointmentCount.getDefaultAppointmentCount().equals(new AppointmentCount("0")));
     }
 }

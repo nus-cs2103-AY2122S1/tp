@@ -40,8 +40,6 @@ public class ParserUtil {
         "Edit", "Find", "List", "Help", "Remark", "Sort", "Statistics", "Tag", "Investment Plan Tag",
         "Priority Tag", "Misc"};
 
-
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -68,7 +66,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        trimmedName = capitalise(trimmedName);
+        trimmedName = capitaliseNamesFirstLetters(trimmedName);
         return new Name(trimmedName);
     }
 
@@ -79,7 +77,7 @@ public class ParserUtil {
      * @param trimmedName
      * @return trimmedName with capitalised words.
      */
-    private static String capitalise(String trimmedName) {
+    private static String capitaliseNamesFirstLetters(String trimmedName) {
         char[] chars = trimmedName.toLowerCase().toCharArray();
         if (Character.isLetter(chars[0])) {
             chars[0] = Character.toUpperCase(chars[0]);
@@ -264,7 +262,6 @@ public class ParserUtil {
     public static String parseDateString(String date) throws ParseException {
         try {
             checkDate(date);
-
             // converts the date to the specified format
             date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException dtpe) {

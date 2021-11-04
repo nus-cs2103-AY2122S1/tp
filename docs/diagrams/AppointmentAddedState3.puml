@@ -1,0 +1,27 @@
+@startuml
+skinparam arrowThickness 1.1
+skinparam arrowColor #000000
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+show fields
+
+title Adding new Appointment
+
+object "__:Person__" as normalHuman {
+}
+
+object "__:Appointment__" as completeAppointment {
+    - date = "No Appointment Scheduled Yet"
+    - time = ""
+    - venue = ""
+}
+
+object "__:AppointmentCount__" as emptyAppointmentCount {
+    - count = 1
+}
+
+normalHuman --> completeAppointment
+normalHuman --> emptyAppointmentCount
+
+
+@enduml

@@ -15,6 +15,13 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class ItemComponent
+Class StatsWindow
+Abstract Class StatsWindowData <<Abstract>>
+Class InvestmentPlanData
+Class PriorityData
+Class TagComponent
+Class UiUtil
 }
 
 package Model <<Rectangle>> {
@@ -28,24 +35,28 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
+Model ...> StatsWindowData
+
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down--> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow ----> "1" StatsWindow
 
 PersonListPanel -down-> "*" PersonCard
 
-MainWindow -left-|> UiPart
+MainWindow --|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+PersonCard ---|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+StatsWindow -|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
@@ -57,4 +68,11 @@ CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
+
+StatsWindowData <|-down- InvestmentPlanData
+StatsWindowData <|-down- PriorityData
+
+PersonCard --> TagComponent
+PersonCard --> ItemComponent
+PersonCard .up.> UiUtil
 @enduml

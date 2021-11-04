@@ -23,7 +23,6 @@ public class MarkAppointmentCommandParser implements Parser<MarkAppointmentComma
                     MarkAppointmentCommand.MESSAGE_USAGE), ive);
         }
 
-        return new MarkAppointmentCommand(index,
-                new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME, Appointment.NO_VENUE));
+        return new MarkAppointmentCommand(index, Appointment.getDefaultAppointment());
     }
 }
