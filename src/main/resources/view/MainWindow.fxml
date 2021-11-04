@@ -58,12 +58,12 @@
                      </font>
                   </Label>
 
-                    <VBox fx:id="applicantList" alignment="TOP_RIGHT" layoutY="40.0" prefHeight="382.0" prefWidth="421.0" styleClass="pane-with-border">
+                    <VBox fx:id="applicantList" alignment="TOP_RIGHT" layoutY="40.0" prefHeight="358.0" prefWidth="422.0" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
                      <children>
-                   <StackPane fx:id="applicantListPanelPlaceholder" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="344.0" />
+                   <StackPane fx:id="applicantListPanelPlaceholder" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="400.0" />
                      </children>
               </VBox>
                   <Label alignment="CENTER" layoutX="562.0" layoutY="7.0" prefHeight="26.0" prefWidth="135.0" text="Positions" textAlignment="CENTER" textFill="WHITE" />
