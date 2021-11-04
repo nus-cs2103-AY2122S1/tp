@@ -29,7 +29,7 @@ and TAs contacts within teams and tutorial groups. It is optimized for CLI users
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`add n/John Doe e/e0123456@u.nus.edu g/john-doe N/e0123456 r/student s/A0123456X T/11 p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a Person with the given details.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
