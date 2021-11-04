@@ -48,6 +48,15 @@ public class TaskCard extends UiPart<Region> {
         taskDate.setText(taskDateStr);
         taskTime.setText(taskTimeStr);
         taskVenue.setText(taskVenueStr);
+        if (taskDateStr == "") {
+            taskDate.setVisible(false);
+        }
+        if (taskTimeStr == "") {
+            taskTime.setVisible(false);
+        }
+        if (taskVenueStr == "") {
+            taskVenue.setVisible(false);
+        }
     }
 
     /**
