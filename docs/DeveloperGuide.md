@@ -272,11 +272,11 @@ LeadsForce allows users to edit client info.
 
 The following sequence diagram shows how the view operation works:
 
-<img src="images/EditCommandSequenceDiagram.png" />
+<img src="images/tracing/EditCommandSequenceDiagram.png" />
 
 #### Implementation of EditClientDescriptor 
 
-The `EditClientDescriptor` keeps tracks of all of the attributes that the user intends on updating, and does so by using the `set{ATTRIBUTE}` command for all the attirbutes of `Client`(such as setName, setPhone, etc.). 
+The `EditClientDescriptor` keeps tracks of all the attributes that the user intends on updating, and does so by using the `set{ATTRIBUTE}` command for all the attributes of `Client`(such as setName, setPhone, etc.). 
 
 ### 4.3 Search Clients
 
