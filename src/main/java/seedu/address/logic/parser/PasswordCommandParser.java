@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
 import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
@@ -30,13 +29,13 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
 
         // repeated flags
         if (allOld.size() > 1 || allNew.size() > 1) {
-            throw new ParseException(MESSAGE_TOO_MANY_FLAGS);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
 
         Optional<String> oldInput = argMultimap.getValue(PREFIX_OLD_PASSWORD);
         Optional<String> newInput = argMultimap.getValue(PREFIX_NEW_PASSWORD);
 
-        // one of the passwords is empty
+        // missing flags
         if (oldInput.isEmpty() || newInput.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
