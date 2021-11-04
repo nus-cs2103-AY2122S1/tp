@@ -11,8 +11,8 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class MemberListPanel
-Class MemberCard
+Class PersonListPanel
+Class PersonCard
 Class StatusBarFooter
 Class CommandBox
 Class FacilityListPanel
@@ -34,37 +34,37 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" MemberListPanel
+MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 MainWindow *-down-> "1" FacilityListPanel
 
-MemberListPanel -down-> "*" MemberCard
+PersonListPanel -down-> "*" PersonCard
 FacilityListPanel -down-> "*" FacilityListCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-MemberListPanel -right-|> UiPart
-MemberCard --|> UiPart
+PersonListPanel -right-|> UiPart
+PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 FacilityListCard --|> UiPart
 FacilityListPanel -left-|> UiPart
 
-MemberCard ..> Model
+PersonCard ..> Model
 FacilityListCard ..> Model
 UiPart .[hidden]left. Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-MemberListPanel -[hidden]left- HelpWindow
+PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
-FacilityListPanel -[hidden]left- MemberListPanel
-FacilityListCard -[hidden]left- MemberCard
+FacilityListPanel -[hidden]left- PersonListPanel
+FacilityListCard -[hidden]left- PersonCard
 
 MainWindow -[hidden]-|> UiPart
 @enduml
