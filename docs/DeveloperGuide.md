@@ -22,7 +22,7 @@ title: Developer Guide
        - [Implementation Details](#implementation-details)
        - [Design Considerations:](#design-considerations)
           - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
-- [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+    - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
       - [Implementation Details](#implementation-details)
       - [Implementation Rationale](#implementation-rationale)
       - [Design Considerations:](#design-considerations)
