@@ -60,7 +60,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
     <div markdown="block" class="alert alert-info">
 
-    **:information_source: Type in your commands into the **Command Box** and press Enter to execute it.**<br>
+    **:information_source: Type in your commands into the Command Box and press Enter to execute it.**<br>
     * e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
     </div>
 
@@ -87,22 +87,26 @@ Scroll down to the bottom and click on `recruitIn.jar`.
       Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.<br><br>
       Your application should look like this:
       ![After Interview](./images/SampleWorkflow3.png)
-   6. Suppose time passes and you now have more applicants in your list of applicants. Your company informs you that `John Doe` has
+   6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
       Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
       ![After mark](./images/SampleWorkflow4.png)
    7. Type in **`list`** to go back to your list of applicants.<br><br>
-      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br>
-      Now `John Doe` is removed from your list of applicants, along with other applicants you may have marked.
+      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Now `John Doe` is removed from your list of applicants.
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
+
+    <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+    The commands given below are not related to the above sample workflow and are given strictly as example usages.
+    </div>
    
       * **`delete`**`2` : Deletes the second applicant in your currently displayed list.
 
       * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn.
 
-      * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would be `John`.
+      * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
 
       * **`filter_interview`**`past` : Displays all applicants whose interviews are in the past, relative to current date and time.
 
