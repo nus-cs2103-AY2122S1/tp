@@ -57,6 +57,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 * [FAQ](#faq)
 * [Glossary](#glossary)
 * [Command Summary](#command-summary)
+* [Example Visual Aids](#example-visual-aids)
 
 <br>
 
@@ -71,7 +72,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
 1. Double-click the file to start the app. The GUI shown in the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/StartingUi.png)
+   ![StartingUi](images/StartingUi.png)
 
 1. Type the command in the command box and press Enter to execute it. E.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -383,7 +384,7 @@ The similar applies for `<number_of_tag_columns>`.
 
 An example of how the CSV should be formatted is shown below:
 
-![CsvFormatExample](images/CsvFormatExample.png)
+![CsvFormatExample](images/UGExamples/importeg.png)
 
 The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`. 
 (There are 2 group columns, 2 assessments columns, and 2 tag columns.)
@@ -624,3 +625,96 @@ Action | Format | Examples
 **Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c add student -as addstu`
 
 [Return to Table of Contents](#table-of-contents)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Example Visual Aids
+
+# Addstudent Example 2
+Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
+![Addstudent Example 2](images/UGExamples/addstu2.png)
+
+# Addstudent Example 3
+Command: `addstudent -n Jonas Chow -i E0123456 -t beginner` <br>
+![Addstudent Example 3](images/UGExamples/addstu3.png)
+
+# Addgroup Example 2
+Command: `addgroup -g T01A -n Hong Yao -n Hong Fai` <br>
+![Addgroup Example 2](images/UGExamples/addgroup2.png)
+
+# Addgroup Example 3
+Command: `addgroup -g T01A -n Hong Yao -i E0123456` <br>
+![Addgroup Example 3](images/UGExamples/addgroup3.png)
+
+# Addalloc Example 1
+Command: `addalloc -g T01A -n Zhiying` <br>
+![Addalloc Example 1](images/UGExamples/addalloc1.png)
+
+# Addassessment Example 2
+Command: `addassessment -a Midterm Assessment` <br>
+![Addassessment Example 2](images/UGExamples/addass2.png)
+
+# Addsc0re Example 1
+Command: `addscore -a Midterm -n Van Nhi -s 95` <br>
+![Addsc0re Example 1](images/UGExamples/addscore1.png)
+
+# Addsc0re Example 2
+Command: `addscore -a P01 -i E0123456 -s 75.25` <br>
+![Addsc0re Example 2](images/UGExamples/addscore2.png)
+
+# List Example
+Command: `list` <br>
+![](images/UGExamples/list.png)
+
+# Search Example 1
+Command: `search -n Jonas Chow` <br>
+![Search Example 1](images/UGExamples/search1.png)
+
+# Search Example 3
+Command: `search -g T02B R03C` <br>
+![Search Example 3](images/UGExamples/search3.png)
+
+# Search Example 4
+Command: `search -g T02` <br>
+![Search Example 4](images/UGExamples/search4.png)
+
+# Search Example 5
+Command: `search -t beginners` <br>
+![Search Example 5](images/UGExamples/search5.png)
+
+# Show Example 1
+Command: `show -n Hong Fai` <br>
+![Show Example 1](images/UGExamples/show1.png)
+
+# Show Example 2
+Command: `show 2 -f chartImage` exports the following picture as a file `chartImage.png`. <br>
+![Show Example 2](images/UGExamples/show2.png)
+
+# Show Example 3
+Command: `show -g T02A` <br>
+![Show Example 3](images/UGExamples/show3.png)
+
+# Show Example 4
+Command: `show -a Midterm` <br>
+![Show Example 4](images/UGExamples/show4.png)
+
+# Edit Example 1
+Command: `edit 1 -n Hong Yao -i E1234567` <br>
+![Edit Example 1](images/UGExamples/edit1.png)
+
+# Delete Example 1
+Command: `delete 2` <br>
+![Delete Example 1](images/UGExamples/delete1.png)
+
+# Import Example
+Command: `import -f student_data.csv -g 2 -a 2 -t 2` <br>
+![Import Example](images/UGExamples/import0.png)
+
+# Alias Example 1
+Command: `alias -c addstudent -as example` <br>
+![Alias Example 1](images/UGExamples/alias1.png)
+
+# Alias Example 4
+Command: `alias -c example -as example` <br>
+![Alias Example 4](images/UGExamples/alias4.png)
