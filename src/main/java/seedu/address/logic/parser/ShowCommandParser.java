@@ -96,7 +96,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             return path;
         }
     }
-  
+
       /**
      * Returns true if none of the prefixes present in the given {@code ArgumentMultimap}.
      */
