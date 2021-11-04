@@ -20,10 +20,13 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PasswordCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UnselectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.ContainsKeywordsPredicate.PersonField;
@@ -94,6 +97,25 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " test.csv") instanceof ExportCommand);
+    }
+
+    @Test
+    public void parseCommand_select() throws Exception {
+        assertTrue(parser.parseCommand(SelectCommand.COMMAND_WORD + " -a") instanceof SelectCommand);
+        assertTrue(parser.parseCommand(SelectCommand.COMMAND_WORD + " -i 1") instanceof SelectCommand);
+        assertTrue(parser.parseCommand(SelectCommand.COMMAND_WORD + " -e 2 3") instanceof SelectCommand);
+    }
+
+    @Test
+    public void parseCommand_unselect() throws Exception {
+        assertTrue(parser.parseCommand(UnselectCommand.COMMAND_WORD + " -a") instanceof UnselectCommand);
+        assertTrue(parser.parseCommand(UnselectCommand.COMMAND_WORD + " -i 1") instanceof UnselectCommand);
+        assertTrue(parser.parseCommand(UnselectCommand.COMMAND_WORD + " -e 2 3") instanceof UnselectCommand);
     }
 
     @Test
