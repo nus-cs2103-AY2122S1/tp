@@ -280,6 +280,7 @@ and filters for applicants that have `Alex` in their names and `0` year of exper
 Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
 and returned.
 
+The following sequence diagram shows how the find operation works.
 ![images](images/FindCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
