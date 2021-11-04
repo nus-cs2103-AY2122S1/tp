@@ -186,6 +186,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+* [Delete Feature](#delete-feature)
+
+### Delete Feature
+
+#### Implementation
+The `MainWindow#executeCommand()` calls `LogicManager#execute()` method, which proceeds 
+to call `MainParser#parseCommand()` method, which them calls either `FriendCommandParser#parse()` or 
+`GameCommandParser#parse()`, and returns a `Command` object.
+
+The delete command is parsed using the following classes:
+* For friends:
+  * `FriendCommandParser` - Checks that the command contains the `DeleteFriendCommand.COMMAND_WORD`.
+    * Subsequently, calls the `parse()` method from a newly created instance of `DeleteFriendCommandParser`.
+  * `DeleteFriendCommandParser` - Parses the command to find the string representing the friend's ID.
+    * The `parse()` command returns a `DeleteFriendCommand` object which is instantiated using the aforementioned 
+      `FriendId` object.
+  * `DeleteFriendCommand` - Represents delete friend command that is executed by gitGud.
+    * Takes in a `FriendId` object to find the friend to be deleted from the Model.
+    * Due to the unique nature of the `FriendId` objects, where no two friends have the same `FriendId`, it is 
+      sufficient to search for the friend using the `FriendId`.
+    
+* For games:
+  * `GameCommandParser` - Checks that the command contains the `DeleteGameCommand.COMMAND_WORD`.
+    * Subsequently, calls the `parse()` method from a newly created instance of `DeleteGameCommandParser`.
+  * `DeleteGameCommandParser` - Parses the command to find the string representing the game's ID.
+      * The `parse()` command returns a `DeleteGameCommand` object which is instantiated using the aforementioned 
+        `GameId` object.
+  * `DeleteGameCommand` - Represents delete game command that is executed by gitGud.
+      * Takes in a `GameId` object to find the game to be deleted from the Model.
+    
+
+After being parsed, the implementation for deleting friends and games is similar. The `Command#execute()` method is 
+called, resulting in the deletion of a friend or a game.The following sequence diagram 
+illustrates the description for deleting **games**:
+
+<img src="images/DeleteGameSequenceDiagram.png" width="574" />
+
+#### Special considerations:
+
+The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
+friend has to a game has to be removed, before deleting the game from the list of games.  
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -260,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ***      | user                  | be able to see full information of a friend from the contact list  | get any information I want about the friend               |
 | ***      | user                  | be able to easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
 | ***      | user                  | be able to view a list of my game information                      | see which of my friends play certain games                |
-| ***      | user                  | be able to delete a game from the contact list                     | remove games that were mistakenly added or due to typos   |
+| ***      | user                  | be able to delete a game from the games list                       | remove games that were mistakenly added or due to typos   |
 | ***      | user                  | be able to see full information of a game from the games list      | see information about which friends play the game and their in-game usernames   |
 
 *{More to be added}*
