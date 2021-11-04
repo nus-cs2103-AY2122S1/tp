@@ -142,7 +142,7 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Name: ").append(getName());
+        builder.append("Name: ").append(getName());
         if (!getGender().toString().isEmpty()) {
             builder.append("; Gender: ").append(getGender());
         }
