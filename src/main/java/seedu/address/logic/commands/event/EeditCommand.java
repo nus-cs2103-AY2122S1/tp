@@ -9,8 +9,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,11 +39,11 @@ public class EeditCommand extends Command {
             + "by the corresponding index number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
+            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_MEMBER_INDEX + "MEMBER_INDEX]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + " 1"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + " 1 "
             + PREFIX_NAME + "Freshman Orientation Week "
             + PREFIX_DATE + "11/11/2021 "
             + PREFIX_MEMBER_INDEX + "1 " + PREFIX_MEMBER_INDEX + "2";
@@ -78,7 +80,10 @@ public class EeditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
+        Event eventToEdit = lastShownList.get(index.getZeroBased());
+
         Set<Member> memberSet = new HashSet<>();
+        Map<Member, Boolean> attendance = new HashMap<>();
         // adds all members in indexSet to participant list in event
         for (Index targetIndex : indexSet) {
             if (targetIndex.getZeroBased() >= lastShownMemberList.size()) {
@@ -86,12 +91,18 @@ public class EeditCommand extends Command {
             }
             Member memberAsParticipant = lastShownMemberList.get(targetIndex.getZeroBased());
             memberSet.add(memberAsParticipant);
+            boolean isParticipant = eventToEdit.isParticipatingInEvent(memberAsParticipant);
+            if (isParticipant) {
+                attendance.put(memberAsParticipant, eventToEdit.hasAttended(memberAsParticipant));
+            } else {
+                attendance.put(memberAsParticipant, false);
+            }
         }
         if (!memberSet.isEmpty()) {
             editEventDescriptor.setMemberSet(memberSet);
+            editEventDescriptor.setAttendance(attendance);
         }
 
-        Event eventToEdit = lastShownList.get(index.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         if (!eventToEdit.isSameType(editedEvent) && model.hasEvent(editedEvent)) {
@@ -112,9 +123,8 @@ public class EeditCommand extends Command {
 
         Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         EventDate updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getDate());
-        Set<Member> updatedMemberSet = editEventDescriptor.getMemberSet().orElse(eventToEdit.getParticipants());
-
-        return new Event(updatedName, updatedDate, updatedMemberSet);
+        Map<Member, Boolean> updatedAttendance = editEventDescriptor.getAttendance().orElse(eventToEdit.getMap());
+        return new Event(updatedName, updatedDate, updatedAttendance);
     }
 
     @Override
@@ -143,6 +153,7 @@ public class EeditCommand extends Command {
         private Name name;
         private EventDate date;
         private Set<Member> memberSet;
+        private Map<Member, Boolean> attendance;
 
         public EditEventDescriptor() {}
 
@@ -154,13 +165,14 @@ public class EeditCommand extends Command {
             setName(toCopy.name);
             setDate(toCopy.date);
             setMemberSet(toCopy.memberSet);
+            setAttendance(toCopy.attendance);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, memberSet);
+            return CollectionUtil.isAnyNonNull(name, date, memberSet, attendance);
         }
 
         public void setName(Name name) {
@@ -193,6 +205,24 @@ public class EeditCommand extends Command {
          */
         public Optional<Set<Member>> getMemberSet() {
             return (memberSet != null) ? Optional.of(Collections.unmodifiableSet(memberSet)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code booleans} to this object's {@code attendance}.
+         * A defensive copy of {@code attendance} is used internally.
+         */
+        public void setAttendance(Map<Member, Boolean> attendance) {
+            this.attendance = (attendance != null) ? new HashMap<Member, Boolean>(attendance) : null;
+        }
+
+        /**
+         * Returns an unmodifiable list of booleans, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code attendance} is null.
+         */
+        public Optional<Map<Member, Boolean>> getAttendance() {
+            return (attendance != null) ? Optional.of(Collections.unmodifiableMap(attendance))
+                    : Optional.empty();
         }
 
         @Override
