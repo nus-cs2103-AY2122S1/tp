@@ -39,7 +39,7 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_newDataSameAsOldData_failure() {
+    public void execute_newPersonSameAsOldPerson_failure() {
         Person originalPerson = model.getFilteredPersonList().get(0);
 
         Person editedPerson = new PersonBuilder(originalPerson).build();
