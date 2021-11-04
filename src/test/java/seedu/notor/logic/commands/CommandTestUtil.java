@@ -17,6 +17,7 @@ import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonEditExecutor;
 import seedu.notor.model.Model;
 import seedu.notor.model.Notor;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.person.NameContainsKeywordsPredicate;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonEditDescriptorBuilder;
@@ -125,6 +126,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the group at the given {@code targetIndex} in the
+     * {@code model}'s Notor.
+     */
+    public static void showGroupAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
+
+        Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
+        model.updateFilteredGroupList(x -> x.getName().equals(group.getName()));
+
+        assertEquals(1, model.getFilteredGroupList().size());
     }
 
 }

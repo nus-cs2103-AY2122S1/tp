@@ -137,6 +137,18 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SuperGroup group = (SuperGroup) o;
+        return subGroups.equals(group.subGroups) && group.name.equals(name);
+    }
+
+    @Override
     public boolean isSame(SuperGroup other) {
         return other.name.equals(this.name);
     }
