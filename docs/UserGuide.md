@@ -35,9 +35,9 @@ Syntax | Meaning
 <kbd>text</kbd> | A keyboard input, or a button to be clicked on.
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
 _text_ | Caption for images.
-<div markdown="block" class="alert alert-info"> :information_source: **Note** </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
-<div markdown="span" class="alert alert-primary"> :bulb: **Tip** </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly. 
-<div markdown="span" class="alert alert-warning"> :exclamation: **Caution** </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to breakdown!
+<div markdown="block" class="alert alert-info"> :information_source: </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
+<div markdown="block" class="alert alert-primary"> :bulb: </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly. 
+<div markdown="block" class="alert alert-warning"> :exclamation: </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to misbehave!
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ This section briefly explains the various section of TAB's GUI.
 Section | Representation
 ---------|---------
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
-Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>). <br> - Note: Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students.
+Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>). :information_source: **Note:** <br> Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students.
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
 Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
@@ -103,7 +103,7 @@ Student Card | The area that shows the details of a student. See [Managing Stude
 Lesson List | The panel that shows the name of the student you have selected together with a list of lessons that the student has.
 Lesson Card | The area that shows the details of a lesson. See [Managing Lessons](#managing-lessons) for more details.
 Center Panel | The region that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
-Footer | The area which shows where TAB saves your student details to. For example, **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json**. <br> ![fileStorage](images/annotatedFileStorage.png) <br> <div class="caption">Location of the saved data.</div>
+Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -112,6 +112,16 @@ Footer | The area which shows where TAB saves your student details to. For examp
 
 ## Features
 This section describes the available features in TAB.
+
+<div markdown="block" class="alert alert-warning"> :exclamation: **Important** <br>
+ 
+* **Prefixes** are **case-sensitive**<br>
+  e.g. `n/` is the prefix for student name but `N/` is invalid.
+
+* **Command words** are **case-insensitive** <br>
+  e.g. `LIST` is equivalent to `list`.
+</div>
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -191,7 +201,7 @@ Executing any of the commands in this section will bring you to the students int
             <th style="text-align:center">Field</th>
             <th style="text-align:center">Prefix</th>
             <th style="text-align:center">Constraint(s)</th>
-            <th style="text-align:center">Example</th>
+            <th style="text-align:center">Example(s)</th>
         </tr>
     </thead>
     <tbody>
@@ -216,16 +226,19 @@ Executing any of the commands in this section will bring you to the students int
         </tr>
         <tr>
             <td rowspan=4 id="student-contact">Contact</td>
-            <td>Phone</td>
+            <td id="phone-field">Phone</td>
             <td><code>p/</code></td>
             <td><ul>
               <li><strong>At least one</strong> of the contact fields must be present.</li>
               <li>Minimum 3 numeric characters.</li>
             </ul></td>
-            <td><code>p/91234567</code></td>
+            <td><ul>
+              <li><code>p/91234567</code></li>
+              <li><code>p/</code> clears the phone field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
-            <td>Email</td>
+            <td id="email-field">Email</td>
             <td><code>pe/</code></td>
             <td>
               <ul>
@@ -244,56 +257,85 @@ Executing any of the commands in this section will bring you to the students int
                   </ul>
               </ul>
             </td>
-            <td><code>e/jane@gmail.com</code></td>
+            <td><ul>
+              <li><code>e/jane@gmail.com</code></li>
+              <li><code>e/</code> clears the email field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Parent Phone</td>
             <td><code>pp/</code></td>
-            <td>Refer to the constraints for Phone above.</td>
-            <td><code>pp/81234567</code></td>
+            <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
+            <td><ul>
+              <li><code>pp/81234567</code></li>
+              <li><code>pp/</code> clears the parent phone field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Parent Email</td>
             <td><code>pe/</code></td>
-            <td>Refer to the constraints for Email above.</td>
-            <td><code>pe/john@gmail.com</code></td>
+            <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
+            <td><ul>
+              <li><code>pe/john@gmail.com</code></li>
+              <li><code>pe/</code> clears the parent email field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
         <td rowspan=5>Optional</td>
             <td>School</td>
             <td><code>sch/</code></td>
             <td>Not Applicable.</td>
-            <td><code>sch/Serangoon JC</code></td>
+            <td><ul>
+              <li><code>sch/Serangoon JC</code></li>
+              <li><code>sch/</code> clears the school field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Academic Stream</td>
             <td><code>stream/</code></td>
             <td>Not Applicable.</td>
-            <td><code>stream/A-Level</code></td>
+            <td><ul>
+              <li><code>stream/A-Level</code></li>
+              <li><code>stream/</code> clears the academic stream field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Academic Level</td>
             <td><code>lvl/</code></td>
             <td>Maximum 15 characters, including space(s).</td>
-            <td><code>lvl/J1</code></td>
+            <td><ul>
+              <li><code>lvl/J1</code></li>
+              <li><code>lvl/</code> clears the academic level field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Remark</td>
             <td><code>r/</code></td>
             <td>Not Applicable.</td>
-            <td><code>r/She is weak at maclaurin series.</code></td>
+            <td><ul>
+              <li><code>r/She is weak at maclaurin series.</code></li>
+              <li><code>r/</code> clears the remark field, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Tags</td>
             <td><code>t/</code></td>
-            <td>Must be alphanumeric characters.</td>
-            <td><code>t/unpaid</code></td>
+            <td><ul>
+              <li>Must be alphanumeric characters.</li>
+              <li>Case-insensitive</li>
+              <li>To add multiple tags to a student, you need to add <code>t/</code> before every tag name.</li>
+            </ul></td>
+            <td><ul>
+              <li><code>t/unpaid</code> adds only one tag with tag name "UNPAID"</li>
+              <li><code>t/unpaid t/exams are coming</code> adds two tags with tag names "UNPAID" and "EXAMS ARE COMING"</li>
+              <li><code>t/</code> clears <strong>all</strong> tags, if there were any.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>View Only</td>
             <td>Outstanding Fees</td>
             <td>Not Applicable.</td>
-            <td>Can only be changed with valid executions of <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands. See <a href="#managing-fees">Managing Fees</a> for more details.</td>
+            <td>Can only be changed with valid executions of <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands. See <a href="#managing-lesson-fees">Managing Fees</a> for more details.</td>
             <td>Not Applicable</td>
         </tr>
     </tbody>
