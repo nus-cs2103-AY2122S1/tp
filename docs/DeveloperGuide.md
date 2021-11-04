@@ -22,6 +22,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+## How to read this guide
+
+[TODO]
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
