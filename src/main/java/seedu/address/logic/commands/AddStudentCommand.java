@@ -71,7 +71,7 @@ public class AddStudentCommand extends AddCommand {
                 if (module.hasStudent(studentToAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
                 }
-                module.addStudent(studentToAdd);
+
                 // for each task in this module's taskList, add it to a new UniqueTaskList
                 // give the new UniqueTaskList to student after all tasks have been added
                 UniqueTaskList thisModuleTaskList = module.getTaskList();
@@ -85,6 +85,7 @@ public class AddStudentCommand extends AddCommand {
                     newStudentTaskList.add(taskToAdd);
                 }
                 studentToAdd.setTaskList(newStudentTaskList);
+                module.addStudent(studentToAdd);
                 return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }
