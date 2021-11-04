@@ -128,8 +128,8 @@ Note that the password needs to follow the requirements stated in the [`password
 3. Once you have set up the password, you will be prompted to enter the same password for subsequent logins.
 
    <figure class="figure">
-       <img src="images/loginPassword.png" class="figure-img img-fluid rounded" alt="Enter Password Prompt Display">
-       <figcaption class="figure-caption">Figure 2: Enter Password Prompt Display</figcaption>
+      <img src="images/loginPassword.png" class="figure-img img-fluid rounded" alt="Enter Password Prompt Display">
+      <figcaption class="figure-caption">Figure 2: Enter Password Prompt Display</figcaption>
    </figure>
    
 5. After a brief period of loading, the GUI similar to the picture below should appear.
@@ -466,7 +466,8 @@ Selects contacts from the current list. The selected contacts stay in the select
 | `-i` | Include indexes when selecting. |
 
 <figure class="figure">
-   <img src="images/select.gif" class="figure-img img-fluid rounded" alt="Help Window">
+   <img src="images/select.png" class="figure-img img-fluid rounded" alt="Help Window">
+   <figcaption class="figure-caption">Figure 3: Selection Display with Indexes 1, 2 and 3 Selected</figcaption>
 </figure>
 
 <div class="d-flex alert alert-secondary pb-0">
@@ -496,10 +497,6 @@ Select contacts at indexes `1`, `2` and `3` of the list.
 ### `unselect`
 
 Unselects contacts from the selected list. The `unselect` command uses the same flags as [`select`](#select).
-
-<figure class="figure">
-   <img src="images/unselect.gif" class="figure-img img-fluid rounded" alt="Help Window">
-</figure>
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
@@ -613,7 +610,8 @@ password -o password123! -n password!321
 Opens up a window that contains this user guide.
 
 <figure class="figure">
-   <img src="images/helpWindow.gif" class="figure-img img-fluid rounded" alt="Help Window">
+   <img src="images/helpWindow.png" class="figure-img img-fluid rounded" alt="Help Window">
+   <figcaption class="figure-caption">Figure 4: Help Window Display</figcaption>
 </figure>
 
 <div class="d-flex alert alert-secondary pb-0">
