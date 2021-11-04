@@ -2,6 +2,8 @@ package seedu.programmer.testutil;
 
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.LabTotal;
 
 public class LabBuilder {
     public static final int DEFAULT_TITLE = 1;
@@ -9,16 +11,16 @@ public class LabBuilder {
     public static final Integer DEFAULT_TOTAL = 20;
 
     private LabNum labNum;
-    private Integer value;
-    private Integer total;
+    private LabResult value;
+    private LabTotal total;
 
     /**
      * Creates a {@code labBuilder} with the default details.
      */
     public LabBuilder() {
         labNum = new LabNum(DEFAULT_TITLE);
-        value = DEFAULT_VALUE;
-        total = DEFAULT_TOTAL;
+        value = new LabResult(DEFAULT_VALUE);
+        total = new LabTotal(DEFAULT_TOTAL);
     }
 
     /**
@@ -42,7 +44,7 @@ public class LabBuilder {
      * Sets the {@code value} of the {@code lab} that we are building.
      */
     public LabBuilder withResult(Integer value) {
-        this.value = value;
+        this.value = new LabResult(value);
         return this;
     }
 
@@ -50,7 +52,7 @@ public class LabBuilder {
      * Sets the {@code total} of the {@code lab} that we are building.
      */
     public LabBuilder withTotal(Integer total) {
-        this.total = total;
+        this.total = new LabTotal(total);
         return this;
     }
 

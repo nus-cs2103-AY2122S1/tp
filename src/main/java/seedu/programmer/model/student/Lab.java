@@ -12,8 +12,8 @@ public class Lab implements DisplayableObject {
 
 
     private LabNum labNum;
-    private Integer actualScore;
-    private Integer totalScore;
+    private LabResult actualScore;
+    private LabTotal totalScore;
 
     /**
      * Constructs a marked Lab Object.
@@ -21,7 +21,7 @@ public class Lab implements DisplayableObject {
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
      * */
-    public Lab(LabNum labNum, Integer actualScore, Integer totalScore) {
+    public Lab(LabNum labNum, LabResult actualScore, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
         this.actualScore = actualScore;
@@ -32,10 +32,10 @@ public class Lab implements DisplayableObject {
      * Constructs a unmarked Lab Object.
      * @param labNum the labNum of the lab
      * @param totalScore the total score */
-    public Lab(LabNum labNum, Integer totalScore) {
+    public Lab(LabNum labNum, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
-        this.actualScore = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
+        this.actualScore = new LabResult(UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
         this.totalScore = totalScore;
     }
 
@@ -52,15 +52,15 @@ public class Lab implements DisplayableObject {
         return labNum;
     }
 
-    public Integer getActualScore() {
+    public LabResult getActualScore() {
         return actualScore;
     }
 
-    public Integer getTotalScore() {
+    public LabTotal getTotalScore() {
         return totalScore;
     }
 
-    public void updateActualScore(Integer value) {
+    public void updateActualScore(LabResult value) {
         this.actualScore = value;
     }
 
@@ -78,7 +78,7 @@ public class Lab implements DisplayableObject {
      * Updates the totalScore of the lab
      * @param total new total score
      */
-    public void updateTotal(Integer total) {
+    public void updateTotal(LabTotal total) {
         if (total != null) {
             this.totalScore = total;
         }

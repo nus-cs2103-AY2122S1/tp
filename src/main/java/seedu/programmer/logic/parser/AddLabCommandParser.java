@@ -12,6 +12,7 @@ import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 
 
 /**
@@ -39,8 +40,10 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
             throw new ParseException(String.format(MESSAGE_MISSING_ARGUMENT, AddLabCommand.MESSAGE_USAGE));
         }
 
-        LabNum labNum = new LabNum(ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null)));
-        Integer total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
+        LabNum labNum = new LabNum(ParserUtil.parseLabNum(
+                argMultimap.getValue(PREFIX_LAB_NUM).orElse(null)));
+        LabTotal total = new LabTotal(ParserUtil.parseTotal(
+                argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null)));
         Lab labResult = new Lab(labNum, total);
         return new AddLabCommand(labResult);
     }

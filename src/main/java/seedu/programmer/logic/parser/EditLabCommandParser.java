@@ -17,6 +17,7 @@ import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 
 
 /**
@@ -58,7 +59,8 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
                         argMultimap.getValue(PREFIX_LAB_NUM).orElse(null)));
                 LabNum newLabNum = new LabNum(ParserUtil.parseLabNum(
                         argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null)));
-                int total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
+                LabTotal total = new LabTotal(ParserUtil.parseTotal(
+                        argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null)));
                 Lab labResult = new Lab(labNum);
                 return new EditLabCommand(labResult, newLabNum, total);
             } else if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()) {
@@ -72,7 +74,8 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             } else if (argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
                 LabNum labNum = new LabNum(ParserUtil.parseLabNum(
                         argMultimap.getValue(PREFIX_LAB_NUM).orElse(null)));
-                int total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
+                LabTotal total = new LabTotal(ParserUtil.parseTotal(
+                        argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null)));
                 Lab labResult = new Lab(labNum);
                 return new EditLabCommand(labResult, total);
             } else {

@@ -17,6 +17,7 @@ import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.testutil.LabBuilder;
 
 public class EditLabCommandTest {
@@ -26,7 +27,7 @@ public class EditLabCommandTest {
     private static LabNum newLabNum = new LabNum(15);
     private static LabNum newLabNum1 = new LabNum(14);
     private static LabNum newLabNum2 = new LabNum(13);
-    private static Integer newLabTotal = 40;
+    private static LabTotal newLabTotal = new LabTotal(40);
     private static EditLabCommand sampleCommandA;
     private static EditLabCommand sampleCommandB;
     private static EditLabCommand sampleCommandC;

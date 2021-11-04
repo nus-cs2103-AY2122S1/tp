@@ -49,7 +49,7 @@ public class AddLabCommand extends Command {
 
         // Gets the last filtered list displayed
         List<Student> lastShownList = model.getFilteredStudentList();
-        if (result.getTotalScore() < 0.0) {
+        if (result.getTotalScore().getLabTotal() < 0.0) {
             throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
         }
         for (Student std: lastShownList) {

@@ -11,6 +11,7 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Student;
 
 
@@ -42,13 +43,13 @@ public class EditLabCommand extends Command {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! ";
 
     private final LabNum newLabNum;
-    private final Integer total;
+    private final LabTotal total;
     private final Lab original;
 
     /**
      * @param original the lab to be edited.
      * */
-    public EditLabCommand(Lab original, LabNum newLabNum, Integer total) {
+    public EditLabCommand(Lab original, LabNum newLabNum, LabTotal total) {
         this.original = original;
         this.newLabNum = newLabNum;
         this.total = total;
@@ -56,7 +57,7 @@ public class EditLabCommand extends Command {
     /**
      * @param original the lab to be edited.
      * */
-    public EditLabCommand(Lab original, Integer total) {
+    public EditLabCommand(Lab original, LabTotal total) {
         this.original = original;
         this.total = total;
         this.newLabNum = new LabNum(0);
@@ -82,7 +83,7 @@ public class EditLabCommand extends Command {
         }
         for (Student std : lastShownList) {
             Student editedStd = std;
-            if (total != null && total < 0.0) {
+            if (total != null && total.getLabTotal() < 0.0) {
                 throw new CommandException(String.format(MESSAGE_SCORE_SHOULD_BE_POSITIVE, total));
             } else if (!std.getLabList().contains(original)) {
                 throw new CommandException(String.format(MESSAGE_LAB_NOT_EXISTS, original.getLabNum()));
