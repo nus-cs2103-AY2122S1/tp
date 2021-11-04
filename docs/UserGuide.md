@@ -776,7 +776,7 @@ This section lists all the available commands in TAB, along with examples on how
 The commands are categorised into 4 different categories:
 * [Managing Students](#students)
 * [Managing Lessons](#lessons)
-* [Switching between views](#switching-between-views)
+* [Switching Between Views](#switching-between-views)
 * [General](#general)
 <br/>
 
