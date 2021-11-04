@@ -356,7 +356,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing all the specified keywords will be deleted.
+The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
 
 It works by filtering for the contacts in the `model` and deleting them one by one.
 
@@ -453,7 +453,7 @@ The following sequence diagram shows how the Sort mechanism works:
 
 The import JSON file will import an external addressbook and add all the entries to the current addressbook in the user's device.
 
-It works by utilizing the same mechanism that is used by AB3 when first initializing the addressbook with existing JSON data.
+It works by utilizing the same mechanism that is used by Socius when first initializing the addressbook with existing JSON data.
 
 #### Usage
 
@@ -496,7 +496,7 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
 
 The export JSON file will export all the current data into a JSON file.
 
-It works by utilizing the same mechanism that is used by AB3 when saving the addressbook into a JSON file.
+It works by utilizing the same mechanism that is used by Socius when saving the addressbook into a JSON file.
 
 #### Usage
 
