@@ -331,7 +331,7 @@ LeadsForce allows the user to `sort` clients according to client fields. LeadsFo
 
 The following sequence diagram shows how the sort operation works:
 
-<img src="images/SortCommandSequenceDiagram.png" />
+<img src="images/tracing/SortCommandSequenceDiagram.png" />
 
 ### 4.5 Multiple Address Book
 
