@@ -2,6 +2,7 @@ package dash.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import dash.commons.core.GuiSettings;
@@ -140,6 +141,21 @@ public interface Model {
      * Returns the UserInputList
      */
     UserInputList getUserInputList();
+
+    /**
+     * Returns index of task to edit.
+     */
+    int getIndexToEdit(int userIndexZeroBase, Task taskToEdit, List<Task> filteredList);
+
+    /**
+     * Finds all tasks that contain personToBeReplaced, and replaces that person with newPerson.
+     */
+    void replacePeopleInTasks(Person personToReplace, Person newPerson);
+
+    /**
+     * Deletes personToBeDeleted from all tasks.
+     */
+    void deletePeopleFromTasks(Person personToDelete);
 
     /**
      * Adds the given user input string to the start of the {@code UserInputList}

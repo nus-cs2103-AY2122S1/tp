@@ -75,7 +75,7 @@ public class EditTaskCommand extends Command {
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        int indexOfTaskToEdit = model.getTaskList().getIndexToEdit(index.getZeroBased(), taskToEdit, lastShownList);
+        int indexOfTaskToEdit = model.getIndexToEdit(index.getZeroBased(), taskToEdit, lastShownList);
 
         model.setTask(indexOfTaskToEdit, editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
