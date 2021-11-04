@@ -13,6 +13,9 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
+/**
+ * Deletes tuition classes from TutAssistor.
+ */
 public class DeleteClassCommand extends Command {
     public static final String COMMAND_WORD = "deleteclass";
     public static final String SHORTCUT = "delc";
@@ -24,10 +27,15 @@ public class DeleteClassCommand extends Command {
     public static final String MESSAGE_DELETE_CLASSES_SUCCESS = "Deleted Classes: %1$s.\n";
     public static final String MESSAGE_DELETE_CLASSES_FAILURE = "Classes at index : %1$s are not found.";
 
-    private List<Index> targetIndex = new ArrayList<>();
+    private List<Index> classIndexes = new ArrayList<>();
 
-    public DeleteClassCommand(List<Index> studentIndexes) {
-        targetIndex = studentIndexes;
+    /**
+     * Constructor for the DeleteClass command.
+     *
+     * @param classIndexes The list of class indexes to be deleted.
+     */
+    public DeleteClassCommand(List<Index> classIndexes) {
+        this.classIndexes = classIndexes;
     }
 
     @Override
@@ -37,9 +45,7 @@ public class DeleteClassCommand extends Command {
         List<TuitionClass> lastShownList = model.getFilteredTuitionList();
         List<String> removed = new ArrayList<String>();
         List<Integer> invalidClasses = new ArrayList<>();
-
-        for (int i = 0; i < targetIndex.size(); i++) {
-            Index currIndex = targetIndex.get(i);
+        for (Index currIndex : classIndexes) {
             if (currIndex.getZeroBased() >= lastShownList.size()) {
                 invalidClasses.add(currIndex.getOneBased());
                 continue;
@@ -53,8 +59,10 @@ public class DeleteClassCommand extends Command {
                     .getStudentList().getStudents().stream()
                     .map(x -> model.getSameNameStudent(new Student(new Name(x)))).collect(Collectors.toList());
             for (Student student : currStudents) {
-                Student updatedStudent = student.removeClass(classToDelete);
-                model.setStudent(student, updatedStudent);
+                if (student != null) {
+                    Student updatedStudent = student.removeClass(classToDelete);
+                    model.setStudent(student, updatedStudent);
+                }
             }
             removed.add(classToDelete.getName().name + "|" + classToDelete.getTimeslot());
             model.deleteTuition(classToDelete);
@@ -62,19 +70,25 @@ public class DeleteClassCommand extends Command {
         if (!invalidClasses.isEmpty() && removed.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_DELETE_CLASSES_FAILURE, invalidClasses));
         }
+        String message = getMessage(removed, invalidClasses);
+        return new CommandResult(message);
+    }
 
-        String feedback = (!removed.isEmpty()
-            ? String.format(MESSAGE_DELETE_CLASSES_SUCCESS, removed) : "")
-                + (!invalidClasses.isEmpty()
-                    ? String.format(MESSAGE_DELETE_CLASSES_FAILURE, invalidClasses)
-                    : "");
-        return new CommandResult(feedback);
+    private String getMessage(List<String> removed, List<Integer> invalidClasses) {
+        String message = "";
+        if (!removed.isEmpty()) {
+            message += String.format(MESSAGE_DELETE_CLASSES_SUCCESS, removed);
+        }
+        if (!invalidClasses.isEmpty()) {
+            message += String.format(MESSAGE_DELETE_CLASSES_FAILURE, invalidClasses);
+        }
+        return message;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof DeleteClassCommand
-                && this.targetIndex.containsAll(((DeleteClassCommand) other).targetIndex));
+                && this.classIndexes.containsAll(((DeleteClassCommand) other).classIndexes));
     }
 }

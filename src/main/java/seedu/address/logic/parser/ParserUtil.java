@@ -223,11 +223,11 @@ public class ParserUtil {
     }
 
     /**
-     * Returns list of student indexes.
+     * Parses a {@code List studentIndexes} into a List of indexes.
      *
-     * @param studentIndexes list of indexes, each representing a student.
-     * @return List of student indexes.
-     * @throws ParseException If index is invalid.
+     * @param studentIndexes List of indexes, each representing a student.
+     * @return List of student indexes sorted in descending order.
+     * @throws ParseException If any index is invalid.
      */
     public static List<Index> parseStudentIndexes(List studentIndexes) throws ParseException {
         List<Index> args = new ArrayList<Index>();
@@ -252,12 +252,16 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String timeslot} into a {@code Timeslot}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Uses EEE HH:mm-HH:mm format.
      *
+     * @param timeslot The String that represents the day and timings.
+     * @return The timeslot.
+     * @throws ParseException If there are parsing errors or the timings are invalid.
      */
     public static Timeslot parseTimeslot(String timeslot) throws ParseException {
         requireNonNull(timeslot);
-        String[] arr = timeslot.trim().split(" ", 2); //Splits day from time
+        //Splits day from time
+        String[] arr = timeslot.trim().split(" ", 2);
         String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
 
         if (arr.length < 2 || times == null || times.length < 2) {

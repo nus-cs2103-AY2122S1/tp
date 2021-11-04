@@ -33,13 +33,13 @@ public class Timetable {
 
     /**
      * Constructor of timetable.
-     * @param tuitionClasses tuition classes to be shown on the timetable.
+     * @param tuitionClassList tuition classes to be shown on the timetable.
      * @param resultDisplay display tuition classes not shown, if any.
      * @param timetableInfoPage the UI component responsible for showing the timetable.
      */
-    public Timetable(ObservableList<TuitionClass> tuitionClasses, ResultDisplay resultDisplay,
+    public Timetable(ObservableList<TuitionClass> tuitionClassList, ResultDisplay resultDisplay,
                      TimetableInfoPage timetableInfoPage) {
-        this.tuitionClasses = tuitionClasses;
+        this.tuitionClasses = tuitionClassList;
         this.infoPage = timetableInfoPage;
         this.resultDisplay = resultDisplay;
     }
