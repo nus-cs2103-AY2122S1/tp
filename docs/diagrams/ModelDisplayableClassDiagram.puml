@@ -7,7 +7,9 @@ Package Model <<Rectangle>>{
 Interface Model <<Interface>>
 Interface Displayable <<Interface>>
 Class Model
-Class Displayable
+Class Displayable {
+{method} asDisplayCard(): UiPart<Region>
+}
 
 Class Item
 Class TransactionRecord
@@ -21,6 +23,6 @@ Model ..> Displayable
 Item .up.|> Displayable
 TransactionRecord .up.|> Displayable
 
-Item .down.> ItemCard
-TransactionRecord .down.> TransactionCard
+Item .down.> ItemCard: generates >
+TransactionRecord .down.> TransactionCard: generates >
 @enduml
