@@ -7,8 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FRIENDS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GAMES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
-import static seedu.address.testutil.TypicalFriends.ALICE_FRIEND_ID;
 import static seedu.address.testutil.TypicalFriends.BENSON;
+import static seedu.address.testutil.TypicalFriends.ELLE_FRIEND_ID;
 import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 import static seedu.address.testutil.TypicalGames.MINECRAFT;
 import static seedu.address.testutil.TypicalGames.VALORANT;
@@ -170,11 +170,11 @@ public class ModelManagerTest {
     @Test
     public void linkFriend_newGameFriendLink_success() {
         // adding a new link
-        Friend friend = new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        Friend friend = new FriendBuilder().withFriendId(ELLE_FRIEND_ID).build();
         modelManager.addFriend(friend);
         GameFriendLink gameFriendLink = new GameFriendLinkBuilder()
                 .withGameId(GENSHIN_IMPACT.getGameId().toString())
-                        .withFriendId(ALICE_FRIEND_ID)
+                        .withFriendId(ELLE_FRIEND_ID)
                         .withUserName(new UserName("GoldNova").toString())
                         .build();
         modelManager.linkFriend(friend, gameFriendLink);
@@ -186,10 +186,10 @@ public class ModelManagerTest {
         // remove existing link
         GameFriendLink gameFriendLink = new GameFriendLinkBuilder()
                 .withGameId(GENSHIN_IMPACT.getGameId().toString())
-                .withFriendId(ALICE_FRIEND_ID)
+                .withFriendId(ELLE_FRIEND_ID)
                 .withUserName(new UserName("GoldNova").toString())
                 .build();
-        Friend friend = new FriendBuilder().withFriendId(ALICE_FRIEND_ID)
+        Friend friend = new FriendBuilder().withFriendId(ELLE_FRIEND_ID)
                 .withGameFriendLinks(gameFriendLink).build();
         modelManager.addFriend(friend);
         modelManager.unlinkFriend(friend, GENSHIN_IMPACT);
