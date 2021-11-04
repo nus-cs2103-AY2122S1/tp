@@ -29,24 +29,19 @@ import seedu.address.model.product.Product;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
     private ProductListPanel productListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-    private PieChartSalesView salesView;
+    private final HelpWindow helpWindow;
     private HelpMessage helpMessage;
-    private ViewMoreClient viewMoreClient;
-    private ViewMoreProduct viewMoreProduct;
-
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -84,7 +79,6 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
 
         helpWindow = new HelpWindow();
@@ -121,6 +115,7 @@ public class MainWindow extends UiPart<Stage> {
          * help window purposely so to support accelerators even when focus is
          * in CommandBox or ResultDisplay.
          */
+
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -159,6 +154,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -197,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleStat() {
-        salesView = new PieChartSalesView(logic.getFilteredClientList());
+        PieChartSalesView salesView = new PieChartSalesView(logic.getFilteredClientList());
         secondPanelPlaceholder.getChildren().clear();
         secondPanelPlaceholder.getChildren().add(salesView.getRoot());
     }
@@ -221,8 +217,10 @@ public class MainWindow extends UiPart<Stage> {
     private void handleView(TabPaneBehavior tpb, int selectedTab, Category category) {
         if (category instanceof Client) {
             logger.info("View client's details: " + category);
-            viewMoreClient = new ViewMoreClient();
+
+            ViewMoreClient viewMoreClient = new ViewMoreClient();
             viewMoreClient.setClientDetails((Client) category);
+
             secondPanelPlaceholder.getChildren().clear();
             secondPanelPlaceholder.getChildren().add(viewMoreClient.getRoot());
 
@@ -233,8 +231,10 @@ public class MainWindow extends UiPart<Stage> {
             }
         } else if (category instanceof Product) {
             logger.info("View product's details: " + category);
-            viewMoreProduct = new ViewMoreProduct();
+
+            ViewMoreProduct viewMoreProduct = new ViewMoreProduct();
             viewMoreProduct.setProductDetails((Product) category);
+
             secondPanelPlaceholder.getChildren().clear();
             secondPanelPlaceholder.getChildren().add(viewMoreProduct.getRoot());
 
@@ -244,14 +244,6 @@ public class MainWindow extends UiPart<Stage> {
                 tabPane.setDisable(false);
             }
         }
-    }
-
-    public ClientListPanel getClientListPanel() {
-        return clientListPanel;
-    }
-
-    public ProductListPanel getProductListPanel() {
-        return productListPanel;
     }
 
     /**

@@ -13,7 +13,6 @@ import seedu.address.model.product.Product;
  * An UI component that displays information of a {@code Product}.
  */
 public class ProductCard extends UiPart<Region> {
-
     private static final String FXML = "ProductListCard.fxml";
 
     /**
@@ -45,6 +44,7 @@ public class ProductCard extends UiPart<Region> {
     public ProductCard(Product product, int displayedIndex) {
         super(FXML);
         this.product = product;
+
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().fullName);
         if (product.getUnitPrice() != null) {
@@ -66,7 +66,6 @@ public class ProductCard extends UiPart<Region> {
 
         // state check
         ProductCard card = (ProductCard) other;
-        return id.getText().equals(card.id.getText())
-                       && product.equals(card.product);
+        return id.getText().equals(card.id.getText()) && product.equals(card.product);
     }
 }

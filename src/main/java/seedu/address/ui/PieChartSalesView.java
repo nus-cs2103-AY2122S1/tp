@@ -71,6 +71,7 @@ public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
                             + " Sold: " + product.getValue().toString(),
                     product.getValue()));
         }
+
         pieChart.getData().addAll(pieChartData);
     }
 
@@ -79,9 +80,11 @@ public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
         if (other == this) {
             return true;
         }
+
         if (!(other instanceof PieChartSalesView)) {
             return false;
         }
+
         PieChartSalesView view = (PieChartSalesView) other;
         return pieChart.equals(view.pieChart);
     }
