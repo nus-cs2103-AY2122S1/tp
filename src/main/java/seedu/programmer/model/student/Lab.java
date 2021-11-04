@@ -12,8 +12,8 @@ public class Lab implements DisplayableObject {
 
 
     private LabNum labNum;
-    private LabResult actualScore;
-    private LabTotal totalScore;
+    private Integer actualScore;
+    private Integer totalScore;
 
     /**
      * Constructs a marked Lab Object.
@@ -21,7 +21,7 @@ public class Lab implements DisplayableObject {
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
      * */
-    public Lab(LabNum labNum, LabResult actualScore, LabTotal totalScore) {
+    public Lab(LabNum labNum, Integer actualScore, Integer totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
         this.actualScore = actualScore;
@@ -32,10 +32,10 @@ public class Lab implements DisplayableObject {
      * Constructs a unmarked Lab Object.
      * @param labNum the labNum of the lab
      * @param totalScore the total score */
-    public Lab(LabNum labNum, LabTotal totalScore) {
+    public Lab(LabNum labNum, Integer totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
-        this.actualScore = new LabResult(UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
+        this.actualScore = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
         this.totalScore = totalScore;
     }
 
@@ -52,15 +52,28 @@ public class Lab implements DisplayableObject {
         return labNum;
     }
 
-    public LabResult getActualScore() {
+    public Integer getActualScore() {
         return actualScore;
     }
 
-    public LabTotal getTotalScore() {
+    public Integer getTotalScore() {
         return totalScore;
     }
 
-    public void updateActualScore(LabResult value) {
+    public String getLabNumValue() {
+        return labNum.getLabNum().toString();
+    }
+
+    //todo
+    public String getActualScoreValue() {
+        return actualScore.toString();
+    }
+
+    public String getTotalScoreValue() {
+        return totalScore.toString();
+    }
+
+    public void updateActualScore(Integer value) {
         this.actualScore = value;
     }
 
@@ -78,7 +91,7 @@ public class Lab implements DisplayableObject {
      * Updates the totalScore of the lab
      * @param total new total score
      */
-    public void updateTotal(LabTotal total) {
+    public void updateTotal(Integer total) {
         if (total != null) {
             this.totalScore = total;
         }

@@ -1,6 +1,7 @@
 package seedu.programmer.logic.commands;
 
 //import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
+
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
@@ -61,6 +62,7 @@ public class EditLabCommandTest {
     //
     //        assertCommandFailure(editLabCommand, model, expectedMessage);
     //    }
+
 
     //TODO
     //@Test
