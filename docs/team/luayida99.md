@@ -35,8 +35,9 @@ Given below are my contributions to the project.
         * Added documentation for the features `edit`, `find`, `visit`, `download` and `help` (Pull requests [\#74](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/74), [\#83](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/83), [\#117](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/117), [\#119](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/119))
         * Added glossary and resolved bugs in User Guide: (Pull requests [\#172](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/172), [\#180](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/180))
     * Developer Guide:
-        * Added implementation details of the `visit` and `find` feature (Pull requests [\#98](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/98), [\#106](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/106))
+        * Added implementation details of the `visit`, `find` and `download` features (Pull requests [\#98](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/98), [\#106](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/106), [\#196](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/196))
         * Added instructions for manual testing (Pull request [\#206](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/206))
+        * Added use case for edit command (Pull request [\#210](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/210https://github.com/AY2122S1-CS2103-T14-1/tp/pull/210))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#54](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/54), [\#72](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/72), [\#88](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/88), [\#96](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/96), [\#120](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/120), [\#186](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/186)
