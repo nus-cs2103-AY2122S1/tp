@@ -1,12 +1,16 @@
 @startuml
+skinparam wrapWidth 140
+skinparam defaultTextAlignment center
+
 start
-:user inputs delete command;
+:User inputs delete command;
 :Logic executes delete command;
 :DeleteCommandParser parses the command;
 
-if () then ([Delete index is with in the valid range])
+if () then ([Delete index is valid])
     if() then ([Visit flag is present])
-        if() then ([Person at specified index has a next visit])
+        if() then ([The elderly at specified index
+        has a next visit])
             :deleteVisit;
         else ([else])
             :Throw CommandException;
