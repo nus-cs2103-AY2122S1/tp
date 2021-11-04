@@ -78,7 +78,8 @@ public class EditCommand extends Command {
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, lastShownList.size()));
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());

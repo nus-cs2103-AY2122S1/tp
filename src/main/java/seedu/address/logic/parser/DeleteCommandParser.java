@@ -6,6 +6,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.stream.Stream;
+
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
@@ -17,13 +19,30 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
+        Prefix[] prefixes = new Prefix[]{
+                CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID, CliSyntax.PREFIX_GROUP,
+                CliSyntax.PREFIX_ASSESSMENT, CliSyntax.PREFIX_SCORE, CliSyntax.PREFIX_TAG,
+                CliSyntax.PREFIX_FILE, CliSyntax.PREFIX_ALIAS, CliSyntax.PREFIX_COMMAND};
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, prefixes);
+
+        if (argMultimap.getPreamble().isEmpty() || !isNoPrefixPresent(argMultimap, prefixes)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes present in the given {@code ArgumentMultimap}.
+     */
+    private static boolean isNoPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
 }
