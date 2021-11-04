@@ -60,12 +60,6 @@ public class HelpCommandParser {
 
             case HelpCommand.COMMAND_WORD:
 
-            case AddTaskCommand.COMMAND_WORD:
-
-            case DeleteTaskCommand.COMMAND_WORD:
-
-            case EditTaskCommand.COMMAND_WORD:
-
             case ViewTaskListCommand.COMMAND_WORD:
 
             case DoneCommand.COMMAND_WORD:
