@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.descriptors.FilterApplicantDescriptor;
-import seedu.address.logic.descriptors.InvalidFilterApplicantDescriptor;
+import seedu.address.logic.descriptors.FilterApplicantDescriptorVerifier;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.ApplicantMatchesFiltersPredicate;
 
@@ -44,7 +44,7 @@ public class FilterApplicantCommand extends Command {
         requireNonNull(model);
 
         FilterApplicantDescriptor invalidFilterApplicantDescriptor =
-                new InvalidFilterApplicantDescriptor(model, filterApplicantDescriptor);
+                new FilterApplicantDescriptorVerifier(model, filterApplicantDescriptor);
         if (invalidFilterApplicantDescriptor.hasAnyFilter()) {
             throw new CommandException(String.format(MESSAGE_INVALID_FILTER, invalidFilterApplicantDescriptor));
         }
