@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/driip-ddrop.png" width="200px">
 
-[[github](https://github.com/driip-ddrop)][[portfolio](team/germaineseah.md)]
+[[github](https://github.com/driip-ddrop)][[portfolio](team/driip-ddrop.md)]
 
 * Role: Developer
 * Responsibilities: Documentation + In charge of Storage
@@ -38,7 +38,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/james-kua.png" width="200px">
 
-[[github](https://github.com/James-Kua)]
+[[github](https://github.com/James-Kua)][[portfolio](team/james-kua.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality + Testing + In charge of UI
