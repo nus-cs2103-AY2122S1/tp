@@ -24,12 +24,12 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasksForModule(String moduleName) {
         return new Task[] {new Task(new ModuleName(moduleName), new TaskId("T1"),
-                new TaskName("Assignment 1"), new TaskDeadline("11-11-2021"))
+                new TaskName("Assignment 1"), new TaskDeadline("2021-11-11"))
         };
     }
 
     public static Student[] getSampleStudents() {
-        return new Student[]{new Student(new StudentId("A1234567A"), new Name("Alex Yeoh"), new TeleHandle("@Alex"),
+        return new Student[]{new Student(new StudentId("A1234567A"), new Name("Alex Yeoh"), new TeleHandle("@Alexyeoh"),
                 new Email("alexyeoh@u.nus.edu")), new Student(new StudentId("A7654321A"),
                 new Name("Bernice Yu"),
                 new TeleHandle("@Berny"), new Email("berniceyu@u.nus.edu")),
