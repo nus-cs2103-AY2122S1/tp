@@ -32,7 +32,7 @@ public class SwapShiftCommand extends Command {
             + "identified using the second name is associated with the second shift. Do take note of the order!\n\n"
             + "Parameters: (2 of each)\n"
             + PREFIX_DASH_NAME + " NAME\n"
-            + PREFIX_DAY_SHIFT + "dayOfWeek-slotNumber "
+            + PREFIX_DAY_SHIFT + "DAYOFWEEK-SLOTNUMBER "
             + DATE_RANGE_INPUT + "\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " -n Alex Yeoh d/monday-1 -n David Li d/friday-0\n\n"
