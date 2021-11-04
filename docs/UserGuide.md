@@ -3,6 +3,7 @@ layout: page
 title: User Guide
 ---
 
+
 Are you having trouble with administrative work as a CS2101 tutor? Does current tools like Excel sheets or the pen and paper cause a lot of pain
 when trying to organize and search for students or recording class participation? Could there be a way to streamline this process
 while providing you a better way to visualise the information? Well, ClassMATE has it all covered! ClassMATE is a **desktop app 
@@ -16,6 +17,18 @@ These are what we have to offer:
 * Add students to a class and their respective oral presentation groups within the class
 * Record class participation marks for students
 
+This user guide for ClassMATE, which you are reading now, will teach you how to use ClassMATE's features. 
+It will get you started on how to create students, classes and groups, 
+assigning students to their respective classes and groups and covers other functionalities for users 
+such as filtering and searching students. Finally, it will also guide
+you through on how you can add class participation marks for your students.
+
+The first part is a guide on how to set up ClassMATE and an overview of the symbols and syntax we use in the user guide.
+The remaining sections explain the important features of ClassMATE, such as the Student, 
+Marks, Tutorial Class and Tutorial Group Commands. 
+
+Use the Table of Contents below to 
+navigate to relevant sections to learn the commands for ClassMATE. 
 
 * Table of Contents
 {:toc}
@@ -97,7 +110,7 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Entering format: `help`
 
 ## Student Commands
 
@@ -105,21 +118,22 @@ Format: `help`
 
 Adds a student to ClassMATE.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
+Entering format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
 Examples:
+* If class G06 has not been created, add the class first using `addc`.
 * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`
-* `addstu n/Betsy Crowe t/proactive e/betsycrowe@example.com a/10 Kent Dr, #02-02 p/1234567 c/G06 t/team player`
+* `addstu n/Betsy Crowe t/proactive e/betsycrowe@example.com a/10 Kent Dr, #02-02 p/1234567 c/G06 t/teamPlayer`
 
 ### Editing a student : `editstu`
 
 Edits an existing student in ClassMATE.
 
-Format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`
+Entering format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -153,7 +167,7 @@ Examples:
 
 Shows a list of all students in ClassMATE.
 
-Format: `liststu`
+Entering format: `liststu`
 
 * All students stored are listed.
 
@@ -161,7 +175,7 @@ Format: `liststu`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `findstu KEYWORD [MORE_KEYWORDS]`
+Entering format: `findstu KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Only the name is searched.
@@ -175,7 +189,7 @@ Examples:
 
 Deletes the specified student from the student list.
 
-Format: `deletestu INDEX`
+Entering format: `deletestu INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -200,7 +214,7 @@ There are 6 types of Marks that can be assigned to a student, for the numerous s
 
 Adds the mark for latest session.
 
-Format: `addlm INDEX m/Mark`
+Entering format: `addlm INDEX m/Mark`
 
 * Adds mark as the mark for latest session.
 * Mark is not case-sensitive.
@@ -216,7 +230,7 @@ Examples:
 
 Deletes the mark for latest session.
 
-Format: `deletelm INDEX`
+Entering format: `deletelm INDEX`
 
 * Deletes mark as the mark for latest session.
 * Student has to have some marks assigned previously.
@@ -232,7 +246,7 @@ Examples:
 
 Deletes the all marks for student.
 
-Format: `deleteam INDEX`
+Entering format: `deleteam INDEX`
 
 * Deletes all marks.
 * Student has to have some marks assigned previously.
@@ -250,7 +264,7 @@ Clears all students from ClassMATE. Below is how it would look like.
 
 ![clear](images/clear.png)
 
-Format: `clear`
+Entering format: `clear`
 
 <div markdown="span" class="alert alert-primary">:warning: **Warning:**
 This command deletes **ALL** students and is irreversible :warning:
@@ -262,7 +276,7 @@ This command deletes **ALL** students and is irreversible :warning:
 
 Adds a tutorial class to ClassMATE.
 
-Format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
+Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
 Examples:
 * `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
@@ -278,7 +292,7 @@ Views a class in ClassMATE, as shown above
 
 viewc highlights the class chosen, and filters out only students in the class!
 
-Format: `viewc INDEX`
+Entering format: `viewc INDEX`
 
 * Views the class details at the specified INDEX.
 * Details of a class includes students in the class and the class schedule.
@@ -293,13 +307,13 @@ Examples:
 
 Shows a list of all classes in ClassMATE.
 
-Format: `listc`
+Entering format: `listc`
 
 ### Finding classes by class codes: `findc`
 
 Find classes by class codes.
 
-Format: `findc KEYWORD [MORE_KEYWORDS]`
+Entering format: `findc KEYWORD [MORE_KEYWORDS]`
 
 * The search is not absolute. e.g `G0` will match `G06`
 
@@ -311,7 +325,7 @@ Examples:
 
 Deletes a class from ClassMATE
 
-Format: `deletec INDEX`
+Entering format: `deletec INDEX`
 
 * Deletes the class at the specified INDEX.
 * The index refers to the index number shown in the displayed list of classes.
@@ -332,7 +346,7 @@ covers interactions between students and groups.
 
 Adds a group to a particular tutorial class
 
-Format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
+Entering format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
 * GROUP_NUMBER should be a single digit
 
@@ -348,12 +362,11 @@ Examples:
 * `addcg gn/1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
 
-
 ### Viewing a Group: `viewg`
 
 Lists students in a particular tutorial group in ClassMATE
 
-Format: `viewg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
+Entering format: `viewg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
 Examples:
 * `viewg c/G06 type/OP2 gn/1` lists the students in `OP2` Group `1` of class `G06`
@@ -363,7 +376,7 @@ Examples:
 
 Deletes a group from ClassMATE
 
-Format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
+Entering Format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
 * GROUP_NUMBER should be a single digit
 
@@ -376,7 +389,7 @@ Examples:
 
 Adds student to a group.
 
-Format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
+Entering format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 * Adds the student to a group in the class
 
@@ -388,7 +401,7 @@ Example:
 
 Deletes a student from a group.
 
-Format: `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE`
+Entering format: `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 * Deletes the student from a group in the class
 * Type refers to the assignment that the group will work together for
@@ -402,7 +415,7 @@ Example:
 
 Exits the program.
 
-Format: `exit`
+Entering format: `exit`
 
 ### Saving the data
 
@@ -443,7 +456,6 @@ Action | Format, Examples
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
 **Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
 **Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
-
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
