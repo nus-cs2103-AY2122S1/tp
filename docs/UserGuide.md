@@ -5,9 +5,9 @@ title: User Guide
 ## User Guide
 
 * Table of Contents
-  {:toc}
+{:toc}
 
-##Overview
+## Overview
 
 Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (CLI) application for Student Insurance
 Agents that aids their operations by:
