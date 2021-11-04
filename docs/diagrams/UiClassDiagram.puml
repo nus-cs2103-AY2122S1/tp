@@ -9,14 +9,19 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
 Class ResultDisplay
 Class CenterPanel
 Class SchedulePanel
 Class PersonListPanel
 Class PersonCard
+Class TagListPanel
+Class TagCard
 Class StatusBarFooter
 Class CommandBox
+Class ExternalWindow
+Class HelpWindow
+Class ReminderWindow
+Class ReminderLessonCard
 }
 
 package Model <<Rectangle>> {
@@ -37,11 +42,15 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" CenterPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow -down-> "0..1" HelpWindow
+MainWindow -down-> "0..1" ReminderWindow
 
 CenterPanel *-down-> "1" PersonListPanel
 CenterPanel *-down-> "1" SchedulePanel
+CenterPanel *-down-> "1" TagListPanel
 
 PersonListPanel -down-> "*" PersonCard
+TagListPanel -down-> "*" TagCard
+ReminderWindow -down-> "*" ReminderLessonCard
 
 MainWindow -left-|> UiPart
 
@@ -51,8 +60,13 @@ CenterPanel --|> UiPart
 SchedulePanel --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
+TagListPanel --|> UiPart
+TagCard --|> UiPart
+ReminderLessonCard --|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ExternalWindow --|> UiPart
+HelpWindow --|> ExternalWindow
+ReminderWindow --|> ExternalWindow
 
 PersonCard ..> Model
 SchedulePanel ..> Model
@@ -63,6 +77,7 @@ CenterPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+ReminderLessonCard -[hidden]left- ExternalWindow
 
 MainWindow -[hidden]-|> UiPart
 @enduml
