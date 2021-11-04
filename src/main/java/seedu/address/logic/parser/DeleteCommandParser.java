@@ -2,11 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -20,9 +21,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         Prefix[] prefixes = new Prefix[]{
-                CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID, CliSyntax.PREFIX_GROUP,
-                CliSyntax.PREFIX_ASSESSMENT, CliSyntax.PREFIX_SCORE, CliSyntax.PREFIX_TAG,
-                CliSyntax.PREFIX_FILE, CliSyntax.PREFIX_ALIAS, CliSyntax.PREFIX_COMMAND};
+            CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID, CliSyntax.PREFIX_GROUP,
+            CliSyntax.PREFIX_ASSESSMENT, CliSyntax.PREFIX_SCORE, CliSyntax.PREFIX_TAG,
+            CliSyntax.PREFIX_FILE, CliSyntax.PREFIX_ALIAS, CliSyntax.PREFIX_COMMAND};
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, prefixes);
 
