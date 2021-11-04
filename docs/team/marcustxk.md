@@ -40,6 +40,6 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added personas for gitGud.
     * Added user story for `list` feature.
-    * Updated the logic section of the Developer Guide.
+    * Updated the logic component section of the Developer Guide to follow gitGud.
     * Added implementation section of `friend --schedule` feature.
   
