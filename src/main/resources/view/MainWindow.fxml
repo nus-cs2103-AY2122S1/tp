@@ -71,7 +71,7 @@
                   <Label alignment="CENTER" layoutX="562.0" layoutY="7.0" prefHeight="26.0" prefWidth="135.0" text="Positions" textAlignment="CENTER" textFill="WHITE" />
              <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="667.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                 <Image url="@../images/Positions.png" />
+                 <Image url="@../images/Position.png" />
                </image>
              </ImageView>
 
