@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
@@ -45,10 +44,15 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     public ShowCommand parseByIndex(ArgumentMultimap argMultimap, Path savePath) throws ParseException {
         Index index;
 
+        // check if there are any prefixes, e.g. `show 1 -a Midterm` is valid
+        if (!isNoPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
         }
 
         return new ShowCommand(index, savePath);
@@ -77,6 +81,13 @@ public class ShowCommandParser implements Parser<ShowCommand> {
      */
     private static boolean isInvalidPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent()).count() != 1;
+    }
+
+    /**
+     * Returns true if none of the prefixes present in the given {@code ArgumentMultimap}.
+     */
+    private static boolean isNoPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
 }
