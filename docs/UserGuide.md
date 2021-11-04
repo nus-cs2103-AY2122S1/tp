@@ -291,7 +291,7 @@ The following sub-categories will explain the intended purpose for the set of fe
 
 ### 4.1 Database
 
-Database features consist of features that allows you to be able to make changes to modules that are in our database. 
+[Database](#database) features consist of features that allows you to be able to make changes to modules that are in our database. 
 Do note that these features do not directly affect the modules that are currently stored in your academic plan.
 (we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan in the [FAQ](#5-faq) section) <br>
 
@@ -364,7 +364,7 @@ Examples:
 
 ### 4.2 Academic Plan
 
-Academic Plan features consist of features that allows you to be able to create and customize your own academic plan.
+[Academic Plan](#academic-plan) features consist of features that allows you to be able to create and customize your own academic plan.
 Do note that these features are the ones that allows you to update and edit your academic plans
 (such as the visual display of which modules you have taken, as well as the progress bar for each of the University's requirements).
 
@@ -468,6 +468,9 @@ This section gives you the solutions to commonly asked questions.
 
 **Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
 **A**: First, add the module into the database using the [add](#411-adding-a-module-into-the-database--add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
+
+**Q**: Why is the module not included in the [MC Goal Progress](#325-mc-goal-progress) even though I have added it to my academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command<br>
+**A**: Make sure that the module has the appropriate tag. Also make sure that the module is colour coded in green as specified [here](#33-module-explanation). Do remember that our MC Goal Progress only takes into account the modules that you have taken.
 
 --------------------------------------------------------------------------------------------------------------------
 
