@@ -12,25 +12,27 @@ Given below are my contributions to the project.
 
 #### New Features
 1. Adding in display windows for Task and Event List.
-2. Adding in title labels for each list in GUI.
+   * What it does: Allows the user to view all 3 event lists: Event, Member, and Task.
+   * Justification: This feature improves the product significantly because the user is required to view and make further commands according to the index shown on the lists.
+   * Highlights: There was much difficulty faced in making the cards on the GUI automatically update when the tags, which are shown in flow panes, are being changed due to member/task additions. 
+   * Credits: FXML files that are edited with much help from SceneBuilder.
 
 #### Code contributed 
 [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=gwphua)
 
-#### Project management
-1. Test cases for Model classes.
-
 #### Enhancements to existing features
 1. Automatically updated tags when fields in the cards are changed.
     * Previous GUI implementation does not update the cards immediately after edits to the tags are being done.
+    * [\#143](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/143)
 2. Changing colours of the tags in GUI.
     * Colour of the tags now represent the attendance of a member, or the status of task completion for a member.
+    * [\#153](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/153)
+3. Wrote additional tests for existing features to increase code coverage.
 
 #### Documentation
 1. Changing occurrences of Address Book to 'Ailurus' on the display side.
+    * [\#238](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/238)
 2. User Guide write-up
     * Standardise format and order of commands
     * Fix grammatical errors
-    
-#### Tools
-1. Use of SceneBuilder application to implement GUI + FXML file changes.
+    * [\#145](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/145), [\#147](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/147)
