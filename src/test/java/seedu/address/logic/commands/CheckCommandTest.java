@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.ReservationCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
 import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
 
@@ -30,8 +30,8 @@ class CheckCommandTest {
     private LocalDate date2 = BENSON_RESERVATION.getDateTime().toLocalDate();
     private LocalTime time = ALICE_RESERVATION.getDateTime().toLocalTime();
     private EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
-    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
-    private Model resultModel = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
+    private Model resultModel = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
     private Reservation reservation1 = ALICE_RESERVATION;
     private Reservation reservation2 = BENSON_RESERVATION;
 

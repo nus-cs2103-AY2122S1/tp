@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalRhrhSuppliers;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.supplier.SupplierComparator;
 
@@ -25,7 +25,7 @@ public class SortSupplierCommandTest {
     private static final String DELIVERY_DETAILS_DESC = "delivery details";
     private static final String ASCENDING_DESC = "ascending";
     private static final String DESCENDING_DESC = "descending";
-    private final Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalRhrhSuppliers(), new UserPrefs());
 
     @Test
     public void constructor_nullComparator_throwsNullPointerException() {
@@ -61,7 +61,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, NAME_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getNameComparator(true));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, NAME_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getNameComparator(false));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -91,7 +91,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, ADDRESS_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getAddressComparator(true));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -106,7 +106,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, ADDRESS_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getAddressComparator(false));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -121,7 +121,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, PHONE_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getPhoneComparator(true));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -136,7 +136,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, PHONE_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getPhoneComparator(false));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -151,7 +151,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, EMAIL_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getEmailComparator(true));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -166,7 +166,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, EMAIL_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getEmailComparator(false));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -181,7 +181,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, SUPPLY_TYPE_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getSupplyTypeComparator(true));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -196,7 +196,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, SUPPLY_TYPE_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getSupplyTypeComparator(false));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -211,7 +211,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, DELIVERY_DETAILS_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getDeliveryDetailsComparator(true));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -226,7 +226,7 @@ public class SortSupplierCommandTest {
         String expectedMessage = String.format(SortSupplierCommand.MESSAGE_SUCCESS, DELIVERY_DETAILS_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableSupplierList().sort(SupplierComparator.getDeliveryDetailsComparator(false));
 
         assertCommandSuccess(sortSupplierCommand, model, expectedMessage, expectedModel);
@@ -237,7 +237,7 @@ public class SortSupplierCommandTest {
         SortSupplierCommand sortSupplierCommand =
                 new SortSupplierCommand(SupplierComparator.getDeliveryDetailsComparator(true),
                         DELIVERY_DETAILS_DESC, ASCENDING_DESC);
-        Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+        Model emptyModel = new ModelManager(new Rhrh(), new UserPrefs());
         assertCommandFailure(sortSupplierCommand, emptyModel, SortSupplierCommand.MESSAGE_EMPTY_FILTERED_LIST);
     }
 

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.showEmployeeAtIndex;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
+import static seedu.address.testutil.TypicalEmployees.getTypicalRhrhEmployees;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
@@ -24,7 +24,7 @@ import seedu.address.model.person.employee.Employee;
  */
 public class DeleteEmployeeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhEmployees(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteEmployeeCommandTest {
 
         String expectedMessage = String.format(DeleteEmployeeCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS, employeeToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.deleteEmployee(employeeToDelete);
 
         assertCommandSuccess(deleteEmployeeCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeleteEmployeeCommandTest {
 
         String expectedMessage = String.format(DeleteEmployeeCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS, employeeToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.deleteEmployee(employeeToDelete);
         showNoEmployee(expectedModel);
 
@@ -69,7 +69,7 @@ public class DeleteEmployeeCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEmployeeList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getEmployeeList().size());
 
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(outOfBoundIndex);
 

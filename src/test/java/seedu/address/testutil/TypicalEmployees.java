@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Rhrh;
 import seedu.address.model.person.employee.Employee;
 
 /**
@@ -90,10 +90,10 @@ public class TypicalEmployees {
     private TypicalEmployees() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical employees.
+     * Returns an {@code Rhrh} with all the typical employees.
      */
-    public static AddressBook getTypicalAddressBookEmployees() {
-        AddressBook ab = new AddressBook();
+    public static Rhrh getTypicalRhrhEmployees() {
+        Rhrh ab = new Rhrh();
         for (Employee employee : getTypicalEmployees()) {
             ab.addEmployee(employee);
         }

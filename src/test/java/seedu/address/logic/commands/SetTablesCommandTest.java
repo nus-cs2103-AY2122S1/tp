@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 import static seedu.address.testutil.TypicalTables.DUMMY_LIST_OF_TABLES;
 import static seedu.address.testutil.TypicalTables.DUMMY_LIST_OF_TABLE_SIZES;
 import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_1;
@@ -23,7 +23,7 @@ import seedu.address.model.UserPrefs;
 
 
 class SetTablesCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
 
     @Test
     public void constructor_nullArgument_throwsNullPointerException() {
