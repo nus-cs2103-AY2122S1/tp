@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -83,6 +84,62 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+    }
+
+    @Test
+    public void getGroup_groupExists_success() {
+        AddressBook addressBook = new AddressBook();
+        Group added = new Group("T01A");
+        addressBook.addGroup(added);
+        assertSame(addressBook.getGroup(new Group("T01A")), added);
+    }
+
+    @Test
+    public void getAssessment_assessmentExists_success() {
+        AddressBook addressBook = new AddressBook();
+        Assessment added = new Assessment("P01");
+        addressBook.addAssessment(added);
+        assertSame(addressBook.getAssessment(new Assessment("P01")), added);
+    }
+
+    @Test
+    public void getGroup_groupDoesNotExist_returnNull() {
+        AddressBook addressBook = new AddressBook();
+        Group added = new Group("T01A");
+        addressBook.addGroup(added);
+        assertSame(addressBook.getGroup(new Group("T01B")), null);
+    }
+
+    @Test
+    public void getAssessment_assessmentDoesNotExist_returnNull() {
+        AddressBook addressBook = new AddressBook();
+        Assessment added = new Assessment("P01");
+        addressBook.addAssessment(added);
+        assertSame(addressBook.getAssessment(new Assessment("M01")), null);
+    }
+
+    @Test
+    public void equals_hashCode() {
+        assertEquals(new AddressBook(), new AddressBook());
+        assertEquals(new AddressBook().hashCode(), new AddressBook().hashCode());
+
+        AddressBook addressBook = new AddressBook();
+        addressBook.addAssessment(new Assessment("P01"));
+        AddressBook addressBook1 = new AddressBook(addressBook);
+        assertEquals(addressBook, addressBook1);
+        assertEquals(addressBook.hashCode(), addressBook1.hashCode());
+
+        addressBook = new AddressBook();
+        addressBook.addStudent(new PersonBuilder(ALICE).build());
+        addressBook1 = new AddressBook(addressBook);
+        assertEquals(addressBook, addressBook1);
+        assertEquals(addressBook.hashCode(), addressBook1.hashCode());
+
+        addressBook = new AddressBook();
+        addressBook.addGroup(new Group("T01A"));
+        addressBook1 = new AddressBook(addressBook);
+        assertEquals(addressBook, addressBook1);
+        assertEquals(addressBook.hashCode(), addressBook1.hashCode());
     }
 
     /**

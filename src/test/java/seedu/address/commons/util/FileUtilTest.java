@@ -1,10 +1,14 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+
 
 public class FileUtilTest {
 
@@ -18,6 +22,12 @@ public class FileUtilTest {
 
         // null path -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> FileUtil.isValidPath(null));
+    }
+
+    @Test
+    public void getRelativePath() {
+        Path path = FileUtil.pathOf("hello.world");
+        assertEquals(FileUtil.getRelativePath(path), Path.of(".").resolve(Path.of("hello.world")));
     }
 
 }
