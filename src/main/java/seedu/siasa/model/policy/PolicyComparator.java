@@ -1,5 +1,6 @@
 package seedu.siasa.model.policy;
 
+import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.Comparator;
 
@@ -23,10 +24,12 @@ public class PolicyComparator {
             a, b) -> -Integer.compare(a.getCommission().commissionPercentage, b.getCommission().commissionPercentage);
 
     public static final Comparator<Policy> POLICY_SORT_BY_DATE_ASC = (
-            a, b) -> ChronoLocalDate.timeLineOrder().compare(a.getCoverageExpiryDate().value,
-            b.getCoverageExpiryDate().value);
+            a, b) -> ChronoLocalDate.timeLineOrder().compare(
+                    a.getCoverageExpiryDate().orElse(new CoverageExpiryDate(LocalDate.MAX)).value,
+                    b.getCoverageExpiryDate().orElse(new CoverageExpiryDate(LocalDate.MAX)).value);
 
     public static final Comparator<Policy> POLICY_SORT_BY_DATE_DSC = (
-            a, b) -> -ChronoLocalDate.timeLineOrder().compare(a.getCoverageExpiryDate().value,
-            b.getCoverageExpiryDate().value);
+            a, b) -> -ChronoLocalDate.timeLineOrder().compare(
+                    a.getCoverageExpiryDate().orElse(new CoverageExpiryDate(LocalDate.MAX)).value,
+                    b.getCoverageExpiryDate().orElse(new CoverageExpiryDate(LocalDate.MAX)).value);
 }

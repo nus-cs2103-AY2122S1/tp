@@ -17,10 +17,12 @@ public class ShowExpiringPolicyCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicy";
 
+    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1);
+
     public static final String MESSAGE_SUCCESS = "Showing policies that will be expiring in 1 month";
 
     public static final Predicate<Policy> EXPIRING_POLICIES_MONTH = (
-            p) -> p.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1));
+            p) -> p.isExpiringBefore(CUT_OFF_DATE);
 
     @Override
     public CommandResult execute(Model model) {

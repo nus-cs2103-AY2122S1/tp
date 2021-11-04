@@ -104,7 +104,7 @@ public class EditPolicyCommand extends Command {
         PaymentStructure updatedPaymentStructure = editPolicyDescriptor.getPaymentStructure()
                 .orElse(policyToEdit.getPaymentStructure());
         CoverageExpiryDate updatedCoverageExpiryDate = editPolicyDescriptor.getCoverageExpiryDate()
-                .orElse(policyToEdit.getCoverageExpiryDate());
+                .orElse(policyToEdit.getCoverageExpiryDate().orElse(null));
         Commission updatedCommission = editPolicyDescriptor.getCommission().orElse(policyToEdit.getCommission());
         Set<Tag> updatedTags = editPolicyDescriptor.getTags().orElse(policyToEdit.getTags());
 
