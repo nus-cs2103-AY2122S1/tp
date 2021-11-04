@@ -479,20 +479,21 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
         * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ##### YEARS_OF_EXPERIENCE `y/`
-    * A YEARS_OF_EXPERIENCE should be a **non-negative integer** smaller than or equals to **67** (re-employment age in Singapore).
+    * A YEARS_OF_EXPERIENCE should be a **non-negative number** with intervals of **0.5** and smaller than or equals to **67** (re-employment age in Singapore).
     * For example:
         * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
-        * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.5`, and `100` are not acceptable.
+        * YEARS_OF_EXPERIENCE inputs such as `0.5` and `3.0` are acceptable.
+        * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.1`, and `100` are not acceptable.
 * ##### TAG `t/`
     * A TAG should only contain alphanumeric characters. Spaces between words are **not** allowed.
     * For example:
         * TAG inputs such as `friends` and `colleagues` are allowed.
         * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
 * ##### INTERVIEW `i/`
-    * An INTERVIEW should follow the DateTime format `yyyy-MM-dd, H:mm`.
+    * An INTERVIEW should be on a legitimate date and follows the DateTime format `yyyy-M-d, H:m`. (Year should be strictly 4-digit while others can be either 1 or 2 digit)
     * For example:
-        * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
-        * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable.
+        * INTERVIEW inputs such as `2021-08-09, 13:00` and `2022-1-3, 3:00` are acceptable.
+        * INTERVIEW inputs such as `morning`, `2021.10.21`, `2021-10-22 13:00` and `2021-02-30, 10:30` (not an existing date) are not acceptable.
 * ##### NOTES `nt/`
     * A NOTES can contain any character, number or symbol as there are no restrictions in place.
     * For example:
@@ -573,12 +574,13 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * An `experienced old` input can match with applicants that have the ***Tag*** `experienced`, or `old`, or both.
 
 * ##### INTERVIEW `i/`
-    * An INTERVIEW is considered matching with a ***Interview*** only if the ***Interview***'s time string contains **at least 1** keyword.
-    * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
+    * An INTERVIEW is considered matching with a ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***  .
+    * All keywords provided as INTERVIEW input must comply with the displayed time format (e.g. 20 March 2021, 10:30).
     * For example:
         * A `2021` input can match with applicants that have the ***Interview*** in year 2021.
         * A `20:21` input can match with applicants that have the ***Interview*** at time 20:21 on any date.
-        * A `21` input can match with ***Interviews*** `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`.
+        * A `mar` input can match with applicants that have the ***Interview*** in March.
+        * However, a `9:30` input cannot be matched with the ***Interview*** displayed as `20 Mar 2021, 09:30` (as 9:30 is not a whole word but 09:30 is).
 
 * ##### NOTES `nt/`
     * NOTES are considered matching with  ***Notes*** only if  ***Notes*** contains **the entire** keyword.
