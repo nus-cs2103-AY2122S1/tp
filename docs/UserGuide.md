@@ -381,7 +381,7 @@ Format: `deleteC INDEX`
 * Deletes the customer at the specified `INDEX`.
 
 Example:
-* `deleteC 2` deletes the 2nd customer displayed in the address book.
+* `deleteC 2` deletes the 2nd customer displayed in RHRH.
 
 <div markdown="block" class="alert alert-warning">
    
@@ -401,7 +401,7 @@ Format: `deleteE INDEX`
 * Deletes the employee at the specified `INDEX`.
 
 Example:
-* `deleteE 2` deletes the 2nd employee in the address book.
+* `deleteE 2` deletes the 2nd employee in RHRH.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -421,7 +421,7 @@ Format: `deleteS INDEX`
 * Deletes the supplier at the specified `INDEX`.
 
 Example:
-* `deleteS 2` deletes the 2nd supplier in the address book.
+* `deleteS 2` deletes the 2nd supplier in RHRH.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -793,7 +793,7 @@ RHRH data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+RHRH data are saved as a JSON file `[JAR file location]/data/rhrh.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-danger">
 

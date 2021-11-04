@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Rhrh;
 import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.table.Table;
@@ -36,8 +36,8 @@ public class TypicalReservation {
     // prevent initialization
     private TypicalReservation() {}
 
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Rhrh getTypicalRhrh() {
+        Rhrh ab = new Rhrh();
         ab.addCustomer(CUSTOMER_ALICE);
         ab.addCustomer(CUSTOMER_BENSON);
         ab.addCustomer(CUSTOMER_CARL);

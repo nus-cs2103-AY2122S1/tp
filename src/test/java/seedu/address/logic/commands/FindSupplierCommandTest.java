@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_SUPPLIERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalRhrhSuppliers;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,8 +21,8 @@ import seedu.address.model.person.supplier.SupplierClassContainsKeywordsPredicat
 
 
 public class FindSupplierCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhSuppliers(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRhrhSuppliers(), new UserPrefs());
 
     @Test
     public void equals() {

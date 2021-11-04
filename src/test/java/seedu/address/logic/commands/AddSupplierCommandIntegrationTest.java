@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalRhrhSuppliers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,14 +22,14 @@ public class AddSupplierCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
+        model = new ModelManager(getTypicalRhrhSuppliers(), new UserPrefs());
     }
 
     @Test
     public void execute_newSupplier_success() {
         Supplier validSupplier = new SupplierBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.addSupplier(validSupplier);
 
         assertCommandSuccess(new AddSupplierCommand(validSupplier), model,
@@ -38,7 +38,7 @@ public class AddSupplierCommandIntegrationTest {
 
     @Test
     public void execute_duplicateSupplier_throwsCommandException() {
-        Supplier supplierInList = model.getAddressBook().getSupplierList().get(0);
+        Supplier supplierInList = model.getRhrh().getSupplierList().get(0);
         assertCommandFailure(new AddSupplierCommand(supplierInList), model,
                 AddSupplierCommand.MESSAGE_DUPLICATE_SUPPLIER);
     }

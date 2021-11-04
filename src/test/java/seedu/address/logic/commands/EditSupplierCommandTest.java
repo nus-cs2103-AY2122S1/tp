@@ -14,16 +14,16 @@ import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommand
 import static seedu.address.logic.commands.SupplierCommandTestUtil.showSupplierAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUPPLIER;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalRhrhSuppliers;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
@@ -34,7 +34,7 @@ import seedu.address.testutil.SupplierBuilder;
  */
 public class EditSupplierCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhSuppliers(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class EditSupplierCommandTest {
 
         String expectedMessage = String.format(EditSupplierCommand.MESSAGE_EDIT_SUPPLIER_SUCCESS, editedSupplier);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setSupplier(model.getFilteredSupplierList().get(0), editedSupplier);
 
         assertCommandSuccess(editSupplierCommand, model, expectedMessage, expectedModel);
@@ -65,7 +65,7 @@ public class EditSupplierCommandTest {
 
         String expectedMessage = String.format(EditSupplierCommand.MESSAGE_EDIT_SUPPLIER_SUCCESS, editedSupplier);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setSupplier(lastSupplier, editedSupplier);
 
         assertCommandSuccess(editSupplierCommand, model, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class EditSupplierCommandTest {
 
         String expectedMessage = String.format(EditSupplierCommand.MESSAGE_EDIT_SUPPLIER_SUCCESS, editedSupplier);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
 
         assertCommandSuccess(editSupplierCommand, model, expectedMessage, expectedModel);
     }
@@ -96,7 +96,7 @@ public class EditSupplierCommandTest {
 
         String expectedMessage = String.format(EditSupplierCommand.MESSAGE_EDIT_SUPPLIER_SUCCESS, editedSupplier);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.setSupplier(model.getFilteredSupplierList().get(0), editedSupplier);
 
         assertCommandSuccess(editSupplierCommand, model, expectedMessage, expectedModel);
@@ -116,7 +116,7 @@ public class EditSupplierCommandTest {
         showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
 
         // edit person in filtered list into a duplicate in address book
-        Supplier supplierInList = model.getAddressBook().getSupplierList().get(INDEX_SECOND_SUPPLIER.getZeroBased());
+        Supplier supplierInList = model.getRhrh().getSupplierList().get(INDEX_SECOND_SUPPLIER.getZeroBased());
         EditSupplierCommand editSupplierCommand = new EditSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new EditSupplierDescriptorBuilder(supplierInList).build());
 
@@ -142,7 +142,7 @@ public class EditSupplierCommandTest {
         showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
         Index outOfBoundIndex = INDEX_SECOND_SUPPLIER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getSupplierList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getSupplierList().size());
 
         EditSupplierCommand editSupplierCommand = new EditSupplierCommand(outOfBoundIndex,
                 new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB).build());
