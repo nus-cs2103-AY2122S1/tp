@@ -145,15 +145,6 @@ public class Applicant {
     }
 
     /**
-     * Returns true if this applicant has the specified name.
-     * Case-insensitive comparison.
-     */
-    public boolean hasNameIgnoreCase(Name name) {
-        requireNonNull(name);
-        return this.name.equalsIgnoreCase(name);
-    }
-
-    /**
      * Returns true if this applicant has the given application status.
      */
     public boolean hasApplicationStatus(ApplicationStatus applicationStatus) {

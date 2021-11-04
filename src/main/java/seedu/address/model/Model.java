@@ -59,7 +59,7 @@ public interface Model {
     /**
      * Returns the applicant with the specified name, if any.
      */
-    Applicant getApplicantByNameIgnoreCase(Name applicantName);
+    Applicant getApplicantByName(Name applicantName);
 
 
 

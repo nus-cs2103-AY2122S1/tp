@@ -20,7 +20,7 @@ public class VisualizePositionCommand extends Command {
     public static final String COMMAND_WORD = "visualize";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays a visual representation of a position. "
+            + ": Displays a visual representation of a position. " + "\n"
             + "Parameters: " + "TITLE " + "\n"
             + "Example: " + COMMAND_WORD + " " + "software engineer";
 
