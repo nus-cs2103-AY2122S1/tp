@@ -20,14 +20,14 @@ public class AddApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "add-applicant";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to MrTechRecruiter. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to MrTechRecruiter. " + "\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_POSITION + "POSITION "
-            + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE "
+            + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE " + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
