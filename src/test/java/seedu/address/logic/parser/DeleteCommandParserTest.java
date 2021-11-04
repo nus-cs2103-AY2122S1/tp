@@ -60,12 +60,12 @@ public class DeleteCommandParserTest {
 
         // 2 duplicate inputs
         assertParseFailure(parser, "1 1",
-                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); 
-        
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
+
          // Many duplicates interspersed (Note that DeleteCommandParser does not detect out of range indexes)
         assertParseFailure(parser, "70 2 3 2 2 1 70",
                 String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
-        
+
         // Duplicates as last few inputs
         assertParseFailure(parser, "2 3 4 4 4",
                 String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); 
