@@ -54,8 +54,6 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        System.out.println(commandWord);
-
         switch (commandWord) {
         case AddOrgCommand.COMMAND_WORD:
             return new AddOrgCommandParser().parse(arguments);

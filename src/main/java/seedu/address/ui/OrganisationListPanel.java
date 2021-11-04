@@ -32,7 +32,6 @@ public class OrganisationListPanel extends UiPart<Region> {
     class OrganisationListViewCell extends ListCell<Organisation> {
         @Override
         protected void updateItem(Organisation organisation, boolean empty) {
-            System.out.print("update pls");
             super.updateItem(organisation, empty);
 
             if (empty || organisation == null) {

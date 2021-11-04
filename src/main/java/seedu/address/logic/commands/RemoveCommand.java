@@ -25,7 +25,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interaction.Interaction;
-import seedu.address.model.person.Compatability;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -124,7 +124,7 @@ public class RemoveCommand extends Command {
         Email previousEmail = personToRemoveFrom.getEmail();
         Faculty previousFaculty = personToRemoveFrom.getFaculty();
         Major previousMajor = personToRemoveFrom.getMajor();
-        Compatability previousCompatability = personToRemoveFrom.getCompatability();
+        Compatibility previousCompatibility = personToRemoveFrom.getCompatibility();
 
         //Convert Set of Skills to an alphabetically sorted Array
         Set<Index> indexesOfSkillsToRemove = removePersonDescriptor
@@ -164,7 +164,7 @@ public class RemoveCommand extends Command {
                 previousInteractions);
 
         return new Person(previousName, previousEmail, previousFaculty, previousMajor,
-                previousCompatability, updatedSkills, updatedLanguages,
+                previousCompatibility, updatedSkills, updatedLanguages,
                 updatedFrameworks, updatedTags, updatedRemarks, updatedInteractions);
     }
 
@@ -178,9 +178,7 @@ public class RemoveCommand extends Command {
 
         // Arrange previous skills in an array
         ArrayList<T> elementArray = new ArrayList<>();
-        elementArray.addAll(previousSet);
         elementArray.sort(Comparator.comparing(Object::toString)); //Does this work?
-        System.out.println(elementArray);
 
         // Convert the set of Indexes to an array of integers
         Index[] indexesArray = indexesToRemove.toArray(new Index[0]);

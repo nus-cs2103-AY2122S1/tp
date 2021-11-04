@@ -111,10 +111,10 @@ public class PersonViewCard extends UiPart<Region> {
         interactionsLabel.setText("Interactions");
 
         compatibilityLabel.setText("Compatibility");
-        if (person.getCompatability().compatabilityRating.isEmpty()) {
+        if (person.getCompatibility().compatibilityRating.isEmpty()) {
             compatibilityView.setText("-");
         } else {
-            compatibilityView.setText(person.getCompatability().compatabilityRating.get() + "/100");
+            compatibilityView.setText(person.getCompatibility().compatibilityRating.get() + "/100");
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");

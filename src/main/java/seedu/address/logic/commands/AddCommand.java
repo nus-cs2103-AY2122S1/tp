@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATABILITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATIBILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_FACULTY + "FACULTY "
             + PREFIX_MAJOR + "MAJOR "
-            + "[" + PREFIX_COMPATABILITY + "COMPATABILITY] "
+            + "[" + PREFIX_COMPATIBILITY + "COMPATIBILITY] "
             + "[" + PREFIX_SKILL + "SKILL]… "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE]… "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK]… "
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_FACULTY + "computing "
             + PREFIX_MAJOR + "computer science "
-            + PREFIX_COMPATABILITY + "80 "
+            + PREFIX_COMPATIBILITY + "80 "
             + PREFIX_SKILL + "backend "
             + PREFIX_LANGUAGE + "sql "
             + PREFIX_FRAMEWORK + "expressJS "

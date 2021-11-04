@@ -41,6 +41,11 @@ public class InteractionCommandParser implements Parser<InteractionCommand> {
 
         Optional<String> description = argMultimap.getValue(PREFIX_INTERACTION);
         Optional<String> date = argMultimap.getValue(PREFIX_DATE);
+        if (!Interaction.isValidDate(date.get())) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, Interaction.MESSAGE_CONSTRAINTS));
+        }
+
         Interaction interaction = new Interaction(description.get(), date.get());
         return new InteractionCommand(index, interaction);
     }

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATABILITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATIBILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
@@ -25,7 +25,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Compatability;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -52,7 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_FACULTY + "FACULTY] "
             + "[" + PREFIX_MAJOR + "MAJOR] "
-            + "[" + PREFIX_COMPATABILITY + "COMPATABILITY] "
+            + "[" + PREFIX_COMPATIBILITY + "COMPATIBILITY] "
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
@@ -127,8 +127,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Compatability updatedCompatability = editPersonDescriptor.getCompatability()
-                                                .orElse(personToEdit.getCompatability());
+        Compatibility updatedCompatibility = editPersonDescriptor.getCompatibility()
+                                                .orElse(personToEdit.getCompatibility());
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
         Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
         Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
         Set<Remark> updatedRemarks = editPersonDescriptor.getRemarks().orElse(personToEdit.getRemarks());
 
         return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
-                updatedCompatability, updatedSkills, updatedLanguages, updatedFrameworks,
+                updatedCompatibility, updatedSkills, updatedLanguages, updatedFrameworks,
                 updatedTags, updatedRemarks, personToEdit.getInteractions());
     }
 
@@ -167,7 +167,7 @@ public class EditCommand extends Command {
         private Email email;
         private Faculty faculty;
         private Major major;
-        private Compatability compatability;
+        private Compatibility compatibility;
         private Set<Skill> skills;
         private Set<Language> languages;
         private Set<Framework> frameworks;
@@ -185,7 +185,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setFaculty(toCopy.faculty);
             setMajor(toCopy.major);
-            setCompatability(toCopy.compatability);
+            setCompatibility(toCopy.compatibility);
             setSkills(toCopy.skills);
             setLanguages(toCopy.languages);
             setFrameworks(toCopy.frameworks);
@@ -197,7 +197,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, faculty, major, compatability,
+            return CollectionUtil.isAnyNonNull(name, email, faculty, major, compatibility,
                                             skills, languages, frameworks, tags, remarks);
         }
 
@@ -233,12 +233,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(major);
         }
 
-        public void setCompatability(Compatability compatability) {
-            this.compatability = compatability;
+        public void setCompatibility(Compatibility compatibility) {
+            this.compatibility = compatibility;
         }
 
-        public Optional<Compatability> getCompatability() {
-            return Optional.ofNullable(compatability);
+        public Optional<Compatibility> getCompatibility() {
+            return Optional.ofNullable(compatibility);
         }
 
         /**
@@ -347,7 +347,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getFaculty().equals(e.getFaculty())
                     && getMajor().equals(e.getMajor())
-                    && getCompatability().equals(e.getCompatability())
+                    && getCompatibility().equals(e.getCompatibility())
                     && getSkills().equals(e.getSkills())
                     && getLanguages().equals(e.getLanguages())
                     && getFrameworks().equals(e.getFrameworks())

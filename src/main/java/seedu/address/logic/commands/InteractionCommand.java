@@ -47,9 +47,6 @@ public class InteractionCommand extends Command {
         Person personToAppendTo = lastShownList.get(index.getZeroBased());
         Person appendedPerson = personToAppendTo.appendInteraction(toAdd);
         model.setPerson(personToAppendTo, appendedPerson);
-        // Er, i suspect this is not neeeded. @Jason replace this line when
-        // you're doing the view
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

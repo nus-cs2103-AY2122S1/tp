@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.interaction.Interaction;
-import seedu.address.model.person.Compatability;
+import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -27,37 +27,37 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
                     new Faculty("computing"), new Major("computer science"),
-                    new Compatability(80),
+                    new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("friends"),
                     getRemarkSet("remarks1")),
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
                     new Faculty("fass"), new Major("economics"),
-                    new Compatability(80),
+                    new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("colleagues", "friends"),
                     getRemarkSet("remarks1")),
             new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
                     new Faculty("fass"), new Major("social work"),
-                    new Compatability(80),
+                    new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("neighbours"),
                     getRemarkSet("remarks1")),
             new Person(new Name("David Li"), new Email("lidavid@example.com"),
                     new Faculty("science"), new Major("physics"),
-                    new Compatability(80),
+                    new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("family"),
                     getRemarkSet("remarks1")),
             new Person(new Name("Irfan Ibrahim"), new Email("irfan@example.com"),
                     new Faculty("computing"), new Major("business analytics"),
-                    new Compatability(80),
+                    new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("classmates"),
                     getRemarkSet("remarks1")),
             new Person(new Name("Roy Balakrishnan"), new Email("royb@example.com"),
                     new Faculty("computing"), new Major("computer science"),
-                    new Compatability(80),
+                    new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("colleagues"),
                     getRemarkSet("remarks1"))
