@@ -15,8 +15,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearGroupsCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
+import seedu.address.logic.commands.ClearTasksCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -43,10 +45,34 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_listStudent() throws Exception {
+        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD) instanceof ListStudentCommand);
+        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " 3") instanceof ListStudentCommand);
+    }
+
+    @Test
+    public void parseCommand_listGroup() throws Exception {
+        assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);
+        assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD + " 3") instanceof ListGroupCommand);
+    }
+
+    @Test
+    public void parseCommand_listTask() throws Exception {
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD) instanceof ListTaskCommand);
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD + " 3") instanceof ListTaskCommand);
+    }
+
+    @Test
+    public void parseCommand_addStudent() throws Exception {
         Student student = new StudentBuilder().build();
         AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
         assertEquals(new AddStudentCommand(student), command);
+    }
+
+    @Test
+    public void parseCommand_clearAll() throws Exception {
+        assertTrue(parser.parseCommand(ClearAllCommand.COMMAND_WORD) instanceof ClearAllCommand);
+        assertTrue(parser.parseCommand(ClearAllCommand.COMMAND_WORD + " 3") instanceof ClearAllCommand);
     }
 
     @Test
@@ -62,6 +88,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_clearTasks() throws Exception {
+        assertTrue(parser.parseCommand(ClearTasksCommand.COMMAND_WORD) instanceof ClearTasksCommand);
+        assertTrue(parser.parseCommand(ClearTasksCommand.COMMAND_WORD + " 3") instanceof ClearTasksCommand);
+    }
+
+    @Test
     public void parseCommand_deleteStudent() throws Exception {
         DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
                 DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
@@ -69,7 +101,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editStudent() throws Exception {
         Student student = new StudentBuilder().build();
         EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
@@ -106,23 +138,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
-    @Test
-    public void parseCommand_listStudent() throws Exception {
-        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD) instanceof ListStudentCommand);
-        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " 3") instanceof ListStudentCommand);
-    }
-
-    @Test
-    public void parseCommand_listTask() throws Exception {
-        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD) instanceof ListTaskCommand);
-        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD + " 3") instanceof ListTaskCommand);
-    }
-
-    @Test
-    public void parseCommand_listGroup() throws Exception {
-        assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);
-        assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD + " 3") instanceof ListGroupCommand);
-    }
 
     @Test
     public void parseCommand_markStudentAttendance() throws Exception {

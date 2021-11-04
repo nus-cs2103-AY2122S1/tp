@@ -50,8 +50,8 @@ public class Participation {
      * @param week week to be checked.
      * @return int specifying if student has participated.
      */
-    public int checkParticipated(int week) {
-        return participationList.get(week);
+    public boolean checkParticipated(int week) {
+        return participationList.get(week) == 1;
     }
 
     @Override
