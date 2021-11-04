@@ -415,11 +415,11 @@ Examples:
 
 ## Filtering with Notor
 
-Sometimes, you will want to view all people, groups, subgroups, or tags to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
+Sometimes, you will want to view all people, groups, subgroups to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
 
 ### List
 
-List can show all persons, groups, subgroups, or tags which you have added to Notor. It can also list archived persons: see [Archiving People](#Archiving People).
+List can show all persons, groups, subgroups which you have added to Notor. It can also list archived persons: see [Archiving People](#Archiving People).
 
 #### _Listing all persons_ :
 
