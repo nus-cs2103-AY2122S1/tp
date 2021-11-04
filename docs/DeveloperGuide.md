@@ -404,6 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise)
 
+```
 **UC01 - Adding an item**
 
 **Actor:** User
@@ -434,7 +435,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
       Use case ends.
-
+```
+```
 **UC02 - Deleting an item**
 
 **Actor:** User
@@ -462,7 +464,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. BogoBogo notifies user of the mismatch.
 
       Use case ends.
-
+```
+```
 **UC03 - Finding items through matching keywords**
 
 **Actor:** User
@@ -490,7 +493,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. BogoBogo notifies user that only one field can be inputted.
 
       Use case ends.
-
+```
+```
 **UC04 - Placing an Order**
 
 **Actor:** User
@@ -530,7 +534,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 7a1. BogoBogo notifies user that the order is empty.
 
       Use case ends.
-
+```
+```
 **UC05 - Remove an item from order**
 
 **Actor:** User
@@ -559,7 +564,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. BogoBogo notifies user the specified item is not in the order.
 
       Use case ends.
-
+```
+```
 **UC06 - Sorting**
 
 **Actor:** User
@@ -577,8 +583,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
 
       Use case ends.
-
-**UC06 - Help**
+```
+```
+**UC07 - Help**
 
 **Actor:** User
 
@@ -600,8 +607,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies the user that the command does not exist, then proceed to display URL to userguide.
 
       Use case ends.
-
-**UC07 - Remove certain amount of item**
+```
+```
+**UC08 - Remove certain amount of item**
 
 **Actor:** User
 
@@ -636,8 +644,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
 
       Use case ends.
-
-**UC08 - Edit an item**
+```
+```
+**UC09 - Edit an item**
 
 **Actor:** User
 
@@ -665,8 +674,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. BogoBogo notifies user that the new value specified is invalid.
 
       Use case ends
-
-**UC09 - Listing out inventory**
+```
+```
+**UC10 - Listing out inventory**
 
 **Actor:** User
 
@@ -676,8 +686,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. BogoBogo lists out all items in inventory.
 
    Use case ends
-
-**UC10 - Listing out order**
+```
+```
+**UC11 - Listing out order**
 
 **Actor:** User
 
@@ -691,11 +702,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. There is currently no order to list.
-    * 2a1. BogoBogo notifies user there is currently no order.
-
-      Use case ends.
-
-**UC11 - Exit the application**
+  * 2a1. BogoBogo notifies user there is currently no order.
+    
+    Use case ends.
+```
+```
+**UC12 - Exit the application**
 
 **Actor:** User
 
@@ -704,9 +716,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to exit the application
 2. BogoBogo acknowledges the request and exits.
 
-   Use case ends.
-
-**UC12 - Clear the inventory**
+    Use case ends.
+```
+```
+**UC13 - Clear the inventory**
 
 **Actor:** User
 
@@ -714,8 +727,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to clear the inventory.
 2. BogoBogo acknowledges the request and clears the inventory.
-
-   Use case ends.
+    
+    Use case ends.
+```
 
 ### Non-Functional Requirements
 
