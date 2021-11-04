@@ -5,9 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
@@ -26,7 +24,7 @@ public interface Model {
 
     enum DisplayType {
         STUDENTS, TASKS, GROUPS, TASK_HISTORY
-    };
+    }
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -170,12 +168,6 @@ public interface Model {
      */
     void setGroup(Group target, Group editedGroup);
 
-    /**
-     * Adds the given github link {@code target} to a group of {@code name}.
-     * A group of {@code name} must exist in the group list.
-     */
-    void addGithubGroup(LinkYear year, RepoName repoName, Group group);
-
     /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
 
@@ -200,7 +192,7 @@ public interface Model {
      * Marks the given task as completed.
      * The task must exist in the address book.
      */
-    void completeTask(Task target);
+    void toggleTaskIsDone(Task target);
 
     /**
      * Adds the given task.
@@ -228,6 +220,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
-
 
 }

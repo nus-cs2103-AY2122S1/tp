@@ -33,10 +33,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/weenleen.png" width="200px">
 
-[[github](http://github.com/weenleen)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/weenleen)]
+[[portfolio](team/weenleen.md)]
 
 * Role: Developer
-* Responsibilities: Ensures the testing of the project is done properly and on time.
+* Responsibilities: UI
 
 ### Raveen Prabhu
 

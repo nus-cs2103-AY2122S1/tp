@@ -49,7 +49,7 @@ public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskComma
             description = Description.NO_DESCRIPTION;
         }
 
-        Task task = new DeadlineTask(name, tagList, false, taskDate, description, priority);
+        DeadlineTask task = new DeadlineTask(name, tagList, description, priority, taskDate);
         return new AddDeadlineTaskCommand(task);
     }
 

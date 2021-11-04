@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,18 +19,13 @@
                     <Insets top="15" right="20" bottom="15" left="20" />
                 </padding>
                 <HBox spacing="5" alignment="CENTER_LEFT">
-                    <Label fx:id="id" styleClass="cell_big_label">
-                        <minWidth>
-                            <!-- Ensures that the label text is never truncated -->
-                            <Region fx:constant="USE_PREF_SIZE" />
-                        </minWidth>
-                    </Label>
+                    <Label fx:id="id" styleClass="cell_big_label"/>
                     <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
                 </HBox>
                 <FlowPane fx:id="tags" />
                 <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
                 <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />
-                <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" VBox.vgrow="ALWAYS"/>
             </VBox>
         </HBox>
     </GridPane>

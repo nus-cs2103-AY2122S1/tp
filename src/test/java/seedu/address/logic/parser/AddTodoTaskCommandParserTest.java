@@ -21,16 +21,16 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTodoTaskCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TodoTask;
 import seedu.address.testutil.TodoTaskBuilder;
 
 public class AddTodoTaskCommandParserTest {
-    private AddTodoTaskCommandParser parser = new AddTodoTaskCommandParser();
+    private final AddTodoTaskCommandParser parser = new AddTodoTaskCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        TodoTask expectedTask = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE)
                 .build();
@@ -41,7 +41,7 @@ public class AddTodoTaskCommandParserTest {
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY
                 + TASK_DESCRIPTION_DESC_PLAY + TASK_TAG_DESC_EXERCISE, new AddTodoTaskCommand(expectedTask));
 
-        Task expectedTaskWithMultipleTags = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        TodoTask expectedTaskWithMultipleTags = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE, VALID_TASK_TAG_FUN)
                 .build();
@@ -55,7 +55,7 @@ public class AddTodoTaskCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Task expectedTask = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        TodoTask expectedTask = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .build();
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY

@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.TaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -35,10 +36,17 @@ public class MarkTaskDoneCommandTest {
         Task taskToMarkAsDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
-        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone);
+        Task messageCopy = TaskBuilder.of(taskToMarkAsDone).build();
+        messageCopy.toggleIsDone();
+
+        String expectedMessage = String.format(
+                MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.completeTask(taskToMarkAsDone);
+
+        Task expectedCopy = TaskBuilder.of(taskToMarkAsDone).build();
+        expectedModel.setTask(taskToMarkAsDone, expectedCopy);
+        expectedModel.toggleTaskIsDone(expectedCopy);
 
         assertCommandSuccess(markTaskDoneCommand, model, expectedMessage, expectedModel);
     }
@@ -60,11 +68,18 @@ public class MarkTaskDoneCommandTest {
         Task taskToMarkAsDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
-        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone);
+        Task messageCopy = TaskBuilder.of(taskToMarkAsDone).build();
+        messageCopy.toggleIsDone();
+
+        String expectedMessage = String.format(
+                MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.completeTask(taskToMarkAsDone);
-        showNoTask(expectedModel);
+        showTaskAtIndex(expectedModel, INDEX_FIRST_TASK);
+
+        Task expectedCopy = TaskBuilder.of(taskToMarkAsDone).build();
+        expectedModel.setTask(taskToMarkAsDone, expectedCopy);
+        expectedModel.toggleTaskIsDone(expectedCopy);
 
         assertCommandSuccess(markTaskDoneCommand, model, expectedMessage, expectedModel);
     }
@@ -106,12 +121,4 @@ public class MarkTaskDoneCommandTest {
         assertNotEquals(markFirstTaskDoneCommand, markSecondTaskDoneCommand);
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoTask(Model model) {
-        model.updateFilteredTaskList(p -> false);
-
-        assertTrue(model.getFilteredTaskList().isEmpty());
-    }
 }

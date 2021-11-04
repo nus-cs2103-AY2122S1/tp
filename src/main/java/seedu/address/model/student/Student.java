@@ -130,7 +130,7 @@ public class Student {
         return Collections.unmodifiableSet(tags);
     }
 
-    public int checkPresent(int week) {
+    public boolean checkPresent(int week) {
         return attendance.checkPresent(week);
     }
 
@@ -138,7 +138,7 @@ public class Student {
         attendance.toggleAttendance(week);
     }
 
-    public int checkParticipated(int week) {
+    public boolean checkParticipated(int week) {
         return participation.checkParticipated(week);
     }
 

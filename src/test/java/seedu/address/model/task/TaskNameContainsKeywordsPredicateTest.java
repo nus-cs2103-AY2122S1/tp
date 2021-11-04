@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.TaskBuilder;
+import seedu.address.testutil.TodoTaskBuilder;
 
 public class TaskNameContainsKeywordsPredicateTest {
 
@@ -46,35 +46,35 @@ public class TaskNameContainsKeywordsPredicateTest {
         // One keyword
         TaskNameContainsKeywordsPredicate predicate =
                 new TaskNameContainsKeywordsPredicate(Collections.singletonList("Tutorial"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Tutorial MONDAY").build()));
+        assertTrue(predicate.test(new TodoTaskBuilder().withName("Tutorial MONDAY").build()));
 
         // Multiple keywords
         predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("Tutorial", "MONDAY"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Tutorial MONDAY").build()));
+        assertTrue(predicate.test(new TodoTaskBuilder().withName("Tutorial MONDAY").build()));
 
         // Only one matching keyword
         predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("MONDAY", "different"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Tutorial different").build()));
+        assertTrue(predicate.test(new TodoTaskBuilder().withName("Tutorial different").build()));
 
         // Mixed-case keywords
         predicate = new TaskNameContainsKeywordsPredicate(Arrays.asList("tutORiaL", "monday"));
-        assertTrue(predicate.test(new TaskBuilder().withName("Tutorial MONDAY").build()));
+        assertTrue(predicate.test(new TodoTaskBuilder().withName("Tutorial MONDAY").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TaskNameContainsKeywordsPredicate predicate = new TaskNameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new TaskBuilder().withName("Tutorial").build()));
+        assertFalse(predicate.test(new TodoTaskBuilder().withName("Tutorial").build()));
 
         // Non-matching keyword
         predicate = new TaskNameContainsKeywordsPredicate(List.of("different"));
-        assertFalse(predicate.test(new TaskBuilder().withName("Tutorial MONDAY").build()));
+        assertFalse(predicate.test(new TodoTaskBuilder().withName("Tutorial MONDAY").build()));
 
         // Keywords match phone, email and address, but does not match name
         predicate = new TaskNameContainsKeywordsPredicate(
                 Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new TaskBuilder().withName("Tutorial")
+        assertFalse(predicate.test(new TodoTaskBuilder().withName("Tutorial")
                 .withDescription("Go through worksheet").build()));
     }
 }

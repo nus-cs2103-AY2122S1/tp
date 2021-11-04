@@ -128,6 +128,7 @@ Format: `deleteStudent INDEX`
 * Deletes the student at the specified `INDEX`.
 * The index must refer to the index number shown in the displayed students list.
 * The index number must be a positive number: 1, 2, 3…
+* Duplicate and multiple indexes are not allowed.
 
 Examples:
 
@@ -142,10 +143,11 @@ Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the student(s) as present (or absent) in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the displayed students list.
-* Duplicate index(es) are not allowed.
 * The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
+* Duplicate indexes are not allowed.
 * Only one week number should be specified after the `w/` prefix.
-* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent, and vice versa.
+* If the student at the specified `INDEX` is marked as **present**, the command toggles the attendance to **absent**.
+* If the student at the specified `INDEX` is marked as **absent**, the command toggles the attendance to **present**.
 
 Examples:
 
@@ -161,10 +163,11 @@ Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the student(s) as participated in the specified `INDEX` for that week.
 * The index must refer to the index number shown in the displayed students list.
-* Duplicate index(es) are not allowed.
 * The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
+* Duplicate indexes are not allowed.
 * Only one week number should be specified after the `w/` prefix.
-* If the student at the specified `INDEX` is marked as participated, the command toggles the participation to not participated.
+* If the student at the specified `INDEX` is marked as **participated**, the command toggles the participation to not **not participated**.
+* If the student at the specified `INDEX` is marked as **not participated**, the command toggles the participation to not **participated**.
 
 Examples:
 
@@ -191,7 +194,6 @@ Examples:
 * `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
   
-
 ### Clearing all entries from student list: `clearStudents`
 
 Clears all entries from the student list.
@@ -226,8 +228,7 @@ Examples:
   group members
 * `addGroup g/f14-4 y/AY2122S1` adds group F14-4 to the list and displays a confirmation output with no GitHub link and group members
   ![result for 'addGroup'](images/addGroupF14-4.png)
-
-
+  
 ### Editing a group : `editGroup`
 
 Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
@@ -246,7 +247,6 @@ Examples:
 * `editGroup 2 y/AY20212022 t/` Edits the name of the 2nd group to be `AY20212022` and clears all existing tags.
   ![result for 'editGroup'](images/editGroupF14-4.png)
 
-
 ### Delete a group: `deleteGroup`
 
 Deletes the specified group from the group list.
@@ -260,8 +260,7 @@ Format: `deleteGroup INDEX`
 Examples:
 * `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and GitHub link of the group deleted.
   ![result for 'deleteGroup'](images/deleteGroup1.png)
-
-
+  
 ### Add a student to a group: `addMember`
 
 Adds a student in student list to an existing group in the group list.
@@ -276,7 +275,6 @@ Format: `addMember INDEX g/GROUP`
 Examples:
 * `addMember 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output that the student has been added to the group.
   ![result for 'addMember'](images/addMemberF14-4.png)
-
 
 ### Delete a student from a group: `deleteMember`
 
@@ -323,6 +321,8 @@ Format: `clearGroups`
 ### List all tasks: `tasks`
 
 Displays all the tasks currently in the task list.
+All tasks are sorted with completed tasks at the bottom of the list.
+Pending tasks are sorted by their associated dates, and their priority.
 
 Format: `tasks`
 
@@ -338,7 +338,7 @@ Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 * The priority parameter accepts partial words and is case-insensitive.
 * A combination of different priority levels are not accepted.
 * Tasks that are not specified a priority level will be by default Low Priority.
-* `DESCRIPTION` should only contain alphanumerical characters.
+* `DESCRIPTION` should only contain ASCII characters.
 
 Examples:
 * `todo n/play` creates the todo task "play" with the default LOW Priority.
@@ -417,22 +417,29 @@ Examples:
 
 ### Marking a task as done: : `doneTask`
 
-Mark the specified task from the list as done.
+Mark the specified task from the list as complete, or mark it as pending.
 
-Format: `doneTask INDEX`
+Format: `doneTask INDEX [MORE INDEXES]`
 
-* Mark the task as done at the specified `INDEX`.
+* If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
+* If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
 * The index refers to the index number shown in the task list.
-* The index must be a positive integer 1, 2, 3, …​
+* The user is able to mark multiple tasks by providing multiple indexes.
+* The indexes must be a positive integer 1, 2, 3, …​
+* Duplicate indexes are not accepted.
 
 Examples:
-* `doneTask 2` marks the 2nd task in the task list as completed.
+* `doneTask 2` marks the 2nd task in the task list as completed or pending.
+* `doneTask 1 3 4` marks the 1st, 3rd and 4th tasks in the task list as completed or pending.
+![markTaskDoneCommand visual](images/MarkTaskDoneCommand_UG_visual.PNG)
 
 ### Clearing all entries from task list: `clearTasks`
 
 Clears all entries from the task list.
 
 Format: `clearTasks`
+
+---
 
 ## Clearing all entries from tApp: `clear`
 
@@ -513,7 +520,7 @@ Commands | Format | Examples
 [**Add Deadline Task**](#add-a-deadline-task-deadline) | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` | e.g., `deadline n/Finish tP by/2021-10-31 t/W14-4`
 [**Edit Task**](#editing-a-task-edittask) | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`| e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
 [**Delete Task**](#deleting-a-task-deletetask) | `deleteTask INDEX`| e.g., `deleteTask 3`
-[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX` | e.g., `doneTask 1`
+[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX [MORE INDEXES]` | e.g., `doneTask 1 2 3`
 [**Clear Tasks**](#clearing-all-entries-from-task-list-cleartasks) | `clearTasks`
 
 ## General

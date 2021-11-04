@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TodoTask;
 
 public class AddTodoTaskCommand extends Command {
 
@@ -27,12 +27,12 @@ public class AddTodoTaskCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp";
 
-    public final Task toAdd;
+    public final TodoTask toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddTodoTaskCommand(Task task) {
+    public AddTodoTaskCommand(TodoTask task) {
         requireNonNull(task);
         toAdd = task;
     }

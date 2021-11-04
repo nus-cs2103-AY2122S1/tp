@@ -10,6 +10,7 @@ import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 
 /**
@@ -17,8 +18,7 @@ import seedu.address.model.task.TaskName;
  */
 public class EditTaskDescriptorBuilder {
 
-    private EditTaskCommand.EditTaskDescriptor descriptor;
-    private Task.Priority priority;
+    private final EditTaskCommand.EditTaskDescriptor descriptor;
 
     public EditTaskDescriptorBuilder() {
         descriptor = new EditTaskCommand.EditTaskDescriptor();
@@ -37,11 +37,9 @@ public class EditTaskDescriptorBuilder {
         descriptor.setTags(task.getTags());
 
         if (task instanceof EventTask) {
-            descriptor.setTaskDate(((EventTask) task).getTaskDate());
-        }
-
-        if (task instanceof DeadlineTask) {
-            descriptor.setDeadline(((DeadlineTask) task).getDeadline());
+            descriptor.setEventTaskDate(((EventTask) task).getTaskDate());
+        } else if (task instanceof DeadlineTask) {
+            descriptor.setDeadlineTaskDate(((DeadlineTask) task).getDeadline());
         }
     }
 
@@ -62,6 +60,22 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code EventTaskDate} of the {@code EditTaskDescriptor} that we are building.
+     */
+    public EditTaskDescriptorBuilder withEventDate(String date) {
+        descriptor.setEventTaskDate(new TaskDate(date));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DeadlineTaskDate} of the {@code EditTaskDescriptor} that we are building.
+     */
+    public EditTaskDescriptorBuilder withDeadlineDate(String date) {
+        descriptor.setDeadlineTaskDate(new TaskDate(date));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
      * that we are building.
      */
@@ -76,11 +90,11 @@ public class EditTaskDescriptorBuilder {
      */
     public EditTaskDescriptorBuilder withPriority(String description) {
         if (description.contains("H") || description.contains("h")) {
-            this.priority = Task.Priority.HIGH;
+            descriptor.setTaskPriority(Task.Priority.HIGH);
         } else if (description.contains("M") || description.contains("m")) {
-            this.priority = Task.Priority.MEDIUM;
+            descriptor.setTaskPriority(Task.Priority.MEDIUM);
         } else {
-            this.priority = Task.Priority.LOW;
+            descriptor.setTaskPriority(Task.Priority.LOW);
         }
         return this;
     }

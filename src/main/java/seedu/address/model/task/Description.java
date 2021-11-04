@@ -8,10 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Descriptions should only contain alphanumeric characters and spaces.";
+            "Descriptions should only contain ASCII characters.";
 
     public static final Description NO_DESCRIPTION =
             new Description("");
+
+    public static final String REGEX = "[\\x00-\\x7F]*";
 
     public final String description;
 
@@ -27,14 +29,13 @@ public class Description {
 
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid description.
      */
     public static boolean isValidDescription(String test) {
-        try {
+        if (test == null) {
             return true;
-        //If there is no description, it still is considered valid.
-        } catch (NullPointerException e) {
-            return true;
+        } else {
+            return test.matches(REGEX);
         }
     }
 

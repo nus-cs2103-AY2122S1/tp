@@ -15,9 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
@@ -149,12 +147,14 @@ public class ModelManager implements Model {
      * @param editedStudent updated Student object
      */
     public void updateGroup(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group updatedGroup = groupList.stream()
                     .filter(g -> g.getName().equals(target.getGroupName()))
                     .findAny()
                     .orElse(null);
+            assert updatedGroup != null;
             updatedGroup.updateMember(target, editedStudent);
         }
     }
@@ -177,7 +177,7 @@ public class ModelManager implements Model {
     @Override
     public String getStudentAttendance(Student target, int week) {
         requireAllNonNull(target, week);
-        return target.checkPresent(week) == 1 ? "present" : "absent";
+        return target.checkPresent(week) ? "present" : "absent";
     }
 
     @Override
@@ -191,20 +191,17 @@ public class ModelManager implements Model {
     @Override
     public String getStudentParticipation(Student target, int week) {
         requireAllNonNull(target, week);
-        return target.checkParticipated(week) == 1 ? "participated" : "not participated";
+        return target.checkParticipated(week) ? "participated" : "not participated";
     }
 
     @Override
     public void addMember(Student student, Group group) {
         requireAllNonNull(student, group);
-        Group newGroup = group;
         Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
                 student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
                 student.getParticipation(), group.getName());
-        newGroup.addMember(updatedStudent);
+        group.addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
-        addressBook.setGroup(group, newGroup);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -212,7 +209,6 @@ public class ModelManager implements Model {
         requireAllNonNull(student, group);
         addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     /**
@@ -244,12 +240,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void completeTask(Task target) {
+    public void toggleTaskIsDone(Task target) {
         requireAllNonNull(target, target);
-        target.markTaskComplete();
-        /*Task newTask = target.clone();
-        newTask.markTaskComplete();
-        addressBook.setTask(target, newTask);*/
+        target.toggleIsDone();
+        addressBook.sortTasks();
     }
 
     @Override
@@ -264,7 +258,6 @@ public class ModelManager implements Model {
         List<Student> students = target.getMembersList();
         addressBook.clearGroupFromStudents(students);
         addressBook.deleteGroup(target);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -285,16 +278,7 @@ public class ModelManager implements Model {
             addressBook.setStudent(student, updatedStudent);
         }
 
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         addressBook.setGroup(target, editedGroup);
-    }
-
-    @Override
-    public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
-        requireAllNonNull(year, repoName, group);
-        Group newGroup = new Group(group.getName(), group.getMembers(), year, repoName, group.getTags());
-        addressBook.setGroup(group, newGroup);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -368,6 +352,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredStudents.equals(other.filteredStudents)
+                && filteredTasks.equals(other.filteredTasks)
+                && filteredGroups.equals(other.filteredGroups);
     }
 }

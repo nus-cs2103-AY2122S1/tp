@@ -25,7 +25,7 @@ import seedu.address.model.student.Attendance;
  */
 public class MarkStudentAttCommandParserTest {
 
-    private MarkStudentAttCommandParser parser = new MarkStudentAttCommandParser();
+    private final MarkStudentAttCommandParser parser = new MarkStudentAttCommandParser();
 
     @Test
     public void parse_validArgs_returnsMarkStudentAttCommand() {
@@ -39,20 +39,30 @@ public class MarkStudentAttCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // EP: Student index not a number
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentAttCommand.MESSAGE_USAGE));
 
+        // EP: Student index out of range
         assertParseFailure(parser, String.valueOf(Attendance.LAST_WEEK_OF_SEM + 1),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentAttCommand.MESSAGE_USAGE));
 
+        // EP: No week prefix found
         assertParseFailure(parser, "1 2 12",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentAttCommand.MESSAGE_USAGE));
 
+        // EP: Empty parameter succeeding command word
         assertParseFailure(parser, " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentAttCommand.MESSAGE_USAGE));
 
+        // EP: String as week parameter
+        assertParseFailure(parser, "1 w/hello", String.format(Attendance.MESSAGE_CONSTRAINTS,
+                Attendance.FIRST_WEEK_OF_SEM, Attendance.LAST_WEEK_OF_SEM));
+
+        // EP: Duplicate index found
         assertParseFailure(parser, "1 1 1 w/1", MESSAGE_INVALID_DUPLICATE_INDEX);
 
+        // EP: Empty week parameter
         assertParseFailure(parser, "1 w/", MESSAGE_EMPTY_WEEK);
     }
 }

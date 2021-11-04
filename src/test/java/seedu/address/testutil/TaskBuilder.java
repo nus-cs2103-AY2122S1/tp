@@ -8,7 +8,6 @@ import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 import seedu.address.model.task.TodoTask;
 import seedu.address.model.util.SampleDataUtil;
@@ -16,13 +15,12 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Task objects.
  */
-public class TaskBuilder {
+public abstract class TaskBuilder {
 
     public static final String DEFAULT_TASK_NAME = "Do CS2103 tP";
     public static final String DEFAULT_TASK_DATE = "2021-10-10";
 
     protected TaskName taskName;
-    protected TaskDate taskDate;
     protected Set<Tag> tags;
     protected boolean isDone;
     protected Description description;
@@ -33,7 +31,6 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         this.taskName = new TaskName(DEFAULT_TASK_NAME);
-        this.taskDate = new TaskDate(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
         this.isDone = false;
         this.description = new Description("No Description");
@@ -43,11 +40,12 @@ public class TaskBuilder {
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    private TaskBuilder(Task taskToCopy) {
-        this.taskName = taskToCopy.getName();
+    protected TaskBuilder(Task taskToCopy) {
+        this.taskName = new TaskName(taskToCopy.getName().toString());
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
         this.description = new Description(taskToCopy.getDescription());
+        this.priority = taskToCopy.getPriority();
     }
 
     /**
@@ -58,13 +56,11 @@ public class TaskBuilder {
      */
     public static TaskBuilder of(Task task) {
         if (task instanceof TodoTask) {
-            return new TodoTaskBuilder(task);
+            return new TodoTaskBuilder((TodoTask) task);
         } else if (task instanceof DeadlineTask) {
             return new DeadlineTaskBuilder((DeadlineTask) task);
-        } else if (task instanceof EventTask) {
-            return new EventTaskBuilder((EventTask) task);
         } else {
-            return new TaskBuilder(task);
+            return new EventTaskBuilder((EventTask) task);
         }
     }
 
@@ -73,14 +69,6 @@ public class TaskBuilder {
      */
     public TaskBuilder withName(String name) {
         this.taskName = new TaskName(name);
-        return this;
-    }
-
-    /**
-     * Sets the {@code TaskDate} of the {@code Task} that we are building.
-     */
-    public TaskBuilder withDate(String date) {
-        this.taskDate = new TaskDate(date);
         return this;
     }
 
@@ -114,7 +102,10 @@ public class TaskBuilder {
         return this;
     }
 
-    public Task build() {
-        return new Task(taskName, tags, isDone, description);
-    }
+    /**
+     * Builds a task with the fields in the TaskBuilder.
+     * @return A task.
+     */
+    public abstract Task build();
+
 }

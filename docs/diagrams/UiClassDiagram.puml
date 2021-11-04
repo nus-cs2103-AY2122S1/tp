@@ -10,9 +10,10 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
-Class ResultDisplay
-Class ListPanelPlaceholder
-Class ListPanel
+Class TerminalContainer
+Class TerminalBox
+Class XYZListPanel
+Class XYZCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -21,35 +22,41 @@ package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
 
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
+MainWindow *-up-> "1" TerminalContainer
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" ListPanelPlaceholder
+MainWindow *-down-> "1" XYZListPanel
+note right
+XYZ refers to the Student,
+Task or Group classes
+end note
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow -down-> "0..1" HelpWindow
 
-ListPanelPlaceholder -down-> "*" ListPanel
+XYZListPanel -down-> "*" XYZCard
+TerminalContainer -left-> "*" TerminalBox
 
 MainWindow -left-|> UiPart
-
-ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-ListPanelPlaceholder --|> UiPart
-ListPanel --|> UiPart
+XYZListPanel --|> UiPart
+XYZCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
+XYZCard -right-> Model
 
-ListPanelPlaceholder -[hidden]left- HelpWindow
+XYZListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
+CommandBox -[hidden]left- StatusBarFooter
 MainWindow -[hidden]-|> UiPart
 @enduml

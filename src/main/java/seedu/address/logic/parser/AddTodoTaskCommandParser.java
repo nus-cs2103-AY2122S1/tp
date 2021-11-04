@@ -15,6 +15,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TodoTask;
 
 public class AddTodoTaskCommandParser implements Parser<AddTodoTaskCommand> {
     /**
@@ -42,7 +43,8 @@ public class AddTodoTaskCommandParser implements Parser<AddTodoTaskCommand> {
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Task.Priority priority = ParserUtil.parsePriority(argMultimap.getPriorityUsingPrefix(PREFIX_PRIORITY).get());
-        Task task = new Task(name, tagList, false, description, priority);
+
+        TodoTask task = new TodoTask(name, tagList, description, priority);
         return new AddTodoTaskCommand(task);
     }
 

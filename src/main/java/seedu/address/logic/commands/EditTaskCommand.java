@@ -86,7 +86,7 @@ public class EditTaskCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Student} with the details of {@code taskToEdit}
+     * Creates and returns a {@code task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor)
@@ -100,36 +100,38 @@ public class EditTaskCommand extends Command {
         Task.Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
 
-
         if (taskToEdit instanceof DeadlineTask) {
+
             //If the task is a Deadline Task, it shouldn't contain /on prefix.
-            if (editTaskDescriptor.getTaskDate().isPresent()) {
+            if (editTaskDescriptor.getEventTaskDate().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_DEADLINE_ON);
             }
-            TaskDate updatedTaskDate = ((DeadlineTask) taskToEdit).getDeadline();
-            return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate,
+            TaskDate updatedDeadline = editTaskDescriptor.getDeadlineTaskDate()
+                    .orElse(((DeadlineTask) taskToEdit).getDeadline());
+            return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedDeadline,
                     description, updatedPriority);
-        }
 
-        if (taskToEdit instanceof EventTask) {
+        } else if (taskToEdit instanceof EventTask) {
+
             //If the task is an Event Task, it shouldn't contain /by prefix.
-            if (editTaskDescriptor.getDeadline().isPresent()) {
+            if (editTaskDescriptor.getDeadlineTaskDate().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_EVENT_BY);
             }
-            TaskDate updatedTaskDate = ((EventTask) taskToEdit).getTaskDate();
-
+            TaskDate updatedTaskDate = editTaskDescriptor.getEventTaskDate()
+                    .orElse(((EventTask) taskToEdit).getTaskDate());
             return new EventTask(updatedTaskName, updatedTags,
                     taskToEdit.checkIsDone(), updatedTaskDate, description, updatedPriority);
-        } else { //if (taskToEdit instanceof TodoTask) {
-            //if the task is a Todo task, it should not contain any time info.
-            if (editTaskDescriptor.getTaskDate().isPresent() || editTaskDescriptor.getDeadline().isPresent()) {
+
+        } else {
+
+            //if the task is a @codeTodo task, it should not contain any time info.
+            if (editTaskDescriptor.getEventTaskDate().isPresent()
+                    || editTaskDescriptor.getDeadlineTaskDate().isPresent()) {
                 throw new CommandException(EditTaskCommand.MESSAGE_TODO_TIME);
             }
             return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(),
                     description, updatedPriority);
         }
-
-        //return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description, updatedPriority);
     }
 
     @Override
@@ -157,8 +159,8 @@ public class EditTaskCommand extends Command {
     public static class EditTaskDescriptor {
         private TaskName taskName;
         private Description description;
-        private TaskDate taskDate;
-        private TaskDate deadline;
+        private TaskDate eventTaskDate;
+        private TaskDate deadlineTaskDate;
         private Set<Tag> tags;
         private Task.Priority priority;
 
@@ -170,8 +172,8 @@ public class EditTaskCommand extends Command {
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setTaskName(toCopy.taskName);
-            setTaskDate(toCopy.taskDate);
-            setDeadline(toCopy.deadline);
+            setEventTaskDate(toCopy.eventTaskDate);
+            setDeadlineTaskDate(toCopy.deadlineTaskDate);
             setTags(toCopy.tags);
             setTaskPriority(toCopy.priority);
             setDescription(toCopy.description);
@@ -181,7 +183,7 @@ public class EditTaskCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(taskName, taskDate, tags, description, deadline, priority);
+            return CollectionUtil.isAnyNonNull(taskName, eventTaskDate, tags, description, deadlineTaskDate, priority);
         }
 
         public void setTaskName(TaskName taskName) {
@@ -196,12 +198,12 @@ public class EditTaskCommand extends Command {
             return Optional.ofNullable(taskName);
         }
 
-        public void setTaskDate(TaskDate taskDate) {
-            this.taskDate = taskDate;
+        public void setEventTaskDate(TaskDate taskDate) {
+            this.eventTaskDate = taskDate;
         }
 
-        public void setDeadline(TaskDate deadline) {
-            this.deadline = deadline;
+        public void setDeadlineTaskDate(TaskDate deadline) {
+            this.deadlineTaskDate = deadline;
         }
 
 
@@ -213,12 +215,12 @@ public class EditTaskCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public Optional<TaskDate> getTaskDate() {
-            return Optional.ofNullable(taskDate);
+        public Optional<TaskDate> getEventTaskDate() {
+            return Optional.ofNullable(eventTaskDate);
         }
 
-        public Optional<TaskDate> getDeadline() {
-            return Optional.ofNullable(deadline);
+        public Optional<TaskDate> getDeadlineTaskDate() {
+            return Optional.ofNullable(deadlineTaskDate);
         }
 
         public Optional<Task.Priority> getPriority() {
@@ -258,7 +260,9 @@ public class EditTaskCommand extends Command {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getTaskName().equals(e.getTaskName())
-                    && getTaskDate().equals(e.getTaskDate())
+                    && getEventTaskDate().equals(e.getEventTaskDate())
+                    && getPriority().equals(e.getPriority())
+                    && getDeadlineTaskDate().equals(e.getDeadlineTaskDate())
                     && getDescription().equals(e.getDescription())
                     && getTags().equals(e.getTags());
         }

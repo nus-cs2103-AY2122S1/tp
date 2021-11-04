@@ -29,29 +29,22 @@ import seedu.address.testutil.StudentBuilder;
 public class MarkStudentAttCommandTest {
 
     private static final Integer[] MARK_ATTENDANCE_PRESENT_EXPECTED = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private static final Integer[] MARK_ATTENDANCE_ABSENT_EXPECTED = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private static final int FIRST_WEEK = Attendance.FIRST_WEEK_OF_SEM;
+    private static final int ZERO_INDEX_WEEK = FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM;
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_markStudentPresentUnfilteredList_success() {
-        String type = "present";
-
+    public void execute_markStudentUnfilteredList_success() {
         Student studentToMark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        String type = studentToMark.checkPresent(ZERO_INDEX_WEEK) ? "absent" : "present";
 
-        // reset student attendance status
-        if (model.getStudentAttendance(studentToMark,
-                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "present") {
-            model.markStudentAttendance(studentToMark,
-                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
-        }
-
-        Student markedStudent = new StudentBuilder(studentToMark)
-                .withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
+        Student markedStudent = (type == "absent")
+                    ? new StudentBuilder(studentToMark).build()
+                    : new StudentBuilder(studentToMark).withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
 
         MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
+                Collections.singletonList(INDEX_FIRST_STUDENT), ZERO_INDEX_WEEK);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -63,80 +56,14 @@ public class MarkStudentAttCommandTest {
     }
 
     @Test
-    public void execute_markStudentAbsentUnfilteredList_success() {
-        String type = "absent";
-
-        Student studentToMark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-
-        // reset student attendance status
-        if (model.getStudentAttendance(studentToMark,
-                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "absent") {
-            model.markStudentAttendance(studentToMark,
-                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
-        }
-
-        Student markedStudent = new StudentBuilder(studentToMark)
-                .withAttendance(MARK_ATTENDANCE_ABSENT_EXPECTED).build();
-
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
-
-        String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
-                markedStudent.getName(), type, FIRST_WEEK);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), markedStudent);
-
-        assertCommandSuccess(markStudentAttCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_markStudentPresentFilteredList_success() {
-        String type = "present";
-
+    public void execute_markStudentFilteredList_success() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
-
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        String type = studentInFilteredList.checkPresent(ZERO_INDEX_WEEK) ? "absent" : "present";
 
-        // reset student attendance status
-        if (model.getStudentAttendance(studentInFilteredList,
-                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "present") {
-            model.markStudentAttendance(studentInFilteredList,
-                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
-        }
-
-        Student markedStudent = new StudentBuilder(studentInFilteredList)
-                .withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
-
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
-
-        String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
-                markedStudent.getName(), type, FIRST_WEEK);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), markedStudent);
-
-        assertCommandSuccess(markStudentAttCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_markStudentAbsentFilteredList_success() {
-        String type = "absent";
-
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
-
-        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-
-        // reset student attendance status
-        if (model.getStudentAttendance(studentInFilteredList,
-                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "absent") {
-            model.markStudentAttendance(studentInFilteredList,
-                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
-        }
-
-        Student markedStudent = new StudentBuilder(studentInFilteredList)
-                .withAttendance(MARK_ATTENDANCE_ABSENT_EXPECTED).build();
+        Student markedStudent = (type == "absent")
+                ? new StudentBuilder(studentInFilteredList).build()
+                : new StudentBuilder(studentInFilteredList).withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
 
         MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
                 Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);

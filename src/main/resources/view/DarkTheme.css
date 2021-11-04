@@ -406,8 +406,16 @@
     -fx-text-fill: white;
 }
 
-.taskType {
-    -fx-background-color: #fc3dc9 !important;
+.taskType-todo {
+    -fx-background-color: #de2fb2 !important;
+}
+
+.taskType-event {
+    -fx-background-color: #00946a !important;
+}
+
+.taskType-deadline {
+    -fx-background-color: #592fed !important;
 }
 
 .priorityLabel-high {
