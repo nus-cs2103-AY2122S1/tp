@@ -33,7 +33,6 @@ Given below are my contributions to the project.
         * Added non-functional requirements and glossary [\#37](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/37)
         * Added implementation details of the `add` feature [\#107](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/107)
         * Added appendix for effort [\#207](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/207)
-        * Added use case for summary [\#207](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/207)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#104](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/104), [\#110](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/110), [\#115](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/115)

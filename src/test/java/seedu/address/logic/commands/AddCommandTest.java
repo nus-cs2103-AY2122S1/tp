@@ -70,7 +70,29 @@ public class AddCommandTest {
 
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person invalidPerson = new PersonBuilder(BOB).withVisit("").withOccurrence(2)
+                .withFrequency("weekly").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INVALID_OPTIONAL_VISIT_FLAG, ()
+            -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_addInvalidVisitOccurrenceFilteredList_throwCommandException() {
+
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person invalidPerson = new PersonBuilder(BOB).withVisit("").withOccurrence(2)
                 .withFrequency("").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INVALID_OPTIONAL_VISIT_FLAG, ()
+            -> addCommand.execute(modelStub));
+    }
+
+
+    @Test
+    public void execute_addInvalidVisitFrequencyFilteredList_throwCommandException() {
+
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person invalidPerson = new PersonBuilder(BOB).withVisit("").withFrequency("weekly").build();
         AddCommand addCommand = new AddCommand(invalidPerson);
         assertThrows(CommandException.class, AddCommand.MESSAGE_INVALID_OPTIONAL_VISIT_FLAG, ()
             -> addCommand.execute(modelStub));

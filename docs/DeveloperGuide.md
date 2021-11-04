@@ -623,15 +623,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC04 - Show summary**
-
-**MSS**
-
-1. User requests to show summary
-2. Summary is displayed
-
-   Use case ends.
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -656,7 +647,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample elderly. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -664,21 +655,24 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
+      
+### Adding an elderly
+1. Adding an elderly to SeniorLove
 
-### Sorting elderly
+   1. Test case: `add n/John p/12345678 l/English a/New College`<br>
+      Expected: An elderly is added to the list without visit or last visit. Details of the added elderly shown in the status message. Timestamp in the status bar is updated.
+      
+   2. Test case: `add n/John A p/12345678 l/English a/New College v/2021-12-20 12:00 lv/2021-10-10 13:00`<br>
+      Expected: An elderly is added to the list with visit and last visit. Details of the added elderly shown in the status message. Timestamp in the status bar is updated.
+      
+   3. Test case: `add n/John B p/12345678 l/English a/New College v/2021-12-20 12:15 f/Weekly o/2`<br>
+      Expected: An elderly is added to the list with a recurring weekly visit that occurs twice. Details of the added elderly shown in the status message. Timestamp in the status bar is updated.
 
-1. Sorting elderly while all elderly are being shown
-
-   1. Prerequisites: List all elderly using the `list` command.
-
-   2. Test case: `sort v/`<br>
-      Expected: Elderly are displayed in increasing order of the next visit date. If an elderly does not have a next visit, he/she will be displayed at the bottom of the list.
-
-   3. Test case: `delete lv/`<br>
-      Expected: Elderly are displayed in decreasing order of the last visit date. If an elderly does not have a last visit, he/she will be displayed at the bottom of the list.
-
-   4. Incorrect delete commands to try: `sort`, `sort n/`.<br>
-      Expected: Error details shown in the status message. Status bar remains the same.
+   4. Test case: `add n/John C p/12345678 l/English a/New College f/Weekly o/2`<br>
+      Expected: No elderly is added. Error details shown in the status message. Status bar remains the same.
+      
+   5. Other incorrect add commands to try: `add`, `add n/Timmy`, `add n/John D p/12345678 l/English a/New College o/2`, `add n/John D p/12345678 l/English a/New College f/Monthly`<br>
+      Expected: Similar to previous.
 
 ### Deleting an elderly
 
@@ -687,7 +681,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First elderly is deleted from the list. Details of the deleted elderly shown in the status message. Timestamp in the status bar is updated.
 
    3. Test case: `delete 0`<br>
       Expected: No elderly is deleted. Error details shown in the status message. Status bar remains the same.
@@ -702,23 +696,106 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all elderly using the `list` command. The first elderly listed has a next visit.
 
    2. Test case: `delete v/1`<br>
-      Expected: Next visit of the first elderly is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Next visit of the first elderly is deleted from the list. Details of the deleted elderly shown in the status message. Timestamp in the status bar is updated.
 
    3. Test case: `delete v/0`<br>
       Expected: No visit of the elderly is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete v/x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete v/x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+      
+### Editing an elderly's details
+
+1. Editing an existing elderly while a list of elderly is being shown
+   1. Prerequisites: Either use the `list` command to list all elderly (if there is at least 1 elderly in SeniorLove), or use the `add` command to add elderly (if there are no elderly in SeniorLove).
+    
+   2. Test case: `edit 1 n/Kingston Chua`<br>
+      Expected: Name of first elderly is changed. Details of the edited elderly shown in the status message. Timestamp in the status bar is updated.
+      
+   3. Test case: `edit 1 h/`<br>
+      Expected: All health conditions of the first elderly is removed. Details of the edited elderly shown in the status message. Timestamp in the status bar is updated.
+      
+   4. Test case: `edit 1 lv/`<br>
+      Expected: Last visit of the first elderly is removed. Details of the edited elderly shown in the status message. Timestamp in the status bar is updated.
+      
+   5. Test case: `edit n/Kingston Chua`<br>
+      Expected: No elderly details are changed. Error details shown in the status message. Status bar remains the same.
+      
+   6. Other incorrect edit commands to try: `edit`, `edit x n/Kingston` (where x is larger than the list size), `edit 1 lv/2000`<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Listing elderly
 
-### Saving data
+1. Listing elderly
+    
+    1. Test case: `list`<br>
+       Expected: All elderly are displayed.
+       
+    2. Test case: `list m/`<br>
+       Expected: All elderly with visits in the next month (30 days) are displayed.
+       
+    3. Test case: `list w/`<br>
+       Expected: All elderly with visits in the next week (7 days) are displayed.
 
-1. Dealing with missing/corrupted data files
+### Sorting elderly
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Sorting elderly while all elderly are being shown
 
-1. _{ more test cases …​ }_
+    1. Prerequisites: List all elderly using the `list` command.
+
+    2. Test case: `sort v/`<br>
+       Expected: Elderly are displayed in increasing order of the next visit date. If an elderly does not have a next visit, he/she will be displayed at the bottom of the list.
+
+    3. Test case: `sort lv/`<br>
+       Expected: Elderly are displayed in decreasing order of the last visit date. If an elderly does not have a last visit, he/she will be displayed at the bottom of the list.
+
+    4. Incorrect sort commands to try: `sort`, `sort n/`<br>
+       Expected: List is not sorted. Error details shown in the status message. Status bar remains the same.
+
+### Finding elderly by attributes
+
+1. Finding elderly
+
+    1. Either use the `list` command to list all elderly (if there is at least 1 elderly in SeniorLove), or use the `add` command to add elderly (if there are no elderly in SeniorLove).
+    
+    2. Test case: `find Alex`<br>
+       Expected: Elderly whose attributes contain Alex as either a string or a substring of their attributes are displayed.
+       
+    3. Test case: `find`<br>
+       Expected: No find operation is executed. Error details shown in the status message. Status bar remains the same.
+       
+### Scheduling a visit to an elderly
+
+1. Scheduling a visit to an elderly:
+
+    1. Either use the `list` command to list all elderly (if there is at least 1 elderly in SeniorLove), or use the `add` command to add elderly (if there are no elderly in SeniorLove).
+    
+    2. Test case: `visit 1 at/2021-12-20 12:00`<br>
+       Expected: Visit is added to the first elderly. Details of the elderly shown in the status message. Timestamp in the status bar is updated.
+       
+    3. Test case: `visit 1 at/2021-12-20 12:00 f/Weekly o/2`<br>
+       Expected: Recurring weekly visit is added to the first elderly. Details of the elderly shown in the status message. Timestamp in the status bar is updated.
+       
+    4. Test case: `visit 1 at/2021-12-20 12:00 f/Weekly`<br>
+       Expected: Visit is not added to elderly. Error details shown in the status message. Status bar remains the same.
+       
+    5. Other incorrect visit commands to try: `visit`, `visit 1`, `visit x at/2021-12-20 12:00` (where x is larger than the list size), `visit 1 at/2021-12-20 12:00 o/3`<br>
+       Expected: Same as previous.
+
+### Marking a visit as done
+
+1. Marking a visit as done:
+
+    1. Either use the `list` command to list all elderly (if there is at least 1 elderly in SeniorLove), or use the `add` command to add elderly (if there are no elderly in SeniorLove).
+
+    2. Test case: `done 1`<br>
+       Expected: Visit for first elderly is marked as done, and is moved to the first elderly's last visit. Details of the elderly shown in the status message. Timestamp in the status bar is updated.
+       
+    3. Test case: `done 0`<br>
+       Expected: No visit is marked as done. Error details shown in the status message. Status bar remains the same.
+       
+    4. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size)<br>
+       Expected: Same as previous.
 
 ## **Appendix: Effort**
 

@@ -1,20 +1,27 @@
 @startuml
+skinparam wrapWidth 130
+skinparam defaultTextAlignment center
+
 start
-:user inputs visit command;
+:User inputs visit command;
 :Logic executes visit command;
 :VisitCommandParser parses the command;
 
-if () then ([Visit date is specified in correct format])
-    if() then ([Frequency and occurrence both present])
-        if() then ([Both frequency and occurrence are correctly specified])
-            :execute VisitCommand;
+if () then ([Visit date is in correct format])
+    if() then ([Frequency and occurrence
+    both present])
+        if() then ([Both frequency
+  and occurrence
+  are correctly specified])
+            :Execute VisitCommand;
         else ([else])
             :Throw ParseException;
         endif
 
     else ([else])
-        if() then ([Neither frequency nor occurrence present])
-            :execute VisitCommand;
+        if() then ([Neither frequency
+ nor occurrence presents])
+            :Execute VisitCommand;
         else ([else])
             :Throw ParseException;
         endif
