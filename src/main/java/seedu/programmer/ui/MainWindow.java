@@ -253,7 +253,8 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
         saveDataState(newPE);
-        displayPopup("Upload success! All past students have been deleted. You now have " + stuList.size() + " students.");
+        displayPopup("Upload success! All past students have been deleted. You now have "
+                    + stuList.size() + " students.");
     }
 
     private List<Student> getStudentList(File chosenFile) {
@@ -269,7 +270,8 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         if (stuList.size() == 0) {
-            displayPopup("Upload failed: No students were found in your file. Use the purge command if you want to remove all students.");
+            displayPopup("Upload failed: No students were found in your file. "
+                        + "Use the purge command if you want to remove all students.");
             return null;
         }
 
