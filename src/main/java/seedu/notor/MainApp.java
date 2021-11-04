@@ -76,7 +76,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s Notor and {@code userPrefs}. <br>
      * The data from the sample Notor will be used instead if {@code storage}'s notor is not found,
      * or an empty Notor will be used instead if errors occur when reading {@code storage}'s notor.
      */
