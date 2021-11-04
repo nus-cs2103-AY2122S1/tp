@@ -109,6 +109,8 @@ public class BirthDate {
         return isValid;
     }
 
+    //@@author XXJJXJ-reused.
+    //Reused from https://stackoverflow.com/a/29038060/13624758 with minimal modification.
     /**
      * Returns true if a given String form is a valid date.
      *

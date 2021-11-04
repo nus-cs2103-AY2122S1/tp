@@ -22,7 +22,7 @@ title: Developer Guide
        - [Implementation Details](#implementation-details)
        - [Design Considerations:](#design-considerations)
           - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
-- [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+    - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
       - [Implementation Details](#implementation-details)
       - [Implementation Rationale](#implementation-rationale)
       - [Design Considerations:](#design-considerations)
@@ -63,6 +63,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* `isValidDate` method of EventDate and BirthDate are adapted from [here](https://stackoverflow.com/a/29038060/13624758)
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
