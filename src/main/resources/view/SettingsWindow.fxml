@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import seedu.address.commons.core.GuiSettings.Theme?>
 
-<fx:root resizable="false" title="Settings" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Settings" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"  minWidth="300">
     <icons>
         <Image url="@/images/settings_icon.png" />
     </icons>
