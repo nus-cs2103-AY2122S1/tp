@@ -583,7 +583,7 @@ Action                    | Format                                              
 **Untag**                 | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /ut [t:TAG1,TAG2,...]`
 **Clear Tags**            | `person (INDEX) /cleartags`                                                   | `p (INDEX) / ct`
 **List Persons**          | `person /list`                                                                | `p /l`
-**List Persons in Group** | `person [INDEX] /list`                                                        | `p [INDEX] /l`
+**List Persons in Group or SubGroup** | `person [INDEX] /list`                                            | `p [INDEX] /l`
 **Find**                  | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
 **Archive**               | `person (INDEX) /archive`                                                     | `p (INDEX) /ar`
 **Archive All**           | `person /archive`                                                             | `p /ar`
