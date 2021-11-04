@@ -2,7 +2,6 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.StringUtil.isValidDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,9 +28,11 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
         if (lastMetDate == null) {
             lastMetDate = "";
         }
+        if (lastMetDate.isEmpty()) {
+            lastMetDate = DEFAULT_VALUE;
+        }
 
-        checkArgument(isValidDate(lastMetDate), MESSAGE_CONSTRAINTS);
-        checkArgument(notFutureDate(lastMetDate), MESSAGE_INVALID_LASTMET);
+        checkArgument(isValidLastMet(lastMetDate), MESSAGE_CONSTRAINTS);
         dateInString = lastMetDate;
 
         if (lastMetDate.isEmpty()) {
@@ -46,13 +47,13 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
      * Returns if a given string is a valid lastMet.
      */
     public static boolean isValidLastMet(String test) {
-        return StringUtil.isValidDate(test) && notFutureDate(test);
+        return (IS_NULL_VALUE_ALLOWED && test.isEmpty()) || (StringUtil.isValidDate(test) && isNotFutureDate(test));
     }
 
     /**
      * Returns if a given string contains a date that is not in the future.
      */
-    public static boolean notFutureDate(String test) {
+    public static boolean isNotFutureDate(String test) {
         if (test.isEmpty()) {
             return true;
         }
@@ -71,27 +72,27 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
     }
 
     @Override
+    public int hashCode() {
+        if (value == null) {
+            return 0;
+        }
+        return value.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof LastMet // instanceof handles nulls
+            && dateInString.equals(((LastMet) other).dateInString)); // state check
+    }
+
+    @Override
     public String toString() {
         if (value == null) {
             return DEFAULT_VALUE;
         } else {
             return this.dateInString;
         }
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof LastMet // instanceof handles nulls
-                && value.equals(((LastMet) other).value)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        if (value == null) {
-            return 0;
-        }
-        return value.hashCode();
     }
 
     @Override

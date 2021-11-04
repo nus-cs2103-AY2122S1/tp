@@ -68,16 +68,16 @@ public class LastMetTest {
         // used in conjunction with isValidDate, so assume dates to be valid
 
         // empty string
-        assertTrue(LastMet.notFutureDate(""));
+        assertTrue(LastMet.isNotFutureDate(""));
 
         // past date
-        assertTrue(LastMet.notFutureDate("20-12-1999"));
-        assertTrue(LastMet.notFutureDate("20-09-2021"));
+        assertTrue(LastMet.isNotFutureDate("20-12-1999"));
+        assertTrue(LastMet.isNotFutureDate("20-09-2021"));
 
         // current date
-        assertTrue(LastMet.notFutureDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+        assertTrue(LastMet.isNotFutureDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
 
         // future date
-        assertFalse(LastMet.notFutureDate("20-12-2050"));
+        assertFalse(LastMet.isNotFutureDate("20-12-2050"));
     }
 }

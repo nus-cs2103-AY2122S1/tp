@@ -64,20 +64,20 @@ public class NextMeetingTest {
         String validEndTime = "13:00";
 
         // empty string
-        assertTrue(NextMeeting.notPastMeeting("", ""));
+        assertTrue(NextMeeting.isNotPastMeeting("", ""));
 
         // invalid strings
-        assertFalse(NextMeeting.notPastMeeting("24-20-2050", "02:00"));
-        assertFalse(NextMeeting.notPastMeeting("24-12-2050", "25:00"));
-        assertFalse(NextMeeting.notPastMeeting("24-12-2050", "23:61"));
+        assertFalse(NextMeeting.isNotPastMeeting("24-20-2050", "02:00"));
+        assertFalse(NextMeeting.isNotPastMeeting("24-12-2050", "25:00"));
+        assertFalse(NextMeeting.isNotPastMeeting("24-12-2050", "23:61"));
 
         // meeting datetime is in the past
-        assertFalse(NextMeeting.notPastMeeting("24-12-2020", "00:00"));
+        assertFalse(NextMeeting.isNotPastMeeting("24-12-2020", "00:00"));
 
         // meeting datetime is in the future
-        assertTrue(NextMeeting.notPastMeeting(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+        assertTrue(NextMeeting.isNotPastMeeting(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
             "23:59"));
-        assertTrue(NextMeeting.notPastMeeting("24-12-2050", "00:00"));
+        assertTrue(NextMeeting.isNotPastMeeting("24-12-2050", "00:00"));
     }
 
     @Test
