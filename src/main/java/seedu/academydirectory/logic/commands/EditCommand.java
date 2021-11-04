@@ -27,7 +27,7 @@ import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
 /**
- * Edits the details of an existing student in the academy directory.
+ * Edits the details of an existing student in the Academy Directory.
  */
 public class EditCommand extends Command {
 
@@ -64,7 +64,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the academy directory.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the Academy Directory.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;

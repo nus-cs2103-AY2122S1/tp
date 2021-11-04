@@ -18,7 +18,7 @@ public class ClearCommand extends Command {
             + "Clears all entries from the academy directory.\n"
             + "\n"
             + "Format: `clear`";
-    public static final String MESSAGE_SUCCESS = "Academy directory has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Academy Directory has been cleared!";
 
 
     @Override

@@ -12,7 +12,7 @@ import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the academy directory.
+ * Deletes a student identified using it's displayed index from the Academy Directory.
  */
 public class DeleteCommand extends Command {
 

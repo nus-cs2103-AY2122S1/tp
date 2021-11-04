@@ -8,6 +8,7 @@ import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
@@ -87,7 +88,7 @@ public class SortCommand extends Command {
         model.setAcademyDirectory(sortedAcademyDirectory);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(result);
+        return new CommandResult(result, Optional.of(result));
     }
 
     public Comparator<Student> getComparator() {

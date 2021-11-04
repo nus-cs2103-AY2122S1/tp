@@ -22,7 +22,7 @@ import seedu.academydirectory.model.student.Information;
 import seedu.academydirectory.model.student.InformationWantedFunction;
 
 /**
- * Finds and lists all persons in academy directory whose name contains any of the argument keywords.
+ * Finds and lists all persons in Academy Directory whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class GetCommand extends Command {

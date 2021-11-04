@@ -23,7 +23,7 @@ title: Developer Guide
     * [GradeCommand](#gradecommand)
     * [AttendanceCommand](#attendancecommand)
     * [ParticipationCommand](#participationcommand)
-  * [Visualize Data](#visualize-data)
+  * [Visualization Tools](#visualization-tools)
     * [ViewCommand](#viewcommand)
     * [ShowCommand](#showcommand)
     * [VisualizeCommand](#visualizecommand)
@@ -57,7 +57,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/architecture/ArchitectureDiagram.png" width="280" />
+![Architecture Diagram](images/dg/architecture/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -83,7 +83,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/architecture/ArchitectureSequenceDiagram.png" width="574" />
+![Architecture Sequence Diagram](images/dg/architecture/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -92,7 +92,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/architecture/ComponentManagers.png" width="300" />
+![Component Managers](images/dg/architecture/ComponentManagers.png)
 
 The sections below give more details of each component.
 
@@ -119,7 +119,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Logic Class Diagram](images/dg/architecture/logic/LogicClassDiagram.png)
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AcademyDirectoryParser` class to parse the user command.
@@ -136,7 +136,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![Parser Classes](images/dg/logic/parsers/ParserClasses.png)
 
 How the parsing works:
 * When called upon to parse a user command, the `AcademyDirectoryParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AcademyDirectoryParser` returns back as a `Command` object.
@@ -149,7 +149,8 @@ API defines methods to interface with version control entities such as `Commit`.
 
 #### Model API
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/model/Model.java)
-<img src="images/architecture/model/ModelClassDiagram.png" width="450" />
+
+![Model Class Diagram](images/dg/architecture/model/ModelClassDiagram.png)
 
 The `Model` component,
 
@@ -159,7 +160,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AcademyDirectory`, which `Student` references. This allows `AcademyDirectory` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
-<img src="images/architecture/model/BetterModelClassDiagram.png" width="450" />
+![Better Model Class Diagram](images/dg/architecture/model/BetterModelClassDiagram.png)
 
 </div>
 
@@ -178,7 +179,7 @@ Here's a (partial) class diagram of the Version component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage Class Diagram](images/dg/architecture/storage/StorageClassDiagram.png)
 
 The `Storage` component,
 * can save both academy directory data and user preference data in json format, and read them back into corresponding objects.
@@ -204,7 +205,7 @@ This section describes some noteworthy details on how certain features are imple
 This command adds a new `Student` to `AcademyDirectory`.
 
 #### Implementation
-`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 `AddCommand` adds students to the `AcademyDirectory`, with prevention of duplicates by ensuring that each `Student` has a unique `NAME`. 
 `NAME` is a sufficiently unique field to identify a unique instance of a student as for the purposes of `AcademyDirectory` is scoped to 
@@ -216,11 +217,20 @@ does not have unnecessary duplicate information (e.g same `PHONE`) is left to an
 
 ### DeleteCommand
 
+This command deletes a `Student` from `AcademyDirectory`.
+
 #### Implementation
+`DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+
+`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `Model#deleteStudent()`.
 
 ### TagCommand
 
+{Add description}
+
 #### Implementation
+
+{Add implementation}
 
 ### GetCommand
 This command serves to retrieve a specific `Information` of students.
@@ -245,7 +255,7 @@ Exactly which field of `Student` should be retrieved is determined by the `Prefi
 This command edits a `Student`'s personal details such as their `NAME`, `PHONE`, `TELEGRAM` and `EMAIL`.
 
 #### Implementation
-`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
 unless the `NAME` is the same  as the `Student` being edited.
@@ -277,15 +287,13 @@ This command serves to update the attendance status of students. A student's `At
 
 #### Implementation
 
-`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
 
 The following sequence diagram describes what happens when `AttendanceCommand` is executed:
 
 ![AttendanceCommandSequenceDiagram](images/dg/logic/commands/attendancecommand/AttendanceCommandSequenceDiagram.png)
-
-As seen from the diagram, the `AttendanceCommand` involves two for loops. In each of the loops there is a reference frame.
 
 For `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams can be found below:
 
@@ -297,7 +305,7 @@ This command serves to update the `Participation` score of students. Following t
 
 #### Implementation
 
-`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done.
 
@@ -309,11 +317,19 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 
  </div>
 
-### Visualize Data
+### Visualization Tools
 
 ### ViewCommand
 
+This command serves to display the summarised details of a single `Student` in the `AcademyDirectory`.
+
+`ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
+
+{Improve on explanation and add a possible UML Diagram}
+
 #### Implementation
+
+`ViewCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
 ### ShowCommand
 
@@ -332,11 +348,23 @@ The following sequence diagram describes what happens when `ShowCommand` is exec
 
 ### VisualizeCommand
 
+This command provides a Box Plot of the performance of all `Student` in `AcademyDirectory` in all `Assessment`.
+
 #### Implementation
+
+`VisualizeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+{Improve on explanation and add a possible UML Diagram}
 
 ### FilterCommand
 
+This command filters the `ObservableList` by `NAME` or `TAG`.  
+
 #### Implementation
+
+`FilterCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+{Improve on explanation and add a possible UML Diagram}
 
 ### SortCommand
 
@@ -344,7 +372,7 @@ This command sorts the `AcademyDirectory` student list based on their `Participa
 
 #### Implementation
 
-`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
 The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
 
@@ -357,10 +385,24 @@ The reference frame for GetComparator can be found below. It details the selecti
 ### Others
 
 ### ListCommand
+
+This command restores the original, unfiltered view of `AcademyDirectory`.
+
 #### Implementation
 
+`ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+{Add more details on implementation}
+
 ### ClearCommand
+
+This command clears all `Student` entries from `AcademyDirectory`.
+
 #### Implementation
+
+`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
+
+{Add more details on implementation}
 
 ### UndoCommand
 #### Implementation
@@ -428,7 +470,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAcademyDirectory()`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![Commit Activity Diagram](images/misc/CommitActivityDiagram.png)
 
 #### Design considerations:
 
@@ -555,9 +597,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students
-2.  AcademyDirectory shows a list of students
+2.  Academy Directory shows a list of students
 3.  User requests to delete a specific student in the list
-4.  AcademyDirectory deletes the student
+4.  Academy Directory deletes the student
 
     Use case ends.
 
@@ -569,7 +611,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -578,9 +620,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students
-2.  AcademyDirectory shows a list of students
+2.  Academy Directory shows a list of students
 3.  User requests to edit a specific student in the list
-4.  AcademyDirectory edit the student
+4.  Academy Directory edit the student
 
     Use case ends.
 
@@ -592,7 +634,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -601,9 +643,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students attending the relevant Studio session
-2.  AcademyDirectory shows a list of students attending the relevant Studio session
+2.  Academy Directory shows a list of students attending the relevant Studio session
 3.  User requests to update the attendance of the student in the relevant Studio session
-4.  AcademyDirectory updates the student's attendance for the relevant Studio session
+4.  Academy Directory updates the student's attendance for the relevant Studio session
 
     Use case ends.
 
@@ -611,12 +653,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index for the Studio group is invalid.
 
-  * 1a1. AcademyDirectory shows an error message.
+  * 1a1. Academy Directory shows an error message.
       Use case resumes at step 1.
 
 * 1b. The given index for the Studio group's Studio session is invalid.
 
-  * 1b1. AcademyDirectory shows an error message.
+  * 1b1. Academy Directory shows an error message.
       Use case resumes at step 1.
 
 * 2a. The list is empty.
@@ -625,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given keyword to search for the student is gives no result.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -634,9 +676,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list students attending the relevant Studio session
-2. AcademyDirectory shows a list of students attending the relevant Studio session
+2. Academy Directory shows a list of students attending the relevant Studio session
 3. User requests to update the Studio participation of the student in the relevant Studio session with the appropriate Studio participation score
-4. AcademyDirectory updates the student's Studio participation for the relevant Studio session
+4. Academy Directory updates the student's Studio participation for the relevant Studio session
 
     Use case ends.
 
@@ -644,13 +686,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index for the Studio group is invalid.
 
-    * 1a1. AcademyDirectory shows an error message.
+    * 1a1. Academy Directory shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The given index for the Studio group's Studio session is invalid.
 
-    * 1b1. AcademyDirectory shows an error message.
+    * 1b1. Academy Directory shows an error message.
 
       Use case resumes at step 1.
 
@@ -660,13 +702,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given keyword to search for the student is gives no result.
 
-    * 3a1. AcademyDirectory shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The given Studio participation score is invalid (non-integer).
 
-    * 3b1. AcademyDirectory shows an error message.
+    * 3b1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
@@ -675,8 +717,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to add the grade for an assessment to a student.
-2. AcademyDirectory checks for existing instance of the assessment.
-3. AcademyDirectory records the input grade for the assessment.
+2. Academy Directory checks for existing instance of the assessment.
+3. Academy Directory records the input grade for the assessment.
    
     Use case ends.
 
@@ -684,25 +726,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The student's name does not match any of the names in the directory.
 
-    * 1a1. AcademyDirectory shows an error message.
+    * 1a1. Academy Directory shows an error message.
 
       Use case resumes at step 1.
     
 * 1b. The input grade is not a positive integer.
 
-    * 1b1. AcademyDirectory requests for user to enter a positive integer.
+    * 1b1. Academy Directory requests for user to enter a positive integer.
 
       Use case resumes at step 1.
 
 * 2a. The assessment already exists.
 
-    * 2a1. AcademyDirectory edits the grade for the existing assessment.
+    * 2a1. Academy Directory edits the grade for the existing assessment.
 
       Use case ends.
 
 * 2b. The assessment is new.
 
-    * 2b1. AcademyDirectory adds a new assessment with the input grade.
+    * 2b1. Academy Directory adds a new assessment with the input grade.
 
       Use case ends.
 
@@ -711,8 +753,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to display the grades for an assessment.
-2. AcademyDirectory parses through the students to obtain the grades.
-3. AcademyDirectory displays a list of students with the grades.
+2. Academy Directory parses through the students to obtain the grades.
+3. Academy Directory displays a list of students with the grades.
 
    Use case ends.
 
@@ -720,8 +762,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The assessment does not exist.
 
-    * 1a1. AcademyDirectory shows an error message.
-    * 1a2. AcademyDirectory requests for the user to try another assessment.
+    * 1a1. Academy Directory shows an error message.
+    * 1a2. Academy Directory requests for the user to try another assessment.
 
       Use case resumes at step 1.
 
@@ -730,8 +772,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a command to retrieve information
-2. AcademyDirectory obtain the queried information from the students.
-3. AcademyDirectory displays the list of information queried.
+2. Academy Directory obtain the queried information from the students.
+3. Academy Directory displays the list of information queried.
 
    Use case ends.
 
@@ -739,13 +781,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User specifies exact student name.
 
-    * 1a1. AcademyDirectory displays the queried information associated with the queried student.
+    * 1a1. Academy Directory displays the queried information associated with the queried student.
   
          Use case ends.
   
 * 1a. User's queried information is not supported 
-    * 1a1. AcademyDirectory shows an error message.
-    * 1a2. AcademyDirectory requests for the user to try another information.
+    * 1a1. Academy Directory shows an error message.
+    * 1a2. Academy Directory requests for the user to try another information.
   
         Use case ends.
 
@@ -770,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Studios**: A tutorial held in CS1101S and is essential in aiding the students to improve their grasp on the concepts taught during the lecture.
 * **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
 * **Principle of Least-Privilege**: Minimum levels of access – or permissions – needed to perform function.
-
+* **Version Controllable**: Refers to a `Command` that logs a `Commit` object upon execution with the logging relying on the `Optional` field in the `CommandResult` returned from `Command#execute()`.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
