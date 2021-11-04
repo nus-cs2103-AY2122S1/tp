@@ -190,9 +190,35 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The link feature makes use of the 
+The parsing of a link command is handled by the following classes:
 
-#### Design considerations:
+ - `FriendCommandParser` - Checks that the command contains the `LinkFriendCommand.COMMAND_WORD`.
+   - A `LinkFriendCommandParser` object is then created, from which `LinkFriendCommandParser#parse()` is called.
+ - `LinkFriendCommandParser` - Parses the command to extract a `FriendId` object, a `GameId` object and a `UserName` object from the command.
+   - `LinkFriendCommandParser#parse()` returns a `LinkFriendCommand` object instantiated with the aforementioned objects as parameters.
+ - `LinkFriendCommand` - Represents link friend command that is executed by gitGud.
+
+Following this, `LinkFriendCommand#execute()` is then called, which in turns calls `ModelManager#linkFriend()` to make changes to the model.
+
+#### Special considerations:
+
+Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
+have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
+
+### Unlink
+
+#### Implementation
+
+The parsing of the unlink command is handled by the following classes:
+
+ - `FriendCommandParser` - Checks that the command contains the `UnlinkFriendCommand.COMMAND_WORD`.
+   - An `UnlinkFriendCommandParser` object is then created, from which `UnlinkFriendCommandParser#parse()` is called.
+ - `UnlinkFriendCommandParser` - Parses the command to extract a `FriendId` object and a `GameId` object.
+   - `UnlinkFriendCommandParser#parse()` return an `UnlinkFriendCommand` object instantiated with the aforementioned objects as parameters.
+ - `UnlinkFriendCommand` - Represents unlink friend command that is executed by gitGud.
+
+
+#### Special considerations:
 
 **Aspect: How undo & redo executes:**
 
