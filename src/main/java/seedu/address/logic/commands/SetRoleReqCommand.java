@@ -15,6 +15,7 @@ import seedu.address.storage.RoleReqStorage;
 
 public class SetRoleReqCommand extends Command {
     public static final String COMMAND_WORD = "setRoleReq";
+    public static final String SUCCESS_MESSAGE = "Role requirements successfully updated:\n\n";
     private static final String HELP_MESSAGE = COMMAND_WORD + "Sets the minimum number of staff required for "
             + "the specified role.\n\n"
             + "Parameters:\n"
@@ -45,8 +46,7 @@ public class SetRoleReqCommand extends Command {
                 throw new CommandException(FILE_NOT_FOUND + RoleReqStorage.FILEPATH);
             }
         }
-        return new CommandResult("Role requirements successfully updated:\n\n"
-                + RoleReqStorage.getRoleReqs());
+        return new CommandResult(SUCCESS_MESSAGE + RoleReqStorage.getRoleReqs());
     }
 
     /**
