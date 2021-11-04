@@ -62,7 +62,7 @@ public class ClaimListPanel extends UiPart<Region> {
     }
 
     private void update() {
-        claimList.clear();
+        claimList = FXCollections.observableArrayList();
         personList.stream().forEach(
             person -> person.getClaims().forEach(
                 claim -> claimList.add(new Pair<>(claim, person))
