@@ -8,8 +8,8 @@ import java.util.List;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.display.Displayable;
+import seedu.address.model.display.TransactionCard;
 import seedu.address.model.item.Item;
-import seedu.address.ui.TransactionCard;
 import seedu.address.ui.UiPart;
 
 /**

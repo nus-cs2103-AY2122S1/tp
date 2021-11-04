@@ -186,7 +186,7 @@ public class ModelManagerTest {
     @Test
     public void transactAndClearOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
-        assertThrows(AssertionError.class, model::transactAndClearOrder);
+        assertThrows(AssertionError.class, model::transactAndCloseOrder);
     }
 
     @Test
@@ -251,8 +251,9 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(inventory, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(inventory, userPrefs);
+        modelManager = new ModelManager(inventory, userPrefs, new TransactionList(), new BookKeeping());
+        ModelManager modelManagerCopy = new ModelManager(inventory, userPrefs,
+                new TransactionList(), new BookKeeping());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -265,13 +266,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different inventory -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs,
+                new TransactionList(), new BookKeeping())));
 
         // different filteredList -> returns false
         String[] keywords = APPLE_PIE.getName().fullName.split("\\s+");
         modelManager.updateFilteredItemList(DISPLAY_INVENTORY,
                 new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(inventory, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, userPrefs,
+                new TransactionList(), new BookKeeping())));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
@@ -279,16 +282,18 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs,
+                new TransactionList(), new BookKeeping())));
 
         // different order -> returns false
-        ModelManager other = new ModelManager(inventory, userPrefs);
+        ModelManager other = new ModelManager(inventory, userPrefs,
+                new TransactionList(), new BookKeeping());
         other.setOrder(new Order());
         assertFalse(modelManager.equals(other));
 
         // different display mode / list -> returns false
         modelManager.setOrder(new Order());
-        other = new ModelManager(inventory, userPrefs);
+        other = new ModelManager(inventory, userPrefs, new TransactionList(), new BookKeeping());
         other.setOrder(new Order());
         other.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         assertFalse(modelManager.equals(other));

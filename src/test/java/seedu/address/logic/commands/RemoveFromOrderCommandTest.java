@@ -12,8 +12,10 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
@@ -21,14 +23,16 @@ import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class RemoveFromOrderCommandTest {
 
-    private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
     private Model modelWithOrder = getModelWithOrderedDonut();
 
     /**
      * Returns a model with 5 donuts in its unclosed order
      */
     private Model getModelWithOrderedDonut() {
-        Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
         model.addToOrder(DONUT.updateCount(5));

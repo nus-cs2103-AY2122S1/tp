@@ -16,15 +16,18 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class RemoveCommandTest {
 
-    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -39,7 +42,8 @@ public class RemoveCommandTest {
                 .withName(VALID_NAME_BAGEL).withCount(1).build();
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.addItem(BAGEL.updateCount(BAGEL.getCount() - 1));
 
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
@@ -55,7 +59,8 @@ public class RemoveCommandTest {
                 .withId(VALID_ID_BAGEL).withCount(1).build();
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.addItem(BAGEL.updateCount(BAGEL.getCount() - 1));
 
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
@@ -72,7 +77,8 @@ public class RemoveCommandTest {
                 .withCount(1).build();
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.addItem(BAGEL.updateCount(BAGEL.getCount() - 1));
 
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
@@ -89,7 +95,8 @@ public class RemoveCommandTest {
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
         String expectedMessage = RemoveCommand.MESSAGE_NAME_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                new TransactionList(), new BookKeeping());
 
         assertCommandFailure(removeCommand, model, expectedModel, expectedMessage);
     }
@@ -103,7 +110,8 @@ public class RemoveCommandTest {
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
         String expectedMessage = RemoveCommand.MESSAGE_ID_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                new TransactionList(), new BookKeeping());
 
         assertCommandFailure(removeCommand, model, expectedModel, expectedMessage);
     }
@@ -117,7 +125,8 @@ public class RemoveCommandTest {
                 .withCount(BAGEL.getCount()).build();
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
 
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.addItem(BAGEL.updateCount(0));
 
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, BAGEL.getCount(), BAGEL.getName());
@@ -149,7 +158,8 @@ public class RemoveCommandTest {
         RemoveCommand removeCommand = new RemoveCommand(descriptor);
         String expectedMessage = RemoveCommand.MESSAGE_MULTIPLE_MATCHES;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                new TransactionList(), new BookKeeping());
         expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, x-> x.equals(BAGEL) || x.equals(DONUT));
 
         assertCommandFailure(removeCommand, model, expectedModel, expectedMessage);

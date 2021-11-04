@@ -12,7 +12,6 @@ import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.TransactionRecord;
 
 /**
  * A default model stub that have all of its methods failing.
@@ -135,12 +134,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void initialiseTransactions() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setOrder(Order order) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public boolean hasUnclosedOrder() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void closeOrder() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -160,7 +169,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void transactAndClearOrder() {
+    public void transactAndCloseOrder() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -175,7 +184,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public List<TransactionRecord> getTransactions() {
+    public ReadOnlyTransactionList getTransactions() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -186,6 +195,11 @@ public class ModelStub implements Model {
 
     @Override
     public BookKeeping getBookKeeping() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void initialiseBookKeeping() {
         throw new AssertionError("This method should not be called.");
     }
 }

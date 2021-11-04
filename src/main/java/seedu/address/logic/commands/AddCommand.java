@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
+import seedu.address.model.item.Name;
 
 /**
  * Adds an item to the inventory.
@@ -24,16 +25,14 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds item(s) to the inventory. "
-            + "\nEnter all fields if item added for the first time"
-            + "\nIf replenish an existing item, only name or/and id, and count are needed"
-            + "\nParameters: "
-            + "NAME "
-            + PREFIX_ID + "ID "
-            + PREFIX_COUNT + "COUNT "
-            + "[" + PREFIX_COSTPRICE + "COSTPRICE]"
-            + " [" + PREFIX_SALESPRICE + "SALESPRICE] "
-            + " [" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "\n Parameters: "
+            + "[ NAME |"
+            + PREFIX_ID + "ID ]"
+            + " (" + PREFIX_COUNT + "COUNT)"
+            + " (" + PREFIX_COSTPRICE + "COSTPRICE) "
+            + " (" + PREFIX_SALESPRICE + "SALESPRICE) "
+            + " (" + PREFIX_TAG + "TAG)...\n"
+            + " Example: " + COMMAND_WORD + " "
             + "Banana Bread "
             + PREFIX_ID + "019381 "
             + PREFIX_COUNT + "10 "
@@ -44,12 +43,14 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_NEW = "New item added: %1$s";
     public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %d x %s";
+    public static final String MESSAGE_EXTRA_PRICE_FLAGS = "There seems to be extra price fields. If you wish to "
+            + "edit prices, please use 'edit' instead.";
+    public static final String MESSAGE_EXTRA_TAG_FLAGS = "There seems to be extra tag field. If you wish to "
+            + "edit tags, please use 'edit' instead.";
     public static final String MESSAGE_INCOMPLETE_INFO = "Item has not been added before,"
             + " please provide name, id, cost price, and sales price";
     public static final String MESSAGE_ID_NOT_FOUND = "Name provided exists but id provided is nonexistent";
     public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
-    public static final String MESSAGE_ID_EXISTS = "Id provided already used for another item";
-    public static final String MESSAGE_NAME_EXISTS = "Name provided already used for another item";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple candidates found, which one did you mean to add?";
 
     private final ItemDescriptor toAddDescriptor;
@@ -68,7 +69,10 @@ public class AddCommand extends Command {
         assert(toAddDescriptor.getCount().isPresent());
 
         List<Item> matchingItems = model.getItems(toAddDescriptor);
-
+        boolean extraCostFlags = false;
+        boolean extraTagFlag = false;
+        boolean nameEmpty = true;
+        boolean idEmpty = true;
         // Check if item exists in inventory
         if (matchingItems.size() == 0) {
             // Check name and id are specified
@@ -85,48 +89,61 @@ public class AddCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_SUCCESS_NEW, newItem));
         }
-        // Check that id and name of the replenished item does not exist
-        if (!toAddDescriptor.getName().equals(Optional.empty())
-                && !toAddDescriptor.getId().equals(Optional.empty())
-                && toAddDescriptor.getCostPrice().equals(Optional.empty())
-                && toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
+        if (toAddDescriptor.getCostPrice().equals(Optional.empty())) {
             toAddDescriptor.setCostPrice(1.0);
+        } else {
+            extraCostFlags = true;
+        }
+        if (toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
             toAddDescriptor.setSalesPrice(1.0);
-            //check that id does not exist
-            if (!model.hasId(toAddDescriptor.buildItem())) {
-                throw new CommandException(MESSAGE_ID_NOT_FOUND);
-            }
-            //check that name does not exist
-            if (!model.hasName(toAddDescriptor.buildItem())) {
-                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
-            }
+        } else {
+            extraCostFlags = true;
+        }
+        if (!toAddDescriptor.getTags().equals(Optional.empty())) {
+            extraTagFlag = true;
         }
         // Check that only 1 item fit the description
         if (matchingItems.size() > 1) {
             model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
-        // Check that id and name of new item does not exist
-        if (!toAddDescriptor.getName().equals(Optional.empty())
-                && !toAddDescriptor.getId().equals(Optional.empty())
-                && !toAddDescriptor.getCostPrice().equals(Optional.empty())
-                && !toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
-            toAddDescriptor.setCostPrice(1.0);
-            toAddDescriptor.setSalesPrice(1.0);
-            //check that id exists
-            if (model.hasId(toAddDescriptor.buildItem())) {
-                throw new CommandException(MESSAGE_ID_EXISTS);
+        if (!toAddDescriptor.getId().equals(Optional.empty())
+                && !toAddDescriptor.getName().equals(Optional.empty())) {
+            if (!model.hasId(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_NOT_FOUND);
             }
-            //check that name exists
-            if (model.hasName(toAddDescriptor.buildItem())) {
-                throw new CommandException(MESSAGE_NAME_EXISTS);
+            if (!model.hasName(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
             }
+        }
+        if (toAddDescriptor.getName().equals(Optional.empty())) {
+            toAddDescriptor.setName(new Name("sample"));
+            nameEmpty = true;
+            if (!model.hasId(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_NOT_FOUND);
+            }
+            toAddDescriptor.setName(null);
+        }
+        if (toAddDescriptor.getId().equals(Optional.empty())) {
+            toAddDescriptor.setId(1);
+            idEmpty = true;
+            if (!model.hasName(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            }
+            toAddDescriptor.setId(null);
         }
 
         Item target = matchingItems.get(0);
         int amount = toAddDescriptor.getCount().get();
         model.restockItem(target, amount);
         model.addCostBookKeeping(amount * target.getCostPrice());
+        String replenishedMessage = String.format(MESSAGE_SUCCESS_REPLENISH, amount, target.getName());
+        if (extraCostFlags) {
+            return new CommandResult(replenishedMessage + "\n" + MESSAGE_EXTRA_PRICE_FLAGS);
+        }
+        if (extraTagFlag) {
+            return new CommandResult(replenishedMessage + "\n" + MESSAGE_EXTRA_TAG_FLAGS);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, amount, target.getName()));
     }
 

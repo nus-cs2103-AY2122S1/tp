@@ -1,10 +1,11 @@
-package seedu.address.ui;
+package seedu.address.model.display;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.TransactionRecord;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of an {@code transaction}.
@@ -48,7 +49,7 @@ public class TransactionCard extends UiPart<Region> {
 
         Double sp = transaction.getOrderItems().stream()
                 .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
-        totalPrice.setText("Total price: " + sp.toString());
+        totalPrice.setText(String.format("Total price: $%.2f", sp));
         totalItems.setText(String.format("Total items: %d", transaction.getOrderItems().size()));
     }
 

@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends InventoryStorage, UserPrefsStorage {
+public interface Storage extends InventoryStorage, UserPrefsStorage, TransactionStorage, BookKeepingStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

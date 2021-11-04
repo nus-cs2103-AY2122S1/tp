@@ -11,8 +11,10 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.order.Order;
@@ -22,14 +24,15 @@ public class EndAndTransactOrderCommandTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     /**
      * Returns a model with 5 donuts in its unclosed order
      */
     private Model getModelWithOrderedDonut(Path path) {
         UserPrefs userPrefs = new UserPrefs(path);
-        Model model = new ModelManager(getTypicalInventory(), userPrefs);
+        Model model = new ModelManager(getTypicalInventory(), userPrefs, new TransactionList(), new BookKeeping());
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
         model.addToOrder(DONUT.updateCount(1));
@@ -49,21 +52,30 @@ public class EndAndTransactOrderCommandTest {
     }
 
     @Test
+    public void execute_emptyOrder_success() {
+        EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
+
+        Model modelWithEmptyOrder = new ModelManager(getTypicalInventory(),
+                new UserPrefs(), new TransactionList(), new BookKeeping());
+        modelWithEmptyOrder.setOrder(new Order());
+
+        Model modelWithoutOrder = new ModelManager(getTypicalInventory(),
+                new UserPrefs(), new TransactionList(), new BookKeeping());
+        CommandResult expectedResult = new CommandResult(EndAndTransactOrderCommand.MESSAGE_EMPTY_ORDER);
+        assertCommandSuccess(command, modelWithEmptyOrder, expectedResult, modelWithoutOrder);
+    }
+
+    @Test
     public void execute_normalTransaction_itemRemoved() {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalInventory(),
-                new UserPrefs(temporaryFolder.resolve("transaction.json")));
+                new UserPrefs(temporaryFolder.resolve("transaction.json")), new TransactionList(), new BookKeeping());
         expectedModel.addItem(DONUT.updateCount(4));
 
         Model modelTemp = getModelWithOrderedDonut(temporaryFolder.resolve("transaction.json"));
 
         assertCommandSuccess(new EndAndTransactOrderCommand(), modelTemp, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_orderIsEmpty_failure() {
-        // TODO: Behaviour not supported yet. Change and update accordingly
     }
 
     @Test
@@ -75,7 +87,7 @@ public class EndAndTransactOrderCommandTest {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalInventory(),
-                new UserPrefs(temporaryFolder.resolve("transaction.json")));
+                new UserPrefs(temporaryFolder.resolve("transaction.json")), new TransactionList(), new BookKeeping());
         expectedModel.addItem(DONUT.updateCount(4));
 
         assertCommandSuccess(new EndAndTransactOrderCommand(), modelTemp, expectedMessage, expectedModel);
