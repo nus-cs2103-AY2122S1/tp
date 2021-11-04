@@ -298,13 +298,15 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Groups and sums up all orders according their customers.
+     * Groups and sums up all orders according to their {@code Customer}s.
+     * This method computes total orders based on the {@code Customer}s,
+     * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
+     * hence the naming of the method and local variables.
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
     @Override
     public ObservableList<ClientTotalOrder> getClientTotalOrders() {
-        // TODO consider rename clientTotalOrders
         HashMap<Customer, Double> customerTotalMap = getCustomerTotalMap();
         ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
         customerTotalMap.forEach((customer, totalOrders)
