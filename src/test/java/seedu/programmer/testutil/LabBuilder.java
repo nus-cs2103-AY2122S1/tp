@@ -7,7 +7,7 @@ import seedu.programmer.model.student.LabTotal;
 
 public class LabBuilder {
     public static final int DEFAULT_TITLE = 1;
-    public static final Integer DEFAULT_VALUE = null;
+    public static final Integer DEFAULT_VALUE = -1;
     public static final Integer DEFAULT_TOTAL = 20;
 
     private LabNum labNum;

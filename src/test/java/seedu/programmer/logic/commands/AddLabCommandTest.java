@@ -58,7 +58,6 @@ public class AddLabCommandTest {
         String expectedMessage = String.format(AddLabCommand.MESSAGE_ADD_LAB_SUCCESS, labToAdd);
 
         Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
-        //expectedModel.addLab(labToAdd);
 
         assertCommandSuccess(addLabCommand, model, expectedMessage, expectedModel);
     }
