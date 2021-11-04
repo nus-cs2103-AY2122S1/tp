@@ -29,7 +29,8 @@ public class ExportCommand extends Command {
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " myContacts";
     public static final String MESSAGE_SUCCESS = "contacts successfully exported to";
-    public static final String MSG_FILE_WRITE_ERROR = "File cannot be written to";
+    public static final String MSG_FILE_WRITE_ERROR = "File cannot be written to. "
+            + "Please check if destination file is open in another application.";
 
     private final String[] fieldHeaders = new String[]{"name", "phone", "email", "address", "tags"};
     private final Map<String, List<String>> data = new HashMap<>();
