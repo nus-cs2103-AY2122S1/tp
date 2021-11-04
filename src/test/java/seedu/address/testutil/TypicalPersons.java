@@ -117,7 +117,7 @@ public class TypicalPersons {
                 "anna@example.com"));
     }
 
-    public static List<String> getTypicalAddressesStringForm() {
+    public static List<String> getTypicalAddressesStringFormWithDoubleQuoutes() {
         return new ArrayList<>(Arrays.asList("\"123, Jurong West Ave 6, #08-111\"",
                 "\"311, Clementi Ave 2, #02-25\"",
                 "\"wall street\"",
@@ -125,6 +125,16 @@ public class TypicalPersons {
                 "\"michegan ave\"",
                 "\"little tokyo\"",
                 "\"4th street\""));
+    }
+
+    public static List<String> getTypicalAddressesStringForm() {
+        return new ArrayList<>(Arrays.asList("123, Jurong West Ave 6, #08-111",
+                "311, Clementi Ave 2, #02-25",
+                "wall street",
+                "10th street",
+                "michegan ave",
+                "little tokyo",
+                "4th street"));
     }
 
     public static List<String> getTypicalTagsStringForm() {
