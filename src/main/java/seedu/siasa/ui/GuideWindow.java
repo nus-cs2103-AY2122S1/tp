@@ -20,7 +20,7 @@ public class GuideWindow extends UiPart<Stage> {
         ONE("User Guide",
             "Welcome to Siasa! "
                 + "This is a guide that teaches you all the basic commands to use this application.\n"
-                + "For a more detailed guide, visit: https://ay2122s1-cs2103-f10-4.github.io/tp/UserGuide.html",
+                + "For a more detailed guide, visit the user guide on our github repository.",
             new Image("file:src/main/resources/images/guide/page_one.png")),
         TWO("User Guide - Contacts", "addcontact: Adds a contact to your Siasa address book.\n"
             + "Format: addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
