@@ -27,13 +27,13 @@ public class EditTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "-e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+    public static final String MESSAGE_USAGE = "task " + COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DESCRIPTION + "NAME] "
             + "[" + PREFIX_DEADLINE + "DEADLINE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + "task " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "Report 2 "
             + PREFIX_DEADLINE + "2021-01-02";
 
