@@ -1557,11 +1557,17 @@ Character limit:
        **Expected**: A stats window will open on top of the main window. There should be 2 pie charts displayed, one for
        Priority Tags and one for Investment Plan Tags and the counts should tally with the data in FAST.
 
-    3. **Test Case**: Add a new person with a Priority Tag, then open the stats window again.
+    3. **Test Case**:
+        1. Add a new person with a Priority Tag.
+        2. Open the stats window again.<br>
+        
        **Expected**: The stat window will focus on top of the main window. The pie charts should be updated to include
        the new person's data.
 
-    4. **Test Case**: `clear` the persons in FAST then open the stats window.
+   4. **Test Case**:
+       1. `clear` the persons in FAST.
+       2. Open the stats window.<br>
+       
        **Expected**: The existing stats window will focus on top of the main window. There should be no pie charts displayed
        and there should be a message at the side informing the user that there are no Tags detected.
 
@@ -1573,6 +1579,45 @@ Character limit:
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. **Prerequisites**: At least one modification has been made to the persons list. FAST is not currently open.
+    
+    2. **Test Case**: 
+        1. Go to the directory that contains FAST.jar.
+        2. navigate to `data` and open `fast.json`.
+        3. In line 3, change "name" to "test".
+        4. Launch FAST. <br>
+       
+        **Expected**: FAST should be completely blank, with no data displayed.
+        
+    3. **Test Case**:
+        1. Go to the directory that contains FAST.jar.
+        2. navigate to `data` and delete `fast.json`.
+        3. Launch FAST. <br>
+    
+        **Expected**: FAST should contain a default set of persons.
 
-1. _{ more test cases …​ }_
+    
+
+2. Ensuring FAST saves your data
+
+    1. **Prerequisites**: FAST is not empty.
+
+    2. **Test Case**:
+        1. `add` a new person to FAST.
+        2. Close FAST by closing the window and relaunch it
+
+        **Expected**: The newest person should have been saved and displayed at the bottom of the person list.
+
+    2. **Test Case**:
+       1. Modify the appointment details of a person in FAST.
+       2. Close FAST by closing the window and relaunch it
+    
+        **Expected**: The affected person's appointment should have been saved and displayed correctly.
+    
+    2. **Test Case**:
+       1. `clear` the data in FAST.
+       2. Close FAST by closing the window and relaunch it
+          
+        **Expected**: FAST should be completely blank, with no data displayed.
+
+    
