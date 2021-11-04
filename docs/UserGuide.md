@@ -215,16 +215,20 @@ Examples:
 
 Marks a specified staff(s) as not working for a specified date.
 
- * The salary for that date will be not included in calculation,
+* The salary for that date will not be included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
- * The format of the input date is in: `YYYY-MM-DD`.
+* The format of the input date is in: `YYYY-MM-DD`.
+* If no date input is provided, the next occurrence of that shift is assumed.
+* If only one date input is provided, the next occurrence of that shift, after the provided date is marked. For instance,
+  if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be marked.
+* Will not indicate if there is a shift in the period provided, even if there isn't a shift, the staff will be marked absent for that period.
 
 Format:  
 
 Marking a period:  
 
-`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`  
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`  
 
 
 Possible to mark a single date:
@@ -243,8 +247,12 @@ Removes the period that was marked by the `mark` command.
 
 The format of the input date is in: `YYYY-MM-DD`.
 
+* If no date input is provided, the next occurrence of that shift is assumed.
+* If only one date input is provided, the next occurrence of that shift, after the provided date is unmarked. For instance,
+  if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be unmarked.
+
 Format:  
-`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`
 
 Examples:  
 `unmark -i 1 da/2020-01-03 da/2021-01-03`  
@@ -364,11 +372,13 @@ the range would be from 25/10/2021 to 31/10/2021.
 
 #### Viewing schedule for the week: `change`
 
+the change command enables the user to view a different week than the default one, which is the current week.
 The schedule for the current week is shown under the schedule tab by default. The week
-can be changed using the `change` command.
+can be changed using the `change` command. 
 
- * Takes in a single date input to translate into a week.
+ * Takes in a single date input to translate into a week, which consists of the seven days after the input date.
  * The date is in `YYYY-MM-DD`
+ * The change command also causes all the default shift related commands to take place over the resulting week.
 
 Format:  
 `change da/DATE`    
