@@ -1,6 +1,6 @@
 title: "BogoBogo"
-#remote_theme: pmarsceill/just-the-docs  #Comment this out when working locally
-theme: "just-the-docs" #Commmen this out when working remotely
+remote_theme: pmarsceill/just-the-docs  #Comment this out when working locally
+#theme: "just-the-docs" #Commmen this out when working remotely
 
 header_pages:
   - UserGuide.md
