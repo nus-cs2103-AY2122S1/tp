@@ -25,8 +25,8 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[github](http://github.com/tanhuakun)]
 [[portfolio](team/tanhuakun.md)]
 
-* Role: Developer
-* Responsibilities: Backend
+* Role: Full Stack Developer
+* Responsibilities: Creating Lesson, Exams and Viewing Panel logic.
 
 ### Srinivasan Neharikha
 

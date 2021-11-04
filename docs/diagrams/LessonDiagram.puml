@@ -29,7 +29,7 @@ Lesson *--> "1" Timeslot
 LessonWithAttendees -up-> "1" Lesson
 LessonWithAttendees -up-> "*" Attendee
 
-LessonAssignable .up.>LessonWithAttendees
-HiddenOutside2 .up.|> LessonAssignable
+LessonAssignable .down.> Lesson
+HiddenOutside2 ..|> LessonAssignable
 HiddenOutside ..|> Attendee
 @enduml
