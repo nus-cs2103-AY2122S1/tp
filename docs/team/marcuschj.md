@@ -47,9 +47,9 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Created Table of Contents [\#78](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/78).
-    * Vetted language for the entire document.
+    * Vetted language for the entire document [\#180](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/180).
     * Added entire About section for UG [\#160](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/160).
-    * Added all usage scenarios for the commands.
+    * Added all usage scenarios for the commands [\#180](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/180).
     * Added documentation for the features `list`, `filter` and `export` [\#78](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/78).
 
   * Developer Guide:
