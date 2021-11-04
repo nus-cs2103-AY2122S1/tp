@@ -145,13 +145,14 @@ public class CommandResult {
             return false;
         }
 
-        boolean isSummary = displaySummary == otherCommandResult.displaySummary;
-
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showCommandSummary == otherCommandResult.showCommandSummary
-                && (isSummary
+                && displaySummary == otherCommandResult.displaySummary
                 && ((summary == null && otherCommandResult.summary == null)
-                || summary.equals(otherCommandResult.summary)))
+                || summary.equals(otherCommandResult.summary))
+                && display == otherCommandResult.display
+                && ((contactToDisplay == null && otherCommandResult.contactToDisplay == null)
+                || contactToDisplay.equals(otherCommandResult.contactToDisplay))
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
