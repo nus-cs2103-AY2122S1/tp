@@ -635,97 +635,97 @@ Action | Format | Examples
 
 ### Addstudent Example 2
 Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
-![Addstudent Example 2](images/UGExamples/addstu2.png)
+![Addstudent Example 2](images/UGExamples/addstu2.png)<br>
 [Return to Addstudent](#adding-a-student--addstudent)
 
 ### Addstudent Example 3
 Command: `addstudent -n Jonas Chow -i E0123456 -t beginner` <br>
-![Addstudent Example 3](images/UGExamples/addstu3.png)
+![Addstudent Example 3](images/UGExamples/addstu3.png)<br>
 [Return to Addstudent](#adding-a-student--addstudent)
 
 ### Addgroup Example 2
 Command: `addgroup -g T01A -n Hong Yao -n Hong Fai` <br>
-![Addgroup Example 2](images/UGExamples/addgroup2.png)
+![Addgroup Example 2](images/UGExamples/addgroup2.png)<br>
 [Return to Addgroup](#creating-a-new-group--addgroup)
 
 ### Addgroup Example 3
 Command: `addgroup -g T01A -n Hong Yao -i E0123456` <br>
-![Addgroup Example 3](images/UGExamples/addgroup3.png)
+![Addgroup Example 3](images/UGExamples/addgroup3.png)<br>
 [Return to Addgroup](#creating-a-new-group--addgroup)
 
 ### Addalloc Example 1
 Command: `addalloc -g T01A -n Zhiying` <br>
-![Addalloc Example 1](images/UGExamples/addalloc1.png)
+![Addalloc Example 1](images/UGExamples/addalloc1.png)<br>
 [Return to Addalloc](#adding-a-student-into-a-group--addalloc)
 
 ### Addassessment Example 2
 Command: `addassessment -a Midterm Assessment` <br>
-![Addassessment Example 2](images/UGExamples/addass2.png)
+![Addassessment Example 2](images/UGExamples/addass2.png)<br>
 [Return to Addassessment](#creating-a-new-assessment--addassessment)
 
 ### Addscore Example 1
 Command: `addscore -a Midterm -n Van Nhi -s 95` <br>
-![Addscore Example 1](images/UGExamples/addscore1.png)
+![Addscore Example 1](images/UGExamples/addscore1.png)<br>
 [Return to Addscore](#adding-a-score--addscore)
 
 ### Addscore Example 2
 Command: `addscore -a P01 -i E0123456 -s 75.25` <br>
-![Addscore Example 2](images/UGExamples/addscore2.png)
+![Addscore Example 2](images/UGExamples/addscore2.png)<br>
 [Return to Addscore](#adding-a-score--addscore)
 
 ### List Example
 Command: `list` <br>
-![](images/UGExamples/list.png)
+![](images/UGExamples/list.png)<br>
 [Return to List](#listing-all-students--list)
 
 ### Search Example 1
 Command: `search -n Jonas Chow` <br>
-![Search Example 1](images/UGExamples/search1.png)
+![Search Example 1](images/UGExamples/search1.png)<br>
 [Return to Search](#searching-for-students--search)
 
 ### Search Example 3
 Command: `search -g T02B R03C` <br>
-![Search Example 3](images/UGExamples/search3.png)
+![Search Example 3](images/UGExamples/search3.png)<br>
 [Return to Search](#searching-for-students--search)
 
 ### Search Example 4
 Command: `search -g T02` <br>
-![Search Example 4](images/UGExamples/search4.png)
+![Search Example 4](images/UGExamples/search4.png)<br>
 [Return to Search](#searching-for-students--search)
 
 ### Search Example 5
 Command: `search -t beginner` <br>
-![Search Example 5](images/UGExamples/search5.png)
+![Search Example 5](images/UGExamples/search5.png)<br>
 [Return to Search](#searching-for-students--search)
 
 ### Show Example 1
 Command: `show -n Hong Fai` <br>
-![Show Example 1](images/UGExamples/show1.png)
+![Show Example 1](images/UGExamples/show1.png)<br>
 [Return to Show](#showing-assessment-result-analysis--show)
 
 ### Show Example 2
 Command: `show 2 -f chartImage` exports the following picture as a file `chartImage.png`. <br>
-![Show Example 2](images/UGExamples/show2.png)
+![Show Example 2](images/UGExamples/show2.png)<br>
 [Return to Show](#showing-assessment-result-analysis--show)
 
 ### Show Example 3
 Command: `show -g T02A` <br>
-![Show Example 3](images/UGExamples/show3.png)
+![Show Example 3](images/UGExamples/show3.png)<br>
 [Return to Show](#showing-assessment-result-analysis--show)
 
 ### Show Example 4
 Command: `show -a Midterm Examination` <br>
-![Show Example 4](images/UGExamples/show4.png)
+![Show Example 4](images/UGExamples/show4.png)<br>
 [Return to Show](#showing-assessment-result-analysis--show)
 
 ### Edit Example 1
 Command: `edit 1 -n Hong Yao -i E1234567` <br>
-![Edit Example 1](images/UGExamples/edit1.png)
+![Edit Example 1](images/UGExamples/edit1.png)<br>
 [Return to Edit](#editing-a-student--edit)
 
 ### Delete Example 1
 Command: `delete 2` <br>
-![Delete Example 1](images/UGExamples/delete1.png)
+![Delete Example 1](images/UGExamples/delete1.png)<br>
 [Return to Delete](#deleting-a-student--delete)
 
 ### Import Example
@@ -742,5 +742,7 @@ Command: `alias -c addstudent -as example` <br>
 Command: `alias -c example -as example` <br>
 ![Alias Example 4](images/UGExamples/alias4.png)<br>
 [Return to Alias](#setting-customised-aliases-for-commands--alias)
+
+<br>
 
 [Return to Table of Contents](#table-of-contents)
