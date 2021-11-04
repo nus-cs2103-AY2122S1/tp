@@ -57,6 +57,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 * [FAQ](#faq)
 * [Glossary](#glossary)
 * [Command Summary](#command-summary)
+* [Example Visual Aids](#example-visual-aids)
 
 <br>
 
@@ -71,7 +72,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
 1. Double-click the file to start the app. The GUI shown in the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/StartingUi.png)
+   ![StartingUi](images/StartingUi.png)
 
 1. Type the command in the command box and press Enter to execute it. E.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -142,12 +143,12 @@ Format: `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <
 * There should not be an existing student with the same NUSNET ID. If there is, the student to be added is considered invalid.
 
 Examples:
-* `addstudent -n Jonas Chow -i E0123456` 
+* `addstudent -n Jonas Chow -i E0123456`
   * adds the student Jonas Chow with the given NUSNET ID.
-* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` 
-  * adds the student Jonas Chow and allocates him into groups `T01A` and `R01A`.
-* `addstudent -n Jonas Chow -i E0123456 -t beginner` 
-  * adds the student Jonas Chow and tags him with `beginner`.
+* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A`
+  * adds the student Jonas Chow and allocates him into groups `T01A` and `R01A`. [\[view example\]](#addstudent-example-2)
+* `addstudent -n Jonas Chow -i E0123456 -t beginner`
+  * adds the student Jonas Chow and tags him with `beginner`. [\[view example\]](#addstudent-example-3)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -162,24 +163,22 @@ Format: `addgroup -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 * Group name can be any number of alphanumeric words.
 * Students can be identified by their name or NUSNET ID.
 Name is case-sensitive and only allows exact match. E.g. `Jonas` will not match `Jonas Chow`.
-* If multiple students have the same name, NUSNET ID needs to be used to identify them. 
+* If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
 
 If duplicated students are found in the list of names and NUSNET IDs input, an error will be shown to inform you of
-the clash, and the group will not be created. 
+the clash, and the group will not be created.
 </div>
 
 Examples:
-* `addgroup -g T01A` 
-  * creates group `T01A`. 
-* `addgroup -g T01A -n Hong Yao -n Hong Fai` 
-  * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
-* `addgroup -g T01A -n Hong Yao -i E0123456` 
-  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
-* `addgroup -g Require More Help -i E0123456` 
-  * creates group `Require More Help` and adds student with NUSNET ID `E0123456` into the group.
+* `addgroup -g T01A`
+  * creates group `T01A`.
+* `addgroup -g T01A -n Hong Yao -n Hong Fai`
+  * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group. [\[view example\]](#addgroup-example-2)
+* `addgroup -g T01A -n Hong Yao -i E0123456`
+  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group. [\[view example\]](#addgroup-example-3)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -195,9 +194,9 @@ Format: `addalloc -g <group_name> (-n <student_name> | -i <student_id>)`
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `addalloc -g T01A -n Zhiying` 
-  * adds `Zhiying` into the tutorial group `T01A`.
-* `addalloc -g T02A -i E0123456` 
+* `addalloc -g T01A -n Zhiying`
+  * adds `Zhiying` into the tutorial group `T01A`. [\[view example\]](#addalloc-example-1)
+* `addalloc -g T02A -i E0123456`
   * adds student with NUSNET ID `E0123456` into the tutorial group `T02A`.
 
 [Return to Table of Contents](#table-of-contents)
@@ -212,10 +211,10 @@ Format: `addassessment -a <assessment_name>`
 * Assessment name can be any number of alphanumeric words.
 
 Examples:
-* `addassessment -a P01` 
+* `addassessment -a P01`
   * creates a new assessment `P01`.
-* `addassessment -a Midterm Assessment` 
-  * creates a new assessment `Midterm Assessment`.
+* `addassessment -a Midterm Assessment`
+  * creates a new assessment `Midterm Assessment`. [\[view example\]](#addassessment-example-2)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -233,10 +232,10 @@ Format: `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s 
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `addscore -a Midterm -n Van Nhi -s 95` 
-  * records score for `Van Nhi` in `Midterm` to be `95.00` percent.
-* `addscore -a P01 -i E0123456 -s 75.25` 
-  * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
+* `addscore -a Midterm -n Van Nhi -s 95`
+  * records score for `Van Nhi` in `Midterm` to be `95.00` percent. [\[view example\]](#addscore-example-1)
+* `addscore -a P01 -i E0123456 -s 75.25`
+  * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent. [\[view example\]](#addscore-example-2)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -246,6 +245,8 @@ Examples:
 Displays a list of all students in the student list.
 
 Format: `list`
+<br>
+[\[view example\]](#list-example)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -268,16 +269,16 @@ E.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
 `beginner` will match `beginners`.
 
 Examples:
-* `search -n Jonas Chow` 
-  * returns a list of students with part of names that matches `Jonas` and `Chow`.
-* `search -i E0123456` 
+* `search -n Jonas Chow`
+  * returns a list of students with part of names that matches `Jonas` and `Chow`. [\[view example\]](#search-example-1)
+* `search -i E0123456`
   * returns the student with NUSNET ID `E0123456`, if found in database.
-* `search -g T02B R03C` 
-  * returns a list of students in the groups `T02B` and `R03C`.
-* `search -g T02` 
-  * returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
-* `search -t beginners` 
-  * returns a list of students tagged as `beginners`.
+* `search -g T02B R03C`
+  * returns a list of students in the groups `T02B` and `R03C`. [\[view example\]](#search-example-3)
+* `search -g T02`
+  * returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`. [\[view example\]](#search-example-4)
+* `search -t beginner`
+  * returns a list of students tagged as `beginner`. [\[view example\]](#search-example-5)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -289,25 +290,25 @@ Shows the in-depth data analysis of individual, group, or the cohort's performan
 Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f]`
 
 * Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments.
-  * The student's score in each assessment, as well as the cohort mean and median score, will be shown as a line graph. 
+  * The student's score in each assessment, as well as the cohort mean and median score, will be shown as a line graph.
   * The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
   * If multiple students have the same name, NUSNET ID needs to be used to identify them.
 * Using `-g <group_name>` displays the information of the group's performance in all their graded assessments.
   * The group's mean score in each assessment, as well as the cohort mean and median score, will be shown as a line graph.
 * Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
-  * The cohort's score distribution will be shown as a histogram. 
+  * The cohort's score distribution will be shown as a histogram.
 * Keywords are case-sensitive and only allows exact match. E.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
 * Entering `-f` exports the graph produced from the command to a `.png` file in the same directory as your JAR file.
 
 Examples:
-* `show -n Hong Fai` 
-  * displays line chart of `Hong Fai`'s performance in all his assessments.
+* `show -n Hong Fai`
+  * displays line chart of `Hong Fai`'s performance in all his assessments. [\[view example\]](#show-example-1)
 * `show 2 -f`
-  * displays and exports the line chart produced of the 2nd student from the displayed list.
-* `show -g T02A` 
-  * displays line chart of group `T02A`'s performance in their assessments.
-* `show -a Midterm` 
-  * displays histogram of the distribution of scores in the `Midterm` assessment.
+  * displays and exports the line chart produced of the 2nd student from the displayed list. [\[view example\]](#show-example-2)
+* `show -g T02A`
+  * displays line chart of group `T02A`'s performance in their assessments. [\[view example\]](#show-example-3)
+* `show -a Midterm Examination`
+  * displays histogram of the distribution of scores in the `Midterm Examination` assessment. [\[view example\]](#show-example-4)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -326,11 +327,11 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 * You can remove all the student’s tags or groups by typing `-t` or `-g` without specifying any values after it.
 
 Examples:
-* `edit 1 -n Hong Yao -i E1234567` 
-  * edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`.
-* `edit 3 -g T01C -g R01A` 
+* `edit 1 -n Hong Yao -i E1234567`
+  * edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`. [\[view example\]](#edit-example-1)
+* `edit 3 -g T01C -g R01A`
   * edits the group of the 3rd student on the displayed list to `T01C` and `R01A`.
-* `search -n Hong Yao` followed by `edit 1 -t` 
+* `search -n Hong Yao` followed by `edit 1 -t`
   * removes all tags of the 1st student on the displayed list after searching for `Hong Yao`.
 
 [Return to Table of Contents](#table-of-contents)
@@ -346,9 +347,9 @@ Format: `delete <index>`
 * The `<index>` refers to the index number shown in the displayed student list. The `<index>` **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` 
-  * deletes the 2nd student in the student list.
-* `search -n Van Nhi` followed by `delete 1` 
+* `list` followed by `delete 2`
+  * deletes the 2nd student in the student list. [\[view example\]](#delete-example-1)
+* `search -n Van Nhi` followed by `delete 1`
   * deletes the 1st student in the results of the `search` command.
 
 [Return to Table of Contents](#table-of-contents)
@@ -374,8 +375,8 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 
 :bulb: **Tips:**<br>
 
-* `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups. 
-The similar applies for `<number_of_tag_columns>`. 
+* `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups.
+The similar applies for `<number_of_tag_columns>`.
 
 * If the student does not have as many groups as the number of group columns, you should leave several group columns blank.
 
@@ -385,15 +386,15 @@ The similar applies for `<number_of_tag_columns>`.
 
 An example of how the CSV should be formatted is shown below:
 
-![CsvFormatExample](images/CsvFormatExample.png)
+![CsvFormatExample](images/UGExamples/importeg.png)
 
-The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`. 
-(There are 2 group columns, 2 assessments columns, and 2 tag columns.)
+The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`.
+(There are 2 group columns, 2 assessments columns, and 2 tag columns.) [\[view example\]](#import-example)
 
 Examples:
-* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` 
+* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
   * imports from the absolute path, and database has 2 group columns, 10 assessments columns, and 1 tag column.
-* `import -f student_data.csv -g 5 -a 20` 
+* `import -f student_data.csv -g 5 -a 20`
   * imports from the relative path, and database has 5 group columns and 20 assessments.
 
 [Return to Table of Contents](#table-of-contents)
@@ -452,10 +453,10 @@ Format: `help`
 
 ### Accessing command history
 
-Retrieves past command lines input. 
+Retrieves past command lines input.
 
 * This can be done using the up and down arrow keys.
-* Only successful command input would be recorded. Unsuccessful inputs which shows an error will not be saved. 
+* Only successful command input would be recorded. Unsuccessful inputs which shows an error will not be saved.
 * Using the up arrow key retrieves the previous input. 
 * Using the down arrow key retrieves the next input.
 
@@ -474,19 +475,19 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing aliases can still be used after new alias is added. E.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`.
-* The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously. 
+* The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously.
 
 Examples:
-* `alias -c addstudent -as example` 
-  * adds a new alias to `addstudent` command.
+* `alias -c addstudent -as example`
+  * adds a new alias to `addstudent` command. [\[view example\]](#alias-example-1)
   * `example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
-* `alias -c addgroup -as example` 
+* `alias -c addgroup -as example`
   * replaces the mapping of the alias `example` to the `addgroup` command, i.e. `example` no longer function as `addstudent`.
   * `example -g T02A` will create a new group `T02A`.
-* `alias -c example -as example2` 
+* `alias -c example -as example2`
   * adds the alias `example2` to the command that `example` currently maps to, i.e. `example2` functions as `addgroup`.
-* `alias -c example -as example` 
-  * removes the alias `example`. `example` will no longer be recognised as a command.
+* `alias -c example -as example`
+  * removes the alias `example`. `example` will no longer be recognised as a command. [\[view example\]](#alias-example-4)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -517,7 +518,7 @@ On an OS based off of Linux, it might be necessary to run `chmod +x sourceContro
 [Return to Table of Contents](#table-of-contents)
 
 
-### How can I back up my data? 
+### How can I back up my data?
 Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the CSV file created.
@@ -527,10 +528,10 @@ If you wish to back up the data, you can use the `export` command. The `import` 
 
 ### Why is my data is gone when I reopen the app?
 Please ensure that the JAR file is in the same directory as it was before. Our application stores the data in external files,
-and data would be lost if either these files are deleted, or if the JAR file is removed from the directory. 
+and data would be lost if either these files are deleted, or if the JAR file is removed from the directory.
 
 Some of these data stored externally include students and their particulars (e.g. NUSNET IDs, groups, assessments and scores),
-as well as you alias preferences. 
+as well as you alias preferences.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -590,11 +591,11 @@ Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
 CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
-JAR | A package file format to combine many Java class files and resources (e.g. text and images) into one file for distribution. Source Control can be opened from the JAR file `sourceControl.jar` retrieved from our website. 
+JAR | A package file format to combine many Java class files and resources (e.g. text and images) into one file for distribution. Source Control can be opened from the JAR file `sourceControl.jar` retrieved from our website.
 Java | A computing platform for application development. Source Control runs on Java.
 JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
-Directory | It is where files in the computer are stored, or commonly known as folder. 
-Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory. 
+Directory | It is where files in the computer are stored, or commonly known as folder.
+Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory.
 
 
 
@@ -624,5 +625,124 @@ Action | Format | Examples
 **Exit App** | `exit` |
 **Help** | `help` |
 **Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c add student -as addstu`
+
+[Return to Table of Contents](#table-of-contents)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Example Visual Aids
+
+### Addstudent Example 2
+Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
+![Addstudent Example 2](images/UGExamples/addstu2.png)<br>
+[Return to Addstudent](#adding-a-student--addstudent)
+
+### Addstudent Example 3
+Command: `addstudent -n Jonas Chow -i E0123456 -t beginner` <br>
+![Addstudent Example 3](images/UGExamples/addstu3.png)<br>
+[Return to Addstudent](#adding-a-student--addstudent)
+
+### Addgroup Example 2
+Command: `addgroup -g T01A -n Hong Yao -n Hong Fai` <br>
+![Addgroup Example 2](images/UGExamples/addgroup2.png)<br>
+[Return to Addgroup](#creating-a-new-group--addgroup)
+
+### Addgroup Example 3
+Command: `addgroup -g T01A -n Hong Yao -i E0123456` <br>
+![Addgroup Example 3](images/UGExamples/addgroup3.png)<br>
+[Return to Addgroup](#creating-a-new-group--addgroup)
+
+### Addalloc Example 1
+Command: `addalloc -g T01A -n Zhiying` <br>
+![Addalloc Example 1](images/UGExamples/addalloc1.png)<br>
+[Return to Addalloc](#adding-a-student-into-a-group--addalloc)
+
+### Addassessment Example 2
+Command: `addassessment -a Midterm Assessment` <br>
+![Addassessment Example 2](images/UGExamples/addass2.png)<br>
+[Return to Addassessment](#creating-a-new-assessment--addassessment)
+
+### Addscore Example 1
+Command: `addscore -a Midterm -n Van Nhi -s 95` <br>
+![Addscore Example 1](images/UGExamples/addscore1.png)<br>
+[Return to Addscore](#adding-a-score--addscore)
+
+### Addscore Example 2
+Command: `addscore -a P01 -i E0123456 -s 75.25` <br>
+![Addscore Example 2](images/UGExamples/addscore2.png)<br>
+[Return to Addscore](#adding-a-score--addscore)
+
+### List Example
+Command: `list` <br>
+![](images/UGExamples/list.png)<br>
+[Return to List](#listing-all-students--list)
+
+### Search Example 1
+Command: `search -n Jonas Chow` <br>
+![Search Example 1](images/UGExamples/search1.png)<br>
+[Return to Search](#searching-for-students--search)
+
+### Search Example 3
+Command: `search -g T02B R03C` <br>
+![Search Example 3](images/UGExamples/search3.png)<br>
+[Return to Search](#searching-for-students--search)
+
+### Search Example 4
+Command: `search -g T02` <br>
+![Search Example 4](images/UGExamples/search4.png)<br>
+[Return to Search](#searching-for-students--search)
+
+### Search Example 5
+Command: `search -t beginner` <br>
+![Search Example 5](images/UGExamples/search5.png)<br>
+[Return to Search](#searching-for-students--search)
+
+### Show Example 1
+Command: `show -n Hong Fai` <br>
+![Show Example 1](images/UGExamples/show1.png)<br>
+[Return to Show](#showing-assessment-result-analysis--show)
+
+### Show Example 2
+Command: `show 2 -f chartImage` exports the following picture as a file `chartImage.png`. <br>
+![Show Example 2](images/UGExamples/show2.png)<br>
+[Return to Show](#showing-assessment-result-analysis--show)
+
+### Show Example 3
+Command: `show -g T02A` <br>
+![Show Example 3](images/UGExamples/show3.png)<br>
+[Return to Show](#showing-assessment-result-analysis--show)
+
+### Show Example 4
+Command: `show -a Midterm Examination` <br>
+![Show Example 4](images/UGExamples/show4.png)<br>
+[Return to Show](#showing-assessment-result-analysis--show)
+
+### Edit Example 1
+Command: `edit 1 -n Hong Yao -i E1234567` <br>
+![Edit Example 1](images/UGExamples/edit1.png)<br>
+[Return to Edit](#editing-a-student--edit)
+
+### Delete Example 1
+Command: `delete 2` <br>
+![Delete Example 1](images/UGExamples/delete1.png)<br>
+[Return to Delete](#deleting-a-student--delete)
+
+### Import Example
+Command: `import -f student_data.csv -g 2 -a 2 -t 2` <br>
+![Import Example](images/UGExamples/import0.png)<br>
+[Return to Import](#importing-data--import)
+
+### Alias Example 1
+Command: `alias -c addstudent -as example` <br>
+![Alias Example 1](images/UGExamples/alias1.png)<br>
+[Return to Alias](#setting-customised-aliases-for-commands--alias)
+
+### Alias Example 4
+Command: `alias -c example -as example` <br>
+![Alias Example 4](images/UGExamples/alias4.png)<br>
+[Return to Alias](#setting-customised-aliases-for-commands--alias)
+
+<br>
 
 [Return to Table of Contents](#table-of-contents)

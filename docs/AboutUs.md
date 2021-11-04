@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/zhing22.png" width="200px">
 
 [[github](https://github.com/zhing22)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/zhing22.md)]
 
 * Role: Developer
 * Responsibilities: Documentation + Code quality
@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ganhongyao.png" width="200px">
 
-[[github](https://github.com/ganhongyao)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/ganhongyao)] [[portfolio](team/ganhongyao.md)]
 
 * Role: Developer
 * Responsibilities: Testing + Integration
@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/leonghongfai.png" width="200px">
 
 [[github](http://github.com/leonghongfai)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/leonghongfai.md)]
 
 * Role: Developer
 * Responsibilities: Integration + Deliverables and Deadlines
