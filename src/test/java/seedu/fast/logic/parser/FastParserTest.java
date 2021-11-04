@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.parser.sort.SortByName;
 import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;
@@ -38,6 +37,7 @@ import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.commands.UnmarkAppointmentCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
+import seedu.fast.logic.parser.sort.SortByName;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.Person;
