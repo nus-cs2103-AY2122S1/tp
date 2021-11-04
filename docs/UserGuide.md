@@ -145,10 +145,10 @@ Format: `addstudent -n <student_name> -i <student_id> [-g <group_name>]... [-t <
 Examples:
 * `addstudent -n Jonas Chow -i E0123456` 
   * adds the student Jonas Chow with the given NUSNET ID.
-* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` [\[example\]](#addstudent-example-2)
+* `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` [\[view example\]](#addstudent-example-2)
   * adds the student Jonas Chow and allocates him into groups `T01A` and `R01A`.
 * `addstudent -n Jonas Chow -i E0123456 -t beginner` 
-  * adds the student Jonas Chow and tags him with `beginner`. [see picture](#addstudent-example-3)
+  * adds the student Jonas Chow and tags him with `beginner`. [\[view example\]](#addstudent-example-3)
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -175,10 +175,10 @@ the clash, and the group will not be created.
 Examples:
 * `addgroup -g T01A` 
   * creates group `T01A`. 
-* `addgroup -g T01A -n Hong Yao -n Hong Fai` [example](#addgroup-example-2)
+* `addgroup -g T01A -n Hong Yao -n Hong Fai` [\[view example\]](#addgroup-example-2)
   * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
-* `addgroup -g T01A -n Hong Yao -i E0123456` [example](#addgroup-example-3)
-  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
+* `addgroup -g T01A -n Hong Yao -i E0123456` 
+  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group. [\[view example\]](#addgroup-example-3)
 
 [Return to Table of Contents](#table-of-contents)
 
