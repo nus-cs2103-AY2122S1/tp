@@ -302,8 +302,8 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 Examples:
 * `show -n Hong Fai` 
   * displays line chart of `Hong Fai`'s performance in all his assessments.
-* `show 2 -f chartImage` 
-  * displays and exports the line chart (produced of the 2nd student on the displayed list) into a file `chartImage.png`.
+* `show 2 -f`
+  * displays and exports the line chart produced of the 2nd student from the displayed list.
 * `show -g T02A` 
   * displays line chart of group `T02A`'s performance in their assessments.
 * `show -a Midterm` 
