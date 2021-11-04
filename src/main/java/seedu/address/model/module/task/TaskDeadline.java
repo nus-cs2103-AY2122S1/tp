@@ -18,7 +18,7 @@ public class TaskDeadline {
     public static final DateTimeFormatter DEADLINE_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEADLINE_FORMAT);
 
     public static final String MESSAGE_CONSTRAINTS = new StringBuilder()
-            .append("Task deadline should of format: ")
+            .append("Task deadline should be of format: ")
             .append(DEADLINE_FORMAT)
             .append(". It should only contain numbers, ':', and '/', and it should not be blank.")
             .toString();

@@ -68,7 +68,8 @@ class TdelCommandTest {
         ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberId);
         TlistCommand tlistCommand = new TlistCommand(validMemberId);
         tlistCommand.execute(modelStub);
-        assertThrows(CommandException.class, TdelCommand.MESSAGE_TASK_NOT_FOUND, () ->
+        assertThrows(CommandException.class,
+                String.format(TdelCommand.MESSAGE_TASK_NOT_FOUND, validTaskId.getOneBased()), () ->
                 tDelCommand.execute(modelStub));
     }
 
