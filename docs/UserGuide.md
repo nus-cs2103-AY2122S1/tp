@@ -614,10 +614,10 @@ Changes the current password.
 
 The flags used in `password` are as follows:
 
-| Flag | Description |
-| ---- | ----------- |
-| `-o` | **Compulsory** flag. The current password of the application. |
-| `-n` | **Compulsory** flag. The new password that the user wishes to use. |
+| Flag | Long Form | Description |
+| ---- | --------- | ----------- |
+| `-o` | `--old`   | **Compulsory** flag. The current password of the application. |
+| `-n` | `--new`   | **Compulsory** flag. The new password that the user wishes to use. |
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
