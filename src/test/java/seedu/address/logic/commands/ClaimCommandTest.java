@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.ClaimCommand.EditClaimDescriptor;
 import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_ADDED_SUCCESS;
 import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_EDITED_SUCCESS;
-import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_EDIT_FAILURE;
 import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_REMOVED_SUCCESS;
+import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_REMOVE_FAILURE;
 import static seedu.address.logic.commands.CommandTestUtil.CLAIM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CLAIM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLAIM_STATUS_BOB;
@@ -21,7 +21,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -112,7 +111,7 @@ public class ClaimCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToAddClaim, personAfterAddClaim);
 
-        String expectedMessage = String.format(MESSAGE_CLAIM_EDIT_FAILURE, VALID_CLAIM_TITLE_AMY);
+        String expectedMessage = String.format(MESSAGE_CLAIM_REMOVE_FAILURE, VALID_CLAIM_TITLE_AMY);
 
         assertCommandFailure(claimCommand, model, expectedMessage);
     }
@@ -122,7 +121,7 @@ public class ClaimCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         ClaimCommand claimCommand = new ClaimCommand(outOfBoundIndex, claimBuilderAmy.buildEditClaimDescriptor());
-        assertCommandFailure(claimCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(claimCommand, model, ClaimCommand.MESSAGE_INDEX_OUTSIDE_RANGE_FAILURE);
     }
 
     @Test

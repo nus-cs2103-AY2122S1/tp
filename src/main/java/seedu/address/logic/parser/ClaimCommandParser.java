@@ -16,6 +16,7 @@ import seedu.address.model.claim.Status;
 
 
 public class ClaimCommandParser implements Parser<ClaimCommand> {
+
     @Override
     public ClaimCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -31,7 +32,7 @@ public class ClaimCommandParser implements Parser<ClaimCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClaimCommand.MESSAGE_USAGE), e);
+            throw new ParseException(e.getMessage(), e);
         }
 
         EditClaimDescriptor editClaimDescriptor = new EditClaimDescriptor(
