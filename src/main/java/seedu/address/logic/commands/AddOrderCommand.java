@@ -55,7 +55,7 @@ public class AddOrderCommand extends Command {
 
         // check if the model contains a customer with the exact name of the order
         ObservableList<Person> listWithOnePerson = model.getAddressBook().getPersonList().filtered(
-                person -> person.getName().fullName.equalsIgnoreCase(toAdd.getCustomer().name));
+                person -> person.getName().fullName.equalsIgnoreCase(toAdd.getCustomer().getName()));
         if (listWithOnePerson.size() != 1) {
             throw new CommandException(MESSAGE_CLIENT_NOT_FOUND);
         }

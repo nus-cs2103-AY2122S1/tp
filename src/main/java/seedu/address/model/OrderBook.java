@@ -2,8 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
@@ -47,6 +50,22 @@ public class OrderBook implements ReadOnlyOrderBook {
         this.orders.setOrders(orders);
     }
 
+    /**
+     * Updates the orders matching the predicate, according to the given function.
+     */
+    public void updateOrders(Predicate<Order> pred, Function<Order, Order> f) {
+        ArrayList<Order> newList = new ArrayList<Order>();
+        for (Order order : orders) {
+            if (pred.test(order)) {
+                // if it matches predicate, replace it by applying the given function
+                newList.add(f.apply(order));
+            } else {
+                // else retain it.
+                newList.add(order);
+            }
+        }
+        this.setOrders(newList);
+    }
 
     /**
      * Resets the existing data of this {@code OrderBook} with {@code newData}.
