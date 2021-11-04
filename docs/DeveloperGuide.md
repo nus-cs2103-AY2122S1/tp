@@ -281,6 +281,30 @@ The following steps describe the execution of the `EditGroupCommand`.
 3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have the updated `Group` object as a field, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
 4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data.
 
+## Edit Task Command
+
+#### Implementation
+![Sequence Diagram of EditTaskCommand](images/EditTaskCommandSequenceDiagram.png)
+
+The Edit Task feature is activated when a user enters the `editTask` command word followed by its relevant arguments.
+When the user executes the `editTask` command, user input is parsed and the fields to be edited are extracted into an `EditTaskDescriptor` object.
+The `EditTaskDescriptor` object and the `Index` of the task to be edited are then extracted into parameters of the `EditTaskCommand` class.
+The `EditTaskCommand` then interacts with the `Model` class to edit the data.
+
+The implementations of the other Edit commands, namely the `EditGroupCommand` and the `EditStudentCommand`, are similar to the `EditTaskCommand` in the way the `Logic` component behaves.
+However, the behaviour of the `Model` component differs slightly for the `EditTaskCommand`, as it alters only the `Task` data in the `AddressBook`.
+
+This process is shown in the following sequence diagram:
+
+![Reference Sequence Diagram of EditTaskCommand](images/EditTaskCommandRefSequenceDiagram.png)
+
+The following steps describe the execution of the `EditTaskCommand`.
+
+1. `EditTaskCommand` uses the provided `Index` and `EditTaskDescriptor` to create the updated `Task` object.
+2. `EditTaskCommand` then calls the `setTask` method of the `Model` class to replace the previous `Task` object with the newly updated one.
+3. Finally, `Model` calls the `setTask` function of the `AddressBook` to update the `Task` data.
+
+
 ### Tasks
 
 tApp allows TAs to manage their tasks for his or her professional or personal use.
