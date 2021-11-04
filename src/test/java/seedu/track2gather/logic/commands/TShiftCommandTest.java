@@ -15,7 +15,8 @@ import seedu.track2gather.logic.commands.exceptions.CommandException;
 import seedu.track2gather.model.Model;
 import seedu.track2gather.model.ModelManager;
 import seedu.track2gather.model.UserPrefs;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -72,9 +73,13 @@ public class TShiftCommandTest {
     public void shiftingDates_validDays() {
         int days = TShiftCommand.MAX_ABS_DAYS_VALUE;
         TShiftCommand tShiftCommand = new TShiftCommand(days);
-        ShnPeriod shnPeriod = new ShnPeriod("2020-01-01 => 2020-01-02");
+        ShnPeriod shnPeriod = new ShnPeriod(new Period("2020-01-01 => 2020-01-02"));
         ShnPeriod shiftedShnPeriod = tShiftCommand.shiftShnPeriodEndDate(shnPeriod);
-        assertEquals(days, shnPeriod.endDate.until(shiftedShnPeriod.endDate, ChronoUnit.DAYS));
+        assertTrue(shnPeriod.value.isPresent());
+        assertTrue(shiftedShnPeriod.value.isPresent());
+        LocalDate endDate = shnPeriod.value.get().getEndDate();
+        LocalDate shiftedEndDate = shiftedShnPeriod.value.get().getEndDate();
+        assertEquals(days, endDate.until(shiftedEndDate, ChronoUnit.DAYS));
     }
 
     @Test
@@ -86,9 +91,11 @@ public class TShiftCommandTest {
         LocalDate startDate = LocalDate.of(2020, 1, 1);
         LocalDate endDate = startDate.plusDays(daysApart);
         TShiftCommand tShiftCommand = new TShiftCommand(days);
-        ShnPeriod shnPeriod = new ShnPeriod(startDate, endDate);
+        ShnPeriod shnPeriod = new ShnPeriod(new Period(startDate, endDate));
         ShnPeriod shiftedShnPeriod = tShiftCommand.shiftShnPeriodEndDate(shnPeriod);
-        assertEquals(startDate.plusDays(1), shiftedShnPeriod.endDate);
+        assertTrue(shiftedShnPeriod.value.isPresent());
+        LocalDate shiftedEndDate = shiftedShnPeriod.value.get().getEndDate();
+        assertEquals(startDate.plusDays(1), shiftedEndDate);
     }
 
     @Test

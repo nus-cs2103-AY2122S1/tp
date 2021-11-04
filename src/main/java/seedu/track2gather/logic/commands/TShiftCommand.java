@@ -8,7 +8,8 @@ import seedu.track2gather.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.track2gather.logic.commands.exceptions.CommandException;
 import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
 
 public class TShiftCommand extends Command {
 
@@ -46,9 +47,7 @@ public class TShiftCommand extends Command {
 
         for (Person personToEdit : lastShownList) {
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-            personToEdit.getShnPeriod()
-                    .map(this::shiftShnPeriodEndDate)
-                    .ifPresent(editPersonDescriptor::setShnPeriod);
+            editPersonDescriptor.setShnPeriod(this.shiftShnPeriodEndDate(personToEdit.getShnPeriod()));
             Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor);
             model.setPerson(personToEdit, editedPerson);
         }
@@ -62,14 +61,16 @@ public class TShiftCommand extends Command {
      * @return A new {@code ShnPeriod} object with its end date shifted.
      */
     public ShnPeriod shiftShnPeriodEndDate(ShnPeriod shnPeriod) {
-        LocalDate startDate = shnPeriod.startDate;
-        LocalDate endDate = shnPeriod.endDate;
+        return new ShnPeriod(shnPeriod.value.map(period -> {
+            LocalDate startDate = period.getStartDate();
+            LocalDate endDate = period.getEndDate();
 
-        assert days != 0;
+            assert days != 0;
 
-        LocalDate newEndDate = Collections.max(List.of(endDate.plusDays(days), startDate.plusDays(1)));
+            LocalDate newEndDate = Collections.max(List.of(endDate.plusDays(days), startDate.plusDays(1)));
 
-        return new ShnPeriod(startDate, newEndDate);
+            return new Period(startDate, newEndDate);
+        }));
     }
 
     @Override

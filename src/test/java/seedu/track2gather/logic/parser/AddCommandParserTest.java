@@ -49,13 +49,13 @@ import static seedu.track2gather.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.track2gather.logic.commands.AddCommand;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
 import seedu.track2gather.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -222,7 +222,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB
                 + HOME_ADDRESS_DESC_BOB + WORK_ADDRESS_DESC_BOB + QUARANTINE_ADDRESS_DESC_BOB
                 + INVALID_SHN_PERIOD_DESC + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB
-                + NEXT_OF_KIN_ADDRESS_DESC_BOB, ShnPeriod.MESSAGE_CONSTRAINTS);
+                + NEXT_OF_KIN_ADDRESS_DESC_BOB, Period.MESSAGE_CONSTRAINTS);
 
         // invalid next-of-kin name
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB

@@ -8,6 +8,7 @@ import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.track2gather.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.track2gather.testutil.Assert.assertThrows;
 import static seedu.track2gather.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.track2gather.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,8 +66,7 @@ public class Track2GatherParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(ALICE).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);

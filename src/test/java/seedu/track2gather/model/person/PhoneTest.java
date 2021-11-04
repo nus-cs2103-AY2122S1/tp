@@ -6,6 +6,8 @@ import static seedu.track2gather.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.track2gather.model.person.attributes.Phone;
+
 public class PhoneTest {
 
     @Test

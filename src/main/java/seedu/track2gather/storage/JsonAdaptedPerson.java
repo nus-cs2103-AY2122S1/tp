@@ -6,14 +6,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.track2gather.commons.exceptions.IllegalValueException;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CallStatus;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CallStatus;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -67,17 +73,17 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
+        name = source.getName().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         caseNumber = source.getCaseNumber().value;
         homeAddress = source.getHomeAddress().value;
-        workAddress = source.getWorkAddress().map(Object::toString).orElse(null);
-        quarantineAddress = source.getQuarantineAddress().map(Object::toString).orElse(null);
-        shnPeriod = source.getShnPeriod().map(Object::toString).orElse(null);
-        nextOfKinName = source.getNextOfKinName().map(Object::toString).orElse(null);
-        nextOfKinPhone = source.getNextOfKinPhone().map(Object::toString).orElse(null);
-        nextOfKinAddress = source.getNextOfKinAddress().map(Object::toString).orElse(null);
+        workAddress = source.getWorkAddress().value.map(Object::toString).orElse(null);
+        quarantineAddress = source.getQuarantineAddress().value.map(Object::toString).orElse(null);
+        shnPeriod = source.getShnPeriod().value.map(Object::toString).orElse(null);
+        nextOfKinName = source.getNextOfKinName().value.map(Object::toString).orElse(null);
+        nextOfKinPhone = source.getNextOfKinPhone().value.map(Object::toString).orElse(null);
+        nextOfKinAddress = source.getNextOfKinAddress().value.map(Object::toString).orElse(null);
         callStatus = source.getCallStatus().toString();
     }
 
@@ -131,41 +137,48 @@ class JsonAdaptedPerson {
         if (workAddress != null && !Address.isValidAddress(workAddress)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Optional<Address> modelWorkAddress = Optional.ofNullable(workAddress).map(Address::new);
+        final WorkAddress modelWorkAddress = new WorkAddress(Optional.ofNullable(workAddress).map(Address::new));
 
         if (quarantineAddress != null && !Address.isValidAddress(quarantineAddress)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Optional<Address> modelQuarantineAddress = Optional.ofNullable(quarantineAddress).map(Address::new);
+        final QuarantineAddress modelQuarantineAddress =
+                new QuarantineAddress(Optional.ofNullable(quarantineAddress).map(Address::new));
 
-        if (shnPeriod != null && !ShnPeriod.isValidShnPeriodString(shnPeriod)) {
-            throw new IllegalValueException(ShnPeriod.MESSAGE_CONSTRAINTS);
+        if (shnPeriod != null && !Period.isValidPeriodString(shnPeriod)) {
+            throw new IllegalValueException(Period.MESSAGE_CONSTRAINTS);
         }
-        final Optional<ShnPeriod> modelShnPeriod = Optional.ofNullable(shnPeriod).map(ShnPeriod::new);
+        final ShnPeriod modelShnPeriod = new ShnPeriod(Optional.ofNullable(shnPeriod).map(Period::new));
 
         if (nextOfKinName != null && !Name.isValidName(nextOfKinName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Optional<Name> modelNextOfKinName = Optional.ofNullable(nextOfKinName).map(Name::new);
+        final NextOfKinName modelNextOfKinName = new NextOfKinName(Optional.ofNullable(nextOfKinName).map(Name::new));
 
         if (nextOfKinPhone != null && !Phone.isValidPhone(nextOfKinPhone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Optional<Phone> modelNextOfKinPhone = Optional.ofNullable(nextOfKinPhone).map(Phone::new);
+        final NextOfKinPhone modelNextOfKinPhone =
+                new NextOfKinPhone(Optional.ofNullable(nextOfKinPhone).map(Phone::new));
 
         if (nextOfKinAddress != null && !Address.isValidAddress(nextOfKinAddress)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Optional<Address> modelNextOfKinAddress = Optional.ofNullable(nextOfKinAddress).map(Address::new);
+        final NextOfKinAddress modelNextOfKinAddress =
+                new NextOfKinAddress(Optional.ofNullable(nextOfKinAddress).map(Address::new));
 
-        if (callStatus != null && !CallStatus.isValidCallStatus(callStatus)) {
+        if (callStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CallStatus.class.getSimpleName()));
+        }
+        if (!CallStatus.isValidCallStatus(callStatus)) {
             throw new IllegalValueException(CallStatus.MESSAGE_CONSTRAINTS);
         }
         final CallStatus modelCallStatus = new CallStatus(callStatus);
 
         return new Person(modelName, modelPhone, modelEmail, modelCaseNumber, modelHomeAddress, modelWorkAddress,
-                          modelQuarantineAddress, modelShnPeriod, modelNextOfKinName, modelNextOfKinPhone,
-                          modelNextOfKinAddress, modelCallStatus);
+                modelQuarantineAddress, modelShnPeriod, modelNextOfKinName, modelNextOfKinPhone,
+                modelNextOfKinAddress, modelCallStatus);
     }
 
 }
