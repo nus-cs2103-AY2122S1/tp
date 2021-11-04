@@ -25,7 +25,7 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 * [Quick Start](#quick-start)
 * [About](#about)
   * [Structure of this document](#structure-of-this-document)
-  * [Orienting to the application](#orienting-to-the-application)
+  * [Orienting to the app](#orienting-to-the-app)
   * [Reading this document](#reading-this-document)
     * [Technical Terms](#technical-terms)
     * [General Symbols and Syntax](#general-symbols-and-syntax)
@@ -123,34 +123,34 @@ In the subsection [Reading this document](#reading-this-document), there are sev
 
 The following section, [Features](#features), details the features in WhereTourGo and how to use them.
 
-### Orienting to the application
+### Orienting to the app
 Below is the Home screen of WhereTourGo, with its key components marked out for easy reference:
 
 ![Ui](images/layout.png)
 
-Tab bar: Exit the application or view help<br>
+| Component | Function |
+|:-------:|----------|
+| Tab bar | Exit the app or view help |
+| Command Box | Text box for you to key in your input |
+| Results Pane | Returns the result of the last command you entered |
+| Contacts Pane | A scrollable pane containing all the contacts you have listed/filtered |
+| Display Pane | A pane which displays your app summary upon opening the app, or details of the contact which you are viewing |
+| Status Bar | Shows the file path of the data file in which your contacts are saved |
 
-Command Box: Text box for you to key in your input<br>
-
-Results Pane: Returns the result of the last command you entered <br>
-
-Contacts Pane: A scrollable pane containing all the contacts you have listed/filtered<br>
-
-Display Pane: A pane which displays your app summary upon opening the application, or details of the contact which you are viewing<br>
-
-Status Bar: Shows the file path of the data file in which your contacts are saved <br>
 
 ### Reading this document
 This section introduces some technical terms, symbols and syntax used in this guide. Do try to familiarize yourself with them before moving on to the subsequent sections.
+
 
 #### Technical Terms
 The table below explains some technical terms frequently used throughout this User Guide.
 
 | Term |  What it means |
 |:----------:|-------------|
-| CLI |  The Command-Line Interface (or CLI for short) is the user interface in which WhereTourGo is based. Typically, users interact with the application by providing text input. Unlike traditional Graphical User Interface (GUI) base applications, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
+| CLI |  The Command-Line Interface (or CLI for short) is the user interface in which WhereTourGo is based. Typically, users interact with the app by providing text input. Unlike traditional Graphical User Interface (GUI) base apps, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
 | Command word| The Command word refers to the keywords which WhereTourGo recognises to invoke specific commands. These command words will be indicated by `COMMAND WORD` in the various sections below. |
 |Parameter|Parameter refers to the user input required after the user is prompted by WhereTourGo. |
+
 
 #### General Symbols and Syntax
 The table below explains the general notations used throughout the user guide.
@@ -162,6 +162,7 @@ The table below explains the general notations used throughout the user guide.
 |<div markdown="block" class="alert alert-primary"> :bulb: </div>  | A light bulb indicates that the following text is a useful tip. |
 |<div markdown="block" class="alert alert-danger"> :warning: </div> | A warning sign indicates that the following text is important. |
 
+
 #### Format of Commands
 The following points explain the format of a command.
 More examples will be provided for each command in [Features](#features).
@@ -172,7 +173,7 @@ More examples will be provided for each command in [Features](#features).
 * Items in **square brackets** are **optional**<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Mandarin Oriental t/hotel` or as `n/Mandarin Oriental`.
 
-* Items with `…`​ after them can be used multiple times including zero times<br>
+* Items with `…`​ after them can be used multiple times including none<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/food`, `t/wine t/food` etc.
 
 * Parameters can be in any order<br>
@@ -181,11 +182,9 @@ More examples will be provided for each command in [Features](#features).
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
 * Duplicate contact names are not allowed
   e.g. if there exists a contact named ‘Marina Bay Sands’, adding or editing a contact with the name ‘Marina Bay Sands’ is not allowed.<br>
+
 
 #### Restrictions for Commands
 * For each contact, there are maximum field sizes:
@@ -203,6 +202,7 @@ More examples will be provided for each command in [Features](#features).
   * Accommodation: `acc`
   * Transport: `tpt`
   * Others: `oth`
+
 
 * Ratings only accept the following 5 inputs:
   * 1-star : `ra/1`
@@ -229,11 +229,14 @@ Adds a contact to the contact list.
 
 Category codes and ratings can be found [here](#restrictions-for-commands).
 
+Usage scenario:
+* Tour Guide discovers a new attraction to record.
+
 Format: `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [rv/REVIEW] [ra/RATING] [t/TAG]…​​`
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 A contact can have any number of tags, or none at all!
-Similarly, reviews are optional.
+Similarly, reviews and ratings are optional.
 </div>
 
 Examples:
@@ -250,6 +253,9 @@ Expected Outcome for `add c/att n/Singapore Flyers p/92345678 e/123@example.com 
 Edits an existing contact in the contact list.
 
 Category codes and ratings can be found [here](#restrictions-for-commands).
+
+Usage scenario:
+* Tour Guide realised he entered the name of a restaurant wrongly, and wants to rectify it.
 
 Format: `edit INDEX [n/CONTACT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rv/REVIEW] [c/CATEGORY_CODE][ra/RATING]  [t/TAG]…​`
 
@@ -283,17 +289,19 @@ After:
 
 Deletes the specified contact from the contact list, either by name or index.
 
+Usage scenario:
+* Tour Guide wants to remove a hotel's contact information from WhereTourGo, as it has closed down.
+
 Format: `delete INDEX`
 
 * Deletes the contact at the specified INDEX
 * The index refers to the index number shown in the displayed contact list
 * The index must be a positive integer 1, 2, 3, ...
 
-
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the contact list
 * `find Mandarin Oriental` followed by `delete 1` deletes the 1st contact in the results of the find command
-
+-------------
 Format: `delete n/CONTACT_NAME`
 
 * Deletes the contact specified by CONTACT_NAME
@@ -312,6 +320,9 @@ Examples:
 
 Shows a list of all contacts in the contact list.
 
+Usage scenario:
+* Tour Guide would like to have an overview of all existing contacts in WhereTourGo.
+
 Format: `list`
 
 [Back to top](#table-of-contents)
@@ -320,11 +331,16 @@ Format: `list`
 
 Finds all contacts whose names, addresses, phone numbers, email addresses or reviews contain any of the given keywords.
 
+Usage scenario: 
+* Tour Guide would like to find any places of interest which are along Orchard Road (have Orchard Road contained within their address field). 
+* Tour Guide remembers leaving a positive review on the room service of a particular hotel, but has forgotten. He/she would like to find which contact this review was written for.
+
+
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive, e.g.,  `hotel` will match `Hotel`
 * The order of the keywords does not matter. e.g. `Park Hyatt` will match `Hyatt Park`
-* The name, phone, email, address and review fields will be searched
+* Fields searched are: name, phone, email, address and review
 * Contacts matching at least one keyword will be returned . e.g. `Park` will return `Park Hyatt Singapore`, `Park Royale`
 
 Examples:
@@ -340,6 +356,10 @@ Expected Outcome for `find bay`:
 
 ### Filtering contacts: `filter`
 Shows a list of all contacts in the specified category, with the specified rating and/or with the specified tag.
+
+Usage scenario:
+* Tour Guide wants to filter for all hotels (in category 'acc') which have a 5-star rating.
+* Tour Guide would like to filter all restaurants (in category 'fnb') which are affordable (with the tag 'cheap').
 
 Format: `filter [c/CATEGORY] [ra/NUMBER] [t/TAGS] ... `
 
@@ -368,6 +388,10 @@ Expected Outcome for `filter c/fnb`:
 ### Sorting the contacts: `sort`
 Sorts the list of contacts in a specified order. The sort feature sorts by Contact name (in lexicographical order) or by Rating (in descending order).
 
+Usage scenario:
+* Tour Guide wants to see all the highest rated contacts at one glance.
+* Tour Guide wants to arrange a messy list of contacts by lexicographical order.
+
 Format : `sort FIELD`
 
 Examples :
@@ -382,6 +406,10 @@ Shows a summary of the content of WhereTourGo. The data presented as a summary a
 * the proportion of contacts for each rating
 * the proportion of contacts for each category defined by [Category code](#restrictions-for-commands)
 
+Usage scenario:
+* Tour Guide wants to improve on the quality of his/her tours. He/she would like to review the database to see which category of tour contacts lacks diversity.
+* Tour Guide would like to assess the quality of his/her contacts by viewing the proportion of contacts with high ratings.
+
 Format: `sum`
 
 Expected Outcome for `sum`:
@@ -394,6 +422,9 @@ Expected Outcome for `sum`:
 
 Displays the specified contact from the contact list.
 
+Usage scenario:
+* Tour Guide wants to zoom in on a particular contact to obtain all the information.
+
 Format: `view INDEX`
 
 * Displays the contact at the specified INDEX
@@ -403,7 +434,7 @@ Format: `view INDEX`
 Examples:
 * `list` followed by `view 2` displays the 2nd contact in the contact list
 * `find Mandarin Oriental` followed by `view  1` displays the first contact in the results of the find command
-
+-------------
 Format: `view n/CONTACT_NAME`
 
 * Displays the contact specified by CONTACT_NAME
@@ -428,7 +459,7 @@ Input history will be reset whenever you exit the app.
 [Back to top](#table-of-contents)
 
 ### Clicking on contacts
-Click on any contact in the [List Panel](#orienting-to-the-application) to view more information about the contact.
+Click on any contact in the [List Panel](#orienting-to-the-app) to view more information about the contact.
 This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 
 [Back to top](#table-of-contents)
@@ -436,6 +467,9 @@ This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 ## Undoing and Redoing
 ### Undoing operations: `undo`
 Undoes the last change made to the list of contacts stored.
+
+Usage scenario:
+* Tour Guide deleted an important contact by mistake and would like to restore this contact.
 
 Format: `undo`
 
@@ -446,6 +480,9 @@ Examples :
 
 ### Redoing operations: `redo`
 Redoes the last change undone on the list of contacts stored.
+
+Usage scenario:
+* Tour Guide wants to delete all contacts after the seventh contact. He/she can execute `delete 8` once, and then repeatedly execute `redo` until there are no more contacts after the seventh one.
 
 Format: `redo`
 
@@ -465,10 +502,13 @@ Only commands that directly change the stored data can be redone and undone. The
 
 Exports all the contacts from the contact list to a well-formatted `.txt` file.
 
+Usage scenario:
+* Tour Guide needs to forward tour information quickly to someone else (i.e. the tour bus driver, an anxious tour participant).
+
 Format: `export`
 * Exports the specified contact from the contact list
 * The text file will be written with the path `data/export.txt`.
-
+-------------
 Format: `export INDEX`
 
 * Exports the contact at the specified INDEX
@@ -488,6 +528,9 @@ A sample of the exported text file:
 ### Clearing all entries: `clear`
 
 Clears all entries from the contact list.
+
+Usage scenario:
+* Tour Guide wants to wipe out the current database and start afresh.
 
 Format: `clear`
 
@@ -514,6 +557,10 @@ If your changes to the data file make the format invalid, WhereTourGo will disca
 ### Viewing help: `help`
 
 Open the User Guide in your default Browser.
+
+Usage scenario:
+* Tour Guide is new to the app and wants to find basic commands to get started with.
+
 Format: `help`
 
 <div markdown="block" class="alert alert-primary"> :bulb: If the User Guide cannot be opened in the Browser, a link to the User Guide will be provided.</div>
@@ -525,7 +572,12 @@ Please refer to the FAQ for more information.
 ### Displaying commands: `cmd`
 
 Open the command list in your default Browser.
+
+Usage scenario:
+* Tour Guide wants to view a command and its syntax as he/she has forgotten how it is used.
+
 Format: `cmd`
+
 <div markdown="span" class="alert alert-danger">:warning: Caution:
 If the command list cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
@@ -562,7 +614,7 @@ This folder contains a file called `addressbook.json` which contains all of your
 **A**: You can type either `cmd` to show the command summary or `help` to open our User Guide.
 
 **Q**: Why does cmd/help command open a backup window with a link instead of my browser?<br>
-**A**: Check to ensure that you have a browser installed and updated to the latest version. Restart the app and try again. If the issue still isn't resolved, please contact us at "WhereTourGo@gmail.com".
+**A**: Check to ensure that your browser installed has been upgraded to the latest version. Restart the app and try again. If the issue still isn't resolved, please contact us at "WhereTourGo@gmail.com".
 
 [Back to top](#table-of-contents)
 
