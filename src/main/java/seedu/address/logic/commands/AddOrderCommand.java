@@ -27,6 +27,7 @@ public class AddOrderCommand extends Command {
             + PREFIX_DATE + "20 August 2021";
 
     public static final String MESSAGE_SUCCESS = "New order added: %1$s";
+    public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the orderbook";
 
     private final Order toAdd;
 
@@ -41,6 +42,11 @@ public class AddOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasOrder(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ORDER);
+        }
+
         model.addOrder(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.ORDER);
     }
