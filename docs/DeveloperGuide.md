@@ -1495,7 +1495,7 @@ Character limit:
     4. **Other invalid commands to try**: `ua`, `ua x`(where x is larger than the list size), `ua y`(where y is an index with an appointment). <br>
        **Expected**: Similar to previous testcase (in Point 3).
 
-#### Sorting Clients
+### Sorting Clients
 1. Sorts the list of clients by a given keyword
     1. **Prerequisites**: Arguments are valid, FAST contains clients.
 
@@ -1504,6 +1504,44 @@ Character limit:
 
     3. **Test Case**: `sort nam` <br>
        **Expected**: No sorting happens. Error message displayed.
+       
+
+### Tag Feature
+
+#### Editing tags of a client
+
+1. Add tags to a client
+    1. **Prerequisites**: Arguments are valid, FAST contains clients, tags to be added do not already exist on the client. 
+       After adding, the client should not have more than 1 priority tag. 
+
+    2. **Test Case**: `tag 1 a/pr/low` <br>
+       **Expected**: The priority tag `LowPriority` is added to the client in index 1. Success message with updated list of tags is shown.
+
+    3. **Test Case**: `tag 2 a/friend a/ip/save` <br>
+       **Expected**: The tag `friend` and investment plan tag `Savings` is added to the client in index 2. Success message with updated list of tags is shown.
+       
+    4. **Test Case**: `tag 1 a/thisisalongtaghahahaahahahaahhahaah` <br>
+       **Expected**: No tag is added. Error message displayed stating the constraints for adding a tag.
+       
+    5. **Test Case**: `tag 1 a/pr/low a/ pr/high` <br>
+       **Expected**: No tag is added. Error message displayed stating that each client can only have 1 priority tag.
+
+    5. **Other invalid commands to try**: `tag`, `tag x`(where x is larger than the list size, or 0 or a negative number), 
+       `tag y a/friend`(where y is the index of a client that already has the `friend` tag). <br>
+       **Expected**: No tag is added. Error message displayed describing the nature of the issue.
+
+2. Delete tags from a client
+    1. **Prerequisites**: Arguments are valid, FAST contains clients, tags to be deleted do exist on the client.
+
+    2. **Test Case**: `tag 1 d/pr/high` <br>
+       **Expected**: The priority tag `HighPriority` is deleted from the client in index 1. Success message with updated list of tags is shown.
+
+    3. **Test Case**: `tag 2 a/boss a/ip/property` <br>
+       **Expected**: The tag `boss` and investment plan tag `PropertyInsurance` is deleted from the client in index 2. Success message with updated list of tags is shown.
+
+    4. **Test Case**: `tag 2 d/friend`(where the client at index 2 does not have the `friend` tag). <br>
+       **Expected**: No tag is deleted. Error message displayed stating that the specified tag does not exist.
+       
        
 ### Saving data
 
