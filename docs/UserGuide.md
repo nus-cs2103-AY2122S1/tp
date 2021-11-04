@@ -45,8 +45,8 @@ Download the correct version based on your operating system (e.g. Linux, macOS, 
 
 ![Java 11 Download](./images/JavaDownload.png)
 
-<div markdown="block" class="alert alert-info">
-    **:information_source: Visit the link and scroll down to find Java SE Development Kit 11 as shown above.**<br>
+<div markdown="span" class="alert alert-info">
+    **:information_source: Visit the link and scroll down to find Java SE Development Kit 11 as shown above.**
 </div>
 
 2. Download the latest `recruitIn.jar` from [here](https://github.com/AY2122S1-CS2103T-F11-2/tp/releases/tag/v1.3b).
