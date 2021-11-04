@@ -19,8 +19,8 @@ import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.UserPrefs;
 import seedu.academydirectory.model.VersionedModel;
-import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.VersionedModelManager;
+import seedu.academydirectory.model.student.Student;
 
 public class ViewCommandTest {
     private final VersionedModel model = new VersionedModelManager(getTypicalAcademyDirectory(), new UserPrefs());
