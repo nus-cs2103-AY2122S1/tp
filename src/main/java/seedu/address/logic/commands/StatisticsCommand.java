@@ -44,7 +44,7 @@ public class StatisticsCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));
-        List<Person> filteredPersonList = new ArrayList<Person>(model.getFilteredPersonList());
+        List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
         if (filteredPersonList.size() == 0) {
             throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
         }
@@ -52,7 +52,7 @@ public class StatisticsCommand extends Command {
 
         Statistic statistic = new Statistic(filteredPersonList);
 
-        return new CommandResult(String.format(MESSAGE_STATISTICS, statistic.toString()), statistic.getRawData());
+        return new CommandResult(String.format(MESSAGE_STATISTICS, statistic), statistic.getRawData());
     }
 
     @Override

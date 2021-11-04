@@ -22,7 +22,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_GENDER + "GENDER] "
@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Note: "
+            + "Note:\n"
             + " - Parameters in square brackets are optional.\n"
             + " - Parameters followed by ... can be used more than once.\n"
             + "Example: " + COMMAND_WORD + " "

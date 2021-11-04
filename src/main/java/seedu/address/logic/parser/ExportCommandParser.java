@@ -14,6 +14,9 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ExportCommand parse(String args) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(ExportCommand.MESSAGE_USAGE);
+        }
         return new ExportCommand(args.trim());
     }
 

@@ -21,7 +21,8 @@ public class AliasCommand extends Command {
             + ": Creates a shortcut name for a command.\n"
             + "Parameters: "
             + PREFIX_ALIAS + "ALIAS "
-            + PREFIX_COMMAND + "COMMAND ";
+            + PREFIX_COMMAND + "COMMAND\n"
+            + "Example: a/findPartner c/ g/m nat/Korean";
 
     public static final String MESSAGE_SUCCESS = "Alias successfully added. Mapped `%s` to the command `%s`.";
     public static final String MESSAGE_INVALID_ALIAS = "Invalid alias. Command words cannot be used as an alias.";
