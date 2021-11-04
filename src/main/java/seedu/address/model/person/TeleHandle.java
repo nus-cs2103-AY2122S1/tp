@@ -58,7 +58,7 @@ public class TeleHandle {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof TeleHandle
-                && value.equals(((TeleHandle) other).value));
+                && value.equalsIgnoreCase(((TeleHandle) other).value));
     }
 
     @Override
