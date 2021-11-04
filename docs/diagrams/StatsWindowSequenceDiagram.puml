@@ -20,11 +20,4 @@ deactivate Fast
 StatsWindow -[UI_COLOR]> StatsWindow : addPriorityPieChartAnalysis(pData)
 StatsWindow -[UI_COLOR]>StatsWindow : addPriorityPieChartData(pData)
 
-
-
-
-
-
-
-
 @enduml

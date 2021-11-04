@@ -33,7 +33,4 @@ deactivate HelpWindow
 
 deactivate MainWindow
 
-
-
-
 @enduml
