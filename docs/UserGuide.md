@@ -141,7 +141,7 @@ shown in the student panel and that you offer the lesson shown in the lesson pan
 ### Step 4: Adding a progress note for a student
 
 Now, imagine you have ended your `Maths 1` lesson. You realised that one of your students, `Alex Yeoh`, seems to struggle with the topic `Vectors`, and you wish to take
-note of it so that you can provide him extra practice. To do so, you can easily add a progress note for `Alex Yeoh ` in TutorAid by following the steps below:
+note of it so that you can provide him extra practice. To do so, you can easily add a progress note for `Alex Yeoh` in TutorAid by following the steps below:
 1. Type `find -s Alex Yeoh` into the command box. This would result in only Alex's details being displayed in the student panel.
 2. Type `add -p 1 Weak in Vectors and requires extra practice` into the command box. Alex's details will then be updated to display the progress note you just added.
 
