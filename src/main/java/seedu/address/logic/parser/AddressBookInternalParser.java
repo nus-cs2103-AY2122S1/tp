@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AccessCacheCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddressBookInternalParser {
@@ -38,6 +39,10 @@ public class AddressBookInternalParser {
 
         case AccessCacheCommand.COMMAND_WORD:
             return new AccessCacheCommandParser().parse(arguments);
+
+        // Handle when user clicks UI instead of typing in
+        case ViewTaskListCommand.COMMAND_WORD:
+            return new ViewTaskListCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_INTERNAL_COMMAND);
