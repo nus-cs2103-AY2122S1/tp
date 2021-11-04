@@ -1,16 +1,33 @@
 package seedu.programmer.commons.util;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
+
+import com.opencsv.CSVReader;
+
+import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.commons.exceptions.IllegalValueException;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 
 /**
  * Writes and reads files
  */
 public class FileUtil {
 
+    private static final Logger logger = LogsCenter.getLogger(FileUtil.class);
     private static final String CHARSET = "UTF-8";
 
     public static boolean isFileExists(Path file) {
@@ -80,4 +97,45 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Gets a List of Students from CSV file of student data.
+     *
+     * @param chosenFile file chosen by user
+     * @return List of Students in the CSV file
+     * @throws IllegalArgumentException if CSV contains invalid input
+     * @throws IOException if error reading the file
+     */
+    public static List<Student> getStudentsFromCsv(File chosenFile) throws IllegalArgumentException, IOException,
+            IllegalValueException {
+        List<Student> stuList = new ArrayList<>();
+
+        CSVReader reader = new CSVReader(new FileReader(chosenFile));
+        String[] headers = reader.readNext();
+        String[] expectedHeaders = {"studentId", "classId", "name", "email"};
+        if (!Arrays.equals(headers, expectedHeaders)) {
+            throw new IllegalValueException("Sorry! Your CSV file header should be: `studentId,classId,name,email`");
+        }
+
+        String [] nextLine;
+        while ((nextLine = reader.readNext()) != null) {
+            addStudentFromCsvLine(stuList, nextLine);
+        }
+
+        return stuList;
+    }
+
+    /**
+     * Adds a Student to a List of Students.
+     *
+     * @param stuList Student list to add to
+     * @param nextLine line in a CSV file of student data
+     */
+    private static void addStudentFromCsvLine(List<Student> stuList, String[] nextLine) {
+        StudentId sid = new StudentId(nextLine[0]);
+        ClassId cid = new ClassId(nextLine[1]);
+        Name name = new Name(nextLine[2]);
+        Email email = new Email(nextLine[3]);
+        Student s = new Student(name, sid, cid, email);
+        stuList.add(s);
+    }
 }
