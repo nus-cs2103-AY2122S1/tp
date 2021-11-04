@@ -5,17 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalContacts.getTypicalContacts;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.contact.Contact;
 import seedu.address.model.summary.Summary;
 
 public class CommandResultTest {
     private Summary summary = new Summary(getTypicalAddressBook());
+    private Contact contact = getTypicalContacts().get(0);
+    private Contact otherContact = getTypicalContacts().get(1);
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
         CommandResult commandResultSummary = new CommandResult("feedback", summary);
+        CommandResult commandResultContact = new CommandResult("feedback", contact);
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
@@ -55,12 +61,19 @@ public class CommandResultTest {
 
         // same object -> returns true
         assertTrue(commandResultSummary.equals(new CommandResult("feedback", summary)));
+
+        // different Contact value with showCommandContact-> returns false
+        assertFalse(commandResultContact.equals(new CommandResult("feedback", otherContact)));
+
+        // same object -> returns true
+        assertTrue(commandResultContact.equals(new CommandResult("feedback", contact)));
     }
 
     @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
         CommandResult commandResultSummary = new CommandResult("feedback", summary);
+        CommandResult commandResultContact = new CommandResult("feedback", contact);
 
         // same values -> returns same hashcode
         assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
@@ -94,5 +107,12 @@ public class CommandResultTest {
         // different summary value with Command Result-> returns different hashcode
         assertNotEquals(commandResultSummary.hashCode(), new CommandResult("feedback",
                 true, false, false).hashCode());
+
+        // same values -> returns same hashcode (contact)
+        assertEquals(commandResultContact.hashCode(), new CommandResult("feedback", contact).hashCode());
+
+        // different contact value with Command Result-> returns different hashcode
+        assertNotEquals(commandResultContact.hashCode(), new CommandResult("feedback",
+                otherContact).hashCode());
     }
 }
