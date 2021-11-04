@@ -27,8 +27,9 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
-    private static final String INVALID_BIRTHDAY_MESSAGE = "Birthday is invalid date. Will start with empty birthday.";
-    private static final String INVALID_PIN_MESSAGE = "Pin status is invalid. Will start with not pinned by default.";
+    private static final String INVALID_BIRTHDAY_MESSAGE = "Birthday %s is invalid. Will start with empty birthday.";
+    private static final String INVALID_PIN_MESSAGE = "Pin status %s is invalid. Will start with not pinned by default.";
+    public static final String INVALID_TAG_NAME_MESSAGE = "Tag %s is invalid. Will remove tag from tag list";
 
     private final String name;
     private final String phone;
@@ -80,7 +81,12 @@ class JsonAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            Tag currentTag = tag.toModelType();
+            if (currentTag != null) {
+                personTags.add(currentTag);
+            } else {
+                logger.info(String.format(INVALID_TAG_NAME_MESSAGE, tag.getTagName()));
+            }
         }
 
         if (name == null) {
@@ -118,11 +124,11 @@ class JsonAdaptedPerson {
         final Pin modelPin;
 
         if (pin == null) {
-            logger.info(INVALID_PIN_MESSAGE);
+            logger.info(String.format(INVALID_PIN_MESSAGE, "null"));
             modelPin = new Pin(false);
             //throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
         } else if (!Pin.isValidPinStatus(pin)) {
-            logger.info(INVALID_PIN_MESSAGE);
+            logger.info(String.format(INVALID_PIN_MESSAGE, pin));
             modelPin = new Pin(false);
             //throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
         } else {
@@ -138,11 +144,11 @@ class JsonAdaptedPerson {
         final Birthday modelBirthday;
         // Set birthday if non-null
         if (!Birthday.isValidFormat(birthday)) {
-            logger.info(INVALID_BIRTHDAY_MESSAGE);
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, birthday));
             modelBirthday = null;
             //throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         } else if (!Birthday.isValidDate(birthday)) {
-            logger.info(INVALID_BIRTHDAY_MESSAGE);
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, birthday));
             modelBirthday = null;
             //throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
         } else {

@@ -18,6 +18,13 @@ public class TagTest {
     }
 
     @Test
+    public void constructor_tooLongTagName_throwsIllegalArgumentException() {
+        String tooLongTagName = "1234567890123456789012345678901234567890123456789012345678901";
+        assert tooLongTagName.length() > 60;
+        assertThrows(IllegalArgumentException.class, () -> new Tag(tooLongTagName));
+    }
+
+    @Test
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
