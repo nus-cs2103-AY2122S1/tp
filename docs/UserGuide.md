@@ -109,28 +109,37 @@ Examples:
 
 Adds a policy to the policy list.
 
-Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
+Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM
+cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A policy can have any number of tags (including 0)
+<div markdown="block" class="alert alert-info">
+A policy should have more payments than the number of commissions, since every commission is tied to one payment!
 </div>
 
-* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires in YYYY-MM-DD format, optional.
-* Payment structure of the policy is defined by:
-  * `PMT_AMOUNT`: fixed amount per payment
-  * `PMT_FREQ` (optional): number of payments per year
-  * `NUM_OF_PMT` (optional): total number of payments required
-  * If only `PMT_AMOUNT` is provided, single lump sum payment is assumed
-  * If only `PMT_AMOUNT` and `PMT_FREQ` is provided, indefinite fixed periodic payments is assumed.
-  * If all three are provided, this represents periodic payments up till `NUM_OF_PMT`
-* Commission structure of the policy is defined by:
+* Payment structure of the policy -`p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMT]`:
+
+| Payment Type                                       | Payment Structure tag | Represents                                     |
+|----------------------------------------------------|-----------------------|---------------------------------------------|
+| Single lump sum                                    | /p 10000               | Single payment of $100                      |
+| X payments per year, indefinite number of payments | /p 10000 12            | Monthly payments of $100, indefinitely       |
+| X payments per year, definite number of payments   | /p 10000 12 120        | Monthly payments of $100, 120 total payments |
+
+* Commission structure of the policy - `c/COMMISSION_% NUM_OF_COMM`:
+  * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
   * `COMMISSION_%`: percentage of each payment that goes to commission
-  * `NUM_OF_PMT`: number of payments that the agent will receive commission for
+  * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
+  *  E.g. `/c 6 5` Receives 6% commission for the first 5 payments.
 * `CONTACT_INDEX` refers to the current index of the contact in the contact list you wish to attach this policy to.
+* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires in YYYY-MM-DD format, optional.
+
 
 Examples:
-* `addpolicy n/full life e/2021-12-12 p/10000 c/10 1 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10% on 1 payment, tagged Aviva, belonging to client with index 1.
-* `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
+* `addpolicy n/full life p/10050 c/10 1 cl/1 e/2021-12-12 t/Aviva` Adds a policy named full life,
+single payment of $100.50, commission of 10% on first payment, belonging to the contact with index 1,
+coverage expires on 2021-12-12, tagged Aviva.
+* `addpolicy n/critical illness p/30000 4 120 c/10 30 cl/2` Adds a policy titled critical illness,
+quarterly payments of $300, 120 total payments, commission of 10% on the first 30 payments,
+belonging to the contact with index 2.
 
 #### Listing All Policies : `listpolicy`
 
@@ -142,7 +151,12 @@ Format: `listpolicy`
 
 Edits an existing policy in the application.
 
-Format: `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] [c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAG] [e/COVERAGE_EXPIRY_DATE] …​`
+Format: `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] 
+[cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
+
+<div markdown="block" class="alert alert-info">
+Careful changing the number of commissions or payments. A policy should have more payments than the number of commissions.
+</div>
 
 * Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -152,8 +166,9 @@ Format: `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PM
   specifying any tags after it.
 
 Examples:
-*  `editpolicy 1 p/100 c/20` Edits the payment amount and commission of the 1st policy to be `100` and `20%` respectively.
-*  `editpolicy 2 n/Life Policy t/` Edits the name of the 2nd policy to be `Life Policy` and clears all existing tags.
+* `editpolicy 1 p/1000 12 c/20 5` Edits the payment structure to be indefinite monthly payments of $10 and 
+the commission structure to be 20% for the first 5 payments.
+* `editpolicy 2 n/Life Policy t/` Edits the name of the 2nd policy to be `Life Policy` and clears all existing tags.
 
 #### Deleting A Policy : `deletepolicy`
 
@@ -165,7 +180,7 @@ Format: `deletepolicy INDEX`
 
 Shows the list of policies that belong to a specific contact.
 
-Format: `clientpolicy CONTACT_INDEX`
+Format: `contactpolicy CONTACT_INDEX`
 
 - List policies for the contact at the specified CONTACT_INDEX.
 - The index refers to the index number shown in the displayed contacts list.
@@ -197,13 +212,13 @@ Format: `expiringpolicy`
 
 #### Sorting a contact : `sortcontact`
 
-Sorts the client list alphabetically by the order specified.
+Sorts the contact list alphabetically by the order specified.
 
-Format: `sortclient SORTER`
+Format: `sortcontact SORTER`
 
 These are the current sorters implemented:
-* `asc`: Sorts the clients in ascending order based on the saved name
-* `dsc`: Sorts the clients in descending order based on the saved name
+* `asc`: Sorts the contacts in ascending order based on the saved name
+* `dsc`: Sorts the contacts in descending order based on the saved name
 
 #### Sorting a Policy: `sortpolicy`
 
@@ -243,6 +258,12 @@ Clears all contacts and policies from the application.
 
 Format: `clear`
 
+####Getting Help : `help`
+
+Provides a helpful guide of the commands.
+
+Format: `help`
+
 ####Exiting the program : `exit`
 
 Exits the program.
@@ -271,11 +292,11 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
 **List Contacts** | `listcontact`
 **Find Contacts** | `findcontact KEYWORD`
-**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
+**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **Delete Policy** | `deletepolicy INDEX`
-**Edit Policy** | `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] [c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAG] [e/COVERAGE_EXPIRY_DATE] …`
+**Edit Policy** | `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **List Policies** | `listpolicy`
-**List Contact's Policies** | `clientpolicy PERSON_INDEX`
+**List Contact's Policies** | `contactpolicy PERSON_INDEX`
 **Clear Contact's Policies** | `clearpolicy PERSON_INDEX`
 **Show Expiring Policies** | `expiringpolicy`
 **Clear All** | `clear`
