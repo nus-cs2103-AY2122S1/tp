@@ -8,8 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is unique.
  */
 public class ID {
-    public static final String MESSAGE_CONSTRAINTS =
-            "ID should only contain numbers and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "ID should only contain numbers and it should not be blank";
 
     // The quantity should contain digits from 0 to 9 only.
     public static final String VALIDATION_REGEX = "[0-9]+";
@@ -31,7 +30,6 @@ public class ID {
     public ID(String id) {
         requireNonNull(id);
         checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
-
         this.id = Integer.parseInt(id);
     }
 
