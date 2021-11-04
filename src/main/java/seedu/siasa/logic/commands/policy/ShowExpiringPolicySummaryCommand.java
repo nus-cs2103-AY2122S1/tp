@@ -22,7 +22,7 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
         int noOfExpiringPolicies = 0;
         for (Policy p : model.getFilteredPolicyList()) {
-            if (p.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1))) {
+            if (p.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1).plusDays(1))) {
                 noOfExpiringPolicies++;
             }
         }
