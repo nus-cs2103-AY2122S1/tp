@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import javafx.application.Platform;
+import com.sun.javafx.application.PlatformImpl;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -28,8 +29,8 @@ class TimetableTest {
 
     @BeforeAll
     public static void setUp_javaFX_runtime() throws InterruptedException {
-        CountDownLatch countDownLatch = new CountDownLatch(0);
-        Platform.startup(() -> {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        PlatformImpl.startup(() -> {
             countDownLatch.countDown();
         });
         countDownLatch.await(3, TimeUnit.SECONDS);
