@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -87,7 +87,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -95,16 +95,10 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `RhrhParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddEmployeeCommand`) 
+   which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -115,7 +109,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddSupplierCommandParser`, `DeleteSupplierCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -136,7 +130,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -158,7 +152,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add command
 
 In the following section, we would be using the example of adding an `Employee` to RHRH. We can add a `Customer`
-and `Supplier` the using a similar format with their own fields and command, and the logic behind how another Person Type is added will be the same. More information on the differences in adding `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://github.com/AY2122S1-CS2103T-T17-4/tp/blob/master/docs/UserGuide.md)
+and `Supplier` the using a similar format with their own fields and command, and the logic behind how another Person Type is added will be the same. More information on the differences in adding `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
 
 #### Current Implementation
 
@@ -185,9 +179,10 @@ After obtaining the `AddEmployeeCommand`, it then calls methods in `Model` to he
 
 <img src="images/AddEmployeeCommandActivityDiagram.png" width="550" />
 
-### Design Considerations
+#### Design Considerations
 
-* Current Design: We separated `AddEmployeeCommmand`, `AddCustomerCommmand` and `AddSupplierCommmand` as different command types.
+* Current Design: We separated `AddCustomerCommmand`, `AddEmployeeCommmand` and `AddSupplierCommmand` as different 
+  command types.
 This is evident in our differing Edit and Delete commands as well.
   * Pros
     * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
@@ -204,6 +199,120 @@ This is evident in our differing Edit and Delete commands as well.
   * Cons
     * Error messages would have been confusing to select.
     
+
+### Delete Command
+In the following section, we will be going through how our delete command works. Since the delete command is very 
+similar across all person types, we will be using the `DeleteSupplierCommand` to illustrate how the delete 
+command 
+works. More information on the differences in deleting `Customer`, `Employee` and `Reservation` can be found in our 
+[User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
+
+#### Current Implementation
+Here's a partial class diagram for the `DeleteSupplierCommand`. Note that to make it more comprehensible, details 
+not related to the `DeleteSupplierCommand` are abstracted away.
+
+![DeleteSupplierClassDiagram](images/DeleteSupplierClassDiagram.png)
+
+How the `DeleteSupplierCommand` works:
+
+1. When `Logic` is called upon to execute a command, it uses the `RhrhParser` class to parse the user command.
+2. The `RhrhParser` then creates a `DeleteSupplierCommandParser` to parse the user command.
+3. If successful, this results in a `DeleteSupplierCommand` object being created which then is executed by the 
+   `LogicManager`.
+4. This instance of `DeleteSupplierCommand` can communicate with the `Model` when it is executed to delete a supplier 
+   from the `UniqueSupplierList`.
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteS 1")` 
+API call.
+
+![Interactions Inside the Logic Component for the `deleteSupplier 1` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`DeleteSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
+
+#### Design Considerations
+
+* Current Design: We separated `DeleteCustomerCommmand`, `DeleteEmployeeCommmand` and `DeleteSupplierCommmand` as 
+  different command types.
+
+  * Pros
+      * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
+      * Errors in user input is easier to identify due to the separation of Person type.
+
+  * Cons
+      * Additional classes had to be implemented.
+      * More commands for a similar feature.
+
+
+* Alternative Design: We could have a singular `DeleteCommand` and parse the user's input to see what Person Type the 
+  user wanted to delete.
+    * Pros
+        * Fewer commands for the user to remember.
+
+    * Cons
+        * Error messages would have been confusing to select.
+        * Implementation would be more difficult
+
+
+### Sort Command
+In the following section, we will be going through how our sort command works. Since the sort command is also very
+similar across all person types, we will be using the `SortSupplierCommand` to illustrate how the sort command
+works. More information on the differences in deleting `Customer` and `Employee` can be found in our
+[User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
+
+#### Current Implementation
+Here's a partial class diagram for the `SortSupplierCommand`. Note that to make it more comprehensible, details
+not related to the `SortSupplierCommand` are abstracted away.
+
+![SortSupplierClassDiagram](images/SortClassDiagram.png)
+
+How the `SortSupplierCommand` works:
+
+1. When `Logic` is called upon to execute a command, it uses the `RhrhParser` class to parse the user command.
+2. The `RhrhParser` then creates a `SortSupplierCommandParser` to parse the user command.
+3. If successful, this results in a `SortSupplierCommand` object being created which then is executed by the
+   `LogicManager`.
+4. This instance of `SortSupplierCommand` can communicate with the `Model` when it is executed to sort the 
+   `UniqueSupplierList` based on a sorting type and sorting order.
+5. The `Comparator` that is used to sort the `UniqueSupplierList` is generated by the `SupplierComparator` class
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("sortS by/dd 
+o/a")` API call.
+
+![SortSupplierSequenceDiagram](images/SortSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`SortSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
+
+#### Design Considerations
+
+* Current Design: We separated `SortCustomerCommmand`, `SortEmployeeCommmand` and `DeleteSupplierCommmand` as
+  different command types.
+
+    * Pros
+        * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
+        * Errors in user input is easier to identify due to the separation of Person type.
+
+    * Cons
+        * Additional classes had to be implemented.
+        * More commands for a similar feature.
+
+
+* Alternative Design: We could have a singular `SortCommand` and parse the user's input to see what Person Type the
+  user wanted to delete.
+    * Pros
+        * Fewer commands for the user to remember.
+
+    * Cons
+        * Error messages would have been confusing to select.
+        * Implementation would be more difficult
 
 ### Customer
 
