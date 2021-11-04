@@ -97,6 +97,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson, boolean removeFilter);
 
+    /**
+     * Sorts the AddressBook by the given {@code prefix}
+     * @param prefix
+     */
+    void sortAddressBook(Prefix prefix, boolean reverse);
+
+    /**
+     * Merges the Json file in the given {@code filePath} with the address book.
+     * @throws DataConversionException when the file given is not in the correct format.
+     */
     void importFile(Path filePath) throws DataConversionException;
 
     /** Returns an unmodifiable view of the filtered person list */
@@ -117,10 +127,4 @@ public interface Model {
      * Redoes the last command undid, if available.  Returns true if redo was executed successfully.
      */
     int redo() throws OperationException;
-
-    /**
-     * Sorts the filtered person list by the given {@code prefix}
-     * @param prefix
-     */
-    void sortFilteredPersonList(Prefix prefix, boolean reverse);
 }

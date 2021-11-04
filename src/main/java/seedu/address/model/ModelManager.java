@@ -149,6 +149,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortAddressBook(Prefix prefix, boolean reverse) {
+        requireNonNull(prefix);
+        runOperation(() -> addressBook.sortList(prefix, reverse));
+    }
+
+    @Override
     public void importFile(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
@@ -205,12 +211,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         runOperation(() -> filteredPersons.setPredicate(predicate));
-    }
-
-    @Override
-    public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
-        requireNonNull(prefix);
-        runOperation(() -> addressBook.sortList(prefix, reverse));
     }
 
     @Override

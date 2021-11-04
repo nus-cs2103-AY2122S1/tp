@@ -199,7 +199,8 @@ The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetDat
 
 #### Sort Feature
 
-The sort feature is facilitated by `SortCommand`. It extends `Command` with a `Prefix` which specifies the prefix the `AddressBook` is to be sorted by, as well as a boolean `reverse` which specifies the order of the sorted list. This is further facilitated by a `PersonComparator` and a `Person#compare(Person p, Prefix prefix)` method to allow for sorting is the list.
+The sort feature is facilitated by `SortCommand`. It extends `Command` with a `Prefix` which specifies the prefix the `AddressBook` is to be sorted by, as well as a boolean `reverse` which specifies the order of the sorted list. 
+This method is exposed in the `Model` interface as `Model#sortAddressBook()` This is further facilitated by  `AddressBook`, `AddressBook#sortList()`, a `PersonComparator` and a `Person#compare(Person p, Prefix prefix)` method to allow for sorting of the list by the `Prefix` specified.
 
 ##### Design Considerations
 
