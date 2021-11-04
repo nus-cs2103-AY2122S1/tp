@@ -16,7 +16,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-Point of View: You are an Avenger sitting behind the control table, supervising your tutee through the transparent glass while physically interacting with the system to manage your tutee's grades and participation. 
+Point of View: You are an Avenger sitting behind the control table, supervising your students through the transparent glass while physically interacting with the system to manage your tutee's grades and participation.
 
 Don't get us wrong though. We are not mad space scientists doing controlled experiment on students. *Or are we?...*
 
