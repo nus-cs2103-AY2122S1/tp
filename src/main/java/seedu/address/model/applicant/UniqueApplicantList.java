@@ -3,14 +3,18 @@ package seedu.address.model.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.descriptors.EditApplicantDescriptor;
+import seedu.address.logic.descriptors.EditApplicationDescriptor;
 import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
+import seedu.address.model.position.Position;
 
 /**
  * A list of applicants that enforces uniqueness between its elements and does not allow nulls.
@@ -43,7 +47,19 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      */
     public boolean containsApplicantWithName(Name toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(applicant -> applicant.getName().equals(toCheck));
+        return internalList.stream().anyMatch(applicant -> applicant.hasName(toCheck));
+    }
+
+    /**
+     * Returns the applicant in the list with the specified name, if any.
+     * @throws ApplicantNotFoundException if not found.
+     */
+    public Applicant getApplicantByNameIgnoreCase(Name name) {
+        requireNonNull(name);
+        return internalList.stream()
+                .filter(applicant -> applicant.hasNameIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(ApplicantNotFoundException::new);
     }
 
     /**
@@ -95,6 +111,32 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     public void removeIf(Predicate<? super Applicant> condition) {
         requireNonNull(condition);
         internalList.removeIf(condition);
+    }
+
+    /**
+     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}
+     */
+    public void updateApplicantsWithPosition(Position positionToEdit,
+                                             Position editedPosition) {
+        List<Applicant> copiedList = new ArrayList<>(internalList);
+
+        for (Applicant applicant : copiedList) {
+            if (!applicant.isApplyingTo(positionToEdit)) {
+                continue;
+            }
+            EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
+            editApplicationDescriptor.setPosition(editedPosition);
+            Application updatedApplication = editApplicationDescriptor
+                    .createEditedApplication(applicant.getApplication());
+
+            EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
+            editApplicantDescriptor.setApplication(updatedApplication);
+            Applicant updatedApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
+
+            remove(applicant);
+            add(updatedApplicant);
+        }
+
     }
 
     public void setApplicants(UniqueApplicantList replacement) {
@@ -151,6 +193,16 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             }
         }
         return true;
+    }
+
+    public UniqueApplicantList getCopiedApplicants() {
+        UniqueApplicantList copiedApplicants = new UniqueApplicantList();
+
+        for (Applicant applicant : this.internalList) {
+            copiedApplicants.internalList.add(applicant.getCopiedApplicant());
+        }
+
+        return copiedApplicants;
     }
 
 }

@@ -108,6 +108,7 @@ public class PositionBook implements ReadOnlyPositionBook {
         positions.remove(key);
     }
 
+
     //// util methods
 
     @Override
@@ -133,4 +134,10 @@ public class PositionBook implements ReadOnlyPositionBook {
         return positions.hashCode();
     }
 
+    public PositionBook getCopiedPositionBook() {
+        PositionBook copiedPositionBook = new PositionBook();
+        copiedPositionBook.positions.setPositions(this.positions.getCopiedPositions());
+
+        return copiedPositionBook;
+    }
 }

@@ -44,10 +44,19 @@ public class AddPositionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_POSITION);
         }
 
-        model.addPosition(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        memento.record(model.getCopiedModel());
 
+        model.addPosition(toAdd);
+
+        String successMessage = String.format(MESSAGE_SUCCESS, toAdd);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
+
+
 
     @Override
     public boolean equals(Object other) {

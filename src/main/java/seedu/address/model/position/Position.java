@@ -15,13 +15,11 @@ public class Position {
 
     private final Description description;
 
-    // Data field is empty
-
     /**
      * Every field must be present and not null.
      */
     public Position(Title title, Description description) {
-        requireAllNonNull(title);
+        requireAllNonNull(title, description);
         this.title = title;
         this.description = description;
     }
@@ -80,5 +78,9 @@ public class Position {
                 .append(getDescription());
 
         return builder.toString();
+    }
+
+    public Position getCopiedPosition() {
+        return new Position(title.getCopiedTitle(), description.getCopiedDescription());
     }
 }

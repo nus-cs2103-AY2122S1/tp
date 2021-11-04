@@ -38,6 +38,15 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the two names are equal.
+     * Case-insensitive comparison.
+     */
+    public boolean equalsIgnoreCase(Name name) {
+        requireNonNull(name);
+        return fullName.equalsIgnoreCase(name.fullName);
+    }
+
     @Override
     public String toString() {
         return fullName;
@@ -53,5 +62,9 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
+    }
+
+    public Name getCopiedName() {
+        return new Name(this.fullName);
     }
 }

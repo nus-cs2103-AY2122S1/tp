@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
+import seedu.address.model.applicant.ApplicantParticulars;
 
 /**
  * Adds an applicant to the address book.
@@ -59,9 +59,16 @@ public class AddApplicantCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
+        memento.record(model.getCopiedModel());
         Applicant applicant = model.addApplicantWithParticulars(applicantParticulars);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, applicant));
+        String successMessage = String.format(MESSAGE_SUCCESS, applicant);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -69,5 +76,4 @@ public class AddApplicantCommand extends Command {
                 || (other instanceof AddApplicantCommand // instanceof handles nulls
                 && applicantParticulars.equals(((AddApplicantCommand) other).applicantParticulars));
     }
-
 }

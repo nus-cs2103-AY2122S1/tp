@@ -60,11 +60,27 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     //// position-level operations
 
     /**
+     * Returns true if the {@code applicant} exists in the applicant book.
+     */
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicants.contains(applicant);
+    }
+
+    /**
      * Returns true if an applicant with the name {@code applicantName} exists in the applicant book.
      */
     public boolean hasApplicantWithName(Name applicantName) {
         requireNonNull(applicantName);
         return applicants.containsApplicantWithName(applicantName);
+    }
+
+    /**
+     * Returns the applicant with the specified name, if any.
+     */
+    public Applicant getApplicantByNameIgnoreCase(Name applicantName) {
+        requireNonNull(applicantName);
+        return applicants.getApplicantByNameIgnoreCase(applicantName);
     }
 
     /**
@@ -98,6 +114,11 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
         applicants.removeIf(applicant -> applicant.isApplyingTo(position));
     }
 
+    public void updateApplicantsWithPosition(Position positionToEdit,
+                                             Position editedPosition) {
+        applicants.updateApplicantsWithPosition(positionToEdit, editedPosition);
+    }
+
     @Override
     public String toString() {
         return applicants.asUnmodifiableObservableList().size() + " applicants";
@@ -114,6 +135,13 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
         return other == this // short circuit if same object
                 || (other instanceof ApplicantBook // instanceof handles nulls
                 && applicants.equals(((ApplicantBook) other).applicants));
+    }
+
+    public ApplicantBook getCopiedApplicantBook() {
+        ApplicantBook copiedApplicantBook = new ApplicantBook();
+        copiedApplicantBook.applicants.setApplicants(this.applicants.getCopiedApplicants());
+
+        return copiedApplicantBook;
     }
 
 }

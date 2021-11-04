@@ -39,9 +39,17 @@ public class DeletePositionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_POSITION_DISPLAYED_INDEX);
         }
 
+        memento.record(model.getCopiedModel());
+
         Position positionToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePosition(positionToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_POSITION_SUCCESS, positionToDelete));
+
+        String successMessage = String.format(MESSAGE_DELETE_POSITION_SUCCESS, positionToDelete);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
 
     @Override

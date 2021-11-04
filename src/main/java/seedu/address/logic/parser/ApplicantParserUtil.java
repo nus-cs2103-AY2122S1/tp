@@ -2,20 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Title;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -97,34 +94,8 @@ public class ApplicantParserUtil {
         return new Email(trimmedEmail);
     }
 
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
-
     // All position related methods
+
     /**
      * Parses a {@code String title} into a {@code Title}.
      * Leading and trailing whitespaces will be trimmed.
@@ -153,6 +124,43 @@ public class ApplicantParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String applicationStatus} into a {@code ApplicationStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code applicationStatus} is invalid.
+     */
+    public static ApplicationStatus parseApplicationStatus(String applicationStatus) throws ParseException {
+        requireNonNull(applicationStatus);
+        String trimmedApplicationStatus = applicationStatus.trim();
+        try {
+            return ApplicationStatus.fromString(trimmedApplicationStatus);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String url} into a {@code ProfileUrl}. It returns emptyProfileUrl if it receives
+     * empty string.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param url user input string of the github link.
+     * @return the profileUrl containing this url.
+     * @throws ParseException if the given {@code gitHubUrl} is invalid.
+     */
+    public static ProfileUrl parseUrl(String url) throws ParseException {
+        requireNonNull(url);
+        String trimmedUrl = url.trim();
+        if (trimmedUrl.equals("")) {
+            return ProfileUrl.emptyProfileUrl();
+        }
+        if (!ProfileUrl.isValidUrl(url)) {
+            throw new ParseException(ProfileUrl.MESSAGE_CONSTRAINTS);
+        }
+        return new ProfileUrl(url);
     }
 
 }
