@@ -41,6 +41,7 @@ public class UniqueStudentList implements Iterable<Student> {
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameStudent);
+
     }
 
     /**

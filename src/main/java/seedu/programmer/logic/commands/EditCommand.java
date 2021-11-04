@@ -51,6 +51,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
+            + "already exists in the ProgrammerError";
+    public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
+            + "already exists in the ProgrammerError";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
