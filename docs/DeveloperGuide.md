@@ -119,7 +119,7 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <center>
-<img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="650"/>
+<img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="550"/>
 </center>
 
 How the `Logic` component works:
