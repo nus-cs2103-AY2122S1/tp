@@ -851,12 +851,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Should be able to hold up to _3000_ student without a noticeable sluggishness in performance for typical usage.
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work in computer with `32-bit` or `64-bit` processor.
-5. Should run on user computer with double-click - no installer or additional libraries required.
-6. Should not require internet connection for any of its feature.
-7. All user and app data should be stored locally, not through an online database solution.
-8. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
-9. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
-10. Logs and previous commits should be transferable and functional after transfer onto other computers.
+5. Users data should be in human editable file and stored locally.
+6. Should run on user computer with double-click - no installer or additional libraries required.
+7. Should not require internet connection for any of its feature.
+8. All user and app data should be stored locally, not through an online database solution.
+9. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
+10. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
+11. Logs and previous commits should be transferable and functional after transfer onto other computers.
+12. Users should be able to undo up to at least _100_ commands. 
 
 
 ### Glossary
