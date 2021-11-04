@@ -191,9 +191,13 @@ public class MainWindow extends UiPart<Stage> {
      * Handles the exporting of mailing list.
      */
     @FXML
-    private void handleMailingList() {
-
+    private void handleMailingList() throws CommandException {
         File file = fileChooser.showSaveDialog(primaryStage);
+
+        if (file == null) {
+            throw new CommandException("No save location was selected.");
+        }
+
         String pathStr = file.getPath();
         if (!pathStr.endsWith(".csv")) {
             pathStr += ".csv";
@@ -202,14 +206,11 @@ public class MainWindow extends UiPart<Stage> {
 
         List<Person> personList = logic.getFilteredPersonList();
         Set<Prefix> prefixSet = logic.getPrefixStore();
-
         try {
             CsvUtil.modelToCsv(personList, path, prefixSet);
         } catch (IOException e) {
-            logger.info("writing csv failed" + e.getMessage());
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw new CommandException("writing csv failed: " + e.getMessage());
         }
-
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -224,6 +225,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -240,11 +242,13 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+
     }
 
     private CommandResult executeSystemCommand(String commandText) {
