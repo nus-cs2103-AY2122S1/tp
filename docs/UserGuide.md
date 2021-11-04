@@ -480,9 +480,7 @@ Uncancelled date |`uncancel/` | Same constraints as other date fields.<br/>The d
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
-* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
-
-* Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.
+If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
 
 </div>
 
@@ -492,14 +490,17 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 
 * When editing homework, all existing pieces of homework of the lesson will be removed and replaced with the pieces of homework specified.<br>
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
+  
+* Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.
 
-* You can delete all homework of a lesson by typing `hw/` without any arguments. 
+<div markdown="block" class="alert alert-info">**:information_source: Note about homework:**<br>
 
-<div markdown="span" class="alert alert-primary">**:information_source: Note about homework:**<br>
+You can delete all homework of a lesson by typing `hw/` without any arguments.
+If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br/><br/>
 
-If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br>
   e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
 On the other hand, `ledit 2 1 hw/ hw/Assignment 1` will remove all existing homework and add only `Assignment 1` as homework for the lesson.
+
 </div>
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
