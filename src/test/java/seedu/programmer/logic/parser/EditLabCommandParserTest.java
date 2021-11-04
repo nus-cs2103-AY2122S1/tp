@@ -17,7 +17,7 @@ import static seedu.programmer.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE2
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.programmer.model.student.Lab.MESSAGE_LAB_NUMBER_CONSTRAINT;
-import static seedu.programmer.model.student.Lab.MESSAGE_LAB_SCORE_CONSTRAINT;
+import static seedu.programmer.model.student.Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +57,7 @@ public class EditLabCommandParserTest {
         // invalid labTotal
         assertParseFailure(parser,
                 LAB_NUM + NEW_LAB_NUM + INVALID_LAB_TOTAL,
-                String.format(MESSAGE_TEMPLATE, MESSAGE_LAB_SCORE_CONSTRAINT, EditLabCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_TEMPLATE, MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT, EditLabCommand.MESSAGE_USAGE));
     }
 
     @Test
