@@ -25,7 +25,6 @@ Given below are my contributions to the project.
 **Project management**:
 * Updated Developer Guide user stories.
 * Updated README to fit our project
-* 
 
 **Testing**:
 * Wrote tests for all new and enhanced features:
@@ -45,4 +44,4 @@ Given below are my contributions to the project.
 **Community**:
 * PRs reviewed:
   [#101](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/101),
-  [#208](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/208)
+[#208](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/208)
