@@ -86,6 +86,19 @@ Flags|Name
 -t|Tag
 -ti|Time
 
+#### Fields of a staff
+
+The fields that a Staff must have.
+
+Flags|Name
+----|----
+-n|Name
+-s|Status
+-a|Address
+-$|Salary
+-e|Email
+-t|Tags
+
 
 
 <div markdown="block" class="alert alert-info">
@@ -181,20 +194,6 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 ### Basic management of Staff Details
 
-#### Viewing a staff : `view`
-
-Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, email, address) of a staff or by index of the staff.
-
- * Does not allow for a non-specific lookup. Any fields entered must be an exact reference.
- * For example, the query `-n Candice` will result in any Staff with the exact name "Candice" and no-one else.
-
-Format:  
-`view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-
-Examples:  
-`view -n Candice`  
-`view -t friends -t neighbours`  
-
 #### Adding a staff : `add`
 
 Adds a staff to the system. 
@@ -216,16 +215,20 @@ Examples:
 
 Marks a specified staff(s) as not working for a specified date.
 
- * The salary for that date will be not included in calculation,
+* The salary for that date will not be included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
- * The format of the input date is in: `YYYY-MM-DD`.
+* The format of the input date is in: `YYYY-MM-DD`.
+* If no date input is provided, the next occurrence of that shift is assumed.
+* If only one date input is provided, the next occurrence of that shift, after the provided date is marked. For instance,
+  if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be marked.
+* Will not indicate if there is a shift in the period provided, even if there isn't a shift, the staff will be marked absent for that period.
 
 Format:  
 
 Marking a period:  
 
-`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`  
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`  
 
 
 Possible to mark a single date:
@@ -244,8 +247,12 @@ Removes the period that was marked by the `mark` command.
 
 The format of the input date is in: `YYYY-MM-DD`.
 
+* If no date input is provided, the next occurrence of that shift is assumed.
+* If only one date input is provided, the next occurrence of that shift, after the provided date is unmarked. For instance,
+  if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be unmarked.
+
 Format:  
-`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`
 
 Examples:  
 `unmark -i 1 da/2020-01-03 da/2021-01-03`  
@@ -253,7 +260,7 @@ Examples:
 
 #### Deleting a Staff : `delete`
 
-Deletes the specified staff `Staff'd`.
+Deletes the specified staff.
 
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, within the range of the staff view.
@@ -267,7 +274,7 @@ Formats:
 Examples:  
 `delete -n Candice`  
 `delete -i 2`  
-`delete -r cashiers`  
+`delete -r floor`  
 `delete -s fulltime`
 
 
@@ -296,6 +303,8 @@ Examples:
 #### Finding staff : `find`
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
+Can attach [fields](#fields-of-a-staff) for additional restrictions or find by fields alone. 
+If index search is performed, no other input is expected.
 
 Name Search:
 
@@ -305,6 +314,7 @@ Name Search:
 * Staff matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `John Nathan` will return `John Wick`, `Nathan Tan`.
 
+
 Index Search:
 
 * If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
@@ -313,15 +323,24 @@ Index Search:
 * If the list is empty, no input is accepted.
 * Only single search is supported, and this search will return only the specific Staff at that index.
 
+Field Search:
+
+* Can perform field search alone or along with name search.
+* The [fields](#fields-of-a-staff) that are attached must match exactly the field to compare to.
+* All the fields will take the last input as the actual input accept for tags and roles, which will find
+the staff(s) that match all the inputs.
+
 Format:  
-`find -n KEYWORD [MORE_KEYWORDS]`  
-`find -i INDEX`  
+`find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`  
+`find -i INDEX [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`  
 
 
 Examples:  
 `find -n John`  
 `find -n alex david`    
 `find -i 3`  
+`find -t Friend`
+`find -r kitchen -r floor`
 
 List before using Find command:
 ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
@@ -353,11 +372,13 @@ the range would be from 25/10/2021 to 31/10/2021.
 
 #### Viewing schedule for the week: `change`
 
+the change command enables the user to view a different week than the default one, which is the current week.
 The schedule for the current week is shown under the schedule tab by default. The week
-can be changed using the `change` command.
+can be changed using the `change` command. 
 
- * Takes in a single date input to translate into a week.
+ * Takes in a single date input to translate into a week, which consists of the seven days after the input date.
  * The date is in `YYYY-MM-DD`
+ * The change command also causes all the default shift related commands to take place over the resulting week.
 
 Format:  
 `change da/DATE`    
@@ -484,7 +505,7 @@ Formats:
 `deleteShift -i INDEX d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
 
 Examples:  
-`deleteShift -n Joe d/tuesday-2 da/2021-10-01`  
+`deleteShift -n Joe d/tuesday-1 da/2021-10-01`  
 `deleteShift -i 1278 d/friday-1`
 
 --------------------------------------------------------------------------------------------------------------------
@@ -497,7 +518,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`<br> `find -i [INDEX]` <br> e.g., `find -n James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
 **Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`

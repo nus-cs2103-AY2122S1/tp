@@ -95,7 +95,6 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedPeriod::new)
                 .collect(Collectors.toList()));
         schedule = new JsonAdaptedSchedule(source.getSchedule());
-
     }
 
     /**

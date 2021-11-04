@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 
 /**
@@ -35,9 +36,10 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        PersonContainsFieldsPredicate emptyPredicate = new PersonContainsFieldsPredicate();
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate, emptyPredicate);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, emptyPredicate);
         FindCommand findThirdCommand = new FindCommand(1);
         FindCommand findFourthCommand = new FindCommand(2);
 
@@ -45,7 +47,7 @@ public class FindCommandTest {
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, emptyPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -68,7 +70,8 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        PersonContainsFieldsPredicate emptyPredicate = new PersonContainsFieldsPredicate();
+        FindCommand command = new FindCommand(predicate, emptyPredicate);
         expectedModel.updateFilteredPersonList(predicate);
         // assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), expectedModel.getFilteredPersonList());
