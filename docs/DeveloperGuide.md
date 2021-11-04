@@ -410,320 +410,391 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise.
 
-**UC01 - Adding an item**
+<div class="code-example bg-grey-lt-000">
+:information_source: Click on any of the use cases to view them.
+</div>
 
-**Actor:** User
+*Mutating the Inventory*{: .text-purple-000 }
 
-**MSS**
+<details markdown="block">
+  <summary>
+    <b>UC01 - Adding Item(s)</b>
+  </summary>
+  {: .text-delta }
 
-1. User adds item into inventory.
-2. BogoBogo saves item into inventory.
-
+```
+MSS:
+1. User requests to add a certain amount of an item into the inventory.
+2. BogoBogo saves the item(s) into the  inventory.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
+    1a1. BogoBogo informs user of the missing details.
+    1a2. User reenters the missing details.
+    Use case resumes at step 2.
 
-* 1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
-    * 1a1. BogoBogo informs user of the missing details.
-    * 1a2. User reenters with the missing details.
+1b. User did not specify the count.
+    1b1. BogoBogo assumes count to be 1.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2.
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    1c2. User reenters the corrected details.
 
-* 1b. User is adding item that has been added before, and only specifies either name or id without the other fields.
-    * 1b1. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
+```
+</details>
 
-      Use case ends.
+<details markdown="block">
+  <summary>
+    <b>UC02 - Deleting an Item</b>
+  </summary>
+  {: .text-delta }
 
-* 1c. User is adding an item that has been added before, but provides an id that corresponds to another item.
-    * 1c1. BogoBogo notifies user of the mismatch and shows the list of possible matches.
-    * 1c2. User reenters with the correct details.
-    * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
-
-      Use case ends.
-
-**UC02 - Deleting an item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to delete item from inventory.
-2. BogoBogo deletes item from inventory.
-
+```
+MSS:
+1. User requests to delete an item from the inventory.
+2. BogoBogo deletes the item from the inventory.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User specified neither the name nor id of the item.
+    1a1. BogoBogo notifies user of missing details.
+    Use case ends.
 
-* 1a. User did not specify the name or serial number of the item.
-    * 1a1. BogoBogo notifies user of missing details.
+1b. The specified item is not in the inventory.
+    1b1. BogoBogo notifies user that the item is not found.
+    Use case ends.
 
-      Use case ends.
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    1c2. User reenters the corrected details.
+    Use case resumes at step 2.
+    
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
+```
 
-* 1b. The specified item is not in the inventory.
-    * 1b1. BogoBogo notifies user that item is not found.
+</details>
 
-      Use case ends.
+<details markdown="block">
+  <summary>
+    <b>UC03 - Removing Item(s)</b>
+  </summary>
+  {: .text-delta }
 
-* 1c. The given id does not match with the given name.
-    * 1c1. BogoBogo notifies user of the mismatch.
-
-      Use case ends.
-
-**UC03 - Finding items through matching keywords**
-
-**Actor:** User
-
-**MSS**
-
-1. User searches for an item in the inventory by stating id, name or tag.
-2. BogoBogo finds item from inventory that matches the keywords.
-
+```
+MSS:
+1. User requests to remove a certain amount of an item from the inventory.
+2. BogoBogo removes the specified amount of that item.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User specified neither the name nor id of the item.
+    1a1. BogoBogo notifies user of missing details.
+    Use case ends.
+    
+1b. The specified item is not in the inventory.
+    1b1. BogoBogo notifies user that the item is not found.
+    Use case ends.
 
-* 1a. User specified an id which is not a positive integer or is not of 6 digits.
-    * 1a1. BogoBogo notifies user of invalid id input.
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    1c2. User reenters the corrected details.
+    Use case resumes at step 2.
 
-      Use case ends.
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
+    
+1e. User did not specify the count.
+    1e1. BogoBogo assumes count to be 1.
+    Use case resumes at step 2.
+    
+1f. The specified amount is greater than what the inventory has.
+    1f1. BogoBogo notifies user of the actual amount of item in the inventory.
+    Use case ends.
 
-* 1b. The specified item is not in the inventory.
-    * 1b1. BogoBogo outputs an empty list.
+```
+</details>
 
-      Use case ends.
+<details markdown="block">
+  <summary>
+    <b>UC04 - Editing an Item</b>
+  </summary>
+  {: .text-delta }
 
-* 1c. User tries to find by 2 different fields at the same time.
-    * 1b1. BogoBogo notifies user that only one field can be inputted.
+```
+Precondition: BogoBogo is displaying the inventory.
+MSS:
+1. User requests to edit an item, specifying an item by index, with the fields and values to change.
+2. BogoBogo updates the fields of the item at the specified index with the new values given.
+   Use case ends.
 
-      Use case ends.
+Extensions:
+1a. The specified index does not point to any item.
+    1a1. BogoBogo notifies the user that the index is invalid.
+    Use case ends.
 
-**UC04 - Placing an Order**
+1b. User specified a new ID/name that already belongs to a different item. 
+    1b1. BogoBogo notifies the user of clashing IDs/names.
+    Use case ends.
 
-**Actor:** User
+1c.  User attempted to edit the count of an item 
+    1c1.  BogoBogo notifies the user that directly editing count is not supported.
+    Use case ends.
+```
+</details>
 
-**MSS**
+<details markdown="block">
+  <summary>
+    <b>UC05 - Clearing the Inventory</b>
+  </summary>
+  {: .text-delta }
 
+```
+MSS:
+1. User requests to clear the inventory.
+2. BogoBogo acknowledges the request and clears the inventory.
+   Use case ends.
+```
+</details>
+
+*Navigating the Inventory*{: .text-purple-000 .text-gamma }
+
+<details markdown="block">
+  <summary>
+    <b>UC06 - Finding an Item</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
+1. User searches for an item in the inventory by specifying possible id(s), name(s) or tag(s).
+2. BogoBogo finds all items in the inventory that matches any of the descriptors.
+   Use case ends.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC07 - Sorting the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+Precondition: BogoBogo is displaying the inventory.
+MSS:
+1. User requests to sort the inventory (either by name or count).
+2. BogoBogo sorts the inventory accordingly.
+   Use case ends.
+
+Extensions:
+1a. User specifies to sort by both name and count.
+    1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
+    Use case ends.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC08 - Listing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
+1. User requests to list out all items in the inventory
+2. BogoBogo lists out all items in inventory.
+   Use case ends.
+```
+
+</details>
+
+*Managing Orders*{: .text-purple-000 }
+
+<details markdown="block">
+  <summary>
+    <b>UC09 - Placing an Order</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
 1. User requests to start an order.
 2. BogoBogo creates an order and requests for item names and quantities.
 3. User adds an item into the order.
-4. BogoBogo saves item into the order.
-
+4. BogoBogo saves  the  item into the order.
    Step 3-4 is repeated until the user wishes to end the order.
-
 5. User requests to end entering item and place the order.
 6. BogoBogo transacts the order and updates inventory and transaction history.
-
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User is already in ordering mode
+    1a1. BogoBogo informs the user that the current mode is already ordering mode.
+    Use case resumes at step 3.
 
-* 3a. User adds an item that is not in the inventory.
-    * 3a1. BogoBogo notifies user that item is not found.
+3a. User adds an item that is not in the inventory.
+    3a1. BogoBogo notifies user that item is not found.
+    Use case resumes at step 3.
+    
+3b. There is an insufficient supply of added items in the inventory.
+    3b1. BogoBogo notifies user of the supply shortage.
+    Use case resumes at step 3.
+      
+3c. User did not specify count.
+    3c1. BogoBogo assumes count to be 1.
+    Use case resumes at step 4.
+    
+3d. The given id and name corresponds to 2 separate items in the inventory.
+    3d1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    3d2. User reenters the corrected details.
+    Use case resumes at step 4.
+    
+3e. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    3e1. BogoBogo notifies user of the mismatch.
+    3e2. User reenters the corrected details.
+    Use case resumes at step 4.
+    
+4a. User incorrectly added an item into the order.
+    4a1. User removes specified item from the order (UC10).
+    Use case resumes at step 3.
 
-      Use case resumes at step 3.
+5a. The order is empty.
+    5a1. BogoBogo notifies user that the order is empty and closes the order.
+    Use case ends.
+```
+</details>
 
-* 3b. There is an insufficient supply of added items in the inventory.
-    * 3a1. BogoBogo notifies user of the supply shortage.
+<details markdown="block">
+  <summary>
+    <b>UC10 - Removing an item from Order</b>
+  </summary>
+  {: .text-delta }
 
-      Use case resumes at step 3.
-
-* 4a. User incorrectly added an item into the order.
-    * 3a1. User removes specified item from the order (UC05).
-
-      Use case resumes at step 3.
-
-* 6a. The order is empty.
-    * 7a1. BogoBogo notifies user that the order is empty.
-
-      Use case ends.
-
-**UC05 - Remove an item from order**
-
-**Actor:** User
-
-**MSS**
-
+```
+Precondition: The user has started an order.
+MSS:
 1. User requests to remove the specified item from the order.
-2. User enters the item to remove.
-3. BogoBogo removes the item from the order.
-
+2. BogoBogo removes the item from the order.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. The specified item is not in the order
+    1a1 BogoBogo notifies user the specified item is not in the order.
+    Use case ends.
+          
+1b. User did not specify count.
+    1b1. BogoBogo assumes count to be 1.
+    Use case resumes at step 2.
+    
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity.
+    1c2. User reenters the corrected details.
+    Use case resumes at step 2.
+    
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
+```
 
-* 1a. There is no order created.
-    * 1a1. BogoBogo notifies user there is no order.
+</details>
 
-      Use case ends.
+<details markdown="block">
+  <summary>
+    <b>UC11 - Listing the current Order</b>
+  </summary>
+  {: .text-delta }
 
-* 2a. The item is specified in wrong format.
-    * 2a1. BogoBogo notifies user the item specification format is wrong.
-
-      Use case ends.
-
-* 3a. The specified item is not in the order
-    * 3a1. BogoBogo notifies user the specified item is not in the order.
-
-      Use case ends.
-
-**UC06 - Sorting**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to sort the inventory (either by name or count).
-2. BogoBogo sorts the inventory accordingly.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User specifies to sort by both name and count.
-    * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
-
-      Use case ends.
-
-**UC06 - Help**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to know what are the commands available.
-2. BogoBogo shows the commands available to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User specifies which command exactly he wants to know how to use.
-    * 1a1. BogoBogo notifies the user what that exact command does.
-
-      Use case ends.
-
-* 1b. User specifies an inexistent command.
-    * 1a1. BogoBogo notifies the user that the command does not exist, then proceed to display URL to userguide.
-
-      Use case ends.
-
-**UC07 - Remove certain amount of item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to remove certain amount of an item.
-2. User enters the item name and amount.
-3. BogoBogo removes the specified amount of that item.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The name and amount is specified in wrong format.
-    * 2a1. BogoBogo notifies user the format is wrong.
-
-      Use case ends.
-
-* 2b. There are multiple matching items in inventory.
-    * 2b1. BogoBogo lists out all the matching items and let user choose one.
-    * 2b2. User chooses the desired item.
-    * BogoBogo removes the specified amount of that item.
-
-      Use case ends.
-
-* 3a. The item is not in the inventory.
-    * 3a1. BogoBogo notifies user there is on such item.
-
-      Use case ends.
-
-* 3b. The specified amount is greater than what inventory has.
-    * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
-
-      Use case ends.
-
-**UC08 - Edit an item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to edit an item.
-2. User enters the item index, fields and new values to change.
-3. BogoBogo updates the fields of the item at the specified index with the new values given.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The edited item is a duplicate of another item in the inventory.
-    * 3a1. BogoBogo notifies user of the duplication.
-
-      Use case ends
-
-* 3b. The specified index is invalid.
-    * 3b1. BogoBogo notifies user the index is invalid.
-
-      Use case ends
-
-* 3c. The specified change of the field is invalid.
-    * 3b1. BogoBogo notifies user that the new value specified is invalid.
-
-      Use case ends
-
-**UC09 - Listing out inventory**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to list out all inventory
-2. BogoBogo lists out all items in inventory.
-
-   Use case ends
-
-**UC10 - Listing out order**
-
-**Actor:** User
-
-**MSS**
-
+```
+MSS:
 1. User requests to list out current order.
 2. BogoBogo lists out all items in current order.
+   Use case ends.
 
-   Use case ends
+Extensions:
+1a. There is currently no open order.
+    1a1. BogoBogo notifies user there is currently no open order.
+    Use case ends.
+```
 
-**Extensions**
+</details>
 
-* 2a. There is currently no order to list.
-    * 2a1. BogoBogo notifies user there is currently no order.
+<details markdown="block">
+  <summary>
+    <b>UC12 - Viewing Past Transactions</b>
+  </summary>
+  {: .text-delta }
 
-      Use case ends.
+```
+MSS:
+1. User requests to view list of past transactions.
+2. BogoBogo lists past transactions, each with an id.
+3. User requests to view a specific transaction's contents.
+4. BogoBogo opens up the specified transaction and displays its items.
+   Use case ends.
 
-**UC11 - Exit the application**
+Extensions:
+3a. The transaction specified does not exist.
+    3a1. BogoBogo notifies the user the transaction does not exist.
+    Use case ends.
+```
+</details>
 
-**Actor:** User
+*Others*{: .text-purple-000 .text-gamma }
 
-**MSS**
+<details markdown="block">
+  <summary>
+    <b>UC13 - Seeking Help</b>
+  </summary>
+  {: .text-delta }
 
+```
+MSS:
+1. User requests for guidance in using BogoBogo.
+2. BogoBogo shares a link to the user guide.
+   Use case ends.
+   
+Extensions:
+1a. User requests guidance for a specific command.
+    1a1. BogoBogo shares with the user a brief how-to guide.
+    Use case ends.
+
+1b. User requests guidance for an inexistent command.
+    1b1. BogoBogo notifies the user that the command does not exist.
+    Use case resumes at step 2.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC14 - Exiting the Application</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
 1. User requests to exit the application
-2. BogoBogo acknowledges the request and exits.
-
+2. BogoBogo exits.
    Use case ends.
-
-**UC12 - Clear the inventory**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to clear the inventory.
-2. BogoBogo acknowledges the request and clears the inventory.
-
-   Use case ends.
+```
+</details>
 
 ### Non-Functional Requirements
 
