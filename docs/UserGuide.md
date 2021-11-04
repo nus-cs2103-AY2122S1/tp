@@ -139,11 +139,11 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [cn/CASE_NUMBER] [sh/start:SHN_START_DAT
 
 Field (`FIELD_PREFIX`) | Description
 ------|------------------
-Name (`n/`) | <ul><li>Search is case-insensitive. e.g `hans` will match `Hans`</li><li>Full words will be matched e.g. `Han` will not match `Hans`</li><li>Name must be entered in the [valid format](#format-for-person-details)</li></ul>
-Phone number (`p/`) | <ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number must be a positive integer, minimally 1 digit long</li></ul>
-Case number (`cn/`) | <ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`</li><li>Case number must be entered in the [valid format](#format-for-person-details)</li></ul>
-SHN start date (`sh/start:`) | <ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`</li><li>SHN start date must be entered in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd)</li></ul>
-SHN end date (`sh/end:`) | <ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`</li><li>SHN end date must be entered in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd)</li></ul>
+Name (`n/`) |{::nomarkdown}<ul><li>Search is case-insensitive. e.g `hans` will match `Hans`</li><li>Full words will be matched e.g. `Han` will not match `Hans`</li><li>Name must be entered in the [valid format](#format-for-person-details)</li></ul>{:/}
+Phone number (`p/`) |{::nomarkdown}<ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number must be a positive integer, minimally 1 digit long</li></ul>{:/}
+Case number (`cn/`) |{::nomarkdown}<ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`</li><li>Case number must be entered in the [valid format](#format-for-person-details)</li></ul>{:/}
+SHN start date (`sh/start:`) |{::nomarkdown}<ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`</li><li>SHN start date must be entered in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd)</li></ul>{:/}
+SHN end date (`sh/end:`) |{::nomarkdown}<ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`</li><li>SHN end date must be entered in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd)</li></ul>{:/}
 
 Examples:
 * `find n/John` will match the following names: `john` and `John Doe` 
