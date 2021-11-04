@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,10 +15,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 import seedu.address.model.util.TaskStatusChecker;
 
 /**
@@ -130,10 +127,7 @@ public class MainWindow extends UiPart<Stage> {
      * by the selected {@code ListCell}.
      */
     @FXML
-    public void handleMouseClicked(ListView<Person> personListView) {
-        int selectedIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
-        String inputCommand = ViewTaskListCommand.COMMAND_WORD + " " + selectedIndex;
-
+    public void handleMouseClicked(String inputCommand) {
         try {
             executeCommand(inputCommand);
         } catch (ParseException | CommandException e) {
@@ -155,11 +149,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-
-        // Initialising mouse click properties for ListView<Person>.
-        ListView<Person> personListView = personListPanel.getPersonListView();
-        personListView.setOnMouseClicked(event -> handleMouseClicked(personListView));
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this);
 
         personListSplitPanel.getChildren().add(personListPanel.getRoot());
         setAnchorProperties(personListSplitPanel);

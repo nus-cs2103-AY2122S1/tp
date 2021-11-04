@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,11 +21,14 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
+    private MainWindow mainWindow;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, MainWindow mainWindow) {
         super(FXML);
+        this.mainWindow = mainWindow;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
@@ -47,6 +51,12 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
+            this.setOnMouseClicked(e -> {
+                if (!this.isEmpty()) {
+                    String inputCommand = ViewTaskListCommand.COMMAND_WORD + " " + (getIndex() + 1);
+                    mainWindow.handleMouseClicked(inputCommand);
+                }
+            });
         }
     }
 
