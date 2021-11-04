@@ -145,6 +145,17 @@ documentation.
 
 ### Member-Specific Features
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**
+* `NAME` specifies the name of the member.
+* Members with the same `NAME` are considered duplicates.
+* `TAG` specifies the tags associated with the member.
+* `NAME` and `TAG` only accept **alphanumeric characters(including spaces)**.
+* `PHONE` specifies the phone number of the member and only accept numbers that are
+**at least 3 digits long and at most 15 digits long**.
+</div>
+
 #### Adding a member: `addm`
 
 Adds a member to your members list.
@@ -152,8 +163,9 @@ Adds a member to your members list.
 Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
 
 * `DAY(S)` is an optional field indicating a list of days for which the member is available for that week
-* `DAY(S)` should be provided as numerical index, where `1` represents Monday, `2` represents Tuesday … and `7` represents
+* `DAY(S)` **must be provided as numerical index**, where `1` represents Monday, `2` represents Tuesday … and `7` represents
   Sunday
+* `DAYS` **must be separated by a single space** 1 2 3 …​
 * Members added without `DAY(S)` will have no available days by default
 * `TAG` is an optional field indicating the tags associated with the member
 
@@ -260,7 +272,7 @@ Examples:
 [Back to Table of Contents](#table-of-contents)
 
 #### Finding a member: `findm`
-If you are looking for specific members,`findm` lets you find and filter members based on any of the
+If you are looking for specific members, `findm` lets you find and filter members based on any of the
 specified field keywords.
 
 Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...`
@@ -398,8 +410,8 @@ All attendance data will be removed immediately after this command is executed. 
 
 #### Importing multiple members using a CSV file: `import`
 
-When you want to add or update the details of multiple members at once, you can import data from a comma-separated values
-file using `import`.
+When you want to add or update the details of multiple members at once, you can import data from a
+comma-separated values(CSV) file using `import`.
 
 Format: `import CSV_FILE_PATH`
 
@@ -412,7 +424,7 @@ Format: `import CSV_FILE_PATH`
 * `CSV_FILE_PATH` should be relative to the JAR file location
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there is a duplicate members(same name) being imported using the
+If there are duplicate members(same name) being imported using the
 CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**.
 </div>
 
@@ -628,13 +640,15 @@ Examples:
 * `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
   at index 2 in the displayed facility list on Monday :camera:
 
-![allocateExample](images/allocateExample.png)
+<p align="center">
+   <img src="images/allocateExample.png" height="500" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Exporting facility details and member allocation: `export`
 
-Exports facility details, and it's member allocation to a CSV file that you can share with
+Exports facility details, and it's member allocation to a comma-separated values(CSV) file that you can share with
 your CCA members.
 
 Format: `export`
@@ -725,7 +739,7 @@ JSON file `[JAR file location]/data/sportspa.json`. Though **not recommended**, 
 directly change the contents, *e.g a member's name*, in the data file, which will be reflected in SportsPA.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
+If changes made to the data file makes its format invalid, SportsPA will start with an empty data file at the next run.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
