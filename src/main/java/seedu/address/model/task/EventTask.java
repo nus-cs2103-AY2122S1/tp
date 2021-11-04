@@ -63,7 +63,8 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append("[EVENT] ")
+                .append(getName())
                 .append("\nEvent on: ")
                 .append(getTaskDate().toString())
                 .append("\nStatus: ")

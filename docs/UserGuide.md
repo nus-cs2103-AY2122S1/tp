@@ -415,23 +415,23 @@ Examples:
 
 * `deleteTask 1` removes the 1st task in the task list.
 
-### Marking a task as done: : `doneTask`
+### Marking a task as done: `doneTask`
 
-Mark the specified task from the list as complete, or mark it as pending.
+Mark the specified task(s) in the task list as completed or pending.
 
-Format: `doneTask INDEX [MORE INDEXES]`
+Format: `doneTask INDEX [MORE_INDEXES]`
 
-* If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
-* If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
 * The index refers to the index number shown in the task list.
 * The user is able to mark multiple tasks by providing multiple indexes.
-* The indexes must be a positive integer 1, 2, 3, …​
+* The indexes must be a positive integer 1, 2, 3, ...
 * Duplicate indexes are not accepted.
+* If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
+* If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
 
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed or pending.
 * `doneTask 1 3 4` marks the 1st, 3rd and 4th tasks in the task list as completed or pending.
-![markTaskDoneCommand visual](images/MarkTaskDoneCommand_UG_visual.PNG)
+![markTaskDoneCommand](images/markTaskDone.png)
 
 ### Clearing all entries from task list: `clearTasks`
 
