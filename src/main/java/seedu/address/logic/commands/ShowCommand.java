@@ -71,6 +71,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Index}.
      */
     public ShowCommand(Index index, Path savePath) {
+        requireNonNull(index);
         setIndex(index);
         setSavePath(savePath);
     }
@@ -79,6 +80,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Name}.
      */
     public ShowCommand(Name name, Path savePath) {
+        requireNonNull(name);
         setName(name);
         setSavePath(savePath);
     }
@@ -87,6 +89,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code ID}.
      */
     public ShowCommand(ID id, Path savePath) {
+        requireNonNull(id);
         setId(id);
         setSavePath(savePath);
     }
@@ -95,6 +98,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Assessment}.
      */
     public ShowCommand(Assessment assessment, Path savePath) {
+        requireNonNull(assessment);
         setAssessment(assessment);
         setSavePath(savePath);
     }
@@ -103,6 +107,7 @@ public class ShowCommand extends Command {
      * Constructor for a {@code ShowCommand} with given {@code Group}.
      */
     public ShowCommand(Group group, Path savePath) {
+        requireNonNull(group);
         setGroup(group);
         setSavePath(savePath);
     }

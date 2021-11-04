@@ -1,6 +1,7 @@
 package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,44 +28,24 @@ public class AssessmentStatistics {
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
 
     private final Assessment assessment;
-    private final Map<Bin, Integer> binCounts;
-    private int numScores = 0;
-    private double sumOfScores = 0.0;
 
     /**
      * Constructs a {@code AssessmentStatistics} with the specified {@code Assessment}.
      */
     public AssessmentStatistics(Assessment assessment) {
-        this(assessment, DEFAULT_BIN_SIZE);
-    }
-
-    /**
-     * Constructs a {@code AssessmentStatistics} with the specified {@code Assessment} and bin size.
-     */
-    public AssessmentStatistics(Assessment assessment, double binSize) {
         requireNonNull(assessment);
         requireNonNull(assessment.scores);
 
         this.assessment = assessment;
-
-        List<Bin> bins = createBins(binSize);
-        binCounts = new HashMap<>();
-        for (Bin b : bins) {
-            binCounts.put(b, 0);
-        }
-
-        for (Score score : assessment.scores.values()) {
-            addScoreToBin(score);
-            numScores++;
-            sumOfScores += score.getNumericValue();
-        }
     }
 
     /**
      * Creates a list of bins spanning from the minimum to maximum score, with each {@code Bin} having the specified
      * bin size.
      */
-    private static List<Bin> createBins(double binSize) {
+    public static List<Bin> createBins(double binSize) {
+        checkArgument(binSize > Score.MIN_SCORE && binSize <= Score.MAX_SCORE);
+
         List<Bin> bins = new ArrayList<>();
 
         double binLowestValue = Score.MIN_SCORE;
@@ -83,8 +64,8 @@ public class AssessmentStatistics {
     /**
      * Returns the {@code Bin} that the {@code Score} belongs in.
      */
-    private Bin getBin(Score score) {
-        for (Bin b : binCounts.keySet()) {
+    public static Bin getBinForScore(Collection<Bin> bins, Score score) {
+        for (Bin b : bins) {
             if (b.includesScore(score)) {
                 return b;
             }
@@ -99,15 +80,27 @@ public class AssessmentStatistics {
     /**
      * Adds the specified {@code Score} to its corresponding {@code Bin}.
      */
-    private void addScoreToBin(Score score) {
-        Bin binForScore = getBin(score);
+    public static void addScoreToBin(Map<Bin, Integer> binCounts, Score score) {
+        Bin binForScore = getBinForScore(binCounts.keySet(), score);
         binCounts.put(binForScore, binCounts.get(binForScore) + 1);
     }
 
     /**
      * Returns a distribution of scores for the assessment, with the bins in their string representations.
      */
-    private Map<String, Number> getScoreDistribution() {
+    public Map<String, Number> getScoreDistribution() {
+        Map<Bin, Integer> binCounts = new HashMap<>();
+
+        List<Bin> bins = createBins(DEFAULT_BIN_SIZE);
+
+        for (Bin b : bins) {
+            binCounts.put(b, 0);
+        }
+
+        for (Score score : assessment.scores.values()) {
+            addScoreToBin(binCounts, score);
+        }
+
         Map<String, Number> distribution = new TreeMap<>();
         binCounts.forEach((bin, count) -> distribution.put(bin.toString(), count));
         return distribution;
@@ -164,6 +157,12 @@ public class AssessmentStatistics {
      * Returns the mean score for the {@code Assessment}.
      */
     public double getMean() {
+        int numScores = 0;
+        double sumOfScores = 0.0;
+        for (Score score : assessment.scores.values()) {
+            numScores++;
+            sumOfScores += score.getNumericValue();
+        }
         return numScores == 0 ? Score.MIN_SCORE : sumOfScores / numScores;
     }
 

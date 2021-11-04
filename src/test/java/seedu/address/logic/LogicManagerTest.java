@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -92,6 +94,28 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getAddressBook() {
+        assertSame(logic.getAddressBook(), model.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBookFilePath() {
+        assertSame(logic.getAddressBookFilePath(), model.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getGuiSettings() {
+        assertSame(logic.getGuiSettings(), model.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        GuiSettings guiSettings = new GuiSettings(100, 100, 100, 100, 100);
+        logic.setGuiSettings(guiSettings);
+        assertSame(logic.getGuiSettings(), guiSettings);
     }
 
     /**
