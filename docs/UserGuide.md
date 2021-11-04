@@ -383,9 +383,9 @@ Examples :
 * `g 1 /create n:Artemis`
 
 
-#### _Adding notes to a group_ :
+#### _Adding notes to a group or subgroup_ :
 
-Adds notes on a group and saves the time when the note is added.
+Adds notes on a group or subgroup and saves the time when the note is added.
 
 Format: `group (INDEX) /note`<br>
 Advanced user Format: `group (INDEX) /n`
@@ -399,9 +399,9 @@ Examples :
 * `group 1 /note` will prompt a popup window where the user can edit the notes for group at index 1.
 * `g 1 /n`
 
-#### _Clearing notes of a group_ :
+#### _Clearing notes of a group or subgroup_ :
 
-Removes note of an existing group.
+Removes note of an existing group or subgroup.
 
 Format: `group (INDEX) /clearnote`<br>
 Advanced user Format:`g (INDEX) /cn`
