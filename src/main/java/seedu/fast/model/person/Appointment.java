@@ -7,7 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.util.DateUtil;
 
 /**
@@ -32,6 +34,8 @@ public class Appointment {
     private String date;
     private String time;
     private String venue;
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
 
     /**
      * Constructs an {@code Appointment}.
@@ -61,20 +65,40 @@ public class Appointment {
             return temp;
         }
         if (time.equals(NO_TIME)) {
-            try {
-                temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            temp = getConvertedDate(temp);
         } else {
-            try {
-                String source = date + " " + time;
-                temp = new SimpleDateFormat("dd MMM yyyy HHmm").parse(source);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            temp = getConvertedDateTime(temp);
         }
+        return temp;
+    }
 
+    /**
+     * Gets a Date object from the given string in the format of dd MMM yyyy HHmm.
+     * @param temp Maximum date
+     * @return A Date object
+     */
+    private Date getConvertedDateTime(Date temp) {
+        try {
+            String source = date + " " + time;
+            temp = new SimpleDateFormat("dd MMM yyyy HHmm").parse(source);
+        } catch (ParseException e) {
+            logger.info("-----Error parsing Date-----");
+            e.printStackTrace();
+        }
+        return temp;
+    }
+    /**
+     * Gets a Date object from the given string in the format of dd MMM yyyy
+     * @param temp Maximum date
+     * @return A Date object
+     */
+    private Date getConvertedDate(Date temp) {
+        try {
+            temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
+        } catch (ParseException e) {
+            logger.info("-----Error parsing Date-----");
+            e.printStackTrace();
+        }
         return temp;
     }
 
