@@ -15,6 +15,7 @@ Given below are my contributions to the project.
     * Creating UniqueTutorialClassList.
     * Modifying JSON file storage structure to accommodate the list of Tutorial Classes.
     * Modifying all relevant test cases and test case data accordingly.
+* **New Features Implemented**:
   * Adding Student Marks functionality
     * Creating Enumeration of Student Marks.
     * Adding a special list of student marks to each Student.
