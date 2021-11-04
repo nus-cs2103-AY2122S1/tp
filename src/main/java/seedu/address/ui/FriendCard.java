@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.friend.FriendName;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -58,11 +57,7 @@ public class FriendCard extends UiPart<Region> {
      * @return String with the friend's id and name.
      */
     private String formatFriendNameId(Friend friend) {
-        if (friend.getFriendName().equals(FriendName.DEFAULT_FRIEND_NAME)) {
-            return friend.getFriendId().toString();
-        } else {
-            return friend.getFriendId() + " (Name: " + friend.getFriendName().fullName + ")";
-        }
+        return friend.getFriendId().toString();
     }
 
     @Override
