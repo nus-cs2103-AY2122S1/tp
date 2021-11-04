@@ -55,8 +55,8 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
         try {
             // remove the prefix, then parse
             if (argMultimap.getValue(PREFIX_DASH_TIME).isPresent()) {
-                String trimmedArgs = args.replace(PREFIX_DASH_TIME.toString(), "").trim();
-                String parsedArg = parseDayOfWeekAndTime(trimmedArgs);
+                String timeInput = argMultimap.getValue(PREFIX_DASH_TIME).get();
+                String parsedArg = parseDayOfWeekAndTime(timeInput);
                 String[] parsedArgArray = parsedArg.split("-");
                 dayOfWeek = DayOfWeek.valueOf(parsedArgArray[0].toUpperCase());
                 time = LocalTime.parse(parsedArgArray[1], DateTimeFormatter.ofPattern("HH:mm"));
@@ -64,8 +64,8 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
             }
 
             if (argMultimap.getValue(PREFIX_DASH_DAY_SHIFT).isPresent()) {
-                String trimmedArgs = args.replace(PREFIX_DASH_DAY_SHIFT.toString(), "").trim();
-                String parsedArg = parseDayOfWeekAndSlot(trimmedArgs); // returns [day]-[slot]
+                String shiftInput = argMultimap.getValue(PREFIX_DASH_DAY_SHIFT).get();
+                String parsedArg = parseDayOfWeekAndSlot(shiftInput); // returns [day]-[slot]
                 String[] parsedArgArray = parsedArg.split("-");
                 dayOfWeek = DayOfWeek.valueOf(parsedArgArray[0].toUpperCase());
                 slotNum = Integer.parseInt(parsedArgArray[1]);
@@ -74,7 +74,6 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
             if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
                 dates = ParserUtil.extractTupleDates(argMultimap);
             }
-
         } catch (ParseException pe) {
             throw INVALID_VIEW_SHIFT_COMMAND_EXCEPTION;
         }

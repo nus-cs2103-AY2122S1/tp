@@ -23,7 +23,7 @@ public class SetRoleReqCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_ROLE + "kitchen-1 bartender-1\n"
             + COMMAND_WORD + " " + PREFIX_ROLE + "floor-3\n\n"
             + "Currently, the role requirements per shift are:\n"
-            + "%s";
+            + String.format("%s", RoleReqStorage.getRoleReqs());
 
     private final Set<String> roleReqList;
 

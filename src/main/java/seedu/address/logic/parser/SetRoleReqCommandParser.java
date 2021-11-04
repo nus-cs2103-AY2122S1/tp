@@ -6,10 +6,11 @@ import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class SetRoleReqCommandParser {
+public class SetRoleReqCommandParser implements Parser<SetRoleReqCommand> {
 
 
     /**
@@ -18,12 +19,13 @@ public class SetRoleReqCommandParser {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public SetRoleReqCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ROLE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ROLE) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(SetRoleReqCommand.getHelpMessage());
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SetRoleReqCommand.getHelpMessage()));
         }
 
         Set<String> roleReqList = ParserUtil.parseRoleRequirements(argMultimap.getAllValues(PREFIX_ROLE));
