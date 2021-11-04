@@ -177,9 +177,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
 
 
-* Managera cannot accept duplicate participants. A participant is considered duplicate if their attributes, name
-  and birthdate, are identical with those of an existing participant.
-* If a participant to be added shares identical name with an existing participant, but one of them lacks a 
+* Managera cannot accept duplicate participants. A participant is considered duplicate if their name
+  and birthdate are identical with those of an existing participant.
+* If a participant to be added shares an identical name with an existing participant, but one of them lacks a 
   birthdate, they are treated as two different participants. (The new participant will be added)
 
 Examples:
@@ -226,10 +226,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
   
 
-* If a participant is edited in a way such that their attributes, name and birthdate  
+* If a participant is edited in a way such that their new name and birthdate  
   would exactly match those of another existing participant, Managera would refuse to execute the command as it forbids 
   duplicate participants.
-* A participant is not considered duplicate if at least one of their attribute, name or birthdate is different.
+* A participant is not considered duplicate if either their name or birthdate is different.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com d/1999-10-09` - Edits the phone number, email address and birthdate of the 
