@@ -366,6 +366,6 @@ Emails should be of the format local-part@domain and adhere to the following con
 3. This is followed by a '@' and then a domain name. 
 4. The domain name is made up of domain labels separated by periods. 
 5. The domain name must:<br>
-   5.1. End with a domain label at least 2 characters long.
-   5.2. Have each domain label start and end with alphanumeric characters.
+   5.1. End with a domain label at least 2 characters long.<br>
+   5.2. Have each domain label start and end with alphanumeric characters.<br>
    5.3. Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
