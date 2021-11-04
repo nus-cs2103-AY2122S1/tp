@@ -223,7 +223,7 @@ Format: `tadd /n TASKNAME /d DATE_TIME /m MEMBER_INDEX [/m MORE_MEMBER_INDEX]…
 
 * `MEMBER_INDEX` **must be a positive integer** 1, 2, 3, …​
 * Tasks can be added to multiple members if there is more than one `MEMBER_INDEX` provided.
-* `DATE_TIME` must be of format: dd/MM/yyyy, and will be rounded. [More information](#id_date)
+* `TASK_DEADLINE` must be of format: dd/MM/yyyy HH:mm, and will be rounded. [More information](#id_date)
 * `MEMBER_INDEX` refers to the index number shown in the displayed member list.
 
 Examples:
@@ -283,7 +283,7 @@ Edits an existing task within Ailurus.
 Format: `tedit /t TASK_INDEX [/n TASK_NAME] [/d TASK_DEADLINE]`
 
 * `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `DATE_TIME` must be of format: dd/MM/yyyy, and will be rounded. [More information](#id_date)
+* `TASK_DEADLINE` must be of format: dd/MM/yyyy HH:mm, and will be rounded. [More information](#id_date)
 * Edits the task at the specified `TASK_INDEX`. The index refers to the index number shown in the displayed task 
   list.
 * At least one of the optional fields must be provided.
