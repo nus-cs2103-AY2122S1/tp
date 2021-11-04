@@ -50,5 +50,5 @@ Given below are my contributions to the project.
 
 * **Team tasks**:
   * Setting up the GitHub team org/repo + codecov
-  * General code enhancements: Renaming product, changing product icon
+  * General code enhancements: Renaming product, changing product icon, changing product image
   * Updating user/developer docs: user stories, use cases
