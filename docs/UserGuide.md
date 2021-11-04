@@ -219,7 +219,7 @@ Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Editing any fields of a member will automatically remove them from any facilities they were allocated to. If necessary, you can manually allocate the edited member
-back to the facility (see [Allocating a member to a facility](#allocating-a-member-to-a-facility-allocate)) or perform the `split` command again (see [Spltting members into facilities](#splitting-members-into-facilities-split))
+back to the facility (see [Allocating a member to a facility](#allocating-a-member-to-a-facility-allocate)) or perform the `split` command again (see [Splitting members into facilities](#splitting-members-into-facilities-split))
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -616,7 +616,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Exporting facility details and member allocation: `export`
+#### Exporting facility details and member allocations: `export`
 
 Export all facilities’ details and their allocation list to a CSV (comma-separated values) file so that
 you can share them with your members.
