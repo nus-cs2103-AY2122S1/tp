@@ -51,6 +51,9 @@ and TAs contacts within teams and tutorial groups. It is optimized for CLI users
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items in curly brackets indicate that one of the items should be chosen, with each item option separated using `|`.<br>
+e.g. `n/NAME {r/student|r/tutor}` can be used as `n/NAME r/student` or `n/NAME r/tutor`.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -108,6 +111,7 @@ Format: `edit INDEX [n/NAME] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTOR
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Role `r/` is optional but if used, the role chosen must be either that of student or tutor.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
@@ -132,7 +136,7 @@ Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/} KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find n/ Hans Bo` will return `Hans Gruber`, `Will Han` and `Bo Yang`
+* `find n/ Hans Bo` will return `Hans Gruber`, and `Bo Yang`
 * `find t/ friend` will return all the contacts with the tag `friend`
 * `find T/ 01` returns `Alex Yeoh`
 * `find t/ frien` returns `Alex Yeoh`, `Bernice Yu`
@@ -153,8 +157,8 @@ Format: `delete {INDEX | -a | -f}`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `find Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
+* `find n/ Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/ Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
 * `delete -a` deletes all entries in the address book.
 
 ### Bulk Tag Persons : `bulk_tag`
