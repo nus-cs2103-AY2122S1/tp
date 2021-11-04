@@ -16,13 +16,15 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicysummary";
 
+    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1).plusDays(1);
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
         int noOfExpiringPolicies = 0;
         for (Policy p : model.getFilteredPolicyList()) {
-            if (p.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1).plusDays(1))) {
+            if (p.isExpiringBefore(CUT_OFF_DATE)) {
                 noOfExpiringPolicies++;
             }
         }
