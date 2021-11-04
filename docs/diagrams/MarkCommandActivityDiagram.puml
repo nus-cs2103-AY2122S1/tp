@@ -6,19 +6,16 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command is valid with valid
-index/indices, with no duplicates])
+if () then ([command is valid with valid and
+ non-duplicated index/indices])
 
     if () then ([applicant(s) at all indices
   have not been marked])
-    :List of applicant(s) filtered
-    for those corresponding to given indices;
 
-    :Update state of filtered applicant(s)
-    to be marked;
+    :Update specified applicant(s) to be marked;
 
-    :GUI Result Display updated with
-    applicant(s) being marked;
+    :GUI Result Display updated with specified
+    applicant(s) being marked with Done;
 
     else ([else])
 

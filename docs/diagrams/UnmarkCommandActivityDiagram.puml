@@ -5,19 +5,15 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command is valid with valid
-index/indices, with no duplicates])
+if () then ([command is valid with valid and
+ non-duplicated index/indices])
 
     if () then ([applicant(s) at all indices
   have been marked])
-    :List of applicant(s) filtered
-    for those corresponding to given indices;
+    :Update specified applicant(s) to be unmarked;
 
-    :Update state of filtered applicant(s)
-    to be unmarked;
-
-    :GUI Result Display updated with
-    applicant(s) being unmarked;
+    :GUI Result Display updated with specified
+    applicant(s) being unmarked with Not Done;
 
     else ([else])
 
