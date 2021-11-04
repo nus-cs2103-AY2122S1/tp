@@ -37,10 +37,9 @@ public class EditLabCommand extends Command {
     public static final String MESSAGE_LAB_ALREADY_EXISTS = "%1$s already exists.";
     public static final String MESSAGE_LAB_NOT_EXISTS = "%1$s doesn't exist.";
     public static final String MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED =
-            "Kindly specify if you want to edit the lab number and/or the total score and what lab do you want to edit";
+            "Kindly specify if you want to edit the lab number and/or the total score.";
     public static final String MESSAGE_MISSING_LAB_TO_BE_EDITED =
             "Kindly specify the lab number that you would like to edit using the " + PREFIX_LAB_NUM + "flag.\n%1$s";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! ";
 
     private final LabNum newLabNum;
     private final LabTotal total;

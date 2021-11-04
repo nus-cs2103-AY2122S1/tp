@@ -39,7 +39,7 @@ public class EditLabCommandParserTest {
         // missing labNum prefix
         assertParseFailure(parser,
                 VALID_LAB_NO + NEW_LAB_NUM + LAB_TOTAL2,
-                MESSAGE_INVALID_FORMAT);
+                String.format(MESSAGE_INVALID_FORMAT, EditLabCommand.MESSAGE_USAGE));
     }
 
     @Test
