@@ -29,7 +29,11 @@ activate AddCommandParser
 AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse(" n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4")
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser: BUFFER_MESSAGE
+note right: arguments = " n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4"
+
+AddressBookParser -> AddCommandParser : parse(arguments)
 activate AddCommandParser
 
 AddCommandParser -> ArgumentTokenizer : tokenize()
