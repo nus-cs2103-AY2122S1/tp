@@ -8,7 +8,7 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyFast <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
+Class Fast
 Class ReadOnlyFast
 Class Model
 Class ModelManager
@@ -26,22 +26,23 @@ Class Tag
 Class Remark
 Class Appointment
 Class AppointmentCount
-
+Class InvestmentPlanTag
+Class PriorityTag
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyFast
+Fast .up.|> ReadOnlyFast
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyFast
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" Fast
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+Fast *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> "1"Name
 Person *--> "1"Phone
@@ -55,6 +56,9 @@ Person *--> "1" AppointmentCount
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+
+Tag <|-down- InvestmentPlanTag
+Tag <|-down- PriorityTag
 
 ModelManager -->"~* filtered" Person
 @enduml

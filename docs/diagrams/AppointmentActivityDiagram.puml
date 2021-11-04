@@ -10,14 +10,22 @@ title Fast Appointment Activity Diagram
 if () then ([recognised command])
     :Parse command;
     if () then ([is appointment-related])
-    :Create new appointment
-    (with respective data, time, venue);
-    :Save Fast to
-    fastStateList;
-    else ([other command])
-    endif
-else ([unknown command])
+            :Check User Input;
+            if () then ([all valid])
+            :Create new appointment with the
+            corresponding data, time, venue;
+            :Update Model;
+            :Save Fast to
+            fastStateList;
+            else ([1 invalid])
+            - Throw Exception
+            endif
+        else ([other command])
+        - Handled by the corresponding classes
+        endif
+else ([other command])
   -Throw exception
 endif
+- Display result / message
 stop
 @enduml

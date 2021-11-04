@@ -3,10 +3,10 @@ package seedu.fast.logic.parser;
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_INPUT;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_INPUT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_BOB;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_INPUT;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_INPUT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_BOB;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
@@ -28,7 +28,7 @@ public class AppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithoutAddition_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -37,8 +37,8 @@ public class AppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithAddition_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT_BOB
+                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT_BOB
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB));
@@ -48,8 +48,8 @@ public class AppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithTime_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT_BOB
+                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY));
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -58,7 +58,7 @@ public class AppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithVenue_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT_BOB
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB));
@@ -68,7 +68,7 @@ public class AppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithRepeatedFields_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT_BOB
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
@@ -86,7 +86,7 @@ public class AppointmentCommandParserTest {
         assertParseFailure(parser, "", expectedMessage);
 
         // no index, with date
-        assertParseFailure(parser, PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT, expectedMessage);
+        assertParseFailure(parser, PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT_BOB, expectedMessage);
 
         // with index, no date, no time, no venue
         assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased(), expectedMessage);

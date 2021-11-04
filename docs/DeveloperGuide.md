@@ -13,6 +13,16 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+Financial Advisor Smart Tracker (FAST), is a free and open-source desktop app for Financial Advisors to manage their contacts.
+FAST is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+This document is a Developer Guide written to help developers who wish to understand more about the design and implementation of FAST. 
+It explains the internal structure of FAST and how the different components in FAST work together to execute the different commands.
+We hope that this Developer Guide will help any developers who wish to contribute to FAST to have a better understanding of FAST.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -21,132 +31,155 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
+In this section, you will learn more about the design and structure of **FAST**.
+
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T09-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="300" />
+<br> *Figure 1: Architecture Diagram of FAST*
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+**FAST** is developed and build upon **AddressBook3**. We have decided to keep the 6 components used in **AddressBook3**
+but modify and enhance each component to fit the needs of **FAST**.
+The **Architecture diagram** given above explains the high-level design of FAST.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+There are the 6 major components of **FAST**:
+1. **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/MainApp.java). It is responsible for,
+   * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+   * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+2. [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+3. [**`UI`**](#ui-component): The UI of the **FAST**.
+4. [**`Logic`**](#logic-component): The command executor.
+5. [**`Model`**](#model-component): Holds the data of the **FAST** in memory.
+6. [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-The rest of the App consists of four components.
+Each of the four main components(*labelled 3-6*) (also shown in the diagram above),
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality 
+using the `LogicManager.java` class which follows the `Logic` interface. 
+Other components interact with a given component through its interface rather than the concrete class 
+(reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" width="300" />
+<br> *Figure 2: Components Managers of FAST*
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
-Each of the four main components (also shown in the diagram above),
-
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
-
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-
-<img src="images/ComponentManagers.png" width="300" />
+<br> *Figure 3: Architecture Sequence Diagram of FAST*
 
 The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+This section will explain the structure of the UI component.
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+**API**: [`Ui.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+![Structure of the UI Component](images/UiClassDiagram.png) 
+<br> *Figure 4: UI Class Diagram of FAST*
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+Our `UI` component uses the JavaFx UI framework. 
+The layout of these UI parts are defined in matching `.fxml` files that are in the [`src/main/resources/view`](https://github.com/AY2122S1-CS2103T-T09-4/tp/tree/master/src/main/resources/view) folder. 
+
+The UI consists of a `MainWindow` that is made up of parts such as:
+* `CommandBox`
+* `ResultDisplay`
+* `PersonListPanel`
+* `StatusBarFooter`
+* `HelpWindow`
+* `StatsWindow`
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component,
-
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+The `PersonCard` class will create new `ItemComponent` and `TagComponent` that will help to add and load the icons used in FAST.
+
+The `StatsWindow` will display a *pie chart* and a *brief analysis message*. 
+The data used in the *piechart* are obtained from the 'Person' object residing in the `Model` component, which is obtained from `StatsWindowData`. 
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+This section will explain the structure of the Logic component.
 
-Here's a (partial) class diagram of the `Logic` component:
+**API**: [`Logic.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/Logic.java)
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="550"/> 
+<br> *Figure 5: Logic Class Diagram of FAST*
+
+Here are the other classes in `Logic` (omitted from *Figure 5* above):
+<img src="images/ParserClasses.png" width="600"/> <br> *Figure 6: Parser Class Diagram of FAST*
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it uses the `FastParser` class to parse the user input.
+2. The `FastParser` will create a specific `XYZCommandParser` object to parse the arguments for the `XYZ` command.
+3. The `XYZCommandParser` will create the `XYZCommand` object.
+4. This results in a `Command` object  which is executed by the `LogicManager`.
+5. The `Command` object can communicate with the `Model` and update `Storage` when it is executed (e.g. to add a client).
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `LogicManager`.
+
+How the parsing works:
+* When called upon to parse a user command, the `FastParser` class creates an `XYZCommandParser` which uses the other classes shown above to parse the user command and create a `XYZCommand` object which the `FastParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<br> *Figure 7: Logic Sequence Diagram of FAST (Delete Command)*
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<img src="images/ParserClasses.png" width="600"/>
-
-How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
-
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+This section will explain the structure of the Model component.
 
-<img src="images/ModelClassDiagram.png" width="700" />
+**API**: [`Model.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/Model.java)
 
+<img src="images/ModelClassDiagram.png" width="700" /> 
+<br> *Figure 8: Model Class Diagram of FAST*
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores Fast data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="700" />
-
-</div>
-
 
 ### Storage component
+This section will explain the structure of the Storage component.
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API**: [`Storage.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
+<br> *Figure 9: Storage Class Diagram of FAST*
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both Fast data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `FastStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.fast.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,57 +187,218 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Sort feature
+<br>
+
+### Appointment feature
 
 #### Current Implementation
+Currently, the appointment feature supports 5 different type of command:
+1. `add appointment`
+2. `edit appointment` 
+3. `delete appointment` 
+4. `mark appointment` 
+5. `unmark appointment`
 
-The sort mechanism is facilitated by the inbuilt Collections::sort method.
-This is done by passing a custom comparator that implements the Comparator interface to the sort method.
-There are currently three custom comparators implemented in FAST:
-- `SortByName` -- Sorts the contacts alphabetically by name.
-- `SortByAppointment` -- Sorts the contacts chronologically by date.
-- `SortByPriority` -- Sorts the contacts by priority tags.
+This 5 features will allow users to be able to manage the appointments they have with their clients.
+All 5 features extends from the `abstract` `Command` class.  
+These 5 features help clients to manage their appointment by manipulating the `Appointment` and the `AppointmentCount` class.
+`add appointment`, `edit appointment` and `delete appointment` works similar to `add`, `edit` and `delete` feature.
+The table below summarises the purpose of the 5 different appointment commands.
 
-`SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
-`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
-the inbuilt `Date::compareTo` method.  <br>
-`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
-Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+| Command      | Command Word | Purpose |
+| ----------- | ----------- | ----- |
+| `add appointment` | `aa` | Adds a new appointment. |
+| `edit appointment` | `ea` | Edits an existing appointment. |
+| `delete appointment` | `da` | Delete an existing appointment.|
+| `mark appointment` | `ma` | Mark an appointment as done.|
+| `unmark appointment` | `ua` | Undo the marking of an appointment as done.|
 
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
+<br>
 
-Step 1. The user launches the application for the first time. <br>
-Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
-calls `FastParser::parseCommand` to parse the given input. <br>
-Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
-`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
-Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate 
-the state of our contacts. <br>
-Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
-to sort the list of persons by their name.<br>
+**Appointment**
+
+Managed by: [`Appointment.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/person/Appointment.java)
+
+This class contains the details of the appointment with a specific client.
+
+Data stored in an `Appointment` object:
+1) The `date` of an appointment in `dd-MMM-yyyy` format as a String.
+2) The `time` of an appointment in `HHmm` format as a String.
+3) The `venue` of an appointment has to be within 20 characters as a String.
+
+<br>
+
+**Appointment Count**
+
+Managed by: [`AppointmentCount.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/person/AppointmentCount.java)
+
+This class contains the number of completed / marked appointment with a specific client.
+
+Data stored in an `AppointmentCount` object:
+1) `count` (number) of completed appointment as an int.
+
+<br>
+
+**Add Appointment**
+
+Managed by: [`AppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/AppointmentCommand.java) 
+and [`AppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/AppointmentCommandParser.java)
+
+`Add apppointment` requires the user to input 4 fields (`index`, `date`, `time` and `venue`), 
+of which only 2 (`index` and `date`) are compulsory for FAST to be able to execute the command.
+
+`Add appointment` requires the `date` to be of the format `yyyy-mm-dd` and `time` to be of the format `HH:mm`.
+Additionally, the `date` entered by the user must be a date in the future (i.e. cannot be a date in the past).
+If the `date` and/or `time` input does not follow the required format, Fast will display an error message to the user.
+
+`AppointmentCommandParser::parse()` makes use of `ParserUtil::parseDateString()` and `ParserUtil::parseTimeString()` to check if the input `date` and `time` follows the format.
+If the input `date` and `time` passes the check, `ParserUtil::parseDateString()` and `ParserUtil::parseTimeString()` will then format the `date` and `time` to be `dd-MMM-yyyy` and `HHmm` respectively.
+The new `Appointment` object created by `AppointmentCommandParser::parse()` will receive the formatted `date` and `time` as its parameter.
+
+`Add appointment` prevents the user from adding another appointment if an appointment already exist for the specified user.
+`AppointmentCommand::execute()` checks if the current `Appointment` is an `empty` appointment and only allows the `AppointmentCommand` to be executed if it is `true`.
+
+<br>
+
+**Edit Appointment**
+
+Managed by: [`EditAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/EditAppointmentCommand.java)
+and [`EditAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/EditAppointmentCommandParser.java)
+
+`Edit Appointment` function similar to `Add Appointment` except that `date` field is no longer compulsory.
+The `EditAppointmentDescriptor` is included to help to duplicate and transfer over existing data that are not edited by the `ea` command.
+
+`EditAppointmentCommandParser::parse()` makes use of `EditAppointmentDescriptor::isAnyFieldEmpty()` to ensure that at least one of the 3 fields (excluding `index`) is entered.
+
+`Edit Appointment` prevents user from editing an appointment if an appointment does not exist yet. It uses the same mechanism as `add appointment` to do the check except that this time, 
+the `EditAppointmentCommand` will execute if the current `Appointment` does not equal to an `empty` appointment.
+
+<br>
+
+**Delete Appointment**
+
+Managed by: [`DeleteAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/DeleteAppointmentCommand.java)
+and [`DeleteAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/DeleteAppointmentCommandParser.java)
+
+`Delete appointment` only requires the user to specify the `index` parameter. 
+It deletes an appointment by creating a new `Appointment` object with empty `date`, `time` and `venue` to replace the current `Appointment` object.
+The new `Appointment` object is created in `DeleteAppointmentCommandParser::parse()`.
+
+`Delete Appointment` prevents user from deleting an appointment if an appointment does not exist yet. It uses the same mechanism as `edit appointment` to do the check.
+
+<br>
+
+**Mark Appointment**
+
+Managed by: [`MarkAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/MarkAppointmentCommand.java)
+and [`MarkAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/MarkAppointmentCommandParser.java)
+
+Similar to `Delete Appointment`, `Mark Appointment` only requires the user to specify the `index` parameter. 
+
+`Mark Appointment` prevents user from marking an appointment if an appointment does not exist yet. It uses the same mechanism as `edit appointment` to do the check.
+If it passes the check, `MarkAppointment::execute()` will make use of `AppointmentCount::incrementAppointmentCount()` to increase the count by 1.
+The existing `Appointment` object will be replaced by a new `Appointment` object with an empty `date`, `time` and `venue`.
+The new `Appointment` object is created in `MarkAppointmentCommandParser::parse()`. 
+
+<br>
+
+**Unmark Appointment**
+
+Managed by: [`UnmarkAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/UnmarkAppointmentCommand.java)
+and [`UnmarkAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/UnmarkAppointmentCommandParser.java)
+
+Similar to `Delete Appointment`, `Unmark Appointment` only requires the user to specify the `index` parameter.
+
+`Unmark Appointment` prevents user from marking an appointment if an appointment already exist. It uses the same mechanism as `add appointment` to do the check.
+If it passes the check, `UnmarkAppointment::execute()` will make use of `AppointmentCount::decrementAppointmentCount()` to decrease the count by 1.
+
+
+#### Usage Scenario
+
+**1**) The user launches the application for the first time and wants to add an appointment to a client in FAST.
+For example, the user input this command: `aa 1 d/2022-10-11 t/10:00 v/NUS`
+The initial state of the `Appointment` object present in the specified client `Person` object before the command is executed is shown below:
+
+![Appointment_Initial_State](images/AppointmentDefaultState.png)
+
+**2**) `LogicManager::execute()` will be called which will in turn calls `FastParser::parseCommand()` to parse the given input.
+`FastParser::parseCommand()` will determine that it is an add appointment command which will then call `AppointmentCommandParser::parse()`.
+
+**3**) Inside `AppointmentCommandParser::parse()`:
+* `ArgumentTokenizer::tokenize()` will be called to recognise the required prefixes for appointment feature.
+* `ParserUtil::parseIndex()`, `ParserUtil::parseDateString()`, `ParserUtil::parseTimeString()` and
+   `AddAppointmentCommandParser::checkVenue()` will be called to check and parse the input if it passes the check (for requirement). 
+* A new `Appointment` object with the input `date`, `time` and `venue` will be created as shown in the diagram below.
+
+    ![Appointment_Added_State](images/AppointmentAddedState.png)
+
+**4**) `AppointmentCommandParser::parse()` will return a new `AppointmentCommand` object that contains the index of the
+specified client and the new `Appointment` object.
+
+**5**)`LogicManager` then calls the method `AppointmentCommand::execute()`, which will attempt to add the new `Appointment`
+after verifying that no appointments had been created for the specified contact yet.
+
+**6**) Inside `AppointmentCommand::execute()`:
+* `Model::setPerson` will be called to update the contact details in the model.
+* `AppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed. 
+* Message and changes will be reflected afterwards.
+
+The sequence diagram below illustrates step 2 to step 6.
+
+![Appointment_Sequence_Diagram](images/AppointmentSequenceDiagram.png)
+
+**7**) Suppose that the user makes a mistake in the `date` of the appointment and he wants to change it.
+Example: `ea 1 d/2022-05-15`
+
+**8**) Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `EditAppointmentCommand` class and `EditAppointmentCommandParser` class instead.
+The diagram below shows the updated object diagram after the `ea` command is executed.
+
+![Appointment_Added_State_2](images/AppointmentAddedState2.png)
+
+**9a**) Suppose that the user cancels the appointment and wants to delete it using the command `da 1`.
+Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `DeleteAppointmentCommand` class and `DeleteAppointmentCommandParser` class instead.
+The update object diagram will be reverted back to the initial state (as shown in step 3).
+
+**9b**) Suppose that the user did not delete the appointment. Instead he wants to mark the appointment using the command `ma 1`.
+Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `MarkAppointmentCommand` class and `MarkAppointmentCommandParser` class instead.
+The diagram below shows the updated object diagram.
+
+![Appointment_Added_State_3](images/AppointmentAddedState3.png)
+
+**10**) Finally, suppose that the user mark the appointment (in step 9b) by accident and wants to unmark it using `ua 1`.
+Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `UnmarkAppointmentCommand` class and `UnmarkAppointmentCommandParser` class instead.
+The update object diagram will reflect the changes in the `AppointmentCount` object (decrementing count by 1), and in this case it will be similar to the object diagram shown in step 3 (since the count is 1 as shown in the diagram in step 9b).
+
+Given below is Activity Diagram for FAST Appointment procedure. It includes scenarios that are not mentioned in step 1 to step 10 above.
+
+![Appointment_Activity_Diagram](images/AppointmentActivityDiagram.png)
+
+<br> 
 
 #### Design Considerations
 
-**Aspect: How sort executes:**
+* **Alternative 1 (current choice):** Divide the appointment features into 5 sub-features.
+    * Pros:
+        1. Isolation of a single sub-feature to a specific command: more intuitive to use.
+        2. Reduces Coupling. One Appointment Command Class handles one type of operation.
+        3. Improvement for the command syntax. Less prefix required.
+        4. Improvement over `edit appointment` command: retains data fields not directly affected by the command.
+    * Cons:
+        1. More classes added, resulting in more lines of codes in the program.
+        2. More checks and testcases needed.
+        3. May have some very similar codes.
 
-* **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
-  * Pros: Easy to implement.
-  * Cons: May need additional attributes to compare.
+* **Alternative 2:** Combine all 5 sub-features into one appointment command.
+    * Pros:
+        1. Reduce the number of commands in the application: less to manage, easier to remember.
+    * Cons:
+        1. More prefixes required, more complex syntax: less intuitive to use. 
+        2. Less abstraction, more coupling and more bug-prone: The same command class and parser class will handle all 
+      the four different feature. 
+        3. Unnecessary code would be executed to check for the type of sub-features is called in the parser class.
 
-* **Alternative 2:** Implement a custom Sort method.
-  * Pros: May not need additional attributes
-  * Cons: Very complicated, may have performance issues if the sort is not efficient.
+<br>
 
-**Aspect: How SortByDate is implemented:**
-
-* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
-    * Pros: Easy to implement.
-    * Cons: Need to account for empty appointment dates.
-
-* **Alternative 2:** Compare dates in String.
-    * Pros: No need to convert the values to another type.
-    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
-    
 ### Find feature
 
 #### Current implementation
@@ -217,10 +411,14 @@ There are currently 4 custom predicates implemented in FAST:
 - `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
 - `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
 
-`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
-`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
-`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
-`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
+`NameContainsQueriesPredicate` implemented by running the person's name through a for-loop to see if any word starts with the query.
+`PriorityPredicate` implemented by running the person's tags through a for-loop and checking if any of them match the given priority.
+`TagMatchesKeywordPredicate` implemented by running the person's tags through a for-loop and checking if any of them match the given keyword.
+`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`. The person's remark is checked to see if it contains the given query.
+
+Each `Predicate` has a `test` method which will be called on every `Person` in the list to see if they fit the search.
+If the `test` method returns `true`, that `Person` will be displayed in the search results.
+![Find_Command_Class_Diagram](images/findcommandpredicates.png)
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 
@@ -228,131 +426,28 @@ Step 1. The user launches the application for the first time. <br>
 Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
 calls `FastParser::parseCommand` to parse the given input. <br>
 Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
-`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
-Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate 
+`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate` 
+containing a `List` of all the search queries (only "john" in this case) <br>
+Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate
 the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
 of the search.<br>
+
+![Find_Command_Sequence_Diagram](images/findcommandsequencediagram.png)
 
 #### Design Considerations
 
 **Aspect: How find executes:**
 
 * **Alternative 1 (current choice):** Use many `Predicate<Person` implementations.
-  * Pros: Easy to implement.
-  * Cons: For every type of find added, a new class must be made.
+    * Pros: Easy to implement.
+    * Cons: For every type of find added, a new class must be made.
 
 * **Alternative 2:** Implement a custom Find method.
-  * Pros: May be able to condense into 1 class
-  * Cons: Very complicated and difficult to implement.
+    * Pros: May be able to condense into 1 class
+    * Cons: Very complicated and difficult to implement.
 
-### Appointment feature
-
-#### Current Implementation
-The appointment status will be reflected on the right side of the contact status.
-Currently, the `appointment command` has 4 different sub-features: 
-
-1. `add appointment`
-2. `edit appointment` 
-3. `delete appointment` 
-4. `track completed appointment` 
-
-The implementation of `adding`, `editing` and `deleting` an appointment is fairly similar to the process of `adding`, 
-`editing` and `deleting` a contact. 
-
-`Adding appointment`: `date` field is compulsory. Parses the `date` string and `time` string by using the built-in 
-`LocalDate` parser. The `date` string and `time` string will then be formatted by built-in `DateTimeFormatter` to the 
-required format. Make use of `String::length` method to check for the character limit imposed on the `venue` field.
-Makes use of `String::equalsIgnoreCase` method to prevent user from adding appointment if it already exists.
-If all input data fields fulfill the requirements, a new `Appointment` object will be created to store the data, 
-which will be added to the `model`.
-
-`Edit appointment`: Similar to `Adding appointment`, except that `date` field is no longer compulsory. 
-Included a `EditAppointmentDescriptor` class to duplicate data fields that are not modified. 
-`EditAppointmentDescriptor::isAnyFieldEmpty` is implemented to ensure that at least 1 data field is being edited.
-Makes use of `String::equalsIgnoreCase` to prevent editing a non-existent appointment.
-If all input data fields fulfills the requirements, a new `EditAppointmentDescriptor` object will be created to store 
-the data, which will be used to update the `model`.
-
-`Delete appointment`: Makes use of `String::equalsIgnoreCase` to prevent deleting a non-existent appointment.
-`deletes` an appointment by creating a new `Appointment` object with empty `date`, `time` and `venue` field for the 
-specified contact in the `model`.
-
-`Track Completed Status`: Makes use of the `AppointmentCount` class to keep track of the number of completed appointment 
-with the specified contact. `AppointmentCount` will be increased by 1 each time the user enters the command.
-
-Below is an example usage scenario (`adding` / `editing`):
-1. The user launches the application for the first time.
-2. The user inputs `appt 1 d/2021-10-11 t/10:00 v/NUS` to add an appointment (on 11th October 2021, 10.00am at NUS) with 
-the first listed contact.
-3. This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
-4. `FastParser::parseCommand` will determine that it is an add appointment command.
-5. `FastParser::parseCommand` will call `AppointmentCommandParser::parse`.
-   1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-   2. `ParserUtil::parseIndex`, `ParserUtil::parseDateString`, `ParserUtil::parseTimeString` and 
-   `ParserUtil::parseVenueString` will be called to check and parse the input if it passes the check (for requirement).
-   3. A new `Appointment` object with the input `date`, `time` and `venue` will be created.
-6. `AppointmentCommandParser::parse` will return a new `AppointmentCommand` object that contains the position of the 
-specified contact and the `Appointment` object. 
-7. `LogicManager` then calls the method `AppointmentCommand::execute`, which will attempt to add the new `Appointment` 
-after verifying that no appointments had been created for the specified contact yet.
-   1. `Model::setPerson` will be called to update the contact details in the model.
-   2. `AppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed.
-   3. Message and changes will be reflected afterwards.
-   
-(`editing appointment` will follow a similar logic)
-
-Below is an example usage scenario (`deleting`):
-1.The user inputs `dappt 1` to delete an appointment with the first listed contact.
-2.This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
-3.`FastParser::parseCommand` will determine that it is a delete appointment command.
-4.`FastParser::parseCommand` will call `DeleteAppointmentCommandParser::parse`.
-    1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-    2. `ParserUtil::parseIndex`, will be called to check and parse the input if it passes the check (for requirement).
-    3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
-5.`DeleteAppointmentCommandParser::parse` will return a new `DeleteAppointmentCommand` object that contains the position of the
-   specified contact and the `Appointment` object.
-6.`LogicManager` then calls the method `DeleteAppointmentCommand::execute`, which will attempt to add the new `Appointment`
-   after verifying that an appointment exists (previously) for the specified contact.
-    1. `Model::setPerson` will be called to update the contact details in the model.
-    2. Success message and changes will be reflected afterwards.
-
-Below is an example usage scenario (`tracking completed appointment`):
-1. The user inputs `done 1` to delete an appointment with the first listed contact. 
-2. This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
-3. `FastParser::parseCommand` will determine that it is a mark appointment command.
-4. `FastParser::parseCommand` will call `MarkAppointmentCommandParser::parse`. 
-   1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-   2. `ParserUtil::parseIndex`, will be called to check and parse the input if it passes the check (for requirement).
-   3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
-5. `MarkAppointmentCommandParser::parse` will return a new `MarkAppointmentCommand` object that contains the position of the
-specified contact and the `Appointment` object. 
-6. .`LogicManager` then calls the method `MarkAppointmentCommand::execute`, which will attempt to increment the 
-7. `appointment count` by 1 through `AppointmentCount::incrementAppointmentCount` and updates the new `Appointment`
-after verifying that an appointment exists (previously) for the specified contact.
-   1. `Model::setPerson` will be called to update the contact details in the model.
-   2. `MarkAppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed.
-   3. Success message and changes will be reflected afterwards.
-
-#### Design Considerations
-
-* **Alternative 1 (current choice):** Divide the appointment features into 4 sub-features.
-    * Pros:
-        1. Isolation of a single sub-feature to a specific command: more intuitive to use.
-        2. Improvement for the command syntax. Less prefix required.
-        3. Improvement over `edit appointment` command: retains data fields not directly affected by the command.
-    * Cons:
-        1. More classes added, resulting in more lines of codes in the program.
-        2. More checks and testcases needed.
-
-* **Alternative 2:** Combine all 4 sub-features into one appointment command.
-    * Pros:
-        1. Reduce the number of commands in the application: less to manage, easier to remember.
-    * Cons:
-        1. More prefixes required, more complex syntax: less intuitive to use. 
-        2. Less abstraction, more coupling and more bug-prone: The same command class and parser class will handle all 
-      the four different feature. 
-        3. Unnecessary code would be executed to check for the type of sub-features is called in the parser class.
+<br>
 
 ### Help Window
 
@@ -443,6 +538,142 @@ To address to cons of our implementation, we decided to compromise by still open
 valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
 window to the default page.
 
+<br>
+
+### Multiple Delete feature
+
+#### Current Implementation
+
+Managed by: [`DeleteCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/DeleteCommand.java)
+and [`DeleteCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/DeleteCommandParser.java)
+
+The `multiple delete` feature built on the existing `delete` feature. With the introduction of `multiple delete`, 
+the `DeleteCommand` class is designed to handle both types of delete. 
+`DeleteCommand::isSingleDelete()` and `DeleteCommand::executeSingleDelete()` handles the scenario of deleting just one client.
+`DeleteCommand::isMultipleDelete()` and `DeleteCommand::executeMultipleDelete()` handles the scenario of deleting multiple client.
+
+`Multiple delete` allows user to delete up to 10 clients in one go. 
+
+Duplicated and out of bound indexes are not allowed. If these indexes are detected,
+the command will not be executed. `HashSet` is used to check for duplicates in the extracted indexes.
+The indexes will also be sorted in descending order to check for any out of bound indexes.
+
+Currently, `multiple delete` allows 2 different format of user input:
+1) `del INDEX...`
+2) `del INDEX-INDEX`
+
+To handle this 2 types of scenario, the `DeleteCommandParser::isRangeInput()` is implemented to determine whether the user input follows format 2.
+`DeleteCommandParser::isRangeInput()` makes use of `DeleteCommandParser::CountDash()` to ensure that the input is a valid input that contains only one dash.
+On top of checking the number of dashes, it also ensures that the length of the input is at least 3 after all whitespaces have been removed.
+The end index must be greater than or equals to the start index. If the end index is equals to the start index, it will be treated as a `single delete`.
+After validation, `DeleteCommandParser::parseRangeInput()` will extract all the indexes that the user wish to delete and create a new `DeleteCommand`.
+The indexes are generated using a loop, starting from the first index, slowly incrementing by 1 until it reaches the end index.
+As for format 1, the indexes are extracted from the user input by breaking up the input between the whitespaces.
+
+The activity diagram below shows the flow of a multiple delete command.
+![Multiple_Delete_Activity_Diagram](images/MultipleDeleteActivityDiagram.png)
+
+#### Usage Scenario
+
+**1**) The user enters this command `del 1-5` into FAST.
+
+**2**) `LogicManage::execute()` will be called which will in turn call `FastParser::parseCommand()`
+
+**3**) `FastParser::ParseCommand()` will determine that it is a delete command and it will call the `DeleteCommandParser::parse()`
+
+**4**) Inside `DeleteCommandParser::parse()`:
+ * `DeleteCommandParser::isRangeInput()` will check if the user input contains exactly 1 dash and if the length is at least 3, after removing all the whitespaces. The result will be `true`
+ * `DeleteCommandParser::spiltRangeInput()` will parse the input and extract out the start index and the end index.
+ * `DeleteCommandParser::parseRangeInput()` will generate all the indexes in between the start and end index and return a new `DeleteCommand` object.
+
+**5**) `LogicManager` will call `DeleteCommand::execute()`.
+
+**6**) Inside `DeleteCommand::execute()`:
+ * It will check if the length of the Index array is more than 10 or more than the number of clients that FAST currently has.
+ * After validation, `DeleteCommand::isMultipleDelete()` will determine that it is a multiple delete.
+ * `DeleteCommand::sortOrder()` will sort the indexes in descending order.
+ * `DeleteCommand::getInvalidIndex()` will traverse through the Index array to collate a list of invalid index.
+ * `DeleteCommand::checkIndex()` will check and determine that there is no invalid index.
+ * `DeleteCommand::checkDuplicates()` will check and determine that there is no duplicated index.
+ * `DeleteCommand::executeMultipleDelete()` will start to delete the 5 clients in a for loop through `Model::deletePerson()`.
+ * Success message will be displayed afterwards.
+
+The sequence diagram below shows step 1 to step 6 mentioned above.
+![Multiple_Delete_Sequence_Diagram](images/MultipleDeleteSequenceDiagram.png)
+
+
+#### Design Consideration
+**Alternative 1 (current choice):** Execute multiple delete in descending order of indexes.
+* Pros:
+  1. Detects out of bound index first.
+
+* Cons:
+  1. Have to introduce another method to do the sorting.
+  2. Slower time as the index array needs to be sorted first.
+
+**Alternative 2:** Execute multiple delete in the order of indexes input by user.
+* Pros:
+    1. Faster process, do not need to sort.
+
+* Cons:
+    1. More bug-prone, have to account for the differences between the currently deleted index and the to-be deleted index as the model updates after each delete, hence the index may not be the same as what the user has input.
+    2. Will delete contacts until the first invalid index is detect, might be confusing for the user.
+
+<br>
+
+### Sort feature
+
+#### Current Implementation
+
+The sort mechanism is facilitated by the inbuilt Collections::sort method.
+This is done by passing a custom comparator that implements the Comparator interface to the sort method.
+There are currently three custom comparators implemented in FAST:
+- `SortByName` -- Sorts the contacts alphabetically by name.
+- `SortByAppointment` -- Sorts the contacts chronologically by date.
+- `SortByPriority` -- Sorts the contacts by priority tags.
+
+`SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
+`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
+the inbuilt `Date::compareTo` method.  <br>
+`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
+Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
+`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
+Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
+to sort the list of persons by their name.<br>
+
+#### Design Considerations
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
+    * Pros: Easy to implement.
+    * Cons: May need additional attributes to compare.
+
+* **Alternative 2:** Implement a custom Sort method.
+    * Pros: May not need additional attributes
+    * Cons: Very complicated, may have performance issues if the sort is not efficient.
+
+**Aspect: How SortByDate is implemented:**
+
+* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
+    * Pros: Easy to implement.
+    * Cons: Need to account for empty appointment dates.
+
+* **Alternative 2:** Compare dates in String.
+    * Pros: No need to convert the values to another type.
+    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
+
+<br>
+
 ### Statistics window
 
 #### Current Implementation
@@ -483,6 +714,8 @@ easily understood, yet is able to convey the essence of the data to the user. Ot
 thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
 piechart to help users better understand the data and provide a more complete statistic.
 
+
+<br>
 
 ### Tagging feature
 
@@ -607,7 +840,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Financial Advisor Smart Tracker (FAST)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add Contact**
+#### Use case: UC01 - Add Contact
 
 **MSS**
 
@@ -625,7 +858,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC02 - Delete Contact**
+#### Use case: UC02 - Delete Contact
 
 **MSS**
 
@@ -643,7 +876,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC03 - Edit Contact**
+#### Use case: UC03 - Edit Contact
 
 **MSS**
 
@@ -669,7 +902,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC04 - Add a remark**
+#### Use case: UC04 - Add a remark
 
 **MSS**
 
@@ -701,7 +934,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC05 - Find Contact by name**
+#### Use case: UC05 - Find Contact by name
 
 **MSS**
 
@@ -724,7 +957,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC06 - List Contacts**
+#### Use case: UC06 - List Contacts
 
 **MSS**
 
@@ -739,7 +972,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC07 - Add Appointment**
+#### Use case: UC07 - Add Appointment
 
 **MSS**
 
@@ -767,7 +1000,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC08 - Delete Appointment**
+#### Use case: UC08 - Delete Appointment
 
 **MSS**
 
@@ -789,7 +1022,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC09 - Edit Appointment**
+#### Use case: UC09 - Edit Appointment
 
 **MSS**
 
@@ -817,12 +1050,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Update Completed Appointment**
+#### Use case: UC10 - Mark Appointment
 
 **MSS**
 
 1. User requests to list persons (UC06)
-2. User requests to update a completed appointment.
+2. User requests to mark an appointment.
 3. FAST displays a message indicating success.
 4. FAST displays the new contact below.
 
@@ -832,15 +1065,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid.
     * 2a1. FAST shows an error message.
-    * 2a2. FAST shows an example of delete appointment command to user.
+    * 2a2. FAST shows an example of mark appointment command to user.
 
 * 2b. No appointment scheduled yet.
     * 2b1. FAST shows an error message.
 
       Use case ends.
-      
 
-**Use case: UC11 - Sort contacts**
+
+#### Use case: UC11 - Unmark Appointment
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to unmark an appointment.
+3. FAST displays a message indicating success.
+4. FAST displays the new contact below.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of unmark appointment command to user.
+
+* 2b. Appointment already exist.
+    * 2b1. FAST shows an error message.
+
+      Use case ends.
+
+
+#### Use case: UC12 - Sort contacts
 
 **MSS**
 
@@ -856,8 +1112,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The list is empty.
       Use case ends.
-      
-**Use case: UC12 - Find Contact by priority**
+
+#### Use case: UC13 - Find Contact by priority
 
 **MSS**
 
@@ -879,8 +1135,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. FAST displays a message to inform user no contacts with the given priority were found.
 
       Use case ends.
-      
-**Use case: UC13 - Find Contact by tag**
+
+#### Use case: UC14 - Find Contact by tag
 
 **MSS**
 
@@ -896,8 +1152,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. FAST shows an example of find command.
 
       Use case ends.
-      
-**Use case: UC14 - Find Contact by remark**
+
+#### Use case: UC15 - Find Contact by remark
 
 **MSS**
 
@@ -920,7 +1176,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC15 - Help command**
+#### Use case: UC16 - Help command
 
 **MSS**
 
@@ -930,9 +1186,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension**
 * 1a. There is already a help window opened.
     * 1a1. FAST focuses on the existing help window. Use case ends.
-    
 
-**Use case: U16 - Statistics window**
+
+#### Use case: U17 - Statistics window
 
 **MSS**
 
@@ -942,9 +1198,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension**
 * 1a. There is already a stats window opened.
     * 1a1. FAST updates and focuses on the existing help window. Use case ends.
-    
 
-**Use case: UC17 - Edit tags of a contact**
+
+#### Use case: UC18 - Edit tags of a contact
 
 **MSS**
 
@@ -1041,22 +1297,220 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a Client
 
-1. Deleting a person while all persons are being shown
+1. Adds a new Client to FAST.
+   1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Client added must not be a duplicated client.
+   
+   2. **Test case**: `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`<br>
+      **Expected**: Adds a client with name `Matthew`, phone `98523146`, email `Matt@example.com` and address `Seletar Lane 12`. Success message with details of the newly added client will be shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   3. **Test case**: `add n/Matthew`<br>
+      **Expected**: No client added. Error message is shown.
+   
+   4. **Other incorrect add commands to try**: `add n/Matthew p/98523146... e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew... p/98523146 e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt...@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12...` (where ... represents string that exceeds the character limit). <br> 
+      **Expected**: Similar to previous (in Point 3).
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+<div markdown="span" class="alert alert-primary">
+:information: 
+Character limit:
+1) Name - 0 to 50 characters
+2) Phone - 3 to 20 digits
+3) Email - max 100 characters (at least 2 for domain portion, before @ symbol)
+4) Address - max 100 characters
+</div>
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Editing a Client
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Edits an existing Client in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
 
-1. _{ more test cases …​ }_
+    2. **Test case**: `edit 1 n/Mattias`<br>
+       **Expected**: Edits the name of the first client in the displayed list. Success message with details of the edited client is shown.
+   
+    3. **Test case**: `edit n/Mattias`<br>
+       **Expected**: No client added. Error message is shown.
+
+    4. **Other incorrect edit commands to try**: `edit 1 n/ `, `edit 1 p/11`, `edit 1 e/mattias@u` <br>
+       **Expected**: Similar to previous (in Point 3).
+
+### Finding a Client
+
+#### Finding by name
+1. Finding a client by their name in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find john`<br>
+       **Expected**: All clients with the name "John" or whose names start with "John" are displayed. Success message with details of
+       search is shown.
+       
+    3. **Test case**: `find `
+       **Expected**: No search results are displayed. Error message is shown.
+
+#### Finding by priority
+1. Finding a client by their priority tag in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find pr/high`<br>
+       **Expected**: All clients with a "HighPriority" tag are displayed. Success message with details of search is shown.
+       
+    3. **Test case**: `find pr/friend`
+       **Expected**: No search results are displayed. Error message is shown.
+       
+    4. **Other incorrect find commands to try**: `find pr/`, `find pr/    `
+       **Expected**: Similar to previous (in Point 3).
+       
+#### Finding by tag
+1. Finding a client by their tag in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find t/friend`<br>
+       **Expected**: All clients with a "friend" tag are displayed. Success message with details of search is shown.
+       
+    3. **Test case**: `find t/`
+       **Expected**: No search results are displayed. Error message is shown.
+       
+    4. **Other incorrect find commands to try**: `find t/    `
+       **Expected**: Similar to previous (in Point 3).
+       
+#### Finding by remark
+1. Finding a client by their tag in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+    
+    2. **Test case**: `find r/likes to eat`<br>
+       **Expected**: All clients with remarks containing "likes to eat" are displayed. Success message with details of search is shown.
+       
+    3. **Test case**: `find r/`
+       **Expected**: No search results are displayed. Error message is shown.
+       
+    4. **Other incorrect find commands to try**: `find r/    `
+       **Expected**: Similar to previous (in Point 3).
+
+### Deleting a Client
+
+#### Single delete
+
+1. Deleting a client while all clients are being shown
+
+   1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list.
+
+   1. **Test case**: `del 1`<br>
+      **Expected**: First contact is deleted from the list. Success message with details of the deleted contact shown in the status message.
+
+   1. **Test case**: `del 0`<br>
+      **Expected**: No person is deleted. Error message displayed.
+
+   1. **Other incorrect delete commands to try**: `del`, `del x`(where x is larger than the list size)<br>
+      **Expected**: Similar to previous (in Point 3).
+
+#### Multiple delete
+
+1. Deleting multiple clients using range input while all clients are being shown
+   1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list. Argument is valid.
+   
+   2. **Test case**: `del 1-3`<br>
+      **Expected**: First, second and third contacts are deleted from the list. Success message showing number of contacts deleted is shown .
+   
+   3. **Test case**: `del 3-1`<br>
+      **Expected**: No client is deleted. Error message displayed.
+   
+   4. **Other incorrect delete commands to try**: `del`, `del 1-`, `del 1-x`(where x is larger than the list size)<br>
+      **Expected**: Similar to previous (in Point 3).
+   
+2. Deleting multiple clients using several indexes input while all clients are being shown
+    1. **Prerequisites**: List all clients using the `list` command. Multiple clients in the list. Argument is valid.
+
+    2. **Test case**: `del 1 3 5`<br>
+       **Expected**: First, third and fifth contacts are deleted from the list. Success message showing number of contacts deleted is shown .
+
+    3. **Test case**: `del 1 0 `<br>
+       **Expected**: No client is deleted. Error message displayed.
+
+    4. **Other incorrect delete commands to try**: `del`, `del 1 x 2`(where x is larger than the list size)<br>
+       **Expected**: Similar to previous.
+
+### Adding a remark
+
+1. Adds a remark to an existing Client in FAST.
+    1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
+
+    2. **Test case**: `rmk 1 r/He loves to sleep.`<br>
+       **Expected**: Add a remark `He loves to sleep` to the first client in the displayed list. Success message with details of the client and the new remark is shown.
+
+    3. **Test case**: `rmk 1 r/`<br>
+       **Expected**: Removes the remark of the first client in the displayed list. Success message with details of the client and an empty remark is shown.
+    4. **Test case**: `rmk 1`<br>
+       **Expected**: No remark added. Error message is shown.
+   
+    5. **Other incorrect remark commands to try**: `rmk r/ `, `rmk 1 r/remark...`(where remark... represents a remark longer than 45 characters) <br>
+       **Expected**: Similar to previous (in Point 4).
+
+### Appointment Feature
+
+#### Adding an appointment
+1. Adds a new appointment to FAST
+   1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment does not exist for the specified client yet.
+   
+   2. **Test Case**: `aa 1 d/2030-05-15 t/07:00 v/NUS` <br>
+   **Expected**: Adds an appointment to the first client in the displayed list with date `15 May 2030`, time `0700hrs` and venue `NUS`. Success message with details of the client name and appointment added is shown.
+   
+   3. **Test Case**: `aa 1 v/NUS` <br>
+      **Expected**: No appointment added. Error message displayed.
+   
+   4. **Other invalid commands to try**: `aa d/2023-05-15`, `aa 1 d/2019-05-15`,  `aa 1 d/2023-15-05`, `aa 1 d/2023-05-15 t/0700`, `aa y d/2023-05-15`(where y is an index with an appointment), `aa 1 v/venue...`(where venue... is longer than 20 characters) <br>
+      **Expected**: Similar to previous testcase (in Point 3).
+
+#### Editing an appointment
+1. Edits an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
+   
+    2. **Test Case**: `ea 1 d/2030-12-16 t/17:00 v/SOC` <br>
+       **Expected**: Edits the appointment of the first client in the displayed list. Changes the date to `16 Dec 2030`, time to `1700hrs` and venue to `SOC`. Success message with details of the client name and edited appointment is shown.
+   
+    3. **Test Case**: `ea 1` <br>
+       **Expected**: No appointment edited. Error message displayed.
+   
+    4. **Other invalid commands to try**: `ea d/2023-12-16`, `ea 1 d/2019-12-16`,  `ea 1 d/2023-16-12`, `ea 1 d/2023-12-16 t/1700` `ea y v/SOC`(where y is an index with no appointment), `ea 1 v/venue...`(where venue... is longer than 20 characters)<br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
+#### Deleting an appointment
+1. Deletes an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
+
+    2. **Test Case**: `da 1` <br>
+       **Expected**: Deletes the appointment of the first client in the displayed list. Success message with client name is shown.
+   
+    3. **Test Case**: `da 0` <br>
+       **Expected**: No appointment deleted. Error message displayed.
+   
+    4. **Other invalid commands to try**: `da`, `da x`(where x is larger than the list size) <br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
+#### Marking an appointment
+1. Marks an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment exists for the specified client yet.
+   
+    2. **Test Case**: `ma 1` <br>
+       **Expected**: Marks and deletes the appointment of the first client in the displayed list. Appointment count is incremented by 1. Success message with details of the client name and edited appointment is shown.
+   
+    3. **Test Case**: `ma 0` <br>
+       **Expected**: No appointment marked. Error message displayed.
+   
+    4. **Other invalid commands to try**: `ma`, `ma x`(where x is larger than the list size), `ma y`(where y is an index with no appointment). <br>
+       **Expected**: Similar to previous testcase (in Point 3).
+
+#### Unmarking an appointment
+1. Umarks an existing appointment in FAST
+    1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment does not exist for the specified client yet.
+   
+    2. **Test Case**: `ua 1` <br>
+       **Expected**: Unmarks the appointment of the first client in the displayed list. Appointment count is decremented by 1. Success message with client name is shown.
+   
+    3. **Test Case**: `ua 0` <br>
+       **Expected**: No appointment unmarked. Error message displayed.
+   
+    4. **Other invalid commands to try**: `ua`, `ua x`(where x is larger than the list size), `ua y`(where y is an index with an appointment). <br>
+       **Expected**: Similar to previous testcase (in Point 3).
 
 ### Saving data
 

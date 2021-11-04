@@ -8,6 +8,7 @@ import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFastSetThree;
 
 import org.junit.jupiter.api.Test;
 
@@ -147,6 +148,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_multipleIndexExceedLimitUnfilteredList_throwsCommandException() {
+        // Model with more than 10 people
+        Model newModel = new ModelManager(getTypicalFastSetThree(), new UserPrefs());
+
         Index[] array = new Index[11];
         for (int i = 0; i < 11; i++) {
             array[i] = Index.fromOneBased(i + 1);
@@ -154,7 +158,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(array);
         String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT);
-        assertCommandFailure(deleteCommand, model, expectedMessage);
+        assertCommandFailure(deleteCommand, newModel, expectedMessage);
     }
 
     @Test
@@ -168,7 +172,7 @@ public class DeleteCommandTest {
     public void execute_invalidMultipleIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON, INDEX_FIRST_PERSON});
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_FAILED_LARGER_THAN_CONTACTS);
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 }

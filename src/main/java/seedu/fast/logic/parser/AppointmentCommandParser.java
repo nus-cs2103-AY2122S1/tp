@@ -34,20 +34,33 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
                     AppointmentCommand.MESSAGE_USAGE), ive);
         }
 
-        String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
+        String parsedDate = getParsedDate(argMultimap);
+        String parsedTime = getParsedTime(argMultimap);
+        String parsedVenue = getParsedVenue(argMultimap);
+
+        return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime, parsedVenue));
+    }
+
+    private String checkInputDate(String retrievedDate) throws ParseException {
         if (retrievedDate.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentCommand.MESSAGE_USAGE));
         }
-        String parsedDate = parseDateString(retrievedDate);
 
+        return retrievedDate;
+    }
+
+    private String getParsedDate(ArgumentMultimap argMultimap) throws ParseException {
+        String retrievedDate = checkInputDate(argMultimap.getValue(PREFIX_APPOINTMENT)
+                .orElse(Appointment.NO_APPOINTMENT));
+        String parsedDate = parseDateString(retrievedDate);
+        return parsedDate;
+    }
+
+    private String getParsedTime(ArgumentMultimap argMultimap) throws ParseException {
         String retrievedTime = argMultimap.getValue(PREFIX_APPOINTMENT_TIME).orElse(Appointment.NO_TIME);
         String parsedTime = parseTimeString(retrievedTime);
-
-        String retrievedVenue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).orElse(Appointment.NO_VENUE);
-        String parsedVenue = checkVenueLength(retrievedVenue);
-
-        return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime, parsedVenue));
+        return parsedTime;
     }
 
     private String checkVenueLength(String venue) throws ParseException {
@@ -57,5 +70,11 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         }
 
         return venue;
+    }
+
+    private String getParsedVenue(ArgumentMultimap argMultimap) throws ParseException {
+        String retrievedVenue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).orElse(Appointment.NO_VENUE);
+        String parsedVenue = checkVenueLength(retrievedVenue);
+        return parsedVenue;
     }
 }

@@ -29,6 +29,24 @@ deactivate DeleteCommandParser
 FastParser -> DeleteCommandParser : parse("1-5")
 activate DeleteCommandParser
 
+DeleteCommandParser -> DeleteCommandParser : isRangeInput()
+activate DeleteCommandParser
+
+DeleteCommandParser -> DeleteCommandParser : spiltRangeInput()
+activate DeleteCommandParser
+
+DeleteCommandParser --> DeleteCommandParser
+deactivate DeleteCommandParser
+
+DeleteCommandParser -> DeleteCommandParser : parseRangeInput()
+activate DeleteCommandParser
+
+DeleteCommandParser --> DeleteCommandParser
+deactivate DeleteCommandParser
+
+DeleteCommandParser --> DeleteCommandParser
+deactivate DeleteCommandParser
+
 create DeleteCommand
 DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
@@ -51,7 +69,28 @@ activate DeleteCommand
 DeleteCommand -> DeleteCommand : isMultipleDelete()
 activate DeleteCommand
 
+DeleteCommand -> DeleteCommand : sortOrder()
+activate DeleteCommand
+
 DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
+
+DeleteCommand -> DeleteCommand : getInvalidIndex()
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommand : list
+deactivate DeleteCommand
+
+DeleteCommand -> DeleteCommand : checkIndex()
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommand : false
+deactivate DeleteCommand
+
+DeleteCommand -> DeleteCommand : checkDuplicates()
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommand : false
 deactivate DeleteCommand
 
 'loop' required'
@@ -70,10 +109,10 @@ create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteCommand : result
 deactivate CommandResult
 
-DeleteCommand --> DeleteCommand
+DeleteCommand --> DeleteCommand : result
 deactivate DeleteCommand
 
 DeleteCommand --> LogicManager : result

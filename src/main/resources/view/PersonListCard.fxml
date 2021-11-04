@@ -25,12 +25,12 @@
               <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
           </Label>
-          <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+          <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" maxWidth="550"/>
         </HBox>
         <VBox fx:id="tags" />
         <VBox fx:id="phone" prefHeight="1.0" prefWidth="1.0" />
         <VBox fx:id="address" maxHeight="200" maxWidth="550" VBox.vgrow="ALWAYS"/>
-        <VBox fx:id="email" prefHeight="1.0" prefWidth="1.0" />
+        <VBox fx:id="email" maxHeight="200" maxWidth="550" VBox.vgrow="ALWAYS"/>
         <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
       </VBox>
     </HBox>

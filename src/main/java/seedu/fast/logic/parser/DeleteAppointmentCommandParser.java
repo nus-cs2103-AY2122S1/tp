@@ -23,7 +23,6 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
                     DeleteAppointmentCommand.MESSAGE_USAGE), ive);
         }
 
-        return new DeleteAppointmentCommand(index,
-                new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME, Appointment.NO_VENUE));
+        return new DeleteAppointmentCommand(index, Appointment.getDefaultAppointment());
     }
 }
