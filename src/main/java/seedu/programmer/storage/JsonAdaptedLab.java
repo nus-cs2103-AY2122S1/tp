@@ -20,7 +20,6 @@ public class JsonAdaptedLab {
                           @JsonProperty("actualScoreValue") String actualScoreValue,
                           @JsonProperty("totalScoreValue") String totalScoreValue) {
         this.labNumValue = labNumValue;
-        //todo: change to actualScoreValue and totalScoreValue when the relevant classes are ready.
         this.actualScoreValue = actualScoreValue;
         this.totalScoreValue = totalScoreValue;
     }
