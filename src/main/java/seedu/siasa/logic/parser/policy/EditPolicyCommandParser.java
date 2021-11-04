@@ -6,7 +6,13 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.policy.EditPolicyCommand;
@@ -15,6 +21,7 @@ import seedu.siasa.logic.parser.ArgumentTokenizer;
 import seedu.siasa.logic.parser.Parser;
 import seedu.siasa.logic.parser.ParserUtil;
 import seedu.siasa.logic.parser.exceptions.ParseException;
+import seedu.siasa.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditPolicyCommand object
@@ -35,7 +42,8 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
                         PREFIX_EXPIRY,
                         PREFIX_PAYMENT,
                         PREFIX_COMMISSION,
-                    PREFIX_CONTACT_INDEX);
+                        PREFIX_CONTACT_INDEX,
+                        PREFIX_TAG);
 
         Index index;
 
@@ -73,6 +81,7 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
             editPolicyDescriptor.setOwnerIndex(ParserUtil.parseIndex(
                     argMultimap.getValue(PREFIX_CONTACT_INDEX).get()));
         }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPolicyDescriptor::setTags);
 
         if (!editPolicyDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditPolicyCommand.MESSAGE_NOT_EDITED);
@@ -81,4 +90,18 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
         return new EditPolicyCommand(index, editPolicyDescriptor);
     }
 
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Tag>} containing zero tags.
+     */
+    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+        assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseTags(tagSet));
+    }
 }
