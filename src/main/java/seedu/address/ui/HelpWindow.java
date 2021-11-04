@@ -36,11 +36,6 @@ public class HelpWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
-    @FXML
-    private void initialize() {
-        webView.getEngine().load(USERGUIDE_URL);
-    }
-
     /**
      * Shows the help window.
      * @throws IllegalStateException
@@ -61,6 +56,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        webView.getEngine().load(USERGUIDE_URL);
         getRoot().show();
         getRoot().centerOnScreen();
     }
