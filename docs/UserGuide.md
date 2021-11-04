@@ -619,7 +619,7 @@ Action | Format | Examples
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | `edit 1 -n Hong Fai -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | `import -f student_data.csv -g 2 -a 10 -t 1`
-**Export Data** | `export` | `export`
+**Export Data** | `export` |
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
 **Help** | `help` |
