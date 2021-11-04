@@ -38,7 +38,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/james-kua.png" width="200px">
 
-[[github](https://github.com/James-Kua)]
+[[github](https://github.com/James-Kua)][[portfolio](team/james-kua.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality + Testing + In charge of UI
