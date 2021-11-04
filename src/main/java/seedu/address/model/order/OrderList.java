@@ -77,7 +77,7 @@ public class OrderList implements Iterable<Order> {
      */
     public boolean hasOrder(Order order) {
         requireNonNull(order);
-        return internalList.stream().anyMatch(order::equals);
+        return internalList.stream().anyMatch(order::isSameOrder);
     }
 
     /**
