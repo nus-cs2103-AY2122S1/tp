@@ -7,7 +7,6 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
@@ -31,11 +30,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap;
         try {
             argMultimap = ParserUtil.tokenizeWithCheck(args, false,
-                    PREFIX_NAME, PREFIX_EPISODE, PREFIX_STATUS, PREFIX_GENRE);
+                    new Prefix[] {PREFIX_NAME}, new Prefix[] {PREFIX_EPISODE, PREFIX_STATUS, PREFIX_GENRE});
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Episode episode;
         Status status;
@@ -53,13 +51,4 @@ public class AddCommandParser implements Parser<AddCommand> {
         Anime anime = new Anime(name, episode, status, genreList);
         return new AddCommand(anime);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

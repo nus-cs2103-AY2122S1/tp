@@ -30,7 +30,7 @@ public class UpdateEpisodeCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1 " + PREFIX_EPISODE + "1";
 
     public static final String MESSAGE_UPDATE_ANIME_EPISODE_SUCCESS = "Updated Anime episode: %1$s";
-    public static final String MESSAGE_NOT_UPDATED = "An episode number should be provided";
+    public static final String MESSAGE_NOT_UPDATED = "A new episode number should be provided";
 
     private final Index index;
     private final UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor;

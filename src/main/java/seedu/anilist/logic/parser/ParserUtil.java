@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.commons.util.StringUtil;
@@ -140,16 +141,18 @@ public class ParserUtil {
      * Checks if preamble is present.
      * @param args the string to tokenize
      * @param requiresPreamble whether the command requires a preamble
-     * @param validPrefixes a Set of valid prefixes used in the command
+     * @param requiredPrefixes the Set of required prefixes used in the command
+     * @param optionalPrefixes the Set of optional prefixes used in the command
      * @return A argumentMultimap
      * @throws ParseException if there are unused params present
      */
-    public static ArgumentMultimap tokenizeWithCheck(String args, boolean requiresPreamble, Prefix... validPrefixes)
-            throws ParseException {
+    public static ArgumentMultimap tokenizeWithCheck(String args, boolean requiresPreamble, Prefix[] requiredPrefixes,
+                                                     Prefix... optionalPrefixes) throws ParseException {
         Prefix[] allPrefixes = CliSyntax.getAllPrefixes();
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, allPrefixes);
-        Set<Prefix> validPrefixesSet = new HashSet<>(Arrays.asList(validPrefixes));
+        Set<Prefix> requiredPrefixesSet = new HashSet<>(Arrays.asList(requiredPrefixes));
+        Set<Prefix> optionalPrefixesSet = new HashSet<>(Arrays.asList(optionalPrefixes));
         boolean hasPreamble = !argMultimap.getPreamble().isEmpty();
         if (!requiresPreamble && hasPreamble) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
@@ -159,12 +162,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
+        if (!arePrefixesPresent(argMultimap, requiredPrefixes)) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+
         for (Prefix p : allPrefixes) {
-            boolean isValidPrefix = validPrefixesSet.contains(p);
+            boolean isRequiredPrefix = requiredPrefixesSet.contains(p);
+            boolean isOptionalPrefix = optionalPrefixesSet.contains(p);
+            boolean isValidPrefix = isOptionalPrefix || isRequiredPrefix;
             if (argMultimap.getValue(p).isPresent() && !isValidPrefix) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
         }
         return argMultimap;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

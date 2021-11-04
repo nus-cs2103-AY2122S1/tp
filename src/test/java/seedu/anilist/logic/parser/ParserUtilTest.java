@@ -175,24 +175,36 @@ public class ParserUtilTest {
 
     @Test
     public void tokenizeWithCheck_invalidArg_throwsParseException() throws Exception {
-        // args contains preamble, preamble not required, no valid prefixes
-        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck("asdf", false));
+        // args contains preamble, preamble not required, no required prefixes, no optional prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck("asdf", false, new Prefix[] {}));
 
-        // args contains extra prefixes, preamble not required, no valid prefixes
-        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(STATUS_DESC_WATCHING, false));
+        // args contains prefixes, preamble not required, no required prefixes, no optional prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(STATUS_DESC_WATCHING,
+                false, new Prefix[] {}));
 
-        // args contains no preamble, preamble required, no valid prefixes
-        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck("", true));
+        // args contains no preamble, preamble required, no required prefixes, no optional prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck("", true, new Prefix[] {}));
 
-        // args contains extra prefixes, preamble not required, one valid prefix
-        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA, true, PREFIX_STATUS));
+        // args does not contains required prefix, preamble not required, one required prefix, no optional prefix
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA,
+                true, new Prefix[] {PREFIX_STATUS}));
 
-        // args contains extra prefixes, preamble not required, two valid prefix
-        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA, true,
+        // args does not contain valid prefixes, preamble not required, no required prefix, two optional prefixes
+        assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA, true, new Prefix[] {},
                 PREFIX_STATUS, PREFIX_ACTION));
 
-        // args contains extra and valid prefixes, preamble not required, one valid prefix
+        // args contains extra and required prefixes, preamble not required, one required prefix, no optional prefix
         assertThrows(ParseException.class, () -> ParserUtil.tokenizeWithCheck(NAME_DESC_AKIRA + STATUS_DESC_WATCHING,
-                true, PREFIX_STATUS));
+                true, new Prefix[] {PREFIX_STATUS}));
+
+        // args contains required prefixes and hasPreamble, preamble required, one required prefix, no optional prefix
+        assertEquals(ParserUtil.tokenizeWithCheck("asdf" + STATUS_DESC_WATCHING,
+                true, new Prefix[] {PREFIX_STATUS}),
+                ArgumentTokenizer.tokenize("asdf" + STATUS_DESC_WATCHING, CliSyntax.getAllPrefixes()));
+
+        // args contains optional prefixes, preamble not required, no required prefix, one optional prefix
+        assertEquals(ParserUtil.tokenizeWithCheck(STATUS_DESC_WATCHING,
+                false, new Prefix[] {}, PREFIX_STATUS),
+                ArgumentTokenizer.tokenize(STATUS_DESC_WATCHING, CliSyntax.getAllPrefixes()));
     }
 }

@@ -37,9 +37,6 @@ public abstract class GenreCommand extends Command {
             + PREFIX_GENRE + "Fantasy "
             + PREFIX_GENRE + "Action";
 
-    public static final String MESSAGE_GENRE_NOT_PROVIDED = "At least one genre should be provided.";
-
-
     private final GenreCommand.GenresDescriptor genresDescriptor;
     private final Index index;
 

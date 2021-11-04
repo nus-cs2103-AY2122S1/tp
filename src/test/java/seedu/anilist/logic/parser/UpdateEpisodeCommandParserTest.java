@@ -32,7 +32,7 @@ public class UpdateEpisodeCommandParserTest {
         assertParseFailure(parser, EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", UpdateEpisodeCommand.MESSAGE_NOT_UPDATED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

@@ -26,7 +26,7 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
 
         try {
             argMultimap = ParserUtil.tokenizeWithCheck(args, true,
-                    PREFIX_STATUS);
+                    new Prefix[] {PREFIX_STATUS});
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateStatusCommand.MESSAGE_USAGE));
         }
@@ -41,13 +41,8 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpdateStatusCommand.MESSAGE_USAGE), pe);
         }
-
-        UpdateStatusCommand.StatusDescriptor statusDescriptor =
-            new UpdateStatusCommand.StatusDescriptor();
-
-        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            statusDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
-        }
+        UpdateStatusCommand.StatusDescriptor statusDescriptor = new UpdateStatusCommand.StatusDescriptor();
+        statusDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
 
         if (!statusDescriptor.isStatusEdited()) {
             throw new ParseException(UpdateStatusCommand.MESSAGE_NOT_EDITED);

@@ -30,7 +30,7 @@ public class RenameCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AKIRA, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", RenameCommand.MESSAGE_NOT_RENAMED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
