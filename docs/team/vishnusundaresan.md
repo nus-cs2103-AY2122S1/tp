@@ -31,7 +31,7 @@ Given below are my contributions to the project.
     * Added documentation for student marks commands in UG [\#153](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/153)
   * Developer Guide:
     * Documentation regarding Student Marks functionality implementation. [\#127](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/127), [\#146](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/146)
-    * Adding Diagrams for Student Marks functionality. [\#127](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/127), [\#133](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/133) (Shown in Appendix A)
+    * Adding Diagrams for Student Marks functionality. [\#127](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/127), [\#133](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/133) (Sequence Diagram Shown in Appendix A)
     * Adding Use Cases for Student Marks functionality. [\#132](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/132)
 * **Team-based Tasks**:
   * Set up the GitHub Team organisation and repo
@@ -48,7 +48,7 @@ Given below are my contributions to the project.
 
 
 
-#### Appendix A
+#### Appendix A (Contributions to the Developer Guide)
 
 Sequence Diagram added to Developers' Guide:
 
