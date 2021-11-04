@@ -106,7 +106,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Returns true if both orders have the same customer, date and amount.
+     * Returns true if both orders have the same customer, label and amount.
      * This defines a weaker notion of equality between two orders.
      */
     public boolean isSameOrder(Order otherOrder) {
@@ -116,7 +116,6 @@ public class Order implements Comparable<Order> {
 
         return otherOrder != null
                 && otherOrder.getCustomer().equals(getCustomer())
-                && otherOrder.getDate().equals(getDate())
                 && otherOrder.getAmount().equals(getAmount())
                 && otherOrder.getLabel().equals(getLabel());
     }
@@ -144,7 +143,7 @@ public class Order implements Comparable<Order> {
         return builder.toString();
     }
 
-    // Required for OrderList to check if an Order exists, before marking it.
+    // Required for UniqueOrderList to check if an Order exists, before marking it.
     @Override
     public boolean equals(Object other) {
         if (other == this) {

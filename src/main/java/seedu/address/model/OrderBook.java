@@ -7,8 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
-
+import seedu.address.model.order.UniqueOrderList;
 
 
 /**
@@ -17,7 +16,7 @@ import seedu.address.model.order.OrderList;
  */
 public class OrderBook implements ReadOnlyOrderBook {
 
-    private final OrderList orders;
+    private final UniqueOrderList orders;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,7 +26,7 @@ public class OrderBook implements ReadOnlyOrderBook {
      *   among constructors.
      */
     {
-        orders = new OrderList();
+        orders = new UniqueOrderList();
     }
 
     public OrderBook() {}
