@@ -29,6 +29,8 @@ import seedu.address.model.gamefriendlink.UserName;
 public class TypicalFriends {
     public static final String ALICE_FRIEND_ID = "94351253";
     public static final String BENSON_FRIEND_ID = "98765432";
+    public static final String ELLE_FRIEND_ID = "9482224";
+    public static final String GEORGE_FRIEND_ID = "9482442";
     public static final Friend ALICE = new FriendBuilder().withFriendName("Alice Pauline")
             .withFriendId(ALICE_FRIEND_ID)
             .withGameFriendLinks(ALICE_CSGO_SKILL_VALUE_EIGHT_LINK).withSchedule(new Schedule()).build();
