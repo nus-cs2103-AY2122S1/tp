@@ -15,6 +15,8 @@ import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -73,7 +75,7 @@ public class EditPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String editedResidents = "";
+        StringBuilder editedResidents = new StringBuilder();
         int count = 0;
 
         for (Index targetIndex : indexArray) {
@@ -85,12 +87,35 @@ public class EditPersonCommand extends Command {
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
+            updatePersonEventResidentLists(model, personToEdit, editedPerson);
             model.setPerson(personToEdit, editedPerson);
-            editedResidents += ((count + 1) + ".\t" + personToEdit.getName() + "\n");
+            editedResidents.append(count + 1).append(".\t").append(personToEdit.getName()).append("\n");
             count++;
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedResidents));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedResidents.toString()));
+    }
+
+    private void updatePersonEventResidentLists(Model model, Person personToEdit, Person editedPerson) {
+        ArrayList<Event> personEvents = model.getPersonEvents(personToEdit, event -> true);
+        for (Event event: personEvents) {
+            ResidentList residents = event.getResidentList();
+
+            ArrayList<Person> toRemove = new ArrayList<>();
+            toRemove.add(personToEdit);
+            ArrayList<Person> toAdd = new ArrayList<>();
+            toAdd.add(editedPerson);
+
+            ResidentList removed = new ResidentList(residents.getRemovedDisplayString(toRemove),
+                    residents.getRemovedStorageString(toRemove));
+            ResidentList added = new ResidentList(removed.getCombinedDisplayString(toAdd),
+                    removed.getCombinedStorageString(toAdd));
+
+            Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                    event.getVenue(), event.getCapacity(), added);
+            model.setEvent(event, editedEvent);
+            model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        }
     }
 
     /**
