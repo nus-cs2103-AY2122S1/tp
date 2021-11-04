@@ -42,7 +42,7 @@ public class MarkStudentPartCommandTest {
 
         Student markedStudent = (type == "not participated")
                 ? new StudentBuilder(studentToMark).build()
-                : new StudentBuilder(studentToMark).withAttendance(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
+                : new StudentBuilder(studentToMark).withParticipation(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
 
         MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
                 Collections.singletonList(INDEX_FIRST_STUDENT), ZERO_INDEX_WEEK);
@@ -64,7 +64,7 @@ public class MarkStudentPartCommandTest {
 
         Student markedStudent = (type == "not participated")
                 ? new StudentBuilder(studentInFilteredList).build()
-                : new StudentBuilder(studentInFilteredList).withAttendance(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
+                : new StudentBuilder(studentInFilteredList).withParticipation(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
 
         MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
                 Collections.singletonList(INDEX_FIRST_STUDENT), ZERO_INDEX_WEEK);

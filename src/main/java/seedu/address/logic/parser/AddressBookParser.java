@@ -81,14 +81,14 @@ public class AddressBookParser {
         case ClearAllCommand.COMMAND_WORD:
             return new ClearAllCommand();
 
-        case ClearTasksCommand.COMMAND_WORD:
-            return new ClearTasksCommand();
-
         case ClearStudentsCommand.COMMAND_WORD:
             return new ClearStudentsCommand();
 
         case ClearGroupsCommand.COMMAND_WORD:
             return new ClearGroupsCommand();
+
+        case ClearTasksCommand.COMMAND_WORD:
+            return new ClearTasksCommand();
 
         case FindStudentCommand.COMMAND_WORD:
             return new FindStudentCommandParser().parse(arguments);

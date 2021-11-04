@@ -38,20 +38,30 @@ public class MarkStudentPartCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // EP: Student index not a number
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentPartCommand.MESSAGE_USAGE));
 
+        // EP: Student index out of range
         assertParseFailure(parser, String.valueOf(Participation.LAST_WEEK_OF_SEM + 1),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentPartCommand.MESSAGE_USAGE));
 
+        // EP: No week prefix found
         assertParseFailure(parser, "1 2 12",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentPartCommand.MESSAGE_USAGE));
 
+        // EP: Empty parameter succeeding command word
         assertParseFailure(parser, " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentPartCommand.MESSAGE_USAGE));
 
+        // EP: String as week parameter
+        assertParseFailure(parser, "1 w/hello", String.format(Participation.MESSAGE_CONSTRAINTS,
+                Participation.FIRST_WEEK_OF_SEM, Participation.LAST_WEEK_OF_SEM));
+
+        // EP: Duplicate index found
         assertParseFailure(parser, "1 1 1 w/1", MESSAGE_INVALID_DUPLICATE_INDEX);
 
+        // EP: Empty week parameter
         assertParseFailure(parser, "1 w/", MESSAGE_EMPTY_WEEK);
     }
 }
