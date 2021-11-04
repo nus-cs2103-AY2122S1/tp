@@ -45,7 +45,9 @@ public class UnfavouriteCommand extends Command {
             throw new CommandException(errorMessage);
         }
         model.unfavouritePerson(personToUnfavourite);
-        model.getPersonListControl().refreshPersonListUI();
+        if (model.getPersonListControl() != null) {
+            model.getPersonListControl().refreshPersonListUI();
+        }
         String successMessage = personToUnfavourite.getName().toString()
                 + MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
         return new CommandResult(successMessage);
