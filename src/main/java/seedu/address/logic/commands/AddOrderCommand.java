@@ -6,9 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class AddOrderCommand extends Command {
 
@@ -27,6 +30,9 @@ public class AddOrderCommand extends Command {
             + PREFIX_DATE + "20 August 2021";
 
     public static final String MESSAGE_SUCCESS = "New order added: %1$s";
+    public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the order book.";
+    public static final String MESSAGE_CLIENT_NOT_FOUND = "The client for this order has not been added to SalesNote!";
+
 
     private final Order toAdd;
 
@@ -41,6 +47,19 @@ public class AddOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // check if model already contains order
+        if (model.hasOrder(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ORDER);
+        }
+
+        // check if the model contains a customer with the exact name of the order
+        ObservableList<Person> listWithOnePerson = model.getAddressBook().getPersonList().filtered(
+                person -> person.getName().fullName.equalsIgnoreCase(toAdd.getCustomer().name));
+        if (listWithOnePerson.size() != 1) {
+            throw new CommandException(MESSAGE_CLIENT_NOT_FOUND);
+        }
+
         model.addOrder(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.ORDER);
     }
