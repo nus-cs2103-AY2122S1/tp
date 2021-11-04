@@ -47,12 +47,19 @@ public class ParticipantCard extends UiPart<Region> {
         super(FXML);
         this.participant = participant;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(participant.getFullName());
+        name.setWrapText(true);
         phone.setText(participant.getPhoneValue());
+        phone.setWrapText(true);
         address.setText(participant.getAddressValue());
+        address.setWrapText(true);
         email.setText(participant.getEmailValue());
+        email.setWrapText(true);
         birthDate.setText(participant.getBirthDateString());
+        birthDate.setWrapText(true);
         nextOfKins.setText(participant.getNextOfKinsListString());
+        nextOfKins.setWrapText(true);
     }
 
     @Override

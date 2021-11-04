@@ -23,6 +23,7 @@ import seedu.address.model.UserPrefs;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model anotherModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
