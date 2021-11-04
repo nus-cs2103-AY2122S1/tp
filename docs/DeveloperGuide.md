@@ -285,7 +285,22 @@ The following sequence diagram shows how the show operation works.
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations:
 
+**Aspect: User command to use in filtering interviews:**
+
+* **Alternative 1 (current choice):** Separate command for filtering interviews
+    * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
+    * Pros: Easy to use for user, only has two inputs it can take.
+    * Cons: Harder to implement than adding to `find` command.
+    * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
+
+* **Alternative 2:** Part of `find` command functionality
+    * Pros: Easy to implement
+    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
+    * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
+    types of inputs.
+   
 ### Find feature
 The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
 input. This command then updates the ```model``` accordingly.
@@ -315,7 +330,34 @@ and returned.
  **Note:** The lifeline for `FindCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-### Datetime for interview
+### Unmark feature
+
+The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
+```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
+
+The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
+![images](images/UnmarkCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
+
+Step 1. A valid command `unmark 3` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ` 3`.
+
+Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
+to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
+`UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
+
+Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
+corresponding to the given indices. If there is no exception thrown, `Model#unmarkPerson()` is called to unmark the applicants corresponding to the given indices.
+
+Step 4. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+![images](images/UnmarkCommandSequenceDiagram.png)
+
+
+### Datetime for interview 
+
 The `Interview` class accepts `yyyy-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
 - `yyyy` : year-of-era in 4 digits, e.g. `2021`
 - `M` : month-of-year, e.g. `7`, `07`

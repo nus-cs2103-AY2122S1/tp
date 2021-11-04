@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -28,7 +29,9 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index should be a non-zero unsigned integer.";
+
+    public static final String MESSAGE_DUPLICATE_INDEX = "There should not be any duplicate indexes.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -44,9 +47,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses multiple {@code oneBasedIndex} into {@code Index} and returns them in an array.
+     * Parses multiple {@code oneBasedIndex} into {@code Index} and returns them in a sorted array.
+     * The array is sorted from the largest to smallest index so that any invalid (out of range)
+     * indexes will be encountered first.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integer)
+     * or if there are duplicates.
      */
     public static Index[] parseMultipleIndex(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
@@ -60,8 +66,13 @@ public class ParserUtil {
             }
             indexesList[i] = Index.fromOneBased(Integer.parseInt(trimmedIndex));
         }
-        // Sort the array from large to small so that invalid (out of range) index will be encountered first
         Arrays.sort(indexesList, (i1, i2) -> i2.getZeroBased() - i1.getZeroBased());
+
+        // Checking for duplicates
+        if (Arrays.stream(indexesList)
+                .anyMatch(index -> Collections.frequency(Arrays.asList(indexesList), index) > 1)) {
+            throw new ParseException(MESSAGE_DUPLICATE_INDEX);
+        }
 
         return indexesList;
     }

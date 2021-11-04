@@ -5,7 +5,7 @@ title: User Guide
 
 ### About RecruitIn
 
-RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
+RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 ![Ui](images/Ui.png)
 ### About this guide
 
@@ -56,26 +56,30 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    Some example commands you can try:
    
    * **`clear`** : Clears all sample data.
+
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com r/Teacher et/Full time s/3000 l/Bachelors y/4` : 
+     Adds an applicant named `John Doe` to RecruitIn, where `98765432`is his phone number, `johnd@example.com` is his email, 
+     `Teacher` is the role he applied for, `Full time` is his desired employment type, `3000` is his expected salary,
+     `Bachelors` is his highest level of education, and he has `4` years of experience.
     
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn,
-    where `98765432`is his phone number, `johnd@example.com` is his email and `3000` is his expected salary.
+   * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com r/Receptionist et/Temporary s/3000 l/High School y/2` : 
+     Adds an applicant named `Mary Poppins` to RecruitIn, where `91131513`is her phone number, `maryp@example.com` is her email, 
+     `Receptionist` is the role she applied for, `Temporary` is her desired employment type, `3000` is her expected salary, 
+     `High School` is her highest level of education, and she has `2` years of experience.
     
-    * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com s/3000` : Adds an applicant named `Mary Poppins` to RecruitIn,
-    where `91131513`is her phone number, `maryp@example.com` is her email and `3000` is her expected salary.
-    
-    * **`list`** : Lists all applicants.
+   * **`list`** : Lists all applicants.
    
-    * **`find`**`n/John Mary` : Finds all applicants whose names are `John` or `Mary`.
+   * **`find`**`n/John Mary` : Finds all current applicants in RecruitIn whose names are `John` or `Mary`.
+   
+   * **`delete`**`2` : Deletes `Mary`, who is the 2nd applicant in the list. After deletion, the list of all applicants will contain only 'John'.
 
-    * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would `Mary`.
+   * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn, which would be 1 result that is `3000`.
 
-    * **`show`**`s/` : Displays all unique expected salaries in RecruitIn, which would be 1 result that is `3000`.
+   * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done, which would be `John`.
 
-    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done, which would `John`.
+   * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would be `John`.
 
-    * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would `John`.
-
-    * **`exit`** : Exits the app.
+   * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -338,6 +342,7 @@ Marks the specified applicant by index from the list in RecruitIn as "Done" (hav
 Format: `mark INDEX…​`
 
 * Marks the applicant at the specified `INDEX` as "Done".
+* An applicant that is has status "Done" cannot be marked again.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -357,6 +362,7 @@ Unmarks the specified applicant by index from the list in RecruitIn to "Not Done
 Format: `unmark INDEX…​`
 
 * Unmarks the applicant at the specified `INDEX` to "Not Done".
+* An applicant that is has status "Not Done" cannot be unmarked again.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -551,12 +557,13 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `2500 5000` input can match with ***Expected Salary*** s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
 
 * ##### LEVEL_OF_EDUCATION `l/`
-    * LEVEL_OF_EDUCATION can be a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
-    * A LEVEL_OF_EDUCATION is considered matching with a ***level of Education*** only if **at least 1** letter of a keyword is equal to **at least 1** letter in the ***Level of Education***
+    * A LEVEL_OF_EDUCATION is considered matching with a ***Level of Education*** only if it **starts with any** of the keywords in the ***Level of Education***.    
     * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
     * For example:
-        * A `H` input can match with ***Level of Education*** s such `High School`, but not with *Level of Education*s such as `PhD`
-        * A `High School` input can match with ***Level of Education*** s such as `High School`, but not with *Level of Education*s such as `Middle School`
+        * A `H` input can match with ***Level of Education***s such `High School`, but not with *Level of Education*s such as `PhD`.
+        * A `High School` input will match with all *Level of Education*s that are `High School`, but not with *Level of Education*s such as `Middle School`.
+        * A `High Middle` input will match with all *Level of Education*s that are `High School` and `Middle School`.
+        * A `High School bob` input is invalid as `bob` is not a term any of the *Level of Education*s start with.
 
 * ##### YEARS_OF_EXPERIENCE `y/`
     * A YEARS_OF_EXPERIENCE is considered matching with a ***Years Of Experience*** only if the value represented by **at least 1** keyword is larger than or equal to the value represented by the ***Years Of Experience***.
@@ -590,10 +597,11 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `passionate` input can match with applicants that have Notes such as `passionate but inexperienced` and `passionate and experienced`.
 
 * ##### DONE `d/`
-    * An DONE is considered matching with a ***Done*** only if the ***Done***'s status string is either `Done` or `Not Done`.
+    * An DONE is considered matching only if the ***Done*** input is either `Done` or `Not Done`.    
     * For example:
         * A `Done` input can match with applicants that have their ***Done*** status marked as Done.
         * A `Not Done` input can match with applicants that have their ***Done*** status unmarked as Not Done.
+        * Any other non-empty input is considered invalid.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -617,4 +625,5 @@ Action | Format, Examples
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
 **Delete marked** | `delete_marked`
+**Clear**| `clear`
 **Help** | `help`
