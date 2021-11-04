@@ -8,17 +8,17 @@
 * Academy Directory (AD) is a desktop appplication for CS1101S tutors (or Avengers) to manage students’ personal
   contact, grades, tutorial attendance, and assignment completion, as well as visualizing and manipulating statistics for tutoring purposes.
   It is optimized primarily for usage in teaching CS1101S - Programming Methodology I - at the National University of Singapore.<br>
+  
+Point of View: You are an Avenger sitting behind the control table, supervising your students through the transparent glass while physically interacting with the system to manage your tutee's grades and participation.
+
+Don't get us wrong though. We are not mad space scientists doing controlled experiment on students. *Or are we?...*
+
+![Ui](docs/images/Ui.png)
 
 * This project is developed with the following discretions:
   * It comes with a detailed User Guide and Developer Guide, as well as sufficient and comprehensive software testing for Quality Assurance purposes.
   * It is optimized for CLI usage and suitable to fast typists, while at the same time having a highly interactive and stylized GUI for those who do not prefer to type.
   * It has a wide range of features, of different categories, for usage in recording and analyzing student data.
-
-![Ui](docs/images/Ui.png)
-
-Point of View: You are an Avenger sitting behind the control table, supervising your students through the transparent glass while physically interacting with the system to manage your tutee's grades and participation.
-
-Don't get us wrong though. We are not mad space scientists doing controlled experiment on students. *Or are we?...*
 
 ### Site Map
 
