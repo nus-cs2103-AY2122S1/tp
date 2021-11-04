@@ -8,10 +8,10 @@ import static seedu.track2gather.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.track2gather.logic.parser.exceptions.ParseException;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
-import seedu.track2gather.model.person.Phone;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.Phone;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

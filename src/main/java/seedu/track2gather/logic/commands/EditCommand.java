@@ -23,14 +23,19 @@ import seedu.track2gather.commons.core.index.Index;
 import seedu.track2gather.commons.util.CollectionUtil;
 import seedu.track2gather.logic.commands.exceptions.CommandException;
 import seedu.track2gather.model.Model;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CallStatus;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
 import seedu.track2gather.model.person.Person;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CallStatus;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.Phone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * Edits the details of an existing person in the contacts list.
@@ -111,18 +116,18 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         CaseNumber updatedCaseNumber = editPersonDescriptor.getCaseNumber().orElse(personToEdit.getCaseNumber());
         Address updatedHomeAddress = editPersonDescriptor.getHomeAddress().orElse(personToEdit.getHomeAddress());
-        Optional<Address> updatedWorkAddress = editPersonDescriptor.getWorkAddress()
-                .or(personToEdit::getWorkAddress);
-        Optional<Address> updatedQuarantineAddress = editPersonDescriptor.getQuarantineAddress()
-                .or(personToEdit::getQuarantineAddress);
-        Optional<ShnPeriod> updatedShnPeriod = editPersonDescriptor.getShnPeriod()
-                .or(personToEdit::getShnPeriod);
-        Optional<Name> updatedNextOfKinName = editPersonDescriptor.getNextOfKinName()
-                .or(personToEdit::getNextOfKinName);
-        Optional<Phone> updatedNextOfKinPhone = editPersonDescriptor.getNextOfKinPhone()
-                .or(personToEdit::getNextOfKinPhone);
-        Optional<Address> updatedNextOfKinAddress = editPersonDescriptor.getNextOfKinAddress()
-                .or(personToEdit::getNextOfKinAddress);
+        WorkAddress updatedWorkAddress = editPersonDescriptor.getWorkAddress()
+                .orElse(personToEdit.getWorkAddress());
+        QuarantineAddress updatedQuarantineAddress = editPersonDescriptor.getQuarantineAddress()
+                .orElse(personToEdit.getQuarantineAddress());
+        ShnPeriod updatedShnPeriod = editPersonDescriptor.getShnPeriod()
+                .orElse(personToEdit.getShnPeriod());
+        NextOfKinName updatedNextOfKinName = editPersonDescriptor.getNextOfKinName()
+                .orElse(personToEdit.getNextOfKinName());
+        NextOfKinPhone updatedNextOfKinPhone = editPersonDescriptor.getNextOfKinPhone()
+                .orElse(personToEdit.getNextOfKinPhone());
+        NextOfKinAddress updatedNextOfKinAddress = editPersonDescriptor.getNextOfKinAddress()
+                .orElse(personToEdit.getNextOfKinAddress());
         CallStatus updatedCallStatus = editPersonDescriptor.getCallStatus().orElse(personToEdit.getCallStatus());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedCaseNumber, updatedHomeAddress,
                 updatedWorkAddress, updatedQuarantineAddress, updatedShnPeriod, updatedNextOfKinName,
@@ -157,15 +162,16 @@ public class EditCommand extends Command {
         private Email email;
         private CaseNumber caseNumber;
         private Address homeAddress;
-        private Address workAddress;
-        private Address quarantineAddress;
+        private WorkAddress workAddress;
+        private QuarantineAddress quarantineAddress;
         private ShnPeriod shnPeriod;
-        private Name nextOfKinName;
-        private Phone nextOfKinPhone;
-        private Address nextOfKinAddress;
+        private NextOfKinName nextOfKinName;
+        private NextOfKinPhone nextOfKinPhone;
+        private NextOfKinAddress nextOfKinAddress;
         private CallStatus callStatus;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -233,19 +239,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(homeAddress);
         }
 
-        public void setWorkAddress(Address workAddress) {
+        public void setWorkAddress(WorkAddress workAddress) {
             this.workAddress = workAddress;
         }
 
-        public Optional<Address> getWorkAddress() {
+        public Optional<WorkAddress> getWorkAddress() {
             return Optional.ofNullable(workAddress);
         }
 
-        public void setQuarantineAddress(Address quarantineAddress) {
+        public void setQuarantineAddress(QuarantineAddress quarantineAddress) {
             this.quarantineAddress = quarantineAddress;
         }
 
-        public Optional<Address> getQuarantineAddress() {
+        public Optional<QuarantineAddress> getQuarantineAddress() {
             return Optional.ofNullable(quarantineAddress);
         }
 
@@ -257,27 +263,27 @@ public class EditCommand extends Command {
             return Optional.ofNullable(shnPeriod);
         }
 
-        public void setNextOfKinName(Name nextOfKinName) {
+        public void setNextOfKinName(NextOfKinName nextOfKinName) {
             this.nextOfKinName = nextOfKinName;
         }
 
-        public Optional<Name> getNextOfKinName() {
+        public Optional<NextOfKinName> getNextOfKinName() {
             return Optional.ofNullable(nextOfKinName);
         }
 
-        public void setNextOfKinPhone(Phone nextOfKinPhone) {
+        public void setNextOfKinPhone(NextOfKinPhone nextOfKinPhone) {
             this.nextOfKinPhone = nextOfKinPhone;
         }
 
-        public Optional<Phone> getNextOfKinPhone() {
+        public Optional<NextOfKinPhone> getNextOfKinPhone() {
             return Optional.ofNullable(nextOfKinPhone);
         }
 
-        public void setNextOfKinAddress(Address nextOfKinAddress) {
+        public void setNextOfKinAddress(NextOfKinAddress nextOfKinAddress) {
             this.nextOfKinAddress = nextOfKinAddress;
         }
 
-        public Optional<Address> getNextOfKinAddress() {
+        public Optional<NextOfKinAddress> getNextOfKinAddress() {
             return Optional.ofNullable(nextOfKinAddress);
         }
 

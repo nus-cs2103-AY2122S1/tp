@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import seedu.track2gather.commons.core.index.Index;
 import seedu.track2gather.commons.util.StringUtil;
 import seedu.track2gather.logic.parser.exceptions.ParseException;
-import seedu.track2gather.model.person.Address;
-import seedu.track2gather.model.person.CaseNumber;
-import seedu.track2gather.model.person.Email;
-import seedu.track2gather.model.person.Name;
-import seedu.track2gather.model.person.Phone;
-import seedu.track2gather.model.person.ShnPeriod;
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -139,13 +139,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code SHN period} is invalid.
      */
-    public static ShnPeriod parseShnPeriod(String shnPeriod) throws ParseException {
-        requireNonNull(shnPeriod);
-        String trimmedShnPeriod = shnPeriod.trim();
+    public static Period parsePeriod(String period) throws ParseException {
+        requireNonNull(period);
+        String trimmedShnPeriod = period.trim();
         String[] dates = trimmedShnPeriod.split(" ", 2);
 
         if (dates.length < 2) {
-            throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
         }
 
         LocalDate startDate;
@@ -155,12 +155,12 @@ public class ParserUtil {
             startDate = LocalDate.parse(dates[0]);
             endDate = LocalDate.parse(dates[1]);
         } catch (DateTimeParseException e) {
-            throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
         }
 
-        if (!ShnPeriod.isValidShnPeriod(startDate, endDate)) {
-            throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS);
+        if (!Period.isValidPeriod(startDate, endDate)) {
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
         }
-        return new ShnPeriod(startDate, endDate);
+        return new Period(startDate, endDate);
     }
 }

@@ -1,13 +1,12 @@
-package seedu.track2gather.model.person;
+package seedu.track2gather.model.person.attributes;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.track2gather.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's email in the contacts list.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class Email {
+public class Email extends Attribute<String> {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
@@ -31,17 +30,14 @@ public class Email {
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
-    public final String value;
-
     /**
      * Constructs an {@code Email}.
      *
      * @param email A valid email address.
      */
     public Email(String email) {
-        requireNonNull(email);
+        super(email);
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
     }
 
     /**
@@ -49,11 +45,6 @@ public class Email {
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    @Override
-    public String toString() {
-        return value;
     }
 
     @Override
@@ -67,5 +58,4 @@ public class Email {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

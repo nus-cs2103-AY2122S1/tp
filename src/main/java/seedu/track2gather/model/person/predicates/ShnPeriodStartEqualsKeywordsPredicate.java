@@ -19,7 +19,8 @@ public class ShnPeriodStartEqualsKeywordsPredicate implements Predicate<Person> 
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> person.getShnPeriod()
-                        .map(sh -> sh.startDate.toString().equals(keyword))
+                        .value
+                        .map(sh -> sh.getStartDate().toString().equals(keyword))
                         .orElse(false));
     }
 

@@ -3,7 +3,19 @@ package seedu.track2gather.model.person;
 import static seedu.track2gather.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.Optional;
+
+import seedu.track2gather.model.person.attributes.Address;
+import seedu.track2gather.model.person.attributes.CallStatus;
+import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Email;
+import seedu.track2gather.model.person.attributes.Name;
+import seedu.track2gather.model.person.attributes.NextOfKinAddress;
+import seedu.track2gather.model.person.attributes.NextOfKinName;
+import seedu.track2gather.model.person.attributes.NextOfKinPhone;
+import seedu.track2gather.model.person.attributes.Phone;
+import seedu.track2gather.model.person.attributes.QuarantineAddress;
+import seedu.track2gather.model.person.attributes.ShnPeriod;
+import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
  * Represents a Person in the contacts list.
@@ -19,22 +31,22 @@ public class Person implements Comparable<Person> {
     // Data fields
     private final CaseNumber caseNumber;
     private final Address homeAddress;
-    private final Optional<Address> workAddress;
-    private final Optional<Address> quarantineAddress;
-    private final Optional<ShnPeriod> shnPeriod;
-    private final Optional<Name> nextOfKinName;
-    private final Optional<Phone> nextOfKinPhone;
-    private final Optional<Address> nextOfKinAddress;
+    private final WorkAddress workAddress;
+    private final QuarantineAddress quarantineAddress;
+    private final ShnPeriod shnPeriod;
+    private final NextOfKinName nextOfKinName;
+    private final NextOfKinPhone nextOfKinPhone;
+    private final NextOfKinAddress nextOfKinAddress;
     private final CallStatus callStatus;
 
     /**
      * Constructor for Person.
-     *
+     * <p>
      * All fields must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, CaseNumber caseNumber, Address homeAddress,
-                  Optional<Address> workAddress, Optional<Address> quarantineAddress, Optional<ShnPeriod> shnPeriod,
-                  Optional<Name> nextOfKinName, Optional<Phone> nextOfKinPhone, Optional<Address> nextOfKinAddress,
+                  WorkAddress workAddress, QuarantineAddress quarantineAddress, ShnPeriod shnPeriod,
+                  NextOfKinName nextOfKinName, NextOfKinPhone nextOfKinPhone, NextOfKinAddress nextOfKinAddress,
                   CallStatus callStatus) {
         requireAllNonNull(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress,
                 shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress, callStatus);
@@ -56,10 +68,10 @@ public class Person implements Comparable<Person> {
      * Default constructor for Person that uses a default call status.
      */
     public Person(Name name, Phone phone, Email email, CaseNumber caseNumber, Address homeAddress,
-                  Optional<Address> workAddress, Optional<Address> quarantineAddress, Optional<ShnPeriod> shnPeriod,
-                  Optional<Name> nextOfKinName, Optional<Phone> nextOfKinPhone, Optional<Address> nextOfKinAddress) {
+                  WorkAddress workAddress, QuarantineAddress quarantineAddress, ShnPeriod shnPeriod,
+                  NextOfKinName nextOfKinName, NextOfKinPhone nextOfKinPhone, NextOfKinAddress nextOfKinAddress) {
         this(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress, shnPeriod,
-            nextOfKinName, nextOfKinPhone, nextOfKinAddress, new CallStatus(0, false));
+                nextOfKinName, nextOfKinPhone, nextOfKinAddress, new CallStatus(0, false));
     }
 
     /**
@@ -76,8 +88,8 @@ public class Person implements Comparable<Person> {
      * Short constructor for Person with no optional attributes.
      */
     public Person(Name name, Phone phone, Email email, CaseNumber caseNumber, Address homeAddress) {
-        this(name, phone, email, caseNumber, homeAddress, Optional.empty(), Optional.empty(), Optional.empty(),
-                Optional.empty(), Optional.empty(), Optional.empty());
+        this(name, phone, email, caseNumber, homeAddress, new WorkAddress(), new QuarantineAddress(), new ShnPeriod(),
+                new NextOfKinName(), new NextOfKinPhone(), new NextOfKinAddress());
     }
 
     public Name getName() {
@@ -100,27 +112,27 @@ public class Person implements Comparable<Person> {
         return homeAddress;
     }
 
-    public Optional<Address> getWorkAddress() {
+    public WorkAddress getWorkAddress() {
         return workAddress;
     }
 
-    public Optional<Address> getQuarantineAddress() {
+    public QuarantineAddress getQuarantineAddress() {
         return quarantineAddress;
     }
 
-    public Optional<ShnPeriod> getShnPeriod() {
+    public ShnPeriod getShnPeriod() {
         return shnPeriod;
     }
 
-    public Optional<Name> getNextOfKinName() {
+    public NextOfKinName getNextOfKinName() {
         return nextOfKinName;
     }
 
-    public Optional<Phone> getNextOfKinPhone() {
+    public NextOfKinPhone getNextOfKinPhone() {
         return nextOfKinPhone;
     }
 
-    public Optional<Address> getNextOfKinAddress() {
+    public NextOfKinAddress getNextOfKinAddress() {
         return nextOfKinAddress;
     }
 
@@ -189,23 +201,23 @@ public class Person implements Comparable<Person> {
                 .append("; Home Address: ")
                 .append(getHomeAddress());
 
-        if (getWorkAddress().isPresent()) {
-            builder.append("; Work Address: ").append(getWorkAddress().get());
+        if (getWorkAddress().value.isPresent()) {
+            builder.append("; Work Address: ").append(getWorkAddress().value.get());
         }
-        if (getQuarantineAddress().isPresent()) {
-            builder.append("; Quarantine Address: ").append(getQuarantineAddress().get());
+        if (getQuarantineAddress().value.isPresent()) {
+            builder.append("; Quarantine Address: ").append(getQuarantineAddress().value.get());
         }
-        if (getShnPeriod().isPresent()) {
-            builder.append("; SHN Period: ").append(getShnPeriod().get());
+        if (getShnPeriod().value.isPresent()) {
+            builder.append("; SHN Period: ").append(getShnPeriod().value.get());
         }
-        if (getNextOfKinName().isPresent()) {
-            builder.append("; Next-of-Kin's Name: ").append(getNextOfKinName().get());
+        if (getNextOfKinName().value.isPresent()) {
+            builder.append("; Next-of-Kin's Name: ").append(getNextOfKinName().value.get());
         }
-        if (getNextOfKinPhone().isPresent()) {
-            builder.append("; Next-of-Kin's Phone: ").append(getNextOfKinPhone().get());
+        if (getNextOfKinPhone().value.isPresent()) {
+            builder.append("; Next-of-Kin's Phone: ").append(getNextOfKinPhone().value.get());
         }
-        if (getNextOfKinAddress().isPresent()) {
-            builder.append("; Next-of-Kin's Address: ").append(getNextOfKinAddress().get());
+        if (getNextOfKinAddress().value.isPresent()) {
+            builder.append("; Next-of-Kin's Address: ").append(getNextOfKinAddress().value.get());
         }
 
         return builder.toString();
