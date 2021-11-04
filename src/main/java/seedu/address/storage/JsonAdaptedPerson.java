@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
@@ -26,11 +24,6 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
-    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
-    private static final String INVALID_BIRTHDAY_MESSAGE = "%s's birthday %s is invalid. "
-            + "Will start with empty birthday.";
-    private static final String INVALID_PIN_MESSAGE = "%s's pin status %s is invalid. "
-            + "Will start with not pinned by default.";
 
     private final String name;
     private final String phone;

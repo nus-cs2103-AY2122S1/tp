@@ -18,10 +18,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Pin;
-import seedu.address.testutil.PersonBuilder;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -67,11 +65,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidPinStatus_returns() throws Exception {
+    public void toModelType_invalidPinStatus_returns() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         VALID_BIRTHDAY, INVALID_PIN);
-        assertEquals(BENSON, person.toModelType());
+        String expectedMessage = Pin.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
@@ -157,30 +156,29 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidBirthdayFormat_returnsPerson() throws Exception {
+    public void toModelType_invalidBirthdayFormat_returnsPerson() {
         JsonAdaptedPerson personWrongBirthdayFormat =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         INVALID_BIRTHDAY_FORMAT, VALID_NOT_PIN);
-        Person resultPerson = personWrongBirthdayFormat.toModelType();
-        Person bensonNoBirthday = new PersonBuilder(BENSON).withNoBirthday().build();
-        assertEquals(bensonNoBirthday, resultPerson);
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, personWrongBirthdayFormat::toModelType);
     }
 
     @Test
-    public void toModelType_invalidBirthdayDate_returnsPerson() throws Exception {
+    public void toModelType_invalidBirthdayDate_returnsPerson() {
         JsonAdaptedPerson personInvalidDate =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         INVALID_DATE, VALID_NOT_PIN);
-        Person resultPerson = personInvalidDate.toModelType();
-        Person bensonNoBirthday = new PersonBuilder(BENSON).withNoBirthday().build();
-        assertEquals(resultPerson, bensonNoBirthday);
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, personInvalidDate::toModelType);
     }
 
     @Test
-    public void toModelType_nullPin_returnsPerson() throws Exception {
+    public void toModelType_nullPin_returnsPerson() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         VALID_BIRTHDAY, null);
-        assertEquals(person.toModelType(), BENSON);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }
