@@ -2,6 +2,7 @@ package seedu.address;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -207,6 +208,28 @@ public class MainApp extends Application {
     }
 
     /**
+     * Sets up the data with the given password.
+     *
+     * @param input The input password from user.
+     * @return {@code true} if the password is correct, {@code false} otherwise
+     * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
+     * @throws NoSuchPaddingException If the padding does not exist.
+     * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
+     */
+    public boolean setUp(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            UnsupportedPasswordException {
+        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        createEncryptedFile(cryptor);
+
+        FileUtil.deleteFile(storage.getAddressBookFilePath());
+        model = initModelManager(storage, userPrefs, cryptor);
+        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
+        new UiManager(logic).start(stage);
+        isLoggedIn = true;
+        return true;
+    }
+
+    /**
      * Attempts to log in with the given password.
      *
      * @param input The input password from user.
@@ -218,17 +241,16 @@ public class MainApp extends Application {
      * @throws InvalidKeyException
      */
     public boolean logIn(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
-            UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException {
-        Encryption cryptor = null;
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
-        if (hasEncryptedFile()) {
-            try {
-                cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
-            } catch (IOException e) {
-                return false;
-            }
-        } else {
-            createEncryptedFile(cryptor);
+            UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException,
+            FileNotFoundException {
+        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        if (!hasEncryptedFile()) {
+            throw new FileNotFoundException();
+        }
+        try {
+            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+        } catch (IOException e) {
+            return false;
         }
 
         FileUtil.deleteFile(storage.getAddressBookFilePath());

@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 import javax.crypto.NoSuchPaddingException;
@@ -79,9 +77,8 @@ public class SetUpScreen extends UiPart<Stage> {
             return;
         }
         try {
-            app.logIn(userInputPassword.getText());
-        } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
-                | InvalidAlgorithmParameterException e) {
+            app.setUp(userInputPassword.getText());
+        } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {
             responseDisplay.setText("Something went wrong, try again!");
             userInputPassword.clear();
             userConfirmPassword.clear();
