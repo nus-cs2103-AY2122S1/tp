@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -36,8 +35,7 @@ public class EditCommand extends Command {
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_NAME + "NAME] "
         + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE] "
-        + "[" + PREFIX_EMAIL + "EMAIL] "
-        + "[" + PREFIX_GROUP_NAME + "GROUP NAME] "
+        + "[" + PREFIX_EMAIL + "EMAIL]\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_TELEGRAM_HANDLE + "@john_doe "
         + PREFIX_EMAIL + "johndoe@example.com";
