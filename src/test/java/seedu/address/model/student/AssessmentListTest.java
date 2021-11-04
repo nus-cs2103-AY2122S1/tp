@@ -3,9 +3,13 @@ package seedu.address.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAssessments.MISSION_01;
+import static seedu.address.testutil.TypicalAssessments.PATH_05;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,11 +17,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.exceptions.AssessmentNotFoundException;
 import seedu.address.model.student.exceptions.DuplicateAssessmentException;
+import seedu.address.testutil.AssessmentBuilder;
+import seedu.address.testutil.AssessmentListBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class AssessmentListTest {
-
-    private static final Assessment PATH_01 = new Assessment("P01");
-    private static final Assessment MISSION_01 = new Assessment("M01");
 
     private final AssessmentList assessments = new AssessmentList();
 
@@ -28,19 +32,20 @@ public class AssessmentListTest {
 
     @Test
     public void contains_assessmentNotInList_returnsFalse() {
-        assertFalse(assessments.contains(PATH_01));
+        assertFalse(assessments.contains(PATH_05));
     }
 
     @Test
     public void contains_assessmentInList_returnsTrue() {
-        assessments.add(PATH_01);
-        assertTrue(assessments.contains(PATH_01));
+        assessments.add(PATH_05);
+        assertTrue(assessments.contains(PATH_05));
     }
 
     @Test
     public void contains_assessmentWithSameNameInList_returnsTrue() {
-        assessments.add(PATH_01);
-        assertTrue(assessments.contains(new Assessment(PATH_01.name)));
+        assessments.add(PATH_05);
+        Assessment sameNameAssessment = new AssessmentBuilder(PATH_05).build();
+        assertTrue(assessments.contains(sameNameAssessment));
     }
 
     @Test
@@ -50,8 +55,39 @@ public class AssessmentListTest {
 
     @Test
     public void add_duplicateAssessment_throwsDuplicateAssessmentException() {
-        assessments.add(PATH_01);
-        assertThrows(DuplicateAssessmentException.class, () -> assessments.add(PATH_01));
+        assessments.add(PATH_05);
+        assertThrows(DuplicateAssessmentException.class, () -> assessments.add(PATH_05));
+    }
+
+    @Test
+    public void add_validAssessment_success() {
+        assessments.add(PATH_05);
+        AssessmentList expectedAssessments = new AssessmentListBuilder()
+                .withStudents(List.of(AMY)).build();
+        assertEquals(expectedAssessments, assessments);
+    }
+
+    @Test
+    public void update_nullStudentToUpdate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> assessments.update(null));
+    }
+
+    @Test
+    public void update_studentToUpdateWithNewAssessment_successWithNewAssessmentAdded() {
+        assessments.update(AMY);
+        AssessmentList expectedAssessments = new AssessmentListBuilder()
+                .withStudents(List.of(AMY)).build();
+        assertEquals(expectedAssessments, assessments);
+    }
+
+    @Test
+    public void update_studentToUpdateWithExistentAssessment_successWithExistentAssessmentUpdated() {
+        Student updatedBob = new PersonBuilder(BOB).withScores(VALID_SCORES_AMY).build(); // Bob with Amy's scores
+        assessments.update(AMY);
+        assessments.update(updatedBob);
+        AssessmentList expectedAssessments = new AssessmentListBuilder()
+                .withStudents(List.of(AMY, updatedBob)).build();
+        assertEquals(expectedAssessments, assessments);
     }
 
     @Test
@@ -61,65 +97,65 @@ public class AssessmentListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsAssessmentNotFoundException() {
-        assertThrows(AssessmentNotFoundException.class, () -> assessments.remove(PATH_01));
+        assertThrows(AssessmentNotFoundException.class, () -> assessments.remove(PATH_05));
     }
 
     @Test
     public void remove_existingAssessment_removesAssessment() {
-        assessments.add(PATH_01);
-        assessments.remove(PATH_01);
-        AssessmentList expectedUniqueAssessmentList = new AssessmentList();
+        assessments.add(PATH_05);
+        assessments.remove(PATH_05);
+        AssessmentList expectedUniqueAssessmentList = new AssessmentListBuilder().build();
         assertEquals(expectedUniqueAssessmentList, assessments);
     }
 
     @Test
     public void setAssessment_nullTargetAssessment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> assessments.setAssessment(null, PATH_01));
+        assertThrows(NullPointerException.class, () -> assessments.setAssessment(null, PATH_05));
     }
 
     @Test
     public void setAssessment_nullEditedAssessment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> assessments.setAssessment(PATH_01, null));
+        assertThrows(NullPointerException.class, () -> assessments.setAssessment(PATH_05, null));
     }
 
     @Test
     public void setAssessment_targetAssessmentNotInList_throwsAssessmentNotFoundException() {
-        assertThrows(AssessmentNotFoundException.class, () -> assessments.setAssessment(PATH_01, PATH_01));
+        assertThrows(AssessmentNotFoundException.class, () -> assessments.setAssessment(PATH_05, PATH_05));
     }
 
     @Test
     public void setAssessment_editedAssessmentIsSameAssessment_success() {
-        assessments.add(PATH_01);
-        assessments.setAssessment(PATH_01, PATH_01);
-        AssessmentList expectedAssessmentList = new AssessmentList();
-        expectedAssessmentList.add(PATH_01);
+        assessments.add(PATH_05);
+        assessments.setAssessment(PATH_05, PATH_05);
+        AssessmentList expectedAssessmentList = new AssessmentListBuilder()
+                .withStudents(List.of(AMY)).build();
         assertEquals(expectedAssessmentList, assessments);
     }
 
     @Test
     public void setAssessment_editedAssessmentHasSameName_success() {
-        assessments.add(PATH_01);
-        Assessment editedPath01 = new Assessment(PATH_01.name);
-        assessments.setAssessment(PATH_01, editedPath01);
-        AssessmentList expectedAssessmentList = new AssessmentList();
-        expectedAssessmentList.add(editedPath01);
+        Assessment sameNameAssessment = new AssessmentBuilder(PATH_05).build();
+        assessments.add(PATH_05);
+        assessments.setAssessment(PATH_05, sameNameAssessment);
+        AssessmentList expectedAssessmentList = new AssessmentListBuilder()
+                .withStudents(List.of(AMY)).build();
         assertEquals(expectedAssessmentList, assessments);
     }
 
     @Test
     public void setAssessment_editedAssessmentHasDifferentIdentity_success() {
-        assessments.add(PATH_01);
-        assessments.setAssessment(PATH_01, MISSION_01);
-        AssessmentList expectedUniqueAssessmentList = new AssessmentList();
-        expectedUniqueAssessmentList.add(MISSION_01);
+        assessments.add(PATH_05);
+        assessments.setAssessment(PATH_05, MISSION_01);
+        AssessmentList expectedUniqueAssessmentList = new AssessmentListBuilder()
+                .withStudents(List.of(BOB)).build();
         assertEquals(expectedUniqueAssessmentList, assessments);
     }
 
     @Test
     public void setAssessment_editedAssessmentHasNonUniqueIdentity_throwsDuplicateAssessmentException() {
-        assessments.add(PATH_01);
+        assessments.add(PATH_05);
         assessments.add(MISSION_01);
-        assertThrows(DuplicateAssessmentException.class, () -> assessments.setAssessment(PATH_01, MISSION_01));
+        assertThrows(DuplicateAssessmentException.class, () -> assessments.setAssessment(PATH_05, MISSION_01));
     }
 
     @Test
@@ -129,9 +165,9 @@ public class AssessmentListTest {
 
     @Test
     public void setAssessments_assessments_replacesOwnListWithProvidedUniqueAssessmentList() {
-        assessments.add(PATH_01);
-        AssessmentList expectedUniqueAssessmentList = new AssessmentList();
-        expectedUniqueAssessmentList.add(MISSION_01);
+        AssessmentList expectedUniqueAssessmentList = new AssessmentListBuilder()
+                .withStudents(List.of(BOB)).build();
+        assessments.add(PATH_05);
         assessments.setAssessments(expectedUniqueAssessmentList);
         assertEquals(expectedUniqueAssessmentList, assessments);
     }
@@ -143,18 +179,17 @@ public class AssessmentListTest {
 
     @Test
     public void setAssessments_list_replacesOwnListWithProvidedList() {
-        assessments.add(PATH_01);
-        List<Assessment> providedList = new ArrayList<>();
-        providedList.add(MISSION_01);
+        List<Assessment> providedList = List.of(MISSION_01);
+        assessments.add(PATH_05);
         assessments.setAssessments(providedList);
-        AssessmentList expectedAssessmentList = new AssessmentList();
-        expectedAssessmentList.add(MISSION_01);
+        AssessmentList expectedAssessmentList = new AssessmentListBuilder()
+                .withStudents(List.of(BOB)).build();
         assertEquals(expectedAssessmentList, assessments);
     }
 
     @Test
     public void setAssessments_listWithDuplicateAssessments_throwsDuplicateAssessmentException() {
-        List<Assessment> listWithDuplicateAssessments = Arrays.asList(PATH_01, PATH_01);
+        List<Assessment> listWithDuplicateAssessments = Arrays.asList(PATH_05, PATH_05);
         assertThrows(DuplicateAssessmentException.class, () ->
                 assessments.setAssessments(listWithDuplicateAssessments));
     }
