@@ -259,6 +259,8 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * Each student must have a unique name.
 
+* Phone numbers are not unique as multiple students may share the same parent.
+
 Example(s):
 
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
