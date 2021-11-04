@@ -168,20 +168,20 @@ Step 1. A valid command `edit 1 n/Ali` is given as user input. This invokes `Log
 `AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ` 1 n/Ali`.
 
 Step 2. `EditCommandParser` is initialized based on the parse results and `EditCommandParser#parse()` is called.
-`EditCommandParser#parse()` then identifies the `Index` of the person to be edited from the preamble of the input (i.e. `1` in this case),
-as well as calls `ArgumentTokenizer#tokenize()` to obtain an `ArgumentMultimap` of prefixes to their respective arguments
-(i.e. mapping `n/` to `Ali`).
+`EditCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to identify the `Index` of the person to be 
+edited from the preamble of the input (i.e. `1` in this case), as well as obtain an `ArgumentMultimap` of prefixes
+to their respective arguments (i.e. mapping `n/` to `Ali`).
 
-Step 3. `ShowCommandParser#parse()` then initializes an `EditPersonDescriptor` that stores the details to edit the person with.
-Thus, `EditPersonDescriptor` will store `Ali` as the `Name` to be edited to.
+Step 3. `EditCommandParser#parse()` then initializes an `EditPersonDescriptor` that stores the details to edit the person with.
+Thus, `EditPersonDescriptor#setName()` will be called to store `Ali` as the `Name` to be edited to.
 
-Step 4. `ShowCommandParser#parse()` then initializes an `EditCommand` with the `Index` and `EditPersonDescriptor` as an argument.
+Step 4. `EditCommandParser#parse()` then initializes an `EditCommand` with the `Index` and `EditPersonDescriptor` as an argument.
 `EditCommand#execute()` is then called, which creates a new `Person` and copies over the details to be edited
 from the `EditPersonDescriptor`.
 
-Step 5. If the new `Person` is not a duplicate of any existing applicant in the `AddressBook`, `Model#setPerson()` will be called to 
-change the specified applicant in the `AddressBook`. Finally, `Model#updateFilteredPersonList()` is called to reflect the changes in the
-list of applicants shown to the user.
+Step 5. After checking that the new `Person` is not a duplicate of any existing applicant in the `AddressBook` using `Model#hasPerson()`,
+`Model#setPerson()` will be called to change the specified applicant in the `AddressBook`. Finally, `Model#updateFilteredPersonList()`
+is called to reflect the changes in the list of applicants shown to the user.
 
 Step 6. Once the list is updated, `CommandResult` is initialized with `String` containing the details of the edited applicants.
 This CommandResult is then returned.
