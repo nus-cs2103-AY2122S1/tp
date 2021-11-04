@@ -4,8 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalClasses.addTypicalClassesToAddressBook;
 import static seedu.address.testutil.TypicalStudents.getAddressBookWithTypicalStudents;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -18,8 +23,19 @@ class TimetableTest {
     private static Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
             new UserPrefs());
     private static ObservableList<TuitionClass> tuitionClasses = UniqueTuitionList.getMostRecentTuitionClasses();
-    private static final TimetableInfoPage infoPage = new TimetableInfoPage(tuitionClasses, null);
-    private static Timetable timetable = new Timetable(tuitionClasses, null, infoPage);
+    private static TimetableInfoPage infoPage;
+    private static Timetable timetable;
+
+    @BeforeAll
+    public static void setUp_javaFX_runtime() throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(0);
+        Platform.startup(() -> {
+            countDownLatch.countDown();
+        });
+        countDownLatch.await(3, TimeUnit.SECONDS);
+        infoPage = new TimetableInfoPage(tuitionClasses, null);
+        timetable = new Timetable(tuitionClasses, null, infoPage);
+    }
 
     @Test
     void parseTime_success() {
@@ -69,5 +85,17 @@ class TimetableTest {
         Node node = timetable.getFirstLabel();
         timetable.showTimetable();
         assertEquals("Math\n11:00-14:00", ((Label) node).getText());
+    }
+
+    @Test
+    void testSetTable_success() {
+        TimetableInfoPage timetableInfoPage = new TimetableInfoPage(tuitionClasses, null);
+
+        //check timetable has correct number of rows
+        int rows = timetableInfoPage.getNumRows();
+        assertEquals(59, rows);
+        //check timetable has correct number of columns
+        int cols = timetableInfoPage.getNumCols();
+        assertEquals(8, cols);
     }
 }
