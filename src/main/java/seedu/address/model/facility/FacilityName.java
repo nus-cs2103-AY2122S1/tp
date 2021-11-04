@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Facility's name in the address book.
+ * Represents a Facility's name.
  */
 public class FacilityName {
 

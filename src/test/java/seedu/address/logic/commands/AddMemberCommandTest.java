@@ -173,6 +173,11 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public void removePersonFromAllocations(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteFacility(Facility target) {
             throw new AssertionError("This method should not be called.");
         }

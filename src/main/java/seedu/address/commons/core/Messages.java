@@ -10,7 +10,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
     // Member-specific Messages
-    public static final String MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX = "The member index provided is invalid";
+    public static final String MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX = "The member index provided is out of range of"
+            + " the currently displayed list";
+    public static final String MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES = "One or more of the member index provided is"
+            + " out of range of the currently displayed list";
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
     public static final String MESSAGE_MEMBER_NOT_AVAILABLE = "The member is not available on that day";
     public static final String MESSAGE_MEMBER_ALREADY_ALLOCATED =

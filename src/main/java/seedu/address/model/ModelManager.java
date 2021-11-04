@@ -180,6 +180,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removePersonFromAllocations(Person target) {
+        addressBook.removePersonFromAllocations(target);
+    }
+
+    @Override
     public void deleteFacility(Facility target) {
         addressBook.removeFacility(target);
     }
