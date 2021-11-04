@@ -28,8 +28,9 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
     private static final String INVALID_BIRTHDAY_MESSAGE = "Birthday %s is invalid. Will start with empty birthday.";
-    private static final String INVALID_PIN_MESSAGE = "Pin status %s is invalid. Will start with not pinned by default.";
-    public static final String INVALID_TAG_NAME_MESSAGE = "Tag %s is invalid. Will remove tag from tag list";
+    private static final String INVALID_PIN_MESSAGE = "Pin status %s is invalid. "
+            + "Will start with not pinned by default.";
+    private static final String INVALID_TAG_NAME_MESSAGE = "Tag %s is invalid. Will remove tag from tag list";
 
     private final String name;
     private final String phone;
