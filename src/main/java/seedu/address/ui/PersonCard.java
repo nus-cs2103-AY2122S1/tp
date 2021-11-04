@@ -70,11 +70,8 @@ public class PersonCard extends UiPart<Region> {
         person.getInsurances().stream()
                 .forEach(insurance -> insurances.getChildren().add(
                         new Label(insurance.toString())));
-        note.setText(person.getNote().value);
         meeting.setText("Meeting: " + person.getAppointment().getValue());
-        person.getClaims().stream()
-                .sorted(Comparator.comparing(claim -> claim.getTitle()))
-                .forEach(claim -> claims.getChildren().add(new Label(claim.toString() + "\n")));
+        note.setText(person.getNote().value);
     }
 
     @Override

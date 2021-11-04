@@ -1,0 +1,10 @@
+@startuml
+!include style.puml
+
+start
+:Get client at index;
+:Set client's Note to the new Note;
+
+stop
+
+@enduml

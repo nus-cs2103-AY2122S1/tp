@@ -17,7 +17,7 @@ public class Insurance {
             "Insurance type must be one of the following: "
             + String.join(", ", Arrays.stream(InsuranceType.values())
                     .map(InsuranceType::getTypeName)
-                    .collect(Collectors.joining()));
+                    .collect(Collectors.toList()));
 
     private InsuranceType type;
     private String brand;
@@ -25,6 +25,7 @@ public class Insurance {
     /**
      * Class constructor
      * @param type The type of this insurance
+     * @param brand The name of the brand of the insurance
      */
     public Insurance(InsuranceType type, String brand) {
         this.type = type;
@@ -34,6 +35,7 @@ public class Insurance {
     /**
      * Returns an Insurance with the given brand
      * @param insuranceName The type of the Insurance to return
+     * @param brand The brand of Insurance to return
      * @return The Insurance with the supplied brand
      */
     public static Insurance of(String insuranceName, String brand) throws IllegalValueException {
@@ -47,7 +49,7 @@ public class Insurance {
 
     /**
      * Gets the type of this Insurance
-     * @return @code{type}
+     * @return {@code type}
      */
     public InsuranceType getType() {
         return type;

@@ -11,7 +11,8 @@ import java.util.Objects;
  */
 
 public class Status {
-    public static final String MESSAGE_CONSTRAINTS = "A status can only be pending or completed";
+    public static final String MESSAGE_CONSTRAINTS = "A status is limited to the following, with any capitalization: "
+            + "\"pending\", \"completed\"";
     private final String status;
 
     private enum StatusState {
