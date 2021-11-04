@@ -335,6 +335,12 @@ public class MainWindow extends UiPart<Stage> {
         popup.getContent().add(label);
     }
 
+    /**
+     * Creates a Label object with a message and styling.
+     *
+     * @param message to be displayed in the label
+     * @return a Label object with the message and styling
+     */
     private Label createLabelForPopup(String message) {
         Label label = new Label(message);
         label.setWrapText(true);
