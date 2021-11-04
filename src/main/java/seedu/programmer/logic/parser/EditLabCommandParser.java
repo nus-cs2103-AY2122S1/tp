@@ -34,22 +34,23 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
 
         ArgumentMultimap argMultimap;
         try {
+            // this line may throw InvalidArgFlagsException while trying to tokenize the user input
             argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_NEW_LAB_NUM, PREFIX_LAB_TOTAL);
+
+            if (!argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
+            }
+
+            if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)) {
+                throw new ParseException(String.format(MESSAGE_MISSING_LAB_TO_BE_EDITED,EditLabCommand.MESSAGE_USAGE));
+            }
         } catch (InvalidArgFlagsException e) {
             throw new ParseException(
                     String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), EditLabCommand.MESSAGE_USAGE));
         }
 
         try {
-            if (!argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
-            }
-
-            if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)) {
-                throw new ParseException(MESSAGE_MISSING_LAB_TO_BE_EDITED);
-            }
-
             if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()
                     && argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
                 // Provided new lab number and total score
