@@ -530,7 +530,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**:
 
 * Sports CCAs have many members and it can be hard for the leaders to keep track of everyone’s information and
-  availability to organise training sessions, especially with COVID restrictions.
+  availability to organise training sessions, especially with the current pandemic restrictions.
 * SportsPA will help NUS Sports CCA leaders to be able to better manage their members’ contacts and attendance as well
   as training facilities to better organise CCA sessions.
 
@@ -555,10 +555,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sports CCA leader                          | edit a member's details        | directly make changes to that member's details if required
 | `* *`    | sports CCA leader                          | edit a facility's data         | quickly update the maximum capacity of each facility when group size regulations have changed
 | `* *`    | sports CCA leader                          | find a member by name          | locate relevant members and see their details without having to go through the entire list
-| `* *`    | sports CCA leader                          | find a facility by location    | locate facilities and see their details without having to go through the entire list
-| `* *`    | sports CCA leader                          | mark my member's attendance    | see who attended today's training session
+| `* *`    | sports CCA leader                          | find a facility by location    | locate relevant facilities and see their details without having to go through the entire list
+| `* *`    | sports CCA leader                          | mark my member's attendance    | keep track of who attended today's training session
 | `* *`    | sports CCA leader                          | unmark my member's attendance  | correct my mistake if I accidentally marked a member who did not attend the session as present
-| `* *`    | sports CCA leader                          | see the total attendance of each member           | assess their level of commitment
+| `* *`    | sports CCA leader                          | see the attendance record of each member          | assess their level of commitment
 | `* *`    | sports CCA leader                          | manually edit a member's allocation to a facility | accommodate last minute changes or requests made by members
 | `* *`    | sports CCA leader                          | tag my members                 | group them into useful categories, such as members with leadership positions or freshmen
 | `* *`    | sports CCA leader                          | filter members by tags         | view all members associated to a given category, such as members with leadership positions 
@@ -733,8 +733,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <span style="text-decoration: underline">list members (UC07)</span>
    or <span style="text-decoration: underline">search for members (UC08)</span>
-2. User requests to set availability of member(s) in the list
-3. SportsPA updates the availability of the member(s)
+2. User requests to set availability of specific member(s) in the list
+3. SportsPA updates the availability of the given member(s)
 
    Use case ends.
 
@@ -750,7 +750,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-* 2b. The given availability is invalid.
+* 2b. The given availability is invalid
 
     * 2b1. SportsPA shows an error message
 
@@ -812,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes from step 1.
 
-* 1b. The CSV file is not in the specified format
+* 1b. The content of CSV file is not in the valid format
   * 1b1. SportsPA shows an error message
 
     Use case resumes from step 1.
