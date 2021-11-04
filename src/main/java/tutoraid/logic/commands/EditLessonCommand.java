@@ -1,6 +1,7 @@
 package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.commons.core.Messages.MESSAGE_CAPACITY_LESS_THAN_STUDENTS;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_CAPACITY;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_PRICE;
@@ -77,6 +78,13 @@ public class EditLessonCommand extends EditCommand {
 
         if (!lessonToEdit.isSameLesson(editedLesson) && model.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        Capacity newCapacity = editedLesson.getCapacity();
+        Students currStudents = lessonToEdit.getStudents();
+
+        if (newCapacity.getCapacity() < currStudents.numberOfStudents()) {
+            throw new CommandException(MESSAGE_CAPACITY_LESS_THAN_STUDENTS);
         }
 
         model.setLesson(lessonToEdit, editedLesson);

@@ -32,4 +32,6 @@ public class Messages {
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d student(s) listed!";
     public static final String MESSAGE_LESSONS_LISTED_OVERVIEW = "%1$d lesson(s) listed!";
     public static final String MESSAGES_SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String MESSAGE_CAPACITY_LESS_THAN_STUDENTS = "The given capacity is lower "
+            + "than the number of students currently enrolled in the lesson!";
 }

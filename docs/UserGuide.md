@@ -192,6 +192,16 @@ You will be able to add up to **10** such progress notes for each student. When 
 
 > :bulb: We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
 
+### Step 5: Deleting a student
+{:.no_toc}
+Lastly, imagine one of your students `Roy Balakrishnan` has graduated from secondary school and no longer requires your tutoring services. You wish to remove his student details
+since he is no longer your student. To do so, you can easily delete his data from TutorAid by following the steps below:
+1. Type `list` in the command box to see the list of all your students in the Student Panel.
+2. Locate `Roy Balakrishnan` in the Student Panel and take note of his index. In this case, it would be `6`.
+3. Type `del -s 6` into the command box. Upon pressing enter, all details belonging to `Roy Balakrishnan` will be removed.
+
+Now, the Student and Lesson Panels will be updated accordingly without any data of `Roy Balakrishnan`.
+
 ### End
 {:.no_toc}
 Congratulations on successfully completing TutorAid's beginner's tutorial :tada: 
@@ -211,21 +221,21 @@ For more information about how to interpret any of the commands, you check out t
 
 ## 5.1 Student Commands
 
-### Adding a student: `add`
+### Adding a student: `add -s`
 {:.no_toc}
 Adds a new student.
 
 Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 
 Examples:
-* `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+* `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` adds a student with name `John Does`, student phone number `81234567`, parent's name `Mrs Doe` and parent's phone number `91234567`.
 
 * The student's phone number, parent's name and parent's phone number are optional details for you to include.
 
 > :bulb: TutorAid does not allow you to add duplicate students. A student is considered as a duplicate if he/she has the exact same name (case-insensitive) as an existing student in the app.
 > For example, TutorAid will consider 'John Doe' and 'john doe' as the same student, but not 'John Doe' and 'John'.
 
-### Deleting a student : `delete`
+### Deleting a student: `del -s`
 {:.no_toc}
 Deletes the student at the specified student index.
 
@@ -238,7 +248,7 @@ Format: `del -s STUDENT_INDEX`
 Example:
 * `del -s 2` deletes the 2nd student displayed in the Student Panel from TutorAid.
 
-### Editing a student : `edit -s`
+### Editing a student: `edit -s`
 {:.no_toc}
 Updates the field(s) of the student at the specified student index.
 
@@ -250,9 +260,9 @@ Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_N
 * At least 1 of the 4 optional fields must be present.
 
 Example:
-* `edit -s 2 pp/91112222` changes the parent contact number of the 2nd student displayed in the Student Panel to 91112222.
+* `edit -s 2 pp/91112222` updates the parent contact number of the 2nd student displayed in the Student Panel to 91112222.
 
-### Viewing a student : `view -s`
+### Viewing a student: `view -s`
 {:.no_toc}
 Displays the specified student’s name, phone number, parent's name, parent's phone number, progress and lessons.
 
@@ -283,7 +293,7 @@ Examples:
 * `find -s John` returns `john`, `John Doe` and `Johnny Liu`
 * `find -s alex david` returns `Alex Yeoh` and `David Li`<br>
 
-### Adding progress for a student : `add -p`
+### Adding progress for a student: `add -p`
 {:.no_toc}
 Adds a progress note to the student at the specified student index.
 
@@ -296,7 +306,7 @@ Format: `add -p STUDENT_INDEX PROGRESS`
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student displayed in the Student Panel.
 
-### Deleting progress from a student : `del -p`
+### Deleting progress from a student: `del -p`
 {:.no_toc}
 Removes a progress note from the student at the specified student index.
 
@@ -324,12 +334,12 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 * The lesson's timing can be anything you want (other than hyphens and slashes) - you could use it to remind yourself what time your lesson is, but you can use this space for any remarks or reminders you may have.
 
 Examples:
-* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400` adds a lesson with name `P6 Maths`, capacity of `20 students`, price of `$80` and timing `Monday 1200-1400`.
 
 > :bulb: TutorAid does not allow you to add duplicate lessons. A lesson is considered as a duplicate if it has the exact same name (case-insensitive) as an existing lesson in the app.
 > For example, TutorAid will consider 'Maths 1' and 'maths 1' as the same lesson, but not 'Maths 1' and 'Maths'.
 
-### Deleting a lesson : `del -l`
+### Deleting a lesson: `del -l`
 {:.no_toc}
 Deletes the lesson at the specified index.
 
@@ -357,9 +367,9 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 > :bulb: After you run this command, the Student Panel will only show students who are taking this lesson. Don't worry: you can easily find your students again using the [`list -a`](#listing-all-students-and-lessons-list) command.
 
 Examples:
-* `edit -l c/20 p/80`
+* `edit -l 1 c/20 p/80` updates the 1st lesson's capacity to `20 students` and price to `$80`
 
-### Viewing a lesson : `view -l`
+### Viewing a lesson: `view -l`
 {:.no_toc}
 Displays the specified lesson’s name, capacity, price and timing, along with names of students who have the specified lesson.
 
@@ -412,7 +422,7 @@ Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `add -sl s/1 2 3 l/1 2`
+* `add -sl s/1 2 3 l/1 2` add students with index 1, 2, 3 into lessons with index 1, 2.
 
 > :exclamation: All of these students must not be attending any of the lessons provided for this command to work.
 
@@ -427,13 +437,13 @@ Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `del -sl s/2 3 l/1 2 3`
+* `del -sl s/2 3 l/1 2 3` deletes students with index 2, 3 from lessons with index 1, 2, 3.
 
 > :exclamation: All of these students must be attending all the lessons provided for this command to work.
 
 ## 5.4 Other Commands
 
-### Viewing help : `help`
+### Viewing help: `help`
 {:.no_toc}
 Open a new pop-up window that displays an offline help guide. This guide contains all the commands available in TutorAid.
 
@@ -441,19 +451,19 @@ Open a new pop-up window that displays an offline help guide. This guide contain
 
 Format: `help`
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 {:.no_toc}
 Clears all entries from TutorAid.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 {:.no_toc}
 Exits the program.
 
 Format: `exit`
 
-## 4.5 Saving and Editing Data
+## 5.5 Saving and Editing Data
 
 ### Saving the data
 {:.no_toc}
@@ -487,13 +497,13 @@ TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`.
 |---
 Action | Format and Examples
 --------|------------------
-**[Add student](#adding-a-student-add)** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
-**[Delete student](#deleting-a-student--delete)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
-**[Edit student](#editing-a-student--edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
-**[View student](#viewing-a-student--view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
+**[Add student](#adding-a-student-add--s)** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+**[Delete student](#deleting-a-student-del--s)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
+**[Edit student](#editing-a-student-edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
+**[View student](#viewing-a-student-view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
 **[Find student](#finding-students-by-name-find--s)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
-**[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
-**[Delete Progress](#deleting-progress-from-a-student--del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
+**[Add Progress](#adding-progress-for-a-student-add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
+**[Delete Progress](#deleting-progress-from-a-student-del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
 ### 8.2 Lesson commands
 
@@ -501,9 +511,9 @@ Action | Format and Examples
 Action | Format and Examples
 --------|------------------
 **[Add lesson](#adding-a-lesson-add--l)** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
-**[Delete lesson](#deleting-a-lesson--del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
+**[Delete lesson](#deleting-a-lesson-del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
-**[View lesson](#viewing-a-lesson--view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
+**[View lesson](#viewing-a-lesson-view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **[Find lesson](#finding-lessons-by-name-find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 
 ### 8.3 Student and Lesson commands
@@ -514,13 +524,12 @@ Action | Format and Examples
 **[List](#listing-all-students-and-lessons-list)** | `list [-a]`<br>e.g., `list`, `list -a`
 **[Add students to lessons](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
 **[Delete students from lessons](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
-**[Clear](#clearing-all-entries--clear)** | `clear`
 
 ### 8.4 Other commands
 
 |---
 Action | Format and Examples
 --------|------------------
-**[Help](#viewing-help--help)** | `help`
-**[Clear](#clearing-all-entries--clear)** | `clear`
-**[Exit](#exiting-the-program--exit)** | `exit`
+**[Help](#viewing-help-help)** | `help`
+**[Clear](#clearing-all-entries-clear)** | `clear`
+**[Exit](#exiting-the-program-exit)** | `exit`
