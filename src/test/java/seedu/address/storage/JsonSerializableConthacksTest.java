@@ -19,7 +19,7 @@ public class JsonSerializableConthacksTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableConthacksTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsConthacks.json");
     private static final Path TYPICAL_MODULE_LESSON_FILE = TEST_DATA_FOLDER
-            .resolve("typicalModuleLessonConthacks.json");
+            .resolve("typicalModuleLessonsConthacks.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonConthacks.json");
     private static final Path INVALID_MODULE_LESSON_FILE = TEST_DATA_FOLDER
             .resolve("invalidModuleLessonConthacks.json");
