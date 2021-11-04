@@ -90,10 +90,10 @@ public class EditCommand extends Command {
         model.setSelectedStudent(editedStudent);
         model.setSelectedLabs(editedStudent.getLabList());
         if (labNum2 != null) {
-            return new EditCommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
-                    + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
+            return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, labNum2)
+                                    + String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
         }
-        return new EditCommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
     /**

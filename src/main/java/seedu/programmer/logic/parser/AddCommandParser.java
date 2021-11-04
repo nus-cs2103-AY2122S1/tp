@@ -44,14 +44,16 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_MISSING_ARGUMENT, AddCommand.MESSAGE_USAGE));
         }
 
+        Student student = createStudent(argMultimap);
+        return new AddCommand(student);
+    }
+
+    private Student createStudent(ArgumentMultimap argMultimap) throws ParseException {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse(null));
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).orElse(null));
         ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASS_ID).orElse(null));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(null));
-
-        Student student = new Student(name, studentId, classId, email);
-
-        return new AddCommand(student);
+        return new Student(name, studentId, classId, email);
     }
 
     /**

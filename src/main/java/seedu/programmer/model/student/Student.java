@@ -187,7 +187,7 @@ public class Student implements DisplayableObject {
     }
 
     private String warnExceedTotalScore(int score, int totalScore) {
-        return String.format( "Error: New score %d exceeds total score of %d", score, totalScore);
+        return String.format("Error: New score %d exceeds total score of %d", score, totalScore);
     }
 
     /**
