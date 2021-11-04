@@ -199,24 +199,22 @@ Notes:
 
 ### Locating persons by name and tag(s): `find`
 
-Finds all persons whose names **and** tags matches ALL keywords provided.
+Finds all persons who match **ALL** name and tag keywords provided.
 
 #### Format:
 * `find [n/NAME] …​ [t/TAG] …​`
   * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
-Notes:
-* `find` is case-insensitive by default. e.g. `hans` will match `Hans`.
-  * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
-  * `c/` case-sensitive search applies **ONLY** to tags.
-* The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as
-  `t/friends n/Hans`.
-* Both name and tags are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-  * This applies to both names and tags. This means `find n/an` will not return entries such as `Hans`, but 
-    it will return entries such as `Jing An`.
-* Only Persons matching all keywords will be returned (i.e. `AND` search).
-  e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`.
+Notes:  
+* `find` is case-insensitive for names. e.g. `n/ hans` will match a contact with name `Hans`.  
+* `find` is case-insensitive for tags by default. e.g. `find t/friend` will match a contact with tags `Friend` or `friend`.  
+  * Adding the `c/` flag **after** the command word will make tag matching case-sensitive.  
+    e.g. `find c/ t/friend` will match a contact with tag `friend` but not `Friend`.
+* The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as `t/friends n/Hans`.
+* Only full words will be matched for names and tags.  
+  * `find n/an` will not return entries such as `Hans`, but will return `Jing An`.  
+* Only Persons matching all keywords will be returned (i.e. `AND` search).  
+  e.g. `n/Hans t/Friend` will return all Persons with names containing the word `Hans` and who are tagged with `Friend`.  
 
 **Sample Usage:**
 * `find n/John`
@@ -231,23 +229,23 @@ Notes:
 
 ### Locating persons by name or tag(s): `findAny`
 
-Finds all persons whose names **or** tags contain ANY of the given keywords.
+Finds all persons who match **ANY** name and tag keywords provided.
 
 #### Format:
 * `findAny [n/NAME] …​ [t/TAG] …​`
-  * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
+  * Note that `findAny` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
-* `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`.
-  * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
-  * `c/` case-sensitive search applies **ONLY** to tags.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Both name and tags are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-  * This applies to both names and tags. This means `findAny n/an` will not return entries such as `Hans`, but
-    it will return entries such as `Jing An`.
+* `find` is case-insensitive for names. e.g. `n/ hans` will match a contact with name `Hans`.
+* `find` is case-insensitive for tags by default. e.g. `find t/friend` will match a contact with tags `Friend` or `friend`.
+  * Adding the `c/` flag **after** the command word will make tag matching case-sensitive.  
+    e.g. `find c/ t/friend` will match a contact with tag `friend` but not `Friend`.
+* The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as `t/friends n/Hans`.
+* Only full words will be matched for names and tags.
+  * `find n/an` will not return entries such as `Hans`, but will return `Jing An`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
+  e.g. `n/Hans t/Friend` will return all Persons either with names containing the word `Hans` or who are tagged with `Friend`.
+
 
 **Sample Usage:**
 * `findAny n/John`
