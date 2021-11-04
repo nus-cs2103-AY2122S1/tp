@@ -3,6 +3,7 @@ package seedu.tuitione.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.AppUtil.checkArgument;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.tuitione.model.student.Student.STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,10 +19,14 @@ import seedu.tuitione.model.student.Student;
 public class Lesson {
 
     public static final int MAX_LESSON_SIZE = 15;
-    public static final String UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT = "%1$s is unable to enroll for this lesson";
-    public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has"
-            + String.format("%1$d students enrolled, and cannot enroll anymore students.", MAX_LESSON_SIZE);
-    public static final String STUDENT_NOT_ENROLLED = "%1$s is not enrolled for %2$s";
+
+    public static final String STUDENT_NOT_ENROLLED_CONSTRAINT = "%1$s is not enrolled for %2$s";
+    public static final String STUDENT_ALREADY_ENROLLED_CONSTRAINT = "%1$s is already enrolled for %2$s";
+    public static final String DIFFERENT_GRADE_CONSTRAINT = "%1$s is in a different grade from %2$s";
+    public static final String CONFLICTING_TIMINGS_CONSTRAINT = "%1$s has enrolled for lessons "
+            + "that conflict with %2$s";
+    public static final String LESSON_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has " + MAX_LESSON_SIZE
+            + " students enrolled, and cannot enroll anymore students.";
 
     private final Subject subject;
     private final Grade grade;
@@ -110,34 +115,35 @@ public class Lesson {
     }
 
     /**
-     * Returns true if Lesson has 14 or fewer Students enrolled.
+     * Returns true if Lesson lesser than MAX_LESSON_SIZE Students enrolled, else false.
      */
     public boolean isAbleToEnrollMoreStudents() {
         return students.size() < MAX_LESSON_SIZE;
     }
 
     /**
-     * Returns true if a student is eligible to enroll for the lesson.
-     * A student must be of the same grade, must be available for the time slot,
-     * and must not be already enrolled to the lesson.
+     * Returns true if Lesson and Student are of the same grade, else false.
      */
-    public boolean isAbleToEnroll(Student student) {
-        if (student == null || !student.isAbleToEnrollForMoreLessons()) {
-            return false;
-        }
-        if (containsStudent(student)) {
-            return false;
-        }
-        if (!student.getGrade().equals(grade)) {
-            return false;
-        }
-        for (Lesson lesson : student.getLessons()) {
-            LessonTime time = lesson.getLessonTime();
-            if (time.hasOverlappedTiming(lessonTime)) {
-                return false;
-            }
-        }
-        return isAbleToEnrollMoreStudents();
+    public boolean isStudentOfSameGrade(Student student) {
+        requireNonNull(student);
+        return student.getGrade().equals(grade);
+    }
+
+    /**
+     * Returns true if {@code otherLesson} conflicts with instance's timing, else false.
+     */
+    public boolean hasConflictingTimings(Lesson otherLesson) {
+        requireNonNull(otherLesson);
+        LessonTime otherTime = otherLesson.getLessonTime();
+        return otherTime.hasOverlappedTiming(lessonTime);
+    }
+
+    /**
+     * Returns true if Student has enrolled for lessons that conflicts with instance's timing, else false.
+     */
+    public boolean doesStudentHaveConflictingTimings(Student student) {
+        requireNonNull(student);
+        return student.getLessons().stream().anyMatch(this::hasConflictingTimings);
     }
 
     /**
@@ -155,7 +161,24 @@ public class Lesson {
      * Checks if Student is enrolled in this Lesson.
      */
     public boolean containsStudent(Student student) {
+        requireNonNull(student);
         return students.stream().anyMatch(s -> s.isSameStudent(student));
+    }
+
+    /**
+     * Runs all checks if a student can be enrolled. If any conditions failed, an exception will be thrown.
+     */
+    public void runEnrollmentChecks(Student student) {
+        checkArgument(student.isAbleToEnrollForMoreLessons(),
+                String.format(STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
+        checkArgument(!containsStudent(student),
+                String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT, student.getName(), this));
+        checkArgument(!doesStudentHaveConflictingTimings(student),
+                String.format(CONFLICTING_TIMINGS_CONSTRAINT, student.getName(), this));
+        checkArgument(isStudentOfSameGrade(student),
+                String.format(DIFFERENT_GRADE_CONSTRAINT, student.getName(), this));
+        checkArgument(isAbleToEnrollMoreStudents(),
+                String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, this));
     }
 
     /**
@@ -163,7 +186,8 @@ public class Lesson {
      */
     public void enrollStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToEnroll(student), String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName()));
+
+        runEnrollmentChecks(student); // use helper method to run checks
         addStudent(student);
     }
 
@@ -172,7 +196,9 @@ public class Lesson {
      */
     public void unenrollStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToUnenroll(student), String.format(STUDENT_NOT_ENROLLED, student.getName(), this));
+        checkArgument(isAbleToUnenroll(student),
+                String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, student.getName(), this));
+
         for (Student s : students) {
             if (s.isSameStudent(student)) {
                 removeStudent(s);
@@ -197,13 +223,14 @@ public class Lesson {
      */
     public void updateStudent(Student oldStudent, Student newStudent) {
         requireAllNonNull(oldStudent, newStudent);
-        checkArgument(isAbleToUnenroll(oldStudent), String.format(STUDENT_NOT_ENROLLED, oldStudent.getName(), this));
+        checkArgument(isAbleToUnenroll(oldStudent),
+                String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, oldStudent.getName(), this));
 
         for (Student student : students) {
             if (student.isSameStudent(oldStudent)) {
                 removeStudent(oldStudent);
-                checkArgument(isAbleToEnroll(newStudent),
-                        String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, newStudent.getName()));
+
+                runEnrollmentChecks(newStudent); // use helper method to run checks
                 addStudent(newStudent);
                 return;
             }

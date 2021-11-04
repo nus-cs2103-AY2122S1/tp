@@ -1,8 +1,10 @@
 package seedu.tuitione.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_DAY;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_PRICE_NOT_NUMBER;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_TIME;
 import static seedu.tuitione.model.lesson.LessonTime.TIME_FORMATTER;
 import static seedu.tuitione.model.lesson.LessonTime.parseStringToDay;
 import static seedu.tuitione.model.lesson.Price.PRICE_MESSAGE_CONSTRAINT;
@@ -19,8 +21,6 @@ import java.util.Set;
 
 import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.commons.util.StringUtil;
-import seedu.tuitione.logic.commands.EnrollCommand;
-import seedu.tuitione.logic.commands.UnenrollCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.lesson.Subject;
@@ -35,12 +35,6 @@ import seedu.tuitione.model.student.ParentContact;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "⚠\tAlert:\n\nIndex is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TIME = "⚠\tAlert:\n\nTime formatting is invalid.";
-    public static final String MESSAGE_INVALID_DAY = "⚠\tAlert:\n\nDay formatting is invalid.";
-    public static final String MESSAGE_INVALID_COST_NOT_NUMBER =
-            "⚠\tAlert:\n\nCost formating is invalid, it is not a number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -76,7 +70,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static ParentContact parsePhone(String phone) throws ParseException {
+    public static ParentContact parseParentContact(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!ParentContact.isValidPhone(trimmedPhone)) {
@@ -181,62 +175,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String studentIndex_LessonIndex} into a {@code UnenrollCommand}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static UnenrollCommand parseUnenrollArgs(String args) throws ParseException {
-        requireNonNull(args);
-
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
-
-        String indexStudentString = argMultimap.getPreamble();
-        String indexLessonString = argMultimap.getValue(PREFIX_LESSON).orElseThrow(() ->
-                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE)));
-
-        if (!StringUtil.isAllDigit(indexStudentString)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE));
-        }
-        Index indexStudent = ParserUtil.parseIndex(indexStudentString);
-
-        if (!StringUtil.isAllDigit(indexLessonString)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE));
-        }
-        Index indexLesson = ParserUtil.parseIndex(indexLessonString);
-
-        return new UnenrollCommand(indexStudent, indexLesson);
-    }
-
-    /**
-     * Parses a {@code String studentIndex_LessonIndex} into a {@code EnrollCommand}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static EnrollCommand parseEnrollArgs(String args) throws ParseException {
-        requireNonNull(args);
-
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
-
-        String indexStudentString = argMultimap.getPreamble();
-        String indexLessonString = argMultimap.getValue(PREFIX_LESSON).orElseThrow(() ->
-                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE)));
-
-        if (!StringUtil.isAllDigit(indexStudentString)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE));
-        }
-        Index indexStudent = ParserUtil.parseIndex(indexStudentString);
-
-        if (!StringUtil.isAllDigit(indexLessonString)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE));
-        }
-        Index indexLesson = ParserUtil.parseIndex(indexLessonString);
-
-        return new EnrollCommand(indexStudent, indexLesson);
-    }
-
-    /**
      * Parses a {@code String subject} into a {@code String subject}
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -250,7 +188,6 @@ public class ParserUtil {
         if (!isValidSubject(cleanedSubject)) {
             throw new ParseException(SUBJECT_MESSAGE_CONSTRAINTS);
         }
-
         return new Subject(cleanedSubject);
     }
 
@@ -260,7 +197,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code cost} is invalid
      */
-    public static Price parseCostArgs(String args) throws ParseException {
+    public static Price parsePriceArgs(String args) throws ParseException {
         requireNonNull(args);
         String trimmedCost = args.trim();
         double cost;
@@ -268,12 +205,12 @@ public class ParserUtil {
         try {
             cost = Double.parseDouble(trimmedCost);
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_COST_NOT_NUMBER);
+            throw new ParseException(MESSAGE_INVALID_PRICE_NOT_NUMBER);
         }
+
         if (!isValidPrice(cost)) {
             throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
         }
-
         return new Price(cost);
     }
 }

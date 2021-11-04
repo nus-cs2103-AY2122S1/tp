@@ -1,6 +1,7 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
@@ -13,7 +14,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nListed all students & lessons";
+    public static final String MESSAGE_SUCCESS = HEADER_UPDATE + "Listed all students & lessons";
 
     @Override
     public CommandResult execute(Model model) {

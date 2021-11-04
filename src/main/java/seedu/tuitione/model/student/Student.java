@@ -25,8 +25,10 @@ public class Student {
     public static final int MAX_ENROLLMENT_SIZE = 10;
     public static final int MAX_REMARK_SIZE = 5;
 
-    public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "Student %1$s has enrolled for "
-            + String.format("%1$d lessons already.", MAX_ENROLLMENT_SIZE);
+    public static final String STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT = "Student %1$s has enrolled for "
+            + MAX_ENROLLMENT_SIZE + " lessons already.";
+    public static final String REMARK_COUNT_CONSTRAINT = "You can only tag a maximum of " + MAX_REMARK_SIZE
+            + " remarks to a student.";
 
     // Identity fields
     private final Name name;
@@ -155,7 +157,9 @@ public class Student {
      */
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
-        checkArgument(isAbleToEnrollForMoreLessons(), String.format(ENROLLMENT_MESSAGE_CONSTRAINT, this.getName()));
+        checkArgument(isAbleToEnrollForMoreLessons(),
+                String.format(STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT, this.getName()));
+
         if (!containsLesson(lesson)) {
             lessons.add(lesson);
         }

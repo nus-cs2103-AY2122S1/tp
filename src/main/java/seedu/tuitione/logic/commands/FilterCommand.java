@@ -1,10 +1,12 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_LESSON_FOUND_OVERVIEW;
+import static seedu.tuitione.commons.core.Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGradeAndSubject;
@@ -43,17 +45,19 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         String output = "";
-        if (grade != null) {
+
+        if (subject == null && grade != null) {
             model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
             model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
             output = studentAndLessonFoundOutput(model.getFilteredStudentList().size(),
                     model.getFilteredLessonList().size());
         }
-        if (subject != null) {
+
+        if (subject != null && grade == null) {
             model.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
             output = lessonFoundOutput(model.getFilteredLessonList().size());
-
         }
+
         if (subject != null && grade != null) {
             model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
             model.updateFilteredLessonList(new LessonIsOfSpecifiedGradeAndSubject(grade, subject));
@@ -62,6 +66,17 @@ public class FilterCommand extends Command {
         }
 
         return new CommandResult(output); // output should never be empty string
+    }
+
+    private String lessonFoundOutput(int size) {
+        return HEADER_UPDATE + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, size);
+    }
+
+    private String studentAndLessonFoundOutput(int studentListSize, int lessonListSize) {
+        String messageContent = String.format(MESSAGE_STUDENTS_FOUND_OVERVIEW, studentListSize)
+                + "\n"
+                + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, lessonListSize);
+        return HEADER_UPDATE + messageContent;
     }
 
     @Override
@@ -80,17 +95,5 @@ public class FilterCommand extends Command {
         } else {
             return false;
         }
-    }
-
-    private String lessonFoundOutput (int size) {
-        return String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_LESSON_FOUND_OVERVIEW, size);
-    }
-
-    private String studentAndLessonFoundOutput (int studentListSize, int lessonListSize) {
-        return String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW,
-                studentListSize)
-                + "\n"
-                + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW,
-                lessonListSize);
     }
 }

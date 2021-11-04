@@ -25,7 +25,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Grade grade = null;
         Subject subject = null;
 
-
         if (!arePrefixesPresent(argMultimap, PREFIX_GRADE, PREFIX_SUBJECT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
@@ -37,7 +36,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             subject = ParserUtil.parseSubjectArgs(argMultimap.getValue(PREFIX_SUBJECT).get());
         }
-
 
         return new FilterCommand(grade, subject);
     }

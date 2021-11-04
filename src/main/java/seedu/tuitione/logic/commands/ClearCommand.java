@@ -1,6 +1,7 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.Tuitione;
@@ -11,7 +12,7 @@ import seedu.tuitione.model.Tuitione;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nData of TuitiONE has been cleared!";
+    public static final String MESSAGE_SUCCESS = HEADER_SUCCESS + "Data of TuitiONE has been cleared.";
 
 
     @Override

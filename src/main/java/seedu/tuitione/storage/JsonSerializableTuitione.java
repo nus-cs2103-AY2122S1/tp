@@ -1,8 +1,10 @@
 package seedu.tuitione.storage;
 
-import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
-import static seedu.tuitione.model.lesson.Lesson.UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT;
-import static seedu.tuitione.model.student.Student.ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.CONFLICTING_TIMINGS_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.DIFFERENT_GRADE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.LESSON_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_ALREADY_ENROLLED_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,6 @@ class JsonSerializableTuitione {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
-    public static final String MESSAGE_DUPLICATE_ENROLLMENT = "Lessons list contains duplicate enrollment(s).";
     public static final String MESSAGE_INVALID_LESSON_CODE = "Lessons list does not match with "
             + "student-associated lesson codes(s).";
 
@@ -118,6 +119,7 @@ class JsonSerializableTuitione {
             List<Lesson> lessonList) throws IllegalValueException {
 
         for (String jsonLessonCode : jsonLessonCodes) {
+
             // find if lesson is present
             Optional<Lesson> lessonStream = lessonList.stream()
                     .filter(l -> l.getLessonCode().value.equals(jsonLessonCode))
@@ -126,18 +128,25 @@ class JsonSerializableTuitione {
 
             // enrollment checks
             if (!student.isAbleToEnrollForMoreLessons()) {
-                throw new IllegalValueException(String.format(ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
+                throw new IllegalValueException(String.format(STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT,
+                        student.getName()));
+
+            } else if (lesson.containsStudent(student)) {
+                throw new IllegalValueException(String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT,
+                        student.getName(), lesson));
+
+            } else if (lesson.doesStudentHaveConflictingTimings(student)) {
+                throw new IllegalValueException(String.format(CONFLICTING_TIMINGS_CONSTRAINT,
+                        student.getName(), lesson));
+
+            } else if (!lesson.isStudentOfSameGrade(student)) {
+                throw new IllegalValueException(String.format(DIFFERENT_GRADE_CONSTRAINT,
+                        student.getName(), lesson));
+
+            } else if (!lesson.isAbleToEnrollMoreStudents()) {
+                throw new IllegalValueException(String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, lesson));
             }
-            if (!lesson.isAbleToEnrollMoreStudents()) {
-                throw new IllegalValueException(String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT,
-                        lesson.getLessonCode()));
-            }
-            if (lesson.containsStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
-            }
-            if (!lesson.isAbleToEnroll(student)) {
-                throw new IllegalValueException(String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName()));
-            }
+
             lesson.enrollStudent(student);
         }
     }

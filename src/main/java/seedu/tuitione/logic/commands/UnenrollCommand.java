@@ -1,8 +1,10 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED_CONSTRAINT;
 
 import java.util.List;
 
@@ -25,13 +27,11 @@ public class UnenrollCommand extends Command {
             + COMMAND_WORD + "\nUnenroll a specified student "
             + "from a given TuitiONE lesson\n\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
-            + "l/LESSON_INDEX\n"
+            + "l/LESSON_INDEX (must be a positive integer)\n"
             + "Example: " + "unenroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS =
-            "✔\tSuccess:\n\nUnenrolled Student:\n%1$s from lesson: %2$s";
-    public static final String MESSAGE_STUDENT_NOT_IN_LESSON =
-            "⚠\tAlert:\n\n%1$s is not currently enrolled in the lesson: %2$s";
+    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = HEADER_SUCCESS + "Unenrolled student "
+            + "%1$s from lesson %2$s";
 
     private final Index indexStudent;
 
@@ -50,8 +50,8 @@ public class UnenrollCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownStudentList = model.getFilteredStudentList();
 
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
         ObservableList<Lesson> lastShownLessonList = model.getFilteredLessonList();
         if (indexStudent.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -64,17 +64,16 @@ public class UnenrollCommand extends Command {
         Lesson lesson = lastShownLessonList.get(indexLesson.getZeroBased());
 
         if (!lesson.containsStudent(studentToUnenroll)) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_LESSON,
-                    studentToUnenroll.getName(),
-                    lesson));
+            throw new CommandException(String.format(STUDENT_NOT_ENROLLED_CONSTRAINT,
+                    studentToUnenroll.getName(), lesson));
         }
         lesson.unenrollStudent(studentToUnenroll);
 
+        // self update entities
         model.setStudent(studentToUnenroll, studentToUnenroll);
         model.setLesson(lesson, lesson);
 
-        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS,
-                studentToUnenroll.getName(), lesson));
+        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));
     }
 
     @Override
