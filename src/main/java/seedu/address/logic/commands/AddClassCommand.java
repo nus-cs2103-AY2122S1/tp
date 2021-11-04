@@ -26,7 +26,7 @@ public class AddClassCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New class added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLASS = "This class already exists in Classmate";
-    public static final String MESSAGE_EMPTY_CLASS = "The class code 'G00' is invalid.";
+    public static final String MESSAGE_EMPTY_CLASS = "The class code is invalid. ";
 
     private final TutorialClass toAdd;
 
@@ -45,7 +45,7 @@ public class AddClassCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
         }
 
-        if (toAdd.equals(new EmptyClassCode())) {
+        if (toAdd.getClassCode().equals(new EmptyClassCode())) {
             throw new CommandException(MESSAGE_EMPTY_CLASS);
         }
 

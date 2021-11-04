@@ -13,7 +13,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ClassCode implements Comparable<ClassCode> {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G/g, "
-            + "followed by a 2-digit number and it should not be blank";
+            + "followed by a 2-digit non-zero number and it should not be blank";
 
     public static final String VALIDATION_REGEX = "[G|g]\\d{2}";
     public final String value;

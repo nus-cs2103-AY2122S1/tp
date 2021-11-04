@@ -11,7 +11,7 @@ public class Schedule {
             "Schedules should follow the format 'day-of-the-week starttime to endtime', "
                     + "and different days must be separated by commas. \n"
                     + "Schedule must contain at least two days\n"
-                    + "e.g. tues 12:00pm to 2:00pm, friday 12:00pm to 2:00pm";
+                    + "e.g. Tues 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm";
 
     private static final String VALIDATION_REGEX = "[,\n]";
 

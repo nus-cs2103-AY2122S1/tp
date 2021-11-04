@@ -102,8 +102,13 @@ Adds a student to ClassMATE.
 
 Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
+<div markdown="span" class="alert alert-info">:information_source: **Notes about addstu:** <br> 
+
+* The Name of a student accommodates special characters such as hyphens, apostrophes and slashes.
+* The phone number should be at least 3 digits long.
+* The tutorial class with the given Class Code must already exist in classmate.
+* A student can have any number of tags (including 0) 
+
 </div>
 
 Examples:
@@ -248,7 +253,7 @@ Clears all students from ClassMATE. Below is how it would look like.
 Format: `clear`
 
 <div markdown="span" class="alert alert-primary">:warning: **Warning:**
-This command deletes **ALL** students and is irreversible :warning:
+This command deletes **ALL** students and is irreversible :warning: 
 </div>
 
 ## Tutorial Class Commands
@@ -259,9 +264,13 @@ Adds a tutorial class to ClassMATE.
 
 Format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** 
+Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
+</div>
+
 Examples:
 * `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
-* `addc c/G01 s/Monday 10am to 12pm, thursday 10am to 12pm`
+* `addc c/G01 s/Monday 10am to 12pm, Thursday 10am to 12pm`
 
 ### Viewing a class: `viewc`
 
@@ -269,9 +278,9 @@ Examples:
 
 Views a class in ClassMATE, as shown above
 
-**:information_source: Note:**<br>
-
-viewc highlights the class chosen, and filters out only students in the class!
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
+`viewc` highlights the class chosen, and filters out only students in the class!
+</div>
 
 Format: `viewc INDEX`
 
@@ -332,7 +341,7 @@ Examples:
 
 ### Adding a group: `addcg`
 
-Adds a group to a particular tutorial class
+Adds a group to a particular tutorial class in ClassMATE.
 
 Format: `addcg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
