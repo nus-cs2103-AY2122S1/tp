@@ -83,8 +83,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showStudentAtIndex(model, INDEX_FIRST);
-
+        //showStudentAtIndex(model, INDEX_FIRST);
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST.getZeroBased());
         Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST,
@@ -93,7 +92,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.setStudent(model.getFilteredStudentList().get(INDEX_FIRST.getZeroBased()), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

@@ -12,7 +12,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes students from TutAssistor.
  */
 public class DeleteCommand extends Command {
 
@@ -29,6 +29,11 @@ public class DeleteCommand extends Command {
 
     private List<Index> targetIndex = new ArrayList<>();
 
+    /**
+     * Constructor for DeleteCommand using a list of student indexes.
+     *
+     * @param targetIndex List of student indexes.
+     */
     public DeleteCommand(List<Index> targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -40,9 +45,7 @@ public class DeleteCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
         List<String> removed = new ArrayList<>();
         List<Integer> invalidStudents = new ArrayList<>();
-
-        for (int i = 0; i < targetIndex.size(); i++) {
-            Index currIndex = targetIndex.get(i);
+        for (Index currIndex: targetIndex) {
             if (currIndex.getZeroBased() >= lastShownList.size()) {
                 invalidStudents.add(currIndex.getOneBased());
                 continue;
@@ -52,19 +55,15 @@ public class DeleteCommand extends Command {
                 invalidStudents.add(currIndex.getOneBased());
                 continue;
             }
-            if (studentToDelete != null) {
-                for (Integer tuitionClassId : studentToDelete.getClasses().getClasses()) {
-                    TuitionClass tuitionClass = model.getClassById(tuitionClassId);
-                    if (tuitionClass != null) {
-                        TuitionClass updatedClass = tuitionClass.removeStudent(studentToDelete);
-                        model.setTuition(tuitionClass, updatedClass);
-                    }
+            for (Integer tuitionClassId : studentToDelete.getClasses().getClasses()) {
+                TuitionClass tuitionClass = model.getClassById(tuitionClassId);
+                if (tuitionClass != null) {
+                    TuitionClass updatedClass = tuitionClass.removeStudent(studentToDelete);
+                    model.setTuition(tuitionClass, updatedClass);
                 }
-                removed.add(studentToDelete.getName().fullName);
-                model.deleteStudent(studentToDelete);
             }
-            model.updateFilteredTuitionList(Model.PREDICATE_SHOW_ALL_TUITIONS);
-            model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+            removed.add(studentToDelete.getName().fullName);
+            model.deleteStudent(studentToDelete);
         }
         if (!invalidStudents.isEmpty() && removed.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_DELETE_STUDENTS_FAILURE, invalidStudents));
@@ -72,9 +71,7 @@ public class DeleteCommand extends Command {
         String feedback = (!removed.isEmpty()
                 ? String.format(MESSAGE_DELETE_STUDENTS_SUCCESS, removed) : "")
                 + (!invalidStudents.isEmpty()
-                        ? String.format(MESSAGE_DELETE_STUDENTS_FAILURE, invalidStudents)
-                        : "");
-
+                        ? String.format(MESSAGE_DELETE_STUDENTS_FAILURE, invalidStudents) : "");
         return new CommandResult(feedback);
     }
 
