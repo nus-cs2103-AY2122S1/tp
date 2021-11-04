@@ -198,8 +198,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Implementation
 
-When ModelManager is initialised, optionalOrder is set to Optional.empty(). 
-At this point, the user has 1 order record with 2 items in his transaction list.
+When ModelManager is initialised, optionalOrder is set to Optional.empty(). At this point, the user has 1 order record
+with 2 items in his transaction list.
 
 ![Initial_State](images/OrderInitialState.png)
 
@@ -233,55 +233,63 @@ Step 4. The new transactions are saved to json file.
 
 This section explains how various commands update the list of items and display the result.
 
-As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness between
-items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then update the
+As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness
+between items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then
+update the
 `ObservableList<Item>`. The `ObservableList<Item>` is bounded to the UI so that the UI automatically updates when the
 data in the list change.
 
-`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design needs to
-ensure that every command mutates the `UniqueItemList` through `Inventory`.
+`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design
+needs to ensure that every command mutates the `UniqueItemList` through `Inventory`.
 
 The general flow of inventory manipulation through AddCommand is as below:
+
 1. The `AddCommand` object in `Logic` component interacts with `Model` component by calling the `Model#addItem()` if a
    new item is added and `Model#restockItem()` if an existing item is restocked.
-2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
-3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
-4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be returned to the user.
-   The returned list has added a new item or incremented the count of the existing item.
-
+2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature
+   in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
+3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method
+   signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
+4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be
+   returned to the user. The returned list has added a new item or incremented the count of the existing item.
 
 Flow:`AddCommand` -> `Model` -> `Inventory` -> `UniqueItemList` -> `ObservableList<Item>`
 
-The above flow applies for all the other similar commands that manipulates the inventory.
-The detailed flow for each command is found below:
+The above flow applies for all the other similar commands that manipulates the inventory. The detailed flow for each
+command is found below:
 
 **`AddCommand:`**      
 AddCommand#execute() -> Model#addItem() or Model#restockItem() -> Inventory#addItem() or Inventory#restockItem()
 -> UniqueItemList#addItem() or UniqueItemList#setItem() -> ObservableList<Item>#add() or ObservableList<Item>#set()
 
 **`RemoveCommand:`**    
-RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
+RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() ->
+ObservableList<Item>#set()
 
 **`EditCommand:`**       
-EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
+EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>
+#set()
 
 **`ClearCommand:`**       
-ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
+ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem()
+-> ObservableList<Item>#set()
 
 **`DeleteCommand:`**      
-DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() -> ObservableList<Item>#remove()
+DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() ->
+ObservableList<Item>#remove()
 
 **`SortCommand:`**      
-SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>#sort()
+SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>
+#sort()
 
 #### Design considerations:
 
 **Aspect:**
 
 * **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
-`IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of 
-strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to 
-update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
+  `IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of
+  strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to
+  update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
 
 --------------------------------------------------------------------------------------------------------------------
 
