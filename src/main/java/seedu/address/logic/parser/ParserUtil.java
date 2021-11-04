@@ -172,7 +172,7 @@ public class ParserUtil {
         requireNonNull(order);
 
         String trimmedOrder = order.trim();
-        if (!trimmedOrder.matches(Order.REGEX)) {
+        if (!trimmedOrder.matches(Order.VALIDATION_REGEX)) {
             throw new ParseException(Order.MESSAGE_CONSTRAINTS);
         }
 

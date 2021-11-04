@@ -22,14 +22,11 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "Products list contains duplicate product(s).";
 
-    // todo remove later
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
     private final List<JsonAdaptedProduct> products = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons, clients and products.
+     * Constructs a {@code JsonSerializableAddressBook} with the given clients and products.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
@@ -37,6 +34,7 @@ class JsonSerializableAddressBook {
         if (clients != null) {
             this.clients.addAll(clients);
         }
+
         if (products != null) {
             this.products.addAll(products);
         }
@@ -65,6 +63,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasClient(client)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
             }
+
             addressBook.addClient(client);
         }
 
@@ -73,6 +72,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasProduct(product)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRODUCT);
             }
+
             addressBook.addProduct(product);
         }
 

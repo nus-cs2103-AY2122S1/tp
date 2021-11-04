@@ -22,7 +22,6 @@ import seedu.address.model.client.exceptions.DuplicateClientException;
  * @see Client#isSameClient(Client)
  */
 public class UniqueClientList implements Iterable<Client> {
-
     private final ObservableList<Client> internalList = FXCollections.observableArrayList();
     private final ObservableList<Client> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -44,6 +43,7 @@ public class UniqueClientList implements Iterable<Client> {
         if (contains(toAdd)) {
             throw new DuplicateClientException();
         }
+
         internalList.add(toAdd);
     }
 
@@ -111,8 +111,8 @@ public class UniqueClientList implements Iterable<Client> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                       || (other instanceof UniqueClientList // instanceof handles nulls
-                                   && internalList.equals(((UniqueClientList) other).internalList));
+                || (other instanceof UniqueClientList // instanceof handles nulls
+                && internalList.equals(((UniqueClientList) other).internalList));
     }
 
     @Override
@@ -131,6 +131,7 @@ public class UniqueClientList implements Iterable<Client> {
                 }
             }
         }
+
         return true;
     }
 }

@@ -13,7 +13,7 @@ import seedu.address.model.product.UniqueProductList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameProduct comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueClientList clients;
@@ -35,7 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Clients and Products in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -166,9 +166,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                       || (other instanceof AddressBook // instanceof handles nulls
-                                   && clients.equals(((AddressBook) other).clients)
-                                   && products.equals(((AddressBook) other).products));
+                || (other instanceof AddressBook // instanceof handles nulls
+                && clients.equals(((AddressBook) other).clients)
+                && products.equals(((AddressBook) other).products));
     }
 
     @Override

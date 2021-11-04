@@ -7,15 +7,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Product's quantity in Sellah.
  */
 public class Quantity implements Comparable<Quantity> {
-    public static final Quantity QUANTITY_ZERO = new Quantity("0");
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Quantity should only contain numbers and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Quantity should only contain numbers and it should not be blank";
 
     /**
      * The quantity should contain digits from 0 to 9 only.
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
+
+    public static final Quantity QUANTITY_ZERO = new Quantity("0");
 
     public final String value;
 
@@ -72,7 +71,6 @@ public class Quantity implements Comparable<Quantity> {
 
         int thisVal = Integer.parseInt(value);
         int otherVal = Integer.parseInt(quantity.value);
-
         return thisVal - otherVal;
     }
 }

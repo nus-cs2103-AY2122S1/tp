@@ -44,6 +44,7 @@ public class Client implements Category {
         if (orders != null) {
             this.orders.addAll(orders);
         }
+
         Logger logger = Logger.getLogger("create client object");
         logger.info("new client created");
     }
@@ -170,8 +171,7 @@ public class Client implements Category {
                 && phoneNumber.equals(otherClient.phoneNumber)
                 && email.equals(otherClient.email)
                 && address.equals(otherClient.address)
-                && orders.containsAll(otherClient.orders)
-                && otherClient.orders.containsAll(orders);
+                && orders.equals(otherClient.orders);
     }
 
     @Override

@@ -32,8 +32,8 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
 
+        requireAllNonNull(addressBook, userPrefs);
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
@@ -41,9 +41,6 @@ public class ModelManager implements Model {
 
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         filteredProducts = new FilteredList<>(this.addressBook.getProductList());
-
-        // todo remove later
-//        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -117,7 +114,6 @@ public class ModelManager implements Model {
     @Override
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-
         addressBook.setClient(target, editedClient);
     }
 
@@ -148,7 +144,6 @@ public class ModelManager implements Model {
     @Override
     public void setProduct(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
-
         addressBook.setProduct(target, editedProduct);
     }
 
@@ -176,7 +171,7 @@ public class ModelManager implements Model {
         filteredClients.setPredicate(predicate);
     }
 
-    //=========== Filtered Product List Accessors =============================================================
+    //=========== Filtered Product List Accessors ============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
@@ -192,6 +187,8 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredProducts.setPredicate(predicate);
     }
+
+    //=========== Others =====================================================================================
 
     @Override
     public boolean equals(Object obj) {

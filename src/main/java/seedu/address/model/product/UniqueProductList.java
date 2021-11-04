@@ -22,7 +22,6 @@ import seedu.address.model.product.exceptions.ProductNotFoundException;
  * @see Product#isSameProduct(Product)
  */
 public class UniqueProductList implements Iterable<Product> {
-
     private final ObservableList<Product> internalList = FXCollections.observableArrayList();
     private final ObservableList<Product> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -44,6 +43,7 @@ public class UniqueProductList implements Iterable<Product> {
         if (contains(toAdd)) {
             throw new DuplicateProductException();
         }
+
         internalList.add(toAdd);
     }
 
@@ -111,8 +111,8 @@ public class UniqueProductList implements Iterable<Product> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                       || (other instanceof UniqueProductList // instanceof handles nulls
-                                   && internalList.equals(((UniqueProductList) other).internalList));
+                || (other instanceof UniqueProductList // instanceof handles nulls
+                && internalList.equals(((UniqueProductList) other).internalList));
     }
 
     @Override
@@ -131,6 +131,7 @@ public class UniqueProductList implements Iterable<Product> {
                 }
             }
         }
+
         return true;
     }
 
@@ -138,7 +139,6 @@ public class UniqueProductList implements Iterable<Product> {
      * Returns true if {@code products} contains a product with the same name as {@code product}.
      */
     public boolean hasProductWithSameName(Product product) {
-        long filteredLength = internalList.stream().filter(p -> p.getName().equals(product.getName())).count();
-        return filteredLength > 0;
+        return internalList.stream().anyMatch(p -> p.getName().equals(product.getName()));
     }
 }

@@ -27,5 +27,4 @@ public class ProductContainsKeywordsPredicate implements Predicate<Product> {
                 || (other instanceof ProductContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((ProductContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }

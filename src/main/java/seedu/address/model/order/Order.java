@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.product.Quantity.QUANTITY_ZERO;
 
 import java.time.LocalDate;
@@ -15,8 +16,6 @@ import seedu.address.model.product.Quantity;
  * Represents an Order in Sellah.
  */
 public class Order {
-    public static final String REGEX = "\\d+ \\d+ (\\d{4}/)?\\d{0,2}/\\d{0,2}";
-
     public static final String MESSAGE_CONSTRAINTS =
             "Please follow the format for orders: -o PRODUCT_ID QUANTITY TIME\n"
                     + "Valid formats of time: MM/DD, YYYY/MM/DD\n"
@@ -24,6 +23,8 @@ public class Order {
 
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
+
+    public static final String VALIDATION_REGEX = "\\d+ \\d+ (\\d{4}/)?\\d{0,2}/\\d{0,2}";
 
     private final Name productName;
     private final Quantity quantity;
@@ -33,10 +34,10 @@ public class Order {
      * Constructor of {@code Order}
      */
     public Order(ID id, Quantity quantity, LocalDate time, Model model) {
+        requireAllNonNull(id, quantity, time, model);
         checkArgument(isValidProductID(id, model), MESSAGE_CONSTRAINTS_ID);
 
         Product product = model.getProductById(id);
-
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
         productName = product.getName();
