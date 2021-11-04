@@ -1,15 +1,26 @@
 ---
-layout: page title: Developer Guide parent: For Developers nav_order: 1
+layout: page 
+title: Developer Guide 
+parent: For Developers 
+nav_order: 1
 ---
 
-* Table of Contents {:toc}
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+* BogoBogo is forked from [Addressbook Level 3](https://se-education.org/addressbook-level3/)
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Theme used: [just-the-docs](https://github.com/pmarsceill/just-the-docs)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,7 +176,7 @@ The `Model` component
   that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the
   list change.
 
-![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
+![Model Displayable object diagram](images/ModelDisplayableClassDiagram.png)
 
 - The `Model` component interacts with `Ui` component through a `Displayable` interface.
 
@@ -306,8 +317,9 @@ This way, any changes to model can be propagated to the ui without having to exp
 
 `DisplayList` is composed of 3 lists.
 1. `DisplayList#filtered` A filtered list that is observed by `DisplayListPanel`.
-2. `DisplayList#displayed` An observable list that acts as the base for `DisplayList#filtered`.
-3. `DisplayList#source` A list of displayables that acts as the base for `DisplayList#displayed`.
+2. `DisplayList#displayed` An observable list that acts as the base for `DisplayList#filtered`. 
+Observes the current `DisplayList#source`.
+3. `DisplayList#source` An observable list that acts as the base for `DisplayList#displayed`.
 
 To propagate any changes to the filtered list, to be reflected to the ui, `DisplayList` can:
 
@@ -315,17 +327,21 @@ To propagate any changes to the filtered list, to be reflected to the ui, `Displ
 
 Set a predicate on the filtered list. This is done when items to be displayed already exists in `DisplayList#source`.
 
-2. **Update the source**.
+2. **Edit the source**.
+
+When the source is edited outside `DisplayList`, it will notify `DisplayList#displayed`, which will then copy and reflect all changes.
+This, resultantly updates the `DisplayList#filtered` and the display panel.
+
+3. **Update the source**.
 
 Call `DisplayList#setItems` which takes in an observable list of items. 
-The list of items is copied into `DisplayList#source`, which is eventually propagated to `DisplayList#filtered`.
-This is done when items to be displayed are not already in `DisplayList#source`.
-
-![DisplayList2](images/sequenceDiagram.png)
+`DisplayList` removes the listener from the previous source and adds a new listener to the new source.
+It also updates `DisplayList#displayed` to reflect the new source.
+This is done when we want to switch between lists to display. (e.g. displaying transactions instead of inventory)
 
 <div class="code-example bg-grey-lt-000">:information_source:
 <code>DisplayList</code> uses a 3 list approach because of the way JavaFX has implemented `FilteredList`.
-`FilteredList` is bound to a `ObservableList` which is bound to a regular `List`.  
+`FilteredList` is bound to a `ObservableList` which is bound to a regular `List`. 
 </div>
 
 ### Displaying an object
@@ -333,7 +349,7 @@ This is done when items to be displayed are not already in `DisplayList#source`.
 Any object can be displayed in the display panel by implementing the `Displayable` interface. 
 The object must implement `Displayable#asDisplayCard()` which should return a `UIPart<Region>` that will act as the object's list cell.
 
-![DisplayList3](images/DisplayableUML.png)
+![DisplayList3](images/ModelDisplayableClassDiagram.png)
 
 ### Design Considerations
 
