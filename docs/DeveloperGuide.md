@@ -172,7 +172,7 @@ Also, to facilitate filtered searches, we have implemented finding using prefixe
 * `find m/` to find by module code
 
 Similar to other commands, this is done using a `argumentTokenizer` to parse for the above prefixes,
-before the correct `Predicate` is instantiated and used for finding the contact. 
+before the correct `Predicate` is instantiated and used for finding the contact.
 
 #### Design considerations:
 
@@ -186,89 +186,46 @@ before the correct `Predicate` is instantiated and used for finding the contact.
     * Pros: Faster searches with just partial keywords.
     * Cons: Contacts you did not mean to retrieve are also displayed.
 
-### \[Proposed\] Undo/redo feature
+### Delete by batch feature
 
-#### Proposed Implementation
+Users are able to execute a command to delete an existing module code in contHACKS. Upon successful deletion of the module code,
+the module code will not exist in contHACKS thus all lesson codes, if any, under the module code will be deleted (module and lesson have a composition relationship).
+The particular contact will only be deleted from contHACKS if it is not attached to any other module code.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+<img src="images/CompositionPersonAndModule.png" width="550" />
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+An input to delete by `delete m/CS2103T` would delete all contacts that are tagged to CS2103T. If a contact has another module code, it will only delete the module code CS2103T tag.
+This is to better fit our target audience as once a class is no longer relevant, enabling a batch delete is quick and helps to keep contHACKS organised.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Implementation
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+`DeletePersonCommand` implements the `execute()` method from the `Command` abstract class whereby upon execution, the method will delete the respective contacts in the model’s list of contacts if a valid module code is provided.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+This is how the `DeletePersonCommand#execute()` method works upon execution:
 
-![UndoRedoState0](images/UndoRedoState0.png)
+The module code to be deleted is retrieved from the `DeletePersonCommand` created.
+All contacts with the module code will be retrieved from the model by `Model#updateFilteredPersonList()` and `Model#getFilteredPersonList()`.
+The module code is deleted by `DeletePersonCommand#deleteByModuleCode()`.
+`DeletePersonCommand#deleteByModuleCode()` will call `Model#deletePerson` for contacts with attached to the module code to delete only otherwise `DeletePersonCommand#deleteModuleCodeTag` will be called.
+The deletion is successful and a CommandResult is returned with an appropriate success message to indicate that the deletion was successful via the CommandUtil#getCommandResult() method.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The following sequence diagrams show how the delete by module code feature works successfully, using the example command delete m/CS2103T:
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<img src="images/BatchDeleteSequenceDiagram.png" width="550" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Previous and current version of delete command:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (previous version):** Delete only supports one deletion at a time.
+    * Pros: 
+      * Deletes the particular intended contact.
+    * Cons: Takes time to delete multiple contacts, does not fit our target audience that wants operations to be fast.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+* **Alternative 2 (current version):** Delete supports batch deletion by module code as well.
+    * Pros: Faster deletion while still supporting deletion by one index.
+    * Cons: Not able to undo the deletion therefore if the user deletes the wrong batch, would take a long time to key all the information back in.
 
 
 --------------------------------------------------------------------------------------------------------------------
