@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.StringConverter;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.genre.Genre;
 import seedu.anilist.model.stats.Stats;
@@ -56,6 +57,32 @@ public class StatsDisplay extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    class IntegerStringConverter extends StringConverter<Number> {
+        private final double epsilon = 1E-3;
+
+        public IntegerStringConverter() {}
+
+        @Override
+        public String toString(Number object) {
+            String tickLabel = "";
+            //handle error where integer values do not show up due to rounding errors
+            if (object.intValue() - epsilon <= object.doubleValue()
+                    && object.intValue() + epsilon >= object.doubleValue()) {
+                tickLabel += object.intValue();
+            } else if (object.intValue() - epsilon + 1 <= object.doubleValue()
+                    && object.intValue() + epsilon + 1 >= object.doubleValue()) {
+                tickLabel += (object.intValue() + 1);
+            }
+            return tickLabel;
+        }
+
+        @Override
+        public Number fromString(String string) {
+            Number val = Double.parseDouble(string);
+            return val.intValue();
+        }
+    }
 
     /**
      * Creates a StatsDisplay UI component.
@@ -160,31 +187,31 @@ public class StatsDisplay extends UiPart<Stage> {
     private void setGenreStats(HashMap<Genre, Integer> genreStats, int uniqueGenresCount) {
         barChart.getData().clear();
         barChart.layout();
+
+        if (genreStats.isEmpty()) {
+            barChart.setId(BAR_CHART_EMPTY_ID);
+            barChart.getXAxis().setOpacity(0);
+            barChart.setTitle(NO_GENRES_TO_SHOW_MSG);
+            return;
+        }
+
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
-
-        //Set horizontal labelling to be integer values
-        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
-            @Override
-            public String toString(Number object) {
-                return Integer.toString(Math.round(object.intValue()));
-            }
-        });
 
         BarChart<Number, String> tempGenreStats = new BarChart<>(xAxis, yAxis);
         tempGenreStats.getData().add(getBarChartData(genreStats));
         barChart.setData(tempGenreStats.getData());
         barChart.getYAxis().setTickMarkVisible(false);
-        barChart.getXAxis().setTickMarkVisible(false);
-        if (genreStats.isEmpty()) {
-            barChart.setId(BAR_CHART_EMPTY_ID);
-            barChart.getXAxis().setOpacity(0);
-            barChart.setTitle(NO_GENRES_TO_SHOW_MSG);
-        } else {
-            barChart.setId(BAR_CHART_ID);
-            barChart.getXAxis().setOpacity(1);
-            barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
-        }
+
+        //set horizontal labels to be integer values
+        NumberAxis numberAxis = (NumberAxis) barChart.getXAxis();
+        numberAxis.setTickLabelFormatter(new IntegerStringConverter());
+
+        numberAxis.setOpacity(1);
+        numberAxis.setTickMarkVisible(false);
+
+        barChart.setId(BAR_CHART_ID);
+        barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
     }
 
     /**

@@ -99,13 +99,11 @@ public class AnimeListParser {
     /**
      * Parses user confirmation input into command for execution.
      *
-     * @param cmdInProgress the command currently in progress
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseConfirmationCommand(Command cmdInProgress, String userInput) {
+    public Command parseConfirmationCommand(String userInput) {
         String cmdWord = userInput.trim();
-        //Extendable to future commands that require confirmation
         switch (cmdWord) {
         case ConfirmClearCommand.COMMAND_WORD:
             return new ConfirmClearCommand();
