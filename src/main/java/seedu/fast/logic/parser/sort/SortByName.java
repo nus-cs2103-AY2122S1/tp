@@ -1,19 +1,19 @@
-package seedu.fast.commons.util.sort;
+package seedu.fast.logic.parser.sort;
 
 import java.util.Comparator;
 
 import seedu.fast.model.person.Person;
 
 /**
- * Custom comparator that compares Person objects by their Tags.
+ * Custom comparator that compares Person objects by their Names.
  */
-public class SortByPriority implements Comparator<Person> {
+public class SortByName implements Comparator<Person> {
 
-    public static final String KEYWORD = "priority";
+    public static final String KEYWORD = "name";
 
     @Override
     public int compare(Person p1, Person p2) {
-        return p1.getPriority() - p2.getPriority();
+        return p1.getName().fullName.compareTo(p2.getName().fullName);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class SortByPriority implements Comparator<Person> {
         }
 
         // instanceof handles nulls
-        if (other instanceof SortByPriority) {
+        if (other instanceof SortByName) {
             return true;
         }
 

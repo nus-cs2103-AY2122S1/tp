@@ -11,9 +11,9 @@ import static seedu.fast.testutil.TypicalPersons.JOE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.fast.commons.util.sort.SortByAppointment;
-import seedu.fast.commons.util.sort.SortByName;
-import seedu.fast.commons.util.sort.SortByPriority;
+import seedu.fast.logic.parser.sort.SortByAppointment;
+import seedu.fast.logic.parser.sort.SortByName;
+import seedu.fast.logic.parser.sort.SortByPriority;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;
 import seedu.fast.model.person.Person;
