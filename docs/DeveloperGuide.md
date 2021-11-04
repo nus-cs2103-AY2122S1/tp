@@ -32,10 +32,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div class="code-example bg-grey-lt-000">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
+the [diagrams](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
 </div>
@@ -51,8 +51,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes
-called [`Main`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is
+called [`Main`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is
 responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -70,9 +70,8 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete Milk -c 5`.
+the command `delete Milk c/5`.
 
-//TODO: modify `saveInventory()` later
 ![Delete Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
@@ -112,12 +111,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Displayable` objects residing in the `Model`.
 
 ### Logic component
-
-**
-API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+The **API** of this component is specified
+in [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -126,17 +124,18 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `AddCommand`) which is
    executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add an item).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add an item).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned by `Logic` back to the caller.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete Milk -c 5` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete Milk c/5` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div class="code-example bg-grey-lt-000">
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -146,35 +145,33 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
+  placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g. `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g. `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**
-API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+The **API** of this component is specified
+in [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![Model class diagram](images/ModelClassDiagram.png)
 
-The `Model` component
+The `Model` component:
 
-- stores an `Inventory` object that represents the inventory data.
-- stores an optional `Order` object that represents the current order data.
-- stores a `TransactionList` object that represents the transaction history of orders.
-- stores a `UserPref` object that represents the user’s preferences.
+- stores an `Inventory` object that encapsulates the inventory data.
+- stores an optional `Order` object that encapsulates the current order data.
+- stores a `TransactionList` object that encapsulates the history of past transactions.
+- stores a `UserPref` object that encapsulates the user’s preferences.
 - does not depend on any of the other three components (as the Model represents data entities of the domain, they should
   make sense on their own without depending on other components)
-
-![Model Displayable class diagram](images/ModelDisplayableClassDiagram.png)
 
 - The `Model` component interacts with `Ui` component through a `Displayable` interface.
 
 ![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
 
-Low level architecture of `Model` component:
+Lower level details of `Model` component:
 
 - `Inventory` and `Order` are each consists of an `UniqueItemList` which contains `Items`.
 - The `TransactionList` stores `TransactionRecord` which are the records of history orders.
@@ -182,18 +179,24 @@ Low level architecture of `Model` component:
 
 ### Storage component
 
-**
-API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+The **API** of this component is specified
+in [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 ![Storage class diagram](images/StorageClassDiagram.png)
 
-The `Storage` component,
+The `Storage` component's responsibility is to read and write persistent data. 
+It can save inventory data, user preference data, bookkeeping data, and transaction history in json format, 
+and read them back into corresponding objects.
 
-* can save both inventory data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `InventoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the
-  functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
+The storage of different aspects of BogoBogo's data are each managed by their own class:
+
+* Inventory Data: `JsonInventoryStorage` 
+* User Preferences: `JsonUserPrefStorage`
+* BookKeeping Data: `JsonBookKeepingStorage`
+* Transaction History: `JsonTransactionStorage`
+
+Each of these classes employ a facade interface that `Storage` inherits from. 
+This ensures that `Storage` will have the necessary API for `Logic` to call when it wishes to save BogoBogo's state.
 
 ### Common classes
 
@@ -370,334 +373,394 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise.
+
+
+<div class="code-example bg-grey-lt-000">
+:information_source: Click on any of the use cases to view them.
+</div>
+
+*Mutating the Inventory*{: .text-purple-000 }
+
+<details markdown="block">
+  <summary>
+    <b>UC01 - Adding Item(s)</b>
+  </summary>
+  {: .text-delta }
 
 ```
-**UC01 - Adding an item**
-
-**Actor:** User
-
-**MSS**
-
-1. User adds item into inventory.
-2. BogoBogo saves item into inventory.
-
+MSS:
+1. User requests to add a certain amount of an item into the inventory.
+2. BogoBogo saves the item(s) into the  inventory.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
+    1a1. BogoBogo informs user of the missing details.
+    1a2. User reenters the missing details.
+    Use case resumes at step 2.
 
-* 1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
-    * 1a1. BogoBogo informs user of the missing details.
-    * 1a2. User reenters with the missing details.
+1b. User did not specify the count.
+    1b1. BogoBogo assumes count to be 1.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2.
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    1c2. User reenters the corrected details.
 
-* 1b. User is adding item that has been added before, and only specifies either name or id without the other fields.
-    * 1b1. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
-
-      Use case ends.
-
-* 1c. User is adding an item that has been added before, but provides an id that corresponds to another item.
-    * 1c1. BogoBogo notifies user of the mismatch and shows the list of possible matches.
-    * 1c2. User reenters with the correct details.
-    * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
-
-      Use case ends.
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
 ```
+</details>
+
+
+<details markdown="block">
+  <summary>
+    <b>UC02 - Deleting an Item</b>
+  </summary>
+  {: .text-delta }
+
 ```
-**UC02 - Deleting an item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to delete item from inventory.
-2. BogoBogo deletes item from inventory.
-
+MSS:
+1. User requests to delete an item from the inventory.
+2. BogoBogo deletes the item from the inventory.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User specified neither the name nor id of the item.
+    1a1. BogoBogo notifies user of missing details.
+    Use case ends.
 
-* 1a. User did not specify the name or serial number of the item.
-    * 1a1. BogoBogo notifies user of missing details.
+1b. The specified item is not in the inventory.
+    1b1. BogoBogo notifies user that the item is not found.
+    Use case ends.
 
-      Use case ends.
-
-* 1b. The specified item is not in the inventory.
-    * 1b1. BogoBogo notifies user that item is not found.
-
-      Use case ends.
-
-* 1c. The given id does not match with the given name.
-    * 1c1. BogoBogo notifies user of the mismatch.
-
-      Use case ends.
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    1c2. User reenters the corrected details.
+    Use case resumes at step 2.
+    
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
 ```
+
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC03 - Removing Item(s)</b>
+  </summary>
+  {: .text-delta }
+
 ```
-**UC03 - Finding items through matching keywords**
-
-**Actor:** User
-
-**MSS**
-
-1. User searches for an item in the inventory by stating id, name or tag.
-2. BogoBogo finds item from inventory that matches the keywords.
-
+MSS:
+1. User requests to remove a certain amount of an item from the inventory.
+2. BogoBogo removes the specified amount of that item.
    Use case ends.
 
-**Extensions**
+Extensions:
+1a. User specified neither the name nor id of the item.
+    1a1. BogoBogo notifies user of missing details.
+    Use case ends.
+    
+1b. The specified item is not in the inventory.
+    1b1. BogoBogo notifies user that the item is not found.
+    Use case ends.
 
-* 1a. User specified an id which is not a positive integer or is not of 6 digits.
-    * 1a1. BogoBogo notifies user of invalid id input.
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    1c2. User reenters the corrected details.
+    Use case resumes at step 2.
 
-      Use case ends.
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
+    
+1e. User did not specify the count.
+    1e1. BogoBogo assumes count to be 1.
+    Use case resumes at step 2.
+    
+1f. The specified amount is greater than what the inventory has.
+    1f1. BogoBogo notifies user of the actual amount of item in the inventory.
+    Use case ends.
 
-* 1b. The specified item is not in the inventory.
-    * 1b1. BogoBogo outputs an empty list.
-
-      Use case ends.
-
-* 1c. User tries to find by 2 different fields at the same time.
-    * 1b1. BogoBogo notifies user that only one field can be inputted.
-
-      Use case ends.
 ```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC04 - Editing an Item</b>
+  </summary>
+  {: .text-delta }
+
 ```
-**UC04 - Placing an Order**
+Precondition: BogoBogo is displaying the inventory.
+MSS:
+1. User requests to edit an item, specifying an item by index, with the fields and values to change.
+2. BogoBogo updates the fields of the item at the specified index with the new values given.
+   Use case ends.
 
-**Actor:** User
+Extensions:
+1a. The specified index does not point to any item.
+    1a1. BogoBogo notifies the user that the index is invalid.
+    Use case ends.
 
-**MSS**
+1b. User specified a new ID/name that already belongs to a different item. 
+    1b1. BogoBogo notifies the user of clashing IDs/names.
+    Use case ends.
 
+1c.  User attempted to edit the count of an item 
+    1c1.  BogoBogo notifies the user that directly editing count is not supported.
+    Use case ends.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC05 - Clearing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
+1. User requests to clear the inventory.
+2. BogoBogo acknowledges the request and clears the inventory.
+   Use case ends.
+```
+</details>
+
+*Navigating the Inventory*{: .text-purple-000 .text-gamma }
+
+<details markdown="block">
+  <summary>
+    <b>UC06 - Finding an Item</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
+1. User searches for an item in the inventory by specifying possible id(s), name(s) or tag(s).
+2. BogoBogo finds all items in the inventory that matches any of the descriptors.
+   Use case ends.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC07 - Sorting the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+Precondition: BogoBogo is displaying the inventory.
+MSS:
+1. User requests to sort the inventory (either by name or count).
+2. BogoBogo sorts the inventory accordingly.
+   Use case ends.
+
+Extensions:
+1a. User specifies to sort by both name and count.
+    1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
+    Use case ends.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC08 - Listing the Inventory</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
+1. User requests to list out all items in the inventory
+2. BogoBogo lists out all items in inventory.
+   Use case ends.
+```
+
+</details>
+
+*Managing Orders*{: .text-purple-000 }
+
+<details markdown="block">
+  <summary>
+    <b>UC09 - Placing an Order</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
 1. User requests to start an order.
 2. BogoBogo creates an order and requests for item names and quantities.
 3. User adds an item into the order.
-4. BogoBogo saves item into the order.
-
+4. BogoBogo saves  the  item into the order.
    Step 3-4 is repeated until the user wishes to end the order.
-
 5. User requests to end entering item and place the order.
 6. BogoBogo transacts the order and updates inventory and transaction history.
-
    Use case ends.
 
-**Extensions**
 
-* 3a. User adds an item that is not in the inventory.
-    * 3a1. BogoBogo notifies user that item is not found.
+Extensions:
+1a. User is already in ordering mode
+    1a1. BogoBogo informs the user that the current mode is already ordering mode.
+    Use case resumes at step 3.
 
-      Use case resumes at step 3.
+3a. User adds an item that is not in the inventory.
+    3a1. BogoBogo notifies user that item is not found.
+    Use case resumes at step 3.
+    
+3b. There is an insufficient supply of added items in the inventory.
+    3b1. BogoBogo notifies user of the supply shortage.
+    Use case resumes at step 3.
+      
+3c. User did not specify count.
+    3c1. BogoBogo assumes count to be 1.
+    Use case resumes at step 4.
+    
+3d. The given id and name corresponds to 2 separate items in the inventory.
+    3d1. BogoBogo notifies user of the ambiguity and shows the list of possible matches.
+    3d2. User reenters the corrected details.
+    Use case resumes at step 4.
+    
+3e. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    3e1. BogoBogo notifies user of the mismatch.
+    3e2. User reenters the corrected details.
+    Use case resumes at step 4.
+    
+4a. User incorrectly added an item into the order.
+    4a1. User removes specified item from the order (UC10).
+    Use case resumes at step 3.
 
-* 3b. There is an insufficient supply of added items in the inventory.
-    * 3a1. BogoBogo notifies user of the supply shortage.
-
-      Use case resumes at step 3.
-
-* 4a. User incorrectly added an item into the order.
-    * 3a1. User removes specified item from the order (UC05).
-
-      Use case resumes at step 3.
-
-* 6a. The order is empty.
-    * 7a1. BogoBogo notifies user that the order is empty.
-
-      Use case ends.
+5a. The order is empty.
+    5a1. BogoBogo notifies user that the order is empty and closes the order.
+    Use case ends.
 ```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC10 - Removing an item from Order</b>
+  </summary>
+  {: .text-delta }
+
 ```
-**UC05 - Remove an item from order**
-
-**Actor:** User
-
-**MSS**
-
+Precondition: The user has started an order.
+MSS:
 1. User requests to remove the specified item from the order.
-2. User enters the item to remove.
-3. BogoBogo removes the item from the order.
-
+2. BogoBogo removes the item from the order.
    Use case ends.
 
-**Extensions**
-
-* 1a. There is no order created.
-    * 1a1. BogoBogo notifies user there is no order.
-
-      Use case ends.
-
-* 2a. The item is specified in wrong format.
-    * 2a1. BogoBogo notifies user the item specification format is wrong.
-
-      Use case ends.
-
-* 3a. The specified item is not in the order
-    * 3a1. BogoBogo notifies user the specified item is not in the order.
-
-      Use case ends.
+Extensions:
+1a. The specified item is not in the order
+    1a1 BogoBogo notifies user the specified item is not in the order.
+    Use case ends.
+          
+1b. User did not specify count.
+    1b1. BogoBogo assumes count to be 1.
+    Use case resumes at step 2.
+    
+1c. The given id and name corresponds to 2 separate items in the inventory.
+    1c1. BogoBogo notifies user of the ambiguity.
+    1c2. User reenters the corrected details.
+    Use case resumes at step 2.
+    
+1d. The given name matches an item, but the given id is non-existent,
+    or the given id matches the item but the given name is non existent.
+    1d1. BogoBogo notifies user of the mismatch.
+    1d2. User reenters the corrected details.
+    Use case resumes at step 2.
 ```
+
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC11 - Listing the current Order</b>
+  </summary>
+  {: .text-delta }
+
 ```
-**UC06 - Sorting**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to sort the inventory (either by name or count).
-2. BogoBogo sorts the inventory accordingly.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User specifies to sort by both name and count.
-    * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
-
-      Use case ends.
-```
-```
-**UC07 - Help**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to know what are the commands available.
-2. BogoBogo shows the commands available to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User specifies which command exactly he wants to know how to use.
-    * 1a1. BogoBogo notifies the user what that exact command does.
-
-      Use case ends.
-
-* 1b. User specifies an inexistent command.
-    * 1a1. BogoBogo notifies the user that the command does not exist, then proceed to display URL to userguide.
-
-      Use case ends.
-```
-```
-**UC08 - Remove certain amount of item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to remove certain amount of an item.
-2. User enters the item name and amount.
-3. BogoBogo removes the specified amount of that item.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The name and amount is specified in wrong format.
-    * 2a1. BogoBogo notifies user the format is wrong.
-
-      Use case ends.
-
-* 2b. There are multiple matching items in inventory.
-    * 2b1. BogoBogo lists out all the matching items and let user choose one.
-    * 2b2. User chooses the desired item.
-    * BogoBogo removes the specified amount of that item.
-
-      Use case ends.
-
-* 3a. The item is not in the inventory.
-    * 3a1. BogoBogo notifies user there is on such item.
-
-      Use case ends.
-
-* 3b. The specified amount is greater than what inventory has.
-    * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
-
-      Use case ends.
-```
-```
-**UC09 - Edit an item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to edit an item.
-2. User enters the item index, fields and new values to change.
-3. BogoBogo updates the fields of the item at the specified index with the new values given.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The edited item is a duplicate of another item in the inventory.
-    * 3a1. BogoBogo notifies user of the duplication.
-
-      Use case ends
-
-* 3b. The specified index is invalid.
-    * 3b1. BogoBogo notifies user the index is invalid.
-
-      Use case ends
-
-* 3c. The specified change of the field is invalid.
-    * 3b1. BogoBogo notifies user that the new value specified is invalid.
-
-      Use case ends
-```
-```
-**UC10 - Listing out inventory**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to list out all inventory
-2. BogoBogo lists out all items in inventory.
-
-   Use case ends
-```
-```
-**UC11 - Listing out order**
-
-**Actor:** User
-
-**MSS**
-
+MSS:
 1. User requests to list out current order.
 2. BogoBogo lists out all items in current order.
+   Use case ends.
 
-   Use case ends
-
-**Extensions**
-
-* 2a. There is currently no order to list.
-  * 2a1. BogoBogo notifies user there is currently no order.
-    
+Extensions:
+1a. There is currently no open order.
+    1a1. BogoBogo notifies user there is currently no open order.
     Use case ends.
 ```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC12 - Viewing Past Transactions</b>
+  </summary>
+  {: .text-delta }
+
 ```
-**UC12 - Exit the application**
+MSS:
+1. User requests to view list of past transactions.
+2. BogoBogo lists past transactions, each with an id.
+3. User requests to view a specific transaction's contents.
+4. BogoBogo opens up the specified transaction and displays its items.
+   Use case ends.
 
-**Actor:** User
+Extensions:
+3a. The transaction specified does not exist.
+    3a1. BogoBogo notifies the user the transaction does not exist.
+    Use case ends.
+```
+</details>
 
-**MSS**
+*Others*{: .text-purple-000 .text-gamma }
 
+<details markdown="block">
+  <summary>
+    <b>UC13 - Seeking Help</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
+1. User requests for guidance in using BogoBogo.
+2. BogoBogo shares a link to the user guide.
+   Use case ends.
+   
+Extensions:
+1a. User requests guidance for a specific command.
+    1a1. BogoBogo shares with the user a brief how-to guide.
+    Use case ends.
+
+1b. User requests guidance for an inexistent command.
+    1b1. BogoBogo notifies the user that the command does not exist.
+    Use case resumes at step 2.
+```
+</details>
+
+<details markdown="block">
+  <summary>
+    <b>UC14 - Exiting the Application</b>
+  </summary>
+  {: .text-delta }
+
+```
+MSS:
 1. User requests to exit the application
-2. BogoBogo acknowledges the request and exits.
 
-    Use case ends.
+2. BogoBogo exits.
+   Use case ends.
 ```
-```
-**UC13 - Clear the inventory**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to clear the inventory.
-2. BogoBogo acknowledges the request and clears the inventory.
-    
-    Use case ends.
-```
+</details>
 
 ### Non-Functional Requirements
 
