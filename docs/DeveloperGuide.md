@@ -10,8 +10,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+* Based on AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -524,14 +523,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * a NUS Sports CCA leader
 * has a need to manage a significant number of member’s contacts
-* has a need to organise training sessions in multiple facilities amidst changing COVID restrictions
+* has a need to organise training sessions in multiple facilities whilst adhering to group size regulations
 * can type faster than average
 * is reasonably comfortable using CLI apps
 
 **Value proposition**:
 
 * Sports CCAs have many members and it can be hard for the leaders to keep track of everyone’s information and
-  availability to organise training sessions, especially with COVID restrictions.
+  availability to organise training sessions, especially with the current pandemic restrictions.
 * SportsPA will help NUS Sports CCA leaders to be able to better manage their members’ contacts and attendance as well
   as training facilities to better organise CCA sessions.
 
@@ -539,43 +538,42 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add a new person        | keep track of them in the club                 | |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | add a facility          | facilitate planning of training sessions |
-| `* * *`  | user                                       | add the available time slots of the facilities   | allocate members to train there               |
-| `* * *`  | user                                       | delete a facility          | remove facilities that are no longer relevant                                                 |
-| `* * *`  | user                                       | add a maximum capacity to each facility          | check whether we are complying with the group size regulations                                                 |
-| `* * *`  | user                                       | update the members' availability weekly           | regularly organise the next training session                                                 |
-| `* * *`  | user                                       | split the members into groups based on their availability         | allocate them to different facilities adhering to the group size regulations                                               |
-| `* * *`  | user                                       | view all the members           | so that I can see the list of members in the club                      |
-| `* * *`  | user                                       | view all the facilities        | so that I can see the list of facilities available                     |
-| `* *`    | potential user exploring the app           | see the app populated with user data | see how the app works when its in use                            |
-| `* *`    | new user                                   | see usage instructions         | refer to instructions when i forget how to use the app                 |
-| `* *`    | new user                                   | purge all current data         | get rid of sample/experimental data I used when exploring the app and start entering my required data      |
-| `* *`    | user                                       | edit a person's details        | have an updated version of their contact                               |
-| `* *`    | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | find a facility by name        | locate details of facility without having to go through the entire list|
-| `* *`    | user                                       | edit a facility's data         | update the maximum capacity of each facility when group size regulations have shifted                        |
-| `* *`    | user                                       | quickly key in attendance data | save time compared to adding them individually                         |
-| `* *`    | user                                       | see the total attendance of each member| assess the level of commitment of members                      |
-| `* *`    | user                                       | manually edit member's allocation to facilities | accomodate to last minute changes or requests made by members|
-| `* *`    | user                                       | see all the dates              | know when are the days of training                                     |
-| `* *`    | user                                       | add tags for members | sort the members by tags |
-| `* *`    | lazy user                                  | add a list of people's contacts into the application| I don't have to individually add them manually     |
-| `* *`    | user with many members added into the app  | sort persons by name           | locate a person easily       |
-| `* * `    | expert user | create shortcut for tasks | save time on frequently performed tasks
-| `* *` | long time user | add groups of people | quickly add in new members
-| `*`      | user | hide private contact details | minimise chance of someone else seeing them by accident
-| `*` | user | transfer my app's data to someone else | access accurate and updated data |                                             |
-| `*` | user |archive/hide temporary data | not get distracted by irrelevant data
-| `*` | user | unarchive archived data | view the neccessary data again
-| `*` | user | export allocations into a readable format | share with club members' their allocated training session and venue
-| `*` | user | recover data | retrieve the data I accidentally deleted
-| `*` | long time user | delete data associated with a particular club | minimize exposure of confidential data I no longer need
-| `*` | long time user | delete groups of people | remove graduating members
-| `*` | long time user | keep track of people from different clubs | allocate members at one go regardless of what club they are from
+| Priority | As a …​                                    | I want to …​                     | So that I can…​
+| -------- | ------------------------------------------ | ------------------------------ | ----------------------------------------------------------------------
+| `* * *`  | sports CCA leader                          | add a new member               | keep track of that member's details
+| `* * *`  | sports CCA leader                          | view all the members added     | so that I can see the list of members in my club
+| `* * *`  | sports CCA leader                          | delete a member                | remove details of that member that is no longer in the CCA
+| `* * *`  | sports CCA leader                          | add a facility                 | keep track of that facility's details
+| `* * *`  | sports CCA leader                          | view all the facilities added  | so that I can see the list of facilities available for use
+| `* * *`  | sports CCA leader                          | delete a facility              | remove details of that facility that are no longer relevant
+| `* * *`  | sports CCA leader                          | record a facility's capacity   | see how many members can train there while complying with the group size regulations
+| `* * *`  | sports CCA leader                          | record a members' availability | see which members are available to attend a training session held on a certain day
+| `* * *`  | sports CCA leader                          | split available members into the facilities  | easily plan training sessions for that day while complying with the group size regulations
+| `* *`    | potential user exploring the app           | see the app populated with user data         | see how the app works when its in use
+| `* *`    | new user                                   | see usage instructions         | refer to instructions when I forget how to use the app
+| `* *`    | new user ready to use the app              | purge all current data         | get rid of sample/experimental data I used when exploring the app
+| `* *`    | sports CCA leader                          | edit a member's details        | directly make changes to that member's details if required
+| `* *`    | sports CCA leader                          | edit a facility's data         | quickly update the maximum capacity of each facility when group size regulations have changed
+| `* *`    | sports CCA leader                          | find a member by name          | locate relevant members and see their details without having to go through the entire list
+| `* *`    | sports CCA leader                          | find a facility by location    | locate relevant facilities and see their details without having to go through the entire list
+| `* *`    | sports CCA leader                          | mark my member's attendance    | keep track of who attended today's training session
+| `* *`    | sports CCA leader                          | unmark my member's attendance  | correct my mistake if I accidentally marked a member who did not attend the session as present
+| `* *`    | sports CCA leader                          | see the attendance record of each member          | assess their level of commitment
+| `* *`    | sports CCA leader                          | manually edit a member's allocation to a facility | accommodate last minute changes or requests made by members
+| `* *`    | sports CCA leader                          | tag my members                 | group them into useful categories, such as members with leadership positions or freshmen
+| `* *`    | sports CCA leader                          | filter members by tags         | view all members associated to a given category, such as members with leadership positions 
+| `* *`    | sports CCA leader                          | update members' availabilities in one go          | set members' availability at once if they are similar instead of individually updating them one-by-one
+| `* *`    | user with many members added into the app  | sort members by name           | locate a member easily
+| `* * `   | expert user                                | create shortcut for commands   | personalise command words based on my preferences
+| `* *`    | sports CCA leader                          | import members' data           | get members to fill in their details first, then add the collated data into the application at one go
+| `* *`    | sports CCA leader                          | export allocations into a readable format         | share with members their allocated training session and venue
+| `*`      | user                                       | undo actions                   | salvage any accidental deletion of data 
+| `*`      | sports CCA leader                          | hide private contact details   | minimise the chance of someone else seeing them by accident
+| `*`      | graduating sports CCA leader               | transfer my app's data to someone else            | hand over my responsibilities to the next leader of the club
+| `*`      | sports CCA leader                          | archive temporary data         | prevent getting distracted by irrelevant data (e.g. facilities that are temporarily unavailable)
+| `*`      | sports CCA leader                          | unarchive archived data        | view the necessary data again when relevant (e.g. facilities that are back in use)
+| `*`      | sports CCA leader                          | delete groups of people        | remove all graduating members from the app in one go
+| `*`      | long time user                             | create shortcut for tasks      | save time on frequently performed tasks
 
 ### Use cases
 
@@ -586,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests for help
-2. SportsPA shows a pop-up message on accessing the help page
+2. SportsPA displays instructions on accessing the help page
 3. User navigates to the help page
 
    Use case ends.
@@ -595,16 +593,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a facility to the list
-2. SportsPA adds the facility to the list
+1. User requests to add a facility into SportsPA
+2. SportsPA adds the facility
 
    Use case ends.
 
 **Extensions**
 
-* 1a. SportsPA detects missing field(s).
+* 1a. SportsPA detects missing or invalid field(s)
 
-    * 1a1. SportsPA shows an error message.
+    * 1a1. SportsPA shows an error message
 
       Use case resumes from step 1.
 
@@ -612,29 +610,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list all facilities
-2. SportsPA shows the list of all facilities to the user
+1. User requests to list facilities
+2. SportsPA shows a list of all the facilities
 
    Use case ends.
 
-**Use case: UC04 - Find facilities using keyword(s)**
+**Use case: UC04 - Search for facilities**
 
 **MSS**
 
-1. User enters keyword or multiple keywords
-2. SportsPA shows the list of facilities whose locations matches given keyword(s)
+1. User requests to find facilities by location(s)
+2. SportsPA shows the list of facilities whose locations match the request
 
    Use case ends.
 
 **Extensions**
 
-* 1a. SportsPA detects missing field(s).
-
-    * 1a1. SportsPA shows an error message.
-
-      Use case resumes from step 1.
-
-* 1a. No facilities have locations matching the given keyword(s)
+* 1a. No facilities have locations matching the request
 
     * 1a1. SportsPA informs user
 
@@ -645,39 +637,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list facilities (UC03)</span>
-   or <span style="text-decoration: underline">find facilities using keyword(s) (UC04)</span>
-2. SportsPA shows the list of facilities
-3. User requests to delete a specific facility in the list
-4. SportsPA deletes the facility from the list
+   or <span style="text-decoration: underline">search for facilities (UC04)</span>
+2. User requests to delete a specific facility in the list
+3. SportsPA deletes the facility
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. User inputs an invalid index
+* 2a. The given index is invalid
 
-    * 3a1. SportsPA shows an error message
+    * 2a1. SportsPA shows an error message
 
-      Use case resumes from step 3.
+      Use case resumes from step 2.
 
 **Use case: UC06 - Add a member**
 
 **MSS**
 
-1. User requests to add a member to the list
-2. SportsPA adds the member to the list
+1. User requests to add a member into SportsPA
+2. SportsPA adds the member
 
    Use case ends.
 
 **Extensions**
 
-* 1a. SportsPA detects missing field(s).
+* 1a. SportsPA detects missing or invalid field(s)
 
-    * 1a1. SportsPA shows an error message.
+    * 1a1. SportsPA shows an error message
 
       Use case resumes from step 1.
 
@@ -685,32 +676,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list all members
-2. SportsPA shows the list of all members
+1. User requests to list members
+2. SportsPA shows a list of all the members
 
    Use case ends.
 
-**Use case: UC08 - Find members using keyword(s)**
+**Use case: UC08 - Search for members**
 
 **MSS**
 
-1. User enters a keyword or multiple keywords
-2. SportsPA finds members whose names matches the keyword(s)
-3. A list of members whose names matches at least one keyword will be displayed to the user
+1. User requests to search for members by the given field(s)
+2. SportsPA shows the list of members matching the given request
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 1a. User does not provide any keyword.
+* 1a. The given field(s) are invalid
 
-    * 1a1. SportsPA shows an error message
+    * 3a1. SportsPA shows an error message
 
       Use case resumes from step 1.
 
-* 3a. No members have names matching the keyword(s).
+* 3a. No members have fields matching the given request
 
-    * 3a1. SportsPA displays message to user that no members can be found
+    * 3a1. SportsPA informs user
 
       Use case ends.
 
@@ -719,61 +709,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC07)</span>
-   or <span style="text-decoration: underline">find members using keyword(s) (UC08)</span>
-2. SportsPA shows the list of members
-3. User requests to delete a specific member in the list
-4. SportsPA deletes the member
+   or <span style="text-decoration: underline">search for members (UC08)</span>
+2. User requests to delete a specific member in the list
+3. SportsPA deletes the member
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid
 
-    * 3a1. SportsPA shows an error message
+    * 2a1. SportsPA shows an error message
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
-**Use case: UC10 - Set a member’s availability**
+**Use case: UC10 - Set member(s) availability**
 
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC07)</span>
-   or <span style="text-decoration: underline">find members using keyword(s) (UC08)</span>
-2. SportsPA shows the list of members
-3. User requests to set availability of a specific member in the list
-4. SportsPA updates the availability of the member
+   or <span style="text-decoration: underline">search for members (UC08)</span>
+2. User requests to set availability of specific member(s) in the list
+3. SportsPA updates the availability of the given member(s)
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index/indices is/are invalid
 
-    * 3a1. SportsPA shows an error message
+    * 2a1. SportsPA shows an error message
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
-* 3b. The given availability (ie. day) is invalid.
+* 2b. The given availability is invalid
 
-    * 3b1. SportsPA shows an error message
+    * 2b1. SportsPA shows an error message
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
 **Use case: UC11 - Split members into facilities**
 
 **MSS**
 
-1. User requests to split members into the facilities
-2. SportsPA shows the list of allocations
+1. User requests to split available members into the facilities
+2. SportsPA shows the allocation results
 
    Use case ends.
 
@@ -781,7 +769,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SportsPA detects insufficient capacity to allocate all available members
 
-    * 1a1. SportsPA shows an error message.
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
+
+* 1a. SportsPA detects no available members
+
+    * 1a1. SportsPA shows an error message
 
       Use case ends.
 
@@ -790,19 +784,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to clear all entries in facility list
-2. SportsPA deletes all existing facilities in the facility list.
+2. SportsPA deletes all facilities
 
    Use case ends.
 
-**Extensions**
-
-* 1a. Facility list is empty.
-
-    * 1a1. SportsPA shows an error message
-
-      Use case ends.
-
-**Use case: UC13 - Clearing all entries in member list**
+**Use case: UC13 - Clear all entries in member list**
 
 **MSS**
 
@@ -811,32 +797,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
-
-* 1a. Member list is empty
-
-    * 1a1. SportsPA shows an error message
-
-      Use case ends.
-
-
-**Use case: UC14 - Importing member details from a CSV file**
+**Use case: UC14 - Import member details from a CSV file**
 
 **MSS**
 1. User requests to import member details from a CSV file
-2. SportsPA imports the member details from the CSV file
+2. SportsPA adds all members in the CSV file
     
     Use case ends.
 
 **Extensions**
-* 1a. The CSV file does not exist
-  * 1a1. SportsPA shows an error message telling the user that the file cannot be found
-    
-    Use case ends.
-* 1b. The CSV file is not in the specified format
-  * 1b1. SportsPA shows an error message informing the user why the error occurred
 
-    Use case ends.
+* 1a. The CSV file does not exist
+  * 1a1. SportsPA shows an error message
+    
+    Use case resumes from step 1.
+
+* 1b. The content of CSV file is not in the valid format
+  * 1b1. SportsPA shows an error message
+
+    Use case resumes from step 1.
 
 **Use case: UC15 - Exiting the program**
 
@@ -854,7 +833,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    for typical usage
 3. Should be able to process and execute user commands within 3 seconds
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-   able to accomplish most of the tasks faster using commands than using the mouse
+   able to accomplish most of the tasks using commands faster than using a mouse
 
 ### Glossary
 
