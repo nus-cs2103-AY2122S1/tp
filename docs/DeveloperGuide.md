@@ -92,7 +92,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -126,6 +126,10 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddTaskCommandParser`, `DeleteTaskCommandParser`, ...) inherit from the `Parser` 
   interface so that they can be treated similarly where possible e.g, during testing.
 * Some parsers require the use of the filtered person list, and they extend `ParserRequiringPersonList` instead.
+
+Here are the remaining classes in logic, mainly utility classes:  
+![Parser Utility Classes](diagrams/ParserUtilityClasses.png)
+
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/model/Model.java)
