@@ -46,7 +46,7 @@
                        </items>
                      </Menu>
                 <Menu mnemonicParsing="false" text="Help">
-                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelpWindow" text="Help" />
                 </Menu>
               </MenuBar>
                    <HBox fx:id="userDetails" style="-fx-border-color: #313131 #313131 #313131 #313131;">
