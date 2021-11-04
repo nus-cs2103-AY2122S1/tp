@@ -28,9 +28,9 @@ public class CommandHistory {
     }
 
     /**
-     * Returns the next most recently entered command according to the {@code counter} pointer.
-     * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
-     * @return The string of the next most recent entered command.
+     * Returns the previous command entered according to the {@code counter} pointer.
+     *
+     * @return The string of the previous command.
      */
     public String getPrevCommand() {
         // We should not call getPrevCommand() if the counter is already at the oldest command.
@@ -42,9 +42,9 @@ public class CommandHistory {
     }
 
     /**
-     * Returns the next least recent entered command according to the {@code counter} pointer.
-     * Returns the most recent command if the {@code counter} is already pointer at the latest command.
-     * @return The string of the next least recent entered command.
+     * Returns the next command entered according to the {@code counter} pointer.
+     *
+     * @return The string of the next most recent command.
      */
     public String getNextCommand() {
         // We should not call getNextCommand() if the counter is already at the latest command.

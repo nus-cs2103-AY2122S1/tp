@@ -1,5 +1,7 @@
 package seedu.programmer.logic.commands;
 
+//import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
+
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
@@ -48,21 +50,21 @@ public class EditLabCommandTest {
         assertThrows(NullPointerException.class, () -> new AddLabCommand(null));
     }
 
-    //todo
-
-    //    @Test
+    //TODO
+    //@Test
     //    public void execute_labTitleDoesNotExist_throwsCommandException() {
-    //        Lab labToEdit = new Lab(new LabNum(10));
+    //        Lab labToEdit = new Lab(new LabNum(120));
     //        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
     //
-    //        String expectedMessage = String.format(EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit.getLabNum());
+    //        String expectedMessage = String.format(
+    //        EditLabCommand.MESSAGE_LAB_NOT_EXISTS, labToEdit.getLabNum().getLabNum());
     //
     //        assertCommandFailure(editLabCommand, model, expectedMessage);
     //    }
 
-    //todo
 
-    //    @Test
+    //TODO
+    //@Test
     //    public void execute_newlabTitleAlreadyExists_throwsCommandException() {
     //        Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
     //        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, 1);
