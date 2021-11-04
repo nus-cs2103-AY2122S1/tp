@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FastParser" as FastParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "sby:SortByName" as SortByName LOGIC_COLOR
+participant "sc:SortCommand" as SortCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FAST" as FAST MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort name")
+activate LogicManager
+
+LogicManager -> FastParser : parseCommand("sort name")
+activate FastParser
+
+create SortCommandParser
+FastParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> FastParser
+deactivate SortCommandParser
+
+FastParser -> SortCommandParser : parse("name")
+activate SortCommandParser
+
+create SortByName
+SortCommandParser -> SortByName
+activate SortByName
+
+SortByName --> SortCommandParser : sby
+deactivate SortByName
+
+create SortCommand
+SortCommandParser -> SortCommand : SortCommand(sby, "name")
+activate SortCommand
+
+SortCommand --> SortCommandParser : sc
+deactivate SortCommand
+
+SortCommandParser --> FastParser : sc
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> FastParser
+destroy SortCommandParser
+
+FastParser --> LogicManager : sc
+deactivate FastParser
+
+LogicManager -> SortCommand : execute()
+activate SortCommand
+
+SortCommand -> Model : sortPersons(sby)
+activate Model
+
+Model --> FAST : sortPersons(sby)
+activate FAST
+
+FAST --> UniquePersonList : sortPersons(sby)
+activate UniquePersonList
+
+UniquePersonList --> FAST
+deactivate UniquePersonList
+
+FAST --> Model
+deactivate FAST
+
+Model --> SortCommand
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult : CommandResult(successMsg, "name")
+activate CommandResult
+
+CommandResult --> LogicManager
+deactivate CommandResult
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
