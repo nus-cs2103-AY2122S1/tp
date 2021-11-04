@@ -18,17 +18,14 @@ Given below are my contributions to the project.
 - **New Feature**: Added the ability to view incoming visits.
   - What it does: allows the user to see all the visits that are scheduled in the next 7 or 30 days depending on the command parameter.
   - Justification: This feature improves the user experience as the user can view incoming visits easily and plan their schedule accordingly.
-
-- **New Features**: Implemented Datetime for all time-related fields
-  - What it does: Replaces the original Date implementation with Datetime for all time-related fields such as `Visit` and `LastVisit`.
-  - Justification: This feature enhances the project by making information more accurate and relevant given that visits for the elderly are of high importance in the real world.
-
+  
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t14&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Chen-Yiyang&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 
 * **Enhancements to existing features**:
-    * Updated the GUI to highlight elderly with overdued visits (Pull requests [\#134](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/134))
+    * Updated the GUI to highlight elderly with overdued visits (Pull request [\#134](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/134))
     * Implemented warnings for inappropriate command usage. (Pull requests [\#192](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/192), [\#96](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/96))
+    * Improve Date to Datetime for all time-related fields. (Pull request [\#71](https://github.com/AY2122S1-CS2103-T14-1/tp/pull/71))
   
 
 * **Documentation**:
