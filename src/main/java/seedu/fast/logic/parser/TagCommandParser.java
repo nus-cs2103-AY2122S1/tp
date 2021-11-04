@@ -52,7 +52,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         return new TagCommand(index, addTags, deleteTags);
     }
 
-    private void checkAndAddSpecialTags(ArgumentMultimap argMultimap, Set<Tag> addTags, Prefix prefixAddTag) throws ParseException {
+    private void checkAndAddSpecialTags(ArgumentMultimap argMultimap, Set<Tag> addTags,
+                                        Prefix prefixAddTag) throws ParseException {
         for (String str : argMultimap.getAllValues(prefixAddTag)) {
             checkIfSpecialTag(str);
             addTags.add(Tag.createTag(str));
