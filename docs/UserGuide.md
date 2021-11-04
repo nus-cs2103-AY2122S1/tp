@@ -56,7 +56,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    Applicant data are displayed as a list in the **Applicant Panel**.
    ![Applicant Diagram](images/ApplicantDiagram.png)
 
-5. Now that your app is set up and running, lets run through a quick workflow on managing an applicant:<br>
+5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br>
 **Note**: Type in your commands into the **Command Box** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
    1. Use **`clear`** command to clear the existing sample data.
    2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
@@ -271,7 +271,7 @@ Examples:
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
-<div markdown="block" class="alert alert-dark">
+<div markdown="block" class="alert alert-success">
 **:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
 
 * You may
@@ -526,7 +526,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ### Find Inputs
 
-<div markdown="block" class="alert alert-dark">
+<div markdown="block" class="alert alert-success">
 
 * Return to [**Find**](#finding-an-applicant--find)
 
