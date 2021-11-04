@@ -12,8 +12,8 @@ import java.util.Objects;
 public class Mc {
 
     public static final String OVERALL_MESSAGE_CONSTRAINTS = "MC for a module should only be an "
-            + "Integer from 1-20.\n MC for a MC goal should only be an Integer from 1-999";
-    public static final String MESSAGE_CONSTRAINTS = "MC for a module should only be an Integer from 1-20.";
+            + "Integer from 0-20.\n MC for a MC goal should only be an Integer from 1-999";
+    public static final String MESSAGE_CONSTRAINTS = "MC for a module should only be an Integer from 0-20.";
     public static final String MESSAGE_CONSTRAINTS_GOAL = "MC for a MC goal should only be an "
             + "Integer from 1-999";
 
@@ -42,7 +42,21 @@ public class Mc {
      * Returns true if a given string is a valid mc credit.
      */
     public static boolean isValidMc(int test) {
-        return test > 0;
+        return test >= 0;
+    }
+
+    /**
+     * Returns true if a given string is a valid module mc.
+     */
+    public static boolean isValidModuleMc(int test) {
+        return isValidMc(test) && test < 21;
+    }
+
+    /**
+     * Returns true if a given string is a valid mc goal.
+     */
+    public static boolean isValidMcGoal(int test) {
+        return test > 0 && test < 1000;
     }
 
     @Override

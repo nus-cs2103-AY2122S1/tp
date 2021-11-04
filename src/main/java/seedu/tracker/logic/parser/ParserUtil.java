@@ -86,12 +86,12 @@ public class ParserUtil {
      */
     public static Mc parseMc(String mc) throws ParseException {
         String trimmedMc = mc.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMc)) {
+        if (!StringUtil.isUnsignedInteger(trimmedMc)) {
             throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
         }
 
         int mcAsInt = Integer.parseInt(trimmedMc);
-        if (mcAsInt > 20 || mcAsInt < 1) {
+        if (!Mc.isValidModuleMc(mcAsInt)) {
             throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
         }
 
@@ -110,7 +110,7 @@ public class ParserUtil {
         }
 
         int mcAsInt = Integer.parseInt(trimmedMc);
-        if (mcAsInt > 999 || mcAsInt < 1) {
+        if (!Mc.isValidMcGoal(mcAsInt)) {
             throw new ParseException(Mc.MESSAGE_CONSTRAINTS_GOAL);
         }
 
