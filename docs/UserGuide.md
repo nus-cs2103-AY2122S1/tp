@@ -207,7 +207,7 @@ Commands that are related to a specific contact.
 ##### Adding a contact : `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR compat/COMPATIBILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples: 
 
@@ -388,8 +388,8 @@ Deletes an organisation at the specified index of the organisation list.
 Format: `deleteorg INDEX`
 
 Examples:
-* `deleteorg 1`
-> Deletes the 1st organisation from the organisation list.
+* `deleteorg 1`Markdown Preview Github Styling
+<!-- > Deletes the 1st organisation from the organisation list.Markdown Preview Github Styling -->
 
 ##### Adding person to an organisation: `addtoorg`
 Adds the person at the specified index in the displayed list to an organisation with the specified name.
@@ -445,7 +445,7 @@ System Command | Format, Examples
 
 Contact-specific Command | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR compat/COMPATIBILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
+**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
 **Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Append** | `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `append 3 s/web devevelopment l/python t/classmate`
 **Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
