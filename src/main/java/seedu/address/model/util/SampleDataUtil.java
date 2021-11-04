@@ -125,7 +125,7 @@ public class SampleDataUtil {
                     new Phone("91009182"), EMPTY_EMAIL,
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL,
-                    new Remark("Weak at trigo"), getTagSet("SEC2", "OLVL"),
+                    new Remark("Weak at trigo"), getTagSet("SEC4", "OLVL"),
                     getLessonSet(getSampleLessons()[4])),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     EMPTY_PHONE, EMPTY_EMAIL,
