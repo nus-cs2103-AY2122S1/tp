@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getNoTagTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -22,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -34,12 +37,22 @@ class TagCommandTest {
             .withTags(VALID_TAG_FRIEND).build();
     private EditPersonDescriptor descriptorAddHusband = new EditPersonDescriptorBuilder()
             .withTags(VALID_TAG_HUSBAND).build();
-    private EditPersonDescriptor descriptorAddBoth = new EditPersonDescriptorBuilder()
+    private EditPersonDescriptor descriptorAddWife = new EditPersonDescriptorBuilder()
+            .withTags(VALID_TAG_WIFE).build();
+
+    private EditPersonDescriptor descriptorAddFriendHusband = new EditPersonDescriptorBuilder()
             .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+    private EditPersonDescriptor descriptorAddFriendWife = new EditPersonDescriptorBuilder()
+            .withTags(VALID_TAG_FRIEND, VALID_TAG_WIFE).build();
 
     private Model generateNoTagModel() {
         return new ModelManager(getNoTagTypicalAddressBook(), new UserPrefs());
     }
+
+    /**
+     * Generates model with everyone tagged with only {@code VALID_TAG_WIFE}
+     * @return
+     */
     private Model generateDefaultTagModel() {
         return new ModelManager(getTaggedTypicalAddressBook(VALID_TAG_WIFE), new UserPrefs());
     }
@@ -85,7 +98,7 @@ class TagCommandTest {
         Person editedPerson = new PersonBuilder(defaultFirst).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
 
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriendHusband);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
                 editedPerson.getName(), editedPerson.getTags());
@@ -103,7 +116,7 @@ class TagCommandTest {
         Person editedPerson = new PersonBuilder(defaultFirst)
                 .withTags(VALID_TAG_WIFE, VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriendHusband);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
                 editedPerson.getName(), editedPerson.getTags());
@@ -134,6 +147,79 @@ class TagCommandTest {
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_personWithSameExistingTags_success() {
+        Model model = generateDefaultTagModel();
+        Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(defaultFirst)
+                .withTags(VALID_TAG_WIFE).build();
+
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddWife);
+
+        Set<Tag> overlapTags = Set.of(new Tag(VALID_TAG_WIFE));
+
+        String expectedSuccessMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
+        String expectedOverlapMessage = String.format(TagCommand.MESSAGE_TAG_ADD_EXISTS,
+                editedPerson.getName(), overlapTags);
+        String expectedMessage = expectedSuccessMessage + "\n"
+                + expectedOverlapMessage;
+
+        Model expectedModel = generateDefaultTagModel();
+        expectedModel.setPerson(defaultFirst, editedPerson);
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_personWithDifferentExistingTags_success() {
+        Model model = generateDefaultTagModel();
+        Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(defaultFirst)
+                .withTags(VALID_TAG_WIFE, VALID_TAG_FRIEND).build();
+
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriendWife);
+
+        Set<Tag> overlapTags = Set.of(new Tag(VALID_TAG_WIFE));
+
+        String expectedSuccessMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
+        String expectedOverlapMessage = String.format(TagCommand.MESSAGE_TAG_ADD_EXISTS,
+                editedPerson.getName(), overlapTags);
+        String expectedMessage = expectedSuccessMessage + "\n"
+                + expectedOverlapMessage;
+
+        Model expectedModel = generateDefaultTagModel();
+        expectedModel.setPerson(defaultFirst, editedPerson);
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_personWithIdenticalAddedTags_success() {
+        Model model = generateDefaultTagModel();
+        Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(defaultFirst).build();
+
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddWife);
+
+        Set<Tag> overlapTags = Set.of(new Tag(VALID_TAG_WIFE));
+
+        String expectedSuccessMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
+        String expectedOverlapMessage = String.format(TagCommand.MESSAGE_TAG_ADD_EXISTS,
+                editedPerson.getName(), overlapTags);
+        String expectedMessage = expectedSuccessMessage + "\n"
+                + expectedOverlapMessage;
+
+        Model expectedModel = generateDefaultTagModel();
+        expectedModel.setPerson(defaultFirst, editedPerson);
+
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {

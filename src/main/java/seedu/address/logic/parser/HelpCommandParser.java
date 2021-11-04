@@ -10,7 +10,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * @return HelpCommand object
      * @throws ParseException if the user input does not conform the expected format
      */
-    public HelpCommand parse(String args) {
+    public HelpCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
         String helpCommandWord = argMultimap.getPreamble();

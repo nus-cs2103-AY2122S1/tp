@@ -15,6 +15,7 @@ public class FindPredicate implements Predicate<Person> {
 
     private final List<Name> nameList;
     private final List<Tag> tagList;
+    private final boolean isCaseSensitive;
 
     /**
      * Creates a FindPredicate
@@ -22,9 +23,10 @@ public class FindPredicate implements Predicate<Person> {
      * @param nameList refers to the list of Names to be searched for
      * @param tagList refers to the list of Tags to be searched for
      */
-    public FindPredicate(List<Name> nameList, List<Tag> tagList) {
+    public FindPredicate(List<Name> nameList, List<Tag> tagList, boolean isCaseSensitive) {
         this.nameList = nameList;
         this.tagList = tagList;
+        this.isCaseSensitive = isCaseSensitive;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class FindPredicate implements Predicate<Person> {
                 .allMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name.fullName))
                 && tagList.stream()
                 .allMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))
-                        .anyMatch(personTag-> personTag.compareTag(tag, false)));
+                        .anyMatch(personTag-> personTag.compareTag(tag, isCaseSensitive)));
     }
 
     @Override

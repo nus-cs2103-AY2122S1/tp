@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_STUDENT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -70,6 +73,34 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void systemExecute_validCommandWord() {
+        String addCommand = AddCommand.COMMAND_WORD;
+        CommandResult result = logic.systemExecute(addCommand);
+        assertEquals(AddCommand.COMMAND_EXAMPLE, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void systemExecute_validCommand() {
+        String tagCommand = TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getZeroBased() + TAG_DESC_STUDENT;
+        CommandResult result = logic.systemExecute(tagCommand);
+        assertEquals(TagCommand.COMMAND_EXAMPLE, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void systemExecute_invalidCommand() {
+        String command = "addd";
+        CommandResult result = logic.systemExecute(command);
+        assertEquals("", result.getFeedbackToUser());
+    }
+
+    @Test
+    public void systemExecute_invalidCommandWord() {
+        String command = "";
+        CommandResult result = logic.systemExecute(command);
+        assertEquals("", result.getFeedbackToUser());
+    }
+
+    @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
@@ -92,6 +123,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getBirthdayReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getBirthdayReminderList().remove(0));
     }
 
     /**

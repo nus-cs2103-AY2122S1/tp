@@ -25,7 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]... "
-            + PREFIX_BIRTHDAY + "BIRTHDAY \n"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

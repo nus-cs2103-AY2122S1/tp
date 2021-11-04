@@ -18,6 +18,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "Finds all persons whose names contain ALL of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: n/[name] ... t/[tag] ...\n"
+            + "Note that users can opt for case-sensitive search on Tags by including the 'c/' flag"
+            + "after the command word\n"
             + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;

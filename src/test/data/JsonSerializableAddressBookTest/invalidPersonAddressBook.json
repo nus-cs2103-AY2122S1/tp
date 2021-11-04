@@ -4,6 +4,7 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
-    "birthday": "15122000"
+    "birthday": "15122000",
+    "pin": "true"
   } ]
 }

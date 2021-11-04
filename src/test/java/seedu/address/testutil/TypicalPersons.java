@@ -53,19 +53,19 @@ public class TypicalPersons {
             .withBirthday("07111990").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withBirthday("12041990").withTags("football").build();
+            .withBirthday("12041990").withTags("football").withPin(true).build();
     public static final Person HANNAH = new PersonBuilder().withName("Hannah Worst").withPhone("1234567")
             .withEmail("hhhhannah@example.com").withAddress("12th street")
-            .withBirthday("31011990").build();
+            .withBirthday("31011990").withPin(true).build();
     public static final Person HANNAH_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
             .withName("Hannah No Birthday Worst").withPhone("12334567")
             .withEmail("hhhhannah@example.com").withAddress("12th street").build();
     public static final Person INDIGO = new PersonBuilder().withName("Indigo Color").withPhone("24422984")
             .withEmail("color@rainbow.com").withAddress("big tokyo")
-            .withBirthday("11101995").build();
+            .withBirthday("11101995").withPin(true).build();
     public static final Person INDIGO_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
             .withName("Indigo No Birthday Color").withPhone("17263722")
-            .withEmail("color@rainbow.com").withAddress("big tokyo").build();
+            .withEmail("color@rainbow.com").withAddress("big tokyo").withPin(true).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

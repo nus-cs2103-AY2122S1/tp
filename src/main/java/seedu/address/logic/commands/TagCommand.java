@@ -8,6 +8,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,6 +21,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +39,7 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_TAG_ADD_SUCCESS = "Person %1$s now has tags: %2$s";
+    public static final String MESSAGE_TAG_ADD_EXISTS = "Person %1$s already had tags: %2$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -68,8 +72,18 @@ public class TagCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_TAG_ADD_SUCCESS,
-                editedPerson.getName(), editedPerson.getTags()));
+
+        Set<Tag> oldTags = personToEdit.getTags();
+        Predicate<Tag> tagInOldTags = testTag -> oldTags.contains(testTag);
+
+        Set<Tag> overlapTags = editPersonDescriptor.getTags().orElse(new HashSet<>()).stream()
+                .filter(tagInOldTags).collect(Collectors.toSet());
+
+        String successMessage = String.format(MESSAGE_TAG_ADD_SUCCESS, editedPerson.getName(), editedPerson.getTags());
+        String existsMessage = !overlapTags.isEmpty()
+                ? '\n' + String.format(MESSAGE_TAG_ADD_EXISTS, editedPerson.getName(), overlapTags)
+                : "";
+        return new CommandResult(successMessage + existsMessage);
     }
 
     /**
@@ -84,16 +98,17 @@ public class TagCommand extends Command {
         Email unchangedEmail = personToEdit.getEmail();
         Address unchangedAddress = personToEdit.getAddress();
         Birthday unchangedBirthday = personToEdit.getBirthday().orElse(null);
+        Pin unchangedPin = personToEdit.getPin();
 
         Set<Tag> existingTags = personToEdit.getTags();
-        Set<Tag> addedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
+        Set<Tag> addedTags = editPersonDescriptor.getTags().orElse(new HashSet<>());
         Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(existingTags);
         updatedTags.addAll(addedTags);
 
         return new Person(unchangedName, unchangedPhone, unchangedEmail, unchangedAddress,
                 updatedTags,
-                unchangedBirthday);
+                unchangedBirthday, unchangedPin);
     }
 
     @Override

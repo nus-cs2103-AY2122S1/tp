@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -30,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_BIRTHDAY_FORMAT = "20-01-1997";
     private static final String INVALID_BIRTHDAY_DATE = "12345678";
+    private static final String INVALID_BIRTHDAY_IN_FUTURE_DATE = "12122111";
     private static final String INVALID_SUBSTRING = "..";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -52,8 +52,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -211,6 +210,11 @@ public class ParserUtilTest {
     @Test
     public void parseBirthday_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY_FORMAT));
+    }
+
+    @Test
+    public void parseBirthday_futureDate_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY_IN_FUTURE_DATE));
     }
 
     @Test

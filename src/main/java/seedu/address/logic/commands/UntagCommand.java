@@ -22,6 +22,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,7 +45,7 @@ public class UntagCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
 
-    private static final Logger logger = LogsCenter.getLogger(HelpCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(UntagCommand.class);
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -103,8 +104,9 @@ public class UntagCommand extends Command {
         Email originalEmail = personToUntag.getEmail();
         Address originalAddress = personToUntag.getAddress();
         Birthday originalBirthday = personToUntag.getBirthday().orElse(null);
+        Pin originalPin = personToUntag.getPin();
 
-        Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
+        Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<>());
         Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
         if (!updatedTags.containsAll(removedTags)) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, originalName,
@@ -116,7 +118,8 @@ public class UntagCommand extends Command {
                 originalName, updatedTags.stream().map(tag -> tag.tagName).collect(Collectors.joining(", ")),
                 getRemovedTags(editPersonDescriptor)));
 
-        return new Person(originalName, originalPhone, originalEmail, originalAddress, updatedTags, originalBirthday);
+        return new Person(originalName, originalPhone, originalEmail,
+                originalAddress, updatedTags, originalBirthday, originalPin);
     }
 
     /**
@@ -138,7 +141,7 @@ public class UntagCommand extends Command {
      * @return String containing tags that are removed
      */
     public static String getRemovedTags(EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getTags().orElse(new HashSet<Tag>()).stream()
+        return editPersonDescriptor.getTags().orElse(new HashSet<>()).stream()
                 .map(tag -> tag.tagName).collect(Collectors.joining(", "));
     }
 

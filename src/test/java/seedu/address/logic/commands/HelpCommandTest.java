@@ -92,8 +92,8 @@ public class HelpCommandTest {
 
     @Test
     public void execute_findOrCommand_success() {
-        HelpCommand helpCommand = new HelpCommand(FindOrCommand.COMMAND_WORD);
-        CommandResult expectedCommandResult = new CommandResult(FindOrCommand.MESSAGE_USAGE, false, false);
+        HelpCommand helpCommand = new HelpCommand(FindAnyCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(FindAnyCommand.MESSAGE_USAGE, false, false);
         assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
     }
 
@@ -119,17 +119,17 @@ public class HelpCommandTest {
     }
 
     @Test
-    public void execute_findTagCaseInsensitiveCommand_success() {
-        HelpCommand helpCommand = new HelpCommand(FindTagCaseInsensitiveCommand.COMMAND_WORD);
-        CommandResult expectedCommandResult = new CommandResult(FindTagCaseInsensitiveCommand.MESSAGE_USAGE,
+    public void execute_pinCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(PinCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(PinCommand.MESSAGE_USAGE,
                 false, false);
         assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
-    public void execute_findTagCaseSensitiveCommand_success() {
-        HelpCommand helpCommand = new HelpCommand(FindTagCaseSensitiveCommand.COMMAND_WORD);
-        CommandResult expectedCommandResult = new CommandResult(FindTagCaseSensitiveCommand.MESSAGE_USAGE,
+    public void execute_unpinCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(UnpinCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(UnpinCommand.MESSAGE_USAGE,
                 false, false);
         assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
     }

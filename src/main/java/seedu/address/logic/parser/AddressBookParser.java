@@ -13,13 +13,14 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindAnyCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindOrCommand;
-import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
-import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MailingListCommand;
+import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -50,6 +51,9 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        case MailingListCommand.COMMAND_WORD:
+            return new MailingListCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -74,8 +78,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case FindOrCommand.COMMAND_WORD:
-            return new FindOrCommandParser().parse(arguments);
+        case FindAnyCommand.COMMAND_WORD:
+            return new FindAnyCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -86,11 +90,11 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
 
-        case FindTagCaseInsensitiveCommand.COMMAND_WORD:
-            return new FindTagCaseInsensitiveCommandParser().parse(arguments);
+        case PinCommand.COMMAND_WORD:
+            return new PinCommandParser().parse(arguments);
 
-        case FindTagCaseSensitiveCommand.COMMAND_WORD:
-            return new FindTagCaseSensitiveCommandParser().parse(arguments);
+        case UnpinCommand.COMMAND_WORD:
+            return new UnpinCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -16,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String birthday;
+    private final String pin;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("birthday") String birthday) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("birthday") String birthday, @JsonProperty("pin") String pin) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.birthday = birthday;
+        this.pin = pin;
     }
 
     /**
@@ -61,6 +65,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         birthday = source.getBirthday().map(Birthday::toString).orElse(null);
+        pin = source.getPin().toString();
     }
 
     /**
@@ -106,10 +111,20 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (pin == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
+        }
+
+        if (!Pin.isValidPinStatus(pin)) {
+            throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
+        }
+
+        final Pin modelPin = new Pin(pin);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (birthday == null) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null, modelPin);
         }
 
         // Set birthday if non-null
@@ -121,7 +136,7 @@ class JsonAdaptedPerson {
         }
         final Birthday modelBirthday = new Birthday(birthday);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelPin);
     }
 
 }
