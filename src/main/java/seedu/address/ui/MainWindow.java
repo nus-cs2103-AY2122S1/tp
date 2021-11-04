@@ -30,6 +30,8 @@ import seedu.address.model.game.Game;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String FRIEND_TITLE = "Friend's ID: %s (Name: %s)";
+    private static final String GAME_TITLE = "Game: %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -236,6 +238,16 @@ public class MainWindow extends UiPart<Stage> {
         return logic.getGamesBook().getGamesList();
     }
 
+    private Friend getUpdatedFriend(Friend toUpdate) {
+        ObservableList<Friend> friendsList = getFriendList();
+        for (Friend friend: friendsList) {
+            if (friend.getFriendId().equals(toUpdate.getFriendId())) {
+                return friend;
+            }
+        }
+        return toUpdate;
+    }
+
     private boolean friendListHasFriend(ObservableList<Friend> friendList, Friend friendToTest) {
         return friendList.stream().anyMatch(x -> x.isSameFriendId(friendToTest));
     }
@@ -258,9 +270,6 @@ public class MainWindow extends UiPart<Stage> {
         ObservableList<Friend> friendList = this.getFriendList();
         currentFriendToGet = friendToGet;
         clearMainCard();
-        mainCardTitle.setText(friendToGet.getFriendId().toString() + " ("
-                + friendToGet.getFriendName().toString() + ")");
-
         // If currentFriendToGet is null, we do nothing.
         if (currentFriendToGet == null) {
             return;
@@ -268,6 +277,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // If friendToGet is in friendList, populate the table with the games associated to it.
         if (this.friendListHasFriend(friendList, currentFriendToGet)) {
+            mainCardTitle.setText(String.format(FRIEND_TITLE, friendToGet.getFriendId().toString(),
+                    friendToGet.getFriendName().toString()));
             friendToGet = friendList
                     .stream()
                     .filter(x -> x.isSameFriendId(currentFriendToGet))
@@ -296,7 +307,6 @@ public class MainWindow extends UiPart<Stage> {
         currentGameToGet = gameToGet;
         clearMainCard();
         ObservableList<Game> gameList = this.getGameList();
-        mainCardTitle.setText(gameToGet.getGameId().toString());
 
         // If currentGameToGet is null, we do nothing.
         if (currentGameToGet == null) {
@@ -310,6 +320,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // If current friendList has a friend(s) which is associated to currentGameToGet, return the list of friends.
         if (friendListHasGameAssociation(friendList, currentGameToGet)) {
+            mainCardTitle.setText(String.format(GAME_TITLE, gameToGet.getGameId().toString()));
             List<Friend> friendsWithGame = friendList.stream()
                     .filter(friend -> friend.hasGameAssociation(currentGameToGet))
                     .collect(Collectors.toList());
@@ -357,7 +368,8 @@ public class MainWindow extends UiPart<Stage> {
             case GAME_LIST:
                 gameListPanel.updateNumberOfFriends();
                 if (isFriendTable) {
-                    handleFriendGet(this.currentFriendToGet);
+                    Friend updatedFriend = getUpdatedFriend(this.currentFriendToGet);
+                    handleFriendGet(updatedFriend);
                 } else {
                     handleGameGet(this.currentGameToGet);
                 }
