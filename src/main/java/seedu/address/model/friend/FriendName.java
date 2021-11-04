@@ -10,10 +10,11 @@ public class FriendName {
     // constants
     public static final FriendName DEFAULT_FRIEND_NAME = new FriendName("No name assigned");
     public static final String MESSAGE_CONSTRAINTS =
-            "FRIEND_NAME provided must consist of only alphanumeric words, of maximum 20 characters in total.";
+            "NAME provided must be a non-empty string of maximum 20 characters, and not contain '-' (hyphen).";
 
     /**
-     * Non-empty, alpha-numeric, multi-word string with a max limit of 20 characters.
+     * The name must not be blank, empty, whitespace or contain a '-'. Max limit of 20 characters.
+     * This is to avoid any flags being inserted in the name.
      */
     public static final String VALIDATION_REGEX = "^[^ -][^-]{0,19}$";
 

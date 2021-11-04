@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UserName {
 
-    public static final String MESSAGE_CONSTRAINTS = "USERNAME provided must be a non-empty string "
+    public static final String MESSAGE_CONSTRAINTS = "IN_GAME_USERNAME provided must be a non-empty string "
             + "of maximum 20 characters, and not contain '-' (hyphen).";
 
     /**
