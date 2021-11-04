@@ -53,7 +53,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/cyn7hius.png" width="200px">
 
 [[github](https://github.com/Cyn7hius)]
-[[portfolio](team/calvin.md)]
+[[portfolio](team/cyn7hius.md)]
 
 * Role: Developer
 * Responsibilities: Documentation
