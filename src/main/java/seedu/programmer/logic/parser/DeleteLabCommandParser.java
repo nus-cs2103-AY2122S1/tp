@@ -10,6 +10,7 @@ import seedu.programmer.logic.commands.DeleteLabCommand;
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
 
 
 /**
@@ -37,7 +38,7 @@ public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
             throw new ParseException(String.format(MESSAGE_MISSING_ARGUMENT, DeleteLabCommand.MESSAGE_USAGE));
         }
 
-        int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(""));
+        LabNum labNum = new LabNum(ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse("")));
         Lab labResult = new Lab(labNum);
         return new DeleteLabCommand(labResult);
     }

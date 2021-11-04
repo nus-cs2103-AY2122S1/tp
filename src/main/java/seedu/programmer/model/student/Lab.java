@@ -11,7 +11,7 @@ public class Lab implements DisplayableObject {
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
 
 
-    private int labNum;
+    private LabNum labNum;
     private Integer actualScore;
     private Integer totalScore;
 
@@ -21,7 +21,7 @@ public class Lab implements DisplayableObject {
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
      * */
-    public Lab(int labNum, Integer actualScore, Integer totalScore) {
+    public Lab(LabNum labNum, Integer actualScore, Integer totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
         this.actualScore = actualScore;
@@ -32,7 +32,7 @@ public class Lab implements DisplayableObject {
      * Constructs a unmarked Lab Object.
      * @param labNum the labNum of the lab
      * @param totalScore the total score */
-    public Lab(int labNum, Integer totalScore) {
+    public Lab(LabNum labNum, Integer totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
         this.actualScore = UNMARKED_ACTUAL_SCORE_PLACEHOLDER;
@@ -42,13 +42,13 @@ public class Lab implements DisplayableObject {
     /**
      * @param labNum the labNum of the lab
      * */
-    public Lab(int labNum) {
+    public Lab(LabNum labNum) {
         this.labNum = labNum;
     }
 
     public Lab(){}
 
-    public int getLabNum() {
+    public LabNum getLabNum() {
         return labNum;
     }
 
@@ -66,10 +66,10 @@ public class Lab implements DisplayableObject {
 
     /**
      * Updates the labNum of the lab
-     * @param newLabNum
+     * @param newLabNum the new lab number
      */
-    public void updateLabNum(int newLabNum) {
-        if (newLabNum > 0) {
+    public void updateLabNum(LabNum newLabNum) {
+        if (newLabNum.getLabNum() > 0) {
             this.labNum = newLabNum;
         }
     }
@@ -92,7 +92,7 @@ public class Lab implements DisplayableObject {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNum == ((Lab) other).getLabNum());
+                && labNum.getLabNum() == ((Lab) other).getLabNum().getLabNum());
     }
 
     /**
@@ -109,7 +109,7 @@ public class Lab implements DisplayableObject {
 
     /**
      * Make a copy of an existing Lab.
-     * @return
+     * @return a copy of the lab
      */
     public Lab copy() {
         return new Lab(labNum, actualScore, totalScore);
