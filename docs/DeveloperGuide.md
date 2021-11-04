@@ -796,3 +796,34 @@ testers are expected to do more *exploratory* testing.
        
     4. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size)<br>
        Expected: Same as previous.
+
+## **Appendix: Effort**
+
+Given below is a summary of the effort our team put into this project.
+
+### Visit, last visit and associated features
+These features were challenging to develop as they affect existing commands and classes. While maintaining the functionality of existing
+features, we also had to ensure their extensibility and consistency.
+
+E.g. We took into consideration the existing delete command while implementing the delete visit feature. Although a new
+`delete visit` command could be easier to implement, we chose to overload the existing delete elderly command with a `v/`
+flag to maintain OOP and also make our commands formats consistent.
+
+### Download
+The main difficulty in developing this feature was the conversion from JSON to CSV, which required effort to understand 
+documentations.
+
+### Sort
+This feature required an in-depth understanding of JavaFX features. It was also challenging to maintain OOP, in particular,
+the immutability of the data had to be maintained while sorting the list.
+
+### Summary
+The challenging part in implementing this feature was its integration with the UI, as it required the changing of display
+from the elderly list to a summary list.
+
+### UI
+A considerable amount of effort was spent on revamping the user interface to cater for our purpose.
+We incorporated functional colors into the UI, which required careful integration of the UI and logic. 
+E.g. Highlighting person card with red colour if the next visit is overdue.
+We also reorganised and adjusted the components, spacing and design for user-friendliness.
+While these UI changes are less challenging, it takes up considerable time and effort to produce a satisfactory render.
