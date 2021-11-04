@@ -14,7 +14,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ScheduleCommand
      * and returns an ScheduleCommand object for execution.
-     * @throws seedu.insurancepal.logic.parser.exceptions.ParseException if user input does not conform the expected format
+     * @throws seedu.insurancepal.logic.parser.exceptions.ParseException if user input is not the expected format
      */
     public ScheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
