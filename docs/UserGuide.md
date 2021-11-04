@@ -252,7 +252,14 @@ Examples:
 ### Show a Student Contact - `show`
 
 Shows detailed information of a Student Contact. This can be done using the name 
-of the contact or the index.
+of the contact, github username, telegram id or the index. It shows the student with the corresponding detail containing the keyword.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: Note:
+The show keywords are case-insensitive, john Doe will match with John Doe, JOHN DOE and JoHN DoE
+
+</div>
 
 Format 1: 
 
@@ -266,15 +273,44 @@ Example 1:
 show John Doe
 ```
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: Note:
 If the exact name is not given, the show function will act similar to find and then you can pick out one contact from the given list.
 
-Format 2: 
+</div>
+
+Format 2:
+
+```
+show g/<GITHUB_USERNAME>
+```
+
+Example 2:
+
+```
+show g/john-doe
+```
+
+Format 3:
+
+```
+show te/<TELEGRAM_ID>
+```
+
+Example 3:
+
+```
+show te/john_doe
+```
+
+Format 4: 
 
 ```
 show <INDEX>
 ```
 
-Example 2:
+Example 4:
 
 ```
 show 4
