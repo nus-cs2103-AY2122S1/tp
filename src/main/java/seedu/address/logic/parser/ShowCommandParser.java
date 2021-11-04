@@ -33,9 +33,9 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             savePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), ".png");
         }
 
-        return isNoPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP)
-                ? parseByIndex(argMultimap, savePath)
-                : parseByPrefixes(argMultimap, savePath);
+        return argMultimap.getPreamble().isEmpty()
+                ? parseByPrefixes(argMultimap, savePath)
+                : parseByIndex(argMultimap, savePath);
     }
 
     /**
@@ -44,7 +44,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     public ShowCommand parseByIndex(ArgumentMultimap argMultimap, Path savePath) throws ParseException {
         Index index;
 
-        if (argMultimap.getPreamble().isEmpty()) {
+        if (isNoPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
