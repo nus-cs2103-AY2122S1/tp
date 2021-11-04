@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
-import static seedu.address.logic.parser.SortComparator.SORT_BY_LAST_VISIT;
-import static seedu.address.logic.parser.SortComparator.SORT_BY_NEXT_VISIT;
+import static seedu.address.model.util.SortUtil.SORT_BY_LAST_VISIT;
+import static seedu.address.model.util.SortUtil.SORT_BY_NEXT_VISIT;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,10 +28,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (argMultimap.isAllPresent(PREFIX_LAST_VISIT, PREFIX_VISIT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
-        } else if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
+        } else if (ParserUtil.isPrefixPresentAndEmpty(argMultimap, PREFIX_LAST_VISIT)) {
             return new SortCommand(SORT_BY_LAST_VISIT, false);
 
-        } else if (argMultimap.getValue(PREFIX_VISIT).isPresent()) {
+        } else if (ParserUtil.isPrefixPresentAndEmpty(argMultimap, PREFIX_VISIT)) {
             return new SortCommand(SORT_BY_NEXT_VISIT, true);
 
         } else {

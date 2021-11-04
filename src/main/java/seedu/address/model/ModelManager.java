@@ -13,8 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.SortComparator;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SortUtil;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.sortedPersons = new SortedList<>(this.addressBook.getPersonList());
-        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
+        sortedPersons.setComparator(SortUtil.SORT_BY_NAME);
         this.filteredPersons = new FilteredList<>(sortedPersons);
         this.summary = new Summary(addressBook);
 
@@ -135,7 +135,7 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         logger.info("Display person list by the order of name.");
-        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
+        sortedPersons.setComparator(SortUtil.SORT_BY_NAME);
         filteredPersons.setPredicate(predicate);
     }
 

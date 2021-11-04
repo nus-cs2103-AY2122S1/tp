@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.SortComparator;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.PersonAttributesContainsKeywordsPredicate;
 import seedu.address.model.person.Visit;
+import seedu.address.model.util.SortUtil;
 
 public class SortCommandTest {
     private static final PersonAttributesContainsKeywordsPredicate PREDICATE_STUB = preparePredicate("meier");
@@ -35,13 +35,13 @@ public class SortCommandTest {
     @Test
     public void execute_sortUnfilteredListByNextVisit_showEverythingSorted() {
         // sort by visit
-        SortCommand sortByNextVisitCommand = new SortCommand(SortComparator.SORT_BY_NEXT_VISIT, true);
-        expectedModel.sortFilteredPersonList(SortComparator.SORT_BY_NEXT_VISIT, true);
+        SortCommand sortByNextVisitCommand = new SortCommand(SortUtil.SORT_BY_NEXT_VISIT, true);
+        expectedModel.sortFilteredPersonList(SortUtil.SORT_BY_NEXT_VISIT, true);
         assertCommandSuccess(sortByNextVisitCommand, model, SUCCESS_MESSAGE_VISIT, expectedModel);
 
         // sort by last visit
-        SortCommand sortByLastVisitCommand = new SortCommand(SortComparator.SORT_BY_LAST_VISIT, false);
-        expectedModel.sortFilteredPersonList(SortComparator.SORT_BY_LAST_VISIT, false);
+        SortCommand sortByLastVisitCommand = new SortCommand(SortUtil.SORT_BY_LAST_VISIT, false);
+        expectedModel.sortFilteredPersonList(SortUtil.SORT_BY_LAST_VISIT, false);
         assertCommandSuccess(sortByLastVisitCommand, model, SUCCESS_MESSAGE_LAST_VISIT, expectedModel);
     }
 
@@ -50,8 +50,8 @@ public class SortCommandTest {
         model.updateFilteredPersonList(PREDICATE_STUB);
         expectedModel.updateFilteredPersonList(PREDICATE_STUB);
 
-        SortCommand sortCommand = new SortCommand(SortComparator.SORT_BY_LAST_VISIT, false);
-        expectedModel.sortFilteredPersonList(SortComparator.SORT_BY_LAST_VISIT, false);
+        SortCommand sortCommand = new SortCommand(SortUtil.SORT_BY_LAST_VISIT, false);
+        expectedModel.sortFilteredPersonList(SortUtil.SORT_BY_LAST_VISIT, false);
 
         assertCommandSuccess(sortCommand, model, SUCCESS_MESSAGE_LAST_VISIT, expectedModel);
     }
@@ -61,15 +61,15 @@ public class SortCommandTest {
         model.updateFilteredPersonList(PREDICATE_STUB);
         expectedModel.updateFilteredPersonList(PREDICATE_STUB);
 
-        SortCommand sortCommand = new SortCommand(SortComparator.SORT_BY_NEXT_VISIT, true);
-        expectedModel.sortFilteredPersonList(SortComparator.SORT_BY_NEXT_VISIT, true);
+        SortCommand sortCommand = new SortCommand(SortUtil.SORT_BY_NEXT_VISIT, true);
+        expectedModel.sortFilteredPersonList(SortUtil.SORT_BY_NEXT_VISIT, true);
 
         assertCommandSuccess(sortCommand, model, SUCCESS_MESSAGE_VISIT, expectedModel);
     }
 
     @Test
     public void execute_invalidComparator_throwCommandException() {
-        SortCommand sortCommand = new SortCommand(SortComparator.SORT_BY_NAME, true);
+        SortCommand sortCommand = new SortCommand(SortUtil.SORT_BY_NAME, true);
         String errorMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
         assertCommandFailure(sortCommand, model, errorMessage);
     }
