@@ -256,6 +256,10 @@ The user can only add or delete a `Genre` from an `Anime` if the `Genre` is in t
 * Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
 * Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`.
 
+The Sequence Diagram below illustrates the interactions within the Logic component for the execute("genre 1 c/add g/action g/fantasy") API call.
+
+![Interactions Inside the Logic Component for the `genre 1 c/add g/action g/fantasy` Command](images/AddGenreSequenceDiagram.png)
+
 #### Proposed Implementation
 
 We can allow the user to modify the `GenreList` by adding both a add `Genre` command and a delete `Genre` command.
