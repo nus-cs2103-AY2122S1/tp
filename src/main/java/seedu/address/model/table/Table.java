@@ -39,7 +39,7 @@ public class Table {
      * Checks if this table can accommodate specified number of customers
      */
     public boolean canFit(int numOfCustomers) {
-        return numOfCustomers <= numOfSeats;
+        return numOfCustomers <= numOfSeats && numOfCustomers > 0;
     }
 
     public int getTableId() {

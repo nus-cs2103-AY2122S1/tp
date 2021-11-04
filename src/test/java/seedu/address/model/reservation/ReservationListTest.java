@@ -4,36 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
+import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.exception.ReservationNotFoundException;
-import seedu.address.model.table.Table;
 
 class ReservationListTest {
-    public static final Reservation DUMMY_RESERVATION = new Reservation(
-            new Phone("98765432"),
-            5,
-            LocalDateTime.parse("2021-11-11T20:00"),
-            new Table(2, 10),
-            new Remark(""),
-            Set.of()
-    );
-    public static final Reservation RESERVATION_NOT_IN_LIST = new Reservation(
-            new Phone("12345678"),
-            2,
-            LocalDateTime.parse("2021-11-11T20:00"),
-            new Table(1, 11),
-            new Remark(""),
-            Set.of()
-    );
-
     private ReservationList reservationList = new ReservationList();
 
     @Test
@@ -43,13 +24,13 @@ class ReservationListTest {
 
     @Test
     public void contains_reservationNotInList_returnsFalse() {
-        assertFalse(reservationList.contains(RESERVATION_NOT_IN_LIST));
+        assertFalse(reservationList.contains(ALICE_RESERVATION));
     }
 
     @Test
     public void contains_reservationInList_returnsTrue() {
-        reservationList.add(DUMMY_RESERVATION);
-        assertTrue(reservationList.contains(DUMMY_RESERVATION));
+        reservationList.add(ALICE_RESERVATION);
+        assertTrue(reservationList.contains(ALICE_RESERVATION));
     }
 
     @Test
@@ -60,36 +41,36 @@ class ReservationListTest {
     @Test
     public void setReservation_nullTargetReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                reservationList.setReservation(null, RESERVATION_NOT_IN_LIST));
+                reservationList.setReservation(null, ALICE_RESERVATION));
     }
 
     @Test
     public void setReservation_nullEditedReservation_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                reservationList.setReservation(DUMMY_RESERVATION, null));
+                reservationList.setReservation(ALICE_RESERVATION, null));
     }
 
     @Test
     public void setReservation_targetReservationNotInList_throwsReservationNotFoundException() {
         assertThrows(ReservationNotFoundException.class, () ->
-                reservationList.setReservation(RESERVATION_NOT_IN_LIST, DUMMY_RESERVATION));
+                reservationList.setReservation(ALICE_RESERVATION, BENSON_RESERVATION));
     }
 
     @Test
     public void setReservation_editedReservationIsSameReservation_success() {
-        reservationList.add(DUMMY_RESERVATION);
-        reservationList.setReservation(DUMMY_RESERVATION, DUMMY_RESERVATION);
+        reservationList.add(ALICE_RESERVATION);
+        reservationList.setReservation(ALICE_RESERVATION, ALICE_RESERVATION);
         ReservationList expected = new ReservationList();
-        expected.add(DUMMY_RESERVATION);
+        expected.add(ALICE_RESERVATION);
         assertEquals(expected, reservationList);
     }
 
     @Test
     public void setReservation_editedReservationOfDifferentIdentity() {
-        reservationList.add(DUMMY_RESERVATION);
-        reservationList.setReservation(DUMMY_RESERVATION, RESERVATION_NOT_IN_LIST);
+        reservationList.add(ALICE_RESERVATION);
+        reservationList.setReservation(ALICE_RESERVATION, BENSON_RESERVATION);
         ReservationList expected = new ReservationList();
-        expected.add(RESERVATION_NOT_IN_LIST);
+        expected.add(BENSON_RESERVATION);
         assertEquals(expected, reservationList);
     }
 
@@ -102,13 +83,13 @@ class ReservationListTest {
     @Test
     public void remove_reservationDoesNotExist_throwsReservationNotFoundException() {
         assertThrows(ReservationNotFoundException.class, () ->
-                reservationList.remove(RESERVATION_NOT_IN_LIST));
+                reservationList.remove(BENSON_RESERVATION));
     }
 
     @Test
     public void remove_reservationInList_success() {
-        reservationList.add(DUMMY_RESERVATION);
-        reservationList.remove(DUMMY_RESERVATION);
+        reservationList.add(ALICE_RESERVATION);
+        reservationList.remove(ALICE_RESERVATION);
         ReservationList expected = new ReservationList();
         assertEquals(expected, reservationList);
     }
@@ -121,9 +102,9 @@ class ReservationListTest {
 
     @Test
     public void setReservations_validReservationList_success() {
-        reservationList.add(DUMMY_RESERVATION);
+        reservationList.add(ALICE_RESERVATION);
         ReservationList expected = new ReservationList();
-        expected.add(RESERVATION_NOT_IN_LIST);
+        expected.add(BENSON_RESERVATION);
         reservationList.setReservations(expected);
         assertEquals(expected, reservationList);
     }
@@ -136,11 +117,11 @@ class ReservationListTest {
 
     @Test
     public void setReservations_validList_success() {
-        reservationList.add(DUMMY_RESERVATION);
-        List<Reservation> validList = Collections.singletonList(DUMMY_RESERVATION);
+        reservationList.add(ALICE_RESERVATION);
+        List<Reservation> validList = Collections.singletonList(ALICE_RESERVATION);
         reservationList.setReservations(validList);
         ReservationList expected = new ReservationList();
-        expected.add(DUMMY_RESERVATION);
+        expected.add(ALICE_RESERVATION);
         assertEquals(expected, reservationList);
     }
 

@@ -4,6 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
+import static seedu.address.testutil.TypicalTables.DUMMY_LIST_OF_TABLES;
+import static seedu.address.testutil.TypicalTables.DUMMY_LIST_OF_TABLE_SIZES;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_1;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_2;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_3;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_4;
+import static seedu.address.testutil.TypicalTables.DUMMY_TABLE_5;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.table.Table;
 
 
 class SetTablesCommandTest {
@@ -26,31 +32,23 @@ class SetTablesCommandTest {
 
     @Test
     public void execute_validListOfTableSizes_addSuccessful() throws Exception {
-        List<Integer> tableSizeList = Arrays.asList(1, 2, 3, 4, 5);
-        List<Table> tableList = Arrays.asList(
-                new Table(1, 1),
-                new Table(2, 2),
-                new Table(3, 3),
-                new Table(4, 4),
-                new Table(5, 5)
-        );
-        SetTablesCommand command = new SetTablesCommand(tableSizeList);
-        model.setTableList(tableList);
+        SetTablesCommand command = new SetTablesCommand(DUMMY_LIST_OF_TABLE_SIZES);
+        model.setTableList(DUMMY_LIST_OF_TABLES);
 
         command.execute(model);
 
-        assertTrue(model.hasTable(new Table(1, 1)));
-        assertTrue(model.hasTable(new Table(2, 2)));
-        assertTrue(model.hasTable(new Table(3, 3)));
-        assertTrue(model.hasTable(new Table(4, 4)));
-        assertTrue(model.hasTable(new Table(5, 5)));
+        assertTrue(model.hasTable(DUMMY_TABLE_1));
+        assertTrue(model.hasTable(DUMMY_TABLE_2));
+        assertTrue(model.hasTable(DUMMY_TABLE_3));
+        assertTrue(model.hasTable(DUMMY_TABLE_4));
+        assertTrue(model.hasTable(DUMMY_TABLE_5));
     }
 
     @Test
     public void equals() {
 
-        List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        List<Integer> list2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        List<Integer> list1 = DUMMY_LIST_OF_TABLE_SIZES;
+        List<Integer> list2 = Arrays.asList(1, 2, 3, 4, 5);
 
         SetTablesCommand setTablesCommand = new SetTablesCommand(list1);
         SetTablesCommand setTablesCommandCopied = new SetTablesCommand(list2);
@@ -68,6 +66,6 @@ class SetTablesCommandTest {
         assertFalse(setTablesCommand.equals(null));
 
         // different list values -> returns false
-        assertFalse(setTablesCommand.equals(new SetTablesCommand(Arrays.asList(99, 2, 3, 4, 5, 6, 7, 8, 9, 10))));
+        assertFalse(setTablesCommand.equals(new SetTablesCommand(Arrays.asList(99, 2, 3, 4, 5))));
     }
 }

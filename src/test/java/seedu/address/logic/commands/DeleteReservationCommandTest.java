@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalReservation.getTypicalRhrh;
 
 import org.junit.jupiter.api.Test;

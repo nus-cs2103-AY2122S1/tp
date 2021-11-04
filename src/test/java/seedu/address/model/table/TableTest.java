@@ -56,6 +56,7 @@ class TableTest {
         assertFalse(table.canFit(101));
         assertFalse(table.canFit(102));
         assertFalse(table.canFit(Integer.MAX_VALUE));
+        assertFalse(table.canFit(Integer.MAX_VALUE + 1));
     }
 
     @Test
