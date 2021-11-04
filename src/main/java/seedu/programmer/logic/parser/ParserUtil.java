@@ -111,6 +111,8 @@ public class ParserUtil {
             int value = Integer.parseInt(labNum);
             if (value <= 0) {
                 throw new ParseException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
+            } else if (value > 14) {
+                throw new ParseException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
             }
             return value;
         } catch (NumberFormatException e) {

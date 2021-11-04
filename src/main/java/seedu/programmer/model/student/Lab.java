@@ -6,7 +6,8 @@ public class Lab implements DisplayableObject {
 
     public static final String MESSAGE_LAB_SCORE_AND_LAB_NUMBER_REQUIREMENT =
             "Both Lab Number and Score to be should be provided together.";
-    public static final String MESSAGE_LAB_NUMBER_CONSTRAINT = "Lab number should be a positive integer.";
+    public static final String MESSAGE_LAB_NUMBER_CONSTRAINT =
+            "Lab number should be between 0 and 14 (non-inclusive).";
     public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
     public static final String MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT =
             "Lab total score should be a positive integer.";
