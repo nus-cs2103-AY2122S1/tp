@@ -244,7 +244,7 @@ Example: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`
 When the user has entered the command, `AddLessonCommandParser` object will proceed on to parse and check the validity of each property entered. Assuming successful, `AddLessonCommandParser` object will proceed on to produce a `Lesson` with the relevant details filled. The object state diagram is as such:
 
 <center>
-![AddLessonState0](images/DeveloperGuideImage/AddLessonState0-Initial_state.png)
+<img alt="AddLessonState0" src="images/DeveloperGuideImage/AddLessonState0-Initial_state.png"/>
 </center>
 
 <u>Step 2:</u>
@@ -252,19 +252,19 @@ When the user has entered the command, `AddLessonCommandParser` object will proc
 With all checks done, `Lesson` object will be added into the `Model` of TuitiONE. The final object state diagram is as such:
 
 <center>
-![AddLessonState1](images/DeveloperGuideImage/AddLessonState1-Final_state.png)
+<img alt="AddLessonState1" src="images/DeveloperGuideImage/AddLessonState1-Final_state.png"/>
 </center>
 
 The following sequence diagram shows how add lesson operation works:
 
 <center>
-![AddLessonSequenceDiagram](images/DeveloperGuideImage/AddLessonSequenceDiagram.png)
+<img alt="AddLessonSequenceDiagram" src="images/DeveloperGuideImage/AddLessonSequenceDiagram.png"/>
 </center>
 
 :information_source: **Note:** The lifelines for `AddLessonCommandParser` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 <center>
-![AddLessonActivityDiagram](images/DeveloperGuideImage/AddLessonActivityDiagram.png)
+<img alt="AddLessonActivityDiagram" src="images/DeveloperGuideImage/AddLessonActivityDiagram.png"/>
 </center>
 
 #### Design considerations:
