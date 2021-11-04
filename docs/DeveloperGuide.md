@@ -661,7 +661,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 3. _Shutting down Dash_
 
@@ -692,6 +692,211 @@ testers are expected to do more *exploratory* testing.
 
    3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+   
+### Adding a task
+
+1. Adding a task with correct format
+
+   1. Prerequisites: Go to task tab using the `tasks` command.
+   
+   2. Test case: `add d/Test Task dt/21/10/2021, 1900 t/Important`<br>
+      Expected: A task with the given details is added on the GUI of task tab. Details of added task shown in the status message.
+
+2. Adding a task with incorrect formats of description, date/time, person or tag
+    
+    1. Prerequisites: Go to task tab using the `tasks` command.
+
+    2. Test case: `add Test Task`<br>
+       Expected: No task is added. Error details stating 'Invalid command format!' is shown.
+   
+    3. Test case: `add d/` <br>
+       Expected: No task is added. Error details stating 'Task descriptions should not be blank.' is shown.
+
+    4. Test case: `add d/Test Task dt/19:00`<br>
+       Expected: No task is added. Error details stating how Date/Time format works is shown.
+   
+    5. Test case: `add d/Test Task p/0`<br>
+       Expected: No task is added. Error details stating 'Index is not a non-zero unsigned integer' is shown.
+    
+    6. Test case: `add d/Test Task t/an extremely long tag`<br>
+       Expected: No task is added. Error details stating how Tag names should be alphanumeric and limited to 15 characters is shown.
+
+### Editing a task
+
+1. Editing a task's description
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+    
+    2. Test case: `edit 1 d/Changed Description`<br>
+       Expected: First task has description changed to the stated description. Details of the new edited task shown in the status message.
+
+    3. Test case: `edit 0 d/Changed Description`<br>
+       Expected: No task has been edited. Error details stating 'Invalid command format!' is shown.
+
+2. Editing a task's date/time
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+    
+    2. Test case: `edit 1 dt/20/10/2021`<br>
+       Expected: First task has Date only changed to the stated Date. Details of the new edited task shown in the status message.
+
+    3. Test case: `edit 1 dt/1900` <br>
+       Expected: If First task has Date and Time or Date only, it has Time only changed to the stated Time. Details of the new edited task shown in the status message.
+       If First task has neither Date nor Time, the stated Time will be added along with current day's Date. 
+
+3. Editing a task's tag
+    
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+
+    2. Test case: `edit 2 t/Test` <br>
+       Expected: Second task has all of its existing tags (even if none) changed to the stated tag. Details of the new edited task shown in the status message. 
+
+    3. Test case: `edit 1 t/` <br>
+       Expected: First task has all of its existing tags removed. Details of the new edited task shown in the status message.
+
+4. Editing a task's assigned person
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+
+    2. Test case: `edit 1 p/1 p/2` <br>
+       Expected: First task has first and second assignees added to the current list of person of the task. Details of the new edited task shown in the status message.
+
+    3. Test case: `edit 1 p/` <br>
+       Expected: No task has been edited. Error details stating 'Arguments cannot be empty' is shown.
+    
+### Tagging a task
+
+1. Tagging a task with one tag
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+    
+    2. Test case: `tag 1 t/Important` <br>
+       Expected: First task has the new tag 'Important' added as a tag in addition to its existing list of tags. If it already has the same existing tag, no additional tag is added.
+       Details of the task with added tag shown in the status message for both cases.
+
+    5. Test case: `tag 0 t/Important` <br>
+       Expected: No task has been added a tag. Error details stating 'invalid command format!' is shown with a description of how to use tag command with proper format.
+
+    6. Test case: `tag 1 t/` <br>
+       Expected: No task has been added a tag. Error details stating 'Arguments cannot be empty' is shown.
+
+2. Tagging a task with multiple tags
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+
+    2. Test case: `tag 1 t/Important t/Assignment` <br>
+       Expected: First task has the new tags 'Important' and 'Assignment added as tags in addition to its existing list of tags. If it already has same existing tags, no additional tag is added.
+       Details of the task with added tag shown in the status message for both cases.
+    
+    3. Test case: `tag 1 t/ t/` <br>
+       Expected: No task has been added a tag. Error details stating 'Arguments cannot be empty' is shown.
+    
+### Assigning people to a task
+
+1. Assigning one person to a task
+    
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+
+    2. Test case: `assign 1 p/1` <br>
+       Expected: First task has the first person under assignees list assigned in addition to its existing list of people. If that person is already assigned, no additional person is assigned.
+       Details of the task with assigned person shown in the status message for both cases.
+
+    3. Test case: `assign 0 p/1` <br>
+       Expected: No task has been assigned a person. Error details stating 'invalid command format!' is shown with a description of how to use assign command with proper format.
+
+2. Assigning multiple people to a task
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+
+    2. Test case: `assign 1 p/1 p/3` <br>
+       Expected: First task has the first and third person under assignees list assigned in addition to its existing list of people. If the people are already assigned, no additional person is assigned.
+       Details of the task with assigned people shown in the status message for both cases.
+
+### Completing a task
+
+1. Completing a task (Note there is currently no way to mark the task as incomplete)
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list, second task is marked completed, first task is not.
+
+    2. Test case: `complete 1` <br>
+       Expected: First task has been marked as completed. Details of task that is just marked completed shown in the status message.
+
+    3. Test case: `complete 0` <br>
+       Expected: No task has been marked as completed. Error details stating 'invalid command format!' is shown with a description of how to use complete command with proper format.
+
+    4. Test case: `complete 3` <br>
+       Expected: Third task has been marked as completed. Details of task that is just marked completed shown in the status message.
+
+       
+### Finding tasks through task description
+
+1. Finding a task containing the stated one word
+
+    1. Prerequisites: Sample data is loaded for the first time without any modification. List all tasks using the `list` command. Multiple tasks in the list.
+
+    2. Test case: `find review` <br>
+       Expected: Task with description "Do PR review" shown as the only task in the task list. Number of task listed shown in status message.
+
+    3. Test case: `find task` <br>
+       Expected: No task shows up on the task list. Number of task listed shown in status message.
+
+2. Finding a task containing multiple words
+
+    1. Prerequisites: Sample data is loaded for the first time without any modification. List all tasks using the `list` command. Multiple tasks in the list.
+
+    2. Test case: `find before friday` <br>
+       Expected: Task with description "ST2334 quiz before Friday" shown as the only task in the list. Number of task listed shown in status message.
+
+    3. Test case: `find with catch` <br>
+       Expected: Task with description "Catch up with ST lectures" shown as the only task in the list. Number of task listed shown in status message.
+    
+### Finding task through searching a specific field
+
+1. Finding a task containing a date/time
+
+   1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+
+   2. Test case: `find dt/1900` <br>
+      Expected: Tasks with 7:00 PM as time shown as tasks in the list. None shown if no matching time. Number of task listed shown in status message.
+
+   3. Test case: `find dt/05/10/2021` <br>
+      Expected: Tasks with 05 Oct 2021 as date shown as tasks in the list. None shown if no matching date. Number of task listed shown in status message.
+
+   4. Test case: `find dt/05/10/2021 dt/1900 dt/2000` <br>
+      Expected: Tasks with 8:00 PM as time shown as tasks in the list. None shown if no matching time of the time stated in second command. Number of task listed shown in status message.
+
+2. Finding a task containing a person
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list. Multiple assignees in the list at the right-hand side.
+    
+    2. Test case: `find p/1` <br>
+       Expected: Tasks assigned with first person in the assignee list shown as tasks in the list. None shown if no matching assignee. Number of task listed shown in status message.
+    
+    3. Test case: `find p/1 p/2` <br>
+       Expected: Tasks assigned with first and second person in the assignee list shown as tasks in the list. None shown if no matching both assignees. Number of task listed shown in status message.
+
+3. Finding a task containing a tag
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+
+    2. Test case: `find t/homework` <br>
+       Expected: Tasks tagged with "homework" shown as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
+
+    3. Test case: `find t/homework t/assignment`<br>
+       Expected: <to be edited>
+
+### Find all upcoming tasks:
+
+1. Find a task that is upcoming from your current date and time
+
+    1. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
+
+    2. Test case: `upcoming` <br>
+       Expected: Incomplete tasks that have Date/Time after the current Date/Time as determined by your PC shown as tasks in the list, sorted by the closest Date/Time
+       to current Date/Time appearing at the top. None shown if no upcoming tasks. Number of task listed shown in status message.
+
+    3. Test case: `upcoming random text` <br>
+       Expected: Same behaviour as above test case.
 
 ### Saving data
 
