@@ -761,7 +761,11 @@ This command has a relatively straightforward implementation:
     3. A maximum of 1 of each Investment Plan tag exists in the `Set` of tags
     4. No duplicate tag is added to the `Set`
     5. No non-existent tag is attempted to be deleted from the 'Set'
-    
+
+The activity diagram below shows the flow of a typical tag command.
+
+![TagActivityDiagram](images/TagActivityDiagram.png)
+
 #### Usage Scenario 
 
 1. The user launches the application and inputs "tag 1 a/fat d/thin", to add a tag `fat` and delete a tag `thin`
