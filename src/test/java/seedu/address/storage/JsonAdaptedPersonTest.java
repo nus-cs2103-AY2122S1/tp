@@ -72,8 +72,6 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         VALID_BIRTHDAY, INVALID_PIN);
         assertEquals(BENSON, person.toModelType());
-        //String expectedMessage = Pin.MESSAGE_CONSTRAINTS;
-        //assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
