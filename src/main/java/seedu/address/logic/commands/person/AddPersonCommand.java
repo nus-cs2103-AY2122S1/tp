@@ -37,7 +37,11 @@ public class AddPersonCommand extends Command {
             + PREFIX_REMARK + "Overseas\n";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON_MAYBE =
+            "Warning: Someone with similar name/email already exist.\n"
+            + "Nonetheless, new person added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+            "A person with exactly the same name or email already exists in the address book";
 
     private final Person toAdd;
 
@@ -57,8 +61,15 @@ public class AddPersonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        CommandResult result;
+        if (model.hasSimilarPerson(toAdd)) {
+            result = new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON_MAYBE, toAdd));
+        } else {
+            result = new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        }
+
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return result;
     }
 
     @Override

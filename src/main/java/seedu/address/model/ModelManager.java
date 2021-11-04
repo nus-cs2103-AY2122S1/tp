@@ -108,6 +108,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSimilarPerson(Person person) {
+        requireNonNull(person);
+        return conthacks.hasSimilarPerson(person);
+    }
+
+    @Override
     public boolean hasModuleLesson(ModuleLesson moduleLesson) {
         requireNonNull(moduleLesson);
         return conthacks.hasLesson(moduleLesson);

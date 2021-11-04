@@ -38,6 +38,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a similar person as the given argument.
+     */
+    public boolean containsSimilarPerson(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSimilarPerson);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
