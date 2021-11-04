@@ -153,7 +153,7 @@ Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
 
 * `DAY(S)` specifies the days when the member is available for that week
 * `DAY(S)` should be provided as a numerical index, where `1` represents Monday, `2` represents Tuesday … and `7` represents
-  Sunday and **must be separated by a single space** e.g. `d/1 2 3` 
+  Sunday and **must be separated by a single space** e.g. `d/1 2 3`
 * Members added without `DAY(S)` will have no available days by default
 
 <div markdown="block" class="alert alert-info">
@@ -339,7 +339,8 @@ Format: `mark INDEX [MORE_INDICES]...`
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip:** After you have marked attendance for today, use the `cleara` command (see [Clearing all attendance for today](#clearing-all-attendance-for-today-cleara)) to reset everyone's attendance today and save
+**:bulb: Tip:** After you have marked attendance for today, use the `cleara` command 
+(see [Clearing all attendance for today](#clearing-all-attendance-for-today-cleara)) to reset everyone's attendance today and save
 their total attendance so that you can use the mark command again to take attendance for another day.
 </div>
 
@@ -383,8 +384,9 @@ All attendance data will be unmarked immediately and total attendance of those w
 
 #### Importing multiple members using a CSV file: `import`
 
-When you want to add or update the details of multiple members in one go, you can import data from a CSV (comma-separated values)
-file using `import`.
+When you want to add or update the details of multiple members in one go, you can import data from
+a CSV (comma-separated values) file using `import`.
+
 
 Format: `import CSV_FILE_PATH`
 
@@ -393,11 +395,14 @@ Format: `import CSV_FILE_PATH`
   2. Phone number
   3. Availability
   4. Tags
-* In the CSV file, parameters' formats follows that of the `addm` command (see [Adding a Member](#adding-a-member-addm)
+* In the CSV file, parameters' formats follows that of the `addm` command 
+(see [Adding a Member](#adding-a-member-addm))
 * `CSV_FILE_PATH` should be relative to the JAR file location
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there are duplicate members (i.e. members with the same name) being imported using the CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**.
+If there are duplicate members (i.e. members with the same name) being imported using the CSV file, 
+the details from the CSV file will overwrite the existing details, except for the attendance data. 
+This action is **irreversible**.
 </div>
 
 Examples:
@@ -540,14 +545,19 @@ Format: `split DAY`
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
 * All facilities are assumed to be available and have the same capacity on every day of the week
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 Executing this command will overwrite all existing allocations you have made for the given day. This action is **irreversible**.
+You can use the `export` command 
+(see [Exporting facility details and member allocation](#exporting-facility-details-and-member-allocations-export))
+to save your previous allocations before using the `split` command again.
 </div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** SportsPA will warn you when there are no members available on the specified day or insufficient facilities
 to accommodate all available members and the allocation will not be executed.
+
 </div>
 
 Examples:
@@ -558,6 +568,7 @@ Examples:
 </p>
 
 [Back to Table of Contents](#table-of-contents)
+
 
 #### Deallocating a member from a facility: `deallocate`
 
@@ -607,14 +618,15 @@ Examples:
 
 #### Exporting facility details and member allocation: `export`
 
-Export all facilities' details and their allocation list to a CSV file so that you can share them with your members.
+Export all facilities’ details and their allocation list to a CSV (comma-separated values) file so that
+you can share them with your members.
 
 Format: `export`
 
 * The exported CSV file will be created in `[JAR file location]/data/exportedData.csv`
 * The CSV file will contain 5 headers: Facility Name, Location, Time, Capacity and Member Allocation
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 
 **:information_source: Note:** If exportedData.csv already exists before this command is executed,
 the existing CSV file will be overwritten. So, make sure to change the file name of the existing
@@ -654,7 +666,7 @@ Format: `alias s/SHORTCUT cw/COMMAND_WORD`
 * `SHORTCUT` **must be one word and not an existing command**
 * `COMMAND_WORD` **must be an existing command**
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 
 **:information_source: Note:** If you create an alias whose given `SHORTCUT` already exists, the newly created alias
 will replace that existing one.
@@ -698,7 +710,7 @@ JSON file `[JAR file location]/data/sportspa.json`. Though **not recommended**, 
 directly change the contents, *e.g a member's name*, in the data file, which will be reflected in SportsPA.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
+If changes made to the data file makes its format invalid, SportsPA will start with an empty data file at the next run.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
