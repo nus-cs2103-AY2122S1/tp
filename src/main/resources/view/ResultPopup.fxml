@@ -6,7 +6,12 @@
 <?import javafx.scene.text.Font?>
 
 
-<Label fx:id="result" alignment="CENTER" prefHeight="118.0" prefWidth="797.0" style="-fx-background-color: DAF1CF; -fx-text-alignment: center; -fx-border-radius: 20;" textAlignment="CENTER" wrapText="true" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.geometry.Insets?>
+<Label fx:id="result" alignment="CENTER" style="-fx-background-color: DAF1CF; -fx-text-alignment: center; -fx-border-radius: 20;"
+       wrapText="true" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets top="5" right="5" bottom="5" left="15" />
+   </padding>
    <font>
       <Font size="25.0" />
    </font>
