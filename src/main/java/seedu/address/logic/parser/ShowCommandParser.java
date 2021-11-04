@@ -97,7 +97,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         }
     }
 
-      /**
+    /**
      * Returns true if none of the prefixes present in the given {@code ArgumentMultimap}.
      */
     private static boolean isNoPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
