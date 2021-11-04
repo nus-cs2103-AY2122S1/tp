@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -72,9 +74,8 @@ public class RemoveCommandTest {
     public void execute_removeExistingItemByNameAndId_success() {
         model.addItem(BAGEL);
 
-        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL)
-                .withCount(1).build();
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL)
+                .withName(VALID_NAME_BAGEL).withCount(1).build();
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
 
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
@@ -82,6 +83,42 @@ public class RemoveCommandTest {
         expectedModel.addItem(BAGEL.updateCount(BAGEL.getCount() - 1));
 
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
+
+        CommandTestUtil.assertCommandSuccess(removeCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_extraPriceFlags_success() {
+        model.addItem(BAGEL);
+
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL)
+                .withName(VALID_NAME_BAGEL).withCount(1).withCostPrice(VALID_COSTPRICE_BAGEL).build();
+        RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
+
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
+        expectedModel.addItem(BAGEL.updateCount(BAGEL.getCount() - 1));
+
+        String message = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
+        String expectedMessage = message + "\n" + RemoveCommand.MESSAGE_EXTRA_PRICE_FLAGS;
+
+        CommandTestUtil.assertCommandSuccess(removeCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_extraTagFlags_success() {
+        model.addItem(BAGEL);
+
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL)
+                .withName(VALID_NAME_BAGEL).withCount(1).withTags(VALID_TAG_BAKED).build();
+        RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
+
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
+        expectedModel.addItem(BAGEL.updateCount(BAGEL.getCount() - 1));
+
+        String message = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
+        String expectedMessage = message + "\n" + RemoveCommand.MESSAGE_EXTRA_TAG_FLAGS;
 
         CommandTestUtil.assertCommandSuccess(removeCommand, model, expectedMessage, expectedModel);
     }
@@ -120,14 +157,15 @@ public class RemoveCommandTest {
     public void execute_removeAllOfItem_success() {
         model.addItem(BAGEL);
 
-        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL)
-                .withCount(BAGEL.getCount()).build();
+        int count = BAGEL.getCount();
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL)
+                .withName(VALID_NAME_BAGEL).withCount(BAGEL.getCount()).build();
         RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
 
         Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs(),
                 new TransactionList(), new BookKeeping());
-        expectedModel.addItem(BAGEL.updateCount(0));
+        expectedModel.addItem(BAGEL);
+        expectedModel.setItem(BAGEL, BAGEL.updateCount(0));
 
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, BAGEL.getCount(), BAGEL.getName());
 
