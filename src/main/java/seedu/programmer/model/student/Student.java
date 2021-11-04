@@ -92,11 +92,12 @@ public class Student implements DisplayableObject {
     /**
      * Returns a labList with all labs unmarked.
      * */
-    public ObservableList<Lab> getFreshLabList() {
-        ObservableList<Lab> freshCopy = FXCollections.observableArrayList();
+    public List<Lab> getFreshLabList() {
+        List<Lab> freshCopy = new ArrayList<>();
         for (Lab lab : labList) {
             freshCopy.add(new Lab(lab.getLabNum(), lab.getLabTotal()));
         }
+        freshCopy.sort(new SortByLabNumber());
         return freshCopy;
     }
 
@@ -129,7 +130,7 @@ public class Student implements DisplayableObject {
     /**
      * Updates a lab's score  for a student
      * */
-    public void editLabScore(Lab lab , LabResult score) throws CommandException {
+    public void editLabScore(Lab lab, LabResult score) throws CommandException {
         if (score.getLabResult() > lab.getLabTotal().getLabTotal()) {
             throw new CommandException(EXCEEDED_TOTAL_SCORE);
         }
@@ -144,8 +145,8 @@ public class Student implements DisplayableObject {
      * */
     public boolean editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
         Lab newLab = new Lab(newLabNum);
-        int index2 = this.labList.indexOf(newLab);
-        if (index2 == -1) {
+        int indexNewLab = this.labList.indexOf(newLab);
+        if (indexNewLab == -1) {
             int index = this.labList.indexOf(lab);
             Lab current = this.labList.get(index);
             current.updateLabNum(newLabNum);
@@ -159,9 +160,12 @@ public class Student implements DisplayableObject {
 
     public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
-            labResultRecord = new ArrayList<>();
+            return;
         }
-        this.labList.addAll(labResultRecord);
+
+        for (Lab lab : labResultRecord) {
+            labList.add(lab.copy());
+        }
     }
 
     public void setLabList(ObservableList<Lab> labList) {
