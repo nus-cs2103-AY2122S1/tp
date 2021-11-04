@@ -1,11 +1,11 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Leong Hong Fai's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Source Control
 
-Source Control is a desktop app for CS1101S professors to manage the performance of their students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Source Control is a desktop application for CS1101S professors to manage the performance of their students. Users interact with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
