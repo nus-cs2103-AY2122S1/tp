@@ -308,8 +308,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a folder                                       | remove folders when they become irrelevant                 |
 | `* * *`  | user                                       | add a user to a folder                                | folder related contacts together and find them efficiently |
 | `* * *`  | experienced computing student              | use my knowledge of Unix commands to navigate the app | use the app without learning a new set of commands         |
-
-*{More to be added}*
+| `* *`    | user                                       | remove a contact from a folder                        | update contacts in folders easily                          |
+| `* *`    | user                                       | clear all folders                                     | reset my folders easily                                    |
 
 ### Use cases
 
@@ -451,6 +451,7 @@ Use case ends.
     * 1a1. All folders remain in UNIon.
     * 1a2. User re-inputs command.
     * Steps 1a1 - 1a2 are repeated until data format is correct.
+    
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -464,7 +465,6 @@ Project scope
 - The app is not required to handle communication with people, only keeping track of metadata associated with contacts
 - The app is not required to handle integration with message apps like Telegram and WhatsApp
 
-*{More to be added}*
 
 ### Glossary
 
@@ -648,27 +648,6 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Multiple folders in the list.
     1. Test case: `rm -folders`<br>
        Expected: all folders are removed.
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ## **Appendix: Effort**
 
