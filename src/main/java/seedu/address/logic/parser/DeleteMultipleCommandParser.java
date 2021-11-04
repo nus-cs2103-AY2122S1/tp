@@ -18,7 +18,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.DeleteMultipleCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.EmailContainsKeywordsPredicate;
@@ -62,7 +61,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new NameContainsKeywordsPredicate(nameKeywords));
         }
@@ -76,7 +75,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
@@ -90,7 +89,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new EmailContainsKeywordsPredicate(emailKeywords));
         }
@@ -104,7 +103,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new GenderContainsKeywordsPredicate(genderKeywords));
         }
@@ -118,7 +117,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new NationalityContainsKeywordsPredicate(nationalityKeywords));
         }
@@ -132,7 +131,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TutorialGroupContainsKeywordsPredicate(tutorialGroupKeywords));
         }
@@ -146,7 +145,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new SocialHandleContainsKeywordsPredicate(socialHandleKeywords));
         }
@@ -160,7 +159,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new RemarkContainsKeywordsPredicate(remarkKeywords));
         }
@@ -172,7 +171,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                     .filter(item-> item.isEmpty()).collect(Collectors.toList()).size();
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TagContainsKeywordsPredicate(tagKeywords));
         }
