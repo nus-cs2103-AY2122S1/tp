@@ -26,7 +26,8 @@ We further recommend taking a glance at **[Section 1.1 Syntax and symbols](#sect
 ### Section 1.1: Syntax and Symbols
 Here are the commonly used syntax and symbols throughout the UG:
 
-`inline code`<br/>denotes a command for the application.
+`inline code`<br/>denotes a command for the application.<br>
+`prefix/` <br/> denotes a ModuLink-supported prefix.
 
 <div class="alert alert-warning">:exclamation: Important</div>denotes an important information for the functioning of the app.
 <br/>
@@ -108,6 +109,8 @@ If you are a first-time user, we recommend starting with [Create your own profil
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  
+* Prefixes and commands are case-sensitive.<br>
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [mod/MODULE]` can be used as `n/John Doe mod/CS2103T` or as `n/John Doe`.

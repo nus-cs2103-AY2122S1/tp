@@ -2,13 +2,13 @@ package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.modulink.commons.core.Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.AddModCommand;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.logic.parser.exceptions.ParseException;
@@ -27,7 +27,6 @@ public class AddModCommandParser implements Parser<AddModCommand> {
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()
-            || StringUtil.countMatch(args, '/') != 1
             || parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
@@ -60,7 +59,11 @@ public class AddModCommandParser implements Parser<AddModCommand> {
         if (tags.size() == 1 && tags.contains("")) {
             throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
         } else {
-            return Optional.of(ParserUtil.parseTags(tags));
+            try {
+                return Optional.of(ParserUtil.parseTags(tags));
+            } catch (ParseException e) {
+                throw new ParseException(String.format(MESSAGE_UNKNOWN_PREFIX_FORMAT, AddModCommand.MESSAGE_USAGE));
+            }
         }
     }
 }

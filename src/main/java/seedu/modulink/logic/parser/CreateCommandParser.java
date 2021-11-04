@@ -1,6 +1,8 @@
 package seedu.modulink.logic.parser;
 
+import static seedu.modulink.commons.core.Messages.MESSAGE_DUPLICATE_PREFIX_FORMAT;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.modulink.commons.core.Messages.MESSAGE_MISSING_PREFIXES_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
@@ -40,57 +42,48 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE, PREFIX_MOD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()
-                || numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL)) {
+            StringBuilder missingPrefixes = findMissingPrefixes(argMultimap,
+                    PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL);
+            throw new ParseException(String.format(MESSAGE_MISSING_PREFIXES_FORMAT,
+                    missingPrefixes, CreateCommand.MESSAGE_USAGE));
+
+        }
+
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).orElse(null));
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        GitHubUsername gitHubUsername =
-                ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).orElse(null));
-        TelegramHandle telegramHandle =
-                ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).orElse(null));
-        Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
-
-        Person person = new Person(name, id, phone, email, gitHubUsername,
-                telegramHandle, false, modList, true);
-
-        return new CreateCommand(person);
-    }
-
-    /**
-     * Checks how many valid prefixes are present in args.
-     *
-     * @param argMultimap tokenized list of arguments.
-     * @return number of provided prefixes.
-     */
-    private int numberOfValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
-        int i = 0;
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
-            i++;
+        // either duplicate parameters, or unsupported parameters (dealt with in try-catch block)
+        if (ParserUtil.numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
+            if (isDuplicatePrefix(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE)) {
+                StringBuilder duplicatePrefixes = findDuplicatePrefixes(args,
+                        PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE);
+                throw new ParseException(String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                        duplicatePrefixes, CreateCommand.MESSAGE_USAGE));
+            }
         }
 
-        i += ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD)).size();
-        return i;
+        try {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            StudentId id = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).orElse(null));
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            GitHubUsername gitHubUsername =
+                    ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).orElse(null));
+            TelegramHandle telegramHandle =
+                    ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).orElse(null));
+            Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
+            Person person = new Person(name, id, phone, email, gitHubUsername,
+                    telegramHandle, false, modList, true);
+            return new CreateCommand(person);
+
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage() + " %s",
+                    e.getMessage().startsWith("Unknown prefix(es)") ? CreateCommand.MESSAGE_USAGE : ""));
+        }
     }
 
     /**
@@ -100,5 +93,49 @@ public class CreateCommandParser implements Parser<CreateCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Returns any prefixes that are missing.
+     * {@code ArgumentMultimap}.
+     */
+    private static StringBuilder findMissingPrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        StringBuilder missingPrefixList = new StringBuilder();
+        for (Prefix prefix : prefixes) {
+            if (argumentMultimap.getValue(prefix).isEmpty()) {
+                missingPrefixList.append(prefix).append(" ");
+            }
+        }
+        return missingPrefixList;
+    }
+
+    /**
+     * Returns if any prefixes that are duplicates.
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isDuplicatePrefix(String args, Prefix... prefixes) {
+        for (Prefix prefix : prefixes) {
+            String prefixAsString = " " + prefix.getPrefix();
+            if (StringUtil.countMatch(args, prefixAsString) > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns any prefixes that are duplicates.
+     * {@code ArgumentMultimap}.
+     */
+    private static StringBuilder findDuplicatePrefixes(String args, Prefix... prefixes) {
+        StringBuilder duplicatePrefixesList = new StringBuilder();
+        for (Prefix prefix : prefixes) {
+            String prefixAsString = " " + prefix.getPrefix();
+            if (StringUtil.countMatch(args, prefixAsString) > 1) {
+                    duplicatePrefixesList.append(prefix).append(" ");
+            }
+        }
+        return duplicatePrefixesList;
+    }
+
 
 }

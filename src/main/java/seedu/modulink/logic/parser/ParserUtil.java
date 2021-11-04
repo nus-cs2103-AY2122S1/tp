@@ -1,11 +1,18 @@
 package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.modulink.commons.core.Messages;
 import seedu.modulink.commons.core.index.Index;
 import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.parser.exceptions.ParseException;
@@ -16,8 +23,6 @@ import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
 import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
-import seedu.modulink.model.tag.Status;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -48,6 +53,9 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (trimmedName.contains("/")) {
+            throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+        }
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -63,6 +71,9 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
+        if (trimmedPhone.contains("/")) {
+            throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+        }
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -78,6 +89,9 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
+        if (trimmedEmail.contains("/")) {
+            throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+        }
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -93,6 +107,9 @@ public class ParserUtil {
     public static GitHubUsername parseGithubUsername(String gitHubUsername) throws ParseException {
         if (gitHubUsername != null) {
             String trimmedUsername = gitHubUsername.trim();
+            if (trimmedUsername.contains("/")) {
+                throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+            }
             if (!GitHubUsername.isValidUsername(gitHubUsername)) {
                 throw new ParseException(GitHubUsername.MESSAGE_CONSTRAINTS);
             }
@@ -111,6 +128,9 @@ public class ParserUtil {
     public static Mod parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        if (trimmedTag.contains("/")) {
+            throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+        }
         if (!Mod.isValidTagName(trimmedTag)) {
             throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
         }
@@ -124,6 +144,9 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Mod> modSet = new HashSet<>();
         for (String tagName : tags) {
+            if (tagName.contains("/")) {
+                throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+            }
             modSet.add(parseTag(tagName));
         }
         return modSet;
@@ -138,28 +161,13 @@ public class ParserUtil {
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
+        if (trimmedId.contains("/")) {
+            throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+        }
         if (!StudentId.isValidId(studentId)) {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(trimmedId);
-    }
-
-    /**
-     * Parses a {@code String status} into a {@code Status}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code status} is invalid.
-     */
-    public static Status parseGroupStatus(String status) throws ParseException {
-        if (status != null) {
-            String trimmedStatus = status.trim();
-            if (!Status.isValidStatus(trimmedStatus)) {
-                throw new ParseException(Status.MESSAGE_CONSTRAINTS);
-            }
-            return Status.parseStatusForFilter(trimmedStatus);
-        } else {
-            return null;
-        }
     }
 
     /**
@@ -175,7 +183,9 @@ public class ParserUtil {
             if (trimmedHandle.startsWith("@")) {
                 trimmedHandle = trimmedHandle.substring(1);
             }
-
+            if (trimmedHandle.contains("/")) {
+                throw new ParseException(String.format(Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT, ""));
+            }
             if (!TelegramHandle.isValidHandle(telegramHandle)) {
                 throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
             }
@@ -183,5 +193,34 @@ public class ParserUtil {
         } else {
             return new TelegramHandle(null);
         }
+    }
+
+    /**
+     * Checks how many valid prefixes are present in args.
+     *
+     * @param argMultimap tokenized list of arguments.
+     * @return number of provided prefixes.
+     */
+    public static int numberOfValidPrefixes(ArgumentMultimap argMultimap) {
+        int i = 0;
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
+            i++;
+        }
+        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
+            i++;
+        }
+        return i;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.modulink.commons.util.StringUtil;
+import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.commands.FilterCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.ModuleContainsKeywordsPredicate;
@@ -26,19 +27,24 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_MOD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MOD)
-                || !argMultimap.getPreamble().isEmpty()
-                || StringUtil.countMatch(args, '/') != 1) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
+        try {
+            Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
+            if (modList.size() > 1) {
+                throw new ParseException(String.format(MESSAGE_MORE_THAN_ONE_PARAMETER_FORMAT,
+                        FilterCommand.MESSAGE_USAGE));
+            }
 
-        if (modList.size() > 1) {
-            throw new ParseException(String.format(MESSAGE_MORE_THAN_ONE_PARAMETER_FORMAT,
-                    FilterCommand.MESSAGE_USAGE));
+            return new FilterCommand(new ModuleContainsKeywordsPredicate(modList));
+
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage() + " %s",
+                    e.getMessage().startsWith("Unknown prefix(es)") ? FilterCommand.MESSAGE_USAGE : ""));
         }
 
-        return new FilterCommand(new ModuleContainsKeywordsPredicate(modList));
     }
 
     /**

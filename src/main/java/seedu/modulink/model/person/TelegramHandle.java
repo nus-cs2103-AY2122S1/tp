@@ -17,6 +17,9 @@ public class TelegramHandle {
      */
     public TelegramHandle(String handle) {
         checkArgument(isValidHandle(handle), MESSAGE_CONSTRAINTS);
+        if (handle != null && handle.startsWith("@")) {
+            handle = handle.substring(1);
+        }
         value = handle;
     }
 

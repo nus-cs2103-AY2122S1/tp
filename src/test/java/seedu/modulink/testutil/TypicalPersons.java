@@ -42,7 +42,7 @@ public class TypicalPersons {
             .withTags("CS2103T", "CS2100").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withStudentId("A1234567C")
-            .withEmail("heinz@example.com").withGitHubUsername("carl_kurz")
+            .withEmail("heinz@example.com").withGitHubUsername("carlkurz")
             .withFavourite(true).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withStudentId("A1234567D").withEmail("cornelia@example.com").withTelegramHandle("@danielmeierr")
