@@ -55,8 +55,8 @@ public class EditPersonCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_SAME_PERSON =
-            "A person with exactly the same and email already exists in contHACKS.";
+    public static final String MESSAGE_SAME_PERSON = "Unable to edit: "
+                    + "A person with either the same email/phone number/telegram handle already exists in contHACKS.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Warning: A person with similar identity already exist.\n"
             + "Nonetheless, person is edited.\n"
             + "Edited person: %1$s";
@@ -93,18 +93,10 @@ public class EditPersonCommand extends Command {
             model.addPerson(personToEdit);
             throw new CommandException(MESSAGE_SAME_PERSON);
         }
-
-        CommandResult result;
-        if (model.hasSimilarPerson(editedPerson)) {
-            result = new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON, editedPerson));
-        } else {
-            result = new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
-        }
         model.addPerson(personToEdit);
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return result;
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
