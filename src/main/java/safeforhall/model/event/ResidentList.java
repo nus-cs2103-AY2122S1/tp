@@ -287,7 +287,7 @@ public class ResidentList {
 
     @Override
     public String toString() {
-        return residentsDisplay;
+        return residentList.toString();
     }
 
     public ArrayList<String> getStringResidentList() {
