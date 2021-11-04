@@ -117,6 +117,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withNoBirthday() {
+        this.birthday = null;
+        return this;
+    }
+
+    /**
      * Sets the {@code Pin} of the {@code Person} that we are building.
      */
     public PersonBuilder withPin(boolean isPinned) {

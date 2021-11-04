@@ -25,12 +25,10 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
     private static final String INVALID_BIRTHDAY_MESSAGE = "Birthday is invalid date. Will start with empty birthday.";
     private static final String INVALID_PIN_MESSAGE = "Pin status is invalid. Will start with not pinned by default.";
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
 
     private final String name;
     private final String phone;
