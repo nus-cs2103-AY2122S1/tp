@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TeleHandle {
 
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Tele handle start with @ and followed by alphanumeric characters";
-    public static final String VALIDATION_REGEX = "@[a-zA-Z0-9]+$";
+    public static final String MESSAGE_CONSTRAINTS = "Tele handle starts with @ and "
+            + "is followed by 5-32 alphanumeric characters \n"
+            + "or underscore.";
+    public static final String VALIDATION_REGEX = "@[a-zA-Z0-9_]{5,32}+$";
     public final String value;
 
     /**

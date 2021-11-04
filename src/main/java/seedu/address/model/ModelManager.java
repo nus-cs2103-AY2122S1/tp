@@ -220,7 +220,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return teachingAssistantBuddy.equals(other.teachingAssistantBuddy)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredModules.equals(other.filteredModules);
     }
 
 }

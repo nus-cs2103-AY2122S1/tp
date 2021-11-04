@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalModules.INVALID_MODULE_NAME;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
 import static seedu.address.testutil.TypicalStudents.AMY;
@@ -47,14 +46,6 @@ class DeleteStudentCommandTest {
         }
         expectedModel.getFilteredModuleList().get(0).removeStudent(AMY);
         assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidModuleName_throwsCommandException() {
-        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(new StudentId(VALID_STUDENT_ID_AMY),
-                new ModuleName(INVALID_MODULE_NAME));
-        String expectedMessage = String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, INVALID_MODULE_NAME);
-        assertCommandFailure(deleteStudentCommand, model, expectedMessage);
     }
 
     @Test
