@@ -3,11 +3,6 @@ package seedu.unify.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
-
 import java.util.stream.Stream;
 
 import seedu.unify.logic.commands.FindCommand;
