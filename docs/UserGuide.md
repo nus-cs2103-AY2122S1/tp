@@ -323,11 +323,9 @@ list
 
 ### `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book at the specified index. The `edit` command uses the same flags as [`add`](#add).
 
-Format: `edit [INDEX] (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
-
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- The specified index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
@@ -407,9 +405,7 @@ clear
 
 ### `find`
 
-Finds persons whose respective fields contain the respective keywords.
-
-Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
+Finds persons whose respective fields (specified by the flags) contain the respective keywords. The `find` command uses the same flags as [`add`](#add).
 
 - At least one of the optional fields must be provided.
 - Only full words will be matched e.g. `Han` will not match `Hans`
