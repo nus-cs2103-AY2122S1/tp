@@ -9,6 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
@@ -25,7 +26,8 @@ public class AddToFolderCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact has already been added to this folder";
     public static final String MESSAGE_DUPLICATE_INDEX_PASSED = "Repeated Indexes passed";
-    public static final String MESSAGE_NONEXISTENT_FOLDER = "This folder does not exist in UNIon";
+    public static final String MESSAGE_NONEXISTENT_FOLDER = "Folder name supplied"
+            + " cannot be found in the folders' listing below";
     public static final String MESSAGE_SUCCESS = "Contact added to Folder: %1$s";
 
     private final List<Index> indexList;
@@ -44,7 +46,21 @@ public class AddToFolderCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        Folder targetFolder = new Folder(folderName);
+
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+        int indexOfFolder = lastShownFolderList.indexOf(targetFolder);
+
+        if (duplicateIndexPassed()) {
+            throw new CommandException(MESSAGE_DUPLICATE_INDEX_PASSED);
+        }
+
+        if (indexOfFolder == -1) {
+            throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
+        }
+
         for (Index index : this.indexList) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_INDEX_EXCEEDS_LIST_SIZE);
@@ -52,12 +68,6 @@ public class AddToFolderCommand extends Command {
 
             Person personToAdd = lastShownList.get(index.getZeroBased());
 
-            if (duplicateIndexPassed()) {
-                throw new CommandException(MESSAGE_DUPLICATE_INDEX_PASSED);
-            }
-            if (!model.hasFolderName(folderName)) {
-                throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
-            }
             if (model.folderContainsPerson(personToAdd, folderName)) {
                 throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
             }

@@ -485,23 +485,169 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file using the command `java -jar UNIon.jar`<br>Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
-
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+### Managing people
 
-1. _{ more test cases …​ }_
+#### Adding a person: `touch`
 
-### Deleting a person
+1. Creating a contact
+    1. Test case: `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`<br>
+    Expected: John Doe is added
+    1. Test case: `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`<br>
+    Expected: John Doe is not added as he is already in the list. Error message is shown.
+    1. Test case: `touch -nBetsy Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`<br>
+    Expected: Betsy Doe is not added as the command is invalid (due to the lack of a space after the `-n` flag). Error message is shown.
+    1. Test case: `touch -n Betsy Doe -p 98765432 -e johnd@example.com`<br>
+    Expected: Betsy Doe is not added as the command is invalid (due to missing compulsory address parameter). Error message is shown.
+
+#### Listing all persons: `ls -contacts`
+
+1. Listing all contacts
+    1. Prerequisite: List is populated with contacts (see above)
+    1. Test case: `ls -contacts`<br>
+    Expected: Full list of contacts is shown
+2. Listing all contacts after filtering with `find -contacts`
+    1. Prerequisite: List has been filtered by running a `find -contacts` command
+    1. Test case: `ls -contacts`<br>
+    Expected: Full list of contacts is shown
+
+#### Editing a person: `vim`
+
+1. Editing a person while all contacts are being shown
+    1. Prerequisite: There is an existing person in the contact list
+    1. Test case: `vim 1 -n Jane Doe`<br>
+    Expected: Contact at first position is renamed to Jane Doe
+    1. Incorrect edit commands to try: `vim`, `vim 0 -n Jane Doe`, `vim x -n Jane Doe` (where x is larger than the list size)
+2. Editing a person while a filter is in place
+    1. Prerequisite: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+    1. Similar to previous, but index number is with reference to the filtered list.
+
+#### Locating persons by name: `find -contacts`
+
+1. Finding contacts
+    1. Prerequisite: There are multiple existing contacts, including someone named Janet Doe
+    1. Test case: `find -contacts Janet`<br>
+    Expected: List of contacts is filtered to show Janet Doe
+    1. Test case: `find -contacts Jane` <br>
+    Expected: No contacts found as only full words are matched.
+
+#### Deleting a person: `rm`
 
 1. Deleting a person while all persons are being shown
+   
+    1. Prerequisites: List all persons using the `ls -contacts` command. Multiple persons in the list.
+    1. Test case: `rm 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `rm 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting a person while a filter is in place
+    1. Prerequisite: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+    1. Similar to previous, but index number is with reference to the filtered list.
+
+#### Clearing all people: `rm -contacts`
+
+1. Clearing all contacts
+    1. Prerequisites: Multiple persons in the list.
+    1. Test case: `rm -contacts`<br>
+       Expected: all contacts are removed.
+
+### Managing folders
+
+#### Adding a folder: `mkdir`
+
+1. Creating a folder
+    1. Test case: `mkdir CS2103`<br>
+       Expected: A new folder called `CS2103` is created
+    1. Test case: `mkdir CS2103`<br>
+       Expected: A new folder is not created as folders must have unique names
+    1. Test case: `mkdir ---`<br>
+       Expected: a new folder is not created as folder names cannot contain special characters
+
+#### Adding contacts to a folder: `echo`
+
+1. Adding contacts to a folder while all contacts and all folders are being shown
+    1. Prerequisites: There are existing persons and existing folders
+    1. Test case: `echo 1 >> CS2103`<br>
+       Expected: Adds the first person in the list to the folder `CS2103`
+    1. Test case: `echo 1 2 >> CS2103`<br>
+       Expected: Adds the first two people in the list to the folder `CS2103`
+
+1. Adding contacts to a folder while there is a filter in place for contacts
+    1. Prerequisites: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+    1. Similar to point 1 but index is with reference to the filtered list.
+
+1. Adding contacts to a folder while there is a filter in place for folders
+    1. Prerequisites: Run a search using the `find -folders` command. Multiple folders in the filtered list.
+    1. Similar to point 1 but folder that is being added to must be present in the filtered list
+
+#### Deleting a contact from folder: `rm`
+
+1. Removing contacts from a folder while all contacts and all folders are being shown
+    1. Prerequisites: There are existing persons and existing folders
+    1. Test case: `rm 1 >> CS2103`<br>
+       Expected: Removes the first person in the list from the folder `CS2103`
+
+1. Removing contacts from a folder while there is a filter in place for contacts
+    1. Prerequisites: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+    1. Similar to point 1 but index is with reference to the filtered list.
+
+1. Removing contacts from a folder while there is a filter in place for folders
+    1. Prerequisites: Run a search using the `find -folders` command. Multiple folders in the filtered list.
+    1. Similar to point 1 but folder that is being removed from must be present in the filtered list
+
+#### Listing all folders: `ls -folders`
+
+1. Listing all folders
+    1. Prerequisite: List is populated with folders
+    1. Test case: `ls -folders`<br>
+       Expected: Full list of folders is shown
+2. Listing all folders after filtering with `find -folders`
+    1. Prerequisite: List has been filtered by running a `find -folders` command
+    1. Test case: `ls -folders`<br>
+       Expected: Full list of folders is shown
+
+#### Editing a folder name: `mv`
+
+1. Editing a folder while all folders are being shown
+    1. Prerequisite: There is an existing folder in the contact list
+    1. Test case: `mv CS2103 | CS2103T`<br>
+       Expected: The folder `CS2103` is renamed to `CS2103T`
+    1. Incorrect edit commands to try: `mv`, `mv CS2103 CS2103T`
+2. Editing a folder while a filter is in place
+    1. Prerequisite: Run a search using the `find -folders` command. Multiple folders in the filtered list.
+    1. Similar to previous, but folder to be edited must be in the filtered list.
+
+#### Locating folders by name: `find -folders`
+
+1. Finding folders
+    1. Prerequisite: There are multiple existing folders, including someone named Janet Doe
+    1. Test case: `find -folders CS`<br>
+       Expected: List of folders is filtered to show folders whose names contain `CS`, including `CS2103` and `CS2101`
+
+#### Deleting a folder: `rmdir`
+
+1. Deleting a folder
+    1. Test case: `rmdir CS2103`<br>
+       Expected: The folder CS2103 is removed
+    1. Incorrect delete commands to try: `rmdir`, `rmdir X` where the folder `X` does not exist<br>
+       Expected: Similar to previous.
+
+#### Clearing all folders: `rm -folders`
+
+1. Clearing all folders
+    1. Prerequisites: Multiple folders in the list.
+    1. Test case: `rm -folders`<br>
+       Expected: all folders are removed.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 

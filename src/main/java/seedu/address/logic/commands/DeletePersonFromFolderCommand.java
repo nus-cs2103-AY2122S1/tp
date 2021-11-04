@@ -22,7 +22,8 @@ public class DeletePersonFromFolderCommand extends Command {
     public static final String COMMAND_WORD = "rm";
     public static final String COMMAND_IDENTIFIER = ">>";
 
-    public static final String MESSAGE_NO_SUCH_FOLDER = "No such folder found in UNIon";
+    public static final String MESSAGE_NO_SUCH_FOLDER = "Folder name supplied"
+            + " cannot be found in the folders' listing below";
     public static final String MESSAGE_NO_CONTACT_IN_FOLDER = "No such contact in folder";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number from the folder specified.\n"
@@ -57,12 +58,15 @@ public class DeletePersonFromFolderCommand extends Command {
         requireNonNull(model);
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Folder> lastShownFolderList = model.getFilteredFolderList();
+
+        int indexOfFolder = lastShownFolderList.indexOf(targetFolder);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!model.hasFolder(targetFolder)) {
+        if (indexOfFolder == -1) {
             throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
         }
 

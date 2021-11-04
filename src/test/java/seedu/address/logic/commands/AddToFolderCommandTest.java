@@ -42,6 +42,7 @@ public class AddToFolderCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         FolderName folderName = new FolderName("Folder 1");
         Folder validFolder = new Folder(folderName);
+        modelStub.addFolder(validFolder);
         Index index = ParserUtil.parseIndex("1");
         List<Index> indexList = new ArrayList<Index>();
         indexList.add(index);
@@ -55,7 +56,7 @@ public class AddToFolderCommandTest {
         ModelStubContainingDuplicate modelStub = new ModelStubContainingDuplicate();
         FolderName folderName = new FolderName("Folder 1");
         Index index = ParserUtil.parseIndex("2");
-        List<Index> indexList = new ArrayList<Index>();
+        List<Index> indexList = new ArrayList<>();
         indexList.add(index);
 
         assertThrows(CommandException.class, () -> new AddToFolderCommand(indexList, folderName).execute(modelStub));
@@ -227,8 +228,8 @@ public class AddToFolderCommandTest {
      * A Model stub with one Person inside Folder.
      */
     private class ModelStubAcceptingPersonAdded extends AddToFolderCommandTest.ModelStub {
-
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList(new PersonBuilder().build());
+        private final ObservableList<Folder> folderList = FXCollections.observableArrayList();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -240,6 +241,16 @@ public class AddToFolderCommandTest {
         public void addContactToFolder(Person target, FolderName folderName) {
             requireAllNonNull(target, folderName);
             personsAdded.add(target);
+        }
+
+        @Override
+        public void addFolder(Folder folder) {
+            this.folderList.add(folder);
+        }
+
+        @Override
+        public ObservableList<Folder> getFilteredFolderList() {
+            return this.folderList;
         }
 
         @Override
@@ -269,13 +280,18 @@ public class AddToFolderCommandTest {
      * A Model stub with one Person inside Folder, same as the peron being added.
      */
     private class ModelStubContainingDuplicate extends AddToFolderCommandTest.ModelStub {
-
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList(new PersonBuilder().build());
+        private final ObservableList<Folder> folderList = FXCollections.observableArrayList();
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public ObservableList<Folder> getFilteredFolderList() {
+            return this.folderList;
         }
 
         @Override

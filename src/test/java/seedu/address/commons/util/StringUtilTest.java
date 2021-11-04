@@ -265,4 +265,51 @@ public class StringUtilTest {
         assertEquals(StringUtil.removeExtraWhitespace("words    more    words       -flag"), "words more words -flag");
         assertEquals(StringUtil.removeExtraWhitespace("words \t \n words"), "words words");
     }
+
+    //---------------- Tests for startsWithCommand --------------------------------------
+    /*
+     * Equivalence Partitions for sentence:
+     * - null
+     * - empty string
+     * - sentence with extra spaces (leading or trailing or in between words)
+     * - sentence with one word
+     * - sentence with multiple words
+     *
+     * Equivalence Partitions for word:
+     * - null
+     * - empty string
+     * - valid word
+     *
+     * Possible scenarios returning true:
+     * - sentence starts with word and then the string ends
+     * - sentence starts with word followed by a whitespace character
+     * - ignoring leading spaces, sentence starts with word
+     *
+     * Possible scenarios returning false:
+     * - sentence does not start with word
+     * - sentence starts with word but followed by non-whitespace character
+     *
+     */
+
+    @Test
+    public void startsWithCommand_nullGiven_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.startsWithCommand(null, "word"));
+        assertThrows(NullPointerException.class, () -> StringUtil.startsWithCommand("a a a a", null));
+    }
+
+    @Test
+    public void startsWithCommand_validInputs_correctResult() {
+        // Possible scenarios returning true
+        assertTrue(StringUtil.startsWithCommand("", ""));
+        assertTrue(StringUtil.startsWithCommand("   ls -contacts", "ls -contacts"));
+        assertTrue(StringUtil.startsWithCommand("command argument1 argument2", "command"));
+        assertTrue(StringUtil.startsWithCommand(" \n  command argument1 argument2", "command"));
+
+        // Possible scenarios returning false
+        assertFalse(StringUtil.startsWithCommand("sentence", "")); // no extra space
+        assertFalse(StringUtil.startsWithCommand("", "command"));
+        assertFalse(StringUtil.startsWithCommand("sentence", "command"));
+        assertFalse(StringUtil.startsWithCommand("helpppp", "help")); // main use case for this method
+        assertFalse(StringUtil.startsWithCommand("rmm 3", "rm")); // main use case for this method
+    }
 }
