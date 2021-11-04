@@ -762,7 +762,7 @@ This command has a relatively straightforward implementation:
     4. No duplicate tag is added to the `Set`
     5. No non-existent tag is attempted to be deleted from the 'Set'
     
-Below is an example usage scenario: 
+#### Usage Scenario 
 
 1. The user launches the application and inputs "tag 1 a/fat d/thin", to add a tag `fat` and delete a tag `thin`
    from the first listed contact.
