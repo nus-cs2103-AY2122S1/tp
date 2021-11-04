@@ -1,7 +1,5 @@
 package seedu.programmer.ui;
 
-import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -35,7 +33,6 @@ import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.UploadCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 
@@ -169,6 +166,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setY(guiSettings.getWindowCoordinates().getY());
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -180,10 +181,6 @@ public class MainWindow extends UiPart<Stage> {
         }
         logger.fine("Showing help window about the application.");
         helpWindow.show();
-    }
-
-    void show() {
-        primaryStage.show();
     }
 
     /**
@@ -200,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Display the selected student's lab results.
+     * Displays the selected student's lab results.
      */
     @FXML
     public void handleShowResult() {
@@ -210,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Display the dashboard.
+     * Displays the dashboard window.
      */
     @FXML
     private void handleDashboard() {
@@ -240,48 +237,15 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
-        updateCurrentStudents(stuList);
-    }
-
-    private void updateCurrentStudents(List<Student> stuList) {
-        ProgrammerError newPE = new ProgrammerError();
         try {
-            newPE.setStudents(stuList);
+            logic.replaceExistingStudents(stuList);
         } catch (DuplicateStudentException e) {
             logger.info("Aborting: file contains duplicate student");
             displayPopup("Upload failed: " + e.getMessage());
-            return;
         }
-        saveDataState(newPE);
+
         displayPopup("Upload success! All past students have been deleted. You now have "
                     + stuList.size() + " students.");
-    }
-
-    private List<Student> getStudentList(File chosenFile) {
-        List<Student> stuList;
-        try {
-            stuList = FileUtil.getStudentsFromCsv(chosenFile);
-        } catch (IllegalArgumentException | IOException e) {
-            displayPopup("Upload failed: " + e.getMessage()); // Error with file data
-            return null;
-        } catch (IllegalValueException e) {
-            displayPopup(e.getMessage()); // Error with file headers
-            return null;
-        }
-
-        if (stuList.size() == 0) {
-            displayPopup("Upload failed: No students were found in your file. "
-                        + "Use the purge command if you want to remove all students.");
-            return null;
-        }
-
-        return stuList;
-    }
-
-    private void saveDataState(ProgrammerError newPE) {
-        logic.updateProgrammerError(newPE);
-        logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
-        logic.saveProgrammerError(newPE);
         logger.info("Uploaded CSV data successfully!");
     }
 
@@ -306,6 +270,37 @@ public class MainWindow extends UiPart<Stage> {
         JsonUtil.writeJsonToCsv(jsonData, destinationFile);
         displayPopup("Your data has been downloaded to " + destinationFile + "!");
         logger.info("Data successfully downloaded as CSV.");
+    }
+
+    @FXML
+    private void handleHover() {
+        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
+    }
+
+    @FXML
+    private void handleUnhover() {
+        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
+    }
+
+    private List<Student> getStudentList(File chosenFile) {
+        List<Student> stuList;
+        try {
+            stuList = FileUtil.getStudentsFromCsv(chosenFile);
+        } catch (IllegalArgumentException | IOException e) {
+            displayPopup("Upload failed: " + e.getMessage()); // Error with file data
+            return null;
+        } catch (IllegalValueException e) {
+            displayPopup(e.getMessage()); // Error with file headers
+            return null;
+        }
+
+        if (stuList.size() == 0) {
+            displayPopup("Upload failed: No students were found in your file. "
+                        + "Use the purge command if you want to remove all students.");
+            return null;
+        }
+
+        return stuList;
     }
 
     /**
@@ -416,15 +411,5 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    @FXML
-    private void handleHover() {
-        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
-    }
-
-    @FXML
-    private void handleUnhover() {
-        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
     }
 }
