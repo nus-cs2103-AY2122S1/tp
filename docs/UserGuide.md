@@ -431,6 +431,9 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: What does the compatibility field represent?<br>
+**A**: Compatibility field as the name suggests records down how compatible you think you are with the contact of interest. This infomation can be used in a versatile way. A common use case is to filter by compatibility when one is looking for a suitable partner for a project.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
