@@ -114,7 +114,7 @@ cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
 **:grey_exclamation:**
-A policy should have more payments than the number of commissions, since every commission is tied to one payment!
+A policy should not have less payments than the number of commissions, since every commission is tied to one payment!
 </div>
 
 * Payment structure of the policy -`p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMT]`:
@@ -157,7 +157,7 @@ Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM
 
 <div markdown="block" class="alert alert-warning">
 **:grey_exclamation:**
-Careful changing the number of commissions or payments. A policy should have more payments than the number of commissions.
+Careful changing the number of commissions or payments. A policy should not have less payments than the number of commissions.
 </div>
 
 * Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. The index **must be a positive integer** 1, 2, 3, …​
