@@ -20,15 +20,17 @@ import seedu.address.model.Model;
 public class MailingListCommand extends Command {
 
     public static final String COMMAND_WORD = "mailingList";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current view as a mailing list. "
-            + "Parameters: "
+    public static final String COMMAND_DESCRIPTION = "Exports the current view as a mailing list.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: "
             + "[" + PREFIX_PHONE + "] "
             + "[" + PREFIX_EMAIL + "] "
             + "[" + PREFIX_ADDRESS + "] "
             + "[" + PREFIX_TAG + "]"
             + "[" + PREFIX_BIRTHDAY + "] \n"
             + "Default export is Phone numbers and Email addresses.\n"
-            + "Example: " + COMMAND_WORD + PREFIX_PHONE + " " + PREFIX_EMAIL;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + " " + PREFIX_EMAIL;
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EMPTY_PERSON_LIST = "Trying to export an empty mailing list does not make sense";
 
