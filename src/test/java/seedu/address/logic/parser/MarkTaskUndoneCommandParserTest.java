@@ -19,13 +19,13 @@ import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.MarkTaskDoneCommand;
+import seedu.address.logic.commands.MarkTaskUndoneCommand;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.task.TaskId;
 
-class MarkTaskDoneCommandParserTest {
-    private final MarkTaskDoneCommandParser parser = new MarkTaskDoneCommandParser();
+class MarkTaskUndoneCommandParserTest {
+    private final MarkTaskUndoneCommandParser parser = new MarkTaskUndoneCommandParser();
     private final ModuleName moduleName1 = new ModuleName(MODULE_NAME_0);
     private final StudentId studentId1 = new StudentId(VALID_STUDENT_ID_AMY);
     private final TaskId taskId1 = new TaskId(VALID_TASK_ID_0);
@@ -34,24 +34,24 @@ class MarkTaskDoneCommandParserTest {
     public void parse_allFieldsPresent_success() {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_NAME_DESC_0 + STUDENT_ID_DESC_AMY
-                + TASK_ID_DESC_0, new MarkTaskDoneCommand(moduleName1, studentId1, taskId1));
+                + TASK_ID_DESC_0, new MarkTaskUndoneCommand(moduleName1, studentId1, taskId1));
 
         // multiple module names -> last module name accepted
         assertParseSuccess(parser, MODULE_NAME_DESC_1 + MODULE_NAME_DESC_0
-                + STUDENT_ID_DESC_AMY + TASK_ID_DESC_0, new MarkTaskDoneCommand(moduleName1, studentId1, taskId1));
+                + STUDENT_ID_DESC_AMY + TASK_ID_DESC_0, new MarkTaskUndoneCommand(moduleName1, studentId1, taskId1));
 
         // multiple student IDs -> last student ID accepted
         assertParseSuccess(parser, MODULE_NAME_DESC_0 + STUDENT_ID_DESC_BOB
-                + STUDENT_ID_DESC_AMY + TASK_ID_DESC_0, new MarkTaskDoneCommand(moduleName1, studentId1, taskId1));
+                + STUDENT_ID_DESC_AMY + TASK_ID_DESC_0, new MarkTaskUndoneCommand(moduleName1, studentId1, taskId1));
 
         // multiple task IDs -> last task ID accepted
         assertParseSuccess(parser, MODULE_NAME_DESC_0 + STUDENT_ID_DESC_AMY
-                + TASK_ID_DESC_1 + TASK_ID_DESC_0, new MarkTaskDoneCommand(moduleName1, studentId1, taskId1));
+                + TASK_ID_DESC_1 + TASK_ID_DESC_0, new MarkTaskUndoneCommand(moduleName1, studentId1, taskId1));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkTaskDoneCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkTaskUndoneCommand.MESSAGE_USAGE);
 
         // missing module name prefix
         assertParseFailure(parser, MODULE_NAME_0 + STUDENT_ID_DESC_AMY + TASK_ID_DESC_0, expectedMessage);
