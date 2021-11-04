@@ -68,10 +68,7 @@ public class ModuleLesson {
 
         return otherModuleLesson != null
                 && otherModuleLesson.getModuleCode().equals(getModuleCode())
-                && otherModuleLesson.getModuleCode().getLessonCodes().equals(getModuleCode().getLessonCodes())
-                && otherModuleLesson.getDay().equals(getDay())
-                && otherModuleLesson.getLessonStartTime().equals(getLessonStartTime())
-                && otherModuleLesson.getLessonEndTime().equals(getLessonEndTime());
+                && otherModuleLesson.getModuleCode().getLessonCodes().equals(getModuleCode().getLessonCodes());
     }
 
     /**
