@@ -1,7 +1,5 @@
 package seedu.track2gather.logic.commands;
 
-import static seedu.track2gather.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -54,8 +52,6 @@ public class TShiftCommand extends Command {
             Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor);
             model.setPerson(personToEdit, editedPerson);
         }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
