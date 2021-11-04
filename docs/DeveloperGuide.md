@@ -224,7 +224,61 @@ This section describes some noteworthy details on how certain features are imple
 
 ## AddressBook feature
 
-### 4.1 Search Clients
+### 4.1 View Client Info
+
+#### Description
+
+LeadsForce allows users to view client info in the `ClientViewPanel` in the `SideBar` of the GUI using the `View` command.
+
+#### Implementation
+
+1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `ViewCommandParser` to parse.
+4. The `ViewCommandParser` will parse the `ClientId` from the remaining input text. In our implementation, a valid `ClientId` is any non-negative integer.
+5. The `ViewCommandParser` will then create a new `ClientHasId` using the `ClientId` parsed.
+6. The `ViewCommandParser` will then create a `ViewCommand` with the `ClientId` and `ClientHasId`.
+7. The `LogicManger` will call the `execute` method of `ViewCommand`.
+8. The `ViewCommand` wil then call the `updateClientToView` method of the provided `Model` with it's `ClientHasId`.
+9. The `ViewCommand` will finally create a new `CommandResult` which will be returned to `LogicManager` and the client's information with the given `ClientId` in the `ClientViewPanel`.
+
+The following sequence diagram shows how the view operation works:
+
+<img src="images/ViewCommandSequenceDiagram.png" />
+
+#### Implementation of ClientHasId
+
+`ClientHasId` implements `Predicate<Client>` and allow filtering of a list of `Client` based on `ClientId` objects. `ClientHasId` contains a list which holds these 'ClientId'. This allows the `Model` to use this list of `ClientId` objects to filter for `Client`(s) that contain the given `ClientId`(s).
+
+### 4.2 Edit Client Info
+
+#### Description
+
+LeadsForce allows users to edit client info. 
+
+#### Implementation
+
+1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `EditCommandParser` to parse.
+4. The `EditCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
+5. The `EditCommandParser` will then create a new `clientId` which contains the list of client Ids. 
+6. The `EditCommandParser` will then create a new `EditClientDescriptor` which contains the fields that the user is intending on editing.
+7. The `EditCommandParser` will create a `EditCommand` containing both the list of client Ids and the `EditClientDescriptor`.  
+8. The `LogicManger` will call the `execute` method of the aforementioned `EditCommand`.
+9. The `EditCommand` will then call the `setAllClients` method of the provided `Model` with the `EditClientDescriptor` and the list of clients. 
+10. The `EditCommand` will then call the `updateFilteredClientList` method of the provided `Model` with a predicate to show all clients in the client list. 
+12. The `EditCommand` will finally create a new `CommandResult` which will be returned to `LogicManager` and the client's information will be edited as according to the command input. 
+
+The following sequence diagram shows how the view operation works:
+
+<img src="images/EditCommandSequenceDiagram.png" />
+
+#### Implementation of EditClientDescriptor 
+
+The `EditClientDescriptor` keeps tracks of all of the attributes that the user intends on updating, and does so by using the `set{ATTRIBUTE}` command for all the attirbutes of `Client`(such as setName, setPhone, etc.). 
+
+### 4.3 Search Clients
 
 #### Description
 
@@ -259,7 +313,7 @@ then `@gmail.com` will be used to matched with the `Email` attribute of the `Cli
 the given `Client` must match with any of the generic keywords if there is any and all the attribute keywords if there
 is any.
 
-### 4.2 Filter Clients
+### 4.4 Filter Clients
 
 #### Description
 
@@ -286,33 +340,7 @@ The following sequence diagram shows how the filter operation works:
 
 See the above description in `Search Clients`.
 
-### 4.3 View Client Info
-
-#### Description
-
-LeadsForce allows users to view client info in the `ClientViewPanel` in the `SideBar` of the GUI using the `View` command.
-
-#### Implementation
-
-1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
-2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
-3. The remaining input text will be passed to the `ViewCommandParser` to parse.
-4. The `ViewCommandParser` will parse the `ClientId` from the remaining input text. In our implementation, a valid `ClientId` is any non-negative integer.
-5. The `ViewCommandParser` will then create a new `ClientHasId` using the `ClientId` parsed.
-6. The `ViewCommandParser` will then create a `ViewCommand` with the `ClientId` and `ClientHasId`.
-7. The `LogicManger` will call the `execute` method of `ViewCommand`.
-8. The `ViewCommand` wil then call the `updateClientToView` method of the provided `Model` with it's `ClientHasId`.
-9. The `ViewCommand` will finally create a new `CommandResult` which will be returned to `LogicManager` and the client's information with the given `ClientId` in the `ClientViewPanel`.
-
-The following sequence diagram shows how the view operation works:
-
-<img src="images/ViewCommandSequenceDiagram.png" />
-
-#### Implementation of ClientHasId
-
-`ClientHasId` implements `Predicate<Client>` and allow filtering of a list of `Client` based on `ClientId` objects. `ClientHasId` contains a list which holds these 'ClientId'. This allows the `Model` to use this list of `ClientId` objects to filter for `Client`(s) that contain the given `ClientId`(s).
-
-### 4.4 Sort Clients
+### 4.5 Sort Clients
 
 #### Description
 
@@ -333,7 +361,7 @@ The following sequence diagram shows how the sort operation works:
 
 <img src="images/tracing/SortCommandSequenceDiagram.png" />
 
-### 4.5 Multiple Address Book
+### 4.6 Multiple Address Book
 
 LeadsForce allow the user to create and switch between multiple addressbook.
 
@@ -345,7 +373,7 @@ Each individual addressbook is stored as its own JSON file in the data folder th
 The following implementation will omit the details prior to the respective commands' parser.
 Also, details with regard to AddressBookList has been omitted for simplicity if it is not critical to the function of the command.
 
-### 4.5.1 Create new Address Book
+### 4.6.1 Create new Address Book
 
 1. The `AbCreateCommandParser` parse the name of the address book that is to be created into a `Path` to that new address book.
 2. The `AbCreateCommandParser` will then create a new `AbCreateCommand` with the parsed `Path`.
@@ -359,7 +387,7 @@ The following sequence diagram shows how the sort operation works:
 
 <img src="images\AbCreateCommandSequenceDiagram.png" />
 
-### 4.5.2 Switch Address Book
+### 4.6.2 Switch Address Book
 
 1. The `AbSwitchCommandParser` parse the name of the address book that is to be switched to into a `Path` to that address book.
 2. The `AbSwitchCommandParser` will then create a new `AbSwitchCommand` with the parsed `Path`.
@@ -373,7 +401,7 @@ The following sequence diagram shows how the sort operation works:
 The following sequence diagram shows how the sort operation works:
 
 
-### 4.5.3 Delete Address Book
+### 4.6.3 Delete Address Book
 
 1. The `AbDeleteCommandParser` parse the name of the address book that is to be deleted to into a `Path` to that address book.
 2. The `AbDeleteCommandParser` will then create a new `AbDeleteCommand` with the parsed `Path`.
@@ -390,9 +418,9 @@ The following sequence diagram shows how the sort operation works:
 3. The `AddressBookList` will append the name of all the addressbook in its list together and return it back to `AblistCommand`
 4. The `AblistCommand` will finally then create a `CommandResult` with that String and return it to `LogicManager`.
 
-### 4.6 Undo/redo feature
+### 4.7 Undo/redo feature
 
-#### 4.6.1 Proposed Implementation
+#### 4.7.1 Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -455,7 +483,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### 4.6.2 Design considerations:
+#### 4.7.2 Design considerations:
 
 **Aspect: How undo & redo executes:**
 
@@ -470,7 +498,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### 4.7 \[Proposed\] Data archiving
+### 4.8 \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
@@ -946,12 +974,62 @@ Action | Format |
        Expected: the application closes
 
 ### 7.3 Commands for manual testing (Multiple address book feature)
+In this section, you can test multiple address book features in LeadsForce. Below is a summary of all multiple address book features in LeadsForce. 
 
-1. Dealing with missing/corrupted data files
+Action | Format | Examples
+--------|---------|---------
+**Create Address Book** | `ab create ADDRESSBOOK_NAME` | ab create vip
+**Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
+**Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
+**List Address Book** | `ab list` | -
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+#### 7.3.1 Create Address Book 
 
-1. _{ more test cases …​ }_
+1. Create Address Book
+
+    1. Prerequisites: -
+
+    1. Test case: `ab create Young Adult`<br>
+       Expected: Creates a new address book with the name `young adult`. Details of the command is shown in the status message.
+       
+    1. Test case: `ab create Addressbook`<br>
+       Expected: Does not create a new address book and error details are shown in the status message, informing the user that the address book name already exists.
+       
+    1. Test case: `ab create`<br>
+       Expected: Does not create a new address book and error details are shown in the status message, informing the user of a valid command format.
+       
+
+#### 7.3.2 Delete Address Book 
+
+1. Delete Address Book
+
+    1. Prerequisites: the user has to using a different address book to delete another address book
+
+    1. Test case: `ab delete Young Adult`<br>
+       Expected: Deletes an address book with the name `young adult`. Details of the command is shown in the status message.
+       
+    1. Test case: `ab delete`<br>
+       Expected: Does not delete a new address book and error details are shown in the status message, informing the user of a valid command format.
+       
+
+#### 7.3.3 Switch Address Book 
+
+1. Switch between Address Book
+
+    1. Prerequisites: have at least 2 address books
+
+    1. Test case: `ab switch Young Adult`<br>
+       Expected: Switch to the `Young Adult` address book. Details of the command is shown in the status message.
+       
+
+#### 7.3.4 List Address Books 
+
+1. List the names of all address books
+
+    1. Prerequisites: -
+
+    1. Test case: `ab list`<br>
+       Expected: Lists the name of all address books. Details of the command is shown in the status message.
 
 
 ### 7.4 Saving data
