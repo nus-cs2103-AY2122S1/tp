@@ -78,17 +78,17 @@ public class MarkingCommandParserTest {
                 String.format(errorDueToInvalidIndex, UnmarkCommand.MESSAGE_USAGE));
 
         // 2 duplicate inputs
-        assertParseFailure(parserForMark, "1 1", 
+        assertParseFailure(parserForMark, "1 1",
                 String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parserForUnmark, "1 1",
                 String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE));
-        
+
         // Many duplicates interspersed (Note that MarkingCommandParser does not detect out of range indexes)
-        assertParseFailure(parserForMark, "70 2 3 2 2 1 70", 
+        assertParseFailure(parserForMark, "70 2 3 2 2 1 70",
                 String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parserForUnmark, "70 2 3 2 2 1 70",
-                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE)); 
-        
+                String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE));
+
          // Duplicates as last few inputs
         assertParseFailure(parserForMark, "2 3 4 4 4",
                 String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
