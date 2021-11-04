@@ -109,5 +109,12 @@ public class AddOrderCommandTest {
             requireNonNull(order);
             ordersAdded.add(order);
         }
+
+        @Override
+        public boolean hasOrder(Order order) {
+            requireNonNull(order);
+            return this.ordersAdded.contains(order);
+        }
+
     }
 }

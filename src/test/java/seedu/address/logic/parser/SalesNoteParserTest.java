@@ -60,9 +60,9 @@ import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TaskUtil;
 
-public class AddressBookParserTest {
+public class SalesNoteParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final SalesNoteParser parser = new SalesNoteParser();
 
     @Test
     public void parseCommand_add() throws Exception {

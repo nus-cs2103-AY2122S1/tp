@@ -27,9 +27,8 @@ public class AddOrderCommand extends Command {
             + PREFIX_DATE + "20 August 2021";
 
     public static final String MESSAGE_SUCCESS = "New order added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the order book.";
+    public static final String MESSAGE_DUPLICATE_ORDER = "This order already exists in the orderbook.";
     public static final String MESSAGE_CLIENT_NOT_FOUND = "The client for this order has not been added to SalesNote!";
-
 
     private final Order toAdd;
 
@@ -45,15 +44,21 @@ public class AddOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+<<<<<<< HEAD
         // check if model already contains order
+=======
+>>>>>>> f2b82d2d088c5cdab5b4f342bd60385ab6f6caf3
         if (model.hasOrder(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ORDER);
         }
 
+<<<<<<< HEAD
         if (!model.hasPersonWithName(toAdd.getCustomer().getName())) {
             throw new CommandException(MESSAGE_CLIENT_NOT_FOUND);
         }
 
+=======
+>>>>>>> f2b82d2d088c5cdab5b4f342bd60385ab6f6caf3
         model.addOrder(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.ORDER);
     }
