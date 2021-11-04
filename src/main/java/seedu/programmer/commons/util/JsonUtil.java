@@ -2,12 +2,24 @@ package seedu.programmer.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.json.CDL;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -137,6 +149,41 @@ public class JsonUtil {
         @Override
         public Class<Level> handledType() {
             return Level.class;
+        }
+    }
+
+    /**
+     * Writes JSON data to a CSV file.
+     *
+     * @param jsonData JSONArray of data
+     * @param destinationFile File object to write to
+     */
+    public static void writeJsonToCsv(JSONArray jsonData, File destinationFile) {
+        // If there were no data, we should not even be trying to write anything
+        assert (jsonData.length() > 0);
+        try {
+            String csv = CDL.toString(jsonData);
+            FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
+            logger.info("The following data was written:\n" + csv);
+        } catch (IOException | JSONException e) {
+            logger.severe("Unexpected error: " + e);
+        }
+    }
+
+    /**
+     * Retrieves students' JSON data stored in ProgrammerError.
+     *
+     * @return JSONArray of student's data
+     */
+    public static JSONArray getJsonData(String filePath) {
+        try {
+            InputStream is = new FileInputStream(filePath);
+            String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
+            JSONObject json = new JSONObject(jsonTxt);
+            return json.getJSONArray("students");
+        } catch (IOException | JSONException e) {
+            logger.severe("Error with the file!");
+            return null;
         }
     }
 

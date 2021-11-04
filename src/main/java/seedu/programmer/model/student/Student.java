@@ -172,6 +172,10 @@ public class Student implements DisplayableObject {
         this.labList = labList;
     }
 
+    public int getNumLabs() {
+        return labList.size();
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
