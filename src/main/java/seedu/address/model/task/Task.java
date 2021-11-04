@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.Callback;
 
 
-public class Task implements Comparable<Task> {
+public class Task {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Task should contain at least the task name.";
@@ -172,44 +172,5 @@ public class Task implements Comparable<Task> {
                 .append(venue == null ? "" : venue);
 
         return builder.toString();
-    }
-
-    /**
-     * Overdue Task > Due Soon Task > Not done Task > Done Task
-     * Tasks with the same level of priority are then compared with date, time, name, venue, until tiebreaker
-     * is found. (If no tiebreaker, tasks are equal, should have been caught by equals check).
-     */
-    @Override
-    public int compareTo(Task otherTask) {
-        if (otherTask.equals(this)) {
-            return 0;
-        }
-
-        int thisPriority = priorityLevel(this);
-        int otherPriority = priorityLevel(otherTask);
-
-        if (thisPriority > otherPriority) {
-            return 1;
-        } else if (thisPriority == otherPriority) {
-            return this.date.taskDate.compareTo(otherTask.date.taskDate) == 0
-                    ? this.time.taskTime.compareTo(otherTask.time.taskTime) == 0
-                            ? this.venue.venue.compareTo(otherTask.venue.venue)
-                            : this.time.taskTime.compareTo(otherTask.time.taskTime)
-                    : this.date.taskDate.compareTo(otherTask.date.taskDate);
-        } else {
-            return -1;
-        }
-    }
-
-    private int priorityLevel(Task task) {
-        if (task.isOverdue.getValue()) {
-            return 1;
-        } else if (task.isDueSoon.getValue()) {
-            return 2;
-        } else if (!task.isDone.getValue()) {
-            return 3;
-        } else {
-            return 4;
-        }
     }
 }
