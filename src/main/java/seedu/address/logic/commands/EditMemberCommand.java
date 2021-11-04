@@ -18,8 +18,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.facility.AllocationMap;
-import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -80,15 +78,7 @@ public class EditMemberCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
-        for (Facility facility : model.getFilteredFacilityList()) {
-            AllocationMap updatedAllocationMap = facility.getAllocationMapClone();
-            updatedAllocationMap.removePersonOnAllDays(personToEdit);
-            Facility updatedFacility = new Facility(
-                    facility.getName(), facility.getLocation(), facility.getTime(), facility.getCapacity(),
-                    updatedAllocationMap);
-            model.setFacility(facility, updatedFacility);
-        }
-
+        model.removePersonFromAllocations(personToEdit);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);

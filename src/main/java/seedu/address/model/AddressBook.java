@@ -193,6 +193,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code key} from all allocations.
+     * {@code key} must exist in the address book.
+     */
+    public void removePersonFromAllocations(Person key) {
+        facilities.removePersonFromAllocations(key);
+    }
+
+    /**
      * Removes {@code key} from SportsPA.
      * {@code key} must exist in SportsPA.
      */
