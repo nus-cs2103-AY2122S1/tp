@@ -403,7 +403,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td><code>rates/</code></td>
             <td><ul>
               <li>Fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.</li>
-              <li>Refer to<a href="#monetary-fields"> "Monetary fields" for more details.</a></li>
+              <li>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</li>
             </ul></td>
             <td><code>rates/50</code></td>
         </tr>
@@ -423,16 +423,13 @@ A lesson can be identified by the index number shown in the lesson list of the s
         <tr>
             <td>Outstanding fees</td>
             <td><code>f/</code></td>
-            <td>Refer to<a href="#monetary-fields"> "Monetary fields" for more details.</a></td>
+            <td>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</td>
             <td><code>lvl/J1</code></td>
         </tr>
         <tr>
             <td>Homework</td>
             <td><code>hw/</code></td>
-            <td><ul>
-              <li>Maximum of 50 characters</li>
-              <li>Cannot be blank</li>
-            </ul></td>
+            <td>Maximum of 50 characters</td>
             <td><code>hw/Test 1</code></td>
         </tr>
     </tbody>
