@@ -407,18 +407,13 @@ clear
 
 ### `find`
 
-Finds persons whose respective fields contain any of the respective keywords.
+Finds persons whose respective fields contain the respective keywords.
 
 Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
 
 - At least one of the optional fields must be provided.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword in **EACH** option will be returned (i.e. `OR` search within individual fields).
-- Persons matching **ALL** given options will be returned (i.e. `AND` search across multiple fields).
-
-<figure class="figure">
-   <img src="images/findAlexDavidResult.png" class="figure-img img-fluid rounded" alt="Help Window">
-</figure>
+- Persons matching **ALL** keywords in **ALL** options will be returned.
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
@@ -435,11 +430,11 @@ find
 </div>
 <div markdown="1" class="w-100">
 ```text
-find -n Alex David
+find -n Alex Yeoh
 ```
-Returns `Alex Yeoh`, `David Li` as shown in the figure above.
+Returns `Alex Yeoh` but not `Alex Teo`.
 ```text
-find -n alex daVID
+find -n aleX yEOh
 ```
 The search is case-insensitive, and will return the same result as the previous example.
 ```text
@@ -447,9 +442,13 @@ find -n Yeoh Alex
 ```
 The order of the keywords does not matter.
 ```text
+find -t friends colleagues
+```
+The above returns persons with both `friends` and `colleagues` tags.
+```text
 find -t friends -t colleagues
 ```
-Optional fields can be repeated. The above returns only persons with tags containing both `friends` and `colleagues`.
+Optional fields can be repeated. The above returns the same result as the previous example.
 </div>
 </div>
 
