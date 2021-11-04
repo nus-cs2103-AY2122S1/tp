@@ -2,29 +2,28 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-* [Quick Start](#quick-start)
-* [Features](#features
-    * [Upcoming birthdays](#upcoming-birthdays)
-    * [Viewing help : `help`](#viewing-help--help)
-    * [Adding a person: `add`](#adding-a-person-add)
-    * [Listing all persons : `list`](#listing-all-persons--list)
-    * [Editing a person : `edit`](#editing-a-person--edit)
-    * [Adding Tags : `tag`](#adding-tags--tag)
-    * [Removing Tags : `untag`](#removing-tags--untag)
-    * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
-    * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findany)
-    * [Pinning a person: `pin`](#pinning-a-person--pin)
-    * [Unpinning a person: `unpin`](#unpinning-a-person--unpin)
-    * [Deleting a person : `delete`](#deleting-a-person--delete)
-    * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
-    * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailinglist)
-    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
-    * [Command Assistant](#command-assistant)
-    * [Command History](#command-history)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Command classes](#common-classes)
+      
+* [Implementation](#implementation)
+    * [Tags](#tags)
+    * [Pin feature](#pin-feature) 
+    * [Find feature](#find-feature)
+    * [FindAny feature](#findany-feature)
+    * [Help feature](#help-feature)
+    * [Birthday Reminder feature](#birthday-reminder-feature)
+    * [Mailing List feature](#mailing-list-feature)
+    
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Requirements](#appendix-requirements)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
