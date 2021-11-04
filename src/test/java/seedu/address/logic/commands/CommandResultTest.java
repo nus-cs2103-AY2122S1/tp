@@ -7,7 +7,41 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for {@link CommandResult}.
+ */
 public class CommandResultTest {
+
+    @Test
+    public void getFeedbackToUser_feedbackPresent_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false, false);
+        assertEquals(commandResult.getFeedbackToUser(), "feedback");
+    }
+
+    @Test
+    public void isShowHelp_success() {
+        CommandResult commandResult = new CommandResult("feedback", true, false, false, false);
+        assertTrue(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void isExit_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, true, false, false);
+        assertTrue(commandResult.isExit());
+    }
+
+    @Test
+    public void isTelegram_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, true, false);
+        assertTrue(commandResult.isTelegram());
+    }
+
+    @Test
+    public void isGithub_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, false, true);
+        assertTrue(commandResult.isGithub());
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
