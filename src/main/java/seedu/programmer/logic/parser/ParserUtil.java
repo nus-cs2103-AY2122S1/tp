@@ -158,6 +158,8 @@ public class ParserUtil {
                 return 0;
             } else if (res <= 0) {
                 throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
+            } else if (res > 100) {
+                throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_UPPER);
             }
             return Integer.parseInt(total.trim());
         } catch (NumberFormatException e) {

@@ -10,6 +10,8 @@ public class Lab implements DisplayableObject {
     public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
     public static final String MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT =
             "Lab total score should be a positive integer.";
+    public static final String MESSAGE_LAB_TOTAL_SCORE_UPPER =
+            "Lab total score should be below 100 marks";
     public static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
 
 
