@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/driip-ddrop.png" width="200px">
 
-[[github](https://github.com/driip-ddrop)]
+[[github](https://github.com/driip-ddrop)][[portfolio](team/germaineseah.md)]
 
 * Role: Developer
 * Responsibilities: Documentation + In charge of Storage
@@ -47,7 +47,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/tanruiquan.png" width="200px">
 
-[[github](https://github.com/tanruiquan)]
+[[github](https://github.com/tanruiquan)][[portfolio](team/tanruiquan.md)]
 
 * Role: Developer
 * Responsibilities: Integration + In charge of Model
