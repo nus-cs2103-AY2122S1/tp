@@ -163,9 +163,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean checkForMarkedPerson(Person target) {
+        requireAllNonNull(target);
+        return addressBook.checkForMarkedPerson(target);
+    }
+
+    @Override
     public void unmarkPerson(Person target) {
         requireAllNonNull(target);
         addressBook.unmarkPerson(target);
+    }
+
+    @Override
+    public boolean checkForUnmarkedPerson(Person target) {
+        requireAllNonNull(target);
+        return addressBook.checkForUnmarkedPerson(target);
     }
 
 }

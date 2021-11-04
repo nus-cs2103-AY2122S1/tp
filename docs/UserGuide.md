@@ -342,6 +342,7 @@ Marks the specified applicant by index from the list in RecruitIn as "Done" (hav
 Format: `mark INDEX…​`
 
 * Marks the applicant at the specified `INDEX` as "Done".
+* An applicant that is has status "Done" cannot be marked again.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -361,6 +362,7 @@ Unmarks the specified applicant by index from the list in RecruitIn to "Not Done
 Format: `unmark INDEX…​`
 
 * Unmarks the applicant at the specified `INDEX` to "Not Done".
+* An applicant that is has status "Not Done" cannot be unmarked again.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
