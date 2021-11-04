@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
@@ -77,6 +78,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox rightMainCard;
+
+    @FXML
+    private Label mainCardTitle;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -247,12 +251,15 @@ public class MainWindow extends UiPart<Stage> {
     private void clearMainCard() {
         clearRightCard();
         clearLeftCard();
+        mainCardTitle.setText("");
     }
 
     private void handleFriendGet(Friend friendToGet) {
         ObservableList<Friend> friendList = this.getFriendList();
         currentFriendToGet = friendToGet;
         clearMainCard();
+        mainCardTitle.setText(friendToGet.getFriendId().toString() + " ("
+                + friendToGet.getFriendName().toString() + ")");
 
         // If currentFriendToGet is null, we do nothing.
         if (currentFriendToGet == null) {
@@ -289,6 +296,7 @@ public class MainWindow extends UiPart<Stage> {
         currentGameToGet = gameToGet;
         clearMainCard();
         ObservableList<Game> gameList = this.getGameList();
+        mainCardTitle.setText(gameToGet.getGameId().toString());
 
         // If currentGameToGet is null, we do nothing.
         if (currentGameToGet == null) {

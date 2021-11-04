@@ -23,9 +23,6 @@ public class FriendSchedulePanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(FriendSchedulePanel.class);
 
     @FXML
-    private Label friendName;
-
-    @FXML
     private ListView<Day> dayListView;
 
     /**
@@ -34,7 +31,6 @@ public class FriendSchedulePanel extends UiPart<Region> {
     public FriendSchedulePanel(Friend friend) {
         super(FXML);
         this.friend = friend;
-        friendName.setText(formatFriendNameId(friend));
         dayListView.setItems((ObservableList<Day>) friend.getSchedule().getSchedule());
         dayListView.setCellFactory(listView -> new DayListViewCell());
     }
