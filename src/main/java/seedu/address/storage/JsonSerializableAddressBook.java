@@ -17,7 +17,7 @@ import seedu.address.model.participant.Participant;
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
-@JsonRootName(value = "managera")
+@JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PARTICIPANT = "Participants list contains duplicate participant(s).";
