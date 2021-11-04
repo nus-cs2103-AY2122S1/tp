@@ -13,8 +13,8 @@ else ([else])
 endif
 :Parse command arguments;
 if () then ([arguments are valid])
-:Generate predicate based on
-  the parameters specified;
+: Generate predicate based on
+the attribute keywords specified;
     :Execute find member command;
 :Update member list;
 :Display member list;
