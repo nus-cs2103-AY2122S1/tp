@@ -843,7 +843,40 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a patient <a name="edit-patient"/>
 
-### Finding a patient <a name="find-patient"/>
+### Finding patients <a name="find-patient"/>
+
+Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding patients while all patients are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab. 
+        1. List all patients using the `list` command. Multiple patients in the list.
+    
+    1. Test case: `find Aaron`<br>
+       Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron`<br>
+       Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron Bobby`<br>
+       Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
+
+    1. Test case: `find aar`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+       
+    1. Test case: `find Alex`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+
+2. Finding patients while some patients are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
+        2. List all patients using the `list` command. Multiple patients in the list.
+        2. List some patients using `find xyz` (XYZ is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+    
 
 ### Listing all patients <a name="list-patients"/>
 
@@ -872,7 +905,39 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
-### Finding a doctor <a name="find-doctor"/>
+### Finding doctors <a name="find-doctor"/>
+
+Prerequisites: The tests for finding doctors uses the sample data from `SampleDataUtil#getSampleDoctors`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding doctors while all doctors are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
+        1. List all doctors using the `list` command. Multiple doctors in the list.
+
+    1. Test case: `find Alex`<br>
+       Expected: Patient list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+
+    1. Test case: `find alex`<br>
+       Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+
+    1. Test case: `find alex bernice`<br>
+       Expected: `find` command is able to search multiple doctors using multiple keywords. Patient list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
+
+    1. Test case: `find ale`<br>
+       Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+
+    1. Test case: `find Aaron`<br>
+       Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+
+2. Finding doctors while some doctors are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
+        2. List all doctors using the `list` command. Multiple doctors in the list.
+        2. List some doctors using `find xyz` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
 
 ### Listing all doctors <a name="list-doctors"/>
 
