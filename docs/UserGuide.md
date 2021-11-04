@@ -315,8 +315,9 @@ Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]`
 * `TIME` is the time at which the event is held
 * `RESIDENTS` can be included as all full names or all rooms
 * The number of residents cannot exceed to provided capacity
-* When adding multiple residents, each resident information is separated by a comma
-* The resident information is case-insensitive
+* Residents can be given in the form of name or room, but all has to be all rooms or all names  
+* When adding multiple residents, each resident's name/room is separated by a comma
+* The resident's name/room is case-insensitive
 
 Examples:
 * `add n/Swim v/Swimming Pool c/10 d/28-10-2021 t/1500`
@@ -393,15 +394,15 @@ Examples:
 
 #### Add residents to an event: `include`
 
-Add multiple residents to an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
+Add multiple residents to an event based on the information given(name or room number), a resident is only expected to be given a name or a room.
 
-Format: `include INDEX [r/RESIDENTS]`
+Format: `include INDEX r/RESIDENTS`
 
 * Residents can be given in the form of name or room, but all has to be all rooms or all names
-* The name/room inputted has to exist in the address book under the `Resident` Tab to be added to an `Event`  
-* When adding multiple names/rooms, each name/room is separated by a comma
-* The name/room inputted is case-insensitive
-* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room are added to the event
+* The resident's name/room inputted has to exist in the address book under the `Resident` Tab to be added to an `Event`  
+* When adding multiple names/rooms, each resident's name/room is separated by a comma
+* The resident's name/room inputted is case-insensitive
+* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room is added to the event
 
 Examples:
 * `include 1 r/A101` adds the resident who stays in room A101 to the first event in the address book
@@ -411,15 +412,15 @@ Examples:
 
 #### Remove residents from an event: `exclude`
 
-Remove multiple residents from an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
+Remove multiple residents from an event based on the information given(name or room number), a resident is only expected to be given a name or a room.
 
-Format: `exclude INDEX r/INFORMATION [, MORE INFORMATION]`
+Format: `exclude INDEX r/RESIDENTS`
 
-* Resident information can be given in the form of name or room, but all has to be all rooms or all names
-* The full name of the resident must be specified
-* When adding multiple residents, each piece of information is separated by a comma
-* The information inputted is case-insensitive
-* If one or more of the given information is invalid, an error message is outputted and none of the residents are added to the event
+* Residents can be given in the form of name or room, but all has to be all rooms or all names
+* The resident's name/room inputted has to be invovled with the `Event` under the `Event` Tab, to be removed from that event
+* When removing multiple names/rooms, each resident's name/room is separated by a comma
+* The resident's name/room inputted is case-insensitive
+* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room is removed from the event
 
 Examples:
 * `exclude 1 r/A101` removes the resident who stays in room A101 from the first event in the address book
@@ -549,8 +550,8 @@ Command | Format | Examples
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
 **Edit** | `edit INDEX [FLAG/UPDATED_PARTICULARS]…` | `edit 1 n/Football Training l/Field`
 **Delete** | `delete INDEX…` | `delete 1 2 3`
-**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` | `include 1 r/A102, E416`
-**Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` | `exclude 1 r/A102, E416`
+**Include** | `include INDEX r/RESIDENTS` | `include 1 r/A102, E416`
+**Exclude** | `exclude INDEX r/RESIDENTS` | `exclude 1 r/A102, E416`
 **Sort** | `sort by/FIELD o/ORDER` | `sort by/c o/d`
 
 ### Commons
