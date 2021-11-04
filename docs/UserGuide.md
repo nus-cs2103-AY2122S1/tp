@@ -66,6 +66,7 @@ Dangerous or potentially negative actions are displayed here
     - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
+
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
 ### Command syntax
@@ -107,7 +108,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 
 <div markdown="block" class="alert alert-warning">
 
-:information_source: **Notes:**<br>
+:information_source: **Notes:**
 ### Date Time Formatting
 
 * All fields that require **both** `Date` and `Time` in RHRH are accepted if they follow the format below, where the 

@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/javiier-pzk.png" width="200px">
 
 [[github](https://github.com/javiier-pzk)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/javiier-pzk.md)]
 
 * Role: Team Lead
 * Responsibilities: In charge of deliverables, deadlines, scheduling and tracking
@@ -32,7 +32,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/clementkfj.png" width="200px">
 
 [[github](http://github.com/clementkfj)] 
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/clementkfj.md)]
 
 * Role: Git and IntelliJ Expert
 * Responsibilities: Integration and helping the team with Git issues
