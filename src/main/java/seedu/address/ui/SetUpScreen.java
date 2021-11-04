@@ -10,9 +10,9 @@ import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.PasswordUtil;
 import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.PasswordCommand;
-import seedu.address.logic.parser.PasswordCommandParser;
 
 public class SetUpScreen extends UiPart<Stage> {
     private static final String FXML = "SetUpPassword.fxml";
@@ -70,7 +70,7 @@ public class SetUpScreen extends UiPart<Stage> {
     }
 
     private void handleNewPassword() {
-        if (!PasswordCommandParser.isValidPassword(userInputPassword.getText())) {
+        if (!PasswordUtil.isValidPassword(userInputPassword.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
             userInputPassword.clear();
             userConfirmPassword.clear();
