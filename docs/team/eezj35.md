@@ -60,5 +60,7 @@ Given below are my contributions to the project.
     * Update model class diagram [\#168](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/168)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#287](https://github.com/AY2122S1-CS2103T-F13-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me), [\#160](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/160), [\#153](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153), [\#151](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/151), [\#140](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/140), 
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
+  * PRs reviewed (with non-trivial review comments): [\#287](https://github.com/AY2122S1-CS2103T-F13-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me), [\#160](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/160), [\#153](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153), [\#151](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/151), [\#140](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/140)
+
+* **Tools**:
+  * Utilize SceneBuilder to build GUI Layout
