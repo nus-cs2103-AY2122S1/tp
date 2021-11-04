@@ -376,6 +376,29 @@ Given below is an example usage scenario:
 3. Statistics of the relevant visits and last visits are calculated and returned on the main panel.
 4. `CommandResult` object is instantiated and returned to `LogicManager`.
 
+### Download command
+
+#### Implementation details
+
+The download command takes the `data\addressbook.json` file and converts it to a CSV file, then downloads it onto a directory of the user's choice.
+
+It makes use of polymorphism and is similar in implementation to other commands in SeniorLove:
+
+- `DownloadCommand` extends `Command`
+
+Given below is an example usage scenario:
+
+1. User inputs the download command.
+2. The `DownloadCommand#execute(Model model)` method is called.
+3. The user is prompted to select a directory to download the data to, and the data is downloaded onto the chosen directory.
+4. `CommandResult` object is instantiated and returned to `LogicManager`.
+
+#### Design choices
+
+- Converting JSON to CSV:
+
+  While it is possible to simply export the `addressbook.json` file as a JSON file, we decided to reformat the JSON file as a CSV file because we thought it would be make the data more readable. The JSON file formats elderly information in a way that is easier to query, and organises them by elderly. Converting to a CSV file allows us to display separate data fields as their own columns, making it easier to read.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
