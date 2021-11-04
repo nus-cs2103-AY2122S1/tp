@@ -2,13 +2,29 @@
 layout: page
 title: User Guide
 ---
-
-Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts including employees, suppliers and customers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RHRH can get your contact management tasks done faster than traditional GUI apps.
+## Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Overview
+Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts including employees, suppliers and customers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RHRH can get your contact management tasks done faster than traditional GUI apps.
+
+## Information about this user guide
+
+### Purpose
+This user guide aims to:
+* Show first time users how to use RHRH
+* Provide a [summary of all commands](#command-summary) supported by RHRH
+* Show [details of all commands](#features) if users face any issues while using RHRH or require a more in depth 
+  explanation of the  commands
+* Answer some [frequently asked questions](#faq)
+
+### Target Audience
+As RHRH is optimised for CLI users, it is targeted towards restaurant managers who can type fast and wish to 
+streamline their restaurant operations by having an easy and efficient way to manage their customers, employees, 
+suppliers and reservations.
 
 ## Getting Started
 
@@ -36,9 +52,12 @@ Dangerous or potentially negative actions are displayed here
 
 2. Download the latest `rhrh.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your RHRH.
+3. Copy the file to the folder you want to use as the _home folder_ for RHRH.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
+4. Double-click the file to start the app. If double-clicking the file does not work for you, from the command line, 
+   navigate to the folder used as the _home folder_ for RHRH and run `java -jar rhrh.jar`. The GUI similar to the 
+   below should 
+   appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
