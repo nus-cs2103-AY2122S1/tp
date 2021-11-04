@@ -97,7 +97,7 @@ public class VersionedModelManagerTest {
     @Test
     public void equals() {
         AcademyDirectory academyDirectory = new AcademyDirectoryBuilder().withStudent(ALICE)
-                                                    .withStudent(BENSON).build();
+                .withStudent(BENSON).build();
         AcademyDirectory differentAcademyDirectory = new AcademyDirectory();
         UserPrefs userPrefs = new UserPrefs();
 

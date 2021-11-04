@@ -6,6 +6,7 @@ import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNu
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.VersionedModel;
 
 /**
@@ -52,12 +53,15 @@ public class HelpCommand extends Command {
             throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
         }
         model.setAdditionalViewType(AdditionalViewType.HELP);
+        model.setAdditionalInfo(AdditionalInfo.of(helpMessage));
+        CommandResult commandResult;
         if (isGeneralHelp) {
-            return new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, this.helpMessage);
+            commandResult = new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, true, false);
         } else {
-            return new CommandResult(String.format(MESSAGE_HELP_SUCCESS_SPECIFIC, this.commandWord),
-                    this.helpMessage);
+            commandResult = new CommandResult(String.format(MESSAGE_HELP_SUCCESS_SPECIFIC, this.commandWord),
+                    true, false);
         }
+        return commandResult;
     }
 
     @Override
@@ -69,6 +73,7 @@ public class HelpCommand extends Command {
             return false;
         }
         HelpCommand curr = (HelpCommand) obj;
-        return curr.helpMessage.equals(this.helpMessage) && curr.commandWord.equals(this.commandWord);
+        return curr.helpMessage.equals(this.helpMessage)
+                && curr.commandWord.equals(this.commandWord);
     }
 }

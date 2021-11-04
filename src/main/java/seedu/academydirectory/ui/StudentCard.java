@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.Student;
 
 /**
@@ -28,6 +30,7 @@ public class StudentCard extends UiPart<Region> {
      * or an exception will be thrown by JavaFX during runtime.
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AcademyDirectory level 4</a>
+     * TODO: Change view layout of student card later
      */
     private final Student student;
 
@@ -55,14 +58,14 @@ public class StudentCard extends UiPart<Region> {
     private ImageView image;
 
     private int displayedIndex;
-    private CommandBox commandBox;
+    private CommandExecutor commandExecutor;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      * @param student student to be displayed
      * @param displayedIndex index of the student
      */
-    public StudentCard(Student student, int displayedIndex, CommandBox commandBox) {
+    public StudentCard(Student student, int displayedIndex, CommandExecutor commandExecutor) {
         super(FXML);
         this.student = student;
         this.displayedIndex = displayedIndex;
@@ -79,7 +82,7 @@ public class StudentCard extends UiPart<Region> {
         // Studio Record, Assessment, and Telegram will be removed for better aesthetics
         container.getChildren().removeAll(studioRecord, assessment, telegram);
         image.setImage(new Image("/images/student.png"));
-        this.commandBox = commandBox;
+        this.commandExecutor = commandExecutor;
     }
 
     @Override
@@ -107,6 +110,10 @@ public class StudentCard extends UiPart<Region> {
     public void viewFullInformation() {
         logger.info("Item selected");
         String commandEquivalent = "view " + this.displayedIndex;
-        commandBox.execute(commandEquivalent);
+        try {
+            commandExecutor.execute(commandEquivalent);
+        } catch (ParseException | CommandException e) {
+            logger.info("This should not be reached");
+        }
     }
 }

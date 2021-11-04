@@ -30,7 +30,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status should only be 0 or 1, "
             + "with 0 indicating absence while 1 indicates the student was present.";
     public static final String MESSAGE_INVALID_PARTICIPATION_STATUS =
-            "Change in Participation must be between -500 and 500 inclusive.";
+            "Change in Participation must be between -100 and 100.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -238,5 +238,4 @@ public class ParserUtil {
             return false;
         }
     }
-
 }

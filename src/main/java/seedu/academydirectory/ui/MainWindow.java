@@ -15,6 +15,8 @@ import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.model.AdditionalInfo;
+import seedu.academydirectory.model.AdditionalViewModel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -93,9 +95,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
 
-        appMenu = new AppMenu(commandBox);
+        appMenu = new AppMenu(this::executeCommand);
 
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), this::executeCommand);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -129,7 +131,9 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
-    public void showHelpFrom(String helpMessage) {
+    public void showHelpFrom(AdditionalViewModel additionalViewModel) {
+        AdditionalInfo<?> additionalInfo = additionalViewModel.getAdditionalInfo();
+        String helpMessage = (String) additionalInfo.get();
         this.helpWindow.setHelpMessage(helpMessage);
         if (!helpWindow.isShowing()) {
             helpWindow.show();
@@ -169,12 +173,14 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            AdditionalViewModel additionalViewModel = logic.getAdditionalViewModel();
             logger.info("Result: " + commandResult.getFeedbackToUser());
+
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            visualizerDisplay.handleAdditionalInfo(logic.getAdditionalViewModel());
+            visualizerDisplay.handleAdditionalInfo(additionalViewModel);
 
             if (commandResult.isShowHelp()) {
-                showHelpFrom(commandResult.getHelpContent());
+                showHelpFrom(additionalViewModel);
             }
 
             if (commandResult.isExit()) {

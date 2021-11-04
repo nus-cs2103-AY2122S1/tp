@@ -24,6 +24,7 @@ import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
+import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.InformationContainsKeywordsPredicate;
 import seedu.academydirectory.model.student.Student;
@@ -45,7 +46,6 @@ public class AcademyDirectoryParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
@@ -67,7 +67,6 @@ public class AcademyDirectoryParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -81,7 +80,6 @@ public class AcademyDirectoryParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -95,6 +93,11 @@ public class AcademyDirectoryParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " grade") instanceof HelpCommand);
         assertThrows(ParseException.class, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " me"));
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " 2") instanceof ViewCommand);
     }
 
     @Test
