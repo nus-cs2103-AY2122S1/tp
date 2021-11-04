@@ -21,13 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.ClassCode;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentMark;
+import seedu.address.model.student.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
@@ -92,7 +86,7 @@ public class EditCommand extends Command {
 
         TutorialClass toCheckTutorialClass = new TutorialClass(editedStudent.getClassCode(),
                 new Schedule("dummy, dummy"), new HashSet<Tag>());
-        if (!model.hasTutorialClass(toCheckTutorialClass)) {
+        if (toCheckTutorialClass.equals(new EmptyClassCode()) || !model.hasTutorialClass(toCheckTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }
 

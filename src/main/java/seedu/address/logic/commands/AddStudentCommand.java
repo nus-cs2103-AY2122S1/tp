@@ -12,6 +12,7 @@ import java.util.HashSet;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.EmptyClassCode;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
@@ -68,7 +69,7 @@ public class AddStudentCommand extends Command {
         // Check tutorial class has been created before the classCode is assigned.
         TutorialClass toCheckTutorialClass = new TutorialClass(toAdd.getClassCode(),
                 new Schedule("dummy, dummy"), new HashSet<Tag>());
-        if (!model.hasTutorialClass(toCheckTutorialClass)) {
+        if (toCheckTutorialClass.equals(new EmptyClassCode()) || !model.hasTutorialClass(toCheckTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }
 

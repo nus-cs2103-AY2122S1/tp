@@ -268,11 +268,11 @@ Given below is an example of how the tutorial class features can be used:
 Step 1. The user launches the application for the first time. The `UniqueTutorialClassList` would be derived from the
 initial ClassMATE state, and all tutorial classes stored will be displayed.
 
-Step 2. The user executes an `addc c/G00 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
+Step 2. The user executes an `addc c/G01 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
 state of ClassMATE. The updated `UniqueTutorialClassList` will be displayed in the `ClassListPanel`
 to the user.
 
-Step 3. The user executes a `findc G00` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
+Step 3. The user executes a `findc G01` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
 of tutorial classes. The updated filtered list consisting of te results of the search query will be displayed to the user.
 
 Step 4. The user executes a  `viewc 1` command. The `viewc` command updates the `FilteredList` of `TutorialCLass`es to only display the class at the

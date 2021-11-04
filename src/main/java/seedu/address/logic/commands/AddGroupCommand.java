@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.EmptyClassCode;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
@@ -45,7 +46,7 @@ public class AddGroupCommand extends Command {
         requireNonNull(model);
 
         // check if tutorial class already exists in ClassMATE
-        if (!model.hasTutorialClass(toAddTutorialClass)) {
+        if (toAddTutorialClass.equals(new EmptyClassCode()) || !model.hasTutorialClass(toAddTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }
 

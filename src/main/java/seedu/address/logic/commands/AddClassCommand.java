@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.EmptyClassCode;
 import seedu.address.model.tutorialclass.TutorialClass;
 
 public class AddClassCommand extends Command {
@@ -25,6 +26,7 @@ public class AddClassCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New class added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLASS = "This class already exists in Classmate";
+    public static final String MESSAGE_EMPTY_CLASS = "The class code 'G00' is invalid.";
 
     private final TutorialClass toAdd;
 
@@ -41,6 +43,10 @@ public class AddClassCommand extends Command {
         requireNonNull(model);
         if (model.hasTutorialClass(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
+        }
+
+        if (toAdd.equals(new EmptyClassCode())) {
+            throw new CommandException(MESSAGE_EMPTY_CLASS);
         }
 
         model.addTutorialClass(toAdd);
