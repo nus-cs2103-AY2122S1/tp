@@ -38,4 +38,3 @@ Given below are my contributions to the project.
     * PRs reviewed (with non-trivial review comments): [\#57](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/57),
       [\#89](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/89), [\#100](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/100)
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2122S1-CS2103T-W12-4/tp/issues/121), [2](https://github.com/AY2122S1-CS2103T-W12-4/tp/issues/124), [3](https://github.com/AY2122S1-CS2103T-W12-4/tp/issues/122))
-    

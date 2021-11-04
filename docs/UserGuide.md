@@ -234,7 +234,7 @@ Undoes a previously executed command. `undo` can reverse any commands executed a
 
 After executing the `undo` command, the remaining number of commands that can be undid is displayed. For example, the following output shows that there are 2 more commands that can be undid; the `undo` command can be executed 2 more times.
 
-> Undo successful  
+> Undo successful
 > Remaining undo count: 2
 
 Format: `undo`
@@ -245,7 +245,7 @@ Re-performs a command that was undone. `redo` can redo any undone command up to 
 
 After executing the `redo` command, the remaining number of commands that can be redone is displayed. For example, the following output shows that there are 3 more commands that can be redone.
 
-> Undo successful  
+> Undo successful
 > Remaining undo count: 3
 
 Format: `redo`
