@@ -33,6 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE_QUIZ = "2022-02-21";
     public static final String VALID_TAG_MODULE = "CS1234";
     public static final String VALID_TAG_CCA = "CCA";
+    public static final String DUPLICATE_DATE_QUIZ = "2021-12-11";
+    public static final String DUPLICATE_TAG_MODULE = "CS1234";
 
     public static final String NAME_DESC_ASSIGNMENT = " " + PREFIX_NAME + VALID_NAME_ASSIGNMENT;
     public static final String NAME_DESC_QUIZ = " " + PREFIX_NAME + VALID_NAME_QUIZ;

@@ -3,6 +3,8 @@ package seedu.unify.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.unify.logic.commands.CommandTestUtil.DUPLICATE_DATE_QUIZ;
+import static seedu.unify.logic.commands.CommandTestUtil.DUPLICATE_TAG_MODULE;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_QUIZ;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_MODULE;
 import static seedu.unify.testutil.Assert.assertThrows;
@@ -46,7 +48,7 @@ public class UniFyTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE)
+        Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(DUPLICATE_DATE_QUIZ).withTags(DUPLICATE_TAG_MODULE)
                 .build();
         List<Task> newTasks = Arrays.asList(CS1234_QUIZ, editedAlice);
         UniFyStub newData = new UniFyStub(newTasks);
@@ -71,11 +73,11 @@ public class UniFyTest {
     }
 
     @Test
-    public void hasTask_taskWithSameIdentityFieldsInUniFy_returnsTrue() {
+    public void hasTask_taskWithSameTaskNameInUniFy_returnsFalse() {
         uniFy.addTask(CS1234_QUIZ);
         Task editedAlice = new TaskBuilder(CS1234_QUIZ).withDate(VALID_DATE_QUIZ).withTags(VALID_TAG_MODULE)
                 .build();
-        assertTrue(uniFy.hasTask(editedAlice));
+        assertFalse(uniFy.hasTask(editedAlice));
     }
 
     @Test
