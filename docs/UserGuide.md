@@ -64,7 +64,7 @@ Below is a list that highlights some of our special features.
 | Feature | Description  |
 | ------- | ------------ |
 | Data Security <span class="badge badge-pill bg-success text-white">NEW</span> | The application data is protected by industry standard [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption. |
-| Spreadsheets Support <span class="badge badge-pill bg-success text-white">NEW</span> | SPAM supports imports from and exports to _.csv_ files, which are compatible with Microsoft Excel and most modern day marketing software. |
+| Spreadsheets Support <span class="badge badge-pill bg-success text-white">NEW</span> | SPAM supports imports from and exports to _.csv_ files, which are compatible with Microsoft Excel and most modern-day marketing software. |
 | Contacts Management | SPAM allows you to create, add, edit and delete contacts that are locally stored on your computer. | 
 
 ---
