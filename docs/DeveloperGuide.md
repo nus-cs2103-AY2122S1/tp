@@ -877,8 +877,11 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.
 
     2. Test case: `tag -a 1 t/Immunocompromised`<br>
-       Expected: A new tag `Immunocompromised` is added to the first patient. Details of the edited contact are shown in the status message.
-
+       1. If the patient does not have a `Immunocompromised` tag
+          Expected: A new tag `Immunocompromised` is added to the first patient. Details of the edited contact are shown in the status message.
+       2. If the patient has a `Immunocompromised` tag
+          Expected: No tag is added to the patient. Response box displays error message: "The tag already exists."
+       
     3. Test case: `tag -a 1 t/`<br>
        Expected: No tag is added to the patient. Response box displays error message: "A tag must be provided."
 
@@ -890,7 +893,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a tag to a patient while some patients are being shown
     1. Prerequisites: `toggle` to the `Patient` tab. List some patient using `find XYZ` (XYZ is the name of an existing patient).
-
+   
     2. Test cases are similar to those above.
 
 ### Deleting a tag of a patient <a name="delete-tag-patient"/>
@@ -899,8 +902,11 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Patient` tab. List all patients using the `list` command.<br>
        First patient has `Immunocompromised` tag. Tag can be added using the following command: `tag -a 1 t/Immunocompromised`.
 
-    3. Test case: `tag -d 1 t/Immunocompromised`<br>
+    2. Test case: `tag -d 1 t/Immunocompromised`<br>
        Expected: First patient's `Immunocompromised` tag is deleted. Details of the edited contact are shown in the status message.
+   
+    3. Test case: `tag -d 1 t/Osteopath`<br>
+       Expected: No tag is deleted from the patient. Response box displays error message: "The tag does not exist."
 
     4. Test case: `tag -d 1 t/`<br>
        Expected: No tag is deleted from the patient. Response box displays error message: "A tag must be provided."
@@ -976,7 +982,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: `toggle` to the `Doctor` tab. List all doctor using the `list` command.
 
     2. Test case: `tag -a 1 t/Pediatrician`<br>
-       Expected: `Pediatrician` is deleted from the first doctor. Details of the edited contact are shown in the status message.
+        1. If the first doctor does not have a `Pediatrician` tag
+           Expected: A new tag `Pediatrician` is added to the first doctor. Details of the edited contact are shown in the status message.
+        2. If the first doctor has a `Pediatrician` tag
+           Expected: No tag is added to the doctor. Response box displays error message: "The tag already exists."
 
     3. Test case: `tag -a 1 t/`<br>
        Expected: No tag is added to the doctor. Response box displays error message: "A tag must be provided."
@@ -989,7 +998,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a tag to a doctor while some doctors are being shown
     1. Prerequisites: `toggle` to the `Patient` tab. List some doctor using `find XYZ` (XYZ is the name of an existing doctor).
-
+      
     2. Test cases are similar to those above.
 
 ### Deleting a tag of a doctor <a name="delete-tag-doctor"/>
