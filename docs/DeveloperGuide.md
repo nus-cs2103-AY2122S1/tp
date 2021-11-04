@@ -154,13 +154,48 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Show feature
+### Edit feature
 
-#### Implementation
+The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes an ```edit``` command:
+![images](images/ShowCommandActivityDiagram.png)
+
+Given below is an example usage scenario and how the edit operation behaves at each step.
+
+Step 1. A valid command `edit 1 n/Ali` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ` 1 n/Ali`.
+
+Step 2. `EditCommandParser` is initialized based on the parse results and `EditCommandParser#parse()` is called.
+`EditCommandParser#parse()` then identifies the `Index` of the person to be edited from the preamble of the input (i.e. `1` in this case),
+as well as calls `ArgumentTokenizer#tokenize()` to obtain an `ArgumentMultimap` of prefixes to their respective arguments
+(i.e. mapping `n/` to `Ali`).
+
+Step 3. `ShowCommandParser#parse()` then initializes an `EditPersonDescriptor` that stores the details to edit the person with.
+Thus, `EditPersonDescriptor` will store `Ali` as the `Name` to be edited to.
+
+Step 4. `ShowCommandParser#parse()` then initializes an `EditCommand` with the `Index` and `EditPersonDescriptor` as an argument.
+`EditCommand#execute()` is then called, which creates a new `Person` and copies over the details to be edited
+from the `EditPersonDescriptor`.
+
+Step 5. If the new `Person` is not a duplicate of any existing applicant in the `AddressBook`, `Model#setPerson()` will be called to 
+change the specified applicant in the `AddressBook`. Finally, `Model#updateFilteredPersonList()` is called to reflect the changes in the
+list of applicants shown to the user.
+
+Step 6. Once the list is updated, `CommandResult` is initialized with `String` containing the details of the edited applicants.
+This CommandResult is then returned.
+
+The following sequence diagram shows how the edit operation works.
+![images](images/ShowCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+### Show feature
 
 The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
 ```AddressBook```. A ```List``` of unique ```String``` objects is created, with ```String``` content depending on
-the prefix provided by the user. 
+the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
 ![images](images/ShowCommandActivityDiagram.png)
@@ -186,11 +221,10 @@ The following sequence diagram shows how the show operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-
 ### Filter interview feature
 
 The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
-input. This command then updates the ```model``` accordingly. 
+input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
@@ -203,10 +237,10 @@ to identify the user input ` past`. `FilterInterviewCommandParser#parse` then in
 `FilterInterviewPastCommand`.
 
 Step 3. `FilterInterviewPastCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
-and filters for applicants that have interviews that have already passed. 
- 
-Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
-have interviews that have passed. This `CommandResult` is then returned. 
+and filters for applicants that have interviews that have already passed.
+
+Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants
+have interviews that have passed. This `CommandResult` is then returned.
 
 Given below is an example usage scenario and how the show operation behaves at each step.
 
@@ -246,9 +280,7 @@ and returned.
  **Note:** The lifeline for `FindCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
-
-
-### Datetime for interview 
+### Datetime for interview
 The `Interview` class accepts `yyyy-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
 - `yyyy` : year-of-era in 4 digits, e.g. `2021`
 - `M` : month-of-year, e.g. `7`, `07`
@@ -257,15 +289,11 @@ The `Interview` class accepts `yyyy-M-d, H:m` as parsed time format and provides
 - `m` : minute-of-hour, e.g. `30`
 
 `Interview#isValidInterviewTime` uses `java.time.format.DateTimeFormatter` to generate a formatter using `Interview#PARSE_FORMAT`,
-and checks for `DateTimeParseException` when parsing the input with the formatter via `LocalDate#parse()`. 
+and checks for `DateTimeParseException` when parsing the input with the formatter via `LocalDate#parse()`.
 
 The `display()` method uses `java.text.DateFormat` and returns the formatted time which is displayed GUI.
 
 For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a person John with interview time shown as `Jan 01 2021, 10:30`.
-
-
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -411,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The delete command is invalid.
     * 3a1. RecruitIn shows an error message.
-    
+
       Use case resumes at step 2.
 
 **Use case: UC05 - Finding an applicant**
@@ -441,13 +469,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to show search terms for a specific category.
 2. RecruitIn displays a list of search terms for the requested category.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. The input format is invalid.
     * 1a1. RecruitIn shows an error message.
-  
+
       Use case resumes at step 1.
 
 * 2a. The list of applicants is empty.
@@ -455,7 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. RecruitIn displays a message indicating that no search terms are available.
 
       Use case ends.
-    
+
 **Use case: UC07 - Marking an applicant**
 
 **MSS**
@@ -507,7 +535,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: UC09 - Deleting marked applicants**
 
 **MSS**
