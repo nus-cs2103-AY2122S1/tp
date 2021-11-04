@@ -32,6 +32,7 @@ public class AddModuleLessonCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS";
     public static final String MESSAGE_SUCCESS_BUT_CLASHING = "Warning: Lesson added clashes with existing lesson.\n"
+            + "Nonetheless, lesson is added.\n"
             + "New lesson added: %1$s";
 
     private final ModuleLesson toAdd;
