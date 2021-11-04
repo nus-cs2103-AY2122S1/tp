@@ -53,6 +53,9 @@ public class NextMeetingTest {
         assertFalse(NextMeeting.isValidNextMeeting("20-30")); // missing local part
         assertFalse(NextMeeting.isValidNextMeeting("24-12-2021, Starbucks @ UTown"));
         assertFalse(NextMeeting.isValidNextMeeting("24-12-2021 (10:00~12:00),    "));
+        assertFalse(NextMeeting.isValidNextMeeting("24-12-2021 (10:00~12:00), very very very long"
+                + "very very very long very very very long very very very long very very very long very very very long"
+                + "very very very long very very very long very very very long")); // exceed char limit (100)
 
         // valid next meeting
         assertTrue(NextMeeting.isValidNextMeeting("24-12-2021 (10:00~12:00), Starbucks @ UTown"));
