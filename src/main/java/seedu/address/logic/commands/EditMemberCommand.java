@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITIES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -17,6 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facility.AllocationMap;
+import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -77,8 +80,18 @@ public class EditMemberCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
+        for (Facility facility : model.getFilteredFacilityList()) {
+            AllocationMap updatedAllocationMap = facility.getAllocationMapClone();
+            updatedAllocationMap.removePersonOnAllDays(personToEdit);
+            Facility updatedFacility = new Facility(
+                    facility.getName(), facility.getLocation(), facility.getTime(), facility.getCapacity(),
+                    updatedAllocationMap);
+            model.setFacility(facility, updatedFacility);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
                 false, false, true);
     }
