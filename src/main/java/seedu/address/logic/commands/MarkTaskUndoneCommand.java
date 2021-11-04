@@ -39,7 +39,7 @@ public class MarkTaskUndoneCommand extends MarkTaskCommand {
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
             + PREFIX_STUDENT_ID + "STUDENT ID "
-            + PREFIX_TASK_ID + "TASK ID "
+            + PREFIX_TASK_ID + "TASK ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_STUDENT_ID + "A0123456X "

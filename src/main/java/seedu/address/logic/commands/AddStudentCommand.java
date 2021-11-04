@@ -40,7 +40,7 @@ public class AddStudentCommand extends AddCommand {
             + PREFIX_STUDENT_ID + "A1234567A "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TELE_HANDLE + "@johndoe "
-            + PREFIX_EMAIL + "johnd@example.com ";
+            + PREFIX_EMAIL + "johnd@example.com";
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the module";
