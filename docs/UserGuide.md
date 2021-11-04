@@ -119,6 +119,7 @@ you a lot of time!
 
 <div markdown="block" class="alert alert-info">
 
+<a name="command-format-info"></a>
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -141,12 +142,14 @@ you a lot of time!
   
 * Here is the meaning of some icons used in this section:
 
-:orange_book: _Description_: This is a brief description of what the command does.
+:orange_book: Brief description of what the command does.
 
-:page_with_curl: _Format_: `This is how you're supposed to type the command into the command line` (Refer to the section below on notes
-about the command format.)
+:camera: Explanation of included screenshots.
 
-:scroll: Notes: These are some notes on how the command can be used, along with any noteworthy examples or caveats.
+:page_with_curl: Format of the command. Refer to the [command format notes](#command-format-info) above for more 
+information.
+
+:scroll: Notes on the command behavior, with relevant examples.
 
 </div>
 
@@ -195,7 +198,7 @@ Make sure you switch to the Contacts tab before using these commands! They will 
 :orange_book: If you want to add a person to the contact list, you can use the _Add_ command. Only the contact's name 
 is compulsory during creation. 
 
-The above screenshot shows how you can use the _Add_ command to add a person with the following details to your contact 
+:camera: The above screenshot shows how you can use the _Add_ command to add a person with the following details to your contact 
 list:
 
 * Name: _Mitski Miyawaki_
@@ -221,7 +224,7 @@ Names should be no longer than 20 characters.
 
 :orange_book: If you want to modify the details of a specific contact, you can use the _Edit_ command.
 
-The above screenshot shows how the _Edit_ command can be used to edit the phone number and email of a contact.
+:camera: The above screenshot shows how the _Edit_ command can be used to edit the phone number and email of a contact.
 
 :page_with_curl: Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
@@ -248,7 +251,7 @@ The above screenshot shows how the _Edit_ command can be used to edit the phone 
 
 :orange_book: If you want to add new tags to a contact without replacing the old ones, you can use the _Tag_ command.
 
-The above screenshot shows how the _Tag_ command can be used to tag a contact with the tag "groupmate".
+:camera: The above screenshot shows how the _Tag_ command can be used to tag a contact with the tag "groupmate".
 
 :page_with_curl: Format: `tag INDEX t/TAG...`
 
@@ -284,7 +287,7 @@ Tags should be no longer than 15 characters.
 
 :orange_book: If you want to filter your contacts by tags, names, or any other details, you can use the _Find_ command.
 
-The above screenshot shows how the _Find_ command can be used to search for all contacts who are tagged as "friends".
+:camera: The above screenshot shows how the _Find_ command can be used to search for all contacts who are tagged as "friends".
 
 :page_with_curl: Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
@@ -354,7 +357,7 @@ of interest and more easily assign them to tasks.
 :orange_book: If you want to add a task to the task list, you can use the _Add_ command. Only task's description is 
 compulsory during creation. 
 
-The above screenshot shows how you can use the _Add_ command to add a task with the following details to your task list:
+:camera: The above screenshot shows how you can use the _Add_ command to add a task with the following details to your task list:
 * Description: _Submit PR_
 * Date and Time: _1 Nov 2021, 5:00 PM_
 * Tag(s): _Groupwork_
@@ -380,7 +383,7 @@ The above screenshot shows how you can use the _Add_ command to add a task with 
 
 :orange_book: If you want to modify the details of a specific task, you can use the _Edit_ command.
 
-The above screenshot shows how the _Edit_ command can be used to edit the date/time and assignee of a task.
+:camera: The above screenshot shows how the _Edit_ command can be used to edit the date/time and assignee of a task.
 
 :page_with_curl: Format: `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
@@ -415,7 +418,7 @@ The above screenshot shows how the _Edit_ command can be used to edit the date/t
 
 :orange_book: If you want to add more tags to a task without replacing the old tags, you can use the _Tag_ command.
 
-The above screenshot shows how the _Tag_ command is used to add the tag "urgent" to the task "Submit CS2100 Assignment
+:camera: The above screenshot shows how the _Tag_ command is used to add the tag "urgent" to the task "Submit CS2100 Assignment
 by 23:59".
 
 :page_with_curl: Format: `tag INDEX t/TAG...`
@@ -439,7 +442,7 @@ Tag names are only limited to 20 characters!
 :orange_book: If you want to assign more people to a task without replacing the old assignees, you can use the _Assign_ 
 command.
 
-The above screenshot shows how the _Assign_ command is used to assign "Alex Yeoh" to the task "Submit CS2100 Assignment
+:camera: The above screenshot shows how the _Assign_ command is used to assign "Alex Yeoh" to the task "Submit CS2100 Assignment
 by 23:59". 
 
 :page_with_curl: Format: `assign INDEX p/PERSON_INDEX...`
@@ -461,7 +464,7 @@ by 23:59".
 
 :orange_book: If you have completed a task, you can mark it as completed by using the _Complete_ command.
 
-The above screenshot shows how a completed task has its text greyed out and has a green tick next to its description. 
+:camera: The above screenshot shows how a completed task has its text greyed out and has a green tick next to its description. 
 An incomplete task has a red tick instead.
 
 :page_with_curl: Format: `complete INDEX`
@@ -498,7 +501,7 @@ An incomplete task has a red tick instead.
 :orange_book: If you want to filter your tasks by tags, assigned people, or any other details, 
 you can use the _Find_ command.
 
-The above screenshot shows how the _Find_ command can be used to search for all tasks marked "07:00 PM".
+:camera: The above screenshot shows how the _Find_ command can be used to search for all tasks marked "07:00 PM".
 
 :page_with_curl: Format: `find [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
@@ -528,7 +531,7 @@ without the prefix `d/`.
 :orange_book: If you want to view all of your upcoming tasks, you can use the _Upcoming_ command. Upcoming tasks are
 incomplete tasks whose Date/Time are after the current Date/Time.
 
-The above screenshot shows how the _Upcoming_ command is used to view all incomplete tasks after the current Date/Time.
+:camera: The above screenshot shows how the _Upcoming_ command is used to view all incomplete tasks after the current Date/Time.
 In this example, it was 25 October 2021, 09:16 PM.
 
 :page_with_curl: Format: `upcoming`
