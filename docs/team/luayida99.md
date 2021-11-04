@@ -18,7 +18,7 @@ Given below are my contributions to the project.
     * What it does: Allows the user to download existing elderly data from `data\addressbook.json` into a CSV file on their local machines.
     * Justification: Existing elderly data can be difficult to look through quickly because the information is displayed in GUI to be presentable and is not as compact. The ability to download existing elderly data into a CSV file makes it more convenient to access this data without having to launch SeniorLove again.
     * Highlights: The implementation was challenging because I had never dealt with JSON to CSV conversions before, and took some time to understand the documentation and write the code.
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t14&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=luayida99&tabRepo=AY2122S1-CS2103-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:

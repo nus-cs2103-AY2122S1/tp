@@ -165,7 +165,7 @@ The datetime is stored and displayed differently in the system for both efficien
 - It is stored as `yyyy-MM-dd HH:mm` in the system and for parsing of commands.
 - It is displayed as `dd LLL yyyy HH:mm` on the GUI.
 
-For example, time at two o'clock in the afternoon of 1st November 2021 will be stored or parsed as `2021-11-01 14:00` and displayed as `01 Nov 2021 14:00`
+For example, time at two o'clock in the afternoon of 1st November 2021 will be stored or parsed as `2021-11-01 14:00` and displayed as `01 Nov 2021 14:00`.
 
 ### Add command
 

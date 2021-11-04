@@ -14,7 +14,7 @@ Given below are my contributions to the project.
     * Justification: This feature is core to the functionality of SeniorLove, enabling the user to track the last time they visited any elderly.
     * Highlights: This enhancement affects existing commands and commands to be added in future. The implementation was challenging as it required changes to existing commands.
 
-* **New Feature**: 
+* **New Feature**:
     * Added a summary command that displays the statistics of overdue visits, recent last visits and upcoming visits.
     * Justification: This feature gives a brief overview of their recent and incoming work, and helps users to keep track of their visitation KPIs.
     * Highlights: This enhancement required the incorporation of new GUI and careful handling of its integration with the command logic.
