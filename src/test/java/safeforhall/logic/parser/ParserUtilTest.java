@@ -1,6 +1,7 @@
 package safeforhall.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static safeforhall.logic.commands.sort.SortPersonCommand.ASCENDING;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -41,6 +42,8 @@ public class ParserUtilTest {
     private static final String INVALID_VENUE = " ";
     private static final String INVALID_CAPACITY = "CAP5.0";
     private static final String INVALID_FILENAME = "file name";
+    private static final String INVALID_FIELD = "z";
+    private static final String INVALID_ORDER = "c";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -435,5 +438,89 @@ public class ParserUtilTest {
     @Test
     public void parseImportFileName_validValue_throwsParseException() throws Exception {
         assertThrows(ParseException.class, () -> ParserUtil.parseImportFileName(INVALID_FILENAME));
+    }
+
+    @Test
+    public void parsePersonField_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePersonField((String) null));
+    }
+
+    @Test
+    public void parsePersonField_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonField(EMPTY_STRING));
+    }
+
+    @Test
+    public void parsePersonField_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonField(INVALID_FIELD));
+    }
+
+    @Test
+    public void parsePersonField_validValue_returnsString() throws Exception {
+        String expectedField = Name.FIELD;
+        assertEquals(expectedField, ParserUtil.parsePersonField(Name.FIELD));
+    }
+
+    @Test
+    public void parsePersonField_validValueWithWhitespace_returnsTrimmedField() throws Exception {
+        String fieldWithWhitespace = WHITESPACE + Name.FIELD + WHITESPACE;
+        String expectedField = Name.FIELD;
+        assertEquals(expectedField, ParserUtil.parsePersonField(fieldWithWhitespace));
+    }
+
+    @Test
+    public void parseEventField_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEventField((String) null));
+    }
+
+    @Test
+    public void parseEventField_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEventField(EMPTY_STRING));
+    }
+
+    @Test
+    public void parseEventField_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEventField(INVALID_FIELD));
+    }
+
+    @Test
+    public void parseEventField_validValue_returnsString() throws Exception {
+        String expectedField = EventName.FIELD;
+        assertEquals(expectedField, ParserUtil.parseEventField(Name.FIELD));
+    }
+
+    @Test
+    public void parseEventField_validValueWithWhitespace_returnsTrimmedField() throws Exception {
+        String fieldWithWhitespace = WHITESPACE + EventName.FIELD + WHITESPACE;
+        String expectedField = EventName.FIELD;
+        assertEquals(expectedField, ParserUtil.parseEventField(fieldWithWhitespace));
+    }
+
+    @Test
+    public void parseOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOrder((String) null));
+    }
+
+    @Test
+    public void parseOrder_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOrder(EMPTY_STRING));
+    }
+
+    @Test
+    public void parseOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOrder(INVALID_ORDER));
+    }
+
+    @Test
+    public void parseOrder_validValue_returnsString() throws Exception {
+        String expectedOrder = ASCENDING;
+        assertEquals(expectedOrder, ParserUtil.parseOrder(ASCENDING));
+    }
+
+    @Test
+    public void parseOrder_validValueWithWhitespace_returnsTrimmedField() throws Exception {
+        String orderWithWhitespace = WHITESPACE + ASCENDING + WHITESPACE;
+        String expectedOrder = ASCENDING;
+        assertEquals(expectedOrder, ParserUtil.parseOrder(orderWithWhitespace));
     }
 }

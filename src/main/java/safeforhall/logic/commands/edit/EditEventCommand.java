@@ -28,7 +28,7 @@ import safeforhall.model.event.Venue;
 public class EditEventCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String PARAMETERS = "INDEXES [n/NAME] [d/DATE] [v/VENUE] [c/CAPACITY]";
+    public static final String PARAMETERS = "INDEXES [n/NAME] [d/DATE] [t/TIME] [v/VENUE] [c/CAPACITY]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed events list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -40,7 +40,7 @@ public class EditEventCommand extends Command {
             + "[" + CliSyntax.PREFIX_CAPACITY + "CAPACITY] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_DATE + "20-01-2021 "
-            + CliSyntax.PREFIX_TIME + "1200"
+            + CliSyntax.PREFIX_TIME + "1200 "
             + CliSyntax.PREFIX_CAPACITY + "50";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Events: \n%1$s";
@@ -156,7 +156,7 @@ public class EditEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, venue, capacity);
+            return CollectionUtil.isAnyNonNull(name, date, time, venue, capacity);
         }
 
         public void setName(EventName name) {

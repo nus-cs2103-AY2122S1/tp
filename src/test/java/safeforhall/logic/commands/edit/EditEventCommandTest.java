@@ -121,6 +121,18 @@ public class EditEventCommandTest {
     }
 
     @Test
+    public void execute_exceedEventCapacity_failure() {
+        Index indexLastEvent = Index.fromOneBased(model.getFilteredEventList().size());
+        EditEventDescriptor eventDescriptor = new EditEventDescriptorBuilder()
+                .withCapacity("2").build();
+        EditEventCommand editEventCommand = new EditEventCommand(indexLastEvent,
+                new EditEventDescriptorBuilder(eventDescriptor).build());
+
+        assertCommandFailure(editEventCommand, model, EditEventCommand.MESSAGE_EXCEED_CAPACITY);
+    }
+
+
+    @Test
     public void execute_invalidEventIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder()

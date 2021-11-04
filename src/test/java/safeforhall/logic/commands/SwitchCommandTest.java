@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
 
-public class ExitCommandTest {
+public class SwitchCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_exit_success() {
-        CommandResult expectedCommandResult =
-                new CommandResult(ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, false);
-        boolean result = expectedCommandResult.isExit();
+    public void execute_help_success() {
+        CommandResult expectedCommandResult = new CommandResult(SwitchCommand.SWITCH_SUCCESS_MESSAGE,
+                false, false, true);
+        boolean result = expectedCommandResult.isSwitchTab();
         assertEquals(result, true);
-        assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new SwitchCommand(), model, expectedCommandResult, expectedModel);
     }
 }

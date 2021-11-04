@@ -58,7 +58,7 @@ public class ViewPersonCommand extends Command {
     public void setSinglePerson(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         model.setSinglePerson(lastShownList.get(targetIndex.getZeroBased()));
     }

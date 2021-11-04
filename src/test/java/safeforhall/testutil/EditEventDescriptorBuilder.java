@@ -33,6 +33,7 @@ public class EditEventDescriptorBuilder {
         descriptor.setTime(event.getEventTime());
         descriptor.setVenue(event.getVenue());
         descriptor.setCapacity(event.getCapacity());
+        descriptor.setTime(event.getEventTime());
     }
 
     /**
