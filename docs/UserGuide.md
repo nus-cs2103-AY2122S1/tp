@@ -132,7 +132,7 @@ Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMI
 A policy can have any number of tags (including 0)
 </div>
 
-* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires, in YYYY-MM-DD format.
+* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires in YYYY-MM-DD format, optional.
 * Payment structure of the policy is defined by:
   * `PMT_AMOUNT`: fixed amount per payment
   * `PMT_FREQ` (optional): number of payments per year
@@ -147,7 +147,7 @@ A policy can have any number of tags (including 0)
 
 Examples:
 * `addpolicy n/full life e/2021-12-12 p/10000 c/10 1 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10% on 1 payment, tagged Aviva, belonging to client with index 1.
-* `addpolicy n/critical illness e/2025-10-10 p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, coverage till 2025-10-10, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
+* `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
 
 ### Listing All Policies : `listpolicy`
 
