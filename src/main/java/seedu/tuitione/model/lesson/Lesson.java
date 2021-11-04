@@ -23,7 +23,7 @@ public class Lesson {
     public static final String STUDENT_NOT_ENROLLED_CONSTRAINT = "%1$s is not enrolled for %2$s";
     public static final String STUDENT_ALREADY_ENROLLED_CONSTRAINT = "%1$s is already enrolled for %2$s";
     public static final String DIFFERENT_GRADE_CONSTRAINT = "%1$s is in a different grade from %2$s";
-    public static final String CONFLICTING_TIMINGS_CONSTRAINT = "%1$s has enrolled for lessons with "
+    public static final String CONFLICTING_TIMINGS_CONSTRAINT = "%1$s has enrolled for lessons "
             + "that conflict with %2$s";
     public static final String LESSON_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has " + MAX_LESSON_SIZE
             + " students enrolled, and cannot enroll anymore students.";

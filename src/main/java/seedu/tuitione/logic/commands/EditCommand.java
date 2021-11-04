@@ -61,8 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = HEADER_SUCCESS + "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = HEADER_ALERT + "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = HEADER_ALERT + MESSAGE_DUPLICATE_STUDENT_FOUND;
-    public static final String MESSAGE_TOO_MANY_REMARKS = HEADER_ALERT + REMARK_COUNT_CONSTRAINT
-            + "\nYou can only add %d more unique remark(s).";
+    public static final String MESSAGE_TOO_MANY_REMARKS = HEADER_ALERT + REMARK_COUNT_CONSTRAINT;
     public static final String MESSAGE_NO_SUCH_REMARK_FOUND = HEADER_ALERT + "The remark(s) you wish to "
             + "remove does not exist.";
 
@@ -135,21 +134,19 @@ public class EditCommand extends Command {
         Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(Collections.emptySet());
 
         Set<Remark> updatedRemarks = new HashSet<>(studentToEdit.getRemarks());
-        int numOfExistingRemarks = updatedRemarks.size();
 
         for (Remark remark : remarksToDelete) {
             if (!updatedRemarks.contains(remark)) {
-                throw new CommandException(String.format(MESSAGE_NO_SUCH_REMARK_FOUND));
+                throw new CommandException(MESSAGE_NO_SUCH_REMARK_FOUND);
             }
             updatedRemarks.remove(remark);
         }
 
         for (Remark remark : remarksToAdd) {
-            if (updatedRemarks.size() >= MAX_REMARK_SIZE) {
-                throw new CommandException(String.format(MESSAGE_TOO_MANY_REMARKS,
-                        MAX_REMARK_SIZE - numOfExistingRemarks));
-            }
             updatedRemarks.add(remark);
+            if (updatedRemarks.size() > MAX_REMARK_SIZE) {
+                throw new CommandException(MESSAGE_TOO_MANY_REMARKS);
+            }
         }
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,

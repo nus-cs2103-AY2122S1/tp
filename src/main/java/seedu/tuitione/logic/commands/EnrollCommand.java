@@ -73,11 +73,11 @@ public class EnrollCommand extends Command {
             alertMessageContainer = String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT,
                     studentToEnroll.getName(), lesson);
 
-        } else if (lesson.doesStudentHaveConflictingTimings(studentToEnroll)) {
-            alertMessageContainer = String.format(CONFLICTING_TIMINGS_CONSTRAINT, studentToEnroll.getName(), lesson);
-
         } else if (!lesson.isStudentOfSameGrade(studentToEnroll)) {
             alertMessageContainer = String.format(DIFFERENT_GRADE_CONSTRAINT, studentToEnroll.getName(), lesson);
+
+        } else if (lesson.doesStudentHaveConflictingTimings(studentToEnroll)) {
+            alertMessageContainer = String.format(CONFLICTING_TIMINGS_CONSTRAINT, studentToEnroll.getName(), lesson);
 
         } else if (!lesson.isAbleToEnrollMoreStudents()) {
             alertMessageContainer = String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, lesson);
