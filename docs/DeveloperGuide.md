@@ -1,15 +1,26 @@
 ---
-layout: page title: Developer Guide parent: For Developers nav_order: 1
+layout: page 
+title: Developer Guide 
+parent: For Developers 
+nav_order: 1
 ---
 
-* Table of Contents {:toc}
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+* BogoBogo is forked from [Addressbook Level 3](https://se-education.org/addressbook-level3/)
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Theme used: [just-the-docs](https://github.com/pmarsceill/just-the-docs)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -293,6 +304,70 @@ SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItem
   strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to
   update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
 
+### Controlling the Display Panel in UI
+
+The main panel of displayed items in the UI is managed by `DisplayListPanel` in the UI component. 
+This panel is dependent on changes made by command logic and should be able to be toggled to display different items 
+(e.g. inventory items, items in current order, list of transactions, etc.).
+
+To minimise coupling between the logic and UI component, `DisplayListPanel` adopts an **observer pattern**.
+
+![DisplayList1](images/ObserverPattern.png)
+
+`DisplayListPanel` observes an `ObservableList<Displayable>` which is controlled by a `DisplayList` in the model component.
+This way, any changes to model can be propagated to the ui without having to explicitly have knowledge about the ui component.
+
+`DisplayList` is composed of 3 lists.
+1. `DisplayList#filtered` A filtered list that is observed by `DisplayListPanel`.
+2. `DisplayList#displayed` An observable list that acts as the base for `DisplayList#filtered`. 
+Observes the current `DisplayList#source`.
+3. `DisplayList#source` An observable list that acts as the base for `DisplayList#displayed`.
+
+To propagate any changes to the filtered list, to be reflected to the ui, `DisplayList` can:
+
+1. **Set a predicate**. 
+
+Set a predicate on the filtered list. This is done when items to be displayed already exists in `DisplayList#source`.
+
+2. **Edit the source**.
+
+When the source is edited outside `DisplayList`, it will notify `DisplayList#displayed`, which will then copy and reflect all changes.
+This, resultantly updates the `DisplayList#filtered` and the display panel.
+
+3. **Update the source**.
+
+Call `DisplayList#setItems` which takes in an observable list of items. 
+`DisplayList` removes the listener from the previous source and adds a new listener to the new source.
+It also updates `DisplayList#displayed` to reflect the new source.
+This is done when we want to switch between lists to display. (e.g. displaying transactions instead of inventory)
+
+<div class="code-example bg-grey-lt-000">:information_source:
+<code>DisplayList</code> uses a 3 list approach because of the way JavaFX has implemented `FilteredList`.
+`FilteredList` is bound to a `ObservableList` which is bound to a regular `List`. 
+</div>
+
+### Displaying an object
+
+Any object can be displayed in the display panel by implementing the `Displayable` interface. 
+The object must implement `Displayable#asDisplayCard()` which should return a `UIPart<Region>` that will act as the object's list cell.
+
+![DisplayList3](images/ModelDisplayableClassDiagram.png)
+
+### Design Considerations
+
+**Time complexity**
+
+Each update to source requires DisplayList to copy over an entire list (complexity: _O(n)_).
+This is definitely inefficient since updates usually involve appending or removing an item from source.
+(e.g. when the user adds an item to the inventory).
+
+This inefficiency does not create observable latency given the envisioned scale of BogoBogo (1000 items).
+However, if BogoBogo is to be scaled up in the future, there might be a need for a more advanced implementation.
+
+Proposed upgrade: 
+Instead of relying on JavaFX's `ObservableList`, we can create a customised observable list that can reference multiple sources.
+From there, we should be able to toggle which source we want to be displaying on the `filteredlist`. This way, copying is no longer required.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -339,6 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise)
 
+```
 **UC01 - Adding an item**
 
 **Actor:** User
@@ -369,7 +445,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
       Use case ends.
-
+```
+```
 **UC02 - Deleting an item**
 
 **Actor:** User
@@ -397,7 +474,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. BogoBogo notifies user of the mismatch.
 
       Use case ends.
-
+```
+```
 **UC03 - Finding items through matching keywords**
 
 **Actor:** User
@@ -425,7 +503,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. BogoBogo notifies user that only one field can be inputted.
 
       Use case ends.
-
+```
+```
 **UC04 - Placing an Order**
 
 **Actor:** User
@@ -465,7 +544,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 7a1. BogoBogo notifies user that the order is empty.
 
       Use case ends.
-
+```
+```
 **UC05 - Remove an item from order**
 
 **Actor:** User
@@ -494,7 +574,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. BogoBogo notifies user the specified item is not in the order.
 
       Use case ends.
-
+```
+```
 **UC06 - Sorting**
 
 **Actor:** User
@@ -512,8 +593,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
 
       Use case ends.
-
-**UC06 - Help**
+```
+```
+**UC07 - Help**
 
 **Actor:** User
 
@@ -535,8 +617,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies the user that the command does not exist, then proceed to display URL to userguide.
 
       Use case ends.
-
-**UC07 - Remove certain amount of item**
+```
+```
+**UC08 - Remove certain amount of item**
 
 **Actor:** User
 
@@ -571,8 +654,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
 
       Use case ends.
-
-**UC08 - Edit an item**
+```
+```
+**UC09 - Edit an item**
 
 **Actor:** User
 
@@ -600,8 +684,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. BogoBogo notifies user that the new value specified is invalid.
 
       Use case ends
-
-**UC09 - Listing out inventory**
+```
+```
+**UC10 - Listing out inventory**
 
 **Actor:** User
 
@@ -611,8 +696,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. BogoBogo lists out all items in inventory.
 
    Use case ends
-
-**UC10 - Listing out order**
+```
+```
+**UC11 - Listing out order**
 
 **Actor:** User
 
@@ -626,11 +712,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. There is currently no order to list.
-    * 2a1. BogoBogo notifies user there is currently no order.
-
-      Use case ends.
-
-**UC11 - Exit the application**
+  * 2a1. BogoBogo notifies user there is currently no order.
+    
+    Use case ends.
+```
+```
+**UC12 - Exit the application**
 
 **Actor:** User
 
@@ -639,9 +726,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to exit the application
 2. BogoBogo acknowledges the request and exits.
 
-   Use case ends.
-
-**UC12 - Clear the inventory**
+    Use case ends.
+```
+```
+**UC13 - Clear the inventory**
 
 **Actor:** User
 
@@ -649,8 +737,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to clear the inventory.
 2. BogoBogo acknowledges the request and clears the inventory.
-
-   Use case ends.
+    
+    Use case ends.
+```
 
 ### Non-Functional Requirements
 
