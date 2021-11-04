@@ -328,10 +328,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions:**
-   > 1a. UNIon detects error in the format specified by user.
-      >> 1a1. No new folder is created\
-      >> 1a2. User keys folder name `mkdir` keyword.\
-      >> Steps 1a1-1a2 are repeated until the data entered are correct.
+* 1a. UNIon detects error in the format specified by user. 
+  * 1a1. No new folder is created.
+  * 1a2. User keys folder name `mkdir` keyword.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
 
 **System: UNIon**\
 **Use case: UC02 - Add a new contact to UNIon**\
@@ -347,10 +347,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions:**
-   > 1a. UNIon detects error in format given by user.
-      >> 1a1. No new contact was registered by UNIon\
-      >> 1a2. User inputs details after `Add` keyword.\
-      >> Steps 1a1-1a2 are repeated until the data format entered are correct.
+* 1a. UNIon detects error in format given by user.
+  * 1a1. No new contact was registered by UNIon\
+  * 1a2. User inputs details after `Add` keyword.\
+  * Steps 1a1-1a2 are repeated until the data format entered are correct.
 
 **System: UNIon**\
 **Use case: UC03 - Add existing contact to an existing folder**\
@@ -366,32 +366,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions:**
-   > 3a. User inputs an invalid index.
-      >> 3a1. Contact not added to folder.
-      >> 3a2. User inputs contact index to the named folder.\
-      >> Steps 3a1-3a2 are repeated until the data format entered are correct.
+* 3a. User inputs an invalid index.
+  * 3a1. Contact not added to folder.
+  * 3a2. User inputs contact index to the named folder.
+  * Steps 3a1-3a2 are repeated until the data format entered are correct.
+  
 
-   > 3b. User specifies a folder name that does not exist.
-      >> 3b1. Contact not added to any folder.
-      >> 3b2. User inputs contact index to named folder.\
-      >> Steps 3b1-3b2 are repeated until the data format entered are correct.
+* 3b. User specifies a folder name that does not exist.
+  * 3b1. Contact not added to any folder.
+  * 3b2. User inputs contact index to named folder.
+  * Steps 3b1-3b2 are repeated until the data format entered are correct.
 
 **System: UNIon**\
 **Use case: UC04 - Delete specified folder**\
 **Actor: User**\
 **Guarantees:** Folder specified is deleted from UNIon \
-**Preconditions:** Folder must already exist in UNIon
+**Preconditions:** Folder must already exist in UNIon\
 **MSS:**
    1. User specifies folder name after `rmdir`.
    2. UNIon removes the specified folder from its system.
 
-    Use case ends.
+Use case ends.
+
 
 **Extensions**
-   > 1a. UNIon detects error of input by user.
-      >> 1a1. Folder remains in the UNIon.\
-      >> 1a2. User re-specifies the folder to be removed.\
-      Steps 1a1 - 1a2 are repeated until data format is correct.
+* 1a. UNIon detects error of input by user.
+  * 1a1. Folder remains in the UNIon.
+  * 1a2. User re-specifies the folder to be removed.
+  * Steps 1a1 - 1a2 are repeated until data format is correct.
 
 **System: UNIon**\
 **Use case: UC05 - Remove all contacts**\
@@ -399,17 +401,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Guarantees:** All contacts are deleted from UNIon
 
 **MSS:**
-   1. User inputs command to remove all contacts
-   2. UNIon clears all the contacts it has stored till thus far.
+   1. User inputs command to remove all contacts.
+   2. UNIon clears all the contacts it has stored thus far.
 
    Use case ends.
 
 **Extensions**
-   > 1a. UNIon detects error of input by user.
-      >> 1a1. All contacts remain in UNIon.
-      >> 1a2. User re-inputs command.\
-      Steps 1a1 - 1a2 are repeated until data format is correct.
+* 1a. UNIon detects error of input by user.
+  * 1a1. All contacts remain in UNIon.
+  * 1a2. User re-inputs command.
+  * Steps 1a1 - 1a2 are repeated until data format is correct.
 
+**System: UNIon**\
+**Use case: UC06 - Remove specified contact from folder**\
+**Actor: User**\
+**Guarantees:** Contact specified is removed from folder\
+**Preconditions:** Folder and contact already exists in UNIon
+
+**MSS:**
+1. User inputs command to remove contact from folder.
+2. UNIon removes specified contact from folder.
+
+Use case ends.
+
+**Extensions**
+* 1a. Contact does not exist in folder.
+    * 1a1. Folder remains unchanged.
+    * 1a2. User re-inputs contact index to be removed.
+    * Steps 1a1 - 1a2 are repeated until data format is correct.
+    
+* 1b. Folder does not exist in UNIon.
+    * 1b1. Contact not removed from folder.
+    * 1b2. User re-inputs folder name for contact to be removed from.
+    * Steps 1b1 - 1b2 are repeated until data format is correct.    
+
+**System: UNIon**\
+**Use case: UC07 - Remove all folders**\
+**Actor: User**\
+**Guarantees:** All folders are deleted from UNIon
+
+**MSS:**
+1. User inputs command to remove all folders.
+2. UNIon clears all the folders it has stored thus far.
+
+Use case ends.
+
+**Extensions**
+* 1a. UNIon detects error of input by user.
+    * 1a1. All folders remain in UNIon.
+    * 1a2. User re-inputs command.
+    * Steps 1a1 - 1a2 are repeated until data format is correct.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -482,3 +523,31 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+The effort we put into UNIon was more than that of the individual project.
+While we did not have to start from scratch, since it is a brown-field project, there were more things that
+we had to do. One of the additional challenges were creating our scope, generating user
+stories and coming up with what our product would look like. Creating readable, succinct
+documentation was also challenging. Weekly meetings also took up more of our time, compared
+to the individual project. Moreover, we had internal deadlines to meet, putting 
+our time management to the test. Our team did a good job of delegating work and
+each person had their role to play. Each member took responsibility for one part of UNIon
+and had secondary responsibilities as well. 
+
+UNIon does reuse some code from AB3 when implementing folders. However, it was not 
+just a simple copy and paste. Because of the differing behaviours of folders and 
+persons, the code had to be adapted to quite a large extent to suit our purposes.
+For folders, only about 5% of the effort was saved by reusing the code from AB3.
+This mostly came in the form of saving time and effort from typing out the code and
+understanding how the different components interact with models like `Person`. Since
+`Folder` is a model as well, the `Person` served as an example to help us understand 
+how the models interacted with other components. However, the code from `Person` merely 
+served as the base. The difference in behaviour of folders and persons meant that we had 
+to come up with the rest of the code involving the behaviou of folders ourselves.
+
+UNIon deals with more entities than AB3, with both persons and folders. Not only does
+this make coding more difficult, testing is more difficult as well. The GUI of UNIon
+includes the display of folders as well. It was more difficult to ensure that UNIon
+runs smoothly with more entities present, creating more chances for bugs to sneak in.
