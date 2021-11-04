@@ -118,7 +118,7 @@ public class ParserUtil {
             compatibilityRating = Integer.parseInt(stringValue);
         } catch (NumberFormatException e) {
             if (stringValue.length() == 0) {
-                return new Compatibility(null); 
+                return new Compatibility(null);
             }
             throw new ParseException((Compatibility.MESSAGE_CONSTRAINTS));
         }
