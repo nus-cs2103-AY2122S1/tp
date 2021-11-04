@@ -23,8 +23,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
 
-        // no extension: require the user to give the exact file path
-        Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), "");
+        Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), ".csv");
 
         int groupCount = getCount(argMultimap, PREFIX_GROUP);
         int assessmentCount = getCount(argMultimap, PREFIX_ASSESSMENT);
@@ -35,7 +34,11 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
     private int getCount(ArgumentMultimap argumentMultimap, Prefix prefix) throws ParseException {
         try {
-            return argumentMultimap.getValue(prefix).map(String::trim).map(Integer::parseInt).orElse(0);
+            int count = argumentMultimap.getValue(prefix).map(String::trim).map(Integer::parseInt).orElse(0);
+            if (count < 0) {
+                throw new NumberFormatException();
+            }
+            return count;
         } catch (NumberFormatException e) {
             throw new ParseException(ImportCommand.MESSAGE_INVALID_NUMBER);
         }

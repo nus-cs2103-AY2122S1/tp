@@ -150,4 +150,15 @@ public class ImportCommandParserTest {
         assertParseSuccess(parser, FILE_DESC_INVALID_FILE
                 + GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_TYPICAL, expectedCommand);
     }
+
+    @Test
+    public void parse_invalidPath_failure() {
+        assertParseFailure(parser, " -f abc.png", String.format(ParserUtil.MESSAGE_WRONG_EXTENSION, ".csv"));
+
+        assertParseFailure(parser, " -f .", ParserUtil.MESSAGE_DIRECTORY);
+
+        assertParseFailure(parser, " -f ///\0.csv", ParserUtil.MESSAGE_INVALID_PATH);
+
+        assertParseFailure(parser, " -f ", ParserUtil.MESSAGE_EMPTY_PATH);
+    }
 }

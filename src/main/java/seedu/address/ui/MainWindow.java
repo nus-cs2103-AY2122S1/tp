@@ -22,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ShowCommand;
@@ -34,6 +35,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    public static final String GRAPH_SAVE_FAIL = "Graph failed to save";
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -248,7 +250,7 @@ public class MainWindow extends UiPart<Stage> {
         splitPane.setDividerPositions(divideRatio);
     }
 
-    private void saveGraph(Path savePath) {
+    private void saveGraph(Path savePath) throws CommandException {
         assert savePath != null;
         WritableImage img = graphDisplayPlaceholder.snapshot(new SnapshotParameters(), null);
         int width = (int) img.getWidth();
@@ -266,10 +268,10 @@ public class MainWindow extends UiPart<Stage> {
         File file = savePath.toFile();
 
         try {
+            FileUtil.createIfMissing(savePath);
             ImageIO.write(bimg, "png", file);
         } catch (IOException e) {
-            resultDisplay.setFeedbackToUser("Graph failed to save");
-            return;
+            throw new CommandException(GRAPH_SAVE_FAIL);
         }
 
         resultDisplay.setFeedbackToUser("Graph saved successfully at " + savePath);

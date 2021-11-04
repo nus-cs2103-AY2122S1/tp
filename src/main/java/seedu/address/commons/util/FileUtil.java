@@ -88,10 +88,13 @@ public class FileUtil {
      */
     private static Path getAppEnclosingFolder() {
         try {
+            // @@author jonas-chow-reused
+            // taken from https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file
             if (enclosingFolder == null) {
                 enclosingFolder = Path.of(new File(FileUtil.class.getProtectionDomain()
                         .getCodeSource().getLocation().toURI()).getPath()).getParent();
             }
+            // @@author jonas-chow
             return enclosingFolder;
         } catch (URISyntaxException e) {
             return null;
@@ -109,9 +112,9 @@ public class FileUtil {
     /**
      * Gets the path, relative to where the jar file is located.
      */
-    public static Path getRelativePath(Path path) {
+    public static String getRelativePathString(Path path) {
         return getAppEnclosingFolder() == null
-                ? path
-                : Path.of(".").resolve(getAppEnclosingFolder().relativize(path));
+                ? path.toString()
+                : Path.of(".").resolve(getAppEnclosingFolder().relativize(path)).toString();
     }
 }
