@@ -415,6 +415,8 @@ The encryption feature is implemented with the following classes:
 
 An encrypted file can only be decrypted with the same AES key that was used to encrypt it. In this case, the AES keys are generated solely using a password string supplied by the user. Multiple instances of AES keys are said to be the same if the password string used to generate these keys are the same. This definition of equality ensures the validity of the generated key across sessions.
 
+As a result of this implementation, the same encrypted file can be shared across devices as long as the supplied password is the same.
+
 The supplied password string must be 32 characters long (32 characters = 256 bits needed to generate the AES key). Passwords shorter than 32 characters will be padded with `"/"` to extend the number of bits. _Passwords longer than 32 characters are **not** supported._ As a consequence, the length and randomness of the supplied password make up the strength of the encryption. Shorter and less random passwords are most vulnerable to brute force attacks.
 
 #### Data file lifecycle
@@ -439,6 +441,37 @@ In the case when there is no data on startup, the following actions will take pl
 3. The temporary `.json` file is deleted.
 
 The data then proceed with the normal lifecycle per operation as described above.
+
+### Password
+#### Implementation
+
+The password is used to generate the `Encryption` in the `LogicManager`. As mentioned in the [`Encryption`](#Encryption) section, it will be used to encrypt and decrypt the data file. 
+
+The password feature applies to the following situations. Note that parts of the situation may be omitted for simplicity.
+
+#### First time set up
+
+The user will be asked to set up a new password if no data file has been detected. The diagram below summarises the workflow.
+
+![First time set up diagram](images/FlowSetUpPassword.png)
+
+The system first checks if the two password match. Then, the validity of the password is checked and valid password will be used to generate the `Encryption` in `LogicManager`.
+
+#### Subsequent logins
+
+The user will be asked to enter the password of the encrypted data file. The diagram below summarises the workflow.
+
+![Subsequent logins diagram](images/FlowLogIn.png)
+
+The system first checks if the password is valid. This is due to the fact that the `AES` encryption pads the password with `/` if the password is less than 32 characters. Therefore, it is necessary to check for the validity for proceeding with the decryption of the data file. Then, the password is used to generate a new `Encryption` and it is used to decrypt the data file. If the password is wrong, an exception will be thrown during the decryption and the user will be notified. Otherwise, the user will be able to log in and proceed with using the application.
+
+#### Changing password
+
+The user can change the password if they wish. The diagram below summarises the workflow.
+
+![Change password diagram](images/FlowChangePassword.png)
+
+The `PasswordCommandParser` checks the format and the validity of the new password. Then, the `LogicManager` will check if the old password supplied is correct. If the old password is correct, the `Encryption` in `LogicManager` will be updated and the data file will be encrypted with the new `Encryption`. This enables the changing of password.
 
 ### Find feature
 
