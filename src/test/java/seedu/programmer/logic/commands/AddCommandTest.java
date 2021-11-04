@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.logic.commands.exceptions.CommandException;
@@ -23,6 +24,7 @@ import seedu.programmer.model.ReadOnlyUserPrefs;
 import seedu.programmer.model.student.DisplayableObject;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.comparator.SortByLabNumber;
 import seedu.programmer.testutil.StudentBuilder;
 
 public class AddCommandTest {
@@ -53,6 +55,11 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
         assertEquals(List.of(validStudent), modelStub.studentsAdded);
+
+        ObservableList<DisplayableObject> expectedSelectedInformation = FXCollections.observableArrayList();
+        expectedSelectedInformation.add(validStudent);
+        expectedSelectedInformation.addAll(validStudent.getLabList());
+        assertEquals(expectedSelectedInformation, modelStub.getSelectedInformation());
     }
 
     // todo
@@ -99,6 +106,10 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private static class ModelStub implements Model {
+        private ObservableList<DisplayableObject> selectedInformation = FXCollections.observableArrayList();
+        private Student selectedStudent;
+        private List<Lab> labsTracker = new ArrayList<>();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -166,22 +177,34 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<DisplayableObject> getSelectedInformation() {
-            throw new AssertionError("This method should not be called.");
+            return selectedInformation;
         }
 
         @Override
         public Student getSelectedStudent() {
-            throw new AssertionError("This method should not be called.");
+            return selectedStudent;
         }
 
         @Override
         public void setSelectedStudent(Student target) {
-
+            this.selectedStudent = target;
+            if (selectedInformation.isEmpty()) {
+                this.selectedInformation.add(target);
+            } else {
+                ObservableList<Lab> labList = target.getLabList();
+                labList.sort(new SortByLabNumber());
+                this.selectedInformation.set(0, target);
+            }
         }
 
         @Override
         public void setSelectedLabs(List<Lab> labs) {
-
+            assert selectedInformation != null;
+            if (!(selectedInformation.size() == 1)) {
+                selectedInformation.remove(1, selectedInformation.size());
+            }
+            labs.sort(new SortByLabNumber());
+            selectedInformation.addAll(labs);
         }
 
         @Override
@@ -197,6 +220,10 @@ public class AddCommandTest {
         @Override
         public void clearLabsTracker() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        public List<Lab> getLabsTracker() {
+            return labsTracker;
         }
 
         @Override
