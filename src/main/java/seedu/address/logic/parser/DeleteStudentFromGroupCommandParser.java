@@ -7,27 +7,39 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
-public class AddGroupCommandParser implements Parser<AddGroupCommand> {
+
+public class DeleteStudentFromGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddGroupCommand
-     * and returns an AddGroupCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteStudentFromCommand
+     * and returns an DeleteStudentFromGroupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public AddGroupCommand parse(String args) throws ParseException {
+    public DeleteStudentFromGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromGroupCommand.MESSAGE_USAGE), ive);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE)) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentFromGroupCommand.MESSAGE_USAGE));
         }
 
         GroupNumber groupNumber = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPNUMBER).get());
@@ -36,7 +48,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         TutorialGroup tutorialGroup = new TutorialGroup(groupNumber, classCode, groupType);
 
-        return new AddGroupCommand(tutorialGroup);
+        return new DeleteStudentFromGroupCommand(index, tutorialGroup);
 
     }
 

@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddLastMarkCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddStudentToGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAllMarkCommand;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteLastMarkCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindClassCommand;
@@ -25,6 +27,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ViewClassCommand;
+import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -65,6 +68,9 @@ public class ClassmateParser {
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
+        case AddStudentToGroupCommand.COMMAND_WORD:
+            return new AddStudentToGroupCommandParser().parse(arguments);
+
         case AddLastMarkCommand.COMMAND_WORD:
             return new AddLastMarkCommandParser().parse(arguments);
 
@@ -80,6 +86,9 @@ public class ClassmateParser {
         case DeleteClassCommand.COMMAND_WORD:
             return new DeleteClassCommandParser().parse(arguments);
 
+        case DeleteStudentFromGroupCommand.COMMAND_WORD:
+            return new DeleteStudentFromGroupCommandParser().parse(arguments);
+
         case DeleteLastMarkCommand.COMMAND_WORD:
             return new DeleteLastMarkCommandParser().parse(arguments);
 
@@ -88,6 +97,9 @@ public class ClassmateParser {
 
         case ViewClassCommand.COMMAND_WORD:
             return new ViewClassCommandParser().parse(arguments);
+
+        case ViewGroupCommand.COMMAND_WORD:
+            return new ViewGroupCommandParser().parse(arguments);
 
         case ViewStudentCommand.COMMAND_WORD:
             return new ViewStudentCommandParser().parse(arguments);

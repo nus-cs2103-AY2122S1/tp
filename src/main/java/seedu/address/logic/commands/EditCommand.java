@@ -25,6 +25,7 @@ import seedu.address.model.student.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Edits the details of an existing student in the ClassMATE.
@@ -49,9 +50,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
-    public static final String MESSAGE_CLASS_NOT_EXIST = "The classCode is invalid as the tutorial class "
-            + "has not been created yet.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -81,13 +79,14 @@ public class EditCommand extends Command {
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_STUDENT);
         }
 
         TutorialClass toCheckTutorialClass = new TutorialClass(editedStudent.getClassCode(),
                 new Schedule("dummy, dummy"), new HashSet<Tag>());
+
         if (toCheckTutorialClass.equals(new EmptyClassCode()) || !model.hasTutorialClass(toCheckTutorialClass)) {
-            throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
+            throw new CommandException(Messages.MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
         model.setStudent(studentToEdit, editedStudent);
@@ -116,7 +115,8 @@ public class EditCommand extends Command {
                 updatedAddress,
                 updatedClassCode,
                 updatedTags,
-                studentToEdit.getMarks());
+                studentToEdit.getMarks(),
+                studentToEdit.getTutorialGroups());
     }
 
     @Override
@@ -149,6 +149,7 @@ public class EditCommand extends Command {
         private ClassCode classCode;
         private Set<Tag> tags;
         private List<StudentMark> marks;
+        private Set<TutorialGroup> tutorialGroups;
 
         public EditStudentDescriptor() {}
 
@@ -164,6 +165,7 @@ public class EditCommand extends Command {
             setClassCode(toCopy.classCode);
             setTags(toCopy.tags);
             setMarks(toCopy.marks);
+            setTutorialGroups(toCopy.tutorialGroups);
         }
 
         /**
@@ -245,6 +247,24 @@ public class EditCommand extends Command {
          */
         public Optional<List<StudentMark>> getMarks() {
             return (marks != null) ? Optional.of(Collections.unmodifiableList(marks)) : Optional.empty();
+        }
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTutorialGroups(Set<TutorialGroup> tutorialGroups) {
+            this.tutorialGroups = (tutorialGroups != null) ? new HashSet<>(tutorialGroups) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<TutorialGroup>> getTutorialGroups() {
+            return (tutorialGroups != null)
+                    ? Optional.of(Collections.unmodifiableSet(tutorialGroups))
+                    : Optional.empty();
         }
 
         @Override

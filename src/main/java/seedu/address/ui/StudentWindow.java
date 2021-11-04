@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -52,6 +53,9 @@ public class StudentWindow extends UiPart<Stage> {
     @FXML
     private FlowPane marks;
 
+    @FXML
+    private FlowPane tutorialGroups;
+
     /**
      * Creates a new StudentWindow.
      *
@@ -89,6 +93,7 @@ public class StudentWindow extends UiPart<Stage> {
     public void show(Student student) {
         tags.getChildren().clear();
         marks.getChildren().clear();
+        tutorialGroups.getChildren().clear();
         logger.fine("Showing student information.");
         message.setText(VIEW_MESSAGE);
         name.setText(student.getName().fullName);
@@ -99,6 +104,9 @@ public class StudentWindow extends UiPart<Stage> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getTutorialGroups().stream()
+                .sorted(Comparator.comparing(tutorialGroup -> tutorialGroup.toDisplayString()))
+                .forEach(tutorialGroup -> tutorialGroups.getChildren().add(new Label(tutorialGroup.toDisplayString())));
         List<StudentMark> studentMarkList = student.getMarks();
         int marksCount = studentMarkList.size();
         for (int i = marksCount; i > 0; i--) {
@@ -106,8 +114,14 @@ public class StudentWindow extends UiPart<Stage> {
             Label markToAdd = new Label(SESSION_LABEL + i + SPACE + mark.name() + SPACE);
             marks.getChildren().add(markToAdd);
         }
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+        stage.show();
+        stage.centerOnScreen();
+        stage.focusedProperty().addListener((ov, onHidden, onShown) -> {
+            if (!stage.isFocused()) {
+                Platform.runLater(stage::close);
+            }
+        });
     }
 
     /**

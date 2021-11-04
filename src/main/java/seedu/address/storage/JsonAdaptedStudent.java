@@ -18,6 +18,7 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -33,6 +34,7 @@ class JsonAdaptedStudent {
     private final String classCode;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedMark> marks = new ArrayList<>();
+    private final List<JsonAdaptedTutorialGroup> tutorialGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -42,7 +44,8 @@ class JsonAdaptedStudent {
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("classCode") String classCode,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                              @JsonProperty("marks") List<JsonAdaptedMark> marks) {
+                              @JsonProperty("marks") List<JsonAdaptedMark> marks,
+                              @JsonProperty("tutorialGroups") List<JsonAdaptedTutorialGroup> tutorialGroups) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +56,9 @@ class JsonAdaptedStudent {
         }
         if (marks != null) {
             this.marks.addAll(marks);
+        }
+        if (tutorialGroups != null) {
+            this.tutorialGroups.addAll(tutorialGroups);
         }
     }
 
@@ -71,6 +77,9 @@ class JsonAdaptedStudent {
         marks.addAll(source.getMarks().stream()
                 .map(JsonAdaptedMark::new)
                 .collect(Collectors.toList()));
+        tutorialGroups.addAll(source.getTutorialGroups().stream()
+                .map(JsonAdaptedTutorialGroup::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -87,6 +96,11 @@ class JsonAdaptedStudent {
         final List<StudentMark> studentMarks = new ArrayList<>();
         for (JsonAdaptedMark mark : marks) {
             studentMarks.add(mark.toModelType());
+        }
+
+        final List<TutorialGroup> studentTutorialGroups = new ArrayList<>();
+        for (JsonAdaptedTutorialGroup tutorialGroup : tutorialGroups) {
+            studentTutorialGroups.add(tutorialGroup.toModelType());
         }
 
         if (name == null) {
@@ -125,12 +139,17 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassCode.class.getSimpleName()));
         }
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
         final ClassCode modelClassCode = new ClassCode(classCode);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         final List<StudentMark> modelMarks = new ArrayList<>(studentMarks);
+        final Set<TutorialGroup> modelTutorialGroups = new HashSet<>(studentTutorialGroups);
 
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelClassCode, modelTags, modelMarks);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress,
+                modelClassCode, modelTags, modelMarks, modelTutorialGroups);
     }
 
 }

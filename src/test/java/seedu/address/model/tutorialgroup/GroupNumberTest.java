@@ -23,18 +23,18 @@ public class GroupNumberTest {
     @Test
     public void isValidName() {
         // null group name
-        assertThrows(NullPointerException.class, () -> GroupNumber.isValidGroupName(null));
+        assertThrows(NullPointerException.class, () -> GroupNumber.isValidGroupNumber(null));
 
         // invalid group name
-        assertFalse(GroupNumber.isValidGroupName("")); // empty string
-        assertFalse(GroupNumber.isValidGroupName(" ")); // spaces only
-        assertFalse(GroupNumber.isValidGroupName("^")); // only non-alphanumeric characters
-        assertFalse(GroupNumber.isValidGroupName("peter*")); // contains non-alphanumeric characters
-        assertFalse(GroupNumber.isValidGroupName("peter")); // contains alphabets
-        assertFalse(GroupNumber.isValidGroupName("12")); // contains more than one digit
+        assertFalse(GroupNumber.isValidGroupNumber("")); // empty string
+        assertFalse(GroupNumber.isValidGroupNumber(" ")); // spaces only
+        assertFalse(GroupNumber.isValidGroupNumber("^")); // only non-alphanumeric characters
+        assertFalse(GroupNumber.isValidGroupNumber("peter*")); // contains non-alphanumeric characters
+        assertFalse(GroupNumber.isValidGroupNumber("peter")); // contains alphabets
+        assertFalse(GroupNumber.isValidGroupNumber("12")); // contains more than one digit
 
         // valid group name
-        assertTrue(GroupNumber.isValidGroupName("1")); // alphabets only
-        assertTrue(GroupNumber.isValidGroupName("2")); // numbers only
+        assertTrue(GroupNumber.isValidGroupNumber("1")); // alphabets only
+        assertTrue(GroupNumber.isValidGroupNumber("2")); // numbers only
     }
 }
