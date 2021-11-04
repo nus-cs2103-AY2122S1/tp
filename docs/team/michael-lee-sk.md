@@ -46,7 +46,7 @@ Given below are my contributions to the project.
     * [Updated Enroll sequence, activity, and object diagrams](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/164)
     * [Added documentation for User Stories](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/116).
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [#95](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/95#discussion_r725457630), [#142](https://github.com/AY2122S1-    CS2103T-F13-4/tp/pull/142#discussion_r730911339).
+  * PRs reviewed (with non-trivial review comments): (Pull requests [#95](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/95#discussion_r725457630), [#142](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/142#discussion_r730911339)).
 
 * **Tools**:
   * Utilize SceneBuilder to build GUI Layout
