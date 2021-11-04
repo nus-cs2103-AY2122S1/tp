@@ -87,8 +87,7 @@ public class EditPersonCommand extends Command {
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
-            ArrayList<Event> personEvents = model.getPersonEvents(personToEdit, event -> true);
-            updatePersonEventResidentLists(model, personToEdit, editedPerson, personEvents);
+            updatePersonEventResidentLists(model, personToEdit, editedPerson);
             model.setPerson(personToEdit, editedPerson);
             editedResidents.append(count + 1).append(".\t").append(personToEdit.getName()).append("\n");
             count++;
@@ -97,8 +96,8 @@ public class EditPersonCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedResidents.toString()));
     }
 
-    private void updatePersonEventResidentLists(Model model, Person personToEdit,
-                                                Person editedPerson, ArrayList<Event> personEvents) {
+    private void updatePersonEventResidentLists(Model model, Person personToEdit, Person editedPerson) {
+        ArrayList<Event> personEvents = model.getPersonEvents(personToEdit, event -> true);
         for (Event event: personEvents) {
             ResidentList residents = event.getResidentList();
 
