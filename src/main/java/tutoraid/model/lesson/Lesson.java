@@ -101,7 +101,7 @@ public class Lesson {
     /**
      * Checks if the lesson is full.
      *
-     *
+     * @throws LessonExceedCapacityException if the lesson exceeds its capacity
      */
     public boolean isFull() throws LessonExceedCapacityException {
         if (students.numberOfStudents() > capacity.getCapacity()) {
