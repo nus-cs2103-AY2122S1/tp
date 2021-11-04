@@ -3,7 +3,9 @@ package seedu.address.model.module;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.*;
+import static seedu.address.testutil.TypicalModules.MODULE_1;
+import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
+import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +49,23 @@ class ModuleNameTest {
     }
 
     @Test
-    void testEquals() {
+    void equals() {
+        // same object -> returns true
+        assertTrue(moduleName1.equals(moduleName1));
+
+        // different objects -> returns false
+        assertFalse(moduleName1.equals(moduleName2));
+
+        // not a ModuleName object -> returns false
+        assertFalse(moduleName1.equals(MODULE_1));
+
+        // same String -> returns true
+        assertTrue(moduleName1.equals(new ModuleName(MODULE_NAME_0)));
+
+        // null -> returns false
+        assertFalse(moduleName1.equals(null));
+
+        // different String -> returns false
+        assertFalse(moduleName1.equals(new ModuleName(MODULE_NAME_1)));
     }
 }
