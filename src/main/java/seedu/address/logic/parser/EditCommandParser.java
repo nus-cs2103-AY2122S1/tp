@@ -37,9 +37,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String preamble = argMultimap.getPreamble();
+            Integer value = Integer.valueOf(preamble);
+            index = ParserUtil.parseIndex(String.valueOf(value));
+        } catch (NumberFormatException ne) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), ne);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
