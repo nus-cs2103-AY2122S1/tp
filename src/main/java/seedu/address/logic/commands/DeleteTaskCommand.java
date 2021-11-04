@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_TASK_NOT_FOUND;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
@@ -79,7 +80,7 @@ public class DeleteTaskCommand extends DeleteCommand {
                 return;
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, targetTaskId));
+        throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, targetTaskId));
     }
 
     /**
