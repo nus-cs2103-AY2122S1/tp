@@ -449,96 +449,6 @@ of the search.<br>
 
 <br>
 
-### Help Window
-
-#### Current Implementation
-The Help Windows is a separate window and displays the command usage for each of the command. To access the help
-window, users have 3 ways to get to the help page:
-1. Using the menu bar. Click on `Help` > `Help`.
-2. Pressing `F1` while using FAST.
-3. Typing the command `help [HELP_TOPIC]`.
-
-Using the methods 1 and 2 will open the Help Window to the default help window view (currently the Quick start page).
-
-However, using method 3 gives the user the option to directly access the help page of the respective HELP_TOPIC. For 
-example, using the command `help add` or `help Add` will open the Add command help page directly. Whereas if no HELP_TOPIC
-was given as parameter, or an invalid parameter is given, the default help window will open. Either ways, the help
-window will open to allow users to view help regardless. For reference, the current valid HELP_TOPICS are: 
-* `Quick Start`
-* `Add`
-* `Appointment`
-* `Edit Appointment`
-* `Delete Appointment`
-* `Mark Appointment`
-* `Clear`
-* `Delete`
-* `Edit`
-* `Find`
-* `List`
-* `Help`
-* `Remark`
-* `Sort`
-* `Statistic`
-* `Tag`
-* `Investment Plan Tag`
-* `Priority Tag`
-* `Misc`
-
-The activity diagram below shows the many ways user can utilise the help command 
-
-![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
-
-The way the help command is parsed is slightly different from the other commands. This is due to the help command not 
-interacting with the `model` and `storage` components like other commands. Instead, the parsing of the help command
-parameter is done by `ParserUtil` and verification of the parameter is done in `HelpWindow` itself. After verification, 
-`HelpWindow` will set the text of the `JavaFX::Label` to be the corresponding help topic. This is as shown in the sequence
-diagram as shown below.
-
-![Help Command Sequnce Diagram](images/HelpCommandParsingSequenceDiagram.png)
-
-
-To access the different commands' help page from within the help window, there is a dropdown selector which will 
-navigate to the different help pages. To achieve this, a `JavaFX::ComboBox` commandList was used which toggles between all 
-the available HELP_TOPICS. A method then reads from commandList's current value and displays the corresponding help message in a
-`JavaFX::Label`. A code snippet is shown below:
-
-`EventHandler<ActionEvent> event =
- e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));`
-
-#### Design Considerations
-
-**Aspect: How to access various commands' help page**
-* **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
-    * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate 
-            between the pages.
-    * Cons: To new users, might not be immediately obvious that the `JavaFX::ComboBox` can be interacted with. Users
-            might also miss the scroll bar and miss out some commands available.
-      
-* **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
-    * Pros: Easier to be understood by new users.
-    * Cons: Cumbersome to users as they would have to scroll down a lot to find their desired command. 
-    
-* **Alternative 3:** Using a Table of Contents (ToC) landing page.
-    * Pros: Users can see all the available commands at a glance and can select their desired commands easily.
-    * Cons: Users have to navigate back to the ToC to navigate between each command.
-    
-We decided on the first choice as it provided users with the greatest ease of use. It is also the fastest way of 
-navigating between help pages. While we understand that most experienced users might not need to access the help menu, 
-by providing them a quick and easy way to access the commands' help page when they do need it is very important.
-    
-**Aspect: How to access the help window**
-
-Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an 
-additional `[COMMAND]` paramater for the help command, which navigates to the selected command's help page.
-  * Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
-    first and selecting the command help page from there.
-  * Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
-
-To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
-valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
-window to the default page.
-
-<br>
 
 ### Multiple Delete feature
 
@@ -674,6 +584,97 @@ to sort the list of persons by their name.<br>
 
 <br>
 
+### Help Window
+
+#### Current Implementation
+The Help Windows is a separate window and displays the command usage for each of the command. To access the help
+window, users have 3 ways to get to the help page:
+1. Using the menu bar. Click on `Help` > `Help`.
+2. Pressing `F1` while using FAST.
+3. Typing the command `help [HELP_TOPIC]`.
+
+Using the methods 1 and 2 will open the Help Window to the default help window view (currently the Quick start page).
+
+However, using method 3 gives the user the option to directly access the help page of the respective HELP_TOPIC. For
+example, using the command `help add` or `help Add` will open the Add command help page directly. Whereas if no HELP_TOPIC
+was given as parameter, or an invalid parameter is given, the default help window will open. Either ways, the help
+window will open to allow users to view help regardless. For reference, the current valid HELP_TOPICS are:
+* `Quick Start`
+* `Add`
+* `Appointment`
+* `Edit Appointment`
+* `Delete Appointment`
+* `Mark Appointment`
+* `Clear`
+* `Delete`
+* `Edit`
+* `Find`
+* `List`
+* `Help`
+* `Remark`
+* `Sort`
+* `Statistic`
+* `Tag`
+* `Investment Plan Tag`
+* `Priority Tag`
+* `Misc`
+
+The activity diagram below shows the many ways user can utilise the help command
+
+![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
+
+The way the help command is parsed is slightly different from the other commands. This is due to the help command not
+interacting with the `model` and `storage` components like other commands. Instead, the parsing of the help command
+parameter is done by `ParserUtil` and verification of the parameter is done in `HelpWindow` itself. After verification,
+`HelpWindow` will set the text of the `JavaFX::Label` to be the corresponding help topic. This is as shown in the sequence
+diagram as shown below.
+
+![Help Command Sequnce Diagram](images/HelpCommandParsingSequenceDiagram.png)
+
+
+To access the different commands' help page from within the help window, there is a dropdown selector which will
+navigate to the different help pages. To achieve this, a `JavaFX::ComboBox` commandList was used which toggles between all
+the available HELP_TOPICS. A method then reads from commandList's current value and displays the corresponding help message in a
+`JavaFX::Label`. A code snippet is shown below:
+
+`EventHandler<ActionEvent> event =
+e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));`
+
+#### Design Considerations
+
+**Aspect: How to access various commands' help page**
+* **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
+    * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate
+      between the pages.
+    * Cons: To new users, might not be immediately obvious that the `JavaFX::ComboBox` can be interacted with. Users
+      might also miss the scroll bar and miss out some commands available.
+
+* **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
+    * Pros: Easier to be understood by new users.
+    * Cons: Cumbersome to users as they would have to scroll down a lot to find their desired command.
+
+* **Alternative 3:** Using a Table of Contents (ToC) landing page.
+    * Pros: Users can see all the available commands at a glance and can select their desired commands easily.
+    * Cons: Users have to navigate back to the ToC to navigate between each command.
+
+We decided on the first choice as it provided users with the greatest ease of use. It is also the fastest way of
+navigating between help pages. While we understand that most experienced users might not need to access the help menu,
+by providing them a quick and easy way to access the commands' help page when they do need it is very important.
+
+**Aspect: How to access the help window**
+
+Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an
+additional `[COMMAND]` paramater for the help command, which navigates to the selected command's help page.
+* Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
+  first and selecting the command help page from there.
+* Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
+
+To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
+valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
+window to the default page.
+
+<br>
+
 ### Statistics window
 
 #### Current Implementation
@@ -694,7 +695,9 @@ as shown below.
 
 ![Stats Window Sequence Diagram](images/StatsWindowSequenceDiagram.png).
 
-The implementation for Investment Plan Tag statistics is identical.
+The implementation for Investment Plan Tag statistics is identical, except instead of a `PriorityData`, the data is encapsulated
+into a `InvestmentPlanData`, and uses the methods `populateInvestmentPieChart()`, `getInvestmentPlanData()` and 
+`addInvestmentPlanPieChartData()` instead. 
 
 #### Design Considerations
 
@@ -714,6 +717,21 @@ easily understood, yet is able to convey the essence of the data to the user. Ot
 thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
 piechart to help users better understand the data and provide a more complete statistic.
 
+**Asepct: How to open the stats window**
+* **Alternative 1 (Current choice):** Using `F2` or the menu item.
+    * Pros: More intuitive, and provides a one-key shortcut to open the stats window.
+    * Cons: Certain devices do not have the function keys, hence they would require to use their mouse and click 
+    on the menu item, which goes against the CLI-focused approach of FAST.
+
+* **Alternative 2:** Using a dedicated stats command.
+    * Pros: Consistent with the other features, as they all are accessible with commands.
+    * Cons: Typing in "stats" into the command box would take longer time than simply pressing the `F2` key. 
+    
+For our current version of FAST, we felt that using the first alternative is more optimal as it is the fastest alternative.
+It also provides a distinction between Commands like `add` or `find` and utility features like `help` and `stats`. 
+However, in future iterations of FAST, alternative 2 might be more useful if there are different stats to view. For 
+instance there could be a pie chart window, or another one with a bar chart, and using the stats command with different
+parameters can be used to view these different windows.
 
 <br>
 
@@ -1251,7 +1269,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should work fully offline, and not rely on external URLs for important guides and documentation
+4.  Should work fully offline, and users should not have to overly rely on external links for important guides and documentation
 5.  Application should be usable by a single user
 
 ### Glossary
@@ -1500,7 +1518,7 @@ Character limit:
        **Expected**: Similar to previous testcase (in Point 3).
 
 #### Unmarking an appointment
-1. Umarks an existing appointment in FAST
+1. Unmarks an existing appointment in FAST
     1. **Prerequisites**: Arguments are valid, compulsory parameters provided and appointment does not exist for the specified client yet.
    
     2. **Test Case**: `ua 1` <br>
