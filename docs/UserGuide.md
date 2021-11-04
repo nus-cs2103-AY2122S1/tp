@@ -210,7 +210,7 @@ Show policies that are expiring in a month.
 
 Format: `expiringpolicy`
 
-#### Sorting a contact : `sortcontact`
+#### Sorting contacts : `sortcontact`
 
 Sorts the contact list alphabetically by the order specified.
 
@@ -220,7 +220,7 @@ These are the current sorters implemented:
 * `asc`: Sorts the contacts in ascending order based on the saved name
 * `dsc`: Sorts the contacts in descending order based on the saved name
 
-#### Sorting a Policy: `sortpolicy`
+#### Sorting policies: `sortpolicy`
 
 Sorts the policy list alphabetically by the order specified.
 
@@ -299,6 +299,8 @@ Action | Format, Examples
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
 **Show Expiring Policies** | `expiringpolicy`
+**Sort Policies** | `sortpolicy SORTER`
+**Sort Contacts** | `sortcontact SORTER`
 **Clear All** | `clear`
 **Download** | `download`
 **Help** | `help`
