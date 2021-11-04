@@ -1624,8 +1624,7 @@ Character limit:
 
 1. Dealing with missing/corrupted data files
 
-<<<<<<< HEAD
-    1. **Prerequisites**: At least one modification has been made to the persons list. FAST is not currently open.
+    1. **Prerequisites**: At least one modification has been made to the persons list (e.g. `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`). FAST is not currently open.
     
     2. **Test Case**: 
         1. Go to the directory that contains FAST.jar.
@@ -1642,15 +1641,6 @@ Character limit:
     
         **Expected**: FAST should contain a default set of persons.
 
-    
-=======
-   1. Make sure there is a ./data/fast.json file.
-      If not, open the app, make some changes (e.g. `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12`), and close the app.
-   
-   2. Open fast.json which is located in the data folder and delete any fields of the contact (eg. `name, phone etc...`) and save the file.
-      After which start the application.<br>
-      Expected: FAST should display an empty GUI.
->>>>>>> master
 
 2. Ensuring FAST saves your data
 

@@ -19,18 +19,33 @@ Parser --> MainWindow : "Add"
 deactivate Parser
 
 MainWindow -> MainWindow : handleHelp("Add")
+activate MainWindow
 
 create HelpWindow
 MainWindow -> HelpWindow : HelpWindow("Add")
+
+'Constructor for HelpWindow'
 activate HelpWindow
-HelpWindow -> HelpWindow : setText
+HelpWindow -> HelpWindow : setText() \nsetItems()
+activate HelpWindow
+HelpWindow --> HelpWindow
+deactivate HelpWindow
 HelpWindow --> MainWindow
 deactivate HelpWindow
 
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+'show()'
 MainWindow -> HelpWindow : show()
 activate HelpWindow
+HelpWindow --> MainWindow
 deactivate HelpWindow
 
+MainWindow -->[ :CommandResult
+
 deactivate MainWindow
+
 
 @enduml
