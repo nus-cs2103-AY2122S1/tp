@@ -353,18 +353,47 @@ class to achieve the fading image and character typing effect respectively.
 
 #### Implementation
 
-The class `WelcomeWindow` is responsible displaying the welcome window at the
-start, when the application is launched. It is facilitated by `WelcomeWindow.fxml` file
-which is responsible for how various components inside this window are arranged.
+The class `ProfileSetUpWindow` is responsible for displaying the Profile SetUp
+Window. It is only showed once, when the User launched the app for the first time,
+and has input their details as required. It is facilitated by `ProfileSetUpWindow.fxml`
+and `ProfileSetUpWindow.css`. The `.fxml` file is responsible for the layout of the
+various components in this window, and the `.css` file add a style, and enhances the 
+overall Ui.
 
-The `WelcomeWindow` class extends `UiPart<Stage>`.
+The `ProfileSetUpWindow` class extends `UiPart<Stage>`.
 
-When the app is launched, an instance of this class is created, and the
-`WelcomeWindow#start` is invoked to display the window. Various methods
-including `fadeTransition` and `displayAnimatedText` are used within this
-class to achieve the fading image and character typing effect respectively.
+This window would only be visible after the Welcome Window Splash Screen. 
+`WelcomeWindow` hands over the control to `MainWindow` after execution, which 
+then sets up the `ProfileSetUpWindow`. On Initializing and calling `start()` 
+method of the `ProfileSetUpWindow`, the `ProfileSetUpWindow` with the help of 
+a `Logic` object (which is obtained during initialization) checks, if a 
+User Profile is present. If it is present, it 
+again hands over the control to the `MainWindow` by calling the `start()` method 
+of the `MainWindow` Object. Else, It displays the Profile SetUp Window, and 
+waits for a response from the User.
 
-![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
+After the User has input their credentials in the text fields, they are expected to 
+click the `Submit` button. When that button is clicked upon, the `submit()` method is 
+invoked. This method calls `areUserCredentialsValid()` method to verify if the
+entered credentials are valid or not. If they are valid, the User Profile is deemed
+complete and is set up with the help of the `Logic` object, that was obtained during
+the initialization of the object. If the credentials are not valid, an error message
+is shown in the Window, highlighting which credential is invalid.
+
+The `areUserCredentialsValid()` class checks if the entered Name, Telegram Handle
+and the GitHub Username are valid. 
+
+1. Class level method `isValidName()`, of `Name` class 
+   verifies the Name entered.
+2. Class level method `isValidTelegram()`, of `Telegram` class
+   verifies the Telegram Handle entered.
+3. Class level method `isValidGithub()`, of `Github` class
+   verifies the GitHub Username entered.
+
+This method is also responsible for displaying the appropriate error message
+in the Window.
+
+![ProfileSetUpWindowSequenceDiagram](images/ProfileSetUpWindowSequenceDiagram.png)
 
 ### Show command
 
