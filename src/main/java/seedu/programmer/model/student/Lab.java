@@ -10,8 +10,6 @@ public class Lab implements DisplayableObject {
     public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
     public static final String MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT =
             "Lab total score should be a positive integer.";
-    public static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
-
 
     private LabNum labNum;
     private LabResult actualScore;
@@ -37,7 +35,7 @@ public class Lab implements DisplayableObject {
     public Lab(LabNum labNum, LabTotal totalScore) {
         requireNonNull(totalScore);
         this.labNum = labNum;
-        this.actualScore = new LabResult(UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
+        this.actualScore = new LabResult(LabResult.getPlaceholder());
         this.totalScore = totalScore;
     }
 
@@ -66,7 +64,6 @@ public class Lab implements DisplayableObject {
         return labNum.getLabNum().toString();
     }
 
-    //todo
     public String getLabResultValue() {
         return actualScore.toString();
     }
@@ -100,7 +97,7 @@ public class Lab implements DisplayableObject {
     }
 
     public boolean isMarked() {
-        return !(actualScore.getLabResult() == UNMARKED_ACTUAL_SCORE_PLACEHOLDER);
+        return !(actualScore.getLabResult().equals(LabResult.getPlaceholder()));
     }
 
     @Override
