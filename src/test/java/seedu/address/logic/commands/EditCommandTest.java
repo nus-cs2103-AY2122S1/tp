@@ -181,7 +181,7 @@ public class EditCommandTest {
             EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
             editCommand.notifyUserProfileWatchers();
             passed = true;
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             assertTrue(passed);
         }
 
@@ -197,12 +197,15 @@ public class EditCommandTest {
         try {
             EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-            EditCommand.addUserProfileWatcher(() -> {
-                // Update User Profile
+            EditCommand.addUserProfileWatcher(new UserProfileWatcher() {
+                @Override
+                public void updateUserProfile() {
+                    // Update User Profile
+                }
             });
 
             passed = true;
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             assertTrue(passed);
         }
 
