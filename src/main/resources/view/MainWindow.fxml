@@ -46,7 +46,6 @@
                   </Text>
                       <MenuBar fx:id="menuBar" GridPane.vgrow="SOMETIMES">
                           <Menu mnemonicParsing="false" text="File">
-                        <MenuItem mnemonicParsing="false" text="Export to CSV.." />
                               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                           </Menu>
                           <Menu mnemonicParsing="false" text="Help">
