@@ -24,6 +24,8 @@ public class UnmarkCommand extends MarkingCommand {
             + "Example: " + COMMAND_WORD + " 1 4 7";
 
     public static final String MESSAGE_UNMARKED_PERSON_SUCCESS = "Unmarked Person(s) to Not Done: \n%1$s";
+    public static final String MESSAGE_UNMARKING_UNMARKED_PERSON =
+            "A person that is already unmarked as Not Done cannot be unmarked again";
 
     private final Index[] targetIndexes;
 
@@ -37,6 +39,15 @@ public class UnmarkCommand extends MarkingCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         StringBuilder result = new StringBuilder();
+
+        boolean unmarkingUnmarkedPerson;
+        for (Index checkIndex : targetIndexes) {
+            Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
+            unmarkingUnmarkedPerson = model.checkForMarkedPerson(personToCheck);
+            if (unmarkingUnmarkedPerson) {
+                throw new CommandException(MESSAGE_UNMARKING_UNMARKED_PERSON);
+            }
+        }
 
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {

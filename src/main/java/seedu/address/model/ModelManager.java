@@ -174,4 +174,10 @@ public class ModelManager implements Model {
         addressBook.unmarkPerson(target);
     }
 
+    @Override
+    public boolean checkForUnmarkedPerson(Person target) {
+        requireAllNonNull(target);
+        return addressBook.checkForUnmarkedPerson(target);
+    }
+
 }

@@ -113,6 +113,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.unmarkPerson(toUnmark);
     }
 
+    public boolean checkForUnmarkedPerson(Person toCheck) {
+        return persons.checkForUnmarkedPerson(toCheck);
+    }
+
     //// util methods
 
     @Override

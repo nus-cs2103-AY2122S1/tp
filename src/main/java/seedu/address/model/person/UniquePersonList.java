@@ -159,6 +159,23 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Not Done" returns true; false otherwise.
+     */
+    public boolean checkForUnmarkedPerson(Person toCheck) {
+        requireNonNull(toCheck);
+
+        int index = internalList.indexOf(toCheck);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person markedPerson = internalList.get(index);
+        return markedPerson.getDone().equals(Done.UNDONE);
+
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

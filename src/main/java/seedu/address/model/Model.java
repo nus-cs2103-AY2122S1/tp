@@ -108,4 +108,10 @@ public interface Model {
      * The person must exist in the address book.
      */
     void unmarkPerson(Person target);
+
+    /**
+     * Checks if the given person has already been unmarked "Not Done".
+     * The person must exist in the address book.
+     */
+    boolean checkForUnmarkedPerson(Person target);
 }
