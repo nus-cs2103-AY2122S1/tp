@@ -35,6 +35,7 @@ public class SubGroupCreateExecutor extends GroupExecutor {
                     SuperGroup superGroup = (SuperGroup) group;
                     subGroup.setParent(superGroup);
                     superGroup.addSubGroup(subGroup);
+                    assert superGroup.getSubGroups().contains(subGroup);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
                 } else {
                     throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
