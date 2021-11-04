@@ -9,7 +9,7 @@ TuitiONE is a desktop address book application used for teaching Software Engine
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added a feature called `Enroll` that established bi-directional linkages between `Student` (previously `Person`) and `Lesson` entities.
+* **New Feature**: Added a feature called `Enroll`(Pull requests [#75](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/75), [#79](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/79), [#84](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/84), [#98](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/98)) that established bi-directional linkages between `Student` (previously `Person`) and `Lesson` entities.
   * What it does: Allows users to enroll a student of a specific `grade` into a lesson with that same respective `grade`.
   * Justification: A key feature in the application in order to establish the bi-directional linkages between a `Student` and a `Lesson`.
   * Highlights:
@@ -39,7 +39,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `Enroll`. (Pull requests [#290](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/290)).
     * Added documentation for About, Introduction, and Quick Start: (Pull requests [#180](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/180)).
-    * Did cosmetic and functional (and structural) tweaks overall: (Pull requests [#220](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/220), [#169](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/169/files)).
+    * Did cosmetic and functional (and structural) tweaks overall: (Pull requests [#298](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/298), [#220](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/220), [#169](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/169/files)).
   * Developer Guide:
     * Added implementation details of the 'Enroll' feature: (Pull requests [#153](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/153)).
     * Did cosmetic tweaks to existing documentation of user stories: (Pull requests [#164](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/164)).
