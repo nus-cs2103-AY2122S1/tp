@@ -223,7 +223,6 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-background-radius: 0;
     -fx-background-color: -fx-main-bg-color;
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 11pt;
