@@ -215,7 +215,7 @@ The features mentioned are:
    1. [Importing contacts](#import-json-file)
    2. [Exporting contacts](#export-json-file)
 5. Advance
-   1. Aliasing commands
+   1. [Aliasing commands](#aliasing-commands)
 6. Utility
    1. [Input Suggestion](#input-suggestion)
 7. Exiting the program
@@ -528,6 +528,45 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
 * **Alternative 2:** Allow users to export files to any directory
     * Pros: Gives user the flexibility to place the file wherever they want.
     * Cons: Different OSes have different file paths convention.
+
+### Aliasing Commands
+
+#### Implementation
+
+The aliasing mechanism will give an alias to the specified command. If an alias already exists, the new command being aliased will overwrite the old one.
+
+During `AliasCommand#execute`, a new entry of alias-command pair will be put into a singleton class called `CommandAliases`, which is implemented using a `HashMap`.
+
+#### Usage
+
+Given below is an example usage scenario and how the alias mechanism behaves at each step.
+
+Step 1. The user executes `alias a/Singaporeans c/find nat/Singaporean` command to assign the alias `Singaporeans` to the command `find nat/Singaporean`.
+
+Step 2. `AliasCommandParser#parse` will then parse the arguments provided. Then a new `AliasCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the alias operation works:
+
+![AliasParserSequenceDiagram](images/AliasParserSequenceDiagram.png)
+
+Step 3. `AliasCommand#execute` will then add a new entry of alias-command pair into `CommandAliases` by calling `CommandAliases#put`.
+
+The following sequence diagram shows how the alias command mechanism works:
+
+![AliasSequenceDiagram](images/AliasSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+</div>
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Singleton pattern
+    * Pros: Cannot be instantiated multiple times. 
+    * Cons: Might be confusing for new developers.
+
+* **Alternative 2:** Non-Singleton
+    * Pros: More commonly used in general and thus easier to understand.
+    * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
 
 
 ### \[Proposed\] Undo/redo feature
