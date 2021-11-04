@@ -76,11 +76,19 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     }
 
     /**
+     * Returns true if there are applicants applying to {@code position} in the applicant book.
+     */
+    public boolean hasApplicantsApplyingTo(Position position) {
+        requireNonNull(position);
+        return applicants.hasApplicantsApplyingTo(position);
+    }
+
+    /**
      * Returns the applicant with the specified name, if any.
      */
-    public Applicant getApplicantByName(Name applicantName) {
+    public Applicant getApplicantWithName(Name applicantName) {
         requireNonNull(applicantName);
-        return applicants.getApplicantByName(applicantName);
+        return applicants.getApplicantWithName(applicantName);
     }
 
     /**
