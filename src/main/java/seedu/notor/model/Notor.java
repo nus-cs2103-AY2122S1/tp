@@ -67,6 +67,10 @@ public class Notor implements ReadOnlyNotor {
         this.superGroups.setItems(superGroups);
     }
 
+    public void setPersonArchive(List<Person> persons) {
+        this.personArchive.setItems(persons);
+    }
+
     /**
      * Resets the existing data of this {@code Notor} with {@code newData}.
      */
@@ -75,6 +79,7 @@ public class Notor implements ReadOnlyNotor {
 
         setPersons(newData.getPersonList());
         setSuperGroups(newData.getSuperGroups());
+        setPersonArchive(newData.getPersonArchiveList());
     }
 
     //// person-level operations
