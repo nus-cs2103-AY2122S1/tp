@@ -86,18 +86,6 @@ public class HelpCommand extends Command {
                 commandResult = new CommandResult(HelpCommand.MESSAGE_USAGE);
                 break;
 
-            case AddTaskCommand.COMMAND_WORD:
-                commandResult = new CommandResult(AddTaskCommand.MESSAGE_USAGE);
-                break;
-
-            case DeleteTaskCommand.COMMAND_WORD:
-                commandResult = new CommandResult(DeleteTaskCommand.MESSAGE_USAGE);
-                break;
-
-            case EditTaskCommand.COMMAND_WORD:
-                commandResult = new CommandResult(EditTaskCommand.MESSAGE_USAGE);
-                break;
-
             case ViewTaskListCommand.COMMAND_WORD:
                 commandResult = new CommandResult(ViewTaskListCommand.MESSAGE_USAGE);
                 break;
