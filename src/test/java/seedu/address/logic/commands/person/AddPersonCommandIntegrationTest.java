@@ -39,7 +39,7 @@ public class AddPersonCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getConthacks().getPersonList().get(0);
-        assertCommandFailure(new AddPersonCommand(personInList), model, AddPersonCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddPersonCommand(personInList), model, AddPersonCommand.MESSAGE_SAME_PERSON);
     }
 
 }

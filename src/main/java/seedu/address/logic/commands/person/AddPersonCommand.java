@@ -37,10 +37,10 @@ public class AddPersonCommand extends Command {
             + PREFIX_REMARK + "Overseas\n";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON_MAYBE =
-            "Warning: Someone with similar identity already exist.\n"
-            + "Nonetheless, new person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =
+            "Warning: A person with similar identity already exist.\n"
+            + "Nonetheless, new person added: %1$s";
+    public static final String MESSAGE_SAME_PERSON =
             "A person with exactly the same name and email already exists in contHACKS";
 
     private final Person toAdd;
@@ -58,12 +58,12 @@ public class AddPersonCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_SAME_PERSON);
         }
 
         CommandResult result;
         if (model.hasSimilarPerson(toAdd)) {
-            result = new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON_MAYBE, toAdd));
+            result = new CommandResult(String.format(MESSAGE_DUPLICATE_PERSON, toAdd));
         } else {
             result = new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         }
