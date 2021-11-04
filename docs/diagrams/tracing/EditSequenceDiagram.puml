@@ -14,10 +14,10 @@ box Model #FFFFFF
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("edit n/Dominic")
+[-> LogicManager : execute
 activate LogicManager LOGIC_COLOR
 
-LogicManager -> AddressBookParser : parseCommand("edit n/Dominic")
+LogicManager -> AddressBookParser : parseCommand(argument)
 activate AddressBookParser LOGIC_COLOR
 
 create EditCommandParser LOGIC_COLOR
@@ -27,23 +27,23 @@ activate EditCommandParser LOGIC_COLOR
 EditCommandParser --> AddressBookParser
 deactivate EditCommandParser LOGIC_COLOR
 
-AddressBookParser -> EditCommandParser : parse("Dominic")
+AddressBookParser -> EditCommandParser : parse(argument)
 activate EditCommandParser LOGIC_COLOR
 
 create EditCommand LOGIC_COLOR
 EditCommandParser -> EditCommand
 activate EditCommand LOGIC_COLOR
 
-EditCommand --> EditCommandParser : d
+EditCommand --> EditCommandParser : command
 deactivate EditCommand LOGIC_COLOR
 
-EditCommandParser --> AddressBookParser : d
+EditCommandParser --> AddressBookParser : command
 deactivate EditCommandParser LOGIC_COLOR
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 EditCommandParser -[hidden]-> AddressBookParser
 destroy EditCommandParser LOGIC_COLOR
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : command
 deactivate AddressBookParser LOGIC_COLOR
 
 LogicManager -> EditCommand : execute()
