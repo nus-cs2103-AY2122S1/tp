@@ -24,12 +24,6 @@ public class TypicalModules {
             .withTasks(TypicalTasks.getTypicalTasksForModule(MODULE_NAME_0))
             .build();
 
-//    public static final Module differentTask = new ModuleBuilder()
-//            .withName(MODULE_NAME_0)
-//            .withStudents(TypicalStudents.getTypicalStudents())
-//            .withTasks(TypicalTasks.getTypicalTasksForModule(MODULE_NAME_0))
-//            .build();
-
     public static final Module MODULE_2 = new ModuleBuilder()
             .withName(MODULE_NAME_1)
             .withStudents(TypicalStudents.getTypicalStudents())
