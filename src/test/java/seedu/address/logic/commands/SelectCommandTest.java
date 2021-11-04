@@ -2,8 +2,13 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -41,7 +46,7 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void execute_validIndexNonEmptySelectedList_success() {
+    public void execute_inclusionValidIndexNonEmptySelectedList_success() {
         Person firstToSelect = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondToSelect = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         List<Index> indexes = new ArrayList<>();
@@ -52,6 +57,31 @@ public class SelectCommandTest {
         persons.add(secondToSelect);
 
         SelectCommand selectCommand = new SelectCommand(indexes, true);
+
+        String expectedMessage = "2 persons selected!";
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addSelected(persons);
+
+        assertCommandSuccess(selectCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_exclusionValidIndexNonEmptySelectedList_success() {
+        Person firstToSelect = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondToSelect = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        List<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_THIRD_PERSON);
+        indexes.add(INDEX_FOURTH_PERSON);
+        indexes.add(INDEX_FIFTH_PERSON);
+        indexes.add(INDEX_SIXTH_PERSON);
+        indexes.add(INDEX_SEVENTH_PERSON);
+        List<Person> persons = new ArrayList<>();
+        persons.add(firstToSelect);
+        persons.add(secondToSelect);
+
+
+        SelectCommand selectCommand = new SelectCommand(indexes, false);
 
         String expectedMessage = "2 persons selected!";
 

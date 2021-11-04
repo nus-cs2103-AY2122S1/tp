@@ -141,7 +141,7 @@ Note that the password needs to follow the requirements stated in the [`password
 
    - `list` : Lists all contacts.
 
-   - `add -n "John Doe" -p "+659875432" -e "johnd@example.com"` : Adds a contact named `John Doe` to the Address Book.
+   - `add -n John Doe -p +659875432 -e johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
 
    - `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -203,7 +203,7 @@ The command keyword may be followed by the command's parameters based on the spe
 </div>
 <div markdown="1" class="w-100">
 ```text
-edit "1"
+edit 1
 ```
 We want to edit the contact with the ID `1`. As such, we specify `1` as the command parameter.
 </div>
@@ -217,7 +217,7 @@ Both the long form and short form of the flags can be used.
 </div>
 <div markdown="1" class="w-100">
 ```text
-edit "1" --name "John Doe"
+edit 1 --name John Doe
 ```
 The command here specifies that we should change the name of the contact to `John Doe`. The flag used is `--name`. The
 short form `-n` can also be used instead.
@@ -250,7 +250,7 @@ add
 </div>
 <div markdown="1" class="w-100">
 ```text
-add -n "Jane Deer" -t "woman"
+add -n Jane Deer -t woman
 ```
 Add a contact with the name of `Jane Deer` that consist of the tag `woman`.
 </div>
@@ -325,7 +325,7 @@ list
 
 Edits an existing person in the address book.
 
-Format: `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`
+Format: `edit [INDEX] (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -348,11 +348,11 @@ edit
 </div>
 <div markdown="1" class="w-100">
 ```text
-edit "1" -p "91234567" -e "johndoe@example.com"
+edit 1 -p 91234567 -e johndoe@example.com
 ```
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 ```text
-edit "2" -n "Betsy Crower" -t ""
+edit 2 -n Betsy Crower -t
 ```
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 </div>
