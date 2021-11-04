@@ -193,7 +193,7 @@ public class ModelManager implements Model {
 
     @Override
     public Position getPositionByTitle(Title title) {
-        return positionBook.getPositionByTitle(title);
+        return positionBook.getPositionWithTitle(title);
     }
 
     @Override
@@ -265,7 +265,7 @@ public class ModelManager implements Model {
     @Override
     public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
         Title positionTitle = applicantParticulars.getPositionTitle();
-        Position position = positionBook.getPositionByTitle(positionTitle);
+        Position position = positionBook.getPositionWithTitle(positionTitle);
         Applicant applicant = new Applicant(applicantParticulars, position);
 
         applicantBook.addApplicant(applicant);
@@ -309,6 +309,7 @@ public class ModelManager implements Model {
     }
 
     //========== Rejection rates =======================================
+
     /**
      * Initialise rejection rate of a new position.
      *
@@ -317,7 +318,7 @@ public class ModelManager implements Model {
      */
     @Override
     public float calculateRejectionRate(Title title) {
-        Position currPosition = positionBook.getPositionByTitle(title);
+        Position currPosition = positionBook.getPositionWithTitle(title);
         int total = (int) applicantBook.getApplicantList()
                 .stream()
                 .filter(applicant -> applicant.isApplyingTo(currPosition))
@@ -326,7 +327,7 @@ public class ModelManager implements Model {
         int count = (int) applicantBook.getApplicantList()
                 .stream()
                 .filter(applicant -> applicant.isApplyingTo(currPosition)
-                        && (applicant.getApplication().getStatus() == ApplicationStatus.REJECTED))
+                        && (applicant.hasApplicationStatus(ApplicationStatus.REJECTED)))
                 .count();
         return Calculator.calculateRejectionRate(total, count);
     }
@@ -379,4 +380,5 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(other.filteredApplicants)
                 && userPrefs.equals(other.userPrefs);
     }
+
 }

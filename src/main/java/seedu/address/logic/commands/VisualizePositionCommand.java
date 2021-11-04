@@ -53,7 +53,7 @@ public class VisualizePositionCommand extends Command {
         PieChartDisplayer positionChartDisplayer = new PieChartDisplayer(positionChart);
         positionChartDisplayer.displayPieChart();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toShowTitle));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, position.getTitle()));
     }
 
     @Override

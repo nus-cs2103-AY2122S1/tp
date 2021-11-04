@@ -25,11 +25,11 @@ public class FilterApplicantCommandParser implements Parser<FilterApplicantComma
         FilterApplicantDescriptor filterApplicantDescriptor = new FilterApplicantDescriptor();
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             filterApplicantDescriptor.setPositionTitle(
-                    ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get()));
+                    ParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             filterApplicantDescriptor.setApplicationStatus(
-                    ApplicantParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_STATUS).get()));
+                    ParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
 
         if (!filterApplicantDescriptor.hasAnyFilter()) {

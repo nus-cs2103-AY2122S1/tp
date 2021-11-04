@@ -21,7 +21,6 @@ import seedu.address.model.position.Title;
 public class JsonAdaptedApplicant {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Applicant's %s field is missing!";
-    public static final String PLACEHOLDER_DESCRIPTION = "This is a placeholder description";
 
     private final String name;
     private final String phone;
@@ -105,7 +104,12 @@ public class JsonAdaptedApplicant {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Position.class.getSimpleName()));
         }
-        final Position modelPosition = positionBook.getPositionByTitle(new Title(positionApplyingTo));
+        final Title modelTitle = new Title(positionApplyingTo);
+        final Position modelPosition = positionBook.getPositionList().stream()
+                .filter(position -> position.hasTitle(modelTitle))
+                .findFirst()
+                .orElseThrow(() -> new IllegalValueException(
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, Position.class.getSimpleName())));
 
         if (applicationStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

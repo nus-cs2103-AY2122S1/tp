@@ -78,7 +78,8 @@ public class FilterApplicantDescriptor {
     public String toString() {
         Stream<String> filterDescriptions = Stream.of(getPositionTitle(), getApplicationStatus())
                 .flatMap(Optional::stream)
-                .map(filter -> filter.getClass().getSimpleName() + ": " + filter);
+                .map(filter -> filter.getClass().getSimpleName() + ": " + filter.toString().toLowerCase());
         return filterDescriptions.collect(Collectors.joining("; ", "", "."));
     }
+
 }

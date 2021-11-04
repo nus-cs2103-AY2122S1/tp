@@ -42,13 +42,13 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
         }
 
-        Name name = ApplicantParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ApplicantParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ApplicantParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Title positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Title positionTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
         ProfileUrl gitHubUrl = argMultimap.getValue(PREFIX_GITHUB_PROFILE).isPresent()
-                ? ApplicantParserUtil.parseUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get())
+                ? ParserUtil.parseUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get())
                 : ProfileUrl.emptyProfileUrl();
 
         ApplicantParticulars applicantParticulars =

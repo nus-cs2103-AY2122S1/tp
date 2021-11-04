@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddApplicantCommand.MESSAGE_NO_SUCH_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,8 +24,6 @@ public class RejectionRateCommand extends Command {
             + PREFIX_POSITION + "software engineer";
 
     public static final String MESSAGE_SUCCESS = "Rejection rate for %1$s = %2$.2f%%";
-
-    public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
     public static final String MESSAGE_NO_CURRENT_APPLICANTS = "There are currently no applicants for this position.";
 

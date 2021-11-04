@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Position's title in the position book.
+ * Equality checks use case-insensitive comparisons.
  * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
  */
 public class Title {
@@ -47,12 +48,12 @@ public class Title {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Title // instanceof handles nulls
-                && fullTitle.equals(((Title) other).fullTitle)); // state check
+                && fullTitle.equalsIgnoreCase(((Title) other).fullTitle)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullTitle.hashCode();
+        return fullTitle.toLowerCase().hashCode();
     }
 
     public Title getCopiedTitle() {

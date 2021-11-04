@@ -82,10 +82,9 @@ public class PositionBook implements ReadOnlyPositionBook {
         positions.add(p);
     }
 
-    @Override
-    public Position getPositionByTitle(Title title) {
+    public Position getPositionWithTitle(Title title) {
         requireNonNull(title);
-        return positions.getPositionByTitle(title);
+        return positions.getPositionWithTitle(title);
     }
 
     /**
@@ -140,4 +139,5 @@ public class PositionBook implements ReadOnlyPositionBook {
 
         return copiedPositionBook;
     }
+
 }
