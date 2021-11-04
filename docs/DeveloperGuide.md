@@ -420,6 +420,8 @@ Each `Predicate` has a `test` method which will be called on every `Person` in t
 If the `test` method returns `true`, that `Person` will be displayed in the search results.
 ![Find_Command_Class_Diagram](images/findcommandpredicates.png)
 
+#### Usage Scenario
+
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. <br>
@@ -582,18 +584,20 @@ The sequence diagram below shows step 1 to step 6 mentioned above.
 
 #### Current Implementation
 
-The sort mechanism is facilitated by the inbuilt Collections::sort method.
+The sort mechanism is facilitated by the inbuilt `Collections::sort` method.
 This is done by passing a custom comparator that implements the Comparator interface to the sort method.
 There are currently three custom comparators implemented in FAST:
 - `SortByName` -- Sorts the contacts alphabetically by name.
-- `SortByAppointment` -- Sorts the contacts chronologically by date.
-- `SortByPriority` -- Sorts the contacts by priority tags.
+- `SortByAppointment` -- Sorts the contact's appointment chronologically by date and time.
+- `SortByPriority` -- Sorts the contacts by `priority tags`.
 
 `SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
-`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
+`SortByAppointment`: Implemented by first converting the appointment date and time from `String` to a `Date` object before using
 the inbuilt `Date::compareTo` method.  <br>
-`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
+`SortByPriority`: Implemented by first assigning int values to `tags`, `tags` with highest priority will have the smallest int value.
 Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+
+#### Usage Scenario
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
@@ -607,13 +611,18 @@ the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
 to sort the list of persons by their name.<br>
 
+The sequence diagram below illustrates the execution of `sort name`.
+
+![Sort_Sequence_Diagram](images/SortSequenceDiagram.png)
+
+
 #### Design Considerations
 
 **Aspect: How sort executes:**
 
 * **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
     * Pros: Easy to implement.
-    * Cons: May need additional attributes to compare.
+    * Cons: May need additional attributes to implement the `compareTo` method.
 
 * **Alternative 2:** Implement a custom Sort method.
     * Pros: May not need additional attributes
@@ -621,13 +630,13 @@ to sort the list of persons by their name.<br>
 
 **Aspect: How SortByDate is implemented:**
 
-* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
+* **Alternative 1 (current choice):** Convert the String date and time value to a Date object before using inbuilt `compareTo`.
     * Pros: Easy to implement.
-    * Cons: Need to account for empty appointment dates.
+    * Cons: Need to account for empty appointment dates and empty appointment times.
 
 * **Alternative 2:** Compare dates in String.
     * Pros: No need to convert the values to another type.
-    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
+    * Cons: Complicated since there is a need for 4 different comparisons namely; year, month, date and time.
 
 <br>
 
@@ -635,7 +644,7 @@ to sort the list of persons by their name.<br>
 
 #### Current Implementation
 
-The statis window displays statistics and insights into the user's client base. To access the stats window, users have 
+The stats window displays statistics and insights into the user's client base. To access the stats window, users have 
 2 ways of getting to the stats page:
 * Using the menu bar. Click on `Stats` > `Stats`.
 * Pressing `F2` while using FAST.
