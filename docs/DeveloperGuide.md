@@ -48,7 +48,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+<p align="center">
 <img src="images/DeveloperGuideImage/ArchitectureDiagram.png" width="280" />
+</p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -74,7 +76,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
+<p align="center">
 <img src="images/DeveloperGuideImage/ArchitectureSequenceDiagram.png" width="574" />
+</p>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -83,7 +87,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/DeveloperGuideImage/ComponentManagers.png" width="300" />
+<p align="center">
+<img src="images/DeveloperGuideImage/ComponentManagers.png" width="350" />
+</p>
 
 The sections below give more details of each component.
 
@@ -110,7 +116,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="550"/>
+<p align="center">
+<img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="650"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `TuitioneParser` class to parse the user command.
@@ -127,7 +135,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/DeveloperGuideImage/ParserClasses.png" width="600"/>
+<img src="images/DeveloperGuideImage/ParserClasses.png" width="550"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `TuitioneParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TuitioneParser` returns back as a `Command` object.
@@ -136,8 +144,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-<img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="740"/>
-
+<p align="center">
+<img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="650"/>
+</p>
 
 The `Model` component,
 
@@ -152,7 +161,9 @@ The `Model` component,
 
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
 
-<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="450" />
+<p align="center">
+<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="550" />
+</p>
 
 </div>
 
@@ -161,7 +172,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/storage/Storage.java)
 
-<img src="images/DeveloperGuideImage/StorageClassDiagram.png" width="550" />
+<p align="center">
+<img src="images/DeveloperGuideImage/StorageClassDiagram.png" width="650" />
+</p>
 
 The `Storage` component,
 * can save both tuitione data and user preference data in json format, and read them back into corresponding objects.
