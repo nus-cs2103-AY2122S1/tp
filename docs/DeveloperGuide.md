@@ -333,11 +333,62 @@ The following sequence diagram shows how the sort operation works:
 
 <img src="images/SortCommandSequenceDiagram.png" />
 
-### 4.5 \[Proposed\] Multiple Address Book
+### 4.5 Multiple Address Book
 
-#### 4.5.1 Proposed Implementation
+### Description
 
-To be included
+LeadsForce allow the user to create and switch between multiple addressbook.
+
+### Implementation
+
+Each individual addressbook is stored as its own JSON file in the data folder that the LeadsForce jar file is stored in.
+The following implementation will omit the details prior to the respective commands' parser.
+Also, details with regard to AddressBookList has been omitted for simplicity if it is not critical to the function of the command.
+
+### 4.5.1 Create new Address Book
+
+1. The `AbCreateCommandParser` parse the name of the address book that is to be created into a `Path` to that new address book.
+2. The `AbCreateCommandParser` will then create a new `AbCreateCommand` with the parsed `Path`.
+3. The `LogicManger` then call the execute method of `AbCreateCommand` which set the address book `Path` and create a new `CommandResult` with the `SpecialCommandResult` type of `CREATE_ADDRESSBOOK`.
+4. The `MainWindow` will then call its handleCreateAddressBook method after checking that the `CommandResult` is of type `CREATE_ADDRESSBOOK` which will call the createAddressBook method of `LogicManager`.
+5. The `LogicManger` will retrieve the `Path` of the new address book and create a new `AddressBookStorage` with it and along with a new `AddressBook`.
+6. The `LogicManger` then call setAddressBook method of `ModelManager` with the new `AddressBook` which will reset the `AddressBook` to a new `AddressBook`.
+7. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
+
+The following sequence diagram shows how the sort operation works:
+
+<img src="images\AbCreateCommandSequenceDiagram.png" />
+
+### 4.5.2 Switch Address Book
+
+1. The `AbSwitchCommandParser` parse the name of the address book that is to be switched to into a `Path` to that address book.
+2. The `AbSwitchCommandParser` will then create a new `AbSwitchCommand` with the parsed `Path`.
+3. The `LogicManger` then call the execute method of `AbSwitchCommand` which set the address book `Path` and create a new `CommandResult` with the `SpecialCommandResult` type of `SWITCH_ADDRESSBOOK`.
+4. The `MainWindow` will then call its handleSwitchAddressBook method after checking that the `CommandResult` is of type `SWITCH_ADDRESSBOOK` which will call the switchAddressBook method of `LogicManager`.
+5. The `LogicManger` will retrieve the `Path` of the address book to switched to and create a new `AddressBookStorage` with it
+6. The `LogicManger` will also call readAddressBook method of `JsonAddressBookStorage` with the `Path` to get the `AddressBook` that is to be switched to.
+7. The `LogicManger` then call setAddressBook method of `ModelManager` with the `AddressBook` which will reset the current `AddressBook` to that.
+8. The `LogicManger` will also call switchAddressBook method of `StorageManager` with the new `AddressBookStorage`.
+
+The following sequence diagram shows how the sort operation works:
+
+
+### 4.5.3 Delete Address Book
+
+1. The `AbDeleteCommandParser` parse the name of the address book that is to be deleted to into a `Path` to that address book.
+2. The `AbDeleteCommandParser` will then create a new `AbDeleteCommand` with the parsed `Path`.
+3. The `LogicManger` then call the execute method of `AbDeleteCommand`.
+4. The `AbDeleteCommand` will then attempt to delete the address book specified by the `Path`
+5. The `AbDeleteCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
+
+The following sequence diagram shows how the sort operation works:
+
+### 4.5.4 List Address Book
+
+1. The `AbListCommand` will call getAddressBookListString method of `ModelManager`.
+2. The `ModelManager` will then subsequently call toString method of `AddressBookList`
+3. The `AddressBookList` will append the name of all the addressbook in its list together and return it back to `AblistCommand`
+4. The `AblistCommand` will finally then create a `CommandResult` with that String and return it to `LogicManager`.
 
 ### 4.6 \[Proposed\] Undo/redo feature
 
