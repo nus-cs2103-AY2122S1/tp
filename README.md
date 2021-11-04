@@ -18,4 +18,4 @@ Please refer to the [Developer Guide](https://ay2122s1-cs2103t-t17-1.github.io/t
 
 ## Acknowledgements
 
-This project is based on the Rhrh-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
