@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
+import static seedu.address.testutil.TypicalEmployees.getTypicalRhrhEmployees;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Rhrh;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.employee.EmployeeComparator;
 
@@ -27,8 +27,8 @@ public class SortEmployeeCommandTest {
     private static final String JOB_TITLE_DESC = "job title";
     private static final String ASCENDING_DESC = "ascending";
     private static final String DESCENDING_DESC = "descending";
-    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
-    private AddressBook ab = new AddressBook();
+    private Model model = new ModelManager(getTypicalRhrhEmployees(), new UserPrefs());
+    private Rhrh ab = new Rhrh();
 
     // comparator field is null
     @Test
@@ -70,7 +70,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, NAME_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getNameComparator(true));
         System.out.println(expectedModel.getSortableEmployeeList());
 
@@ -88,7 +88,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, NAME_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getNameComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -105,7 +105,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, ADDRESS_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getAddressComparator(true));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -122,7 +122,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, ADDRESS_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getAddressComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -139,7 +139,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, PHONE_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getPhoneComparator(true));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -156,7 +156,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, PHONE_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getPhoneComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -173,7 +173,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, EMAIL_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getEmailComparator(true));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -190,7 +190,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, EMAIL_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getEmailComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -207,7 +207,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, LEAVES_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getLeavesComparator(true));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -224,7 +224,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, LEAVES_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getLeavesComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -241,7 +241,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, SALARY_DESC,
                 ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getSalaryComparator(true));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -258,7 +258,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, SALARY_DESC,
                 DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getSalaryComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -275,7 +275,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, JOB_TITLE_DESC,
                         ASCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getJobTitleComparator(true));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -292,7 +292,7 @@ public class SortEmployeeCommandTest {
                 String.format(seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_SUCCESS, JOB_TITLE_DESC,
                         DESCENDING_DESC);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Rhrh(model.getRhrh()), new UserPrefs());
         expectedModel.getSortableEmployeeList().sort(EmployeeComparator.getJobTitleComparator(false));
 
         assertCommandSuccess(sortEmployeeCommand, model, expectedMessage, expectedModel);
@@ -303,7 +303,7 @@ public class SortEmployeeCommandTest {
         SortEmployeeCommand sortEmployeeCommand =
                 new SortEmployeeCommand(EmployeeComparator.getSalaryComparator(true),
                         SALARY_DESC, ASCENDING_DESC);
-        Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+        Model emptyModel = new ModelManager(new Rhrh(), new UserPrefs());
         assertCommandFailure(sortEmployeeCommand, emptyModel,
                 seedu.address.logic.commands.SortEmployeeCommand.MESSAGE_EMPTY_FILTERED_LIST);
     }

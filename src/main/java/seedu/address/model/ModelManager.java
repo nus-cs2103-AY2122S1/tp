@@ -28,7 +28,7 @@ import seedu.address.model.table.TableManager;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Rhrh rhrh;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
     private final ObservableList<Customer> sortableCustomers;
@@ -41,29 +41,29 @@ public class ModelManager implements Model {
     private final TableManager tableManager;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given rhrh and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyRhrh rhrh, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(rhrh, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + rhrh + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.rhrh = new Rhrh(rhrh);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
-        sortableCustomers = this.addressBook.getSortableCustomerList();
-        filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
-        filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
-        sortableEmployees = this.addressBook.getSortableEmployeeList();
-        sortableSuppliers = this.addressBook.getSortableSupplierList();
-        filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
-        reservationsManager = this.addressBook.getReservationsManager();
-        tableManager = this.addressBook.getTableManager();
+        filteredCustomers = new FilteredList<>(this.rhrh.getCustomerList());
+        sortableCustomers = this.rhrh.getSortableCustomerList();
+        filteredEmployees = new FilteredList<>(this.rhrh.getEmployeeList());
+        filteredSuppliers = new FilteredList<>(this.rhrh.getSupplierList());
+        sortableEmployees = this.rhrh.getSortableEmployeeList();
+        sortableSuppliers = this.rhrh.getSortableSupplierList();
+        filteredReservations = new FilteredList<>(this.rhrh.getReservationList());
+        reservationsManager = this.rhrh.getReservationsManager();
+        tableManager = this.rhrh.getTableManager();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Rhrh(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -91,86 +91,86 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getRhrhFilePath() {
+        return userPrefs.getRhrhFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setRhrhFilePath(Path rhrhFilePath) {
+        requireNonNull(rhrhFilePath);
+        userPrefs.setRhrhFilePath(rhrhFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Rhrh ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setRhrh(ReadOnlyRhrh rhrh) {
+        this.rhrh.resetData(rhrh);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyRhrh getRhrh() {
+        return rhrh;
     }
 
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
-        return addressBook.hasCustomer(customer);
+        return rhrh.hasCustomer(customer);
     }
 
     @Override
     public boolean hasCustomerWithPhone(Phone phone) {
         requireNonNull(phone);
-        return addressBook.hasCustomerWithPhone(phone);
+        return rhrh.hasCustomerWithPhone(phone);
     }
 
     @Override
     public boolean hasEmployee(Employee employee) {
         requireNonNull(employee);
-        return addressBook.hasEmployee(employee);
+        return rhrh.hasEmployee(employee);
     }
 
     @Override
     public boolean hasSupplier(Supplier supplier) {
         requireNonNull(supplier);
-        return addressBook.hasSupplier(supplier);
+        return rhrh.hasSupplier(supplier);
     }
 
     @Override
     public void deleteCustomer(Customer target) {
-        addressBook.removeCustomer(target);
+        rhrh.removeCustomer(target);
     }
     @Override
     public void deleteEmployee(Employee employee) {
-        addressBook.removeEmployee(employee);
+        rhrh.removeEmployee(employee);
     }
 
     @Override
     public void deleteSupplier(Supplier target) {
-        addressBook.removeSupplier(target);
+        rhrh.removeSupplier(target);
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        addressBook.addCustomer(customer);
+        rhrh.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
     public void setCustomerComparator(Comparator<Customer> customerComparator) {
-        this.addressBook.setCustomerComparator(customerComparator);
+        this.rhrh.setCustomerComparator(customerComparator);
     }
 
     @Override
     public void addEmployee(Employee employee) {
-        addressBook.addEmployee(employee);
+        rhrh.addEmployee(employee);
         updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
     }
 
     @Override
     public void addSupplier(Supplier supplier) {
-        addressBook.addSupplier(supplier);
+        rhrh.addSupplier(supplier);
         updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
     }
 
@@ -178,80 +178,80 @@ public class ModelManager implements Model {
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
-        addressBook.setCustomer(target, editedCustomer);
+        rhrh.setCustomer(target, editedCustomer);
     }
     @Override
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireAllNonNull(target, editedEmployee);
-        addressBook.setEmployee(target, editedEmployee);
+        rhrh.setEmployee(target, editedEmployee);
     }
 
     @Override
     public void setEmployeeComparator(Comparator<Employee> employeeComparator) {
-        this.addressBook.setEmployeeComparator(employeeComparator);
+        this.rhrh.setEmployeeComparator(employeeComparator);
     }
 
     @Override
     public void setSupplier(Supplier target, Supplier editedSupplier) {
         requireAllNonNull(target, editedSupplier);
-        addressBook.setSupplier(target, editedSupplier);
+        rhrh.setSupplier(target, editedSupplier);
     }
 
     @Override
     public void setSupplierComparator(Comparator<Supplier> supplierComparator) {
-        this.addressBook.setSupplierComparator(supplierComparator);
+        this.rhrh.setSupplierComparator(supplierComparator);
     }
 
     @Override
     public boolean hasReservation(Reservation reservation) {
         requireNonNull(reservation);
-        return addressBook.hasReservation(reservation);
+        return rhrh.hasReservation(reservation);
     }
 
     @Override
     public void deleteReservation(Reservation target) {
-        addressBook.removeReservation(target);
+        rhrh.removeReservation(target);
     }
 
     @Override
     public void addReservation(Reservation reservation) {
-        addressBook.addReservation(reservation);
+        rhrh.addReservation(reservation);
         updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
     }
 
     @Override
     public void setReservation(Reservation target, Reservation editedReservation) {
         requireAllNonNull(target, editedReservation);
-        addressBook.setReservation(target, editedReservation);
+        rhrh.setReservation(target, editedReservation);
     }
 
     @Override
     public void setTableList(List<Table> tableList) {
         requireNonNull(tableList);
-        addressBook.setTables(tableList);
+        rhrh.setTables(tableList);
     }
 
     @Override
     public void resetReservations() {
-        addressBook.resetReservations();
+        rhrh.resetReservations();
     }
 
     @Override
     public void resetTableCount() {
-        addressBook.resetTableCount();
+        rhrh.resetTableCount();
     }
 
     @Override
     public boolean hasTable(Table table) {
         requireNonNull(table);
-        return addressBook.hasTable(table);
+        return rhrh.hasTable(table);
     }
 
     //=========== Filtered Employee List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedRhrh}
      */
     @Override
     public ObservableList<Employee> getFilteredEmployeeList() {
@@ -265,7 +265,7 @@ public class ModelManager implements Model {
 
     @Override
     public void resetEmployeeListToDefaultSortState() {
-        this.addressBook.resetEmployeeListToDefaultSortState();
+        this.rhrh.resetEmployeeListToDefaultSortState();
     }
 
     @Override
@@ -278,7 +278,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedRhrh}
      */
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
@@ -292,7 +292,7 @@ public class ModelManager implements Model {
 
     @Override
     public void resetCustomerListToDefaultSortState() {
-        this.addressBook.resetCustomerListToDefaultSortState();
+        this.rhrh.resetCustomerListToDefaultSortState();
     }
 
     @Override
@@ -305,7 +305,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Supplier} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedRhrh}
      */
     @Override
     public ObservableList<Supplier> getFilteredSupplierList() {
@@ -319,7 +319,7 @@ public class ModelManager implements Model {
 
     @Override
     public void resetSupplierListToDefaultSortState() {
-        this.addressBook.resetSupplierListToDefaultSortState();
+        this.rhrh.resetSupplierListToDefaultSortState();
     }
 
     @Override
@@ -332,7 +332,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedRhrh}
      */
     @Override
     public ObservableList<Reservation> getFilteredReservationList() {
@@ -369,7 +369,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return rhrh.equals(other.rhrh)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCustomers.equals(other.filteredCustomers)
                 && filteredEmployees.equals(other.filteredEmployees)

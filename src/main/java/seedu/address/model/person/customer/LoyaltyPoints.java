@@ -6,8 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LoyaltyPoints {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Loyalty points must be a number";
-    public static final String VALIDATION_REGEX = "\\d{4,}";
+            "Loyalty points must be numerical, more than or equals to 0 and less than or equals to 100000";
     public final String value;
 
     /**
@@ -26,7 +25,7 @@ public class LoyaltyPoints {
      */
     public static boolean isValidLoyaltyPoints(String value) {
         try {
-            return Integer.parseInt(value) >= 0;
+            return Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100000;
         } catch (NumberFormatException e) {
             return false;
         }

@@ -23,8 +23,8 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.Rhrh;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.SupplierClassContainsKeywordsPredicate;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
@@ -106,11 +106,11 @@ public class SupplierCommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Rhrh expectedRhrh = new Rhrh(actualModel.getRhrh());
         List<Supplier> expectedFilteredList = new ArrayList<>(actualModel.getFilteredSupplierList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedRhrh, actualModel.getRhrh());
         assertEquals(expectedFilteredList, actualModel.getFilteredSupplierList());
     }
 

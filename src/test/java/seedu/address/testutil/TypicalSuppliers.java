@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Rhrh;
 import seedu.address.model.person.supplier.Supplier;
 
 /**
@@ -72,10 +72,10 @@ public class TypicalSuppliers {
     private TypicalSuppliers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical suppliers.
+     * Returns an {@code Rhrh} with all the typical suppliers.
      */
-    public static AddressBook getTypicalAddressBookSuppliers() {
-        AddressBook ab = new AddressBook();
+    public static Rhrh getTypicalRhrhSuppliers() {
+        Rhrh ab = new Rhrh();
         for (Supplier supplier : getTypicalSuppliers()) {
             ab.addSupplier(supplier);
         }

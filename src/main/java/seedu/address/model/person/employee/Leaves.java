@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Leaves {
     public static final String MESSAGE_CONSTRAINTS =
-            "Leaves should only be in numbers";
+            "Leaves should be numerical and be more than or equals to 0, less than or equals to 365";
 
     public final String currentLeaves;
 
@@ -29,7 +29,7 @@ public class Leaves {
      */
     public static boolean isValidLeaves(String test) {
         try {
-            return Integer.parseInt(test) >= 0;
+            return Integer.parseInt(test) >= 0 && Integer.parseInt(test) <= 365;
         } catch (NumberFormatException e) {
             return false;
         }

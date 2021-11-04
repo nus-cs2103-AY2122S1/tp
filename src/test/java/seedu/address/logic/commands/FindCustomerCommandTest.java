@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalCustomers.getTypicalRhrhCustomers;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,8 +23,8 @@ import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicat
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCustomerCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRhrhCustomers(), new UserPrefs());
 
     @Test
     public void equals() {

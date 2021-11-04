@@ -18,10 +18,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRhrh;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Rhrh;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
@@ -110,12 +110,12 @@ public class AddCustomerCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getRhrhFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setRhrhFilePath(Path rhrhFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -131,12 +131,12 @@ public class AddCustomerCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setRhrh(ReadOnlyRhrh newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyRhrh getRhrh() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -371,8 +371,8 @@ public class AddCustomerCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyRhrh getRhrh() {
+            return new Rhrh();
         }
     }
 

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPLOYEES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
+import static seedu.address.testutil.TypicalEmployees.getTypicalRhrhEmployees;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,8 +18,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
 
 public class FindEmployeeCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhEmployees(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRhrhEmployees(), new UserPrefs());
 
     @Test
     public void equals() {

@@ -23,7 +23,7 @@ import seedu.address.model.table.TableManager;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Rhrh implements ReadOnlyRhrh {
 
     private final UniqueCustomerList customers;
     private final UniqueEmployeeList employees;
@@ -46,12 +46,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tableManager = new TableManager();
     }
 
-    public AddressBook() {}
+    public Rhrh() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Rhrh using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Rhrh(ReadOnlyRhrh toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -99,9 +99,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Rhrh} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyRhrh newData) {
         requireNonNull(newData);
         setCustomers(newData.getCustomerList());
         setEmployees(newData.getEmployeeList());
@@ -240,7 +240,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code Rhrh}.
      * {@code key} must exist in the address book.
      */
     public void removeSupplier(Supplier key) {
@@ -373,11 +373,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && customers.equals(((AddressBook) other).customers)
-                && employees.equals(((AddressBook) other).employees)
-                && suppliers.equals(((AddressBook) other).suppliers)
-                && reservationsManager.equals(((AddressBook) other).reservationsManager));
+                || (other instanceof Rhrh // instanceof handles nulls
+                && customers.equals(((Rhrh) other).customers)
+                && employees.equals(((Rhrh) other).employees)
+                && suppliers.equals(((Rhrh) other).suppliers)
+                && reservationsManager.equals(((Rhrh) other).reservationsManager));
     }
 
     @Override
@@ -394,7 +394,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code employee} from this {@code AddressBook}.
+     * Removes {@code employee} from this {@code Rhrh}.
      * {@code employee} must exist in the address book.
      */
     public void removeEmployee(Employee employee) {

@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommand
 import static seedu.address.logic.commands.SupplierCommandTestUtil.showSupplierAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUPPLIER;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalRhrhSuppliers;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.address.model.person.supplier.Supplier;
  */
 public class DeleteSupplierCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRhrhSuppliers(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteSupplierCommandTest {
 
         String expectedMessage = String.format(DeleteSupplierCommand.MESSAGE_DELETE_SUPPLIER_SUCCESS, supplierToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.deleteSupplier(supplierToDelete);
 
         assertCommandSuccess(deleteSupplierCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeleteSupplierCommandTest {
 
         String expectedMessage = String.format(DeleteSupplierCommand.MESSAGE_DELETE_SUPPLIER_SUCCESS, supplierToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRhrh(), new UserPrefs());
         expectedModel.deleteSupplier(supplierToDelete);
         showNoSupplier(expectedModel);
 
@@ -69,7 +69,7 @@ public class DeleteSupplierCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_SUPPLIER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getSupplierList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getSupplierList().size());
 
         DeleteSupplierCommand deleteSupplierCommand = new DeleteSupplierCommand(outOfBoundIndex);
 
