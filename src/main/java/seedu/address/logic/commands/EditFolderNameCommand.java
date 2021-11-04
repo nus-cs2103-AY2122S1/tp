@@ -24,6 +24,8 @@ public class EditFolderNameCommand extends Command {
     public static final String MESSAGE_NO_SUCH_FOLDER = "No such folder found in UNIon to be renamed";
     public static final String MESSAGE_FOLDER_ALREADY_EXISTS = "Cannot rename folder to"
             + " an already existing folder in UNIon";
+    public static final String MESSAGE_FOLDER_NAME_TOO_LONG = "This folder name is too long! "
+            + "Please keep it to a maximum of 30 chars.";
 
     private final Folder oldFolder;
     private final Folder newFolder;
@@ -49,6 +51,9 @@ public class EditFolderNameCommand extends Command {
         }
         if (model.hasFolder(newFolder)) {
             throw new CommandException(MESSAGE_FOLDER_ALREADY_EXISTS);
+        }
+        if (newFolder.getFolderName().toString().length() > 30) {
+            throw new CommandException(MESSAGE_FOLDER_NAME_TOO_LONG);
         }
 
         model.setNewFolder(oldFolder, newFolder);

@@ -53,6 +53,16 @@ class CreateFolderCommandTest {
     }
 
     @Test
+    public void execute_longFolderName_throwsCommandException() {
+        Folder invalidLongFolder = new Folder(new FolderName("Some Super Strange Long Folder Name"));
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(invalidLongFolder);
+        ModelStub modelStub = new ModelStubWithFolder(invalidLongFolder);
+
+        assertThrows(CommandException.class, () -> createFolderCommand.execute(modelStub));
+    }
+
+
+    @Test
     public void equals() {
         Folder nus = new Folder(new FolderName("NUS"));
         Folder cs = new Folder(new FolderName("CS"));
