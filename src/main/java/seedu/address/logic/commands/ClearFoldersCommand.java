@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ClearFoldersCommand extends Command {
 
     public static final String COMMAND_WORD = "rm -folders";
-    public static final String MESSAGE_SUCCESS = "Address book folders have been cleared!";
+    public static final String MESSAGE_SUCCESS = "UNIon's folders have been cleared!";
 
 
     @Override
