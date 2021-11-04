@@ -25,7 +25,7 @@ Given below are my contributions to the project:
 * **Other features and enhancements to existing features**:
     * Improved formatting for information shown in result display, student panel and lesson panel for better user readability
     * Updated features `delete student` and `delete lesson` to remove the lessons and students they have respectively, and update the student and lesson panels accordingly.
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=dt-td&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=dt-td&tabRepo=AY2122S1-CS2103T-W16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: My code contributions can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=dt-td&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=dt-td&tabRepo=AY2122S1-CS2103T-W16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `view student` and `view lesson`
@@ -34,3 +34,5 @@ Given below are my contributions to the project:
         * Added target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
         * Updated UI Architecture component's description and class diagram
         * Added implementation of features `view student` and `view lesson` and relevant UML diagrams 
+* **Contributions beyond the project team**:
+    * Reported [bugs and suggestions](https://github.com/dt-td/ped/issues) for Team CS2103T-W08-3 during the Practical Exam - Dry Run.  
