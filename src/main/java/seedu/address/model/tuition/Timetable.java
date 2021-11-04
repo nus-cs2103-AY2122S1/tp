@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import seedu.address.ui.ResultDisplay;
@@ -48,7 +49,7 @@ public class Timetable {
      * Displays the timetable constructed from the tuition classes.
      */
     public void showTimetable() {
-        parseTime();
+        parseTime(this.tuitionClasses);
         infoPage.setTableTime(start, end, totalRows);
         insertSlot();
         if (notShown.size() > 0) {
@@ -63,10 +64,10 @@ public class Timetable {
     /**
      * Parses timeslot of tuition class list to determine the size of timetable.
      */
-    private void parseTime() {
+    public void parseTime(ObservableList<TuitionClass> tuitionClassesPresent) {
         LocalTime earliest = null;
         LocalTime latest = null;
-        for (TuitionClass tc: tuitionClasses) {
+        for (TuitionClass tc: tuitionClassesPresent) {
             LocalTime[] times = tc.getTimeslot().parseTime();
             LocalTime localStart = times[0];
             LocalTime localEnd = times[1];
@@ -95,7 +96,7 @@ public class Timetable {
     /**
      * Inserts tuition classes into the timetable.
      */
-    private void insertSlot() {
+    public void insertSlot() {
         if (tuitionClasses.size() == 0) {
             return;
         }
@@ -132,7 +133,7 @@ public class Timetable {
         GridPane.setFillWidth(lesson, true);
     }
 
-    private String getColor(int start) {
+    public String getColor(int start) {
         String color = start % 2 == 0 ? COLOR_EVEN : COLOR_ODD;
         return color;
     }
@@ -145,7 +146,7 @@ public class Timetable {
      * @param tuitionClass the tuition class to be shown.
      * @return a label with information of tuition class on it.
      */
-    private Label getLabel(String message, int fontSize, int col, TuitionClass tuitionClass) {
+    public Label getLabel(String message, int fontSize, int col, TuitionClass tuitionClass) {
         Label lesson;
         if (fontSize == 1) {
             lesson = new Label();
@@ -163,7 +164,12 @@ public class Timetable {
         return lesson;
     }
 
-    private int getFontSize(int span) {
+    /**
+     * Determines font size of each tuition class according to its time span.
+     * @param span time range of the tuition class.
+     * @return the font size to be used.
+     */
+    public int getFontSize(int span) {
         if (span < 3) {
             return 1;
         }
@@ -179,4 +185,19 @@ public class Timetable {
         return DEFAULT_FONT_SIZE;
     }
 
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public int getTotalRows() {
+        return totalRows;
+    }
+
+    public Node getFirstLabel() {
+        return this.infoPage.getFirstLabelInGridPane();
+    }
 }
