@@ -24,7 +24,7 @@ import seedu.address.model.person.TutorialGroup;
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENDER = "N";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "@651234";
     private static final String INVALID_NATIONALITY = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "A";
