@@ -214,6 +214,25 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Deletes personToBeDeleted from all tasks.
+     *
+     * @param personToBeDeleted Person to be deleted.
+     */
+    public void deletePeople(Person personToBeDeleted) {
+        for (Task t : internalList) {
+            if (t.containsPerson(personToBeDeleted)) {
+                Set<Person> newPersonList = new HashSet<>(t.getPeople());
+                newPersonList.remove(personToBeDeleted);
+
+                Task newTask = new Task(t.getTaskDescription(), t.getCompletionStatus(), t.getTaskDate(),
+                        newPersonList, t.getTags());
+
+                setTask(internalList.indexOf(t), newTask);
+            }
+        }
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
