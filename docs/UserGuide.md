@@ -77,7 +77,7 @@ This is an area where some features can be found. As TutorAid primarily interact
 {:.no_toc}
 The Command Box is a field in which you can type instructions (commands) to TutorAid. Text in this user guide that is `highlighted` should typically be copied into the command box exactly (including spaces). After you have typed a command into this box, you can press ENTER :leftwards_arrow_with_hook: on your keyboard to tell TutorAid to execute your command.
 
-If your command is of the wrong [format](#2.3-command-format), TutorAid will try to show you the correct format in the Console if it is able to infer what command you had intended to provide.
+If your command is of the wrong [format](#23-command-format), TutorAid will try to show you the correct format in the Console if it is able to infer what command you had intended to provide.
 
 #### Console
 {:.no_toc}
@@ -205,7 +205,7 @@ You can also experiment with some of the other TutorAid commands that are listed
 If you are new to TutorAid, we hope that you have gone through the [Beginner's Tutorial](#4-beginners-tutorial) to gain a better understanding on how TutorAid can help to 
 ease your tutoring tasks! This section lists all the available commands in TutorAid. 
 
-The commands can be split into 3 main categories: _Student_ commands, _Lesson_ comamnds, _Student and Lesson_ commands and _Other_ commands. This section will also be split into these 4 sub-sections for easier navigation.
+The commands can be split into 3 main categories: _Student_ commands, _Lesson_ commands, _Student and Lesson_ commands and _Other_ commands. This section will also be split into these 4 sub-sections for easier navigation.
 
 For more information about how to interpret any of the commands, you check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
 
@@ -491,7 +491,7 @@ Action | Format and Examples
 **[Delete student](#deleting-a-student--delete)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **[Edit student](#editing-a-student--edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **[View student](#viewing-a-student--view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
-**[Find student](#locating-students-by-name-find--s)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
+**[Find student](#finding-students-by-name-find--s)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
 **[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student--del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
@@ -504,7 +504,7 @@ Action | Format and Examples
 **[Delete lesson](#deleting-a-lesson--del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
 **[View lesson](#viewing-a-lesson--view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
-**[Find lesson](#locating-lessons-by-name-find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
+**[Find lesson](#finding-lessons-by-name-find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 
 ### 8.3 Student and Lesson commands
 
