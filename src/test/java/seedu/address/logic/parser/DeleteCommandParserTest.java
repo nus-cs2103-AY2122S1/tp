@@ -68,6 +68,6 @@ public class DeleteCommandParserTest {
 
         // Duplicates as last few inputs
         assertParseFailure(parser, "2 3 4 4 4",
-                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE)); 
+                String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
     }
 }
