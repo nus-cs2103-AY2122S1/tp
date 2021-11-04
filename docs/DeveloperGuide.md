@@ -237,22 +237,70 @@ This is evident in our differing Edit and Delete commands as well.
 
 #### Implementation
 
-- Set Tables command `[settables]` takes in a list of numbers as arguments and creates a TableList that is stored in the ModelManager
+Set Tables command `[settables]` takes in a list of numbers as arguments and creates a TableList that is stored in the ModelManager
 
-- The input integers have to be comma separated and each integer is taken as the size of one new table. 
+An AddEmployeeCommand is created through the usage of our addE command.
 
-- Input is checked to be valid and exception is thrown if the input are not positive-integers
+The process in which an Employee is added can be broken down into 2.
 
-- Input integers can also be formatted as `[size of table]x[number of tables with this size]`
-  - This allows the user to quickly add large number of tables with the same table size at once instead of typing out the entire list
-  - (eg. Instead of typing `settables 10,10,10,10,10,6,6,6,6,1`, the user can type `settables 10x5,6x4,1` which help in efficiency as a keyboard-preferred user)
+1. User input is sent into the RhrhParser and a SetTablesCommand is created.
 
-- There is no add/remove/edit table or table list
-  - This is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
+2. The SetTablesCommand then proceeds to create and add the new tables to RHRH.
 
-- Everytime user uses this command, the entire list of tables will be replaced, and ALL reservations will be deleted.
-  - Again, this is to prevent the reservations and previously-linked table id not being in sync
+In the first step, the user input is parsed in SetTableCommandParser and broken down for other methods from other classes to create a SetTablesCommand. This is depicted in the Sequence Diagram below. 
 
+![SetTablesSequenceDiagram](images/SetTablesSequenceDiagram.png)
+
+Once the SetTablesCommand is created, the LogicManager will then execute the SetTablesCommand and add the newly created list of tables to the model
+
+Finally, a success message is printed to the user saying how many tables were set
+
+##### Flow of execution
+
+The activity diagram below shows the flow of execution when a user calls this command together with the details when SetTablesCommand is executed
+
+![SetTablesActivityDiagram](images/SetTablesActivityDiagram.png)
+
+After user calls the command:
+
+1. Command syntax and user input arguments are checked if they are valid
+
+2. User input arguments are parsed and a SetTablesCommand is created and executed
+
+During the SetTablesCommand execution:
+
+1. The Table ID will be reset
+
+2. All current reservations will be removed
+
+3. New tables with the specified sizes will be created and added into a new list
+
+4. New list of tables will overwrite the old list of tables in the TableManager inside the RHRH
+
+#### Design Considerations
+
+1. User is allowed to format the argument for table sizes as a singular table size (e.g. `2` = 1 table that accommodates 2 people) or, with an `x` for multiple tables with the same size (e.g. `10x3` = 3 tables that accommodate 10 people)
+    * This is because we find that in an actual restaurant, there will be many tables with the same sizes so this allows the user to set the tables faster without repeating the table sizes many times. Hence, the design choice is to allow for these `x` syntax.
+
+
+2. Table IDs will be reset to start from 1
+   * This is because we want the new set of tables to have the correct table IDs starting from 1 and not be affected by the old set of tables
+
+
+3. All current reservations will be removed
+    * This is because each reservation is linked to exactly one table so changing the tables in the restaurant will mess up the reservation and thus the reservations and tables will not be in sync. Hence, the design choice is to remove all reservations.
+
+
+4. There is no add/remove/edit table or table list
+    * Again, this is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
+
+#### Future Implementations
+
+In the future implementations, we plan to allow editing of tables and allowing the user to shift reservations to specific tables if they want to overwrite the original assigned table.
+
+Checks have to be implemented to ensure that the reservations-table pairings are still valid.
+
+This will allow for greater flexibility for restaurant managers where they can manually assign seats to certain reservations (e.g. Assigning a big table to a small group of VIPs even though the table space is not optimized)
 
 ### \[Proposed\] Undo/redo feature
 
