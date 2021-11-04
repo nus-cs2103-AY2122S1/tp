@@ -21,7 +21,11 @@ public class TagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 a/friends ";
 
     public static final String MESSAGE_TAGGED_PERSON_SUCCESS = "Successfully added/removed required tag(s) to %1$s!";
-    public static final String MESSAGE_INVALID_TAG_FORMAT = "Invalid Tag Format in Command";
+    public static final String MESSAGE_INVALID_TAG_INDEX = "Invalid index entered! Tag index must be a "
+            + "positive integer";
+    public static final String MESSAGE_MISSING_ADD_AND_REMOVE_TAG_ARGS = "Tags to be added and removed are missing!\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_MISSING_ADD_TAG_ARGS = "Tags to be added are missing!\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_MISSING_REMOVE_TAG_ARGS = "Tags to be removed are missing!\n" + MESSAGE_USAGE;
 
     private final Index targetIndex;
     private final ArrayList<Tag> toAdd;
