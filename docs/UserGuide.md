@@ -10,15 +10,13 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 ### About this guide
 
 This guide aims to help users get familiar with using RecruitIn's features.
-* **New users** can get started by following the steps under [Quick start](#quick-start). New users may also view
-descriptions of the usage of each component in RecruitIn under [Usages](#usages)
+* **New users** can get started by following the steps under [Quick start](#quick-start).
 * **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. A **summary** of existing features can also be viewed under [Command summary](#command-summary).
 * **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
 * Commonly addressed questions can be viewed under [FAQ](#faq). 
 
 ### Table of Contents
   * [Quick start](#quick-start)
-  * [Usages](#usages)
   * [Features](#features)
     + [Viewing help : `help`](#viewing-help--help)
     + [Adding an applicant: `add`](#adding-an-applicant-add)
@@ -42,8 +40,14 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. If not, you can install it from [here](https://www.oracle.com/java/technologies/downloads/).
+1. Ensure you have Java `11` or above installed in your Computer. If not, you can install it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 Download the correct version based on your operating system (e.g. Linux, macOS, Windows) and follow the Java installation instructions.
+
+![Java 11 Download](./images/JavaDownload.png)
+
+<div markdown="block" class="alert alert-info">
+    **:information_source: Visit the link and scroll down to find Java SE Development Kit 11 as shown above.**<br>
+</div>
 
 2. Download the latest `recruitIn.jar` from [here](https://github.com/AY2122S1-CS2103T-F11-2/tp/releases/tag/v1.3b).
 Scroll down to the bottom and click on `recruitIn.jar`.
@@ -192,13 +196,13 @@ Examples:
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
-| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p) |
-| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#emailaddress-e) |
 | ROLE | `r/` | [**role**](#role-r) |
-| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et) |
-| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s) |
-| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l) |
-| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employmenttype-et) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expectedsalary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#levelofeducation-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#yearsofexperience-y) |
 | TAG | `t/` | [**tag**](#tag-t) |
 | INTERVIEW | `i/` | [**interview**](#interview-i) |
 | NOTES | `nt/` | [**notes**](#notes-nt) |
@@ -236,13 +240,13 @@ Examples:
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
-| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p) |
-| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#emailaddress-e) |
 | ROLE | `r/` | [**role**](#role-r) |
-| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et) |
-| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s) |
-| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l) |
-| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employmenttype-et) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expectedsalary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#levelofeducation-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#yearsofexperience-y) |
 | TAG | `t/` | [**tag**](#tag-t) |
 | INTERVIEW | `i/` | [**interview**](#interview-i) |
 | NOTES | `nt/` | [**notes**](#notes-nt) |
@@ -298,13 +302,13 @@ Examples:
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n-1) |
-| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p-1) |
-| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e-1) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p-1) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#emailaddress-e-1) |
 | ROLE | `r/` | [**role**](#role-r-1) |
-| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et-1) |
-| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s-1) |
-| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l-1) |
-| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y-1) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employmenttype-et-1) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expectedsalary-s-1) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#levelofeducation-l-1) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#yearsofexperience-y-1) |
 | TAG | `t/` | [**tag**](#tag-t-1) |
 | INTERVIEW | `i/` | [**interview**](#interview-i-1) |
 | NOTES | `nt/` | [**notes**](#notes-nt-1) |
@@ -556,14 +560,14 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### PHONE_NUMBER `p/`
     * A PHONE_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
-    * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phone_number-p).
+    * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phonenumber-p).
     * For example:
         * A `99999999` input can only match with ***Contact Number*** s that are `99999999`.
         * A `99999999 88888888` input can only match with ***Contact Number*** s that are `99999999` and `88888888`.
 
 * ##### EMAIL_ADDRESS `e/`
     * An EMAIL_ADDRESS is considered matching with an ***Email Address*** only if **at least 1** keyword is equal to **at least 1** word in the ***Email Address***.
-    * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#email_address-e).
+    * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#emailaddress-e).
     * For example:
         * A `alexyeoh@example.com` input can match with ***Email*** s such as `alexyeoh@example.com`.
         * A `alexyeoh@example.com marysue@gmail.com` input can match with ***Email*** s such as `alexyeoh@example.com`
@@ -579,7 +583,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### EMPLOYMENT_TYPE `et/`
     * An EMPLOYMENT_TYPE is considered matching with an ***Employment Type*** only if it **starts with any** of the keywords in the ***Employment Type***.
-    * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employment_type-et).
+    * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employmenttype-et).
     * For example:
         * A `Full time` or `full time` or `full` input will match only with ***Employment Type*** s that are ```Full time```
         * A ```Full part``` input will match with all ***Employment Type*** s that are ```Full time``` or ```Part time```
@@ -589,14 +593,14 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### EXPECTED_SALARY `s/`
     * An EXPECTED_SALARY is considered matching with a ***Expected Salary*** only if **at least 1** keyword is within a range of `500` from **at least 1** keyword in the ***Expected Salary***.
-    * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
+    * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expectedsalary-s).
     * For example:
         * A `3000` input can match with ***Expected Salary*** s that range from `2500` to `3500` inclusive.
         * A `2500 5000` input can match with ***Expected Salary*** s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
 
 * ##### LEVEL_OF_EDUCATION `l/`
     * A LEVEL_OF_EDUCATION is considered matching with a ***Level of Education*** only if it **starts with any** of the keywords in the ***Level of Education***.    
-    * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
+    * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#levelofeducation-l).
     * For example:
         * A `H` input can match with ***Level of Education***s such `High School`, but not with *Level of Education*s such as `PhD`.
         * A `High School` input will match with all *Level of Education*s that are `High School`, but not with *Level of Education*s such as `Middle School`.
@@ -605,7 +609,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### YEARS_OF_EXPERIENCE `y/`
     * A YEARS_OF_EXPERIENCE is considered matching with a ***Years Of Experience*** only if the value represented by **at least 1** keyword is larger than or equal to the value represented by the ***Years Of Experience***.
-    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y).
+    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#yearsofexperience-y).
     * For example:
         * A `3` input can match with ***Year Of Experience*** s that are higher than or equal to 3.
         * A `2 3` input can match with ***Year Of Experience*** s that are higher than or equal to 2.
