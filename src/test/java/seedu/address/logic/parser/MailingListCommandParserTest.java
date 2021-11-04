@@ -11,10 +11,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.MailingListCommand;
 
 class MailingListCommandParserTest {
+    private static final String INVALID_PREFIX = "k/";
     private MailingListCommandParser parser = new MailingListCommandParser();
-
-    private final String INVALID_PREFIX = "k/";
-
 
     @Test
     public void parse_emptyArg_defaultArgs() {
@@ -40,7 +38,7 @@ class MailingListCommandParserTest {
     public void parse_extraDataExists_failure() {
         Set<Prefix> prefixes = Set.of(PREFIX_PHONE);
         MailingListCommand expectedCommand = new MailingListCommand(prefixes);
-        assertParseFailure(parser, INVALID_PREFIX + " " +  PREFIX_PHONE.getPrefix(), MailingListCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, INVALID_PREFIX + " " + PREFIX_PHONE.getPrefix(), MailingListCommand.MESSAGE_USAGE);
     }
 
 }
