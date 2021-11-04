@@ -23,8 +23,7 @@ public class AssessmentTest {
 
     @Test
     public void constructor_invalidAssessment_throwsIllegalArgumentException() {
-        String invalidAssessment = "";
-        assertThrows(IllegalArgumentException.class, () -> new Assessment(invalidAssessment));
+        assertThrows(IllegalArgumentException.class, () -> new Assessment("%/(]"));
     }
 
     @Test
@@ -51,14 +50,14 @@ public class AssessmentTest {
     }
 
     @Test
-    public void isGraded_ungraded() {
+    public void isGraded_ungraded_returnsFalse() {
         ID id = new IdBuilder().build();
         Assessment assessment = new AssessmentBuilder().build();
         assertFalse(() -> assessment.isGraded(id));
     }
 
     @Test
-    public void isGraded_graded() {
+    public void isGraded_graded_returnsTrue() {
         ID id = new IdBuilder().withValue(VALID_ID_AMY).build();
         Assessment assessment = new AssessmentBuilder()
                 .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
