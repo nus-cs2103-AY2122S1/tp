@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **New Feature**: Batch Import
     * What it does: Imports contacts from _csv_ files. 
     * Justification: To allow ease of transition from most modern marketing software.
-    * Highlights: Transfer all you contacts to SPAM in just a couple moments.
+    * Highlights: Transfer all your contacts to SPAM in just a couple moments.
     * Credits: [Splitting by Character, Unless in Quotes](https://stackabuse.com/regex-splitting-by-character-unless-in-quotes/) by Scott Robinson.
 
 * **New Feature**: Batch Export
