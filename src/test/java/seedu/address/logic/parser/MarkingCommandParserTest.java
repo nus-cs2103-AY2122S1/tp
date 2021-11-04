@@ -89,7 +89,7 @@ public class MarkingCommandParserTest {
         assertParseFailure(parserForUnmark, "70 2 3 2 2 1 70",
                 String.format(errorDueToDuplicateIndex, UnmarkCommand.MESSAGE_USAGE));
 
-         // Duplicates as last few inputs
+        // Duplicates as last few inputs
         assertParseFailure(parserForMark, "2 3 4 4 4",
                 String.format(errorDueToDuplicateIndex, MarkCommand.MESSAGE_USAGE));
         assertParseFailure(parserForUnmark, "2 3 4 4 4",
