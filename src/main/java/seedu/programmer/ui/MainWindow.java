@@ -1,7 +1,5 @@
 package seedu.programmer.ui;
 
-import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -35,7 +33,6 @@ import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.UploadCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 
@@ -60,6 +57,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private DashboardWindow dashboardWindow;
+    private Popup popup = new Popup();
 
     @FXML
     private Scene primaryScene;
@@ -168,6 +166,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setY(guiSettings.getWindowCoordinates().getY());
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -179,10 +181,6 @@ public class MainWindow extends UiPart<Stage> {
         }
         logger.fine("Showing help window about the application.");
         helpWindow.show();
-    }
-
-    void show() {
-        primaryStage.show();
     }
 
     /**
@@ -199,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Display the selected student's lab results.
+     * Displays the selected student's lab results.
      */
     @FXML
     public void handleShowResult() {
@@ -209,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Display the dashboard.
+     * Displays the dashboard window.
      */
     @FXML
     private void handleDashboard() {
@@ -234,27 +232,20 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
-        List<Student> stuList;
-        try {
-            stuList = FileUtil.getStudentsFromCsv(chosenFile);
-        } catch (IllegalArgumentException | IOException e) {
-            displayPopup("Upload failed: " + e.getMessage()); // Error with file data
-            return;
-        } catch (IllegalValueException e) {
-            displayPopup(e.getMessage()); // Error with file headers
+        List<Student> stuList = getStudentList(chosenFile);
+        if (stuList == null) {
             return;
         }
 
-        ProgrammerError newPE = new ProgrammerError();
         try {
-            newPE.setStudents(stuList);
+            logic.replaceExistingStudents(stuList);
         } catch (DuplicateStudentException e) {
+            logger.info("Aborting: file contains duplicate student");
             displayPopup("Upload failed: " + e.getMessage());
-            return;
         }
-        logic.updateProgrammerError(newPE);
-        logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
-        logic.saveProgrammerError(newPE);
+
+        displayPopup("Upload success! All past students have been deleted. You now have "
+                    + stuList.size() + " students.");
         logger.info("Uploaded CSV data successfully!");
     }
 
@@ -272,11 +263,44 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         File destinationFile = promptUserForDestination();
-        if (destinationFile != null) {
-            JsonUtil.writeJsonToCsv(jsonData, destinationFile);
-            displayPopup("Your data has been downloaded to " + destinationFile + "!");
-            logger.info("Data successfully downloaded as CSV.");
+        if (destinationFile == null) {
+            return;
         }
+
+        JsonUtil.writeJsonToCsv(jsonData, destinationFile);
+        displayPopup("Your data has been downloaded to " + destinationFile + "!");
+        logger.info("Data successfully downloaded as CSV.");
+    }
+
+    @FXML
+    private void handleHover() {
+        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
+    }
+
+    @FXML
+    private void handleUnhover() {
+        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
+    }
+
+    private List<Student> getStudentList(File chosenFile) {
+        List<Student> stuList;
+        try {
+            stuList = FileUtil.getStudentsFromCsv(chosenFile);
+        } catch (IllegalArgumentException | IOException e) {
+            displayPopup("Upload failed: " + e.getMessage()); // Error with file data
+            return null;
+        } catch (IllegalValueException e) {
+            displayPopup(e.getMessage()); // Error with file headers
+            return null;
+        }
+
+        if (stuList.size() == 0) {
+            displayPopup("Upload failed: No students were found in your file. "
+                        + "Use the purge command if you want to remove all students.");
+            return null;
+        }
+
+        return stuList;
     }
 
     /**
@@ -287,8 +311,8 @@ public class MainWindow extends UiPart<Stage> {
     private void displayPopup(String message) {
         // We should not need to display an empty popup
         assert (message != null);
-        Popup popup = createPopup(message);
         double tenPercent = 1 - NINETY_PERCENT;
+        configurePopup(message);
 
         // Add some left padding according to primaryStage's width
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * tenPercent / 2);
@@ -302,26 +326,30 @@ public class MainWindow extends UiPart<Stage> {
      * Creates a Popup object with a message.
      *
      * @param message The text to display to the user
-     * @return a Popup object
      */
-    private Popup createPopup(String message) {
-        // @@author AllardQuek-reused
-        // Reused with modifications from https://stackoverflow.com/questions/18669209/
-        final Popup popup = new Popup();
+    private void configurePopup(String message) {
         popup.setAutoFix(true);
         popup.setHideOnEscape(true);
+        Label label = createLabelForPopup(message);
+        popup.getContent().clear();
+        popup.getContent().add(label);
+    }
 
+    /**
+     * Creates a Label object with a message and styling.
+     *
+     * @param message to be displayed in the label
+     * @return a Label object with the message and styling
+     */
+    private Label createLabelForPopup(String message) {
         Label label = new Label(message);
         label.setWrapText(true);
         label.setMaxWidth(primaryStage.getWidth() * NINETY_PERCENT);
-        label.getStylesheets().add("view/Styles.css");
-        label.getStyleClass().add("popup");
+        label.getStyleClass().add("popup-label");
 
         // Hide popup when the user clicks on it
         label.setOnMouseReleased(e -> popup.hide());
-
-        popup.getContent().add(label);
-        return popup;
+        return label;
     }
 
     /**
@@ -389,15 +417,5 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    @FXML
-    private void handleHover() {
-        exitButton.setStyle("-fx-background-color: -fx-light-bg-color;");
-    }
-
-    @FXML
-    private void handleUnhover() {
-        exitButton.setStyle("-fx-background-color: -fx-main-bg-color;");
     }
 }

@@ -106,18 +106,6 @@
     -fx-padding: 0 0 0 0;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
 .list-cell:filled:selected #cardPane {
     -fx-border-color: -fx-highlight-color;
     -fx-border-width: 1;
@@ -235,7 +223,6 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-background-radius: 0;
     -fx-background-color: -fx-main-bg-color;
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 11pt;
@@ -256,7 +243,6 @@
 
 .button:focused {
     -fx-font-size: 11pt;
-    -fx-background-radius: 0;
     -fx-background-color: -fx-main-bg-color;
     -fx-text-fill: #d8d8d8;
     -fx-border-radius: 10;
@@ -302,6 +288,14 @@
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
+}
+
+.popup-label {
+    -fx-background-color: -fx-highlight-color;
+    -fx-text-fill: -fx-main-bg-color;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-padding: 10;
 }
 
 .scroll-bar {

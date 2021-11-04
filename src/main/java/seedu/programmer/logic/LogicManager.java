@@ -1,7 +1,10 @@
 package seedu.programmer.logic;
 
+import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -18,6 +21,7 @@ import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.DisplayableObject;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.storage.Storage;
 
 
@@ -87,7 +91,6 @@ public class LogicManager implements Logic {
         }
     }
 
-
     @Override
     public ReadOnlyProgrammerError getProgrammerError() {
         return model.getProgrammerError();
@@ -116,5 +119,14 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void replaceExistingStudents(List<Student> stuList) throws DuplicateStudentException {
+        ProgrammerError newPE = new ProgrammerError();
+        newPE.setStudents(stuList);
+        updateProgrammerError(newPE);
+        updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
+        saveProgrammerError(newPE);
     }
 }
