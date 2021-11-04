@@ -1,4 +1,6 @@
 @startuml
+skinparam wrapWidth 140
+skinparam defaultTextAlignment center
 
 start
 :User inputs add command;
@@ -6,7 +8,9 @@ start
 :AddCommandParser parses the command;
 
 if() then ([Input arguments are valid])
-    if() then([Person's name does not exist in the address book])
+    if() then([The elderly's name
+    does not exist
+    in the address book])
         :addPerson;
     else ([else])
         :Throw CommandException;

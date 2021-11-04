@@ -1,13 +1,16 @@
 @startuml
+skinparam wrapWidth 140
+skinparam defaultTextAlignment center
+
 start
-:user inputs done command;
+:User inputs done command;
 :Logic executes done command;
 :DoneCommandParser parses the command;
 
-if () then ([Visit date is specified in correct format])
-    if () then ([Index is the valid])
-        if () then ([There is a next visit for the elderly])
-            :executes DoneCommand;
+if () then ([Visit date is in correct format])
+    if () then ([Index is valid])
+        if () then ([The elderly has a next visit])
+            :Execute DoneCommand;
         else ([else])
             :Throw CommandException;
         endif
