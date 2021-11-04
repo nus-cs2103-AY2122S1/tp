@@ -216,7 +216,22 @@ The following sequence diagram shows how the show operation works.
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+#### Design considerations:
 
+**Aspect: User command to use in filtering interviews:**
+
+* **Alternative 1 (current choice):** Separate command for filtering interviews
+    * Pros: Command has single responsibility of filtering interviews based on whether they haved passed or are upcoming.
+    * Pros: Easy to use for user, only has two inputs it can take.
+    * Cons: Harder to implement than adding to `find` command.
+    * Cons: User might be confused between `find` command for interviews and `filter_interview` command.
+
+* **Alternative 2:** Part of `find` command functionality
+    * Pros: Easy to implement
+    * Pros: Intuitive for user to use `find` command to find certain types of interviews (past or future)
+    * Cons: Breaks the single responsibility principle as it does not find a specific input for a prefix, but rather
+    types of inputs.
+   
 ### Find feature
 The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
 input. This command then updates the ```model``` accordingly.
