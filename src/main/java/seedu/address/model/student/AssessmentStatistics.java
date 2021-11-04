@@ -28,10 +28,6 @@ public class AssessmentStatistics {
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
 
     private final Assessment assessment;
-    private final double binSize = DEFAULT_BIN_SIZE;
-    private int numScores = 0;
-    private double sumOfScores = 0.0;
-
 
     /**
      * Constructs a {@code AssessmentStatistics} with the specified {@code Assessment}.
@@ -41,11 +37,6 @@ public class AssessmentStatistics {
         requireNonNull(assessment.scores);
 
         this.assessment = assessment;
-
-        for (Score score : assessment.scores.values()) {
-            numScores++;
-            sumOfScores += score.getNumericValue();
-        }
     }
 
     /**
@@ -100,7 +91,7 @@ public class AssessmentStatistics {
     public Map<String, Number> getScoreDistribution() {
         Map<Bin, Integer> binCounts = new HashMap<>();
 
-        List<Bin> bins = createBins(binSize);
+        List<Bin> bins = createBins(DEFAULT_BIN_SIZE);
 
         for (Bin b : bins) {
             binCounts.put(b, 0);
@@ -166,6 +157,12 @@ public class AssessmentStatistics {
      * Returns the mean score for the {@code Assessment}.
      */
     public double getMean() {
+        int numScores = 0;
+        double sumOfScores = 0.0;
+        for (Score score : assessment.scores.values()) {
+            numScores++;
+            sumOfScores += score.getNumericValue();
+        }
         return numScores == 0 ? Score.MIN_SCORE : sumOfScores / numScores;
     }
 
