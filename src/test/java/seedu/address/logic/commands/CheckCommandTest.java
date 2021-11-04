@@ -4,17 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.ReservationCommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.ParserUtil.DATE_FORMATTER;
-import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
-import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BOB;
 import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBookCustomers;
+import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
+import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,25 +23,17 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.reservation.CustomerContainsReservationPredicate;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
-import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
-import seedu.address.model.table.Table;
 
 class CheckCommandTest {
-    private LocalDate date1 = LocalDate.parse("2021-01-01", DATE_FORMATTER);
-    private LocalDate date2 = LocalDate.parse("2021-02-02", DATE_FORMATTER);
-    private LocalTime time = LocalTime.parse("1200", TIME_FORMATTER);
+    private LocalDate date1 = ALICE_RESERVATION.getDateTime().toLocalDate();
+    private LocalDate date2 = BENSON_RESERVATION.getDateTime().toLocalDate();
+    private LocalTime time = ALICE_RESERVATION.getDateTime().toLocalTime();
     private EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
     private Model model = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
     private Model resultModel = new ModelManager(getTypicalAddressBookCustomers(), new UserPrefs());
-    private Table table1 = new Table(5, 10);
-    private Table table2 = new Table(10, 11);
-    private Reservation reservation1 = new Reservation(
-            CUSTOMER_ALICE.getPhone(), 5, LocalDateTime.of(date1, time), table1, new Remark(""), Set.of()
-    );
-    private Reservation reservation2 = new Reservation(
-            CUSTOMER_BOB.getPhone(), 10, LocalDateTime.of(date2, time), table2, new Remark(""), Set.of()
-    );
+    private Reservation reservation1 = ALICE_RESERVATION;
+    private Reservation reservation2 = BENSON_RESERVATION;
 
     @Test
     void execute_validDateTime_success() {
@@ -84,23 +74,23 @@ class CheckCommandTest {
         ListContainsReservationPredicate predicate1 = new ListContainsReservationPredicate(date1, time, typeOfCheck);
         ListContainsReservationPredicate predicate2 = new ListContainsReservationPredicate(date2, time, typeOfCheck);
 
-        CheckCommand findFirstCommand = new CheckCommand(predicate1);
-        CheckCommand findSecondCommand = new CheckCommand(predicate2);
+        CheckCommand checkFirstCommand = new CheckCommand(predicate1);
+        CheckCommand checkSecondCommand = new CheckCommand(predicate2);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(checkFirstCommand.equals(checkFirstCommand));
 
         // same values -> returns true
-        CheckCommand findFirstCommandCopy = new CheckCommand(predicate1);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        CheckCommand checkFirstCommandCopy = new CheckCommand(predicate1);
+        assertTrue(checkFirstCommand.equals(checkFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(checkFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(checkFirstCommand.equals(null));
 
         // different command -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(checkFirstCommand.equals(checkSecondCommand));
     }
 }
