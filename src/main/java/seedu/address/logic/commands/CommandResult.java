@@ -159,7 +159,8 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showCommandSummary, showHelp, exit, display, contactToDisplay, displaySummary, summary);
+        return Objects.hash(feedbackToUser, showCommandSummary, showHelp,
+                exit, display, contactToDisplay, displaySummary, summary);
     }
 
 }
