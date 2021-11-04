@@ -29,15 +29,15 @@ public class MarkingCommandParserTest {
 
         // Multiple index
         assertParseSuccess(parserForMark, "1 2",
-                new MarkCommand(new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON}));
+                new MarkCommand(new Index[]{INDEX_SECOND_PERSON, INDEX_FIRST_PERSON}));
         assertParseSuccess(parserForUnmark, "1 2",
-                new UnmarkCommand(new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON}));
+                new UnmarkCommand(new Index[]{INDEX_SECOND_PERSON, INDEX_FIRST_PERSON}));
 
         // Multiple index with varying white space
         assertParseSuccess(parserForMark, "3            1     2",
-                new MarkCommand(new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON}));
+                new MarkCommand(new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON}));
         assertParseSuccess(parserForUnmark, "3            1     2",
-                new UnmarkCommand(new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON}));
+                new UnmarkCommand(new Index[]{INDEX_THIRD_PERSON, INDEX_SECOND_PERSON, INDEX_FIRST_PERSON}));
     }
 
     @Test
