@@ -28,13 +28,14 @@ public class TutorialIdOrRoleContainsKeywordsPredicate extends AttributeContains
      * @return boolean
      */
     public boolean test(Person person) {
-        if (type == TUTORIAL_ID_TYPE) {
+        if (type.equals(TUTORIAL_ID_TYPE)) {
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getTutorialId().value, keyword));
-        } else {
+        } else if (type.equals(ROLE_TYPE)) {
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getType().value, keyword));
         }
+        return false;
     }
 
     @Override
