@@ -18,16 +18,15 @@ import seedu.address.model.person.Person;
 public class DeleteMultipleCommand extends Command {
     public static final String COMMAND_WORD = "deletem";
     public static final String INDEX_SPLITTER = "-";
-    public static final String COMMAND_DESCRIPTION = "Deletes a range of people identified by the index numbers "
+    public static final String COMMAND_DESCRIPTION = "Deletes a range of people identified "
+            + "by the index numbers ( Both inclusive ) "
             + "in the displayed person list.\n";
-    public static final String COMMAND_EXAMPLE = "Parameters: START_INDEX - END_INDEX (must be positive integers,"
-            + " both inclusive)\n"
+    public static final String COMMAND_EXAMPLE = "Parameters: START_INDEX - END_INDEX \n"
             + "Example: " + COMMAND_WORD + " 8 " + INDEX_SPLITTER + " 14";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
-
     public static final String MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS = "Deleted Persons: ";
-    public static final String MESSAGE_CONSTRAINTS = "STARTINDEX cannot be larger than ENDINDEX";
+    public static final String MESSAGE_CONSTRAINTS = "START_INDEX cannot be larger than END_INDEX \n";
+    public static final String MESSAGE_INVALID_INDEX = Index.MESSAGE_INVALID_INDEX;
 
     private final Index startIndex;
     private final Index endIndex;
@@ -45,7 +44,7 @@ public class DeleteMultipleCommand extends Command {
         this.endIndex = endIndex;
     }
 
-    private boolean areValidIndexes(Index startIndex, Index endIndex) {
+    public static boolean areValidIndexes(Index startIndex, Index endIndex) {
         return startIndex.getZeroBased() <= endIndex.getZeroBased();
     }
 

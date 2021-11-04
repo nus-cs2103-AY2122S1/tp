@@ -204,36 +204,6 @@ public class ModelManager implements Model {
         birthdayReminders.clear();
         ObservableList<Person> updatedList = generateBirthdayReminderList(this.addressBook);
         birthdayReminders.addAll(updatedList);
-        // Buggy Implementation use brute force for now.
-        //        if (personToAdd.getBirthday().isEmpty()) {
-        //            return;
-        //        }
-        //
-        //        int indexToInsert = -1;
-        //        MonthDay birthdayToAdd = MonthDay.from(personToAdd.getBirthday().get().birthdate);
-        //        PersonBirthdayComparator comparator = new PersonBirthdayComparator();
-        //        if (MonthDay.now().isAfter(birthdayToAdd)) {
-        //            // BirthdayToAdd has past should inserted from the end of the list
-        //            indexToInsert = birthdayReminders.size();
-        //            while (indexToInsert > 0
-        //                    && comparator.compare(personToAdd, birthdayReminders.get(indexToInsert - 1)) < 0) {
-        //                indexToInsert--;
-        //            }
-        //        }
-        //        if (!MonthDay.now().isAfter(birthdayToAdd)) {
-        //            // BirthdayToAdd has not past should inserted at the start of the list
-        //            indexToInsert = 0;
-        //            while (indexToInsert < birthdayReminders.size()
-        //                    && comparator.compare(personToAdd, birthdayReminders.get(indexToInsert)) > 0) {
-        //                indexToInsert++;
-        //            }
-        //        }
-        //        if (indexToInsert == birthdayReminders.size() && !MonthDay.now().isAfter(birthdayToAdd)) {
-        //            // BirthdayToAdd is latest in the list but has not past therefore placed at start of list
-        //            birthdayReminders.add(0, personToAdd);
-        //        } else {
-        //            birthdayReminders.add(indexToInsert, personToAdd);
-        //        }
     }
 
     @Override

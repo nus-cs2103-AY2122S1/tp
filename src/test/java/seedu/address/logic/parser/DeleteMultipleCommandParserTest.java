@@ -19,6 +19,7 @@ public class DeleteMultipleCommandParserTest {
         assertParseSuccess(parser, "8" + INDEX_SPLITTER + "11",
                 new DeleteMultipleCommand(INDEX_EIGHTH_PERSON, INDEX_ELEVENTH_PERSON));
         assertParseSuccess(parser, "8 " + INDEX_SPLITTER + " 8",
+
                 new DeleteMultipleCommand(INDEX_EIGHTH_PERSON, INDEX_EIGHTH_PERSON));
     }
 
@@ -27,8 +28,8 @@ public class DeleteMultipleCommandParserTest {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "14 -- 18",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_INVALID_INDEX));
         assertParseFailure(parser, "9 -1 3",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_INVALID_INDEX));
     }
 }

@@ -66,7 +66,7 @@ public class BirthdayReminderCard extends UiPart<Region> {
     private String generateBirthdayReminderMessage(Birthday birthday) {
         assert birthday != null;
         LocalDate birthdate = birthday.birthdate;
-        MonthDay birthMonthDay = MonthDay.from(birthdate);
+        MonthDay birthMonthDay = accountForLeapDay(MonthDay.from(birthdate));
         String birthMonthDayAsString = birthMonthDay.format(DateTimeFormatter.ofPattern(MONTH_DAY_STRING_FORMAT));
         Year birthYear = Year.from(birthdate);
         LocalDate birthdateInCurrentYear = birthMonthDay.atYear(YearMonth.now().getYear());
@@ -83,6 +83,21 @@ public class BirthdayReminderCard extends UiPart<Region> {
             return String.format(BIRTHDAY_MESSAGE_THIS_WEEK, age, daysToBirthday, birthMonthDayAsString);
         }
         return String.format(BIRTHDAY_MESSAGE_DEFAULT, age, birthMonthDayAsString);
+    }
+
+    private MonthDay accountForLeapDay(MonthDay birthMonthDay) {
+        boolean isLeapDay = birthMonthDay.equals(MonthDay.of(2, 29));
+        boolean hasPassedThisYear = birthMonthDay.isAfter(MonthDay.now());
+        int thisYear = Year.now().getValue();
+        if (!hasPassedThisYear && isLeapDay && !Year.now().isLeap()) {
+            // Leap day birthday yet to pass and currently leap year
+            return birthMonthDay.withDayOfMonth(28);
+        } else if (hasPassedThisYear && isLeapDay && !Year.of(thisYear + 1).isLeap()) {
+            // Leap day birthday passed and next year is leap year
+            return birthMonthDay.withDayOfMonth(28);
+        } else {
+            return birthMonthDay;
+        }
     }
 
     private String generateSendWellWishesPrompt(String phoneNumber) {
