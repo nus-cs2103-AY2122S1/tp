@@ -63,7 +63,7 @@ public class AddToFolderCommand extends Command {
 
         for (Index index : this.indexList) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_INDEX_EXCEEDS_LIST_SIZE);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
             Person personToAdd = lastShownList.get(index.getZeroBased());

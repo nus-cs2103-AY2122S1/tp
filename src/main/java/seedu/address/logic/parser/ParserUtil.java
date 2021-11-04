@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Address;
@@ -21,8 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Person with this index does not exist";
-
+    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_OVERFLOW_INTEGER = "UNIon is unable to handle such a large integer";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -30,8 +32,25 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+
+        //Check for - symbol as first element
+        char firstElement = trimmedIndex.charAt(0);
+        if(firstElement == 45){
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        //Check if all values are integers only
+        for (int i = 0;i < trimmedIndex.length();i++) {
+            char element = trimmedIndex.charAt(i);
+            if(!Character.isDigit(element)){
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddToFolderCommand.MESSAGE_USAGE));
+            }
+        }
+
+        //Check if integer input is too big
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_OVERFLOW_INTEGER);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
