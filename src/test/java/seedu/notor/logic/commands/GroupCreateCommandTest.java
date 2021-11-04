@@ -119,7 +119,7 @@ public class GroupCreateCommandTest {
         // null -> returns false
         assertNotEquals(null, groupCreateCommand);
 
-        // different person -> returns false
+        // different group -> returns false
         assertNotEquals(groupCreateCommand, groupCreateCommand2);
     }
 
@@ -144,7 +144,7 @@ public class GroupCreateCommandTest {
         // null -> returns false
         assertNotEquals(null, groupCreateCommand);
 
-        // different person -> returns false
+        // different group -> returns false
         assertNotEquals(groupCreateCommand, groupCreateCommand2);
     }
 }
