@@ -129,7 +129,7 @@ Format birthday as `ddMMyyyy`.
 </div>
 
 Notes:
-* Phone number must be unique.
+* Phone number must be unique and must contain only numbers.
 * Emails must contain @. (Other stricter checks are not included as there are some emails that violate the convention).
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.

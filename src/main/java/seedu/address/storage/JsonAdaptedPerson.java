@@ -145,6 +145,12 @@ class JsonAdaptedPerson {
         } else if (!Birthday.isValidDate(birthday)) {
             logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
             modelBirthday = null;
+        } else if (Birthday.isFutureDate(birthday)) {
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
+            modelBirthday = null;
+        } else if (Birthday.isYear0000(birthday)) {
+            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
+            modelBirthday = null;
         } else {
             modelBirthday = new Birthday(birthday);
         }
