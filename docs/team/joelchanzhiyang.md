@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 **Code Contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=JoelChanZhiYang&tabRepo=AY2122S1-CS2103T-T17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 **Major Enhancements**
-* Implemented **claims command** ([#69](), [#101](), [#174]())
+* Implemented **claims command** ([#69](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/69), [#101](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/101), [#174](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/174))
   * **What it does**: The claim command allow users to add claims to the model.
   * **Justification**: Part of the role of an insurance agent is managing the insurance 
     claims of the client. The claim command allows the user to easily add, edit and delete 
