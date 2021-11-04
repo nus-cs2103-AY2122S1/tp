@@ -106,12 +106,10 @@ public class MakeUpLesson extends Lesson {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append("(Makeup)")
-                .append(" ")
-                .append("Start Date: ")
-                .append(getStartDate());
-
-        builder.append(super.toString());
+        builder.append("(")
+                .append(getTypeOfLesson())
+                .append(") ")
+                .append(super.toString());
 
         if (isCancelled()) {
             builder.append("; (Cancelled)");

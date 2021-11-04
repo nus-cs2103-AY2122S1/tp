@@ -258,7 +258,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         // common fields of Lesson
-        builder.append("; Date: ")
+        builder.append("Date: ")
                 .append(getDisplayDate())
                 .append("; Time: ")
                 .append(getTimeRange())

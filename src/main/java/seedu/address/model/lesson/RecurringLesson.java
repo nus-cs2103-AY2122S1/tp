@@ -191,8 +191,9 @@ public class RecurringLesson extends Lesson {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append("(Recurring)")
-                .append(" ")
+        builder.append("(")
+                .append(getTypeOfLesson())
+                .append(") ")
                 .append("Start Date: ")
                 .append(getStartDate());
 
@@ -201,7 +202,8 @@ public class RecurringLesson extends Lesson {
                     .append(getEndDate());
         }
 
-        builder.append(super.toString());
+        builder.append("; ")
+                .append(super.toString());
 
         String dates = getCancelledDates().stream().sorted()
                 .map(Date::toString).collect(Collectors.joining(", "));
