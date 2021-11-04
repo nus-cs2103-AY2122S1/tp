@@ -340,7 +340,7 @@ export Friends.csv
 
 ### Setting a Contact as Favourite - `fav`
 
-Helps to set a particular Student Contact as a Favourite.
+Helps to set a particular Student Contact as a Favourite only if the contact has not been favourited.
 
 Format:
 
@@ -356,7 +356,7 @@ fav 1
 
 ### Setting a Contact as Unfavourite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavourite.
+Helps to set a particular Student Contact as an Unfavourite only if the contact has been favourited.
 
 Format:
 
