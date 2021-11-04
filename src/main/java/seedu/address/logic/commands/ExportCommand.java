@@ -31,7 +31,7 @@ public class ExportCommand extends Command {
 
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
 
-    public static final String MESSAGE_IMPORT_FILE_WRONG_TYPE = "%s is in the wrong format!";
+    public static final String MESSAGE_EXPORT_FILE_WRONG_TYPE = "%s is in the wrong format!";
 
     private final String testPath;
     private final String fileName;
@@ -79,7 +79,7 @@ public class ExportCommand extends Command {
         } else if (StringUtil.isCsv(fileName)) {
             exportAddressBookToCsv(currentAddressBook);
         } else {
-            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+            throw new CommandException(String.format(MESSAGE_EXPORT_FILE_WRONG_TYPE, fileName));
         }
     }
 

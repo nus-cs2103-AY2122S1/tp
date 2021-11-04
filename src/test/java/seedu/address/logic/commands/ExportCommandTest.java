@@ -2,29 +2,37 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FILENAME_TXT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXISTING_FILE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_CSV;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.ui.PersonListPanel;
 
 public class ExportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
     private static final String PATH_TEST_FILES = "src/test/data/ExportImportCommandTest/TestFiles/";
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+    private final ModelStub modelStub = new ModelStubForExport();
+    private final ModelStub expectedModelStub = new ModelStubForExport();
 
     @Test
     public void equals() {
@@ -57,7 +65,7 @@ public class ExportCommandTest {
         String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, VALID_FILENAME_JSON);
 
         ExportCommand exportCommand = new ExportCommand(PATH_EMPTY_FOLDER, VALID_FILENAME_JSON);
-        assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(exportCommand, modelStub, expectedMessage, expectedModelStub);
         try {
             FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_JSON));
         } catch (IOException ioe) {
@@ -75,7 +83,7 @@ public class ExportCommandTest {
         String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, VALID_FILENAME_CSV);
 
         ExportCommand exportCommand = new ExportCommand(PATH_EMPTY_FOLDER, VALID_FILENAME_CSV);
-        assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(exportCommand, modelStub, expectedMessage, expectedModelStub);
         try {
             FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_CSV));
         } catch (IOException ioe) {
@@ -91,6 +99,177 @@ public class ExportCommandTest {
     public void execute_fileName_fileExists() {
         String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_FAILURE, VALID_EXISTING_FILE);
         ExportCommand exportCommand = new ExportCommand(PATH_TEST_FILES, VALID_EXISTING_FILE);
-        assertCommandFailure(exportCommand, model, expectedMessage);
+        assertCommandFailure(exportCommand, modelStub, expectedMessage);
+    }
+
+    /**
+     * Export command fails when there is the filename provided is of the wrong type.
+     * This should not happen as file type should be verified in ExportCommandParser.
+     * However, it is still checked here for completeness.
+     */
+    @Test
+    public void execute_fileNameWrongFileType_importFail() {
+        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_FILE_WRONG_TYPE, INVALID_FILENAME_TXT);
+        ExportCommand exportCommand = new ExportCommand(PATH_TEST_FILES, INVALID_FILENAME_TXT);
+        assertCommandFailure(exportCommand, modelStub, expectedMessage);
+    }
+
+    /**
+     * A model stub for export command.
+     */
+    private class ModelStubForExport extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return new AddressBook().getPersonList();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof ModelStubForExport)) {
+                return false;
+            }
+            return personsAdded.equals(((ModelStubForExport) other).personsAdded);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(personsAdded);
+        }
+    }
+
+    /**
+     * Stub for {@link Model} class.
+     */
+    private class ModelStub implements Model {
+
+        @Override
+        public Person getUserProfile() {
+            return null;
+        }
+
+        @Override
+        public boolean isProfilePresent() {
+            return false;
+        }
+
+        @Override
+        public void setUserProfile(Person userProfile) {
+
+        }
+
+        @Override
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+
+        }
+
+        @Override
+        public ReadOnlyUserPrefs getUserPrefs() {
+            return null;
+        }
+
+        @Override
+        public GuiSettings getGuiSettings() {
+            return null;
+        }
+
+        @Override
+        public void setGuiSettings(GuiSettings guiSettings) {
+
+        }
+
+        @Override
+        public Path getAddressBookFilePath() {
+            return null;
+        }
+
+        @Override
+        public void setAddressBookFilePath(Path addressBookFilePath) {
+
+        }
+
+        @Override
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return null;
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            return false;
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+
+        }
+
+        @Override
+        public void favouritePerson(Person target) {
+
+        }
+
+        @Override
+        public void unfavouritePerson(Person target) {
+
+        }
+
+        @Override
+        public void addPerson(Person person) {
+
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+
+        }
+
+        @Override
+        public void setSelectedIndex(int index) {
+
+        }
+
+        @Override
+        public int getSelectedIndex() {
+            return 0;
+        }
+
+        @Override
+        public void setPersonListControl(PersonListPanel personListPanel) {
+
+        }
+
+        @Override
+        public PersonListPanel getPersonListControl() {
+            return null;
+        }
+
+        @Override
+        public void setTabIndex(int index) {
+
+        }
     }
 }
