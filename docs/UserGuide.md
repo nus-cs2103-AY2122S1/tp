@@ -112,7 +112,8 @@ Adds a policy to the policy list.
 Format: `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM
 cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
+**:grey_exclamation**
 A policy should have more payments than the number of commissions, since every commission is tied to one payment!
 </div>
 
@@ -154,7 +155,8 @@ Edits an existing policy in the application.
 Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] 
 [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
+**:grey_exclamation**
 Careful changing the number of commissions or payments. A policy should have more payments than the number of commissions.
 </div>
 
