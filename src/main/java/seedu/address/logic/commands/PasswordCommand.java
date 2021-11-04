@@ -22,9 +22,9 @@ public class PasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + " newPassword";
 
     public static final String MESSAGE_SUCCESS = "Password updated!";
-    public static final String MESSAGE_WRONG_PASSWORD = "Wrong password. Please try again! %s";
+    public static final String MESSAGE_WRONG_PASSWORD = "Wrong password. Please try again!";
     public static final String MESSAGE_FAIL = "Something went wrong. Please try again!";
-    public static final String MESSAGE_INVALID_PASSWORD = "Invalid password! %s";
+    public static final String MESSAGE_INVALID_PASSWORD = "Invalid password!";
 
     private final String oldPassword;
     private final String newPassword;
