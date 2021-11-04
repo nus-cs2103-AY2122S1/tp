@@ -286,7 +286,7 @@ Examples:
 
 Shows the in-depth data analysis of individual, group, or the cohort's performance for assessments.
 
-Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f <export_file_path>]`
+Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f]`
 
 * Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments.
   * The student's score in each assessment, as well as the cohort mean and median score, will be shown as a line graph. 
@@ -297,7 +297,7 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 * Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
   * The cohort's score distribution will be shown as a histogram. 
 * Keywords are case-sensitive and only allows exact match. E.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
-* Entering `-f <export_file_path>` exports the graph produced from the command to the specified location. `<export_file_path>` can be relative or absolute filepath.
+* Entering `-f` exports the graph produced from the command to a `.png` file in the same directory as your JAR file.
 
 Examples:
 * `show -n Hong Fai` 
@@ -403,11 +403,9 @@ Examples:
 
 Exports data into a CSV file. Can be used to backup the data, or to send the data to colleagues for them to load into their copy of Source Control.
 
-Format: `export [-f <file_path>]`
+Format: `export`
 
-* The file path can be either the absolute path or the relative path.
-* The relative path will be relative to the folder your JAR file is located.
-* If the file path is not specified, it will be saved to `sourceControl.csv`.
+* The CSV file will be saved to `sourceControl.csv` in the same directory as your JAR file.
 * The format of the CSV file saved matches exactly the CSV format used by the `import` command.
 
 <div markdown="block" class="alert alert-primary">
@@ -417,14 +415,6 @@ Format: `export [-f <file_path>]`
 * The exported CSV file can be imported again to restore the state of the application when the data was exported
 
 </div>
-
-Examples:
-* `export -f student_data.csv` 
-  * exports database as file `student_data.csv` to the working directory of the application.
-* `export -f /home/prof/CS1101S/student_data.csv` 
-  * exports database to the given absolute path.
-* `export` 
-  * exports database as file `sourceControl.csv` to the working directory of the application.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -625,11 +615,11 @@ Action | Format | Examples
 **Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | `addscore -a Midterm -n Van Nhi -s 75`, `addscore -a Finals -i E0123456 -s 87.65`
 **List** | `list` |
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | `search -n Zhiying`, `search -g T02B R04D`
-**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f <export_file_path>]` | `show -n Jonas Chow`, `show -a Midterm Examination`
+**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | `show -n Jonas Chow`, `show -a Midterm Examination`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | `edit 1 -n Hong Fai -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | `import -f student_data.csv -g 2 -a 10 -t 1`
-**Export Data** | `export [-f <file_path>]` | `export -f save_data.csv`
+**Export Data** | `export` | `export`
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
 **Help** | `help` |
