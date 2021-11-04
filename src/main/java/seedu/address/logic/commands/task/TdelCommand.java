@@ -30,7 +30,7 @@ public class TdelCommand extends Command {
             + PREFIX_TASK_INDEX + "3 ";
 
     public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s.";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member.";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member.\n";
     public final Index targetTaskId;
 
     /**
@@ -53,7 +53,7 @@ public class TdelCommand extends Command {
         ObservableList<Task> tasks = taskList.asUnmodifiableObservableList();
         System.out.println(taskId);
         if (taskId >= tasks.size()) {
-            throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, targetTaskId.getOneBased()));
         }
         Task targetTask = tasks.get(targetTaskId.getZeroBased());
         Name deletedTaskName = targetTask.getName();
