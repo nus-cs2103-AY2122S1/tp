@@ -37,26 +37,6 @@ _text_ | Caption for images.
 :information_source: | Indication that the following text is a note.
 :bulb: | Indication that the following text is a tip.
 :exclamation: | Indication that the following text is important.
-
-### Command Format
-Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
-
-```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER…​```
-
-Detailed notes about the command format can be found [here](#features).
-
-|Component|Description|
-|---------|-----------|
-|Command word|The word that specifies which action you want TAB to execute.|
-|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student or lesson indices for commands that require them. The preamble may or may not be empty depending on the command.|
-|Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
-|Parameter| An input provided by the user for the execution of the command.|
-
-* Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
-  
-An example of a command in TAB:
-![Command format](images/CommandFormat.png)
   
 --------------------------------------------------------------------------------------------------------------------
 
@@ -117,6 +97,28 @@ No. | Section | Representation
 3 | Student List Panel | The area that shows the list of students you have in TAB.
 4 | Lesson List Panel | The area that shows the name of the student you have selected together with a list of lessons that the student has.
 5 | Center Panel | The area that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command Format
+Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
+
+```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER…​```
+
+Detailed notes about the command format can be found [here](#features).
+
+|Component|Description|
+|---------|-----------|
+|Command word|The word that specifies which action you want TAB to execute.|
+|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student or lesson indices for commands that require them. The preamble may or may not be empty depending on the command.|
+|Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
+|Parameter| An input provided by the user for the execution of the command.|
+
+* Each parameter prefix is separated from the others with a space.<br/>
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+
+An example of a command in TAB:
+![Command format](images/CommandFormat.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
