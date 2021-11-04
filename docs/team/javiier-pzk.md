@@ -17,7 +17,6 @@ restaurants.
     * What it does: Add/Edit/Delete a `Supplier` with the required and optional fields to the list of `Suppliers`.
     * Justification: We need to separate the different people, between employees, customers and suppliers and thus, 
       we separated the functions of Suppliers.
-<br>
 
 2. Implemented the [`sort supplier`]((https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/116)) and [`sort customer`](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/122) functionality.
     * What it does: Sorts the `Supplier` list according to a supplier field and order that the user specifies
