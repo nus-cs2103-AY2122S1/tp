@@ -205,6 +205,11 @@ A link between a particular friend and game shows that the friend plays the game
 This association is required for subsequent commands, e.g. for the application to display all games that a friend plays 
 or to recommend a friend to play with based on a particular game.
 
+<div markdown="block" class="alert alert-info">
+:information_source: If you link an already linked game to particular friend again, the previous link will be 
+overridden with the new link with the new `IN_GAME_USERNAME` and the friend's skill level set to `0`. 
+</div>
+
 Format: `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`
 
 Command constraints: 
