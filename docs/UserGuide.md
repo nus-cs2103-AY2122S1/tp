@@ -400,13 +400,13 @@ CONNECTIONS data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-CONNECTIONS data are saved as a JSON file `[JAR file location]/data/connections.json`. Advanced users are welcome to update data directly by editing that data file.
+CONNECTIONS data are saved as a JSON file `[JAR file location]/data/CONNECTIONS.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
 If your changes to the data file makes other its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
-If your changes to the data file makes optional fields (Birthday, Tag and Pin) have invalid format, CONNECTIONS will discard data for these fields and revert to default (empty for Birthday and Tag and false for Pin). Other data will be recovered. 
+If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (empty for Birthday and false for Pin). Other data will be recovered. 
 </div>
 
 ### Archiving data files `[coming in v2.0]`

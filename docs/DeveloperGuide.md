@@ -201,7 +201,7 @@ The operation are exposed in the `Command` interface as `Command#Execute`, speci
 Given below is an example usage scenario and how the pin mechanism behaves at each step.
 
 Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
-
+    
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
 Step 2. The user executes `add n/person3 …​` to add a new person. This person is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
@@ -352,6 +352,8 @@ Shows a list of people with upcoming birthdays. This list of birthday reminders 
 The list of birthdays is generated in the `ModelManager`, which implements the following functions:
 * `getBirthdayReminderList` which returns an `ObservableList<Person>` that is ordered according to upcoming birthdays.
 
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
 Step 1. On app startup sort people with birthday by birth month and day only into a list of people. Birthdays that are one day away are coloured green while birthdays that within one week are coloured blue.
 
 Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
@@ -385,8 +387,9 @@ Allows user to download a CSV file mailing list of the current view
 Users can use arguments to specify which fields to include in their download
 
 #### Implementation
+Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
-Step 1. The user filters the contacts using other commands, eg. `find`
+Step 1. The user filters the contacts using other commands, eg. `find`.
 
 Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 
@@ -395,6 +398,32 @@ Step 3. The user is prompted to pick the name and download location of their gen
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+
+### [Proposed] Partial data recovery feature
+Allows user to recover partial data in event of corruption in data file. 
+
+#### Proposed Implementation
+If data file is corrupt for fields other than `Birthday` and `Pin`, CONNECTIONS will use an empty data file upon the next start up. 
+The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonAddressBookStorage`. Upon getting an invalid data format for compulsory fields, `JsonAdaptedPerson` can return `null` and 
+not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+Step 1. The user edits the data file and changes `Tag` field of the first contact to an invalid value.
+
+Step 2. The user edits the data file and changes the `Email` field of the second contact to an invalid value.
+
+Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first person is invalid, `JsonAdaptedPerson`
+will not add the invalid `Tag`.
+
+Step 4. Since the value of `Email` (compulsory field) for the second person is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
+
+Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will not display the second person. The other fields and contacts will be displayed as per normal.  
+
+
+#### Design considerations:
+* Arguments for the command should follow the standard used in other parts of the software.
+* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

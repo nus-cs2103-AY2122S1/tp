@@ -30,7 +30,6 @@ class JsonAdaptedPerson {
     private static final String INVALID_BIRTHDAY_MESSAGE = "Birthday %s is invalid. Will start with empty birthday.";
     private static final String INVALID_PIN_MESSAGE = "Pin status %s is invalid. "
             + "Will start with not pinned by default.";
-    private static final String INVALID_TAG_NAME_MESSAGE = "Tag %s is invalid. Will remove tag from tag list";
 
     private final String name;
     private final String phone;
@@ -83,11 +82,7 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             Tag currentTag = tag.toModelType();
-            if (currentTag != null) {
-                personTags.add(currentTag);
-            } else {
-                logger.info(String.format(INVALID_TAG_NAME_MESSAGE, tag.getTagName()));
-            }
+            personTags.add(currentTag);
         }
 
         if (name == null) {
