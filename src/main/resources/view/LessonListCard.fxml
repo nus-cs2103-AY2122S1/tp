@@ -40,12 +40,12 @@
                 <Label fx:id="time" styleClass="cell_small_label" text="\$time" wrapText="true" />
             </HBox>
             <HBox>
-                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" />
+                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" minWidth="45" maxWidth="46" />
                 <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true" />
             </HBox>
             <HBox>
-                <Label fx:id="feesPlaceholder" styleClass="cell_medium_label" text="Outstanding Fees: " wrapText="true" />
-                <Label fx:id="outstandingFees" styleClass="cell_small_label" text="\$rates" wrapText="true" />
+                <Label fx:id="feesPlaceholder" styleClass="cell_medium_label" text="Outstanding Fees: " wrapText="true" minWidth="85" />
+                <Label fx:id="outstandingFees" styleClass="cell_small_label" text="\$fees" wrapText="true" />
             </HBox>
             <HBox fx:id="cancelDatesBox">
                 <Label fx:id="cancelPlaceholder" styleClass="cell_medium_label" text="Cancelled Date(s): " wrapText="true" />
