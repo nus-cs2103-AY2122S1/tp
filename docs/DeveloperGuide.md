@@ -444,7 +444,6 @@ The following activity diagram summarizes what happens when a user enters and ex
 * ** Alternative 2: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
->>>>>>> c2ae8159151d3cced46901dd7835e78eaf6b6e5c
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
