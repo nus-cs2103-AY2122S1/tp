@@ -26,6 +26,8 @@ public class ChartUtilTest {
         assertEquals(ChartUtil.wrap("aspecialcase longwordcannotfit"), "aspecialcase\nlongwordcann\notfit");
         assertEquals(ChartUtil.wrap("short short short short short short short short short"),
                 "short short\n" + "short short\n" + "short shor...");
+        assertEquals(ChartUtil.wrap("super long long long long long assessment"),
+                "super long\n" + "long long\n" + "long long ...");
         assertEquals(ChartUtil.wrap("short longwordcannotfit short longwordcannotfit"),
                 "short longwo\n" + "rdcannotfit\n" + "short long...");
         assertEquals(ChartUtil.wrap("superlongonewordsuperlongonewordsuperlongoneword"),

@@ -143,7 +143,7 @@ public class ChartUtil {
             }
 
             // word cannot fit into previous line, but word is below size limit
-            if (wordLength <= 12) {
+            if (wordLength <= 12 && line < 2) {
                 line++;
                 result.add(words[count]);
                 count++;
