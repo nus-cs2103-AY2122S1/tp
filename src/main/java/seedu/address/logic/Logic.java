@@ -32,7 +32,7 @@ public interface Logic {
     ReadOnlyTeachingAssistantBuddy getAssistantBuddy();
 
     /** Returns an unmodifiable view of the filtered list of students */
-    ObservableList<Student> getFilteredPersonList();
+    ObservableList<Student> getFilteredStudentList();
 
     /** Returns an unmodifiable view of the filtered list of modules */
     ObservableList<Module> getFilteredModuleList();
