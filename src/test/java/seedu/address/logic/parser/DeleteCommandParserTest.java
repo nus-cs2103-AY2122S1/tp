@@ -62,7 +62,7 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "1 1",
                 String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
 
-         // Many duplicates interspersed (Note that DeleteCommandParser does not detect out of range indexes)
+        // Many duplicates interspersed (Note that DeleteCommandParser does not detect out of range indexes)
         assertParseFailure(parser, "70 2 3 2 2 1 70",
                 String.format(errorDueToDuplicateIndex, DeleteCommand.MESSAGE_USAGE));
 
