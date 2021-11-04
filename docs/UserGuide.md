@@ -385,9 +385,9 @@ Examples:
 `change da/2021-12-28`  
 
 
-#### Viewing schedule of staff: `viewSchedule`
+#### Viewing schedule of staff(s): `viewSchedule`
 
-Views the schedule of staff's that satisfy the query conditions.
+Views the schedule of staff(s) that satisfy the query conditions.
 
 
 Formats:  
