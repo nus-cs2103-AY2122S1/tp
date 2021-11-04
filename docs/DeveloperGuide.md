@@ -10,8 +10,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This software is built upon [SE-EDU's AddressBook Level-3](https://se-education.org/addressbook-level3/) project.
-* Implementation of CLI History Navigation feature referenced from [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T.
-
+* Implementation of CLI History Navigation feature referenced from [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T. 
+* Implementation of opening User Guide in user's browser feature referenced from [samyipsh's tP](https://github.com/samyipsh/tp) for CS2103T.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
