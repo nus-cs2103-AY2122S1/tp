@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ConthacksParser" as ConthacksParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeletePersonCommandParser" as DeletePersonCommandParser LOGIC_COLOR
+participant "d:DeletePersonCommand" as DeletePersonCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -19,60 +19,60 @@ activate LogicManager
 LogicManager -> ConthacksParser : parseCommand("delete m/CS2103T")
 activate ConthacksParser
 
-create DeleteCommandParser
-ConthacksParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeletePersonCommandParser
+ConthacksParser -> DeletePersonCommandParser
+activate DeletePersonCommandParser
 
-DeleteCommandParser --> ConthacksParser
-deactivate DeleteCommandParser
+DeletePersonCommandParser --> ConthacksParser
+deactivate DeletePersonCommandParser
 
-ConthacksParser -> DeleteCommandParser : parse(" m/CS2103T")
-activate DeleteCommandParser
+ConthacksParser -> DeletePersonCommandParser : parse(" m/CS2103T")
+activate DeletePersonCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeletePersonCommand
+DeletePersonCommandParser -> DeletePersonCommand
+activate DeletePersonCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeletePersonCommand --> DeletePersonCommandParser : d
+deactivate DeletePersonCommand
 
-DeleteCommandParser --> ConthacksParser : d
-deactivate DeleteCommandParser
+DeletePersonCommandParser --> ConthacksParser : d
+deactivate DeletePersonCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> ConthacksParser
-destroy DeleteCommandParser
+DeletePersonCommandParser -[hidden]-> ConthacksParser
+destroy DeletePersonCommandParser
 
 ConthacksParser --> LogicManager : d
 deactivate ConthacksParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeletePersonCommand : execute()
+activate DeletePersonCommand
 
 loop no. of contacts with module code CS2103T
 alt contact tagged to only CS2103T
-DeleteCommand -> Model : deletePerson()
+DeletePersonCommand -> Model : deletePerson()
 activate Model
 
-Model --> DeleteCommand
+Model --> DeletePersonCommand
 deactivate Model
 else contacts attached to other module codes
-DeleteCommand -> Model : setPerson()
+DeletePersonCommand -> Model : setPerson()
 activate Model
 
-Model --> DeleteCommand
+Model --> DeletePersonCommand
 deactivate Model
 end
 end
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeletePersonCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeletePersonCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeletePersonCommand --> LogicManager : result
+deactivate DeletePersonCommand
 
 [<--LogicManager
 deactivate LogicManager

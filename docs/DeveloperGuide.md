@@ -203,15 +203,15 @@ This is to better fit our target audience as once a class is no longer relevant,
 
 This is how the `DeletePersonCommand#execute()` method works upon execution:
 
-The module code to be deleted is retrieved from the `DeletePersonCommand` created.
-All contacts with the module code will be retrieved from the model by `Model#updateFilteredPersonList()` and `Model#getFilteredPersonList()`.
-The module code is deleted by `DeletePersonCommand#deleteByModuleCode()`.
-`DeletePersonCommand#deleteByModuleCode()` will call `Model#deletePerson` for contacts with attached to the module code to delete only otherwise `DeletePersonCommand#deleteModuleCodeTag` will be called.
-The deletion is successful and a CommandResult is returned with an appropriate success message to indicate that the deletion was successful via the CommandUtil#getCommandResult() method.
+1. The module code to be deleted is retrieved from the `DeletePersonCommand` created.
+2. All contacts with the module code will be retrieved from the model by `Model#updateFilteredPersonList()` and `Model#getFilteredPersonList()`.
+3. The module code is deleted by `DeletePersonCommand#deleteByModuleCode()`.
+4. `DeletePersonCommand#deleteByModuleCode()` will call `Model#deletePerson` for contacts with attached to the module code to delete only otherwise `DeletePersonCommand#deleteModuleCodeTag` will be called.
+5. The deletion is successful and a CommandResult is returned with an appropriate success message to indicate that the deletion was successful via the CommandUtil#getCommandResult() method.
 
 The following sequence diagrams show how the delete by module code feature works successfully, using the example command delete m/CS2103T:
 
-<img src="images/BatchDeleteSequenceDiagram.png" width="600" />
+![Interactions for  `delete m/CS2103T` Command](images/BatchDeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeletePersonCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
