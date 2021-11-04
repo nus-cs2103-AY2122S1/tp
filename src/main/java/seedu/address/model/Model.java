@@ -87,7 +87,7 @@ public interface Model {
     /**
      * Returns the position with {@code title}
      */
-    Position getPositionByTitle(Title title);
+    Position getPositionWithTitle(Title title);
 
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();

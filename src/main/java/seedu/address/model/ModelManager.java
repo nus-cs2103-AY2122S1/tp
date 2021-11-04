@@ -192,7 +192,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Position getPositionByTitle(Title title) {
+    public Position getPositionWithTitle(Title title) {
         return positionBook.getPositionWithTitle(title);
     }
 
