@@ -631,47 +631,47 @@ Action | Format | Examples
 
 ## Example Visual Aids
 
-# Addstudent Example 2
+#### Addstudent Example 2
 Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
 ![Addstudent Example 2](images/UGExamples/addstu2.png)
 
-# Addstudent Example 3
+#### Addstudent Example 3
 Command: `addstudent -n Jonas Chow -i E0123456 -t beginner` <br>
 ![Addstudent Example 3](images/UGExamples/addstu3.png)
 
-# Addgroup Example 2
+#### Addgroup Example 2
 Command: `addgroup -g T01A -n Hong Yao -n Hong Fai` <br>
 ![Addgroup Example 2](images/UGExamples/addgroup2.png)
 
-# Addgroup Example 3
+#### Addgroup Example 3
 Command: `addgroup -g T01A -n Hong Yao -i E0123456` <br>
 ![Addgroup Example 3](images/UGExamples/addgroup3.png)
 
-# Addalloc Example 1
+#### Addalloc Example 1
 Command: `addalloc -g T01A -n Zhiying` <br>
 ![Addalloc Example 1](images/UGExamples/addalloc1.png)
 
-# Addassessment Example 2
+### Addassessment Example 2
 Command: `addassessment -a Midterm Assessment` <br>
 ![Addassessment Example 2](images/UGExamples/addass2.png)
 
-# Addsc0re Example 1
+### Addsc0re Example 1
 Command: `addscore -a Midterm -n Van Nhi -s 95` <br>
 ![Addsc0re Example 1](images/UGExamples/addscore1.png)
 
-# Addsc0re Example 2
+### Addsc0re Example 2
 Command: `addscore -a P01 -i E0123456 -s 75.25` <br>
 ![Addsc0re Example 2](images/UGExamples/addscore2.png)
 
-# List Example
+### List Example
 Command: `list` <br>
 ![](images/UGExamples/list.png)
 
-# Search Example 1
+### Search Example 1
 Command: `search -n Jonas Chow` <br>
 ![Search Example 1](images/UGExamples/search1.png)
 
-# Search Example 3
+### Search Example 3
 Command: `search -g T02B R03C` <br>
 ![Search Example 3](images/UGExamples/search3.png)
 
