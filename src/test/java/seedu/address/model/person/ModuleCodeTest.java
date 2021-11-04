@@ -30,7 +30,7 @@ public class ModuleCodeTest {
         assertFalse(ModuleCode.isValidModuleCode("1101S")); // no prefix
         assertFalse(ModuleCode.isValidModuleCode("CS100")); // 3 digit in module code
         assertFalse(ModuleCode.isValidModuleCode("CS10101")); // 5 digit in module code
-        //assertFalse(ModuleCode.isValidModuleCode("CS1010XX")); // 2-letter suffix
+        assertFalse(ModuleCode.isValidModuleCode("CS1010XX")); // 2-letter suffix
 
         // valid module code
         assertTrue(ModuleCode.isValidModuleCode("CS1010")); // 2-letter prefix
