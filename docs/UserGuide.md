@@ -448,8 +448,8 @@ Advanced user Format:`p (INDEX) /l`
 
 Examples:
 
-* `group 1 /list`
-* `g 2 /l`
+* `person 1 /list`
+* `p 2 /l`
 
 #### _Listing all subgroups in a group_ :
 
