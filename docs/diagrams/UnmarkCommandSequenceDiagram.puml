@@ -23,7 +23,7 @@ create MarkingCommandParser
 
 
 
-AddressBookParser -> MarkingCommandParser: MarkingCommandParser()
+AddressBookParser -> MarkingCommandParser: MarkingCommandParser("unmark")
 activate MarkingCommandParser
 
 MarkingCommandParser --> AddressBookParser
@@ -34,7 +34,7 @@ AddressBookParser -> MarkingCommandParser : parse(" 3")
 activate MarkingCommandParser
 
 create UnmarkCommand
-MarkingCommandParser -> UnmarkCommand
+MarkingCommandParser -> UnmarkCommand: UnmarkCommand([3])
 activate UnmarkCommand
 
 UnmarkCommand --> MarkingCommandParser :
@@ -78,6 +78,7 @@ CommandResult --> UnmarkCommand
 deactivate CommandResult
 
 UnmarkCommand --> LogicManager: result
+deactivate UnmarkCommand
 
 
 

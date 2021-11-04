@@ -6,7 +6,8 @@ start
 'diamond we place it as the true branch instead.
 
 if () then ([command is
-valid with valid index/indices])
+valid with valid index/indices,
+with no duplicates])
 
     if () then ([applicant(s) at all indices
   have been marked])
