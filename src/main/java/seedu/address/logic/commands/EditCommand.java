@@ -128,8 +128,7 @@ public class EditCommand extends Command {
         String editedTaskMessage = "";
 
         if (targetTaskIndex != null) {
-            List<Task> tasks = new ArrayList<>();
-            tasks.addAll(personToEdit.getTasks());
+            List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
 
             if (targetTaskIndex.getZeroBased() >= tasks.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
@@ -212,8 +211,24 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+        if (index.equals(e.index) && editPersonDescriptor.equals(e.editPersonDescriptor)) {
+            if (editTaskDescriptor != null && e.editTaskDescriptor == null
+                    || editTaskDescriptor == null && e.editTaskDescriptor != null) {
+                return false;
+            } else {
+                boolean hasSameNonNullIndex = targetTaskIndex != null && e.targetTaskIndex != null
+                        && targetTaskIndex.equals(e.targetTaskIndex);
+                if (editTaskDescriptor != null) {
+                    return editTaskDescriptor.equals(e.editTaskDescriptor) &&
+                            (targetTaskIndex == null && e.targetTaskIndex == null)
+                            || hasSameNonNullIndex;
+                } else {
+                    return (targetTaskIndex == null && e.targetTaskIndex == null)
+                            || hasSameNonNullIndex;
+                }
+            }
+        }
+        return false;
     }
 
     public String getCommand() {
