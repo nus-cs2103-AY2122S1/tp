@@ -108,7 +108,7 @@ public class ParserUtil {
     public static int parseLabNum(String labNum) throws ParseException {
         try {
             int value = Integer.parseInt(labNum);
-            if (value < 0) {
+            if (value <= 0) {
                 throw new ParseException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
             }
             return value;
