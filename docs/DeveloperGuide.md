@@ -18,7 +18,6 @@ title: Developer Guide
    - [Delete student feature](#delete-student-feature)
    - [View student/lesson feature](#view-studentlesson-feature)
    - [Card-like UI Elements](#card-like-ui-elements)
-   - [Set/Unset payment made feature](#setunset-payment-made-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
 7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -405,53 +404,6 @@ The above applies to the scenario when the user inputs a command which calls a m
 ![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
 
 The panels default to the minimal panels for the application launch.
-
-
-### Set/Unset payment made feature
-
-#### Implementation
-
-The purpose of the set/unset payment made feature is for tutors to modify a student's payment status.
-
-This feature implements the following operations:
-
-* `PaidCommand#execute()` - Updates the payment status of the student to `paid`.
-* `UnpaidCommand#execute()` - Updates the payment status of the student to `unpaid`.
-
-This feature is facilitated by the following operations:
-
-* `TutorAidParser#parseCommand()` - Calls `PaidCommandParser#parse()` or `UnpaidCommandParser#parse()` with the specified student index, depending on the command word in the user input.
-* `PaidCommandParser#parse()` - Returns an instance of `PaidCommand`.
-* `UnpaidCommandParser#parse()` - Returns an instance of `UnpaidCommand`.
-
-To represent a student's payment status, a `PaymentStatus` class is introduced. It stores an immutable instance variable `hasPaid`, of boolean type. We then work with the `Student` model, and implement `PaymentStatus` as a field in `Student`.
-
-<img src="images/StudentWithPaymentStatusClassDiagram.png" width="150" />
-
-Given below is an example usage scenario for setting a student's payment status as `paid`, and how the command is executed.
-
-1. The user executes `paid 2` command to set the payment status of the 2nd student in the address book. `LogicManager#execute()` is executed, where the user input is passed into `TutorAidParser#parseCommand()`. This in turn calls `PaidCommandParser#parse()`, which returns a `PaidCommand` instance if the index is valid.
-
-<img src="images/ParsePaidCommandSequenceDiagram.png" width="650" />
-
-2. `LogicManager#execute()` then calls upon `PaidCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
-
-3. A `PaymentStatus` instance with the `hasPaid` variable set to `true` is created. This is then passed into the constructor of `Student`, along with the values of the other existing fields of the index-specified student, to create a new `Student` instance.
-
-The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 2 and 3.
-
-<img src="images/ConstructEditedStudentSequenceDiagram.png" width="800" height="275" />
-
-4. `Model#setStudent()` is then called upon to replace the existing `Student` instance in the `StudentBook` with the newly created instance. 
-
-5. The result of the `PaidCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager`.
-
-The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 4 and 5.
-
-<img src="images/SetEditedStudentSequenceDiagram.png" width="500" />
-
-A similar execution scenario can be expected for setting a student's payment status as `unpaid`.
-
 
 ### \[Proposed\] Undo/redo feature
 

@@ -41,7 +41,8 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_LESSON_TIMING + "10.00 AM to 12.00 PM every Monday "
             + PREFIX_LESSON_CAPACITY + "10 ";
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edit successful. Displaying %s and the students in "
+            + "this class.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid";
 
@@ -83,7 +84,7 @@ public class EditLessonCommand extends EditCommand {
         model.viewLesson(editedLesson);
         model.updateFilteredStudentList(editedLesson::hasStudent);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson));
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString()));
     }
 
     /**

@@ -24,7 +24,7 @@
 }
 
 #quickStartTitle, #featuresTitle, #helpTitle, #addSTitle, #listTitle, #delSTitle, #editSTitle, #viewSTitle,
-#addPTitle, #delPTitle, #paidTitle, #unpaidTitle, #clearTitle, #exitTitle, #savingDataTitle, #editDataTitle,
+#addPTitle, #delPTitle, #clearTitle, #exitTitle, #savingDataTitle, #editDataTitle,
 #findTitle, #addLTitle, #delLTitle, #editLTitle, #viewLTitle, #faqTitle {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
@@ -62,7 +62,7 @@
     -fx-font-size: 16;
 }
 
-#listDesc, #addSDesc, #delSDesc, #helpDesc, #editSDesc,#viewSDesc, #addPDesc, #delPDesc, #paidDesc, #unpaidDesc,
+#listDesc, #addSDesc, #delSDesc, #helpDesc, #editSDesc,#viewSDesc, #addPDesc, #delPDesc,
 #clearDesc, #exitDesc, #savingDataDesc, #editDataDesc1, #editDataDesc2, #findDesc1, #findDesc2, #findDesc3,
 #addLDesc, #delLDesc, #editLDesc, #viewLDesc {
     -fx-alignment: top-left;
@@ -72,7 +72,7 @@
 }
 
 #delSExampleDesc, #listExampleDesc, #listAExampleDesc, #editSExampleDesc, #viewSExampleDesc, #addPExampleDesc,
-#delPExampleDesc, #paidExampleDesc, #unpaidExampleDesc, #findSExampleDesc, #findLExampleDesc, #delLExampleDesc,
+#delPExampleDesc, #findSExampleDesc, #findLExampleDesc, #delLExampleDesc,
 #editLExampleDesc, #viewLExampleDesc {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
@@ -95,7 +95,7 @@
 
 #helpCommand, #addSCommand, #addSExample, #delSCommand, #delSExample, #listGeneralCommand, #listExample,
 #listAExample, #editSCommand, #editSExample, #viewSCommand, #viewSExample, #addPCommand, #addPExample,
-#delPCommand, #delPExample, #paidCommand, #paidExample, #unpaidCommand, #unpaidExample, #clearCommand,
+#delPCommand, #delPExample, #clearCommand,
 #exitCommand, #findCommand, #findSExample, #findLExample, #addLCommand, #addLExample, #delLCommand, #delLExample,
 #viewLCommand, #viewLExample, #editLCommand, #editLExample, #editFilePath, #sFlag, #lFlag {
     -fx-alignment: top-left;
