@@ -178,8 +178,6 @@ Examples:
   * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
 * `addgroup -g T01A -n Hong Yao -i E0123456` 
   * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
-* `addgroup -g Require More Help -i E0123456` 
-  * creates group `Require More Help` and adds student with NUSNET ID `E0123456` into the group.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -276,8 +274,8 @@ Examples:
   * returns a list of students in the groups `T02B` and `R03C`.
 * `search -g T02` 
   * returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
-* `search -t beginners` 
-  * returns a list of students tagged as `beginners`.
+* `search -t beginner` 
+  * returns a list of students tagged as `beginner`.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -306,8 +304,8 @@ Examples:
   * displays and exports the line chart produced of the 2nd student from the displayed list.
 * `show -g T02A` 
   * displays line chart of group `T02A`'s performance in their assessments.
-* `show -a Midterm` 
-  * displays histogram of the distribution of scores in the `Midterm` assessment.
+* `show -a Midterm Examination` 
+  * displays histogram of the distribution of scores in the `Midterm Examination` assessment.
 
 [Return to Table of Contents](#table-of-contents)
 
