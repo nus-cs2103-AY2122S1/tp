@@ -48,7 +48,7 @@ title: Developer Guide
 the `Graphical User Interface (GUI)`. It is used to keep track of the contact information of your clients and details of
 the products in your inventory, as well as details of the orders placed by your clients.
 
-The purpose of this developer guide is to aid any curious or interested contributor in developing Sellah further by 
+The purpose of this developer guide is to aid any curious or interested contributor in developing Sellah further by
 providing more insight on how the features were implemented.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -58,8 +58,10 @@ providing more insight on how the features were implemented.
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 1. Ensure that Java 11 and IntelliJ Idea (or your preferred Java IDE) are installed in your computer.
-1. Fork the Sellah repo from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp), and clone the fork into your computer.
-1. Configure the JDK in IntelliJ Idea to use JDK 11 by following instructions from [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
+1. Fork the Sellah repo from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp), and clone the fork into your
+   computer.
+1. Configure the JDK in IntelliJ Idea to use JDK 11 by following instructions
+   from [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 1. Import the project as a Gradle project.
 1. If you had previously disabled the Gradle plugin, go to `File → Settings → Plugins` to re-enable them.
 1. Click on Import Project and select the build.gradle file.
@@ -131,8 +133,8 @@ The **API** of this component is specified in
 
 The UI consists of a `MainWindow` that is made up of parts `CommandBox`, `ResultDisplay`, `ClientListPanel`,
 `ProductListPanel`, `ClientCard`, `ProductCard`, `HelpMessage`, `ViewMoreClient`, `ViewMoreProduct`, `PieChartSalesView`
-`StatusBarFooter` and `HelpWindow`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class 
-which captures the commonalities between classes that represent parts of the visible GUI. In addition, `HelpMessage`, 
+`StatusBarFooter` and `HelpWindow`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+which captures the commonalities between classes that represent parts of the visible GUI. In addition, `HelpMessage`,
 `ViewMoreClient`, `ViewMoreProduct` and `PieChartSalesView` extends from `SecondPanel` which displays the results of
 view, stat and help command.
 
@@ -166,7 +168,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -c 1")` 
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -c 1")`
 API call.
 
 ![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteClientSequenceDiagram.png)
@@ -201,11 +203,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Client` and `Product` objects (which are contained in a `UniquePersonList` 
+* stores the address book data i.e., all `Client` and `Product` objects (which are contained in a `UniquePersonList`
   object and a `UniqueProductList` object respectively).
-* stores the currently 'selected' `Client` and `Product` objects (e.g., results of a search query) as two separate 
-  _filtered_ lists which are exposed to outsiders as the unmodifiable `ObservableList<Client>` and 
-  `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to the lists so that the UI automatically 
+* stores the currently 'selected' `Client` and `Product` objects (e.g., results of a search query) as two separate
+  _filtered_ lists which are exposed to outsiders as the unmodifiable `ObservableList<Client>` and
+  `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to the lists so that the UI automatically
   updates when the data in these lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
@@ -582,7 +584,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | 10th-time user                             | list all my products           | locate a product easily                                                |
 | `* * * ` | 10th-time user                             | see the statistics of the products sold | analyse the consumer pattern and make better decision in the future |
 
-
 ### 6.3 Use Cases
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
@@ -755,7 +756,7 @@ User story ends.
     * 2a1. Sellah shows an error message.
 
       Use case ends.
-    
+
 **Use case: UC07 - Display statistics**
 
 **MSS**
@@ -768,9 +769,9 @@ User story ends.
 **Extensions**
 
 * 2a. There is no order found.
-  
+
     * 2a1. Sellah shows an error message.
-      
+
       Use case ends.
 
 ### 6.4 Non-Functional Requirements
@@ -807,8 +808,8 @@ expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the latest jar file from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases) and copy into an empty 
-       folder
+    1. Download the latest jar file from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases) and copy into an
+       empty folder
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
@@ -862,7 +863,6 @@ expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-       
 
 ### 7.4 Saving Data
 
