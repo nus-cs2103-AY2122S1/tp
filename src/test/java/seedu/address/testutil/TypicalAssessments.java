@@ -1,5 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_BOB;
+
 import java.util.Map;
 
 import seedu.address.model.student.Assessment;
@@ -9,10 +16,11 @@ import seedu.address.model.student.Assessment;
  */
 public class TypicalAssessments {
 
-    public static final Assessment PATH_1 = new AssessmentBuilder()
-            .withValue("P01")
-            .withScores(
-                    Map.of("E0543948", "100",
-                            "E0473477", "100")
-            ).build();
+    public static final Assessment PATH_05 = new AssessmentBuilder()
+            .withValue(VALID_ASSESSMENT_AMY)
+            .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
+
+    public static final Assessment MISSION_01 = new AssessmentBuilder()
+            .withValue(VALID_ASSESSMENT_BOB)
+            .withScores(Map.of(VALID_ID_BOB, VALID_SCORE_BOB)).build();
 }

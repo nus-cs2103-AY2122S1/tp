@@ -5,14 +5,25 @@ import java.util.List;
 import java.util.Map;
 
 import seedu.address.model.student.Assessment;
+import seedu.address.model.student.AssessmentList;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 
 public class AssessmentListBuilder {
+
+    private List<Assessment> assessments;
+
     /**
-     * Takes in a list of students with scores, and returns a list of assessments with those scores reflected
+     * Creates a {@code AssessmentListBuilder} with the default details.
      */
-    public static List<Assessment> createAssessmentListFromStudents(List<Student> students) {
+    public AssessmentListBuilder() {
+        assessments = new ArrayList<>();
+    }
+
+    /**
+     * Sets the {@code students} of the {@code assessmentList} that we are building.
+     */
+    public AssessmentListBuilder withStudents(List<Student> students) {
         List<Assessment> result = new ArrayList<>();
         for (Student student : students) {
             Map<Assessment, Score> studentScores = student.getScores();
@@ -24,6 +35,16 @@ public class AssessmentListBuilder {
                 resultAssessment.setScore(student.getId(), studentScores.get(assessment));
             }
         }
-        return result;
+        this.assessments = result;
+        return this;
+    }
+
+    /**
+     * Returns an {@code AssessmentList}.
+     */
+    public AssessmentList build() {
+        AssessmentList assessmentList = new AssessmentList();
+        assessmentList.setAssessments(assessments);
+        return assessmentList;
     }
 }

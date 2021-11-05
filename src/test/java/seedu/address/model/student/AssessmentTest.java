@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAssessments.PATH_1;
+import static seedu.address.testutil.TypicalAssessments.PATH_05;
 
 import java.util.Map;
 
@@ -23,8 +23,7 @@ public class AssessmentTest {
 
     @Test
     public void constructor_invalidAssessment_throwsIllegalArgumentException() {
-        String invalidAssessment = "";
-        assertThrows(IllegalArgumentException.class, () -> new Assessment(invalidAssessment));
+        assertThrows(IllegalArgumentException.class, () -> new Assessment("%/(]"));
     }
 
     @Test
@@ -51,14 +50,14 @@ public class AssessmentTest {
     }
 
     @Test
-    public void isGraded_ungraded() {
+    public void isGraded_ungraded_returnsFalse() {
         ID id = new IdBuilder().build();
         Assessment assessment = new AssessmentBuilder().build();
         assertFalse(() -> assessment.isGraded(id));
     }
 
     @Test
-    public void isGraded_graded() {
+    public void isGraded_graded_returnsTrue() {
         ID id = new IdBuilder().withValue(VALID_ID_AMY).build();
         Assessment assessment = new AssessmentBuilder()
                 .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
@@ -68,26 +67,26 @@ public class AssessmentTest {
     @Test
     public void isSameAssessment() {
         // null -> returns false
-        assertFalse(PATH_1.isSameAssessment(null));
+        assertFalse(PATH_05.isSameAssessment(null));
 
         // same object -> returns true
-        assertTrue(PATH_1.isSameAssessment(PATH_1));
+        assertTrue(PATH_05.isSameAssessment(PATH_05));
 
         // same name, different score list -> returns true
-        Assessment editedPath1 = new AssessmentBuilder(PATH_1)
+        Assessment editedPath1 = new AssessmentBuilder(PATH_05)
                 .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
-        assertTrue(PATH_1.isSameAssessment(editedPath1));
+        assertTrue(PATH_05.isSameAssessment(editedPath1));
 
         // different name, same score list -> returns false
-        editedPath1 = new AssessmentBuilder(PATH_1).withValue("P02").build();
-        assertFalse(PATH_1.isSameAssessment(editedPath1));
+        editedPath1 = new AssessmentBuilder(PATH_05).withValue("P02").build();
+        assertFalse(PATH_05.isSameAssessment(editedPath1));
 
         // name differs in case, same score list -> returns false
-        editedPath1 = new AssessmentBuilder(PATH_1).withValue("p01").build();
-        assertFalse(PATH_1.isSameAssessment(editedPath1));
+        editedPath1 = new AssessmentBuilder(PATH_05).withValue("p01").build();
+        assertFalse(PATH_05.isSameAssessment(editedPath1));
 
         // name has trailing spaces, same score list -> returns false
-        editedPath1 = new AssessmentBuilder(PATH_1).withValue("P01 ").build();
-        assertFalse(PATH_1.isSameAssessment(editedPath1));
+        editedPath1 = new AssessmentBuilder(PATH_05).withValue("P01 ").build();
+        assertFalse(PATH_05.isSameAssessment(editedPath1));
     }
 }

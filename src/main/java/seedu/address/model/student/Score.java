@@ -56,6 +56,8 @@ public class Score {
     }
 
     public double getNumericValue() {
+        // NumberFormatException is not handled since
+        // Score cannot be initialized with invalid values
         return Double.parseDouble(value);
     }
 
