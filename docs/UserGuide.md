@@ -145,7 +145,7 @@ Edits an existing person in ContactSH.
 
 Format: `edit INDEX [-nNAME] [-pPHONE] [-eEMAIL] [-aADDRESS] [-dDESCRIPTION] [-lLABEL]… [-imptIMPORTANCE]`
 
-* Edits the person at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing labels, the existing labels of the person will be removed (i.e editing labels overwrites previous labels).
@@ -166,7 +166,7 @@ Examples:
 
    * Deletes the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the persons list displayed.
-   * `INDEX` **must be a positive integer** 1, 2, 3, …​
+   * `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 
    Examples:
 
@@ -218,7 +218,7 @@ Adds a task to the current list of tasks attached to a person.
 
 Format: `add INDEX -tnTASK_NAME [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
 
-* Adds a task to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer** 1, 2, 3, …​
+* Adds a task to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
 * `TASK_TIME` should follow the format of `HH:MM`.
 
@@ -232,8 +232,8 @@ Edits an existing task in ContactSH.
 
 Format: `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]…​`
 
-* Edits a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The tasks edited  is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
+* Edits a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
+* The tasks edited  is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * Multiple tasks of one person can be edited in one command. All fields provided after a `TASK_INDEX` are taken to be edited fields for the task at the `TASK_INDEX`.
 * Existing values will be updated to the input value.
 * For each `TASK_INDEX` provided, at least one of the optional fields must be provided.
@@ -251,8 +251,8 @@ Deletes a task attached to a specified person.
 
 Format: `rm INDEX -tiTASK_INDEX…​`
 
-* Deletes a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The task deleted is specified by `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​.
+* Deletes a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
+* The task deleted is specified by `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647.
 If the same `TASK_INDEX` is specified more than once, the task will only be deleted once.
 * Multiple tasks of one person can be deleted in one command.
 
@@ -302,8 +302,8 @@ Marks an existing task in ContactSH as done.
 
 Format: `donetask INDEX -tiTASK_INDEX…​`
 
-* Marks tasks attached to the person at the specified `INDEX` as done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
+* Marks tasks attached to the person at the specified `INDEX` as done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
+* The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * Multiple tasks of one person can be marked as done in one command.
 
 Examples:
@@ -316,8 +316,8 @@ Marks existing tasks in ContactSH as not done.
 
 Format: `undotask INDEX -tiTASK_INDEX…​`
 
-* Marks tasks attached to the person at the specified `INDEX` as not done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​
+* Marks tasks attached to the person at the specified `INDEX` as not done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
+* The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * Multiple tasks of one person can be marked as not done in one command.
 
 Examples:
@@ -337,7 +337,7 @@ Examples:
    Format: `reminder -s DAYS`
 
    * `DAYS` refer to the number of days prior to a task's date.
-     The day **must be a positive integer** 1, 2, 3, ...
+     The day **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
    * All tasks share the same number of days before it is considered as due soon.
 
    Example:
