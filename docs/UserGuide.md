@@ -135,15 +135,16 @@ Format: `find {n/|s/|N/|g/|T/|r/|p/|a/|t/} KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * All attributes can be searched, by specifying the prefix before the keyword.
 * Partial matching can be done for all attributes except Tutorial ID and Role e.g. for name, Han will match Hans.
+* Partial matching is performed from the first letter of each value, i.e. `find n/o` will return Charlotte Oliveiro since Oliveiro starts with 'o', but will not return Alex Yeoh or Roy Balakrishnan since they do not contain values starting with the specified key.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find n/ Hans Bo` will return `Hans Gruber`, and `Bo Yang`
-* `find t/ friend` will return all the contacts with the tag `friend`
-* `find T/ 01` returns `Alex Yeoh`
-* `find t/ frien` returns `Alex Yeoh`, `Bernice Yu`
-* `find n/ alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/Hans Bo` will return `Hans Gruber`, and `Bo Yang`
+* `find t/friend` will return all the contacts with the tag `friend`
+* `find T/01` returns `Alex Yeoh`
+* `find t/frien` returns `Alex Yeoh`, `Bernice Yu`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
