@@ -48,8 +48,9 @@ deactivate RhrhParser
 LogicManager -> DeleteSupplierCommand : execute()
 activate DeleteSupplierCommand
 
-DeleteSupplierCommand -> Model : deleteSupplier(1)
+DeleteSupplierCommand -> Model : deleteSupplier(Supplier)
 activate Model
+note left of Model : Index parsed from the\n user input is used to\n obtain the supplier to \ndelete from Model
 
 Model --> DeleteSupplierCommand
 deactivate Model
