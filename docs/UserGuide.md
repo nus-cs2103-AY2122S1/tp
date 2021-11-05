@@ -130,7 +130,7 @@ The `Next Meeting` attribute refers to the next meeting that the financial advis
 
 A NextMeeting needs to be inputted in the following format:
 
-`m/dd-MM-yyyy (hh:mm~hh:mm), {non-empty location string)`
+`m/dd-MM-yyyy (hh:mm~hh:mm), (non-empty location string)`
 
 where
 * *date* is in the format `dd-MM-yyyy`, where day, month and year are numerical values
