@@ -37,7 +37,8 @@ title: Developer Guide
         7.1 <a href="#71-launch-and-shutdown">Launch and Shutdown</a><br>
         7.2 <a href="#72-viewing-help">Viewing Help</a><br>
         7.3 <a href="#73-deleting-a-clientproduct">Deleting a Client/Product</a><br>
-        7.4 <a href="#74-saving-data">Saving Data</a><br>
+        7.4 <a href="#74-editing-a-clientproduct">Editing a Client/Product</a><br>
+        7.5 <a href="#75-saving-data">Saving Data</a><br>
    </details>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -836,7 +837,7 @@ expected to do more *exploratory* testing.
 
 ### 7.3 Deleting a Client/Product
 
-1. Deleting a client while all clients are being shown
+1. Deleting a client while all clients are being shown.
 
     1. Prerequisites: List all clients using the `list -c` command. Multiple clients in the list.
 
@@ -847,10 +848,10 @@ expected to do more *exploratory* testing.
     1. Test case: `delete -c 0`<br>
        Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete -c x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. Deleting a product while all products are being shown
+1. Deleting a product while all products are being shown.
 
     1. Prerequisites: List all products using the `list -p` command. Multiple products in the list.
 
@@ -861,10 +862,40 @@ expected to do more *exploratory* testing.
     1. Test case: `delete -p 0`<br>
        Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete -p x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### 7.4 Saving Data
+### 7.4 Editing a Client/Product
+
+1. Editing a client while all clients are being shown.
+
+    1. Prerequisites: List all clients using the `list -c` command. Multiple clients in the list.
+
+    1. Test case: `edit -c 1 -n Ben -pn 12345678 -e ben@gmail.com -a ben's house address -o 2 1 1/1 -o 1 0 3/14`<br>
+       Expected: First client is edited from the list. Details of the edited client shown in the status message.
+       Timestamp in the status bar is updated.
+
+    1. Test case: `edit -c 0`<br>
+       Expected: No client is edited. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect edit commands to try: `edit`, `edit -c x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Editing a product while all products are being shown.
+
+    1. Prerequisites: List all products using the `list -p` command. Multiple products in the list.
+
+    1. Test case: `edit -p 2 -n iPhone 13 -$ 1499 -q 200`<br>
+       Expected: Second product is edited from the list. Details of the edited product shown in the status message.
+       Timestamp in the status bar is updated.
+
+    1. Test case: `edit -p 0`<br>
+       Expected: No product is edited. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect edit commands to try: `edit`, `edit -p x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### 7.5 Saving Data
 
 1. Dealing with missing/corrupted data files
 
