@@ -37,7 +37,7 @@ AppointmentCommandParser -[hidden]-> PlannerMdParser
 AppointmentCommandParser --> PlannerMdParser
 deactivate AppointmentCommandParser
 
-PlannerMdParser -> AppointmentCommandParser : parse("appt -f p/Alice s/19/10/2021")
+PlannerMdParser -> AppointmentCommandParser : parseAppointmentCommand("appt -f \np/Alice s/19/10/2021")
 activate AppointmentCommandParser
 
 create FilterAppointmentCommandParser
