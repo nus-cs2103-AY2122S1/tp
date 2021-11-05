@@ -537,35 +537,39 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 * Return to [**Edit**](#editing-an-applicant--edit).
 
 * ##### NAME `n/`
-    * A NAME should only contain alphanumeric characters. Spaces between words are allowed.
+    * A NAME should only contain alphanumeric characters. You can have spaces in between words.
     * For example:
         * NAME inputs such as `John`, `Mary Sue` and `9ine 6ix` are acceptable.
         * NAME inputs such as `J@hn`, `Mary S^e` and `B{}b` are not acceptable.
+    
 * ##### PHONE_NUMBER `p/`
-    * A PHONE_NUMBER should contain a minimum of 3 digits. No characters other than the digits 0-9 are allowed.
+    * A PHONE_NUMBER should contain a minimum of 3 digits. You cannot input any characters
+      other than the digits 0-9.
     * For example:
         * PHONE_NUMBER inputs such as `99999999` and `999` are acceptable.
         * PHONE_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
+    
 * ##### EMAIL_ADDRESS `e/`
-    * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by an `@` character.
-    * The **local part**:
-        * must contain **at least 1** alphanumeric character.
-        * It can contain alphanumeric characters separated by any 1 of these characters `+_.-`. (i.e. `John-a-bc`)
-        * It must **start with** and **end with** an alphanumeric character.
-    * The **domain part**:
-        * must contain **at least 2** domain labels. Each domain label, **except the final domain label**, must start with an
-          alphanumeric character and end with a `.`.
-        * The final domain label must have **at least 2** alphanumeric characters, but does not need to end with
-          a `.` unlike its preceding domain labels. (i.e. `John@u.sg` is valid)
-        * The domain label can contain alphanumeric characters separated by `-`. (i.e. `John@u-u.sg`)
+    * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by the `@` character.
+    * **Local part specifications**:
+        * Your local part must **start with** and **end with** an alphanumeric character.
+        * You can separate alphanumeric characters with any one of these characters: `+_.-`. (i.e. `John-a-bc`)
+    * **Domain part specifications**:
+        * Your domain part must contain **at least 2** domain labels, with each domain label separated by a `.`.
+        * You must start and end each domain label with an alphanumeric character.
+        * Within each domain label, you can separate alphanumeric characters with `-`. (i.e. `John@u-u.sg`)
+        * Each domain label must have **at least 1** alphanumeric character, **except the final domain label**
+          which must have **at least 2** alphanumeric characters. (i.e. `John@u.sg` is valid)
     * For example:
         * EMAIL_ADDRESS inputs such as `PeterJack_1190@example.com` and `e1234567@u.nus.edu` are acceptable.
         * EMAIL_ADDRESS inputs such as `peterjack@example.c` and `peter..jack@example.com` are unacceptable.
+    
 * ##### ROLE `r/`
-    * A ROLE should only contain **alphanumeric** characters. Spaces between words are allowed.
+    * A ROLE should only contain **alphanumeric** characters. You can have spaces in between words.
     * For example:
         * ROLE inputs such as `Software Engineer` and `Sales Assistant` are acceptable.
         * ROLE inputs such as `Softw@re Engin^^r` and `Day + Night Security Guard` are not acceptable.
+    
 * ##### EMPLOYMENT_TYPE `et/`
     * An EMPLOYMENT_TYPE should be one of the following: `Full time`, `Part time`, `Temporary` or `Internship`.
     * An EMPLOYMENT_TYPE is **case-insensitive**.
@@ -573,12 +577,15 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * EMPLOYMENT_TYPE inputs such as `Full time` and `Internship` are acceptable.
         * EMPLOYMENT_TYPE inputs such as `fUlL tiMe` and `iNtErnShIP` are acceptable.
         * EMPLOYMENT_TYPE inputs such as `Long term` are not acceptable.
+    
 * ##### EXPECTED_SALARY `s/`
-    * An EXPECTED_SALARY should only represent non-negative integers.
-        * Non-negative integers range from 0 to 2^(31) - 1 inclusive.
+    * An EXPECTED_SALARY should only be **non-negative integers**.
+        * Non-negative integers are defined as integers (no decimals or fractions) that range from 
+          0 to 2^(31) - 1 inclusive.
     * For example:
         * EXPECTED_SALARY inputs such as `0` and `3500` are acceptable.
         * EXPECTED_SALARY inputs such as `-600` and `~350` are not acceptable.
+    
 * ##### LEVEL_OF_EDUCATION `l/`
     * A LEVEL_OF_EDUCATION should be one of the following: `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` or `PhD`.
     * A LEVEL_OF_EDUCATION is **case-insensitive**.
@@ -586,22 +593,28 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * LEVEL_OF_EDUCATION inputs such as `Middle School` and `PhD` are acceptable.
         * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
         * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
+    
 * ##### YEARS_OF_EXPERIENCE `y/`
-    * A YEARS_OF_EXPERIENCE should be a **non-negative number** with intervals of **0.5** and smaller than or equals to **67** (re-employment age in Singapore).
+    * A YEARS_OF_EXPERIENCE should be a **non-negative number** with intervals of **0.5** 
+      * A YEARS_OF_EXPERIENCE input can be at most **67** (re-employment age in Singapore).
     * For example:
         * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
         * YEARS_OF_EXPERIENCE inputs such as `0.5` and `3.0` are acceptable.
         * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.1`, and `100` are not acceptable.
+    
 * ##### TAG `t/`
-    * A TAG should only contain alphanumeric characters. Spaces between words are **not** allowed.
+    * A TAG should only contain alphanumeric characters. You **cannot** have spaces in between words.
     * For example:
         * TAG inputs such as `friends` and `colleagues` are allowed.
         * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
+    
 * ##### INTERVIEW `i/`
-    * An INTERVIEW should be on a legitimate date and follows the DateTime format `yyyy-M-d, H:m`. (Year should be strictly 4-digit while others can be either 1 or 2 digit)
+    * An INTERVIEW should be a legitimate date and follow the DateTime format `yyyy-M-d, H:m`. 
+      * The input for Year is strictly 4 digits while others (i.e Month, Day, Hours, Minutes) can be either 1 or 2 digits.
     * For example:
         * INTERVIEW inputs such as `2021-08-09, 13:00` and `2022-1-3, 3:00` are acceptable.
         * INTERVIEW inputs such as `morning`, `2021.10.21`, `2021-10-22 13:00` and `2021-02-30, 10:30` (not an existing date) are not acceptable.
+    
 * ##### NOTES `nt/`
     * A NOTES can contain any character, number or symbol as there are no restrictions in place.
     * For example:
