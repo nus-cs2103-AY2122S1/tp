@@ -72,6 +72,9 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.setShowSourceTrayButton(false);
         calendarView.setShowPageToolBarControls(false);
         calendarView.setShowSearchField(false);
+
+        // Start at week page
+        calendarView.showWeekPage();
     }
 
     /**
