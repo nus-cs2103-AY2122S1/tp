@@ -43,8 +43,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
-    public static final String MESSAGE_GROUP_NONEXISTENT =
-        "The group indicated does not exist. Please create it first.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -71,8 +69,7 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-
-        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor, model);
+        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -89,8 +86,7 @@ public class EditCommand extends Command {
      * edited with {@code editStudentDescriptor}.
      */
     private static Student createEditedStudent(Student studentToEdit,
-                                               EditStudentDescriptor editStudentDescriptor,
-                                               Model model) throws CommandException {
+                                               EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
@@ -98,14 +94,10 @@ public class EditCommand extends Command {
             .orElse(studentToEdit.getTelegramHandle());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Note note = studentToEdit.getNote(); // we don't allow editing of notes from EditCommand;
-        GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
+        GroupName groupName = studentToEdit.getGroupName(); // we don't allow editing of group name from EditCommand
         UniqueAssessmentList assessments = studentToEdit.getUniqueAssessmentList();
 
-        if (!model.hasGroup(updatedGroupName)) {
-            throw new CommandException(MESSAGE_GROUP_NONEXISTENT);
-        }
-
-        return new Student(updatedName, updatedTelegramHandle, updatedEmail, note, updatedGroupName, assessments);
+        return new Student(updatedName, updatedTelegramHandle, updatedEmail, note, groupName, assessments);
     }
 
     @Override
@@ -134,7 +126,6 @@ public class EditCommand extends Command {
         private Name name;
         private TelegramHandle telegramHandle;
         private Email email;
-        private GroupName groupName;
 
         public EditStudentDescriptor() {
         }
@@ -146,7 +137,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
-            setGroupName(toCopy.groupName);
         }
 
         /**
@@ -180,15 +170,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setGroupName(GroupName groupName) {
-            this.groupName = groupName;
-        }
-
-        public Optional<GroupName> getGroupName() {
-            return Optional.ofNullable(groupName);
-        }
-
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -206,8 +187,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                 && getTelegramHandle().equals(e.getTelegramHandle())
-                && getEmail().equals(e.getEmail())
-                && getGroupName().equals(e.getGroupName());
+                && getEmail().equals(e.getEmail());
         }
     }
 }

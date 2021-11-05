@@ -6,8 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 //import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
@@ -19,11 +21,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 //import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 //import seedu.address.model.CsBook;
+import seedu.address.model.CsBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -32,18 +36,18 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalCsBook(), new UserPrefs());
 
-    // TODO: fix test case
-    /*
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new StudentBuilder().build();
+        Student originalStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(originalStudent).build();
+        // get descriptor of new student with all same fields
         EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new CsBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        Model expectedModel = new ModelManager(new CsBook(model.getCsBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -57,13 +61,13 @@ public class EditCommandTest {
         Student editedStudent = studentInList.withName(VALID_NAME_BOB)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
 
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new CsBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CsBook(model.getCsBook()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -71,12 +75,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, new EditStudentDescriptor());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, new EditCommand.EditStudentDescriptor());
         Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new CsBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CsBook(model.getCsBook()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -92,14 +96,11 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new CsBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CsBook(model.getCsBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-
-     */
-
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {

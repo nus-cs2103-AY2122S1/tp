@@ -185,6 +185,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         csBook.setStudent(target, editedStudent);
+
+        // remove old student name from its group
+        getGroupByGroupName(target.getGroupName()).removeStudentName(target.getName());
+
+        // add new student name to its group
+        getGroupByGroupName(editedStudent.getGroupName()).addStudentName(editedStudent.getName());
     }
 
     @Override
