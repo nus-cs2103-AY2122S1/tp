@@ -84,9 +84,6 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Task` objects residing in the `Model`.
-* `PersonCard` class keeps a reference of the `MainWindow` object as any mouse clicks on the ListCells of the `PersonListPanel`
- is handled by `PersonCard`, which then informs the `MainWindow` to execute the appropriate command to show the task list of the
- person associated with the clicked ListCell.
 
 ### Logic component
 
