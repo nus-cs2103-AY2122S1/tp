@@ -8,8 +8,8 @@ package Logic {
 class ReserveCommand {
     {field} numberOfPeople: int
 }
+class CommandResult
 }
-
 
 package Model {
 class Phone
@@ -25,6 +25,8 @@ ReserveCommand ---> "1" Phone
 ReserveCommand ---> "1" LocalDateTime
 ReserveCommand ---> "0..1" Remark
 ReserveCommand ---> "*" Tag
+
+ReserveCommand ..r..> "0..1" CommandResult : creates >
 
 Reservation -u-> "1" Phone
 Reservation -u-> "1" LocalDateTime
