@@ -19,14 +19,14 @@ activate FilterCommand
 FilterCommand -> Model
 activate Model
 
-alt "grade parameter is present"
-    Model -> Model : filter student and lesson list by grade
+alt "grade and subject are present"
+    Model -> Model : filter students subject, and\nfilter lessons by subject & grade
     
-else "subject parameter is present"
-    Model -> Model : filter lesson list by subject
+else "only subject is present"
+    Model -> Model : filter lessons by subject
 
-else "both grade and subject parameters are present"
-    Model -> Model : filter student list by subject,\nfilter lesson list by subject and grade
+else "only grade is present"
+    Model -> Model : filter students & lessons by grade
 end
 
 Model --> FilterCommand

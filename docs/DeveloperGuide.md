@@ -3,7 +3,12 @@ layout: page
 title: Developer Guide
 ---
 
-## **About this document**
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Introduction**
 
 This document provides the relevant information for developers-as-users and developers-as-maintainers to learn more about the design architecture and user-related considerations made in designing this application.
 
@@ -19,11 +24,6 @@ Here are the interpretations of symbols and formatting used in this document:
 * :bulb: indicates tips.
 * `Tuitione` is used in referencing code due to code syntax.
 * **TuitiONE** is used when referencing the application.
-
---------------------------------------------------------------------------------------------------------------------
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1243,6 +1243,23 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+
+#### Clearing data
+
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+1. _{ more test cases …​ }_
+
+#### Exiting application
+
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
 
