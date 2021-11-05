@@ -114,7 +114,7 @@ The features are categorised into the different categories as follows:
 * [Managing Data](#managing-data)
 * [Miscellaneous Commands](#miscellaneous-commands)
 
-### Overview of the Command Format
+### Overview of the command format
 This section explains the command format used for TAB's commands.<br/>
 
 Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
@@ -131,8 +131,9 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
 
+--------------------------------------------------------------------------------------------------------------------
 
-#### Command Format Notation
+#### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -146,7 +147,7 @@ An example of a command in TAB:
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-#### Notes About Parameters
+#### Notes about parameters
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
