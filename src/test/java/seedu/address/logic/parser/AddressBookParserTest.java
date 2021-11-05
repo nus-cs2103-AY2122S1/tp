@@ -133,7 +133,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommandWithDescription_invalidCommand() {
+    public void parseCommandWithDescription_invalidCommand() throws Exception {
         String invalidCommand = "notValidCommand";
         String arguments = "1";
         String expectedOutput = MESSAGE_PARSE_COMMAND_ERROR;
@@ -142,7 +142,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommandWithoutDescription_invalidCommand() {
+    public void parseCommandWithoutDescription_invalidCommand() throws Exception {
         String invalidCommand = "notValidCommand";
         String expectedOutput = MESSAGE_PARSE_COMMAND_ERROR;
         assertThrows(ParseException.class, expectedOutput, ()
