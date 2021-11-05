@@ -17,7 +17,6 @@ import seedu.notor.commons.util.StringUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.LogicManager;
 import seedu.notor.logic.executors.Executor;
-import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
 import seedu.notor.model.Notor;

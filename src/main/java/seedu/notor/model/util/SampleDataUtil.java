@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import seedu.notor.MainApp;
 import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.commons.util.DateUtil;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
