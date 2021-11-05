@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UserProfileWatcher;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -170,4 +171,44 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
     }
 
+    @Test
+    public void notifyUserProfileWatchers_noInputs_success() {
+        boolean passed = false;
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+
+        try {
+            EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+            editCommand.notifyUserProfileWatchers();
+            passed = true;
+        } catch (RuntimeException e) {
+            assertTrue(passed);
+        }
+
+        assertTrue(passed);
+    }
+
+    @Test
+    public void addUserProfileWatcher_validInput_success() {
+        boolean passed = false;
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+
+        try {
+            EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+            EditCommand.addUserProfileWatcher(new UserProfileWatcher() {
+                @Override
+                public void updateUserProfile() {
+                    // Update User Profile
+                }
+            });
+
+            passed = true;
+        } catch (RuntimeException e) {
+            assertTrue(passed);
+        }
+
+        assertTrue(passed);
+    }
 }

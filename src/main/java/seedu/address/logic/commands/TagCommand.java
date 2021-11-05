@@ -20,8 +20,15 @@ public class TagCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) a/TAG [r/TAG] [MORE_TAGS]..\n"
             + "Example: " + COMMAND_WORD + " 1 a/friends ";
 
-    public static final String MESSAGE_TAGGED_PERSON_SUCCESS = "Successfully added/removed required tag(s) to %1$s!";
-    public static final String MESSAGE_INVALID_TAG_FORMAT = "Invalid Tag Format in Command";
+    public static final String MESSAGE_TAGGED_PERSON_SUCCESS = "Successfully added/removed tag(s) to %1$s!";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Successfully added tag(s) to %1$s!";
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Successfully removed tag(s) to %1$s!";
+    public static final String MESSAGE_MISSING_ADD_AND_REMOVE_TAG_ARGS = "Tags to be added and removed are missing!\n"
+            + MESSAGE_USAGE;
+    public static final String MESSAGE_MISSING_ADD_TAG_ARGS = "Tags to be added are missing!\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_MISSING_REMOVE_TAG_ARGS = "Tags to be removed are missing!\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_TAG_TO_REMOVE_DOES_NOT_EXIST = "Tag(s) to be removed doesn't exist!";
+    public static final String MESSAGE_TAG_TO_ADD_ALREADY_EXISTS = "Tag(s) to be added already exists!";
 
     private final Index targetIndex;
     private final ArrayList<Tag> toAdd;
@@ -38,6 +45,32 @@ public class TagCommand extends Command {
         this.toRemove = toRemove;
     }
 
+    private ArrayList<Tag> getInvalidRemoveTags(Set<Tag> newTags) {
+        ArrayList<Tag> invalidRemoveTags = new ArrayList<>();
+        for (Tag tag : toRemove) {
+            if (!newTags.contains(tag)) {
+                invalidRemoveTags.add(tag);
+            }
+        }
+        return invalidRemoveTags;
+    }
+
+    private Set<Tag> getTagsAfterRemove(Set<Tag> newTags) throws CommandException {
+        ArrayList<Tag> invalidRemoveTags = getInvalidRemoveTags(newTags);
+        if (invalidRemoveTags.size() == toRemove.size()) {
+            throw new CommandException(MESSAGE_TAG_TO_REMOVE_DOES_NOT_EXIST);
+        }
+        newTags.removeIf(toRemove::contains);
+        return newTags;
+    }
+
+    private Set<Tag> getTagsAfterAdd(Set<Tag> newTags) throws CommandException {
+        if (newTags.containsAll(toAdd)) {
+            throw new CommandException(MESSAGE_TAG_TO_ADD_ALREADY_EXISTS);
+        }
+        newTags.addAll(toAdd);
+        return newTags;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -50,8 +83,12 @@ public class TagCommand extends Command {
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
 
         Set<Tag> newTags = new HashSet<>(personToEdit.getTags());
-        newTags.removeIf(toRemove::contains);
-        newTags.addAll(toAdd);
+        if (!toRemove.isEmpty()) {
+            newTags = getTagsAfterRemove(newTags);
+        }
+        if (!toAdd.isEmpty()) {
+            newTags = getTagsAfterAdd(newTags);
+        }
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getTelegram(), personToEdit.getGithub(),
                 personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(), newTags,
@@ -59,9 +96,20 @@ public class TagCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.getPersonListControl().refreshPersonListUI();
-        return new CommandResult(String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(getTagSuccessMessage(editedPerson, !toAdd.isEmpty(), !toRemove.isEmpty()));
     }
 
+    public String getTagSuccessMessage(Person editedPerson, boolean tagsAdded, boolean tagsRemoved) {
+        String successMessage = "";
+        if (tagsAdded && tagsRemoved) {
+            successMessage = String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson);
+        } else if (tagsAdded) {
+            successMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson);
+        } else if (tagsRemoved) {
+            successMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson);
+        }
+        return successMessage;
+    }
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
