@@ -165,8 +165,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_tag() throws Exception {
         String addTagPrefix = "a/";
-        System.out.println(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + CommandTestUtil.VALID_TAG_FRIEND);
         TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + addTagPrefix + CommandTestUtil.VALID_TAG_FRIEND);
         ArrayList<Tag> tagsToAdd = new ArrayList<Tag>();

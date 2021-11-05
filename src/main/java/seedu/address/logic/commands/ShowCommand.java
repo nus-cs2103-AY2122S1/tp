@@ -88,7 +88,9 @@ public class ShowCommand extends Command {
 
         if (filteredList.size() == 1) {
             int index = model.getFilteredPersonList().indexOf(filteredList.get(0));
-            model.setSelectedIndex(index);
+            if (model.getPersonListControl() != null) {
+                model.setSelectedIndex(index);
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS,
                     model.getFilteredPersonList().get(index).getName()));
         }
@@ -102,12 +104,13 @@ public class ShowCommand extends Command {
      * Executes the show command if argument is a numeric index
      */
     private CommandResult executeWithIndex(Model model) throws CommandException {
-        assert this.index != null;
         int index = this.index.getZeroBased();
         if (index >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        model.setSelectedIndex(index);
+        if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(index);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 model.getFilteredPersonList().get(index).getName()));
     }
@@ -120,7 +123,7 @@ public class ShowCommand extends Command {
         } else if (index != null) {
             return executeWithIndex(model);
         }
-        return new CommandResult(
+        throw new CommandException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
 
