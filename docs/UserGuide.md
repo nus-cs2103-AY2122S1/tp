@@ -157,11 +157,7 @@ An example of a command in TAB:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. 
-  
-* For optional parameters, empty parameters are allowed but TAB will ignore them.<br/>
-  For example, Tab recognises `t/` as an empty tag and will ignore them (see [Managing Students](#managing-students) for more details about tags).
+* Each parameter and its prefix is separated from the others with a **space**.<br/>
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -339,6 +335,7 @@ Executing any of the commands in this section will bring you to the students int
             <td><ul>
               <li><code>t/unpaid</code> is valid.</li>
               <li><code>t/unpaid retained</code> is invalid.</li>
+              <li><code>t/unpaid t/</code> replaces existing tags with the <code>unpaid</code> tag.</li>
               <li><code>t/</code> clears <strong>all</strong> tags.</li>
             </ul></td>
         </tr>
