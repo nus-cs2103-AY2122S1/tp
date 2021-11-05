@@ -1052,6 +1052,8 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 2. Dealing with corrupted data files
    1. Navigate to `[JAR File location]/data` and rename `sportspa.json` to `sportspa.txt`.
-   2. Run SportsPA. 
-   3. SportsPA will start up without any data being present.
+   2. Open `sportspa.txt` and delete the first `{` in the file and close the file.
+   3. Rename `sportspa.txt` back to `sportspa.json`.
+   4. Run SportsPA. 
+   5. SportsPA will start up without any data being present.
    
