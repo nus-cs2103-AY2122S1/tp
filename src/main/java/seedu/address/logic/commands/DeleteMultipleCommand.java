@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -27,21 +28,23 @@ public class DeleteMultipleCommand extends Command {
 
     public static final String COMMAND_WORD = "deletem";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all persons whose details contain every "
-            + "specified keywords.\n"
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all persons whose details contain any of "
+            + "the specified keywords (case-insensitive) from the list.\n"
+            + "Parameters:"
             + "[" + PREFIX_NAME + "NAME]... "
             + "[" + PREFIX_GENDER + "GENDER]... "
             + "[" + PREFIX_PHONE + "PHONE]... "
             + "[" + PREFIX_EMAIL + "EMAIL]... "
             + "[" + PREFIX_NATIONALITY + "NATIONALITY]... "
-            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP]... "
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP]... "
+            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE]... "
             + "[" + PREFIX_REMARK + "REMARK]... "
-            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE]... "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Note:\n"
-            + " - Keywords are case-insensitive"
-            + "Example:  " + COMMAND_WORD + " n/alice p/91234567 tg/19";
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "Example: " + COMMAND_WORD + " n/alice p/91234567 tg/19";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "An empty %s was entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No valid keyword entered. \n%1$s");
 
     private int startIndex;
     private int endIndex;

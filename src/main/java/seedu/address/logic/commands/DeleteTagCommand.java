@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ public class DeleteTagCommand extends Command {
     public static final String MESSAGE_DELETED_TAG_SUCCESS = "Deleted Tag: %1$s";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_TAG_NOT_DELETED = "There are no tags to delete.";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid index was not entered. \n%1$s");
 
     private final Index index;
     private final Set<Tag> tags;

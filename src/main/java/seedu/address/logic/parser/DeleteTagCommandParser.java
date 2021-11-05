@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -34,7 +34,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX,
                         DeleteTagCommand.MESSAGE_USAGE), pe); //When invalid index is inputted.
             }
         }

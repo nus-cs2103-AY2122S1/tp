@@ -565,7 +565,7 @@ The following sequence diagram shows how the alias command mechanism works:
 #### Design considerations:
 
 * **Alternative 1 (current choice):** Singleton pattern
-    * Pros: Cannot be instantiated multiple times. 
+    * Pros: Cannot be instantiated multiple times.
     * Cons: Might be confusing for new developers.
 
 * **Alternative 2:** Non-Singleton
@@ -897,7 +897,7 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
 
@@ -907,7 +907,7 @@ Use case ends.
     * Steps 3b1-3b2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
-      
+
 **Use case: Remove existing tag of a person**
 
 **MSS**
@@ -969,7 +969,7 @@ Use case ends.
     * Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
-      
+
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
@@ -990,16 +990,16 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
       Use case ends.
-      
+
 * 3a. The format of the request is invalid.
     * 3a1. Socius shows an error message.
     * 3a2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
-      
+
 **Use case: View tutorial group statistics**
 
 **MSS**
@@ -1015,18 +1015,18 @@ Use case ends.
 
 * 2a. The list is empty.
       Use case ends.
-      
+
 * 3a. The tutorial group does not exist.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3a1-3a2 are repeated until the data entered are correct. 
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
 
 * 3b. The format of the request is invalid.
     * 3b1. Socius shows an error message.
     * 3b2. User enters a new request.
-    * Steps 3b1-3b2 are repeated until the data entered are correct. 
+    * Steps 3b1-3b2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
 
@@ -1121,7 +1121,7 @@ testers are expected to do more *exploratory* testing.
     1. Simulate a missing file by deleting the `addressbook.json` file.
 
     1. Re-Launch the application again.
-       Expected: Shows the GUI with a set of sample contacts and new file titled `addressbook.json` will be created in the `data` folder.  
+       Expected: Shows the GUI with a set of sample contacts and new file titled `addressbook.json` will be created in the `data` folder.
 
 1. Dealing with corrupted data files
 
@@ -1130,6 +1130,6 @@ testers are expected to do more *exploratory* testing.
     1. Simulate a corrupted file by editing the `addressbook.json` file.
 
     1. Re-Launch the application again.
-       Expected: Shows the GUI with a set of sample contacts and upon shutdown, the `addressbook.json` file will be updated with the sample contacts.  
+       Expected: Shows the GUI with a set of sample contacts and upon shutdown, the `addressbook.json` file will be updated with the sample contacts.
 
 
