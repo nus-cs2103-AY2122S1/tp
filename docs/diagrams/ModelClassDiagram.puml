@@ -48,10 +48,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 Classmate *--> "1" UniqueStudentList
 Classmate *--> "1" UniqueTutorialClassList
-Classmate *--> "1" UniqueTutorialGroupList
+TutorialClass *--> "1" UniqueTutorialGroupList
 UniqueStudentList *-down-> "~* all" Student
 UniqueTutorialClassList *-down-> "~* all" TutorialClass
-UniqueTutorialGroupList *-down-> "~* all" TutorialGroup
+UniqueTutorialGroupList *-down-> "~* " TutorialGroup
 Student *--> Name
 Student *--> Phone
 Student *--> Email
@@ -71,5 +71,4 @@ Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Student
 ModelManager -->"~* filtered" TutorialClass
-ModelManager --->"~* filtered" TutorialGroup
 @enduml
