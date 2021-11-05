@@ -124,12 +124,4 @@ public class AddStudentCommandTest {
         // different students -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
-
-    @Test
-    public void helperTest() {
-        List<Module> list = model.getFilteredModuleList();
-        ModuleName moduleName = new ModuleName("CS2103");
-        Module module = new Module(moduleName);
-        assertTrue(list.contains(module));
-    }
 }

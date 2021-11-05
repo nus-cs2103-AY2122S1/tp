@@ -71,51 +71,40 @@ public class AddStudentCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
-        Module module = new Module(new ModuleName("AB1111Z"));
-
-        // checks if the module exists
-        if (!lastShownList.contains(new Module(moduleName))) {
-            throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND,
-                    moduleName.getModuleName()));
-        }
-
-        // checks for duplicate students
+        Module module;
         for (Module mod : lastShownList) {
             if (mod.getName().equals(moduleName)) {
                 module = mod;
                 if (module.hasStudent(studentToAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
                 }
+
+                if (isDuplicateTeleHandleInModule(studentToAdd.getTeleHandle(), module)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_TELE_HANDLE);
+                }
+
+                if (isDuplicateEmailInModule(studentToAdd.getEmail(), module)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+                }
+
+                // for each task in this module's taskList, add it to a new UniqueTaskList
+                // give the new UniqueTaskList to student after all tasks have been added
+                UniqueTaskList thisModuleTaskList = module.getTaskList();
+                UniqueTaskList newStudentTaskList = new UniqueTaskList();
+                for (Task task : thisModuleTaskList) {
+                    ModuleName moduleName = task.getTaskModuleName();
+                    TaskId taskId = task.getTaskId();
+                    TaskName taskName = task.getTaskName();
+                    TaskDeadline taskDeadline = task.getTaskDeadline();
+                    Task taskToAdd = new Task(moduleName, taskId, taskName, taskDeadline);
+                    newStudentTaskList.add(taskToAdd);
+                }
+                studentToAdd.setTaskList(newStudentTaskList);
+                module.addStudent(studentToAdd);
+                return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }
-
-        assert !module.equals(new Module(new ModuleName("AB0000Z")));
-
-        // checks for duplicate TeleHandle and Email
-        for (Module module1 : lastShownList) {
-            if (isDuplicateTeleHandleInModule(studentToAdd.getTeleHandle(), module1)) {
-                throw new CommandException(MESSAGE_DUPLICATE_TELE_HANDLE);
-            }
-            if (isDuplicateEmailInModule(studentToAdd.getEmail(), module1)) {
-                throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
-            }
-        }
-
-        // copy taskList and add student
-        UniqueTaskList thisModuleTaskList = module.getTaskList();
-        UniqueTaskList newStudentTaskList = new UniqueTaskList();
-        for (Task task : thisModuleTaskList) {
-            ModuleName moduleName = task.getTaskModuleName();
-            TaskId taskId = task.getTaskId();
-            TaskName taskName = task.getTaskName();
-            TaskDeadline taskDeadline = task.getTaskDeadline();
-            Task taskToAdd = new Task(moduleName, taskId, taskName, taskDeadline);
-            newStudentTaskList.add(taskToAdd);
-        }
-        studentToAdd.setTaskList(newStudentTaskList);
-
-        module.addStudent(studentToAdd);
-        return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     /**
