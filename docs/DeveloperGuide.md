@@ -13,6 +13,33 @@ List of sources of all reused/adapted ideas, code, documentation, and third-part
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
+* The `SchedulePanel#createTimeThread()` method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
+
+```java
+private void createTimeThread() {
+    Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
+        @Override
+        public void run() {
+            while (true) {
+                Platform.runLater(() -> {
+                    calendarView.setToday(LocalDate.now());
+                    calendarView.setTime(LocalTime.now());
+                });
+                try {
+                    // update every 60 seconds
+                    sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+    updateTimeThread.setPriority(Thread.MIN_PRIORITY);
+    updateTimeThread.setDaemon(true);
+    updateTimeThread.start();
+}
+```
+* Initialising the `CalendarView` in the `SchedulePanel` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1180,3 +1207,14 @@ Expected: Error details will be shown in the status message.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Efforts**
+
+**Calendar Interface**
+The Calendar interface was implemented using the CalendarFX library -- our work on adapting CalendarFX into TAB is contained in the `SchedulePanel` class.
+Explain the difficulty level, challenges faced, effort required, and achievements of the project.
+If a significant part (e.g., more than 5%) of the effort was saved through reuse,
+mention what you reused and how it affected the effort e.g., 
+the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
+
+Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
