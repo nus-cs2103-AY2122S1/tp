@@ -129,7 +129,7 @@ The `Model` component,
   
 A `Module` stores a `Title`, `Code`, `Description`, `Mc`, `AcademicCalendar` and zero or more `Tag`s.
 <br><br>
-An `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
+A `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
 
 
 ### Storage component
