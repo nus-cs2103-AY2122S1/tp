@@ -11,13 +11,16 @@ import java.util.Objects;
  */
 public class Mc {
 
+    public static final String OVERALL_MESSAGE_CONSTRAINTS = "MC for a module should only be an "
+            + "Integer from 1-20.\n MC for a MC goal should only be an Integer from 1-999";
+    public static final String MESSAGE_CONSTRAINTS = "MC for a module should only be an Integer from 1-20.";
+    public static final String MESSAGE_CONSTRAINTS_GOAL = "MC for a MC goal should only be an "
+            + "Integer from 1-999";
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "MC credit should only be an Integer, and it should not be less than 0.";
     public final int value;
 
     /**
-     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * Constructs a dummy object only used by JsonUserInfoStorage and McProgressList.
      * This default constructor shouldn't be used anywhere else.
      */
     public Mc() {
@@ -25,13 +28,13 @@ public class Mc {
     }
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Mc}.
      *
      * @param value A valid mc credit.
      */
     public Mc(int value) {
         requireNonNull(value);
-        checkArgument(isValidMc(value), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidMc(value), OVERALL_MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
@@ -39,7 +42,7 @@ public class Mc {
      * Returns true if a given string is a valid mc credit.
      */
     public static boolean isValidMc(int test) {
-        return test >= 0;
+        return test > 0;
     }
 
     @Override

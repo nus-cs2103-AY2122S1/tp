@@ -11,17 +11,17 @@ import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.module.McProgress;
 
 /**
- * Panel containing the list of modules.
+ * Panel containing the user's mc progress.
  */
 public class McListPanel extends UiPart<Region> {
     private static final String FXML = "McListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ModuleListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(McListPanel.class);
 
     @FXML
     private ListView<McProgress> mcListView;
 
     /**
-     * Creates a {@code ModuleListPanel} with the given {@code ObservableList}.
+     * Creates a {@code McListPanel} with the given {@code ObservableList}.
      */
     public McListPanel(ObservableList<McProgress> progressList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class McListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code McProgress} using a {@code McCard}.
      */
     class McListViewCell extends ListCell<McProgress> {
         @Override

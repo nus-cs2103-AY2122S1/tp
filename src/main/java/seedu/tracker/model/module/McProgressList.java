@@ -57,11 +57,13 @@ public class McProgressList {
 
     private void initialiseDefaultProgressList() {
         ObservableList<McProgress> defaultProgressList = FXCollections.observableArrayList();
-        Mc zeroMc = new Mc(0);
+        Mc zeroMc = new Mc();
         defaultProgressList.add(new McProgress(zeroMc, userInfo.getMcGoal(), "Total"));
 
         for (int index : TAG_INDEXES_LIST) {
-            Mc requirement = new Mc(MC_REQUIREMENTS_LIST[index - 1]);
+            int reqInt = MC_REQUIREMENTS_LIST[index - 1];
+            assert reqInt != 0 : "MC requirement will never be 0";
+            Mc requirement = new Mc(reqInt);
             String tagName = TAGS_LIST[index - 1];
 
             McProgress newProgress = new McProgress(zeroMc, requirement, tagName);
@@ -115,12 +117,21 @@ public class McProgressList {
                 .filter(modulesWithTag)
                 .mapToInt(m -> m.getMc().value)
                 .sum();
-        return new Mc(numOfMc);
+
+        if (numOfMc == 0) {
+            return new Mc();
+        } else {
+            return new Mc(numOfMc);
+        }
     }
 
     private Mc getTotalCompletedMcs(ObservableList<Module> completedModules) {
         int totalNum = completedModules.stream().mapToInt(module -> module.getMc().value).sum();
-        return new Mc(totalNum);
+        if (totalNum == 0) {
+            return new Mc();
+        } else {
+            return new Mc(totalNum);
+        }
     }
 
     private ObservableList<Module> getCompletedModulesList(ObservableList<Module> modules) {

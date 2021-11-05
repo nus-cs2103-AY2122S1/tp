@@ -16,6 +16,9 @@ import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
 
+/**
+ * Unschedule the module identified using it's displayed index.
+ */
 public class UntakeCommand extends Command {
     public static final String COMMAND_WORD = "untake";
 

@@ -7,6 +7,8 @@ import static seedu.tracker.logic.commands.CommandTestUtil.DESC_GEQ1000;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CP3108A;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS1101S;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_GEQ1000;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CP3108A;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_MC_CP3108A;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TITLE_CP3108A;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -31,7 +33,7 @@ import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 import seedu.tracker.testutil.ModuleBuilder;
 
 /**
-*Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+* Contains integration tests (interaction with the Model) and unit tests for EditCommand.
 */
 public class EditCommandTest {
 
@@ -39,7 +41,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Module editedModule = new ModuleBuilder().build();
+        Module editedModule = new ModuleBuilder().withCode(VALID_CODE_CP3108A)
+                .withTitle(VALID_TITLE_CP3108A)
+                .withDescription(VALID_DESCRIPTION_CP3108A)
+                .withMc(VALID_MC_CP3108A)
+                .withTags(VALID_TAG_CORE)
+                .build();
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE, descriptor);
 
@@ -80,10 +87,10 @@ public class EditCommandTest {
         Module lastModule = model.getFilteredModuleList().get(indexLastModule.getZeroBased());
 
         ModuleBuilder moduleInList = new ModuleBuilder(lastModule);
+        Module moduleWithAcademicCal = moduleInList.withAcademicCalendar(3, 2).build();
         Module editedModule = moduleInList.withCode(VALID_CODE_CP3108A).withTitle(VALID_TITLE_CP3108A)
                 .withTags(VALID_TAG_CORE).withAcademicCalendar(3, 2).build();
 
-        Module moduleWithAcademicCal = moduleInList.withAcademicCalendar(3, 2).build();
         Model modelToEdit = new ModelManager(new ModuleTracker(model.getModuleTracker()),
                 new UserPrefs(), new UserInfo());
         modelToEdit.setModule(lastModule, moduleWithAcademicCal);
@@ -102,19 +109,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE, new EditModuleDescriptor());
-        Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
-
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
-                new UserPrefs(), new UserInfo());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
@@ -130,6 +124,14 @@ public class EditCommandTest {
         expectedModel.setModule(model.getFilteredModuleList().get(0), editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE, new EditModuleDescriptor());
+        Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_SAME_VALUE);
     }
 
     @Test

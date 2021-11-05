@@ -69,20 +69,20 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W17-2/tp/blob/master/src/main/java/seedu/tracker/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ModuleListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W17-2/tp/blob/master/src/main/java/seedu/tracker/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W17-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Module` and `Mc` object residing in the `Model`.
 
 ### Logic component
 
@@ -93,9 +93,9 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `ModuleTrackerParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a Module).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `ModuleTrackerParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ModuleTrackerParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -311,6 +311,96 @@ When the `ClearCommand#execute()` method is called,
       - All modules stored in the storage in advance will be deleted as well
       - User need to add all the modules again, once the clear command is called
       - It will be expensive, if the user accidentally use clear command
+
+### Set feature
+#### Implementation
+The `SetCommand` has 2 functionalities: set current semester and set MC goal. A `SetCommand` can perform one and only one of these two functionalities at a time.
+
+Below are the sequence diagrams and explanation of how `SetCommand` is executed. The explanation uses set semester as an example, the mechanism for setting MC goal is similar.
+
+![Sequence diagram of parsing `set` command](images/SetSequenceDiagram.png)
+
+**Step 1.** The user executes the command `set y/1 s/1` and the user input is passed to `LogicManager`.
+
+**Step 2.** `LogicManager` passes the user input to `ModuleTrackerParser` and `ModuleTrackerParser` will call `SetCommandParser#parse`.
+
+**Step 3.** `SetCommandParser` will check whether there is MC prefix `m/` in the user input. If there isn't, it will then check whether there is `AcademicYear` prefix `y/` and `Semester` prefix`s/`.In this case, there is, so it will create a new `AcademicYear` and `Semester`, and use them to create a new `AcademicCalendar`.
+
+**Step 4.** `SetCommandParser` creates a `SetCommand` with the newly created `AcademicCalendar`. An inner boolean property `isSemChanged` in `SetCommand` is assigned to true indicating this is a command for setting current semester.
+
+![Sequence diagram of executing `set` command](images/SetExecuteSequenceDiagram.png)
+
+**Step 5.** The `SetCommand` is executed by calling its `execute` method.
+
+**Step 6.** During execution, the `SetCommand` checks whether it needs to set current semester or mc goal by `isSemChanged` property. In this case, it needs to set current semester.
+
+**Step 7.**  Since the `Model` is passed to `SetCommand#execute`, it is able to call the method `Model#setCurrentSemester` to update the current semester stored in `Model`.
+
+**Step 8.** After the current semester is changed, `SetCommand` will call the method `Model#updateFilteredModuleList()`, which will notify the `ModuleListPanel` in `UI` to update the color of all module cards.
+
+#### Design Considerations:
+
+**Aspect: How can the user set current semester**
+- **Alternative 1:** There is a button in the GUI that when user click it,it will show drop-down lists of year and semester for user to choose.
+    - Pros:
+        - It is very straight forward and intuitive.
+        - For beginners, and users who are not familiar with CLI, they can change current semester easily.
+    - Cons:
+        - For users who are familiar with CLI, picking academic year and semester using mouse may slow down their working efficiency.
+
+- **Alternative 2(current choice)**: User set current semester through command line.
+    - Pros:
+        - For a user who is familiar with the app and CLI, they don't need to use mouse to change current semester. 
+    - Cons:
+        - The command is less intuitive than drop-down list, the user might need to memorize the `set` command format.
+
+**Aspect: How can the user set Mc goal and current semester**
+
+- **Alternative 1:** The user can use `setMcGoal` and `setCurrentSemester` command to perform the two functionalities respectively.
+    - Pros:
+        - The command is very clear. For beginners, they can understand the command quickly.
+        - `setMcGoal` and `setCurrentSemester` gives hints to user regarding what parameters need to be filled in.
+    - Cons:
+        - The command is very long, which takes more time to type in. For a user who is familiar with the app, they might not be able to use it efficiently.
+        - The command consist of capital letters and lower-case letters and is long. Thus, it might be more prone to errors.
+
+- **Alternative 2(current choice)**: The user can use a single `set` command to perform both set Mc goal and change current semester functionalities.
+    - Pros:
+        - The command is short, as a user that is familiar with the app, they can execute the command quickly and are less likely to make mistakes.
+    - Cons:
+        - For beginners, the `set` command might be a bit confusing since the word "set" shows little hints on what the command does.
+
+### View feature
+The `view` command results in modules taken in a specific semester being shown.
+#### Implementation
+Below is a sequence diagram and explanation of how the `view` command works.
+![Sequence diagram of executing `view` command](images/viewSequenceDiagram.png)
+
+**Step 1.** The user executes the command `view y/2 s/1` and the user input is passed to `LogicManager`.
+
+**Step 2.** `LogicManager` passes the user input to `ModuleTrackerParser` and `ModuleTrackerParser` will call `ViewCommandParser#parse`.
+
+**Step 3.** `ViewCommandParser` creates a new Academic calendar by parsing the user input.
+
+**Step 4.** `ViewCommandParser` creates a predicate that can check whether the module is in the semester specified by the user.
+
+**Step 5.** `ViewCommandParser` creates a new `ViewCommand` and it is returned to LogicManager.
+
+**Step 6.** LogicManager executes the `ViewCommand` by calling its `execute` method.
+
+**Step 7.** `ViewCommand` calls Model to update filtered module list to only contain modules in the specified semester.
+
+#### Design Considerations:
+
+**Aspect: How can the user view modules in specific semester**
+- **Alternative 1:** Set 2 buttons in GUI that when clicked, allows user to navigate to the previous semester or next semester and see the modules taken in that semester.  
+    - Pros:
+        - It is very straight forward and intuitive.
+        - For beginners and users who are not familiar with CLI, they can view modules taken in different semesters by simply clicking buttons without needing to remember the commands.
+    - Cons:
+        - If the specific semester is very far away from the current semester, users need to click the button many times.
+        - For a user comfortable with using command line, the need to use mouse may lower their working efficiency.
+    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -472,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ModuleTracker` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
@@ -503,21 +593,136 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Mod tracker shows an error message.
       Use case ends.
 
+
+
+
+**Use case 1: Change current semester**
+
+**MSS**
+
+1.  User requests to change current semester.
+2.  Module tracker change the current semester.
+    
+    Use case ends.
+
+**Extensions**
+* 1a. User does not specify academic year or semester in the request.
+    * 1a1. Module Tracker shows an error message.
+      
+    Use case resumes at step 1.
+
+
+* 1b. The academic year and semester user request to change to is invalid.
+    * 1b1. Module Tracker shows an error message.
+    
+    Use case resumes at step 1.
+      
+* a. At any time, User requests to view help(UCxx)
+
+
+
+
+
+
+
+
+
+
+
+**Use case 2: Set Mc goal**
+
+**MSS**
+
+1.  User requests to set Mc goal.
+2.  Module tracker change Mc goal.
+
+    Use case ends.
+
+**Extensions**
+* 1a. User does not specify the number of MC in the request.
+    * 1a1. Module Tracker shows an error message.
+
+  Use case resumes at step 1.
+
+
+* 1b. The MC user request to set is invalid.
+    * 1b1. Module Tracker shows an error message.
+
+  Use case resumes at step 1.
+
+* a. At any time, User requests to view help(UCxx)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Use case 3: View modules taken in specific semester**
+
+**MSS**
+
+1.  User requests view modules selected in specific semester.
+2.  Module tracker shows the modules selected in specific semester.
+
+    Use case ends.
+
+**Extensions**
+* 1a. User does not specify the number the specific academic year and semester in the request.
+    * 1a1. Module Tracker shows an error message.
+
+  Use case resumes at step 1.
+
+
+* 1b. There is no module selected in that specific semester.
+    * 1b1. Module Tracker shows an empty module list.
+
+  Use case ends.
+
+* a. At any time, User requests to view help(UCxx)
+
+
+
+
+
+
+
+
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 100 modules without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  New users can have a grasp of the core features quickly with the help of user guide.
-5.  Should work properly no matter where the application is stored.
-6.  This product will not be connected to the internet, it will be a totally offline application.
-*{More to be added}*
+* Technical requirement:
+  * NUS Mod Tracker Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+  * NUS Mod Tracker should work under common screen resolutions.
+  * NUS Mod Tracker Should work properly no matter where the application is stored.
+
+* Performance requirements:
+  * NUS Mod Tracker Should be able to hold up to 500 modules without a noticeable sluggishness in performance for typical usage.
+
+* Quality requirement
+  * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+  * New users can have a grasp of the core features quickly with the help of user guide(link).
+* Constraints
+  * The product is not required to handle the module timetable planning and module bidding process. 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: Graphical user interface
+* **ClI**: Command line interface
+* **Common screen resolutions**: minimum _1024x786_, maximum _3840x2160_ 
+* **MSS**: Main Success Scenario
 
 --------------------------------------------------------------------------------------------------------------------
 

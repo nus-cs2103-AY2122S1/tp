@@ -34,7 +34,7 @@ public class SetCommandParser implements Parser<SetCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
             }
 
-            Mc mc = ParserUtil.parseMc(argMultimap.getValue(PREFIX_MC).get());
+            Mc mc = ParserUtil.parseMcGoal(argMultimap.getValue(PREFIX_MC).get());
 
             return new SetCommand(mc);
         } else if (arePrefixesPresent(argMultimap, PREFIX_ACADEMIC_YEAR, PREFIX_SEMESTER)) {

@@ -1,5 +1,12 @@
 package seedu.tracker.ui;
 
+import static seedu.tracker.model.module.McProgressList.BREADTH_DEPTH_TAG_TITLE;
+import static seedu.tracker.model.module.McProgressList.FOUNDATION_TAG_TITLE;
+import static seedu.tracker.model.module.McProgressList.GE_TAG_TITLE;
+import static seedu.tracker.model.module.McProgressList.MATH_SCIENCE_TAG_TITLE;
+import static seedu.tracker.model.module.McProgressList.PROFESSIONALISM_TAG_TITLE;
+import static seedu.tracker.model.module.McProgressList.UE_TAG_TITLE;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -10,7 +17,7 @@ import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.McProgressList;
 
 /**
- * An UI component that displays information of a {@code Module}.
+ * An UI component that displays information of a {@code McProgress}.
  */
 public class McCard extends UiPart<Region> {
 
@@ -38,7 +45,7 @@ public class McCard extends UiPart<Region> {
     private ProgressBar progressBar;
 
     /**
-     * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
+     * Creates a {@code McCard} with the given {@code McProgress}.
      */
     public McCard(McProgress progress, int index) {
         super(FXML);
@@ -59,17 +66,17 @@ public class McCard extends UiPart<Region> {
     private String getTitle(int index) {
         switch (index) {
         case McProgressList.GE_INDEX:
-            return "GE";
+            return GE_TAG_TITLE;
         case McProgressList.UE_INDEX:
-            return "UE";
+            return UE_TAG_TITLE;
         case McProgressList.FOUNDATION_INDEX:
-            return "Foundation";
+            return FOUNDATION_TAG_TITLE;
         case McProgressList.BREADTH_DEPTH_INDEX:
-            return "Breath and Depth";
+            return BREADTH_DEPTH_TAG_TITLE;
         case McProgressList.PROFESSIONALISM_INDEX:
-            return "IT Professionalism";
+            return PROFESSIONALISM_TAG_TITLE;
         case McProgressList.MATH_SCIENCE_INDEX:
-            return "Math and Science";
+            return MATH_SCIENCE_TAG_TITLE;
         default:
             return "Total";
         }

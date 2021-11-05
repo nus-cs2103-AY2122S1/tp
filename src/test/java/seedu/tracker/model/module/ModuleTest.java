@@ -45,12 +45,7 @@ class ModuleTest {
         assertFalse(CS2103T.isSameModule(editedCS2103T));
 
         // code differs in case, all other attributes same -> returns false
-        Module editedCS2101 = new ModuleBuilder(CS2101).withCode(VALID_CODE_CS2100.toLowerCase()).build();
-        assertFalse(CS2101.isSameModule(editedCS2101));
-
-        // code has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_CODE_CS2100 + " ";
-        editedCS2101 = new ModuleBuilder(CS2101).withCode(nameWithTrailingSpaces).build();
+        Module editedCS2101 = new ModuleBuilder(CS2101).withCode(VALID_CODE_CS2100).build();
         assertFalse(CS2101.isSameModule(editedCS2101));
     }
 
@@ -87,8 +82,6 @@ class ModuleTest {
         // different tags -> returns false
         editedCS2103T = new ModuleBuilder(CS2103T).withTags(VALID_TAG_UE).build();
         assertFalse(CS2103T.equals(editedCS2103T));
-
-
     }
 
     @Test

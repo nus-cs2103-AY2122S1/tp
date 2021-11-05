@@ -31,9 +31,10 @@ public class ClearCommand extends Command {
             + PREFIX_ACADEMIC_YEAR + "YEAR "
             + PREFIX_SEMESTER + "SEMESTER "
             + "Example: " + COMMAND_WORD
-            + PREFIX_ACADEMIC_YEAR + "1 "
-            + PREFIX_SEMESTER + "1";;
-    public static final String MESSAGE_SUCCESS = "All modules on %1$s has been untaked!";
+            + " " + PREFIX_ACADEMIC_YEAR + "1 "
+            + PREFIX_SEMESTER + "1";
+
+    public static final String MESSAGE_SUCCESS = "All modules in %1$s has been unscheduled!";
     private final ModuleInSpecificSemesterPredicate predicate;
     private final AcademicCalendar academicCalendar;
 

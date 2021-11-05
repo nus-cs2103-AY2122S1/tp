@@ -14,6 +14,9 @@ import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 
+/**
+ * Parses input arguments and creates a new TakeCommand object
+ */
 public class TakeCommandParser implements Parser<TakeCommand> {
 
     /**

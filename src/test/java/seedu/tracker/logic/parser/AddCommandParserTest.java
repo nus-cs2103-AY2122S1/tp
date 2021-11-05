@@ -7,7 +7,6 @@ import static seedu.tracker.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS21
 import static seedu.tracker.logic.commands.CommandTestUtil.DESCRIPTION_DESC_GEQ1000;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_MC_DESC;
-import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CP3108A;
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CS2103T;
@@ -34,7 +33,6 @@ import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.Title;
-import seedu.tracker.model.tag.Tag;
 import seedu.tracker.testutil.ModuleBuilder;
 
 public class AddCommandParserTest {
@@ -116,9 +114,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CODE_DESC_CS2103T + TITLE_DESC_CS2103T + DESCRIPTION_DESC_CS2103T
                 + INVALID_MC_DESC + TAG_DESC_CORE, Mc.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
-        assertParseFailure(parser, CODE_DESC_CS2103T + TITLE_DESC_CS2103T + DESCRIPTION_DESC_CS2103T
-                + MC_DESC_CS2103T + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+        // invalid tag - deleted as there are no restrictions on tags
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_CODE_DESC + TITLE_DESC_CS2103T + DESCRIPTION_DESC_CS2103T

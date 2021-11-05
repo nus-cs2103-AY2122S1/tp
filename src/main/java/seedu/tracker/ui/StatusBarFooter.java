@@ -39,7 +39,10 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
 
-        currentSemester.setText(userInformation.getCurrentSemester().toString());
+        String calender = userInformation.getCurrentSemester().toString();
+        calender = calender.substring(0, 1).toUpperCase() + calender.substring(1, 8)
+                + calender.substring(8, 9).toUpperCase() + calender.substring(9);
+        currentSemester.setText(calender);
 
         mcGoal.setText("MC goal : " + userInformation.getMcGoal().toString());
 

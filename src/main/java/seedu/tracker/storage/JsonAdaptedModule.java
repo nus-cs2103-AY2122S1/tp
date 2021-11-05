@@ -115,7 +115,7 @@ class JsonAdaptedModule {
         // }
 
         if (!Mc.isValidMc(mc)) {
-            throw new IllegalValueException(Mc.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Mc.OVERALL_MESSAGE_CONSTRAINTS);
         }
         final Mc modelMc = new Mc(mc);
 

@@ -46,7 +46,6 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = moduleTrackerParser.parseCommand(commandText);
         commandResult = command.execute(model);
-        //update completed mcs ->
         model.updateMcProgress();
 
         try {
