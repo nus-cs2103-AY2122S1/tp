@@ -23,7 +23,7 @@ public class AbDeleteCommandParserTest {
 
     @Test
     public void parse_invalidFileName_throwsParseException() {
-        String invalidFileName = "dddd\nddd";
+        String invalidFileName = "dddd<>\nddd";
         assertParseFailure(parser, invalidFileName, String.format(MESSAGE_ADDRESSBOOK_NOT_VALID, invalidFileName));
     }
 

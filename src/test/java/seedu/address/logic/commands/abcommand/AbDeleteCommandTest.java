@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.abcommand;
 
+import static java.nio.file.attribute.PosixFilePermission.OWNER_READ;
+import static java.nio.file.attribute.PosixFilePermission.OWNER_WRITE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -11,8 +13,12 @@ import static seedu.address.logic.commands.abcommand.AbDeleteCommand.MESSAGE_ADD
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.DosFileAttributeView;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.util.EnumSet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -83,11 +89,23 @@ public class AbDeleteCommandTest {
         String newFilePathName = "testingfile";
         Path newFilePath = testFolder.resolve(newFilePathName + ".json");
         Files.createFile(newFilePath);
-        Files.setAttribute(newFilePath, "dos:readonly", true);
+
+        FileStore fileStore = Files.getFileStore(newFilePath);
+        if (fileStore.supportsFileAttributeView(DosFileAttributeView.class)) {
+            Files.setAttribute(newFilePath, "dos:readonly", true);
+        } else if (fileStore.supportsFileAttributeView(PosixFileAttributeView.class)) {
+            Files.setPosixFilePermissions(newFilePath, EnumSet.of(OWNER_READ));
+        }
+
         AbDeleteCommand abDeleteCommand1 = new AbDeleteCommand(newFilePathName, newFilePath);
         String result = String.format(MESSAGE_DELETE_ADDRESSBOOK_FAILURE, newFilePathName);
         assertCommandFailure(abDeleteCommand1, model, result);
-        Files.setAttribute(newFilePath, "dos:readonly", false);
+
+        if (fileStore.supportsFileAttributeView(DosFileAttributeView.class)) {
+            Files.setAttribute(newFilePath, "dos:readonly", false);
+        } else if (fileStore.supportsFileAttributeView(PosixFileAttributeView.class)) {
+            Files.setPosixFilePermissions(newFilePath, EnumSet.of(OWNER_READ, OWNER_WRITE));
+        }
     }
 
     @Test

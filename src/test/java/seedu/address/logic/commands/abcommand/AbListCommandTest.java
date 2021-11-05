@@ -45,12 +45,17 @@ public class AbListCommandTest {
 
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookDirectory(testFolder);
+        userPrefs.setAddressBookFilePath(file1);
         Model model = new ModelManager(new AddressBook(), userPrefs);
         Model expectedModel = new ModelManager(new AddressBook(), userPrefs);
 
         model.addAddressBookList(file1);
         model.addAddressBookList(file2);
         model.addAddressBookList(file3);
+
+        expectedModel.addAddressBookList(file1);
+        expectedModel.addAddressBookList(file2);
+        expectedModel.addAddressBookList(file3);
 
         AbListCommand command = new AbListCommand();
         String result = String.format(AbListCommand.MESSAGE_SUCCESS, "\n-first" + "\n-another" + "\n-last");
