@@ -98,7 +98,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Client` object residing in the `Model`.
 
-LeadsForce's GUI is primarily adapted from `AddressBook3`, with the addition of a scrollable `SideBar` that conveniently displays information for the user.
+LeadsForce's GUI is primarily adapted from `AddressBook3`, with the addition of a `SideBar` that conveniently displays information for the user.
 
 Our `SideBar` has a `ClientViewPanel`, which like the `ClientCard`, has a dependency on the `Model` class to fully display the information of the `Client` of interest to the user.
 
@@ -170,7 +170,11 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
-### 3.6.1 Field options
+### 3.7 Client Fields
+
+As client attributes often share a few similarities in their constraints, some with their own differences, we provide interfaces for developers to customise the constraints of client attributes.
+
+### 3.7.1 Field options
 
 We provide options for developers to easily customise the constraints on the user input such as whether the input is required or whether it is editable. These field options are encapsulated within the `Field` interface, which further branches into more concrete interfaces which can be implemented by `Client` attributes.
 
@@ -183,13 +187,13 @@ IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for i
 DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Client` creation. Default to `""`.
 IS_EDITABLE | If set to `true`, the field is editable by the user through edit command. Default to `true`.
 
-### 3.6.2 Field interfaces
+### 3.7.2 Field interfaces
 
 <img src="images/FieldClassDiagram.png" width="700" />
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
-#### 3.6.3 OptionalStringBasedField
+#### 3.7.3 OptionalStringBasedField
 
 Option | Default
 --- | ---
@@ -198,7 +202,7 @@ IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
-#### 3.6.4 OptionalNonStringBasedField
+#### 3.7.4 OptionalNonStringBasedField
 
 Option | Default
 --- | ---
@@ -207,7 +211,7 @@ IS_NULL_VALUE_ALLOWED | `true`
 DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
-#### 3.6.5 RequiredField
+#### 3.7.5 RequiredField
 
 Option | Default
 --- | ---
@@ -411,7 +415,7 @@ The following sequence diagram shows how the sort operation works:
 
 The following sequence diagram shows how the sort operation works:
 
-### 4.5.4 List Address Book
+### 4.6.4 List Address Book
 
 1. The `AbListCommand` will call getAddressBookListString method of `ModelManager`.
 2. The `ModelManager` will then subsequently call toString method of `AddressBookList`
@@ -529,7 +533,6 @@ _{Explain here how the data archiving feature will be implemented}_
 * Manages a significant number of contacts
 * Short on time as they have to juggle both school and work at the same time
 * Trying to sell financial products effectively by finding the right clients
-* Job is competitive in nature
 
 **Value propositions**:
 * Keep tracks of client information and meetings all in one place
@@ -542,11 +545,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I can …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | Student financial advisor| add in my client's information| refer to my client's information later on|
-| `* * *`  | Student financial advisor| remove a client from my catalogue of clients | remove clients who I no longer keep in touch with |
-| `* * *`  | Student financial advisor | view my client's information | view in-depth information on the client which can allow me to better strategise the appropriate plan |
-| `* * *`  | Student financial advisor | categorise my clients | have a more targetted approach when approaching clients with new financial plans |
-| `* * *`  | Student financial advisor | list out all my clients | have an overview of the clients I have |
+| `* * *`  | student financial advisor| add in my client's information| refer to my client's information later on|
+| `* * *`  | student financial advisor| remove a client from my catalogue of clients | remove clients who I no longer keep in touch with |
+| `* * *`  | student financial advisor | view my client's information | view in-depth information on the client which can allow me to better strategise the appropriate plan |
+| `* * *`  | student financial advisor | categorise my clients | have a more targetted approach when approaching clients with new financial plans |
+| `* * *`  | student financial advisor | list out all my clients | have an overview of the clients I have |
 | `* * *`  | student financial advisor who is meeting with a client soon| lookup a client in the address book | strategise several plans that would be appropriate for my clients based on the client's financial information |
 | `* * *`  | student financial advisor that forgot the client's name | search for a client by their information|be able to greet the client when we meet|
 | `* * *`  | student financial advisor| save my address book locally   | access the information again when I reopen the application |
@@ -554,10 +557,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | student financial advisor| be warned that I am about to add the same user again | avoid having duplicate clients in my catalogue of clients|
 | `* * *`  | student financial advisor| set meetings with my clients| keep track and not be late to my meetings with my clients |
 | `* * *`  | student financial advisor who's client has changed client information | edit my client's information   | keep track of my client's information |
-| `* * *`  | student financial advisor who is planning to attend an event | get an overview of my meeting schedule on the day | ensure that I can still attned my meetings with clients | Student financial advisor | 
-| `* *`   | Student financial advisor trying to sell a particular financial plan | search for clients with a certain amount of financial appetite | suggest the plans to the appropriate clients |
+| `* * *`  | student financial advisor who is planning to attend an event | get an overview of my meeting schedule on the day | ensure that I can still attend my meetings with clients |
+| `* *`   | student financial advisor trying to sell a particular financial plan | search for clients with a certain amount of financial appetite | suggest the plans to the appropriate clients |
 | `* *`   | student financial advisor | sort clients in my catalogue of clients| quickly identify the clients based on the last time I've seen them or the number of financial plans they have |
-| `*`  | Student financial advisor who has gotten a new laptop | transfer my clients' information into another computer | transfer my clients' information onto my new laptop |
+| `*`  | student financial advisor who has gotten a new laptop | transfer my clients' information into another computer | transfer my clients' information onto my new laptop |
 
 ### 6.3 Use cases
 
@@ -576,8 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a.  Missing paramters - name and email
 
     * 1a1. LeadsForce shows an invalid command error message. 
-
-          Use case ends. 
+      Use case ends. 
 
 **Use case: UC02 View a client's information**
 
@@ -592,13 +594,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. LeadsForce shows an invalid command error to user.
       Use case ends.
       
-**Use case: UC03 Edit client information **
+**Use case: UC03 Edit client information**
 
 **MSS**
 
 1. User request to edit multiple attributes of a client 
 2. LeadsForce updates the client's information.
-3. User __UC05 Views a client's information__ to see that the information of the client have been changed. 
+3. User __UC02 Views a client's information__ to see that the information of the client have been changed. 
 
 **Extensions**
 
@@ -626,7 +628,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. LeadsForce shows an error message, informing the user that there is no client with the given client Id .
       Use case resumes at step 2.
       
-**Use case: UC05 Showcases list of clients **
+**Use case: UC05 Showcases list of clients**
 
 **MSS**
 
@@ -652,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
   
 
-**Use case: UC07 Setting a meeting with clients **
+**Use case: UC07 Setting a meeting with clients**
 
 **MSS**
 
@@ -681,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The meeting schedule is empty as the user has no meetings on the day
   Use case ends.
 
-**Use case: UC09 Clearing a client list **
+**Use case: UC09 Clearing a client list**
 
 **MSS**
 
