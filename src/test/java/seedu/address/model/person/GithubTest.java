@@ -49,6 +49,13 @@ public class GithubTest {
     }
 
     @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Github github = new Github("Jai2501");
+        Email email = new Email("jay@gmail.com");
+        assertFalse(github.equals(email));
+    }
+
+    @Test
     public void equals_twoDifferentObjectsWithSameGitHubUsernames_success() {
         Github github1 = new Github("Jai2501");
         Github github2 = new Github("Jai2501");

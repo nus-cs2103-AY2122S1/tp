@@ -67,6 +67,13 @@ public class EmailTest {
     }
 
     @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Email email = new Email("jay@gmail.com");
+        Github github = new Github("Jai2501");
+        assertFalse(email.equals(github));
+    }
+
+    @Test
     public void equals_twoDifferentObjectsWithSameEmail_success() {
         Email email1 = new Email("jay@gmail.com");
         Email email2 = new Email("jay@gmail.com");

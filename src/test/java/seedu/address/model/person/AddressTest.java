@@ -35,6 +35,13 @@ public class AddressTest {
     }
 
     @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Address address = new Address("Prince George's Park Residences, NUS, 118430");
+        Email email = new Email("jay@gmail.com");
+        assertFalse(address.equals(email));
+    }
+
+    @Test
     public void equals_twoDifferentObjectsWithSameAddress_success() {
         Address address1 = new Address("Prince George's Park Residences, NUS, 118430");
         Address address2 = new Address("Prince George's Park Residences, NUS, 118430");

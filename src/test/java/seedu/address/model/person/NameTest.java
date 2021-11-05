@@ -72,6 +72,13 @@ public class NameTest {
     }
 
     @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Name name = new Name("Jai");
+        Email email = new Email("jay@gmail.com");
+        assertFalse(name.equals(email));
+    }
+
+    @Test
     public void equals_twoDifferentObjectsWithSameName_success() {
         Name name1 = new Name("Jai");
         Name name2 = new Name("Jai");

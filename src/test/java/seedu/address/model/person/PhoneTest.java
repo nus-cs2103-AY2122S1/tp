@@ -47,6 +47,13 @@ public class PhoneTest {
     }
 
     @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Phone phone = new Phone("12345678");
+        Email email = new Email("jay@gmail.com");
+        assertFalse(phone.equals(email));
+    }
+
+    @Test
     public void equals_twoDifferentObjectsWithSameNumber_success() {
         String phoneNumber = "12345678";
         Phone phone1 = new Phone(phoneNumber);
