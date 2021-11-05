@@ -60,10 +60,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Type type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get());
         TutorialId tutorialId = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIAL_ID).get());
-
-        Person person = new Person(name, phone, email, address, tagList, gitHubId, nusNetworkId, type, studentId,
-                tutorialId);
-        return new AddCommand(person);
+        if (email.value.toUpperCase().contains(nusNetworkId.value.toUpperCase())) {
+            Person person = new Person(name, phone, email, address, tagList, gitHubId, nusNetworkId, type, studentId,
+                    tutorialId);
+            return new AddCommand(person);
+        } else {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

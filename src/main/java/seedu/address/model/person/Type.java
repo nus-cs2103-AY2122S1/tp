@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Type {
 
-    public static final String MESSAGE_CONSTRAINTS = "Type must be valid ie Student or Tutor, and it should not be "
+    public static final String MESSAGE_CONSTRAINTS = "Type must be valid ie student or tutor, and it should not be "
             + "blank";
 
     /*

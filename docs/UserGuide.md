@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your
-contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students
+ProfBook is a desktop app for managing contacts, optimized for use via a Command Line Interface
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ProfBook can get your
+contact management tasks done faster than traditional GUI apps. ProfBook helps CS2103 Instructors manage both students
 and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
@@ -29,7 +29,7 @@ and TAs contacts within teams and tutorial groups. It is optimized for CLI users
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`add n/John Doe e/e0123456@u.nus.edu g/john-doe N/e0123456 r/student s/A0123456X T/11 p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a Person with the given details.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,19 +77,38 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Attribute Summary:
+
+Attribute | Prefix | Format 
+------|---|---------------------------------------------------------
+**Name** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Phone** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long
+**Email** | `e/` | Emails should be of the format `NUS Network ID@u.nus.edu`
+**Address** | `a/` | Addresses can take any values, and it should not be blank
+**Tag** | `t/` | Tags names should be alphanumeric
+**GITHUB_ID** | `g/` | GitHub ID must be valid ie alphanumeric separated by single dash and it should not start or end with a dash, and it should not be blank
+**NUSNet_ID** | `N/` | NUS Network ID must be valid ie starting with e or E followed by 7 digits, and it should not be blank
+**Type** | `r/` | Type must be valid ie `student` or `tutor`, and it should not be blank
+**STUDENT_ID** | `S/` | Student ID must be valid ie starting with a or A followed by 7 digits and a single alphabet, and it should not be blank
+**TUTORIAL_ID** | `T/ `| Tutorial ID must be valid ie a 2 digits, and it should not be blank
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME e/EMAIL s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
+
+* A person cannot be added if he or she already exists in ProfBook, i.e. they are the same person.
+* 2 persons are considered similar if they share the exact same name, e.g. if John Doe already exists in ProfBook, `add n/John Doe s/A0222530X N/E0560062 g/meixuanjin T/01 p/98159386 a/John Street, block 456, #01-01` would not add a new John Doe to ProfBook.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
+Also two persons are same if their names are equal with case sensitivity taken into consideration
 </div>
 
 Examples:
-* `add n/Siddharth Srivastava s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incomplete ip`
-* `add n/Rachel Cheah s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
+* `add n/Siddharth Srivastava e/e0638874@u.nus.edu s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incompleteIp`
+* `add n/Rachel Cheah e/e0987654@u.nus.edu s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
 
 ### Listing all persons : `list`
 
@@ -107,18 +126,16 @@ Format: `stat`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [e/Email] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Role `r/` is optional but if used, the role chosen must be either that of student or tutor.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed and new tags will be added i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 1 p/91234567 e/e0123456@u.nus.edu` Edits the phone number and email address of the 1st person to be `91234567` and `e0123456@u.nus.edu` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 1 n/Siddharth Srivastava t/IncompleteIP` Edits the name of the 1st person to be `Siddharth Srivastava` and replaces all existing tags with the tag `IncompleteIP`.
 
@@ -236,7 +253,7 @@ Undoes a previously executed command. `undo` can reverse any commands executed a
 
 After executing the `undo` command, the remaining number of commands that can be undid is displayed. For example, the following output shows that there are 2 more commands that can be undid; the `undo` command can be executed 2 more times.
 
-> Undo successful  
+> Undo successful
 > Remaining undo count: 2
 
 Format: `undo`
@@ -247,7 +264,7 @@ Re-performs a command that was undone. `redo` can redo any undone command up to 
 
 After executing the `redo` command, the remaining number of commands that can be redone is displayed. For example, the following output shows that there are 3 more commands that can be redone.
 
-> Undo successful  
+> Undo successful
 > Remaining undo count: 3
 
 Format: `redo`
@@ -260,12 +277,12 @@ Format: `exit`
 
 ### Saving the data
 
-PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save
+ProfBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
 
 ### Editing the data file
 
-PB3 data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update
+ProfBook data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update
 data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -280,7 +297,7 @@ file at the next run.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that
-contains the data of your previous PB3 home folder.
+contains the data of your previous ProfBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

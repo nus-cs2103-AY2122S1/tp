@@ -39,7 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "e0123456@u.nus.edu "
             + PREFIX_GITHUB_ID + "john-doe "
-            + PREFIX_NUS_NETWORK_ID + "e0638879 "
+            + PREFIX_NUS_NETWORK_ID + "e0123456 "
             + PREFIX_TYPE + "student "
             + PREFIX_STUDENT_ID + "A0123456X "
             + PREFIX_TUTORIAL_ID + "11 "
