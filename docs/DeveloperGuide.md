@@ -434,7 +434,11 @@ The final object state diagram is as such:
 The following sequence diagram shows how the enroll lesson operation works:
 
 <center>
-<img alt="EnrollLessonSequenceDiagram" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram.png"/>
+<img alt="EnrollLessonSequenceDiagram0" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="EnrollLessonSequenceDiagram1" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram1.png"/>
 </center>
 
 The following activity diagram summarizes what
