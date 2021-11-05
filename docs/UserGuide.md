@@ -476,7 +476,8 @@ Examples:
 
 Notes:
 * The start date and the end date are included in the period.
-* The `DAYOFWEEK` field required to specify shifts are not case-sensitive, but must be full.
+* The `DAYOFWEEK` stands for the day in the week, such as `monday`, `sunday` etc. 
+* Field required to specify shifts are not case-sensitive, but must be full. 
 
 
 #### Swapping shifts: `swapShift`
