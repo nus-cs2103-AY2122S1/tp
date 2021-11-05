@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyConthacks <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Conthacks
+Class ReadOnlyConthacks
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -35,16 +35,16 @@ Class LessonTime
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Conthacks .up.|> ReadOnlyConthacks
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyConthacks
+ModelManager -left-> "1" Conthacks
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+Conthacks *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> "1" Name
 Person *---> "1" Email
@@ -52,7 +52,7 @@ Person *---> Phone
 Person *---> TeleHandle
 Person --> "1..*" ModuleCode
 Person *---> Remark
-AddressBook *--> "1" UniqueModuleLessonList
+Conthacks *--> "1" UniqueModuleLessonList
 UniqueModuleLessonList --> "~* all" ModuleLesson
 ModuleLesson *--> Remark
 ModuleLesson --> "1" ModuleCode
