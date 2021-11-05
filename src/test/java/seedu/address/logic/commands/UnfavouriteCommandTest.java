@@ -6,27 +6,73 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.model.person.Person;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class UnfavouriteCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        Person personToUnfavourite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = personToUnfavourite.getName().toString()
+                + UnfavouriteCommand.MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), null);
+        expectedModel.unfavouritePerson(personToUnfavourite);
+        if (!personToUnfavourite.isFavourite()) {
+            personToUnfavourite.setIsFavourite();
+        }
+        assertCommandSuccess(unfavouriteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_failure() {
+        Person personAlreadyUnfavourited = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = personAlreadyUnfavourited.getName().toString()
+                + UnfavouriteCommand.MESSAGE_ALREADY_UNFAVOURITE_PERSON;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), null);
+        expectedModel.favouritePerson(personAlreadyUnfavourited);
+        if (personAlreadyUnfavourited.isFavourite()) {
+            personAlreadyUnfavourited.setIsNotFavourite();
+        }
+        assertCommandFailure(unfavouriteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_failure() {
+        ObservableList<Person> list = model.getFilteredPersonList();
+        Person personToUnfavourite = list.get(INDEX_FIRST_PERSON.getZeroBased());
+        UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(Index.fromZeroBased(list.size() + 1));
+
+        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), null);
+        expectedModel.unfavouritePerson(personToUnfavourite);
+        if (!personToUnfavourite.isFavourite()) {
+            personToUnfavourite.setIsFavourite();
+        }
+        assertCommandFailure(unfavouriteCommand, model, expectedMessage);
+    }
 
     @Test
     public void equals() {
@@ -50,29 +96,4 @@ public class UnfavouriteCommandTest {
         assertFalse(unfavouriteFirstCommand.equals(unfavouriteSecondCommand));
     }
 
-    @Test
-    public void execute_validIndex_success() {
-        String expectedMessage = TypicalPersons.ALICE.getName().fullName
-                + UnfavouriteCommand.MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
-        UnfavouriteCommand command = new UnfavouriteCommand(INDEX_FIRST_PERSON);
-        model.getFilteredPersonList().get(0).setIsFavourite();
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndex_failure() {
-        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(List.of("alice")));
-        UnfavouriteCommand command = new UnfavouriteCommand(INDEX_THIRD_PERSON);
-        assertCommandFailure(command, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_alreadyFavourite_failure() {
-        String expectedMessage = TypicalPersons.ALICE.getName().fullName
-                + UnfavouriteCommand.MESSAGE_ALREADY_UNFAVOURITE_PERSON;
-        UnfavouriteCommand command = new UnfavouriteCommand(INDEX_FIRST_PERSON);
-        model.getFilteredPersonList().get(0).setIsNotFavourite();
-        assertCommandFailure(command, model, expectedMessage);
-    }
 }
