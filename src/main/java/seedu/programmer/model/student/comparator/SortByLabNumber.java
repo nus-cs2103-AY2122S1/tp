@@ -3,7 +3,6 @@ package seedu.programmer.model.student.comparator;
 import java.util.Comparator;
 
 import seedu.programmer.model.student.Lab;
-import seedu.programmer.model.student.LabNum;
 
 /**
  * A class to help sort Students in ascending order.
