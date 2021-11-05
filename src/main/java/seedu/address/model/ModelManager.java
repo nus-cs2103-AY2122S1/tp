@@ -209,11 +209,9 @@ public class ModelManager implements Model {
     @Override
     public void loadTaskList(Member member) {
         requireNonNull(member);
-        if (this.taskListManager != member.getTaskList()) {
-            this.taskListManager = member.getTaskList();
-            this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
-            this.currentMember = member;
-        }
+        this.taskListManager = member.getTaskList();
+        this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
+        this.currentMember = member;
     }
 
     /**
@@ -243,7 +241,6 @@ public class ModelManager implements Model {
             this.currentMember = member;
         }
         taskListManager.add(task);
-        updateFilteredTaskList(member, PREDICATE_SHOW_ALL_TASKS);
     }
 
     /**
