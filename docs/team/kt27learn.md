@@ -3,44 +3,41 @@ layout: page
 title: Keith's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: LeadsForce
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+LeadsForce - LeadsForce is a desktop application catered towards student financial advisors (FA) for managing their leads. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added numerous client fields (Pull requests: [\#62]())
+  * What it does: allows the user to store financial specific client information (etc risk appetite, disposable income)
+
+* **New Feature**: Added the ability to sort clients based off different client fields. (Pull requests: [\#64]())
+  * What it does: allows the user to sort clients in ascending or descending order based off a declared client field
+  * Justification: This feature improves the user experience for FAs significantly when managing a large address book as it allows them to identify key clients 
+  * Highlights: This implementation was challenging as there were numerous client fields to take account for. This required a comparator that took into account the values of the fields as well as take into account that certain fields might be empty as they are optional fields.
+
+* **New Feature**: Added meeting list GUI (Pull requests: [\#120](), [\#136]())
+  * What it does: allows the user to quickly sieve through all scheduled upcoming meetings
+  * Justification: This feature improves the user experience for FAs significantly when managing a large address book as it allows them to be able to quickly refer to all upcoming meetings sorted based on date and time.
+  * Highlights: This implementation was challenging as it requires a lot of changes to logic, storage and Gui. Also, when linking the GUI to the edit command as NextMeeting object would have to also listen to the any changes in the name field for its associated client.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
 * **Code contributed**: [RepoSense link]()
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Improved Add command to cater to optional fields (Pull requests: [\#62]())
+    * Implemented numerous client interfaces to allow for optional fields to be passed empty inputs
+    * Modified parser to only require compulsory fields for add command
+  * Updated the delete command (Pull requests: [\#62]())
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Did cosmetic tweaks to existing documentation of features `add`: [\#79]()
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Updated class diagrams for model, ui and logic component [\#124]()
+    * Added implementation details of the `sort` feature. [\#124]()
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * Reported bugs and suggestions for other teams in the class
