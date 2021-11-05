@@ -85,6 +85,8 @@ Shows a message explaining how to access the help page.
 
 ### <a name="view-dashboard"></a>1.2 Dashboard: `dashboard`
 
+![dashboard](images/commands/DashboardCommand/dashboard.png)
+
 Displays a dashboard window showing the following data:
 
 1. Number of students
@@ -217,7 +219,7 @@ The student particular and lab results will be updated if other commands modify 
 
 Format: `show <INDEX_IN_LIST>`
 
-![UI](images/commands/ShowCommand/show.png)
+![show](images/commands/ShowCommand/show.png)
 
 <div markdown="block" class="alert alert-success">💡 **Example:**
 
