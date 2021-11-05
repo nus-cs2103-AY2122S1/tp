@@ -1218,7 +1218,7 @@ testers are expected to do more *exploratory* testing.
    
     1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
 
-    2. Test case: `appt -u`<br>
+    2. Test case: `appt -f`<br>
        Expected: All appointments in the appointment records will be listed in the appointment list.
 
     3. Test case: `appt -f p/Aaron`<br>
