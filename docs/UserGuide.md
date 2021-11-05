@@ -565,7 +565,7 @@ Terminology used | What it means
 --------|------------------
 Tilted | A term widely used in the gaming community to express frustration. 
 Pro | A term widely used in the gaming community to refer to a someone who is considered highly skilled. 
-Friend Identifier | identifier you assign to a friend to refer to that specific friend within the gitGud application
+Friend Identifier | identifier you assign to a friend to refer to that specific friend within the gitGud application.
 Game Identifier | identifier you assign to a game to refer to that specific game within the gitGud application.
 
 --------------------------------------------------------------------------------------------------------------------
