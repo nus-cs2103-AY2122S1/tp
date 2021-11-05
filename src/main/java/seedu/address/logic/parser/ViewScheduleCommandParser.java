@@ -12,10 +12,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.ParserUtil.extractPeriodDates;
-import static seedu.address.logic.parser.ParserUtil.initializePeriodToThisWeek;
 import static seedu.address.logic.parser.ParserUtil.parseIndex;
 import static seedu.address.logic.parser.ParserUtil.testByAllFields;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Period;
@@ -38,8 +38,7 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
                         PREFIX_DASH_INDEX, PREFIX_DATE,
                         PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
                         PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
-
-        Period period = initializePeriodToThisWeek();
+        Period period = DateTimeUtil.getDisplayedPeriod();
         if (argMultimap.isEmpty()) {
             throw new ParseException(ViewScheduleCommand.MESSAGE_USAGE);
         }
@@ -51,7 +50,6 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
             return new ViewScheduleCommand(predicate,
                     parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()), period);
         }
-
         return new ViewScheduleCommand(predicate, period);
     }
 }

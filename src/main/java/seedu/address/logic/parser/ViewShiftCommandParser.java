@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Period;
@@ -51,7 +52,7 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
         int slotNum = ViewShiftCommand.INVALID_SLOT_NUMBER;
         DayOfWeek dayOfWeek = null; // should not be null when ViewShiftCommand object is created
         LocalTime time = null;
-        LocalDate[] dates = ParserUtil.initializeLocalDateToThisWeek();
+        LocalDate[] dates = DateTimeUtil.getDisplayedDateArray();
         try {
             // remove the prefix, then parse
             if (argMultimap.getValue(PREFIX_DASH_TIME).isPresent()) {
