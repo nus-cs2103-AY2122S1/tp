@@ -179,7 +179,8 @@ public class CommandBox extends UiPart<Region> {
                 boolean isIndex = (suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
                         || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
                         && parameterPart.matches("\\d+");
-                boolean isCsv = (suggestionPart.equals("CSV_NAME")) && parameterPart.matches("\\w+");
+                boolean isImportOrExport = (suggestionPart.equals("CSV_NAME") || suggestionPart.equals("FILE_NAME"))
+                        && parameterPart.matches("\\w+");
                 boolean isLateKeyword = parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE");
                 boolean isOptionalOneCharPrefix = suggestionPart.charAt(0) == '['
                         && parameterPart.length() > 1
@@ -190,26 +191,12 @@ public class CommandBox extends UiPart<Region> {
                         && parameterPart.charAt(2) == '/'
                         && suggestionPart.substring(1, 4).equals(parameterPart.substring(0, 3));
 
-                if (isOneCharPrefix) {
-                    isEntered = true;
-                    break;
-                } else if (isTwoCharPrefix) {
-                    isEntered = true;
-                    break;
-                } else if (isIndex) {
-                    isEntered = true;
-                    break;
-                } else if (isCsv) {
+                if (isOneCharPrefix || isTwoCharPrefix || isIndex || isImportOrExport || isOptionalOneCharPrefix
+                        || isOptionalTwoCharPrefix) {
                     isEntered = true;
                     break;
                 } else if (isLateKeyword) {
                     isEntered = true;
-                } else if (isOptionalOneCharPrefix) {
-                    isEntered = true;
-                    break;
-                } else if (isOptionalTwoCharPrefix) {
-                    isEntered = true;
-                    break;
                 }
             }
             if (!isEntered) {
@@ -233,73 +220,81 @@ public class CommandBox extends UiPart<Region> {
 
     private String mapSuggestion(String currentString, boolean isResidentTab) {
         if (isResidentTab) {
-            switch (currentString) {
-            case AddPersonCommand.COMMAND_WORD:
-                return AddPersonCommand.PARAMETERS;
-            case DeletePersonCommand.COMMAND_WORD:
-                return DeletePersonCommand.PARAMETERS;
-            case EditPersonCommand.COMMAND_WORD:
-                return EditPersonCommand.PARAMETERS;
-            case ViewPersonCommand.COMMAND_WORD:
-                return ViewPersonCommand.PARAMETERS;
-            case ClearCommand.COMMAND_WORD:
-                return ClearCommand.PARAMETERS;
-            case ExitCommand.COMMAND_WORD:
-                return ExitCommand.PARAMETERS;
-            case FindPersonCommand.COMMAND_WORD:
-                return FindPersonCommand.PARAMETERS;
-            case HelpCommand.COMMAND_WORD:
-                return HelpCommand.PARAMETERS;
-            case DeadlineCommand.COMMAND_WORD:
-                return DeadlineCommand.PARAMETERS;
-            case ImportCommand.COMMAND_WORD:
-                return ImportCommand.PARAMETERS;
-            case ExportCommand.COMMAND_WORD:
-                return ExportCommand.PARAMETERS;
-            case SwitchCommand.COMMAND_WORD:
-                return SwitchCommand.PARAMETERS;
-            case TraceCommand.COMMAND_WORD:
-                return TraceCommand.PARAMETERS;
-            case SortPersonCommand.COMMAND_WORD:
-                return SortPersonCommand.PARAMETERS;
-
-            default:
-                return "";
-            }
+            return getResidentTabSuggestion(currentString);
         } else {
-            switch (currentString) {
-            case AddEventCommand.COMMAND_WORD:
-                return AddEventCommand.PARAMETERS;
-            case DeleteEventCommand.COMMAND_WORD:
-                return DeleteEventCommand.PARAMETERS;
-            case EditEventCommand.COMMAND_WORD:
-                return EditEventCommand.PARAMETERS;
-            case ViewEventCommand.COMMAND_WORD:
-                return ViewEventCommand.PARAMETERS;
-            case ClearCommand.COMMAND_WORD:
-                return ClearCommand.PARAMETERS;
-            case ExitCommand.COMMAND_WORD:
-                return ExitCommand.PARAMETERS;
-            case FindEventCommand.COMMAND_WORD:
-                return FindEventCommand.PARAMETERS;
-            case HelpCommand.COMMAND_WORD:
-                return HelpCommand.PARAMETERS;
-            case IncludeCommand.COMMAND_WORD:
-                return IncludeCommand.PARAMETERS;
-            case ImportCommand.COMMAND_WORD:
-                return ImportCommand.PARAMETERS;
-            case ExportCommand.COMMAND_WORD:
-                return ExportCommand.PARAMETERS;
-            case SwitchCommand.COMMAND_WORD:
-                return SwitchCommand.PARAMETERS;
-            case ExcludeCommand.COMMAND_WORD:
-                return ExcludeCommand.PARAMETERS;
-            case SortEventCommand.COMMAND_WORD:
-                return SortEventCommand.PARAMETERS;
+            return getEventTabSuggestion(currentString);
+        }
+    }
 
-            default:
-                return "";
-            }
+    public String getResidentTabSuggestion(String currentString) {
+        switch (currentString) {
+        case AddPersonCommand.COMMAND_WORD:
+            return AddPersonCommand.PARAMETERS;
+        case DeletePersonCommand.COMMAND_WORD:
+            return DeletePersonCommand.PARAMETERS;
+        case EditPersonCommand.COMMAND_WORD:
+            return EditPersonCommand.PARAMETERS;
+        case ViewPersonCommand.COMMAND_WORD:
+            return ViewPersonCommand.PARAMETERS;
+        case ClearCommand.COMMAND_WORD:
+            return ClearCommand.PARAMETERS;
+        case ExitCommand.COMMAND_WORD:
+            return ExitCommand.PARAMETERS;
+        case FindPersonCommand.COMMAND_WORD:
+            return FindPersonCommand.PARAMETERS;
+        case HelpCommand.COMMAND_WORD:
+            return HelpCommand.PARAMETERS;
+        case DeadlineCommand.COMMAND_WORD:
+            return DeadlineCommand.PARAMETERS;
+        case ImportCommand.COMMAND_WORD:
+            return ImportCommand.PARAMETERS;
+        case ExportCommand.COMMAND_WORD:
+            return ExportCommand.PARAMETERS;
+        case SwitchCommand.COMMAND_WORD:
+            return SwitchCommand.PARAMETERS;
+        case TraceCommand.COMMAND_WORD:
+            return TraceCommand.PARAMETERS;
+        case SortPersonCommand.COMMAND_WORD:
+            return SortPersonCommand.PARAMETERS;
+
+        default:
+            return "";
+        }
+    }
+
+    public String getEventTabSuggestion(String currentString) {
+        switch (currentString) {
+        case AddEventCommand.COMMAND_WORD:
+            return AddEventCommand.PARAMETERS;
+        case DeleteEventCommand.COMMAND_WORD:
+            return DeleteEventCommand.PARAMETERS;
+        case EditEventCommand.COMMAND_WORD:
+            return EditEventCommand.PARAMETERS;
+        case ViewEventCommand.COMMAND_WORD:
+            return ViewEventCommand.PARAMETERS;
+        case ClearCommand.COMMAND_WORD:
+            return ClearCommand.PARAMETERS;
+        case ExitCommand.COMMAND_WORD:
+            return ExitCommand.PARAMETERS;
+        case FindEventCommand.COMMAND_WORD:
+            return FindEventCommand.PARAMETERS;
+        case HelpCommand.COMMAND_WORD:
+            return HelpCommand.PARAMETERS;
+        case IncludeCommand.COMMAND_WORD:
+            return IncludeCommand.PARAMETERS;
+        case ImportCommand.COMMAND_WORD:
+            return ImportCommand.PARAMETERS;
+        case ExportCommand.COMMAND_WORD:
+            return ExportCommand.PARAMETERS;
+        case SwitchCommand.COMMAND_WORD:
+            return SwitchCommand.PARAMETERS;
+        case ExcludeCommand.COMMAND_WORD:
+            return ExcludeCommand.PARAMETERS;
+        case SortEventCommand.COMMAND_WORD:
+            return SortEventCommand.PARAMETERS;
+
+        default:
+            return "";
         }
     }
 

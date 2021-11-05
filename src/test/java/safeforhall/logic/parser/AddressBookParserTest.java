@@ -133,8 +133,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         DeadlineCommand command = (DeadlineCommand) parser.parseCommand(
-                DeadlineCommand.COMMAND_WORD + " k/c d1/10-10-2021", true);
-        assertEquals(new DeadlineCommand("c", new LastDate("10-10-2021")), command);
+                DeadlineCommand.COMMAND_WORD + " k/c d1/10-10-2021 d2/12-10-2021", true);
+        assertEquals(new DeadlineCommand("c", new LastDate("10-10-2021"), new LastDate("12-10-2021")), command);
     }
 
     @Test

@@ -21,21 +21,20 @@ public class ResidentListTest {
 
     @Test
     public void constructor_nameRoomConflict_throwsIllegalArgumentException() {
-        assertThrows(ParseException.class, () ->
-                ResidentList.isValidResidentList("Peter, a213")); // name and room
+        assertThrows(IllegalArgumentException.class, () -> new ResidentList("Peter, a213")); // name and room
     }
 
     @Test
     public void isValidResidentList() throws ParseException {
-        // null name
+        // null residentList
         assertThrows(NullPointerException.class, () -> ResidentList.isValidResidentList(null));
 
-        // invalid name
+        // invalid residentList
         assertFalse(ResidentList.isValidResidentList("")); // empty string
         assertFalse(ResidentList.isValidResidentList(" ")); // spaces only
         assertFalse(ResidentList.isValidResidentList("a213 b423")); // no comma between information
 
-        // valid name
+        // valid residentList
         assertTrue(ResidentList.isValidResidentList(ResidentList.DEFAULT_LIST)); // default no residents string
         assertTrue(ResidentList.isValidResidentList("peter jack")); // alphabets only
         assertTrue(ResidentList.isValidResidentList("Capital Tan")); // with capital letters
@@ -48,7 +47,7 @@ public class ResidentListTest {
 
     @Test
     public void hasUnvaccinatedResident() {
-        ResidentList emptyResidentList = new ResidentList(ResidentList.EMPTY_STRING);
+        ResidentList emptyResidentList = new ResidentList(ResidentList.DEFAULT_LIST);
         assertFalse(emptyResidentList.hasUnvaccinatedResident());
     }
 
@@ -60,11 +59,11 @@ public class ResidentListTest {
     }
 
     @Test
-    public void isValidResidentStorage() throws ParseException {
-        // null name
+    public void isValidResidentStorage() {
+        // null residentStorage
         assertThrows(NullPointerException.class, () -> ResidentList.isValidResidentStorage(null));
 
-        // invalid name
+        // invalid residentStorage
         assertFalse(ResidentList.isValidResidentStorage("")); // empty string
         assertFalse(ResidentList.isValidResidentStorage(" ")); // spaces only
         assertFalse(ResidentList.isValidResidentStorage("David Li; Room: C112; Phone: 91031282; "
@@ -76,7 +75,7 @@ public class ResidentListTest {
                 + "Email: berniceyu@example.com; Vaccinated: F; Faculty: FASS; Last Fet Date: 10-10-2021; "
                 + "Last Collection Date: 11-10-2021peter jack,Capital Tan")); // no comma between information
 
-        // valid name
+        // valid residentStorage
         assertTrue(ResidentList.isValidResidentStorage("None")); // default no residents string
         assertTrue(ResidentList.isValidResidentStorage("David Li; Room: C112; Phone: 91031282; "
                 + "Email: lidavid@example.com; Vaccinated: T; Faculty: SDE; Last Fet Date: 02-10-2021; "
