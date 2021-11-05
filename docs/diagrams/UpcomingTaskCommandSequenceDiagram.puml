@@ -1,20 +1,22 @@
 @startuml
-participant ":MainWindow" as MainWindow
-participant ":LogicManager" as LogicManager
-participant ":TaskTabParser" as TaskTabParser
-participant "command:UpcomingTaskCommand" as UpcomingTaskCommand
-participant "commandResult:CommandResult" as CommandResult
+!include style.puml
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskTabParser" as TaskTabParser LOGIC_COLOR
+participant "command:UpcomingTaskCommand" as UpcomingTaskCommand LOGIC_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 
-activate MainWindow
+activate MainWindow UI_COLOR
 MainWindow -> LogicManager: execute("upcoming")
-activate LogicManager
+activate LogicManager LOGIC_COLOR
 
 LogicManager -> TaskTabParser: parseCommand(...)
-activate TaskTabParser
+activate TaskTabParser LOGIC_COLOR
 
 create UpcomingTaskCommand
 TaskTabParser -> UpcomingTaskCommand
-activate UpcomingTaskCommand
+activate UpcomingTaskCommand LOGIC_COLOR
 UpcomingTaskCommand --> TaskTabParser
 deactivate UpcomingTaskCommand
 
@@ -22,11 +24,21 @@ TaskTabParser --> LogicManager: command
 deactivate TaskTabParser
 
 LogicManager -> UpcomingTaskCommand: execute(model)
-activate UpcomingTaskCommand
+activate UpcomingTaskCommand LOGIC_COLOR
+
+UpcomingTaskCommand -> ModelManager: sortTaskList()
+activate ModelManager MODEL_COLOR
+ModelManager --> UpcomingTaskCommand
+deactivate ModelManager
+
+UpcomingTaskCommand -> ModelManager: updateFilteredTaskList(predicate)
+activate ModelManager MODEL_COLOR
+ModelManager --> UpcomingTaskCommand
+deactivate ModelManager
 
 create CommandResult
 UpcomingTaskCommand -> CommandResult
-activate CommandResult
+activate CommandResult LOGIC_COLOR
 CommandResult --> UpcomingTaskCommand: commandResult
 deactivate CommandResult
 
