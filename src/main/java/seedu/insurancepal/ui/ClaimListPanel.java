@@ -10,15 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-<<<<<<< HEAD:src/main/java/seedu/address/ui/ClaimListPanel.java
 import javafx.util.Pair;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.claim.Claim;
-import seedu.address.model.person.Person;
-=======
 import seedu.insurancepal.commons.core.LogsCenter;
+import seedu.insurancepal.model.claim.Claim;
 import seedu.insurancepal.model.person.Person;
->>>>>>> master:src/main/java/seedu/insurancepal/ui/ClaimListPanel.java
 
 /**
  * Panel containing the list of Claims and Names.
