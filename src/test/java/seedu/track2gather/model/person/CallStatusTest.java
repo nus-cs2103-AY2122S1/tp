@@ -30,6 +30,11 @@ public class CallStatusTest {
         assertFalse(CallStatus.isValidCallStatus("")); // empty string
         assertFalse(CallStatus.isValidCallStatus(" ")); // spaces only
 
+        // missing fields
+        assertFalse(CallStatus.isValidCallStatus("2")); // missing call status
+        assertFalse(CallStatus.isValidCallStatus("false")); // missing numbers
+        assertFalse(CallStatus.isValidCallStatus("true")); // missing numbers
+
         // invalid numbers
         assertFalse(CallStatus.isValidCallStatus("-1 false")); // negative integer
         assertFalse(CallStatus.isValidCallStatus("1.4 false")); // decimal
