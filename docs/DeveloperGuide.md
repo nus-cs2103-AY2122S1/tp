@@ -692,6 +692,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case resumes at step 1
 
+
+
+**Use case: UC08 - List elderly with incoming visits in next week or month**
+
+**MSS**
+
+1. User requests to list elderly
+2. SeniorLove shows a list of elderly
+3. User requests to show all the elderly with next visit in the incoming week or month
+4. SeniorLove display the filtered list of elderly
+
+   Use case ends.
+
+**Extension**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
