@@ -18,7 +18,9 @@ public class Period extends Attribute<Pair<LocalDate, LocalDate>> {
                     + "separated by a space. The start date should be keyed before the end date, "
                     + "and must occur earlier than the end date by at least 1 day.";
     public static final String MESSAGE_CONSTRAINTS_DATE =
-            "Date should be in the ISO-8601 format (i.e. yyyy-MM-dd)";
+            "Dates should be in the ISO-8601 format (i.e. yyyy-MM-dd)";
+    public static final String MESSAGE_CONSTRAINTS_DATE_KEYWORDS =
+            "Date keywords should be in the ISO-8601 format (i.e. yyyy-MM-dd)";
 
     /**
      * Constructs a {@code Period}.

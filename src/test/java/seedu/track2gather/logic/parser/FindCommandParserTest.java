@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.track2gather.logic.commands.FindCommand;
 import seedu.track2gather.model.person.attributes.CaseNumber;
+import seedu.track2gather.model.person.attributes.Name;
 import seedu.track2gather.model.person.attributes.Period;
+import seedu.track2gather.model.person.attributes.Phone;
 import seedu.track2gather.model.person.predicates.CaseNumberEqualsKeywordsPredicate;
 import seedu.track2gather.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.track2gather.model.person.predicates.PhoneStartsWithKeywordsPredicate;
@@ -54,7 +56,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validNameArgs_returnsFindCommand() {
+    public void parse_validNameArgs_success() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
@@ -67,7 +69,18 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validPhoneArgs_returnsFindCommand() {
+    public void parse_invalidNameArgs_throwsParseException() {
+        // One invalid keyword
+        String invalidKeyword = " " + PREFIX_NAME + "Alex-Yeoh";
+        assertParseFailure(parser, invalidKeyword, Name.MESSAGE_CONSTRAINTS_KEYWORDS);
+
+        // One valid and one invalid keyword
+        String invalidTestInput = " " + PREFIX_NAME + "Alex Alex-Yeoh";
+        assertParseFailure(parser, invalidTestInput, Name.MESSAGE_CONSTRAINTS_KEYWORDS);
+    }
+
+    @Test
+    public void parse_validPhoneArgs_success() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
                 new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList("111", "222")));
@@ -81,7 +94,18 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validCaseNumberArgs_returnsFindCommand() {
+    public void parse_invalidPhoneArgs_throwsParseException() {
+        // One invalid keyword
+        String invalidKeyword = " " + PREFIX_PHONE + "abc";
+        assertParseFailure(parser, invalidKeyword, Phone.MESSAGE_CONSTRAINTS_KEYWORDS);
+
+        // One valid and one invalid keyword
+        String invalidTestInput = " " + PREFIX_PHONE + "12 abc";
+        assertParseFailure(parser, invalidTestInput, Phone.MESSAGE_CONSTRAINTS_KEYWORDS);
+    }
+
+    @Test
+    public void parse_validCaseNumberArgs_success() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
                 new FindCommand(new CaseNumberEqualsKeywordsPredicate(Arrays.asList("111", "222")));
@@ -95,18 +119,18 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_invalidCaseNumberArgs_returnsFindCommand() {
+    public void parse_invalidCaseNumberArgs_throwsParseException() {
         // One invalid keyword
         String invalidKeyword = " " + PREFIX_CASE_NUMBER + "-1";
-        assertParseFailure(parser, invalidKeyword, CaseNumber.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, invalidKeyword, CaseNumber.MESSAGE_CONSTRAINTS_KEYWORDS);
 
         // One valid and one invalid keyword
         String invalidTestInput = " " + PREFIX_CASE_NUMBER + "1 -1";
-        assertParseFailure(parser, invalidTestInput, CaseNumber.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, invalidTestInput, CaseNumber.MESSAGE_CONSTRAINTS_KEYWORDS);
     }
 
     @Test
-    public void parse_validShnPeriodStartArgs_returnsFindCommand() {
+    public void parse_validShnPeriodStartArgs_success() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
                 new FindCommand(new ShnPeriodStartEqualsKeywordsPredicate(Arrays.asList("2000-01-01",
@@ -122,18 +146,18 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_invalidShnPeriodStartArgs_returnsFindCommand() {
+    public void parse_invalidShnPeriodStartArgs_throwsParseException() {
         // One invalid keyword
         String invalidKeyword = " " + PREFIX_SHN_PERIOD_START + "2000/01/01";
-        assertParseFailure(parser, invalidKeyword, Period.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidKeyword, Period.MESSAGE_CONSTRAINTS_DATE_KEYWORDS);
 
         // One valid and one invalid keyword
         String invalidTestInput = " " + PREFIX_SHN_PERIOD_START + "2000-01-01 2000/01/01";
-        assertParseFailure(parser, invalidTestInput, Period.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidTestInput, Period.MESSAGE_CONSTRAINTS_DATE_KEYWORDS);
     }
 
     @Test
-    public void parse_validShnPeriodEndArgs_returnsFindCommand() {
+    public void parse_validShnPeriodEndArgs_success() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
                 new FindCommand(new ShnPeriodEndEqualsKeywordsPredicate(Arrays.asList("2000-01-01",
@@ -149,13 +173,13 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_invalidShnPeriodEndArgs_returnsFindCommand() {
+    public void parse_invalidShnPeriodEndArgs_throwsParseException() {
         // One invalid keyword
         String invalidKeyword = " " + PREFIX_SHN_PERIOD_END + "2000/01/02";
-        assertParseFailure(parser, invalidKeyword, Period.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidKeyword, Period.MESSAGE_CONSTRAINTS_DATE_KEYWORDS);
 
         // One valid and one invalid keyword
         String invalidTestInput = " " + PREFIX_SHN_PERIOD_END + "2000-01-02 2000/01/02";
-        assertParseFailure(parser, invalidTestInput, Period.MESSAGE_CONSTRAINTS_DATE);
+        assertParseFailure(parser, invalidTestInput, Period.MESSAGE_CONSTRAINTS_DATE_KEYWORDS);
     }
 }
