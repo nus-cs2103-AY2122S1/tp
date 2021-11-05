@@ -90,14 +90,6 @@ public class Conthacks implements ReadOnlyConthacks {
     }
 
     /**
-     * Returns true if a person with similar identidy as {@code person} exits in contHACKS.
-     */
-    public boolean hasSimilarPerson(Person person) {
-        requireNonNull(person);
-        return persons.containsSimilarPerson(person);
-    }
-
-    /**
      * Returns true if a lesson with the same identity as {@code ModuleLesson} exists in contHACKS.
      */
     public boolean hasLesson(ModuleLesson moduleLesson) {

@@ -65,11 +65,6 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a person with similar identity as {@code person} exists in contHACKS.
-     */
-    boolean hasSimilarPerson(Person person);
-
-    /**
      * Returns true if a module lesson with the same information as {@code moduleLesson} exists in contHACKS.
      */
     boolean hasModuleLesson(ModuleLesson moduleLesson);

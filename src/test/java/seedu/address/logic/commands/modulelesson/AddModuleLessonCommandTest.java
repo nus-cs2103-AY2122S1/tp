@@ -143,10 +143,6 @@ public class AddModuleLessonCommandTest {
         }
 
         @Override
-        public boolean hasSimilarPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
         public boolean hasModuleLesson(ModuleLesson lesson) {
             throw new AssertionError("This method should not be called.");
         }

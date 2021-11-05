@@ -99,21 +99,6 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have similar identity.
-     */
-    public boolean isSimilarPerson(Person otherPerson) {
-        if (otherPerson == null) {
-            return false;
-        }
-
-        return getName().isSimilarTo(otherPerson.getName())
-                || getEmail().isSimilarTo(otherPerson.getEmail())
-                || getPhone().equals(otherPerson.getPhone())
-                || getTeleHandle().isSimilarTo(otherPerson.getTeleHandle());
-    }
-
-
-    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
