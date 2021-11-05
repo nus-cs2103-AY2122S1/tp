@@ -350,7 +350,9 @@ Step 6: `CommandResult` is returned informing the user of the classes that have 
 #### Activity Diagram
 
 The user flow is shown in the *Activity Diagram* below.<br>
-![Ui](images/DeleteActivityDiagram.png)
+<p align="center">
+  <img src="images/DeleteActivityDiagram.png">
+</p>
 
 ### [Developed] Removing Students from Tuition Classes
 This feature allows students enrolled in existing classes to be removed using student indices and a class index using the `remove` command.
