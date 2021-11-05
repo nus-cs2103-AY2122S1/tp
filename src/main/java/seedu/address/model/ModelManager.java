@@ -147,8 +147,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
-        friendsList.linkFriend(toLink, gameFriendLink);
+    public void linkFriend(Friend friendToLink, GameFriendLink gameFriendLink) {
+        friendsList.linkFriend(friendToLink, gameFriendLink);
     }
 
     @Override
@@ -157,8 +157,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void unlinkFriend(Friend toUnlink, Game game) throws GameLinkNotFoundException {
-        friendsList.unlinkFriend(toUnlink, game);
+    public void unlinkFriend(Friend friendToUnlink, Game game) {
+        friendsList.unlinkFriend(friendToUnlink, game);
     }
 
     //=========== Filtered Friend List Accessors =============================================================

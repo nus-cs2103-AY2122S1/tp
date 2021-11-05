@@ -137,7 +137,7 @@ public interface Model {
     /**
      * Unlinks the friend {@code toUnlink} with the Game {@code game}.
      */
-    void unlinkFriend(Friend toUnlink, Game game) throws GameLinkNotFoundException;
+    void unlinkFriend(Friend toUnlink, Game game);
 
     //=========== GamesBook ==================================================================================
 

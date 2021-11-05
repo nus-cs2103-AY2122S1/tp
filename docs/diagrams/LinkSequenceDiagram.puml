@@ -8,22 +8,22 @@ participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
 participant "friendToEdit:Friend" as Friend MODEL_COLOR
 end box
 
--> ModelManager : linkFriend
+-> ModelManager : linkFriend(friendToLink, gameFriendLink)
 activate ModelManager
-ModelManager -> FriendsList : linkFriend
+ModelManager -> FriendsList : linkFriend(friendToLink, gameFriendLink)
 activate FriendsList
-FriendsList -> UniqueFriendsList : link
+FriendsList -> UniqueFriendsList : link(friendToLink, gameFriendLink)
 activate UniqueFriendsList
 create Friend
 UniqueFriendsList -> Friend
 activate Friend
-Friend --> UniqueFriendsList
+Friend --> UniqueFriendsList : friendToEdit
 deactivate Friend
-UniqueFriendsList -> Friend : link
+UniqueFriendsList -> Friend : link(gameFriendLink)
 activate Friend
 Friend --> UniqueFriendsList
 deactivate Friend
-UniqueFriendsList -> UniqueFriendsList : setFriend
+UniqueFriendsList -> UniqueFriendsList : setFriend(friendToLink, friendToEdit)
 activate UniqueFriendsList
 UniqueFriendsList --> UniqueFriendsList
 deactivate UniqueFriendsList

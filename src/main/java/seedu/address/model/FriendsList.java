@@ -110,8 +110,8 @@ public class FriendsList implements ReadOnlyFriendsList {
      * Associates the given friend {@code toLink} in the list with {@code gameFriendLink}
      * {@code toLink} must exist in the friends list.
      */
-    public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
-        friends.link(toLink, gameFriendLink);
+    public void linkFriend(Friend friendToLink, GameFriendLink gameFriendLink) {
+        friends.link(friendToLink, gameFriendLink);
     }
 
     /**
@@ -124,8 +124,8 @@ public class FriendsList implements ReadOnlyFriendsList {
     /**
      * Removes the associated {@code GameFriendLink} between Friend {@code toUnlink} and Game {@code game}.
      */
-    public void unlinkFriend(Friend toUnlink, Game game) throws GameLinkNotFoundException {
-        friends.unlink(toUnlink, game);
+    public void unlinkFriend(Friend friendToUnlink, Game game) {
+        friends.unlink(friendToUnlink, game);
     }
 
     /**

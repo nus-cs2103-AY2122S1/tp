@@ -18,7 +18,6 @@ import seedu.address.model.gamefriendlink.GameFriendLink;
 public class FriendMainCardTable extends UiPart<Region> {
 
     private static final String FXML = "FriendMainCardTable.fxml";
-    private ObservableList<Friend> friendList;
 
     @FXML
     private TableView<GameFriendLink> tableView;

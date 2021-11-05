@@ -90,6 +90,7 @@ The `UI` component,
 **Component Structure**
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
+![Inheritance from UiPart](images/UiClassDiagramUiPart.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -197,12 +198,23 @@ The parsing of a link command is handled by the following classes:
  - `LinkFriendCommandParser` - Parses the command to extract a `FriendId` object, a `GameId` object and a `UserName` object from the command.
    - `LinkFriendCommandParser#parse()` returns a `LinkFriendCommand` object instantiated with the aforementioned objects as parameters.
  - `LinkFriendCommand` - Represents link friend command that is executed by gitGud.
+   - It calls `Model#linkFriend()` with a `Friend` object argument and a `GameFriendLink` object argument.
+   
+The sequence diagram of the parsing is similar to that of the other friend commands.
 
-Following this, `LinkFriendCommand#execute()` is then called, which in turns calls `ModelManager#linkFriend()` to make changes to the model.
+The implementation of `Model#linkFriend()` is as follows:
+
+- `FriendList#linkFriend()` is called, which in turns called `UniqueFriendList#link()`.
+- A new `Friend` object, `friendToEdit` is created with the same fields as `friendToLink` (the target friend of the link command).
+`Friend#link()` is then called, which modifies `friendToEdit` so that it now contains the new `GameFriendLink`.
+- `UniqueFriendsList#setFriend()` then replaces `friendToLink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
+
+![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
 #### Special considerations:
 
-Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
+ - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
+ - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
 have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
 ### Unlink
@@ -216,9 +228,18 @@ The parsing of the unlink command is handled by the following classes:
  - `UnlinkFriendCommandParser` - Parses the command to extract a `FriendId` object and a `GameId` object.
    - `UnlinkFriendCommandParser#parse()` return an `UnlinkFriendCommand` object instantiated with the aforementioned objects as parameters.
  - `UnlinkFriendCommand` - Represents unlink friend command that is executed by gitGud.
+   - It calls `Model#unlinkFriend()` with a `Friend` object and a `Game` object.
 
+The sequence diagram of the parsing is similar to that of the other friend commands.
 
-#### Special considerations:
+The implementation of `Model#unlinkFriend()` is as follows:
+
+- `FriendList#unlinkFriend()/FriendList#linkFriend()` is called, which in turns called `UniqueFriendList#unlink()`.
+- A new `Friend` object, `friendToEdit` is created with the same fields as `friendToLink` (the target friend of the unlink command).
+  `Friend#unlink()` is then called, which modifies `friendToEdit` so that it no longer contains a link to the game.
+- `UniqueFriendsList#setFriend()` then replaces `friendToUnlink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
+
+![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
 
 **Aspect: How undo & redo executes:**
 
