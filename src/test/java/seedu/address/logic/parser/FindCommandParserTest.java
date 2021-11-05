@@ -43,13 +43,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -107,6 +113,21 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " " + PREFIX_ACAD_STREAM + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
         // invalid empty academic level keyword
         assertParseFailure(parser, " " + PREFIX_ACAD_LEVEL + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty remarks keyword
+        assertParseFailure(parser, " " + PREFIX_REMARK + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+
+        // Lesson Fields
+        // invalid empty lesson date keyword
+        assertParseFailure(parser, " " + PREFIX_DATE + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty cancelled date keyword
+        assertParseFailure(parser, " " + PREFIX_CANCEL + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty lesson homework keyword
+        assertParseFailure(parser, " " + PREFIX_HOMEWORK + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty lesson rates keyword
+        assertParseFailure(parser, " " + PREFIX_RATES + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty subjects keyword
+        assertParseFailure(parser, " " + PREFIX_SUBJECT + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+
         // invalid empty tag keyword
         assertParseFailure(parser, " " + PREFIX_TAG + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
         // invalid multiple words tag keyword
