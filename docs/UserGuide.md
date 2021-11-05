@@ -39,7 +39,6 @@ _text_ | Caption for images.
 <div markdown="block" class="alert alert-primary"> :bulb: </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly. 
 <div markdown="block" class="alert alert-warning"> :exclamation: </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to misbehave!
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -111,10 +110,35 @@ Footer | The area which shows where TAB saves your student details to. <br> e.g.
 <div style="page-break-after: always;"></div>
 
 ## Features
-This section describes the available features in TAB.
+This section describes the available features in TAB. 
+The features are categorised into the different categories as follows:
+
+* [Getting Help](#getting-help)
+* [Managing Students](#managing-students)
+* [Managing Lessons](#managing-lessons)
+* [Managing Lesson Fees](#managing-lesson-fees)
+* [Managing Your Schedule](#managing-your-schedule)
+* [Managing Data](#managing-data)
+* [Miscellaneous Commands](#miscellaneous-commands)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Overview of the command format
+This section explains the command format used for TAB's commands.<br/>
+
+Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
+
+```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER…​```
+
+|Component|Description|
+|---------|-----------|
+|Command word|The word that specifies which action you want TAB to execute.|
+|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student or lesson indices for commands that require them. The preamble may or may not be empty depending on the command.|
+|Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
+|Parameter| An input provided by the user for the execution of the command.|
 
 <div markdown="block" class="alert alert-warning"> :exclamation: **Important** <br>
- 
+
 * **Prefixes** are **case-sensitive**<br>
   e.g. `n/` is the prefix for student name but `N/` is invalid.
 
@@ -122,29 +146,35 @@ This section describes the available features in TAB.
   e.g. `LIST` is equivalent to `list`.
 </div>
 
+An example of a command in TAB:
+![Command format](images/CommandFormat.png)
 
-<div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+#### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-  
-* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.
+
+* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
-  
+
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+#### Notes about parameters
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Each parameter prefix is separated from the others with a space.<br/>
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
+  
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `calendar`, `exit`, `clear` etc.) are not valid.<br>
   e.g. `help 123` is not a valid command.
 
@@ -154,9 +184,9 @@ This section describes the available features in TAB.
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
-</div>
-
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
@@ -673,7 +703,6 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
-<<<<<<< HEAD
 Example: Suppose the date today is 1 Nov 2021 and current time is 1500h, 
 - lessons with the following dates and time are considered upcoming:
   - 1 Nov 2021 with end time at or after 1500h, 
@@ -696,13 +725,12 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
     </li>
   </ul>
 </div>
-=======
+
 <br />
 
 [back to table of contents](#)
 
 <br />
->>>>>>> 09bdf00092e6dc2411a5334ee96f175cff04f055
 
 <div style="page-break-after: always;"></div>
 
@@ -932,24 +960,13 @@ Exits the program.
 
 Format: `exit`
 
-<<<<<<< HEAD
-### Menu Bar Shortcuts
-
-TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
-
-Menu Item | Shortcut | Action | Description
-----------|--------|---------|---------
-<kbd>Help</kbd> | <kbd>F1</kbd> | View Help | Opens the help window.
-<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list.
-<kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
-<kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
-<kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
-=======
 <br />
 
 [back to table of contents](#)
 
 <br />
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Data
 
@@ -980,18 +997,17 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 <div style="page-break-after: always;"></div>
 
-### Shortcuts
+### Menu Bar Shortcuts
 
 TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
 
-Shortcut | Action
----------|------------------
-<kbd>F1</kbd> | **Help** <br /> Opens the help window.
-<kbd>F2</kbd> | **View Students** <br /> Brings you to your list of students.
-<kbd>F3</kbd> | **View Calendar** <br /> Brings you to the calendar interface.
-<kbd>F4</kbd> | **View Tags** <br /> Brings you to your list of tags.
-<kbd>F5</kbd> | **View Reminders** <br /> Opens the reminder window.
->>>>>>> 09bdf00092e6dc2411a5334ee96f175cff04f055
+Menu Item | Shortcut | Action | Description
+----------|--------|---------|---------
+<kbd>Help</kbd> | <kbd>F1</kbd> | View Help | Opens the help window.
+<kbd>View</kbd> → <kbd>Students</kbd> | <kbd>F2</kbd> | <span id="view-students">View Students </span> | Brings you to the last displayed list of students. <br> e.g. if you used `find` to filter the list of students, and then switched to the calendar view, clicking <kbd>View</kbd> → <kbd>Students</kbd> or pressing <kbd>F2</kbd> brings you back to the filtered list.
+<kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
+<kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
+<kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
@@ -1055,37 +1071,61 @@ UX | User Experience - The experience a user has when using the app.
 <br />
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Command Summary
-This section lists all available commands in TAB, along with examples on how you can use them.
+This section lists all the available commands in TAB, along with examples on how you can use them.
+The commands are categorised into 4 different categories:
+* [Students](#students)
+* [Lessons](#lessons)
+* [Navigating the UI](#navigating-the-ui)
+* [General](#general)
+<br/>
+
+### Students
 
 Action | Format & Examples
--------|------------------
-**Help** | `help`
-**Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
-**Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
-**Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
-**List Students** | `list`
-**Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
-**View Tags** | `tag`
-**Add Lesson** | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
-**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
-**Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
-**Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
-**View Calendar** | `calendar`
-**View Daily Calendar** | `day`
-**View Weekly Calendar** | `week`
-**View Monthly Calendar** | `month`
-**View Yearly Calendar** | `year`
-**Navigate to Today in Calendar** | `today`
-**Navigate forward in Calendar** | `next`
-**Navigate backward in Calendar** | `back`
-**View Reminders** | `remind`
-**Clear** |`clear`
-**Undo** | `undo`
-**Redo** | `redo`
-**Exit** | `exit`
+--------|------------------
+[**Add Student**](#adding-a-student-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
+[**Edit Student**](#editing-a-student-edit) | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
+[**Delete Student**](#deleting-a-student-delete) | `delete INDEX`<br><br> e.g. `delete 3`
+[**Find Students**](#finding-students) | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
+
+### Lessons
+
+Action | Format & Examples
+--------|------------------
+[**Add Lesson**](#adding-a-lesson-ladd) | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
+[**Edit Lesson**](#editing-a-lesson-ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+[**Delete Lesson**](#deleting-a-lesson-ldelete) | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
+[**Pay Lesson**](#paying-a-lessons-outstanding-fees-paid) | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+
+### Navigating the UI
+
+Action | Format
+--------|------------------
+[**List Students**](#listing-all-students-list) | `list`
+[**View Tags**](#viewing-all-tags-tag) | `tag`
+[**View Calendar**](#switching-to-the-calendar-interface-calendar) | `calendar`
+[**View Daily Calendar**](#viewing-your-daily-calendar-day) | `day`
+[**View Weekly Calendar**](#viewing-your-weekly-calendar-week) | `week`
+[**View Monthly Calendar**](#viewing-your-monthly-calendar-month) | `month`
+[**View Yearly Calendar**](#viewing-your-yearly-calendar-year) | `year`
+[**Navigate to Today in Calendar**](#navigate-to-today-in-the-calendar-today) | `today`
+[**Navigate Forward in Calendar**](#navigating-forward-in-the-calendar-next) | `next`
+[**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
+[**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
+
+### General
+
+Action | Format
+--------|------------------
+[**Help**](#viewing-help-help) | `help`
+[**Clear**](#clearing-all-entries-clear) |`clear`
+[**Undo**](#undoing-previous-commands-undo) | `undo`
+[**Redo**](#redoing-undone-commands-redo) | `redo`
+[**Exit**](#exiting-the-program-exit) | `exit`
 
 <br />
 
