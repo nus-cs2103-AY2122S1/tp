@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
@@ -16,6 +17,7 @@ import seedu.address.model.tag.Tag;
 public class TagCommandParser implements Parser<Command> {
 
     private void checkInputFormat(String args, ArgumentMultimap argMultimap) throws ParseException {
+        assert(!args.isEmpty());
         boolean isAddTagArgsEmpty = argMultimap.getAllValues(PREFIX_ADD_TAG).size() == 1
                 && argMultimap.getAllValues(PREFIX_ADD_TAG).indexOf("") == 0;
         boolean isRemoveTagArgsEmpty = argMultimap.getAllValues(PREFIX_REMOVE_TAG).size() == 1
@@ -40,6 +42,9 @@ public class TagCommandParser implements Parser<Command> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagCommand parse(String args) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(TagCommand.COMMAND_WORD + MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY);
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_TAG, PREFIX_REMOVE_TAG);
         Index index;
