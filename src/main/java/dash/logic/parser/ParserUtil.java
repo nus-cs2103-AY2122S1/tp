@@ -140,11 +140,11 @@ public class ParserUtil {
     public static TaskDate parseTaskDate(String taskDate, boolean isForEditing) throws ParseException {
         requireNonNull(taskDate);
         String trimmedTaskDate = taskDate.trim();
-        if (!TaskDate.isValidTaskDate(trimmedTaskDate)) {
+        try {
+            return new TaskDate(trimmedTaskDate, isForEditing);
+        } catch (IllegalArgumentException e) {
             throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
         }
-
-        return new TaskDate(trimmedTaskDate, isForEditing);
     }
 
     /**
