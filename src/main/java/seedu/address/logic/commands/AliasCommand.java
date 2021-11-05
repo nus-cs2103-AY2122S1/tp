@@ -28,9 +28,9 @@ public class AliasCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Alias successfully added. Mapped `%s` to the command `%s`.";
     public static final String MESSAGE_INVALID_ALIAS = "Invalid alias. Command words cannot be used as an alias.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_ALIAS_ABSENT = String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, "No Alias was entered. \n%1$s");
+            MESSAGE_INVALID_COMMAND_FORMAT, "No alias was entered. \n%1$s");
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_COMMAND_ABSENT = String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, "No Command was entered. \n%1$s");
+            MESSAGE_INVALID_COMMAND_FORMAT, "No command was entered. \n%1$s");
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_PREAMBLE_PRESENT = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "An input was entered without prefix. \n%1$s");
 

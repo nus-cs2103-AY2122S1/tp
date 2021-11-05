@@ -49,9 +49,9 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_TAG_NOT_ADDED = "There are no tags to add.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, "A valid Index was not entered. \n%1$s");
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid index was not entered. \n%1$s");
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT = String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, "No Tag was entered. \n%1$s");
+            MESSAGE_INVALID_COMMAND_FORMAT, "No tag was entered. \n%1$s");
 
     private final Index index;
     private final Set<Tag> tag;

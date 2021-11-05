@@ -64,7 +64,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, "A valid Index was not entered. \n%1$s");
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid index was not entered. \n%1$s");
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

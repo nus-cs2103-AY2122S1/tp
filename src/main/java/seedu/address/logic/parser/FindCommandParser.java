@@ -63,7 +63,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Name", FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "name", FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new NameContainsKeywordsPredicate(nameKeywords));
         }
@@ -79,7 +79,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Phone", FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "phone", FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
@@ -95,7 +95,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Email", FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "email", FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new EmailContainsKeywordsPredicate(emailKeywords));
         }
@@ -111,7 +111,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Gender", FindCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "gender", FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new GenderContainsKeywordsPredicate(genderKeywords));
         }
@@ -127,7 +127,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Nationality",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "nationality",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new NationalityContainsKeywordsPredicate(nationalityKeywords));
@@ -144,7 +144,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Tutorial Group",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial Group",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TutorialGroupContainsKeywordsPredicate(tutorialGroupKeywords));
@@ -161,7 +161,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Social Handle",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "social handle",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new SocialHandleContainsKeywordsPredicate(socialHandleKeywords));
@@ -178,7 +178,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Remark",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "remark",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new RemarkContainsKeywordsPredicate(remarkKeywords));
@@ -193,7 +193,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Tag",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tag",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TagContainsKeywordsPredicate(tagKeywords));

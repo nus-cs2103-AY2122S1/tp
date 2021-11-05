@@ -53,7 +53,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_NAME_ABSENT = String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, "No Name was entered. \n%1$s");
+            MESSAGE_INVALID_COMMAND_FORMAT, "No name was entered. \n%1$s");
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_PREAMBLE_PRESENT = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "An input was entered without prefix. \n%1$s");
 
