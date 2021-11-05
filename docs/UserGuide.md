@@ -341,6 +341,13 @@ Exports a CSV file of the current view containing specified fields.
 
 Notes:
 * Name is always the first column in the CSV file.
+* Including any of the arguments will export that field to the CSV file. 
+* Each argument represents: 
+  * `p/` phone number
+  * `e/` email
+  * `a/` address
+  * `b/` birthday
+  * `t/` tags
 * The default exported fields are name, phone, email.
 * Opens a file selector for you to pick the export location and file name.
 
