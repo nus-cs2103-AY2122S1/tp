@@ -19,7 +19,6 @@ Take note of some syntax we will frequently use throughout the User Guide:
 | :information_source: **Note:** | Noteworthy information |
 | `markdown` | Commands or examples |
 | Format: | the format to write the commands in the application|
-| :information_source: **Note:** | Noteworthy information |
 
 ## Table Of Contents <a name="toc"></a>
 * [Quick start](#quick-start)
@@ -200,6 +199,7 @@ Format: `exit`
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 To use commands for managing patients, toggle the displayed list to the patient list using the toggle command.
 </div>
+More information about the `toggle` command [here](#toggle).
 
 ![patient tab](images/patientTab.png)
 
@@ -260,8 +260,8 @@ Format: `remark INDEX r/REMARK`
 * Existing remark will be updated to the input remark.
 
 Examples:
-*  `remark 1 r/` Edits the remark of the 1st patient to be blank.
-*  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
+*  `remark 1 r/` edits the remark of the 1st patient to be blank.
+*  `remark 2 r/Chronic diabetic, monthly insulin pick up` edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
 
 ### Locating patients by name: `find` <a name="find-patient"/>
 
@@ -331,7 +331,10 @@ Examples:
 ---
 
 ## Managing Doctors <a name="managing-doctors"/>
-To use commands for managing doctors, toggle the displayed list to the doctor list using the [toggle](#toggle) command.
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+To use commands for managing doctors, toggle the displayed list to the doctor list using the toggle command.
+</div>
+More information about the `toggle` command [here](#toggle).
 
 ![doctor tab'](images/doctorTab.png)
 
@@ -476,14 +479,10 @@ Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood tes
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
 </div>
-<br>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can also add appointments that have happened already! This is especially useful if you just started using PlannerMD
 and would like to store your entire history of appointments!
 </div>
-<br>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
 </div>
@@ -580,7 +579,7 @@ If your changes to the data file makes its format invalid, PlannerMD will discar
 ## FAQ <a name="faq"/>
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PlannerMD home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
