@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.DeleteShiftCommand;
 import seedu.address.model.person.Name;
 
@@ -39,7 +39,7 @@ public class DeleteShiftCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        LocalDate[] dates = initializeLocalDateToThisWeek();
+        LocalDate[] dates = DateTimeUtil.getDisplayedDateArray();
         DeleteShiftCommand expectedNameCommand = new DeleteShiftCommand(null, new Name("testing"),
                 "monday-1", dates[0], dates[1]);
         DeleteShiftCommand expectedIndexCommand = new DeleteShiftCommand(Index.fromOneBased(1), null,

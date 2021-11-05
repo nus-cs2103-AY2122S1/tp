@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.DayOfWeek;
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,7 +27,7 @@ import seedu.address.testutil.ScheduleBuilder;
 
 public class DeleteShiftCommandTest {
 
-    private static final LocalDate[] dates = initializeLocalDateToThisWeek();
+    private static final LocalDate[] dates = DateTimeUtil.getDisplayedDateArray();
     private static final LocalDate START_DATE = dates[0];
     private static final LocalDate END_DATE = dates[1];
 
