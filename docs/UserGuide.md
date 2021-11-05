@@ -429,7 +429,7 @@ Action | Summary | Format, Examples
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
 **Find** | Locates persons by name and tags (Results fulfill all search terms)| `find [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
-**FindOr** | Locates persons by name and tags (Results fulfill at least one search term)| `findOr [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findOr n/James t/NUS`
+**FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
 **Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
 **Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
 **Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
