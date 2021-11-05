@@ -169,6 +169,10 @@ public class Student implements DisplayableObject {
         this.labList = labList;
     }
 
+    public boolean hasNoLabs() {
+        return getLabList().isEmpty();
+    }
+
     public int getNumLabs() {
         return labList.size();
     }

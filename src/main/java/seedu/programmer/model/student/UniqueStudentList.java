@@ -112,7 +112,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void add(Student toAdd) throws DuplicateStudentException {
         requireNonNull(toAdd);
-        if (toAdd.getLabList().isEmpty()) {
+        if (toAdd.hasNoLabs()) {
             toAdd.setLabResultRecord(labsTracker);
         }
 
