@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,6 +10,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.model.person.Name;
 
@@ -53,11 +53,11 @@ public class SetShiftTimeCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         LocalTime[] times = new LocalTime[]{LocalTime.of(17, 0), LocalTime.of(18, 0)};
         SetShiftTimeCommand expectedNameCommand = new SetShiftTimeCommand(null, new Name("testing"),
-                "monday-1", times, initializeLocalDateToThisWeek()[0],
-                initializeLocalDateToThisWeek()[1]);
+                "monday-1", times, DateTimeUtil.getDisplayedDateArray()[0],
+            DateTimeUtil.getDisplayedDateArray()[1]);
         SetShiftTimeCommand expectedIndexCommand = new SetShiftTimeCommand(Index.fromOneBased(1), null,
-                "monday-1", times, initializeLocalDateToThisWeek()[0],
-                initializeLocalDateToThisWeek()[1]);
+                "monday-1", times, DateTimeUtil.getDisplayedDateArray()[0],
+                DateTimeUtil.getDisplayedDateArray()[1]);
         SetShiftTimeCommand expectedOneDateCommand = new SetShiftTimeCommand(Index.fromOneBased(1), null,
                 "monday-1", times, START_DATE, DEFAULT_END_DATE);
         SetShiftTimeCommand expectedTwoDateCommand = new SetShiftTimeCommand(Index.fromOneBased(1), null,
