@@ -368,8 +368,11 @@ Sorts the list of students in Academy Directory.
 Format: `sort attr/ATTRIBUTE ord/ORDER`
 
 * The sort can be done on some `ATTRIBUTE`  in either ascending order or descending order.
-* `ATTRIBUTE` can only be `name`, `participation`, `RA1`, `Midterm`, `RA2`, `Final` and `Average`.
+* `ATTRIBUTE` can only be `Name`, `Participation`, `RA1`, `Midterm`, `RA2`, `Final` and `Average`.
 * `ATTRIBUTE` is case-insensitive. e.g. `name` and `NAME` will both sort the list by `Name`.
+* `Average` here refers to the average score of all `Assessments`.
+* `Participation` is sorted based on the average `Participation` of a `Student` across all Studio sessions.
+* `Name` is sorted _lexicographically_. 
 * `ORDER` can only be `asc` and `desc` which indicate either ascending or descending sort.
 * `ORDER` is case-insensitive. e.g. `ASC` and `Asc` will both sort the list in ascending order
 * Both `ATTRIBUTE` and `ORDER` are required for the sorting to work.
@@ -592,6 +595,7 @@ Command Box | A part of the Academy Directory's GUI which can be used by users t
 Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix
 Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
 Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
+Lexicographically |  Refers to the generalization of the alphabetical order of the dictionaries to sequences of ordered symbols or, more generally, of elements of a totally ordered set. More information can be found [here](https://en.wikipedia.org/wiki/Lexicographic_order). |
 
 ## Appendix
 ### Appendix A: Version Controlled Commands
