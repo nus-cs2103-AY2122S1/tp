@@ -140,19 +140,19 @@ The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
 #### Student and Group component
 
-<img src="images/StudentGroupClassDiagram.png"/>
+![Structure of the Student and Group Class](images/StudentGroupClassDiagram.png)
 
 The `Student` component,
 
-* stores the student's personal information.
-* stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
-* depends on `groupName` from the `Group` component.
+* stores the student's personal information as shown by composition in the diagram above.
+* stores `Tag` and `RepoName` which are clases common to both `Student` and `Group` data types. `RepoName` in this case refers to the name of the student's IP repository.
+* stores a reference to the `Group` the student is a part of via a unique `groupName` from the `Group` component (composition is not valid here as a `Group` can exist with an empty `Member` component). This attribute is not modifiable via teh regular `editStudent` command, and can only be modified internally when the student is added/deleted from a `Group`, or the `GroupName` of the student's group changes.
 
 The `Group` component,
 
-* stores group related information.
-* stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
-* has a `Members` subcomponent that stores references to the `Student` component.
+* stores group related information, similarly shown by compostition in the diagram above.
+* stores `Tag` and `RepoName`. In this case, `RepoName` refers to the TP repository of the group.
+* has a `Members` subcomponent that stores references to the `Student` component. This is initialized with no references to any `Student` to allow for preemptive creation of groups before members are made known. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `XYZ` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `XYZ` object needing their own `Tag` objects.<br>
 
@@ -218,6 +218,8 @@ The above process is further summarised in the following sequence diagram:
 
 ### Add Member to Group Command
 
+The add member command can be executed to form an association between two main data types in tApp, Groups and Students.
+
 #### Implementation
 
 ![Sequence Diagram of Add Member](images/AddMemberSequenceDiagram.png)
@@ -227,13 +229,18 @@ The main difference between the addMember command lies not in the way the `Logic
 
 When the user executes the `addMember` command, user input is parsed and the `Index` of student to be added, and the `GroupName` of the group to be added to are extracted into parameters of the `AddMemberCommand` class.
 
-The above process is shown in the following sequence diagram:
+If any errors are present in the user input, exceptions are thrown in the following components:
+
+1. `AddMemberCommandParser` throws an exception if command format is invalid (negative/missing index, missing group prefix)
+1. `AddMemberCommand` throws an exception if the `Index` does not exist in the student list, `GroupName` is does not belong to any preexisting `Group`, the student is already in another group, or the student has already been added to the current group. 
+
+The interaction between the `Logic` and `Model` classes are shown in the following sequence diagram:
 
 ![Reference Sequence Diagram of Add Member](images/AddMemberRefSequenceDiagram.png)
 
 A key difference to note about this command is that gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
 
-The follow steps describes the execution of the AddMember command.
+The follow steps describes the execution of the AddMember command:
 
 1. `AddMemberCommand` uses the provided `Index` and `GroupName` to obtain both a reference to the `Student` (using `Index`) and the `Group` (using `GroupName`). Since `GroupName` is unique, there will only be one `Group` selected.
 1. `AddMemberCommand` then uses these references to call the `addMembers` function of the `Model` class.
@@ -242,9 +249,10 @@ The follow steps describes the execution of the AddMember command.
 1. `Group` then calls the `addMember` function of its `Member` class, passing in the same `Student` parameter.
 1. The `Member` then stores a reference to this `Student`.
 1. `Model` then calls `setStudent` and `setGroup` to update these changes in `AddressBook`.
+1. Execution of this command then follows the usual execution path of all other commands in tApp.
 
 Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
-these changes in the `AddressBook`.
+these changes in the `AddressBook`. 
 
 #### Design considerations:
 
@@ -256,6 +264,10 @@ these changes in the `AddressBook`.
     * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
     * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
       unnatural modelling of the real world since `Group` contains students and not the other way around.
+
+* Alternative 3: Have `Members` save the `Name` of students only
+    * Pros: Smaller JSON file size due to smaller volume of information being referenced to, lesser coupling due to only a unidirectional association.
+    * Cons: Unable to display the `GroupName` of a `Student` in the student display list using simple code implementation, reduction in input validation capabilities (assigning 1 student to 2 groups) since there is no direct way to determine if a `Student` is already in a group.
 
 ### Edit Group Command
 
@@ -363,9 +375,9 @@ This product is for CS2103/T TAs who are:
 
 **Value proposition**:
 
-TAs are required to access different platforms (LumiNUS, GitHub & CS2103/T website) and manage multiple groups and students.
+TAs are required to complete different tasks (mark attendance and participation, track tp progress) and manage multiple groups and students.
 
-This application aims to integrate different tools into a centralised platform that can improve a TA’s efficiency. It helps to ensure instructors complete all tasks on the relevant platforms by stipulated deadlines.
+This application aims to integrate different tasks into a centralised platform that can improve a TA’s efficiency. It helps to ensure instructors complete all tasks by stipulated deadlines.
 
 
 ### User stories
