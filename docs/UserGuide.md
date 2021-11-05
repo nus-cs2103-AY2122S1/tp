@@ -481,6 +481,7 @@ Examples:
 * Removing multiple (general) tags : `tag 2 r/family owesmoney`
 * Removing multiple (module) tags : `tag 2 r/module-CS1101S module-MA1521`
 * Adding and removing a tag : `tag 4 a/friends r/colleagues`
+
 ### Displaying the Help Window - `help`
 
 Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
