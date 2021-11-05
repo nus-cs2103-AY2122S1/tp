@@ -135,7 +135,24 @@ public class MainApp extends Application {
             initialOrderBook = new OrderBook();
         }
 
-        return new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        ModelManager modelManager = new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        try {
+            modelManager.checkClientAndOrderRelation();
+        } catch (DataConversionException e) {
+            logger.info("Data file not corrupted. Will be starting with a empty OrderBook");
+            initialOrderBook = new OrderBook();
+            modelManager = new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        }
+
+        try {
+            modelManager.checkTaskAndOrderRelation();
+        } catch (DataConversionException e) {
+            logger.info("Data file not corrupted. Will be starting with a empty TaskBook");
+            initialTaskBook = new TaskBook();
+            modelManager = new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        }
+
+        return modelManager;
     }
 
     private void initLogging(Config config) {

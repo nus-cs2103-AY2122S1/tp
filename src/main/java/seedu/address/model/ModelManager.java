@@ -16,6 +16,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
@@ -306,7 +308,6 @@ public class ModelManager implements Model {
     }
 
     /**
-<<<<<<< HEAD
      * Delete tasks related to a given Order
      */
     @Override
@@ -326,12 +327,10 @@ public class ModelManager implements Model {
     /**
      * For each person, finds orders associated with the person, and adds up the amount.
      * Creates a ClientTotalOrder for each person.
-=======
      * Groups and sums up all orders according to their {@code Customer}s.
      * This method computes total orders based on the {@code Customer}s,
      * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
      * hence the naming of the method and local variables.
->>>>>>> 7d4603133ce879c7e267914eb92fdca0f8d42c1e
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
@@ -408,5 +407,38 @@ public class ModelManager implements Model {
         orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any order tagged to persons that don't exist.
+     */
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        ObservableList<Order> orders = this.orderBook.getOrderList();
+        for (Order eachOrder : orders) {
+            String nameOfPerson = eachOrder.getCustomer().getName();
+            if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Client Name does not exist in Address Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any tasks tagged to order that don't exist.
+     */
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        ObservableList<Task> tasks = this.taskBook.getTaskList();
+        for (Task eachTask : tasks) {
+            Long id = eachTask.getTaskTag().getTagId();
+            if (!this.orderBook.hasOrder(id)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Sales ID does not exist in Order Book"));
+            }
+        }
+    }
+
 
 }
