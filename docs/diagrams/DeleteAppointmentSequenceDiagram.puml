@@ -18,7 +18,7 @@ create LogicManager
 activate LogicManager
 
 create PlannerMdParser
-LogicManager -> PlannerMdParser : parseCommand("appt -d 1")
+LogicManager -> PlannerMdParser : parseCommand("appt -d 1, \n State.PATIENT")
 activate PlannerMdParser
 
 create AppointmentCommandParser
