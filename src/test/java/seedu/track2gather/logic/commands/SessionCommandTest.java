@@ -28,20 +28,20 @@ public class SessionCommandTest {
     }
 
     @Test
-    public void execute_sessionUnfilteredList_showsSameSession() {
+    public void execute_unfilteredList_success() {
         expectedModel.resetAllCallStatuses();
         assertCommandSuccess(new SessionCommand(), model, SessionCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_sessionFilteredList_showsEverything() {
+    public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         expectedModel.resetAllCallStatuses();
         assertCommandSuccess(new SessionCommand(), model, SessionCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_differentCallStatusUnfilteredList_showsSameSession() {
+    public void execute_differentCallStatusUnfilteredList_success() {
         // Contains one called person
         Person personToCall = TestUtil.getPerson(model, INDEX_FIRST_PERSON);
         Person calledPerson = new Person(personToCall, personToCall.getCallStatus().call());
@@ -54,7 +54,7 @@ public class SessionCommandTest {
     }
 
     @Test
-    public void execute_differentCallStatusFilteredList_showsSameSession() {
+    public void execute_differentCallStatusFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // Contains one called person

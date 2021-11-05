@@ -34,14 +34,14 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_scheduleAllNonCalledUnfilteredList_showsSameSchedule() {
+    public void execute_allNonCalledUnfilteredList_showsSameSchedule() {
         model.resetAllCallStatuses();
         expectedModel.resetAllCallStatuses();
         assertCommandSuccess(new ScheduleCommand(), model, ScheduleCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_scheduleAllNonCalledFilteredList_showsAllUncalled() {
+    public void execute_allNonCalledFilteredList_showsAllUncalled() {
         model.resetAllCallStatuses();
         expectedModel.resetAllCallStatuses();
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
