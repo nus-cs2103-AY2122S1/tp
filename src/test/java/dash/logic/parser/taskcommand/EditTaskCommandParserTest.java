@@ -62,13 +62,9 @@ class EditTaskCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailureWithPersonList(parser, "1" + CommandTestUtil.INVALID_TASK_DESC, people,
-                TaskDescription.MESSAGE_CONSTRAINTS); // invalid name
+                TaskDescription.MESSAGE_CONSTRAINTS); // invalid task description
         assertParseFailureWithPersonList(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, people,
                 Tag.MESSAGE_CONSTRAINTS); // invalid tag
-
-        // invalid task description
-        assertParseFailureWithPersonList(parser,
-                "1" + CommandTestUtil.INVALID_TASK_DESC, people, TaskDescription.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error

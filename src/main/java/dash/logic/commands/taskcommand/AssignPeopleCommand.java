@@ -81,4 +81,22 @@ public class AssignPeopleCommand extends Command {
         return new Task(taskToEdit.getTaskDescription(), taskToEdit.getCompletionStatus(),
                 taskToEdit.getTaskDate(), updatedPeople, taskToEdit.getTags());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AssignPeopleCommand)) {
+            return false;
+        }
+
+        // state check
+        AssignPeopleCommand e = (AssignPeopleCommand) other;
+        return index.equals(e.index)
+                && editTaskDescriptor.equals(e.editTaskDescriptor);
+    }
 }
