@@ -1,6 +1,7 @@
 package seedu.tuitione.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_DELETE_REMARK;
@@ -88,8 +89,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (remarks.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> remarkSet = remarks.size() == 1 && remarks.contains("") ? Collections.emptySet() : remarks;
-        return Optional.of(ParserUtil.parseRemarks(remarkSet));
+
+        for (String remark : remarks) {
+            if (remark.isBlank()) {
+                throw new ParseException(HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return Optional.of(ParserUtil.parseRemarks(remarks));
     }
 
 }

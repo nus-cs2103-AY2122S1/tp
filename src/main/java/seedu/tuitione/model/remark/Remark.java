@@ -31,7 +31,7 @@ public class Remark {
      * Returns true if a given string is a valid remark name.
      */
     public static boolean isValidRemarkName(String test) {
-        return (test.matches(VALIDATION_REGEX)) && (test.length() <= MAX_REMARK_CHARACTER) && !test.isBlank();
+        return test.matches(VALIDATION_REGEX) && (test.length() <= MAX_REMARK_CHARACTER) && !test.isBlank();
     }
 
     @Override
