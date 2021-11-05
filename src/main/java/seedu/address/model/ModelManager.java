@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.sort.SortDescriptor;
@@ -156,6 +160,7 @@ public class ModelManager implements Model {
     public ReadOnlyTaskBook getTaskBook() {
         return taskBook;
     }
+
     /**
      * Checks if taskBook has this task.
      */
@@ -301,6 +306,7 @@ public class ModelManager implements Model {
     }
 
     /**
+<<<<<<< HEAD
      * Delete tasks related to a given Order
      */
     @Override
@@ -320,26 +326,39 @@ public class ModelManager implements Model {
     /**
      * For each person, finds orders associated with the person, and adds up the amount.
      * Creates a ClientTotalOrder for each person.
+=======
+     * Groups and sums up all orders according to their {@code Customer}s.
+     * This method computes total orders based on the {@code Customer}s,
+     * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
+     * hence the naming of the method and local variables.
+>>>>>>> 7d4603133ce879c7e267914eb92fdca0f8d42c1e
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
     @Override
     public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        HashMap<Customer, Double> customerTotalMap = getCustomerTotalMap();
         ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
-        for (Person client : addressBook.getPersonList()) {
-            clientTotalOrders.add(getClientTotalOrder(client));
-        }
+        customerTotalMap.forEach((customer, totalOrders)
+            -> clientTotalOrders.add(new ClientTotalOrder(customer.toString(), totalOrders)));
+        sortDescending(clientTotalOrders);
         return clientTotalOrders;
     }
 
-    private ClientTotalOrder getClientTotalOrder(Person client) {
-        String clientName = client.getName().toString();
-        Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
-        double totalOrder = orderBook.getOrderList().stream()
-                .filter(correctClient)
-                .mapToDouble(Order::getAmountAsDouble)
-                .sum();
-        return new ClientTotalOrder(clientName, totalOrder);
+    private HashMap<Customer, Double> getCustomerTotalMap() {
+        HashMap<Customer, Double> customerTotalMap = new HashMap<>();
+        orderBook.getOrderList().forEach(order -> {
+            Customer customer = order.getCustomer();
+            Double updatedTotal = customerTotalMap.getOrDefault(customer, 0.0) + order.getAmountAsDouble();
+            customerTotalMap.put(customer, updatedTotal);
+        });
+        return customerTotalMap;
+    }
+
+    private void sortDescending(List<ClientTotalOrder> clientTotalOrders) {
+        Comparator<? super ClientTotalOrder> comparator = Comparator.comparing(ClientTotalOrder::getTotalOrder);
+        clientTotalOrders.sort(comparator);
+        Collections.reverse(clientTotalOrders);
     }
 
 
