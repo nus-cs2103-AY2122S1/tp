@@ -11,6 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,6 +58,8 @@ public class AddPersonCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.setPersonToView(toAdd);
+        model.setViewingType(ViewingType.PERSON);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

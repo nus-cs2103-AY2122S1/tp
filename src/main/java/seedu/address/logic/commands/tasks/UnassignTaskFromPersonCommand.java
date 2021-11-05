@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TaskAssignable;
+import seedu.address.model.ViewingType;
 import seedu.address.model.person.Person;
 
 public class UnassignTaskFromPersonCommand extends UnassignTaskCommand {
@@ -55,6 +56,8 @@ public class UnassignTaskFromPersonCommand extends UnassignTaskCommand {
         model.setPerson(personToEdit, newPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setPersonToView(newPerson);
+        model.setViewingType(ViewingType.PERSON);
     }
 
     @Override
