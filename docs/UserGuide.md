@@ -457,6 +457,7 @@ This section guides you on how to find or filter students of your choice in TAB.
 #### Finding students by fields: `find`
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
+You can find by tags, student fields and lesson fields.
 
 Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
 
@@ -535,7 +536,7 @@ Example:
               <ul>
                 <li>Accepts one keyword that must follow the Time Range format</li>
                 <li>Finds students with lessons that occur within the time range, excluding the start and end time.<br>
-                    e.g. <code>time/1200-1400</code> matches lesson with time <code>time/1300-1500</code>, but not <code>time/1400-1500</code></li>
+                    e.g. <code>time/1200-1400</code> matches lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
               </ul>
             </td>
         </tr>
@@ -556,19 +557,13 @@ Examples:
   * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
   * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
-Examples:
+<br>
+**Example of finding by different types of fields**
 
-To find a student, you may enter `find a/serangoon n/Bern` into the command box.
+To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
 
-All students in TAB whose address matches `serangoon` and whose name matches `Bern` will be returned. The figure below shows the list after the find command is executed.
-
-![findAll](images/findAll.png)
-<div class="caption">TAB displays one student after the find command.</div>
-
-To find students without the `unpaid` tag and whose school is not `NYJC`, you may enter the command `find cond/none t/unpaid sch/NYJC`. The figure below shows the list after this find command is executed.
-
-![findNone](images/findNone.png)
-<div class="caption">TAB displays three students after the find command.</div>
+![find](images/find.png)
+<div class="caption">TAB displays two students after the find command.</div>
 
 <div style="page-break-after: always;"></div>
 
