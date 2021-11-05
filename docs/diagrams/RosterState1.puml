@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-title Final state
+title After command "roster 1"
 
 package Tuitione <<rectangle>> {
 
