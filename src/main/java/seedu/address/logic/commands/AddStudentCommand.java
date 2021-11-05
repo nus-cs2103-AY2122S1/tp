@@ -66,7 +66,8 @@ public class AddStudentCommand extends Command {
 
         // Check tutorial class has been created before the classCode is assigned.
         TutorialClass toCheckTutorialClass = new TutorialClass(toAdd.getClassCode(),
-                new Schedule("dummy, dummy"), new HashSet<Tag>());
+                new Schedule("Tues 12:00pm to 2:00pm, Fri 12:00pm to 2:00pm"), new HashSet<Tag>());
+
         if (!model.hasTutorialClass(toCheckTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }

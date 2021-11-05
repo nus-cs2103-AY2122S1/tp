@@ -63,7 +63,7 @@ public class TutorialClass {
      * @return The TutorialClass with a ClassCode.
      */
     public static TutorialClass createTestTutorialClass(ClassCode classCode) {
-        return new TutorialClass(classCode, new Schedule("tues 12:00pm to 2:00pm, friday 12:00pm to 2:00pm"),
+        return new TutorialClass(classCode, new Schedule("Tuesday 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm"),
                 new HashSet<Tag>());
     }
 

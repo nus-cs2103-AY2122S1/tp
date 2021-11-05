@@ -128,9 +128,8 @@ public class ParserUtil {
         String trimmedClassCode = classCode.trim();
         if (!ClassCode.isValidClassCode(trimmedClassCode)) {
             throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS);
-        }
-        if (ClassCode.isDefaultClassCode(trimmedClassCode)) {
-            throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS_DEFAULT_CLASSCODE);
+        } else if (ClassCode.isDefaultClassCode(classCode)) {
+            throw new ParseException(ClassCode.MESSAGE_EMPTY_CLASS);
         }
         return new ClassCode(trimmedClassCode);
     }

@@ -15,12 +15,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
+import seedu.address.model.tutorialclass.Schedule;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -30,17 +32,22 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_GROUP_NUMBER = "a";
     private static final String INVALID_GROUP_TYPE = "OP3";
+    private static final String INVALID_CLASSCODE = "T01";
+    private static final String INVALID_SCHEDULE = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_CLASSCODE = "G01";
+    private static final String VALID_SCHEDULE = "Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_GROUP_NUMBER = "1";
     private static final String VALID_GROUP_TYPE = "OP1";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String DEFAULT_CLASSCODE = "G00";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -152,6 +159,51 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseClassCode_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClassCode((String) null));
+    }
+
+    @Test
+    public void parseClassCode_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_CLASSCODE));
+    }
+
+    @Test
+    public void parseClassCode_defaultValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(DEFAULT_CLASSCODE));
+    }
+
+    @Test
+    public void parseClassCode_validValueWithoutWhitespace_returnsClassCode() throws Exception {
+        ClassCode expectedClassCode = new ClassCode(VALID_CLASSCODE);
+        assertEquals(expectedClassCode, ParserUtil.parseClassCode(VALID_CLASSCODE));
+    }
+
+    @Test
+    public void parseClassCode_validValueWithWhitespace_returnsTrimmedClassCode() throws Exception {
+        String classCodeWithWhiteSpace = WHITESPACE + VALID_CLASSCODE + WHITESPACE;
+        ClassCode expectedClassCode = new ClassCode(VALID_CLASSCODE);
+        assertEquals(expectedClassCode, ParserUtil.parseClassCode(classCodeWithWhiteSpace));
+    }
+
+    @Test
+    public void parseSchedule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSchedule(null));
+    }
+
+    @Test
+    public void parseSchedule_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSchedule(INVALID_SCHEDULE));
+    }
+
+    @Test
+    public void parseSchedule_validValueWithWhitespace_returnsTrimmedSchedule() throws Exception {
+        String scheduleWithWhiteSpace = WHITESPACE + VALID_SCHEDULE + WHITESPACE;
+        Schedule expectedSchedule = new Schedule(VALID_SCHEDULE);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(scheduleWithWhiteSpace));
     }
 
     @Test

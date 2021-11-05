@@ -114,8 +114,13 @@ Adds a student to ClassMATE.
 
 Entering format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
+<div markdown="span" class="alert alert-info">:information_source: **Notes about addstu:** <br> 
+
+* The Name of a student accommodates special characters such as hyphens, apostrophes and slashes.
+* The phone number should be at least 3 digits long.
+* The tutorial class with the given Class Code must already exist in classmate.
+* A student can have any number of tags (including 0) 
+
 </div>
 
 Examples:
@@ -261,7 +266,7 @@ Clears all students from ClassMATE. Below is how it would look like.
 Entering format: `clear`
 
 <div markdown="span" class="alert alert-primary">:warning: **Warning:**
-This command deletes **ALL** students and is irreversible :warning:
+This command deletes **ALL** students and is irreversible :warning: 
 </div>
 
 ## Tutorial Class Commands
@@ -272,9 +277,15 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary"> :bulb: **Note:** 
+
+* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
+* Schedule consists of 2 weekly timeslots
+</div>
+
 Examples:
 * `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
-* `addc c/G01 s/Monday 10am to 12pm, thursday 10am to 12pm`
+* `addc c/G01 s/Monday 10am to 12pm, Thursday 10am to 12pm`
 
 ### Viewing a class: `viewc`
 
@@ -282,9 +293,9 @@ Examples:
 
 Views a class in ClassMATE, as shown above
 
-**:information_source: Note:**<br>
-
-viewc highlights the class chosen, and filters out only students in the class!
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
+`viewc` highlights the class chosen, and filters out only students in the class!
+</div>
 
 Entering format: `viewc INDEX`
 
@@ -292,6 +303,10 @@ Entering format: `viewc INDEX`
 * Details of a class includes students in the class and the class schedule.
 * The index refers to the index number shown in the displayed list of classes.
 * The index must be a positive integer 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+In order to find a specific class, use the `findc` command to find a particular class before viewing it.
+</div>
 
 Examples:
 
@@ -348,7 +363,7 @@ Entering format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
 * The class must have already been added to ClassMATE first. If you are unsure, you can refer to
   [Adding a Tutorial Class](#adding-a-tutorial-class)
-
+  
 * Tutorial groups are identified by GROUP_NUMBER, GROUP_TYPE and CLASS_CODE. This means that
   any two tutorial groups are identical if all three fields are identical, which is not allowed.
 
