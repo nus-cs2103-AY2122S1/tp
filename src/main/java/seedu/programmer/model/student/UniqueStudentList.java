@@ -76,6 +76,11 @@ public class UniqueStudentList implements Iterable<Student> {
         return studentListCopy.stream().anyMatch(editedStudent::isSameStudent);
     }
 
+    public boolean hasLab(Lab lab) {
+        return labsTracker.contains(lab);
+    }
+
+
     /**
      * Returns true if the list contains an equivalent student as the given argument，
      * excluding himself/herself.
