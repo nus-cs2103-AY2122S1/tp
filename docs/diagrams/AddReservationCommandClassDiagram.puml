@@ -26,6 +26,7 @@ ReserveCommand ---> "1" LocalDateTime
 ReserveCommand ---> "0..1" Remark
 ReserveCommand ---> "*" Tag
 
+ReserveCommand ..> Reservation : creates >
 ReserveCommand ..r..> "0..1" CommandResult : creates >
 
 Reservation -u-> "1" Phone

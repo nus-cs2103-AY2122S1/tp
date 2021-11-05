@@ -113,6 +113,7 @@ How the parsing works:
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
+![ModelEntitiesClassDiagram](images/ModelEntitiesClassDiagram.png)
 
 The `Model` component,
 
