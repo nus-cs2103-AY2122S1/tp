@@ -18,12 +18,15 @@ public class SCallCommand extends Command {
     public static final String COMMAND_WORD = "scall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Indicates that the person has been successfully called\n"
-        + "Parameters: INDEX (must be a positive integer)\n"
-        + "Example: " + COMMAND_WORD + " 1";
+            + ": Indicates that the person has been successfully called\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_CALL_PERSON_SUCCESS =
-        "Successfully called Person: %s (Case No. %s) with %d past failed call attempt(s)";
+            "Successfully called Person: %s (Case No. %s) with %d past failed call attempt(s)";
+
+    public static final String MESSAGE_INVALID_MULTIPLE_CALLS =
+            "Person has already been called in the current session.";
 
     private final Index targetIndex;
 
@@ -47,6 +50,9 @@ public class SCallCommand extends Command {
         }
 
         Person personToIncrement = lastShownList.get(targetIndex.getZeroBased());
+        if (personToIncrement.getCallStatus().isCalledInCurrentSession()) {
+            throw new CommandException(MESSAGE_INVALID_MULTIPLE_CALLS);
+        }
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         model.setPerson(personToIncrement, newPerson);
 

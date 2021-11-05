@@ -26,6 +26,9 @@ public class FCallCommand extends Command {
     public static final String MESSAGE_INCREMENT_PERSON_SUCCESS =
             "Failed to call Person: %s (Case No. %s) with %d past failed call attempt(s)";
 
+    public static final String MESSAGE_INVALID_MULTIPLE_CALLS =
+            "Person has already been called in the current session.";
+
     private final Index targetIndex;
 
     /**
@@ -48,6 +51,9 @@ public class FCallCommand extends Command {
         }
 
         Person personToIncrement = lastShownList.get(targetIndex.getZeroBased());
+        if (personToIncrement.getCallStatus().isCalledInCurrentSession()) {
+            throw new CommandException(MESSAGE_INVALID_MULTIPLE_CALLS);
+        }
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().incrementNumFailedCalls());
         model.setPerson(personToIncrement, newPerson);
 
