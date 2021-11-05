@@ -56,15 +56,15 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5 n/t" + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
+        assertParseFailure(parser, "-5 " + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
         // zero index
-        assertParseFailure(parser, "0 n/t" + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
+        assertParseFailure(parser, "0 " + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string n/t", MESSAGE_INVALID_COUNT_INDEX);
+        assertParseFailure(parser, "1 some random string ", MESSAGE_INVALID_COUNT_INDEX);
 
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string n/t", MESSAGE_INVALID_COUNT_INDEX);
+        // empty preamble
+        assertParseFailure(parser, NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
     }
 
     @Test

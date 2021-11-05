@@ -94,13 +94,13 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_negativeIdArgs_throwsParseException() {
-        assertParseFailure(parser, PREFIX_ID + INVALID_ID_NEGATIVE_NUMBER, String.format(
+        assertParseFailure(parser, INVALID_ID_NEGATIVE_NUMBER, String.format(
                 MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_notDigitsInArg_throwsParseException() {
-        assertParseFailure(parser, PREFIX_ID + INVALID_ID_LETTER, String.format(
+        assertParseFailure(parser, INVALID_ID_LETTER, String.format(
                 MESSAGE_INVALID_ID_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
