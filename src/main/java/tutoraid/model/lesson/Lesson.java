@@ -164,31 +164,29 @@ public class Lesson {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append(getLessonName());
-
         if (lessonName != null) {
-            builder.append("; Lesson's name: ")
+            builder.append("\nLesson's name: ")
                     .append(getLessonName());
         }
 
         if (timing != null) {
-            builder.append("; Lesson's timing: ")
+            builder.append("\nLesson's timing: ")
                     .append(getTiming());
 
         }
 
         if (capacity != null) {
-            builder.append("; Lesson's capacity: ")
+            builder.append("\nLesson's capacity: ")
                     .append(getCapacity());
         }
 
         if (price != null) {
-            builder.append("; Lesson's price: ")
+            builder.append("\nLesson's price: ")
                     .append(getPrice());
         }
 
         if (students != null) {
-            builder.append("; Lesson's students: ")
+            builder.append("\nLesson's students: ")
                     .append(getStudents());
         }
 

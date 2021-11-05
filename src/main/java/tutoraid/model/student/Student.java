@@ -89,6 +89,10 @@ public class Student {
         return progressList.deleteLatestProgress();
     }
 
+    public boolean isProgressListEmpty() {
+        return progressList.isProgressListEmpty();
+    }
+
     public void addLesson(Lesson toAttend) {
         lessons.addLesson(toAttend);
     }
@@ -156,25 +160,25 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append(getStudentName());
+        builder.append("\nStudent's name: " + getStudentName());
 
         if (studentPhone != null) {
-            builder.append("; Student's phone: ")
+            builder.append("\nStudent's phone: ")
                     .append(getStudentPhone());
         }
 
         if (parentName != null) {
-            builder.append("; Parent's name: ")
+            builder.append("\nParent's name: ")
                     .append(getParentName());
 
         }
 
         if (parentPhone != null) {
-            builder.append("; Parent's phone: ")
+            builder.append("\nParent's phone: ")
                     .append(getParentPhone());
         }
 
-        builder.append("; Progress: ")
+        builder.append("\nProgress: ")
                 .append(getLatestProgress())
                 .append("; Payment Status: ")
                 .append("; Lessons: ")
