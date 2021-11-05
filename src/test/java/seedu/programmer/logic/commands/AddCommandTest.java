@@ -108,9 +108,6 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private static class ModelStub implements Model {
-        private ObservableList<DisplayableObject> selectedInformation = FXCollections.observableArrayList();
-        private Student selectedStudent;
-        private List<Lab> labsTracker = new ArrayList<>();
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -214,35 +211,24 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<DisplayableObject> getSelectedInformation() {
-            return selectedInformation;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Student getSelectedStudent() {
-            return selectedStudent;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setSelectedStudent(Student target) {
-            this.selectedStudent = target;
-            if (selectedInformation.isEmpty()) {
-                this.selectedInformation.add(target);
-            } else {
-                ObservableList<Lab> labList = target.getLabList();
-                labList.sort(new SortByLabNumber());
-                this.selectedInformation.set(0, target);
-            }
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setSelectedLabs(List<Lab> labs) {
-            assert selectedInformation != null;
-            if (!(selectedInformation.size() == 1)) {
-                selectedInformation.remove(1, selectedInformation.size());
-            }
-            labs.sort(new SortByLabNumber());
-            selectedInformation.addAll(labs);
+            throw new AssertionError("This method should not be called.");
         }
+
 
         @Override
         public void clearSelectedInformation() {
@@ -258,7 +244,6 @@ public class AddCommandTest {
         public void clearLabsTracker() {
             throw new AssertionError("This method should not be called.");
         }
-
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
@@ -289,6 +274,9 @@ public class AddCommandTest {
      */
     private static class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();
+        private ObservableList<DisplayableObject> selectedInformation = FXCollections.observableArrayList();
+        private Student selectedStudent;
+        private List<Lab> labsTracker = new ArrayList<>();
 
         @Override
         public boolean hasStudent(Student student) {
@@ -300,6 +288,38 @@ public class AddCommandTest {
         public void addStudent(Student student) {
             requireNonNull(student);
             studentsAdded.add(student);
+        }
+
+        @Override
+        public ObservableList<DisplayableObject> getSelectedInformation() {
+            return selectedInformation;
+        }
+
+        @Override
+        public Student getSelectedStudent() {
+            return selectedStudent;
+        }
+
+        @Override
+        public void setSelectedStudent(Student target) {
+            this.selectedStudent = target;
+            if (selectedInformation.isEmpty()) {
+                this.selectedInformation.add(target);
+            } else {
+                ObservableList<Lab> labList = target.getLabList();
+                labList.sort(new SortByLabNumber());
+                this.selectedInformation.set(0, target);
+            }
+        }
+
+        @Override
+        public void setSelectedLabs(List<Lab> labs) {
+            assert selectedInformation != null;
+            if (!(selectedInformation.size() == 1)) {
+                selectedInformation.remove(1, selectedInformation.size());
+            }
+            labs.sort(new SortByLabNumber());
+            selectedInformation.addAll(labs);
         }
 
         @Override
