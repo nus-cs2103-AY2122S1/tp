@@ -501,6 +501,23 @@ public class StringUtilTest {
         assertEquals(StringUtil.convertEmptyStringIfNull("test 123"), "test 123");
     }
 
+    //---------------- Tests for removeLeadingZeros --------------------------------------
+
+    @Test
+    public void removeLeadingZeros_null_returnsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.removeLeadingZeros(null));
+    }
+
+    @Test
+    public void removeLeadingZeros_nonEmptyString_returnsStringWithLeadingZerosRemoved() {
+        assertEquals(StringUtil.removeLeadingZeros("09"), "9");
+    }
+
+    @Test
+    public void convertEmptyStringIfNull_emptyString_returnsEmptyString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull(""), "");
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*

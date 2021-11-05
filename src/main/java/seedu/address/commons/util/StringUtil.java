@@ -284,6 +284,18 @@ public class StringUtil {
     }
 
     /**
+     * Returns number string without leading zeros.
+     *
+     * @param number numeric value.
+     * @return number string without leading zeros.
+     */
+    public static String removeLeadingZeros(String number) {
+        String regex = "^0+(?!$)";
+        String res = number.replaceAll(regex, "");
+        return res;
+    }
+
+    /**
      * Returns {@code value} in currency format
      * e.g.
      * with symbol: $500.00

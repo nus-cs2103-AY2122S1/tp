@@ -2,6 +2,7 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.removeLeadingZeros;
 
 public class ClientId extends NumberComparable<ClientId> {
 
@@ -17,7 +18,7 @@ public class ClientId extends NumberComparable<ClientId> {
     public ClientId(String clientId) {
         requireNonNull(clientId);
         checkArgument(isValidClientId(clientId), MESSAGE_CONSTRAINTS);
-        this.value = clientId;
+        this.value = removeLeadingZeros(clientId);
     }
 
     /**
