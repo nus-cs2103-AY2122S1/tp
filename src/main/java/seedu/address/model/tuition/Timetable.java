@@ -15,10 +15,10 @@ import seedu.address.ui.infopage.TimetableInfoPage;
 
 
 public class Timetable {
-    private static final int DEFAULT_FONT_SIZE = 8;
-    private static final String COLOR_ODD = "-fx-background-color: #3e7589; -fx-text-fill:WHITE; -fx-font-size:%1$spt;";
-    private static final String COLOR_EVEN = "-fx-background-color: #515658; -fx-text-fill:WHITE;"
+    public static final String COLOR_ODD = "-fx-background-color: #3e7589; -fx-text-fill:WHITE; -fx-font-size:%1$spt;";
+    public static final String COLOR_EVEN = "-fx-background-color: #515658; -fx-text-fill:WHITE;"
             + " -fx-font-size:%1$spt;";
+    private static final int DEFAULT_FONT_SIZE = 8;
     private static final String NOT_SHOWN = "The following class details are not shown due to space limit: ";
     private static final HashMap<String, Integer> dates = Timeslot.getDays();
     private final ObservableList<TuitionClass> tuitionClasses;
@@ -48,7 +48,7 @@ public class Timetable {
      * Displays the timetable constructed from the tuition classes.
      */
     public void showTimetable() {
-        parseTime();
+        parseTime(this.tuitionClasses);
         infoPage.setTableTime(start, end, totalRows);
         insertSlot();
         if (notShown.size() > 0) {
@@ -63,10 +63,10 @@ public class Timetable {
     /**
      * Parses timeslot of tuition class list to determine the size of timetable.
      */
-    private void parseTime() {
+    public void parseTime(ObservableList<TuitionClass> tuitionClassesPresent) {
         LocalTime earliest = null;
         LocalTime latest = null;
-        for (TuitionClass tc: tuitionClasses) {
+        for (TuitionClass tc: tuitionClassesPresent) {
             LocalTime[] times = tc.getTimeslot().parseTime();
             LocalTime localStart = times[0];
             LocalTime localEnd = times[1];
@@ -95,7 +95,7 @@ public class Timetable {
     /**
      * Inserts tuition classes into the timetable.
      */
-    private void insertSlot() {
+    public void insertSlot() {
         if (tuitionClasses.size() == 0) {
             return;
         }
@@ -126,13 +126,15 @@ public class Timetable {
         int rowSpan = rowFinishInsert - rowStartInsert;
         Label lesson = getLabel(message, getFontSize(rowSpan),
                 colInsert, tuitionClass);
-        infoPage.addLesson(lesson, colInsert, rowStartInsert, 1,
-                rowSpan == 0 ? 1 : rowSpan);
-        GridPane.setHalignment(lesson, HPos.CENTER);
-        GridPane.setFillWidth(lesson, true);
+        if (infoPage != null) {
+            infoPage.addLesson(lesson, colInsert, rowStartInsert, 1,
+                    rowSpan == 0 ? 1 : rowSpan);
+            GridPane.setHalignment(lesson, HPos.CENTER);
+            GridPane.setFillWidth(lesson, true);
+        }
     }
 
-    private String getColor(int start) {
+    public String getColor(int start) {
         String color = start % 2 == 0 ? COLOR_EVEN : COLOR_ODD;
         return color;
     }
@@ -145,25 +147,41 @@ public class Timetable {
      * @param tuitionClass the tuition class to be shown.
      * @return a label with information of tuition class on it.
      */
-    private Label getLabel(String message, int fontSize, int col, TuitionClass tuitionClass) {
+    public Label getLabel(String message, int fontSize, int col, TuitionClass tuitionClass) {
         Label lesson;
         if (fontSize == 1) {
-            lesson = new Label();
+            lesson = productLabel("");
             notShown.add(tuitionClass.getNameString() + " " + tuitionClass.getTimeslot());
         } else if (fontSize == 2) {
-            lesson = new Label(tuitionClass.getNameString());
+            lesson = productLabel(tuitionClass.getNameString());
             fontSize = 8;
             notShown.add(tuitionClass.getNameString() + " " + tuitionClass.getTimeslot());
         } else {
-            lesson = new Label(message);
+            lesson = productLabel(message);
         }
-        lesson.setStyle(String.format(getColor(col), fontSize));
-        lesson.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        lesson.setAlignment(Pos.CENTER);
+        if (lesson != null) {
+            lesson.setStyle(String.format(getColor(col), fontSize));
+            lesson.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            lesson.setAlignment(Pos.CENTER);
+        }
         return lesson;
     }
 
-    private int getFontSize(int span) {
+    /**
+     * Produces a Label with given message.
+     * @param message message to shown on the label.
+     * @return the label instance.
+     */
+    public Label productLabel(String message) {
+        return new Label(message);
+    }
+
+    /**
+     * Determines font size of each tuition class according to its time span.
+     * @param span time range of the tuition class.
+     * @return the font size to be used.
+     */
+    public int getFontSize(int span) {
         if (span < 3) {
             return 1;
         }
@@ -179,4 +197,37 @@ public class Timetable {
         return DEFAULT_FONT_SIZE;
     }
 
+    /**
+     * Gets starting hour.
+     * @return the starting hour.
+     */
+    public int getStart() {
+        return start;
+    }
+
+    /**
+     * Gets ending hour.
+     * @return the ending hour.
+     */
+    public int getEnd() {
+        return end;
+    }
+
+    /**
+     * Gets total rows of the timetable.
+     * @return the number of rows.
+     */
+    public int getTotalRows() {
+        return totalRows;
+    }
+
+    /**
+     * Returns a copy of the notshown arraylist.
+     * @return an arraylist with same elements as notshown.
+     */
+    public ArrayList<String> getNotShown() {
+        ArrayList<String> result = new ArrayList<>();
+        result.addAll(notShown);
+        return result;
+    }
 }
