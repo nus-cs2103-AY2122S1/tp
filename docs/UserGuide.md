@@ -731,7 +731,25 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RecruitIn home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the data file that your previous RecruitIn home folder contains.
+
+**Q**: How do I know if I have the right version of Java installed (i.e. Java 11 or above)?<br>
+**A**: Open up your terminal , type `java -version` and press enter. You should see a variant of Java 11 or above (for example `java version "11.0.9"`). 
+If you do not know how to open up your terminal, refer to the next question below.
+
+**Q**: How do I open up my terminal?<br>
+**A**: There are different ways to open up your terminal, depending on what operating system you use.
+
+* **MacOS**: 
+  1. Open Spotlight Search by clicking on the magnifying glass icon in the upper-right corner of your desktop (or press `Command + Space` on your keyboard)
+  2. Type in `terminal` into the Spotlight Search bar and press return.
+    
+* **Windows**:
+  1. Press `Windows key + R` on your keyboard and press enter.
+  2. Type `cmd` and press enter.
+    
+* **Linux**:
+  1. Press `ctrl + alt + T` on your keyboard.
 
 --------------------------------------------------------------------------------------------------------------------
 
