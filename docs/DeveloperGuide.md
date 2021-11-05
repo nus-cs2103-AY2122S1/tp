@@ -1038,7 +1038,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 **MSS**
 
-1. User requests for reminder.
+1. User requests for reminders.
 2. TAB displays a list of upcoming lessons.
 
 Use case ends.
