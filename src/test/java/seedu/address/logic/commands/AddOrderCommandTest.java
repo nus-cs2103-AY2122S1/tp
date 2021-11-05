@@ -96,6 +96,7 @@ public class AddOrderCommandTest {
 
         @Override
         public boolean hasOrder(Order order) {
+            requireNonNull(order);
             return ordersAdded.contains(order);
         }
 
@@ -108,12 +109,6 @@ public class AddOrderCommandTest {
         public void addOrder(Order order) {
             requireNonNull(order);
             ordersAdded.add(order);
-        }
-
-        @Override
-        public boolean hasOrder(Order order) {
-            requireNonNull(order);
-            return this.ordersAdded.contains(order);
         }
 
     }
