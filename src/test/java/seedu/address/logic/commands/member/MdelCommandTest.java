@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -28,8 +28,8 @@ public class MdelCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        MdelCommand mdelCommand = new MdelCommand(INDEX_FIRST_MEMBER);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
+        MdelCommand mdelCommand = new MdelCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(MdelCommand.MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete);
 
@@ -49,10 +49,10 @@ public class MdelCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
 
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        MdelCommand mdelCommand = new MdelCommand(INDEX_FIRST_MEMBER);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
+        MdelCommand mdelCommand = new MdelCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(MdelCommand.MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete);
 
@@ -65,9 +65,9 @@ public class MdelCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_MEMBER;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
 
@@ -78,14 +78,14 @@ public class MdelCommandTest {
 
     @Test
     public void equals() {
-        MdelCommand deleteFirstCommand = new MdelCommand(INDEX_FIRST_MEMBER);
-        MdelCommand deleteSecondCommand = new MdelCommand(INDEX_SECOND_MEMBER);
+        MdelCommand deleteFirstCommand = new MdelCommand(INDEX_FIRST);
+        MdelCommand deleteSecondCommand = new MdelCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        MdelCommand deleteFirstCommandCopy = new MdelCommand(INDEX_FIRST_MEMBER);
+        MdelCommand deleteFirstCommandCopy = new MdelCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
