@@ -4,17 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalClasses.addTypicalClassesToAddressBook;
 import static seedu.address.testutil.TypicalStudents.getAddressBookWithTypicalStudents;
 
+import java.util.concurrent.TimeoutException;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.testfx.api.FxToolkit;
 
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.infopage.TimetableInfoPage;
+
 
 class TimetableTest {
     private static Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
@@ -24,8 +27,9 @@ class TimetableTest {
     private static Timetable timetable;
 
     @BeforeAll
-    public static void setUp_javaFX_runtime() throws InterruptedException {
-        JFXPanel jfxPanel = new JFXPanel();
+    public static void setUp_javaFX_runtime() throws InterruptedException, TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.hideStage();
         infoPage = new TimetableInfoPage(tuitionClasses, null);
         timetable = new Timetable(tuitionClasses, null, infoPage);
     }
