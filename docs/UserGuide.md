@@ -65,7 +65,7 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 --------------------------------------------------------------------------------------------------------------------
 
 # Quick Start
-1. Ensure you have Java 11 or above installed in your Computer. You may install it here
+1. Ensure you have Java 11 or above installed in your Computer. You may install it
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
 2. Download the latest `wheretourgo.jar` from [here](update on final)
 
@@ -91,7 +91,7 @@ java -jar WhereTourGo.jar
 ```
 
 <br>After launching the app, GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/ui.png)
+   ![Ui](images/Ui.png)
    <br><br>
 
 Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
@@ -130,7 +130,7 @@ Below is the Home screen of WhereTourGo, with its key components marked out for 
 
 | Component | Function |
 |:-------:|----------|
-| Tab bar | Exit the app or view help |
+| Tab Bar | Exit the app or view help |
 | Command Box | Text box for you to key in your input |
 | Results Pane | Returns the result of the last command you entered |
 | Contacts Pane | A scrollable pane containing all the contacts you have listed/filtered |
@@ -219,7 +219,7 @@ More examples will be provided for each command in [Features](#features).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 ## Modifying Contacts
 
@@ -230,7 +230,7 @@ Adds a contact to the contact list.
 Category codes and ratings can be found [here](#restrictions-for-commands).
 
 Usage scenario:
-* Tour Guide discovers a new attraction to record.
+* You discover a new attraction to record.
 
 Format: `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [rv/REVIEW] [ra/RATING] [t/TAG]…​​`
 
@@ -255,7 +255,7 @@ Edits an existing contact in the contact list.
 Category codes and ratings can be found [here](#restrictions-for-commands).
 
 Usage scenario:
-* Tour Guide realised he entered the name of a restaurant wrongly, and wants to rectify it.
+* You realise you entered the name of a restaurant wrongly, and want to rectify it.
 
 Format: `edit INDEX [n/CONTACT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rv/REVIEW] [c/CATEGORY_CODE][ra/RATING]  [t/TAG]…​`
 
@@ -290,7 +290,7 @@ After:
 Deletes the specified contact from the contact list, either by name or index.
 
 Usage scenario:
-* Tour Guide wants to remove a hotel's contact information from WhereTourGo, as it has closed down.
+* You want to remove a hotel's contact information from WhereTourGo, as it has closed down.
 
 Format: `delete INDEX`
 
@@ -301,6 +301,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the contact list
 * `find Mandarin Oriental` followed by `delete 1` deletes the 1st contact in the results of the find command
+
 -------------
 Format: `delete n/CONTACT_NAME`
 
@@ -309,7 +310,7 @@ Format: `delete n/CONTACT_NAME`
 * The name is case-sensitive and must match the contact's name exactly
 
 Examples:
-* `list` followed by `delete Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours’
+* `list` followed by `delete Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours`
 * `find fullerton` followed by `delete The Fullerton Hotel` deletes the contact with name 'The Fullerton Hotel'
 
 [Back to top](#table-of-contents)
@@ -375,7 +376,7 @@ You can add multiple category and tag filters in a single command, but only a si
 
 Examples:
 * `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts)
-* `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts)
+* `filter c/acc c/fnb` returns Mandarin Oriental, and KFC (all accommodation and F&B contacts)
 * `filter ra/3 t/outdoor` returns all contacts with 3-star rating and outdoor tag from all categories
 * `filter c/fnb ra/3 t/fun t/outdoor` returns all F&B contacts with 3-star rating, and with fun and/or outdoor tags
 
@@ -563,7 +564,9 @@ Usage scenario:
 
 Format: `help`
 
-<div markdown="block" class="alert alert-primary"> :bulb: If the User Guide cannot be opened in the Browser, a link to the User Guide will be provided.</div>
+<div markdown="block" class="alert alert-primary"> 
+ :bulb: If the User Guide cannot be opened in the Browser, a link to the User Guide will be provided.
+</div>
 
 Please refer to the FAQ for more information.
 
