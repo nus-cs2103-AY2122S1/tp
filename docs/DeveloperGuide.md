@@ -151,31 +151,35 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add command
 
-In the following section, we would be using the example of adding an `Employee` to RHRH. We can add a `Customer`
-and `Supplier` the using a similar format with their own fields and command, and the logic behind how another Person Type is added will be the same. More information on the differences in adding `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
+In the following section, we will be going through how our add command works. Since the add command is very similar across all person types, we will be using the `AddEmployeeCommand` to illustrate how the add command works. More information on the differences in adding `Customer`, `Employee` and `Supplier` can be found in our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
 
 #### Current Implementation
 
 {:no_toc}
 
-The AddEmployeeCommand creates an Employee and adds it into the current Employee's list. In the Class Diagram below, we can see what is created when we call upon the 
-AddEmployeeCommand
+Adding an employee can be split into 2 steps: `Parse` and `Execute`.
 
-![AddEmployeeCommandClassDiagram](images/AddEmployeeCommandClassDiagram.png)
-
-An AddEmployeeCommand is created through the usage of our `addE` command.
-
-The process in which an `Employee` is added can be broken down into 2.
-
-1. User input is sent into the `RhrhParser` and an `AddEmployeeCommand` is created.
-2. The `AddEmployeeCommand` then proceeds to add the created `Employee` to RHRH.
-
-In the first step, the user input is parsed in `AddEmployeeCommandParser` and broken down for other methods from other classes to create an `AddEmployeeCommand`.
-This is depicted in the Sequence Diagram below.
+The sequence Diagram below illustrates the interactions within the `Logic` component for the `execute` API call. 
 
 ![AddEmployeeCommandSequenceDiagram](images/AddEmployeeCommandSequenceDiagram.png)
 
-After obtaining the `AddEmployeeCommand`, it then calls methods in `Model` to help add the newly created `Employee` to the existing `UniqueEmployeeList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`AddEmployeeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
+
+`Parse`:
+1. When `Logic` is called upon to execute `AddEmployeeCommand`, it uses the `RhrhParser` class to parse the user command.
+2. The `RhrhParser` then creates an `AddEmployeeCommandParser` to parse the command input.
+3. If successful, this results in an `AddEmployeeCommand` object being created which will then be executed by the `LogicManager`.
+
+Below is a partial class diagram for `AddEmployeeCommand`. NOte that to make it more comprehensible, details not related to `AddEmployeeCommand` are abstracted away.
+
+![AddEmployeeCommandClassDiagram](images/AddEmployeeCommandClassDiagram.png)
+
+`Execute`:
+1. The instance of `AddEmployeeCommand` created can communicate with the `Model` when it is executed to add an employee to the `UniqueEmployeeList`.
+2. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 ![AddEmployeeCommandActivityDiagram](images/AddEmployeeCommandActivityDiagram.png)
 
@@ -183,13 +187,12 @@ After obtaining the `AddEmployeeCommand`, it then calls methods in `Model` to he
 
 * Current Design: We separated `AddCustomerCommmand`, `AddEmployeeCommmand` and `AddSupplierCommmand` as different 
   command types.
-This is evident in our differing Edit and Delete commands as well.
   * Pros
     * It is much neater as everything is divided based on the Person type and prefixes are easily separated based on whichever Person Type it is.
     * Errors in user input is easier to identify due to the separation of Person type.
     
   * Cons
-    * Additional classes had to be implemented.
+    * Additional classes have to be implemented.
     * More commands for a similar feature.
 
 * Alternative Design: We could have a singular `AddCommand` and parse the user's input to see what Person Type the user wanted to add.
@@ -264,7 +267,7 @@ not related to the `DeleteSupplierCommand` are abstracted away.
       * Errors in user input is easier to identify due to the separation of Person type.
 
   * Cons
-      * Additional classes had to be implemented.
+      * Additional classes have to be implemented.
       * More commands for a similar feature.
 
 
@@ -383,7 +386,7 @@ not related to the `SortSupplierCommand` are abstracted away.
         * Errors in user input is easier to identify due to the separation of Person type.
 
     * Cons
-        * Additional classes had to be implemented.
+        * Additional classes have to be implemented.
         * More commands for a similar feature.
 
 
