@@ -297,6 +297,8 @@ show 4
 
 Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
 
+Exporting will not overwrite existing files.
+
 Format 1:
 
 ```
@@ -325,7 +327,7 @@ export Friends.csv
 
 Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
 
-Importing will not remove existing contacts, and skips duplicate contacts.
+Importing will not remove existing contacts, and ignores duplicate contacts.
 
 Format 1:
 
