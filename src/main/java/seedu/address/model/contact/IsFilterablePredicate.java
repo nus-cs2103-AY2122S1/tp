@@ -1,7 +1,5 @@
 package seedu.address.model.contact;
 
-import static seedu.address.model.contact.Rating.isEmptyRating;
-
 import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -19,8 +17,9 @@ public class IsFilterablePredicate implements Predicate<Contact> {
 
     /**
      * Constructs a Predicate object.
-     * @param categoryCodes
-     * @param rating
+     * @param categoryCodes of predicate
+     * @param rating of predicate
+     * @param tags of predicate
      */
     public IsFilterablePredicate(Set<CategoryCode> categoryCodes, Rating rating, Set<Tag> tags) {
         this.categoryCodes = categoryCodes;

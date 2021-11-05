@@ -41,7 +41,6 @@ public class FileUtil {
 
     /**
      * Creates a file if it does not exist along with its missing parent directories.
-     * @throws IOException if the file or directory cannot be created.
      */
     public static void createIfMissing(Path file) {
         try {
