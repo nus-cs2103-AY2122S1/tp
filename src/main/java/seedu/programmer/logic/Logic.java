@@ -82,5 +82,8 @@ public interface Logic {
      */
     void saveProgrammerError(ProgrammerError pe);
 
+    /**
+     * Replace the existing student list with a new one.
+     */
     void replaceExistingStudents(List<Student> stuList);
 }

@@ -119,7 +119,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyProgrammerError getSampleProgrammerError() {
-        ProgrammerError sampleAb = new ProgrammerError();
+        ProgrammerError samplePE = new ProgrammerError();
         for (Student sampleStudent : getSampleStudents()) {
             Lab[] sampleLabs = getSampleLab();
             for (int i = 0; i < sampleLabs.length; i++) {
@@ -130,9 +130,9 @@ public class SampleDataUtil {
                 }
                 sampleStudent.addLab(sampleLab);
             }
-            sampleAb.addStudent(sampleStudent);
+            samplePE.addStudent(sampleStudent);
         }
-        return sampleAb;
+        return samplePE;
     }
 
     /**
@@ -140,11 +140,11 @@ public class SampleDataUtil {
      * @return ProgrammerError filled with sample data
      */
     public static ProgrammerError fillSampleProgrammerError() {
-        ProgrammerError sampleAb = new ProgrammerError();
+        ProgrammerError samplePE = new ProgrammerError();
         for (Student sampleStudent : getSampleStudents()) {
-            sampleAb.addStudent(sampleStudent);
+            samplePE.addStudent(sampleStudent);
         }
-        return sampleAb;
+        return samplePE;
     }
 
 }

@@ -25,13 +25,13 @@ public class DeleteLabCommand extends Command {
     public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
     public static final String MESSAGE_LAB_DOES_NOT_EXIST = "Lab doesn't exist: %1$s";
 
-    private final Lab result;
+    private final Lab lab;
 
     /**
-     * @param result the lab result to be added.
+     * @param lab to be added.
      */
-    public DeleteLabCommand(Lab result) {
-        this.result = result;
+    public DeleteLabCommand(Lab lab) {
+        this.lab = lab;
     }
 
     @Override
@@ -39,31 +39,23 @@ public class DeleteLabCommand extends Command {
         requireNonNull(model);
 
         List<Student> studentList = model.getAllStudents();
-        boolean exists = true;
-        for (Student std : studentList) {
-            Student target = std;
-            if (!target.deleteLab(this.result)) {
-                exists = false;
-            }
-            model.setStudent(target, std);
+      
+        if (!model.hasLab(lab)) {
+            throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, lab));
         }
-        if (exists) {
-            if (!model.getSelectedInformation().isEmpty()) {
-                Student selectedStudent = model.getSelectedStudent().copy();
-                selectedStudent.deleteLab(result);
-                model.setSelectedStudent(selectedStudent);
-                model.setSelectedLabs(selectedStudent.getLabList());
-            }
-            return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
-        } else {
-            throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, result));
+
+        for (Student student : studentList) {
+            Student originalStudent = student;
+            originalStudent.deleteLab(lab);
+            model.setStudent(originalStudent, student);
         }
+        return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, lab));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteLabCommand// instanceof handles nulls
-                && result.equals(((DeleteLabCommand) other).result)); // state check
+                && lab.equals(((DeleteLabCommand) other).lab)); // state check
     }
 }
