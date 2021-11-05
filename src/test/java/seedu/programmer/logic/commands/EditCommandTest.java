@@ -34,21 +34,16 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
-    /* TODO: Test failing on CI
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
-
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-
         Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-    */
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
