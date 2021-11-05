@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 Participant ":SortCommand" as sc LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
+box VersionedModel MODEL_COLOR_T1
 Participant "<<class>>\nName" as name MODEL_COLOR
 Participant "<<class>>\nParticipation" as part MODEL_COLOR
 Participant "<<class>>\nAssessment" as assess MODEL_COLOR

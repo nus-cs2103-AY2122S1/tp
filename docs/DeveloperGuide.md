@@ -39,6 +39,8 @@ title: Developer Guide
 * [Appendix](#appendix-requirements)
   * [Requirement](#appendix-requirements)
   * [Manual Testing](#appendix-instructions-for-manual-testing)
+    * [Feature Testing](#feature-testing)
+    * [UI Testing](#ui-testing)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -881,7 +883,9 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Feature Testing
+
+#### Launch and shutdown
 
 1. Initial launch
 
@@ -898,7 +902,14 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
-### Deleting a student
+#### Add Student
+
+1. Adding a student while all students are being shown
+2. Adding a student while only one student is being shown, with there being more than one student in the list
+
+1. _{ more test cases to come …​ }_
+
+#### Delete Student
 
 1. Deleting a student while all students are being shown
 
@@ -915,10 +926,85 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
-### Saving data
+#### Tag Student
+
+1. Tag a student while all students are being shown
+2. Tag a student while only one student is being shown, with there being more than one student in the list 
+
+1. _{ more test cases to come …​ }_
+
+#### Get Personal Detail
+
+1. _{ more test cases to come …​ }_
+
+
+#### Edit Personal Detail
+
+1. _{ more test cases to come …​ }_
+
+
+#### Add Grade
+
+1. _{ more test cases to come …​ }_
+
+#### Edit Attendance
+
+1. _{ more test cases to come …​ }_
+
+#### Edit Participation
+
+1_{ more test cases to come …​ }_
+
+#### View student information
+
+1. _{ more test cases to come …​ }_
+
+#### Show Grade
+
+1. _{ more test cases to come …​ }_
+
+#### Visualize all Grades
+
+1. _{ more test cases to come …​ }_
+
+#### Filter Academy Directory
+
+1. _{ more test cases to come …​ }_
+
+#### Sort Student List
+
+1. _{ more test cases to come …​ }_
+
+#### List All Students
+
+1. _{ more test cases to come …​ }_
+
+#### Clear Student List
+
+1. _{ more test cases to come …​ }_
+
+#### Undo Changes
+
+1. _{ more test cases to come …​ }_
+
+#### Redo Changes
+
+1. _{ more test cases to come …​ }_
+
+#### Help
+
+1. _{ more test cases to come …​ }_
+
+#### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+2. _{ more test cases to come …​ }_
+
+### UI Testing
+
+#### Buttons
 
 1. _{ more test cases to come …​ }_
