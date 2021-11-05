@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
+import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.common.Note;
 import seedu.notor.ui.ConfirmationWindow;
@@ -61,6 +62,7 @@ public class GeneralNoteWindow extends NoteWindow {
         ViewPanel viewPane = new ViewPanel(logic.getNotor().getNote());
         notePane.getChildren().add(viewPane.getRoot());
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
+        logger.info(MESSAGE_SAVE_NOTE_SUCCESS);
     }
 
 
@@ -82,8 +84,17 @@ public class GeneralNoteWindow extends NoteWindow {
             return false;
         }
 
-        GeneralNoteWindow otherPerson = (GeneralNoteWindow) other;
-        return otherPerson.notor.equals(this.notor);
+        GeneralNoteWindow otherGeneralNoteWindow = (GeneralNoteWindow) other;
+        return otherGeneralNoteWindow.notor.equals(this.notor);
+    }
+
+    @Override
+    public boolean belongsTo(Notable notable) {
+        if (notable instanceof Notor) {
+            Notor otherNotor = (Notor) notable;
+            return otherNotor.equals(notor);
+        }
+        return false;
     }
 
     /**
@@ -94,5 +105,6 @@ public class GeneralNoteWindow extends NoteWindow {
         getRoot().close();
         OPENED_NOTE_WINDOWS.remove(this);
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS));
+        logger.info(MESSAGE_EXIT_NOTE_SUCCESS);
     }
 }
