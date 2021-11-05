@@ -109,7 +109,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-![Parser Classes](images/ParserClassDiagram.png)
+![Parser Classes](images/ParserClasses.png)
 
 How the parsing works:
 * When called upon to parse a user command, the `SourceControlParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `SourceControlParser` returns back as a `Command` object.
