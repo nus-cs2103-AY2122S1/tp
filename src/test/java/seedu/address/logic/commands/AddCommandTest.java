@@ -221,6 +221,16 @@ public class AddCommandTest {
         public void setViewAllTasksFindPred(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setIsViewAllTasks(boolean isViewAllTasks) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsViewAllTasks() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

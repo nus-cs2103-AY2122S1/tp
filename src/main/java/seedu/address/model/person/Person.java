@@ -86,6 +86,13 @@ public class Person implements Comparable<Person> {
     }
 
     /**
+     * Returns the mutable task lists of this {@code Person}.
+     */
+    public List<Task> getModifiableTasks() {
+        return tasks;
+    }
+
+    /**
      * Returns the number of tasks that are overdue.
      */
     public int getOverdueTasks() {
@@ -132,17 +139,17 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Removes tasks from the task list that returns false upon
-     * application {@code predicates}'s test method.
+     * Returns a {@code List<Task>} containing tasks that returned true
+     * upon application of {@code predicates}'s test method.
      */
-    public void filterTasks(Predicate<Task> predicate) {
-        List<Task> tasksToRemove = new ArrayList<>();
+    public List<Task> filterTasks(Predicate<Task> predicate) {
+        List<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (!predicate.test(task)) {
-                tasksToRemove.add(task);
+            if (predicate.test(task)) {
+                filteredTasks.add(task);
             }
         }
-        tasks.removeAll(tasksToRemove);
+        return filteredTasks;
     }
 
     /**
