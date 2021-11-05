@@ -45,10 +45,6 @@ public class GroupRemoveLessonParser implements Parser<GroupRemoveLessonCommand>
                     MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
-        if (indexes.size() != INDEX_NUM) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    String.format(MESSAGE_WRONG_INDEX_NUM_FORMAT, INDEX_NUM, indexes.size())));
-        }
         return new GroupRemoveLessonCommand(indexes.get(0), indexes.get(1));
     }
 }

@@ -29,7 +29,7 @@ public class PersonAddExamParser implements Parser<EditPersonCommand> {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_DAY + ParserUtil.DATE_TIME_FORMAT + "] ";
-    public static final String ADD_EXAM_SUCCESS = "Exam added: %1$s";
+    public static final String ADD_EXAM_SUCCESS = "Exam added to person:\n%s";
 
     @Override
     public EditPersonCommand parse(String userInput) throws ParseException {

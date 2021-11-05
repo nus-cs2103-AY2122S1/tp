@@ -34,7 +34,7 @@ public class PersonAddLessonParser implements Parser<EditPersonCommand> {
             + "[" + PREFIX_START_TIME + "HH:MM START TIME] "
             + "[" + PREFIX_END_TIME + "HH:MM END TIME] "
             + "[" + PREFIX_DAY + "DAY] ";
-    public static final String ADD_LESSON_SUCCESS = "Lesson added: %1$s";
+    public static final String ADD_LESSON_SUCCESS = "Lesson added to person:\n%s";
 
     @Override
     public EditPersonCommand parse(String userInput) throws ParseException {
