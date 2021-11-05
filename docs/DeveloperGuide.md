@@ -22,9 +22,8 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+ProgrammerError makes use of the following third-party libraries:
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,9 +38,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
-Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
-diagrams.
+the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder.
 </div>
 
 ### Architecture
@@ -66,9 +63,9 @@ is responsible for,
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): ProgrammerError's UI.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of ProgrammerError in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 **How the architecture components interact with each other**
@@ -100,15 +97,21 @@ in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`
+The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
 , `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. 
+They inherit from the abstract class `PopupWindow`, 
+which captures the commonalities between classes that represent popup information to be displayed to the user.
+
+The `UI` component uses the JavaFx UI framework. 
+- The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
 in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+- The styling of the UI components are defined in the `src/main/resources/view/css` folder.
 
 The `UI` component,
 
