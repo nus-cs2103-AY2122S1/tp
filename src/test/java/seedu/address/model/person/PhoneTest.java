@@ -31,4 +31,42 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
+
+    @Test
+    public void toString_aValidInput_correctOutput() {
+        String phoneNumber = "12345678";
+        Phone phone = new Phone(phoneNumber);
+        assertTrue(phoneNumber.equals(phone.toString()));
+    }
+
+    @Test
+    public void equals_twoSameObjects_correctOutput() {
+        String phoneNumber = "12345678";
+        Phone phone = new Phone(phoneNumber);
+        assertTrue(phone.equals(phone));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithSameNumber_correctOutput() {
+        String phoneNumber = "12345678";
+        Phone phone1 = new Phone(phoneNumber);
+        Phone phone2 = new Phone(phoneNumber);
+        assertTrue(phone1.equals(phone2));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithDifferentNumber_correctOutput() {
+        String phoneNumber1 = "12345678";
+        String phoneNumber2 = "87654321";
+        Phone phone1 = new Phone(phoneNumber1);
+        Phone phone2 = new Phone(phoneNumber2);
+        assertFalse(phone1.equals(phone2));
+    }
+
+    @Test
+    public void hashCode_validInput_correctOutput() {
+        String phoneNumber = "12345678";
+        Phone phone = new Phone(phoneNumber);
+        assertTrue(phone.hashCode() == -1861353340);
+    }
 }
