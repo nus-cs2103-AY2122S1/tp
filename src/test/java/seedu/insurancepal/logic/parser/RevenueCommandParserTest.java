@@ -1,8 +1,8 @@
 package seedu.insurancepal.logic.parser;
 
-import static seedu.insurancepal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.insurancepal.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.insurancepal.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.insurancepal.logic.parser.RevenueCommandParser.INVALID_REVENUE_COMMAND_FORMAT;
 import static seedu.insurancepal.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ public class RevenueCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "     ", String.format(INVALID_REVENUE_COMMAND_FORMAT,
                 RevenueCommand.COMMAND_WORD));
     }
 
@@ -32,7 +32,7 @@ public class RevenueCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // no leading and trailing whitespaces
-        assertParseFailure(parser, "1 r10", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "1 r10", String.format(INVALID_REVENUE_COMMAND_FORMAT,
                 RevenueCommand.COMMAND_WORD));
     }
 }
