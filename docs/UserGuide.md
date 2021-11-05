@@ -284,8 +284,7 @@ This section guides you on how to find or filter students of your choice in TAB.
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 
-Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE]
-[time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
+Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
 
 * You must specify at least one field to search for, and provide at least one keyword.<br>
   e.g. `find cond/any` or `find n/` are invalid commands.
