@@ -57,44 +57,55 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of TutorAid.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+The architecture of TutorAid can first be divided into 6 components: `Main`, `Commons`, `UI`, `Logic`, `Model` and `Storage`
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+1. `Main`
+* Has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/MainApp.java).
+* It is responsible for the following operations:
+  * At app launch: Initializes the components in the correct sequence, and connects them up with each other. 
+  * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-The rest of the App consists of four components.
+2. [**`Commons`**](#common-classes)
+* Represents a collection of classes used by multiple other components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+3. [**`UI`**](#ui-component)
+* Represents the UI of the App.
+  
+4. [**`Logic`**](#logic-component)
+* Serves as the command executor.
+  
+5. [**`Model`**](#model-component)
+* Holds the data of the App in memory.
+  
+6. [**`Storage`**](#storage-component)
+* Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `del -s 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the four main components shown in the diagram above:
+* Defines its *API* in an `interface` with the same name as the component.
+* Implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned above).
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
-
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface. It also implements its functionality using the `LogicManager.java` class, which is based on the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class as illustrated in the (partial) class diagram below. It is designed as such to prevent outside components being coupled to the implementation of a component.
 
 <img src="images/ComponentManagers.png" width="300" />
 
-The sections below give more details of each component.
+### Components
 
-### UI component
+The sections below provide more details on the following components: `UI`, `Logic`, `Model` and `Storage`.
+
+#### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/ui/Ui.java)
 
@@ -111,36 +122,66 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` and `Lesson` objects residing in the `Model`.
 
-### Logic component
+#### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+The `Logic` component mainly works in 2 different ways for 2 different types of commands:
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+**Commands with a unique command word**
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+This applies to the commands `help`, `clear` and `exit`.
+  
+The `Logic` component works as such:
+1. When `Logic` is called upon to execute a command, it uses the `TutorAidParser` class to parse the user command.
+2. This results in a `Command` object (or more precisely, an object of one of its subclasses e.g., `HelpCommand`), which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to open the help window).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("help")` API call.
+
+![Interactions Inside the Logic Component for the `help` Command](images/HelpSequenceDiagram.png)
+  
+**Commands with non-unique command word**
+
+Commands that have the same command word as (at least) 1 other command (e.g. `add -s` and `add -l`) is known to have a non-unique command word.
+This applies to all the commands in TutorAid apart from those mentioned in the section above.
+
+The process of parsing for commands with non-unique command words differs from those with unique command words as an additional step is required to differentiate between commands that share the same command word.
+
+Below are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a command with non-unique command words:
+
+<img src="images/ParserClasses.png" width="600"/>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: All `XYCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing
+</div>
+
+The `Logic` component works as such:
+1. When `Logic` is called upon to execute a command, it uses the `TutorAidParser` class to parse the user command.
+2. The result of the above step is then **further parsed** by another `Parser` class (specifically a class named after a command word e.g., `AddCommandParser`).
+3. A `Command` object (or more precisely, an object of one of its subclasses e.g., `AddStudentCommand`) is then created and is executed by the `LogicManager`.
+4. The command can communicate with the `Model` when it is executed (e.g. to add a student).
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+Here's a Sequence Diagram that illustrates the interactions within the `Logic` component for the `execute("del -s 1")` API call.
+
+![Interactions Inside the Logic Component for the `del -s 1` Command](images/DeleteStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+<div markdown="span" class="alert alert-primary">
 
-<img src="images/ParserClasses.png" width="600"/>
+:bulb: Most of the interactions between the `DeleteStudentCommand` object and the objects of the `Model` class have not been depicted in this diagram as the focus lies in the interactions within the `Logic` class.
+</div>
 
-How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
-
-### Model component
+#### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -160,7 +201,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+#### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 

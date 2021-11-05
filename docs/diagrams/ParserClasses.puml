@@ -9,8 +9,8 @@ Class XYZCommand
 
 package "Parser classes"{
 Interface Parser <<Interface>>
-Class AddressBookParser
-Class XYZCommandParser
+Class TutorAidParser
+Class XYCommandParser
 Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
@@ -19,19 +19,19 @@ Class Prefix
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
+HiddenOutside ..> TutorAidParser
 
-AddressBookParser .down.> XYZCommandParser: creates >
+TutorAidParser .down.> XYCommandParser: creates >
 
-XYZCommandParser ..> XYZCommand : creates >
-AddressBookParser ..> Command : returns >
-XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
-XYZCommandParser ..> ArgumentTokenizer
+XYCommandParser ..> XYZCommand : creates >
+TutorAidParser ..> Command : returns >
+XYCommandParser .up.|> Parser
+XYCommandParser ..> ArgumentMultimap
+XYCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
-XYZCommandParser ..> CliSyntax
+XYCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
-XYZCommandParser ..> ParserUtil
+XYCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
