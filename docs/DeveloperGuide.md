@@ -541,7 +541,7 @@ The reminder feature allows users to view a list of upcoming lessons that ends i
   - lessons with the following dates and time are not considered upcoming:
     - dates before 1 Nov 2021 (has passed),
     - 1 Nov 2021 with end time before 1500h (has passed),
-    - 3 Nov 2021 with start time after 1500 (beyond 48 hours).
+    - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
 
 Viewing a list of upcoming lessons is facilitated by `CalendarEntryList`.
 - `CalendarEntryList` holds all lesson entries as well as a separate list of lessons that are considered upcoming. 
