@@ -88,6 +88,7 @@ public class EditPersonCommand extends Command {
         model.deletePerson(personToEdit);
         if (model.hasPerson(editedPerson)) {
             model.addPerson(personToEdit);
+            model.sortConthacks();
             throw new CommandException(MESSAGE_SAME_PERSON);
         }
         model.addPerson(personToEdit);
