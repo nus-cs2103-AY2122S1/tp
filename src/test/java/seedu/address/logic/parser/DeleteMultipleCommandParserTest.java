@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.DeleteMultipleCommand.MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE;
-import static seedu.address.logic.commands.DeleteMultipleCommand.MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -12,6 +11,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteMultipleCommand;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.MultiplePredicates;
 import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
@@ -34,9 +34,7 @@ public class DeleteMultipleCommandParserTest {
 
     @Test
     public void parse_emptyKeyword_throwsParseException() {
-        assertParseFailure(parser, " n/ n/Alice    ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Name",
-                        DeleteMultipleCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/ n/Alice    ", String.format(Name.MESSAGE_CONSTRAINTS));
     }
 
     @Test
