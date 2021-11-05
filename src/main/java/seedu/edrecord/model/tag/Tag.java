@@ -9,7 +9,7 @@ import static seedu.edrecord.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric. Only 1-15 characters allowed.";
     public static final String VALIDATION_REGEX = "^\\p{Alnum}{1,15}$";
 
     public final String tagName;
