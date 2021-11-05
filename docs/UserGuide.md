@@ -14,11 +14,11 @@ such as filtering and searching students. Finally, it will also guide
 you through on how you can add class participation marks for your students.
 
 The first part is a guide on how to set up ClassMATE and an overview of the symbols and syntax we use in the user guide.
-The remaining sections explain the important features of ClassMATE, such as the Student, 
-Marks, Tutorial Class and Tutorial Group Commands. 
+The remaining sections explain the important features of ClassMATE, such as the Student,
+Marks, Tutorial Class and Tutorial Group Commands.
 
-Use the Table of Contents below to 
-navigate to relevant sections to learn the commands for ClassMATE. 
+Use the Table of Contents below to
+navigate to relevant sections to learn the commands for ClassMATE.
 
 * Table of Contents
 {:toc}
@@ -56,11 +56,11 @@ We hope you find this User Guide helpful in using ClassMATE!
 1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
    * **`liststu`** : Lists all students.
-   
+
    * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
-   
+
    * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
-   
+
    * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
@@ -113,12 +113,12 @@ Adds a student to ClassMATE.
 
 Entering format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:information_source: **Notes about addstu:** <br> 
+<div markdown="span" class="alert alert-info">:information_source: **Notes about addstu:** <br>
 
 * The Name of a student accommodates special characters such as hyphens, apostrophes and slashes.
 * The phone number should be at least 3 digits long.
 * The tutorial class with the given Class Code must already exist in classmate.
-* A student can have any number of tags (including 0) 
+* A student can have any number of tags (including 0)
 
 </div>
 
@@ -265,7 +265,7 @@ Clears all students from ClassMATE. Below is how it would look like.
 Entering format: `clear`
 
 <div markdown="span" class="alert alert-primary">:warning: **Warning:**
-This command deletes **ALL** students and is irreversible :warning: 
+This command deletes **ALL** students and is irreversible :warning:
 </div>
 
 ## Tutorial Class Commands
@@ -276,7 +276,7 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Note:** 
+<div markdown="span" class="alert alert-primary"> :bulb: **Note:**
 
 * Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
 * Schedule consists of 2 weekly timeslots

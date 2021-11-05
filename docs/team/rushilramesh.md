@@ -37,7 +37,7 @@ Given below are my contributions to the project.
         * This implementation involved the creations of more `Predicate` classes to filter the students out. In addition,
         I made changes to the UI, including setting the layout of the main page and the UI of the individual students and tutorial classes.
         I also implemented the list class feature which brings the user back to the original list of classes.
-    * Enchancement to existing feature: Student managment features. 
+    * Enchancement to existing feature: Student management features.
         * PR [\#135](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/135)
         * Adjusted student functionality, such as preventing students from being added to an empty class and adding a classcode.
         * These features were related to tutorial class, therefore some of my other PRs include updates to student management features.
