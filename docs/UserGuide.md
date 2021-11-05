@@ -14,7 +14,7 @@ title: User Guide
   - [Add elderly details](#add-elderly-details--add)
   - [Delete an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
   - [Edit an elderly](#edit-an-elderly--edit)
-  - [List all elderly](#list-elderly--list)
+  - [List all or selected elderly](#list-all-or-selected-elderly--list)
   - [Sort elderly by visit](#sort-elderly-by-visit--sort)
   - [Find elderly by attribute](#find-elderly-by-attribute--find)
   - [Schedule a visit to an elderly](#schedule-a-visit-to-an-elderly--visit)
@@ -48,7 +48,7 @@ title: User Guide
 
    * `delete 3` : Deletes the 3rd elderly shown in the current list.
 
-   * `list` : Lists all elderly.
+   * `list n/` : Lists all elderly.
 
    * `find Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
 
@@ -127,7 +127,7 @@ Quarterly | Every 90 days
 * If a parameter is expected but two consecutive flags are given (i.e. no spaces between two flags), only the first parameter will be taken.<br>
   e.g. if you specify `sort v/lv/`, only `v/` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -218,23 +218,23 @@ Examples:
 *  `edit 2 n/Betsy Crower h/`
    > Edits the name of the 2nd elderly to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
 
-### List elderly : `list`
+### List all or selected elderly : `list`
 
 Shows a list of all or selecteded elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
-Format: `list [w/] [m/]`
+Format: `list [CRITERION_FOR_LISTING]`
 
-* `list` without any prefix displays all the elderly in the alphabetical order of their names.
+* `list n/` displays all the elderly in the alphabetical order of their names.
 * `list w/` displays all the elderly with an incoming visit in the next week.
 * `list m/` displays all the elderly with an incoming visit in the next month.
 
 <div markdown="block" class="alert alert-info">
 :exclamation: Take note!
-* `w/` and `m/` fields cannot be both present.
+* Exactly one of the `n/`, `w/` and `m/` fields need to be present.
 </div>
 
 Examples:
-* `list`
+* `list n/`
   > Displays all the elderly.
 * `list m/`
   > Displays all the elderly with an incoming visit in the next month.
@@ -404,7 +404,7 @@ Action | Format, Examples
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/2021-11-12 16:30 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
-**list** | `list [w/] [m/]` <br> e.g., `list`<br> e.g., `list w/`<br> e.g., `list m/`
+**list** | `list [CRITERION_FOR_LISTING]` <br> e.g., `list n/`<br> e.g., `list w/`<br> e.g., `list m/`
 **sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **summary** | `summary`
 **clear** | `clear`
