@@ -44,5 +44,5 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#91](), [\#104](), [\#116]()
-    * Reported bugs and suggestions for other teams in the class
+    * Reported bugs and suggestions for other teams in the class: [1](https://github.com/Zhou-Jiahao-1998/ped/issues/1), [2](https://github.com/Zhou-Jiahao-1998/ped/issues/2), [3](https://github.com/Zhou-Jiahao-1998/ped/issues/3)
 
