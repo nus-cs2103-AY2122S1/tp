@@ -1445,7 +1445,7 @@ testers are expected to do more *exploratory* testing.
 
     *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
-    *  Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that produces a data file that conforms to the constraints mentioned in the application. Below are some critical constraints to take note of but please refer to the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the full list.<br>
+    *  Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that produces a data file that conforms to the constraints mentioned in the application. Below are some critical constraints that are unique in the storage file. For other possible inputs to test with, view the other sections presented under this [appendix](#appendix-b-instructions-for-manual-testing) or the .<br>
        Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
 
        :information_source: **Note:**
@@ -1467,7 +1467,7 @@ testers are expected to do more *exploratory* testing.
          }
          ```
          Do note once again that enrolling a student using the data storage must fulfil the enrollment constraints.<br>
-         See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the remaining constraints present.<br>
+         Review the [appendix](#appendix-b-instructions-for-manual-testing) for the remaining constraints present.<br>
 
     *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
        Expected (continued): After the UI responds, verify that `./data/tuitione.json` is not modified, and holds the changes you made in the initial step.
