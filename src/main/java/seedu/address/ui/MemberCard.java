@@ -54,10 +54,10 @@ public class MemberCard extends UiPart<Region> {
         phone.setText("Phone: " + member.getPhone().value);
         member.getAddress().ifPresentOrElse(a -> {
             address.setText("Address: " + a.value);
-        }, () -> address.setVisible(false));
+        }, () -> address.setText("Address: NIL"));
         member.getEmail().ifPresentOrElse(e -> {
             email.setText("Email: " + e.value);
-        }, () -> email.setVisible(false));
+        }, () -> email.setText("Email: NIL"));
         member.getPositions().stream()
                 .sorted(Comparator.comparing(position -> position.positionName))
                 .forEach(position -> {

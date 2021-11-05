@@ -26,7 +26,6 @@ Class Position
 
 Class UniqueEventList
 Class Event
-Class EventName
 Class EventDate
 
 Class TaskList
@@ -46,7 +45,7 @@ Model ..left.> ReadOnlyAddressBook
 ModelManager --left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
-ModelManager -> "1\n manager" TaskList
+ModelManager -> "1" TaskList
 
 AddressBook *--> "1" UniqueMemberList
 UniqueMemberList --> "~* all" Member

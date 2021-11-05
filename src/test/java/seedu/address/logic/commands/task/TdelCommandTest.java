@@ -225,25 +225,12 @@ class TdelCommandTest {
         }
 
         @Override
-        public void deleteTask(Member member, Task task) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
+        public void deleteTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTask(Task target, Task editedTask) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        /**
-         * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
-         */
-        @Override
-        public void setTask(int index, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -291,6 +278,7 @@ class TdelCommandTest {
         private final Member member;
         private final Task task;
         private TaskList taskListManager;
+        private FilteredList<Task> filteredTasks;
         private final FilteredList<Member> filteredMembers;
         // The current selected member
         private Member currentMember;
@@ -303,11 +291,17 @@ class TdelCommandTest {
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskList();
+            this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
         }
 
         @Override
         public ObservableList<Member> getFilteredMemberList() {
             return filteredMembers;
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            return filteredTasks;
         }
 
         @Override
@@ -324,6 +318,11 @@ class TdelCommandTest {
         }
 
         @Override
+        public void deleteTask(Task task) {
+            taskListManager.remove(task);
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return this.addressBook;
         }
@@ -333,14 +332,9 @@ class TdelCommandTest {
             requireNonNull(member);
             if (this.taskListManager != member.getTaskList()) {
                 this.taskListManager = member.getTaskList();
+                this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
                 this.currentMember = member;
             }
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
-            loadTaskList(member);
-            taskListManager.remove(index);
         }
 
         @Override
@@ -376,6 +370,11 @@ class TdelCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            return filteredTasks;
+        }
+
+        @Override
         public boolean hasTask(Member member, Task task) {
             loadTaskList(member);
             return taskListManager.contains(task);
@@ -389,6 +388,11 @@ class TdelCommandTest {
         }
 
         @Override
+        public void deleteTask(Task task) {
+            taskListManager.remove(task);
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return this.addressBook;
         }
@@ -398,14 +402,9 @@ class TdelCommandTest {
             requireNonNull(member);
             if (this.taskListManager != member.getTaskList()) {
                 this.taskListManager = member.getTaskList();
+                this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
                 this.currentMember = member;
             }
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
-            loadTaskList(member);
-            taskListManager.remove(index);
         }
 
         @Override
