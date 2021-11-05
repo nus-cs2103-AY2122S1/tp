@@ -776,7 +776,7 @@ This section lists all the available commands in TAB, along with examples on how
 The commands are categorised into 4 different categories:
 * [Managing Students](#students)
 * [Managing Lessons](#lessons)
-* [Switching Between Views](#switching-between-views)
+* [Navigating the UI](#navigating-the-ui)
 * [General](#general)
 <br/>
 
@@ -784,42 +784,42 @@ The commands are categorised into 4 different categories:
 
 Action | Format, Examples
 --------|------------------
-**Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
-**Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
-**Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
-**Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
+[**Add Student**](#adding-a-student-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
+[**Edit Student**](#editing-a-student-edit) | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
+[**Delete Student**](#deleting-a-student-delete) | `delete INDEX`<br><br> e.g. `delete 3`
+[**Find Students**](#finding-students) | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 
 ### Lessons
 
 Action | Format, Examples
 --------|------------------
-**Add Lesson** | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
-**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
-**Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
-**Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+[**Add Lesson**](#adding-a-lesson-ladd) | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
+[**Edit Lesson**](#editing-a-lesson--ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+[**Delete Lesson**](#deleting-a-lesson--ldelete) | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
+[**Pay Lesson**](#paying-a-lessons-outstanding-fees-paid) | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
-### Switching Between Views
+### Navigating the UI
 
 Action | Format
 --------|------------------
-**List Students** | `list`
-**View Tags** | `tag`
-**View Calendar** | `calendar`
-**View Daily Calendar** | `day`
-**View Weekly Calendar** | `week`
-**View Monthly Calendar** | `month`
-**View Yearly Calendar** | `year`
-**Navigate to Today in Calendar** | `today`
-**Navigate forward in Calendar** | `next`
-**Navigate backward in Calendar** | `back`
-**View Reminders** | `remind`
+[**List Students**](#listing-all-students-list) | `list`
+[**View Tags**](#viewing-all-tags-tag) | `tag`
+[**View Calendar**](#switching-to-the-calendar-interface-calendar) | `calendar`
+[**View Daily Calendar**](#viewing-your-daily-calendar-day) | `day`
+[**View Weekly Calendar**](#viewing-your-weekly-calendar-week) | `week`
+[**View Monthly Calendar**](#viewing-your-monthly-calendar-month) | `month`
+[**View Yearly Calendar**](#viewing-your-weekly-calendar-year) | `year`
+[**Navigate to Today in Calendar**](#navigate-to-today-in-the-calendar-today) | `today`
+[**Navigate forward in Calendar**](#navigating-forward-in-the-calendar-next) | `next`
+[**Navigate backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
+[**View Reminders**](#viewing-upcoming-lessons--remind) | `remind`
 
 ### General
 
 Action | Format
 --------|------------------
-**Help** | `help`
-**Clear** |`clear`
-**Undo** | `undo`
-**Redo** | `redo`
-**Exit** | `exit`
+[**Help**](#viewing-help-help) | `help`
+[**Clear**](#clearing-all-entries-clear) |`clear`
+[**Undo**](#undoing-previous-command-undo) | `undo`
+[**Redo**](#redoing-undone-command-redo) | `redo`
+[**Exit**](#exiting-the-program-exit) | `exit`
