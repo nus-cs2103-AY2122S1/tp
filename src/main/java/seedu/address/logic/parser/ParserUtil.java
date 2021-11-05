@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Address;
@@ -30,7 +28,7 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex, ParseException exception) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
 
         //Check for - symbol or 0 as first element
@@ -43,8 +41,7 @@ public class ParserUtil {
         for (int i = 0; i < trimmedIndex.length(); i++) {
             char element = trimmedIndex.charAt(i);
             if (!Character.isDigit(element)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddToFolderCommand.MESSAGE_USAGE));
+                throw exception;
             }
         }
 

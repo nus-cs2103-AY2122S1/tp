@@ -19,7 +19,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(DeleteCommand.MESSAGE_USAGE);
         }
 
-        Index index = ParserUtil.parseIndex(args);
+        Index index = ParserUtil.parseIndex(args, new ParseException(DeleteCommand.MESSAGE_USAGE));
         return new DeleteCommand(index);
     }
 

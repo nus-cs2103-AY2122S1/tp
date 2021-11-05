@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
@@ -43,7 +44,8 @@ public class AddToFolderCommandTest {
         FolderName folderName = new FolderName("Folder 1");
         Folder validFolder = new Folder(folderName);
         modelStub.addFolder(validFolder);
-        Index index = ParserUtil.parseIndex("1");
+        Index index = ParserUtil.parseIndex("1", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE)));
         List<Index> indexList = new ArrayList<Index>();
         indexList.add(index);
         CommandResult commandResult = new AddToFolderCommand(indexList, folderName).execute(modelStub);
@@ -55,7 +57,8 @@ public class AddToFolderCommandTest {
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
         ModelStubContainingDuplicate modelStub = new ModelStubContainingDuplicate();
         FolderName folderName = new FolderName("Folder 1");
-        Index index = ParserUtil.parseIndex("2");
+        Index index = ParserUtil.parseIndex("2", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE)));
         List<Index> indexList = new ArrayList<>();
         indexList.add(index);
 
@@ -66,13 +69,15 @@ public class AddToFolderCommandTest {
     public void equals() throws ParseException {
         FolderName cs2100FolderName = new FolderName("CS2100");
         Folder cs2100 = new Folder(cs2100FolderName);
-        Index indexOne = ParserUtil.parseIndex("1");
+        Index indexOne = ParserUtil.parseIndex("1", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE)));
         List<Index> indexListOne = new ArrayList<Index>();
         indexListOne.add(indexOne);
 
         FolderName cs2103FolderName = new FolderName("CS2103");
         Folder cs2103 = new Folder(cs2103FolderName);
-        Index indexTwo = ParserUtil.parseIndex("2");
+        Index indexTwo = ParserUtil.parseIndex("2", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE)));
         List<Index> indexListTwo = new ArrayList<Index>();
         indexListOne.add(indexTwo);
 

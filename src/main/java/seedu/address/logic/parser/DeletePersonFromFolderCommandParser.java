@@ -57,7 +57,8 @@ public class DeletePersonFromFolderCommandParser
     private Index extractIndex(
             String[] inputsToConvertToCommand) throws ParseException {
         String indexString = inputsToConvertToCommand[0];
-        return ParserUtil.parseIndex(indexString);
+        return ParserUtil.parseIndex(indexString, new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeletePersonFromFolderCommand.MESSAGE_USAGE)));
     }
 
 

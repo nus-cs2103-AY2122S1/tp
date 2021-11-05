@@ -60,7 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
         }
 
-        index = ParserUtil.parseIndex(preamble);
+        index = ParserUtil.parseIndex(preamble, new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE)));
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
