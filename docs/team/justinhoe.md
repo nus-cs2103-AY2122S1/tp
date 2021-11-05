@@ -3,21 +3,21 @@ layout: page
 title: Justin Hoe's Project Portfolio Page
 ---
 
-### Project: Connections
+### Project: CONNECTIONS
 
-Connections is a desktop address book application used for teaching Software Engineering principles. 
+CONNECTIONS is a desktop address book application used for teaching Software Engineering principles. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
 It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
 * **New Feature**: Added a Birthday Reminder List
-    * The display contacted sorted by birthdays in ascending order, starting with the 
+    * The list displays contacts sorted by birthdays in ascending order, starting with the 
       nearest upcoming birthday all the way through the latest birthday and then looping back 
       to the earliest birthday.
-    * The list is responsive to changes in contact details be it add, delete or edit command. The list 
+    * The list is responsive to changes in contact details be it using add, delete or edit command. The list 
       reorders contacts where appropriate to ensure it stays sorted as described above.
-    * Birthday at present day and coming within 7 days are color coded as well as personalised message.
+    * Birthday at present day and upcoming birthdays within 7 days are color coded and provided with personalised message.
     * This feature would allow our target user, a person who loves birthday celebrations, always wish contacts on
     their birthday.
     * Account for birthdays that fall on leap days by ensuring they are brought forward to 28th Feb on non leap years.
