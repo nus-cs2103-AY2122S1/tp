@@ -21,7 +21,7 @@ activate Model
 
 alt "grade and subject are present"
     Model -> Model : filter students subject, and\nfilter lessons by subject & grade
-    
+
 else "only subject is present"
     Model -> Model : filter lessons by subject
 

@@ -1268,7 +1268,7 @@ testers are expected to do more *exploratory* testing.
 1. Exiting using the window close button
 
     1. Test case: Press the close button on the window of the application.<br>
-       Expected: The window should close.  
+       Expected: The window should close.
 
 1. Exiting using the application's exit button
 
@@ -1304,8 +1304,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that produces a data file that conforms to the constraints mentioned in the application. Below are some critical constraints to take note of but please refer to the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the full list.<br>
        Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
 
-       :information_source: **Note:** 
-       
+       :information_source: **Note:**
+
        * Particulars in a `student` object must conform to the constraints of the application.
 
        * Particulars in a `lesson` object must conform to the constraints of the application.
