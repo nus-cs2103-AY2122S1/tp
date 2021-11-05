@@ -19,11 +19,6 @@ Given below are my contributions to the project.
   * Justification: The previous implementation needed users to re-type existing remarks if they wanted to keep existing remarks and add new ones. It also did not allow users to delete individual remarks. This feature saves the user time if they want to add or delete remarks, and makes it more convenient for them.
   * Highlights: This required editing existing classes and methods to check for remarks to delete and add. It required analysing what the target user would most likely do with the remarks feature in the app, and re-designing the feature to better suit their needs. It required considering various new checks on the inputs as well.
 
-* **New Feature**: Added ability to edit the grade of students.
-  * What it does: Allows the user to just change the grade of the students without adding the same student again into the application. It also unenrolls the student from all the lessons that he is currently enrolled in with his current grade.
-  * Justification: This makes it more convenient for the user to manage students.
-  * Highlights: This required editing existing classes to check if the user wants to edit the student's grade, and required ensuring different components that are linked interacted with each other correctly upon invocation of this feature.
-
 * **New Feature**: Added feature where student list is sorted by student names, and lesson list is sorted by grade.
   * What it does: Student list is now displayed in sorted ascending order by student names, and lesson list is sorted by grade, from 'P1' to 'S5'.
   * Justification: This allows users to view a more organised list of students and lessons, making look ups more efficient.
@@ -39,6 +34,7 @@ Given below are my contributions to the project.
   * Creating tags and milestones on Github
 
 * **Enhancements to existing features**:
+  * Enhanced edit feature by allowing editiing of student's grade (Pull requests [\#148](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/148), [\#137](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/137))
   * Updated the GUI (Pull requests [\#286](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/286), [\#282](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/282))
   * Wrote additional tests for existing features to increase coverage (Pull requests [\#94](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/94), [\#181](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/181))
   * Updated validity checks and constraints for existing features (Pull requests [\#282](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/282), [\#203](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/203), [\#187](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/187))
