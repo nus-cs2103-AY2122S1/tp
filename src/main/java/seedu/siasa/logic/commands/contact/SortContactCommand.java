@@ -25,7 +25,7 @@ public class SortContactCommand extends Command {
 
     public static final String MESSAGE_NO_SUCH_COMPARATOR = "No such sorting order";
 
-    public static final String MESSAGE_NO_POLICIES = "There are no policies to sort.";
+    public static final String MESSAGE_NO_POLICIES = "There are no policies to sort";
 
     private final Comparator<Contact> comparator;
 

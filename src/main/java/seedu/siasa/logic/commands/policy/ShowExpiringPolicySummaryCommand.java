@@ -16,7 +16,7 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicysummary";
 
-    public static final String MESSAGE_NO_POLICIES = "There are no policies that are expuring.";
+    public static final String MESSAGE_NO_POLICIES = "There are no policies that are expiring";
 
     public static final String MESSAGE_SUCCESS_PLURAL = "There are %d policies expiring within 1 month.\n"
             + "use the 'expiringpolicy' command to see which ones.";

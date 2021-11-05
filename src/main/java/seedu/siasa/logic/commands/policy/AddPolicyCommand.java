@@ -56,8 +56,8 @@ public class AddPolicyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified contact";
-    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future.";
-    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the SIASA.";
+    public static final String MESSAGE_NOT_FUTURE_EXPIRY_DATE = "Expiry Date is not in the future";
+    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the SIASA";
 
     private final Title title;
     private final PaymentStructure paymentStructure;
