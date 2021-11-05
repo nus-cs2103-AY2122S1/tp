@@ -49,9 +49,9 @@ This guide aims to help users get familiar with using RecruitIn's features.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Note for all users:**<br>
 
-* If this is your first time reading this user guide, it is recommended that you visit [Glossary](#glossary) and [Features](#features) to familiarize
+* If this is your **first time** reading this user guide, it is **recommended** that you visit [Glossary](#glossary) & [Features](#features) to familiarize
   yourself with the terminology and text formatting used in this user guide. This will help you better understand the user guide.
 
 * If you still wish to skip directly to the feature descriptions, or if you need a refresher on the important terminologies and text formatting used
