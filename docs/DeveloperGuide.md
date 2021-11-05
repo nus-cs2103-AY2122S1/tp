@@ -161,15 +161,15 @@ This section describes some noteworthy details on how certain features are imple
 The `take` command is implemented via the `TakeCommand` and `TakeCommandParser` classes.
 
 The `TakeCommandParser` class implements the `Parser` interface and is responsible for parsing the user input to retrieve the index and `AcademicYear` object which represents the year and semester. <br>
-The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object with the index and the `AcademicYear` object as arguments.
+The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object containing the index and the `AcademicYear` object.
 
 The `TakeCommand` class extends the `Command` class and implements the `TakeCommand#execute()` method which handles the main logic of the class. <br>
 It contains non-null `index` and `academicCalendar` fields. <br>
 When the `TakeCommand#execute()` method is called,
 
 - The `Module` object corresponding to the `index` is found from the `Model`.
-- A copy of the `Module` object is made with the value of `academicCalendar`, which is stored in its corresponding field in the copy.
-- The `Module` object in the Model is then replaced by this copy.
+- A copy of the `Module` object containing the value of `academicCalendar` is created. The value of `academicCalendar` is stored in a corresponding field in this copy.
+- The `Module` object in the `Model` is then replaced by this copy.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**
