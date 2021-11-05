@@ -45,7 +45,7 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
-     * Returns true if the list contains an equivalent student as the given argument.
+     * Returns true if the list contains an equivalent student with the same Email as the given argument.
      */
     public boolean containsSameEmail(Student toCheck) {
         requireNonNull(toCheck);
@@ -54,7 +54,7 @@ public class UniqueStudentList implements Iterable<Student> {
 
 
     /**
-     * Returns true if the list contains an equivalent student as the given argument.
+     * Returns true if the list contains an equivalent student with the same Student Id as the given argument.
      */
     public boolean containsSameStudentId(Student toCheck) {
         requireNonNull(toCheck);
