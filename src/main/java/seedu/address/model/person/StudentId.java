@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student ID must be valid, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Student ID must be valid ie starting with a or A followed by"
+            + " 7 digits and a single alphabet, and it should not be blank\nExample: a0123456m, A1234567N";
 
     /*
      * Regex for the Student ID.

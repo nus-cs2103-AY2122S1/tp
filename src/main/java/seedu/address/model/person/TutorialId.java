@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TutorialId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tutorial ID must be valid, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Tutorial ID must be valid ie a 2 digits, and it should not be"
+            + " blank";
 
     /*
      * Regex for the Tutorial ID.
