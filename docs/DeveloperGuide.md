@@ -193,6 +193,7 @@ This section describes some noteworthy details on how the following features are
 * [Batch Import](#batch-import)
 * [Batch Export](#batch-export)
 * [Encryption](#encryption)
+* [Password](#password)
 * [Find Feature](#find-feature)
 
 ### Command Input History
