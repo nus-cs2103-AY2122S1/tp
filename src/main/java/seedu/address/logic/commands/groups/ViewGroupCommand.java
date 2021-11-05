@@ -24,7 +24,7 @@ public class ViewGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views a group in the groups list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + "group " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_GROUP_SUCCESS = "View Group: %1$s";
 
