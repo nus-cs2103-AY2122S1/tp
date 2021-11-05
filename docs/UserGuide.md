@@ -130,7 +130,7 @@ Format birthday as `ddMMyyyy`.
 
 Notes:
 * Phone number must be unique and must contain only numbers.
-* Emails must contain @. (Other stricter checks are not included as there are some emails that violate the convention).
+* Emails must contain @. (Valid emails that violate convention are accepted as well)
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.
 * Each tag has a character limit of 60.
