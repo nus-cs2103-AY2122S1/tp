@@ -12,6 +12,18 @@ import javafx.collections.ObservableList;
 import seedu.address.model.modulelesson.exceptions.DuplicateModuleLessonException;
 import seedu.address.model.modulelesson.exceptions.ModuleLessonNotFoundException;
 
+/**
+ * A list of module lessons that enforces uniqueness between its elements and does not allow nulls.
+ * A module lesson is considered unique by comparing using {@code ModuleLesson#isSameModuleLesson(ModuleLesson)}.
+ * As such, adding and updating of module lessons uses Person#isSameModuleLesson(ModuleLesson) for equality so as
+ * to ensure that the person being added or updated is unique in terms of identity in the UniqueModuleLessonList.
+ * However, the removal of a module lesson uses ModuleLesson#equals(Object) so as to ensure that the module lesson
+ * with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see ModuleLesson#isSameModuleLesson(ModuleLesson)
+ */
 public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
 
     private final ObservableList<ModuleLesson> internalList = FXCollections.observableArrayList();

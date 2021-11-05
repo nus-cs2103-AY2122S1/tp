@@ -6,6 +6,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
+/**
+ * Clears all the module lessons in contHACKS.
+ */
 public class ClearModuleLessonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "The lessons in contHACKS has been cleared!";

@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at contHACKS level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Conthacks implements ReadOnlyConthacks {

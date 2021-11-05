@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in contHACKS.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {

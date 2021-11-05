@@ -17,6 +17,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleCode;
 
+/**
+ * Parses input arguments and creates a new DeleteModuleLessonCommand object.
+ */
 public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLessonCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
