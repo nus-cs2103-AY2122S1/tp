@@ -37,4 +37,40 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
+
+    @Test
+    public void nameEqualsWorkAsExpected() {
+        String alice = "Alice";
+        Name testName = new Name(alice);
+        Object objectName = (Object) testName;
+
+        // Base tests to check equals method works.
+        assertTrue(testName.equals(testName));
+        assertTrue(testName.equals(new Name(alice)));
+
+        assertTrue(testName.equals(new Name("alice"))); // Test all uncapitalized characters.
+        assertTrue(testName.equals(new Name("ALICE"))); // Test all capitalized characters.
+        assertTrue(testName.equals(new Name("aLiCe"))); // Test capitalizing characters at different places.
+        assertTrue(testName.equals(objectName)); // Test different object.
+
+        assertFalse(testName.equals(new Name("Alice "))); // Test with space bar.
+        assertFalse(testName.equals(null)); // Test if testName handles null.
+    }
+
+    @Test
+    public void nameToStringTest() {
+        String alice = "Alice";
+        Name testName = new Name(alice);
+
+        assertTrue(testName.toString().equals("Alice"));
+        assertFalse(testName.toString().equals("ALICE"));
+    }
+
+    @Test
+    public void nameHashCodeTest() {
+        String alice = "Alice";
+        Name testName = new Name(alice);
+
+        assertTrue(testName.hashCode() == (testName.fullName.hashCode()));
+    }
 }
