@@ -487,9 +487,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**` | experienced user | import a list of contacts | add a large number of contacts at once |
 | `**` | experienced user | export a list of contacts | send them to other people |
 | | **expert Linux CLI user** | **use high-level CLI instructions** | **directly use the app at a high-level** |
-| `*` | expert CL user | make command combinations | execute multiple instructions in one line |
-| `*` | expert CL user | redirect input/output | input/output from/to files instead of stdin |
-| `*` | expert CL user | create scripts | automate specific tasks |
+| `*` | expert Linux CLI user | make command combinations | execute multiple instructions in one line |
+| `*` | expert Linux CLI user | redirect input/output | input/output from/to files instead of stdin |
+| `*` | expert Linux CLI user | create scripts | automate specific tasks |
 
 ### Use cases
 
