@@ -438,8 +438,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="span" class="alert alert-primary">
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
 :note: **Bolded** user stories are `epics`.
 </div>
 
