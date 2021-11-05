@@ -137,6 +137,10 @@ public class PrefixMapper {
         return PREFIX_MAP.get(prefix).getAttributeFunction;
     }
 
+    public static BiConsumer<EditClientDescriptor, Client> getAttributeAndSetFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).getAttributeAndSet();
+    }
+
     public static BiConsumer<EditClientDescriptor, String> parseAndEditSetFunction(Prefix prefix) {
         return PREFIX_MAP.get(prefix).parseAndEditSet();
     }
@@ -170,6 +174,15 @@ public class PrefixMapper {
             this.parseFunction = parseFunction;
             this.name = name;
             this.defaultValue = defaultValue;
+        }
+
+        /**
+         * Returns a {@code BiConsumer<EditClientDescriptor, Client>} that takes a {@code EditClientDescriptor}
+         * to set with the {@code Client}'s attribute.
+         */
+        private BiConsumer<EditClientDescriptor, Client> getAttributeAndSet() {
+            return (editClientDescriptor, client) -> editSetFunction.accept(editClientDescriptor,
+                    getAttributeFunction.apply(client));
         }
 
         /**

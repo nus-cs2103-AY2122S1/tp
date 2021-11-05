@@ -1,14 +1,19 @@
 package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.mapper.PrefixMapper;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 
@@ -252,13 +257,11 @@ public class Client {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setDisposableIncome(toCopy.disposableIncome);
             setRiskAppetite(toCopy.riskAppetite);
+            setDisposableIncome(toCopy.disposableIncome);
             setLastMet(toCopy.lastMet);
             setNextMeeting(toCopy.nextMeeting);
             setCurrentPlan(toCopy.currentPlan);
-            setDisposableIncome(toCopy.disposableIncome);
-            setRiskAppetite(toCopy.riskAppetite);
             setTags(toCopy.tags);
         }
 
@@ -359,6 +362,20 @@ public class Client {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
+        /**
+         * Returns a {@code EditClientDescriptor} with the attributes from {@code toCopy}.
+         */
+        public static EditClientDescriptor copyClientDescriptor(Client toCopy) {
+            assert toCopy != null;
+            EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
+
+            Arrays.stream(allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG))
+                    .map(PrefixMapper::getAttributeAndSetFunction)
+                    .forEach(f -> f.accept(editClientDescriptor, toCopy));
+
+            editClientDescriptor.setTags(toCopy.tags);
+            return editClientDescriptor;
+        }
 
         /**
          * Creates and returns a {@code Client} with the details of {@code clientToEdit}
@@ -367,29 +384,27 @@ public class Client {
         public static Client createEditedClient(Client clientToEdit, EditClientDescriptor editClientDescriptor) {
             assert clientToEdit != null;
 
-            ClientId oldClientId = clientToEdit.getClientId();
-            Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
-            Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
-            Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
-            Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
-            RiskAppetite updateRiskAppetite = editClientDescriptor.getRiskAppetite()
-                    .orElse(clientToEdit.getRiskAppetite());
-            DisposableIncome updatedDisposableIncome = editClientDescriptor.getDisposableIncome()
-                    .orElse(clientToEdit.getDisposableIncome());
-            CurrentPlan updatedCurrentPlan = editClientDescriptor.getCurrentPlan()
-                    .orElse(clientToEdit.getCurrentPlan());
-            LastMet updatedLastMet = editClientDescriptor.getLastMet().orElse(clientToEdit.getLastMet());
+            EditClientDescriptor clientDescriptor = copyClientDescriptor(clientToEdit);
+            editClientDescriptor.getName().ifPresent(clientDescriptor::setName);
+            editClientDescriptor.getEmail().ifPresent(clientDescriptor::setEmail);
+            editClientDescriptor.getPhone().ifPresent(clientDescriptor::setPhone);
+            editClientDescriptor.getAddress().ifPresent(clientDescriptor::setAddress);
+            editClientDescriptor.getRiskAppetite().ifPresent(clientDescriptor::setRiskAppetite);
+            editClientDescriptor.getDisposableIncome().ifPresent(clientDescriptor::setDisposableIncome);
+            editClientDescriptor.getCurrentPlan().ifPresent(clientDescriptor::setCurrentPlan);
+            editClientDescriptor.getLastMet().ifPresent(clientDescriptor::setLastMet);
+
             NextMeeting tempUpdatedNextMeeting = editClientDescriptor.getNextMeeting()
                     .orElse(clientToEdit.getNextMeeting());
             NextMeeting updatedNextMeeting = tempUpdatedNextMeeting.copyNextMeeting();
             if (!updatedNextMeeting.isNullMeeting()) {
-                updatedNextMeeting.setWithWho(updatedName);
-
+                updatedNextMeeting.setWithWho(clientDescriptor.name);
             }
-            Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
-            return new Client(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,
-                    updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
+            clientDescriptor.setNextMeeting(updatedNextMeeting);
+            editClientDescriptor.getTags().ifPresent(clientDescriptor::setTags);
+
+            return clientDescriptor.createClient(clientToEdit.getClientId());
         }
 
         /**
@@ -399,24 +414,14 @@ public class Client {
         public static Client createEditedMeetingOverClient(Client clientToEdit) {
             assert clientToEdit != null;
 
-            ClientId oldClientId = clientToEdit.getClientId();
-            Name oldName = clientToEdit.getName();
-            Email oldEmail = clientToEdit.getEmail();
-            Phone oldPhone = clientToEdit.getPhone();
-            Address oldAddress = clientToEdit.getAddress();
-            RiskAppetite oldRiskAppetite = clientToEdit.getRiskAppetite();
-            DisposableIncome oldDisposableIncome = clientToEdit.getDisposableIncome();
-            CurrentPlan oldCurrentPlan = clientToEdit.getCurrentPlan();
-            Set<Tag> oldTags = clientToEdit.getTags();
-
+            EditClientDescriptor clientDescriptor = copyClientDescriptor(clientToEdit);
             LastMet updatedLastMet = clientToEdit.getLastMet().getLaterLastMet(
                     clientToEdit.getNextMeeting().convertToLastMet()
             );
-            NextMeeting updatedNextMeeting = NextMeeting.NULL_MEETING;
+            clientDescriptor.setLastMet(updatedLastMet);
+            clientDescriptor.setNextMeeting(NextMeeting.NULL_MEETING);
 
-
-            return new Client(oldClientId, oldName, oldPhone, oldEmail, oldAddress, oldRiskAppetite,
-                    oldDisposableIncome, oldCurrentPlan, updatedLastMet, updatedNextMeeting, oldTags);
+            return clientDescriptor.createClient(clientToEdit.clientId);
         }
 
         /**
