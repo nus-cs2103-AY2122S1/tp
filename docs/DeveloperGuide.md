@@ -122,7 +122,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the teaching assistant buddy data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
+* stores the Teaching Assistant Buddy data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
 * stores the currently 'selected' `Module` objects which is exposed to outsiders as an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. `Module` also stores a unique student list and a filtered student list (used for example, when searching for a specific `Student`). Each `Student` has a unique task list.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
