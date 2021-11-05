@@ -1,6 +1,7 @@
 package seedu.siasa.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.util.CurrencyUtil.centsToDollars;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -73,8 +74,8 @@ public class DownloadCommand extends Command {
         stringList.add("\n");
 
         stringList.add("Number of policies per contact:\n" + TITLE_UNDERLINE);
-        numberPoliciesPerContact.forEach((contact, noPolicies) -> {
-            stringList.add(contact + "; Number of Policies: " + noPolicies);
+        numberPoliciesPerContact.forEach((contact, policyCount) -> {
+            stringList.add(contact + "; Number of Policies: " + policyCount);
         });
         stringList.add("\n");
 
@@ -94,19 +95,4 @@ public class DownloadCommand extends Command {
         }
         FileUtil.writeToFile(pathToFile, stats.toString());
     }
-
-    private String centsToDollars(int priceInCents) {
-        int cents = priceInCents % 100;
-        int dollars = (priceInCents - cents) / 100;
-
-        String centsStr;
-        if (cents <= 9) {
-            centsStr = 0 + "" + cents;
-        } else {
-            centsStr = Integer.toString(cents);
-        }
-
-        return "$" + dollars + "." + centsStr;
-    }
-
 }

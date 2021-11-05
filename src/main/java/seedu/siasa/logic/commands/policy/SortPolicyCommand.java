@@ -10,7 +10,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.policy.Policy;
 
 /**
- * Lists all policies in the address book to the user.
+ * Lists all policies in the SIASA to the user.
  */
 public class SortPolicyCommand extends Command {
 

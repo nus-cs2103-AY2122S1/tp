@@ -9,7 +9,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all contacts in address book whose name contains any of the argument keywords.
+ * Finds and lists all contacts in SIASA whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindContactCommand extends Command {

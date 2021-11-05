@@ -8,7 +8,7 @@ import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.model.Model;
 
 /**
- * Lists all contacts in the address book to the user.
+ * Lists all contacts in the SIASA to the user.
  */
 public class ListContactCommand extends Command {
 

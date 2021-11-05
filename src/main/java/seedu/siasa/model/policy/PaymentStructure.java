@@ -2,6 +2,7 @@ package seedu.siasa.model.policy;
 
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.siasa.commons.util.CurrencyUtil.centsToDollars;
 
 import java.util.Objects;
 
@@ -35,17 +36,7 @@ public class PaymentStructure {
 
     @Override
     public String toString() {
-        int cents = paymentAmount % 100;
-        int dollars = (paymentAmount - cents) / 100;
-
-        String centsStr;
-        if (cents <= 9) {
-            centsStr = 0 + "" + cents;
-        } else {
-            centsStr = Integer.toString(cents);
-        }
-
-        String paymentAmountStr = "$" + dollars + "." + centsStr;
+        String paymentAmountStr = centsToDollars(paymentAmount);
         if (paymentFrequency == 1 && numberOfPayments == 1) {
             return "Lump sum payment of " + paymentAmountStr;
         }
@@ -57,12 +48,12 @@ public class PaymentStructure {
         } else if (paymentFrequency == 1) {
             paymentFrequencyStr = "Annual";
         } else {
-            paymentFrequencyStr = Integer.toString(paymentFrequency) + " payments a year";
+            paymentFrequencyStr = paymentFrequency + " payments a year";
         }
 
         String numberOfPaymentsStr = "";
         if (numberOfPayments != INDEFINITE_NUMBER_OF_PAYMENTS) {
-            numberOfPaymentsStr = Integer.toString(numberOfPayments) + " total payments";
+            numberOfPaymentsStr = numberOfPayments + " total payments";
         }
 
         if (!numberOfPaymentsStr.isEmpty()) {

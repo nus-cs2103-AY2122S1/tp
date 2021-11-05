@@ -6,7 +6,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.Siasa;
 
 /**
- * Clears the address book.
+ * Clears the SIASA.
  */
 public class ClearCommand extends Command {
 

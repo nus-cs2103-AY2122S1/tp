@@ -16,7 +16,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
 
 /**
- * Adds a contact to the address book.
+ * Adds a contact to the SIASA.
  */
 public class AddContactCommand extends Command {
 
@@ -38,8 +38,8 @@ public class AddContactCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
-    public static final String MESSAGE_SIMILAR_CONTACT = "A similar contact: %1$s already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the SIASA";
+    public static final String MESSAGE_SIMILAR_CONTACT = "A similar contact: %1$s already exists in the SIASA.";
 
     private final Contact toAdd;
 
