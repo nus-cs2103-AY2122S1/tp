@@ -28,9 +28,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_CATEGORY_CODE, PREFIX_RATING, PREFIX_TAG);
 
-        if (((!arePrefixesPresent(argMultimap, PREFIX_CATEGORY_CODE))
-            && (!arePrefixesPresent(argMultimap, PREFIX_RATING))
-                && (!arePrefixesPresent(argMultimap, PREFIX_TAG)))
+        if (arePrefixesAbsent(argMultimap, PREFIX_CATEGORY_CODE, PREFIX_RATING, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
@@ -54,8 +52,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean arePrefixesAbsent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 
 }

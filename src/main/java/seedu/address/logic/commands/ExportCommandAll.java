@@ -31,8 +31,8 @@ public class ExportCommandAll extends ExportCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-            || other instanceof ExportCommandAll; // instanceof handles nulls
+        // short circuit if same object
+        return other instanceof ExportCommandAll; // instanceof handles nulls
     }
 
 }

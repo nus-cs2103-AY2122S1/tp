@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -15,10 +14,10 @@ import org.junit.jupiter.api.Test;
 public class FileUtilTest {
 
     public static final Path EXISTING_FILE_PATH = Paths.get("src", "test", "data", "FileUtilTest",
-        "samplefile.txt");
+        "sampleFile.txt");
 
     public static final Path NEW_FILE_PATH = Paths.get("src", "test", "data", "FileUtilTest",
-        "no_such_samplefile.txt");
+        "noSuchFile.txt");
 
     public static final String CONTACT_TO_STRING =
         "\n-------------------------------------------------------\n"
@@ -58,7 +57,7 @@ public class FileUtilTest {
         assertTrue(FileUtil.readFromFile(NEW_FILE_PATH).equals(""));
 
         // reset file that was created during test
-        Files.deleteIfExists(NEW_FILE_PATH);
+        FileUtil.deleteFileIfExists(NEW_FILE_PATH);
     }
 
     @Test
@@ -75,7 +74,7 @@ public class FileUtilTest {
         assertEquals(FileUtil.readFromFile(NEW_FILE_PATH), CONTACT_TO_STRING);
 
         // reset/clear files that were created/written during test
-        Files.deleteIfExists(NEW_FILE_PATH);
+        FileUtil.deleteFileIfExists(NEW_FILE_PATH);
         FileUtil.clearFile(EXISTING_FILE_PATH);
     }
 

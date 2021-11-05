@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -21,13 +19,7 @@ public class ExportCommandAllTest {
 
     private UserPrefs userPrefs = new UserPrefs();
 
-    {
-        try {
-            new ExportStorage(userPrefs.getExportFilePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private final ExportStorage exportStorageModel = new ExportStorage(userPrefs.getExportFilePath());
 
     @Test
     public void execute_exportCommandAll_success() {

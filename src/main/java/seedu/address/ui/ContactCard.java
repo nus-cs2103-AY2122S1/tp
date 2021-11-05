@@ -57,6 +57,7 @@ public class ContactCard extends UiPart<Region> {
         if (ratingValue.equals(EMPTY_RATING)) {
             rating.setText(EMPTY_RATING);
         } else {
+            // Does not work on Mac OS.
             // rating.setText(ratingValue + "\u2B50");
             rating.setText(ratingValue + " stars");
         }

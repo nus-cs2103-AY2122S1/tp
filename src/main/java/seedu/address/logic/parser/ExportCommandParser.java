@@ -24,17 +24,13 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             return new ExportCommandAll();
         }
 
-        ParseException pe;
         // index given
         try {
             Index index = ParserUtil.parseIndex(args);
             return new ExportCommandIndex(index);
         } catch (ParseException peIndex) {
-            pe = peIndex;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
-
-        throw new ParseException(
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), pe);
 
     }
 }

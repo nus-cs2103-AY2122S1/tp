@@ -100,10 +100,6 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
-            System.out.println(result.isDisplaySummary());
-            System.out.println(expectedCommandResult.isDisplaySummary());
-            System.out.println(result.getSummaryToDisplay());
-            System.out.println(expectedCommandResult.getSummaryToDisplay());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

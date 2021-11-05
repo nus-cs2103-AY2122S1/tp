@@ -12,6 +12,7 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Contact}'s {@code CategoryCode, Rating} matches the specified {@code CategoryCode, Rating}.
  */
 public class IsFilterablePredicate implements Predicate<Contact> {
+
     private final Set<CategoryCode> categoryCodes;
     private final Rating rating;
     private final Set<Tag> tags;
@@ -32,22 +33,28 @@ public class IsFilterablePredicate implements Predicate<Contact> {
         CategoryCode category = contact.getCategoryCode();
         Rating contactRating = contact.getRating();
         Set<Tag> contactTags = contact.getTags();
+
         boolean isSameRating = contactRating.equals(rating);
         boolean isSameCategoryCodes = categoryCodes.contains(category);
         boolean isSameTags = !(Collections.disjoint(tags, contactTags));
-        boolean noRating = isEmptyRating(rating);
 
-        if (categoryCodes.isEmpty() && tags.isEmpty()) {
+        boolean hasNoRating = Rating.isEmptyRating(rating);
+        boolean hasNoCategories = categoryCodes.isEmpty();
+        boolean hasNoTags = tags.isEmpty();
+
+        assert !(hasNoCategories && hasNoTags && hasNoRating);
+
+        if (hasNoCategories && hasNoTags) {
             return isSameRating;
-        } else if (tags.isEmpty() && noRating) {
+        } else if (hasNoTags && hasNoRating) {
             return isSameCategoryCodes;
-        } else if (categoryCodes.isEmpty() && noRating) {
+        } else if (hasNoCategories && hasNoRating) {
             return isSameTags;
-        } else if (categoryCodes.isEmpty()) {
+        } else if (hasNoCategories) {
             return isSameRating && isSameTags;
-        } else if (tags.isEmpty()) {
+        } else if (hasNoTags) {
             return isSameRating && isSameCategoryCodes;
-        } else if (noRating) {
+        } else if (hasNoRating) {
             return isSameTags && isSameCategoryCodes;
         } else {
             return isSameRating && isSameCategoryCodes && isSameTags;

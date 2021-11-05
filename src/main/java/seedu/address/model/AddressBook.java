@@ -83,7 +83,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setContact(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
-
         contacts.setContact(target, editedContact);
     }
 
@@ -100,7 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void exportContact(Contact key) {
-        // Write to file
+        requireNonNull(key);
         ExportStorage.addToStorage(key.toExportFormat());
     }
 

@@ -51,6 +51,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredContactList(predicate);
         Summary summary = new Summary(model.getAddressBook());
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
                         model.getFilteredContactList().size()), summary);
