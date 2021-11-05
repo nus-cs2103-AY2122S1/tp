@@ -123,8 +123,11 @@ Given below are my contributions to the project.
 >- `add d/Event dt/25/10/2021, 10:00 AM` - Adds a task "Event" that starts at the given date and time.
 >
 >A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
->is entered:
+>is entered. The details of the **create Task** interactions have been omitted from the diagram for clarity:
 >![AddDateSequenceDiagram](../images/AddDateSequenceDiagram.png)
+>
+>The omitted details are shown below in a separate sequence diagram:
+>![AddDateSequenceDiagramRef](../images/AddDateSequenceDiagramRef.png)
 >
 >The following activity diagram summarises what happens when a user executes an add command with date and/or time:
 >![AddDateActivityDiagram](../images/AddDateActivityDiagram.png)
@@ -143,3 +146,7 @@ Given below are my contributions to the project.
 >      comparison methods between two `LocalDateTime` objects.
 >    * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
 >
+* **Community**:
+  * Assisted other team in finding bugs and suggesting alternatives (examples: [1](https://github.com/AY2122S1-CS2103T-T11-4/tp/issues/152),
+  [2](https://github.com/AY2122S1-CS2103T-T11-4/tp/issues/133), [3](https://github.com/AY2122S1-CS2103T-T11-4/tp/issues/125))
+
