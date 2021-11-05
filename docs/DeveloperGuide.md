@@ -994,6 +994,38 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a patient <a name="find-patient-manual-testing"/>
 
+Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding patients while all patients are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab. 
+        1. List all patients using the `list` command. Multiple patients in the list.
+    
+    1. Test case: `find Aaron`<br>
+       Expected: Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron`<br>
+       Expected: `find` command is case-insensitive. Patient list shows only one patient "Aaron Yeoh". Status message shown says "1 patients listed!".
+
+    1. Test case: `find aaron Bobby`<br>
+       Expected: `find` command is able to search multiple patients using multiple keywords. Patient list shows two patients "Aaron Yeoh" and "Bobby Yu". Status message shown says "2 patients listed!".
+
+    1. Test case: `find aar`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+       
+    1. Test case: `find Alex`<br>
+       Expected: Patient list shows "No patients found". Status message shown says "0 patients listed!".
+
+2. Finding patients while some patients are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Patients" tab, else use the `toggle` command to toggle to the "Patients" tab.
+        2. List all patients using the `list` command. Multiple patients in the list.
+        2. List some patients using `find xyz` (xyz is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
 ### Listing all patients <a name="list-patients-manual-testing"/>
 
 1. List all patients while none/some patients are being shown
@@ -1173,7 +1205,39 @@ testers are expected to do more *exploratory* testing.
 
     2. Test cases are similar to those above.
 
-### Finding a doctor <a name="find-doctor-manual-testing"/>
+### Finding doctors <a name="find-doctor"/>
+
+Prerequisites: The tests for finding doctors uses the sample data from `SampleDataUtil#getSampleDoctors`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
+
+1. Finding doctors while all doctors are being shown
+
+    1. Prerequisites:
+        1. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
+        1. List all doctors using the `list` command. Multiple doctors in the list.
+
+    1. Test case: `find Alex`<br>
+       Expected: Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+
+    1. Test case: `find alex`<br>
+       Expected: `find` command is case-insensitive. Doctor list shows only one doctor "Alex Yeoh". Status message shown says "1 doctors listed!".
+
+    1. Test case: `find alex bernice`<br>
+       Expected: `find` command is able to search multiple doctors using multiple keywords. Doctor list shows two doctors "Alex Yeoh" and "Bernice Yu". Status message shown says "2 doctors listed!".
+
+    1. Test case: `find ale`<br>
+       Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+
+    1. Test case: `find Aaron`<br>
+       Expected: Doctor list shows "No doctors found". Status message shown says "0 doctors listed!".
+
+2. Finding doctors while some doctors are being shown
+
+    2. Prerequisites:
+        2. Ensure the active tab is the "Doctors" tab, else use the `toggle` command to toggle to the "Doctors" tab.
+        2. List all doctors using the `list` command. Multiple doctors in the list.
+        2. List some doctors using `find xyz` (xyz is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
 
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
 
@@ -1441,8 +1505,16 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data  <a name="saving-data"/>
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+   
+    1. Prerequisites: If there is a plannermd.json file in the data folder at the root of the application directory, delete the plannermd.json file.
+    
+    1. Test case: Double-click on the jar file to run the application.
+        Expected: Application runs and loads the sample data from `SampleDataUtil#getSamplePlannerMd`.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Dealing with corrupted data files
 
-1. _{ more test cases …​ }_
+    1. Prerequisites: Modify the plannermd.json file to be an illegal format, such as deleting the "name" field of a patient.
+    
+    1. Test case: Double-click on the jar file to run the application.
+       Expected: Application runs and has no data on initial load. Running the next command overwrites the current corrupted plannermd.json file.
