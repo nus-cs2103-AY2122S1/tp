@@ -22,11 +22,11 @@ import static seedu.address.testutil.TypicalPersons.ALICE_TAG_1;
 import static seedu.address.testutil.TypicalPersons.ALICE_TELEGRAM;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
 
 public class PersonTest {
 
