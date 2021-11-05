@@ -67,7 +67,7 @@ public class RecommendCommandParserTest {
 
     @Test
     public void parse_invalidGameId_failure() {
-        assertParseFailure(parser, RECOMMEND_INVALID_GAME_ID, GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
+        assertParseFailure(parser, RECOMMEND_INVALID_GAME_ID, GameId.MESSAGE_INVALID_CHARACTERS);
     }
 
     @Test

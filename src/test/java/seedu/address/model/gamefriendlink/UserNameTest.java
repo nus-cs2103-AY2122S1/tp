@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.friend.FriendName;
+
 public class UserNameTest {
 
     @Test
@@ -23,16 +25,19 @@ public class UserNameTest {
         assertThrows(NullPointerException.class, () -> UserName.isValidUserName(null));
 
         // invalid name
-        assertFalse(UserName.isValidUserName("")); // empty string
-        assertFalse(UserName.isValidUserName("  ")); // spaces only
+        assertFalse(FriendName.isValidName("")); // empty string
+        assertFalse(FriendName.isValidName("    ")); // spaces only
+        assertFalse(FriendName.isValidName("----")); // hyphen only characters
+        assertFalse(FriendName.isValidName("peter-jack")); // contains hyphen characters
+        assertFalse(FriendName.isValidName("peter jack peter jack peter jack")); // longer than 20 chars
 
         // valid name
-        assertTrue(UserName.isValidUserName("peter jack")); // alphabets only
-        assertTrue(UserName.isValidUserName("12345")); // numbers only
-        assertTrue(UserName.isValidUserName("peter the 2nd")); // alphanumeric characters
-        assertTrue(UserName.isValidUserName("Capital Tan")); // with capital letters
-        assertTrue(UserName.isValidUserName("!@#$%^")); // special characters only
-        assertTrue(UserName.isValidUserName("peter@123.!?")); // alphabets with special characters
-        assertTrue(UserName.isValidUserName("Roger@Jackson#1111")); // long names
+        assertTrue(FriendName.isValidName("Peter123")); // single word
+        assertTrue(FriendName.isValidName("Peter jack123")); // multi-word
+        assertTrue(FriendName.isValidName("`~!@#$%^&*()_=+[{]}")); // all special characters available
+        assertTrue(FriendName.isValidName("\\|;:'\",<.>/?")); // on an average keyboard
+        assertTrue(FriendName.isValidName("Peter jack#123 @<>")); // with special characters
+        assertTrue(FriendName.isValidName("p")); // short name - 1 char
+        assertTrue(FriendName.isValidName("David Roger Evans Jr")); // long names - 20 chars
     }
 }

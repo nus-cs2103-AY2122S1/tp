@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.game.GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID;
+import static seedu.address.model.game.GameId.MESSAGE_INVALID_CHARACTERS;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class GetGameCommandParserTest {
     public void parse_emptyArgsWithFlag_throwsParseException() {
         String emptyArgs1 = " " + FLAG_GET.getFlag();
         String emptyArgs2 = " " + FLAG_GET.getFlag() + "          ";
-        String expectedMessage = MESSAGE_INVALID_CHARACTERS_IN_GAME_ID;
+        String expectedMessage = MESSAGE_INVALID_CHARACTERS;
 
         assertParseFailure(parser, emptyArgs1, expectedMessage);
         assertParseFailure(parser, emptyArgs2, expectedMessage);
@@ -40,7 +40,7 @@ public class GetGameCommandParserTest {
     @Test
     public void parse_multipleWordArgsWithFlag_throwsParseException() {
         String emptyArgs = " " + FLAG_GET.getFlag() + "mine craft";
-        String expectedMessage = MESSAGE_INVALID_CHARACTERS_IN_GAME_ID;
+        String expectedMessage = MESSAGE_INVALID_CHARACTERS;
 
         assertParseFailure(parser, emptyArgs, expectedMessage);
     }

@@ -25,7 +25,7 @@ MainParser .down.> XYZCommandParser: creates >
 
 XYZCommandParser ..> XYZCommand : creates >
 MainParser ..> Command : returns >
-note top of MainParser: User commands with "~--friend" or "~--game" as the first flags will go \nthrough an additional FriendCommandParser and GameCommandParser \nrespectively which then creates XYZCommandParser
+note top of MainParser: User commands with "friend" or "game" as the first argument will go \nthrough an additional FriendCommandParser and GameCommandParser \nrespectively which then creates XYZCommandParser
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer

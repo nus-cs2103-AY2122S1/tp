@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.games;
 
 import static seedu.address.logic.parser.CliSyntax.FLAG_LIST;
-import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
 
 import seedu.address.logic.commands.games.ListGameCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -23,7 +22,7 @@ public class ListGameCommandParser implements Parser<ListGameCommand> {
      */
     public ListGameCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args + FLAG_POSTFIX, FLAG_LIST);
+                ArgumentTokenizer.tokenize(args, FLAG_LIST);
 
         if (argMultimap.getValue(FLAG_LIST).isPresent()) {
             return new ListGameCommand(

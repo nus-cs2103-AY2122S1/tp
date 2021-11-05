@@ -10,13 +10,13 @@ public class FriendName {
     // constants
     public static final FriendName DEFAULT_FRIEND_NAME = new FriendName("No name assigned");
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "NAME provided must be a non-empty string of maximum 20 characters, and not contain '-' (hyphen).";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+    /**
+     * The name must not be blank, empty, whitespace or contain a '-'. Max limit of 20 characters.
+     * This is to avoid any flags being inserted in the name.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[^ -][^-]{0,19}$";
 
     public final String fullName;
 

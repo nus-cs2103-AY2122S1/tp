@@ -15,9 +15,8 @@ import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.Schedule;
 
-// TODO: Update tests for FriendId and Games based on UG specs
 public class JsonAdaptedFriendTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R@chel-";
     private static final String INVALID_GAME = "R@staurantC!ty";
 
     private static final String VALID_FRIEND_ID = BENSON.getFriendId().toString();

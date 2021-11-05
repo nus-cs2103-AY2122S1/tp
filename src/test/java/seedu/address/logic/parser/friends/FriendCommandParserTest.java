@@ -12,8 +12,11 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_EDIT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LINK;
 import static seedu.address.logic.parser.CliSyntax.FLAG_LIST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
+import static seedu.address.logic.parser.CliSyntax.FLAG_UNLINK;
+import static seedu.address.logic.parser.CliSyntax.FLAG_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_VALUE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -31,10 +34,11 @@ class FriendCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(" --invalid"));
         // empty input
         assertThrows(ParseException.class, () -> parser.parse(""));
+        assertThrows(ParseException.class, () -> parser.parse("              "));
     }
 
     @Test
-    public void parseAdd_validCommandFlag_correctParserReturned() throws ParseException {
+    public void parseAddFriend_validCommandFlag_correctParserReturned() throws ParseException {
         String addInput = FLAG_POSTFIX.getFlag() + FLAG_ADD.getFlag() + VALID_FRIEND_ID_AMY;
         assertEquals(parser.parse(addInput), new AddFriendCommandParser().parse(addInput));
     }
@@ -76,5 +80,18 @@ class FriendCommandParserTest {
     public void parseList_validCommandFlag_correctParserReturned() throws ParseException {
         String listInput = FLAG_POSTFIX.getFlag() + FLAG_LIST.getFlag();
         assertEquals(parser.parse(listInput), new ListFriendCommandParser().parse(listInput));
+    }
+
+    @Test
+    public void parseLink_validCommandFlag_correctParserReturned() throws ParseException {
+        String linkInput = FLAG_POSTFIX.getFlag() + FLAG_LINK + "Draco " + FLAG_USERNAME
+                + "GoldNova " + FLAG_GAME + "CSGO";
+        assertEquals(parser.parse(linkInput), new LinkFriendCommandParser().parse(linkInput));
+    }
+
+    @Test
+    public void parseUnlink_validCommandFlag_correctParserReturned() throws ParseException {
+        String unlinkInput = FLAG_POSTFIX.getFlag() + FLAG_UNLINK + "Draco " + FLAG_GAME + "CSGO";
+        assertEquals(parser.parse(unlinkInput), new UnlinkFriendCommandParser().parse(unlinkInput));
     }
 }

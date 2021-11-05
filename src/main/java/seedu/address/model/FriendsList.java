@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.UniqueFriendsList;
-import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.Game;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 

@@ -41,8 +41,6 @@ public class CommandResult {
      */
     private final Game gameToGet;
 
-    //TODO : Remove this once merged with main code.
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */

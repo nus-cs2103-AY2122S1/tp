@@ -23,7 +23,7 @@ public class DeleteFriendCommandParser implements Parser<DeleteFriendCommand> {
             argMultimap = ArgumentTokenizer.tokenize(args, FLAG_DELETE);
             friendId = ParserUtil.parseFriendId(argMultimap.getValue(FLAG_DELETE).get());
             return new DeleteFriendCommand(friendId);
-        } catch (ParseException | NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFriendCommand.MESSAGE_USAGE), e);
         }

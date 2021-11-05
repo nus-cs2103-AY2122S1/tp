@@ -23,7 +23,7 @@ public class DeleteGameCommandParser implements Parser<DeleteGameCommand> {
             argMultimap = ArgumentTokenizer.tokenize(args, FLAG_DELETE);
             gameId = ParserUtil.parseGameId(argMultimap.getValue(FLAG_DELETE).get());
             return new DeleteGameCommand(gameId);
-        } catch (ParseException | NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteGameCommand.MESSAGE_USAGE), e);
         }

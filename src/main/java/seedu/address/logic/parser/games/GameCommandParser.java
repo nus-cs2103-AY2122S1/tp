@@ -1,10 +1,8 @@
 package seedu.address.logic.parser.games;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_GAME_FLAG;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.games.AddGameCommand;
 import seedu.address.logic.commands.games.DeleteGameCommand;
 import seedu.address.logic.commands.games.GetGameCommand;
@@ -27,9 +25,6 @@ public class GameCommandParser implements Parser<Command> {
     @Override
     public Command parse(String arguments) throws ParseException {
         String[] userInput = arguments.strip().split(" ");
-        if (userInput.length <= 0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
 
         switch (userInput[0]) {
         case AddGameCommand.COMMAND_WORD:

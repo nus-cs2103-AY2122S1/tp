@@ -31,11 +31,9 @@ public class GetFriendCommandParser implements Parser<GetFriendCommand> {
         }
 
         String keyword = argMultimap.getValue(FLAG_GET).get().trim();
-        if (!FriendId.isValidFriendId(keyword)) {
-            throw new ParseException(FriendId.MESSAGE_INVALID_CHARACTERS);
-        }
+        FriendId friendId = ParserUtil.parseFriendId(keyword);
 
-        return new GetFriendCommand(new FriendId(keyword));
+        return new GetFriendCommand(friendId);
     }
 
 }

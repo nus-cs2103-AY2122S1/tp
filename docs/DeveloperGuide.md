@@ -121,7 +121,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `MainParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `HelpCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `HelpCommand`) which the `AddressBookParser` returns back as a `Command` object.
-    * Note: For user commands with `--friend` or `--game` as the first flags will go through an additional `FriendCommandParser` or `GameCommandParser` respectively for parsing, which will then create the respective `XYZFriendCommandParser` or `XYZGameCommandParser`
+    * Note: For user commands with `friend` or `game` as the first arguments will go through an additional `FriendCommandParser` or `GameCommandParser` respectively for parsing, which will then create the respective `XYZFriendCommandParser` or `XYZGameCommandParser`
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -185,7 +185,50 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+* [Delete Feature](#delete-feature)
+* [Link feature](#link-feature)
+* [Unlink feature](#unlink-feature)
+* [Schedule Feature](#schedule-feature)
+
+### Delete Feature
+
+#### Implementation
+The `MainWindow#executeCommand()` calls `LogicManager#execute()` method, which proceeds 
+to call `MainParser#parseCommand()` method, which them calls either `FriendCommandParser#parse()` or 
+`GameCommandParser#parse()`, and returns a `Command` object.
+
+The delete command is parsed using the following classes:
+* For friends:
+  * `FriendCommandParser` - Checks that the command contains the `DeleteFriendCommand.COMMAND_WORD`.
+    * Subsequently, calls the `parse()` method from a newly created instance of `DeleteFriendCommandParser`.
+  * `DeleteFriendCommandParser` - Parses the command to find the string representing the friend's ID.
+    * The `parse()` command returns a `DeleteFriendCommand` object which is instantiated using the aforementioned 
+      `FriendId` object.
+  * `DeleteFriendCommand` - Represents delete friend command that is executed by gitGud.
+    * Takes in a `FriendId` object to find the friend to be deleted from the Model.
+    * Due to the unique nature of the `FriendId` objects, where no two friends have the same `FriendId`, it is 
+      sufficient to search for the friend using the `FriendId`.
+    
+* For games:
+  * `GameCommandParser` - Checks that the command contains the `DeleteGameCommand.COMMAND_WORD`.
+    * Subsequently, calls the `parse()` method from a newly created instance of `DeleteGameCommandParser`.
+  * `DeleteGameCommandParser` - Parses the command to find the string representing the game's ID.
+      * The `parse()` command returns a `DeleteGameCommand` object which is instantiated using the aforementioned 
+        `GameId` object.
+  * `DeleteGameCommand` - Represents delete game command that is executed by gitGud.
+      * Takes in a `GameId` object to find the game to be deleted from the Model.
+    
+
+After being parsed, the implementation for deleting friends and games is similar. The `Command#execute()` method is 
+called, resulting in the deletion of a friend or a game.The following sequence diagram 
+illustrates the description for deleting **games**:
+
+<img src="images/DeleteGameSequenceDiagram.png" width="574" />
+
+#### Special considerations:
+
+The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
+friend has to a game has to be removed, before deleting the game from the list of games.
 
 ### Link
 
@@ -193,29 +236,29 @@ This section describes some noteworthy details on how certain features are imple
 
 The parsing of a link command is handled by the following classes:
 
- - `FriendCommandParser` - Checks that the command contains the `LinkFriendCommand.COMMAND_WORD`.
-   - A `LinkFriendCommandParser` object is then created, from which `LinkFriendCommandParser#parse()` is called.
- - `LinkFriendCommandParser` - Parses the command to extract a `FriendId` object, a `GameId` object and a `UserName` object from the command.
-   - `LinkFriendCommandParser#parse()` returns a `LinkFriendCommand` object instantiated with the aforementioned objects as parameters.
- - `LinkFriendCommand` - Represents link friend command that is executed by gitGud.
-   - It calls `Model#linkFriend()` with a `Friend` object argument and a `GameFriendLink` object argument.
-   
+- `FriendCommandParser` - Checks that the command contains the `LinkFriendCommand.COMMAND_WORD`.
+    - A `LinkFriendCommandParser` object is then created, from which `LinkFriendCommandParser#parse()` is called.
+- `LinkFriendCommandParser` - Parses the command to extract a `FriendId` object, a `GameId` object and a `UserName` object from the command.
+    - `LinkFriendCommandParser#parse()` returns a `LinkFriendCommand` object instantiated with the aforementioned objects as parameters.
+- `LinkFriendCommand` - Represents link friend command that is executed by gitGud.
+    - It calls `Model#linkFriend()` with a `Friend` object argument and a `GameFriendLink` object argument.
+
 The sequence diagram of the parsing is similar to that of the other friend commands.
 
 The implementation of `Model#linkFriend()` is as follows:
 
 - `FriendList#linkFriend()` is called, which in turns called `UniqueFriendList#link()`.
 - A new `Friend` object, `friendToEdit` is created with the same fields as `friendToLink` (the target friend of the link command).
-`Friend#link()` is then called, which modifies `friendToEdit` so that it now contains the new `GameFriendLink`.
+  `Friend#link()` is then called, which modifies `friendToEdit` so that it now contains the new `GameFriendLink`.
 - `UniqueFriendsList#setFriend()` then replaces `friendToLink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
 ![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
 #### Special considerations:
 
- - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
- - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
-have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
+- A separate `GameFriendLink` class was created to represent the association between a friend and a game.
+- Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
+  have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
 ### Unlink
 
@@ -223,12 +266,12 @@ have a corresponding data structure to the friends it is linked to. This reduces
 
 The parsing of the unlink command is handled by the following classes:
 
- - `FriendCommandParser` - Checks that the command contains the `UnlinkFriendCommand.COMMAND_WORD`.
-   - An `UnlinkFriendCommandParser` object is then created, from which `UnlinkFriendCommandParser#parse()` is called.
- - `UnlinkFriendCommandParser` - Parses the command to extract a `FriendId` object and a `GameId` object.
-   - `UnlinkFriendCommandParser#parse()` return an `UnlinkFriendCommand` object instantiated with the aforementioned objects as parameters.
- - `UnlinkFriendCommand` - Represents unlink friend command that is executed by gitGud.
-   - It calls `Model#unlinkFriend()` with a `Friend` object and a `Game` object.
+- `FriendCommandParser` - Checks that the command contains the `UnlinkFriendCommand.COMMAND_WORD`.
+    - An `UnlinkFriendCommandParser` object is then created, from which `UnlinkFriendCommandParser#parse()` is called.
+- `UnlinkFriendCommandParser` - Parses the command to extract a `FriendId` object and a `GameId` object.
+    - `UnlinkFriendCommandParser#parse()` return an `UnlinkFriendCommand` object instantiated with the aforementioned objects as parameters.
+- `UnlinkFriendCommand` - Represents unlink friend command that is executed by gitGud.
+    - It calls `Model#unlinkFriend()` with a `Friend` object and a `Game` object.
 
 The sequence diagram of the parsing is similar to that of the other friend commands.
 
@@ -241,23 +284,45 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
 
-**Aspect: How undo & redo executes:**
+### Schedule Feature
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+#### Implementation
+* To enable storing the schedule of a friend, two new fields had to be added: `Schedule` and `Day`
+    * `Schedule` contains a list of 7 `Day`s.
+    * `Day` contains:
+        * an array of 24 booleans, each boolean representing a 1 hour timeslot in the day, with `true` being free and 
+          `false` being busy.
+        * the `DayOfWeek`, which day of the week the `Day` is.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* Schedule has the command format of `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`, and as in
+  [Logic component](#logic-component), it will follow a similar flow of other commands, with `LogicManager#execute()` 
+  calling `MainParser#parseCommand()`, who in turn calls `FriendCommandParser#parse()` as it is a `friend` command, 
+  which returns a `ScheduleFriendCommand` after determining the `commandType` is `ScheduleFriendCommand.COMMAND_WORD`.
 
-_{more aspects and alternatives to be added}_
+<img src="images/ScheduleSequenceDiagram1.png" width="574" />
+  
+* `LogicManager` will then call `Command#execute()`. In `ScheduleFriendCommand`, the friend to be updated will be 
+  retrieved with `Model:getfriend()`, and a new friend will be created with `createScheduledFriend()`, with the schedule
+  updated and all fields mapped over to from `friendToSchedule` to `scheduledFriend`.
+* `ScheduleFriendCommand` will then call `Model:setfriend()` to set the updated `scheduledFriend`.
+* Upon success, the `CommandResult` is created with the success message to display on the UI and the `CommandType` of
+  `FRIEND_SCHEDULE`, before being returned.
 
-### \[Proposed\] Data archiving
+<img src="images/ScheduleSequenceDiagram2.png" width="574" />
 
-_{Explain here how the data archiving feature will be implemented}_
-
+#### Design considerations:
+* `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
+  would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
+  * Among other reasons, this also allows us to create custom methods, such as:
+    * custom validators when used by serialization when being mapped from the saved data in the storage.
+    * a method to group of adjacent 1h timeslots into a larger timeslots (e.g. `0800 - 0900` and `0900 - 1000` will be 
+      displayed as `0800 - 1000`) to save space when displaying on the UI with finite space.
+* `Day` only stores 24 hourly slots as we wanted to keep data compact, and the rational is that since this is a weekly 
+  schedule, it is present to provide the user an easy way to estimate when their friends are free and thus need not be 
+  accurate to the minute.
+* A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
+  busy than free, so it would be easier for the user to just set when their friend is free.
+  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -313,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ***      | user                  | be able to see full information of a friend from the contact list  | get any information I want about the friend               |
 | ***      | user                  | be able to easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
 | ***      | user                  | be able to view a list of my game information                      | see which of my friends play certain games                |
-| ***      | user                  | be able to delete a game from the contact list                     | remove games that were mistakenly added or due to typos   |
+| ***      | user                  | be able to delete a game from the games list                       | remove games that were mistakenly added or due to typos   |
 | ***      | user                  | be able to see full information of a game from the games list      | see information about which friends play the game and their in-game usernames   |
 
 *{More to be added}*

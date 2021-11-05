@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.RECOMMEND_VALID_VALORANT_VALID_HOUR_ZERO_MONDAY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -12,18 +16,28 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.RecommendCommand;
+import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.games.AddGameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.friends.FriendCommandParser;
+import seedu.address.logic.parser.games.GameCommandParser;
 
 public class MainParserTest {
 
     private final MainParser parser = new MainParser();
 
     @Test
-    public void parseCommand_addFriend() throws Exception {
-        // TODO Update after add command is updated
-        // Friend friend = new FriendBuilder().build();
-        // AddFriendCommand command = (AddFriendCommand) parser.parseCommand(FriendUtil.getAddFriendCommand(friend));
-        // assertEquals(new AddFriendCommand(friend), command);
+    public void parseCommand_friendCommands() throws Exception {
+        String addFriendCommandString = FriendCommandParser.COMMAND_WORD + FLAG_POSTFIX.getFlag()
+                + FLAG_ADD.getFlag() + VALID_FRIEND_ID_AMY;
+        assertTrue(parser.parseCommand(addFriendCommandString) instanceof AddFriendCommand);
+    }
+
+    @Test
+    public void parseCommand_gameCommands() throws Exception {
+        String addGameCommandString = GameCommandParser.COMMAND_WORD + FLAG_POSTFIX.getFlag()
+                + FLAG_ADD.getFlag() + VALID_GAME_ID_CSGO;
+        assertTrue(parser.parseCommand(addGameCommandString) instanceof AddGameCommand);
     }
 
     @Test
@@ -39,22 +53,6 @@ public class MainParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    @Test
-    public void parseCommand_delete() throws Exception {
-        // TODO Update after delete command is updated
-        // DeleteFriendCommand command = (DeleteFriendCommand) parser.parseCommand(
-        //      DeleteFriendCommand.COMMAND_WORD + " " + AMY.getFriendId().toString());
-        // assertEquals(new DeleteFriendCommand(AMY.getFriendId()), command);
-    }
-
-    //    @Test
-    //    public void parseCommand_edit() throws Exception {
-    //        Friend friend = new FriendBuilder().build();
-    //        EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder(friend).build();
-    //        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-    //                + INDEX_FIRST_PERSON.getOneBased() + " " + FriendUtil.getEditFriendDescriptorDetails(descriptor));
-    //        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
-    //    }
 
     @Test
     public void parseCommand_exit() throws Exception {
@@ -66,13 +64,6 @@ public class MainParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
-    }
-
-    @Test
-    public void parseCommand_list() throws Exception {
-        // TODO Update after list command is updated
-        // assertTrue(parser.parseCommand(ListFriendCommand.COMMAND_WORD) instanceof ListFriendCommand);
-        // assertTrue(parser.parseCommand(ListFriendCommand.COMMAND_WORD + " 3") instanceof ListFriendCommand);
     }
 
     @Test

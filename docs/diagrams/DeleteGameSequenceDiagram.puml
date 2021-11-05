@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+
+box Logic GAME_DELETE_BOX_COLOR
+participant ":MainParser" as MainParser MAIN_PARSER_COLOR
+participant ":GameCommandParser" as GameCommandParser GAME_PARSER_COLOR
+participant ":DeleteGameCommandParser" as DeleteGameCommandParser DELETE_GAME_PARSER_COLOR
+participant ":DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
+end box
+
+[-> MainParser : parse("game --delete DOTA")
+activate MainParser
+
+create GameCommandParser
+MainParser -> GameCommandParser : new GameCommandParser()
+activate GameCommandParser
+
+GameCommandParser -> MainParser
+deactivate GameCommandParser
+
+MainParser -> GameCommandParser : parse("--delete DOTA")
+activate GameCommandParser
+
+create DeleteGameCommandParser
+GameCommandParser -> DeleteGameCommandParser : new DeleteGameCommandParser()
+activate DeleteGameCommandParser
+DeleteGameCommandParser -> GameCommandParser
+deactivate DeleteGameCommandParser
+
+GameCommandParser -> DeleteGameCommandParser : parse("--delete  DOTA")
+activate DeleteGameCommandParser
+
+create DeleteGameCommand
+DeleteGameCommandParser -> DeleteGameCommand : new DeleteGameCommand(gameId)
+activate DeleteGameCommand
+DeleteGameCommand -> DeleteGameCommandParser
+deactivate DeleteGameCommand
+
+
+DeleteGameCommandParser -> GameCommandParser : command
+deactivate DeleteGameCommandParser
+DeleteGameCommandParser -[hidden]-> GameCommandParser
+destroy DeleteGameCommandParser
+
+GameCommandParser -> MainParser : command
+deactivate GameCommandParser
+GameCommandParser -[hidden]-> MainParser
+destroy GameCommandParser
+
+[<--MainParser : command
+deactivate MainParser
+
+[-> DeleteGameCommand : command.execute()
+activate DeleteGameCommand
+[<--DeleteGameCommand : commandResult
+deactivate DeleteGameCommand
+[<-[hidden]- DeleteGameCommand
+destroy DeleteGameCommand
+
+@enduml
