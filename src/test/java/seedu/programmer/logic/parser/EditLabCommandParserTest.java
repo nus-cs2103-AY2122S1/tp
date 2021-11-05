@@ -14,6 +14,7 @@ import static seedu.programmer.logic.commands.CommandTestUtil.VALID_LAB_NO;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_LAB_NO2;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE2;
+import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.programmer.model.student.Lab.MESSAGE_LAB_NUMBER_CONSTRAINT;
@@ -61,6 +62,11 @@ public class EditLabCommandParserTest {
     }
 
     @Test
+    public void parse_noNewLabNumAndNoNewTotalScore_failure() {
+        assertParseFailure(parser, LAB_NUM, MESSAGE_ARGUMENT_SHOULD_BE_SPECIFIED);
+    }
+
+    @Test
     public void parse_allFieldsSpecified_success() {
         Lab originalLab = new LabBuilder().withLabNum(VALID_LAB_NO).withTotal(VALID_TOTAL_SCORE).build();
         LabNum labNum = new LabNum(VALID_LAB_NO2);
@@ -84,5 +90,4 @@ public class EditLabCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + LAB_NUM + LAB_TOTAL2,
                 new EditLabCommand(originalLab, labTotal));
     }
-
 }
