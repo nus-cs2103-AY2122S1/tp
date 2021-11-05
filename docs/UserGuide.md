@@ -875,7 +875,7 @@ The commands are categorised into 4 different categories:
 
 ### Students
 
-Action | Format, Examples
+Action | Format & Examples
 --------|------------------
 [**Add Student**](#adding-a-student-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
 [**Edit Student**](#editing-a-student-edit) | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
@@ -903,8 +903,8 @@ Action | Format
 [**View Monthly Calendar**](#viewing-your-monthly-calendar-month) | `month`
 [**View Yearly Calendar**](#viewing-your-yearly-calendar-year) | `year`
 [**Navigate to Today in Calendar**](#navigate-to-today-in-the-calendar-today) | `today`
-[**Navigate forward in Calendar**](#navigating-forward-in-the-calendar-next) | `next`
-[**Navigate backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
+[**Navigate Forward in Calendar**](#navigating-forward-in-the-calendar-next) | `next`
+[**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
 [**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
 
 ### General
