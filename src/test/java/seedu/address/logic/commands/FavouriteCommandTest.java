@@ -94,7 +94,7 @@ public class FavouriteCommandTest {
         // different person -> returns false
         assertFalse(favouriteFirstCommand.equals(favouriteSecondCommand));
     }
-  
+
     @Test
     public void execute_validIndex_success() {
         String expectedMessage = TypicalPersons.ALICE.getName().fullName
