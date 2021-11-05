@@ -36,7 +36,7 @@ public class DeleteShiftCommand extends Command {
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] or "
             + "[" + PREFIX_DASH_NAME + " NAME] "
-            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
+            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT "
             + DATE_RANGE_INPUT
             + "\n\n"
             + "Examples:\n" + COMMAND_WORD + " "

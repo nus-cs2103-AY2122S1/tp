@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.TimeUtil.isValidTime;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
-import seedu.address.commons.util.TimeUtil;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.RecurrencePeriod;
 import seedu.address.model.person.exceptions.NoShiftException;
 
@@ -277,13 +276,13 @@ public class Shift {
             throw new InvalidShiftTimeException();
         }
         if (order == 0) {
-            if (startTime.isBefore(TimeUtil.getDefaultMorningStartTime())
-                    || endTime.isAfter(TimeUtil.getDefaultMorningEndTime())) {
+            if (startTime.isBefore(DateTimeUtil.getDefaultMorningStartTime())
+                    || endTime.isAfter(DateTimeUtil.getDefaultMorningEndTime())) {
                 throw new InvalidShiftTimeException();
             }
         } else {
-            if (startTime.isBefore(TimeUtil.getDefaultAfternoonStartTime())
-                    || endTime.isAfter(TimeUtil.getDefaultAfternoonEndTime())) {
+            if (startTime.isBefore(DateTimeUtil.getDefaultAfternoonStartTime())
+                    || endTime.isAfter(DateTimeUtil.getDefaultAfternoonEndTime())) {
                 throw new InvalidShiftTimeException();
             }
         }
@@ -307,8 +306,8 @@ public class Shift {
         String endTimeString = stringSplit[3];
         return isValidDayOfWeek(dayString)
                 && Slot.isValidSlot(slotString)
-                && isValidTime(startTimeString)
-                && isValidTime(endTimeString);
+                && DateTimeUtil.isValidTime(startTimeString)
+                && DateTimeUtil.isValidTime(endTimeString);
 
     }
 
