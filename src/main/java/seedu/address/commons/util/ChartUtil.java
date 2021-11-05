@@ -90,26 +90,29 @@ public class ChartUtil {
         lineChart.setTitle(title);
         lineChart.setId("chart1");
 
-        // Input data points: score, mean, median
-        XYChart.Series seriesScore = new XYChart.Series();
+        // Input score data points
+        XYChart.Series<String, Number> seriesScore = new XYChart.Series<>();
         seriesScore.setName(dataLabel);
         for (Map.Entry<String, Number> entry : data.entrySet()) {
-            seriesScore.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
+            seriesScore.getData().add(new XYChart.Data<>(wrap(entry.getKey()), entry.getValue()));
         }
+        lineChart.getData().add(seriesScore);
 
-        XYChart.Series seriesMean = new XYChart.Series();
+        // Input mean data points
+        XYChart.Series<String, Number> seriesMean = new XYChart.Series<>();
         seriesMean.setName("cohort mean");
         for (Map.Entry<String, Number> entry : mean.entrySet()) {
-            seriesMean.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
+            seriesMean.getData().add(new XYChart.Data<>(wrap(entry.getKey()), entry.getValue()));
         }
+        lineChart.getData().add(seriesMean);
 
-        XYChart.Series seriesMedian = new XYChart.Series();
+        // Input median data points
+        XYChart.Series<String, Number> seriesMedian = new XYChart.Series<>();
         seriesMedian.setName("cohort median");
         for (Map.Entry<String, Number> entry : median.entrySet()) {
-            seriesMedian.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
+            seriesMedian.getData().add(new XYChart.Data<>(wrap(entry.getKey()), entry.getValue()));
         }
-
-        lineChart.getData().addAll(seriesScore, seriesMean, seriesMedian);
+        lineChart.getData().add(seriesMedian);
 
         return lineChart;
     }
@@ -120,7 +123,6 @@ public class ChartUtil {
     public static double roundUpToNearestMultiple(double val, int multiple) {
         return Math.round(val / multiple) * multiple;
     }
-
 
     /**
      * Wraps the given string such that each line contains maximum of 12 characters, with a maximum of 3 lines.
