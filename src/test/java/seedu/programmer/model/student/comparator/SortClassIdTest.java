@@ -1,13 +1,12 @@
 package seedu.programmer.model.student.comparator;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.programmer.testutil.TypicalClasses.CLASS_1;
 import static seedu.programmer.testutil.TypicalClasses.CLASS_2;
 import static seedu.programmer.testutil.TypicalClasses.CLASS_3;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 
 class SortClassIdTest {
