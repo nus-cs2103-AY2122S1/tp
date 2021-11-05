@@ -45,7 +45,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(HEADER_ALERT + MESSAGE_INVALID_INDEX);
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -161,7 +161,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(trimmedTime, TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new ParseException(HEADER_ALERT + MESSAGE_INVALID_TIME);
+            throw new ParseException(MESSAGE_INVALID_TIME);
         }
     }
 
@@ -172,7 +172,7 @@ public class ParserUtil {
         requireNonNull(day);
         String cleanedDay = StringUtil.capitalizeFirstCharAndLowerRest(day.trim());
         return parseStringToDay(cleanedDay)
-                .orElseThrow(() -> new ParseException(HEADER_ALERT + MESSAGE_INVALID_DAY));
+                .orElseThrow(() -> new ParseException(MESSAGE_INVALID_DAY));
     }
 
     /**
@@ -206,7 +206,7 @@ public class ParserUtil {
         try {
             cost = Double.parseDouble(trimmedCost);
         } catch (NumberFormatException e) {
-            throw new ParseException(HEADER_ALERT + MESSAGE_INVALID_PRICE_NOT_NUMBER);
+            throw new ParseException(MESSAGE_INVALID_PRICE_NOT_NUMBER);
         }
 
         if (!isValidPrice(cost)) {

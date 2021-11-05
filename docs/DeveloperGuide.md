@@ -1194,7 +1194,7 @@ testers are expected to do more *exploratory* testing.
     * Test case: `edit 1 p/`
       Expected: First student's parent contact is not edited. The message box displays a message alerting the user of the constraints on parent contact numbers.
       
-    * Other incorrect edit name commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits),
+    * Other incorrect edit parent contact commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits),
     `edit 1 p/x1111111` (where x is a number that is not '6', '8' or '9')
       Expected: Similar to previous
       
@@ -1208,7 +1208,7 @@ testers are expected to do more *exploratory* testing.
     * Test case: `edit 1 e/`
       Expected: First student's email is not edited. The message box displays a message alerting the user of the constraints on emails.
       
-    * Other incorrect edit name commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` 
+    * Other incorrect edit email commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` 
       Expected: Similar to previous
       
 1. Editing a student's address
@@ -1221,7 +1221,7 @@ testers are expected to do more *exploratory* testing.
     * Test case: `edit 1 a/`
       Expected: First student's address is not edited. The message box displays a message alerting the user of the constraints on addresses.
       
-    * Other incorrect edit name commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`
+    * Other incorrect edit address commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`
       Expected: Similar to previous
       
 1. Editing a student's grade
@@ -1234,7 +1234,7 @@ testers are expected to do more *exploratory* testing.
     * Test case: `edit 1 g/`
       Expected: First student's grade is not edited. The message box displays a message alerting the user of the constraints on grade levels.
       
-    * Other incorrect edit name commands to try: `edit 1 g/A5`, `edit 1 g/p`
+    * Other incorrect edit grade commands to try: `edit 1 g/A5`, `edit 1 g/p`
       Expected: Similar to previous
       
 1. Editing a student's remarks
@@ -1247,11 +1247,31 @@ testers are expected to do more *exploratory* testing.
     * Test case: `edit 1 r/`
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
       
+    * Test case: `edit 1 r/test1 r/test2 r/test3 r/test4 r/test5` (assuming first student already has 1 remark tagged)
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user of that only a maximum of 5 remarks can be tagged to a student.
+      
+    * Other incorrect edit remarks commands to try: `edit 1 r/test test`, `edit 1 r/!`
+      Expected: Similar to previous
+      
     * Test case: `edit 1 dr/discounted` (assuming 'discounted' remark already tagged to first student)
       Expected: Remark is deleted from student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Other incorrect edit name commands to try: `edit 1 g/A5`, `edit 1 g/p`
+    * Test case: `edit 1 dr/`
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
+      
+    * Other incorrect edit remarks commands to try: `edit 1 dr/test test`, `edit 1 dr/!`
       Expected: Similar to previous
+          
+    * Test case: `edit 1 dr/notTaggedToStudent` (assuming 'notTaggedToStudent' remark is not tagged to first student)
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user that the remark he or she wishes to delete does not exist.
+      
+1. Editing multiple fields and misc scenarios
+
+    * Test case: `edit 1 n/Alex p/87654321 g/s4`
+      Expected: First student's name, parent contact and grade are edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 0 n/Alex`
+      Expected: First student is not edited. The message box displays a message alerting the user that the given index is not valid.
 
 ### Saving data
 
