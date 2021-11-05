@@ -109,11 +109,15 @@ The sections below give more details of each component.
 
 ### UI component
 
+![TAB UI](images/annotatedGui.png)
+
+*Figure A.1.1: Graphical User Interface of TAB*
+
 The *API* of this component is specified in the [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java) interface.
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-*Figure A.1.1: Class Diagram of GUI using JavaFX framework*
+*Figure A.1.2: Class Diagram of GUI using JavaFX framework*
 
 The `Ui` component uses the JavaFX framework and consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CenterPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible _GUI_.
 
@@ -125,7 +129,7 @@ The `Ui` component
 * listens for changes to `Model` data so that the _UI_ can be updated with the modified data.
 * keeps a reference to the `Logic` component, as it relies on `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Calendar` objects residing in the `Model`.
-* chooses which component it displays based on the `CommandResult` returned by `Logic` component after executing the user command (e.g., `CommandResult#isShowSchedule()` tells the `Ui` to display the user's schedule. See also: [Schedule feature](#schedule-feature)). 
+* chooses which component it displays based on the `CommandResult` returned by `Logic` component after executing the user command (e.g., `CommandResult.DisplayType.STUDENTS` tells the `Ui` to display the `PersonGridPanel`. See also: [Switching between students calendar and tags](#switching-between-students-calendar-and-tags)). 
 
 ### Logic component
 
@@ -188,7 +192,7 @@ Note that deleting a person in the tuition address book requires
 2. removing all calendar `Entry`s related to that person from the `CalendarEntryList`
 3. removing all `Tag`s related to that person from the `UniqueTagList`
 
-Working together the `UniquePersonList`, `CalendarEntrylist`, and `UniqueTagList` manage all of TAB's data.
+Working together, the `UniquePersonList`, `CalendarEntrylist`, and `UniqueTagList` manage all of TAB's data.
 **All three of these lists must be updated together, whenever a change is made to TAB's data.**
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -310,6 +314,7 @@ list without the deleted lesson will be created and will replace the original `P
 The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.<br>
 
 #### Storing lessons
+
 The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
 to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the
 `Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
@@ -366,18 +371,20 @@ we decided to put off alternative 2 for future considerations.
 
 TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface, allowing users to view a calendar that contains all their existing lessons, so that they can visualise their schedule and plan ahead.
 
-![Calendar Interface](images/week.png)
+![CalendarView](images/GUICalendarView.png)
 
-A CalendarFX `CalendarView` with custom display settings is integrated into our GUI with the `SchedulePanel` class in the `Ui` component.
+*Figure C.1.1: Integration of the CalendarView in our GUI*
+
+A CalendarFX `CalendarView` with custom display settings is integrated into our GUI through the `SchedulePanel` class in the `Ui` component.
 This `CalendarView` displays every CalendarFX `Entry` that we store in model component's `CalendarEntryList`.
 Any changes made to the `CalendarEntryList` in `Model` will automatically update the `CalendarView` through CalendarFX's internal implementation (see how in their [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)).
 
-The `CalendarEntryList` converts every `Lesson` in TAB and maintains them as CalendarFX `Entry`(s) (see also: [Model Component](#model-component)).
+`CalendarEntryList` converts every `Lesson` in TAB and maintains them as CalendarFX `Entry`(s) (see also: [Model Component](#model-component)).
 Some knowledge of the CalendarFX `Entry` _API_ (provided [here](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html)) 
 is necessary to understand the conversion that happens in [`CalendarEntryList#convertRecurringLessonToEntries(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L331)
 and [`CalendarEntryList#convertToMakeupEntry(Person, Lesson)`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/lesson/CalendarEntryList.java#L384).
 
-In particular, CalendarFX `Entry` does not support recurrence exceptions. 
+It is important to understand the limitations of CalendarFX `Entry`. In particular, it does not support recurrence exceptions. 
 This means that we cannot modify properties of specific occurrences of a recurring `Entry`. 
 For example, suppose we have a lesson entry that recurs weekly starting from 1st Jan till 31st Dec. There is no in-built way to change the details of a single date, 
 such as cancelling a lesson only on 15th Jan. However, cancelling lessons for a particular week is a valid and common
@@ -466,14 +473,16 @@ Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
 
 The `CenterPanel` in the `Ui` component consists of the `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` and handles the switching between each of them for users to view their list of students and lessons, schedule, and list of tags respectively.
 
+![CenterPanel Class Diagram](images/CenterPanelClassDiagram.png)
+
 The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `calendar` command.
 
 ![Interactions Inside the Ui Component for the `calendar` Command](images/ScheduleSequenceDiagram.png)
 
-*Figure I.1.1: Sequence Diagram of Schedule Command*
+*Figure I.1.1: Sequence Diagram of Calendar Command*
 
-When the user requests to view their schedule in the calendar interface,the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
-Switching back is similarly achieved by calling the `displayPersonListPanel()` method of `CenterPanel`.
+When the user requests to view the calendar interface, the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
+Switching to the student view and tag list is similarly achieved by calling `displayPersonGridPanel()` and `displayTagListPanel` respectively.
 
 ### Undo/redo feature
 
