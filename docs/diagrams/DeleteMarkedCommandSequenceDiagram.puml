@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteMarkedCommand" as DeleteMarkedCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete_marked")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete_marked")
+activate AddressBookParser
+create DeleteMarkedCommand
+AddressBookParser -> DeleteMarkedCommand
+activate DeleteMarkedCommand
+DeleteMarkedCommand --> AddressBookParser
+deactivate DeleteMarkedCommand
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> DeleteMarkedCommand: execute()
+activate DeleteMarkedCommand
+
+
+DeleteMarkedCommand -> Model: getFilteredPersonList()
+activate Model
+Model --> DeleteMarkedCommand: doneList
+deactivate Model
+
+loop until doneList is empty
+    DeleteMarkedCommand -> Model: deletePerson(personToDelete)
+    activate Model
+    Model --> DeleteMarkedCommand:
+    deactivate Model
+end
+
+create CommandResult
+DeleteMarkedCommand -> CommandResult
+activate CommandResult
+CommandResult --> DeleteMarkedCommand
+deactivate CommandResult
+
+DeleteMarkedCommand --> LogicManager: result
+deactivate DeleteMarkedCommand
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
