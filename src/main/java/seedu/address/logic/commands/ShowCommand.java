@@ -252,8 +252,10 @@ public class ShowCommand extends Command {
         boolean isIdEquals = Objects.equals(id, toCompare.id);
         boolean isAssessmentEquals = Objects.equals(assessment, toCompare.assessment);
         boolean isGroupEquals = Objects.equals(group, toCompare.group);
+        boolean isSavePathEquals = Objects.equals(savePath, toCompare.savePath);
 
-        return isIndexEquals && isNameEquals && isIdEquals && isAssessmentEquals && isGroupEquals;
+        return isIndexEquals && isNameEquals && isIdEquals
+                && isAssessmentEquals && isGroupEquals && isSavePathEquals;
     }
 
     public void setIndex(Index index) {
