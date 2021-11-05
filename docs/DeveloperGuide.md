@@ -186,7 +186,7 @@ Notice that the `AddModuleLessonCommandParser` uses the method `parseModuleCodeF
 
 **Aspect: What should be associated with the `ModuleCode`:**
 
-* **Alternative 1 (initial idea):** Have both `ModuleCode` and `LessonCode` be standalone classes associate with `Person` and `ModuleLesson` as shown below.
+* **Alternative 1 (initial idea):** Have both `ModuleCode` and `LessonCode` be standalone classes associate with `Person` and `ModuleLesson`.
     * Pros: Easier to implement
     * Pros: Reduced coupling.
     * Cons: Unable to tell which `ModuleCode` a `LessonCode` belongs to when there are more than one `ModuleCode` and `LessonCode`. Have to find another way to make the association which would introduce dependencies and remove the pros of reduced coupling.
