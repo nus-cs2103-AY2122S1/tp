@@ -719,7 +719,7 @@ The following sequence diagram shows how the roster operation works:
 The following activity diagram summarizes what happens when a user executes the roster command:
 
 <center>
-<img alt="FilterActivityDiagram" src="images/DeveloperGuideImage/FilterActivityDiagram.png"/>
+<img alt="RosterActivityDiagram" src="images/DeveloperGuideImage/RosterActivityDiagram.png"/>
 </center>
 
 #### Design considerations:
