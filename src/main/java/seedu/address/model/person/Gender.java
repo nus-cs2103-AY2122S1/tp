@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should only be 'M' for male, 'F' for female and 'O' for others. \n"
-                    + "Leaving it blank will remove the Gender field. \n";
+            "Gender should only be 'M' for male, 'F' for female and 'O' for others.\n"
+                    + "Leaving it blank will remove the Gender field.";
 
     /*
      * The gender must be one of the following character: F, M or O.
