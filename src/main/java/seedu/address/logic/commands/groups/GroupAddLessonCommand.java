@@ -61,6 +61,6 @@ public class GroupAddLessonCommand extends Command {
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         model.setGroupToView(groupWithLesson);
         model.setViewingType(ViewingType.GROUP);
-        return new CommandResult(String.format(ADD_LESSON_SUCCESS, lessonToAdd, groupWithLesson));
+        return new CommandResult(ADD_LESSON_SUCCESS);
     }
 }
