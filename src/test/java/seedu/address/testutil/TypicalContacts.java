@@ -32,7 +32,7 @@ public class TypicalContacts {
     public static final Contact ALICE = new ContactBuilder().withCategoryCode("att").withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withReview("great")
-            .withTags("friends").withRating("3").build();
+            .withTags("friends", "new").withRating("3").build();
     public static final Contact BENSON = new ContactBuilder().withCategoryCode("oth").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -40,7 +40,7 @@ public class TypicalContacts {
     public static final Contact CARL = new ContactBuilder().withCategoryCode("acc").withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
             .withReview("bad").withRating("2").build();
-    public static final Contact DANIEL = new ContactBuilder().withCategoryCode("tpt").withName("Daniel Meier")
+    public static final Contact DANIEL = new ContactBuilder().withCategoryCode("oth").withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
             .withReview("great").withTags("friends").withRating("5").build();
     public static final Contact ELLE = new ContactBuilder().withCategoryCode("att").withName("Elle Meyer")
