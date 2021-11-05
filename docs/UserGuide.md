@@ -132,13 +132,15 @@ Adds a Student to the Address Book.
 Format:
 
 ```
-add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>]
+[t/<TAG>]
 ```
 
 Example:
 
 ```
-add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
+add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com
+a/John Street, Blk 12, #01-01
 ```
 
 ### Delete a Student - `delete`
@@ -164,7 +166,8 @@ Edits an existing Student Contact in the Address Book.
 Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>]
+[a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
