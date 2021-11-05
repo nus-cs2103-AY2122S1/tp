@@ -35,7 +35,6 @@ Given below are my contributions to the project.
   * Integrated `Notes` category into `find` and wrote tests for it: 
   [\#211](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/211)
 
-
 * **Documentation**
     * User Guide
         * Added documentation for `filter_interview` feature:
