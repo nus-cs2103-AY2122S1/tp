@@ -50,13 +50,13 @@ public class AddFavCommand extends Command {
                 }
             }
         }
-        // included this so the list will be properly updated
-        model.refreshFilteredPersonList();
 
         if (noPersonFound) {
             return new CommandResult(
                     String.format(Messages.MESSAGE_NO_SUCH_ID_FOUND));
         } else {
+            // included this so the list will be properly updated
+            model.refreshFilteredPersonList();
             return new CommandResult(
                     String.format(Messages.MESSAGE_FAVOURITE_ADDED, studentId));
         }

@@ -57,7 +57,6 @@ public class RemoveModCommandParser implements Parser<RemoveModCommand> {
             throw new ParseException(RemoveModCommand.MESSAGE_NO_CHANGE);
         }
 
-        Collection<String> tagSet;
         if (tags.size() == 1 && tags.contains("")) {
             throw new ParseException(RemoveModCommand.MESSAGE_NO_CHANGE);
         } else {

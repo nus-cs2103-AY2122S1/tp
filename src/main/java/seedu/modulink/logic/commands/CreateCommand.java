@@ -61,11 +61,6 @@ public class CreateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        // Problem with this if statement:
-        // Since the model person already in the system has this student ID,
-        // creating another model person makes the "execute_personAcceptedByModel_addSuccessful" test fail
-        // Don't know what to do about this rn
-        // FIXED!!
         if (model.hasStudentIdNotProfile(myProfile)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
         }

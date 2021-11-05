@@ -13,7 +13,9 @@ import seedu.modulink.logic.parser.exceptions.ParseException;
 public class Mod {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Please enter a valid Module Code (e.g. CS2103T). You may also include your grouping status.\n"
+            "Please enter a valid Module Code (e.g. CS2103T). A valid Module Code starts with 2-3 letters, followed by"
+                + "4 digits, and optionally ends with a letter."
+                + " You may also include your grouping status.\n"
                 + "Available grouping statuses are: need member, need group. Please leave it blank to "
                 + "indicate you do not need a group.";
     public static final String VALIDATION_REGEX =

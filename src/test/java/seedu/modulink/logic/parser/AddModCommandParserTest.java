@@ -5,6 +5,7 @@ import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2103T;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2103T;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -34,5 +35,11 @@ class AddModCommandParserTest {
         AddModCommand expectedCommand = new AddModCommand(descriptor);
         assertParseFailure(parser, userInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    void parse_randomInput_failure() {
+        String userInput = " " + PREFIX_ID + VALID_TAG_CS2100;
+        assertParseFailure(parser, userInput, AddModCommand.MESSAGE_NO_CHANGE);
     }
 }

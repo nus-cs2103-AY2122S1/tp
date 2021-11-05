@@ -16,7 +16,7 @@ import seedu.modulink.model.tag.Mod;
 public class Person {
     private static final Person placeholder = new Person(new Name("Your name"),
             new StudentId("A0000000A"), new Phone("81234567"),
-            new Email("youremail@email.com"), new GitHubUsername("your_github_user"),
+            new Email("youremail@email.com"), new GitHubUsername("your-github-user"),
             new TelegramHandle("yourtelehandle"), false,
             new HashSet<>(), true);
 
