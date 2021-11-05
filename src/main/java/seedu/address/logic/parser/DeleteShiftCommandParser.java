@@ -8,12 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.ParserUtil.extractTupleDates;
-import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.DeleteShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -38,7 +38,7 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
-        LocalDate[] dates = initializeLocalDateToThisWeek();
+        LocalDate[] dates = DateTimeUtil.getDisplayedDateArray();
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_DASH_INDEX and PREFIX_DASH_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
                 || !argMultimap.getPreamble().isEmpty() || (!arePrefixesPresent(argMultimap, PREFIX_DASH_INDEX)
