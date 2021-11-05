@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeletePersonFromFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,13 +18,11 @@ public class DeletePersonFromFolderCommandParser
      * @throws ParseException if the given index and folder name is invalid.
      */
     public DeletePersonFromFolderCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, new Prefix(""));
-        List<String> allValues = argMultimap.getAllValues(new Prefix(""));
-        if (allValues.size() <= 1) {
+        if (args.length() == 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeletePersonFromFolderCommand.MESSAGE_USAGE));
         }
-        String[] inputsToConvertToCommand = extractProperInputs(allValues);
+        String[] inputsToConvertToCommand = extractIndividualFolderAndIndex(args);
         assert inputsToConvertToCommand.length == 2
                 : "Should have exactly 2 inputs of Index and Folder strings only!";
 
@@ -60,22 +56,6 @@ public class DeletePersonFromFolderCommandParser
         return ParserUtil.parseIndex(indexString);
     }
 
-
-    /**
-     * Extracts the elements relevant to the
-     * folder names and index from {@code List} of inputs
-     * and returns string of index and folder name {@code String[]}.
-     * @param allValues {@code List} of inputs
-     * @return folder name and index strings {@code String[]}
-     * @throws ParseException if the given string inputs are invalid.
-     */
-    private String[] extractProperInputs(List<String> allValues)
-            throws ParseException {
-        String indexAndFolderJoined = buildProperInputs(allValues);
-        String[] indexAndFolderParts = extractIndividualFolderAndIndex(indexAndFolderJoined);
-        return indexAndFolderParts;
-    }
-
     /**
      * Segments the joined string of folder name and index into
      * individual {@code String[]} objects.
@@ -106,21 +86,4 @@ public class DeletePersonFromFolderCommandParser
         return inputsOfIndexAndFolder;
     }
 
-
-    /**
-     * Concatenates the multiple inputs into a single string.
-     * @param allValues {@code List} of inputs
-     * @return concatenated inputs consisting of Index and Folder {@code String}
-     */
-    private String buildProperInputs(List<String> allValues) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 1; i < allValues.size(); i++) {
-            if (i > 1) {
-                stringBuilder.append(" ").append(allValues.get(i));
-                continue;
-            }
-            stringBuilder.append(allValues.get(i));
-        }
-        return stringBuilder.toString();
-    }
 }
