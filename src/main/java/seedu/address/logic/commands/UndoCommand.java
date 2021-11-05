@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.UndoRedoStack;
@@ -13,8 +14,7 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes the last Command that modified TAB data. \n";
-
+            + ": Undoes the last Command that modified TAB data. \n" + MESSAGE_NO_PARAMS;
     public static final String MESSAGE_SUCCESS = "%1$s command for %2$s has been undone.";
     public static final String MESSAGE_FAILURE = "No commands to undo!";
 
