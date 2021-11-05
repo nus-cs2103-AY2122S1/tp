@@ -1210,11 +1210,25 @@ Expected: Error details will be shown in the status message.
 
 ## **Appendix: Efforts**
 
-**Calendar Interface**
-The Calendar interface was implemented using the CalendarFX library -- our work on adapting CalendarFX into TAB is contained in the `SchedulePanel` class.
-Explain the difficulty level, challenges faced, effort required, and achievements of the project.
-If a significant part (e.g., more than 5%) of the effort was saved through reuse,
-mention what you reused and how it affected the effort e.g., 
-the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
+In this Appendix, we highlight the difficulty level, challenges faced, effort required, and achievements of our project.
 
-Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+**Calendar Interface and CenterPanel**
+
+The Calendar interface was implemented using the CalendarFX library -- our work on adapting CalendarFX into TAB is contained in the `SchedulePanel` class (see how in the [Calendar interface](#calendar-interface) section).
+A lot of effort was required to make this feature work as there was very a steep learning curve due to the massive size and complexity of the library, and minimal documentation on how to customise it.
+Integrating the interface into our app with JavaFX was also extremely difficult, as the learning curve was just as steep with JavaFX and FXML elements.
+It took two weeks (from v1.1 to v1.2b) of learning and trial-and-error to achieve a working prototype of a weekly calendar and the CenterPanel which houses it.
+Furthermore, additional complex calendar logic had to be added to customise behaviours to fit our target audience, such as allowing recurrence exceptions.
+Implementation of these features took ~4k Loc.
+
+**Undo/Redo feature**
+
+**Finding students**
+
+**Lessons**
+
+**Clashing Lessons**
+
+**Fee Calculator**
+
+
