@@ -15,27 +15,33 @@
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <VBox alignment="CENTER_LEFT" minHeight="105" minWidth="-Infinity" GridPane.columnIndex="0">
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <Label fx:id="id">
+                    <styleClass>
+                        <String fx:value="cell_big_label" />
+                        <String fx:value="appointment_big_label" />
+                    </styleClass>
+                </Label>
+                <Label fx:id="name" styleClass="appointment_big_label" text="\$first">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
-               <styleClass>
-                  <String fx:value="cell_big_label" />
-                  <String fx:value="appointment_big_labelappointment_big_label" />
-               </styleClass>
                 </Label>
-               <Label fx:id="name" styleClass="appointment_big_label" text="\$first" />
             </HBox>
-             <Label fx:id="meeting" styleClass="appointment_time" text="\$meeting" />
+            <Label fx:id="meeting" styleClass="appointment_time" text="\$meeting">
+                <minWidth>
+                    <!-- Ensures that the label text is never truncated -->
+                    <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+            </Label>
         </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
     </GridPane>
 </HBox>
