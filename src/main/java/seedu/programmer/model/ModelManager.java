@@ -163,6 +163,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Student> getAllStudents() {
+        return programmerError.getStudentList();
+    }
+
+    @Override
     public ObservableList<DisplayableObject> getSelectedInformation() {
         return programmerError.getSelectedInformation();
     }
