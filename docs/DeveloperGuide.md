@@ -166,7 +166,7 @@ Here are the remaining classes in logic, mainly utility classes:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+
 
 
 The `Model` component:
@@ -537,193 +537,268 @@ be changed.
 
 #### Use case 01: Add a task
 
+Preconditions: Dash is launched, user is on tasks tab
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-3. User requests to add a task, specifying task info
-4. Dash adds task to the list
+1. User requests to add a task, specifying task info
+2. Dash adds task to the list
 
 Use case ends.
 
 <u>Extensions:</u>
 
-* 3a. Incorrect syntax is used for a task field
-  * 3a1. Dash shows an error message
+* 1a. Incorrect syntax is used
+  * 1a1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 #### Use case 02: Delete a task
 
+Preconditions: Dash is launched, user is on tasks tab
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-3. User requests to delete a task, specifying the index to be deleted
-4. Dash deletes the task
+1. User requests to delete a task, specifying the index to be deleted
+2. Dash deletes the task
 
 Use case ends.
 
 <u>Extensions:</u>
 
-3. The list is empty
+* 1a. The given index is invalid
+  * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-3. The given index is invalid
-    * a. Dash shows an error message
-
-Use case resumes at step 2.
+* 1b. Incorrect syntax is used
+  * 1b1. Dash shows an error message
+    
+Use case resumes at step 1.
 
 #### Use case 03: Edit a task
 
+Preconditions: Dash is launched and user is on tasks tab
 <u>MSS:</u>
 
-1. User switches to the task tab
-2. Dash shows the list of tasks
-3. User inputs the task index to be edited, specifying updated info for the task
-4. Dash edits the task
+1. User inputs the task index to be edited, specifying updated info for the task
+2. Dash edits the task
 
 Use case ends.
 
 <u>Extensions:</u>
 
-3.  The task list is empty
+* 1a. The given index is invalid
+   * 1a1. Dash shows an error message
 
-Use case ends
+Use case resumes at step 1.
 
-3. The given index is invalid
-   * a. Dash shows an error message
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
-Use case resumes at step 3
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 field to be edited
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.
 
 #### Use case 04: View all tasks
 
+Precondition: Dash is launched and user is on tasks tab
 <u>MSS:</u>
 
-1. User switches to the task tab
+1. User requests to show all tasks
 2. Dash shows the list of tasks
-
-Use case ends.
-
-<u>Extensions:</u>
-
-2. The task list is empty
 
 Use case ends.
 
 #### Use case 05: Add a contact
 
+Preconditions: Dash is launched and user is on contacts tab
 <u>MSS:</u>
 
-1. User switches to the contacts tab
-2. Dash shows a list of contacts
-3. User requests to add a contact, specifying contact info
-4. Dash adds contact to the list
+1. User requests to add a contact, specifying contact info
+2. Dash adds contact to the list
 
 Use case ends.
 
 <u>Extensions:</u>
 
-3. The contact info is invalid
-    * a. Dash shows an error message
+* 1a. Incorrect syntax is used
+    * 1a1. Dash shows an error message
 
-Use case resumes at step 2.
+* 1b. User tries to add a contact with the same name as a contact that already exists in the contact list
+  * 1b1. Dash shows an error message
+    
+Use case resumes at step 1.
 
 #### Use case 06: Delete a contact
 
+Preconditions: Dash is launched and user is on contacts tab
 <u>MSS:</u>
 
-1. User switches to the contacts tab
-2. Dash shows the list of contacts
-3. User requests to delete a contact, specifying the index to be deleted
-4. Dash deletes the contact
+1. User requests to delete a contact, specifying the index to be deleted
+2. Dash deletes the contact
 
 Use case ends.
 
 <u>Extensions:</u>
 
-3. The contacts list is empty
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-3. The given index is invalid
-    * a. Dash shows an error message
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 #### Use case 07: Edit a contact
 
+Preconditions: Dash is launched and user is on contacts tab
 <u>MSS:</u>
 
-1. User switches to contacts tab
-2. Dash shows the list of contacts
-3. User inputs the contact index to be edited, specifying the updated info for the contact
-4. Dash edits the contact
+1. User inputs the contact index to be edited, specifying the updated info for the contact
+2. Dash edits the contact
 
 Use case ends.
 
 <u>Extensions:</u>
 
-3. The contact list is empty
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-3. The given index is invalid
-   * Dash shows an error message
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 field to be edited
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.   
+
+* 1d. User tries to edit the contact's name to be the same as an existing contact's name
+    * 1d1. Dash shows an error message
+
+Use case resumes at step 1.
 
 #### Use case 08: View all contacts
 
+Precondition: Dash is launched and user is on contacts tab
 <u>MSS:</u>
 
-1. User switches to the contacts tab
+1. User requests to show all contacts
 2. Dash shows the list of contacts
+
+Use case ends.
+
+#### Use case 09: Tagging a contact
+
+Precondition: Dash is launched and user is on contacts tab
+<u>MSS:</u>
+
+1. User inputs the contact index to be tagged and specifies the tag(s) for the contact
+2. Dash adds the tag(s) to the contact
 
 Use case ends.
 
 <u>Extensions:</u>
 
-2a. The task list is empty
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-#### Use case 10: Tagging a contact
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
+Use case resumes at step 1.
+
+* 1c. User did not provide at least 1 tag to be added
+    * 1c1. Dash shows an error message
+
+Use case resumes at step 1.
+
+
+#### Use case 10: Tagging a task
+
+Precondition: Dash is launched and user is on tasks tab
 <u>MSS:</u>
 
-1. User switches to contacts tab
-2. Dash shows the list of contacts
-3. User inputs the contact index to be edited, specifying the tag(s) for the contact
-4. Dash adds the tag(s) to the contact
+1. User requests to tag a task by specifying the task index and tag(s) for the task
+2. Dash adds the tag(s) to the task
 
 Use case ends.
 
 <u>Extensions:</u>
 
-2a. The task list is empty
+* 1a. The given index is invalid
+    * 1a1. Dash shows an error message
 
-Use case ends.
+Use case resumes at step 1.
 
-3. The given index is invalid
-    * Dash shows an error message
+* 1b. Incorrect syntax is used
+    * 1b1. Dash shows an error message
 
-Use case resumes at step 2.
+Use case resumes at step 1.
 
+* 1c. User did not provide at least 1 tag to be added
+    * 1c1. Dash shows an error message
 
+Use case resumes at step 1.
 
-#### Use case 11: 
+#### Use case 11: View a list of available commands
 
-
-#### Use case 09: View a list of available commands
-
+Precondition: Dash is launched and user is not on the help tab
 <u>MSS:</u>
 
-1. User requests to view all available commands
+1. User switches to the help tab.
 2. Dash shows a list of all available commands
 
 Use case ends.
+
+#### Use case 12: Finding for a task
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to find a task and inputs the search term(s)
+2. Dash shows a list of tasks that match all the search term(s)
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+    * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 12: Finding for a contact
+
+Precondition: Dash is launched and user is on the contacts tab
+
+<u>MSS:</u>
+1. User requests to find a contact and inputs the search term(s)
+2. Dash shows a list of contacts that match all the search term(s)
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+    * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 13: Assigning contacts to tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+
 
 ### Non-Functional Requirements
 
