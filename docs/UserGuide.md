@@ -56,7 +56,7 @@ open the help window.<br>
 
 * Commands are usually abbreviated to facilitate faster typing for user convenience. As a general rule of thumb, `m`, `e` and `t` are used to represent `Member`, `Event` and `Task` respectively.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user, and they are preceded with prefixes of format `/prefix `<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `madd /n NAME`, `NAME` is a parameter which can be used as `madd /n John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -65,7 +65,11 @@ open the help window.<br>
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[/p POSITION]…​` can be completely absent (i.e. 0 times), `/p friend`, `/p friend /p family` etc.
 
-* All prefixes that are provided must be followed by a space and a non-empty parameter, except `/p ` prefix in `medit`, `/m ` prefix in `eedit`, `/att` and `/abs` in `mlist`, and `/ovd` in `tlist`.
+* All prefixes that are provided must be followed by a space and a non-empty parameter. <br> There are exceptions to this rule: 
+  * `/p ` prefix in `medit`
+  * `/m ` prefix in `eedit`
+  * `/att` and `/abs` in `mlist`
+  * `/ovd` in `tlist`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/n NAME /ph PHONE_NUMBER`, `/ph PHONE_NUMBER /n NAME` is also acceptable.
@@ -77,7 +81,8 @@ open the help window.<br>
   <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If an invalid prefix is used in a command, it will be seen as part of the previous parameter and may throw an error.
+<span id="invalid_prefix" />
+* If an invalid prefix is used in a command, it will be seen as part of the previous parameter and may throw an error. <br> e.g. if you specify `madd /n John Tan /w Street 52 /ph 91234556`, the name of member added will be `John Tan /w Street 52` which is invalid as `/` is not an alphabet or number.
 
 * Some commands require the user to enter the `EVENT_INDEX`, `MEMBER_INDEX` or `TASK_INDEX`. The `INDEX` refers to the order on 
   the display list.<br>
@@ -107,7 +112,7 @@ Parameter | Description, Constraints
 **POSITIONS** | _Positions of member_ <br> - Same as NAME. <br> - If `-` should be used, replace it with a space e.g. `Vice President`.
 **PHONE_NUMBER** | _Phone number of member_ <br> - Only numbers allowed. <br> - No number limit, but minimum 3 numbers.
 **ADDRESS** | _Physical address of member_ <br> - All characters allowed with no character limit.
-**EMAIL** | _Email address of member_ <br> - Should be of format local-part@domain.
+**EMAIL** | _Email address of member_ <br> - Should be of format local-part@domain. e.g. johndoe@example.com
 **MEMBER_INDEX** | _Index of member in the displayed `Member List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of members listed in the displayed `Member List`.
 **EVENT_INDEX** | _Index of event in the displayed `Event List` column of the application_ <br> - **Must be a positive integer** 1, 2, 3, …​ <br> - Cannot exceed the number of events listed in the displayed `Event List`.
 
@@ -155,7 +160,7 @@ Format: `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing positions, the existing positions of the member will be removed i.e. adding of positions is not cumulative.
-* You can remove all the member’s positions by typing `/p` without specifying any positions after it. In such a case, only one `/p` prefix is allowed, otherwise the second `/p` prefix will be considered an _invalid prefix_.
+* You can remove all the member’s positions by typing `/p` without specifying any positions after it. In such a case, only one `/p` prefix is allowed, otherwise the second `/p` prefix will be considered an [invalid prefix](#invalid_prefix) and will throw an error.
 
 Examples:
 * `medit /m 1 /ph 91234567 /em johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
