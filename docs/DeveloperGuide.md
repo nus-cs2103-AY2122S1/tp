@@ -299,8 +299,12 @@ The `TaskDate.java` class is created to represent a date/time object of a task, 
 upon creating a `Task` through an `add` command. Inside `TaskDate.java` class, date and time are represented by Java 
 class objects `LocalDate` and `LocalTime`. As the user can choose to either omit both date and time or have time as optional
 information, both of these objects are wrapped in Java `Optional` objects as `Optional<LocalDate>` and `Optional<LocalTime>`.
-This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `Task` which the user adds
-in without stating date/time information. 
+This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `TaskDate` of a `Task` which
+the user adds in without stating date/time information. 
+
+When the user states the time of a task only, this will be detected in the constructor of `TaskDate` and the current date will
+be stored instead through the use of `LocalDate#now`. When the user states the date of a task only, this will also be detected 
+in the constructor and time will be left as empty.
 
 The user is also required to follow a specific date and time format which the validity is checked by `DateTask#isValidTaskDate`.
 Java `LocalDate#parse` and `LocalTime#parse` are used to help verify validity of the format keyed in by the user.
@@ -311,8 +315,11 @@ Example usage of `add` command to add date/time is as follows:
 - `add d/Event dt/25/10/2021, 10:00 AM` - Adds a task "Event" that starts at the given date and time.
 
 A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
-is entered:
+is entered. The details of the **create Task** interactions have been omitted from the diagram for clarity:
 ![AddDateSequenceDiagram](images/AddDateSequenceDiagram.png)
+
+The omitted details are shown below in a separate sequence diagram:
+![AddDateSequenceDiagramRef](images/AddDateSequenceDiagramRef.png)
 
 The following activity diagram summarises what happens when a user executes an add command with date and/or time:
 ![AddDateActivityDiagram](images/AddDateActivityDiagram.png)
@@ -330,6 +337,36 @@ The following activity diagram summarises what happens when a user executes an a
     * Pros: Less code and methods to handle one Object type and it also results in easier implementation of
             comparison methods between two `LocalDateTime` objects.
     * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
+
+#### Challenges
+
+`TaskDate` class was initially implemented with only `add` command in mind but there were some changes that had to be made
+when `edit` command was implemented to allow editing of date and time. There are several cases to consider when a task has
+to be edited.
+
+- Case 1: A task has no date and no time.
+- Case 2: A task has date only.
+- Case 3: A task has date and time.
+
+Keep in mind the special condition that a task cannot have a time without a date. Editing a task's date/time also has 3 cases,
+where a user can input date only, time only, or both at once. 
+
+In the first case, no problem is encountered as all the 3 possible types of inputs result in successful outcomes when editing
+a task with no date or time. When only date is input in the `edit` command, the edited task will now have the input date. When
+only time is input, the edited task will now have the input time and current date. When both are input, the edited task will now have
+both of the input date and time.
+
+In the second case however, a problem is encountered when only time is input in the `edit` command. With the initial implementation of
+the constructor of `TaskDate`, this will result in the edited task having the current date and the input time. This is an undesirable side
+effect where the current date overwrites the existing date of the task to be edited. There are no issues with other two possible input types.
+
+In the third case, there is also a problem encountered when only time is input in the `edit` command. Similar to the second case, this will
+result in the current date overwriting the existing date of the task to be edited.
+
+To differentiate between an `edit` command and `add` command involving `TaskDate`, a new boolean argument was added to `ParserUtil#parseTaskDate`.
+This boolean is propagated down as another additional argument of `TaskDate` constructor and using that, a new `TaskDate` will be created without
+using `LocalDate#now` if it is used for editing purposes. 
+
 
 ### \[Implemented\] Listing Upcoming Tasks (Hanif)
 

@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "taskDate:TaskDate" as TaskDate MODEL_COLOR
+participant "task:Task" as Task MODEL_COLOR
+end box
+
+group sd "create Task"
+
+
+activate AddTaskCommandParser
+AddTaskCommandParser -> ParserUtil: parseTaskDate(21/11/2021)
+activate ParserUtil
+
+create TaskDate
+ParserUtil -> TaskDate: TaskDate(trimmedTaskDate)
+activate TaskDate
+
+TaskDate -> TaskDate: isValidArgument(trimmedTaskDate)
+activate TaskDate
+TaskDate --> TaskDate
+deactivate TaskDate
+
+TaskDate --> ParserUtil
+deactivate TaskDate
+
+ParserUtil --> AddTaskCommandParser : taskDate
+deactivate ParserUtil
+
+create Task
+AddTaskCommandParser -> Task: Task(..., taskDate,..)
+activate Task
+Task --> AddTaskCommandParser: task
+deactivate Task
+end
+
+@enduml
