@@ -411,7 +411,7 @@ After that, the filter is used to create a `FilterAppointmentCommand`. When exec
 
 Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
 
-A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
+A clearer view of this sequence diagram can be found [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/docs/images/AppointmentFilterSequenceDiagram.png).
 
 ![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
 
@@ -786,6 +786,56 @@ These are some use cases to familiarise with the flow of our application:
     * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 2.
+    
+**Use case: Filtering appointments**
+
+**MSS**
+1. Clinic receptionist wishes to filter through all appointments.
+2. Clinic receptionist enters the parameters to filter through the appointment records.
+3. The filtered results are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not specify any parameters when filtering through the appointment records.
+  
+    * 2a1. All appointments in the appointment records are displayed in the appointment list.
+    
+        Use case ends.
+    
+* 2b. The users enters a parameter that is invalid.
+  
+    * 2b1. An error message is shown, informing the user of an invalid parameter.
+    * 2b2. User enters the new parameters.
+    
+        Steps 2b1-2b2 are repeated until the new parameters entered are valid.
+      
+        Use case resumes from step 3.  
+    
+**Use case: Listing today's appointments**
+
+**MSS**
+1. Clinic receptionists wishes to view all of today's appointments.
+2. Clinic receptionists enters the `appt -l` command.
+3. All of today's appointments are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid.
+
+    * 2a1. An error message is shown to the user.
+  
+        Use case resumes at step 2.
+    
+* 2b. There are no appointments for the current day.
+
+    * 2b1. A message is shown informing the user that there are no appointments for the current day.
+    
+        Use case ends.
+
 
 ### Non-Functional Requirements  <a name="nfr"/>
 
@@ -1317,9 +1367,77 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering all appointments <a name="filter-all-manual-testing"/>
 
-### Filtering upcoming appointments <a name="filter-upcoming-manual-testing"/>
+1. Searches through all appointment based on the filter parameters provided.
+   
+    1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
+
+    2. Test case: `appt -f`<br>
+       Expected: All appointments in the appointment records will be listed in the appointment list.
+
+    3. Test case: `appt -f p/Aaron`<br>
+       Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it and displays the results in the appointment list.
+       
+    4. Test case: `appt -f p/Aaron Yeoh`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+
+    5. Test case: `appt -f d/Irfan`<br>
+       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` in it and displays the results in the appointment list.
+       
+    6. Test case: `appt -f d/Irfan Ibrahim`<br>
+        Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+        
+    7. Test case: `appt -f s/01/11/2021`<br>
+        Expected: Searches for appointments that has a starting date after `01/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    8. Test case: `appt -f e/30/11/2021`<br>
+        Expected: Searches for appointments that has a starting date before `31/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    9. Test case: `appt -f p/Aaron e/Irfan s/01/11/2021 e/30/11/2021`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive].
+       
+    10. Test case: `appt -f s/01/14/2021`<br>
+        Expected: Displays an error message telling the user that the date entered has to be valid.
+        
+    11. Test case: `appt -f d/`<br>
+        Expected: Displays an error message telling the user that a specified parameter cannot be empty.
+
+
+### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
+
+1. Searches for upcoming appointment based on the filter parameters provided. An appointment is considered upcoming if it has a date and time greater or equal than the current date and time.
+   
+    1. Prerequisites: None, but if there are no upcoming appointments in the appointment records, upcoming filter searches will not return any results.
+       
+    2. Test case: `appt -u`<br>
+       Expected: All upcoming appointments in the appointment records will be listed in the appointment list.
+       
+    3. Test case: `appt -u p/Aaron`<br>
+       Expected: Searches for upcoming appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    4. Test case: `appt -u p/Aaron Yeoh`<br>
+      Expected: Searches for upcoming appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+      
+    5. Test case: `appt -u d/Irfan`<br>
+       Expected: Searches for appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    6. Test case: `appt -u d/Irfan Ibrahim`<br>
+      Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+      
+    7. Test case: `appt -u d/Aaron s/21/10/2021`<br>
+        Expected: An error is displayed telling the user that a `FilterUpcomingAppointmentCommand` should not have any date parameters in it.
+
+    8. Test case: `appt -u d/`<br>
+       Expected: Displays an error message telling the user that a specified parameter cannot be empty.
 
 ### Listing all appointments for today <a name="list-all-manual-testing"/>
+
+1. Displays all appointments for the current day in the appointment list.
+   
+    1. Test case: `appt -l` when there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
+        Expected: No appointments are displayed in the appointment list.
+       
+    2. Test case: `appt -l` when there are appointments for the current day<br>
+        Expected: All of today's appointments are displayed in the appointment list
 
 ### Saving data  <a name="saving-data"/>
 
