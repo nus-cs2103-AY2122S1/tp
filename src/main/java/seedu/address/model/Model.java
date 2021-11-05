@@ -131,13 +131,13 @@ public interface Model {
      */
     void addCommand(String command);
 
-    ObservableList<Person> getObservablePersonList();
+    ObservableList<Person> getViewAllTaskListPersons();
 
     /**
      * Updates the {@code observablePersonList} using the newly updated
      * {@code filteredTasks}.
      */
-    void updateObservablePersonList();
+    void updateViewAllTaskListPersons();
 
     /**
      * Sets the predicate used to filter {@code observablePersonList}.
