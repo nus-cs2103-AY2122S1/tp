@@ -71,6 +71,8 @@ public class MoveCommand extends Command {
             }
 
             Person personToMove = lastShownList.get(index.getZeroBased());
+            // TODO: Check if personToMove already in module, group. Throw exception if true.
+
             personToMove.getModules().add(savedMod, group);
         }
 
