@@ -905,37 +905,155 @@ testers are expected to do more *exploratory* testing.
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+    
 
-1. _{ more test cases …​ }_
+### Adding a member
+
+1. Adding a new member.
+
+   1. Prerequisites: The list of members does not already contain members with the same names as those in the test
+   cases below. 
+   
+   2. Test case: `addm n/Bob p/12345678`<br>
+        Expected: New member with the same name and phone number is added to the bottom of the list
+        of members.
+   
+   3. Test case: `addm n/Ch@rlie p/45678`<br>
+        Expected: No new member added. Error details are shown in the status message.
+   
+   4. Test case: `addm n/Adam p/01234`<br>
+        Expected: Similar to previous.
+   
+   5. Test case: `addm n/Sam p/87654321` followed by `addm n/Sam p/23456789`<br>
+        Expected: After the first command, a new member called Sam with the phone number 87654321
+        is added to the list of members. After the second command, no member is added and error details
+        are shown in the status message.
+   
+        
 
 ### Deleting a member
 
-1. Deleting a member while all members are being shown
+1. Deleting a member while all members are being shown.
 
-    1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+    1. Prerequisites: List all members using the `listm` command. One or more members are in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+    1. Test case: `deletem 1`<br>
+         Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `deletem 0`<br>
        Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Editing a member
+
+1. Edit the details of a member that is being shown in the list.
+
+    1. Prerequisites: List all members using the `listm` command. One or more members are in the list and the list does
+        not contain any members with the same names as those in the test cases below.
+   
+    2. Test case: `editm 1 n/Adam`<br>
+        Expected: First member's name is changed to Adam. Details of the edited member is shown in the status message.
+   
+    3. Test case: `editm 1 n/@dam`<br>
+        Expected: No member details are changed. Error details are shown in the status message.
+   
+    4. Other incorrect delete commands to try: `editm`, `editm x n/Bob p/45678`, `...` 
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
+### Setting member availability
+1. Set the availability of one or more members 
+    
+    1. Prerequisites: List all members using the `listf` command. One or more members ar ein the list.
+   
+    2. Test case: `setm 1 2 3 d/1 2`<br>
+        Expected: The availability of the first 3 members are changed to Monday and Tuesday. The names of members
+        that had their availability changed are shown in the status message.
+    3. Test case: `setm 1 2 3`<br>
+        Expected: No change in the members' availability. Error details are shown in the status message.
+    4. Other incorrect delete commands to try: `setm`, `setm x d/1`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
+### Adding a facility
+
+1. Adding a new facility.
+
+    1. Prerequisites: The list of facilities does not already contain facilities with the same names and locations
+       as those in the test cases below.
+
+    2. Test case: `addf n/Court 1 l/Sports Hall t/1500 c/5`<br>
+       Expected: New facility called Court 1 at Sports Hall at 3pm with a capacity of 5 is added to the bottom of the list
+       of facilities.
+
+    3. Test case: `addf n/Court #1 l/Sports Hall t/1800 c/5`<br>
+       Expected: No new facility added. Error details are shown in the status message.
+
+    4. Test case: `addf n/Court 1 p/Sports H@ll t/1100 c/5`<br>
+       Expected: Similar to previous.
+
+    5. Test case: `addf addf n/Court 2 l/Sports Hall t/1200 c/5` followed by `addf n/Court 2 l/Sports Hall t/1600 c/5`<br>
+       Expected: After the first command, a new facility called Court 2 at Sports Hall at 12pm with capacity of 5 
+       is added to the list of facilities. After the second command, no facility is added and error details
+       are shown in the status message.
+
+### Deleting a facility
+
+The test cases are similar to those of [Deleting a member](#deleting-a-member).
+
+### Editing a facility
+
+1. Edit the details of a facility that is being shown in the list.
+
+    1. Prerequisites: List all members using the `listf` command. One or more members are in the list and the list does
+       not contain any members with the same names as those in the test cases below.
+
+    2. Test case: `editf 1 n/Court 3 t/1800`<br>
+       Expected: First facility's name is changed to Adam and time is changed to 6pm. 
+       Details of the edited facility is shown in the status message.
+
+    3. Test case: `editf 1 t/9999`<br>
+       Expected: No member details are changed. Error details are shown in the status message.
+
+    4. Other incorrect delete commands to try: `editf`, `editf x n/Court 1 l/Sports Hall t/1800 c/5`, `...`
+       (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Splitting members into facilities
+
+1. Allocating all the members into the allocation lists of the facilities.
+
+    1. Test case: `split 1`<br>
+       Expected: All members that have Monday as one of their available days will be allocated to facility. Their names
+       will be shown in the facility list under Monday.
+   
+    2. Test case: `split`<br>
+       Expected: No members are allocated to any facility. Error details are shown in the status message.
+    
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Navigate to `[JAR File location]/data` and move the file `sportspa.json` into another folder.
+    2. Run SportsPA.
+    3. SportsPA will start up with sample members and facilities being present.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+   1. Navigate to `[JAR File location]/data` and rename `sportspa.json` to `sportspa.txt`.
+   2. Open `sportspa.txt` and delete the first `{` in the file and close the file.
+   3. Rename `sportspa.txt` back to `sportspa.json`.
+   4. Run SportsPA. 
+   5. SportsPA will start up without any data being present.
+   
