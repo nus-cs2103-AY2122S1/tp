@@ -209,7 +209,7 @@ This is how the `DeletePersonCommand#execute()` method works upon execution:
 4. `DeletePersonCommand#deleteByModuleCode()` will call `Model#deletePerson` for contacts with attached to the module code to delete only otherwise `DeletePersonCommand#deleteModuleCodeTag` will be called.
 5. The deletion is successful and a CommandResult is returned with an appropriate success message to indicate that the deletion was successful via the CommandUtil#getCommandResult() method.
 
-The following sequence diagrams show how the delete by module code feature works successfully, using the example command delete m/CS2103T:
+The following sequence diagrams show how the delete by module code feature works successfully, using the example command `delete m/CS2103T`:
 
 ![Interactions for  `delete m/CS2103T` Command](images/BatchDeleteSequenceDiagram.png)
 
@@ -222,13 +222,12 @@ The following sequence diagrams show how the delete by module code feature works
 **Aspect: Previous and current version of delete command:**
 
 * **Alternative 1 (previous version):** Delete only supports one deletion at a time.
-    * Pros: 
-      * Deletes the particular intended contact.
+    * Pros: Deletes the particular intended contact.
     * Cons: Takes time to delete multiple contacts, does not fit our target audience that wants operations to be fast.
 
 * **Alternative 2 (current version):** Delete supports batch deletion by module code as well.
     * Pros: Faster deletion while still supporting deletion by one index.
-    * Cons: Not able to undo the deletion therefore if the user deletes the wrong batch, would take a long time to key all the information back in.
+    * Cons: Not able to undo the deletion if the user deletes the wrong batch, it would take a long time to key all the information back in.
 
 
 --------------------------------------------------------------------------------------------------------------------
