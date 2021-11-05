@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentToGroupCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
 public class TutorialGroupUtil {
@@ -26,10 +27,19 @@ public class TutorialGroupUtil {
     }
 
     /**
-     * Returns an add student group command string for adding the {@code TutorialGroup} and given index.
+     * Returns an add student to group command string for adding the Student at given index to {@code TutorialGroup}.
      */
     public static String getAddStudentToGroupCommand(TutorialGroup tutorialGroup, Index index) {
         return AddStudentToGroupCommand.COMMAND_WORD + " " + index.getOneBased() + " "
+                + getTutorialGroupDetails(tutorialGroup);
+    }
+
+    /**
+     * Returns an delete student from group command string for deleting the student at given inde from
+     * {@code TutorialGroup}.
+     */
+    public static String getDeleteStudentFromGroupCommand(TutorialGroup tutorialGroup, Index index) {
+        return DeleteStudentFromGroupCommand.COMMAND_WORD + " " + index.getOneBased() + " "
                 + getTutorialGroupDetails(tutorialGroup);
     }
 

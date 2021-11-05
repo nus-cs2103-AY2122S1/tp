@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindStudentCommand;
@@ -107,6 +108,15 @@ public class ClassmateParserTest {
         DeleteGroupCommand command = (DeleteGroupCommand) parser.parseCommand(
                 TutorialGroupUtil.getDeleteGroupCommand(tutorialGroup));
         assertEquals(new DeleteGroupCommand(tutorialGroup), command);
+    }
+
+    @Test
+    public void parseCommand_deleteStudentFromtutorialGroup() throws Exception {
+        TutorialGroup tutorialGroup = new TutorialGroupBuilder().build();
+        DeleteStudentFromGroupCommand command = (DeleteStudentFromGroupCommand) parser.parseCommand(
+                TutorialGroupUtil.getDeleteStudentFromGroupCommand(tutorialGroup, INDEX_FIRST_STUDENT)
+        );
+        assertEquals(new DeleteStudentFromGroupCommand(INDEX_FIRST_STUDENT, tutorialGroup), command);
     }
 
     @Test
