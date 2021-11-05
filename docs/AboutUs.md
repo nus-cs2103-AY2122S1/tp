@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/nbvannhi.png" width="200px">
 
-[[github](http://github.com/nbvannhi)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/nbvannhi)] [[portfolio](team/nbvannhi.md)]
 
 * Role: Developer
 * Responsibilities: Documentation + Code quality
