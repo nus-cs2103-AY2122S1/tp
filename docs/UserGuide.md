@@ -489,6 +489,7 @@ After adding an appointment, the appointment list is updated to show all appoint
 Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test` creates an appointment with the
 **first patient** in the patient list, and the **second doctor** in the doctor list, at 12 November 2021, 8pm, with the remark that the patient
 wants a blood test
+![addAppointment](images/user-guide/addAppointment.png)
 
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
@@ -511,8 +512,6 @@ You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor
 
 Examples:
 * `appt -e 1 p/2 r/Blood test` edits the patient and remark of the 1st appointment to be the **second patient** in the patient list and **Blood test** respectively.
-
-![editAppointment](images/editAppointment.png)
 
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
 Searches and lists all appointments in the appointment records that match the given filter conditions.
