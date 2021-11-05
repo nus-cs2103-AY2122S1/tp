@@ -39,6 +39,8 @@ title: Developer Guide
 * [Appendix](#appendix-requirements)
   * [Requirement](#appendix-requirements)
   * [Manual Testing](#appendix-instructions-for-manual-testing)
+    * [Feature Testing](#feature-testing)
+    * [UI Testing](#ui-testing)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -881,7 +883,9 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Feature Testing
+
+#### Launch and shutdown
 
 1. Initial launch
 
@@ -898,7 +902,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
-### Deleting a student
+#### Add Student
+
+#### Delete Student
 
 1. Deleting a student while all students are being shown
 
@@ -915,10 +921,47 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
-### Saving data
+#### Tag Student
+
+#### Get Personal Detail
+
+#### Edit Personal Detail
+
+#### Add Grade
+
+#### Edit Attendance
+
+#### Edit Participation
+
+#### View student information
+
+#### Show Grade
+
+#### Visualize all Grades
+
+#### Filter Academy Directory
+
+#### Sort Student List
+
+#### List All Students
+
+#### Clear Student List
+
+#### Undo Changes
+
+#### Redo Changes
+
+#### Help
+
+
+#### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases to come …​ }_
+2. _{ more test cases to come …​ }_
+
+### UI Testing
+
+#### Buttons
