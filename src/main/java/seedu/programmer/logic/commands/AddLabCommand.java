@@ -32,6 +32,7 @@ public class AddLabCommand extends Command {
 
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
 
+    public static final String NO_STUDENT_CONSTRAINTS = "There are no students to add the lab to.";
 
     private final Lab result;
 
@@ -47,10 +48,17 @@ public class AddLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+
         List<Student> studentList = model.getAllStudents();
+
         if (result.getLabTotal().getLabTotalScore() < 0) {
             throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
         }
+
+        if (studentList.isEmpty()) {
+            throw new CommandException(NO_STUDENT_CONSTRAINTS);
+        }
+
         for (Student std: studentList) {
             Student target = std;
             Lab newLab = this.result.copy();

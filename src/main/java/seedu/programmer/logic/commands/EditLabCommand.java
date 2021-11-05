@@ -40,6 +40,7 @@ public class EditLabCommand extends Command {
             "Kindly specify if you want to edit the lab number and/or the total score.";
     public static final String MESSAGE_MISSING_LAB_TO_BE_EDITED =
             "Kindly specify the lab number that you would like to edit using the " + PREFIX_LAB_NUM + "flag.\n%1$s";
+    public static final String MESSAGE_NO_STUDENT = "There are no students whose labs can be edited";
 
     private final LabNum newLabNum;
     private final LabTotal total;
@@ -75,11 +76,18 @@ public class EditLabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+      
         List<Student> studentList = model.getAllStudents();
+      
+        if (studentList.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENT);
+        }
+      
         Lab newLab = new Lab(newLabNum);
         if (studentList.get(0).getLabList().contains(newLab)) {
             throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, newLab));
         }
+      
         for (Student std : studentList) {
             Student editedStd = std;
             if (total != null && total.getLabTotalScore() < 0.0) {
