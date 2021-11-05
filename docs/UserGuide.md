@@ -543,8 +543,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * NAME inputs such as `J@hn`, `Mary S^e` and `B{}b` are not acceptable.
     
 * ##### PHONE_NUMBER `p/`
-    * A PHONE_NUMBER should contain a minimum of 3 digits. You cannot input any characters
-      other than the digits 0-9.
+    * A PHONE_NUMBER should contain a minimum of 3 digits. You cannot input any characters other than the digits 0-9.
     * For example:
         * PHONE_NUMBER inputs such as `99999999` and `999` are acceptable.
         * PHONE_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
@@ -580,8 +579,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
     
 * ##### EXPECTED_SALARY `s/`
     * An EXPECTED_SALARY should only be **non-negative integers**.
-        * Non-negative integers are defined as integers (no decimals or fractions) that range from 
-          0 to 2^(31) - 1 inclusive.
+        * Non-negative integers are defined as integers (no decimals or fractions) that range from 0 to 2^(31) - 1 inclusive.
     * For example:
         * EXPECTED_SALARY inputs such as `0` and `3500` are acceptable.
         * EXPECTED_SALARY inputs such as `-600` and `~350` are not acceptable.
@@ -610,7 +608,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
     
 * ##### INTERVIEW `i/`
     * An INTERVIEW should be a legitimate date and follow the DateTime format `yyyy-M-d, H:m`. 
-      * The input for Year is strictly 4 digits while others (i.e Month, Day, Hours, Minutes) can be either 1 or 2 digits.
+      * The input for Year is strictly 4 digits while others (i.e. Month, Day, Hours, Minutes) can be either 1 or 2 digits.
     * For example:
         * INTERVIEW inputs such as `2021-08-09, 13:00` and `2022-1-3, 3:00` are acceptable.
         * INTERVIEW inputs such as `morning`, `2021.10.21`, `2021-10-22 13:00` and `2021-02-30, 10:30` (not an existing date) are not acceptable.
@@ -628,95 +626,99 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * Return to [**Find**](#finding-an-applicant--find)
 
+:information_source: Note that keywords refer to the words separated by whitespace in your parameters for each category. 
+For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are your keywords for the NAME category.<br>
+
 * ##### NAME `n/`
-    * A NAME is considered matching with a ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
-    * All keywords provided as NAME input must comply with input specifications for add given [**here**](#name-n).
+    * A NAME parameter matches with an existing stored ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
+    * All the keywords that you provide as a NAME parameter must comply with the input specifications for add given [**here**](#name-n).
     * For example:
-        * A `John` input can match with ***Name*** s such as `John Tan` or `John Lee`.
-        * A `John Mary` input can match with ***Name*** s such as `Mary John`, `Mary Lee` or `Long John`.
+        * A `John` input can match with ***Name***s such as `John Tan` or `John Lee`.
+        * A `John Mary` input can match with ***Name***s such as `Mary John`, `Mary Lee` or `Long John`.
 
 * ##### PHONE_NUMBER `p/`
-    * A PHONE_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
-    * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phonenumber-p).
+    * A PHONE_NUMBER parameter matches with an existing stored ***Phone Number*** only if **at least 1** keyword is equal to the ***Phone Number***.
+    * All the keywords that you provide as a PHONE_NUMBER parameter must comply with the input specifications for add given [**here**](#phonenumber-p).
     * For example:
-        * A `99999999` input can only match with ***Contact Number*** s that are `99999999`.
-        * A `99999999 88888888` input can only match with ***Contact Number*** s that are `99999999` and `88888888`.
+        * A `99999999` input can only match with ***Phone Number***s that are `99999999`.
+        * A `99999999 88888888` input can only match with ***Phone Number***s that are `99999999` and `88888888`.
 
 * ##### EMAIL_ADDRESS `e/`
-    * An EMAIL_ADDRESS is considered matching with an ***Email Address*** only if **at least 1** keyword is equal to **at least 1** word in the ***Email Address***.
-    * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#emailaddress-e).
+    * An EMAIL_ADDRESS parameter matches with an existing stored ***Email Address*** only if **at least 1** keyword is equal to the ***Email Address***.
+    * All the keywords that you provide as an EMAIL_ADDRESS parameter must comply with the input specifications for add given [**here**](#emailaddress-e).
     * For example:
-        * A `alexyeoh@example.com` input can match with ***Email*** s such as `alexyeoh@example.com`.
-        * A `alexyeoh@example.com marysue@gmail.com` input can match with ***Email*** s such as `alexyeoh@example.com`
+        * A `alexyeoh@example.com` input can match with ***Email Address***es such as `alexyeoh@example.com`.
+        * A `alexyeoh@example.com marysue@gmail.com` input can match with ***Email Address***es such as `alexyeoh@example.com`
           and `marysue@gmail.com`.
 
 * ##### ROLE `r/`
-    * A ROLE is considered matching with a ***Role*** only if **each of every** provided keyword is equal to **at least 1** word in the ***Role***.
-    * All keywords provided as ROLE input must comply with input specifications for add given [**here**](#role-r).
+    * A ROLE parameter matches with an existing stored ***Role*** only if the **entire** input is **contained** in the ***Role***.
+    * All the keywords that you provide as a ROLE parameter must comply with the input specifications for add given [**here**](#role-r).
     * For example:
-        * A `Software` input can match with ***Role*** s such as `Software Engineer`, `Software` or `Software Developer`
-        * A `Software Engineer` input can match with ***Role*** s such as `Software Engineer` or `Senior Software Engineer`
-          but not with ***Role*** s such as `Software` or `Software Developer`.
+        * A `Software` input can match with ***Role***s such as `Software Engineer`, `Software` or `Software Developer`
+        * A `Software Engineer` input can match with ***Role***s such as `Software Engineer` or `Senior Software Engineer`
+          but not with ***Role***s such as `Software` or `Software Developer`.
 
 * ##### EMPLOYMENT_TYPE `et/`
-    * An EMPLOYMENT_TYPE is considered matching with an ***Employment Type*** only if it **starts with any** of the keywords in the ***Employment Type***.
-    * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employmenttype-et).
+    * An EMPLOYMENT_TYPE parameter matches with an existing stored ***Employment Type*** only if the ***Employment Type*** **starts with** any of the keywords.
+    * All possible ***Employment Type*** terms that comply with the input specifications for add are given [**here**](#levelofeducation-l). Keywords that you provide as a LEVEL_OF_EDUCATION 
+      parameter must be words that these terms start with.
     * For example:
-        * A `Full time` or `full time` or `full` input will match only with ***Employment Type*** s that are ```Full time```
-        * A ```Full part``` input will match with all ***Employment Type*** s that are ```Full time``` or ```Part time```
-        * A ```temp Intern``` input will match with all ***Employment Type*** s that are ```Temporary``` or ```Internship```
-        * A ```full time bob``` input will throw an exception as ```bob``` is not a term any of the ***Employment Type*** s start
-          with.
+        * A `Full time` or `full time` or `full` input will match only with ***Employment Type***s that are ```Full time```
+        * A ```Full part``` input will match with all ***Employment Type***s that are ```Full time``` and ```Part time```
+        * A ```temp Intern``` input will match with all ***Employment Type***s that are ```Temporary``` and ```Internship```
+        * A ```full time bob``` input is invalid as ```bob``` is not a term any of the possible ***Employment Type***s start with.
 
 * ##### EXPECTED_SALARY `s/`
-    * An EXPECTED_SALARY is considered matching with a ***Expected Salary*** only if **at least 1** keyword is within a range of `500` from **at least 1** keyword in the ***Expected Salary***.
-    * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expectedsalary-s).
+    * An EXPECTED_SALARY parameter matches with an existing stored ***Expected Salary*** only if **at least 1** keyword is within a range of `500` from the ***Expected Salary***.
+    * All the keywords that you provide as an EXPECTED_SALARY parameter must comply with the input specifications for add given [**here**](#expectedsalary-s).
     * For example:
-        * A `3000` input can match with ***Expected Salary*** s that range from `2500` to `3500` inclusive.
-        * A `2500 5000` input can match with ***Expected Salary*** s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
+        * A `3000` input can match with ***Expected Salary***s that range from `2500` to `3500` inclusive.
+        * A `2500 5000` input can match with ***Expected Salary***s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
 
 * ##### LEVEL_OF_EDUCATION `l/`
-    * A LEVEL_OF_EDUCATION is considered matching with a ***Level of Education*** only if it **starts with any** of the keywords in the ***Level of Education***.    
-    * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#levelofeducation-l).
+    * A LEVEL_OF_EDUCATION parameter matches with an existing stored ***Level of Education*** only if the ***Level of Education*** **starts with** any of the keywords.    
+    * All possible ***Level of Education*** terms that comply with the input specifications for add are given [**here**](#levelofeducation-l). Keywords that you provide as a LEVEL_OF_EDUCATION 
+      parameter must be words that these terms start with.
     * For example:
-        * A `H` input can match with ***Level of Education***s such `High School`, but not with *Level of Education*s such as `PhD`.
-        * A `High School` input will match with all *Level of Education*s that are `High School`, but not with *Level of Education*s such as `Middle School`.
-        * A `High Middle` input will match with all *Level of Education*s that are `High School` and `Middle School`.
-        * A `High School bob` input is invalid as `bob` is not a term any of the *Level of Education*s start with.
+        * A `H` input will match with ***Level of Education***s that are `High School`, but not with ***Level of Education***s that are `PhD`.
+        * A `High School` input will match with all ***Level of Education***s that are `High School`, but not with ***Level of Education***s that are `Middle School`.
+        * A `High Middle` input will match with all ***Level of Education***s that are `High School` and `Middle School`.
+        * A `High School bob` input is invalid as `bob` is not a term any of the possible ***Level of Education***s start with.
 
 * ##### YEARS_OF_EXPERIENCE `y/`
-    * A YEARS_OF_EXPERIENCE is considered matching with a ***Years Of Experience*** only if the value represented by **at least 1** keyword is larger than or equal to the value represented by the ***Years Of Experience***.
-    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#yearsofexperience-y).
+    * A YEARS_OF_EXPERIENCE parameter matches with an existing stored ***Years Of Experience*** only if **at least 1** keyword is greater than or equal to the ***Years Of Experience***.
+    * All the keywords that you provide as a YEARS_OF_EXPERIENCE parameter must comply with the input specifications for add given [**here**](#yearsofexperience-y).
     * For example:
-        * A `3` input can match with ***Year Of Experience*** s that are higher than or equal to 3.
-        * A `2 3` input can match with ***Year Of Experience*** s that are higher than or equal to 2.
+        * A `3` input can match with ***Year Of Experience***s that are greater than or equal to `3`.
+        * A `2 3` input can match with ***Year Of Experience***s that are greater than or equal to `2`.
 
 * ##### TAG `t/`
-    * Each applicant can have many stored tags, so ***Tags*** will be used to refer to each applicant's stored ***Tag*** s.
-    * A TAG is considered matching with a ***Tags*** only if ***at least 1*** keyword is **exactly equals** to **at least 1** ***Tag*** within the ***Tags***..
-    * All keywords provided as TAG input must comply with input specifications for add given [**here**](#tag-t).
+    * Each applicant can have multiple stored ***Tag***s.
+    * A TAG parameter matches with an applicant's set of ***Tag***s only if **at least 1** keyword is **exactly equals** to **at least 1** ***Tag*** within the applicant's set of ***Tag***s.
+    * All the keywords that you provide as a TAG parameter must comply with the input specifications for add given [**here**](#tag-t).
     * For example:
-        * An `old` input can match with applicants that have the ***Tag*** `old`
-        * An `experienced old` input can match with applicants that have the ***Tag*** `experienced`, or `old`, or both.
+        * An `old` input can match with applicants that have the ***Tag*** `old`, even if they have other tags.
+        * An `experienced old` input can match with applicants that have the ***Tag*** `experienced`, or `old`, or both, even if they have other tags.
 
 * ##### INTERVIEW `i/`
-    * An INTERVIEW is considered matching with a ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***  .
-    * All keywords provided as INTERVIEW input must comply with the displayed time format (e.g. 20 March 2021, 10:30).
+    * An INTERVIEW parameter matches with an existing stored ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***.
+    * All the keywords that you provide as an INTERVIEW parameter must comply with the displayed format (e.g. 20 Mar 2021, 10:30).
     * For example:
-        * A `2021` input can match with applicants that have the ***Interview*** in year 2021.
-        * A `20:21` input can match with applicants that have the ***Interview*** at time 20:21 on any date.
-        * A `mar` input can match with applicants that have the ***Interview*** in March.
-        * However, a `9:30` input cannot be matched with the ***Interview*** displayed as `20 Mar 2021, 09:30` (as 9:30 is not a whole word but 09:30 is).
+        * A `2021` input can match with applicants that have their ***Interview***s in year 2021.
+        * A `20:21` input can match with applicants that have their ***Interview***s at time 20:21 on any date.
+        * A `mar` input can match with applicants that have their ***Interview***s in March.
+        * However, a `9:30` input cannot be matched with the ***Interview*** displayed as `20 Mar 2021, 09:30` (as 9:30 is not the whole word displayed, but 09:30 is).
 
 * ##### NOTES `nt/`
-    * NOTES are considered matching with  ***Notes*** only if  ***Notes*** contains **the entire** keyword.
-    * All keywords provided as NOTES input must comply with input specifications for add given [**here**](#notes-nt).
+    * A NOTES parameter matches with an existing stored ***Notes*** only if the **entire** input is **contained** in the ***Notes***.
+    * All the keywords that you provide as a NOTES parameter must comply with the input specifications for add given [**here**](#notes-nt).
     * For example:
-        * A `good in this field` input can match with applicants that have ***Notes*** containing the `good in this field`.
-        * A `passionate` input can match with applicants that have Notes such as `passionate but inexperienced` and `passionate and experienced`.
+        * A `good in this field` input can match with applicants that have ***Notes*** containing `good in this field`.
+        * A `passionate` input can match with applicants that have ***Notes*** such as `passionate but inexperienced` and `passionate and experienced`.
 
 * ##### DONE `d/`
-    * An DONE is considered matching only if the ***Done*** input is either `Done` or `Not Done`.    
+    * A DONE parameter can only be either `Done` or `Not Done`.  
     * For example:
         * A `Done` input can match with applicants that have their ***Done*** status marked as Done.
         * A `Not Done` input can match with applicants that have their ***Done*** status unmarked as Not Done.
