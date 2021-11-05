@@ -500,7 +500,8 @@ public class ParserUtil {
                 timings[i] = LocalTime.parse(stringTimings[i], TIME_FORMATTER);
             }
         } catch (DateTimeParseException e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
         }
 
         // Check that the morning shift starts before on or before noon,
