@@ -6,7 +6,7 @@ title: Developer Guide
 ## Table of Contents
 - [Setting up, getting started](#setting-up-getting-started)
 - [Design](#design)
-  - [Architechture](#architecture)
+  - [Architecture](#architecture)
   - [UI component](#ui-component)
   - [Logic component](#logic-component)
   - [Model component](#model-component)
@@ -460,8 +460,8 @@ Since social workers need to contact many elderly every day, we created this app
 | Term              | Meaning                                                                                                                    |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | **User**          | Refers to Social Worker, a community worker using the app to manage multiple elderly.                                      |
-| **Social Worker** | Workers at community centres to provide supports for needy seniors. They manage multiple elderly and visit them regularly. |
-| **Elderly**       | The seniors who need social support due to limited family support. They are managed by social workers.                     |
+| **Social Worker** | Workers at community centres to provide supports for needy elderly. They manage multiple elderly and visit them regularly. |
+| **Elderly**       | The elderly who need social support due to limited family support. They are managed by social workers.                     |
 | **Visit**         | A visit to an elderly's home scheduled by the user.                                                                        |
 | **Attribute**     | Data that is assigned to an elderly                                                                                        |
 | **Mainstream OS** | Windows, Linux, Unix, OS-X.                                                                                                |
@@ -500,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User adds in a new senior’s name together with phone number, language and address
+1. User adds in a new elderly’s name together with phone number, language and address
 2. SeniorLove shows a new entry for the elderly just added
 
    Use case ends.
@@ -531,8 +531,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list elderly
 2. SeniorLove shows a list of elderly
-3. User requests to delete a specific senior in the list
-4. SeniorLove deletes the senior
+3. User requests to delete a specific elderly in the list
+4. SeniorLove deletes the elderly
 
    Use case ends.
 
@@ -554,7 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list elderly
 2. SeniorLove shows a list of elderly
-3. User requests to delete the visit from a specific senior in the list
+3. User requests to delete the visit from a specific elderly in the list
 4. SeniorLove deletes the visit
 
    Use case ends.
@@ -654,6 +654,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+**Use case: UC07 - Edit an elderly**
+
+1. User edits an elderly's details (which can include name, phone number, language, address, last visit, health condition(s)) by supplying the index of the elderly in SeniorLove's list
+2. SeniorLove edits the entry for the elderly to be edited
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User edits an elderly with a name that is already inside SeniorLove’s list.
+
+    - 1a1. SeniorLove shows an error message notifying the user that the name already exists.
+
+      Use case resumes at step 1.
+
+- 1b. The given index is invalid.
+
+    - 1b1. SeniorLove shows an error message notifying user that the index is invalid.
+
+      Use case resumes at step 1.
+
+- 1c. User inputs an invalid date and time format while editing an elderly's last visit.
+
+    - 1c1. SeniorLove shows an error message showing the correct date and time format.
+
+      Use case resumes at step 1.
+
+- 1d. User inputs a date and time that is in the future while editing last visit.
+
+    - 1d1. SeniorLove shows a warning message notifying the user about the date and time that is in the future.
+
+      Use case resumes at step 2.
+    
+- 1e. User inputs no fields to edit.
+    - 1e1. SeniorLove shows an error message notifying user that the at least 1 field to edit must be provided.
+    
+      Use case resumes at step 1
 
 ### Non-Functional Requirements
 

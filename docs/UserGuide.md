@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-**SeniorLove** is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Senior Love can get your contact management tasks done faster than traditional GUI apps.
+**SeniorLove** is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SeniorLove can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 - [Quick start](#quick-start)
@@ -400,7 +400,7 @@ If your changes to the data file make its format invalid, SeniorLove will discar
 Action | Format, Examples
 --------|------------------
 **add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [f/FREQUENCY o/OCCURRENCE] [h/HEALTH_CONDITION]…​` <br> e.g., `add n/James Ho p/22224444 l/english a/123, Clementi Rd, 1234665 lv/1900-11-08 18:00 v/2021-11-08 17:00`
-**delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
+**delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third elderly) <br> e.g., `delete v/2` (delete the scheduled visit of the second elderly)
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/2021-11-12 16:30 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
