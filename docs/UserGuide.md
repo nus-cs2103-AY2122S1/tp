@@ -200,7 +200,7 @@ Update the attributes of existing users using the tag of the client’s attribut
 
 Deletes an existing client from the address book using their client id.
 
-| Format | `delete CLIENT'S ID...`|
+| Format | `delete CLIENT_ID...`|
 | :-: | :-- |
 | **example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src=images/info_icon.png width="50"> | • Multiple clients can be deleted with one `delete` command |
