@@ -101,11 +101,11 @@ No. | Section | Representation
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Format
+This section explains the command format used for TAB's commands.<br/>
+
 Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
 
 ```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER…​```
-
-Detailed notes about the command format can be found [here](#features).
 
 |Component|Description|
 |---------|-----------|
@@ -117,32 +117,29 @@ Detailed notes about the command format can be found [here](#features).
 * Each parameter prefix is separated from the others with a space.<br/>
   For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
 
+* There are constraints in place to determine whether the value you provided for a field is valid.
+  TAB will inform you if you gave an invalid input for a field.
+
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
 
---------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
-## Features
-This section describes the available features in TAB.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+### Command Format Notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-  
+
 * Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
-  
+
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+### Notes About Parameters
+  
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -151,11 +148,24 @@ This section describes the available features in TAB.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
-* There are constraints in place to determine whether the value you provided for a field is valid. 
-  TAB will inform you if you gave an invalid input for a field.
 
-</div>
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Features
+This section describes the available features in TAB. 
+The features are categorised into the different categories as follows:
+
+* [Getting Help](#getting-help)
+* [Managing Students](#managing-students)
+* [Managing Lessons](#managing-lessons)
+* [Managing Lesson Fees](#managing-lesson-fees)
+* [Viewing Your Calendar](#viewing-your-calendar)
+* [Managing Data](#managing-data)
+* [Miscellaneous](#miscellaneous-commands)
 
 <div style="page-break-after: always;"></div>
 
@@ -589,7 +599,7 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 <div style="page-break-after: always;"></div>
 
-### Viewing your Calendar
+### Viewing Your Calendar
 
 This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
 
