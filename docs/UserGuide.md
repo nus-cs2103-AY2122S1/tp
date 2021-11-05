@@ -210,11 +210,9 @@ Format: `student -dl PERSON_INDEX LESSON_INDEX`
 * Specifies the student at `PERSON_INDEX`.
 * Deletes the specified lesson at `LESSON_INDEX` of the student specified.
 * Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
+* The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v) as shown below.
 
-<div align="center">
 ![studentLessonIndex](images/LessonIndex.png)
-*The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v)*
-</div>
 
 Example:
 * `student -dl 1 1` deletes the first lesson from the first student.
@@ -249,7 +247,10 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 * Specifies the student at `PERSON_INDEX`.
 * Deletes the specified lesson at `EXAM_INDEX` of the student specified.
 * Both `PERSON_INDEX` and `EXAM_INDEX` must be a positive number.
-
+* The `EXAM_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v), similarly to
+deleting lessons.
+  
+Example:
 * `student -de 1 1` deletes the first exam from the first student.
 </details>
 
@@ -564,6 +565,9 @@ Action | Format, Examples
 **Add an exam to a student** | `student -ae INDEX s/SUBJECT d/DATE_TIME` <br> e.g. `student -ae 1 s/Math d/2021-12-20 14:00`
 **Remove an exam from a student** | `student -de PERSON_INDEX EXAM_INDEX` <br> e.g. `student -de 1 1`
 **Group students** | `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...​` <br> e.g., `student -g Team2 1 3 5`
+**Delete a group** | `group -d INDEX​` <br> e.g., `group -d 2`
+**Add a lesson to a group** | `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY` <br> e.g. `group -al 1 s/Chinese st/16:00 et/18:00 d/Thu`
+**Remove a lesson from a group** | `group -dl GROUP_INDEX LESSON_INDEX` <br> e.g. `group -dl 1 1`
 **Add a task** | `task -a n/NAME​` <br> e.g., `task -a n/CS2100 Lab 1`
 **Edit a task** | `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]​` <br> e.g., `task -e 4 d/20211231 c/true`
 **View a task** | `task -v INDEX​` <br> e.g., `task -v 2`
