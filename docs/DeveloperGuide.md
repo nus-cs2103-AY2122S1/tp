@@ -277,7 +277,7 @@ each with different implementation of the `test(Student student)` function.
 * `GroupContainsKeywordsPredicate`: checks if any group of student contains any word in the given keywords.
   Partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
 * `TagContainsKeywordsPredicate`: checks if the tag of student contains any word in the given keywords.
-  Partial search is supported. e.g. `friend` will match `friends`.
+  Partial search is supported. e.g. `beginner` will match `beginners`.
 
 The following diagram summarizes what happens after user input search command:
 
