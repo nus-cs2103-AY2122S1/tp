@@ -71,39 +71,33 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_WORK_ADDRESS).isPresent()) {
             Optional<String> workAddressOptional = argMultimap.getValue(PREFIX_WORK_ADDRESS);
-            editPersonDescriptor.setWorkAddress(workAddressOptional.isEmpty()
-                    ? null
-                    : new WorkAddress(ParserUtil.parseAddress(workAddressOptional.get())));
+            editPersonDescriptor.setWorkAddress(new WorkAddress(
+                    ParserUtil.parseAddress(workAddressOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS).isPresent()) {
             Optional<String> quarantineAddressOptional = argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS);
-            editPersonDescriptor.setQuarantineAddress(quarantineAddressOptional.isEmpty()
-                    ? null
-                    : new QuarantineAddress(ParserUtil.parseAddress(quarantineAddressOptional.get())));
+            editPersonDescriptor.setQuarantineAddress(new QuarantineAddress(
+                    ParserUtil.parseAddress(quarantineAddressOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_SHN_PERIOD).isPresent()) {
             Optional<String> shnPeriodOptional = argMultimap.getValue(PREFIX_SHN_PERIOD);
-            editPersonDescriptor.setShnPeriod(shnPeriodOptional.isEmpty()
-                    ? null
-                    : new ShnPeriod(ParserUtil.parsePeriod(shnPeriodOptional.get())));
+            editPersonDescriptor.setShnPeriod(new ShnPeriod(
+                    ParserUtil.parsePeriod(shnPeriodOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
             Optional<String> nextOfKinNameOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME);
-            editPersonDescriptor.setNextOfKinName(nextOfKinNameOptional.isEmpty()
-                    ? null
-                    : new NextOfKinName(ParserUtil.parseName(nextOfKinNameOptional.get())));
+            editPersonDescriptor.setNextOfKinName(new NextOfKinName(
+                    ParserUtil.parseName(nextOfKinNameOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
             Optional<String> nextOfKinPhoneOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE);
-            editPersonDescriptor.setNextOfKinPhone(nextOfKinPhoneOptional.isEmpty()
-                    ? null
-                    : new NextOfKinPhone(ParserUtil.parsePhone(nextOfKinPhoneOptional.get())));
+            editPersonDescriptor.setNextOfKinPhone(new NextOfKinPhone(
+                    ParserUtil.parsePhone(nextOfKinPhoneOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS).isPresent()) {
             Optional<String> nextOfKinAddressOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS);
-            editPersonDescriptor.setNextOfKinAddress(nextOfKinAddressOptional.isEmpty()
-                    ? null
-                    : new NextOfKinAddress(ParserUtil.parseAddress(nextOfKinAddressOptional.get())));
+            editPersonDescriptor.setNextOfKinAddress(new NextOfKinAddress(
+                    ParserUtil.parseAddress(nextOfKinAddressOptional.get())));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
