@@ -17,7 +17,7 @@ Class ReadOnlyUserPrefs
 Class UniqueStudentList
 Class UniqueLessonList
 
-Package "Student\n\n" <<Rectangle>> {
+Package "Student\n\n" <<Rectangle>> #F4F6F6{
 Class "Student" as s
 Class Address
 Class Email
@@ -27,7 +27,7 @@ Class Remark
 Class "Grade" as g1
 }
 
-Package "Lesson\n\n" <<Rectangle>> {
+Package "Lesson\n\n" <<Rectangle>> #F4F6F6{
 Class "Lesson" as l
 Class LessonCode
 Class LessonTime
