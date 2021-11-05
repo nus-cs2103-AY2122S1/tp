@@ -62,7 +62,6 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-
     }
 
     @Test
