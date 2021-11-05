@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.BENSON;
 import static seedu.address.testutil.TypicalContacts.DANIEL;
 import static seedu.address.testutil.TypicalContacts.ELLE;
 import static seedu.address.testutil.TypicalContacts.FIONA;
+import static seedu.address.testutil.TypicalContacts.GEORGE;
 import static seedu.address.testutil.TypicalContacts.JANE;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
@@ -67,30 +69,59 @@ class FilterCommandTest {
     }
 
 
-    // TODO [LETHICIA]
     @Test
     public void execute_oneCategoryCode_noContactFound() {
-
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
+        Set<CategoryCode> categoryCodes = Collections.singleton(new CategoryCode("tpt"));
+        Rating rating = new Rating();
+        Set<Tag> tags = Collections.emptySet();
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
 
     @Test
     public void execute_oneCategoryCode_singleContactFound() {
-
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
+        Set<CategoryCode> categoryCodes = Collections.singleton(new CategoryCode("fnb"));
+        Rating rating = new Rating();
+        Set<Tag> tags = Collections.emptySet();
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(GEORGE), model.getFilteredContactList());
     }
 
     @Test
     public void execute_oneCategoryCode_multipleContactsFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
+        Set<CategoryCode> categoryCodes = Collections.singleton(new CategoryCode("oth"));
+        Rating rating = new Rating();
+        Set<Tag> tags = Collections.emptySet();
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-    }
-
-    @Test
-    public void execute_multipleCategoryCode_singleContactsFound() {
-
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredContactList());
     }
 
     @Test
     public void execute_multipleCategoryCode_multipleContactsFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
+        Set<CategoryCode> categoryCodes = new HashSet<>(Arrays.asList(new CategoryCode("oth"),
+                new CategoryCode("fnb")));
+        Rating rating = new Rating();
+        Set<Tag> tags = Collections.emptySet();
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
+        assertEquals(Arrays.asList(BENSON, DANIEL, GEORGE), model.getFilteredContactList());
     }
 
     @Test
@@ -136,32 +167,108 @@ class FilterCommandTest {
     // TODO [LETHICIA]
     @Test
     public void execute_oneTag_noContactFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
+        Set<CategoryCode> categoryCodes = Collections.EMPTY_SET;
+        Rating rating = new Rating();
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("neighbour")));;
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
 
     }
 
-    @Test
-    public void execute_multipleTag_noContactFound() {
-
-    }
-
-    @Test
-    public void execute_oneTag_singleContactFound() {
-
-    }
 
     @Test
     public void execute_oneTag_multipleContactsFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
+        Set<CategoryCode> categoryCodes = Collections.EMPTY_SET;
+        Rating rating = new Rating();
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("friends")));
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredContactList());
 
     }
 
     @Test
-    public void execute_multipleTag_singleContactsFound() {
+    public void execute_multipleTag_multipleContactFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
+        Set<CategoryCode> categoryCodes = Collections.EMPTY_SET;
+        Rating rating = new Rating();
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("new"), new Tag("owesMoney")));
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredContactList());
+
 
     }
 
+    // combined criteria
     @Test
-    public void execute_multipleTag_multipleContactsFound() {
+    public void execute_categoryCodeWithRating() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
+        Set<CategoryCode> categoryCodes = new HashSet<CategoryCode>(Arrays.asList(new CategoryCode("oth"),
+                new CategoryCode("att")));
+        Rating rating = new Rating("5");
+        Set<Tag> tags = Collections.emptySet();
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
+        assertEquals(Arrays.asList(DANIEL, ELLE), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_categoryCodeWithTag() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
+        Set<CategoryCode> categoryCodes = new HashSet<CategoryCode>(Arrays.asList(new CategoryCode("oth"),
+                new CategoryCode("acc")));
+        Rating rating = new Rating();
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("friends")));
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_tagWithRating() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
+        Set<CategoryCode> categoryCodes = Collections.EMPTY_SET;
+        Rating rating = new Rating("5");
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("friends")));
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(DANIEL), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_allCriteria() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
+        Set<CategoryCode> categoryCodes = new HashSet<CategoryCode>(Arrays.asList(new CategoryCode("oth"),
+                new CategoryCode("acc"), new CategoryCode("tpt")));
+        Rating rating = new Rating("4");
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("owesMoney")));
+        IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
+        FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
+        expectedModel.updateFilteredContactList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(BENSON), model.getFilteredContactList());
     }
 
 }

@@ -130,7 +130,11 @@ public class ModelManager implements Model {
 
     @Override
     public void sortList(String sortBy) {
+        AddressBook previous = new AddressBook(addressBook);
         addressBook.sortList(sortBy);
+        if (!(addressBook.equals(previous))) {
+            this.commit();
+        }
     }
 
     @Override
