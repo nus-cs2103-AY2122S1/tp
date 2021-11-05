@@ -11,9 +11,9 @@ import seedu.anilist.commons.util.StringUtil;
  */
 public class Episode {
 
+    public static final int MAX_EPISODE = 99999;
     public static final String MESSAGE_CONSTRAINTS =
-        String.format("Episodes should be a non-negative integer less than %d",
-            (long) Integer.MAX_VALUE + 1);
+        "Episodes should be a non-negative integer less than " + MAX_EPISODE;
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String DEFAULT_EPISODE = "0";
     public final int episodeNumber;
@@ -33,7 +33,8 @@ public class Episode {
      * Returns true if a given string is a valid episode number.
      */
     public static boolean isValidEpisode(String test) {
-        return test.matches(VALIDATION_REGEX) && StringUtil.isUnsignedInteger(test);
+        return test.matches(VALIDATION_REGEX)
+            && StringUtil.isIntegerInRange(test, 0, MAX_EPISODE);
     }
 
     @Override

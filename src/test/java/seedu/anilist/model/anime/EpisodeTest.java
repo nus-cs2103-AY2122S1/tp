@@ -35,6 +35,8 @@ public class EpisodeTest {
         // valid name
         assertTrue(Episode.isValidEpisode("12345")); // numbers only
         assertTrue(Episode.isValidEpisode("0000")); // leading zeroes
-        assertTrue(Episode.isValidEpisode(Integer.toString(Integer.MAX_VALUE))); // maximum value
+
+        // larger than 99999
+        assertFalse(Episode.isValidEpisode(Integer.toString(Integer.MAX_VALUE))); // maximum value
     }
 }
