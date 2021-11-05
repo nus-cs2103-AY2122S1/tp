@@ -272,28 +272,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Clear Note Feature
-
-When a ClearNoteCommand i.e `ClearNoteCommand, PersonClearNoteCommand, GroupClearNoteCommand` is executed, Notor checks
-via`NoteWindow#contains(Notable notable)` where `notable` can be an instance of `Person`, `Notor` or 
-`Group/SubGroup`, whether the instance of notable belongs to any of `OPEN_NOTE_WINDOWS`. If it belongs to any instance
-of 
-
-### Note Feature
-
-`Notor, Person, Group` implements `Notable` interface, where they need to implement `Notable#getNote()` to retrieve note.
-
-When a NoteCommand i.e `NoteCommand, PersonNoteCommand, GroupNoteCommand` is executed, an instance of Notable is passed
-into `CommandResult`, and `showNote` boolean of `CommandResult` is set to `true`. `MainWindow` will execute 
-`MainWindow#handleNote(Notable notable, Logic logic)` which will create an instance of `GeneralNoteWindow`, `PersonNoteWindow`, 
-`GroupNoteWindow` depending on the instance of `Notable` and add it to `OPEN_NOTE_WINDOWS` which is a static `ArrayList<NoteWindow>` 
-which keeps track of what `NoteWindow` is opened. If a `NoteWindow` of an instance of `Notable` is already opened, that instance of 
-``
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
