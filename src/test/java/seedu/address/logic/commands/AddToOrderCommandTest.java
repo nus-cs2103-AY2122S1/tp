@@ -45,7 +45,7 @@ public class AddToOrderCommandTest {
         ItemDescriptor toAddDescriptor = new ItemDescriptor(DONUT);
 
         AddToOrderCommand command = new AddToOrderCommand(toAddDescriptor);
-        
+
         assertCommandFailure(command, modelWithoutOrder, AddToOrderCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 

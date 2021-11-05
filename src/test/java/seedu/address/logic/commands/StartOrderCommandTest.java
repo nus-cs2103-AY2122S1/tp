@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Optional;
 
@@ -47,7 +46,8 @@ public class StartOrderCommandTest {
         @Override
         public void addToOrder(Item item) {
             assert hasUnclosedOrder();
-            optionalOrder.get().addItem(item);;
+            optionalOrder.get().addItem(item);
+            ;
         }
     }
 }

@@ -3,14 +3,14 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_VALUE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_NEGATIVE_VALUE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_ZERO;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_LETTER;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE_NUMBER;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SPECIAL_CHAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
@@ -95,30 +95,30 @@ public class RemoveFromOrderCommandParserTest {
 
     @Test
     public void parse_countZero_failure() {
-        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_ZERO,
+        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_ZERO,
                 Messages.MESSAGE_INVALID_COUNT_INTEGER);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
+        assertParseFailure(parser, INVALID_NAME_SPECIAL_CHAR + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid id with negative number
-        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL_2 + COUNT_DESC_BAGEL,
+        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_NEGATIVE_NUMBER + COUNT_DESC_BAGEL,
                 Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
 
         // invalid id with 3 numbers
-        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL + COUNT_DESC_BAGEL,
+        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_LETTER + COUNT_DESC_BAGEL,
                 Messages.MESSAGE_INVALID_ID_FORMAT);
 
         // invalid count format
-        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_FORMAT,
+        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_LETTER,
                 Messages.MESSAGE_INVALID_COUNT_FORMAT);
 
         // invalid count value
-        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_VALUE,
+        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_NEGATIVE_VALUE,
                 Messages.MESSAGE_INVALID_COUNT_INTEGER);
     }
 }
