@@ -15,7 +15,6 @@ title: Developer Guide
 5. [Implementation](#implementation)
    - [Add progress feature](#add-progress-feature)
    - [Add student feature](#add-student-feature)
-   - [Delete student feature](#delete-student-feature)
    - [View student/lesson feature](#view-studentlesson-feature)
    - [Card-like UI Elements](#card-like-ui-elements)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
@@ -226,20 +225,20 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The add progress feature adds a progress to an existing student's progress list in TutorAid. Each student can have up
-to 10 progress entries. Adding a new entry to a student with 10 entries will result in the deletion of the oldest entry.
+The add progress feature adds a progress entry to an existing student in TutorAid. Each student can have up to 10 progress entries. 
+Adding a new entry to a student who already has 10 such entries will result in the deletion of the oldest entry.
 
 This feature implements the following operations:
-* `AddProgressCommand#execute()` —Creates a Progress object and adds it to a ProgressList object of a Student object
+* `AddProgressCommand#execute()` —Creates a `Progress` object and adds it to a `ProgressList` object of a `Student` object
 in TutorAid.
 
 It is also facilitated by the methods below:
-* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a progress.
-* `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a progress.
-* `AddProgressCommandParser#parse()` — Parses the individual arguments to create a Progress object.
+* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a progress entry.
+* `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a progress entry.
+* `AddProgressCommandParser#parse()` — Parses the individual arguments to create a `Progress` object.
 
-When a Student object is created, a ProgressList object is created for this Student object. This ProgressList object
-stores an ArrayList of type Progress that keeps track of a maximum of 10 Progress objects. We implement `ProgressList`
+When a `Student` object is created, a `ProgressList` object is created for this `Student` object. This `ProgressList` object
+stores an `ArrayList` of type `Progress` that keeps track of a maximum of 10 `Progress` objects. We implement `ProgressList`
 as a field in `Student`.
 
 ![ProgressListClass](images/StudentWithProgressListClassDiagram.png)
@@ -290,10 +289,10 @@ Below is the sequence diagram that depicts the process of the adding a progress 
 **Aspect: How to keep track of all the progress (maximum 10) of a student:**
 
 * **Alternative 1 (current choice):** Implements a ProgressList class.
-    * Pros: Abstracts away the management of progress from the Student class.
+    * Pros: Abstracts away the management of progress from the `Student` class.
     * Cons: Potentially more dependency.
 
-* **Alternative 2:** Implements an ArrayList of type Progress in the Student class.
+* **Alternative 2:** Implements an `ArrayList` of type `Progress` in the `Student` class.
     * Pros: Easier to implement.
     * Cons: Student class may have too many responsibilities.
 
@@ -301,8 +300,7 @@ Below is the sequence diagram that depicts the process of the adding a progress 
 
 #### Implementation
 
-The 'add student' feature adds a student contact to TutorAid. A student contact consists of the student's name, 
-student's contact number, the parent's name and parent's contact number. 
+This feature adds a student contact to TutorAid. A student contact consists of the student's name, student's contact number, the parent's name and parent's contact number. 
 
 The feature is mainly implemented by the following methods:
 * `AddStudentCommand::execute()` — Adds a `Student` object to TutorAid.
@@ -369,21 +367,6 @@ Below is the sequence diagram that depicts an overview of a student contact bein
     * Pros: Command can be executed quickly as only one method is required to parse the command.
     * Cons: Having a single parse method may result in the method having multiple responsibilities to parse various 
       parts of a command, such as the command word, command flag and arguments.
-    
-
-### Delete student feature
-
-#### Implementation
-
-The delete feature deletes a student contact from TutorAid. 
-
-The feature is mainly implemented by the following methods:
-* `DeleteStudentCommand#execute()` in `DeleteStudentCommand` class: Deletes a student from TutorAid
-
-It is also additionally facilitated by these methods:
-* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the deletion of a student.
-* `DeleteCommandParser#parse()` — Checks for the command flag that specifies the deletion of a student.
-* `DeleteStudentCommandParser#parse()` — Parses the student index specified.
 
 ### View student/lesson feature
 
