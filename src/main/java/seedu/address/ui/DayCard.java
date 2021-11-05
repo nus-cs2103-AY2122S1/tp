@@ -48,7 +48,7 @@ public class DayCard extends UiPart<Region> {
         this.dayCardNumber = dayCardNumber;
         DayOfWeek day = firstDate.getDayOfWeek().plus(dayCardNumber);
         LocalDate date = firstDate.plusDays(dayCardNumber);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         String text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()) + ", "
                 + date.format(formatter);
         dayDateLabel.setText(text);
