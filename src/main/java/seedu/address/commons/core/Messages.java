@@ -14,5 +14,6 @@ public class Messages {
             + "provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_VIEW_PERSON = "Details of %1$s shown!";
+    public static final String MESSAGE_INVALID_FILTER_PREFIX = "Invalid filter Prefix provided: ";
 
 }
