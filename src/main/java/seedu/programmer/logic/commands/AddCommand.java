@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
             + "already exists in the ProgrammerError";
-    public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
+    public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same email "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError";
 
