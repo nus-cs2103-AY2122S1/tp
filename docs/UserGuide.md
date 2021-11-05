@@ -3,11 +3,17 @@ layout: page
 title: User Guide
 ---
 
-SalesNote is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application 
-than from traditional GUI apps. The application and guide are based on AB3 with new added features.
+SalesNote is a **desktop app for tailors, optimized for use via a Command Line Interface** (CLI), suitable for fast
+typists. SalesNote aims to help tailors simplify their administrative tasks, with the main features
+of the application split between helping to manage:
+* Client Information (e.g. Contact details, measurements, notes)
+* Tasks to be done 
+* Sales orders and accounts
 
-This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
+This is a user guide aimed at helping all users of the application; both new and experienced. The table of contents 
+below lists all the available commands, and the link will bring you to a quick overview for more information on the
+given command. Newer users hoping to quickly get started can refer to the "quick start", in the first section of the
+user guide below.
 
 ## Table of Contents
 
@@ -15,28 +21,28 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
     - [Client Commands](#client-commands)
-        - [Listing all clients : `listclients`](#listing-all-clients--listclients)    
         - [Adding a client : `addclient`](#adding-a-client--addclient)
         - [Deleting a client : `deleteclient`](#deleting-a-client--deleteclient)
         - [Editing a client : `editclient`](#editing-a-client--editclient)
         - [Locating clients by name : `findclient`](#locating-clients-by-name--findclient)
+        - [Listing all clients : `listclients`](#listing-all-clients--listclients)
     - [Task Commands](#task-commands)
-        - [Listing all tasks : `listtasks`](#listing-all-tasks--listtasks)
         - [Adding a task : `addtask`](#adding-a-task--addtask)
         - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
         - [Editing a task : `edittask`](#editing-a-task--edittask)
-        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
         - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+        - [Listing all tasks : `listtasks`](#listing-all-tasks--listtasks)
         - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
         - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
+        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
     - [Order Commands](#order-commands)
-        - [Listing all orders : `listorders`](#listing-all-orders--listorders)
         - [Adding an order : `addorder`](#adding-an-order--addorder)
         - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
-        - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
         - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
+        - [Listing all orders : `listorders`](#listing-all-orders--listorders)
         - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
         - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
+        - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
         - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
         - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
     - [Clearing all entries : `clear`](#clearing-all-entries--clear)
@@ -76,17 +82,27 @@ Some example commands you can try:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+Here are some general notes about how to understand the documentation of the commands below. It includes examples 
+to help you better understand how the documentation translates to actual commands you might feed into the application.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* In the documentation, words in `UPPER_CASE` are the parameters you should supply. Some examples include:
+    * In `addclient n/NAME ...`, `NAME` should be replaced by a name of your choice. e.g. `addclient n/Jacob Tan ...`
+    * In `deletetask INDEX`, `INDEX` should be replaced by a positive number. e,g, `deletetask 2`
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* When the documentation surrounds parameters with square brackets, this indicates they are optional and can be left blank.
+    * The format for `addtask` is:
+        * `addtask l/LABEL d/DATE [t/TASKTAG]`
+    * So in this case, you can use the command with or without supplying a `TASKTAG`. The following are both valid:
+        * `addtask l/Sew Buttons d/20th Aug 2021`
+        * `addtask l/Sew Buttons d/20th Aug 2021 t/SO1`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* To add on to the previous point, some arguments have a `…​` after them, e.g. `[t/TAG]…​` in the `addclient` command.
+  This is to indicate that the arguments may be used 0 or more times, for instance the following are all valid:
+    * `addclient n/Jacob Tan p/98765432 e/jtan@gmail.com a/47 Cashew Road m/170-70-70 g/M t/Regular t/Important`
+    * `addclient n/Jacob Tan p/98765432 e/jtan@gmail.com a/47 Cashew Road m/170-70-70 g/M t/Regular`
+    * `addclient n/Jacob Tan p/98765432 e/jtan@gmail.com a/47 Cashew Road m/170-70-70 g/M`
 
-* Parameters can be in any order.<br>
+* The parameters you give an argument can be in any order </br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -95,26 +111,26 @@ Some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
+
+
+
+
+
 * Amount accepts a real number for its input, with an upper limit of 1 billion, and no negative amounts allowed. Note 
   that it supports accuracy of up to 15-17 decimal places, and accuracy may be lost beyond that point.
 
 
-* Date inputs should follow one of the formats below.
-
-  Format | Example
-  --------|------------------
-  **dd mmmm yyyy** | `08 November 2001`
-  **dd mmm yyyy** | `08 Nov 2021`
-  **yyyy mm dd** | `2021 11 08`
-  **dd-mm-yyyy** | `08-11-2021`
-  **yyyy/mm/dd** | `2021/11/08`
-  **dd/mm/yyyy** | `08/11/2021`
 
 </div>
 
+
+
+
+
+
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+This command will bring up the following window, allowing you to access this user guide at any time.
 
 ![help message](images/helpMessage.png)
 
@@ -122,54 +138,78 @@ Format: `help`
 
 ## Client Commands
 
-<div markdown="block" class="alert alert-info">
+These commands relate to helping you record and manage client information using the application. When entering a client's
+information into the application, there are several fields of information you can store, such as the client's gender,
+or their body measurements for clothing.
 
+The following are some notes on the purpose and requirements of these fields:
+
+<div markdown="block" class="alert alert-info">
 **:information_source: Notes about the client commands:**<br>
 
-* A male's body measurements should be of the format height_waist_shoulder in cm, and it should not be blank.
-* A female's body measurements should be of the format height_waist_shoulder_bust in cm, and it should not be blank.
+* The application allows you to record the gender of the client. The gender field takes accepts "M" or "Male" to
+  indicate male gender, and "F" or "Female" to indicate female gender. </br>
+  Note that this ignores case, thus "male" or "FEMALE" will also be accepted.
+* A related point, is that the application also allows you to store their measurements for easy reference. This field
+  is **different depending on their gender**. Take note of the following points:
+    * A male's body measurements should be of the format height_waist_shoulder in cm, and it should not be blank.
+    * A female's body measurements should be of the format height_waist_shoulder_bust in cm, and it should not be blank.
+* A phone number is to consist only of numbers, and be between 3 and 20 digits long
+* An email should be of the form `LOCALPART@DOMAIN` and follow the following rules:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+       The domain name must:
+        - end with a domain label at least 2 characters long
+        - have each domain label start and end with alphanumeric characters
+        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* The tag field is meant to help categorise your clients: it should consist of a single block of alphanumeric characters. Some examples of valid tags:
+    * `t/regular` (trailing and leading spaces are allowed and will be removed, so "t/ friends" and "t/friends  " have the same result)
+    * `t/cat1` (numbers are allowed)
+    * Note that `t/regular friend` fails however
+* The remark field is a free-form field that allows you to keep short notes. e.g. `r/broad shoulders`
 
 </div>
-
-### Listing all clients : `listclients`
-
-Shows a list of all clients in the application.
-
-Format: `listclients`
 
 ### Adding a client : `addclient`
 
 Allows you to add a client to the application. 
 
-Note that two clients are regarded as their names are the same! As two individuals having the exact same name
-is quite a rare occurrence, we felt this was more likely to be a user mistake we wanted to guard against, then
-it was to be an intentional choice. If you happen to have two clients with the exact same name, our recommendation
-is to add a number, to be clear that this was intentional. (e.g., adding Jane Lim and Jane Lim1).
+Note that the application maintains a list of unique individuals! In this case two individuals are **considered equal if
+they have the same name**. Two individuals having the exact same name is quite the rare occurrence, and so we felt
+this was more likely to be a user mistake we wanted to help prevent. If you do happen to have two clients with the
+exact same name, our recommendation is to add a number, to make clear that this was intentional (e.g. adding Jane Lim
+and Jane Lim1).
 
 Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0). The remark is also optional.
+If you get the required format for a field wrong e.g. you key in an invalid EMAIL, the application will give you a 
+warning, and a reminder of the requirements:
 </div>
 
+![add client tip](images/uiupdate/addclienttip.png)
 
-Examples:
-* `addclient n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
-* `addclient n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F m/160_85_35_81`
+Some examples of valid commands:
+* `addclient n/Ng Chin Gan p/98765432 e/ncg@example.com a/42 Almond Street g/M m/170_100_40`
+* `addclient n/Alice Seah e/aseah@example.com a/47 Cashew Street p/92345782 t/important g/F m/160_85_35_81`
+
 
 ### Deleting a client : `deleteclient`
 
-Deletes the specified client from the application.
+Allows you to delete a client from the application.
 
 Format: `deleteclient INDEX`
 
 * Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
+* The index refers to the index number shown in the displayed **Clients** tab list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listclients` followed by `deleteclient 2` deletes the 2nd client in the application.
-* `find Betsy` followed by `deleteclient 1` deletes the 1st client in the results of the `find` command.
+* Using `listclients` first, to display all clients in the application followed by `deleteclient 2` will 
+  delete the 2nd client in the application.
+* Using `find Alice` first, followed by `deleteclient 1` will delete the 1st client in the results of the `find` command.
+  </br> This is a quick and convenient way to remove a specific client that you know is in the application, without 
+  having to scroll to find them.
 
 ### Editing a client : `editclient`
 
@@ -178,75 +218,108 @@ Edits an existing client in the application.
 Format: `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Do not forget to edit the body measurements when you modify the client's gender.
+Editing the gender of a customer is something we expect to be quite rare. Nevertheless, if you find yourself needing to
+do so, do not forget to also edit their body measurements when you change their gender! As a reminder, the measurements
+field is different based on whether the client's gender is male or female.
 </div>
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* **At least one of the optional fields must be provided.** 
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative. In particular, this means
+  </br> that if you want to keep all existing tags, and add a new one, you should re-type all the tags in the command.
+    * e.g. Suppose the first displayed client already has the tag friend, and you wish to add the tag regular. The 
+      command is then: </br> `editclient 1 t/friend t/regular`
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `editclient 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `editclient 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `editclient 1 p/91234567 e/jacobtan@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `jaconbtan@example.com` respectively.
+*  `editclient 2 n/Jamie Chew t/` Edits the name of the 2nd client to be `Jamie Chew` and clears all existing tags.
 
 ### Locating clients by name : `findclient`
 
-Finds clients whose names contain any of the given keywords.
+Allows you to find clients whose names contain any of the given keywords. 
 
 Format: `findclient KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `chan` will match `Chan`
+* The order of the keywords does not matter. e.g. `Jane Lim` will match `Lim Jane`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Jan` will not match `Jane`
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Jane Tay` will return `Jane Tan`, `Alice Tay`
 
 Examples:
-* `findclient John` returns `john` and `John Doe`
+* `findclient jacob` returns `Jacob Chua` and `Jacob Tan`
 * `findclient alex david` returns `Alex Yeoh`, `David Li`<br>
 
+### Listing all clients : `listclients`
+
+Displays a list of all clients in the application to you. 
+
+One common use of this command is to remove a filter; 
+for example you might have used `findclient tan` to display only clients whose names contain "Tan". 
+</br> Following with the command `listclients` allows you to refresh the client list to display all clients currently in the application.
+
+Format: `listclients`
+
+
 ## Task Commands
+This part of the user guide concerns commands meant to help you manage tasks. Tasks in SalesNote come with a 
+label, and a date representing an intended deadline. <br> Like any good to-do list, SalesNote allows you to mark tasks
+as completed, and also provides you with an ability to tag tasks to sales orders.
 
 <div markdown="block" class="alert alert-info">
-
 **:information_source: Notes about the task commands:**<br>
 
-* The task tags should either be 'General' or have prefix `SO` followed by at least 1 digit.
-* The number after the 'SO' prefix should correspond to the id of an existing order.
-
+* A task tag is **not** the same as a client tag. While you are free to select any client tag you wish, a task tag should:
+    * Be `General` or
+    * Have prefix `SO` followed by at least 1 digit.
+    * Some examples:
+        * `addtask sew buttons t/general`
+        * `addtask sew buttons t/SO1`
+        * `addtask sew buttons` (for convenience, if the tag is omitted, the application will clasify the task as "general")
+* The number after the 'SO' prefix **must correspond to the id of an existing order**. 
+* The date that accompanies tasks should be keyed in one of the following formats:
+  
+  Format | Example
+    --------|------------------
+  **dd mmmm yyyy** | `08 November 2001`
+  **dd mmm yyyy** | `08 Nov 2021`
+  **yyyy mm dd** | `2021 11 08`
+  **dd-mm-yyyy** | `08-11-2021`
+  **yyyy/mm/dd** | `2021/11/08`
+  **dd/mm/yyyy** | `08/11/2021`
 </div>
-
-### Listing all tasks : `listtasks`
-
-Shows a list of all tasks in the application.
-
-Format: `listtasks`
 
 ### Adding a task : `addtask`
 
-Adds a task to the application.
+Adds a task to SalesNote. The `TASKTAG` field allows you to relate tasks to orders, to help you better organise your work.
 
 Format: `addtask l/LABEL d/DATE [t/TASKTAG]`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-The new task will automatically be assigned the 'General' tag if the task tag parameter is not supplied.
+A reminder that for your convenience, a new task will automatically be assigned the 'General' tag if the task tag parameter is not supplied.
+</div>
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+If an order is deleted from SalesNote, all tasks that are tagged to it will also be deleted.
 </div>
 
 Examples:
 * `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
+* `addtask l/sew buttons onto blazer d/20 Aug 2021` (the tasktag can be omitted)
+* `addtask l/sew buttons onto blazer d/2021/08/18`
 
 ### Deleting a task : `deletetask`
 
-Deletes the specified task from the application.
+Lets you delete a specified task from SalesNote.
 
 Format: `deletetask INDEX`
 
 * Deletes the task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed task list on the **Tasks**'s tab.
+* The index refers to the index number shown in the displayed task list on the **Tasks** tab.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -255,34 +328,23 @@ Examples:
 
 ### Editing a task : `edittask`
 
-Edits an existing task in the application.
+Allows you to edit the information of an existing task in the application.
 
 Format: `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]`
 
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list on the **Tasks**'s tab. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* If you attempt to edit the `TASKTAG` field to tie the task to an order, note that the order with that id must exist in the 
+application first. <br> e.g. `edittask 2 t/SO2` will fail if there is no order with id 2 in SalesNote.
 
 Examples:
 * `edittask 1 l/order cloth d/19 September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
 * `edittask 2 t/General` edits the tag of the 2nd task to be `General`
 
-### Marking a task as done : `marktask`
-
-Marks a specified task from the application as done.
-
-Format: `marktask INDEX`
-
-* Marks the task at the specified `INDEX` as done.
-* The index refers to the index number shown in the displayed task list on the **Tasks**'s tab.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listtasks` followed by `marktask 2` marks the the 2nd task displayed as done.
-
 ### Finding tasks by keywords : `findtask`
 
-Finds tasks whose label, date or task tag contain any of the given keywords.
+Helps you find tasks whose label, date or task tag contain any of the given keywords.
 
 Format: `findtask KEYWORD [MORE_KEYWORDS]`
 
@@ -297,6 +359,12 @@ Examples:
 
 ![result for 'findtask SO1'](images/findtaskSO1.png)
 
+### Listing all tasks : `listtasks`
+
+Shows a list of all tasks in the application.
+
+Format: `listtasks`
+
 ### Listing completed tasks : `completedtasks`
 
 List all the completed tasks.
@@ -309,13 +377,22 @@ List all the incomplete tasks.
 
 Format: `incompletetasks`
 
+### Marking a task as done : `marktask`
+
+Marks a specified task from the application as done.
+
+Format: `marktask INDEX`
+
+* Marks the task at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed task list on the **Tasks**'s tab.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listtasks` followed by `marktask 2` marks the the 2nd task displayed as done.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Order Commands
-
-### Listing all orders : `listorders`
-
-Shows a list of all orders in the application.
 
 ### Adding an order : `addorder`
 
@@ -339,13 +416,6 @@ Format: `deleteorder INDEX`
 
 Note that this will also delete all tasks tagged to the deleted order.
 
-### Marking an order as complete : `markorder`
-
-Format: `markorder INDEX`
-* Marks the order at the specified `INDEX` as completed
-* The index refers to the index number shown in the displayed order list.
-* The index must be a positive integer 1, 2, 3
-
 ### Finding orders by keywords : `findorder`
 
 Finds orders whose customer, label, date or sales id contain any of the given keywords.
@@ -361,6 +431,9 @@ Examples:
 * `findorder blue` returns `blue blazer` and `blue shirt`
 * `findorder SO1` returns order with id of `SO1`
 
+### Listing all orders : `listorders`
+
+Shows a list of all orders in the application.
 
 ### Listing completed orders : `completedorders`
 
@@ -373,6 +446,13 @@ Format: `completedorders`
 List all the incomplete orders.
 
 Format: `incompleteorders`
+
+### Marking an order as complete : `markorder`
+
+Format: `markorder INDEX`
+* Marks the order at the specified `INDEX` as completed
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
 
 ### Sorting orders : `sortorders`
 
@@ -511,3 +591,7 @@ Action | Format
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
+
+
+Acknowledgements:
+This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
