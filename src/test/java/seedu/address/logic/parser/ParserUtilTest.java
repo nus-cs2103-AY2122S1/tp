@@ -42,25 +42,29 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a",
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddToFolderCommand.MESSAGE_USAGE))));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1), new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1),
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddToFolderCommand.MESSAGE_USAGE))));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1",
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddToFolderCommand.MESSAGE_USAGE))));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  ", new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  ",
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddToFolderCommand.MESSAGE_USAGE))));
     }
 
