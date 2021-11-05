@@ -843,7 +843,6 @@ expected to do more *exploratory* testing.
 
     1. Test case: `delete -c 1`<br>
        Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
-       Timestamp in the status bar is updated.
 
     1. Test case: `delete -c 0`<br>
        Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
@@ -857,7 +856,6 @@ expected to do more *exploratory* testing.
 
     1. Test case: `delete -p 2`<br>
        Expected: Second product is deleted from the list. Details of the deleted product shown in the status message.
-       Timestamp in the status bar is updated.
 
     1. Test case: `delete -p 0`<br>
        Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
@@ -865,15 +863,51 @@ expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete -p x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### 7.4 Editing a Client/Product
+### 7.4 Adding a Client/Product
+
+1. Adding a client.
+
+    1. Prerequisites:<br>
+       List all products using the `list -p` command. At least one product in the list, the first product
+       has a positive quantity value.
+       1. If the product list is empty, refer to <u>7.4, 2</u> to add a product.
+       1. If the first product doesn't have a quantity, refer to <u>7.5, 2</u> to set its quantity to be a
+       positive integer.
+       
+    1. Test case: `add -c John Doe -pn 98765432 -e john.doe@gmail.com -a xxx Rd Singapore -o 1 1 11/05`<br>
+       Expected: A client is added into the list. Details of the added client shown in the status message.
+       
+    1. Test case: `add -c Ben`<br>
+       Expected: No client is added. Error details shown in the status message. Status bar remains the same.
+       
+    1. Other incorrect add commands to try: `add -c`, `add -c !`, `add -c Ben -pn phone number`, `...`<br>
+       Expected: Similar to previous.
+       
+1. Adding a product.
+
+    1. Test case: `add -p pen -$ 10 -q 100`<br>
+       Expected: A product is added into the list. Details of the added product shown in the status message.
+       
+    1. Test case: `add -p pen`<br>
+       Expected: No product is added. Error details shown in the status message. Status bar remains the same.
+       
+    1. Other incorrect add commands to try: `add -p`, `add -p !`, `add -p pen -$ ten`, `...`<br>
+       Expected: Similar to previous.
+
+### 7.5 Editing a Client/Product
 
 1. Editing a client while all clients are being shown.
 
-    1. Prerequisites: List all clients using the `list -c` command. Multiple clients in the list.
+    1. Prerequisites:<br>
+       List all clients using the `list -c` command. Multiple clients in the list.<br>
+       List all products using the `list -p` command. At least one product in the list, the first product
+       has a positive quantity value.
+        1. If the product list is empty, refer to <u>7.4, 2</u> to add a product.
+        1. If the first product doesn't have a quantity, refer to <u>7.5, 2</u> to set its quantity to be a
+           positive integer.
 
-    1. Test case: `edit -c 1 -n Ben -pn 12345678 -e ben@gmail.com -a ben's house address -o 2 1 1/1 -o 1 0 3/14`<br>
+     1. Test case: `edit -c 1 -n Ben -pn 12345678 -e ben@gmail.com -a ben's house address -o 1 0 3/14`<br>
        Expected: First client is edited from the list. Details of the edited client shown in the status message.
-       Timestamp in the status bar is updated.
 
     1. Test case: `edit -c 0`<br>
        Expected: No client is edited. Error details shown in the status message. Status bar remains the same.
@@ -887,7 +921,6 @@ expected to do more *exploratory* testing.
 
     1. Test case: `edit -p 2 -n iPhone 13 -$ 1499 -q 200`<br>
        Expected: Second product is edited from the list. Details of the edited product shown in the status message.
-       Timestamp in the status bar is updated.
 
     1. Test case: `edit -p 0`<br>
        Expected: No product is edited. Error details shown in the status message. Status bar remains the same.
@@ -895,7 +928,7 @@ expected to do more *exploratory* testing.
     1. Other incorrect edit commands to try: `edit`, `edit -p x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### 7.5 Saving Data
+### 7.6 Saving Data
 
 1. Dealing with missing/corrupted data files
 
