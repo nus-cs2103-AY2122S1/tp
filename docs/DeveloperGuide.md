@@ -347,7 +347,11 @@ Notice how there are no more associations between the Lesson and the Students.
 The following sequence diagram shows how the delete lesson operation works:
 
 <center>
-<img alt="DeleteLessonSequenceDiagram" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram.png"/>
+<img alt="DeleteLessonSequenceDiagram0" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="DeleteLessonSequenceDiagram1" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram1.png"/>
 </center>
 
 <div markdown="span" class="alert alert-info">

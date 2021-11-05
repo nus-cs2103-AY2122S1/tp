@@ -24,7 +24,7 @@ activate Lesson
 Lesson -> Student : addStudent(Alice)
 activate Student
 
-Student -> Lesson
+Student --> Lesson
 deactivate Student
 
 Lesson --> EnrollCommand
