@@ -76,8 +76,8 @@ public class ModuleLesson {
      */
     public boolean clashesWith(ModuleLesson otherModuleLesson) {
         if (getDay().equals(otherModuleLesson.getDay())) {
-            return (getLessonStartTime().value.isBefore(otherModuleLesson.getLessonEndTime().value)
-                    && otherModuleLesson.getLessonStartTime().value.isBefore(getLessonEndTime().value));
+            return getLessonStartTime().value.isBefore(otherModuleLesson.getLessonEndTime().value)
+                    && otherModuleLesson.getLessonStartTime().value.isBefore(getLessonEndTime().value);
         }
         return false;
     }
