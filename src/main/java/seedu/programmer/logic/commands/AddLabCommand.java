@@ -48,18 +48,17 @@ public class AddLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        List<Student> studentList = model.getAllStudents();
+
+        if (studentList.isEmpty()) {
+            throw new CommandException(NO_STUDENT_CONSTRAINTS);
+        }
+
         if (result.getLabTotal().getLabTotalScore() < 0) {
             throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
         }
 
-        // Gets the last filtered list displayed
-        List<Student> lastShownList = model.getFilteredStudentList();
-
-        if (lastShownList.isEmpty()) {
-            throw new CommandException(NO_STUDENT_CONSTRAINTS);
-        }
-
-        for (Student std: lastShownList) {
+        for (Student std: studentList) {
             Student target = std;
             Lab newLab = this.result.copy();
             if (!target.addLab(newLab)) {

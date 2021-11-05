@@ -38,13 +38,18 @@ public class DeleteLabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+
+        List<Student> studentList = model.getAllStudents();
+
+        if (studentList.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_STUDENT);
+        }
 
         if (!model.hasLab(lab)) {
             throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, lab));
         }
 
-        for (Student student : lastShownList) {
+        for (Student student : studentList) {
             Student originalStudent = student;
             originalStudent.deleteLab(lab);
             model.setStudent(originalStudent, student);

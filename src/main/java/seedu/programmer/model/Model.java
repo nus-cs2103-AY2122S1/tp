@@ -124,6 +124,12 @@ public interface Model {
     ObservableList<Student> getFilteredStudentList();
 
     /**
+     * Returns all students in ProgrammerError
+     */
+    ObservableList<Student> getAllStudents();
+
+
+    /**
      * Returns the selected information.
      */
     ObservableList<DisplayableObject> getSelectedInformation();
