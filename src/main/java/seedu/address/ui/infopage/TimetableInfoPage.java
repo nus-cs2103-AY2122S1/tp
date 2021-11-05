@@ -99,6 +99,11 @@ public class TimetableInfoPage extends InfoPage {
         }
     }
 
+    /**
+     * Produces a header for the timetable.
+     * @param i determines which day to put in the header.
+     * @return a StackPane with the day in it.
+     */
     private StackPane getDayPane(int i) {
         StackPane pane = new StackPane();
         Label label = new Label(days[i - 1]);
@@ -108,6 +113,11 @@ public class TimetableInfoPage extends InfoPage {
         return pane;
     }
 
+    /**
+     * Produces a header for the timetable.
+     * @param i determines what time to put in the header.
+     * @return a StackPane with the time in it.
+     */
     private StackPane getTimePane(int i) {
         StackPane pane = new StackPane();
         Label label = new Label(i + ":00");
