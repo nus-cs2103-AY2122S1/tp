@@ -384,7 +384,7 @@ Format: `exit`
 
 #### Viewing schedule for the week: `change`
 
-the change command enables the user to view a different week than the default one, which is the next seven days.
+The change command enables the user to view a different week than the default one, which is the next seven days.
 The schedule for the current week is shown under the schedule tab by default. The week
 can be changed using the `change` command. 
 
