@@ -15,10 +15,10 @@ Class TaskTag
 
 }
 
-Task --> Label
+Task *--> Label
 Task *--> TaskTag
-Task --> Date
-Task --> "isDone" Boolean
+Task *--> Date
+Task *--> "isDone" Boolean
 
 Label -[hidden]right-> Date
 Date -[hidden]right-> TaskTag

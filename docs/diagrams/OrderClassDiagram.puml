@@ -17,12 +17,12 @@ Class Date
 
 }
 
-Order --> Label
+Order *--> Label
 Order *--> Amount
 Order *--> Customer
-Order --> Date
-Order --> "isComplete" Boolean
-Order --> "Id" Integer
+Order *--> Date
+Order *--> "isComplete" Boolean
+Order *--> "Id" Integer
 
 Label -[hidden]right-> Amount
 Amount -[hidden]right-> Customer
