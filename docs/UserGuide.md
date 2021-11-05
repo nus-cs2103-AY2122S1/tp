@@ -18,8 +18,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 | :exclamation: **Caution:** | Possible pitfalls |
 | `markdown` | Commands or examples |
 | Format: | the format to write the commands in the application|
-
-
+| :information_source: **Note:** | Noteworthy information |
 
 ## Table Of Contents <a name="toc"></a>
 * [Quick start](#quick-start)
@@ -197,9 +196,11 @@ Format: `exit`
 ---
 
 ## Managing Patients <a name="managing-patients"/>
-To use commands for managing patients, toggle the displayed list to the patient list using the [toggle](#toggle) command. <br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+To use commands for managing patients, toggle the displayed list to the patient list using the toggle command.
+</div>
 
-![patient tab'](images/patientTab.png)
+![patient tab](images/patientTab.png)
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
