@@ -1,0 +1,16 @@
+@startuml
+start
+:User inputs Find Command;
+:Logic executes Find Command;
+:Find Command Parser extracts present prefixes;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Keywords are valid])
+
+    :Model filters a list of persons;
+    :GUI updates filtered person list;
+else ([else])
+endif
+stop
+@enduml

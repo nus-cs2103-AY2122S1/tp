@@ -10,6 +10,8 @@ public class Done {
 
     public static final String STATUS_DONE = "Done";
     public static final String STATUS_UNDONE = "Not Done";
+    public static final Done DONE = new Done(STATUS_DONE);
+    public static final Done UNDONE = new Done(STATUS_UNDONE);
 
     public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for Done or Not Done";
     private String doneStatus;

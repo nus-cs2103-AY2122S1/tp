@@ -6,9 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 /**
@@ -17,12 +14,13 @@ import java.util.Date;
  */
 public class Interview {
     public static final Interview EMPTY_INTERVIEW = new Interview("");
-    public static final String PARSE_FORMAT = "y-M-d, H:m"; //e.g. 2022-09-21, 9:30
+    public static final String PARSE_FORMAT = "yyyy-M-d, H:m"; //e.g. 2022-09-21, 9:30
     public static final String DISPLAY_FORMAT = "MMM dd yyyy , HH:mm"; //e.g. Sep 21 2022, 09:30
     public static final String EMPTY_TIME = "-";
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview time should follow the format: [year-month-date, hour-minute]. "
-                    + "E.g. i/2021-09-01, 8:00 or i/21-9-1,08:00";
+            "Interview time should be on a valid day and follow the format: "
+                    + "yyyy-M-d, H:m (Year should be strictly 4-digit while others can be either 1 or 2 digit) "
+                    + "E.g. i/2021-09-01, 8:00 or i/2021-9-1,08:00";
 
     public final String parseTime;
 
@@ -49,9 +47,10 @@ public class Interview {
             return true;
         }
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
-            LocalDate.parse(test, formatter);
-        } catch (DateTimeParseException e) {
+            DateFormat df = new SimpleDateFormat(PARSE_FORMAT);
+            df.setLenient(false);
+            df.parse(test);
+        } catch (ParseException e) {
             return false;
         }
 

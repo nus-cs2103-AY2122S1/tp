@@ -52,6 +52,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -85,7 +86,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setExperience(
                     ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
         }
-
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

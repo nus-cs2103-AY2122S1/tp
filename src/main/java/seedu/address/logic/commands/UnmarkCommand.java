@@ -20,10 +20,12 @@ public class UnmarkCommand extends MarkingCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the applicants identified by the index numbers used in the displayed "
-            + "person list to Not Done.\n" + "Parameters: INDEX... (must be positive integers)\n"
+            + "person list to Not Done.\n" + "Parameters: INDEX...\n"
             + "Example: " + COMMAND_WORD + " 1 4 7";
 
     public static final String MESSAGE_UNMARKED_PERSON_SUCCESS = "Unmarked Person(s) to Not Done: \n%1$s";
+    public static final String MESSAGE_UNMARKING_UNMARKED_PERSON =
+            "A person that is already unmarked as Not Done cannot be unmarked again";
 
     private final Index[] targetIndexes;
 
@@ -38,10 +40,19 @@ public class UnmarkCommand extends MarkingCommand {
 
         StringBuilder result = new StringBuilder();
 
-        for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        boolean unmarkingUnmarkedPerson;
+        for (Index checkIndex : targetIndexes) {
+            if (checkIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
+            Person personToCheck = lastShownList.get(checkIndex.getZeroBased());
+            unmarkingUnmarkedPerson = model.checkForUnmarkedPerson(personToCheck);
+            if (unmarkingUnmarkedPerson) {
+                throw new CommandException(MESSAGE_UNMARKING_UNMARKED_PERSON);
+            }
+        }
+
+        for (Index targetIndex : targetIndexes) {
             Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
             model.unmarkPerson(personToUnmark);
             result.append(personToUnmark);

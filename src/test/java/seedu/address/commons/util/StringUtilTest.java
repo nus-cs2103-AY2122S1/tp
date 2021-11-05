@@ -245,37 +245,33 @@ public class StringUtilTest {
     //---------------- Tests for isIntegerLargerOrEqualToValue ---------------------------
 
     @Test
-    public void isIntegerLargerOrEqualToValue() {
+    public void isDoubleLargerOrEqualToValue() {
         // EP: empty strings
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("", ""));
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue("", ""));
 
         // EP: not a number
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("a", "b"));
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("aaa", "bbb"));
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue("a", "b"));
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue("aaa", "bbb"));
 
         // EP: numbers with white space
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(" 10 ", "    20    ")); // Leading/trailing spaces
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("1 0", "2 0")); // Spaces in the middle
-
-        // EP: number larger than Integer.MAX_VALUE
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(Long.toString(Integer.MAX_VALUE + 1),
-                Long.toString(Integer.MAX_VALUE + 2)));
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue(" 10 ", "    20    ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue("1 0", "2 0")); // Spaces in the middle
 
         // EP: s1 >= s2, should return true
-        int small = 1;
-        int large = 10;
-        assertTrue(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(large),
-                Integer.toString(small)));
-        assertTrue(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(large + 5),
-                Integer.toString(small + 5)));
+        double small = 1;
+        double large = 10;
+        assertTrue(StringUtil.isDoubleLargerOrEqualToValue(Double.toString(large),
+                Double.toString(small)));
+        assertTrue(StringUtil.isDoubleLargerOrEqualToValue(Double.toString(large + 5),
+                Double.toString(small + 5)));
 
         // EP: s1 < s2, should return false
-        int i = 5;
-        int j = 20;
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(i),
-                Integer.toString(j))); // Boundary value
-        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(i - 5),
-                Integer.toString(j - 5)));
+        double i = 5;
+        double j = 20;
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue(Double.toString(i),
+                Double.toString(j))); // Boundary value
+        assertFalse(StringUtil.isDoubleLargerOrEqualToValue(Double.toString(i - 5),
+                Double.toString(j - 5)));
     }
 
 }

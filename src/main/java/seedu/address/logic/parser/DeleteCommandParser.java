@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,12 +20,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             Index[] indexes = ParserUtil.parseMultipleIndex(args);
 
-            // Sort the array from large to small so that applicants will be deleted from the back
-            Arrays.sort(indexes, (i1, i2) -> i2.getZeroBased() - i1.getZeroBased());
             return new DeleteCommand(indexes);
         } catch (ParseException pe) {
+            String causeOfError = "\n" + pe.getMessage();
+
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT + causeOfError,
+                            DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 

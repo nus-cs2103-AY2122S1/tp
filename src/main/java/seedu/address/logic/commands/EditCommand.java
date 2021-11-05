@@ -139,10 +139,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Interview> updatedInterview = editPersonDescriptor.getInterview().orElse(personToEdit.getInterview());
         Optional<Notes> updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
+        Done updatedDone = personToEdit.getDone();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole,
                 updatedEmploymentType, updatedExpectedSalary, updatedLevelOfEducation,
-                updatedExperience, updatedTags, updatedInterview, updatedNotes);
+                updatedExperience, updatedTags, updatedInterview, updatedNotes, updatedDone);
     }
 
     /**
