@@ -181,7 +181,7 @@ The add student feature adds a student with the provided name and NUSNET ID into
 #### Implementation
 
 #### AddCommand class
-The `add student` mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
+The `addstudent` mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
 the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
 If this `Student` already exists, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
 the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
@@ -207,9 +207,9 @@ The following sequence diagram shows how the add student operation works:
 </div>
 
 
-### Add group feature
+### Add Group feature
 
-The `add group` feature allows users to create new groups, as well as specify students to be added to the group to be created.
+The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
 #### How the `AddGroupCommand` works:
 1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
@@ -233,7 +233,7 @@ The following sequence diagram summarizes what happens when the user inputs an a
 
 ### Add Allocation feature
 
-The `add alloc` feature allocates an existing student into a group.
+The `addalloc` feature allocates an existing student into a group.
 
 Given below is an example usage case and how the `add alloc` command mechanism behaves at each step.
 
@@ -254,7 +254,7 @@ Use case ends.
 
 ### Search feature
 
-The `search` feature is allows user to filter student list by name, NUSNET ID, group, or tag.
+The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
 #### Implementation
 
@@ -265,17 +265,18 @@ The following diagram shows the search operation after user input `search -n Ale
 A `Predicate<Student>` object will be created for each search command.
 It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
 
-To support the differentiated search functionality for different identifiers, multiple classes extending from
-`Predicate<Student>` can be created, each with different implementation of `test(Student student)` function.
+To support the differentiated search functionality for different flags (e.g. name, NUSNET ID, group name, or tag),
+multiple classes extending from `Predicate<Student>` can be created,
+each with different implementation of the `test(Student student)` function.
 
 * `NameContainsKeywordsPredicate`: checks if any word in the full name of student matches exactly any word in the
-  given keywords. e.g. `Alex Yu` will match Alex Yeoh and Bernice Yu. Partial search is not supported
+  given keywords. e.g. `Alex Yu` will match `Alex Yeoh` and `Bernice Yu`. Partial search is not supported
   e.g. `Han` will not match `Hans`.
-* `IdContainsKeywordsPredicate`: checks if the ID of student contains any string in the given keywords.
+* `IdContainsKeywordsPredicate`: checks if the ID of student contains any word in the given keywords.
   Partial search is supported. e.g. `E05` will match `E0523412`.
-* `GroupContainsKeywordsPredicate`: checks if any group of student contains any string in the given keywords.
+* `GroupContainsKeywordsPredicate`: checks if any group of student contains any word in the given keywords.
   Partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
-* `TagContainsKeywordsPredicate`: checks if the tag of student contains any string in the given keywords.
+* `TagContainsKeywordsPredicate`: checks if the tag of student contains any word in the given keywords.
   Partial search is supported. e.g. `friend` will match `friends`.
 
 The following diagram summarizes what happens after user input search command:
@@ -283,7 +284,7 @@ The following diagram summarizes what happens after user input search command:
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
-if command is valid. Command is invalid if user input is empty, or if user entered more or less than one parameter.
+if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
 </div>
 
 
@@ -295,7 +296,7 @@ if command is valid. Command is invalid if user input is empty, or if user enter
     * Pros: Easy to implement.
     * Cons: Inconvenient for user to remember different command words.
 
-* **Alternative 2(current choice):** Single search command to perform search for multiple identifiers.
+* **Alternative 2 (current choice):** Single search command to perform search for multiple identifiers.
     * Pros: More straightforward and convenient for users.
     * Cons: We need to identify the type of input given.
 
@@ -378,12 +379,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -403,7 +398,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* targets professors of CS1101S
+Targets professors of CS1101S who:
 * has a need to manage a significant number of students
 * has a need to analyse students' performance
 * prefer desktop apps over other types
@@ -411,51 +406,73 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: This app will help the professors keep track of each student’s performance after each assessment,
+**Value proposition**: This app will help CS1101S professors keep track of students' performance after each assessment,
 doing so faster than a typical mouse/GUI driven app.
-It can analyse results of individual students, or tutorial groups, and identify students who require additional help,
+It can analyse results of individual students, tutorial groups, or the whole cohort in each assessment,
+in order to identify students who may require additional help.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
+Importing and exporting data:
+
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | CS1101S Professor                          | Upload large amounts of data from a file      | Upload all assessment scores of all students at once          |
 | `* *`  | Long-time user                         | Clear all data        | Remove records from the previous semester            |
-| `*`  | CS1101S Professor                          | Export data      | Share interesting findings with my colleagues          |
+| `* *`  | CS1101S Professor                          | Export data      | Share interesting findings with my colleagues          |
 | `*`  | New user | Import data from the previous semester | Have an idea of how intakes of the previous cohort performed |
+
+Adding and editing data fields:
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | CS1101S Professor                          | Add a new assessment        | Keep track of assessment scores of students           |
 | `* * *`  | CS1101S Professor                          | Add a new student        | Add a new student without having to make a new file               |
 | `* * *`  | CS1101S Professor                          | Allocate a student into existing group       | Allocate groupings without having to make a new file                  |
 | `* * *`  | CS1101S Professor                          | Organise students into groups      | Encourage peer learning          |
 | `* *`  | CS1101S Professor | Remove a specific student   | Update the system accordingly when a student drops the module  |
-| `*`  | CS1101S Professor | Annotate a student with a tag  | See categories of students quickly |
+| `* *`  | CS1101S Professor | Annotate a student with a tag  | See categories of students quickly |
 | `* *`  | CS1101S Professor | Add remarks to particular students | Be aware of any special conditions the student is facing |
-| `*`  | CS1101S Professor | Upload students’ feedback about their tutors | Provide timely feedback to the tutors |
-| `* *`  | CS1101S Professor | Add attendance records for each class  | Track the students present at each class |
 | `* *`  | CS1101S Professor | Edit assessment score for a particular student | Make changes after the initial grading |
+| `*`  | CS1101S Professor | Add attendance records for each class  | Track the students present at each class |
+| `*`  | CS1101S Professor | Upload students’ feedback about their tutors | Provide timely feedback to the tutors |
+
+Viewing and searching data:
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | CS1101S Professor                          | Search for specific student     | Track his/her progress to facilitate better learning          |
 | `* * *`  | CS1101S Professor | Search for students by classes and groups  | Track them by groups easily |
 | `* * *`  | CS1101S Professor | Check a student’s grades | See individual performance |
-| `* *`  | CS1101S Professor | Check attendance records for each student | Track if the student has been attending classes diligently |
+| `*`  | CS1101S Professor | Check attendance records for each student | Track if the student has been attending classes diligently |
+
+Analysing data:
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | CS1101S Professor | Analyse the performances of individual students | Give special assistance to those in need |
 | `* * *`  | CS1101S Professor | Analyse performance of cohort in each assessment | See how the cohort is performing |
-| `*`  | CS1101S Professor | Analyse the cohort performance for each question | Understand which are the topics students require more help with |
 | `* *`  | CS1101S Professor | Analyse the performances of students in groups | See which studio is under-performing and check in with the tutor |
-| `*`  | Detailed user | View the performances under different kinds of graph | Have better visualisation about the performances of students |
 | `* *`  | CS1101S Professor | Calculate overall grades  | Easily decide on grade ranges |
+| `*`  | Detailed user | View the performances under different kinds of graph | Have better visualisation about the performances of students |
+| `*`  | CS1101S Professor | Analyse the cohort performance for each question | Understand which are the topics students require more help with |
 | `*`  | CS1101S Professor | Compare between different batches of students | See if the module is too hard this semester as compared to previous semesters |
 | `*`  | CS1101S Professor | Check the overall performance of the tutors based on several indicators | Identify excellent tutors to be called back next semester |
+
+Others:
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | New user | Get command prompts when typing | Do not have to keep checking user guide |
 | `* *`  | Expert user | Have shortcuts for commands | Save time |
+| `* *`  | Potential user | View the app populated with sample data | See how the app looks like when in use |
 | `*`  | Forgetful user | Access the user guide with an easy to remember command | Lookup how to use a command/what command to use |
 | `*`  | Long-term user | Store meeting timings | Not miss any meetings that have been planned |
-| `* *`  | Potential user | View the app populated with sample data | See how the app looks like when in use |
 | `*`  | Forgetful user | Have reminders about upcoming meetings | Avoid missing any important events |
 | `*`  | CS1101S Professor | Add TODO bug fixes accumulated throughout the semester | Fix them during CP3108 |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -503,26 +520,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Data should persist after closing the application.
-3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+3. Should be able to analyse data of up to 1000 students without a noticeable sluggishness in performance for typical usage.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. Should work without internet connections.
+6. New users can pick up the basic functionalities of Source Control easily.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
-* **Student**: A student in the database, identified by their name and ID (their NUSNET ID). Each student can be in multiple groups, and can have scores for multiple assessments.
-* **Group**: A group of students, identified by its name.
-* **Assessment**: An assessment is identified by its name.
-* **Score**: The score that a student has attained for an assignment. Should be between 0 and 100, inclusive. Each student can only have 1 score per assessment.
-
+* **Student**: A student in the database, identified by their name and NUSNET ID. Each student can be in multiple groups, and can have scores for multiple assessments.
+* **Group**: A group of students, identified by the group name.
+* **Assessment**: An assessment is identified by the assessment name.
+* **Score**: The score that a student has attained for an assessment, stored in percentage and can be recorded up to 2 decimal places. Each student can only have 1 score per assessment.
+* **Student list**: The list of students displayed on the right panel of Source Control. Student list can be filtered to display selected students only.
+* **Flag**: Arguments flags are used to indicate different types of user inputs e.g. `-n` for student name, and `-g` for group. More about flags can be found [here](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#glossary).
 
 --------------------------------------------------------------------------------------------------------------------
 
