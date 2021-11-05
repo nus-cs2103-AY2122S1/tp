@@ -1,5 +1,7 @@
 package seedu.address.model.summary;
 
+import static seedu.address.model.contact.Rating.EMPTY_RATING;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
-
-import static seedu.address.model.contact.Rating.EMPTY_RATING;
-
 
 /**
  *  This class contains the logic of retrieving data from different components

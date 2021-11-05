@@ -128,7 +128,7 @@ public class CommandTestUtil {
         if (command instanceof DeleteCommand || command instanceof AddCommand || command instanceof ClearCommand
                 || command instanceof UndoCommand || command instanceof RedoCommand || command instanceof ListCommand
                 || command instanceof SummaryCommand || command instanceof FilterCommand
-                || command instanceof FindCommand ) {
+                || command instanceof FindCommand) {
             expectedCommandResult = new CommandResult(expectedMessage, summary);
         } else {
             expectedCommandResult = new CommandResult(expectedMessage);

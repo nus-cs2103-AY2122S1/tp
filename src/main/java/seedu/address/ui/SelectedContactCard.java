@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.contact.Rating.EMPTY_RATING;
+
 import java.util.Comparator;
 import java.util.logging.Logger;
 
@@ -13,10 +15,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Rating;
 import seedu.address.model.summary.Summary;
 
-import static seedu.address.model.contact.Rating.EMPTY_RATING;
+
 
 /**
  * An UI component that displays information of a {@code Contact}.
