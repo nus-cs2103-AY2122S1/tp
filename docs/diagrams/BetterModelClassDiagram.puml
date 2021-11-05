@@ -18,7 +18,7 @@ Participant *--> ParticipantId
 Participant "*" <-left-> "*" Event
 Participant --> "*" NextOfKin
 Participant --> "0..1" BirthDate
-Event *--> "1" EventName
-Event *--> "1" EventDate
+Event *--> EventName
+Event *--> EventDate
 Event --> "0..1" EventTime
 @enduml
