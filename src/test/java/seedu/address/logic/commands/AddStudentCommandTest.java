@@ -3,18 +3,22 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -47,7 +51,10 @@ public class AddStudentCommandTest {
             expectedModel.addModule(mod);
         }
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
-        CommandResult commandResult = new AddStudentCommand(validStudent, moduleName).execute(expectedModel);
+        CommandResult commandResult = new AddStudentCommand(
+                validStudent,
+                moduleName)
+                .execute(expectedModel);
 
         assertEquals(String.format(AddStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, validStudent),
                 commandResult.getFeedbackToUser());
@@ -61,6 +68,35 @@ public class AddStudentCommandTest {
         AddStudentCommand addStudentCommand = new AddStudentCommand(AMY, moduleName);
 
         assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+                addStudentCommand.execute(model));
+    }
+
+    @Test
+    public void execute_moduleNotFound_throwsCommandException() {
+        ModuleName moduleName = new ModuleName("CS1101S");
+        AddStudentCommand addStudentCommand = new AddStudentCommand(AMY, moduleName);
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, "CS1101S"), () ->
+                addStudentCommand.execute(model));
+    }
+
+    @Test
+    public void execute_duplicateTeleHandle_throwsCommandException() {
+        ModuleName moduleName = new ModuleName("CS2103");
+        Student student = new StudentBuilder().withStudentId("A7654321X").withName("Dema")
+                .withTeleHandle(VALID_TELE_HANDLE_AMY).withEmail("ddd@example.com").build();
+        AddStudentCommand addStudentCommand = new AddStudentCommand(student, moduleName);
+        assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_TELE_HANDLE, () ->
+                addStudentCommand.execute(model));
+
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        ModuleName moduleName = new ModuleName("CS2103");
+        Student student = new StudentBuilder().withStudentId("A7654321X").withName("Dema")
+                .withTeleHandle("@eeema").withEmail(VALID_EMAIL_AMY).build();
+        AddStudentCommand addStudentCommand = new AddStudentCommand(student, moduleName);
+        assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_EMAIL, () ->
                 addStudentCommand.execute(model));
     }
 
@@ -87,5 +123,13 @@ public class AddStudentCommandTest {
 
         // different students -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+    }
+
+    @Test
+    public void helperTest() {
+        List<Module> list = model.getFilteredModuleList();
+        ModuleName moduleName = new ModuleName("CS2103");
+        Module module = new Module(moduleName);
+        assertTrue(list.contains(module));
     }
 }
