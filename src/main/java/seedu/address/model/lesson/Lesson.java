@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -145,6 +146,13 @@ public abstract class Lesson implements Comparable<Lesson> {
      * Gets the date of the lesson to display to the user.
      */
     public abstract Date getDisplayDate();
+
+    /**
+     * Gets the day of week of the lesson to display to the user.
+     */
+    public String getDisplayDayOfWeek() {
+        return getLocalDate().format(DateTimeFormatter.ofPattern("EEE"));
+    }
 
     /**
      * Gets the local date of the lesson to display to the user.
