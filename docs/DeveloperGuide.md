@@ -214,7 +214,7 @@ Step5: The complete timetable is displayed to user through the `UI` component.
 The following activity diagram summarizes what happens when a user executes a "timetable" command:
 ![TimetableCommand Activity Diagram](images/TimetableCommandActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Size of timetable:**
 
@@ -247,6 +247,21 @@ Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the re
 ### \[Developed\] CLI input history navigation
 Users are able to navigate through their previously entered String inputs from the Command Box in the UI, using the up and down arrow keys.
 This is facilitated by the `InputHistory` class.
+
+### [Developed] Editing a Student
+Users can edit a student by editing the following fields: `Name`, `Phone`, `Email` and `Address`.
+This is implemented using the `EditCommand`, `EditCommandParser` classes.
+
+#### Current Implementation
+The `EditCommand` receives an index that indicates the student to be edited and an
+editable `EditStudentDescriptor` class which consists of the updated fields of the student.
+The student is then updated with the help of the following methods:
+
+* `Student#sameStudent(Student)` 
+
+Given below is an example usage scenario of how an `edit` command is executed.
+#### Steps
+Step 1: The user enters `edit 1 n/Tom p/98989898` command.
 
 
 ### [Developed] Editing Tuition Classes
@@ -317,13 +332,13 @@ classes are removed from the database with the help of the following methods:
 Given below is an example usage of how a `DeleteClassCommand` is executed.
 
 #### Steps
-Step 1: The user enters `deleteclass 1 2` command.
+Step 1: The user enters `deleteclass 1` command.
 
-Step 2: The `DeleteClassCommandParser` will parse the class indices to ensure that they are valid.
-Additionally, it removes any duplicates among the class indices. 
-A `DeleteClassCommand` object with the class indices as arguments is constructed.
+Step 2: The `DeleteClassCommandParser` will parse the class index to ensure that it is valid.
+ 
+A `DeleteClassCommand` object with the class index as arguments is constructed.
 
-Step 3: The `DeleteClassCommand` is executed. Class indices - 1 and 2, are used to retrieve the classes by calling the `ModelManager#getTuitionClass(Index)` method.
+Step 3: The `DeleteClassCommand` is executed. Class index - 1, is used to retrieve the class by calling the `ModelManager#getTuitionClass(Index)` method.
 
 Step 4: `Student#removeClass(TuitionClass)` is called to remove the Tuition class using the id from the all the students. 
 It also removes the class tag for all the students by using the `ClassName` and unique `TimeSlot` of the tuition class.
@@ -373,7 +388,7 @@ Step 6: `CommandResult` is returned informing the user of both the students that
 removed as they do not exist in the tuition class.
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Whether to allow users to remove single or multiple students at once:**
 
@@ -415,7 +430,7 @@ Valid students who are not added due to tuition class size limit or who have bee
 Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled ito show the `ClassName` and
 `Timeslot` of the class.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Whether to allow users to add students using names:**
 
@@ -490,7 +505,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 

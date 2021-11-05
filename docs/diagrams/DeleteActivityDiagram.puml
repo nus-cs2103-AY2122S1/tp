@@ -7,7 +7,7 @@ title DeleteClassCommand
 
 if () then ([valid tuition class?])
 
-   :Removes the class and the corresponding tag
+   :Removes the class and tags
    from all the students in the class;
    :Deletes the class in database;
    :Updates the tuition list;
