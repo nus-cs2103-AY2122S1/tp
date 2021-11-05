@@ -34,8 +34,8 @@
                 <FlowPane fx:id="risk" />
             </HBox>
             <Label fx:id="apptTime" styleClass="cell_small_label" text="\$apptTime" />
-            <Label fx:id="doctorName" styleClass="cell_small_label" text="\$doctorName"/>
-            <Label fx:id="patientName" styleClass="cell_small_label" text="\$patientName"/>
+            <Label fx:id="doctorName" styleClass="cell_small_label" text="\$doctorName" wrapText="true"/>
+            <Label fx:id="patientName" styleClass="cell_small_label" text="\$patientName" wrapText="true"/>
             <Label fx:id="remarks" styleClass="cell_small_label" wrapText="true" text="\$remarks"/>
         </VBox>
     </GridPane>
