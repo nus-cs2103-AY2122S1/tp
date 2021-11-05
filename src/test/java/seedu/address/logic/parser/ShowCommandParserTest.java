@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ASSESSMENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_VALID_FILE;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSESSMENT_DESC;
@@ -11,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -60,18 +60,18 @@ public class ShowCommandParserTest {
     @Test
     public void parse_presentPath() {
         // parse by index
-        assertParseSuccess(parser, index.getOneBased() + " " + PREFIX_FILE, new ShowCommand(index, savePath));
+        assertParseSuccess(parser, index.getOneBased() + FILE_DESC_VALID_FILE, new ShowCommand(index, savePath));
 
         // parse by prefixes
-        assertParseSuccess(parser, NAME_DESC_AMY + " " + PREFIX_FILE, new ShowCommand(student.getName(), savePath));
-        assertParseSuccess(parser, ID_DESC_AMY + " " + PREFIX_FILE, new ShowCommand(student.getId(), savePath));
-        assertParseSuccess(parser, ASSESSMENT_DESC_AMY + " " + PREFIX_FILE, new ShowCommand(assessment, savePath));
-        assertParseSuccess(parser, GROUP_DESC_TUTORIAL + " " + PREFIX_FILE, new ShowCommand(group, savePath));
+        assertParseSuccess(parser, NAME_DESC_AMY + FILE_DESC_VALID_FILE, new ShowCommand(student.getName(), savePath));
+        assertParseSuccess(parser, ID_DESC_AMY + FILE_DESC_VALID_FILE, new ShowCommand(student.getId(), savePath));
+        assertParseSuccess(parser, ASSESSMENT_DESC_AMY + FILE_DESC_VALID_FILE, new ShowCommand(assessment, savePath));
+        assertParseSuccess(parser, GROUP_DESC_TUTORIAL + FILE_DESC_VALID_FILE, new ShowCommand(group, savePath));
     }
 
     @Test
     public void parseByIndex_validIndex_success() {
-        assertParseSuccess(parser, index.getOneBased() + " " + PREFIX_FILE, new ShowCommand(index, savePath));
+        assertParseSuccess(parser, index.getOneBased() + FILE_DESC_VALID_FILE, new ShowCommand(index, savePath));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ShowCommandParserTest {
 
     @Test
     public void parseByPrefixes_validName_success() {
-        assertParseSuccess(parser, NAME_DESC_AMY + " " + PREFIX_FILE, new ShowCommand(student.getName(), savePath));
+        assertParseSuccess(parser, NAME_DESC_AMY + FILE_DESC_VALID_FILE, new ShowCommand(student.getName(), savePath));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ShowCommandParserTest {
 
     @Test
     public void parseByPrefixes_validId_success() {
-        assertParseSuccess(parser, ID_DESC_AMY + " " + PREFIX_FILE, new ShowCommand(student.getId(), savePath));
+        assertParseSuccess(parser, ID_DESC_AMY + FILE_DESC_VALID_FILE, new ShowCommand(student.getId(), savePath));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ShowCommandParserTest {
 
     @Test
     public void parseByPrefixes_validAssessment_success() {
-        assertParseSuccess(parser, ASSESSMENT_DESC_AMY + " " + PREFIX_FILE, new ShowCommand(assessment, savePath));
+        assertParseSuccess(parser, ASSESSMENT_DESC_AMY + FILE_DESC_VALID_FILE, new ShowCommand(assessment, savePath));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ShowCommandParserTest {
 
     @Test
     public void parseByPrefixes_validGroup_success() {
-        assertParseSuccess(parser, GROUP_DESC_TUTORIAL + " " + PREFIX_FILE, new ShowCommand(group, savePath));
+        assertParseSuccess(parser, GROUP_DESC_TUTORIAL + FILE_DESC_VALID_FILE, new ShowCommand(group, savePath));
     }
 
     @Test
