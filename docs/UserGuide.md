@@ -779,7 +779,8 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, no .
+The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, only commands that do not modify any data are executed
+, such as `view`, `day`, `calendar`, `tags` etc.
 
 Format: `redo`
 
