@@ -1,5 +1,6 @@
 package seedu.address.model.tutorialgroup;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,7 +21,13 @@ public class GroupTypeTest {
     }
 
     @Test
-    public void isValidName() {
+    public void parseGroupType() {
+        assertEquals(1, GroupType.parseGroupType("OP1"));
+        assertEquals(2, GroupType.parseGroupType("OP2"));
+    }
+
+    @Test
+    public void isValidGroupType() {
         // null group name
         assertThrows(NullPointerException.class, () -> GroupType.isValidGroupType(null));
 
