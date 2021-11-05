@@ -568,7 +568,7 @@ A lesson can be categorised into 2 types:
     <tbody>
         <tr>
             <td rowspan=4>Essential</td>
-            <td>Start date</td>
+            <td>Start Date</td>
             <td><code>date/</code></td>
             <td>
               <ul>
@@ -585,7 +585,7 @@ A lesson can be categorised into 2 types:
             <td><code>subject/Social studies</code></td>
         </tr>
         <tr>
-            <td>Time range</td>
+            <td>Time Range</td>
             <td><code>time/</code></td>
             <td><ul>
             <li>Formatted as <code>HHmm-HHmm</code></li>
@@ -594,7 +594,7 @@ A lesson can be categorised into 2 types:
             <td><code>time/1730-1830</code></td>
         </tr>
         <tr>
-            <td>Lesson rate</td>
+            <td>Lesson Rates</td>
             <td><code>rates/</code></td>
             <td><ul>
               <li>Fee of the lesson per hour</li>
@@ -605,7 +605,7 @@ A lesson can be categorised into 2 types:
         </tr>
         <tr>
         <td rowspan=5>Optional</td>
-            <td>Recurrence flag</td>
+            <td>Recurrence Flag</td>
             <td><code>recurring/</code></td>
             <td><ul>
               <li>Indicates whether the lesson is recurring</li>
@@ -617,7 +617,7 @@ A lesson can be categorised into 2 types:
             </ul></td>
         </tr>
         <tr>
-            <td>Outstanding fees</td>
+            <td>Outstanding Fees</td>
             <td><code>f/</code></td>
             <td>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</td>
             <td><code>lvl/J1</code></td>
@@ -685,8 +685,8 @@ Additional fields to the ones in [Managing lessons](#managing-lessons) are liste
 
 Field | Prefix | Constraints | Examples |
 ------------------|-------|-----------| --------|
-Cancelled date |`cancel/`| Same constraints as other date fields.<br/> The date to be cancelled must be a valid lesson date and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
-Uncancelled date |`uncancel/` | Same constraints as other date fields.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
+Cancelled Date |`cancel/`| Same constraints as other date fields.<br/> The date to be cancelled must be a valid lesson date and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
+Uncancelled Date |`uncancel/` | Same constraints as other date fields.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
