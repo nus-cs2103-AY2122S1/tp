@@ -10,9 +10,8 @@ import java.time.format.DateTimeFormatter;
 import seedu.address.commons.util.StringUtil;
 
 public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparable<LastMet> {
-    public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
-            + "where Day, month and year should be numerical values.";
-
+    public static final String MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of dd-MM-yyyy, "
+            + "where dd refers to the day, MM refers to the month and yyyy refers to the year.";
     public final LocalDate value;
     public final String dateInString;
 

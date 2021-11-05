@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class StringUtil {
     public static final String DATE_VALIDATION_REGEX =
-            "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
+            "^([0][1-9]|(3)[0-1]|[1-2][0-9])[-](((0)[1-9])|((1)[0-2]))[-]\\d{4}";
     public static final String TIME_VALIDATION_REGEX =
             "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String CLIENT_DELIMITER = "\n";

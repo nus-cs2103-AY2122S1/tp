@@ -14,8 +14,8 @@ import java.time.LocalTime;
 
 public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullComparable<NextMeeting> {
 
-    public static final String DATE_MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of Day-Month-Year, "
-            + "where Day, month and year should be numerical values.";
+    public static final String DATE_MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of dd-MM-yyyy, "
+            + "where dd refers to the day, MM refers to the month and yyyy refers to the year.";
     public static final String TIME_MESSAGE_CONSTRAINTS = "Next meeting time should be in the 24-hour format, "
             + "where Hour and Minutes should be numerical values.";
     public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
