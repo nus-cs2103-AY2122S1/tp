@@ -40,6 +40,14 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the first value of {@code prefix}.
+     */
+    public Optional<String> getFirstValue(Prefix prefix) {
+        List<String> values = getAllValues(prefix);
+        return values.isEmpty() ? Optional.empty() : Optional.of(values.get(0));
+    }
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.

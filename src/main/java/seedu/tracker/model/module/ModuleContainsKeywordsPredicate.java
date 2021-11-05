@@ -44,6 +44,7 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
     public boolean test(Module module) {
         List<String> prefixesPresent = findPrefixesPresent(prefixList);
         List<String> keywordsPresent = findKeywordsPresent(prefixesPresent);
+        assert keywordsPresent.size() != 0;
         if (prefixesPresent.isEmpty()) {
             if (module.hasAcademicCalendar()) {
                 return (keywordsPresent.stream()
