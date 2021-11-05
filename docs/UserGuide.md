@@ -622,7 +622,7 @@ A lesson can be identified by the index number shown in the lesson list of the s
             <td><ul>
               <li><code>hw/Test 2</code> is valid</li>
               <li><code>hw/</code> clears <strong>all</strong> existing pieces of homework.</li>
-            <li><code>hw/ hw/Worksheet 1</code> ignores the empty homework and adds <code>Worksheet 1</code> to the homework set.</li>
+            <li><code>hw/ hw/Worksheet 1</code> replaces the existing pieces of homework and adds <code>Worksheet 1</code> to the homework set.</li>
             </ul></td>
         </tr>
     </tbody>
