@@ -90,8 +90,8 @@ Given below are my contributions to the project.
     ![UiClassDiagram](../images/UiClassDiagram.png)
   * Completed the write-up for how tab changing works.
   * Added sequence and activity diagrams for changing of tabs:
-    ![TabSequenceDiagram](../images/TabSystemSequenceDiagram.png)
-    ![TabActivityDiagram](../images/TabSystemActivityDiagram.png)
+    ![TabSequenceDiagram](../diagrams/TabSystemSequenceDiagram.png)
+    ![TabActivityDiagram](../diagrams/TabSystemActivityDiagram.png)
     * Below is an excerpt from the write-up: 
 
 The tab system is implemented using the JavaFX `javafx.scene.control.Tab` class. It is
