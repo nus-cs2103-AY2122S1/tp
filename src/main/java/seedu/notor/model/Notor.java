@@ -19,14 +19,14 @@ import seedu.notor.model.util.UniqueList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Notor implements ReadOnlyNotor {
-    private static final String INTIAL_NOTE = "Welcome to NOTOR v1.4! This application is a personal CLI\n" 
+    private static final String INTIAL_NOTE = "Welcome to NOTOR v1.4! This application is a personal CLI\n"
             + "designed for"
-            + " mentors to keep tabs on their mentees.\n" 
+            + " mentors to keep tabs on their mentees.\n"
             + "If you need help, you can refer to the help page!\n\n"
             + "Some things this application can do are: \n"
             + "person /list : Lists all contacts.\n"
-            + "person 3 /delete : Deletes the 3rd contact (contact with index number 3) shown in the current list.\n"
-            + "person User /create p:83248324 e:sampleuser@gmail.com : Creates a person named User with the phone and" 
+            + "person 3 /delete : Deletes the 3rd contact shown in the current list.\n"
+            + "person User /create p:83248324 e:sampleuser@gmail.com : Creates a person named User with the phone and"
             + " email listed \n\n\n ...and much more!";
 
     private final UniqueList<Person> persons;

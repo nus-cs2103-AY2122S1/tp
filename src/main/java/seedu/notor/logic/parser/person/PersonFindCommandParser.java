@@ -1,7 +1,6 @@
 package seedu.notor.logic.parser.person;
 
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.notor.commons.util.CollectionUtil.isAnyNonNull;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
