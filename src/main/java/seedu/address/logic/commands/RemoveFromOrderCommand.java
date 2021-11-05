@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,6 +34,8 @@ public class RemoveFromOrderCommand extends Command {
     public static final String MESSAGE_NO_UNCLOSED_ORDER = "Please use `sorder` to enter ordering mode first.";
     public static final String MESSAGE_MULTIPLE_MATCHES =
             "Multiple candidates found, check item's details again?";
+    public static final String MESSAGE_ID_NOT_FOUND = "Name provided exists but id provided is nonexistent";
+    public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
 
     private final ItemDescriptor toRemoveDescriptor;
 
@@ -80,6 +83,16 @@ public class RemoveFromOrderCommand extends Command {
             throw new CommandException(
                     String.format(MESSAGE_INSUFFICIENT_ITEM, target.getCount(), target.getName())
             );
+        }
+
+        if (!toRemoveDescriptor.getId().equals(Optional.empty())
+                && !toRemoveDescriptor.getName().equals(Optional.empty())) {
+            if (!toRemoveDescriptor.getId().get().equals(target.getId())) {
+                throw new CommandException(MESSAGE_ID_NOT_FOUND);
+            }
+            if (!toRemoveDescriptor.getName().get().equals(target.getName())) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            }
         }
 
         model.removeFromOrder(target, amount);

@@ -26,7 +26,7 @@ public class Item implements Displayable {
     private final Double salesPrice;
 
     // Data fields
-    private Integer count;
+    private final Integer count;
     private final Set<Tag> tags = new HashSet<>();
 
     /**

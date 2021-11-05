@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+
+participant ":AddCommand" as AddCommand LOGIC_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":Inventory" as Inventory MODEL_COLOR
+participant ":DisplayList" as DisplayList MODEL_COLOR
+
+--> AddCommand : execute()
+activate AddCommand
+
+AddCommand --> ModelManager : addItem(newItem)
+activate ModelManager
+
+ModelManager --> Inventory : addItem(newItem)
+activate Inventory
+
+Inventory --> ModelManager
+deactivate Inventory
+
+ModelManager --> ModelManager : updateFilteredItemList()
+activate ModelManager
+
+ModelManager --> DisplayList : setItems(itemList)
+activate DisplayList
+
+DisplayList --> ModelManager
+deactivate DisplayList
+
+ModelManager --> ModelManager
+deactivate ModelManager
+
+ModelManager --> AddCommand
+deactivate ModelManager
+
+<-- AddCommand
+deactivate AddCommand
+
+@enduml

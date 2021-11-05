@@ -1,0 +1,25 @@
+@startuml
+
+skinparam defaultTextAlignment center
+
+start
+:Add 3 Bananas;
+:New Item Object (Banana)\ncreated with count\n 3 in inventory;
+:DisplayList is updated;
+
+switch()
+case ( Remove 3 bananas)
+  :Previous Item\nobject deleted;
+  :New Item object\ncreated with count 0;
+case (    Delete banana)
+  :Previous Item\nobject deleted;
+case ( Edit Banana)
+  :Previous Item\nobject deleted;
+  :New Item object\ncreated with new fields;
+endswitch
+
+:DisplayList is updated;
+
+stop
+
+@enduml
