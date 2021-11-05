@@ -151,8 +151,8 @@ Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 Examples:
 
-* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 3.
-* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 3.
+* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 10.
+* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 10.
   ![result for 'marka'](images/marka.png)
 
 ### Marking a student's participation: `markp`
@@ -171,8 +171,8 @@ Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 Examples:
 
-* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 3.
-* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 3.
+* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 10.
+* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 10.
   ![result for 'markp'](images/markp.png)
 
 ### Find student by name: `findStudent`

@@ -176,6 +176,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -183,7 +184,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find Command
 
-The find command can be executed for two main features in tApp: students and groups.
+The find command is generalised for two main groups of data in tApp: students and groups.
 
 #### Implementation
 
@@ -214,7 +215,65 @@ The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
-ℹ️ **Note:** The lifeline ****for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+#### Design Considerations
+
+How can we improve search for a student?
+
+* **Alternative 1 (selected implementation):**
+    * Allow user to search through partial names. This is done through an `anyMatch` using any part of (`contains`) `String` predicate.
+    * *Pros:* Easier to implement, more convenient since there are no prefixes. Generally, this method results in a better user experience, since the user may not be exactly sure what the student name is if it is a complicated name.
+    * *Cons:* No search by different fields, e.g. email.
+  
+* **Alternative 2**:
+    * Allow search of students through different fields with multiple prefixes.
+    * *Pros:* More freedom to find a student based on different fields.
+    * *Cons:* Increases complexity in software.
+
+<div style="page-break-after: always;"></div>
+
+### Mark Attendance/Participation/Task-as-Done Command
+
+The mark command is generalised for two main groups of data in tApp: students and tasks.
+These commands can be accessed through `marka`, `markp` for students, and `doneTask` for tasks.
+
+#### Implementation
+
+Given below is an example usage scenario and how the marking mechanism behaves at each step.
+In this example, we explore the `marka` command.
+
+1. When the user executes the `marka` command, the user input is parsed to separate the command and its arguments.
+1. The format of the command is first checked, followed by the checking and separation of the individual arguments (student index(es) and week). This is done in the `MarkStudentAttCommandParser#parse(String args)` method.
+1. The student's attendance status for the particular week is retrieved and toggled. This operation is exposed in the `Model` interface as `Model#markStudenAttendance(Student student, int week)`.
+1. If the student is originally marked as absent, the method toggles his attendance to present.
+1. If the student is originally marked as present, the method toggles his attendance to absent.
+1. If the student belongs to a group, the group's student list will be updated with the updated student.
+1. Steps 3 to 6 are repeated for the next student, until all the specified students' attendance are marked as either present or absent.
+1. A new `CommandResult` is returned, switching the current display to the updated student list. 
+1. Note: An error message will be thrown if: student index out of bounds, duplicate student index in the command, invalid week, invalid command format, invalid type of argument.
+
+During the execution of `MarkStudentAttCommand`, the student list will be updated according to the arguments supplied.
+
+The following diagram shows the summarised workflow of a typical MarkStudentAtt command.
+
+![Activity Diagram of Mark Student Attendance Command](images/MarkStudentAttActivityDiagram.png)
+
+#### Design Considerations
+
+How can we improve the marking of attendance of a student?
+
+* **Alternative 1 (selected implementation):**
+    * Toggle the attendance when the `marka` command is executed for the student.
+    * *Pros:* More intuitive for the user, just call the command to mark the attendance. Easier to implement, more convenient since there are no prefixes/flags. 
+    * *Cons:* May accidentally mark the attendance wrongly (e.g. present to absent).
+
+* **Alternative 2**:
+    * Use of flags `-p` (present), `-a` (absent) to mark attendance
+    * *Pros:* Less confusing for the user when there is a larger set of students (>100). Lesser risk of mis-marking a user.
+    * *Cons:* Increases complexity, more flags for user to remember.
+
+<div style="page-break-after: always;"></div>
 
 ### Add Member to Group Command
 
@@ -256,6 +315,8 @@ these changes in the `AddressBook`.
     * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
     * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
       unnatural modelling of the real world since `Group` contains students and not the other way around.
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Group Command
 
@@ -334,6 +395,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 <img src=“images/AddTodoTaskCommandActivityDiagram.png”/>
 **Activity diagram showcasing the  add todo task execution flow**
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -882,7 +944,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `deleteStudent 0`<br>
        Expected: No student is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `deleteStudent`, `deleteStudent x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deleteStudent`, `deleteStudent x`, `deleteStudent 1 2 3` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing a student
@@ -1311,7 +1373,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `taskDone 1 2 3`<br>
        Expected: Tasks 1, 2 and 3 are marked as completed in the list. Status message shows details of tasks.
 
-
 ### Clearing task list
 
 1. Clearing the tasks list
@@ -1326,7 +1387,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clearAll`<br>
        Expected: All students, tasks and groups cleared from the application.
 
-### Help Window
+## Help Window
 
 1. Opening the help window through command line
     1. Test case: `help`<br>
@@ -1340,7 +1401,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: click on the "COPY URL" button in the help page
        Expected: The url for the User Guide is copied.
 
-### Saving data
+## Saving data
 
 1. Dealing with missing/corrupted data files
 
