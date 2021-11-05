@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class SortSupplierCommand
+class CommandResult
+}
+
+Interface Comparator <<Interface>>
+
+package Model {
+class ModelManager
+class Rhrh
+class UniqueSupplierList
+class SortBySupplier
+class SortOrder
+Class SupplierComparator
+Interface Model <<Interface>>
+}
+
+SortSupplierCommand ..> Model
+SortSupplierCommand --> "1" SortOrder
+SortSupplierCommand --> "1" SortBySupplier
+SortBySupplier ..> SupplierComparator
+SupplierComparator -right-> Comparator : returns >
+SortSupplierCommand -right-> "1" Comparator
+ModelManager .up.|> Model
+ModelManager -down-> "1" Rhrh
+Rhrh *-right-> "1" UniqueSupplierList
+SortSupplierCommand ..> "0..1" CommandResult : creates >
+
+@enduml

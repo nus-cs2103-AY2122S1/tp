@@ -65,7 +65,7 @@ restaurants.
 #### Contributions beyond the team project
 * Evidence of helping others: 
   * CS2103T AY2122S1 forum [Issue #297](https://github.com/nus-cs2103-AY2122S1/forum/issues/297)
-  * Found bugs in team [CS2103T-T15-3's](https://github.com/Javiier-pzk/ped/issues) product.
+  * Found 6 bugs in team [CS2103T-T15-3's](https://github.com/Javiier-pzk/ped/issues) product during PE-D.
   
 #### Contributions to the User Guide (UG):
 * Added [Overview, Target Audience and Purpose]() in the UG

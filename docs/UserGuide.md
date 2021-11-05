@@ -121,6 +121,10 @@ However, time strictly follows the `24 hours` format.
 | `dd-mm-yyyy hh:mm` | `19-09-2021 13:00` |
 | `hh:mm yyyy-mm-dd` | `14:00 2021-11-10` |
 | `hh:mm dd-mm-yyyy` | `14:00 10-11-2021` |
+| `yyyy-mm-dd hhmm` | `2021-09-19 1300` |
+| `dd-mm-yyyy hhmm` | `19-09-2021 13:00` |
+| `hhmm yyyy-mm-dd` | `14:00 2021-11-10` |
+| `hhmm dd-mm-yyyy` | `14:00 10-11-2021` |
 
 </div>
 
@@ -141,8 +145,6 @@ Action | Format, Examples
 **Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOB_TITLE [t/TAG] [sh/SHIFTS]` <br> e.g. `addE n/John Doe p/87654321 e/john@example.com a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Soup Chef t/Managerial sh/2021-12-08 0800`
 **Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLY_TYPE dd/DELIVERY_DETAILS [t/TAG]` <br> e.g. `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/10 Balestier Rd st/Chicken dd/19-12-2021 08:00`
 **Add reservation** | `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addR 2 p/98765432 at/2021-12-24 2000`
-**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
-**Get Customer Reserving** | `getC INDEX`<br> e.g. `getc 1`
 **Delete Customer** | `deleteC INDEX`<br> e.g., `deleteC 3`
 **Delete Employee** | `deleteE INDEX`<br> e.g., `deleteE 1`
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `deleteS 2`
@@ -155,6 +157,8 @@ Action | Format, Examples
 **Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
 **Find Employee** | `findE KEYWORDS`<br> e.g., `findE 2021-12-08 0800`
 **Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
+**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Get Customer Reserving** | `getC INDEX`<br> e.g. `getc 1`
 **Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
 **Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
 **Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
@@ -196,7 +200,7 @@ Action | Format, Examples
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* Users can use all customer/employee/supplier commands apart from  `listC`, `listE` and `listS` to switch to the customer/employee/supplier list respectively
+* Users can use all customer/employee/supplier/reservation commands apart from  `listC`, `listE`, `listS`, and `listR` to switch to the customer/employee/supplier list respectively
  <br> e.g. If a user is currently viewing the customer list, using `addE`, `editE`, `sortE` etc. while the customer list is active will execute the respective employee command and switch to the employee list automatically
 
 </div>
@@ -290,11 +294,13 @@ Examples:
 
 :information_source: **Notes:**<br>
 
+* `NUMBER_OF_PEOPLE` must be a positive integer 1, 2, 3...
+
 * Tables must be set before reservations can be made. See [settables](#setting-the-tables-for-the-restaurant-settables)
 
-* Phone number has to be a valid phone number from a customer in the database
+* `PHONE` has to be a valid phone number from a customer in the database
 
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**). Refer [here](#date-time-formatting) for a list of acceptable formats when entering date time.
 
 </div>
 
@@ -582,7 +588,7 @@ Examples:
 Gets the customer who made a specified reservation
 
 Format: `getC INDEX`
-* The customer who made the reservation at the specified `INDEX`
+* Gets the customer who made the reservation at the specified `INDEX`
 
 Example:
 * `getC 1`: Gets the customer who made the 1st display reservation.
