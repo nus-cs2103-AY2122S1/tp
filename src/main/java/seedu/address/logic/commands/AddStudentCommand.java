@@ -14,7 +14,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.student.Email;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.TeleHandle;
+import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDeadline;
 import seedu.address.model.task.TaskId;
@@ -44,6 +47,10 @@ public class AddStudentCommand extends AddCommand {
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the module";
+    public static final String MESSAGE_DUPLICATE_TELE_HANDLE = "This Telegram Handle belongs to someone "
+            + "existing in TAB. \n" + "Please input another Telegram Handle.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This Email belongs to someone existing in TAB. \n"
+            + "Please input another Email.";
 
     private final Student studentToAdd;
     private ModuleName moduleName;
@@ -65,6 +72,16 @@ public class AddStudentCommand extends AddCommand {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
         Module module;
+
+        for (Module module1 : lastShownList) {
+            if (isDuplicateTeleHandleInModule(studentToAdd.getTeleHandle(), module1)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TELE_HANDLE);
+            }
+            if (isDuplicateEmailInModule(studentToAdd.getEmail(), module1)) {
+                throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+            }
+        }
+
         for (Module mod : lastShownList) {
             if (mod.getName().equals(moduleName)) {
                 module = mod;
@@ -85,11 +102,46 @@ public class AddStudentCommand extends AddCommand {
                     newStudentTaskList.add(taskToAdd);
                 }
                 studentToAdd.setTaskList(newStudentTaskList);
+
                 module.addStudent(studentToAdd);
                 return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }
         throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
+    }
+
+    /**
+     * Checks if a TeleHandle is a duplicate of an existing one in TAB.
+     *
+     * @param teleHandle The TeleHandle to be verified.
+     * @return True is the TeleHandle is a duplicate. False otherwise.
+     */
+    private boolean isDuplicateTeleHandleInModule(TeleHandle teleHandle, Module module) {
+        UniqueStudentList studentList = module.getUniqueStudentList();
+        for (Student student : studentList) {
+            TeleHandle studentTeleHandle = student.getTeleHandle();
+            if (studentTeleHandle.equals(teleHandle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if an Email is a duplicate of an existing one in TAB.
+     *
+     * @param email The Email to be verified.
+     * @return True is the Email is a duplicate. False otherwise.
+     */
+    private boolean isDuplicateEmailInModule(Email email, Module module) {
+        UniqueStudentList studentList = module.getUniqueStudentList();
+        for (Student student : studentList) {
+            Email studentEmail = student.getEmail();
+            if (studentEmail.equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
