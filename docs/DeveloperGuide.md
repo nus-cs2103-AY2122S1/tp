@@ -382,11 +382,11 @@ not related to the `SortSupplierCommand` are abstracted away.
 
 #### Implementation
 
-Set Tables command `[settables]` takes in a list of numbers as arguments and creates a TableList that is stored in the ModelManager
+Set Tables command `settables` takes in a list of numbers as arguments and creates a TableList that is stored in RHRH
 
-An AddEmployeeCommand is created through the usage of our addE command.
+A SetTablesCommand is created through the usage of our `settables` command.
 
-The process in which an Employee is added can be broken down into 2.
+The process in which a new list of tables is set can be broken down into 2.
 
 1. User input is sent into the RhrhParser and a SetTablesCommand is created.
 
@@ -425,7 +425,7 @@ During the SetTablesCommand execution:
 #### Design Considerations
 
 1. User is allowed to format the argument for table sizes as a singular table size (e.g. `2` = 1 table that accommodates 2 people) or, with an `x` for multiple tables with the same size (e.g. `10x3` = 3 tables that accommodate 10 people)
-    * This is because we find that in an actual restaurant, there will be many tables with the same sizes so this allows the user to set the tables faster without repeating the table sizes many times. Hence, the design choice is to allow for these `x` syntax.
+    * This is because we find that in an actual restaurant, there will be many tables with the same sizes so this allows the user to set the tables faster without repeating the same table sizes many times. Hence, the design choice is to allow for these `x` syntax.
 
 
 2. Table IDs will be reset to start from 1
