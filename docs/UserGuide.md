@@ -43,19 +43,7 @@ _text_ | Caption for images.
 
 ## Quick Start
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: JDK Installation Guide**
-
-You can install the required JDK and JRE from the
-[Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
-
-Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-to help you with the installation. Follow the guide for your operating system for detailed instructions.
-</div>
-
-
-1. Ensure you have **Java 11** or above installed on your computer.
+1. Ensure you have **Java 11** or above installed on your computer. If you need help with installation, you can visit this [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for more details.
 
 2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
@@ -169,8 +157,7 @@ An example of a command in TAB:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+* Each parameter and its prefix are separated from the others with a **space**.<br/>
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -348,6 +335,7 @@ Executing any of the commands in this section will bring you to the students int
             <td><ul>
               <li><code>t/unpaid</code> is valid.</li>
               <li><code>t/unpaid retained</code> is invalid.</li>
+              <li><code>t/unpaid t/</code> replaces existing tags with the <code>unpaid</code> tag.</li>
               <li><code>t/</code> clears <strong>all</strong> tags.</li>
             </ul></td>
         </tr>
@@ -403,9 +391,6 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 * Existing values will be updated to the entered values.<br>
   e.g. `edit 2 pp/81234567` will override the parent phone of the 2nd student in the displayed list to `81234567`.
 
-* When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
-  e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
-
 * You can delete the data in optional fields by supplying a parameter with no arguments.<br>
   e.g. `edit 2 r/` will remove the remarks for the 2nd student in the displayed list.
 
@@ -413,8 +398,8 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
   e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
   any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
 
-* You can delete all tags of a student by typing `t/` without any arguments.<br>
-  e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
+* When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
+  e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -428,8 +413,6 @@ Deletes the specified student from TAB.
 Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
-
-* The index must be a valid index number of a student shown in the displayed list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
@@ -479,7 +462,7 @@ Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students who have lessons w
 Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date
 Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range
 Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
-Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
+Lesson Rates     | rates/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
 Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
 
 Notes about the find condition:
@@ -544,6 +527,13 @@ This section guides you on how to use the commands for managing the lessons of y
 5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
 
 <br>
+
+A lesson can be categorised into 2 types:
+1. A **weekly** recurring lesson
+2. A one-off makeup lesson.
+
+<br>
+
 ![lessonCard](images/annotatedRecurringLessonCard.png)
 
 <div class="caption">Layout of a recurring lesson card.</div>
@@ -552,25 +542,99 @@ This section guides you on how to use the commands for managing the lessons of y
 
 <div class="caption">Layout of a cancelled makeup lesson card.</div>
 
-A lesson **must** have the following fields: a start date, a time range, a lesson rate and a subject.
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
 
-A lesson can be categorised into 2 types: 
-1. A **weekly** recurring lesson
-2. A one-off makeup lesson.
+A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
+</div>
 
-The essential fields for a lesson are:
-* Start date
-* Time range
-* Subject
-* Rate
+<table id="lesson-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center; padding: 10px">Category</th>
+            <th style="text-align:center">Field</th>
+            <th style="text-align:center">Prefix</th>
+            <th style="text-align:center">Constraints</th>
+            <th style="text-align:center">Examples</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=4>Essential</td>
+            <td>Start Date</td>
+            <td><code>date/</code></td>
+            <td>
+              <ul>
+                <li>Case-insensitive</li>
+                <li>Formatted as <code>dd MMM yyyy</code></li>
+              </ul>
+            </td>
+            <td><code>date/12 jul 2020</code></td>
+        </tr>
+        <tr>
+            <td>Subject</td>
+            <td><code>subject/</code></td>
+            <td>Should only contain alphanumeric characters and spaces</td>
+            <td><code>subject/Social studies</code></td>
+        </tr>
+        <tr>
+            <td>Time Range</td>
+            <td><code>time/</code></td>
+            <td><ul>
+            <li>Formatted as <code>HHmm-HHmm</code></li>
+            <li>Must be between 8am and 10pm, inclusive</li>
+            </ul></td>
+            <td><code>time/1730-1830</code></td>
+        </tr>
+        <tr>
+            <td>Lesson Rates</td>
+            <td><code>rates/</code></td>
+            <td><ul>
+              <li>Fee of the lesson per hour</li>
+              <li>Used in the calculation of fees due after each lesson</li>
+              <li>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</li>
+            </ul></td>
+            <td><code>rates/50</code></td>
+        </tr>
+        <tr>
+        <td rowspan=5>Optional</td>
+            <td>Recurrence Flag</td>
+            <td><code>recurring/</code></td>
+            <td><ul>
+              <li>Indicates whether the lesson is recurring</li>
+              <li>Optional parameter: end date of the recurrence</li>
+            </ul></td>
+            <td><ul>
+              <li><code>recurring/</code></li>
+              <li><code>recurring/30 Nov 2100</code></li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>Outstanding Fees</td>
+            <td><code>f/</code></td>
+            <td>Refer to <a href="#monetary-fields">Monetary fields</a> for more details.</td>
+            <td><code>lvl/J1</code></td>
+        </tr>
+        <tr>
+            <td>Homework</td>
+            <td><code>hw/</code></td>
+            <td>Maximum of 50 characters</td>
+            <td><ul>
+              <li><code>hw/Test 2</code> is valid</li>
+              <li><code>hw/</code> clears <strong>all</strong> existing pieces of homework.</li>
+            <li><code>hw/ hw/Worksheet 1</code> removes the existing pieces of homework and adds <code>Worksheet 1</code> to the homework set.</li>
+            </ul></td>
+        </tr>
+    </tbody>
+</table>
 
-An optional field for both types of lesson is:
-* Homework
-* Outstanding Fees (refer to more details in this [section](#managing-lesson-fees))
+* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit).<br>
 
-Optional fields for a **recurring** lesson is:
-* End date
-* Cancelled dates
+<div markdown="block" class="alert alert-info" id="monetary-fields">**:information_source: Monetary Fields:**<br>
+
+For all monetary fields (lesson rates and outstanding fees), we follow the [Singapore convention](https://www.dfa.cornell.edu/treasurer/cash-management/processinginternational/intl-currency) of using a decimal point '.' to separate dollars and cents, The values of these fields should only contain numbers, with at most one decimal point, and two decimal places and should not start or end with a decimal point.
+
+</div>
 
 TAB has features to help to prevent scheduling mistakes.
 For example, we help you avoid mistakes such as scheduling two lessons at the same slots by ensuring that lessons never overlap.
@@ -578,18 +642,8 @@ Additionally, we help to avoid accidentally scheduling lessons outside working h
 
 In the future, we intend to add some nice-to-have features that will allow you to customise your working hours,
 as well as specify minimum/maximum lesson durations so that accidents like mistyping a 10-minute lesson won't happen.
-Additionally, we will allow you to toggle these checks on and off, just in case you don't want them.
+Additionally, we will allow you to toggle these checks on and off, just in case you don't want them. You would also be able to customise your own recurrence rule for your recurring lessons.
 Do look forward to these features!
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Note:**<br>
-* The lesson's rate refers to the fee of the lesson per hour.
-This rate will be used in the calculation of fees due after each lesson.
-
-* A lesson can be identified by the index number shown in the lesson list of the student.
-</div>
-
-<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -597,17 +651,11 @@ This rate will be used in the calculation of fees due after each lesson.
 
 Adds a lesson to the specified student in TAB, provided you do not have any other lessons scheduled at that time.
 
-Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/END_DATE] date/START_DATE time/TIME_RANGE subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
-
-* The type of lesson will be inferred from the presence of the `recurring/` prefix.
-
-* The end date for the recurrence is optional.
-  
-* The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
 
 Examples:
 
@@ -627,24 +675,27 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time/TIMERANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+Additional fields to the ones in [Managing lessons](#managing-lessons) are listed below.
+
+Field | Prefix | Constraints | Examples |
+------------------|-------|-----------| --------|
+Cancelled Date |`cancel/`| Same constraints as other date fields.<br/> The date to be cancelled must be a valid lesson date and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
+Uncancelled Date |`uncancel/` | Same constraints as other date fields.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+
+</div>
+
+Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
-* The index must be a valid index number shown in the displayed student list.
-
-* The lesson index must be a valid index number shown in the lesson list of the student.
-
-* You can edit all fields of a lesson.
+* Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.<br>
+  e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
-
-* The date to cancel must be a valid lesson date.<br>
-  e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.
-  
-* The date to uncancel must be an already cancelled date.
-
-* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
@@ -662,10 +713,6 @@ Deletes the specified lesson of the specified student in TAB.
 Format: `ldelete INDEX LESSON_INDEX`
 
 * Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-  
-* The index must be a valid index number shown in the displayed student list.
-  
-* The lesson index must be a valid index number shown in the lesson list of the student.
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
@@ -680,9 +727,6 @@ Views all the lessons for the specified student in TAB.
 Format: `view INDEX`
 
 * Views the list of lessons belonging to the student of the specified `INDEX`.
-
-* The index must be a valid index number shown in the displayed student list.
-
 
 Examples:
 
@@ -772,7 +816,7 @@ Examples:
 Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
-Refer to [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator) for cases the Fees Calculator will not account for.
+Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
 Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
 
@@ -793,7 +837,7 @@ Examples:
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
 
-#### Behaviours of the Fees Calculator
+#### Behaviour of the Fees Calculator
 
 TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
@@ -802,7 +846,7 @@ However, the Fees Calculator will not account for any changes to lessons that ha
 
 Note that outstanding fees will not change with the following cases:
 
-* Changing the lesson's rate. The change in lesson rate will only take effect from the date and time of change.
+* Changing the lesson's rates. The change in lesson rates will only take effect from the date and time of change.
 * Cancelling or uncancelling a lesson date that has passed.
 * Changing the start or end date of the lesson.
 * Changing the lesson's timing.
