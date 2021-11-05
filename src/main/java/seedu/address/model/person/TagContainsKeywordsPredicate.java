@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -30,15 +31,29 @@ public class TagContainsKeywordsPredicate extends AttributeContainsKeywordsPredi
      */
     public boolean test(Person person) {
         Set<Tag> tags = person.getTags();
+        List<String> keywordsCopy = new ArrayList<>(keywords);
         Iterator<Tag> values = tags.iterator();
-        String s = "";
-        while (values.hasNext()) {
-            String nextValue = values.next().toString();
-            s += allPrefixes(nextValue);
+        StringBuilder s = new StringBuilder();
+        String key = keywordsCopy.get(0);
+        if (key.contains("full/")) {
+            keywordsCopy.add(key.substring(5));
+            while (values.hasNext()) {
+                String nextValue = values.next().toString();
+                String nextTag = nextValue.substring(1, nextValue.length() - 1);
+                s.append(nextTag).append(" ");
+            }
+            final String str = s.toString();
+            return keywordsCopy.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(str, keyword));
+        } else {
+            while (values.hasNext()) {
+                String nextValue = values.next().toString();
+                s.append(allPrefixes(nextValue));
+            }
+            final String str = s.toString();
+            return keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(str, keyword));
         }
-        final String str = s;
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(str, keyword));
     }
 
     /**
