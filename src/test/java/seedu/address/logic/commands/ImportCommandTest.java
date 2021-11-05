@@ -15,9 +15,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Availability;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.member.Availability;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ImportCommandTest {
@@ -29,16 +29,28 @@ public class ImportCommandTest {
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addMember(HOON);
         expectedModel.addMember(IDA);
-        assertCommandSuccess(new ImportCommand(testFilePath), model, ImportCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ImportCommand(testFilePath), model,
+                ImportCommand.MESSAGE_SUCCESS_NO_SKIP, expectedModel);
     }
 
     @Test
-    public void execute_personInAddressBook_listOfPersonAddedWithReplacement() {
+    public void execute_personWithSameNameInAddressBook_listOfPersonAddedWithReplacement() {
         String testFilePath = "src/test/data/ImportCommandTest/SameMemberInSportsPa.csv";
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
         expectedModel.addMember(HOON);
         expectedModel.setMember(ALICE, ALICE_DIFFERENT_PHONE);
-        assertCommandSuccess(new ImportCommand(testFilePath), model, ImportCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ImportCommand(testFilePath), model,
+                ImportCommand.MESSAGE_SUCCESS_NO_SKIP, expectedModel);
+    }
+
+    @Test
+    public void execute_personWithSamePhoneInAddressBook_listOfPersonAddedWithReplacement() {
+        String testFilePath = "src/test/data/ImportCommandTest/SameMemberInSportsPa.csv";
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
+        expectedModel.addMember(HOON);
+        expectedModel.setMember(ALICE, ALICE_DIFFERENT_PHONE);
+        assertCommandSuccess(new ImportCommand(testFilePath), model,
+                ImportCommand.MESSAGE_SUCCESS_NO_SKIP, expectedModel);
     }
 
     @Test

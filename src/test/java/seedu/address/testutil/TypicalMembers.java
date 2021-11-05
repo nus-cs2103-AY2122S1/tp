@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.person.Member;
+import seedu.address.model.member.Member;
 
 
 /**

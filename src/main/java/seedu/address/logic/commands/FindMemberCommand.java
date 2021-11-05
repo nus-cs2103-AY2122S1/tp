@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Member;
+import seedu.address.model.member.Member;
 
 /**
  * Finds and lists all members in SportsPA whose name contains any of the argument keywords.

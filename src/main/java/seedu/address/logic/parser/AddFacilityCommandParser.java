@@ -22,7 +22,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Member;
+import seedu.address.model.member.Member;
 
 /**
  * Parses input arguments and creates a new AddFacilityCommand object.
