@@ -9,15 +9,20 @@ TutAssistor is a desktop application for private tutors to manage tuition class 
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to open the TutAssistor user guide from the Help window.
+  * What it does: in the AB3's implementation for Help window, the user has to click on the "Copy URL" button to retrieve the user guide link. Instead, the new feature allows the user to click the button to open the user guide in the user's browser automatically.
+  * Credits: this implementation was referenced from [samyipsh’s tP](https://github.com/samyipsh/tp) for CS2103T.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the ability to add remarks to Tuition Classes.
+  * What it does: allows the user to optionally add remarks when creating tuition classes. 
+  * Credits: this implementation was referenced from [AB3's Add Remark tutorial](https://nus-cs2103-ay2122s1.github.io/tp/tutorials/AddRemark.html).
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Added the ability to edit remarks with Remark Editor.
+  * What it does: allows the user to edit or remove remarks from a student or tuition class.
+  * Justification: users are not allowed to edit remarks in the original AB3's implementation for [remarks](https://nus-cs2103-ay2122s1.github.io/tp/tutorials/AddRemark.html). In fact, adding remarks will override the previous remarks. However, the remarks is an essential feature for TutAssistor as users will be using it frequently to keep track of student or class details. This feature helps users to edit remarks freely and conveniently.
+  * Highlights: 
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=adam-ky&tabRepo=AY2122S1-CS2103T-T12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
   * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
