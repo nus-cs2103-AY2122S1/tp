@@ -490,7 +490,7 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 <div markdown="block" class="alert alert-info">**:information_source: Note about homework:**<br>
 
 You can delete all homework of a lesson by typing `hw/` without any arguments.
-If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br/><br/>
+If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br/>
 
   e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
 On the other hand, `ledit 2 1 hw/ hw/Assignment 1` will remove all existing homework and add only `Assignment 1` as homework for the lesson.
