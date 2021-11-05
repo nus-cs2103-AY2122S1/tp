@@ -30,9 +30,13 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex, ParseException exception) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        char firstElement = trimmedIndex.charAt(0);
+
+        if (firstElement == 45 && trimmedIndex.length() == 1) {
+            throw exception;
+        }
 
         //Check for - symbol or 0 as first element
-        char firstElement = trimmedIndex.charAt(0);
         if (firstElement == 45 || firstElement == 48) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
