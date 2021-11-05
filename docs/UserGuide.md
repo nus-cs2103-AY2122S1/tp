@@ -273,7 +273,16 @@ Below is the list of flags that can be used with the `add` command.
 
 Imports all contacts from a selected _csv_ file to ease the transition from excel or other marketing software. Calling the command will open a file browser to help select the file.
 
-Format: `import`
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+import
+```
+</div>
+</div>
 
 Example:
 
