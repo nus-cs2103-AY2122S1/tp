@@ -35,8 +35,9 @@ public class AddToOrderCommandTest {
     }
 
     @Test
-    public void constructor_nullItem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor() {
+        // EP: null parameters
+        assertThrows(NullPointerException.class, () -> new AddToOrderCommand(null));
     }
 
     @Test
@@ -44,7 +45,7 @@ public class AddToOrderCommandTest {
         ItemDescriptor toAddDescriptor = new ItemDescriptor(DONUT);
 
         AddToOrderCommand command = new AddToOrderCommand(toAddDescriptor);
-
+        
         assertCommandFailure(command, modelWithoutOrder, AddToOrderCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 
