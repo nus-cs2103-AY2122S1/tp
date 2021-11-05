@@ -69,7 +69,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "deleteclient 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -108,6 +108,21 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void getFilteredOrderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredOrderList().remove(0));
+    }
+
+    @Test
+    public void getClientTotalOrders_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> logic.getClientTotalOrders().remove(0));
     }
 
     /**

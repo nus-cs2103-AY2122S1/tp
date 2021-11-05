@@ -25,6 +25,8 @@ import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.sort.SortField;
+import seedu.address.model.sort.SortOrdering;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TaskTag;
 
@@ -58,10 +60,14 @@ public class ParserUtilTest {
     private static final String VALID_TASK_TAG = "SO100";
 
     private static final String INVALID_CUSTOMER = "";
+    private static final String INVALID_SORT_ORDER = "ascend";
+    private static final String INVALID_SORT_FIELD = "customer";
     private static final String INVALID_AMOUNT = "10000000000";
 
     private static final String VALID_CUSTOMER = "Richard Li";
     private static final String VALID_AMOUNT = "99.99";
+    private static final String VALID_SORT_ORDER = "desc";
+    private static final String VALID_SORT_FIELD = "date";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -408,5 +414,51 @@ public class ParserUtilTest {
         String amountWithWhitespace = WHITESPACE + VALID_AMOUNT + WHITESPACE;
         Amount expectedAmount = new Amount(VALID_AMOUNT);
         assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(null));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithoutWhitespace_returnsSortOrdering() throws Exception {
+        SortOrdering expectedSortOrdering = new SortOrdering(VALID_SORT_ORDER);
+        assertEquals(expectedSortOrdering, ParserUtil.parseSortOrder(VALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_returnsSortOrdering() throws Exception {
+        String sortOrderingWithWhitespace = WHITESPACE + VALID_SORT_ORDER + WHITESPACE;
+        SortOrdering expectedSortOrdering = new SortOrdering(VALID_SORT_ORDER);
+        assertEquals(expectedSortOrdering, ParserUtil.parseSortOrder(sortOrderingWithWhitespace));
+    }
+
+    @Test
+    public void parseSortField_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortField(null));
+    }
+
+    @Test
+    public void parseSortField_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortField(INVALID_SORT_FIELD));
+    }
+
+    @Test
+    public void parseSortField_validValueWithoutWhitespace_returnsSortField() throws Exception {
+        SortField expectedSortField = new SortField(VALID_SORT_FIELD);
+        assertEquals(expectedSortField, ParserUtil.parseSortField(VALID_SORT_FIELD));
+    }
+
+    @Test
+    public void parseSortField_validValueWithWhitespace_returnsSortField() throws Exception {
+        String sortFieldWithWhitespace = WHITESPACE + VALID_SORT_FIELD + WHITESPACE;
+        SortField expectedSortField = new SortField(VALID_SORT_FIELD);
+        assertEquals(expectedSortField, ParserUtil.parseSortField(sortFieldWithWhitespace));
     }
 }

@@ -25,8 +25,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -80,6 +84,8 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GENDER_MALE = "M";
+    public static final String GENDER_FEMALE = "F";
 
     public static final String LABEL_DESC_ORDER = " " + PREFIX_LABEL + VALID_LABEL_ORDER;
     public static final String LABEL_DESC_SEW = " " + PREFIX_LABEL + VALID_LABEL_SEW;
@@ -182,8 +188,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered client list to show only the client at the given {@code targetIndex} in the
+     * {@code model}'s addressbook.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -193,5 +199,33 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered task list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s taskbook.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitTaskLabel = task.getLabel().checkedLabel.split("\\s+");
+        model.updateFilteredTaskList(new TaskContainsKeywordsPredicate(Arrays.asList(splitTaskLabel[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered order list to show only the order at the given {@code targetIndex} in the
+     * {@code model}'s orderbook.
+     */
+    public static void showOrderAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredOrderList().size());
+
+        Order order = model.getFilteredOrderList().get(targetIndex.getZeroBased());
+        final String[] splitOrderLabel = order.getLabel().checkedLabel.split("\\s+");
+        model.updateFilteredOrderList(new OrderContainsKeywordsPredicate(Arrays.asList(splitOrderLabel[0])));
+
+        assertEquals(1, model.getFilteredOrderList().size());
     }
 }

@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.sort.SortField;
 import seedu.address.model.sort.SortOrdering;
 
-public class SortOrdersCommandParser {
+public class SortOrdersCommandParser implements Parser<SortOrdersCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortOrderCommand

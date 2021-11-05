@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalOrders.SALESORDER1;
+import static seedu.address.testutil.TypicalOrders.SALESORDER2;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalTasks.TASK1;
@@ -106,7 +107,7 @@ public class ModelManagerTest {
         TaskBook taskBook = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
         TaskBook differentTaskBook = new TaskBook();
         OrderBook salesOrderBook = new OrderBookBuilder().withOrder(SALESORDER1)
-                .withOrder(SALESORDER1).build();
+                .withOrder(SALESORDER2).build();
         OrderBook differentSalesOrderBook = new OrderBook();
         UserPrefs userPrefs = new UserPrefs();
 
