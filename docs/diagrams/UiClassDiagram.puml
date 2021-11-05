@@ -11,11 +11,6 @@ Class UiManager
 Class MainWindow
 Class ResultDisplay
 Class CenterPanel
-Class SchedulePanel
-Class PersonListPanel
-Class PersonCard
-Class TagListPanel
-Class TagCard
 Class StatusBarFooter
 Class CommandBox
 Class ExternalWindow
@@ -40,16 +35,17 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" CenterPanel
+
+note right
+Details of CenterPanel are
+shown in another diagram.
+end note
+
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow -down-> "0..1" HelpWindow
 MainWindow -down-> "0..1" ReminderWindow
 
-CenterPanel *-down-> "1" PersonListPanel
-CenterPanel *-down-> "1" SchedulePanel
-CenterPanel *-down-> "1" TagListPanel
 
-PersonListPanel -down-> "*" PersonCard
-TagListPanel -down-> "*" TagCard
 ReminderWindow -down-> "*" ReminderLessonCard
 
 MainWindow -left-|> UiPart
@@ -57,19 +53,12 @@ MainWindow -left-|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 CenterPanel --|> UiPart
-SchedulePanel --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-TagListPanel --|> UiPart
-TagCard --|> UiPart
 ReminderLessonCard --|> UiPart
 StatusBarFooter --|> UiPart
 ExternalWindow --|> UiPart
 HelpWindow --|> ExternalWindow
 ReminderWindow --|> ExternalWindow
 
-PersonCard ..> Model
-SchedulePanel ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
