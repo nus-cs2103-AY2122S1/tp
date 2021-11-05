@@ -29,5 +29,4 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setWrapText(true);
         resultDisplay.setText(feedbackToUser);
     }
-
 }

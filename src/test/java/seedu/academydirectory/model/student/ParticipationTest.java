@@ -159,6 +159,22 @@ public class ParticipationTest {
         studentList.sort(descendingComparator);
         assertEquals(studentList, expectedDescendingList);
         assertNotEquals(studentList, expectedAscendingList);
+    }
 
+    @Test
+    public void testGetParticipation() {
+        Participation participation = new Participation(6);
+        int[] tempArray = {110, 120, 130, 140, 150, 160};
+        participation.setParticipation(tempArray);
+
+        // equal if the values are the same
+        assertEquals(participation.getParticipationScoreFrom(1), 120);
+
+        // not equal if the values are different
+        assertNotEquals(participation.getParticipationScoreFrom(3), 200);
+
+        // throw if the values exceed: should never happen
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> participation.getParticipationScoreFrom(7));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> participation.getParticipationScoreFrom(-1));
     }
 }

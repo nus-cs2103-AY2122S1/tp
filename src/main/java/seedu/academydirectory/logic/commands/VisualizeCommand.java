@@ -58,4 +58,9 @@ public class VisualizeCommand extends Command {
 
         return new CommandResult(MESSAGE_VISUALIZE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof VisualizeCommand);
+    }
 }

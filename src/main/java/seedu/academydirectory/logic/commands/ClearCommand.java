@@ -28,4 +28,8 @@ public class ClearCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS, Optional.of(MESSAGE_SUCCESS));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof ClearCommand);
+    }
 }
