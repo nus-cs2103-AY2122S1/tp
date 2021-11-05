@@ -41,6 +41,7 @@ title: Developer Guide
   * [Manual Testing](#appendix-instructions-for-manual-testing)
     * [Feature Testing](#feature-testing)
     * [UI Testing](#ui-testing)
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
