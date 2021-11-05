@@ -278,7 +278,7 @@ Example Usage:
 * `view 1` - Displays the details of the 1st Participant in the displayed Participant list.
 * `list` followed by `view 2` - Displays the details of the 2nd Participant in the full Participant list.
   Find out more about `list` [here](#listing-all-participants--list).
-* `find Betsy` followed by `delete 1` - Displays the details of the 1st Participant in the results of the 
+* `find Betsy` followed by `view 1` - Displays the details of the 1st Participant in the results of the 
   `find` command. Find out more about `find` [here](#locating-participants-by-name-find).
 
 <br>![result for 'view 1'](images/viewFirstResult.png)
@@ -307,11 +307,11 @@ Example Usage:
 
 Deletes a Next-of-Kin (NOK) of a Participant.
 
-Format: `deleteNok NOK_INDEX PARTICIPANT_ID`
+Format: `deleteNok NOK_INDEX PARTICIPANT_INDEX`
 
-* Deletes the NOK at specified `NOK_INDEX` of the Participant at specified index `PARTICIPANT_ID`.
+* Deletes the NOK at specified `NOK_INDEX` of the Participant at specified index `PARTICIPANT_INDEX`.
 * `NOK_INDEX` refers to the index number of the NOK as shown in the Participant's list of NOKs.
-* `PARTICIPANT_ID` refers to the index number of the Participant as shown in the displayed Participant list.
+* `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
@@ -657,9 +657,9 @@ Action | Format, Examples
 **Sort Events** | `sortEvents`
 **List Events** | `listEvents`
 **Show Event Details** | `showDetails INDEX` <br> e.g., `showDetails 1`
-**Show Event Participants** | `showParticipants INDEX` <br> e.g., `showParticipants 3`
 **Add Participant to Event** | `enroll PARTICIPANT_INDEX EVENT_INDEX` <br> e.g., `enroll 1 2`
 **Remove Participant from Event** | `expel PARTICIPANT_INDEX EVENT_INDEX` <br> e.g., `expel 3 1`
+**Show Event Participants** | `showParticipants INDEX` <br> e.g., `showParticipants 3`
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
