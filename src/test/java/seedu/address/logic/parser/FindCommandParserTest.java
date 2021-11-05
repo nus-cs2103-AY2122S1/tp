@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalItems.BAGEL;

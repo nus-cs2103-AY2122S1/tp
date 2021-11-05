@@ -186,7 +186,7 @@ public class ParserUtilTest {
         // Negative integer
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT_NEGATIVE));
         // Large integer
-        String largeString = String.format("%d", (long)Integer.MAX_VALUE + 1);
+        String largeString = String.format("%d", (long) Integer.MAX_VALUE + 1);
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(largeString));
         // Not an integer
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT_FLOAT));
