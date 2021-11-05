@@ -13,7 +13,7 @@ import seedu.insurancepal.model.person.Revenue;
 
 public class RevenueCommandParser implements Parser<RevenueCommand> {
 
-    public static final String MESSAGE_USAGE =  ": Add revenue to the person identified "
+    public static final String MESSAGE_USAGE = ": Add revenue to the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be added on with the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
