@@ -30,7 +30,10 @@ public class AddModuleLessonCommand extends Command {
             + PREFIX_REMARK + "Online\n";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Unable to add: A lesson with the same module code and"
+            + " lesson code already exists in contHACKS";
+    public static final String MESSAGE_OVERLAPPING_LESSON = "Warning: Another lesson with overlapping timings exists.\n"
+            + "New lesson added: %1$s";
 
     private final ModuleLesson toAdd;
 
@@ -50,8 +53,15 @@ public class AddModuleLessonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
+        CommandResult result;
+        if (model.hasModuleLessonClashingWith(toAdd)) {
+            result = new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, toAdd));
+        } else {
+            result = new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        }
+
         model.addLesson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return result;
     }
 
     @Override

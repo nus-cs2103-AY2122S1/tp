@@ -39,6 +39,20 @@ public class LessonTime {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if this is before {@code other}.
+     */
+    public boolean isBefore(LessonTime other) {
+        return value.isBefore(other.value);
+    }
+
+    /**
+     * Returns true if this is after {@code other}.
+     */
+    public boolean isAfter(LessonTime other) {
+        return value.isAfter(other.value);
+    }
+
     @Override
     public String toString() {
         return value.toString();
