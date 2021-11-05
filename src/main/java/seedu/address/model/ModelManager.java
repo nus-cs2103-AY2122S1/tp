@@ -419,7 +419,7 @@ public class ModelManager implements Model {
             String nameOfPerson = eachOrder.getCustomer().getName();
             if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
                 throw new DataConversionException(
-                        new IllegalValueException("Given Client Name does not exist in Address Book"));
+                        new IllegalValueException("Given customer name does not exist in Address Book"));
             }
         }
     }
@@ -440,5 +440,10 @@ public class ModelManager implements Model {
         }
     }
 
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    public ModelManager resetModelManager(){
+        return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
+    }
 
 }
