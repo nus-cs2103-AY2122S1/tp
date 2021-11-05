@@ -210,8 +210,6 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Ordering
 
-### Implementation
-
 When ModelManager is initialised, optionalOrder is set to Optional.empty(). At this point, the user has 1 order record
 with 2 items in his transaction list.
 
@@ -219,7 +217,7 @@ with 2 items in his transaction list.
 
 Step 1. The user enters ordering mode via the `sorder` command.
 
-Upon entering the ordering mode, optionalOrder now has a new Order() which is empty
+Upon entering the ordering mode, optionalOrder now has a new Order() which is empty.
 
 ![Sorder_State](images/OrderSorderState.png)
 
@@ -233,19 +231,19 @@ Next, upon entering `iorder Strawberry c/1`, the order now contains 1 strawberry
 
 ![Iorder_State](images/OrderItem2State.png)
 
-Step 3. The user transacts the order via the `eorder` command.
+Step 3. The user transacts and ends the order via the `eorder` command.
 
-After the transaction is done, optionalOrder is reinitialised to Optional.empty()
+After the transaction is done, optionalOrder is reinitialised to Optional.empty().
 
 ![Initial_State](images/OrderFinalState.png)
 
-Step 4. The new transactions are saved to json file.
+Step 4. The new transactions are saved to the json file.
 
 ![Transact_Order_Sequence_Diagram](images/TransactOrderSequenceDiagram.png)
 
 ### Mutating Inventory
 
-This section explains how various commands update the list of items and display the result.
+This section explains how various commands update the list of items in the inventory and display the result.
 
 As described in the UML diagram of the Model component above, `Inventory` contains a `UniqueItemList` object which in turn
 has `Item` objects. Every time add, remove, edit, delete, or clear is called, the `UniqueItemList` inside Inventory is
