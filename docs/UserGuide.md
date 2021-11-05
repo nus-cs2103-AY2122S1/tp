@@ -157,7 +157,7 @@ An example of a command in TAB:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Each parameter and its prefix is separated from the others with a **space**.<br/>
+* Each parameter and its prefix are separated from the others with a **space**.<br/>
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
