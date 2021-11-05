@@ -72,7 +72,7 @@ public class Conthacks implements ReadOnlyConthacks {
     }
 
     /**
-     * Sorts the contacts in the address book by alphabetical order.
+     * Sorts the contacts in contHACKS by alphabetical order.
      */
     public void sortConthacks() {
         persons.sortList();
@@ -82,7 +82,7 @@ public class Conthacks implements ReadOnlyConthacks {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in contHACKS.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -90,7 +90,7 @@ public class Conthacks implements ReadOnlyConthacks {
     }
 
     /**
-     * Returns true if a lesson with the same identity as {@code ModuleLesson} exists in the address book.
+     * Returns true if a lesson with the same identity as {@code moduleLesson} exists in contHACKS.
      */
     public boolean hasLesson(ModuleLesson moduleLesson) {
         requireNonNull(moduleLesson);
@@ -98,16 +98,24 @@ public class Conthacks implements ReadOnlyConthacks {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Returns true if a lesson that clashes with {@code moduleLesson} exists in contHACKS.
+     */
+    public boolean hasLessonClashingWith(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return moduleLessons.containsLessonClashingWith(moduleLesson);
+    }
+
+    /**
+     * Adds a person to contHACKS.
+     * The person must not already exist in contHACKS.
      */
     public void addPerson(Person p) {
         persons.add(p);
     }
 
     /**
-     * Adds a lesson to the address book.
-     * The lesson must not already exist in the address book.
+     * Adds a lesson to contHACKS.
+     * The lesson must not already exist in contHACKS.
      */
     public void addLesson(ModuleLesson m) {
         moduleLessons.add(m);
@@ -115,8 +123,8 @@ public class Conthacks implements ReadOnlyConthacks {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in contHACKS.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in contHACKS.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -126,9 +134,9 @@ public class Conthacks implements ReadOnlyConthacks {
 
     /**
      * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in contHACKS.
      * The lesson information of {@code editedLesson} must not be the same as another
-     * existing lesson in the address book.
+     * existing lesson in contHACKS.
      */
     public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
         requireNonNull(editedLesson);
@@ -138,7 +146,7 @@ public class Conthacks implements ReadOnlyConthacks {
 
     /**
      * Removes {@code key} from this {@code Conthacks}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in contHACKS.
      */
     public void removePerson(Person key) {
         persons.remove(key);
@@ -146,7 +154,7 @@ public class Conthacks implements ReadOnlyConthacks {
 
     /**
      * Removes {@code key} from this {@code Conthacks}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in contHACKS.
      */
     public void removeLesson(ModuleLesson key) {
         moduleLessons.remove(key);

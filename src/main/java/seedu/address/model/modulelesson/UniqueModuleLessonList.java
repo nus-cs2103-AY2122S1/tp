@@ -39,6 +39,14 @@ public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
     }
 
     /**
+     * Returns true if the list contains any module lesson that clashes with {@code toCheck}.
+     */
+    public boolean containsLessonClashingWith(ModuleLesson toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(ml -> ml.clashesWith(toCheck));
+    }
+
+    /**
      * Adds a lesson to the list.
      * The lesson must not already exist in the list.
      */

@@ -13,7 +13,7 @@ Given below are my contributions to the project.
   * **What it does**: allows the user to add lesson into contHACKS by providing information about the lesson.
   * **Justification**: This feature improves the product significantly as user can now refer to contHACKS to know what upcoming lessons they have after they have added the lesson.
   * **Credits**: The design structure is inspired from AddressBook Level 3
-  
+
 **Enhanced Feature**: Enhanced the ability to add person. (PRs [#14](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/14), [#47](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/47))
   * **What it does**: allows the user to add person into contHACKS with information that are relevant to a TA.
   * **Justification**: removed the ability to include address when adding a person as such information is not relevant to a TA.
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
 [#47](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/47),
 [#74](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/74),
 [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135)
-    
+
 **Documentation**:
   * User Guide:
     * Added documentation for the features `add`, `edit`: [#104](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/104)
@@ -48,5 +48,5 @@ Given below are my contributions to the project.
   [#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77),
   [#105](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/105),
   [#132](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/132),
-  [#145](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45), 
-[#202](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/202)
+  [#145](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45),
+  [#202](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/202)
