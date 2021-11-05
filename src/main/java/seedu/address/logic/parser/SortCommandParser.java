@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -68,6 +68,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             return new SortCommand(new TagComparator());
         }
 
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT,
+                SortCommand.MESSAGE_USAGE));
     }
 }

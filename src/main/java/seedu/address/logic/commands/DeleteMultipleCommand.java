@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
@@ -34,6 +35,10 @@ public class DeleteMultipleCommand extends Command {
             + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP] " + "[" + PREFIX_PHONE + "MORE_TUTORIAL GROUPS] "
             + "[" + PREFIX_TAG + "TAG] " + "[" + PREFIX_TAG + "MORE_TAGS]...\n "
             + "Example: " + COMMAND_WORD + " n/alice p/91234567 tg/19";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A empty %s was entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No valid keyword entered. \n%1$s");
 
     private int startIndex;
     private int endIndex;

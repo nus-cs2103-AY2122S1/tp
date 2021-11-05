@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.DeleteMultipleCommand.MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE;
+import static seedu.address.logic.commands.DeleteMultipleCommand.MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -25,9 +26,17 @@ public class DeleteMultipleCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMultipleCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE,
+                        DeleteMultipleCommand.MESSAGE_USAGE));
 
         // invalid input followed by valid input e.g. deletem n/ n/Alice should throw error
+    }
+
+    @Test
+    public void parse_emptyKeyword_throwsParseException() {
+        assertParseFailure(parser, " n/ n/Alice    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "Name",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
     }
 
     @Test

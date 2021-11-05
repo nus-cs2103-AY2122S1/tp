@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_INVALID_COMMAND_FORMAT_NAME_ABSENT;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_INVALID_COMMAND_FORMAT_PREAMBLE_PRESENT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
@@ -193,7 +194,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_NAME_ABSENT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
@@ -257,6 +259,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB
                         + REMARK_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + GENDER_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT_PREAMBLE_PRESENT, AddCommand.MESSAGE_USAGE));
     }
 }

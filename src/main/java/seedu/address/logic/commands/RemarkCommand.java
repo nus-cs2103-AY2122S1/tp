@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -30,6 +31,10 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid Index was not entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_REMARK_ABSENT = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No Remark was entered. \n%1$s");
 
     private final Index index;
     private final Remark remark;

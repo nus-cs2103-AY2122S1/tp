@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AddTagCommand.MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX;
+import static seedu.address.logic.commands.AddTagCommand.MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -35,14 +36,15 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTagCommand.MESSAGE_USAGE), pe); //When invalid index is inputted.
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX,
+                        AddTagCommand.MESSAGE_USAGE), pe); //When invalid index/nothing is inputted.
             }
         }
 
         tags = parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG));
         if (tags == null || tags.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT_TAGS_ABSENT, AddTagCommand.MESSAGE_USAGE));
         }
 
         return new AddTagCommand(index, tags);
