@@ -11,7 +11,7 @@ that you can get up to speed quickly and be productive with your data.
 
 ## Lee Hur Sebastian
 
-### Role: Team Lead
+**Role: Team Lead**
 
 <img src="images/sebbycake.png" width="200px">
 
@@ -19,9 +19,11 @@ that you can get up to speed quickly and be productive with your data.
 [![Sebastian LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/sebastian-lee-329b45198/) &nbsp;
 [![Sebastian GitHub](images/github.png)](https://github.com/sebbycake)
 
+<br>
+
 ## Lye Wen Jun
 
-### Role: Code Quality
+**Role: Code Quality**
 
 <img src="images/xlzior.png" width="200px">
 
@@ -29,9 +31,11 @@ that you can get up to speed quickly and be productive with your data.
 [![Wen Jun LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/wen-jun-lye/) &nbsp;
 [![Wen Jun GitHub](images/github.png)](https://github.com/xlzior/)
 
+<br>
+
 ## Lee Wei, David
 
-### Role: Documentation
+**Role: Documentation**
 
 <img src="images/itsyme.png" width="200px">
 
@@ -39,9 +43,11 @@ that you can get up to speed quickly and be productive with your data.
 [![David LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/david-lee-4a147a1b1/) &nbsp;
 [![David GitHub](images/github.png)](https://github.com/itsyme)
 
+<br>
+
 ## Rehman Sajid
 
-### Role: Integration
+**Role: Integration**
 
 <img src="images/rehmmann.png" width="200px">
 
@@ -49,9 +55,11 @@ that you can get up to speed quickly and be productive with your data.
 [![Rehman LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/rehman-sajid/) &nbsp;
 [![Rehman GitHub](images/github.png)](https://github.com/rehmmann/)
 
+<br>
+
 ## Ching Jia Rong
 
-### Role: Testing
+**Role: Testing**
 
 <img src="images/jiarong15.png" width="200px">
 
