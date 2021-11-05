@@ -174,6 +174,20 @@ Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the student(s) 
 shown in the Student Panel and that you offer the lesson(s) shown in the Lesson Panel. 
 
+### Step 2: Adding a lesson
+{:.no_toc}
+Now that you've added your first student (and perhaps a few others too), let's add some Lessons to TutorAid. In this tutorial, we will be adding a lesson named History 1 into TutorAid by performing the steps below:
+
+1. Type `add -l n/History 1` into the command box and press enter.
+
+![](images/tutorialAddLesson1.png)
+
+2. Observe how History 1 appears in the Lesson Panel.
+3. We've added the lesson successfully, but we can continue by adding more details, such as its timing (10AM - 11AM on Mondays), price ($125.90) and capacity (10). Assuming that History 1 is the only lesson in your Lesson Panel, type the command `edit -l 1 t/10AM - 11AM on Mondays c/10`. Press Enter on your keyboard.
+4. Observe how the capacity and timing now show what you have requested.
+> :bulb: If you know what details you wish to add from the beginning, you can type `add -l n/History 1 c/10 t/10 AM - 11AM on Mondays p/125.90` to enter these details in a single command.
+5. That's it, you've added your first lesson. If you need more information, you can check out the detailed documentation of the [add lesson](#adding-a-lesson-add--l) and [edit lesson](#editing-a-lesson-edit--l) commands.
+
 ### Step 4: Adding a progress note for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
