@@ -7,10 +7,10 @@ import static seedu.address.commons.util.StringUtil.isValidCurrencyValue;
 import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 
 public class DisposableIncome extends NumberComparable<DisposableIncome>
-    implements OptionalStringBasedField, StandardFieldLength {
+    implements OptionalStringBasedField, ShorterFieldLength {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Disposable Income numbers should be a positive number only. (Character limit: 30)";
+            "Disposable Income numbers should be a positive number only. (Character limit: 15)";
     public static final String DEFAULT_VALUE = "0.00";
 
     public final String value;
