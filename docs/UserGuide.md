@@ -200,6 +200,9 @@ sequence of characters provided in the argument string.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
+![filter](images/commands/FilterCommand/filter.png)
+
+
 <div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
