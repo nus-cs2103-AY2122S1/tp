@@ -213,12 +213,14 @@ The features mentioned are:
    3. [Sorting persons](#sorting-persons)
    4. Viewing statistics
 4. Share
-   1. Importing contacts
-   2. Exporting contacts
+   1. [Importing contacts](#import-json-file)
+   2. [Exporting contacts](#export-json-file)
 5. Advance
-   1. Aliasing commands
-6. Exiting the program
-7. Saving the data
+   1. [Aliasing commands](#aliasing-commands)
+6. Utility
+   1. [Input Suggestion](#input-suggestion)
+7. Exiting the program
+8. Saving the data
 
 
 ### Add contacts with optional arguments
@@ -358,7 +360,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing all the specified keywords will be deleted.
+The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
 
 It works by filtering for the contacts in the `model` and deleting them one by one.
 
@@ -455,7 +457,7 @@ The following sequence diagram shows how the Sort mechanism works:
 
 The import JSON file will import an external addressbook and add all the entries to the current addressbook in the user's device.
 
-It works by utilizing the same mechanism that is used by AB3 when first initializing the addressbook with existing JSON data.
+It works by utilizing the same mechanism that is used by Socius when first initializing the addressbook with existing JSON data.
 
 #### Usage
 
@@ -490,6 +492,85 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
 * **Alternative 2:** Allow to-be-imported files to be located anywhere
     * Pros: Gives user the flexibility to put the file wherever they want.
     * Cons: Different OSes have different file paths convention.
+
+
+### Export JSON file
+
+#### Implementation
+
+The export JSON file will export all the current data into a JSON file.
+
+It works by utilizing the same mechanism that is used by Socius when saving the addressbook into a JSON file.
+
+#### Usage
+
+Given below is an example usage scenario and how the Export mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `export tmp.json` command to export a file located in `data/tmp.json`.
+
+Step 3. This will call `ExportCommandParser#parse` which will then parse the argument provided.
+
+Step 4. A new `ExportCommand` object will be created with its `outputFilePath` set to `data/FILE_NAME`,
+with the `FILE_NAME` being the string parsed in the previous step.
+
+Step 5. `ExportCommand#execute` will first call `FileUtil#createIfMissing` to create the file as specified in `outputFilePath`.
+
+Step 6. It will then call `JsonUtil#saveJsonFile` which will take in the `outputFilePath` and a `JsonSerializableAddressBook` of the current data, which is retrieved by calling `model#getAddressBook()`.
+
+Step 7. Finally, it will return a `CommandResult` if the operation is successful.
+
+#### Design considerations:
+
+**Aspect: File directory:**
+
+* **Alternative 1 (current choice):** Only allow files to be exported to the `data` directory
+    * Pros: Every file exported from the application will live under a single `data` directory.
+    * Cons: Less flexibility for the user.
+
+* **Alternative 2:** Allow users to export files to any directory
+    * Pros: Gives user the flexibility to place the file wherever they want.
+    * Cons: Different OSes have different file paths convention.
+
+### Aliasing Commands
+
+#### Implementation
+
+The aliasing mechanism will give an alias to the specified command. If an alias already exists, the new command being aliased will overwrite the old one.
+
+During `AliasCommand#execute`, a new entry of alias-command pair will be put into a singleton class called `CommandAliases`, which is implemented using a `HashMap`.
+
+#### Usage
+
+Given below is an example usage scenario and how the alias mechanism behaves at each step.
+
+Step 1. The user executes `alias a/Singaporeans c/find nat/Singaporean` command to assign the alias `Singaporeans` to the command `find nat/Singaporean`.
+
+Step 2. `AliasCommandParser#parse` will then parse the arguments provided. Then a new `AliasCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the alias operation works:
+
+![AliasParserSequenceDiagram](images/AliasParserSequenceDiagram.png)
+
+Step 3. `AliasCommand#execute` will then add a new entry of alias-command pair into `CommandAliases` by calling `CommandAliases#put`.
+
+The following sequence diagram shows how the alias command mechanism works:
+
+![AliasSequenceDiagram](images/AliasSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+</div>
+
+#### Design considerations:
+
+* **Alternative 1 (current choice):** Singleton pattern
+    * Pros: Cannot be instantiated multiple times. 
+    * Cons: Might be confusing for new developers.
+
+* **Alternative 2:** Non-Singleton
+    * Pros: More commonly used in general and thus easier to understand.
+    * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
 
 
 ### \[Proposed\] Undo/redo feature
@@ -600,7 +681,7 @@ The `Levenshtein distance` between two words is the minimum number of single-cha
 
 #### Usage
 
-Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step.
+Given below is an example usage scenario and how the Input Suggestion mechanism behaves at each step when a user types in a wrong command word.
 
 Step 1. The user launches the application.
 
@@ -610,7 +691,7 @@ Step 3. This will call `AddressBookParser#parseCommand`. But since there are no 
 it will end up at the `default` clause of the `switch` statement.
 
 Step 4. A new `WordSuggestion` object will be created with its `word` set to the `commandWord`,
-`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 3.
+`validWords` set to the `COMMAND_WORDS` list, and the `distanceLimit` set to 2.
 
 Step 5. While being initialized, `WordSuggestion#computeAllLevenshteinDistance` will be called, and it will compute the
 `Levenshtein distance` of `word` with every single word in `validWords`.
@@ -628,8 +709,8 @@ display the suggestions to the user.
 
 **Aspect: Algorithm and Time Complexity:**
 
-* **Alternative 1 (current choice):** Dynamic programming
-    * Pros: More efficient, only takes O(n*m) time, with n and m being the length of each of the two strings.
+* **Alternative 1 (current choice):** Dynamic programming (Wagner-Fischer algorithm)
+    * Pros: More efficient, only takes `O(n * m)` time, with `n` and `m` being the length of each of the two strings.
     * Cons: Harder to implement by the developers.
 
 * **Alternative 2:** Recursive

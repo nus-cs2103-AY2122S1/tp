@@ -25,6 +25,8 @@ public class StatisticsCommand extends Command {
 
     public static final String MESSAGE_STATISTICS = "Statistics: \n%s";
     public static final String MESSAGE_TUTORIAL_GROUP_NOT_FOUND = "Tutorial group not found";
+    public static final String MESSAGE_TG_FIELD_MISSING = "Unable to compute statistics. "
+            + "%s info for the contacts in the specified tutorial group are missing.";
 
     private final TutorialGroup tutorialGroup;
 
@@ -44,11 +46,12 @@ public class StatisticsCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));
-        List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
+        List<Person> filteredPersonList = new ArrayList<Person>(model.getFilteredPersonList());
+        model.updateFilteredPersonList(p -> true);
+
         if (filteredPersonList.size() == 0) {
             throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
         }
-        model.updateFilteredPersonList(p -> true);
 
         Statistic statistic = new Statistic(filteredPersonList);
 

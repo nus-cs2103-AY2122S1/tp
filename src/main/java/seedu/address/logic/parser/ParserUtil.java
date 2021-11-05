@@ -85,14 +85,18 @@ public class ParserUtil {
         requireNonNull(nationality);
         String trimmedNationality = nationality.trim();
         if (!Nationality.isValidNationality(trimmedNationality)) {
-            String exceptionMessage = Nationality.MESSAGE_CONSTRAINTS;
+            String exceptionMessage = "";
 
             // Check for suggestions
             if (Nationality.VALID_NATIONALITIES.size() > 0) {
                 WordSuggestion nationalitiesSuggestion = new WordSuggestion(trimmedNationality,
-                        Nationality.VALID_NATIONALITIES);
+                        Nationality.VALID_NATIONALITIES, 2, true);
 
                 exceptionMessage = nationalitiesSuggestion.getSuggestedWords();
+            }
+
+            if (exceptionMessage.equals("")) {
+                exceptionMessage = Nationality.MESSAGE_NOT_FOUND;
             }
 
             throw new ParseException(exceptionMessage);

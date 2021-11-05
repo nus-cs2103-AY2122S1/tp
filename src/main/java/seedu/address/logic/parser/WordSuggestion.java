@@ -19,6 +19,7 @@ public class WordSuggestion {
     private final int distanceLimit;
     private final Map<String, Integer> editDistances = new HashMap<>();
     private int minDistance = Integer.MAX_VALUE;
+    private boolean capitalizeFirstLetter = false;
 
     /**
      * Constructs an {@code WordSuggestion}.
@@ -30,6 +31,7 @@ public class WordSuggestion {
         this.word = word;
         this.validWords = correctWords;
         this.distanceLimit = Integer.MAX_VALUE;
+        this.capitalizeFirstLetter = false;
 
         computeAllLevenshteinDistance();
     }
@@ -45,6 +47,24 @@ public class WordSuggestion {
         this.word = word;
         this.validWords = correctWords;
         this.distanceLimit = distanceLimit;
+        this.capitalizeFirstLetter = false;
+
+        computeAllLevenshteinDistance();
+    }
+
+    /**
+     * Constructs an {@code WordSuggestion}.
+     *
+     * @param word the word to be compared with
+     * @param correctWords list of correct words
+     * @param distanceLimit limit of minimum distance
+     * @param capitalizeFirstLetter decides whether to capitalize the first letter of each result
+     */
+    public WordSuggestion(String word, List<String> correctWords, int distanceLimit, boolean capitalizeFirstLetter) {
+        this.word = word;
+        this.validWords = correctWords;
+        this.distanceLimit = distanceLimit;
+        this.capitalizeFirstLetter = capitalizeFirstLetter;
 
         computeAllLevenshteinDistance();
     }
@@ -119,7 +139,10 @@ public class WordSuggestion {
             int distance = entry.getValue();
 
             if (distance == minDistance) {
-                suggestions.add(suggestedWord.substring(0, 1).toUpperCase() + suggestedWord.substring(1));
+                if (capitalizeFirstLetter) {
+                    suggestedWord = suggestedWord.substring(0, 1).toUpperCase() + suggestedWord.substring(1);
+                }
+                suggestions.add(suggestedWord);
             }
         }
 
