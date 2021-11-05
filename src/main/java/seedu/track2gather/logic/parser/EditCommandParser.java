@@ -71,31 +71,37 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_WORK_ADDRESS).isPresent()) {
             Optional<String> workAddressOptional = argMultimap.getValue(PREFIX_WORK_ADDRESS);
+            assert workAddressOptional.isPresent();
             editPersonDescriptor.setWorkAddress(new WorkAddress(
                     ParserUtil.parseAddress(workAddressOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS).isPresent()) {
             Optional<String> quarantineAddressOptional = argMultimap.getValue(PREFIX_QUARANTINE_ADDRESS);
+            assert quarantineAddressOptional.isPresent();
             editPersonDescriptor.setQuarantineAddress(new QuarantineAddress(
                     ParserUtil.parseAddress(quarantineAddressOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_SHN_PERIOD).isPresent()) {
             Optional<String> shnPeriodOptional = argMultimap.getValue(PREFIX_SHN_PERIOD);
+            assert shnPeriodOptional.isPresent();
             editPersonDescriptor.setShnPeriod(new ShnPeriod(
                     ParserUtil.parsePeriod(shnPeriodOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
             Optional<String> nextOfKinNameOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME);
+            assert nextOfKinNameOptional.isPresent();
             editPersonDescriptor.setNextOfKinName(new NextOfKinName(
                     ParserUtil.parseName(nextOfKinNameOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
             Optional<String> nextOfKinPhoneOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE);
+            assert nextOfKinPhoneOptional.isPresent();
             editPersonDescriptor.setNextOfKinPhone(new NextOfKinPhone(
                     ParserUtil.parsePhone(nextOfKinPhoneOptional.get())));
         }
         if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS).isPresent()) {
             Optional<String> nextOfKinAddressOptional = argMultimap.getValue(PREFIX_NEXT_OF_KIN_ADDRESS);
+            assert nextOfKinAddressOptional.isPresent();
             editPersonDescriptor.setNextOfKinAddress(new NextOfKinAddress(
                     ParserUtil.parseAddress(nextOfKinAddressOptional.get())));
         }
