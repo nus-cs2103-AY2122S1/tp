@@ -258,10 +258,10 @@ Step 7: The `TaskTabParser` returns an `AddTaskCommand` instead of an `AddPerson
 
 The following sequence diagram shows how the switch tab system works when the command `task` is entered on the Contacts
 Tab:
-![TabSystemSequenceDiagram](images/TabSystemSequenceDiagram.png)
+![TabSystemSequenceDiagram](diagrams/TabSystemSequenceDiagram.png)
 
 The following activity diagram summarises what happens when a user executes a switch tab command:
-![TabSystemActivityDiagram](images/TabSystemActivityDiagram.png)
+![TabSystemActivityDiagram](diagrams/TabSystemActivityDiagram.png)
 
 #### Design considerations:
 
