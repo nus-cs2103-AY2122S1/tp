@@ -17,8 +17,8 @@ import seedu.address.MainApp;
 public class Nationality {
 
     public static final List<String> VALID_NATIONALITIES = readValidNationalities();
-    public static final String MESSAGE_CONSTRAINTS = "Nationality can be any valid nationality spelled in full."
-            + "Leaving it blank will remove the Nationality field. \n";
+    public static final String MESSAGE_CONSTRAINTS = "Nationality can be any valid nationality spelled in full.\n"
+            + "Leaving it blank will remove the Nationality field.";
     public static final String MESSAGE_NOT_FOUND = "The nationality entered is not valid. Please try again";
 
     /*

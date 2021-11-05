@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TutorialGroup {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tutorial Groups should only contain one letter that is one of M/T/W/F followed by two digits. "
-                    + "Leaving it blank will remove the Tutorial Group field. \n";
+            "Tutorial Groups should only contain one letter that is one of M/T/W/F followed by two digits.\n"
+                    + "Leaving it blank will remove the Tutorial Group field.\n";
     public static final String VALIDATION_REGEX = "[mtwfMTWF]\\d{2}";
 
     public final String value;

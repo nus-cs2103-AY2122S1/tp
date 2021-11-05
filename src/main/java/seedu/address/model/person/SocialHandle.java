@@ -29,7 +29,7 @@ public class SocialHandle {
             + "Discord (dc)"
             + "\n"
             + "(e.g. tg:tanjj3298)\n"
-            + "Leaving it blank will remove all the Social Handles. \n";
+            + "Leaving it blank will remove all the Social Handles.";
 
     public static final String PLATFORM_CONSTRAINTS = "Only the following platforms are supported: "
             + "Instagram (ig), "

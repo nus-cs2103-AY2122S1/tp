@@ -8,8 +8,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values. "
-            + "Leaving it blank will remove the Remark field. \n";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values.\n"
+            + "Leaving it blank will remove the Remark field.";
 
     /*
      * The first character of the remark must not be a whitespace,
