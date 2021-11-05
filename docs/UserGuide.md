@@ -172,7 +172,8 @@ Scroll down to the bottom and click on `recruitIn.jar`.
       * **`exit`** : Exits the app.
 
 
-7. Refer to the [Features](#features) below for details of available commands.
+7. This marks the end of the Quick Start guide. If you would like to know more about using RecruitIn's features,
+   you can refer to the [Features](#features) below for details of available commands.
 
 <p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
