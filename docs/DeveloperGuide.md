@@ -1268,7 +1268,7 @@ testers are expected to do more *exploratory* testing.
 1. Exiting using the window close button
 
     1. Test case: Press the close button on the window of the application.<br>
-       Expected: The window should close.
+       Expected: The window should close.<br>
 
 1. Exiting using the application's exit button
 
