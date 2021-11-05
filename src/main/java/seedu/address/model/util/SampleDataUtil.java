@@ -75,10 +75,8 @@ public class SampleDataUtil {
             sampleAb.addMember(sampleMember);
         }
         Set<Member> set = new HashSet<>();
-        set.add(new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@example.com"),
-                        new Address("Blk 45 Aljunied Street 85, #11-31"),
-                        getPositionSet("Program Head")));
+
+        set.add(sampleAb.getMemberList().get(5));
         sampleAb.addEvent(new Event(new Name("Freshmen Orientation Camp Project"), new EventDate("11/07/2021"),
                         set));
         return sampleAb;

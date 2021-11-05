@@ -64,6 +64,10 @@ public class TaddCommand extends Command {
                 throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK,
                         targetMember.getName().toString()));
             }
+        }
+
+        for (Index targetMemberId: targetMemberIdList) {
+            Member targetMember = members.get(targetMemberId.getZeroBased());
             model.addTask(targetMember, toAdd);
         }
 
