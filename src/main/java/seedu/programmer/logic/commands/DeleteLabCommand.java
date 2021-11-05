@@ -25,35 +25,35 @@ public class DeleteLabCommand extends Command {
     public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
     public static final String MESSAGE_LAB_DOES_NOT_EXIST = "Lab doesn't exist: %1$s";
 
-    private final Lab result;
+    private final Lab lab;
 
     /**
-     * @param result the lab result to be added.
+     * @param lab to be added.
      */
-    public DeleteLabCommand(Lab result) {
-        this.result = result;
+    public DeleteLabCommand(Lab lab) {
+        this.lab = lab;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-        if (!model.hasLab(result)) {
-            throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, result));
+        if (!model.hasLab(lab)) {
+            throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, lab));
         }
 
-        for (Student std : lastShownList) {
-            Student target = std;
-            target.deleteLab(this.result);
-            model.setStudent(target, std);
+        for (Student student : lastShownList) {
+            Student originalStudent = student;
+            originalStudent.deleteLab(lab);
+            model.setStudent(originalStudent, student);
         }
-        return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, lab));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteLabCommand// instanceof handles nulls
-                && result.equals(((DeleteLabCommand) other).result)); // state check
+                && lab.equals(((DeleteLabCommand) other).lab)); // state check
     }
 }
