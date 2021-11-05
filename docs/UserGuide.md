@@ -76,7 +76,7 @@ The result of executing the input command will be displayed the lower-most box.
 
 * `command_word` is a word at the start of the command to specify the action to be done. <br> e.g. in `add n/NAME`, `add` is the command word.
 * `PARAMETER` are word(s) in `UPPER_CASE` to be supplied by the user.<br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
-* `Prefix` is a letter before `PARAMETER` to denote the information supplied as parameter. <br>e.g. in `add n/NAME`, `n/` is a prefix to indicate that NAME is being supplied.
+* `Prefix` are letter(s) before `PARAMETER` to denote the information supplied as parameter. <br>e.g. in `add n/NAME`, `n/` is a prefix to indicate that NAME is being supplied.
 
 
 <div markdown="block" class="alert alert-info">
@@ -127,7 +127,7 @@ Parameter | Constraints
 
 **:information_source: Note:**<br>
 
-**ROOM** is currently modelled after an existing hall in the National University of Singapore, options for more flexibility will be made in the future.
+**ROOM** is currently modelled after an existing hall in the National University of Singapore.
 
 </div>
 
@@ -293,8 +293,8 @@ Example csv:
 
 #### Exporting residents' emails : `export`
 
-Exports the emails of all the residents in the last filtered list to a `FILE_NAME` of choice within the `data/exports/` folder.
-A quick copy-paste allows you to send mass emails using modern email clients.
+Exports the emails of all the residents in the last filtered list to a csv file within the `data/exports/` folder.
+A quick copy-paste of the email addresses from the csv file allows you to send mass emails using modern email clients.
 
 Format: `export FILE_NAME`
 
@@ -302,7 +302,7 @@ Format: `export FILE_NAME`
 
 **:information_source: Note:**<br>
 
-* The file format (`.csv`) is not to be included in the `CSV_NAME`
+* The file format (`.csv`) is not to be included in the `FILE_NAME`
 
 </div>
 
