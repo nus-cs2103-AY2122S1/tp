@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ConthacksParser" as ConthacksParser LOGIC_COLOR
+participant ":AddPersonCommandParser" as AddPersonCommandParser LOGIC_COLOR
+participant "a:AddPersonCommand" as AddPersonCommand LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("add ... m/CS2100 T19 B04\nm/CS2103T T09")
+activate LogicManager
+
+LogicManager -> ConthacksParser : parseCommand("add ... m/CS2100 T19 B04\nm/CS2103T T09")
+activate ConthacksParser
+
+create AddPersonCommandParser
+ConthacksParser -> AddPersonCommandParser
+activate AddPersonCommandParser
+
+AddPersonCommandParser --> ConthacksParser
+deactivate AddPersonCommandParser
+
+ConthacksParser -> AddPersonCommandParser : parse("... m/CS2100 T19 B04\nm/CS2103T T09")
+activate AddPersonCommandParser
+
+AddPersonCommandParser -> ParserUtil : parseModuleCodes()
+activate ParserUtil
+ParserUtil -> AddPersonCommandParser : moduleCodes
+deactivate ParserUtil
+note right of AddPersonCommandParser : modulecode = [CS2100 T19 B04], [CS2103T T09]
+
+
+create AddPersonCommand
+AddPersonCommandParser -> AddPersonCommand
+activate AddPersonCommand
+
+AddPersonCommand --> AddPersonCommandParser : a
+deactivate AddPersonCommand
+
+AddPersonCommandParser --> ConthacksParser : a
+deactivate AddPersonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddPersonCommandParser -[hidden]-> ConthacksParser
+destroy AddPersonCommandParser
+
+ConthacksParser --> LogicManager : a
+deactivate ConthacksParser
+@enduml
