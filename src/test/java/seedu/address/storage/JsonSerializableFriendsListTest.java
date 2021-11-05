@@ -28,6 +28,8 @@ public class JsonSerializableFriendsListTest {
                 JsonSerializableFriendsList.class).get();
         FriendsList friendsListFromFile = dataFromFile.toModelType();
         FriendsList typicalPersonsFriendsList = TypicalFriends.getTypicalFriendsList();
+        assertEquals(friendsListFromFile.getFriendsList().toString(),
+                typicalPersonsFriendsList.getFriendsList().toString());
         assertEquals(friendsListFromFile, typicalPersonsFriendsList);
     }
 

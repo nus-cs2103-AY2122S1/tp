@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGameAtIndex;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
 import static seedu.address.testutil.TypicalGames.CSGO;
 import static seedu.address.testutil.TypicalGames.VALORANT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
@@ -40,7 +41,7 @@ public class DeleteGameCommandTest {
     @Test
     public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
         // command fails if game id does not exist in unfiltered list
-        DeleteGameCommand deleteGameCommand = new DeleteGameCommand(CSGO.getGameId());
+        DeleteGameCommand deleteGameCommand = new DeleteGameCommand(APEX_LEGENDS.getGameId());
         assertCommandFailure(deleteGameCommand, model, Messages.MESSAGE_NONEXISTENT_GAME_ID);
     }
 

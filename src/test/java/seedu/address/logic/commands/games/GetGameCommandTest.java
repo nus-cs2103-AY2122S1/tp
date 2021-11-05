@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
-import static seedu.address.testutil.TypicalGames.CSGO;
+import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
 import static seedu.address.testutil.TypicalGames.MINECRAFT;
 import static seedu.address.testutil.TypicalGames.VALORANT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
@@ -48,8 +48,8 @@ public class GetGameCommandTest {
     @Test
     public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
         // command fails if game id does not exist in unfiltered list
-        GetGameCommand getGameCommand = new GetGameCommand(CSGO.getGameId());
-        String expectedMessage = String.format(Messages.MESSAGE_GAME_ID_NOT_FOUND, CSGO.getGameId());
+        GetGameCommand getGameCommand = new GetGameCommand(APEX_LEGENDS.getGameId());
+        String expectedMessage = String.format(Messages.MESSAGE_GAME_ID_NOT_FOUND, APEX_LEGENDS.getGameId());
 
         assertCommandFailure(getGameCommand, model, expectedMessage);
     }
