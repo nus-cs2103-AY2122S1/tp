@@ -19,6 +19,9 @@ import seedu.address.model.modulelesson.LessonTimeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
 
+/**
+ * Finds module lesson in contHACKS.
+ */
 public class FindModuleLessonCommand extends Command {
 
     public static final String COMMAND_WORD = getAliasList(FIND_MODULE_LESSON).get(0);

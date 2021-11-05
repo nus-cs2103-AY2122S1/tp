@@ -7,7 +7,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Clears the contacts stored in address book.
+ * Clears the contacts stored in contHACKS.
  */
 public class ClearPersonCommand extends Command {
 
