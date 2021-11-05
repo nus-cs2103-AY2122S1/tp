@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_PARSE_COMMAND_ERROR;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -75,6 +77,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_emptyArg() {
+        String userInput = FavouriteCommand.COMMAND_WORD;
+        String expectedOutput = userInput + MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY;
+        assertThrows(ParseException.class, expectedOutput, () -> parser.parseCommand(userInput));
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertThrows(ParseException.class, () -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
@@ -121,6 +130,23 @@ public class AddressBookParserTest {
         ImportCommand command = (ImportCommand) parser.parseCommand(ImportCommand.COMMAND_WORD + " "
                 + filename);
         assertEquals(new ImportCommand(filename), command);
+    }
+
+    @Test
+    public void parseCommandWithDescription_invalidCommand() {
+        String invalidCommand = "notValidCommand";
+        String arguments = "1";
+        String expectedOutput = MESSAGE_PARSE_COMMAND_ERROR;
+        assertThrows(ParseException.class, expectedOutput, ()
+            -> parser.parseCommandWithDescription(invalidCommand, arguments));
+    }
+
+    @Test
+    public void parseCommandWithoutDescription_invalidCommand() {
+        String invalidCommand = "notValidCommand";
+        String expectedOutput = MESSAGE_PARSE_COMMAND_ERROR;
+        assertThrows(ParseException.class, expectedOutput, ()
+            -> parser.parseCommandWithoutDescription(invalidCommand));
     }
 
     @Test
