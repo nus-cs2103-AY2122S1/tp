@@ -289,7 +289,7 @@ When the `ClearCommand#execute()` method is called,
 - A `CommandResult` is returned with the updated `Model`.
 
 Below is an example sequence diagram for a valid clear command from the user.
-![clearCommand](images/clearCommand.png)
+![ClearCommand](images/ClearCommandSequenceDiagram.png)
 
 
 #### Design Considerations:
@@ -315,6 +315,28 @@ Below is an example sequence diagram for a valid clear command from the user.
       - All modules stored in the storage in advance will be deleted as well
       - User need to add all the modules again, once the clear command is called
       - It will be expensive, if the user accidentally use clear command
+
+### Edit Module feature
+
+####Implementation
+
+The `edit` command is implemented via the `EditCommand`, `EditCommandParser` and `EditModuleDescriptor` classes.
+
+The `EditCommandParser` class implements the `Parser` interface.
+The `EditCommandParser#parse()` method is responsible for parsing the user input to retrieve the index of the module, fields user want to edit and its new value. The method will return an `EditCommand` object with parsed user input as its argument.
+
+The `EditModuleDescriptor` is responsible for storing the details to edit the module with and replacing each non-empty field value to corresponding field value of the module.
+
+The `EditCommand` class extends the `Command` class and implements the `EditCommand#execute()` method which handles the main logic of the class.
+It contains non-null `index` and `editModuleDescriptor` fields.
+When the `EditCommand#execute()` method is called,
+- The `Module` object corresponding to the `index` is found from the `Model`.
+- Create an edited copy of the module, and replace the original module.  
+- A `CommandResult` is returned with the updated `Model`.
+
+Below is an example sequence diagram for a valid clear command from the user.
+![EditCommand](images/EditCommandSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -507,7 +529,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Mod tracker shows an error message.
       Use case ends.
 
-*{More to be added}*
+**UC2: Edit a module**
+
+**MSS**
+
+1. User requests to edit a specific module in the database.
+2. NUS Mod Tracker edits the module.
+    
+
+    Use case ends.
+
+**Extension**
+
+* 1a. The given module index or arguments are invalid.
+  * 1a1. NUS Mod Tracker shows an error message.
+ 
+
+    Use case resumes at step 1.
+* 1b. The user failed to provide any mandatory details to be edited.
+  * 1b1. NUS Mod Tracker shows an error message. 
+  
+
+    Use case resumes at step 1.
+* 1c. The new value that is given to the code field is already exists in the database.
+  * 1c1. NUS Mod Tracker shows an error message.
+
+
+    Use case resumes at step 1.
+
+
+**UC3: Remove all modules in a specific semester from the academic plan**
+
+**MSS**
+
+1. User requests to remove modules in a specific semester from the academic plan.
+2. NUS Mod Tracker removes all modules in that semester from the academic plan.
+
+
+    Use case ends.
+
+**Extension**
+
+* 1a. The given semester is invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+
+
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 

@@ -67,7 +67,7 @@ deactivate Model
 loop every module in the list
 ClearCommand -> Model : setModule()
 activate Model
-Model -> ClearCommand
+Model --> ClearCommand
 deactivate Model
 end
 create CommandResult
