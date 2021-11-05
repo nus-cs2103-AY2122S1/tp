@@ -351,9 +351,9 @@ Example 2:
 import CS2103T.csv
 ```
 
-### Setting a Contact as Favourite - `fav`
+### Setting a Contact as Favorite - `fav`
 
-Helps to set a particular Student Contact as a Favourite only if the contact has not been favourited.
+Helps to set a particular Student Contact as a Favorite only if the contact has not been favorited.
 
 Format:
 
@@ -474,7 +474,7 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Edit a Student | `edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
 | Edit your Profile | `edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]` |
 | Exporting Student Contacts | `export <FILENAME>.json` <br> `export <FILENAME>.csv` |
-| Favourite a Student Contact | `fav <INDEX>` |
+| Favorite a Student Contact | `fav <INDEX>` |
 | Find a Student (by Name) | `find <STRING> ` |
 | Find a Student (by Tag) | `find t/<TAG>` |
 | Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
@@ -483,4 +483,4 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |
-| Unfavourite a Student Contact | `unfav <INDEX>` |
+| Unfavorite a Student Contact | `unfav <INDEX>` |
