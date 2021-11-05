@@ -33,9 +33,28 @@ Given below are my contributions to the project.
     * Added documentation for the categories `Level of Education` [\#112](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/112), `Done` [\#215](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/215) and `Notes` [\#204](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/204)
   * Developer Guide:
     * Added implementation details of the `delete` and `mark` features [\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322)
-    * Edited outdated class diagram for `Model` [\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322)
+    * Edited outdated class diagram for `Model`[\#322](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/322)
     * Add Use Cases for `list`[\#29](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/29), `find` [\#63](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/63), `mark` and `unmark` [\#180](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/180)
     * Update User Stories and Glossary.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#154](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/154), [\#181](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/181), [\#185](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/185), [\#295](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/295), [\#305](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/305)
+  * PRs reviewed (with non-trivial review comments): 
+    [\#154](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/154), 
+    [\#181](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/181), 
+    [\#185](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/185), 
+    [\#295](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/295),
+    [\#305](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/305)
+  * Reported bugs for other team during PE Dry Run: 
+    [\#105](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/105),
+    [\#118](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/118), 
+    [\#119](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/119), 
+    [\#128](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/128), 
+    [\#129](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/129),
+    [\#134](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/134),
+    [\#136](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/136),
+    [\#138](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/138),
+    [\#142](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/142),
+    [\#146](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/146),
+    [\#147](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/147),
+    [\#149](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/149),
+    [\#150](https://github.com/AY2122S1-CS2103T-W15-4/tp/issues/150)
