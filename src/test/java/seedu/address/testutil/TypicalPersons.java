@@ -54,6 +54,7 @@ public class TypicalPersons {
     public static final String BENSON_ADDRESS = "311, Clementi Ave 2, #02-25";
     public static final String BENSON_TAG_1 = "owesmoney";
     public static final String BENSON_TAG_2 = "friends";
+    public static final String BENSON_TAG_3 = "cca";
     public static final boolean BENSON_IS_FAVOURITE = false;
     public static final Person BENSON =
             new PersonBuilder()
@@ -63,7 +64,7 @@ public class TypicalPersons {
                     .withPhone(BENSON_PHONE)
                     .withEmail(BENSON_EMAIL)
                     .withAddress(BENSON_ADDRESS)
-                    .withTags(BENSON_TAG_1, BENSON_TAG_2)
+                    .withTags(BENSON_TAG_1, BENSON_TAG_2, BENSON_TAG_3)
                     .withIsFavourite(BENSON_IS_FAVOURITE)
                     .build();
     public static final String CARL_NAME = "Carl Kurz";
