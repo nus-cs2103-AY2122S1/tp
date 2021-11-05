@@ -30,7 +30,12 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "e0518441@u.nus.edu";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
+            + "already exists in the ProgrammerError";
+    public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same email "
+            + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError";
+
 
     private final Student toAdd;
 
@@ -46,8 +51,13 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        //A duplicate student is a student with an existing student ID and/or email.
         if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            if (model.hasSameStudentId(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
+            } else if (model.hasSameStudentEmail(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
+            }
         }
 
         model.addStudent(toAdd);

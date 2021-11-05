@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 
@@ -21,7 +22,7 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_STUDENT_ID = "A0214325H";
     private static final String VALID_CLASS_ID = "B01";
-    private static final String VALID_email = "e051221@u.nus.edu";
+    private static final String VALID_email = "e0512213@u.nus.edu";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -115,18 +116,17 @@ public class ParserUtilTest {
     public void parseemail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
-}
 
-    //todo
-//    @Test
-//    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-//        Email expectedEmail = new Email(VALID_email);
-//        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_email));
-//    }
-//
-//    @Test
-//    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-//        String emailWithWhitespace = WHITESPACE + VALID_email + WHITESPACE;
-//        Email expectedEmail = new Email(VALID_email);
-//        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-//}
+    @Test
+    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
+        Email expectedEmail = new Email(VALID_email);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_email));
+    }
+
+    @Test
+    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String emailWithWhitespace = WHITESPACE + VALID_email + WHITESPACE;
+        Email expectedEmail = new Email(VALID_email);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+}

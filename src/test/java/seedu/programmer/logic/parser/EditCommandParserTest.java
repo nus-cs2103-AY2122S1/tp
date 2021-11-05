@@ -158,7 +158,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        //TODO
+        //TODO: LabNum & LabResult
 
         // class ID
         userInput = targetIndex.getOneBased() + CLASS_ID_DESC_AMY;

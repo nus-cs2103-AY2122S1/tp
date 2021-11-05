@@ -169,19 +169,37 @@ public class Student implements DisplayableObject {
         this.labList = labList;
     }
 
+    public boolean hasNoLabs() {
+        return getLabList().isEmpty();
+    }
+
     public int getNumLabs() {
         return labList.size();
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Returns true if both students have the same studentId or email.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
-        if (otherStudent == this) {
-            return true;
-        }
+        return isSameStudentId(otherStudent) || isSameStudentEmail(otherStudent);
+    }
 
+    /**
+     * Returns true if both students have the same studentId.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudentEmail(Student otherStudent) {
+        return otherStudent != null
+                && otherStudent.getEmail().equals(getEmail());
+    }
+
+
+    /**
+     * Returns true if both students have the same email.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudentId(Student otherStudent) {
         return otherStudent != null
                 && otherStudent.getStudentId().equals(getStudentId());
     }

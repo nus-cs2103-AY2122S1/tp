@@ -42,7 +42,6 @@ public class AddCommandParserTest {
                 + EMAIL_DESC_BOB, new AddCommand(expectedStudent));
     }
 
-    //TODO
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags

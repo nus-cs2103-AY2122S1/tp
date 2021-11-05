@@ -5,7 +5,7 @@ title: Zhao Peiduo's Project Portfolio Page
 
 ### Project: ProgrammerError
 
-ProgrammerError is a desktop application which helps CS2100 tutors manage their students’ lab results in a simple and
+[ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) (P|E) is a desktop application which helps CS2100 tutors manage their students’ lab results in a simple and
 efficient manner, allowing them to spend less time on administrative processes and more time teaching students.
 
 Given below are my contributions to the project. My contribution to the project code base is also shown in the
@@ -14,7 +14,7 @@ Given below are my contributions to the project. My contribution to the project 
 
 ### Features
 
-1. Added to ability to show a student's lab results on the side panel
+#### Added to ability to show a student's lab results on the side panel
 
 * What it does: Allow CS2100 TAs to check a student's lab record on the side panel.
 * Justification: This feature provides a convenient way for CS2100 TAs to view a student's lab record on
@@ -26,7 +26,7 @@ Given below are my contributions to the project. My contribution to the project 
 * Credits: [JavaFX8Docs](https://docs.oracle.com/javase/8/javafx/api/toc.htm) for guidelines on how to use different
   containers.
 
-2. Added colour-coded tags to each student in ProgrammerError
+#### Added colour-coded tags to each student in ProgrammerError
 
 * What it does: Green tags represent the marked labs while red ones represent the unmarked labs
 * Justification: This feature allows CS2100 TAs to have a bird view of the marking status of the labs, without a need to
@@ -37,7 +37,7 @@ Given below are my contributions to the project. My contribution to the project 
 
 ### Other Contributions
 
-1. **Enhancements to existing features**:
+#### **Enhancements to existing features**:
 
 * Improve the help feature by adding a table of command syntax to the HelpWindow.
 * Add a button bar with buttons for exit, help, download, upload and dashboard features. Enabled keyboard shortcut to be
@@ -50,11 +50,11 @@ Given below are my contributions to the project. My contribution to the project 
   [\#374](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/374),
   [\#381](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/381).
 
-2. **Project management**:
+#### **Project management**:
 
 * Utilize the issue tracker for bug reports and new feature proposals.
 
-3. **Documentation**:
+#### **Documentation**:
 
 * User Guide:
     * Added documentation for the features `delete`
@@ -66,8 +66,8 @@ Given below are my contributions to the project. My contribution to the project 
     * Updated the UML diagrams for ProgrammerError: [\#158](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/159)
       , [\#393](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/393).
 
-4. **Community**:
+#### **Community**:
 
 * PRs reviewed (with non-trivial review comments): [\#194](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/194).
 * Contributed to forum discussions: [\#290](https://github.com/nus-cs2103-AY2122S1/forum/issues/290).
-  
+* Reported bugs and suggestions for other teams in the class: [\#3](https://github.com/ZhaoPeiduo/ped/issues/3), [\#5](https://github.com/ZhaoPeiduo/ped/issues/5) from PE-D

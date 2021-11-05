@@ -47,7 +47,7 @@ public class Lab implements DisplayableObject {
         this.labNum = labNum;
     }
 
-    public Lab(){}
+    public Lab() {}
 
     public LabNum getLabNum() {
         return labNum;
@@ -61,8 +61,8 @@ public class Lab implements DisplayableObject {
         return totalScore;
     }
 
-    public String getLabNumValue() {
-        return labNum.getLabNum().toString();
+    public int getLabNumValue() {
+        return labNum.getLabNum();
     }
 
     public String getLabResultValue() {
@@ -106,13 +106,6 @@ public class Lab implements DisplayableObject {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
                 && labNum.getLabNum() == ((Lab) other).getLabNum().getLabNum());
-    }
-
-    /**
-     * Returns true if a given string is a valid score.
-     */
-    public static boolean isValidScore (Integer score) {
-        return score >= 0;
     }
 
     @Override

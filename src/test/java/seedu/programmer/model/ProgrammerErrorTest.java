@@ -3,6 +3,7 @@ package seedu.programmer.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.programmer.testutil.Assert.assertThrows;
@@ -71,9 +72,10 @@ public class ProgrammerErrorTest {
     }
 
     @Test
-    public void hasStudent_studentWithSameNameDifferentStudentId_returnsFalse() {
+    public void hasStudent_studentWithSameNameDifferentStudentIdDifferentEmail_returnsFalse() {
         programmerError.addStudent(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB).build();
+        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(programmerError.hasStudent(editedAlice));
     }
 

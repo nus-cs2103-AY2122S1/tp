@@ -9,12 +9,12 @@ import javafx.collections.ObservableList;
 import seedu.programmer.model.student.Lab;
 
 public class TypicalLabs {
-    public static final Lab LAB1 = new LabBuilder().withLabNum(1).withResult(10).withTotal(20).build();
-    public static final Lab LAB2 = new LabBuilder().withLabNum(2).withResult(0).withTotal(10).build();
-    public static final Lab LAB3 = new LabBuilder().withLabNum(3).withResult(20).withTotal(20).build();
-    public static final Lab LAB4 = new LabBuilder().withLabNum(4).withResult(30).withTotal(40).build();
-    public static final Lab LAB5 = new LabBuilder().withLabNum(5).withResult(5).withTotal(20).build();
-    public static final Lab LAB6 = new LabBuilder().withLabNum(6).withResult(0).withTotal(40).build();
+    public static final Lab LAB_1 = new LabBuilder().withLabNum(1).withResult(10).withTotal(20).build();
+    public static final Lab LAB_2 = new LabBuilder().withLabNum(2).withResult(0).withTotal(10).build();
+    public static final Lab LAB_3 = new LabBuilder().withLabNum(3).withResult(20).withTotal(20).build();
+    public static final Lab LAB_4 = new LabBuilder().withLabNum(4).withResult(30).withTotal(40).build();
+    public static final Lab LAB_5 = new LabBuilder().withLabNum(5).withResult(5).withTotal(20).build();
+    public static final Lab LAB_6 = new LabBuilder().withLabNum(6).withResult(0).withTotal(40).build();
 
     private TypicalLabs() {
     } // prevents instantiation
@@ -29,6 +29,6 @@ public class TypicalLabs {
     }
 
     public static List<Lab> getTypicalLabs() {
-        return new ArrayList<>(Arrays.asList(LAB1, LAB2, LAB3, LAB4, LAB5));
+        return new ArrayList<>(Arrays.asList(LAB_1, LAB_2, LAB_3, LAB_4, LAB_5));
     }
 }

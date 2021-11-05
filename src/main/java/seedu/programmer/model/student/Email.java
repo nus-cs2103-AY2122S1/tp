@@ -9,7 +9,7 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be in the format: eXXXXXX@u.nus.edu "
+    public static final String MESSAGE_CONSTRAINTS = "Emails should be in the format: eXXXXXXX@u.nus.edu "
             + "(case-insensitive), where X represents a digit from 0 to 9";
 
     private static final String VALIDATION_REGEX = "e" + "\\d{7}+" + "@u.nus.edu";

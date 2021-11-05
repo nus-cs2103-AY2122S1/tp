@@ -30,7 +30,7 @@ public class JsonAdaptedLab {
      */
     public JsonAdaptedLab(Lab lab) {
         requireNonNull(lab);
-        this.labNumValue = lab.getLabNumValue();
+        this.labNumValue = String.valueOf(lab.getLabNumValue());
         this.actualScoreValue = lab.getLabResultValue();
         this.totalScoreValue = lab.getLabTotalValue();
     }

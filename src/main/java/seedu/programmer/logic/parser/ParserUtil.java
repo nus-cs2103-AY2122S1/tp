@@ -129,10 +129,8 @@ public class ParserUtil {
             if (trimmedResult.isEmpty()) {
                 throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
             }
-            Integer res = Integer.parseInt(trimmedResult);
-            if (result == null) {
-                return 0;
-            } else if (res < 0) {
+            int res = Integer.parseInt(trimmedResult);
+            if (res < 0) {
                 throw new ParseException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
             }
             return Integer.parseInt(result.trim());
@@ -153,10 +151,8 @@ public class ParserUtil {
             if (trimmedResult.isEmpty()) {
                 throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
             }
-            Integer res = Integer.parseInt(trimmedResult);
-            if (total == null) {
-                return 0;
-            } else if (res <= 0 || res > 100) {
+            int res = Integer.parseInt(trimmedResult);
+            if (res <= 0 || res > 100) {
                 throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
             }
             return Integer.parseInt(total.trim());
