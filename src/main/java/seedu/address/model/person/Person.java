@@ -389,11 +389,7 @@ public class Person implements HasUniqueId, Attendee,
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Lessons: ")
-                .append(getLessonsList())
-                .append("; Exams: ")
-                .append(getExams());
+                .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

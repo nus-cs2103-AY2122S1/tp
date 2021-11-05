@@ -15,6 +15,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
@@ -74,6 +75,8 @@ public class EditTaskCommand extends Command {
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.updateLessonWithAttendeesList();
+        model.setViewingType(ViewingType.SCHEDULE);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
         //return new CommandResult("Hello from remark");
     }

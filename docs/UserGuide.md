@@ -61,7 +61,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
+
 * `INDEX` parameters are very common in this application. Ensure that they are a positive integer and is less than 2,147,483,648.
 
 </div>
@@ -332,7 +332,7 @@ Examples:
 * `task -a n/CS2100 Lab 1 d/2021-10-10` adds the task "CS2100 Lab 1"
 </details>
 
-### Editing a task 
+### Editing a task
 <details markdown="1">
 <summary>
 Edits a task in the task list.
@@ -369,10 +369,10 @@ Examples:
 * `task -d 1` deletes the task at index 1
 </details>
 
-### Listing all tasks 
+### Listing all tasks
 <details markdown="1">
 <summary>
-Shows a list of all the tasks in the task list. 
+Shows a list of all the tasks in the task list.
 </summary>
 
 Format: `task -l`
