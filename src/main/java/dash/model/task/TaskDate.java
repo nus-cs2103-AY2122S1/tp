@@ -21,15 +21,6 @@ public class TaskDate {
             + " Time: hh:mm a -> 12:00 PM) \n"
             + "If both Date and Time are included, Date should come first before Time and they should be separated "
             + "by a comma. A full list of available formats can be seen under the Help tab.";
-    public static final String FORMAT_CONSTRAINTS = "Dates can be listed in these formats: \n"
-            + "dd/MM/yyyy\n"
-            + "dd-MM-yyyy\n"
-            + "yyyy/MM/dd\n"
-            + "yyyy-MM-dd\n"
-            + "dd MMM yyyy\n\n"
-            + "Times can be listed in these formats: \n"
-            + "HHmm\n"
-            + "hh:mm a\n";
     private static final String[] DATE_FORMATS = {
         "dd/MM/uuuu",
         "dd-MM-uuuu",
@@ -53,29 +44,6 @@ public class TaskDate {
      *
      * @param taskDate A valid taskDate.
      */
-    public TaskDate(String taskDate) {
-        requireNonNull(taskDate);
-        checkArgument(isValidArgument(taskDate), MESSAGE_CONSTRAINTS);
-
-        if (detectedDateFormat != null) {
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
-            this.date = Optional.of(LocalDate.parse(taskDateString,
-                    dateFormat.withResolverStyle(ResolverStyle.STRICT)));
-        } else {
-            this.date = Optional.of(LocalDate.now());
-        }
-
-        if (detectedTimeFormat != null) {
-            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat, Locale.US);
-            this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
-        }
-    }
-
-    /**
-     * Constructs a {@code TaskDate} specialised for editing a taskDate.
-     *
-     * @param taskDate A valid taskDate.
-     */
     public TaskDate(String taskDate, boolean isForEditing) {
         requireNonNull(taskDate);
         checkArgument(isValidArgument(taskDate), MESSAGE_CONSTRAINTS);
@@ -84,6 +52,10 @@ public class TaskDate {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
             this.date = Optional.of(LocalDate.parse(taskDateString,
                     dateFormat.withResolverStyle(ResolverStyle.STRICT)));
+        } else {
+            if (!isForEditing) {
+                this.date = Optional.of(LocalDate.now());
+            }
         }
 
         if (detectedTimeFormat != null) {

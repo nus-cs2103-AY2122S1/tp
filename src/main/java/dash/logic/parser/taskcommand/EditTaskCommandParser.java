@@ -62,7 +62,7 @@ public class EditTaskCommandParser implements ParserRequiringPersonList<EditTask
         }
 
         if (argMultimap.getValue(PREFIX_TASK_DATE).isPresent()) {
-            TaskDate taskdate = ParserUtil.parseTaskDateToEdit(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            TaskDate taskdate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get(), true);
             editTaskDescriptor.setTaskDate(taskdate);
         }
 

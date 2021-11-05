@@ -57,7 +57,7 @@ public class AddTaskCommandParser implements ParserRequiringPersonList<AddTaskCo
         }
 
         if (isTaskDatePrefixPresent) {
-            taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get(), false);
         } else {
             taskDate = new TaskDate();
         }

@@ -110,16 +110,16 @@ public class EditTaskCommand extends Command {
         TaskDate editTaskDate = taskDate.get();
         if (!editTaskDate.hasDate()) {
             if (taskDateToEdit.hasDate()) {
-                return new TaskDate(taskDateToEdit.toDateString() + "," + editTaskDate.toTimeString());
+                return new TaskDate(taskDateToEdit.toDateString() + "," + editTaskDate.toTimeString(), false);
             }
         }
         if (!editTaskDate.hasTime()) {
             if (taskDateToEdit.hasDate() && taskDateToEdit.hasTime()) {
-                return new TaskDate(editTaskDate.toDateString() + "," + taskDateToEdit.toTimeString());
+                return new TaskDate(editTaskDate.toDateString() + "," + taskDateToEdit.toTimeString(), false);
             }
         }
 
-        return new TaskDate(editTaskDate.toString());
+        return new TaskDate(editTaskDate.toString(), false);
     }
 
     @Override

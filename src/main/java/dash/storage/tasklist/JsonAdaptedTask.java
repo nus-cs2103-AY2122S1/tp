@@ -104,7 +104,7 @@ class JsonAdaptedTask {
             if (!TaskDate.isValidTaskDate(taskDate)) {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
-            modelTaskDate = new TaskDate(taskDate);
+            modelTaskDate = new TaskDate(taskDate, false);
         }
 
         final TaskDescription modelTaskDescription = new TaskDescription(description);

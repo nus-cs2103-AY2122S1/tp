@@ -78,7 +78,7 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
             if (argMultimap.getValue(PREFIX_TASK_DATE).get().isEmpty()) {
                 throw new ParseException(MESSAGE_ARGUMENT_EMPTY);
             }
-            TaskDate taskDateArg = ParserUtil.parseTaskDateToEdit(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            TaskDate taskDateArg = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get(), true);
             findTaskDescriptor.setDate(taskDateArg);
         }
         if (tagPresent) {
