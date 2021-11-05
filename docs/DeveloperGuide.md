@@ -161,7 +161,7 @@ and a `UniqueFacilityList` object respectively).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SportsPA`, which `Member` references. This allows `SportsPa` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagramUpdated.png" width="600" />
+<img src="images/BetterModelClassDiagramUpdated.png" width="650" />
 
 </div>
 
