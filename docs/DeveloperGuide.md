@@ -486,16 +486,17 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 | As a... | I want to... | So that I can... |
 |---|---|---|
-| Person who loves Birthdays    | Track birthdays                       | Easily checking the birthday of friends
-| Person who Loves Birthdays and is forgetful    | have birthday reminders            | Avoid miss any of his/her friends’ birthdays
-| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
+| Person who loves birthdays    | Track birthdays                       | Easily check the birthday of friends
+| Person who Loves birthdays and is forgetful    | have birthday reminders            | Avoid missing any of his/her friends’ birthdays
+| Party Organiser       | Look for contact details for all my friends      | Send out invites
 | Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
-| Party Organiser               | Add people to a party list            | Easily extend a party invite list
-| Party Organiser               | Remove people to a party list         | Easily Remove people from only one party
-| Party Organiser               | Search contacts by invited party      | Generate invite list
-| Party Organiser               | Delete multiple contacts at once      | Delete contacts that I no longer need faster
-| Sociable person               | Partition frequent contacts           | Easily access people that I contact often
-| Sociable person               | To be able to save up to 100 contacts | Keep all my friends contacts
+| Party Organiser               | Tag people with a party           | Easily keep track of people coming for parties
+| Party Organiser               | Untag people from a party         | Easily remove people who are not coming for parties
+| Party Organiser               | Search contacts by party      | Generate invite list
+| Party Organiser               | Search contacts by parties      | View who is coming for these parties
+| Party Organiser               | Delete multiple contacts at once      | Quickly delete contacts that I no longer need
+| Sociable person               | Pin frequent contacts           | Easily access people that I contact often
+| Sociable person               | Save up to 100 contacts | Keep all my friends contacts
 | Sociable person               | Search for contacts within a reasonable timing | Avoid waiting too long for search results
 | Beginner              | See sample commands                               | See what I should be typing.
 | Beginner              | View helpful prompts                              | See what can be done with the app
@@ -821,9 +822,9 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 **MSS**
 
-1.  User requests to generate a CSV file with contacts displayed with request fields.
+1. User requests to generate a CSV file containing selected data fields of the contacts displayed.
 2. CONNECTIONS requests for user to input export location and file name.
-3. User selected export location and file name.
+3. User selects export location and file name.
 4. CONNECTIONS generates CSV file in export location with file name.
 
     Use case ends.
@@ -897,8 +898,6 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
     * 1a1. CONNETIONS will not display command.
 
       Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
