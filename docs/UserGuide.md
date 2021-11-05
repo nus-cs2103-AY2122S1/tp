@@ -438,7 +438,7 @@ Action | Summary | Format, Examples
 **Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
 **Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
 **Deletem** | Deletes multiple people within the range | `deletem START_INDEX - END_INDEX`<br> e.g., `deletem 3 - 5`
-**MailingList**| Exports a mailing list | `mailingList [p/] [e/] [a/] [b/] [t/]`
+**MailingList**| Exports a mailing list | `mailingList [p/] [e/] [a/] [b/] [t/]` <br> e.g., `mailingList [p/] [e/] [b/]`
 **Clear** | Clears all entries | `clear`
 **Exit** | Exits the program | `exit`
 
