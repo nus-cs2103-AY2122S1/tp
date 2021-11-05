@@ -2,8 +2,8 @@ package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javafx.scene.chart.Chart;
 import seedu.address.commons.util.ChartUtil;
@@ -34,7 +34,7 @@ public class StudentStatistics {
      * Returns a distribution of student's scores for the assessment.
      */
     public Map<String, Number> getScoreDistribution() {
-        Map<String, Number> distribution = new TreeMap<>();
+        Map<String, Number> distribution = new LinkedHashMap<>();
         scoreMap.forEach((assessment, score) -> distribution.put(assessment.getName(), score.getNumericValue()));
         return distribution;
     }
@@ -46,8 +46,8 @@ public class StudentStatistics {
      * and the second element contains the median distribution.
      */
     private Map<String, Number>[] getDataSet() {
-        Map<String, Number> mean = new TreeMap<>();
-        Map<String, Number> median = new TreeMap<>();
+        Map<String, Number> mean = new LinkedHashMap<>();
+        Map<String, Number> median = new LinkedHashMap<>();
         scoreMap.forEach((assessment, score) -> {
             AssessmentStatistics statistics = new AssessmentStatistics(assessment);
             mean.put(assessment.getName(), statistics.getMean());

@@ -3,14 +3,13 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javafx.scene.chart.Chart;
 import seedu.address.commons.util.ChartUtil;
-import seedu.address.model.Model;
 
 /**
  * Represents statistics about a student and the students' performance in each assessment.
@@ -21,7 +20,6 @@ public class GroupStatistics {
     private static final String CHART_X_AXIS_LABEL = "Assessments";
     private static final String CHART_Y_AXIS_LABEL = "Scores";
 
-    private final Model model;
     private final Group group;
     private final List<ID> studentList;
     private final List<Assessment> assessmentList;
@@ -29,14 +27,13 @@ public class GroupStatistics {
     /**
      * Constructs a {@code GroupStatistics} with the specified {@code group}.
      */
-    public GroupStatistics(Group group, Model model) {
-        requireNonNull(model);
+    public GroupStatistics(Group group, List<Assessment> assessmentList) {
         requireNonNull(group);
         requireNonNull(group.getStudents());
-        this.model = model;
+        requireNonNull(assessmentList);
         this.group = group;
         this.studentList = group.getStudents();
-        this.assessmentList = model.getAddressBook().getAssessmentList();
+        this.assessmentList = assessmentList;
     }
 
     /**
@@ -90,9 +87,9 @@ public class GroupStatistics {
      * and the third element contains the cohort median distribution.
      */
     private Map<String, Number>[] getDataSet() {
-        Map<String, Number> cohortMean = new TreeMap<>();
-        Map<String, Number> groupMedian = new TreeMap<>();
-        Map<String, Number> cohortMedian = new TreeMap<>();
+        Map<String, Number> groupMedian = new LinkedHashMap<>();
+        Map<String, Number> cohortMean = new LinkedHashMap<>();
+        Map<String, Number> cohortMedian = new LinkedHashMap<>();
 
         for (Assessment assessment: assessmentList) {
             if (!isGraded(assessment)) {

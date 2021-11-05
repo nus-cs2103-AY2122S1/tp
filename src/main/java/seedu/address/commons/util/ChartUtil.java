@@ -8,12 +8,26 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.util.StringConverter;
+import seedu.address.model.student.Score;
 
 /**
  * Creates JavaFX charts
  */
 public class ChartUtil {
     private static final double DEFAULT_TICK_UNIT = 5.0;
+    private static final StringConverter<Number> CUSTOM_TICK_LABEL_FORMATTER = new StringConverter<>() {
+        @Override
+        public String toString(Number number) {
+            // Hide labels that are greater than max score since they only serve as padding
+            return number.doubleValue() > Score.MAX_SCORE ? "" : String.valueOf(number.intValue());
+        }
+
+        @Override
+        public Number fromString(String string) {
+            return Double.parseDouble(string);
+        }
+    };
 
     /**
      * Creates a JavaFX BarChart with the given title, axis labels and data points.
@@ -70,31 +84,35 @@ public class ChartUtil {
         yAxis.setLowerBound(0);
         yAxis.setUpperBound(104);
         yAxis.setTickUnit(10);
+        yAxis.setTickLabelFormatter(CUSTOM_TICK_LABEL_FORMATTER);
 
         final LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
         lineChart.setTitle(title);
         lineChart.setId("chart1");
 
-        // Input data points: score, mean, median
-        XYChart.Series seriesScore = new XYChart.Series();
+        // Input score data points
+        XYChart.Series<String, Number> seriesScore = new XYChart.Series<>();
         seriesScore.setName(dataLabel);
         for (Map.Entry<String, Number> entry : data.entrySet()) {
-            seriesScore.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
+            seriesScore.getData().add(new XYChart.Data<>(wrap(entry.getKey()), entry.getValue()));
         }
+        lineChart.getData().add(seriesScore);
 
-        XYChart.Series seriesMean = new XYChart.Series();
+        // Input mean data points
+        XYChart.Series<String, Number> seriesMean = new XYChart.Series<>();
         seriesMean.setName("cohort mean");
         for (Map.Entry<String, Number> entry : mean.entrySet()) {
-            seriesMean.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
+            seriesMean.getData().add(new XYChart.Data<>(wrap(entry.getKey()), entry.getValue()));
         }
+        lineChart.getData().add(seriesMean);
 
-        XYChart.Series seriesMedian = new XYChart.Series();
+        // Input median data points
+        XYChart.Series<String, Number> seriesMedian = new XYChart.Series<>();
         seriesMedian.setName("cohort median");
         for (Map.Entry<String, Number> entry : median.entrySet()) {
-            seriesMedian.getData().add(new XYChart.Data(wrap(entry.getKey()), entry.getValue()));
+            seriesMedian.getData().add(new XYChart.Data<>(wrap(entry.getKey()), entry.getValue()));
         }
-
-        lineChart.getData().addAll(seriesScore, seriesMean, seriesMedian);
+        lineChart.getData().add(seriesMedian);
 
         return lineChart;
     }
@@ -105,7 +123,6 @@ public class ChartUtil {
     public static double roundUpToNearestMultiple(double val, int multiple) {
         return Math.round(val / multiple) * multiple;
     }
-
 
     /**
      * Wraps the given string such that each line contains maximum of 12 characters, with a maximum of 3 lines.
