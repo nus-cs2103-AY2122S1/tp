@@ -416,7 +416,8 @@ public class ParserUtil {
         for (String roleReq : roles) {
             roleReq = roleReq.trim().replace(PREFIX_ROLE.toString(), "");
             if (!isValidRoleRequirement(roleReq)) {
-                throw new ParseException(SetRoleReqCommand.getHelpMessage());
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SetRoleReqCommand.getHelpMessage()));
             }
             roleSet.add(roleReq);
         }
@@ -482,7 +483,14 @@ public class ParserUtil {
      * @return A corresponding array of timings as LocalTime.
      */
     public static LocalTime[] parseTimingsArr(String[] stringTimings) throws ParseException {
+
         if (stringTimings.length != 4) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
+        }
+
+        // Check if the duration of the morning and afternoon shifts is non-zero
+        if (stringTimings[0].equals(stringTimings[1]) || stringTimings[2].equals(stringTimings[3])) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
         }
@@ -493,7 +501,15 @@ public class ParserUtil {
                 timings[i] = LocalTime.parse(stringTimings[i], TIME_FORMATTER);
             }
         } catch (DateTimeParseException e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
+        }
+
+        // Check that the morning shift starts before on or before noon,
+        // and the afternoon shift starts after or on noon
+        if (timings[0].compareTo(LocalTime.NOON) > 0 || timings[2].compareTo(LocalTime.NOON) < 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
         }
 
         for (int i = 0; i < 3; i++) {

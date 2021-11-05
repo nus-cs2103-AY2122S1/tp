@@ -165,11 +165,14 @@ See Also:
 
 #### Setting Default Shift Timings : `setDefaultShiftTimings `
 
-Set the default timings for the morning and afternoon shift. Note that all 4 timings must be present, and the timings 
-must be provided in an `HH:mm` format.
-
-The default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
-The Clear Command will also reset the shift timings to the aforementioned defaults.
+Set the default timings for the morning and afternoon shift. Please note:
+* All 4 timings must be present
+* Timings must be provided in an `HH:mm` format, using the 24-hour clock. (Example: `22:00`)
+* The duration of the shift must not be zero (i.e. the shift cannot start and end at the same time)
+* The shifts do not overlap, but can have the same start and end times
+* The morning shift must start at noon or before noon. Similarly, the afternoon shift must start at noon or after noon.
+* The default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
+* The Clear Command will also reset the shift timings to the aforementioned defaults.
 
 Format:
 
