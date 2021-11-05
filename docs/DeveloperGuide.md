@@ -168,7 +168,7 @@ The `Storage` component,
 --------------------------------------------------------------------------------------------------------------------
 ### 3.6 Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 ### 3.7 Client Fields
 
