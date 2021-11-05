@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -43,6 +44,7 @@ public class Client implements Category {
         if (orders != null) {
             this.orders.addAll(orders);
         }
+
         Logger logger = Logger.getLogger("create client object");
         logger.info("new client created");
     }
@@ -72,21 +74,42 @@ public class Client implements Category {
     }
 
     /**
-     * Add orders in a set into the client's orders.
+     * Adds an order into the client's set of orders.
      *
-     * @param ordersToAdd A set of orders to be added.
+     * @param orderToAdd The order to be added.
      */
-    public void addOrders(Set<Order> ordersToAdd) {
-        orders.addAll(ordersToAdd);
+    public void addOrder(Order orderToAdd) {
+        orders.add(orderToAdd);
     }
 
     /**
-     * Remove orders in a set from the client's orders.
+     * Checks if the product name appears in the client's set of orders.
      *
-     * @param ordersToRemove A set of orders to be removed.
+     * @param productName The name of the product.
+     * @return True if it does appear; false otherwise.
      */
-    public void removeOrders(Set<Order> ordersToRemove) {
-        orders.removeAll(ordersToRemove);
+    public boolean hasOrder(Name productName) {
+        return orders.stream().anyMatch(order -> order.getProductName().equals(productName));
+    }
+
+    /**
+     * Removes the order with the same product name from the client's set of orders.
+     *
+     * @param productName The name of the product of the order to be removed.
+     * @return The order removed if it exists; null otherwise.
+     */
+    public Order removeOrder(Name productName) {
+        Optional<Order> optionalOrder = orders.stream()
+                .filter(order -> order.getProductName().equals(productName))
+                .findAny();
+
+        if (optionalOrder.isPresent()) {
+            Order orderToRemove = optionalOrder.get();
+            orders.remove(orderToRemove);
+            return orderToRemove;
+        }
+
+        return null;
     }
 
     /**
@@ -148,8 +171,7 @@ public class Client implements Category {
                 && phoneNumber.equals(otherClient.phoneNumber)
                 && email.equals(otherClient.email)
                 && address.equals(otherClient.address)
-                && orders.containsAll(otherClient.orders)
-                && otherClient.orders.containsAll(orders);
+                && orders.equals(otherClient.orders);
     }
 
     @Override

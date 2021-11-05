@@ -11,9 +11,9 @@ import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientDescriptorTest {
-    private Name name = new Name("John Doe");
-    private PhoneNumber phoneNumber = new PhoneNumber("12345678");
-    private AddClientCommand.AddClientDescriptor descriptor =
+    private final Name name = new Name("John Doe");
+    private final PhoneNumber phoneNumber = new PhoneNumber("12345678");
+    private final AddClientCommand.AddClientDescriptor descriptor =
             new AddClientCommand.AddClientDescriptor(name, phoneNumber);
 
     @Test

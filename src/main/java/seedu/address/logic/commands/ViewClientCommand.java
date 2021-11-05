@@ -16,15 +16,12 @@ import seedu.address.model.client.ClientContainsIdPredicate;
  */
 public class ViewClientCommand extends Command {
     public static final String COMMAND_WORD = "view -c";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Views a current client identified by the index number used in the displayed "
                     + "client list.\n"
-                    + "If no such client exists, nothing will be shown\n"
-                    + "Parameters: INDEX (must be a positive integer)"
-                    + "Example usage : "
-                    + COMMAND_WORD
-                    + " 20 ";
+                    + "If no such client exists, nothing will be shown.\n"
+                    + "Parameters: INDEX (must be a positive integer)\n"
+                    + "Example usage : " + COMMAND_WORD + " 2";
 
     private Index index;
 
@@ -34,7 +31,7 @@ public class ViewClientCommand extends Command {
     public ViewClientCommand(ClientContainsIdPredicate predicate) {
         try {
             this.index = Index.fromOneBased(predicate.getId());
-        } catch (IndexOutOfBoundsException ioobe) {
+        } catch (IndexOutOfBoundsException ex) {
             this.index = Index.fromOneBased(Integer.MAX_VALUE);
         }
     }
@@ -49,8 +46,7 @@ public class ViewClientCommand extends Command {
         }
 
         Client client = lastShownList.get(index.getZeroBased());
-
-        return new CommandResult(String.format(Messages.MESSAGE_VIEW_CLIENT, client.getId()),
+        return new CommandResult(String.format(Messages.MESSAGE_VIEW_CLIENT, client.getId(), index.getOneBased()),
                 CommandType.VIEW, client, true);
     }
 

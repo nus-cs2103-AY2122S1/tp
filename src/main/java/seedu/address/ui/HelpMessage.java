@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
  */
 public class HelpMessage extends UiPart<Region> implements SecondPanel {
     private static final String fxml = "HelpMessage.fxml";
-
     private static final String TITLE = "Need help?";
     private static final String HELP_MESSAGE =
             "help: see detailed user guide\n"

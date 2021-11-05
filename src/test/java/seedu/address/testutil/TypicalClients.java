@@ -6,15 +6,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CANNON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DAISY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_NUMBER_BOB;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.commons.Name;
+import seedu.address.model.product.Quantity;
 
 /**
  * A utility class containing a list of {@code Client} objects to be used in tests.
@@ -83,6 +88,8 @@ public class TypicalClients {
             .withPhoneNumber(VALID_PHONE_NUMBER_AMY)
             .withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY)
+            .withOrder(new Name(VALID_NAME_CANNON), new Quantity("1"), LocalDate.MAX)
+            .withOrder(new Name(VALID_NAME_DAISY), new Quantity("2"), LocalDate.MAX)
             .build();
     public static final Client BOB = new ClientBuilder()
             .withName(VALID_NAME_BOB)

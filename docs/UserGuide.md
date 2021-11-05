@@ -87,7 +87,7 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 1. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. You can use
    the [`clear`](#48-clearing-all-data) command to purge all data. <br>
-   ![Ui](images/UiHelpCommand.png)
+   ![Ui](images/UIStartup.png)
 
 1. Refer to the [Features](#4-features) below for details of each command.
 
@@ -151,6 +151,9 @@ The table below explains the general syntax used throughout the user guide.
 * Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+* Extraneous parameters for commands that do take in parameters (such as `edit`) will be ignored.<br>
+  e.g. if the command specifies `edit -c 1 -a asdf -id 5`, the resulting address will be changed to `asdf -id 5`.
+
 #### 3.2.3 Defining Client and Product
 
 **Client** refers to the clients that have bought your products before. Each client must have a **Name** and a
@@ -162,8 +165,8 @@ An **Order** refers to a product that the client has ordered. For each order, th
 
 Parameter | Format |
 |:---:| --- |
-`-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alice Bob`.
-`-pn` | A series of 8 positive numbers from 0 to 9. <br> E.g.: `-pn 12345678`.
+`-n` | Any valid name, only alphabets, numbers and spaces are allowed (applicable for Edit command only). <br> E.g.: `-n Alice Bob`.
+`-pn` | A series of 1 or more positive integers from 0 to 9. <br> E.g.: `-pn 12345678` and `-pn 123` is valid.
 `-e` | Any valid email. <br> E.g.: `-e abc@asdf.com`.
 `-a` | Any valid address, spaces are allowed. <br> E.g.: `-a 12 clementi road`.
 `-o` | Each order requires a product id, quantity and a date field that is either in `YYYY/MM/DD` or `MM/DD` and is identified by its own ID. <br> E.g.: `-o 1 1 1/2` and `-o 3 12 2020/07/09`.
@@ -174,7 +177,7 @@ in your inventory currently. Every product command requires a `-p` parameter.
 
 Parameter | Format |
 |:---:| --- |
-`-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alienware Aurora R12`.
+`-n` | Any valid name, only alphabets, numbers and spaces are allowed (applicable for Edit command only). <br> E.g.: `-n Alienware Aurora R12`.
 `-$` | A valid price, optional to specify the cents (2 decimal places). <br> E.g.: `-$ 10.00` and `-$ 10`.
 `-q` | Any positive integer to specify the quantity. <br> E.g.: `-q 15`.
 
@@ -207,16 +210,24 @@ Format: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 
 > Note: the format of `ORDER` is `PRODUCT_ID QUANTITY DATE`, e.g. `-o 0 10 10/26` represents an order made on 26 Oct of the current year, the product requested has `PRODUCT_ID` = `0` and `QUANTITY` = `10`.
 
-Example: `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, whose
+Example (without orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, 
+whose
 `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road`.
 
-Expected Output:
+Example (with orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road -o 0 10 10/26` adds a new 
+`Client` `Ben`,
+whose `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road` with an `ORDER` of 
+`QUANTITY` `10` of product with `IDENTITY` `0` on `DATE` `26/10/<curr year>`.
+
+Expected Output (without orders):
 ![Ui](images/UIAddClientCommand.png)
+
+> Note: the expected output of an addClient command with orders is similar to the output above except that the orders added will be displayed.
 
 #### 4.2.2 Adding a Product
 
 Adds a product with name, unit price and optional quantity. If quantity is not specified, the number of product is not
-0, but undefined instead.
+0, but undefined instead. Unit price have to only contain 2 decimal places. `-$ 0.2` and `-$ 0.002` would be invalid.
 
 Format: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
@@ -278,15 +289,16 @@ Expected Output:
 
 **:bulb: Notes on `ORDER`:**
 
-* If the client has an order with same `ID`, then that order's other information will be updated with the information
-  in `ORDER`.
-* If the client does not have an order with same `ID`, then that `ORDER` will be added.
-* If the `ORDER`'s `QUANTITY` is 0, then that `ORDER` will be removed.
-* For example, assuming client already has an order `[ ID = 1, QUANTITY = 3, (other information)... ]`, and the
-  input `ORDER`s are `[ ID = 1, QUANTITY = 0, ... ]` and `[ ID = 2, QUANTITY = 10, ... ]`:
-* `[ ID = 1, QUANTITY = 3, ... ]` will be updated to `[ ID = 1, QUANTITY = 0, ... ]` as they have the same `ID`, and
-  since `QUANTITY` is now 0, this `ORDER` will be removed.
-* `[ ID = 2, QUANTITY = 10, ... ]` will be added as the client does not have an order with the same `ID`.
+* If the client has an order with same `Product ID`, then that order's other information will be updated with the
+  information in `ORDER`.
+* If the client does not have an order with same `Product ID`, then that `ORDER` will be added.
+* If the `ORDER`'s `Quantity` is 0, then that `ORDER` will be removed.
+* For example, assuming client already has an order `[ Product ID = 1, Quantity = 3, (other information)... ]`, and the
+  input `ORDER`s are `[ Product ID = 1, Quantity = 0, ... ]` and `[ Product ID = 2, Quantity = 10, ... ]`:
+* `[ Product ID = 1, Quantity = 3, ... ]` will be updated to `[ Product ID = 1, Quantity = 0, ... ]` as they have the
+  same `Product ID`, and since `Quantity` is now 0, this `ORDER` will be removed.
+* `[ Product ID = 2, Quantity = 10, ... ]` will be added as the client does not have an order with the same
+  `Product ID`.
 
 </div>
 
@@ -304,10 +316,17 @@ Expected Output:
 
 ### 4.5 Find
 
-Finds a client or product in Sellah, based on the name specified in `-n`.
+Finds a client or product in Sellah based on the name. If there are no matching name, Sellah will show an empty list.
 
-An error message will be displayed if the format of a parameter is incorrect. The name you provided must fully match
-(case-insensitive) the name of the client or product in Sellah, otherwise you will receive an error message.
+An error message will be displayed if the format of a parameter is incorrect. 
+
+The name you provide must fully match (case-insensitive) the name of the client or product in Sellah.
+
+Example : `find -c ben` will match with `Ben`, but will not match with `Benson`.
+
+If multiple keywords are specified, any name matching the keywords will be displayed.
+
+Example: `find -c alice ben charlie` will match with `alice`, `ben`, and `charlie`.
 
 #### 4.5.1 Finding a Client
 
@@ -315,7 +334,7 @@ Finds a client in Sellah.
 
 Format : `find -c NAME`
 
-Example : `find -c john` Shows a list of all clients with the `NAME` `john` in Sellah.
+Example : `find -c Benson` Shows a list of all clients with the `NAME` `Benson` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindClientCommand.png)
@@ -326,15 +345,15 @@ Finds a product in Sellah.
 
 Format : `find -p NAME`
 
-Example : `find -c phone` Shows a list of all products with the `NAME` `phone` in Sellah.
+Example : `find -p apple` Shows a list of all products with the `NAME` `apple` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindProductCommand.png)
 
 ### 4.6 List
 
-Displays a list of all the clients or products in Sellah. If there are no clients or products, a message will inform you
-that Sellah has no clients or product, depending on whether you are listing client or product.
+Displays a list of all the clients or products in Sellah. If there are no clients or products, Sellah will show
+an empty list.
 
 An error message will be displayed if the format of a parameter is incorrect.
 
@@ -376,10 +395,10 @@ If any of the details were not specified, a placeholder value will be displayed 
 
 Format : `view -c INDEX`
 
-Example : `view -c 20` Views all the details of the client with `INDEX` of `20`.
+Example : `view -c 2` Views all the details of the client with `INDEX` of `2`.
 
 Expected Output:
-![Ui](images/UIViewClientCommand.png)
+![Ui](images/UiViewCommand.png)
 
 #### 4.7.2 Viewing a Product
 

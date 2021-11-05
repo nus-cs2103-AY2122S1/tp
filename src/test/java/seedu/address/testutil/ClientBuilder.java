@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
+import seedu.address.model.product.Quantity;
 
 /**
  * A utility class to help with building Client objects.
@@ -24,7 +26,7 @@ public class ClientBuilder {
     private PhoneNumber phoneNumber;
     private Email email;
     private Address address;
-    private Set<Order> orders;
+    private final Set<Order> orders;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.
@@ -87,6 +89,14 @@ public class ClientBuilder {
      */
     public ClientBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Add an order to {@code Orders} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withOrder(Name name, Quantity quantity, LocalDate time) {
+        this.orders.add(new Order(name, quantity, time));
         return this;
     }
 

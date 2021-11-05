@@ -1,11 +1,14 @@
 package seedu.address.model.order;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.product.Quantity.QUANTITY_ZERO;
 
 import java.time.LocalDate;
 
 import seedu.address.model.Model;
 import seedu.address.model.commons.ID;
+import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 
@@ -13,8 +16,6 @@ import seedu.address.model.product.Quantity;
  * Represents an Order in Sellah.
  */
 public class Order {
-    public static final String REGEX = "\\d+ \\d+ (\\d{4}/)?\\d{0,2}/\\d{0,2}";
-
     public static final String MESSAGE_CONSTRAINTS =
             "Please follow the format for orders: -o PRODUCT_ID QUANTITY TIME\n"
                     + "Valid formats of time: MM/DD, YYYY/MM/DD\n"
@@ -23,23 +24,23 @@ public class Order {
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
 
-    private static final Quantity QUANTITY_ZERO = new Quantity("0");
+    public static final String VALIDATION_REGEX = "\\d+ \\d+ (\\d{4}/)?\\d{0,2}/\\d{0,2}";
 
-    public final ID id;
-    public final Quantity quantity;
-    public final LocalDate time;
+    private final Name productName;
+    private final Quantity quantity;
+    private final LocalDate time;
 
     /**
      * Constructor of {@code Order}
      */
     public Order(ID id, Quantity quantity, LocalDate time, Model model) {
+        requireAllNonNull(id, quantity, time, model);
         checkArgument(isValidProductID(id, model), MESSAGE_CONSTRAINTS_ID);
 
         Product product = model.getProductById(id);
-
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
-        this.id = id;
+        productName = product.getName();
         this.quantity = quantity;
         this.time = time;
     }
@@ -47,10 +48,22 @@ public class Order {
     /**
      * Constructor of {@code Order}, assume attributes to be valid.
      */
-    public Order(ID id, Quantity quantity, LocalDate time) {
-        this.id = id;
+    public Order(Name productName, Quantity quantity, LocalDate time) {
+        this.productName = productName;
         this.quantity = quantity;
         this.time = time;
+    }
+
+    public Name getProductName() {
+        return productName;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
+    public LocalDate getTime() {
+        return time;
     }
 
     private static boolean isValidProductID(ID id, Model model) {
@@ -76,12 +89,12 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return id.equals(otherOrder.id) && quantity.equals(otherOrder.quantity) && time.equals(otherOrder.time);
+        return productName.equals(otherOrder.productName);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return productName.hashCode();
     }
 
     /**
@@ -89,6 +102,6 @@ public class Order {
      */
     @Override
     public String toString() {
-        return "[ Product ID: " + id + ", Quantity: " + quantity + ", Time " + time + "]";
+        return "[ Product Name: " + productName + ", Quantity: " + quantity + ", Time " + time + "]";
     }
 }

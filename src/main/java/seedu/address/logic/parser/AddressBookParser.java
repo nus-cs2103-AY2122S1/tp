@@ -30,7 +30,6 @@ import seedu.address.model.Model;
  * Parses user input.
  */
 public class AddressBookParser {
-
     /**
      * Used for initial separation of command word and args.
      */

@@ -12,8 +12,8 @@ import seedu.address.testutil.TypicalClients;
 import seedu.address.testutil.TypicalProducts;
 
 public class ClearCommandTest {
-    private CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, CommandType.CLEAR,
-            null, false);
+    private final CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS,
+            CommandType.CLEAR, null, false);
 
     @Test
     public void execute_emptyAddressBook_success() {

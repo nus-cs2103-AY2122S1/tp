@@ -22,9 +22,7 @@ public class ClientContainsIdPredicate implements Predicate<Client> {
 
     @Override
     public boolean test(Client client) {
-            return id.stream()
-                    .anyMatch(id ->
-                            StringUtil.containsWordIgnoreCase(client.getId().toString(), id));
+        return id.stream().anyMatch(id -> StringUtil.containsWordIgnoreCase(client.getId().toString(), id));
     }
 
     @Override

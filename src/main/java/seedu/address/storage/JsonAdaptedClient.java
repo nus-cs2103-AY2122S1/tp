@@ -33,15 +33,17 @@ class JsonAdaptedClient {
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phoneNumber") String phoneNumber,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("ordered") List<JsonAdaptedOrder> ordered) {
+    public JsonAdaptedClient(@JsonProperty("name") String name,
+                             @JsonProperty("phoneNumber") String phoneNumber,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("orders") List<JsonAdaptedOrder> orders) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        if (ordered != null) {
-            this.ordered.addAll(ordered);
+        if (orders != null) {
+            this.ordered.addAll(orders);
         }
     }
 
@@ -69,46 +71,47 @@ class JsonAdaptedClient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
     public Client toModelType() throws IllegalValueException {
+        final Name modelName;
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
+        } else if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        } else {
+            modelName = new Name(name);
         }
-        final Name modelName = new Name(name);
 
+        final PhoneNumber modelPhoneNumber;
         if (phoneNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PhoneNumber.class.getSimpleName()));
-        }
-        if (!PhoneNumber.isValidPhoneNumber(phoneNumber)) {
+        } else if (!PhoneNumber.isValidPhoneNumber(phoneNumber)) {
             throw new IllegalValueException(PhoneNumber.MESSAGE_CONSTRAINTS);
+        } else {
+            modelPhoneNumber = new PhoneNumber(phoneNumber);
         }
-        final PhoneNumber modelPhoneNumber = new PhoneNumber(phoneNumber);
 
         final Email modelEmail;
         if (email == null) {
             modelEmail = null;
-        } else if (Email.isValidEmail(email)) {
-            modelEmail = new Email(email);
-        } else {
+        } else if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        } else {
+            modelEmail = new Email(email);
         }
 
         final Address modelAddress;
         if (address == null) {
             modelAddress = null;
-        } else if (Address.isValidAddress(address)) {
-            modelAddress = new Address(address);
-        } else {
+        } else if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAddress = new Address(address);
         }
 
-        final List<Order> clientOrders = new ArrayList<>();
+        final Set<Order> modelOrders = new HashSet<>();
         for (JsonAdaptedOrder order : ordered) {
-            clientOrders.add(order.toModelType());
+            modelOrders.add(order.toModelType());
         }
-        final Set<Order> modelOrders = new HashSet<>(clientOrders);
 
         return new Client(modelName, modelPhoneNumber, modelEmail, modelAddress, modelOrders);
     }

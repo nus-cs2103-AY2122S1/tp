@@ -8,16 +8,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is unique.
  */
 public class ID {
-    public static final String MESSAGE_CONSTRAINTS =
-            "ID should only contain numbers and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "ID should only contain numbers and it should not be blank";
 
-    /**
-     * The quantity should contain digits from 0 to 9 only.
-     */
+    // The quantity should contain digits from 0 to 9 only.
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    private static int clientIDCounter = 0;
-    private static int productIDCounter = 0;
+    private static int clientIDCounter = 1;
+    private static int productIDCounter = 1;
 
     private final int id;
 
@@ -33,7 +30,6 @@ public class ID {
     public ID(String id) {
         requireNonNull(id);
         checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
-
         this.id = Integer.parseInt(id);
     }
 
@@ -62,6 +58,14 @@ public class ID {
      */
     public static boolean isValidId(String id) {
         return id.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Resets the counter. To be used with clear command.
+     */
+    public static void resetIdCounter() {
+        clientIDCounter = 1;
+        productIDCounter = 1;
     }
 
     @Override

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.Arrays;
 
@@ -12,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,6 +19,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsIdPredicate;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListClientCommand.
  */
@@ -28,8 +29,8 @@ public class ViewClientCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
         Client client1 = new Client(new Name("Test1"), new PhoneNumber("1"), null, null, null);
         Client client2 = new Client(new Name("Test2"), new PhoneNumber("2"), null, null, null);
         Client client3 = new Client(new Name("Test3"), new PhoneNumber("3"), null, null, null);

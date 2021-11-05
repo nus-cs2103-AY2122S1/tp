@@ -27,5 +27,4 @@ public class ClientContainsKeywordsPredicate implements Predicate<Client> {
                 || (other instanceof ClientContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((ClientContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }

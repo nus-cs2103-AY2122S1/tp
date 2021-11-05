@@ -8,7 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UnitPrice {
     public static final String MESSAGE_CONSTRAINTS =
-            "Unit prices should only contain numbers and optionally '.' for cents, and it should not be blank";
+            "Unit price should only contain numbers and it should not be blank.\n"
+                    + "Optionally, '.' can be used for cents, which must be followed by exactly 2 numbers "
+                    + "(2 decimal points)\n";
 
     /**
      * The unit price should contain digits from 0 to 9 only, and optionally '.' for cents.

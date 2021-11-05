@@ -9,7 +9,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +28,8 @@ import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
 import seedu.address.logic.commands.EditProductCommand;
 import seedu.address.logic.commands.EditProductCommand.EditProductDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindClientCommand;
+import seedu.address.logic.commands.FindProductCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClientCommand;
 import seedu.address.logic.commands.ListProductCommand;
@@ -36,8 +41,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsIdPredicate;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductContainsIdPredicate;
+import seedu.address.model.product.ProductContainsKeywordsPredicate;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
@@ -167,23 +174,23 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListProductCommand.COMMAND_WORD + " 3", model) instanceof ListProductCommand);
     }
 
-    //    @Test
-    //    public void parseCommand_findClient() throws Exception {
-    //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-    //        FindClientCommand command = (FindClientCommand) parser.parseCommand(
-    //                FindClientCommand.COMMAND_WORD + " " +
-    //                        keywords.stream().collect(Collectors.joining(" ")), model);
-    //        assertEquals(new FindClientCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    //    }
+    @Test
+    public void parseCommand_findClient() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindClientCommand command = (FindClientCommand) parser.parseCommand(
+                FindClientCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")), model);
+        assertEquals(new FindClientCommand(new ClientContainsKeywordsPredicate(keywords)), command);
+    }
 
-    //    @Test
-    //    public void parseCommand_findProduct() throws Exception {
-    //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-    //        FindProductCommand command = (FindProductCommand) parser.parseCommand(
-    //                FindProductCommand.COMMAND_WORD + " " +
-    //                        keywords.stream().collect(Collectors.joining(" ")), model);
-    //        assertEquals(new FindProductCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    //    }
+    @Test
+    public void parseCommand_findProduct() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindProductCommand command = (FindProductCommand) parser.parseCommand(
+                FindProductCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")), model);
+        assertEquals(new FindProductCommand(new ProductContainsKeywordsPredicate(keywords)), command);
+    }
 
     @Test
     public void parseCommand_help() throws Exception {
@@ -211,14 +218,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand("", model));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("", model));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
-                -> parser.parseCommand("unknownCommand", model));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", model));
     }
 
     public static class ModelStub extends ModelManager {

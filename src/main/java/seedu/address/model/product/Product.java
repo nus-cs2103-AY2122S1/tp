@@ -33,6 +33,7 @@ public class Product implements Category {
         this.name = name;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
+
         Logger logger = Logger.getLogger("create product object");
         logger.info("new product created");
     }
