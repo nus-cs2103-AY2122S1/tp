@@ -110,7 +110,7 @@ public class EditStudentCommandTest {
         assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND,
                 DIFFERENT_MODULE_NAME));
     }
-    
+
     @Test
     public void execute_duplicateTeleHandle_failure() {
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
