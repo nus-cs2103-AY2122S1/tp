@@ -59,4 +59,36 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
     }
+
+    @Test
+    public void equals_twoSameObjects_success() {
+        Email email = new Email("jay@gmail.com");
+        assertTrue(email.equals(email));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithSameEmail_success() {
+        Email email1 = new Email("jay@gmail.com");
+        Email email2 = new Email("jay@gmail.com");
+        assertTrue(email1.equals(email2));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithDifferentEmail_falseOutput() {
+        Email email1 = new Email("jay@gmail.com");
+        Email email2 = new Email("atin@gmail.com");
+        assertFalse(email1.equals(email2));
+    }
+
+    @Test
+    public void toString_aValidInput_success() {
+        Email email = new Email("jay@gmail.com");
+        assertTrue(email.toString().equals("jay@gmail.com"));
+    }
+
+    @Test
+    public void hashCode_validInput_correctOutput() {
+        Email email = new Email("jay@gmail.com");
+        assertTrue(email.hashCode() == -975207021);
+    }
 }

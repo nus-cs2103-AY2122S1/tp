@@ -45,14 +45,14 @@ public class TelegramTest {
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithSameName_success() {
+    public void equals_twoDifferentObjectsWithSameTelegramHandles_success() {
         Telegram telegram1 = new Telegram("Jai2501");
         Telegram telegram2 = new Telegram("Jai2501");
         assertTrue(telegram1.equals(telegram2));
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithDifferentName_falseOutput() {
+    public void equals_twoDifferentObjectsWithDifferentTelegramHandles_falseOutput() {
         Telegram telegram1 = new Telegram("Jai2501");
         Telegram telegram2 = new Telegram("Atin1234");
         assertFalse(telegram1.equals(telegram2));
