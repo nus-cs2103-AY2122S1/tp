@@ -12,13 +12,13 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=pualixue&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=pualixue&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements implemented**:
-  * Implemented edit doctors functionality [#73](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/73)
-  * Implemented `Appointment` class which encapsulates the patient, doctor, date, session and remark of an appointment [#95](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/95)
-  * Implemented edit appointments functionality [#121](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/121)
-  * Implemented the logic for determining clashing appointments [#129](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/129)
+  * Implemented edit doctors functionality and added test cases [#73](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/73)
+  * Implemented `Appointment` class which encapsulates the patient, doctor, date, session and remark of an appointment and added test cases [#95](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/95)
+  * Implemented edit appointments functionality and added test cases [#121](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/121)
+  * Implemented the logic for determining clashing appointments and added test cases [#129](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/129)
 
 * **Enhancements to existing features**:
-  * Allowed adding and deleting individual tags from a patient's record instead of overwriting all existing tags [#40](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/40)
+  * Allowed adding and deleting individual tags from a patient's record instead of overwriting all existing tags and added test cases [#40](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/40)
 
 * **Contributions to the UG**:
   * Updated documentation for adding and deleting individual tags commands [\#40](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/40)
@@ -38,7 +38,7 @@ Given below are my contributions to the project.
   * Reviewed, raised and fixed issues throughout the DG
 
 * **Contributions to team-based tasks**:
-  * Ensured code quality and assigned reviewers for pull requests
+  * Ensured code quality and assigned reviewers for Pull Requests
   * Reviewed, raised and fixed issues in the User/Developer Guide
   * Created `Appointment` class and relevant methods so that features related to appointments can be implemented [#95](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/95)
   * Updated the User Guide template to have less merge conflicts [#106](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/106)
