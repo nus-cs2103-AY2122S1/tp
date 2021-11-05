@@ -864,7 +864,7 @@ However, the Fees Calculator will not account for any changes to lessons that ha
 
 Note that outstanding fees will not change with the following cases:
 
-* Changing the lesson's rate. The change in lesson rate will only take effect from the date and time of change.
+* Changing the lesson's rates. The change in lesson rates will only take effect from the date and time of change.
 * Cancelling or uncancelling a lesson date that has passed.
 * Changing the start or end date of the lesson.
 * Changing the lesson's timing.
