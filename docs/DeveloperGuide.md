@@ -1273,24 +1273,67 @@ testers are expected to do more *exploratory* testing.
 1. Exiting using the application's exit button
 
     1. Test case: Click on the file button on the top left of the application. A dropdown list with one option of `exit` should be present. Click on that button.<br>
+       <center>
+       <img src="images/DeveloperGuideImage/exit_ui.png"/>
+       </center><br>
        Expected: The UI should display the elements correctly and the window should close.<br>
-<center>
-<img src="images/DeveloperGuideImage/exit_ui.png"/>
-</center>
 
 #### Managing data externally
 
+1. Loading the application with no data files present
+
+    1. Prerequisites: There should be no files present in the directory you are going to work with, apart from `TuitiONE.jar`.
+
+    1. Test case: Run the application.<br>
+       Expected: Upon UI loading, verify the directory has these few files `tuitione.log.0`, `preferences.json`, `config.json` (if you also have `tuitione.log.0.lck`, that is okay as well).
+
+   1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+      Expected (continued): After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
+
 1. Verifying that data is stored
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+
+    1. Test case: Perform a positive (successful) insertion/deletion/modification of the entities. See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html#features) for more on the relevant commands that can perform such. After such, verify the `./data/tuitione.json` file to see if the contents match the changes made by your command.<br>
+       Expected: After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
 
 1. Modifying saved data, but preserving its correctness to the application's constraints
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+
+    1. Test case: Modify an entry in `./data/tuitione.json` that conforms to the constraints mentioned in the application. Here is a summary of some critical constraints:<br>
+       <div markdown="span" class="alert alert-info">
+
+       :information_source: **Note:** 
+       
+       * Particulars in a `student` object must conform to the constraints of the application.
+
+       * Particulars in a `lesson` object must conform to the constraints of the application.
+
+       * The field `lessonCodes` in a `student` represents the `Lessons` the student is enrolled in an encoded form. A lesson can be converted to its encoded form using the details in a lesson and creating a string with the format `subject-grade-day-startTime`. A `lessonCode` of `"Math-P4-Wed-1800"` represents a json `lesson` of:
+         ``` json
+         {
+           "subject" : "Math",
+           "grade" : "P4",
+           "startTime" : "1800",
+           "day" : "Wed",
+           "price" : 15.9 # can be any amount here that meets the price constraints
+         }
+         ```
+         Do note once again that enrolling a student using the data storage must fulfill the enrollment constraints.
+       </div><br>
+       <br> See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the remaining constraints present.<br>
+       Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
+
+    1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+       Expected (continued): After the UI responds, verify that `./data/tuitione.json` is not modified, and holds the changes you made in the initial step.
 
 1. Modifying saved data, but losing its correctness to the application's constraints
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
+    1. Test case: Modify an entry in `./data/tuitione.json` that violates the entity and/or relationship constraints, see the previous test scenario's explanation to perform a counter modification to the data file.<br>
+       Expected: Upon application and UI load up, the application should be presented with no data present, i.e. no lessons or students. The content in `./data/tuitione.json` should not be modified yet (see next step).
 
-
+    1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+       Expected (continued): After the UI responds, verify that `./data/tuitione.json` holds no entities.
