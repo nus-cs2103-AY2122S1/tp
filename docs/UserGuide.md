@@ -37,8 +37,7 @@ _text_ | Caption for images.
 :information_source: | Indication that the following text is a note.
 :bulb: | Indication that the following text is a tip.
 :exclamation: | Indication that the following text is important.
-
-
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -104,30 +103,62 @@ No. | Section | Representation
 <div style="page-break-after: always;"></div>
 
 ## Features
-This section describes the available features in TAB.
+This section describes the available features in TAB. 
+The features are categorised into the different categories as follows:
 
-<div markdown="block" class="alert alert-info">
+* [Getting Help](#getting-help)
+* [Managing Students](#managing-students)
+* [Managing Lessons](#managing-lessons)
+* [Managing Lesson Fees](#managing-lesson-fees)
+* [Managing Your Schedule](#managing-your-schedule)
+* [Managing Data](#managing-data)
+* [Miscellaneous Commands](#miscellaneous-commands)
 
-**:information_source: Notes about the command format:**<br>
+--------------------------------------------------------------------------------------------------------------------
+
+### Overview of the command format
+This section explains the command format used for TAB's commands.<br/>
+
+Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
+
+```COMMAND_WORD PREAMBLE PARAMETER_PREFIX/PARAMETER…​```
+
+|Component|Description|
+|---------|-----------|
+|Command word|The word that specifies which action you want TAB to execute.|
+|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student or lesson indices for commands that require them. The preamble may or may not be empty depending on the command.|
+|Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
+|Parameter| An input provided by the user for the execution of the command.|
+
+An example of a command in TAB:
+![Command format](images/CommandFormat.png)
+
+
+#### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-  
-* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.
+
+* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
-  
+
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+#### Notes about parameters
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Each parameter prefix is separated from the others with a space.<br/>
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
+  
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `calendar`, `exit`, `clear` etc.) are not valid.<br>
   e.g. `help 123` is not a valid command.
 
@@ -137,9 +168,9 @@ This section describes the available features in TAB.
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
-</div>
-
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
@@ -862,6 +893,7 @@ UX | User Experience - The experience a user has when using the app.
 <br />
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Command Summary
