@@ -35,7 +35,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;

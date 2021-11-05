@@ -13,15 +13,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.CurrentPlan;
 import seedu.address.model.client.DisposableIncome;
@@ -91,27 +92,27 @@ public class PrefixMapper {
 
     // PrefixMapperElement wrapping the different function together
     private static final PrefixMapperElement<ClientId> PME_CLIENTID = new PrefixMapperElement<>(GET_CLIENTID,
-            null, PARSE_CLIENTID, "Client Id");
+            null, PARSE_CLIENTID, "Client Id", null);
     private static final PrefixMapperElement<Name> PME_NAME = new PrefixMapperElement<>(GET_NAME,
-            EDIT_SET_NAME, PARSE_NAME, "Name");
+            EDIT_SET_NAME, PARSE_NAME, "Name", Name.DEFAULT_VALUE);
     private static final PrefixMapperElement<Phone> PME_PHONE = new PrefixMapperElement<>(GET_PHONE,
-            EDIT_SET_PHONE, PARSE_PHONE, "Phone");
+            EDIT_SET_PHONE, PARSE_PHONE, "Phone", Phone.DEFAULT_VALUE);
     private static final PrefixMapperElement<Email> PME_EMAIL = new PrefixMapperElement<>(GET_EMAIL,
-            EDIT_SET_EMAIL, PARSE_EMAIL, "Email");
+            EDIT_SET_EMAIL, PARSE_EMAIL, "Email", Email.DEFAULT_VALUE);
     private static final PrefixMapperElement<Address> PME_ADDRESS = new PrefixMapperElement<>(GET_ADDRESS,
-            EDIT_SET_ADDRESS, PARSE_ADDRESS, "Address");
+            EDIT_SET_ADDRESS, PARSE_ADDRESS, "Address", Address.DEFAULT_VALUE);
     private static final PrefixMapperElement<RiskAppetite> PME_RISKAPPETITE = new PrefixMapperElement<>(
-            GET_RISKAPPETITE, EDIT_SET_RISKAPPETITE, PARSE_RISKAPPETITE, "Risk Appetite");
+            GET_RISKAPPETITE, EDIT_SET_RISKAPPETITE, PARSE_RISKAPPETITE, "Risk Appetite", RiskAppetite.DEFAULT_VALUE);
     private static final PrefixMapperElement<DisposableIncome> PME_DISPOSABLEINCOME = new PrefixMapperElement<>(
-            GET_DISPOSABLEINCOME, EDIT_SET_DISPOSABLEINCOME,
-            PARSE_DISPOSABLEINCOME, "Disposable Income");
+            GET_DISPOSABLEINCOME, EDIT_SET_DISPOSABLEINCOME, PARSE_DISPOSABLEINCOME,
+            "Disposable Income", DisposableIncome.DEFAULT_VALUE);
     private static final PrefixMapperElement<LastMet> PME_LASTMET = new PrefixMapperElement<>(GET_LASTMET,
-            EDIT_SET_LASTMET, PARSE_LASTMET, "Last Met");
+            EDIT_SET_LASTMET, PARSE_LASTMET, "Last Met", LastMet.DEFAULT_VALUE);
     private static final PrefixMapperElement<NextMeeting> PME_NEXTMEETING = new PrefixMapperElement<>(GET_NEXTMEETING,
-            EDIT_SET_NEXTMEETING, PARSE_NEXTMEETING, "Next Meeting");
+            EDIT_SET_NEXTMEETING, PARSE_NEXTMEETING, "Next Meeting", NextMeeting.NO_NEXT_MEETING);
     private static final PrefixMapperElement<CurrentPlan> PME_CURRENTPLAN = new PrefixMapperElement<>(GET_CURRENTPLAN,
-            EDIT_SET_CURRENTPLAN, PARSE_CURRENTPLAN, "Current Plan");
-    private static final PrefixMapperElement<Tag> PME_TAG = new PrefixMapperElement<>(null, null, null, "Tag");
+            EDIT_SET_CURRENTPLAN, PARSE_CURRENTPLAN, "Current Plan", CurrentPlan.DEFAULT_VALUE);
+    private static final PrefixMapperElement<Tag> PME_TAG = new PrefixMapperElement<>(null, null, null, "Tag", null);
 
     // Maps prefix with their respective functions
     private static final Map<Prefix, PrefixMapperElement<? extends IgnoreNullComparable<?>>> PREFIX_MAP = Map.ofEntries(
@@ -140,6 +141,10 @@ public class PrefixMapper {
         return PREFIX_MAP.get(prefix).parseAndEditSet();
     }
 
+    public static BiConsumer<EditClientDescriptor, Optional<String>> parseAndEditSetDefaultFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).parseAndEditSetDefault();
+    }
+
     public static BiFunction<Client, Client, Integer> compareFunction(Prefix prefix, SortDirection sortDirection) {
         return PREFIX_MAP.get(prefix).compareFunction(sortDirection);
     }
@@ -153,24 +158,36 @@ public class PrefixMapper {
         private final BiConsumer<EditClientDescriptor, T> editSetFunction;
         private final Function<String, T> parseFunction;
         private final String name;
+        private final String defaultValue;
 
         private PrefixMapperElement(Function<Client, T> getAttributeFunction,
                                     BiConsumer<EditClientDescriptor, T> editSetFunction,
                                     Function<String, T> parseFunction,
-                                    String name) {
+                                    String name,
+                                    String defaultValue) {
             this.getAttributeFunction = getAttributeFunction;
             this.editSetFunction = editSetFunction;
             this.parseFunction = parseFunction;
             this.name = name;
+            this.defaultValue = defaultValue;
         }
 
         /**
-         * Returns a {@code BiConsumer<EditClientDescriptor, String} that takes a {@code EditClientDescriptor}
+         * Returns a {@code BiConsumer<EditClientDescriptor, String>} that takes a {@code EditClientDescriptor}
          * to set with the result parsed from {@code parse_attribute} with the given {@code String}
          */
         private BiConsumer<EditClientDescriptor, String> parseAndEditSet() {
             return (editClientDescriptor, s) ->
                     editSetFunction.accept(editClientDescriptor, parseFunction.apply(s));
+        }
+
+        /**
+         * Returns a {@code BiConsumer<EditClientDescriptor, Optional<String>>} that takes a
+         * {@code EditClientDescriptor} to set with the result parsed from {@code parse_attribute}
+         * with the given {@code String}. If {@code String} is not present then default value is used.
+         */
+        private BiConsumer<EditClientDescriptor, Optional<String>> parseAndEditSetDefault() {
+            return (editClientDescriptor, s) -> parseAndEditSet().accept(editClientDescriptor, s.orElse(defaultValue));
         }
 
         /**

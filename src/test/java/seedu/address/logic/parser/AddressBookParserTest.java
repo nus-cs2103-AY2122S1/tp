@@ -20,7 +20,6 @@ import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.Function;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,6 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -44,6 +42,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
@@ -64,7 +63,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Function<ClientId, Client> clientFunction = new ClientBuilder().buildFunction();
+        EditClientDescriptor clientFunction = new ClientBuilder().buildFunction();
         Client client = new ClientBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(ClientUtil.getAddCommand(client));
         assertEquals(new AddCommand(clientFunction), command);

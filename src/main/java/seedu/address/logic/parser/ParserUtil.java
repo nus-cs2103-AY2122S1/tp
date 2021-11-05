@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.StringUtil.isEqualIgnoreCase;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_CONFIRMATION_FAIL;
 
 import java.util.Collection;
@@ -148,7 +147,7 @@ public class ParserUtil {
     public static NextMeeting parseNextMeeting(String nextMeeting) throws ParseException {
         requireNonNull(nextMeeting);
         String trimmedNextMeeting = nextMeeting.trim();
-        if (isEqualIgnoreCase(trimmedNextMeeting, NextMeeting.NO_NEXT_MEETING) || trimmedNextMeeting.isEmpty()) {
+        if (trimmedNextMeeting.equalsIgnoreCase(NextMeeting.NO_NEXT_MEETING) || trimmedNextMeeting.isEmpty()) {
             return NextMeeting.NULL_MEETING;
         }
 

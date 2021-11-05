@@ -410,12 +410,6 @@ public class ParserUtilTest {
         }
 
         @Override
-        public void addTag(Tag tag) {
-            requireNonNull(tag);
-            tagsAdded.add(tag);
-        }
-
-        @Override
         public Tag getTag(String tagName) {
             return new Tag(tagName);
         }

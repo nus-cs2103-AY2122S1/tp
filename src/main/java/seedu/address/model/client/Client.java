@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -220,5 +222,238 @@ public class Client {
 
     public NextMeeting getNextMeeting() {
         return nextMeeting;
+    }
+
+    /**
+     * Stores the details to edit the client with. Each non-empty field value will replace the
+     * corresponding field value of the client.
+     */
+    public static class EditClientDescriptor {
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private Address address;
+        private RiskAppetite riskAppetite;
+        private DisposableIncome disposableIncome;
+        private Set<Tag> tags;
+        private LastMet lastMet;
+        private NextMeeting nextMeeting;
+        private CurrentPlan currentPlan;
+
+        public EditClientDescriptor() {
+        }
+
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public EditClientDescriptor(EditClientDescriptor toCopy) {
+            setName(toCopy.name);
+            setPhone(toCopy.phone);
+            setEmail(toCopy.email);
+            setAddress(toCopy.address);
+            setDisposableIncome(toCopy.disposableIncome);
+            setRiskAppetite(toCopy.riskAppetite);
+            setLastMet(toCopy.lastMet);
+            setNextMeeting(toCopy.nextMeeting);
+            setCurrentPlan(toCopy.currentPlan);
+            setDisposableIncome(toCopy.disposableIncome);
+            setRiskAppetite(toCopy.riskAppetite);
+            setTags(toCopy.tags);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome,
+                    currentPlan, lastMet, nextMeeting, tags);
+        }
+
+        public Optional<Name> getName() {
+            return Optional.ofNullable(name);
+        }
+
+        public void setName(Name name) {
+            this.name = name;
+        }
+
+        public Optional<Phone> getPhone() {
+            return Optional.ofNullable(phone);
+        }
+
+        public void setPhone(Phone phone) {
+            this.phone = phone;
+        }
+
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
+
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        public Optional<LastMet> getLastMet() {
+            return Optional.ofNullable(lastMet);
+        }
+
+        public void setLastMet(LastMet lastMet) {
+            this.lastMet = lastMet;
+        }
+
+        public Optional<NextMeeting> getNextMeeting() {
+            return Optional.ofNullable(nextMeeting);
+        }
+
+        public void setNextMeeting(NextMeeting nextMeeting) {
+            this.nextMeeting = nextMeeting;
+        }
+
+        public Optional<CurrentPlan> getCurrentPlan() {
+            return Optional.ofNullable(currentPlan);
+        }
+
+        public void setCurrentPlan(CurrentPlan currentPlan) {
+            this.currentPlan = currentPlan;
+        }
+
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        public Optional<RiskAppetite> getRiskAppetite() {
+            return Optional.ofNullable(riskAppetite);
+        }
+
+        public void setRiskAppetite(RiskAppetite riskAppetite) {
+            this.riskAppetite = riskAppetite;
+        }
+
+        public Optional<DisposableIncome> getDisposableIncome() {
+            return Optional.ofNullable(disposableIncome);
+        }
+
+        public void setDisposableIncome(DisposableIncome disposableIncome) {
+            this.disposableIncome = disposableIncome;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+
+        /**
+         * Creates and returns a {@code Client} with the details of {@code clientToEdit}
+         * edited with {@code editClientDescriptor}.
+         */
+        public static Client createEditedClient(Client clientToEdit, EditClientDescriptor editClientDescriptor) {
+            assert clientToEdit != null;
+
+            ClientId oldClientId = clientToEdit.getClientId();
+            Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
+            Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
+            Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
+            Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
+            RiskAppetite updateRiskAppetite = editClientDescriptor.getRiskAppetite()
+                    .orElse(clientToEdit.getRiskAppetite());
+            DisposableIncome updatedDisposableIncome = editClientDescriptor.getDisposableIncome()
+                    .orElse(clientToEdit.getDisposableIncome());
+            CurrentPlan updatedCurrentPlan = editClientDescriptor.getCurrentPlan()
+                    .orElse(clientToEdit.getCurrentPlan());
+            LastMet updatedLastMet = editClientDescriptor.getLastMet().orElse(clientToEdit.getLastMet());
+            NextMeeting tempUpdatedNextMeeting = editClientDescriptor.getNextMeeting()
+                    .orElse(clientToEdit.getNextMeeting());
+            NextMeeting updatedNextMeeting = tempUpdatedNextMeeting.copyNextMeeting();
+            if (!updatedNextMeeting.isNullMeeting()) {
+                updatedNextMeeting.setWithWho(updatedName);
+
+            }
+            Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
+
+            return new Client(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,
+                    updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
+        }
+
+        /**
+         * Creates and returns a {@code Client} with the {@code LastMet} date being replaced by
+         * the {@code NextMeeting} date and {@code NextMeeting} being set to {@code NullMeeting}
+         */
+        public static Client createEditedMeetingOverClient(Client clientToEdit) {
+            assert clientToEdit != null;
+
+            ClientId oldClientId = clientToEdit.getClientId();
+            Name oldName = clientToEdit.getName();
+            Email oldEmail = clientToEdit.getEmail();
+            Phone oldPhone = clientToEdit.getPhone();
+            Address oldAddress = clientToEdit.getAddress();
+            RiskAppetite oldRiskAppetite = clientToEdit.getRiskAppetite();
+            DisposableIncome oldDisposableIncome = clientToEdit.getDisposableIncome();
+            CurrentPlan oldCurrentPlan = clientToEdit.getCurrentPlan();
+            Set<Tag> oldTags = clientToEdit.getTags();
+
+            LastMet updatedLastMet = clientToEdit.getLastMet().getLaterLastMet(
+                    clientToEdit.getNextMeeting().convertToLastMet()
+            );
+            NextMeeting updatedNextMeeting = NextMeeting.NULL_MEETING;
+
+
+            return new Client(oldClientId, oldName, oldPhone, oldEmail, oldAddress, oldRiskAppetite,
+                    oldDisposableIncome, oldCurrentPlan, updatedLastMet, updatedNextMeeting, oldTags);
+        }
+
+        /**
+         * Returns a new {@code Client} with the given {@code ClientId} and attributes set
+         * in this {@code EditClientDescriptor}.
+         */
+        public Client createClient(ClientId clientId) {
+            return new Client(clientId, name, phone, email, address, riskAppetite, disposableIncome,
+                    currentPlan, lastMet, nextMeeting, tags);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditClientDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditClientDescriptor e = (EditClientDescriptor) other;
+
+            return getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getLastMet().equals(e.getLastMet())
+                    && getNextMeeting().equals(e.getNextMeeting())
+                    && getCurrentPlan().equals(e.getCurrentPlan())
+                    && getDisposableIncome().equals(e.getDisposableIncome())
+                    && getRiskAppetite().equals(e.getRiskAppetite())
+                    && getNextMeeting().equals(e.getNextMeeting())
+                    && getTags().equals(e.getTags());
+        }
     }
 }
