@@ -18,7 +18,7 @@ public class GuideWindow extends UiPart<Stage> {
      */
     private enum Page {
         ONE("User Guide",
-            "Welcome to Siasa! "
+            "Welcome to SIASA! "
                 + "This is a guide that teaches you all the basic commands to use this application.\n"
                 + "For a more detailed guide, visit the user guide on our github repository.",
             new Image("file:src/main/resources/images/guide/page_one.png")),
@@ -56,7 +56,7 @@ public class GuideWindow extends UiPart<Stage> {
                 + "Example: editpolicy 2 n/Life Policy 2 c/20 20 e/2022-10-22",
             new Image("file:src/main/resources/images/guide/page_seven.png")),
         EIGHT("User Guide - Policies",
-            "contactpolicy: List the policies belonging to the client based on the index provided.\n"
+            "contactpolicy: List the policies belonging to the contact based on the index provided.\n"
                 + "contactpolicy INDEX\n"
                 + "Example: contactpolicy 1",
             new Image("file:src/main/resources/images/guide/page_eight.png")),

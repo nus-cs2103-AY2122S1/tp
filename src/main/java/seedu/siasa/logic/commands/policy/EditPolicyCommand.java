@@ -2,6 +2,7 @@ package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,13 +38,14 @@ public class EditPolicyCommand extends Command {
     public static final String COMMAND_WORD = "editpolicy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the policy identified "
-            + "by the index number used in the displayed policy list. "
+            + "by the index number used in the displayed policy list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TITLE + "TITLE] "
-            + "[" + PREFIX_EXPIRY + "EXPIRY] "
-            + "[" + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT)] "
-            + "[" + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM] "
+            + "[" + PREFIX_TITLE + "POLICY_NAME] "
+            + "[" + PREFIX_PAYMENT + "PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS]] "
+            + "[" + PREFIX_COMMISSION + "COMMISSION_% NUM_OF_COMM] "
+            + "[" + PREFIX_CONTACT_INDEX + "CONTACT_INDEX] "
+            + "[" + PREFIX_EXPIRY + "COVERAGE_EXPIRY_DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TITLE + "Full Life "

@@ -37,19 +37,21 @@ public class AddPolicyCommand extends Command {
     public static final String COMMAND_WORD = "addpolicy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a policy to the policy list. "
+            + "\n"
             + "Parameters: "
-            + PREFIX_TITLE + "TITLE "
-            + PREFIX_EXPIRY + "EXPIRY "
-            + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT) "
-            + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM "
+            + PREFIX_TITLE + "POLICY_NAME "
+            + PREFIX_PAYMENT + "PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] "
+            + PREFIX_COMMISSION + "COMMISSION_% NUM_OF_COMM "
             + PREFIX_CONTACT_INDEX + "CONTACT_INDEX "
-            + PREFIX_TAG + "TAG... "
+            + "[" + PREFIX_EXPIRY + "COVERAGE_EXPIRY_DATE] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Life Policy "
-            + PREFIX_EXPIRY + "2021-06-13 "
             + PREFIX_PAYMENT + "1000 12 120 "
             + PREFIX_COMMISSION + "20 12 "
             + PREFIX_CONTACT_INDEX + "1 "
+            + PREFIX_EXPIRY + "2021-06-13 "
             + PREFIX_TAG + "AIA";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
