@@ -167,4 +167,24 @@ public class UniqueStudentListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueStudentList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void hashCodeTest() {
+        uniqueStudentList.add(ALICE);
+        UniqueStudentList newList = new UniqueStudentList();
+        newList.add(ALICE);
+
+        //same Student objects -> returns true
+        assertTrue(uniqueStudentList.hashCode() == newList.hashCode());
+
+        Student editedAlice = new PersonBuilder(ALICE)
+                .withGroups(VALID_GROUP_RECITATION)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        newList = new UniqueStudentList();
+        newList.add(editedAlice);
+
+        //different Student objects -> returns false
+        assertFalse(uniqueStudentList.hashCode() == newList.hashCode());
+    }
 }
