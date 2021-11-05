@@ -334,7 +334,7 @@ Expected Outcome for `find hotel` followed by `delete n/Mandarin Oriental Singap
 Shows a list of all contacts in the contact list.
 
 Usage scenario:
-* Tour Guide would like to have an overview of all existing contacts in WhereTourGo.
+* You would like to have an overview of all your existing contacts in WhereTourGo.
 
 Format: `list`
 
@@ -345,8 +345,8 @@ Format: `list`
 Finds all contacts whose names, addresses, phone numbers, email addresses or reviews contain any of the given keywords.
 
 Usage scenario: 
-* Tour Guide would like to find any places of interest which are along Orchard Road (have 'Orchard Road' contained within their address field). 
-* Tour Guide remembers leaving a positive review on the room service of a particular hotel, but has forgotten. He/she would like to find which contact this review was written for.
+* You would like to find any places of interest which are along Orchard Road (have 'Orchard Road' contained within their address field). 
+* You remember leaving a positive review on the room service of a particular hotel, but have forgotten which hotel it was for. You would like to find which contact this review was written for.
 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -371,8 +371,8 @@ Expected Outcome for `find bay`:
 Shows a list of all contacts in the specified category, with the specified rating and/or with the specified tag.
 
 Usage scenario:
-* Tour Guide wants to filter for all hotels (in category 'acc') which have a 5-star rating.
-* Tour Guide would like to filter all restaurants (in category 'fnb') which are affordable (with the tag 'cheap').
+* You want to filter for all hotels (in category 'acc') which have a 5-star rating.
+* You would like to filter all restaurants (in category 'fnb') which are affordable (with the tag 'cheap').
 
 Format: `filter [c/CATEGORY] [ra/NUMBER] [t/TAGS] ... `
 
@@ -402,8 +402,8 @@ Expected Outcome for `filter c/fnb`:
 Sorts the list of contacts in a specified order. The sort feature sorts by Contact name (in lexicographical order) or by Rating (in descending order).
 
 Usage scenario:
-* Tour Guide wants to see all the highest rated contacts at one glance.
-* Tour Guide wants to arrange a messy list of contacts by lexicographical order.
+* You want to see all the highest rated contacts at one glance.
+* You want to arrange a messy list of contacts by lexicographical order.
 
 Format : `sort FIELD`
 
@@ -420,8 +420,8 @@ Shows a summary of the content of WhereTourGo. The data presented as a summary a
 * the proportion of contacts for each category defined by [Category code](#restrictions-for-commands).
 
 Usage scenario:
-* Tour Guide wants to improve on the quality of his/her tours. He/she would like to review the database to see which category of tour contacts lacks diversity.
-* Tour Guide would like to assess the quality of his/her contacts by viewing the proportion of contacts with high ratings.
+* You want to improve on the quality of your tours. You would like to review the database to see which category of tour contacts lacks diversity.
+* You would like to assess the quality of your contacts by viewing the proportion of contacts with high ratings.
 
 Format: `sum`
 
@@ -436,7 +436,7 @@ Expected Outcome for `sum`:
 Displays the specified contact from the contact list.
 
 Usage scenario:
-* Tour Guide wants to zoom in on a particular contact to obtain all the information.
+* You want to zoom in on a particular contact to obtain all the information.
 
 Format: `view INDEX`
 
@@ -483,7 +483,7 @@ This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 Undoes the last change made to the list of contacts stored.
 
 Usage scenario:
-* Tour Guide deleted an important contact by mistake and would like to restore this contact.
+* You deleted an important contact by mistake and would like to restore this contact.
 
 Format: `undo`
 
@@ -496,7 +496,7 @@ Examples :
 Redoes the last change undone on the list of contacts stored.
 
 Usage scenario:
-* Tour Guide wants to delete all contacts after the seventh contact. He/she can execute `delete 8` once, and then repeatedly execute `redo` until there are no more contacts after the seventh one.
+* You want to delete all contacts after the seventh contact. You can execute `delete 8` once, and then repeatedly execute `redo` until there are no more contacts after the seventh one.
 
 Format: `redo`
 
@@ -517,7 +517,7 @@ Only commands that directly change the stored data can be redone and undone. The
 Exports all the contacts from the contact list to a well-formatted `.txt` file.
 
 Usage scenario:
-* Tour Guide needs to forward tour information quickly to someone else (i.e. the tour bus driver, an anxious tour participant).
+* You need to forward tour information quickly to someone else (i.e. the tour bus driver, an anxious tour participant).
 
 Format: `export`
 * Exports the specified contact from the contact list.
@@ -544,7 +544,7 @@ A sample of the exported text file:
 Clears all entries from the contact list.
 
 Usage scenario:
-* Tour Guide wants to wipe out the current database and start afresh.
+* You want to wipe out the current database and start afresh.
 
 Format: `clear`
 
@@ -573,7 +573,7 @@ If your changes to the data file make the format invalid, WhereTourGo will disca
 Open the User Guide in your default Browser.
 
 Usage scenario:
-* Tour Guide is new to the app and wants to find basic commands to get started with.
+* You are new to the app and want to find basic commands to get started with.
 
 Format: `help`
 
@@ -590,7 +590,7 @@ Please refer to the [FAQ](#faq) for more information.
 Open the command list in your default Browser.
 
 Usage scenario:
-* Tour Guide wants to view a command and its syntax as he/she has forgotten how it is used.
+* You want to view a command and its syntax as you have forgotten how it should be used.
 
 Format: `cmd`
 
