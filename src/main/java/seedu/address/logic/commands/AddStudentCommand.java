@@ -113,7 +113,7 @@ public class AddStudentCommand extends AddCommand {
      * @param teleHandle The TeleHandle to be verified.
      * @return True is the TeleHandle is a duplicate. False otherwise.
      */
-    private boolean isDuplicateTeleHandleInModule(TeleHandle teleHandle, Module module) {
+    public static boolean isDuplicateTeleHandleInModule(TeleHandle teleHandle, Module module) {
         UniqueStudentList studentList = module.getUniqueStudentList();
         for (Student student : studentList) {
             TeleHandle studentTeleHandle = student.getTeleHandle();
@@ -130,7 +130,7 @@ public class AddStudentCommand extends AddCommand {
      * @param email The Email to be verified.
      * @return True is the Email is a duplicate. False otherwise.
      */
-    private boolean isDuplicateEmailInModule(Email email, Module module) {
+    public static boolean isDuplicateEmailInModule(Email email, Module module) {
         UniqueStudentList studentList = module.getUniqueStudentList();
         for (Student student : studentList) {
             Email studentEmail = student.getEmail();

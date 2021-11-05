@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,10 +50,7 @@ public class AddStudentCommandTest {
             expectedModel.addModule(mod);
         }
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
-        CommandResult commandResult = new AddStudentCommand(
-                validStudent,
-                moduleName)
-                .execute(expectedModel);
+        CommandResult commandResult = new AddStudentCommand(validStudent, moduleName).execute(expectedModel);
 
         assertEquals(String.format(AddStudentCommand.MESSAGE_ADD_STUDENT_SUCCESS, validStudent),
                 commandResult.getFeedbackToUser());
