@@ -195,17 +195,16 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 
 * At least one of the parameters must be provided
 * Existing values of the parameters specified will be erased and updated to the input values
+* You can input multiple module codes, and can have multiple lesson codes for a single module code
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-To remove an existing phone number/telegram handle/remark from a contact, simply input `p/`/`h/`/`r/` respectively, followed with a whitespace. <br>
-e.g. `edit 1 r/` will remove the existing remark from the first contact.
+To remove an existing phone number/telegram handle/remark from a contact, simply input `p/``h/``r/` respectively.
 </div>
 
 Examples:
-* `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email of the 1st contact to be `91234567` and `ben321@gmail.com` respectively
-* `edit 2 n/Ben m/CS2100 T09 B09`: Edits the name and module of the 2nd contact to be `Ben` and `CS2100 T09 B09` respectively
-* `edit 3 h/@BenWasHere r/Overseas`: Edits the telegram handle and remark of the 3rd contact to be `@BenWasHere` and `Overseas` respectively
-* `edit 4 n/Ben m/CS2100 T09 B09 p/91234567 e/ben321@gmail.com h/@BenWasHere r/Overseas`: All parameters present in one command
+* `edit 1 e/ben321@gmail.com p/91234567`: Edits the email and phone number of the 1st contact to be `ben321@gmail.com` and `91234567`respectively
+* `edit 2 m/CS2100 T09 B09 m/CS2103T T01`: Edits the modules of the 2nd contact to be `[CS2100 T09 B09], [CS2103T T01]`
+* `edit 3 r/`: Removes the remark of the 3rd contact
 
 Command aliases: `update` `e`
 
@@ -329,7 +328,7 @@ Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME]
 * Existing values of the parameters specified will be erased and updated to the input values
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-To remove a remark from a lesson, simply input `r/` followed with a whitespace.
+To remove a remark from a lesson, simply input `r/`.
 </div>
 
 Examples:

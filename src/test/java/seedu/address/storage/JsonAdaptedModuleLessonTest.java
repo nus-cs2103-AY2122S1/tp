@@ -21,7 +21,7 @@ public class JsonAdaptedModuleLessonTest {
     private static final String VALID_MODULE_LESSON_REMARK = CS2100_LAB1.getRemark().toString();
 
     @Test
-    public void toModelType_validModuleClassDetails_returnsModuleClass() throws IllegalValueException {
+    public void toModelType_validModuleLessonDetails_returnsModuleLesson() throws IllegalValueException {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(CS2100_LAB1);
         assertEquals(CS2100_LAB1, moduleClass.toModelType());
     }
@@ -34,7 +34,7 @@ public class JsonAdaptedModuleLessonTest {
     }
 
     @Test
-    public void toModelType_invalidDay_throwsIllegaArgumentException() {
+    public void toModelType_invalidDay_throwsIllegalArgumentException() {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODE_CS2040S_T16,
                 INVALID_DAY, VALID_LESSON_START_TIME, VALID_LESSON_END_TIME, VALID_MODULE_LESSON_REMARK);
         assertThrows(IllegalArgumentException.class, moduleClass::toModelType);
