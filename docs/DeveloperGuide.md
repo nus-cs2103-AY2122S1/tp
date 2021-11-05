@@ -656,6 +656,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC07 - Edit an elderly**
 
+**MSS**
+
 1. User edits an elderly's details (which can include name, phone number, language, address, last visit, health condition(s)) by supplying the index of the elderly in SeniorLove's list
 2. SeniorLove edits the entry for the elderly to be edited
 
