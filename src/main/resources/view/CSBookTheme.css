@@ -328,7 +328,7 @@
     -fx-background-radius: 10;
 }
 
-#groupName {
+.smaller_groupName {
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-text-fill: white;
     -fx-font-weight: bold;
