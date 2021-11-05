@@ -11,4 +11,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
             "The lesson index provided is invalid for this student";
     public static final String MESSAGE_DUPLICATE_STUDENT = "A student with the exact same name already exists!";
+    public static final String MESSAGE_NO_PARAMS = "This command should not have any parameters!";
+
 }
