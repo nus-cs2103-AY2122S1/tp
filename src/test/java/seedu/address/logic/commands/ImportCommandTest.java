@@ -5,6 +5,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_correctFile_success() throws CommandException, URISyntaxException {
-        String properFile = "../../../../data/import.json";
+        String properFile = Paths.get("..", "..", "..", "..", "data", "import.json").toString();
         CommandResult commandResult = new ImportCommand(properFile).execute(model);
 
         assertEquals(commandResult.getFeedbackToUser(), String.format(ImportCommand.MESSAGE_SUCCESS, 2));
@@ -32,7 +33,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_fileNotFound_throwsCommandException() {
-        String nonexistentFile = "../../../../data/random.json";
+        String nonexistentFile = Paths.get("..", "..", "..", "..", "data", "random.json").toString();
         ImportCommand importCommand = new ImportCommand(nonexistentFile);
 
         assertThrows(CommandException.class, ImportCommand.MESSAGE_FILE_NOT_FOUND, () -> importCommand.execute(model));
@@ -40,7 +41,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_incorrectFormat_throwsCommandException() {
-        String incorrectDataFormatFile = "../../../../data/incorrect.json";
+        String incorrectDataFormatFile = Paths.get("..", "..", "..", "..", "data", "incorrect.json").toString();
         ImportCommand importCommand = new ImportCommand(incorrectDataFormatFile);
 
         assertThrows(CommandException.class,
@@ -49,7 +50,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_incorrectFileExtension_throwsCommandException() {
-        String incorrectFileExtension = "../../../../data/import.txt";
+        String incorrectFileExtension = Paths.get("..", "..", "..", "..", "data", "import.txt").toString();
         ImportCommand importCommand = new ImportCommand(incorrectFileExtension);
 
         assertThrows(CommandException.class,
