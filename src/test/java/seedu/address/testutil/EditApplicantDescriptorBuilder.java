@@ -15,7 +15,7 @@ public class EditApplicantDescriptorBuilder {
     private EditApplicantDescriptor descriptor;
 
     public EditApplicantDescriptorBuilder() {
-        descriptor = new EditApplicantDescriptor();
+        this.descriptor = new EditApplicantDescriptor();
     }
 
     public EditApplicantDescriptorBuilder(EditApplicantDescriptor descriptor) {
