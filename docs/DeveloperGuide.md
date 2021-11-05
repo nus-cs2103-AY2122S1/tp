@@ -774,21 +774,28 @@ The activity diagram below shows the flow of a typical tag command.
 #### Usage Scenario 
 
 **1**) The user launches the application and inputs "tag 1 a/pr/low d/friend", to add a priority tag `LowPriority` and 
-delete a tag `friend` from the first listed contact.
+delete a tag `friend` from the first listed contact. We assume the first listed contact only has one tag at this 
+point in time, which is the `friend` tag.
 
 **2**) This calls `LogicManager::execute` which further calls `FastParser::parseCommand` to parse the given input.
 
 **3**) `FastParser` determines that it is a tag command, and further calls `TagCommandParser::parse`.
 
 **4**) `TagCommandParser` will then identify the tags to add and delete, and proceed to instantiate them then
-return a `TagCommand` that contains a Set of tags to delete and another Set of tags to add.
+return a `TagCommand` that contains a Set of tags to delete and another Set of tags to add. At this point, the 
+object diagram below shows the state of the `Person` object and the `Tag` associated with it.
+
+![TagCommandState1](images/TagCommandState1.png)
 
 **5**) `LogicManager` then calls the method `TagCommand::execute`, which will attempt to add and delete the specified 
 tags, while ensuring that certain conditions are met.
 
 **6**) If there are no issues, the command will finish executing, and a message indicating success will appear.
 Any changes to the tags will be reflected immediately: In this case, the tag `LowPriority` will be added while the
-tag `friend` will be deleted.
+tag `friend` will be deleted. The object diagram below shows the final state of the `Person` object 
+and the `Tag` associated with it.
+
+![TagCommandState2](images/TagCommandState2.png)
    
 The sequence diagram below shows the process for the usage scenario as described above.
 ![TagSequenceDiagram](images/TagSequenceDiagram.png)
