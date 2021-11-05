@@ -96,7 +96,7 @@ public class AssessmentListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsAssessmentNotFoundException() {
+    public void remove_assessmentDoesNotExist_throwsAssessmentNotFoundException() {
         assertThrows(AssessmentNotFoundException.class, () -> assessments.remove(PATH_05));
     }
 
