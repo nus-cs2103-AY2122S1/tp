@@ -99,15 +99,4 @@ public class JsonAdaptedClientTest {
                 new JsonAdaptedClient(VALID_NAME, VALID_PHONE_NUMBER, VALID_EMAIL, null, VALID_ORDERS);
         assertNull(client.toModelType().getAddress());
     }
-
-    /*
-    @Test
-    public void toModelType_invalidOrders_throwsIllegalValueException() {
-        List<JsonAdaptedOrder> invalidOrders = new ArrayList<>(VALID_ORDERS);
-        invalidOrders.add(new JsonAdaptedOrder(new Order(new Name(""), new Quantity(""), LocalDate.now())));
-        JsonAdaptedClient client =
-                new JsonAdaptedClient(VALID_NAME, VALID_PHONE_NUMBER, VALID_EMAIL, VALID_ADDRESS, invalidOrders);
-        assertThrows(IllegalValueException.class, client::toModelType);
-    }
-     */
 }

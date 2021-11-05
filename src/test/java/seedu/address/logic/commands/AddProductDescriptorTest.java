@@ -10,9 +10,9 @@ import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
 
 public class AddProductDescriptorTest {
-    private Name name = new Name("pen");
-    private UnitPrice unitPrice = new UnitPrice("15");
-    private AddProductCommand.AddProductDescriptor descriptor =
+    private final Name name = new Name("pen");
+    private final UnitPrice unitPrice = new UnitPrice("15");
+    private final AddProductCommand.AddProductDescriptor descriptor =
             new AddProductCommand.AddProductDescriptor(name, unitPrice);
 
     @Test

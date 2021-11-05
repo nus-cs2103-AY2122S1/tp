@@ -36,7 +36,7 @@ public class EditProductCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditProductCommand.MESSAGE_USAGE);
 
-    private EditProductCommandParser parser = new EditProductCommandParser();
+    private final EditProductCommandParser parser = new EditProductCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

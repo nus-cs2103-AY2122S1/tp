@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.model.product.ProductContainsIdPredicate;
 
 public class ViewProductCommandParserTest {
-    private ViewProductCommandParser parser = new ViewProductCommandParser();
+    private final ViewProductCommandParser parser = new ViewProductCommandParser();
 
     @Test
     public void parse_emptyArgs_throwParseException() {

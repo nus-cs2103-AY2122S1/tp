@@ -26,7 +26,7 @@ public class ClientBuilder {
     private PhoneNumber phoneNumber;
     private Email email;
     private Address address;
-    private Set<Order> orders;
+    private final Set<Order> orders;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.

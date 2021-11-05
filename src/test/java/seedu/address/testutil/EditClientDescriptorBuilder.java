@@ -20,7 +20,7 @@ import seedu.address.model.product.Quantity;
  * A utility class to help with building EditClientDescriptor objects.
  */
 public class EditClientDescriptorBuilder {
-    private EditClientDescriptor descriptor;
+    private final EditClientDescriptor descriptor;
 
     public EditClientDescriptorBuilder() {
         descriptor = new EditClientDescriptor();

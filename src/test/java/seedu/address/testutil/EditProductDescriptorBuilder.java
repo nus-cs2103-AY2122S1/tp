@@ -10,7 +10,7 @@ import seedu.address.model.product.UnitPrice;
  * A utility class to help with building EditProductDescriptor objects.
  */
 public class EditProductDescriptorBuilder {
-    private EditProductDescriptor descriptor;
+    private final EditProductDescriptor descriptor;
 
     public EditProductDescriptorBuilder() {
         descriptor = new EditProductDescriptor();

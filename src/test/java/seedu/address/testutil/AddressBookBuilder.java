@@ -11,7 +11,7 @@ import seedu.address.model.product.Product;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private final AddressBook addressBook;
 
     public AddressBookBuilder() {
         addressBook = new AddressBook();
