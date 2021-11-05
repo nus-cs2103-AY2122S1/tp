@@ -25,11 +25,12 @@ public class MailingListCommand extends Command {
             + "[" + PREFIX_PHONE + "] "
             + "[" + PREFIX_EMAIL + "] "
             + "[" + PREFIX_ADDRESS + "] "
-            + "[" + PREFIX_TAG + "]"
+            + "[" + PREFIX_TAG + "] "
             + "[" + PREFIX_BIRTHDAY + "] \n"
             + "Default export is Phone numbers and Email addresses.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + " " + PREFIX_EMAIL;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
+    public static final String MESSAGE_EXTRA_ARGUMENTS_FAILURE = "Invalid fields selected.\n" + COMMAND_EXAMPLE;
     public static final String MESSAGE_EMPTY_PERSON_LIST = "Trying to export an empty mailing list does not make sense";
     public static final String MESSAGE_SUCCESS = "Exporting current view as a CSV file";
     private final Set<Prefix> prefixToWrite;
