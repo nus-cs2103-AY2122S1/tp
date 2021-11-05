@@ -621,7 +621,7 @@ the `FilterCommand#execute(model)` method to be called which then filters the re
 
 <u>Step 3:</u>
 
-The user executes `list` to get back the initial lists before the filter.
+The user can execute the command `list` to get back the initial lists before the filter command.
 
 The following sequence diagram shows how the filter operation works:
 
@@ -697,7 +697,7 @@ lists to only show the relevant objects.
 
 <u>Step 3:</u>
 
-The user executes `list` to get back the initial lists before the filter.
+The user can execute the command `list` to get back the initial lists before the roster command.
 
 The following sequence diagram shows how the filter operation works:
 
