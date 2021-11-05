@@ -96,7 +96,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasModuleLessonInAddressBook_returnstrue() {
+    public void hasModuleLessonInConthacks_returnstrue() {
         modelManager.addLesson(CS2100_LAB1);
         assertTrue(modelManager.hasModuleLesson(CS2100_LAB1));
     }
