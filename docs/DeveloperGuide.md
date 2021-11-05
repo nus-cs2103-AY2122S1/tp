@@ -1383,6 +1383,8 @@ testers are expected to do more *exploratory* testing.
 2) Phone - 3 to 20 digits <br>
 3) Email - max 100 characters (at least 2 for domain portion, before @ symbol) <br>
 4) Address - max 100 characters
+5) Remark - max 45 characters
+6) Tag - max 20 characters
 </div>
 
 ### Editing a Client
