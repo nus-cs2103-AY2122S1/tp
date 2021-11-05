@@ -229,10 +229,13 @@ The main difference between the addMember command lies not in the way the `Logic
 
 When the user executes the `addMember` command, user input is parsed and the `Index` of student to be added, and the `GroupName` of the group to be added to are extracted into parameters of the `AddMemberCommand` class.
 
-If any errors are present in the user input, exceptions are thrown in the following components:
+If any errors are present in the user input, exceptions are thrown in the following components, summarised in the following activity diagram:
+
+![Activity Diagram of Add Member](images/AddMemberActivityDiagram.png)
 
 1. `AddMemberCommandParser` throws an exception if command format is invalid (negative/missing index, missing group prefix)
-1. `AddMemberCommand` throws an exception if the `Index` does not exist in the student list, `GroupName` is does not belong to any preexisting `Group`, the student is already in another group, or the student has already been added to the current group. 
+1. `AddMemberCommand` throws an exception if the `Index` does not exist in the student list, `GroupName` is does not belong to any preexisting `Group`. It also throws an exception if the student is already in another group, or the student has already been added to the current group. 
+The workflow for throwing these exceptions is similar to the first two and is not shown in the activity diagram below.
 
 The interaction between the `Logic` and `Model` classes are shown in the following sequence diagram:
 

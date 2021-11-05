@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User executes ""addMember"" command;
+
+if () then ([valid format])
+    :Parse the ""addMember""
+    command and arguments;
+
+    : Parser converts user input to
+     valid ""Index"" and ""GroupName"";
+
+    :Search for student based
+    on the specified index;
+
+    if () then ([index within bounds])
+
+    :Search for group based
+    on the specified name;
+
+    if () then ([group with name exists])
+
+    :Update group and student;
+
+    :Show success status message;
+
+    else ([else])
+
+    :Show invalid group name
+     error message to user;
+
+    endif
+
+    else ([else])
+
+    :Show invalid index
+    error message to user;
+
+endif
+else ([else])
+
+    :Show command format
+     error message to user;
+
+endif
+
+
+stop
+
+@enduml
