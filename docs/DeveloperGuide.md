@@ -682,13 +682,13 @@ The user launches the app with the stored student list holding the initial stude
 initial lesson data in TuitiONE (only the fields of each object relevant to the roster feature are shown in the diagrams below).
 
 <center>
-<img alt="FilterState0" src="images/DeveloperGuideImage/FilterState0.png"/>
+<img alt="RosterState0" src="images/DeveloperGuideImage/RosterState0.png"/>
 </center>
 
 <u>Step 2:</u>
 
-The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
-the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
+The user executes `roster 2` to filter out and display all students enrolled in `Science-S1-Fri-1330`. The `roster` command causes
+the `RosterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
 
 <center>
 <img alt="FilterState1" src="images/DeveloperGuideImage/FilterState1.png"/>
