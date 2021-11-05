@@ -170,7 +170,7 @@ Format 2:
 <div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `edit 1 -n Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
-- `edit 1 -ln 4 -s 29.5` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
+- `edit 1 -ln 4 -s 29` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
 
 </div>
 
