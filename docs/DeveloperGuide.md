@@ -3,7 +3,21 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents {:toc}
+## **Table of Contents**
+
+1. [Acknowledgements](#Acknowledgements)
+2. [Setting up, getting started](#Setting up)
+3. [Design](#Design)
+4. [Architecture](#Architecture)
+5. [UI](#UI component)
+6. [Logic component](#Logic component)
+7. [Storage component](#component)
+8. [Common classes](#Common classes)
+9. [User Stories](#User Stories)
+10. [Use case](#Use case)
+11. [Non-Functional Requirements](#Non-Functional Requirements)
+12. [Glossary](#Glossary) 
+13. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -533,21 +547,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
 | `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.
-| `* *`   | CS2100 TA                                   | update attendance to keep track of participation email%                                          | I can fulfil my obligations as a TA.
-| `* *`   | CS2100 TA                                   | edit a student's participation score                                                             | the records are up to date.
-| `* *`   | CS2100 TA                                   | upload the students' performance to LumiNUS conveniently                                         |
+| `* *`   | CS2100 TA                                   | upload the students' lab results to LumiNUS conveniently                                         |
 | `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/email from the database.
 | `* *`   | CS2100 TA who loves using the keyboard      | type commands                                                                                    | practice my typing skills.
 | `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.
-| `* *`   | CS2100 TA                                   | use tags to identify the topics which many students have difficulty in                           | prepare more notes on the topic.
-| `*`     | CS2100 TA with multiple classes             | filter the contact list by classes  | easily identify those in the current class.                |                                                                        
+| `* *`   | CS2100 TA                                   | use tags to identify which labs are marked or unmarked                                           | know which what labs to mark next.
+| `*`     | CS2100 TA with multiple classes             | filter the contact list by name, classes, email  | easily identify those in the current class.                |                                                                        
 | `*`     | archive previous batch statistics           | compare current batch performance with them                                                      |
 | `*`     | expert user                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
-| `*`     | CS2100 TA                                   | use tags to mark the weak areas of a student                                                     | provide more targetted help to my students.
-| `*`     | user                                        | add a time to a task                                                                             | record when a task need to be done.
-| `*`     | user                                        | see the pending task that has the next earliest deadline                                         | know what I need to do next.
-| `*`     | a student                                   | easily view my participation statistics                                                          | verify that it was recorded correctly.
 | `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
@@ -708,7 +716,8 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Student ID**: An NUS student's matriculation number
+- **Student ID**: An NUS student's matriculation number (AXXXXXXY)
+- **Email**: An NUS student email (eXXXXXXX@u.nus.edu.sg)
 - **TA**: A CS2100 teaching assistant
 
 --------------------------------------------------------------------------------------------------------------------
@@ -765,6 +774,9 @@ testers are expected to do more *exploratory* testing.
     1. To cancel, click 'cancel' to return to the main window.
     2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
-### [Proposed] Dashboard
+### Dashboard
 
-1. A dashboard to view the TA's classes lab results.  
+1. Enter dashboard as a command or press F5 to view the dashboard.  
+    
+    1. User will be able to view the number of students, number of classes, number of labs. 
+    2. User will also be able to see the number of labs left to mark. 
