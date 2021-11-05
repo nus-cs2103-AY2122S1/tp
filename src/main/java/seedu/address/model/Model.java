@@ -166,24 +166,13 @@ public interface Model {
      * Deletes the given {@code task} from the given {@code member}'s task list.
      * The task must exist in the member's task list.
      */
-    void deleteTask(Member member, Task task);
-
-    /**
-     * Deletes the task specified by {@code index} from the given {@code member}'s task list.
-     * The task must exist in the member's task list.
-     */
-    void deleteTask(Member member, int index);
+    void deleteTask(Task task);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask} in the given {@code member}'s task list.
      * {@code target} must exist in the task list.
      */
     void setTask(Task target, Task editedTask);
-
-    /**
-     * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
-     */
-    void setTask(int index, Task editedTask);
 
     /**
      * Returns an unmodifiable view of the filtered task list of the given {@code member}.
