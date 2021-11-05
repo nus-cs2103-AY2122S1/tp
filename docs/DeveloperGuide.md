@@ -36,7 +36,7 @@ title: Developer Guide
     * [RedoCommand](#redocommand)
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
-* [Appendix](#appendix-requirements)
+* [Appendix](#appendix-a-requirements)
   * [Requirements](#appendix-requirements)
     * [Product Scope](#product-scope)
     * [User Stories](#user-stories)
@@ -50,8 +50,9 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* TBC
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+- The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
+- Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -120,9 +121,9 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 The `UI` component,
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* listens for changes to `VersionedModel` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model` and requires grades statistics from `Student` object in the `Model`.
+* depends on some classes in the `VersionedModel` component, as it displays `Student` object residing in the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
 
 ### Logic component
 
@@ -134,7 +135,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AcademyDirectoryParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
+1. The command can communicate with the `VersionedModel` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -161,7 +162,7 @@ The `VersionedModel` component,
 * stores the academy directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components)
 * interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
 and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
 
@@ -185,7 +186,7 @@ For more information regarding `VersionControl`, read [here](#versioncontrol-com
 The `Storage` component,
 * can save both academy directory data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AcademyDirectoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `VersionedModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `VersionedModel`)
 * can write version control objects to disk
 
 ### Common classes
@@ -239,7 +240,7 @@ class diagram shows this:
 
 The facade classes are: 
 - `VersionControlGeneralReader`: to read `VcObject` from disk
-- `VersionControlGeneralWriter`: to read `VcObject` to disk
+- `VersionControlGeneralWriter`: to write `VcObject` to disk
 - `HashComputer`: to compute hash of a file or hash of a `VcObject`
 
 To modify disk representation of a particular instance of `VcObject`, modify both its `Reader`
@@ -274,7 +275,7 @@ This command deletes a `Student` from `AcademyDirectory`.
 #### Implementation
 `DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
-`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `Model#deleteStudent()`.
+`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
 
 ### TagCommand
 
@@ -471,19 +472,19 @@ This command is meant for:
 serve the aforementioned purpose.
 
 The `HistoryCommand` makes use of the following set of invariance:
-- The most recent commit that belongs to the current branch is always labelled as `CURRENT`
+- The most recent commit that belongs to the current branch is always labelled as `MAIN`
 - The most recent commit that belongs to the second-most-recent branch is always labelled
 as `OLD`
 
-These guarantees are assured by the `VersionedModel#commit` method. Note that `HEAD` and `CURRENT` need not
-refer to the same commit e.g. if the user reverts to a previous commit then `CURRENT` and `HEAD` will refer to 
+These guarantees are assured by the `VersionedModel#commit` method. Note that `HEAD` and `MAIN` need not
+refer to the same commit e.g. if the user reverts to a previous commit then `MAIN` and `HEAD` will refer to 
 different commits. 
 
 Because this set of invariance are respected, thus `HistoryCommand` can show commit history by doing the following: 
-- fetch commit labelled as `CURRENT` and `OLD` from disk (methods to do this exposed by `VersionedModel`)
-- find the lowest common ancestor between `CURRENT` and `OLD` (`Commit#LCA` method used here)
+- fetch commit labelled as `MAIN` and `OLD` from disk (methods to do this exposed by `VersionedModel`)
+- find the lowest common ancestor between `MAIN` and `OLD` (`Commit#LCA` method used here)
 - show all commits from initial commit until the lowest common ancestor found above normally
-- show all commits from the lowest common ancestor until `CURRENT` and `OLD` as per the desired
+- show all commits from the lowest common ancestor until `MAIN` and `OLD` as per the desired
 formatting
 
 The following sequence diagram shows the above implementation:
@@ -491,7 +492,7 @@ The following sequence diagram shows the above implementation:
 {Add IMAGE}
 
 #### Limitation
-The current implementation can only show two commit branches: `CURRENT` and `OLD`. While this is
+The current implementation can only show two commit branches: `MAIN` and `OLD`. While this is
 sufficient in most cases, the ability to show arbitrary number of commit branches to give users
 the ability to revert to any previous commits easily without having to look for the commit's hash
 manually in disk. However, due to the implementer's inability to figure out how best to show
@@ -507,7 +508,7 @@ are made to the underlying disk:
   - provided hash cannot be found on disk
   - commit file with the given hash exists, but is corrupted
   - commit file with the given hash exists, but no read access is given to AcademyDirectory
-  - other reasons which leads to failure in reading commmit file
+  - other reasons which leads to failure in reading commit file
 - Otherwise, the `AcademyDirectory` storage data will be restored according to the target commit
 to be reverted to. 
 
@@ -523,6 +524,7 @@ serve the aforementioned purpose.
 The following sequence diagram shows the above implementation:
 
 {Add IMAGE}
+
 #### Limitation
 Because `RevertCommand` has to restore academy directory data which is the responsibility of the
 `Storage` component, `RevertCommand` reinitialize a `Storage` and `VersionedModel` and changes the 
@@ -591,7 +593,9 @@ The following links to guides on: Documentation, Logging, Testing, Configuration
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+
+## Appendix A: Requirements
+
 
 ### Product scope
 
@@ -627,7 +631,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | CS1101S Avenger           | view the average scores of my students for specific assessments    | focus on the aspects to improve on during tutorial                     |
 | `* *`    | CS1101S Avenger           | visualize the class scores for specific assessments                | gauge how well my students are doing in assessments                    |
 | `* *`    | CS1101S Avenger           | add tags to certain students to take note of their weaker topics   | focus on topics that they are struggling with                          |
-| `* `     | experienced user          | make custom commands                                               | I can issue my commonly used commands faster                           |
+| `* * `   | CS1101S Avenger           | see history of changes to Academy Directory data                   | easily revert accidental changes to data                               |
+| `* * `   | CS1101S Avenger           | undo changes made to Academy Directory data                        | easily revert accidental changes to data                               |
+| `* * `   | CS1101S Avenger           | redo changes made to Academy Directory data                        | easily revert accidental undos to data                                 |
 
 ### Use cases
 
@@ -870,17 +876,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Studios**: A tutorial held in CS1101S and is essential in aiding the students to improve their grasp on the concepts taught during the lecture.
-* **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
-* **Principle of Least-Privilege**: Minimum levels of access – or permissions – needed to perform function.
-* **Version Controllable**: Refers to a `Command` that logs a `Commit` object upon execution with the logging relying on the `Optional` field in the `CommandResult` returned from `Command#execute()`.
+Term | Definition | Comments
+-----| ----------- | ---------- 
+Operating System (OS) | Software that manages computer hardware and other computer software. |
+Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. |
+Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address
+CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. |
+Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. |
+Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
+Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function.
+Version Controllable `Command` | a `Command` that logs a `Commit` object upon execution with the logging relying on the `Optional` field in the `CommandResult` returned from `Command#execute()`.
+Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something.
+Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something.
+Java | A program that allows running other programs written in Java programming language.
+Command | An instruction typed by a user to Academy Directory.
+Command Box | A part of the Academy Directory's GUI which can be used by users to type commands.
+Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix
+Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
+Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 

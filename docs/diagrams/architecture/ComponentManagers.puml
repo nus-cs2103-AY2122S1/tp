@@ -9,9 +9,9 @@ Interface Logic <<Interface>>
 Class LogicManager
 }
 
-package Model{
-Interface Model <<Interface>>
-Class ModelManager
+package VersionedModel{
+Interface VersionedModel <<Interface>>
+Class VersionedModelManager
 }
 
 package Storage{
@@ -23,9 +23,9 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
-ModelManager .up.|> Model
+VersionedModelManager .up.|> VersionedModel
 StorageManager .up.|> Storage
 
-LogicManager --> Model
+LogicManager --> VersionedModel
 LogicManager --> Storage
 @enduml
