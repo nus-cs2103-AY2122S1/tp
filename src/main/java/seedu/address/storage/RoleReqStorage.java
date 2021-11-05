@@ -67,9 +67,17 @@ public class RoleReqStorage {
     /**
      * Updates the file.
      *
-     * @throws FileNotFoundException If the file is not found.
+     * @throws IOException If the file cannot be created or opened.
      */
-    private static void update() throws FileNotFoundException {
+    private static void update() throws IOException {
+        if (!file.exists()) {
+            // Create the data folder if it does not exist.
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdir();
+            }
+            file.createNewFile(); // Create the RoleReq.txt file.
+        }
+
         StringBuilder txt = new StringBuilder();
         for (int n : requirements) {
             txt.append(n).append("\n");
@@ -86,7 +94,15 @@ public class RoleReqStorage {
      * @param role The role which minimum requirement will be updated.
      * @param numMinStaff The minimum number of staff required for that role.
      */
-    public static void update(String role, int numMinStaff) throws FileNotFoundException {
+    public static void update(String role, int numMinStaff) throws IOException {
+        if (!file.exists()) {
+            // Create the data folder if it does not exist.
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdir();
+            }
+            file.createNewFile(); // Create the RoleReq.txt file.
+        }
+
         int roleNum = getNumFromRole(role.toLowerCase());
         requirements[roleNum] = numMinStaff;
         update();
@@ -139,9 +155,9 @@ public class RoleReqStorage {
     /**
      * Resets the timings to the default timings.
      *
-     * @throws FileNotFoundException If the file cannot be found.
+     * @throws IOException If the file cannot be created or opened.
      */
-    public static void reset() throws FileNotFoundException {
+    public static void reset() throws IOException {
         requirements = DEFAULT_REQUIREMENTS;
         update();
     }

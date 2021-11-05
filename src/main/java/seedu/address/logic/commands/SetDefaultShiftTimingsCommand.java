@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Arrays;
 
@@ -40,7 +40,7 @@ public class SetDefaultShiftTimingsCommand extends Command {
             DefaultShiftTimingsStorage.update(timings);
             // TimeUtil will not update if DefaultShiftTimingsStorage does not update to keep consistency
             DateTimeUtil.updateTimings(timings);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new CommandException(Messages.FILE_NOT_FOUND + "\n" + DefaultShiftTimingsStorage.FILEPATH);
         }
 

@@ -45,10 +45,11 @@ public class StaffIndividualStatisticsCommand extends Command {
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_PHONE + "91234567 "
             + PREFIX_DASH_EMAIL + "johndoe@example.com";
-    private static final String INDIVIDUAL_STAFF_PRINT = "Stats for %1$s:\n"
+    public static final String INDIVIDUAL_STAFF_PRINT = "Stats for %1$s:\n"
             + "Total work hours: %2$s\n"
             + "Total salary: %3$s";
 
+    public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -85,6 +86,9 @@ public class StaffIndividualStatisticsCommand extends Command {
             return executeIndex(model);
         }
         List<Person> staffs = model.getUnFilteredPersonList().filtered(predicate);
+        if (staffs.size() == 0) {
+            throw new CommandException(NO_STAFF_SATISFIES_QUERY);
+        }
         return new CommandResult(String.format(DEFAULT_EXECUTION, result(staffs)));
 
     }
@@ -94,7 +98,11 @@ public class StaffIndividualStatisticsCommand extends Command {
         if (index >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person staff = model.getFilteredPersonListByIndex(index);
+        if (!predicate.test(staff)) {
+            throw new CommandException(NO_STAFF_SATISFIES_QUERY);
+        }
         return new CommandResult(staffSummary(staff));
     }
 
@@ -116,4 +124,12 @@ public class StaffIndividualStatisticsCommand extends Command {
         return String.format(INDIVIDUAL_STAFF_PRINT, staff.getName(), workHours, totalSalary);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null
+                && obj instanceof StaffIndividualStatisticsCommand
+                && ((StaffIndividualStatisticsCommand) obj).index == index
+                && ((StaffIndividualStatisticsCommand) obj).predicate.equals(predicate)
+                && ((StaffIndividualStatisticsCommand) obj).period.equals(period);
+    }
 }

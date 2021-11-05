@@ -39,7 +39,7 @@ Staff’d helps food & beverage managers manage details and schedules of their s
 
 1. Say the Staff in question has to work on the next monday's afternoon shift.
 
-1. Use the `addShift` command to add the staff to the morning shift. <br> `addShift n/Joe d/monday-0`
+1. Use the `addShift` command to add the staff to the morning shift. <br> `addShift -n Joe d/monday-0`
   
 1. Joe has a flu and is now unable to work on the next monday which is on 25th October 2021.
 
@@ -183,9 +183,11 @@ Examples:
 `setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
 `setDefaultShiftTimings 09:00 15:00 18:00 23:00`
 
+
 See Also:
 
 [Clear Command](#clearing-all-entries--clear)
+
 
 #### Listing all persons : `list`
 
@@ -450,21 +452,32 @@ Demonstration:
 Adds a time period where the staff is working to the staff’s schedule.
 
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
-* The `fulldayname` field required to specify shifts are not case sensitive.
 * The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
   10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
-* If no date input is provided, the staff is added to the next occurrence of the provided shift.
-* If only one date input is provided, the staff next occurence of the provided shift *after the provided date*. For instance, 
-  if the shift is on a 1/10/2021, a Monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
+* If no `da/` input is provided, the following seven days starting with the current date will be taken.
+* If only one date input is provided, this input will be regarded as the start date bound the shift added is
+  to the next date that the shift is at. For instance, if the shift is on a 1/11/2021, a monday,
+  with `da/2021-10-27` as input, the shift will be added to 1/10/2021 (Because 1/11/2021 is the first
+  monday after 2021/10/27).
+* If two dates are provided, they will be considered as the start date and the end date of the period. Shifts will be
+  added to Any date matched with the `d/` input. For example, if the command
+  `addShift -n Candice d/Monday-1 da/2021-10-27 da/2021-11-14` is executed, shifts will be added to the afternoon of
+  1/11/2021, 8/11/2021, because these are the two mondays in this period.
 * If the shift is not in the period provided, the program will do nothing.
 
+
 Formats:  
-`addShift -n name d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`  
-`addShift -i index d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
+`addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
+`addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 
 Examples:  
 `addShift -n Candice d/Monday-1 da/2021-10-01`   
 `addShift -i 1234 d/tuesday-0`
+
+Notes:
+* The start date and the end date are included in the period.
+* The `DAYOFWEEK` stands for the day in the week, such as `monday`, `sunday` etc. 
+* Field required to specify shifts are not case-sensitive, but must be full. 
 
 
 #### Swapping shifts: `swapShift`
@@ -481,7 +494,7 @@ Examples:
 `swapShift -n Candice -n Bob d/monday-0 d/tuesday-1 da/2021-10-01`  
 `swapShift -n Candice d/monday-0 -n Bob d/tuesday-1`
 
-Note:
+Notes:
 * The staff identified using the first name is associated with the first shift and the staff identified using the second name is associated with the second shift.
 * This means that you can permute the order of the parameters in any way but the rule mentioned right above will always be followed.
 
@@ -490,22 +503,27 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-* If no date input is provided, the next occurrence of the provided shift is assumed.
-* If only one date input is provided, the next occurrence of the provided shift *after the provided date* is assumed.
-
-Formats:  
-`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
-`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
-
 * Start time and end time must follow the format (hh:mm).
 * Start time must be earlier than end time.
 * Both start time and end time must be within the bound (10:00-16:00 for morning slot, 16:00-22:00 for afternoon slot).
 * If the shift does not exist in the staff's schedule, it will be created.
+* Start date must be earlier than the end date.
+
+Formats:  
+`setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
+`setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
 
 Examples:   
+`setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
 `setShiftTime -n Candice d/Monday-0 st/10:30-12:30 da/2021-10-01`  
-`setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`  
+`setShiftTime -i 1 d/wednesday-1 st/17:00-21:30 da/2021-10-01 da/2021-11-01`
 
+
+Notes:
+* If no date input is provided, current week is taken as default.
+* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If two date inputs are provided, the period will be taken from the start date to the end date, both included.
+* The `DAYOFWEEK` field required to specify shifts are not case-sensitive, but must be full.
 
 #### Deleting a shift from a staff : `deleteShift`
 
@@ -516,8 +534,8 @@ If no date input is provided, the next occurrence of the provided shift is assum
 * If the shift to delete is not in the input date range, the program will do nothing.
 
 Formats:  
-`deleteShift -n NAME d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`  
-`deleteShift -i INDEX d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
+`deleteShift -n NAME d/DAYOFWEEK-shiftNumber [da/START_DATE] [da/END_DATE]`  
+`deleteShift -i INDEX d/DAYOFWEEK-shiftNumber [da/START_DATE] [da/END_DATE]`
 
 Examples:  
 `deleteShift -n Joe d/tuesday-1 da/2021-10-01`  
@@ -535,9 +553,9 @@ Action | Format, Examples
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`<br> `find -i [INDEX]` <br> e.g., `find -n James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
-**Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
+**Add staff to shift** | `addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
-**Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
+**Set shift time** | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`

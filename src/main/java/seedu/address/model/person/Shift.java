@@ -356,7 +356,8 @@ public class Shift {
         }
         Shift otherShift = (Shift) other;
         return slot.equals(otherShift.slot) && dayOfWeek.equals(otherShift.dayOfWeek)
-                && this.recurrences.equals(otherShift.recurrences);
+                && this.recurrences.containsAll(otherShift.recurrences)
+                && otherShift.recurrences.containsAll(this.recurrences);
     }
 
     @Override
