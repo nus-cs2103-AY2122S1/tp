@@ -673,6 +673,12 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
       Use case resumes at step 2.
 
+* 4a. The given email or student id is not unique 
+
+    * 4a.1. ProgrammerError shows an error message. 
+  
+        Use case resumes at step 2. 
+
 **Use case: UC6 Automatic sort student records**
 
 **MSS**
