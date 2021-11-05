@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMS;
 import static seedu.address.logic.commands.CommandResult.DisplayType.DAY;
 
 /**
@@ -13,8 +14,7 @@ public class DayCommand extends Command {
 
     public static final String USER_TIP = "To view your daily calendar, type: " + COMMAND_WORD;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your daily calendar.\n"
-            + "This command should not have any parameters!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your daily calendar.\n" + MESSAGE_NO_PARAMS;
 
     public static final String SHOWING_DAY_MESSAGE = "Showing your daily calendar."
             + " You can go back to list view by typing \""

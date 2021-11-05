@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMS;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -19,8 +20,7 @@ public class ClearCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "TAB's data has been cleared!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all data.\n"
-            + "This command should not have any parameters!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all data.\n" + MESSAGE_NO_PARAMS;
 
     private ReadOnlyAddressBook previousAddressBook;
 
