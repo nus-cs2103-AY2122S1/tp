@@ -1296,3 +1296,34 @@ testers are expected to do more *exploratory* testing.
        box. A sample json file will be created. Then repeat the steps as above.
 
     1. The steps for data/positionbook.json is similar.
+
+## **Appendix: Effort**
+**<u>Difficulty: Medium to Hard</u>**
+
+We felt that our project overall is not extremely difficult to implement but requires a fair amount of understanding of the code base. Many commands created and classes implemented
+were predominantly based off of AB3 and enhanced to a great extent; others were freshly added in to be in tune with our product. Hence despite having different features from AB3,
+the overall project is still doable.
+
+
+**<u>Challenges faced:</u>** Understanding base code from AB3, deciding how to go forth and implement features.
+
+Understanding AB3's code was definitely challenging because it is our first time encountering a software engineering project with many layers of logic and programming.
+Especially with the integration of UI and many sections of code segregated and made in very fine detail, the learning curve was definitely steep.
+The other challenge is deciding how we wanted to code some of our features - the final product of many of these commands came after many iterations of changing and 
+decisions we made as a team, which is vastly different from how we initially wanted to implement it. Along the way with many bugs being discovered and wanting to keep methods
+inaccessible to certain classes, additional layers of defensive coding and how we accessed the various classes and methods were also converted.
+
+
+**<u>Effort required:</u>** 110 - 120%
+
+Many commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`) so not much work was needed to adapt it to what we wanted. However, besides our weekly 
+inputs of coding, we had to brainstorm and constantly adapt our code to better fit our user's needs. The challenges faced as mentioned also delayed many features into later weeks, 
+requiring more effort to be put into the project. But overall, our product is not strikingly outstanding with fancy UI, "clever" logical code or AI-integrated but rather maintaining
+a realistic, simplistic code base for future developers to further improve on. 
+
+
+**<u>Achievements:</u>** Better understood JavaFX, interweaving code bases, planning and delivering, software engineering on a whole
+We feel that many of the initial outcomes of the project were achieved, such as integrating software engineering related principles into our project while at the same
+keeping to our deadlines and planning ahead for future iterations of the project. We better understood how to link various classes together despite their differences and segregate them
+to better fit how we wanted the classes and methods to be accessed. A side benefit would be learning JavaFX because this is a completely new interface and tool used in helping design
+UI and seeing how our code works with the UI greatly benefitted us as well.
