@@ -2,14 +2,12 @@ package seedu.address.model.tutorialclass;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;

@@ -113,8 +113,8 @@ public class ClassmateTest {
     public void hasTutorialGroup_studentWithDifferentClassCodeInClassmate_returnsFalse() {
         classmate.addTutorialClass(G01);
         classmate.addTutorialClass(G02);
-        TutorialGroup editedTUT_01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G02).build();
-        assertFalse(classmate.hasTutorialGroup(editedTUT_01));
+        TutorialGroup editedTutorialGroup = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G02).build();
+        assertFalse(classmate.hasTutorialGroup(editedTutorialGroup));
     }
 
     /**

@@ -28,6 +28,12 @@ public class GroupType implements Comparable<GroupType> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Gets the group type in terms of its number, 1 or 2.
+     *
+     * @param groupType The type of the group.
+     * @return The group type in terms of its number.
+     */
     public static Integer parseGroupType(String groupType) {
         assert groupType.length() == 3;
         return parseInt(groupType.substring(2));
