@@ -860,8 +860,8 @@ testers are expected to do more *exploratory* testing.
     7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
        Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
-    8. Other incorrect edit commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
-       Expected: Similar to previous.
+    8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
+       Expected: No Patient is added. Error message is shown in the response box: "Invalid command format!..."
 
 ### Deleting a patient  <a name="delete-patient-manual-testing"/>
 1. Deleting a patient while all doctors are being shown
