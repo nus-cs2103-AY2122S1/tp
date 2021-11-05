@@ -26,9 +26,6 @@ deactivate TagCommand
 AddressBookParser --> Logic : command
 deactivate AddressBookParser
 
-AddressBookParser -[hidden]-> Logic
-destroy AddressBookParser
-
 Logic -> TagCommand : execute()
 activate TagCommand
 
@@ -38,10 +35,6 @@ activate CommandResult
 
 CommandResult --> TagCommand : commandResult
 deactivate CommandResult
-
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-CommandResult -[hidden]-> AddressBookParser
-destroy CommandResult
 
 TagCommand --> Logic : commandResult
 deactivate TagCommand

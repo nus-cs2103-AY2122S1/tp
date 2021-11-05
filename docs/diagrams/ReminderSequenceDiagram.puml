@@ -32,10 +32,6 @@ activate Logic
 Logic --> MainWindow
 deactivate Logic
 
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-Logic -[hidden]-> MainWindow
-destroy Logic
-
 MainWindow --> MainWindow
 deactivate MainWindow
 

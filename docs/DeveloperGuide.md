@@ -151,9 +151,9 @@ The `Model` component
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
-An alternative (arguably, a more OOP) model will have a `Tag` list in the `AddressBook`, which `Person` references. 
+An alternative (arguably, a more OOP) model will have the `UniqueTagList` storing all `Tag` objects which `Person` references. 
 This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-e.g. Suppose `Bernice` was the only person tagged with `UNPAID`. Then the user adds the tag `UNPAID` to `Alex` as well, the state of the dependencies will be as shown in the Final State Diagram, instead of TAB creating another `Tag` named `UNPAID` for `Alex`. <br>
+e.g. Suppose `Bernice` was the only person tagged with `UNPAID`. Then the user adds the tag `UNPAID` to `Alex` as well, the state of the dependencies will be as shown in the Final State Diagram, instead of TAB creating another `Tag` named `UNPAID` for `Alex` as per current implementation. <br>
 <img src="images/AddTagState0-Initial_state.png" width="324" />   <img src="images/AddTagState1-Final_state.png" width="324" />
 
 </div>
@@ -489,13 +489,9 @@ Viewing tag is facilitated by `UniqueTagList`.
 - `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
 
 Operations include:
-- `UniqueTagList#addTagFromPersonList(List<Person>)` - Adds tags from the specified list of persons to the tag list.
 - `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
 - `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
-- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person to the tag list and adds the new tags labelled for the specified person.
-- `UniqueTagList#getNumStudentsForTag(Tag)` - Returns the number of students labelled under the specified tag as stored in `tagCounter`.
-- `UniqueTagList#asUnmodifiableTagList()` - Returns an unmodifiable view of the tag list.
-- `UniqueTagList#asUnmodifiableMap()` - Returns an unmodifiable view of the tag counter.
+- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person from the tag list and adds the new tags labelled for the specified person to the tag list.
 These operations are called when a person is added, edited, or deleted with `AddCommand`, `EditCommand` and `DeleteCommand` respectively.
 
 Given below is an example usage scenario and how viewing tag is executed:
@@ -1058,14 +1054,14 @@ Use case ends.
 
 **MSS**
 
-1. User requests to view tags.
+1. User requests to view the list of tags.
 2. TAB displays a list of existing tags created for all students in TAB.
 
 Use case ends.
 
 **Extension**
 
-* 1a. There are no tags created.
+* 1a. There are no tags.
 
   Use case ends.
 
