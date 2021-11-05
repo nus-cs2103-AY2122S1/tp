@@ -267,8 +267,6 @@ Shows a list of all students in TAB.
 
 Format: `list`
 
-Shortcut: <kbd>F2</kbd>
-
 <br />
 
 [back to table of contents](#)
