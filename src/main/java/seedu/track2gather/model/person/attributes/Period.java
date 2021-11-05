@@ -14,9 +14,9 @@ import javafx.util.Pair;
  */
 public class Period extends Attribute<Pair<LocalDate, LocalDate>> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Period should be of two dates in the ISO-8601 format (i.e. yyyy-MM-dd), "
-                    + "separated by a space. Start date should be keyed before the end date, "
-                    + "and must occur earlier than the end date by at least 1 second.";
+            "SHN periods should comprise of two dates in the ISO-8601 format (i.e. yyyy-MM-dd), "
+                    + "separated by a space. The start date should be keyed before the end date, "
+                    + "and must occur earlier than the end date by at least 1 day.";
     public static final String MESSAGE_CONSTRAINTS_DATE =
             "Date should be in the ISO-8601 format (i.e. yyyy-MM-dd)";
 
