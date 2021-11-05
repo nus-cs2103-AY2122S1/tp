@@ -16,9 +16,10 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format DD/MM/YYYY "
             + "and adhere to the following constraints:\n"
-            + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
-            + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
-            + "3. Year must be 4 characters.";
+            + "1. Must be a valid date \n"
+            + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
+            + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
+            + "4. Year must be 4 characters.";
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
