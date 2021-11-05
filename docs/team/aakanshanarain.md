@@ -32,3 +32,4 @@ Given below are my contributions to the project.
 * **Project management**:
     * Managed release v1.3.1 on GitHub
     * Opened issues for the team
+  
