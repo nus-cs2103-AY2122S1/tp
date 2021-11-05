@@ -32,7 +32,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_IMPORT_FILE_NOT_FOUND = "File with name %s could not be found!";
 
-    public static final String MESSAGE_IMPORT_FILE_WRONG_TYPE = "%s is in the wrong format!";
+    public static final String MESSAGE_IMPORT_FILE_WRONG_TYPE = "%s is not .csv or .json!";
+
+    public static final String MESSAGE_IMPORT_FILE_WRONGLY_FORMATTED = "%s is wrongly formatted!";
 
     private final Logger logger = LogsCenter.getLogger(ImportCommand.class);
 
@@ -72,6 +74,9 @@ public class ImportCommand extends Command {
         } else {
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
         }
+
+        assert StringUtil.isCsv(fileName) || StringUtil.isJson(fileName);
+
         for (Person p: personList) {
             try {
                 model.addPerson(p);
@@ -96,7 +101,7 @@ public class ImportCommand extends Command {
             fileData = addressBookOptional.orElseThrow();
         } catch (DataConversionException dce) {
             logger.info("Import: Error while reading contacts from JSON file. File is likely to be wrongly formatted.");
-            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONGLY_FORMATTED, fileName));
         } catch (NoSuchElementException nsee) {
             logger.info("Import: File does not exist");
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_NOT_FOUND, fileName));
@@ -114,7 +119,7 @@ public class ImportCommand extends Command {
             fileData = addressBookOptional.orElseThrow();
         } catch (DataConversionException dce) {
             logger.info("Import: Error while reading contacts from CSV file. File is likely to be wrongly formatted.");
-            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONGLY_FORMATTED, fileName));
         } catch (NoSuchElementException nsee) {
             logger.info("Import: File does not exist");
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_NOT_FOUND, fileName));

@@ -22,6 +22,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE_TAG_1;
 import static seedu.address.testutil.TypicalPersons.ALICE_TELEGRAM;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -91,13 +93,27 @@ public class PersonTest {
 
     @Test
     public void hashTest() {
-        int expected = 658747986;
+        int expected = 1772994055;
         assertEquals(expected, ALICE.hashCode());
     }
 
     @Test
     public void profilePic() {
         assertNotEquals(null, ALICE.getProfilePicture());
+    }
+
+    @Test
+    public void getCommonLanguages() {
+        ArrayList<String> expectedLanguages = new ArrayList<>();
+        Person person = new PersonBuilder().build();
+        assertEquals(expectedLanguages, person.getCommonLanguages());
+    }
+
+    @Test
+    public void getSimScore() {
+        double expectedScore = 0.0;
+        Person person = new PersonBuilder().build();
+        assertEquals(expectedScore, person.getSimScore());
     }
 
     @Test
