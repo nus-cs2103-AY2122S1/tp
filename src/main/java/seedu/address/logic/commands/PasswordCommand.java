@@ -3,28 +3,22 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 
+import seedu.address.commons.util.PasswordUtil;
 import seedu.address.model.Model;
 
 public class PasswordCommand extends Command {
     public static final String COMMAND_WORD = "password";
 
-    public static final int MIN_PASSWORD_LENGTH = 8;
-    public static final int MAX_PASSWORD_LENGTH = 32;
-    public static final String SLASH = "/";
-    public static final String HYPHEN = "-";
-    public static final String SPACE = " ";
-    public static final boolean ALLOWSPACE = false;
-
     public static final String CORRECT_PASSWORD_FORMAT =
             "Password should have "
-                    + MIN_PASSWORD_LENGTH
+                    + PasswordUtil.MIN_PASSWORD_LENGTH
                     + " to "
-                    + MAX_PASSWORD_LENGTH
+                    + PasswordUtil.MAX_PASSWORD_LENGTH
                     + " characters (inclusive) and SHOULD NOT contain "
-                    + (ALLOWSPACE ? "" : "SPACE OR ")
-                    + SLASH
+                    + "SPACE OR "
+                    + PasswordUtil.SLASH
                     + " OR "
-                    + HYPHEN;
+                    + PasswordUtil.HYPHEN;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " oldPassword "
             + PREFIX_NEW_PASSWORD + " newPassword";
