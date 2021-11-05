@@ -71,9 +71,17 @@ public class DefaultShiftTimingsStorage {
     /**
      * Updates the file and {@code:timings} based on the {@code:stringTimings}.
      *
-     * @throws FileNotFoundException If the file is not found.
+     * @throws IOException If the file cannot be created or opened.
      */
-    private static void update() throws FileNotFoundException {
+    private static void update() throws IOException {
+        if (!file.exists()) {
+            // Create the data folder if it does not exist.
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdir();
+            }
+            file.createNewFile(); // Create the DefaultShiftTimings.txt file.
+        }
+
         StringBuilder txt = new StringBuilder();
         int i = 0;
         for (String s: stringTimings) {
@@ -92,28 +100,10 @@ public class DefaultShiftTimingsStorage {
     /**
      * Updates the save file with the new timings given.
      *
-     * @param mornStartTime The start time of the morning shift.
-     * @param mornEndTime The end time of the morning shift.
-     * @param aftStartTime The start time of the afternoon shift.
-     * @param aftEndTime The end time of the afternoon shift.
-     * @throws FileNotFoundException Thrown when file is not found.
-     */
-    public static void update(LocalTime mornStartTime, LocalTime mornEndTime, LocalTime aftStartTime,
-                              LocalTime aftEndTime) throws FileNotFoundException {
-        stringTimings[0] = mornStartTime.toString();
-        stringTimings[1] = mornEndTime.toString();
-        stringTimings[2] = aftStartTime.toString();
-        stringTimings[3] = aftEndTime.toString();
-        update();
-    }
-
-    /**
-     * Updates the save file with the new timings given.
-     *
      * @param newTimings a LocalTime[] of new timings.
      * @throws FileNotFoundException Thrown when file is not found.
      */
-    public static void update(LocalTime[] newTimings) throws FileNotFoundException {
+    public static void update(LocalTime[] newTimings) throws IOException {
         stringTimings[0] = newTimings[0].toString();
         stringTimings[1] = newTimings[1].toString();
         stringTimings[2] = newTimings[2].toString();
@@ -134,9 +124,9 @@ public class DefaultShiftTimingsStorage {
     /**
      * Resets the timings to the default timings.
      *
-     * @throws FileNotFoundException If the file cannot be found.
+     * @throws IOException If the file cannot be created or opened.
      */
-    public static void reset() throws FileNotFoundException {
+    public static void reset() throws IOException {
         for (int i = 0; i < 4; i++) {
             stringTimings[i] = DEFAULT_TIMINGS[i];
         }
