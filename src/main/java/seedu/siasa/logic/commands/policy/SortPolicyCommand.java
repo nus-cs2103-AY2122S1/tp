@@ -18,13 +18,15 @@ public class SortPolicyCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the policy list alphabetically by the order specified.\n"
-            + "Parameters: SORTING_METHOD (titleasc, titledsc, priceasc, pricedsc, commasc,"
-            + "commdsc, dateasc, datedsc)\n"
-            + "Example: " + COMMAND_WORD + " dateasc";
+            + "Parameters: SORTING_METHOD (titleasc, titledsc, paymentasc, paymentasc, commasc,"
+            + "commdsc, expiryasc, expirydsc)\n"
+            + "Example: " + COMMAND_WORD + " expirydsc";
 
     public static final String MESSAGE_SUCCESS = "Sorted policies";
 
     public static final String MESSAGE_NO_SUCH_COMPARATOR = "No such sorting order";
+
+    public static final String MESSAGE_NO_POLICIES = "There are no policies to sort.";
 
     private final Comparator<Policy> comparator;
 
@@ -41,7 +43,11 @@ public class SortPolicyCommand extends Command {
         requireNonNull(model);
         if (comparator != null) {
             model.updateFilteredPolicyList(comparator);
-            return new CommandResult(MESSAGE_SUCCESS);
+            if (model.getFilteredPolicyList().isEmpty()) {
+                return new CommandResult(MESSAGE_NO_POLICIES);
+            } else {
+                return new CommandResult(MESSAGE_SUCCESS);
+            }
         } else {
             return new CommandResult(MESSAGE_NO_SUCH_COMPARATOR);
         }

@@ -16,11 +16,16 @@ public class ListPolicyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all policies";
 
+    public static final String MESSAGE_NO_POLICIES = "There are no policies to list.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (model.getFilteredPolicyList().isEmpty()) {
+            return new CommandResult(MESSAGE_NO_POLICIES);
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 }
