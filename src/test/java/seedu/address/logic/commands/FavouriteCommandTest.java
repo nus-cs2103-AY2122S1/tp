@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,8 +27,6 @@ public class FavouriteCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
-
-    private Index targetIndex;
 
     @Test
     public void equals() {
