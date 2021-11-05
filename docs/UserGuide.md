@@ -11,34 +11,29 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-
 1. Download the latest JAR file` from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
-
 1. Copy the file to the folder you want to use as the _home folder_ for your UNIon.
-
 1. Double-click the file to start the app. The GUI should appear in a few seconds, and it should look similar to this image below. Note how the app contains some sample contacts.<br>
+   
+<img alt="startup ui" src="images/startupUi.png" width="500px" />
 
-   ![Ui](images/startupUi.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
    * `ls -contacts`: Lists all contacts.
-
    * `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to UNIon.
-
    * `rm 3`: Deletes the 3rd contact shown in the current list.
-
    * `rm -contacts`: Deletes all contacts.
-
    * `exit`: Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -67,6 +62,8 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 * Flags such as `-contacts` and `-folders` are part of the command word and must be placed immediately after the main command word e.g. (`ls -contacts` not `ls -invalid_flag -contacts`)
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -105,6 +102,8 @@ Shows a list of all persons in UNIon.
 
 Format: `ls -contacts`
 
+<div style="page-break-after: always;"></div>
+
 #### Editing a person: `vim`
 
 Edits an existing person in the UNIon.
@@ -141,10 +140,13 @@ Format: `find -contacts KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * All flags after `-contacts` will be ignored e.g. `find -contacts -invalid_flag Hans` is equivalent to `find -contacts Hans`
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `find -contacts John` returns `john` and `John Doe`
 * `find -contacts alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<img alt="result for 'find -contacts alex david'" src="images/findAlexDavidResult.png" width="500px"/>
 
 #### Deleting a person: `rm`
 
@@ -165,6 +167,8 @@ Examples:
 Clears all contacts from UNIon.
 
 Format: `rm -contacts`
+
+<div style="page-break-after: always;"></div>
 
 ### Managing folders
 
@@ -198,18 +202,19 @@ Examples:
 * `echo 3 >> CS2103` Adds contact 3 to CS2103 folder.
 * `echo 3 4 1 9 10 >> CS2103` Add contacts 3, 4, 1, 9, 10 to CS2103 folder.
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a contact from folder: `rm`
 
 Deletes the specified contact from the list of contacts from the folder.
 
-Format `rm 1 >> FOLDER_NAME`
+Format: `rm 1 >> FOLDER_NAME`
 
 * Deletes contact number 1 seen on the contact list from the folder named `FOLDER_NAME`.
 
 Examples:
 
 * `rm 1 >> CS1010` deletes a contact that corresponds to index 1 in the contact list from the folder `CS1010`.
-
 
 #### Listing all folders: `ls -folders`
 
@@ -221,18 +226,18 @@ Format: `ls -folders`
 
 Replaces the old folder name with the new folder name.
 
-Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
+Format: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
+
 * `NEW_FOLDER_NAME` has a maximum character limit of 30.
 
 #### Locating folders by name: `find -folders`
 
-Finds folders whose names contain any of the given keywords.
+Finds folders whose name contains any of the given keywords.
 
 Format: `find -folders KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `cs2103` will match `CS2103`
 * The order of the keywords does not matter. e.g. `Team Project CS2103` will match `CS2103 Team Project`
-* Only the folder name is searched.
 * Partial words will be matched e.g. `CS` will match `CS2103` and `CS2101`.
 * Folders matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `CS2103 Team Project` will return `CS2103`, `Team Project`
@@ -242,11 +247,13 @@ Examples:
 * `find -folders CS` returns `CS2103` and `CS2101`
 * `find -folders CS2103 Team Project` returns `CS2103`, `Team Project`
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a folder: `rmdir`
 
 Deletes a specified folder
 
-Format `rmdir FOLDER_NAME`
+Format: `rmdir FOLDER_NAME`
 
 * Deletes folder with the name `FOLDER_NAME`.
 
@@ -287,6 +294,8 @@ If your changes to the data file makes its format invalid, UNIon will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Action | Format, Examples
@@ -303,7 +312,7 @@ Action | Format, Examples
 **Add multiple contacts to folder** | `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME` <br> e.g. `echo 3 4 1 9 10 >> CS2103`
 **Delete contact from folder** | `rm INDEX >> FOLDER_NAME` <br> e.g., `rm 1 >> CS2102`
 **List folders** | `ls -folders`
-**Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` <br> e.g., `mv CS2103` &#124; `CS2102`
+**Edit folder name** | `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME` <br> e.g., `mv CS2103 | CS2102`
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
 **Delete folder** | `rmdir FOLDER_NAME` <br> e.g., `rmdir CS1010`
 **Clear folders** | `rm -folders`
