@@ -63,17 +63,7 @@ public class FindCommandTest {
         // different module -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
-
-    @Test
-    public void execute_zeroKeywords_noModuleFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 0);
-        ModuleContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredModuleList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredModuleList());
-    }
-
+    
     @Test
     public void execute_codePredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 6);
