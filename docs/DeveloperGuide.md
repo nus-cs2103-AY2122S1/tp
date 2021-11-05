@@ -514,70 +514,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-|`**`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
 |`***`|Tour Guide|Add contacts to my list|build a list of all my contacts|
 |`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
 |`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
 |`***`|Tour Guide|View all the contacts in my list |find contacts whose names I have forgotten|
-|`*`|Tour Guide|Sort my contacts by name or by rating||
-|`*`|Seasoned tour guide|Merge contacts |prevent duplicates or inaccurate information.|
-|`*`|Forgetful|Retrieve recently viewed/most frequently used contacts|easily access certain contacts|
-|`**`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
 |`***`|Organized|Label contacts with category|Access information more efficiently|
-|`**`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
-|`***`|Busy |Search for a specific contact|View information about the contact|
-|`**`|Objective|Rate contacts (1 to 5 stars?)|Refer to them during itinerary planning|
-|`*`|Experienced|Add reviews to contacts|Recommend services based on reviews|
-|`***`|Forgetful|Scroll through my list manually|Find contacts that I may have forgotten the names of|
 |`***`|Visual|View my contacts on a GUI|Have a more user-friendly experience|
+|`***`|Forgetful|Scroll through my list manually|Find contacts that I may have forgotten the names of|
+|`**`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
+|`**`|Busy |Find a specific contact by keyword|Easily sieve through a large database of contacts|
+|`**`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
+|`**`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
+|`**`|Objective|Rate contacts (1 to 5 stars)|Refer to them during itinerary planning|
 |`**`|New|Access a help page|Remind myself / learn how to use the app|
-|`*`|Non tech-savvy|Easy search button|Search for information easily|
 |`*`|Busy|See the overview of my current data upon start up|Quick summary of my data at a glance|
+|`*`|Experienced|Add reviews to contacts|Recommend services based on reviews|
+|`*`|Tour Guide|Sort my contacts by name or by rating|Organise a long list of contacts|
+|`*`|Seasoned tour guide|Be alerted of duplicate contacts |prevent repetition and disorganised information|
 |`*`|Confused|Have sample data shown to me|Have a rough idea of what the app has to offer|
-|`*`|Helpful|Share my data with other tour guides (through the .txt file?)|Hopefully receive more contacts from other guides|
-|`*`|Tech-savvy|Transfer my contact information conveniently||
+|`*`|Helpful|Share my data with other parties (through a .txt file)|Utilise WhereTourGo on the go|
+|`*`|Tech-savvy|Transfer my contact information conveniently|Facilitate change of devices|
 
-
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide`, unless specified otherwise)
-
+(For all use cases below, the **System** is `WhereTourGo` and the **Actor** is the `User`, unless specified otherwise)
 
 **UC01 - Add a Contact**
+**UC - Edit a Contact**
+**UC - Delete a Contact**
+**UC - List all Contacts**
+**UC - Find a Contact**
+**UC - Filter for Contacts**
+**UC - Sort all Contacts**
+**UC - Summarize all Contacts**
+**UC - View a Contact**
+**UC - Navigate Input History**
+**UC - Undo an Operation**
+**UC - Redo an Operation**
+**UC - Export a Contact**
+**UC - Export all Contacts in Filtered List**
+**UC - Clear all Contacts**
+**UC - Exit the App**
+**UC - View Help Page**
+**UC - Display Commands**
+
+
+**UC - Add a Contact**
 
 **MSS**
 
-1.Tour Guide decides to add a contact
+1.User decides to add a contact
 
-2.Tour Guide inputs the add command to the interface
+2.User inputs the add command to the interface
 
-3.AddressBook informs the Tour Guide that the contact was added
+3.WhereTourGo informs the user that the contact was added
 
-4.AddressBook displays updated list of contacts
+4.WhereTourGo displays updated list of contacts
 Use case ends.
 
 **Extensions**
 * 2a. The format is wrong
 
-    * 2a1. Address books show an error message
+    * 2a1. WhereTourGo shows an error message
 
   Use case resumes at step 2.
 
-* 2b.  Contact already exists in the AddressBook
+* 2b.  Contact already exists in WhereTourGo
 
-    * 2b1. Address books show an error message
+    * 2b1. WhereTourGo shows an error message
 
   Use case resumes at step 2
 
 
-**UC02 - List All Contacts**
+
+
+
+
+**UC - Export a Contact by Index**
+***Preconditions: User has <u>listed all contacts UC02</u>***
 
 **MSS**
 
-1.  Tour Guide requests to list all contacts
-2.  AddressBook shows a list of contacts
+1.  User requests to export a specific contact in the list.
+2.  WhereTourGo exports the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. WhereTourGo shows an error message.
+
+      Use case ends.
+
+**UC - Export all Contacts in Filtered List**
+
+**MSS**
+
+1.  User requests to export all contacts in the current list.
+2.  WhereTourGo exports all contacts.
 
     Use case ends.
 
@@ -587,14 +624,56 @@ Use case ends.
 
   Use case ends.
 
-
-**UC03 - Delete a Contact**
-***Preconditions: Tour Guide has <u>listed all contacts UC02</u>***
+**UC - List all Contacts**
 
 **MSS**
 
-1.  Tour Guide requests to delete a specific contact in the list
-2.  AddressBook deletes the contact
+1.User requests to list all contacts.
+2.WhereTourGo shows a list of contacts.
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**UC - Clear all Contacts**
+
+**MSS**
+
+1.User requests to clear all contacts.
+2.WhereTourGo clears all contacts.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. WhereTourGo has no contacts to be cleared.
+
+  Use case ends.
+
+**UC - Exit the App**
+
+**MSS**
+
+1.User requests to exit the application.
+2.WhereTourGo closes.
+
+Use case ends.
+
+
+
+
+
+**UC - Delete a Contact**
+***Preconditions: User has <u>listed all contacts UC02</u>***
+
+**MSS**
+
+1.  User requests to delete a specific contact in the list
+2.  WhereTourGo deletes the contact
 
     Use case ends.
 
@@ -602,17 +681,17 @@ Use case ends.
 
 * 2a. The given index is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. WhereTourGo shows an error message.
 
       Use case ends.
 
 
-**UC04 - Find a Contact**
+**UC - Find a Contact**
 
 **MSS**
 
-1.  Tour Guide requests to find a contact
-2.  AddressBook displays a list of all contacts with the given keywords
+1.  User requests to find a contact
+2.  WhereTourGo displays a list of all contacts with the given keywords
 
     Use case ends.
 
@@ -624,7 +703,7 @@ Use case ends.
 
 * 2b. No keywords are provided
 
-    * 2b1. AddressBook shows an error message
+    * 2b1. WhereTourGo shows an error message
 
       Use case resumes at step 2.
 
@@ -675,6 +754,10 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a contact
+
+### Editing a contact
+
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -692,10 +775,90 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Listing all contacts
+
+1. Listing all contacts
+
+    1. Test case: `list`<br>
+       Expected: All contacts are listed in the Contact Pane. Success message shown in the status message. Summary will be shown in the Display Pane.
+
+    1. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
+       Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
+       
+### Locating contacts
+
+### Filtering contacts
+
+### Sorting contacts
+
+### Summarizing contacts
+
+### Viewing a contact
+
+### Navigating WhereTourGo
+
+### Navigating input history
+
+### Clicking on contacts
+
+### Undoing operations
+
+### Redoing operations
+
+### Exporting data
+
+1. Exporting a contact while all contacts are being shown
+
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+    1. Test case: `export 1`<br>
+       Expected: First contact is exported from the list. Details of the exported contact found in the specified export .txt file.
+
+    1. Test case: `export 0`<br>
+       Expected: No contact is exported. Error details shown in the status message.
+
+    1. Other incorrect export commands to try: `export abc`, `export x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Exporting all contacts in filtered list
+
+    1. Prerequisites: List all contacts using the a command such as `list`, `filter` etc. Multiple contacts in the list.
+
+    1. Test case: `export`<br>
+       Expected: All contacts are exported from the list. Details of the exported contacts found in the specified export .txt file.
+
+### Clearing all entries
+
+1. Clearing all contacts
+
+    1. Test case: `clear`<br>
+       Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
+       
+    1. Test case: `clear`<br> and repeat `clear` again
+       Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
+
+    1. Other incorrect clear commands to try: `clear abc`, `clear 2`, `...` <br>
+       Expected: No contacts are cleared. Error details shown in the status message.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+### Exiting the program
+
+1. Exiting the program
+
+    1. Test case: `exit`<br>
+       Expected: WhereTourGo application window closes.
+
+    1. Other incorrect exit commands to try: `exit abc`, `exit 2`, `...` <br>
+       Expected: WhereTourGo is not exited. Error details shown in the status message.
+
+### Viewing help
+
+### Displaying commands
+
+
+## **Appendix: Effort**
