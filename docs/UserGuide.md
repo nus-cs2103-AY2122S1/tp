@@ -16,6 +16,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 | **Bold** | keywords |
 | :bulb: **Tip:** | Useful tips |
 | :exclamation: **Caution:** | Possible pitfalls |
+| :information_source: **Note:** | Noteworthy information |
 | `markdown` | Commands or examples |
 | Format: | the format to write the commands in the application|
 
@@ -167,7 +168,7 @@ Format: `help`
 ### Toggling between tabs: `toggle` <a name="toggle"/>
 
 Toggles between `Patients` and `Doctors` tab.<br>
-Commands enters only applies on the currently displayed tab. (eg. If the currently displayed tab the `add` command will add a patient to the records.)
+Commands enters only applies on the currently displayed tab. (eg. If the currently displayed tab is the patient tab, the `add` command will add a patient to the records.)
 
 Format: `toggle`
 * toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
@@ -203,9 +204,13 @@ To use commands for managing patients, toggle the displayed list to the patient 
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
-Adds a patient to the patient records. 
+Adds a patient to the patient records.
 
 Format: `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Duplicate patients cannot be added! A duplicate patient is one with the same name, phone number and email as an existing patient.
+</div>
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
@@ -334,6 +339,10 @@ To use commands for managing doctors, toggle the displayed list to the doctor li
 Adds a doctor to the doctor records.
 
 Format: `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Duplicate doctors cannot be added! A duplicate doctor is one with the same name, phone number and email as an existing doctor.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A doctor can have any number of tags (including 0).

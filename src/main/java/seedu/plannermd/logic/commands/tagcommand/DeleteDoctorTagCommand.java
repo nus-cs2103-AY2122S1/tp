@@ -26,7 +26,6 @@ public class DeleteDoctorTagCommand extends DeleteTagCommand {
             + "1 " + PREFIX_TAG + "healthy";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag from Doctor: %1$s";
-    public static final String MESSAGE_INVALID_TAG = "The tag does not exist.";
 
     private final Index index;
     private final Tag tag;
