@@ -34,10 +34,17 @@ public class TagTest {
     }
 
     @Test
-    public void constructor_invalidColourCodeTagColour_throwsIllegalArgumentException() {
+    public void constructor_invalidColourFieldTagColour_throwsIllegalArgumentException() {
         String validTagName = "ValidTag";
-        String invalidTagColour = "blue";
+        String invalidTagColour = "bubbleBlue";
         assertThrows(IllegalArgumentException.class, () -> new Tag(validTagName, invalidTagColour));
+    }
+
+    @Test
+    public void constructor_invalidTagAndTagColour_throwsIllegalArgumentException() {
+        String invalidTagName = "";
+        String invalidTagColour = "bubbleBlue";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName, invalidTagColour));
     }
 
     @Test
@@ -59,13 +66,13 @@ public class TagTest {
         // null tag colour
         assertThrows(NullPointerException.class, () -> Tag.isValidTagColour(null));
 
-        assertFalse(Tag.isValidTagColour("yellow")); // invalid tag colour
         assertFalse(Tag.isValidTagColour("#yellow")); // invalid tag colour
         assertFalse(Tag.isValidTagColour("#12")); // invalid colour code
         assertFalse(Tag.isValidTagColour("")); // empty tag name
 
         assertTrue(Tag.isValidTagColour("#0000FF")); // valid tag colour
         assertTrue(Tag.isValidTagColour("#123456")); // valid tag colour
+        assertTrue(Tag.isValidTagColour("yellow")); // valid tag colour
 
     }
 
