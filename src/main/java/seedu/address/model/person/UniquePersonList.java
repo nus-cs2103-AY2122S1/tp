@@ -37,6 +37,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the given name.
+     */
+    public boolean containsWithName(String name) {
+        requireNonNull(name);
+        return internalList.stream().anyMatch(person -> person.getName().fullName.equalsIgnoreCase(name));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

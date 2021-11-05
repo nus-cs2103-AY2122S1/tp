@@ -23,7 +23,6 @@ import seedu.address.model.order.Order;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.OrderBuilder;
 
-
 public class DeleteOrderCommandTest {
     private static final Order testOrder = new OrderBuilder().build();
 
@@ -80,6 +79,9 @@ public class DeleteOrderCommandTest {
             requireNonNull(order);
             listWithOneOrder.remove(order);
         }
+
+        @Override
+        public void deleteRelatedTasks(Order order) {}
 
         @Override
         public void deleteTaskIf(Predicate<Task> pred) {
