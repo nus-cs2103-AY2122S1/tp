@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
-participant ":DeleteLessonCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
-participant "dl:DeleteLessonCommand" as DeleteLessonCommand LOGIC_COLOR
+participant ":DeleteLesson\nCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
+participant "dl:DeleteLesson\nCommand" as DeleteLessonCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1

@@ -138,7 +138,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <img alt="Interactions Inside the Logic Component for the `delete 1` Command 1" src="images/DeveloperGuideImage/DeleteSequenceDiagram1.png" width="650"/>
 </center>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser`, `DeleteCommand` and `Student s` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -169,7 +169,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects. A similar design can be consdired for `Grade` as well.<br><br>
 
 <center>
 <img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="500" />
@@ -271,7 +271,11 @@ The following sequence diagram shows how add lesson operation works:
 <img alt="AddLessonSequenceDiagram1" src="images/DeveloperGuideImage/AddLessonSequenceDiagram1.png" width="650"/>
 </center>
 
-:information_source: **Note:** The lifelines for `AddLessonCommandParser` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `AddLessonCommandParser` and `AddLessonCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 <center>
 <img alt="AddLessonActivityDiagram" src="images/DeveloperGuideImage/AddLessonActivityDiagram.png"/>
@@ -364,7 +368,7 @@ The following sequence diagram shows how the delete lesson operation works:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** The lifelines for `DeleteLessonCommandParser` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+:information_source: **Note:** The lifelines for `DeleteLessonCommandParser`, `DeleteLessonCommand` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -452,6 +456,12 @@ The following sequence diagram shows how the enroll lesson operation works:
 <center>
 <img alt="EnrollLessonSequenceDiagram1" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram1.png" width="650"/>
 </center>
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `EnrollCommandParser` and `EnrollCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 The following activity diagram summarizes what
 happens when a user executes the enroll lesson command:
@@ -541,6 +551,12 @@ The following sequence diagram shows how the unenroll operation works:
 <img alt="UnenrollSequenceDiagram1" src="images/DeveloperGuideImage/UnenrollSequenceDiagram1.png" width="650"/>
 </center>
 
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `UnenrollCommandParser` and `UnenrollCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 The following activity diagram summarizes what happens when a user executes the unenroll lesson command:
 
 <center>
@@ -616,7 +632,10 @@ The following sequence diagram shows how the filter operation works:
 <img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png" width="650"/>
 </center>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `FilterCommandParser` and `FilterCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 </div>
 
 The following activity diagram summarizes what happens when a user executes the filter command:

@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant "al:AddLessonCommand" as AddLessonCommand LOGIC_COLOR
+participant "al:AddLesson\nCommand" as AddLessonCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 

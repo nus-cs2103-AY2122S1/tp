@@ -14,24 +14,27 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
-
 Class UniqueStudentList
-Class Student
+Class UniqueLessonList
+
+Package "Student\n\n" <<Rectangle>> {
+Class "Student" as s
 Class Address
 Class Email
 Class Name
 Class ParentContact
 Class Remark
 Class "Grade" as g1
-Class "Grade" as g2
+}
 
-Class UniqueLessonList
-Class Lesson
+Package "Lesson\n\n" <<Rectangle>> {
+Class "Lesson" as l
 Class LessonCode
 Class LessonTime
 Class Price
 Class Subject
+Class "Grade" as g2
+}
 
 }
 
@@ -48,13 +51,13 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 Tuitione *--> "1" UniqueStudentList
-UniqueStudentList --> "~* all" Student
-Student *--> Name
-Student *--> ParentContact
-Student *--> Email
-Student *--> Address
-Student *--> "0..5" Remark
-Student *--> g1
+UniqueStudentList --> "~* all" s
+s *--> Name
+s *--> ParentContact
+s *--> Email
+s *--> Address
+s *--> "0..5" Remark
+s *--> g1
 
 Name -[hidden]down-> ParentContact
 ParentContact -[hidden]down-> g1
@@ -66,12 +69,12 @@ Address -[hidden]down-> Email
 UniqueStudentList --[hidden]right--> UniqueLessonList
 
 Tuitione *--> "1" UniqueLessonList
-UniqueLessonList -right-> "~* all" Lesson
-Lesson *--> LessonCode
-Lesson *--> LessonTime
-Lesson *--> Price
-Lesson *--> Subject
-Lesson *--> g2
+UniqueLessonList -right-> "~* all" l
+l *--> LessonCode
+l *--> LessonTime
+l *--> Price
+l *--> Subject
+l *--> g2
 
 Subject -[hidden]down-> LessonTime
 LessonTime -[hidden]down-> Price
@@ -79,8 +82,8 @@ LessonTime -[hidden]down-> Price
 Subject -[hidden]down-> LessonCode
 LessonCode -[hidden]down-> g2
 
-Student "0..15" <-left-> "0..10" Lesson
+s "0..15" <-left-> "0..10" l
 
-ModelManager --->"~* filtered" Student
-ModelManager --->"~* filtered" Lesson
+ModelManager ---->"~* filtered" s
+ModelManager ---->"~* filtered" l
 @enduml
