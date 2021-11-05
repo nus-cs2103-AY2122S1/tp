@@ -25,7 +25,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_correctFile_success() throws CommandException, URISyntaxException {
-        String properFile = Paths.get("../../../../data/import.json").normalize().toString();
+        String properFile = "../../../../data/import.json";
         CommandResult commandResult = new ImportCommand(properFile).execute(model);
 
         assertEquals(commandResult.getFeedbackToUser(), String.format(ImportCommand.MESSAGE_SUCCESS, 2));
@@ -33,7 +33,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_fileNotFound_throwsCommandException() {
-        String nonexistentFile = Paths.get("../../../../data/random.json").normalize().toString();
+        String nonexistentFile = "../../../../data/random.json";
         ImportCommand importCommand = new ImportCommand(nonexistentFile);
 
         assertThrows(CommandException.class, ImportCommand.MESSAGE_FILE_NOT_FOUND, () -> importCommand.execute(model));
@@ -41,7 +41,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_incorrectFormat_throwsCommandException() {
-        String incorrectDataFormatFile = Paths.get("../../../../data/incorrect.json").normalize().toString();
+        String incorrectDataFormatFile = "../../../../data/incorrect.json";
         ImportCommand importCommand = new ImportCommand(incorrectDataFormatFile);
 
         assertThrows(CommandException.class,
@@ -50,7 +50,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_incorrectFileExtension_throwsCommandException() {
-        String incorrectFileExtension = Paths.get("../../../../data/import.txt").normalize().toString();
+        String incorrectFileExtension = "../../../../data/import.txt";
         ImportCommand importCommand = new ImportCommand(incorrectFileExtension);
 
         assertThrows(CommandException.class,
