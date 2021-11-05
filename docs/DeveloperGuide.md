@@ -400,7 +400,7 @@ Once the SetTablesCommand is created, the LogicManager will then execute the Set
 
 Finally, a success message is printed to the user saying how many tables were set
 
-###### Flow of execution
+**Flow of execution:**
 
 The activity diagram below shows the flow of execution when a user calls this command together with the details when SetTablesCommand is executed
 
@@ -439,7 +439,7 @@ During the SetTablesCommand execution:
 4. There is no add/remove/edit table or table list
     * Again, this is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
 
-###### Future Implementations
+**Future Implementations:**
 
 In the future implementations, we plan to allow editing of tables and allowing the user to shift reservations to specific tables if they want to overwrite the original assigned table.
 
