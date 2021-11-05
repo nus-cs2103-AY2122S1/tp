@@ -184,7 +184,13 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
   for 8am.
-* Overlapping lessons cannot be added. These include any lessons in groups that the student is in.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Overlapping lessons:**<br>
+* The same student cannot be allocated to multiple lessons that are overlapping. Overlap is defined as being
+  on the same day and within the same time frame.
+* However, lessons of different students can still overlap. This may be disallowed in a future version.
+</div>
 
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
@@ -205,6 +211,9 @@ Format: `student -dl PERSON_INDEX LESSON_INDEX`
 * Deletes the specified lesson at `LESSON_INDEX` of the student specified.
 * Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
 
+![studentLessonIndex](images/LessonIndex.png)
+*The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v)*
+
 Example:
 * `student -dl 1 1` deletes the first lesson from the first student.
 </details>
@@ -220,6 +229,7 @@ Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
 * Adds a lesson to the student specified by the `INDEX`.
 * `SUBJECT` takes in any input with at least one alphanumeric character.
 * `DATE_TIME` takes in a date and time in the following format: `yyyy-MM-dd HH:mm`.
+* There are currently no restrictions on `DATE_TIME`, please ensure that the exam dates are correct.
 
 Example:
 * `student -ae 1 s/Math d/2021-12-20 14:00` Adds an exam with the subject name Math
@@ -293,12 +303,13 @@ Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
   for 8am.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Overlapping lessons:**<br>
-The same student cannot be allocated to multiple lessons that are overlapping. Overlapping is defined as being
-on the same day and within the same time frame. <br>
-However, lessons of different students can still overlap. This may be disallowed in a future version.
+* A group cannot be allocated a lesson if any students within the group have overlapping lessons. Overlap is defined as being
+  on the same day and within the same time frame.
+* However, lessons of different students or groups can still overlap. This may be disallowed in a future version.
 </div>
 
 Example:
