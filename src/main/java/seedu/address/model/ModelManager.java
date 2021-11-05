@@ -222,7 +222,11 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean hasTask(Member member, Task task) {
-        loadTaskList(member);
+        requireNonNull(member);
+        if (this.taskListManager != member.getTaskList()) {
+            this.taskListManager = member.getTaskList();
+            this.currentMember = member;
+        }
         requireNonNull(task);
         return taskListManager.contains(task);
     }
@@ -233,7 +237,11 @@ public class ModelManager implements Model {
      */
     @Override
     public void addTask(Member member, Task task) {
-        loadTaskList(member);
+        requireNonNull(member);
+        if (this.taskListManager != member.getTaskList()) {
+            this.taskListManager = member.getTaskList();
+            this.currentMember = member;
+        }
         taskListManager.add(task);
         updateFilteredTaskList(member, PREDICATE_SHOW_ALL_TASKS);
     }
