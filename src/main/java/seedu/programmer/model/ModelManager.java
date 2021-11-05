@@ -103,7 +103,7 @@ public class ModelManager implements Model {
         requireNonNull(lab);
         return programmerError.hasLab(lab);
     }
-  
+
     @Override
     public boolean hasSameStudentId(Student student) {
         requireNonNull(student);
@@ -156,7 +156,7 @@ public class ModelManager implements Model {
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedProgrammerError}
-    */
+     */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
@@ -171,7 +171,6 @@ public class ModelManager implements Model {
     public Student getSelectedStudent() {
         return programmerError.getSelectedStudent();
     }
-
 
     @Override
     public void setSelectedStudent(Student target) {
