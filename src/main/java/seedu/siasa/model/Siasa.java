@@ -157,15 +157,10 @@ public class Siasa implements ReadOnlySiasa {
     public Map<Contact, Integer> getCommissionPerContact() {
         HashMap<Contact, Integer> hashMap = new HashMap<>();
         contacts.forEach(contact -> {
-            float commission = 0;
+            double commission = 0;
             for (Policy policy : policies) {
                 if (policy.getOwner().equals(contact)) {
-                    float commissionPercentage = policy.getCommission().commissionPercentage;
-                    int numberPayments = policy.getCommission().numberOfPayments;
-                    int paymentAmt = policy.getPaymentStructure().paymentAmount;
-                    float policyCommission = (commissionPercentage / 100)
-                            * numberPayments * paymentAmt;
-                    commission += policyCommission;
+                    commission += policy.getTotalCommission();
                 }
             }
             hashMap.put(contact, (int) commission);

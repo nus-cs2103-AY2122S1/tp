@@ -69,7 +69,7 @@ public class DownloadCommand extends Command {
         stringList.add("Statistics for " + CURRENT_DATE + "\n");
         stringList.add("Most premium contacts:\n" + TITLE_UNDERLINE);
         commissionPerContact.forEach((contact, commission) -> {
-            stringList.add(contact + "; Commission: " + centsToDollars(commission));
+            stringList.add(contact + "; Commission: " + commissionToDollarsStr(commission));
         });
         stringList.add("\n");
 
@@ -82,8 +82,17 @@ public class DownloadCommand extends Command {
         stringList.add("Average number of policies per contact: "
                 + String.format("%.2f", getAvgPoliciesPerContact(numberPoliciesPerContact)));
 
-        stringList.add("Total Commission: " + centsToDollars(totalCommission));
+        stringList.add("Total Commission: " + commissionToDollarsStr(totalCommission));
         return stringList;
+    }
+
+    private String commissionToDollarsStr(int commission) {
+        boolean isMaxInt = commission == Integer.MAX_VALUE;
+        if (isMaxInt) {
+            return centsToDollars(commission) + " (Max Value reached)";
+        } else {
+            return centsToDollars(commission);
+        }
     }
 
     private void writeToTxt(List<String> stringList) throws IOException {
