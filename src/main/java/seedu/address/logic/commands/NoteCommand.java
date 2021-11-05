@@ -32,6 +32,9 @@ public class NoteCommand extends Command {
      * Constructor of the NoteCommand with the given student name and note.
      */
     public NoteCommand(Name studentName, Note note) {
+        requireNonNull(studentName);
+        requireNonNull(note);
+
         this.studentName = studentName;
         this.note = note;
     }
