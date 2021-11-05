@@ -334,24 +334,24 @@ Adds a group to a particular tutorial class
 
 Entering format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
+**:information_source: Note:**<br>
+
+Only `OP1` and `OP2` are accepted as Group Types.
+
 Examples:
-* `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
-
+* `addcg gn/1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 * Group Type refers to the assignment that the group will work together for
-
-### Adding a group: `addcg`
-
-Adds a group to a particular tutorial class
-
-Entering format: `addcg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
-
-Examples: `addcg gn/1 c/G01 type/OP1` adds `OP1` Group `1` to class `G01`
 
 ### Viewing a Group: `viewg`
 
 Lists students in a particular tutorial group in ClassMATE
 
 Entering format: `viewg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
+
+**:information_source: Note:**<br>
+
+Only `OP1` and `OP2` are accepted as Group Types.
+
 
 Examples:
 * `viewg c/G06 type/OP2 gn/1` lists the students in `OP2` Group `1` of class `G06`
@@ -361,22 +361,32 @@ Examples:
 
 Deletes a group from ClassMATE
 
-Entering format: `deletecg c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
+Entering format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
+
+**:information_source: Note:**<br>
+
+Only `OP1` and `OP2` are accepted as Group Types.
+
 
 Examples:
 * `deletecg c/G06 type/OP2 gn/1` deletes the `OP2` Group `1` of class `G06`
 
 ### Adding Student to a group: `addsg`
 
-Adds student to a group.
+Adds a student to a group.
 
 Entering format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 * Adds the student to a group in the class
 
+**:information_source: Note:**<br>
+
+Only `OP1` and `OP2` are accepted as Group Types.
+
+
 Example:
 * `liststu c/G06`shows that Betsy is a student in class G06, with Index 1.
-  `addsg 1 g/A c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group A in class G06
+  `addsg 1 gn/1 c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group 1 in class G06
 
 ### Deleting Student from a group: `deletesg`
 
@@ -386,6 +396,11 @@ Entering format: `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 * Deletes the student from a group in the class
 * Type refers to the assignment that the group will work together for
+
+**:information_source: Note:**<br>
+
+Only `OP1` and `OP2` are accepted as Group Types.
+
 
 Example:
 * `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
