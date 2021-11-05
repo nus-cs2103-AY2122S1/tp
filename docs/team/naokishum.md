@@ -42,7 +42,8 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Wrote additional tests for existing features to increase coverage (Pull requests
-      [\#100](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/100))
+      [\#100](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/100),
+      [\#332](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/332))
     * Added sample data for new users. (Pull requests
       [\#155](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/155)) 
 
@@ -57,9 +58,10 @@ Given below are my contributions to the project.
         * Added implementation details of the `find` and `list` feature.(Pull requests
           [\#52](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/52),
           [\#159](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/159))
-        * Added use cases for `find` and `list` feature. (Pull requests
+        * Added use cases and manual testing instructions for `find` and `list` feature. (Pull requests
           [\#52](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/52),
-          [\#159](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/159))
+          [\#159](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/159),
+          [\#333](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/333))
 
 * **Community**:
     * Reported bugs and suggestions for other teams in the class([link](https://github.com/NaokiShum/ped/issues))

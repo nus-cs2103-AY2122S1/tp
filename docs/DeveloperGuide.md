@@ -906,7 +906,7 @@ expected to do more *exploratory* testing.
         1. If the first product doesn't have a quantity, refer to <u>7.5, 2</u> to set its quantity to be a
            positive integer.
 
-     1. Test case: `edit -c 1 -n Ben -pn 12345678 -e ben@gmail.com -a ben's house address -o 1 0 3/14`<br>
+    1. Test case: `edit -c 1 -n Ben -pn 12345678 -e ben@gmail.com -a ben's house address -o 1 0 3/14`<br>
        Expected: First client is edited from the list. Details of the edited client shown in the status message.
 
     1. Test case: `edit -c 0`<br>
@@ -927,8 +927,40 @@ expected to do more *exploratory* testing.
 
     1. Other incorrect edit commands to try: `edit`, `edit -p x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+       
+### 7.6 Listing Clients/Products
 
-### 7.6 Saving Data
+1. Listing all clients
+    1. Test Case: `list -c`<br>
+       Expected: All clients in the application will be shown.
+   
+1. Listing all products
+   1. Test Case: `list -p`<br>
+      Expected:  All products in the application will be shown.
+   
+### 7.7 Finding a Client/Product
+
+1. Finding a client
+    1. Test case: `find -c ben`<br>
+       Expected: All clients name containing the keyword `ben` will be shown (case insensitive). 
+       If there are no matches, an empty list will be shown.
+       
+    1. Test case: `find -c ben alice charlie`<br>
+       Expected: All clients name containing the keyword `ben`, `alice` or `charlie` will be shown (case insensitive). 
+       If there are no matches, an empty list will be shown. 
+    
+1. Finding a product
+    1. Test case: `find -p IPhone`<br>
+       Expected: All products name containing the keyword `IPhone` will be shown (case insensitive).
+       If there are no matches, an empty list will be shown.
+
+    1. Test case: `find -c IPhone AirPods Macbook`<br>
+       Expected: All products name containing the keyword `IPhone`, `AirPods`
+       or `Macbook` will be shown (case insensitive).
+       If there are no matches, an empty list will be shown.
+
+
+### 7.8 Saving Data
 
 1. Dealing with missing/corrupted data files
 
