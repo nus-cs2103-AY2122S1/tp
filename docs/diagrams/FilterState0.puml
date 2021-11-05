@@ -26,4 +26,7 @@ package Tuitione <<rectangle>> {
     }
 }
 
+lessonList -[hidden]up-> studentList
+
+
 @end
