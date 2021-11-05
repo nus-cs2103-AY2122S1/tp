@@ -6,11 +6,10 @@ participant ":Logic\nManager" as LogicManager LOGIC_COLOR
 participant ":Tuitione\nParser" as TuitioneParser LOGIC_COLOR
 participant "fp:FilterCommand\nParser" as FilterCommandParser LOGIC_COLOR
 participant "f:Filter\nCommand" as FilterCommand LOGIC_COLOR
-participant ":Command\nResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute\n("filter g/S2 s/English")
@@ -38,36 +37,17 @@ deactivate FilterCommand
 
 FilterCommandParser --> TuitioneParser : f
 deactivate FilterCommandParser
+
 FilterCommandParser -[hidden]-> TuitioneParser
 destroy FilterCommandParser
-
 
 TuitioneParser --> LogicManager : f
 deactivate TuitioneParser
 
-LogicManager -> FilterCommand : execute(m)
+LogicManager -> FilterCommand : execute()
 activate FilterCommand
 
-FilterCommand -> Model
-activate Model
-alt "grade != null"
-    Model -> Model : filter student and lesson list by grade
-else "subject != null"
-    Model -> Model : filter lesson list by subject
-
-else "grade != null && subject != null"
-    Model -> Model : filter student list by subject,\nfilter lesson list by subject and grade
-end
-
-Model --> FilterCommand : student and\nlesson lists filtered
-deactivate Model
-
-create CommandResult
-FilterCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> FilterCommand
-deactivate CommandResult
+ref over FilterCommand : FilterCommand execution
 
 FilterCommand --> LogicManager : commandResult
 deactivate FilterCommand

@@ -589,7 +589,11 @@ The user executes `list` to get back the initial lists before the filter.
 The following sequence diagram shows how the filter operation works:
 
 <center>
-<img alt="FilterSequenceDiagram" src="images/DeveloperGuideImage/FilterSequenceDiagram.png"/>
+<img alt="FilterSequenceDiagram0" src="images/DeveloperGuideImage/FilterSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png"/>
 </center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
