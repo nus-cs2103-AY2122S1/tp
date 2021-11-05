@@ -9,8 +9,6 @@ import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -23,26 +21,28 @@ import seedu.address.storage.ExportStorage;
 
 public class ExportCommandIndexTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    private UserPrefs userPrefs = new UserPrefs();
+    private final UserPrefs userPrefs = new UserPrefs();
 
-    {
-        try {
-            new ExportStorage(userPrefs.getExportFilePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private final ExportStorage exportStorageModel = new ExportStorage(userPrefs.getExportFilePath());
+
+    private Contact getModelFirstContact() {
+        return model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+    }
+
+    private ModelManager getNewModelManager() {
+        return new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact contactToExport = getModelFirstContact();
         ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
 
         String expectedMessage = ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = getNewModelManager();
         expectedModel.exportContact(contactToExport);
 
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
@@ -60,12 +60,12 @@ public class ExportCommandIndexTest {
     public void execute_validIndexFilteredList_success() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 
-        Contact contactToExport = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact contactToExport = getModelFirstContact();
         ExportCommandIndex exportCommand = new ExportCommandIndex(INDEX_FIRST_CONTACT);
 
         String expectedMessage = ExportCommand.MESSAGE_EXPORT_SUCCESS;
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = getNewModelManager();
         expectedModel.exportContact(contactToExport);
         showContactAtIndex(expectedModel, INDEX_FIRST_CONTACT);
 

@@ -35,6 +35,7 @@ public class ExportCommandIndex extends ExportCommand {
         Contact contactToExport = lastShownList.get(targetIndex.getZeroBased());
         ExportStorage.clearStorage();
         model.exportContact(contactToExport);
+
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, contactToExport));
     }
 
