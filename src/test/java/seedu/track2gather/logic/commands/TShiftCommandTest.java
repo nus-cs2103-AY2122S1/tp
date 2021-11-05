@@ -101,6 +101,24 @@ public class TShiftCommandTest {
     }
 
     @Test
+    public void singlePeriod_validDaysShiftNegativeWithinStart_success() {
+        int days = -3;
+        int daysApart = 10;
+        assertTrue(Math.abs(days) < daysApart);
+
+        LocalDate startDate = LocalDate.of(2020, 1, 1);
+        LocalDate endDate = startDate.plusDays(daysApart);
+
+        TShiftCommand tShiftCommand = new TShiftCommand(days);
+        ShnPeriod shnPeriod = new ShnPeriod(new Period(startDate, endDate));
+        ShnPeriod shiftedShnPeriod = tShiftCommand.shiftShnPeriodEndDate(shnPeriod);
+        assertTrue(shiftedShnPeriod.value.isPresent());
+
+        LocalDate shiftedEndDate = shiftedShnPeriod.value.get().getEndDate();
+        assertEquals(startDate.plusDays(7), shiftedEndDate);
+    }
+
+    @Test
     public void equals() {
         TShiftCommand tShiftCommand1 = new TShiftCommand(-1);
         TShiftCommand tShiftCommand2 = new TShiftCommand(0);
