@@ -93,7 +93,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     public EditApplicantDescriptor build() {
-        return descriptor;
+        return this.descriptor;
     }
 
 }
