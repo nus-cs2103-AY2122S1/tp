@@ -37,7 +37,12 @@ title: Developer Guide
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
 * [Appendix](#appendix-requirements)
-  * [Requirement](#appendix-requirements)
+  * [Requirements](#appendix-requirements)
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
   * [Manual Testing](#appendix-instructions-for-manual-testing)
     * [Feature Testing](#feature-testing)
     * [UI Testing](#ui-testing)
@@ -586,7 +591,7 @@ The following links to guides on: Documentation, Logging, Testing, Configuration
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix: Requirements
+## **Appendix: Requirements**
 
 ### Product scope
 
