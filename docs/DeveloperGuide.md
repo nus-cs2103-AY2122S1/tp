@@ -492,6 +492,43 @@ Checks would have to be implemented to ensure that the reservations-table pairin
 
 This will allow for greater flexibility for restaurant managers where they can manually assign seats to certain reservations (e.g. Assigning a big table to a small group of VIPs even though the table space is not optimized)
 
+### Get corresponding customer command
+For more information about this command and its usage, please refer to our [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
+
+#### Implementation
+
+Getting corresponding customer can be divided into two steps, `Parse` and `Execute`.
+Parsing for this command is similar to any Delete Command, where we only need to parse for an `INDEX`.
+Hence, this section will focus on the executing aspect of this command.
+
+The Sequence Diagram below illustrates how `getC 1` is executed, assuming `1` is a valid reservation index.
+
+![GetCustomerReservingCommandSequenceDiagram](images/GetCustomerReservingCommandSequenceDiagram.png)
+
+1. When a command is executed, it will interact with the `Model` to get the display reservation list. The `Reservation`
+   specified by the given index is obtained from the list.
+2. A `CustomerContainsPhonePredicate` is instantiated with the `Phone` of the `Reservation`, 
+   and it is used to update the filtered customer list to contain only the corresponding customer.
+3. The result of the command execution is encapsulated as a `CommandResult` object and returned back to the caller. 
+   The Ui is also switched to customer view and display the corresponding customer.
+   
+#### Design Considerations
+
+* Current design: We have a separate command to support viewing the information of a customer who made a reservation.
+    * Pros: 
+      * There is no overlapping information between customer view and reservation view, hence less coupling between reservation and customer code, thus it improves coding quality.
+      *  We can manipulate reservations and customers separately, which is more flexible.
+    * Cons: 
+      * We need an extra step for viewing customer information corresponding to a reservation
+
+* Alternative Design: Instead of a separate command, we can display the customer information with the reservation, or
+display the reservations along with customer information.
+  * Pros: 
+    * This implementation is more intuitive as we do not need an extra step to view corresponding customer information.
+  * Cons: 
+    * It is harder to implement properly, as it will introduce more couplings to the codebase, espeacially when
+    the database used is NoSQL, which hinders the ability to create relationship between entities.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
