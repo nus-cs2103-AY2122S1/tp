@@ -106,7 +106,7 @@ public class SetShiftTimeCommandTest {
         expectedModel.findPersonByName(new Name("Alice Pauline")).setShiftTime(DayOfWeek.TUESDAY, Slot.AFTERNOON,
                 TIMES[0], TIMES[1], START_DATE, END_DATE);
         assertCommandSuccess(firstCommand, model, String.format(MESSAGE_SET_SHIFT_TIME_SUCCESS, alice.getName(),
-                DayOfWeek.TUESDAY, Slot.AFTERNOON, TIMES[0], TIMES[1]), expectedModel);
+                DayOfWeek.TUESDAY, Slot.AFTERNOON, START_DATE, END_DATE, TIMES[0], TIMES[1]), expectedModel);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class SetShiftTimeCommandTest {
         expectedModel.findPersonByName(new Name("Alice Pauline")).setShiftTime(DayOfWeek.TUESDAY, Slot.AFTERNOON,
                 TIMES[0], TIMES[1], START_DATE, END_DATE);
         assertCommandSuccess(firstCommand, model, String.format(MESSAGE_SET_SHIFT_TIME_SUCCESS, alice.getName(),
-                DayOfWeek.TUESDAY, Slot.AFTERNOON, TIMES[0], TIMES[1]), expectedModel);
+                DayOfWeek.TUESDAY, Slot.AFTERNOON, START_DATE, END_DATE, TIMES[0], TIMES[1]), expectedModel);
     }
 
     @Test

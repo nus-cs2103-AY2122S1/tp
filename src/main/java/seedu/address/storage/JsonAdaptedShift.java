@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.RecurrencePeriod;
 import seedu.address.model.person.EmptyShift;
 import seedu.address.model.person.Shift;
@@ -65,10 +66,16 @@ public class JsonAdaptedShift {
             throw new IllegalValueException(Slot.MESSAGE_CONSTRAINTS);
         }
         Slot modelSlot = Slot.translateStringToSlot(slot);
-        DayOfWeek modelDayOfWeek = DayOfWeek.valueOf(dayOfWeek);
+        DayOfWeek modelDayOfWeek = toModelTypeDayOfWeek();
         List<RecurrencePeriod> periods = new ArrayList<>();
         for (JsonAdaptedRecurrencePeriod period : history) {
-            periods.add(period.toModelType());
+            RecurrencePeriod toAdd = period.toModelType();
+            try {
+                Shift.checkTimeOrder(toAdd.getStartTime(), toAdd.getEndTime(), modelSlot.getOrder());
+            } catch (InvalidShiftTimeException e) {
+                throw new IllegalValueException(e.getMessage());
+            }
+            periods.add(toAdd);
         }
 
         //empty case
@@ -79,4 +86,13 @@ public class JsonAdaptedShift {
         Shift result = new Shift(modelDayOfWeek, modelSlot, periods);
         return result;
     }
+
+    private DayOfWeek toModelTypeDayOfWeek() throws IllegalValueException {
+        try {
+            return DayOfWeek.valueOf(dayOfWeek);
+        } catch (IllegalArgumentException re) {
+            throw new IllegalValueException(re.getMessage());
+        }
+    }
+
 }
