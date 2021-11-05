@@ -6,6 +6,7 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 import java.util.function.Predicate;
 
 import seedu.anilist.commons.core.Messages;
+import seedu.anilist.logic.parser.Prefix;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Status;
@@ -22,6 +23,11 @@ public class ListCommand extends Command {
             + "specified to switch tabs, showing only anime with that status.\n"
             + "Parameters: [" + PREFIX_STATUS + "STATUS]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STATUS + "watching\n";
+
+    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[] {};
+    public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[] {PREFIX_STATUS};
+    public static final boolean REQUIRES_PREAMBLE = false;
+
     private final Predicate<Anime> predicate;
     private final Status statusToMatch;
 

@@ -103,20 +103,20 @@ public class ParserUtil {
 
     /**
      * Parse a {@Code String actionString} into a {@Code Action}.
-     * Leading and trailing whitespaces will be trimmed, and it will be set to lowercase.
+     * Leading and trailing whitespaces will be trimmed.
      * @param actionString string to be parsed
      * @return a {@Code Action}
      * @throws ParseException if the given {@code actionString} is invalid.
      */
     public static Action parseAction(String actionString) throws ParseException {
         requireNonNull(actionString);
-        String trimmedActionLowerCase = actionString.trim().toLowerCase();
+        String trimmedAction = actionString.trim();
         Action result;
-        if (!Action.isValidAction(trimmedActionLowerCase)) {
-            throw new ParseException(String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, trimmedActionLowerCase));
+        if (!Action.isValidAction(trimmedAction)) {
+            throw new ParseException(String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, trimmedAction));
         }
 
-        result = Action.actionFromString(trimmedActionLowerCase);
+        result = Action.actionFromString(trimmedAction);
 
         return result;
     }
@@ -153,7 +153,8 @@ public class ParserUtil {
                 ArgumentTokenizer.tokenize(args, allPrefixes);
         Set<Prefix> requiredPrefixesSet = new HashSet<>(Arrays.asList(requiredPrefixes));
         Set<Prefix> optionalPrefixesSet = new HashSet<>(Arrays.asList(optionalPrefixes));
-        boolean hasPreamble = !argMultimap.getPreamble().isEmpty();
+        String preamble = argMultimap.getPreamble();
+        boolean hasPreamble = !preamble.isEmpty();
         if (!requiresPreamble && hasPreamble) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
@@ -162,7 +163,8 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
-        if (!arePrefixesPresent(argMultimap, requiredPrefixes)) {
+        boolean areRequiredPrefixesPresent = arePrefixesPresent(argMultimap, requiredPrefixes);
+        if (!areRequiredPrefixesPresent) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
@@ -170,7 +172,8 @@ public class ParserUtil {
             boolean isRequiredPrefix = requiredPrefixesSet.contains(p);
             boolean isOptionalPrefix = optionalPrefixesSet.contains(p);
             boolean isValidPrefix = isOptionalPrefix || isRequiredPrefix;
-            if (argMultimap.getValue(p).isPresent() && !isValidPrefix) {
+            boolean isPrefixPresent = isPrefixPresent(argMultimap, p);
+            if (isPrefixPresent && !isValidPrefix) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
         }
@@ -182,6 +185,10 @@ public class ParserUtil {
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> isPrefixPresent(argumentMultimap, prefix));
+    }
+
+    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
+        return argumentMultimap.getValue(prefix).isPresent();
     }
 }

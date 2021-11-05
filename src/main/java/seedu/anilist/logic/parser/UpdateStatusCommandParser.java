@@ -5,15 +5,21 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.anilist.commons.core.Messages.MESSAGE_OUT_OF_RANGE_INDEX;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.Optional;
+
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.logic.parser.exceptions.IntegerOutOfRangeException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
+import seedu.anilist.model.anime.Status;
+
 
 /**
  * Parses input arguments and creates a new UpdateStatusCommand object
  */
 public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
+    private static final String MESSAGE_INVALID_COMMAND_STATUS = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            UpdateStatusCommand.MESSAGE_USAGE);
 
     /**
      * Parses the given {@code String} of arguments in the context of the UpdateStatusCommand
@@ -25,10 +31,10 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
         ArgumentMultimap argMultimap;
 
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, true,
-                    new Prefix[] {PREFIX_STATUS});
+            argMultimap = ParserUtil.tokenizeWithCheck(args, UpdateStatusCommand.REQUIRES_PREAMBLE,
+                    UpdateStatusCommand.REQUIRED_PREFIXES, UpdateStatusCommand.OPTIONAL_PREFIXES);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateStatusCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_STATUS);
         }
         Index index;
 
@@ -37,12 +43,13 @@ public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
         } catch (IntegerOutOfRangeException e) {
             throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UpdateStatusCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_STATUS, pe);
         }
         UpdateStatusCommand.StatusDescriptor statusDescriptor = new UpdateStatusCommand.StatusDescriptor();
-        statusDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
+        Optional<String> statusParam = argMultimap.getValue(PREFIX_STATUS);
+        Status status = ParserUtil.parseStatus(statusParam.get());
+
+        statusDescriptor.setStatus(status);
 
         if (!statusDescriptor.isStatusEdited()) {
             throw new ParseException(UpdateStatusCommand.MESSAGE_NOT_EDITED);

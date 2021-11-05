@@ -8,6 +8,7 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.ParserUtil.parseAction;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,6 +26,10 @@ import seedu.anilist.model.genre.Genre;
  * Parses input arguments and creates a new GenreCommand object
  */
 public class GenreCommandParser implements Parser<GenreCommand> {
+    private static final String MESSAGE_INVALID_COMMAND_GENRE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            GenreCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_UNSUPPORTED_ACTION = String.format(Action.MESSAGE_ACTION_NOT_SUPPORTED_FORMAT,
+            GenreCommand.COMMAND_WORD);
 
     /**
      * Parses the given {@code String} of arguments in the context of the GenreCommand
@@ -37,26 +42,27 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         ArgumentMultimap argMultimap;
 
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, true, new Prefix[] {PREFIX_ACTION, PREFIX_GENRE});
+            argMultimap = ParserUtil.tokenizeWithCheck(args, GenreCommand.REQUIRES_PREAMBLE,
+                    GenreCommand.REQUIRED_PREFIXES, GenreCommand.OPTIONAL_PREFIXES);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_GENRE);
         }
 
         Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String preamble = argMultimap.getPreamble();
+            index = ParserUtil.parseIndex(preamble);
         } catch (IntegerOutOfRangeException e) {
             throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    GenreCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_GENRE, pe);
         }
 
         GenreCommand.GenresDescriptor genresDescriptor = new GenreCommand.GenresDescriptor();
-        String actionString = argMultimap.getValue(PREFIX_ACTION).get();
-        Action action = parseAction(actionString);
-        parseGenresForEdit(argMultimap.getAllValues(PREFIX_GENRE)).ifPresent(genresDescriptor::setGenres);
+        Optional<String> actionParam = argMultimap.getValue(PREFIX_ACTION);
+        Action action = parseAction(actionParam.get());
+        List<String> genreParams = argMultimap.getAllValues(PREFIX_GENRE);
+        parseGenresForEdit(genreParams).ifPresent(genresDescriptor::setGenres);
 
         switch (action) {
         case ADD :
@@ -64,8 +70,7 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         case DELETE :
             return new GenreDeleteCommand(index, genresDescriptor);
         default :
-            throw new ParseException(String.format(Action.MESSAGE_ACTION_NOT_SUPPORTED_FORMAT,
-                    GenreCommand.COMMAND_WORD));
+            throw new ParseException(MESSAGE_UNSUPPORTED_ACTION);
         }
     }
 

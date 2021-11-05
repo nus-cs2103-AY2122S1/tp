@@ -7,6 +7,7 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.function.Predicate;
 
 import seedu.anilist.commons.core.Messages;
+import seedu.anilist.logic.parser.Prefix;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 
@@ -26,8 +27,11 @@ public class FindCommand extends Command {
         + "[" + PREFIX_GENRE + "GENRE KEYWORD]...\n"
         + "Example: " + COMMAND_WORD + " n/boku no n/hero g/comedy";
 
-    private final Predicate<Anime> predicate;
+    public static final Prefix[] REQUIRED_PREFIXES = new Prefix[] {};
+    public static final Prefix[] OPTIONAL_PREFIXES = new Prefix[] {PREFIX_NAME, PREFIX_GENRE};
+    public static final boolean REQUIRES_PREAMBLE = false;
 
+    private final Predicate<Anime> predicate;
 
     public FindCommand(Predicate<Anime> predicate) {
         this.predicate = predicate;

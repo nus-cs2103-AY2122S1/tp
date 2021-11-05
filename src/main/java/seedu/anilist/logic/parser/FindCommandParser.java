@@ -4,6 +4,7 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.anilist.logic.commands.FindCommand;
@@ -16,7 +17,8 @@ import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
+    private static final String MESSAGE_INVALID_COMMAND_FIND = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindCommand.MESSAGE_USAGE);
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -29,28 +31,28 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap;
 
         try {
-            argMultimap = ParserUtil.tokenizeWithCheck(args, false, new Prefix[] {}, PREFIX_NAME, PREFIX_GENRE);
+            argMultimap = ParserUtil.tokenizeWithCheck(args, FindCommand.REQUIRES_PREAMBLE,
+                    FindCommand.REQUIRED_PREFIXES, FindCommand.OPTIONAL_PREFIXES);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FIND);
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        List<String> nameParams = argMultimap.getAllValues(PREFIX_NAME);
+        List<String> genreParams = argMultimap.getAllValues(PREFIX_GENRE);
+        boolean hasNameParams = nameParams.size() > 0;
+        boolean hasGenreParams = genreParams.size() > 0;
+        if (hasNameParams) {
             hasValidArguments = true;
-            combinedPred = combinedPred.and(
-                new NameContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_NAME))
-            );
+            combinedPred = combinedPred.and(new NameContainsKeywordsPredicate(nameParams));
         }
 
-        if (argMultimap.getValue(PREFIX_GENRE).isPresent()) {
+        if (hasGenreParams) {
             hasValidArguments = true;
-            combinedPred = combinedPred.and(
-                new GenresContainedPredicate(argMultimap.getAllValues(PREFIX_GENRE))
-            );
+            combinedPred = combinedPred.and(new GenresContainedPredicate(genreParams));
         }
 
         if (!hasValidArguments) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FIND);
         }
 
         return new FindCommand(combinedPred);

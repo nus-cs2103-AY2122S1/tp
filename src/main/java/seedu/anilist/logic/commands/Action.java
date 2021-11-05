@@ -16,7 +16,7 @@ public enum Action {
      * Returns true if a given string is a valid action.
      */
     public static boolean isValidAction(String test) {
-        switch (test) {
+        switch (test.toLowerCase()) {
         case "a":
         case "d":
         case "add" :
@@ -33,7 +33,7 @@ public enum Action {
     public static Action actionFromString(String actionString) {
         assert actionString != null;
 
-        switch (actionString) {
+        switch (actionString.toLowerCase()) {
         case "a":
         case "add" :
             return Action.ADD;

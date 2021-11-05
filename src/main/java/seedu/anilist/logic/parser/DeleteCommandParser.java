@@ -12,6 +12,8 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
+    private static final String MESSAGE_INVALID_COMMAND_DELETE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            DeleteCommand.MESSAGE_USAGE);
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -25,9 +27,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } catch (IntegerOutOfRangeException e) {
             throw new ParseException(MESSAGE_OUT_OF_RANGE_INDEX);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_DELETE, pe);
         }
     }
 
