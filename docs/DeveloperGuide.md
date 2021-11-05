@@ -498,7 +498,7 @@ The following activity diagram in Figure I.2.8 summarizes what happens inside th
 
 *Figure I.2.8: Activity Diagram after a `Command` is executed.*
 
-In Figure I.2.8, after execution, any `Command` that is **not** `UndoableCommand` will not change the `UndoRedoStack`.
+In Figure I.2.8, after execution, any `Command` that is **not** an `UndoableCommand` will not change the `UndoRedoStack`.
 If the `Command` is an `UndoableCommand`, it will be pushed to the `undoStack` before the control is returned to the user eventually.
 
 #### Design considerations:
@@ -590,10 +590,12 @@ The predicate is then used to filter the list of person.
 
 ### Fees Calculation
 
-TAB automates the updating of individual lesson fees after the lesson has ended. Fees Calculation is facilitated by:
-* `FeesCalculator` - 
+TAB automates the updating of individual lesson fees after the lesson has ended. The Fees Calculation is facilitated by:
+* `FeesCalculator` implements the `Calculator` interface. It is responsible for calculates the amount to update for each specific lesson. 
+* `LastUpdatedDate` stores the `LocalDateTime` of when the `AddressBook` was last updated.
+* `Money` and its subclass facilitates the payment mechanism.
 
-When the user launches TAB, in `MainApp#initModel()`, the `FeesCalculator` would update all the outstanding lesson fees in the model.
+When the user launches TAB, in `MainApp#initModel()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. 
 
 --------------------------------------------------------------------------------------------------------------------
 
