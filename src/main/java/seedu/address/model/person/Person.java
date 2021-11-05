@@ -62,7 +62,7 @@ public class Person {
         this.schedule = new Schedule();
         this.fields.addAll(tags);
         this.absentDates.addAll(absentDates);
-        this.fields.addAll(roles);
+        this.fields.addAll(this.roles);
         addToFieldSet(fields, name, phone, email, address, salary, status);
     }
 
