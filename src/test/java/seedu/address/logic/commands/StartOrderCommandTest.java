@@ -15,11 +15,6 @@ import seedu.address.model.order.Order;
 public class StartOrderCommandTest {
 
     @Test
-    public void constructor_nullItem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
-
-    @Test
     public void execute_modelHasNoUnclosedOrder_modelSetsOrder() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
         StartOrderCommand command = new StartOrderCommand();
