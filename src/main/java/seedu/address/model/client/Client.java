@@ -100,8 +100,8 @@ public class Client {
             return true;
         }
 
-        return otherClient.getName().equals(getName())
-            && otherClient.getEmail().equals(getEmail());
+        return otherClient.getClientId().equals(getClientId())
+            || (otherClient.getName().equals(getName()) && otherClient.getEmail().equals(getEmail()));
     }
 
     public Name getName() {
