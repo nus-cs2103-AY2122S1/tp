@@ -5,7 +5,7 @@ title: Chi Sern's Project Portfolio Page
 
 ### Project: SalesNote
 
-SalesNote is a desktop application that helps tailors to manage sales and keep track of a smaller, but more recurrent group of clients. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+SalesNote is a desktop application that helps tailors to manage sales and keep track of a smaller, but more recurrent group of clients. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). It has about 20k lines of code written in Java.
 
 Given below are my contributions to the project.
 
