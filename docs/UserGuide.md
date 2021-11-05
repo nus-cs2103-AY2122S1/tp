@@ -83,7 +83,7 @@ to help you with the installation. Follow the guide for your operating system fo
 
 <div style="page-break-after: always;"></div>
 
-## Graphical User Interface (GUI)
+## Overview of the Graphical User Interface (GUI)
 
 This section briefly explains the various section of TAB's GUI.
 
@@ -133,7 +133,6 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
 
-
 #### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -168,6 +167,10 @@ An example of a command in TAB:
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
+<br />
+
+[back to table of contents](#)
+
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -189,6 +192,10 @@ Format: `help`
 
 ![help](images/help.png)
 <div class="caption">Help window interface.</div>
+
+<br />
+
+[back to table of contents](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -302,8 +309,6 @@ Format: `list`
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
@@ -387,6 +392,10 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
 
 ![findNone](images/findNone.png)
 <div class="caption">TAB displays three students after the find command.</div>
+
+<br />
+
+[back to table of contents](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -637,8 +646,6 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Managing Your Schedule
@@ -731,8 +738,6 @@ Format: `today`
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 
@@ -815,8 +820,6 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Shortcuts
@@ -840,8 +843,6 @@ This means that after clicking any button in the GUI, you do not have to click i
 
 [back to table of contents](#)
 
-<br />
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -861,8 +862,6 @@ This section records frequently asked questions from users of TAB.
 <br />
 
 [back to table of contents](#)
-
-<br />
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -890,8 +889,6 @@ UX | User Experience - The experience a user has when using the app.
 
 [back to table of contents](#)
 
-<br />
-
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -903,6 +900,7 @@ The commands are categorised into 4 different categories:
 * [Lessons](#lessons)
 * [Navigating the UI](#navigating-the-ui)
 * [General](#general)
+
 <br/>
 
 ### Students
@@ -953,4 +951,3 @@ Action | Format
 
 [back to table of contents](#)
 
-<br />
