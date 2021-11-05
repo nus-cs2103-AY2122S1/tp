@@ -2,13 +2,14 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import seedu.address.commons.util.StringUtil;
 
-public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparable<LastMet> {
+public class LastMet implements OptionalNonStringBasedField, StandardFieldLength, IgnoreNullComparable<LastMet> {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
         + "where Day, month and year should be numerical values.";
 
@@ -46,7 +47,8 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
      * Returns if a given string is a valid lastMet.
      */
     public static boolean isValidLastMet(String test) {
-        return (IS_NULL_VALUE_ALLOWED && test.isEmpty()) || StringUtil.isValidDate(test);
+        return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
+            || (StringUtil.isValidDate(test) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
     /**
