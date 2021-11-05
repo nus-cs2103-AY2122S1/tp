@@ -532,11 +532,12 @@ be changed.
 
 #### Use case 01: Add a task
 
-Preconditions: Dash is launched, user is on tasks tab
+Preconditions: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
-1. User requests to add a task, specifying task info
-2. Dash adds task to the list
+1. User requests to add a task, specifying task information
+2. Dash adds task to the list and shows the updated task list
 
 Use case ends.
 
@@ -547,13 +548,19 @@ Use case ends.
 
 Use case resumes at step 1.
 
+* 1b. User inputs an invalid person index
+  * 1b1. Dash shows an error message
+
+Use case resumes at step 1.  
+
 #### Use case 02: Delete a task
 
-Preconditions: Dash is launched, user is on tasks tab
+Preconditions: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
 1. User requests to delete a task, specifying the index to be deleted
-2. Dash deletes the task
+2. Dash deletes the task and shows the updated task list
 
 Use case ends.
 
@@ -572,10 +579,11 @@ Use case resumes at step 1.
 #### Use case 03: Edit a task
 
 Preconditions: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
-1. User inputs the task index to be edited, specifying updated info for the task
-2. Dash edits the task
+1. User inputs the task index to be edited, specifying updated information for the task
+2. Dash edits the task with the provided information and shows the updated task list
 
 Use case ends.
 
@@ -599,20 +607,22 @@ Use case resumes at step 1.
 #### Use case 04: View all tasks
 
 Precondition: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
 1. User requests to show all tasks
-2. Dash shows the list of tasks
+2. Dash shows a list of all tasks
 
 Use case ends.
 
 #### Use case 05: Add a contact
 
 Preconditions: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
-1. User requests to add a contact, specifying contact info
-2. Dash adds contact to the list
+1. User requests to add a contact, specifying contact information
+2. Dash adds contact to the list and shows the updated contact list
 
 Use case ends.
 
@@ -621,7 +631,9 @@ Use case ends.
 * 1a. Incorrect syntax is used
     * 1a1. Dash shows an error message
 
-* 1b. User tries to add a contact with the same name as a contact that already exists in the contact list
+Use case resumes at step 1.
+
+* 1b. User tries to add a contact with the same name as an existing contact in the contact list
   * 1b1. Dash shows an error message
     
 Use case resumes at step 1.
@@ -629,10 +641,11 @@ Use case resumes at step 1.
 #### Use case 06: Delete a contact
 
 Preconditions: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
 1. User requests to delete a contact, specifying the index to be deleted
-2. Dash deletes the contact
+2. Dash deletes the contact and shows the updated contact list
 
 Use case ends.
 
@@ -651,10 +664,11 @@ Use case resumes at step 1.
 #### Use case 07: Edit a contact
 
 Preconditions: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
-1. User inputs the contact index to be edited, specifying the updated info for the contact
-2. Dash edits the contact
+1. User inputs the contact index to be edited, specifying the updated information for the contact
+2. Dash edits the contact with the provided information and shows the updated contact list
 
 Use case ends.
 
@@ -675,7 +689,7 @@ Use case resumes at step 1.
 
 Use case resumes at step 1.   
 
-* 1d. User tries to edit the contact's name to be the same as an existing contact's name
+* 1d. User tries to edit the contact's name to be the same as an existing contact's name in the contact list
     * 1d1. Dash shows an error message
 
 Use case resumes at step 1.
@@ -683,20 +697,22 @@ Use case resumes at step 1.
 #### Use case 08: View all contacts
 
 Precondition: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
 1. User requests to show all contacts
-2. Dash shows the list of contacts
+2. Dash shows a list of all contacts
 
 Use case ends.
 
 #### Use case 09: Tagging a contact
 
 Precondition: Dash is launched and user is on contacts tab
+
 <u>MSS:</u>
 
-1. User inputs the contact index to be tagged and specifies the tag(s) for the contact
-2. Dash adds the tag(s) to the contact
+1. User requests to tag a contact by specifying the contact index and tag(s) for the contact
+2. The contact that the user specifies is updated by Dash to show the newly added tag(s)
 
 Use case ends.
 
@@ -717,14 +733,14 @@ Use case resumes at step 1.
 
 Use case resumes at step 1.
 
-
 #### Use case 10: Tagging a task
 
 Precondition: Dash is launched and user is on tasks tab
+
 <u>MSS:</u>
 
 1. User requests to tag a task by specifying the task index and tag(s) for the task
-2. Dash adds the tag(s) to the task
+2. The task that the user specifies is updated by Dash to show the newly added tag(s)
 
 Use case ends.
 
@@ -748,9 +764,10 @@ Use case resumes at step 1.
 #### Use case 11: View a list of available commands
 
 Precondition: Dash is launched and user is not on the help tab
+
 <u>MSS:</u>
 
-1. User switches to the help tab.
+1. User switches to the help tab
 2. Dash shows a list of all available commands
 
 Use case ends.
@@ -772,7 +789,7 @@ Use case ends.
 
 Use case resumes at step 1.
 
-#### Use case 12: Finding for a contact
+#### Use case 13: Finding for a contact
 
 Precondition: Dash is launched and user is on the contacts tab
 
@@ -789,11 +806,98 @@ Use case ends.
 
 Use case resumes at step 1.
 
-#### Use case 13: Assigning contacts to tasks
+#### Use case 14: Assigning contacts to tasks
 
 Precondition: Dash is launched and user is on the tasks tab
 
+<u>MSS:</u>
+1. User requests to assign contacts to a task by specifying the task index, and a person index for each person to be 
+   assigned
+2. The task that the user specifies is updated by Dash to show the newly assigned contacts  
 
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+  * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1b. The given task index is invalid
+  * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1c. A given person index is invalid
+  * 1c1. Dash shows an error message
+
+* 1d. User did not specify at least 1 person to be assigned
+  * 1d1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 15: Completing a task
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to complete a task by specifying a task index
+2. The task that the user specifies is updated by Dash to show that it is completed
+
+Use case ends.
+
+<u>Extensions:</u>
+
+* 1a. Incorrect syntax is used
+  * 1a1. Dash shows an error message
+
+Use case resumes at step 1.
+
+* 1b. The given index is invalid
+  * 1b1. Dash shows an error message
+
+Use case resumes at step 1.
+
+#### Use case 16: Listing all upcoming tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to view all upcoming tasks, which are incomplete tasks after the current date and time
+2. Dash shows a list of all upcoming tasks, sorted in chronological order
+
+Use case ends.
+
+#### Use case 17: Clearing all tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to clear all tasks
+2. Dash shows an empty task list
+
+Use case ends.
+
+#### Use case 18: Clearing completed tasks
+
+Precondition: Dash is launched and user is on the tasks tab
+
+<u>MSS:</u>
+1. User requests to clear completed tasks
+2. Dash clears completed tasks and shows a task list that contains only incomplete tasks
+
+Use case ends.
+
+#### Use case 19: Clearing all contacts
+
+Precondition: Dash is launched and user is on the contacts tab
+
+<u>MSS:</u>
+1. User requests to clear all contacts
+2. Dash shows an empty contact list
+
+Use case ends.
 
 ### Non-Functional Requirements
 
