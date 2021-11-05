@@ -65,12 +65,12 @@ public class Lab implements DisplayableObject {
         return labNum.getLabNum();
     }
 
-    public String getLabResultValue() {
-        return actualScore.toString();
+    public int getLabResultValue() {
+        return actualScore.getLabResult();
     }
 
-    public String getLabTotalValue() {
-        return totalScore.toString();
+    public int getLabTotalValue() {
+        return totalScore.getLabTotalScore();
     }
 
     public void updateActualScore(LabResult value) {
