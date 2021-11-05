@@ -487,7 +487,7 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 | As a... | I want to... | So that I can... |
 |---|---|---|
 | Person who loves birthdays    | Track birthdays                       | Easily check the birthday of friends
-| Person who Loves birthdays and is forgetful    | have birthday reminders            | Avoid missing any of his/her friends’ birthdays
+| Person who loves birthdays and is forgetful    | have birthday reminders            | Avoid missing any of his/her friends’ birthdays
 | Party Organiser       | Look for contact details for all my friends      | Send out invites
 | Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
 | Party Organiser               | Tag people with a party           | Easily keep track of people coming for parties
