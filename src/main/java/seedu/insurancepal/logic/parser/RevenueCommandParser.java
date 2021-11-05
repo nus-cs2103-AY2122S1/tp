@@ -1,9 +1,9 @@
 package seedu.insurancepal.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.RevenueCommand.COMMAND_WORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REVENUE;
+import static seedu.insurancepal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.insurancepal.logic.commands.RevenueCommand.COMMAND_WORD;
+import static seedu.insurancepal.logic.parser.CliSyntax.PREFIX_REVENUE;
 
 import seedu.insurancepal.commons.core.index.Index;
 import seedu.insurancepal.commons.exceptions.IllegalValueException;
