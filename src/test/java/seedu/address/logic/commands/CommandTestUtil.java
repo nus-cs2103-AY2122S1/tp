@@ -57,9 +57,9 @@ public class CommandTestUtil {
     public static final String VALID_CLASSCODE_G01 = "G01";
     public static final String VALID_CLASSCODE_G02 = "G02";
     public static final String VALID_CLASSCODE_G06 = "G06";
-    public static final String VALID_SCHEDULE_G01 = "Monday 10am to 12pm, Thursday 10am to 12pm";
-    public static final String VALID_SCHEDULE_G02 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
-    public static final String VALID_SCHEDULE_G06 = "Tuesday 12pm to 2pm, Friday 12pm to 2pm";
+    public static final String VALID_SCHEDULE_G01 = "Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm";
+    public static final String VALID_SCHEDULE_G02 = "Tuesday 10:00am to 12:00pm, Friday 10:00am to 12:00pm";
+    public static final String VALID_SCHEDULE_G06 = "Tues 12:00pm to 2:00pm, Fri 12:00pm to 2:00pm";
     public static final String VALID_MARK = "GOOD";
     public static final TutorialGroup VALID_GROUP_G01_OP1 = new TutorialGroup(new GroupNumber("1"),
             new ClassCode("G01"), new GroupType("OP1"));
