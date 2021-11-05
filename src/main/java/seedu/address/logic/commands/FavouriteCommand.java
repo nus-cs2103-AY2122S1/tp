@@ -44,7 +44,9 @@ public class FavouriteCommand extends Command {
             throw new CommandException(errorMessage);
         }
         model.favouritePerson(personToFavourite);
-        model.getPersonListControl().refreshPersonListUI();
+        if (model.getPersonListControl() != null) {
+            model.getPersonListControl().refreshPersonListUI();
+        }
         String successMessage = personToFavourite.getName().toString()
                 + MESSAGE_FAVOURITE_PERSON_SUCCESS;
         return new CommandResult(successMessage);
