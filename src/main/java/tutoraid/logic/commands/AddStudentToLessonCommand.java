@@ -38,7 +38,7 @@ public class AddStudentToLessonCommand extends AddCommand {
     private final Index lessonIndex;
 
     /**
-     * Constructs an AddStudentToLessonsCommand.
+     * Constructs an AddStudentToLessonCommand.
      *
      * @param studentIndex of the student in the filtered student list to add to the lesson
      * @param lessonIndex  of the lesson in the filtered lesson list to add to the student
