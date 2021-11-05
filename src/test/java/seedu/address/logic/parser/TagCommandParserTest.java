@@ -16,10 +16,10 @@ import seedu.address.model.tag.Tag;
 
 public class TagCommandParserTest {
 
-    private static String MESSAGE_MISSING_INDEX = ParserUtil.MESSAGE_MISSING_INDEX + "\n" + TagCommand.MESSAGE_USAGE;
-    private static String MESSAGE_INVALID_COMMAND_FORMAT = ParserUtil.MESSAGE_INVALID_COMMAND_FORMAT + "\n"
+    private String messageMissingIndex = ParserUtil.MESSAGE_MISSING_INDEX + "\n" + TagCommand.MESSAGE_USAGE;
+    private String messageInvalidCommandFormat = ParserUtil.MESSAGE_INVALID_COMMAND_FORMAT + "\n"
             + TagCommand.MESSAGE_USAGE;
-    private static String MESSAGE_INVALID_INDEX = ParserUtil.MESSAGE_INVALID_INDEX + "\n" + TagCommand.MESSAGE_USAGE;
+    private String messageInvalidIndex = ParserUtil.MESSAGE_INVALID_INDEX + "\n" + TagCommand.MESSAGE_USAGE;
     private TagCommandParser parser = new TagCommandParser();
 
     //Tag command description is empty
@@ -33,9 +33,9 @@ public class TagCommandParserTest {
     @Test
     public void parse_missingIndex_throwsParseException() {
         //Index of person to be tagged is missing
-        assertParseFailure(parser, " a/friends", MESSAGE_MISSING_INDEX);
+        assertParseFailure(parser, " a/friends", messageMissingIndex);
         //Index of person to remove tag from is missing
-        assertParseFailure(parser, " r/friends", MESSAGE_MISSING_INDEX);
+        assertParseFailure(parser, " r/friends", messageMissingIndex);
     }
 
     //Tag(s) to be added and/or removed from required contact is missing
@@ -69,31 +69,31 @@ public class TagCommandParserTest {
     @Test
     public void parse_invalidArg1_throwsParseException() {
         //User enters wrong prefix to add a tag
-        assertParseFailure(parser, "1 add/friends", MESSAGE_INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "1 add/friends", messageInvalidCommandFormat);
         //User enters wrong prefix to remove tag
-        assertParseFailure(parser, "1 remove/friends", MESSAGE_INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "1 remove/friends", messageInvalidCommandFormat);
     }
 
     //Invalid format for adding/removing multiple tags
     @Test
     public void parse_invalidArg2_throwsParseException() {
         //User enters wrong format to add multiple tags
-        assertParseFailure(parser, "1 add/friends CS2103T", MESSAGE_INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "1 add/friends CS2103T", messageInvalidCommandFormat);
         //User enters wrong format to remove multiple tags
-        assertParseFailure(parser, "1 remove/teammates CS2100", MESSAGE_INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "1 remove/teammates CS2100", messageInvalidCommandFormat);
     }
 
     //Invalid index (not a positive integer value) for adding/removing tag(s)
     @Test
     public void parse_invalidArg3_throwsParseException() {
         //User enters negative index
-        assertParseFailure(parser, "-5 a/friends r/family", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "-5 a/friends r/family", messageInvalidIndex);
         //User enters index 0
-        assertParseFailure(parser, "0 a/friends r/family", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "0 a/friends r/family", messageInvalidIndex);
         //User enters non-integer index
-        assertParseFailure(parser, "1.5 a/friends r/family", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1.5 a/friends r/family", messageInvalidIndex);
         //User enters non-numeric index
-        assertParseFailure(parser, "ab*! a/friends r/family", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "ab*! a/friends r/family", messageInvalidIndex);
     }
 
     //Valid arguments for adding tag(s)
