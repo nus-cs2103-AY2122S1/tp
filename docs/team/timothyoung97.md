@@ -14,8 +14,8 @@ With the primary programming language written in Java, the team's contribution t
 #### Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to add lessons into the application - [`add-l`](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/89)
-  * What it does:<br> Adds a unique lesson into the application for students to enroll in. 
-  * Justification:<br> This feature is necessary to be implemented in the project. This is because we need to create a lesson in the application in order for students to be enrolled in. 
+  * What it does:<br> Adds a unique lesson into the application for students to enroll in.
+  * Justification:<br> This feature is necessary to be implemented in the project. This is because we need to create a lesson in the application in order for students to be enrolled in.
   * Highlights:<br>This feature will parse the lesson-related parameters to ensure validity of each of the parameters. This function will ensure the lesson added is unique and bounded within the acceptable timing of 0900-1900.
 
 * **New Feature**: Added roster command - [`roster`](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/179)
@@ -49,7 +49,7 @@ With the primary programming language written in Java, the team's contribution t
     * [Update Add Lesson Implementation in DG](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/165)
     * [Update Add Lesson Command's activity diagram](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/171)
     * [Fix Add Lesson Seq Diagram](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/176)
-    
+
 * **Tools**:
   * Integrated a new Github plugin (CircleCI) to the team repo
   * Utilize SceneBuilder to build GUI Layout

@@ -1,5 +1,6 @@
 package seedu.tuitione.model.remark;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
@@ -27,6 +28,8 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemarkName("testone"));
         assertTrue(Remark.isValidRemarkName("0123456789012345678912345"));
         assertTrue(Remark.isValidRemarkName("1"));
+        assertFalse(Remark.isValidRemarkName(""));
+        assertFalse(Remark.isValidRemarkName("   "));
     }
 
 }

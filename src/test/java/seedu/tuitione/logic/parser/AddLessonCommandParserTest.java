@@ -1,5 +1,6 @@
 package seedu.tuitione.logic.parser;
 
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_DAY;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_TIME;
@@ -108,12 +109,12 @@ public class AddLessonCommandParserTest {
         // invalid subject
         assertParseFailure(parser, INVALID_SUBJECT_DESC + GRADE_DESC_MATHS
                 + DAYOFWEEK_DESC_MATHS + LESSONTIME_DESC_MATHS + PRICE_DESC_MATHS,
-                SUBJECT_MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + SUBJECT_MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser, SUBJECT_DESC_MATHS + INVALID_GRADE_DESC
                 + DAYOFWEEK_DESC_MATHS + LESSONTIME_DESC_MATHS + PRICE_DESC_MATHS,
-                GRADE_MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + GRADE_MESSAGE_CONSTRAINTS);
 
         // invalid dayOfWeek
         assertParseFailure(parser, SUBJECT_DESC_MATHS + GRADE_DESC_MATHS
@@ -128,11 +129,11 @@ public class AddLessonCommandParserTest {
         // invalid lessonTime - odd timing
         assertParseFailure(parser, SUBJECT_DESC_MATHS + GRADE_DESC_MATHS
                 + DAYOFWEEK_DESC_MATHS + INVALID_LESSONTIME_ODD_TIME_DESC + PRICE_DESC_MATHS,
-                TIME_MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + TIME_MESSAGE_CONSTRAINTS);
 
         // invalid price
         assertParseFailure(parser, SUBJECT_DESC_MATHS + GRADE_DESC_MATHS
                 + DAYOFWEEK_DESC_MATHS + LESSONTIME_DESC_MATHS + INVALID_PRICE_DESC,
-                PRICE_MESSAGE_CONSTRAINT);
+                HEADER_ALERT + PRICE_MESSAGE_CONSTRAINT);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.tuitione.logic.parser;
 
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.tuitione.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -127,31 +128,38 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
+                HEADER_ALERT + Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, ParentContact.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
+                HEADER_ALERT + ParentContact.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
+                HEADER_ALERT + Email.MESSAGE_CONSTRAINTS);
 
         // invalid tuitione
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
+                HEADER_ALERT + Address.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + INVALID_GRADE_DESC + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Grade.GRADE_MESSAGE_CONSTRAINTS);
+                + INVALID_GRADE_DESC + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
+                HEADER_ALERT + Grade.GRADE_MESSAGE_CONSTRAINTS);
 
         // invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + INVALID_REMARK_DESC + VALID_REMARK_FRIEND, Remark.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INVALID_REMARK_DESC + VALID_REMARK_FRIEND,
+                HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + GRADE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB,
+                HEADER_ALERT + Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

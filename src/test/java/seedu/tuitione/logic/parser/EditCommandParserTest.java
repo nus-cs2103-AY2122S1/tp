@@ -1,5 +1,6 @@
 package seedu.tuitione.logic.parser;
 
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -89,33 +90,41 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, ParentContact.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_GRADE_DESC, Grade.GRADE_MESSAGE_CONSTRAINTS); // invalid grade
-        assertParseFailure(parser, "1" + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS); // invalid remark
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC,
+                HEADER_ALERT + Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC,
+                HEADER_ALERT + ParentContact.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC,
+                HEADER_ALERT + Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC,
+                HEADER_ALERT + Address.MESSAGE_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, "1" + INVALID_GRADE_DESC,
+                HEADER_ALERT + Grade.GRADE_MESSAGE_CONSTRAINTS); // invalid grade
+        assertParseFailure(parser, "1" + INVALID_REMARK_DESC,
+                HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS); // invalid remark
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, ParentContact.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                HEADER_ALERT + ParentContact.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, ParentContact.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC,
+                HEADER_ALERT + ParentContact.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_REMARK} alone will reset the remarks of the {@code Student} being edited,
         // parsing it together with a valid remark results in error
         assertParseFailure(parser, "1" + REMARK_DESC_FRIEND + REMARK_DESC_HUSBAND + REMARK_EMPTY,
-                Remark.MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + REMARK_DESC_FRIEND + REMARK_EMPTY + REMARK_DESC_HUSBAND,
-                Remark.MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + REMARK_EMPTY + REMARK_DESC_FRIEND + REMARK_DESC_HUSBAND,
-                Remark.MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
                         + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                HEADER_ALERT + Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -217,17 +226,6 @@ public class EditCommandParserTest {
         descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_resetRemarks_success() {
-        Index targetIndex = INDEX_THIRD_STUDENT;
-        String userInput = targetIndex.getOneBased() + REMARK_EMPTY;
-
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withRemarks().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

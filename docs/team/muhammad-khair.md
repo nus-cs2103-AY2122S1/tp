@@ -16,7 +16,7 @@ Given below are my contributions to the project.
     * Establishing weaker equality checks using a dependent entity `LessonCode`, numerous constraints and abstracting the initial `Lesson` class to dependent field classes such as `Subject` and `Price` in iterations `v1.2` and `v1.3`.
     * Ensuring defensive programming is embedded in the bidirectional relationship with multiple constraints so that it can be tapped on by other packages such as `model`, `storage` as well as `logic`.
     * Abstracting logic for ease of usage within other packages (similar to previous pointer).
-    * Ensuring and maintaining the new entity into `storage` integration with Jackson JSON processing library.  
+    * Ensuring and maintaining the new entity into `storage` integration with Jackson JSON processing library.
 
 * **Enhancements to existing features**:
   * Ensuring and maintaining the new and existing (modified) entities into `storage` integration with Jackson JSON processing library (Pull requests [#76](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/76), [#86](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/86))
@@ -28,7 +28,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed release [`v1.3`](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases/tag/v1.3)
-  
+
 * **Documentation**:
   * User Guide:
     * Did cosmetic and functional (and structural) tweaks overall: [#217](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/217), [#169](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/169/files)
@@ -38,4 +38,4 @@ Given below are my contributions to the project.
     * Added implementation details of the `delete-l` feature: [#151](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/151)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [#159](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/159), [\#190](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/190)  
+  * PRs reviewed (with non-trivial review comments): [#159](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/159), [\#190](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/190)

@@ -254,7 +254,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code remarks} is used internally.
          */
         public void setRemarks(Set<Remark> remarks) {
-            this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
+            this.remarks = (remarks != null) ? new HashSet<>(remarks) : Collections.emptySet();
         }
 
         /**
@@ -262,7 +262,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code remarksToDelete} is used internally.
          */
         public void setRemarksToDelete(Set<Remark> remarksToDelete) {
-            this.remarksToDelete = (remarksToDelete != null) ? new HashSet<>(remarksToDelete) : null;
+            this.remarksToDelete = (remarksToDelete != null) ? new HashSet<>(remarksToDelete) : Collections.emptySet();
         }
 
         /**

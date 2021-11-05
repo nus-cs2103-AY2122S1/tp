@@ -1,6 +1,7 @@
 package seedu.tuitione.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_DAY;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_PRICE_NOT_NUMBER;
@@ -59,7 +60,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -74,7 +75,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!ParentContact.isValidPhone(trimmedPhone)) {
-            throw new ParseException(ParentContact.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + ParentContact.MESSAGE_CONSTRAINTS);
         }
         return new ParentContact(trimmedPhone);
     }
@@ -89,7 +90,7 @@ public class ParserUtil {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
     }
@@ -104,7 +105,7 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
     }
@@ -119,7 +120,7 @@ public class ParserUtil {
         requireNonNull(grade);
         String trimmedGrade = grade.trim();
         if (!Grade.isValidGrade(trimmedGrade)) {
-            throw new ParseException(Grade.GRADE_MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + Grade.GRADE_MESSAGE_CONSTRAINTS);
         }
         return new Grade(trimmedGrade);
     }
@@ -134,7 +135,7 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemarkName(trimmedRemark)) {
-            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
     }
@@ -186,7 +187,7 @@ public class ParserUtil {
         String cleanedSubject = StringUtil.capitalizeFirstCharAndLowerRest(args.trim());
 
         if (!isValidSubject(cleanedSubject)) {
-            throw new ParseException(SUBJECT_MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + SUBJECT_MESSAGE_CONSTRAINTS);
         }
         return new Subject(cleanedSubject);
     }
@@ -209,7 +210,7 @@ public class ParserUtil {
         }
 
         if (!isValidPrice(cost)) {
-            throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
+            throw new ParseException(HEADER_ALERT + PRICE_MESSAGE_CONSTRAINT);
         }
         return new Price(cost);
     }

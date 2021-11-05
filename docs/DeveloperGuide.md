@@ -1216,15 +1216,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    * Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    * Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -1233,46 +1233,191 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
+    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
 
-    1. Test case: `delete 1`<br>
+    * Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    * Test case: `delete 0`<br>
        Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
+### Filtering
+
+1. Filtering by grade
+
+    * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
+
+    * Test case: `filter g/S1`
+      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No students or lessons shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
+      
+    * Test case: `filter g/s1`
+      Expected: Similar to previous.
+      
+    * Test case: `filter g/J8`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user of the constraints of the grade condition to be inputted. 
+      
+    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`.
+      Expected. Similar to previous.
+      
+    * Test case: `filter s2`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+
+1. Filtering by subject
+
+    * Test case: `filter s/English`
+      Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
+      
+    * Test case: `filter s/english`
+      Expected: Similar to previous.
+      
+    * Test case: `filter english`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+      
+1. Filtering by both grade and subject
+
+    * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature.
+    
+    * Test case: `filter s/English g/S1`
+      Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
+      
+    * Test case: `filter english S1`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+
+### Editing a student
+
+1. Editing a student's name
+
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
+    
+    * Test case: `edit 1 n/Alex Ye`
+      Expected: First student's name is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 1 n/`
+      Expected: First student's name is not edited. The message box displays a message alerting the user of the constraints on names.
+      
+    * Other incorrect edit name commands to try: `edit 1 n/y` (where y is not an alphanumeric character, `edit 1 n/x` (where x is longer than 150 characters)
+      Expected: Similar to previous
+
+1. Editing a student's parent contact
+
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
+    
+    * Test case: `edit 1 p/98765432`
+      Expected: First student's parent contact is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 1 p/`
+      Expected: First student's parent contact is not edited. The message box displays a message alerting the user of the constraints on parent contact numbers.
+      
+    * Other incorrect edit parent contact commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits),
+    `edit 1 p/x1111111` (where x is a number that is not '6', '8' or '9')
+      Expected: Similar to previous
+      
+1. Editing a student's email
+
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
+    
+    * Test case: `edit 1 e/alexye@gmail.com`
+      Expected: First student's email is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 1 e/`
+      Expected: First student's email is not edited. The message box displays a message alerting the user of the constraints on emails.
+      
+    * Other incorrect edit email commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` 
+      Expected: Similar to previous
+      
+1. Editing a student's address
+
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
+    
+    * Test case: `edit 1 a/Blk 20 Hello Street #01-01`
+      Expected: First student's address is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 1 a/`
+      Expected: First student's address is not edited. The message box displays a message alerting the user of the constraints on addresses.
+      
+    * Other incorrect edit address commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`
+      Expected: Similar to previous
+      
+1. Editing a student's grade
+
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
+    
+    * Test case: `edit 1 g/S2`
+      Expected: First student's grade is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown. If the student was enrolled in any lessons in his previous grade, applying this edit will unenroll him from those lessons. The lessons he was enrolled in will also reflect a decrease in class size by 1.
+      
+    * Test case: `edit 1 g/`
+      Expected: First student's grade is not edited. The message box displays a message alerting the user of the constraints on grade levels.
+      
+    * Other incorrect edit grade commands to try: `edit 1 g/A5`, `edit 1 g/p`
+      Expected: Similar to previous
+      
+1. Editing a student's remarks
+
+    * Prerequisites: List all students using the `list` command. Multiple students in the list.
+    
+    * Test case: `edit 1 r/discounted`
+      Expected: Remark is added onto the first student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 1 r/`
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
+      
+    * Test case: `edit 1 r/test1 r/test2 r/test3 r/test4 r/test5` (assuming first student already has 1 remark tagged)
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user of that only a maximum of 5 remarks can be tagged to a student.
+      
+    * Other incorrect edit remarks commands to try: `edit 1 r/test test`, `edit 1 r/!`
+      Expected: Similar to previous
+      
+    * Test case: `edit 1 dr/discounted` (assuming 'discounted' remark already tagged to first student)
+      Expected: Remark is deleted from student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 1 dr/`
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
+      
+    * Other incorrect edit remarks commands to try: `edit 1 dr/test test`, `edit 1 dr/!`
+      Expected: Similar to previous
+          
+    * Test case: `edit 1 dr/notTaggedToStudent` (assuming 'notTaggedToStudent' remark is not tagged to first student)
+      Expected: First student's remarks is not edited. The message box displays a message alerting the user that the remark he or she wishes to delete does not exist.
+      
+1. Editing multiple fields and misc scenarios
+
+    * Test case: `edit 1 n/Alex p/87654321 g/s4`
+      Expected: First student's name, parent contact and grade are edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
+      
+    * Test case: `edit 0 n/Alex`
+      Expected: First student is not edited. The message box displays a message alerting the user that the given index is not valid.
 
 #### Clearing data
 
 1. Clearing all data with students and lessons present
 
-    1. Prerequisites: There should be students and lessons present in the application. Use `list` to view all the entities present.
+    *  Prerequisites: There should be students and lessons present in the application. Use `list` to view all the entities present.
 
-    1. Test case: `clear`<br>
+    *  Test case: `clear`<br>
        Expected: Status messages should inform you that all information is cleared. Both panels on the application should be empty, i.e. there should be no more students and lessons. Checking the storage file in `./data/tuitione.json` should show no entities present.
 
 1. Clearing all data with no data present
 
-    1. Prerequisites: There should be no students and lessons present in the application. Use `list` to view all the entities present.
+    *  Prerequisites: There should be no students and lessons present in the application. Use `list` to view all the entities present.
 
-    1. Test case: `clear`<br>
+    *  Test case: `clear`<br>
        Expected: Same as in previous test scenario. Having no data present should not yield any difference in output.
 
 #### Exiting application
 
 1. Exiting using the window close button
 
-    1. Test case: Press the close button on the window of the application.<br>
+    *  Test case: Press the close button on the window of the application.<br>
        Expected: The window should close.
 
 1. Exiting using the application's exit button
 
-    1. Test case: Click on the file button on the top left of the application. A dropdown list with one option of `exit` should be present. Click on that button.<br>
+    *  Test case: Click on the file button on the top left of the application. A dropdown list with one option of `exit` should be present. Click on that button.<br>
        <center>
        <img src="images/DeveloperGuideImage/exit_ui.png"/>
        </center><br>
@@ -1282,26 +1427,26 @@ testers are expected to do more *exploratory* testing.
 
 1. Loading the application with no data files present
 
-    1. Prerequisites: There should be no files present in the directory you are going to work with, apart from `TuitiONE.jar`.
+    *  Prerequisites: There should be no files present in the directory you are going to work with, apart from `TuitiONE.jar`.
 
-    1. Test case: Run the application.<br>
+    *  Test case: Run the application.<br>
        Expected: Upon UI loading, verify the directory has these few files `tuitione.log.0`, `preferences.json`, `config.json` (if you also have `tuitione.log.0.lck`, that is okay as well).
 
-   1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
-      Expected (continued): After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
+    *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+       Expected (continued): After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
 
 1. Verifying that data is stored
 
-    1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+    *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
-    1. Test case: Perform a positive (successful) insertion/deletion/modification of the entities. See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html#features) for more on the relevant commands that can perform such. After such, verify the `./data/tuitione.json` file to see if the contents match the changes made by your command.<br>
+    *  Test case: Perform a positive (successful) insertion/deletion/modification of the entities. See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html#features) for more on the relevant commands that can perform such. After such, verify the `./data/tuitione.json` file to see if the contents match the changes made by your command.<br>
        Expected: After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
 
 1. Modifying saved data, but preserving its correctness to the application's constraints
 
-    1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+    *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
-    1. Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that produces a data file that conforms to the constraints mentioned in the application. Below are some critical constraints to take note of but please refer to the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the full list.<br>
+    *  Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that produces a data file that conforms to the constraints mentioned in the application. Below are some critical constraints to take note of but please refer to the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the full list.<br>
        Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
 
        :information_source: **Note:**
@@ -1325,15 +1470,15 @@ testers are expected to do more *exploratory* testing.
          Do note once again that enrolling a student using the data storage must fulfil the enrollment constraints.<br>
          See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the remaining constraints present.<br>
 
-    1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+    *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
        Expected (continued): After the UI responds, verify that `./data/tuitione.json` is not modified, and holds the changes you made in the initial step.
 
 1. Modifying saved data, but losing its correctness to the application's constraints
 
-    1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+    *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
-    1. Test case: Modify an entry in `./data/tuitione.json` that violates the entity and/or relationship constraints, see the previous test scenario's explanation to perform a counter modification to the data file.<br>
+    *  Test case: Modify an entry in `./data/tuitione.json` that violates the entity and/or relationship constraints, see the previous test scenario's explanation to perform a counter modification to the data file.<br>
        Expected: Upon application and UI load up, the application should be presented with no data present, i.e. no lessons or students. The content in `./data/tuitione.json` should not be modified yet (see next step).
 
-    1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+    *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
        Expected (continued): After the UI responds, verify that `./data/tuitione.json` holds no entities.
