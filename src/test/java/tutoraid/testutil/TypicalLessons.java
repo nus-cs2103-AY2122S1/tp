@@ -28,7 +28,6 @@ public class TypicalLessons {
             .withParentName("Mrs Tan")
             .withParentPhone("94351253")
             .withProgressList(new ArrayList<>())
-            .withPaymentStatus(false)
             .withLessons(new ArrayList<>(Arrays.asList("Maths 1", "Science 1")))
             .build();
 

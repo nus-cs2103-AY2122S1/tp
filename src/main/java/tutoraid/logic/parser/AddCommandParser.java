@@ -8,7 +8,7 @@ import tutoraid.logic.commands.AddCommand;
 import tutoraid.logic.commands.AddLessonCommand;
 import tutoraid.logic.commands.AddProgressCommand;
 import tutoraid.logic.commands.AddStudentCommand;
-import tutoraid.logic.commands.AddStudentsToLessonsCommand;
+import tutoraid.logic.commands.AddStudentToLessonCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
@@ -50,8 +50,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         case AddProgressCommand.COMMAND_FLAG:
             return new AddProgressCommandParser().parse(arguments);
 
-        case AddStudentsToLessonsCommand.COMMAND_FLAG:
-            return new AddStudentsToLessonsCommandParser().parse(arguments);
+        case AddStudentToLessonCommand.COMMAND_FLAG:
+            return new AddStudentToLessonCommandParser().parse(arguments);
 
         case AddLessonCommand.COMMAND_FLAG:
             return new AddLessonCommandParser().parse(arguments);
