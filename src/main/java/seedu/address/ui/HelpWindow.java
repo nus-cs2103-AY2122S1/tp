@@ -138,7 +138,8 @@ public class HelpWindow extends UiPart<Stage> {
      * Sets up the table view. Disables scrolling and
      * adjusts the height according to the number of rows.
      */
-    //Solution below adapted from https://stackoverflow.com/questions/27945817/javafx-adapt-tableview-height-to-number-of-rows
+    // Solution below adapted from
+    // https://stackoverflow.com/questions/27945817/javafx-adapt-tableview-height-to-number-of-rows
     public void setUpHelpTableView() {
         helpTable.addEventFilter(ScrollEvent.ANY, Event::consume);
         helpTable.setFixedCellSize(27);
