@@ -30,7 +30,7 @@ public class StorageManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.userCommandCache = userCommandCache.getInstance();
+        this.userCommandCache = UserCommandCache.getInstance();
     }
 
     // ================ UserPrefs methods ==============================

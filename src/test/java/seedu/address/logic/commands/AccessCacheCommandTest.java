@@ -1,9 +1,17 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -11,15 +19,50 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskListManager;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-
 public class AccessCacheCommandTest {
+
+    private final Model model = new AccessCacheCommandTest.ModelStub();
+
+    @Test
+    public void constructor_nullCommand_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AccessCacheCommand(null));
+    }
+
+    @Test
+    public void upKey_givesBefore() throws Exception {
+        CommandResult command = new AccessCacheCommand("UP").execute(model);
+        assertEquals("Before", command.getAdditionalText());
+        assertEquals("", command.getFeedbackToUser());
+    }
+
+    @Test
+    public void downKey_givesAfter() throws Exception {
+        CommandResult command = new AccessCacheCommand("DOWN").execute(model);
+        assertEquals("After", command.getAdditionalText());
+        assertEquals("", command.getFeedbackToUser());
+    }
+
+    @Test
+    public void equals() {
+        AccessCacheCommand command = new AccessCacheCommand("DOWN");
+        AccessCacheCommand commandSame = new AccessCacheCommand("DOWN");
+        AccessCacheCommand commandDifferent = new AccessCacheCommand("UP");
+
+        //null
+        assertNotEquals(null, command);
+
+        //same object
+        assertEquals(command, command);
+
+        //same direction
+        assertEquals(command, commandSame);
+
+        //different direction
+        assertNotEquals(command, commandDifferent);
+    }
+
     /**
-     * A default model stub that have all the methods failing.
+     * A default model stub that have all themethods failing.
      */
     private class ModelStub implements Model {
         @Override

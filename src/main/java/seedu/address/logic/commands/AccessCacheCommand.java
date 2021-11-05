@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 public class AccessCacheCommand extends Command {
 
     public static final String COMMAND_WORD = "accesscache";
+    public static final String UNKNOWN_KEY = "Unknown Key in AccessCacheCommand#Execute!";
 
     public final String key;
 
@@ -16,6 +17,7 @@ public class AccessCacheCommand extends Command {
      */
     public AccessCacheCommand(String key) {
         requireNonNull(key);
+        assert(isValidKey(key));
         this.key = key;
     }
 
@@ -25,12 +27,26 @@ public class AccessCacheCommand extends Command {
             return new CommandResult("", false, false, true,
                     model.getBefore()
             );
-        } else if (key.equals("DOWN")) {
+        } else {
             return new CommandResult("", false, false, true,
                     model.getAfter()
             );
-        } else {
-            throw new CommandException("Unknown Error in AccessCacheCommand#Execute!");
         }
+    }
+
+    /**
+     * Check if a key is valid
+     * @param key
+     * @return
+     */
+    public static boolean isValidKey(String key) {
+        return (key.equals("UP") || key.equals("DOWN"));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AccessCacheCommand // instanceof handles nulls
+                && key.equals(((AccessCacheCommand) other).key));
     }
 }

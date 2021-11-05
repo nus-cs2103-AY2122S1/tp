@@ -287,7 +287,6 @@ public class ParserUtil {
         return taskIndexList;
     }
 
-
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
