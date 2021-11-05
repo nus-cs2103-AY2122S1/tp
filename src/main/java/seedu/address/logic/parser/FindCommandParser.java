@@ -27,7 +27,6 @@ import java.util.Optional;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Date;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 
 /**
