@@ -590,6 +590,10 @@ The predicate is then used to filter the list of person.
 
 ### Fees Calculation
 
+TAB automates the updating of individual lesson fees after the lesson has ended. Fees Calculation is facilitated by:
+* `FeesCalculator` - 
+
+When the user launches TAB, in `MainApp#initModel()`, the `FeesCalculator` would update all the outstanding lesson fees in the model.
 
 --------------------------------------------------------------------------------------------------------------------
 
