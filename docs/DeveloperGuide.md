@@ -656,6 +656,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC07 - Edit an elderly**
 
+**MSS**
+
 1. User edits an elderly's details (which can include name, phone number, language, address, last visit, health condition(s)) by supplying the index of the elderly in SeniorLove's list
 2. SeniorLove edits the entry for the elderly to be edited
 
@@ -691,6 +693,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1e1. SeniorLove shows an error message notifying user that the at least 1 field to edit must be provided.
     
       Use case resumes at step 1
+
+
+
+**Use case: UC08 - List elderly with incoming visits in next week or month**
+
+**MSS**
+
+1. User requests to list elderly
+2. SeniorLove shows a list of elderly
+3. User requests to show all the elderly with next visit in the incoming week or month
+4. SeniorLove display the filtered list of elderly
+
+   Use case ends.
+
+**Extension**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -796,7 +818,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Listing elderly
 
-   1. Test case: `list`<br>
+   1. Test case: `list n/`<br>
       Expected: All elderly are displayed.
 
    2. Test case: `list m/`<br>

@@ -18,5 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_OCCURRENCE = new Prefix("o/");
     public static final Prefix PREFIX_INCOMING_MONTH = new Prefix("m/");
     public static final Prefix PREFIX_INCOMING_WEEK = new Prefix("w/");
+    public static final Prefix PREFIX_NORMAL_LIST = new Prefix("n/");
 
 }
