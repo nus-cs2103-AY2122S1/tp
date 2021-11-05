@@ -206,7 +206,8 @@ The following activity diagram summarises what happens when a user executes a `c
 
 * **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
 
-  * Pros: More convenient to implement.
+  * Pros: 
+    * More convenient to implement.
 
   * Cons:
     * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
