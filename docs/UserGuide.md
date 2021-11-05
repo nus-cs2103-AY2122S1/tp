@@ -5,9 +5,9 @@ title: User Guide
 
 Are you having trouble with administrative work as a CS2101 tutor? Does current tools like Excel sheets or the pen and paper cause a lot of pain
 when trying to organize and search for students or recording class participation? Could there be a way to streamline this process
-while providing you a better way to visualise the information? Well, ClassMATE has it all covered! ClassMATE is a **desktop app 
-designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' 
-class participation without much hassle. Having both a Command Line Interface** (CLI) 
+while providing you a better way to visualise the information? Well, ClassMATE has it all covered! ClassMATE is a **desktop app
+designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students'
+class participation without much hassle. Having both a Command Line Interface** (CLI)
 and a Graphical User Interface (GUI), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
 
 This user guide for ClassMATE which you are reading now, will teach you how to:
@@ -18,8 +18,8 @@ This user guide for ClassMATE which you are reading now, will teach you how to:
 * Add class participation marks for students
 
 The first part is a guide on how to set up ClassMATE and an overview of the symbols and syntax we use in the user guide.
-The remaining sections explain the important features of ClassMATE, such as the Student, 
-Marks, Tutorial Class and Tutorial Group Commands. 
+The remaining sections explain the important features of ClassMATE, such as the Student,
+Marks, Tutorial Class and Tutorial Group Commands.
 
 Use the Table of Contents below to 
 navigate to relevant sections to learn the commands for ClassMATE. 

@@ -75,5 +75,4 @@ public class UniqueTutorialGroupListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueTutorialGroupList.asUnmodifiableObservableList().remove(0));
     }
-
 }
