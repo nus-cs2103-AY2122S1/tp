@@ -752,7 +752,9 @@ Displays a list of upcoming lessons that ends within the next 48 hours.
 
 Format: `remind`
 
-![remind](images/remind.png)
+<div align="center">
+  <img src="images/remind.png" width="500" />
+</div>
 
 <div class="caption">Reminder window interface.</div>
 
@@ -1061,7 +1063,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 ### Menu Bar Shortcuts
 
-TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
+TAB has a menu bar which you can click to easily navigate between its various views. Additionally, TAB provides keyboard shortcuts for these menu items to help you stay more productive by keeping your hands on the keyboard.
 
 Menu Item | Shortcut | Action | Description
 ----------|--------|---------|---------
