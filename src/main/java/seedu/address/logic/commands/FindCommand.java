@@ -34,6 +34,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
+            + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -43,22 +44,20 @@ public class FindCommand extends Command {
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
             + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_SUBJECT + "LESSON_SUBJECT] "
-            + "[" + PREFIX_TIME + "LESSON_TIME] "
-            + "[" + PREFIX_DATE + "LESSON_DATE] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_TIME + "TIME_RANGE] "
+            + "[" + PREFIX_DATE + "START_DATE] "
             + "[" + PREFIX_CANCEL + "CANCELLED_DATE] "
-            + "[" + PREFIX_RATES + "LESSON_RATE] "
-            + "[" + PREFIX_HOMEWORK + "LESSON_HOMEWORK] ";
+            + "[" + PREFIX_RATES + "LESSON_RATES] "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_FIND_CONDITION + "any "
             + PREFIX_NAME + "Alex Yeo "
-            + PREFIX_ADDRESS + "Aljunied "
-            + PREFIX_SCHOOL + "nyjc "
-            + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
+            + PREFIX_TAG + "unpaid "
+            + PREFIX_TIME + "1500-1600";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose fields contain any of the "
             + "specified keywords (case-insensitive).\n"
