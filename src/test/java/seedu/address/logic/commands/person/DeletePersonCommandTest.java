@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtMultipleIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonsWithModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_HENRY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ISAAC;
@@ -217,7 +217,8 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validRangeFilteredList_success() {
         //Deletes 2 person in the filtered list
-        showPersonAtMultipleIndex(model, INDEX_FIRST, INDEX_SECOND);
+        showPersonsWithModuleCode(model, new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+        assert model.getFilteredPersonList().size() == 2; //Only 2 persons in TypicalPersonList has CS2100
 
         Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
@@ -237,7 +238,9 @@ public class DeletePersonCommandTest {
     @Test
     public void execute_validModuleCodeFilteredList_success() {
         //Deletes 0 persons in filtered list, only deletes module code
-        showPersonAtMultipleIndex(model, INDEX_FIRST, INDEX_ISAAC);
+        showPersonsWithModuleCode(model, new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+        assert model.getFilteredPersonList().size() == 2; //Only 2 persons in TypicalPersonList has CS2100
+
         Person person = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
         Person newPerson = new PersonBuilder(person).withModuleCodes(VALID_MODULE_CODE_CS2100).build();
 
@@ -272,7 +275,8 @@ public class DeletePersonCommandTest {
 
     @Test
     public void execute_invalidRangeFilteredList_throwsCommandException() {
-        showPersonAtMultipleIndex(model, INDEX_FIRST, INDEX_SECOND);
+        showPersonsWithModuleCode(model, new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+        assert model.getFilteredPersonList().size() == 2; //Only 2 persons in TypicalPersonList has CS2100
 
         Index invalidStartIndex = INDEX_SECOND;
         Index invalidEndIndex = INDEX_THIRD;
