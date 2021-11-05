@@ -545,24 +545,15 @@ This section guides you on how to use the commands for managing the lessons of y
 
 <div class="caption">Layout of a cancelled makeup lesson card.</div>
 
-A lesson can be categorised into 2 types: 
-1. A **weekly** recurring lesson
-2. A one-off makeup lesson.
-
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 
 A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 </div>
 
-TAB has features to help to prevent scheduling mistakes.
-For example, we help you avoid mistakes such as scheduling two lessons at the same slots by ensuring that lessons never overlap.
-Additionally, we help to avoid accidentally scheduling lessons outside working hours (before 0800 and after 2200 hours).
-
-In the future, we intend to add some nice-to-have features that will allow you to customise your working hours,
-as well as specify minimum/maximum lesson durations so that accidents like mistyping a 10-minute lesson won't happen.
-Additionally, we will allow you to toggle these checks on and off, just in case you don't want them. You would also be able to customise your own recurrence rule for your recurring lessons.
-Do look forward to these features!
+A lesson can be categorised into 2 types:
+1. A **weekly** recurring lesson
+2. A one-off makeup lesson.
 
 <table id="lesson-param-table">
     <thead>
@@ -646,6 +637,15 @@ Do look forward to these features!
 For all monetary fields (lesson rates and outstanding fees), we follow the [Singapore convention](https://www.dfa.cornell.edu/treasurer/cash-management/processinginternational/intl-currency) of using a decimal point '.' to separate dollars and cents, The values of these fields should only contain numbers, with at most one decimal point, and two decimal places and should not start or end with a decimal point.
 
 </div>
+
+TAB has features to help to prevent scheduling mistakes.
+For example, we help you avoid mistakes such as scheduling two lessons at the same slots by ensuring that lessons never overlap.
+Additionally, we help to avoid accidentally scheduling lessons outside working hours (before 0800 and after 2200 hours).
+
+In the future, we intend to add some nice-to-have features that will allow you to customise your working hours,
+as well as specify minimum/maximum lesson durations so that accidents like mistyping a 10-minute lesson won't happen.
+Additionally, we will allow you to toggle these checks on and off, just in case you don't want them. You would also be able to customise your own recurrence rule for your recurring lessons.
+Do look forward to these features!
 
 --------------------------------------------------------------------------------------------------------------------
 
