@@ -288,6 +288,16 @@ public class ModelManager implements Model {
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public int getAssignmentCounter() {
+        return selectedModule.get().getAssignmentCounter();
+    }
+
+    @Override
+    public void setAssignmentCounter(int i) {
+        selectedModule.get().setAssignmentCounter(i);
+    }
+
     //=========== Current View =============================================================================
     @Override
     public ObservableValue<PersonListPanel.View> getSelectedView() {

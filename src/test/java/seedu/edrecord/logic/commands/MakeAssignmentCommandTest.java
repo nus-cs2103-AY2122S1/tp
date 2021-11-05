@@ -36,13 +36,14 @@ import seedu.edrecord.ui.PersonListPanel;
 public class MakeAssignmentCommandTest {
     @Test
     public void constructor_nullAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new MakeAssignmentCommand(null));
+        assertThrows(NullPointerException.class, () -> new MakeAssignmentCommand(null, null, null));
     }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         Assignment validAssignment = new AssignmentBuilder().build();
-        assertThrows(NullPointerException.class, () -> new MakeAssignmentCommand(validAssignment).execute(null));
+        assertThrows(NullPointerException.class, () -> new MakeAssignmentCommand(validAssignment.getName(),
+                validAssignment.getWeightage(), validAssignment.getMaxScore()).execute(null));
     }
 
 
@@ -50,7 +51,8 @@ public class MakeAssignmentCommandTest {
     public void execute_noModuleSelected_throwsCommandException() {
         Assignment validAssignment = new AssignmentBuilder().build();
         ModelStubWithoutSelectedModule modelStub = new ModelStubWithoutSelectedModule();
-        MakeAssignmentCommand addAssignmentCommand = new MakeAssignmentCommand(validAssignment);
+        MakeAssignmentCommand addAssignmentCommand = new MakeAssignmentCommand(validAssignment.getName(),
+                validAssignment.getWeightage(), validAssignment.getMaxScore());
 
         assertThrows(CommandException.class,
                 MESSAGE_NO_MODULE_SELECTED, () -> addAssignmentCommand.execute(modelStub));
@@ -60,7 +62,8 @@ public class MakeAssignmentCommandTest {
     public void execute_duplicateAssignment_throwsCommandException() {
         Assignment validAssignment = new AssignmentBuilder().build();
         ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
-        MakeAssignmentCommand addAssignmentCommand = new MakeAssignmentCommand(validAssignment);
+        MakeAssignmentCommand addAssignmentCommand = new MakeAssignmentCommand(validAssignment.getName(),
+                validAssignment.getWeightage(), validAssignment.getMaxScore());
 
         assertThrows(CommandException.class,
                 MakeAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> addAssignmentCommand.execute(modelStub));
@@ -71,7 +74,8 @@ public class MakeAssignmentCommandTest {
         ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
         Assignment validAssignment = new AssignmentBuilder().build();
 
-        CommandResult commandResult = new MakeAssignmentCommand(validAssignment).execute(modelStub);
+        CommandResult commandResult = new MakeAssignmentCommand(validAssignment.getName(),
+                validAssignment.getWeightage(), validAssignment.getMaxScore()).execute(modelStub);
 
         assertEquals(
                 String.format(MakeAssignmentCommand.MESSAGE_SUCCESS, validAssignment),
@@ -81,16 +85,19 @@ public class MakeAssignmentCommandTest {
 
     @Test
     public void equals() {
-        Assignment mission = new AssignmentBuilder().withName("Mission").build();
-        Assignment training = new AssignmentBuilder().withName("Training").build();
-        MakeAssignmentCommand addMission = new MakeAssignmentCommand(mission);
-        MakeAssignmentCommand addTraining = new MakeAssignmentCommand(training);
+        Assignment mission = new AssignmentBuilder().withName("Mission").withId(0).build();
+        Assignment training = new AssignmentBuilder().withName("Training").withId(1).build();
+        MakeAssignmentCommand addMission = new MakeAssignmentCommand(mission.getName(),
+                mission.getWeightage(), mission.getMaxScore());
+        MakeAssignmentCommand addTraining = new MakeAssignmentCommand(training.getName(),
+                mission.getWeightage(), mission.getMaxScore());
 
         // same object -> returns true
         assertTrue(addMission.equals(addMission));
 
         // same values -> returns true
-        MakeAssignmentCommand addMissionCopy = new MakeAssignmentCommand(mission);
+        MakeAssignmentCommand addMissionCopy = new MakeAssignmentCommand(mission.getName(),
+                mission.getWeightage(), mission.getMaxScore());
         assertTrue(addMission.equals(addMissionCopy));
 
         // different types -> returns false
@@ -287,6 +294,15 @@ public class MakeAssignmentCommandTest {
         public void setAssignment(Assignment target, Assignment editedAssignment) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int getAssignmentCounter() {
+            return 0;
+        }
+
+        @Override
+        public void setAssignmentCounter(int i) {
+        }
     }
 
     /**
@@ -318,7 +334,7 @@ public class MakeAssignmentCommandTest {
         @Override
         public boolean hasAssignmentInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
-            return this.assignment.isSameAssignment(assignment);
+            return this.assignment.isSameName(assignment);
         }
     }
 
@@ -336,7 +352,7 @@ public class MakeAssignmentCommandTest {
         @Override
         public boolean hasAssignmentInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
-            return assignmentsAdded.stream().anyMatch(assignment::isSameAssignment);
+            return assignmentsAdded.stream().anyMatch(assignment::isSameName);
         }
 
         @Override

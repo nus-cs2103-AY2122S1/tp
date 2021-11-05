@@ -73,7 +73,10 @@ public class EditAssignmentCommand extends Command {
         }
 
         Assignment asgToEdit = assignmentList.get(index.getZeroBased());
-        Assignment editedAsg = createEditedAssignment(asgToEdit, editDescriptor);
+
+        int id = model.getAssignmentCounter();
+
+        Assignment editedAsg = createEditedAssignment(asgToEdit, editDescriptor, id);
 
         if (model.hasAssignmentInCurrentModule(editedAsg)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
@@ -91,6 +94,7 @@ public class EditAssignmentCommand extends Command {
         }
 
         model.setAssignment(asgToEdit, editedAsg);
+        model.setAssignmentCounter(id + 1);
         return new CommandResult(String.format(MESSAGE_EDIT_ASSIGNMENT_SUCCESS, editedAsg));
     }
 
@@ -98,14 +102,15 @@ public class EditAssignmentCommand extends Command {
      * Creates and returns an {@code Assignment} with the details of {@code toEdit}
      * edited with {@code editDescriptor}.
      */
-    private static Assignment createEditedAssignment(Assignment toEdit, EditAssignmentDescriptor editDescriptor) {
+    private static Assignment createEditedAssignment(Assignment toEdit,
+                                                     EditAssignmentDescriptor editDescriptor, int id) {
         requireNonNull(toEdit);
 
         Name updatedName = editDescriptor.getName().orElse(toEdit.getName());
         Weightage updatedWeightage = editDescriptor.getWeightage().orElse(toEdit.getWeightage());
         Score updatedMaxScore = editDescriptor.getMaxScore().orElse(toEdit.getMaxScore());
 
-        return new Assignment(updatedName, updatedWeightage, updatedMaxScore);
+        return new Assignment(updatedName, updatedWeightage, updatedMaxScore, id);
     }
 
     /**

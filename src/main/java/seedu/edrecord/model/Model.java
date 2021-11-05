@@ -205,6 +205,16 @@ public interface Model {
     void setAssignment(Assignment target, Assignment editedAssignment);
 
     /**
+     * Returns the counter for this module's assignment ID.
+     */
+    int getAssignmentCounter();
+
+    /**
+     * Sets the counter for this module's assignment ID to the given value.
+     */
+    void setAssignmentCounter(int i);
+
+    /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

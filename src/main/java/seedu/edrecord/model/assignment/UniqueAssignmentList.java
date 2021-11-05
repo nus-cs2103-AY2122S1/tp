@@ -20,25 +20,28 @@ import seedu.edrecord.model.name.Name;
  * so as to ensure that the assignment being added or updated is unique in terms of identity in the
  * UniqueAssignmentList. However, the removal of an assignment uses Assignment#equals(Object) so as
  * to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
- * @see Assignment#isSameAssignment(Assignment)
+ * @see Assignment#isSameName(Assignment)
  */
 public class UniqueAssignmentList implements Iterable<Assignment> {
+    private static final String INVALID_ID = "ID of this assignment is invalid.";
 
     private static final Weightage maximumTotalWeightage = new Weightage("100");
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private int assignmentCounter = 1;
 
     /**
      * Returns true if the list contains an assignment with the same identity as the given argument.
      */
     public boolean contains(Assignment toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameAssignment);
+        return internalList.stream().anyMatch(toCheck::isSameName)
+                || internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -53,6 +56,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     /**
      * Adds an assignment to the list.
      * The assignment must not already exist in the list.
+     *
      * @param toAdd The assignment to be added.
      */
     public void add(Assignment toAdd) {
@@ -76,7 +80,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
             throw new AssignmentNotFoundException();
         }
 
-        if (!target.isSameAssignment(editedAssignment) && contains(editedAssignment)) {
+        if (!target.isSameName(editedAssignment) && contains(editedAssignment)) {
             throw new DuplicateAssignmentException();
         }
 
@@ -120,13 +124,27 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      */
     public Optional<Assignment> searchAssignment(Name name) {
         // Create dummy assignment to search by name
-        Assignment a = new Assignment(name, new Weightage("0"), new Score("0"));
+        Assignment a = new Assignment(name, new Weightage("0"), new Score("0"), 0);
         int index = internalUnmodifiableList.indexOf(a);
         if (index == -1) {
             return Optional.empty();
         } else {
             return Optional.of(internalUnmodifiableList.get(index));
         }
+    }
+
+    /**
+     * Returns the current counter for this module's assignment ID.
+     */
+    public int getAssignmentCounter() {
+        return assignmentCounter;
+    }
+
+    /**
+     * Sets the counter for this module's assignment ID to the given value.
+     */
+    public void setAssignmentCounter(int i) {
+        assignmentCounter = i;
     }
 
     /**
@@ -159,7 +177,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     private boolean assignmentsAreUnique(List<Assignment> assignments) {
         for (int i = 0; i < assignments.size() - 1; i++) {
             for (int j = i + 1; j < assignments.size(); j++) {
-                if (assignments.get(i).isSameAssignment(assignments.get(j))) {
+                if (assignments.get(i).isSameName(assignments.get(j))) {
                     return false;
                 }
             }
