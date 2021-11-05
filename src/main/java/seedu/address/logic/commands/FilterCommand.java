@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -54,8 +55,9 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        List<String> list = new ArrayList<>();
         if (argMultimap.getValue(PREFIX_FACULTY).isPresent()) {
-            List<String> list = argMultimap.getAllValues(PREFIX_FACULTY);
+            list = argMultimap.getAllValues(PREFIX_FACULTY);
             for (String s : list) {
                 if (!Faculty.isValidFaculty(s)) {
                     return new CommandResult("Faculty not found: " + s);
@@ -66,7 +68,7 @@ public class FilterCommand extends Command {
         }
 
         if (argMultimap.getValue(PREFIX_MAJOR).isPresent()) {
-            List<String> list = argMultimap.getAllValues(PREFIX_MAJOR);
+            list = argMultimap.getAllValues(PREFIX_MAJOR);
             for (String s : list) {
                 if (!Major.isValidMajor(s)) {
                     return new CommandResult("Major not found: " + s);
@@ -77,7 +79,7 @@ public class FilterCommand extends Command {
         }
 
         if (argMultimap.getValue(PREFIX_SKILL).isPresent()) {
-            List<String> list = argMultimap.getAllValues(PREFIX_SKILL);
+            list = argMultimap.getAllValues(PREFIX_SKILL);
             for (String s : list) {
                 if (!Skill.isValidSkillName(s)) {
                     return new CommandResult("Skill name is invalid: " + s);
@@ -88,7 +90,7 @@ public class FilterCommand extends Command {
         }
 
         if (argMultimap.getValue(PREFIX_FRAMEWORK).isPresent()) {
-            List<String> list = argMultimap.getAllValues(PREFIX_FRAMEWORK);
+            list = argMultimap.getAllValues(PREFIX_FRAMEWORK);
             for (String s : list) {
                 if (!Framework.isValidFrameworkName(s)) {
                     return new CommandResult("Framework name is invalid: " + s);
@@ -99,7 +101,7 @@ public class FilterCommand extends Command {
         }
 
         if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
-            List<String> list = argMultimap.getAllValues(PREFIX_LANGUAGE);
+            list = argMultimap.getAllValues(PREFIX_LANGUAGE);
             for (String s : list) {
                 if (!Language.isValidLanguageName(s)) {
                     return new CommandResult("Language name is invalid: " + s);
@@ -110,7 +112,7 @@ public class FilterCommand extends Command {
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            List<String> list = argMultimap.getAllValues(PREFIX_TAG);
+            list = argMultimap.getAllValues(PREFIX_TAG);
             for (String s : list) {
                 if (!Tag.isValidTagName(s)) {
                     return new CommandResult("Tag name is invalid: " + s);
@@ -118,6 +120,9 @@ public class FilterCommand extends Command {
             }
             tagPredicate = new ContactHasTagPredicate(list);
             model.updateFilteredPersonList(tagPredicate);
+        }
+        if (list.isEmpty()) {
+            return new CommandResult(Messages.MESSAGE_INVALID_FILTER_PREFIX + argMultimap.getPreamble());
         }
 
         return new CommandResult(
