@@ -63,5 +63,8 @@ ModelManager -->"~* filtered" Person
 ModelManager -->"~* filtered" Task
 ModelManager -->"~* filtered" Order
 
+ModelManager -[hidden]down-> Person
+UniqueOrderList -[hidden]down-> Order
+
 
 @enduml

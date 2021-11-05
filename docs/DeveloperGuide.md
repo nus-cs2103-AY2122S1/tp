@@ -122,8 +122,8 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletetask 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteTaskSequenceDiagram.png)
-
+![Interactions Inside the Logic Component for the `deletetask 1` Command](images/DeleteTaskSequenceDiagram.png)
+    
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -156,8 +156,8 @@ The `Model` component,
 
 * stores these three types of data in SalesNote
   * Address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-  * Task book data i.e., all `Tasks` objects (which are contained in a `UniqueTaskList` object).
-  * Order book data i.e., all `Orders` objects (which are contained in a `UniqueOrderList` object).
+  * Task book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
+  * Order book data i.e., all `Order` objects (which are contained in a `UniqueOrderList` object).
 
 * stores the currently 'selected' `Person`, `Tasks`, and `Orders` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<Task>` and `ObservableList<Order>` respectively  that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -249,10 +249,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Update Person Changes in Order List and Task List
 
-SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated through the Order list.
+SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated to the Order list.
 
-* When a client is deleted, his/her orders and the tasks linked to the orders will be deleted as well.
-* When a client name is modified, this change will be updated in his/her existing orders.
+* When a client is deleted, their orders and the tasks linked to the orders will be deleted as well.
+* When a client name is modified, this change will be updated in their existing orders.
 
 #### Execution
 
