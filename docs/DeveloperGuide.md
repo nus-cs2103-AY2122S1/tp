@@ -160,6 +160,11 @@ In the following section, we will be going through how our add command works. Si
 
 Adding an employee can be split into 2 steps: `Parse` and `Execute`.
 
+Below is a partial class diagram for `AddEmployeeCommand`. Note that to make it more comprehensible, details not
+related to `AddEmployeeCommand` are abstracted away.
+
+![AddEmployeeCommandClassDiagram](images/AddEmployeeCommandClassDiagram.png)
+
 The sequence Diagram below illustrates the interactions within the `Logic` component for the `execute` API call. 
 
 ![AddEmployeeCommandSequenceDiagram](images/AddEmployeeCommandSequenceDiagram.png)
@@ -174,13 +179,14 @@ reaches the end of diagram.
 2. The `RhrhParser` then creates an `AddEmployeeCommandParser` to parse the command input.
 3. If successful, this results in an `AddEmployeeCommand` object being created which will then be executed by the `LogicManager`.
 
-Below is a partial class diagram for `AddEmployeeCommand`. NOte that to make it more comprehensible, details not related to `AddEmployeeCommand` are abstracted away.
-
-![AddEmployeeCommandClassDiagram](images/AddEmployeeCommandClassDiagram.png)
-
 `Execute`:
 1. The instance of `AddEmployeeCommand` created can communicate with the `Model` when it is executed to add an employee to the `UniqueEmployeeList`.
 2. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+**Flow of execution**
+
+The activity diagram below shows the flow of execution when a user calls the `AddEmployeeCommand` together with the
+details when this command is executed
 
 ![AddEmployeeCommandActivityDiagram](images/AddEmployeeCommandActivityDiagram.png)
 
@@ -232,6 +238,12 @@ works. More information on the differences in deleting `Customer`, `Employee` an
 #### Current Implementation
 Deleting a supplier can be split into 2 steps: `Parse` and `Execute`.
 
+Here's a partial class diagram for the `DeleteSupplierCommand`. Note that to make it more comprehensible, details
+not related to the `DeleteSupplierCommand` are abstracted away.
+
+![DeleteSupplierClassDiagram](images/DeleteSupplierClassDiagram.png)
+
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteS 1")`
 API call.
 
@@ -248,15 +260,18 @@ reaches the end of diagram.
 3. If successful, this results in a `DeleteSupplierCommand` object being created which then is executed by the
    `LogicManager`.
 
-Here's a partial class diagram for the `DeleteSupplierCommand`. Note that to make it more comprehensible, details 
-not related to the `DeleteSupplierCommand` are abstracted away.
-
-![DeleteSupplierClassDiagram](images/DeleteSupplierClassDiagram.png)
 
 `Execute`:
 1. The instance of `DeleteSupplierCommand` created can communicate with the `Model` when it is executed to delete a 
    supplier from the `UniqueSupplierList`.
 2. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+**Flow of execution**
+
+The activity diagram below shows the flow of execution when a user calls the `DeleteSupplierCommand` together with the
+details when this command is executed
+
+![DeleteSupplierActivityDiagram](images/DeleteActivityDiagram.png)
 
 #### Design Considerations
 
@@ -294,6 +309,11 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![FindCustomerCommandSequenceDiagram](images/FindCustomerCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`FindCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
+
 `Parse`:
 1. When `Logic` is called upon to execute the `FindCustomerCommand`, it uses the `RhrhParser` class to parse the user command.
 2. The `RhrhParser` then creates a `FindCustomerCommandParser` to parse the command input.
@@ -301,18 +321,15 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 4. This finally results in a `FindCustomerCommand` object being created from the newly created `CustomerClassContainsKeywordsPredicate` and is then executed by the
    `LogicManager`.
 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`FindCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
-
 `Execute`:
 1. The instance of `FindCustomerCommand` created can communicate with the `Model` when it is executed to filter the
    `UniqueCustomerList` based on the `CustomerClassContainsKeywordsPredicate`.
-3. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The following is an activity diagram to show how the find implementation works for a find customer input:
+**Flow of execution**
+
+The activity diagram below shows the flow of execution when a user calls the `FindCustomerCommand` together with the 
+details when this command is executed
 
 ![FindCustomerCommandActivityDiagram](images/FindCustomerCommandActivityDiagram.png)
 
@@ -349,10 +366,20 @@ works. More information on the differences in sorting `Customer` and `Employee` 
 #### Current Implementation
 Sorting of a supplier list can be divided into two steps: `Parse` and `Execute`.
 
+Here's a partial class diagram for the `SortSupplierCommand`. Note that to make it more comprehensible, details
+not related to the `SortSupplierCommand` are abstracted away.
+
+![SortSupplierClassDiagram](images/SortClassDiagram.png)
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("sortS by/dd
 o/a")` API call.
 
 ![SortSupplierSequenceDiagram](images/SortSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`SortSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
 
 `Parse`:
 1. When `Logic` is called upon to execute the `SortSupplierCommand`, it uses the `RhrhParser` class to parse the user command.
@@ -360,22 +387,18 @@ o/a")` API call.
 3. If successful, this results in a `SortSupplierCommand` object being created which then is executed by the
    `LogicManager`.
 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
-`SortSupplierCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
-reaches the end of diagram.
-</div>
-
-Here's a partial class diagram for the `SortSupplierCommand`. Note that to make it more comprehensible, details
-not related to the `SortSupplierCommand` are abstracted away.
-
-![SortSupplierClassDiagram](images/SortClassDiagram.png)
-
 `Execute`:
 1. The instance of `SortSupplierCommand` created can communicate with the `Model` when it is executed to sort the 
    `UniqueSupplierList` based on a sorting type and sorting order.
 2. The `Comparator` that is used to sort the `UniqueSupplierList` is generated by the `SupplierComparator` class
 3. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+**Flow of execution**
+
+The activity diagram below shows the flow of execution when a user calls the `SortSupplierCommand` together with the
+details when this command is executed
+
+![SortSupplierActivityDiagram](images/SortActivityDiargam.png)
 
 #### Design Considerations
 

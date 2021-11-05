@@ -52,6 +52,8 @@ activate Model
 
 Model -> Model : sort()
 
+note left of Model : The SortableSupplierList \nis sorted in Model.\nDetails are not shown here
+
 
 Model --> SortSupplierCommand : sortedList
 deactivate Model
