@@ -158,7 +158,7 @@ An example of a command in TAB:
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags and will ignore them (see [Managing Students](#managing-students) for more details about tags). The same applies for homework i.e. TAB ignores homework with empty description (see [Managing Lessons](#managing-lessons) for more details about homework). 
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -400,16 +400,6 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
-  
-* You can delete all tags of a student by typing `t/` without any arguments. 
-
-<div markdown="span" class="alert alert-primary">**:information_source: Note about tags:**<br>
-
-If you add other tags along with `t/`, `t/` will be interpreted as an empty tag.<br>
-  e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
-On the other hand, `edit 2 t/ t/neighbour` will remove all existing tags and add only `neighbour` as a tag to the student.
-
-</div>
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -702,16 +692,6 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
   
 * Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.
-
-<div markdown="block" class="alert alert-info">**:information_source: Note about homework:**<br>
-
-You can delete all homework of a lesson by typing `hw/` without any arguments.
-If you add other pieces of homework along with `hw/`, `hw/` will be interpreted as a homework with an empty description.<br/>
-
-  e.g. `ledit 2 1 hw/` will remove all existing homework pieces from the 1st lesson of the 2nd student in the displayed list.
-On the other hand, `ledit 2 1 hw/ hw/Assignment 1` will remove all existing homework and add only `Assignment 1` as homework for the lesson.
-
-</div>
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
