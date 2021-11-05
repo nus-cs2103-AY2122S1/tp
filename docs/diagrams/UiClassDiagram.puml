@@ -19,10 +19,6 @@ Class ReminderWindow
 Class ReminderLessonCard
 }
 
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
-}
-
 package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
