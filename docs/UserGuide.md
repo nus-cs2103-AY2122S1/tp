@@ -472,7 +472,7 @@ Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students who have lessons w
 Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date
 Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range
 Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
-Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
+Lesson Rates     | rates/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
 Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
 
 Notes about the find condition:
