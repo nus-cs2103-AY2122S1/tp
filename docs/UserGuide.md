@@ -864,7 +864,7 @@ UX | User Experience - The experience a user has when using the app.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Command Summary
 This section lists all available commands in TAB, along with examples on how you can use them.
 
 Action | Format & Examples
