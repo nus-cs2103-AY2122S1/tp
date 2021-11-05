@@ -201,8 +201,8 @@ Executing any of the commands in this section will bring you to the students int
             <th style="text-align:center; padding: 10px 0 10px 0">Category</th>
             <th style="text-align:center">Field</th>
             <th style="text-align:center">Prefix</th>
-            <th style="text-align:center">Constraint(s)</th>
-            <th style="text-align:center">Example(s)</th>
+            <th style="text-align:center">Constraints</th>
+            <th style="text-align:center">Examples</th>
         </tr>
     </thead>
     <tbody>
@@ -216,12 +216,12 @@ Executing any of the commands in this section will bring you to the students int
                 <li>TAB does not allow adding students with the same case-sensitive name.</li>
               </ul>
             </td>
-            <td><code>n/Jane</code></td>
+            <td><code>n/Jane Tan</code></td>
         </tr>
         <tr>
             <td>Address</td>
             <td><code>a/</code></td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
             <td><code>a/Blk 123A, Serangoon Ave 3, #04-56</code></td>
         </tr>
         <tr>
@@ -267,7 +267,7 @@ Executing any of the commands in this section will bring you to the students int
         <td rowspan=5>Optional</td>
             <td>School</td>
             <td><code>sch/</code></td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
             <td><ul>
               <li><code>sch/Serangoon JC</code></li>
               <li><code>sch/</code> sets the school field to empty.</li>
@@ -296,7 +296,7 @@ Executing any of the commands in this section will bring you to the students int
         <tr>
             <td>Remark</td>
             <td><code>r/</code></td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
             <td><ul>
               <li><code>r/She is weak at maclaurin series.</code></li>
               <li><code>r/</code> sets the remark field to empty.</li>
@@ -311,24 +311,23 @@ Executing any of the commands in this section will bring you to the students int
               <li>To add multiple tags to a student, you need to add <code>t/</code> before every tag name.</li>
             </ul></td>
             <td><ul>
-              <li><code>t/unpaid</code> adds one tag with tag name "UNPAID"</li>
+              <li><code>t/unpaid</code> is valid.</li>
               <li><code>t/unpaid retained</code> is invalid.</li>
-              <li><code>t/unpaid t/retained</code> adds two tags with tag names "UNPAID" and "RETAINED"</li>
               <li><code>t/</code> clears <strong>all</strong> tags.</li>
             </ul></td>
         </tr>
         <tr>
             <td rowspan="2">View Only</td>
             <td>Student Index</td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
             <td>Changes according to the position of the student in the displayed list.</td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
         </tr>
         <tr>
             <td>Outstanding Fees</td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
             <td>Can only be changed with valid executions of <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands. See <a href="#managing-lesson-fees">Managing Fees</a> for more details.</td>
-            <td>Not Applicable.</td>
+            <td>Not Applicable</td>
         </tr>
     </tbody>
 </table>
@@ -347,7 +346,7 @@ Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER
 A student can have any number of tags (including 0).
 </div>
 
-* **At least one** [contact](#student-contact) field is required.<br>
+* **At least one** [contact field](#student-contact) is required.<br>
 * `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
 Examples:
@@ -664,7 +663,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 - lessons with the following dates and time are not considered upcoming:
   - dates before 1 Nov 2021 (has passed),
   - 1 Nov 2021 with end time before 1500h (has passed),
-  - 3 Nov 2021 with start time after 1500 (beyond 48 hours).
+  - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
