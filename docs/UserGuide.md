@@ -628,7 +628,7 @@ Note that outstanding fees will not change with the following cases:
 
 * Changing the lesson's rate. The change in lesson rate will only take effect from the date and time of change.
 * Cancelling or uncancelling a lesson date that has passed.
-* Changing start or end date of the lesson.
+* Changing the start or end date of the lesson.
 * Changing the lesson's timing.
 
 #### Upcoming features for Fees Calculator
@@ -779,7 +779,7 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone if the previous command was `undo` or a command that does not modify any data.
+The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, no .
 
 Format: `redo`
 
