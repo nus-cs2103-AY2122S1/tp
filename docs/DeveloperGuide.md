@@ -115,9 +115,9 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 The `UI` component,
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* listens for changes to `VersionedModel` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model` and requires grades statistics from `Student` object in the `Model`.
+* depends on some classes in the `VersionedModel` component, as it displays `Student` object residing in the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
 
 ### Logic component
 
@@ -129,7 +129,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AcademyDirectoryParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
+1. The command can communicate with the `VersionedModel` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -156,7 +156,7 @@ The `VersionedModel` component,
 * stores the academy directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components)
 * interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
 and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
 
@@ -180,7 +180,7 @@ For more information regarding `VersionControl`, read [here](#versioncontrol-com
 The `Storage` component,
 * can save both academy directory data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AcademyDirectoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `VersionedModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `VersionedModel`)
 * can write version control objects to disk
 
 ### Common classes
@@ -269,7 +269,7 @@ This command deletes a `Student` from `AcademyDirectory`.
 #### Implementation
 `DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose and is Version Controllable.
 
-`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `Model#deleteStudent()`.
+`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
 
 ### TagCommand
 
