@@ -48,12 +48,13 @@ public class EditFolderNameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
         if (newFolder.getFolderName().equals(oldFolder.getFolderName())) {
             throw new CommandException(MESSAGE_SAME_FOLDER_NAME_ENTERED);
         }
+
         List<Folder> lastShownFolderList = model.getFilteredFolderList();
         int indexOfFolder = lastShownFolderList.indexOf(oldFolder);
-
         if (indexOfFolder == -1) {
             throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
         }

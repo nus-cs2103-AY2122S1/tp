@@ -13,7 +13,9 @@ that you can get up to speed quickly and be productive with your data.
 
 ### Role: Team Lead
 
-![Sebastian](images/sebbycake.png) <br/>
+<img src="images/sebbycake.png" width="200px">
+
+[![Sebastian PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/sebbycake.html) &nbsp;
 [![Sebastian LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/sebastian-lee-329b45198/) &nbsp;
 [![Sebastian GitHub](images/github.png)](https://github.com/sebbycake)
 
@@ -21,7 +23,9 @@ that you can get up to speed quickly and be productive with your data.
 
 ### Role: Code Quality
 
-![Wen Jun](images/xlzior.png) <br/>
+<img src="images/xlzior.png" width="200px">
+
+[![Wen Jun PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/xlzior.html) &nbsp;
 [![Wen Jun LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/wen-jun-lye/) &nbsp;
 [![Wen Jun GitHub](images/github.png)](https://github.com/xlzior/)
 
@@ -29,7 +33,9 @@ that you can get up to speed quickly and be productive with your data.
 
 ### Role: Documentation
 
-![David](images/itsyme.png) <br/>
+<img src="images/itsyme.png" width="200px">
+
+[![David PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/itsyme.html) &nbsp;
 [![David LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/david-lee-4a147a1b1/) &nbsp;
 [![David GitHub](images/github.png)](https://github.com/itsyme)
 
@@ -37,14 +43,18 @@ that you can get up to speed quickly and be productive with your data.
 
 ### Role: Integration
 
-![Rehhmann](images/rehmmann.png) <br/>
-[![Rehhmann LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/rehman-sajid/) &nbsp;
-[![Rehhmann GitHub](images/github.png)](https://github.com/rehmmann/)
+<img src="images/rehmmann.png" width="200px">
+
+[![Rehman PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/rehmmann.html) &nbsp;
+[![Rehman LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/rehman-sajid/) &nbsp;
+[![Rehman GitHub](images/github.png)](https://github.com/rehmmann/)
 
 ## Ching Jia Rong
 
 ### Role: Testing
 
-![Jia Rong](images/jiarong15.png) <br/>
+<img src="images/jiarong15.png" width="200px">
+
+[![Jia Rong PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/jiarong15.html) &nbsp;
 [![Jia Rong LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/jiarong15//) &nbsp;
 [![Jia Rong GitHub](images/github.png)](https://github.com/jiarong15)

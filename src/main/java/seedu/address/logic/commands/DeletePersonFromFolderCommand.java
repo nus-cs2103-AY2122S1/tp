@@ -21,6 +21,7 @@ public class DeletePersonFromFolderCommand extends Command {
 
     public static final String COMMAND_WORD = "rm";
     public static final String COMMAND_IDENTIFIER = ">>";
+
     public static final String MESSAGE_NO_SUCH_PERSON_IN_FOLDER = "This person does not exist in this folder";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number from the folder specified.\n"
@@ -60,7 +61,7 @@ public class DeletePersonFromFolderCommand extends Command {
         int indexOfFolder = lastShownFolderList.indexOf(targetFolder);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_UNION);
         }
 
         if (indexOfFolder == -1) {
