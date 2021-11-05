@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILTER_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
@@ -56,8 +56,8 @@ public class FilterCommandTest {
                 PREFIX_LANGUAGE, PREFIX_MAJOR, PREFIX_SKILL, PREFIX_TAG);
         FilterCommand command = new FilterCommand(argumentMultimap);
         expectedModel.updateFilteredPersonList(predicate);
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                expectedModel.getFilteredPersonList().size());
+        String expectedMessage = String.format(MESSAGE_INVALID_FILTER_PREFIX,
+                argumentMultimap.getPreamble());
         command.execute(model);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());

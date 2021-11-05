@@ -187,7 +187,6 @@ Examples:
 <div markdown="block" class="alert alert-info">
 :bulb: Tips
 *  You can add multiple fields in one command to see all filters together.
-*  Empty filter gives a list with all persons.
 </div>
 
 
