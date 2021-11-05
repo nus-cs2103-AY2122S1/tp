@@ -70,7 +70,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     - Updated Acknowledgements section
     - Updated implementation of Model section, including the Model object diagram<br>
-      <img src="images/StorageClassDiagram.png" width="750" />
+      <img src="../images/StorageClassDiagram.png" width="750" />
     - Added implementation details of using up/down arrow keys to select previous user inputs
   
     Example extract:
@@ -83,7 +83,7 @@ Given below are my contributions to the project.
 >Suppose the user is on the Tasks tab. The following activity diagram illustrates a possible workflow for a user
 >entering tasks, and shows how the workflow is enhanced by this feature.
 >
->![CreateSimilarTasksActivityDiagram](..images/CreateSimilarTasksActivityDiagram.png)
+>![CreateSimilarTasksActivityDiagram](../images/CreateSimilarTasksActivityDiagram.png)
 >
 >A concrete example would be when a user wants to add two tasks with descriptions "CS2100 Tutorial 7" and "CS2100
 >Tutorial 8" to their task List. Instead of typing out a near-identical command for the second task, they could press
@@ -101,7 +101,7 @@ Given below are my contributions to the project.
 >already on the help tab. It also shows how `Storage` is updated. Details related to command parsing and execution are
 >omitted.
 >
->![SaveUserInputSequenceDiagram](..images/SaveUserInputSequenceDiagram.png)
+>![SaveUserInputSequenceDiagram](../images/SaveUserInputSequenceDiagram.png)
 >
 >Since the storage of the`UserInputList` is very similar to the storage of the `TaskList` and `AddressBook`,
 >implementation details are not shown above. In summary, when the app is started, a `UserInputList` is constructed using
