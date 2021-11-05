@@ -14,6 +14,21 @@ public class AddressTest {
     }
 
     @Test
+    public void constructor_emptyString_success() {
+        String emptyAddress = "";
+        boolean success = false;
+
+        try {
+            Address address = new Address(emptyAddress);
+            success = true;
+        } catch (Exception e) {
+            // Test Case Failed
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    @Test
     public void isValidAddress() {
         // null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));

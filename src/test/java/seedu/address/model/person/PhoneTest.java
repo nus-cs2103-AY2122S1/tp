@@ -14,6 +14,21 @@ public class PhoneTest {
     }
 
     @Test
+    public void constructor_emptyString_success() {
+        String emptyPhone = "";
+        boolean success = false;
+
+        try {
+            Phone phone = new Phone(emptyPhone);
+            success = true;
+        } catch (Exception e) {
+            // Test Case Failed
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    @Test
     public void isValidPhone() {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));

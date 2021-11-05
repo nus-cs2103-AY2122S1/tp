@@ -14,6 +14,21 @@ public class EmailTest {
     }
 
     @Test
+    public void constructor_emptyString_success() {
+        String emptyEmail = "";
+        boolean success = false;
+
+        try {
+            Email email = new Email(emptyEmail);
+            success = true;
+        } catch (Exception e) {
+            // Test Case Failed
+            success = false;
+        }
+        assertTrue(success);
+    }
+
+    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
