@@ -36,16 +36,16 @@ title: Developer Guide
     * [RedoCommand](#redocommand)
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
-* [Appendix](#appendix-requirements)
-  * [Requirements](#appendix-requirements)
+* [Appendix](#appendix-a-requirements)
+* [Requirement](#appendix-a-requirements)
     * [Product Scope](#product-scope)
     * [User Stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-  * [Manual Testing](#appendix-instructions-for-manual-testing)
-    * [Feature Testing](#feature-testing)
-    * [UI Testing](#ui-testing)
+* [Manual Testing](#appendix-b-instructions-for-manual-testing)
+  * [Feature Testing](#feature-testing)
+  * [UI Testing](#ui-testing)
     
 --------------------------------------------------------------------------------------------------------------------
 
