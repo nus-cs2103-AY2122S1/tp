@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Tan Rui Quan's Project Portfolio Page
+title: Jason's Project Portfolio Page
  ---
 
 ### Project: contHACKS
@@ -9,44 +9,50 @@ contHACKS is a desktop app for Teaching Assistants (TAs) to manage contacts and 
 
 Given below are my contributions to the project.
 
-**New Feature**: Added the ability to add lesson. (PR [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135))
-* **What it does**: allows the user to add lesson into contHACKS by providing information about the lesson.
-* **Justification**: This feature improves the product significantly as user can now refer to contHACKS to know what upcoming lessons they have after they have added the lesson.
+**New Feature**: Added the ability to find a lesson. (PR [#141](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/141))
+* **What it does**: Allows the user to find a lesson within contHACKS by providing information about the lesson.
+* **Justification**: This feature improves the product significantly as user can now find the relevant classes based on their searches from contHACKS.
+* **Highlights**: On top of searching using the lesson's module code, you can also search via the lesson's start time and the day of the week of the lesson. The once obsolete tag prefix `t/` was recycled to be used to search for lesson start time.
 * **Credits**: The design structure is inspired from AddressBook Level 3
 
-**Enhanced Feature**: Enhanced the ability to add person. (PRs [#14](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/14), [#47](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/47))
-* **What it does**: allows the user to add person into contHACKS with information that are relevant to a TA.
-* **Justification**: removed the ability to include address when adding a person as such information is not relevant to a TA.
-* **Justification**: added the ability to include module codes, lessons codes and telegram handle when adding a person as such information are relevant to a TA.
-* **Highlight**: as multiple module codes (e.g.` CS2103T`) and lesson codes (e.g. `T14`) are allowed. There is a need to identify which module code a lesson code belongs to. There were many possible design considerations, but we ultimately settled with making the associate when adding. Such an implementation requires [substanstial change in the model component](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/86) which made the enhancement challenging.
+**Enhanced Feature**: Enhanced the ability to find person. (PRs [#51](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/51), [#76](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/76), [#84](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/84))
+* **What it does**: Allows the user to find person from contHACKS with different information quickly by allowing partial word matches.
+* **Justification**: User now need not type the full name just to search for a single person, making the process faster especially for long names.
+* **Justification**: While this might return more entries per search, it is still not significantly long enough to affect search experience.
 
-**Enhanced Feature**: Enhanced the ability to edit person. (PR [#74](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/74))
-* **What it does**: allows the user to edit a person that is already in contHACKS.
-* **Justification**: modified the edit functionality so as to correspond with the changes in add functionality
+**Enhanced Feature**: Refactor `moduleClass` class to `moduleLesson` class. (PR [#98](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/98))
+* **What it does**: Rename `moduleClass` class to `moduleLesson` class. This includes changing all instances of `moduleClass` in pacakages, methods, test cases and comments.
+* **Justification**: As it became confusing to discuss about `moduleClass` class and a `module` class, we realised that there was a need to rename this class to make it more instinctive.
 
-**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=ruiquan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=tanruiquan&tabRepo=AY2122S1-CS2103T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jason-ng-zq99&tabRepo=AY2122S1-CS2103T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 **Project management**:
-* Managed releases `v1.2.1` and `v1.3.1` (2 releases) on GitHub
+* Helped to regulate and ensure the proper workflow in the project 
+* Guided the general direction of where project should move towards 
 
 **Testing**:
 * Wrote tests for all new and enhanced features:
-  [#47](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/47),
-  [#74](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/74),
-  [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135)
+  [#51](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/51),
+  [#76](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/76),
+  [#84](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/84),
+  [#98](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/98),
+  [#141](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/141)
 
 **Documentation**:
 * User Guide:
-    * Added documentation for the features `add`, `edit`: [#104](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/104)
-    * Created a structure, updated table of contents and added documentation for the feature `addc`: [#148](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/148)
+    * Added documentation for the features `find`: [#116](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/116), [#146](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/146)
+    * Created a structure and added documentation for the feature `findc`: [#152](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/152)
 
 * Developer Guide:
-    * Updated the UML diagram and documentation for the model component: [#99](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/99)
+    * Refine product scope and use cases: [#16](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/16)
+    * Update implementation of find feature: [#110](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/110)
 
 **Community**:
 * PRs reviewed (with non-trivial review comments):
-  [#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77),
-  [#105](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/105),
-  [#132](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/132),
-  [#145](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45),
-  [#202](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/202)
+  [#47](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/47),
+  [#101](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/101),
+  [#119](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/119),
+  [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131),
+  [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135),
+  [#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136),
+  [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137)
