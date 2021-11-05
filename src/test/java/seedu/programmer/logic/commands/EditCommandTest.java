@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
+//import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
+//import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.programmer.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
@@ -21,11 +21,11 @@ import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
-import seedu.programmer.model.ProgrammerError;
+//import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.testutil.EditStudentDescriptorBuilder;
-import seedu.programmer.testutil.StudentBuilder;
+//import seedu.programmer.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
