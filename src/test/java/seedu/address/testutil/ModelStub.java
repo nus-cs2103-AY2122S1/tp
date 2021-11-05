@@ -233,6 +233,8 @@ public class ModelStub implements Model {
      */
     public static class ModelStubAcceptingPersonAdded extends ModelStub {
         public final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Person toView = null;
+        private ViewingType viewingType = null;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -244,6 +246,16 @@ public class ModelStub implements Model {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void setPersonToView(Person person) {
+            toView = person;
+        }
+
+        @Override
+        public void setViewingType(ViewingType type) {
+            viewingType = type;
         }
 
         @Override

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TIME_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
+import static seedu.address.logic.parser.CommandParserTestUtil.INVALID_COMMAND_INVALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.INVALID_DATE_TIME_FORMAT;
@@ -56,9 +57,12 @@ class PersonAddExamParserTest {
 
     @Test
     public void parse_invalidFields_failure() {
+        // empty
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
         // invalid index
-        assertParseFailure(parser, "-1" + SUBJECT_DESC_MATH + DATE_TIME_DESC1, MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, "abc" + SUBJECT_DESC_MATH + DATE_TIME_DESC1, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-1" + SUBJECT_DESC_MATH + DATE_TIME_DESC1, INVALID_COMMAND_INVALID_INDEX);
+        assertParseFailure(parser, "abc" + SUBJECT_DESC_MATH + DATE_TIME_DESC1, INVALID_COMMAND_INVALID_INDEX);
 
         // invalid subject
         assertParseFailure(parser, "1" + INVALID_SUBJECT_DESC + DATE_TIME_DESC1, Subject.MESSAGE_CONSTRAINTS);
