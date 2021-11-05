@@ -49,11 +49,13 @@ This guide aims to help users get familiar with using RecruitIn's features.
 
 <div markdown="block" class="alert alert-info">
 
-    **:information_source: Take Note:**
-    * If this is your first time reading this user guide, it is recommended that you visit [Glossary](#glossary) and [Features](#features) to familiarize
-    yourself with the terminology and text formatting used in this user guide. This will help you better understand the user guide.
-    * If you still wish to skip directly to the feature descriptions, or if you need a refresher on the important terminologies and text formatting used
-    in this user guide, you may visit [Basic Command Format](#basic-command-format).
+**:information_source: Notes about the command format:**<br>
+
+* If this is your first time reading this user guide, it is recommended that you visit [Glossary](#glossary) and [Features](#features) to familiarize
+  yourself with the terminology and text formatting used in this user guide. This will help you better understand the user guide.
+
+* If you still wish to skip directly to the feature descriptions, or if you need a refresher on the important terminologies and text formatting used
+  in this user guide, you may visit [Basic Command Format](#basic-command-format).
 
 </div>
 
