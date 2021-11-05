@@ -559,21 +559,21 @@ Examples:
 
 #### Behaviours of the Fees Calculator
 
-TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
+TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
 However, the Fees Calculator will not account for any changes to lessons that have passed. 
 
 Note that outstanding fees will not change with the following cases:
 
-* Changing lesson rates. The change in lesson rates will only take effect from the date and time of change.
+* Changing the lesson's rate. The change in lesson rate will only take effect from the date and time of change.
 * Cancelling or uncancelling a lesson date that has passed.
-* Changing lesson start or end date.
-* Changing lesson timings.
+* Changing start or end date of the lesson.
+* Changing the lesson's timing.
 
 #### Upcoming Features for Fees Calculator
 
-1. **Flag out overdue lesson fees.** In the future, we would like to allow users to specify how many lessons per payment, and if not specified the default would be 4 lessons per payment. 
+1. **Flag out overdue lesson fees.** In the future, we would like to allow users to specify the number of lessons per payment, and if not specified the default would be 4 lessons per payment. 
 This value would be used to calculate and flag out which lesson's fees are due by automatically tagging a red `DUE` tag to that lesson.
 2. **Account for cancelled and uncancelled lessons.** In the future, we would also like to make the Fees Calculator smarter such that when lessons in the past has been cancelled, fees will be deducted accordingly. Vice versa for uncancelled dates in the past.
 
@@ -713,14 +713,18 @@ The undone command can only be redone provided that you did not call any command
 Format: `redo`
 
 Example:
-1. Valid Redo command
+1. Valid Successive Redo and Undo commands
+   1. `edit 1 n/Joe Doe` modifies name of the first student.
+   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   3. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
+   
+2. Valid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
-   4. `redo` redoes the edit command. The name of the first student will be `John Doe` now.
-  
-
-2. Invalid Redo command
+   4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
+   
+3. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
