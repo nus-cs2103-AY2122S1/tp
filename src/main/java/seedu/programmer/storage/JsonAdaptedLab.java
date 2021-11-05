@@ -8,17 +8,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.programmer.model.student.Lab;
 
 public class JsonAdaptedLab {
-    private String labNumValue;
-    private String actualScoreValue;
-    private String totalScoreValue;
+    private final int labNumValue;
+    private final int actualScoreValue;
+    private final int totalScoreValue;
 
     /**
      * Constructs a {@code JsonAdaptedLab} with the given lab details.
      */
     @JsonCreator
-    public JsonAdaptedLab(@JsonProperty("labNumValue") String labNumValue,
-                          @JsonProperty("actualScoreValue") String actualScoreValue,
-                          @JsonProperty("totalScoreValue") String totalScoreValue) {
+    public JsonAdaptedLab(@JsonProperty("labNumValue") int labNumValue,
+                          @JsonProperty("actualScoreValue") int actualScoreValue,
+                          @JsonProperty("totalScoreValue") int totalScoreValue) {
         this.labNumValue = labNumValue;
         this.actualScoreValue = actualScoreValue;
         this.totalScoreValue = totalScoreValue;
@@ -30,32 +30,20 @@ public class JsonAdaptedLab {
      */
     public JsonAdaptedLab(Lab lab) {
         requireNonNull(lab);
-        this.labNumValue = String.valueOf(lab.getLabNumValue());
+        this.labNumValue = lab.getLabNumValue();
         this.actualScoreValue = lab.getLabResultValue();
         this.totalScoreValue = lab.getLabTotalValue();
     }
 
-    public String getLabNumValue() {
+    public Integer getLabNum() {
         return labNumValue;
     }
 
-    public String getLabResultValue() {
+    public Integer getLabResult() {
         return actualScoreValue;
     }
 
-    public String getLabTotalValue() {
-        return totalScoreValue;
-    }
-
-    public Integer getLabNum() {
-        return Integer.parseInt(labNumValue);
-    }
-
-    public Integer getLabResult() {
-        return Integer.parseInt(actualScoreValue);
-    }
-
     public Integer getLabTotal() {
-        return Integer.parseInt(totalScoreValue);
+        return totalScoreValue;
     }
 }
