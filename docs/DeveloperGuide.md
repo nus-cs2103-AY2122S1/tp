@@ -29,7 +29,7 @@ ProgrammerError makes use of the following third-party libraries:
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/docs/SettingUp.md).
+Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -476,19 +476,13 @@ success.
 ### Alternatives
 
 1. One alternative could be to not use a third-party package (`org.json`), and instead manually parse the json file and
-   write the corresponding values to a CSV file which ProgrammerError would create.
-
-We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
-quality.
+   write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route as it is much more tedious with little reward in terms of code management and code
+   quality.
 
 2. Another alternative with respect to the user experience could be to disallow the user from selecting a folder to save
    their data to. Instead, a default location could be chosen so as to save the user some time in getting their data
-   downloaded quickly.
-
-However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
+   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
 functionality of allowing the user to select a folder destination.
-
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -520,11 +514,7 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
-<<<<<<< HEAD
-
-=======
-> > > > > > > master
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
 ### User stories
 
@@ -543,8 +533,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.
 | `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
 | `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.
-| `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.
-| `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.
+| `* * `  | busy CS2100 TA                              | view students' statistics formatted in a standard form                                            | avoid sorting the information on my own.
+| `* * `  | CS2100 TA                                   | use the app to track students' performance                                                       | identify those who need more help.
 | `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
 | `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.
@@ -560,12 +550,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
-`CS2100 Teaching Assistant (CS2100 TA in short)`, unless specified otherwise)
+For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
+`CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
 
 **Use case: UC1 Purge/Delete all sample student records**
 
@@ -690,14 +678,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
    Use case ends.
 
-**Use case: UC7 Automatic save and load student records**
+**Use case: UC7 Download student records**
 
 **MSS**
 
 1. CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
-2. ProgrammerError automatically save the changed student records to hard disk
-3. CS2100 TA restarts the application
-4. ProgrammerError shows the saved data
+2. CS2100 TA requests to download current student records to a file on their hard disk
+3. ProgrammerError saves the student records to a CSV file in a folder of the TA's choice.
 
    Use case ends.
 
@@ -747,7 +734,7 @@ Use case ends.
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
    than using the mouse.
-3. The data should be stored locally and should be in a human editable csv file.
+3. The data should be stored locally and should be in a human editable CSV file.
 4. The product should be for a single user at a time (i.e. not a multi-user product).
 5. No DBMS should be used to store data.
 6. The software should follow the Object-oriented paradigm primarily. (with the possibility of allowing a mix of other
@@ -762,9 +749,10 @@ Use case ends.
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Student ID**: An NUS student's matriculation number (AXXXXXXY)
-- **Email**: An NUS student email (eXXXXXXX@u.nus.edu.sg)
+- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
+- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
 - **TA**: A CS2100 teaching assistant
+- **PE**: ProgrammerError
 
 --------------------------------------------------------------------------------------------------------------------
 
