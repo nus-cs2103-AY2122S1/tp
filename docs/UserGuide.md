@@ -25,7 +25,7 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 * [Quick Start](#quick-start)
 * [About](#about)
   * [Structure of this document](#structure-of-this-document)
-  * [Orienting to the app](#orienting-to-the-app)
+  * [Orienting to WhereTourGo](#orienting-to-wheretourgo)
   * [Reading this document](#reading-this-document)
     * [Technical Terms](#technical-terms)
     * [General Symbols and Syntax](#general-symbols-and-syntax)
@@ -86,6 +86,7 @@ cd Desktop
 
 
 3. Run the following command:
+
 ```
 java -jar WhereTourGo.jar
 ```
@@ -123,7 +124,7 @@ In the subsection [Reading this document](#reading-this-document), there are sev
 
 The following section, [Features](#features), details the features in WhereTourGo and how to use them.
 
-### Orienting to the app
+### Orienting to WhereTourGo
 Below is the Home screen of WhereTourGo, with its key components marked out for easy reference:
 
 ![Ui](images/layout.png)
@@ -173,8 +174,8 @@ More examples will be provided for each command in [Features](#features).
 * Items in **square brackets** are **optional**<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Mandarin Oriental t/hotel` or as `n/Mandarin Oriental`.
 
-* Items with `…`​ after them can be used multiple times including none<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/food`, `t/wine t/food` etc.
+* Items with `…​` after them can be used multiple times including none<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times) `t/food`, `t/wine t/food`  or not at all
 
 * Parameters can be in any order<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -184,6 +185,8 @@ More examples will be provided for each command in [Features](#features).
 
 * Duplicate contact names are not allowed
   e.g. if there exists a contact named ‘Marina Bay Sands’, adding or editing a contact with the name ‘Marina Bay Sands’ is not allowed.<br>
+  
+* Contact names are case-sensitive e.g. `VivoCity` is not the same as `vivocity`
 
 
 #### Restrictions for Commands
@@ -260,18 +263,18 @@ Usage scenario:
 Format: `edit INDEX [n/CONTACT_NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rv/REVIEW] [c/CATEGORY_CODE][ra/RATING]  [t/TAG]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided
-* Fields will be updated based on input values
-* When editing tags, the existing tags of the contact will be removed (i.e. adding of tags is not cumulative)
+* At least one of the optional fields must be provided.
+* Fields will be updated based on input values.
+* When editing tags, the existing tags of the contact will be removed (i.e. adding of tags is not cumulative).
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 You can remove all of a contact’s tags by typing `t/` without specifying any tags after it.
 </div>
 
 Examples:
-*  `edit 1 p/92345678 e/Mandarin_Oriental@example.com` Edits the phone number and email address of the 1st contact to be `92345678` and `Mandarin_Oriental@example.com` respectively
-*  `edit 2 n/Marina Bay Sands t/` Edits the name of the 2nd contact to be `Marina Bay Sands` and clears all existing tags
-* `edit 3 ra/3` Edits the rating of the 3rd contact to be `3`
+*  `edit 1 p/92345678 e/Mandarin_Oriental@example.com` Edits the phone number and email address of the 1st contact to be `92345678` and `Mandarin_Oriental@example.com` respectively.
+*  `edit 2 n/Marina Bay Sands t/` Edits the name of the 2nd contact to be `Marina Bay Sands` and clears all existing tags.
+* `edit 3 ra/3` Edits the rating of the 3rd contact to be `3`.
 
 Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
 
@@ -294,24 +297,33 @@ Usage scenario:
 
 Format: `delete INDEX`
 
-* Deletes the contact at the specified INDEX
-* The index refers to the index number shown in the displayed contact list
+* Deletes the contact at the specified INDEX.
+* The index refers to the index number shown in the displayed contact list.
 * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the contact list
-* `find Mandarin Oriental` followed by `delete 1` deletes the 1st contact in the results of the find command
+* `list` followed by `delete 2` deletes the 2nd contact in the contact list.
+* `find Marina Bay Sands` followed by `delete 1` deletes the 1st contact in the results of the find command.
+
+Expected Outcome for `find Marina Bay Sands` followed by `delete 1`:
+
+<img src="images/deleteIndex.png" width="800">
 
 -------------
 Format: `delete n/CONTACT_NAME`
 
 * Deletes the contact specified by CONTACT_NAME
-* The name must refer to a contact’s full name in the displayed contact list
-* The name is case-sensitive and must match the contact's name exactly
+* The name must refer to a contact’s full name in the displayed contact list.
+* The name is case-sensitive and must match the contact's name exactly.
 
 Examples:
-* `list` followed by `delete Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours`
-* `find fullerton` followed by `delete The Fullerton Hotel` deletes the contact with name 'The Fullerton Hotel'
+* `list` followed by `delete n/Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours`.
+* `find hotel` followed by `delete n/Mandarin Oriental Singapore` deletes the contact with name 'Mandarin Oriental Singapore'.
+
+Expected Outcome for `find hotel` followed by `delete n/Mandarin Oriental Singapore`:
+
+<img src="images/deleteName.png" width="800">
+
 
 [Back to top](#table-of-contents)
 
@@ -333,20 +345,20 @@ Format: `list`
 Finds all contacts whose names, addresses, phone numbers, email addresses or reviews contain any of the given keywords.
 
 Usage scenario: 
-* Tour Guide would like to find any places of interest which are along Orchard Road (have Orchard Road contained within their address field). 
+* Tour Guide would like to find any places of interest which are along Orchard Road (have 'Orchard Road' contained within their address field). 
 * Tour Guide remembers leaving a positive review on the room service of a particular hotel, but has forgotten. He/she would like to find which contact this review was written for.
 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive, e.g.,  `hotel` will match `Hotel`
-* The order of the keywords does not matter. e.g. `Park Hyatt` will match `Hyatt Park`
-* Fields searched are: name, phone, email, address and review
-* Contacts matching at least one keyword will be returned . e.g. `Park` will return `Park Hyatt Singapore`, `Park Royale`
+* The search is case-insensitive, e.g.,  `hotel` will match `Hotel`.
+* The order of the keywords does not matter. e.g. `Park Hyatt` will match `Hyatt Park`.
+* Fields searched are: name, phone, email, address and review.
+* Contacts matching at least one keyword will be returned . e.g. `Park` will return `Park Hyatt Singapore`, `Park Royale`.
 
 Examples:
-* `find hotel` returns `D’ Hotel` and `The Fullerton Hotel`
-* `find bay` returns `Gardens by the Bay` and `Marina Bay Sands`
+* `find hotel` returns `D’ Hotel` and `The Fullerton Hotel`.
+* `find bay` returns `Gardens by the Bay` and `Marina Bay Sands`.
 
 Expected Outcome for `find bay`:
 
@@ -375,10 +387,10 @@ You can add multiple category and tag filters in a single command, but only a si
 </div>
 
 Examples:
-* `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts)
-* `filter c/acc c/fnb` returns Mandarin Oriental, and KFC (all accommodation and F&B contacts)
-* `filter ra/3 t/outdoor` returns all contacts with 3-star rating and outdoor tag from all categories
-* `filter c/fnb ra/3 t/fun t/outdoor` returns all F&B contacts with 3-star rating, and with fun and/or outdoor tags
+* `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts).
+* `filter c/acc c/fnb` returns Mandarin Oriental, and KFC (all accommodation and F&B contacts).
+* `filter ra/3 t/outdoor` returns all contacts with 3-star rating and outdoor tag from all categories.
+* `filter c/fnb ra/3 t/fun t/outdoor` returns all F&B contacts with 3-star rating, and with fun and/or outdoor tags.
 
 Expected Outcome for `filter c/fnb`:
 
@@ -396,16 +408,16 @@ Usage scenario:
 Format : `sort FIELD`
 
 Examples :
-* `sort name` returns the same list of contacts displayed in lexicographical order
-* `sort rating` returns the same list of contacts displayed, sorted from highest to lowest rating
+* `sort name` returns the same list of contacts displayed in lexicographical order.
+* `sort rating` returns the same list of contacts displayed, sorted from highest to lowest rating.
 
 [Back to top](#table-of-contents)
 
 ### Summarizing contacts: `sum`
 Shows a summary of the content of WhereTourGo. The data presented as a summary are as follows:
-* total number of contacts in the contact list
-* the proportion of contacts for each rating
-* the proportion of contacts for each category defined by [Category code](#restrictions-for-commands)
+* total number of contacts in the contact list.
+* the proportion of contacts for each rating (Does not include unrated contacts).
+* the proportion of contacts for each category defined by [Category code](#restrictions-for-commands).
 
 Usage scenario:
 * Tour Guide wants to improve on the quality of his/her tours. He/she would like to review the database to see which category of tour contacts lacks diversity.
@@ -428,23 +440,24 @@ Usage scenario:
 
 Format: `view INDEX`
 
-* Displays the contact at the specified INDEX
-* The index refers to the index number shown in the displayed contact list
+* Displays the contact at the specified INDEX.
+* The index refers to the index number shown in the displayed contact list.
 * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-* `list` followed by `view 2` displays the 2nd contact in the contact list
-* `find Mandarin Oriental` followed by `view  1` displays the first contact in the results of the find command
+* `list` followed by `view 2` displays the 2nd contact in the contact list.
+* `find Mandarin Oriental` followed by `view 1` displays the first contact in the results of the find command.
+
 -------------
 Format: `view n/CONTACT_NAME`
 
-* Displays the contact specified by CONTACT_NAME
-* The name must refer to a contact’s full name in the displayed contact list
-* The name is case-sensitive and must match exactly
+* Displays the contact specified by CONTACT_NAME.
+* The name must refer to a contact’s full name in the displayed contact list.
+* The name is case-sensitive and must match exactly.
 
 Examples:
-* `list` followed by `view Marina Bay Sands` displays the contact with name 'Marina Bay Sands'
-* `find Gardens By The Bay` followed by `view Gardens By The Bay` displays the contact with name 'Gardens By The Bay'
+* `list` followed by `view n/Marina Bay Sands` displays the contact with name 'Marina Bay Sands'.
+* `find Gardens By The Bay` followed by `view n/Gardens By The Bay` displays the contact with name 'Gardens By The Bay'.
 
 [Back to top](#table-of-contents)
 
@@ -460,7 +473,7 @@ Input history will be reset whenever you exit the app.
 [Back to top](#table-of-contents)
 
 ### Clicking on contacts
-Click on any contact in the [List Panel](#orienting-to-the-app) to view more information about the contact.
+Click on any contact in the [Contacts Pane](##orienting-to-wheretourgo) to view more information about the contact.
 This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 
 [Back to top](#table-of-contents)
@@ -475,7 +488,7 @@ Usage scenario:
 Format: `undo`
 
 Examples :
-* If you execute the command `delete Marina Bay Sands`, then execute the command `undo`, the Marina Bay Sands contact will be restored
+* If you execute the command `delete Marina Bay Sands`, then execute the command `undo`, the Marina Bay Sands contact will be restored.
 
 [Back to top](#table-of-contents)
 
@@ -507,18 +520,18 @@ Usage scenario:
 * Tour Guide needs to forward tour information quickly to someone else (i.e. the tour bus driver, an anxious tour participant).
 
 Format: `export`
-* Exports the specified contact from the contact list
+* Exports the specified contact from the contact list.
 * The text file will be written with the path `data/export.txt`.
 -------------
 Format: `export INDEX`
 
-* Exports the contact at the specified INDEX
-* The index refers to the index number shown in the displayed contact list
+* Exports the contact at the specified INDEX.
+* The index refers to the index number shown in the displayed contact list.
 * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-* `list` followed by `export 2` exports the second contact in the contact list
-* `find Mandarin Oriental` followed by `export  1` exports the first contact in the results of the find command
+* `list` followed by `export 2` exports the second contact in the contact list.
+* `find Mandarin Oriental` followed by `export  1` exports the first contact in the results of the find command.
 
 A sample of the exported text file:
 
@@ -564,11 +577,11 @@ Usage scenario:
 
 Format: `help`
 
-<div markdown="block" class="alert alert-primary"> 
- :bulb: If the User Guide cannot be opened in the Browser, a link to the User Guide will be provided.
+<div markdown="span" class="alert alert-danger"> 
+:warning: Caution: If the User Guide cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
 
-Please refer to the FAQ for more information.
+Please refer to the [FAQ](#faq) for more information.
 
 [Back to top](#table-of-contents)
 
@@ -585,7 +598,7 @@ Format: `cmd`
 If the command list cannot be opened in the Browser, a link to the User Guide will be provided.
 </div>
 
-Please refer to the FAQ for more information.
+Please refer to the [FAQ](#faq) for more information.
 
 [Back to top](#table-of-contents)
 
@@ -635,7 +648,7 @@ Action | Format, Examples
 **List** | `list`
 **Filter** | `filter c/CATEGORY`<br> e.g.,`filter c/fnb`
 **Sort** | `sort name`<br><br>`sort rating`
-**View** | `view INDEX <br>`<br>e.g., `view 1`  <br><br>`view n/CONTACT_NAME`<br> e.g., `view n/Marina Bay Sands`
+**View** | `view INDEX`<br>e.g., `view 1`  <br><br>`view n/CONTACT_NAME`<br> e.g., `view n/Marina Bay Sands`
 **Undo** | `undo`
 **Redo** | `redo`
 **Export** | `export`<br><br>`export INDEX` <br> e.g., `export 2`

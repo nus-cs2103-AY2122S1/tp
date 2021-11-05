@@ -56,8 +56,9 @@ public class ContactCard extends UiPart<Region> {
         String ratingValue = contact.getRating().value;
         if (ratingValue.equals(EMPTY_RATING)) {
             rating.setText(EMPTY_RATING);
+        } else if (ratingValue.equals("1")) {
+            rating.setText(ratingValue + " star");
         } else {
-            // rating.setText(ratingValue + "\u2B50");
             rating.setText(ratingValue + " stars");
         }
     }
