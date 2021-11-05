@@ -61,7 +61,7 @@ public class ArgumentMultimap {
     /**
      * Returns true if all {@code prefix} is / are present.
      * @param prefix Prefix key with which the specified argument value is to be associated
-     * @return True if are {@code prefix} is / are present, false otherwise
+     * @return True if all {@code prefix} is / are present, false otherwise
      */
     public boolean isAllPresent(Prefix ...prefix) {
         for (Prefix p : prefix) {
@@ -70,6 +70,24 @@ public class ArgumentMultimap {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns true if at least two of all {@code prefix} are present.
+     * Uses the {@code isAllPresent()} method.
+     * @param prefix Prefix key with which the specified argument value is to be associated
+     * @return True if multiple {@code prefix} is / are present, false otherwise
+     */
+    public boolean isMultiplePresent(Prefix ...prefix) {
+        for (int i = 0; i < prefix.length - 1; i++) {
+            for (int j = i + 1; j < prefix.length; j++) {
+                if (isAllPresent(prefix[i], prefix[j])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override

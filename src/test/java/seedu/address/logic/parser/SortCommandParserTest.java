@@ -22,6 +22,10 @@ public class SortCommandParserTest {
 
         assertParseSuccess(parser, String.format(" %s", PREFIX_LAST_VISIT), sortByLastVisitCommand);
         assertParseSuccess(parser, String.format(" %s", PREFIX_VISIT), sortByNextVisitCommand);
+
+        // accept trailing whitespaces
+        assertParseSuccess(parser, String.format(" %s       ", PREFIX_LAST_VISIT), sortByLastVisitCommand);
+        assertParseSuccess(parser, String.format(" %s       ", PREFIX_VISIT), sortByNextVisitCommand);
     }
 
     @Test
