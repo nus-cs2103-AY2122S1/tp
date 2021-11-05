@@ -27,8 +27,8 @@ Given below are my contributions to the project.
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jason-ng-zq99&tabRepo=AY2122S1-CS2103T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 **Project management**:
-* Helped to regulate and ensure the proper workflow in the project 
-* Guided the general direction of where project should move towards 
+* Helped to regulate and ensure the proper workflow in the project
+* Guided the general direction of where project should move towards
 
 **Testing**:
 * Wrote tests for all new and enhanced features:
