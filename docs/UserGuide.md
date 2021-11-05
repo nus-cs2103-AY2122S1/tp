@@ -531,9 +531,10 @@ Format: `remind`
 
 This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
 
-1. [Adding a Lesson's Outstanding Fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
-2. [Editing a Lesson's Outstanding Fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
-3. [Paying a lesson's Outstanding Fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
+1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
+2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
+3. [Paying a lesson's outstanding fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
+4. [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -543,7 +544,7 @@ This section guides you on how to use the commands for managing the lesson fees 
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Adding a Lesson's Outstanding Fees: `ladd`
+#### Adding a lesson's outstanding fees: `ladd`
 
 Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
 
@@ -559,7 +560,7 @@ Examples:
 * `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
   adds the recurring lesson with an outstanding fee of `$250.00`.
 
-#### Editing a Lesson's Outstanding Fees: `ledit`
+#### Editing a lesson's outstanding fees: `ledit`
 
 Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
 
@@ -573,7 +574,7 @@ Examples:
 * `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
 * `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
 
-#### Paying a Lesson's Outstanding Fees: `paid`
+#### Paying a lesson's outstanding fees: `paid`
 
 Pays for a specific lesson.
 
