@@ -7,6 +7,7 @@ import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerErro
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
@@ -33,7 +34,7 @@ public class AddCommandIntegrationTest {
 
     @Test
 
-    public void execute_newStudent_success() {
+    public void execute_newStudent_success() throws CommandException {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         assertCommandSuccess(new AddCommand(validStudent), model,
@@ -47,7 +48,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameNameDifferentStudentIdSameEmail_failure() {
+    public void execute_sameNameDifferentStudentIdSameEmail_failure() throws CommandException {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentStudentId = "A6543210B";
@@ -59,7 +60,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameNameDifferentStudentIdDifferentEmail_success() {
+    public void execute_sameNameDifferentStudentIdDifferentEmail_success() throws CommandException {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentStudentId = "A6543210B";
@@ -72,7 +73,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameStudentIdSameEmailDifferentName_failure() {
+    public void execute_sameStudentIdSameEmailDifferentName_failure() throws CommandException {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentName = "Different Name";
@@ -84,7 +85,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameStudentIdDifferentEmailDifferentName_failure() {
+    public void execute_sameStudentIdDifferentEmailDifferentName_failure() throws CommandException {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentName = "Different Name";
@@ -97,7 +98,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameEmailDifferentNameDifferentId_failure() {
+    public void execute_sameEmailDifferentNameDifferentId_failure() throws CommandException {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentID = "A0214251H";
