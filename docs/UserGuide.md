@@ -165,6 +165,11 @@ Format: `help`
 This section guides you on how to use the commands for managing students in TAB.
 Executing any of the commands in this section will bring you to the students interface. Any command from other sections, such as `day` or `tag`, will bring you right out.
 
+1. [Adding a student: `add`](#adding-a-student-add)
+2. [Editing a student: `edit`](#editing-a-student-edit)
+3. [Deleting a student: `delete`](#deleting-a-student-delete)
+4. [Listing all students: `list`](#listing-all-students-list)
+
 A student must have the following essential fields:
 * Name
 * Address
@@ -262,6 +267,12 @@ Shows a list of all students in TAB.
 
 Format: `list`
 
+<br />
+
+[back to table of contents](#)
+
+<br />
+
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
@@ -273,10 +284,12 @@ This section guides you on how to find or filter students of your choice in TAB.
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 
-Fields that you can search for are:
+Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
+
+The fields that you can search for are:
 
 Field            | Parameter                   | Result                                              
-------------------|-----------------------------|---------------------------------------------------------
+-----------------|-----------------------------|---------------------------------------------------------
 Student Name     | n/NAME_KEYWORDS             | Students whose name contains all the keywords
 Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contains all the keywords
 Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contains all the keywords
@@ -294,8 +307,6 @@ Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the spe
 Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
 Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
 Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
-
-Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
 
 Notes about the find condition:
 
@@ -351,6 +362,13 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
+
+1. [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
+2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
+3. [Deleting a lesson: `ldelete`](#deleting-a-lesson-ldelete)
+4. [Viewing a student's lessons: `view`](#viewing-lessons-view)
+5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
+
 A lesson **must** have the following fields: a start date, a time range, a lesson rate and a subject.
 
 A lesson can be categorised into 2 types: 
@@ -422,7 +440,7 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
-#### Editing a lesson : `ledit`
+#### Editing a lesson: `ledit`
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
@@ -454,7 +472,7 @@ Examples:
 * `ledit 2 2 uncancel/10 Oct 2021` Uncancels the specific lesson on `10 Oct 2021`, which was previously cancelled, for the 2nd lesson of the 2nd student.
 
 
-#### Deleting a lesson : `ldelete`
+#### Deleting a lesson: `ldelete`
 
 Deletes the specified lesson of the specified student in TAB.
 
@@ -472,7 +490,7 @@ Examples:
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
   
-#### Viewing lessons : `view`
+#### Viewing a student's lessons: `view`
 
 Views all the lessons for the specified student in TAB.
 
@@ -491,7 +509,7 @@ Examples:
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
-#### Viewing upcoming lessons : `remind`
+#### Viewing upcoming lessons: `remind`
 
 Displays a list of upcoming lessons with end date time within the next 48 hours
 
@@ -501,11 +519,22 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
+<br />
+
+[back to table of contents](#)
+
+<br />
+
 <div style="page-break-after: always;"></div>
 
 ### Managing Lesson Fees
 
 This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
+
+1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
+2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
+3. [Paying a lesson's outstanding fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
+4. [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -515,7 +544,7 @@ This section guides you on how to use the commands for managing the lesson fees 
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Adding a Lesson's Outstanding Fees : `ladd`
+#### Adding a lesson's outstanding fees: `ladd`
 
 Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
 
@@ -531,7 +560,7 @@ Examples:
 * `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
   adds the recurring lesson with an outstanding fee of `$250.00`.
 
-#### Editing a Lesson's Outstanding Fees: `ledit`
+#### Editing a lesson's outstanding fees: `ledit`
 
 Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
 
@@ -545,7 +574,7 @@ Examples:
 * `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
 * `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
 
-#### Paying a Lesson's Outstanding Fees: `paid`
+#### Paying a lesson's outstanding fees: `paid`
 
 Pays for a specific lesson.
 
@@ -573,11 +602,28 @@ the fees of the cancelled lesson for you. Same for uncancelling a lesson that ha
 * **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
 the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
 
+<br />
+
+[back to table of contents](#)
+
+<br />
+
 <div style="page-break-after: always;"></div>
 
 ### Managing Your Schedule
 
 This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
+
+1. [Switching to the calendar interface: `calendar`](#switching-to-the-calendar-interface-calendar)
+2. [Viewing your daily calendar: `day`](#viewing-your-daily-calendar-day)
+3. [Viewing your weekly calendar: `week`](#viewing-your-weekly-calendar-week)
+4. [Viewing your monthly calendar: `month`](#viewing-your-monthly-calendar-month)
+5. [Viewing your yearly calendar: `year`](#viewing-your-yearly-calendar-year)
+6. [Navigating forward in the calendar: `next`](#navigating-forward-in-the-calendar-next)
+7. [Navigating backwards in the calendar: `back`](#navigating-backwards-in-the-calendar-back)
+8. [Navigate to today in the calendar: `today`](#navigate-to-today-in-the-calendar-today)
+
+[Coming soon... jump to a specific date in the calendar]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -622,7 +668,7 @@ Format: `month`
 
 <div class="caption">Month view for calendar interface.</div>
 
-#### Viewing your weekly calendar: `year`
+#### Viewing your yearly calendar: `year`
 
 Shows the yearly calendar. You can see which days of the year you have lessons in this view.
 
@@ -650,30 +696,24 @@ Jumps to the current day in the calendar.
 
 Format: `today`
 
-<div style="page-break-after: always;"></div>
+<br />
 
-### Managing Data
+[back to table of contents](#)
 
-This section informs you on how data is handled in TAB.
-
---------------------------------------------------------------------------------------------------------------------
-
-#### Saving the data
-
-TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-#### Editing the data file
-
-TAB data are saved as a JSON file **[JAR file location]/data/addressbook.json**. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
-</div>
+<br />
 
 <div style="page-break-after: always;"></div>
+
 
 ### Miscellaneous Commands
+
 This section describes the other miscellaneous commands available in TAB.
+
+1. [Clearing all entries: `clear`](#clearing-all-entries-clear)
+2. [Viewing all tags: `tag`](#viewing-all-tags-tag)
+3. [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
+4. [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
+5. [Exiting the program: `exit`](#exiting-the-program-exit)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -695,13 +735,13 @@ Format: `tag`
 
 <div style="page-break-after: always;"></div>
 
-#### Undoing previous command: `undo`
+#### Undoing previous commands: `undo`
 
 Undo the previous command that modified the data.
 
 Format: `undo`
 
-#### Redoing undone command: `redo`
+#### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone.
 
@@ -713,12 +753,47 @@ Exits the program.
 
 Format: `exit`
 
+<br />
+
+[back to table of contents](#)
+
+<br />
+
+### Managing Data
+
+This section informs you on how data is handled in TAB.
+
+1. [Saving the data](#saving-the-data)
+2. [Editing the data file](#editing-the-data-file)
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Saving the data
+
+TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Editing the data file
+
+TAB data are saved as a JSON file **[JAR file location]/data/addressbook.json**. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
+</div>
+
+<br />
+
+[back to table of contents](#)
+
+<br />
+
+<div style="page-break-after: always;"></div>
+
 ### Shortcuts
 
 TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
 
 Shortcut | Action
---------|------------------
+---------|------------------
 <kbd>F1</kbd> | **Help** <br /> Opens the help window.
 <kbd>F2</kbd> | **View Students** <br /> Brings you to your list of students.
 <kbd>F3</kbd> | **View Calendar** <br /> Brings you to the calendar interface.
@@ -729,6 +804,12 @@ Shortcut | Action
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
 This means that after clicking any button in the GUI, you do not have to click in the Command Box again to continue. Just type away!
 </div>
+
+<br />
+
+[back to table of contents](#)
+
+<br />
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -745,6 +826,12 @@ This section records frequently asked questions from users of TAB.
 
 ![macSecurity](images/macSecurity.png)
 <div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
+
+<br />
+
+[back to table of contents](#)
+
+<br />
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -768,15 +855,20 @@ UI | User Interface - the means by which the user and the app interact.
 UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 UX | User Experience - The experience a user has when using the app.
 
+<br />
+
+[back to table of contents](#)
+
+<br />
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Command Summary
 This section lists all available commands in TAB, along with examples on how you can use them.
 
-
-Action | Format, Examples
---------|------------------
+Action | Format & Examples
+-------|------------------
 **Help** | `help`
 **Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
 **Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
@@ -801,3 +893,9 @@ Action | Format, Examples
 **Undo** | `undo`
 **Redo** | `redo`
 **Exit** | `exit`
+
+<br />
+
+[back to table of contents](#)
+
+<br />
