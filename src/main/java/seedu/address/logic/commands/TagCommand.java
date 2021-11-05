@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
 import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMS;
+import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
