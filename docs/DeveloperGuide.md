@@ -36,16 +36,16 @@ title: Developer Guide
     * [RedoCommand](#redocommand)
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
-* [Appendix](#appendix-a-requirements)
-* [Requirement](#appendix-a-requirements)
+* [Appendix](#appendix)
+  * [Requirement](#appendix-a-requirements)
     * [Product Scope](#product-scope)
     * [User Stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-* [Manual Testing](#appendix-b-instructions-for-manual-testing)
-  * [Feature Testing](#feature-testing)
-  * [UI Testing](#ui-testing)
+  * [Manual Testing](#appendix-b-instructions-for-manual-testing)
+    * [Feature Testing](#feature-testing)
+    * [UI Testing](#ui-testing)
     
 --------------------------------------------------------------------------------------------------------------------
 
@@ -53,7 +53,12 @@ title: Developer Guide
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 - The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
-
+- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/)
+- Libraries used: 
+  - Junit5
+  - JavaFX
+  - [Add more]
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
@@ -574,10 +579,6 @@ users know that the input is invalid.
 Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
 will be created. If it is a specific help, then a specific help command associated with a command will be created.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -592,7 +593,9 @@ The following links to guides on: Documentation, Logging, Testing, Configuration
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-## **Appendix: Requirements**
+## **Appendix**
+
+## Appendix A: Requirements
 
 ### Product scope
 
