@@ -74,6 +74,7 @@ public class ArgumentMultimap {
 
     /**
      * Returns true if at least two of all {@code prefix} are present.
+     * Returns false if {@code prefix} contains less than two items.
      * Uses the {@code isAllPresent()} method.
      * @param prefix Prefix key with which the specified argument value is to be associated
      * @return True if multiple {@code prefix} is / are present, false otherwise
