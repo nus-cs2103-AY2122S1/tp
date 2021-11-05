@@ -37,9 +37,6 @@ public class LastMetTest {
         assertFalse(LastMet.isValidLastMet("60-08-2010"));
         assertFalse(LastMet.isValidLastMet("5654-08-12"));
 
-        // invalid date (in the future)
-        assertFalse(LastMet.isValidLastMet("25-12-3000"));
-
         // valid date
         assertTrue(LastMet.isValidLastMet("20-12-1999"));
         assertTrue(LastMet.isValidLastMet("20-09-2021"));

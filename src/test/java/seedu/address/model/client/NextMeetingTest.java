@@ -93,12 +93,6 @@ public class NextMeetingTest {
         assertFalse(NextMeeting.isValidNextMeeting("24-12-2021, Starbucks @ UTown"));
         assertFalse(NextMeeting.isValidNextMeeting("24-12-2021 (10:00~12:00),    "));
 
-        // invalid time duration
-        assertFalse(NextMeeting.isValidNextMeeting("24-12-2050 (13:00~12:59), Starbucks @ UTown"));
-
-        // past meeting
-        assertFalse(NextMeeting.isValidNextMeeting("24-12-2010 (12:00~12:59), Starbucks @ UTown"));
-
         // valid next meeting
         assertTrue(NextMeeting.isValidNextMeeting("24-12-2050 (10:00~12:00), Starbucks @ UTown"));
         assertTrue(NextMeeting.isValidNextMeeting("25-12-2050 (14:00~17:00), null"));
