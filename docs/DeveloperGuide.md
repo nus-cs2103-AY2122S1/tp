@@ -72,20 +72,20 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `LessonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` and `Lesson` objects residing in the `Model`.
 
 ### Logic component
 
@@ -381,53 +381,6 @@ The above applies to the scenario when the user inputs a command which calls a m
 ![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
 
 The panels default to `StudentCard` and `LessonCard` for the application launch, thus showing most details to the user but not the complete list of `Progress` entries.
-
-
-### Set/Unset payment made feature
-
-#### Implementation
-
-The purpose of the set/unset payment made feature is for tutors to modify a student's payment status.
-
-This feature implements the following operations:
-
-* `PaidCommand#execute()` - Updates the payment status of the student to `paid`.
-* `UnpaidCommand#execute()` - Updates the payment status of the student to `unpaid`.
-
-This feature is facilitated by the following operations:
-
-* `TutorAidParser#parseCommand()` - Calls `PaidCommandParser#parse()` or `UnpaidCommandParser#parse()` with the specified student index, depending on the command word in the user input.
-* `PaidCommandParser#parse()` - Returns an instance of `PaidCommand`.
-* `UnpaidCommandParser#parse()` - Returns an instance of `UnpaidCommand`.
-
-To represent a student's payment status, a `PaymentStatus` class is introduced. It stores an immutable instance variable `hasPaid`, of boolean type. We then work with the `Student` model, and implement `PaymentStatus` as a field in `Student`.
-
-<img src="images/StudentWithPaymentStatusClassDiagram.png" width="150" />
-
-Given below is an example usage scenario for setting a student's payment status as `paid`, and how the command is executed.
-
-1. The user executes `paid 2` command to set the payment status of the 2nd student in the address book. `LogicManager#execute()` is executed, where the user input is passed into `TutorAidParser#parseCommand()`. This in turn calls `PaidCommandParser#parse()`, which returns a `PaidCommand` instance if the index is valid.
-
-<img src="images/ParsePaidCommandSequenceDiagram.png" width="650" />
-
-2. `LogicManager#execute()` then calls upon `PaidCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
-
-3. A `PaymentStatus` instance with the `hasPaid` variable set to `true` is created. This is then passed into the constructor of `Student`, along with the values of the other existing fields of the index-specified student, to create a new `Student` instance.
-
-The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 2 and 3.
-
-<img src="images/ConstructEditedStudentSequenceDiagram.png" width="800" height="275" />
-
-4. `Model#setStudent()` is then called upon to replace the existing `Student` instance in the `StudentBook` with the newly created instance. 
-
-5. The result of the `PaidCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager`.
-
-The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 4 and 5.
-
-<img src="images/SetEditedStudentSequenceDiagram.png" width="500" />
-
-A similar execution scenario can be expected for setting a student's payment status as `unpaid`.
-
 
 ### \[Proposed\] Undo/redo feature
 

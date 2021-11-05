@@ -1,6 +1,7 @@
 package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.commons.core.Messages.MESSAGE_CAPACITY_LESS_THAN_STUDENTS;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_CAPACITY;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_PRICE;
@@ -41,7 +42,8 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_LESSON_TIMING + "10.00 AM to 12.00 PM every Monday "
             + PREFIX_LESSON_CAPACITY + "10 ";
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edit successful. Displaying %s and the students in "
+            + "this class.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid";
 
@@ -78,12 +80,19 @@ public class EditLessonCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
+        Capacity newCapacity = editedLesson.getCapacity();
+        Students currStudents = lessonToEdit.getStudents();
+
+        if (newCapacity.getCapacity() < currStudents.numberOfStudents()) {
+            throw new CommandException(MESSAGE_CAPACITY_LESS_THAN_STUDENTS);
+        }
+
         model.setLesson(lessonToEdit, editedLesson);
         Student.updateStudentLessonLink(studentList, lessonToEdit, editedLesson);
         model.viewLesson(editedLesson);
         model.updateFilteredStudentList(editedLesson::hasStudent);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson));
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.toNameString()));
     }
 
     /**

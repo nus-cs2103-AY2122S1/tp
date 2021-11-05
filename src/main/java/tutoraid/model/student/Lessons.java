@@ -8,7 +8,7 @@ import tutoraid.commons.util.AppUtil;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
 import tutoraid.model.student.exceptions.DuplicateStudentLessonsException;
-import tutoraid.model.student.exceptions.StudentLessonsNotFoundException;
+import tutoraid.model.student.exceptions.LessonNotFoundInStudentException;
 
 /**
  * Represents a student's list of progress in TutorAid.
@@ -80,13 +80,13 @@ public class Lessons {
      * Deletes a lesson.
      *
      * @param toDelete the lesson to be deleted
-     * @throws StudentLessonsNotFoundException if the lesson is not in the list
+     * @throws LessonNotFoundInStudentException if the lesson is not in the list
      */
     public void deleteLesson(Lesson toDelete) {
         requireNonNull(toDelete);
         LessonName lessonNameToDelete = toDelete.getLessonName();
         if (!lessons.contains(lessonNameToDelete)) {
-            throw new StudentLessonsNotFoundException();
+            throw new LessonNotFoundInStudentException();
         }
         lessons.remove(lessonNameToDelete);
     }
