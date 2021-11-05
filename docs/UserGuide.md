@@ -158,7 +158,10 @@ An example of a command in TAB:
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags and will ignore them (see [Managing Students](#managing-students) for more details about tags). The same applies for homework i.e. TAB ignores homework with empty description (see [Managing Lessons](#managing-lessons) for more details about homework). 
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. 
+  
+* For optional parameters, empty parameters are allowed but TAB will ignore them.<br/>
+  For example, Tab recognises `t/` as an empty tag and will ignore them (see [Managing Students](#managing-students) for more details about tags).
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -693,7 +696,6 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 
 * Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.<br>
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
-  
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
