@@ -13,7 +13,7 @@ import seedu.address.model.product.ProductContainsKeywordsPredicate;
 
 public class FindProductCommandParserTest {
 
-    private FindProductCommandParser parser = new FindProductCommandParser();
+    private final FindProductCommandParser parser = new FindProductCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

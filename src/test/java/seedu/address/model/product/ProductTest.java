@@ -58,7 +58,7 @@ public class ProductTest {
         // different type -> returns false
         assertFalse(CANNON.equals(5));
 
-        // different person -> returns false
+        // different product -> returns false
         assertFalse(CANNON.equals(IPAD));
 
         // different name -> returns false

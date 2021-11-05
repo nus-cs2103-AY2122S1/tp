@@ -24,8 +24,8 @@ import seedu.address.model.product.ProductContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindProductCommand}.
  */
 public class FindProductCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {

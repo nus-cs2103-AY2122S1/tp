@@ -21,7 +21,7 @@ public class ProductUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code product}'s details.
      */
     public static String getProductDetails(Product product) {
         StringBuilder sb = new StringBuilder();

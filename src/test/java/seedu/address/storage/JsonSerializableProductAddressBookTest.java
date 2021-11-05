@@ -48,24 +48,10 @@ public class JsonSerializableProductAddressBookTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
-    /*
     @Test
     public void toModelType_duplicateProducts_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PRODUCTS_FILE,
                 JsonSerializableAddressBook.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalProductsAddressBook = TypicalProducts.getTypicalAddressBook();
-        AddressBook typicalProductsAddressBookUpdated = new AddressBook();
-        for (int i = 0; i < 2; i++) {
-            typicalProductsAddressBookUpdated.addProduct(Product.updateProduct(
-                    addressBookFromFile.getProductList().get(i),
-                    typicalProductsAddressBook.getProductList().get(0).getName(),
-                    typicalProductsAddressBook.getProductList().get(0).getUnitPrice(),
-                    typicalProductsAddressBook.getProductList().get(0).getQuantity()
-            ));
-        }
-        assertEquals(addressBookFromFile, typicalProductsAddressBookUpdated);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
-
-     */
 }

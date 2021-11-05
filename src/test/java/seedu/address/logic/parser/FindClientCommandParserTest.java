@@ -14,7 +14,7 @@ import seedu.address.model.client.ClientContainsKeywordsPredicate;
 
 public class FindClientCommandParserTest {
 
-    private FindClientCommandParser parser = new FindClientCommandParser();
+    private final FindClientCommandParser parser = new FindClientCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

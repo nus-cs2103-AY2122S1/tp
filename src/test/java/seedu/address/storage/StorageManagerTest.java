@@ -58,7 +58,7 @@ public class StorageManagerTest {
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        // Will not be equal since now addressbook cant read persons
+        // Will not be equal since now addressbook can't read data
         assertNotEquals(original, new AddressBook(retrieved));
     }
 

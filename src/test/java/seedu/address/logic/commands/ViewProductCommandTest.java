@@ -20,8 +20,6 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductContainsIdPredicate;
 import seedu.address.model.product.UnitPrice;
 
-
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListClientCommand.
  */

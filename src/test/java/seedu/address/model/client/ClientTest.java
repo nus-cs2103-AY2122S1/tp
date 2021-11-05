@@ -59,7 +59,7 @@ public class ClientTest {
         // different type -> returns false
         assertFalse(AMY.equals(5));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(AMY.equals(BOB));
 
         // different name -> returns false
