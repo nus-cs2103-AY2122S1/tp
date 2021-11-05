@@ -18,9 +18,9 @@ public class PasswordUtil {
      * @return Boolean value of the check result.
      */
     public static boolean isValidPassword(String password) {
-        Pattern slash = Pattern.compile(PasswordCommand.slash);
-        Pattern hyphen = Pattern.compile(PasswordCommand.hyphen);
-        Pattern space = Pattern.compile(PasswordCommand.space);
+        Pattern slash = Pattern.compile(PasswordCommand.SLASH);
+        Pattern hyphen = Pattern.compile(PasswordCommand.HYPHEN);
+        Pattern space = Pattern.compile(PasswordCommand.SPACE);
 
         Matcher hasSlash = slash.matcher(password);
         Matcher hasHyphen = hyphen.matcher(password);
@@ -30,7 +30,7 @@ public class PasswordUtil {
                 && password.length() <= PasswordCommand.MAX_PASSWORD_LENGTH
                 && !hasSlash.find()
                 && !hasHyphen.find()
-                && (PasswordCommand.allowSpace || !hasSPace.find());
+                && (PasswordCommand.ALLOWSPACE || !hasSPace.find());
     }
 
 }
