@@ -370,7 +370,7 @@ Examples:
 
 Deletes a group from ClassMATE
 
-Format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
+Entering Format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
 * GROUP_NUMBER should be a single digit
 
