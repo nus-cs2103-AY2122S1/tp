@@ -1040,8 +1040,16 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
 
 ### Saving data  <a name="saving-data"/>
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+   
+    1. Prerequisites: If there is a plannermd.json file in the data folder at the root of the application directory, delete the plannermd.json file.
+    
+    1. Test case: Double-click on the jar file to run the application.
+        Expected: Application runs and loads the sample data from `SampleDataUtil#getSamplePlannerMd`.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Dealing with corrupted data files
 
-1. _{ more test cases …​ }_
+    1. Prerequisites: Modify the plannermd.json file to be an illegal format, such as deleting the "name" field of a patient.
+    
+    1. Test case: Double-click on the jar file to run the application.
+       Expected: Application runs and has no data on initial load. Running the next command overwrites the current corrupted plannermd.json file.
