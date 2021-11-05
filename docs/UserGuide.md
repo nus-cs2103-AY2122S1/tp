@@ -443,6 +443,44 @@ Example:
 unfav 1
 ```
 
+### Adding or removing tags from a contact - `tag`
+
+Allows user to directly add or remove tag(s) from a specific student contact.
+
+Format:
+
+```
+tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]
+```
+>* Index is compulsory and must be a positive integer.<br>
+>* To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
+* Users can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
+
+
+* Adding tags : 
+  * If `a/` is entered, it must be followed by the name(s) of tag(s) to be added. E.g. `tag 1 a/ r/friends` 
+  would result in an error even if only the `friends` tag was to be removed.
+  * Duplicate tags aren't allowed. E.g. `tag 1 a/teammate` would result in an error if the student contact at index 1 
+  already has the tag `teammate`.
+  * If multiple tags are to be added and there is at least 1 tag that is not already assigned to the specific contact, 
+  then this tag is added and the remaining duplicate tags are ignored. E.g. if `tag 1 a/classmate a/cca` would result in only the `classmate` tag being added to the student contact at index 1 if it already has the tag `cca`.
+
+
+* Removing tags :
+  * If `r/` is entered, it must be followed by the name(s) of tag(s) to be removed. E.g. `tag 1 a/friends r/`
+    would result in an error even if only the `friends` tag was to be added.
+  * Attempting to remove a tag that is not assigned to the specified contact is not allowed. E.g. `tag 1 r/teammate` would result in an error if the student contact at index 1
+    is not assigned the tag `teammate`.
+  * If multiple tags are to be removed and there is at least 1 valid tag that can be removed from the specific contact,
+    then this tag is removed and the remaining invalid tags are ignored. E.g. if `tag 1 r/classmate r/cca` would result in only the `classmate` tag being removed from the student contact at index 1 if the tag `cca` is not assigned to them already.
+
+Examples:
+* Adding single (general) tag : `tag 1 a/friends`
+* Adding single (event) tag : `tag 2 a/event-hackathon`
+* Adding multiple tags : `tag 3 a/friends a/teammate`
+* Removing multiple (general) tags : `tag 2 r/family owesmoney`
+* Removing multiple (module) tags : `tag 2 r/module-CS1101S module-MA1521`
+* Adding and removing a tag : `tag 4 a/friends r/colleagues`
 ### Displaying the Help Window - `help`
 
 Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
