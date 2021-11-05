@@ -52,7 +52,7 @@ public class LessonEditCommand extends UndoableCommand {
             + "[" + PREFIX_TIME + "HHmm-HHmm] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_RATES + "RATE] "
-            + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING FEES]"
+            + "[" + PREFIX_OUTSTANDING_FEES + "OUTSTANDING FEES] "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]... "
             + "[" + PREFIX_CANCEL + "CANCEL_DATE]... "
             + "[" + PREFIX_UNCANCEL + "UNCANCEL_DATE]...";
@@ -75,7 +75,7 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson for student %1$s:\n%2$s\nto %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
-    public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!";
+    public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit! \n%1$s";
     public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE =
             "You cannot edit the type of a lesson. Please add another" + " lesson if you wish to do so.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "The end date cannot be earlier than the start date. Please"
@@ -88,7 +88,7 @@ public class LessonEditCommand extends UndoableCommand {
             "Failed to uncancel lesson! This lesson does not have a cancelled lesson on %1$s.";
 
 
-    private final Index index;
+    private Index index;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
     private Person personBeforeLessonEdit;
@@ -101,6 +101,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param lessonIndex to edit.
      */
     public LessonEditCommand(Index index, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
+        super(COMMAND_ACTION);
         requireNonNull(index);
         requireNonNull(lessonIndex);
 
@@ -129,7 +130,9 @@ public class LessonEditCommand extends UndoableCommand {
         personAfterLessonEdit = PersonUtil.createdEditedPerson(personBeforeLessonEdit, updatedLessons);
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (!model.hasPersonFilteredList(personAfterLessonEdit)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(), lessonToEdit, editedLesson),
                 personAfterLessonEdit);
@@ -188,7 +191,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToCancel A set of lesson dates to add to cancelled dates.
      * @param datesToUncancel A set of lesson dates to remove from cancelled dates.
      * @return A set of updated cancelled dates.
-     * @throws CommandException
+     * @throws CommandException If any of the dates to cancel is invalid.
      */
     private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
                                                          Set<Date> datesToUncancel) throws CommandException {
@@ -269,22 +272,19 @@ public class LessonEditCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
         model.setPerson(personAfterLessonEdit, personBeforeLessonEdit);
+        return personBeforeLessonEdit;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
-
+        model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
+        return personAfterLessonEdit;
     }
 
     @Override

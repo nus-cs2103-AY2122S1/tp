@@ -4,6 +4,7 @@ import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_NAME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Money;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -37,6 +39,9 @@ class UndoCommandIntegrationTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private UndoRedoStack undoRedoStack = new UndoRedoStack();
+    private Person studentModified =
+            DEFAULT_MODEL.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
 
     @Test
     public void execute_success() {
@@ -44,13 +49,14 @@ class UndoCommandIntegrationTest {
         UndoCommand undoCommand = prepareUndoCommand(Arrays.asList(dummyCommand,
                 dummyUndoableCommandOne, dummyUndoableCommandTwo));
 
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, "Dummy", DEFAULT_NAME);
         //2 Undoable commands already called
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.singletonList(dummyUndoableCommandOne),
                 Collections.singletonList(dummyUndoableCommandTwo), undoRedoStack);
 
         //1 Undoable command already called
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.emptyList(),
                 Arrays.asList(dummyUndoableCommandTwo, dummyUndoableCommandOne), undoRedoStack);
     }
@@ -77,8 +83,9 @@ class UndoCommandIntegrationTest {
         //Check stack after Add Command executed
         assertStackStatus(Collections.singletonList(addCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = AddCommand.COMMAND_ACTION + " command has been undone.";
         //Undo Add Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(addCommand), undoRedoStack);
     }
 
@@ -90,10 +97,12 @@ class UndoCommandIntegrationTest {
         //Check stack after Clear Command
         assertStackStatus(Collections.singletonList(clearCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = ClearCommand.COMMAND_ACTION + " command has been undone.";
         //Undo Clear Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(clearCommand), undoRedoStack);
     }
+
 
     @Test
     public void execute_undoDeleteCommand() {
@@ -103,8 +112,10 @@ class UndoCommandIntegrationTest {
         //Check stack after Delete Command
         assertStackStatus(Collections.singletonList(deleteCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS,
+                DeleteCommand.COMMAND_ACTION, studentModified.getName());
         //Undo Delete Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(deleteCommand), undoRedoStack);
     }
 
@@ -118,8 +129,10 @@ class UndoCommandIntegrationTest {
         //Check stack after Edit Command
         assertStackStatus(Collections.singletonList(editCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS,
+                EditCommand.COMMAND_ACTION, studentModified.getName());
         //Undo Edit Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(editCommand), undoRedoStack);
     }
 
@@ -132,8 +145,10 @@ class UndoCommandIntegrationTest {
         //Check stack after Lesson Add
         assertStackStatus(Collections.singletonList(lessonAddCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS,
+                LessonAddCommand.COMMAND_ACTION, studentModified.getName());
         //Undo Lesson Add Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
+        assertCommandSuccess(undoCommand, model, expectedMessage, DEFAULT_MODEL);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonAddCommand), undoRedoStack);
     }
 
@@ -155,8 +170,10 @@ class UndoCommandIntegrationTest {
         //Check stack after Lesson Edit
         assertStackStatus(Collections.singletonList(lessonEditCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS,
+                LessonEditCommand.COMMAND_ACTION, studentModified.getName());
         //Undo Lesson Add Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonEditCommand), undoRedoStack);
     }
 
@@ -175,9 +192,33 @@ class UndoCommandIntegrationTest {
         //Check stack after Lesson Delete Command
         assertStackStatus(Collections.singletonList(lessonDeleteCommand), Collections.emptyList(), undoRedoStack);
 
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS,
+                LessonDeleteCommand.COMMAND_ACTION, studentModified.getName());
         //Undo Lesson Delete Command
-        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
         assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonDeleteCommand), undoRedoStack);
+    }
+
+    @Test
+    public void execute_undoPaidCommand() {
+        //Add lesson to first student
+        Lesson lesson = new LessonBuilder().withOutstandingFees("100").build();
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withLessons(lesson).build();
+        model.setPerson(firstPerson, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, new Money("20"));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(paidCommand));
+
+        //Check stack after Lesson Delete Command
+        assertStackStatus(Collections.singletonList(paidCommand), Collections.emptyList(), undoRedoStack);
+
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS,
+                PaidCommand.COMMAND_ACTION, studentModified.getName());
+        //Undo Lesson Delete Command
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(paidCommand), undoRedoStack);
     }
 
     private UndoCommand prepareUndoCommand(List<Command> commandsBeforeUndo) {
@@ -206,13 +247,20 @@ class UndoCommandIntegrationTest {
     }
 
     private class DummyUndoableCommand extends UndoableCommand {
+        private DummyUndoableCommand() {
+            super("Dummy");
+        }
         @Override
         public CommandResult executeUndoableCommand() {
             return new CommandResult("");
         }
         @Override
-        protected void undo() {}
+        protected Person undo() {
+            return new PersonBuilder().build();
+        }
         @Override
-        protected void redo() {}
+        protected Person redo() {
+            return new PersonBuilder().build();
+        }
     }
 }

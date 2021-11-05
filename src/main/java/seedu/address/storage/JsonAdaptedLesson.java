@@ -30,6 +30,8 @@ class JsonAdaptedLesson {
 
     public static final String MESSAGE_INVALID_CANCELLED_DATE = "Cancelled date is not a date of this lesson.";
 
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Start date is after end date!";
+
     private final String date;
     private final String endDate;
     private final String timeRange;
@@ -101,6 +103,9 @@ class JsonAdaptedLesson {
         }
         final Date modelDate = new Date(StringUtil.stripLeadingZeroes(strippedDate));
         final Date modelEndDate = new Date(StringUtil.stripLeadingZeroes(strippedEndDate));
+        if (modelDate.isAfter(modelEndDate)) {
+            throw new IllegalValueException(MESSAGE_INVALID_DATE_RANGE);
+        }
 
         String strippedTimeRange = timeRange.strip();
         if (!TimeRange.isValidTimeRange(strippedTimeRange)) {
@@ -116,13 +121,13 @@ class JsonAdaptedLesson {
 
         String strippedLessonRates = lessonRates.strip();
         if (!LessonRates.isValidMonetaryField(strippedLessonRates)) {
-            throw new IllegalValueException(LessonRates.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(LessonRates.MESSAGE_FORMAT_CONSTRAINTS);
         }
         final LessonRates modelLessonRates = new LessonRates(strippedLessonRates);
 
         String strippedOutstandingFees = outstandingFees.strip();
         if (!OutstandingFees.isValidMonetaryField(strippedOutstandingFees)) {
-            throw new IllegalValueException(OutstandingFees.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(OutstandingFees.MESSAGE_FORMAT_CONSTRAINTS);
         }
         final OutstandingFees modelOutstandingFees = new OutstandingFees(outstandingFees);
 

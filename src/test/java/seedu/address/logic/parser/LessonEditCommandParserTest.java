@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.CANCEL_DATE_DESC_MON;
 import static seedu.address.logic.commands.CommandTestUtil.CANCEL_DATE_DESC_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
@@ -29,9 +31,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
@@ -56,7 +60,9 @@ class LessonEditCommandParserTest {
 
     private static final String HOMEWORK_EMPTY = " " + PREFIX_HOMEWORK;
     private static final String MESSAGE_INVALID_FORMAT =
-        String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_NOT_EDITED =
+            String.format(LessonEditCommand.MESSAGE_NOT_EDITED, LessonEditCommand.MESSAGE_USAGE);
     private final LessonEditCommandParser parser = new LessonEditCommandParser();
 
     @Test
@@ -65,33 +71,40 @@ class LessonEditCommandParserTest {
         assertParseFailure(parser, TIME_RANGE_DESC, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1 1", LessonEditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1 1", MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
+        // invalid index with no field specified should show not edited
+        assertParseFailure(parser, "1 0", MESSAGE_NOT_EDITED);
+
+        // missing arguments for field
         assertParseFailure(parser, "1 1 " + PREFIX_DATE, Date.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative student index
-        assertParseFailure(parser, "-5 1" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5 1" + SUBJECT_DESC, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // zero student index
-        assertParseFailure(parser, "0 1" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 1" + SUBJECT_DESC, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // negative lesson index
-        assertParseFailure(parser, "1 -7" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 -7" + SUBJECT_DESC, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
 
         // zero lesson index
-        assertParseFailure(parser, "1 0" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 0" + SUBJECT_DESC, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+
+        // invalid student and lesson index
+        assertParseFailure(parser, "-1 0" + SUBJECT_DESC, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -102,8 +115,14 @@ class LessonEditCommandParserTest {
         // invalid cancelled date
         assertParseFailure(parser, "1 1" + INVALID_CANCEL_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
+        // invalid cancelled date (empty)
+        assertParseFailure(parser, "1 1" + " " + PREFIX_CANCEL, Date.MESSAGE_CONSTRAINTS);
+
         // invalid uncancelled date
         assertParseFailure(parser, "1 1" + INVALID_UNCANCEL_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+
+        // invalid uncancelled date (empty)
+        assertParseFailure(parser, "1 1" + " " + PREFIX_UNCANCEL, Date.MESSAGE_CONSTRAINTS);
 
         // invalid subject
         assertParseFailure(parser, "1 1" + INVALID_SUBJECT_DESC, Subject.MESSAGE_CONSTRAINTS);
@@ -171,7 +190,7 @@ class LessonEditCommandParserTest {
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + PAST_DATE_DESC;
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withDate(VALID_DATE_PAST).build();
         LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
-        //assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
         // time range
         userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + TIME_RANGE_DESC;
