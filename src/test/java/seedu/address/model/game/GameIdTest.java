@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.friend.FriendId;
+
 public class GameIdTest {
 
     @Test
@@ -28,17 +30,19 @@ public class GameIdTest {
         assertThrows(NullPointerException.class, () -> GameId.isValidGameId(null));
 
         // invalid id
-        assertFalse(GameId.isValidGameId("")); // empty string
-        assertFalse(GameId.isValidGameId(" ")); // spaces only
-        assertFalse(GameId.isValidGameId("^")); // only non-alphanumeric characters
-        assertFalse(GameId.isValidGameId("peter*")); // contains non-alphanumeric characters
-        assertFalse(GameId.isValidGameId("peter jack")); // contains multiple spaced words
+        assertFalse(FriendId.isValidFriendId("")); // empty string
+        assertFalse(FriendId.isValidFriendId("        ")); // spaces only
+        assertFalse(FriendId.isValidFriendId("!@#$%^&*()")); // only non-alphanumeric characters
+        assertFalse(FriendId.isValidFriendId("peter*jack")); // contains non-alphanumeric characters
+        assertFalse(FriendId.isValidFriendId("peter jack")); // contains multiple words
+        assertFalse(FriendId.isValidFriendId("peter jack peter jack peter jack")); // longer than 20 chars
 
         // valid id
-        assertTrue(GameId.isValidGameId("minecraft")); // alphabets only
-        assertTrue(GameId.isValidGameId("12345")); // numbers only
-        assertTrue(GameId.isValidGameId("gta5")); // alphanumeric characters
-        assertTrue(GameId.isValidGameId("AmongUs")); // with capital letters
-        assertTrue(GameId.isValidGameId("RedDead2Redemption")); // long ids
+        assertTrue(FriendId.isValidFriendId("peter")); // alphabets only
+        assertTrue(FriendId.isValidFriendId("12345")); // numbers only
+        assertTrue(FriendId.isValidFriendId("peter24")); // alphanumeric characters
+        assertTrue(FriendId.isValidFriendId("CapiTan")); // with capital letters
+        assertTrue(FriendId.isValidFriendId("p")); // short id - 1 char
+        assertTrue(FriendId.isValidFriendId("PeterEvansSchool1234")); // long id - 20 chars
     }
 }

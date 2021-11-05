@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root height="700.0" minHeight="700" minWidth="1200.0" onCloseRequest="#handleExit" title="gitGud" type="javafx.stage.Stage" width="1200.0"
-         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root height="700.0" minHeight="700" minWidth="1400.0" onCloseRequest="#handleExit" resizable="false" title="gitGud" type="javafx.stage.Stage" width="1200.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/gitGud.png" />
   </icons>
@@ -61,9 +60,14 @@
                               <Insets bottom="5.0" top="5.0" />
                            </padding>
                         </StackPane>
+                        <HBox maxHeight="-Infinity" prefWidth="200.0" styleClass="pane-with-border">
+                           <children>
+                              <Label fx:id="mainCardTitle" />
+                           </children>
+                        </HBox>
                         <HBox fx:id="mainCard" prefHeight="116.0" prefWidth="284.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox fx:id="leftMainCard" prefHeight="112.0" HBox.hgrow="ALWAYS">
+                              <VBox fx:id="leftMainCard" fillWidth="false" maxWidth="130.0" prefWidth="120.0" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin></VBox>

@@ -5,16 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
+import static seedu.address.testutil.TypicalFriends.ALICE_FRIEND_ID;
 import static seedu.address.testutil.TypicalFriends.BOB;
 import static seedu.address.testutil.TypicalGameFriendLinks.APEX_AMY_DRACO_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_LINK;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.game.Game;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
+import seedu.address.testutil.GameBuilder;
+import seedu.address.testutil.GameFriendLinkBuilder;
+
 
 public class FriendTest {
 
@@ -49,6 +56,51 @@ public class FriendTest {
                 .withGameFriendLinks(CSGO_AMY_DRACO_LINK, APEX_AMY_DRACO_LINK).build();
         assertEquals(2, copyAlice.getNumberOfGames());
     }
+
+    @Test
+    public void link_validGfl_success() {
+        Friend aliceNoGfl = new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        GameFriendLink gameFriendLink =
+                new GameFriendLinkBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameId(VALID_GAME_ID_CSGO).build();
+        Friend aliceWithGfl =
+                new FriendBuilder().withFriendId(ALICE_FRIEND_ID).withGameFriendLinks(gameFriendLink).build();
+        aliceNoGfl.link(gameFriendLink);
+        assertEquals(aliceNoGfl, aliceWithGfl);
+    }
+
+    @Test
+    public void link_nullGfl_throwsNullPointerException() {
+        Friend alice = new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        assertThrows(NullPointerException.class, () -> alice.link(null));
+    }
+
+    @Test
+    public void unlink_validGflExistInFriend_success() {
+        GameFriendLink gameFriendLink =
+                new GameFriendLinkBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameId(VALID_GAME_ID_CSGO).build();
+        Friend aliceWithGfl =
+                new FriendBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .withGameFriendLinks(gameFriendLink).build();
+        Game csgo = new GameBuilder().withGameId(VALID_GAME_ID_CSGO).build();
+        Friend aliceWithNoGfl =
+                new FriendBuilder()
+                        .withFriendId(ALICE_FRIEND_ID)
+                        .build();
+        aliceWithGfl.unlink(csgo);
+        assertEquals(aliceWithNoGfl, aliceWithGfl);
+    }
+
+    @Test
+    public void unlink_nullGame_throwsNullPointerException() {
+        Friend alice = new FriendBuilder().withFriendId(ALICE_FRIEND_ID).build();
+        assertThrows(NullPointerException.class, () -> alice.unlink(null));
+    }
+
 
     @Test
     public void equals() {

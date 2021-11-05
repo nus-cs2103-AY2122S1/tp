@@ -8,6 +8,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GAMES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.BENSON;
+import static seedu.address.testutil.TypicalFriends.ELLE_FRIEND_ID;
+import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 import static seedu.address.testutil.TypicalGames.MINECRAFT;
 import static seedu.address.testutil.TypicalGames.VALORANT;
 
@@ -18,10 +20,14 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
 import seedu.address.model.game.GameIdContainsKeywordPredicate;
+import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.UserName;
 import seedu.address.testutil.FriendBuilder;
 import seedu.address.testutil.FriendsListBuilder;
+import seedu.address.testutil.GameFriendLinkBuilder;
 import seedu.address.testutil.GamesListBuilder;
 
 public class ModelManagerTest {
@@ -159,6 +165,35 @@ public class ModelManagerTest {
     @Test
     public void getFilteredGamesList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredGamesList().remove(0));
+    }
+
+    @Test
+    public void linkFriend_newGameFriendLink_success() {
+        // adding a new link
+        Friend friend = new FriendBuilder().withFriendId(ELLE_FRIEND_ID).build();
+        modelManager.addFriend(friend);
+        GameFriendLink gameFriendLink = new GameFriendLinkBuilder()
+                .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                        .withFriendId(ELLE_FRIEND_ID)
+                        .withUserName(new UserName("GoldNova").toString())
+                        .build();
+        modelManager.linkFriend(friend, gameFriendLink);
+        assertTrue(modelManager.getFriend(friend.getFriendId()).hasGameAssociation(GENSHIN_IMPACT));
+    }
+
+    @Test
+    public void unlinkFriend_validGameFriendLink_success() {
+        // remove existing link
+        GameFriendLink gameFriendLink = new GameFriendLinkBuilder()
+                .withGameId(GENSHIN_IMPACT.getGameId().toString())
+                .withFriendId(ELLE_FRIEND_ID)
+                .withUserName(new UserName("GoldNova").toString())
+                .build();
+        Friend friend = new FriendBuilder().withFriendId(ELLE_FRIEND_ID)
+                .withGameFriendLinks(gameFriendLink).build();
+        modelManager.addFriend(friend);
+        modelManager.unlinkFriend(friend, GENSHIN_IMPACT);
+        assertFalse(modelManager.getFriend(friend.getFriendId()).hasGameAssociation(GENSHIN_IMPACT));
     }
 
     @Test

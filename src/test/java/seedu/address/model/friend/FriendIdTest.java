@@ -29,16 +29,18 @@ public class FriendIdTest {
 
         // invalid id
         assertFalse(FriendId.isValidFriendId("")); // empty string
-        assertFalse(FriendId.isValidFriendId(" ")); // spaces only
-        assertFalse(FriendId.isValidFriendId("^")); // only non-alphanumeric characters
-        assertFalse(FriendId.isValidFriendId("peter*")); // contains non-alphanumeric characters
-        assertFalse(FriendId.isValidFriendId("peter jack")); // contains multiple spaced words
+        assertFalse(FriendId.isValidFriendId("        ")); // spaces only
+        assertFalse(FriendId.isValidFriendId("!@#$%^&*()")); // only non-alphanumeric characters
+        assertFalse(FriendId.isValidFriendId("peter*jack")); // contains non-alphanumeric characters
+        assertFalse(FriendId.isValidFriendId("peter jack")); // contains multiple words
+        assertFalse(FriendId.isValidFriendId("peter jack peter jack peter jack")); // longer than 20 chars
 
         // valid id
         assertTrue(FriendId.isValidFriendId("peter")); // alphabets only
         assertTrue(FriendId.isValidFriendId("12345")); // numbers only
         assertTrue(FriendId.isValidFriendId("peter24")); // alphanumeric characters
         assertTrue(FriendId.isValidFriendId("CapiTan")); // with capital letters
-        assertTrue(FriendId.isValidFriendId("PeterFromSchoolWhoIs24yo")); // long ids
+        assertTrue(FriendId.isValidFriendId("p")); // short id - 1 char
+        assertTrue(FriendId.isValidFriendId("PeterEvansSchool1234")); // long id - 20 chars
     }
 }

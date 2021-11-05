@@ -22,10 +22,13 @@
             <Label fx:id="friendName" styleClass="cell_big_label" text="\$first" />
          </children>
       </HBox>
-      <Label fx:id="games" text="Label">
+      <Label fx:id="games" text="Label" styleClass="cell_small_label">
          <VBox.margin>
             <Insets left="10.0" />
          </VBox.margin>
       </Label>
    </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
 </VBox>

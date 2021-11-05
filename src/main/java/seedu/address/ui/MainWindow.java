@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
@@ -29,6 +30,8 @@ import seedu.address.model.game.Game;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String FRIEND_TITLE = "Friend's ID: %s (Name: %s)";
+    private static final String GAME_TITLE = "Game: %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -77,6 +80,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox rightMainCard;
+
+    @FXML
+    private Label mainCardTitle;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -232,6 +238,16 @@ public class MainWindow extends UiPart<Stage> {
         return logic.getGamesBook().getGamesList();
     }
 
+    private Friend getUpdatedFriend(Friend toUpdate) {
+        ObservableList<Friend> friendsList = getFriendList();
+        for (Friend friend: friendsList) {
+            if (friend.getFriendId().equals(toUpdate.getFriendId())) {
+                return friend;
+            }
+        }
+        return toUpdate;
+    }
+
     private boolean friendListHasFriend(ObservableList<Friend> friendList, Friend friendToTest) {
         return friendList.stream().anyMatch(x -> x.isSameFriendId(friendToTest));
     }
@@ -247,13 +263,13 @@ public class MainWindow extends UiPart<Stage> {
     private void clearMainCard() {
         clearRightCard();
         clearLeftCard();
+        mainCardTitle.setText("");
     }
 
     private void handleFriendGet(Friend friendToGet) {
         ObservableList<Friend> friendList = this.getFriendList();
         currentFriendToGet = friendToGet;
         clearMainCard();
-
         // If currentFriendToGet is null, we do nothing.
         if (currentFriendToGet == null) {
             return;
@@ -261,6 +277,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // If friendToGet is in friendList, populate the table with the games associated to it.
         if (this.friendListHasFriend(friendList, currentFriendToGet)) {
+            mainCardTitle.setText(String.format(FRIEND_TITLE, friendToGet.getFriendId().toString(),
+                    friendToGet.getFriendName().toString()));
             friendToGet = friendList
                     .stream()
                     .filter(x -> x.isSameFriendId(currentFriendToGet))
@@ -270,9 +288,6 @@ public class MainWindow extends UiPart<Stage> {
             rightMainCard.getChildren().add(friendMainCardTable.getRoot());
             friendSchedulePanel = new FriendSchedulePanel(friendToGet);
             leftMainCard.getChildren().add(friendSchedulePanel.getRoot());
-        } else {
-            friendMainCardTable = new FriendMainCardTable();
-            rightMainCard.getChildren().add(friendMainCardTable.getRoot());
         }
     }
 
@@ -302,6 +317,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // If current friendList has a friend(s) which is associated to currentGameToGet, return the list of friends.
         if (friendListHasGameAssociation(friendList, currentGameToGet)) {
+            mainCardTitle.setText(String.format(GAME_TITLE, gameToGet.getGameId().toString()));
             List<Friend> friendsWithGame = friendList.stream()
                     .filter(friend -> friend.hasGameAssociation(currentGameToGet))
                     .collect(Collectors.toList());
@@ -349,7 +365,8 @@ public class MainWindow extends UiPart<Stage> {
             case GAME_LIST:
                 gameListPanel.updateNumberOfFriends();
                 if (isFriendTable) {
-                    handleFriendGet(this.currentFriendToGet);
+                    Friend updatedFriend = getUpdatedFriend(this.currentFriendToGet);
+                    handleFriendGet(updatedFriend);
                 } else {
                     handleGameGet(this.currentGameToGet);
                 }

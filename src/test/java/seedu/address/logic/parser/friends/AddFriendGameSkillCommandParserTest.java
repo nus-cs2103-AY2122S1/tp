@@ -87,11 +87,11 @@ public class AddFriendGameSkillCommandParserTest {
     public void parse_invalidGameId_failure() {
         String invalidGameIdWithSpacesInput = FLAG_POSTFIX.getFlag() + FLAG_ADD_GAME_SKILL
                 + VALID_FRIEND_ID_AMY + " " + FLAG_GAME + INVALID_GAME_ID_WITH_SPACES + " " + FLAG_VALUE + "3";
-        assertParseFailure(parser, invalidGameIdWithSpacesInput, GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
+        assertParseFailure(parser, invalidGameIdWithSpacesInput, GameId.MESSAGE_INVALID_CHARACTERS);
 
         String invalidGameIdWithInvalidChar = FLAG_POSTFIX.getFlag() + FLAG_ADD_GAME_SKILL
                 + VALID_FRIEND_ID_AMY + " " + FLAG_GAME + INVALID_GAME_ID_INVALID_CHAR + " " + FLAG_VALUE + "3";
-        assertParseFailure(parser, invalidGameIdWithInvalidChar, GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
+        assertParseFailure(parser, invalidGameIdWithInvalidChar, GameId.MESSAGE_INVALID_CHARACTERS);
     }
 
     @Test

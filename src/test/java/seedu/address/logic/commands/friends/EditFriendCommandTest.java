@@ -43,7 +43,7 @@ public class EditFriendCommandTest {
     public void execute_allFieldsSpecified_success() {
         Friend friendToEdit = model.getFriendsList().getFriendsList().get(0);
 
-        Friend editedFriend = new FriendBuilder(friendToEdit).withFriendName("1234 5678 9101112 13141516").build();
+        Friend editedFriend = new FriendBuilder(friendToEdit).withFriendName("1234 5678 9101112").build();
 
         EditFriendCommand.EditFriendDescriptor editFriendDescriptor =
             new EditFriendDescriptorBuilder(editedFriend).build();
