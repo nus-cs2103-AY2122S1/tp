@@ -110,6 +110,7 @@ regarding your students and lessons stress-free and efficiently. In the latest v
 * Keep student details up-to-date
 * Resolve conflicting tuition timeslots
 * Efficiently create notes for each class/student
+* View scheduled lessons in a timetable
 
 ### 1.3 How to use this guide?
 
@@ -234,9 +235,7 @@ a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-1
 ```
 
 <div markdown="span" class="alert alert-primary">
-  
 :information_source: Note: `James Yeoh` and  <code>james &nbsp; yeoh</code> are considered the same person, namely `Name` is case-insensitive and the differences in whitespaces would not be considered.
-
 </div>
 
 #### Adding a tuition class: `addclass` | `ac`
@@ -552,7 +551,7 @@ timetable
   
 :information_source: Note: <br>
   
-  If a lesson is shorter than one hour, the timetable may not display its details properly, such as smaller font size or omitted completely due to limited space in the time block.
+  If a lesson is shorter than one hour, the timetable may not display its details properly, such as using smaller font size or omitting the details completely due to limited space in the time block.
   
   For example, in Figure 6 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
 </div>
