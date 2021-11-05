@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,10 +39,12 @@ import seedu.address.testutil.EditClientDescriptorBuilder;
 public class EditCommandTest {
 
     private Model model;
+    private Model expectedModel;
 
     @BeforeEach
     public void initialiseModel() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
@@ -54,8 +55,6 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(List.of(clientId), descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         expectedModel.setAllClients(List.of(clientId), descriptor);
 
@@ -77,7 +76,6 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAllClients(List.of(clientId), descriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -90,8 +88,6 @@ public class EditCommandTest {
         Client editedClient = model.getClient(clientId);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -123,7 +119,6 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS,
             StringUtil.joinListToString(editClientList, "\n"));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAllClients(clientIdlist, editClientDescriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

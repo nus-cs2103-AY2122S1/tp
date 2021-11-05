@@ -46,16 +46,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         clients.asUnmodifiableObservableList().addListener((ListChangeListener<Client>) change -> {
             while (change.next()) {
-                for (Client client: change.getRemoved()) {
-                    client.delete();
-                }
-                removeUnreferencedTags();
+                change.getRemoved().forEach(Client::delete);
 
-                for (Client client: change.getAddedSubList()) {
-                    client.getTags().stream()
-                            .filter(tag -> !tags.contains(tag))
-                            .forEach(tags::add);
-                }
+                change.getAddedSubList().forEach(client -> client.getTags()
+                        .stream()
+                        .filter(tag -> !tags.contains(tag))
+                        .forEach(tags::add));
+
+                removeUnreferencedTags();
             }
         });
     }
