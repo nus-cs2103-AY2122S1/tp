@@ -23,8 +23,6 @@ public class TagCommand extends Command {
     public static final String MESSAGE_TAGGED_PERSON_SUCCESS = "Successfully added/removed tag(s) to %1$s!";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Successfully added tag(s) to %1$s!";
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Successfully removed tag(s) to %1$s!";
-    public static final String MESSAGE_INVALID_TAG_INDEX = "Invalid index entered! Tag index must be a "
-            + "positive integer";
     public static final String MESSAGE_MISSING_ADD_AND_REMOVE_TAG_ARGS = "Tags to be added and removed are missing!\n"
             + MESSAGE_USAGE;
     public static final String MESSAGE_MISSING_ADD_TAG_ARGS = "Tags to be added are missing!\n" + MESSAGE_USAGE;
@@ -98,17 +96,20 @@ public class TagCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.getPersonListControl().refreshPersonListUI();
-        String output = "";
-        if (!toAdd.isEmpty() && !toRemove.isEmpty()) {
-            output = String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson);
-        } else if (!toAdd.isEmpty()) {
-            output = String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson);
-        } else if (!toRemove.isEmpty()) {
-            output = String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson);
-        }
-        return new CommandResult(output);
+        return new CommandResult(getTagSuccessMessage(editedPerson, !toAdd.isEmpty(), !toRemove.isEmpty()));
     }
 
+    public String getTagSuccessMessage(Person editedPerson, boolean tagsAdded, boolean tagsRemoved) {
+        String successMessage = "";
+        if (tagsAdded && tagsRemoved) {
+            successMessage = String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson);
+        } else if (tagsAdded) {
+            successMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson);
+        } else if (tagsRemoved) {
+            successMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson);
+        }
+        return successMessage;
+    }
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
