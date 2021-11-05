@@ -1,6 +1,7 @@
 package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.modulink.commons.core.Messages.MESSAGE_DUPLICATE_PREFIX_FORMAT;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
@@ -15,7 +16,6 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.logic.parser.exceptions.ParseException;
@@ -41,73 +41,62 @@ public class EditCommandParser implements Parser<EditCommand> {
         String trimmedArgs = args.trim();
         String preamble = argMultimap.getPreamble();
         if (trimmedArgs.isEmpty()
-            || !preamble.isEmpty()
-            || numberOfValidPrefixes(argMultimap) != StringUtil.countMatch(args, '/')) {
+            || !preamble.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            editPersonDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
-            editPersonDescriptor.setGitHubUsername(ParserUtil.parseGithubUsername
-                    (argMultimap.getValue(PREFIX_GITHUB_USERNAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
-            editPersonDescriptor.setTelegramHandle(ParserUtil.parseTelegramHandle(
-                    argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
-        }
-        if (parseModsToEdit(argMultimap.getAllValues(PREFIX_MOD)).isPresent()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
+        // either duplicate parameters, or unsupported parameters (dealt with in next try-catch block)
+        try {
+            ParserUtil.checkDuplicate(args, argMultimap, ParserUtil.isDuplicatePrefix(args, PREFIX_NAME, PREFIX_ID,
+                    PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE));
+        } catch (ParseException e) {
+            StringBuilder duplicatePrefixes = ParserUtil.findDuplicatePrefixes(args,
+                    PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
+                    PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE);
+            throw new ParseException(String.format(MESSAGE_DUPLICATE_PREFIX_FORMAT,
+                    duplicatePrefixes, EditCommand.MESSAGE_USAGE));
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+                editPersonDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get()));
+            }
+            if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+                editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            }
+            if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
+                editPersonDescriptor.setGitHubUsername(ParserUtil.parseGithubUsername
+                        (argMultimap.getValue(PREFIX_GITHUB_USERNAME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
+                editPersonDescriptor.setTelegramHandle(ParserUtil.parseTelegramHandle(
+                        argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
+            }
+            if (parseModsToEdit(argMultimap.getAllValues(PREFIX_MOD)).isPresent()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
 
-        return new EditCommand(editPersonDescriptor);
+            if (!editPersonDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            }
+
+            return new EditCommand(editPersonDescriptor);
+        } catch (ParseException e) {
+            throw new ParseException(String.format(e.getMessage() + "%s",
+                    e.getMessage().startsWith("Unknown prefix(es)") ? EditCommand.MESSAGE_USAGE : ""));
+        }
     }
 
-    /**
-     * Checks how many valid prefixes are present in args.
-     *
-     * @param argMultimap tokenized list of arguments.
-     * @return number of provided prefixes.
-     */
-    private int numberOfValidPrefixes(ArgumentMultimap argMultimap) {
-        int i = 0;
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
-            i++;
-        }
-        if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
-            i++;
-        }
-        return i;
-    }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.

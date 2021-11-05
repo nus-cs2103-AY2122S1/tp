@@ -16,17 +16,17 @@ This guide has been designed to make sure you can quickly access any information
 
 1. [Quick Start - Getting started with ModuLink (Recommended for first-time users)](#section-2-quick-start---getting-started-with-modulink)
 2. [Features - Understanding what ModuLink can do for you](#section-3-features---understanding-what-modulink-can-do-for-you)
-3. [Managing Data](#data-storage-in-modulink)
-4. [Summaries](#parameter--command-summary)
-5. [Frequently Asked Questions](#faq)
-6. [Glossary](#glossary)
+3. [Managing Data](#section-4-data-storage-in-modulink)
+4. [Summaries](#section-5-summaries)
+5. [Frequently Asked Questions](#section-6-frequently-asked-questions)
 
 We further recommend taking a glance at **[Section 1.1 Syntax and symbols](#section-11-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
 
 ### Section 1.1: Syntax and Symbols
 Here are the commonly used syntax and symbols throughout the UG:
 
-`inline code`<br/>denotes a command for the application.
+`inline code`<br/>denotes a command for the application.<br>
+`prefix/` <br/> denotes a ModuLink-supported prefix.
 
 <div class="alert alert-warning">:exclamation: Important</div>denotes an important information for the functioning of the app.
 <br/>
@@ -108,6 +108,8 @@ If you are a first-time user, we recommend starting with [Create your own profil
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  
+* Prefixes and commands are case-sensitive.<br>
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [mod/MODULE]` can be used as `n/John Doe mod/CS2103T` or as `n/John Doe`.
@@ -366,7 +368,7 @@ Exits the program.
 
 Format: `exit`
 
-## Data Storage in ModuLink
+## Section 4: Data Storage in ModuLink
 
 ### Saving the data
 
@@ -383,14 +385,7 @@ In this event, please locate the data file, delete it, and relaunch the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModuLink home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Parameter & Command summary
+## Section 5: Summaries
 
 ### Parameter summary
 
@@ -422,3 +417,12 @@ Action | Format, Examples
 **Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` <br> with group filter: `filter mod/CS2030 need group`
 **Help** | `help`
 **Exit** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Section 6: Frequently Asked Questions
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModuLink home folder.
+
+--------------------------------------------------------------------------------------------------------------------

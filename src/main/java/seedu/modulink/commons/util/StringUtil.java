@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 
+
 /**
  * Helper functions for handling strings.
  */
@@ -73,6 +74,19 @@ public class StringUtil {
         int n = 0;
         for (int i = 0; i < s.length(); i++) {
             if (c == s.charAt(i)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /**
+     * Returns the number of occurrences of {@param substring} in {@param s}.
+     */
+    public static int countMatch(String s, String substring) {
+        int n = 0;
+        for (int i = 0; i < s.length() - substring.length(); i++) {
+            if (substring.equals(s.substring(i, i + substring.length()))) {
                 n++;
             }
         }

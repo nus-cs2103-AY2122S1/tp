@@ -6,6 +6,7 @@ import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseSucce
 
 import org.junit.jupiter.api.Test;
 
+import seedu.modulink.commons.core.Messages;
 import seedu.modulink.logic.commands.AddFavCommand;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.testutil.PersonBuilder;
@@ -20,17 +21,27 @@ public class AddFavCommandParserTest {
     @Test
     public void parse_emptyArgs_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFavCommand.MESSAGE_USAGE);
-
-        // missing name prefix
         assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test
     public void parse_twoArgs_failure() {
         String expectedMessage = AddFavCommand.MULTIPLE_ID_ERROR;
+        assertParseFailure(parser, "A1233393X A2321013Y", expectedMessage);
+    }
 
-        // missing name prefix
-        assertParseFailure(parser, "A123333X A232113Y", expectedMessage);
+    @Test
+    public void parse_multipleRandomArgs_failure() {
+        assertParseFailure(parser, "random hello A123X",
+                String.format(Messages.MESSAGE_UNEXPECTED_INPUT_FORMAT,
+                        "random", AddFavCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_randomArg_failure() {
+        assertParseFailure(parser, "random",
+                String.format(Messages.MESSAGE_UNEXPECTED_INPUT_FORMAT,
+                        "random", AddFavCommand.MESSAGE_USAGE));
     }
 
     @Test

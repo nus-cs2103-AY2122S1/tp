@@ -27,8 +27,8 @@ public class AddModCommandParser implements Parser<AddModCommand> {
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()
-            || StringUtil.countMatch(args, '/') != 1
-            || parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).isEmpty()) {
+            || parseModsToAdd(argMultimap.getAllValues(PREFIX_MOD)).isEmpty()
+            || StringUtil.countMatch(args, '/') != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
         }
@@ -56,11 +56,15 @@ public class AddModCommandParser implements Parser<AddModCommand> {
             throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
         }
 
-        Collection<String> tagSet;
         if (tags.size() == 1 && tags.contains("")) {
             throw new ParseException(AddModCommand.MESSAGE_NO_CHANGE);
         } else {
-            return Optional.of(ParserUtil.parseTags(tags));
+            try {
+                return Optional.of(ParserUtil.parseTags(tags));
+            } catch (ParseException e) {
+                throw new ParseException(String.format(e.getMessage(),
+                        e.getMessage().startsWith("Unknown prefix(es)") ? AddModCommand.MESSAGE_USAGE : ""));
+            }
         }
     }
 }

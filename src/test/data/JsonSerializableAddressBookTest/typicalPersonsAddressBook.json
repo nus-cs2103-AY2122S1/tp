@@ -33,7 +33,7 @@
     "id": "A0000115R",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "github": "elleMeyer24_01",
+    "github": "elleMeyer24-01",
     "address" : "michegan ave",
     "tagged" : [ ]
   }, {
@@ -48,7 +48,7 @@
     "id": "A0000117R",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "github": "george_best",
+    "github": "george-best",
     "address" : "4th street",
     "tagged" : [ ]
   } ]

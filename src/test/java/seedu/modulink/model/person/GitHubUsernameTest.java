@@ -22,12 +22,13 @@ public class GitHubUsernameTest {
         assertFalse(GitHubUsername.isValidUsername("^")); // only non-alphanumeric characters
         assertFalse(GitHubUsername.isValidUsername("@peter")); // contains non-alphanumeric characters
         assertFalse(GitHubUsername.isValidUsername("alex yeoh")); // contains spaces
+        assertFalse(GitHubUsername.isValidUsername("alex_yeoh")); // contains underscore
 
         // valid GitHub username
         assertTrue(GitHubUsername.isValidUsername("peterjack")); // alphabets only
         assertTrue(GitHubUsername.isValidUsername("12345")); // numbers only
         assertTrue(GitHubUsername.isValidUsername("peterthe2nd")); // alphanumeric characters
         assertTrue(GitHubUsername.isValidUsername("CapitalTan")); // with capital letters
-        assertTrue(GitHubUsername.isValidUsername("alexa_tan_test")); // with hyphens
+        assertTrue(GitHubUsername.isValidUsername("alexa-tan-test")); // with hyphens
     }
 }
