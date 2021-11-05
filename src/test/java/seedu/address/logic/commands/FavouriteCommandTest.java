@@ -94,29 +94,4 @@ public class FavouriteCommandTest {
         // different person -> returns false
         assertFalse(favouriteFirstCommand.equals(favouriteSecondCommand));
     }
-
-    @Test
-    public void execute_validIndex_success() {
-        String expectedMessage = TypicalPersons.ALICE.getName().fullName
-                + FavouriteCommand.MESSAGE_FAVOURITE_PERSON_SUCCESS;
-        FavouriteCommand command = new FavouriteCommand(INDEX_FIRST_PERSON);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndex_failure() {
-        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(List.of("alice")));
-        FavouriteCommand command = new FavouriteCommand(INDEX_THIRD_PERSON);
-        assertCommandFailure(command, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_alreadyFavourite_failure() {
-        String expectedMessage = TypicalPersons.ALICE.getName().fullName
-                + FavouriteCommand.MESSAGE_ALREADY_FAVOURITE_PERSON;
-        FavouriteCommand command = new FavouriteCommand(INDEX_FIRST_PERSON);
-        model.getFilteredPersonList().get(0).setIsFavourite();
-        assertCommandFailure(command, model, expectedMessage);
-    }
 }
