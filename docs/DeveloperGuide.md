@@ -239,6 +239,43 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+###  Interactions feature
+
+#### Implementation
+The interaction mechanism utilizes the same concept as other commands like `add` and `edit` with some tweaks.
+
+Given below is an example usage scenario and how the interaction mechanism behaves at each step.
+
+Step 1. The user inputs the command `interaction int/we just met on/2020-02-02`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a interaction command and creates a `InteractionCommandParser` object.
+
+Step 4. `InteractionCommandParser` helps to extract out the tokens and generate a `InteractionCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How interactions is stored:**
+
+* **Alternative 1 (current choice):** As a list of interactions in the Person object.
+  * Pros: Easy to implement, intuitive design and navigatability
+  * Cons: Heavy coupling with the person class
+
+* **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
+  * Pros: More isolated from the Person class, so less changes to overall code
+  * Cons: Navigatability is reduced significantly
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
