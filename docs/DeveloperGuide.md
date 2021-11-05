@@ -173,7 +173,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Implemented\] Tabs System (Aaron)
+### \[Implemented\] Tabs System
 
 #### Implementation
 The tab system is implemented using the JavaFX `javafx.scene.control.Tab` class. It is
@@ -239,7 +239,7 @@ user choice.
     * Cons: Not very scalable in case more tabs are needed in the future, hard to implement multiple segments
             within a tab.
 
-### \[Implemented\] Assigning People to Tasks (Zen)
+### \[Implemented\] Assigning People to Tasks
 
 We integrated the existing address book system of storing contacts with our new task list system by adding the ability
 to assign people from your address book to tasks in your task list.   
@@ -282,7 +282,7 @@ the possibility of multiple people with the same first name, etc. The side panel
 this problem
 
 
-### \[Implemented\] Adding Date/Time to Tasks (Myat)
+### \[Implemented\] Adding Date/Time to Tasks
 
 To add onto our new task list system, just like how the address book allows storing of additional information like
 phone number and email, the user can now add in a task's date with an optional time information. The addition of
@@ -368,7 +368,7 @@ This boolean is propagated down as another additional argument of `TaskDate` con
 using `LocalDate#now` if it is used for editing purposes. 
 
 
-### \[Implemented\] Listing Upcoming Tasks (Hanif)
+### \[Implemented\] Listing Upcoming Tasks
 
 With the implementation of `TaskDate.java`, we can easily look up upcoming tasks by comparing dates and times.
 
@@ -402,7 +402,7 @@ A sequence diagram is provided below:
     which they would be able to operate. This would go against Dash's primary design goal of prioritizing speed.
     
 
-### \[Implemented\] Using the Up/Down Arrow Keys to Select Previous User Inputs (Joshua)
+### \[Implemented\] Using the Up/Down Arrow Keys to Select Previous User Inputs
 
 An implemented improvement to the text-based input method is to allow users to easily reenter previously inputted 
 commands by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle 
