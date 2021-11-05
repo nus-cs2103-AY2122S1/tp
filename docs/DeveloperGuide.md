@@ -588,16 +588,45 @@ The predicate is then used to filter the list of person.
     * Pros: It offers greater flexibility for each field predicate to have its own matching behavior.
     * Cons: There is greater probability of bugs introduced if a new field to search is to be added, or if the matching behaviour of all predicates are required to be changed.
 
-### Fees Calculation
+### Fees Management
 
 TAB automates the updating of individual lesson fees after the lesson has ended. The Fees Calculation is facilitated by:
 * `FeesCalculator` implements the `Calculator` interface. It is responsible for calculates the amount to update for each specific lesson. 
-* `LastUpdatedDate` stores the `LocalDateTime` of when the `AddressBook` was last updated.
-* `Money` and its subclass facilitates the payment mechanism.
+* `LastUpdatedDate` stores the `LocalDateTime` of when the `AddressBook` was last updated. `LastUpdatedDate` is stored in `AddressBook`.
+* `Money` and its subclass facilitates the payment mechanism. Each `Lesson` contains a `LessonRates` field and a `OutstandingFees` field. Both of which extends `Money`.
 
-When the user launches TAB, in `MainApp#initModel()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after user launches TAB.
+When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after user launches TAB.
 
+![UpdateFeesSequenceDiagram](images/UpdateFeesSequenceDiagram.png)
 
+*Figure I.6.1: Sequence diagram of Update Fees.*
+
+In `initModelManager()`, after the `model` was built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
+When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fields using `lastUpdatedDate` and the current local date time.  
+
+The following is the logic of `FeesCalculator` to decide whether to update the specific lesson:
+* To construct a `FeesCalculator` object, the `lastUpdatedDate` and `LocalDateTime.now()` are required. 
+* `FeesCalculator` would count the number of lessons that have ended between `lastUpdatedDate` and `currentDateTime` which is simply `LocalDateTime.now()` at the time of initialization.
+  * **For Makeup Lessons:** 
+    * Use `Date#getLocalDate()` to get the date of the lesson and `TimeRange#getEnd()` to get the end time of the lesson. Then check for these conditions:
+      * Lesson end date and time is after `lastUpdatedDate`.
+      * Lesson end date and time is before `currentDateTime`.
+      
+    If both conditions are true, update the fees by adding the cost of the lesson to the current outstanding fees.
+  * **For Recurring Lessons:** 
+    * Find the `earlierStartDate` by comparing `startDate` of lesson and `lastUpdatedDate`. This is to handle cases where lesson starts after the last time TAB was launched.
+    * Find the `laterEndDate` by comparing `endDate` of lesson and `currentDateTime`. This is to handle cases where lesson ends before the current launching of TAB.
+    * Shift the `earlierStartDate` to the week before `earlierStartDate` and to the day of the week which the lesson falls on. Similarly, shift the `laterEndDate` to the week after `laterEndDate` and the day of the week which the lesson falls on.
+    This allows us to count the number of the day of the week in which the lesson falls on has passed, by treating the days which the lesson falls on as intervals.
+    * Check if any of the cancelled dates falls between `earlierStartDate` and `laterEndDate`. If true, deduct the number of lessons by 1.
+    * Check for the cases in which the day of `lastUpdatedDate` and `currentDateTime` falls on the day of the lesson and deduct accordingly.
+* Multiply the number of lessons calculated with the cost per lesson to get the amount to be added to `OutstandingFees` field.
+
+//Activity diagram!!
+
+This means that once the outstanding fees have been updated, any changes to fields that would affect outstanding fees (e.g. start date, end date, cancelling and uncancelling lessons in the past, change in lesson rates) will not be accounted for.
+
+#### Payment
 
 --------------------------------------------------------------------------------------------------------------------
 
