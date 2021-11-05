@@ -53,7 +53,7 @@ public class HashComputer {
             Path filePath = tmpPath.resolve(tmpFilename);
             write(vcObject);
             String hash = hashGenerator.generateHashFromFile(filePath);
-            boolean deletedSuccessfully = filePath.toFile().delete();
+            filePath.toFile().delete();
 
             return hash;
         } catch (IOException e) {

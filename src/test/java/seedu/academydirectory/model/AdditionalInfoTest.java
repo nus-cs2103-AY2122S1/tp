@@ -21,7 +21,7 @@ public class AdditionalInfoTest {
     public void testEmptyAdditionalInfo() {
         AdditionalInfo<?> emptyInfo1 = AdditionalInfo.empty();
         AdditionalInfo<String> emptyInfo2 = AdditionalInfo.empty();
-        AdditionalInfo emptyInfo3 = AdditionalInfo.empty();
+        AdditionalInfo emptyInfo3 = AdditionalInfo.empty(); // Deliberately set to be raw type
         AdditionalInfo<Student> emptyInfo4 = AdditionalInfo.empty();
 
         // empty info are all equal regardless of the type we passed in,
