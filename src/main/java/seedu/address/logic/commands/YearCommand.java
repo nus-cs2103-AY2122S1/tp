@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMS;
 import static seedu.address.logic.commands.CommandResult.DisplayType.YEAR;
 
 /**
@@ -13,8 +14,7 @@ public class YearCommand extends Command {
 
     public static final String USER_TIP = "To view your yearly calendar, type: " + COMMAND_WORD;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your yearly calendar.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your yearly calendar.\n" + MESSAGE_NO_PARAMS;
 
     public static final String SHOWING_YEAR_MESSAGE = "Showing your yearly calendar."
             + " You can go back to list view by typing \""
