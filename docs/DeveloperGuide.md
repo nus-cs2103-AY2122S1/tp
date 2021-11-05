@@ -473,25 +473,28 @@ be changed.
 
 | Priority | As a(n) ...                                | I want to ...                                 | So that I can ...                                               |
 |----------|--------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------|
-| * * *    | user                                       | create tasks                                  | record the tasks I need to do                                   |
-| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
-| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
-| * * *    | user                                       | edit tasks                                    | keep track of changing requirements                             |
+| * * *    | user who prefers typing                    | use a CLI over a GUI                          | be faster and efficient in using the app                        |
 | * * *    | user                                       | add contacts                                  | store them for later reference                                  |
 | * * *    | user                                       | delete contacts                               | remove contacts when I want to                                  |
 | * * *    | user                                       | view all contacts                             | keep track of all my contacts                                   |
 | * * *    | user                                       | edit contacts                                 | change them later when my contacts update their contact details |
-| * * *    | first-time user                            | view a list of available commands             | refer to them easily                                            |
-| * * *    | user who prefers typing                    | use a CLI over a GUI                          | be faster and efficient in using the app                        |
-| * *      | experienced user                           | write notes on the main page of the app       | see miscellaneous reminders at a glance                         |
-| * *      | forgetful student                          | add short notes to each task as a reminder    | Remember what the task is about                                 |
-| * *      | stressed student with many tasks to handle | set priorities of tasks                       | decide what to do next                                          |
-| * *      | lazy student                               | go back to previously used full command lines | be even faster without needing to type                          |
-| * *      | student with many contacts                 | group contacts according to tags              | organise my contacts better                                     |
+| * * *    | user                                       | tag contacts                                  | keep track of who they are                                      |
+| * * *    | new user                                   | view a list of available commands             | refer to them easily                                            |
+| * * *    | user                                       | add tasks                                     | record the tasks I need to do                                   |
+| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
+| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
+| * * *    | user                                       | edit tasks                                    | keep track of changing real-life requirements                   |
+| * * *    | user                                       | mark a task as completed                      | keep track of which tasks I have completed                      |
+| * *      | stressed student with many tasks to handle | view all upcoming tasks                       | see which tasks are most urgent                                 |
+| * *      | lazy student                               | go back to previously used full command lines | waste less time typing the lines all over again                 |
+| * *      | student with many contacts                 | assign contacts to tasks                      | keep track of who is involved with which tasks                  |
 | * *      | student with many CCAs                     | tag tasks with CCA tags                       | easily identify what I need to do for a particular CCA          |
 | * *      | student taking many modules                | tag tasks with module tags                    | easily identify what I need to do for a particular module       |
+| * *      | organized student                          | clear all completed tasks                     | declutter and focus on the tasks I have yet to complete         |
 
 ### Use cases
+
+(The System is Dash and the Actor is the user for all Use Cases, unless specified otherwise.)
 
 #### Use case 01: Add a task
 
@@ -506,8 +509,8 @@ Use case ends.
 
 <u>Extensions:</u>
 
-3. There is no task description specified
-    * a. Dash shows an error message
+* 3a. Incorrect syntax is used for a task field
+  * 3a1. Dash shows an error message
 
 Use case resumes at step 2.
 
@@ -522,7 +525,7 @@ Use case resumes at step 2.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 3. The list is empty
 
@@ -544,7 +547,7 @@ Use case resumes at step 2.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 3.  The task list is empty
 
@@ -564,7 +567,7 @@ Use case resumes at step 3
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 2. The task list is empty
 
@@ -581,7 +584,7 @@ Use case ends.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 3. The contact info is invalid
     * a. Dash shows an error message
@@ -599,7 +602,7 @@ Use case resumes at step 2.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 3. The contacts list is empty
 
@@ -621,7 +624,7 @@ Use case resumes at step 2.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 3. The contact list is empty
 
@@ -641,7 +644,7 @@ Use case resumes at step 2.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 2a. The task list is empty
 
@@ -658,7 +661,7 @@ Use case ends.
 
 Use case ends.
 
-<u>Extension:</u>
+<u>Extensions:</u>
 
 2a. The task list is empty
 
@@ -669,6 +672,9 @@ Use case ends.
 
 Use case resumes at step 2.
 
+
+
+#### Use case 11: 
 
 
 #### Use case 09: View a list of available commands
@@ -683,13 +689,15 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 250 persons and tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be lightweight.
 5. Should run smoothly even on low-end systems.
-
-*{More to be added}*
+6. Contact and task data should be stored locally.
+7. Contact and task data should persist between instances (unless the data files are deleted).
+8. New users should be easily able to adjust to the CLI.
+9. Should be fully functional without an internet connection.
 
 ### Glossary
 
@@ -701,8 +709,10 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting
+point for testers to work on; testers are expected to do more *exploratory* testing.
 
 </div>
 
