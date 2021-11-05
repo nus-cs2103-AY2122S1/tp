@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,29 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void favourite_targetPersonNotInList_throwsPersonNotFoundException() {
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withGithub("DifferentAlice")
+                .build();
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.favourite(editedAlice));
+    }
+
+    @Test
+    public void unfavourite_targetPersonNotInList_throwsPersonNotFoundException() {
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withGithub("DifferentAlice")
+                .build();
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.unfavourite(editedAlice));
+    }
+
+    @Test
+    public void iterator() {
+        uniquePersonList.add(ALICE);
+        Iterator<Person> personList = uniquePersonList.iterator();
+        assertEquals(ALICE, personList.next());
     }
 
     @Test
