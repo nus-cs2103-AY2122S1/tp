@@ -17,8 +17,8 @@ import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
-import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.commands.Warning;
+import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
@@ -105,7 +105,8 @@ public class AddPolicyCommand extends Command {
 
         if (model.getSimilarPolicy(toAdd).isPresent()) {
             Policy similarPolicy = model.getSimilarPolicy(toAdd).get();
-            boolean response = Warning.isUserConfirmingCommand(String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
+            boolean response = Warning.isUserConfirmingCommand(
+                    String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }
