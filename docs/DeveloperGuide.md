@@ -343,9 +343,9 @@ and time via `LocalDateTime.now()`, and the current date via `LocalDate.now()`. 
 a date, then if it has a date but no time, and finally whether it has both date and time.
 
 When `UpcomingTaskCommand.execute(Model model)` is called by `LogicManager`, 
-`Model#sortTaskList()` is called which sorts the task list chronologically. `UpcomingTaskCommand` then passes 
-`TaskDateAfterCurrentDatePredicate` to `Model#updateFilteredTaskList(Predicate<Task> predicate)`, which filters out the
-upcoming tasks and updates the viewable `ObservableList<Task>`. 
+`Model#sortTaskList()` is called which sorts the task list chronologically. `UpcomingTaskCommand` then calls
+`Model#updateFilteredTaskList(Predicate<Task> predicate)`, which filters out the upcoming tasks and updates the viewable
+`ObservableList<Task>`. 
 
 The user is then able to view their upcoming tasks, in chronological order.
 
@@ -620,7 +620,7 @@ Use case ends.
 
 Use case resumes at step 2.
 
-#### Use case 08: View all contact
+#### Use case 08: View all contacts
 
 <u>MSS:</u>
 
@@ -635,6 +635,30 @@ Use case ends.
 
 Use case ends.
 
+#### Use case 10: Tagging a contact
+
+<u>MSS:</u>
+
+1. User switches to contacts tab
+2. Dash shows the list of contacts
+3. User inputs the contact index to be edited, specifying the tag(s) for the contact
+4. Dash adds the tag(s) to the contact
+
+Use case ends.
+
+<u>Extension:</u>
+
+2a. The task list is empty
+
+Use case ends.
+
+3. The given index is invalid
+    * Dash shows an error message
+
+Use case resumes at step 2.
+
+
+
 #### Use case 09: View a list of available commands
 
 <u>MSS:</u>
@@ -648,7 +672,8 @@ Use case ends.
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be lightweight.
 5. Should run smoothly even on low-end systems.
 
