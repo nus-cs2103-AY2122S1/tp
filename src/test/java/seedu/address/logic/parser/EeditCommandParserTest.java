@@ -1,26 +1,31 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_DESC_BADMINTON;
+import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_BADMINTON;
+import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_CHESS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATE_BADMINTON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_NAME_BADMINTON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.event.EeditCommand;
-import seedu.address.logic.commands.member.MeditCommand;
 import seedu.address.logic.parser.event.EeditCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.event.EventDate;
 import seedu.address.testutil.EditEventDescriptorBuilder;
-import seedu.address.testutil.EditMemberDescriptorBuilder;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class EeditCommandParserTest {
 
