@@ -48,7 +48,7 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to existing documentation of features `find`: 
       [\#90](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/90)
   * Developer Guide:
-    * TBC
+    * To be updated
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): 
