@@ -276,6 +276,51 @@ Step 3: It will proceed to update the class tag of the students enrolled in the 
 
 Step 4: Finally, it replaces the existing class with the updated class in the database.
 
+### [Developed] Removing Students from Tuition Classes
+This feature allows students enrolled in existing classes to be removed using student indices and a class index using the `remove` command.
+This is facilitated by the `RemoveStudentCommand` and `RemoveStudentCommandParser` classes.
+
+The `RemoveStudentCommandParser` parses the input from user to ensure that the indices are valid. Then, 
+students are removed from the respective tuition class with the help of the following methods:
+
+* `TuitionClass#containsStudent(Student)` - Checks if the student exists in the class before removing
+* `TuitionClass#removeStudent(Student)` - Removes an existing student from a class
+* `RemoveStudentCommand#updateInvalidStudents(Student)` - Updates the list of invalid students who do not exist in the class.
+
+Given below is an example usage of how a `RemoveStudentCommand` is executed.
+
+The interactions between the components is shown in the *Sequence Diagram* below.<br>
+![Ui](images/RmStudentSequenceDiagram.png)
+
+Step 1: The user enters `remove si/1 4 tc/1` command.
+
+Step 2: The `RemoveStudentCommandParser` will parse the student indices and class index to ensure that they are valid. 
+Additionally, it removes any duplicates among the student indices. A `RemoveStudentCommand` object with the student indices and class index as arguments is constructed.
+
+Step 3: The `RemoveStudentCommand` is executed. Student indices - 1 and 2, are used to retrieve the unique student names using the `UniqueStudentList`.
+
+Step 4: `TuitionClass#containsStudent(Student)` is called to confirm that the student exists in the class. 
+
+Step 5: If the student exists, the student is removed from the class using TuitionClass#removeStudent(Student). The tuition class is also removed the particular student using
+`Student#removeClass(TuitionClass)`. Otherwise, the names of the invalid students are tracked using `RemoveStudentCommand#updateInvalidStudents(Student)`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+Student indices that are not found in the `UniqueStudentList` would be considered as invalid indices.
+</div>
+
+
+#### Design considerations:
+
+**Aspect: Whether to allow users to remove single or multiple students at once:**
+
+* **Alternative 1 (current choice):** Allows multiple students to be removed.
+    * Pros: More efficient for users to remove students from tuition classes.
+    * Cons: More bug-prone due to parsing errors or duplicate indices. This is later resolved by providing more specific instructions in user guide and detailed command feedback in TutAssistor.
+
+* **Alternative 2:** Allows only one student to be removed.
+    * Pros: Easy to implement and reduced possibility of parsing errors.
+    * Cons: Users who wish to mass-update class enrollment will find it inefficient.
+
 ### [Developed] Adding Students to Existing Tuition Classes
 
 Users can add students to existing tuition classes using student index or name.
