@@ -864,11 +864,11 @@ UX | User Experience - The experience a user has when using the app.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Command Summary
 This section lists all the available commands in TAB, along with examples on how you can use them.
 The commands are categorised into 4 different categories:
-* [Managing Students](#students)
-* [Managing Lessons](#lessons)
+* [Students](#students)
+* [Lessons](#lessons)
 * [Navigating the UI](#navigating-the-ui)
 * [General](#general)
 <br/>
@@ -884,7 +884,7 @@ Action | Format, Examples
 
 ### Lessons
 
-Action | Format, Examples
+Action | Format & Examples
 --------|------------------
 [**Add Lesson**](#adding-a-lesson-ladd) | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
 [**Edit Lesson**](#editing-a-lesson-ledit) | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
