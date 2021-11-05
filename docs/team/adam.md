@@ -11,10 +11,12 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to open the TutAssistor user guide from the Help window.
   * What it does: in the AB3's implementation for Help window, the user has to click on the "Copy URL" button to retrieve the user guide link. Instead, the new feature allows the user to click the button to open the user guide in the user's browser automatically.
+  * Justification: it is tedious for users to manually copy the url link and open the user guide in the browser. It will be a lot more convenient to redirect the users to the user guide in their browser when they click the button.
   * Credits: this implementation was referenced from [samyipsh’s tP](https://github.com/samyipsh/tp) for CS2103T.
 
-* **New Feature**: Added the ability to add remarks to Tuition Classes.
+* **New Feature**: Added the ability to add remarks to tuition classes.
   * What it does: allows the user to optionally add remarks when creating tuition classes. 
+  * Justification: users will use the remark feature extensively to keep track of details such as fee payments and homework. As such, it is important to implement the ability to add remarks to tuition classes as well.
   * Credits: this implementation was referenced from [AB3's Add Remark tutorial](https://nus-cs2103-ay2122s1.github.io/tp/tutorials/AddRemark.html).
 
 * **New Feature**: Added the ability to edit remarks with Remark Editor. [\#99](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/99), [\#101](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/101)
@@ -26,7 +28,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed and assigned 1.2 issues to track project tasks
-  * Facilitated team direction for tP w7 requirements
+  * Facilitated team direction for week 7 tP requirements
 
 * **Enhancements to existing features**:
   * Updated icons and labels for GUI [\#56](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/56)
