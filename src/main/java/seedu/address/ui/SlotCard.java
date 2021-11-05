@@ -33,7 +33,6 @@ public class SlotCard extends UiPart<Region> {
 
     private final DayOfWeek day;
     private final Slot slot;
-    private ObservableList<Person> filteredList;
     private ObservableList<Person> stafflist;
 
     @FXML
@@ -53,7 +52,6 @@ public class SlotCard extends UiPart<Region> {
         this.slot = slot;
         this.stafflist = stafflist;
         shiftName.setText(slot.toString());
-
         ObservableList<Person> filteredList =
                 stafflist.filtered(p -> p.isWorking(day, slot.getOrder(), period));
         staffWorkingList.setItems(filteredList);
@@ -68,7 +66,6 @@ public class SlotCard extends UiPart<Region> {
         @Override
         protected void updateItem(Person staff, boolean empty) {
             super.updateItem(staff, empty);
-
             if (empty || staff == null) {
                 setText(null);
             } else {
