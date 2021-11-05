@@ -79,7 +79,7 @@ public class CommandBox extends UiPart<Region> {
         } else {
             return;
         }
-        commandTextField.setText(commandHistory.getCommandText());
+        commandTextField.setText(commandHistory.getCommandText(commandTextField.getText()));
     }
 
     /**
@@ -131,11 +131,13 @@ public class CommandBox extends UiPart<Region> {
             return commandHistory.size();
         }
 
-        String getCommandText() {
+        String getCommandText(String curCommandText) {
             if (index > 0) {
                 return commandHistory.get(historyLength() - index);
-            } else {
+            } else if (index == 0 && historyLength() > 0) {
                 return "";
+            } else {
+                return curCommandText;
             }
         }
 

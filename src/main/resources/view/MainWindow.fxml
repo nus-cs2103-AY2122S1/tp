@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="300" minWidth="450" onCloseRequest="#handleExit" title="Notor" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="200" minWidth="450" onCloseRequest="#handleExit" title="Notor" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -28,9 +28,8 @@
                 <URL value="@Extensions.css" />
             <URL value="@DarkTheme.css" />
             </stylesheets>
-
             <VBox alignment="TOP_CENTER" styleClass="background">
-            <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" styleClass="splitpane-background" VBox.vgrow="NEVER">
+            <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" styleClass="column-header-background" VBox.vgrow="NEVER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -63,7 +62,7 @@
                   <Insets bottom="2.0" top="2.0" />
                </VBox.margin>
             </GridPane>
-            <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" minWidth="400.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="400.0" styleClass="background" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="1000.0" styleClass="splitpane-background" VBox.vgrow="ALWAYS">
               <items>
                   <VBox alignment="BOTTOM_CENTER" styleClass="splitpane-background">
                      <children>
