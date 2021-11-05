@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -16,9 +17,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class AbListCommandTest {
-    @TempDir
-    public Path testFolder;
-
     @Test
     public void equals() {
         AbListCommand abListCommand1 = new AbListCommand();
@@ -39,12 +37,11 @@ public class AbListCommandTest {
 
     @Test
     public void execute_success() {
-        Path file1 = testFolder.resolve("first.json");
-        Path file2 = testFolder.resolve("another.json");
-        Path file3 = testFolder.resolve("last.json");
+        Path file1 = Path.of("first.json");
+        Path file2 = Path.of("another.json");
+        Path file3 = Path.of("last.json");
 
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookDirectory(testFolder);
         userPrefs.setAddressBookFilePath(file1);
         Model model = new ModelManager(new AddressBook(), userPrefs);
         Model expectedModel = new ModelManager(new AddressBook(), userPrefs);
@@ -53,12 +50,8 @@ public class AbListCommandTest {
         model.addAddressBookList(file2);
         model.addAddressBookList(file3);
 
-        expectedModel.addAddressBookList(file1);
-        expectedModel.addAddressBookList(file2);
-        expectedModel.addAddressBookList(file3);
-
         AbListCommand command = new AbListCommand();
-        String result = String.format(AbListCommand.MESSAGE_SUCCESS, "\n-first" + "\n-another" + "\n-last");
+        String result = String.format(AbListCommand.MESSAGE_SUCCESS, model.getAddressBookListString());
         CommandResult commandResult = new CommandResult(result);
 
         assertCommandSuccess(command, model, commandResult, expectedModel);

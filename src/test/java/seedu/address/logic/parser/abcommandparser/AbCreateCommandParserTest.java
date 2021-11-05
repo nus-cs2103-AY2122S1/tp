@@ -23,7 +23,7 @@ public class AbCreateCommandParserTest {
 
     @Test
     public void parse_invalidFileName_throwsParseException() {
-        String invalidFileName = "dddd<>\nddd";
+        String invalidFileName = "dddd<>\0ddd";
         assertParseFailure(parser, invalidFileName, String.format(MESSAGE_ADDRESSBOOK_NOT_VALID, invalidFileName));
     }
 

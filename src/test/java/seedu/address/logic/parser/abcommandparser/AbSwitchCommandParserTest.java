@@ -23,7 +23,7 @@ public class AbSwitchCommandParserTest {
 
     @Test
     public void parse_invalidFileName_throwsParseException() {
-        String invalidFileName = "ddd<>\nddd";
+        String invalidFileName = "ddd<>\0ddd";
         assertParseFailure(parser, invalidFileName, String.format(MESSAGE_ADDRESSBOOK_NOT_VALID, invalidFileName));
     }
 
