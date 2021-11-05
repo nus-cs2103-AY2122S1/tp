@@ -57,9 +57,6 @@ public class EditPersonCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_SAME_PERSON = "Unable to edit: "
                     + "A person with either the same email/phone number/telegram handle already exists in contHACKS.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Warning: A person with similar identity already exist.\n"
-            + "Nonetheless, person is edited.\n"
-            + "Edited person: %1$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
