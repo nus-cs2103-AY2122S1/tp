@@ -296,7 +296,7 @@ public class Period {
 
 
     @Override
-    public String toString() {
+    public final String toString() {
         return this.startDate + DELIMITER + this.endDate;
     }
 
