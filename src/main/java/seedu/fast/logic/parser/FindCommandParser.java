@@ -35,12 +35,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     PREFIX_PRIORITY_TAG.getPrefix().length());
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            for (String tag : tags) {
-                if (!isPriority(tag)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
-                }
-            }
+            checkIfPriorityTag(tags);
             return new FindCommand(new PriorityPredicate(Arrays.asList(tags)));
 
         } else if (trimmedArgs.startsWith(FindCommand.TAG_PREFIX)) {
@@ -63,6 +58,15 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] nameKeywords = trimmedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
             return new FindCommand(new NameContainsQueriesPredicate(Arrays.asList(nameKeywords)));
+        }
+    }
+
+    private void checkIfPriorityTag(String[] tags) throws ParseException {
+        for (String tag : tags) {
+            if (!isPriority(tag)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
+            }
         }
     }
 

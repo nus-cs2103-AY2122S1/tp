@@ -17,7 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.fast.commons.util.sort.SortByName;
+import seedu.fast.logic.parser.sort.SortByName;
 import seedu.fast.model.person.exceptions.DuplicatePersonException;
 import seedu.fast.model.person.exceptions.PersonNotFoundException;
 import seedu.fast.testutil.PersonBuilder;
