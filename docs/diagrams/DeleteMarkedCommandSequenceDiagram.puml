@@ -50,8 +50,6 @@ deactivate CommandResult
 DeleteMarkedCommand --> LogicManager: result
 deactivate DeleteMarkedCommand
 
-
-
 [<--LogicManager
 deactivate LogicManager
 @enduml
