@@ -253,6 +253,10 @@ public class ParserUtil {
         requireNonNull(dates);
         final Set<Date> dateSet = new HashSet<>();
         for (String date : dates) {
+            Optional<Date> parsedDate = parseDate(date);
+            if (parsedDate.isEmpty()) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
             dateSet.add(parseDate(date).get());
         }
         return dateSet;
