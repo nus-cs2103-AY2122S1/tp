@@ -24,7 +24,7 @@ This user guide is intended for any user of TAB. It provides installation instru
 
 **Navigation**
 
-In the [Table of Contents](), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
 
 **Conventions Used**
 
@@ -563,8 +563,6 @@ Format: `remind`
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Managing Lesson Fees
@@ -740,7 +738,6 @@ Format: `today`
 
 <div style="page-break-after: always;"></div>
 
-
 ### Miscellaneous Commands
 
 This section describes the other miscellaneous commands available in TAB.
@@ -792,8 +789,6 @@ Format: `exit`
 <br />
 
 [back to table of contents](#)
-
-<br />
 
 ### Managing Data
 
