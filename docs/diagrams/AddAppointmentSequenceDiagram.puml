@@ -49,11 +49,6 @@ deactivate PlannerMdParser
 LogicManager -> AddAppointmentCommand : execute()
 activate AddAppointmentCommand
 
-AddAppointmentCommand -> Model : hasAppointment((appointmentToAdd)
-activate Model
-Model --> AddAppointmentCommand
-deactivate Model
-
 AddAppointmentCommand -> Model : addAppointment(appointmentToAdd)
 
 create CommandResult
