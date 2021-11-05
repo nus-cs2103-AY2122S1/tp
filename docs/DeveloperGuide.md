@@ -45,7 +45,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Glossary](#glossary)
     - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
         - [Launch and shutdown](#launch-and-shutdown)
-        - [Adding a person](#add-patient-manual-testing)
+        - [Adding a patient](#add-patient-manual-testing)
         - [Deleting a patient](#delete-patient-manual-testing)
         - [Editing a patient](#edit-patient-manual-testing)
         - [Finding a patient](#find-patient-manual-testing)
