@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -65,6 +66,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         this.mainWindow = mainWindow;
         this.logic = logic;
         welcomeMessage.setText(WELCOME_MESSAGE);
+        submit.requestFocus();
     }
 
     /**
@@ -80,6 +82,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         } else {
             logger.info("No User Profile Found, Launching Profile Window");
             getRoot().show();
+            submit.requestFocus();
         }
     }
 
@@ -89,6 +92,14 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
     public void close() {
         logger.info("Closing Profile Window");
         getRoot().close();
+    }
+
+    /**
+     * Closes the application.
+     */
+    public void handleExit() {
+        MainWindow.setDone(true);
+        ThreadProcessor.stopAllThreads();
     }
 
     /**
@@ -108,6 +119,8 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         Telegram telegram;
 
         if (areUserCredentialsValid()) {
+            setErrorMessageText("Setting Up...");
+
             address = new Address("");
 
             email = new Email("");
@@ -126,12 +139,23 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
                 logic.setUserProfile(user);
                 logger.info("User Data Set");
             } catch (IOException e) {
+                setErrorMessageText("Could Not Set Up User Profile");
                 logger.severe("Could Not Set User Data.");
             }
 
             close();
             mainWindow.start();
         }
+    }
+
+    /**
+     * Sets The {@code errorMessage} text to
+     * {@code message}.
+     *
+     * @param message The message to be showed.
+     */
+    public void setErrorMessageText(String message) {
+        errorMessage.setText(message);
     }
 
     /**
@@ -148,21 +172,21 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         assert userName != null : "User Name Could Not Be Found";
         if (!Name.isValidName(userName)) {
             logger.info("Invalid Name Detected");
-            errorMessage.setText(INVALID_NAME_MESSAGE);
+            setErrorMessageText(INVALID_NAME_MESSAGE);
             return false;
         }
 
         assert userTelegram != null : "User Telegram Handle Could Not Be Found";
         if (!Telegram.isValidTelegram(userTelegram)) {
             logger.info("Invalid Telegram Handle Detected");
-            errorMessage.setText(INVALID_TELEGRAM_MESSAGE);
+            setErrorMessageText(INVALID_TELEGRAM_MESSAGE);
             return false;
         }
 
         assert userGitHub != null : "User GitHub Username Could Not Be Found";
         if (!Github.isValidGithub(userGitHub)) {
             logger.info("Invalid GitHub Username Detected");
-            errorMessage.setText(INVALID_GITHUB_MESSAGE);
+            setErrorMessageText(INVALID_GITHUB_MESSAGE);
             return false;
         }
 

@@ -4,9 +4,11 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.GitHubUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.util.UserProfileWatcher;
@@ -65,7 +67,22 @@ public class UserProfileInMenuBar extends UiPart<Region> implements UserProfileW
      * to be displayed on the Menu Bar.
      */
     public void setUserProfileOnMenuBar() {
-        userProfile.setImage(logic.getUserProfile().getProfilePicture());
+        Image userGitHubProfilePicture = logic.getUserProfile().getProfilePicture();
+        userProfile.setImage(userGitHubProfilePicture);
+        if (userGitHubProfilePicture == GitHubUtil.DEFAULT_USER_PROFILE_PICTURE) {
+            Thread temp = new Thread(() -> {
+                while (logic.getUserProfile().getProfilePicture() == GitHubUtil.DEFAULT_USER_PROFILE_PICTURE
+                        && !MainWindow.isDone()) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        //e.printStackTrace();
+                    }
+                }
+                userProfile.setImage(logic.getUserProfile().getProfilePicture());
+            });
+            temp.start();
+        }
         userName.setText(logic.getUserProfile().getName().toString());
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Locale;
 
 /**
  * Represents a Person's Github username in the address book.
@@ -45,7 +46,8 @@ public class Github {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Github // instanceof handles nulls
-                && value.equals(((Github) other).value)); // state check
+                && value.toLowerCase(Locale.ROOT).equals((
+                        (Github) other).value.toLowerCase(Locale.ROOT))); // state check
     }
 
     @Override

@@ -21,9 +21,4 @@ public class ProgressIndicatorRegion extends UiPart<Region> {
         super(FXML);
         this.getRoot().setVisible(false);
     }
-
-    public void setProgressIndicator(double val) {
-        progressBar.setProgress(val);
-        System.out.println(progressBar.getProgress());
-    }
 }

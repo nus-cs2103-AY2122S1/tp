@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.scene.image.Image;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.GitHubUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -87,6 +88,33 @@ public class JsonAdaptedPerson {
     }
 
     /**
+     * Checks whether given Image is the default profile image
+     *
+     * @param image image to check
+     * @return true, if given image is same as default
+     */
+    public boolean isDefaultImage(Image image) {
+
+        if (image == null
+                || image.getHeight() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getHeight()
+                || image.getWidth() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getWidth()) {
+            return false;
+        }
+
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int firstArgb = image.getPixelReader().getArgb(x, y);
+                int secondArgb = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getPixelReader().getArgb(x, y);
+                if (firstArgb != secondArgb) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
@@ -152,7 +180,7 @@ public class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (image == null) {
+        if (image == null || isDefaultImage(image)) {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
                     modelEmail, modelAddress, modelTags, modelIsFavourite);
         }

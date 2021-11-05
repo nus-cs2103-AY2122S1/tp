@@ -30,6 +30,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static boolean isDone = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -192,7 +193,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         PersonDetails personDetails = new PersonDetails(null);
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails);
+        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
+        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails, tabPaneHeader);
         logic.setPersonList(personListPanel);
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -200,19 +203,22 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
         personListPanelPlaceholder.getChildren().add(progressIndicator.getRoot());
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
         personListPanel.setTabPaneHeader(tabPaneHeader);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
 
-        if (logic.isProfilePresent()) {
+    /**
+     * Sets the User Data to be displayed on the
+     * Menu Bar.
+     */
+    public void setUserProfileInMenuBar() {
+        if (logic.isProfilePresent() && userDetails.getChildren().isEmpty()) {
             UserProfileInMenuBar userProfileInMenuBar = new UserProfileInMenuBar(logic);
             userDetails.getChildren().add(userProfileInMenuBar.getRoot());
         }
@@ -239,6 +245,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+            helpWindow.getRoot().toFront();
         }
     }
 
@@ -265,6 +272,7 @@ public class MainWindow extends UiPart<Stage> {
             userProfileWindow.show();
         } else {
             userProfileWindow.focus();
+            userProfileWindow.getRoot().toFront();
         }
     }
 
@@ -312,7 +320,16 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the {@code MainWindow}.
      */
     public void start() {
+        setUserProfileInMenuBar();
         primaryStage.show();
+    }
+
+    public static boolean isDone() {
+        return isDone;
+    }
+
+    public static void setDone(boolean isDone) {
+        MainWindow.isDone = isDone;
     }
 
     /**
@@ -332,6 +349,8 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         userProfileWindow.hide();
         primaryStage.hide();
+        tabPaneHeader.stopFabLoader();
+        isDone = true;
         ThreadProcessor.stopAllThreads();
     }
 

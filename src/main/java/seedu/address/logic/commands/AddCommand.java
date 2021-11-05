@@ -22,13 +22,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_TELEGRAM + "TELEGRAM"
-            + PREFIX_GITHUB + "GITHUB"
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_NAME + "<NAME> "
+            + PREFIX_TELEGRAM + "<TELEGRAM> "
+            + PREFIX_GITHUB + "<GITHUB> "
+            + "[" + PREFIX_PHONE + "<PHONE>] "
+            + "[" + PREFIX_EMAIL + "<EMAIL>] "
+            + "[" + PREFIX_ADDRESS + "<ADDRESS>] "
+            + "[" + PREFIX_TAG + "<TAG>]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TELEGRAM + "@john_doe_123"
@@ -41,6 +41,15 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_ALL_COMPULSORY_FIELDS_MISSING =
+            "The Name, Github and Telegram fields, are compulsory!";
+    public static final String MESSAGE_NAME_GITHUB_FIELDS_MISSING = "The Name and Github fields are compulsory!";
+    public static final String MESSAGE_NAME_TELEGRAM_FIELDS_MISSING = "The Name and Telegram fields are compulsory!";
+    public static final String MESSAGE_GITHUB_TELEGRAM_FIELDS_MISSING =
+            "The Github and Telegram fields are compulsory!";
+    public static final String MESSAGE_NAME_FIELD_MISSING = "The Name field is compulsory!";
+    public static final String MESSAGE_GITHUB_FIELD_MISSING = "The GitHub field is compulsory!";
+    public static final String MESSAGE_TELEGRAM_FIELD_MISSING = "The Telegram field is compulsory!";
 
     private final Person toAdd;
 

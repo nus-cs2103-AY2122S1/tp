@@ -43,7 +43,35 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
+    public void parseException_toString() {
+        String expectedErrorMessage = "Index is missing!";
+        String errorMessage = "";
+        try {
+            ParserUtil.parseIndex("");
+        } catch (ParseException e) {
+            errorMessage = e.toString();
+        }
+        assertEquals(expectedErrorMessage, errorMessage);
+
+    }
+
+    @Test
+    public void parseIndex_emptyInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex(""));
+    }
+
+    @Test
+    public void parseIndex_invalidInputNegativeNumber_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-1"));
+    }
+
+    @Test
+    public void parseIndex_invalidInputNumbersWithSpace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("3 0"));
+    }
+
+    @Test
+    public void parseIndex_invalidInputNumbersAndAlphabet_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
     }
 
@@ -64,7 +92,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -87,7 +115,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTelegram_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTelegram((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTelegram(null));
     }
 
     @Test
@@ -110,7 +138,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseGithub_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGithub((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGithub(null));
     }
 
     @Test
@@ -133,7 +161,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -156,7 +184,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -179,7 +207,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -241,7 +269,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
