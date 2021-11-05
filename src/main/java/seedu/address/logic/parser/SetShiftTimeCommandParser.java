@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT_TIME;
-import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
