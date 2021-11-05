@@ -176,6 +176,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Student> getAllStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<DisplayableObject> getSelectedInformation() {
             return selectedInformation;
         }

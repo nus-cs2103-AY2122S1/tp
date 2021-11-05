@@ -37,9 +37,10 @@ public class DeleteLabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+
+        List<Student> studentList = model.getAllStudents();
         boolean exists = true;
-        for (Student std : lastShownList) {
+        for (Student std : studentList) {
             Student target = std;
             if (!target.deleteLab(this.result)) {
                 exists = false;

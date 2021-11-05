@@ -83,6 +83,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns all students in ProgrammerError */
+    ObservableList<Student> getAllStudents();
+
     /** Returns the selected information.*/
     ObservableList<DisplayableObject> getSelectedInformation();
 
