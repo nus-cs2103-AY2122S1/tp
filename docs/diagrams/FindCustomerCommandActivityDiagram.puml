@@ -1,0 +1,18 @@
+@startuml
+start
+:User enters find customer command;
+:Parse command arguments;
+
+if () then ([input is valid])
+    :Creates instance of
+    CustomerClassContainsKeywordsPredicate
+    based on provided arguments;
+    :Execute find customer command;
+    :Update customer list with customers that
+    satisfies the newly created predicate;
+    :Display filtered customers;
+    stop
+else ([else])
+    :Throw \nParseException;
+    stop
+@enduml
