@@ -442,7 +442,7 @@ public class ModelManager implements Model {
 
     //=========== AddressBook & OrderBook Relation Check =======================================================
 
-    public ModelManager resetModelManager(){
+    public ModelManager resetModelManager() {
         return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
     }
 
