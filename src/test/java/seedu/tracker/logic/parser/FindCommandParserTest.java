@@ -24,11 +24,23 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-            new FindCommand(new ModuleContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+            new FindCommand(new ModuleContainsKeywordsPredicate(Arrays.asList("CS2103T", "GEQ1000")));
+        assertParseSuccess(parser, "CS2103T GEQ1000", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n CS2103T \n \t GEQ1000  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_invalidArgs_failure() {
+        // prefix is not empty
+        assertParseFailure(parser, "c/cs2103t ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "t/cs2103t ge",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // no keywords given
+        assertParseFailure(parser, "c/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "tag/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
 }
