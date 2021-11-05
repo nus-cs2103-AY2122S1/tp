@@ -369,7 +369,7 @@ This section guides you on how to use the commands for managing the lessons of y
 2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
 3. [Deleting a lesson: `ldelete`](#deleting-a-lesson-ldelete)
 4. [Viewing a student's lessons: `view`](#viewing-lessons-view)
-5. [Viewing upcoming lessons lesson: `remind`](#viewing-upcoming-lessons-remind)
+5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
 
 A lesson **must** have the following fields: a start date, a time range, a lesson rate and a subject.
 
