@@ -35,7 +35,8 @@ This product will make recruiters’ lives easier through categorisation and fil
     + [Showing search terms : `show`](#showing-search-terms--show)
     + [Marking an applicant : `mark`](#marking-an-applicant--mark)
     + [Unmarking an applicant : `unmark`](#unmarking-an-applicant--unmark)
-    + [Deleting marked applicants: `delete_marked`](#deleting-marked-applicants-delete_marked)
+    + [Deleting marked applicants : `delete_marked`](#deleting-marked-applicants--delete_marked)
+    + [Clearing all data : `clear`](#clearing-all-data--clear)  
     + [Exiting the program : `exit`](#exiting-the-program--exit)
     + [Saving the data](#saving-the-data)
     + [Editing the data file](#editing-the-data-file)
@@ -475,11 +476,17 @@ Examples:
 * After using the command `find n/John`, `unmark 1` unmarks the 1st applicant in the results of the `find` command.
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 
-### Deleting marked applicants: `delete_marked`
+### Deleting marked applicants : `delete_marked`
 
 Deletes all applicants that are marked as done.
 
 Format: `delete_marked`
+
+### Clearing all data : `clear`
+
+Deletes all applicants in RecruitIn.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -757,14 +764,16 @@ If you do not know how to open up your terminal, refer to the next question belo
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00 nt/This applicant is a good candidate for the job!`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]` <br> e.g., `edit 1 p/90909090 s/4500`
 **List** | `list`
-**Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES] [d/DONE]`<br> e.g., `find n/John Mary`
+**Filter interviews** | `filter_interview past` or `filter_interview future`
+**Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
 **Delete marked** | `delete_marked`
 **Clear**| `clear`
-**Help** | `help`
+**Exit** | `exit`
