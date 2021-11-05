@@ -262,11 +262,11 @@ Only one flag should be used for each search (e.g. having `-n` and `-g` argument
 * To search with multiple keywords, separate keywords with spaces. E.g. `search -g T02A R03C`.
 * The search is case-insensitive. E.g. `jonas` will match `Jonas`.
 * The order of the keywords does not matter. E.g. `Jonas Chow` will match `Chow Jonas`.
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-E.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
-* For search with name, only full words will be matched. E.g. `Jon` will not match `Jonas`.
-* For search with NUSNET ID, group name or tag, partial search is supported. E.g. `T02` will match `T02A` and `T02B`.
-`beginner` will match `beginners`.
+* Students matching at least one keyword will be returned. E.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
+* For search with name,
+  * only full words will be matched. E.g. `Jon` will not match `Jonas`.
+* For search with NUSNET ID, group name or tag, 
+  * partial search is supported. E.g. `T02` will match `T02A` and `T02B`. `beginner` will match `beginners`.
 
 Examples:
 * `search -n Jonas Chow`
@@ -624,7 +624,7 @@ Action | Format | Examples
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
 **Help** | `help` |
-**Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c add student -as addstu`
+**Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c addstudent -as addstu`
 
 [Return to Table of Contents](#table-of-contents)
 
