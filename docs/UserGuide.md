@@ -10,12 +10,12 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Upcoming birthdays](#upcoming-birthdays)
   * [Viewing help : `help`](#viewing-help--help)
   * [Adding a person: `add`](#adding-a-person-add)
-  * [Listing all persons : `list`](#listing-all-persons--list)
+  * [Listing all people : `list`](#listing-all-people--list)
   * [Editing a person : `edit`](#editing-a-person--edit)
   * [Adding Tags : `tag`](#adding-tags--tag)
   * [Removing Tags : `untag`](#removing-tags--untag)
-  * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
-  * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findany)
+  * [Locating people by name and tag(s): `find`](#locating-people-by-name-and-tags-find)
+  * [Locating people by name or tag(s): `findAny`](#locating-people-by-name-or-tags-findany)
   * [Pinning a person: `pin`](#pinning-a-person--pin)
   * [Unpinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
@@ -141,9 +141,9 @@ Notes:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison b/25121999 p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all people : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all people in the address book.
 
 #### Format:
 * `list`
@@ -202,9 +202,9 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd person.
 
-### Locating persons by name and tag(s): `find`
+### Locating people by name and tag(s): `find`
 
-Finds all persons who match **ALL** name and tag keywords provided.
+Finds all people who match **ALL** name and tag keywords provided.
 
 #### Format:
 * `find [c/] [n/NAME] …​ [t/TAG] …​`
@@ -218,8 +218,8 @@ Notes:
 * The order of the keywords does not matter. e.g. `find n/Hans t/football` will return the same result as `find  t/football n/Hans`.
 * Only full words will be matched for names and tags.  
   * `find n/an` will not return `Hans`, but will return `Jing An`.  
-* Only Persons matching all keywords will be returned (i.e. `AND` search).  
-  e.g. `find n/Hans t/Friend` will return all Persons with names containing the word `Hans` and who are tagged with `Friend`.  
+* Only people matching all keywords will be returned (i.e. `AND` search).  
+  e.g. `find n/Hans t/Friend` will return all people with names containing the word `Hans` and who are tagged with `Friend`.  
 
 **Sample Usage:**
 * `find n/John`
@@ -232,9 +232,9 @@ Notes:
   * returns `Shin`, who is tagged with `FRIENDS`.
     ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
-### Locating persons by name or tag(s): `findAny`
+### Locating people by name or tag(s): `findAny`
 
-Finds all persons who match **ANY** name and tag keywords provided.
+Finds all people who match **ANY** name and tag keywords provided.
 
 #### Format:
 * `findAny [c/] [n/NAME] …​ [t/TAG] …​`
@@ -248,8 +248,8 @@ Notes:
 * The order of the keywords does not matter. e.g. `findAny n/Hans t/football` will return the same result as `findAny t/football n/Hans`.
 * Only full words will be matched for names and tags.
   * `findAny n/an` will not return `Hans`, but will return `Jing An`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `findAny n/Hans t/Friend` will return all Persons with names containing the word `Hans` or who are tagged with `Friend`.
+* People matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `findAny n/Hans t/Friend` will return all people with names containing the word `Hans` or who are tagged with `Friend`.
 
 
 **Sample Usage:**
@@ -341,7 +341,7 @@ Exports a CSV file of the current view containing specified fields.
 
 Notes:
 * Name is always the first column in the CSV file.
-* Including any of the arguments will export that field to the CSV file. 
+* Including any of the arguments will export include that field in the CSV file. 
 * Each argument represents: 
   * `p/` phone number
   * `e/` email
@@ -426,18 +426,23 @@ If your changes to the data file makes its format invalid, CONNECTIONS will disc
 
 Action | Summary | Format, Examples
 --------|--------|----------------
-**Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
-**Clear** | Clears all entries | `clear`
-**Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
-**Deletem** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
-**Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
-**Exit** | Exits the program | `exit`
-**Find** | Locates persons by name and tags (Results fulfill all search terms)| `find [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
-**FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
-**Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
-**Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
 **Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
-**List** | Lists all persons | `list`
+**Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
+**List** | Lists all people | `list`
+**Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
 **Untag** | Untags a person | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
+**Find** | Locates people by name and tags (Results fulfill all search terms)| `find [c/] [n/NAME] [t/TAG]`<br> e.g., `find n/James t/friends`
+**FindAny** | Locates people by name and tags (Results fulfill at least one search term)| `findAny [c/] [n/NAME] [t/TAG]`<br> e.g., `findAny n/James t/NUS`
+**Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
+**Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
+**Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
+**Deletem** | Deletes multiple people within the range | `deletem START_INDEX - END_INDEX`<br> e.g., `deletem 3 - 5`
 **MailingList**| Exports a mailing list | `mailingList [p/] [e/] [a/] [b/] [t/]`
+**Clear** | Clears all entries | `clear`
+**Exit** | Exits the program | `exit`
+
+
+
+
+
