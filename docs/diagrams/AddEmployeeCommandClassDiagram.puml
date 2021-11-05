@@ -6,6 +6,7 @@ skinparam classBackgroundColor MODEL_COLOR
 
 package Logic {
 class AddEmployeeCommand
+class CommandResult
 }
 
 
@@ -21,8 +22,18 @@ class Email
 class Name
 class Phone
 class Tag
+Interface Model <<Interface>>
+class ModelManager
+class Rhrh
+class UniqueEmployeeList
 }
 
+AddEmployeeCommand ..> Model
+ModelManager ..up|> Model
+ModelManager --> "1" Rhrh
+Rhrh *--> "1" UniqueEmployeeList
+UniqueEmployeeList --> "*" Employee
+AddEmployeeCommand ..> "0..1" CommandResult : creates >
 AddEmployeeCommand --> "1" Employee
 Employee --> "1" JobTitle
 Employee --> "1" Leaves
