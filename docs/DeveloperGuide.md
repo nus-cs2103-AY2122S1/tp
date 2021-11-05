@@ -205,7 +205,7 @@ Step 1. A valid command `delete_marked` is given as user input. This invokes `Lo
 Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
 
 Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to 
-update list for applicants marked then. `Model#getFilteredList()` is then called to retrieve this list. 
+update list for applicants marked then `Model#getFilteredList()` is then called to retrieve this list. 
 
 Step 5:
 `Model#deletePerson()` is called on applicants in the list to delete them.
