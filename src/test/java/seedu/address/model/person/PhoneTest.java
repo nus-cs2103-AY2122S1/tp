@@ -33,21 +33,21 @@ public class PhoneTest {
     }
 
     @Test
-    public void toString_aValidInput_correctOutput() {
+    public void toString_aValidInput_success() {
         String phoneNumber = "12345678";
         Phone phone = new Phone(phoneNumber);
         assertTrue(phoneNumber.equals(phone.toString()));
     }
 
     @Test
-    public void equals_twoSameObjects_correctOutput() {
+    public void equals_twoSameObjects_success() {
         String phoneNumber = "12345678";
         Phone phone = new Phone(phoneNumber);
         assertTrue(phone.equals(phone));
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithSameNumber_correctOutput() {
+    public void equals_twoDifferentObjectsWithSameNumber_success() {
         String phoneNumber = "12345678";
         Phone phone1 = new Phone(phoneNumber);
         Phone phone2 = new Phone(phoneNumber);
@@ -55,7 +55,7 @@ public class PhoneTest {
     }
 
     @Test
-    public void equals_twoDifferentObjectsWithDifferentNumber_correctOutput() {
+    public void equals_twoDifferentObjectsWithDifferentNumber_falseOutput() {
         String phoneNumber1 = "12345678";
         String phoneNumber2 = "87654321";
         Phone phone1 = new Phone(phoneNumber1);
