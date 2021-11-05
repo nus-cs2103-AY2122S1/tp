@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("edit 1 n/[new name]")
 activate LogicManager
 
-LogicManager -> SalesNoteParser : parseCommand("delete 1")
+LogicManager -> SalesNoteParser : parseCommand("edit 1 n/[new name]")
 activate SalesNoteParser
 
 create DeleteCommandParser
@@ -26,7 +26,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> SalesNoteParser
 deactivate DeleteCommandParser
 
-SalesNoteParser -> DeleteCommandParser : parse("1")
+SalesNoteParser -> DeleteCommandParser : parse("n/[new name]")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -48,27 +48,21 @@ deactivate SalesNoteParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(p)
-activate Model
-
-Model --> DeleteCommand
-deactivate Model
-
-DeleteCommand -> Model : getRelatedOrders(name)
+DeleteCommand -> Model : getRelatedOrders([old name])
 activate Model
 
 Model --> DeleteCommand
 deactivate Model
 
 loop through list of related orders
-    DeleteCommand -> Model: removeRelatedTasks(order)
+    DeleteCommand -> Model: setName([new name])
     activate Model
 
     Model --> DeleteCommand:
     deactivate Model
 end
 
-DeleteCommand -> Model : deleteOrderIf(name)
+DeleteCommand -> Model : setPerson(person, EditedPerson)
 activate Model
 
 Model --> DeleteCommand
