@@ -102,7 +102,7 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 
 | Number | Section Name | Description |
 | -------| -------------- | ----------- | 
-| 1 | Toolbar | Currently provides functionality related to exiting and on accessing the help screen. | 
+| 1 | Toolbar | Provides functionality related to exiting and accessing the help screen. | 
 | 2 | Command input box | This is where you can input commands to perform actions in gitGud. |
 | 3 | Command feedback box | This box displays information related to the status of the commands you have executed. |
 | 4 | Friends list | This section displays the friends list and may be filtered to display specific friends based on the previous executed commands. |
@@ -158,7 +158,7 @@ Command constraints:
 
 <div markdown="block" class="alert alert-warning">
 
-**:heavy_exclamation_mark: Warning: `FRIEND_ID` cannot be changed after being set, hence, make sure to use a `FRIEND_ID`
+**:heavy_exclamation_mark: Warning: `FRIEND_ID` cannot be changed after being set. Hence, make sure to use a `FRIEND_ID`
 you are sure about.**
 </div>
 
@@ -295,7 +295,7 @@ Format: `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`
 
 **:information_source: Notes about the schedule:**<br>
 
-* New friends start off which a schedule with all periods marked as busy.
+* New friends start off with a schedule with all periods marked as busy.
 
 * gitGud displays the periods of time friends are free using the 24-hour notation.
 The end of a day, midnight (12am) is displayed as `2400` to allow users to easily differentiate it 
@@ -332,8 +332,7 @@ Command constraints:
   `0000` and 23 representing the 24-hour time `2300`.
 * The `DAY` provided must be an integer within 1 - 7 inclusive, with `1` representing Monday
   and `7` representing Sunday.
-* The `GAME_ID` must be valid(contain only alphanumeric characters and be a single word)
-  and exist in the games list.
+* The `GAME_ID` must exist in the games list.
 
 Examples:
 * `recommend -g Valorant -t 10 6` Recommends friends who play the game with the `GAME_ID` `Valorant` and
@@ -430,7 +429,9 @@ Deletes a game from the gitGud game list.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: When a game is deleted, all links between the game and friends will be removed.**
+**:information_source: Notes on deleting games:**
+
+* When a game is deleted, all previous links between the game and friends will be removed.
 </div>
 
 Format: `game --delete GAME_ID`
@@ -510,7 +511,7 @@ Format: `clear`
 
 <div markdown="block" class="alert alert-warning">
 
-**:heavy_exclamation_mark: Warning: This command deletes all friends and games from gitGud!** 
+**:heavy_exclamation_mark: Warning: This command deletes all friends and games from gitGud!** <br>
 Only use this command if you are absolutely sure you would like to restart gitGud from a clean slate.
 </div>
 
@@ -537,10 +538,10 @@ details in our guide.
 
 <div markdown="block" class="alert alert-warning">
 
-**:heavy_exclamation_mark: Warning: If the changes you have made cause the format of the data files to be invalid, 
-gitGud will start with empty data for the list(s) affected by the invalid file(s) at the next run and 
-may override the invalid files with subsequent saves.**  
-This may cause loss of data and hence should be avoided unless you are absolutely sure of what you are doing!
+**:heavy_exclamation_mark: Warning:** If the changes you have made cause the format of the data files to be invalid, 
+gitGud will start with **empty data for the list(s) affected by the invalid file(s)** at the next run and 
+may override the invalid files with subsequent saves.
+This may cause **loss of data** and hence should be avoided unless you are absolutely sure of what you are doing!
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -558,7 +559,7 @@ for all distributions.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary:
+## Glossary
 
 Terminology used | What it means
 --------|------------------
