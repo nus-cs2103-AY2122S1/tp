@@ -170,7 +170,7 @@ This section details the various features available in a single address book in 
 ### 4.1 Create New Contact : `add`
 
 Adds a new client to the address book.
-| Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...​`|
+| Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
 | :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
 | <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client ID as client ID cannot be given to the client.  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
@@ -226,7 +226,7 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted as
 
 Finds the meeting schedule on a specified date.
 
- | Format | `schedule DATE`|
+ | Format | `schedule [DATE]`|
 | :-: | :-- |
 | **examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
 | <img src=images/info_icon.png width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
@@ -246,7 +246,7 @@ Filters the current list by the given keywords.
  
 | Format | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :-: | :-- |
-| **examples** | • `search John` returns `john` and `John Doe` <br> • `search alex david` returns `Alex Yeoh`, `David Li` |
+| **examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
 | <img src=images/tip_icon.png width="50"> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">| 
  
@@ -342,7 +342,7 @@ List all the name of all the existing address books
 
 --------------------------------------------------------------------------------------------------------------------
  
-## 7. troubleshooting
+## 7. Troubleshooting
 
 ### Unable to launch LeadsForce
 * Do check that you indeed have Java 11 or above installed in your computer. 
@@ -374,13 +374,13 @@ This section details all commands in using the features in LeadsForce.
 ### 9.1 Address Book Specific Commands
 Action | Format | Examples
 --------|---------|---------
-**Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
+**Create** | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
 **View** | `view CLIENT'S ID` | view 123 |
-**Edit** | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
+**Edit** | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 12 n/Dominic p/12345678 |
 **Delete** | `delete CLIENT'S ID...` | delete 4  |
 **List** | `list` | - |
 **Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
-**Schedule** | `schedule DATE` | schedule 22-09-2021 |
+**Schedule** | `schedule [DATE]` | schedule 22-09-2021 |
 **Search** | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | search e/doe@gmail.com r/5 |
 **Filter** | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter e/doe@gmail.com p/9 |
 **Clear** | `clear` | - |
