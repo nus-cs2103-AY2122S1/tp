@@ -10,8 +10,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TransactionList;
+import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 
+/**
+ * Jackson-friendly version of {@link TransactionRecord}.
+ */
 @JsonRootName(value = "transaction")
 class JsonSerializableTransaction {
 

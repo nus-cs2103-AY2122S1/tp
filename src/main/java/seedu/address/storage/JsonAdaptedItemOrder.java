@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 
+/**
+ * Jackson-friendly version of {@link Item} in an order. Unimportant details (e.g. tag and cost) are omitted.
+ */
 public class JsonAdaptedItemOrder {
 
     private final String name;

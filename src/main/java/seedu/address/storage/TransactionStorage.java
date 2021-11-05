@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyTransactionList;
 
 /**
- * Represents a storage for list of {@link seedu.address.model.order.TransactionRecord}.
+ * Represents a storage for list of {@link seedu.address.model.TransactionList}.
  */
 public interface TransactionStorage {
 

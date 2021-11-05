@@ -9,8 +9,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.model.item.Item;
+import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 
+/**
+ * Jackson-friendly version of {@link Order}.
+ */
 class JsonAdaptedOrder {
 
     private final List<JsonAdaptedItemOrder> itemOrders = new ArrayList<>();

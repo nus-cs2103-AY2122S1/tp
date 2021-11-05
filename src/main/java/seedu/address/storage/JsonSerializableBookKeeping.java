@@ -8,6 +8,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.BookKeeping;
 import seedu.address.model.ReadOnlyBookKeeping;
 
+/**
+ * An Immutable BookKeeping that is serializable to JSON format.
+ */
 @JsonRootName(value = "bookKeeping")
 public class JsonSerializableBookKeeping {
     private Double revenue;

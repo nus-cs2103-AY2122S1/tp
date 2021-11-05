@@ -8,6 +8,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyBookKeeping;
 import seedu.address.model.ReadOnlyTransactionList;
 
+/**
+ * Represents a storage for {@link seedu.address.model.BookKeeping}.
+ */
 public interface BookKeepingStorage {
 
     /**
