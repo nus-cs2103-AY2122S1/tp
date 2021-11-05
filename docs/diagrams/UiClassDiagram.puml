@@ -19,6 +19,10 @@ Class ReminderWindow
 Class ReminderLessonCard
 }
 
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
 package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
@@ -58,6 +62,7 @@ ReminderWindow --|> ExternalWindow
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
+CenterPanel ..> Model
 CenterPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
