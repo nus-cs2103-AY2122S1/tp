@@ -1,25 +1,20 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.group.Group;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Note;
-import seedu.address.model.student.Student;
-import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.StudentBuilder;
-
-import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 import static seedu.address.testutil.TypicalNote.TYPICAL_STUDENT_NOTE;
 import static seedu.address.testutil.TypicalNote.TYPICAL_STUDENT_NOTE_ALT;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 public class NoteCommandTest {
     private Model model = new ModelManager();

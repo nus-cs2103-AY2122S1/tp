@@ -1,14 +1,14 @@
 package seedu.address.model.student;
 
-import seedu.address.testutil.NoteBuilder;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalNote.TYPICAL_STUDENT_NOTE;
 import static seedu.address.testutil.TypicalNote.TYPICAL_STUDENT_NOTE_ALT;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.NoteBuilder;
 
 public class NoteTest {
 
