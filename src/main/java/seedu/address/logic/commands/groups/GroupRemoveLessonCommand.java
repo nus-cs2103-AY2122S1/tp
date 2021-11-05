@@ -8,6 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 
 public class GroupRemoveLessonCommand extends Command {
@@ -45,6 +46,8 @@ public class GroupRemoveLessonCommand extends Command {
 
         model.setGroup(toRemoveFrom, removedLesson);
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
+        model.setGroupToView(removedLesson);
+        model.setViewingType(ViewingType.GROUP);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

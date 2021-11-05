@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -97,6 +98,21 @@ public class UniquePersonList implements Iterable<Person>, UniqueIdMapper<Person
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Removes the groupId from all persons
+     * @param toRemove id to remove
+     */
+    public void cleanUpGroupId(UniqueId toRemove) {
+        List<Person> persons = new ArrayList<>(internalList);
+        for (int i = 0; i < persons.size(); i++) {
+            Person current = persons.get(i);
+            if (current.containsGroupId(toRemove)) {
+                Person withoutId = current.removeGroupId(toRemove);
+                internalList.set(i , withoutId);
+            }
+        }
     }
 
     /**

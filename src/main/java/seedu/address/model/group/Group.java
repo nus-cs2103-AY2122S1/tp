@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -79,6 +81,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     /**
      * Constructs a group by copying details from the given group
+     *
      * @param toCopy to copy
      */
     public Group(Group toCopy) {
@@ -87,6 +90,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
         this.assignedTaskIds.addAll(toCopy.assignedTaskIds);
         this.assignedPersonIds.addAll(toCopy.assignedPersonIds);
         this.lessonList = toCopy.lessonList;
+        id.setOwner(this);
     }
 
     public GroupName getName() {
@@ -147,8 +151,17 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
+    @Override
     public Set<UniqueId> getAssignedTaskIds() {
         return Collections.unmodifiableSet(assignedTaskIds);
+    }
+
+    /**
+     * Returns only an empty unmodifiable map since class does not support task completion
+     */
+    @Override
+    public Map<UniqueId, Boolean> getTasksCompletion() {
+        return Collections.unmodifiableMap(new HashMap<>());
     }
 
     /**
@@ -157,9 +170,18 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
      * @param newAssignedTaskIds the new assigned task id list
      * @return new Person instance with the updated assigned task id list
      */
+    @Override
     public Group updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
         return new Group(name, id, newAssignedTaskIds, assignedPersonIds, lessonList);
+    }
+
+    /**
+     * Returns an identical copy of the Group since class does not support task completion
+     */
+    @Override
+    public Group updateTasksCompletion(Map<UniqueId, Boolean> newTasksCompletion) {
+        return new Group(name, id, assignedTaskIds, assignedPersonIds, lessonList);
     }
 
     /**
@@ -173,8 +195,23 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
         return new Group(name, id, assignedTaskIds, ids, lessonList);
     }
 
-    public List<Group> getFilteredListFromModel(Model model) {
-        return model.getFilteredGroupList();
+    @Override
+    public String getNameInString() {
+        return name.toString();
+    }
+
+    @Override
+    public boolean isSameTaskAssignable(TaskAssignable otherTaskAssignable) {
+        if (!(otherTaskAssignable instanceof Group)) {
+            return false;
+        }
+
+        return isSameGroup((Group) otherTaskAssignable);
+    }
+
+    @Override
+    public boolean isInModel(Model model) {
+        return model.hasGroup(this);
     }
 
     /**
@@ -193,7 +230,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     @Override
     public boolean canAssignLesson(Lesson lesson) {
-        return !lesson.doLessonsOverlap(lesson);
+        return !lessonList.doesLessonOverlap(lesson);
     }
 
     @Override
@@ -258,9 +295,6 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
-
-        return builder.toString();
+        return String.valueOf(getName());
     }
 }

@@ -5,9 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -22,7 +25,7 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
  *
  * @see Task#isSameTask(Task)
  */
-public class UniqueTaskList implements Iterable<Task> {
+public class UniqueTaskList implements Iterable<Task>, UniqueIdMapper<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
@@ -108,6 +111,11 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
+    }
+
+    @Override
+    public Set<Task> getFromUniqueIds(Set<UniqueId> ids) {
+        return UniqueIdMapper.<Task>getFromUniqueIdsAndItemList(ids, internalList);
     }
 
     @Override

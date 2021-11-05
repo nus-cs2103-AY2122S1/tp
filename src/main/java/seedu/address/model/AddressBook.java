@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
@@ -208,7 +209,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeGroup(Group key) {
+        UniqueId groupId = key.getId();
         groups.remove(key);
+        assert !groups.contains(key); // assert removal first, before cleaning up.
+        persons.cleanUpGroupId(groupId);
     }
 
     public UniqueIdMapper<Person> getPersonMapper() {
@@ -220,13 +224,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public PersonWithDetails getPersonWithDetails(Person person) {
-        Set<Group> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds());
-        return new PersonWithDetails(person, groupsPersonIsIn);
+        Set<GroupWithDetails> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds()).stream()
+                .map(this::getGroupWithDetails)
+                .collect(Collectors.toSet());
+        Set<Task> tasksPersonHas = tasks.getFromUniqueIds(person.getAssignedTaskIds());
+        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas);
     }
 
     public GroupWithDetails getGroupWithDetails(Group group) {
         Set<Person> studentsInGroup = persons.getFromUniqueIds(group.getAssignedPersonIds());
-        return new GroupWithDetails(group, studentsInGroup);
+        Set<Task> tasksInGroup = tasks.getFromUniqueIds(group.getAssignedTaskIds());
+        return new GroupWithDetails(group, studentsInGroup, tasksInGroup);
     }
 
     //// util methods
