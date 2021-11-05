@@ -36,10 +36,16 @@ title: Developer Guide
     * [RedoCommand](#redocommand)
     * [HelpCommand](#helpcommand)
 * [Guides](#guides)
-* [Requirement](#appendix-a-requirements)
-* [Manual Testing](#appendix-b-instructions-for-manual-testing)
-  * [Feature Testing](#feature-testing)
-  * [UI Testing](#ui-testing)
+* [Appendix](#appendix-a-requirements)
+  * [Requirements](#appendix-requirements)
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [Manual Testing](#appendix-instructions-for-manual-testing)
+    * [Feature Testing](#feature-testing)
+    * [UI Testing](#ui-testing)
     
 --------------------------------------------------------------------------------------------------------------------
 
@@ -587,7 +593,9 @@ The following links to guides on: Documentation, Logging, Testing, Configuration
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Appendix A: Requirements
+
 
 ### Product scope
 
@@ -900,6 +908,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Feature Testing
 
+***
+
 #### Launch and shutdown
 
 1. Initial launch
@@ -917,6 +927,8 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Add Student
 
 1. Adding a student while all students are being shown
@@ -924,22 +936,29 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Delete Student
 
 1. Deleting a student while all students are being shown
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Result display remains the same.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message. Result display remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: 
+      1. `delete`
+      2. `delete x` (where x is larger than the list size)<br>
+         Expected: Similar to previous.
+
 
 1. _{ more test cases to come …​ }_
+
+***
 
 #### Tag Student
 
@@ -948,67 +967,192 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Get Personal Detail
 
 1. _{ more test cases to come …​ }_
 
+***
 
 #### Edit Personal Detail
 
 1. _{ more test cases to come …​ }_
 
+***
 
 #### Add Grade
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Edit Attendance
 
-1. _{ more test cases to come …​ }_
+1. Marking a single student's attendance while all students are being shown in list and no student is being viewed
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   2. Test case: `attendance 1 ses/1 att/1` <br>
+      Expected: First student's first Studio session is now marked as having attended
+   3. Test case: `attendance 1 att/1 ses/1` <br>
+      Expected: First student's first Studio session is now marked as having attended
+   4. Test case: `attendance 1 ses/0 att/1` <br>
+      Expected: No student's attendance is modified. Error details are shown in the status message indicating invalid session. Result display remains the same.
+   5. Test case: `attendance 1 ses/0 att/-1` <br>
+      Expected: No student's attendance is modified. Error details are shown in the status message indicating invalid attendance. Result display remains the same.
+   6. Test case: `attendance 0 ses/1 att/1` <br>
+      Expected: No student's attendance is modified. Error details are shown in the status message indicating invalid index. Result display remains the same.
+   7. Other incorrect attendance commands to try:
+      1. `attendance` (Missing index, session and attendance)
+      2. `attendance 1` (Missing session and attendance)
+      3. `attendance 1 att/1` (Missing session)
+      4. `attendance 1 ses/1` (Missing attendance)
+      5. `attendance x ses/y att/z` (Any case where x is an integer greater than the size of the student list, y is an integer out of the range of 0 and 12 inclusive or z is not 0 or 1)
+
+
+2. Marking a single student's attendance while all students are shown in list and a student is being viewed with no tabs open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display still being viewed in the same state with no tabs open after execution of the command regardless if the execution of the command is successful or not.
+
+
+3. Marking a single student's attendance while all students are shown in list and a student is being viewed with the "View Participation" open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Participation" in the result display.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Participation" tab open.
+
+
+4. Marking a single student's attendance while all students are shown in list and a student is being viewed with the "View Test Score" open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Test Score" in the result display.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
+   
+***
 
 #### Edit Participation
 
-1_{ more test cases to come …​ }_
+1. Updating a single student's participation score while all students are being shown in list and no student is being viewed
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   2. Test case: `participation 1 ses/1 add/1` <br>
+      Expected: First student's first Studio session's participation score is 1 greater than it was previously. If it was 500 previously, it would still be 500.
+   3. Test case: `participation 1 add/1 ses/1` <br>
+      Expected: First student's first Studio session's participation score is 1 greater than it was previously. If it was 500 previously, it would still be 500.
+   4. Test case: `participation 1 ses/0 add/1` <br>
+      Expected: No student's participation is modified. Error details are shown in the status message indicating invalid session. Result display remains the same.
+   5. Test case: `participation 1 ses/1 add/-501` <br>
+      Expected: No student's participation is modified. Error details are shown in the status message indicating invalid participation. Result display remains the same.
+   6. Test case: `participation 0 ses/1 add/1` <br>
+      Expected: No student's participation is modified. Error details are shown in the status message indicating invalid index. Result display remains the same.
+   7. Other incorrect participation commands to try:
+       1. `participation` (Missing index, session and attendance)
+       2. `participation 1` (Missing session and attendance)
+       3. `participation 1 add/1` (Missing session)
+       4. `participation 1 ses/1` (Missing participation)
+       5. `participation x ses/y add/z` (Any case where x is an integer greater than the size of the student list, y is an integer out of the range of 0 and 12 inclusive or z is either greater than 500, or smaller than -501)
+
+
+2. Updating a single student's participation while all students are shown in list and a student is being viewed with no tabs open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display still being viewed in the same state with no tabs open after execution of the command regardless if the execution of the command is successful or not.
+
+
+3. Updating a single student's participation while all students are shown in list and a student is being viewed with the "View Participation" open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Participation" in the result display.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Participation" tab open.
+
+
+4. Updating a single student's participation while all students are shown in list and a student is being viewed with the "View Test Score" open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Test Score" in the result display.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
+
+
+***
 
 #### View student information
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Show Grade
 
 1. _{ more test cases to come …​ }_
+
+***
 
 #### Visualize all Grades
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Filter Academy Directory
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Sort Student List
 
-1. _{ more test cases to come …​ }_
+1. Sorting the student list while all students are shown in and a student is being viewed with no tabs open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   2. Test case: `sort attr/name ord/asc` <br>
+      Expected: Student list is now sorted by name in ascending order.
+   3. Test case: `sort ord/asc attr/name` <br>
+      Expected: Student list is now sorted by name in ascending order.
+   4. Test case: `sort attr/name ord/as` <br>
+      Expected: Student list's sorting state remains unchanged. Error details are shown in the status message indicating invalid order. Result display remains the same.
+   5. Test case: `sort attr/nam ord/asc` <br>
+      Expected: Student list's sorting state remains unchanged. Error details are shown in the status message indicating invalid attribute. Result display remains the same.
+   6. Other incorrect sort commands to try:
+      1. `sort` (Missing attribute and order)
+      2. `sort attr/name` (Missing order)
+      3. `sort ord/asc`
+      4. `sort attr/[ATTRIBUTE] ord/[ORDER]` (Any case where [ATTRIBUTE] is not any of the valid attributes, case-insensitive or [ORDER] is not 'asc' or 'desc', case-insensitive)
+
+
+2. Sorting the student list while all students are shown in list and a student is being viewed with no tabs open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display still being viewed in the same state with no tabs open after execution of the command regardless if the execution of the command is successful or not.
+
+
+3. Sorting the student list while all students are shown in list and a student is being viewed with the "View Participation" open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Participation" in the result display.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Participation" tab open.
+
+
+4. Sorting the student list while all students are shown in list and a student is being viewed with the "View Test Score" open
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list. View a single student using `view 1`. Click on "View Test Score" in the result display.
+   2. The test cases mirror `Test 1`, with the student being viewed in the result display in the state with no tabs open after successful execution of the command. If the execution of the command fails, the result display still shows the student with the "View Test Score" tab open.
+
+
+***
 
 #### List All Students
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Clear Student List
 
 1. _{ more test cases to come …​ }_
+
+***
 
 #### Undo Changes
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Redo Changes
 
 1. _{ more test cases to come …​ }_
 
+***
+
 #### Help
 
 1. _{ more test cases to come …​ }_
+
+***
 
 #### Saving data
 
@@ -1017,6 +1161,8 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases to come …​ }_
+
+***
 
 ### UI Testing
 

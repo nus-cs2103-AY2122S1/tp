@@ -45,7 +45,7 @@ public abstract class SortableInformation implements Information {
 
         public static final String MESSAGE_CONSTRAINTS = "Please use a valid order as follows: \n"
                 + "'asc'"
-                + "'desc";
+                + " or 'desc'";
 
         public static final List<String> VALID_ORDER = Arrays.asList("ASC", "DESC");
 
