@@ -31,6 +31,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -175,11 +176,13 @@ public class EditCommand extends Command {
         //currently do not allow modifications to period via edit person descriptor
         //exception would be during tests.
         Set<Period> updatedPeriod = editPersonDescriptor.getPeriod().orElse(staffToEdit.getAbsentDates());
+        Schedule sameSchedule = staffToEdit.getSchedule();
 
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles,
+        Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles,
                 updatedSalary, updatedStatus, updatedTags, updatedPeriod);
-
+        updatedPerson.setSchedule(sameSchedule);
+        return updatedPerson;
     }
 
     @Override
@@ -214,6 +217,7 @@ public class EditCommand extends Command {
         private Status status;
         private Set<Tag> tags;
         private Set<Period> absentPeriods;
+        private Schedule schedule;
 
         public EditPersonDescriptor() {
         }
@@ -232,6 +236,7 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setTags(toCopy.tags);
             setPeriod(toCopy.absentPeriods);
+            setSchedule(toCopy.schedule);
         }
 
         /**
@@ -247,6 +252,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setSchedule(Schedule schedule) {
+            this.schedule = schedule;
+        }
+
+        public Optional<Schedule> getSchedule() {
+            return Optional.ofNullable(schedule);
         }
 
         public void setPhone(Phone phone) {
@@ -365,7 +378,8 @@ public class EditCommand extends Command {
                     && getRoles().equals(e.getRoles())
                     && getSalary().equals(e.getSalary())
                     && getStatus().equals(e.getStatus())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getSchedule().equals(e.getSchedule());
         }
     }
 }

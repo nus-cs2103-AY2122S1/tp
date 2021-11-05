@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
@@ -12,8 +11,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class SetRoleReqCommandParser {
 
-    public static final ParseException DEFAULT_ERROR = new ParseException(
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRoleReqCommand.HELP_MESSAGE));
 
     /**
      * Parses the given {@code String} of arguments in the context of the SetRoleReqCommand
@@ -26,7 +23,7 @@ public class SetRoleReqCommandParser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ROLE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ROLE) || !argMultimap.getPreamble().isEmpty()) {
-            throw DEFAULT_ERROR;
+            throw new ParseException(SetRoleReqCommand.getHelpMessage());
         }
 
         Set<String> roleReqList = ParserUtil.parseRoleRequirements(argMultimap.getAllValues(PREFIX_ROLE));

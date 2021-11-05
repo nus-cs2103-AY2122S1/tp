@@ -31,7 +31,7 @@ public class DeleteShiftCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a shift from the staff identified "
             + "by the index number used in the displayed staff list or the name of staff. Date input is used "
             + "to indicate the duration of the shift to delete. "
-            + SHIFT_PERIOD_PARSING_DEFAULT + "\n"
+            + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] or "
             + "[" + PREFIX_DASH_NAME + " NAME] "

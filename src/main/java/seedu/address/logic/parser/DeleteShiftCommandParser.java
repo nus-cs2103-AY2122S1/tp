@@ -59,11 +59,13 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
                 dates = extractTupleDates(argMultimap);
 
             }
-            shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteShiftCommand.MESSAGE_USAGE), pe);
         }
+
+        shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
+
         if (dates[0].isAfter(dates[1])) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DATES_IN_WRONG_ORDER));

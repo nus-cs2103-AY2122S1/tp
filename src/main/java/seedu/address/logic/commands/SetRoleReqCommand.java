@@ -23,7 +23,7 @@ public class SetRoleReqCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_ROLE + "kitchen-1 bartender-1\n"
             + COMMAND_WORD + " " + PREFIX_ROLE + "floor-3\n\n"
             + "Currently, the role requirements per shift are:\n"
-            + RoleReqStorage.getRoleReqs();
+            + "%s";
 
     private final Set<String> roleReqList;
 
@@ -48,4 +48,9 @@ public class SetRoleReqCommand extends Command {
         return new CommandResult("Role requirements successfully updated:\n\n"
                 + RoleReqStorage.getRoleReqs());
     }
+
+    public static String getHelpMessage() {
+        return String.format(HELP_MESSAGE, RoleReqStorage.getRoleReqs());
+    }
+
 }
