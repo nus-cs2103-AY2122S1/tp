@@ -92,7 +92,7 @@ public class EditCommand extends Command {
         //Check if the user edits any field.
         //Different from the one in EditCommandParser: at this stage user can enter an input
         //that is identical to the existing field.
-        if (studentToEdit.equals(editedStudent)) {
+        if (studentToEdit.isIdenticalStudent(editedStudent)) {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
