@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at contHACKS level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Conthacks implements ReadOnlyConthacks {
@@ -72,7 +72,7 @@ public class Conthacks implements ReadOnlyConthacks {
     }
 
     /**
-     * Sorts the contacts in the address book by alphabetical order.
+     * Sorts the contacts in contHACKS by alphabetical order.
      */
     public void sortConthacks() {
         persons.sortList();
@@ -90,11 +90,19 @@ public class Conthacks implements ReadOnlyConthacks {
     }
 
     /**
-     * Returns true if a lesson with the same identity as {@code ModuleLesson} exists in contHACKS.
+     * Returns true if a lesson with the same identity as {@code moduleLesson} exists in contHACKS.
      */
     public boolean hasLesson(ModuleLesson moduleLesson) {
         requireNonNull(moduleLesson);
         return moduleLessons.contains(moduleLesson);
+    }
+
+    /**
+     * Returns true if a lesson that clashes with {@code moduleLesson} exists in contHACKS.
+     */
+    public boolean hasLessonClashingWith(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return moduleLessons.containsLessonClashingWith(moduleLesson);
     }
 
     /**

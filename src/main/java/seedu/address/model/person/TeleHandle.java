@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 /**
- * Represents a Person's Telegram handle in the address book.
+ * Represents a Person's Telegram handle in contHACKS.
  * Guarantees: immutable; is valid as declared in {@link #isValidTeleHandle(String)}
  */
 public class TeleHandle {

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a LessonCode in the address book.
+ * Represents a LessonCode in contHACKS.
  * Guarantees: immutable; name is valid as declared in {@link #isValidLessonCode(String)}
  */
 public class LessonCode {

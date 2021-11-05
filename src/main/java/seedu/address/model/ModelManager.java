@@ -15,7 +15,7 @@ import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of contHACKS data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -111,6 +111,12 @@ public class ModelManager implements Model {
     public boolean hasModuleLesson(ModuleLesson moduleLesson) {
         requireNonNull(moduleLesson);
         return conthacks.hasLesson(moduleLesson);
+    }
+
+    @Override
+    public boolean hasModuleLessonClashingWith(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return conthacks.hasLessonClashingWith(moduleLesson);
     }
 
     @Override

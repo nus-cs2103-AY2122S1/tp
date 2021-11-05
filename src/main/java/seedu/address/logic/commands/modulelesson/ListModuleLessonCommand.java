@@ -7,6 +7,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
+/**
+ * Lists all module lessons in contHACKS to the user.
+ */
 public class ListModuleLessonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all lessons";
