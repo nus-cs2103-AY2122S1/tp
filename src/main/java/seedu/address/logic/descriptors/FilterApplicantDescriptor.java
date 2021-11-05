@@ -78,4 +78,5 @@ public class FilterApplicantDescriptor {
                 getPositionTitle().map(title -> "Position: " + title).orElse("")
                 + getApplicationStatus().map(status -> "Status: " + status).orElse(""));
     }
+
 }

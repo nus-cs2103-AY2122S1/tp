@@ -42,20 +42,20 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editApplicantDescriptor.setName(ApplicantParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editApplicantDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editApplicantDescriptor.setPhone(ApplicantParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editApplicantDescriptor.setEmail(ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editApplicantDescriptor.setAddress(ApplicantParserUtil
+            editApplicantDescriptor.setAddress(ParserUtil
                     .parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-            positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
+            positionTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
             editApplicantDescriptor.setTitle(positionTitle);
         }
 
@@ -64,7 +64,6 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
         }
 
         return new EditApplicantCommand(index, editApplicantDescriptor);
-
     }
 
 }
