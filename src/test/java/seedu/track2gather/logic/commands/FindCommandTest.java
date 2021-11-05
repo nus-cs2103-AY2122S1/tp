@@ -24,8 +24,6 @@ import seedu.track2gather.model.person.predicates.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -56,6 +54,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+
         String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -66,6 +67,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
+        Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTrack2Gather(), new UserPrefs());
+
         String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
