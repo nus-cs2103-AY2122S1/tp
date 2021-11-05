@@ -3,12 +3,16 @@ package seedu.address.commons.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.PasswordCommand;
-
 /**
  * Utility class for checking password validity
  */
 public class PasswordUtil {
+
+    public static final int MIN_PASSWORD_LENGTH = 8;
+    public static final int MAX_PASSWORD_LENGTH = 32;
+    public static final String SLASH = "/";
+    public static final String HYPHEN = "-";
+    public static final String SPACE = " ";
 
     /**
      * Checks if the given password satisfies the requirements.
@@ -18,19 +22,19 @@ public class PasswordUtil {
      * @return Boolean value of the check result.
      */
     public static boolean isValidPassword(String password) {
-        Pattern slash = Pattern.compile(PasswordCommand.SLASH);
-        Pattern hyphen = Pattern.compile(PasswordCommand.HYPHEN);
-        Pattern space = Pattern.compile(PasswordCommand.SPACE);
+        Pattern slash = Pattern.compile(SLASH);
+        Pattern hyphen = Pattern.compile(HYPHEN);
+        Pattern space = Pattern.compile(SPACE);
 
         Matcher hasSlash = slash.matcher(password);
         Matcher hasHyphen = hyphen.matcher(password);
         Matcher hasSPace = space.matcher(password);
 
-        return password.length() >= PasswordCommand.MIN_PASSWORD_LENGTH
-                && password.length() <= PasswordCommand.MAX_PASSWORD_LENGTH
+        return password.length() >= MIN_PASSWORD_LENGTH
+                && password.length() <= MAX_PASSWORD_LENGTH
                 && !hasSlash.find()
                 && !hasHyphen.find()
-                && (PasswordCommand.ALLOWSPACE || !hasSPace.find());
+                && !hasSPace.find();
     }
 
 }
