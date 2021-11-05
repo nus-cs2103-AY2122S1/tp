@@ -556,7 +556,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * PHONE_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
     
 * ##### EMAIL_ADDRESS `e/`
-    * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by the `@` character.
+    * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by the `@` character. (i.e. ***local part***@***domain part***)
     * **Local part specifications**:
         * Your local part must **start with** and **end with** an alphanumeric character.
         * You can separate alphanumeric characters with any one of these characters: `+_.-`. (i.e. `John-a-bc`)
@@ -712,10 +712,10 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
     * An INTERVIEW parameter matches with an existing stored ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***.
     * All the keywords that you provide as an INTERVIEW parameter must comply with the displayed format (e.g. 20 Mar 2021, 10:30).
     * For example:
-        * A `2021` input can match with applicants that have their ***Interview***s in year 2021.
-        * A `20:21` input can match with applicants that have their ***Interview***s at time 20:21 on any date.
+        * A `2021` input can match with applicants that have their ***Interview***s in the year 2021.
+        * A `20:21` input can match with applicants that have their ***Interview***s at the time 20:21 on any date.
         * A `mar` input can match with applicants that have their ***Interview***s in March.
-        * However, a `9:30` input cannot be matched with the ***Interview*** displayed as `20 Mar 2021, 09:30` (as 9:30 is not the whole word displayed, but 09:30 is).
+        * However, a `9:30` input cannot be matched with the ***Interview*** displayed as `20 Mar 2021, 09:30` (as 9:30 is not the whole word that is displayed, but 09:30 is).
 
 * ##### NOTES `nt/`
     * A NOTES parameter matches with an existing stored ***Notes*** only if the **entire** input is **contained** in the ***Notes***.
