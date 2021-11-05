@@ -52,7 +52,6 @@ We hope you find this User Guide helpful in using ClassMATE!
 
 ## Quick Start
 
-
 1. Ensure you have Java `11` or above installed in your Computer. (Go to [this website](https://codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) and follow the instructions to download and install Oracle JDK 11, which is _basically_ Java 11.)
 1. Download the latest `classmate.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-1/tp/releases).
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
@@ -108,12 +107,13 @@ Once you have attempted these commands, you're ready to go!
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* If you add parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`), they will be ignored.<br>
+* If you add parameters for commands that do not take in parameters (such as `help`, `liststu`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
 ## Features
+
 Here, you can find instructions on how to use ClassMATE's various features. The features are divided into three main subsections,
 each covering different subsections, namely the Tutorial Class Features, Student features and Tutorial Group Features. Each
 subsection will provide you with an overview of the section, followed by the individual commands' formats, instructions on how to use them,
