@@ -548,8 +548,8 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 **MSS**
 
-1.  User requests to list persons
-2.  CONNECTIONS show a list of persons
+1.  User requests to list people
+2.  CONNECTIONS show a list of people
 3.  User requests to delete a specific person in the list
 4.  CONNECTIONS delete the person
 
@@ -571,8 +571,8 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 **MSS**
 
-1.  User requests to list persons
-2.  CONNECTIONS show a list of persons
+1.  User requests to list people
+2.  CONNECTIONS show a list of people
 3.  User provides his/her index in the list along with the replacement information
 4.  CONNECTIONS reflect the edits that were made
 
@@ -737,8 +737,8 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 **MSS**
 
-1.  User requests to list persons
-2.  CONNECTIONS show a list of persons
+1.  User requests to list people
+2.  CONNECTIONS show a list of people
 3.  User provides his index in the list along with the tags to be added
 4.  CONNECTIONS add those tags from that entry
 
@@ -766,8 +766,8 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 
 **MSS**
 
-1.  User requests to list persons
-2.  CONNECTIONS show a list of persons
+1.  User requests to list people
+2.  CONNECTIONS show a list of people
 3.  User provides his index in the list along with the tags to be removed
 4.  CONNECTIONS remove those tags from that entry
 
@@ -902,7 +902,7 @@ Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will n
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 people without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
@@ -943,9 +943,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all people are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all people using the `list` command. Multiple people in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
