@@ -171,31 +171,13 @@ public class CommandBox extends UiPart<Region> {
     private String compareParts(StringBuilder stringBuilder, String[] suggestionParts, String[] parameterParts) {
         for (String suggestionPart : suggestionParts) {
             boolean isEntered = false;
+            SuggestionPredicate suggestionPredicate = new SuggestionPredicate(suggestionPart);
             for (String parameterPart : parameterParts) {
-                boolean isOneCharPrefix = parameterPart.length() > 1 && parameterPart.charAt(1) == '/'
-                        && suggestionPart.substring(0, 2).equals(parameterPart.substring(0, 2));
-                boolean isTwoCharPrefix = parameterPart.length() > 2 && parameterPart.charAt(2) == '/'
-                        && suggestionPart.substring(0, 3).equals(parameterPart.substring(0, 3));
-                boolean isIndex = (suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
-                        || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
-                        && parameterPart.matches("\\d+");
-                boolean isImportOrExport = (suggestionPart.equals("CSV_NAME") || suggestionPart.equals("FILE_NAME"))
-                        && parameterPart.matches("\\w+");
-                boolean isLateKeyword = parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE");
-                boolean isOptionalOneCharPrefix = suggestionPart.charAt(0) == '['
-                        && parameterPart.length() > 1
-                        && parameterPart.charAt(1) == '/'
-                        && suggestionPart.substring(1, 3).equals(parameterPart.substring(0, 2));
-                boolean isOptionalTwoCharPrefix = suggestionPart.charAt(0) == '['
-                        && parameterPart.length() > 2
-                        && parameterPart.charAt(2) == '/'
-                        && suggestionPart.substring(1, 4).equals(parameterPart.substring(0, 3));
-
-                if (isOneCharPrefix || isTwoCharPrefix || isIndex || isImportOrExport || isOptionalOneCharPrefix
-                        || isOptionalTwoCharPrefix) {
+                boolean isMatched = suggestionPredicate.test(parameterPart);
+                if (isMatched && !suggestionPredicate.isLateKeyword(parameterPart)) {
                     isEntered = true;
                     break;
-                } else if (isLateKeyword) {
+                } else if (isMatched && suggestionPredicate.isLateKeyword(parameterPart)) {
                     isEntered = true;
                 }
             }
