@@ -63,7 +63,7 @@ public class FindCommandTest {
         // different module -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
-    
+
     @Test
     public void execute_codePredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 6);
