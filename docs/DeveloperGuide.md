@@ -144,7 +144,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Participant` or `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -286,7 +286,7 @@ we can simply add a new `commandType` case for `FilterEventCommand` in `AddressB
 
 Since this feature requires Managera to take in user input and determine if the filter is by:
 
-1. Date only; or
+1. Date only, or
 2. Date and Time
 
 A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses user's 
@@ -303,7 +303,7 @@ event list. When the command is executed, the `model` will filter the `FilteredL
 #### Implementation Rationale
 
 With considerations to how the `Event` class is implemented, some events do not have time associated to them.
-We feel that since all `Event` have a date associated through the `EventDate` class, filtering should be done primarily 
+We feel that since all `Events` have a date associated through the `EventDate` class, filtering should be done primarily 
 through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
 optional criteria for filtering.
 
