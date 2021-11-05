@@ -12,18 +12,18 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Stats information should be shown to the user. */
-    private final boolean showStats;
+    private final boolean isStats;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showStats, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isStats, boolean isExit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showStats = showStats;
-        this.exit = exit;
+        this.isStats = isStats;
+        this.isExit = isExit;
     }
 
     /**
@@ -38,12 +38,12 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public boolean isShowStats() {
-        return showStats;
+    public boolean isStats() {
+        return isStats;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 
     @Override
@@ -59,13 +59,13 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && exit == otherCommandResult.exit
-                && showStats == otherCommandResult.showStats;
+                && isExit == otherCommandResult.isExit
+                && isStats == otherCommandResult.isStats;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showStats, exit);
+        return Objects.hash(feedbackToUser, isStats, isExit);
     }
 
 }

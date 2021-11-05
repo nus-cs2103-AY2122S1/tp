@@ -45,11 +45,11 @@ public class ListCommand extends Command {
         model.updateTabOptionsAnimeList(predicate);
         if (statusToMatch == null) {
             model.setCurrentTab(TabOption.TabOptions.ALL);
-        } else if (statusToMatch.toString().equals("towatch")) {
+        } else if (statusToMatch.status == Status.WatchStatus.TOWATCH) {
             model.setCurrentTab(TabOption.TabOptions.TOWATCH);
-        } else if (statusToMatch.toString().equals("watching")) {
+        } else if (statusToMatch.status == Status.WatchStatus.WATCHING) {
             model.setCurrentTab(TabOption.TabOptions.WATCHING);
-        } else if (statusToMatch.toString().equals("finished")) {
+        } else if (statusToMatch.status == Status.WatchStatus.FINISHED) {
             model.setCurrentTab(TabOption.TabOptions.FINISHED);
         }
         return new CommandResult(
