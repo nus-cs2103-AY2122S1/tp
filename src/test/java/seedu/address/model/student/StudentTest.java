@@ -3,18 +3,15 @@ package seedu.address.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
+
+import java.util.Locale;
 
 public class StudentTest {
 
@@ -58,6 +55,19 @@ public class StudentTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSameStudent(editedBob));
+    }
+
+    @Test
+    public void isSameName() {
+        //different name -> returns false
+        assertFalse(AMY.isSameName(BOB));
+
+        //different student, same name -> return true
+        Student editedBob = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        assertTrue(AMY.isSameName(editedBob));
+
+        //other student provided is null -> return false
+        assertFalse(AMY.isSameName(null));
     }
 
     @Test
