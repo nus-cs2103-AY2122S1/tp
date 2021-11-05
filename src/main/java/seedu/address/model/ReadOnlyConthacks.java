@@ -5,7 +5,7 @@ import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
- * Unmodifiable view of Conthacks
+ * Unmodifiable view of ContHACKS.
  */
 public interface ReadOnlyConthacks {
 

@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.model.lessoncode.LessonCode;
 
 /**
- * Represents a module code that a Person is taking in the address book.
+ * Represents a module code that a Person is taking in contHACKS.
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {

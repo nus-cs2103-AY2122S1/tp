@@ -31,7 +31,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in contHACKS.
  */
 public class EditPersonCommand extends Command {
 

@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
 
+/**
+ * Deletes module lesson in contHACKS.
+ */
 public class DeleteModuleLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = "deletec: "
