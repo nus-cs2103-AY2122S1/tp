@@ -26,7 +26,7 @@ else "subject parameter is present"
     Model -> Model : filter lesson list by subject
 
 else "both grade and subject parameters are present"
-    Model -> Model : filter student list by subject, filter lesson list by subject and grade
+    Model -> Model : filter student list by subject,\nfilter lesson list by subject and grade
 end
 
 Model --> FilterCommand

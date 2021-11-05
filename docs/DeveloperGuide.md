@@ -131,7 +131,11 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 <center>
-<img alt="Interactions Inside the Logic Component for the `delete 1` Command" src="images/DeveloperGuideImage/DeleteSequenceDiagram.png"/>
+<img alt="Interactions Inside the Logic Component for the `delete 1` Command 0" src="images/DeveloperGuideImage/DeleteSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="Interactions Inside the Logic Component for the `delete 1` Command 1" src="images/DeveloperGuideImage/DeleteSequenceDiagram1.png" width="650"/>
 </center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -260,7 +264,11 @@ With all checks done, `Lesson` object will be added into the `Model` of TuitiONE
 The following sequence diagram shows how add lesson operation works:
 
 <center>
-<img alt="AddLessonSequenceDiagram" src="images/DeveloperGuideImage/AddLessonSequenceDiagram.png"/>
+<img alt="AddLessonSequenceDiagram0" src="images/DeveloperGuideImage/AddLessonSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="AddLessonSequenceDiagram1" src="images/DeveloperGuideImage/AddLessonSequenceDiagram1.png" width="650"/>
 </center>
 
 :information_source: **Note:** The lifelines for `AddLessonCommandParser` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -351,7 +359,7 @@ The following sequence diagram shows how the delete lesson operation works:
 </center>
 
 <center>
-<img alt="DeleteLessonSequenceDiagram1" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram1.png"/>
+<img alt="DeleteLessonSequenceDiagram1" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram1.png" width="650"/>
 </center>
 
 <div markdown="span" class="alert alert-info">
@@ -442,7 +450,7 @@ The following sequence diagram shows how the enroll lesson operation works:
 </center>
 
 <center>
-<img alt="EnrollLessonSequenceDiagram1" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram1.png"/>
+<img alt="EnrollLessonSequenceDiagram1" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram1.png" width="650"/>
 </center>
 
 The following activity diagram summarizes what
@@ -495,7 +503,7 @@ Given below is an example usage scenario and how the unenroll operation works.
 <ins>Step 1:</ins>
 
 User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a
-lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
+lesson `l1` that has two students (`John` and `Alice`). The object state diagram is as such:
 
 <center>
 <img alt="UnenrollState0" src="images/DeveloperGuideImage/UnenrollState0.png"/>
@@ -509,10 +517,10 @@ The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, t
 internal steps.
 
 * The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
-* The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l`.
-* The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
-* If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
-* Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
+* The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l1`.
+* The command executor checks if the student, `Alice`, is enrolled in the lesson `l1`.
+* If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l1`.
+* Subsequently, the lesson `l1` will be removed from the set of lessons in the student object `Alice`.
 * Relevant UI and Storage procedures are run to complete the execution in full.
 
 The final object state diagram is as such:
@@ -521,7 +529,7 @@ The final object state diagram is as such:
 <img alt="UnenrollState1" src="images/DeveloperGuideImage/UnenrollState1.png"/>
 </center>
 
-Notice how there is no longer any association between the student `Alice` and lesson `l`.
+Notice how there is no longer any association between the student `Alice` and lesson `l1`.
 
 The following sequence diagram shows how the unenroll operation works:
 
@@ -530,7 +538,7 @@ The following sequence diagram shows how the unenroll operation works:
 </center>
 
 <center>
-<img alt="UnenrollSequenceDiagram1" src="images/DeveloperGuideImage/UnenrollSequenceDiagram1.png"/>
+<img alt="UnenrollSequenceDiagram1" src="images/DeveloperGuideImage/UnenrollSequenceDiagram1.png" width="650"/>
 </center>
 
 The following activity diagram summarizes what happens when a user executes the unenroll lesson command:
@@ -605,7 +613,7 @@ The following sequence diagram shows how the filter operation works:
 </center>
 
 <center>
-<img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png"/>
+<img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png" width="650"/>
 </center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
