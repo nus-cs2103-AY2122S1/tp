@@ -2,7 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.address.testutil.PathUtil.addToPath;
+import static seedu.address.testutil.TypicalBookkeeping.getTypicalBookkeeping;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
+import static seedu.address.testutil.TypicalOrders.getTypicalTransactionList;
 
 import java.nio.file.Path;
 
@@ -11,8 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Inventory;
+import seedu.address.model.ReadOnlyBookKeeping;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.ReadOnlyTransactionList;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,16 +31,16 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonInventoryStorage jsonInventoryStorage = new JsonInventoryStorage(getTempFilePath("ab"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        JsonBookKeepingStorage bookKeepingStorage = new JsonBookKeepingStorage(getTempFilePath("bookKeeping"));
-        JsonTransactionStorage transactionStorage = new JsonTransactionStorage(getTempFilePath("transactions"));
+        JsonInventoryStorage jsonInventoryStorage =
+                new JsonInventoryStorage(addToPath(testFolder, "ab"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(addToPath(testFolder, "prefs"));
+        JsonBookKeepingStorage bookKeepingStorage =
+                new JsonBookKeepingStorage(addToPath(testFolder, "bookKeeping"));
+        JsonTransactionStorage transactionStorage =
+                new JsonTransactionStorage(addToPath(testFolder, "transactions"));
         storageManager = new StorageManager(jsonInventoryStorage, userPrefsStorage,
                 transactionStorage, bookKeepingStorage);
-    }
-
-    private Path getTempFilePath(String fileName) {
-        return testFolder.resolve(fileName);
     }
 
     @Test
@@ -48,6 +55,11 @@ public class StorageManagerTest {
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
+    }
+
+    @Test
+    public void getUserPrefsFilePath() {
+        assertNotNull(storageManager.getUserPrefsFilePath());
     }
 
     @Test
@@ -66,6 +78,43 @@ public class StorageManagerTest {
     @Test
     public void getInventoryFilePath() {
         assertNotNull(storageManager.getInventoryFilePath());
+    }
+
+    @Test
+    public void bookKeepingReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonBookKeepingStorage} class.
+         * More extensive testing of Bookkeeping saving/reading is done in {@link JsonBookkeepingStorageTest} class.
+         */
+        BookKeeping original = getTypicalBookkeeping();
+        storageManager.saveBookKeeping(original);
+        ReadOnlyBookKeeping retrieved = storageManager.readBookKeeping().get();
+        assertEquals(original, new BookKeeping(retrieved));
+    }
+
+    @Test
+    public void getBookKeepingFilePath() {
+        assertNotNull(storageManager.getBookKeepingPath());
+    }
+
+    @Test
+    public void transactionReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonTransactionStorage} class.
+         * More extensive testing of TransactionStorage saving/reading is done in
+         * {@link JsonTransactionStorageTest} class.
+         */
+        TransactionList original = getTypicalTransactionList();
+        storageManager.saveTransactionList(original);
+        ReadOnlyTransactionList retrieved = storageManager.readTransactionList().get();
+        assertEquals(original, new TransactionList(retrieved));
+    }
+
+    @Test
+    public void getTransactionFilePath() {
+        assertNotNull(storageManager.getTransactionFilePath());
     }
 
 }
