@@ -1301,7 +1301,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
-    1. Test case: Modify an entry in `./data/tuitione.json` that conforms to the constraints mentioned in the application. Here is a summary of some critical constraints:<br>
+    1. Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that conforms to the constraints mentioned in the application. Here is a summary of some critical constraints:<br>
 
        :information_source: **Note:** 
        
@@ -1309,18 +1309,20 @@ testers are expected to do more *exploratory* testing.
 
        * Particulars in a `lesson` object must conform to the constraints of the application.
 
-       * The field `lessonCodes` in a `student` represents the `Lessons` the student is enrolled in an encoded form. A lesson can be converted to its encoded form using the details in a lesson and creating a string with the format `subject-grade-day-startTime`. A `lessonCode` of `"Math-P4-Wed-1800"` represents a json `lesson` of:
+       * The field `lessonCodes` in a `student` represents the `Lessons` the student is enrolled in an encoded form.<br>
+         A `lesson` can be converted to its encoded form by creating a string with the format `subject-grade-day-startTime`.<br>
+         A `lessonCode` of `"Math-P4-Wed-1800"` represents a json `lesson` object of (`price` can be of any amount that meets the constraints):
          ``` json
          {
            "subject" : "Math",
            "grade" : "P4",
            "startTime" : "1800",
            "day" : "Wed",
-           "price" : 15.9 # can be any amount here that meets the price constraints
+           "price" : 15.9
          }
          ```
-         Do note once again that enrolling a student using the data storage must fulfill the enrollment constraints.
-       <br> See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the remaining constraints present.<br>
+         Do note once again that enrolling a student using the data storage must fulfil the enrollment constraints.<br>
+         See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html#adding-a-student-add) for the remaining constraints present.<br>
        Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
 
     1. Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
