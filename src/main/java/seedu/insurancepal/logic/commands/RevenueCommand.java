@@ -54,7 +54,7 @@ public class RevenueCommand extends Command {
                 personToEdit.getAppointment(), personToEdit.getClaims());
 
         if (!editedPerson.getRevenue().isValidResultingRevenue()) {
-            throw new CommandException((MESSAGE_ADD_REVENUE_FAIL));
+            throw new CommandException(String.format(MESSAGE_ADD_REVENUE_FAIL, personToEdit));
         }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
