@@ -29,8 +29,7 @@ entire students or classes in order to change a few details.
   
 * **Implement `RemoveStudent` feature**: Designed and created `RemoveStudentCommand`, `RemoveStudentCommandParser`. (Pull request [\#58](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/58))
   * What it does: Allows user to remove an existing student from a tuition class in **TutAssistor**
-  * Justification:  This is more convenient for the user as now they do not have to delete and recreate
-  * a tuition class when a student drops out of a class.
+  * Justification:  This is more convenient for the user as now they do not have to delete and recreate a tuition class when a student drops out of a class.
   * Highlights:
   
 * **Refactor Timeslot class**: Refactor Timeslot class to use Java `LocalTime` and `Date` for class timings instead of`String`. (Pull request [\#125](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/125))
@@ -48,16 +47,18 @@ repeating similar commands multiple times.
 
 * **Testing**: Create tests for the edit, delete commands and their related classes to increase coverage. (Pull request)
 
-  <div style="page-break-after: always;"></div>
+
 #### Contributions to the User Guide
 Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary.(Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
 
 #### Contributions to the Developer Guide
 Added the implementation details of edit commands (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
+Added UML diagrams for `RemoveStudent` command (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
 
 <div style="page-break-after: always;"></div>
 
 #### Contributions to the team-based tasks
+* Proposed the idea for TutAssistor
 * Proposed the feature to enable command shortcuts for long commands
 * Proposed the idea of input history navigation feature to improve the design of TutAssistor to model a CLI application
 * Enabled status checks and approvals for all PRs to prevent CI failures for the team's repository

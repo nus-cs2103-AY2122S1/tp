@@ -214,7 +214,7 @@ Step5: The complete timetable is displayed to user through the `UI` component.
 The following activity diagram summarizes what happens when a user executes a "timetable" command:
 ![TimetableCommand Activity Diagram](images/TimetableCommandActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Size of timetable:**
 
@@ -248,19 +248,36 @@ Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the re
 Users are able to navigate through their previously entered String inputs from the Command Box in the UI, using the up and down arrow keys.
 This is facilitated by the `InputHistory` class.
 
+### [Developed] Editing a Student
+Users can edit a student by editing the following fields: `Name`, `Phone`, `Email` and `Address`.
+This is implemented using the `EditCommand`, `EditCommandParser` classes.
+
+#### Current Implementation
+The `EditCommand` receives an index that indicates the student to be edited and an
+editable `EditStudentDescriptor` class which consists of the updated fields of the student.
+The student is then updated with the help of the following methods:
+
+* `Student#sameStudent(Student)` 
+
+Given below is an example usage scenario of how an `edit` command is executed.
+#### Steps
+Step 1: The user enters `edit 1 n/Tom p/98989898` command.
+
+
 ### [Developed] Editing Tuition Classes
 Users can edit tuition classes by editing the following fields: limit, name and timeslot of a class. 
 This is implemented using the `EditClassCommand`, `EditClassDescriptor` classes.
 
+#### Current Implementation 
 The `EditClassCommand` receives an index that indicates the class to be edited and an 
 editable `EditClassDescriptor` class which consists of the updated fields of the class. 
-The tuition class is then updated with the help of the following operations: 
+The tuition class is then updated with the help of the following methods: 
 
 * `TuitionClass#sameClassDetails()` - Checks if any field of the tuition class has been updated. 
 * `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken by another class.
 
-Given below is an example usage scenario and an `editclass` command is executed.
-
+Given below is an example usage scenario of how an `editclass` command is executed.
+#### Steps
 Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
 
 Step 1.1 The `EditClassCommand` class will first check if any field of the tuition class has been updated.
@@ -275,6 +292,115 @@ Step 3: It will proceed to update the class tag of the students enrolled in the 
 `Timeslot` of the updated class.
 
 Step 4: Finally, it replaces the existing class with the updated class in the database.
+
+
+### [Developed] Deleting Students
+This feature allows students to be deleted using the `deletestudent` or `del` command.
+This is facilitated by the `DeleteStudentCommand` and `DeleteStudentCommandParser` classes.
+
+#### Current Implementation
+The `DeleteStudentCommandParser` parses the input from user to ensure that the student indices are valid. Then,
+students are removed from the database with the help of the following methods:
+
+* `ModelManager#getStudent(Student)` - Retrieves the `Student` indicated by its index from `UniqueStudentList`
+
+Given below is an example usage of how a `DeleteStudentCommand` is executed.
+
+#### Steps
+Step 1: The user enters `deletestudent 1 2` command.
+
+Step 2: The `DeleteStudentCommandParser` will parse the student indices to ensure that they are valid.
+Additionally, it removes any duplicates among the student indices.
+A `DeleteStudentCommand` object with the student indices as arguments is constructed.
+
+Step 3: The `DeleteStudentCommand` is executed. Student indices - 1 and 2, are used to retrieve the students by calling the `ModelManager#getTuitionClass(Index)` method.
+
+Step 6: `CommandResult` is returned informing the user of the students that have been deleted.
+
+### [Developed] Deleting Tuition Classes
+This feature allows tuition classes to be removed using the `deleteclass` or `delc` command.
+This is facilitated by the `DeleteClassCommand` and `DeleteClassCommandParser` classes.
+
+#### Current Implementation
+The `DeleteClassCommandParser` parses the input from user to ensure that the class indices are valid. Then,
+classes are removed from the database with the help of the following methods:
+
+* `ModelManager#getTuitionClass(Index)` - Retrieves the `TuitionClass` indicated by its index from `UniqueTuitionList`
+* `Student#removeClass(TuitionClass)` - Removes the class identified by an internal id and the class tag from the enrolled students
+* `ModelManager#deleteTuition(TuitionClass)` - Removes the tuition class from `UniqueTuitionList`.
+
+Given below is an example usage of how a `DeleteClassCommand` is executed.
+
+#### Steps
+Step 1: The user enters `deleteclass 1` command.
+
+Step 2: The `DeleteClassCommandParser` will parse the class index to ensure that it is valid.
+ 
+A `DeleteClassCommand` object with the class index as arguments is constructed.
+
+Step 3: The `DeleteClassCommand` is executed. Class index - 1, is used to retrieve the class by calling the `ModelManager#getTuitionClass(Index)` method.
+
+Step 4: `Student#removeClass(TuitionClass)` is called to remove the Tuition class using the id from the all the students. 
+It also removes the class tag for all the students by using the `ClassName` and unique `TimeSlot` of the tuition class.
+
+Step 5: `ModelManager#deleteTuition(TuitionClass)` to delete the tuition class and update the tuitions list accordingly.
+
+Step 6: `CommandResult` is returned informing the user of the classes that have been deleted.
+
+#### Activity Diagram
+
+The user flow is shown in the *Activity Diagram* below.<br>
+<p align="center">
+  <img src="images/DeleteActivityDiagram.png">
+</p>
+
+### [Developed] Removing Students from Tuition Classes
+This feature allows students enrolled in existing classes to be removed using student indices and a class index using the `remove` command.
+This is facilitated by the `RemoveStudentCommand` and `RemoveStudentCommandParser` classes.
+
+#### Current Implementation
+The `RemoveStudentCommandParser` parses the input from user to ensure that the indices are valid. Then, 
+students are removed from the respective tuition class with the help of the following methods:
+
+* `TuitionClass#containsStudent(Student)` - Checks if the student exists in the class before removing
+* `TuitionClass#removeStudent(Student)` - Removes an existing student from a class
+* `RemoveStudentCommand#updateInvalidStudents(Student)` - Updates the list of invalid students who do not exist in the class.
+
+Given below is an example usage of how a `RemoveStudentCommand` is executed.
+
+#### Sequence Diagram
+
+The following sequence diagram shows the interactions between the components when the `RemoveStudentCommand` is executed.<br>
+![Ui](images/RmStudentSequenceDiagram.png)
+
+#### Steps
+Step 1: The user enters `remove si/1 4 tc/1` command.
+
+Step 2: The `RemoveStudentCommandParser` will parse the student indices and class index to ensure that they are valid. 
+Additionally, it removes any duplicates among the student indices. A `RemoveStudentCommand` object with the student indices and class index as arguments is constructed.
+
+Step 3: The `RemoveStudentCommand` is executed. Student indices - 1 and 2, are used to retrieve the unique student names using the `UniqueStudentList`.
+
+Step 4: `TuitionClass#containsStudent(Student)` is called to confirm that the student exists in the class. 
+
+Step 5: If the student exists, the student is removed from the class using TuitionClass#removeStudent(Student). The tuition class is also removed the particular student using
+`Student#removeClass(TuitionClass)`. Otherwise, the names of the invalid students are tracked using `RemoveStudentCommand#updateInvalidStudents(Student)`
+
+Step 6: `CommandResult` is returned informing the user of both the students that have been removed successfully and the students who could not be 
+removed as they do not exist in the tuition class.
+
+
+#### Design considerations
+
+**Aspect: Whether to allow users to remove single or multiple students at once:**
+
+* **Alternative 1 (current choice):** Allows multiple students to be removed.
+    * Pros: More efficient for users to remove students from tuition classes.
+    * Cons: More bug-prone due to parsing errors or duplicate indices. This is later resolved by providing more specific instructions in user guide and detailed command feedback in TutAssistor.
+
+* **Alternative 2:** Allows only one student to be removed.
+    * Pros: Easy to implement and reduced possibility of parsing errors.
+    * Cons: Users who wish to mass-update class enrollment will find it inefficient.
 
 ### [Developed] Adding Students to Existing Tuition Classes
 
@@ -306,7 +432,7 @@ Valid students who are not added due to tuition class size limit or who have bee
 Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled ito show the `ClassName` and
 `Timeslot` of the class.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Whether to allow users to add students using names:**
 
@@ -381,7 +507,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
