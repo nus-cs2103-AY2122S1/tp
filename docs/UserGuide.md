@@ -58,23 +58,37 @@ We hope you find this User Guide helpful in using ClassMATE!
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-annotated.png)
-1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-   * **`liststu`** : Lists all students.
+1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. 
+   Check out some examples in the [Tutorial](#CLI Tutorial)
+1. Refer to the [Features](#Features) below for details of each command.
 
-   * **`addcg c/G06 s/Tuesday 12pm-2pm, Friday 12pm-2pm`** : Adds a tutorial class with classCode `G06`.
-    
-   * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
+## CLI Tutorial
 
-   * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
+In this section, you will familiarize yourself with the use of CLI to facilitate your experience when using ClassMATE.
+All commands would be typed in the **Command-Line Input** located at the top of the user interface as shown in the image below.
 
-   * **`clear`** : Deletes all students.
+![Command Line Input](images/CommandLineInput.png)
 
-   * **`exit`** : Exits the app.
-1. Refer to the [Features](#features) below for details of each command.
+Once you have familiarised yourself with the layout of the application, try out some example commands!
 
+Some example commands you can try:
+* **`liststu`** : Lists all students. All students currently stored in ClassMATE will be displayed in the **Student Panel**.
 
-### Command Features
+* **`addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00pm to 4:00pm`**: Adds a tutorial class with the code `G06`. The **Tutorial Class Panel**
+  should reflect the updated list of tutorial classes including your new class, `G06`.
+
+* **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
+  The **Student Panel** Should reflect the updated list of students including your new student, `John Doe`.
+
+* **`deletestu 3`**: Deletes the 3rd student shown in the current list.
+
+* **`clear`** : Deletes all data from ClassMATE.
+
+* **`exit`** : Exits the app.
+
+Once you have attempted these commands, you're ready to go!
+
+### Command Format
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
@@ -99,15 +113,34 @@ We hope you find this User Guide helpful in using ClassMATE!
 
 </div>
 
+## Features
+Here, you can find instructions on how to use ClassMATE's various features. The features are divided into three main subsections,
+each covering different subsections, namely the Tutorial Class Features, Student features and Tutorial Group Features. Each
+subsection will provide you with an overview of the section, followed by the individual commands' formats, instructions on how to use them,
+examples of use and the expected outcome of executing these commands.
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page, which directs you to this user guide.
 
 ![help message](images/helpMessage.png)
 
 Entering format: `help`
 
 ## Student Commands
+
+This part of the guide covers all the commands you can use to manage student information! 
+
+These features include the ability to:
+1. Add new students
+1. Edit and existing student
+1. View a student's details
+1. Delete a student
+1. List all students
+1. Find students by name
+1. Add class participation marks
+1. Removing class participation marks
+1. Delete all students
 
 ### Adding a student: `addstu`
 
@@ -272,6 +305,15 @@ This command deletes **ALL** students and is irreversible :warning:
 
 ## Tutorial Class Commands
 
+This section covers all the commands you can use to manage information pertaining to tutorial classes! 
+
+Features include the ability to:
+1. Add a tutorial class
+1. View all students in a tutorial class
+1. List all tutorial classes
+1. Find a tutorial class by its class code
+1. Delete a tutorial class
+
 ### Adding a tutorial class : `addc`
 
 Adds a tutorial class to ClassMATE.
@@ -297,7 +339,7 @@ Examples:
 
 ![viewing a class](images/viewc.png)
 
-Views a class in ClassMATE, as shown above
+Displayes a class and its students in ClassMATE, as shown above.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
 `viewc` highlights the class chosen, and filters out only students in the class!
@@ -505,4 +547,8 @@ Action | Format, Examples
 ## Glossary
 
 **Java 11** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
-**JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).3
+**JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
+**CLI** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following
+visual prompts from the program.
+**GUI** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with
+a program through graphical icons.
