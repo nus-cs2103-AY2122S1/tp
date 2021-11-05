@@ -35,8 +35,9 @@ public class AddToOrderCommandTest {
     }
 
     @Test
-    public void constructor_nullItem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor() {
+        // EP: null parameters
+        assertThrows(NullPointerException.class, () -> new AddToOrderCommand(null));
     }
 
     @Test
