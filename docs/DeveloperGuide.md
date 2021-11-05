@@ -700,6 +700,45 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
    Use case ends.
 
+**Use case: UC8 Create a lab record**
+
+**MSS**
+
+1. CS2100 TA requests to create a new lab record
+2. ProgrammerError requests for lab details 
+3. CS2100 TA specifies the lab name and total score
+4. ProgrammerError creates a lab record for every student
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given lab name is not unique or lab score < 0
+  * 3a.1 ProgrammerError shows an error message. 
+  Use case resumes at 2
+
+Use case ends.
+
+**Use case: UC9 Edit a lab record**
+
+**MSS**
+
+1. CS2100 TA requests to  <ins>view a particular student's record using a show command (UC3) <ins/>
+2. ProgrammerError show the student's record
+3. CS2100 TA specifies lab number and actual score or total score
+4. ProgrammerError updates the student's record
+
+Use case ends.
+
+**Extensions**
+
+* 3a. The given lab score < 0 or actual score > total score 
+    * 3a.1 ProgrammerError shows an error message. 
+* Use case resumes at 2
+
+Use case ends.
+
+
 {More to be added}
 
 ### Non-Functional Requirements
