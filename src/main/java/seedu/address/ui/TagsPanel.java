@@ -42,7 +42,7 @@ public class TagsPanel extends UiPart<Region> {
         tagList.addListener((ListChangeListener<Tag>) change -> {
             while (change.next()) {
                 for (Tag tag: change.getRemoved()) {
-                    logger.fine(tag.getName() + "was removed from the list!");
+                    logger.fine(tag.getName() + "was removed from the tag list!");
                     tags.getChildren().remove(tagLabels.remove(tag));
                 }
 
