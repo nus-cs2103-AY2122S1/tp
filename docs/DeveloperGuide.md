@@ -5,11 +5,6 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -817,11 +812,7 @@ The sequence diagram below shows the process for the usage scenario as described
       1. Overloading the `edit` command, which already accepts many parameters and modifiers in its
          command format, could make it much more confusing to use, especially for newer users.
       2. Harder to implement, as many existing dependencies could be affected.   
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -887,7 +878,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                                       | color-code my contacts                                       | can differentiate between the tags, and it looks nicer                         |
 | `*`      | Responsible FA                             | be reminded of clashes in my appointments                    | will not lose any potential clients                                            |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -1320,8 +1310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2f1. FAST shows an error message to the user that the maximum tag length is 20 characters.
     
       Use case ends.
-
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
@@ -1364,16 +1353,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+      
 
 ### Adding a Client
 
@@ -1389,12 +1377,11 @@ testers are expected to do more *exploratory* testing.
    4. **Other incorrect add commands to try**: `add n/Matthew p/98523146... e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew... p/98523146 e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt...@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12...` (where ... represents string that exceeds the character limit). <br> 
       **Expected**: Similar to previous (in Point 3).
 
-<div markdown="span" class="alert alert-primary">
-:information: 
-Character limit:
-1) Name - 0 to 50 characters
-2) Phone - 3 to 20 digits
-3) Email - max 100 characters (at least 2 for domain portion, before @ symbol)
+<div markdown="span" class="alert alert-primary">:information_source:
+**Character limits:** <br>
+1) Name - 0 to 50 characters <br>
+2) Phone - 3 to 20 digits <br>
+3) Email - max 100 characters (at least 2 for domain portion, before @ symbol) <br>
 4) Address - max 100 characters
 </div>
 
