@@ -26,54 +26,35 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
   
    2.2 [Try it yourself!](#22-try-it-yourself)
 
-3. [Features](#3-features)
+3. <details open><summary><a href="#3-features">Features</a></summary>
+   3.1 <a href="#31-add-studenttuition-class">Add student/class</a><br>
+   3.2 <a href="#32-view-studenttuition-class">View student/class</a><br>
+   3.3 <a href="#33-edit-studenttuition-class">Edit student/class</a><br>
+   3.4 <a href="#34-delete-studenttuition-class">Delete student/class</a><br>
+   3.5 <a href=“#35-addremove-student-from-class”>Move student</a><br>
+   3.6 <a href=“36-add-remark-to-studenttuition-class”>Add remark</a><br>
+   3.7 <a href=“#37-find-studenttuition-class”>Find students/classes</a><br>
+   3.8 <a href=“#38-list-all-studentstuition-classes”>List students/classes</a><br>
+   3.9 <a href=“#39-sort-tuition-classes-sort--s”>Sort classes</a><br>
+   3.10 <a href=“#310-view-timetable-timetable--tt”>View timetable</a><br>
+   3.11 <a href=“#311-view-todays-classes-today--td”>View today's classes</a><br>
+   3.12 <a href=“#312-view-help-help--h”>View help</a><br>
+   3.13 <a href=“#313-navigate-input-history”>Navigate Input History</a><br>
+   3.14 <a href=“#314-clear-data-clear”>Clear data</a><br>
+   3.15 <a href=“#315-exit-the-app-exit”>Exit the program</a><br>
+   3.16 <a href=“#316-track-payment-coming-in-v20”>Track payment `coming in v2.0`</a><br>
+</details>
 
-   3.1 [Add student/class](#31-add-studenttuition-class)
+4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary>
+   4.1 <a href=“#41-name”>Name</a><br>
+   4.2 <a href=“#42-phone-number”>Phone Number</a><br>
+   4.3 <a href=“#43-email”>Email</a><br>
+   4.4 <a href=“#44-timeslot”>Timeslot</a><br>
+   4.5 <a href=“#45-index”>Index</a><br>
+</details>
 
-   3.2 [View student/class](#32-view-studenttuition-class)
-
-   3.3 [Edit student/class](#33-edit-studenttuition-class)
-
-   3.4 [Delete student/class](#34-delete-studenttuition-class)
-
-   3.5 [Move student](#35-addremove-student-from-class)
-
-   3.6 [Add remark](#36-add-remark-to-studenttuition-class)
-
-   3.7 [Find students/classes](#37-find-studenttuition-class)
-
-   3.8 [List students/classes](#38-list-all-studentstuition-classes)
-
-   3.9 [Sort classes](#39-sort-tuition-classes-sort--s)
-
-   3.10 [View timetable](#310-view-timetable-timetable--tt)
-
-   3.11 [View today's classes](#311-view-todays-classes-today--td)
-
-   3.12 [View help](#312-view-help-help--h)
-
-   3.13 [Navigate Input History](#313-navigate-input-history)
- 
-   3.14 [Clear data](#314-clear-data-clear)
-
-   3.15 [Exit the program](#315-exit-the-app-exit)
-   
-   3.16 [Track payment `coming in v2.0`](#316-track-payment-coming-in-v20)
-
-5. [Additional Command Format Information](#4-additional-command-format-information)
-   
-   4.1 [Name](#41-name)
-   
-   4.2 [Phone Number](#42-phone-number)
-   
-   4.3 [Email](#43-email)
-  
-   4.4 [Timeslot](#44-timeslot)
-
-   4.5 [Index](#45-index)
-
-6. [FAQ](#5-faq)
-7. [Command Summary](#6-command-summary)
+5. [FAQ](#5-faq)
+6. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
