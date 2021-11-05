@@ -213,16 +213,26 @@ Executing any of the commands in this section will bring you to the students int
               <ul> 
                 <li>Must be present.</li>
                 <li>Case-sensitive.</li>
-                <li>TAB does not allow adding students with the same name.</li>
+                <li>TAB does not allow adding students with the same case-sensitive name.</li>
+                <li>If there are multiple name inputs prefixed with <code>n/</code>, TAB only accepts the last name input.</li>
               </ul>
             </td>
-            <td><code>n/Jane</code></td>
+            <td><ul>
+              <li><code>n/Jane</code></li>
+              <li><code>n/Jane n/John</code> - name will be <code>John</code>.</li>
+            </ul></td>
         </tr>
         <tr>
             <td>Address</td>
             <td><code>a/</code></td>
-            <td>Must be present.</td>
-            <td><code>a/Blk 123A, Serangoon Ave 3, #04-56</code></td>
+            <td><ul>
+              <li>Must be present.</li>
+              <li>If there are multiple address inputs prefixed with <code>a/</code>, TAB only accepts the last address input.</li>
+            </ul></td>
+            <td><ul>
+              <li><code>a/Blk 123A, Serangoon Ave 3, #04-56</code></li>
+              <li><code>a/Blk 123A, Serangoon Ave 3, #04-56 a/Clementi</code> - address will be <code>Clementi</code>.</li>
+            </ul></td>
         </tr>
         <tr>
             <td rowspan=4 id="student-contact">Contact</td>
@@ -231,9 +241,11 @@ Executing any of the commands in this section will bring you to the students int
             <td><ul>
               <li><strong>At least one</strong> of the contact fields must be present.</li>
               <li>Minimum 3 numeric characters.</li>
+              <li>If there are multiple phone inputs, TAB only accepts the last phone input.</li>
             </ul></td>
             <td><ul>
               <li><code>p/91234567</code></li>
+              <li><code>p/91234567 p/81234567</code> - phone will be <code>81234567</code></li>
               <li><code>p/</code> clears the phone field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
@@ -243,7 +255,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>
               <ul>
                 <li><strong>At least one</strong> of the contact fields must be present.</li>
-                <li>Must be of the format <em>local-part@domain</em> and adhere to the following constraints:</li> 
+                <li>Must be of the format <em>local-part@domain</em> and adhere to the following constraints:
                   <ul>
                     <li>The <em>local-part</em> should only contain alphanumeric characters and these special characters <em>+_.-</em>. The <em>local-part</em> may not start or end with any special characters.</li>
                     <li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.</li>
@@ -254,11 +266,13 @@ Executing any of the commands in this section will bring you to the students int
                         <li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li>
                       </ul>
                     </li>
-                  </ul>
+                  </ul></li>
+              <li>If there are multiple email inputs, TAB only accepts the last email input.</li>
               </ul>
             </td>
             <td><ul>
               <li><code>e/jane@gmail.com</code></li>
+              <li><code>e/jane@gmail.com e/john@gmaill.com</code> - email will be <code>john@gmaill.com</code></li>
               <li><code>e/</code> clears the email field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
@@ -268,6 +282,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
             <td><ul>
               <li><code>pp/81234567</code></li>
+              <li><code>pp/81234567 pp/91234567</code> - parent phone will be <code>91234567</code></li>
               <li><code>pp/</code> clears the parent phone field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
@@ -277,6 +292,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
             <td><ul>
               <li><code>pe/john@gmail.com</code></li>
+              <li><code>pe/john@gmail.com pe/alex@gmaill.com</code> - parent email will be <code>alex@gmaill.com</code></li>
               <li><code>pe/</code> clears the parent email field, if there were any and provided the student has other contact data after this deletion.</li>
             </ul></td>
         </tr>
@@ -284,36 +300,43 @@ Executing any of the commands in this section will bring you to the students int
         <td rowspan=5>Optional</td>
             <td>School</td>
             <td><code>sch/</code></td>
-            <td>Not Applicable.</td>
+            <td>If there are multiple school inputs, TAB only accepts the last school input.</td>
             <td><ul>
               <li><code>sch/Serangoon JC</code></li>
+              <li><code>sch/SRJC sch/NYJC</code> - school will be <code>NYJC</code></li>
               <li><code>sch/</code> clears the school field, if there were any.</li>
             </ul></td>
         </tr>
         <tr>
             <td>Academic Stream</td>
             <td><code>stream/</code></td>
-            <td>Not Applicable.</td>
+            <td>If there are multiple academic stream inputs, TAB only accepts the last academic stream input.</td>
             <td><ul>
               <li><code>stream/A-Level</code></li>
+              <li><code>stream/A-Level stream/O-Level</code> - stream will be <code>O-Level</code></li>
               <li><code>stream/</code> clears the academic stream field, if there were any.</li>
             </ul></td>
         </tr>
         <tr>
             <td>Academic Level</td>
             <td><code>lvl/</code></td>
-            <td>Maximum 15 characters, including space(s).</td>
+            <td><ul>
+              <li>Maximum 15 characters, including space(s).</li>
+              <li>If there are multiple academic level inputs, TAB only accepts the last academic level input.</li>
+            </ul></td>
             <td><ul>
               <li><code>lvl/J1</code></li>
+              <li><code>lvl/J1 lvl/S2</code> - academic level will be <code>S2</code></li>
               <li><code>lvl/</code> clears the academic level field, if there were any.</li>
             </ul></td>
         </tr>
         <tr>
             <td>Remark</td>
             <td><code>r/</code></td>
-            <td>Not Applicable.</td>
+            <td>If there are multiple remark inputs, TAB only accepts the last remark input.</td>
             <td><ul>
               <li><code>r/She is weak at maclaurin series.</code></li>
+              <li><code>r/weak at series r/weak at trigo</code> - remark will be <code>weak at trigo</code></li>
               <li><code>r/</code> clears the remark field, if there were any.</li>
             </ul></td>
         </tr>
