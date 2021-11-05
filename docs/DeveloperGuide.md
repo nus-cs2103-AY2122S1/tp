@@ -399,43 +399,15 @@ not related to the `SortSupplierCommand` are abstracted away.
         * Error messages would have been confusing to select.
         * Implementation would be more difficult
 
-### Customer
-
-### Proposed alternative considerations
-
-* `CustomerList` is always sorted by date and time
-
-### Employee
-
-### Proposed alternative considerations
-
-* `EmployeeList` is always sorted by date and time
-
-### Supplier
-
-### Proposed alternative considerations
-
-* `SupplierList` is always sorted by date and time
-
-### Reserve Command
-
-#### Implementation
-
-#### Proposed alternative considerations
-
-* `ReservationList` is always sorted by date and time
-
-* `ReservationList` checks for time crash before adding a new `Reservation`
-
 ### Set Tables Command
 
 #### Implementation
 
-Set Tables command `[settables]` takes in a list of numbers as arguments and creates a TableList that is stored in the ModelManager
+Set Tables command `settables` takes in a list of numbers as arguments and creates a TableList that is stored in RHRH
 
-An AddEmployeeCommand is created through the usage of our addE command.
+A SetTablesCommand is created through the usage of our `settables` command.
 
-The process in which an Employee is added can be broken down into 2.
+The process in which a new list of tables is set can be broken down into 2.
 
 1. User input is sent into the RhrhParser and a SetTablesCommand is created.
 
@@ -449,7 +421,7 @@ Once the SetTablesCommand is created, the LogicManager will then execute the Set
 
 Finally, a success message is printed to the user saying how many tables were set
 
-##### Flow of execution
+**Flow of execution:**
 
 The activity diagram below shows the flow of execution when a user calls this command together with the details when SetTablesCommand is executed
 
@@ -474,7 +446,7 @@ During the SetTablesCommand execution:
 #### Design Considerations
 
 1. User is allowed to format the argument for table sizes as a singular table size (e.g. `2` = 1 table that accommodates 2 people) or, with an `x` for multiple tables with the same size (e.g. `10x3` = 3 tables that accommodate 10 people)
-    * This is because we find that in an actual restaurant, there will be many tables with the same sizes so this allows the user to set the tables faster without repeating the table sizes many times. Hence, the design choice is to allow for these `x` syntax.
+    * This is because we find that in an actual restaurant, there will be many tables with the same sizes so this allows the user to set the tables faster without repeating the same table sizes many times. Hence, the design choice is to allow for these `x` syntax.
 
 
 2. Table IDs will be reset to start from 1
@@ -488,11 +460,11 @@ During the SetTablesCommand execution:
 4. There is no add/remove/edit table or table list
     * Again, this is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
 
-#### Future Implementations
+**Alternatives considered:**
 
-In the future implementations, we plan to allow editing of tables and allowing the user to shift reservations to specific tables if they want to overwrite the original assigned table.
+Alternatively, we plan to allow editing of tables and allowing the user to shift reservations to specific tables if they want to overwrite the original assigned table.
 
-Checks have to be implemented to ensure that the reservations-table pairings are still valid.
+Checks would have to be implemented to ensure that the reservations-table pairings are still valid.
 
 This will allow for greater flexibility for restaurant managers where they can manually assign seats to certain reservations (e.g. Assigning a big table to a small group of VIPs even though the table space is not optimized)
 

@@ -43,7 +43,7 @@ This includes neatly storing employees, suppliers, loyal customers information a
 
 #### Review and Mentoring contributions
 
-* Reviewed 15 pull requests on GitHub
+* Reviewed 16 pull requests on GitHub
 
 * Helped to ensure issues and internal milestones are on schedule
 
@@ -53,7 +53,7 @@ This includes neatly storing employees, suppliers, loyal customers information a
 
 #### Contributions to the User Guide (UG):
 
-* Updated the section for check commands and settables command (Pull request [#73](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/73), Pull request [#121](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/121) and Pull request [#175](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/175))
+* Updated the section for CheckCommand and SetTablesCommand (Pull request [#73](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/73), Pull request [#121](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/121) and Pull request [#175](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/175))
 
 * Fixed general formatting and aesthetic issues (Pull request [#21](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/21), Pull request [#136](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/136))
 
@@ -62,4 +62,4 @@ This includes neatly storing employees, suppliers, loyal customers information a
 
 * Added all user stories and glossary (Pull request [#22](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/22))
 
-* Added section for [TBC]() command together with UML diagrams 
+* Added section for SetTablesCommand together with UML diagrams (Pull request [#213](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/213) and Pull request [#222](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/222))
