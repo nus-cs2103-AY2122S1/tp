@@ -58,16 +58,13 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavourite";
     private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
     private static final String ADD_TAGS_FEATURE_NAME = "To Add Tag(s)";
-    private static final String ADD_TAGS_FEATURE_COMMAND = "tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS]";
+    private static final String ADD_TAGS_FEATURE_COMMAND = "tag <INDEX> a/<TAG> [MORE_TAGS]";
     private static final String REMOVE_TAGS_FEATURE_NAME = "To Remove Tag(s)";
-    private static final String REMOVE_TAGS_FEATURE_COMMAND = "tag <INDEX> r/<TAG_TO_REMOVE> [MORE_TAGS]";
+    private static final String REMOVE_TAGS_FEATURE_COMMAND = "tag <INDEX> r/<TAG> [MORE_TAGS]";
     private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME = "To Add and Remove Tag(s) "
             + "Simultaneously";
-    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND = "tag <INDEX> a/<TAG_TO_ADD> "
-            + "[MORE_TAGS]";
-    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME_CONTINUATION = "";
-    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND_CONTINUATION = "    r/<TAG_TO_REMOVE"
-            + "> [MORE_TAGS]";
+    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND = "tag <INDEX> a/<TAG> [TAGS] "
+            + "r/<TAG> [TAGS]";
     private static final String IMPORT_CONTACT_CSV_FEATURE_NAME = "Import Contacts from CSV file";
     private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
     private static final String IMPORT_CONTACT_JSON_FEATURE_NAME = "Import Contacts from JSON file";
@@ -225,9 +222,6 @@ public class HelpWindow extends UiPart<Stage> {
                 REMOVE_TAGS_FEATURE_COMMAND);
         CommandDetails addAndRemoveTagsSimultaneouslyCommandDetails = new CommandDetails(
                 ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME, ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND);
-        CommandDetails addAndRemoveTagsSimultaneouslyContinuationCommandDetails = new CommandDetails(
-                ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME_CONTINUATION,
-                ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND_CONTINUATION);
         CommandDetails importContactCsvCommandDetails = new CommandDetails(IMPORT_CONTACT_CSV_FEATURE_NAME,
                 IMPORT_CONTACT_CSV_FEATURE_COMMAND);
         CommandDetails importContactJsonCommandDetails = new CommandDetails(IMPORT_CONTACT_JSON_FEATURE_NAME,
@@ -258,7 +252,6 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(addTagsCommandDetails);
         helpSectionCommandDetails.add(removeTagsCommandDetails);
         helpSectionCommandDetails.add(addAndRemoveTagsSimultaneouslyCommandDetails);
-        helpSectionCommandDetails.add(addAndRemoveTagsSimultaneouslyContinuationCommandDetails);
         helpSectionCommandDetails.add(importContactCsvCommandDetails);
         helpSectionCommandDetails.add(importContactJsonCommandDetails);
         helpSectionCommandDetails.add(exportContactCsvCommandDetails);
