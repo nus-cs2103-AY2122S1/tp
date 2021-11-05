@@ -13,7 +13,12 @@ UniqueTagList *-right-> "*" Tag
 UniqueStudentList -right-> Student
 
 Student -up-> "*" Tag
-
 Student *--> Name
 Student *--> ID
+
+note as N1
+    Other associated classes such as Group and
+    Assessment are omitted here for brevity.
+end note
+
 @enduml
