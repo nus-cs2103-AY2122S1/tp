@@ -16,7 +16,7 @@ public class ConfirmClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         List<Anime> lastShownList = model.getFilteredAnimeList();
-        while (!model.getFilteredAnimeList().isEmpty()) {
+        while (!lastShownList.isEmpty()) {
             model.deleteAnime(lastShownList.get(0));
         }
         return new CommandResult(MESSAGE_SUCCESS);

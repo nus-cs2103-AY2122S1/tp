@@ -39,29 +39,32 @@ public class GenreAddCommand extends GenreCommand {
         requireNonNull(model);
         List<Anime> lastShownList = model.getFilteredAnimeList();
 
-        if (getIndex().getZeroBased() >= lastShownList.size()) {
+        Index index = getIndex();
+        GenresDescriptor genresDescriptor = getGenresDescriptor();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
         }
 
-        Anime animeToEdit = lastShownList.get(getIndex().getZeroBased());
-        Anime editedAnime = createUpdatedAnime(animeToEdit, getGenresDescriptor());
+        Anime animeToEdit = lastShownList.get(index.getZeroBased());
+        Anime editedAnime = createUpdatedAnime(animeToEdit, genresDescriptor);
 
         model.setAnime(animeToEdit, editedAnime);
         model.updateFilteredAnimeList(PREDICATE_SHOW_ALL_ANIME);
 
         String resultMessage;
-        if (getGenresDescriptor().hasUnusedGenres() && getGenresDescriptor().hasUsedGenres()) {
+        if (genresDescriptor.hasUnusedGenres() && genresDescriptor.hasUsedGenres()) {
             resultMessage = String.format(MESSAGE_PARTIAL_SUCCESS,
-                    getGenresDescriptor().usedGenresString(),
-                    getGenresDescriptor().unusedGenresString(),
+                    genresDescriptor.usedGenresString(),
+                    genresDescriptor.unusedGenresString(),
                     editedAnime);
-        } else if (getGenresDescriptor().hasUsedGenres()) {
+        } else if (genresDescriptor.hasUsedGenres()) {
             resultMessage = String.format(MESSAGE_SUCCESS,
-                    getGenresDescriptor().usedGenresString(),
+                    genresDescriptor.usedGenresString(),
                     editedAnime);
         } else {
             resultMessage = String.format(MESSAGE_GENRE_PRESENT,
-                    getGenresDescriptor().unusedGenresString(),
+                    genresDescriptor.unusedGenresString(),
                     editedAnime);
         }
         return new CommandResult(resultMessage);
@@ -79,6 +82,7 @@ public class GenreAddCommand extends GenreCommand {
         Status status = animeToEdit.getStatus();
 
         Set<Genre> updatedGenres = new HashSet<>(animeToEdit.getGenres());
+        assert genresDescriptor.getGenres().isPresent();
         Set<Genre> genresToAdd = genresDescriptor.getGenres().get();
         Set<Genre> addedGenres = new HashSet<>();
         Set<Genre> unusedGenres = new HashSet<>();
@@ -86,8 +90,8 @@ public class GenreAddCommand extends GenreCommand {
         assert genresToAdd != null;
 
         for (Genre genreToAdd : genresToAdd) {
-            boolean genreIsAdded = updatedGenres.add(genreToAdd);
-            if (genreIsAdded) {
+            boolean isGenreAdded = updatedGenres.add(genreToAdd);
+            if (isGenreAdded) {
                 addedGenres.add(genreToAdd);
             } else {
                 unusedGenres.add(genreToAdd);

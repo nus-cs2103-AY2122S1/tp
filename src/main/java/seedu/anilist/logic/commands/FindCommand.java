@@ -6,6 +6,7 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
@@ -38,7 +39,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredAnimeList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_ANIME_LISTED_OVERVIEW, model.getFilteredAnimeList().size()));
+                String.format(Messages.MESSAGE_ANIME_LISTED_OVERVIEW,
+                        getFilteredListSize(model.getFilteredAnimeList())));
     }
 
     @Override
@@ -46,5 +48,10 @@ public class FindCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
                 && predicate.equals(((FindCommand) other).predicate)); // state check
+    }
+
+    private int getFilteredListSize(ObservableList<Anime> observableList) {
+        assert observableList != null;
+        return observableList.size();
     }
 }
