@@ -278,15 +278,20 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Note:**
+<div markdown="span" class="alert alert-primary"> :information-source: **Note:**
 
-* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
-* Schedule consists of 2 weekly timeslots
+* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from `G01` to `G99`).
+
+* Schedule consists of 2 weekly timeslots. Day of the week should be capitalized. Short form for days are also accepted (e.g. Tues for Tuesday).
+
+* Time slots in Schedules should be written in the H:MM am/pm (e.g. 12:00pm)
+
 </div>
 
 Examples:
-* `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
-* `addc c/G01 s/Monday 10am to 12pm, Thursday 10am to 12pm`
+* `addc c/G01 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
+* With short form for days: `addc c/G02 s/Tues 10:00am to 12:00pm, Fri 10:00am to 12:00pm`
+* With tags: `addc c/G06 s/Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm t/Favourite`
 
 ### Viewing a class: `viewc`
 
@@ -340,6 +345,9 @@ Entering format: `deletec INDEX`
 * Deletes the class at the specified INDEX.
 * The index refers to the index number shown in the displayed list of classes.
   The index **must be a positive integer** 1, 2, 3, …​
+* Students formerly belonging to the deleted would now be assigned to `No Class`.
+
+![deleteClass](images/deletecScreenshot.png)
 
 Examples:
 * `listc` followed by `deletec 2` deletes the 2nd class in the list of classes.
@@ -473,18 +481,18 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 atd/1 t/attentive`
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
-**List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
-**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
+**List students** | `liststu`
+**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G02 s/Tues 10:00am to 12:00pm, Fri 10:00am to 12:00pm`
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
-**Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
+**Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G01 type/OP1`
 **Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
