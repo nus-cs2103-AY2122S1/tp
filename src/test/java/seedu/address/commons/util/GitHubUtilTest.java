@@ -7,6 +7,16 @@ import org.junit.jupiter.api.Test;
 
 
 public class GitHubUtilTest {
+    @Test
+    public void getProfilePicture_validUserName_success() {
+        boolean runtimeExceptionThrown = false;
+        try {
+            GitHubUtil.getProfilePicture("jai2501");
+        } catch (RuntimeException e) {
+            runtimeExceptionThrown = true;
+        }
+        Assertions.assertFalse(runtimeExceptionThrown);
+    }
 
     @Test
     public void getProfilePicture_invalidUserName_runtimeException() {
@@ -89,4 +99,25 @@ public class GitHubUtilTest {
         Assertions.assertFalse(runtimeExceptionThrown);
     }
 
+    @Test
+    public void getUserStats_invalidUserName_runtimeException() {
+        boolean runtimeExceptionThrown = false;
+        try {
+            GitHubUtil.getUserStats("/");
+        } catch (RuntimeException e) {
+            runtimeExceptionThrown = true;
+        }
+        Assertions.assertTrue(runtimeExceptionThrown);
+    }
+
+    @Test
+    public void getUserStats_validUserName_noException() {
+        boolean runtimeExceptionThrown = false;
+        try {
+            GitHubUtil.getUserStats("jai2501");
+        } catch (RuntimeException e) {
+            runtimeExceptionThrown = true;
+        }
+        Assertions.assertFalse(runtimeExceptionThrown);
+    }
 }
