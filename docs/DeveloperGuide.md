@@ -292,17 +292,17 @@ Precondition: User passes the wrong parameters, command, or data
 
 **Extensions**
 
-* 1a. User commands Notor to display the list of groups (UC1)
+* 1a. User <u> commands Notor to display the list of groups</u> (UC1)
     * 1a1. User requests to add a person to Notor, specifying their name and optional parameters for their personal details, as well as the group they want to add them to
     * Resume usecase at 2
-* 1b. User enters the wrong parameters for their request to add person, resulting in (UC-CommandError).
+* 1b. User enters the <u> wrong parameters for their request to add person, resulting in </u> (UC-CommandError).
   * Resume usecase at 2
 
 ##### Use case: Edit Person, Tag Person, or Add/remove person to a group
 
 **MSS**
 
-1. User commands Notor to display the list of persons (UC1)
+1. User commands <u> Notor to display the list of persons </u> (UC1)
 2. User specifies a person they want to change, and informs Notor of which fields they want changed and to what values.
 3. Notor changes the fields, displaying the correct fields and a success message
 
@@ -310,14 +310,14 @@ Precondition: User passes the wrong parameters, command, or data
 
 * 2a. User tries to add person to a group that does not exist.
   * Notor informs the user that the group does not exist
-    * User decides to create the group first (UC)
+    * User decides to <u> create the group</u> first (UC)
     * Resume use case from step 1.
 
 ##### Use case: Add a note to a person
 
 **MSS**
 
-1. User commands Notor to display the list of persons (UC1)
+1. User <u> commands Notor to display the list of persons </u> (UC1)
 2. User requests to add a note to a specific person in the list
 3. Notor opens up a pop up window for the user to type the note for the person
 4. User types in their notes.
@@ -328,7 +328,7 @@ Precondition: User passes the wrong parameters, command, or data
 
 **Extensions**
 
-* 2a. User makes a mistake in their request, such as specifying a person that doesn't exist. (UC-CommandError)
+* 2a. User <u> makes a mistake in their request, such as specifying a person that doesn't exist </u> (UC-CommandError)
 * 6a. User requests to save the note to the person
   * 6a1. Notor displays a message that the note has been saved. Use case resumes at step 5 or 6
 * 6b. User requests to close the note (without saving)
