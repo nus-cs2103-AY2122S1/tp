@@ -10,13 +10,21 @@ public class PasswordCommand extends Command {
 
     public static final int MIN_PASSWORD_LENGTH = 8;
     public static final int MAX_PASSWORD_LENGTH = 32;
+    public static final String SLASH = "/";
+    public static final String HYPHEN = "-";
+    public static final String SPACE = " ";
+    public static final boolean ALLOWSPACE = false;
 
     public static final String CORRECT_PASSWORD_FORMAT =
             "Password should have "
                     + MIN_PASSWORD_LENGTH
                     + " to "
                     + MAX_PASSWORD_LENGTH
-                    + " characters and contain LETTERS, NUMBERS AND symbols from !@#$%&*()_+=|<>?{}~-[].";
+                    + " characters (inclusive) and SHOULD NOT contain "
+                    + (ALLOWSPACE ? "" : "SPACE OR ")
+                    + SLASH
+                    + " OR "
+                    + HYPHEN;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " oldPassword "
             + PREFIX_NEW_PASSWORD + " newPassword";

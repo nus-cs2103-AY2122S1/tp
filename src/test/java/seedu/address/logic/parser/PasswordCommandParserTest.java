@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
 import static seedu.address.logic.commands.PasswordCommand.MESSAGE_INVALID_PASSWORD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
@@ -17,7 +16,8 @@ public class PasswordCommandParserTest {
 
     @Test
     public void parse_repeatedFlag_failure() {
-        assertParseFailure(parser, PasswordUtil.getRepeatedFlag(validPassword, validPassword), MESSAGE_TOO_MANY_FLAGS);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, PasswordUtil.getRepeatedFlag(validPassword, validPassword), expectedMessage);
     }
 
     @Test
