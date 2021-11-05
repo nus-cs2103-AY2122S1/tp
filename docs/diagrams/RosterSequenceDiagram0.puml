@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
+participant "rp:RosterCommandParser" as RosterCommandParser LOGIC_COLOR
+participant "r:RosterCommand" as RosterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("roster 1")
+activate LogicManager
+
+LogicManager -> TuitioneParser : parseCommand\n("roster 1")
+activate TuitioneParser
+
+create RosterCommandParser
+TuitioneParser -> RosterCommandParser
+activate RosterCommandParser
+
+RosterCommandParser --> TuitioneParser
+deactivate RosterCommandParser
+
+TuitioneParser -> RosterCommandParser : parse(1)
+activate RosterCommandParser
+
+create RosterCommand
+RosterCommandParser -> RosterCommand
+activate RosterCommand
+
+RosterCommand --> RosterCommandParser : r
+deactivate RosterCommand
+
+RosterCommandParser --> TuitioneParser : r
+deactivate RosterCommandParser
+
+RosterCommandParser -[hidden]-> TuitioneParser
+destroy RosterCommandParser
+
+TuitioneParser --> LogicManager : r
+deactivate TuitioneParser
+
+ref over LogicManager, Model : RosterCommand execution
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

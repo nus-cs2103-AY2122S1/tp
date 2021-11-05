@@ -699,14 +699,14 @@ lists to only show the relevant objects.
 
 The user can execute the command `list` to get back the initial lists before the roster command.
 
-The following sequence diagram shows how the filter operation works:
+The following sequence diagram shows how the roster operation works:
 
 <center>
-<img alt="FilterSequenceDiagram0" src="images/DeveloperGuideImage/FilterSequenceDiagram0.png"/>
+<img alt="RosterSequenceDiagram0" src="images/DeveloperGuideImage/RosterSequenceDiagram0.png"/>
 </center>
 
 <center>
-<img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png" width="650"/>
+<img alt="RosterSequenceDiagram1" src="images/DeveloperGuideImage/RosterSequenceDiagram1.png" width="650"/>
 </center>
 
 <div markdown="span" class="alert alert-info">
