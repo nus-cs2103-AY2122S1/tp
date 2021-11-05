@@ -9,9 +9,9 @@ CONNECTIONS is a desktop address book application adapted from AB3. The user int
 
 Given below are my contributions to the project.
 
-* **New Feature**: FindOr
+* **New Feature**: FindAny
   * What it does: 
-    * FindOr is a command that allows users to apply an 'OR' filter with the search terms they have provided.
+    * FindAny is a command that allows users to apply an 'OR' filter with the search terms they have provided.
   * Justification:
     * "OR" search retrieves records that include either terms searched for. Using OR broadens a search and thus returns more results. 
       This way, users will be able to filter contacts with greater flexibility.
@@ -37,8 +37,8 @@ Given below are my contributions to the project.
       can have friends with the same name but unique phone numbers, I changed CONNECTIONS to check for phone 
       numbers instead to raise possible duplicate contacts.
   * Revamp Find 
-    * Find ('AND'-search) and FindOr ('OR'-search) can be applied names and/or tags.
-    * Case Sensitivity to search (Find/FindOr).
+    * Find ('AND'-search) and FindAny ('OR'-search) can be applied names and/or tags.
+    * Case Sensitivity to search (Find/FindAny).
       * Users can now opt for case-sensitive searches on Tags using the `c/` flag.
   * Wrote unit and integration tests for existing features.
     * Increase coverage from 72.15% to 72.59% (+0.43%) (Pull request [\#49]())
@@ -49,10 +49,10 @@ Given below are my contributions to the project.
       
 * **Documentation**:
   * User Guide:
-    * Documented `Upcoming Birthdays`, `Find` as well as `findOr`. (Pull request [\#95]() [\#173]())
+    * Documented `Upcoming Birthdays`, `Find` as well as `findAny`. (Pull request [\#95]() [\#173]())
   * Developer Guide:
     * Documented `Use Cases`, `Non-functional requirements` and `Glossary`. (Pull request [\#19]())
-    * Documented `find` and `findOr` (Pull request [\#101]())
+    * Documented `find` and `findAny` (Pull request [\#101]())
   <br></br>
       
 * **Community**:
