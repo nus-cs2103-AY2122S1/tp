@@ -174,6 +174,25 @@ Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you. For this tutorial, let's assume that you tutor the student(s) 
 shown in the Student Panel and that you offer the lesson(s) shown in the Lesson Panel. 
 
+### Step 1: Adding a student
+{:.no_toc}
+First, imagine a new student, John Yeo ,has just approached you for your tutoring services, and you wish to record down his students details in TutorAid so that you can
+keep track of his details and refer to them when needed. Furthermore, John Yeo has also given you the following details:
+* John's phone number: 98765432
+* John's parent's name: Mary Yeo
+* John's parent's phone number: 81234567
+
+You can then easily add his data to TutorAid by following the steps below:
+1. Key in `add -s sn/John Yeo sp/98765432 pn/Mary Yeo pp/81234567` into the command box. 
+
+> :bulb: If John did not provide you with his phone number, parent's name and parent's phone number, you can still add his student details to TutorAid
+> by keying in `add -s sn/John Yeo` into the command box, since those are optional details for you to include in the command.
+
+2. Upon pressing enter, all specified details belonging to John Yeo will be added and stored in TutorAid.
+
+Now, the Student Panel will be updated accordingly with John's details. If you do not see John's details on your screen, you can either scroll down the Student Panel
+to find his details, or enter the command `find -s John Yeo` to display only his details in the Student Panel.
+
 ### Step 4: Adding a progress note for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
