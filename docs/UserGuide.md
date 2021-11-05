@@ -9,7 +9,7 @@ title: User Guide
 ## 1. Introduction
 ![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
-NUS Mod Tracker is a **desktop app** designed for **NUS Computer Science (CS) students who are enrolled before the Academic Year 2020/2021** to **create their own academic plan**,
+NUS Mod Tracker is a **desktop app** designed for **NUS Computer Science (CS) students who are enrolled in the Academic Year 2021/2022 and onward** to **create their own academic plan**,
 as well as to **keep track of their Modular Credits(MC) and modules taken**.
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
@@ -171,13 +171,13 @@ Notes:
 Here is an image of a module in our [database](#database)<br>
 ![Module Explanation](images/ModuleExplanation.png)
 
-A module is made up of 6 components:
-* An index in the database
-* A module [code](#code) number
-* A [title](#title) 
-* A [description](#description) of the module
-* The number of [MC](#mc) that the module carries
-* The [tag(s)](#tag) that the module can be classified under
+A module is made up of 6 **components**:
+1. An index in the database
+1. A module [code](#code) number
+1. A [title](#title) 
+1. A [description](#description) of the module
+1. The number of [MC](#mc) that the module carries 
+1. The [tag(s)](#tag) that the module can be classified under
 
 A module can have 4 different colour codes:
 * A grey coloured module represents a module that is in the database but not in your [academic plan](#academic-plan)<br>
@@ -201,8 +201,9 @@ A module can have 4 different colour codes:
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the inputs to be entered by the user.<br>
-  e.g. in `add m/MODULE`, `MODULE` is a parameter which is entered by the user(such as `add m/GEQ1000` or `add m/CS2030S`).
+* Words in `lower_case` are the inputs to be followed while words in `UPPER_CASE` are the inputs to be entered by you.<br>
+  e.g. when using our [add command](#411-adding-a-module-into-the-database--add)(`add m/MODULE`),
+  you are supposed to type in`add m/` while `MODULE` is a parameter which is entered you(such as `add m/GEQ1000` or `add m/CS2030S`).
 
 * Items in square brackets are optional.<br>
   e.g. `c/CODE [tag/TAG]` can be used as `c/CS2103T tag/core` or as `c/CS2103T`.
@@ -223,7 +224,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `database`
 * Refers to NUS Mod Tracker's database.
 * Contains all the modules that is currently stored in the application locally.
-* Modules in the database can be view in the [Module List](#324-module-list)
+* Modules in the database can be viewed in the [Module List](#324-module-list)
 
 #### `academic plan`
 * Refers to modules that you have assigned with a specific semester and year.
@@ -252,7 +253,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `MC`
 * Stands for Modular Credits.
 * Represents the `module`'s MC component.
-* `MC` must be a **positive integer** from 1-20.
+* `MC` must be a **positive integer** from 0-20.
 
 #### `TAG`
 * Represents the `module`'s tag component.
@@ -291,7 +292,7 @@ The following sub-categories will explain the intended purpose for the set of fe
 
 ### 4.1 Database
 
-Database features consist of features that allows you to be able to make changes to modules that are in our database. 
+[Database](#database) features consist of features that allows you to be able to make changes to modules that are in our database. 
 Do note that these features do not directly affect the modules that are currently stored in your academic plan.
 (we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan in the [FAQ](#5-faq) section) <br>
 
@@ -330,15 +331,29 @@ Format: `list`
 
 You can search for specific module(s) in the database with our `find` command.
 
+<div markdown="span" class="alert alert-info">:information_source:
+Do take note that the format is slightly different compared to the other features!
+</div>
+
 Format: `FORMAT: find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS`
 * `KEYWORDS` refers to the words that the application will search the modules by.
-* If no optional parameters are entered, the application will search within all the modules'
-  components for matching `KEYWORDS`
+* If no optional parameters are entered, the application will search within all [components](#33-module-explanation) of the modules
+  for matching `KEYWORDS`.
 * If optional parameters are entered, the application will search within the modules'
-  specified components for matching `KEYWORDS`
+  specified components for matching `KEYWORDS`.
+
+Optional Parameter | Component to search 
+------------|-----------
+c/ | [`CODE`](#code)
+t/ | [`TITLE`](#title)
+d/ | [`DESCRIPTION`](#description)
+m/ | [`MC`](#mc)
+tag/ | [`TAG`](#tag)
+y/ | [`YEAR`](#year)
+s/ | [`SEMESTER`](#semester)
 
 Examples:
-* `find CS`is equivalent to displaying any modules that contain the word "CS" in the code, title, description, MC or tag.
+* `find CS`is equivalent to displaying any modules that contain the word "CS" in the code, title, description, MC, tag, year or semester.
 * `find c/ t/ CS GE` is equivalent to displaying any modules that contain the words "CS" or "GE" in the code or title.
 * `find c/ CS2040S` is equivalent to displaying any modules that contain the word "CS2040S" in the code.
 * `find tag/ UE` is equivalent to displaying any modules that contain the word "UE" in the tag.
@@ -352,7 +367,7 @@ Format: `edit INDEX [c/CODE] [t/TITLE] [d/DESCRIPTION] [m/MC] [tag/TAG]`
 
 * At least one of the optional fields must be provided.
 * The given value for the field(s) must be **different** from value that it is replacing.
-* For values supplied to the `CODE` field, the value must **NOT** be identical with any other module's `CODE` field in the database .
+* For values supplied to the `CODE` field, the value must **NOT** be identical with any other module's `CODE` field in the database.
 
 Parameters: [`CODE`](#code) [`TITLE`](#title) [`DESCRIPTION`](#description) [`MC`](#mc) [`TAG`](#tag)
 
@@ -364,7 +379,7 @@ Examples:
 
 ### 4.2 Academic Plan
 
-Academic Plan features consist of features that allows you to be able to create and customize your own academic plan.
+[Academic Plan](#academic-plan) features consist of features that allows you to be able to create and customize your own academic plan.
 Do note that these features are the ones that allows you to update and edit your academic plans
 (such as the visual display of which modules you have taken, as well as the progress bar for each of the University's requirements).
 
@@ -468,6 +483,9 @@ This section gives you the solutions to commonly asked questions.
 
 **Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
 **A**: First, add the module into the database using the [add](#411-adding-a-module-into-the-database--add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
+
+**Q**: Why is the module not included in the [MC Goal Progress](#325-mc-goal-progress) even though I have added it to my academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command<br>
+**A**: Make sure that the module has the appropriate tag. Also make sure that the module is colour coded in green as specified [here](#33-module-explanation). Do remember that our MC Goal Progress only takes into account the modules that you have taken.
 
 --------------------------------------------------------------------------------------------------------------------
 

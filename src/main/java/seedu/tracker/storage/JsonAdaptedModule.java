@@ -109,12 +109,7 @@ class JsonAdaptedModule {
         }
         final Description modelDescription = new Description(description);
 
-        // if (mc == null) {
-        // throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-        // Address.class.getSimpleName()));
-        // }
-
-        if (!Mc.isValidMc(mc)) {
+        if (!Mc.isValidModuleMc(mc)) {
             throw new IllegalValueException(Mc.OVERALL_MESSAGE_CONSTRAINTS);
         }
         final Mc modelMc = new Mc(mc);
