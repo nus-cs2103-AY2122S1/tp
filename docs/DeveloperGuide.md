@@ -1302,7 +1302,6 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
 
     1. Test case: Modify an entry in `./data/tuitione.json` that conforms to the constraints mentioned in the application. Here is a summary of some critical constraints:<br>
-       <div markdown="span" class="alert alert-info">
 
        :information_source: **Note:** 
        
@@ -1321,7 +1320,6 @@ testers are expected to do more *exploratory* testing.
          }
          ```
          Do note once again that enrolling a student using the data storage must fulfill the enrollment constraints.
-       </div><br>
        <br> See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html) for the remaining constraints present.<br>
        Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
 
