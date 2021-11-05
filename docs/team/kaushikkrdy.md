@@ -45,7 +45,6 @@ Given below are my contributions to the project.
         * Added documentation for employment type category:
         [\#125](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/125)
         
-    
     * Developer Guide:
         * Added partial implementation details of the `show` feature:
         [\#220](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/220)
