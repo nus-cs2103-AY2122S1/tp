@@ -5,26 +5,25 @@ title: User Guide
 
 ### About RecruitIn
 
-RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
+RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 ![Ui](images/Ui.png)
 ### About this guide
 
 This guide aims to help users get familiar with using RecruitIn's features.
-* **New users** can get started by following the steps under [Quick start](#quick-start). New users may also view
-descriptions of the usage of each component in RecruitIn under [Usages](#usages)
+* **New users** can get started by following the steps under [Quick start](#quick-start).
 * **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. A **summary** of existing features can also be viewed under [Command summary](#command-summary).
 * **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
 * Commonly addressed questions can be viewed under [FAQ](#faq). 
 
 ### Table of Contents
   * [Quick start](#quick-start)
-  * [Usages](#usages)
   * [Features](#features)
     + [Viewing help : `help`](#viewing-help--help)
     + [Adding an applicant: `add`](#adding-an-applicant-add)
     + [Editing an applicant: `edit`](#editing-an-applicant--edit)
     + [Listing all applicants : `list`](#listing-all-applicants--list)
     + [Finding an applicant : `find`](#finding-an-applicant--find)
+    + [Filtering interviews : `filter_interview`](#filtering-interviews--filter_interview)
     + [Deleting an applicant : `delete`](#deleting-an-applicant--delete)
     + [Showing search terms : `show`](#showing-search-terms--show)
     + [Marking an applicant : `mark`](#marking-an-applicant--mark)
@@ -41,8 +40,16 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. If not, you can install it from [here](https://www.oracle.com/java/technologies/downloads/).
+1. Ensure you have Java `11` or above installed in your Computer. If not, you can install it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 Download the correct version based on your operating system (e.g. Linux, macOS, Windows) and follow the Java installation instructions.
+
+![Java 11 Download](./images/JavaDownload.png)
+
+<div markdown="span" class="alert alert-info">
+
+    **:information_source: Visit the link and scroll down to find Java SE Development Kit 11 as shown above.**
+
+</div>
 
 2. Download the latest `recruitIn.jar` from [here](https://github.com/AY2122S1-CS2103T-F11-2/tp/releases/tag/v1.3b).
 Scroll down to the bottom and click on `recruitIn.jar`.
@@ -51,33 +58,69 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 4. Double-click the file to start the app. The GUI should be similar to the below image. Note how the app contains some sample data.<br>
    ![Ui](images/description.png)
-
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
    
-   * **`clear`** : Clears all sample data.
-    
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn,
-    where `98765432`is his phone number, `johnd@example.com` is his email and `3000` is his expected salary.
-    
-    * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com s/3000` : Adds an applicant named `Mary Poppins` to RecruitIn,
-    where `91131513`is her phone number, `maryp@example.com` is her email and `3000` is her expected salary.
-    
-    * **`list`** : Lists all applicants.
+   Applicant data are displayed as a list in the **Applicant Panel**.
+   ![Applicant Diagram](images/ApplicantDiagram.png)
+
+5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br><br>
+
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Type in your commands into the Command Box and press Enter to execute it.**<br>
+    * e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+    </div>
+
+   1. Use **`clear`** command to clear the existing sample data.
+   2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
+      your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
+      stated that he is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
+      education is `Bachelors` and has `4` years of experience as a teacher. <br><br>
+      Type in **`add`**`n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4` to add `John Doe` to your
+      list of applicants.
+   3. Let's also add in another applicant named `Mary Sue`. Her phone number is `91131513` and her email is `MarySue@gmail.com`. She is applying
+      for the role of a `Software Engineer` and is looking for an `Internship` with an expected salary of `3000`. Her highest level of education is `High School`
+      and has `0` years of experience as a `Software Engineer`. <br><br>
+      Type in **`add`**`n/Mary Sue p/91131513 e/MarySue@gmail.com r/Software Engineer et/Internship s/3000 l/High School y/0`.<br><br>
+      Your application should look like this:
+      ![After Adding](./images/SampleWorkflow1.png)
+   4. As an experienced recruiter, you notice that `Mary Sue` may not have the qualifications for the job as a `Software Engineer` and want to add
+      a note to remind yourself.<br><br>
+      Type in **`edit`**`2 nt/She might not have the qualifications for the job` to add the note to `Mary Sue`.<br><br>
+      Your application should look like this:
+      ![After Note](./images/SampleWorkflow2.png)
+   5. Your company then informs you that they would like to interview `John Doe` on December 11th 2021 at 10 am `2021-12-11, 10:00` and you want to remind
+      yourself that an interview has been arranged for `John Doe`.<br><br>
+      Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.<br><br>
+      Your application should look like this:
+      ![After Interview](./images/SampleWorkflow3.png)
+   6. Fast forward the time. Your company informs you that `John Doe` has
+      passed his interview and is hired.<br><br>
+      Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
+      Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
+      ![After mark](./images/SampleWorkflow4.png)
+   7. Type in **`list`** to go back to your list of applicants.<br><br>
+      Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
+      Now `John Doe` is removed from your list of applicants.
+
+6. Aside from the commands shown in the sample workflow above, you may also find these useful:
+
+    <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+    The commands given below are not related to the above sample workflow and are given strictly as example usages.
+    </div>
    
-    * **`find`**`n/John Mary` : Finds all applicants whose names are `John` or `Mary`.
+      * **`delete`**`2` : Deletes the second applicant in your currently displayed list.
 
-    * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would `Mary`.
+      * **`show`**`s/` : Displays all unique expected salaries currently in RecruitIn.
 
-    * **`show`**`s/` : Displays all unique expected salaries in RecruitIn, which would be 1 result that is `3000`.
+      * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
 
-    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done, which would `John`.
+      * **`filter_interview`**`past` : Displays all applicants whose interviews are in the past, relative to current date and time.
 
-    * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would `John`.
+      * **`filter_interview`**`future` : Displays all applicants whose interview are in the future, relative to current date and time.
 
-    * **`exit`** : Exits the app.
+      * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of available commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -140,7 +183,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/E
 Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
 * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
-* Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
@@ -156,13 +198,13 @@ Examples:
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
-| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p) |
-| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#emailaddress-e) |
 | ROLE | `r/` | [**role**](#role-r) |
-| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et) |
-| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s) |
-| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l) |
-| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employmenttype-et) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expectedsalary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#levelofeducation-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#yearsofexperience-y) |
 | TAG | `t/` | [**tag**](#tag-t) |
 | INTERVIEW | `i/` | [**interview**](#interview-i) |
 | NOTES | `nt/` | [**notes**](#notes-nt) |
@@ -200,13 +242,13 @@ Examples:
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
-| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p) |
-| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#emailaddress-e) |
 | ROLE | `r/` | [**role**](#role-r) |
-| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et) |
-| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s) |
-| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l) |
-| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employmenttype-et) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expectedsalary-s) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#levelofeducation-l) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#yearsofexperience-y) |
 | TAG | `t/` | [**tag**](#tag-t) |
 | INTERVIEW | `i/` | [**interview**](#interview-i) |
 | NOTES | `nt/` | [**notes**](#notes-nt) |
@@ -252,7 +294,7 @@ Examples:
 * `find n/John Mary t/friend colleague`
 * `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
-<div markdown="block" class="alert alert-secondary">
+<div markdown="block" class="alert alert-success">
 **:information_source: Prefix inputs for `find` command must follow the following input specifications:**<br>
 
 * You may
@@ -262,13 +304,13 @@ Examples:
 | Input | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n-1) |
-| PHONE_NUMBER | `p/` | [**phone_number**](#phone_number-p-1) |
-| EMAIL_ADDRESS | `e/` | [**email_address**](#email_address-e-1) |
+| PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p-1) |
+| EMAIL_ADDRESS | `e/` | [**email_address**](#emailaddress-e-1) |
 | ROLE | `r/` | [**role**](#role-r-1) |
-| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employment_type-et-1) |
-| EXPECTED_SALARY | `s/` | [**expected_salary**](#expected_salary-s-1) |
-| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#level_of_education-l-1) |
-| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#years_of_experience-y-1) |
+| EMPLOYMENT_TYPE | `et/` | [**employment_type**](#employmenttype-et-1) |
+| EXPECTED_SALARY | `s/` | [**expected_salary**](#expectedsalary-s-1) |
+| LEVEL_OF_EDUCATION | `l/` | [**level_of_education**](#levelofeducation-l-1) |
+| YEARS_OF_EXPERIENCE | `y/` | [**years_of_experience**](#yearsofexperience-y-1) |
 | TAG | `t/` | [**tag**](#tag-t-1) |
 | INTERVIEW | `i/` | [**interview**](#interview-i-1) |
 | NOTES | `nt/` | [**notes**](#notes-nt-1) |
@@ -338,6 +380,7 @@ Marks the specified applicant by index from the list in RecruitIn as "Done" (hav
 Format: `mark INDEX…​`
 
 * Marks the applicant at the specified `INDEX` as "Done".
+* An applicant that is has status "Done" cannot be marked again.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -357,6 +400,7 @@ Unmarks the specified applicant by index from the list in RecruitIn to "Not Done
 Format: `unmark INDEX…​`
 
 * Unmarks the applicant at the specified `INDEX` to "Not Done".
+* An applicant that is has status "Not Done" cannot be unmarked again.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -425,6 +469,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ### Add Inputs
 
+<div markdown="block" class="alert alert-secondary">
+
 * Return to [**Add**](#adding-an-applicant-add).
 * Return to [**Edit**](#editing-an-applicant--edit).
 
@@ -479,26 +525,31 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
         * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ##### YEARS_OF_EXPERIENCE `y/`
-    * A YEARS_OF_EXPERIENCE should be a **non-negative integer** smaller than or equals to **67** (re-employment age in Singapore).
+    * A YEARS_OF_EXPERIENCE should be a **non-negative number** with intervals of **0.5** and smaller than or equals to **67** (re-employment age in Singapore).
     * For example:
         * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
-        * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.5`, and `100` are not acceptable.
+        * YEARS_OF_EXPERIENCE inputs such as `0.5` and `3.0` are acceptable.
+        * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.1`, and `100` are not acceptable.
 * ##### TAG `t/`
     * A TAG should only contain alphanumeric characters. Spaces between words are **not** allowed.
     * For example:
         * TAG inputs such as `friends` and `colleagues` are allowed.
         * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
 * ##### INTERVIEW `i/`
-    * An INTERVIEW should follow the DateTime format `yyyy-MM-dd, H:mm`.
+    * An INTERVIEW should be on a legitimate date and follows the DateTime format `yyyy-M-d, H:m`. (Year should be strictly 4-digit while others can be either 1 or 2 digit)
     * For example:
-        * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
-        * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable.
+        * INTERVIEW inputs such as `2021-08-09, 13:00` and `2022-1-3, 3:00` are acceptable.
+        * INTERVIEW inputs such as `morning`, `2021.10.21`, `2021-10-22 13:00` and `2021-02-30, 10:30` (not an existing date) are not acceptable.
 * ##### NOTES `nt/`
     * A NOTES can contain any character, number or symbol as there are no restrictions in place.
     * For example:
         * NOTES inputs such as `This candidate is good!` and `@Applicant123 is suitab13 for th3 job!` are acceptable.
 
+</div>
+
 ### Find Inputs
+
+<div markdown="block" class="alert alert-success">
 
 * Return to [**Find**](#finding-an-applicant--find)
 
@@ -511,14 +562,14 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### PHONE_NUMBER `p/`
     * A PHONE_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
-    * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phone_number-p).
+    * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phonenumber-p).
     * For example:
         * A `99999999` input can only match with ***Contact Number*** s that are `99999999`.
         * A `99999999 88888888` input can only match with ***Contact Number*** s that are `99999999` and `88888888`.
 
 * ##### EMAIL_ADDRESS `e/`
     * An EMAIL_ADDRESS is considered matching with an ***Email Address*** only if **at least 1** keyword is equal to **at least 1** word in the ***Email Address***.
-    * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#email_address-e).
+    * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#emailaddress-e).
     * For example:
         * A `alexyeoh@example.com` input can match with ***Email*** s such as `alexyeoh@example.com`.
         * A `alexyeoh@example.com marysue@gmail.com` input can match with ***Email*** s such as `alexyeoh@example.com`
@@ -534,7 +585,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### EMPLOYMENT_TYPE `et/`
     * An EMPLOYMENT_TYPE is considered matching with an ***Employment Type*** only if it **starts with any** of the keywords in the ***Employment Type***.
-    * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employment_type-et).
+    * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employmenttype-et).
     * For example:
         * A `Full time` or `full time` or `full` input will match only with ***Employment Type*** s that are ```Full time```
         * A ```Full part``` input will match with all ***Employment Type*** s that are ```Full time``` or ```Part time```
@@ -544,22 +595,23 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 * ##### EXPECTED_SALARY `s/`
     * An EXPECTED_SALARY is considered matching with a ***Expected Salary*** only if **at least 1** keyword is within a range of `500` from **at least 1** keyword in the ***Expected Salary***.
-    * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
+    * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expectedsalary-s).
     * For example:
         * A `3000` input can match with ***Expected Salary*** s that range from `2500` to `3500` inclusive.
         * A `2500 5000` input can match with ***Expected Salary*** s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
 
 * ##### LEVEL_OF_EDUCATION `l/`
-    * LEVEL_OF_EDUCATION can be a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
-    * A LEVEL_OF_EDUCATION is considered matching with a ***level of Education*** only if **at least 1** letter of a keyword is equal to **at least 1** letter in the ***Level of Education***
-    * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
+    * A LEVEL_OF_EDUCATION is considered matching with a ***Level of Education*** only if it **starts with any** of the keywords in the ***Level of Education***.    
+    * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#levelofeducation-l).
     * For example:
-        * A `H` input can match with ***Level of Education*** s such `High School`, but not with *Level of Education*s such as `PhD`
-        * A `High School` input can match with ***Level of Education*** s such as `High School`, but not with *Level of Education*s such as `Middle School`
+        * A `H` input can match with ***Level of Education***s such `High School`, but not with *Level of Education*s such as `PhD`.
+        * A `High School` input will match with all *Level of Education*s that are `High School`, but not with *Level of Education*s such as `Middle School`.
+        * A `High Middle` input will match with all *Level of Education*s that are `High School` and `Middle School`.
+        * A `High School bob` input is invalid as `bob` is not a term any of the *Level of Education*s start with.
 
 * ##### YEARS_OF_EXPERIENCE `y/`
     * A YEARS_OF_EXPERIENCE is considered matching with a ***Years Of Experience*** only if the value represented by **at least 1** keyword is larger than or equal to the value represented by the ***Years Of Experience***.
-    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y).
+    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#yearsofexperience-y).
     * For example:
         * A `3` input can match with ***Year Of Experience*** s that are higher than or equal to 3.
         * A `2 3` input can match with ***Year Of Experience*** s that are higher than or equal to 2.
@@ -573,12 +625,13 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * An `experienced old` input can match with applicants that have the ***Tag*** `experienced`, or `old`, or both.
 
 * ##### INTERVIEW `i/`
-    * An INTERVIEW is considered matching with a ***Interview*** only if the ***Interview***'s time string contains **at least 1** keyword.
-    * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
+    * An INTERVIEW is considered matching with a ***Interview*** only if the keyword is a whole word (i.e. separated by space) contained in the ***Interview***  .
+    * All keywords provided as INTERVIEW input must comply with the displayed time format (e.g. 20 March 2021, 10:30).
     * For example:
         * A `2021` input can match with applicants that have the ***Interview*** in year 2021.
         * A `20:21` input can match with applicants that have the ***Interview*** at time 20:21 on any date.
-        * A `21` input can match with ***Interviews*** `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`.
+        * A `mar` input can match with applicants that have the ***Interview*** in March.
+        * However, a `9:30` input cannot be matched with the ***Interview*** displayed as `20 Mar 2021, 09:30` (as 9:30 is not a whole word but 09:30 is).
 
 * ##### NOTES `nt/`
     * NOTES are considered matching with  ***Notes*** only if  ***Notes*** contains **the entire** keyword.
@@ -588,10 +641,13 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
         * A `passionate` input can match with applicants that have Notes such as `passionate but inexperienced` and `passionate and experienced`.
 
 * ##### DONE `d/`
-    * An DONE is considered matching with a ***Done*** only if the ***Done***'s status string is either `Done` or `Not Done`.
+    * An DONE is considered matching only if the ***Done*** input is either `Done` or `Not Done`.    
     * For example:
         * A `Done` input can match with applicants that have their ***Done*** status marked as Done.
         * A `Not Done` input can match with applicants that have their ***Done*** status unmarked as Not Done.
+        * Any other non-empty input is considered invalid.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -615,4 +671,5 @@ Action | Format, Examples
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
 **Delete marked** | `delete_marked`
+**Clear**| `clear`
 **Help** | `help`

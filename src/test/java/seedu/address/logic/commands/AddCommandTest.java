@@ -155,6 +155,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean checkForMarkedPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkForUnmarkedPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void unmarkPerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
