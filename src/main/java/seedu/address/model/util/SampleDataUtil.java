@@ -88,6 +88,15 @@ public class SampleDataUtil {
                     getHomeworkSet("Ch7 pg10"),
                     new LessonRates("60.00"),
                     new OutstandingFees("100.00"),
+                    EMPTY_CANCELLED_DATES_SET),
+            new RecurringLesson(
+                    getDate(LocalDate.now().withDayOfMonth(21).minusWeeks(7)),
+                    getDate(LocalDate.now().withDayOfMonth(21).plusWeeks(1)),
+                    new TimeRange("0800-1000"),
+                    new Subject("Chem"),
+                    getHomeworkSet("tb p101"),
+                    new LessonRates("55.00"),
+                    new OutstandingFees("110.00"),
                     EMPTY_CANCELLED_DATES_SET)
         };
     }
@@ -95,7 +104,7 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Phone("87438807"), new Email("alexyeoh@example.com"),
+                    new Phone("88438808"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL,
                     EMPTY_REMARK, getTagSet("unpaid"),
@@ -110,13 +119,13 @@ public class SampleDataUtil {
                     EMPTY_PHONE, new Email("olivealice@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new School("NYJC"), EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL,
-                    EMPTY_REMARK, getTagSet("zoom"),
+                    EMPTY_REMARK, getTagSet("cousin"),
                     getLessonSet(getSampleLessons()[3])),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Phone("91009182"), EMPTY_EMAIL,
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL,
-                    new Remark("Weak at trigo"), getTagSet("zoom"),
+                    new Remark("Weak at trigo"), getTagSet("neighbour", "friend"),
                     getLessonSet(getSampleLessons()[4])),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     EMPTY_PHONE, EMPTY_EMAIL,
@@ -127,7 +136,7 @@ public class SampleDataUtil {
                     EMPTY_PHONE, EMPTY_EMAIL,
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
                     new School("DHS"), new AcadStream("IP"), new AcadLevel("Y3"),
-                    EMPTY_REMARK, getTagSet("forgetful"), EMPTY_LESSON_SET)
+                    EMPTY_REMARK, getTagSet("forgetful"), getLessonSet(getSampleLessons()[5]))
         };
     }
 

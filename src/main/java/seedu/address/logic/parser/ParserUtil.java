@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -312,7 +313,9 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+        Collection<String> nonEmptyTags = tags.stream()
+            .filter(tagName -> !tagName.isEmpty()).collect(Collectors.toSet());
+        for (String tagName : nonEmptyTags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
@@ -338,8 +341,10 @@ public class ParserUtil {
      */
     public static Set<Homework> parseHomeworkList(Collection<String> homework) throws ParseException {
         requireNonNull(homework);
+        Collection<String> nonEmptyHomework = homework.stream()
+            .filter(desc -> !desc.isEmpty()).collect(Collectors.toSet());
         final Set<Homework> homeworkSet = new HashSet<>();
-        for (String description : homework) {
+        for (String description : nonEmptyHomework) {
             homeworkSet.add(parseIndividualPieceOfHomework(description));
         }
         return homeworkSet;
