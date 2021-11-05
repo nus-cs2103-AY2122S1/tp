@@ -40,7 +40,7 @@ public class EditLabCommand extends Command {
             "Kindly specify if you want to edit the lab number and/or the total score.";
     public static final String MESSAGE_MISSING_LAB_TO_BE_EDITED =
             "Kindly specify the lab number that you would like to edit using the " + PREFIX_LAB_NUM + "flag.\n%1$s";
-    public static final String MESSAGE_NO_STUDENT = "There is no student whose labs can be edited";
+    public static final String MESSAGE_NO_STUDENT = "There are no students whose labs can be edited";
 
     private final LabNum newLabNum;
     private final LabTotal total;

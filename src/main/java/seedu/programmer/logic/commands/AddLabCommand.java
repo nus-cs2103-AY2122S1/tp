@@ -32,7 +32,7 @@ public class AddLabCommand extends Command {
 
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
 
-    public static final String NO_STUDENT_CONSTRAINTS = "There is no student to add the lab to.";
+    public static final String NO_STUDENT_CONSTRAINTS = "There are no students to add the lab to.";
 
     private final Lab result;
 
