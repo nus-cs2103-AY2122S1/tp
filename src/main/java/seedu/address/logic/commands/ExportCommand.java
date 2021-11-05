@@ -49,7 +49,7 @@ public class ExportCommand extends Command {
         Path outputFilePath;
 
         try {
-            outputFilePath = Paths.get(FileUtil.getCurrentPath(), "../data", outputFileName).normalize();
+            outputFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", outputFileName).normalize();
 
             FileUtil.createIfMissing(outputFilePath);
             JsonUtil.saveJsonFile(new JsonSerializableAddressBook(model.getAddressBook()), outputFilePath);
