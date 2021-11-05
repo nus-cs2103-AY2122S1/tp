@@ -604,7 +604,7 @@ Given below is an example usage scenario and how the filter operation works.
 <u>Step 1:</u>
 
 The user launches the app with the stored student list holding the initial student data and the lesson list holding the
-initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
+initial lesson data in TuitiONE (only the fields of each object relevant to the filter feature are shown in the diagrams below).
 
 <center>
 <img alt="FilterState0" src="images/DeveloperGuideImage/FilterState0.png"/>
@@ -679,7 +679,7 @@ Given below is an example usage scenario and how the roster operation works.
 <u>Step 1:</u>
 
 The user launches the app with the stored student list holding the initial student data and the lesson list holding the
-initial lesson data in TuitiONE (only the fields of each object relevant to roster are shown in the diagrams below).
+initial lesson data in TuitiONE (only the fields of each object relevant to the roster feature are shown in the diagrams below).
 
 <center>
 <img alt="FilterState0" src="images/DeveloperGuideImage/FilterState0.png"/>
