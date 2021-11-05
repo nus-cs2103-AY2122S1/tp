@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -41,6 +42,10 @@ public class FindCommand extends Command {
             + "Note: \n"
             + " - Keywords are case-insensitive."
             + "Example: " + COMMAND_WORD + " n/alice g/f p/91234567 tg/19";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A empty %s was entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No valid keyword entered. \n%1$s");
 
     private Predicate<Person> predicate;
 

@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -34,8 +35,10 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
 
-        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT); // invalid index
-        assertParseFailure(parser, "-1" + TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT); // negative index
+        assertParseFailure(parser, "0" + TAG_DESC_FRIEND, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, DeleteTagCommand.MESSAGE_USAGE)); // invalid index
+        assertParseFailure(parser, "-1" + TAG_DESC_FRIEND, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, DeleteTagCommand.MESSAGE_USAGE)); // negative index
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
@@ -48,7 +51,8 @@ public class DeleteTagCommandParserTest {
                 parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "0" + TAG_EMPTY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TAG_EMPTY, String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, DeleteTagCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -110,7 +114,7 @@ public class DeleteTagCommandParserTest {
                 + INDEX_SECOND_PERSON.getOneBased() + TAG_DESC_FRIEND;
         String expectedMessage = MESSAGE_INVALID_FORMAT + DeleteTagCommand.MESSAGE_USAGE;
         assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX, DeleteTagCommand.MESSAGE_USAGE));
     }
 
     @Test
