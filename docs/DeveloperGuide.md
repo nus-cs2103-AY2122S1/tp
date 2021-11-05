@@ -14,6 +14,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
 | **Bold** | keywords |
 | :bulb: **Tip:** | Useful tips |
 | `markdown` | Classes or methods |
+| :information_source: **Note:** | Noteworthy information |
 
 * Table of Contents
     - [Acknowledgements](#acknowledgements) 
@@ -352,7 +353,7 @@ Deleting an appointment requires the user to input a valid index of the desired 
 The diagram below illustrates the flow of deleting an appointment:
 ![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
 
-![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
+![DeleteAppointment](images/DeleteAppointmentSequenceDiagram.png)
 1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
    to `DeleteAppointmentCommandParser` for parsing.
 2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
@@ -362,6 +363,8 @@ The diagram below illustrates the flow of deleting an appointment:
 4. The UI will then display the result
 
 ### Editing an appointment <a name="editing-an-appointment"/> 
+
+#### What it is
 
 Edits the details of an existing appointment.
 
@@ -407,7 +410,7 @@ After that, the filter is used to create a `FilterAppointmentCommand`. When exec
 
 Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
 
-A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
+A clearer view of this sequence diagram can be found [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/docs/images/AppointmentFilterSequenceDiagram.png).
 
 ![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
 
@@ -782,6 +785,56 @@ These are some use cases to familiarise with the flow of our application:
     * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 2.
+    
+**Use case: Filtering appointments**
+
+**MSS**
+1. Clinic receptionist wishes to filter through all appointments.
+2. Clinic receptionist enters the parameters to filter through the appointment records.
+3. The filtered results are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not specify any parameters when filtering through the appointment records.
+  
+    * 2a1. All appointments in the appointment records are displayed in the appointment list.
+    
+        Use case ends.
+    
+* 2b. The users enters a parameter that is invalid.
+  
+    * 2b1. An error message is shown, informing the user of an invalid parameter.
+    * 2b2. User enters the new parameters.
+    
+        Steps 2b1-2b2 are repeated until the new parameters entered are valid.
+      
+        Use case resumes from step 3.  
+    
+**Use case: Listing today's appointments**
+
+**MSS**
+1. Clinic receptionists wishes to view all of today's appointments.
+2. Clinic receptionists enters the `appt -l` command.
+3. All of today's appointments are displayed in the appointment list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid.
+
+    * 2a1. An error message is shown to the user.
+  
+        Use case resumes at step 2.
+    
+* 2b. There are no appointments for the current day.
+
+    * 2b1. A message is shown informing the user that there are no appointments for the current day.
+    
+        Use case ends.
+
 
 ### Non-Functional Requirements  <a name="nfr"/>
 
@@ -834,28 +887,32 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. Exiting the app
-    1. While the app is still open, enter `exit` in the command box or click on the close window button.
-        Expected: The application closes.
+    1. While the app is still open, enter `exit` in the command box or click on the close window button. 
+       <br>Expected: The application closes.
 
 ### Adding a patient <a name="add-patient-manual-testing"/>
-1. Adding a doctor
+1. Adding a patient
     1. Prerequisites: `toggle` to the `Patients` tab. The following patient must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: vaccinated; Risk: LOW
        
     2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
+       <br>
        Expected: Patient named Bob Doe is added successfully. Details of the added patient are shown in the status message.
 
     3. Test case: `add n/Bobby Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
+       <br>
         Expected: Patient named Bobby Doe is added successfully. Details of the added patient are shown in the status message.
 
     4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
+       <br>
+        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
 
     5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
+       <br>
+        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
 
     6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
+       <br>Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
     7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
        Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
@@ -873,7 +930,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete 0`<br>
        Expected: No patient is deleted. Error details are shown in the response box.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>~~~~
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete abcd` (where x is larger than the list size, and abcd are any alphabets)<br>
        Expected: No patient deleted. Error message is shown in the response box: "Invalid command format!..."
 
 
@@ -885,7 +942,56 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a patient <a name="edit-patient-manual-testing"/>
 
-### Finding patients <a name="find-patient"/>
+1. Editing a patient while all patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. List all patients using the `list` command.
+
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: First patient's name is edited to `John Doe`. Details of the edited patient are shown in the status message.
+
+    3. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First patient's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited patient are shown in the status message.
+
+    4. Test case: `edit 1 hp/abc`<br>
+       Expected: No patient is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+
+    5. Test case: `edit 1 eml/xyz`<br>
+       Expected: No patient is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+
+    6. Test case: `edit 1 a/Blk 50, Clementi Ave 2`<br>
+       Expected: First patient's address is edited to `Blk 50, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
+
+    7. Test case: `edit 1 dob/20/12/1960`<br>
+       Expected: First patient's date of birth is edited to `1960-12-20`. Details of the edited patient are shown in the status message.
+
+    8. Test case: `edit 1 dob/20/14/1960`<br>
+       Expected: No patient is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+
+    9. Test case: `edit 1 t/covid`<br>
+       Expected: First patient's tag is edited to `covid`. Details of the edited patient are shown in the status message.
+
+    10. Test case: `edit 1 t/`<br>
+        Expected: First patient's tags are deleted. Details of the edited patient are shown in the status message.
+
+    11. Test case: `edit 1 risk/HIGH`<br>
+        Expected: First patient's risk is edited to `HIGH`. Details of the edited patient are shown in the status message.
+
+    12. Test case: `edit 1 risk/ABC`<br>
+        Expected: No patient is edited. Error details are shown in the status message: "Risks should only be either HIGH, MEDIUM OR LOW".
+
+    13. Test case: `edit 0 hp/91234567`<br>
+        Expected: No patient is edited. Error details are shown in the status message: "Invalid command format...".
+
+    14. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+        Expected: No patient is edited. Error details are shown in the status message.
+
+2. Editing a patient while some patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. List some patients using `find XYZ` (XYZ is the name of an existing patient).
+
+    2. Test cases are similar to those above.
+
+### Finding a patient <a name="find-patient-manual-testing"/>
 
 Prerequisites: The tests for finding patients uses the sample data from `SampleDataUtil#getSamplePatients`. This is the sample data loaded at initial launch of the application, or in the absence of the `data/plannermd.json` file.
 
@@ -921,32 +1027,42 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
 
 ### Listing all patients <a name="list-patients-manual-testing"/>
 
+1. List all patients while none/some patients are being shown
+
+    1. Prerequisites: `toggle` to the `Patients` tab. Ensure that there are existing patients. If there is none, use the [add](#add-patient-manual-testing) command to add some patients. List some patients using `find XYZ` (XYZ is the name of an existing/non-existent patient).
+
+    2. Test case: `list`<br>
+       Expected: All existing patients are listed.
+
+    3. Test case: `list extra-parameters`<br>
+       Expected: All existing patients are listed.
+
 ### Adding a doctor <a name="add-doctor-manual-testing"/>
 1. Adding a doctor
     1. Prerequisites: `toggle` to the `Doctors` tab. The following doctor must already exists:
        John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Date of Birth: 20/7/1964; Tags: experienced
     
     2. Test case: `add n/Bob Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
-       
+       <br> Expected: Doctor named Bob Doe is added successfully. Details of the added doctor are shown in the status message.
+
     3. Test case: `add n/Joe Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964`
-       Expected: Doctor named Joe Doe is added successfully. Details of the added doctor are shown in the status message.
+       <br>Expected: Doctor named Joe Doe is added successfully. Details of the added doctor are shown in the status message.
        
     4. Test case: `add n/John Doe hp/999 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
+       <br>Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
 
     5. Test case: `add n/John Doe hp/98765432 eml/johndoeeeee@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
+       <br> Expected: Doctor named John Doe is added successfully. Details of the added doctor are shown in the status message.
        
     6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/experienced`
-       Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+       <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
        
     7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
-       Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
+       <br> Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
 
     8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
-       Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
-       
+        Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
+
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
 1. Deleting a doctor while all doctors are being shown
     1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command. There must be multiple doctors. 
@@ -972,14 +1088,38 @@ Prerequisites: The tests for finding patients uses the sample data from `SampleD
 
     1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
 
-    2. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
-       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited contact are shown in the status message.
+    2. Test case: `edit 1 n/John Doe`<br>
+       Expected: First doctor's name is edited to `John Doe`. Details of the edited doctor are shown in the status message.
 
-    3. Test case: `edit 0 hp/91234567`<br>
-       Expected: No doctor is edited. Response box displays error message: "Invalid command format!..."
+    3. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited doctor are shown in the status message.
 
-    4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. Test case: `edit 1 hp/abc`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Phone numbers should only contain numbers...".
+
+    5. Test case: `edit 1 eml/xyz`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Emails should be of the format local-part@domain...".
+
+    6. Test case: `edit 1 a/Blk 30, Clementi Ave 2`<br>
+       Expected: First doctor's address is edited to `Blk 30, Clementi Ave 2`. Details of the edited doctor are shown in the status message.
+
+    7. Test case: `edit 1 dob/20/12/1960`<br>
+       Expected: First doctor's date of birth is edited to `1960-12-20`. Details of the edited doctor are shown in the status message.
+
+    8. Test case: `edit 1 dob/20/14/1960`<br>
+       Expected: No doctor is edited. Error details are shown in the status message: "Birth dates should be of the format DD/MM/YYYY and adhere to the following constraints...".
+
+    9. Test case: `edit 1 t/experienced`<br>
+       Expected: First doctor's tag is edited to `experienced`. Details of the edited doctor are shown in the status message.
+
+    10. Test case: `edit 1 t/`<br>
+        Expected: First doctor's tags are deleted. Details of the edited doctor are shown in the status message.
+
+    11. Test case: `edit 0 hp/91234567`<br>
+        Expected: No doctor is edited. Error details are shown in the status message: "Invalid command format...".
+
+    12. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+        Expected: No doctor is edited. Error details are shown in the status message.
 
 2. Editing a doctor while some doctors are being shown
 
@@ -1022,6 +1162,16 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
     2. Test cases are similar to those above.
 
 ### Listing all doctors <a name="list-doctors-manual-testing"/>
+
+1. List all doctors while none/some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. Ensure that there are existing doctors. If there is none, use the [add](#add-doctor-manual-testing) command to add some doctors. List some doctors using `find XYZ` (XYZ is the name of an existing/non-existent doctor).
+
+    2. Test case: `list`<br>
+       Expected: All existing doctors are listed.
+
+    3. Test case: `list extra-parameters`<br>
+       Expected: All existing doctors are listed.
 
 ### Adding an appointment <a name="add-appointment-manual-testing"/>
 1. Add an appointment 
@@ -1099,26 +1249,106 @@ Prerequisites: The tests for finding doctors uses the sample data from `SampleDa
     2. Test case: `appt -e 1 p/1 s/31/12/2021 10:00 dur/30`<br>
        Expected: First appointment's patient is edited to the first patient in the filtered patient list. The date and session are edited to `31 Dec 21, Fri` and `10:00 - 10:30` respectively. Details of the edited appointment are shown in the status message.
 
-    3. Test case: `appt -e 0 dur/30`<br>
+    3. Test case: `appt -e 1 d/1 r/blood test`<br>
+       Expected: First appointment's doctor is edited to the first doctor in the filtered doctor list. The remark is edited to `blood test`. Details of the edited appointment are shown in the status message.
+
+    4. Test case: `appt -e 1 s/31/12/2021`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "Start date/time should be of the format DD/MM/YYYY HH:MM...".
+
+    5. Test case: `appt -e 1 s/10:00`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "Start date/time should be of the format DD/MM/YYYY HH:MM...".
+
+    6. Test case: `appt -e 1 dur/1000`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "The duration should be an integer between 1-120 minutes".
+
+    7. Test case: `appt -e 0 dur/30`<br>
+       Expected: No appointment is edited. Error details are shown in the status message: "Invalid command format...".
+
+    8. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
        Expected: No appointment is edited. Error details are shown in the status message.
 
-    4. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    9. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
+        Expected: No appointment is edited. Error details are shown in the status message: "This appointment clashes with an existing appointment".
 
-    5. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
-        Expected: Similar to previous.
-
-3. Editing an appointment while some appointments are being shown
+2. Editing an appointment while some appointments are being shown
 
     1. Prerequisites: Use `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]` to list only some appointments. E.g., `appt -f s/01/11/2021` to list only appointments after `01/11/2021`.
 
     2. Test cases are similar to those above.
 
-### Filtering all appointments <a name="filter-all-manual-testing/>
+### Filtering all appointments <a name="filter-all-manual-testing"/>
 
-### Filtering upcoming appointments <a name="filter-upcoming-manual-testing"/>
+1. Searches through all appointment based on the filter parameters provided.
+   
+    1. Prerequisites: None, but if there are no appointments added, upcoming filter searches will not return any results.
+
+    2. Test case: `appt -f`<br>
+       Expected: All appointments in the appointment records will be listed in the appointment list.
+
+    3. Test case: `appt -f p/Aaron`<br>
+       Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it and displays the results in the appointment list.
+       
+    4. Test case: `appt -f p/Aaron Yeoh`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+
+    5. Test case: `appt -f d/Irfan`<br>
+       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` in it and displays the results in the appointment list.
+       
+    6. Test case: `appt -f d/Irfan Ibrahim`<br>
+        Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+        
+    7. Test case: `appt -f s/01/11/2021`<br>
+        Expected: Searches for appointments that has a starting date after `01/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    8. Test case: `appt -f e/30/11/2021`<br>
+        Expected: Searches for appointments that has a starting date before `31/11/2021` [inclusive] and displays the results in the appointment list.
+    
+    9. Test case: `appt -f p/Aaron e/Irfan s/01/11/2021 e/30/11/2021`<br>
+        Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive].
+       
+    10. Test case: `appt -f s/01/14/2021`<br>
+        Expected: Displays an error message telling the user that the date entered has to be valid.
+        
+    11. Test case: `appt -f d/`<br>
+        Expected: Displays an error message telling the user that a specified parameter cannot be empty.
+
+
+### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
+
+1. Searches for upcoming appointment based on the filter parameters provided. An appointment is considered upcoming if it has a date and time greater or equal than the current date and time.
+   
+    1. Prerequisites: None, but if there are no upcoming appointments in the appointment records, upcoming filter searches will not return any results.
+       
+    2. Test case: `appt -u`<br>
+       Expected: All upcoming appointments in the appointment records will be listed in the appointment list.
+       
+    3. Test case: `appt -u p/Aaron`<br>
+       Expected: Searches for upcoming appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    4. Test case: `appt -u p/Aaron Yeoh`<br>
+      Expected: Searches for upcoming appointments that has a patient with a name that contains the keyword `Aaron` **or** `Yeoh` in it and displays the results in the appointment list.
+      
+    5. Test case: `appt -u d/Irfan`<br>
+       Expected: Searches for appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
+
+    6. Test case: `appt -u d/Irfan Ibrahim`<br>
+      Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+      
+    7. Test case: `appt -u d/Aaron s/21/10/2021`<br>
+        Expected: An error is displayed telling the user that a `FilterUpcomingAppointmentCommand` should not have any date parameters in it.
+
+    8. Test case: `appt -u d/`<br>
+       Expected: Displays an error message telling the user that a specified parameter cannot be empty.
 
 ### Listing all appointments for today <a name="list-all-manual-testing"/>
+
+1. Displays all appointments for the current day in the appointment list.
+   
+    1. Test case: `appt -l` when there are no appointments for the current day (when `appt -f` does not show any appointment for the current day)<br>
+        Expected: No appointments are displayed in the appointment list.
+       
+    2. Test case: `appt -l` when there are appointments for the current day<br>
+        Expected: All of today's appointments are displayed in the appointment list
 
 ### Saving data  <a name="saving-data"/>
 
