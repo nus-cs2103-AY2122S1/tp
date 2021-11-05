@@ -9,13 +9,13 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class ExitCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private final Model model = new ModelManager();
+    private final Model expectedModel = new ModelManager();
 
     @Test
     public void execute_exit_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false,
-                true, false, null, false, false);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT,
+                CommandType.EXIT, null, false);
         assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }

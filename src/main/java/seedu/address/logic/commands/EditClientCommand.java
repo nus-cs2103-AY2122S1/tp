@@ -32,7 +32,6 @@ import seedu.address.model.order.Order;
  */
 public class EditClientCommand extends Command {
     public static final String COMMAND_WORD = "edit -c";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Edits the details of the client identified by the index number used in the displayed "
                     + "client list.\n"
@@ -48,8 +47,8 @@ public class EditClientCommand extends Command {
                     + PREFIX_PHONE_NUMBER + "12345678 "
                     + PREFIX_EMAIL + "ben@gmail.com "
                     + PREFIX_ADDRESS + "Ridley Park, Singapore 248473 "
-                    + PREFIX_ORDER + "0 100 2021/10/20 "
-                    + PREFIX_ORDER + "15 10 10/20";
+                    + PREFIX_ORDER + "1 3 2021/10/20 "
+                    + PREFIX_ORDER + "2 10 10/20";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -87,7 +86,9 @@ public class EditClientCommand extends Command {
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient), CommandType.EDIT,
+                editedClient, true);
     }
 
     /**
@@ -113,7 +114,7 @@ public class EditClientCommand extends Command {
         updatedOrders.addAll(oldOrders);
 
         return updatedOrders.stream()
-                .filter(Order::isValidOrder)
+                .filter(Order::isPositiveQuantity)
                 .collect(Collectors.toSet());
     }
 
@@ -221,10 +222,10 @@ public class EditClientCommand extends Command {
             EditClientDescriptor e = (EditClientDescriptor) other;
 
             return getName().equals(e.getName())
-                           && getPhoneNumber().equals(e.getPhoneNumber())
-                           && getEmail().equals(e.getEmail())
-                           && getAddress().equals(e.getAddress())
-                           && getOrders().equals(e.getOrders());
+                    && getPhoneNumber().equals(e.getPhoneNumber())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getOrders().equals(e.getOrders());
         }
     }
 }

@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Category;
@@ -28,23 +29,19 @@ import seedu.address.model.product.Product;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
     private ProductListPanel productListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-    private PieChartView pieChartView;
+    private final HelpWindow helpWindow;
     private HelpMessage helpMessage;
-    private ViewMoreClient viewMoreClient;
-    private ViewMoreProduct viewMoreProduct;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -82,7 +79,6 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
 
         helpWindow = new HelpWindow();
@@ -98,6 +94,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -118,6 +115,7 @@ public class MainWindow extends UiPart<Stage> {
          * help window purposely so to support accelerators even when focus is
          * in CommandBox or ResultDisplay.
          */
+
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -156,6 +154,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -169,6 +168,8 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
+            secondPanelPlaceholder.getChildren().clear();
+            secondPanelPlaceholder.getChildren().add(helpMessage.getRoot());
         } else {
             helpWindow.focus();
         }
@@ -192,23 +193,19 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleStat() {
-        pieChartView = new PieChartView();
+        PieChartSalesView salesView = new PieChartSalesView(logic.getFilteredClientList());
         secondPanelPlaceholder.getChildren().clear();
-        secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
-
+        secondPanelPlaceholder.getChildren().add(salesView.getRoot());
     }
 
-    private void handleList(TabPaneBehavior tpb, int selectedTab, Category category) {
-        if (category instanceof Client) {
-            logger.info("List all clients");
+    private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, boolean isClient) {
+        if (isClient) {
             if (selectedTab == 1) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
-        if (category instanceof Product) {
-            logger.info("List all products");
+        } else {
             if (selectedTab == 0) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
@@ -219,9 +216,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleView(TabPaneBehavior tpb, int selectedTab, Category category) {
         if (category instanceof Client) {
-            logger.info("View client's details: " + category.toString());
-            viewMoreClient = new ViewMoreClient();
+            logger.info("View client's details: " + category);
+
+            ViewMoreClient viewMoreClient = new ViewMoreClient();
             viewMoreClient.setClientDetails((Client) category);
+
             secondPanelPlaceholder.getChildren().clear();
             secondPanelPlaceholder.getChildren().add(viewMoreClient.getRoot());
 
@@ -230,12 +229,12 @@ public class MainWindow extends UiPart<Stage> {
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
+        } else if (category instanceof Product) {
+            logger.info("View product's details: " + category);
 
-        if (category instanceof Product) {
-            logger.info("View product's details: " + category.toString());
-            viewMoreProduct = new ViewMoreProduct();
+            ViewMoreProduct viewMoreProduct = new ViewMoreProduct();
             viewMoreProduct.setProductDetails((Product) category);
+
             secondPanelPlaceholder.getChildren().clear();
             secondPanelPlaceholder.getChildren().add(viewMoreProduct.getRoot());
 
@@ -245,14 +244,6 @@ public class MainWindow extends UiPart<Stage> {
                 tabPane.setDisable(false);
             }
         }
-    }
-
-    public ClientListPanel getClientListPanel() {
-        return clientListPanel;
-    }
-
-    public ProductListPanel getProductListPanel() {
-        return productListPanel;
     }
 
     /**
@@ -265,28 +256,39 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
             int selectedTab = tabPane.getSelectionModel().getSelectedIndex();
             TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
+
             Category category = commandResult.getInfo();
+            CommandType commandType = commandResult.getCommandType();
+            boolean isClient = commandResult.getIsClientCommand();
 
-            if (commandResult.isList()) {
-                handleList(tpb, selectedTab, category);
-            }
-
-            if (commandResult.isViewMore()) {
-                handleView(tpb, selectedTab, category);
-            }
-
-            if (commandResult.isShowHelp()) {
+            switch (commandType) {
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
-            }
+                break;
 
-            if (commandResult.isStat()) {
+            case STAT:
                 handleStat();
+                break;
+
+            case CLEAR:
+                break;
+
+            case ADD:
+            case EDIT:
+            case VIEW:
+                handleView(tpb, selectedTab, category);
+                break;
+
+            default:
+                handleChangeTab(tpb, selectedTab, isClient);
+                break;
             }
 
             return commandResult;

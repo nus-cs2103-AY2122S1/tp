@@ -23,16 +23,14 @@ public class EditProductCommandParser implements Parser<EditProductCommand> {
      */
     public EditProductCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_UNIT_PRICE,
                 PREFIX_QUANTITY);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditProductCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getPreamble().equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditProductCommand.MESSAGE_USAGE));
         }
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
         EditProductDescriptor editProductDescriptor = new EditProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

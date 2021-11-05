@@ -10,11 +10,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Represents a version with major, minor and patch number
  */
 public class Version implements Comparable<Version> {
-
     public static final String VERSION_REGEX = "V(\\d+)\\.(\\d+)\\.(\\d+)(ea)?";
-
     private static final String EXCEPTION_STRING_NOT_VERSION = "String is not a valid Version. %s";
-
     private static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_REGEX);
 
     private final int major;
@@ -50,21 +47,22 @@ public class Version implements Comparable<Version> {
 
     /**
      * Parses a version number string in the format V1.2.3.
+     *
      * @param versionString version number string
      * @return a Version object
      */
     @JsonCreator
     public static Version fromString(String versionString) throws IllegalArgumentException {
         Matcher versionMatcher = VERSION_PATTERN.matcher(versionString);
-
         if (!versionMatcher.find()) {
             throw new IllegalArgumentException(String.format(EXCEPTION_STRING_NOT_VERSION, versionString));
         }
 
-        return new Version(Integer.parseInt(versionMatcher.group(1)),
+        return new Version(
+                Integer.parseInt(versionMatcher.group(1)),
                 Integer.parseInt(versionMatcher.group(2)),
                 Integer.parseInt(versionMatcher.group(3)),
-                versionMatcher.group(4) == null ? false : true);
+                versionMatcher.group(4) != null);
     }
 
     @JsonValue
@@ -89,6 +87,7 @@ public class Version implements Comparable<Version> {
         if (isEarlyAccess) {
             return -1;
         }
+
         return 1;
     }
 
@@ -100,8 +99,8 @@ public class Version implements Comparable<Version> {
         if (!(obj instanceof Version)) {
             return false;
         }
-        final Version other = (Version) obj;
 
+        final Version other = (Version) obj;
         return compareTo(other) == 0;
     }
 
@@ -111,6 +110,7 @@ public class Version implements Comparable<Version> {
         if (!isEarlyAccess) {
             hash = "1" + hash;
         }
+
         return Integer.parseInt(hash);
     }
 }

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_NUMBER_BOB;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
 
@@ -29,7 +29,7 @@ public class ClientTest {
         // same id, different data fields
         Client editedAmy = new ClientBuilder(AMY)
                 .withName(VALID_NAME_BOB)
-                .withPhoneNumber(VALID_PHONE_BOB)
+                .withPhoneNumber(VALID_PHONE_NUMBER_BOB)
                 .withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .build();
@@ -59,7 +59,7 @@ public class ClientTest {
         // different type -> returns false
         assertFalse(AMY.equals(5));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(AMY.equals(BOB));
 
         // different name -> returns false
@@ -67,7 +67,7 @@ public class ClientTest {
         assertFalse(AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new ClientBuilder(AMY).withPhoneNumber(VALID_PHONE_BOB).build();
+        editedAmy = new ClientBuilder(AMY).withPhoneNumber(VALID_PHONE_NUMBER_BOB).build();
         assertFalse(AMY.equals(editedAmy));
 
         // different email -> returns false

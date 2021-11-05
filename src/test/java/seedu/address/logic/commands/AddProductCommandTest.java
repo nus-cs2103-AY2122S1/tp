@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.AddProductCommand.AddProductDescriptor;
 import static seedu.address.logic.commands.AddProductCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -16,11 +17,10 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.UnitPrice;
 
 public class AddProductCommandTest {
-    private Name name = new Name("pen");
-    private UnitPrice unitPrice = new UnitPrice("15");
-    private AddProductCommand.AddProductDescriptor descriptor =
-            new AddProductCommand.AddProductDescriptor(name, unitPrice);
-    private AddProductCommand addProductCommand = new AddProductCommand(descriptor);
+    private final Name name = new Name("pen");
+    private final UnitPrice unitPrice = new UnitPrice("15");
+    private final AddProductDescriptor descriptor = new AddProductDescriptor(name, unitPrice);
+    private final AddProductCommand addProductCommand = new AddProductCommand(descriptor);
 
     @Test
     public void constructor_nullDescriptor_throwsNullPointerException() {
@@ -49,8 +49,6 @@ public class AddProductCommandTest {
             String expectedString = expectedResult.getFeedbackToUser();
             expectedString = expectedString.substring(expectedString.indexOf("Name"));
             assertEquals(expectedString, actualString);
-            assertEquals(expectedResult.isShowHelp(), actualResult.isShowHelp());
-            assertEquals(expectedResult.isExit(), actualResult.isExit());
         } catch (CommandException e) {
             fail();
         }
@@ -61,7 +59,8 @@ public class AddProductCommandTest {
         assertFalse(addProductCommand.equals(null));
     }
 
-    @Test void equals_itself_returnsTrue() {
+    @Test
+    public void equals_itself_returnsTrue() {
         assertTrue(addProductCommand.equals(addProductCommand));
     }
 

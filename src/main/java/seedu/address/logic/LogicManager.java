@@ -15,7 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 import seedu.address.storage.Storage;
 
@@ -43,9 +42,8 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText, model);
-        commandResult = command.execute(model);
+        CommandResult commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -59,11 +57,6 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
-    }
-
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
     }
 
     @Override

@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.model.client.ClientContainsIdPredicate;
 
 public class ViewClientCommandParserTest {
-    private ViewClientCommandParser parser = new ViewClientCommandParser();
+    private final ViewClientCommandParser parser = new ViewClientCommandParser();
 
     @Test
     public void parse_emptyArgs_throwParseException() {

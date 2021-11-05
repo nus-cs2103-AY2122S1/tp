@@ -12,12 +12,15 @@ import seedu.address.testutil.TypicalClients;
 import seedu.address.testutil.TypicalProducts;
 
 public class ClearCommandTest {
+    private final CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS,
+            CommandType.CLEAR, null, false);
+
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -26,12 +29,12 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
 
         model = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
     }
 }

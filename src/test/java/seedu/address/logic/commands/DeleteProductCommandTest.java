@@ -24,7 +24,7 @@ import seedu.address.model.product.Product;
  */
 public class DeleteProductCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,11 +32,12 @@ public class DeleteProductCommandTest {
         DeleteProductCommand deleteProductCommand = new DeleteProductCommand(INDEX_FIRST_PRODUCT);
 
         String expectedMessage = String.format(DeleteProductCommand.MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.DELETE, null, false);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteProduct(productToDelete);
 
-        assertCommandSuccess(deleteProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -55,12 +56,13 @@ public class DeleteProductCommandTest {
         DeleteProductCommand deleteProductCommand = new DeleteProductCommand(INDEX_FIRST_PRODUCT);
 
         String expectedMessage = String.format(DeleteProductCommand.MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.DELETE, null, false);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteProduct(productToDelete);
         showNoProduct(expectedModel);
 
-        assertCommandSuccess(deleteProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

@@ -10,35 +10,23 @@ import seedu.address.model.Category;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-
     private final String feedbackToUser;
-
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
-
-    /** The application should exit. */
-    private final boolean exit;
-
-    private final boolean viewMore;
-
-    private final boolean stat;
-
-    private final boolean list;
-
+    private final CommandType commandType;
     private final Category info;
+    private final boolean isClientCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewMore, Category info,
-                         boolean stat, boolean list) {
+    public CommandResult(String feedbackToUser, CommandType commandType, Category info, boolean isClientCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.viewMore = viewMore;
+        this.commandType = commandType;
         this.info = info;
-        this.stat = stat;
-        this.list = list;
+        this.isClientCommand = isClientCommand;
+    }
+
+    public CommandResult(String feedbackToUser, CommandType commandType) {
+        this(feedbackToUser, commandType, null, false);
     }
 
     /**
@@ -46,7 +34,14 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null, false, false);
+        this(feedbackToUser, null, null, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} by copying from the provided {@code copyFrom}.
+     */
+    public CommandResult(CommandResult copyFrom) {
+        this(copyFrom.feedbackToUser, copyFrom.commandType, copyFrom.info, copyFrom.isClientCommand);
     }
 
     public String getFeedbackToUser() {
@@ -57,46 +52,34 @@ public class CommandResult {
         return info;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
+    public CommandType getCommandType() {
+        return commandType;
     }
 
-    public boolean isExit() {
-        return exit;
-    }
-
-    public boolean isViewMore() {
-        return viewMore;
-    }
-
-    public boolean isStat() {
-        return stat;
-    }
-
-    public boolean isList() {
-        return list;
+    public boolean getIsClientCommand() {
+        return isClientCommand;
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
+        if (!(obj instanceof CommandResult)) {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+        CommandResult other = (CommandResult) obj;
+        return feedbackToUser.equals(other.feedbackToUser)
+                && commandType == other.commandType
+                && Objects.equals(info, other.info)
+                && isClientCommand == other.isClientCommand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, viewMore, info, stat, list);
+        return Objects.hash(feedbackToUser, commandType, info, isClientCommand);
     }
-
 }

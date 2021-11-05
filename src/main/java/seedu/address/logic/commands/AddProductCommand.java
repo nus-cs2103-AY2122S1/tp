@@ -13,7 +13,6 @@ import seedu.address.model.product.UnitPrice;
 
 public class AddProductCommand extends Command {
     public static final String COMMAND_WORD = "add -p";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Adds a product to the address book. "
                     + "Parameters: "
@@ -28,8 +27,7 @@ public class AddProductCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in Sellah";
 
-    private AddProductDescriptor addProductDescriptor;
-    private Product productToAdd;
+    private final Product productToAdd;
 
     /**
      * Constructor of the class `AddProductCommand`.
@@ -38,8 +36,12 @@ public class AddProductCommand extends Command {
      */
     public AddProductCommand(AddProductDescriptor addProductDescriptor) {
         requireNonNull(addProductDescriptor);
-        this.addProductDescriptor = addProductDescriptor;
-        this.productToAdd = createAddedProduct(addProductDescriptor);
+
+        Name name = addProductDescriptor.getName();
+        UnitPrice unitPrice = addProductDescriptor.getUnitPrice();
+        Quantity quantity = addProductDescriptor.getQuantity();
+
+        this.productToAdd = new Product(name, unitPrice, quantity);
     }
 
     @Override
@@ -51,20 +53,7 @@ public class AddProductCommand extends Command {
         }
 
         model.addProduct(productToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, productToAdd));
-    }
-
-    /**
-     * Creates a Product to be added using an AddProductDescriptor.
-     *
-     * @param addProductDescriptor A descriptor containing the information of the product.
-     * @return The product to be added.
-     */
-    private static Product createAddedProduct(AddProductDescriptor addProductDescriptor) {
-        Name name = addProductDescriptor.getName();
-        UnitPrice unitPrice = addProductDescriptor.getUnitPrice();
-        Quantity quantity = addProductDescriptor.getQuantity();
-        return new Product(name, unitPrice, quantity);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, productToAdd), CommandType.ADD, productToAdd, false);
     }
 
     @Override
@@ -78,8 +67,8 @@ public class AddProductCommand extends Command {
      * Stores the details of the new product.
      */
     public static class AddProductDescriptor {
-        private Name name;
-        private UnitPrice unitPrice;
+        private final Name name;
+        private final UnitPrice unitPrice;
         private Quantity quantity;
 
         /**

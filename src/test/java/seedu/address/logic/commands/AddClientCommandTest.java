@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddClientCommand.AddClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.client.Client;
@@ -16,11 +17,10 @@ import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommandTest {
-    private Name name = new Name("John Doe");
-    private PhoneNumber phoneNumber = new PhoneNumber("12345678");
-    private AddClientCommand.AddClientDescriptor descriptor =
-            new AddClientCommand.AddClientDescriptor(name, phoneNumber);
-    private AddClientCommand addClientCommand = new AddClientCommand(descriptor);
+    private final Name name = new Name("John Doe");
+    private final PhoneNumber phoneNumber = new PhoneNumber("12345678");
+    private final AddClientDescriptor descriptor = new AddClientDescriptor(name, phoneNumber);
+    private final AddClientCommand addClientCommand = new AddClientCommand(descriptor);
 
     @Test
     public void constructor_nullDescriptor_throwsNullPointerException() {
@@ -43,14 +43,13 @@ public class AddClientCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd));
         try {
             CommandResult actualResult = addClientCommand.execute(new ModelStub());
+
             // compare the feedback to user excluding the id.
             String actualString = actualResult.getFeedbackToUser();
             actualString = actualString.substring(actualString.indexOf("Name"));
             String expectedString = expectedResult.getFeedbackToUser();
             expectedString = expectedString.substring(expectedString.indexOf("Name"));
             assertEquals(expectedString, actualString);
-            assertEquals(expectedResult.isShowHelp(), actualResult.isShowHelp());
-            assertEquals(expectedResult.isExit(), actualResult.isExit());
         } catch (CommandException e) {
             fail();
         }
@@ -61,7 +60,8 @@ public class AddClientCommandTest {
         assertFalse(addClientCommand.equals(null));
     }
 
-    @Test void equals_itself_returnsTrue() {
+    @Test
+    public void equals_itself_returnsTrue() {
         assertTrue(addClientCommand.equals(addClientCommand));
     }
 

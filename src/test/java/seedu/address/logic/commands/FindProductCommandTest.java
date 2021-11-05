@@ -24,8 +24,8 @@ import seedu.address.model.product.ProductContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindProductCommand}.
  */
 public class FindProductCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -57,20 +57,22 @@ public class FindProductCommandTest {
     @Test
     public void execute_zeroKeywords_noProductFound() {
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 0);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FIND, null, false);
         ProductContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindProductCommand command = new FindProductCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredProductList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleProductsFound() {
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 3);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FIND, null, false);
         ProductContainsKeywordsPredicate predicate = preparePredicate("iphone macbook ipad");
         FindProductCommand command = new FindProductCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(IPHONE, IPAD, MACBOOK), model.getFilteredProductList());
     }
 

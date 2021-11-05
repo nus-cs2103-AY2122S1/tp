@@ -21,22 +21,19 @@ import seedu.address.model.order.Order;
 
 public class AddClientCommand extends Command {
     public static final String COMMAND_WORD = "add -c";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Adds a client to the address book. "
                     + "Parameters: "
-                    + "NAME "
-                    + PREFIX_PHONE_NUMBER + "PHONE_NUMBER "
+                    + "NAME " + PREFIX_PHONE_NUMBER + "PHONE_NUMBER "
                     + "[" + PREFIX_EMAIL + "EMAIL] "
                     + "[" + PREFIX_ADDRESS + "ADDRESS] "
                     + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME]...\n"
-                    + "Example: " + COMMAND_WORD + " "
-                    + "John Doe "
+                    + "Example: " + COMMAND_WORD + " John Doe "
                     + PREFIX_PHONE_NUMBER + "98765432 "
                     + PREFIX_EMAIL + "john.doe@eg.email "
-                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore"
-                    + PREFIX_ORDER + "0 100 2021/10/20"
-                    + PREFIX_ORDER + "15 10 10/20";
+                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore "
+                    + PREFIX_ORDER + "1 3 2021/10/20 "
+                    + PREFIX_ORDER + "2 10 10/20";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Sellah";
@@ -62,7 +59,7 @@ public class AddClientCommand extends Command {
         }
 
         model.addClient(clientToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd), CommandType.ADD, clientToAdd, true);
     }
 
     /**
@@ -78,8 +75,9 @@ public class AddClientCommand extends Command {
         Address address = addClientDescriptor.getAddress();
         Set<Order> orders = addClientDescriptor.getOrders()
                 .stream()
-                .filter(Order::isValidOrder)
+                .filter(Order::isPositiveQuantity)
                 .collect(Collectors.toSet());
+
         return new Client(name, phoneNumber, email, address, orders);
     }
 
@@ -94,8 +92,8 @@ public class AddClientCommand extends Command {
      * Stores the details of the new client.
      */
     public static class AddClientDescriptor {
-        private Name name;
-        private PhoneNumber phoneNumber;
+        private final Name name;
+        private final PhoneNumber phoneNumber;
         private Email email;
         private Address address;
         private Set<Order> orders = new HashSet<>();

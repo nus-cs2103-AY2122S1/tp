@@ -4,5 +4,5 @@
 <?import javafx.scene.chart.PieChart?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <PieChart fx:id="pieChart" />
+	<PieChart fx:id="pieChart" minWidth="340" minHeight="340" legendVisible="false" />
 </VBox>

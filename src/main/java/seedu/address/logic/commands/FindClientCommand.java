@@ -8,12 +8,10 @@ import seedu.address.model.client.ClientContainsKeywordsPredicate;
 
 /**
  * Finds and lists all clients in application whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindClientCommand extends Command {
-
     public static final String COMMAND_WORD = "find -c";
-
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Finds all clients whose names contain any of "
                     + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -31,7 +29,8 @@ public class FindClientCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size()));
+                String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size()),
+                CommandType.FIND, null, true);
     }
 
     @Override

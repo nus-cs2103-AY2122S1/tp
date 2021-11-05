@@ -33,7 +33,7 @@ import seedu.address.testutil.ProductBuilder;
  */
 
 public class EditProductCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,11 +43,13 @@ public class EditProductCommandTest {
         EditProductCommand editProductCommand = new EditProductCommand(INDEX_FIRST_PRODUCT, descriptor);
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedProduct,
+                false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setProduct(productToEdit, editedProduct);
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -68,11 +70,13 @@ public class EditProductCommandTest {
         EditProductCommand editProductCommand = new EditProductCommand(indexLastProduct, descriptor);
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedProduct,
+                false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setProduct(lastProduct, editedProduct);
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -82,10 +86,12 @@ public class EditProductCommandTest {
         Product editedProduct = model.getFilteredProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedProduct,
+                false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -98,35 +104,14 @@ public class EditProductCommandTest {
                 new EditProductDescriptorBuilder().withName(VALID_NAME_DAISY).build());
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedProduct,
+                false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setProduct(model.getFilteredProductList().get(0), editedProduct);
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
-
-    /*
-    @Test
-    public void execute_duplicateProductUnfilteredList_failure() {
-        Product firstProduct = model.getFilteredProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
-        EditProductDescriptor descriptor = new EditProductDescriptorBuilder(firstProduct).build();
-        EditProductCommand editProductCommand = new EditProductCommand(INDEX_SECOND_PRODUCT, descriptor);
-
-        assertCommandFailure(editProductCommand, model, EditProductCommand.MESSAGE_DUPLICATE_PRODUCT);
-    }
-
-    @Test
-    public void execute_duplicateProductFilteredList_failure() {
-        showProductAtIndex(model, INDEX_FIRST_PRODUCT);
-
-        // edit product in filtered list into a duplicate in address book
-        Product productInList = model.getAddressBook().getProductList().get(INDEX_SECOND_PRODUCT.getZeroBased());
-        EditProductCommand editProductCommand = new EditProductCommand(INDEX_FIRST_PRODUCT,
-                new EditProductDescriptorBuilder(productInList).build());
-
-        assertCommandFailure(editProductCommand, model, EditProductCommand.MESSAGE_DUPLICATE_PRODUCT);
-    }
-    */
 
     @Test
     public void execute_invalidProductIndexUnfilteredList_failure() {

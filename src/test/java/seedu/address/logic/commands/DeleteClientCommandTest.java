@@ -24,7 +24,7 @@ import seedu.address.model.client.Client;
  */
 public class DeleteClientCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,11 +32,12 @@ public class DeleteClientCommandTest {
         DeleteClientCommand deleteClientCommand = new DeleteClientCommand(INDEX_FIRST_CLIENT);
 
         String expectedMessage = String.format(DeleteClientCommand.MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.DELETE, null, true);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteClient(clientToDelete);
 
-        assertCommandSuccess(deleteClientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteClientCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -55,12 +56,13 @@ public class DeleteClientCommandTest {
         DeleteClientCommand deleteClientCommand = new DeleteClientCommand(INDEX_FIRST_CLIENT);
 
         String expectedMessage = String.format(DeleteClientCommand.MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.DELETE, null, true);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteClient(clientToDelete);
         showNoClient(expectedModel);
 
-        assertCommandSuccess(deleteClientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteClientCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

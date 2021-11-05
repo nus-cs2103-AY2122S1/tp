@@ -18,7 +18,7 @@ import seedu.address.logic.commands.DeleteClientCommand;
  */
 public class DeleteClientCommandParserTest {
 
-    private DeleteClientCommandParser parser = new DeleteClientCommandParser();
+    private final DeleteClientCommandParser parser = new DeleteClientCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteClientCommand() {
