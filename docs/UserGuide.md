@@ -20,6 +20,8 @@ Take note of some syntax we will frequently use throughout the User Guide:
 | `markdown` | Commands or examples |
 | Format: | the format to write the commands in the application|
 
+<div style="page-break-after: always;"></div>
+
 ## Table Of Contents <a name="toc"></a>
 * [Quick start](#quick-start)
 * [What is Command-line Interface (CLI)?](#what-is-cli)
@@ -118,7 +120,6 @@ all the details!<br>
 
 ![get format](images/user-guide/tipGetFormat.png)
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features <a name="features"/>
@@ -202,6 +203,7 @@ To use commands for managing patients, toggle the displayed list to the patient 
 More information about the `toggle` command [here](#toggle).
 
 ![patient tab](images/patientTab.png)
+
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
