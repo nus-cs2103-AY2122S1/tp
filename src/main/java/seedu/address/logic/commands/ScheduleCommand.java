@@ -21,8 +21,8 @@ public class ScheduleCommand extends Command {
         + "Example: " + COMMAND_WORD + " 01-01-2021";
 
     public static final String MESSAGE_SCHEDULE_SUCCESS = "Found Schedule for %1$s";
-    public static final String MESSAGE_INVALID_DATE_FAILURE = "Please input a date in the format of dd-MM-yyyy, " +
-            "where dd refers to the day, MM refers to the month and yyyy refers to the year.";
+    public static final String MESSAGE_INVALID_DATE_FAILURE = "Please input a date in the format of dd-MM-yyyy, "
+            + "where dd refers to the day, MM refers to the month and yyyy refers to the year.";
     public static final String MESSAGE_NO_SCHEDULE_ON_DATE_SUCCESS = "No meetings on the day!";
     public static final String MESSAGE_SHOW_ALL_MEETINGS_SUCCESS = "Showing all meetings.";
 
