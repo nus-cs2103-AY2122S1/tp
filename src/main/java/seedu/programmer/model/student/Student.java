@@ -223,11 +223,20 @@ public class Student implements DisplayableObject {
         }
 
         Student otherStudent = (Student) other;
-        return otherStudent.getName().equals(getName())
+
+        boolean isIdentityFieldSame = otherStudent.getName().equals(getName())
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getClassId().equals(getClassId())
-                && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getLabList().equals(getLabList());
+                && otherStudent.getEmail().equals(getEmail());
+
+        boolean isLabListSame = true;
+
+        for (int i = 0; i < getLabList().size(); i++) {
+            //check if the labNum, labResult and labTotal are all identical
+            isLabListSame = isLabListSame && getLabList().get(i).isIdenticalLab(otherStudent.getLabList().get(i));
+        }
+
+        return isIdentityFieldSame && isLabListSame;
     }
 
     @Override

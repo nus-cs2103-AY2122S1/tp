@@ -105,15 +105,18 @@ public class Lab implements DisplayableObject {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && labNum.getLabNum() == ((Lab) other).getLabNum().getLabNum());
+                && labNum.getLabNum().equals(((Lab) other).getLabNum().getLabNum()));
     }
 
     /**
-     * Returns true if a given string is a valid score.
+     * check if the labNum, labResult and labTotal are all identical.
      */
-    public static boolean isValidScore (Integer score) {
-        return score >= 0;
+    public boolean isIdenticalLab(Lab otherLab) {
+        return labNum.equals(otherLab.getLabNum())
+                && actualScore.equals(otherLab.getLabResult())
+                && totalScore.equals(otherLab.getLabTotal());
     }
+
 
     @Override
     public String toString() {

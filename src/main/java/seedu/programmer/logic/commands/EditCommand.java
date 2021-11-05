@@ -84,7 +84,10 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+        //Instead of editing the student, create a copy of it and edit the copy
+        //This is to allow the original student to remain unchanged, so that comparison of fields can be carried out.
+        Student studentToEditCopy = studentToEdit.copy();
+        Student editedStudent = createEditedStudent(studentToEditCopy, editStudentDescriptor);
 
         //Check if the user edits any field.
         //Different from the one in EditCommandParser: at this stage user can enter an input
@@ -125,6 +128,7 @@ public class EditCommand extends Command {
         ClassId updatedClassId = editStudentDescriptor.getClassId().orElse(studentToEdit.getClassId());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Lab updatedLab = editStudentDescriptor.getLab().orElse(null);
+
         LabResult updatedResult = null;
         if (updatedLab != null) {
             updatedResult = editStudentDescriptor.getResult().orElse(null);
