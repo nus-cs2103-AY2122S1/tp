@@ -138,5 +138,4 @@ Given below are my contributions to the project.
   [\#175](https://github.com/AY2122S1-CS2103-W14-3/tp/issues/175),
   [\#180](https://github.com/AY2122S1-CS2103-W14-3/tp/issues/180),
   [\#182](https://github.com/AY2122S1-CS2103-W14-3/tp/issues/182),
-  
-  
+
