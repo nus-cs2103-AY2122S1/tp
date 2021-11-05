@@ -595,7 +595,9 @@ TAB automates the updating of individual lesson fees after the lesson has ended.
 * `LastUpdatedDate` stores the `LocalDateTime` of when the `AddressBook` was last updated.
 * `Money` and its subclass facilitates the payment mechanism.
 
-When the user launches TAB, in `MainApp#initModel()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. 
+When the user launches TAB, in `MainApp#initModel()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after user launches TAB.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
