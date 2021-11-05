@@ -247,7 +247,26 @@ Examples:
 * Search by single GitHub username: `find g/dY` 
 * Search by multiple GitHub usernames: `find g/ai-coder kaira1208`
 
-<h3 id = "Show"> </h3>
+### Find A Buddy Tab
+
+The Find a Buddy feature can be accessed by just switching to the last tab. The tab will display the top 5 matches to your profile based on gathered GitHub data.
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true">
+</p>
+
+
+#### Working
+
+The GitHub data used includes the percentage of contributions for different languages in the top 30 repositories, and the number of repos in the user's profile.
+
+A similarity score is calculated using these features. The similarity score is based on the following three metrics:
+
+- Euclidean Distance
+- Manhattan Distance
+- Cosine Similarity
+
+On clicking a student, you can view the similarity score and the languages you have in common with the selected student.
 
 ### Show a Student Contact - `show`
 
