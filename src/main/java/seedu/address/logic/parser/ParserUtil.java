@@ -36,6 +36,10 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            if (trimmedIndex.matches("\\d*[1-9]d*")) { // Number of any length, but must not be all 0s.
+                // assume the total number of users is less than 2.147 billion.
+                return Index.fromOneBased(Integer.MAX_VALUE);
+            }
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
