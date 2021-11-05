@@ -30,7 +30,7 @@ Student *-down-> "1" StudentNumber
 Student *-down-> "0..1" UserName
 Student *-up---> "0..1" RepoName
 Student -up--> "*" Tag
-Student *-right--> "0..1" GroupName
+Student -right--> "0..1" GroupName
 
 Group *-down-> "1" GroupName
 Group *-left-> "1" Members

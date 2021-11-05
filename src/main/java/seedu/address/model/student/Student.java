@@ -82,6 +82,23 @@ public class Student {
         this.groupName = groupName;
     }
 
+    /**
+     * Constructor for a Student object when updating student GroupName
+     */
+
+    public Student(Student student, GroupName groupName) {
+        requireAllNonNull(student, groupName);
+        this.name = student.getName();
+        this.email = student.getEmail();
+        this.studentNumber = student.getStudentNumber();
+        this.userName = student.getUserName();
+        this.repoName = student.getRepoName();
+        this.tags.addAll(student.getTags());
+        this.attendance = student.getAttendance();
+        this.participation = student.getParticipation();
+        this.groupName = groupName;
+    }
+
     public Name getName() {
         return name;
     }
