@@ -7,7 +7,7 @@ import seedu.address.model.product.Product;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ * {@code AddressBook ab = new AddressBookBuilder().withClient(client).withProduct(product).build();}
  */
 public class AddressBookBuilder {
 
@@ -15,10 +15,6 @@ public class AddressBookBuilder {
 
     public AddressBookBuilder() {
         addressBook = new AddressBook();
-    }
-
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
     }
 
     /**
