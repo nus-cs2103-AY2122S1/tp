@@ -93,7 +93,7 @@ public class Date implements Comparable<Date> {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Date
-                && dateString.equals(((Date) other).dateString));
+                && date.equals(((Date) other).date));
     }
 
     @Override
