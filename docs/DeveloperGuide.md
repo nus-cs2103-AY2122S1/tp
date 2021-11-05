@@ -587,6 +587,8 @@ The predicate is then used to filter the list of person.
     * Pros: It offers greater flexibility for each field predicate to have its own matching behavior.
     * Cons: There is greater probability of bugs introduced if a new field to search is to be added, or if the matching behaviour of all predicates are required to be changed.
 
+### Fees Calculation
+
 
 --------------------------------------------------------------------------------------------------------------------
 
