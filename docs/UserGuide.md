@@ -87,6 +87,19 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 
 > * Main Window.
 
+## User Interface
+
+![User Interface](images/UiLabelled.png)
+
+1. **Menu Bar**: Contains links and keyboard shortcuts for navigating to other UI components.
+2. **Profile Window**: Opens the Profile Window, where users can see the details they have entered during profile set up.
+3. **Events Icon**: Switches to the events tab.
+4. **Command Box**: A text field for users to enter their commands and view previous commands command-line style.
+5. **Result Box**: Displays the results of commands entered into the Command Box.
+6. **Tab Switcher**: Shows all tabs, highlights the current tab, and switches between tabs by clicking or keyboard shortcuts.
+7. **Contact List**: Shows all contacts in a scrollable list.
+8. **Contact Details**: Shows all details of the currently selected contact.
+
 ## Keyboard Mappings
 
 1. <kbd>⌘</kbd> + <kbd>1</kbd>: To Switch to Contacts Tab.
