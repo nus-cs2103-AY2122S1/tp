@@ -631,7 +631,7 @@ Note that outstanding fees will not change with the following cases:
 * Changing start or end date of the lesson.
 * Changing the lesson's timing.
 
-#### Upcoming Features for Fees Calculator
+#### Upcoming features for Fees Calculator
 
 1. **Flag out overdue lesson fees.** In the future, we would like to allow users to specify the number of lessons per payment, and if not specified the default would be 4 lessons per payment. 
 This value would be used to calculate and flag out which lesson's fees are due by automatically tagging a red `DUE` tag to that lesson.
@@ -779,23 +779,18 @@ Format: `undo`
 #### Redoing undone commands: `redo`
 
 Redo the previous command that has been undone. 
-The undone command can only be redone provided that you did not call any commands that will modify data prior to redo.
+The undone command can only be redone if the previous command was `undo` or a command that does not modify any data.
 
 Format: `redo`
 
 Example:
-1. Valid Successive Redo and Undo commands
-   1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
-   3. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
-   
-2. Valid Redo command
+1. Valid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
    4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
    
-3. Invalid Redo command
+2. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
    2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
