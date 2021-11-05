@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ModuLink: User Guide
+title: ModuLink - User Guide
 ---
 ## Welcome to ModuLink!
 
