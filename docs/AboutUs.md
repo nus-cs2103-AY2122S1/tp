@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/yucheng11122017.png" width="200px">
 
 [[github](https://github.com/yucheng11122017)]
-[[portfolio](team/chanyucheng.md)]
+[[portfolio](team/yucheng11122017.md)]
 
 * Role: In charge of Model
 

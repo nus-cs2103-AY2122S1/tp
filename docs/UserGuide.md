@@ -129,7 +129,8 @@ Format birthday as `ddMMyyyy`.
 </div>
 
 Notes:
-* Phone number must be unique.
+* Phone number must be unique and must contain only numbers.
+* Emails must contain @. (Valid emails that violate convention are accepted as well)
 * Birthdays are optional and can be added in future with `edit` command.
 * Future dates as birthdays are not allowed.
 * Each tag has a character limit of 60.
@@ -327,7 +328,7 @@ Notes:
 * `list` followed by `deletem 2 - 3`
   * deletes the 2nd and 3rd person in the address book.
 * `find n/Betsy` followed by `deletem 1 - 5`
-  * deletes the 1st and 2nd person in the results of the `find` command.
+  * deletes the 1st to 5th person in the results of the `find` command.
 
 ### Exporting a mailing list of contacts : `mailingList`
 
@@ -339,7 +340,6 @@ Exports a CSV file of the current view containing specified fields.
 Notes:
 * Name is always the first column in the CSV file.
 * The default exported fields are name, phone, email.
-* Invalid prefixes are ignored.
 * Opens a file selector for you to pick the export location and file name.
 
 **Sample Usage:**
@@ -348,10 +348,6 @@ Notes:
 
 * `mailingList p/`
   * Prepares a CSV of the current view containing Name and Phone as the fields.
-
-* `mailingList j/`
-  * Invalid Prefix j/ is ignored.
-  * Prepares a CSV of the current view containing Name, Phone and Email as the fields.
 
 ### Clearing all entries : `clear`
 
@@ -406,7 +402,6 @@ CONNECTIONS data are saved as a JSON file `[JAR file location]/data/CONNECTIONS.
 
 :exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
-If your changes to the data file makes Birthday and Pin have invalid format, CONNECTIONS will discard data for these fields and revert to default (no birthday and not pinned). Other data will be recovered. 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
