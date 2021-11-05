@@ -51,7 +51,8 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
-        title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
+        title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson()
+                + " - " + lesson.getDisplayDayOfWeek() + ")");
         date.setText(lesson.getDisplayDate().toString());
         time.setText(lesson.getTimeRange().toString());
         rates.setText(lesson.getLessonRates().toString());
