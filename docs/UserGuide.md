@@ -66,10 +66,10 @@ This guide aims to help users get familiar with using RecruitIn's features.
 
 | Term | Definition |
 | :---: | :--- |
-| **Command Line Interface (CLI)** | A **CLI** is a user interface that accepts text input to execute system functions.<br>RecruitIn uses a **CLI** interface to operate most of its features. |
+| **Command Line Interface (CLI)** | A **CLI** is a user interface that accepts text input to execute system functions.<br><br>RecruitIn uses a **CLI** interface to operate most of its features. |
 | **Command** | **Commands** are user text inputs that executes certain features of RecruitIn. |
-| **Prefix** | A **Prefix** is a fixed text input that indicates an applicant's detail.<br>For instance, `n/` is a Prefix that indicates an applicant's name.<br>It is used in commands to differentiate user inputs for different applicant details. |
-| **Parameter** | A **Parameter** is a user text input that usually follows after a **Prefix**.<br>For instance, in `n/John`, `John` is a **Parameter** of **Prefix** `n/`.<br>In some cases, it does not have to follow a **Prefix**.<br>For instance, in `delete 1`, `1` is a **Parameter** of the `delete` command. | 
+| **Prefix** | A **Prefix** is a fixed text input that indicates an applicant's detail.<br><br>For instance, `n/` is a Prefix that indicates an applicant's name.<br><br>It is used in commands to differentiate user inputs for different applicant details. |
+| **Parameter** | A **Parameter** is a user text input that usually follows after a **Prefix**.<br><br>For instance, in `n/John`, `John` is a **Parameter** of **Prefix** `n/`.<br><br>In some cases, it does not have to follow a **Prefix**.<br><br>For instance, in `delete 1`, `1` is a **Parameter** of the `delete` command. | 
 
 <p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
 
