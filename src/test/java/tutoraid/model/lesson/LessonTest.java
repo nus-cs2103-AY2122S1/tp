@@ -1,6 +1,5 @@
 package tutoraid.model.lesson;
 
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_CAPACITY_MATHS_TWO;
@@ -39,10 +38,10 @@ public class LessonTest {
                 new LessonBuilder(TypicalLessons.MATHS_ONE).withLessonName(VALID_LESSON_NAME_MATHS_TWO).build();
         assertFalse(TypicalLessons.MATHS_ONE.isSameLesson(editedMathsOne));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Lesson editedMathsTwo = new LessonBuilder(TypicalLessons.MATHS_TWO).withLessonName(
                 VALID_LESSON_NAME_MATHS_TWO.toLowerCase()).build();
-        assertFalse(TypicalLessons.MATHS_TWO.isSameLesson(editedMathsTwo));
+        assertTrue(TypicalLessons.MATHS_TWO.isSameLesson(editedMathsTwo));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_LESSON_NAME_MATHS_TWO + " ";
