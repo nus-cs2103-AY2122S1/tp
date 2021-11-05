@@ -29,7 +29,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/czhi-bin.png" width="200px">
 
-[[github](https://github.com/czhi-bin)][[portforlio](team/czhi-bin.md)]
+[[github](https://github.com/czhi-bin)][[portfolio](team/czhi-bin.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines + In charge of Logic
