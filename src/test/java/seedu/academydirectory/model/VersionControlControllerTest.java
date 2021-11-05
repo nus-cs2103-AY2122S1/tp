@@ -25,7 +25,7 @@ import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.objects.VcObject;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
-// Integration Test of VersionControlController with other components
+// Contains integration Test of VersionControlController with other components
 class VersionControlControllerTest {
     private static final Path RELEVANT_DIR = Paths.get("src", "test",
             "data", "VersionControlTest", "VersionControlTest");

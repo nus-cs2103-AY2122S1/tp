@@ -1,15 +1,13 @@
 package seedu.academydirectory.versioncontrol.reader;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.academydirectory.commons.util.FileUtil;
 import seedu.academydirectory.versioncontrol.objects.VcObject;
 
 public abstract class VersionControlObjectReader<T extends VcObject> {
@@ -34,10 +32,9 @@ public abstract class VersionControlObjectReader<T extends VcObject> {
     }
 
     private Optional<String> loadFile(Path filepath) {
-        File file = new File(String.valueOf(filepath));
         String result;
         try {
-            result = new String(new FileInputStream(file).readAllBytes(), StandardCharsets.UTF_8);
+            result = FileUtil.readFromFile(filepath);
         } catch (IOException e) {
             return Optional.empty();
         }
