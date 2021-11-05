@@ -18,23 +18,33 @@ Given below are my contributions to the project.
 The code that I have contributed to the team can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=Linxcathyyy&tabRepo=AY2122S1-CS2103T-T12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false).
 
 #### Enhancements to Existing Features
-* Wrote additional tests for new and existing features to increase coverage from 33% to 70%
-* Helped to develop the UI of Sellah
-* Helped to remove traces of Person (the old model)
-* Helped to remove unused testcases (the old testcases)
-
-#### New Features Implemented
 Implemented delete command for client and product
 * What it does: allows the user to delete a specific client or product from database
-* Justification: This feature improves the product significantly because a user might want to make changes in his/her 
-  inventory due to low sales or the some clients might no longer be available, hence the app should provide a way for 
+* Justification: This feature improves the product significantly because a user might want to make changes in his/her
+  inventory due to low sales or the some clients might no longer be available, hence the app should provide a way for
   the user to make changes in the database.
-  
+
+* Pull request:
+  [\#73](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/73)
+
+
 Implemented unique client and product's list
 * What it does: stores a list of clients or products with different IDs
 * Justification: This feature improves the product significantly because a user should not be able to add duplicate
-clients or products in the database, as duplicate clients or products might lead to confusion.
+  clients or products in the database, as duplicate clients or products might lead to confusion.
 
+* Pull requests:
+  [\#65](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/65),
+  [\#70](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/70)
+
+Wrote additional tests for new and existing features to increase coverage from 33% to 70%.
+* Pull requests:
+[\#112](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/112),
+[\#114](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/114),
+[\#119](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/119),
+[\#213](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/213)
+
+#### New Features Implemented
 Implemented second panel for view, help and stat command together with Benjamin Lui (benluiwj)
 * What it does: a panel to show additional information other than clients and products. When a user first opens the app,
   a help message with example commands will be displayed on the second panel. When a user wants to view the details of
@@ -48,6 +58,10 @@ Implemented second panel for view, help and stat command together with Benjamin 
   understand their needs in order to make necessary improvements to their products, hence we implemented the statistics
   function on the second panel.
 
+* Pull request:
+  [\#144](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/144)
+
+
 #### Contributions to the UG
 * Section 1 (Introduction)
 * Section 2 (Quick Start)
@@ -60,16 +74,59 @@ Implemented second panel for view, help and stat command together with Benjamin 
 * Section 5 (FAQ)
 * Section 6 (Command Summary)
 
+(Pull requests
+[\#41](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/41),
+[\#51](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/51),
+[\#147](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/147),
+[\#189](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/189),
+[\#190](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/190),
+[\#222](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/222),
+[\#224](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/224))
+
 #### Contributions to the DG
-* Delete Client/Product Feature
-* Appendix: Requirements
-* Appendix: Instructions for manual testing
+* Section 1 (Introduction)
+* Section 2 (Setting Up & Getting Started)
+* Section 3.1 (Architecture)
+* Section 3.2 (UI component)
+* Section 3.3 (Logic Component)
+* Section 3.4 (Model Component)
+* Section 3.5 (Storage Component)
+* Section 3.6 (Common Classes)
+* Section 4.2 (Delete Client/Product Feature)
+* Section 6.1 (Product Scope)
+* Section 6.2 (User Stories)
+* Section 6.3 (Use Cases)
+* Section 6.4 (Non-Functional Requirements)
+* Section 6.5 (Glossary)
+* Section 7.1 (Launch and Shutdown)
+* Section 7.2 (Viewing Help)
+* Section 7.3 (Deleting a Client/Product)
+
+(Pull requests
+[\#42](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/42),
+[\#148](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/148),
+[\#302](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/302),
+[\#311](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/311),
+[\#312](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/312))
 
 #### Contributions to Team-based Tasks
-* Designing the new GUI for Sellah
+* Drawing all UML diagrams for DG
 * Setting up the GitHub team org/repo
 * Managing the issue tracker
 * In charge of implementing and reviewing testcases
+* Updating README (Pull request
+  [\#26](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/26))
+* Designing the new GUI for Sellah
+* Designing the new icon for Sellah
+* Removing traces of Person (Pull request
+  [\#211](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/211))
+* Removing unused testcases (Pull request
+  [\#86](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/86))
 
 #### Contributions to the Community
 * Reported bugs and suggestions for other teams in the class can be found [here](https://github.com/Linxcathyyy/ped/issues).
+
+#### Bug Fixed
+* GUI Display (Pull request [\#290](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/290))
+* Error Message (Pull request [\#291](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/291))
+* Email Validation (Pull request [\#292](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/292))
