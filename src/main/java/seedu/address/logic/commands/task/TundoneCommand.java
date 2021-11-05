@@ -29,7 +29,7 @@ public class TundoneCommand extends Command {
             + PREFIX_TASK_INDEX + "2";
 
     public static final String MESSAGE_UNDONE_TASK_SUCCESS = "Marked task: %1$s as undone\n";
-    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member\n";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member.\n";
 
     private final Set<Index> indexList;
 

@@ -520,7 +520,6 @@ Action | Format, Examples
 **medit** | `medit /m MEMBER_INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
 **mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
-**mpfind** | `mpfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mpfind colleague`
 **mdel** | `mdel /m MEMBER_INDEX` <br> e.g., `mdel /m 5`
 **tadd** | `tadd /n TASKNAME /m MEMBER_INDEX` <br> e.g., `tadd /n Collect payment from members /m 3`
 **tfind** | `tfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `tfind form`
