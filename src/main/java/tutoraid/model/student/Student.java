@@ -20,28 +20,27 @@ public class Student {
 
     // Data fields
     private final ProgressList progressList;
-    private final PaymentStatus paymentStatus;
     private final Lessons lessons;
 
     /**
      * Every field must be present and not null.
      */
     public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
-                   ProgressList progressList, PaymentStatus paymentStatus, Lessons lessons) {
+                   ProgressList progressList, Lessons lessons) {
         CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone, progressList,
-                paymentStatus, lessons);
+                lessons);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.progressList = progressList;
-        this.paymentStatus = paymentStatus;
         this.lessons = lessons;
     }
 
     /**
      * Updates the dependency between each lesson and a student if the lesson gets edited
-     * @param studentList A list containing all students in TutorAid
+     *
+     * @param studentList  A list containing all students in TutorAid
      * @param lessonToEdit The lesson being edited
      * @param editedLesson The edited lesson
      */
@@ -78,10 +77,6 @@ public class Student {
         return progressList.getLatestProgress();
     }
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
-
     public Lessons getLessons() {
         return lessons;
     }
@@ -92,6 +87,10 @@ public class Student {
 
     public Progress deleteLatestProgress() {
         return progressList.deleteLatestProgress();
+    }
+
+    public boolean isProgressListEmpty() {
+        return progressList.isProgressListEmpty();
     }
 
     public void addLesson(Lesson toAttend) {
@@ -139,14 +138,13 @@ public class Student {
                 && otherStudent.getParentName().equals(getParentName())
                 && otherStudent.getParentPhone().equals(getParentPhone())
                 && otherStudent.getProgressList().equals(getProgressList())
-                && otherStudent.getPaymentStatus().equals(getPaymentStatus())
                 && otherStudent.getLessons().equals(getLessons());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progressList, paymentStatus, lessons);
+        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progressList, lessons);
     }
 
     /**
@@ -183,7 +181,6 @@ public class Student {
         builder.append("; Progress: ")
                 .append(getLatestProgress())
                 .append("; Payment Status: ")
-                .append(getPaymentStatus())
                 .append("; Lessons: ")
                 .append(getLessons());
 

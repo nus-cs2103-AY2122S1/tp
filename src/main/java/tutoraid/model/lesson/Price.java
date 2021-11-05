@@ -12,7 +12,8 @@ import java.text.DecimalFormat;
 public class Price {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Price should be at least one digit long. It may contain dollars only or both dollars and cents.";
+            "Price should be non-negative and at least one digit long. "
+                    + "It may contain dollars only or both dollars and cents.";
     public static final String VALIDATION_REGEX = "\\d+(\\.\\d\\d)?";
     public final String price;
 

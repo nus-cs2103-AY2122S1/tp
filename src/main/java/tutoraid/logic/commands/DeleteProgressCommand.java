@@ -46,9 +46,13 @@ public class DeleteProgressCommand extends DeleteCommand {
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
 
+        if (studentToEdit.isProgressListEmpty()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NO_PROGRESS_TO_DELETE);
+        }
         Progress progressToDelete = studentToEdit.deleteLatestProgress();
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.viewStudent(studentToEdit);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, progressToDelete, studentToEdit));
     }
