@@ -418,33 +418,122 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `SalesNote` and the **Actor** is the `user`, unless specified otherwise)
+For use cases that are very similar, only the differences between them have been highlighted.
 
 #### Use case: Add a client
 
 **MSS**
 
-1. User requests to add a specific client to the list
-2. SalesNote adds the client
+1. User requests to add a specific client to the client list.
+2. SalesNote adds the client to the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The format of the request is invalid.
+* 1a. The format / details of the request are invalid.
 
-    * 1a1. SalesNote shows an error message.
-    
-      Use case ends.
+  * 1a1. SalesNote shows an error message. 
+  * 1a2. User enters a new request. 
+  * Steps 1a1-1a2 are repeated until the request is valid.
+  
+    Use case resumes from step 2.
+  
+* 2a. The client already exists in the client list
 
+  * 2a1. SalesNote shows an error message
+
+    Use case resumes from step 1.
+
+#### Use case: Add a task
+
+Analogous to the use case for [adding a client](#use-case-add-a-client).
+
+**Extensions**
+
+* 2b. The specified tag for the task does not correspond to an existing sales order.
+
+  * 2b1. SalesNote shows an error message.
+
+    Use case resumes from step 1.
+
+#### Use case: Add an order
+
+Analogous to the use case for [adding a client](#use-case-add-a-client).
+
+**Extensions**
+
+* 2b. The specified customer for the task does not correspond to an existing client.
+
+    * 2b1. SalesNote shows an error message.
+
+      Use case resumes from step 1.
 
 #### Use case: Delete a client
 
 **MSS**
 
-1.  User requests to list clients
-2.  SalesNote shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  SalesNote deletes the client
+1. User requests to list clients.
+2. SalesNote shows a list of clients.
+3. User requests to delete a specific client in the list.
+4. SalesNote deletes the client.
+5. SalesNote deletes the orders related to that client.
+6. SalesNote deletes the tasks related to those orders.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+  
+* 5a. No related orders found.
+
+    Use case ends.
+
+* 6a. No related tasks found.
+
+    Use case ends.
+    
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks.
+2. SalesNote shows a list of tasks.
+3. User requests to delete a specific task in the list.
+4. SalesNote deletes the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+
+#### Use case: Delete an order
+
+**MSS**
+
+1. User requests to list orders.
+2. SalesNote shows a list of orders.
+3. User requests to delete a specific order in the list.
+4. SalesNote deletes the order.
+5. SalesNote deletes the tasks related to the order.
 
     Use case ends.
 
@@ -460,34 +549,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
     
-#### Use case: Add a task
+* 5a. No related tasks found.
+
+  Use case ends.
+
+#### Use case: Edit a task
 
 **MSS**
 
-1. User requests to add a specific task to the list
-2. SalesNote adds the task
+1. User requests to list tasks.
+2. SalesNote shows a list of tasks.
+3. User requests to edit the details of a specific task in the list.
+4. SalesNote edits the details of the task.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The format of the request is invalid.
+* 2a. The list is empty.
 
-    * 1a1. SalesNote shows an error message.
+  Use case ends.
 
-      Use case ends.
+* 3a. The format / details of the request are invalid.
+
+    * 3a1. SalesNote shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the request is valid.
+
+      Use case resumes from step 4.
+
+* 4a. The user has not made any changes to the task details.
+
+      Use case resumes at step 3.
+
+* 4b. A task with the edited details already exists in the task list.
+
+    * 2b1. SalesNote shows an error message.
+
+      Use case resumes from step 3.
 
 
-#### Use case: Delete a task
+#### Use case: Edit a client
+
+Analogous to the use case for [editing a task](#use-case-edit-a-client).
+
+**Extensions**
+
+* 4c. The user updates the gender of a client without updating their dimensions.
+
+    * 4c1. SalesNote shows an error message.
+
+      Use case resumes from step 3.
+
+#### Use case: Find a client
 
 **MSS**
 
-1.  User requests to list tasks
-2.  SalesNote shows a list of tasks
-3.  User requests to delete a specific task in the list
-4.  SalesNote deletes the task
+1. User requests to find clients by a given keyword.
+2. SalesNote shows a list of clients whose details match at least 1 keyword.
 
-    Use case ends.
+   Use case ends.
+
+**Extensions**
+
+* 2a. None of the clients match the keyword.
+
+    * 2a1. SalesNote displays an empty client list.
+
+      Use case ends.
+
+#### Use case: Find a task
+
+Analogous to the use case for [finding a client](#use-case-find-a-client).
+
+#### Use case: Find an order
+
+Analogous to the use case for [finding a client](#use-case-find-a-client).
+
+#### Use case: Mark a task as done
+
+**MSS**
+
+1. User requests to list incomplete tasks.
+2. SalesNote shows a list of incomplete tasks.
+3. User requests to mark a specific task in the list as done.
+4. SalesNote marks the task as done.
+
+   Use case ends.
 
 **Extensions**
 
@@ -501,45 +649,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-#### Use case: Add an order
+#### Use case: Mark an order as complete
+
+Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-done).
+
+#### Use case: Sort orders
 
 **MSS**
 
-1. User requests to add a specific order to the list
-2. SalesNote adds the order
+1. User requests to list orders.
+2. SalesNote shows a list of orders.
+3. User requests to sort the orders by either the date or amount field in ascending or descending order.  
+4. SalesNote displays the sorted list of orders.
 
    Use case ends.
 
-**Extensions**
+**Extension**
 
-* 1a. The format of the request is invalid.
-
-    * 1a1. SalesNote shows an error message.
-
-      Use case ends.
-
-#### Use case: Delete an order
-
-**MSS**
-
-1.  User requests to list orders
-2.  SalesNote shows a list of orders
-3.  User requests to delete a specific order in the list
-4.  SalesNote deletes the order
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
+- 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The format / details of the request are invalid
 
     * 3a1. SalesNote shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the request is valid.
 
-      Use case resumes at step 2.
+      Use case resumes from step 3.
 
 
 *{More to be added}*
