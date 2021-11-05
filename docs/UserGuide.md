@@ -284,64 +284,104 @@ This section guides you on how to find or filter students of your choice in TAB.
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 
-Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
+Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE]
+[time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
 
-The fields that you can search for are:
+* You must specify at least one field to search for, and provide at least one keyword.<br>
+  e.g. `find cond/any` or `find n/` are invalid commands.
 
-Field            | Parameter                   | Result                                              
------------------|-----------------------------|---------------------------------------------------------
-Student Name     | n/NAME_KEYWORDS             | Students whose name contains all the keywords
-Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contains all the keywords
-Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contains all the keywords
-Student Email    | e/EMAIL_KEYWORDS            | Students whose email contains all the keywords
-Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contains all the keywords
-Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contains all the keywords
-School           | sch/SCHOOL_KEYWORDS         | Students whose school contains all the keywords
-Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contains all the keywords
-Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contains all the keywords
-Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contains all the keywords
-Tags             | t/TAG                           | Students who have the specified tag
-Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students who have lessons with subject that contains all the keywords
-Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date
-Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range
-Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
-Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
-Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
+##### Search by tags
+* You can search by multiple tags. e.g. `t/paid t/new`
+* One tag parameter can only have one keyword. e.g. `t/paid new` is invalid.
+* The search is case-insensitive. e.g. keyword `new` will match `NEW`.
+* Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`
 
-Notes about the find condition:
+Example:
+* `find t/unpaid t/New` will return all students with both of the tags `UNPAID` and `NEW`.
 
-* The find condition indicates that a student is only considered a match when `all`, `any` or `none`
-  of the fields which you are searching for match the student.<br>
-  e.g. 
-    * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
-    * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
-    * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
-    
-* The find condition is optional and defaults to `all` if not specified. <br>
-  e.g. `find date/10 Oct 2021 time/1000-1400` will return students with lessons that occur between `1000-1400` on `10 Oct 2021`.
-  
-Notes about search keywords:
-
-* You must provide at least one field to search.<br>
-  e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
-
-* You must provide at least one keyword to search for.<br>
-  e.g. entering just `find n/` alone is not a valid command as the keyword is empty.
-
-* Tags must only have one keyword.<br>
-  e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
-
-* The search is case-insensitive.<br>
-  e.g. keyword `hans` will match `Hans`.
-
-* A keyword can match a word partially.<br>
-  e.g. keyword `math` will match `mathematics`.
-
-* The order of the keywords do not matter.<br>
-  e.g. keyword `west jurong` will match `jurong west`.
-  
+##### Search by other student fields
+* You can specify one or more keywords for each parameter. e.g. `find n/Amad Ali`.
 * A field needs to contain all specified keywords to be matched.<br>
-  e.g. keywords `Amad Ali` will not match `Amad` or `Ali Abdul`, but it will match `Amad bin Ali`.
+  e.g. keywords `Amad Ali` will not match `Amad`, but it will match `Amad bin Ali`.
+* If you specify multiple of the same prefix, only the last prefix will be used for the search of that field.
+* A keyword can match a word partially. e.g. keyword `uni` will match `university`.
+* The search is case-insensitive.
+
+Example:
+* `find n/John a/west coast` will return students with name that contains `John`, and address that contains `west` and `coast`.
+
+##### Search by lesson fields
+* Finds all students with at least one lesson that matches the lesson parameters.
+
+<table id="find-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center">Fields</th>
+            <th style="text-align:center">Find behaviour</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Subject <br> Lesson Rate</td>
+            <td>
+              <ul>
+                <li>The same constraints for student fields apply.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Homework</td>
+            <td>
+              <ul>
+                <li>Finds students with lessons that have at least one homework that matches all the keywords.</li>
+                <li>The same constraints for student fields apply.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the Date format</li>
+                <li>Finds students with lessons that fall on the specified date.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Cancelled Date</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the Date format</li>
+                <li>Finds students with lessons that are cancelled on the specified date.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Time Range</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the Time Range format</li>
+                <li>Finds students with lessons that occur within the time range, excluding the start and end time.<br>
+                    e.g. <code>time/1200-1400</code> matches lesson with time <code>time/1300-1500</code>, but not <code>time/1400-1500</code></li>
+              </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+Example:
+* `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
+
+##### Search with match condition
+
+* You can specify an optional match condition which indicates the type of matching to be applied. 
+  A student is considered a match only when `all`, `any` or `none` of the fields which you are searching for match the student.
+* The match condition is optional and defaults to `all` if not specified.
+
+Examples:
+  * `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
+  * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
+  * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
 Examples:
 
