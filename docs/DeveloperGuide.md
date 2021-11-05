@@ -259,11 +259,69 @@ not related to the `DeleteSupplierCommand` are abstracted away.
         * Error messages would have been confusing to select.
         * Implementation would be more difficult
 
+### Find Command
+In the following section, we will be going through how our find command works. Since the find command is also very
+similar across all person types, we will be using the `FindCustomerCommand` to illustrate how the find command
+works. More information on the differences in finding `Supplier` and `Employee` can be found in our
+[User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
+
+#### Current Implementation
+Finding of customers can be divided into two steps: `Parse` and `Execute`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("findC Chetwin")` API call.
+
+![FindCustomerCommandSequenceDiagram](images/FindCustomerCommandSequenceDiagram.png)
+
+`Parse`:
+1. When `Logic` is called upon to execute the `FindCustomerCommand`, it uses the `RhrhParser` class to parse the user command.
+2. The `RhrhParser` then creates a `FindCustomerCommandParser` to parse the command input.
+3. If successful, the `FindCustomerCommandParser` then creates a `CustomerClassContainsKeywordsPredicate` in `Model`
+4. This finally results in a `FindCustomerCommand` object being created from the newly created `CustomerClassContainsKeywordsPredicate` and is then executed by the
+   `LogicManager`.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for 
+`FindCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
+reaches the end of diagram.
+</div>
+
+`Execute`:
+1. The instance of `FindCustomerCommand` created can communicate with the `Model` when it is executed to filter the
+   `UniqueCustomerList` based on the `CustomerClassContainsKeywordsPredicate`.
+3. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following is an activity diagram to show how the find implementation works for a find customer input:
+
+![FindCustomerCommandActivityDiagram](images/FindCustomerCommandActivityDiagram.png)
+
+#### Design Considerations
+
+* Current Design: We separated `FindCustomerCommmand`, `FindEmployeeCommmand` and `FindSupplierCommmand` as
+  different command types.
+
+    * Pros
+        * As there are different data types, and different number of optional and compulsory fields between Person types, it would be neater to separate and check for keyword matches in the different fields depending on the Person type.
+        * Errors in user input is easier to identify due to the separation of Person type.
+
+    * Cons
+        * Additional classes had to be implemented.
+        * More commands for a similar feature.
+
+
+* Alternative Design: We could have a singular `FindCommand` and parse the user's input to see what Person Type the
+  user wanted to find.
+    * Pros
+        * Fewer commands for the user to remember.
+
+    * Cons
+        * Error messages would have been confusing to select.
+        * Implementation would be more difficult
+
 
 ### Sort Command
 In the following section, we will be going through how our sort command works. Since the sort command is also very
 similar across all person types, we will be using the `SortSupplierCommand` to illustrate how the sort command
-works. More information on the differences in deleting `Customer` and `Employee` can be found in our
+works. More information on the differences in sorting `Customer` and `Employee` can be found in our
 [User Guide](https://ay2122s1-cs2103t-t17-1.github.io/tp/UserGuide.html)
 
 #### Current Implementation
@@ -299,7 +357,7 @@ not related to the `SortSupplierCommand` are abstracted away.
 
 #### Design Considerations
 
-* Current Design: We separated `SortCustomerCommmand`, `SortEmployeeCommmand` and `DeleteSupplierCommmand` as
+* Current Design: We separated `SortCustomerCommmand`, `SortEmployeeCommmand` and `SortSupplierCommmand` as
   different command types.
 
     * Pros
