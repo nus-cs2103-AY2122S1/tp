@@ -6,13 +6,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.convertEmptyStringIfNull;
 import static seedu.address.commons.util.StringUtil.isValidDate;
 import static seedu.address.commons.util.StringUtil.isValidTime;
+import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 import static seedu.address.commons.util.StringUtil.parseToLocalDate;
 import static seedu.address.commons.util.StringUtil.parseToLocalTime;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullComparable<NextMeeting> {
+public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullComparable<NextMeeting>, LongerFieldLength {
 
     public static final String DATE_MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of Day-Month-Year, "
             + "where Day, Month and Year should be valid numerical values.";
@@ -20,8 +21,9 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
             + "where Hour and Minutes should be valid numerical values.";
     public static final String END_TIME_MESSAGE_CONSTRAINTS = "End time should be in the 24-hour format, "
             + "where Hour and Minutes should be valid numerical values.";
-    public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct."
-            + "It should be in the form of m/dd-MM-yyyy (hh:mm~hh:mm), {location}";
+    public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct\n"
+            + "It should be in the form of m/dd-MM-yyyy (hh:mm~hh:mm), {location}\n"
+            + "(Character limit: 100)";
     public static final String MESSAGE_INVALID_TIME_DURATION = "End Time should be after Start Time.";
     public static final String MESSAGE_MEETING_DATE_OVER = "NextMeeting should not be in the past.";
     public static final String NO_NEXT_MEETING = "No meeting planned";
@@ -122,7 +124,8 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
      * Returns a boolean if the given {@code test} is a valid NextMeeting string
      */
     public static boolean isValidNextMeeting(String test) {
-        return (IS_NULL_VALUE_ALLOWED && test.isEmpty()) || test.matches(VALID_MEETING_STRING);
+        return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
+            || (test.matches(VALID_MEETING_STRING) && isWithinLengthLimit(test, MAX_LENGTH));
     }
 
     public void setWithWho(Name withWho) {
