@@ -21,18 +21,18 @@ public class ClassCodeTest {
 
     @Test
     public void classCodeComparable_validClassCode_success() {
-        ClassCode G06 = new ClassCode("G06");
-        ClassCode G92 = new ClassCode("G92");
-        ClassCode G06_copy = new ClassCode("G06");
-        ClassCode G99 = new ClassCode("G99");
+        ClassCode g06 = new ClassCode("G06");
+        ClassCode g92 = new ClassCode("G92");
+        ClassCode g06_copy = new ClassCode("G06");
+        ClassCode g99 = new ClassCode("G99");
 
         // compare same ClassCode
-        assertTrue(G06.compareTo(G06_copy) == 0);
-        assertTrue(G06.compareTo(G06) == 0);
+        assertTrue(g06.compareTo(g06_copy) == 0);
+        assertTrue(g06.compareTo(g06) == 0);
 
         // compare different ClassCode
-        assertTrue(G06.compareTo(G92) < 0);
-        assertTrue(G99.compareTo(G92) > 0);
+        assertTrue(g06.compareTo(g92) < 0);
+        assertTrue(g99.compareTo(g92) > 0);
     }
 
     @Test
