@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.*;
@@ -17,6 +18,7 @@ import seedu.address.model.module.event.EventDate;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,5 +75,19 @@ public class EeditCommandParserTest {
         assertParseFailure(parser, userInput + INVALID_EVENT_NAME_DESC + INVALID_EVENT_DATE_DESC
                 + VALID_EVENT_NAME_BADMINTON + VALID_EVENT_DATE_BADMINTON, Name.MESSAGE_CONSTRAINTS);
     }
-    
+
+    @Test
+    public void parse_invalidValueFollowedByValidValue_success() {
+        // no other valid values specified
+        Index targetIndex = INDEX_FIRST;
+        Set<Index> targetIndices = new HashSet<>();
+        String userInput = " " + CliSyntax.PREFIX_EVENT_INDEX + targetIndex.getOneBased()
+                + INVALID_EVENT_NAME_DESC + EVENT_NAME_DESC_BADMINTON + " " + PREFIX_MEMBER_INDEX;
+        EeditCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder()
+                .withName(VALID_EVENT_NAME_BADMINTON).build();
+        descriptor.setMemberSet(new HashSet<>());
+        descriptor.setAttendance(new HashMap<>());
+        EeditCommand expectedCommand = new EeditCommand(targetIndex, descriptor, targetIndices);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }
