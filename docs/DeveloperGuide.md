@@ -195,7 +195,7 @@ Currently, the appointment feature supports 5 different type of command:
 5. `unmark appointment`
 
 This 5 features will allow users to be able to manage the appointments they have with their clients.
-All 5 features extends from the `abstract` `Command` class.  
+All 5 features extends from the `abstract` `Command` class.  <br>
 These 5 features help clients to manage their appointment by manipulating the `Appointment` and the `AppointmentCount` class.
 `add appointment`, `edit appointment` and `delete appointment` functions similarly to the features `add`, `edit` and `delete` respectively.
 The table below summarises the purpose of the 5 different appointment commands.
@@ -375,8 +375,8 @@ Given below is Activity Diagram for FAST Appointment procedure. It includes scen
 * **Alternative 1 (current choice):** Divide the appointment features into 5 sub-features.
     * Pros:
         1. Isolation of a single sub-feature to a specific command: more intuitive to use.
-        2. Reduces Coupling. One Appointment Command Class handles one type of operation.
-        3. Improvement for the command syntax. Less prefix required.
+        2. Reduces coupling. One Appointment command class handles one type of operation.
+        3. Improvement for the command syntax. Less prefixes required.
         4. Improvement over `edit appointment` command: retains data fields not directly affected by the command.
     * Cons:
         1. More classes added, resulting in more lines of codes in the program.
@@ -419,16 +419,21 @@ If the `test` method returns `true`, that `Person` will be displayed in the sear
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. <br>
-Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
-calls `FastParser::parseCommand` to parse the given input. <br>
-Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
+**1**) The user launches the application for the first time. 
+
+**2**) The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. 
+
+**3**) `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
 `FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate` 
-containing a `List` of all the search queries (only "john" in this case) <br>
-Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate
-the state of our contacts. <br>
-Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
-of the search.<br>
+containing a `List` of all the search queries (only "john" in this case) 
+
+**4**). After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate
+the state of our contacts. 
+
+**5**) Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
+of the search.
+<br>
 
 ![Find_Command_Sequence_Diagram](images/findcommandsequencediagram.png)
 
@@ -502,7 +507,7 @@ The activity diagram below shows the flow of a multiple delete command.
  * `DeleteCommand::getInvalidIndex()` will traverse through the Index array to collate a list of invalid index.
  * `DeleteCommand::checkIndex()` will check and determine that there is no invalid index.
  * `DeleteCommand::checkDuplicates()` will check and determine that there is no duplicated index.
- * `DeleteCommand::executeMultipleDelete()` will start to delete the 5 clients in a for loop through `Model::deletePerson()`.
+ * `DeleteCommand::executeMultipleDelete()` will start to delete the 5 clients in a for-loop through `Model::deletePerson()`.
  * Success message will be displayed afterwards.
 
 The sequence diagram below shows step 1 to step 6 mentioned above.
@@ -768,7 +773,7 @@ The activity diagram below shows the flow of a typical tag command.
 
 #### Usage Scenario 
 
-**1**) The user launches the application and inputs "tag 1 a/pr/low d/friend", to add a priority tag `LowPriority` and 
+**1**) The user launches the application and inputs `tag 1 a/pr/low d/friend`, to add a priority tag `LowPriority` and 
 delete a tag `friend` from the first listed contact. We assume the first listed contact only has one tag at this 
 point in time, which is the `friend` tag.
 
@@ -1382,8 +1387,8 @@ testers are expected to do more *exploratory* testing.
 1) Name - 0 to 50 characters <br>
 2) Phone - 3 to 20 digits <br>
 3) Email - max 100 characters (at least 2 for domain portion, before @ symbol) <br>
-4) Address - max 100 characters
-5) Remark - max 45 characters
+4) Address - max 100 characters <br>
+5) Remark - max 45 characters <br>
 6) Tag - max 20 characters
 </div>
 
