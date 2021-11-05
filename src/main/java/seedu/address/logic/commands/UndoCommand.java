@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.summary.Summary;
 
@@ -16,13 +17,13 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_SUCCESS = "Previous contact list restored.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         if (model.isUndoable()) {
             model.undo();
             Summary summary = new Summary(model.getAddressBook());
             return new CommandResult(MESSAGE_UNDO_SUCCESS, summary);
         } else {
-            return new CommandResult(Messages.MESSAGE_INVALID_UNDO_STATE);
+            throw new CommandException(Messages.MESSAGE_INVALID_UNDO_STATE);
         }
     }
 
