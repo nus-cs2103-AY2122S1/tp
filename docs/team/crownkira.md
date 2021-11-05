@@ -50,3 +50,9 @@ Given below are my contributions to the project.
     * Integrated a new Github plugin (CircleCI) to the team repo
 
 * _{you can add/remove categories in the list above}_
+
+* 1
+* 2
+* 3
+* 4
+* 5
