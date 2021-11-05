@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":RhrhParser" as RhrhParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeleteSupplierCommandParser" as DeleteSupplierCommandParser LOGIC_COLOR
+participant "d:DeleteSupplierCommand" as DeleteSupplierCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +13,56 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("deleteS 1")
 activate LogicManager
 
-LogicManager -> RhrhParser : parseCommand("delete 1")
+LogicManager -> RhrhParser : parseCommand("deleteS 1")
 activate RhrhParser
 
-create DeleteCommandParser
-RhrhParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteSupplierCommandParser
+RhrhParser -> DeleteSupplierCommandParser
+activate DeleteSupplierCommandParser
 
-DeleteCommandParser --> RhrhParser
-deactivate DeleteCommandParser
+DeleteSupplierCommandParser --> RhrhParser
+deactivate DeleteSupplierCommandParser
 
-RhrhParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+RhrhParser -> DeleteSupplierCommandParser : parse("1")
+activate DeleteSupplierCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteSupplierCommand
+DeleteSupplierCommandParser -> DeleteSupplierCommand
+activate DeleteSupplierCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteSupplierCommand --> DeleteSupplierCommandParser : d
+deactivate DeleteSupplierCommand
 
-DeleteCommandParser --> RhrhParser : d
-deactivate DeleteCommandParser
+DeleteSupplierCommandParser --> RhrhParser : d
+deactivate DeleteSupplierCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> RhrhParser
-destroy DeleteCommandParser
+DeleteSupplierCommandParser -[hidden]-> RhrhParser
+destroy DeleteSupplierCommandParser
 
 RhrhParser --> LogicManager : d
 deactivate RhrhParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteSupplierCommand : execute()
+activate DeleteSupplierCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteSupplierCommand -> Model : deleteSupplier(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteSupplierCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteSupplierCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteSupplierCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteSupplierCommand --> LogicManager : result
+deactivate DeleteSupplierCommand
 
 [<--LogicManager
 deactivate LogicManager
