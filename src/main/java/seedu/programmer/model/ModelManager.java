@@ -103,6 +103,36 @@ public class ModelManager implements Model {
         requireNonNull(lab);
         return programmerError.hasLab(lab);
     }
+  
+    @Override
+    public boolean hasSameStudentId(Student student) {
+        requireNonNull(student);
+        return programmerError.hasSameStudentId(student);
+    }
+
+    @Override
+    public boolean hasSameStudentEmail(Student student) {
+        requireNonNull(student);
+        return programmerError.hasSameStudentEmail(student);
+    }
+
+    @Override
+    public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        return programmerError.hasOtherStudent(studentToEdit, editedStudent);
+    }
+
+    @Override
+    public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        return programmerError.hasOtherSameStudentId(studentToEdit, editedStudent);
+    }
+
+    @Override
+    public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        return programmerError.hasOtherSameStudentEmail(studentToEdit, editedStudent);
+    }
 
     @Override
     public void deleteStudent(Student target) {

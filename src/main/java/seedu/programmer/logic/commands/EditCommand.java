@@ -51,6 +51,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
     public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student Id "
+            + "already exists in the ProgrammerError";
+    public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
+            + "already exists in the ProgrammerError";
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s updated!\n";
 
     private static LabNum labNum2;
@@ -82,8 +86,19 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        //Check if the user edits any field.
+        //Different from the one in EditCommandParser: at this stage user can enter an input
+        //that is identical to the existing field.
+        if (studentToEdit.equals(editedStudent)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
+        if (model.hasOtherStudent(studentToEdit, editedStudent)) {
+            if (model.hasOtherSameStudentId(studentToEdit, editedStudent)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
+            } else if (model.hasOtherSameStudentEmail(studentToEdit, editedStudent)) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENT_EMAIL);
+            }
         }
 
         model.setStudent(studentToEdit, editedStudent);
