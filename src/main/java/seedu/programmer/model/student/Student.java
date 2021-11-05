@@ -244,7 +244,10 @@ public class Student implements DisplayableObject {
 
         for (int i = 0; i < getLabList().size(); i++) {
             //check if the labNum, labResult and labTotal are all identical
-            isLabListSame = isLabListSame && getLabList().get(i).isIdenticalLab(otherStudent.getLabList().get(i));
+            if (!getLabList().get(i).isIdenticalLab(otherStudent.getLabList().get(i))) {
+                isLabListSame = false;
+                break;
+            }
         }
 
         return isIdentityFieldSame && isLabListSame;
