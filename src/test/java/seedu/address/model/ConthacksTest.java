@@ -104,7 +104,7 @@ public class ConthacksTest {
      */
     private static class ConthacksStub implements ReadOnlyConthacks {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<ModuleLesson> classes = FXCollections.observableArrayList();
+        private final ObservableList<ModuleLesson> lessons = FXCollections.observableArrayList();
 
         ConthacksStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -117,7 +117,7 @@ public class ConthacksTest {
 
         @Override
         public ObservableList<ModuleLesson> getModuleLessonList() {
-            return classes;
+            return lessons;
         }
     }
 
