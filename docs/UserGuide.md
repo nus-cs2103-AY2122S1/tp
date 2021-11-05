@@ -579,8 +579,7 @@ Example: `tg/T09`
 Example: `s/tg:alexx9384`
 
 ### `s/SOCIAL_HANDLE_USERID`
-`SOCIAL_HANDLE_USERID` is the `USERID` component of `SOCIAL_HANDLE`
-Please refer to (`s/SOCIAL_HANDLE`)[#ssocial-handle]
+`SOCIAL_HANDLE_USERID` is the `USERID` component of [`SOCIAL_HANDLE`](#ssocial-handle)
 
 ### `r/REMARK`
 `REMARK` can take any values.
