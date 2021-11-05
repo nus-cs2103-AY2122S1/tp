@@ -1265,7 +1265,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAST focuses on the existing help window. Use case ends.
 
 
-#### Use case: U17 - Statistics window
+#### Use case: UC17 - Statistics window
 
 **MSS**
 
