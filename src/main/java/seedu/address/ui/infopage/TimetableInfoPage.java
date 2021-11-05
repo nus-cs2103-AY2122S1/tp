@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -132,22 +131,5 @@ public class TimetableInfoPage extends InfoPage {
         String[] dayOfWeek = new String[]{"Mon", "Tue", "Wed",
             "Thu", "Fri", "Sat", "Sun"};
         return dayOfWeek;
-    }
-
-    public int getNumCols() {
-        return timetableShown.getColumnCount();
-    }
-
-    public int getNumRows() {
-        return timetableShown.getRowCount();
-    }
-
-    public Node getFirstLabelInGridPane() {
-        for (Node node : timetableShown.getChildren()) {
-            if (node instanceof Label) {
-                return node;
-            }
-        }
-        return null;
     }
 }

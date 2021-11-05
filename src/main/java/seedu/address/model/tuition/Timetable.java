@@ -8,7 +8,6 @@ import java.util.HashMap;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import seedu.address.ui.ResultDisplay;
@@ -16,10 +15,10 @@ import seedu.address.ui.infopage.TimetableInfoPage;
 
 
 public class Timetable {
-    private static final int DEFAULT_FONT_SIZE = 8;
-    private static final String COLOR_ODD = "-fx-background-color: #3e7589; -fx-text-fill:WHITE; -fx-font-size:%1$spt;";
-    private static final String COLOR_EVEN = "-fx-background-color: #515658; -fx-text-fill:WHITE;"
+    public static final String COLOR_ODD = "-fx-background-color: #3e7589; -fx-text-fill:WHITE; -fx-font-size:%1$spt;";
+    public static final String COLOR_EVEN = "-fx-background-color: #515658; -fx-text-fill:WHITE;"
             + " -fx-font-size:%1$spt;";
+    private static final int DEFAULT_FONT_SIZE = 8;
     private static final String NOT_SHOWN = "The following class details are not shown due to space limit: ";
     private static final HashMap<String, Integer> dates = Timeslot.getDays();
     private final ObservableList<TuitionClass> tuitionClasses;
@@ -127,10 +126,12 @@ public class Timetable {
         int rowSpan = rowFinishInsert - rowStartInsert;
         Label lesson = getLabel(message, getFontSize(rowSpan),
                 colInsert, tuitionClass);
-        infoPage.addLesson(lesson, colInsert, rowStartInsert, 1,
-                rowSpan == 0 ? 1 : rowSpan);
-        GridPane.setHalignment(lesson, HPos.CENTER);
-        GridPane.setFillWidth(lesson, true);
+        if (infoPage != null) {
+            infoPage.addLesson(lesson, colInsert, rowStartInsert, 1,
+                    rowSpan == 0 ? 1 : rowSpan);
+            GridPane.setHalignment(lesson, HPos.CENTER);
+            GridPane.setFillWidth(lesson, true);
+        }
     }
 
     public String getColor(int start) {
@@ -149,19 +150,30 @@ public class Timetable {
     public Label getLabel(String message, int fontSize, int col, TuitionClass tuitionClass) {
         Label lesson;
         if (fontSize == 1) {
-            lesson = new Label();
+            lesson = productLabel("");
             notShown.add(tuitionClass.getNameString() + " " + tuitionClass.getTimeslot());
         } else if (fontSize == 2) {
-            lesson = new Label(tuitionClass.getNameString());
+            lesson = productLabel(tuitionClass.getNameString());
             fontSize = 8;
             notShown.add(tuitionClass.getNameString() + " " + tuitionClass.getTimeslot());
         } else {
-            lesson = new Label(message);
+            lesson = productLabel(message);
         }
-        lesson.setStyle(String.format(getColor(col), fontSize));
-        lesson.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        lesson.setAlignment(Pos.CENTER);
+        if (lesson != null) {
+            lesson.setStyle(String.format(getColor(col), fontSize));
+            lesson.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            lesson.setAlignment(Pos.CENTER);
+        }
         return lesson;
+    }
+
+    /**
+     * Produces a Label with given message.
+     * @param message message to shown on the label.
+     * @return the label instance.
+     */
+    public Label productLabel(String message) {
+        return new Label(message);
     }
 
     /**
@@ -185,19 +197,41 @@ public class Timetable {
         return DEFAULT_FONT_SIZE;
     }
 
+    /**
+     * Gets starting hour.
+     * @return the starting hour.
+     */
     public int getStart() {
         return start;
     }
 
+    /**
+     * Gets ending hour.
+     * @return the ending hour.
+     */
     public int getEnd() {
         return end;
     }
 
+    /**
+     * Gets total rows of the timetable.
+     * @return the number of rows.
+     */
     public int getTotalRows() {
         return totalRows;
     }
 
-    public Node getFirstLabel() {
-        return this.infoPage.getFirstLabelInGridPane();
+    /**
+     * Returns a copy of the notshown arraylist.
+     * @return an arraylist with same elements as notshown.
+     */
+    public ArrayList<String> getNotShown() {
+        ArrayList<String> result = new ArrayList<>();
+        result.addAll(notShown);
+        return result;
+    }
+
+    public void setTableTime(int start, int end, int totalRows) {
+        return;
     }
 }
