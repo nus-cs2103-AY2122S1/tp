@@ -85,9 +85,10 @@ public class EditModuleLessonCommand extends Command {
         model.setModuleLesson(lessonToEdit, editedModuleLesson);
         model.updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
-        if (model.hasModuleLessonClashingWith(editedModuleLesson)){
+        if (model.hasModuleLessonClashingWith(editedModuleLesson)) {
             return new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, editedModuleLesson));
         }
+        
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedModuleLesson));
     }
 
