@@ -69,7 +69,7 @@ Given below are my contributions to the project.
 
   * Developer Guide:
     - Updated Acknowledgements section
-    - Updated implementation of Model section, including the Model object diagram<br>
+    - Updated implementation of Storage section, including the Storage class diagram<br>
       <img src="../images/StorageClassDiagram.png" width="750" />
     - Added implementation details of using up/down arrow keys to select previous user inputs
   
