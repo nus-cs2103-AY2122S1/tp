@@ -133,7 +133,9 @@ class JsonAdaptedLesson {
 
         final List<Homework> lessonHomework = new ArrayList<>();
         for (JsonAdaptedHomework hw : homework) {
-            lessonHomework.add(hw.toModelType());
+            if (!hw.getDescription().isEmpty()) {
+                lessonHomework.add(hw.toModelType());
+            }
         }
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
 
