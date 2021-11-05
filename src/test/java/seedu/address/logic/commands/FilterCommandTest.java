@@ -5,7 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalContacts.*;
+import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.BENSON;
+import static seedu.address.testutil.TypicalContacts.DANIEL;
+import static seedu.address.testutil.TypicalContacts.ELLE;
+import static seedu.address.testutil.TypicalContacts.FIONA;
+import static seedu.address.testutil.TypicalContacts.GEORGE;
+import static seedu.address.testutil.TypicalContacts.JANE;
+import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
