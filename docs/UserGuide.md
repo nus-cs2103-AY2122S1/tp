@@ -429,11 +429,13 @@ A lesson can be identified by the index number shown in the lesson list of the s
     </tbody>
 </table>
 
-* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit). 
+* Additional fields of a lesson aside from those stated in the table are used for recording cancelled dates of a lesson. More details can be found in [Editing a lesson](#editing-a-lesson--ledit).<br>
 
-<p id="monetary-fields"><strong>Monetary fields</strong></p>
+<div markdown="block" class="alert alert-info" id="monetary-fields">**:information_source: Monetary Fields:**<br>
+
 For all monetary fields (lesson rates and outstanding fees), we follow the [Singapore convention](https://www.dfa.cornell.edu/treasurer/cash-management/processinginternational/intl-currency) of using a decimal point '.' to separate dollars and cents, The values of these fields should only contain numbers, with at most one decimal point, and two decimal places and should not start or end with a decimal point.
-<br/>
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
