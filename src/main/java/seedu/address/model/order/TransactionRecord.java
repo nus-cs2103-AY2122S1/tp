@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import javafx.scene.layout.Region;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.display.Displayable;
@@ -77,7 +78,32 @@ public class TransactionRecord extends Order implements Displayable {
     }
 
     /**
-     * Returns true if two transactions have the same id and timestamp.
+     * Returns true if items in the transacted order matches with the ones in the {@code otherList}.
+     * Only considers name, id, quantity and sales price. (i.e. information relevant to transaction).
+     */
+    private boolean isSameTransactionInfo(ObservableList<Item> otherList) {
+
+        if (getOrderItems().size() != otherList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < getOrderItems().size(); i++) {
+            Item item1 = getOrderItems().get(i);
+            Item item2 = otherList.get(i);
+
+            if (!item1.getName().equals(item2.getName())
+                || !item1.getId().equals(item2.getId())
+                || !item1.getCount().equals(item2.getCount())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Returns true if two transactions have the same items, id and timestamp.
+     * Does not consider the equality of items' cost since we have no interest in the cost of transacted items.
      */
     @Override
     public boolean equals(Object other) {
@@ -89,7 +115,7 @@ public class TransactionRecord extends Order implements Displayable {
             TransactionRecord temp = (TransactionRecord) other;
             return id.equals(temp.id)
                     && timestamp.equals(temp.timestamp)
-                    && getOrderItems().equals(temp.getOrderItems());
+                    && isSameTransactionInfo(temp.getOrderItems());
         }
 
         return false;

@@ -10,23 +10,22 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TransactionList;
-import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 
 /**
- * Jackson-friendly version of {@link TransactionRecord}.
+ * Jackson-friendly version of {@link TransactionList}.
  */
 @JsonRootName(value = "transaction")
-class JsonSerializableTransaction {
+class JsonSerializableTransactionList {
 
     private final ArrayList<JsonAdaptedOrder> orders = new ArrayList<>();
 
     @JsonCreator
-    public JsonSerializableTransaction(@JsonProperty("orders") ArrayList<JsonAdaptedOrder> orders) {
+    public JsonSerializableTransactionList(@JsonProperty("orders") ArrayList<JsonAdaptedOrder> orders) {
         this.orders.addAll(orders);
     }
 
-    public JsonSerializableTransaction(Stream<TransactionRecord> source) {
+    public JsonSerializableTransactionList(Stream<TransactionRecord> source) {
         orders.addAll(source.map(JsonAdaptedOrder::new).collect(Collectors.toList()));
     }
 

@@ -41,8 +41,8 @@ public class JsonTransactionStorage implements TransactionStorage {
     public Optional<ReadOnlyTransactionList> readTransactionList(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableTransaction> jsonTransaction = JsonUtil.readJsonFile(
-                filePath, JsonSerializableTransaction.class);
+        Optional<JsonSerializableTransactionList> jsonTransaction = JsonUtil.readJsonFile(
+                filePath, JsonSerializableTransactionList.class);
         if (!jsonTransaction.isPresent()) {
             return Optional.empty();
         }
@@ -66,7 +66,7 @@ public class JsonTransactionStorage implements TransactionStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableTransaction(transactionList.getTransactionRecordList().stream()),
+        JsonUtil.saveJsonFile(new JsonSerializableTransactionList(transactionList.getTransactionRecordList().stream()),
                 filePath);
     }
 }
