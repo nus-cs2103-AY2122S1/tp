@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -22,12 +23,16 @@ public class MeetingsListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code MeetingsListPanel} with the given {@code ObservableList}.
+     *
      * @param nextMeetingList
      */
     public MeetingsListPanel(ObservableList<Client> nextMeetingList) {
         super(FXML);
         meetingsListView.setItems(nextMeetingList);
         meetingsListView.setCellFactory(listView -> new MeetingsListPanel.MeetingsListViewCell());
+        meetingsListView
+                .setPlaceholder((new Label(
+                        "No meetings scheduled yet >3<")));
     }
 
     /**

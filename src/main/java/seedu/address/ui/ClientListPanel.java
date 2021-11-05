@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -31,6 +32,8 @@ public class ClientListPanel extends UiPart<Region> {
 
         clientListView.setItems(clientList);
         clientListView.setCellFactory(listView -> new ClientListViewCell());
+        clientListView
+                .setPlaceholder((new Label("No clients yet >o<")));
     }
 
     /**

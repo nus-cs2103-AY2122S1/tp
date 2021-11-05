@@ -44,12 +44,12 @@ public class TagsPanel extends UiPart<Region> {
                 if (change.wasAdded()) {
                     Tag tag = change.getAddedSubList().get(0);
                     TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
-                    logger.fine(tag.getName() + "was added to the list!");
+                    logger.fine(tag.getName() + "was added to the tag list!");
                     tags.getChildren().add(tagLabel.getRoot());
                     tagLabels.put(tag, tagLabel.getRoot());
                 } else if (change.wasRemoved()) {
                     Tag tag = change.getRemoved().get(0);
-                    logger.fine(tag.getName() + "was removed from the list!");
+                    logger.fine(tag.getName() + "was removed from the tag list!");
                     tags.getChildren().remove(tagLabels.remove(change.getRemoved().get(0)));
                 } else if (change.wasUpdated()) {
                     tags.getChildren().clear();
