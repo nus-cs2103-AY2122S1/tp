@@ -163,6 +163,12 @@ public interface Model {
     boolean hasAssignmentInCurrentModule(Assignment assignment);
 
     /**
+     * Returns true if adding the assignment {@code toAdd} will bring the total weightage
+     * of all assignments under the currently selected module to above 100%.
+     */
+    boolean isTotalWeightageExceeded(Assignment toAdd);
+
+    /**
      * Returns true if any existing grade of the original assignment {@code current} is
      * higher than the maximum score of {@code editedAssignment}. Both assignments
      * must be under the currently selected module.

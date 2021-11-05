@@ -40,6 +40,14 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
+     * Returns true if adding the assignment {@code toAdd} will bring
+     * the total weightage of all assignments in this list to above 100%.
+     */
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        return getTotalWeightage() + toAdd.getWeightage().weightage > 100;
+    }
+
+    /**
      * Adds an assignment to the list.
      * The assignment must not already exist in the list.
      * @param toAdd The assignment to be added.
@@ -154,6 +162,17 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the total weightage of all assignments in this list.
+     */
+    private Float getTotalWeightage() {
+        Float total = 0f;
+        for (Assignment assignment : internalList) {
+            total += assignment.getWeightage().weightage;
+        }
+        return total;
     }
 }
 

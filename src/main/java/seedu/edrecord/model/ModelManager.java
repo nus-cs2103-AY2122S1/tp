@@ -254,6 +254,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        if (!hasSelectedModule()) {
+            return false;
+        }
+        return selectedModule.get().isTotalWeightageExceeded(toAdd);
+    }
+
+    @Override
     public boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment) {
         if (!hasSelectedModule()) {
             return false;
