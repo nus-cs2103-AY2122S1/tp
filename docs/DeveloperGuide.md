@@ -439,11 +439,11 @@ During the SetTablesCommand execution:
 4. There is no add/remove/edit table or table list
     * Again, this is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
 
-**Future Implementations:**
+**Alternatives considered:**
 
-In the future implementations, we plan to allow editing of tables and allowing the user to shift reservations to specific tables if they want to overwrite the original assigned table.
+Alternatively, we plan to allow editing of tables and allowing the user to shift reservations to specific tables if they want to overwrite the original assigned table.
 
-Checks have to be implemented to ensure that the reservations-table pairings are still valid.
+Checks would have to be implemented to ensure that the reservations-table pairings are still valid.
 
 This will allow for greater flexibility for restaurant managers where they can manually assign seats to certain reservations (e.g. Assigning a big table to a small group of VIPs even though the table space is not optimized)
 
