@@ -52,17 +52,17 @@
   } ],
   "tutorialClasses": [{
     "classCode": "G04",
-    "schedule": "mon 16:00 to 18:00, tues 17:00 to 19:00",
+    "schedule": "Mon 10:00am to 12:00pm, Tues 10:00am to 12:00pm",
     "tagged": ["evening"]
     },
     {
       "classCode": "G06",
-      "schedule": "tues 16:00 to 18:00, tues 16:00 to 18:00",
+      "schedule": "Tues 12:00pm to 2:00pm, Fri 12:00pm to 2:00pm",
       "tagged": [ ]
     },
     {
       "classCode": "G02",
-      "schedule": "Wed 10:00 to 12:00, Fri 10:00 to 12:00",
+      "schedule": "Wed 10:00am to 12:00pm, Fri 10:00am to 12:00pm",
       "tagged": [ ]
     }
   ],

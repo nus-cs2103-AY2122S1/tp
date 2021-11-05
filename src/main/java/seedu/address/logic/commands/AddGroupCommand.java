@@ -45,6 +45,7 @@ public class AddGroupCommand extends Command {
         requireNonNull(model);
 
         // check if tutorial class already exists in ClassMATE
+
         if (!model.hasTutorialClass(toAddTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }
