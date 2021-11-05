@@ -218,6 +218,13 @@ public class HelpWindow extends UiPart<Stage> {
                 FAVOURITE_CONTACT_FEATURE_COMMAND);
         CommandDetails unFavouriteContactCommandDetails = new CommandDetails(UNFAVOURITE_CONTACT_FEATURE_NAME,
                 UNFAVOURITE_CONTACT_FEATURE_COMMAND);
+
+        CommandDetails addTagsCommandDetails = new CommandDetails(ADD_TAGS_FEATURE_NAME, ADD_TAGS_FEATURE_COMMAND);
+        CommandDetails removeTagsCommandDetails = new CommandDetails(REMOVE_TAGS_FEATURE_NAME,
+                REMOVE_TAGS_FEATURE_COMMAND);
+        CommandDetails addAndRemoveTagsSimultaneouslyCommandDetails = new CommandDetails(
+                ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME, ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND);
+
         CommandDetails importContactCsvCommandDetails = new CommandDetails(IMPORT_CONTACT_CSV_FEATURE_NAME,
                 IMPORT_CONTACT_CSV_FEATURE_COMMAND);
         CommandDetails importContactJsonCommandDetails = new CommandDetails(IMPORT_CONTACT_JSON_FEATURE_NAME,
@@ -245,6 +252,11 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(listAllContactsCommandDetails);
         helpSectionCommandDetails.add(favouriteContactCommandDetails);
         helpSectionCommandDetails.add(unFavouriteContactCommandDetails);
+
+        helpSectionCommandDetails.add(addTagsCommandDetails);
+        helpSectionCommandDetails.add(removeTagsCommandDetails);
+        helpSectionCommandDetails.add(addAndRemoveTagsSimultaneouslyCommandDetails);
+
         helpSectionCommandDetails.add(importContactCsvCommandDetails);
         helpSectionCommandDetails.add(importContactJsonCommandDetails);
         helpSectionCommandDetails.add(exportContactCsvCommandDetails);
