@@ -785,7 +785,7 @@ Examples:
 
 Pays for a specific lesson.
 
-The amount paid would be deducted from the outstanding fees field. The amount paid should not be greater than the current outstanding fees.
+The amount paid would be deducted from the outstanding fees field. The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
 
 Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
@@ -795,19 +795,23 @@ Examples:
 
 #### Behaviours of the Fees Calculator
 
-TAB will automatically update your lesson's outstanding fees once the lesson has ended using Fees Calculator feature. 
+TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
 The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
 
-However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
+However, the Fees Calculator will not account for any changes to lessons that have passed. 
 
-* **Lesson rates increment.** In the event that you want to increase your lesson rates, the current outstanding fees will not change according to the newly edited lesson rates.
-* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to 
-the newly edited lesson rates.
-* **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the Fees Calculator will not deduct
-the fees of the cancelled lesson for you. Same for uncancelling a lesson that has passed, the fees will not be added back for you.
-* **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
-* **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
-the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
+Note that outstanding fees will not change with the following cases:
+
+* Changing the lesson's rate. The change in lesson rate will only take effect from the date and time of change.
+* Cancelling or uncancelling a lesson date that has passed.
+* Changing the start or end date of the lesson.
+* Changing the lesson's timing.
+
+#### Upcoming features for Fees Calculator
+
+1. **Flag out overdue lesson fees.** In the future, we would like to allow users to specify the number of lessons per payment, and if not specified the default would be 4 lessons per payment. 
+This value would be used to calculate and flag out which lesson's fees are due by automatically tagging a red `DUE` tag to that lesson.
+2. **Account for cancelled and uncancelled lessons.** In the future, we would also like to make the Fees Calculator smarter such that when lessons in the past has been cancelled, fees will be deducted accordingly. Vice versa for uncancelled dates in the past.
 
 <br />
 
@@ -950,9 +954,25 @@ Format: `undo`
 
 #### Redoing undone commands: `redo`
 
-Redo the previous command that has been undone.
+Redo the previous command that has been undone. 
+The undone command can only be redone if `redo` was executed immediately after `undo` or after the `undo` command, only commands that do not modify any data are executed.<br>
+e.g. `view`, `day`, `calendar`, `tags` etc.
 
 Format: `redo`
+
+Example:
+1. Valid Redo command
+   1. `edit 1 n/Joe Doe` modifies name of the first student.
+   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   3. `day` displays the calendar for today. This command **does not modify any data**.
+   4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
+   
+2. Invalid Redo command
+   1. `edit 1 n/Joe Doe` modifies name of the first student.
+   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
+   4. `redo` is invalid. TAB shows that there are no commands to be redone.
+   
 
 #### Exiting the program: `exit`
 
