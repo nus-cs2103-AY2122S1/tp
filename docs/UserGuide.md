@@ -6,7 +6,7 @@ title: User Guide
 CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CONNECTIONS can get your contact management tasks done faster than traditional GUI apps.
 
 * [Quick Start](#quick-start)
-* [Features](#features
+* [Features](#features)
   * [Upcoming birthdays](#upcoming-birthdays)
   * [Viewing help : `help`](#viewing-help--help)
   * [Adding a person: `add`](#adding-a-person-add)
