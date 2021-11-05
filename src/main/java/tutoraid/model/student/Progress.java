@@ -10,7 +10,7 @@ import tutoraid.commons.util.AppUtil;
 public class Progress {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Progress should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Progress should not be blank";
 
     public static final String EMPTY_PROGRESS_DESCRIPTION = "No Progress";
 
@@ -18,7 +18,7 @@ public class Progress {
      * The first character of the progress must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[^ ].*";
 
     private static final Progress EMPTY_PROGRESS = new Progress(EMPTY_PROGRESS_DESCRIPTION);
 
