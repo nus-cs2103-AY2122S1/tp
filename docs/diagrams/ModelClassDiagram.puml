@@ -57,7 +57,7 @@ Student *--> "*" Tag
 GroupList --> "\t~*" Group
 Group --> "\t*" ID
 
-AssessmentList --> "~*" Assessment
+AssessmentList --> "~* " Assessment
 
 Name -[hidden]right-> ID
 
