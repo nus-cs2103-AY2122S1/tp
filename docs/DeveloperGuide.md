@@ -592,6 +592,7 @@ syntax should make it easy to fix the mistake.
 The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user
 input to extract out the command and the arguments, after which the `FilterCommand#execute(model)` method is invoked in
 the `LogicManager` class to filter the `filteredStudents` and/or the `filteredLessons` list(s) in the `model` based on the given user inputs.
+
 The filter performs differently based on the inputs given (grade, subject, or both):
 * If only grade is given as input, TuitiONE filters both the student list and the lesson list based on the given grade.
 * If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
@@ -654,10 +655,85 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
 
-<u>Design</u>
+<ins>Decision</ins>
+
 Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
 handle multiple scenarios would be less daunting to use.
 
+### Roster feature
+
+#### Implementation
+
+The roster operation is facilitated by `RosterCommand` and `RosterCommandParser`. `RosterCommandParser` first parses 
+the user input to extract out the command and the arguments, after which the `RosterCommand#execute(model)` method is 
+invoked in the `LogicManager` class to filter the `filteredStudents` and the `filteredLessons` list(s) in the `model` 
+based on the given user input (`LESSSON_INDEX`).
+
+The roster feature functions like a more specific version of the filter feature. The aim of this feature is to provide 
+the CSOs a quick way to see all the students who are enrolled in a specific lesson. Hence, in the roster feature, it 
+performs a filtering of the student list and the lesson list based on a specific lesson identified by the`LESSON_INDEX`.
+This will extract out the relevant students and display them to the GUI with the requested lesson.
+
+Given below is an example usage scenario and how the roster operation works.
+
+<u>Step 1:</u>
+
+The user launches the app with the stored student list holding the initial student data and the lesson list holding the
+initial lesson data in TuitiONE (only the fields of each object relevant to roster are shown in the diagrams below).
+
+<center>
+<img alt="FilterState0" src="images/DeveloperGuideImage/FilterState0.png"/>
+</center>
+
+<u>Step 2:</u>
+
+The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
+the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
+
+<center>
+<img alt="FilterState1" src="images/DeveloperGuideImage/FilterState1.png"/>
+</center>
+
+<u>Step 3:</u>
+
+The user executes `list` to get back the initial lists before the filter.
+
+The following sequence diagram shows how the filter operation works:
+
+<center>
+<img alt="FilterSequenceDiagram0" src="images/DeveloperGuideImage/FilterSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png" width="650"/>
+</center>
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `FilterCommandParser` and `FilterCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the filter command:
+
+<center>
+<img alt="FilterActivityDiagram" src="images/DeveloperGuideImage/FilterActivityDiagram.png"/>
+</center>
+
+#### Design considerations:
+
+<u>Aspect: How to implement filter</u>
+* Option 1: one filter command that handles both grade and subject filtering
+    * Pros: Less commands to remember, user will not feel overwhelmed.
+    * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
+* Option 2: 3 separate filter commands, one for each scenario stated above
+    * Pros: Slightly more straightforward to implement.
+    * Cons: Too many existing commands in the application, and may not be as intuitive to use.
+
+<ins>Decision</ins>
+
+Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
+handle multiple scenarios would be less daunting to use.
 
 ### \[Proposed\] Undo/redo feature
 
