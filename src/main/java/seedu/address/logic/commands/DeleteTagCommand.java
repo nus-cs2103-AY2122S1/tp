@@ -32,16 +32,18 @@ public class DeleteTagCommand extends Command {
 
     public static final String COMMAND_WORD = "deletet";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags of persons in the current list. "
-            + "'deletet all' deletes all tags of everyone."
-            + "'deletet INDEX' deletes all tags of selected person."
-            + "'deletet all [t/TAG1 t/TAG2...]' deletes selected tags for everyone."
-            + "'deletet INDEX [t/TAG1 t/TAG2...]' deletes selected tags for selected person"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags of persons in the displayed list.\n"
+            + " - 'deletet all' deletes all tags for everyone.\n"
+            + " - 'deletet INDEX' deletes all tags for the person identified by the index number used in the displayed "
+            + "person list.\n"
+            + " - 'deletet all [t/TAG1 t/TAG2...]' deletes the specified tags for everyone."
+            + " - 'deletet INDEX [t/TAG1 t/TAG2...]' deletes the specified tags for the person identified by the index "
+            + "number used in the displayed person list.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer or the word 'all') "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "CS2103 Group Mate ";
+            + PREFIX_TAG + "CS2103Teammate";
 
     public static final String MESSAGE_DELETED_ALL_TAG_SUCCESS = "Deleted All Tags.";
     public static final String MESSAGE_DELETED_TAG_SUCCESS = "Deleted Tag: %1$s";

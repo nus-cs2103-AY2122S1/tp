@@ -55,7 +55,7 @@ public class StatisticsCommand extends Command {
 
         Statistic statistic = new Statistic(filteredPersonList);
 
-        return new CommandResult(String.format(MESSAGE_STATISTICS, statistic.toString()), statistic.getRawData());
+        return new CommandResult(String.format(MESSAGE_STATISTICS, statistic), statistic.getRawData());
     }
 
     @Override
