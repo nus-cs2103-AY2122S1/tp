@@ -1,13 +1,11 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -28,8 +26,8 @@ public class ArgumentTokenizer {
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixes   Expected prefixes
-     * @throws ParseException if an unexpected prefix is detected
      * @return           ArgumentMultimap object that maps prefixes to their arguments
+     * @throws           ParseException if an unexpected prefix is detected
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
@@ -43,7 +41,8 @@ public class ArgumentTokenizer {
      * @param prefixes   Expected prefixes
      * @return           List of zero-based prefix positions in the given arguments string
      */
-    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) throws ParseException {
+    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes)
+            throws ParseException {
         Matcher m = Pattern.compile(PREFIX_REGEX).matcher(argsString);
 
         List<PrefixPosition> prefixPositionList = new ArrayList<>();
