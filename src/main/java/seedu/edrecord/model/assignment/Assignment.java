@@ -54,6 +54,13 @@ public class Assignment {
                 && otherAssignment.getName().equals(getName());
     }
 
+    /**
+     * Returns true if this assignment has a higher weightage than the other assignment.
+     */
+    public boolean hasHigherWeightage(Assignment other) {
+        return weightage.compareTo(other.weightage) > 0;
+    }
+
     @Override
     public String toString() {
         return String.format("%s - Weightage: %s, Maximum Score: %s", name, weightage, maxScore);
