@@ -96,6 +96,7 @@ public class WelcomeWindow extends UiPart<Stage> {
      * @param textToDisplay The text to be displayed on the WelcomeWindow stage.
      * @param delayTime The delay after which each character is to be printed.
      */
+    // Solution below adapted from https://stackoverflow.com/a/33648481
     public void displayAnimatedText(String textToDisplay, double delayTime) {
         IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
