@@ -18,7 +18,9 @@
    </BorderPane>
     <ListView fx:id="taskListView" VBox.vgrow="ALWAYS">
         <placeholder>
-            <Label text="No task listed." />
+            <Label textFill="#ffffff" >
+                No task listed.
+            </Label>
         </placeholder>
     </ListView>
 </VBox>
