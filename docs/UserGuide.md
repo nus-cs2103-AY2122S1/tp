@@ -203,9 +203,13 @@ To use commands for managing patients, toggle the displayed list to the patient 
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
-Adds a patient to the patient records. 
+Adds a patient to the patient records.
 
 Format: `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Duplicate patients cannot be added! A duplicate patient is one with the same name, phone number and email as an existing patient.
+</div>
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
@@ -334,6 +338,10 @@ To use commands for managing doctors, toggle the displayed list to the doctor li
 Adds a doctor to the doctor records.
 
 Format: `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Duplicate doctors cannot be added! A duplicate doctor is one with the same name, phone number and email as an existing doctor.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A doctor can have any number of tags (including 0).
