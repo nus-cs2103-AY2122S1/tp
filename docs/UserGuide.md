@@ -84,7 +84,7 @@ When reading our User Guide, here are some important information to take note of
 
     * **`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`** : Creates a contact named `John Doe` to the Address Book.
 
-    * **`delete 3`** : Deletes the 3rd contact shown in the current list.
+    * **`delete 3`** : Deletes the contact with the client ID 3.
 
     * **`clear`** : Deletes all contacts.
 
