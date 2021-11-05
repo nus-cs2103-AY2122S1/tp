@@ -210,14 +210,12 @@ Format: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 
 > Note: the format of `ORDER` is `PRODUCT_ID QUANTITY DATE`, e.g. `-o 0 10 10/26` represents an order made on 26 Oct of the current year, the product requested has `PRODUCT_ID` = `0` and `QUANTITY` = `10`.
 
-Example (without orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, 
-whose
-`PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road`.
+Example (without orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`,
+whose `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road`.
 
-Example (with orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road -o 0 10 10/26` adds a new 
-`Client` `Ben`,
-whose `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road` with an `ORDER` of 
-`QUANTITY` `10` of product with `IDENTITY` `0` on `DATE` `26/10/<curr year>`.
+Example (with orders) : `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road -o 0 10 10/26` adds a new
+`Client` `Ben`, whose `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road` with
+an `ORDER` of `QUANTITY` `10` of product with `IDENTITY` `0` on `DATE` `26/10/<curr year>`.
 
 Expected Output (without orders):
 ![Ui](images/UIAddClientCommand.png)
@@ -318,7 +316,7 @@ Expected Output:
 
 Finds a client or product in Sellah based on the name. If there are no matching name, Sellah will show an empty list.
 
-An error message will be displayed if the format of a parameter is incorrect. 
+An error message will be displayed if the format of a parameter is incorrect.
 
 The name you provide must fully match (case-insensitive) the name of the client or product in Sellah.
 
@@ -352,8 +350,8 @@ Expected Output:
 
 ### 4.6 List
 
-Displays a list of all the clients or products in Sellah. If there are no clients or products, Sellah will show
-an empty list.
+Displays a list of all the clients or products in Sellah. If there are no clients or products, Sellah will show an empty
+list.
 
 An error message will be displayed if the format of a parameter is incorrect.
 
