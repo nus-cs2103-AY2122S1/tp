@@ -127,7 +127,8 @@ public class UniqueAnimeList implements Iterable<Anime> {
     private boolean animeAreUnique(List<Anime> anime) {
         for (int i = 0; i < anime.size() - 1; i++) {
             for (int j = i + 1; j < anime.size(); j++) {
-                if (anime.get(i).isSameAnime(anime.get(j))) {
+                Anime curAnime = anime.get(i);
+                if (curAnime.isSameAnime(anime.get(j))) {
                     return false;
                 }
             }

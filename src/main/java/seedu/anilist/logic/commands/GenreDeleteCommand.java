@@ -5,6 +5,7 @@ import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.anilist.commons.core.Messages;
@@ -82,8 +83,9 @@ public class GenreDeleteCommand extends GenreCommand {
         Status status = animeToEdit.getStatus();
 
         Set<Genre> updatedGenres = new HashSet<>(animeToEdit.getGenres());
-        assert genresDescriptor.getGenres().isPresent();
-        Set<Genre> genresToDelete = genresDescriptor.getGenres().get();
+        Optional<Set<Genre>> descriptorGenre = genresDescriptor.getGenres();
+        assert descriptorGenre.isPresent();
+        Set<Genre> genresToDelete = descriptorGenre.get();
         Set<Genre> deletedGenres = new HashSet<>();
         Set<Genre> unusedGenres = new HashSet<>();
 

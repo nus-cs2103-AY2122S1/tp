@@ -1,7 +1,6 @@
 package seedu.anilist.model.stats;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -50,7 +49,7 @@ public class Stats {
 
         //sorts genres input by value i.e. count
         List<Entry<Genre, Integer>> listOfEntries = new ArrayList<>(genres.entrySet());
-        Collections.sort(listOfEntries, genreCountComparator);
+        listOfEntries.sort(genreCountComparator);
 
         //number of items to be included in the stats display is the lower
         //of the genreCountLimit and the number of unique genres tagged to animes
@@ -58,7 +57,8 @@ public class Stats {
         LinkedHashMap<Genre, Integer> topGenresSorted = new LinkedHashMap<>(numItems);
 
         for (int i = numItems - 1; i >= 0; i--) {
-            topGenresSorted.put(listOfEntries.get(i).getKey(), listOfEntries.get(i).getValue());
+            Entry<Genre, Integer> e = listOfEntries.get(i);
+            topGenresSorted.put(e.getKey(), e.getValue());
         }
         return topGenresSorted;
     }
@@ -95,6 +95,7 @@ public class Stats {
         } // instanceof handles nulls
 
         Stats otherStats = (Stats) other;
+        assert otherStats != null;
         return this.watchingCount == otherStats.watchingCount
                 && this.toWatchCount == otherStats.toWatchCount
                 && this.finishedCount == otherStats.finishedCount

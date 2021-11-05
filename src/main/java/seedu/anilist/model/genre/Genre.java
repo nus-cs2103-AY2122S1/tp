@@ -9,7 +9,7 @@ import seedu.anilist.logic.commands.GenreListCommand;
  * Represents a Genre of an Anime in the anime list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidGenreName(String)}
  */
-public class Genre implements Comparable {
+public class Genre implements Comparable<Genre> {
 
     public static final String MESSAGE_CONSTRAINTS = "Genres must be from the list of available genres.\n"
             + "To view the list, enter: "
@@ -59,8 +59,8 @@ public class Genre implements Comparable {
      * Compares the two genreNames, returns 0 if the other is null.
      */
     @Override
-    public int compareTo(Object o) {
-        if (!(o instanceof Genre)) {
+    public int compareTo(Genre o) {
+        if (o == null) {
             return 0;
         }
         Genre g = (Genre) o;

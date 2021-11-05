@@ -75,7 +75,8 @@ public class RenameCommand extends Command {
     private static Anime createRenamedAnime(Anime animeToRename, RenameCommand.NameDescriptor nameDescriptor) {
         assert animeToRename != null;
 
-        Name updatedName = nameDescriptor.getName().orElse(animeToRename.getName());
+        Optional<Name> descriptorName = nameDescriptor.getName();
+        Name updatedName = descriptorName.orElse(animeToRename.getName());
         Episode episode = animeToRename.getEpisode();
         Status status = animeToRename.getStatus();
         Set<Genre> updatedGenres = animeToRename.getGenres();

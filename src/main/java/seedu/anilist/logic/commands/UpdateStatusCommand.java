@@ -74,7 +74,8 @@ public class UpdateStatusCommand extends Command {
 
         Name name = animeToEdit.getName();
         Episode episode = animeToEdit.getEpisode();
-        Status updatedStatus = statusDescriptor.getStatus().orElse(animeToEdit.getStatus());
+        Optional<Status> descriptorStatus = statusDescriptor.getStatus();
+        Status updatedStatus = descriptorStatus.orElse(animeToEdit.getStatus());
         Set<Genre> genres = animeToEdit.getGenres();
 
         return new Anime(name, episode, updatedStatus, genres);
