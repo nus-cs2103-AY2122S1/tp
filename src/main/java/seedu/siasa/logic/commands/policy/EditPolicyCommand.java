@@ -20,6 +20,7 @@ import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.commons.util.CollectionUtil;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.Warning;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Contact;
@@ -54,6 +55,7 @@ public class EditPolicyCommand extends Command {
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists in the address book.";
+    public static final String MESSAGE_PAST_EXPIRY_DATE = "Expiry Date is in the past.";
 
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
@@ -79,8 +81,17 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
         }
 
+
         Policy policyToEdit = lastShownList.get(index.getZeroBased());
         Policy editedPolicy = createEditedPolicy(policyToEdit, editPolicyDescriptor, model);
+
+        if (editPolicyDescriptor.expiryDate != null
+                && !CoverageExpiryDate.isFutureExpiryDate(editPolicyDescriptor.expiryDate.value)) {
+            boolean response = Warning.isUserConfirmingCommand(MESSAGE_PAST_EXPIRY_DATE);
+            if (!response) {
+                return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
+            }
+        }
 
         if (!policyToEdit.isSamePolicy(editedPolicy) && model.hasPolicy(editedPolicy)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -113,6 +124,7 @@ public class EditPolicyCommand extends Command {
         if (updatedCommission.numberOfPayments > updatedPaymentStructure.numberOfPayments) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMISSION_NUM_OF_PMT);
         }
+
         Contact updatedOwner;
         if (editPolicyDescriptor.getOwnerIndex().isEmpty()) {
             updatedOwner = policyToEdit.getOwner();

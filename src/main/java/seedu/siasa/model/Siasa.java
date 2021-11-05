@@ -2,7 +2,10 @@ package seedu.siasa.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -142,7 +145,13 @@ public class Siasa implements ReadOnlySiasa {
             int currentCount = hashMap.get(owner);
             hashMap.put(owner, currentCount + 1);
         });
-        return hashMap;
+        List<Map.Entry<Contact, Integer>> list = new ArrayList<>(hashMap.entrySet());
+        list.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        Map<Contact, Integer> sortedResult = new LinkedHashMap<>();
+        for (Map.Entry<Contact, Integer> entry : list) {
+            sortedResult.put(entry.getKey(), entry.getValue());
+        }
+        return sortedResult;
     }
 
     public Map<Contact, Integer> getCommissionPerContact() {
@@ -161,7 +170,13 @@ public class Siasa implements ReadOnlySiasa {
             }
             hashMap.put(contact, (int) commission);
         });
-        return hashMap;
+        List<Map.Entry<Contact, Integer>> list = new ArrayList<>(hashMap.entrySet());
+        list.sort(Collections.reverseOrder(Map.Entry.comparingByValue()));
+        Map<Contact, Integer> sortedResult = new LinkedHashMap<>();
+        for (Map.Entry<Contact, Integer> entry : list) {
+            sortedResult.put(entry.getKey(), entry.getValue());
+        }
+        return sortedResult;
     }
 
     /// policy-level operations
