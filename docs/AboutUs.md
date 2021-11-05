@@ -15,7 +15,7 @@ Hi, this is AcademyDirectory!
 <img src="images/team/hmanhduc2k.png" width="200px">
 
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/hmanhduc2k.md)]
 
 * Role: Supreme leader
 
@@ -24,7 +24,7 @@ Hi, this is AcademyDirectory!
 <img src="images/team/phuccuongngo99.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/phuccuongngo99.md)]
 
 * Role: Minion
 * Responsibilities: Everything
@@ -33,17 +33,18 @@ Hi, this is AcademyDirectory!
 
 <img src="images/team/cheweejia.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Minion
 * Responsibilities: Everything
 
 ### Amadeus
 
-<img src="images/team/amadeus-winarto.png" width="200px">
+<img src="images/team/amadeus-winarto.jpeg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/amadeus-winarto)]
+[[portfolio](team/amadeus-winarto.md)]
 
 * Role: Minion
 * Responsibilities: Everything
