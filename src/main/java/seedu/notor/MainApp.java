@@ -17,6 +17,7 @@ import seedu.notor.commons.util.StringUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.LogicManager;
 import seedu.notor.logic.executors.Executor;
+import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
 import seedu.notor.model.Notor;
@@ -90,13 +91,12 @@ public class MainApp extends Application {
             }
             initialData = notorOptional.orElseGet(SampleDataUtil::getSampleNotor);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Notor");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Notor.");
             initialData = new Notor();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Notor");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Notor.");
             initialData = new Notor();
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 
