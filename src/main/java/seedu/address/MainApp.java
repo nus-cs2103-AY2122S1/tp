@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
@@ -217,7 +218,10 @@ public class MainApp extends Application {
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
      */
     public boolean setUp(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
-            UnsupportedPasswordException {
+            UnsupportedPasswordException, InvalidKeyException, FileAlreadyExistsException {
+        if (hasEncryptedFile()) {
+            throw new FileAlreadyExistsException("");
+        }
         Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
         createEncryptedFile(cryptor);
 
@@ -237,8 +241,8 @@ public class MainApp extends Application {
      * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
      * @throws NoSuchPaddingException If the padding does not exist.
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
-     * @throws InvalidAlgorithmParameterException
-     * @throws InvalidKeyException
+     * @throws InvalidAlgorithmParameterException If the specified algorithm is invalid.
+     * @throws InvalidKeyException If the data file does not exist.
      */
     public boolean logIn(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
             UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException,
@@ -263,16 +267,23 @@ public class MainApp extends Application {
 
     /**
      * This method fails silently if encrypted file already exists.
+     *
+     * @param cryptor The Encryption used.
+     * @throws InvalidKeyException If the key supplied is invalid.
      */
-    private void createEncryptedFile(Encryption cryptor) {
+    private void createEncryptedFile(Encryption cryptor) throws InvalidKeyException {
         requireNonNull(cryptor);
         logger.info("Data file not found. Will be starting with a sample AddressBook");
         try {
             storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
             FileUtil.createFile(userPrefs.getEncryptedFilePath());
             cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
-        } catch (IOException | InvalidKeyException e) {
+        } catch (IOException e ) {
             e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            FileUtil.deleteFile(storage.getAddressBookFilePath());
+            FileUtil.deleteFile(userPrefs.getEncryptedFilePath());
+            throw new InvalidKeyException();
         }
     }
 

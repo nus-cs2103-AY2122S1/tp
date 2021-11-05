@@ -18,6 +18,10 @@ import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 
 public class LoginScreen extends UiPart<Stage> {
     private static final String FXML = "LoginWindow.fxml";
+    private static final String INSTRUCTION = "Please enter your password!";
+    private static final String PASSWORD_WRONG = "Wrong password, try again!";
+    private static final String SOMETHING_WRONG = "Something went wrong, try again!";
+    private static final String DATA_NOT_FOUND = "Data not found. Please exit and start again!";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
@@ -64,7 +68,7 @@ public class LoginScreen extends UiPart<Stage> {
     private void handlePassword() {
         // blocks the case when / is appended to the end of password
         if (!PasswordUtil.isValidPassword(userInputPassword.getText())) {
-            responseDisplay.setText("Wrong password, try again!");
+            responseDisplay.setText(PASSWORD_WRONG);
             userInputPassword.clear();
             return;
         }
@@ -72,17 +76,17 @@ public class LoginScreen extends UiPart<Stage> {
             boolean isCorrectPassword = app.logIn(userInputPassword.getText());
             // wrong password
             if (!isCorrectPassword) {
-                responseDisplay.setText("Wrong password, try again!");
+                responseDisplay.setText(PASSWORD_WRONG);
                 userInputPassword.clear();
             }
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException e) {
             // app problems
-            responseDisplay.setText("Something went wrong, try again!");
+            responseDisplay.setText(SOMETHING_WRONG);
             userInputPassword.clear();
         } catch (FileNotFoundException e) {
             // data deleted after opening the app
-            responseDisplay.setText("Data not found. Please exit and start again!");
+            responseDisplay.setText(DATA_NOT_FOUND);
             userInputPassword.clear();
         }
     }
@@ -94,7 +98,7 @@ public class LoginScreen extends UiPart<Stage> {
         logger.fine("Showing login page...");
         getRoot().show();
         getRoot().centerOnScreen();
-        responseDisplay.setText("Please enter your password!");
+        responseDisplay.setText(INSTRUCTION);
     }
 
 }

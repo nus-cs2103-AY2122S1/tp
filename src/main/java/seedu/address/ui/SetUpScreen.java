@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.nio.file.FileAlreadyExistsException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 import javax.crypto.NoSuchPaddingException;
@@ -16,7 +18,11 @@ import seedu.address.logic.commands.PasswordCommand;
 
 public class SetUpScreen extends UiPart<Stage> {
     private static final String FXML = "SetUpPassword.fxml";
+    private static final String INSTRUCTION = "Please set up a new password!";
     private static final String PASSWORDS_DO_NOT_MATCH = "Two passwords do not match!";
+    private static final String PASSWORDS_NON_STANDARD = "You entered non-standard characters. Please try again!";
+    private static final String DATA_EXISTS = "Data file Exists. Please restart the app!";
+    private static final String SOMETHING_WRONG = "Something went wrong, try again!";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
@@ -79,7 +85,15 @@ public class SetUpScreen extends UiPart<Stage> {
         try {
             app.setUp(userInputPassword.getText());
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {
-            responseDisplay.setText("Something went wrong, try again!");
+            responseDisplay.setText(SOMETHING_WRONG);
+            userInputPassword.clear();
+            userConfirmPassword.clear();
+        } catch (InvalidKeyException e) {
+            responseDisplay.setText(PASSWORDS_NON_STANDARD);
+            userInputPassword.clear();
+            userConfirmPassword.clear();
+        } catch (FileAlreadyExistsException e) {
+            responseDisplay.setText(DATA_EXISTS);
             userInputPassword.clear();
             userConfirmPassword.clear();
         }
@@ -92,7 +106,7 @@ public class SetUpScreen extends UiPart<Stage> {
         logger.fine("Showing login page...");
         getRoot().show();
         getRoot().centerOnScreen();
-        responseDisplay.setText("Please set up a new password!");
+        responseDisplay.setText(INSTRUCTION);
     }
 
 }
