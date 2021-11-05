@@ -527,6 +527,13 @@ This section guides you on how to use the commands for managing the lessons of y
 5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
 
 <br>
+
+A lesson can be categorised into 2 types:
+1. A **weekly** recurring lesson
+2. A one-off makeup lesson.
+
+<br>
+
 ![lessonCard](images/annotatedRecurringLessonCard.png)
 
 <div class="caption">Layout of a recurring lesson card.</div>
@@ -540,10 +547,6 @@ This section guides you on how to use the commands for managing the lessons of y
 
 A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 </div>
-
-A lesson can be categorised into 2 types:
-1. A **weekly** recurring lesson
-2. A one-off makeup lesson.
 
 <table id="lesson-param-table">
     <thead>
