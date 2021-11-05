@@ -13,7 +13,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Rating;
 import seedu.address.model.summary.Summary;
+
+import static seedu.address.model.contact.Rating.EMPTY_RATING;
 
 /**
  * An UI component that displays information of a {@code Contact}.
@@ -103,7 +106,16 @@ public class SelectedContactCard extends UiPart<Region> {
             contact.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-            rating.setText(contact.getRating().value + "\u2B50");
+
+            String ratingValue = contact.getRating().value;
+
+            if (ratingValue.equals(EMPTY_RATING)) {
+                rating.setText(EMPTY_RATING);
+            } else if (ratingValue.equals("1")) {
+                rating.setText(ratingValue + " star");
+            } else {
+                rating.setText(ratingValue + " stars");
+            }
 
             address.setTextAlignment(TextAlignment.JUSTIFY);
             review.setTextAlignment(TextAlignment.JUSTIFY);

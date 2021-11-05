@@ -10,6 +10,8 @@ import javafx.scene.chart.PieChart;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 
+import static seedu.address.model.contact.Rating.EMPTY_RATING;
+
 
 /**
  *  This class contains the logic of retrieving data from different components
@@ -79,7 +81,6 @@ public class Summary {
             } else {
                 count.put(categoryString, 1);
             }
-
         }
 
         return count;
@@ -108,7 +109,7 @@ public class Summary {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Integer> entry : percentageCategory.entrySet()) {
-            String key = entry.getKey().toUpperCase();
+            String key = entry.getKey().toLowerCase();
             Integer value = entry.getValue();
             pieChartData.add(new PieChart.Data(key, value));
         }
@@ -119,9 +120,13 @@ public class Summary {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Integer> entry : percentageRatings.entrySet()) {
-            String key = entry.getKey() + "\u2B50";
-            Integer value = entry.getValue();
-            pieChartData.add(new PieChart.Data(key, value));
+            String key = entry.getKey();
+            // Does not reflect empty ratings
+            if (!key.equals(EMPTY_RATING)) {
+                key = key + " *";
+                Integer value = entry.getValue();
+                pieChartData.add(new PieChart.Data(key, value));
+            }
         }
         return pieChartData;
     }
