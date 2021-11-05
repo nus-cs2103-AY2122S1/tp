@@ -249,7 +249,7 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 * Both `PERSON_INDEX` and `EXAM_INDEX` must be a positive number.
 * The `EXAM_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v), similarly to
 deleting lessons.
-  
+
 Example:
 * `student -de 1 1` deletes the first exam from the first student.
 </details>
