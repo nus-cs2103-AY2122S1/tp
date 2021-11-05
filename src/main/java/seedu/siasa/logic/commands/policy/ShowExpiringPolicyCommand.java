@@ -29,10 +29,11 @@ public class ShowExpiringPolicyCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPolicyList(EXPIRING_POLICIES_MONTH);
-        if (model.getFilteredPolicyList().isEmpty()) {
-            return new CommandResult(MESSAGE_NO_POLICIES);
-        } else {
+
+        if (model.getFilteredPolicyList().size() > 0) {
             return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            return new CommandResult(MESSAGE_NO_POLICIES);
         }
     }
 }

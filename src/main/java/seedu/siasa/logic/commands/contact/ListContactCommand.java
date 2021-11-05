@@ -1,6 +1,8 @@
 package seedu.siasa.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LIST_EMPTY;
 import static seedu.siasa.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import seedu.siasa.logic.commands.Command;
@@ -21,6 +23,12 @@ public class ListContactCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        if (model.getFilteredContactList().size() > 0) {
+            return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                    model.getFilteredContactList().size()));
+        } else {
+            return new CommandResult(MESSAGE_CONTACTS_LIST_EMPTY);
+        }
     }
 }

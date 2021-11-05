@@ -1,6 +1,7 @@
 package seedu.siasa.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.core.Messages.MESSAGE_POLICIES_LIST_EMPTY;
 
 import java.util.List;
 
@@ -46,11 +47,16 @@ public class ListContactPolicyCommand extends Command {
 
         Contact contact = lastShownList.get(contactId.getZeroBased());
         model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contact));
-        return new CommandResult(
-            String.format(
-                MESSAGE_LIST_CONTACT_POLICY_SUCCESS,
-                model.getFilteredPolicyList().size(),
-                contactId.getOneBased()));
+
+        if (model.getFilteredPolicyList().size() > 0) {
+            return new CommandResult(
+                    String.format(
+                            MESSAGE_LIST_CONTACT_POLICY_SUCCESS,
+                            model.getFilteredPolicyList().size(),
+                            contactId.getOneBased()));
+        } else {
+            return new CommandResult(MESSAGE_POLICIES_LIST_EMPTY);
+        }
     }
 
     @Override

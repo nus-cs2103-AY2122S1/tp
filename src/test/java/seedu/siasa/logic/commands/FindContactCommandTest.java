@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LIST_EMPTY;
 import static seedu.siasa.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.siasa.testutil.TypicalContacts.CARL;
 import static seedu.siasa.testutil.TypicalContacts.ELLE;
@@ -57,11 +58,10 @@ public class FindContactCommandTest {
 
     @Test
     public void execute_zeroKeywords_noContactFound() {
-        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindContactCommand command = new FindContactCommand(predicate);
         expectedModel.updateFilteredContactList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, MESSAGE_CONTACTS_LIST_EMPTY, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
 
