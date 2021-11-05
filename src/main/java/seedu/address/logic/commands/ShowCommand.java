@@ -207,7 +207,7 @@ public class ShowCommand extends Command {
         model.updateFilteredStudentList(predicate);
 
         Info info = new Info(matchedGroup);
-        GroupStatistics statistics = new GroupStatistics(matchedGroup, model);
+        GroupStatistics statistics = new GroupStatistics(matchedGroup, model.getAddressBook().getAssessmentList());
         return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart(), savePath);
     }
 
