@@ -58,7 +58,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             for (String name : nameKeywords) {
                 ParserUtil.parseName(name);
             }
-          
+
             int numOfEmptyValue = (int) nameKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
