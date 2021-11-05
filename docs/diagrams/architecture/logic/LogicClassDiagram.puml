@@ -16,7 +16,7 @@ Interface Logic <<Interface>>
 Class LogicManager
 }
 
-package Model{
+package VersionedModel{
 Class HiddenModel #FFFFFF
 }
 
@@ -33,11 +33,11 @@ AcademyDirectoryParser ..> XYZCommand : creates >
 XYZCommand -up-|> Command
 LogicManager .left.> Command : executes >
 
-LogicManager --> Model
+LogicManager --> VersionedModel
 LogicManager --> Storage
-Storage --[hidden] Model
+Storage --[hidden] VersionedModel
 Command .[hidden]up.> Storage
-Command .right.> Model
+Command .right.> VersionedModel
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult

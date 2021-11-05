@@ -17,7 +17,7 @@ Class StatusBarFooter
 Class CommandBox
 }
 
-package Model <<Rectangle>> {
+package VersionedModel <<Rectangle>> {
 Class HiddenModel #FFFFFF
 }
 
@@ -47,7 +47,7 @@ StudentCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-StudentCard ..> Model
+StudentCard ..> VersionedModel
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
