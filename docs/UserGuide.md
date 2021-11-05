@@ -6,8 +6,8 @@ title: User Guide
 
 Dash is a personal planner app which offers unparalleled speed using text-based input. It supports both management of
 tasks and contacts. Dash is tailored to the needs of university students, who must keep track of a slew of different 
-deadlines and commitments. So long as you're a fast typist, Dash provides a blisteringly quick way to stay on top of 
-your responsibilities using your keyboard.
+deadlines, commitments, and contacts. So long as you're a fast typist, Dash provides a blisteringly quick way to stay 
+on top of your responsibilities.
 
 This guide was written to help you set up and start using Dash. You can navigate by clicking the table of 
 contents [below](#table-of-contents). If you're a new user, the Quick Start guide has all you need to get started. If 
@@ -26,9 +26,10 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 
 Whether you're using Windows or macOS, the steps for installation are the same.
 
-1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
+1. Ensure you have Java `11` or above installed in your Computer. 
+   [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html).
 
-2. Download the latest `dash.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
+2. Download the latest `dash.jar` from [this website](https://github.com/AY2122S1-CS2103T-W15-2/tp/releases/tag/v1.3.1).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
 
@@ -91,7 +92,9 @@ command; you cannot do so by clicking the tab.
 
 ![Using the CLI](images/CLITutorialGif.gif)
 
-Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open 
+the help window.
+
 Some example commands you can try:
 
 * **`contacts`** : Switches to the contacts tab
@@ -134,10 +137,12 @@ you a lot of time!
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of 
+  the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `contacts`, `tasks` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `contacts`, `tasks` and `clear`) 
+  will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * Here is the meaning of some icons used in this section:
@@ -198,8 +203,8 @@ Make sure you switch to the Contacts tab before using these commands! They will 
 :orange_book: If you want to add a person to the contact list, you can use the _Add_ command. Only the contact's name 
 is compulsory during creation. 
 
-:camera: The above screenshot shows how you can use the _Add_ command to add a person with the following details to your contact 
-list:
+:camera: The above screenshot shows how you can use the _Add_ command to add a person with the following details to 
+your contact list:
 
 * Name: _Mitski Miyawaki_
 * Phone number: _91288841_
@@ -212,7 +217,7 @@ list:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Name limitations:**<br>
-Names should be no longer than 20 characters.
+Names should be no longer than 30 characters.
 
 </div>
 
@@ -229,6 +234,7 @@ Names should be no longer than 20 characters.
 :page_with_curl: Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 :scroll: Notes:
+
 * Edits the contact at the specified `INDEX`.
   * The `INDEX` refers to the position of the contact in the displayed contact list as indicated by the number next to 
     their name.
@@ -256,6 +262,7 @@ Names should be no longer than 20 characters.
 :page_with_curl: Format: `tag INDEX t/TAG...`
 
 :scroll: Notes:
+
 * At least one tag must be provided.
 
 <div markdown="block" class="alert alert-info">
@@ -274,6 +281,7 @@ Tags should be no longer than 15 characters.
 :page_with_curl: Format: `delete INDEX`
 
 :scroll: Notes:
+
 * Deletes the person at the specified `INDEX`.
   * The `INDEX` refers to the position of the contact in the displayed contact list as indicated by the number next to
     their name.
@@ -287,11 +295,13 @@ Tags should be no longer than 15 characters.
 
 :orange_book: If you want to filter your contacts by tags, names, or any other details, you can use the _Find_ command.
 
-:camera: The above screenshot shows how the _Find_ command can be used to search for all contacts who are tagged as "friends".
+:camera: The above screenshot shows how the _Find_ command can be used to search for all contacts who are tagged as 
+"friends".
 
 :page_with_curl: Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 :scroll: Notes:
+
 * The search is case-insensitive. e.g. `find e/hans@gmail.com` will match `Hans@gmail.com`.
 * The order of the keywords does not matter. e.g. `find a/tampines 111` will match `Blk 111 Tampines Street 11, #02-345`.
 * At least one of the fields must be present.
@@ -357,7 +367,9 @@ of interest and more easily assign them to tasks.
 :orange_book: If you want to add a task to the task list, you can use the _Add_ command. Only task's description is 
 compulsory during creation. 
 
-:camera: The above screenshot shows how you can use the _Add_ command to add a task with the following details to your task list:
+:camera: The above screenshot shows how you can use the _Add_ command to add a task with the following details to your 
+task list:
+
 * Description: _Submit PR_
 * Date and Time: _1 Nov 2021, 5:00 PM_
 * Tag(s): _Groupwork_
@@ -366,6 +378,7 @@ compulsory during creation.
 :page_with_curl: Format: `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
+
 * An explanation of how Date and Time formats work can be found 
   [here](#date-time-info).
 * If you want to assign people to the task, the people to be assigned to the task (assignees) are specified with
@@ -388,6 +401,7 @@ compulsory during creation.
 :page_with_curl: Format: `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
+
 * Edits the task at the specified `INDEX`.
   * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to 
     its description.
@@ -424,6 +438,7 @@ by 23:59".
 :page_with_curl: Format: `tag INDEX t/TAG...`
 
 :scroll: Notes:
+
 * At least one tag must be provided.
 
 <div markdown="block" class="alert alert-info">
@@ -448,6 +463,7 @@ by 23:59".
 :page_with_curl: Format: `assign INDEX p/PERSON_INDEX...`
 
 :scroll: Notes:
+
 * Assigns people, specified with `PERSON_INDEX`, to the task at the specified `INDEX`.
   * You can assign multiple people to the same task at once.
   * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to its 
@@ -470,12 +486,11 @@ An incomplete task has a red tick instead.
 :page_with_curl: Format: `complete INDEX`
 
 :scroll: Notes:
+
 * Completes the task at the specified `INDEX`.
   * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to its 
     description.
   * The `INDEX` must be a positive integer (1, 2, 3,...).
-
-:scroll: Notes:
 * You cannot 'un-complete' a task. 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -487,6 +502,7 @@ An incomplete task has a red tick instead.
 :page_with_curl: Format: `delete INDEX`
 
 :scroll: Notes:
+
 * Deletes the task at the specified `INDEX`.
   * The `INDEX` refers to the position of the task in the displayed task list as indicated by the number next to 
     its description.
@@ -507,6 +523,7 @@ you can use the _Find_ command.
 [p/PERSON_INDEX]... [t/TAG]...`
 
 :scroll: Notes:
+
 * The search is case-insensitive. e.g `find t/HOMEWORK` will match the `homework` tag.
 * The order of the keywords does not matter. e.g. `find d/lectures ST` will match `ST Lectures`.
 * At least one of the fields must be present.
@@ -536,9 +553,11 @@ incomplete tasks whose Date/Time are after the current Date/Time.
 :camera: The above screenshot shows how the _Upcoming_ command is used to view all incomplete tasks after the current Date/Time.
 In this example, it was 25 October 2021, 09:16 PM.
 
+
 :page_with_curl: Format: `upcoming`
 
 :scroll: Notes:
+
 * Upcoming tasks will be listed in chronological order.
 * The current Date/Time is determined locally by your system clock.
 * An explanation of how Date and Time formats work can be found 
