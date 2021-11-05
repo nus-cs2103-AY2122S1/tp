@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.RemoveMarkCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
@@ -35,7 +36,7 @@ public class RemoveMarkCommandParserTest {
     public void parse_noDates_success() {
         assertParseSuccess(PARSER, " " + PREFIX_DASH_INDEX + " " + "1",
                 new RemoveMarkCommand(new PersonContainsFieldsPredicate(), Index.fromOneBased(1),
-                        ParserUtil.initializePeriodToThisWeek()));
+                        DateTimeUtil.getDisplayedPeriod()));
     }
 
     @Test
@@ -44,7 +45,7 @@ public class RemoveMarkCommandParserTest {
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate(new Phone("999"),
                 new Address("Kent Ridge"));
         assertParseSuccess(PARSER, userInput, new RemoveMarkCommand(predicate,
-                ParserUtil.initializePeriodToThisWeek()));
+                DateTimeUtil.getDisplayedPeriod()));
 
     }
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
@@ -34,7 +35,7 @@ public class MarkCommandParserTest {
     public void parse_validLookup() {
         String userInput = " " + PREFIX_DASH_INDEX + " 1";
         assertParseSuccess(PARSER, userInput, new MarkCommand(Index.fromOneBased(1),
-               ParserUtil.initializePeriodToThisWeek(), new PersonContainsFieldsPredicate()));
+                DateTimeUtil.getDisplayedPeriod(), new PersonContainsFieldsPredicate()));
 
     }
 
