@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.BENSON;
+import static seedu.address.testutil.TypicalClients.DANIEL;
 import static seedu.address.testutil.TypicalClients.ELLE;
 import static seedu.address.testutil.TypicalClients.FIONA;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
@@ -62,7 +60,7 @@ class SearchCommandTest {
     @Test
     public void execute_zeroKeywords_noClientFound() {
         String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0);
-        ClientContainsKeywordsPredicate predicate = preparePredicate("* e/not_example.com");
+        ClientContainsKeywordsPredicate predicate = preparePredicate("e/not_example.com");
         SearchCommand command = new SearchCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -79,9 +77,18 @@ class SearchCommandTest {
         assertEquals(Arrays.asList(ALICE, ELLE, FIONA), model.getFilteredClientList());
     }
 
+    @Test
+    public void execute_tagKeywords_clientsFound() {
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 3);
+        ClientContainsKeywordsPredicate predicate = preparePredicate("t/friends");
+        SearchCommand command = new SearchCommand(predicate);
+        expectedModel.updateFilteredClientList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredClientList());
+    }
+
     private ClientContainsKeywordsPredicate preparePredicate(String s) {
-        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(s,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(" " + s, ALL_PREFIXES);
         return new ClientContainsKeywordsPredicate(aMM);
     }
 }

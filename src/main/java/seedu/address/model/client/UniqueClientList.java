@@ -152,18 +152,6 @@ public class UniqueClientList implements Iterable<Client> {
         return clientFound;
     }
 
-    public List<Name> getClientNames(List<ClientId> clientIds) {
-        requireNonNull(clientIds);
-        List<Name> clientNames = FXCollections.observableArrayList();
-        clientIds.stream().forEach(clientId -> {
-            if (this.hasClientId(clientId)) {
-                Client tempClient = this.getClient(clientId);
-                clientNames.add(tempClient.getName());
-            }
-        });
-        return clientNames;
-    }
-
     /**
      * Removes the equivalent client from the list.
      * The client must exist in the list.

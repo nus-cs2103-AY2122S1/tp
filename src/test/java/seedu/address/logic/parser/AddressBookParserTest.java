@@ -5,14 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.client.SortDirection.SORT_ASCENDING;
+import static seedu.address.model.client.SortDirection.SORT_DESCENDING;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_CLIENT;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Function;
 
@@ -28,7 +34,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.abcommand.AbCommand;
 import seedu.address.logic.commands.abcommand.AbListCommand;
@@ -39,6 +47,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
+import seedu.address.model.client.SortByAttribute;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
@@ -103,6 +112,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_sort() throws Exception {
+        String keywords = "r/asc d/dsc i/asc";
+        SortByAttribute sorter = new SortByAttribute(
+                List.of(PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME, PREFIX_CLIENTID),
+                List.of(SORT_ASCENDING, SORT_DESCENDING, SORT_ASCENDING));
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + keywords);
+        assertEquals(new SortCommand(sorter), command);
+    }
+
+    @Test
     public void parseCommand_filter() throws Exception {
         String keywords = "do t/friends e/example.com";
         ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
@@ -119,6 +139,14 @@ public class AddressBookParserTest {
         ViewCommand command = (ViewCommand) parser.parseCommand(
             ViewCommand.COMMAND_WORD + " " + input);
         assertEquals(new ViewCommand(clientId, new ClientHasId(clientId)), command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        String input = "20-12-2021";
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " " + input);
+        assertEquals(new ScheduleCommand(LocalDate.of(2021, 12, 20)), command);
     }
 
     @Test

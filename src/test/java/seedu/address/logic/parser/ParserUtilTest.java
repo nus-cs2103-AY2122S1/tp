@@ -185,7 +185,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDirection_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_DIRECTION));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortDirection(INVALID_DIRECTION));
     }
 
     @Test
