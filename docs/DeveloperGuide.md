@@ -216,6 +216,21 @@ and returned.
 The following sequence diagram shows how the delete marked operation works.
 ![images](images/DeleteMarkedCommandSequenceDiagram.png)
 
+#### Design considerations:
+
+**Aspect: User command to use in deleting marked applicants:**
+
+* **Alternative 1 (current choice):** Separate command for deleting marked applicants
+    * Pros: Command has single responsibility of deleting marked applicants based.
+    * Pros: Easy to use for user, does not take any additional input.
+    * Cons: User might be confused between `delete` command for general deletion and `delete_marked` command.
+
+* **Alternative 2:** Part of `delete` command functionality
+    * Pros: Intuitive for user to use `delete` command for all deletion purposes
+    * Cons: Breaks the single responsibility principle as deleting marked applicants does not delete applicants at specific indices
+    like the rest of the `delete` command, but rather a certain group of applicants at once. 
+
+
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
