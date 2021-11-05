@@ -170,7 +170,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 #### History
 
-**API** : [`history.java`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/History.java)
+**API** : [`History.java`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/History.java)
 
 <img src="images/HistoryClassDiagram.png" width="250" />
 
