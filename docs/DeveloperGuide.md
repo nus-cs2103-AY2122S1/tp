@@ -724,18 +724,18 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-<u>Aspect: How to implement filter</u>
-* Option 1: one filter command that handles both grade and subject filtering
-    * Pros: Less commands to remember, user will not feel overwhelmed.
-    * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
-* Option 2: 3 separate filter commands, one for each scenario stated above
-    * Pros: Slightly more straightforward to implement.
-    * Cons: Too many existing commands in the application, and may not be as intuitive to use.
+<u>Aspect: How to implement roster</u>
+
+* Option 1: `roster LESSON_INDEX`
+    * Pros: Less key travels needed, user can potentially save more time in the repeated usage of this command.
+    * Cons: User may not understand the use of the `LESSON_INDEX` on the first instance.
+* Option 2: `roster l/LESSON_INDEX`
+    * Pros: With the usage of the flag `l/`, the purpose of the command is clearer.
+    * Cons: As the user gets familiar with the application, the extra `l/` could potentially result in a loss of efficiency due to extra key travels.
 
 <ins>Decision</ins>
 
-Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
-handle multiple scenarios would be less daunting to use.
+Ultimately we chose option 1 as we felt that in a long run, the time saved through a fast and easy command is more essential, in order to keep TuitiONE on the competitive edge.
 
 ### \[Proposed\] Undo/redo feature
 
