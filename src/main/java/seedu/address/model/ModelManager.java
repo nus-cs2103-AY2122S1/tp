@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
@@ -111,6 +112,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return addressBook.hasPersonWithName(name);
     }
 
     @Override
@@ -293,15 +300,38 @@ public class ModelManager implements Model {
     /**
      * Marks an order as completed
      */
+    @Override
     public boolean markOrder(Order order) {
         return orderBook.markOrder(order);
     }
 
     /**
+<<<<<<< HEAD
+     * Delete tasks related to a given Order
+     */
+    @Override
+    public void deleteRelatedTasks(Order order) {
+        String keyword = Order.ID_PREFIX + String.valueOf(order.getId());
+        this.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    @Override
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orderBook.deleteOrderIf(pred);
+    }
+
+    /**
+     * For each person, finds orders associated with the person, and adds up the amount.
+     * Creates a ClientTotalOrder for each person.
+=======
      * Groups and sums up all orders according to their {@code Customer}s.
      * This method computes total orders based on the {@code Customer}s,
      * but each {@code Customer} is supposed to map to an existing {@code Person} (Client),
      * hence the naming of the method and local variables.
+>>>>>>> 7d4603133ce879c7e267914eb92fdca0f8d42c1e
      *
      * @return an ObservableList of {@code ClientTotalOrder}.
      */
