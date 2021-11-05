@@ -20,6 +20,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 public class DeleteClassCommand extends Command {
 
@@ -77,7 +78,8 @@ public class DeleteClassCommand extends Command {
             ClassCode classCode = new EmptyClassCode();
             Set<Tag> tags = student.getTags();
             List<StudentMark> marks = student.getMarks();
-            return new Student(name, phone, email, address, classCode, tags, marks);
+            Set<TutorialGroup> tutorialGroups = student.getTutorialGroups();
+            return new Student(name, phone, email, address, classCode, tags, marks, tutorialGroups);
         }
         return student;
     }

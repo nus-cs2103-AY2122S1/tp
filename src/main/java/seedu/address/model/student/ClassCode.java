@@ -13,7 +13,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ClassCode implements Comparable<ClassCode> {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G/g, "
-            + "followed by a 2-digit number and it should not be blank";
+            + "followed by a 2-digit non-zero number and it should not be blank";
+
+    public static final String MESSAGE_EMPTY_CLASS = "The classcode is invalid. Choose a classcode between G01 and G99";
 
     public static final String VALIDATION_REGEX = "[G|g]\\d{2}";
     public final String value;
@@ -35,6 +37,10 @@ public class ClassCode implements Comparable<ClassCode> {
     public static boolean isValidClassCode(String test) {
         boolean value = test.matches(VALIDATION_REGEX);
         return value;
+    }
+
+    public static boolean isDefaultClassCode(String test) {
+        return test.equals("G00");
     }
     @Override
     public String toString() {

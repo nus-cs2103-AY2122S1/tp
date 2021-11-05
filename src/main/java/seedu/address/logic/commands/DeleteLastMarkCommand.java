@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ public class DeleteLastMarkCommand extends Command {
 
     public static final String MESSAGE_DELETE_MARK_STUDENT_SUCCESS = "Deleted Mark from Student: %1$s";
     public static final String MESSAGE_NO_MARKS = "No Marks to Delete!";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
 
     private final Index index;
 
@@ -76,7 +76,8 @@ public class DeleteLastMarkCommand extends Command {
                 studentToEdit.getAddress(),
                 studentToEdit.getClassCode(),
                 studentToEdit.getTags(),
-                updatedMarks);
+                updatedMarks,
+                studentToEdit.getTutorialGroups());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
@@ -27,7 +28,6 @@ public class AddLastMarkCommand extends Command {
 
     public static final String MESSAGE_ADD_MARK_STUDENT_SUCCESS = "Added Mark to Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Mark to add must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
 
     private final Index index;
     private final StudentMark mark;
@@ -79,7 +79,8 @@ public class AddLastMarkCommand extends Command {
                 studentToEdit.getAddress(),
                 studentToEdit.getClassCode(),
                 studentToEdit.getTags(),
-                updatedMarks);
+                updatedMarks,
+                studentToEdit.getTutorialGroups());
     }
 
     @Override

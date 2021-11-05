@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CLASS_DOES_NOT_EXIST;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -43,9 +45,6 @@ public class AddStudentCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE";
-    public static final String MESSAGE_CLASS_NOT_EXIST = "The classCode is invalid as the tutorial class "
-            + "has not been created yet.";
 
     private final Student toAdd;
 
@@ -67,9 +66,10 @@ public class AddStudentCommand extends Command {
 
         // Check tutorial class has been created before the classCode is assigned.
         TutorialClass toCheckTutorialClass = new TutorialClass(toAdd.getClassCode(),
-                new Schedule("dummy, dummy"), new HashSet<Tag>());
+                new Schedule("Tues 12:00pm to 2:00pm, Fri 12:00pm to 2:00pm"), new HashSet<Tag>());
+
         if (!model.hasTutorialClass(toCheckTutorialClass)) {
-            throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
+            throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
         model.addStudent(toAdd);

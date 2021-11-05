@@ -268,11 +268,11 @@ Given below is an example of how the tutorial class features can be used:
 Step 1. The user launches the application for the first time. The `UniqueTutorialClassList` would be derived from the
 initial ClassMATE state, and all tutorial classes stored will be displayed.
 
-Step 2. The user executes an `addc c/G00 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
+Step 2. The user executes an `addc c/G01 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
 state of ClassMATE. The updated `UniqueTutorialClassList` will be displayed in the `ClassListPanel`
 to the user.
 
-Step 3. The user executes a `findc G00` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
+Step 3. The user executes a `findc G01` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
 of tutorial classes. The updated filtered list consisting of te results of the search query will be displayed to the user.
 
 Step 4. The user executes a  `viewc 1` command. The `viewc` command updates the `FilteredList` of `TutorialCLass`es to only display the class at the
@@ -303,11 +303,11 @@ Execution of the `AddClassCommand`
 * Alternative 1 (current choice): Find Tutorial Classes by selecting all classes with classcodes matching the search keyword
     * Pros: Shorter keyword to type, therefore increasing user typing speed. User is also able to find multiple classes
     * Cons: Lower Accuracy in searching for a specific class, having to search through multiple classes
-    
+
 * Alternative 2: Find tutorial class by exact class code
     * Pros: Higher Accuracy in search
     * Cons: Takes longer for user to type commands, less user-friendly
-    
+
 #### Aspect: Student and Tutorial Class lists
 * Alternative 1 (current choice): Use two separate lists to store students and tutorial classes
     * Pros: Faster, simpler command executions for student and tutorial class commands.
@@ -439,7 +439,7 @@ The class `Classmate` facilitates all operations related to tutorial groups. It 
 tutorial group list to be displayed to the user. TutorialGroups are identical only if all its attributes, Group name, Class code and Group type are the same.
 The `Classmate` contains a summary of all the logic of the tutorial group commands which can be split into two parts,
 adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`, and adding students to tutorial groups.
-Displaying of groups in the UI has not been implemented yet. 
+Displaying of groups in the UI has not been implemented yet.
 
 The following operations are implemented:
 * `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
@@ -476,7 +476,7 @@ it checks whether the specified tutorial class exists before invoking the `model
     * Pros: Simpler to implement, without the use of multiple lists to store tutorial groups of different types ("OP1" or "OP2").
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
-    
+
 * Alternative 2: Use multiple lists to store groups of different categories (by class or type)
     * Pros: Faster when performing find functions and groups are better organised.
     * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented. Deleting of groups may also become more complicated.
@@ -519,9 +519,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new student              |                                                                        |
 | `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
 | `* * *`  | user                                       | add a new class                |                                                                        |
-| `* * `   | user                                       | add a class schedule           | plan my week in advance  
+| `* * `   | user                                       | add a class schedule           | plan my week in advance                                                |
 | `* * *`  | user                                       | view a class' details          | easily check the details of a particular class                         |
-| `* * *`  | user                                       | delete a student               | remove entries that I no longer need       
+| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | delete a class                 | remove classes that I no longer need                                                                 |
 | `* * *`  | user                                       | find a student by name          | locate details of students without having to go through the entire list |
 | `* * *`  | user                                       | find a class by code           | locate details of a class without having to go through the entire list |

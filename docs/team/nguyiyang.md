@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `list` and `clear`
   * Developer Guide:
-    * Added documentation for Target Users, user 
+    * Added documentation for Target Users, user
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#57](), [\#59]()

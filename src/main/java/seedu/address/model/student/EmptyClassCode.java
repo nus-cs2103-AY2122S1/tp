@@ -1,6 +1,6 @@
 package seedu.address.model.student;
 
-public final class EmptyClassCode extends ClassCode {
+public class EmptyClassCode extends ClassCode {
 
     public static final String EMPTY_CLASSCODE = "G00";
 
@@ -9,6 +9,10 @@ public final class EmptyClassCode extends ClassCode {
      */
     public EmptyClassCode() {
         super(EMPTY_CLASSCODE);
+    }
+
+    public static boolean isDefaultClassCode(String test) {
+        return true;
     }
 
     @Override
