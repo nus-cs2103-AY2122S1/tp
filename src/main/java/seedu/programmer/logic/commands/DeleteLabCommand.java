@@ -24,6 +24,7 @@ public class DeleteLabCommand extends Command {
 
     public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
     public static final String MESSAGE_LAB_DOES_NOT_EXIST = "Lab doesn't exist: %1$s";
+    public static final String MESSAGE_NO_STUDENT = "There are no students whose labs can be deleted";
 
     private final Lab lab;
 
@@ -38,6 +39,7 @@ public class DeleteLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
+
         if (!model.hasLab(lab)) {
             throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, lab));
         }
