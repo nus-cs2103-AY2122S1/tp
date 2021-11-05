@@ -4,17 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.abcommand.AbCommand.MESSAGE_DELETE_ADDRESSBOOK_FAILURE;
 import static seedu.address.logic.commands.abcommand.AbCommand.MESSAGE_DELETE_ADDRESSBOOK_SUCCESS;
 import static seedu.address.logic.commands.abcommand.AbDeleteCommand.MESSAGE_ADDRESSBOOK_DELETE_CURRENT;
 import static seedu.address.logic.commands.abcommand.AbDeleteCommand.MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.io.IOException;
-import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.attribute.DosFileAttributeView;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -78,26 +75,6 @@ public class AbDeleteCommandTest {
         AbDeleteCommand abDeleteCommand = new AbDeleteCommand(newFilePathName, newFilePath);
         String result = String.format(MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS, newFilePathName);
         assertCommandFailure(abDeleteCommand, model, result);
-    }
-
-    @Test
-    public void execute_failure_failToDelete() throws IOException {
-        String newFilePathName = "testingfile";
-        Path newFilePath = testFolder.resolve(newFilePathName + ".json");
-        Files.createFile(newFilePath);
-
-        FileStore fileStore = Files.getFileStore(newFilePath);
-        if (!fileStore.supportsFileAttributeView(DosFileAttributeView.class)) {
-            return;
-        }
-
-        Files.setAttribute(newFilePath, "dos:readonly", true);
-
-        AbDeleteCommand abDeleteCommand1 = new AbDeleteCommand(newFilePathName, newFilePath);
-        String result = String.format(MESSAGE_DELETE_ADDRESSBOOK_FAILURE, newFilePathName);
-        assertCommandFailure(abDeleteCommand1, model, result);
-
-        Files.setAttribute(newFilePath, "dos:readonly", false);
     }
 
     @Test
