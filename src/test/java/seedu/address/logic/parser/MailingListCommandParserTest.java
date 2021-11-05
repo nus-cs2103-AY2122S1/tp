@@ -11,6 +11,7 @@ import seedu.address.logic.commands.MailingListCommand;
 
 class MailingListCommandParserTest {
     private MailingListCommandParser parser = new MailingListCommandParser();
+
     @Test
     public void parse_emptyArg_defaultArgs() {
         MailingListCommand expectedCommand = new MailingListCommand(MailingListCommandParser.DEFAULT_PREFIXES);
