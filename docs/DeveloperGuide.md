@@ -1467,7 +1467,7 @@ testers are expected to do more *exploratory* testing.
          }
          ```
          Do note once again that enrolling a student using the data storage must fulfil the enrollment constraints.<br>
-         Review the [Appendix B](#appendix-b-instructions-for-manual-testing) for the remaining constraints present.<br>
+         Review [Appendix B](#appendix-b-instructions-for-manual-testing) for the remaining constraints present.<br>
 
     *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
        Expected (continued): After the UI responds, verify that `./data/tuitione.json` is not modified, and holds the changes you made in the initial step.
