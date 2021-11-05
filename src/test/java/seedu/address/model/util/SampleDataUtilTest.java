@@ -1,15 +1,15 @@
 package seedu.address.model.util;
 
-import javafx.collections.ObservableList;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class SampleDataUtilTest {
     private final ReadOnlyAddressBook sampleAb = SampleDataUtil.getSampleAddressBook();
