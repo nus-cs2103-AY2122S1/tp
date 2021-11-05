@@ -107,14 +107,20 @@ Given below are my contributions to the project.
 
   <br>
 * **Developer Guide**:
-  * TBA
+  * Added Use case UC18 [\#116](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/116)
+  * Added implementation details and diagrams for Tagging feature [\#116](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/116),
+    [\#227](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/227)
+  * Added Manual Testing Section for `Tag` feature [\#227](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/227)
+  * Added User stories [\#60](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/60)
+  
 
 <br>
 
 #### Community
+  * Updated SampleDataUtils [\#98](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/98)
   * Fixed bugs highlighted in PED [/#200](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/200)
-  * Performed release of JAR file (v1.2)
-  * Performed a demo of the application in Week 
+  * Performed release of JAR file [v1.2](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases/tag/v1.2)
+  * Performed a demo of the application in Week 9
   * Helped to check the formatting of the UG [/#148](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/148)  
   * PRs reviewed (with non-trivial review comments): [\#77](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/77), 
     [\#117](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/117), 

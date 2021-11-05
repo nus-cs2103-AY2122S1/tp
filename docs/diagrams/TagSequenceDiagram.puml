@@ -1,0 +1,131 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FastParser" as FastParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant "tc:TagCommand" as TagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Tag" as Tag MODEL_COLOR
+participant "t:Tag" as TagObject MODEL_COLOR
+participant "pt:PriorityTag" as PriorityTag MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag 1 a/pr/low")
+activate LogicManager
+
+LogicManager -> FastParser : parseCommand("tag 1 a/pr/low d/friend")
+activate FastParser
+
+create TagCommandParser
+FastParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> FastParser
+deactivate TagCommandParser
+
+FastParser --> TagCommandParser : parse("1 a/pr/low d/friend")
+activate TagCommandParser
+
+'loop required`
+loop until all tags to be added are created
+    TagCommandParser --> TagCommandParser : checkAndAddNonSpecialTags()
+    activate TagCommandParser
+
+    TagCommandParser --> TagCommandParser : checkIfSpecialTag()
+    activate TagCommandParser
+
+    TagCommandParser --> TagCommandParser
+        deactivate TagCommandParser
+
+    TagCommandParser --> Tag : createTag("pr/low")
+    activate Tag
+
+    create PriorityTag
+    Tag -->  PriorityTag : PriorityTag("pr/low")
+    activate PriorityTag
+
+    PriorityTag --> Tag
+    deactivate PriorityTag
+
+    Tag --> TagCommandParser
+    deactivate Tag
+
+    TagCommandParser --> TagCommandParser
+    deactivate TagCommandParser
+end
+
+loop until all tags to be deleted are created
+    TagCommandParser --> TagCommandParser : checkAndAddNonSpecialTags()
+    activate TagCommandParser
+
+    TagCommandParser --> TagCommandParser : checkIfSpecialTag()
+    activate TagCommandParser
+
+    TagCommandParser --> TagCommandParser
+    deactivate TagCommandParser
+
+    TagCommandParser --> Tag : createTag("friend")
+    activate Tag
+
+    create TagObject
+    Tag -->  TagObject : Tag("friend")
+    activate TagObject
+
+    TagObject --> Tag
+    deactivate TagObject
+
+    Tag --> TagCommandParser
+    deactivate Tag
+
+    TagCommandParser --> TagCommandParser
+    deactivate TagCommandParser
+end
+
+create TagCommand
+TagCommandParser --> TagCommand : TagCommand()
+activate TagCommand
+
+TagCommand --> TagCommandParser : tc
+deactivate TagCommand
+
+TagCommandParser --> FastParser : tc
+deactivate TagCommandParser
+
+FastParser --> LogicManager : tc
+deactivate FastParser
+
+LogicManager --> TagCommand : execute()
+activate TagCommand
+
+TagCommand -> Model : setPerson(PersonToEdit, editedPerson)
+activate Model
+
+Model --> TagCommand
+deactivate Model
+
+TagCommand --> TagCommand : generateSuccessMessage(editedPerson)
+activate TagCommand
+
+TagCommand --> TagCommand : successMsg
+deactivate TagCommand
+
+create CommandResult
+TagCommand -> CommandResult : CommandResult(successMsg)
+activate CommandResult
+
+CommandResult --> TagCommand
+deactivate CommandResult
+
+TagCommand --> LogicManager
+deactivate TagCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

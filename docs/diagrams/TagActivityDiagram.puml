@@ -1,0 +1,37 @@
+@startuml
+start
+title Fast Tag Activity Diagram
+
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([recognised command])
+    :Parse command;
+    if () then ([is tag-related])
+            :Check User Input;
+            if () then ([valid syntax])
+                if () then ([tags to be added and
+         deleted are valid])
+                    :Add and delete tags
+                    as required;
+                    :Update Model;
+                    :Save Fast to
+                    fastStateList;
+                else ([tags are invalid]))
+                -Throw exception
+                endif
+            else ([invalid syntax])
+            - Throw Exception
+            endif
+    else ([other command])
+    - Handled by the corresponding classes
+    endif
+else ([unrecognised command])
+  -Throw exception
+endif
+- Display result / message
+stop
+
+@enduml

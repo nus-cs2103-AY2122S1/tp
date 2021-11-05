@@ -5,11 +5,6 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,29 +38,29 @@ In this section, you will learn more about the design and structure of **FAST**.
 <img src="images/ArchitectureDiagram.png" width="300" />
 <br> *Figure 1: Architecture Diagram of FAST*
 
-**FAST** is developed and build upon **AddressBook3**. We have decided to keep the 6 components used in **AddressBook3**
-but modify and enhance each component to fit the needs of **FAST**.
+**FAST** is developed and built upon **AddressBook3**. We have decided to keep the 6 components used in **AddressBook3**
+while modifying and enhancing each component to fit the needs of **FAST**.
 The **Architecture diagram** given above explains the high-level design of FAST.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
-There are the 6 major components of **FAST**:
+There are 6 major components of **FAST**:
 1. **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/MainApp.java). It is responsible for,
    * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
    * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-2. [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-3. [**`UI`**](#ui-component): The UI of the **FAST**.
+2. [**`Commons`**](#common-classes): A collection of classes used by multiple other components.
+3. [**`UI`**](#ui-component): The UI of **FAST**.
 4. [**`Logic`**](#logic-component): The command executor.
-5. [**`Model`**](#model-component): Holds the data of the **FAST** in memory.
+5. [**`Model`**](#model-component): Holds the data of **FAST** in memory.
 6. [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 Each of the four main components(*labelled 3-6*) (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality 
 using the `LogicManager.java` class which follows the `Logic` interface. 
@@ -113,8 +108,8 @@ The `UI` component,
 
 The `PersonCard` class will create new `ItemComponent` and `TagComponent` that will help to add and load the icons used in FAST.
 
-The `StatsWindow` will display a *pie chart* and a *brief analysis message*. 
-The data used in the *piechart* are obtained from the 'Person' object residing in the `Model` component, which is obtained from `StatsWindowData`. 
+The `StatsWindow` will display a *pie chart*, and a *brief analysis message*. 
+The data used in the *pie chart* are obtained from the 'Person' object residing in the `Model` component, which is obtained from `StatsWindowData`. 
 
 ### Logic component
 
@@ -158,7 +153,7 @@ This section will explain the structure of the Model component.
 
 The `Model` component,
 
-* stores Fast data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores Fast data, i.e. all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -202,7 +197,7 @@ Currently, the appointment feature supports 5 different type of command:
 This 5 features will allow users to be able to manage the appointments they have with their clients.
 All 5 features extends from the `abstract` `Command` class.  
 These 5 features help clients to manage their appointment by manipulating the `Appointment` and the `AppointmentCount` class.
-`add appointment`, `edit appointment` and `delete appointment` works similar to `add`, `edit` and `delete` feature.
+`add appointment`, `edit appointment` and `delete appointment` functions similarly to the features `add`, `edit` and `delete` respectively.
 The table below summarises the purpose of the 5 different appointment commands.
 
 | Command      | Command Word | Purpose |
@@ -347,7 +342,7 @@ The sequence diagram below illustrates step 2 to step 6.
 
 ![Appointment_Sequence_Diagram](images/AppointmentSequenceDiagram.png)
 
-**7**) Suppose that the user makes a mistake in the `date` of the appointment and he wants to change it.
+**7**) Suppose that the user makes a mistake in the `date` of the appointment, and he wants to change it.
 Example: `ea 1 d/2022-05-15`
 
 **8**) Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `EditAppointmentCommand` class and `EditAppointmentCommandParser` class instead.
@@ -357,15 +352,15 @@ The diagram below shows the updated object diagram after the `ea` command is exe
 
 **9a**) Suppose that the user cancels the appointment and wants to delete it using the command `da 1`.
 Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `DeleteAppointmentCommand` class and `DeleteAppointmentCommandParser` class instead.
-The update object diagram will be reverted back to the initial state (as shown in step 3).
+The update object diagram will be reverted to the initial state (as shown in step 3).
 
-**9b**) Suppose that the user did not delete the appointment. Instead he wants to mark the appointment using the command `ma 1`.
-Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `MarkAppointmentCommand` class and `MarkAppointmentCommandParser` class instead.
+**9b**) Suppose that the user did not delete the appointment. Instead, he wants to mark the appointment using the command `ma 1`.
+A similar course of action mentioned to step 2 to step 6 will occur, except that in this case it involves the `MarkAppointmentCommand` class and `MarkAppointmentCommandParser` class instead.
 The diagram below shows the updated object diagram.
 
 ![Appointment_Added_State_3](images/AppointmentAddedState3.png)
 
-**10**) Finally, suppose that the user mark the appointment (in step 9b) by accident and wants to unmark it using `ua 1`.
+**10**) Finally, suppose that the user marks the appointment (in step 9b) by accident and wants to unmark it using `ua 1`.
 Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `UnmarkAppointmentCommand` class and `UnmarkAppointmentCommandParser` class instead.
 The update object diagram will reflect the changes in the `AppointmentCount` object (decrementing count by 1), and in this case it will be similar to the object diagram shown in step 3 (since the count is 1 as shown in the diagram in step 9b).
 
@@ -376,7 +371,7 @@ Given below is Activity Diagram for FAST Appointment procedure. It includes scen
 <br> 
 
 #### Design Considerations
-
+**Aspect: How the application feature is implemented**
 * **Alternative 1 (current choice):** Divide the appointment features into 5 sub-features.
     * Pros:
         1. Isolation of a single sub-feature to a specific command: more intuitive to use.
@@ -439,9 +434,9 @@ of the search.<br>
 
 #### Design Considerations
 
-**Aspect: How find executes:**
+**Aspect: How find executes**
 
-* **Alternative 1 (current choice):** Use many `Predicate<Person` implementations.
+* **Alternative 1 (current choice):** Use many `Predicate<Person>` implementations.
     * Pros: Easy to implement.
     * Cons: For every type of find added, a new class must be made.
 
@@ -491,11 +486,11 @@ The activity diagram below shows the flow of a multiple delete command.
 
 **2**) `LogicManage::execute()` will be called which will in turn call `FastParser::parseCommand()`
 
-**3**) `FastParser::ParseCommand()` will determine that it is a delete command and it will call the `DeleteCommandParser::parse()`
+**3**) `FastParser::ParseCommand()` will determine that it is a delete command, and it will call the `DeleteCommandParser::parse()`
 
 **4**) Inside `DeleteCommandParser::parse()`:
  * `DeleteCommandParser::isRangeInput()` will check if the user input contains exactly 1 dash and if the length is at least 3, after removing all the whitespaces. The result will be `true`
- * `DeleteCommandParser::spiltRangeInput()` will parse the input and extract out the start index and the end index.
+ * `DeleteCommandParser::spiltRangeInput()` will parse the input and extract out the start index, and the end index.
  * `DeleteCommandParser::parseRangeInput()` will generate all the indexes in between the start and end index and return a new `DeleteCommand` object.
 
 **5**) `LogicManager` will call `DeleteCommand::execute()`.
@@ -515,21 +510,22 @@ The sequence diagram below shows step 1 to step 6 mentioned above.
 
 
 #### Design Consideration
-**Alternative 1 (current choice):** Execute multiple delete in descending order of indexes.
-* Pros:
-  1. Detects out of bound index first.
-
-* Cons:
-  1. Have to introduce another method to do the sorting.
-  2. Slower time as the index array needs to be sorted first.
-
-**Alternative 2:** Execute multiple delete in the order of indexes input by user.
-* Pros:
-    1. Faster process, do not need to sort.
-
-* Cons:
-    1. More bug-prone, have to account for the differences between the currently deleted index and the to-be deleted index as the model updates after each delete, hence the index may not be the same as what the user has input.
-    2. Will delete contacts until the first invalid index is detect, might be confusing for the user.
+**Aspect: How multiple delete performs the order of commands**
+* **Alternative 1 (current choice):** Execute multiple delete in descending order of indexes.
+    * Pros:
+      1. Detects out of bound index first.
+    
+    * Cons:
+      1. Have to introduce another method to do the sorting.
+      2. Slower time as the index array needs to be sorted first.
+    
+*  **Alternative 2:** Execute multiple delete in the order of indexes input by user.
+    * Pros:
+        1. Faster process, do not need to sort.
+    
+    * Cons:
+        1. More bug-prone, have to account for the differences between the currently deleted index, and the to-be deleted index as the model updates after each delete, hence the index may not be the same as what the user has input.
+        2. Will delete contacts until the first invalid index is detected, might be confusing for the user.
 
 <br>
 
@@ -547,22 +543,26 @@ There are currently three custom comparators implemented in FAST:
 `SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
 `SortByAppointment`: Implemented by first converting the appointment date and time from `String` to a `Date` object before using
 the inbuilt `Date::compareTo` method.  <br>
-`SortByPriority`: Implemented by first assigning int values to `tags`, `tags` with highest priority will have the smallest int value.
+`SortByPriority`: Implemented by first assigning int values to `tags`, `tags` with the highest priority will have the smallest int value.
 Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
 
 #### Usage Scenario
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. <br>
-Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
-calls `FastParser::parseCommand` to parse the given input. <br>
-Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
-`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
-Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate
-the state of our contacts. <br>
-Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
-to sort the list of persons by their name.<br>
+**1**) The user launches the application for the first time.
+
+**2**) The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. 
+
+**3**) `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
+`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator.
+
+**4**) After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate
+the state of our contacts.
+
+**5**) Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
+to sort the list of persons by their name.
 
 The sequence diagram below illustrates the execution of `sort name`.
 
@@ -571,7 +571,7 @@ The sequence diagram below illustrates the execution of `sort name`.
 
 #### Design Considerations
 
-**Aspect: How sort executes:**
+**Aspect: How sort executes**
 
 * **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
     * Pros: Easy to implement.
@@ -581,7 +581,7 @@ The sequence diagram below illustrates the execution of `sort name`.
     * Pros: May not need additional attributes
     * Cons: Very complicated, may have performance issues if the sort is not efficient.
 
-**Aspect: How SortByDate is implemented:**
+**Aspect: How SortByDate is implemented**
 
 * **Alternative 1 (current choice):** Convert the String date and time value to a Date object before using inbuilt `compareTo`.
     * Pros: Easy to implement.
@@ -628,7 +628,7 @@ window will open to allow users to view help regardless. For reference, the curr
 * `Priority Tag`
 * `Misc`
 
-The activity diagram below shows the many ways user can utilise the help command
+The activity diagram below shows the many ways a user can utilise the help command
 
 ![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
 
@@ -638,7 +638,7 @@ parameter is done by `ParserUtil` and verification of the parameter is done in `
 `HelpWindow` will set the text of the `JavaFX::Label` to be the corresponding help topic. This is as shown in the sequence
 diagram as shown below.
 
-![Help Command Sequnce Diagram](images/HelpCommandParsingSequenceDiagram.png)
+![Help Command Sequence Diagram](images/HelpCommandParsingSequenceDiagram.png)
 
 
 To access the different commands' help page from within the help window, there is a dropdown selector which will
@@ -673,12 +673,12 @@ by providing them a quick and easy way to access the commands' help page when th
 **Aspect: How to access the help window**
 
 Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an
-additional `[COMMAND]` paramater for the help command, which navigates to the selected command's help page.
+additional `[COMMAND]` parameter for the help command, which navigates to the selected command's help page.
 * Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
   first and selecting the command help page from there.
 * Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
 
-To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
+To address the cons of our implementation, we decided to compromise by still opening the help menu regardless of a
 valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
 window to the default page.
 
@@ -722,12 +722,12 @@ into a `InvestmentPlanData`, and uses the methods `populateInvestmentPieChart()`
     * Cons: The information might be overbearing. Does not provide an immediate overview of the client base. New
             users might also be confused by the large amount of information displayed at once.
 
-Ultimately, as our main focus was speed and ease of use, we decided on the piechart implementation as it is both 
+Ultimately, as our main focus was speed and ease of use, we decided on the pie chart implementation as it is both 
 easily understood, yet is able to convey the essence of the data to the user. Other chart types are less common and 
-thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
-piechart to help users better understand the data and provide a more complete statistic.
+thus might be confusing to the user. To address the cons of the pie chart, we also included some analysis of the 
+pie chart to help users better understand the data and provide a more complete statistic.
 
-**Asepct: How to open the stats window**
+**Aspect: How to open the stats window**
 * **Alternative 1 (Current choice):** Using `F2` or the menu item.
     * Pros: More intuitive, and provides a one-key shortcut to open the stats window.
     * Cons: Certain devices do not have the function keys, hence they would require to use their mouse and click 
@@ -761,23 +761,43 @@ This command has a relatively straightforward implementation:
     3. A maximum of 1 of each Investment Plan tag exists in the `Set` of tags
     4. No duplicate tag is added to the `Set`
     5. No non-existent tag is attempted to be deleted from the 'Set'
-    
+
+The activity diagram below shows the flow of a typical tag command.
+
+![TagActivityDiagram](images/TagActivityDiagram.png)
+
 #### Usage Scenario 
 
-1. The user launches the application and inputs "tag 1 a/fat d/thin", to add a tag `fat` and delete a tag `thin`
-   from the first listed contact.
-2. This calls `LogicManager::execute` which further calls `FastParser::parseCommand` to parse the given input.
-3. `FastParser` determines that it is a tag command, and further calls `TagCommandParser::parse`.
-4. `TagCommandParser` will then identify the tags to add and delete, and return a `TagCommand` that contains a Set
-   of tags to delete and another Set of tags to add.
-5. `LogicManager` then calls the method `TagCommand::execute`, which will attempt to add and delete the specified 
-   tags, while ensuring that certain conditions are met.
-6. If there are no issues, the command will finish executing, and a message indicating success will appear.
-   Any changes to the tags will be reflected immediately: In this case, the tag `fat` will be added while the
-   tag `thin` will be deleted.
+**1**) The user launches the application and inputs "tag 1 a/pr/low d/friend", to add a priority tag `LowPriority` and 
+delete a tag `friend` from the first listed contact. We assume the first listed contact only has one tag at this 
+point in time, which is the `friend` tag.
+
+**2**) This calls `LogicManager::execute` which further calls `FastParser::parseCommand` to parse the given input.
+
+**3**) `FastParser` determines that it is a tag command, and further calls `TagCommandParser::parse`.
+
+**4**) `TagCommandParser` will then identify the tags to add and delete, and proceed to instantiate them then
+return a `TagCommand` that contains a Set of tags to delete and another Set of tags to add. At this point, the 
+object diagram below shows the state of the `Person` object and the `Tag` associated with it.
+
+![TagCommandState1](images/TagCommandState1.png)
+
+**5**) `LogicManager` then calls the method `TagCommand::execute`, which will attempt to add and delete the specified 
+tags, while ensuring that certain conditions are met.
+
+**6**) If there are no issues, the command will finish executing, and a message indicating success will appear.
+Any changes to the tags will be reflected immediately: In this case, the tag `LowPriority` will be added while the
+tag `friend` will be deleted. The object diagram below shows the final state of the `Person` object 
+and the `Tag` associated with it.
+
+![TagCommandState2](images/TagCommandState2.png)
+   
+The sequence diagram below shows the process for the usage scenario as described above.
+![TagSequenceDiagram](images/TagSequenceDiagram.png)
    
 #### Design Considerations
 
+**Aspect: How to add more functionality to the tagging system**
 * **Alternative 1 (current choice):** Implement a dedicated Tag command.
     * Pros: 
       1. Isolation of a single feature to a specific command: more intuitive to use.
@@ -792,11 +812,7 @@ This command has a relatively straightforward implementation:
       1. Overloading the `edit` command, which already accepts many parameters and modifiers in its
          command format, could make it much more confusing to use, especially for newer users.
       2. Harder to implement, as many existing dependencies could be affected.   
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -862,7 +878,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                                       | color-code my contacts                                       | can differentiate between the tags, and it looks nicer                         |
 | `*`      | Responsible FA                             | be reminded of clashes in my appointments                    | will not lose any potential clients                                            |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -1240,7 +1255,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAST focuses on the existing help window. Use case ends.
 
 
-#### Use case: U17 - Statistics window
+#### Use case: UC17 - Statistics window
 
 **MSS**
 
@@ -1295,8 +1310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2f1. FAST shows an error message to the user that the maximum tag length is 20 characters.
     
       Use case ends.
-
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
@@ -1339,16 +1353,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+      
 
 ### Adding a Client
 
@@ -1364,13 +1377,14 @@ testers are expected to do more *exploratory* testing.
    4. **Other incorrect add commands to try**: `add n/Matthew p/98523146... e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew... p/98523146 e/Matt@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt...@example.com a/Seletar Lane 12`, `add n/Matthew p/98523146 e/Matt@example.com a/Seletar Lane 12...` (where ... represents string that exceeds the character limit). <br> 
       **Expected**: Similar to previous (in Point 3).
 
-<div markdown="span" class="alert alert-primary">
-:information: 
-Character limit:
-1) Name - 0 to 50 characters
-2) Phone - 3 to 20 digits
-3) Email - max 100 characters (at least 2 for domain portion, before @ symbol)
+<div markdown="span" class="alert alert-primary">:information_source:
+**Character limits:** <br>
+1) Name - 0 to 50 characters <br>
+2) Phone - 3 to 20 digits <br>
+3) Email - max 100 characters (at least 2 for domain portion, before @ symbol) <br>
 4) Address - max 100 characters
+5) Remark - max 45 characters
+6) Tag - max 20 characters
 </div>
 
 ### Editing a Client
@@ -1488,10 +1502,10 @@ Character limit:
     1. **Prerequisites**: Arguments are valid, compulsory parameters are provided. Multiple clients in the list.
 
     2. **Test case**: `rmk 1 r/He loves to sleep.`<br>
-       **Expected**: Add a remark `He loves to sleep` to the first client in the displayed list. Success message with details of the client and the new remark is shown.
+       **Expected**: Add a remark `He loves to sleep` to the first client in the displayed list. Success message with details of the client, and the new remark is shown.
 
     3. **Test case**: `rmk 1 r/`<br>
-       **Expected**: Removes the remark of the first client in the displayed list. Success message with details of the client and an empty remark is shown.
+       **Expected**: Removes the remark of the first client in the displayed list. Success message with details of the client, and an empty remark is shown.
     4. **Test case**: `rmk 1`<br>
        **Expected**: No remark added. Error message is shown.
    
@@ -1590,7 +1604,7 @@ Character limit:
 
     2. **Test Case**: Open the stats window (with `F2` or with the menu item) <br>
        **Expected**: A stats window will open on top of the main window. There should be 2 pie charts displayed, one for
-       Priority Tags and one for Investment Plan Tags and the counts should tally with the data in FAST.
+       Priority Tags and one for Investment Plan Tags, and the counts should tally with the data in FAST.
 
     3. **Test Case**:
         1. Add a new person with a Priority Tag.
@@ -1610,15 +1624,53 @@ Character limit:
        **Expected**: Similar to previous testcase (in Point 3).
 
 
-#### Sorting Clients
+### Sorting Clients
 1. Sorts the list of clients by a given keyword
     1. **Prerequisites**: Arguments are valid, FAST contains clients.
 
     2. **Test Case**: `sort name` <br>
-       **Expected**: The list of clients are sorted alphabetically by name.
+       **Expected**: The list of clients is sorted alphabetically by name.
 
     3. **Test Case**: `sort nam` <br>
        **Expected**: No sorting happens. Error message displayed.
+       
+
+### Tag Feature
+
+#### Editing tags of a client
+
+1. Add tags to a client
+    1. **Prerequisites**: Arguments are valid, FAST contains clients, tags to be added do not already exist on the client. 
+       After adding, the client should not have more than 1 priority tag. 
+
+    2. **Test Case**: `tag 1 a/pr/low` <br>
+       **Expected**: The priority tag `LowPriority` is added to the client in index 1. Success message with updated list of tags is shown.
+
+    3. **Test Case**: `tag 2 a/friend a/ip/save` <br>
+       **Expected**: The tag `friend` and investment plan tag `Savings` is added to the client in index 2. Success message with updated list of tags is shown.
+       
+    4. **Test Case**: `tag 1 a/thisisalongtaghahahaahahahaahhahaah` <br>
+       **Expected**: No tag is added. Error message displayed stating the constraints for adding a tag.
+       
+    5. **Test Case**: `tag 1 a/pr/low a/ pr/high` <br>
+       **Expected**: No tag is added. Error message displayed stating that each client can only have 1 priority tag.
+
+    5. **Other invalid commands to try**: `tag`, `tag x`(where x is larger than the list size, or 0 or a negative number), 
+       `tag y a/friend`(where y is the index of a client that already has the `friend` tag). <br>
+       **Expected**: No tag is added. Error message displayed describing the nature of the issue.
+
+2. Delete tags from a client
+    1. **Prerequisites**: Arguments are valid, FAST contains clients, tags to be deleted do exist on the client.
+
+    2. **Test Case**: `tag 1 d/pr/high` <br>
+       **Expected**: The priority tag `HighPriority` is deleted from the client in index 1. Success message with updated list of tags is shown.
+
+    3. **Test Case**: `tag 2 a/boss a/ip/property` <br>
+       **Expected**: The tag `boss` and investment plan tag `PropertyInsurance` is deleted from the client in index 2. Success message with updated list of tags is shown.
+
+    4. **Test Case**: `tag 2 d/friend`(where the client at index 2 does not have the `friend` tag). <br>
+       **Expected**: No tag is deleted. Error message displayed stating that the specified tag does not exist.
+       
        
 ### Saving data
 

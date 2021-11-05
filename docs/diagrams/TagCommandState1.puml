@@ -1,0 +1,20 @@
+@startuml
+skinparam arrowThickness 1.1
+skinparam arrowColor #000000
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+show fields
+
+title Before TagCommand is executed
+
+object "__:Person__" as normalPerson {
+tags
+}
+
+object "__:Tag__" as NormalTag {
+tagName = "friend"
+}
+
+normalPerson --> NormalTag
+
+@enduml
