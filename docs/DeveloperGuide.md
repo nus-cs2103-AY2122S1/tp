@@ -11,7 +11,7 @@ title: Developer Guide
 
 Dash is adapted from AddressBook Level 3 (or AB3 for short), a sample project for software engineering students
 provided by [SE-EDU](https://se-education.org/). AB3 initially encompassed 6 KLoC and included a reasonable level of 
-user and developer documentation. In developing Dash, we expanded the code base to 17 KLoC and made large updates to 
+user and developer documentation. In developing Dash, we expanded the code base to 11 KLoC and made large updates to 
 the User Guide and Developer Guide.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -76,9 +76,10 @@ Each of the four main components (also shown in the diagram above):
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using 
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component 
-through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the 
+implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/ComponentManagers.png" width="300"/>
 
 The sections below give more details of each component.
 
@@ -87,7 +88,7 @@ The sections below give more details of each component.
 The **API** of this component is specified in 
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="750"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TabMenu`, 
 `StatusBarFooter` etc. 
@@ -119,7 +120,7 @@ The `UI` component:
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="diagrams/LogicClassDiagram.png" width="550"/>
+<img src="diagrams/LogicClassDiagram.png" width="750"/>
 
 How the `Logic` component works:
 
@@ -146,7 +147,7 @@ to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="diagrams/ParserClasses.png" width="600"/>
+<img src="diagrams/ParserClasses.png" width="750"/>
 
 How the parsing works:
 
@@ -166,32 +167,26 @@ Here are the remaining classes in logic, mainly utility classes:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/model/Model.java)
 
-
-
+<img src="images/ModelClassDiagram.png" width="750" />
 
 The `Model` component:
 
 * stores the contacts' data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the task list data i.e., all `Task` objects  (which are contained in a `TaskList` object).
-* stores the currently 'selected' `Person` or `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>` or `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the 
-`AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, 
-instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* stores the currently 'selected' `Person` or `Task` objects (e.g., results of a search query) as separate _filtered_ 
+  lists which are exposed to outsiders as unmodifiable `ObservableList<Person>` or `ObservableList<Task>` that can be 
+  'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list 
+  change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a 
+  `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they 
+  should make sense on their own without depending on other components)
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="750" />
 
 The `Storage` component:
 
@@ -258,10 +253,10 @@ Step 7: The `TaskTabParser` returns an `AddTaskCommand` instead of an `AddPerson
 
 The following sequence diagram shows how the switch tab system works when the command `task` is entered on the Contacts
 Tab:
-![TabSystemSequenceDiagram](images/TabSystemSequenceDiagram.png)
+![TabSystemSequenceDiagram](diagrams/TabSystemSequenceDiagram.png)
 
 The following activity diagram summarises what happens when a user executes a switch tab command:
-![TabSystemActivityDiagram](images/TabSystemActivityDiagram.png)
+![TabSystemActivityDiagram](diagrams/TabSystemActivityDiagram.png)
 
 #### Design considerations:
 
