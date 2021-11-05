@@ -230,8 +230,4 @@ public class Timetable {
         result.addAll(notShown);
         return result;
     }
-
-    public void setTableTime(int start, int end, int totalRows) {
-        return;
-    }
 }
