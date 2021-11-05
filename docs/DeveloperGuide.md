@@ -522,7 +522,11 @@ Notice how there is no longer any association between the student `Alice` and le
 The following sequence diagram shows how the unenroll operation works:
 
 <center>
-<img alt="UnenrollSequenceDiagram" src="images/DeveloperGuideImage/UnenrollSequenceDiagram.png"/>
+<img alt="UnenrollSequenceDiagram0" src="images/DeveloperGuideImage/UnenrollSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="UnenrollSequenceDiagram1" src="images/DeveloperGuideImage/UnenrollSequenceDiagram1.png"/>
 </center>
 
 The following activity diagram summarizes what happens when a user executes the unenroll lesson command:

@@ -44,15 +44,8 @@ destroy FilterCommandParser
 TuitioneParser --> LogicManager : f
 deactivate TuitioneParser
 
-LogicManager -> FilterCommand : execute()
-activate FilterCommand
+ref over LogicManager, Model : FilterCommand execution
 
-ref over FilterCommand : FilterCommand execution
-
-FilterCommand --> LogicManager : commandResult
-deactivate FilterCommand
-FilterCommand -[hidden]-> LogicManager
-
-[<--LogicManager
+[<--LogicManager : result
 deactivate LogicManager
 @enduml

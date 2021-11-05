@@ -39,6 +39,9 @@ activate CommandResult
 CommandResult --> FilterCommand
 deactivate CommandResult
 
-LogicManager <-- FilterCommand  : commandResult
+LogicManager <-- FilterCommand  : result
 deactivate FilterCommand
+
+FilterCommand -[hidden]-> LogicManager
+destroy FilterCommand
 @enduml

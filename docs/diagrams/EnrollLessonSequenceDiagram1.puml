@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant "e:EnrollLessonCommand" as EnrollLessonCommand LOGIC_COLOR
+participant "e:EnrollCommand" as EnrollCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,38 +13,39 @@ participant "l1:Lesson" as Lesson MODEL_COLOR
 participant "Alice:Student" as Student MODEL_COLOR
 end box
 
-mainframe **sd**  EnrollLessonCommand execution
+mainframe **sd**  EnrollCommand execution
 
-LogicManager -> EnrollLessonCommand : execute()
-activate EnrollLessonCommand
+LogicManager -> EnrollCommand : execute()
+activate EnrollCommand
 
-EnrollLessonCommand -> Lesson : removeStudent(2)
+EnrollCommand -> Lesson : enrollStudent(Alice)
 activate Lesson
 
-Lesson -> Student : enroll(Alice)
+Lesson -> Student : addStudent(Alice)
 activate Student
 
 Student -> Lesson
 deactivate Student
 
-Lesson --> EnrollLessonCommand
+Lesson --> EnrollCommand
 deactivate Lesson
 
-EnrollLessonCommand --> Model : setLesson(l1)
+EnrollCommand --> Model : setLesson(l1)
 activate Model
 
-Model --> EnrollLessonCommand
+Model --> EnrollCommand
 deactivate Model
 
 create CommandResult
-EnrollLessonCommand -> CommandResult
+EnrollCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> EnrollLessonCommand
+CommandResult --> EnrollCommand
 deactivate CommandResult
 
-EnrollLessonCommand --> LogicManager : result
-deactivate EnrollLessonCommand
+EnrollCommand --> LogicManager : result
+deactivate EnrollCommand
 
-
+EnrollCommand -[hidden]-> LogicManager
+destroy EnrollCommand
 @enduml
