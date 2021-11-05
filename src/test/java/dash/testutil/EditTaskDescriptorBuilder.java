@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import dash.logic.commands.taskcommand.EditTaskCommand;
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.Task;
 import dash.model.task.TaskDescription;
@@ -46,6 +47,18 @@ public class EditTaskDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+
+    /**
+     * Parses the {@code people} into a {@code Set<Person>} and set it to the {@code EditTaskDescriptor}
+     * that we are building.
+     */
+    public EditTaskDescriptorBuilder withPeople(Person... people) {
+        Set<Person> personSet = Stream.of(people).collect(Collectors.toSet());
+        descriptor.setPeople(personSet);
+        return this;
+    }
+
+
 
     public EditTaskCommand.EditTaskDescriptor build() {
         return descriptor;

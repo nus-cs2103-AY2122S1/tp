@@ -3,6 +3,7 @@ package dash.logic.commands;
 import static dash.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static dash.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static dash.logic.parser.CliSyntax.PREFIX_NAME;
+import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
 import static dash.logic.parser.CliSyntax.PREFIX_PHONE;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
@@ -87,6 +88,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + " "; // whitespace not allowed
+    public static final String INVALID_PERSON_INDEX = " " + PREFIX_PERSON + "a"; // letters not allowed in person index
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
