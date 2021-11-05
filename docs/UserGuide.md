@@ -140,7 +140,7 @@ In summary:
 
 ### <a name="add-student"></a>3.1 Add Student: `add`
 
-Adds a student to ProgrammerError with their student ID and class ID.
+Adds a student to ProgrammerError with their student ID and class ID. Both the student ID and class ID must be unique. 
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
@@ -153,7 +153,7 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 
-Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to
+Edits the details or grade of an existing student's in the PE.  Both the student ID and class ID must be unique. Take note that 1-indexing is used here as according to
 the displayed list.
 
 Format 1:
