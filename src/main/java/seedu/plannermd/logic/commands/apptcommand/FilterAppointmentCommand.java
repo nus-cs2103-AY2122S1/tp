@@ -15,7 +15,8 @@ public class FilterAppointmentCommand extends FilterCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all appointments according to the"
             + " filters parameters given.\n"
             + "Parameters: [" + PREFIX_PATIENT + "PATIENT NAME] [" + PREFIX_DOCTOR + "DOCTOR_NAME] ["
-            + PREFIX_START + "START DATE] [" + PREFIX_END + "END DATE]\n" + "Example: "
+            + PREFIX_START + "START DATE] [" + PREFIX_END + "END DATE]\n"
+            + "Example: "
             + COMMAND_WORD + " " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "Bob "
             + PREFIX_START + "15/10/2021 " + PREFIX_END + "18/10/2021";
 
