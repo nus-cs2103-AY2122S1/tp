@@ -14,6 +14,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
 | **Bold** | keywords |
 | :bulb: **Tip:** | Useful tips |
 | `markdown` | Classes or methods |
+| :information_source: **Note:** | Noteworthy information |
 
 * Table of Contents
     - [Acknowledgements](#acknowledgements) 

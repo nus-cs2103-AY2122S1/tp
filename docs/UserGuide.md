@@ -16,6 +16,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 | **Bold** | keywords |
 | :bulb: **Tip:** | Useful tips |
 | :exclamation: **Caution:** | Possible pitfalls |
+| :information_source: **Note:** | Noteworthy information |
 | `markdown` | Commands or examples |
 | Format: | the format to write the commands in the application|
 
