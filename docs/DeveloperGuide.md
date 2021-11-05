@@ -669,13 +669,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 * 3a. The given index is invalid.
 
-    * 3a1. ProgrammerError shows an error message.
+    * 3a.1. ProgrammerError shows an error message.
 
       Use case resumes at step 2.
 
-* 4a. The given email or student id is not unique 
+* 3b. The given email or student id is not unique 
 
-    * 4a.1. ProgrammerError shows an error message. 
+    * 3b.1. ProgrammerError shows an error message. 
   
         Use case resumes at step 2. 
 
