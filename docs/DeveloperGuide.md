@@ -855,10 +855,10 @@ testers are expected to do more *exploratory* testing.
        Expected: Patient named John Doe is added successfully. Details of the added patient are shown in the status message.
 
     6. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/20/07/1964 t/vaccinated risk/LOW`
-       Expected: No Patient is edited. Error message is shown in the response box: "This patient already exists in PlannerMD"
+       Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
     7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/vaccinated risk/LOW`
-       Expected: No Patient is edited. Error message is shown in the response box: "This patient already exists in PlannerMD"
+       Expected: No Patient is added. Error message is shown in the response box: "This patient already exists in PlannerMD"
 
     8. Other incorrect edit commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags and risk, are filled)<br>
        Expected: Similar to previous.
@@ -912,7 +912,7 @@ testers are expected to do more *exploratory* testing.
     7. Test case: `add n/John Doe hp/98765432 eml/johnd@example.com a/311, Kent Ridge Ave 2, #02-25 dob/25/12/0000 t/experienced`
         Expected: No doctor is added. Error message is shown in the response box: "This doctor already exists in PlannerMD"
 
-    8. Other incorrect edit commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
+    8. Other incorrect add commands to try: `add`, `add n/Bob hp/`, `add n/` (not all fields, except tags, are filled)<br>
         Expected: No doctor is added. Error message is shown in the response box: "Invalid command format!..."
        
 ### Deleting a doctor  <a name="delete-doctor-manual-testing"/>
