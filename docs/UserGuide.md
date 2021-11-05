@@ -1,19 +1,18 @@
 ---
-layout: page 
-title: User Guide
-parent: For Users
-nav_order: 2
+layout: page title: User Guide parent: For Users nav_order: 2
 ---
 
 **BogoBogo User Guide**{: .text-purple-000 .text-alpha }
 
 _What is BogoBogo?_{: .text-gamma}
 
-BogoBogo is a **desktop app for small business owners to manage inventories, optimized for use via a Command Line Interface (CLI)**
+BogoBogo is a **desktop app for small business owners to manage inventories, optimized for use via a Command Line
+Interface (CLI)**
 while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BogoBogo can get your
 inventory management tasks done faster than traditional GUI apps.
 
 With BogoBogo, business owners can:
+
 1. manage inventories
 2. record customer orders
 3. track profit, costs, and revenue
@@ -47,16 +46,18 @@ You might have to give your device permission to open BogoBogo.
 
 6. Let's try adding a new item! Enter the command in the command box.<br>
 
-    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, 
-      cost price 1.3, and sales price 2.4, into the inventory.
+    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price 1.3, and sales price 2.4,
+      into the inventory.
 
-7. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different things you can do on the application.
+7. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different things you can
+   do on the application.
 
 <div class="code-example bg-grey-lt-000">:bulb:
 Ready to jump right into recording your inventory? Use <code>clear</code> to clear the sample data!
 </div>
 
 8. To close BogoBogo, simply enter `exit` into the command box.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Managing Inventory
@@ -103,14 +104,16 @@ Ready to jump right into recording your inventory? Use <code>clear</code> to cle
 
 ### Viewing help : `help`
 
-Gives a quick link to this user guide.
-If a command word is specified, it'll explain how to use the specified command instead.
+Gives a quick link to this user guide. If a command word is specified, it'll explain how to use the specified command
+instead.
 
-Format: 
+Format:
+
 - `help`: Shows help page url.
 - `help {command}` : Explains how to use the specified command.
 
 Examples:
+
 - `help list` offers information regarding the `list` command.
 
 ![help message](images/helpMessage.png)
@@ -138,7 +141,8 @@ Examples:
 
 - `add apple` adds an apple into the inventory
 - `add id/111111` adds 2 of item with id #111111 into the inventory
-- `add banana id/192023 cp/1.0 sp/2.2` adds a banana (#192023) with cost price $1 and sales price $2.20 into the inventory.
+- `add banana id/192023 cp/1.0 sp/2.2` adds a banana (#192023) with cost price $1 and sales price $2.20 into the
+  inventory.
 
 <div class="code-example bg-grey-lt-000">
 :information_source: BogoBogo will get confused if different items have matching names or id. Hence, adding different items with clashing names/ids are is not supported.
@@ -148,8 +152,8 @@ Examples:
 
 ### Deleting an item : `delete`
 
-Deletes the specified item from the inventory.
-Use this command to delete items wrongly keyed into the inventory. Costs initially incurred from the item will be removed too.
+Deletes the specified item from the inventory. Use this command to delete items wrongly keyed into the inventory. Costs
+initially incurred from the item will be removed too.
 
 Format: `delete [{name} | id/{id number}]`
 
@@ -190,8 +194,8 @@ Examples:
 
 ### Editing an item : `edit`
 
-Edit a particular item in the inventory.
-Note that display must be in inventory mode (see [`list`](#listing-items-list)).
+Edit a particular item in the inventory. Note that display must be in inventory mode (see [`list`](#listing-items-list))
+.
 
 Format: `edit {index} (n/{name}) (id/{id}) (cp/{cp}) (sp/{sp}) (t/{tag})...`
 
@@ -223,12 +227,12 @@ Examples:
 
 List items in the inventory, current order, or past transactions.
 
-Format: 
+Format:
 
- - `list`: List items in the inventory.
- - `list order`: List items in the current order (if any).
- - `list txns`: List past transactions, along with total costs, revenue and profit.
- - `list txns {id}`: List items in the specified transaction.
+- `list`: List items in the inventory.
+- `list order`: List items in the current order (if any).
+- `list txns`: List past transactions, along with total costs, revenue and profit.
+- `list txns {id}`: List items in the specified transaction.
 
 <div class="code-example bg-grey-lt-000">
 :question:  <b>Where can I find the transaction id?</b><br>
@@ -239,26 +243,24 @@ The transaction id can be found to the right of the transaction timestamp when y
 
 ### Sorting items: `sort`
 
-Sort items in the inventory.
-Note that display must be in inventory mode (see [`list`](#listing-items-list)).
+Sort items in the inventory. Note that display must be in inventory mode (see [`list`](#listing-items-list)).
 
-Format: 
+Format:
 
- - `sort n/`: Sort items in the inventory by name.
- - `sort c/`: Sort items in the inventory by count.
- 
+- `sort n/`: Sort items in the inventory by name.
+- `sort c/`: Sort items in the inventory by count.
+
 ![sort](images/screenshots/sort_items.png)
 
 ### Finding items: `find`
 
-Find items in the inventory.
-Note that display must be in inventory mode (see `list`).
+Find items in the inventory. Note that display must be in inventory mode (see `list`).
 
 Format: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
 
 BogoBogo searches and lists items in the inventory that has matches any of the specified name, id, or tag.
 
-Examples: 
+Examples:
 
 - `find n/Cookie n/Apple` finds and lists items with the words "Cookie" or "Apple" in their names
 - `find id/123456` finds item with id 123456
@@ -279,8 +281,8 @@ Format: `clear`
 
 ## Managing orders
 
-Orders is BogoBogo's way of tracking sold items. Users can create orders, process, and save them for later review.
-By processing an order, the revenue attained will be added into total revenue.
+Orders is BogoBogo's way of tracking sold items. Users can create orders, process, and save them for later review. By
+processing an order, the revenue attained will be added into total revenue.
 
 <div class="code-example bg-grey-lt-000">
 :exclamation: Be sure not to close BogoBogo without saving your order! Any unsaved order will be lost. 
@@ -301,7 +303,8 @@ Format: `sorder`
 
 ### Inputting an item into order: `iorder`
 
-Add an item into the current order. BogoBogo will let you know if there isn't enough items in the inventory to fulfill the order request.
+Add an item into the current order. BogoBogo will let you know if there isn't enough items in the inventory to fulfill
+the order request.
 
 <div class="code-example bg-grey-lt-000">
 :bulb: Once having added items, you can view your current order with <code>list order</code>.
@@ -345,7 +348,7 @@ Examples:
 
 ### End ordering: `eorder`
 
-Processes the current order and saves it. 
+Processes the current order and saves it.
 
 Format: `eorder`
 
@@ -356,16 +359,17 @@ Format: `eorder`
 ## FAQ
 
 **Q**: What is total profit, cost and revenue?<br>
-**A**: Total cost is the total amount of money incurred from adding items to the inventory. Revenue is the total amount of money gained from successfully selling items.
-Profit = Revenue - Cost.
+**A**: Total cost is the total amount of money incurred from adding items to the inventory. Revenue is the total amount
+of money gained from successfully selling items. Profit = Revenue - Cost.
 
 **Q**: I have edited the cost price of my item. Why isn't the change reflected in my total cost?<br>
-**A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. 
-Any changes to cost price is assumed to be for future restocking of the item.<br>
+**A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. Any
+changes to cost price is assumed to be for future restocking of the item.<br>
 
 **Q**: Why can't I edit the count of an item with `edit`?<br>
 **A**: Due to the calculation of total cost and revenue, BogoBogo needs to know the reason for the change in count.
-Use `add` for stocking items, `delete` to delete accidentally added items, `remove` to remove unsold items (e.g. expired goods), and `iorder` to account for sold items.
+Use `add` for stocking items, `delete` to delete accidentally added items, `remove` to remove unsold items (e.g. expired
+goods), and `iorder` to account for sold items.
 
 --------------------------------------------------------------------------------------------------------------------
 

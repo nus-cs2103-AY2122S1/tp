@@ -26,7 +26,7 @@ public class Item implements Displayable {
     private final Double salesPrice;
 
     // Data fields
-    private Integer count;
+    private final Integer count;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -120,14 +120,14 @@ public class Item implements Displayable {
     }
 
     /**
-     * Returns true if both items have the same count.
+     * Returns true if both items have the same id.
      */
     public boolean isSameId(Item other) {
         if (other == this) {
             return true;
         }
 
-        return other != null && Objects.equals(other.getId(), getId());
+        return other != null && this.id.equals(other.getId());
     }
 
     /**
@@ -138,7 +138,7 @@ public class Item implements Displayable {
             return true;
         }
 
-        return other != null && Objects.equals(other.getName(), getName());
+        return other != null && this.name.equals(other.getName());
     }
 
     /**

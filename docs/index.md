@@ -17,5 +17,6 @@ nav_order: 1
 
 **Acknowledgements**
 
+* BogoBogo is forked from [Addressbook Level 3](https://se-education.org/addressbook-level3/)
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * Theme used: [just-the-docs](https://github.com/pmarsceill/just-the-docs)

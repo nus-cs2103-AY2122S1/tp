@@ -47,6 +47,14 @@ skinparam Class {
     FontName Arial
 }
 
+skinparam Object {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
 skinparam classAttributeFontColor #FFFFFF
 
 skinparam methods #FFFFFF

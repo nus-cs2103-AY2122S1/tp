@@ -1,7 +1,5 @@
 ---
-layout: page 
-title: Developer Guide
-nav_exclude: true
+layout: page title: Developer Guide nav_exclude: true
 ---
 
 * Table of Contents {:toc}
@@ -154,22 +152,23 @@ The `Model` component
 
 - stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
 - stores the order data i.e., an optional `Order` which contains all `Items` added to it.
-- stores the transaction history of orders i.e., a set of `TransactionRecord` objects. 
-- does not depend on any of the other three components (as the Model represents data entities of the domain, 
-  they should make sense on their own without depending on other components)
-- Is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects. 
-  i.e., updates `Inventory` when `Order` is placed by user, and note down `TransactionRecord`.
-
+- stores the transaction history of orders i.e., a set of `TransactionRecord` objects.
+- does not depend on any of the other three components (as the Model represents data entities of the domain, they should
+  make sense on their own without depending on other components)
+- Is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects. i.e.,
+  updates `Inventory` when `Order` is placed by user, and note down `TransactionRecord`.
 
 <<<<<<< HEAD
+
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-=======
+  =======
 * stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
 * stores the currently 'selected' `Item` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to
->>>>>>> master
-  this list so that the UI automatically updates when the data in the list change.
+
+> > > > > > > master this list so that the UI automatically updates when the data in the list change.
+
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
@@ -190,10 +189,9 @@ API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master
 
 The `Storage` component,
 
-* can save both inventory data and user preference data in json format, and read them back into corresponding
-  objects.
-* inherits from both `InventoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
+* can save both inventory data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `InventoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the
+  functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
@@ -476,8 +474,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. BogoBogo sorts the inventory accordingly.
 
    Use case ends.
-   
- **Extensions**
+
+**Extensions**
 
 * 1a. User specifies to sort by both name and count.
     * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
@@ -492,14 +490,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. BogoBogo shows the commands available to the user.
 
    Use case ends.
-   
- **Extensions**
+
+**Extensions**
 
 * 1a. User specifies which command exactly he wants to know how to use.
     * 1a1. BogoBogo notifies the user what that exact command does.
 
       Use case ends.
-      
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -531,17 +529,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    a. Download the jar file and copy into an empty folder
+   a. Download the jar file and copy into an empty folder
 
-    b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+   b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+   optimum.
 
 2. Saving window preferences
 
-    a. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    b. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   b. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
 
@@ -549,14 +547,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a new item into the inventory
 
-    a. Test case: `add Milk id/111111 c/1 sp/2.4 cp/1.2`<br>
-       Expected: Item Milk is added to the list. Milk should have the id #111111, count 1, sales price $2.40, and cost price $1.20.
+   a. Test case: `add Milk id/111111 c/1 sp/2.4 cp/1.2`<br>
+   Expected: Item Milk is added to the list. Milk should have the id #111111, count 1, sales price $2.40, and cost price
+   $1.20.
 
-    b. Test case: `add Milk c/1 sp/2.4 sp/1.2`<br>
-       Expected: No Milk added to the inventory. BogoBogo notifies user to specify id as well.
+   b. Test case: `add Milk c/1 sp/2.4 sp/1.2`<br>
+   Expected: No Milk added to the inventory. BogoBogo notifies user to specify id as well.
 
-    c. Test case: `add n/Milk c/1 sp/2.4 sp/1.2`<br>
-       Expected: No Milk added to the inventory. BogoBogo notifies of incorrect command format.
+   c. Test case: `add n/Milk c/1 sp/2.4 sp/1.2`<br>
+   Expected: No Milk added to the inventory. BogoBogo notifies of incorrect command format.
 
 2. _{ more test cases …​ }_
 
