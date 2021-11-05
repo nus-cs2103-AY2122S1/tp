@@ -27,6 +27,7 @@ import java.util.Optional;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 
 /**
@@ -89,10 +90,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicate.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            predicate.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()).get());
+            predicate.setDate(
+                    ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get())
+                            .orElseThrow(() -> new ParseException(FindCommand.MESSAGE_KEYWORD_CONSTRAINTS)));
         }
         if (argMultimap.getValue(PREFIX_CANCEL).isPresent()) {
-            predicate.setCancelledDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_CANCEL).get()).get());
+            predicate.setCancelledDate(
+                    ParserUtil.parseDate(argMultimap.getValue(PREFIX_CANCEL).get())
+                            .orElseThrow(() -> new ParseException(FindCommand.MESSAGE_KEYWORD_CONSTRAINTS)));
         }
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             predicate.setSubjectKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_SUBJECT).get()));
