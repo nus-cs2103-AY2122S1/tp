@@ -9,7 +9,7 @@ title: User Guide
 ## 1. Introduction
 ![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
-NUS Mod Tracker is a **desktop app** designed for **NUS Computer Science (CS) students who are enrolled before the Academic Year 2020/2021** to **create their own academic plan**,
+NUS Mod Tracker is a **desktop app** designed for **NUS Computer Science (CS) students who are enrolled in the Academic Year 2021/2022 and onward** to **create their own academic plan**,
 as well as to **keep track of their Modular Credits(MC) and modules taken**.
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
@@ -252,7 +252,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `MC`
 * Stands for Modular Credits.
 * Represents the `module`'s MC component.
-* `MC` must be a **positive integer** from 1-20.
+* `MC` must be a **positive integer** from 0-20.
 
 #### `TAG`
 * Represents the `module`'s tag component.
