@@ -33,7 +33,9 @@ Given below are my contributions to the project.
     
 * **Enhancements to existing features**:
   * Redefine equality amongst contacts.
-    * Previously, equality between two contacts hinged on the fact that they had the same name. Since people can have friends with the same name, I changed CONNECTIONS to check for phone numbers instead to raise possible duplicate contacts.
+    * Previously, equality between two contacts hinged on the fact that they had the same name. Since people 
+      can have friends with the same name but unique phone numbers, I changed CONNECTIONS to check for phone 
+      numbers instead to raise possible duplicate contacts.
   * Revamp Find 
     * Find ('AND'-search) and FindOr ('OR'-search) can be applied names and/or tags.
     * Case Sensitivity to search (Find/FindOr).
