@@ -50,6 +50,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -502,48 +503,6 @@ public class ParserUtil {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDefaultShiftTimingsCommand.HELP_MESSAGE));
             }
         }
-
         return timings;
-    }
-
-
-    /**
-     * Creates an array of {@code LocalDate} of size 2 representing the range of the current week.
-     * If the current date is monday, it gives the range from this monday to next sunday.
-     * If the current date is sunday, it gives the range from the previous monday to today.
-     * It always represents a range of dates, starting from monday to sunday.
-     */
-    public static LocalDate[] initializeLocalDateToThisWeek() {
-        return getDateArrayOfTheWeek(LocalDate.now());
-
-
-    }
-
-    /**
-     * Creates an array of {@code LocalDate} of size 2, representing the range
-     * of the week {@code currentDate} is in. It results in the smallest range of dates, from
-     * monday to sunday that includes {@code currentDate}.
-     *
-     */
-    public static LocalDate[] getDateArrayOfTheWeek(LocalDate currentDate) {
-        int date = currentDate.getDayOfWeek().getValue();
-        //take the current date and get the distance from monday and sunday
-        int diffFromMonday = date - 1;
-        int diffFromSunday = 7 - date;
-        return new LocalDate[]{currentDate.minusDays(diffFromMonday),
-                currentDate.plusDays(diffFromSunday)};
-    }
-
-    public static Period getWeekPeriodFromDate(LocalDate date) {
-        LocalDate[] init = getDateArrayOfTheWeek(date);
-        assert init.length == 2;
-        return new Period(init[0], init[1]);
-    }
-
-    /**
-     * Creates a Period from monday to sunday, where today is within that range.
-     */
-    public static Period initializePeriodToThisWeek() {
-        return getWeekPeriodFromDate(LocalDate.now());
     }
 }
