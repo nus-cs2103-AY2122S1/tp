@@ -222,9 +222,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public List<Lab> getLabsTracker() {
-            return labsTracker;
-        }
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
