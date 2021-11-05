@@ -27,7 +27,7 @@ public class TShiftCommandTest {
     private Model model = new ModelManager(getTypicalTrack2Gather(), new UserPrefs());
 
     @Test
-    public void execute_validDaysShiftPositive() throws CommandException {
+    public void execute_validDaysShiftPositive_success() throws CommandException {
         int days = TShiftCommand.MAX_ABS_DAYS_VALUE;
 
         TShiftCommand tShiftCommand = new TShiftCommand(days);
@@ -37,7 +37,7 @@ public class TShiftCommandTest {
     }
 
     @Test
-    public void execute_validDaysShiftNegative() throws CommandException {
+    public void execute_validDaysShiftNegative_success() throws CommandException {
         int days = -TShiftCommand.MAX_ABS_DAYS_VALUE;
 
         TShiftCommand tShiftCommand = new TShiftCommand(days);
@@ -70,7 +70,7 @@ public class TShiftCommandTest {
     }
 
     @Test
-    public void shiftingDates_validDays() {
+    public void singlePeriod_validDaysShiftPositive_success() {
         int days = TShiftCommand.MAX_ABS_DAYS_VALUE;
         TShiftCommand tShiftCommand = new TShiftCommand(days);
         ShnPeriod shnPeriod = new ShnPeriod(new Period("2020-01-01 => 2020-01-02"));
@@ -83,17 +83,19 @@ public class TShiftCommandTest {
     }
 
     @Test
-    public void shiftingDates_validDays_validNegativeShift() {
+    public void singlePeriod_validDaysShiftNegativeBeyondStart_success() {
         int days = -TShiftCommand.MAX_ABS_DAYS_VALUE;
         int daysApart = 10;
         assertTrue(Math.abs(days) > daysApart);
 
         LocalDate startDate = LocalDate.of(2020, 1, 1);
         LocalDate endDate = startDate.plusDays(daysApart);
+
         TShiftCommand tShiftCommand = new TShiftCommand(days);
         ShnPeriod shnPeriod = new ShnPeriod(new Period(startDate, endDate));
         ShnPeriod shiftedShnPeriod = tShiftCommand.shiftShnPeriodEndDate(shnPeriod);
         assertTrue(shiftedShnPeriod.value.isPresent());
+
         LocalDate shiftedEndDate = shiftedShnPeriod.value.get().getEndDate();
         assertEquals(startDate.plusDays(1), shiftedEndDate);
     }

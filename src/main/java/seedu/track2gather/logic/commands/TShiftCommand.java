@@ -57,7 +57,8 @@ public class TShiftCommand extends Command {
     }
 
     /**
-     * Shifts the end date of the specified {@code ShnPeriod} by {@code days}.
+     * Shifts the end date of the specified {@code ShnPeriod} by number of days specified by {@code days} attribute
+     * of the {@code TShiftCommand} object.
      * @param shnPeriod that will have its end date shifted.
      * @return A new {@code ShnPeriod} object with its end date shifted.
      */
