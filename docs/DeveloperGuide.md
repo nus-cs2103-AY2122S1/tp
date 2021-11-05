@@ -189,6 +189,33 @@ The following sequence diagram shows how the add operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+### Delete marked feature
+
+The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCommand```.
+This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
+![images](images/DeleteMarkedCommandActivityDiagram.png)
+
+Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
+
+Step 1. A valid command `delete_marked` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `delete_marked`.
+
+Step 2. `AddreddBookParser#parseCommand()` initializes a `DeleteMarkedCommand`.
+
+Step 3. `DeleteMarkedCommand#execute()` is then called, which will in turn call `Model#updateFilteredList()` (not shown) to 
+update list for applicants marked then. `Model#getFilteredList()` is then called to retrieve this list. 
+
+Step 5:
+`Model#deletePerson()` is called on applicants in the list to delete them.
+
+Step 6. Once the string of all applicant names that are marked is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the delete marked operation works.
+![images](images/DeleteMarkedCommandSequenceDiagram.png)
+
 ### Edit feature
 
 The ```edit``` command is facilitated by creating an ```EditCommand``` depending on the given input.
