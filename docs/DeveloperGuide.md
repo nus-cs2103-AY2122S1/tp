@@ -687,11 +687,12 @@ initial lesson data in TuitiONE (only the fields of each object relevant to the 
 
 <u>Step 2:</u>
 
-The user executes `roster 2` to filter out and display all students enrolled in `Science-S1-Fri-1330`. The `roster` command causes
-the `RosterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
+The user executes `roster 1` to filter out and display all the corresponding students enrolled in `Math-P4-Wed-1800`.
+The `roster` command causes the `RosterCommand#execute(model)` method to be called which then filters the respective 
+lists to only show the relevant objects.
 
 <center>
-<img alt="FilterState1" src="images/DeveloperGuideImage/FilterState1.png"/>
+<img alt="RosterState1" src="images/DeveloperGuideImage/RosterState1.png"/>
 </center>
 
 <u>Step 3:</u>
