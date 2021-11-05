@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class RecurringLesson extends Lesson {
+    private static final String RECURRING = "Recurring";
+
     /**
      * Every field must be present and not null.
      *
@@ -53,6 +55,16 @@ public class RecurringLesson extends Lesson {
     @Override
     public boolean isRecurring() {
         return true;
+    }
+
+    /**
+     * Returns a string representing the type of this lesson.
+     *
+     * @return Recurring.
+     */
+    @Override
+    public String getTypeOfLesson() {
+        return RECURRING;
     }
 
     /**
@@ -175,4 +187,31 @@ public class RecurringLesson extends Lesson {
                 && !getCancelledDates().contains(date); // other date is not a cancelled date
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("(")
+                .append(getTypeOfLesson())
+                .append(") ")
+                .append("Start Date: ")
+                .append(getStartDate());
+
+        if (!getEndDate().equals(Date.MAX_DATE)) {
+            builder.append("; End Date: ")
+                    .append(getEndDate());
+        }
+
+        builder.append("; ")
+                .append(super.toString());
+
+        String dates = getCancelledDates().stream().sorted()
+                .map(Date::toString).collect(Collectors.joining(", "));
+
+        if (!dates.isEmpty()) {
+            builder.append("; Cancelled Date(s): ")
+                    .append(dates);
+        }
+        return builder.toString();
+    }
 }

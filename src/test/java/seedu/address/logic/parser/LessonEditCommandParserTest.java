@@ -31,9 +31,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
@@ -113,8 +115,14 @@ class LessonEditCommandParserTest {
         // invalid cancelled date
         assertParseFailure(parser, "1 1" + INVALID_CANCEL_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
+        // invalid cancelled date (empty)
+        assertParseFailure(parser, "1 1" + " " + PREFIX_CANCEL, Date.MESSAGE_CONSTRAINTS);
+
         // invalid uncancelled date
         assertParseFailure(parser, "1 1" + INVALID_UNCANCEL_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+
+        // invalid uncancelled date (empty)
+        assertParseFailure(parser, "1 1" + " " + PREFIX_UNCANCEL, Date.MESSAGE_CONSTRAINTS);
 
         // invalid subject
         assertParseFailure(parser, "1 1" + INVALID_SUBJECT_DESC, Subject.MESSAGE_CONSTRAINTS);

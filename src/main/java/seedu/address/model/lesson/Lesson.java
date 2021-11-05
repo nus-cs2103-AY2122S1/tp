@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -17,11 +18,6 @@ import java.util.stream.Collectors;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson implements Comparable<Lesson> {
-
-    // Types of lesson
-    private static final String RECURRING = "Recurring";
-    private static final String MAKEUP = "Makeup";
-
     // Time fields
     private final Date startDate;
     private final Date endDate;
@@ -100,10 +96,6 @@ public abstract class Lesson implements Comparable<Lesson> {
         return timeRange.getEnd().atDate(startDate.getLocalDate());
     }
 
-    public String getTypeOfLesson() {
-        return isRecurring() ? RECURRING : MAKEUP;
-    }
-
     public LessonRates getLessonRates() {
         return lessonRates;
     }
@@ -144,9 +136,23 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
+     * Returns a string representing the type of this lesson.
+     *
+     * @return The type of this lesson.
+     */
+    public abstract String getTypeOfLesson();
+
+    /**
      * Gets the date of the lesson to display to the user.
      */
     public abstract Date getDisplayDate();
+
+    /**
+     * Gets the day of week of the lesson to display to the user.
+     */
+    public String getDisplayDayOfWeek() {
+        return getLocalDate().format(DateTimeFormatter.ofPattern("EEE"));
+    }
 
     /**
      * Gets the local date of the lesson to display to the user.
@@ -259,20 +265,8 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
-
-        builder.append(typeOfLesson)
-                .append(" ")
-                .append("Start Date: ")
-                .append(getStartDate());
-
-        if (!getEndDate().equals(Date.MAX_DATE)) {
-            builder.append("; End Date: ")
-                   .append(getEndDate());
-        }
-
-
-        builder.append("; Date: ")
+        // common fields of Lesson
+        builder.append("Date: ")
                 .append(getDisplayDate())
                 .append("; Time: ")
                 .append(getTimeRange())
@@ -283,23 +277,10 @@ public abstract class Lesson implements Comparable<Lesson> {
                 .append("; Lesson Rates: ")
                 .append(getLessonRates());
 
-        Set<Homework> homework = getHomework();
+        String homework = getHomework().stream().map(Homework::toString).collect(Collectors.joining(", "));
         if (!homework.isEmpty()) {
-            builder.append("; Homework: ");
-            homework.forEach(x -> builder.append(x + "; "));
-        } else {
-            builder.append("; ");
-        }
-        if (isCancelled()) {
-            builder.append("(Cancelled)");
-            return builder.toString();
-        }
-        String dates = getCancelledDates().stream().sorted()
-                .map(Date::toString).collect(Collectors.joining(","));
-
-        if (!dates.isEmpty()) {
-            builder.append("Cancelled Date(s): ")
-                    .append(dates);
+            builder.append("; Homework: ")
+                    .append(homework);
         }
         return builder.toString();
     }

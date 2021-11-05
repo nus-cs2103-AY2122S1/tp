@@ -30,6 +30,8 @@ class JsonAdaptedLesson {
 
     public static final String MESSAGE_INVALID_CANCELLED_DATE = "Cancelled date is not a date of this lesson.";
 
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Start date is after end date!";
+
     private final String date;
     private final String endDate;
     private final String timeRange;
@@ -101,6 +103,9 @@ class JsonAdaptedLesson {
         }
         final Date modelDate = new Date(StringUtil.stripLeadingZeroes(strippedDate));
         final Date modelEndDate = new Date(StringUtil.stripLeadingZeroes(strippedEndDate));
+        if (modelDate.isAfter(modelEndDate)) {
+            throw new IllegalValueException(MESSAGE_INVALID_DATE_RANGE);
+        }
 
         String strippedTimeRange = timeRange.strip();
         if (!TimeRange.isValidTimeRange(strippedTimeRange)) {
@@ -128,7 +133,9 @@ class JsonAdaptedLesson {
 
         final List<Homework> lessonHomework = new ArrayList<>();
         for (JsonAdaptedHomework hw : homework) {
-            lessonHomework.add(hw.toModelType());
+            if (!hw.getDescription().isEmpty()) {
+                lessonHomework.add(hw.toModelType());
+            }
         }
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
 
