@@ -176,7 +176,7 @@ shown in the Student Panel and that you offer the lesson(s) shown in the Lesson 
 
 ### Step 1: Adding a student
 {:.no_toc}
-First, imagine a new student, John Yeo ,has just approached you for your tutoring services, and you wish to record down his students details in TutorAid so that you can
+First, imagine a new student, John Yeo, has just approached you for your tutoring services, and you wish to record down his students details in TutorAid so that you can
 keep track of his details and refer to them when needed. Furthermore, John Yeo has also given you the following details:
 * John's phone number: 98765432
 * John's parent's name: Mary Yeo
