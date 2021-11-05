@@ -43,6 +43,11 @@ public class UniqueStudentList implements Iterable<Student> {
         return internalList.stream().anyMatch(toCheck::isSameStudent);
     }
 
+    public boolean hasLab(Lab lab) {
+        return labsTracker.contains(lab);
+    }
+
+
     /**
      * Adds a student to the list and the list is sorted each time.
      * The student must not already exist in the list.

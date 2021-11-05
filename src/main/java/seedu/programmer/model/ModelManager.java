@@ -99,6 +99,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLab(Lab lab) {
+        requireNonNull(lab);
+        return programmerError.hasLab(lab);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         programmerError.removeStudent(target);
     }

@@ -38,25 +38,16 @@ public class DeleteLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-        boolean exists = true;
-        for (Student std : lastShownList) {
-            Student target = std;
-            if (!target.deleteLab(this.result)) {
-                exists = false;
-            }
-            model.setStudent(target, std);
-        }
-        if (exists) {
-            if (!model.getSelectedInformation().isEmpty()) {
-                Student selectedStudent = model.getSelectedStudent().copy();
-                selectedStudent.deleteLab(result);
-                model.setSelectedStudent(selectedStudent);
-                model.setSelectedLabs(selectedStudent.getLabList());
-            }
-            return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
-        } else {
+        if (!model.hasLab(result)) {
             throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, result));
         }
+
+        for (Student std : lastShownList) {
+            Student target = std;
+            target.deleteLab(this.result);
+            model.setStudent(target, std);
+        }
+        return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
     }
 
     @Override

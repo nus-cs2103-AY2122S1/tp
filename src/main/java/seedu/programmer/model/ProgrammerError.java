@@ -40,6 +40,10 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         resetData(toBeCopied);
     }
 
+    public boolean hasLab(Lab lab) {
+        return students.hasLab(lab);
+    }
+
     //// list overwrite operations
 
     /**

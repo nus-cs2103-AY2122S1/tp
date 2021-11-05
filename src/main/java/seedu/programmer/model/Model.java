@@ -61,6 +61,11 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if the lab exists in ProgrammerError.
+     */
+    boolean hasLab(Lab lab);
+
+    /**
      * Deletes the given student.
      * The student must exist in ProgrammerError.
      */
