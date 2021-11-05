@@ -18,7 +18,7 @@ class JsonAdaptedHomework {
      */
     @JsonCreator
     public JsonAdaptedHomework(String description) {
-        this.description = description;
+        this.description = description.strip();
     }
 
     /**
