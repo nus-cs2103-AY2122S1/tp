@@ -74,6 +74,8 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 * Phone number can be of any length, and can contain any number of digits.
 
+* Command words are case sensitive. e.g. `findany` will not be intepreted as `findAny`.
+
 </div>
 
 ### Upcoming Birthdays
