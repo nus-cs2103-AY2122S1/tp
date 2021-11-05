@@ -54,4 +54,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/felissa.md)]
 
 * Role: Developer
-* Responsibilities: Module
+* Responsibilities: Student
