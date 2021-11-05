@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_PARAMS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 
@@ -15,8 +16,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displayed list with %1$d students!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the list of all students.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the list of all students.\n" + MESSAGE_NO_PARAMS;
 
     @Override
     public CommandResult execute() {
