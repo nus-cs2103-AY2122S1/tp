@@ -8,8 +8,8 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+* Libraries used: JavaFX, Jackson, JUnit5
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,14 +86,14 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java) //TODO update link
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `InsurancePalParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,43 +110,43 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `InsurancePalParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InsurancePalParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java) //TODO update link
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `InsurancePal`, which `Person` references. This allows `InsurancePal` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="800" />
 
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java) //TODO update link
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both clients' data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `InsurancePalStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.insurancepal.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,90 +154,249 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+###  Revenue feature
 
-#### Proposed Implementation
+#### Current Implementation
+{:.no_toc}
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+A client's revenue is currently represented by the `revenue` field under `Person`,
+which is represented by a `Revenue` object.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The `Revenue` object contains a `Money` field called `value` which represents the amount 
+of money in Singapore Dollars(SGD) that the user earned from the client. This `value` can 
+never be null.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+<img src="images/RevenueClassDiagram.png" width="300" />
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The processing of a revenue command from the user can be split into 2 general steps:
+1. Parsing the user input into a `RevenueCommand`
+2. Executing the `RevenueCommand`
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Each step will be described in the sections below.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+**Step 1**: Parsing of user input
 
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Parsing of the user input is primarily handled by the `RevenueCommandParser` which calls other
+helper classes to parse the text into the data classes `Index` and `Revenue`.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<img src="images/RevenueCommandParserSequenceDiagram.png" width="800" />
 
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+`RevenueCommandParser` then creates a `RevenueCommand` using the `Index` and `Revenue` objects created.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+**Step 2**: Executing the RevenueCommand
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<img src="images/RevenueCommandExecuteActivityDiagram.png" width="300" />
 
-</div>
+There are 2 possible outcomes from the execution of a RevenueCommand.
 
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+1. Add a new revenue to the client
+2. No changes to the client's revenue after a RevenueCommand as the total value of
+the new revenue and client's original revenue is negative
 
-![UndoRedoState3](images/UndoRedoState3.png)
+#### Design considerations
+{:.no_toc}
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+*Aspect*: User interface of adding and editing revenue.
 
-</div>
+* **Alternative 1 (Current Choice):** `revenue` command adds to existing `revenue`
+of client. `edit` command sets the `revenue` of client.
+  * Pros: Easier to implement
+  * Cons: User has to remember a lot of commands and to also understand the differences
+  between each command
+* **Alternative 2:** One `revenue` command adds and edits
+  * Pros: Fewer commands for the user to remember
+  * Cons: It will be difficult to give proper error messages since we are not sure
+  of the user's intentions
+### Add command
 
-The following sequence diagram shows how the undo operation works:
+A user can use the add command to add a clients. A sequence diagram of this action is as shown:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-</div>
+###  Note feature
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### Current Implementation
+{:.no_toc}
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+A client's note is currently represented by the `note` field under `Person`,
+which is represented by an `Note` object.
 
-</div>
+The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+<img src="images/NoteClassDiagram.png" width="300" />
 
-![UndoRedoState4](images/UndoRedoState4.png)
+A `Note` can be given to a `Person` through any of these 3 methods:
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+1. Using the `NoteCommand` to add a note to an existing `Person`.
+2. Through the `AddCommand`, a new `Person` with a `Note` can be created.
+3. Editing a `Person` using the `EditCommand` to give the `Person` a `Note`.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+The processing of a note command from the user can be split into 2 general steps:
 
-The following activity diagram summarizes what happens when a user executes a new command:
+1. Parsing the user input into a `NoteCommand`
+2. Executing the `NoteCommand`
+   Each step will be described in the sections below.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+**Step 1:** Parsing of user input
 
-#### Design considerations:
+The user input is parsed by the `NoteCommandParser` which calls other helper methods 
+to parse the text into a `Note` object
 
-**Aspect: How undo & redo executes:**
+<img src="images/NoteCommandParserSequenceDiagram.png" width="800" />
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. Unlike the `Claim` feature, as the `Note` command has no constraints on the text that can be inputted, the `NoteCommandParser` is able to create a `NoteCommand` without using a `EditNoteDescriptor.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+**Step 2:** Executing the NoteCommand
 
-_{more aspects and alternatives to be added}_
+<img src="images/NoteCommandExecuteActivityDiagram.png" width="300" />
 
-### \[Proposed\] Data archiving
+There are 3 possible outcomes from the execution of a `NoteCommand`.
 
-_{Explain here how the data archiving feature will be implemented}_
+1. Add a new Note to the client
+2. Edit an existing Note of the client
+3. Delete an existing Note of the client
 
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting Note
+
+* **Alternative 1 (Current choice):** The 'Note' command and 'Edit' command adds, edits and deletes. The 'Add' command is also able to create a person with a note.
+    * Pros:
+        * It is more intuitive as the note is a field that belongs to a `Person`.
+        * The user has more flexibility when choosing how to add, edit or delete a note.
+    * Cons:
+        * It is difficult to give proper error messages since we are not sure of the user intentions
+        * The user has to keep track of more prefixes
+        * The "help message" for the 'Add' and 'Edit' commands become longer and harder to read due to the additional field.
+* **Alternative 2:** One ‘Note’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 3:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
+
+###  Claims feature
+
+#### Current Implementation
+{:.no_toc}
+
+The processing of a claim command from the user can be split into 2 general steps:
+1. Parsing the user input into a `ClaimCommand`
+2. Executing the `ClaimCommand`
+Each step will be described in the sections below.
+
+**Step 1:** Parsing of user input
+
+Parsing of the user input is primarily handled by the `ClaimCommandParser` which calls other helper classes to
+parse the text into the data classes `Title`, `Description` and `Status`
+
+<img src="images/ClaimCommandParserSequenceDiagram.png" width="800" />
+
+`ClaimCommandParser` uses the parsed data classes to create an `EditClaimDescriptor`. It does not create a `Claim` at
+this stage because the user input could be giving an incomplete description of a `Claim` with missing fields. These
+missing fields imply that the user wants to edit or delete an existing claim. The difference between a `Claim` and
+`EditClaimDescriptor` can be seen in the class diagram below.
+
+<img src="images/ClaimEditClaimDescriptorClassDiagram.png" width="300" />
+
+**Step 2:** Executing the ClaimCommand
+
+<img src="images/ClaimCommandExecuteActivityDiagram.png" width="500" />
+
+There are 3 possible outcomes from the execution of a ClaimCommand.
+1. Add a new claim to the client
+2. Edit an existing claim of the client
+3. Delete an existing claim of the client
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting claims
+
+* **Alternative 1 (Current choice):** One ‘claim’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 2:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
+    
+#### Future Improvements
+{:.no_toc}
+
+* A Java HashSet may not be the most appropriate data structure to store claims since it is unable to find a claim
+  in O(1) time. Instead, a HashMap may be more appropriate, using the claim title as key.
+* Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes
+  to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
+  both extend from an abstract class to ensure that any future modification would not lead to regressions.
+
+###  Schedule appointment feature
+
+#### Current Implementation
+{:.no_toc}
+
+An appointment with a client is currently represented by the `appointment` field under `Person`,
+which is represented by an `Appointment` object.
+
+The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
+the appointment with is scheduled for. An empty appointment is represented when `appointmentTime` is set to `null`.
+
+<img src="images/ScheduleAppointmentClassDiagram.png" width="300" />
+
+The processing of a schedule command from the user can be split into 2 general steps:
+1. Parsing the user input into a `ScheduleCommand`
+2. Executing the `ScheduleCommand`
+
+Each step will be described in the sections below.
+
+**Step 1:** Parsing of user input
+
+Parsing of the user input is primarily handled by the `ScheduleCommandParser` which calls other helper classes to
+parse the text into the data classes `Index` and `Appointment`.
+
+<img src="images/ScheduleCommandParserSequenceDiagram.png" width="800" />
+
+`ScheduleCommandParser` then creates a `ScheduleCommand` using the `Index` and `Appointment` objects created.
+
+**Step 2:** Executing the ScheduleCommand
+
+<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="400" />
+
+There are 3 possible outcomes from the execution of a ScheduleCommand.
+1. Schedule a new appointment with the client
+2. Reschedule an appointment with the client
+3. Delete an existing appointment with the client
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting appointments
+
+* **Alternative 1 (Current choice):** One ‘schedule’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 2:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
+    
+### Insurance feature
+
+#### Implementation
+{:.no_toc}
+
+`Insurance` is currently composed of two objects:
+
+* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
+* `brand`, a `String` representing the brand of insurance.
+
+A `Person` can have any number of different `Insurances`, stored as a `HashSet`.
+
+`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command.
+
+A class diagram of `Insurance` is as shown:
+
+![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -421,7 +580,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Add reveneue to a client**
+**Use case: Add revenue to a client**
 
 **MSS**
 
