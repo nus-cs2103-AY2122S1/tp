@@ -39,7 +39,6 @@ public class DeleteLabCommand extends Command {
         requireNonNull(model);
 
         List<Student> studentList = model.getAllStudents();
-      
         if (!model.hasLab(lab)) {
             throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, lab));
         }

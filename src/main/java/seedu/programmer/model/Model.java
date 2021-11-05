@@ -123,9 +123,8 @@ public interface Model {
      */
     ObservableList<Student> getFilteredStudentList();
 
-
-    /** 
-     * Returns all students in ProgrammerError 
+    /**
+     * Returns all students in ProgrammerError
      */
     ObservableList<Student> getAllStudents();
 
