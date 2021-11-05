@@ -30,8 +30,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-*  Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Adapted code - [`formatTotalColumn`](https://stackoverflow.com/a/34924734/13896417) and [`setCloseOnEsc`](https://stackoverflow.com/a/42104595/13896417)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
