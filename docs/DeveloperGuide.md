@@ -1202,7 +1202,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
        Expected: Tasks tagged with "homework" shown as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
 
     3. Test case: `find t/homework t/assignment`<br>
-       Expected: <to be edited>
+       Expected: Tasks tagged with both "homework" and "assignment" show as tasks in the list. None shown if no matching tag. Number of task listed shown in status message.
 
 ### Find all upcoming tasks:
 
