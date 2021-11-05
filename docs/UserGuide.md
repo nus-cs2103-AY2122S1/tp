@@ -128,12 +128,6 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 |Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
 |Parameter| An input provided by the user for the execution of the command.|
 
-* Each parameter prefix is separated from the others with a space.<br/>
-  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
-
-* There are constraints in place to determine whether the value you provided for a field is valid.
-  TAB will inform you if you gave an invalid input for a field.
-
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
 
@@ -156,6 +150,9 @@ An example of a command in TAB:
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Each parameter prefix is separated from the others with a space.<br/>
+  For example, `t/t/` means the parameter value of the first `t/` is "t/", and TAB will interpret it as an invalid tag. On the other hand, `t/ t/` represents two `t/` parameters with no parameter value for both. TAB recognises this as 2 empty tags (see [Managing students](#managing-students) for more details about tags).
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
