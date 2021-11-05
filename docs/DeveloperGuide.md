@@ -163,7 +163,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/tutoraid/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -437,7 +437,7 @@ At this point, if `AddLessonCommandParser#parse()` detects that no lesson name h
 its execution and `ParseException` will be thrown.
 </div>
 
-3. Since the optional parameters (`price` and `timing`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. Else, the original arguments (`Maths 1` and `15`) are used for the parameters `lessonName` and `capacity` respectively. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Timing` instances.
+3. The original arguments (Maths 1 and 15) are used for the parameters `lessonName` and `capacity` respectively. Since the optional parameters (`price` and `timing`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Timing` instances.
 
 4. These individual instances, along with a `Students` object containing an empty `ArrayList<Student>`,  are then used to create a `Lesson` object. This `Lesson` instance is used to create a `AddLessonCommand` object.
 
