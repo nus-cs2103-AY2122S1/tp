@@ -82,14 +82,17 @@ public class EditModuleLessonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        model.setModuleLesson(lessonToEdit, editedModuleLesson);
-        model.updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        CommandResult result;
 
         if (model.hasModuleLessonClashingWith(editedModuleLesson)) {
-            return new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, editedModuleLesson));
+            result = new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, editedModuleLesson));
+        } else {
+            result = new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedModuleLesson));
         }
-        
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedModuleLesson));
+
+        model.setModuleLesson(lessonToEdit, editedModuleLesson);
+        model.updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        return result;
     }
 
     /**

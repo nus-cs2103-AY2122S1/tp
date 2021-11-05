@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
+import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_OVERLAPPING_LESSON;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -25,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.ModuleLessonBuilder;
@@ -39,31 +41,20 @@ public class EditModuleLessonCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        //TODO
         Index indexLastLesson = Index.fromOneBased(model.getFilteredModuleLessonList().size());
         ModuleLesson lastLesson = model.getFilteredModuleLessonList().get(indexLastLesson.getZeroBased());
 
         ModuleLessonBuilder lessonInList = new ModuleLessonBuilder(lastLesson);
-        ModuleLesson editedLesson = lessonInList.withModuleCode(VALID_MODULE_CODE_CS2030S_T12).build();
+        ModuleLesson editedLesson = lessonInList.withModuleCode(VALID_MODULE_CODE_CS2030S_T12)
+                .withLessonDay("5").build();
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
+                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
+                .withLessonDay(new LessonDay("5")).build();
         EditModuleLessonCommand editModuleLessonCommand = new EditModuleLessonCommand(indexLastLesson, descriptor);
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
-
         expectedModel.setModuleLesson(lastLesson, editedLesson);
-
-        assertCommandSuccess(editModuleLessonCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditModuleLessonCommand editModuleLessonCommand =
-                new EditModuleLessonCommand(INDEX_FIRST, new EditLessonDescriptor());
-        ModuleLesson editedLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
-
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
         assertCommandSuccess(editModuleLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -102,6 +93,45 @@ public class EditModuleLessonCommandTest {
         EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_DUPLICATE_LESSON);
+    }
+
+    @Test
+    public void execute_overlappingTimeLessonUnfilteredList_successWithWarning() {
+        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
+        ModuleLesson secondLesson = model.getFilteredModuleLessonList().get(INDEX_SECOND.getZeroBased());
+        LessonDay day = firstLesson.getDay();
+        LessonTime startTime = firstLesson.getLessonStartTime();
+        LessonTime endTime = firstLesson.getLessonEndTime();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(secondLesson).withLessonDay(day)
+                .withLessonStartTime(startTime).withLessonEndTime(endTime).build();
+        ModuleLesson editedLesson = new ModuleLessonBuilder(secondLesson).withLessonDay(day.getDayAsIntString())
+                .withLessonStartTime(startTime.toString()).withLessonEndTime(endTime.toString()).build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_SECOND, descriptor);
+
+        String expectedMessage = String.format(MESSAGE_OVERLAPPING_LESSON, editedLesson);
+        expectedModel.setModuleLesson(secondLesson, editedLesson);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_overlappingTimeLessonFilteredList_successWithWarning() {
+        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
+        ModuleLesson secondLesson = model.getFilteredModuleLessonList().get(INDEX_SECOND.getZeroBased());
+
+        showLessonAtIndex(model, INDEX_SECOND);
+
+        LessonDay day = firstLesson.getDay();
+        LessonTime startTime = firstLesson.getLessonStartTime();
+        LessonTime endTime = firstLesson.getLessonEndTime();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(secondLesson).withLessonDay(day)
+                .withLessonStartTime(startTime).withLessonEndTime(endTime).build();
+        ModuleLesson editedLesson = new ModuleLessonBuilder(secondLesson).withLessonDay(day.getDayAsIntString())
+                .withLessonStartTime(startTime.toString()).withLessonEndTime(endTime.toString()).build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST, descriptor);
+
+        String expectedMessage = String.format(MESSAGE_OVERLAPPING_LESSON, editedLesson);
+        expectedModel.setModuleLesson(secondLesson, editedLesson);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -152,7 +182,5 @@ public class EditModuleLessonCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_FIRST, DESC_CS2040S)));
-
-
     }
 }
