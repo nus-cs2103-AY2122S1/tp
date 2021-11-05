@@ -5,7 +5,7 @@ title: Aakansha Narain's Project Portfolio Page
 
 ### Project: Modulink
 
-ModuLink is a desktop-based application for Computer Science (CS) students at NUS to facilitate finding teammates for group-based modules. It allows you to find students taking the modules you are interested in, search by their group status (to find students available to form or join groups), and much more. ModuLink has been developed using Java and has about 6k LoC.
+ModuLink is a desktop-based application for Computer Science (CS) students at NUS to facilitate finding teammates for group-based modules. It allows you to find students taking the modules you are interested in, search by their group status (to find students available to form or join groups), and much more. ModuLink has been developed using Java and has about 18k LoC.
 
 Given below are my contributions to the project.
 
@@ -32,3 +32,11 @@ Given below are my contributions to the project.
 * **Project management**:
     * Managed release v1.3.1 on GitHub
     * Opened issues for the team
+
+* **Documentation**:
+  * User Guide:
+    * Edited documentation for all new features. (Pull Requests: [\#100](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/100), [\#103](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/103), [\#105](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/105), [\#107](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/107), [\#109](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/109))
+    * Added the Introduction and made other cosmetic changes throughout the document. (Pull Requests: [\#111](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/111), [\#184](https://github.com/AY2122S1-CS2103T-W12-4/tp/pull/184))
+  * Developer Guide:
+    * Added use cases (UC5 - UC10).
+    * Added details + sequence diagram for editGroupStatus command.
