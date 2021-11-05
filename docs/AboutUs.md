@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/jason-ng-zq99.png" width="200px">
 
-[[github](https://github.com/jason-ng-zq99)]
+[[github](https://github.com/jason-ng-zq99)[[portfolio](team/jason-ng-zq99.md)]
 
 * Role: Team Lead
 * Responsibilities: In charge of Common
