@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -56,7 +57,7 @@ public class AddCommandTest {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_STUDENT, () ->
                 prepareAddCommandForPerson(validPerson, modelStub).execute());
     }
 
@@ -131,6 +132,11 @@ public class AddCommandTest {
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
@@ -211,6 +217,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public boolean hasPersonFilteredList(Person person) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 

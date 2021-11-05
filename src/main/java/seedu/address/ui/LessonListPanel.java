@@ -56,7 +56,7 @@ public class LessonListPanel extends UiPart<Region> {
         initialiseLessonListView(lessonList);
 
         lessonListTitle.setText(student.getName().fullName);
-        titleBox.minHeightProperty().bind(lessonListTitle.heightProperty().multiply(TITLE_HEIGHT));
+        titleBox.prefHeightProperty().bind(lessonListTitle.heightProperty().multiply(TITLE_HEIGHT));
         if (lessonList.isEmpty()) {
             placeholder.setText(NO_EXISTING_LESSONS_MESSAGE);
         }

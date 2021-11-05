@@ -35,11 +35,15 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted student: %1$s";
 
-    private final Index targetIndex;
+    private Index targetIndex;
 
     private Person deletedPerson;
 
+    /**
+     * Constructs a Delete Command.
+     */
     public DeleteCommand(Index targetIndex) {
+        super(COMMAND_ACTION);
         this.targetIndex = targetIndex;
     }
 
@@ -49,27 +53,30 @@ public class DeleteCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToDelete = CommandUtil.getPerson(lastShownList, targetIndex);
+
+        targetIndex = setToDefinitiveIndex(personToDelete);
+
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, personToDelete));
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
         model.addPersonAtIndex(deletedPerson, targetIndex);
+        return deletedPerson;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(deletedPerson);
+
+        model.deletePerson(deletedPerson);
+        return deletedPerson;
     }
 
     @Override

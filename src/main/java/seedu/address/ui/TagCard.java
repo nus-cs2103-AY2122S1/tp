@@ -30,7 +30,7 @@ public class TagCard extends UiPart<Region> {
     public TagCard(Tag tag, Integer count) {
         super(FXML);
         this.tag = tag;
-        tagName.setText(tag.getTagName());
+        tagName.setText(tag.toString());
         numDuplicates.setText(String.valueOf(count));
     }
 

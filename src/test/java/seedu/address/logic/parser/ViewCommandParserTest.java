@@ -8,18 +8,17 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.ViewCommand;
 
-public class DeleteCommandParserTest {
-
+public class ViewCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private ViewCommandParser parser = new ViewCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgs_returnsViewCommand() {
+        assertParseSuccess(parser, "1", new ViewCommand(INDEX_FIRST_PERSON));
     }
 
     @Test

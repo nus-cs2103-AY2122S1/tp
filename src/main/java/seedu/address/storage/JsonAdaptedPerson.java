@@ -76,6 +76,8 @@ class JsonAdaptedPerson {
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
+     *
+     * @param source Person to convert.
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
@@ -125,29 +127,10 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(strippedName);
 
-        String strippedPhone = phone.strip();
-        if (!Phone.isValidPhone(strippedPhone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(strippedPhone);
-
-        String strippedEmail = email.strip();
-        if (!Email.isValidEmail(strippedEmail)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(strippedEmail);
-
-        String strippedParentPhone = parentPhone.strip();
-        if (!Phone.isValidPhone(strippedParentPhone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelParentPhone = new Phone(strippedParentPhone);
-
-        String strippedParentEmail = parentEmail.strip();
-        if (!Email.isValidEmail(strippedParentEmail)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelParentEmail = new Email(strippedParentEmail);
+        final Phone modelPhone = getPhone(phone);
+        final Email modelEmail = getEmail(email);
+        final Phone modelParentPhone = getPhone(parentPhone);
+        final Email modelParentEmail = getEmail(parentEmail);
 
         String strippedAddress = address.strip();
         if (!Address.isValidAddress(strippedAddress)) {
@@ -179,6 +162,22 @@ class JsonAdaptedPerson {
                 modelLessons);
     }
 
+    private Email getEmail(String email) throws IllegalValueException {
+        String strippedEmail = email.strip();
+        if (!Email.isValidEmail(strippedEmail)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(strippedEmail);
+    }
+
+    private Phone getPhone(String phone) throws IllegalValueException {
+        String strippedPhone = phone.strip();
+        if (!Phone.isValidPhone(strippedPhone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(strippedPhone);
+    }
+
     private void checkContactFields() throws IllegalValueException {
         if (phone.isBlank() && parentPhone.isBlank() && email.isBlank() && parentEmail.isBlank()) {
             throw new IllegalValueException(MESSAGE_MISSING_CONTACT);
@@ -189,18 +188,10 @@ class JsonAdaptedPerson {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (parentPhone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (parentEmail == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
+        checkNullPhone(phone);
+        checkNullEmail(email);
+        checkNullPhone(parentPhone);
+        checkNullEmail(parentEmail);
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -217,6 +208,18 @@ class JsonAdaptedPerson {
         }
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+    }
+
+    private void checkNullEmail(String email) throws IllegalValueException {
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+    }
+
+    private void checkNullPhone(String phone) throws IllegalValueException {
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
     }
 }

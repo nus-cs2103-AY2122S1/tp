@@ -9,11 +9,11 @@ public class YearCommand extends Command {
 
     public static final String COMMAND_WORD = "year";
 
-    public static final String COMMAND_ACTION = "View Yearly Schedule";
+    public static final String COMMAND_ACTION = "View Yearly Calendar";
 
-    public static final String USER_TIP = "To view your yearly schedule, type: " + COMMAND_WORD;
+    public static final String USER_TIP = "To view your yearly calendar, type: " + COMMAND_WORD;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your yearly schedule.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your yearly calendar.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_YEAR_MESSAGE = "Showing your yearly calendar."

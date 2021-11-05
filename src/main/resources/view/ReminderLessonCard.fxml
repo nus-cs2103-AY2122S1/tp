@@ -25,7 +25,7 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="lessonTitle" styleClass="cell_big_label" text="\$name"/>
+                <Label fx:id="lessonTitle" styleClass="cell_big_label" text="\$name" wrapText="true"/>
             </HBox>
             <HBox>
                 <Label fx:id="datePlaceholder" styleClass="cell_medium_label" text="Date: " wrapText="true" />
@@ -36,11 +36,11 @@
                 <Label fx:id="time" styleClass="cell_small_label" text="\$date" wrapText="true" />
             </HBox>
             <HBox>
-                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" />
+                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" minWidth="50" maxWidth="51" />
                 <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true" />
             </HBox>
             <HBox>
-                <Label fx:id="feesPlaceholder" styleClass="cell_medium_label" text="Outstanding Fees: " wrapText="true" />
+                <Label fx:id="feesPlaceholder" styleClass="cell_medium_label" text="Outstanding Fees: " wrapText="true" minWidth="90" />
                 <Label fx:id="outstandingFees" styleClass="cell_small_label" text="\$fees" wrapText="true" />
             </HBox>
             <VBox fx:id="homeworkList" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS" />

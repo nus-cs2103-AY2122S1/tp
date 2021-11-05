@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -63,14 +65,43 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
+    public void parsePreamble_emptyString_returnsEmptyArray() {
+        assertTrue(ParserUtil.parsePreamble("  ").length == 0);
+    }
+
+    @Test
+    public void parsePreamble_nonEmptyString_returnsArray() {
+        assertTrue(ParserUtil.parsePreamble(" 1 ").length == 1);
+        assertTrue(ParserUtil.parsePreamble(" 1 2 ").length == 2);
+        assertTrue(ParserUtil.parsePreamble(" 1   2 ").length == 2);
+    }
+
+    @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        // non integer
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("a"));
+        // zero
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("0"));
+        // signed
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("+2"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil
                 .parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseStudentIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class,
+                MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, () -> ParserUtil.parseStudentIndex("a"));
+    }
+
+    @Test
+    public void parseLessonIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class,
+                MESSAGE_INVALID_LESSON_DISPLAYED_INDEX, () -> ParserUtil.parseLessonIndex("a"));
     }
 
     @Test

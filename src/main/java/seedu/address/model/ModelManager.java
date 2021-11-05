@@ -128,6 +128,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -194,6 +199,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasPersonFilteredList(Person person) {
+        requireNonNull(person);
+        return filteredPersons.contains(person);
     }
 
     //=========== Last Updated Accessors =============================================================

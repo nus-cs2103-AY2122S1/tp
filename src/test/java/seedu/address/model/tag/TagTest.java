@@ -21,18 +21,6 @@ public class TagTest {
     }
 
     @Test
-    public void getTagName_success() {
-        // all upper case -> success
-        assertEquals("ZOOM", TAG_ZOOM.getTagName());
-
-        // all lower case -> failed
-        assertNotEquals("zoom", TAG_ZOOM.getTagName());
-
-        // partial lower case -> failed
-        assertNotEquals("zOom", TAG_ZOOM.getTagName());
-    }
-
-    @Test
     public void equals_success() {
         assertEquals(new Tag("zoom"), TAG_ZOOM);
     }
@@ -44,6 +32,13 @@ public class TagTest {
 
     @Test
     public void testToString() {
-        assertEquals("[ZOOM]", TAG_ZOOM.toString());
+        // all upper case -> success
+        assertEquals("ZOOM", TAG_ZOOM.toString());
+
+        // all lower case -> failed
+        assertNotEquals("zoom", TAG_ZOOM.toString());
+
+        // partial lower case -> failed
+        assertNotEquals("zOom", TAG_ZOOM.toString());
     }
 }
