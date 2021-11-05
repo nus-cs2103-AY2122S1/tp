@@ -16,10 +16,10 @@ public class NoteCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the note of the student identified by their student name"
-            + " existing note will be overwritten by the input.\n"
+            + ": Edits the note of the student identified by their student name."
+            + " Existing note will be overwritten by the input.\n"
             + "Parameters: " + PREFIX_NAME + "STUDENTNAME " + PREFIX_NOTE + "NOTE\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Brian " + PREFIX_NOTE + " is bad at UML diagrams.";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Brian " + PREFIX_NOTE + "is bad at UML diagrams.";
 
     public static final String MESSAGE_SUCCESS = "Success. Student: %1$s, Notes: %2$s";
     public static final String MESSAGE_STUDENT_NONEXISTENT =
