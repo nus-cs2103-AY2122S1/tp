@@ -14,7 +14,7 @@ participant "p:CustomerClassContainsKeywordsPredicate" as CustomerClassContainsK
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("findc Chetwin")
+[-> LogicManager : execute("findC Chetwin")
 activate LogicManager
 
 LogicManager -> RhrhParser : parseCommand("findc Chetwin")
