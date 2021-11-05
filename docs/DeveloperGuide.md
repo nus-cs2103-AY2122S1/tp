@@ -169,7 +169,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects. A similar design can be consdired for `Grade` as well.<br><br>
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects. A similar design can be considered for `Grade` as well.<br><br>
 
 <center>
 <img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="500" />
@@ -1249,24 +1249,48 @@ testers are expected to do more *exploratory* testing.
 
 #### Clearing data
 
-1. Dealing with missing/corrupted data files
+1. Clearing all data with students and lessons present
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There should be students and lessons present in the application. Use `list` to view all the entities present.
 
-1. _{ more test cases …​ }_
+    1. Test case: `clear`<br>
+       Expected: Status messages should inform you that all information is cleared. Both panels on the application should be empty, i.e. there should be no more students and lessons. Checking the storage file in `./data/tuitione.json` should show no entities present.
+
+1. Clearing all data with no data present
+
+    1. Prerequisites: There should be no students and lessons present in the application. Use `list` to view all the entities present.
+
+    1. Test case: `clear`<br>
+       Expected: Same as in previous test scenario. Having no data present should not yield any difference in output.
 
 #### Exiting application
 
-1. Dealing with missing/corrupted data files
+1. Exiting using the window close button
+
+    1. Test case: Press the close button on the window of the application.<br>
+       Expected: The window should close.
+
+1. Exiting using the application's exit button
+
+    1. Test case: Click on the file button on the top left of the application. A dropdown list with one option of `exit` should be present. Click on that button.<br>
+       Expected: The UI should display the elements correctly and the window should close.<br>
+<center>
+<img src="images/DeveloperGuideImage/exit_ui.png"/>
+</center>
+
+#### Managing data externally
+
+1. Verifying that data is stored
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
-
-#### Saving data
-
-1. Dealing with missing/corrupted data files
+1. Modifying saved data, but preserving its correctness to the application's constraints
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. Modifying saved data, but losing its correctness to the application's constraints
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+
+
