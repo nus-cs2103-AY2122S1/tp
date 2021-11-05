@@ -55,7 +55,7 @@ public class EditTaskCommand extends EditCommand {
     private ModuleName moduleName;
 
     /**
-     * Creates an EditTaskCommand to edit the specified {@code Task}
+     * Creates an EditTaskCommand to edit the specified {@code Task}.
      *
      * @param moduleName The name of the module for which the task is assigned.
      * @param editTaskDescriptor The edited task descriptor.
@@ -108,9 +108,9 @@ public class EditTaskCommand extends EditCommand {
     }
 
     /**
-     * Edits a {@code Task}'s information. The {@code Task} will be from the specified {@code Student}.
+     * Edits a {@code Task}'s information. The {@code Task} will be from the specified {@code Module}.
      *
-     * @param module The student whose task will be edited.
+     * @param module The module whose task will be edited.
      * @return Statement indicating that the edit is successful.
      * @throws CommandException Exception thrown when task is not found.
      */
@@ -197,6 +197,8 @@ public class EditTaskCommand extends EditCommand {
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return A boolean stating whether any field is edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(taskName, taskDeadline);

@@ -11,13 +11,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.StudentId;
 
+/**
+ * Parses input arguments and creates a new DeleteStudentCommand object.
+ */
 public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> {
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses {@code String} into a command and returns it.
      *
      * @param args args for deleting a module.
      * @return DeleteStudentCommand object created from user input.
-     * @throws ParseException if {@code userInput} does not conform the expected format.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public DeleteStudentCommand parse(String args) throws ParseException {

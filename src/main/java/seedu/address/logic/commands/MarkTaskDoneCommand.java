@@ -54,6 +54,7 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
 
     /**
      * Creates a MarkTaskDoneCommand.
+     *
      * @param moduleName The name of the module the task belongs to.
      * @param studentId The ID of the student the task is assigned to.
      * @param taskId The ID of the task to be marked as done.
@@ -85,7 +86,7 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
         Student student = findStudent(studentId, studentList);
         UniqueTaskList taskList = student.getTaskList();
 
-        if (!isPresentTasK(taskId, taskList)) {
+        if (!isPresentTask(taskId, taskList)) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
 
@@ -100,6 +101,10 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
 
     /**
      * A helper method that checks if a list of modules contains a module with a specified name.
+     *
+     * @param moduleName The name of the module to be searched.
+     * @param moduleList The list of modules that may potentially contain the specified module.
+     * @return A boolean stating whether the module is present in the module list.
      */
     public boolean isPresentModule(ModuleName moduleName, List<Module> moduleList) {
         for (Module module : moduleList) {
@@ -112,6 +117,10 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
 
     /**
      * A helper method that checks if a list of students contains a student with a specified student ID.
+     *
+     * @param studentId The student ID of the student to be searched.
+     * @param studentList The list of students that may potentially contain the specified student.
+     * @return A boolean stating whether the student is present in the student list.
      */
     public boolean isPresentStudent(StudentId studentId, List<Student> studentList) {
         for (Student student : studentList) {
@@ -124,8 +133,12 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
 
     /**
      * A helper method that checks if a UniqueTaskList contains a task with a specified task ID.
+     *
+     * @param taskId The task ID of the task to be searched.
+     * @param taskList The list of the tasks that may potentially contain the specified task.
+     * @return A boolean stating whether the task is present in the task list.
      */
-    public boolean isPresentTasK(TaskId taskId, UniqueTaskList taskList) {
+    public boolean isPresentTask(TaskId taskId, UniqueTaskList taskList) {
         for (Task task : taskList) {
             if (task.getTaskId().equals(taskId)) {
                 return true;
@@ -136,6 +149,11 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
 
     /**
      * A helper method that finds a module from a list of modules according to module name.
+     *
+     * @param moduleName The name of the module to be found.
+     * @param moduleList The list of modules that may potentially contain the specified module.
+     * @return The module to be found.
+     * @throws ModuleNotFoundException if the module is not found.
      */
     public Module findModule(ModuleName moduleName, List<Module> moduleList) throws ModuleNotFoundException {
         for (Module module : moduleList) {
@@ -148,6 +166,11 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
 
     /**
      * A helper method that finds a student from a list of students according to student ID.
+     *
+     * @param studentId The student ID of the student to be found.
+     * @param studentList The list of students that may potentially contain the specified student.
+     * @return The student to be found.
+     * @throws StudentNotFoundException if the student is not found.
      */
     public Student findStudent(StudentId studentId, List<Student> studentList) throws StudentNotFoundException {
         for (Student student : studentList) {

@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
@@ -33,7 +32,6 @@ public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        String command = args.split(" ")[0];
 
         final String commandWord = "mark " + matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
@@ -45,13 +43,5 @@ public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

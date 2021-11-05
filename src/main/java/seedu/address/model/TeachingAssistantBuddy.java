@@ -248,7 +248,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     @Override
     public String toString() {
-        return students.asUnmodifiableObservableList().size() + " persons";
+        return students.asUnmodifiableObservableList().size() + " students";
         // TODO: refine later
     }
 

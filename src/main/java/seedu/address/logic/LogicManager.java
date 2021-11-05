@@ -15,7 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.student.Student;
 import seedu.address.storage.Storage;
 
 /**
@@ -59,11 +58,6 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyTeachingAssistantBuddy getAssistantBuddy() {
         return model.getBuddy();
-    }
-
-    @Override
-    public ObservableList<Student> getFilteredPersonList() {
-        return model.getFilteredStudentList();
     }
 
     /**

@@ -57,7 +57,7 @@ public class EditStudentCommand extends EditCommand {
     private ModuleName moduleName;
 
     /**
-     * Creates an EditStudentCommand to edit the specified {@code Student}
+     * Creates an EditStudentCommand to edit the specified {@code Student}.
      *
      * @param moduleName The name of the module the student is registered in.
      * @param editStudentDescriptor The edited student descriptor.
@@ -154,10 +154,13 @@ public class EditStudentCommand extends EditCommand {
         private StudentId studentId;
         private UniqueTaskList uniqueTaskList;
 
+        /**
+         * Creates an EditStudentDescriptor.
+         */
         public EditStudentDescriptor() {}
 
         /**
-         * Copy constructor.
+         * Creates an EditStudentDescriptor for the specified {@code Student}.
          *
          * @param  toCopy The edit student descriptor to be copied.
          */
@@ -171,6 +174,8 @@ public class EditStudentCommand extends EditCommand {
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return True if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, teleHandle, email, studentId);

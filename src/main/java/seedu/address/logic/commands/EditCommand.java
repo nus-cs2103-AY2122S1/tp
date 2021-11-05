@@ -4,7 +4,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Edits the details of an existing student in the studentId book.
+ * Edits a module/student/task in TAB.
  */
 public abstract class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";

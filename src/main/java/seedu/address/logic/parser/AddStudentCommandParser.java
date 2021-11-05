@@ -18,13 +18,16 @@ import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.TeleHandle;
 
+/**
+ * Parses input arguments and creates a new AddStudentCommand object.
+ */
 public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses {@code String} into a command and returns it.
      *
-     * @param args Args for deleting a module.
+     * @param args Args for adding a student.
      * @return AddStudentCommand object created from the user input.
-     * @throws ParseException if {@code userInput} does not conform the expected format.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public AddStudentCommand parse(String args) throws ParseException {

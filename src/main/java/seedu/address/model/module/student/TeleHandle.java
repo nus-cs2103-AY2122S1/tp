@@ -28,7 +28,10 @@ public class TeleHandle {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid tele handle.
+     *
+     * @param test The string that may potentially be a tele handle.
+     * @return A boolean stating whether the tele handle is valid.
      */
     public static boolean isValidTeleHandle(String test) {
         return test.matches(VALIDATION_REGEX);

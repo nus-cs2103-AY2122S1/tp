@@ -5,7 +5,7 @@ import seedu.address.model.Model;
 
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a module/student/task from TAB.
  */
 public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";

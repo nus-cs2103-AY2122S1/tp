@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 
 /**
- * Adds a student to the address book.
+ * Adds a module to TAB.
  */
 public class AddModuleCommand extends AddCommand {
 
@@ -28,7 +28,7 @@ public class AddModuleCommand extends AddCommand {
     private final Module toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Module}
+     * Creates an AddModuleCommand to add the specified {@code Module}.
      *
      * @param module The module to be added to TAB.
      */

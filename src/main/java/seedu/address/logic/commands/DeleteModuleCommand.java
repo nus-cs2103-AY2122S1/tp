@@ -32,6 +32,8 @@ public class DeleteModuleCommand extends DeleteCommand {
 
     /**
      * Deletes a module from TAB.
+     *
+     * @param moduleName The name of the module to be deleted.
      */
     public DeleteModuleCommand(ModuleName moduleName) {
         this.moduleName = moduleName;

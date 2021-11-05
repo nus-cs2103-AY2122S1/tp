@@ -22,7 +22,7 @@ import seedu.address.model.task.TaskName;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Adds a student to the address book.
+ * Adds a student to a module in TAB.
  */
 public class AddStudentCommand extends AddCommand {
 
@@ -49,7 +49,8 @@ public class AddStudentCommand extends AddCommand {
     private ModuleName moduleName;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student} to a module with the
+     * specified {@code ModuleName}.
      *
      * @param student The student to be added to a module.
      * @param moduleName The name of the module the student will be added to.

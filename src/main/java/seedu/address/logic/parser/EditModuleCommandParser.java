@@ -12,8 +12,19 @@ import seedu.address.logic.commands.EditModuleCommand.EditModuleDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 
+/**
+ * Parses input arguments and creates a new EditModuleCommand object.
+ */
 public class EditModuleCommandParser implements Parser<EditModuleCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditModuleCommand
+     * and returns an EditModuleCommand object for execution.
+     *
+     * @param args Args for editing a type.
+     * @return EditModuleCommand object created from user input.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     @Override
     public EditModuleCommand parse(String args) throws ParseException {
         requireNonNull(args);

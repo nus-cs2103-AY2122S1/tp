@@ -14,7 +14,7 @@ import seedu.address.model.module.student.StudentId;
 import seedu.address.model.task.TaskId;
 
 /**
- * Parses input arguments and creates a new MarkTaskDoneCommand object.
+ * Parses input arguments and creates a new MarkTaskUndoneCommand object.
  */
 public class MarkTaskUndoneCommandParser implements Parser<MarkTaskUndoneCommand> {
 
@@ -24,7 +24,7 @@ public class MarkTaskUndoneCommandParser implements Parser<MarkTaskUndoneCommand
      *
      * @param args Args for marking a task as undone.
      * @return MarkTaskUndoneCommand object.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public MarkTaskUndoneCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

@@ -11,8 +11,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.task.TaskId;
 
+/**
+ * Parses input arguments and creates a new DeleteTaskCommand object.
+ */
 public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteTaskCommand
+     * and returns an DeleteTaskCommand object for execution.
+     *
+     * @param args Args for editing a type.
+     * @return DeleteTaskCommand object created from user input.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     @Override
     public DeleteTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

@@ -17,7 +17,7 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.StudentId;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditStudentCommand object.
  */
 public class EditStudentCommandParser implements Parser<EditStudentCommand> {
 

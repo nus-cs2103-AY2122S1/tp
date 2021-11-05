@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.model.Model;
@@ -50,8 +51,10 @@ public class EditStudentCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, VALID_STUDENT_ID_AMY);
 
         Model expectedModel = new ModelManager(new TeachingAssistantBuddy(model.getBuddy()), new UserPrefs());
-        Module expectedModule = expectedModel.getFilteredModuleList().get(0);
-        expectedModule.setStudent(expectedModule.getFilteredStudentList().get(0), editedAmy);
+        ObservableList<Module> expectedModuleList = expectedModel.getFilteredModuleList();
+        Module expectedModule = expectedModuleList.get(0);
+        ObservableList<Student> expectedStudentList = expectedModule.getFilteredStudentList();
+        expectedModule.setStudent(expectedStudentList.get(0), editedAmy);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -68,8 +71,10 @@ public class EditStudentCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, VALID_STUDENT_ID_AMY);
 
         Model expectedModel = new ModelManager(new TeachingAssistantBuddy(model.getBuddy()), new UserPrefs());
-        Module expectedModule = expectedModel.getFilteredModuleList().get(0);
-        expectedModule.setStudent(expectedModule.getFilteredStudentList().get(0), editedAmy);
+        ObservableList<Module> expectedModuleList = expectedModel.getFilteredModuleList();
+        Module expectedModule = expectedModuleList.get(0);
+        ObservableList<Student> expectedStudentList = expectedModule.getFilteredStudentList();
+        expectedModule.setStudent(expectedStudentList.get(0), editedAmy);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -84,8 +89,10 @@ public class EditStudentCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, VALID_STUDENT_ID_AMY);
 
         Model expectedModel = new ModelManager(new TeachingAssistantBuddy(model.getBuddy()), new UserPrefs());
-        Module expectedModule = expectedModel.getFilteredModuleList().get(0);
-        expectedModule.setStudent(expectedModule.getFilteredStudentList().get(0), AMY);
+        ObservableList<Module> expectedModuleList = expectedModel.getFilteredModuleList();
+        Module expectedModule = expectedModuleList.get(0);
+        ObservableList<Student> expectedStudentList = expectedModule.getFilteredStudentList();
+        expectedModule.setStudent(expectedStudentList.get(0), AMY);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

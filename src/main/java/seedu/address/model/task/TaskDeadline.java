@@ -108,6 +108,9 @@ public class TaskDeadline {
 
     /**
      * Returns true if a given string is a valid taskDeadline.
+     *
+     * @param test The string that may potentially be a valid task deadline.
+     * @return A boolean stating whether the string is a valid task deadline.
      */
     public static boolean isValidTaskDeadline(String test) {
         try {

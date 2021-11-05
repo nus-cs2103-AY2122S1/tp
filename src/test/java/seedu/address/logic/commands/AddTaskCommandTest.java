@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -18,6 +19,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TypicalModules;
 
@@ -39,8 +41,10 @@ public class AddTaskCommandTest {
         String expectedMessage = String.format(MESSAGE_ADD_TASK_SUCCESS, validTask.getTaskId());
         Model expectedModel = new ModelManager(new TeachingAssistantBuddy(TypicalModules.getTypicalBuddy()),
                 new UserPrefs());
-        Module expectedModule = expectedModel.getFilteredModuleList().get(0);
-        expectedModule.getTaskList().add(validTask);
+        ObservableList<Module> expectedModuleList = expectedModel.getFilteredModuleList();
+        Module expectedModule = expectedModuleList.get(0);
+        UniqueTaskList expectedTaskList = expectedModule.getTaskList();
+        expectedTaskList.add(validTask);
         for (Student student : expectedModule.getFilteredStudentList()) {
             student.getTaskList().add(validTask);
         }

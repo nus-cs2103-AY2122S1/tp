@@ -1,6 +1,5 @@
 package seedu.address.model.module.student;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -24,7 +23,12 @@ public class Student {
     private UniqueTaskList taskList;
 
     /**
-     * Every field must be present and not null.
+     * Constucts a student object.
+     *
+     * @param studentId The student's student ID.
+     * @param name The student's name.
+     * @param teleHandle The student's teleHandle.
+     * @param email The student's email.
      */
     public Student(StudentId studentId, Name name, TeleHandle teleHandle, Email email) {
         requireAllNonNull(studentId, name, teleHandle, email);
@@ -37,6 +41,12 @@ public class Student {
 
     /**
      * Constructor that also specifies taskList, to be used for storage.
+     *
+     * @param studentId The student's student ID.
+     * @param name The student's name.
+     * @param teleHandle The student's teleHandle.
+     * @param email The student's email.
+     * @param taskList The student's taskList.
      */
     public Student(StudentId studentId, Name name, TeleHandle teleHandle, Email email,
                    UniqueTaskList taskList) {
@@ -66,22 +76,17 @@ public class Student {
     /**
      * Adds a task to this student's task list.
      * The task must not already exist in this student's task list.
-     * @param task
+     *
+     * @param task The task to be added to the student's taskList.
      */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
     /**
-     * Returns true if this student has {@code task} exists in the task list.
-     */
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return taskList.contains(task);
-    }
-
-    /**
      * Returns the UniqueTaskList of this Student.
+     *
+     * @return The student's taskList.
      */
     public UniqueTaskList getTaskList() {
         return this.taskList;
@@ -89,6 +94,7 @@ public class Student {
 
     /**
      * Sets the UniqueTaskList of this Student to be the input {@code taskList} taskList.
+     *
      * @param taskList the taskList to set this Student's UniqueTaskList to.
      */
     public void setTaskList(UniqueTaskList taskList) {
@@ -96,8 +102,11 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same student ID.
+     * This defines a weaker notion of equality between two students.
+     *
+     * @param otherStudent The other student to be compared to this student object.
+     * @return A boolean stating whether the students are the same student.
      */
     public boolean isSameStudent(Student otherStudent) {
         if (otherStudent == this) {
@@ -110,14 +119,18 @@ public class Student {
 
     /**
      * Removes the specified {@Code task} from the student's task list.
+     *
+     * @param task The task to be removed from the student's task list.
      */
     public void removeTask(Task task) {
         taskList.remove(task);
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
+     *
+     * @return A boolean stating whether the students are the same students.
      */
     @Override
     public boolean equals(Object other) {

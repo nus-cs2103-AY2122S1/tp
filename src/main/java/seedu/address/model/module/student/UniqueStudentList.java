@@ -31,6 +31,9 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Returns true if the list contains an equivalent student as the given argument.
+     *
+     * @param toCheck The student to be checked.
+     * @return A boolean stating whether the studentList contain the specified student.
      */
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
@@ -40,6 +43,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Adds a student to the list.
      * The student must not already exist in the list.
+     *
+     * @param toAdd The student to be added to the list.
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
@@ -53,6 +58,9 @@ public class UniqueStudentList implements Iterable<Student> {
      * Replaces the student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
+     *
+     * @param target The student to be replaced.
+     * @param editedStudent The student that will replace the other student.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
@@ -72,6 +80,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Removes the equivalent student from the list.
      * The student must exist in the list.
+     *
+     * @param toRemove The student to be removed.
      */
     public void remove(Student toRemove) {
         requireNonNull(toRemove);
@@ -88,6 +98,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Replaces the contents of this list with {@code students}.
      * {@code students} must not contain duplicate students.
+     *
+     * @param students The new list of students that will replace the current list of students.
      */
     public void setStudents(List<Student> students) {
         requireAllNonNull(students);
@@ -100,6 +112,8 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Returns the backing list as an modifiable {@code ObservableList}.
+     *
+     * @return The modifiable observable list of students.
      */
     public ObservableList<Student> asModifiableObservableList() {
         return internalList;
@@ -107,6 +121,8 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
+     *
+     * @return The unmodifiable observable list of students.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
@@ -131,6 +147,9 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Returns true if {@code students} contains only unique students.
+     *
+     * @param students The list of students to be tested.
+     * @return A boolean stating whether all the students in the list are unique.
      */
     private boolean studentsAreUnique(List<Student> students) {
         for (int i = 0; i < students.size() - 1; i++) {

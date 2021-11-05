@@ -33,7 +33,10 @@ public class StudentId {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid student ID.
+     *
+     * @param test The string that may potentially be a student ID.
+     * @return A boolean stating whether the student ID is valid.
      */
     public static boolean isValidStudentId(String test) {
         return test.matches(VALIDATION_REGEX);
