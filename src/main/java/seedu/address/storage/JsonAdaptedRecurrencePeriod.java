@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
+import static seedu.address.commons.util.DateTimeUtil.TIME_FORMATTER;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;

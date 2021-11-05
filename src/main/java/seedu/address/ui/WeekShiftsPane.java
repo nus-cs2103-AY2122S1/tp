@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 
@@ -27,18 +26,19 @@ public class WeekShiftsPane extends UiPart<Region> {
      */
     public WeekShiftsPane(ObservableList<Person> staffList) {
         super(FXML);
-        Period period = ParserUtil.initializePeriodToThisWeek();
-        setChildren(staffList, period);
+        setChildren(staffList, Period.oneWeekFrom(LocalDate.now()));
     }
 
     public void setChildren(ObservableList<Person> staffList, Period period) {
+        LocalDate firstDay = period.getStartDate();
         weekShiftsPane.getChildren().clear();
-        weekShiftsPane.getChildren().addAll(new DayCard(DayOfWeek.MONDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.TUESDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.WEDNESDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.THURSDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.FRIDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.SATURDAY, staffList, period).getRoot(),
-                new DayCard(DayOfWeek.SUNDAY, staffList, period).getRoot());
+        weekShiftsPane.getChildren().addAll(new DayCard(firstDay, 0, staffList, period).getRoot(),
+                new DayCard(firstDay, 1, staffList, period).getRoot(),
+                new DayCard(firstDay, 2, staffList, period).getRoot(),
+                new DayCard(firstDay, 3, staffList, period).getRoot(),
+                new DayCard(firstDay, 4, staffList, period).getRoot(),
+                new DayCard(firstDay, 5, staffList, period).getRoot(),
+                new DayCard(firstDay, 6, staffList, period).getRoot());
     }
+
 }

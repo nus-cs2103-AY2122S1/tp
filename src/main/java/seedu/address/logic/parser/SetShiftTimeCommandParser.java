@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -35,7 +36,9 @@ public class SetShiftTimeCommandParser implements Parser<SetShiftTimeCommand> {
         String shiftDayAndSlot;
         LocalTime[] shiftTimes;
 
-        LocalDate[] dates = initializeLocalDateToThisWeek();
+
+        LocalDate[] dates = DateTimeUtil.getDisplayedDateArray();
+
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME)
