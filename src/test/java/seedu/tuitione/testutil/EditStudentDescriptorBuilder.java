@@ -91,16 +91,6 @@ public class EditStudentDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Parses the {@code remarksToDelete} into a {@code Set<Remark>} and set it to the {@code EditStudentDescriptor}
-     * that we are building.
-     */
-    public EditStudentDescriptorBuilder withRemarksToDelete(String... remarks) {
-        Set<Remark> remarkSet = Stream.of(remarks).map(Remark::new).collect(Collectors.toSet());
-        descriptor.setRemarksToDelete(remarkSet);
-        return this;
-    }
-
     public EditStudentDescriptor build() {
         return descriptor;
     }

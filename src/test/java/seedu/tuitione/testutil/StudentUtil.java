@@ -52,7 +52,7 @@ public class StudentUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade.value).append(" "));
-        if (descriptor.getRemarks().isPresent()) {
+        if (descriptor.getRemarks().isPresent() && !descriptor.getRemarks().get().isEmpty()) {
             Set<Remark> remarks = descriptor.getRemarks().get();
             if (remarks.isEmpty()) {
                 sb.append(PREFIX_REMARK);
@@ -62,4 +62,6 @@ public class StudentUtil {
         }
         return sb.toString();
     }
+
+
 }
