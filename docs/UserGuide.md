@@ -566,11 +566,9 @@ The flags used in `password` are as follows:
 password
 ```
 
-Note that the password needs to be between **8** and **32** characters (inclusive) long, consisting of **LETTERS**, **NUMBERS** **AND** **SYMBOLS**.
+Do note that the password needs to be between **8** and **32** characters (inclusive) long.
 
-The accepted symbols are : `!@#$%&*()_+=|<>?{}~-[]`
-
-Note that `/` is **NOT** allowed in the password.
+The prohibited characters are : `/`, `-`. Note that password cannot contain blank space.
 
 <div class="d-flex alert alert-light pb-0">
 <div class="mr-2">
@@ -578,7 +576,7 @@ Note that `/` is **NOT** allowed in the password.
 </div>
 <div markdown="1" class="w-100">
 ```text
-password -o password123! -n password!321
+password -o oldPassword123! -n newPassword!321
 ```
 </div>
 </div>

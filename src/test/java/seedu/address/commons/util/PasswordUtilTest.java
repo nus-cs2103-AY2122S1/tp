@@ -13,26 +13,24 @@ public class PasswordUtilTest {
         assertFalse(PasswordUtil.isValidPassword(""));
 
         // password too short
-        assertFalse(PasswordUtil.isValidPassword("1232a!"));
+        assertFalse(PasswordUtil.isValidPassword("1234567"));
+
+        // password too long
+        assertFalse(PasswordUtil.isValidPassword("123456789012345678901234567890123"));
 
         // contain illegal characters
-        assertFalse(PasswordUtil.isValidPassword("`````sdfdf1212121"));
-
-        // does not contain all three types of characters
-        assertFalse(PasswordUtil.isValidPassword("gsdjfkhk123123"));
-        assertFalse(PasswordUtil.isValidPassword("@#%$^@&*dfghj"));
-        assertFalse(PasswordUtil.isValidPassword("121212121!!!!"));
-        assertFalse(PasswordUtil.isValidPassword("2132354241412"));
-        assertFalse(PasswordUtil.isValidPassword("sdfgjbsjkdfsdfkhsdf"));
-        assertFalse(PasswordUtil.isValidPassword("!@#$%^&*(*&^%$#$%^&"));
-
-        // contains /
+        assertFalse(PasswordUtil.isValidPassword("/////////////"));
+        assertFalse(PasswordUtil.isValidPassword("--------------"));
+        assertFalse(PasswordUtil.isValidPassword("               "));
         assertFalse(PasswordUtil.isValidPassword("password1234/"));
+        assertFalse(PasswordUtil.isValidPassword("password-1234"));
+        assertFalse(PasswordUtil.isValidPassword("password 1234"));
 
         // valid cases
-        assertTrue(PasswordUtil.isValidPassword("p1!@#$%&*()_+=|<>?{}~-[]"));
-
-        // valid plus additional characters
-        assertTrue(PasswordUtil.isValidPassword("password1!@''`"));
+        assertTrue(PasswordUtil.isValidPassword("p1!@#$%&*()_+=|<>?{}~[]"));
+        assertTrue(PasswordUtil.isValidPassword("12345678"));
+        assertTrue(PasswordUtil.isValidPassword("12345678901234567890123456789012"));
+        assertTrue(PasswordUtil.isValidPassword("password"));
+        assertTrue(PasswordUtil.isValidPassword("password12!"));
     }
 }
