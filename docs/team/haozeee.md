@@ -8,11 +8,11 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Haozeee&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements implemented**:
-    * Implemented delete doctor functionality ([#62](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/62))
-    * Implemented tag doctor functionality ([#65](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/65))
-    * Implemented add remark to doctor functionality ([#65](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/65))
-    * Implemented filter appointments functionality ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
-    * Implemented filter upcoming appointments functionality ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
+    * Implemented and add test cases for delete doctor functionality ([#62](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/62))
+    * Implemented and add test cases for tag doctor functionality ([#65](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/65))
+    * Implemented and add test cases for add remark to doctor functionality ([#65](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/65))
+    * Implemented and add test cases for filter appointments functionality ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
+    * Implemented and add test cases for filter upcoming appointments functionality ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
     * Added ability to list today's appointments ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
 
 * **Enhancements to existing features**:
