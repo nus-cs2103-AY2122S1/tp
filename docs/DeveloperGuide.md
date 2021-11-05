@@ -161,7 +161,7 @@ and `Supplier` the using a similar format with their own fields and command, and
 The AddEmployeeCommand creates an Employee and adds it into the current Employee's list. In the Class Diagram below, we can see what is created when we call upon the 
 AddEmployeeCommand
 
-<img src="images/AddEmployeeCommandClassDiagram.png" width="550" />
+![AddEmployeeCommandClassDiagram](images/AddEmployeeCommandClassDiagram.png)
 
 An AddEmployeeCommand is created through the usage of our `addE` command.
 
@@ -173,11 +173,11 @@ The process in which an `Employee` is added can be broken down into 2.
 In the first step, the user input is parsed in `AddEmployeeCommandParser` and broken down for other methods from other classes to create an `AddEmployeeCommand`.
 This is depicted in the Sequence Diagram below.
 
-<img src="images/AddEmployeeCommandSequenceDiagram.png" width="700" />
+![AddEmployeeCommandSequenceDiagram](images/AddEmployeeCommandSequenceDiagram.png)
 
 After obtaining the `AddEmployeeCommand`, it then calls methods in `Model` to help add the newly created `Employee` to the existing `UniqueEmployeeList`.
 
-<img src="images/AddEmployeeCommandActivityDiagram.png" width="550" />
+![AddEmployeeCommandActivityDiagram](images/AddEmployeeCommandActivityDiagram.png)
 
 #### Design Considerations
 
