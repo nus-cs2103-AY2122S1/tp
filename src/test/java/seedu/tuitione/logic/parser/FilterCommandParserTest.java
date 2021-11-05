@@ -1,5 +1,6 @@
 package seedu.tuitione.logic.parser;
 
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -48,9 +49,10 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidGrade_throwsParseException() {
         // without input for subject field
-        assertParseFailure(parser, " g/A5", Grade.GRADE_MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " g/A5", HEADER_ALERT + Grade.GRADE_MESSAGE_CONSTRAINTS);
 
         // with input for subject field
-        assertParseFailure(parser, " g/A5 s/English", Grade.GRADE_MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " g/A5 s/English",
+                HEADER_ALERT + Grade.GRADE_MESSAGE_CONSTRAINTS);
     }
 }

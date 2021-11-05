@@ -59,7 +59,8 @@ public class TuitioneParserTest {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+                + INDEX_FIRST_STUDENT.getOneBased() + " "
+                + StudentUtil.getEditStudentDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 

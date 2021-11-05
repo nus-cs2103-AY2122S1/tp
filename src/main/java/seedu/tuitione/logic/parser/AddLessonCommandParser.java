@@ -1,5 +1,6 @@
 package seedu.tuitione.logic.parser;
 
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_DAY;
@@ -47,7 +48,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY).get());
         LocalTime startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_TIME).get());
         if (!isValidTime(startTime)) {
-            throw new ParseException(TIME_MESSAGE_CONSTRAINTS);
+            throw new ParseException(HEADER_ALERT + TIME_MESSAGE_CONSTRAINTS);
         }
         LessonTime lessonTime = new LessonTime(dayOfWeek, startTime);
 
