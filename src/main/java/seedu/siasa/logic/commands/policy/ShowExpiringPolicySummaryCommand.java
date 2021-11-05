@@ -16,12 +16,15 @@ public class ShowExpiringPolicySummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "expiringpolicysummary";
 
-    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1).plusDays(1);
-
     public static final String MESSAGE_NO_POLICIES = "There are no policies that are expuring.";
 
-    public static final String MESSAGE_SUCCESS = "There are %d policies expiring within 1 month.\n"
+    public static final String MESSAGE_SUCCESS_PLURAL = "There are %d policies expiring within 1 month.\n"
             + "use the 'expiringpolicy' command to see which ones.";
+
+    public static final String MESSAGE_SUCCESS_SINGULAR = "There is %d policy expiring within 1 month.\n"
+            + "use the 'expiringpolicy' command to see it.";
+
+    private static final LocalDate CUT_OFF_DATE = LocalDate.now().plusMonths(1).plusDays(1);
 
     @Override
     public CommandResult execute(Model model) {
@@ -33,10 +36,12 @@ public class ShowExpiringPolicySummaryCommand extends Command {
                 noOfExpiringPolicies++;
             }
         }
-        if (noOfExpiringPolicies > 0) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, noOfExpiringPolicies));
-        } else {
+        if (noOfExpiringPolicies == 0) {
             return new CommandResult(MESSAGE_NO_POLICIES);
+        } else if (noOfExpiringPolicies == 1) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS_SINGULAR, noOfExpiringPolicies));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS_PLURAL, noOfExpiringPolicies));
         }
     }
 }

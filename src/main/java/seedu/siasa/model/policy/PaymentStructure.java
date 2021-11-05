@@ -4,7 +4,6 @@ import static seedu.siasa.commons.util.AppUtil.checkArgument;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.siasa.commons.util.CurrencyUtil.centsToDollars;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 public class PaymentStructure {
@@ -12,7 +11,6 @@ public class PaymentStructure {
         "Payment amount, frequency and count should be a non-negative integer not exceeding 2147483647.";
 
     public static final int INDEFINITE_NUMBER_OF_PAYMENTS = Integer.MAX_VALUE;
-    public static final int INFINITE_PAYMENT_SUM = Integer.MAX_VALUE;
     // payment amount in cents
     public final int paymentAmount;
     // number of payments in a year
