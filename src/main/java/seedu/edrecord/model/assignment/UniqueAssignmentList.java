@@ -130,6 +130,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if there is another assignment with the same name in the list.
      */
     public boolean hasSameName(Assignment assignment) {
@@ -138,6 +139,8 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
+=======
+>>>>>>> afc49632 (Add ID to assignments)
      * Returns the current counter for this module's assignment ID.
      */
     public int getAssignmentCounter() {
