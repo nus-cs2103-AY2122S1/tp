@@ -454,7 +454,11 @@ related to the UI. In addition, the following classes are utilised:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-The following sequence diagram shows how the `download` command works:
+The following sequence diagrams shows how the `download` command works:
+
+1. Similarly to the Show command, when the user executes the `download` command, the `Logic Manager` and `ProgrammerErrorParser`are used. 
+
+![DownloadSequenceDiagram1](images/commands/DownloadCommand/DownloadSequenceDiagram1.png)
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
 

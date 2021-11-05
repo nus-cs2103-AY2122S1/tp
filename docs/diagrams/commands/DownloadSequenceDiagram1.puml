@@ -1,0 +1,18 @@
+@startuml
+!include ../style.puml
+
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":ProgrammerErrorParser" as abp LOGIC_COLOR
+Participant ":DownloadCommand" as dc LOGIC_COLOR
+
+[-> logic : execute
+activate logic
+logic -> abp ++: parseCommand(commandText)
+create dc
+abp -> dc
+abp -> dc ++: execute(model)
+dc --> abp --: command
+abp --> logic --: command
+<-- logic : DownloadCommandResult
+
+@enduml
