@@ -144,7 +144,9 @@ For assessments, the assessment name, score the student received and percentage 
 * Optional parameters/fields will be indicated within square brackets.
   e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
 
-* For parameters that expect a number value, such as `INDEX` of a student or `SCORE` for assessments, you may encounter unexpected behaviour if you try to enter an extremely large value i.e. not receiving an error message. This is because it is considered an unrealistic usage of CSBook. For example, it is unlikely for assessments to have total scores above a few hundreds or for a TA to have more than a few thousand students
+* For parameters that expect a number value, such as `INDEX` of a student or `SCORE` for assessments, if you try to enter an extremely large value, CSBook will not behave as expected. This is because for assessments to have total scores above a few hundreds or for a TA to have more than a few thousand students is considered unrealistic.
+
+* For parameters that expect a string value i.e. non-numeric value, such as `NAME` of a student or `GROUPNAME` of a group, if you try to enter extremely long values, the name may be truncated. This is because for students or groups to have extremely long names is considered unrealistic. 
 
 * If you specify a parameter multiple times when it is expected only once in the command, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/@albino_monkii t/@albino_api`, only `t/@albino_api` will be taken.
