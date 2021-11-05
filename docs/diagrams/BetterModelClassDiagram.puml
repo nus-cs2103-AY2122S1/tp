@@ -17,7 +17,7 @@ Participant *--> Address
 Participant *--> ParticipantId
 Participant *--> "*" Event
 Participant --> "*" NextOfKin
-Participant --> BirthDate
+Participant --> "0..1" BirthDate
 Event *--> "1" EventName
 Event *--> "1" EventDate
 Event --> "0..1" EventTime
