@@ -5,19 +5,26 @@ title: User Guide
 
 ### About RecruitIn
 
-RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
-![Ui](images/Ui.png)
-### About this guide
 
-This guide aims to help users get familiar with using RecruitIn's features.
-* **New users** can get started by following the steps under [Quick start](#quick-start).
-* **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. A **summary** of existing features can also be viewed under [Command summary](#command-summary).
-* **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
-* Commonly addressed questions can be viewed under [FAQ](#faq). 
+<p align="center">
+    <img align="center" alt="RecruitIn Icon" src="images/RecruitIn.png"/>
+</p>
+
+RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. 
+
+It is optimised for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). 
+
+This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
+
+![Ui](images/Ui.png)
 
 ### Table of Contents
-  * [Quick start](#quick-start)
-  * [Features](#features)
+* [About RecruitIn](#about-recruitin)
+* [About this guide](#about-this-guide)
+* [Glossary](#glossary)
+* [Basic Command Format](#basic-command-format)
+* [Quick start](#quick-start)
+* [Features](#features)
     + [Viewing help : `help`](#viewing-help--help)
     + [Adding an applicant: `add`](#adding-an-applicant-add)
     + [Editing an applicant: `edit`](#editing-an-applicant--edit)
@@ -32,9 +39,60 @@ This guide aims to help users get familiar with using RecruitIn's features.
     + [Exiting the program : `exit`](#exiting-the-program--exit)
     + [Saving the data](#saving-the-data)
     + [Editing the data file](#editing-the-data-file)
-  * [Prefix Input Specifications ***{Advanced}***](#prefix-input-specifications-advanced)
-  * [FAQ](#faq)
-  * [Command summary](#command-summary)
+* [Prefix Input Specifications ***{Advanced}***](#prefix-input-specifications-advanced)
+* [FAQ](#faq)
+* [Command summary](#command-summary)
+
+
+### About this guide
+
+This guide aims to help users get familiar with using RecruitIn's features.
+* **New users** can get started by following the steps under [Quick start](#quick-start).
+* **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. A **summary** of existing features can also be viewed under [Command summary](#command-summary).
+* **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
+* Commonly addressed questions can be viewed under [FAQ](#faq).
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note for all users:**<br>
+
+* If this is your **first time** reading this user guide, it is **recommended** that you visit [Glossary](#glossary) & [Features](#features) to familiarize
+  yourself with the terminology and text formatting used in this user guide. This will help you better understand the user guide.
+
+* If you still wish to skip directly to the feature descriptions, or if you need a refresher on the important terminologies and text formatting used
+  in this user guide, you may visit [Basic Command Format](#basic-command-format).
+
+</div>
+
+<p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
+
+
+### Glossary
+
+| Term | Definition |
+| :---: | :--- |
+| **Command Line Interface (CLI)** | A **CLI** is a user interface that accepts text input to execute system functions.<br><br>RecruitIn uses a **CLI** interface to operate most of its features. |
+| **Command** | **Commands** are user text inputs that executes certain features of RecruitIn. |
+| **Prefix** | A **Prefix** is a fixed text input that indicates an applicant's detail.<br><br>For instance, `n/` is a Prefix that indicates an applicant's name.<br><br>It is used in commands to differentiate user inputs for different applicant details. |
+| **Parameter** | A **Parameter** is a user text input that usually follows after a **Prefix**.<br><br>For instance, in `n/John`, `John` is a **Parameter** of **Prefix** `n/`.<br><br>In some cases, it does not have to follow a **Prefix**.<br><br>For instance, in `delete 1`, `1` is a **Parameter** of the `delete` command. | 
+
+<p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
+
+### Basic Command Format
+
+If you wish to skip directly to specific features, listed below are some **important** text formatting that you should take
+note of so that you may understand their descriptions better.
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
+* Words that are ***bold & italicized*** refers to a stored applicant detail for a certain prefix.<br>
+  e.g. ***Name*** could refer to the value `John` stored as a name in the application.
+* Items in square brackets are optional.<br>
+  e.g. `n/NAME` `[t/TAG]` can be used as n/John Doe t/friend or as n/John Doe.
+* Items with `...` after them can be repeated multiple times, including zero times.<br>
+  e.g. `delete INDEX...` can be used as `delete 1` (i.e. `INDEX` repeated 0 times), `delete 1 2`, `delete 2 4 3` etc.
+
+<p align="center"><a href="#table-of-contents">Click here to return to the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,37 +128,37 @@ Scroll down to the bottom and click on `recruitIn.jar`.
     * e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
     </div>
 
-   1. Use **`clear`** command to clear the existing sample data.
+   1. Use **`clear`** command to clear the existing sample data.<br><br>
    2. Suppose you have an applicant named `John Doe` that you have scouted from online sources and want to add him to
       your list of applicants. `John Doe` has kindly provided you his phone number, `98765432` and email `JohnDoe@gmail.com`. He has also
       stated that he is applying for the role of a `Teacher` and plans to work `Full time` with an expected salary of `3000`. His highest level of
       education is `Bachelors` and has `4` years of experience as a teacher. <br><br>
       Type in **`add`**`n/John Doe p/98765432 e/JohnDoe@gmail.com r/Teacher et/Full time s/3000 l/Bachelors y/4` to add `John Doe` to your
-      list of applicants.
+      list of applicants.<br><br>
    3. Let's also add in another applicant named `Mary Sue`. Her phone number is `91131513` and her email is `MarySue@gmail.com`. She is applying
       for the role of a `Software Engineer` and is looking for an `Internship` with an expected salary of `3000`. Her highest level of education is `High School`
       and has `0` years of experience as a `Software Engineer`. <br><br>
       Type in **`add`**`n/Mary Sue p/91131513 e/MarySue@gmail.com r/Software Engineer et/Internship s/3000 l/High School y/0`.<br><br>
       Your application should look like this:
-      ![After Adding](./images/SampleWorkflow1.png)
+      ![After Adding](./images/SampleWorkflow1.png)<br><br>
    4. As an experienced recruiter, you notice that `Mary Sue` may not have the qualifications for the job as a `Software Engineer` and want to add
       a note to remind yourself.<br><br>
       Type in **`edit`**`2 nt/She might not have the qualifications for the job` to add the note to `Mary Sue`.<br><br>
       Your application should look like this:
-      ![After Note](./images/SampleWorkflow2.png)
+      ![After Note](./images/SampleWorkflow2.png)<br><br>
    5. Your company then informs you that they would like to interview `John Doe` on December 11th 2021 at 10 am `2021-12-11, 10:00` and you want to remind
       yourself that an interview has been arranged for `John Doe`.<br><br>
       Type in **`edit`**`1 i/2021-12-11, 10:00` to add this interview slot to `John Doe`.<br><br>
       Your application should look like this:
-      ![After Interview](./images/SampleWorkflow3.png)
+      ![After Interview](./images/SampleWorkflow3.png)<br><br>
    6. Fast forward the time. Your company informs you that `John Doe` has
       passed his interview and is hired.<br><br>
       Type in **`find`**`n/John Doe p/98765432` to find `John Doe`.<br>
       Type in **`mark`**`1` to mark `John Doe` as done.<br><br>
-      ![After mark](./images/SampleWorkflow4.png)
+      ![After mark](./images/SampleWorkflow4.png)<br><br>
    7. Type in **`list`** to go back to your list of applicants.<br><br>
       Type in **`delete_marked`** to remove all applicants marked as done, such as `John Doe`.<br><br>
-      Now `John Doe` is removed from your list of applicants.
+      Now `John Doe` is removed from your list of applicants.<br><br>
 
 6. Aside from the commands shown in the sample workflow above, you may also find these useful:
 
@@ -120,7 +178,11 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
       * **`exit`** : Exits the app.
 
-7. Refer to the [Features](#features) below for details of available commands.
+
+7. This marks the end of the Quick Start guide. If you would like to know more about using RecruitIn's features,
+   you can refer to the [Features](#features) below for details of available commands.
+
+<p align="center"><a href="#table-of-contents">Click here to see the table of contents</a></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
