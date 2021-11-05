@@ -75,13 +75,11 @@ public class ModuleLesson {
      * Returns true if the {@code otherModuleLesson} clashes with this moduleLesson.
      */
     public boolean clashesWith(ModuleLesson otherModuleLesson) {
-        boolean isOtherModuleLessonStartTimeBetweenThis = otherModuleLesson.getLessonStartTime()
-                .isAfter(getLessonStartTime())
-                && otherModuleLesson.getLessonStartTime().isBefore(getLessonEndTime());
-        boolean isOtherModuleLessonEndTimeBetweenThis = otherModuleLesson.getLessonEndTime()
-                .isAfter(getLessonStartTime())
-                && otherModuleLesson.getLessonEndTime().isBefore(getLessonEndTime());
-        return isOtherModuleLessonStartTimeBetweenThis || isOtherModuleLessonEndTimeBetweenThis;
+        if (getDay().equals(otherModuleLesson.getDay())) {
+            return getLessonStartTime().value.isBefore(otherModuleLesson.getLessonEndTime().value)
+                    && otherModuleLesson.getLessonStartTime().value.isBefore(getLessonEndTime().value);
+        }
+        return false;
     }
 
     /**

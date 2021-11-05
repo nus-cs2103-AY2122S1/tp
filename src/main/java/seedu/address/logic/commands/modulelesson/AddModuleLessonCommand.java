@@ -31,8 +31,7 @@ public class AddModuleLessonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS";
-    public static final String MESSAGE_SUCCESS_BUT_CLASHING = "Warning: Lesson added clashes with existing lesson.\n"
-            + "Nonetheless, lesson is added.\n"
+    public static final String MESSAGE_OVERLAPPING_LESSON = "Warning: Another lesson with overlapping timings exists.\n"
             + "New lesson added: %1$s";
 
     private final ModuleLesson toAdd;
@@ -55,7 +54,7 @@ public class AddModuleLessonCommand extends Command {
 
         CommandResult result;
         if (model.hasModuleLessonClashingWith(toAdd)) {
-            result = new CommandResult(String.format(MESSAGE_SUCCESS_BUT_CLASHING, toAdd));
+            result = new CommandResult(String.format(MESSAGE_OVERLAPPING_LESSON, toAdd));
         } else {
             result = new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         }
