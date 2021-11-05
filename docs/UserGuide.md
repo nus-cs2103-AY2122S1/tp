@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MTR can get your application management tasks done faster than traditional GUI apps.
+MrTechRecruiter (MTR) is a **desktop app for managing job applications, aimed at HRs in technology companies and optimized for use via a Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, MTR can get your application management tasks done faster than traditional GUI apps.
 
 ## Table of Contents 
 * [Quick start](#quick-start)
