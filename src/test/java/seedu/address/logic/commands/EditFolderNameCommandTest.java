@@ -56,6 +56,13 @@ public class EditFolderNameCommandTest {
     }
 
     @Test
+    public void execute_renameExistingFolderWithSameName_failure() {
+        model.addFolder(testFolder1);
+        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(testFolder1, testFolder1);
+        assertThrows(CommandException.class, () -> editFolderNameCommand.execute(model));
+    }
+
+    @Test
     public void execute_folderWithLongName_failure() {
         String longFolderName = "Some Super Strange Long Folder Name";
         Folder longFolder = new Folder(new FolderName(longFolderName));
