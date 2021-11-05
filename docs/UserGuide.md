@@ -233,7 +233,7 @@ Executing any of the commands in this section will bring you to the students int
             </td>
             <td><ul>
               <li><code>p/91234567</code></li>
-              <li><code>p/</code> clears the phone field.</li>
+              <li><code>p/</code> sets the phone field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -242,7 +242,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Must be of the format <em>xxx@yyy</em>.</td>
             <td><ul>
               <li><code>e/jane@gmail.com</code></li>
-              <li><code>e/</code> clears the email field.</li>
+              <li><code>e/</code> set the email field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -251,7 +251,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Refer to the constraints for <a href="#phone-field">Phone</a> above.</td>
             <td><ul>
               <li><code>pp/81234567</code></li>
-              <li><code>pp/</code> clears the parent phone field.</li>
+              <li><code>pp/</code> sets the parent phone field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -260,7 +260,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Refer to the constraints for <a href="#email-field">Email</a> above.</td>
             <td><ul>
               <li><code>pe/john@gmail.com</code></li>
-              <li><code>pe/</code> clears the parent email field.</li>
+              <li><code>pe/</code> sets the parent email field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -270,7 +270,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Not Applicable.</td>
             <td><ul>
               <li><code>sch/Serangoon JC</code></li>
-              <li><code>sch/</code> clears the school field.</li>
+              <li><code>sch/</code> sets the school field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -279,7 +279,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Not Applicable</td>
             <td><ul>
               <li><code>stream/A-Level</code></li>
-              <li><code>stream/</code> clears the academic stream field.</li>
+              <li><code>stream/</code> sets the academic stream field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -290,7 +290,7 @@ Executing any of the commands in this section will bring you to the students int
             </ul></td>
             <td><ul>
               <li><code>lvl/J1</code></li>
-              <li><code>lvl/</code> clears the academic level field.</li>
+              <li><code>lvl/</code> sets the academic level field to empty.</li>
             </ul></td>
         </tr>
         <tr>
@@ -299,7 +299,7 @@ Executing any of the commands in this section will bring you to the students int
             <td>Not Applicable.</td>
             <td><ul>
               <li><code>r/She is weak at maclaurin series.</code></li>
-              <li><code>r/</code> clears the remark field.</li>
+              <li><code>r/</code> sets the remark field to empty.</li>
             </ul></td>
         </tr>
         <tr>
