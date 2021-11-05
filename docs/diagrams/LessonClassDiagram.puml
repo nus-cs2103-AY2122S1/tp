@@ -13,9 +13,9 @@ Class Timing
 Class StudentName
 
 Lesson *--> "1"LessonName
-Lesson *--> "0..1"Capacity
-Lesson *--> "0..1"Price
-Lesson *--> "0..1"Timing
+Lesson *--> "1"Capacity
+Lesson *--> "1"Price
+Lesson *--> "1"Timing
 Lesson -right-> "*"StudentName
 
 

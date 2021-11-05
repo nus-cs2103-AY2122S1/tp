@@ -7,16 +7,14 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Class Student
 Class StudentName
-Class StudentPhone
+Class Phone
 Class ParentName
-Class ParentPhone
 Class Progress
 Class LessonName
 
 Student *--> "1"StudentName
-Student *--> "0..1"StudentPhone
-Student *--> "0..1"ParentName
-Student *--> "0..1"ParentPhone
+Student *--> "0..2" Phone
+Student *--> "1"ParentName
 Student *--> "0..10"Progress
 Student -right-> "*"LessonName
 
