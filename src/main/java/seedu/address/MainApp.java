@@ -100,8 +100,7 @@ public class MainApp extends Application {
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (IOException io) {
-            logger.warning("Problem from saving TAB's last updated date. The data will not be updated"
-                    + "Please restart TAB.");
+            logger.warning("Error encountered when saving updated model. The data will not be updated.");
             return new ModelManager(initialData, userPrefs);
         }
         return model;
