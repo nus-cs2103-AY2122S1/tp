@@ -575,6 +575,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
 
+#### Use cases that have been added to TutorAid
 **Use Case 1: Add a student**
 
 **MSS**
@@ -654,6 +655,208 @@ Preconditions: The student's details have been previously added to TutorAid.
       Steps 2a1 - 2a2 are repeated until a valid syntax is given.
       Use case resumes from step 3.
 
+**Use case 6: View a student's details**
+
+Precondition: The student's details have been added to TutorAid.
+
+**MSS**
+
+1. Tutor requests a list of students
+2. TutorAid shows the list of students
+3. Tutor finds the specific student in the list and requests to view the student's details
+4. TutorAid shows the student's details
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid
+    * 3a1. TutorAid shows an error message
+
+      Use case resumes at step 3
+
+**Use case 13: Set up a recurring class**
+
+Preconditions: The students of the class have been added to TutorAid.
+
+**MSS**
+
+1. Tutor requests to add a class
+2. TutorAid requests for details of the class including the day of the week, time and price
+3. Tutor enters the details of the class
+4. TutorAid creates the class
+5. Tutor <u>adds a student to the class (UC14)</u>
+
+   Step 5 is repeated until all students have been added
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Class appears to overlap with another class as intended by the Tutor
+    * 3a1. TutorAid shows a warning message
+    * 3a2. Tutor dismisses the warning message
+
+      Use case resumes at step 4
+
+* 3b. Class appears to overlap with another class due to a mistake of the Tutor
+    * 3b1. TutorAid shows a warning message
+    * 3b2. Tutor acknowledges the warning message and cancels the creation of the class
+
+      Use case resumes at step 1
+
+* 3c. TutorAid detects invalid input
+    * 3c1. TutorAid shows a warning message
+    * 3c2. Tutor acknowledges the warning message
+
+      Use case resumes at step 3
+
+**Use case 14: Add a student to a class**
+
+Preconditions: The students of the class have been added to TutorAid, and the class has been created correctly.
+
+**MSS**
+
+1. Tutor requests a list of classes
+2. TutorAid displays a list of classes
+3. Tutor requests to add students to a specific class
+4. TutorAid displays the list of students
+5. Tutor chooses some students from the list to be added
+6. TutorAid shows a confirmation message
+7. Tutor confirms the action
+8. TutorAid adds the selected students to the class
+
+   Use case ends.
+
+**Extensions**
+
+* 6a. Tutor declines the confirmation message.
+    * 6a1. TutorAid stops the action.
+
+      Use case resumes at step 3.
+
+**Use Case 15: Edit students in a class**
+
+**MSS**
+
+1. Tutor requests to view the list of his/her students
+2. TutorAid shows the list of students, including each student's index number
+3. Tutor identifies the contact of the student who is to be removed from a specific class and takes note of the index number
+4. Tutor requests to view the list of his/her classes
+5. TutorAid shows the list of classes, including each class's index number
+6. Tutor identifies the class he/she wishes to modify and takes note of the index number
+7. Tutor keys in the student index number and the class index number along with the command to remove a student from a class
+8. TutorAid successfully removes the student corresponding to the given index number from the class corresponding to the
+   given class index number, and displays a message to indicate this
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the command to list students (e.g. command is misspelt)
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+* 4a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+* 7a. TutorAid detects an error in the command to remove a student from a class.
+    * 7a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 7a2. Tutor re-enters the command.
+
+      Steps 7a1-7a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 8.
+
+**Use Case 16: Edit timing of a recurring class**
+
+**MSS**
+
+1. Tutor requests to view the list of his/her classes
+2. TutorAid shows the list of classes, including each class's index number
+3. Tutor identifies the recurring class he/she wishes to modify and takes note of the index number
+4. Tutor keys in the command to modify the timing of a class, along with the new day, start and end timings of the class, and the class index number
+5. TutorAid successfully updates the start and end timings of the class corresponding to the given class index number,
+   and displays a message to indicate this
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    * 1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+* 4a. TutorAid detects an error in the command to edit the timing of a recurring class
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+* 4b. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same day)
+    * 4b1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key in a different day and/or a pair of timings.
+    * 4b2. Tutor re-enters the command with a different day and/or different pair of timings.
+
+      Steps 4b1-4b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+**Use Case 17: Edit timing of an ad-hoc class**
+
+**MSS**
+
+1. Tutor requests to view the list of his/her classes
+2. TutorAid shows the list of classes, including each class's index number
+3. Tutor identifies the ad-hoc class he/she wishes to modify and takes note of the index number
+4. Tutor keys in the command to modify the timing of a class, along with the new date, start and end timings of the class, and the class index number
+5. TutorAid successfully updates the start and end timings of the class corresponding to the given class index number,
+   and displays a message to indicate this
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    * 1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+* 4a. TutorAid detects an error in the command to edit the timing of an ad-hoc class.
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+* 4b. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same date)
+    * 4b1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key a different day and/or a pair of timings.
+    * 4b2. Tutor re-enters the command with a different day and/or different pair of timings.
+
+      Steps 4b1-4b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+#### Use cases that are to be added to TutorAid in the future
+
 **Use case 4: Update a student's progress**
 
 **MSS**
@@ -723,26 +926,6 @@ Preconditions: There is at least one student added to TutorAid.
       Steps 4b1-4b2 are repeated until the command entered is correct.
 
       Use case resumes from step 5.
-
-**Use case 6: View a student's details**
-
-Precondition: The student's details have been added to TutorAid.
-
-**MSS**
-
-1. Tutor requests a list of students
-2. TutorAid shows the list of students
-3. Tutor finds the specific student in the list and requests to view the student's details
-4. TutorAid shows the student's details
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The given index is invalid
-    * 3a1. TutorAid shows an error message
-
-      Use case resumes at step 3
 
 **Use case 7: Add a todo list for a session**
 
@@ -902,186 +1085,6 @@ Preconditions: There is at least one student added to TutorAid.
       
       Use case resumes from step 2.
 
-**Use case 13: Set up a recurring class**
-
-Preconditions: The students of the class have been added to TutorAid.
-
-**MSS**
-
-1. Tutor requests to add a class
-2. TutorAid requests for details of the class including the day of the week, time and price
-3. Tutor enters the details of the class
-4. TutorAid creates the class
-5. Tutor <u>adds a student to the class (UC14)</u>
-
-   Step 5 is repeated until all students have been added
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. Class appears to overlap with another class as intended by the Tutor
-    * 3a1. TutorAid shows a warning message
-    * 3a2. Tutor dismisses the warning message
-
-      Use case resumes at step 4
-
-* 3b. Class appears to overlap with another class due to a mistake of the Tutor
-    * 3b1. TutorAid shows a warning message
-    * 3b2. Tutor acknowledges the warning message and cancels the creation of the class
-
-      Use case resumes at step 1
-
-* 3c. TutorAid detects invalid input
-    * 3c1. TutorAid shows a warning message
-    * 3c2. Tutor acknowledges the warning message
-
-      Use case resumes at step 3
-
-**Use case 14: Add a student to a class**
-
-Preconditions: The students of the class have been added to TutorAid, and the class has been created correctly.
-
-**MSS**
-
-1. Tutor requests a list of classes
-2. TutorAid displays a list of classes
-3. Tutor requests to add students to a specific class
-4. TutorAid displays the list of students
-5. Tutor chooses some students from the list to be added
-6. TutorAid shows a confirmation message
-7. Tutor confirms the action
-8. TutorAid adds the selected students to the class
-
-   Use case ends.
-
-**Extensions**
-
-* 6a. Tutor declines the confirmation message.
-    * 6a1. TutorAid stops the action.
-
-      Use case resumes at step 3.
-
-**Use Case 15: Edit students in a class**
-
-**MSS**
-
-1. Tutor requests to view the list of his/her students
-2. TutorAid shows the list of students, including each student's index number
-3. Tutor identifies the contact of the student who is to be removed from a specific class and takes note of the index number
-4. Tutor requests to view the list of his/her classes
-5. TutorAid shows the list of classes, including each class's index number
-6. Tutor identifies the class he/she wishes to modify and takes note of the index number
-7. Tutor keys in the student index number and the class index number along with the command to remove a student from a class
-8. TutorAid successfully removes the student corresponding to the given index number from the class corresponding to the 
-   given class index number, and displays a message to indicate this
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the command to list students (e.g. command is misspelt)
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-* 4a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-    
-* 7a. TutorAid detects an error in the command to remove a student from a class.
-    * 7a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 7a2. Tutor re-enters the command.
-
-      Steps 7a1-7a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 8.
-
-**Use Case 16: Edit timing of a recurring class**
-
-**MSS**
-
-1. Tutor requests to view the list of his/her classes
-2. TutorAid shows the list of classes, including each class's index number
-3. Tutor identifies the recurring class he/she wishes to modify and takes note of the index number
-4. Tutor keys in the command to modify the timing of a class, along with the new day, start and end timings of the class, and the class index number
-5. TutorAid successfully updates the start and end timings of the class corresponding to the given class index number,
-   and displays a message to indicate this
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
-    * 1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-* 4a. TutorAid detects an error in the command to edit the timing of a recurring class
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
-* 4b. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same day)
-    * 4b1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key in a different day and/or a pair of timings.
-    * 4b2. Tutor re-enters the command with a different day and/or different pair of timings.
-
-      Steps 4b1-4b2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
-**Use Case 17: Edit timing of an ad-hoc class**
-
-**MSS**
-
-1. Tutor requests to view the list of his/her classes
-2. TutorAid shows the list of classes, including each class's index number
-3. Tutor identifies the ad-hoc class he/she wishes to modify and takes note of the index number
-4. Tutor keys in the command to modify the timing of a class, along with the new date, start and end timings of the class, and the class index number
-5. TutorAid successfully updates the start and end timings of the class corresponding to the given class index number,
-   and displays a message to indicate this
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
-    * 1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-* 4a. TutorAid detects an error in the command to edit the timing of an ad-hoc class.
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
-* 4b. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same date)
-    * 4b1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key a different day and/or a pair of timings.
-    * 4b2. Tutor re-enters the command with a different day and/or different pair of timings.
-
-      Steps 4b1-4b2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
 **Use Case 18: Edit pricing of a class**
 
 **MSS**
@@ -1168,6 +1171,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a student from TutorAid
 
 1. Deleting a student while all students are being shown
+   
    1. Prerequisites: List all student using the `list` command. Multiple students in the list.
       
    2. Test case: `del -s 1`<br>
