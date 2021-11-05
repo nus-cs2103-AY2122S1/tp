@@ -346,6 +346,10 @@ Format: `addgroup g/GROUPNAME d/DESCRIPTION`
 
 * Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
+<div markdown="block" class="alert alert-info">
+:information_source: **Note**: `GROUPNAME` is case sensitive. For example, this means that `CS2100` and `cs2100` will refer to two different groups and allowed to coexist.
+</div>
+
 Examples:
 * `addgroup g/CS2100 d/Computer Organisation` creates a group called `CS2100` and the description `Computer Organisation`
 that students can be added into.<br>
