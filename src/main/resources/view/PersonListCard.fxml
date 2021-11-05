@@ -61,7 +61,7 @@
           <Label fx:id="acadLevel" styleClass="cell_small_label" text="\$acadLevel" wrapText="true" />
         </HBox>
         <HBox>
-          <Label fx:id="feesPlaceholder" styleClass="cell_medium_label" text="Outstanding Fees: " wrapText="true" />
+          <Label fx:id="feesPlaceholder" styleClass="cell_medium_label" text="Outstanding Fees: " wrapText="true" minWidth="85" />
           <Label fx:id="outstandingFees" styleClass="cell_small_label" text="\$rates" wrapText="true" />
         </HBox>
         <HBox>
