@@ -1,3 +1,7 @@
+---
+layout: page
+title: ModuLink: Developer Guide
+---
 **Table of Contents**
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
