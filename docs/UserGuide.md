@@ -492,7 +492,7 @@ Examples:
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
   
-#### Viewing lessons: `view`
+#### Viewing a student's lessons: `view`
 
 Views all the lessons for the specified student in TAB.
 
