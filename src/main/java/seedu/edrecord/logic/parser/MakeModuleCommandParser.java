@@ -2,9 +2,6 @@ package seedu.edrecord.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.edrecord.logic.parser.AddCommandParser.arePrefixesPresent;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
