@@ -21,9 +21,11 @@ import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddTodoTaskCommand;
 import seedu.address.logic.commands.ClearAllCommand;
+import seedu.address.logic.commands.ClearGroupsCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.ClearTasksCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditGroupCommand;
@@ -68,8 +70,10 @@ public class HelpWindow extends UiPart<Stage> {
             new CommandCell(AddGroupCommand.COMMAND_WORD, AddGroupCommand.MESSAGE_USAGE),
             new CommandCell(EditGroupCommand.COMMAND_WORD, EditGroupCommand.MESSAGE_USAGE),
             new CommandCell(AddMemberCommand.COMMAND_WORD, AddMemberCommand.MESSAGE_USAGE),
+            new CommandCell(DeleteMemberCommand.COMMAND_WORD, DeleteMemberCommand.MESSAGE_USAGE),
             new CommandCell(DeleteGroupCommand.COMMAND_WORD, DeleteGroupCommand.MESSAGE_USAGE),
             new CommandCell(FindGroupCommand.COMMAND_WORD, FindGroupCommand.MESSAGE_USAGE),
+            new CommandCell(ClearGroupsCommand.COMMAND_WORD, "Clears all groups from the groups list"),
             new CommandCell(ClearAllCommand.COMMAND_WORD, "Clears all data in tApp"),
             new CommandCell(HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE),
             new CommandCell(ExitCommand.COMMAND_WORD, "Exits from tApp"));

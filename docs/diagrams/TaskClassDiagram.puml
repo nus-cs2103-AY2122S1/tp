@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Task <<Rectangle>>{
+Package Task <<Rectangle>> {
 abstract Class Task
 Class TaskName
 Class Description
@@ -16,9 +16,9 @@ Class DeadlineTask
 }
 
 Task *-up-> "1"TaskName
+Task .up.> Priority
 Task *-up-> "0..1"Description
-Task *-up-> Priority
-Task *-right-> "*" Tag
+Task *-right-> "*"Tag
 
 TodoTask -up-|> Task
 EventTask -up-|> Task
