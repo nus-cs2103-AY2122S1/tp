@@ -34,7 +34,7 @@ Given below are my contributions to the project.
   * Creating tags and milestones on Github
 
 * **Enhancements to existing features**:
-  * Enhanced edit feature by allowing editiing of student's grade (Pull requests [\#148](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/148), [\#137](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/137))
+  * Enhanced edit feature by allowing editing of student's grade. This required ensuring different components interacted with each other correctly depending on what field was to be edited, and required modifying existing classes (Pull requests [\#148](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/148), [\#137](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/137))
   * Updated the GUI (Pull requests [\#286](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/286), [\#282](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/282))
   * Wrote additional tests for existing features to increase coverage (Pull requests [\#94](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/94), [\#181](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/181))
   * Updated validity checks and constraints for existing features (Pull requests [\#282](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/282), [\#203](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/203), [\#187](https://github.com/AY2122S1-CS2103T-F13-4/tp/pull/187))
