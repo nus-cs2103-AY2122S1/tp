@@ -54,6 +54,7 @@ public class ParserUtilTest {
         assertEquals(expectedErrorMessage, errorMessage);
 
     }
+
     @Test
     public void parseIndex_emptyInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex(""));
