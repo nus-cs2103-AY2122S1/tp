@@ -58,7 +58,7 @@ Participant *--> Address
 Participant *--> ParticipantId
 Participant --> "0..1" BirthDate
 Participant --> "*" NextOfKin
-Participant *-left-> "*" Event
+Participant "*" <-left-> "*" Event
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

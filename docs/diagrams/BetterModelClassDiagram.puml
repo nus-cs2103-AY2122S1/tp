@@ -15,7 +15,7 @@ Participant *--> Phone
 Participant *--> Email
 Participant *--> Address
 Participant *--> ParticipantId
-Participant *--> "*" Event
+Participant "*" <-left-> "*" Event
 Participant --> "*" NextOfKin
 Participant --> "0..1" BirthDate
 Event *--> "1" EventName
