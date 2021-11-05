@@ -421,66 +421,76 @@ Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `del
 of TutorialClass `G08` to `G00`.
 
 ### Tutorial Group Management Features
-(Contributed by Ngu Yi Yang and Zhou Yirui)
+This feature is split into two parts. 
+* Adding/removing tutorial group to tutorial class (Contributed by Ngu Yi Yang)
+* Adding/removing student to tutorial group. (Contributed by Zhou Yirui)
 
 ClassMATE allows the user to manage information relevant to the TutorialGroup. A User is able to:
 
 1. Add a new tutorial group to an existing tutorial class
 2. Remove an existing tutorial group from an existing tutorial class
-3. List all tutorial groups. (Coming Soon)
-4. View a tutorial group's details (Coming Soon)
-5. Add a student to an existing tutorial group (Coming Soon)
-6. Remove a student from tutorial group (Coming Soon)
+3. Add a student to an existing tutorial group
+4. Remove a student from tutorial group
 
-#### Current Implementation
+#### Current Implementation (Adding/removing tutorial group to tutorial class)
 
 The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
-`UniqueTutorialGroupList` of containing all tutorial groups, as well as a `FliteredList` of `TutorialGroup` instances reflecting the current state of the
-tutorial group list to be displayed to the user. TutorialGroups are identical only if all its attributes, Group name, Class code and Group type are the same.
-The `Classmate` contains a summary of all the logic of the tutorial group commands which can be split into two parts,
+`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial classes. 
+Tutorial groups are identical only if all its attributes, `GroupName`, `ClassCode` and `GroupType` are the same.
+The `Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class
 adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`, and adding students to tutorial groups.
-Displaying of groups in the UI has not been implemented yet.
 
 The following operations are implemented:
 * `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
 * `Classmate#addTutorialGroup(TutorialGroup tutorialGroup)` - Adds tutorial group to ClassMATE
 * `Classmate#removeTutorialGroup(TutorialGroup tutorialGroup)` - Deletes existing tutorial group from ClassMATE
-* `Classmate#getTutorialGroupList()` - Retrieves entire list of tutorial groups.
-
+*  `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
+*  `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
+*  `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
+*  `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
 
 Given below is an example of how the tutorial group features can be used:
 
-Step 1. The user launches the application for the first time. The `UniqueTutorialGroupList` would be derived from the
-initial ClassMATE state.
+Step 1. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
+and the model component checks if the TutorialClass specified by the class code exists, then checks whether the tutorial group already exists
+using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
 
-Step 2. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
-and the model component checks if the TutorialClass specified by the class code exists, adding a new tutorial group to Classmate
-and calls `Model#addTutorialGroup()` if it does.
+The checking of whether the tutorial class and tutorial group already exists is done as such:
+`Classmate` calls the `contains` method of its `UniqueTutorialClassList`. This method is overloaded to accept
+either a `TutorialClass` or `TutorialGroup`. The difference between the implementation of these two is that for the former,
+it simply checks through its list of tutorial classes. For the latter, it uses `TutorialClass#createTestTutorialClass(ClassCode classCode)`
+to retrieve the tutorial class of the tutorial group it is being added to, so that it can then find that tutorial class
+within the `UniqueTutorialClassList` and get its `UniqueTutorialGroupList` using the method `TutorialClass#getTutorialGroups()`
+and from there check whether the tutorial group already exists or not.
+
+Adding of tutorial groups is similar to the checking part in that a tutorial class is created for checking and
+retrieve that tutorial class from the `UniqueTutorialClassList` to add that tutorial group into its `UniqueTutorialGroupList`.
+
 This modifies and saves the state of ClassMATE.
 
-Step 3. The user executes a `deletecg 1` command. The `deletecg` command calls `Model#deleteTutorialGroup()`, modifying and saving the
-state of ClassMATE by deleting the class stored at the given index in the `UniqueTutorialGroupList`.
+Step 2. The user executes a `deletecg c/G06 gn/1 type/OP1` command. The `deletecg` command works in the same way as the `addcg`
+command, except it removes that tutorial group from ClassMATE after checking if it exists.
 
 Using the example of the `AddGroupCommand`,
 when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
 During the parsing, a new TutorialGroup instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
 
-The *Sequence Diagram* is similar to that for adding of Tutorial class, as shown under [Tutorial Class Management Features](#tutorial-class-management-features). Additionally,
-it checks whether the specified tutorial class exists before invoking the `model#addTutorialGroup()` method.
+The *Sequence Diagram* below summarizes the aforementioned steps.
 
+![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
 #### Design Considerations
 
 #### Aspect: Storing Tutorial Groups as lists
-* Alternative 1 (current choice): Use a single list to store all tutorial groups.
+* Alternative 1 (current choice): Storing tutorial groups in their respective tutorial classes
+    * Pros: Faster when performing find functions and groups are better organised.
+    * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented.
+
+* Alternative 2: Use a single list to store all tutorial groups.
     * Pros: Simpler to implement, without the use of multiple lists to store tutorial groups of different types ("OP1" or "OP2").
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
-
-* Alternative 2: Use multiple lists to store groups of different categories (by class or type)
-    * Pros: Faster when performing find functions and groups are better organised.
-    * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented. Deleting of groups may also become more complicated.
-
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

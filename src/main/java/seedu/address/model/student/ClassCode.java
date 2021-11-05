@@ -18,6 +18,7 @@ public class ClassCode implements Comparable<ClassCode> {
     public static final String MESSAGE_EMPTY_CLASS = "The classcode is invalid. Choose a classcode between G01 and G99";
 
     public static final String VALIDATION_REGEX = "[G|g]\\d{2}";
+
     public final String value;
 
     /**
@@ -42,6 +43,7 @@ public class ClassCode implements Comparable<ClassCode> {
     public static boolean isDefaultClassCode(String test) {
         return test.equals("G00");
     }
+
     @Override
     public String toString() {
         return value;
