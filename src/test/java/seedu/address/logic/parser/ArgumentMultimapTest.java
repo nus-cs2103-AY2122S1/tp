@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOMING_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOMING_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
@@ -18,10 +18,14 @@ public class ArgumentMultimapTest {
     public void isAllPresent() {
         ArgumentMultimap allPresent = ArgumentTokenizer.tokenize(" n/ w/ m/",
                 PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK, PREFIX_NORMAL_LIST);
+
         ArgumentMultimap somePresent = ArgumentTokenizer.tokenize(" v/123",
                 PREFIX_VISIT, PREFIX_LAST_VISIT);
+
+        // in this case lv/ is considered the value of key v/
         ArgumentMultimap somePresentNoSpace = ArgumentTokenizer.tokenize(" v/lv/",
-                PREFIX_VISIT, PREFIX_LAST_VISIT);   // in this case lv/ is considered the value of key v/
+                PREFIX_VISIT, PREFIX_LAST_VISIT);
+
 
         assertTrue(allPresent.isAllPresent(PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK, PREFIX_NORMAL_LIST));
         assertTrue(somePresent.isAllPresent(PREFIX_VISIT));
@@ -34,10 +38,12 @@ public class ArgumentMultimapTest {
     public void isMultiplePresent() {
         ArgumentMultimap allPresent = ArgumentTokenizer.tokenize(" n/ w/ m/",
                 PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK, PREFIX_NORMAL_LIST);
+
         ArgumentMultimap somePresent = ArgumentTokenizer.tokenize(" v/123",
                 PREFIX_VISIT, PREFIX_LAST_VISIT);
+        // in this case lv/ is considered the value of key v/
         ArgumentMultimap somePresentNoSpace = ArgumentTokenizer.tokenize(" v/lv/",
-                PREFIX_VISIT, PREFIX_LAST_VISIT);   // in this case lv/ is considered the value of key v/
+                PREFIX_VISIT, PREFIX_LAST_VISIT);
 
         assertTrue(allPresent.isMultiplePresent(PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK, PREFIX_NORMAL_LIST));
         assertTrue(allPresent.isMultiplePresent(PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK));
