@@ -45,5 +45,5 @@ Given below are my contributions to the project.
       * Modified some diagrams (e.g. `Model` and `Ui` class diagrams).
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
+    * PRs reviewed (with non-trivial review comments): [\#67](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/67), [\#73](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/73), [\#107](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/107), [\#123](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/123), [\#134](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/134), [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183), [\#223](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/223), [\#276](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/276), [\#278](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/278), [\#279](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/279), [\#280](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/280), [\#307](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/307), [\#311](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/311).
 
