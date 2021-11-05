@@ -41,7 +41,10 @@ public class CsvUtil {
             entry(PREFIX_EMAIL, (p)->p.getEmail().toString()),
             entry(PREFIX_ADDRESS, (p)->p.getAddress().toString()),
             entry(PREFIX_BIRTHDAY, (p)->p.getBirthday().map(x->x.toString()).orElse("")),
-            entry(PREFIX_TAG, (p)->p.getTags().toString())
+            entry(PREFIX_TAG, (p)-> p.getTags().isEmpty()
+                    ? ""
+                    : p.getTags().stream().map(x->x.toString()).collect(Collectors.joining(","))
+            )
     );
 
     /**

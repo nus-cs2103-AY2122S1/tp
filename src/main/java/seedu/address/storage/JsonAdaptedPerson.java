@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
@@ -26,11 +24,6 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
-    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
-    private static final String INVALID_BIRTHDAY_MESSAGE = "%s's birthday %s is invalid. "
-            + "Will start with empty birthday.";
-    private static final String INVALID_PIN_MESSAGE = "%s's pin status %s is invalid. "
-            + "Will start with not pinned by default.";
 
     private final String name;
     private final String phone;
@@ -121,13 +114,9 @@ class JsonAdaptedPerson {
         final Pin modelPin;
 
         if (pin == null) {
-            logger.info(String.format(INVALID_PIN_MESSAGE, name, "null"));
-            modelPin = new Pin(false);
-            //throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
         } else if (!Pin.isValidPinStatus(pin)) {
-            logger.info(String.format(INVALID_PIN_MESSAGE, name, pin));
-            modelPin = new Pin(false);
-            //throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
+            throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
         } else {
             modelPin = new Pin(pin);
         }
@@ -140,11 +129,13 @@ class JsonAdaptedPerson {
 
         final Birthday modelBirthday;
         if (!Birthday.isValidFormat(birthday)) {
-            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
-            modelBirthday = null;
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
         } else if (!Birthday.isValidDate(birthday)) {
-            logger.info(String.format(INVALID_BIRTHDAY_MESSAGE, name, birthday));
-            modelBirthday = null;
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        } else if (Birthday.isFutureDate(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        } else if (Birthday.isYear0000(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
         } else {
             modelBirthday = new Birthday(birthday);
         }
