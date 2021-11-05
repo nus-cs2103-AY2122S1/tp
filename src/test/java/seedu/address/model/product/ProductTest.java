@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalProducts.IPAD;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.commons.Name;
 import seedu.address.testutil.ProductBuilder;
 
 public class ProductTest {
@@ -72,7 +73,22 @@ public class ProductTest {
         // different quantity -> returns false
         editedCannon = new ProductBuilder(CANNON).withQuantity(VALID_QUANTITY_DAISY).build();
         assertFalse(CANNON.equals(editedCannon));
+    }
 
+    @Test
+    public void hasEnoughStock_notEnough_returnsFalse() {
+        // quantity of the product is null
+        Product product = new Product(new Name("productX"), new UnitPrice("1"), null);
+        assertFalse(product.hasEnoughStock(new Quantity("1")));
+        // stock is not enough
+        Product productWithStock = new Product(new Name("productY"), new UnitPrice("1"), new Quantity("1"));
+        assertFalse(productWithStock.hasEnoughStock(new Quantity("100")));
+    }
 
+    @Test
+    public void hasEnoughStock_enough_returnsTrue() {
+        Product product = new Product(new Name("productZ"), new UnitPrice("1"), new Quantity("100"));
+        assertTrue(product.hasEnoughStock(new Quantity("1")));
+        assertTrue(product.hasEnoughStock(new Quantity("100")));
     }
 }
