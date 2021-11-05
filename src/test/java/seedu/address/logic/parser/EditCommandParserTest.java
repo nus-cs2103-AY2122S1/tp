@@ -61,7 +61,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "0 " + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string ", MESSAGE_INVALID_COUNT_INDEX);
+        assertParseFailure(parser, "1 some random string " + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
 
         // empty preamble
         assertParseFailure(parser, NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);

@@ -32,13 +32,10 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_BAGEL = "Bagel";
     public static final String VALID_NAME_DONUT = "Donut";
-    public static final String VALID_NAME_100PLUS = "100Plus";
-    public static final String VALID_NAME_H20 = "H20";
     public static final String VALID_ID_BAGEL = "094021";
     public static final String VALID_ID_DONUT = "789013";
     public static final String VALID_COUNT_BAGEL = "5";
     public static final String VALID_COUNT_DONUT = "6";
-    public static final String VALID_COUNT_ONE = "1";
     public static final String VALID_COSTPRICE_BAGEL = "5.0";
     public static final String VALID_COSTPRICE_DONUT = "6.0";
     public static final String VALID_SALESPRICE_BAGEL = "6.0";
@@ -52,17 +49,12 @@ public class CommandTestUtil {
     public static final String ID_DESC_DONUT = " " + PREFIX_ID + VALID_ID_DONUT;
     public static final String COUNT_DESC_BAGEL = " " + PREFIX_COUNT + VALID_COUNT_BAGEL;
     public static final String COUNT_DESC_DONUT = " " + PREFIX_COUNT + VALID_COUNT_DONUT;
-    public static final String COUNT_DESC_ONE = " " + PREFIX_COUNT + VALID_COUNT_ONE;
-    public static final String COUNT_DESC_MAX_INT = " " + PREFIX_COUNT + String.valueOf(Integer.MAX_VALUE);
     public static final String SALESPRICE_DESC_BAGEL = " " + PREFIX_SALESPRICE + VALID_SALESPRICE_BAGEL;
-    public static final String SALESPRICE_DESC_DONUT = " " + PREFIX_SALESPRICE + VALID_SALESPRICE_DONUT;
     public static final String COSTPRICE_DESC_BAGEL = " " + PREFIX_COSTPRICE + VALID_COSTPRICE_BAGEL;
-    public static final String COSTPRICE_DESC_DONUT = " " + PREFIX_COSTPRICE + VALID_COSTPRICE_DONUT;
     public static final String TAG_DESC_BAKED = " " + PREFIX_TAG + VALID_TAG_BAKED;
     public static final String TAG_DESC_POPULAR = " " + PREFIX_TAG + VALID_TAG_POPULAR;
 
     public static final String INVALID_NAME_SPECIAL_CHAR = "Cake$";
-    public static final String INVALID_NAME_EMPTY_STRING = "";
     public static final String INVALID_NAME_DESC =
             " " + PREFIX_NAME + INVALID_NAME_SPECIAL_CHAR; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
@@ -71,15 +63,8 @@ public class CommandTestUtil {
     public static final String INVALID_ID_NEGATIVE_NUMBER = " " + PREFIX_ID + "-123232";
     public static final String INVALID_ID_SEVEN_DIGITS = " " + PREFIX_ID + "1234567";
     public static final String INVALID_COUNT_LETTER = " " + PREFIX_COUNT + "abc";
-    public static final String INVALID_COUNT_SPECIAL_CHAR = " " + PREFIX_COUNT + "1234$";
     public static final String INVALID_COUNT_ZERO = " " + PREFIX_COUNT + "0";
     public static final String INVALID_COUNT_NEGATIVE_VALUE = " " + PREFIX_COUNT + "-1";
-    public static final String INVALID_COUNT_BEYOND_MAX_INT = " " + PREFIX_COUNT + "2147483648";
-    public static final String INVALID_SALESPRICE_BAGEL = " " + PREFIX_SALESPRICE + "asdf";
-    public static final String INVALID_COSTPRICE_BAGEL = " " + PREFIX_COSTPRICE + "asdf";
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final ItemDescriptor DESC_BAGEL;
     public static final ItemDescriptor DESC_DONUT;
