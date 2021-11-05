@@ -11,11 +11,12 @@ import static seedu.address.testutil.TypicalFriends.BENSON_FRIEND_ID;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
@@ -71,12 +72,12 @@ public class TypicalGameFriendLinks {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static Set<GameFriendLink> getTypicalGameFriendLinksList() {
-        Set<GameFriendLink> set = new HashSet<>();
-        for (GameFriendLink game : getTypicalGameFriendLinks()) {
-            set.add(game);
+    public static Map<GameId, GameFriendLink> getTypicalGameFriendLinksList() {
+        Map<GameId, GameFriendLink> map = new HashMap<>();
+        for (GameFriendLink gameFriendLink : getTypicalGameFriendLinks()) {
+            map.put(gameFriendLink.getGameId(), gameFriendLink);
         }
-        return set;
+        return map;
     }
 
     public static List<GameFriendLink> getTypicalGameFriendLinks() {

@@ -182,11 +182,6 @@ public class UniqueFriendsList implements Iterable<Friend> {
                 && internalList.equals(((UniqueFriendsList) other).internalList));
     }
 
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
     /**
      * Returns true if {@code friends} contains only unique friends.
      */

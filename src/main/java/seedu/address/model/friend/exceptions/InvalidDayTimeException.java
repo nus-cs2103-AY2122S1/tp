@@ -9,8 +9,4 @@ public class InvalidDayTimeException extends IllegalValueException {
     public InvalidDayTimeException(String message) {
         super(message);
     }
-
-    public InvalidDayTimeException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

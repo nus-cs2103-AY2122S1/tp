@@ -2,6 +2,7 @@ package seedu.address.model.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGames.MINECRAFT;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.game.exceptions.DuplicateGameException;
 import seedu.address.model.game.exceptions.GameNotFoundException;
+import seedu.address.testutil.GameBuilder;
 
 public class UniqueGamesListTest {
 
@@ -45,6 +47,14 @@ public class UniqueGamesListTest {
     public void add_duplicateGame_throwsDuplicateGameException() {
         uniqueGamesList.add(MINECRAFT);
         assertThrows(DuplicateGameException.class, () -> uniqueGamesList.add(MINECRAFT));
+    }
+
+    @Test
+    public void getGame_nonExistentGameId_throwsGameNotFoundException() {
+        GameId nonExistentGameId = new GameId("XXX");
+        assertFalse(uniqueGamesList.containsId(nonExistentGameId)); // confirm doesn't exist
+
+        assertThrows(GameNotFoundException.class, () -> uniqueGamesList.getGame(nonExistentGameId));
     }
 
     @Test
@@ -144,5 +154,28 @@ public class UniqueGamesListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () ->
                 uniqueGamesList.asUnmodifiableObservableList().remove(0));
+    }
+
+
+    @Test
+    public void equals() {
+        // same object -> true
+        assertEquals(uniqueGamesList, uniqueGamesList);
+
+        // null -> false
+        assertNotEquals(uniqueGamesList, null);
+
+        // different type -> false
+        assertNotEquals(uniqueGamesList, "String");
+
+        // different objects, same values -> true
+        UniqueGamesList sameValues = new UniqueGamesList();
+        uniqueGamesList.iterator().forEachRemaining(sameValues::add);
+        assertEquals(uniqueGamesList, sameValues);
+
+        // different values -> false
+        UniqueGamesList diffValues = new UniqueGamesList();
+        diffValues.add(new GameBuilder().withGameId("NewGame").build());
+        assertNotEquals(uniqueGamesList, diffValues);
     }
 }

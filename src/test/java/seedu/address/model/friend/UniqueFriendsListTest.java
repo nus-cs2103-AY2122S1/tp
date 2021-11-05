@@ -2,6 +2,7 @@ package seedu.address.model.friend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -299,5 +300,27 @@ public class UniqueFriendsListTest {
     public void removeAll_nullGame_throwsNullPointerException() {
         // null game input
         assertThrows(NullPointerException.class, () -> uniqueFriendsList.removeLinkAllFriends(null));
+    }
+
+    @Test
+    public void equals() {
+        // same object -> true
+        assertEquals(uniqueFriendsList, uniqueFriendsList);
+
+        // null -> false
+        assertNotEquals(uniqueFriendsList, null);
+
+        // different type -> false
+        assertNotEquals(uniqueFriendsList, "String");
+
+        // different objects, same values -> true
+        UniqueFriendsList sameValues = new UniqueFriendsList();
+        uniqueFriendsList.iterator().forEachRemaining(sameValues::add);
+        assertEquals(uniqueFriendsList, sameValues);
+
+        // different values -> false
+        UniqueFriendsList diffValues = new UniqueFriendsList();
+        diffValues.add(new FriendBuilder().withFriendId("NewFriend").build());
+        assertNotEquals(uniqueFriendsList, diffValues);
     }
 }

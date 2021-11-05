@@ -28,7 +28,7 @@ public class FriendScheduleFreePredicate implements Predicate<Friend> {
     public boolean test(Friend friend) {
         try {
             return friend.isFriendScheduleFree(hour, day);
-        } catch (InvalidHourOfDayException | InvalidDayTimeException e) {
+        } catch (InvalidHourOfDayException | InvalidDayTimeException e) { // unreachable but necessary catch block
             // return false since if hour or day is invalid, there should be no matches
             return false;
         }
@@ -38,11 +38,13 @@ public class FriendScheduleFreePredicate implements Predicate<Friend> {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else if (!(other instanceof FriendScheduleFreePredicate)) {
-            return false;
-        } else {
-            FriendScheduleFreePredicate otherPredicate = (FriendScheduleFreePredicate) other;
-            return otherPredicate.hour.equals(hour) && otherPredicate.day.equals(day);
         }
+
+        if (!(other instanceof FriendScheduleFreePredicate)) {
+            return false;
+        }
+
+        FriendScheduleFreePredicate otherPredicate = (FriendScheduleFreePredicate) other;
+        return otherPredicate.hour.equals(hour) && otherPredicate.day.equals(day);
     }
 }

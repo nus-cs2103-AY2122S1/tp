@@ -93,17 +93,6 @@ public class GamesList implements ReadOnlyGamesList {
     }
 
     /**
-     * Replaces the given game {@code target} in the list with {@code editedGame}.
-     * {@code target} must exist in the games list.
-     * The game identity of {@code editedGame} must not be the same as another existing game in the games list.
-     */
-    public void setGame(Game target, Game editedGame) {
-        requireNonNull(editedGame);
-
-        games.setGame(target, editedGame);
-    }
-
-    /**
      * Removes {@code key} from this {@code GamesList}.
      * {@code key} must exist in the games list.
      */
@@ -129,10 +118,5 @@ public class GamesList implements ReadOnlyGamesList {
         return other == this // short circuit if same object
             || (other instanceof GamesList // instanceof handles nulls
             && games.equals(((GamesList) other).games));
-    }
-
-    @Override
-    public int hashCode() {
-        return games.hashCode();
     }
 }

@@ -179,13 +179,6 @@ public interface Model {
     Game getGame(GameId gameId);
 
     /**
-     * Replaces the given game {@code target} with {@code editedGame}.
-     * {@code target} must exist in the games book.
-     * The game identity of {@code editedGame} must not be the same as another existing game in the games book.
-     */
-    void setGame(Game target, Game editedGame);
-
-    /**
      * Returns an unmodifiable view of the filtered game list
      */
     ObservableList<Game> getFilteredGamesList();

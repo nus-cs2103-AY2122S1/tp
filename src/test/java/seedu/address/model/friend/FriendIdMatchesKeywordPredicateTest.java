@@ -1,6 +1,8 @@
 package seedu.address.model.friend;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -8,34 +10,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.FriendBuilder;
 
 public class FriendIdMatchesKeywordPredicateTest {
-
-    @Test
-    public void equals() {
-        String firstKeyword = "first";
-        String secondKeyword = "second";
-
-        FriendIdMatchesKeywordPredicate firstPredicate =
-                new FriendIdMatchesKeywordPredicate(firstKeyword);
-        FriendIdMatchesKeywordPredicate secondPredicate =
-                new FriendIdMatchesKeywordPredicate(secondKeyword);
-
-        // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
-
-        // same values -> returns true
-        FriendIdMatchesKeywordPredicate firstPredicateCopy =
-                new FriendIdMatchesKeywordPredicate(firstKeyword);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
-
-        // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
-
-        // null -> returns false
-        assertFalse(firstPredicate.equals(null));
-
-        // different person -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
-    }
 
     @Test
     public void test_idMatchesKeywords_returnsTrue() {
@@ -60,6 +34,34 @@ public class FriendIdMatchesKeywordPredicateTest {
                 new FriendIdMatchesKeywordPredicate("Alice");
         assertFalse(predicate.test(new FriendBuilder().withFriendId("Ally").withFriendName("Alice")
                 .build()));
+    }
+
+    @Test
+    public void equals() {
+        String firstKeyword = "first";
+        String secondKeyword = "second";
+
+        FriendIdMatchesKeywordPredicate firstPredicate =
+                new FriendIdMatchesKeywordPredicate(firstKeyword);
+        FriendIdMatchesKeywordPredicate secondPredicate =
+                new FriendIdMatchesKeywordPredicate(secondKeyword);
+
+        // same object -> returns true
+        assertEquals(firstPredicate, firstPredicate);
+
+        // null -> returns false
+        assertNotEquals(firstPredicate, null);
+
+        // different types -> returns false
+        assertNotEquals(firstPredicate, "String");
+
+        // same values -> returns true
+        FriendIdMatchesKeywordPredicate firstPredicateCopy =
+                new FriendIdMatchesKeywordPredicate(firstKeyword);
+        assertEquals(firstPredicate, firstPredicateCopy);
+
+        // different person -> returns false
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 }
 
