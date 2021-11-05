@@ -101,6 +101,10 @@ public class UniqueGamesList implements Iterable<Game> {
         }
     }
 
+    /**
+     * Replaces the games in the internal list with the replacement list that is passed.
+     * @param replacement The list to replace the current list.
+     */
     public void setGames(UniqueGamesList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

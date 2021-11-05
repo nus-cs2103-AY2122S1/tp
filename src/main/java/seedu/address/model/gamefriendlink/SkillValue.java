@@ -44,6 +44,10 @@ public class SkillValue {
         }
     }
 
+    /**
+     * Returns the integer skill value of the {@Code SkillValue} object.
+     * @return Integer skill value.
+     */
     public Integer getSkillVal() {
         return this.skillVal;
     }

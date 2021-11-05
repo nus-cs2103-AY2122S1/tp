@@ -34,6 +34,10 @@ public class HourOfDay {
         return hourOfDay >= MIN_HOUR && hourOfDay <= MAX_HOUR;
     }
 
+    /**
+     * Get the integer value of the hour for the {@Code HourOfDay} object.
+     * @return Integer value of hour.
+     */
     public int getHour() {
         return hour;
     }

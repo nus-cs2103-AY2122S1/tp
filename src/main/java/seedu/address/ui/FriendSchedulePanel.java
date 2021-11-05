@@ -13,7 +13,7 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendName;
 
 /**
- * Panel containing the list of days.
+ * A panel containing the list of days.
  */
 public class FriendSchedulePanel extends UiPart<Region> {
     private static final String FXML = "FriendSchedulePanel.fxml";

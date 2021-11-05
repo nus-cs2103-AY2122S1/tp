@@ -48,6 +48,7 @@ public class AddFriendCommand extends Command {
                 toAdd.getFriendId()), CommandType.FRIEND_ADD);
     }
 
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

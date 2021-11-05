@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
 
 /**
- * Panel containing the list of persons.
+ * A panel containing the list of persons.
  */
 public class FriendListPanel extends UiPart<Region> {
     private static final String FXML = "FriendListPanel.fxml";

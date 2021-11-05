@@ -51,22 +51,42 @@ public class GameFriendLink {
         this.skillValue = skillValue;
     }
 
+    /**
+     * Returns the {@Code GameId} of the {@Code GameFriendLink}
+     * @return {@Code GameId} of the {@Code GameFriendLink}
+     */
     public GameId getGameId() {
         return gameId;
     }
 
+    /**
+     * Returns the {@Code GameId} of the {@Code GameFriendLink}
+     * @return {@Code GameId} of the {@Code GameFriendLink}
+     */
     public FriendId getFriendId() {
         return friendId;
     }
 
+    /**
+     * Returns the {@Code UserName} of the {@Code GameFriendLink}
+     * @return {@Code UserName} of the {@Code GameFriendLink}
+     */
     public UserName getUserName() {
         return userName;
     }
 
+    /**
+     * Returns the {@Code SkillValue} of the {@Code GameFriendLink}
+     * @return {@Code SkillValue} of the {@Code GameFriendLink}
+     */
     public SkillValue getSkillValue() {
         return skillValue;
     }
 
+    /**
+     * Sets a new skill value to the {@Code GameFriendLink}.
+     * @param skillValue The new skill value to assign to the GameFriendLink.
+     */
     public void setSkillValue(SkillValue skillValue) {
         this.skillValue = skillValue;
     }

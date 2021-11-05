@@ -12,7 +12,7 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.game.Game;
 
 /**
- * Panel containing the list of Games.
+ * A panel containing the list of Games.
  */
 public class GameListPanel extends UiPart<Region> {
     private static final String FXML = "GameListPanel.fxml";

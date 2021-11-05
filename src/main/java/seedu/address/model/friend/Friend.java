@@ -145,6 +145,14 @@ public class Friend {
         return this.friendId.equals(friend.getFriendId());
     }
 
+    /**
+     * Checks whether a friend is available at the specified hour and day of the week.
+     * @param hour The hour to check availability.
+     * @param dayOfWeek The day of the week to check availability.
+     * @return Boolean value representing the availability of the friend.
+     * @throws InvalidHourOfDayException when an invalid hour is given.
+     * @throws InvalidDayTimeException when an invalid day is given.
+     */
     public boolean isFriendScheduleFree(HourOfDay hour, DayOfWeek dayOfWeek)
             throws InvalidHourOfDayException, InvalidDayTimeException {
         return this.schedule.isTimeslotAvailable(hour.getHour(), dayOfWeek.getValue());
