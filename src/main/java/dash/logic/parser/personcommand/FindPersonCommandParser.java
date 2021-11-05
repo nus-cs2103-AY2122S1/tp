@@ -21,6 +21,7 @@ import dash.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
 import dash.logic.parser.ArgumentMultimap;
 import dash.logic.parser.ArgumentTokenizer;
 import dash.logic.parser.Parser;
+import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
 
 
@@ -110,7 +111,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         } else {
             tagList.addAll(tags);
         }
-        return Optional.of(tagList);
+        return Optional.of(ParserUtil.parseTagList(tagList));
     }
 
 }

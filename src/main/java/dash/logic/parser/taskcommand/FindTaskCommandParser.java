@@ -150,7 +150,7 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
         } else {
             tagList.addAll(tags);
         }
-        return Optional.of(tagList);
+        return Optional.of(ParserUtil.parseTagList(tagList));
     }
 
 }
