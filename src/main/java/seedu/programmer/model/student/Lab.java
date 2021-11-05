@@ -47,7 +47,7 @@ public class Lab implements DisplayableObject {
         this.labNum = labNum;
     }
 
-    public Lab(){}
+    public Lab() {}
 
     public LabNum getLabNum() {
         return labNum;
@@ -61,8 +61,8 @@ public class Lab implements DisplayableObject {
         return totalScore;
     }
 
-    public String getLabNumValue() {
-        return labNum.getLabNum().toString();
+    public int getLabNumValue() {
+        return labNum.getLabNum();
     }
 
     public String getLabResultValue() {
@@ -116,7 +116,6 @@ public class Lab implements DisplayableObject {
                 && actualScore.equals(otherLab.getLabResult())
                 && totalScore.equals(otherLab.getLabTotal());
     }
-
 
     @Override
     public String toString() {

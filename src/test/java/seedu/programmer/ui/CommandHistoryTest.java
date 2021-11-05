@@ -31,6 +31,7 @@ public class CommandHistoryTest {
 
         commandHistoryTwo.add("test input three");
         assertNotEquals(commandHistory, commandHistoryTwo);
+        assertTrue(commandHistory.isAtLastIndex());
     }
 
     @Test
@@ -68,6 +69,7 @@ public class CommandHistoryTest {
         // Simulate multiple up keys pressed
         assertEquals(commandHistory.getCurrentCommand(), "one");
         assertEquals(commandHistory.getCurrentCommand(), "one");
+        assertTrue(commandHistory.isAtFirstIndex());
     }
 
     @Test
@@ -86,12 +88,14 @@ public class CommandHistoryTest {
 
         // Retrieve the next command
         assertEquals(commandHistory.getNextCommand(), "two");
-        // Retrieve the next command
+        // Retrieve the next command again
         assertEquals(commandHistory.getNextCommand(), "three");
+        assertTrue(commandHistory.isAtLastIndex());
     }
 
     @Test
     public void getCurrentCommand_emptyHistory_returnsEmptyString() {
+        assertTrue(commandHistory.isEmpty());
         assertEquals(commandHistory.getCurrentCommand(), "");
     }
 
