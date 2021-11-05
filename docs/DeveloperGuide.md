@@ -371,9 +371,14 @@ An implemented improvement to the text-based input method is to allow users to e
 commands by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle 
 feature which greatly improves the speed and usability of the app.
 
-An example use case would be when a user wants to add two tasks with descriptions "CS2100 Tutorial 7" and "CS2100 
+Suppose the user is on the Tasks tab. The following activity diagram illustrates a possible workflow for a user 
+entering tasks, and shows how the workflow is enhanced by this feature.
+
+![CreateSimilarTasksActivityDiagram](images/CreateSimilarTasksActivityDiagram.png)
+
+A concrete example would be when a user wants to add two tasks with descriptions "CS2100 Tutorial 7" and "CS2100 
 Tutorial 8" to their task List. Instead of typing out a near-identical command for the second task, they could press 
-the up arrow key, access their previously entered commmand and change '7' to '8'.
+the up arrow key, access their previously entered commmand and change '7' to '8'. 
 
 Another example use case would be when a user accidentally deletes an entry in Dash by entering the wrong index. As 
 long as the entry was added within the past 10 commands, the user can press the up arrow key until the command that 
@@ -382,20 +387,27 @@ corresponds to adding that entry is set in the command box. The user can then si
 #### Implementation
 
 The implementation involves adding a new class `UserInputList` to `Model`. When a user enters an input in the command 
-box, the `UserInputList` is updated in `LogicManager` if this user input results in a valid command execution. On app 
-startup and after any successful command execution, the `CommandBox` is reinitialised with an updated list of user 
-input strings from the `Model`.
+box, the `UserInputList` is updated in `LogicManager` if this user input results in a valid command execution. The 
+following sequence diagram shows how the `UserInputList` is updated when the valid input `help` is entered while not
+already on the help tab. It also shows how `Storage` is updated. Details related to command parsing and execution are 
+omitted.
 
-In order to allow the user to scroll through their past inputs to select a particular one, we must keep track of which 
+![SaveUserInputSequenceDiagram](images/SaveUserInputSequenceDiagram.png)
+
+Since the storage of the`UserInputList` is very similar to the storage of the `TaskList` and `AddressBook`, 
+implementation details are not shown above. In summary, when the app is started, a `UserInputList` is constructed using 
+the `userinputlist.json` file in the `data` folder. Conversely, when the app is closed, the `userinputlist.json` file 
+is updated using the `UserInputList`.
+
+On startup and after any successful command execution, the `CommandBox` is reinitialised with an updated list of user 
+input strings from the `Model`. 
+
+In order to allow the user to look through their past inputs to select a particular one, we must keep track of which 
 input string the CLI is currently displaying. This is implemented in `CommandBox` by keeping track of the index of the 
 string being displayed within the list of input strings. When the up or down arrow keys are pressed, `CommandBox` 
-increments or decrements the index, retrieves the new string corresponding to it, and displays it. 
+increments or decrements the index, retrieves the new string corresponding to it, and displays it.
 
-The storage of the `UserInputList` works similarly to the storage of the `TaskList` and `AddressBook`. When the app is 
-started, a `UserInputList` is constructed using the `userinputlist.json` file in the `data` folder. Conversely, when 
-the app is closed, the `userinputlist.json` file is updated using the `UserInputList`.
-
-#### Design considerations
+#### Alternatives Considered and Design Considerations
 
 - Keeping track of different lists of user inputs for different tabs
 

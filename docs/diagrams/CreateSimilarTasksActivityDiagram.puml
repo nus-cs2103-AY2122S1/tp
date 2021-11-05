@@ -1,0 +1,12 @@
+@startuml
+start
+:User enters a command, creating a task;
+if () then ([User wants to create a similar task])
+    :User uses the up and down arrow keys to get previous input in command box;
+    :User uses left and right arrow keys to move the text cursor;
+    :User edits the field to be changed;
+    :User enters the command, creating a similar task;
+else ([else])
+endif
+stop
+@enduml

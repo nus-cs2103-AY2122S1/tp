@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+Participant ":MainWindow" as mainWindow UI_COLOR
+Participant ":LogicManager" as logicManager LOGIC_COLOR
+Participant ":ModelManager" as modelManager MODEL_COLOR
+Participant ":UserInputList" as userInputList MODEL_COLOR
+Participant ":StorageManager" as storageManager STORAGE_COLOR
+
+activate mainWindow UI_COLOR
+
+mainWindow -[UI_COLOR]> logicManager : execute("help")
+activate logicManager LOGIC_COLOR
+
+logicManager -[LOGIC_COLOR]> modelManager : addUserInput("help")
+activate modelManager MODEL_COLOR
+
+modelManager -[MODEL_COLOR]-> userInputList : add("help")
+activate userInputList MODEL_COLOR
+userInputList -[MODEL_COLOR]-> modelManager
+deactivate userInputList
+
+modelManager -[MODEL_COLOR]-> logicManager
+deactivate modelManager
+
+logicManager -[LOGIC_COLOR]> storageManager : saveUserInputList(userInputList)
+activate storageManager STORAGE_COLOR
+
+storageManager -[STORAGE_COLOR]> storageManager : Save to file
+activate storageManager STORAGE_COLOR_T1
+storageManager --[STORAGE_COLOR]> storageManager
+deactivate storageManager
+
+storageManager --[STORAGE_COLOR]> logicManager
+deactivate storageManager
+
+logicManager --[LOGIC_COLOR]> mainWindow
+deactivate logicManager
+
+@enduml
