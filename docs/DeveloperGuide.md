@@ -9,11 +9,11 @@ title: Developer Guide
 1. [Setting up & getting started](#2-setting-up--getting-started)<br>
 1. <details><summary><a href="#3-design">Design</a></summary>
         3.1 <a href="#31-architecture">Architecture</a><br>
-        3.2 <a href="#32-ui-component">UI component</a><br>
-        3.3 <a href="#33-logic-component">Logic component</a><br>
-        3.4 <a href="#34-model-component">Model component</a><br>
-        3.5 <a href="#35-storage-component">Storage component</a><br>
-        3.6 <a href="#36-common-classes">Common classes</a><br>
+        3.2 <a href="#32-ui-component">UI Component</a><br>
+        3.3 <a href="#33-logic-component">Logic Component</a><br>
+        3.4 <a href="#34-model-component">Model Component</a><br>
+        3.5 <a href="#35-storage-component">Storage Component</a><br>
+        3.6 <a href="#36-common-classes">Common Classes</a><br>
    </details>
 1. <details><summary><a href="#4-implementation">Implementation</a></summary>
         4.1 <a href="#41-add-clientproduct-feature">Add Client/Product Feature</a><br>
@@ -23,21 +23,21 @@ title: Developer Guide
         4.5 <a href="#45-view-clientproduct-feature">View Client/Product Feature</a><br>
         4.6 <a href="#46-command-history-feature">Command History Feature</a><br>
         4.7 <a href="#47-proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a><br>
-        4.8 <a href="#48-proposed-data-archiving">[Proposed] Data archiving</a><br>
+        4.8 <a href="#48-proposed-data-archiving">[Proposed] Data Archiving</a><br>
    </details>
 1. [Documentation, logging, testing, configuration, dev-ops](#5-documentation-logging-testing-configuration-dev-ops)
 1. <details><summary><a href="#6-appendix-requirements">Appendix: Requirements</a></summary>
-        6.1 <a href="#61-product-scope">Product scope</a><br>
-        6.2 <a href="#62-user-stories">User stories</a><br>
-        6.3 <a href="#63-use-cases">Use cases</a><br>
+        6.1 <a href="#61-product-scope">Product Scope</a><br>
+        6.2 <a href="#62-user-stories">User Stories</a><br>
+        6.3 <a href="#63-use-cases">Use Cases</a><br>
         6.4 <a href="#64-non-functional-requirements">Non-Functional Requirements</a><br>
         6.5 <a href="#65-glossary">Glossary</a><br>
    </details>
 1. <details><summary><a href="#7-appendix-instructions-for-manual-testing">Appendix: Instructions for manual testing</a></summary>
-        7.1 <a href="#71-launch-and-shutdown">Launch and shutdown</a><br>
-        7.2 <a href="#72-viewing-help">Viewing help</a><br>
-        7.3 <a href="#73-deleting-a-clientproduct">Deleting a client/product</a><br>
-        7.4 <a href="#74-saving-data">Saving data</a><br>
+        7.1 <a href="#71-launch-and-shutdown">Launch and Shutdown</a><br>
+        7.2 <a href="#72-viewing-help">Viewing Help</a><br>
+        7.3 <a href="#73-deleting-a-clientproduct">Deleting a Client/Product</a><br>
+        7.4 <a href="#74-saving-data">Saving Data</a><br>
    </details>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-### 3.2 UI component
+### 3.2 UI Component
 
 The **API** of this component is specified in
 [`Ui.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -149,7 +149,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Client` or `Product` object residing in the `Model`.
 
-### 3.3 Logic component
+### 3.3 Logic Component
 
 **API** :
 [`Logic.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -192,7 +192,7 @@ How the parsing works:
   the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-### 3.4 Model component
+### 3.4 Model Component
 
 **API** :
 [`Model.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -228,7 +228,7 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-### 3.6 Common classes
+### 3.6 Common Classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -547,7 +547,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## 6 Appendix: Requirements
 
-### 6.1 Product scope
+### 6.1 Product Scope
 
 **Target user profile**:
 
@@ -563,7 +563,7 @@ _{Explain here how the data archiving feature will be implemented}_
 and partners. The information and status of each order can also be easily monitored by the user. This product makes it
 easy and convenient to track orders and look for future cooperation.
 
-### 6.2 User stories
+### 6.2 User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -583,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * * ` | 10th-time user                             | see the statistics of the products sold | analyse the consumer pattern and make better decision in the future |
 
 
-### 6.3 Use cases
+### 6.3 Use Cases
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -803,7 +803,7 @@ expected to do more *exploratory* testing.
 
 </div>
 
-### 7.1 Launch and shutdown
+### 7.1 Launch and Shutdown
 
 1. Initial launch
 
@@ -825,7 +825,7 @@ expected to do more *exploratory* testing.
     1. Enter `exit` and press enter or click the exit button<br>
        Expected: The application exits successfully.
 
-### 7.2 Viewing help
+### 7.2 Viewing Help
 
 1. Viewing help for Sellah
 
@@ -833,7 +833,7 @@ expected to do more *exploratory* testing.
        Expected: A help message will be shown on the second panel. In addition, a link to Sellah's user guide will also
        pop up.
 
-### 7.3 Deleting a client/product
+### 7.3 Deleting a Client/Product
 
 1. Deleting a client while all clients are being shown
 
@@ -864,7 +864,7 @@ expected to do more *exploratory* testing.
        Expected: Similar to previous.
        
 
-### 7.4 Saving data
+### 7.4 Saving Data
 
 1. Dealing with missing/corrupted data files
 
