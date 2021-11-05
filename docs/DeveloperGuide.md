@@ -630,73 +630,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC02 - Add a facility**
-
-**MSS**
-
-1. User requests to add a facility into SportsPA
-2. SportsPA adds the facility
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. SportsPA detects missing or invalid field(s)
-
-    * 1a1. SportsPA shows an error message
-
-      Use case resumes from step 1.
-
-**Use case: UC03 - List all facilities**
-
-**MSS**
-
-1. User requests to list facilities
-2. SportsPA shows a list of all the facilities
-
-   Use case ends.
-
-**Use case: UC04 - Search for facilities**
-
-**MSS**
-
-1. User requests to find facilities by location(s)
-2. SportsPA shows the list of facilities whose locations match the request
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No facilities have locations matching the request
-
-    * 1a1. SportsPA informs user
-
-      Use case ends.
-
-**Use case: UC05 - Delete a facility**
-
-**MSS**
-
-1. User requests to <span style="text-decoration: underline">list facilities (UC03)</span>
-   or <span style="text-decoration: underline">search for facilities (UC04)</span>
-2. User requests to delete a specific facility in the list
-3. SportsPA deletes the facility
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
-
-* 2a. The given index is invalid
-
-    * 2a1. SportsPA shows an error message
-
-      Use case resumes from step 2.
-
-**Use case: UC06 - Add a member**
+**Use case: UC02 - Add a member**
 
 **MSS**
 
@@ -713,7 +647,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-**Use case: UC07 - List all members**
+**Use case: UC03 - List all members**
 
 **MSS**
 
@@ -722,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC08 - Search for members**
+**Use case: UC04 - Search for members**
 
 **MSS**
 
@@ -745,12 +679,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC09 - Delete a member**
+**Use case: UC05 - Delete a member**
 
 **MSS**
 
-1. User requests to <span style="text-decoration: underline">list members (UC07)</span>
-   or <span style="text-decoration: underline">search for members (UC08)</span>
+1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
+   or <span style="text-decoration: underline">search for members (UC04)</span>.
 2. User requests to delete a specific member in the list
 3. SportsPA deletes the member
 
@@ -768,14 +702,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC10 - Set member(s) availability**
+**Use case: UC06 - Edit a member's details**
 
 **MSS**
 
-1. User requests to <span style="text-decoration: underline">list members (UC07)</span>
-   or <span style="text-decoration: underline">search for members (UC08)</span>
-2. User requests to set availability of specific member(s) in the list
-3. SportsPA updates the availability of the given member(s)
+1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to edit the details of specific member in the list.
+3. SportsPA edits the details of the member.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The given index is invalid
+
+    * 2a1. SportsPA shows an error message
+
+      Use case resumes from step 2.
+
+* 2b. SportsPA detects invalid field(s)
+
+    * 2b1. SportsPA shows an error message
+
+      Use case resumes from step 2.
+
+**Use case: UC07 - Sort all members**
+
+**MSS**
+
+1. User requests to sort all the members by a field.
+2. SportsPA sorts the members accordingly.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given field is invalid
+
+    * 1a1. SportsPA shows an error message
+    
+      Use case ends.
+    
+**Use case: UC08 - Set member(s) availability**
+
+**MSS**
+
+1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
+   or <span style="text-decoration: underline">search for members (UC04)</span>.
+2. User requests to set availability of specific member(s) in the list.
+3. SportsPA updates the availability of the given member(s).
 
    Use case ends.
 
@@ -796,8 +776,161 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. SportsPA shows an error message
 
       Use case resumes from step 2.
+    
+**Use case: UC09 - Mark attendance of members**
 
-**Use case: UC11 - Split members into facilities**
+**MSS**
+
+1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
+   or <span style="text-decoration: underline">search for members (UC04)</span>.
+2. User requests to mark the attendance of specific member(s) in the list.
+3. SportsPA marks the attendance of the specified member(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The index/indices given is/are invalid.
+
+    * 2a1. SportsPA shows an error message
+  
+      Use case resumes from step 2.
+
+**Use case: UC10 - Mark attendance of members**
+
+This use case is similar to that of <span style="text-decoration: underline">mark attendance (UC09)</span>.
+
+**Use case: UC11 - Import member details from a CSV file**
+
+**MSS**
+1. User requests to import member details from a CSV file
+2. SportsPA adds all members in the CSV file
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The CSV file does not exist
+
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
+
+* 1b. The content of CSV file is not in the valid format
+
+    * 1b1. SportsPA shows an error message
+
+      Use case ends.
+    
+**Use case: UC12 - Clear all entries in member list**
+
+**MSS**
+
+1. User requests to clear all entries in member list
+2. SportsPA deletes all the existing members in the member list
+
+   Use case ends.
+
+**Use case: UC13 - Add a facility**
+
+**MSS**
+
+1. User requests to add a facility into SportsPA
+2. SportsPA adds the facility
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. SportsPA detects missing or invalid field(s)
+
+    * 1a1. SportsPA shows an error message
+
+      Use case resumes from step 1.
+
+**Use case: UC14 - List all facilities**
+
+**MSS**
+
+1. User requests to list facilities
+2. SportsPA shows a list of all the facilities
+
+   Use case ends.
+
+**Use case: UC15 - Search for facilities**
+
+**MSS**
+
+1. User requests to find facilities by location(s)
+2. SportsPA shows the list of facilities whose locations match the request
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No facilities have locations matching the request
+
+    * 1a1. SportsPA informs user
+
+      Use case ends.
+
+**Use case: UC16 - Delete a facility**
+
+**MSS**
+
+1. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
+   or <span style="text-decoration: underline">search for facilities (UC15)</span>
+2. User requests to delete a specific facility in the list
+3. SportsPA deletes the facility
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The given index is invalid
+
+    * 2a1. SportsPA shows an error message
+
+      Use case resumes from step 2.
+
+**Use case: UC17 - Edit a facility's details**
+
+**MSS**
+
+1. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
+   or <span style="text-decoration: underline">search for facilities (UC15)</span>
+2. User requests to edit the details of specific facility in the list.
+3. SportsPA edits the details of the facility.
+        
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+    Use case ends.
+
+* 2a. The given index is invalid
+  
+    * 2a1. SportsPA shows an error message
+  
+      Use case resumes from step 2.
+
+* 2b. SportsPA detects invalid field(s)
+
+    * 2b1. SportsPA shows an error message
+
+      Use case resumes from step 2.
+    
+**Use case: UC18 - Split members into facilities**
 
 **MSS**
 
@@ -820,7 +953,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC12 - Clear all entries in facility list**
+**Use case: UC19 - Deallocate a member from a facility**
+
+**MSS**
+
+1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
+   or <span style="text-decoration: underline">search for facilities (UC15)</span>
+3. User requests to deallocate a specified member from a specified facility.
+4. SportsPA deallocates the specified member from the specified facility.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index/indices is/are invalid
+
+    * 3a1. SportsPA shows an error message
+      
+      Use case resumes from step 3.
+  
+* 3b. The specified member is not allocated to the specified facility.
+
+    * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+**Use case: UC20 - Allocate a member to a facility**
+
+**MSS**
+1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
+   or <span style="text-decoration: underline">search for facilities (UC15)</span>
+3. User requests to allocate a specified member to a specified facility.
+4. SportsPA allocates the specified member to the specified facility.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index/indices is/are invalid
+
+    * 3a1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3b. The specified member is already allocated to the specified facility.
+
+    * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+    
+**Use case: UC21 - Export facility details and member allocations**
+
+**MSS**
+1. User requests to export facility details and member allocations.
+2. SportsPA exports the facility details and member allocations to a CSV file.
+
+   Use case ends.
+
+**Use case: UC22 - Clear all entries in facility list**
 
 **MSS**
 
@@ -829,36 +1023,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC13 - Clear all entries in member list**
-
-**MSS**
-
-1. User requests to clear all entries in member list
-2. SportsPA deletes all the existing members in the member list
-
-   Use case ends.
-
-**Use case: UC14 - Import member details from a CSV file**
-
-**MSS**
-1. User requests to import member details from a CSV file
-2. SportsPA adds all members in the CSV file
-    
-    Use case ends.
-
-**Extensions**
-
-* 1a. The CSV file does not exist
-  * 1a1. SportsPA shows an error message
-    
-    Use case resumes from step 1.
-
-* 1b. The content of CSV file is not in the valid format
-  * 1b1. SportsPA shows an error message
-
-    Use case resumes from step 1.
-
-**Use case: UC15 - Exiting the program**
+**Use case: UC23 - Exiting the program**
 
 **MSS**
 
