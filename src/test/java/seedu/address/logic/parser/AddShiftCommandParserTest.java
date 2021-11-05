@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.initializeLocalDateToThisWeek;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.AddShiftCommand;
 import seedu.address.model.person.Name;
 
@@ -64,9 +64,11 @@ public class AddShiftCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         AddShiftCommand expectedNameCommand = new AddShiftCommand(null, new Name("testing"),
-                "monday-1", initializeLocalDateToThisWeek()[0], initializeLocalDateToThisWeek()[1]);
+                "monday-1", DateTimeUtil.getDisplayedDateArray()[0],
+                DateTimeUtil.getDisplayedDateArray()[1]);
         AddShiftCommand expectedIndexCommand = new AddShiftCommand(Index.fromOneBased(1), null,
-                "monday-1", initializeLocalDateToThisWeek()[0], initializeLocalDateToThisWeek()[1]);
+                "monday-1", DateTimeUtil.getDisplayedDateArray()[0],
+                DateTimeUtil.getDisplayedDateArray()[1]);
         AddShiftCommand expectedGivenStartDayCommand = new AddShiftCommand(Index.fromOneBased(1), null,
                 "monday-1", START_DATE, DEFAULT_END_DATE);
         AddShiftCommand expectedGivenStartEndDayCommand = new AddShiftCommand(Index.fromOneBased(1), null,
