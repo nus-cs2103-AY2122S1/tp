@@ -34,11 +34,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (!exactlyOneAcceptedPrefix(argMultimap)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
+            return new DeleteCommand(index);
+        }
+
         try {
-            if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
-                Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
-                return new DeleteCommand(index);
-            } else if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
                 Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
                 return new DeleteCommand(name);
             } else if (argMultimap.getValue(PREFIX_DASH_ROLE).isPresent()) {

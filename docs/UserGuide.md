@@ -147,6 +147,9 @@ Set the minimum number of staff required for each shift. The three roles are: ki
 Multiple roles can be set with this same command, but if the same role occurs multiple times, the last instance will be
 used.
 
+The default role requirements are 0 for all three roles. The Clear Command will also reset the
+role requirements to the default.
+
 Format:
 
 `setRoleReq r/ROLE-NUMBER_REQUIRED...`
@@ -156,19 +159,33 @@ Examples:
 `setRoleReq r/floor-3`\
 `setRoleReq r/kitchen-4 r/bartender-2`
 
+See Also:
+
+[Clear Command](#clearing-all-entries--clear)
+
 #### Setting Default Shift Timings : `setDefaultShiftTimings `
 
-Set the default timings for the morning and afternoon shift. Note that all 4 timings must be present, and the timings 
-must be provided in an `HH:mm` format.
+Set the default timings for the morning and afternoon shift. Please note:
+* All 4 timings must be present
+* Timings must be provided in an `HH:mm` format, using the 24-hour clock. (Example: `22:00`)
+* The duration of the shift must not be zero (i.e. the shift cannot start and end at the same time)
+* The shifts do not overlap, but can have the same start and end times
+* The morning shift must start at noon or before noon. Similarly, the afternoon shift must start at noon or after noon.
+* The default morning shift timings are 10:00 - 16:00, and the default afternoon shift timing is 16:00 - 22:00.
+* The Clear Command will also reset the shift timings to the aforementioned defaults.
 
 Format:
 
-`setShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
+`setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
 
 Examples:
 
-`setShiftTimings 10:00 16:00 17:00 22:00`\
-`setShiftTimings 09:00 15:00 18:00 23:00`
+`setDefaultShiftTimings 10:00 16:00 17:00 22:00`\
+`setDefaultShiftTimings 09:00 15:00 18:00 23:00`
+
+See Also:
+
+[Clear Command](#clearing-all-entries--clear)
 
 #### Listing all persons : `list`
 
@@ -215,16 +232,20 @@ Examples:
 
 Marks a specified staff(s) as not working for a specified date.
 
- * The salary for that date will be not included in calculation,
+* The salary for that date will not be included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
- * The format of the input date is in: `YYYY-MM-DD`.
+* The format of the input date is in: `YYYY-MM-DD`.
+* If no date input is provided, the next occurrence of that shift is assumed.
+* If only one date input is provided, the next occurrence of that shift, after the provided date is marked. For instance,
+  if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be marked.
+* Will not indicate if there is a shift in the period provided, even if there isn't a shift, the staff will be marked absent for that period.
 
 Format:  
 
 Marking a period:  
 
-`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`  
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`  
 
 
 Possible to mark a single date:
@@ -243,8 +264,12 @@ Removes the period that was marked by the `mark` command.
 
 The format of the input date is in: `YYYY-MM-DD`.
 
+* If no date input is provided, the next occurrence of that shift is assumed.
+* If only one date input is provided, the next occurrence of that shift, after the provided date is unmarked. For instance,
+  if the shift is on Monday 1/11/2021, with `da/2021-10-27` as the date input, the shift on 1/10/2021 would be unmarked.
+
 Format:  
-`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`
 
 Examples:  
 `unmark -i 1 da/2020-01-03 da/2021-01-03`  
@@ -252,7 +277,7 @@ Examples:
 
 #### Deleting a Staff : `delete`
 
-Deletes the specified staff `Staff'd`.
+Deletes the specified staff.
 
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, within the range of the staff view.
@@ -266,7 +291,7 @@ Formats:
 Examples:  
 `delete -n Candice`  
 `delete -i 2`  
-`delete -r cashiers`  
+`delete -r floor`  
 `delete -s fulltime`
 
 
@@ -332,7 +357,7 @@ Examples:
 `find -n alex david`    
 `find -i 3`  
 `find -t Friend`
-`find -r kitchen -r floor`
+`find -r kitchen -r floor`  
 
 List before using Find command:
 ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
@@ -343,9 +368,14 @@ List after using Find command:
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the Staff List.
+Clears all entries from the Staff List. The default Shift Timings and Role Requirements are also reset.
 
 Format: `clear`
+
+See Also:
+
+[setDefaultShiftTimings Command](#setting-default-shift-timings--setdefaultshifttimings-)\
+[setRoleReq Command](#setting-role-requirements--setrolereq-)
 
 #### Exiting the program : `exit`
 
@@ -355,20 +385,15 @@ Format: `exit`
 
 ### Basic Management of Staff Schedules
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The current week refers to a week from monday to sunday which includes today's date.  
-An example would be if 27/10/2021 were the date we were looking at (a wednesday),
-the range would be from 25/10/2021 to 31/10/2021.
-</div>
-
-
 #### Viewing schedule for the week: `change`
 
+The change command enables the user to view a different week than the default one, which is the next seven days.
 The schedule for the current week is shown under the schedule tab by default. The week
-can be changed using the `change` command.
+can be changed using the `change` command. 
 
- * Takes in a single date input to translate into a week.
+ * Takes in a single date input to translate into a week, which consists of the seven days after the input date.
  * The date is in `YYYY-MM-DD`
+ * The change command also causes all the default shift related commands to take place over the resulting week.
 
 Format:  
 `change da/DATE`    
@@ -379,7 +404,7 @@ Examples:
 
 #### Viewing schedule of staff(s): `viewSchedule`
 
-Views the schedule of staff's that satisfy the query conditions.
+Views the schedule of staff(s) that satisfy the query conditions.
 
 
 Formats:  
@@ -401,9 +426,9 @@ The output will look like the following.
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
-* The DAY entry is not case sensitive.
-* If no date input is provided the shift is viewed for current week.
-* If only one date input is provided, the shift is viewed for seven days after the date.
+* The DAY entry is not case-sensitive.
+* If no date input is provided, the next occurrence of the provided shift is displayed.
+* Similarly, if only one date input is provided, the next occurrence of the provided shift *after the provided date* is displayed.
 
 Formats:  
 `viewShift -d DAY-shift_number [da/START_DATE] [da/END_DATE]`  
@@ -428,9 +453,9 @@ Adds a time period where the staff is working to the staff’s schedule.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 * The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
   10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
-* If no date input is provided, current week is taken as default.
-* If only one date input is provided, the shift added is to the next date that the shift is at. For instance, 
-  if the shift is on a 1/10/2021, a monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
+* If no date input is provided, the staff is added to the next occurrence of the provided shift.
+* If only one date input is provided, the staff next occurence of the provided shift *after the provided date*. For instance, 
+  if the shift is on a 1/10/2021, a Monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
 * If the shift is not in the period provided, the program will do nothing.
 
 Formats:  
@@ -445,8 +470,8 @@ Examples:
 #### Swapping shifts: `swapShift`
 Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
 
-* If no date input is provided, current week is taken as default.
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If no date input is provided, the next occurrence of the provided shift is assumed.
+* If only one date input is provided, the next occurrence of both the provided shifts *after the provided date* is assumed.
 
 Formats:  
 `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]`  
@@ -465,8 +490,8 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-* If no date input is provided, current week is taken as default.  
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If no date input is provided, the next occurrence of the provided shift is assumed.
+* If only one date input is provided, the next occurrence of the provided shift *after the provided date* is assumed.
 
 Formats:  
 `setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
@@ -486,8 +511,8 @@ Examples:
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
-* If no date input is provided, current week is taken as default.
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+If no date input is provided, the next occurrence of the provided shift is assumed.
+* If only one date input is provided, the next occurrence of the provided shift *after the provided date* is assumed.
 * If the shift to delete is not in the input date range, the program will do nothing.
 
 Formats:  
@@ -495,7 +520,7 @@ Formats:
 `deleteShift -i INDEX d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
 
 Examples:  
-`deleteShift -n Joe d/tuesday-2 da/2021-10-01`  
+`deleteShift -n Joe d/tuesday-1 da/2021-10-01`  
 `deleteShift -i 1278 d/friday-1`
 
 --------------------------------------------------------------------------------------------------------------------
@@ -518,7 +543,10 @@ Action | Format, Examples
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 **Change schedule** | `change da/START_DATE`
+**Set role requirements** | `setRoleReq r/ROLE-NUMBER_REQUIRED...`
+**Set default shift timings** | `setDefaultShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
 **List** | `list`
+**Tab** | `tab`
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
