@@ -303,7 +303,7 @@ Examples:
 *  `view 1` 
 > Displays the details of contact indexed at 1 in the currently displayed list.
 *  `view 2`
-> Displays the details of contact indexed at 2 in the currently dispalyed list.
+> Displays the details of contact indexed at 2 in the currently displayed list.
 
 ![result for 'view 2'](images/viewscreenshot.PNG)
 
@@ -328,7 +328,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: How to 'find'
@@ -452,7 +452,7 @@ Contact-specific Command | Format, Examples
 **Append** | `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `append 3 s/web devevelopment l/python t/classmate`
 **Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
 **Interaction** | `interaction INDEX int/DESCRIPTION on/DATE`
-**View** | details coming soon
+**View** | `view INDEX` <br><br> e.g. `view 2`
 **Find** | `find KEYWORD [MORE_KEYWORDS]…​`<br><br> e.g., `find James Jake`
 **Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`<br><br> e.g., `filter f/computing`
 **Delete** | `delete INDEX`<br><br> e.g., `delete 3`
