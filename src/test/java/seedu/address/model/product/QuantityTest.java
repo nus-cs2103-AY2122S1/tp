@@ -1,5 +1,6 @@
 package seedu.address.model.product;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -37,5 +38,17 @@ public class QuantityTest {
         assertTrue(Quantity.isValidQuantity("911"));
         assertTrue(Quantity.isValidQuantity("93121534"));
         assertTrue(Quantity.isValidQuantity("124293842033123"));
+    }
+
+    @Test
+    public void compareTo() {
+        Quantity quantity = new Quantity("10");
+
+        // compare to null
+        assertEquals(1, quantity.compareTo(null));
+        // compare to valid quantities
+        assertTrue(quantity.compareTo(new Quantity("1")) > 0);
+        assertTrue(quantity.compareTo(new Quantity("10")) == 0);
+        assertTrue(quantity.compareTo(new Quantity("20")) < 0);
     }
 }

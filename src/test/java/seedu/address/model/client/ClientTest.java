@@ -1,16 +1,24 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CANNON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DAISY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_NUMBER_BOB;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
+import seedu.address.model.product.Quantity;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientTest {
@@ -77,5 +85,36 @@ public class ClientTest {
         // different address -> returns false
         editedAmy = new ClientBuilder(AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(AMY.equals(editedAmy));
+    }
+
+    @Test
+    public void addOrder_success() {
+        Order order = new Order(new Name("product"), new Quantity("1"), LocalDate.MAX);
+        AMY.addOrder(order);
+        Client editedAmy = new ClientBuilder(AMY)
+                .withOrder(new Name("product"), new Quantity("1"), LocalDate.MAX)
+                .build();
+        assertTrue(AMY.equals(editedAmy));
+    }
+
+    @Test
+    public void hasOrder_clientHasOrder_returnsTrue() {
+        assertTrue(AMY.hasOrder(new Name(VALID_NAME_DAISY)));
+    }
+
+    @Test
+    public void hasOrder_cannotFindOrder_returnsFalse() {
+        assertFalse(AMY.hasOrder(new Name("random product")));
+    }
+
+    @Test
+    public void removeOrder_cannotFindOrder_returnsNull() {
+        assertEquals(null, AMY.removeOrder(new Name("random product")));
+    }
+
+    @Test
+    public void removeOrder_clientHasOrder_returnsOrderToRemove() {
+        assertTrue(AMY.removeOrder(new Name(VALID_NAME_CANNON))
+                .equals(new Order(new Name(VALID_NAME_CANNON), new Quantity("1"), LocalDate.MAX)));
     }
 }
