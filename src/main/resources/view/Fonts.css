@@ -14,11 +14,6 @@
 }
 
 @font-face {
-    font-family: "Open Sans Bold Italic";
-    src: url("/fonts/open-sans/OpenSans-BoldItalic.ttf");
-}
-
-@font-face {
     font-family: "Open Sans Extra Bold";
     src: url("/fonts/open-sans/OpenSans-ExtraBold.ttf");
 }

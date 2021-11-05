@@ -41,7 +41,6 @@ public class DetailedStudentCard extends UiPart<Region> {
         this.student = student;
         setName(student);
         setGroupName(student);
-//        groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
         notes.setText(student.getNote().toString());
@@ -85,7 +84,7 @@ public class DetailedStudentCard extends UiPart<Region> {
         double txtWidth = text.getLayoutBounds().getWidth();
         ObservableList<String> styleClass = groupName.getStyleClass();
         if (txtWidth > 200) {
-            styleClass.add("smaller_groupName");
+            styleClass.add("smaller_group_name");
         } else {
             styleClass.add("bigger_group_name");
         }
