@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.GuiSettings;
+import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.student.DisplayableObject;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
@@ -61,6 +62,34 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if a student with the same email as {@code student} exists in ProgrammerError.
+     */
+    boolean hasSameStudentEmail(Student student);
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    boolean hasOtherStudent(Student studentToEdit, Student editedStudent);
+
+    /**
+     * Returns true if a student with the same student id as {@code student} exists in ProgrammerError
+     * excluding himself/herself.
+     */
+    boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent);
+
+    /**
+     * Returns true if a student with the same email as {@code student} exists in ProgrammerError.
+     * excluding himself/herself.
+     */
+    boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent);
+
+    /**
+     * Returns true if a student with the same student id as {@code student} exists in ProgrammerError.
+     */
+    boolean hasSameStudentId(Student student);
+
+    /**
      * Deletes the given student.
      * The student must exist in ProgrammerError.
      */
@@ -70,7 +99,7 @@ public interface Model {
      * Adds the given student.
      * {@code student} must not already exist in the ProgrammerError.
      * */
-    void addStudent(Student student);
+    void addStudent(Student student) throws CommandException;
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.

@@ -41,7 +41,70 @@ public class UniqueStudentList implements Iterable<Student> {
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameStudent);
+
     }
+
+    /**
+     * Returns true if the list contains an equivalent student with the same Email as the given argument.
+     */
+    public boolean containsSameEmail(Student toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameStudentEmail);
+    }
+
+
+    /**
+     * Returns true if the list contains an equivalent student with the same Student Id as the given argument.
+     */
+    public boolean containsSameStudentId(Student toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameStudentId);
+    }
+
+
+    /**
+     * Returns true if the list contains an equivalent student as the given argument，
+     * excluding himself/herself.
+     */
+    public boolean containsOther(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        List<Student> studentListCopy = new ArrayList<>();
+        for (Student student : internalList) {
+            studentListCopy.add(student.copy());
+        }
+        studentListCopy.remove(studentToEdit);
+        return studentListCopy.stream().anyMatch(editedStudent::isSameStudent);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent student as the given argument，
+     * excluding himself/herself.
+     */
+    public boolean containsOtherSameEmail(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        List<Student> studentListCopy = new ArrayList<>();
+        for (Student student : internalList) {
+            studentListCopy.add(student.copy());
+        }
+        studentListCopy.remove(studentToEdit);
+        return studentListCopy.stream().anyMatch(editedStudent::isSameStudentEmail);
+    }
+
+
+    /**
+     * Returns true if the list contains an equivalent student as the given argument，
+     * excluding himself/herself.
+     */
+    public boolean containsOtherSameStudentId(Student studentToEdit, Student editedStudent) {
+        requireAllNonNull(studentToEdit, editedStudent);
+        List<Student> studentListCopy = new ArrayList<>();
+        for (Student student : internalList) {
+            studentListCopy.add(student.copy());
+        }
+        studentListCopy.remove(studentToEdit);
+        return studentListCopy.stream().anyMatch(editedStudent::isSameStudentId);
+    }
+
 
     /**
      * Adds a student to the list and the list is sorted each time.
@@ -49,7 +112,10 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void add(Student toAdd) throws DuplicateStudentException {
         requireNonNull(toAdd);
-        toAdd.setLabResultRecord(labsTracker);
+        if (toAdd.hasNoLabs()) {
+            toAdd.setLabResultRecord(labsTracker);
+        }
+
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
         }
@@ -86,10 +152,6 @@ public class UniqueStudentList implements Iterable<Student> {
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new StudentNotFoundException();
-        }
-
-        if (!target.isSameStudent(editedStudent) && contains(editedStudent)) {
-            throw new DuplicateStudentException();
         }
 
         internalList.set(index, editedStudent);

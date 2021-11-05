@@ -63,21 +63,23 @@ public class AddCommandTest {
     }
 
     // todo
+
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT_ID, () ->
             addCommand.execute(modelStub));
     }
 
+
+    //todo
     @Test
     public void execute_invalidName_throwsCommandException() {
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT_ID, () ->
             addCommand.execute(modelStub));
     }
 
@@ -141,8 +143,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addStudent(Student student) {
-            throw new AssertionError("This method should not be called.");
+        public void addStudent(Student student) throws CommandException {
+            throw new CommandException(AddCommand.MESSAGE_DUPLICATE_STUDENT_ID);
         }
 
         @Override
@@ -157,7 +159,32 @@ public class AddCommandTest {
 
         @Override
         public boolean hasStudent(Student student) {
-            throw new AssertionError("This method should not be called.");
+            return false;
+        }
+
+        @Override
+        public boolean hasSameStudentId(Student student) {
+            return false;
+        }
+
+        @Override
+        public boolean hasSameStudentEmail(Student student) {
+            return false;
+        }
+
+        @Override
+        public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
+            return false;
+        }
+
+        @Override
+        public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
+            return false;
+        }
+
+        @Override
+        public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
+            return false;
         }
 
         @Override
