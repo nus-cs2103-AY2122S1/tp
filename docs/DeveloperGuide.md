@@ -173,7 +173,7 @@ The process in which an `Employee` is added can be broken down into 2.
 In the first step, the user input is parsed in `AddEmployeeCommandParser` and broken down for other methods from other classes to create an `AddEmployeeCommand`.
 This is depicted in the Sequence Diagram below.
 
-<img src="images/AddEmployeeCommandSequenceDiagram.png" width="550" />
+<img src="images/AddEmployeeCommandSequenceDiagram.png" width="700" />
 
 After obtaining the `AddEmployeeCommand`, it then calls methods in `Model` to help add the newly created `Employee` to the existing `UniqueEmployeeList`.
 
