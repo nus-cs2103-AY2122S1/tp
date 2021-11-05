@@ -6,7 +6,7 @@ title: User Guide
 CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CONNECTIONS can get your contact management tasks done faster than traditional GUI apps.
 
 * [Quick Start](#quick-start)
-* [Features](#features
+* [Features](#features)
   * [Upcoming birthdays](#upcoming-birthdays)
   * [Viewing help : `help`](#viewing-help--help)
   * [Adding a person: `add`](#adding-a-person-add)
@@ -205,7 +205,7 @@ Notes:
 Finds all persons who match **ALL** name and tag keywords provided.
 
 #### Format:
-* `find [n/NAME] …​ [t/TAG] …​`
+* `find [c/] [n/NAME] …​ [t/TAG] …​`
   * Note that `find` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:  
@@ -235,7 +235,7 @@ Notes:
 Finds all persons who match **ANY** name and tag keywords provided.
 
 #### Format:
-* `findAny [n/NAME] …​ [t/TAG] …​`
+* `findAny [c/] [n/NAME] …​ [t/TAG] …​`
   * Note that `findAny` must have at least one `[n/NAME]` or `[t/TAG]`.
 
 Notes:
@@ -423,8 +423,8 @@ Action | Summary | Format, Examples
 **Deletem** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
-**Find** | Locates persons by name and tags (Results fulfill all search terms)| `find n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
-**FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
+**Find** | Locates persons by name and tags (Results fulfill all search terms)| `find [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
+**FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny [c/] n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
 **Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
 **Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
 **Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
