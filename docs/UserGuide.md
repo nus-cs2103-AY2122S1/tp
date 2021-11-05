@@ -311,7 +311,9 @@ Entering format: `viewc INDEX`
 * The index must be a positive integer 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 In order to find a specific class, use the `findc` command to find a particular class before viewing it.
+
 </div>
 
 Examples:
