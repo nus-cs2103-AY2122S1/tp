@@ -4,15 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalClasses.addTypicalClassesToAddressBook;
 import static seedu.address.testutil.TypicalStudents.getAddressBookWithTypicalStudents;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.sun.javafx.application.PlatformImpl;
-
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import seedu.address.model.Model;
@@ -29,11 +25,7 @@ class TimetableTest {
 
     @BeforeAll
     public static void setUp_javaFX_runtime() throws InterruptedException {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        PlatformImpl.startup(() -> {
-            countDownLatch.countDown();
-        });
-        countDownLatch.await(3, TimeUnit.SECONDS);
+        JFXPanel jfxPanel = new JFXPanel();
         infoPage = new TimetableInfoPage(tuitionClasses, null);
         timetable = new Timetable(tuitionClasses, null, infoPage);
     }
