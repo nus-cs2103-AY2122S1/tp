@@ -691,10 +691,9 @@ Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/T
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
-* When editing homework, all existing pieces of homework of the lesson will be removed and replaced with the pieces of homework specified.<br>
+* Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.<br>
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
   
-* Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
