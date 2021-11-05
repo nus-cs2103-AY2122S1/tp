@@ -464,12 +464,11 @@ Examples:
 ## Managing Appointments `appt` <a name="managing-appointments"/>
 
 ### Adding an appointment: `appt -a` <a name="add-appointment"/>
-Creates an appointment. 
+Creates an appointment and adds it to the appointment list. 
 
 Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION]
  [r/REMARK]`
 
-Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test`
 
 * Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …
 * Duration has to be an integer between 1 and 120 (minutes).
@@ -486,6 +485,11 @@ and would like to store your entire history of appointments!
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
 </div>
+
+Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test` creates an appointment with the
+**first patient** in the patient list, and the **second doctor** in the doctor list, at 12 November 2021, 8pm, with the remark that the patient
+wants a blood test
+
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
@@ -506,7 +510,7 @@ You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor
 </div>
 
 Examples:
-* `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
+* `appt -e 1 p/2 r/Blood test` edits the patient and remark of the 1st appointment to be the **second patient** in the patient list and **Blood test** respectively.
 
 ![editAppointment](images/editAppointment.png)
 
