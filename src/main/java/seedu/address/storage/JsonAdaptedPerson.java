@@ -109,7 +109,9 @@ class JsonAdaptedPerson {
 
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            if (!tag.getTagName().isEmpty()) {
+                personTags.add(tag.toModelType());
+            }
         }
 
         final List<Lesson> personLessons = new ArrayList<>();

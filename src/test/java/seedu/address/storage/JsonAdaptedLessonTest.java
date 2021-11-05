@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
 import static seedu.address.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLessons.MAKEUP_LESSON;
@@ -50,7 +52,7 @@ class JsonAdaptedLessonTest {
     }
 
     @Test
-    public void toModelType_invalidDate_throwsIllegalValueException() {
+    public void toModelType_invalidStartDate_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(INVALID_DATE, VALID_END_DATE, VALID_TIME_RANGE, VALID_SUBJECT,
                 VALID_HOMEWORK_PIECES, VALID_LESSON_RATES, VALID_OUTSTANDING_FEES, null);
@@ -59,9 +61,36 @@ class JsonAdaptedLessonTest {
     }
 
     @Test
-    public void toModelType_nullDate_throwsIllegalValueException() {
+    public void toModelType_invalidEndDate_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DATE, INVALID_DATE, VALID_TIME_RANGE, VALID_SUBJECT,
+                VALID_HOMEWORK_PIECES, VALID_LESSON_RATES, VALID_OUTSTANDING_FEES, null);
+        String expectedMessage = Date.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDateRange_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DATE_TUE, VALID_DATE_MON, VALID_TIME_RANGE, VALID_SUBJECT,
+                VALID_HOMEWORK_PIECES, VALID_LESSON_RATES, VALID_OUTSTANDING_FEES, null);
+        String expectedMessage = JsonAdaptedLesson.MESSAGE_INVALID_DATE_RANGE;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullStartDate_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
             new JsonAdaptedLesson(null, VALID_END_DATE, VALID_TIME_RANGE, VALID_SUBJECT,
+                VALID_HOMEWORK_PIECES, VALID_LESSON_RATES, VALID_OUTSTANDING_FEES, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEndDate_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DATE, null, VALID_TIME_RANGE, VALID_SUBJECT,
                 VALID_HOMEWORK_PIECES, VALID_LESSON_RATES, VALID_OUTSTANDING_FEES, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);

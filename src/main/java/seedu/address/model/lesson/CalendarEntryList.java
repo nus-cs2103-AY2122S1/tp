@@ -55,6 +55,7 @@ public class CalendarEntryList {
     }
 
     private void add(Entry<Lesson> calendarEntry) {
+        assert calendarEntry != null;
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
         addUpcomingLesson(calendarEntry);
