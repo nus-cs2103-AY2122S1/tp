@@ -6,7 +6,9 @@ title: User Guide
 ### About RecruitIn
 
 
-#<p align="center">![RecruitIn Icon](images/RecruitIn.png)</p>
+<p align="center">
+    <img align="center" alt="RecruitIn Icon" src="images/RecruitIn.png"/>
+</p>
 
 RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. 
 
