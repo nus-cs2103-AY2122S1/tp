@@ -15,28 +15,28 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    - [\[Completed\] Add Event feature](#completed-add-event-feature)
+    - [Add Event feature](#add-event-feature)
        - [Implementation Details](#implementation-details)
        - [Implementation Rationale](#implementation-rationale)
-    - [\[Completed\] Remove Event feature](#completed-remove-event-feature)
+    - [Remove Event feature](#remove-event-feature)
        - [Implementation Details](#implementation-details)
        - [Design Considerations:](#design-considerations)
           - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
-    - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+    - [Filter Event feature](#filter-event-feature)
       - [Implementation Details](#implementation-details)
       - [Implementation Rationale](#implementation-rationale)
       - [Design Considerations:](#design-considerations)
         - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
         - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
-    - [\[Completed\] View Participant's Details feature](#completed-view-participants-details-feature)
+    - [View Participant's Details feature](#view-participants-details-feature)
       - [Implementation Details](#implementation-details-1)
       - [Implementation Rationale](#implementation-rationale-1)
       - [Design Considerations:](#design-considerations-1)
         - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
-    - [\[Completed\] Add/Remove Participant to/from event by index](#completed-addremove-participant-tofrom-event-by-index)
+    - [Add/Remove Participant to/from event by index](#addremove-participant-tofrom-event-by-index)
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-2)
-    - [\[Completed\] View Event Details feature](#completed-view-event-details-feature)
+    - [View Event Details feature](#view-event-details-feature)
       - [Implementation Details](#implementation-details-3)
       - [Implementation Rationale](#implementation-rationale-3)
       - [Design Considerations:](#design-considerations-2)
@@ -62,9 +62,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* `isValidDate` method of EventDate and BirthDate are adapted from [here](https://stackoverflow.com/a/29038060/13624758)
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* * `isValidDate` method of EventDate and BirthDate are adapted from stackoverflow [here](https://stackoverflow.com/a/29038060/13624758).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -179,7 +178,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+![ModelClassDiagram](images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -191,7 +190,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Participant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Participant` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="600" />
+![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
 
@@ -217,7 +216,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Completed\] Add Event feature
+### Add Event feature
 
 This feature allows Managera users to create an event at the specified date and time.
 
@@ -240,7 +239,7 @@ this, Event is implemented with abstractions EventName, EventDate and EventTime.
 reliability of the program.
 
 
-### \[Completed\] Remove Event feature
+### Remove Event feature
 
 This feature allows Managera users to remove an existing event at a particular index of the displayed list.
 
@@ -276,7 +275,7 @@ When the command is executed, there is a check to ensure the index is within the
     * Cons:
         1. The user has to fully match the Event name, which is much more cumbersome. 
 
-### \[Completed\] Filter Event feature
+### Filter Event feature
 
 This feature allows Managera users to filter the event list by date of event and by time.
 
@@ -350,7 +349,7 @@ The following is the sequence diagram for how a `FilterEventCommand` works inter
 
 ![FilterEventSequenceDiagram](images/FilterEventSequenceDiagram.png)
 
-### \[Completed\] View Participant's Details feature
+### View Participant's Details feature
 
 This feature allows Managera users to look for a specific participant and view their details. The search is done using
 the participant's ID since each participant has a unique ID.
@@ -404,7 +403,9 @@ The following is the sequence diagram for how a `ViewCommand` works internally.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
-### \[Completed\] Add/Remove Participant to/from event by index
+
+
+### Add/Remove Participant to/from event by index
 
 This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered
  list of events and participant visible to user.
@@ -443,7 +444,7 @@ The following activity diagrams summarise what happens when a user executes a ne
 ![RemoveParticipantFromEventActivityDiagram](images/RemoveParticipantByIndexActivityDiagram.png)
 
 
-### \[Completed\] View Event Details feature
+### View Event Details feature
 
 This feature allows Managera users to find an Event by name and view its details. The search is done using the Event's 
 name since Managera employs a UniqueEventList and will not have more than one Event with a given name.
@@ -876,7 +877,6 @@ Preconditions: At least one Event has been added to Managera.
 7.  Saved data should be kept in a single file to allow for easy transfer to a different device.
 8.  The system should respond within two seconds.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -907,10 +907,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a participant
 
@@ -927,7 +926,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
