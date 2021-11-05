@@ -20,13 +20,33 @@ public class ClassCodeTest {
     }
 
     @Test
+    public void classCodeComparable_validClassCode_success() {
+        ClassCode g06 = new ClassCode("G06");
+        ClassCode g92 = new ClassCode("G92");
+        ClassCode g06_copy = new ClassCode("G06");
+        ClassCode g99 = new ClassCode("G99");
+
+        // compare same ClassCode
+        assertTrue(g06.compareTo(g06_copy) == 0);
+        assertTrue(g06.compareTo(g06) == 0);
+
+        // compare different ClassCode
+        assertTrue(g06.compareTo(g92) < 0);
+        assertTrue(g99.compareTo(g92) > 0);
+    }
+
+    @Test
     public void isValidClassCode() {
         // null classCode
         assertThrows(NullPointerException.class, () -> ClassCode.isValidClassCode(null));
 
-        // invalid ClassCode
+        // blank ClassCode
         assertFalse(ClassCode.isValidClassCode("")); // empty string
+        assertFalse(ClassCode.isValidClassCode(" ")); // spaces only
+
+        // invalid ClassCode
         assertFalse(ClassCode.isValidClassCode("Today")); // must start with G, followed by 2 digits
+        assertFalse(ClassCode.isValidClassCode("12")); // only numbers
         assertFalse(ClassCode.isValidClassCode("T99")); // first character is G/g
         assertFalse(ClassCode.isValidClassCode("g001")); // must have 3 digits
 
