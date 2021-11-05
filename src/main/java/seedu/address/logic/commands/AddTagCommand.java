@@ -31,14 +31,18 @@ public class AddTagCommand extends Command {
 
     public static final String COMMAND_WORD = "addt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
-            + "'addt all t/TAG' adds tags for everyone. "
-            + "'addt INDEX t/TAG' adds tags for selected person."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tags to people.\n"
+            + " - 'addt all t/TAG' adds tags for everyone.\n"
+            + " - 'addt INDEX t/TAG' adds tags for the person identified by the index number used in the displayed "
+            + "person list.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer or the word 'all')"
-            + "" + PREFIX_TAG + "TAG...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "CS2103 Group Mate ";
+            + "INDEX (must be a positive integer or the word 'all') "
+            + PREFIX_TAG + "TAG...\n"
+            + "Note:\n"
+            + " - Tags must be alphanumeric.\n"
+            + "Example: "
+            + COMMAND_WORD + " 1 "
+            + PREFIX_TAG + "CS2103Teammate";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag: %1$s";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";

@@ -16,7 +16,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     public ImportCommand parse(String args) throws ParseException {
         String fileName = args.trim();
 
-        if (!fileName.endsWith(".json")) {
+        if (!fileName.endsWith(".json") || fileName.equals(".json")) {
             throw new ParseException(ImportCommand.MESSAGE_WRONG_FORMAT);
         }
 

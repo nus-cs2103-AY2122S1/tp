@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -24,16 +27,21 @@ public class DeleteMultipleCommand extends Command {
 
     public static final String COMMAND_WORD = "deletem";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all persons whose details contain any of "
-            + "the specified keywords (case-insensitive) from the list.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_NAME + "MORE_NAMES] "
-            + "[" + PREFIX_PHONE + "PHONE] " + "[" + PREFIX_PHONE + "MORE_PHONES] "
-            + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_PHONE + "MORE_EMAILS] "
-            + "[" + PREFIX_NATIONALITY + "NATIONALITY] " + "[" + PREFIX_PHONE + "MORE_NATIONALITY] "
-            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP] " + "[" + PREFIX_PHONE + "MORE_TUTORIAL GROUPS] "
-            + "[" + PREFIX_TAG + "TAG] " + "[" + PREFIX_TAG + "MORE_TAGS]...\n "
-            + "Example: " + COMMAND_WORD + " n/alice p/91234567 tg/19";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all persons whose details contain every "
+            + "specified keywords.\n"
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME]... "
+            + "[" + PREFIX_GENDER + "GENDER]... "
+            + "[" + PREFIX_PHONE + "PHONE]... "
+            + "[" + PREFIX_EMAIL + "EMAIL]... "
+            + "[" + PREFIX_NATIONALITY + "NATIONALITY]... "
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP]... "
+            + "[" + PREFIX_REMARK + "REMARK]... "
+            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE]... "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Note:\n"
+            + " - Keywords are case-insensitive"
+            + "Example:  " + COMMAND_WORD + " n/alice p/91234567 tg/19";
 
     private int startIndex;
     private int endIndex;
