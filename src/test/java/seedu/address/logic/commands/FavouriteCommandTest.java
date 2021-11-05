@@ -94,5 +94,4 @@ public class FavouriteCommandTest {
         // different person -> returns false
         assertFalse(favouriteFirstCommand.equals(favouriteSecondCommand));
     }
-
 }
