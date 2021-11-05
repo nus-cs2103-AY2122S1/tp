@@ -109,8 +109,8 @@ Given below are my contributions to the project.
 * **Developer Guide**:
   * Added Use case UC18 [\#116](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/116)
   * Added implementation details and diagrams for Tagging feature [\#116](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/116),
-    [\#226](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/226)
-  * Added Manual Testing Section for `Tag` feature [\#226](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/226)
+    [\#227](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/227)
+  * Added Manual Testing Section for `Tag` feature [\#227](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/227)
   * Added User stories [\#60](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/60)
   
 
