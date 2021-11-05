@@ -70,10 +70,11 @@ If you can type fast, MTR can get your application management tasks done faster 
 
 ## Command Navigation
 
+
 ### General Commands
-* Viewing help: ['help'](#viewing-help--help)
-* Undoing the last modification: ['undo'](#undoing-the-last-modification--undo)
-* Exiting the program: ['exit'](#exiting-the-program--exit)
+* Viewing help: [`help`](#viewing-help--help)
+* Undoing the last modification: [`undo`](#undoing-the-last-modification--undo)
+* Exiting the program: [`exit`](#exiting-the-program--exit)
 
 ### Position-Related Command
 * Adding a position: [`add-position`](#adding-a-position-add-position)
@@ -91,7 +92,6 @@ If you can type fast, MTR can get your application management tasks done faster 
 * Searching for applicants using keywords: [`find-applicant`](#searching-for-applicants-using-keywords-find-applicant)
 * Listing all applicants : [`list-applicant`](#listing-all-applicants--list-applicant)
 * Updating an applicant's status: [`mark`](#updating-an-applicants-status-mark)
-
 
 
 
