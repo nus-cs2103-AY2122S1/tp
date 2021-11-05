@@ -12,7 +12,7 @@ import seedu.siasa.model.Model;
  */
 public class ListContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "listcontact";
+    public static final String COMMAND_WORD = "allcontact";
 
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
 

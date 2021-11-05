@@ -12,7 +12,7 @@ import seedu.siasa.model.Model;
  */
 public class ListPolicyCommand extends Command {
 
-    public static final String COMMAND_WORD = "listpolicy";
+    public static final String COMMAND_WORD = "allpolicy";
 
     public static final String MESSAGE_SUCCESS = "Listed all policies";
 

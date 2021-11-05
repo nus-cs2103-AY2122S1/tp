@@ -66,11 +66,11 @@ Examples:
 * `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-#### Listing all contacts : `listcontact`
+#### Listing all contacts : `allcontact`
 
 Shows a list of all contacts in the application.
 
-Format: `listcontact`
+Format: `allcontact`
 
 #### Editing a contact : `editcontact`
 
@@ -142,11 +142,11 @@ coverage expires on 2021-12-12, tagged Aviva.
 quarterly payments of $300, 120 total payments, commission of 10% on the first 30 payments,
 belonging to the contact with index 2.
 
-#### Listing All Policies : `listpolicy`
+#### Listing All Policies : `allpolicy`
 
 Shows a list of all policies.
 
-Format: `listpolicy`
+Format: `allpolicy`
 
 #### Editing a policy : `editpolicy`
 
