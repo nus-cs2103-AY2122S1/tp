@@ -501,7 +501,7 @@ Usage scenario:
 Format: `redo`
 
 Examples :
-* If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
+* If you execute the command `delete n/Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
   If you then execute `redo` , the Marina Bay Sands contact will be deleted again
 
 
