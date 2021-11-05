@@ -27,4 +27,36 @@ public class AddressTest {
         assertTrue(Address.isValidAddress("-")); // one character
         assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
+
+    @Test
+    public void equals_twoSameObjects_success() {
+        Address address = new Address("Prince George's Park Residences, NUS, 118430");
+        assertTrue(address.equals(address));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithSameAddress_success() {
+        Address address1 = new Address("Prince George's Park Residences, NUS, 118430");
+        Address address2 = new Address("Prince George's Park Residences, NUS, 118430");
+        assertTrue(address1.equals(address2));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithDifferentAddresses_falseOutput() {
+        Address address1 = new Address("Prince George's Park Residences, NUS, 118430");
+        Address address2 = new Address("UTown, NUS, Singapore");
+        assertFalse(address1.equals(address2));
+    }
+
+    @Test
+    public void toString_aValidInput_success() {
+        Address address = new Address("Prince George's Park Residences, NUS, 118430");
+        assertTrue(address.toString().equals("Prince George's Park Residences, NUS, 118430"));
+    }
+
+    @Test
+    public void hashCode_validInput_correctOutput() {
+        Address address = new Address("Prince George's Park Residences, NUS, 118430");
+        assertTrue(address.hashCode() == -778107328);
+    }
 }
