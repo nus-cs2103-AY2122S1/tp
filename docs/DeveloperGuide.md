@@ -288,38 +288,38 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
 
-### FindAny feature
+### FindOr feature
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`.
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindOrCommand#Execute`.
 
-The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindAnyPredicate` is generated according to the user's command and passed as a argument into `ModelManager#updateFilteredPersonList`.
+The filtered list will be updated using `ModelManager#updateFilteredPersonList`. A `FindOrPredicate` is generated according to the user's command and passed as a argument into `ModelManager#updateFilteredPersonList`.
 It will be displayed in `PersonListPanel`.
 
-Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
+Given below is an example usage scenario and how the FindOr mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. All people are displayed at default. 
 
-Step 2. The user executes `findAny n/David n/Henry t/friend t/footnall` to search for a matching entry.
+Step 2. The user executes `findOr n/David n/Henry t/friend t/footnall` to search for a matching entry.
 
-Step 3. A `FindAnyPredicate`  which will only return `true` if person's name contains **either** `David` **or** `Henry` **OR** are
+Step 3. A `FindOrPredicate`  which will only return `true` if person's name contains **either** `David` **or** `Henry` **OR** are
 tagged to **either** `friend` **or** `football` is made.
 
-Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list. 
+Step 4. This`FindOrPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list. 
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
 #### Design considerations:
 
-**Aspect: How FindAny executes:**
+**Aspect: How FindOr executes:**
 
 * **Alternative 1:** Utilise `NameContainsKeywordsPredicate` and `PersonsTagsContainsCaseInsensitiveTags`.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Alternative 2 (current choice):** Create a `FindAnyPredicate` to store Name(s) and Tag(s).
-    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindAnyCommand`.
+* **Alternative 2 (current choice):** Create a `FindOrPredicate` to store Name(s) and Tag(s).
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindOrCommand`.
     * Cons: More code.
 
 
@@ -640,7 +640,7 @@ Future versions user stories
     
       Use case resumes at step 2.
     
-* 2c. FindAny command is used
+* 2c. FindOr command is used
     
     * 2c1. CONNECTIONS return all entries that matches any of the search terms provided.
 
