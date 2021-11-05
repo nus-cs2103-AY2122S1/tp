@@ -1252,40 +1252,40 @@ testers are expected to do more *exploratory* testing.
 
     * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
 
-    * Test case: `filter g/S1`
+    * Test case: `filter g/S1`<br>
       Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No students or lessons shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
       
-    * Test case: `filter g/s1`
+    * Test case: `filter g/s1`<br>
       Expected: Similar to previous.
       
-    * Test case: `filter g/J8`
+    * Test case: `filter g/J8`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user of the constraints of the grade condition to be inputted. 
       
-    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`.
+    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`<br>
       Expected. Similar to previous.
       
-    * Test case: `filter s2`
+    * Test case: `filter s2`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
 1. Filtering by subject
 
-    * Test case: `filter s/English`
+    * Test case: `filter s/English`<br>
       Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
       
-    * Test case: `filter s/english`
+    * Test case: `filter s/english`<br>
       Expected: Similar to previous.
       
-    * Test case: `filter english`
+    * Test case: `filter english`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
       
 1. Filtering by both grade and subject
 
     * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature.
     
-    * Test case: `filter s/English g/S1`
+    * Test case: `filter s/English g/S1`<br>
       Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
       
-    * Test case: `filter english S1`
+    * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
 ### Editing a student
@@ -1294,102 +1294,101 @@ testers are expected to do more *exploratory* testing.
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 n/Alex Ye`
+    * Test case: `edit 1 n/Alex Ye`<br>
       Expected: First student's name is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 n/`
+    * Test case: `edit 1 n/`<br>
       Expected: First student's name is not edited. The message box displays a message alerting the user of the constraints on names.
       
-    * Other incorrect edit name commands to try: `edit 1 n/y` (where y is not an alphanumeric character, `edit 1 n/x` (where x is longer than 150 characters)
+    * Other incorrect edit name commands to try: `edit 1 n/y` (where y is not an alphanumeric character, `edit 1 n/x` (where x is longer than 150 characters)<br>
       Expected: Similar to previous
 
 1. Editing a student's parent contact
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 p/98765432`
+    * Test case: `edit 1 p/98765432`<br>
       Expected: First student's parent contact is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 p/`
+    * Test case: `edit 1 p/`<br>
       Expected: First student's parent contact is not edited. The message box displays a message alerting the user of the constraints on parent contact numbers.
       
-    * Other incorrect edit parent contact commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits),
-    `edit 1 p/x1111111` (where x is a number that is not '6', '8' or '9')
+    * Other incorrect edit parent contact commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits), `edit 1 p/x1111111` (where x is a number that is not '6', '8' or '9')<br>
       Expected: Similar to previous
       
 1. Editing a student's email
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 e/alexye@gmail.com`
+    * Test case: `edit 1 e/alexye@gmail.com`<br>
       Expected: First student's email is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 e/`
+    * Test case: `edit 1 e/`<br>
       Expected: First student's email is not edited. The message box displays a message alerting the user of the constraints on emails.
       
-    * Other incorrect edit email commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` 
+    * Other incorrect edit email commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` <br>
       Expected: Similar to previous
       
 1. Editing a student's address
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 a/Blk 20 Hello Street #01-01`
+    * Test case: `edit 1 a/Blk 20 Hello Street #01-01`<br>
       Expected: First student's address is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 a/`
+    * Test case: `edit 1 a/`<br>
       Expected: First student's address is not edited. The message box displays a message alerting the user of the constraints on addresses.
       
-    * Other incorrect edit address commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`
+    * Other incorrect edit address commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`<br>
       Expected: Similar to previous
       
 1. Editing a student's grade
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 g/S2`
+    * Test case: `edit 1 g/S2`<br>
       Expected: First student's grade is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown. If the student was enrolled in any lessons in his previous grade, applying this edit will unenroll him from those lessons. The lessons he was enrolled in will also reflect a decrease in class size by 1.
       
-    * Test case: `edit 1 g/`
+    * Test case: `edit 1 g/`<br>
       Expected: First student's grade is not edited. The message box displays a message alerting the user of the constraints on grade levels.
       
-    * Other incorrect edit grade commands to try: `edit 1 g/A5`, `edit 1 g/p`
+    * Other incorrect edit grade commands to try: `edit 1 g/A5`, `edit 1 g/p`<br>
       Expected: Similar to previous
       
 1. Editing a student's remarks
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 r/discounted`
+    * Test case: `edit 1 r/discounted`<br>
       Expected: Remark is added onto the first student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 r/`
+    * Test case: `edit 1 r/`<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
       
-    * Test case: `edit 1 r/test1 r/test2 r/test3 r/test4 r/test5` (assuming first student already has 1 remark tagged)
+    * Test case: `edit 1 r/test1 r/test2 r/test3 r/test4 r/test5` (assuming first student already has 1 remark tagged)<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of that only a maximum of 5 remarks can be tagged to a student.
       
-    * Other incorrect edit remarks commands to try: `edit 1 r/test test`, `edit 1 r/!`
+    * Other incorrect edit remarks commands to try: `edit 1 r/test test`, `edit 1 r/!`<br>
       Expected: Similar to previous
       
-    * Test case: `edit 1 dr/discounted` (assuming 'discounted' remark already tagged to first student)
+    * Test case: `edit 1 dr/discounted` (assuming 'discounted' remark already tagged to first student)<br>
       Expected: Remark is deleted from student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
-      
-    * Test case: `edit 1 dr/`
+
+    * Test case: `edit 1 dr/`<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
-      
-    * Other incorrect edit remarks commands to try: `edit 1 dr/test test`, `edit 1 dr/!`
+
+    * Test case: Other incorrect edit remarks commands to try: `edit 1 dr/test test`, `edit 1 dr/!`<br>
       Expected: Similar to previous
           
-    * Test case: `edit 1 dr/notTaggedToStudent` (assuming 'notTaggedToStudent' remark is not tagged to first student)
+    * Test case: `edit 1 dr/notTaggedToStudent` (assuming 'notTaggedToStudent' remark is not tagged to first student)<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user that the remark he or she wishes to delete does not exist.
       
 1. Editing multiple fields and misc scenarios
 
-    * Test case: `edit 1 n/Alex p/87654321 g/s4`
+    * Test case: `edit 1 n/Alex p/87654321 g/s4`<br>
       Expected: First student's name, parent contact and grade are edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 0 n/Alex`
+    * Test case: `edit 0 n/Alex`<br>
       Expected: First student is not edited. The message box displays a message alerting the user that the given index is not valid.
 
 #### Clearing data
