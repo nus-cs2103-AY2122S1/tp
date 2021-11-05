@@ -14,7 +14,7 @@ public class TodayCommand extends Command {
     public static final String USER_TIP = "To go to the current date on the calendar, type: " + COMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Goes to the current date.\n"
-            + "Example: " + COMMAND_WORD;
+            + "This command should not have any parameters!";
 
     public static final String TODAY_MESSAGE = "Showing today."
             + " You can navigate forwards by typing \""

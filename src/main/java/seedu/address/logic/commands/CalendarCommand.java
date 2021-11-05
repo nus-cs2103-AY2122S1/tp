@@ -14,7 +14,7 @@ public class CalendarCommand extends Command {
     public static final String USER_TIP = "To switch to calendar view, type: " + COMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the calendar.\n"
-            + "Example: " + COMMAND_WORD;
+            + "This command should not have any parameters!";
 
     public static final String SHOWING_CALENDAR_MESSAGE = String.format(
             "Showing your calendar. You can go back to list view by typing \"%1$s\", or navigate the calendar with "

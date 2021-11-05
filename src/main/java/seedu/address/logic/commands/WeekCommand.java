@@ -14,7 +14,7 @@ public class WeekCommand extends Command {
     public static final String USER_TIP = "To view your weekly calendar, type: " + COMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your weekly calendar.\n"
-            + "Example: " + COMMAND_WORD;
+            + "This command should not have any parameters!";
 
     public static final String SHOWING_WEEK_MESSAGE = "Showing your weekly calendar."
             + " You can go back to list view by typing \""

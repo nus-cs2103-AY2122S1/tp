@@ -14,7 +14,7 @@ public class NextCommand extends Command {
     public static final String USER_TIP = "To navigate forward in the calendar, type: " + COMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Goes forwards in the calendar.\n"
-            + "Example: " + COMMAND_WORD;
+            + "This command should not have any parameters!";
 
     public static final String NEXT_MESSAGE = "Went forward in the calendar."
             + " You can jump back to today by typing \""

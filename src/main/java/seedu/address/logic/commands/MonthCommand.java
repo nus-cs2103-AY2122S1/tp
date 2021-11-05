@@ -14,7 +14,7 @@ public class MonthCommand extends Command {
     public static final String USER_TIP = "To view your monthly calendar, type: " + COMMAND_WORD;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows your monthly calendar.\n"
-            + "Example: " + COMMAND_WORD;
+            + "This command should not have any parameters!";
 
     public static final String SHOWING_MONTH_MESSAGE = "Showing your monthly calendar."
             + " You can go back to list view by typing \""

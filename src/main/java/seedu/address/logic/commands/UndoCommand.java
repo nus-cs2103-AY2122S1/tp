@@ -13,7 +13,8 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes the last Command that modified TAB data. \n";
+            + ": Undoes the last Command that modified TAB data. \n"
+            + "This command should not have any parameters!";
 
     public static final String MESSAGE_SUCCESS = "%1$s command for %2$s has been undone.";
     public static final String MESSAGE_FAILURE = "No commands to undo!";

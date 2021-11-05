@@ -11,7 +11,8 @@ import seedu.address.model.person.Person;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Redoes the last Command that has been undone. \n";
+            + ": Redoes the last Command that has been undone. \n"
+            + "This command should not have any parameters!";
 
     public static final String MESSAGE_SUCCESS = "%1$s command for %2$s has been redone.";
     public static final String MESSAGE_FAILURE = "No commands to redo!";
