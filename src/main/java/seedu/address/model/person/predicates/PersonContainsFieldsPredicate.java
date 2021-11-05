@@ -3,6 +3,7 @@ package seedu.address.model.person.predicates;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -36,10 +37,25 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
      */
     public void addFieldToTest(Optional<? extends String> fieldString,
                                ParserCheckedFunction<String, Field> func) throws ParseException {
-        if (!fieldString.isPresent()) {
+        if (fieldString.isEmpty()) {
             return;
         }
         this.fields.add(func.apply(fieldString.get()));
+    }
+
+    /**
+     * Add a field to the predicate to test from a string.
+     * @param fieldString The field to test.
+     * @param func The function to create the field.
+     */
+    public void addFieldToTest(List<String> fieldString,
+                                   ParserCheckedFunction<String, Field> func) throws ParseException {
+        if (fieldString.isEmpty()) {
+            return;
+        }
+        for (String s : fieldString) {
+            this.fields.add(func.apply(s));
+        }
     }
 
     /**
@@ -50,7 +66,6 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
         this.fields.add(field);
     }
 
-
     /**
      * Checks if the predicate tests for anything.
      * @return True if the predicate tests no fields.
@@ -58,8 +73,6 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
     public boolean isEmpty() {
         return this.fields.isEmpty();
     }
-
-
 
     @Override
     public boolean test(Person person) {

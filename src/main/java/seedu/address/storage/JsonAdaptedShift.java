@@ -54,8 +54,6 @@ public class JsonAdaptedShift {
                 .stream()
                 .map(JsonAdaptedRecurrencePeriod::new)
                 .collect(Collectors.toList()));
-
-
     }
 
     /**
@@ -87,7 +85,6 @@ public class JsonAdaptedShift {
         }
         Shift result = new Shift(modelDayOfWeek, modelSlot, periods);
         return result;
-
     }
 
     private DayOfWeek toModelTypeDayOfWeek() throws IllegalValueException {
@@ -97,6 +94,5 @@ public class JsonAdaptedShift {
             throw new IllegalValueException(re.getMessage());
         }
     }
-
 
 }

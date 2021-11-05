@@ -59,8 +59,5 @@ public class JsonAdaptedSchedule {
             }
         }
         return new Schedule(modelShifts);
-
     }
-
-
 }

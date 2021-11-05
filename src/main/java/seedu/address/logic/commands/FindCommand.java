@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 
 /**
@@ -19,10 +20,11 @@ import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final int INVALID_INDEX = -1;
+    private static final int NAME_AND_FIELD_PREDICATE = -1;
+    private static final int FIELD_PREDICATE_ONLY = -2;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) or the index specified and "
+            + "the specified keywords (case-insensitive) along with fields or the index specified and "
             + "displays them as a list with index numbers.\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
@@ -32,9 +34,16 @@ public class FindCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " alice bob charlie\n";
 
-    private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
+    public static final String INDEX_WITH_OTHER_INPUT = COMMAND_WORD + ": With index input, "
+            + "Only the index is expected. No other field is needed.\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " " + PREFIX_DASH_INDEX + " 2";
+
+
     private final NameContainsKeywordsPredicate namePredicate;
+    private final PersonContainsFieldsPredicate predicate;
     private final int index;
+    private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
     private StaffHasCorrectIndexPredicate indexPredicate = null;
 
     /**
@@ -42,9 +51,10 @@ public class FindCommand extends Command {
      *
      * @param namePredicate Predicate to filter the list by names that match a given name.
      */
-    public FindCommand(NameContainsKeywordsPredicate namePredicate) {
+    public FindCommand(NameContainsKeywordsPredicate namePredicate, PersonContainsFieldsPredicate predicate) {
         this.namePredicate = namePredicate;
-        this.index = INVALID_INDEX; // not used
+        this.predicate = predicate;
+        this.index = NAME_AND_FIELD_PREDICATE; // not used
     }
 
     /**
@@ -53,26 +63,45 @@ public class FindCommand extends Command {
      * @param index The index that the user searched for.
      */
     public FindCommand(int index) {
-        this.namePredicate = null;
+        assert index >= 0;
+        this.namePredicate = NameContainsKeywordsPredicate.EMPTY;
         this.index = index;
+        this.predicate = new PersonContainsFieldsPredicate();
+    }
+
+    /**
+     * Constructs a FindCommand object which searches for the person with the specified fields.
+     *
+     * @param predicate The predicate to test if the person containes the specified fields.
+     */
+    public FindCommand(PersonContainsFieldsPredicate predicate) {
+        assert predicate != null;
+        assert !predicate.isEmpty();
+        this.predicate = predicate;
+        this.index = FIELD_PREDICATE_ONLY;
+        this.namePredicate = NameContainsKeywordsPredicate.EMPTY;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (namePredicate != null) {
-            return executeNameSearch(model);
-
-        } else if (index > -1) {
-            checkIndex(model); // throws an exception if index is out of range
+        //with name and field
+        if (index == NAME_AND_FIELD_PREDICATE) {
+            return executeNameAndFieldSearch(model);
+        }
+        //empty case cannot search
+        if (index == FIELD_PREDICATE_ONLY) {
+            return executeFieldSearch(model);
+        }
+        if (index >= 0) {
+            checkIndex(model);
             indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
             return executeIndexSearch(model);
-
-        } else {
-            throw new CommandException("Check if your input are correct: -n for name, -i for index,\n"
-                    + "and that the index given is correct!");
         }
+        throw new CommandException("Check if your input are correct: -n for name, -i for index,\n"
+                + "and that the index given is correct!");
+
+
     }
 
     /**
@@ -81,8 +110,9 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    public CommandResult executeNameSearch(Model model) {
-        model.updateFilteredPersonList(namePredicate);
+    private CommandResult executeNameAndFieldSearch(Model model) {
+        model.updateFilteredPersonList(person -> namePredicate.test(person)
+                && predicate.test(person));
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
@@ -93,13 +123,28 @@ public class FindCommand extends Command {
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
 
+    private CommandResult executeFieldSearch(Model model) {
+        model.updateFilteredPersonList(person -> predicate.test(person));
+        ObservableList<Person> staffs = model.getFilteredPersonList();
+        int counter = 1;
+        for (Person p : staffs) {
+            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            counter++;
+        }
+        return new CommandResult(
+                String.format(successMessage.toString(), model.getFilteredPersonList().size()));
+    }
+
+
+
+
     /**
      * Executes a search by index.
      *
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    public CommandResult executeIndexSearch(Model model) {
+    private CommandResult executeIndexSearch(Model model) {
         model.updateFilteredPersonList(indexPredicate);
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
@@ -117,59 +162,24 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @throws CommandException When the index inputted is not within range.
      */
-    public void checkIndex(Model model) throws CommandException {
+    private void checkIndex(Model model) throws CommandException {
         int personListSize = model.getFilteredPersonList().size();
         if (index > personListSize - 1) { // -1 so that index starts from 0
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
-    /**
-     * Returns the index of the FindCommand object.
-     *
-     * @return index
-     */
-    public int getIndex() {
-        return this.index;
-    }
-
-    /**
-     * Returns the namePredicate of the FindCommand object.
-     *
-     * @return namePredicate
-     */
-    public NameContainsKeywordsPredicate getNamePredicate() {
-        return this.namePredicate;
-    }
 
     @Override
     public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && ((findByNameIsEquals((FindCommand) other)) || findByIndexIsEquals((FindCommand) other)));
+                && ((FindCommand) other).namePredicate.equals(this.namePredicate)
+                && ((FindCommand) other).index == index
+                && predicate.equals(((FindCommand) other).predicate));
     }
 
-    /**
-     * Checks if another FindCommand object which searches by name is equal to the current FindCommand object.
-     *
-     * @param otherFind The other FindCommand object to be checked
-     * @return Whether the otherFind is equal to this
-     */
-    public boolean findByNameIsEquals(FindCommand otherFind) {
-        return (otherFind.getIndex() == INVALID_INDEX && this.index == INVALID_INDEX)
-                && (otherFind.getNamePredicate() != null && this.namePredicate != null)
-                && (this.namePredicate.equals(otherFind.getNamePredicate()));
-    }
-
-    /**
-     * Checks if another FindCommand object which searches by index is equal to the current FindCommand object.
-     *
-     * @param otherFind The other FindCommand object to be checked
-     * @return Whether the otherFind is equal to this
-     */
-    public boolean findByIndexIsEquals(FindCommand otherFind) {
-        return (otherFind.namePredicate == null && this.namePredicate == null)
-                && (otherFind.getIndex() != INVALID_INDEX && this.index != INVALID_INDEX)
-                && (this.index == otherFind.getIndex());
-    }
 }
