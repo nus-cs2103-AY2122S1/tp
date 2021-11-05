@@ -68,12 +68,12 @@ public class TypicalStudents {
      * Returns an {@code ProgrammerError} with all the typical students.
      */
     public static ProgrammerError getTypicalProgrammerError() {
-        ProgrammerError ab = new ProgrammerError();
+        ProgrammerError pe = new ProgrammerError();
         for (Student student : getTypicalStudents()) {
             student.setLabList(getTypicalLabList());
-            ab.addStudent(student);
+            pe.addStudent(student);
         }
-        return ab;
+        return pe;
     }
 
     public static List<Student> getTypicalStudents() {
