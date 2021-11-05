@@ -76,6 +76,17 @@ public class FCallCommandTest {
     }
 
     @Test
+    public void execute_multipleFCallCommand_throwsCommandException() {
+        Person personToIncrement = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().incrementNumFailedCalls());
+        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), newPerson);
+        FCallCommand command = new FCallCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = FCallCommand.MESSAGE_INVALID_MULTIPLE_CALLS;
+        assertCommandFailure(command, model, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         FCallCommand firstCommand = new FCallCommand(INDEX_FIRST_PERSON);
         FCallCommand secondCommand = new FCallCommand(INDEX_SECOND_PERSON);

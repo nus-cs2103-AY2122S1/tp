@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import seedu.track2gather.commons.core.Messages;
 import seedu.track2gather.commons.core.index.Index;
@@ -27,12 +26,12 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s):\n";
 
-    private final ArrayList<Index> targetIndices;
+    private final List<Index> targetIndices;
 
     /**
      * Creates a DeleteCommand to delete the specified {@code Person}(s)
      */
-    public DeleteCommand(ArrayList<Index> targetIndices) {
+    public DeleteCommand(List<Index> targetIndices) {
         targetIndices.sort(Comparator.reverseOrder());
         this.targetIndices = targetIndices;
     }
@@ -53,7 +52,7 @@ public class DeleteCommand extends Command {
             model.deletePerson(personToDelete);
             commandResultList.add(0, personToDelete.toString());
         }
-        commandResult += commandResultList.stream().collect(Collectors.joining("\n"));
+        commandResult += String.join("\n", commandResultList);
 
         return new CommandResult(commandResult);
     }

@@ -63,7 +63,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s\n"
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Fields%1$s\n"
             + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This case number already exists in the contacts list.";
@@ -101,7 +101,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editPersonDescriptor));
     }
 
     /**
@@ -322,6 +322,30 @@ public class EditCommand extends Command {
                     && getNextOfKinPhone().equals(e.getNextOfKinPhone())
                     && getNextOfKinAddress().equals(e.getNextOfKinAddress())
                     && getCallStatus().equals(e.getCallStatus());
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder builder = new StringBuilder();
+            getName().ifPresent(n -> builder.append("; Name: ").append(n));
+            getPhone().ifPresent(p -> builder.append("; Phone: ").append(p));
+            getEmail().ifPresent(e -> builder.append("; Email: ").append(e));
+            getCaseNumber().ifPresent(cn -> builder.append("; Case Number: ").append(cn));
+            getHomeAddress().ifPresent(ha -> builder.append("; Home Address: ").append(ha));
+            getWorkAddress().flatMap(wa -> wa.value)
+                    .ifPresent(wa -> builder.append("; Work Address: ").append(wa));
+            getQuarantineAddress().flatMap(qa -> qa.value)
+                    .ifPresent(qa -> builder.append("; Quarantine Address: ").append(qa));
+            getShnPeriod().flatMap(sh -> sh.value)
+                    .ifPresent(sh -> builder.append("; SHN Period: ").append(sh));
+            getNextOfKinName().flatMap(kn -> kn.value)
+                    .ifPresent(kn -> builder.append("; Next-of-Kin's Name: ").append(kn));
+            getNextOfKinPhone().flatMap(kp -> kp.value)
+                    .ifPresent(kp -> builder.append("; Next-of-Kin's Phone: ").append(kp));
+            getNextOfKinAddress().flatMap(ka -> ka.value)
+                    .ifPresent(ka -> builder.append("; Next-of-Kin's Address: ").append(ka));
+
+            return builder.toString();
         }
     }
 }

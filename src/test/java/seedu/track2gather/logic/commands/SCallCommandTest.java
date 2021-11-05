@@ -76,6 +76,17 @@ public class SCallCommandTest {
     }
 
     @Test
+    public void execute_multipleSCallCommand_throwsCommandException() {
+        Person personToIncrement = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
+        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), newPerson);
+        SCallCommand command = new SCallCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = SCallCommand.MESSAGE_INVALID_MULTIPLE_CALLS;
+        assertCommandFailure(command, model, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         SCallCommand firstCommand = new SCallCommand(INDEX_FIRST_PERSON);
         SCallCommand secondCommand = new SCallCommand(INDEX_SECOND_PERSON);

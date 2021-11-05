@@ -55,4 +55,9 @@ public class Index implements Comparable<Index> {
                 || (other instanceof Index // instanceof handles nulls
                 && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
     }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(zeroBasedIndex);
+    }
 }

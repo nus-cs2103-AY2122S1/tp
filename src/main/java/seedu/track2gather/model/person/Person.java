@@ -201,24 +201,12 @@ public class Person implements Comparable<Person> {
                 .append("; Home Address: ")
                 .append(getHomeAddress());
 
-        if (getWorkAddress().value.isPresent()) {
-            builder.append("; Work Address: ").append(getWorkAddress().value.get());
-        }
-        if (getQuarantineAddress().value.isPresent()) {
-            builder.append("; Quarantine Address: ").append(getQuarantineAddress().value.get());
-        }
-        if (getShnPeriod().value.isPresent()) {
-            builder.append("; SHN Period: ").append(getShnPeriod().value.get());
-        }
-        if (getNextOfKinName().value.isPresent()) {
-            builder.append("; Next-of-Kin's Name: ").append(getNextOfKinName().value.get());
-        }
-        if (getNextOfKinPhone().value.isPresent()) {
-            builder.append("; Next-of-Kin's Phone: ").append(getNextOfKinPhone().value.get());
-        }
-        if (getNextOfKinAddress().value.isPresent()) {
-            builder.append("; Next-of-Kin's Address: ").append(getNextOfKinAddress().value.get());
-        }
+        getWorkAddress().value.ifPresent(address -> builder.append("; Work Address: ").append(address));
+        getQuarantineAddress().value.ifPresent(address -> builder.append("; Quarantine Address: ").append(address));
+        getShnPeriod().value.ifPresent(period -> builder.append("; SHN Period: ").append(period));
+        getNextOfKinName().value.ifPresent(value -> builder.append("; Next-of-Kin's Name: ").append(value));
+        getNextOfKinPhone().value.ifPresent(value -> builder.append("; Next-of-Kin's Phone: ").append(value));
+        getNextOfKinAddress().value.ifPresent(address -> builder.append("; Next-of-Kin's Address: ").append(address));
 
         return builder.toString();
     }

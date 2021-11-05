@@ -4,6 +4,7 @@ import static seedu.track2gather.commons.core.Messages.MESSAGE_INVALID_COMMAND_F
 import static seedu.track2gather.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.track2gather.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.track2gather.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.track2gather.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,15 @@ public class DeleteCommandParserTest {
         ArrayList<Index> indicesFirstPerson = new ArrayList<>();
         indicesFirstPerson.add(INDEX_FIRST_PERSON);
         assertParseSuccess(parser, "1", new DeleteCommand(indicesFirstPerson));
+    }
+
+    // Checks that it only delete unique indices.
+    @Test
+    public void parse_nonUniqueArgs_returnsDeleteCommand() {
+        ArrayList<Index> indices = new ArrayList<>();
+        indices.add(INDEX_FIRST_PERSON);
+        indices.add(INDEX_SECOND_PERSON);
+        assertParseSuccess(parser, "1 1 1 2 2", new DeleteCommand(indices));
     }
 
     @Test
