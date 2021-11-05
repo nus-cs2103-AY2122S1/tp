@@ -711,11 +711,12 @@ The following sequence diagram shows how the roster operation works:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** The lifelines for `FilterCommandParser` and `FilterCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+:information_source: **Note:** The lifelines for `RosterCommandParser` and `RosterCommand` should end at destroy marker 
+(X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the filter command:
+The following activity diagram summarizes what happens when a user executes the roster command:
 
 <center>
 <img alt="FilterActivityDiagram" src="images/DeveloperGuideImage/FilterActivityDiagram.png"/>
