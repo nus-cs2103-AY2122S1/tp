@@ -780,6 +780,9 @@ The activity diagram below shows the flow of a typical tag command.
    Any changes to the tags will be reflected immediately: In this case, the tag `fat` will be added while the
    tag `thin` will be deleted.
    
+The sequence diagram below shows the process for the usage scenario as described above.
+![TagSequenceDiagram](images/TagSequenceDiagram.png)
+   
 #### Design Considerations
 
 * **Alternative 1 (current choice):** Implement a dedicated Tag command.
