@@ -452,7 +452,7 @@ related to the UI. In addition, the following classes are utilised:
 - `DownloadCommand`: for generating the `DownloadCommandResult`
 - `DownloadCommandResult`: for displaying the feedback to the user
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
-- `Styles.css`: for the customisation of styles for pop-up messages
+- `Popup.css`: for the customisation of styles for pop-up messages
 
 The following sequence diagram shows how the `download` command works:
 
@@ -470,7 +470,7 @@ there is any data to begin with. Only if there exists any data will the user be 
 Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
 indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
 only know if the data was successfully downloaded after the textual response is shown to the user. Using a pop-up
-message right at the end of this operation means we can change the message depending on whether the download was a
+message right at the end of this operation means we can customise the message depending on whether the download was a
 success.
 
 ### Alternatives
@@ -481,8 +481,8 @@ success.
 
 2. Another alternative with respect to the user experience could be to disallow the user from selecting a folder to save
    their data to. Instead, a default location could be chosen so as to save the user some time in getting their data
-   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
-functionality of allowing the user to select a folder destination.
+   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the 
+   functionality of allowing the user to select a folder destination.
 
 --------------------------------------------------------------------------------------------------------------------
 

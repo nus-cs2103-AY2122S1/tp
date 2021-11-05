@@ -1,17 +1,29 @@
 @startuml
 !include ../style.puml
 
-Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":ProgrammerErrorParser" as abp LOGIC_COLOR
-Participant ":DownloadCommand" as dc LOGIC_COLOR
+Participant ":JsonUtil" as ju STORAGE_COLOR
+Participant ":MainWindow" as mw UI_COLOR
+Participant ":LogicManager" as lm LOGIC_COLOR
 
-[-> logic : execute
-activate logic
-logic -> abp ++: parseCommand(commandText)
-create dc
-abp -> dc
-abp -> dc ++: execute(model)
-dc --> abp --: command
-abp --> logic --: command
+activate lm
+activate ju
+activate mw
+lm --> mw : DownloadCommandResult
+
+ju <- mw
+ju -> ju : Get JSON data
+activate ju
+ju --> mw : jsonData
+deactivate ju
+
+mw -> mw : prompt for destination
+activate mw
+mw -> ju :file
+deactivate mw
+
+ju -> ju : Write to Csv
+activate ju
+<-- ju
+deactivate ju
 
 @enduml
