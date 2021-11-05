@@ -211,8 +211,10 @@ Format: `student -dl PERSON_INDEX LESSON_INDEX`
 * Deletes the specified lesson at `LESSON_INDEX` of the student specified.
 * Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
 
+<div align="center">
 ![studentLessonIndex](images/LessonIndex.png)
 *The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v)*
+</div>
 
 Example:
 * `student -dl 1 1` deletes the first lesson from the first student.
