@@ -125,8 +125,11 @@ The `Model` component,
 * stores the `ModuleTracker` data, which contains data of modules, user's information and Mc progress.
 * exposes various `ObservableList`s that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
-* A `Module` stores a `Title`, `Code`, `Description`, `Mc`, `AcademicCalendar` and zero or more `Tag`s.
-* A `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
+<br><br>
+  
+A `Module` stores a `Title`, `Code`, `Description`, `Mc`, `AcademicCalendar` and zero or more `Tag`s.
+<br><br>
+An `UserInfo` stores a `Mc` as Mc goal and a `AcademicCalendar` as current semester.
 
 
 ### Storage component
