@@ -280,6 +280,34 @@ Example 2:
 show 4
 ```
 
+### Exporting Student Contacts - `export`
+
+Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
+
+Format 1:
+
+```
+export <FILENAME>.json
+```
+
+Example 1:
+
+```
+export Friends.json
+```
+
+Format 2:
+
+```
+export <FILENAME>.csv
+```
+
+Example 2:
+
+```
+export Friends.csv
+```
+
 ### Importing Student Contacts - `import`
 
 Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
@@ -310,34 +338,6 @@ Example 2:
 import CS2103T.csv
 ```
 
-### Exporting Student Contacts - `export`
-
-Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
-
-Format 1:
-
-```
-export <FILENAME>.json
-```
-
-Example 1:
-
-```
-export Friends.json
-```
-
-Format 2:
-
-```
-export <FILENAME>.csv
-```
-
-Example 2:
-
-```
-export Friends.csv
-```
-
 ### Setting a Contact as Favourite - `fav`
 
 Helps to set a particular Student Contact as a Favourite only if the contact has not been favourited.
@@ -354,9 +354,9 @@ Example:
 fav 1
 ```
 
-### Setting a Contact as Unfavourite - `unfav`
+### Setting a Contact as Unfavorite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavourite only if the contact has been favourited.
+Helps to set a particular Student Contact as an Unfavorite only if the contact has been favorited.
 
 Format:
 
@@ -372,16 +372,9 @@ unfav 1
 
 ### Displaying the Help Window - `help`
 
-Displays the Help Window, which consists of a list
-of possible Commands, and a link to this UserGuide.
+Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
 
 Format:
-
-```
-help
-```
-
-Example:
 
 ```
 help
@@ -401,12 +394,6 @@ Format:
 list
 ```
 
-Example:
-
-```
-list
-```
-
 ### Deleting All Student Contacts - `clear`
 
 Deletes all the Student Contacts present.
@@ -417,15 +404,13 @@ Format:
 clear
 ```
 
-Example:
-
-```
-clear
-```
-
-> :exclamation: WARNING: Use With Caution!
+<div markdown="span" class="alert alert-danger">
+:exclamation: DANGER: Use With Caution!
+</div>
 
 ### Open Telegram of Current User
+
+Opens the current user's Telegram link in the user's default web browser. If the user has the Telegram application installed on his device, he will be redirected to the application.
 
 Format:
 
@@ -434,6 +419,8 @@ te
 ```
 
 ### Open GitHub of Current User
+
+Opens the current user's GitHub profile in the user's default web browser.
 
 Format:
 
@@ -450,12 +437,6 @@ Similar to a Command Line Interface, <kbd>↑</kbd> retrieves the previous comma
 Exits the App.
 
 Format:
-
-```
-exit
-```
-
-Example:
 
 ```
 exit
