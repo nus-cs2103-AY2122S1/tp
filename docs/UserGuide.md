@@ -25,7 +25,7 @@ This user guide is intended for any user of TAB. It provides installation instru
 
 **Navigation**
 
-In the [Table of Contents](), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
 
 **Conventions Used**
 
@@ -72,7 +72,7 @@ _text_ | Caption for images.
 
 <div style="page-break-after: always;"></div>
 
-## Graphical User Interface (GUI)
+## Overview of the Graphical User Interface (GUI)
 
 This section briefly explains the various section of TAB's GUI.
 
@@ -137,7 +137,6 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 An example of a command in TAB:
 ![Command format](images/CommandFormat.png)
 
-
 #### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -171,6 +170,10 @@ An example of a command in TAB:
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
+<br />
+
+[back to table of contents](#)
+
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -192,6 +195,10 @@ Format: `help`
 
 ![help](images/help.png)
 <div class="caption">Help window interface.</div>
+
+<br />
+
+[back to table of contents](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -428,8 +435,6 @@ Format: `list`
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
@@ -513,6 +518,10 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
 
 ![findNone](images/findNone.png)
 <div class="caption">TAB displays three students after the find command.</div>
+
+<br />
+
+[back to table of contents](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -774,8 +783,6 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Managing Lesson Fees
@@ -860,8 +867,6 @@ This value would be used to calculate and flag out which lesson's fees are due b
 <br />
 
 [back to table of contents](#)
-
-<br />
 
 <div style="page-break-after: always;"></div>
 
@@ -955,10 +960,7 @@ Format: `today`
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
-
 
 ### Miscellaneous Commands
 
@@ -1028,8 +1030,6 @@ Format: `exit`
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Managing Data
@@ -1057,8 +1057,6 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 [back to table of contents](#)
 
-<br />
-
 <div style="page-break-after: always;"></div>
 
 ### Menu Bar Shortcuts
@@ -1082,8 +1080,6 @@ This means that after clicking any button in the GUI, you do not have to click i
 
 [back to table of contents](#)
 
-<br />
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -1103,8 +1099,6 @@ This section records frequently asked questions from users of TAB.
 <br />
 
 [back to table of contents](#)
-
-<br />
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -1132,8 +1126,6 @@ UX | User Experience - The experience a user has when using the app.
 
 [back to table of contents](#)
 
-<br />
-
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -1145,6 +1137,7 @@ The commands are categorised into 4 different categories:
 * [Lessons](#lessons)
 * [Navigating the UI](#navigating-the-ui)
 * [General](#general)
+
 <br/>
 
 ### Students
@@ -1195,4 +1188,3 @@ Action | Format
 
 [back to table of contents](#)
 
-<br />
