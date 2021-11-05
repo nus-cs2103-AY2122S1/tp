@@ -4,10 +4,10 @@ title: User Guide
 ---
 
 Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming 
-[events](#glossary) and the details of their [participants](#glossary)**. It does not handle communication between the event organiser and the 
-participants.
+[events](#glossary) and the details of their [Participants](#glossary)**. It does not handle communication between the event organiser and the 
+Participants.
 
-Managera is OS-independent meaning it will work on any operating system. (Windows, MacOS, Linux)
+Managera is OS-independent, meaning it will work on any operating system (Windows, MacOS, Linux).
 
 ## Table of Contents
 - [**What this user guide is for**](#what-this-user-guide-is-for)
@@ -21,8 +21,8 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Locating Participants by name: `find`](#locating-participants-by-name-find)
         * [Listing all Participants: `list`](#listing-all-participants--list)
         * [Viewing a Participant's details: `view`](#viewing-a-participants-details-view)
-        * [Adding Next-of-Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
-        * [Deleting Next-of-Kin of a Participant: `deleteNok`](#deleting-next-of-kin-of-a-participant-deletenok)
+        * [Adding a Next-of-Kin to a Participant: `addNok`](#adding-a-next-of-kin-to-a-participant-addnok)
+        * [Deleting a Next-of-Kin of a Participant: `deleteNok`](#deleting-a-next-of-kin-of-a-participant-deletenok)
     * [Event](#event)
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
@@ -66,8 +66,7 @@ look through the [next section](#how-to-use-this-user-guide).
 ## How to use this user guide
 
 If this is the first time you are using Managera, you are strongly advised to visit the [Quick Start](#quick-start) 
-section to learn how to set up Managera
-and get started.
+section to learn how to set up Managera and get started.
 
 If there are any doubts on how certain commands are used, you can look for the description of the command in the 
 [Features](#features) section or have a brief overview in the [Command Summary](#command-summary) section.
@@ -107,7 +106,7 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Participant 
      named `John Doe` to Managera.
 
-   * **`delete`**`3` : Deletes the 3rd Participant shown in the current list.
+   * **`delete 3`** : Deletes the 3rd Participant shown in the current list.
 
    * **`clear`** : Deletes all Participants and Events.
      
@@ -157,12 +156,12 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 The following commands deal with the handling of Participants in Managera. They can help you: 
 * [Add a Participant](#adding-a-participant-add), 
 * [Delete a Participant](#deleting-a-participant--delete), 
-* [Edit a Participants](#editing-a-participant--edit), 
+* [Edit a Participant's details](#editing-a-participant--edit), 
 * [Locate Participants by name](#locating-participants-by-name-find), 
 * [List all Participants](#listing-all-participants--list), 
 * [View a Participant's details](#viewing-a-participants-details-view), 
-* [Add Next-of-Kin to a Participant](#adding-next-of-kin-to-a-participant-addnok) and 
-* [Delete Next-of-Kin of a Participant](#deleting-next-of-kin-of-a-participant-deletenok).
+* [Add a Next-of-Kin to a Participant](#adding-a-next-of-kin-to-a-participant-addnok) and 
+* [Delete a Next-of-Kin of a Participant](#deleting-a-next-of-kin-of-a-participant-deletenok).
 
 ### Adding a Participant: `add`
 
@@ -170,17 +169,17 @@ Adds a Participant to Managera.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
-* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`.
 * The phone number should only have numbers, and must be at least 3-digits long.
 * Emails should be of the form `local-part@domain`. The full list of constraints can be found [here](#valid-emails).
 * The address does not have any constraints.
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
 
 
-* Managera cannot accept duplicate participants. A participant is considered duplicate if their name
-  and birthdate are identical with those of an existing participant.
-* If a participant to be added shares an identical name with an existing participant, but one of them lacks a 
-  birthdate, they are treated as two different participants. (The new participant will be added)
+* Managera cannot accept duplicate Participants. A Participant is considered duplicate if their name
+  and birthdate are identical with those of an existing Participant.
+* If a Participant to be added shares an identical name with an existing Participant, but one of them lacks a 
+  birthdate, they are treated as two different Participants. (The new Participant will be added.)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/2000-01-02` - Adds a Participant
@@ -219,17 +218,16 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
 * Existing values will be updated to the input values.
 
 
-* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`.
 * The phone number should only have numbers, and must be at least 3-digits long.
 * Emails should be of the form `local-part@domain`. The full list of constraints can be found [here](#valid-emails).
 * The address does not have any constraints.
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
   
 
-* If a participant is edited in a way such that their new name and birthdate  
-  would exactly match those of another existing participant, Managera would refuse to execute the command as it forbids 
-  duplicate participants.
-* A participant is not considered duplicate if either their name or birthdate is different.
+* If a Participant is edited in a way such that their new name and birthdate would exactly match those of another
+  existing Participant, Managera would refuse to execute the command as it forbids duplicate Participants.
+* A Participant is not considered duplicate if either their name or birthdate is different.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com d/1999-10-09` - Edits the phone number, email address and birthdate of the 
@@ -244,17 +242,17 @@ Finds Participant(s) whose names contain any of the given keywords. It is possib
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g., `hans` will match `Hans`
-* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g., `Han` will not match `Hans`
+* Only full words will be matched e.g., `Han` will not match `Hans`.
 * Participants whose names match at least one keyword will be returned (i.e. `OR` search).
-  e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
-* `find John` - Finds any Participants with the name "John"; possible matches: `John` and `John Doe`.
-* `find alex david` - Finds any Participants with "Alex" or "David" in their names; 
-  possible matches: `Alex Yeoh` and `David Li`<br>
+* `find John` - Finds any Participants with the name "John". Some possible matches are: `John` and `John Doe`.
+* `find alex david` - Finds any Participants with "Alex" or "David" in their names. Some
+  possible matches are: `Alex Yeoh` and `David Li`.<br>
   
 <br>![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -283,7 +281,7 @@ Example Usage:
 
 <br>![result for 'view 1'](images/viewFirstResult.png)
 
-### Adding Next-of-Kin to a Participant: `addNok`
+### Adding a Next-of-Kin to a Participant: `addNok`
 
 Adds a Next-of-Kin (NOK) to a Participant.
 
@@ -293,17 +291,17 @@ Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 * The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * An NOK with the same name cannot be assigned to the same Participant.
-* The name must contain only alphanumeric characters and is case-insensitive e.g., `Willy` will match `wiLLy`
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Willy` will match `wiLLy`.
   
 
-* Managera does not allow duplicate NOKs for a single participant. An NOK is considered duplicate if they share the 
-  same name with another existing NOK. Please ensure that all NOKs for a single participant have different names.
+* Managera does not allow duplicate NOKs for a single Participant. An NOK is considered duplicate if they share the 
+  same name with another existing NOK. Please ensure that all NOKs for a single Participant have different names.
 
 Example Usage:
-* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - Adds an NOK whose name is Janette Yeo with contact number
+* `addNok 1 n/Janette Yeo p/88734323 tag/Spouse` - Adds an NOK whose name is Janette Yeo with contact number
   88734323 and tag Spouse to the first Participant.
 
-### Deleting Next-of-Kin of a Participant: `deleteNok`
+### Deleting a Next-of-Kin of a Participant: `deleteNok`
 
 Deletes a Next-of-Kin (NOK) of a Participant.
 
@@ -343,7 +341,7 @@ Format: `addEvent n/NAME d/DATE [t/TIME]`
 
 * The event name must contain only alphanumeric characters.
 * The event date must be given in YYYY-MM-DD format.
-* The event time must be given in 24-hr format e.g., 0000 to 2359.
+* The event time must be given in 24-hr format, i.e. 0000 to 2359.
   
 
 * Managera cannot accept duplicate events. An event is considered duplicate it shares the same name **and** date
@@ -351,7 +349,7 @@ Format: `addEvent n/NAME d/DATE [t/TIME]`
   different name or different date from those that already exist in Managera.
 
 Example Usage:
-* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 9:00am 
+* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 at 9:00am 
   to the Event list.
 * `addEvent n/240Km Marathon d/2022-08-20` - Adds a full-day Event "240 km Marathon" on 20th August 2022 
   to the Event list.
@@ -388,7 +386,7 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
   due to the fact that time is optional for an Event.
 * The event name must contain only alphanumeric characters.
 * The event date must be given in YYYY-MM-DD format.
-* The event time must be given in 24-hr format e.g., 0000 to 2359.
+* The event time must be given in 24-hr format, i.e. 0000 to 2359.
 
 
 * If an event is edited in a way such that its name **and** date
@@ -427,17 +425,17 @@ Finds Events whose names contain any of the given keywords. It is possible for t
 
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g., `marathon` will match `Marathon`
-* The order of the keywords does not matter. e.g., `Marathon Commencement` will match `Commencement Marathon`
+* The search is case-insensitive. e.g., `marathon` will match `Marathon`.
+* The order of the keywords does not matter. e.g., `Marathon Commencement` will match `Commencement Marathon`.
 * Only the name is searched.
-* Only full words will be matched e.g., `Marath` will not match `Marathon`
+* Only full words will be matched e.g., `Marath` will not match `Marathon`.
 * Events matching at least one keyword will be returned (i.e. `OR` search).
-  e.g., `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`
+  e.g., `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`.
 
 Examples:
-* `findEvent party` - Finds any Events with the name "party"; possible matches: `beach party` and `Christmas party`
-* `findEvent marathon meeting` - Finds any Events with "marathon" or "meeting" in their names;
-  possible matches:  `240Km Marathon`, `project meeting`<br>
+* `findEvent party` - Finds any Events with the name "party". Some possible matches are: `beach party` and `Christmas party`.
+* `findEvent marathon meeting` - Finds any Events with "marathon" or "meeting" in their names. Some
+  possible matches are:  `240Km Marathon`, `project meeting`.<br>
 
 ### Filtering Events by time: `filterEvents`
 
@@ -446,12 +444,12 @@ Filters the Event list for Events occurring on a specific date and optionally, t
 Format: `filterEvents d/DATE [t/TIME]`
 
 * The event date must be given in YYYY-MM-DD format.
-* The event time must be given in 24-hr format e.g., 0000 to 2359.
+* The event time must be given in 24-hr format, i.e. 0000 to 2359.
 
 Example Usage:
 * `filterEvents d/2021-09-18` - Filters the displayed Event list to show only Events occurring on 18th September 2021.
 * `filterEvents d/2021-09-18 t/0900` - Filters the displayed Event list to show only Events occurring on 
-  18th September 2021 9am.
+  18th September 2021 at 9am.
 
 ### Sorting Events by time: `sortEvents`
 
@@ -489,14 +487,13 @@ Example Usage:
 
 Adds a Participant with the first specified index to the Event with the second specified index.
 
-Format:
-`enroll PARTICIPANT_INDEX EVENT_INDEX`
+Format: `enroll PARTICIPANT_INDEX EVENT_INDEX`
 
 * Adds the Participant at specified `PARTICIPANT_INDEX` to the Event at specified index `EVENT_INDEX`.
 * `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
 * `EVENT_INDEX` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
-* You cannot add participants who were already added to the event previously.
+* You cannot add Participants who were already added to the event previously.
 
 Example Usage:
 * `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event
@@ -514,7 +511,7 @@ Format: `expel PARTICIPANT_INDEX EVENT_INDEX`
 * `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
 * `EVENT_INDEX` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
-* You cannot remove participants who were not added to the event previously.
+* You cannot remove Participants who were not added to the event previously.
 
 Example Usage:
 * `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event
@@ -522,7 +519,7 @@ Example Usage:
 
 ### Showing an Event's Participants: `showParticipants`
 
-Displays the list of participants of the Event at the specified index.
+Displays the list of Participants of the Event at the specified index.
 
 Format: `showParticipants INDEX`
 
@@ -531,7 +528,7 @@ Format: `showParticipants INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `showParticipants 4` - Displays the list of participants of the 4th Event in the displayed Event list.
+* `showParticipants 4` - Displays the list of Participants of the 4th Event in the displayed Event list.
 
 <br>![result for 'showParticipants 4'](images/showParticipantsFourthResult.png)
 
@@ -574,10 +571,10 @@ Format: `exit`
 * Emails should be of the form `local-part@domain`.
 * The local-part should only contain alphanumeric characters and these special characters: +_.-
 * The local-part should not start or end with any of the special characters.
-* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods
+* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 * The domain name must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
+    - end with a domain label at least 2 characters long,
+    - have each domain label start and end with alphanumeric characters,
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
     
 --------------------------------------------------------------------------------------------------------------------
