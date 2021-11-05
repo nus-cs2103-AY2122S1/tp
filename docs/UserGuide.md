@@ -85,6 +85,8 @@ Shows a message explaining how to access the help page.
 
 ### <a name="view-dashboard"></a>1.2 Dashboard: `dashboard`
 
+![dashboard](images/commands/DashboardCommand/dashboard.png)
+
 Displays a dashboard window showing the following data:
 
 1. Number of students
@@ -140,7 +142,7 @@ In summary:
 
 ### <a name="add-student"></a>3.1 Add Student: `add`
 
-Adds a student to ProgrammerError with their student ID and class ID.
+Adds a student to ProgrammerError with their student ID and class ID. Both the student ID and class ID must be unique. 
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
@@ -153,12 +155,16 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 
-Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to
+Edits the details or grade of an existing student's in the PE.  Both the student ID and class ID must be unique. Take note that 1-indexing is used here as according to
 the displayed list.
 
-Format 1:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
+Format 1:
 
-Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
+`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
+
+Format 2:
+
+`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input values.
@@ -166,7 +172,7 @@ Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 <div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `edit 1 -n Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
-- `edit 1 -ln 4 -s 29.5` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
+- `edit 1 -ln 4 -s 29` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
 
 </div>
 
@@ -194,6 +200,9 @@ sequence of characters provided in the argument string.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
+![filter](images/commands/FilterCommand/filter.png)
+
+
 <div markdown="block" class="alert alert-success">💡 **Examples:**
 
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
@@ -213,7 +222,7 @@ The student particular and lab results will be updated if other commands modify 
 
 Format: `show <INDEX_IN_LIST>`
 
-![UI](images/commands/ShowCommand/show.png)
+![show](images/commands/ShowCommand/show.png)
 
 <div markdown="block" class="alert alert-success">💡 **Example:**
 
@@ -281,7 +290,7 @@ Command | Format & Examples
 **Dashboard** | `dashboard`
 **Delete Lab** | `dellab -ln <LAB_NUM>`
 **Download** | `download`
-**Edit** | Format 1:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>` <br/> Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
+**Edit** | Format 1:<br/> `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>` <br/> Format 2:<br/>`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 **Edit Lab** | `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 **Exit** | `exit`
 **Fill** | `fill`
