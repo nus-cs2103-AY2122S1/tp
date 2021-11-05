@@ -3,7 +3,12 @@ layout: page
 title: Developer Guide
 ---
 
-## **About this document**
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Introduction**
 
 This document provides the relevant information for developers-as-users and developers-as-maintainers to learn more about the design architecture and user-related considerations made in designing this application.
 
@@ -19,11 +24,6 @@ Here are the interpretations of symbols and formatting used in this document:
 * :bulb: indicates tips.
 * `Tuitione` is used in referencing code due to code syntax.
 * **TuitiONE** is used when referencing the application.
-
---------------------------------------------------------------------------------------------------------------------
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,7 +48,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+<center>
 <img src="images/DeveloperGuideImage/ArchitectureDiagram.png" width="280" />
+</center>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -74,7 +76,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
+<center>
 <img src="images/DeveloperGuideImage/ArchitectureSequenceDiagram.png" width="574" />
+</center>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -83,7 +87,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
+<center>
 <img src="images/DeveloperGuideImage/ComponentManagers.png" width="300" />
+</center>
 
 The sections below give more details of each component.
 
@@ -91,7 +97,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/ui/Ui.java)
 
-![Structure of the UI Component](images/DeveloperGuideImage/UiClassDiagram.png)
+<center>
+<img alt="Structure of the UI Component" src="images/DeveloperGuideImage/UiClassDiagram.png" width="650"/>
+</center>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -110,7 +118,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
+<center>
 <img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="550"/>
+</center>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `TuitioneParser` class to parse the user command.
@@ -120,14 +130,22 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeveloperGuideImage/DeleteSequenceDiagram.png)
+<center>
+<img alt="Interactions Inside the Logic Component for the `delete 1` Command 0" src="images/DeveloperGuideImage/DeleteSequenceDiagram0.png"/>
+</center>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<center>
+<img alt="Interactions Inside the Logic Component for the `delete 1` Command 1" src="images/DeveloperGuideImage/DeleteSequenceDiagram1.png" width="650"/>
+</center>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser`, `DeleteCommand` and `Student s` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/DeveloperGuideImage/ParserClasses.png" width="600"/>
+<center>
+<img src="images/DeveloperGuideImage/ParserClasses.png" width="650"/>
+</center>
 
 How the parsing works:
 * When called upon to parse a user command, the `TuitioneParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TuitioneParser` returns back as a `Command` object.
@@ -136,8 +154,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-![Structure of the Model Component](images/DeveloperGuideImage/ModelClassDiagram.png)
-
+<center>
+<img alt="Structure of the Model Component" src="images/DeveloperGuideImage/ModelClassDiagram.png" width="650"/>
+</center>
 
 The `Model` component,
 
@@ -150,9 +169,11 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects. A similar design can be considered for `Grade` as well.<br><br>
 
-<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="450" />
+<center>
+<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="500" />
+</center>
 
 </div>
 
@@ -161,7 +182,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/storage/Storage.java)
 
-<img src="images/DeveloperGuideImage/StorageClassDiagram.png" width="550" />
+<center>
+<img src="images/DeveloperGuideImage/StorageClassDiagram.png" width="650" />
+</center>
 
 The `Storage` component,
 * can save both tuitione data and user preference data in json format, and read them back into corresponding objects.
@@ -226,21 +249,37 @@ Example: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`
 
 When the user has entered the command, `AddLessonCommandParser` object will proceed on to parse and check the validity of each property entered. Assuming successful, `AddLessonCommandParser` object will proceed on to produce a `Lesson` with the relevant details filled. The object state diagram is as such:
 
-![AddLessonState0](images/DeveloperGuideImage/AddLessonState0-Initial_state.png)
+<center>
+<img alt="AddLessonState0" src="images/DeveloperGuideImage/AddLessonState0-Initial_state.png"/>
+</center>
 
 <u>Step 2:</u>
 
 With all checks done, `Lesson` object will be added into the `Model` of TuitiONE. The final object state diagram is as such:
 
-![AddLessonState1](images/DeveloperGuideImage/AddLessonState1-Final_state.png)
+<center>
+<img alt="AddLessonState1" src="images/DeveloperGuideImage/AddLessonState1-Final_state.png"/>
+</center>
 
 The following sequence diagram shows how add lesson operation works:
 
-![AddLessonSequenceDiagram](images/DeveloperGuideImage/AddLessonSequenceDiagram.png)
+<center>
+<img alt="AddLessonSequenceDiagram0" src="images/DeveloperGuideImage/AddLessonSequenceDiagram0.png"/>
+</center>
 
-:information_source: **Note:** The lifelines for `AddLessonCommandParser` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<center>
+<img alt="AddLessonSequenceDiagram1" src="images/DeveloperGuideImage/AddLessonSequenceDiagram1.png" width="650"/>
+</center>
 
-![AddLessonActivityDiagram](images/DeveloperGuideImage/AddLessonActivityDiagram.png)
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `AddLessonCommandParser` and `AddLessonCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+<center>
+<img alt="AddLessonActivityDiagram" src="images/DeveloperGuideImage/AddLessonActivityDiagram.png"/>
+</center>
 
 #### Design considerations:
 
@@ -293,7 +332,9 @@ _Note: For this usage, we only consider the main success scenario (i.e. the less
 
 User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
 
-![DeleteLessonState0](images/DeveloperGuideImage/DeleteLessonState0.png)
+<center>
+<img alt="DeleteLessonState0" src="images/DeveloperGuideImage/DeleteLessonState0.png"/>
+</center>
 
 <u>Step 2:</u>
 
@@ -309,23 +350,33 @@ Upon running the delete lesson command, the application runs a few internal step
 
 The final object state diagram is as such:
 
-![DeleteLessonState1](images/DeveloperGuideImage/DeleteLessonState1.png)
+<center>
+<img alt="DeleteLessonState1" src="images/DeveloperGuideImage/DeleteLessonState1.png"/>
+</center>
 
 Notice how there are no more associations between the Lesson and the Students.
 
 The following sequence diagram shows how the delete lesson operation works:
 
-![DeleteLessonSequenceDiagram](images/DeveloperGuideImage/DeleteLessonSequenceDiagram.png)
+<center>
+<img alt="DeleteLessonSequenceDiagram0" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="DeleteLessonSequenceDiagram1" src="images/DeveloperGuideImage/DeleteLessonSequenceDiagram1.png" width="650"/>
+</center>
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** The lifelines for `DeleteLessonCommandParser` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+:information_source: **Note:** The lifelines for `DeleteLessonCommandParser`, `DeleteLessonCommand` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
 The following activity diagram summarizes what happens when a user executes the delete lesson command:
 
-![DeleteLessonActivityDiagram](images/DeveloperGuideImage/DeleteLessonActivityDiagram.png)
+<center>
+<img alt="DeleteLessonActivityDiagram" src="images/DeveloperGuideImage/DeleteLessonActivityDiagram.png"/>
+</center>
 
 #### Design considerations:
 
@@ -373,7 +424,9 @@ TuitiONE application. The user has a `Lesson` with the lessoncode Math-P2-Wed-18
 P2 that they would like to enroll a `Student` named Alice of `grade` P2 into.
 The object state diagram is as such:
 
-![EnrollLessonState0](images/DeveloperGuideImage/EnrollLessonState0.png)
+<center>
+<img alt="EnrollLessonState0" src="images/DeveloperGuideImage/EnrollLessonState0.png"/>
+</center>
 
 The initial size of the lesson is 0, and the student has yet to enroll
 into the lesson.
@@ -390,16 +443,32 @@ Upon running the Enroll command, the application runs a few internal steps:
 
 The final object state diagram is as such:
 
-![EnrollLessonState0](images/DeveloperGuideImage/EnrollLessonState1.png)
+<center>
+<img alt="EnrollLessonState0" src="images/DeveloperGuideImage/EnrollLessonState1.png"/>
+</center>
 
 The following sequence diagram shows how the enroll lesson operation works:
 
-![EnrollLessonSequenceDiagram](images/DeveloperGuideImage/EnrollLessonSequenceDiagram.png)
+<center>
+<img alt="EnrollLessonSequenceDiagram0" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="EnrollLessonSequenceDiagram1" src="images/DeveloperGuideImage/EnrollLessonSequenceDiagram1.png" width="650"/>
+</center>
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `EnrollCommandParser` and `EnrollCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 The following activity diagram summarizes what
 happens when a user executes the enroll lesson command:
 
-![EnrollLessonActivityDiagram](images/DeveloperGuideImage/EnrollLessonActivityDiagram.png)
+<center>
+<img alt="EnrollLessonActivityDiagram" src="images/DeveloperGuideImage/EnrollLessonActivityDiagram.png"/>
+</center>
 
 #### Design considerations:
 
@@ -444,9 +513,11 @@ Given below is an example usage scenario and how the unenroll operation works.
 <ins>Step 1:</ins>
 
 User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a
-lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
+lesson `l1` that has two students (`John` and `Alice`). The object state diagram is as such:
 
-![UnenrollState0](images/DeveloperGuideImage/UnenrollState0.png)
+<center>
+<img alt="UnenrollState0" src="images/DeveloperGuideImage/UnenrollState0.png"/>
+</center>
 
 Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1.
 
@@ -456,25 +527,41 @@ The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, t
 internal steps.
 
 * The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
-* The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l`.
-* The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
-* If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
-* Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
+* The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l1`.
+* The command executor checks if the student, `Alice`, is enrolled in the lesson `l1`.
+* If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l1`.
+* Subsequently, the lesson `l1` will be removed from the set of lessons in the student object `Alice`.
 * Relevant UI and Storage procedures are run to complete the execution in full.
 
 The final object state diagram is as such:
 
-![UnenrollState1](images/DeveloperGuideImage/UnenrollState1.png)
+<center>
+<img alt="UnenrollState1" src="images/DeveloperGuideImage/UnenrollState1.png"/>
+</center>
 
-Notice how there is no longer any association between the student `Alice` and lesson `l`.
+Notice how there is no longer any association between the student `Alice` and lesson `l1`.
 
 The following sequence diagram shows how the unenroll operation works:
 
-![UnenrollSequenceDiagram](images/DeveloperGuideImage/UnenrollSequenceDiagram.png)
+<center>
+<img alt="UnenrollSequenceDiagram0" src="images/DeveloperGuideImage/UnenrollSequenceDiagram0.png"/>
+</center>
+
+<center>
+<img alt="UnenrollSequenceDiagram1" src="images/DeveloperGuideImage/UnenrollSequenceDiagram1.png" width="650"/>
+</center>
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `UnenrollCommandParser` and `UnenrollCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 The following activity diagram summarizes what happens when a user executes the unenroll lesson command:
 
-![UnenrollActivityDiagram](images/DeveloperGuideImage/UnenrollActivityDiagram.png)
+<center>
+<img alt="UnenrollActivityDiagram" src="images/DeveloperGuideImage/UnenrollActivityDiagram.png"/>
+</center>
 
 #### Design considerations:
 
@@ -518,14 +605,18 @@ Given below is an example usage scenario and how the filter operation works.
 The user launches the app with the stored student list holding the initial student data and the lesson list holding the
 initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
 
-![FilterState0](images/DeveloperGuideImage/FilterState0.png)
+<center>
+<img alt="FilterState0" src="images/DeveloperGuideImage/FilterState0.png"/>
+</center>
 
 <u>Step 2:</u>
 
 The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
 the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
 
-![FilterState1](images/DeveloperGuideImage/FilterState1.png)
+<center>
+<img alt="FilterState1" src="images/DeveloperGuideImage/FilterState1.png"/>
+</center>
 
 <u>Step 3:</u>
 
@@ -533,15 +624,25 @@ The user executes `list` to get back the initial lists before the filter.
 
 The following sequence diagram shows how the filter operation works:
 
-![FilterSequenceDiagram](images/DeveloperGuideImage/FilterSequenceDiagram.png)
+<center>
+<img alt="FilterSequenceDiagram0" src="images/DeveloperGuideImage/FilterSequenceDiagram0.png"/>
+</center>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<center>
+<img alt="FilterSequenceDiagram1" src="images/DeveloperGuideImage/FilterSequenceDiagram1.png" width="650"/>
+</center>
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for `FilterCommandParser` and `FilterCommand` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 </div>
 
 The following activity diagram summarizes what happens when a user executes the filter command:
 
-![FilterActivityDiagram](images/DeveloperGuideImage/FilterActivityDiagram.png)
-
+<center>
+<img alt="FilterActivityDiagram" src="images/DeveloperGuideImage/FilterActivityDiagram.png"/>
+</center>
 
 #### Design considerations:
 
@@ -576,19 +677,25 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 The user launches the application for the first time. The `VersionedTuitione` will be initialized with the initial tuitione state, and the `currentStatePointer` pointing to that single tuitione state.
 
-![UndoRedoState0](images/DeveloperGuideImage/UndoRedoState0.png)
+<center>
+<img alt="UndoRedoState0" src="images/DeveloperGuideImage/UndoRedoState0.png"/>
+</center>
 
 <u>Step 2.</u>
 
 The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commitTuitione()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
 
-![UndoRedoState1](images/DeveloperGuideImage/UndoRedoState1.png)
+<center>
+<img alt="UndoRedoState1" src="images/DeveloperGuideImage/UndoRedoState1.png"/>
+</center>
 
 <u>Step 3.</u>
 
 The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitTuitione()`, causing another modified tuitione state to be saved into the `tuitioneStateList`.
 
-![UndoRedoState2](images/DeveloperGuideImage/UndoRedoState2.png)
+<center>
+<img alt="UndoRedoState2" src="images/DeveloperGuideImage/UndoRedoState2.png"/>
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitTuitione()`, so the tuitione state will not be saved into the `tuitioneStateList`.
 
@@ -598,7 +705,9 @@ The user executes `add n/David …​` to add a new student. The `add` command a
 
 The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTuitione()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous tuitione state, and restores the tuitione to that state.
 
-![UndoRedoState3](images/DeveloperGuideImage/UndoRedoState3.png)
+<center>
+<img alt="UndoRedoState3" src="images/DeveloperGuideImage/UndoRedoState3.png"/>
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Tuitione state, then there are no previous Tuitione states to restore. The `undo` command uses `Model#canUndoTuitione()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
@@ -606,7 +715,9 @@ The user now decides that adding the student was a mistake, and decides to undo 
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/DeveloperGuideImage/UndoSequenceDiagram.png)
+<center>
+<img alt="UndoSequenceDiagram" src="images/DeveloperGuideImage/UndoSequenceDiagram.png"/>
+</center>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -622,17 +733,23 @@ The `redo` command does the opposite — it calls `Model#redoTuitione()`, wh
 
 The user then decides to execute the command `list`. Commands that do not modify the tuitione, such as `list`, will usually not call `Model#commitTuitione()`, `Model#undoTuitione()` or `Model#redoTuitione()`. Thus, the `tuitioneStateList` remains unchanged.
 
-![UndoRedoState4](images/DeveloperGuideImage/UndoRedoState4.png)
+<center>
+<img alt="UndoRedoState4" src="images/DeveloperGuideImage/UndoRedoState4.png"/>
+</center>
 
 <u>Step 6.</u>
 
 The user executes `clear`, which calls `Model#commitTuitione()`. Since the `currentStatePointer` is not pointing at the end of the `tuitioneStateList`, all tuitione states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/DeveloperGuideImage/UndoRedoState5.png)
+<center>
+<img alt="UndoRedoState5" src="images/DeveloperGuideImage/UndoRedoState5.png"/>
+</center>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+<center>
 <img src="images/DeveloperGuideImage/CommitActivityDiagram.png" width="250" />
+</center>
 
 #### Design considerations:
 
@@ -660,9 +777,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendices**
 
-### Product scope
+### **Appendix A: Requirements**
+
+#### Product scope
 
 **Target user profile (Customer Service Officer at tuition center)**:
 
@@ -675,7 +794,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Value proposition**: Provide a more streamlined platform, as compared to conventional excel which might have numerous irrelevant functions. This platform also offers a more intuitive UI - with a clean and minimalist layout. Helps manage student admin information faster than a typical mouse-driven app. The app is only used for one tuition centre.
 
 
-### User stories
+#### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -722,11 +841,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Customer Service Officer                   | write to excel sheet                 | export my existing administrative details                        |
 
 
-### Use cases
+#### Use cases
 
 For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise.
 
-#### UC01: View all Students and Lessons
+##### UC01: View all Students and Lessons
 
 **MSS**
 
@@ -735,7 +854,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC02: Add a Student
+##### UC02: Add a Student
 
 **MSS**
 
@@ -765,7 +884,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC03: Look up Student(s)
+##### UC03: Look up Student(s)
 
 **MSS**
 
@@ -794,7 +913,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC04: Filter Students by grade and Lessons by grade and/or subject
+##### UC04: Filter Students by grade and Lessons by grade and/or subject
 
 **MSS**
 1. CSO wants to filter the student and/or lesson list by their grade and/or subject.
@@ -834,7 +953,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 2.
 
-#### UC05: Delete a Student
+##### UC05: Delete a Student
 
 **MSS**
 
@@ -862,7 +981,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC06: Add a Lesson
+##### UC06: Add a Lesson
 
 **MSS**
 
@@ -885,7 +1004,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC07: View details of a Lesson
+##### UC07: View details of a Lesson
 
 **MSS**
 
@@ -899,7 +1018,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC08: Delete a Lesson
+##### UC08: Delete a Lesson
 
 **MSS**
 
@@ -927,7 +1046,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC09: Update a specific Student’s Details
+##### UC09: Update a specific Student’s Details
 
 **MSS**
 
@@ -951,7 +1070,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC10: Enroll a Student to a Lesson
+##### UC10: Enroll a Student to a Lesson
 
 **MSS**
 
@@ -990,7 +1109,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC11: Unenroll a Student from a Lesson
+##### UC11: Unenroll a Student from a Lesson
 
 **MSS**
 
@@ -1029,7 +1148,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC12: Review Commands
+##### UC12: Review Commands
 
 **MSS**
 
@@ -1038,7 +1157,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC13: View Lesson Roster
+##### UC13: View Lesson Roster
 
 **MSS**
 
@@ -1062,7 +1181,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-### Non-Functional Requirements
+#### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -1075,7 +1194,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
     * The user interface should use readable text styling, i.e. appropriate size and font.
     * All string output must be in UTF-8 encoding.
 
-### Glossary
+#### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
@@ -1084,7 +1203,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+### **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1093,7 +1212,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+#### Launch and shutdown
 
 1. Initial launch
 
@@ -1110,7 +1229,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a student
+#### Deleting a student
 
 1. Deleting a student while all students are being shown
 
@@ -1133,40 +1252,40 @@ testers are expected to do more *exploratory* testing.
 
     * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
 
-    * Test case: `filter g/S1`
+    * Test case: `filter g/S1`<br>
       Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No students or lessons shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
       
-    * Test case: `filter g/s1`
+    * Test case: `filter g/s1`<br>
       Expected: Similar to previous.
       
-    * Test case: `filter g/J8`
+    * Test case: `filter g/J8`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user of the constraints of the grade condition to be inputted. 
       
-    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`.
+    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`<br>
       Expected. Similar to previous.
       
-    * Test case: `filter s2`
+    * Test case: `filter s2`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
 1. Filtering by subject
 
-    * Test case: `filter s/English`
+    * Test case: `filter s/English`<br>
       Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
       
-    * Test case: `filter s/english`
+    * Test case: `filter s/english`<br>
       Expected: Similar to previous.
       
-    * Test case: `filter english`
+    * Test case: `filter english`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
       
 1. Filtering by both grade and subject
 
     * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature.
     
-    * Test case: `filter s/English g/S1`
+    * Test case: `filter s/English g/S1`<br>
       Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
       
-    * Test case: `filter english S1`
+    * Test case: `filter english S1`<br>
       Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
 
 ### Editing a student
@@ -1175,108 +1294,190 @@ testers are expected to do more *exploratory* testing.
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 n/Alex Ye`
+    * Test case: `edit 1 n/Alex Ye`<br>
       Expected: First student's name is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 n/`
+    * Test case: `edit 1 n/`<br>
       Expected: First student's name is not edited. The message box displays a message alerting the user of the constraints on names.
       
-    * Other incorrect edit name commands to try: `edit 1 n/y` (where y is not an alphanumeric character, `edit 1 n/x` (where x is longer than 150 characters)
+    * Other incorrect edit name commands to try: `edit 1 n/y` (where y is not an alphanumeric character, `edit 1 n/x` (where x is longer than 150 characters)<br>
       Expected: Similar to previous
 
 1. Editing a student's parent contact
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 p/98765432`
+    * Test case: `edit 1 p/98765432`<br>
       Expected: First student's parent contact is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 p/`
+    * Test case: `edit 1 p/`<br>
       Expected: First student's parent contact is not edited. The message box displays a message alerting the user of the constraints on parent contact numbers.
       
-    * Other incorrect edit parent contact commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits),
-    `edit 1 p/x1111111` (where x is a number that is not '6', '8' or '9')
+    * Other incorrect edit parent contact commands to try: `edit 1 p/abc`, `edit 1 p/x` (where x is a number shorter than 8 digits), `edit 1 p/x1111111` (where x is a number that is not '6', '8' or '9')<br>
       Expected: Similar to previous
       
 1. Editing a student's email
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 e/alexye@gmail.com`
+    * Test case: `edit 1 e/alexye@gmail.com`<br>
       Expected: First student's email is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 e/`
+    * Test case: `edit 1 e/`<br>
       Expected: First student's email is not edited. The message box displays a message alerting the user of the constraints on emails.
       
-    * Other incorrect edit email commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` 
+    * Other incorrect edit email commands to try: `edit 1 e/abc`, `edit 1 e/!a@example.com` <br>
       Expected: Similar to previous
       
 1. Editing a student's address
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 a/Blk 20 Hello Street #01-01`
+    * Test case: `edit 1 a/Blk 20 Hello Street #01-01`<br>
       Expected: First student's address is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 a/`
+    * Test case: `edit 1 a/`<br>
       Expected: First student's address is not edited. The message box displays a message alerting the user of the constraints on addresses.
       
-    * Other incorrect edit address commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`
+    * Other incorrect edit address commands to try: `edit 1 a/Blk 20/ Hello Street #01-01`<br>
       Expected: Similar to previous
       
 1. Editing a student's grade
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 g/S2`
+    * Test case: `edit 1 g/S2`<br>
       Expected: First student's grade is edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown. If the student was enrolled in any lessons in his previous grade, applying this edit will unenroll him from those lessons. The lessons he was enrolled in will also reflect a decrease in class size by 1.
       
-    * Test case: `edit 1 g/`
+    * Test case: `edit 1 g/`<br>
       Expected: First student's grade is not edited. The message box displays a message alerting the user of the constraints on grade levels.
       
-    * Other incorrect edit grade commands to try: `edit 1 g/A5`, `edit 1 g/p`
+    * Other incorrect edit grade commands to try: `edit 1 g/A5`, `edit 1 g/p`<br>
       Expected: Similar to previous
       
 1. Editing a student's remarks
 
     * Prerequisites: List all students using the `list` command. Multiple students in the list.
     
-    * Test case: `edit 1 r/discounted`
+    * Test case: `edit 1 r/discounted`<br>
       Expected: Remark is added onto the first student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 1 r/`
+    * Test case: `edit 1 r/`<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
       
-    * Test case: `edit 1 r/test1 r/test2 r/test3 r/test4 r/test5` (assuming first student already has 1 remark tagged)
+    * Test case: `edit 1 r/test1 r/test2 r/test3 r/test4 r/test5` (assuming first student already has 1 remark tagged)<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of that only a maximum of 5 remarks can be tagged to a student.
       
-    * Other incorrect edit remarks commands to try: `edit 1 r/test test`, `edit 1 r/!`
+    * Other incorrect edit remarks commands to try: `edit 1 r/test test`, `edit 1 r/!`<br>
       Expected: Similar to previous
       
-    * Test case: `edit 1 dr/discounted` (assuming 'discounted' remark already tagged to first student)
+    * Test case: `edit 1 dr/discounted` (assuming 'discounted' remark already tagged to first student)<br>
       Expected: Remark is deleted from student's existing remarks. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
-      
-    * Test case: `edit 1 dr/`
+
+    * Test case: `edit 1 dr/`<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user of the constraints on remarks.
-      
-    * Other incorrect edit remarks commands to try: `edit 1 dr/test test`, `edit 1 dr/!`
+
+    * Test case: Other incorrect edit remarks commands to try: `edit 1 dr/test test`, `edit 1 dr/!`<br>
       Expected: Similar to previous
           
-    * Test case: `edit 1 dr/notTaggedToStudent` (assuming 'notTaggedToStudent' remark is not tagged to first student)
+    * Test case: `edit 1 dr/notTaggedToStudent` (assuming 'notTaggedToStudent' remark is not tagged to first student)<br>
       Expected: First student's remarks is not edited. The message box displays a message alerting the user that the remark he or she wishes to delete does not exist.
       
 1. Editing multiple fields and misc scenarios
 
-    * Test case: `edit 1 n/Alex p/87654321 g/s4`
+    * Test case: `edit 1 n/Alex p/87654321 g/s4`<br>
       Expected: First student's name, parent contact and grade are edited. The message box displays a message stating that the command has succeeded, with details of the edited student shown.
       
-    * Test case: `edit 0 n/Alex`
+    * Test case: `edit 0 n/Alex`<br>
       Expected: First student is not edited. The message box displays a message alerting the user that the given index is not valid.
 
-### Saving data
+#### Clearing data
 
-1. Dealing with missing/corrupted data files
+1. Clearing all data with students and lessons present
 
-    * _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    *  Prerequisites: There should be students and lessons present in the application. Use `list` to view all the entities present.
 
-1. _{ more test cases …​ }_
+    *  Test case: `clear`<br>
+       Expected: Status messages should inform you that all information is cleared. Both panels on the application should be empty, i.e. there should be no more students and lessons. Checking the storage file in `./data/tuitione.json` should show no entities present.
+
+1. Clearing all data with no data present
+
+    *  Prerequisites: There should be no students and lessons present in the application. Use `list` to view all the entities present.
+
+    *  Test case: `clear`<br>
+       Expected: Same as in previous test scenario. Having no data present should not yield any difference in output.
+
+#### Exiting application
+
+1. Exiting using the window close button
+
+    *  Test case: Press the close button on the window of the application.<br>
+       Expected: The window should close.
+
+1. Exiting using the application's exit button
+
+    *  Test case: Click on the file button on the top left of the application. A dropdown list with one option of `exit` should be present. Click on that button.<br>
+       <center>
+       <img src="images/DeveloperGuideImage/exit_ui.png"/>
+       </center><br>
+       Expected: The UI should display the elements correctly and the window should close.<br>
+
+#### Managing data externally
+
+1. Loading the application with no data files present
+
+    *  Prerequisites: There should be no files present in the directory you are going to work with, apart from `TuitiONE.jar`.
+
+    *  Test case: Run the application.<br>
+       Expected: Upon UI loading, verify the directory has these few files `tuitione.log.0`, `preferences.json`, `config.json` (if you also have `tuitione.log.0.lck`, that is okay as well).
+
+    *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+       Expected (continued): After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
+
+1. Verifying that data is stored
+
+    *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+
+    *  Test case: Perform a positive (successful) insertion/deletion/modification of the entities. See the [User Guide](https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html#features) for more on the relevant commands that can perform such. After such, verify the `./data/tuitione.json` file to see if the contents match the changes made by your command.<br>
+       Expected: After the UI responds, there should now a new directory `data` being created and there is a `tuitione.json` file present.
+
+1. Modifying saved data, but preserving its correctness to the application's constraints
+
+    *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+
+    *  Test case: Insert/Delete/Modify an entry in `./data/tuitione.json` that produces a data file that conforms to the constraints mentioned in the application. Below are some critical constraints that are unique in the storage file. For other possible inputs to test with, view the other sections presented under [Appendix B](#appendix-b-instructions-for-manual-testing).<br>
+       Expected: The application should load up as per normal, and the new changes in the storage file is presented in the UI.
+
+       :information_source: **Note:**
+
+       * Particulars in a `student` object must conform to the constraints of the application.
+
+       * Particulars in a `lesson` object must conform to the constraints of the application.
+
+       * The field `lessonCodes` in a `student` represents the `Lessons` the student is enrolled in an encoded form.<br>
+         A `lesson` can be converted to its encoded form by creating a string with the format `subject-grade-day-startTime`.<br>
+         A `lessonCode` of `"Math-P4-Wed-1800"` represents a json `lesson` object of (`price` can be of any amount that meets the constraints):
+         ``` json
+         {
+           "subject" : "Math",
+           "grade" : "P4",
+           "startTime" : "1800",
+           "day" : "Wed",
+           "price" : 15.9
+         }
+         ```
+         Do note once again that enrolling a student using the data storage must fulfil the enrollment constraints.<br>
+         Review [Appendix B](#appendix-b-instructions-for-manual-testing) for the remaining constraints present.<br>
+
+    *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+       Expected (continued): After the UI responds, verify that `./data/tuitione.json` is not modified, and holds the changes you made in the initial step.
+
+1. Modifying saved data, but losing its correctness to the application's constraints
+
+    *  Prerequisites: There should be files already initialised in your working directory and there should be entities present in the application. Commands in the application run as expected.
+
+    *  Test case: Modify an entry in `./data/tuitione.json` that violates the entity and/or relationship constraints, see the previous test scenario's explanation to perform a counter modification to the data file.<br>
+       Expected: Upon application and UI load up, the application should be presented with no data present, i.e. no lessons or students. The content in `./data/tuitione.json` should not be modified yet (see next step).
+
+    *  Test case (continued): Then type in the `list` command and hit `ENTER`.<br>
+       Expected (continued): After the UI responds, verify that `./data/tuitione.json` holds no entities.

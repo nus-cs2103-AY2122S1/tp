@@ -41,6 +41,6 @@ JsonTuitioneStorage ..> JsonSerializableTuitione
 JsonSerializableTuitione --> "*" JsonAdaptedLesson
 JsonSerializableTuitione --> "*" JsonAdaptedStudent
 JsonAdaptedLesson -right[hidden]- JsonAdaptedStudent
-JsonAdaptedStudent --> "*" JsonAdaptedRemark
+JsonAdaptedStudent --> "0..5" JsonAdaptedRemark
 
 @enduml

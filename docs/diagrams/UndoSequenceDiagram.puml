@@ -36,8 +36,8 @@ activate Model
 Model -> VersionedTuitione : undo()
 activate VersionedTuitione
 
-VersionedTuitione -> VersionedTuitione :resetData(ReadOnlyTuitione)
-VersionedTuitione --> Model :
+VersionedTuitione -> VersionedTuitione :resetData\n(ReadOnlyTuitione)
+VersionedTuitione --> Model
 deactivate VersionedTuitione
 
 Model --> UndoCommand
@@ -45,6 +45,7 @@ deactivate Model
 
 UndoCommand --> LogicManager : result
 deactivate UndoCommand
+
 UndoCommand -[hidden]-> LogicManager : result
 destroy UndoCommand
 

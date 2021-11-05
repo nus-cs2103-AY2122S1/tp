@@ -4,20 +4,18 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
-participant ":DeleteLessonCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
-participant "dl:DeleteLessonCommand" as DeleteLessonCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":DeleteLesson\nCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
+participant "dl:DeleteLesson\nCommand" as DeleteLessonCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "l:Lesson" as Lesson MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete-l 1")
+[-> LogicManager : execute\n("delete-l 1")
 activate LogicManager
 
-LogicManager -> TuitioneParser : parseCommand("delete-l 1")
+LogicManager -> TuitioneParser : parseCommand\n("delete-l 1")
 activate TuitioneParser
 
 create DeleteLessonCommandParser
@@ -46,33 +44,7 @@ destroy DeleteLessonCommandParser
 TuitioneParser --> LogicManager : dl
 deactivate TuitioneParser
 
-LogicManager -> DeleteLessonCommand : execute()
-activate DeleteLessonCommand
-
-DeleteLessonCommand -> Lesson : removeAllStudents()
-activate Lesson
-
-Lesson --> DeleteLessonCommand
-deactivate Lesson
-
-DeleteLessonCommand -> Model : deleteLesson(l)
-activate Model
-
-Model -> Lesson : deleteLesson(l)
-destroy Lesson
-
-Model --> DeleteLessonCommand
-deactivate Model
-
-create CommandResult
-DeleteLessonCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> DeleteLessonCommand
-deactivate CommandResult
-
-DeleteLessonCommand --> LogicManager : result
-deactivate DeleteLessonCommand
+ref over LogicManager, Model : DeleteLessonCommand execution
 
 [<--LogicManager
 deactivate LogicManager

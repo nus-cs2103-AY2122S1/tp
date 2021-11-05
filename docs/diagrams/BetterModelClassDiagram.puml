@@ -12,7 +12,7 @@ UniqueRemarkList -[hidden]down- UniqueStudentList
 UniqueRemarkList *-right-> "*" Remark
 UniqueStudentList -right-> "*" Student
 
-Student -up-> "*" Remark
+Student -up-> "0..5" Remark
 
 Student *--> Name
 Student *--> ParentContact

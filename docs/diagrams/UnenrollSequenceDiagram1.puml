@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "u:UnenrollCommand" as UnenrollCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "l1:Lesson" as Lesson MODEL_COLOR
+participant "Alice\n:Student" as Student MODEL_COLOR
+end box
+
+mainframe **sd**  UnenrollCommand execution
+
+LogicManager -> UnenrollCommand : execute()
+activate UnenrollCommand
+
+UnenrollCommand -> Lesson : unenrollStudent(Alice)
+activate Lesson
+
+Lesson -> Student : removeStudent\n(Alice)
+activate Student
+
+Student --> Lesson
+deactivate Student
+
+Lesson --> UnenrollCommand
+deactivate Lesson
+
+UnenrollCommand --> Model : setLesson(l1)
+activate Model
+
+Model --> UnenrollCommand
+deactivate Model
+
+create CommandResult
+UnenrollCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UnenrollCommand
+deactivate CommandResult
+
+UnenrollCommand --> LogicManager : result
+deactivate UnenrollCommand
+
+UnenrollCommand -[hidden]-> LogicManager
+destroy UnenrollCommand
+
+@enduml
