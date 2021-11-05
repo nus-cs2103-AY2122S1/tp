@@ -87,6 +87,19 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 
 > * Main Window.
 
+## User Interface
+
+![User Interface](images/UiLabelled.png)
+
+1. **Menu Bar**: Contains links and keyboard shortcuts for navigating to other UI components.
+2. **Profile Window**: Opens the Profile Window, where users can see the details they have entered during profile set up.
+3. **Events Icon**: Switches to the events tab.
+4. **Command Box**: A text field for users to enter their commands and view previous commands command-line style.
+5. **Result Box**: Displays the results of commands entered into the Command Box.
+6. **Tab Switcher**: Shows all tabs, highlights the current tab, and switches between tabs by clicking or keyboard shortcuts.
+7. **Contact List**: Shows all contacts in a scrollable list.
+8. **Contact Details**: Shows all details of the currently selected contact.
+
 ## Keyboard Mappings
 
 1. <kbd>⌘</kbd> + <kbd>1</kbd>: To Switch to Contacts Tab.
@@ -119,13 +132,15 @@ Adds a Student to the Address Book.
 Format:
 
 ```
-add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>]
+[t/<TAG>]
 ```
 
 Example:
 
 ```
-add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
+add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com
+a/John Street, Blk 12, #01-01
 ```
 
 ### Delete a Student - `delete`
@@ -151,7 +166,8 @@ Edits an existing Student Contact in the Address Book.
 Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>]
+[a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
@@ -335,39 +351,11 @@ Example 4:
 show 4
 ```
 
-### Importing Student Contacts - `import`
-
-Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
-
-Importing will not remove existing contacts, and skips duplicate contacts.
-
-Format 1:
-
-```
-import <FILENAME>.json
-```
-
-Example 1:
-
-```
-import CS2103T.json
-```
-
-Format 2:
-
-```
-import <FILENAME>.csv
-```
-
-Example 2:
-
-```
-import CS2103T.csv
-```
-
 ### Exporting Student Contacts - `export`
 
 Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
+
+Exporting will not overwrite existing files.
 
 Format 1:
 
@@ -393,9 +381,39 @@ Example 2:
 export Friends.csv
 ```
 
-### Setting a Contact as Favourite - `fav`
+### Importing Student Contacts - `import`
 
-Helps to set a particular Student Contact as a Favourite only if the contact has not been favourited.
+Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
+
+Importing will not remove existing contacts, and ignores duplicate contacts.
+
+Format 1:
+
+```
+import <FILENAME>.json
+```
+
+Example 1:
+
+```
+import CS2103T.json
+```
+
+Format 2:
+
+```
+import <FILENAME>.csv
+```
+
+Example 2:
+
+```
+import CS2103T.csv
+```
+
+### Setting a Contact as Favorite - `fav`
+
+Helps to set a particular Student Contact as a Favorite only if the contact has not been favorited.
 
 Format:
 
@@ -409,9 +427,9 @@ Example:
 fav 1
 ```
 
-### Setting a Contact as Unfavourite - `unfav`
+### Setting a Contact as Unfavorite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavourite only if the contact has been favourited.
+Helps to set a particular Student Contact as an Unfavorite only if the contact has been favorited.
 
 Format:
 
@@ -427,16 +445,9 @@ unfav 1
 
 ### Displaying the Help Window - `help`
 
-Displays the Help Window, which consists of a list
-of possible Commands, and a link to this UserGuide.
+Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
 
 Format:
-
-```
-help
-```
-
-Example:
 
 ```
 help
@@ -456,12 +467,6 @@ Format:
 list
 ```
 
-Example:
-
-```
-list
-```
-
 ### Deleting All Student Contacts - `clear`
 
 Deletes all the Student Contacts present.
@@ -472,15 +477,13 @@ Format:
 clear
 ```
 
-Example:
-
-```
-clear
-```
-
-> :exclamation: WARNING: Use With Caution!
+<div markdown="span" class="alert alert-danger">
+:exclamation: DANGER: Use With Caution!
+</div>
 
 ### Open Telegram of Current User
+
+Opens the current user's Telegram link in the user's default web browser. If the user has the Telegram application installed on his device, he will be redirected to the application.
 
 Format:
 
@@ -489,6 +492,8 @@ te
 ```
 
 ### Open GitHub of Current User
+
+Opens the current user's GitHub profile in the user's default web browser.
 
 Format:
 
@@ -505,12 +510,6 @@ Similar to a Command Line Interface, <kbd>↑</kbd> retrieves the previous comma
 Exits the App.
 
 Format:
-
-```
-exit
-```
-
-Example:
 
 ```
 exit
@@ -535,7 +534,7 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Edit a Student | `edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
 | Edit your Profile | `edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]` |
 | Exporting Student Contacts | `export <FILENAME>.json` <br> `export <FILENAME>.csv` |
-| Favourite a Student Contact | `fav <INDEX>` |
+| Favorite a Student Contact | `fav <INDEX>` |
 | Find a Student (by Name) | `find <STRING> ` |
 | Find a Student (by Tag) | `find t/<TAG>` |
 | Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
@@ -544,4 +543,4 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |
-| Unfavourite a Student Contact | `unfav <INDEX>` |
+| Unfavorite a Student Contact | `unfav <INDEX>` |
