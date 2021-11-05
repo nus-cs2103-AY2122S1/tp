@@ -11,13 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ArgumentTokenizerTest {
 
-    //private final Prefix unknownPrefix = new Prefix("--u");
     private final Prefix pSlash = new Prefix("p/");
     private final Prefix dSlash = new Prefix("d/");
     private final Prefix wordSlash = new Prefix("word/");
 
     private final String wordParameter1 = "Argument";
-    private final String wordParameter2 = "Argument";
+    private final String wordParameter2 = "Value";
     private final String sentenceParameter1 = "Argument value with spaces";
     private final String sentenceParameter2 = "Another argument value";
 
