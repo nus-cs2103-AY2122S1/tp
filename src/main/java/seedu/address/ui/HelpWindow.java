@@ -70,6 +70,15 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String EXIT_APP_FEATURE_NAME = "Exit the App";
     private static final String EXIT_APP_FEATURE_COMMAND = "exit";
 
+    private static final String ADD_TAGS_FEATURE_NAME = "To Add Tag(s)";
+    private static final String ADD_TAGS_FEATURE_COMMAND = "tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS]";
+    private static final String REMOVE_TAGS_FEATURE_NAME = "To Remove Tag(s)";
+    private static final String REMOVE_TAGS_FEATURE_COMMAND = "tag <INDEX> r/<TAG_TO_REMOVE> [MORE_TAGS]";
+    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME = "To Add and Remove Tag(s) "
+            + "Simultaneously";
+    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND = "tag <INDEX> a/<TAG_TO_ADD> "
+            + "[MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]";
+
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
