@@ -1097,15 +1097,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    * Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    * Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    * Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    * Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -1114,23 +1114,67 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
+    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
 
-    1. Test case: `delete 1`<br>
+    * Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    * Test case: `delete 0`<br>
        Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Filtering
+
+1. Filtering by grade
+
+    * Note: We will be using `S1` to conduct manual testing for positive tests, but feel free to test with any grade you wish (from `P1` to `S5`).
+
+    * Test case: `filter g/S1`
+      Expected: Only students and lessons of grade `S1` are shown in the student list and lesson list respectively. No students or lessons shown if there are none of grade `S1`. An update message showing the number of students and lessons found will also be shown in the message box.
+      
+    * Test case: `filter g/s1`
+      Expected: Similar to previous.
+      
+    * Test case: `filter g/J8`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user of the constraints of the grade condition to be inputted. 
+      
+    * Other incorrect filter by grade commands to try: `filter g/abc`, `filter g/123`, `filter g/g/`.
+      Expected. Similar to previous.
+      
+    * Test case: `filter s2`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+
+1. Filtering by subject
+
+    * Test case: `filter s/English`
+      Expected: Only lessons with subject matching `English` are shown in the lesson list. No lessons shown if none have matching subject. No change to student list. An update message showing the number of lessons found will also be shown in the message box.
+      
+    * Test case: `filter s/english`
+      Expected: Similar to previous.
+      
+    * Test case: `filter english`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+      
+1. Filtering by both grade and subject
+
+    * Note: It will be good to add more lessons of grade `S1` but of different subject (eg. English, Math etc.) to better test this feature.
+    
+    * Test case: `filter s/English g/S1`
+      Expected: Only students of grade `S1` will be displayed in the student list. Only lessons with subject matching `English` and of grade `S1` will be displayed in the lesson list. No lessons or students shown if none have matching the given filter conditions. An update message showing the number of students and lessons found will also be shown in the message box.
+      
+    * Test case: `filter english S1`
+      Expected: No filter is applied, and no change to both lists. The message box displays a message alerting the user that the command format inputted is invalid, along with a description of what the filter command does, its parameters, and an example usage.
+
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    * _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
