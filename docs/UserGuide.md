@@ -148,8 +148,17 @@ Jump right in to the next section: [2 Get Started](#2-get-started) to get you st
    ```
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
-![Ui](images/ui_ug.png)
+![Ui](images/annotated_UI.png)
 <p align="center"><i>Figure 1: GUI of TutAssistor</i></p>
+
+Component | What it does
+-------|--------
+Help Window | Exits TutAssistor or views help.
+Command Box | Keys in command.
+Result Display Pane | Displays feedback of command to user.
+TuitionList Panel | Displays all tuition classes.
+StudentList Panel | Displays all students.
+Main Display Pane | Displays today's lessons, tuition class's or student's details, or a timetable.
 
 
 ### 2.2 Try it yourself!
