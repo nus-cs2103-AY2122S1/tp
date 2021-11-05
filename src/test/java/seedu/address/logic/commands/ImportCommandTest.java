@@ -5,7 +5,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
