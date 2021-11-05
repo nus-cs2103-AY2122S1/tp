@@ -2,8 +2,41 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+### Table of Contents
+- [**Acknowledgements**](#--acknowledgements--)
+- [**Setting up, getting started**](#--setting-up--getting-started--)
+- [**Design**](#--design--)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+- [**Implementation**](#--implementation--)
+  * [Add feature](#add-feature)
+  * [Edit feature](#edit-feature)
+  * [Show feature](#show-feature)
+  * [Find feature](#find-feature)
+  * [Filter interview feature](#filter-interview-feature)
+    + [Design considerations:](#design-considerations-)
+  * [Unmark feature](#unmark-feature)
+  * [Datetime for interview](#datetime-for-interview)
+- [**Documentation, logging, testing, configuration, dev-ops**](#--documentation--logging--testing--configuration--dev-ops--)
+- [**Appendix: Requirements**](#--appendix--requirements--)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#--appendix--instructions-for-manual-testing--)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Deleting a person](#deleting-a-person)
+  * [Saving data](#saving-data)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+  
+ 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -663,14 +696,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
 * **Applied Role**: Represents the job a person is applying for
 * **Employment Type**: Represents the type of work contract, specifically Full time, Part time, Temporary & Internship
 * **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
 * **Level of Education**: Represents the highest/current level of education the applicant has, specifically Elementary, Middle School, High School, University, Bachelors, Masters, PhD
-* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
+* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
