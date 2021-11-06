@@ -505,7 +505,7 @@ Use case ends.
 * **Graphical User Interface (GUI)**: Type of user interface through which users interact with electronic devices via visual indicator representations
 * **Command Line Interface (CLI)**: Type of user interface through which users interact with a system or application by typing in text (commands)
 * **Stay-Home-Notice (SHN)**: The notice involves a stipulated period consisting of a start and end date a person would have to remain in their place of residence or dedicated facility
-* **SHN enforcement mode**: Refer to [User Guide](UserGuide.md#SHN-enforcement-mode)
+* **SHN enforcement mode**: Refer to [User Guide](UserGuide.md#shn-enforcement-mode)
 * **Case number**: The unique identifier assigned to each person in Track2Gather
 
 --------------------------------------------------------------------------------------------------------------------
