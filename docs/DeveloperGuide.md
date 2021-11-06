@@ -11,12 +11,12 @@ title: Developer Guide
 4. [Architecture](#Architecture)
 5. [UI](#UI component)
 6. [Logic component](#Logic component)
-7. [Storage component](#component)
+7. [Storage component](#Storage component)
 8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
 9. [Appendix: Requirements](#Appendix Requirements)
 9. [Common classes](#Common classes)
 10. [User Stories](#User Stories)
-11. [Use case](#Use case)
+11. [Use case](#Use Cases)
 12. [Non-Functional Requirements](#Non-Functional Requirements)
 13. [Glossary](#Glossary) 
 14. [Appendix: Instructions for manual testing](#Appendix)
@@ -124,8 +124,7 @@ The `UI` component,
 
 ## <a name="Logic component"></a> Logic component
 
-**
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -491,7 +490,7 @@ success.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="docs"></a> **Documentation, logging, testing, configuration, dev-ops**
+## <a name="Documentation"></a> **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -521,7 +520,7 @@ CS2100 TAs who
 
 CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
-## <a name="User stories"></a> User stories
+## <a name="User Stories"></a> User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -555,7 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-## <a name="Use cases"></a> Use cases
+## <a name="Use Cases"></a> Use Cases
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
