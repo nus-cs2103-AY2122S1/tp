@@ -95,7 +95,7 @@ public class LogicManager implements Logic {
                 AliasCommandParser.checkAliasWord(aliasWord, addressBookParser);
                 AliasCommandParser.checkCommandWord(aliases.get(aliasWord), addressBookParser);
             } catch (ParseException e) {
-                LogsCenter.getLogger(getClass()).info("Invalid alias removed: " + aliasWord);
+                logger.info("Invalid alias removed: " + aliasWord);
                 aliases.remove(aliasWord);
             }
         }
