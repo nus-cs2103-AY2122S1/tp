@@ -41,16 +41,13 @@ import static seedu.address.testutil.TypicalClients.BOB;
 import static seedu.address.testutil.TypicalClients.OPTIONAL_AMY;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
-import java.util.function.Function;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.Client;
-import seedu.address.model.client.ClientId;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.DisposableIncome;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
@@ -71,7 +68,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Function<ClientId, Client> expectedClient = new ClientBuilder(BOB).withTags(VALID_TAG_FRIEND).buildFunction();
+        EditClientDescriptor expectedClient = new ClientBuilder(BOB).withTags(VALID_TAG_FRIEND).buildFunction();
 
         model.getAddressBook().setClientCounter("10");
         // whitespace only preamble
@@ -133,7 +130,7 @@ public class AddCommandParserTest {
 
         model.getAddressBook().setClientCounter("10");
         // multiple tags - all accepted
-        Function<ClientId, Client> expectedClientMultipleTags = new ClientBuilder(BOB)
+        EditClientDescriptor expectedClientMultipleTags = new ClientBuilder(BOB)
             .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).buildFunction();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
             + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB
@@ -144,7 +141,7 @@ public class AddCommandParserTest {
     public void parse_allOptionalFieldsMissing_success() {
         // missing all optional fields
         model.getAddressBook().setClientCounter("11");
-        Function<ClientId, Client> expectedClient = new ClientBuilder(OPTIONAL_AMY).buildFunction();
+        EditClientDescriptor expectedClient = new ClientBuilder(OPTIONAL_AMY).buildFunction();
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY,
             new AddCommand(expectedClient));
     }

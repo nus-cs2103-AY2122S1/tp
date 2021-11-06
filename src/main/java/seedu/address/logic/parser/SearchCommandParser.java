@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_FIELDS_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,8 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         String preparedArgs = " ".concat(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(preparedArgs, ALL_PREFIXES);
 
-        List<String> emptyInputPrefixes = Arrays.stream(ALL_PREFIXES)
+        List<String> emptyInputPrefixes = argMultimap.getPrefixOrdering()
+                .stream()
                 .filter(prefix -> argMultimap.getValue(prefix)
                         .map(String::isBlank)
                         .orElse(false))

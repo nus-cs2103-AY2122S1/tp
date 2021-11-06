@@ -1,13 +1,20 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
+import static seedu.address.model.client.NextMeeting.NULL_MEETING;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Function;
 
+import seedu.address.commons.mapper.PrefixMapper;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.CurrentPlan;
 import seedu.address.model.client.DisposableIncome;
@@ -33,7 +40,6 @@ public class ClientBuilder {
     public static final String DEFAULT_RISKAPPETITE = "3";
     public static final String DEFAULT_DISPOSABLEINCOME = "300";
     public static final String DEFAULT_LASTMET = "24-09-2021";
-    public static final String DEFAULT_NEXTMEETING = "24-09-2022 (10:00~12:00), Starbucks @ UTown";
     public static final String DEFAULT_CURRENTPLAN = "Prudential PRUwealth";
 
     private ClientId clientId;
@@ -60,12 +66,7 @@ public class ClientBuilder {
         riskAppetite = new RiskAppetite(DEFAULT_RISKAPPETITE);
         disposableIncome = new DisposableIncome(DEFAULT_DISPOSABLEINCOME);
         lastMet = new LastMet(DEFAULT_LASTMET);
-        try {
-            nextMeeting = ParserUtil.parseNextMeeting(DEFAULT_NEXTMEETING);
-        } catch (ParseException pe) {
-            nextMeeting = new NextMeeting("24-09-2022", "10:00", "12:00",
-                "Starbucks @ UTown", name.fullName);
-        }
+        nextMeeting = NULL_MEETING;
 
         currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         tags = new HashSet<>();
@@ -192,8 +193,14 @@ public class ClientBuilder {
     /**
      * @return {@code Client} function that we are building
      */
-    public Function<ClientId, Client> buildFunction() {
-        return clientId -> new Client(clientId, name, phone, email, address, riskAppetite,
-            disposableIncome, currentPlan, lastMet, nextMeeting, tags);
+    public EditClientDescriptor buildFunction() {
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
+        Client client = build();
+        Arrays.stream(allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG))
+                .map(PrefixMapper::getAttributeAndSetFunction)
+                .forEach(f -> f.accept(editClientDescriptor, client));
+
+        editClientDescriptor.setTags(tags);
+        return editClientDescriptor;
     }
 }

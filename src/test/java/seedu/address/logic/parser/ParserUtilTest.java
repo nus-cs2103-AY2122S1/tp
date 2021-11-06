@@ -185,7 +185,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDirection_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_DIRECTION));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortDirection(INVALID_DIRECTION));
     }
 
     @Test
@@ -407,12 +407,6 @@ public class ParserUtilTest {
         public boolean hasTagName(String tagName) {
             requireNonNull(tagName);
             return tagsAdded.stream().anyMatch(tag -> tag.getName().equals(tagName));
-        }
-
-        @Override
-        public void addTag(Tag tag) {
-            requireNonNull(tag);
-            tagsAdded.add(tag);
         }
 
         @Override

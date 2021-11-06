@@ -11,13 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Optional;
-import java.util.function.Function;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.ClientId;
+import seedu.address.model.client.Client.EditClientDescriptor;
 
 /**
  * Adds a client to the address book.
@@ -52,13 +49,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";
 
-    private final Function<ClientId, Client> toAdd;
+    private final EditClientDescriptor toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Client}
      */
-    public AddCommand(Function<ClientId, Client> client) {
-        // HACK: making client a function is counter-intuitive
+    public AddCommand(EditClientDescriptor client) {
         requireNonNull(client);
         toAdd = client;
     }
@@ -67,18 +63,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // HACK: getClientCounter() should encapsulate the default
-        String clientCounter = Optional.ofNullable(model.getAddressBook().getClientCounter()).orElse("0");
-        Client client = toAdd.apply(new ClientId(clientCounter));
-
-        // TODO: model.createClient (to do check and add client)
-        if (model.hasClient(client)) {
+        Client client = model.createClient(toAdd);
+        if (client == null) {
             throw new CommandException(MESSAGE_DUPLICATE_CLIENT);
         }
-
-        model.addClient(client);
-        // TODO: model.incrementClientCounter should not be exposed, instead increment directly within addClient
-        model.getAddressBook().incrementClientCounter();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, client));
     }
@@ -89,7 +77,6 @@ public class AddCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.apply(new ClientId("0")).equals(((AddCommand) other)
-                .toAdd.apply(new ClientId("0"))));
+                && toAdd.equals(((AddCommand) other).toAdd));
     }
 }

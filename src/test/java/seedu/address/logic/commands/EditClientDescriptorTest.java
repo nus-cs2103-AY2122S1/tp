@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class EditClientDescriptorTest {

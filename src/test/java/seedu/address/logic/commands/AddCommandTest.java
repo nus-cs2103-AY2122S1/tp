@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,13 +17,13 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
@@ -40,7 +39,7 @@ public class AddCommandTest {
     @Test
     public void execute_clientAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingClientAdded modelStub = new ModelStubAcceptingClientAdded();
-        Function<ClientId, Client> validClientFunction = new ClientBuilder().buildFunction();
+        EditClientDescriptor validClientFunction = new ClientBuilder().buildFunction();
         Client validClient = new ClientBuilder().build();
 
         CommandResult commandResult = new AddCommand(validClientFunction).execute(modelStub);
@@ -51,7 +50,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateClient_throwsCommandException() {
-        Function<ClientId, Client> validClientFunction = new ClientBuilder().buildFunction();
+        EditClientDescriptor validClientFunction = new ClientBuilder().buildFunction();
         Client validClient = new ClientBuilder().build();
         AddCommand addCommand = new AddCommand(validClientFunction);
         ModelStub modelStub = new ModelStubWithClient(validClient);
@@ -61,8 +60,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Function<ClientId, Client> alice = new ClientBuilder().withName("Alice").buildFunction();
-        Function<ClientId, Client> bob = new ClientBuilder().withName("Bob").buildFunction();
+        EditClientDescriptor alice = new ClientBuilder().withName("Alice").buildFunction();
+        EditClientDescriptor bob = new ClientBuilder().withName("Bob").buildFunction();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -172,11 +171,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasClient(Client client) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasClientId(ClientId clientId) {
             return true;
         }
@@ -192,6 +186,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Client createClient(EditClientDescriptor client) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Client> setAllClients(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
             throw new AssertionError("This method should not be called.");
         }
@@ -203,11 +202,6 @@ public class AddCommandTest {
 
         @Override
         public boolean hasTagName(String tagName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -294,9 +288,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasClient(Client client) {
-            requireNonNull(client);
-            return this.client.isSameClient(client);
+        public Client createClient(EditClientDescriptor clientDescriptor) {
+            Client client = clientDescriptor.createClient(new ClientId("0"));
+            if (client.isSameClient(client)) {
+                return null;
+            }
+            return client;
         }
     }
 
@@ -306,21 +303,19 @@ public class AddCommandTest {
     private static class ModelStubAcceptingClientAdded extends ModelStub {
         final ArrayList<Client> clientsAdded = new ArrayList<>();
 
+        private int count = 0;
+
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
 
         @Override
-        public boolean hasClient(Client client) {
-            requireNonNull(client);
-            return clientsAdded.stream().anyMatch(client::isSameClient);
-        }
-
-        @Override
-        public void addClient(Client client) {
-            requireNonNull(client);
+        public Client createClient(EditClientDescriptor clientDescriptor) {
+            requireNonNull(clientDescriptor);
+            Client client = clientDescriptor.createClient(new ClientId(Integer.toString(count++)));
             clientsAdded.add(client);
+            return client;
         }
     }
 }
