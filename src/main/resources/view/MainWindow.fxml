@@ -20,7 +20,6 @@
       <stylesheets>
         <URL value="@../css/Fonts.css" />
         <URL value="@../css/DarkTheme.css" />
-        <URL value="@../css/Extensions.css" />
       </stylesheets>
          <ScrollPane fitToHeight="true" fitToWidth="true">
             <content>
