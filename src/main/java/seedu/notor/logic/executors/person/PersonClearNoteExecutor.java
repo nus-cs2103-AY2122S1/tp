@@ -17,8 +17,9 @@ public class PersonClearNoteExecutor extends PersonExecutor {
     public static final String MESSAGE_CLEAR_NOTE_SUCCESS = "Cleared note of Person: %1$s.";
     public static final String MESSAGE_CLEAR_NOTE_CANCEL = "Clearing of note for %1$s has been cancelled.";
     public static final String MESSAGE_CLEAR_NOTE_FAILURE =
-            "Unable to clear note.\nPlease close the note of Person: %1$s";
-    public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with clearing the note of Person: %1$s?";
+            "Unable to clear note as note window for Person: %1$s is currently opened.";
+    public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with clearing note of Person: %1$s?";
+
 
 
 
