@@ -8,8 +8,13 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
+import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Group objects.
+ */
 public class GroupBuilder {
+
     public static final String DEFAULT_NAME = "Stats tutorial";
 
     private GroupName name;
@@ -53,6 +58,30 @@ public class GroupBuilder {
      */
     public GroupBuilder withUniqueId(String uniqueId) {
         this.uniqueId = UniqueId.generateId(uniqueId);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ids} into a {@code Set<UniqueId>} and set it to the {@code Group} that we are building.
+     */
+    public GroupBuilder withAssignedTaskIds(String ... assignedTaskIds) {
+        this.assignedTaskIds = SampleDataUtil.getUniqueIdSet(assignedTaskIds);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ids} into a {@code Set<UniqueId>} and set it to the {@code Group} that we are building.
+     */
+    public GroupBuilder withAssignedPersonIds(String ... assignedPersonIds) {
+        this.assignedPersonIds = SampleDataUtil.getUniqueIdSet(assignedPersonIds);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Lessons List} of the {@code Group} that we are building.
+     */
+    public GroupBuilder withLessonsList(NoOverlapLessonList lessonsList) {
+        this.lessonsList = lessonsList;
         return this;
     }
 
