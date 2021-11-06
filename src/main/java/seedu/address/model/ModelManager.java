@@ -113,6 +113,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
     }
 
     @Override
