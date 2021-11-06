@@ -352,6 +352,35 @@ The following sequence diagram shows how the view operation works.
 
 ![ViewDiagram](images/ViewStudentDiagram.png)
 
+### Changing View Panel
+
+On the right side of the GUI, there exists a panel with contents that change depending on the user's selected view. For example
+it can show the current schedule or more details of a person.
+
+#### Implementation
+
+![ViewTypeDiagram](images/ViewTypes.png)
+
+The UI listens to changes in the Model via an ObservableProperty within the ModelManager. It does this by
+registering a ChangeListener on initialisation.
+
+If a Viewing Panel should be updated when the Command executes, the Command will set the appropriate ViewingType within the Model.
+This will update the ObservableProperty that the UI is listening on, hence updating the UI with the correct ViewingType.
+
+The contents of the ViewingType are obtained through other Observables in the Model as well. These are updated independently
+of the ViewingType.
+
+#### Implementation Rationale
+
+This method of using a ChangeListener is in line with the overall architecture of the application, where the UI responds to any
+changes in the Model. This also removes the need for Model and Logic packages to be dependent on the UI.
+
+#### Alternatives Considered
+
+We had considered using CommandResult to inform the UI what the ViewingType should be, which the UI can obtain after executing
+the command. This works well, but could get complicated if we used the CommandResult for all sorts of feedback to the UI. Using
+event listeners was more convenient and allowed us to store less information in the CommandResult itself.
+
 ### Lessons
 
 #### Implementation
@@ -362,10 +391,10 @@ a `Subject` and a `Timeslot`, which describes a Lesson well.
 A `NoOverlapLessonList` contains a list of lessons, in which the lessons within must not overlap. Overlap is defined as falling on the
 same day and with timings that run within each other.
 
-`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular
+`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular for transporting lesson information around.
 
-The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use maintain knowledge of a
-lesson and its attendees. For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
+The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use lessons.
+For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
 a `LessonAssignable`.
 
 ![LessonDiagram](images/LessonDiagram.png)
@@ -377,7 +406,7 @@ is a useful wrapper class to obtain the full details of a lesson (the lesson det
 does not have a direct reference to its attendee.
 
 Lessons were created to be held by other classes, and thus does not hold information about its attendees. We acknowledge that a
-`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided let other classes be
+`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided to let other classes be
 in charge of knowing who _attends_ each `Lesson`.
 
 #### Alternatives considered

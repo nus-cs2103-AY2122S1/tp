@@ -31,7 +31,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
         if (argMultimap.getPreamble().isEmpty() || !argMultimap.preambleHasExpectedSegments(1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditTaskCommand.COMMAND_WORD));
+                    EditTaskCommand.MESSAGE_USAGE));
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();

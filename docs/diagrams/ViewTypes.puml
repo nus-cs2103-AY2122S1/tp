@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":Command" as Command LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+participant ":ObservableProperty" as ObservableProperty MODEL_COLOR
+end box
+
+participant ":ChangeListener" as ChangeListener #747d7d
+
+box UI UI_COLOR_T1
+participant "ViewingPanel" as ViewingPanel UI_COLOR
+endbox
+
+[-> Command : execute(Model)
+activate Command
+Command -> Model : setViewingType(newValue)
+activate Model
+Model -> ObservableProperty : set(newValue)
+activate ObservableProperty
+
+ObservableProperty -> ChangeListener : changed(ObservableValue,\noldValue, oldValue)
+activate ChangeListener
+
+ChangeListener -> ViewingPanel : changeOnValue(newValue);
+activate ViewingPanel
+
+ViewingPanel --> ChangeListener
+deactivate ViewingPanel
+
+ChangeListener --> ObservableProperty
+deactivate ChangeListener
+
+ObservableProperty --> Model
+deactivate ObservableProperty
+
+Model --> Command
+deactivate Model
+
+[<-- Command
+deactivate Command
+
+@enduml

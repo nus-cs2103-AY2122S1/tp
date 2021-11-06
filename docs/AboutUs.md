@@ -17,6 +17,7 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[portfolio](team/eltonyeh.md)]
 
 * Role: Developer
+* Responsibilities: Unique Id for entities and task assignments.
 
 ### Tan Hua Kun
 
@@ -25,17 +26,17 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[github](http://github.com/tanhuakun)]
 [[portfolio](team/tanhuakun.md)]
 
-* Role: Developer
-* Responsibilities: Backend
+* Role: Full Stack Developer
+* Responsibilities: Creating Lesson, Exams and Viewing Panel logic.
 
 ### Srinivasan Neharikha
 
 <img src="images/neha-5678.png" width="200px">
 
-[[github](http://github.com/Neha-5678)] [[portfolio](team/Neha-5678.md)]
+[[github](http://github.com/neha-5678)] [[portfolio](team/neha-5678.md)]
 
 * Role: Developer
-* Responsibilities: Scheduling and tracking
+* Responsibilities: Storage for tasks and groups and creating logic for features related to Tasks.
 
 ### Le Quoc Huy
 
