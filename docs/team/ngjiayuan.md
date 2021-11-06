@@ -9,12 +9,12 @@ ModuLink is a desktop-based application for Computer Science (CS) students at NU
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the feature to allow new users to create their profile 
+* **New Feature**: Added the create feature to allow new users to create their profile 
   * What it does: allows new user to create their profile for the first time.
   * Justification: This feature was necessary as each user should be required to create their profile with their contact details. This allows other users to search them up and obtain their contact details in order to reach out to them to form groups.
   * Highlights: This command is restricted to be called only once as we expect only 1 profile creation per new user. Any amendments should be made with the edit command instead. Users are also required to create their profile prior to using other commands of ModuLink as part of the Get Started process.
 
-* **New Feature**: Added the feature to remove a favourited profile as a favourite
+* **New Feature**: Added the remFav feature to remove a favourited profile as a favourite
   * What it does: allows user to remove a favourited profile as their favourites.
   * Justification: This feature was necessary as users may add a profile to favourite by accident or has a change in mind of keeping a profile as their favourites.
   * Highlights: This command is a new command and complements the addFav command.
