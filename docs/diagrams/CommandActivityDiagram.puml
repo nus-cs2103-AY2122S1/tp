@@ -1,0 +1,17 @@
+@startuml
+skinparam lineType ortho
+skinparam lineType polyline
+
+start
+:User input command;
+:TAB parses command;
+
+if (command format is valid?) then (yes)
+  :TAB executes command;
+else (no)
+  :TAB displays error message;
+endif
+
+end
+
+@enduml

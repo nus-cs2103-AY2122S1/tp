@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -12,9 +17,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,6 +34,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
+    private final UndoRedoStack undoRedoStack;
     private final AddressBookParser addressBookParser;
 
     /**
@@ -34,6 +43,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+        undoRedoStack = new UndoRedoStack();
         addressBookParser = new AddressBookParser();
     }
 
@@ -43,7 +53,9 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        command.setDependencies(model, undoRedoStack); //equivalent to setting parameters for command.execute()
+        commandResult = command.execute();
+        undoRedoStack.pushUndoableCommand(command);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -54,6 +66,7 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
@@ -62,6 +75,44 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Tag> getObservableTagList() {
+        return model.getObservableTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return model.getTagCounter();
+    }
+
+    public ObservableList<Lesson> getLessonList(Person student) {
+        ObservableList<Lesson> internalList = FXCollections.observableArrayList();
+        internalList.addAll(student.getLessons());
+        return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    @Override
+    public ObservableList<Lesson> getEmptyLessonList() {
+        ObservableList<Lesson> internalList = FXCollections.observableArrayList();
+        return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return model.getCalendar();
+    }
+
+    @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return model.getUpcomingLessons();
+    }
+
+    @Override
+    public void updateUpcomingLessons() {
+        logger.info("Update upcoming lessons");
+        model.updateUpcomingLessons();
     }
 
     @Override
@@ -77,5 +128,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return model.getLastUpdatedDate();
     }
 }
