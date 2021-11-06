@@ -1368,7 +1368,36 @@ Expected: Error details will be shown in the status message.
 
 ### Fees Calculator
 
-1. Add a recurring lesson to a student. <br>
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> Please test the test cases separately and independently for better clarity.</div>
+
+1. Add the recurring lessons and makeup lessons to a student, following the test cases. <br>
+   Prerequisites: The lessons do not clash with each other and other existing lessons. If there were clashes, delete the clashing lesson(s).
+2. Close TAB and open the json file `/data/addressbook.json`. 
+3. At the bottom of the json file there is `lastUpdated` field with a `DateTime` object. Edit the `DateTime` object according to the test cases.
+
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> Please vary the date and time accordingly (adding or subtracting by an equivalent amount of day(s) and time), 
+depending on the date and time when you are testing.</div>
+
+Suppose the date today is 6 Nov 2021 and current time is 1800 hours,
+* Test case: 
+  1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-31T1200`
+  Expected: Outstanding lesson fees for first lesson of the first person is `$25`. The lesson that was accounted for is:
+    * 6 Nov 2021 1400-1500
+* Test case:
+  1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-30T1200`
+  Expected: Outstanding lesson fees for the first lesson of the first person is `$50`. The lessons that were accounted for are:
+     * 30 Oct 2021 1400-1500
+     * 6 Nov 2021 1400-1500
+* Test case:
+  1. `ladd 1 recurring/ date/3 Nov 2021 time/1400-1500 rates/25 subject/math` 
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-20T0000`
+  Expected: Outstanding lesson fees for the first lesson of the first person is `$25`. The lesson that was accounted for is:
+     * 3 Nov 2021 1400-1500
+* Test case:
+  1. `ladd 1 date/6 Nov 2021 time/2000-2130 rates/25 subject/math`
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10
 
 ### Saving data
 
