@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CLASS_DOES_NOT_EXIST;
 import static seedu.address.commons.core.Messages.MESSAGE_GROUP_DOES_NOT_EXIST;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
@@ -17,6 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
 
@@ -60,6 +62,11 @@ public class AddStudentToGroupCommand extends Command {
         // Check if index is within range of student list
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
+        // check if tutorial class already exists in ClassMATE
+        if (!model.hasTutorialClass(TutorialClass.createTestTutorialClass(toAddTutorialGroup.getClassCode()))) {
+            throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
         // check if tutorial group already exists in ClassMATE
