@@ -811,6 +811,12 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Adding a contact
+1. Adding a contact
+
+    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 rv/Great place! t/view t/tourist ra/4` <br> 
+    Expected: "Singapore Flyers" is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `add c/att`
+    3. Other incorrect add commands to try:
 
 ### Editing a contact
 
@@ -856,6 +862,9 @@ testers are expected to do more *exploratory* testing.
 ### Navigating input history
 
 ### Clicking on contacts
+1. Clicking on contacts shown in the contact list
+
+    1. 
 
 ### Undoing operations
 
@@ -878,7 +887,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Exporting all contacts in filtered list
 
-    1. Prerequisites: List all contacts using the a command such as `list`, `filter` etc. Multiple contacts in the list.
+    1. Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.
 
     1. Test case: `export`<br>
        Expected: All contacts are exported from the list. Details of the exported contacts found in the specified export .txt file.
@@ -914,7 +923,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing help
 
+1. Viewing help
+
+   1. Test case: `help`<br>
+      Expected: User Guide is opened in the User's default browser.
+
+   1. Other incorrect exit commands to try: `help abc`, `help 2`, `...` <br>
+      Expected: WhereTourGo does not open User Guide. Error details shown in the status message.
+
 ### Displaying commands
 
+1. Displaying command summary
+
+   1. Test case: `cmd` <br>
+      Expected: Command summary is opened in the User's default browser.
+
+   1. Other incorrect exit commands to try: `cmd abc`, `cmd 2`, `...` <br>
+      Expected: WhereTourGo does not open command summary. Error details shown in the status message.
 
 ## **Appendix: Effort**
