@@ -112,4 +112,9 @@ public class ProfileUrl {
         ProfileUrl otherProfileUrl = (ProfileUrl) other;
         return this.url.equals(otherProfileUrl.url);
     }
+
+    @Override
+    public String toString() {
+        return this.url;
+    }
 }

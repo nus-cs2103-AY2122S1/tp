@@ -204,7 +204,9 @@ public class Applicant {
                 + "; Address: "
                 + address
                 + "; Application: "
-                + application;
+                + application
+                + "; GitHub Profile: "
+                + gitHubUrl;
     }
 
     public String getApplicationSummary() {
