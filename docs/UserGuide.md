@@ -29,6 +29,7 @@ More importantly, FAST is **optimized for those who prefer to work with a Comman
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you are a Financial Advisor that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
+<div style="page-break-after: always"></div>
 
 ### Features overview
 Here is an overview of the features FAST offers:
