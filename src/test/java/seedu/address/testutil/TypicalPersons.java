@@ -60,7 +60,7 @@ public class TypicalPersons {
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withMeasurement("160_50_60_70")
             .withRemark("").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withGender("MALE")
+    public static final Person JOHNSON = new PersonBuilder().withName("Johnson").withGender("MALE")
             .withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withMeasurement("175_90_110")
@@ -103,6 +103,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, JOHNSON));
     }
 }
