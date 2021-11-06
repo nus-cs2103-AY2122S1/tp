@@ -33,7 +33,7 @@ title: Developer Guide
   * [Deleting a person](#deleting-a-person)
   * [Saving data](#saving-data)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -199,7 +199,7 @@ Given below is an example usage scenario and how the add operation behaves at ea
 
 Step 1. A valid command `add n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`
 is given as user input. This invokes `LogicManager#execute()`, which calls`AddressBookParser#parseCommand()` to parse
-the input into command word `add` and command argument ` n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4`.
+the input into command word `add` and command argument ``` n/Dylan p/97998581 e/dylan.eyyou@gmail.com r/Pilot et/Full time s/3500 l/PhD y/4```.
 
 Step 2. `AddCommandParser` is initialized based on the parse results and `AddCommandParser#parse()` is called.
 `AddCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to obtain an `ArgumentMultimap`, which is
@@ -278,7 +278,7 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario and how the edit operation behaves at each step.
 
 Step 1. A valid command `edit 1 n/Ali` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ` 1 n/Ali`.
+`AddressBookParser#parseCommand()` to parse `edit 1 n/Ali` into command word `edit` and command argument ``` 1 n/Ali```.
 
 Step 2. `EditCommandParser` is initialized based on the parse results and `EditCommandParser#parse()` is called.
 `EditCommandParser#parse()` then calls `ArgumentTokenizer#tokenize()` to identify the `Index` of the person to be 
@@ -319,10 +319,10 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario illustrated by a sequence diagram for ```delete``` command.
 
 Step 1. A valid command `delete 1` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ` 1`.
+`AddressBookParser#parseCommand()` to parse `delete 1` into command word `delete` and command argument ``` 1```.
 
 Step 2. `DeleteCommandParser` is initialized based on the parse results and `DeleteCommandParser#parse()` is called
-to identify the indices present in ` 1`. `DeleteCommandParser#parse()` then initializes a
+to identify the indices present in ``` 1```. `DeleteCommandParser#parse()` then initializes a
 `DeleteCommand` with the indices present as arguments.
 
 Step 3. `DeleteCommand#execute()` is then called, which will check the validity of the given indices. 
@@ -478,10 +478,10 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario illustrated by a sequence diagram for ```mark``` command.
 
 Step 1. A valid command `mark 1 2` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `mark 1 2` into command word `mark` and command argument ` 1 2`.
+`AddressBookParser#parseCommand()` to parse `mark 1 2` into command word `mark` and command argument ``` 1 2```.
 
 Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
-to identify the indices present in ` 1 2`. `MarkingCommandParser#parse()` then initializes a
+to identify the indices present in ``` 1 2```. `MarkingCommandParser#parse()` then initializes a
 `MarkCommand` with the indices present as arguments.
 
 Step 3. `MarkCommand#execute()` is then called, which will in turn call `Model#checkForMarkedPerson()` on the applicants
@@ -513,10 +513,10 @@ in the Activity Diagram. This is a known limitation of PlantUML.</div>
 Given below is an example usage scenario illustrated by a sequence diagram for ```unmark``` command.
 
 Step 1. A valid command `unmark 3` is given as user input. This invokes `LogicManager#execute()`, which calls
-`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ` 3`.
+`AddressBookParser#parseCommand()` to parse `unmark 3` into command word `unmark` and command argument ``` 3```.
 
 Step 2. `MarkingCommandParser` is initialized based on the parse results and `MarkingCommandParser#parse()` is called
-to identify the indices present in ` 3`. `MarkingCommandParser#parse()` then initializes a
+to identify the indices present in ``` 3```. `MarkingCommandParser#parse()` then initializes a
 `UnmarkCommand` with the indices present as arguments, which in this case is a single index 3.
 
 Step 3. `UnmarkCommand#execute()` is then called, which will in turn call `Model#checkForUnmarkedPerson()` on the applicants
@@ -621,7 +621,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | see all tags available in the list | check easily if a certain tag is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
-| `* *`    | user                                       | delete all applicants at once                 | so that I can save time clearing all data without having to manually input every single applicant via a delete command |
+| `* *`    | user                                       | clear all applicants                         | so that I can save time clearing all data without having to manually input every single applicant via a delete command |
 | `* *`    | user                                       | find applicants with interviews that have passed | so that I can easily see and keep track of the applicants with passed interviews  |
 | `* *`    | user                                       | find applicants with interviews that are upcoming | so that I can easily see and keep track of the applicants with upcoming interviews |
 
@@ -898,7 +898,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC013 - Deleting all applicants at once**
+**Use case: UC013 - Clear all applicants**
 
 **MSS**
 
@@ -945,6 +945,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
 * **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
