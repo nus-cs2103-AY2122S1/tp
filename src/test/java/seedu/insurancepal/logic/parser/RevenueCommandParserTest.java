@@ -39,12 +39,12 @@ public class RevenueCommandParserTest {
     @Test
     public void parse_invalidRevenue_throwsParseException() {
         // no leading and trailing whitespaces
-        assertParseFailure(parser, "1 r/iudsiu8w", RevenueCommandParser.ILLEGAL_REVENUE_MESSAGE);
+        assertParseFailure(parser, "1 r/iudsiu8w", INVALID_REVENUE_COMMAND_FORMAT);
     }
 
     @Test
     public void parse_missingRevenue_throwsParseException() {
         // no leading and trailing whitespaces
-        assertParseFailure(parser, "1", RevenueCommandParser.ILLEGAL_REVENUE_MESSAGE);
+        assertParseFailure(parser, "1", INVALID_REVENUE_COMMAND_FORMAT);
     }
 }
