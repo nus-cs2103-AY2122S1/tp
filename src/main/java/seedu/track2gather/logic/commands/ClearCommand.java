@@ -1,6 +1,8 @@
 package seedu.track2gather.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.track2gather.commons.core.Messages.MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.track2gather.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.Clock;
 import java.time.LocalDate;
@@ -16,7 +18,9 @@ import seedu.track2gather.model.person.attributes.Period;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Contacts with completed SHN periods have been cleared!";
+    public static final String MESSAGE_SUCCESS = "Contacts with completed SHN periods have been cleared. "
+            + "Note that SHN periods with end dates that fall on the current day are not cleared.\n"
+            + MESSAGE_PREDICATE_SHOW_ALL_PERSONS;
 
     private Clock clock;
 
@@ -31,6 +35,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownListCopy = List.copyOf(model.getFilteredPersonList());
 
         // A dummy SHN period for contacts that do not have SHN periods

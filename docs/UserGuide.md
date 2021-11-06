@@ -213,9 +213,11 @@ Examples:
 
 ### Clearing all persons : `clear`
 
-Deletes all persons with SHN periods that are completed at the time of command call.
+Deletes all persons with SHN periods that are completed at the time of command call. 
 
 Format: `clear`
+
+* Note that SHN periods with end dates that fall on the current day will not be cleared.
 
 ### SHN enforcement mode
 SHN enforcement mode contains a special group of features that enables users to track the call statuses of persons in Track2Gather. 
@@ -244,7 +246,7 @@ Under `Call Status` for each person, there are two components:
   * The number of failed call attempts recorded is cumulative over the entire period of Track2Gather usage. It does not reset to zero when a new SHN enforcement session is created.
 
 #### Important notes
-* `add`, `edit`, `find` and `list` commands deactivate enforcement mode.
+* `add`, `edit`, `find`, `clear` and `list` commands deactivate enforcement mode.
 * At any point in time, there is only 1 ongoing SHN enforcement session.
 * Previous sessions cannot be accessed.
 
