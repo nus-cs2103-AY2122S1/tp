@@ -325,14 +325,14 @@ Examples:
 
 ### Setting the number of days before tasks are considered due soon: `reminder`
 
-1. Displays the current number of days prior to a task's date for tasks to be considered due soon. 
+1. Displays the current number of days prior to the date of tasks for them to be considered due soon. 
 
    Format: `reminder`
 
     * The default value is 3 days.
 
 
-2. Sets the number of days prior to a task's date before tasks are considered as due soon.
+2. Sets the number of days prior to the date of tasks for them to be considered as due soon. This affects all tasks.
 
    Format: `reminder -s DAYS`
 
@@ -342,11 +342,11 @@ Examples:
 
    Example:
 
-   * `reminder -s 10` Tasks that are due within a 10-day period from the current system date will be considered due soon.
+   * `reminder -s 10` All tasks that are due within a 10-day period from the current system date will be considered due soon.
 
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: A task will turn orange in colour as a reminder that it is due soon. A task is defined as being
-due soon when the current system date is later than or the same as {task's date - DAYS}, and earlier than {task's date}.
+due soon when the number of days between the current system date is less than or equal to {DAYS}, the task is not overdue.
 </div>
 
 ### Clearing the screen: `clear`
