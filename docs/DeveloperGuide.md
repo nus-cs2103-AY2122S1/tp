@@ -2,8 +2,32 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+## Table of Contents
+
+* [**Overview**](#)
+* [**Table of Contents**](#table-of-contents)
+* [**Acknowledgements**](#acknowledgements)
+* [**Setting up, getting started**](#setting-up-getting-started)
+* [**Design**](#design)
+* [**Implementation**](#implementation)
+  * [Add Student : `addstudent`](#add-student--addstudent)
+  * [Add Group : `addgroup`](#add-group--addgroup)
+  * [Add Alloc : `addalloc`](#add-allocation--addalloc)
+  * [Add Score : `addscore`](#add-score--addscore)
+  * [Search : `search`](#search--search)
+  * [Import : `import`](#import--import)
+* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+* [**Appendix: Requirements**](#appendix-requirements)
+  * [Product Scope](#product-scope)
+  * [User Stories](#user-stories)
+  * [Use Cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  * [Launch and Shutdown](#launch-and-shutdown)
+  * [Delete a Student](#deleting-a-student)
+  * [Saving Data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,7 +178,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Import feature
+### Import : `import`
 
 The following activity diagram summarizes what happens when the user inputs an import command:
 
@@ -173,12 +197,9 @@ The user needs to provide the number of `Groups`, `Assessments`, and `Tags` sinc
 
 1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
 
-### Add Student feature
+### Add Student : `addstudent`
 
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
-
-
-#### Implementation
 
 #### AddCommand class
 The `addstudent` mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
@@ -206,8 +227,7 @@ The following sequence diagram shows how the add student operation works:
 
 </div>
 
-
-### Add Group feature
+### Add Group : `addgroup`
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
@@ -230,7 +250,7 @@ The following sequence diagram summarizes what happens when the user inputs an a
 
 ![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
-### Add Allocation Feature
+### Add Allocation : `addalloc`
 
 The `addalloc` feature allows users to allocate a student into a group.
 
@@ -258,7 +278,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 ![AddGroupSequenceDiagram](images/AddAllocSequenceDiagram.png)
 
-### Add Score Feature
+### Add Score : `addscore`
 
 The `addscore` feature allows users to add score for an assessment of a student.
 
@@ -286,11 +306,11 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 ![AddGroupSequenceDiagram](images/AddScoreSequenceDiagram.png)
 
-### Search feature
+### Search : `search`
 
 The `search` feature allows user to filter student list by name, NUSNET ID, groups, or tags.
 
-#### Implementation
+#### How the `search` command works
 
 The following diagram shows the search operation after user input `search -n Alex Yu`.
 
@@ -321,7 +341,7 @@ The following diagram summarizes what happens after user input search command:
 if command is valid. Command is invalid if user input is empty, or if user entered more or less than one flag.
 </div>
 
-### Show Feature
+### Show : `show`
 
 The `show` feature allows users to show the performance analysis of a student, a group or the cohort in an assessment.
 
@@ -531,7 +551,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -548,7 +568,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a Student
 
 1. Deleting a person while all persons are being shown
 
@@ -565,7 +585,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### Saving Data
 
 1. Dealing with missing/corrupted data files
 
