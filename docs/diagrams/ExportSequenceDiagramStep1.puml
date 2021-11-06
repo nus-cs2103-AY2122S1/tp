@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExportCommandParser" as ExportCommandParser LOGIC_COLOR
+participant "e:ExportCommand" as ExportCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("export cs2103t.json")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("export cs2103t.json")
+activate AddressBookParser
+
+create ExportCommandParser
+AddressBookParser -> ExportCommandParser
+activate ExportCommandParser
+
+ExportCommandParser --> AddressBookParser
+deactivate ExportCommandParser
+
+AddressBookParser -> ExportCommandParser : parse("cs2103t.json")
+activate ExportCommandParser
+
+create ExportCommand
+ExportCommandParser -> ExportCommand
+activate ExportCommand
+
+ExportCommand --> ExportCommandParser : e
+deactivate ExportCommand
+
+ExportCommandParser --> AddressBookParser
+deactivate ExportCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+@enduml
