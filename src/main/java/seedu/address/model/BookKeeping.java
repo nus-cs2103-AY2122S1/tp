@@ -75,11 +75,21 @@ public class BookKeeping implements ReadOnlyBookKeeping {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof BookKeeping // instanceof handles nulls
-                && (profit.equals(((BookKeeping) other).profit)
-                    && revenue.equals(((BookKeeping) other).revenue)
-                    && cost.equals(((BookKeeping) other).cost)));
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof BookKeeping)) {
+            return false;
+        }
+
+        // state check
+        BookKeeping other = (BookKeeping) obj;
+        return revenue.equals(other.revenue)
+                && profit.equals(other.profit)
+                && cost.equals(other.cost);
     }
 }

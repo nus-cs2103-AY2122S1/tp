@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_NAME_SPECIFIED_TWICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -30,10 +29,6 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
 
         if (argMultimap.getValue(PREFIX_ID).isEmpty() && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCommand.MESSAGE_USAGE));
-        }
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_NAME_SPECIFIED_TWICE, RemoveCommand.MESSAGE_USAGE));
         }
 
         ItemDescriptor toRemoveDescriptor = new ItemDescriptor();

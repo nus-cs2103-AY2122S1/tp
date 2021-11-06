@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE_NUMBER;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SPECIAL_CHAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -55,10 +55,10 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME + ID_DESC_BAGEL, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_SPECIAL_CHAR + ID_DESC_BAGEL, Name.MESSAGE_CONSTRAINTS);
 
         // invalid id with negative number
-        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL_2,
+        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_NEGATIVE_NUMBER,
                 Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
     }
 }

@@ -26,9 +26,15 @@ Class JsonAdaptedTag
 package "Transaction Storage" #F4F6F6{
 Interface TransactionStorage <<Interface>>
 Class JsonTransactionStorage
-Class JsonSerializableTransaction
+Class JsonSerializableTransactionList
 Class JsonAdaptedOrder
 Class JsonAdaptedItemOrder
+}
+
+package "UserPrefs Storage" #F4F6F6{
+Interface UserPrefsStorage <<Interface>>
+Class UserPrefsStorage
+Class JsonUserPrefsStorage
 }
 
 }
@@ -40,10 +46,12 @@ StorageManager .up.|> Storage
 StorageManager -up-> "1" BookKeepingStorage
 StorageManager -up-> "1" InventoryStorage
 StorageManager -up-> "1" TransactionStorage
+StorageManager -up-> "1" UserPrefsStorage
 
 Storage --|> BookKeepingStorage
 Storage --|> InventoryStorage
 Storage --|> TransactionStorage
+Storage --|> UserPrefsStorage
 
 JsonBookKeepingStorage .up.|> BookKeepingStorage
 JsonBookKeepingStorage .down.> JsonSerializableBookKeeping
@@ -54,8 +62,10 @@ JsonSerializableInventory --> "*" JsonAdaptedItem
 JsonAdaptedItem --> "*" JsonAdaptedTag
 
 JsonTransactionStorage .up.|> TransactionStorage
-JsonTransactionStorage ..> JsonSerializableTransaction
-JsonSerializableTransaction --> "*" JsonAdaptedOrder
+JsonTransactionStorage ..> JsonSerializableTransactionList
+JsonSerializableTransactionList --> "*" JsonAdaptedOrder
 JsonAdaptedOrder --> "*" JsonAdaptedItemOrder
+
+JsonUserPrefsStorage .up.|> UserPrefsStorage
 
 @enduml

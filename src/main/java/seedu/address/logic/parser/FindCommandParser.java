@@ -49,9 +49,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // Add name predicate if name(s) specified
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            predicates.add(
-                    new NameContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_NAME))
-            );
+            predicates.add(new NameContainsKeywordsPredicate(
+                    argMultimap.getAllValues(PREFIX_NAME)));
         }
 
         // Add id predicate if id(s) specified

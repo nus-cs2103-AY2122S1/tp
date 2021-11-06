@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Optional;
 
@@ -13,11 +12,6 @@ import seedu.address.model.item.Item;
 import seedu.address.model.order.Order;
 
 public class StartOrderCommandTest {
-
-    @Test
-    public void constructor_nullItem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
 
     @Test
     public void execute_modelHasNoUnclosedOrder_modelSetsOrder() throws CommandException {
@@ -52,7 +46,8 @@ public class StartOrderCommandTest {
         @Override
         public void addToOrder(Item item) {
             assert hasUnclosedOrder();
-            optionalOrder.get().addItem(item);;
+            optionalOrder.get().addItem(item);
+            ;
         }
     }
 }

@@ -3,16 +3,19 @@ package seedu.address.testutil;
 import seedu.address.model.BookKeeping;
 
 /**
- * A utility class containing the revenue,cost and profits {@code Bookkeeping} objects to be used in tests.
+ * A utility class containing a list of {@code Item} objects to be used in tests.
  */
 public class TypicalBookkeeping {
-    public static final Double REVENUE = 966.0;
-    public static final Double COST = 105.0;
-    public static final Double PROFIT = 219.8;
 
+    private TypicalBookkeeping() {} // prevents instantiation
+
+    /**
+     * Returns a {@code Bookkeeping} with initialised values.
+     */
     public static BookKeeping getTypicalBookkeeping() {
-        return new BookKeeping(TypicalBookkeeping.REVENUE, TypicalBookkeeping.COST,
-                TypicalBookkeeping.PROFIT);
+        BookKeeping bookKeeping = new BookKeeping();
+        bookKeeping.addRevenue(100.0);
+        bookKeeping.addCost(50.0);
+        return bookKeeping;
     }
-
 }

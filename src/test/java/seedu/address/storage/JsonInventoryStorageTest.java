@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PathUtil.addToPath;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.HONEY_CAKE;
 import static seedu.address.testutil.TypicalItems.ICE_CREAM;
@@ -31,13 +32,8 @@ public class JsonInventoryStorageTest {
     }
 
     private java.util.Optional<ReadOnlyInventory> readInventory(String filePath) throws Exception {
-        return new JsonInventoryStorage(Paths.get(filePath)).readInventory(addToTestDataPathIfNotNull(filePath));
-    }
-
-    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-                : null;
+        return new JsonInventoryStorage(Paths.get(filePath))
+                .readInventory(addToPath(TEST_DATA_FOLDER, filePath));
     }
 
     @Test
@@ -97,7 +93,7 @@ public class JsonInventoryStorageTest {
     private void saveInventory(ReadOnlyInventory inventory, String filePath) {
         try {
             new JsonInventoryStorage(Paths.get(filePath))
-                    .saveInventory(inventory, addToTestDataPathIfNotNull(filePath));
+                    .saveInventory(inventory, addToPath(TEST_DATA_FOLDER, filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
