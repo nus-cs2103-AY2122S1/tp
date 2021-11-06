@@ -1294,7 +1294,7 @@ testers are expected to do more *exploratory* testing.
 
     * Download the jar file and copy into an empty folder
 
-    * Double-click the jar file <br>
+    * Double-click the jar file<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -1310,10 +1310,10 @@ testers are expected to do more *exploratory* testing.
 
     * Prerequisites: There is no student with the name "John Doe" in the TuitiONE application.
 
-    * Test case: `add n/John Doe p/91234567 e/jd@gmail.com a/John street, block 123, #01-01 g/P2` <br>
+    * Test case: `add n/John Doe p/91234567 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`<br>
       Expected: New student with specified details is added to the student list. Details of the added student are shown in the status message.
 
-    * Test case: `add n/Peter Parker p/92345678 e/pp@gmail.com a/Peter street, block 123, #01-01` <br>
+    * Test case: `add n/Peter Parker p/92345678 e/pp@gmail.com a/Peter street, block 123, #01-01`<br>
       Expected: No student is added. Proper command format is shown in the status message.
 
     * Other incorrect add commands to try: use the `add` command while missing out one of the following required fields (`n/`, `p/`, `e/`, `a/` and `g/`). <br>
@@ -1323,10 +1323,10 @@ testers are expected to do more *exploratory* testing.
 
     * Prerequisite: There is a student with the name "John Doe" in the TuitiONE application. Otherwise, replace the name "John Doe" in the test case with a name of a student that is already added to the TuitiONE application.
 
-    * Test case: `add n/John Doe p/93456789 e/jd@gmail.com a/John street, block 123, #01-01 g/P2` <br>
+    * Test case: `add n/John Doe p/93456789 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`<br>
       Expected: No student is added. Error message stating the student already exists is displayed in the status message.
 
-    * Test case: `add n/John Doe p/99999999 e/jd3000@gmail.com a/John street, block 500, #02-02 g/S5` <br>
+    * Test case: `add n/John Doe p/99999999 e/jd3000@gmail.com a/John street, block 500, #02-02 g/S5`<br>
       Expected: No student is added. Error message stating the student already exists is displayed in the status message.
 
 3. Adding a new student with any incorrect input
@@ -1351,6 +1351,19 @@ testers are expected to do more *exploratory* testing.
     * Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
       Expected: Similar to previous.
 
+#### Listing all students and lessons
+
+1. Listing all students and lessons when a filtered list of students is shown
+
+    * Prerequisites: A filtered list of students is shown
+
+    * Test case: `list`<br>
+      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
+
+2. Listing all students and lessons when all students and lessons are shown 
+
+   * Test case: `list`<br>
+      Exptected: Status message will state that all students and lessons are listed. The student and lesson list will refresh and show all students and lessons.
 
 #### Editing a student
 
