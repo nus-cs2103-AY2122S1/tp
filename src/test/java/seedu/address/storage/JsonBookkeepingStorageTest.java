@@ -78,14 +78,14 @@ public class JsonBookkeepingStorageTest {
         assertEquals(original, new BookKeeping(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addCost(5.0);
-        original.addRevenue(10.0);
+        original.addCost(5.0, 1);
+        original.addRevenue(10.0, 1);
         jsonBookKeepingStorage.saveBookKeeping(original, filePath);
         readBack = jsonBookKeepingStorage.readBookKeeping(filePath).get();
         assertEquals(original, new BookKeeping(readBack));
 
         // Save and read without specifying file path
-        original.addCost(5.0);
+        original.addCost(5.0, 1);
         jsonBookKeepingStorage.saveBookKeeping(original); // file path not specified
         readBack = jsonBookKeepingStorage.readBookKeeping().get(); // file path not specified
         assertEquals(original, new BookKeeping(readBack));

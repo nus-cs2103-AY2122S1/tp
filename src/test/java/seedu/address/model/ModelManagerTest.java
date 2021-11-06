@@ -202,7 +202,7 @@ public class ModelManagerTest {
         ModelManager model = new ModelManager();
         model.setInventory(TypicalItems.getTypicalInventory());
         model.setOrder(TypicalOrders.getTypicalOrder());
-        model.transactAndClearOrder(temporaryFolder.resolve("transaction.json"));
+        model.transactAndClearOrder();
 
         assertFalse(model.hasUnclosedOrder());
         assertEquals(model.getInventory(), new Inventory());

@@ -174,7 +174,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addCostBookKeeping(Double cost) {
+    public void addCostBookKeeping(Double cost, int amount) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -189,7 +189,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addRevenueBookKeeping(Double revenue) {
+    public void addRevenueBookKeeping(Double revenue, int amount) {
         throw new AssertionError("This method should not be called.");
     }
 

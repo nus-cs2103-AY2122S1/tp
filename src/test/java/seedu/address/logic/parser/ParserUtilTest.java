@@ -167,7 +167,7 @@ public class ParserUtilTest {
     /* Tests for parsing count:
        Equivalence Partitions:
             - null
-            - Integers within range [1, INT_MAX]
+            - Integers within range [1, 999999]
             - 0
             - Negative integers
             - Large integers (> INT_MAX)
@@ -186,7 +186,7 @@ public class ParserUtilTest {
         // Negative integer
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT_NEGATIVE));
         // Large integer
-        String largeString = String.format("%d", (long) Integer.MAX_VALUE + 1);
+        String largeString = String.format("%d", 1000000);
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(largeString));
         // Not an integer
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT_FLOAT));
@@ -201,9 +201,9 @@ public class ParserUtilTest {
         assertEquals(expectedCount, 1);
 
         // Tests the upper boundary of the valid range
-        String maxString = String.format("%d", Integer.MAX_VALUE);
+        String maxString = String.format("%d", 999999);
         expectedCount = ParserUtil.parseCount(maxString);
-        assertEquals(expectedCount, Integer.MAX_VALUE);
+        assertEquals(expectedCount, 999999);
     }
 
     /* Tests for parsing id:

@@ -99,7 +99,7 @@ public class LogicManagerTest {
                 + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL;
         Item expectedItem = new ItemBuilder(BAGEL).withTags().build();
         BookKeeping bookKeeping = new BookKeeping();
-        bookKeeping.addCost(BAGEL.getCostPrice() * 5);
+        bookKeeping.addCost(BAGEL.getCostPrice(), 5);
         ModelManager expectedModel = new ModelManager(new Inventory(), new UserPrefs(),
                 new TransactionList(), bookKeeping);
         expectedModel.addItem(expectedItem);
