@@ -47,7 +47,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets `[]` are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -79,7 +79,7 @@ Format: `student -a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * Adds a student with the specified `NAME`
 * `-a` refers to the add command
-* Commands in `[ ]` are optional
+* Two students are considered the same if all their names, phone numbers and emails are the same. It is a requirement that **same students can not be added to the app simultaneously**.
 
 Examples:
 * `student -a n/John p/12345678 e/john@mail.com a/42 Wallaby Way, Sydney`<br>
