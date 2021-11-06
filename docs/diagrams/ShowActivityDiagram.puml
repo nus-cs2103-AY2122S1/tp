@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+
+start
+if () then ([student analysis\n    is requested])
+	:Show performance analysis
+	of a student <$rake>;
+else ([group / assessment\nanalysis is requested])
+  :Show performance analysis
+  of a group / an assessment <$rake>;
+endif
+
+stop
+
+@enduml
