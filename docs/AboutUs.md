@@ -22,7 +22,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/chetwinlow.png" width="200px">
 
 [[github](http://github.com/chetwinlow)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chetwinlow.md)]
 
 * Role: Documentation
 * Responsibilities: In charge of quality of user guide and developer guide
@@ -42,7 +42,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/hernpiblo.png" width="200px">
 
 [[github](http://github.com/hernpiblo)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/hernpiblo.md)]
 
 * Role: Code quality checker
 * Responsibilities: Checks code quality and ensures all team members adhere to coding standards
@@ -52,7 +52,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/pbthang.png" width="200px">
 
 [[github](http://github.com/pbthang)]
-[[portfolio](team/pbthang)]
+[[portfolio](team/pbthang.md)]
 
 * Role: Testing and Debug
 * Responsibilities: Ensures testing of code is done properly and on time
