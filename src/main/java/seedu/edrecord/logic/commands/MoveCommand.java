@@ -13,7 +13,6 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.person.Person;
 
 /**
@@ -32,6 +31,7 @@ public class MoveCommand extends Command {
             + PREFIX_MODULE + "CS2103 "
             + PREFIX_GROUP + "T01";
 
+    public static final String MESSAGE_SAME_MOD_GROUP = "%1$s already in %2$s/%3$s";
     public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Successfully moved student(s) to %1$s, %2$s";
 
     private final List<Index> indexes;
@@ -74,7 +74,7 @@ public class MoveCommand extends Command {
             Person personToMove = lastShownList.get(index.getZeroBased());
             if (personToMove.getModules().containsGroupInModule(savedMod, group)) {
                 throw new CommandException(
-                        String.format(ModuleSet.MESSAGE_DUPLICATE_GROUP, personToMove.getName(), savedMod, group));
+                        String.format(MESSAGE_SAME_MOD_GROUP, personToMove.getName(), savedMod, group));
             }
 
             Module newModule = new Module(savedMod.getCode());
