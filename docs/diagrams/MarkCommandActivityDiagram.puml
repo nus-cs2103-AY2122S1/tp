@@ -7,21 +7,28 @@ start
 'diamond we place it as the true branch instead.
 
 if () then ([command is valid with valid and
- non-duplicated index/indices])
+ non-duplicated index/indexes])
 
-    if () then ([applicant(s) at all indices
+    if () then ([applicant(s) at all indexes
   have not been marked])
 
-    :Update specified applicant(s) to be marked;
+    :Update specified applicant(s)
+                 to be marked;
 
-    :GUI Result Display updated with specified
-    applicant(s) being marked with Done;
+    :GUI updated with specified applicant(s)
+               being marked with Done;
 
     else ([else])
+    :GUI display shows
+       error message
+         for marking a
+      marked applicant;
 
     endif
 
 else([else])
+: GUI display shows error
+message for invalid format;
 
 
 endif
