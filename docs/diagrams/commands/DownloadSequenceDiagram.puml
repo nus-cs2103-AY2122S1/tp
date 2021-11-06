@@ -1,29 +1,33 @@
 @startuml
 !include ../style.puml
 
-Participant ":JsonUtil" as ju STORAGE_COLOR
+
+box UI UI_COLOR_T1
 Participant ":MainWindow" as mw UI_COLOR
-Participant ":LogicManager" as lm LOGIC_COLOR
+end box
 
-activate lm
-activate ju
+box Util STORAGE_COLOR
+Participant "<<class>>\nJsonUtil" as ju STORAGE_COLOR
+end box
+
+--> mw : DownloadCommandResult
+
 activate mw
-lm --> mw : DownloadCommandResult
 
-ju <- mw
-ju -> ju : Get JSON data
-activate ju
-ju --> mw : jsonData
-deactivate ju
-
-mw -> mw : prompt for destination
+mw -> mw : handleDownload()
 activate mw
-mw -> ju :file
+    mw -> ju : getJsonData(filePath)
+    activate ju
+    mw <-- ju : jsonData
+    deactivate ju
+
+    mw -> mw : promptUserForFileDestination()
+    mw -> ju :writeJsonToCsv(jsonData, file)
+
+    activate ju
+    mw <-- ju
+    deactivate mw
+    <-- mw
 deactivate mw
-
-ju -> ju : Write to Csv
-activate ju
-<-- ju
-deactivate ju
 
 @enduml

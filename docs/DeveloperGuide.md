@@ -456,11 +456,10 @@ related to the UI. In addition, the following classes are utilised:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-The following sequence diagrams shows how the `download` command works:
+In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does not require its own parser. 
 
-1. Similarly to the Show command, when the CS2100 TA executes the `download` command, the `Logic Manager` and `ProgrammerErrorParser`are used. 
 
-![DownloadSequenceDiagram1](images/commands/DownloadCommand/DownloadSequenceDiagram1.png)
+This sequence diagram shows how the `download` command works at a lever lower:
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
 
