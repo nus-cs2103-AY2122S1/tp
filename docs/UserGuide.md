@@ -66,7 +66,6 @@ Dangerous or potentially negative actions are displayed here
     - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
-
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
 ### Command syntax
@@ -207,7 +206,7 @@ Action | Format, Examples
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+>Shows a message explaining how to access the help page.
 
 ![helpMessage](images/help_message.png)
 
@@ -216,7 +215,7 @@ Format: `help`
 
 ### Adding a customer: `addC`
 
-Adds a customer to RHRH.
+>Adds a customer to RHRH.
 
 Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTY POINTS [alg/ALLERGIES] [sr/SPECIAL REQUESTS] [t/TAG]`
 
@@ -231,7 +230,7 @@ Examples:
 
 ### Adding an employee: `addE`
 
-Adds an employee to RHRH.
+>Adds an employee to RHRH.
 
 Format: `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOB_TITLE [t/TAG] [sh/SHIFT]`
 
@@ -254,7 +253,7 @@ Refer [here](#date-time-formatting) for a list of acceptable formats when enteri
 
 ### Adding a supplier: `addS`
 
-Adds a supplier to RHRH.
+>Adds a supplier to RHRH.
 
 Format: `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLY_TYPE dd/DELIVERY_DETAILS [t/TAG]`
 
@@ -278,7 +277,7 @@ Refer [here](#date-time-formatting) for a list of acceptable formats when enteri
 
 ### Adding a reservation: `addR`
 
-Adds a new reservation to RHRH
+>Adds a new reservation to RHRH
 
 Format: `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
 
@@ -306,7 +305,7 @@ Examples:
 
 ### Editing a customer : `editC`
 
-Edits an existing customer in RHRH.
+>Edits an existing customer in RHRH.
 
 Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIAL_REQUESTS] [t/TAG]…​`
 
@@ -331,7 +330,7 @@ Examples:
 
 ### Editing an employee : `editE`
 
-Edits an existing employee in RHRH.
+>Edits an existing employee in RHRH.
 
 Format: `editE INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOB_TITLE] [t/TAG]…​ 
 [sh/SHIFT]…​`
@@ -358,7 +357,7 @@ Examples:
 
 ### Editing a supplier : `editS`
 
-Edits an existing supplier in RHRH.
+>Edits an existing supplier in RHRH.
 
 Format: `editS INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLY_TYPE] [dd/DELIVERY_DETAILS] [t/TAG]…​`
 
@@ -383,7 +382,7 @@ Examples:
 
 ### Editing a reservation : `editR`
 
-Edits an existing reservation in RHRH
+>Edits an existing reservation in RHRH
 
 Format: `editR INDEX [r/REMARK] [t/TAG]…`
 * Edits the reservation at the specified `INDEX`. 
@@ -409,7 +408,7 @@ Examples:
 
 ### Deleting a customer : `deleteC`
 
-Deletes the specified customer from RHRH.
+>Deletes the specified customer from RHRH.
 
 Format: `deleteC INDEX`
 
@@ -429,7 +428,7 @@ Example:
 
 ### Deleting an employee : `deleteE`
 
-Deletes the specified employee from RHRH.
+>Deletes the specified employee from RHRH.
 
 Format: `deleteE INDEX`
 
@@ -449,7 +448,7 @@ Example:
 
 ### Deleting a supplier : `deleteS`
 
-Deletes the specified supplier from RHRH.
+>Deletes the specified supplier from RHRH.
 
 Format: `deleteS INDEX`
 
@@ -469,7 +468,7 @@ Example:
 
 ### Deleting a reservation : `deleteR`
 
-Deletes the specified reservation from RHRH
+>Deletes the specified reservation from RHRH
 
 Format: `deleteR INDEX`
 
@@ -489,7 +488,7 @@ Example:
 
 ### Finding customers based on keywords: `findC`
 
-Find customers that have fields that contain all specified keywords cumulatively
+>Find customers that have fields that contain all specified keywords cumulatively
 
 Format: `findC KEYWORD [MORE_KEYWORD...]`
 
@@ -511,7 +510,7 @@ Example:
 
 ### Finding Employees based on keywords: `findE`
 
-Find employees that have a field that contains the whole phrase of keywords consecutively.
+>Find employees that have a field that contains the whole phrase of keywords consecutively.
 
 Format: `findE KEYWORDS`
 
@@ -538,7 +537,7 @@ Examples:
 
 ### Finding Suppliers based on keywords: `findS`
 
-Find suppliers that have fields that contain all specified keywords cumulatively.
+>Find suppliers that have fields that contain all specified keywords cumulatively.
 
 Format: `findS KEYWORD [MORE_KEYWORDS...]`
 
@@ -561,7 +560,7 @@ Example:
 
 ### Searching for reservation's made : `check`
 
-Displays the reservations made at the specified date and/or time
+>Displays the reservations made at the specified date and/or time
 
 Format:
 * `check DATE TIME`: Returns all reservations on `DATE TIME`
@@ -585,7 +584,7 @@ Examples:
 
 ### Get customer who made the reservation: `getC`
 
-Gets the customer who made a specified reservation
+>Gets the customer who made a specified reservation
 
 Format: `getC INDEX`
 * Gets the customer who made the reservation at the specified `INDEX`
@@ -604,7 +603,7 @@ Example:
 
 ### Displaying a sorted list of customers: `sortC`
 
-Sorts and displays the active list of customers based on a given field in either ascending or descending order.
+>Sorts and displays the active list of customers based on a given field in either ascending or descending order.
 
 Format: `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`
 
@@ -630,7 +629,8 @@ Examples:
 </div>
 
 ### Displaying a sorted list of employees: `sortE`
-Sorts and displays the active list of employees based on a given field in either ascending or descending order.
+
+>Sorts and displays the active list of employees based on a given field in either ascending or descending order.
 
 Format: `sortE by/PREFIX_OF_EMMPLOYEE_FIELD o/ORDER_OF_SORT`
 * Sorts and displays the list of employees based on the sort type
@@ -656,7 +656,7 @@ Examples:
 </div>
 
 ### Displaying a sorted list of suppliers: `sortS`
-Sorts and displays the active list of suppliers based on a given field in either ascending or descending order.
+>Sorts and displays the active list of suppliers based on a given field in either ascending or descending order.
 
 Format: `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`
 
@@ -685,14 +685,14 @@ Examples:
 
 ### Resetting a sorted customer list: `resetC`
 
-Resets the sorting of the customer list to its default state (sorted by name)
+>Resets the sorting of the customer list to its default state (sorted by name)
 
 Format:
 * `resetC`
 
 ### Resetting a sorted employee list: `resetE`
 
-Resets the sorting of the employee list to its default state (sorted by name)
+>Resets the sorting of the employee list to its default state (sorted by name)
 
 Format:
 * `resetE`
@@ -700,14 +700,14 @@ Format:
 
 ### Resetting a sorted supplier list: `resetS`
 
-Resets the sorting of the supplier list to its default state (sorted by name)
+>Resets the sorting of the supplier list to its default state (sorted by name)
 
 Format:
 * `resetS`
 
 ### Listing all customers: `listC`
 
-Shows a list of all customers in RHRH.
+>Shows a list of all customers in RHRH.
 
 Format: `listC`
 
@@ -726,7 +726,7 @@ Format: `listC`
 
 ### Listing all employees: `listE`
 
-Shows a list of all employees in RHRH.
+>Shows a list of all employees in RHRH.
 
 Format: `listE`
 
@@ -744,7 +744,7 @@ Format: `listE`
 
 ### Listing all suppliers: `listS`
 
-Shows a list of all suppliers in RHRH.
+>Shows a list of all suppliers in RHRH.
 
 Format: `listS`
 
@@ -761,7 +761,7 @@ Format: `listS`
 
 ### Listing all reservations: `listR`
 
-Show a list of all reservations in RHRH
+>Show a list of all reservations in RHRH
 
 Format: `listR`
 
@@ -786,7 +786,7 @@ This command will remove **ALL** reservations and overwrite **ALL** previously s
 
 </div>
 
-Sets the number of tables and size of each table in the restaurant.
+>Sets the number of tables and size of each table in the restaurant.
 
 Format: `settables LIST_OF_TABLE_SIZES`
   * `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
@@ -812,13 +812,13 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from RHRH.
+>Clears all entries from RHRH.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+>Exits the program.
 
 Format: `exit`
 

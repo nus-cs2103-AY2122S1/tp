@@ -8,7 +8,7 @@ import java.util.Comparator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Represents the types of sorting methods we can apply to employees in the address book.
+ * Represents the types of sorting methods we can apply to employees in RHRH.
  */
 public class SortByEmployee {
 

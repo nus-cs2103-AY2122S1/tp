@@ -2,6 +2,9 @@ package seedu.address.model.person.employee;
 
 import java.util.Comparator;
 
+/**
+ * Represents a class that generates employee comparators
+ */
 public class EmployeeComparator {
 
     /**

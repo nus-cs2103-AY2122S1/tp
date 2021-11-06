@@ -1,5 +1,7 @@
 @startuml
 !include style.puml
+skinparam NoteFontSize 20
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as logicManager LOGIC_COLOR
 participant ":RhrhParser" as rhrhParser LOGIC_COLOR
@@ -26,7 +28,7 @@ activate addEmployeeCommandParser
 addEmployeeCommandParser --[LOGIC_COLOR]> rhrhParser
 deactivate addEmployeeCommandParser
 
-rhrhParser -[LOGIC_COLOR]> addEmployeeCommandParser :"parse(n/John Doe...)"
+rhrhParser -[LOGIC_COLOR]> addEmployeeCommandParser :parse(n/John Doe...)
 activate addEmployeeCommandParser
 
 create command

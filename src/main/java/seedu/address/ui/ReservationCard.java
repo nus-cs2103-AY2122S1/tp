@@ -10,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.reservation.Reservation;
 
+/**
+ * An UI component that displays information of a {@code Reservation}.
+ */
 public class ReservationCard extends UiPart<Region> {
     public static final String FXML = "ReservationListCard.fxml";
     private static final DateTimeFormatter DATE_TIME_PRINTING_FORMAT =

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an Employee's shift in the address book.
+ * Represents an Employee's shift in RHRH.
  */
 public class Shift {
     public static final String MESSAGE_CONSTRAINTS =

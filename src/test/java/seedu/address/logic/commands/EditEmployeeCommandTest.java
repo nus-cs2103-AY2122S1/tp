@@ -112,7 +112,7 @@ public class EditEmployeeCommandTest {
     public void execute_duplicateEmployeeFilteredList_failure() {
         showEmployeeAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit person in filtered list into a duplicate in RHRH
         Employee employeeInList = model.getRhrh().getEmployeeList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST_PERSON,
                 new EditEmployeeDescriptorBuilder(employeeInList).build());
@@ -131,13 +131,13 @@ public class EditEmployeeCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of RHRH
      */
     @Test
     public void execute_invalidEmployeeIndexFilteredList_failure() {
         showEmployeeAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of RHRH list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRhrh().getEmployeeList().size());
 
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(outOfBoundIndex,

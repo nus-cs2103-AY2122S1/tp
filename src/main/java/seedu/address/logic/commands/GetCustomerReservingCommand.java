@@ -12,6 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.customer.CustomerContainsPhonePredicate;
 import seedu.address.model.reservation.Reservation;
 
+/**
+ * Gets the corresponding customer who made the reservation
+ */
 public class GetCustomerReservingCommand extends Command {
     public static final String COMMAND_WORD = "getc";
 

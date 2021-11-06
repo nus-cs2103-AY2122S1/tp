@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Represents a Supplier in the address book.
+ * Represents a Supplier in RHRH.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Supplier extends Person {

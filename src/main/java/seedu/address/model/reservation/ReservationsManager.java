@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.reservation.exception.ReservationException;
 import seedu.address.model.table.Table;
 
+/**
+ * Represents the manager class for all reservations related data
+ */
 public class ReservationsManager {
     private final ReservationList reservations;
 

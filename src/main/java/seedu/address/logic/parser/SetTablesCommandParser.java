@@ -10,6 +10,9 @@ import seedu.address.logic.commands.SetTablesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.table.Table;
 
+/**
+ * Parses input arguments and creates a new SetTablesCommand object
+ */
 public class SetTablesCommandParser implements Parser<SetTablesCommand> {
 
     public static final String MESSAGE_INVALID_SIZE_OR_COUNT =

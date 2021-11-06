@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
 /**
- * Sorts the supplier list to the address book according to a comparator.
+ * Sorts the supplier list to RHRH according to a comparator.
  */
 public class SortSupplierCommand extends Command {
 
