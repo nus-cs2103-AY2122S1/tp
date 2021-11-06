@@ -260,6 +260,8 @@ These commands are for helping you to manage your incoming orders and manage acc
 with a label describing them, a client, an amount, and a date. The following are a few points to take note of:
 
 <div markdown="block" class="alert alert-info">
+**:information_source: Notes about the order commands:**<br>
+
 * The amount field is any number from 0 to 1 billion.
 * The client for the order **must exist in SalesNote** to create the order. For instance <br>
 `addorder l/blue blouse c/Jane a/22.50 d/20 August 2021` will fail if the client with name `Jane` is not in SalesNote. Note that the name is matched
