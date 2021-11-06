@@ -60,7 +60,7 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete 1`.
+the command `delete -i 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -494,7 +494,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -582,7 +581,6 @@ Project scope:
 1. Does not send out emails.
 1. Does not provide graphical representation of statistics.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -662,7 +660,6 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. 
 
 ### Saving data
 
