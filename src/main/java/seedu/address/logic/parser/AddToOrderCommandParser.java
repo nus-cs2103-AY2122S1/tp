@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_NAME_SPECIFIED_TWICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -24,7 +22,7 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
     @Override
     public AddToOrderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG,
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG,
                         PREFIX_COSTPRICE, PREFIX_SALESPRICE);
 
         if (argMultimap.getValue(PREFIX_ID).isEmpty() && argMultimap.getPreamble().isEmpty()) {
@@ -32,10 +30,6 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
         }
 
         ItemDescriptor toAddDescriptor = new ItemDescriptor();
-        // if both name flag and prefix are present
-        if (!argMultimap.getPreamble().isEmpty() && argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(MESSAGE_NAME_SPECIFIED_TWICE + "\n" + AddToOrderCommand.MESSAGE_USAGE);
-        }
 
         // Parse preamble
         if (!argMultimap.getPreamble().isEmpty()) {

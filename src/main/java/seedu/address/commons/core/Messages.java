@@ -10,7 +10,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_ITEM_DISPLAYED_INDEX = "The item index provided is invalid";
     public static final String MESSAGE_ITEMS_LISTED_OVERVIEW = "%1$d items listed!";
     public static final String MESSAGE_INVALID_COUNT_INTEGER = "The count provided must be positive!";
-    public static final String MESSAGE_INVALID_COUNT_FORMAT = "The count provided must be integer!";
+    public static final String MESSAGE_INVALID_COUNT_FORMAT = "The count provided must be an integer!\n"
+            + "Minimum: 1\n" + "Maximum: 2,147,483,647";
     public static final String MESSAGE_INVALID_COUNT_INDEX = "The index provided must be a number (can't be >1 number)"
             + " and cannot be 0 or negative!";
     public static final String MESSAGE_INVALID_PRICE_FORMAT = "Prices provided must be numerical values!";
@@ -19,5 +20,4 @@ public class Messages {
     public static final String MESSAGE_INVALID_ID_FORMAT = "The id provided must be integer!";
     public static final String MESSAGE_INVALID_ID_LENGTH_AND_SIGN = "The id provided must be positive"
             + " and at most 6 digits!";
-    public static final String MESSAGE_NAME_SPECIFIED_TWICE = "Name field is specified twice!";
 }
