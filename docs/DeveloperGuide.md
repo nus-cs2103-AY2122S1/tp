@@ -293,7 +293,7 @@ The `Github` class is first integrated into the `Person` class and added as a ne
 
 #### Implementation
 
-The Export command exports the current list of contacts to the specified JSON or CSV file, with help from [Jackson](https://github.com/FasterXML/jackson), an external library. It does not overwrite existing files. From a high level perspective, the execution of a user entering an export command is done in 2 steps.
+The Export command exports the current list of contacts to the specified JSON or CSV file, with help from [Jackson](https://github.com/FasterXML/jackson), an external library. It does not overwrite existing files.
 
 Executing an Export Command can be summarized with the following steps:
 1. User command is handed over to `ExportCommandParser`. After verification of arguments, an ExportCommand is generated.
@@ -356,8 +356,6 @@ Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand
 The Sequence Diagram below illustrates the interactions during the second step of executing `execute("export newfriends.json")`.
 
 ![ExportSequenceDiagram](images/ExportSequenceDiagramStep2.png)
-
-
 
 ### Import command
 
