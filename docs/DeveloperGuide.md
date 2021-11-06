@@ -435,25 +435,25 @@ ClassMATE allows the user to manage information relevant to the TutorialGroup. A
 #### Current Implementation (Adding/removing tutorial group to tutorial class)
 
 The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
-`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial classes. 
+`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial groups. 
 Tutorial groups are identical only if all its attributes, `GroupName`, `ClassCode` and `GroupType` are the same.
-The `Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class
-adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`, and adding students to tutorial groups.
+`Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class such as
+adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`.
 
 The following operations are implemented:
 * `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
 * `Classmate#addTutorialGroup(TutorialGroup tutorialGroup)` - Adds tutorial group to ClassMATE
 * `Classmate#removeTutorialGroup(TutorialGroup tutorialGroup)` - Deletes existing tutorial group from ClassMATE
-*  `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
-*  `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
-*  `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
-*  `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
+* `UniqueTutorialClassList#contains(TutorialGroup toCheck)`  - Checks if tutorial group is in any of the tutorial classes
+* `UniqueTutorialClassList#add(TutorialGroup toAdd)`  - Adds tutorial group to its respective class
+* `TutorialClass#getTutorialGroups()`  - Retrieves the list of tutorial groups within the TutorialClass
+* `TutorialClass#createTestTutorialClass(ClassCode classCode)`  - Creates a dummy tutorial class from the class code of the tutorial group for checking
 
 Given below is an example of how the tutorial group features can be used:
 
 Step 1. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
-and the model component checks if the TutorialClass specified by the class code exists, then checks whether the tutorial group already exists
-using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
+and the model component checks if the TutorialClass specified by the class code exists and throws an exception if it does not.
+It then checks whether the tutorial group already exists using `Model#hasTutorialGroup()`and calls `Model#addTutorialGroup()` if it does not.
 
 The checking of whether the tutorial class and tutorial group already exists is done as such:
 `Classmate` calls the `contains` method of its `UniqueTutorialClassList`. This method is overloaded to accept
@@ -463,8 +463,8 @@ to retrieve the tutorial class of the tutorial group it is being added to, so th
 within the `UniqueTutorialClassList` and get its `UniqueTutorialGroupList` using the method `TutorialClass#getTutorialGroups()`
 and from there check whether the tutorial group already exists or not.
 
-Adding of tutorial groups is similar to the checking part in that a tutorial class is created for checking and
-retrieve that tutorial class from the `UniqueTutorialClassList` to add that tutorial group into its `UniqueTutorialGroupList`.
+Adding of tutorial groups is similar; It again finds the tutorial class in the `UniqueTutorialClassList` using its class code
+After retrieving the respective tutorial class, it can then add the tutorial group using `UniqueTutorialClassList#add(TutorialGroup toAdd)`.
 
 This modifies and saves the state of ClassMATE.
 
@@ -483,7 +483,7 @@ The *Sequence Diagram* below summarizes the aforementioned steps.
 
 #### Aspect: Storing Tutorial Groups as lists
 * Alternative 1 (current choice): Storing tutorial groups in their respective tutorial classes
-    * Pros: Faster when performing find functions and groups are better organised.
+    * Pros: Faster when performing find functions such as finding tutorial groups in a particular class. Tutorials groups are also better organised.
     * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented.
 
 * Alternative 2: Use a single list to store all tutorial groups.
