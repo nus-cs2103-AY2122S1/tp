@@ -1316,10 +1316,10 @@ and the lesson to be added does not exist in TuitiONE yet.
 
     * Test case: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
         Expected: A new lesson `Science-P2-Wed-1200` will be added into the lesson list. Lesson list will be updated
-while there is no change ot the student list. An update message will also be shown in the message box to inform the user
+while there is no change to the student list. An update message will also be shown in the message box to inform the user
 that a new lesson is successfully added.
 
-    * Incorrect addition of a lesson due to duplication: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
+    * Incorrect addition of a lesson due to duplication:<br>`add-l s/Science g/P2 d/Wed t/1200 c/10.50`<br>
         Expected: Addition of the particular lesson will not be applied to TuitiONE. An alert message will be shown in 
 the message box to inform the user that the lesson already exists in TuitiONE.
 
@@ -1367,9 +1367,9 @@ expected to correct the input parameters one by one._
       Expected: No student will be found since name should only contain alphanumeric characters and spaces. An update
 message showing that `No students found.` will also be displayed in the message box. 
 
-#### Rostering
+#### View lesson rostering
 
-1. Rostering a lesson by `LESSON_INDEX` while all students and lessons are being shown
+1. View a lesson's roster using `LESSON_INDEX` while all students and lessons are being shown
 
     * Prerequisites: List all students and lessons using the `list` command. Multiple `Students` and `Lessons` in the 
 list with some `Students` already enrolled in some of the `Lessons`. For `LESSON_INDEX` used, it is within the number
