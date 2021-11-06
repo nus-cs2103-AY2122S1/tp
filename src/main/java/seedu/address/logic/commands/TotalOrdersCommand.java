@@ -13,7 +13,8 @@ public class TotalOrdersCommand extends Command {
     public static final String MESSAGE_SUCCESS = COMMAND_WORD + ": Shows total orders for each client.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_TOTAL_ORDERS_MESSAGE = "Opened total orders window.";
+    public static final String SHOWING_TOTAL_ORDERS_MESSAGE = "Opened/Refreshed total orders window.\n"
+            + "You might need to click the icon on taskbar if you have minimized it.";
 
     @Override
     public CommandResult execute(Model model) {
