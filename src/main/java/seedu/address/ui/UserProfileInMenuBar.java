@@ -69,6 +69,7 @@ public class UserProfileInMenuBar extends UiPart<Region> implements UserProfileW
     public void setUserProfileOnMenuBar() {
         Image userGitHubProfilePicture = logic.getUserProfile().getProfilePicture();
         userProfile.setImage(userGitHubProfilePicture);
+
         if (userGitHubProfilePicture == GitHubUtil.DEFAULT_USER_PROFILE_PICTURE) {
             Thread temp = new Thread(() -> {
                 while (logic.getUserProfile().getProfilePicture() == GitHubUtil.DEFAULT_USER_PROFILE_PICTURE
@@ -76,7 +77,7 @@ public class UserProfileInMenuBar extends UiPart<Region> implements UserProfileW
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
-                        //e.printStackTrace();
+                        logger.severe("Could Not Obtain User GitHub Profile Picture.");
                     }
                 }
                 userProfile.setImage(logic.getUserProfile().getProfilePicture());
