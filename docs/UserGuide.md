@@ -141,17 +141,17 @@ Adds a tutorial class to ClassMATE.
 
 Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary"> :bulb: **Note:**
+<div markdown="span" class="alert alert-primary"> :bulb: ** Note: ** <br>
+    Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').<br>
+    Schedule consists of 2 weekly timeslots
+</div>
 
-
-* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from 'G01' to 'G99').
-* Schedule consists of 2 weekly timeslots
-  </div>
+* Schedule should strictly follow the format: [Day] (hh:mm)am/pm to (hh:mm)am/pm, [Day]...
 
 Examples:
 
-* `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
-* `addc c/G01 s/Monday 10am to 12pm, Thursday 10am to 12pm`
+* `addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
+* `addc c/G01 s/Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm`
 
 ### Viewing a class: `viewc`
 
@@ -193,12 +193,11 @@ Find classes by class codes.
 
 Entering format: `findc KEYWORD [MORE_KEYWORDS]`
 
-* The search is not absolute. e.g `G0` will match `G06`
+* The search is absolute. e.g `G0` will not match `G06`
 
 Examples:
 
-* `findc G02` returns `G02` if it exists
-* `findc G` returns `G01`, `G02`, `G03`<br>
+* `findc G02` returns `G02` if it exists<br>
 
 ### Deleting a class: `deletec`
 
@@ -236,14 +235,11 @@ Adds a student to ClassMATE.
 
 Entering format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:information_source: **Notes about addstu:** <br>
 
 * The Name of a student accommodates special characters such as hyphens, apostrophes and slashes.
 * The phone number should be at least 3 digits long.
 * The tutorial class with the given Class Code must already exist in classmate.
 * A student can have any number of tags (including 0)
-
-</div>
 
 Examples:
 * If class G06 has not been created, add the class first using `addc`.
@@ -427,7 +423,7 @@ Examples:
 
 ![viewing a class](images/viewc.png)
 
-Displayes a class and its students in ClassMATE, as shown above.
+Displays a class and its students in ClassMATE, as shown above.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
 `viewc` highlights the class chosen, and filters out only students in the class!
