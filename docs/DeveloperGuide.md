@@ -635,6 +635,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Viewing a resident
+
+1. View a list of all the residents in the app, or the information on a specific resident
+
+    1. Prerequisites: NIL
+
+    1. Test case: `view`<br>
+       Expected: A list of all the residents is displayed in the app's GUI
+
+    1. Test case: `view 3`<br>
+       Expected: The details of the resident at index 3 (meaning the 3rd resident in the list when `view` without the 
+       index parameter is called) of the address book are displayed in the GUI.
+
+    1. Other incorrect delete commands to try: `view 0`, `view x` (where x is larger than the list size)<br>
+       Expected: Error message shown
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -651,6 +667,45 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Finding an event
+
+1. Shows a list of events that match the provided keywords for different available parameters.
+
+    1. Prerequisites: NIL
+
+    1. Test case: `find c/5`<br>
+       Expected: A list of all the events with capacity 5 is displayed in the app's GUI
+
+    1. Test case: `find n/Football Training`<br>
+       Expected: A list of all the events which contain the words "Football" and "Training" is displayed in the app's GUI
+
+    1. Other incorrect delete commands to try: `find`, `find d/03-01` (invalid date input)<br>
+       Expected: Error message shown
+
+### Deleting an event
+
+1. Deleting an event while all persons are being shown
+
+    1. Prerequisites: List all events using the `view` command (without any parameters). Multiple events in the list.
+
+    1. Test case: `delete 3`<br>
+       Expected: The third event is deleted from the list. Details of the deleted event shown in the status message.
+
+    1. Test case: `delete 0`<br>
+       Expected: No event is deleted. Error details shown.
+
+    1. Other incorrect delete commands to try: `delete -1`, `delete x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Switch between tabs
+
+1. Switch between the event and resident tabs
+
+    1. Prerequisites: NIL
+
+    1. Test case: `switch`<br> when the user is at the Event tab
+       Expected: The GUI switches from displaying the Event tab to the Resident tab
 
 ### Saving data
 
