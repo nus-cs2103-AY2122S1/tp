@@ -83,6 +83,7 @@ public class EditGroupStatusCommandTest {
                 new EditPersonDescriptorBuilder().withTags("CS2103T").build();
         EditGroupStatusCommand editGroupStatusCommand = new EditGroupStatusCommand(descriptor);
         assertTrue(model.getProfile().getMods().contains(new Mod("CS2103T")));
+        assertEquals(editedPerson, model.getProfile());
         assertCommandFailure(editGroupStatusCommand, model, EditGroupStatusCommand.MESSAGE_NO_STATUS_CHANGED);
     }
 
