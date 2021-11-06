@@ -23,8 +23,7 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
 
     private final String name;
     private final String phone;
@@ -76,7 +75,8 @@ class JsonAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            Tag currentTag = tag.toModelType();
+            personTags.add(currentTag);
         }
 
         if (name == null) {
@@ -111,15 +111,15 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Pin modelPin;
+
         if (pin == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
-        }
-
-        if (!Pin.isValidPinStatus(pin)) {
+        } else if (!Pin.isValidPinStatus(pin)) {
             throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
+        } else {
+            modelPin = new Pin(pin);
         }
-
-        final Pin modelPin = new Pin(pin);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -127,14 +127,18 @@ class JsonAdaptedPerson {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null, modelPin);
         }
 
-        // Set birthday if non-null
+        final Birthday modelBirthday;
         if (!Birthday.isValidFormat(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        } else if (!Birthday.isValidDate(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        } else if (Birthday.isFutureDate(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        } else if (Birthday.isYear0000(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        } else {
+            modelBirthday = new Birthday(birthday);
         }
-        if (!Birthday.isValidDate(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
-        }
-        final Birthday modelBirthday = new Birthday(birthday);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelPin);
     }

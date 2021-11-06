@@ -2,8 +2,28 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Command classes](#common-classes)
+      
+* [Implementation](#implementation)
+    * [Tags](#tags)
+    * [Pin feature](#pin-feature) 
+    * [Find feature](#find-feature)
+    * [FindAny feature](#findany-feature)
+    * [Help feature](#help-feature)
+    * [Birthday Reminder feature](#birthday-reminder-feature)
+    * [Mailing List feature](#mailing-list-feature)
+    
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Requirements](#appendix-requirements)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -201,7 +221,7 @@ The operation are exposed in the `Command` interface as `Command#Execute`, speci
 Given below is an example usage scenario and how the pin mechanism behaves at each step.
 
 Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
-
+    
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
 Step 2. The user executes `add n/person3 …​` to add a new person. This person is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
@@ -352,6 +372,8 @@ Shows a list of people with upcoming birthdays. This list of birthday reminders 
 The list of birthdays is generated in the `ModelManager`, which implements the following functions:
 * `getBirthdayReminderList` which returns an `ObservableList<Person>` that is ordered according to upcoming birthdays.
 
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
 Step 1. On app startup sort people with birthday by birth month and day only into a list of people. Birthdays that are one day away are coloured green while birthdays that within one week are coloured blue.
 
 Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
@@ -385,8 +407,9 @@ Allows user to download a CSV file mailing list of the current view
 Users can use arguments to specify which fields to include in their download
 
 #### Implementation
+Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
-Step 1. The user filters the contacts using other commands, eg. `find`
+Step 1. The user filters the contacts using other commands, eg. `find`.
 
 Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 
@@ -395,6 +418,32 @@ Step 3. The user is prompted to pick the name and download location of their gen
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+
+### [Proposed] Partial data recovery feature
+Allows user to recover partial data in event of corruption in data file. 
+
+#### Proposed Implementation
+If data file is corrupt for fields other than `Birthday` and `Pin`, CONNECTIONS will use an empty data file upon the next start up. 
+The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonAddressBookStorage`. Upon getting an invalid data format for compulsory fields, `JsonAdaptedPerson` can return `null` and 
+not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
+Step 1. The user edits the data file and changes `Tag` field of the first contact to an invalid value.
+
+Step 2. The user edits the data file and changes the `Email` field of the second contact to an invalid value.
+
+Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. Since the value of `Tag` (optional field) for the first person is invalid, `JsonAdaptedPerson` will not add the invalid `Tag`.
+
+Step 4. Since the value of `Email` (compulsory field) for the second person is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
+
+Step 3. CONNECTIONS will not display the first person's invalid `Tag` and will not display the second person. The other fields and contacts will be displayed as per normal.  
+
+
+#### Design considerations:
+* Arguments for the command should follow the standard used in other parts of the software.
+* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -434,63 +483,28 @@ Step 3. The user is prompted to pick the name and download location of their gen
 
 ### User stories
 
-Chosen user stories v1.2
 
 | As a... | I want to... | So that I can... |
 |---|---|---|
-| Person who loves Birthdays    | Track birthdays                       | Easy way of checking the birthday of friends
-| Sociable person               | Partition frequent contacts           | Easy to access people within each group
-| Party Organiser               | Add people to a party list            | Easily extend a party invite list
-| Party Organiser               | Remove people to a party list         | Easily Remove people from only one party
-| Party Organiser               | Search contacts by invited party      | Generate invite list
-|  |  |  |
-| User                          | App need to be bug free               | So that I can rely on the app to give me accurate contact details
-| Fast typer                    | Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
-| Sociable person               | To be able to save up to 100 contacts | I can keep all my friends contacts
-| User with many contacts       | Search timings to be reasonable       | Do not have to wait too long for search results
-| Forgetful user                | Track contacts                        | Retrieve Contact details whenever I need to contact somebody
-
-Nice to have user stories v1.2
-
-| As a... | I want to... | So that I can... |
-|---|---|---|
-| Beginner user                 | View feedback on wrong commands       | Format commands better
-| User                          | Can modify contact details            | So that I can update my contact details
-| Beginner user                 | View feedback on wrong commands       | To format commands better
-| Advanced user                 | Add nicknames to my contacts          | Find my close friends using their nicknames
-
-Future versions user stories
-
-| As a... | I want to... | So that I can... |
-| --- | --- | --- |
-| Beginner              | See sample commands                               | To see what I should be typing.
-| Beginner              | View tutorials                                    | To see how the app should be used
-| Beginner              | View helpful prompts                              | To see what can be done with the app
-| New user              | Immediately add my first contact                  | Use the product without reading a manual
-|  |  |  |
-| Advanced user         | Disable suggestions                               | Avoid accidentally pressing on them
-| Experienced user      | Quickly add contact without my mouse              | Just type
-| Experienced user      | Get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
-|  |  |  |
-| Forgetful person      | Use the help button                               | Remind myself how to use the app
-| Forgetful person      | Select from existing tags                         | Have consistent labelling
-|  |  |  |
-| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
-| Party Organiser       | Generate mailing list from my contacts            | Contact all invitees as a group
+| Person who loves birthdays    | Track birthdays                       | Easily check the birthday of friends
+| Person who loves birthdays and is forgetful    | have birthday reminders            | Avoid missing any of his/her friends’ birthdays
+| Party Organiser       | Look for contact details for all my friends      | Send out invites
 | Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
-| Party Organiser       | Generate a mail to link for my selection          | Send emails to a group
-|  |  |  |
-| Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
-| Sociable person       | Pin frequent contacts                             | Access these contacts easily
-|  |  |  |
-| Fast typer            | Use the app with little lag                       | Can utilise functions of the app quickly
-|  |  |  |
-| Person                | Add new optional fields                           | Add my own types of data
-| Youth                 | Use Emojis                                        | Add <3 to people i like and poop to people I don’t
-| University student    | User experience to be smooth                      | Find who they want to contact easily
-|  |  |  |
-| User with many contacts   | Show search suggestions                       | Easily find contacts
-| User with many contacts   | Search timings to be reasonable               | Do not have to wait too long for search results
+| Party Organiser               | Tag people with a party           | Easily keep track of people coming for parties
+| Party Organiser               | Untag people from a party         | Easily remove people who are not coming for parties
+| Party Organiser               | Search contacts by party      | Generate invite list
+| Party Organiser               | Search contacts by parties      | View who is coming for these parties
+| Party Organiser               | Delete multiple contacts at once      | Quickly delete contacts that I no longer need
+| Sociable person               | Pin frequent contacts           | Easily access people that I contact often
+| Sociable person               | Save up to 100 contacts | Keep all my friends contacts
+| Sociable person               | Search for contacts within a reasonable timing | Avoid waiting too long for search results
+| Beginner              | See sample commands                               | See what I should be typing.
+| Beginner              | View helpful prompts                              | See what can be done with the app
+| Beginner                 | View feedback on wrong commands       | Format commands better
+| Beginner     | Get help on specific commands                                 | Learn how to use the app
+| Fast typer                    | Use sentences to interact with the app | Utilise the functions of the app quicker without using a mouse
+| User                          | Can modify contact details            | Update my contact details
+| Experienced user      | Get suggestions on previously run commands          | Avoid typing the commands I use frequently again and again.
 
 ### Use cases
 
@@ -802,17 +816,94 @@ Future versions user stories
   * 2c1. CONNNECTIONS display an error message followed by a list of valid commands
 
   Use case ends.
+
+
+**Use case: Generate CSV file**
+
+**MSS**
+
+1. User requests to generate a CSV file containing selected data fields of the contacts displayed.
+2. CONNECTIONS requests for user to input export location and file name.
+3. User selects export location and file name.
+4. CONNECTIONS generates CSV file in export location with file name.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs invalid fields
+    * 1a1. CONNECTIONS display an error message
     
-*{More to be added}*
+      Use case ends.
+    
+* 2a. User fails to choose export location
+    * 2a1. CONNECTIONS does not export the CSV file.
+      
+      Use case ends.
+
+**Use case: Deleting multiple contacts**
+
+**MSS**
+
+1. User requests to delete multiple contacts.
+2. CONNECTIONS deletes the contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User inputs indexes that are out of range
+    * 1a1. CONNECTIONS display an error message
+
+      Use case ends.
+
+* 1b. User inputs negative numbers
+    * 1b1. CONNECTIONS display an error message
+
+      Use case ends.
+    
+* 1c. User inputs start index that is bigger then end index
+    * 1c1. CONNECTIONS display an error message
+
+      Use case ends.
+
+**Use case: View prompts for commands**
+
+**MSS**
+
+1. User starts typing command.
+2. CONNECTIONS displays a prompt to help user write command.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is not writing a valid command.
+    * 1a1. CONNETIONS will not display prompt.
+
+      Use case ends.
+
+**Use case: View previous command history**
+
+**MSS**
+
+1. User requests to view previous commands.
+2. CONNECTIONS displays previous commands.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There is no previous command history.
+    * 1a1. CONNETIONS will not display command.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-
-*{More to be added}*
 
 ### Glossary
 * **CONNECTIONS**: The name of our product

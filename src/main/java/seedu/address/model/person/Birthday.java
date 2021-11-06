@@ -17,6 +17,7 @@ public class Birthday {
     public static final String MESSAGE_CONSTRAINTS = "Birthdays should come in the form of ddMMyyyy";
     public static final String MESSAGE_BIRTHDAY_IN_FUTURE = "Birthday should not be a future date";
     public static final String MESSAGE_INVALID_DATE = "Birthday is not a valid date. " + MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_YEAR_0000 = "Year 0000 does not exist.";
     public static final String VALIDATION_REGEX = "\\d{8}";
     private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMuuuu");
     public final LocalDate birthdate;
@@ -31,6 +32,7 @@ public class Birthday {
         checkArgument(isValidFormat(birthdate), MESSAGE_CONSTRAINTS);
         checkArgument(isValidDate(birthdate), MESSAGE_INVALID_DATE);
         checkArgument(!isFutureDate(birthdate), MESSAGE_BIRTHDAY_IN_FUTURE);
+        checkArgument(!isYear0000(birthdate), MESSAGE_INVALID_YEAR_0000);
         this.birthdate = LocalDate.parse(birthdate, BIRTHDATE_FORMATTER);
     }
 
@@ -59,6 +61,14 @@ public class Birthday {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns if a given string is in year 0000 (which does not exist).
+     */
+    public static boolean isYear0000(String birthday) {
+        String yearString = birthday.substring(birthday.length() - 4);
+        return yearString.equals("0000");
     }
 
     @Override
