@@ -50,7 +50,7 @@ LogicManager -> ViewShiftCommand : execute()
 activate ViewShiftCommand
 note right  : Refer to the View Shift Command Execution \nfor details on this function
 
-ViewShiftCommand --> LogicManager  
+ViewShiftCommand --> LogicManager
 deactivate ViewShiftCommand
 
 [<--LogicManager
