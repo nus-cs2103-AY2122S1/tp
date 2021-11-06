@@ -37,4 +37,4 @@ Given below are my contributions to the project.
     * PR reviewed (with non-trivial review comments): [#50](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/50)
 
 * **Tools**:
-    * Added bootstrap stylesheets to the project. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
+    * Added [bootstrap](https://getbootstrap.com/) stylesheets to the project. [\#122](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/122)
