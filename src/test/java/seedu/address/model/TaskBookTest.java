@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SEPT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.SEW;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
@@ -45,8 +44,7 @@ public class TaskBookTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedSew = new TaskBuilder(SEW).withDate(VALID_DATE_SEPT)
-                .build();
+        Task editedSew = new TaskBuilder(SEW).build();
         List<Task> newTasks = Arrays.asList(SEW, editedSew);
         TaskBookStub newData = new TaskBookStub(newTasks);
 
