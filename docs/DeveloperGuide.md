@@ -1049,7 +1049,7 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
-### Marking a person
+### Marking an applicant
 
 1. Marking a person while all persons are being shown
 
@@ -1086,7 +1086,7 @@ testers are expected to do more *exploratory* testing.
        Expected: For `mark 6`, the sixth contact is marked to `Done` and details of the marked contact shown in the status message.
                  After `list`, locate the marked person in the list and the person should still be `Done`.
 
-### Unmarking a person
+### Unmarking an applicant
 
 1. Unmarking a person while all persons are being shown
 
@@ -1122,6 +1122,22 @@ testers are expected to do more *exploratory* testing.
        Expected: For `unmark 6`, the sixth contact is unmarked to `Not Done` and details of the unmarked contact shown in the status message.
                  After `list`, locate the unmarked person in the list and the person should still be `Not Done`.
     
+### Deleting marked applicants
+
+1. Deleting marked applicants while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Some persons are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the persons with `Done` are deleted from the list. Details of the deleted contacts shown in the status message.
+
+2. Deleting marked applicants while a filtered list of persons are being shown
+
+    1. Prerequisites: Find a valid group of persons using the `find` command with appropriate inputs. Multiple persons in the filtered list. Some persons are currently `Done`.
+
+    2. Test case: `delete_marked`<br>
+       Expected: All the persons with `Done` are deleted from the list, not just those found in the filtered list. Details of the deleted contacts shown in the status message.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
