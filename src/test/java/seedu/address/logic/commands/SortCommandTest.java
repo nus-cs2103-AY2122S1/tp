@@ -14,11 +14,20 @@ public class SortCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_sortPersonList_success() {
+    public void execute_sortPersonList_reverse_success() {
         SortCommand sortCommand = new SortCommand(true);
         String expectedMessage = "Sorted all persons in reverse order";
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateSortedPersonList(true);
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sortPersonList_success() {
+        SortCommand sortCommand = new SortCommand(false);
+        String expectedMessage = "Sorted all persons in reverse order";
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateSortedPersonList(false);
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 }

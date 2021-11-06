@@ -10,10 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -23,9 +23,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -33,6 +39,12 @@ import seedu.address.testutil.PersonBuilder;
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private EditCommand.EditTaskDescriptor editTaskDescriptor;
+
+    @BeforeEach
+    public void setUp() {
+        editTaskDescriptor = new EditCommand.EditTaskDescriptor();
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -81,7 +93,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    /*@Test
+    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -98,7 +110,7 @@ public class EditCommandTest {
                 expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
@@ -145,6 +157,96 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_filteredList_task_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(personToEdit);
+
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        Task newTask = new Task(new TaskName("walk"), null, null, null);
+        editTaskDescriptor.setTaskName(new TaskName("walk"));
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        tasks.set(0, newTask);
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
+                + String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask);
+
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
+        expectedModel.displayPersonTaskList(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_filteredList_person_and_task_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(personToEdit);
+
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        Task newTask = new Task(new TaskName("walk"), null, null, null);
+        editTaskDescriptor.setTaskName(new TaskName("walk"));
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        tasks.set(0, newTask);
+        Person editedPerson = new Person(
+                new Name(VALID_NAME_BOB), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson) + "\n"
+                + String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask);
+
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
+        expectedModel.displayPersonTaskList(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundsPersonIndexFilteredList_failure() {
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(person);
+
+        Index outOfBoundIndex = Index.fromZeroBased(person.getTasks().size());
+        editTaskDescriptor.setTaskName(new TaskName("walk"));
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = new EditCommand(
+                INDEX_FIRST_PERSON, descriptor, outOfBoundIndex, editTaskDescriptor
+        );
+        assertCommandFailure(
+                editCommand, model, String.format(EditCommand.MESSAGE_INVALID_TASK, person.getName())
+        );
+    }
+
+    @Test
+    public void execute_duplicateTask_failure() {
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.displayPersonTaskList(person);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        Task task = person.getTasks().get(0);
+        editTaskDescriptor.setTaskName(task.getTaskName());
+        editTaskDescriptor.setTaskDate(task.getDate());
+        editTaskDescriptor.setTaskTime(task.getTime());
+        editTaskDescriptor.setTaskVenue(task.getVenue());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor, INDEX_FIRST_TASK, editTaskDescriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
