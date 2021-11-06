@@ -46,7 +46,6 @@ public class SetDefaultShiftTimingsCommand extends Command {
 
         return new CommandResult("Default shift timings successfully updated!\n\n"
                 + DefaultShiftTimingsStorage.getTimings());
-
     }
 
     /**
