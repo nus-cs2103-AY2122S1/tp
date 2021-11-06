@@ -133,7 +133,7 @@ public class DeletePersonCommand extends Command {
         for (Person current : list) {
             if (!current.getModuleCodes().contains(moduleCode)) { //ensure that module code exist
                 model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-                throw new CommandException(MESSAGE_DELETE_BY_MODULE_USAGE);
+                throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
             }
             if (current.get(moduleCode).getLessonCodes().contains(lessonCodeToRemove)) {
                 personsToDelete.add(current);
