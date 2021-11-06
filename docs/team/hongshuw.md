@@ -48,7 +48,9 @@ Given below are my contributions to the project.
       [\#229](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/229),
       [\#235](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/235),
       [\#236](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/236),
-      [\#289](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/289))
+      [\#289](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/289),
+      [\#322](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/322),
+      [\#331](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/331))
       
 * **Documentation**:
     * User Guide:
@@ -64,6 +66,8 @@ Given below are my contributions to the project.
           [\#306](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/306)
         * Added implementation details of the `add client` and `add product` features
           [\#179](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/179)
+        * Added instructions for testing for `add client` and `add product` features
+          [\#334](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/334)
 
 * **Contributions to team-based tasks**:
     * Developer Guide:
@@ -71,6 +75,7 @@ Given below are my contributions to the project.
           [\#183](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/183)
         * Corrected mistakes in document for all features
           [\#184](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/184)
+    * Hosted online team meetings
 
 * **Community**:
     * Contributed to forum discussions (examples: [\#24](https://github.com/nus-cs2103-AY2122S1/forum/issues/24))
