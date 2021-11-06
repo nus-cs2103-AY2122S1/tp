@@ -10,6 +10,7 @@ while () is ([has remaining student(s) to add])
     :Add student\nto group;
   else ([else])
     :Display an\nerror message;
+    stop
   endif
 endwhile ([else])
 stop
