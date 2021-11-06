@@ -582,11 +582,11 @@ This command clears all `Student` entries from `AcademyDirectory`.
 
 #### Implementation
 
-`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose 
+and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
 The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 ![GetComparatorSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
-
 
 ### HistoryCommand
 This command shows the commit history. Each commit will be shown with its five character hash, 
