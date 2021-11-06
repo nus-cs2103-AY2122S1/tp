@@ -8,8 +8,9 @@ import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.common.Note;
 import seedu.notor.ui.ConfirmationWindow;
-import seedu.notor.ui.ResultDisplay;
 import seedu.notor.ui.GeneralNote;
+import seedu.notor.ui.ResultDisplay;
+
 
 public class GeneralNoteWindow extends NoteWindow {
 
