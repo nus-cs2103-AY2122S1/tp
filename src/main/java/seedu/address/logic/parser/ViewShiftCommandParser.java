@@ -30,8 +30,8 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewShiftCommand.HELP_MESSAGE);
     public static final ParseException INVALID_VIEW_SHIFT_COMMAND_EXCEPTION =
             new ParseException(INVALID_VIEW_SHIFT_COMMAND);
-    private static final String INVALID_NUMBER_OF_DATES = "Wrong number of dates input. Expecting 0 or 1, " +
-            "received %d date inputs.";
+    private static final String INVALID_NUMBER_OF_DATES = "Wrong number of dates input. Expecting 0 or 1, "
+            + "received %d date inputs.";
 
 
     private DayOfWeek currDayOfWeek = DayOfWeek.from(LocalDate.now());
