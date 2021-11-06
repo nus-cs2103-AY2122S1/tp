@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam nodesep 110
 
 package "Lesson" {
     Class "{abstract}\nLesson" as Lesson
@@ -15,15 +16,18 @@ package "Lesson" {
     Class LessonRates
 }
 
-Lesson *-up-> "2" Date
+Lesson *-up-> "cancelledDates \n *" Date
+Lesson *-up-> "endDate \n 1" Date
+Lesson *-up-> "startDate \n 1" Date
 Lesson *-up-> TimeRange
 Lesson *-up-> Subject
 Lesson *-up-> LessonRates
 Lesson *-up-> "*" Homework
 
-Homework -[hidden]left-> Subject
-Subject -[hidden]left-> TimeRange
-TimeRange -[hidden]left-> Date
+Homework -[hidden]left-> Date
+Subject -[hidden]left-> LessonRates
+TimeRange -[hidden]left->LessonRates
+Date -[hidden]left->Subject
 
 Lesson <|-down- RecurringLesson
 Lesson <|-down- MakeUpLesson
