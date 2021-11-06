@@ -56,5 +56,4 @@ AddressBookParser --> LogicManager : ta
 deactivate AddressBookParser
 
 ref over LogicManager, Task : TaddCommand Execution
-
 @enduml
