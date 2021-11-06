@@ -39,13 +39,7 @@ deactivate CommandResult
 TagCommand --> Logic : commandResult
 deactivate TagCommand
 
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-TagCommand -[hidden]-> Logic
-destroy TagCommand
-
 [<-- Logic : commandResult
 deactivate Logic
-
-
 
 @enduml
