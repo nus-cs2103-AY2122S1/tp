@@ -18,6 +18,9 @@ Class VersionControlController
 Class VersionControlReader
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class AdditionalViewModel
+Class AdditionalViewType
+Class AdditionalInfo
 
 
 Class UniqueStudentList
@@ -52,6 +55,10 @@ VersionControlReader --> VersionControl
 VersionedModelManager -left-> "1" AcademyDirectory
 VersionedModelManager -right-> "1" UserPrefs
 VersionedModelManager -left-> "1" VersionControlController
+VersionedModelManager -down-> "1" AdditionalViewModel
+
+AdditionalViewModel *-down-> "1" AdditionalInfo
+AdditionalViewModel *-down-> "1" AdditionalViewType
 
 AcademyDirectory *--> "1" UniqueStudentList
 UniqueStudentList --> "~* all" Student
