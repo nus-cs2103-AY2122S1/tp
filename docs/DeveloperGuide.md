@@ -590,7 +590,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The delete command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -636,7 +636,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The command for filtering by passed interviews is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -662,7 +662,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The command for filtering by upcoming interviews is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -710,7 +710,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The mark command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -736,7 +736,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The unmark command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -762,7 +762,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The delete command is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -793,7 +793,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The command to delete all applicants is invalid.
+* 3a. The input format is invalid.
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
@@ -806,13 +806,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  RecruitIn closes.
 
     Use case ends.
-
-**Extensions**
-
-* 1a. The exit command is invalid.
-    * 1a1. RecruitIn shows an error message.
-
-      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
