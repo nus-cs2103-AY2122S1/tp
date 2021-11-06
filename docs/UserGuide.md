@@ -142,13 +142,22 @@ Format: `mv INDEX [INDEX]... m/MODULE c/CLASS`
 
 - Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
+Examples:
+
+- `mv 2 m/CS2103 c/T10`
+
 ### Removing students from an existing class and module : `rm`
 
 Remove a particular student from a particular module and class.
 
 Format: `rm INDEX m/MODULE c/CLASS`
 
-- Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …
+
+Examples:
+
+- `rm 3 m/CS2103 c/T10`
+
 
 ### Toggle view: `view`
 
@@ -158,8 +167,11 @@ Format: `view (contacts/asg)`
 
 - The default view when the application launches is the student details.
 - The only valid parameters are `contacts` or `asg`
-- `view contacts` toggles the view to display the student's contact details for each student listed.
-- `view asg` toggles the view to display the assignment completion status and/or grade for each student.
+
+Examples:
+
+- `view contacts`: toggles the view to display the student's contact details for each student listed.
+- `view asg`: toggles the view to display the assignment completion status and/or grade for each student.
 
 ### List modules: `lsmod`
 
@@ -352,12 +364,12 @@ If your changes to the data file makes its format invalid, EdRecord will discard
 | **List Class**                          | `lsclass`<br> e.g., `lsclass`                                                                                                                                         |
 | **Create Class**                        | `mkclass m/MODULE c/CLASS`<br> e.g., `mkclass m/CS2103 c/T09`                                                                                                         |
 | **Delete Class**                        | `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`                                                                                                         |
+| **Move Student into Class in Module**   | `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`                                                                                                            |
+| **Remove Student from Class in Module** | `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`                                                                                                            |
 | **Create Assigment**                    | `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`                                                                               |
 | **Edit Assignment**                     | `edasg ID [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run w/12.5 s/10`                                                                           |
 | **Delete Assignment**                   | `dlasg ID`<br> e.g., `dlasg 1`                                                                                                                                        |
-| **Move Student into Class in Module**   | `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`                                                                                                            |
-| **Remove Student from Class in Module** | `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`                                                                                                            |
-| **Grade an Assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/1`                                                                                         |
+| **Grade an Assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/50`                                                                                         |
 | **Delete student's grade**              | `dlgrade INDEX id/ID`<br> e.g.,`dlgrade 3 id/3 Midterm`                                                                                                               |
 | **Toggle view**                         | `view (contacts/asg)`<br> e.g.,`view contacts`                                                                                                                        |
 | **Find**                                | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
