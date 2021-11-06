@@ -67,8 +67,9 @@ Can't wait to get started? Check out the [Quick Start](#quick-start) to get goin
 # Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. You may install it
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
+   
 2. Download the latest `wheretourgo.jar` from [here](update on final)
-
+   
 3. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
 **For Windows**
@@ -124,7 +125,10 @@ In the subsection [Reading this document](#reading-this-document), there are sev
 
 The following section, [Features](#features), details the features in WhereTourGo and how to use them.
 
+To make your navigation easier, click [Back to top](#table-of-contents) located throughout this document to navigate back to the table of contents.
+
 ### Orienting to WhereTourGo
+
 Below is the Home screen of WhereTourGo, with its key components marked out for easy reference:
 
 ![Ui](images/layout.png)
@@ -318,9 +322,9 @@ Format: `delete n/CONTACT_NAME`
 
 Examples:
 * `list` followed by `delete n/Singapore DUCKTours` deletes the contact with name 'Singapore DUCKTours`.
-* `find hotel` followed by `delete n/Mandarin Oriental Singapore` deletes the contact with name 'Mandarin Oriental Singapore'.
+* `filter c/fnb` followed by `delete n/Green on Earth Vegetarian Cafe` deletes the contact with name 'Earth Vegetarian Cafe'.
 
-Expected Outcome for `find hotel` followed by `delete n/Mandarin Oriental Singapore`:
+Expected Outcome for `filter c/fnb` followed by `delete n/Green on Earth Vegetarian Cafe`:
 
 <img src="images/deleteName.png" width="800">
 
@@ -473,7 +477,7 @@ Input history will be reset whenever you exit the app.
 [Back to top](#table-of-contents)
 
 ### Clicking on contacts
-Click on any contact in the [Contacts Pane](##orienting-to-wheretourgo) to view more information about the contact.
+Click on any contact in the [Contacts Pane](#orienting-to-wheretourgo) to view more information about the contact.
 This is equivalent to using a [`view`](#viewing-a-contact-view) command.
 
 [Back to top](#table-of-contents)

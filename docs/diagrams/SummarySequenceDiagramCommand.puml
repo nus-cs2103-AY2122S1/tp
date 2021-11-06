@@ -2,17 +2,11 @@
 !include style.puml
 'https://plantuml.com/sequence-diagram
 
-box Main STORAGE_COLOR_T1
-
-participant ":MainApp" as MainApp STORAGE_COLOR
-end box
-
-
 box Logic LOGIC_COLOR_T1
 
-participant ":ModelManager" as ModelManager LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Command" as Command LOGIC_COLOR
 participant ":AddressBook" as AddressBook LOGIC_COLOR
-
 end box
 
 box Model MODEL_COLOR_T1
@@ -20,15 +14,15 @@ participant ":Summary" as Summary MODEL_COLOR
 participant "contact:Contact" as Contact MODEL_COLOR
 end box
 
+[-> LogicManager : execute(commandText)
+activate LogicManager
 
-
-create ModelManager
-MainApp -> ModelManager
-activate ModelManager
-
+LogicManager -> Command : execute(model)
+activate Command
 
 create Summary
-ModelManager -> Summary : Summary(ReadOnlyAddressBook)
+Command -> Summary : Summary(ReadOnlyAddressBook)
+
 activate Summary
 
 Summary -> AddressBook : getContactList()
@@ -70,10 +64,11 @@ end
 Summary --> Summary
 deactivate Summary
 
-Summary --> ModelManager : summary
+Summary --> Command : summary
 deactivate Summary
 
-
+Command --> LogicManager : commandResult
+[<-- LogicManager : commandResult
 
 
 @enduml

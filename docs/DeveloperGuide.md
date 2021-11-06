@@ -195,6 +195,49 @@ The following activity diagram shows what happens when a user executes the `edit
 * **Alternative 2:** Exclusive command to add Category field
   * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
   * Cons: Reduces usability due to the need to remember another command
+    
+### Delete Feature
+
+#### Implementation
+
+The Delete feature deletes the specified contact directly from the model, which is reflected on the GUI.
+Each Delete operation can either be a deletion based on name or index.
+It is implemented with the following operations:
+
+* `DeleteCommandIndex#execute()`
+* `DeleteCommandName#execute()`
+
+Given below is an example usage scenario of deleting a contact:
+
+Step 1. The user launches the application. The user executes the command `list` to look at all contacts.
+
+Step 2. The user executes the command `delete 1` to delete the first contact in the List. The `delete` command calls `DeleteCommandParser#parse()`.
+
+Step 3. The `Parser` returns the command result which is then executed by `LogicManager`.
+
+The following sequence diagram shows how the Delete operation works to delete a contact (by Index):
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+Deleting a contact by name e.g. `delete n/VALID_NAME` results in the Parser returning a different command result:
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagramName.png)
+
+The only difference between the 2 diagrams is the `DeleteCommand` (Name or Index) called and returned to the `Parser` and `LogicManager`.
+
+#### Design considerations:
+
+**Aspect: How Delete is implemented:**
+
+* **Alternative 1 (current choice):** Delete deletes directly from the AddressBook
+    * Pros: Easier to implement
+    * Cons: Causes other features, such as undo and redo, to be more memory intensive
+
+* **Alternative 2:** Delete Stashes away the contact (for undoing purposes)
+    * Pros: More memory friendly, instead of storing a copy of the entire AddressBook
+    * Cons: More complex to implement. Storage of contacts might result in duplicates etc.
+
+
 
 ### Find feature
 
@@ -426,32 +469,33 @@ In addition, numerous classes had to be updated to accommodate the Review featur
 * `ParserUtil` to parse the Review content.
 * `EditCommand` and `EditCommandParser` to enable editing of Reviews.
 
+Given below is an example usage scenario of adding a Review:
+
+Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`.
+
+Step 2. The `add` command calls `ParserUtil#ParseReview()`, creating a `Review` object.
+
 The following sequence diagram gives the overview of the add command with a review:
 
 ![Sequence Diagram for Review](images/ReviewSequenceDiagram.png)
 
 The following activity diagram shows how the review operation works:
 
-![Sequence Diagram for Review](images/ReviewActivityDiagram.png)
+![Activity Diagram for Review](images/ReviewActivityDiagram.png)
 
-
-Given below is an example usage scenario of adding a Review:
-
-Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`
-
-Step 2. The user can click on the contact on the GUI to expand it and display the full review
 
 #### Design considerations:
 
 **Aspect: How Review is called by the user:**
 
-* **Alternative 1 (current choice):** Adds a review through the `add` command.
+* **Alternative 1 (current choice):** Adds a review through the `add` command or `edit` command.
     * Pros: Easier to implement.
-    * Cons: Add command can become very lengthy.
+    * Cons: Add command or edit command can become very lengthy.
 
 * **Alternative 2:** Separate command for review
     * Pros: Increases modularity by making review an entirely new command.
     * Cons: Too many commands which may confuse the User.
+
 
 ### Summary Feature
 
@@ -459,15 +503,40 @@ Step 2. The user can click on the contact on the GUI to expand it and display th
 
 The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to
 obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
-* `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
-* `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
-* `setNumberCategory`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+* `setNumberOfContacts()`  — Calculates and sets the number of contacts in the addressbook.
+* `setPercentageRatings()`  — Calculates and sets the percentage of contacts that have a rating (unrated not included).
+* `setNumberCategory()`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+* `getNumberOfContactsGui()`  — Returns the total number of contacts to display on the GUI.
+* `getPercentageRatingsGui()`  — Returns the Pie Chart data for the proportions/percentage of `Rating`.
+* `getPercentageCategoryGui()`  — Returns the Pie Chart data for the proportions/percentage for `CatergoryCode`.
 
-Additionally, `Summary` will communicate with `UI` to display the summarised results
 
-The following sequence diagram gives an overview of how `Summary` works:
+Additionally, `Summary` will communicate with `UI`, specifically `MainWindow` to display the summarised results.
+
+The following sequence diagram gives an overview of how `Summary` works when the app launches:
 
 ![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
+
+`Summary` updates when certain commands are executed:
+
+These commands include:
+1. Add
+2. Clear
+3. Delete
+4. Filter
+5. Find
+6. List
+7. Undo
+8. Redo
+9. Summary
+
+The following sequence diagram shows how `Summary` updates when these commands are executed:
+
+![Sequence Diagram for Summary Commands](images/SummarySequenceDiagramCommand.png)
+
+
+The above sequence diagrams describe how Summary pulls data from the `AddressBook` to summarise data.
+`Summary` uses `JavaFx chart` to display data, on top of the text.
 
 #### Design considerations:
 
@@ -475,7 +544,7 @@ The following sequence diagram gives an overview of how `Summary` works:
 
 * **Alternative 1 (current choice):** Works on a Read-Only copy of `AddressBook`.
     * Pros: Easier to implement, guaranteed to not edit the internals.
-    * Cons: Exposing internal workings of `AddressBook`.
+    * Cons: Works directly with a Read-Only copy of `AddressBook`.
 
 * **Alternative 2:** Gets data directly from `Contact`, `Review` etc.
     * Pros: Data is kept directly with the low-level classes and pulled from there.
@@ -682,6 +751,7 @@ Use case ends.
 
 **UC - List all Contacts**
 
+
 **MSS**
 
 1.User requests to list all contacts.
@@ -720,26 +790,38 @@ Use case ends.
 Use case ends.
 
 
+**UC03 - Delete a Contact**
 
-
-
-**UC - Delete a Contact**
-***Preconditions: User has <u>listed all contacts UC02</u>***
+***Preconditions: User has <u>listed all contacts UC02 + filter etc</u>***
 
 **MSS**
 
 1.  User requests to delete a specific contact in the list
-2.  WhereTourGo deletes the contact
+2.  AddressBook deletes the contact
+
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 1a. The given index is invalid.
 
-    * 2a1. WhereTourGo shows an error message.
+    * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
+
 
       Use case ends.
+    
+* 1b. The given name is invalid.
+
+    * 1b1. AddressBook shows an error message, and instructions on how to use the command.
+    
+         Use case ends.
+  
+* 1c. The command format is invalid.
+
+    * 1c1. AddressBook shows an error message, and instructions on how to use the command.
+
+        Use case ends.
 
 
 **UC - Find a Contact**
@@ -762,6 +844,30 @@ Use case ends.
     * 2b1. WhereTourGo shows an error message
 
       Use case resumes at step 2.
+
+**UC05 - Summarising Contacts**
+
+
+**MSS**
+
+1.  User requests to view the summary of the AddressBook
+2.  The addressBook returns the summary on the GUI
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format is wrong (e.g. `sum 1`)
+    
+    * 1a1. AddressBook shows an error message, and instructions on how to use the command.
+
+      Use case ends.
+
+* 2a. The addressBook is empty
+
+    * 2a1. AddressBook will not display chart data and show total contacts as 0.
+
+      Use case ends.
 
 *{More to be added}*
 
@@ -824,18 +930,63 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   1. Prerequisites: List all contacts using the `list` command, contact with name 'Singapore Flyers' exists. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Summary is updated and displayed.
+
+   1. Test case: `delete n/Singapore Flyers`<br>
+       Expected: Contact with name 'Singapore Flyers' is deleted. Details of the deleted contact shown in the status message. Summary is displayed.
 
    1. Test case: `delete 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in the addressBook)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Displaying Summary
+
+1. Using the `sum` command
+
+    1. Prerequisites: AddressBook has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
+    
+    1. Test case: `sum`<br>
+        Expected: Displays summary with the correct information.
+       
+    1. Test case: `sum 2`<br>
+        Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
+
+1. Modifying AddressBook with commands that involve summary.
+
+    1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
+
+    1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
+       Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
+
+    1. Test case: `edit 1 c/fnb`<br>
+       Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
+       
+    1. Test case: `clear`<br>
+        Expected: Entire addressBook is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
+       
+    1. Test case: `delete 1`<br>
+        Expected: First contact in the addressBook is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
+       
+    1. Test case: `find VALID_SEARCH_QUERY` (any keyword in the addressBook) <br>
+        Expected: Displays results of the `find` command. Summary is displayed.
+
+    1. Test case: `filter c/fnb` <br>
+       Expected: Displays results of the `filter` command. Summary is displayed.
+
+    1. Test case: `list` <br>
+       Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
+
+    1. Test case: `undo` (A command affecting the addressBook must be ran first, such as `delete`) <br>
+        Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
+       
+    1. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
+        Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
+      
 
 ### Listing all contacts
 
