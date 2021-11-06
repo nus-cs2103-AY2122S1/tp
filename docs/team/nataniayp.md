@@ -40,12 +40,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-      * Added the documentation for the feature `find` and `sort`.
+      * Added the documentation for the features `find` and `sort`.
       * Contributed in writing the introduction of the guide.
       * Crafted more Frequently Asked Questions.
 
     * Developer Guide:
-      * Added implementation details of the feature `find`.
+      * Added implementation details of the features `find` and `sort`.
+      * Included instructions for manual testing and use cases for `find` and `sort`.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#167](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/167), [\#64](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/64)
