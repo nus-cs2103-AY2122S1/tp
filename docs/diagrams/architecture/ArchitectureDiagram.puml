@@ -20,7 +20,7 @@ Class "<$documents>" as File UI_COLOR_T1
 VersionedModel =[#maroon]> VersionControl
 
 UI -[#green]> Logic
-UI -right[#green]-> VersionedModel
+UI -right[#green].> VersionedModel
 
 Logic -[#blue]-> Storage
 Logic -down[#blue]-> VersionedModel
