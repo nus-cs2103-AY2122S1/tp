@@ -707,7 +707,7 @@ Format:
 
 ### Listing all customers: `listC`
 
-Shows a list of all customers in RHRH.
+>Shows a list of all customers in RHRH.
 
 Format: `listC`
 
