@@ -1,6 +1,7 @@
 package seedu.anilist.model.stats;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
@@ -31,6 +32,10 @@ public class StatsTest {
         int expectedTotalAnimes = 0;
         int expectedNumUniqueGenres = 0;
         HashMap<Genre, Integer> expectedTopGenres = new HashMap<>();
+
+        assertEquals(stats.getWatchingCount(), watchingCount);
+        assertEquals(stats.getToWatchCount(), toWatchCount);
+        assertEquals(stats.getFinishedCount(), finishedCount);
 
         assertEquals(stats.getTotalAnimesCount(), expectedTotalAnimes);
         assertEquals(stats.getNumUniqueGenres(), expectedNumUniqueGenres);
@@ -111,5 +116,16 @@ public class StatsTest {
         assertEquals(stats.getTotalAnimesCount(), expectedTotalAnimes);
         assertEquals(stats.getNumUniqueGenres(), expectedNumUniqueGenres);
         assertEquals(stats.getTopGenres(), expectedTopGenres);
+    }
+
+    @Test
+    public void equals() {
+        Stats stats1 = new Stats(1, 2, 3, new HashMap<>());
+        Stats stats2 = new Stats(1, 2, 3, new HashMap<>());
+
+        //same Stats object
+        assertTrue(stats1.equals(stats1));
+        //no animes tagged with genres
+        assertTrue(stats1.equals(stats2));
     }
 }
