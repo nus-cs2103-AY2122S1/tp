@@ -99,13 +99,20 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+
+        builder.append(getName());
+
+        if (!getPhone().isEmpty()) {
+            builder.append("; Phone: ").append(getPhone());
+        }
+
+        if (!getEmail().isEmpty()) {
+            builder.append("; Email: ").append(getPhone());
+        }
+
+        if (!getAddress().isEmpty()) {
+            builder.append("; Address: ").append(getPhone());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

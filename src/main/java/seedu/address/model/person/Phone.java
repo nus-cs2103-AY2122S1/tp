@@ -40,6 +40,15 @@ public class Phone {
         return test.matches(VALIDATION_REGEX) || test.matches("");
     }
 
+    /**
+     * Returns true if the phone number is empty.
+     *
+     * @return boolean that represents whether phone number is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;
