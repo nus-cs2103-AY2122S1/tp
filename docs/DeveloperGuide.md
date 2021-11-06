@@ -210,9 +210,9 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 ### Pin feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations: 
+The pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations: 
 * `UniquePersonList#add` - adds a contact into the list of stored contacts and stores the contacts according to their priority. 
 * `UniquePersonList#setPerson` - updates an edited contact in the list of stored contacts and stores the contacts according to their priority. 
 
@@ -366,7 +366,7 @@ Step 5. CONNECTIONS will display a detailed help message on the usage of `add` c
 
 ### Birthday Reminder feature
 
-#### Proposed Implementation
+#### Implementation
 
 Shows a list of contacts with upcoming birthdays. This list of birthday reminders is displayed to the user though the `UI`, specifically in `BirthdayReminderListPanel`. Each birthday is displayed as a `BirthdayReminderCard`.
 The list of birthdays is generated in the `ModelManager`, which implements the following functions:
