@@ -13,7 +13,7 @@ import seedu.edrecord.model.assignment.Grade.GradeStatus;
 import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.tag.Tag;
 
@@ -30,21 +30,21 @@ public class Person {
 
     // Data fields
     private final Info info;
-    private final ModuleGroupMap modules = new ModuleGroupMap();
+    private final ModuleSet moduleSet = new ModuleSet();
     private final Set<Tag> tags = new HashSet<>();
     private final AssignmentGradeMap grades = new AssignmentGradeMap();
 
     /**
      * Every field must be present and cannot be null.
      */
-    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules,
+    public Person(Name name, Phone phone, Email email, Info info, ModuleSet moduleSet,
                   Set<Tag> tags, AssignmentGradeMap grades) {
         requireAllNonNull(name, phone, email, info, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.info = info;
-        this.modules.addAll(modules);
+        this.moduleSet.addAll(moduleSet);
         this.tags.addAll(tags);
         this.grades.addAll(grades);
     }
@@ -65,12 +65,12 @@ public class Person {
         return info;
     }
 
-    public ModuleGroupMap getModules() {
-        return this.modules;
+    public ModuleSet getModules() {
+        return this.moduleSet;
     }
 
     public void addModuleClass(Module mod, Group group) {
-        this.modules.add(mod, group);
+        this.moduleSet.add(mod, group);
     }
 
     /**
@@ -114,7 +114,9 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -143,7 +145,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, info, modules, tags, grades);
+        return Objects.hash(name, phone, email, info, moduleSet, tags, grades);
     }
 
     @Override

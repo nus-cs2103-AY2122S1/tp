@@ -8,13 +8,13 @@ import static java.util.Objects.requireNonNull;
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class code cannot have whitespaces.";
+    public static final String MESSAGE_CONSTRAINTS = "Class code must be alphanumeric. Only 1-8 characters allowed.";
     public static final String MESSAGE_DOES_NOT_EXIST = "Class with that code has yet to be created.";
 
     /*
      * The class code must not have any whitespace characters.
      */
-    public static final String VALIDATION_REGEX = "[^\\s]+";
+    public static final String VALIDATION_REGEX = "^\\p{Alnum}{1,8}$";
 
     public final String code;
 

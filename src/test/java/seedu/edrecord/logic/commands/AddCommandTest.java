@@ -26,7 +26,7 @@ import seedu.edrecord.model.ReadOnlyEdRecord;
 import seedu.edrecord.model.ReadOnlyUserPrefs;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
@@ -176,7 +176,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasModulesAndGroups(ModuleGroupMap mod) {
+        public boolean hasModulesAndGroups(ModuleSet mod) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -232,6 +232,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasAssignmentInCurrentModule(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isTotalWeightageExceeded(Assignment toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -325,7 +330,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasModulesAndGroups(ModuleGroupMap mod) {
+        public boolean hasModulesAndGroups(ModuleSet mod) {
             return true;
         }
     }

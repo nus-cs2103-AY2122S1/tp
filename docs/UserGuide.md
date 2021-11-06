@@ -76,6 +76,8 @@ Some symbols used in this guide:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* **Scope of commands**: All commands work within the currently selected module. If no module is selected, then the commands will work on all students across all modules. (see also [cd](#working-within-a-specific-module-cd))
+
 </div>
 
 ### Viewing help : `help`
@@ -141,11 +143,11 @@ Examples:
 
 #### Listing all students: `list`
 
-Shows a list of all students matching the specified tags or list of all students if no tags are specified.
+Shows a list of all students in the current module matching the specified tags or list of all students in the current module if no tags are specified.
 
 #### Locating students by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords *in the current module*.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -155,8 +157,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no module is selected, the scope of the command would be across all modules.
 
 Examples:
+
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
@@ -167,7 +171,7 @@ Format: `list [TAG]…​`
 
 #### Working within a specific module: `cd`
 
-Changes the working directory to a specific module in EdRecord.
+Changes the working directory to a specific module in EdRecord, and shows the students of that module.
 
 Format: `cd MODULE`
 
@@ -284,27 +288,28 @@ Format: `mkasg n/NAME w/WEIGHTAGE s/MAXSCORE`
 
 * This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
 * `WEIGHTAGE` is a number from 0 to 100 with at most 2 decimal places, indicating the weightage of the assignment in percentage.
-* `MAXSCORE` is a non-negative decimal value, indicating the maximum score for the assignment.
+* `MAXSCORE` is a non-negative decimal value, indicating the maximum score attainable for the assignment.
 
 <div markdown="span" class="alert alert-primary">:information_source: 
-You won't be able to create an assignment if adding that assignment makes the total weightage of the module exceed 100%.
+You won't be able to create an assignment if adding that assignment makes the total weightage of all assignments in the module exceed 100%.
 </div>
 
-Examples:
+Example:
 
-* If you are in module CS1010S, `mkasg n/Side quest 10 w/2.5 s/50` will create a new assignment called `Side quest 10` with weightage 2.5% and maximum score 50 under that module.
+* If you are in module CS1010S, `mkasg n/Midterm w/12.5 s/50` will create a new assignment called `Midterm` with weightage 12.5% and maximum score 50 under that module.
 
-#### Editing an assignment: `mkasg`
+#### Editing an assignment: `edasg`
 
 Edits an assignment under the currently selected module.
 
-Format: `edasg INDEX [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`
+Format: `edasg ID [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`
 
 * This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
-* Edits the assignment at the specified `INDEX` as shown by the [assignment view](#toggling-the-view-view).
+* `ID` represents the unique ID of the assignment, as displayed in the [assignment view](#toggling-the-view-view).
+* Edits the assignment identified by `ID`.
 
 <div markdown="span" class="alert alert-primary">:bulb: 
-We recommend that you switch to Assignment View before editing an assignment, so that you have a clear idea what its index number is. Editing assignments without Assignment View is more prone to mistakes and can lead to unexpected results.
+We recommend that you switch to Assignment View before editing an assignment, so that you have a clear idea what its ID is. Editing assignments without Assignment View is more prone to mistakes and can lead to unexpected results.
 </div>
 
 * At least one of the optional fields must be provided.
@@ -312,50 +317,64 @@ We recommend that you switch to Assignment View before editing an assignment, so
 * When editing weightage, EdRecord will report an error if the new weightage causes the total module weightage to exceed 100%.
 * If the maximum score is edited but this new `MAXSCORE` is lower than an existing student grade for that assignment, EdRecord will also reject the edit.
 
-Examples:
+Example:
 
-* If you are in module CS1010S, `edasg 1 n/The Hungry Games w/10` will edit the 1st assignment listed in CS1010S, and change its name to `The Hungry Games` with a new weightage of 10%.
+* If you are in module CS2103, `edasg 1 n/PE Dry Run w/0` will edit the assignment with ID number 1 in CS2103, and change its name to `PE Dry Run` with a new weightage of 0%.
 
 #### Deleting an assignment: `dlasg`
 
 Deletes an assignment in the currently selected module.
 
-Format: `dlasg INDEX`
+Format: `dlasg ID`
 
 * This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
-* Deletes the assignment at the specified `INDEX` as shown by the [assignment view](#toggling-the-view-view).
-* Similar to editing assignment, we recommend that you use the [assignment view](#toggling-the-view-view) for this feature.
+* `ID` represents the unique ID of the assignment, as displayed in the [assignment view](#toggling-the-view-view).
+* Deletes the assignment identified by `ID`. 
+* Similar to editing assignment, we recommend that you use the [assignment view](#toggling-the-view-view) when deleting assignments.
 
-Examples:
+Example:
 
-* `dlasg 2` will delete the 2nd assignment shown under the module you are currently in.
+* `dlasg 2` will delete the assignment with ID number 2 in the module you are currently in.
 
 
 ### Managing students' grades
 
 Keeping assignments without the students' grades is not of much use to teaching assistants. EdRecord can help you record the grades of students for each submission!
 
-#### Grade a student's assignment : `grade`
+#### Grading a student's assignment: `grade`
 
-Format: `grade INDEX n/ASSIGNMENT st/STATUS [s/SCORE]`
+Grades a student for the specified assignment.
 
-* This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
-* Assigns a grade to the student identified specified `INDEX` used in the displayed student list. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* `ASSIGNMENT` refers to the name of the assignment that this grade should be assigned to. The name of the assignment is **case sensitive**.
-* Status has 3 possible inputs: Not submitted, Submitted or Graded
-* Score must be equal or less than the assignment's maximum score
+Format: `grade INDEX id/ID st/STATUS [s/SCORE]`
 
-#### Delete a student's grade : `dlgrade`
+- This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
+- Assigns a grade to the student identified specified `INDEX` used in the displayed student list. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+- `ID` represents the unique ID of the assignment, as displayed in the assignments view (`view asg`)
+- Status has 3 possible inputs: Not submitted, Submitted or Graded
+- Score must be less than or equal to the assignment's maximum score
+- If the student has an existing grade for this assignment, it will be overwritten.
 
-Format: `dlgrade INDEX n/ASSIGNMENT`
+Examples:
 
-* This command can only be made after changing directory to a particular module (i.e `cd MODULE`),
-* `ASSIGNMENT` refers to the name of the assignment that the grade was assigned to. The name of the assignment is **case sensitive**.
-* Deletes a grade for the specified assignment from the student at the specified `INDEX` used in the displayed student list.
+- `grade 2 id/3 st/submitted`
+- `grade 3 id/4 st/graded s/35`
+
+#### Deleting a student's grade : `dlgrade`
+
+Deletes a grade for the specified assignment from the student at the specified `INDEX` used in the displayed student list.
+
+Format: `dlgrade INDEX id/ID`
+
+- This command can only be made after changing directory to a particular module (i.e `cd MODULE`),
+- `ID` represents the unique ID of the assignment, as displayed in the assignments view (`view asg`)
+
+Example:
+
+- `dlgrade 3 id/4`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from EdRecord.
+Clears all entries, both contacts and modules/groups, from EdRecord.
 
 Format: `clear`
 
@@ -377,10 +396,6 @@ EdRecord data is saved as a JSON file `[JAR file location]/data/edrecord.json`. 
 If your changes to the data file makes its format invalid, EdRecord will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -392,27 +407,27 @@ _Details coming soon ..._
 
 ## Command summary
 
-|Action| Format, Examples|
---------|------------------
-|**Add Student**| `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless`|
-| **Edit Student**| `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@u.nus.edu`|
-| **Delete Student**| `delete INDEX`<br> e.g., `delete 3`|
-| **List Module**| `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`|
-| **Create Module**| `mkmod MODULE`<br> e.g., `mkmod CS2103`|
-| **Delete Module**| `dlmod MODULE`<br> e.g., `dlmod CS2103`|
-| **List Class**| `lsclass`<br> e.g., `lsclass`|
-| **Create Class**| `mkclass m/MODULE c/CLASS`<br> e.g., `mkclass m/CS2103 c/T09`|
-| **Delete Class**| `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`|
-| **Create Assigment**| `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`|
-| **Edit Assignment**| `edasg INDEX [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run w/12.5 s/10`|
-| **Delete Assignment**| `dlasg INDEX`<br> e.g., `dlasg 1`|
-| **Move Student into Class in Module**| `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`|
-| **Remove Student from Class in Module**| `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`|
-| **Grade an Assignment**| `grade INDEX n/ASSIGNMENT st/STATUS [s/SCORE]`<br> e.g.,`grade 4 n/Attendance st/Graded s/1`|
-| **Delete student's grade**| `dlgrade INDEX n/ASSIGNMENT`<br> e.g.,`dlgrade 3 n/Midterm`|
-| **Toggle view** | `view (contacts/asg)`<br> e.g.,`view contacts`|
-| **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
-| **List** | `list [TAG]…​`|
-| **Clear**| `clear`|
-| **Help** | `help`|
-| **Exit** | `exit`|
+| Action                                  | Format, Examples                                                                                                                                                      |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add Student**                         | `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless` |
+| **Edit Student**                        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@u.nus.edu`                                              |
+| **Delete Student**                      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **List Module**                         | `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`                                                                                                                              |
+| **Create Module**                       | `mkmod MODULE`<br> e.g., `mkmod CS2103`                                                                                                                               |
+| **Delete Module**                       | `dlmod MODULE`<br> e.g., `dlmod CS2103`                                                                                                                               |
+| **List Class**                          | `lsclass`<br> e.g., `lsclass`                                                                                                                                         |
+| **Create Class**                        | `mkclass m/MODULE c/CLASS`<br> e.g., `mkclass m/CS2103 c/T09`                                                                                                         |
+| **Delete Class**                        | `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`                                                                                                         |
+| **Move Student into Class in Module**   | `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`                                                                                                            |
+| **Remove Student from Class in Module** | `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`                                                                                                            |
+| **Create Assigment**                    | `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`                                                                               |
+| **Edit Assignment**                     | `edasg ID [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run w/12.5 s/10`                                                                           |
+| **Delete Assignment**                   | `dlasg ID`<br> e.g., `dlasg 1`                                                                                                                                        |
+| **Grade an Assignment**                 | `grade INDEX id/ID st/STATUS [s/SCORE]`<br> e.g.,`grade 4 id/2 st/Graded s/50`                                                                                        |
+| **Delete student's grade**              | `dlgrade INDEX id/ID`<br> e.g.,`dlgrade 3 id/3`                                                                                                               |
+| **Toggle view**                         | `view (contacts/asg)`<br> e.g.,`view contacts`                                                                                                                        |
+| **Find**                                | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**                                | `list [TAG]…​`                                                                                                                                                        |
+| **Clear**                               | `clear`                                                                                                                                                               |
+| **Help**                                | `help`                                                                                                                                                                |
+| **Exit**                                | `exit`                                                                                                                                                                |

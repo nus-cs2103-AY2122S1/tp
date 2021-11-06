@@ -9,7 +9,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.person.Person;
 
 /**
@@ -49,7 +49,7 @@ public class DeleteGroupCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasModule(module)) {
-            throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
+            throw new CommandException(String.format(Module.MESSAGE_DOES_NOT_EXIST, module));
         }
 
         Module savedMod = model.getModule(module);
@@ -58,8 +58,8 @@ public class DeleteGroupCommand extends Command {
         }
 
         for (Person p : model.getEdRecord().getPersonList()) {
-            ModuleGroupMap mods = p.getModules();
-            if (mods.containsModule(savedMod)) {
+            ModuleSet mods = p.getModules();
+            if (mods.containsModule(savedMod) && mods.containsGroupInModule(savedMod, group)) {
                 mods.removeGroup(savedMod, group);
             }
         }

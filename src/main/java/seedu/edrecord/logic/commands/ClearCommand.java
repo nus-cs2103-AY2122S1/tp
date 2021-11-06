@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.edrecord.model.EdRecord;
 import seedu.edrecord.model.Model;
+import seedu.edrecord.model.module.ModuleSystem;
 
 /**
  * Clears edrecord.
@@ -18,6 +19,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setEdRecord(new EdRecord());
+        model.setModuleSystem(new ModuleSystem());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

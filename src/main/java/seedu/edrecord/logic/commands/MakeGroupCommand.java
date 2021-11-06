@@ -48,7 +48,7 @@ public class MakeGroupCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasModule(module)) {
-            throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
+            throw new CommandException(String.format(Module.MESSAGE_DOES_NOT_EXIST, module));
         }
 
         Module mod = model.getModule(module);

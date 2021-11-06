@@ -16,7 +16,7 @@ import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
@@ -59,14 +59,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        if (!Module.MODULE_SYSTEM.hasModule(module.getCode())) {
-            throw new ParseException(Module.MESSAGE_DOES_NOT_EXIST);
+        if (!Module.MODULE_SYSTEM.hasModule(module)) {
+            throw new ParseException(String.format(Module.MESSAGE_DOES_NOT_EXIST, module));
         }
 
-        module.addGroup(group);
-        ModuleGroupMap moduleGroupMap = new ModuleGroupMap();
-        moduleGroupMap.add(module, group);
-        Person person = new Person(name, phone, email, info, moduleGroupMap, tagList, new AssignmentGradeMap());
+        ModuleSet moduleSet = new ModuleSet();
+        moduleSet.add(module, group);
+        Person person = new Person(name, phone, email, info, moduleSet, tagList, new AssignmentGradeMap());
 
         return new AddCommand(person);
     }

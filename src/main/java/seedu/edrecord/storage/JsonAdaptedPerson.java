@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.edrecord.commons.exceptions.IllegalValueException;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
@@ -112,42 +112,50 @@ class JsonAdaptedPerson {
 
         if (mods == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleGroupMap.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleSet.class.getSimpleName()));
         }
-        ModuleGroupMap moduleGroupMap = new ModuleGroupMap();
+
+        ModuleSet moduleSet = new ModuleSet();
         String[] modGroupPairs = mods.split(" ");
         for (String modGroupPair : modGroupPairs) {
             String[] modGroupArray = modGroupPair.split(":");
             if (modGroupArray.length != 2) {
-                throw new IllegalValueException(ModuleGroupMap.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(ModuleSet.MESSAGE_CONSTRAINTS);
             }
             String mod = modGroupArray[0];
-            String group = modGroupArray[1];
-
             if (!Module.isValidModuleCode(mod)) {
                 throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
             }
             if (!Module.MODULE_SYSTEM.hasModule(mod)) {
-                throw new IllegalValueException(Module.MESSAGE_DOES_NOT_EXIST);
+                throw new IllegalValueException(String.format(Module.MESSAGE_DOES_NOT_EXIST, mod));
             }
             final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
 
-            if (!Group.isValidGroup(group)) {
-                throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+            String groups = modGroupArray[1];
+            if (groups.length() <= 1 || groups.charAt(0) != '[' || groups.charAt(groups.length() - 1) != ']') {
+                throw new IllegalValueException(ModuleSet.MESSAGE_GROUP_CONSTRAINTS);
             }
-            if (!modelModule.getGroupSystem().hasGroup(group)) {
-                throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
+            groups = ModuleSet.parseGroups(groups);
+            String[] groupArray = groups.split(",");
+
+            for (String group : groupArray) {
+                if (!Group.isValidGroup(group)) {
+                    throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+                }
+                if (!modelModule.getGroupSystem().hasGroup(group)) {
+                    throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
+                }
+                final Group modelGroup = modelModule.getGroup(group);
+                if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
+                    modelModule.getGroupSystem().addGroup(modelGroup);
+                }
+                moduleSet.addToSet(modelModule);
             }
-            final Group modelGroup = modelModule.getGroup(group);
-            if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
-                modelModule.getGroupSystem().addGroup(modelGroup);
-            }
-            moduleGroupMap.add(modelModule, modelGroup);
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // TODO change `new AssignmentGradeMap()` to save grades
-        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags,
+        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleSet, modelTags,
                 new AssignmentGradeMap());
     }
 

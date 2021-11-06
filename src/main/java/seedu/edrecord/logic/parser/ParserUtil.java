@@ -153,7 +153,7 @@ public class ParserUtil {
      */
     public static Group parseGroup(String groupCode) throws ParseException {
         requireNonNull(groupCode);
-        String trimmedGroupCode = groupCode.trim();
+        String trimmedGroupCode = groupCode.trim().toUpperCase();
 
         if (!Group.isValidGroup(trimmedGroupCode)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);

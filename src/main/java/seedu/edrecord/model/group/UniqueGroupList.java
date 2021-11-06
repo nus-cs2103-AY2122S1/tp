@@ -3,7 +3,6 @@ package seedu.edrecord.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -127,10 +126,13 @@ public class UniqueGroupList implements Iterable<Group> {
 
     @Override
     public String toString() {
-        List<Group> groups = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
         for (Group group : internalList) {
-            groups.add(group);
+            sb.append(group).append(",");
         }
-        return groups.toString();
+        sb.delete(sb.length() - 1, sb.length());
+        sb.append("]");
+        return sb.toString();
     }
 }

@@ -19,21 +19,7 @@ public class JsonSerializableEdRecordTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonEdRecord.json");
 
     // TODO: Add assignments to a person's modules in json format, so that this tests can pass.
-    /*     @Test
-        public void toModelType_typicalPersonsFile_success() throws Exception {
-            setTypicalModuleSystem();
-            JsonSerializableEdRecord dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
-                    JsonSerializableEdRecord.class).get();
-            EdRecord edRecordFromFile = dataFromFile.toModelType();
-            EdRecord typicalPersonsEdRecord = TypicalPersons.getTypicalEdRecord();
-            for (Person typicalPerson : typicalPersonsEdRecord.getPersonList()) {
-                for (Map.Entry<Module, Group> modGroupPair : typicalPerson.getModules().getMapping().entrySet()) {
-                    modGroupPair.getKey().setGroupSystem(getTypicalGroupSystem());
-                }
-            }
-            assertEquals(edRecordFromFile, typicalPersonsEdRecord);
-        }
-     */
+    /*:ee*/
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
         JsonSerializableEdRecord dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,

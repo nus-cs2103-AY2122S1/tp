@@ -7,7 +7,6 @@ import static seedu.edrecord.model.person.PartOfModulePredicate.PREDICATE_SHOW_A
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -23,7 +22,7 @@ import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ModuleSystem;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.name.Name;
@@ -168,18 +167,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasModulesAndGroups(ModuleGroupMap mods) {
+    public boolean hasModulesAndGroups(ModuleSet mods) {
         requireNonNull(mods);
-        for (Map.Entry<Module, Group> modClassPair : mods.getMapping().entrySet()) {
-            Module mod = modClassPair.getKey();
-            if (!hasModule(mod)) {
+        for (Module module : mods.getModules()) {
+            if (!hasModule(module)) {
                 return false;
             }
 
-            Module modelModule = getModule(mod);
-            Group group = modClassPair.getValue();
-            if (!modelModule.hasGroup(group)) {
-                return false;
+            Module modelModule = getModule(module);
+            for (Group group : module.getGroupList()) {
+                if (!modelModule.hasGroup(group)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -251,6 +250,14 @@ public class ModelManager implements Model {
     @Override
     public boolean hasAssignmentInCurrentModule(Assignment assignment) {
         return hasSelectedModule() && selectedModule.get().hasAssignment(assignment);
+    }
+
+    @Override
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        if (!hasSelectedModule()) {
+            return false;
+        }
+        return selectedModule.get().isTotalWeightageExceeded(toAdd);
     }
 
     @Override

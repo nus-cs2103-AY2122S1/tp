@@ -17,7 +17,7 @@ import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.assignment.Score;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
@@ -117,7 +117,7 @@ public class GradeCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Info updatedInfo = personToEdit.getInfo();
-        ModuleGroupMap updatedModule = personToEdit.getModules();
+        ModuleSet updatedModule = personToEdit.getModules();
         Set<Tag> updatedTags = personToEdit.getTags();
         AssignmentGradeMap updatedGrades = personToEdit.getGrades();
         updatedGrades.add(assignment, grade);

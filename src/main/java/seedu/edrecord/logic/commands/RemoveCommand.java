@@ -13,11 +13,11 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.person.Person;
 
 /**
- * Removes an existing person in edrecord from an existing mod and class.
+ * Removes an existing person in edrecord from an existing mod's class.
  */
 public class RemoveCommand extends Command {
 
@@ -32,8 +32,8 @@ public class RemoveCommand extends Command {
             + PREFIX_MODULE + "CS2103 "
             + PREFIX_GROUP + "T01";
 
-    public static final String MESSAGE_MODULE_DOES_NOT_EXIST_IN_PERSON = "%1$s is not under %2$s!";
-    public static final String MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON = "%1$s is not under %2$s!";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST_IN_PERSON = "%1$s is not under module %2$s!";
+    public static final String MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON = "%1$s's module %2$s does not have class %3$s!";
     public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Removed %1$s from %2$s/%3$s";
     public static final String MESSAGE_MOVE_PERSON_FAILURE = "Removing %1$s from %2$s/%3$s was unsuccessful!";
 
@@ -66,7 +66,7 @@ public class RemoveCommand extends Command {
         }
 
         if (!model.hasModule(module)) {
-            throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
+            throw new CommandException(String.format(Module.MESSAGE_DOES_NOT_EXIST, module));
         }
         Module savedMod = model.getModule(module);
         if (!savedMod.hasGroup(group)) {
@@ -74,20 +74,17 @@ public class RemoveCommand extends Command {
         }
 
         Person personToMove = lastShownList.get(index.getZeroBased());
-        ModuleGroupMap moduleGroupMap = personToMove.getModules();
-        if (!moduleGroupMap.containsModule(savedMod)) {
+        ModuleSet moduleSet = personToMove.getModules();
+        if (!moduleSet.containsModule(savedMod)) {
             throw new CommandException(
                     String.format(MESSAGE_MODULE_DOES_NOT_EXIST_IN_PERSON, personToMove.getName(), savedMod));
         }
-        if (!moduleGroupMap.containsGroup(savedMod, group)) {
+        if (!moduleSet.containsGroupInModule(savedMod, group)) {
             throw new CommandException(
-                    String.format(MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON, personToMove.getName(), group));
+                    String.format(MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON, personToMove.getName(), savedMod, group));
         }
 
-        if (!personToMove.getModules().removeGroup(savedMod, group)) {
-            throw new CommandException(
-                    String.format(MESSAGE_MOVE_PERSON_FAILURE, personToMove.getName(), savedMod, group));
-        }
+        personToMove.getModules().removeGroup(savedMod, group);
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MOVE_PERSON_SUCCESS, personToMove.getName(), savedMod, group));
     }
