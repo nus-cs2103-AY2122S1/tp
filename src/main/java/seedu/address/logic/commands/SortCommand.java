@@ -2,13 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
@@ -24,9 +19,10 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts all contacts by a specified property in ascending order.\n"
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Sorts all contacts by a specified property in ascending order.\n\n"
+            + "Parameter: [FIELD_PREFIX/]\n"
+            + "FIELD_PREFIX/ can be any of the following:\n"
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_GENDER + "] "
             + "[" + PREFIX_PHONE + "] "
@@ -34,7 +30,7 @@ public class SortCommand extends Command {
             + "[" + PREFIX_NATIONALITY + "] "
             + "[" + PREFIX_TUTORIAL_GROUP + "] "
             + "[" + PREFIX_REMARK + "] "
-            + "\n"
+            + "\n\n"
             + "Example: " + COMMAND_WORD + " n/";
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by %s in ascending order";
