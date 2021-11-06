@@ -575,7 +575,7 @@ Same as UC02P but references to patient is replaced with doctor instead.
 **Use case: UC03D Finding doctors** <br>
 **Precondition:** PlannerMD is displaying the doctor tab.
 
-Same as UC02P but references to patient is replaced with doctor instead.
+Same as UC03P but references to patient is replaced with doctor instead.
 
 **Use case: UC04P Deleting a patient** <br>
 **Precondition:** PlannerMD is displaying the patient tab.
