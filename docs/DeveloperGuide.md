@@ -219,7 +219,6 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 4. The group is added to the application if Step 3 completes without any exceptions.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
-
 </div>
 
 The following activity diagrams summarizes what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
@@ -249,7 +248,6 @@ Step 3. The `AllocDescriptor` is used to find the group and the student(s) as sp
 Step 4. The student is allocated into the group.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
-
 </div>
 
 The following activity diagram summarises what happens when a user executes the `addalloc` command to allocate a student into a group. In the case where the allocation is not made successfully, an error message will be displayed with the reason.
@@ -356,7 +354,6 @@ Step 3. The `ScoreDescriptor` is used to find the assessment and the student(s) 
 * If there are multiple matched students, the update is not made successfully, and the student list is updated with all matched students.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
-
 </div>
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
