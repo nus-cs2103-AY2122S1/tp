@@ -158,7 +158,7 @@ This section details the various components of LeadsForce's interface and how yo
 ### 4.1 Command 
 The command portion is where you will be able to input commands into LeadsForce.
 
-<img src=images/CommandViewInterface.png width="300"/>
+<img src=images/CommandViewInterface.png width="500"/>
 <br> 
 The command view consist of the following components: 
 
@@ -180,17 +180,16 @@ The command view consist of the following components:
 ### 4.2 Client List 
 The client list view consist of a list of clients. <br>  
 • This list will change according to the commands used - `search`, `filter`, `list`, `clear`, among others. <br>
-• The client list view also provides users with an overview of the client's information.
-<img src=images/ClientListView.png width="300"/>
+• The client list view also provides users with an overview of the client's information. <br> 
+<img src=images/ClientListView.png width="500"/>
 <br>
 
 ### 4.3 Client Info 
-The client information view provides in-depth information about the client's attributes. Using the [`view`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info view.
-<img src=images/ClientInfoView.png width="300"/>
+The client information view provides in-depth information about the client's attributes. Using the [`view`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info view. <br> 
+<img src=images/ClientInfoView.png width="500"/>
+<br> 
 ### 4.3 Meeting Schedule 
-The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to the latest meeting that the client has. When first booting up the application, all meetings will be shown. <br> <br> 
-
-Using the [`Schedule`](#57-find-meeting-schedule--schedule) command can change the list of meetings shown to the user.
+The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to the latest meeting that the client has. When first booting up the application, all meetings will be shown. Using the [`Schedule`](#57-find-meeting-schedule--schedule) command can change the list of meetings shown to the user.
 
 
 ## 5. Features
