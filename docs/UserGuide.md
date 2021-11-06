@@ -454,11 +454,10 @@ Format: `mark INDEX…​`
 
 Examples:
 * After using the command `list`, `mark 1` marks the 1st applicant listed in RecruitIn as "Done".
-  
 
-  Before: ![images](images/MarkBefore.png)
+Before: ![images](images/MarkBefore.png)
 
-  After: ![images](images/MarkAfter.png)
+After: ![images](images/MarkAfter.png)
 
 * After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 * After using the command `find n/John`, `mark 1` marks the 1st applicant listed in RecruitIn's results of the `find` command.
@@ -482,6 +481,11 @@ Format: `unmark INDEX…​`
 
 Examples:
 * After using the command `list`, `ummark 1` unmarks the 1st applicant listed in RecruitIn to "Not Done".
+
+Before: ![images](images/UnmarkBefore.png)
+
+After: ![images](images/UnmarkAfter.png)
+
 * After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 * After using the command `find n/John`, `unmark 1` unmarks the 1st applicant listed in RecruitIn's results of the `find` command.
 
@@ -491,6 +495,12 @@ The `delete_marked` command deletes all applicants that are currently marked as 
 This provides an easy way for you to delete the data of all applicants you no longer need.
 
 Format: `delete_marked`
+
+Example:
+
+Before: ![images](images/DeleteMarkedBefore.png)
+
+After: ![images](images/DeleteMarkedAfter.png)
 
 ### Exiting the program : `exit`
 
