@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/lrnshk.md)]
 
 * Role: Team Lead
-* Responsibilities: Scheduling
+* Responsibilities: Scheduling, Deliverables and Documentation
 
 ### Lutfi Randiva
 
