@@ -23,7 +23,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up and getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -79,7 +79,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI Component
+### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/ui/Ui.java)
 
@@ -96,7 +96,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-### Logic Component
+### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/logic/Logic.java)
 
@@ -151,7 +151,7 @@ The `Model` component,
 
 </div>
 
-### Storage Component
+### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/storage/Storage.java)
 
@@ -162,7 +162,7 @@ The `Storage` component,
 * inherits from both `SourceControlStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common Classes
+### Common classes
 
 Classes used by multiple components are in the `seedu.sourcecontrol.commons` package.
 
@@ -374,7 +374,7 @@ The following sequence diagram summarises what happens when the user inputs an `
 <br>
 
 
-### Alias feature
+### Alias : `alias`
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
 
@@ -607,7 +607,7 @@ Others:
 
       Use case resumes at step 1.
 
-### Non-Functional Requirements
+### Non-functional requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -630,7 +630,7 @@ Others:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -639,7 +639,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and Shutdown
+### Launch and shutdown
 
 1. Initial launch
 
@@ -746,7 +746,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `alias -c addstudent -as add student `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that alias can only be one alphanumeric word.
 
-### Saving Data
+### Saving data
 
 1. Dealing with missing/corrupted data files
 
