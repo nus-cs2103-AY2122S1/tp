@@ -103,6 +103,7 @@ The features are categorised into the different categories as follows:
 
 * [Getting Help](#getting-help)
 * [Managing Students](#managing-students)
+* [Finding Students](#finding-students)
 * [Managing Lessons](#managing-lessons)
 * [Managing Lesson Fees](#managing-lesson-fees)
 * [Managing Your Schedule](#managing-your-schedule)
