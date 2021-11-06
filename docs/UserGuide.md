@@ -259,7 +259,7 @@ Format: `dlgrade INDEX n/ASSIGNMENT`
 
 ### Locating students by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords *in the current module*. 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -269,6 +269,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no module is selected, the scope of the command would be across all modules.
 
 Examples:
 * `find John` returns `john` and `John Doe`
