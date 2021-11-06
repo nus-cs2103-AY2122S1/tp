@@ -1,6 +1,7 @@
 package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.core.Messages.MESSAGE_POLICIES_LIST_EMPTY;
 
 import java.util.Comparator;
 
@@ -26,8 +27,6 @@ public class SortPolicyCommand extends Command {
 
     public static final String MESSAGE_NO_SUCH_COMPARATOR = "No such sorting order";
 
-    public static final String MESSAGE_NO_POLICIES = "There are no policies to sort";
-
     private final Comparator<Policy> comparator;
 
     public SortPolicyCommand() {
@@ -43,10 +42,11 @@ public class SortPolicyCommand extends Command {
         requireNonNull(model);
         if (comparator != null) {
             model.updateFilteredPolicyList(comparator);
-            if (model.getFilteredPolicyList().isEmpty()) {
-                return new CommandResult(MESSAGE_NO_POLICIES);
-            } else {
+
+            if (model.getFilteredPolicyList().size() > 0) {
                 return new CommandResult(MESSAGE_SUCCESS);
+            } else {
+                return new CommandResult(MESSAGE_POLICIES_LIST_EMPTY);
             }
         } else {
             return new CommandResult(MESSAGE_NO_SUCH_COMPARATOR);

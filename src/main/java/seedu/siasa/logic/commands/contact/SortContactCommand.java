@@ -1,6 +1,7 @@
 package seedu.siasa.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.core.Messages.MESSAGE_CONTACTS_LIST_EMPTY;
 
 import java.util.Comparator;
 
@@ -25,8 +26,6 @@ public class SortContactCommand extends Command {
 
     public static final String MESSAGE_NO_SUCH_COMPARATOR = "No such sorting order";
 
-    public static final String MESSAGE_NO_POLICIES = "There are no policies to sort";
-
     private final Comparator<Contact> comparator;
 
     public SortContactCommand() {
@@ -42,10 +41,11 @@ public class SortContactCommand extends Command {
         requireNonNull(model);
         if (comparator != null) {
             model.updateFilteredContactList(comparator);
-            if (model.getFilteredPolicyList().isEmpty()) {
-                return new CommandResult(MESSAGE_NO_POLICIES);
-            } else {
+
+            if (model.getFilteredContactList().size() > 0) {
                 return new CommandResult(MESSAGE_SUCCESS);
+            } else {
+                return new CommandResult(MESSAGE_CONTACTS_LIST_EMPTY);
             }
         } else {
             return new CommandResult(MESSAGE_NO_SUCH_COMPARATOR);
