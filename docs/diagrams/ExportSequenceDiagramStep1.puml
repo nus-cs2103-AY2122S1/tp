@@ -8,10 +8,10 @@ participant ":ExportCommandParser" as ExportCommandParser LOGIC_COLOR
 participant "e:ExportCommand" as ExportCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("export newfriends.json")
+[-> LogicManager : execute("export cs2103t.json")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("export newfriends.json")
+LogicManager -> AddressBookParser : parseCommand("export cs2103t.json")
 activate AddressBookParser
 
 create ExportCommandParser
@@ -21,7 +21,7 @@ activate ExportCommandParser
 ExportCommandParser --> AddressBookParser
 deactivate ExportCommandParser
 
-AddressBookParser -> ExportCommandParser : parse("newfriends.json")
+AddressBookParser -> ExportCommandParser : parse("cs2103t.json")
 activate ExportCommandParser
 
 create ExportCommand
