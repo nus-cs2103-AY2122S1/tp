@@ -169,12 +169,12 @@ The `Storage` component,
   and user preference data in json format, and read them back into corresponding objects.
 * The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
   and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* Each Book Storage component (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of making converting the model's data into correct json file and retrieving the data from 
+* Each Book Storage component (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of converting the model's data into correct json file and retrieving the data from 
   the json file to convert it to a model data.
 * Each `JsonSerializable` class implements its own `JsonAdapted` class which specifies methods to convert model Object
   (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
 * The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the 
-  case when any of the format is wrong, it will then throw a `IllegalValueException` and  `IllegalValueException`
+  case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`
 ### Common classes
 
 Classes used by multiple components are in the `seedu.salesnote.commons` package.
