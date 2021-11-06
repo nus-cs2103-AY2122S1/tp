@@ -371,9 +371,8 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 * The next `<number_of_tag_columns>` columns, refer to the student's tags.
 * The number of group columns, assessment columns, and tag columns are assumed to be 0 if they are not specified.
 
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **Tips:**<br>
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
 
 * `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups.
 The similar applies for `<number_of_tag_columns>`.
@@ -475,7 +474,15 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing aliases can still be used after new alias is added. E.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+
 * The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously.
+* Default commands cannot be overwritten to perform different functionalities, and cannot be deleted.
+
+</div>
+
 
 Examples:
 * `alias -c addstudent -as example`
@@ -577,6 +584,7 @@ Group | Group name can be any alphanumeric words. | `Tutorial Group 2`
 Assessment | Assessment name can be any alphanumeric words. | `Practical Assessment 2`
 Score | Score is in percentage, recorded up to 2 decimal places. | `67.75`
 Tag | Tag can be a single alphanumeric word. | `Beginner1`
+Alias | Command alias can be a single alphanumeric word. | `addstu1`
 
 [Return to Table of Contents](#table-of-contents)
 

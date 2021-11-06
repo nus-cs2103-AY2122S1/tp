@@ -474,35 +474,84 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Shutdown
+
+   1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically. 
+
+
+### Adding a group
+
+1. Adding a group successfully.
+   1. Prerequisites: Group should not already exist in database. Database contain a student with name `Hong Fai` and another student A with ID `E0123456`.
+   2. Test case: `addgroup -g T01A`<br> Expected: Group `T01A` will be added to the database.
+   3. Test case: `addgroup -g T02B -n Hong Fai -i E0123456`<br> Expected: Group `T02B` will be added to database with students `Hong Fai` and A in the group.
+   
+2. Adding a group with incorrect formats.
+   1. Test case: `addgroup`<br> Expected: No group is created. Error detail shown in the status message to inform user of the correct command format.
+   2. Test case: `addgroup -g`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name cannot be blank.
+   3. Test case: `addgroup -g Tutorial-1`<br> Expected: No group is created. Error detail shown in the status message to inform user that group name must be alphanumeric.
+
+3. Adding a group that already exists in database.
+   1. Prerequisite: Group specified already exists in database.
+   2. Test case: `addgroup -g T01A`<br> Expected: The group will not be re-created. Error details shown in the status message to inform user group already exists.
+
+4. Adding a group with duplicated student instances.
+   1. Prerequisites: Database contain a student with name `Hong Fai` with the ID `E0123456`.
+   2. Test case: `addgroup -g T01A -n Hong Fai -i E0123456`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` has been specified more than once.
+
+5. Adding a group with non-existent students.
+   1. Prerequisites: Database does not contain a student with name `Hong Fai`.
+   2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
+
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while a list of all students are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all students using the `list` command. Some students are displayed in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First student is deleted from the list. Details of the deleted student is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is an invalid number)<br>
+       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a student after searching.
+    1. Prerequisites: List selected students using the `search` command. Some students are displayed in the list.
+    2. Test case: `delete 1`<br> Expected: First student displayed on the sorted list is deleted. Details of the deleted student is shown in the status message. Timestamp in the status bar is updated.
+    3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an invalid number)<br>
+       Expected: Similar to previous.
+
+### Adding an alias
+1. Adding an alias successfully.
+   1. Test case: `alias -c addstudent -as example`<br> Expected: A new alias `example` is added for `addstudent`. `example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
+   2. Test case: `alias -c example -as example2`<br> Expected: A new alias `examples` is added for `addstudent` (the command `example` is mapped to).
+   3. Test case: `alias -c addgroup -as example`<br> Expected: The alias `example` is mapped to `addgroup` and no longer represent `addgroup`. `example -g T02A` will create a new group `T02A`.
+
+2. Deleting an alias successfully.
+   1. Prerequisites: An alias `example` exists. 
+   2. Test case: `alias -c example -as example`<br> Expected: Removes the alias `example`. `example` will no longer be recognised as a command.
+
+3. Deleting an alias unsuccessfully.
+   1. Test case: `alias -c addstudent -as addstudent`<br> Expected: The alias `addstudent` will not be removed. Error detail shown in the status message to inform user that default command cannot be overwritten.
+
+4. Adding an alias unsuccessfully.
+   1. Test case: `alias -c addgroup -as addstudent `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that default command cannot be overwritten.
+   2. Test case: `alias -c addstudent -as add student `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that alias can only be one alphanumeric word.
 
 ### Saving data
 
