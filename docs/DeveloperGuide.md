@@ -1107,17 +1107,19 @@ testers are expected to do more *exploratory* testing.
 ### Editing a contact
 1. Editing a contact
 
-  1. Test case: `edit 1 n/Singapore Flyers` <br>
-     Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
-  
-  1. Test case: `edit 0`<br>
-     Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
-  1. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
-     Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+    1. Test case: `edit 1 n/Singapore Flyers` <br>
+       Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
 
-1. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
-   Expected: Similar to previous.
+    1. Test case: `edit 0`<br>
+       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+
+    1. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
+       Expected: No contact is added. Error details shown in the status message. Summary is displayed.
+
+    1. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
+       Expected: Similar to previous.
 
 ### Deleting a contact
 
