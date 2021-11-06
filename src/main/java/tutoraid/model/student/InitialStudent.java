@@ -47,11 +47,11 @@ public class InitialStudent {
     public Student toStudent(List<Lesson> fullLessonList) {
         Lessons lessons = new Lessons();
         for (String lessonName : lessonNames) {
-            Lesson lesson = fullLessonList.stream()
-                    .filter(l -> l.toNameString().equals(lessonName))
-                    .findFirst()
-                    .orElseThrow(LessonNotFoundException::new);
-            lessons.addLesson(lesson);
+            for (Lesson lesson : fullLessonList) {
+                if (lesson.toNameString().equals(lessonName)) {
+                    lessons.addLesson(lesson);
+                }
+            }
         }
         return new Student(studentName, studentPhone, parentName, parentPhone, progressList, lessons);
     }
