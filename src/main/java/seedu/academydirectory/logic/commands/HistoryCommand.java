@@ -48,10 +48,6 @@ public class HistoryCommand extends Command {
 
         Commit lca = currLatestCommit.findLca(oldLatestCommit);
 
-        Commit currLatestAncestor = currLatestCommit.getHighestAncestor(lca);
-        Commit oldLatestAncestor = oldLatestCommit.getHighestAncestor(lca);
-        assert !currLatestAncestor.equals(oldLatestAncestor); // Violates LCA definition
-
         List<Commit> earlyHistory = lca.getHistory();
         List<Commit> currLatestToEarly = currLatestCommit.getHistory(lca);
         List<Commit> oldLatestToEarly = oldLatestCommit.getHistory(lca);
