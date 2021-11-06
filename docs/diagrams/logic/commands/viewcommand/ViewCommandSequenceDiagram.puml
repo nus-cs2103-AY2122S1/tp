@@ -25,24 +25,10 @@ student --> viewCommand: studentToView
 deactivate student
 
 viewCommand -> versionedModel : setAdditionalViewType(AdditionalViewType.VIEW)
-activate versionedModel
 versionedModel -> addViewModel: setAdditionalViewType(VIEW)
-activate addViewModel
-addViewModel --> versionedModel
-deactivate addViewModel
-versionedModel --> viewCommand
-deactivate versionedModel
 
 viewCommand -> versionedModel : setAdditionalInfo(AdditionalInfo.of(studentToView))
-activate versionedModel
 versionedModel -> addViewModel: setAdditionalInfo(AdditionalInfo.of(studentToView))
-activate addViewModel
-addViewModel --> versionedModel
-deactivate addViewModel
-versionedModel --> viewCommand
-deactivate versionedModel
-
-deactivate versionedModel
 
 create commandResult
 viewCommand -> commandResult: new CommandResult(MESSAGE_SUCCESS)

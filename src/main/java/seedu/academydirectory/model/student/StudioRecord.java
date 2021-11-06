@@ -85,6 +85,10 @@ public class StudioRecord implements Information {
         return this.participation;
     }
 
+    /**
+     * Visualize studio participation and attendance for view
+     * @return studio record in complete
+     */
     public String visualizeForView() {
         String displayedInfo = "";
         for (int sessionNumber = 0; sessionNumber < numberOfSessions; sessionNumber++) {
