@@ -103,7 +103,6 @@ In [Glossary](#glossary), you will find useful descriptions and meanings of term
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 <div style="page-break-after: always"></div>
 
 ## **Quick start**
@@ -125,7 +124,9 @@ on any operating system including Windows, macOS or Linux
    
 1. When you first start up, FAST will contain some sample data for you to explore the different features.
 1. You are now ready to start managing your clients!
-   
+
+<div style="page-break-after: always"></div>
+
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
