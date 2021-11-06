@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private DetailedStudentCard detailedStudentCard;
     private HelpWindow helpWindow;
     private ResultPopup resultPopup;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
