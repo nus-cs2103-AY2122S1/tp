@@ -95,6 +95,9 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Refreshes the current filtered person list.
+     */
     void updateFilteredPersonList();
 
     /**
