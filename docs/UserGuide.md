@@ -153,7 +153,7 @@ Format: `rm INDEX m/MODULE c/CLASS`
 
 ### Toggle view: `view`
 
-Toggle the view between showing student details and showing module's assignments.
+Toggle the view between showing student details and showing module's assignments. This command works on the filtered list, toggling the view for students currently listed.
 
 Format: `view (contacts/asg)`
 
