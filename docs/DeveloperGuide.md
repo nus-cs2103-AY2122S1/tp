@@ -1376,7 +1376,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Enrolling a student into a lesson
 
-1. Enrolling a student into a lesson, while all students and lessons are being shown
+1. Enrolling a student into a lesson, while all students and lessons are being shown.
 
     * Prerequisites: Multiple "Students" and "Lessons" shown in the list of students and lessons. "Students" must not currently be enrolled in the "lesson" the user wishes to enroll the student in. 
 
@@ -1393,7 +1393,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student while all students are being shown.
 
     * Prerequisites: Multiple "Students" shown in the list of students.
     
@@ -1411,7 +1411,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Deleting a lesson
 
-1. Deleting a lesson while all lessons are being shown
+1. Deleting a lesson while all lessons are being shown.
 
     * Prerequisites: Multiple "Lessons" shown in the list of lessons.
 
