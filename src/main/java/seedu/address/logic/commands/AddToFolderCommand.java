@@ -24,9 +24,9 @@ public class AddToFolderCommand extends Command {
             + COMMAND_WORD + " "
             + "3 >> CS2103";
 
-    public static final String MESSAGE_SUCCESS = "Person added to folder: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This person already exists in this folder";
     public static final String MESSAGE_DUPLICATE_INDEX_PASSED = "Duplicate person indices passed";
+    public static final String MESSAGE_SUCCESS = "Person added to folder: %1$s";
 
     private final List<Index> indexList;
     private final FolderName folderName;
