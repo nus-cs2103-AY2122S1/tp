@@ -87,12 +87,12 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Encryption cryptor) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Encryption token) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
 
         try {
-            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+            token.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             addressBookOptional = storage.readAddressBook();
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             FileUtil.deleteFile(storage.getAddressBookFilePath());
@@ -220,15 +220,18 @@ public class MainApp extends Application {
     public boolean setUp(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
             UnsupportedPasswordException, InvalidKeyException, FileAlreadyExistsException {
         // Guard clause for the case when user adds a data file after opening the app.
+        logger.info("Setting up password.");
         if (hasEncryptedFile()) {
+            logger.warning("Data found on set up!");
             throw new FileAlreadyExistsException("");
         }
-        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
-        createEncryptedFile(cryptor);
+        Encryption token = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        createEncryptedFile(token);
 
         FileUtil.deleteFile(storage.getAddressBookFilePath());
-        model = initModelManager(storage, userPrefs, cryptor);
-        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
+        logger.info("Set up completed. Welcome to SPAM!");
+        model = initModelManager(storage, userPrefs, token);
+        logic = new LogicManager(model, storage, token, userPrefs.getEncryptedFilePath());
         new UiManager(logic).start(stage);
         isLoggedIn = true;
         return true;
@@ -248,22 +251,25 @@ public class MainApp extends Application {
     public boolean logIn(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
             UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException,
             FileNotFoundException {
-        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        Encryption token = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
         // Guard clause for the case when user removed the data file after opening the app.
         if (!hasEncryptedFile()) {
+            logger.warning("Data not found!");
             throw new FileNotFoundException();
         }
 
         // Password unable to decrypt the file.
         try {
-            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+            token.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
         } catch (IOException e) {
+            logger.info("Unable to decrypt data file.");
             return false;
         }
 
         FileUtil.deleteFile(storage.getAddressBookFilePath());
-        model = initModelManager(storage, userPrefs, cryptor);
-        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
+        logger.info("Welcome back!");
+        model = initModelManager(storage, userPrefs, token);
+        logic = new LogicManager(model, storage, token, userPrefs.getEncryptedFilePath());
         new UiManager(logic).start(stage);
         isLoggedIn = true;
         return true;
@@ -272,16 +278,16 @@ public class MainApp extends Application {
     /**
      * This method fails silently if encrypted file already exists.
      *
-     * @param cryptor The Encryption used.
+     * @param token The Encryption used.
      * @throws InvalidKeyException If the key supplied is invalid.
      */
-    private void createEncryptedFile(Encryption cryptor) throws InvalidKeyException {
-        requireNonNull(cryptor);
+    private void createEncryptedFile(Encryption token) throws InvalidKeyException {
+        requireNonNull(token);
         logger.info("Data file not found. Will be starting with a sample AddressBook");
         try {
             storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
             FileUtil.createFile(userPrefs.getEncryptedFilePath());
-            cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
+            token.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidKeyException e) {
