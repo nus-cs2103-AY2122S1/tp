@@ -122,7 +122,7 @@ public class DeleteTaskCommand extends Command {
     private List<Task> getTaskListToModify(Model model) {
         List<Task> taskListToModify;
         if (model.getIsViewAllTasks()) {
-            taskListToModify = model.getObservablePersonList().get(targetPersonIndex.getZeroBased()).getTasks();
+            taskListToModify = model.getViewAllTaskListPersons().get(targetPersonIndex.getZeroBased()).getTasks();
         } else {
             taskListToModify = model.getDisplayTaskList();
         }
@@ -141,7 +141,7 @@ public class DeleteTaskCommand extends Command {
     private List<Person> getLastShownList(Model model) {
         List<Person> lastShownList;
         if (model.getIsViewAllTasks()) {
-            lastShownList = model.getObservablePersonList();
+            lastShownList = model.getViewAllTaskListPersons();
         } else {
             lastShownList = model.getFilteredPersonList();
         }
