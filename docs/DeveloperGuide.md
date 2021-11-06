@@ -317,6 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `ModuLink` and the **Actor** is the `user`, unless specified otherwise.<br>
 **Preconditions:** User is logged in.)
 
+<br>
 
 **Use case: UC1 - Create user profile**
 
@@ -342,6 +343,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC2 - Add a profile to Favourites list**
 
+<br>
+
 **MSS**
 
 1.  User requests to add a specific profile to their favourites list.
@@ -360,6 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+<br>
 
 **Use case: UC3 - Remove a profile from Favourites list**
 
@@ -381,6 +385,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+<br>
+
 **Use case: UC4 - View Favourites list**
 
 **MSS**
@@ -390,24 +396,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<br>
 
 **Use case: UC5 - Remove a module from the user's profile**
 
 **MSS**
 
-1.  User requests to remove a module from their profile.
-2.  ModuLink removes the module from the profile.
+1. User requests to remove a module from their profile.
+2. ModuLink removes the module from the profile.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. The requested Module is invalid.
+
+    * 1a1. ModuLink shows an error message.
+    * 1a2. ModuLink requests for the correct ID.
+
+* 1b. The requested Module is not present in the users current module list.
+
+    * 1b1. ModuLink shows an error message.
+    * 1b2. ModuLink requests for the correct ID.
+    
+<br>
 
 **Use case: UC6 - Add a module to the user's profile**
 
 **MSS**
 
-1.  User requests to add a module from their profile.
-2.  ModuLink adds the module from the profile.
+1. User requests to add a module from their profile.
+2. ModuLink adds the module from the profile.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. The requested Module is invalid.
+
+    * 1a1. ModuLink shows an error message.
+    * 1a2. ModuLink requests for the correct ID.
+
+<br>
 
 **Use case: UC7 - Update group status for modules**
 
@@ -427,6 +457,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. ModuLink asks the user if they would like to <u> add the module to their profile (UC6) </u>.
 
       Use case resumes at step 1.
+
+<br>
 
 **Use case: UC8 - Filter profiles by mods**
 
@@ -448,6 +480,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+<br>
+
 **Use case: UC9 - Filter profiles by module**
 
 **MSS**
@@ -456,6 +490,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  ModuLink shows the list of profiles with the requested module(s).
 
     Use case ends.
+
+<br>
 
 **Use case: UC10 - Find a profile by student ID**
 
