@@ -546,17 +546,18 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. Shutdown
 
-   1. Shut down the app using the `exit` command.
+   1. Shut down the app using the `exit` command.<br>
+      Expected: The app shuts down.
 
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   1. Prerequisites: List all clients using the `listclients` command. Multiple clients in the list.
 
    1. Test case: `deleteclient 1`<br>
       Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
@@ -567,14 +568,31 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete client commands to try: `deleteclient`, `deleteclient x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+1. Deleting a client while no clients are being shown
+
+   1. Prerequisite: Use `findclients keyword` command (where keyword matches none of the clients) to display an empty list of clients.<br>
+
+   1. Test case: `deleteclient 1`<br>
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other delete client commands to try: `deleteclient`, `deleteclient x`, `...` (where x is anything)<br>
+      Expected: Similar to previous. Note that there is no valid command because the client list is empty.
+
 ### Saving data
 
 1. Dealing with missing data files
 
    1. Prerequisite: The folder containing the jar file contains a `data` folder.
 
-   1. Delete the `data` folder and launch the app by double-clicking the jar file.<br>
-      Expected: Shows the GUI with a set of sample clients, tasks and orders. The window size may not be optimum.
+   1. Delete the `data` folder then launch the app by double-clicking the jar file.<br>
+      Expected: Shows the GUI with a set of clients, tasks and orders. The window size may not be optimum.
 
+1. Dealing with corrupted data files
 
+   1. Prerequisite: The folder containing the jar file contains a `data` folder, which contains `addressbook.json`, `salesBook.json` and `taskBook.json`. 
 
+   1. Test case: Corrupt the `addressbook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+      Expected: Shows the GUI with no clients, but with a previously saved set of tasks and orders.
+      
+   1. Other files to corrupt: `salesBook.json` and `taskBook.json`<br>
+      Expected: Similar to previous.
