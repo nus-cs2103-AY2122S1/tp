@@ -34,7 +34,7 @@ create ClearCommand
 ClearCommandParser -> ClearCommand
 activate ClearCommand
 create ModuleInSpecificSemesterPredicate
-ClearCommandParser --> ModuleInSpecificSemesterPredicate :
+ClearCommand-> ModuleInSpecificSemesterPredicate :
 activate ModuleInSpecificSemesterPredicate
 ModuleInSpecificSemesterPredicate --> ClearCommand : predicate
 deactivate ModuleInSpecificSemesterPredicate
