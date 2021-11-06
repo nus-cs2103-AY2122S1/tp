@@ -11,7 +11,7 @@ prefix])
 
     :Retrieve list of unique inputs
     for given prefix;
-    :GUI Result Display updated with
+    :GUI Result Display shows
     list of unique inputs;
 else ([else])
 
