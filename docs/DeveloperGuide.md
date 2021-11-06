@@ -297,13 +297,13 @@ help window.
 
 The sequence diagram below shows the interaction within the `UI` component when a `totalorders` command is executed.
 
-![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram2.png)
+![Interactions Inside the UI Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram0.png)
 
 The sequence diagram below shows the interaction within the `Logic` component when the `UI` component calls 
 `execute("totalorders")`. Note that there is no need to have a `TotalOrdersCommandParser`. This is because the 
 `SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
 
-![Interactions Inside the Logic and Model Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
+![Interactions Inside the Logic Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
 
 
 
