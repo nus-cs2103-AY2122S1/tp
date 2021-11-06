@@ -584,7 +584,7 @@ The Export feature works such that it export the contacts specified into a text 
 It is implemented with the following operation:
 
 * `ExportCommandIndex#execute()`  —  Exports the contacts at the specified index in the current list.
-* * `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
+* `ExportCommandAll#execute()`  —  Exports all the contacts in the current list.
 
 The feature makes use of an `ExportStorage` class, which handles the manipulation of the aforementioned exported text file. It is implemented inside the Storage component and is implemented using a singleton design pattern. This class has an `addToStorage` write method which is called by the `exportContact()` method in the read-only `AddressBook` model.
 
@@ -1234,3 +1234,15 @@ testers are expected to do more *exploratory* testing.
       Expected: WhereTourGo does not open command summary. Error details shown in the status message.
 
 ## **Appendix: Effort**
+We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
+Keep it brief (~1 page)
+Explain the difficulty level, challenges faced, effort required, and achievements of the project.
+If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
+Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
+
+20% more effort than AB3
+
+commands that are not novel,
+
+introducing new features that took time
+
