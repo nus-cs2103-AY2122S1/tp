@@ -576,184 +576,536 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
 
 #### Use cases that have been added to TutorAid
+
 **Use Case 1: Add a student**
 
 **MSS**
 
-1. Tutor collates information related to the student to be added
-2. Tutor adds the student by passing the student's name and other details to TutorAid
-3. TutorAid adds the student and displays a message indicating that this has been done
-
-   Use case ends.
+1. Tutor requests to add a student by passing all the relevant student details to TutorAid, such as the student's name and phone number.
+2. TutorAid adds the student and displays a message indicating that this has been done.
+    
+Use case ends.
 
 **Extensions**
 
-* 1a. Tutor enters the `add` command without using the correct format
-  * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command
-  * 1a2. Tutor re-enters the command, along with the necessary arguments
+* 1a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing/invalid arguments)
+  * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+  * 1a2. Tutor re-enters the command, along with the necessary arguments.
+    
+Steps 1a1-1a2 are repeated until the data entered is correct. 
+    
+Use case resumes from step 2.
 
-    Steps 1a1-1a2 are repeated until the data entered is correct.
-
-    Use case resumes from step 3.
-
-* 2a. Tutor realises that they added the student's details wrongly
-  * 2a1. Tutor <u>deletes the student (UC02)</u> who was just added
-
-    Use case resumes from step 2
+* 1a. Tutor realises that they added the student's details wrongly.
+  * 1a1. Tutor <u>deletes the student (UC02)</u> who was just added.
+    
+Use case resumes from step 2.
 
 **Use Case 2: Delete a student**
 
 **MSS**
 
-1. Tutor requests to view the list of his/her students
-2. TutorAid shows the list of students, including each student's index number
-3. Tutor identifies the contact of the student that is to be deleted and takes note of the index number
-4. Tutor requests to delete the specified student from the list
-5. TutorAid successfully deletes the contact of the student corresponding to the given index number, and displays a 
-   message to indicate this
+1. Tutor requests to list all students. 
+2. TutorAid shows the list of all students.
+3. Tutor identifies the index of the student that is to be deleted in the list, and requests to delete the student at this index from TutorAid.
+4. TutorAid successfully deletes the student corresponding to the given index and displays a message to indicate this.
+   
+Use case ends.
 
-   Use case ends.
+**Extensions**
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+      
+Steps 1a1-1a2 are repeated until the command entered is correct.
+      
+Use case resumes from step 2.
+    
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+    
+Steps 3a1-3a2 are repeated until the command entered is correct.
+      
+Use case resumes from step 4.
+
+**Use case 3: View a student's details**
+
+Precondition: The student contact (that contains the details) currently exists in TutorAid.
+
+**MSS**
+
+1. Tutor requests a list of students.
+2. TutorAid shows the list of the students.
+3. Tutor identifies the index of a specific student in the list and requests to view the details of the student at this index.
+4. TutorAid displays all the details of the student corresponding to the index.
+   
+Use case ends.
 
 **Extensions**
 
 * 1a. TutorAid detects an error in the list command.
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
-      
-      Steps 1a1-1a2 are repeated until the command entered is correct.
 
-      Use case resumes from step 2.
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
     
-* 4a. TutorAid detects an error in the command to delete a student.
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-      
-      Steps 4a1-4a2 are repeated until the command entered is correct.
+**Use Case 4: Edit a student’s contact**
 
-      Use case resumes from step 5.
-
-**Use Case 3: Updating a student’s detail record**
-
-Preconditions: The student's details have been previously added to TutorAid.
+Preconditions: The student's contact currently exists in TutorAid.
 
 **MSS**
 
-1. Tutor <u>deletes the student (UC02)</u> whose details are to be updated.
-2. Tutor requests to add the student back into the list, and provides the updated details of the student
-3. TutorAid adds the updated student to the list
-4. TutorAid displays a message indicating the student has been successfully added
-
-    Use case ends.
+1. Tutor requests a list of students.
+2. TutorAid shows the list of the students.
+3. Tutor identifies the index of a specific student in the list and requests to edit the details of the student at this index by providing the updated details.
+4. TutorAid updates the details and displays all the latest information of the student corresponding to the index, along with a message to indicate that it has done the update.
 
 **Extensions**
 
-* 2a. The given syntax is invalid.
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
 
-    * 2a1. TutorAid shows an error message.
-    * 2a2. Tutor re-enters the student details.
+Steps 1a1-1a2 are repeated until the command entered is correct.
 
-      Steps 2a1 - 2a2 are repeated until a valid syntax is given.
-      Use case resumes from step 3.
+Use case resumes from step 2.
 
-**Use case 6: View a student's details**
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
 
-Precondition: The student's details have been added to TutorAid.
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use Case 5: Add a progress note to a student**
+
+Preconditions: The student's contact currently exists in TutorAid.
 
 **MSS**
 
-1. Tutor requests a list of students
-2. TutorAid shows the list of students
-3. Tutor finds the specific student in the list and requests to view the student's details
-4. TutorAid shows the student's details
-
-   Use case ends.
+1. Tutor requests a list of students.
+2. TutorAid shows the list of the students.
+3. Tutor identifies the index of a specific student in the list and requests to add a progress note to the student at this index by providing the details that are to be added in the note.
+4. TutorAid adds the progress note to the student corresponding to the given index and displays a message to indicate that it has done it.
 
 **Extensions**
 
-* 3a. The given index is invalid
-    * 3a1. TutorAid shows an error message
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
 
-      Use case resumes at step 3
+Steps 1a1-1a2 are repeated until the command entered is correct.
 
-**Use case 13: Set up a recurring class**
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use Case 6: Delete a progress note from a student**
+
+Preconditions: The student's contact currently exists in TutorAid.
+
+**MSS**
+
+1. Tutor requests to <u>view the details of a specific student(UC03)<u>.
+2. TutorAid displays the details of that specific student, including all the past progress notes added for that student.   
+3. Tutor identifies the index of a specific note in that list, and requests to delete this progress note from this student by passing in both the indices of the student and the note.
+4. TutorAid deletes the progress note from the student corresponding to the given index and displays a message to indicate that it has done it.
+
+**Extensions**
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use case 7: Set up a lesson**
 
 Preconditions: The students of the class have been added to TutorAid.
 
 **MSS**
 
-1. Tutor requests to add a class
-2. TutorAid requests for details of the class including the day of the week, time and price
-3. Tutor enters the details of the class
-4. TutorAid creates the class
-5. Tutor <u>adds a student to the class (UC14)</u>
+1. Tutor requests to add a class by providing the details of the class, such as the lesson time and price.
+2. TutorAid creates the class and displays a message to indicate this.
+3. Tutor the <u>adds a student to the class (UC06)</u>.
+   
+Step 3 is repeated until all students have been added.
 
-   Step 5 is repeated until all students have been added
-
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 3a. Class appears to overlap with another class as intended by the Tutor
-    * 3a1. TutorAid shows a warning message
-    * 3a2. Tutor dismisses the warning message
+* 1a. Lesson appears to overlap with another class as intended by the Tutor.
+    * 1a1. TutorAid displays a warning message.
+    * 1a2. Tutor dismisses the warning message.
 
-      Use case resumes at step 4
+      Use case resumes at step 2.
 
-* 3b. Class appears to overlap with another class due to a mistake of the Tutor
-    * 3b1. TutorAid shows a warning message
-    * 3b2. Tutor acknowledges the warning message and cancels the creation of the class
+* 1b. Class appears to overlap with another class due to a mistake of the Tutor.
+    * 1b1. TutorAid shows a warning message.
+    * 1b2. Tutor acknowledges the warning message and cancels the creation of the class.
 
-      Use case resumes at step 1
+      Use case resumes at step 2.
 
-* 3c. TutorAid detects invalid input
-    * 3c1. TutorAid shows a warning message
-    * 3c2. Tutor acknowledges the warning message
+* 1a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command, along with the necessary arguments.
 
-      Use case resumes at step 3
+Steps 1a1-1a2 are repeated until the command entered is correct.
 
-**Use case 14: Add a student to a class**
+Use case resumes from step 2.
 
-Preconditions: The students of the class have been added to TutorAid, and the class has been created correctly.
+**Use Case 8: Delete a lesson**
 
 **MSS**
 
-1. Tutor requests a list of classes
-2. TutorAid displays a list of classes
-3. Tutor requests to add students to a specific class
-4. TutorAid displays the list of students
-5. Tutor chooses some students from the list to be added
-6. TutorAid shows a confirmation message
-7. Tutor confirms the action
-8. TutorAid adds the selected students to the class
+1. Tutor requests to list all lessons.
+2. TutorAid shows the list of all lessons.
+3. Tutor identifies the index of the lesson that is to be deleted in the list, and requests to delete the lesson at this index from TutorAid.
+4. TutorAid successfully deletes the lesson corresponding to the given index and displays a message to indicate this.
+
+Use case ends.
+
+**Extensions**
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use case 9: View a lesson's details**
+
+Precondition: The lesson (that contains the details) currently exists in TutorAid.
+
+**MSS**
+
+1. Tutor requests a list of lessons.
+2. TutorAid shows the list of the lessons.
+3. Tutor identifies the index of a specific lesson in the list and requests to view the details of the lesson at this index.
+4. TutorAid displays all the details of the lesson corresponding to the index.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use Case 10: Edit the details of a lesson**
+
+Preconditions: The lesson currently exists in TutorAid.
+
+**MSS**
+
+1. Tutor requests a list of lessons.
+2. TutorAid shows the list of the lessons.
+3. Tutor identifies the index of a specific lesson in the list and requests to edit the details of the lesson at this index by providing the updated details.
+4. TutorAid updates the details and displays all the latest information of the lesson corresponding to the index, along with a message to indicate that it has done the update.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use case 11: Add a student to a lesson**
+
+Preconditions: The students of the lesson have been added to TutorAid and the lesson has been created.
+
+**MSS**
+
+1. Tutor requests the list of students and lessons.
+2. TutorAid displays the list of all students and lessons.
+3. Tutor identifies the indices of the specific student, and the specific lesson to which they wish to add the student to. The Tutor then requests to add this student to this lesson by providing the indices.   
+4. TutorAid adds the student to the lesson and displays a message to indicate that it has been done.
+   
+Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use case 12: Delete a student from a lesson**
+
+Preconditions: The students has been added to the lesson prior to this.
+
+**MSS**
+
+1. Tutor requests the list of students and lessons.
+2. TutorAid displays the list of all students and lessons.
+3. Tutor identifies the indices of the specific student, and the specific lesson from which they wish to delete the student. The Tutor then requests to delete this student from this lesson by providing the indices.
+4. TutorAid delete the student from the lesson and displays a message to indicate that it has been done.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the list command.
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. Tutor re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+**Use case 13: View which students should be present for the lesson**
+
+**MSS**
+
+1. Tutor requests to <u>view the specific lesson (UC00)<u>.
+2. TutorAid displays the details of that specific lesson, including the list of students enrolled in that lesson.
+   
+Use case ends.
+
+#### Use cases that are to be added to TutorAid in the future
+
+**Use case 4: Update a student's progress** //Need this?
+
+**MSS**
+
+1. Tutor views the list of his/her students
+2. TutorAid displays the list of students
+3. Tutor identifies the student index to update their progress
+4. Tutor updates progress for that student
+5. TutorAid registers the new progress for the student at the specified index number
 
    Use case ends.
 
 **Extensions**
 
-* 6a. Tutor declines the confirmation message.
-    * 6a1. TutorAid stops the action.
+* 1a. Invalid list command syntax
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command.
 
-      Use case resumes at step 3.
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
 
-**Use Case 15: Edit students in a class**
+* 1b. The list is empty. Use case ends.
+
+* 4a. Invalid progress commands syntax
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a2. Tutor re-enters the command
+
+      Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 5
+
+**Use case 5: Updating payment for a student** //How to modify this?
+
+Preconditions: There is at least one student added to TutorAid.
 
 **MSS**
 
 1. Tutor requests to view the list of his/her students
 2. TutorAid shows the list of students, including each student's index number
-3. Tutor identifies the contact of the student who is to be removed from a specific class and takes note of the index number
-4. Tutor requests to view the list of his/her classes
-5. TutorAid shows the list of classes, including each class's index number
-6. Tutor identifies the class he/she wishes to modify and takes note of the index number
-7. Tutor keys in the student index number and the class index number along with the command to remove a student from a class
-8. TutorAid successfully removes the student corresponding to the given index number from the class corresponding to the
-   given class index number, and displays a message to indicate this
-
-   Use case ends.
+3. Tutor identifies the student index to update his/her payment status
+4. Tutor requests to update payment status for the student
+5. TutorAid successfully updates the payment status for the student corresponding to the given index number, and
+   displays a message to indicate this
+   
+Use case ends.
 
 **Extensions**
 
-* 1a. TutorAid detects an error in the command to list students (e.g. command is misspelt)
+* 1a. TutorAid detects an error in the list command
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+      
+      Use case resumes from step 2.
+
+* 4a. TutorAid detects a wrongly formatted command to update payment status of a student
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a2. Tutor re-enters the command with a revised format.
+
+      Steps 4a1-4a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+* 4b. TutorAid detects an invalid student index number
+      (e.g. a negative index number, a non-integer index number, a non-existent index number)
+    * 4b1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4b2. User re-enters the command with another student index number.
+
+      Steps 4b1-4b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
+
+**Use Case 7: View schedule for the upcoming week**
+
+**MSS**
+
+1.  Tutor enters the end date of the upcoming week, and requests to view the schedule up till that date.
+2.  TutorAid shows the lessons and milestones in the upcoming week in a chronological order.
+3.  Tutor requests to view the happenings for a specific date in the week.
+4.  TutorAid shows the details of the lessons and milestones for that specific date in a chronological order.
+
+Use case ends.
+    
+Steps 3-4 are repeated until Tutor wishes to stop viewing the details of sessions and milestones for a specific date in the upcoming week.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The given date has an invalid format.
+    * 1a1. TutorAid shows an error message.
+    * 1a2. Tutor re-enters the date.
+    
+Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
+      
+Use case resumes from step 2.
+
+* 1b. TutorAid detects an error in the command to view schedule. (e.g. wrong format, missing arguments, invalid indices)
+    * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command, along with the necessary arguments.
+
+Steps 1b1-1b2 are repeated until the command entered is correct.
+
+Use case resumes from Step 2.
+
+* 3a. The given date has an invalid format.
+    * 3a1. TutorAid shows an error message.
+    * 3a2. Tutor re-enters the date.
+
+Steps 3a1 - 3a2 are repeated until a valid format for the date is given.
+
+Use case resumes from step 4.
+      
+**Use case 8: Add a todo list for a lesson**
+
+Preconditions: The lesson has been added to TutorAid prior to this.
+
+**MSS**
+
+1. Tutor requests to view their schedule.
+2. TutorAid displays the schedule.
+3. Tutor identifies the lesson to add a todo list for and requests to add a todo list for that lesson.
+4. TutorAid creates a todo list for that lesson.
+5. Tutor enters a task to be added to the todo list.
+6. TutorAid adds the task to the todo list.   
+
+Steps 5-6 are repeated until the Tutor finishes adding all the tasks.
+
+Use case ends.
+
+**Extensions**
+* 1a. TutorAid detects an error in the command to view schedule. (e.g. wrong format, missing arguments, invalid indices)
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command, along with the necessary arguments.
+
+Steps 1a1-1a2 are repeated until the command entered is correct.
+
+Use case resumes from step 2.
+
+* 3a. TutorAid detects an error in the command to add a todo list. (e.g. wrong format, missing arguments, invalid indices)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. User re-enters the command, along with the necessary arguments.
+
+Steps 3a1-3a2 are repeated until the command entered is correct.
+
+Use case resumes from step 4.
+
+* 5a. TutorAid detects an error in the command to add a task to the todo list. (e.g. wrong format, missing arguments, invalid indices)
+    * 5a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 5a2. User re-enters the command, along with the necessary arguments.
+
+Steps 5a1-5a2 are repeated until the command entered is correct.
+
+Use case resumes from step 6.
+
+**Use case 10: Reset payment status for all students at the end of the month** //How to modify this
+
+Preconditions: There is at least one student added to TutorAid.
+
+**MSS**
+
+1. Tutor requests to show the list of their students.
+2. TutorAid displays the list of all students, including each student's index number
+3. Tutor identifies that all students have made payment for the month, and the month has ended
+4. Tutor keys in the reset payment command to set all student payments as unpaid
+5. TutorAid successfully resets payment for all students, and displays a message to indicate this
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the list command
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. Tutor re-enters the command.
 
@@ -761,21 +1113,44 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
       Use case resumes from step 2.
 
-* 4a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+* 4a. TutorAid detects an error in the reset payment command
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the data entered are correct.
+      
+      Use case resumes from step 4.
+
+**Use Case 18: Edit pricing of a class**
+
+**MSS**
+
+1. Tutor requests to view the list of his/her classes
+2. TutorAid shows the list of classes, including each class's index number
+3. Tutor identifies the class he/she wishes to modify and takes note of the index number
+4. Tutor keys in the command to modify the pricing of a class, along with the new price of the class and the class's index number
+5. TutorAid successfully updates the pricing of the class corresponding to the given class index number,
+   and displays a message to indicate this
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    * 1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+* 4a. TutorAid detects an error in the command to edit the pricing of a class.
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 4a2. Tutor re-enters the command.
 
       Steps 4a1-4a2 are repeated until the command entered is correct.
 
       Use case resumes from step 5.
-
-* 7a. TutorAid detects an error in the command to remove a student from a class.
-    * 7a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 7a2. Tutor re-enters the command.
-
-      Steps 7a1-7a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 8.
 
 **Use Case 16: Edit timing of a recurring class**
 
@@ -852,267 +1227,6 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
     * 4b2. Tutor re-enters the command with a different day and/or different pair of timings.
 
       Steps 4b1-4b2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
-#### Use cases that are to be added to TutorAid in the future
-
-**Use case 4: Update a student's progress**
-
-**MSS**
-
-1. Tutor views the list of his/her students
-2. TutorAid displays the list of students
-3. Tutor identifies the student index to update their progress
-4. Tutor updates progress for that student
-5. TutorAid registers the new progress for the student at the specified index number
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Invalid list command syntax
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
-
-* 1b. The list is empty. Use case ends.
-
-* 4a. Invalid progress commands syntax
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command
-
-      Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 5
-
-**Use case 5: Updating payment for a student**
-
-Preconditions: There is at least one student added to TutorAid.
-
-**MSS**
-
-1. Tutor requests to view the list of his/her students
-2. TutorAid shows the list of students, including each student's index number
-3. Tutor identifies the student index to update his/her payment status
-4. Tutor requests to update payment status for the student
-5. TutorAid successfully updates the payment status for the student corresponding to the given index number, and
-   displays a message to indicate this
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the list command
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-      
-      Use case resumes from step 2.
-
-* 4a. TutorAid detects a wrongly formatted command to update payment status of a student
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command with a revised format.
-
-      Steps 4a1-4a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
-* 4b. TutorAid detects an invalid student index number
-      (e.g. a negative index number, a non-integer index number, a non-existent index number)
-    * 4b1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4b2. User re-enters the command with another student index number.
-
-      Steps 4b1-4b2 are repeated until the command entered is correct.
-
-      Use case resumes from step 5.
-
-**Use case 7: Add a todo list for a session**
-
-**MSS**
-
-1. Tutor views his schedule
-2. TutorAid displays the schedule
-3. Tutor identifies the session to add a todo list for
-4. Tutor adds a todo task to that session
-5. TutorAid registers the task to the session
-6. Tutor repeats from step 4 until he/she finishes adding all the tasks
-
-   Use case ends.
-
-**Extensions**
-* 1a. Invalid view schedule command syntax
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
-
-* 4a. Invalid add task command syntax
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the syntax entered is correct. Use case resumes from step 5.
-
-* 4b. The session does not exist.
-    * 4b2. TutorAid displays an error message that the session does not exist.
-
-  Use case ends.
-
-**Use Case 8: View schedule for the upcoming week**
-
-**MSS**
-
-1.  Tutor enters the end date of the upcoming week, and requests to view the schedule up till that date
-2.  TutorAid shows the sessions and milestones happening in the upcoming week, in a calendar view
-3.  Tutor clicks on a specific date in the calendar
-4.  TutorAid shows the details of the sessions and milestones happening on that specific date, in a list view
-5.  Tutor requests to return to the calendar view
-    Steps 2 - 5 are repeated until Tutor decides to stop viewing the details of sessions and milestones
-    happening on a specific date in the upcoming week.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given date has an invalid format.
-    * 1a1. TutorAid shows an error message.
-    * 1a2. Tutor re-enters the date.
-
-      Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
-      Use case resumes from step 2.
-
-* 1b. TutorAid detects an error in the view schedule command.
-    * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1b2. User re-enters the command.
-
-      Steps 1b1-1b2 are repeated until the command entered is correct.
-      Use case resumes from step 2.
-
-**Use case 9: Check which students should be present for the class**
-
-**MSS**
-
-1. Tutor views his schedule
-2. TutorAid displays the schedule
-3. Tutor identifies the session for which he/she wants to check the list of students for
-4. Tutor requests the list of students for that session
-5. TutorAid displays the list of students in the session
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Invalid view schedule command syntax
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
-
-* 4a. Invalid view session students command syntax
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the syntax entered is correct. Use case resumes from step 5.
-
-**Use case 10: Reset payment status for all students at the end of the month**
-
-Preconditions: There is at least one student added to TutorAid.
-
-**MSS**
-
-1. Tutor requests to view the list of his/her students
-2. TutorAid shows the list of students, including each student's index number
-3. Tutor identifies that all students have made payment for the month, and the month has ended
-4. Tutor keys in the reset payment command to set all student payments as unpaid
-5. TutorAid successfully resets payment for all students, and displays a message to indicate this
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the list command
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-* 4a. TutorAid detects an error in the reset payment command
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the data entered are correct.
-      
-      Use case resumes from step 4.
-
-**Use Case 11: View upcoming milestones for all students**
-
-**MSS**
-
-1.  Tutor requests to view the students' upcoming milestones
-2.  TutorAid shows the upcoming milestones in a chronological order
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the view milestones command.
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. User re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-      Use case resumes from step 2.
-
-**Use case 12: View income for the month**
-
-Preconditions: There is at least one student added to TutorAid.
-
-**MSS**
-
-1. Tutor keys in the view income command to view income earned for the month
-2. Tutor successfully views income earned for the month
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the view income command
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. User re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the data entered are correct.
-      
-      Use case resumes from step 2.
-
-**Use Case 18: Edit pricing of a class**
-
-**MSS**
-
-1. Tutor requests to view the list of his/her classes
-2. TutorAid shows the list of classes, including each class's index number
-3. Tutor identifies the class he/she wishes to modify and takes note of the index number
-4. Tutor keys in the command to modify the pricing of a class, along with the new price of the class and the class's index number
-5. TutorAid successfully updates the pricing of the class corresponding to the given class index number,
-   and displays a message to indicate this
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
-    * 1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-
-      Use case resumes from step 2.
-
-* 4a. TutorAid detects an error in the command to edit the pricing of a class.
-    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 4a2. Tutor re-enters the command.
-
-      Steps 4a1-4a2 are repeated until the command entered is correct.
 
       Use case resumes from step 5.
 
