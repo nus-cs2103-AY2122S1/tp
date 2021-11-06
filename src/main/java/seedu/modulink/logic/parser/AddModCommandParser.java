@@ -2,18 +2,14 @@ package seedu.modulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.modulink.commons.core.Messages.MESSAGE_UNKNOWN_PREFIX_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.modulink.commons.core.Messages;
-import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.AddModCommand;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.modulink.logic.commands.EditGroupStatusCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.tag.Mod;
 

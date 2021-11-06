@@ -9,10 +9,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.EditGroupStatusCommand;
-import seedu.modulink.logic.commands.FilterCommand;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.tag.Mod;
 

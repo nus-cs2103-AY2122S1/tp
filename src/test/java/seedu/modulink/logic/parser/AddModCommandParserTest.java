@@ -1,12 +1,9 @@
 package seedu.modulink.logic.parser;
 
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2103T;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
-import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2103T;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseFailure;
