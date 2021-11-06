@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalContacts.BENSON;
+import static seedu.address.testutil.TypicalContacts.BATTLEBOX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,22 +26,22 @@ public class JsonAdaptedContactTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_RATING = "6";
 
-    private static final String VALID_CATEGORY_CODE = BENSON.getCategoryCode().toString();
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_REVIEW = BENSON.getReview().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_CATEGORY_CODE = BATTLEBOX.getCategoryCode().toString();
+    private static final String VALID_NAME = BATTLEBOX.getName().toString();
+    private static final String VALID_PHONE = BATTLEBOX.getPhone().toString();
+    private static final String VALID_EMAIL = BATTLEBOX.getEmail().toString();
+    private static final String VALID_REVIEW = BATTLEBOX.getReview().toString();
+    private static final String VALID_ADDRESS = BATTLEBOX.getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = BATTLEBOX.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_RATING = BENSON.getRating().toString();
+    private static final String VALID_RATING = BATTLEBOX.getRating().toString();
 
     //TODO(HK): add invalid test cases for Category Codes
     @Test
     public void toModelType_validContactDetails_returnsContact() throws Exception {
-        JsonAdaptedContact contact = new JsonAdaptedContact(BENSON);
-        assertEquals(BENSON, contact.toModelType());
+        JsonAdaptedContact contact = new JsonAdaptedContact(BATTLEBOX);
+        assertEquals(BATTLEBOX, contact.toModelType());
     }
 
     @Test

@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalContacts.ALICE;
-import static seedu.address.testutil.TypicalContacts.BENSON;
-import static seedu.address.testutil.TypicalContacts.DANIEL;
-import static seedu.address.testutil.TypicalContacts.ELLE;
-import static seedu.address.testutil.TypicalContacts.FIONA;
-import static seedu.address.testutil.TypicalContacts.GEORGE;
-import static seedu.address.testutil.TypicalContacts.JANE;
+import static seedu.address.testutil.TypicalContacts.AIRZONE;
+import static seedu.address.testutil.TypicalContacts.BATTLEBOX;
+import static seedu.address.testutil.TypicalContacts.FUKTAKCHI;
+import static seedu.address.testutil.TypicalContacts.GSEA;
+import static seedu.address.testutil.TypicalContacts.HOTEL_SOLOHA;
+import static seedu.address.testutil.TypicalContacts.ICHIBAN;
+import static seedu.address.testutil.TypicalContacts.JCUBE;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -92,7 +92,7 @@ class FilterCommandTest {
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(GEORGE), model.getFilteredContactList());
+        assertEquals(Arrays.asList(ICHIBAN), model.getFilteredContactList());
     }
 
     @Test
@@ -106,7 +106,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredContactList());
+        assertEquals(Arrays.asList(BATTLEBOX, FUKTAKCHI), model.getFilteredContactList());
     }
 
     @Test
@@ -121,7 +121,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON, DANIEL, GEORGE), model.getFilteredContactList());
+        assertEquals(Arrays.asList(BATTLEBOX, FUKTAKCHI, ICHIBAN), model.getFilteredContactList());
     }
 
     @Test
@@ -147,7 +147,7 @@ class FilterCommandTest {
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredContactList());
+        assertEquals(Arrays.asList(AIRZONE), model.getFilteredContactList());
     }
 
     @Test
@@ -161,7 +161,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA, JANE), model.getFilteredContactList());
+        assertEquals(Arrays.asList(FUKTAKCHI, GSEA, HOTEL_SOLOHA, JCUBE), model.getFilteredContactList());
     }
 
     // TODO [LETHICIA]
@@ -191,7 +191,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredContactList());
+        assertEquals(Arrays.asList(AIRZONE, BATTLEBOX, FUKTAKCHI), model.getFilteredContactList());
 
     }
 
@@ -200,13 +200,13 @@ class FilterCommandTest {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
         Set<CategoryCode> categoryCodes = Collections.EMPTY_SET;
         Rating rating = new Rating();
-        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("new"), new Tag("owesMoney")));
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("new"), new Tag("fun")));
         IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredContactList());
+        assertEquals(Arrays.asList(AIRZONE, BATTLEBOX), model.getFilteredContactList());
 
 
     }
@@ -224,7 +224,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(DANIEL, ELLE), model.getFilteredContactList());
+        assertEquals(Arrays.asList(FUKTAKCHI, GSEA), model.getFilteredContactList());
     }
 
     @Test
@@ -239,7 +239,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredContactList());
+        assertEquals(Arrays.asList(BATTLEBOX, FUKTAKCHI), model.getFilteredContactList());
     }
 
     @Test
@@ -253,7 +253,7 @@ class FilterCommandTest {
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(DANIEL), model.getFilteredContactList());
+        assertEquals(Arrays.asList(FUKTAKCHI), model.getFilteredContactList());
     }
 
     @Test
@@ -262,13 +262,13 @@ class FilterCommandTest {
         Set<CategoryCode> categoryCodes = new HashSet<CategoryCode>(Arrays.asList(new CategoryCode("oth"),
                 new CategoryCode("acc"), new CategoryCode("tpt")));
         Rating rating = new Rating("4");
-        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("owesMoney")));
+        Set<Tag> tags = new HashSet<Tag>(Arrays.asList(new Tag("fun")));
         IsFilterablePredicate predicate = new IsFilterablePredicate(categoryCodes, rating, tags);
         FilterCommand command = new FilterCommand(categoryCodes, rating, tags);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(Arrays.asList(BENSON), model.getFilteredContactList());
+        assertEquals(Arrays.asList(BATTLEBOX), model.getFilteredContactList());
     }
 
 }
