@@ -245,20 +245,73 @@ is below:
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Sort orders by amount feature
+### Sort Order Feature
 
 #### Implementation
 
-The feature sorts all the orders in the addressbook by their amount in descending order. 
+By default, orders are sorted in ascending order of their `id`. 
+This arrangement is also followed when SalesNote starts up or the `listorders` command is executed.
 
-To ensure that the orders can be sorted, both `Order` and its attribute `Amount` implement the `Comparable` interface. 
-Order uses its `id` field to produce the default ordering of the `OrderList`. 
+The `sortorders` command sorts the orders in the `OrderBook` based on a field and an ordering specified by the user.
 
-{to be completed}
+The field is represented using the `SortFieldType` enumeration which is encapsulated as a `SortField` object.
+Currently, SalesNote supports sorting by the following fields, which have been adapted to implement the `Comparable` interface:
+1. `Amount` - Represented by `SortFieldType.AMOUNT`
+2. `Date` - Represented by `SortFieldType.DATE`
 
+The ordering is represented using the `SortOrderingType` enumeration which is encapsulated as a `SortOrderingType` object. SalesNote supports sorting in: 
+1. Ascending order - Represented by `SortOrderingType.ASCENDING`
+2. Descending - Represented by `SortOrderingType.DESCENDING`
+
+
+The class structure of the feature is shown in the diagram below:
+
+![SortOrdersCommandClassDiagram](images/SortOrdersCommandClassDiagram.png)
+
+Orders are sorted using the `SortDescriptor`, which implements the `Comparator<Order>` interface.
+Its `compare` method uses the `SortField` and `SortOrdering` to compare orders based on the user specified arrangement.
+
+#### Usage
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `parseCommand("sortorder f/a o/asc")` API call. 
+Details about tokenizing the user input to retrieve the field and ordering have been omitted.
+
+![SortOrdersParserSequenceDiagram](images/SortOrdersParserSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortOrdersCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+When the `SortOrderCommand` is executed, the following interactions take place in the `Logic` and the `Model` components.
+
+![SortOrdersModelSequenceDiagram](images/SortOrdersModelSequenceDiagram.png)
+
+After the `ObservableList<Order>` has been sorted, 
+
+Step 1.  the `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`. 
+
+Step 2.  a `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
+
+Step 3.  the UI proceeds to display the sorted list of orders.
+
+#### Design choices
+
+* **Alternative 1:**  Mutating the `OrderList`.
+    * Pros: Allows the sorting functionality to be less coupled with the `FilteredList` of orders.
+      * This allows the user the flexibility to combine various filtering and sorting commands.
+      * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
+    * Cons: Commands that mutate the list might disrupt the ordering of the sorted list. 
+      * For instance, adding an `Order` to an `OrderBook` simply appends it
+        at the end of the `OrderList`. Thus, the `OrderBook` needs be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
+      * Note that this is not a concern for the `markorder` and `deleteorder` commands since they do not disrupt the ordering of the list.
+* **Alternative 2:** Wrapping the `FilteredList` around the `SortedList`. 
+    * Pros: 
+      * Maintains the immutability of the order list. 
+      * Ensures that the sorting arrangement is always preserved, even another command e.g. `addorder` mutates the underlying list.
+    * Cons: More difficult to implement since it entails more coupling with the `FilteredList` of orders.
+    
 ### Display client's total orders feature
 
-#### Implementation
+#### Implementation details
 
 The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`. 
 
@@ -417,8 +470,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+For the use cases that are very similar, only the differences between them have been highlighted.
+
 (For all use cases below, the **System** is the `SalesNote` and the **Actor** is the `user`, unless specified otherwise)
-For use cases that are very similar, only the differences between them have been highlighted.
 
 #### Use case: Add a client
 
@@ -580,7 +634,7 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 * 4a. The user has not made any changes to the task details.
 
-      Use case resumes at step 3.
+    Use case resumes at step 3.
 
 * 4b. A task with the edited details already exists in the task list.
 
