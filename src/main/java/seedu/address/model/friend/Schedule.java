@@ -115,6 +115,18 @@ public class Schedule {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Schedule schedule1 = (Schedule) o;
+        return Objects.equals(daysOfWeek, schedule1.daysOfWeek);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         for (Day day : daysOfWeek) {
@@ -129,18 +141,6 @@ public class Schedule {
             builder.append(";");
         }
         return builder.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Schedule schedule1 = (Schedule) o;
-        return Objects.equals(daysOfWeek, schedule1.daysOfWeek);
     }
 
     private int convertToListIndex(int dayOfWeek) {

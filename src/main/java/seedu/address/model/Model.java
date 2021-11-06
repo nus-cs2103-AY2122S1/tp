@@ -26,14 +26,14 @@ public interface Model {
     Predicate<Game> PREDICATE_SHOW_ALL_GAMES = unused -> true;
 
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
-     */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
-
-    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -58,14 +58,14 @@ public interface Model {
     //=========== FriendsBook ==================================================================================
 
     /**
-     * Replaces friends book data with the data in {@code readOnlyFriendsList}.
-     */
-    void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList);
-
-    /**
      * Returns the FriendsBook
      */
     ReadOnlyFriendsList getFriendsList();
+
+    /**
+     * Replaces friends book data with the data in {@code readOnlyFriendsList}.
+     */
+    void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList);
 
     /**
      * Returns true if a friend with the same identity as {@code friend} exists in the friends book.
@@ -141,14 +141,14 @@ public interface Model {
     //=========== GamesBook ==================================================================================
 
     /**
-     * Replaces games book data with the data in {@code readOnlyGamesList}.
-     */
-    void setGamesList(ReadOnlyGamesList readOnlyGamesList);
-
-    /**
      * Returns the GamesBook
      */
     ReadOnlyGamesList getGamesList();
+
+    /**
+     * Replaces games book data with the data in {@code readOnlyGamesList}.
+     */
+    void setGamesList(ReadOnlyGamesList readOnlyGamesList);
 
     /**
      * Returns true if a game with the same identity as {@code game} exists in the games book.

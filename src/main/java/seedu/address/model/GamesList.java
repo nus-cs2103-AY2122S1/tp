@@ -103,12 +103,6 @@ public class GamesList implements ReadOnlyGamesList {
     // util methods
 
     @Override
-    public String toString() {
-        return games.asUnmodifiableObservableList().size() + " games";
-        // TODO: refine later
-    }
-
-    @Override
     public ObservableList<Game> getGamesList() {
         return games.asUnmodifiableObservableList();
     }
@@ -116,7 +110,13 @@ public class GamesList implements ReadOnlyGamesList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof GamesList // instanceof handles nulls
-            && games.equals(((GamesList) other).games));
+                || (other instanceof GamesList // instanceof handles nulls
+                && games.equals(((GamesList) other).games));
+    }
+
+    @Override
+    public String toString() {
+        return games.asUnmodifiableObservableList().size() + " games";
+        // TODO: refine later
     }
 }

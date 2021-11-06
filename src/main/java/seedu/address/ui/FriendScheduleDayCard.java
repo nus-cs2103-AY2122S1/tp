@@ -12,7 +12,7 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.ui.util.SampleStyles;
 
 /**
- * An UI component that displays information of a {@code Day} in a {@code Schedule}.
+ * A UI component that displays information of a {@code Day} in a {@code Schedule}.
  */
 public class FriendScheduleDayCard extends UiPart<Region> {
 

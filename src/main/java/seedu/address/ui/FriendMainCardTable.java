@@ -13,7 +13,7 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
- * Table showing games that are linked to a friend, and their corresponding usernames and skills levels.
+ * A table showing games that are linked to a friend, and their corresponding usernames and skills levels.
  */
 public class FriendMainCardTable extends UiPart<Region> {
 

@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class FriendCard extends UiPart<Region> {
 
@@ -33,6 +33,7 @@ public class FriendCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label games;
+
     /**
      * Creates a {@code FriendCard} with the given {@code Friend} and index to display.
      */
