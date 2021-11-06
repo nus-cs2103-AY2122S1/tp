@@ -42,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/cookiedan42.png" width="200px">
 
 [[github](http://github.com/cookiedan42)]
-[[portfolio](team/daniel.md)]
+[[portfolio](team/cookiedan42.md)]
 
 * Role: Developer
 * Responsibilities: tests and documentation

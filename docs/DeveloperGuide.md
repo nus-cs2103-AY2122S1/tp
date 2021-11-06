@@ -11,16 +11,16 @@ title: Developer Guide
     * [Model component](#model-component)
     * [Storage component](#storage-component)
     * [Command classes](#common-classes)
-      
+
 * [Implementation](#implementation)
     * [Tags](#tags)
-    * [Pin feature](#pin-feature) 
+    * [Pin feature](#pin-feature)
     * [Find feature](#find-feature)
     * [FindAny feature](#findany-feature)
     * [Help feature](#help-feature)
     * [Birthday Reminder feature](#birthday-reminder-feature)
     * [Mailing List feature](#mailing-list-feature)
-    
+
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
@@ -141,7 +141,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed. 
+* stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed.
 * stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -201,9 +201,9 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 #### Design considerations:
 
 * **Current implementation: Tags are saved within a `Set<Tag>` within `Person`**
-  * Pros: Easy to implement and doesn't allow for duplicates. 
+  * Pros: Easy to implement and doesn't allow for duplicates.
   * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
-  
+
 * **Alternative: Utilise a separate `HashMap` data structure to map contacts to tags.**
   * Pros: Fast retrieval of tagged contacts.
   * Cons: Difficult to maintain a separate data structure.
@@ -212,7 +212,7 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 #### Proposed Implementation
 
-The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations: 
+The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations:
 * `UniquePersonList#add` - adds a contact into the list of stored contacts and stores the contacts according to their priority. 
 * `UniquePersonList#setPerson` - updates an edited contact in the list of stored contacts and stores the contacts according to their priority. 
 
@@ -221,7 +221,7 @@ The operation are exposed in the `Command` interface as `Command#Execute`, speci
 Given below is an example usage scenario and how the pin mechanism behaves at each step.
 
 Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
-    
+
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
 Step 2. The user executes `add n/person3 …​` to add a new contact. This contact is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
@@ -268,11 +268,11 @@ The following sequence diagram shows how the pin operation works:
 
 * **Alternative 1 (current choice):** Have two seperate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
     * Pros: Easier to implement.
-    * Cons: More code duplication. 
+    * Cons: More code duplication.
 
 * **Alternative 2:** Have one card that will add a pin if the contact is pinned.
     * Pros: Harder to implement.
-    * Cons: Less code duplication. 
+    * Cons: Less code duplication.
 
 ### Find feature
 
@@ -326,7 +326,7 @@ Step 2. The user executes `findAny n/David n/Henry t/friend t/footnall` to searc
 Step 3. A `FindAnyPredicate`  which will only return `true` if contact's name contains **either** `David` **or** `Henry` **OR** are
 tagged to **either** `friend` **or** `football` is made.
 
-Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list. 
+Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
