@@ -45,7 +45,7 @@ public class DeleteFolderCommand extends Command {
         int indexOfFolder = lastShownFolderList.indexOf(folderToRemove);
 
         if (indexOfFolder == -1) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOLDER_IN_UNION);
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_FOLDER_IN_CURRENT_LIST);
         }
 
         model.deleteFolder(folderToRemove);

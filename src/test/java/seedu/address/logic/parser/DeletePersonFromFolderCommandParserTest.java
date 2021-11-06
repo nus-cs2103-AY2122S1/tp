@@ -20,7 +20,9 @@ public class DeletePersonFromFolderCommandParserTest {
     @Test
     public void parse_properFolderAndIndexInput_success() throws ParseException {
         String successStringInput = " 1 >> TestFolder1";
-        Index validIndex = ParserUtil.parseIndex(stringIndex);
+        Index validIndex = ParserUtil.parseIndex(stringIndex,
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeletePersonFromFolderCommand.MESSAGE_USAGE)));
         DeletePersonFromFolderCommand expectedDeletePersonFromFolderCommand =
                 new DeletePersonFromFolderCommand(validIndex, testFolder1);
         DeletePersonFromFolderCommandParser deletePersonFromFolderCommandParser =
@@ -47,7 +49,7 @@ public class DeletePersonFromFolderCommandParserTest {
     @Test
     public void parse_properFolderAndInvalidIndex_failure() {
         String successStringInput = " -1 >> TestFolder1";
-        String expectedErrorMessage = ParserUtil.MESSAGE_INVALID_INDEX;
+        String expectedErrorMessage = String.format(ParserUtil.MESSAGE_INVALID_INDEX, "-1");
         DeletePersonFromFolderCommandParser deletePersonFromFolderCommandParser =
                 new DeletePersonFromFolderCommandParser();
         assertParseFailure(
