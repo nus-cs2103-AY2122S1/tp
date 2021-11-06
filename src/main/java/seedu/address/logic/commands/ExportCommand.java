@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.FileUtil.isValidFileName;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -48,11 +47,6 @@ public class ExportCommand extends Command {
         requireNonNull(model);
         requireNonNull(model.getAddressBook());
         requireNonNull(outputFileName);
-
-        if (!isValidFileName(outputFileName)) {
-            throw new CommandException(MESSAGE_WRONG_FORMAT);
-        }
-
         Path outputFilePath;
 
         try {

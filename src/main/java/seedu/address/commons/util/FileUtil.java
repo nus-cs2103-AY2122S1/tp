@@ -95,7 +95,7 @@ public class FileUtil {
     /**
      * Returns true if a given string is a valid file name.
      */
-    public static boolean isValidFileName(String test) {
+    public static boolean isValidJsonFileName(String test) {
         if (test.isEmpty()) {
             return true;
         }

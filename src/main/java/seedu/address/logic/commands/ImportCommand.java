@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.FileUtil.isValidFileName;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -58,10 +56,6 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!isValidFileName(importedFileName)) {
-            throw new CommandException(MESSAGE_WRONG_FORMAT);
-        }
-
         Path importedFilePath;
         int contactsAdded;
 

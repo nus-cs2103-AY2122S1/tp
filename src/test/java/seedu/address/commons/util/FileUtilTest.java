@@ -20,4 +20,22 @@ public class FileUtilTest {
         assertThrows(NullPointerException.class, () -> FileUtil.isValidPath(null));
     }
 
+    @Test
+    public void isValidJsonFileName() {
+        // valid JSON file name
+        assertTrue(FileUtil.isValidJsonFileName("import.json"));
+
+        // contains underscore
+        assertTrue(FileUtil.isValidJsonFileName("import_underscore.json"));
+
+        // contains dash
+        assertTrue(FileUtil.isValidJsonFileName("import-dash.json"));
+
+        // contains special characters
+        assertFalse(FileUtil.isValidJsonFileName("*.json"));
+
+        // contains special characters
+        assertFalse(FileUtil.isValidJsonFileName("!@#$%^&*().json"));
+    }
+
 }
