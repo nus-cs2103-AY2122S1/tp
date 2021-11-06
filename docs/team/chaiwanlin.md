@@ -8,7 +8,7 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 * [Code](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=chaiwanlin&tabRepo=AY2122S1-CS2103-W14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 * [Enhancements implemented](#enhancements-implemented)
 * [User Guide](#user-guide)
-* [Deverloper Guide](#delevoper-guide)
+* [Developer Guide](#delevoper-guide)
 * [Team-based tasks](#team-based-tasks)
 * [Reviewing/Mentoring](#reviewingmentoring)
 * [Beyond the project](#beyond-the-project)
