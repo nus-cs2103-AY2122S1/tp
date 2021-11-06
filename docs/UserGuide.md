@@ -185,6 +185,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+[table of contents](#table-of-contents)
 
 <div markdown="block" class="alert alert-info">
 
