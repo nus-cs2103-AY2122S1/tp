@@ -81,8 +81,8 @@ This section briefly explains the various section of TAB's GUI.
 
 Section | Representation
 ---------|---------
-Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Features](#features) for more details.
-Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).<br> - Clicking on <kbd>View</kbd> → <kbd>Students</kbd> brings you to the last displayed list of students and not the full list of students. See [View Students](#view-students) for more details.
+Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
+Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
 Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
@@ -752,7 +752,9 @@ Displays a list of upcoming lessons that ends within the next 48 hours.
 
 Format: `remind`
 
-![remind](images/remind.png)
+<div align="center">
+  <img src="images/remind.png" width="450" />
+</div>
 
 <div class="caption">Reminder window interface.</div>
 
@@ -1061,7 +1063,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 ### Menu Bar Shortcuts
 
-TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
+TAB has a menu bar which you can click to easily navigate between its various views. Additionally, TAB provides keyboard shortcuts for these menu items to help you stay more productive by keeping your hands on the keyboard.
 
 Menu Item | Shortcut | Action | Description
 ----------|--------|---------|---------
@@ -1070,6 +1072,7 @@ Menu Item | Shortcut | Action | Description
 <kbd>View</kbd> → <kbd>Calendar</kbd> | <kbd>F3</kbd> | View Calendar | Brings you to the calendar interface.
 <kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
 <kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
+<kbd>File</kbd> → <kbd>Exit</kbd> | N.A. | Exit | Quits TAB.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
