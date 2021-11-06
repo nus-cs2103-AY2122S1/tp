@@ -513,7 +513,7 @@ a new `commandType` case for `UndoneEventCommand` is required in `AddressBookPar
 
 An `UndoneEventCommandParser` is needed to parse the user's input and creates an `Index` representing the position of
 the event in the Event list. The `UndoneEventCommand` created by `UndoneEventCommandParser` will contain the `Index`
-of the event in Event list to be undone. When the command is executed, the `model` will retrieve the event at the specified
+of the event in the displayed Event list to be undone. When the command is executed, the `model` will retrieve the event at the specified
 `Index` and change the completion status of the Event object.
 
 ### \[Proposed\] Enroll and Expel multiple participants from multiple events
@@ -521,7 +521,7 @@ of the event in Event list to be undone. When the command is executed, the `mode
 #### Proposed Implementation
 
 The current implementation of `AddParticipantToEventCommand`(enroll) and `RemoveParticipantFromEventCommand`(expel)
-only allows single participant to single event enrolling/expelling. To extend this feature to:
+only allows the enrolling/expelling of a single Participant to/from a single Event. To extend this feature to:
 
 1. Enroll/Expel a participant to/from multiple events.
 2. Enroll/Expel multiple participants to/from an event.
