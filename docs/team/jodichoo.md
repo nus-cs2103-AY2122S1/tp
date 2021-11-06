@@ -46,6 +46,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
+        * Added documentation for the MC goal progress component: [\#88](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/88)
         * Added documentation for the features `take` and `untake`: [\#80](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/80)
         * Updated documentation for `add` feature: [\#45](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/45)
         * Update documentation to reflect additional input format restrictions: [\#167](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/167)
