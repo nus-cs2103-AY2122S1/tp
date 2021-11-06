@@ -43,6 +43,8 @@ deactivate addEmployeeCommandParser
 addEmployeeCommandParser -[hidden]-> rhrhParser
 destroy addEmployeeCommandParser
 
+note left of model : The Employee e added to\nModel is created in Model.\nDetails are not shown here.
+
 rhrhParser -[LOGIC_COLOR]-> logicManager : AddEmployeeCommand
 deactivate rhrhParser
 
