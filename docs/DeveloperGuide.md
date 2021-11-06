@@ -288,24 +288,7 @@ details when this command is executed
         * Error messages would have been confusing to select.
 
 #### Differences regarding editing reservation command
-Parsing `Reservecommand` is similar to other add commands. However, since for `Reservation`, we need some logic to check for restaurant availability, then there are some differences regarding how a `Reservecommand` is executed.
-
-The class diagram below demonstrates the class structure of `Reservecommand`.
-
-![AddReservationCommandClassDiagram](images/AddReservationCommandClassDiagram.png)
-
-The sequence diagram below shows how a valid `ReserveCommand` is executed.
-
-![AddReservationCommandSequenceDiagram](images/AddReservationCommandSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** The lifeline for
-`rm:ReservationManager` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline
-reaches the end of diagram.
-
-</div>
-
+Implementation of `EditReservationcommand` is similar to other edit commands. However, to avoid clashing of the edited reservation with other reservations, only the editing of tags and remark is allowed.
 
 ### Delete Command
 In the following section, we will be going through how our delete command works. Since the delete command is very 
