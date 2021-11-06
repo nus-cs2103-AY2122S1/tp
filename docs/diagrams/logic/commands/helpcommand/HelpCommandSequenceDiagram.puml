@@ -11,7 +11,8 @@ participant ":VersionedModel" as versionedModel MODEL_COLOR
 participant ":AdditionalViewModel" as addViewModel MODEL_COLOR
 end box
 
--> helpCommand ++ : execute
+-> helpCommand: execute(model)
+activate helpCommand
 helpCommand -> versionedModel : setAdditionalViewType(AdditionalViewType.HELP)
 versionedModel -> addViewModel: setAdditionalViewType(HELP)
 
