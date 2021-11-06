@@ -423,7 +423,9 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results
+  of the `find` command.
 
 #### Listing all students: `list`
 
@@ -789,13 +791,13 @@ Format: `remind`
 
 Example: Suppose the date today is 1 Nov 2021 and current time is 1500h, 
 - lessons with the following dates and time are considered upcoming:
-    - 1 Nov 2021 with end time at or after 1500h, 
-    - 2 Nov 2021 with any valid time range, 
-    - 3 Nov 2021 with start time before or at 1500h.
+  - 1 Nov 2021 with end time at or after 1500h, 
+  - 2 Nov 2021 with any valid time range, 
+  - 3 Nov 2021 with start time before or at 1500h.
 - lessons with the following dates and time are not considered upcoming:
-    - dates before 1 Nov 2021 (has passed),
-    - 1 Nov 2021 with end time before 1500h (has passed),
-    - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
+  - dates before 1 Nov 2021 (has passed),
+  - 1 Nov 2021 with end time before 1500h (has passed),
+  - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -844,7 +846,8 @@ Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
 
 Examples:
 
-* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds the recurring lesson with the specified details and outstanding fees is assumed to be `$0.00`.
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
+  starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
 
 * `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
   adds the recurring lesson with an outstanding fee of `$250.00`.
