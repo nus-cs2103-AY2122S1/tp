@@ -1241,8 +1241,15 @@ testers are expected to do more *exploratory* testing.
          Expected: Background image also expanded, alongside other components of the internal controls (result display, student list, and status message)
          Expected: No other visual misbehavior of the User Interface (image is cropped or lacking in any visual design)
       3. Test case: Shrink Academy Directory to the smallest possible size
-         Expected: Academy Directory is not shrinked completely as there is a limit
+         Expected: Academy Directory is not minimized completely as there is a minimal size for users to still see the data
+      4. Test case: Enter keywords to the command bar.
          
 #### User Experience
 
-1. _{ more test cases to come …​ }_
+### System testing
+
+#### Performance testing
+#### Load testing
+#### Compatibility testing
+#### Usability testing
+#### Portability testing
