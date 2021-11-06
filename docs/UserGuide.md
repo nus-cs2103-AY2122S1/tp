@@ -244,20 +244,20 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/E
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
 </div>
-* Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
+* Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
 <div markdown="block" class="alert alert-secondary">
-**:information_source: Prefix inputs for `add` command must follow the following input specifications:**<br>
+**:information_source: Prefix parameters for `add` command must follow the following parameter specifications:**<br>
 
 * You may
-    * refer to [**Add Parameter Specifications**](#add-parameters) for detailed input specifications.
-    * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+    * refer to [**Add Parameter Specifications**](#add-parameters) for detailed parameter specifications.
+    * refer to add parameter specifications for specific prefixes by clicking on relevant links in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
@@ -280,14 +280,14 @@ Edits an applicant's with specified index in RecruitIn.
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
  [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`
  
- * Edit command must take at least 1 prefix input.
+ * Edit command must take at least 1 prefix parameter.
  * The `INDEX` refers to the index number shown in the displayed applicants list.
  * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
 remove tags from the applicant.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Giving more than 1 tag prefix input with 1 or more having no value will instead lead to an error. (i.e. `edit 1 t/ t/smart` leads to an error)
+Giving more than 1 tag prefix parameter with 1 or more having no value will instead lead to an error. (i.e. `edit 1 t/ t/smart` leads to an error)
 </div>
- * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
+ * Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
 * `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
@@ -295,13 +295,13 @@ Examples:
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
 
 <div markdown="block" class="alert alert-secondary">
-**:information_source: Prefix inputs for `edit` command must follow the same input specifications as `add` command:**<br>
+**:information_source: Prefix parameters for `edit` command must follow the same parameter specifications as `add` command:**<br>
 
 * You may 
-  * refer to [**Add Parameter Specifications**](#add-parameters) for detailed input specifications.
-  * refer to add input specifications for specific prefixes by clicking on relevant links in the table below.
+  * refer to [**Add Parameter Specifications**](#add-parameters) for detailed parameter specifications.
+  * refer to add parameter specifications for specific prefixes by clicking on relevant links in the table below.
 
-| Input | Prefix | Specifications |
+| Parameter | Prefix | Specifications |
 | :---: | :---: | :---: |
 | NAME | `n/` | [**name**](#name-n) |
 | PHONE_NUMBER | `p/` | [**phone_number**](#phonenumber-p) |
