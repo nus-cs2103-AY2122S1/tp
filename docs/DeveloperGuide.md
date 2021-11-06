@@ -150,6 +150,7 @@ The `Model` component
   * While `UniqueTagList` stores all existing distinct tags created, `Tag` objects with the same tag name may not have the same reference. This means that each `Person` object still has its own `Tag` objects and the `Tag` is only added into `UniqueTagList` if it does not exist in the tag list yet.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores the `LocalDateTime` object of the date and time the `AddressBook` was updated.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
@@ -709,11 +710,13 @@ Payment of outstanding fees is facilitated by `Money` and its subclasses as well
 `OutstandingFees` and `LessonRates` extends `Money` whereas `Fees` field in `Person` is composed of `OutstandingFees` as it is the sum of `OutstandingFees`. Money uses `BigDecimal` for all calculations.
 
 The user can record payment of the lesson using the `PaidCommand`. Payment made must be greater than 0 and lesser than or equals to the current outstanding fees.
-The `OutstandingFees` field would then be deducted by the paid amount. The following is the sequence diagram of the `PaidCommand`.
+The `OutstandingFees` field would then be deducted by the paid amount. `PaidCommand` extends `UndoableCommand`. The following is the sequence diagram of the `PaidCommand`.
 
 ![PaidCommandSequenceDiagram](images/PaidCommandSequenceDiagram.png)
 
 *Figure I.6.4: Sequence diagram of executing paid command.*
+
+
 
 #### Design Consideration
 
@@ -1368,7 +1371,7 @@ Expected: Error details will be shown in the status message.
 
 ### Fees Calculator
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> Please test the test cases separately and independently for better clarity.</div>
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The test cases below are designed separately and independent of each other. i.e. Test the different test cases separately.</div>
 
 1. Add the recurring lessons and makeup lessons to a student, following the test cases. <br>
    Prerequisites: The lessons do not clash with each other and other existing lessons. If there were clashes, delete the clashing lesson(s).
