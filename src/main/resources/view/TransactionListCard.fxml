@@ -26,7 +26,7 @@
         </Label>
         <Label fx:id="timestamp" text="transaction" styleClass="cell_big_label" />
         <Region HBox.hgrow="ALWAYS" />
-        <Label fx:id="id" alignment="CENTER_RIGHT" text="id" styleClass="cell_big_label" />
+        <Label fx:id="id" alignment="CENTER_RIGHT" text="id" styleClass="cell_big_label_tinted" />
       </HBox>
       <Label fx:id="totalPrice" styleClass="cell_small_label" text="Total price: -" />
       <Label fx:id="totalItems" styleClass="cell_small_label" text="Total items: -" />

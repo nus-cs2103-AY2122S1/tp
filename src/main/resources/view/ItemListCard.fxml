@@ -28,7 +28,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="id" styleClass="cell_small_label" text="\$no ID" />
+      <Label fx:id="id" styleClass="barcode_label" text="\$no ID" />
       <Label fx:id="count" styleClass="cell_small_label" text="\$0" />
       <Label fx:id="costPrice" styleClass="cell_small_label" text="\$0" />
       <Label fx:id="salesPrice" styleClass="cell_small_label" text="\$0" />
