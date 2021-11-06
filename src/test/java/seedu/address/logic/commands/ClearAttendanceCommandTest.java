@@ -14,12 +14,11 @@ import seedu.address.testutil.MemberBuilder;
 
 
 class ClearAttendanceCommandTest {
-    private Model model = new ModelManager(new SportsPa(getTypicalSportsPa()), new UserPrefs());
 
     @Test
     public void execute_someMembersPresent_success() {
-        Member member = new MemberBuilder().build();
-        member.setPresent();
+        Model model = new ModelManager(new SportsPa(getTypicalSportsPa()), new UserPrefs());
+        Member member = new MemberBuilder().withTodayAttendance(true).build();
         model.addMember(member);
 
         ClearAttendanceCommand command = new ClearAttendanceCommand();

@@ -60,7 +60,7 @@ class JsonAdaptedMember {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         availability = source.getAvailability().values;
-        todayAttendance = source.getTodayAttendance().getAttendance();
+        todayAttendance = source.getTodayAttendance().isPresentToday();
         totalAttendance = source.getTotalAttendance().getAttendance();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

@@ -31,7 +31,6 @@ class UnmarkAttendanceCommandTest {
         model.addMember(secondMember);
 
         UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
-
         String expectedMessage = UnmarkAttendanceCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
@@ -53,16 +52,21 @@ class UnmarkAttendanceCommandTest {
         UnmarkAttendanceCommand firstCommand = new UnmarkAttendanceCommand(Arrays.asList(INDEX_FIRST, INDEX_SECOND));
         UnmarkAttendanceCommand secondCommand = new UnmarkAttendanceCommand(Arrays.asList(INDEX_THIRD));
 
+        //same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
+        //same value -> returns true
         UnmarkAttendanceCommand firstCommandCopy = new UnmarkAttendanceCommand(Arrays.asList(INDEX_FIRST,
                 INDEX_SECOND));
         assertTrue(firstCommand.equals(firstCommandCopy));
 
+        //different values -> returns false
         assertFalse(firstCommand.equals(secondCommand));
 
+        //null -> returns false
         assertFalse(firstCommand.equals(null));
 
+        //different types -> returns false
         assertFalse(firstCommand.equals("1"));
     }
 }

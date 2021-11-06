@@ -344,7 +344,6 @@ which will be updated accordingly when the attendance of that `Member` is marked
 as absent.
 * `ModelManager#markOneMemberAttendance(Member)` — Marks attendance of specified member.
 * `ModelManager#unmarkMembersAttendance(Member)` — Unmarks attendance of specified member.
-as absent.
   
 Additionally, `Member` implements the following operations:
 * `Member#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
@@ -434,7 +433,8 @@ The following sequence diagram shows how the find member operation works:
 
 The following activity diagram summarizes what happens when a user enters and executes a find member command:
 
-![FindMemberActivityDiagram](images/FindMemberActivityDiagram.png)
+<img src="images/FindMemberActivityDiagram.png" width="250" />
+
 #### Design considerations
 **Aspect: Implementation of the find member command**
 
