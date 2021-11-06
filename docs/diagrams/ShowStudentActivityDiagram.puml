@@ -1,6 +1,8 @@
 @startuml
 !include style.puml
 
+title: Show performance analysis\nof a student
+
 start
 if () then ([student(s) found in database])
 	:Update student list

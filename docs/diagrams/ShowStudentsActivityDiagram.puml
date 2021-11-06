@@ -1,6 +1,8 @@
 @startuml
 !include style.puml
 
+title: Show performance analysis\nof a group / an assessment
+
 start
 if () then ([group / assessment\n  found in database])
 	:Update student list with\nstudents in group / cohort;
