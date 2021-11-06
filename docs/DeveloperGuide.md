@@ -516,22 +516,22 @@ the event in the Event list. The `UndoneEventCommand` created by `UndoneEventCom
 of the event in the displayed Event list to be undone. When the command is executed, the `model` will retrieve the event at the specified
 `Index` and change the completion status of the Event object.
 
-### \[Proposed\] Enroll and Expel multiple participants from multiple events
+### \[Proposed\] Enroll and Expel multiple Participants from multiple events
 
 #### Proposed Implementation
 
 The current implementation of `AddParticipantToEventCommand`(enroll) and `RemoveParticipantFromEventCommand`(expel)
 only allows the enrolling/expelling of a single Participant to/from a single Event. To extend this feature to:
 
-1. Enroll/Expel a participant to/from multiple events.
-2. Enroll/Expel multiple participants to/from an event.
-3. Enroll/Expel multiple participants to/from multiple events.
+1. Enroll/Expel a Participant to/from multiple Events.
+2. Enroll/Expel multiple Participants to/from an Event.
+3. Enroll/Expel multiple Participants to/from multiple Events.
 
 It is recommended to incorporate the use of the `Prefix` class in these commands. Instead of the current syntax of
 `enroll PARTICIPANT_INDEX EVENT_INDEX` and `expel PARTICPANT_INDEX EVENT_INDEX`. A change to 
 `enroll pid/PARTICIPANT_INDEXES... eid/EVENT_INDEXES...` and `expel pid/PARTICIPANT_INDEXES... eid/EVENT_INDEXES...`
-allows these cases to be possible. The `model` will then remove each of the specified participants from each of the
-specified events.
+allows these cases to be possible. The `model` will then remove each of the specified Participants from each of the
+specified Events.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -557,7 +557,7 @@ specified events.
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage events and event participants faster than a typical mouse/GUI driven app
+**Value proposition**: manage events and event Participants faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -567,7 +567,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                          |
 | -------- | ------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ |
 | `* * *`  | Event organiser                             | add an upcoming event to my list   | keep track of the details of all events I will be organising                   |
-| `* * *`  | Event organiser                             | add a participant to an event      | keep track of the participants for an event                                    |
+| `* * *`  | Event organiser                             | add a Participant to an event      | keep track of the participants for an event                                    |
 | `* * *`  | Event organiser with many concluded events  | delete events from my list         | keep my list of events tidy                                                    |
 | `* * *`  | Event organiser                             | remove a participant from an event | maintain an accurate list of participants attending the event                  |
 | `* * *`  | Event organiser that has concluded an event | mark the event as done             | safely ignore events in my list that have already passed                       |
@@ -813,7 +813,7 @@ Preconditions: At least one Event has been added to Managera.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 participants without a noticeable sluggishness in performance for typical usage. 
+2.  Should be able to hold up to 1000 Participants without a noticeable sluggishness in performance for typical usage. 
 3.  Should be able to hold up to 100 events without a noticeable sluggishness in performance for typical usage.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Should work without having to use an installer or compiler.
@@ -868,17 +868,17 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-### Deleting a participant
+### Deleting a Participant
 
-1. Deleting a participant while all participants are being shown
+1. Deleting a Participant while all Participants are being shown
 
-   1. Prerequisites: List all participants using the `list` command. Multiple participants in the list.
+   1. Prerequisites: List all Participants using the `list` command. Multiple Participants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First participant is deleted from the list. Details of the deleted participant shown in the status message.
+      Expected: First Participant is deleted from the list. Details of the deleted Participant shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No participant is deleted. Error details shown in the status message.
+      Expected: No Participant is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -911,5 +911,5 @@ testers are expected to do more *exploratory* testing.
    
    3. Restart Managera.
 
-   4. Managera will start with no events and participants.
+   4. Managera will start with no events and Participants.
 
