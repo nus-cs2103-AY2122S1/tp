@@ -58,7 +58,8 @@ public class JsonSourceControlStorageTest {
 
     @Test
     public void readSourceControl_invalidAndValidStudentSourceControl_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readSourceControl("invalidAndValidStudentSourceControl.json"));
+        assertThrows(DataConversionException.class, () ->
+                readSourceControl("invalidAndValidStudentSourceControl.json"));
     }
 
     @Test

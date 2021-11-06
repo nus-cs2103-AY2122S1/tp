@@ -59,9 +59,9 @@ import seedu.sourcecontrol.testutil.AllocDescriptorBuilder;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
 import seedu.sourcecontrol.testutil.EditStudentDescriptorBuilder;
 import seedu.sourcecontrol.testutil.GroupBuilder;
+import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
 import seedu.sourcecontrol.testutil.StudentBuilder;
 import seedu.sourcecontrol.testutil.StudentUtil;
-import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
 
 public class SourceControlParserTest {
 

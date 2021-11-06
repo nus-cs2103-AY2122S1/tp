@@ -27,9 +27,9 @@ import seedu.sourcecontrol.model.student.Assessment;
 import seedu.sourcecontrol.model.student.Score;
 import seedu.sourcecontrol.model.student.Student;
 import seedu.sourcecontrol.testutil.AssessmentBuilder;
-import seedu.sourcecontrol.testutil.StudentBuilder;
 import seedu.sourcecontrol.testutil.ScoreBuilder;
 import seedu.sourcecontrol.testutil.ScoreDescriptorBuilder;
+import seedu.sourcecontrol.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with Model) and unit tests for AddScoreCommand.
