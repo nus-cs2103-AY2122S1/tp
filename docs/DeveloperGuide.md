@@ -31,9 +31,15 @@ title: Developer Guide
     - [View Participant's Details feature](#view-participants-details-feature)
       - [Implementation Details](#implementation-details-1)
       - [Implementation Rationale](#implementation-rationale-1)
+<<<<<<< HEAD
       - [Design Considerations](#design-considerations-1)
         - [Aspect: Similar participant IDs](#aspect-similar-participant-ids)
     - [Add/Remove Participant to/from event by index](#addremove-participant-tofrom-event-by-index)
+=======
+      - [Design Considerations:](#design-considerations-1)
+        - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
+    - [Add/Remove Participant to/from event - enroll/expel](#addremove-participant-tofrom-event---enrollexpel)
+>>>>>>> master
       - [Implementation Details](#implementation-details-2)
       - [Implementation Rationale](#implementation-rationale-2)
     - [View Event Details feature](#view-event-details-feature)
@@ -399,45 +405,47 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![ViewCommandActivityDiagram](images/DG-images/ViewCommandActivityDiagram.png)
 
+### Add/Remove Participant to/from event - enroll/expel
 
-### Add/Remove Participant to/from event by index
-
-This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered
- list of events and participant visible to user.
+This feature allows Managera users to quickly add/remove Participant to/from event according to the current filtered
+ list of events and Participant visible to user.
 
 #### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
-hence we add new `commandType` cases for `AddParticipantToEventByIndexCommand` and `RemoveParticipantFromEventByIndexCommand` in `AddressBookParser`
+hence we add new `commandType` cases for `AddParticipantToEventCommand` and `RemoveParticipantFromEventCommand` in `AddressBookParser`
 
-A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. 
-If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
+A `AddParticipantToEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantToEventParser` creates the command itself to prevent any further error. 
+If all indexes are valid, a `AddParticipantToEventCommand` will be created by the parser.
 
-The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains 2 zero-based indexes. 
+The `AddParticipantToEventCommand` created by `AddParticipantToEventParser` contains 2 zero-based indexes. 
 The first one is used to identify the `Participant` while the second is used to identify the `Event`. 
-When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the participant will be added to the event accordingly.
+When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the Participant will be added to the event accordingly.
  Otherwise, a `CommandException` will be thrown.
 
-A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
-The workflow is nearly identical to `AddParticipantToEventByIndex`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
+A `RemoveParticipantFromEventParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+The workflow is nearly identical to `AddParticipantToEvent`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
 the `CommandException` will be thrown when `Participant` *doesn't* exist in the event. After all of that, the `Participant` object will be removed from the `Event`. 
 
 
 #### Implementation Rationale
 
-Since the command implies that the index of participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
+Since the command implies that the index of Participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
 
 The following activity diagrams summarise what happens when a user executes a new command in each case:
 
-`AddParticipantToEventByIndex`
+`AddParticipantToEvent` - `enroll`
 
 ![AddParticipantToEventActivityDiagram](images/DG-images/AddParticipantToEventByIndexActivityDiagram.png)
 
-`RemoveParticipantFromEventByIndex`
+`RemoveParticipantFromEvent` - `expel`
 
 ![RemoveParticipantFromEventActivityDiagram](images/DG-images/RemoveParticipantByIndexActivityDiagram.png)
 
+The command keywords to add/remove participant to/from events are `enroll` and `expel`
+respectively as many have found `addParticipant` and `removeParticipant` to be too long for the commands that are used 
+regularly and the main core of the application.
 
 ### View Event Details feature
 
@@ -505,90 +513,35 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ![ShowEventDetailsActivityDiagram](images/DG-images/ShowEventDetailsActivityDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undone Event feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undone event feature is an add-on command to the current implementation of Managera. Since
+the `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+a new `commandType` case for `UndoneEventCommand` is required in `AddressBookParser`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+An `UndoneEventCommandParser` is needed to parse the user's input and creates an `Index` representing the position of
+the event in the Event list. The `UndoneEventCommand` created by `UndoneEventCommandParser` will contain the `Index`
+of the event in the displayed Event list to be undone. When the command is executed, the `model` will retrieve the event at the specified
+`Index` and change the completion status of the Event object.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+### \[Proposed\] Enroll and Expel multiple Participants from multiple events
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Proposed Implementation
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+The current implementation of `AddParticipantToEventCommand`(enroll) and `RemoveParticipantFromEventCommand`(expel)
+only allows the enrolling/expelling of a single Participant to/from a single Event. To extend this feature to:
 
-![UndoRedoState0](images/DG-images/UndoRedoState0.png)
+1. Enroll/Expel a Participant to/from multiple Events.
+2. Enroll/Expel multiple Participants to/from an Event.
+3. Enroll/Expel multiple Participants to/from multiple Events.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/DG-images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/DG-images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/DG-images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/DG-images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/DG-images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/DG-images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+It is recommended to incorporate the use of the `Prefix` class in these commands. Instead of the current syntax of
+`enroll PARTICIPANT_INDEX EVENT_INDEX` and `expel PARTICPANT_INDEX EVENT_INDEX`. A change to 
+`enroll pid/PARTICIPANT_INDEXES... eid/EVENT_INDEXES...` and `expel pid/PARTICIPANT_INDEXES... eid/EVENT_INDEXES...`
+allows these cases to be possible. The `model` will then remove each of the specified Participants from each of the
+specified Events.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -614,7 +567,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage events and event participants faster than a typical mouse/GUI driven app
+**Value proposition**: manage events and event Participants faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -624,14 +577,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                          |
 | -------- | ------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ |
 | `* * *`  | Event organiser                             | add an upcoming event to my list   | keep track of the details of all events I will be organising                   |
-| `* * *`  | Event organiser                             | add a participant to an event      | keep track of the participants for an event                                    |
+| `* * *`  | Event organiser                             | add a Participant to an event      | keep track of the participants for an event                                    |
 | `* * *`  | Event organiser with many concluded events  | delete events from my list         | keep my list of events tidy                                                    |
 | `* * *`  | Event organiser                             | remove a participant from an event | maintain an accurate list of participants attending the event                  |
 | `* * *`  | Event organiser that has concluded an event | mark the event as done             | safely ignore events in my list that have already passed                       |
 | `* *`    | Event organiser with many events            | sort events by date and time       | keep track of which events occur when and prepare accordingly                  |
 | `*`      | Event organiser with many participants      | find a participant by name         | I can contact the participant to inform him of updates or changes to the event |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -871,7 +823,7 @@ Preconditions: At least one Event has been added to Managera.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 participants without a noticeable sluggishness in performance for typical usage. 
+2.  Should be able to hold up to 1000 Participants without a noticeable sluggishness in performance for typical usage. 
 3.  Should be able to hold up to 100 events without a noticeable sluggishness in performance for typical usage.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Should work without having to use an installer or compiler.
@@ -882,9 +834,22 @@ Preconditions: At least one Event has been added to Managera.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in the form of lines of text.
-* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X. <br>
+* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in the form of lines of text.<br>
+* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.<br>
+* **API**: The Application Programming Interface specifies the interface through which software and other programs interact.<br>
+* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.<br>
+* **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays.<br>
+* **Participant**: A person that is participating in or attending some given event.<br>
+* **Event**: An event that will be conducted in real life e.g., a competition, meeting, social activity etc.<br>
+* **Command**: A command is a specific instruction that you give to Managera to perform a certain action, like adding a 
+  new Participant to the list. Commands will be the primary way that you will interact with Managera.<br>
+* **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell Managera which actions to
+  perform. For example, the `done` command requires a single integer as a parameter so that it knows which event to mark
+  as done.<br>
+* **Prefix**: Prefixes are unique identifiers in front of parameters so that Managera understands what kind of values
+  they are. For example, the prefix "n/" lets Managera know that a name is expected to follow behind it, while the
+  prefix "d/" lets Managera know that a date is expected.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -913,26 +878,48 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-### Deleting a participant
+### Deleting a Participant
 
-1. Deleting a participant while all participants are being shown
+1. Deleting a Participant while all Participants are being shown
 
-   1. Prerequisites: List all participants using the `list` command. Multiple participants in the list.
+   1. Prerequisites: List all Participants using the `list` command. Multiple Participants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First Participant is deleted from the list. Details of the deleted Participant shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No participant is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No Participant is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+
+###  Deleting an Event
+
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `listEvents` command. Multiple events in the list.
+
+   2. Test case: `deleteEvent 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+
+   3. Test case: `deleteEvent 0`<br>
+      Expected: No event is deleted. Error details shown in the status message.
+
+   4. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
 
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Navigate to and open `[JAR file location]/data/managera.json` in a text editor.
 
-1. _{ more test cases …​ }_
+   2. Delete one line of code at the beginning `"participants" : [ {`.
+   
+   3. Restart Managera.
+
+   4. Managera will start with no events and Participants.
+
