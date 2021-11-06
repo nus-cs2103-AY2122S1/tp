@@ -9,8 +9,14 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* The formatting and content of our User Guide and Developer Guide is referenced from [AY2021S2-CS2103T-T11-2/tp](https://ay2021s2-cs2103t-t11-2.github.io/tp/)
+* The NUS Mod Tracker icon is created using [Adobe Photoshop](https://www.adobe.com/sg/products/photoshop.html).
+* Libraries used:
+    - [JavaFX](https://openjfx.io/)
+    - [Jackson](https://github.com/FasterXML/jackson)
+    - [JUnit5](https://github.com/junit-team/junit5)
+    - [TestFX](https://github.com/TestFX/TestFX)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -272,17 +278,12 @@ Certain details have been omitted from the sequence diagram for simplicity, incl
 The `find` command is implemented via the `FindCommand`, `FindCommandParser` and `NameContainsKeywordsPredicate` classes.
 
 The `FindCommandParser` class implements the `Parser` interface and the `FindCommandParser#parse()` method is responsible for parsing the user input to retrieve the `args` String which represents the keywords to search the modules by. <br>
-When the `FindCommandParser#parse()` method is called,
-
-- The `args` String is converted into two arrays of String(s) called `nameKeywords` and `optionalFilter`.
-- The `nameKeywords` array consists of the keywords to search the modules with and the `optionalFilter` array consists of specific components of the module to search for the keywords.
-- A new `NameContainsKeywordsPredicate` object is created by passing in the arrays `nameKeywords` and `optionalFilter` as arguments.
-- A `FindCommand` object is returned with the `NameContainsKeywordsPredicate` object as its argument.
+The `FindCommandParser` checks for any invalid input before creating a new `NameContainsKeywordsPredicate` object and passing in `args` as an array.
+The `FindCommandParser#parse()` method then parses the user input and returns a `FindCommand` object containing the `NameContainsKeywordsPredicate` object.
 
 The `NameContainsKeywordsPredicate` class implements the `Predicate` interface and the `NameContainsKeywordsPredicate#test()` method is responsible for checking if the given module contains any of the valid keywords. <br>
-It contains the non-null `keywords` and `optionalFilter` fields, which is used to find the appropriate modules in the `NameContainsKeywordsPredicate#test()` method. <br>
-When the `NameContainsKeywordsPredicate#test()` method is called, it takes in a `Module` and returns a boolean depending on whether the keyword is found inside the `module`.
-
+It contains the non-null `keywords` fields, which is used to find the appropriate modules in the `NameContainsKeywordsPredicate#test()` method. <br>
+When the `NameContainsKeywordsPredicate#test()` method is called, it takes in a `Module` and returns a boolean depending on whether the keyword is found inside the `Module`.
 
 The `FindCommand` class extends the `Command` class and implements the `FindCommand#execute()` method which handles the main logic of the class. <br>
 It contains the non-null `predicate` field. <br>
@@ -291,6 +292,21 @@ When the `FindCommand#execute()` method is called,
 - The `Model` object is updated with a new `predicate`.
 - The `Model` filters the module list based on the given `predicate`.
 - A `CommandResult` is returned with the updated `Model`.
+
+Below is a sequence diagram, and an explanation of how `FindCommand` is executed.
+![FindCommand](images/FindSequenceDiagram.png)
+
+**Step 1.** The user enters the command "find cs2103t".
+
+**Step 2.** ModuleTrackerParser takes in the user's input, and calls `FindCommandParser#parse()` to create a `FindCommand` object containing the data parsed from the user input.
+
+**Step 3.** The `FindCommand` is then executed by calling its `execute` method.
+
+**Step 4.** The `predicate` of the `Model` is updated by calling its `updateFilteredModuleList` method.
+
+**Step 5.** The list of modules that do not contain the `predicate` are filtered from the `Model`.
+
+**Step 6.** The `Model` is updated to reflect this change in the Mod Tracker.
 
 #### Design considerations:
 
@@ -333,7 +349,7 @@ When the `FindCommand#execute()` method is called,
 
 ### Clear modules feature
 
-####Implementation
+#### Implementation
 
 The `clear` command is implemented via the `ClearCommand`, `ClearCommandParser` and `ModuleInSpecificSemesterPredicate` classes.
 
@@ -723,9 +739,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
+**UC5: Find a module**
+
+**MSS**
+
+1. User requests to find a specific module in the database.
+2. NUS Mod Tracker find the module.
+2. NUS Mod Tracker show the module to the user.
+
+   Use case ends.
+
+**Extension**
+
+* 1a. The given parameters are invalid.
+    * 1a1. NUS Mod Tracker shows an error message.
+
+  Use case resumes at step 1.
+
 #### Academic Plan Features
 
-**UC5: Add a Module to the Academic Plan**
+**UC6: Add a Module to the Academic Plan**
 
 **MSS**
 
@@ -740,7 +773,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 1.
 
-**UC6: Remove a Module from the Academic Plan**
+**UC7: Remove a Module from the Academic Plan**
 
 **MSS**
 
@@ -759,7 +792,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
     
-**UC7: Change current semester**
+**UC8: Change current semester**
 
 **MSS**
 
@@ -783,7 +816,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * a. At any time, User requests to view help(UCxx)
 
 
-**UC8: Set Mc goal**
+**UC9: Set Mc goal**
 
 **MSS**
 
@@ -807,7 +840,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * a. At any time, User requests to view help(UCxx)
 
 
-**UC9: View modules taken in specific semester**
+**UC10: View modules taken in specific semester**
 
 **MSS**
 
@@ -823,7 +856,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * a. At any time, User requests to view help(UCxx)
 
 
-**UC10: Remove all modules in a specific semester from the academic plan**
+**UC11: Remove all modules in a specific semester from the academic plan**
 
 **MSS**
 1. User requests to remove modules in a specific semester from the academic plan.
@@ -838,7 +871,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
-**UC11: Viewing help**
+**UC12: Viewing help**
 
 **MSS**
 1. User requests for help.
