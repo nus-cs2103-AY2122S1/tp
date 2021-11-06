@@ -60,7 +60,6 @@ public class Students {
         if (!students.remove(student)) {
             throw new StudentNotFoundInLessonException();
         }
-        students.remove(student);
     }
 
     /**
