@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
@@ -39,11 +38,10 @@ public class DeleteOrderCommand extends Command {
 
         Order orderToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        //we also delete all related tasks
-        String keyword = "SO" + String.valueOf(orderToDelete.getId());
-        model.deleteTaskIf(task -> StringUtil.containsWordIgnoreCase(task.getTaskTag().tagName, keyword));
-
+        //delete related tasks, and then delete the order.
+        model.deleteRelatedTasks(orderToDelete);
         model.deleteOrder(orderToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, orderToDelete),
                 CommandResult.DisplayState.ORDER);
     }

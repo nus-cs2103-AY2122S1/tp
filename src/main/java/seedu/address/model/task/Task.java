@@ -29,7 +29,7 @@ public class Task {
     }
 
     /**
-     * Mark a task as done by setting isDone to true.
+     * Marks a task as done by setting isDone to true.
      * @return a boolean indicating whether the value of isDone has been changed or not.
      */
     public boolean markDone() {
@@ -76,14 +76,14 @@ public class Task {
     }
 
     /**
-     * Return the task tag id of the task
+     * Returns the task tag id of the task
      */
     public long getTagId() {
         return taskTag.getTagId();
     }
 
     /**
-     * Returns true if both tasks have the same label and tag.
+     * Returns true if both tasks have the same label, tag and date.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -92,7 +92,8 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getLabel().equals(getLabel())
-                && otherTask.getTaskTag().equals(getTaskTag());
+                && otherTask.getTaskTag().equals(getTaskTag())
+                && otherTask.getDate().equals(getDate());
     }
 
     /**
