@@ -12,7 +12,7 @@ Hi, this is AcademyDirectory!
 
 ### Manh Duc
 
-<img src="images/team/hmanhduc2k.png" width="200px">
+<img src="images/hmanhduc2k.png" width="200px">
 
 [[github](https://github.com/johndoe)]
 [[portfolio](team/hmanhduc2k.md)]
@@ -21,7 +21,7 @@ Hi, this is AcademyDirectory!
 
 ### Phuc Cuong
 
-<img src="images/team/phuccuongngo99.png" width="200px">
+<img src="images/phuccuongngo99.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/phuccuongngo99.md)]
@@ -31,7 +31,7 @@ Hi, this is AcademyDirectory!
 
 ### Ee Jia
 
-<img src="images/team/cheweejia.png" width="200px">
+<img src="images/cheweejia.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
@@ -41,7 +41,7 @@ Hi, this is AcademyDirectory!
 
 ### Amadeus
 
-<img src="images/team/amadeus-winarto.jpeg" width="200px">
+<img src="images/amadeus-winarto.jpeg" width="200px">
 
 [[github](http://github.com/amadeus-winarto)]
 [[portfolio](team/amadeus-winarto.md)]
@@ -51,7 +51,7 @@ Hi, this is AcademyDirectory!
 
 ### Tan Jian Wei
 
-<img src="images/team/jianoway.png" width="200px">
+<img src="images/jianoway.png" width="200px">
 
 [[github](https://github.com/jianoway/)]
 [[portfolio](team/jianoway.md)]
