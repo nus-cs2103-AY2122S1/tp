@@ -84,7 +84,7 @@ This guide aims to help users get familiar with using RecruitIn's features.
 If you wish to skip directly to specific features, listed below are some **important** text formatting that you should take
 note of so that you may understand their descriptions better.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you, the user.<br>
   e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
 * Words that are ***bold & italicized*** refers to a stored applicant detail for a certain prefix.<br>
   e.g. ***Name*** could refer to the value `John` stored as a name in the application.
@@ -251,6 +251,10 @@ Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 * `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
+Before: ![images](images/AddBefore.png)
+
+After: ![images](images/AddAfter.png)
+
 <div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix parameters for `add` command must follow the following parameter specifications:**<br>
 
@@ -292,9 +296,12 @@ Giving more than 1 tag prefix parameter with 1 or more having no value will inst
  * Parameters for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 
 Examples:
-* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
-* `edit 1 t/` will remove all ***tags***s from the applicant with index number 1
+* `edit 1 t/` will remove all ***tag***s from the applicant with index number 1
 * `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
+* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
+Before: ![images](images/EditBefore.png)
+
+After: ![images](images/EditAfter.png)
 
 <div markdown="block" class="alert alert-secondary">
 **:information_source: Prefix parameters for `edit` command must follow the same parameter specifications as `add` command:**<br>
