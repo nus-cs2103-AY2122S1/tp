@@ -17,7 +17,7 @@ public class TutorialGroupComparator implements Comparator<Person> {
         if (p2.getTutorialGroup() == null) {
             return -1;
         }
-        return p1.getTutorialGroup().toString().compareTo(p2.getTutorialGroup().toString());
+        return p1.getTutorialGroup().toString().toLowerCase().compareTo(p2.getTutorialGroup().toString().toLowerCase());
     }
 
     @Override

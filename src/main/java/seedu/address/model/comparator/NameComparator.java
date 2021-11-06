@@ -18,7 +18,7 @@ public class NameComparator implements Comparator<Person> {
         if (p2.getName() == null) {
             return -1;
         }
-        return p1.getName().toString().compareTo(p2.getName().toString());
+        return p1.getName().toString().toLowerCase().compareTo(p2.getName().toString().toLowerCase());
     }
 
     @Override
