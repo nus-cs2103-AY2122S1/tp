@@ -818,7 +818,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Listing elderly
 
-   1. Test case: `list n/`<br>
+   1. Test case: `list all/`<br>
       Expected: All elderly are displayed.
 
    2. Test case: `list m/`<br>
