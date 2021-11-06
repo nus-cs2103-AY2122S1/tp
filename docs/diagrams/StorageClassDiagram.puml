@@ -22,7 +22,6 @@ Class JsonAdaptedEvent
 Class JsonAdaptedParticipant
 Class JsonAdaptedTag
 Class JsonAdaptedNextOfKin
-Class JsonAdaptedNote
 }
 
 }
@@ -42,8 +41,7 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedParticipant
 JsonSerializableAddressBook --> "*" JsonAdaptedEvent
-JsonAdaptedParticipant --> "*" JsonAdaptedTag
-JsonAdaptedParticipant --> "*" JsonAdaptedNote
 JsonAdaptedParticipant --> "*" JsonAdaptedNextOfKin
+JsonAdaptedNextOfKin --> "1" JsonAdaptedTag
 
 @enduml
