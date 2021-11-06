@@ -441,9 +441,9 @@ Examples:
 * `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
 * `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
-### Adding student to lesson: `add -sl`
+### Adding a student to a lesson: `add -sl`
 {:.no_toc}
-Adds a student to a lesson.
+Tells TutorAid that a student attends a particular lesson.
 
 Format: `add -sl s/STUDENT_INDEX l/LESSON_INDEX`
 
@@ -456,9 +456,9 @@ Examples:
 
 > :exclamation: The student must not be attending the lesson provided for this command to work.
 
-### Deleting student from lesson: `del -sl`
+### Deleting a student from a lesson: `del -sl`
 {:.no_toc}
-Deletes a student from a lesson.
+Tells TutorAid that a student no longer attends a particular lesson.
 
 Format: `del -sl s/STUDENT_INDEX l/LESSON_INDEX`
 
@@ -552,8 +552,8 @@ Action | Format and Examples
 Action | Format and Examples
 --------|------------------
 **[List](#listing-all-students-and-lessons-list)** | `list [-a]`<br>e.g., `list`, `list -a`
-**[Add students to lessons](#adding-student-to-lesson-add--sl)** | `add -sl s/STUDENT_INDEX l/LESSON_INDEX`<br>e.g.,`add -sl s/1 l/2`
-**[Delete students from lessons](#deleting-student-from-lesson-del--sl)** | `del -sl s/STUDENT_INDEX l/LESSON_INDEX`<br>e.g.,`del -sl s/2 l/1`
+**[Add students to lessons](#adding-a-student-to-a-lesson-add--sl)** | `add -sl s/STUDENT_INDEX l/LESSON_INDEX`<br>e.g.,`add -sl s/1 l/2`
+**[Delete students from lessons](#deleting-a-student-from-a-lesson-del--sl)** | `del -sl s/STUDENT_INDEX l/LESSON_INDEX`<br>e.g.,`del -sl s/2 l/1`
 
 ### 8.4 Other commands
 
