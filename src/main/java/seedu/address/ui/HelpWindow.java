@@ -28,11 +28,9 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
@@ -230,12 +228,9 @@ public class HelpWindow extends AnchorPane {
         EditTaskCommand.EditTaskDescriptor taskDescriptor = new EditTaskCommand.EditTaskDescriptor();
 
         ObservableList<Command> data = FXCollections.observableArrayList(
-                new AddCommand(samplePerson), new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new ClearCommand(), new DeleteCommand(Index.fromZeroBased(0)),
-                new DeleteTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
+                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(Index.fromZeroBased(0)),
                 new DoneCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new EditCommand(Index.fromZeroBased(0), descriptor),
-                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), taskDescriptor), new ExitCommand(),
+                new EditCommand(Index.fromZeroBased(0), descriptor), new ExitCommand(),
                 new FindCommand(null), new ListCommand(), new ReminderCommand(),
                 new SortCommand(false),
                 new UndoCommand(Index.fromZeroBased(0), new ArrayList<>()), new ViewTaskListCommand()
@@ -259,13 +254,10 @@ public class HelpWindow extends AnchorPane {
 
     private void fillCommandTable() {
         commandTable.put(AddCommand.COMMAND_WORD, this::handleAdd);
-        commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(ClearCommand.COMMAND_WORD, this::handleClear);
         commandTable.put(DeleteCommand.COMMAND_WORD, this::handleDelete);
-        commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
         commandTable.put(DoneCommand.COMMAND_WORD, this::handleDoneTask);
         commandTable.put(EditCommand.COMMAND_WORD, this::handleEdit);
-        commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
         commandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
         commandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
         commandTable.put(ListCommand.COMMAND_WORD, this::handleList);
@@ -316,13 +308,6 @@ public class HelpWindow extends AnchorPane {
         );
     }
 
-    private void handleAddTask() {
-        additionalInfo.setText("Format: "
-                + "add INDEX -tn TASK_NAME [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]"
-                + "\nAdds a task to the person at the specified INDEX"
-        );
-    }
-
     private void handleClear() {
         additionalInfo.setText("Format: clear \nClears all entries from ContactSH.");
     }
@@ -333,10 +318,6 @@ public class HelpWindow extends AnchorPane {
                 + "\nDeletes the person at the specified index IF it is valid. "
                 + "\nIf the optional -A flag is given, all of the current data will be deleted"
         );
-    }
-
-    private void handleDelTask() {
-        additionalInfo.setText("Format: rm INDEX -ti TASK_INDEX… \nDeletes a task from the specified person.");
     }
 
     private void handleDoneTask() {
@@ -350,14 +331,6 @@ public class HelpWindow extends AnchorPane {
         additionalInfo.setText("Format: "
                 + "edit INDEX -ti TASK_INDEX [-tn TASK_NAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…"
                 + "\nEdits the person at the specified index IF it is valid"
-        );
-    }
-
-    private void handleEditTask() {
-        additionalInfo.setText("Format: "
-                + "edit INDEX -ti TASK_INDEX [-tn TASK_NAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…"
-                + "\nEdits a task attached to the person (at the specified INDEX) according to the TASK_INDEX"
-                + "\nAt least one of the optional fields must be provided."
         );
     }
 

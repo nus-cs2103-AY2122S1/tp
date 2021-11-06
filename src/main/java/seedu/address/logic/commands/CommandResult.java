@@ -32,6 +32,12 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     *
+     * @param feedbackToUser The feedback given by the program to the user.
+     * @param showHelp The boolean that determines whether the {@code HelpWindow} is shown.
+     * @param exit The boolean that determines whether the program should exit.
+     * @param changeCommandBox The boolean that determines whether the commandBox should be emptied.
+     * @param additionalText Extra information to show to the user.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean changeCommandBox,
                          String additionalText) {
@@ -44,6 +50,10 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} without changeCommandBox.
+     *
+     * @param feedbackToUser The feedback given by the program to the user.
+     * @param showHelp The boolean that determines whether the {@code HelpWindow} is shown.
+     * @param exit The boolean that determines whether the program should exit.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -59,6 +69,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
+     *
+     * @param feedbackToUser The feedback given by the program to the user.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);

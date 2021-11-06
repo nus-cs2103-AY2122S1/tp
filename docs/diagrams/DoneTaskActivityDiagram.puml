@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters donetask command;
+if () then ([Valid command format])
+    :Retrieve the last shown Person list;
+  if () then ([Valid Person Index])
+    :Retrieve the task list of the Person at INDEX;
+    if () then ([Valid Task Index])
+      :Retrive the task specified by the task index;
+      :Mark the task as done;
+    else ([else])
+      :Show invalid TASK_INDEX error message;
+    endif
+  else ([else])
+    :Show invalid INDEX error message;
+  endif
+else ([else])
+  :Show invalid format error message;
+endif
+
+stop
+
+@enduml
