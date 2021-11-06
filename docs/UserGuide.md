@@ -52,27 +52,42 @@ We hope you find this User Guide helpful in using ClassMATE!
 
 ## Quick Start
 
-
 1. Ensure you have Java `11` or above installed in your Computer. (Go to [this website](https://codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) and follow the instructions to download and install Oracle JDK 11, which is _basically_ Java 11.)
 1. Download the latest `classmate.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-1/tp/releases).
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-annotated.png)
-1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-   * **`liststu`** : Lists all students.
+1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. 
+   Check out some examples in the [Tutorial](#CLI Tutorial)
+1. Refer to the [Features](#Features) below for details of each command.
 
-   * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
+## CLI Tutorial
 
-   * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
+In this section, you will familiarize yourself with the use of CLI to facilitate your experience when using ClassMATE.
+All commands would be typed in the **Command-Line Input** located at the top of the user interface as shown in the image below.
 
-   * **`clear`** : Deletes all students.
+![Command Line Input](images/CommandLineInput.png)
 
-   * **`exit`** : Exits the app.
-1. Refer to the [Features](#features) below for details of each command.
+Once you have familiarised yourself with the layout of the application, try out some example commands!
 
+Some example commands you can try:
+* **`liststu`** : Lists all students. All students currently stored in ClassMATE will be displayed in the **Student Panel**.
 
-### Command Features
+* **`addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00pm to 4:00pm`**: Adds a tutorial class with the code `G06`. The **Tutorial Class Panel**
+  should reflect the updated list of tutorial classes including your new class, `G06`.
+
+* **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
+  The **Student Panel** Should reflect the updated list of students including your new student, `John Doe`.
+
+* **`deletestu 3`**: Deletes the 3rd student shown in the current list.
+
+* **`clear`** : Deletes all data from ClassMATE.
+
+* **`exit`** : Exits the app.
+
+Once you have attempted these commands, you're ready to go!
+
+### Command Format
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
@@ -92,14 +107,21 @@ We hope you find this User Guide helpful in using ClassMATE!
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* If you add parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`), they will be ignored.<br>
+* If you add parameters for commands that do not take in parameters (such as `help`, `liststu`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
+## Features
+
+Here, you can find instructions on how to use ClassMATE's various features. The features are divided into three main subsections,
+each covering different subsections, namely the Tutorial Class Features, Student features and Tutorial Group Features. Each
+subsection will provide you with an overview of the section, followed by the individual commands' formats, instructions on how to use them,
+examples of use and the expected outcome of executing these commands.
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page, which directs you to this user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -187,6 +209,19 @@ Examples:
 * `findc G06` followed by `deletec 1` deletes the 1st class in the results of the `findc` command.
 
 ## Student Commands
+
+This part of the guide covers all the commands you can use to manage student information! 
+
+These features include the ability to:
+1. Add new students
+1. Edit and existing student
+1. View a student's details
+1. Delete a student
+1. List all students
+1. Find students by name
+1. Add class participation marks
+1. Removing class participation marks
+1. Delete all students
 
 ### Adding a student: `addstu`
 
@@ -337,6 +372,113 @@ Examples:
 * `liststu` followed by `addlm 2 m/Low`  and `deleteam 2` deletes all marks assigned to the 2nd student in the student list.
 * `findstu Betsy` followed by `deleteam 1` deletes all sessions' mark for 1st student in the results of `findstu`.
 
+### Clearing all students : `clear`
+
+Clears all students from ClassMATE. Below is how it would look like.
+
+![clear](images/clear.png)
+
+Entering format: `clear`
+
+<div markdown="span" class="alert alert-primary">:warning: **Warning:**
+This command deletes **ALL** students and is irreversible :warning:
+</div>
+
+## Tutorial Class Commands
+
+This section covers all the commands you can use to manage information pertaining to tutorial classes! 
+
+Features include the ability to:
+1. Add a tutorial class
+1. View all students in a tutorial class
+1. List all tutorial classes
+1. Find a tutorial class by its class code
+1. Delete a tutorial class
+
+### Adding a tutorial class : `addc`
+
+Adds a tutorial class to ClassMATE.
+
+Entering format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary"> :information-source: **Note:**
+
+* Class Code should consist of 'G' followed by two numerical digits (i.e. any value from `G01` to `G99`).
+
+* Schedule consists of 2 weekly timeslots. Day of the week should be capitalized. Short form for days are also accepted (e.g. Tues for Tuesday).
+
+* Time slots in Schedules should be written in the H:MM am/pm (e.g. 12:00pm)
+
+</div>
+
+Examples:
+* `addc c/G01 s/Tuesday 2:00pm to 4:00pm, Friday 2:00 to 4:00pm`
+* With short form for days: `addc c/G02 s/Tues 10:00am to 12:00pm, Fri 10:00am to 12:00pm`
+* With tags: `addc c/G06 s/Monday 10:00am to 12:00pm, Thursday 10:00am to 12:00pm t/Favourite`
+
+### Viewing a class: `viewc`
+
+![viewing a class](images/viewc.png)
+
+Displayes a class and its students in ClassMATE, as shown above.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br>
+`viewc` highlights the class chosen, and filters out only students in the class!
+</div>
+
+Entering format: `viewc INDEX`
+
+* Views the class details at the specified INDEX.
+* Details of a class includes students in the class and the class schedule.
+* The index refers to the index number shown in the displayed list of classes.
+* The index must be a positive integer 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+In order to find a specific class, use the `findc` command to find a particular class before viewing it.
+
+</div>
+
+Examples:
+
+* `listc` followed by `viewc 2` shows the 2nd class in the displayed class list.
+
+### Listing all classes : `listc`
+
+Shows a list of all classes in ClassMATE.
+
+Entering format: `listc`
+
+### Finding classes by class codes: `findc`
+
+Find classes by class codes.
+
+Entering format: `findc KEYWORD [MORE_KEYWORDS]`
+
+* The search is not absolute. e.g `G0` will match `G06`
+
+Examples:
+* `findc G02` returns `G02` if it exists
+* `findc G` returns `G01`, `G02`, `G03`<br>
+
+### Deleting a class: `deletec`
+
+Deletes a class from ClassMATE
+
+Entering format: `deletec INDEX`
+
+* Deletes the class at the specified INDEX.
+* The index refers to the index number shown in the displayed list of classes.
+  The index **must be a positive integer** 1, 2, 3, …​
+* Students formerly belonging to the deleted would now be assigned to `No Class`.
+
+![deleteClass](images/deletecScreenshot.png)
+
+Examples:
+* `listc` followed by `deletec 2` deletes the 2nd class in the list of classes.
+* `findc G06` followed by `deletec 1` deletes the 1st class in the results of the `findc` command.
+
+
 ## Tutorial Group Commands
 
 These are the commands that involve tutorial groups!
@@ -476,19 +618,19 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 atd/1 t/attentive` 
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com` 
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
-**List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
-**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
+**List students** | `liststu`
+**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G02 s/Tues 10:00am to 12:00pm, Fri 10:00am to 12:00pm`
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
-**Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
-**Delete Tutorial Group** | `deletecg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `deletecg gn/1 c/G11 type/OP1` 
+**Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G01 type/OP1`
+**Delete Tutorial Group** | `deletecg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `deletecg gn/1 c/G11 type/OP1`
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
@@ -499,3 +641,7 @@ Action | Format, Examples
 
 **Java 11** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
 **JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
+**CLI** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following
+visual prompts from the program.
+**GUI** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with
+a program through graphical icons.

@@ -3,12 +3,16 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddLastMarkCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.student.Student;
@@ -19,13 +23,19 @@ import seedu.address.model.tag.Tag;
  */
 public class StudentUtil {
 
+    public static final String GOOD_MARK = "Good";
+
     /**
      * Returns an add command string for adding the {@code student}.
      */
-
     public static String getAddCommand(Student student) {
         return AddStudentCommand.COMMAND_WORD + " " + getStudentDetails(student);
 
+    }
+
+    public static String getAddLastMarkCommand(Index index) {
+        return AddLastMarkCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased()
+                + " " + PREFIX_MARK + GOOD_MARK;
     }
 
     /**
