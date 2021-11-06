@@ -251,7 +251,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g., `Han` will not match `Hans`.
-* Participants whose names match at least one keyword will be returned (i.e. `OR` search).
+* Participants whose names match at least one keyword will be returned.
   e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
@@ -434,7 +434,7 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g., `Marathon Commencement` will match `Commencement Marathon`.
 * Only the name is searched.
 * Only full words will be matched e.g., `Marath` will not match `Marathon`.
-* Events matching at least one keyword will be returned (i.e. `OR` search).
+* Events matching at least one keyword will be returned.
   e.g., `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`.
 
 Examples:
