@@ -1565,6 +1565,14 @@ Implementation of these features took ~4k Loc.
 
 **Undo/Redo feature**
 
+The implementation of `UndoableCommand` and `UndoRedoStack` was a solution adapted from [SE-EDU AddressBook 4](https://github.com/nus-cs2103-AY1718S2/addressbook-level4/blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java).
+However, we have modified the implementations such that each command knows how to undo itself, while more tedious, allows us to control which panels to display e.g. student, tags, calendar etc.
+Furthermore, the implementation of `undo` command such that if `undo` was executed in a `filteredPersonsList`, after the execution of `undo`, the display panel would remain on the `filteredPersonsList` if the `undo` command affects a student that is already in the `filteredPersonsList` else it would return to the list with all the students,
+was unexpectedly tedious with the need to check through each command and ensuring that the referenced indexes are universal. Similar challenges were faced for `redo` as well.
+
+Arguably, one of the most challenging aspects of implementing `undo` and `redo` feature was to handle all the regression errors. With our approach of making each command know how to undo itself and also our many types of display,
+regression error to make undo compatible with all the new commands was arguably the most tedious and challenging aspect of this implementation.
+
 **Finding students**
 
 **Lessons**
@@ -1572,5 +1580,14 @@ Implementation of these features took ~4k Loc.
 **Clashing Lessons**
 
 **Fee Calculator**
+
+We have undergone many lengthy discussions on how to implement the automated Fees Update as we needed to decide all the different cases of when fees should be automatically update. 
+The implementation of Fees Calculation was also extremely tedious with many new fields to add to `lesson` as well as a new `lastUpdatedDate` to be added to `AddressBook`. Along with all these new fields, we needed to design the implementation of these fields as well 
+e.g. Initially we used `float` to implement Monetary fields and realised it was optimal due to the rounding off errors and changed it to `BigDecimal`. There were many such instances during the implementation of the many fields to facilitate `FeesCalculator` hence the long and tedious implementation.
+
+While the groundwork for `FeesCalculator` was tedious, the implementation of the algorithm to get the number of lessons was extremely challenging. There were many edge cases to account for, and we have cycled through multiple versions of the algorithm.
+The current method `FeesCalculator#getNumOfLessonsSinceLastUpdated()` was mainly contributed by [Eliana](http://github.com/eeliana) with earlier versions contributed by various members of the team as well ([Lingshan](http://github.com/lingshanng) and [Koon Hwee](http://github.com/angkoonhwee)). 
+The test scripts were written by multiple team members to ensure a bug-free implementation of `FeesCalculator`. The implementation of the automated fees update feature was thoroughly tested and reviewed by all members of the team due to its complexity.
+
 
 
