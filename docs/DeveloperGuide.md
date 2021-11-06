@@ -341,7 +341,7 @@ Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `del
 of TutorialClass `G08` to `G00`.
 
 ### Tutorial Group Management Features
-This feature is split into two parts. 
+This feature is split into two parts.
 * Adding/removing tutorial group to tutorial class (Contributed by Ngu Yi Yang)
 * Adding/removing student to tutorial group. (Contributed by Zhou Yirui)
 
@@ -355,7 +355,7 @@ ClassMATE allows the user to manage information relevant to the TutorialGroup. A
 #### Current Implementation (Adding/removing tutorial group to tutorial class)
 
 The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
-`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial groups. 
+`UniqueTutorialClassList` containing all tutorial classes, where each class maintains a `UniqueTutorialGroupList` containing its tutorial groups.
 Tutorial groups are identical only if all its attributes, `GroupName`, `ClassCode` and `GroupType` are the same.
 `Classmate` contains a summary of all the logic of the interaction between tutorial group and tutorial class such as
 adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`.
@@ -411,7 +411,7 @@ The *Sequence Diagram* below summarizes the aforementioned steps.
     * Pros: Simpler to implement, easier to add or remove tutorial groups.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
-    
+
 ### Recommended workflow for setting up ClassMATE
 
 The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
@@ -525,7 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. The given parameter to edit is a Class Code.
 
     * 3b1. ClassMATE removes all existing tutorial groups of the student.
-    
+
       Use case resumes at step 4.
 
 **Use case: List students**
