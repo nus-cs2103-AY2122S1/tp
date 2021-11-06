@@ -23,6 +23,11 @@ Given below are my contributions to the project.
   * Credits: Uses [OpenCSV](http://opencsv.sourceforge.net/) to create the CSV files
   * Credits: Inspired by LUMINUS allowing Instructors to export CSV file of students details
   
+* **Testing**
+  * Wrote test cases for handling `tag` command
+  * Wrote test cases for handling `mailingList` command
+  * Wrote test cases for handling `Tag` command
+
 * **Documentation**:
   * Developer Guide:
     * Added user stories for versions 1.1 and 1.2 (Pull requests [\#13](), [\#35]())
@@ -31,7 +36,8 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Integrated a third party library (OpenCSV) to the project ([\#91]())
-  * Improved TestUtils by adding the ability to create different AddressBook states for testing ([\#52]())
+  * Improved `TestUtils` by adding the ability to create different AddressBook states for testing ([\#52]())
   
 * **Community**:
   * Reported bugs and suggestions for other teams in the class ([examples](https://github.com/cookiedan42/ped/issues))
+  * PRs reviewed (with non-trivial review comments): [\#42](), [\#53]()
