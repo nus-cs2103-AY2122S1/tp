@@ -263,11 +263,40 @@ and the source path for the background image.
 the background image.
 * Cons: There is a limited choice of color blocking. The bulk of the theming is made from a specified color shading.
 
-**Proposed Implementation**
 
-We can possibly create an interface for users to choose primary secondary and tertiary colors and upload an image file. 
-From this we can help the user to create more themes and further allow the user to personalize the application
-to their own personal preferences.
+### [/Proposed] Theme adding feature
+#### Current Implementation
+
+Currently, users are allowed to switch between pre-defined and pre-made themes that are provided by the application. However, we 
+currently only support a limited number of themes which may not fit the user's preferences. Users are currently not allowed to 
+create their own themes even if they create their own CSS files. The only way to define their own theme would be to overwrite 
+current CSS files and replace the theme completely.
+
+#### Proposed Implementation
+We can create an interface to allow users to create their own themes and their own CSS files. The CSS files has been refactored
+for easy creation of new themes.
+<br/><br/>
+User only needs to provide the following:
+* Theme Name
+* Background image 
+* Primary color
+* Secondary color
+* Tertiary color
+
+With this information, it would be possible to create a new theme that is custom to the user's preference.
+
+Given below is an MSS of an example usage scenario of a user creating their own theme.
+
+**Use case: UCP1-Add user defined Theme**
+
+**MSS**
+
+1. User requests to add theme to the application
+2. User provides theme name, background image and color blocking
+3. New theme is created
+4. Application switches to the new theme Use case ends
+
+
 
 ### [/Proposed] Genre adding feature
 
@@ -287,9 +316,9 @@ We can allow the user to modify the `GenreList` by adding both a add `Genre` com
 * Cons: `Genre` must be synced in multiple locations, and deletion of a `Genre` from the `GenreList` would require the system to remove the `Genre` from all tagged `Animes`.
 
 
-Given below is a MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
+Given below is an MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
 
-**Use case: UCP1 - Add Genre to the GenreList**
+**Use case: UCP2 - Add Genre to the GenreList**
 
 **MSS**
 1.  User requests to add a genre to the genre list
