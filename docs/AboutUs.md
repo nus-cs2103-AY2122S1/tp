@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jodichoo.png" width="200px">
 
-[[github](http://github.com/jodichoo)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jodichoo)] [[portfolio](team/jodichoo.md)]
 
 * Role: Developer
 * Responsibilities: Data
