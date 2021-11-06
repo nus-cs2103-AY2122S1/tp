@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORGANISATIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -25,12 +26,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.organisation.Organisation;
 import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
@@ -102,8 +105,17 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        List<Organisation> organisationList = model.getFilteredOrganisationList();
+        for (Organisation organisation: organisationList) {
+            UniquePersonList persons = organisation.getPersons();
+            if (persons.contains(personToEdit)) {
+                persons.setPerson(personToEdit, editedPerson);
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
 
         if (updateViewed) {
             model.updateViewedPerson(new Predicate<Person>() {
