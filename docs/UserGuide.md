@@ -166,7 +166,7 @@ Format: `help`
 Shows a list of all contacts in the address book. <br/>
 
 ##### Sorting contacts : `sort`
-Sorts all contacts and shows the list in alphabetical order. <br/>
+Sorts all contacts permanently and shows the list in alphabetical order. <br/>
 
 Format: `sort`
 ![result for 'sort'](images/sortscreenshot.png)
@@ -379,6 +379,7 @@ Examples:
 * Use organisations to help you link contact together!
 * An organisation can have any number of persons within it (including 0). However, an organisation must have a name and email.
 * Remember to add the member persons separately before adding them.
+* Organisation names must be unique, emails can be repeated.
 </div>
 
 ##### Deleting an organisation: `deleteorg`
@@ -401,6 +402,7 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 :information_source: Add a person to an organisation one at a time! 
+* A person can belong to more than one Organisation.
 * Multiple addition will be implemented in future versions.
 </div>
 
