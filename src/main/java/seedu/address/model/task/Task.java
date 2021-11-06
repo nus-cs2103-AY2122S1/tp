@@ -92,7 +92,8 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getLabel().equals(getLabel())
-                && otherTask.getTaskTag().equals(getTaskTag());
+                && otherTask.getTaskTag().equals(getTaskTag())
+                && otherTask.getDate().equals(getDate());
     }
 
     /**
