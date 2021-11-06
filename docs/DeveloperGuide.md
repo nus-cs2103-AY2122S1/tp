@@ -32,7 +32,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -65,15 +65,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanelPlaceholder`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of multiple parts e.g.`CommandBox`, `ListPanelPlaceholder`, `StatusBarFooter`, `HelpWindow` etc. These parts, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `XYZListPanel` is in turn made up of other parts e.g. `StudentListPanel`, `TaskListPanel`, `GroupListPanel`.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -88,12 +88,12 @@ The `XYZListPanel` consists of either a `StudentListPanel`, `TaskListPanel` or `
 
 Each of these `XYZListPanel`s consists of their own `XYZCard` components which make up the final GUI.
 
-The layout of these `XYZListPanel`s are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The layout of these `XYZListPanel`s are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,7 +121,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`]
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -134,7 +134,7 @@ The `Model` component,
 
 The class diagrams of the `Student`, `Task` and `Group` classes are shown below:
 
-#####Task Component
+#### Task Component
 
 ![Structure of the Task Class](images/TaskClassDiagram.png)
 
@@ -162,7 +162,7 @@ The `Group` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -173,7 +173,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -353,9 +353,26 @@ This process is shown in the following sequence diagram:
 The following steps describe the execution of the `EditGroupCommand`.
 
 1. `EditGroupCommand` uses the provided `Index` and `EditGroupDescriptor` to create the updated `Group` object.
-2. `EditGroupCommand` then calls the `setGroup` method of the `Model` class to replace the previous `Group` object with the newly updated one.
-3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have the updated `Group` object as a field, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
-4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data.
+2. `EditGroupCommand` calls the `setGroup` method of the `Model` class to replace the previous `Group` object with the newly updated one.
+3. `Model` then updates all `Student` objects that are part of the `Members` class of the group. This is achieved by creating new `Student` objects that have a reference to the `GroupName` of the updated group, and calling the `setStudent` method of `AddressBook` to update the `Student data`.
+4. Finally, `Model` calls the `setGroup` function of the `AddressBook` to update the `Group` data of the `AddressBook`.
+
+#### Design considerations:
+
+* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
+    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
+    * Cons: Increases coupling between `Student` and `Group` classes.
+
+* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
+    * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
+    * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
+      unnatural modelling of the real world since `Group` contains students and not the other way around.
+
+* Alternative 3: Have `Members` save the `Name` of students only
+    * Pros: Smaller JSON file size due to smaller volume of information being referenced to, lesser coupling due to only a unidirectional association.
+    * Cons: Unable to display the `GroupName` of a `Student` in the student display list using simple code implementation, reduction in input validation capabilities (assigning 1 student to 2 groups) since there is no direct way to determine if a `Student` is already in a group.
+
+<div style="page-break-after: always;"></div>
 
 ## Edit Task Command
 
