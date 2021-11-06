@@ -195,7 +195,7 @@ The following activity diagram shows what happens when a user executes the `edit
 * **Alternative 2:** Exclusive command to add Category field
   * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
   * Cons: Reduces usability due to the need to remember another command
-    
+  
 ### Delete Feature
 
 #### Implementation
@@ -337,7 +337,7 @@ Given below is an example usage scenario of the view mechanism.
 
 Step 1. The user launched the application for the first time. The `filteredContact` List will be initialized with all contacts in the addressBook `UniqueContactList`.
 
-Step 2. The user executes `view n/Marina Bay Sands` command to display the contact details of Marina Bay Sands. The `Parser` parses user input and creates a `ViewCommandName`. 
+Step 2. The user executes `view n/Marina Bay Sands` command to display the contact details of Marina Bay Sands. The `Parser` parses user input and creates a `ViewCommandName`.
 
 Step 3. The view command calls the `Model#getFilteredContactList()` and iterates through the list to check for a matching contact Name. If the contact is successfully retrieved, the Display Pane updates with details of Marina Bay Sands.
 
@@ -480,7 +480,6 @@ The following activity diagram summarizes what happens when a user executes a co
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-    
 
 ### Review Feature
 
@@ -837,7 +836,7 @@ Use case ends.
 
 **UC09 - View a Contact**
 
-**UC10 - Navigate Input History** 
+**UC10 - Navigate Input History**
 
 **MSS**
 1. User request for a previously entered command.
@@ -1027,7 +1026,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
       Expected: Similar to previous.
-      
 
 ### Listing all contacts
 
@@ -1053,7 +1051,7 @@ testers are expected to do more *exploratory* testing.
   
     1. Test case: `sum`<br>
        Expected: Displays summary with the correct information.
-  
+
     1. Test case: `sum 2`<br>
        Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
 
@@ -1066,25 +1064,25 @@ testers are expected to do more *exploratory* testing.
   
     1. Test case: `edit 1 c/fnb`<br>
        Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
-  
+   
     1. Test case: `clear`<br>
        Expected: Entire contact list is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
-  
+
     1. Test case: `delete 1`<br>
        Expected: First contact in WhereTourGo is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
-  
+
     1. Test case: `find VALID_SEARCH_QUERY` (any keyword in WhereTourGo) <br>
        Expected: Displays results of the `find` command. Summary is displayed.
-  
+
     1. Test case: `filter c/fnb` <br>
        Expected: Displays results of the `filter` command. Summary is displayed.
-  
+
     1. Test case: `list` <br>
        Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
-  
+
     1. Test case: `undo` (A command affecting WhereTourGo must be run first, such as `delete`) <br>
        Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
-  
+
     1. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
        Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
 
@@ -1145,7 +1143,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `undo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
-    
+  
 ### Redoing operations
 1. Redoing changes consecutively
 
@@ -1154,7 +1152,7 @@ testers are expected to do more *exploratory* testing.
         1. `edit 1 e/123@example.com`
         1. `undo`
         1. `undo`
-        
+   
      1. Test case: `redo`<br>
        Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
 
@@ -1163,7 +1161,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `redo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
-    
 
 ### Exporting data
 
@@ -1193,7 +1190,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `clear`<br>
        Expected: All contacts are cleared from WhereTourGo. Success message shown in the status message. Contact Pane will be empty.
-       
+      
     1. Test case: `clear`<br> and repeat `clear` again
        Expected: Cannot be cleared twice. Error message shown in the status message. Contact Pane will remain empty.
 
@@ -1238,4 +1235,3 @@ testers are expected to do more *exploratory* testing.
      
 
 ## **Appendix: Effort**
-
