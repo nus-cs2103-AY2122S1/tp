@@ -408,7 +408,10 @@ Examples:
 Shows the total orders for each client in the application.
 
 <div markdown="block" class="alert alert-info">
-:information_source: After adding/deleting orders, you might want to run this command again to refresh the window.
+:information_source:
+
+* Clients without orders will not be displayed.
+* After adding/deleting orders, you might want to run this command again to refresh the window.
 </div>
 
 ![TotalOrdersWindow](images/TotalOrdersWindow.png)
