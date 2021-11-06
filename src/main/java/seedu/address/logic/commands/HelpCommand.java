@@ -10,6 +10,14 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+    public static final String MORE = "more";
+    public static final String EMPTY = "";
+    public static final String COMMAND_DESCRIPTION = "Shows program usage instructions.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: "
+            + "[COMMAND] \n"
+            + "Example: " + COMMAND_WORD + "; "
+            + COMMAND_WORD + " " + AddCommand.COMMAND_WORD + "; "
+            + COMMAND_WORD + " " + MORE;
 
     public static final String SPACE = "            ";
 
@@ -32,14 +40,9 @@ public class HelpCommand extends Command {
             + ExitCommand.COMMAND_WORD + SPACE + ExitCommand.COMMAND_DESCRIPTION
             + "For more information, enter <help more>.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
-
-    public static final String MORE = "more";
-
-    public static final String EMPTY = "";
 
     private final String commandWord;
 

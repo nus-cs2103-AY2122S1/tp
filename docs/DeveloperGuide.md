@@ -11,16 +11,16 @@ title: Developer Guide
     * [Model component](#model-component)
     * [Storage component](#storage-component)
     * [Command classes](#common-classes)
-      
+
 * [Implementation](#implementation)
     * [Tags](#tags)
-    * [Pin feature](#pin-feature) 
+    * [Pin feature](#pin-feature)
     * [Find feature](#find-feature)
     * [FindAny feature](#findany-feature)
     * [Help feature](#help-feature)
     * [Birthday Reminder feature](#birthday-reminder-feature)
     * [Mailing List feature](#mailing-list-feature)
-    
+
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
@@ -141,7 +141,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed. 
+* stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed.
 * stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -212,7 +212,11 @@ Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 #### Implementation
 
+<<<<<<< HEAD
 The pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations: 
+=======
+The proposed pin mechanism is facilitated by `UniquePersonList`. It stores all the list of contacts in CONNECTIONS and maintains the order of these contacts according to if they are pinned or not. Pinned contacts have a higher priority and hence are displayed first. It currently implements the following operations:
+>>>>>>> a97ce17a38ef3307791f387a33178a829efa2a59
 * `UniquePersonList#add` - adds a contact into the list of stored contacts and stores the contacts according to their priority. 
 * `UniquePersonList#setPerson` - updates an edited contact in the list of stored contacts and stores the contacts according to their priority. 
 
@@ -221,7 +225,7 @@ The operation are exposed in the `Command` interface as `Command#Execute`, speci
 Given below is an example usage scenario and how the pin mechanism behaves at each step.
 
 Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
-    
+
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
 Step 2. The user executes `add n/person3 …​` to add a new contact. This contact is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
@@ -268,11 +272,11 @@ The following sequence diagram shows how the pin operation works:
 
 * **Option 1 (current choice):** Have two seperate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
     * Pros: Easier to implement.
-    * Cons: More code duplication. 
+    * Cons: More code duplication.
 
 * **Option 2:** Have one card that will add a pin if the contact is pinned.
     * Pros: Harder to implement.
-    * Cons: Less code duplication. 
+    * Cons: Less code duplication.
 
 ### Find feature
 
@@ -326,7 +330,7 @@ Step 2. The user executes `findAny n/David n/Henry t/friend t/football` to searc
 Step 3. A `FindAnyPredicate`  which will only return `true` if contact's name contains **either** `David` **or** `Henry` **OR** are
 tagged to **either** `friend` **or** `football` is made.
 
-Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list. 
+Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
@@ -403,21 +407,30 @@ Step 7. CONNECTIONS `UI` will observe a change in the `ObservableList<Person>` a
     * Cons: Harder to implement and maintain.
     
 ### Mailing List feature
-Allows user to download a CSV file mailing list of the current view
-Users can use arguments to specify which fields to include in their download
+Allows user to download a CSV file mailing list of the current view.  
+Users can use arguments to specify which fields to include in their download.
 
 #### Implementation
 Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
-Step 1. The user filters the contacts using other commands, eg. `find`.
+Step 1. The user filters the contacts using other commands, eg. `find`.  
+Step 2. The `FilteredList` in `Model` is updated.  
+Step 3. The UI is updated to reflect this new state.  
+Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
+Step 5. These `Prefix` arguments are stored in `Model`.  
+Step 6. The user is prompted to pick the name and download location of their generated CSV file.  
+Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
+![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)  
+Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
+Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
+Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 
-Step 3. The user is prompted to pick the name and download location of their generated CSV file.
+
 
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
+* Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 ### [Proposed] Partial data recovery feature
 Allows user to recover partial data in event of corruption in data file. 
