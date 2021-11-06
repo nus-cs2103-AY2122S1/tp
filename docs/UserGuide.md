@@ -65,8 +65,7 @@ Let's try adding a student with the following details:
    * This adds a student with the details specified.
    * You will now be able to see __David__ at the entry in the person panel on the left,
    as shown in the image below.
-
-<br> <-- insert image here --> Just added David.
+   ![Add David](images/imagesInUG/student-addDavid.png)
 
 2. Now lets try editing his address. Note the index number beside his name in the person panel, in this case it is 5.<br>
    Type the following command `student -e 5 a/Kent Ridge` and hit `Enter`.
@@ -277,7 +276,7 @@ Format: `student -dl PERSON_INDEX LESSON_INDEX`
 * Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
 * The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v) as shown below.
 
-![studentLessonIndex](images/LessonIndex.png)
+![studentLessonIndex](images/imagesInUG/student-findLesson.png)
 
 Example:
 * `student -dl 1 1` deletes the first lesson from the first student.
