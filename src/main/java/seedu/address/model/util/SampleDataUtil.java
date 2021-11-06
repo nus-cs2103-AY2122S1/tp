@@ -50,10 +50,10 @@ public class SampleDataUtil {
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName("W10-2")),
             new Student(new Name("Irfan Ibrahim"), new Email("irfan@u.nus.edu"), new StudentNumber("A0823456B"),
                     new UserName("IrIb"), new RepoName("myRepo"), getTagSet("year3"),
-                    getDefaultAttendance(), getDefaultParticipation(), new GroupName("W07-3")),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName("F07-3")),
             new Student(new Name("Roy Balakrishnan"), new Email("royb@u.nus.edu"), new StudentNumber("A1123456B"),
                     null, null, getTagSet("year1"),
-                    getDefaultAttendance(), getDefaultParticipation(), new GroupName("W07-3")),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName("F07-3")),
         };
     }
 
@@ -63,7 +63,7 @@ public class SampleDataUtil {
                     new RepoName("tp"), getTagSet("monday")),
             new Group(new GroupName("W10-2"), getMemberList(2, 3), new LinkYear("AY2122"),
                     new RepoName("tp"), getTagSet("tuesday")),
-            new Group(new GroupName("W07-3"), getMemberList(4, 5), new LinkYear("AY2122"),
+            new Group(new GroupName("F07-3"), getMemberList(4, 5), new LinkYear("AY2122"),
                     new RepoName("tp"), getTagSet("wednesday")),
         };
     }

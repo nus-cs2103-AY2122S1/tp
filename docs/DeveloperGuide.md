@@ -351,10 +351,12 @@ these changes in the `AddressBook`.
     * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
       unnatural modelling of the real world since `Group` contains students and not the other way around.
 
-<div style="page-break-after: always;"></div>
 * Alternative 3: Have `Members` save the `Name` of students only
     * Pros: Smaller JSON file size due to smaller volume of information being referenced to, lesser coupling due to only a unidirectional association.
     * Cons: Unable to display the `GroupName` of a `Student` in the student display list using simple code implementation, reduction in input validation capabilities (assigning 1 student to 2 groups) since there is no direct way to determine if a `Student` is already in a group.
+
+<div style="page-break-after: always;"></div>
+
 
 ### Edit Group Command
 
@@ -952,7 +954,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `addStudent n/John Doe e/john@u.nus.edu s/a0000001b u/johndoee r/ip`<br>
        Expected: A student is added to the bottom of the list, with Github link shown. Details of the student is shown in the status message. Letters in student number are automatically capitalized.
 
-    1. Test case: `addStudent n/John Doe e/jondoe@u.nus.edu s/a0000002b u/jondoee r/ip`<br>   
+    1. Test case: `addStudent n/John Doe e/jondoe@u.nus.edu s/a0000002b u/jondoee r/ip`<br>
        Expected: Similar to previous, no error thrown, student with same name added.
        
     1. Test case: `addStudent n/Mary Doe e/mary@u.nus.edu s/a0000001b` or any other student with conflicting student number or email<br>
@@ -993,13 +995,13 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `editStudent 1 n/John Doe u/johndoee r/ip`<br>
        Expected: The first student in the list has details changed to the ones specified above. Details of the student is shown in the status message.
        
-    1. Test case: `editStudent 1 s/a0000001b` or any other student number or email or both to that conflicts with another student in the list<br>   
+    1. Test case: `editStudent 1 s/a0000001b` or any other student number or email or both to that conflicts with another student in the list<br>
        Expected: No student is edited. Error message of duplicate student shown in status message.
 
-    1. Test case: `editStudent 999 n/test` where the index is greater than the number of students in the list.
+    1. Test case: `editStudent 999 n/test` where the index is greater than the number of students in the list.<br>
        Expected: No student is edited. Error message invalid index shown. 
 
-    1. Test case: `editStudent 1` with no prefixes <br>
+    1. Test case: `editStudent 1` with no prefixes<br>
        Expected: No student is edited. Error message of missing edit fields shown.
     
    1. Test case: `editStudent 0 n/test`, where the index is 0 or smaller <br>
@@ -1155,16 +1157,16 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `editGroup 1 r/ip`<br>
        Expected: The first group in the list has details changed to the ones specified above. Details of the group is shown in the status message.
 
-    1. Test case: `editGroup g/w14-4` changing group name a value conflicting another group in the list<br>   
+    1. Test case: `editGroup 1 g/w14-4` changing group name a value conflicting another group in the list<br>
        Expected: No group is edited. Error message of duplicate group shown in status message.
 
-    1. Test case: `editGroup 999 n/test` where the index is greater than the number of groups in the list.
+    1. Test case: `editGroup 999 g/z11-1` where the index is greater than the number of groups in the list.<br>
        Expected: No group is edited. Error message invalid index shown.
 
     1. Test case: `editGroup 1` with no prefixes <br>
        Expected: No group is edited. Error message of missing edit fields shown.
 
-    1. Test case: `editStudent 0 n/test`, where the index is 0 or smaller <br>
+    1. Test case: `editStudent 0 g/z11-1`, where the index is 0 or smaller <br>
        Expected: No student is edited. Error message of invalid command format shown.
 
 2. Editing a student while on another directory
