@@ -16,6 +16,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
@@ -402,6 +404,44 @@ public class ModelManager implements Model {
         Comparator<Order> defaultComparator = Order::compareTo;
         orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any order tagged to persons that don't exist.
+     */
+    public void checkClientAndOrderRelation() throws DataConversionException {
+        ObservableList<Order> orders = this.orderBook.getOrderList();
+        for (Order eachOrder : orders) {
+            String nameOfPerson = eachOrder.getCustomer().getName();
+            if (!this.addressBook.hasPersonWithName(nameOfPerson)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given customer name does not exist in Address Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    /**
+     * Checks if any tasks tagged to order that don't exist.
+     */
+    public void checkTaskAndOrderRelation() throws DataConversionException {
+        ObservableList<Task> tasks = this.taskBook.getTaskList();
+        for (Task eachTask : tasks) {
+            Long id = eachTask.getTaskTag().getTagId();
+            if (!this.orderBook.hasOrder(id)) {
+                throw new DataConversionException(
+                        new IllegalValueException("Given Sales ID does not exist in Order Book"));
+            }
+        }
+    }
+
+    //=========== AddressBook & OrderBook Relation Check =======================================================
+
+    public ModelManager resetModelManager() {
+        return new ModelManager(new AddressBook(), new TaskBook(), new OrderBook(), this.userPrefs);
     }
 
 }
