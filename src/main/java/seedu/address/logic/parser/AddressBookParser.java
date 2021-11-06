@@ -7,7 +7,6 @@ import static seedu.address.commons.util.CollectionUtil.equalsIgnoreOrder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -115,18 +114,6 @@ public class AddressBookParser {
 
         default:
             return parseAliases(userInput);
-        }
-    }
-
-    /**
-     * Creates Aliases and adds it into the list for each aliasWord -> commandWord mapping in the provided Map.
-     */
-    public void addAliases(Map<String, String> aliases) {
-        requireNonNull(aliases);
-        for (String aliasWord : aliases.keySet()) {
-            if (Alias.isValidAlias(aliasWord)) {
-                addAlias(new Alias(aliasWord, aliases.get(aliasWord)));
-            }
         }
     }
 
