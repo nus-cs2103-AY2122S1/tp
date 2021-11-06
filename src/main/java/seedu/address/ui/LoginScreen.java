@@ -72,6 +72,7 @@ public class LoginScreen extends UiPart<Stage> {
             userInputPassword.clear();
             return;
         }
+
         try {
             boolean isCorrectPassword = app.logIn(userInputPassword.getText());
             // wrong password

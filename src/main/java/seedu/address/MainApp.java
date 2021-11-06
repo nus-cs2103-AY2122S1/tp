@@ -219,6 +219,7 @@ public class MainApp extends Application {
      */
     public boolean setUp(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
             UnsupportedPasswordException, InvalidKeyException, FileAlreadyExistsException {
+        // Guard clause for the case when user adds a data file after opening the app.
         if (hasEncryptedFile()) {
             throw new FileAlreadyExistsException("");
         }
@@ -248,9 +249,12 @@ public class MainApp extends Application {
             UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException,
             FileNotFoundException {
         Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        // Guard clause for the case when user removed the data file after opening the app.
         if (!hasEncryptedFile()) {
             throw new FileNotFoundException();
         }
+
+        // Password unable to decrypt the file.
         try {
             cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
         } catch (IOException e) {
