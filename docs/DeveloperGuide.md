@@ -477,6 +477,44 @@ bring the window to the maximized state.
 
 ![HelpWindowSequenceDiagram](images/HelpWindowSequenceDiagram.png)
 
+### User Profile in Menu Bar
+
+#### Implementation
+
+The class `UserProfileInMenuBar` is responsible for displaying the User
+Profile in the Menu Bar. It is shown in the Main Window, in the top right
+of the Menu Bar beside the Bell icon. It is facilitated by `UserProfileInMenuBar.fxml`.
+The `.fxml` file is responsible for the layout of the various components inside
+this Region.
+
+The `UserProfileInMenuBar` class extends `UiPart<Region>` and implements
+`UserProfileWatcher`.
+
+This Region can only be viewed when the app has successfully started up and
+has valid User Credentials.
+
+This Region is initialized when the `MainWindow#start()` is called. On 
+initializing the `UserProfileInMenuBar` class, `UserProfileInMenuBar#setUserProfileOnMenuBar()` 
+and `UserProfileInMenuBar#addToUserProfileWatcherList()` are called.
+
+`setUserProfileOnMenuBar()` is responsible for retrieving the User Credentials with
+the help of the `Logic` object obtained during initialization and setting up the 
+`ImageView` and `Label` with the User Credentials retrieved.
+
+`addToUserProfileWatcherList()` is responsible for adding `this` (UserProfileWatcher)
+to a watchers list, such that, in the scenario, the User updates their profile
+credentials, the changes are reflected immediately. As the User is able to 
+edit their Credentials via the `EditCommand`, the profile watchers list is present there.
+A static method in `EditCommand`, `addUserProfileWatcher(this)` is called upon, by
+passing `this` (UserProfileWatcher) as an argument, to add it to the profile watchers list.
+
+Whenever there is a change in the User Credentials, the `updateUserProfile()` is
+called upon in the `UserProfileInMenuBar`, which in turn calls the 
+`setUserProfileOnMenuBar()`. This method then retrieves the new User Credentials
+and sets them up.
+
+![UserProfileInMenuBarSequenceDiagram](images/UserProfileInMenuBarSequenceDiagram.png)
+
 ### Show command
 
 #### Implementation
