@@ -18,7 +18,7 @@ public class FindPersonCommand extends Command {
     public static final String COMMAND_WORD = "-f";
 
     public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
-            + ": Finds all persons whose names contain any of "
+            + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + PERSON_COMMAND + " " + COMMAND_WORD + " alice bob charlie";
