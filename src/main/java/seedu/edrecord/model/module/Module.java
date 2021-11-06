@@ -19,13 +19,14 @@ import seedu.edrecord.model.name.Name;
  */
 public class Module {
 
-    public static final String MESSAGE_CONSTRAINTS = "Module code cannot have whitespaces.";
+    public static final String MESSAGE_CONSTRAINTS = "Module code must be alphanumeric. Only 1-8 characters allowed.";
     public static final String MESSAGE_INVALID_JSON = "Module code cannot be saved with lower case or white spaces.";
-    public static final String MESSAGE_DOES_NOT_EXIST = "Module with that code has yet to be created.";
+    public static final String MESSAGE_DOES_NOT_EXIST = "Module %s has yet to be created.";
     public static final String MESSAGE_DUPLICATE = "Module with that code has already been created.";
+    public static final String MESSAGE_MODULE_GROUPS_DOES_NOT_EXIST = "Module and/or Group has not been created";
 
     /* The module code must not have any whitespace characters. */
-    public static final String VALIDATION_REGEX = "[^\\s]+";
+    public static final String VALIDATION_REGEX = "^\\p{Alnum}{1,8}$";
 
     public static final ModuleSystem MODULE_SYSTEM = new ModuleSystem();
 
@@ -45,21 +46,6 @@ public class Module {
 
         requireNonNull(groupSystem);
         this.groupSystem = groupSystem;
-        this.assignmentList = new UniqueAssignmentList();
-    }
-
-    /**
-     * Constructs a {@code Module} with a Group in its Group System.
-     *
-     * @param moduleCode A valid module code.
-     * @param groupCode  A valid group code.
-     */
-    public Module(String moduleCode, String groupCode) {
-        requireNonNull(moduleCode, groupCode);
-        this.code = moduleCode;
-        this.groupSystem = new GroupSystem();
-        Group group = new Group(groupCode);
-        groupSystem.addGroup(group);
         this.assignmentList = new UniqueAssignmentList();
     }
 
@@ -156,6 +142,14 @@ public class Module {
     }
 
     /**
+     * Returns true if adding the assignment {@code toAdd} will bring
+     * the total weightage of all assignments to above 100%.
+     */
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        return assignmentList.isTotalWeightageExceeded(toAdd);
+    }
+
+    /**
      * Returns an {@code Optional} containing the assignment with the given name, if it exists.
      */
     public Optional<Assignment> searchAssignment(Name name) {
@@ -189,7 +183,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return code;
+        return this.getCode();
     }
 
     @Override

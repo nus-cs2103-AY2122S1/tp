@@ -10,7 +10,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 
-public class AddAssignmentCommand extends Command {
+public class MakeAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "mkasg";
 
@@ -25,15 +25,16 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_SCORE + "50";
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
-
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in this module";
+    public static final String MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100 =
+            "Adding this assignment brings the total module weightage above 100%";
 
     private final Assignment toAdd;
 
     /**
-     * Creates an AddAssignmentCommand to add the specified {@code Assignment}
+     * Creates an MakeAssignmentCommand to add the specified {@code Assignment}
      */
-    public AddAssignmentCommand(Assignment assignment) {
+    public MakeAssignmentCommand(Assignment assignment) {
         requireNonNull(assignment);
         toAdd = assignment;
     }
@@ -47,6 +48,9 @@ public class AddAssignmentCommand extends Command {
         if (model.hasAssignmentInCurrentModule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
+        if (model.isTotalWeightageExceeded(toAdd)) {
+            throw new CommandException(MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100);
+        }
         model.addAssignment(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
@@ -54,7 +58,7 @@ public class AddAssignmentCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddAssignmentCommand // instanceof handles nulls
-                && toAdd.equals(((AddAssignmentCommand) other).toAdd));
+                || (other instanceof MakeAssignmentCommand // instanceof handles nulls
+                && toAdd.equals(((MakeAssignmentCommand) other).toAdd));
     }
 }

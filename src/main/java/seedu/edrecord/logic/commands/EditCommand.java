@@ -25,7 +25,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
@@ -107,7 +107,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
-        ModuleGroupMap previousModules = personToEdit.getModules();
+        ModuleSet previousModules = personToEdit.getModules();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         AssignmentGradeMap grades = personToEdit.getGrades();
 
