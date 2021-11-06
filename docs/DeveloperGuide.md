@@ -131,7 +131,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![StorageClassDiagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -584,7 +584,91 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
+**Use case: UC05 - Include a resident to an event**
+
+**MSS**
+
+1. Hall admin navigates to the `Event` Tab.
+2. Hall admin views the event to include residents in.
+3. Hall admin enters the residents to be included in the selected event.
+4. SafeFor(H)all reflects the added residents in the side window.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. SafeFor(H)all detects invalid residents entered.
+    * 3a1. SafeFor(H)all displays an error message.
+    * 3a2. SafeFor(H)all requests for valid residents.
+    * 3a3. Hall admin enters new data.
+
+      Steps 3a1-3a2 are repeated until the residents entered are valid.
+
+      Use case resumes from step 4.
+
+**Use case: UC06 - Exclude a resident from an event**
+
+**MSS**
+
+1. Hall admin navigates to the `Event` Tab.
+2. Hall admin views the event to exclude residents from.
+3. Hall admin enters the residents to be excluded in the selected event.
+4. SafeFor(H)all reflects the remaining residents in the side window after removing the given residents.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. SafeFor(H)all detects invalid residents entered.
+    * 3a1. SafeFor(H)all displays an error message.
+    * 3a2. SafeFor(H)all requests for valid residents.
+    * 3a3. Hall admin enters new data.
+
+      Steps 3a1-3a3 are repeated until the residents entered are valid.
+
+      Use case resumes from step 4.
+
+**Use case: UC07 - List residents who missed their FET**
+
+**MSS**
+
+1. Hall admin navigates to the `Resident` Tab.
+2. Hall admin filters residents whose FET were due before today.
+3. SafeFor(H)all displays the filtered residents.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. SafeFor(H)all detects invalid date entered.
+    * 2a1. SafeFor(H)all displays an error message.
+    * 2a2. SafeFor(H)all requests for a valid date.
+    * 2a3. Hall admin enters a new date.
+
+      Steps 3a1-3a2 are repeated until the date entered are valid.
+
+      Use case resumes from step 3.
+
+**Use case: UC08 - List residents whose FET or Test Kit collection dates are due soon**
+
+**MSS**
+
+1. Hall admin navigates to the `Resident` Tab.
+2. Hall admin filters residents whose FET or Test Kit Collection will be due between two given dates.
+3. SafeFor(H)all displays the filtered residents.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. SafeFor(H)all detects invalid dates entered.
+    * 2a1. SafeFor(H)all displays an error message.
+    * 2a2. SafeFor(H)all requests for valid dates.
+    * 2a3. Hall admin enters new dates.
+
+      Steps 3a1-3a2 are repeated until the dates entered are valid.
+
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
@@ -651,6 +735,127 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Listing residents by FET/Collection Deadlines
+1. Listing residents' deadline with normal keyword and valid dates
+    1. Prerequisites: There are residents whose FET deadline lies between the 2 gates given
+    2. Test case: `deadline k/f d1/10-10-2021 d2/15-10-2021`<br>
+       Expected: Residents whose FET deadline lies between these 2 dates are listed.
+       
+
+2. Listing residents' deadline with late keyword and valid dates
+    1. Prerequisites: There are residents whose FET deadline is due before the given date
+    2. Test case: `deadline k/lf d1/10-10-2021`<br>
+       Expected: Residents whose FET is due before the given date is listed.
+
+3. Listing residents' deadline with invalid parameters
+    1. Test case: `deadline k/f d1/10-10-2021`<br>
+       Expected: The result box will indicate that the given command format is invalid.
+       
+    2. Test case: `deadline k/f d1/12-10-2021 d2/10-10-2021`<br>
+       Expected: The result box will indicate that the second date is earlier than the first.
+
+### Adding residents to an Event
+1. Add a single valid resident by name to a valid Event
+    1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1. 
+    2. Test case: `include 1 r/Alex Yeoh`<br>
+       Expected: The given resident will be added to the event. Sidebar will reflect that the resident is in the event.
+
+
+2. Add a single valid resident by room to a valid Event
+    1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1.
+    2. Test case: `include 1 r/A101`<br>
+       Expected: The given resident will be added to the event. Sidebar will reflect that the resident is in the event.
+
+
+3. Add multiple valid residents by names to a valid Event
+    1. Prerequisites: There are two residents with names "Alex Yeoh" and "Bernice Yu", with rooms "A101" and "A102" 
+       respectively, and an event with index 1.
+    2. Test case: `include 1 r/Alex Yeoh, Bernice Yu`<br>
+       Expected: The given residents will be added to the event. Sidebar will reflect that the residents are in the
+       event.
+
+
+4. Add multiple valid residents by rooms to a valid Event
+    1. Prerequisites: There are two residents with names "Alex Yeoh" and "Bernice Yu", with rooms "A101" and "A102"
+       respectively, and an event with index 1.
+    2. Test case: `include 1 r/A101, A102`<br>
+       Expected: The given residents will be added to the event. Sidebar will reflect that the residents are in the
+       event.
+
+
+5. Add a valid resident to an valid Event but without comma separating the rooms
+    1. Prerequisites: There are two residents with names "Alex Yeoh" and "Bernice Yu", with rooms "A101" and "A102"
+       respectively, and an event with index 1.
+    2. Test case: `include 1 r/A101 A102`<br>
+       Expected: The given residents are not added to the event. The result box will indicate that names/rooms have to
+       be separated by a comma.
+
+
+5. Add a valid resident to an invalid Event
+    1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and there is no event with index 1.
+    2. Test case: `include 1 r/Alex Yeoh`<br>
+       Expected: The given resident is not added to the event. The result box will show that the given index is invalid.
+
+
+6. Add an invalid resident to a valid Event
+    1. Prerequisites: There is no resident with name "Alex Yeoh" or room "A101", but there is an event with index 1.
+    2. Test case: `include 1 r/A101`<br>
+       Expected: The given resident is not added to the event. The result box will show that no residents with the
+       given information could be found.
+
+
+### Removing residents from an Event
+1. Remove a single valid resident by name from a valid Event
+    1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1.
+    2. Test case: `exclude 1 r/Alex Yeoh`<br>
+       Expected: The given resident will be removed from the event. Sidebar will reflect that the resident is no longer
+       in the event.
+
+
+2. Remove a single valid resident by room from a valid Event
+    1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1.
+    2. Test case: `exclude 1 r/A101`<br>
+       Expected: The given resident will be removed from the event. Sidebar will reflect that the resident is no longer
+       in the event.
+
+
+3. Remove multiple valid residents by names from a valid Event
+    1. Prerequisites: There are two residents with names "Alex Yeoh" and "Bernice Yu", with rooms "A101" and "A102"
+       respectively, and an event with index 1.
+    2. Test case: `exclude 1 r/Alex Yeoh, Bernice Yu`<br>
+       Expected: The given residents will be removed from the event. Sidebar will reflect that the residents are no
+       longer in the event.
+
+
+4. Remove multiple valid residents by rooms from a valid Event
+    1. Prerequisites: There are two residents with names "Alex Yeoh" and "Bernice Yu", with rooms "A101" and "A102"
+       respectively, and an event with index 1.
+    2. Test case: `exclude 1 r/A101, A102`<br>
+       Expected: The given residents will be removed from the event. Sidebar will reflect that the residents are no
+       longer in the event.
+
+
+5. Remove a valid resident from an valid Event but without comma separating the rooms
+    1. Prerequisites: There are two residents with names "Alex Yeoh" and "Bernice Yu", with rooms "A101" and "A102"
+       respectively, and an event with index 1.
+    2. Test case: `exclude 1 r/A101 A102`<br>
+       Expected: The given residents are not removed from the event. The result box will indicate that names/rooms have
+       to be separated by a comma.
+
+
+5. Remove a valid resident from an invalid Event
+    1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and there is no event with index 1.
+    2. Test case: `exclude 1 r/Alex Yeoh`<br>
+       Expected: The given resident is not removed from the event. The result box will show that the given index is
+       invalid.
+
+
+6. Remove an invalid resident from a valid Event
+    1. Prerequisites: There is no resident with name "Alex Yeoh" or room "A101", but there is an event with index 1.
+    2. Test case: `exclude 1 r/A101`<br>
+       Expected: The given resident is not removed from the event. The result box will show that no residents with the
+       given information could be found.
 
 ### Saving data
 
