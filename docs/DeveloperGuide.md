@@ -57,6 +57,7 @@ title: Developer Guide
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
   - [Launch and shutdown](#launch-and-shutdown)
   - [Deleting a participant](#deleting-a-participant)
+  - [Deleting an event](#deleting-an-event)
   - [Saving data](#saving-data)
   
 
