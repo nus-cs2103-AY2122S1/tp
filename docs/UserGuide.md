@@ -103,6 +103,8 @@ each part of the graphical user interface in detail.
 | 3     | **Command Result**. This text box displays the string response from the application after a command is entered. |
 | 4     | **List of Contacts**. This is the list of contacts that are stored in the application. |
 
+<div style="page-break-after: always;"></div>
+
 ##### Controls
 
 In order to improve your experience when using the app, there are a few features that were added.
@@ -183,6 +185,8 @@ on any command below to learn more about that particular command.
 | [`exit`](#exit)  | Exits the application |
 | [`password`](#password)  | Changes the password of the application |
 | [`help`](#help)  | Opens up a window that contains this user guide |
+
+<div style="page-break-after: always;"></div>
 
 <div class="d-flex alert alert-info pb-0">
 <div class="mr-2">
