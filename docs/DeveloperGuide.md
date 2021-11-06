@@ -1381,23 +1381,27 @@ depending on the date and time when you are testing.</div>
 Suppose the date today is 6 Nov 2021 and current time is 1800 hours,
 * Test case: 
   1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-31T1200`
-  Expected: Outstanding lesson fees for first lesson of the first person is `$25`. The lesson that was accounted for is:
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-31T12:00`
+  Expected: Outstanding lesson fees for first lesson of the first person is `$25`. The lesson that have passed is:
     * 6 Nov 2021 1400-1500
+
 * Test case:
   1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-30T1200`
-  Expected: Outstanding lesson fees for the first lesson of the first person is `$50`. The lessons that were accounted for are:
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-30T12:00`
+  Expected: Outstanding lesson fees for the first lesson of the first person is `$50`. The lessons that have passed are:
      * 30 Oct 2021 1400-1500
      * 6 Nov 2021 1400-1500
+
 * Test case:
   1. `ladd 1 recurring/ date/3 Nov 2021 time/1400-1500 rates/25 subject/math` 
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-20T0000`
-  Expected: Outstanding lesson fees for the first lesson of the first person is `$25`. The lesson that was accounted for is:
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-20T00:00`
+  Expected: Outstanding lesson fees for the first lesson of the first person is `$25`. The lesson that have passed is:
      * 3 Nov 2021 1400-1500
+
 * Test case:
   1. `ladd 1 date/6 Nov 2021 time/2000-2130 rates/25 subject/math`
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10
+  2. Set the `DateTime` in `data/addressbook.json` to `2021-11-06T18:00`
+  Expected: Outstanding lesson fees for first lesson of the first person is `$0`. No lessons have passed.
 
 ### Saving data
 
