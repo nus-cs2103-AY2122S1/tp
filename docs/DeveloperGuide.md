@@ -660,8 +660,6 @@ The following activity diagram summarizes what happens when a user executes the 
 Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
 handle multiple scenarios would be less daunting to use.
 
-### Roster feature
-
 #### Implementation
 
 The roster operation is facilitated by `RosterCommand` and `RosterCommandParser`. `RosterCommandParser` first parses 
@@ -1329,25 +1327,6 @@ wrongly entered parameter will be shown in the message box to remind the user of
 format.<br>_Note: Only the alert message corresponds to the first encountered incorrect parameter will be shown. User is
 expected to correct the input parameters one by one._
 
-#### Deleting a student
-
-1. Deleting a student while all students are being shown
-
-    * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
-
-    * Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-    * Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-    * Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-#### Finding a student
-
 1. Finding a student while all students are being shown
    
     * Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
@@ -1536,6 +1515,69 @@ use valid `LESSON_INDEX`.
       
     * Test case: `edit 0 n/Alex`<br>
       Expected: First student is not edited. The message box displays a message alerting the user that the given index is not valid.
+
+#### Enrolling a student into a lesson
+
+Enrolling a `Student` into a `Lesson`, while the students and lessons are being shown
+
+* Prerequisites: 
+  * Multiple `Students` and `Lessons` shown in the list of students and lessons. `Students` must not currently be enrolled in the `Lesson` the user wishes to enroll the student in.
+  * `Student` must have the same `grade` as the `Lesson` to be enrolled in
+  * `Student` must not currently be enrolled in `Lesson` of interest
+  * `Student` must not have any existing classes that clash with the duration in `Lesson`
+  * `Student` must currently be enrolled in fewer than `10` lessons
+  * `Lesson` must currently have fewer than `15` students enrolled inside the lesson
+  * Should any of the above conditions not be met, the `Student` will not be able to be enrolled in the `Lesson` of interest  
+
+
+* Note: 
+  * We will be using index `2` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student and lesson lists).
+  * In this case, we will be using the sample data given when loading up **TuitiONE** for the first time (delete tuitione.json file if it is not your first time). 
+  * The `Student` of index `2` (Bernice Yu of grade P4) will be enrolled into `Lesson` of `index` 2 (Math-P4-Wed-1800).
+
+* Test case: `enroll 2 l/2`<br>
+  Expected: `Student` of index `1` is enrolled in `Lesson` of index `3` . Details of the student and lesson enrolled in shown in the status message.
+
+* Test case: `enroll 0 l/0`<br>
+  Expected: No student is enrolled in any lesson. Error details shown in the status message.
+
+* Other incorrect delete commands to try: `enroll`, `enroll 1`, `enroll 1 l/0`, `enroll 0 l/1`, `enroll x l/y`, `enroll y l/x` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
+
+#### Deleting a student
+
+Deleting a student while all students are being shown
+
+* Prerequisites: Multiple "Students" shown in the list of students.
+
+* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the student list).
+
+* Test case: `delete 1`<br>
+  Expected: `Student` of index `1` is deleted from the list. `Student` will be unenrolled from the `Lesson`, and `Lesson` with `Student` inside will decrease its size by `1`. Details of the deleted student shown in the status message.
+
+* Test case: `delete 0`<br>
+  Expected: No student is deleted. Error details shown in the status message.
+
+* Other incorrect delete commands to try: `delete`, `delete x`, `delete y` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
+      
+
+#### Deleting a lesson
+
+Deleting a lesson while all lessons are being shown.
+
+* Prerequisites: Multiple "Lessons" shown in the list of lessons
+
+* Note: We will be using index `1` to conduct manual testing for positive tests, but feel free to test with any valid index (any positive integer shown in the lesson list).
+
+* Test case: `delete-l 1`<br>
+  Expected: Students currently enrolled in `Lesson` of index `1` would be unenrolled. `Lesson` of index `1` is deleted from the list. Details of the deleted lesson shown in the status message.
+
+* Test case: `delete-l 0`<br>
+  Expected: No lesson is deleted. Error details shown in the status message.
+
+* Other incorrect delete commands to try: `delete-l`, `delete-l x`, `delete-l y` (where x is larger than the list size, and y is a negative integer)<br>
+  Expected: Similar to previous.
 
 #### Clearing data
 
