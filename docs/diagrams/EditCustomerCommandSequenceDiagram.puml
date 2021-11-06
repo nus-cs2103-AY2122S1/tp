@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":RhrhParser" as RhrhParser LOGIC_COLOR
+participant ":EditCustomerCommandParser" as EditCustomerCommandParser LOGIC_COLOR
+participant "e:EditCustomerCommand" as EditCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editC 2 p/81234567")
+activate LogicManager
+
+LogicManager -> RhrhParser : parseCommand("editC 2 p/81234567")
+activate RhrhParser
+
+create EditCustomerCommandParser
+RhrhParser -> EditCustomerCommandParser
+activate EditCustomerCommandParser
+
+EditCustomerCommandParser --> RhrhParser
+deactivate EditCustomerCommandParser
+
+RhrhParser -> EditCustomerCommandParser : parse(" 2 p/81234567")
+activate EditCustomerCommandParser
+
+create EditCustomerCommand
+EditCustomerCommandParser -> EditCustomerCommand
+activate EditCustomerCommand
+
+EditCustomerCommand --> EditCustomerCommandParser : e
+deactivate EditCustomerCommand
+
+EditCustomerCommandParser --> RhrhParser : e
+deactivate EditCustomerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCustomerCommandParser -[hidden]-> RhrhParser
+destroy EditCustomerCommandParser
+
+RhrhParser --> LogicManager : e
+deactivate RhrhParser
+
+LogicManager -> EditCustomerCommand : execute()
+activate EditCustomerCommand
+
+EditCustomerCommand -> Model : setCustomer(customerToEdit, editedCustomer)
+activate Model
+
+Model --> EditCustomerCommand
+deactivate Model
+
+create CommandResult
+EditCustomerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCustomerCommand :
+deactivate CommandResult
+
+EditCustomerCommand --> LogicManager : result
+deactivate EditCustomerCommand
+EditCustomerCommand -[hidden]-> LogicManager : result
+destroy EditCustomerCommand
+
+[<--LogicManager :
+deactivate LogicManager
+@enduml
