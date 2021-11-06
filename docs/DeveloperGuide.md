@@ -357,10 +357,9 @@ Priorities:<p>
 4. Notor opens up a pop up dialogue for the user to type the note for the person.
 5. User types in note for the person in the pop up dialogue.
 6. User requests to save the note to the person.
-7. Notor stores the book to the person.
-8. Notor saves the note to storage.
-9. User requests to close pop up dialogue for note.
-10.Notor closes pop up dialogue for note.
+7. Notor saves the note to storage.
+8. User requests to close pop up dialogue for note.
+9. Notor closes pop up dialogue for note.
 
    Use case ends.
 
@@ -474,9 +473,9 @@ testers are expected to do more *exploratory* testing.
 1. Adding general note.
 
     1. Test case: `note` <br>
-       Expected: Note window opened with title of note window named as `General Note` to add note for.
-       Within the note window, user can refer to note shortcut key in User Guide.
-       Upon saving of note, general note is added and displayed in Notor.
+       Expected: Note window opened with title of note window named as `General Note` to add note to.
+       Within the note window, user can make use of keyboard shortcuts in **User Guide** for saving and quiting of note.
+       Upon saving of note, general note is added and displayed in left pane of Notor.
 
 ### Clearing general note.
 
@@ -488,25 +487,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding note to a person
 
-1. Adding note to a person in person list.
-   
-    1.  Prerequisites: List all persons using the `person /list` command. Must have at least one person in the list.
+1. Adding note to a person in person list. <br>
+    Prerequisites: List all persons using the `person /list` command or already in person list. 
+    Must have at least one person in the list.
     
     1. Test case: `person 1 /note` <br>
-        Expected: Note window opened with title of note window named as the person to add note for.
-        Within the note window, user can refer to note shortcut key in User Guide.
+        Expected: Note window opened with title of note window named as the person to add note to.
+        Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving 
+        and quiting of note.
         Upon saving of note, first three lines of note excluding empty line is shown for the first person in the list.
 
-   1. Test case: `person 0 /note `<br>
+    1. Test case: `person 0 /note `<br>
       Expected: No note window is opened. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `p /note`, `p x /note`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Clearing note of a person
-1. Clearing note of a person in person list.
-
-    1.  Prerequisites: List all persons using the `person /list` command or already in person list. 
+1. Clearing note of a person in person list. <br>
+   Prerequisites: List all persons using the `person /list` command or already in person list. 
         Must have at least one person in the list.
 
     1. Test case: `person 1 /clearnote` <br>
