@@ -94,7 +94,11 @@ public class Assessment extends SortableInformation {
         return total;
     }
 
-    public String getVisualizerDisplay() {
+    /**
+     * Visualize assessment score of student
+     * @return assessment score
+     */
+    public String visualizeForView() {
         StringBuilder displayedInfo = new StringBuilder();
         displayedInfo.append(PLACEHOLDER_RA1)
                 .append(getAssessmentGrade("RA1")).append("\n")
