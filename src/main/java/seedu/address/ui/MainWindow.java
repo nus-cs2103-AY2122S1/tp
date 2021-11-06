@@ -218,11 +218,12 @@ public class MainWindow extends UiPart<Stage> {
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
+                        logger.info("Showing lessons for " + newVal.getName());
                         handlePersonGridPanel(newVal);
                     }
                 });
-        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
-                .getSelectionModel().getSelectedItem()));
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(
+                personListView.getSelectionModel().getSelectedItem()));
     }
 
     /**
@@ -275,57 +276,96 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Switches to the calendar.
+     */
     @FXML
     private void handleCalendar() {
         centerPanel.displaySchedulePanel();
     }
 
+    /**
+     * Shows the day view of the calendar.
+     */
     private void handleDay() {
         centerPanel.showDay();
     }
 
+    /**
+     * Shows the week view of the calendar.
+     */
     private void handleWeek() {
         centerPanel.showWeek();
     }
 
+    /**
+     * Shows the month view of the calendar.
+     */
     private void handleMonth() {
         centerPanel.showMonth();
     }
 
+    /**
+     * Shows the year view of the calendar.
+     */
     private void handleYear() {
         centerPanel.showYear();
     }
 
+    /**
+     * Go next in the calendar.
+     */
     private void handleNext() {
         centerPanel.goNext();
     }
 
+    /**
+     * Go to today in the calendar.
+     */
     private void handleToday() {
         centerPanel.goToday();
     }
 
+    /**
+     * Go back in the calendar.
+     */
     private void handleBack() {
         centerPanel.goBack();
     }
 
+    /**
+     * Switches to the personGridPanel.
+     */
     @FXML
     private void handlePersonGridPanel() {
         centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
     }
 
+    /**
+     * Displays the person on the personGridPanel
+     *
+     * @param student The person whose lessons we wish to display.
+     */
     private void handlePersonGridPanel(Person student) {
         requireNonNull(student);
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
+    /**
+     * Switches to the student view.
+     *
+     * @param commandResult The commandResult that causes this change.
+     */
     private void handleStudents(CommandResult commandResult) {
         if (commandResult.getStudent().isPresent()) {
             Person student = commandResult.getStudent().get();
             handlePersonGridPanel(student);
+            centerPanel.getPersonListView().scrollTo(student);
         } else {
             handlePersonGridPanel();
         }
     }
+
     /**
      * Displays tag list instead of the default person list.
      */

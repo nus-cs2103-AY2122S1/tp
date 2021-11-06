@@ -128,9 +128,6 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (dates.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> dateSet = dates.size() == 1 && dates.contains("")
-                ? Collections.emptySet()
-                : dates;
-        return Optional.of(ParserUtil.parseDates(dateSet));
+        return Optional.of(ParserUtil.parseDates(dates));
     }
 }

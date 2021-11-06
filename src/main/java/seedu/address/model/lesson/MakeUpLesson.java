@@ -7,6 +7,8 @@ import java.util.Set;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class MakeUpLesson extends Lesson {
+    private static final String MAKEUP = "Makeup";
+
     /**
      * Every field must be present and not null.
      *
@@ -43,6 +45,16 @@ public class MakeUpLesson extends Lesson {
     @Override
     public boolean isRecurring() {
         return false;
+    }
+
+    /**
+     * Returns a string representing the type of this lesson.
+     *
+     * @return Makeup.
+     */
+    @Override
+    public String getTypeOfLesson() {
+        return MAKEUP;
     }
 
     /**
@@ -88,6 +100,23 @@ public class MakeUpLesson extends Lesson {
     @Override
     public boolean hasLessonOnDate(Date date) {
         return getStartDate().equals(date) && !isCancelled();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("(")
+                .append(getTypeOfLesson())
+                .append(") ")
+                .append(super.toString());
+
+        if (isCancelled()) {
+            builder.append("; (Cancelled)");
+            return builder.toString();
+        }
+
+        return builder.toString();
     }
 }
 

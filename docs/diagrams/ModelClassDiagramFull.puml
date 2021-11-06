@@ -1,0 +1,104 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
+Interface Model <<Interface>>
+Class AddressBook
+Class ReadOnlyAddressBook
+Class Model
+Class ModelManager
+Class UserPrefs
+Class ReadOnlyUserPrefs
+
+
+package "Person" {
+    Class UniquePersonList
+    Class Person
+    Class Name
+    Class Address
+    Class Phone
+    Class Email
+    Class ParentPhone
+    Class ParentEmail
+    Class School
+    Class AcadStream
+    Class AcadLevel
+    Class Fee
+    Class Remark
+}
+
+package "Tag" {
+    Class UniqueTagList
+    Class Tag
+}
+
+
+package "Lesson" {
+    Class CalendarEntryList
+    Class "{abstract}\nLesson" as Lesson
+    Class RecurringLesson
+    Class MakeUpLesson
+    Class Date
+    Class TimeRange
+    Class Subject
+    Class Homework
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+AddressBook .up.|> ReadOnlyAddressBook
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+AddressBook *--> "1" UniquePersonList
+UniquePersonList --> "~* all" Person
+Person *--> Name
+Person *--> Address
+Person *--> Phone
+Person *--> Email
+Person *--> ParentPhone
+Person *--> ParentEmail
+Person *--> School
+Person *--> AcadStream
+Person *--> AcadLevel
+Person *--> Fee
+Person *--> Remark
+Person *--> "*" Tag
+Person *--> "*" Lesson
+
+AddressBook *-----> "1" CalendarEntryList
+CalendarEntryList --> "~* all" Lesson
+RecurringLesson -up-|> Lesson
+MakeUpLesson -up-|> Lesson
+
+Lesson *-up-> Date
+Lesson *-up-> TimeRange
+Lesson *-up-> Subject
+Lesson *-up-> "*" Homework
+
+AddressBook *------> "1" UniqueTagList
+UniqueTagList --> "~*" Tag
+
+
+MakeUpLesson -[hidden]right-> RecurringLesson
+
+Name -[hidden]right-> Address
+Address -[hidden]right-> Phone
+Phone -[hidden]right-> Email
+Email -[hidden]right-> ParentPhone
+ParentPhone -[hidden]right-> ParentEmail
+ModelManager -->"~* filtered" Person
+@enduml

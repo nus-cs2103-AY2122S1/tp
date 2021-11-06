@@ -112,7 +112,6 @@ public class CenterPanel extends UiPart<Region> {
      * Bring PersonGridPanel to top of the stack's child list.
      */
     public void displayPersonGridPanel(ObservableList<Lesson> lessons) {
-        logger.info("Showing the student list without lessons.");
         personGridPanel.fillListPanels(lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
@@ -126,18 +125,19 @@ public class CenterPanel extends UiPart<Region> {
      * @param lessons Lessons of the student.
      */
     public void displayPersonGridPanel(Person student, ObservableList<Lesson> lessons) {
-        logger.info("Showing the student list with lessons.");
         personGridPanel.fillListPanels(student, lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
+        personGridPanel.getPersonListView().getSelectionModel().select(student);
+        personGridPanel.getPersonListView().requestFocus();
     }
 
     /**
      * Brings SchedulePanel to top of the stack's child list.
      */
     public void displaySchedulePanel() {
-        logger.info("Showing the schedule calendar.");
         if (!centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot())) {
+            logger.info("Showing the schedule calendar.");
             centerPanelPlaceholder.getChildren().setAll(schedulePanel.getRoot());
         }
     }
@@ -146,8 +146,8 @@ public class CenterPanel extends UiPart<Region> {
      * Brings TagListPanel to top of the stack's child list.
      */
     public void displayTagListPanel() {
-        logger.info("Showing the list of tags.");
         if (!centerPanelPlaceholder.getChildren().contains(tagListPanel.getRoot())) {
+            logger.info("Showing the list of tags.");
             centerPanelPlaceholder.getChildren().setAll(tagListPanel.getRoot());
         }
     }
