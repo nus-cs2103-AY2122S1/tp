@@ -102,23 +102,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-
-        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
-
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        expectedModel.setPerson(
-                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_validTargetIndexFilteredList_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor emptyPersonDescriptor = new EditPersonDescriptor();
@@ -257,6 +240,7 @@ public class EditCommandTest {
         // different types -> returns false
         Command otherCommand = new ClearCommand();
         assertNotEquals(standardCommand, otherCommand);
+        assertNotEquals(editTaskDescriptorOne, editTaskCommandOne);
 
         // different index -> returns false
         assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_PERSON, DESC_AMY));

@@ -112,13 +112,7 @@ Format: `man [COMMAND_NAME]`
 
 Examples:
 * `man sort` Shows the full details of `sort` command as below.
-
-
-```
-sort: Sorts the list of persons by the alphabetical order of their name.
-Parameters: [-r]
-Example: sort -r
-```
+![result for `man sort`](images/mansortResult.png)
 
 ### Adding a person: `add`
 
@@ -211,7 +205,7 @@ Examples:
 
 * `find -n Alex` Finds all people whose name matches the keyword "Alex".
 
-![result for find -n Alex](images/findResult.png)
+![result for `find -n Alex`](images/findAlexResult.png)
 
 ### Adding a task: `add`
 
@@ -274,17 +268,14 @@ Shows you a list of tasks that has been attached to a specific person.
 
 Format: `cat INDEX [-f KEYWORDS]`
 
-   * Displays the list of tasks attached to the person at the specified `INDEX`.
+1. Displays the list of tasks attached to the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the displayed person list.
    * `INDEX` **must be a positive integer** 1, 2, 3, ...
 
    Examples:
 
    * `cat 1` Displays the list of tasks attached to the 1st person.
-   ![result for 'cat 1'](images/cat1Result.png)
-   * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
-   ![result for 'cat 1 -f work'](images/cat1-fworkResult.png)
-
+   ![result for `cat 1`](images/catAlexResult.png)
      
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
@@ -295,12 +286,14 @@ Format: `cat INDEX [-f KEYWORDS]`
 
    Examples:
 
-   * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f nus` will display the task "project meeting at NUS"
-
+   * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
+   * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
+   ![result for `cat 1 -f work`](images/cat-fResult.png)
 
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
+   ![result for `cat -A`](images/catAllResult.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!

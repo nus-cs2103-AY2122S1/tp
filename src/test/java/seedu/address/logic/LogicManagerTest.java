@@ -102,11 +102,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validInternalCommand_success() throws Exception {
-        assertDoesNotThrow(() -> logic.executeInternal("accesscache -qqUP"));
-    }
-
-    @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =

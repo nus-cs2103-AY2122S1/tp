@@ -2,24 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-<<<<<<< HEAD
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-
-public class AccessCacheCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-=======
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -43,34 +25,10 @@ public class AccessCacheCommandTest {
 
     @Test
     public void constructor_nullCommand_throwsNullPointerException() {
->>>>>>> origin/master
         assertThrows(NullPointerException.class, () -> new AccessCacheCommand(null));
     }
 
     @Test
-<<<<<<< HEAD
-    public void execute_validKey_success() throws Exception {
-        AccessCacheCommand accessCacheCommandOne = new AccessCacheCommand("UP");
-        AccessCacheCommand accessCacheCommandTwo = new AccessCacheCommand("DOWN");
-        String expectedMessage = "";
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        CommandResult expectedResultOne = accessCacheCommandOne.execute(expectedModel);
-        CommandResult expectedResultTwo = accessCacheCommandTwo.execute(expectedModel);
-        CommandResult actualResult =
-                new CommandResult("", false, false, true, "");
-
-        assertEquals(expectedResultOne, actualResult);
-        assertEquals(expectedResultTwo, actualResult);
-    }
-
-    @Test
-    public void execute_invalidKey_failure() throws Exception {
-        AccessCacheCommand accessCacheCommand = new AccessCacheCommand("asdf");
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        String expectedMessage = "Unknown Error in AccessCacheCommand#Execute!";
-        assertCommandFailure(accessCacheCommand, expectedModel, expectedMessage);
-=======
     public void upKey_givesBefore() throws Exception {
         CommandResult command = new AccessCacheCommand("UP").execute(model);
         assertEquals("Before", command.getAdditionalText());
@@ -82,32 +40,10 @@ public class AccessCacheCommandTest {
         CommandResult command = new AccessCacheCommand("DOWN").execute(model);
         assertEquals("After", command.getAdditionalText());
         assertEquals("", command.getFeedbackToUser());
->>>>>>> origin/master
     }
 
     @Test
     public void equals() {
-<<<<<<< HEAD
-        AccessCacheCommand accessCacheCommandOne = new AccessCacheCommand("UP");
-        AccessCacheCommand accessCacheCommandTwo = new AccessCacheCommand("DOWN");
-
-        // same object -> returns true
-        assertEquals(accessCacheCommandOne, accessCacheCommandOne);
-
-        // same values -> returns true
-        AccessCacheCommand accessCacheCommandOneCopy = new AccessCacheCommand("UP");
-        assertEquals(accessCacheCommandOne, accessCacheCommandOneCopy);
-
-        // different types -> returns false
-        Command otherCommand = new DeleteCommand();
-        assertNotEquals(otherCommand, accessCacheCommandOne);
-
-        // null -> returns false
-        assertNotEquals(null, accessCacheCommandOne);
-
-        // different key -> returns false
-        assertNotEquals(accessCacheCommandOne, accessCacheCommandTwo);
-=======
         AccessCacheCommand command = new AccessCacheCommand("DOWN");
         AccessCacheCommand commandSame = new AccessCacheCommand("DOWN");
         AccessCacheCommand commandDifferent = new AccessCacheCommand("UP");
@@ -273,6 +209,5 @@ public class AccessCacheCommandTest {
         public boolean getIsViewAllTasks() {
             throw new AssertionError("This method should not be called.");
         }
->>>>>>> origin/master
     }
 }
