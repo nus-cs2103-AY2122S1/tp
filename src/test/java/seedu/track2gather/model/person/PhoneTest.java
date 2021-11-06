@@ -29,14 +29,38 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
+        assertFalse(Phone.isValidPhone("0")); // zero
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("01123")); // leading zeros
+        assertFalse(Phone.isValidPhone("124293831231")); // longer than 11 digits
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("12429383123")); // exactly 11 numbers
+    }
+
+    @Test
+    public void isValidPhoneKeyword() {
+        // null phone number keyword
+        assertThrows(NullPointerException.class, () -> Phone.isValidPhoneKeyword(null));
+
+        // invalid phone number keywords
+        assertFalse(Phone.isValidPhoneKeyword("")); // empty string
+        assertFalse(Phone.isValidPhoneKeyword(" ")); // spaces only
+        assertFalse(Phone.isValidPhoneKeyword("0")); // zero
+        assertFalse(Phone.isValidPhoneKeyword("phone")); // non-numeric
+        assertFalse(Phone.isValidPhoneKeyword("9011p041")); // alphabets within digits
+        assertFalse(Phone.isValidPhoneKeyword("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhoneKeyword("01123")); // leading zeros
+        assertFalse(Phone.isValidPhoneKeyword("124293831231")); // longer than 11 digits
+
+        // valid phone number keywords
+        assertTrue(Phone.isValidPhoneKeyword("9")); // exactly 1 number
+        assertTrue(Phone.isValidPhoneKeyword("93121534"));
+        assertTrue(Phone.isValidPhoneKeyword("12429383123")); // exactly 11 numbers
     }
 }

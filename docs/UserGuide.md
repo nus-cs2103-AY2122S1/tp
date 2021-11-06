@@ -86,7 +86,7 @@ Refer to the [Features](#features) below for details of each command.
 Field | Format
 ------|------------------
 `NAME` | Names should only contain alphanumeric characters and spaces, and should not be blank.
-`PHONE_NUMBER` | Phone numbers should only contain integers and should be at least 3 digits long.
+`PHONE_NUMBER` | Phone numbers should be positive integers with no leading zeros, and should be 3 to 11 digits long.
 `EMAIL` | Emails should be of the format local-part@domain. <br> The local-part should only contain alphanumeric characters and these special characters: (+_.-), excluding the parentheses. The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. <br> The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters and must have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 `CASE_NUMBER` | Case numbers should be positive integers with no leading zeros, and should be between 1 to 6 digits long. Note that case numbers are displayed in a fixed format of 6 digits, padded with zeros on the left, if needed.
 `HOME_ADDRESS` | Addresses can be any non-empty string of characters.
@@ -94,7 +94,7 @@ Field | Format
 `QUARANTINE_ADDRESS` | Addresses can be any non-empty string of characters.
 `SHN_PERIOD` | SHN periods should comprise of two dates in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd), separated by a space. The start date should be keyed before the end date, and must occur earlier than the end date by at least 1 day.
 `NEXT_OF_KIN_NAME` | Names should only contain alphanumeric characters and spaces, and should not be blank.
-`NEXT_OF_KIN_PHONE` | Phone numbers should only contain integers and should be at least 3 digits long.
+`NEXT_OF_KIN_PHONE` | Phone numbers should be positive integers with no leading zeros, and should be 3 to 11 digits long.
 `NEXT_OF_KIN_ADDRESS` | Addresses can be any non-empty string of characters.
 
 ### Adding a person: `add`
@@ -140,7 +140,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [cn/CASE_NUMBER] [sh/start:SHN_START_DAT
 Field (`FIELD_PREFIX`) | Description
 ------|------------------
 Name (`n/`) |{::nomarkdown}<ul><li>Search is case-insensitive. e.g `hans` will match `Hans`</li><li>Full words will be matched e.g. `Han` will not match `Hans`</li><li>Name keywords must be entered as <a href="#format-for-person-details">valid names</a></li></ul>{:/}
-Phone number (`p/`) |{::nomarkdown}<ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number keywords must be positive integers, minimally 1 digit long</li></ul>{:/}
+Phone number (`p/`) |{::nomarkdown}<ul><li>Phone numbers that start with the specified number(s) will be matched e.g. `123` and `1234` will match `12345678`</li><li>Phone number keywords must be positive integers with no leading zeros, and should be 1 to 11 digits long</li></ul>{:/}
 Case number (`cn/`) |{::nomarkdown}<ul><li> Search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`</li><li>Case number keywords must be entered as <a href="#format-for-person-details">valid case numbers</a></li></ul>{:/}
 SHN start date (`sh/start:`) |{::nomarkdown}<ul><li>Search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`</li><li>SHN start date keywords must be entered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO-8601 format</a> (i.e. yyyy-MM-dd)</li></ul>{:/}
 SHN end date (`sh/end:`) |{::nomarkdown}<ul><li>Search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`</li><li>SHN end date keywords must be entered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO-8601 format</a> (i.e. yyyy-MM-dd)</li></ul>{:/}

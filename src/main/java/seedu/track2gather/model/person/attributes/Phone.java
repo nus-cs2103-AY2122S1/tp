@@ -9,11 +9,12 @@ import static seedu.track2gather.commons.util.AppUtil.checkArgument;
 public class Phone extends Attribute<String> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain integers, and should be at least 3 digits long";
+            "Phone numbers should be positive integers with no leading zeros, and should be 3 to 11 digits long";
     public static final String MESSAGE_CONSTRAINTS_KEYWORDS =
-            "Phone number keywords should only contain integers, and should be at least 1 digit long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
-    public static final String VALIDATION_REGEX_KEYWORD = "\\d{1,}";
+            "Phone number keywords should be positive integers with no leading zeros"
+            + ", and should be 1 to 11 digits long";
+    public static final String VALIDATION_REGEX = "[1-9]\\d{2,10}";
+    public static final String VALIDATION_REGEX_KEYWORD = "[1-9]\\d{0,10}";
 
     /**
      * Constructs a {@code Phone}.
