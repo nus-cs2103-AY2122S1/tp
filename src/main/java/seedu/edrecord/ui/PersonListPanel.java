@@ -59,6 +59,11 @@ public class PersonListPanel extends UiPart<Region> {
         assignmentListView.setVisible(this.selectedView == View.ASSIGNMENTS);
     }
 
+    public void refresh() {
+        personListView.refresh();
+        assignmentListView.refresh();
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */

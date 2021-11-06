@@ -25,7 +25,13 @@ public class ModuleGroupMap {
     }
 
     public Group removeMod(Module mod) {
-        return mapping.remove(mod);
+        for (Map.Entry<Module, Group> modGroupMapping : mapping.entrySet()) {
+            Module m = modGroupMapping.getKey();
+            if (m.isSameModule(mod)) {
+                return mapping.remove(m);
+            }
+        }
+        return null;
     }
 
     public boolean removeGroup(Module mod, Group grp) {
