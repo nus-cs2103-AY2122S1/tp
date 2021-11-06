@@ -136,6 +136,11 @@ public class AccessCacheCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void displayPersonTaskList(Person person) {
             throw new AssertionError("This method should not be called");
         }
