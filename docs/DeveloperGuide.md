@@ -410,7 +410,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
 Step 1. Suppose that a user has just launched our application. The `undoRedoStack` will be empty at the beginning.
 
 Step 2. The user then executes an `UndoableCommand` which modifies the existing `Model` as per the definition of an `UndoableCommand`. 
-The specific `UndoableCommand` called will process the command during the method call `UndoableCommand#executeUndoableCommand` so that it can undo itself.
+The specific `UndoableCommand` called will process the command during the method call `UndoableCommand#executeUndoableCommand()` so that it can undo itself.
 
 For instance, the executed command is `delete 5`, to delete the 5th person in the `AddressBook` that resides in the `Model`. 
 The deleted Person, referred to in the Figure I3 as `p5` is stored in the `deletedPerson` field in `DeleteCommand`. 
@@ -438,7 +438,7 @@ Upon executing `add` command, `add` command that has been processed such that it
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action using `undo`.
 
 `UndoRedoStack` will pop the most recent command out of the `undoStack` and push it to the `redoStack`. For instance, the popped command in this example would be `add`,
-`add` would the call its own `AddCommand#undo` to undo itself.
+`add` would the call its own `AddCommand#undo()` to undo itself.
 
 ![UndoRedoStackAfterUndo](images/UndoRedoStack1UndoDiagram.png) 
 
@@ -602,11 +602,11 @@ When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator
 *Figure I.6.1: Sequence diagram of Update Fees.*
 
 In `initModelManager()`, after the `model` was built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
-When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fields using `lastUpdatedDate` and the current local date time.  
+When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fees fields using `lastUpdatedDate` and the current local date time.  
 
 The following is the logic of `FeesCalculator` to decide whether to update the specific lesson:
-* To construct a `FeesCalculator` object, the `lastUpdatedDate` and `LocalDateTime.now()` are required. 
-* `FeesCalculator` would count the number of lessons that have ended between `lastUpdatedDate` and `currentDateTime` which is simply `LocalDateTime.now()` at the time of initialization.
+* To construct a `FeesCalculator` object, the `lastUpdatedDate` and `currentDateTime`, which is simply the `LocalDateTime.now()`, are required. 
+* `FeesCalculator` would count the number of lessons that have ended between `lastUpdatedDate` and `currentDateTime` at the time of initialization.
   * **For Makeup Lessons:** 
     * Use `Date#getLocalDate()` to get the date of the lesson and `TimeRange#getEnd()` to get the end time of the lesson. Then check for these conditions:
       * Lesson end date and time is after `lastUpdatedDate`.
@@ -614,19 +614,22 @@ The following is the logic of `FeesCalculator` to decide whether to update the s
       
     If both conditions are true, update the fees by adding the cost of the lesson to the current outstanding fees.
   * **For Recurring Lessons:** 
-    * Find the `earlierStartDate` by comparing `startDate` of lesson and `lastUpdatedDate`. This is to handle cases where lesson starts after the last time TAB was launched.
-    * Find the `laterEndDate` by comparing `endDate` of lesson and `currentDateTime`. This is to handle cases where lesson ends before the current launching of TAB.
-    * Shift the `earlierStartDate` to the week before `earlierStartDate` and to the day of the week which the lesson falls on. Similarly, shift the `laterEndDate` to the week after `laterEndDate` and the day of the week which the lesson falls on.
-    This allows us to count the number of the day of the week in which the lesson falls on has passed, by treating the days which the lesson falls on as intervals.
-    * Check if any of the cancelled dates falls between `earlierStartDate` and `laterEndDate`. If true, deduct the number of lessons by 1.
+    * Find the `laterStart` by comparing `startDate` of lesson and `lastUpdatedDate`. This is to handle cases where lesson starts after the last time TAB was launched.
+    * Find the `earlierEnd` by comparing `endDate` of lesson and `currentDateTime`. This is to handle cases where lesson ends before the current launching of TAB.
+    * Calculate the number of lessons that have passed between the `laterStart` and `earlierEnd`.
+    * Check if any of the cancelled dates falls between `laterStart` and `earlierEnd`. If true, deduct the number of lessons accordingly.
     * Check for the cases in which the day of `lastUpdatedDate` and `currentDateTime` falls on the day of the lesson and deduct accordingly.
 * Multiply the number of lessons calculated with the cost per lesson to get the amount to be added to `OutstandingFees` field.
 
-//Activity diagram!!
+![UpdateFeesActivityDiagram](images/UpdateFeesActivityDiagram.png)
+
+*Figure I.6.2: Activity Diagram of Update Fees.*
 
 This means that once the outstanding fees have been updated, any changes to fields that would affect outstanding fees (e.g. start date, end date, cancelling and uncancelling lessons in the past, change in lesson rates) will not be accounted for.
 
 #### Payment
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
