@@ -67,7 +67,7 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -315,8 +315,8 @@ _Details coming soon ..._
 
 |Action| Format, Examples|
 --------|------------------
-|**Add Student**| `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com i/Currently on SHN t/friend t/colleague`|
-| **Edit Student**| `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
+|**Add Student**| `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/85436543 e/jamesho@u.nus.edu i/Currently on SHN t/strong t/careless`|
+| **Edit Student**| `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@u.nus.edu`|
 | **Delete Student**| `delete INDEX`<br> e.g., `delete 3`|
 | **List Module**| `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`|
 | **Create Module**| `mkmod MODULE`<br> e.g., `mkmod CS2103`|
