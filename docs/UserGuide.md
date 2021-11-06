@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming 
-[events](#glossary) and the details of their [Participants](#glossary)**. It does not handle communication between the event organiser and the 
+Managera is a **desktop app that _provides event organisers with a convenient method of keeping track of upcoming 
+[events](#glossary) and the details of their [Participants](#glossary)**_. It does not handle communication between the event organiser and the 
 Participants.
 
 Managera is OS-independent, meaning it will work on any operating system (Windows, MacOS, Linux).
