@@ -175,7 +175,7 @@ The `Model` component
 * stores the tuition address book data, i.e., all `Person`, calendar `Entry`, and `Tag` objects (which are contained in the `UniquePersonList`, `CalendarEntryList`, and `UniqueTagList` objects respectively).
 * stores the currently 'filtered' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* stores the `LocalDateTime` object of the date and time the `AddressBook` was updated.
+* stores a `LocalDateTime` object of the date and time the `AddressBook` was last updated.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 The _Sequence Diagram_ below illustrates the interactions when a person, p, is removed from the model.
@@ -726,22 +726,22 @@ The predicate is then used to filter the list of person.
 ### Fees Management
 
 TAB automates the updating of individual lesson fees after the lesson has ended. The Fees Calculation is facilitated by:
-* `FeesCalculator` implements the `Calculator` interface. It is responsible for calculates the amount to update for each specific lesson. 
-* `LastUpdatedDate` stores the `LocalDateTime` of when the `AddressBook` was last updated. `LastUpdatedDate` is stored in `AddressBook`.
-* `Money` and its subclass facilitates the payment mechanism. Each `Lesson` contains a `LessonRates` field and a `OutstandingFees` field. Both of which extends `Money`.
+* `FeesCalculator` implements the `Calculator` interface. It is responsible for calculating the amount to update for each specific lesson. 
+* `LastUpdatedDate` stores a `LocalDateTime` of when the `AddressBook` was last updated. `LastUpdatedDate` is stored in `AddressBook`.
+* `Money` and its subclass facilitates the payment mechanism. Each `Lesson` contains a `LessonRates` field and a `OutstandingFees` field. Both of which extend `Money`.
 
-When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after user launches TAB.
+When the user launches TAB, in `MainApp#initModelManager()`, the `FeesCalculator` would update all the outstanding lesson fees in the model. Figure I.6.1 is a sequence diagram after the user launches TAB.
 
 ![UpdateFeesSequenceDiagram](images/UpdateFeesSequenceDiagram.png)
 
 *Figure I.6.1: Sequence diagram of Update Fees.*
 
-In `initModelManager()`, after the `model` was built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
+In `initModelManager()`, after the `model` has been built from storage, `FeesCalculator#UpdateAllLessonOutstanding()` is called to update the lesson fees. For each person in `addressBook`, a new `updatedPerson` would be created.
 When creating the new `updatedPerson`, for each lesson that the person has, `updateLessonOutstandingFeesField()` will update all the outstanding fees fields using `lastUpdatedDate` and the current local date time.  
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
-FeesCalculator do not refresh the outstanding fees immediately after the lesson ends if TAB is open. Users need to relaunch TAB to see the updated outstanding fees. </div>
+FeesCalculator does not update the outstanding fees immediately after a lesson ends when TAB is open. Users need to relaunch TAB to see the updated outstanding fees. </div>
 
 
 The following is the logic of `FeesCalculator` to decide whether to update the specific lesson:
@@ -752,7 +752,7 @@ The following is the logic of `FeesCalculator` to decide whether to update the s
       * Lesson end date and time is after `lastUpdatedDate`.
       * Lesson end date and time is before `currentDateTime`.
       
-    If both conditions are true, update the fees by adding the cost of the lesson to the current outstanding fees.
+    If both conditions are true, update the fees by adding the cost of the lesson (as calculated by multiplying the hourly rates and the duration of the lesson) to the current outstanding fees.
   * **For Recurring Lessons:** 
     * Find the `laterStart` by comparing `startDate` of lesson and `lastUpdatedDate`. This is to handle cases where lesson starts after the last time TAB was launched.
     * Find the `earlierEnd` by comparing `endDate` of lesson and `currentDateTime`. This is to handle cases where lesson ends before the current launching of TAB.
@@ -761,9 +761,12 @@ The following is the logic of `FeesCalculator` to decide whether to update the s
     * Check for the cases in which the day of `lastUpdatedDate` and `currentDateTime` falls on the day of the lesson and deduct accordingly.
 * Multiply the number of lessons calculated with the cost per lesson to get the amount to be added to `OutstandingFees` field.
 
+The following activity diagram starts from the creation of the updated lesson. Firstly, copy all lesson details to the new lesson object for defensive coding. 
+Then, the following depicts the logic of how to calculate the amount to be added to `OutstandingFees`.
+
 ![UpdateFeesActivityDiagram](images/UpdateFeesActivityDiagram.png)
 
-*Figure I.6.2: Activity Diagram of Update Fees.*
+*Figure I.6.2: Activity Diagram of Update Fees from creation of a new Lesson object onwards.*
 
 This means that once the outstanding fees have been updated, any changes to fields that would affect outstanding fees (e.g. start date, end date, cancelling and uncancelling lessons in the past, change in lesson rates) will not be accounted for.
 
@@ -1510,8 +1513,8 @@ Expected: Error details will be shown in the status message.
 <div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The test cases below are designed separately and independent of each other. i.e. Test the different test cases separately.</div>
 
 1. Add the recurring lessons and makeup lessons to a student, following the test cases. <br>
-   Prerequisites: The lessons do not clash with each other and other existing lessons. If there were clashes, delete the clashing lesson(s).
-2. Close TAB and open the json file `/data/addressbook.json`. 
+   Prerequisites: The lessons do not clash with each other and other existing lessons. If there were clashes, delete the clashing lesson(s). The student to which the lesson is to be added has no other lessons.
+2. Close TAB and open the json file `./data/addressbook.json`. 
 3. At the bottom of the json file there is `lastUpdated` field with a `DateTime` object. Edit the `DateTime` object according to the test cases.
 
 <div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> Please vary the date and time accordingly (adding or subtracting by an equivalent amount of day(s) and time), 
@@ -1520,27 +1523,27 @@ depending on the date and time when you are testing.</div>
 Suppose the date today is 6 Nov 2021 and current time is 1800 hours,
 * Test case: 
   1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-31T12:00`
-  Expected: Outstanding lesson fees for first lesson of the first person is `$25`. The lesson that have passed is:
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-10-31T12:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$25`. The lesson that has passed is:
     * 6 Nov 2021 1400-1500
 
 * Test case:
   1. `ladd 1 recurring/ date/30 Oct 2021 time/1400-1500 rates/25 subject/math`
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-30T12:00`
-  Expected: Outstanding lesson fees for the first lesson of the first person is `$50`. The lessons that have passed are:
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-10-30T12:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$50`. The lessons that have passed are:
      * 30 Oct 2021 1400-1500
      * 6 Nov 2021 1400-1500
 
 * Test case:
   1. `ladd 1 recurring/ date/3 Nov 2021 time/1400-1500 rates/25 subject/math` 
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-10-20T00:00`
-  Expected: Outstanding lesson fees for the first lesson of the first person is `$25`. The lesson that have passed is:
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-10-20T00:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$25`. The lesson that have passed is:
      * 3 Nov 2021 1400-1500
 
 * Test case:
   1. `ladd 1 date/6 Nov 2021 time/2000-2130 rates/25 subject/math`
-  2. Set the `DateTime` in `data/addressbook.json` to `2021-11-06T18:00`
-  Expected: Outstanding lesson fees for first lesson of the first person is `$0`. No lessons have passed.
+  2. Set the `DateTime` in `./data/addressbook.json` to `2021-11-06T18:00`
+  Expected: Outstanding lesson fees for the first lesson of the first student is `$0`. No lessons have passed.
 
 ### Saving data
 
