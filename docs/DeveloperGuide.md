@@ -12,16 +12,18 @@ title: Developer Guide
 5. [UI](#UI component)
 6. [Logic component](#Logic component)
 7. [Storage component](#component)
-8. [Common classes](#Common classes)
-9. [User Stories](#User Stories)
-10. [Use case](#Use case)
-11. [Non-Functional Requirements](#Non-Functional Requirements)
-12. [Glossary](#Glossary) 
-13. [Appendix: Instructions for manual testing](#Appendix)
+8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+9. [Appendix: Requirements](#Appendix Requirements)
+9. [Common classes](#Common classes)
+10. [User Stories](#User Stories)
+11. [Use case](#Use case)
+12. [Non-Functional Requirements](#Non-Functional Requirements)
+13. [Glossary](#Glossary) 
+14. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## <a name="Acknowledgements"></a> **Acknowledgements**
 ProgrammerError makes use of the following third-party libraries:
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/), [JUnit5](https://github.com/junit-team/junit5)
 
@@ -490,7 +492,7 @@ success.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## <a name="docs"></a> **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -500,7 +502,7 @@ success.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## <a name="Appendix Requirements"></a> **Appendix: Requirements**
 
 ### Product scope
 
@@ -520,7 +522,7 @@ CS2100 TAs who
 
 CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
-### User stories
+## <a name="User stories"></a> User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -554,7 +556,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-### Use cases
+## <a name="Use cases"></a> Use cases
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
@@ -734,7 +736,7 @@ Use case ends.
 
 {More to be added}
 
-### Non-Functional Requirements
+## <a name="Non-Functional Requirements"></a> Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
@@ -751,7 +753,7 @@ Use case ends.
 9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions
    1280x720 and higher, and screen scales 150%.
 
-### Glossary
+## <a name="Glossary"></a> Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
@@ -761,7 +763,7 @@ Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## <a name="Appendix"></a> **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
