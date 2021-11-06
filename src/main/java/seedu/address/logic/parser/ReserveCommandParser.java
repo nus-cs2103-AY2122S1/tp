@@ -17,6 +17,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.Remark;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new ReserveCommand object
+ */
 public class ReserveCommandParser implements Parser<ReserveCommand> {
 
     @Override

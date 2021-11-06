@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("settables 10x2,4,1")
+[-> LogicManager : execute("settables 10x2,4")
 activate LogicManager
 
-LogicManager -> RhrhParser : parseCommand("settables 10x2,4,1")
+LogicManager -> RhrhParser : parseCommand("settables 10x2,4")
 activate RhrhParser
 
 create SetTablesCommandParser
@@ -27,7 +27,7 @@ activate SetTablesCommandParser
 SetTablesCommandParser --> RhrhParser
 deactivate SetTablesCommandParser
 
-RhrhParser -> SetTablesCommandParser : parse("10x2,4,1")
+RhrhParser -> SetTablesCommandParser : parse("10x2,4")
 activate SetTablesCommandParser
 
 create SetTablesCommand
